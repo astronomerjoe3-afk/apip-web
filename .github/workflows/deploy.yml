@@ -51,3 +51,4 @@ jobs:
             --set-env-vars NEXT_PUBLIC_API_BASE_URL=https://api.cognispark.tech
 
 
+
