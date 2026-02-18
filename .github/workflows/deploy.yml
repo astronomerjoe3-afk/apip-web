@@ -47,4 +47,6 @@ jobs:
             --image "$IMAGE" \
             --region ${{ env.REGION }} \
             --platform managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --set-env-vars NEXT_PUBLIC_API_BASE_URL=https://apip-api-vdm7t5uzpq-as.a.run.app
+
