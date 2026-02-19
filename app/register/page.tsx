@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../lib/firebase";
 import { useRouter } from "next/navigation";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,10 +17,10 @@ export default function LoginPage() {
     setErr(null);
     setBusy(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
       router.push("/dashboard");
     } catch (e: any) {
-      setErr(e?.message ?? "Login failed");
+      setErr(e?.message ?? "Registration failed");
     } finally {
       setBusy(false);
     }
@@ -28,7 +28,7 @@ export default function LoginPage() {
 
   return (
     <main style={{ padding: 24, fontFamily: "system-ui", maxWidth: 480 }}>
-      <h1>Login</h1>
+      <h1>Create account</h1>
 
       <form onSubmit={onSubmit} style={{ display: "grid", gap: 12 }}>
         <label>
@@ -43,12 +43,13 @@ export default function LoginPage() {
         </label>
 
         <label>
-          Password
+          Password (min 6 chars)
           <input
             style={{ width: "100%", padding: 10 }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
+            minLength={6}
             required
           />
         </label>
@@ -56,12 +57,12 @@ export default function LoginPage() {
         {err && <p style={{ color: "crimson" }}>{err}</p>}
 
         <button disabled={busy} style={{ padding: 12 }}>
-          {busy ? "Signing in..." : "Sign in"}
+          {busy ? "Creating..." : "Create account"}
         </button>
       </form>
 
       <p style={{ marginTop: 12 }}>
-        No account? <a href="/register">Create one</a>
+        Already have an account? <a href="/login">Login</a>
       </p>
     </main>
   );
