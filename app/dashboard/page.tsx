@@ -1,20 +1,23 @@
 "use client";
 
-import { Protected } from "../../lib/Protected";
-import { useAuth } from "../../lib/auth";
+import Protected from "../../lib/Protected";
+import { auth } from "../../lib/firebase";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
-  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  async function handleLogout() {
+    await signOut(auth);
+    router.push("/login");
+  }
 
   return (
     <Protected>
-      <main style={{ padding: 24, fontFamily: "system-ui" }}>
+      <main style={{ padding: 24 }}>
         <h1>Dashboard</h1>
-        <p>Signed in as: <b>{user?.email}</b></p>
-
-        <button onClick={logout} style={{ padding: 12 }}>
-          Logout
-        </button>
+        <button onClick={handleLogout}>Logout</button>
       </main>
     </Protected>
   );

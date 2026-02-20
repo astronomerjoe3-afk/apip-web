@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { useAuth } from "./auth";
 import { useRouter } from "next/navigation";
+import { useAuth } from "./auth";
 
-export function Protected({ children }: { children: React.ReactNode }) {
+export default function Protected({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
 
@@ -12,8 +12,8 @@ export function Protected({ children }: { children: React.ReactNode }) {
     if (!loading && !user) router.replace("/login");
   }, [loading, user, router]);
 
-  if (loading) return <p style={{ padding: 24 }}>Loading...</p>;
-  if (!user) return null;
+  if (loading) return <div style={{ padding: 24 }}>Loading...</div>;
+  if (!user) return null; // while redirecting
 
   return <>{children}</>;
 }
