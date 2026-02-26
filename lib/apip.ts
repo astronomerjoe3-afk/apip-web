@@ -1,18 +1,18 @@
 // lib/apip.ts
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-export type JsonValue = any;
+export type QueryParams =
+  | Record<string, string | number | boolean | null | undefined>
+  | URLSearchParams;
 
 export class ApiError extends Error {
   status: number;
-  detail?: any;
+  detail: unknown;
   requestId?: string;
   url?: string;
 
   constructor(args: {
     message: string;
     status: number;
-    detail?: any;
+    detail?: unknown;
     requestId?: string;
     url?: string;
   }) {
@@ -25,170 +25,139 @@ export class ApiError extends Error {
   }
 }
 
-function getEnvBase(): string {
-  // Primary expected env var
+function envBase(): string {
+  // Preferred env var (your .env.local/.env.production uses this)
   const a = process.env.NEXT_PUBLIC_API_BASE_URL;
-  // Backward-compat / accidental older name
+  // Back-compat fallback (in case older code used this)
   const b = process.env.NEXT_PUBLIC_API_BASE;
   const base = (a || b || "").trim();
-
-  if (!base) {
-    // Keep error message crystal clear for UI
-    throw new Error(
-      "NEXT_PUBLIC_API_BASE_URL is not set (or NEXT_PUBLIC_API_BASE). " +
-        "Set it in .env.local and restart `npm run dev`."
-    );
-  }
-  return base.replace(/\/+$/, "");
+  return base.replace(/\/+$/, ""); // no trailing slash
 }
 
 export function apipBase(): string {
-  return getEnvBase();
+  return envBase();
 }
 
-function isAbsoluteUrl(s: string): boolean {
-  return /^https?:\/\//i.test(s);
-}
-
-function normalizePath(path: string): string {
-  // Ensure leading slash for relative paths
-  const p = path.trim();
-  if (!p) return "/";
-  return p.startsWith("/") ? p : `/${p}`;
-}
-
-function buildUrl(path: string): string {
-  if (isAbsoluteUrl(path)) return path;
-  return `${apipBase()}${normalizePath(path)}`;
-}
-
-async function readBodySafe(res: Response): Promise<{ text?: string; json?: any }> {
-  const ct = res.headers.get("content-type") || "";
-  try {
-    if (ct.includes("application/json")) {
-      const json = await res.json();
-      return { json };
-    }
-    const text = await res.text();
-    return { text };
-  } catch {
-    // If body can't be read (rare), just ignore
-    return {};
-  }
-}
-
-function pickRequestId(res: Response): string | undefined {
-  return (
-    res.headers.get("x-request-id") ||
-    res.headers.get("X-Request-Id") ||
-    undefined
-  );
-}
-
-/**
- * Core fetch wrapper used by AdminPanel and other pages.
- * - path MUST be a string (guarded)
- * - automatically prefixes with NEXT_PUBLIC_API_BASE_URL unless already absolute
- * - attaches Authorization: Bearer <idToken> when provided
- */
-export async function apipFetch(
-  path: string,
-  options?: RequestInit & { idToken?: string }
-): Promise<Response> {
+function buildUrl(path: string, query?: QueryParams): string {
   if (typeof path !== "string") {
-    // This is what prevents: TypeError: path.startsWith is not a function
-    throw new Error(`apipFetch(path, ...): path must be a string; got ${typeof path}`);
+    // Prevent the "path.startsWith is not a function" failure mode
+    throw new Error(`apipFetch: path must be a string, got ${typeof path}`);
   }
 
-  const url = buildUrl(path);
+  const base = envBase();
+  if (!base) {
+    // This is exactly what your UI is complaining about; keep it explicit.
+    throw new Error("NEXT_PUBLIC_API_BASE_URL is not set");
+  }
 
-  const headers = new Headers(options?.headers || {});
-  headers.set("Accept", "application/json");
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  let url = `${base}${cleanPath}`;
 
-  // If caller passes JSON body and no Content-Type, set it.
-  if (options?.body && !headers.has("Content-Type")) {
-    // If body is string we assume caller knows; otherwise set JSON
-    if (typeof options.body !== "string") {
-      headers.set("Content-Type", "application/json");
+  if (query) {
+    const usp =
+      query instanceof URLSearchParams ? query : new URLSearchParams();
+
+    if (!(query instanceof URLSearchParams)) {
+      for (const [k, v] of Object.entries(query)) {
+        if (v === undefined || v === null) continue;
+        usp.set(k, String(v));
+      }
     }
+
+    const qs = usp.toString();
+    if (qs) url += `?${qs}`;
   }
 
-  if (options?.idToken) {
-    headers.set("Authorization", `Bearer ${options.idToken}`);
+  return url;
+}
+
+async function readBodySafe(res: Response): Promise<string> {
+  try {
+    return await res.text();
+  } catch {
+    return "";
+  }
+}
+
+function parseJsonSafe(text: string): unknown {
+  if (!text) return null;
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text; // not JSON (or partial), return raw
+  }
+}
+
+export type ApipFetchOptions = {
+  method?: "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
+  token?: string; // Firebase ID token (Bearer)
+  apiKey?: string; // X-API-Key (for protected endpoints)
+  query?: QueryParams;
+  body?: unknown; // will be JSON.stringified unless it's FormData
+  headers?: Record<string, string>;
+  signal?: AbortSignal;
+};
+
+export async function apipFetch<T = any>(
+  path: string,
+  opts: ApipFetchOptions = {}
+): Promise<T> {
+  const url = buildUrl(path, opts.query);
+
+  const headers: Record<string, string> = {
+    Accept: "application/json",
+    ...(opts.headers || {}),
+  };
+
+  if (opts.token) headers["Authorization"] = `Bearer ${opts.token}`;
+  if (opts.apiKey) headers["X-API-Key"] = opts.apiKey;
+
+  let body: BodyInit | undefined = undefined;
+
+  // Only attach a body for non-GET requests (safe default)
+  const method = opts.method ?? "GET";
+  if (method !== "GET" && method !== "DELETE" && opts.body !== undefined) {
+    if (opts.body instanceof FormData) {
+      body = opts.body;
+      // Let browser set Content-Type boundary automatically
+    } else {
+      headers["Content-Type"] = headers["Content-Type"] || "application/json";
+      body = JSON.stringify(opts.body);
+    }
   }
 
   const res = await fetch(url, {
-    ...options,
+    method,
     headers,
+    body,
+    signal: opts.signal,
+    // credentials: "include" // only if you later add cookie auth
   });
 
-  return res;
-}
+  const requestId = res.headers.get("x-request-id") || undefined;
 
-/**
- * JSON helper: throws ApiError on non-2xx with parsed body (json/text) + request id.
- */
-export async function apipJson<T = any>(
-  path: string,
-  options?: RequestInit & { idToken?: string }
-): Promise<T> {
-  const res = await apipFetch(path, options);
-
+  // Success path
   if (res.ok) {
-    // If response has no content, return as any
-    if (res.status === 204) return undefined as any;
-    const ct = res.headers.get("content-type") || "";
-    if (ct.includes("application/json")) return (await res.json()) as T;
-    // Fallback: try text
-    return (await res.text()) as any as T;
+    // Some endpoints may return empty body
+    const text = await readBodySafe(res);
+    if (!text) return null as T;
+    return parseJsonSafe(text) as T;
   }
 
-  const requestId = pickRequestId(res);
-  const { json, text } = await readBodySafe(res);
+  // Error path
+  const text = await readBodySafe(res);
+  const parsed = parseJsonSafe(text);
 
-  // Many FastAPI errors look like { detail: "..." }
-  const detail = json ?? text;
+  const msg =
+    typeof parsed === "object" && parsed && "detail" in (parsed as any)
+      ? String((parsed as any).detail)
+      : `HTTP ${res.status}`;
 
   throw new ApiError({
-    message: `HTTP ${res.status} ${res.statusText}`,
+    message: msg,
     status: res.status,
-    detail,
+    detail: parsed,
     requestId,
-    url: res.url,
+    url,
   });
-}
-
-// Convenience wrappers (nice for AdminPanel)
-export function apipGet<T = any>(path: string, idToken?: string): Promise<T> {
-  return apipJson<T>(path, { method: "GET", idToken });
-}
-
-export function apipPost<T = any>(
-  path: string,
-  body?: any,
-  idToken?: string
-): Promise<T> {
-  return apipJson<T>(path, {
-    method: "POST",
-    idToken,
-    body: body === undefined ? undefined : JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
-  });
-}
-
-export function apipPatch<T = any>(
-  path: string,
-  body?: any,
-  idToken?: string
-): Promise<T> {
-  return apipJson<T>(path, {
-    method: "PATCH",
-    idToken,
-    body: body === undefined ? undefined : JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
-  });
-}
-
-export function apipDelete<T = any>(path: string, idToken?: string): Promise<T> {
-  return apipJson<T>(path, { method: "DELETE", idToken });
 }
