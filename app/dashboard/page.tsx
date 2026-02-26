@@ -1,56 +1,90 @@
 "use client";
 
-import Protected from "../../lib/Protected";
-import { auth } from "../../lib/firebase";
-import { signOut } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import AdminPanel from "./AdminPanel";
+
+// NOTE: this import path depends on how you set up Firebase in apip-web.
+// Adjust if needed (common: "@/lib/firebase" exporting `auth`)
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function DashboardPage() {
-  const router = useRouter();
+  const [email, setEmail] = useState<string>("");
+  const [uid, setUid] = useState<string>("");
+  const [claimsRole, setClaimsRole] = useState<string>("");
+  const [apiRole, setApiRole] = useState<string>("");
+  const [token, setToken] = useState<string>("");
+  const [err, setErr] = useState<string>("");
 
-  async function handleLogout() {
-    await signOut(auth);
-    router.push("/login");
-  }
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, async (user) => {
+      setErr("");
+      setApiRole("");
+      setClaimsRole("");
+      setToken("");
 
-  async function callProfile() {
-    const user = auth.currentUser;
-    if (!user) {
-      alert("No current user. Please login again.");
-      return;
-    }
+      if (!user) return;
 
-    // ✅ This is the REAL Firebase ID token your backend needs
-    const idToken = await user.getIdToken(true);
+      setEmail(user.email || "");
+      setUid(user.uid);
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.cognispark.tech";
+      try {
+        const t = await user.getIdToken(/* forceRefresh */ true);
+        setToken(t);
 
-    const res = await fetch(`${baseUrl}/profile`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
+        const decoded = await user.getIdTokenResult();
+        const role = (decoded?.claims as any)?.role;
+        setClaimsRole(role ? String(role) : "");
+
+        // Fetch /profile from API for server-side role truth (Step 3.2 depends on this)
+        const base = process.env.NEXT_PUBLIC_API_BASE;
+        if (base) {
+          const resp = await fetch(`${base.replace(/\/$/, "")}/profile`, {
+            headers: { Authorization: `Bearer ${t}` },
+            cache: "no-store",
+          });
+          const data = await resp.json().catch(() => null);
+
+          if (!resp.ok) {
+            setErr(`API ${resp.status}: ${JSON.stringify(data)}`);
+          } else {
+            setApiRole(data?.role ? String(data.role) : "");
+          }
+        }
+      } catch (e: any) {
+        setErr(String(e));
+      }
     });
 
-    const text = await res.text();
-    alert(`Status: ${res.status}\n\n${text}`);
-  }
+    return () => unsub();
+  }, []);
+
+  const isAdmin = (apiRole || claimsRole) === "admin";
 
   return (
-    <Protected>
-      <main style={{ padding: 24 }}>
-        <h1>Dashboard</h1>
+    <main style={{ padding: 24 }}>
+      <h1 style={{ fontSize: 44, fontWeight: 800, marginBottom: 16 }}>Dashboard</h1>
 
-        <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
-          <button onClick={callProfile}>Test /profile</button>
-          <button onClick={handleLogout}>Logout</button>
+      <div style={{ fontSize: 18, lineHeight: 1.6 }}>
+        <div>
+          <b>Email:</b> {email || "(not signed in)"}
         </div>
+        <div>
+          <b>UID:</b> {uid || "-"}
+        </div>
+        <div>
+          <b>Role (client claims):</b> {claimsRole || "-"}
+        </div>
+        <div>
+          <b>Role (from API /profile):</b> {apiRole || "(not fetched)"}
+        </div>
+      </div>
 
-        <p style={{ marginTop: 16, fontSize: 12, opacity: 0.8 }}>
-          API: {process.env.NEXT_PUBLIC_API_BASE_URL || "(not set)"}
-        </p>
-      </main>
-    </Protected>
+      {err ? (
+        <pre style={{ color: "#ff6b6b", marginTop: 12, whiteSpace: "pre-wrap" }}>{err}</pre>
+      ) : null}
+
+      {isAdmin && token ? <AdminPanel token={token} /> : null}
+    </main>
   );
 }
