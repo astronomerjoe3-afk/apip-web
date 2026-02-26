@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { apipFetch, ApiError } from "@/lib/apip";
+import { auth } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
 
-// ---- Types (match your API payloads defensively) ----
+// -----------------------------
+// Types (defensive)
+// -----------------------------
 type Metrics = {
   ok?: boolean;
   utc?: string;
@@ -16,14 +20,41 @@ type Metrics = {
 type KeyRecord = {
   key_id: string;
   label?: string;
+  scopes?: string[];
   active?: boolean;
-  total_requests?: number;
   created_at_utc?: string;
   last_used_at_utc?: string;
+  // policy fields (optional)
   rl_window_limit?: number;
   rl_window_seconds?: number;
   rl_bucket_seconds?: number;
   rl_daily_limit?: number;
+  // counters (optional)
+  total_requests?: number;
+  // audit-ish fields (optional)
+  auto_disabled?: boolean;
+};
+
+type KeysListResponse = {
+  ok?: boolean;
+  keys?: KeyRecord[];
+  count?: number;
+};
+
+type CreateKeyRequest = {
+  label: string;
+  scopes: string[];
+  rl_window_limit: number;
+  rl_window_seconds: number;
+  rl_bucket_seconds: number;
+  rl_daily_limit: number;
+};
+
+type CreateKeyResponse = {
+  ok?: boolean;
+  key_id?: string;
+  api_key?: string; // one-time secret
+  key?: KeyRecord;
 };
 
 function fmtJson(x: any) {
@@ -34,61 +65,98 @@ function fmtJson(x: any) {
   }
 }
 
-function errToString(e: unknown) {
-  // Prefer ApiError shape from lib/apip.ts
+function errToString(e: any) {
   const ae = e as ApiError;
   if (ae && typeof (ae as any).status === "number") {
     const status = (ae as any).status as number;
     const msg = (ae as any).message ?? "API error";
     const detail = (ae as any).detail;
-    return `HTTP ${status}: ${msg}\n${fmtJson(detail)}`;
+    return `HTTP ${status}: ${msg}${detail ? `\n${fmtJson(detail)}` : ""}`;
   }
-  if (e instanceof Error) return e.message;
-  return String(e);
+  return String(e?.message ?? e);
 }
 
-export default function AdminPanel({ token }: { token: string }) {
-  // ---- state ----
-  const [busy, setBusy] = useState(false);
+async function copyToClipboard(text: string) {
+  await navigator.clipboard.writeText(text);
+}
 
+function apiBase(): string {
+  // Must remain NEXT_PUBLIC_API_BASE_URL=https://api.cognispark.tech per your constraint
+  return (process.env.NEXT_PUBLIC_API_BASE_URL || "").trim();
+}
+
+export default function AdminPanel() {
+  const base = useMemo(() => apiBase(), []);
+  const [token, setToken] = useState<string>("");
+
+  // auth/user info
+  const [meEmail, setMeEmail] = useState<string>("");
+  const [authErr, setAuthErr] = useState<string>("");
+
+  // metrics
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [metricsErr, setMetricsErr] = useState<string>("");
 
+  // keys
   const [keys, setKeys] = useState<KeyRecord[]>([]);
   const [keysErr, setKeysErr] = useState<string>("");
-  const [limit, setLimit] = useState<number>(20);
+  const [keysLoading, setKeysLoading] = useState<boolean>(false);
 
-  const [selectedKeyId, setSelectedKeyId] = useState<string>("");
-  const [selectedKey, setSelectedKey] = useState<KeyRecord | null>(null);
-  const [selectedErr, setSelectedErr] = useState<string>("");
-
-  // Create key form
-  const [newLabel, setNewLabel] = useState("web-admin-created");
-  const [newScopes, setNewScopes] = useState("profile:read");
-  const [newWindowLimit, setNewWindowLimit] = useState<number>(10);
-  const [newWindowSeconds, setNewWindowSeconds] = useState<number>(60);
-  const [newBucketSeconds, setNewBucketSeconds] = useState<number>(10);
-  const [newDailyLimit, setNewDailyLimit] = useState<number>(500);
+  // create key
+  const [create, setCreate] = useState<CreateKeyRequest>({
+    label: "new-key",
+    scopes: ["profile:read"],
+    rl_window_limit: 10,
+    rl_window_seconds: 60,
+    rl_bucket_seconds: 10,
+    rl_daily_limit: 500,
+  });
   const [createErr, setCreateErr] = useState<string>("");
+  const [createdApiKey, setCreatedApiKey] = useState<string>("");
+  const [createdKeyId, setCreatedKeyId] = useState<string>("");
 
-  // Patch form
-  const [patchWindowLimit, setPatchWindowLimit] = useState<number>(5);
-  const [patchWindowSeconds, setPatchWindowSeconds] = useState<number>(60);
-  const [patchBucketSeconds, setPatchBucketSeconds] = useState<number>(10);
-  const [patchDailyLimit, setPatchDailyLimit] = useState<number>(200);
-  const [patchErr, setPatchErr] = useState<string>("");
-
-  const scopesArray = useMemo(
-    () =>
-      newScopes
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-    [newScopes]
+  // selection/actions
+  const [selectedKeyId, setSelectedKeyId] = useState<string>("");
+  const selectedKey = useMemo(
+    () => keys.find((k) => k.key_id === selectedKeyId) || null,
+    [keys, selectedKeyId]
   );
 
-  const refreshMetrics = useCallback(async () => {
-    setBusy(true);
+  // -----------------------------
+  // Token bootstrap
+  // -----------------------------
+  async function refreshToken() {
+    setAuthErr("");
+    try {
+      const u = auth.currentUser;
+      if (!u) {
+        setToken("");
+        setMeEmail("");
+        setAuthErr("Not logged in. Please login first.");
+        return;
+      }
+      setMeEmail(u.email || "");
+      const t = await u.getIdToken(/* forceRefresh */ true);
+      setToken(t);
+    } catch (e) {
+      setAuthErr(errToString(e));
+    }
+  }
+
+  useEffect(() => {
+    // keep in sync if user logs in/out
+    const unsub = auth.onAuthStateChanged(() => {
+      refreshToken();
+    });
+    refreshToken();
+    return () => unsub();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // -----------------------------
+  // API calls
+  // -----------------------------
+  async function loadMetrics() {
     setMetricsErr("");
     try {
       const m = (await apipFetch("/admin/metrics", {
@@ -98,285 +166,186 @@ export default function AdminPanel({ token }: { token: string }) {
       setMetrics(m);
     } catch (e) {
       setMetricsErr(errToString(e));
-    } finally {
-      setBusy(false);
+      setMetrics(null);
     }
-  }, [token]);
+  }
 
-  const refreshKeys = useCallback(async () => {
-    setBusy(true);
+  async function loadKeys() {
     setKeysErr("");
+    setKeysLoading(true);
     try {
-      // NOTE: API endpoint is /admin/keys (not /keys)
-      const out = (await apipFetch("/admin/keys", {
+      const r = (await apipFetch("/admin/keys", {
         token,
-        query: { limit },
-      })) as any;
+        query: { limit: 50 },
+      })) as KeysListResponse;
 
-      // Accept either { keys: [...] } or raw array for robustness
-      const arr: KeyRecord[] = Array.isArray(out) ? out : out?.keys ?? [];
-      setKeys(arr);
+      const list = Array.isArray(r?.keys) ? r.keys : [];
+      setKeys(list);
+      if (list.length && !selectedKeyId) setSelectedKeyId(list[0].key_id);
     } catch (e) {
       setKeysErr(errToString(e));
+      setKeys([]);
     } finally {
-      setBusy(false);
+      setKeysLoading(false);
     }
-  }, [token, limit]);
+  }
 
-  const fetchOneKey = useCallback(
-    async (keyId: string) => {
-      if (!keyId) return;
-      setBusy(true);
-      setSelectedErr("");
-      try {
-        const k = (await apipFetch(`/keys/${encodeURIComponent(keyId)}`, {
-          token,
-        })) as any;
-        // Accept {key: {...}} or {...}
-        const rec: KeyRecord = (k?.key ?? k) as KeyRecord;
-        setSelectedKey(rec);
-
-        // Seed patch fields from current values (fallback to existing)
-        setPatchWindowLimit(rec.rl_window_limit ?? patchWindowLimit);
-        setPatchWindowSeconds(rec.rl_window_seconds ?? patchWindowSeconds);
-        setPatchBucketSeconds(rec.rl_bucket_seconds ?? patchBucketSeconds);
-        setPatchDailyLimit(rec.rl_daily_limit ?? patchDailyLimit);
-      } catch (e) {
-        setSelectedErr(errToString(e));
-        setSelectedKey(null);
-      } finally {
-        setBusy(false);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [token]
-  );
-
-  const createKey = useCallback(async () => {
-    setBusy(true);
+  async function createKey() {
     setCreateErr("");
+    setCreatedApiKey("");
+    setCreatedKeyId("");
     try {
-      const payload = {
-        label: newLabel,
-        scopes: scopesArray,
-        rl_window_limit: Number(newWindowLimit),
-        rl_window_seconds: Number(newWindowSeconds),
-        rl_bucket_seconds: Number(newBucketSeconds),
-        rl_daily_limit: Number(newDailyLimit),
-      };
-
-      await apipFetch("/keys", {
+      const r = (await apipFetch("/keys", {
         token,
         method: "POST",
-        body: payload,
-      });
+        body: create,
+      })) as CreateKeyResponse;
 
-      alert("API key created.");
-      await refreshKeys();
-      await refreshMetrics();
+      const kid = r?.key_id || r?.key?.key_id || "";
+      const ak = r?.api_key || "";
+      setCreatedKeyId(kid);
+      setCreatedApiKey(ak);
+
+      await loadKeys();
+      if (kid) setSelectedKeyId(kid);
     } catch (e) {
       setCreateErr(errToString(e));
-    } finally {
-      setBusy(false);
     }
-  }, [
-    token,
-    newLabel,
-    scopesArray,
-    newWindowLimit,
-    newWindowSeconds,
-    newBucketSeconds,
-    newDailyLimit,
-    refreshKeys,
-    refreshMetrics,
-  ]);
+  }
 
-  const enableKey = useCallback(
-    async (keyId: string) => {
-      if (!keyId) return;
-      if (!confirm(`Enable key ${keyId}?`)) return;
+  async function enableKey(keyId: string) {
+    try {
+      await apipFetch(`/keys/${encodeURIComponent(keyId)}/enable`, {
+        token,
+        method: "POST",
+      });
+      await loadKeys();
+    } catch (e) {
+      alert(errToString(e));
+    }
+  }
 
-      setBusy(true);
-      setSelectedErr("");
-      try {
-        await apipFetch(`/keys/${encodeURIComponent(keyId)}/enable`, {
-          token,
-          method: "POST",
-        });
+  async function resetCounters(keyId: string) {
+    try {
+      await apipFetch(`/keys/${encodeURIComponent(keyId)}/reset-counters`, {
+        token,
+        method: "POST",
+      });
+      await loadKeys();
+    } catch (e) {
+      alert(errToString(e));
+    }
+  }
 
-        alert("Key enabled.");
-        await fetchOneKey(keyId);
-        await refreshKeys();
-        await refreshMetrics();
-      } catch (e) {
-        setSelectedErr(errToString(e));
-      } finally {
-        setBusy(false);
+  async function copyAdminToken() {
+    setAuthErr("");
+    try {
+      if (!token) {
+        await refreshToken();
       }
-    },
-    [token, fetchOneKey, refreshKeys, refreshMetrics]
-  );
-
-  const disableKey = useCallback(
-    async (keyId: string) => {
-      if (!keyId) return;
-      if (!confirm(`Disable key ${keyId}? This will immediately block traffic.`))
+      if (!auth.currentUser) {
+        setAuthErr("Not logged in.");
         return;
-
-      setBusy(true);
-      setSelectedErr("");
-      try {
-        await apipFetch(`/keys/${encodeURIComponent(keyId)}/disable`, {
-          token,
-          method: "POST",
-        });
-
-        alert("Key disabled.");
-        await fetchOneKey(keyId);
-        await refreshKeys();
-        await refreshMetrics();
-      } catch (e) {
-        setSelectedErr(errToString(e));
-      } finally {
-        setBusy(false);
       }
-    },
-    [token, fetchOneKey, refreshKeys, refreshMetrics]
-  );
+      const t = token || (await auth.currentUser.getIdToken(true));
+      await copyToClipboard(t);
+      alert("Admin ID token copied to clipboard.");
+    } catch (e) {
+      setAuthErr(errToString(e));
+    }
+  }
 
-  const resetCounters = useCallback(
-    async (keyId: string) => {
-      if (!keyId) return;
-      if (!confirm(`Reset counters for key ${keyId}?`)) return;
+  async function doLogout() {
+    try {
+      await signOut(auth);
+      setToken("");
+      setMeEmail("");
+      setMetrics(null);
+      setKeys([]);
+      setSelectedKeyId("");
+      alert("Logged out.");
+    } catch (e) {
+      alert(errToString(e));
+    }
+  }
 
-      setBusy(true);
-      setSelectedErr("");
-      try {
-        await apipFetch(`/keys/${encodeURIComponent(keyId)}/reset-counters`, {
-          token,
-          method: "POST",
-        });
+  // auto-load once token exists
+  useEffect(() => {
+    if (!token) return;
+    loadMetrics();
+    loadKeys();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
-        alert("Counters reset.");
-        await fetchOneKey(keyId);
-        await refreshKeys();
-        await refreshMetrics();
-      } catch (e) {
-        setSelectedErr(errToString(e));
-      } finally {
-        setBusy(false);
-      }
-    },
-    [token, fetchOneKey, refreshKeys, refreshMetrics]
-  );
-
-  const patchRateLimit = useCallback(
-    async (keyId: string) => {
-      if (!keyId) return;
-      if (
-        !confirm(
-          `Patch rate limits for key ${keyId}?\n\nWindow limit=${patchWindowLimit}\nWindow seconds=${patchWindowSeconds}\nBucket seconds=${patchBucketSeconds}\nDaily limit=${patchDailyLimit}`
-        )
-      )
-        return;
-
-      setBusy(true);
-      setPatchErr("");
-      try {
-        const payload = {
-          rl_window_limit: Number(patchWindowLimit),
-          rl_window_seconds: Number(patchWindowSeconds),
-          rl_bucket_seconds: Number(patchBucketSeconds),
-          rl_daily_limit: Number(patchDailyLimit),
-        };
-
-        await apipFetch(`/keys/${encodeURIComponent(keyId)}`, {
-          token,
-          method: "PATCH",
-          body: payload,
-        });
-
-        alert("Rate limits updated.");
-        await fetchOneKey(keyId);
-        await refreshKeys();
-        await refreshMetrics();
-      } catch (e) {
-        setPatchErr(errToString(e));
-      } finally {
-        setBusy(false);
-      }
-    },
-    [
-      token,
-      patchWindowLimit,
-      patchWindowSeconds,
-      patchBucketSeconds,
-      patchDailyLimit,
-      fetchOneKey,
-      refreshKeys,
-      refreshMetrics,
-    ]
-  );
-
-  const onSelectKeyId = useCallback((v: string) => {
-    setSelectedKeyId(v);
-    setSelectedKey(null);
-    setSelectedErr("");
-  }, []);
-
-  // ---- UI ----
+  // -----------------------------
+  // Render
+  // -----------------------------
   return (
-    <div style={{ marginTop: 24 }}>
-      <h2>Admin Console</h2>
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 16 }}>
+      <h2 style={{ marginBottom: 8 }}>Admin Dashboard</h2>
 
-      <div style={{ display: "flex", gap: 10, margin: "10px 0" }}>
-        <button disabled={busy} onClick={refreshMetrics}>
-          Refresh metrics
-        </button>
-        <button disabled={busy} onClick={refreshKeys}>
-          Refresh keys
-        </button>
-        {busy ? <span style={{ opacity: 0.8 }}>Working…</span> : null}
+      <div style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8, marginBottom: 16 }}>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <div><strong>API Base:</strong> {base || "(missing NEXT_PUBLIC_API_BASE_URL)"}</div>
+            <div><strong>Signed in as:</strong> {meEmail || "(none)"}</div>
+          </div>
+
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <button onClick={refreshToken} disabled={!auth.currentUser}>
+              Refresh token
+            </button>
+            <button onClick={copyAdminToken} disabled={!auth.currentUser}>
+              Copy admin ID token
+            </button>
+            <button onClick={doLogout} disabled={!auth.currentUser}>
+              Logout
+            </button>
+          </div>
+        </div>
+
+        {authErr ? (
+          <pre style={{ color: "crimson", marginTop: 10, whiteSpace: "pre-wrap" }}>{authErr}</pre>
+        ) : null}
+
+        <div style={{ marginTop: 10, fontSize: 13, color: "#555" }}>
+          Notes:
+          <ul style={{ marginTop: 6 }}>
+            <li>We do <strong>not</strong> display your token by default (security). Use “Copy admin ID token”.</li>
+            <li>API keys are only shown <strong>once</strong> immediately after creation.</li>
+          </ul>
+        </div>
       </div>
 
       {/* Metrics */}
-      <div style={{ border: "1px solid #333", padding: 12, borderRadius: 10 }}>
-        <h3>Metrics</h3>
-        {metricsErr ? (
-          <pre style={{ color: "salmon", whiteSpace: "pre-wrap" }}>
-            {metricsErr}
-          </pre>
-        ) : (
-          <pre style={{ whiteSpace: "pre-wrap" }}>
-            {metrics ? fmtJson(metrics) : "{}"}
-          </pre>
-        )}
-      </div>
+      <div style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8, marginBottom: 16 }}>
+        <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "space-between" }}>
+          <h3 style={{ margin: 0 }}>Metrics</h3>
+          <button onClick={loadMetrics} disabled={!token}>
+            Reload metrics
+          </button>
+        </div>
 
-      {/* Create key */}
-      <div
-        style={{
-          border: "1px solid #333",
-          padding: 12,
-          borderRadius: 10,
-          marginTop: 16,
-        }}
-      >
-        <h3>Create API Key</h3>
-        {createErr ? (
-          <pre style={{ color: "salmon", whiteSpace: "pre-wrap" }}>
-            {createErr}
-          </pre>
+        {metricsErr ? (
+          <pre style={{ color: "crimson", marginTop: 10, whiteSpace: "pre-wrap" }}>{metricsErr}</pre>
         ) : null}
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+        <pre style={{ marginTop: 10, background: "#fafafa", padding: 10, borderRadius: 6, overflowX: "auto" }}>
+          {metrics ? fmtJson(metrics) : "(no metrics yet)"}
+        </pre>
+      </div>
+
+      {/* Create Key */}
+      <div style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8, marginBottom: 16 }}>
+        <h3 style={{ marginTop: 0 }}>Create API Key</h3>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
           <label>
             Label
             <input
               style={{ width: "100%" }}
-              value={newLabel}
-              onChange={(e) => setNewLabel(e.target.value)}
-              disabled={busy}
+              value={create.label}
+              onChange={(e) => setCreate({ ...create, label: e.target.value })}
             />
           </label>
 
@@ -384,9 +353,16 @@ export default function AdminPanel({ token }: { token: string }) {
             Scopes (comma-separated)
             <input
               style={{ width: "100%" }}
-              value={newScopes}
-              onChange={(e) => setNewScopes(e.target.value)}
-              disabled={busy}
+              value={(create.scopes || []).join(",")}
+              onChange={(e) =>
+                setCreate({
+                  ...create,
+                  scopes: e.target.value
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
             />
           </label>
 
@@ -395,9 +371,8 @@ export default function AdminPanel({ token }: { token: string }) {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={newWindowLimit}
-              onChange={(e) => setNewWindowLimit(Number(e.target.value))}
-              disabled={busy}
+              value={create.rl_window_limit}
+              onChange={(e) => setCreate({ ...create, rl_window_limit: Number(e.target.value) })}
             />
           </label>
 
@@ -406,9 +381,8 @@ export default function AdminPanel({ token }: { token: string }) {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={newWindowSeconds}
-              onChange={(e) => setNewWindowSeconds(Number(e.target.value))}
-              disabled={busy}
+              value={create.rl_window_seconds}
+              onChange={(e) => setCreate({ ...create, rl_window_seconds: Number(e.target.value) })}
             />
           </label>
 
@@ -417,9 +391,8 @@ export default function AdminPanel({ token }: { token: string }) {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={newBucketSeconds}
-              onChange={(e) => setNewBucketSeconds(Number(e.target.value))}
-              disabled={busy}
+              value={create.rl_bucket_seconds}
+              onChange={(e) => setCreate({ ...create, rl_bucket_seconds: Number(e.target.value) })}
             />
           </label>
 
@@ -428,190 +401,105 @@ export default function AdminPanel({ token }: { token: string }) {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={newDailyLimit}
-              onChange={(e) => setNewDailyLimit(Number(e.target.value))}
-              disabled={busy}
+              value={create.rl_daily_limit}
+              onChange={(e) => setCreate({ ...create, rl_daily_limit: Number(e.target.value) })}
             />
           </label>
         </div>
 
-        <div style={{ marginTop: 10 }}>
-          <button disabled={busy} onClick={createKey}>
-            Create
+        <div style={{ marginTop: 10, display: "flex", gap: 8 }}>
+          <button onClick={createKey} disabled={!token}>
+            Create key
+          </button>
+          <button onClick={loadKeys} disabled={!token}>
+            Reload keys
           </button>
         </div>
+
+        {createErr ? (
+          <pre style={{ color: "crimson", marginTop: 10, whiteSpace: "pre-wrap" }}>{createErr}</pre>
+        ) : null}
+
+        {/* One-time API key panel */}
+        {createdApiKey ? (
+          <div style={{ marginTop: 12, padding: 12, border: "1px solid #f0c36d", borderRadius: 8, background: "#fff8e6" }}>
+            <div style={{ display: "flex", gap: 10, alignItems: "center", justifyContent: "space-between" }}>
+              <div>
+                <strong>ONE-TIME API KEY</strong>
+                <div style={{ fontSize: 13, color: "#555" }}>
+                  Copy now — it will not be shown again. Key ID: <code>{createdKeyId || "(unknown)"}</code>
+                </div>
+              </div>
+              <button onClick={() => copyToClipboard(createdApiKey)}>Copy API key</button>
+            </div>
+
+            <pre style={{ marginTop: 10, background: "#fff", padding: 10, borderRadius: 6, overflowX: "auto" }}>
+              {createdApiKey}
+            </pre>
+          </div>
+        ) : null}
       </div>
 
-      {/* Keys list */}
-      <div
-        style={{
-          border: "1px solid #333",
-          padding: 12,
-          borderRadius: 10,
-          marginTop: 16,
-        }}
-      >
-        <h3>Keys</h3>
-
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <label>
-            Limit:&nbsp;
-            <input
-              type="number"
-              value={limit}
-              onChange={(e) => setLimit(Number(e.target.value))}
-              disabled={busy}
-              style={{ width: 80 }}
-            />
-          </label>
-          <button disabled={busy} onClick={refreshKeys}>
-            Load
-          </button>
+      {/* Keys List + Actions */}
+      <div style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8 }}>
+        <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "space-between" }}>
+          <h3 style={{ margin: 0 }}>Keys</h3>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            {keysLoading ? <span style={{ fontSize: 13 }}>Loading…</span> : null}
+            <button onClick={loadKeys} disabled={!token}>
+              Reload
+            </button>
+          </div>
         </div>
 
         {keysErr ? (
-          <pre style={{ color: "salmon", whiteSpace: "pre-wrap" }}>{keysErr}</pre>
+          <pre style={{ color: "crimson", marginTop: 10, whiteSpace: "pre-wrap" }}>{keysErr}</pre>
         ) : null}
 
-        <table style={{ width: "100%", marginTop: 10, borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ borderBottom: "1px solid #333" }}>
-              <th style={{ textAlign: "left", padding: 6 }}>key_id</th>
-              <th style={{ textAlign: "left", padding: 6 }}>label</th>
-              <th style={{ textAlign: "left", padding: 6 }}>active</th>
-              <th style={{ textAlign: "left", padding: 6 }}>requests</th>
-            </tr>
-          </thead>
-          <tbody>
-            {keys.length === 0 ? (
-              <tr>
-                <td style={{ padding: 6 }} colSpan={4}>
-                  (no keys loaded)
-                </td>
-              </tr>
-            ) : (
-              keys.map((k) => (
-                <tr
-                  key={k.key_id}
-                  style={{ borderBottom: "1px solid #222", cursor: "pointer" }}
-                  onClick={() => {
-                    onSelectKeyId(k.key_id);
-                    fetchOneKey(k.key_id);
-                  }}
-                >
-                  <td style={{ padding: 6 }}>{k.key_id}</td>
-                  <td style={{ padding: 6 }}>{k.label ?? ""}</td>
-                  <td style={{ padding: 6 }}>{String(!!k.active)}</td>
-                  <td style={{ padding: 6 }}>{k.total_requests ?? 0}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 12, marginTop: 10 }}>
+          <div style={{ border: "1px solid #eee", borderRadius: 8, padding: 8 }}>
+            <div style={{ fontSize: 13, color: "#555", marginBottom: 8 }}>
+              Select a key
+            </div>
+            <select
+              style={{ width: "100%", padding: 8 }}
+              value={selectedKeyId}
+              onChange={(e) => setSelectedKeyId(e.target.value)}
+            >
+              <option value="" disabled>
+                (choose)
+              </option>
+              {keys.map((k) => (
+                <option key={k.key_id} value={k.key_id}>
+                  {k.key_id} — {k.label || "(no label)"} {k.active ? "" : "[disabled]"}
+                </option>
+              ))}
+            </select>
 
-      {/* Selected key */}
-      <div
-        style={{
-          border: "1px solid #333",
-          padding: 12,
-          borderRadius: 10,
-          marginTop: 16,
-        }}
-      >
-        <h3>Selected key</h3>
+            <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <button
+                onClick={() => selectedKeyId && enableKey(selectedKeyId)}
+                disabled={!token || !selectedKeyId}
+              >
+                Enable key
+              </button>
+              <button
+                onClick={() => selectedKeyId && resetCounters(selectedKeyId)}
+                disabled={!token || !selectedKeyId}
+              >
+                Reset counters
+              </button>
+            </div>
+          </div>
 
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <input
-            style={{ flex: 1 }}
-            placeholder="key_id"
-            value={selectedKeyId}
-            onChange={(e) => onSelectKeyId(e.target.value)}
-            disabled={busy}
-          />
-          <button disabled={busy || !selectedKeyId} onClick={() => fetchOneKey(selectedKeyId)}>
-            Fetch
-          </button>
-          <button disabled={busy || !selectedKeyId} onClick={() => enableKey(selectedKeyId)}>
-            Enable
-          </button>
-          <button disabled={busy || !selectedKeyId} onClick={() => disableKey(selectedKeyId)}>
-            Disable
-          </button>
-          <button disabled={busy || !selectedKeyId} onClick={() => resetCounters(selectedKeyId)}>
-            Reset counters
-          </button>
-        </div>
-
-        {selectedErr ? (
-          <pre style={{ color: "salmon", whiteSpace: "pre-wrap" }}>
-            {selectedErr}
-          </pre>
-        ) : null}
-
-        {selectedKey ? (
-          <pre style={{ whiteSpace: "pre-wrap" }}>{fmtJson(selectedKey)}</pre>
-        ) : null}
-
-        <h4 style={{ marginTop: 14 }}>Patch rate limit</h4>
-
-        {patchErr ? (
-          <pre style={{ color: "salmon", whiteSpace: "pre-wrap" }}>{patchErr}</pre>
-        ) : null}
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <label>
-            Window limit
-            <input
-              style={{ width: "100%" }}
-              type="number"
-              value={patchWindowLimit}
-              onChange={(e) => setPatchWindowLimit(Number(e.target.value))}
-              disabled={busy}
-            />
-          </label>
-
-          <label>
-            Window seconds
-            <input
-              style={{ width: "100%" }}
-              type="number"
-              value={patchWindowSeconds}
-              onChange={(e) => setPatchWindowSeconds(Number(e.target.value))}
-              disabled={busy}
-            />
-          </label>
-
-          <label>
-            Bucket seconds
-            <input
-              style={{ width: "100%" }}
-              type="number"
-              value={patchBucketSeconds}
-              onChange={(e) => setPatchBucketSeconds(Number(e.target.value))}
-              disabled={busy}
-            />
-          </label>
-
-          <label>
-            Daily limit
-            <input
-              style={{ width: "100%" }}
-              type="number"
-              value={patchDailyLimit}
-              onChange={(e) => setPatchDailyLimit(Number(e.target.value))}
-              disabled={busy}
-            />
-          </label>
-        </div>
-
-        <div style={{ marginTop: 10 }}>
-          <button
-            disabled={busy || !selectedKeyId}
-            onClick={() => patchRateLimit(selectedKeyId)}
-          >
-            Patch
-          </button>
+          <div style={{ border: "1px solid #eee", borderRadius: 8, padding: 8 }}>
+            <div style={{ fontSize: 13, color: "#555", marginBottom: 8 }}>
+              Selected key details
+            </div>
+            <pre style={{ background: "#fafafa", padding: 10, borderRadius: 6, overflowX: "auto" }}>
+              {selectedKey ? fmtJson(selectedKey) : "(none selected)"}
+            </pre>
+          </div>
         </div>
       </div>
     </div>
