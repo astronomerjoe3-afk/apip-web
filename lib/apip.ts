@@ -1,11 +1,13 @@
 // lib/apip.ts
 // Centralized APIP API client for the admin dashboard.
-// - Uses NEXT_PUBLIC_API_BASE_URL (preferred) with NEXT_PUBLIC_API_BASE as fallback
-// - Normalizes trailing slashes
-// - Provides typed helpers for the APIP admin endpoints
-// - Throws clear errors with HTTP status + JSON/body
+// Backwards-compatible exports:
+//   - apipFetch(method, path, idToken, body?)
+//   - ApiError
+//
+// Prefers NEXT_PUBLIC_API_BASE_URL, falls back to NEXT_PUBLIC_API_BASE.
+// Normalizes trailing slashes and throws clear, structured errors.
 
-export type ApipErrorInfo = {
+export type ApiErrorInfo = {
   status: number;
   message: string;
   detail?: any;
@@ -13,14 +15,17 @@ export type ApipErrorInfo = {
 };
 
 export class ApipError extends Error {
-  public info: ApipErrorInfo;
+  public info: ApiErrorInfo;
 
-  constructor(info: ApipErrorInfo) {
+  constructor(info: ApiErrorInfo) {
     super(info.message);
     this.name = "ApipError";
     this.info = info;
   }
 }
+
+// Backwards-compatible name used by AdminPanel.tsx
+export class ApiError extends ApipError {}
 
 function resolveApiBase(): string {
   const raw =
@@ -30,14 +35,14 @@ function resolveApiBase(): string {
 
   const base = raw.trim().replace(/\/+$/, "");
   if (!base) {
-    throw new ApipError({
+    throw new ApiError({
       status: 0,
       message:
         "NEXT_PUBLIC_API_BASE_URL is not set (expected e.g. https://api.cognispark.tech)",
     });
   }
   if (!/^https?:\/\//i.test(base)) {
-    throw new ApipError({
+    throw new ApiError({
       status: 0,
       message:
         `Invalid API base URL "${base}". ` +
@@ -50,13 +55,14 @@ function resolveApiBase(): string {
 export const apipBase = resolveApiBase();
 
 function joinUrl(base: string, path: string): string {
-  if (!path.startsWith("/")) path = `/${path}`;
-  return `${base}${path}`;
+  const p = path.startsWith("/") ? path : `/${path}`;
+  return `${base}${p}`;
 }
 
 async function readBodySafe(resp: Response): Promise<{ text: string; json: any }> {
   const text = await resp.text();
   let json: any = null;
+
   if (text) {
     try {
       json = JSON.parse(text);
@@ -64,6 +70,7 @@ async function readBodySafe(resp: Response): Promise<{ text: string; json: any }
       json = null;
     }
   }
+
   return { text, json };
 }
 
@@ -73,6 +80,14 @@ async function requestJson<T>(
   idToken: string,
   body?: any
 ): Promise<T> {
+  if (!idToken) {
+    throw new ApiError({
+      status: 0,
+      message: "Missing idToken (Firebase ID token).",
+      url: joinUrl(apipBase, path),
+    });
+  }
+
   const url = joinUrl(apipBase, path);
 
   const headers: Record<string, string> = {
@@ -80,7 +95,7 @@ async function requestJson<T>(
     Accept: "application/json",
   };
 
-  let payload: string | undefined = undefined;
+  let payload: string | undefined;
   if (body !== undefined) {
     headers["Content-Type"] = "application/json";
     payload = JSON.stringify(body);
@@ -90,7 +105,6 @@ async function requestJson<T>(
     method,
     headers,
     body: payload,
-    // Cloud Run + browser: keep default mode; relies on server CORS config
   });
 
   const { text, json } = await readBodySafe(resp);
@@ -101,7 +115,7 @@ async function requestJson<T>(
       (text ? text : resp.statusText) ||
       `HTTP ${resp.status}`;
 
-    throw new ApipError({
+    throw new ApiError({
       status: resp.status,
       message: `HTTP ${resp.status}: ${msg}`,
       detail: json ?? text,
@@ -109,11 +123,23 @@ async function requestJson<T>(
     });
   }
 
-  // If server returns empty body, return {} as T
   return (json ?? (text ? (text as any) : ({} as any))) as T;
 }
 
-/** ---------- Types that mirror your API responses ---------- */
+/**
+ * Backwards-compatible helper used by AdminPanel.tsx
+ * Example: apipFetch("GET", "/admin/metrics?top_n=10", token)
+ */
+export async function apipFetch<T = any>(
+  method: "GET" | "POST" | "PATCH" | "DELETE",
+  path: string,
+  idToken: string,
+  body?: any
+): Promise<T> {
+  return requestJson<T>(method, path, idToken, body);
+}
+
+/** ---------- Typed helpers (nice to use in new code) ---------- */
 
 export type MetricsResponse = {
   ok: boolean;
@@ -176,7 +202,7 @@ export type CreateKeyRequest = {
 export type CreateKeyResponse = {
   ok: boolean;
   key_id: string;
-  api_key: string; // only returned at create time
+  api_key: string;
   created_at_utc: string;
 };
 
@@ -221,8 +247,6 @@ export type ProfileResponse = {
   utc: string;
 };
 
-/** ---------- APIP API functions ---------- */
-
 export function getApiBase(): string {
   return apipBase;
 }
@@ -251,7 +275,11 @@ export async function getKey(
   idToken: string,
   keyId: string
 ): Promise<KeyGetResponse> {
-  return requestJson<KeyGetResponse>("GET", `/keys/${encodeURIComponent(keyId)}`, idToken);
+  return requestJson<KeyGetResponse>(
+    "GET",
+    `/keys/${encodeURIComponent(keyId)}`,
+    idToken
+  );
 }
 
 export async function createKey(
