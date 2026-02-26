@@ -1,90 +1,61 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import AdminPanel from "./AdminPanel";
-
-// NOTE: this import path depends on how you set up Firebase in apip-web.
-// Adjust if needed (common: "@/lib/firebase" exporting `auth`)
 import { auth } from "@/lib/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getIdTokenResult, User } from "firebase/auth";
 
 export default function DashboardPage() {
-  const [email, setEmail] = useState<string>("");
-  const [uid, setUid] = useState<string>("");
-  const [claimsRole, setClaimsRole] = useState<string>("");
-  const [apiRole, setApiRole] = useState<string>("");
+  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string>("");
-  const [err, setErr] = useState<string>("");
+  const [claimsRole, setClaimsRole] = useState<string>("(unknown)");
+  const [uid, setUid] = useState<string>("");
+
+  const email = useMemo(() => user?.email ?? "(not signed in)", [user]);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (user) => {
-      setErr("");
-      setApiRole("");
-      setClaimsRole("");
+    const unsub = onAuthStateChanged(auth, async (u) => {
+      setUser(u);
       setToken("");
+      setClaimsRole("(unknown)");
+      setUid("");
 
-      if (!user) return;
+      if (!u) return;
 
-      setEmail(user.email || "");
-      setUid(user.uid);
+      setUid(u.uid);
 
-      try {
-        const t = await user.getIdToken(/* forceRefresh */ true);
-        setToken(t);
+      // Always fetch token+claims once on load
+      const res = await getIdTokenResult(u, true);
+      setToken(res.token);
 
-        const decoded = await user.getIdTokenResult();
-        const role = (decoded?.claims as any)?.role;
-        setClaimsRole(role ? String(role) : "");
-
-        // Fetch /profile from API for server-side role truth (Step 3.2 depends on this)
-        const base = process.env.NEXT_PUBLIC_API_BASE;
-        if (base) {
-          const resp = await fetch(`${base.replace(/\/$/, "")}/profile`, {
-            headers: { Authorization: `Bearer ${t}` },
-            cache: "no-store",
-          });
-          const data = await resp.json().catch(() => null);
-
-          if (!resp.ok) {
-            setErr(`API ${resp.status}: ${JSON.stringify(data)}`);
-          } else {
-            setApiRole(data?.role ? String(data.role) : "");
-          }
-        }
-      } catch (e: any) {
-        setErr(String(e));
-      }
+      const role = (res.claims?.role as string) || "(none)";
+      setClaimsRole(role);
     });
 
     return () => unsub();
   }, []);
 
-  const isAdmin = (apiRole || claimsRole) === "admin";
+  const isAdmin = claimsRole === "admin";
 
   return (
     <main style={{ padding: 24 }}>
-      <h1 style={{ fontSize: 44, fontWeight: 800, marginBottom: 16 }}>Dashboard</h1>
+      <h1 style={{ fontSize: 56, marginBottom: 12 }}>Dashboard</h1>
 
-      <div style={{ fontSize: 18, lineHeight: 1.6 }}>
+      <div style={{ lineHeight: 1.8 }}>
         <div>
-          <b>Email:</b> {email || "(not signed in)"}
+          <strong>Email:</strong> {email}
         </div>
         <div>
-          <b>UID:</b> {uid || "-"}
+          <strong>UID:</strong> {uid || "(not signed in)"}
         </div>
         <div>
-          <b>Role (client claims):</b> {claimsRole || "-"}
-        </div>
-        <div>
-          <b>Role (from API /profile):</b> {apiRole || "(not fetched)"}
+          <strong>Role (client claims):</strong> {claimsRole}
         </div>
       </div>
 
-      {err ? (
-        <pre style={{ color: "#ff6b6b", marginTop: 12, whiteSpace: "pre-wrap" }}>{err}</pre>
-      ) : null}
-
-      {isAdmin && token ? <AdminPanel token={token} /> : null}
+      <div style={{ marginTop: 24 }}>
+        {isAdmin && token ? <AdminPanel token={token} /> : null}
+      </div>
     </main>
   );
 }
