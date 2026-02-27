@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { onAuthStateChanged, User, signOut } from "firebase/auth";
 
 // NOTE: adjust this import if your firebase.ts exports differently
 import { auth } from "../../lib/firebase";
@@ -31,7 +31,19 @@ export default function TokenBar({ label = "Session tools" }: Props) {
       setStatus(forceRefresh ? "Fresh ID token copied." : "ID token copied.");
       setTimeout(() => setStatus(""), 2500);
     } catch (e: any) {
-      setStatus(`Token copy failed: ${String(e?.message || e)}`.slice(0, 120));
+      setStatus(`Token copy failed: ${String(e?.message || e)}`.slice(0, 160));
+    }
+  }
+
+  async function doLogout() {
+    try {
+      setStatus("Signing out...");
+      await signOut(auth);
+      setStatus("Signed out.");
+      // Optional: force refresh so UI updates instantly
+      window.location.href = "/login";
+    } catch (e: any) {
+      setStatus(`Logout failed: ${String(e?.message || e)}`.slice(0, 160));
     }
   }
 
@@ -51,6 +63,9 @@ export default function TokenBar({ label = "Session tools" }: Props) {
           </button>
           <button onClick={() => copyIdToken(true)} disabled={!user}>
             Refresh + copy token
+          </button>
+          <button onClick={doLogout} disabled={!user}>
+            Logout
           </button>
         </div>
       </div>
