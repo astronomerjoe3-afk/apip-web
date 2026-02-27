@@ -23,8 +23,18 @@ type Lesson = {
 };
 
 export default function StudentModulePage() {
-  const params = useParams<{ moduleId: string }>();
-  const moduleId = decodeURIComponent(params.moduleId);
+  // Next returns Record<string, string | string[]>
+  const params = useParams() as Record<string, string | string[] | undefined>;
+
+  // Support both keys defensively (in case your folder name changed at some point)
+  const raw =
+    (params["moduleId"] ?? params["module"]) as string | string[] | undefined;
+
+  const moduleId = useMemo(() => {
+    if (!raw) return "";
+    const v = Array.isArray(raw) ? raw[0] : raw;
+    return decodeURIComponent(v);
+  }, [raw]);
 
   const [module, setModule] = useState<Module | null>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -37,21 +47,40 @@ export default function StudentModulePage() {
   );
 
   useEffect(() => {
+    if (!moduleId) {
+      setErr("Missing module id in route.");
+      setModule(null);
+      setLessons([]);
+      setActiveLessonId("");
+      return;
+    }
+
     (async () => {
       try {
         setErr("");
-        const m = await apipGet<{ ok: boolean; module: Module }>(`/modules/${encodeURIComponent(moduleId)}`);
+
+        const m = await apipGet<{ ok: boolean; module: Module }>(
+          `/modules/${encodeURIComponent(moduleId)}`
+        );
         setModule(m.module);
 
-        const l = await apipGet<{ ok: boolean; lessons: Lesson[]; warnings?: string[] }>(
-          `/modules/${encodeURIComponent(moduleId)}/lessons`
+        const l = await apipGet<{
+          ok: boolean;
+          lessons: Lesson[];
+          warnings?: string[];
+        }>(`/modules/${encodeURIComponent(moduleId)}/lessons`);
+
+        const ordered = [...(l.lessons || [])].sort(
+          (a, b) => (a.sequence ?? 999) - (b.sequence ?? 999)
         );
 
-        const ordered = [...(l.lessons || [])].sort((a, b) => (a.sequence ?? 999) - (b.sequence ?? 999));
         setLessons(ordered);
-        if (ordered.length > 0) setActiveLessonId(ordered[0].id);
+        setActiveLessonId(ordered[0]?.id || "");
       } catch (e: any) {
         setErr(String(e?.message || e));
+        setModule(null);
+        setLessons([]);
+        setActiveLessonId("");
       }
     })();
   }, [moduleId]);
@@ -60,7 +89,7 @@ export default function StudentModulePage() {
     <div style={{ padding: 24 }}>
       <div style={{ marginBottom: 14 }}>
         <div style={{ fontSize: 28, fontWeight: 800 }}>
-          {module?.title || moduleId}
+          {module?.title || moduleId || "Module"}
         </div>
         <div style={{ opacity: 0.85, marginTop: 6 }}>
           {module?.description || ""}
@@ -68,14 +97,29 @@ export default function StudentModulePage() {
       </div>
 
       {err ? (
-        <div style={{ border: "1px solid #800", padding: 12, borderRadius: 10, marginBottom: 16 }}>
+        <div
+          style={{
+            border: "1px solid #800",
+            padding: 12,
+            borderRadius: 10,
+            marginBottom: 16,
+          }}
+        >
           <b>Error:</b> {err}
         </div>
       ) : null}
 
-      <div style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: 16, alignItems: "start" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "320px 1fr",
+          gap: 16,
+          alignItems: "start",
+        }}
+      >
         <div style={{ border: "1px solid #333", borderRadius: 12, padding: 12 }}>
           <div style={{ fontWeight: 800, marginBottom: 10 }}>Lessons</div>
+
           <div style={{ display: "grid", gap: 8 }}>
             {lessons.map((l) => (
               <button
@@ -92,9 +136,7 @@ export default function StudentModulePage() {
                 <div style={{ fontWeight: 700 }}>
                   {(l.sequence ?? "?")}. {l.title || l.id}
                 </div>
-                <div style={{ opacity: 0.75, fontSize: 13 }}>
-                  {l.id}
-                </div>
+                <div style={{ opacity: 0.75, fontSize: 13 }}>{l.id}</div>
               </button>
             ))}
           </div>
@@ -119,7 +161,7 @@ export default function StudentModulePage() {
               misconceptionAllowlist={module?.misconception_tag_allowlist || []}
             />
           ) : (
-            <div style={{ opacity: 0.8 }}>Select a lesson.</div>
+            <div style={{ opacity: 0.8 }}>Select a lesson to begin.</div>
           )}
         </div>
       </div>
