@@ -1,61 +1,71 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import AdminPanel from "./AdminPanel";
-import { auth } from "@/lib/firebase";
+import { useEffect, useState } from "react";
 import { onAuthStateChanged, getIdTokenResult, User } from "firebase/auth";
+
+import { auth } from "../../lib/firebase";
+import TokenBar from "./TokenBar";
+import AdminPanel from "./AdminPanel";
+
+type Role = "student" | "instructor" | "admin" | "unknown";
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string>("");
-  const [claimsRole, setClaimsRole] = useState<string>("(unknown)");
-  const [uid, setUid] = useState<string>("");
-
-  const email = useMemo(() => user?.email ?? "(not signed in)", [user]);
+  const [role, setRole] = useState<Role>("unknown");
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
       setUser(u);
-      setToken("");
-      setClaimsRole("(unknown)");
-      setUid("");
-
-      if (!u) return;
-
-      setUid(u.uid);
-
-      // Always fetch token+claims once on load
-      const res = await getIdTokenResult(u, true);
-      setToken(res.token);
-
-      const role = (res.claims?.role as string) || "(none)";
-      setClaimsRole(role);
+      if (!u) {
+        setRole("unknown");
+        return;
+      }
+      try {
+        // Pull custom claims (role) from Firebase
+        const tokenResult = await getIdTokenResult(u, true);
+        const r = (tokenResult.claims?.role as Role) || "unknown";
+        setRole(r);
+      } catch {
+        setRole("unknown");
+      }
     });
 
     return () => unsub();
   }, []);
 
-  const isAdmin = claimsRole === "admin";
-
   return (
-    <main style={{ padding: 24 }}>
-      <h1 style={{ fontSize: 56, marginBottom: 12 }}>Dashboard</h1>
+    <div style={{ padding: 24 }}>
+      <h1 style={{ fontSize: 72, margin: "0 0 16px 0" }}>Dashboard</h1>
 
-      <div style={{ lineHeight: 1.8 }}>
-        <div>
-          <strong>Email:</strong> {email}
-        </div>
-        <div>
-          <strong>UID:</strong> {uid || "(not signed in)"}
-        </div>
-        <div>
-          <strong>Role (client claims):</strong> {claimsRole}
-        </div>
+      <div style={{ fontSize: 18, lineHeight: 1.6 }}>
+        <div><b>Email:</b> {user?.email || "-"}</div>
+        <div><b>UID:</b> {user?.uid || "-"}</div>
+        <div><b>Role (client claims):</b> {role}</div>
       </div>
 
-      <div style={{ marginTop: 24 }}>
-        {isAdmin && token ? <AdminPanel token={token} /> : null}
-      </div>
-    </main>
+      <TokenBar label="Token tools (student/instructor/admin)" />
+
+      {role === "admin" ? (
+        <AdminPanel />
+      ) : role === "instructor" ? (
+        <div style={{ marginTop: 18, padding: 16, border: "1px solid #333", borderRadius: 10 }}>
+          <h2 style={{ marginTop: 0 }}>Instructor Mode</h2>
+          <div style={{ opacity: 0.85 }}>
+            Instructor dashboard features will appear here next (cohort metrics, misconception map, engagement analytics).
+          </div>
+        </div>
+      ) : role === "student" ? (
+        <div style={{ marginTop: 18, padding: 16, border: "1px solid #333", borderRadius: 10 }}>
+          <h2 style={{ marginTop: 0 }}>Student Mode</h2>
+          <div style={{ opacity: 0.85 }}>
+            Student learning UI will be added next (Module F1 → Lessons → ACSR loop → /progress logging).
+          </div>
+        </div>
+      ) : (
+        <div style={{ marginTop: 18, opacity: 0.8 }}>
+          Sign in to continue.
+        </div>
+      )}
+    </div>
   );
 }
