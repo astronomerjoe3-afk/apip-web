@@ -5,53 +5,40 @@ import { apipGet, apipPost } from "../lib/apipApi";
 import { auth } from "../lib/firebase";
 
 /**
- * Student-only LessonRunner (ACRM-aligned):
- * - Shows only prompts + inputs + hints + feedback + Module Mastery
- * - No IDs, no tags, no step/debug, no confidence/readiness
- * - Virtual lab step runs once (if lab_id exists)
- * - Lesson considered "Completed" only when best >= 80%
- * - Student can move on even if not completed, after first attempt
- * - Module mastery shown as derived from highest lesson scores (client-side)
- * - Dedupes repeated questions coming from Firestore (reseed/merge issues)
+ * Student-only LessonRunner (ACR(M)-aligned)
+ * - Teaching ALWAYS exists for F1 (fallback if Firestore lesson.phases missing)
+ * - Single-focus screens: Gate -> Analogy -> Lab (once) -> Capsules -> Challenge -> Done
+ * - No readiness/confidence bars; no internal IDs displayed
+ * - “Commitment sentence” removed
+ * - Dedupes repeated questions strongly
+ * - Module mastery derived from HIGHEST lesson scores across ALL lessons in module
  */
 
 type Props = {
   moduleId: string;
   lesson: any;
   misconceptionAllowlist: string[];
+  lessonOrderIds: string[]; // passed from module page
   onRequestNextLesson?: () => void;
 };
 
-type McqItem = {
-  type: "mcq";
-  question_id?: string;
-  prompt: string;
-  choices: string[];
-  correct_index?: number;
-  misconception_tags?: string[];
-  hint?: string;
-};
-
-type ShortItem = {
-  type: "short";
-  question_id?: string;
-  prompt: string;
-  misconception_tags?: string[];
-  hint?: string;
-};
-
-type Item = McqItem | ShortItem;
-
-type ProgressMe = {
-  ok: boolean;
-  mastery_map?: Array<{
-    module_id: string;
-    mastery_score: number;
-    readiness: string;
-    engagement_seconds: number;
-    last_event_utc?: string;
-  }>;
-};
+type Item =
+  | {
+      type: "mcq";
+      question_id?: string;
+      prompt: string;
+      choices: string[];
+      correct_index?: number;
+      misconception_tags?: string[];
+      hint?: string;
+    }
+  | {
+      type: "short";
+      question_id?: string;
+      prompt: string;
+      misconception_tags?: string[];
+      hint?: string;
+    };
 
 const PASS_THRESHOLD = 0.8;
 
@@ -85,9 +72,8 @@ function pickHint(item: any): string {
   if (typeof item?.hint === "string" && item.hint.trim()) return item.hint.trim();
 
   const tags = (item?.misconception_tags || []) as string[];
-  for (const t of tags) {
-    if (HINT_BY_TAG[t]) return HINT_BY_TAG[t];
-  }
+  for (const t of tags) if (HINT_BY_TAG[t]) return HINT_BY_TAG[t];
+
   return "Tip: show units, and explain your reasoning in 1–2 sentences.";
 }
 
@@ -96,7 +82,7 @@ function storageKey(moduleId: string) {
   return `apip:bestScores:${uid}:${moduleId}`;
 }
 
-type BestScores = Record<string, number>; // lessonId -> best score [0..1]
+type BestScores = Record<string, number>; // lessonId -> best [0..1]
 
 function readBestScores(moduleId: string): BestScores {
   try {
@@ -124,26 +110,64 @@ function writeBestScores(moduleId: string, best: BestScores) {
   }
 }
 
-function computeModuleMastery(best: BestScores): number {
-  const vals = Object.values(best).filter((n) => Number.isFinite(n));
-  if (!vals.length) return 0;
-  const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
-  return clamp01(avg);
+/**
+ * Module mastery MUST account for *all* lessons in the module:
+ * - highest score per lesson
+ * - unattempted lessons count as 0
+ */
+function computeModuleMastery(best: BestScores, lessonOrderIds: string[]) {
+  const ids = lessonOrderIds || [];
+  if (!ids.length) return 0;
+  let sum = 0;
+  for (const id of ids) sum += clamp01(Number(best[id] ?? 0));
+  return clamp01(sum / ids.length);
 }
 
 /**
- * IMPORTANT:
- * - Score MCQ by question_id (preferred).
- * - If question_id missing, we fallback to a stable derived key created in keyItems().
+ * Strong dedupe: normalize prompt/choices; dedupe by question_id if present,
+ * else by normalized fingerprint.
  */
+function normalizeText(s: string) {
+  return (s || "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .replace(/[“”]/g, '"')
+    .replace(/[’]/g, "'")
+    .trim();
+}
+
+function keyAndDedupe(items: Item[]) {
+  const seen = new Set<string>();
+  const out: any[] = [];
+
+  for (const it of items || []) {
+    const qid = normalizeText(String((it as any)?.question_id || ""));
+    const prompt = normalizeText(String((it as any)?.prompt || ""));
+    const choices = Array.isArray((it as any)?.choices)
+      ? (it as any).choices.map((c: any) => normalizeText(String(c))).join("|")
+      : "";
+
+    const fp = qid ? `id:${qid}` : `p:${prompt}::c:${choices}`;
+    if (seen.has(fp)) continue;
+    seen.add(fp);
+
+    out.push(it);
+  }
+
+  return out.map((it, idx) => ({
+    ...(it as any),
+    __key: String((it as any)?.question_id || `q_${idx}`),
+  }));
+}
+
 function scoreMcq(items: any[], chosenMap: Record<string, number>) {
-  const mcqItems = (items || []).filter((x: any) => x?.type === "mcq") as any[];
-  if (mcqItems.length === 0) return null;
+  const mcqs = (items || []).filter((x: any) => x?.type === "mcq");
+  if (!mcqs.length) return null;
 
   let correct = 0;
   let total = 0;
 
-  for (const q of mcqItems) {
+  for (const q of mcqs) {
     const key = String(q?.question_id || q?.__key || "");
     const chosen = chosenMap[key];
     if (typeof chosen !== "number") continue;
@@ -151,50 +175,120 @@ function scoreMcq(items: any[], chosenMap: Record<string, number>) {
     total += 1;
     if (typeof q.correct_index === "number" && chosen === q.correct_index) correct += 1;
   }
-
   if (total === 0) return 0;
   return clamp01(correct / total);
 }
 
 /**
- * Dedupe repeated questions caused by Firestore merges/reseeding.
- * - Prefer dedupe by question_id
- * - Else dedupe by prompt+choices fingerprint
- * Adds __key for stable state tracking.
+ * F1 fallback teaching pack (used ONLY if Firestore is missing phases).
+ * This is not “questions only” — it provides analogy + lab prompt + capsules.
  */
-function keyItems(items: Item[]) {
-  const seen = new Set<string>();
-  const unique: any[] = [];
+function getF1Fallback(lesson: any) {
+  const seq = Number(lesson?.sequence ?? 0);
 
-  for (const it of items || []) {
-    const qid = String((it as any)?.question_id || "").trim();
-    const prompt = String((it as any)?.prompt || "").trim();
-    const choices = Array.isArray((it as any)?.choices) ? (it as any).choices.join("|") : "";
-    const fingerprint = qid ? `id:${qid}` : `p:${prompt}::c:${choices}`;
+  const mim = `Measurement Infrastructure Model (MIM)
+• SI unit = standard construction code
+• SI prefix = permit category (kilo-, milli-, micro-)
+• Scalars = single-lane measurement (amount only)
+• Vectors = directed pathway measurement (amount + direction)
+• Significant figures = precision tolerance limit
+• Error/uncertainty = construction deviation band
+• Density = mass-per-capacity (how tightly packed)`;
 
-    if (seen.has(fingerprint)) continue;
-    seen.add(fingerprint);
-    unique.push(it);
-  }
+  // One “lab” per lesson at most; lightweight guided activity until real sim_specs exist.
+  const labPromptBySeq: Record<number, string[]> = {
+    1: ["Use prefixes to convert values. Notice: the quantity stays the same; only the unit scale changes."],
+    2: ["Add two arrows (direction matters). See how vectors can cancel even when you travelled."],
+    3: ["Read a scale carefully. Your best reading includes a small uncertainty band (about half the smallest division)."],
+    4: ["Change instrument resolution. Watch how reported digits must match the tool."],
+    5: ["Measure mass and volume once. Compute density (mass per volume) and classify the material."],
+    6: ["Compare precision vs accuracy using the dartboard idea: tight grouping vs close to true value."],
+  };
 
-  return unique.map((it, idx) => {
-    const k = String((it as any)?.question_id || `q_${idx}`);
-    return { ...(it as any), __key: k };
-  });
+  const capsulePromptsBySeq: Record<number, { title: string; prompts: string[] }> = {
+    1: {
+      title: "Concept Capsules: Units & Prefixes",
+      prompts: [
+        "Explain what a prefix does (kilo-, milli-, micro-) in one sentence.",
+        "Show one conversion with units cancelling (example: km → m).",
+      ],
+    },
+    2: {
+      title: "Concept Capsules: Scalars vs Vectors",
+      prompts: [
+        "Explain the difference between distance and displacement.",
+        "Give one example of a vector and include a direction.",
+      ],
+    },
+    3: {
+      title: "Concept Capsules: Reading Scales & Uncertainty",
+      prompts: [
+        "How do you estimate uncertainty from a scale?",
+        "Why can two careful measurements be slightly different?",
+      ],
+    },
+    4: {
+      title: "Concept Capsules: Significant Figures",
+      prompts: [
+        "What does an extra decimal place *mean* about precision?",
+        "When should you round in multi-step calculations?",
+      ],
+    },
+    5: {
+      title: "Concept Capsules: Density & Units",
+      prompts: [
+        "Explain density in words (no formula).",
+        "Write correct density units and give one conversion idea (g/cm³ vs kg/m³).",
+      ],
+    },
+    6: {
+      title: "Concept Capsules: Precision vs Accuracy",
+      prompts: [
+        "Explain precision vs accuracy using the dartboard idea.",
+        "Give one real-world example where precision matters.",
+      ],
+    },
+  };
+
+  return {
+    analogyText: mim,
+    simPrompts: labPromptBySeq[seq] || ["Do the activity once, then write one observation."],
+    reconTitle: capsulePromptsBySeq[seq]?.title || "Concept Capsules",
+    reconPrompts: capsulePromptsBySeq[seq]?.prompts || ["Explain the key idea in 2–4 sentences."],
+  };
 }
 
-export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist, onRequestNextLesson }: Props) {
+export default function LessonRunner({
+  moduleId,
+  lesson,
+  misconceptionAllowlist,
+  lessonOrderIds,
+  onRequestNextLesson,
+}: Props) {
   const phases = lesson?.phases || {};
 
-  const diagnosticItems: any[] = keyItems((phases?.diagnostic?.items || []) as Item[]);
-  const transferItems: any[] = keyItems((phases?.transfer?.items || []) as Item[]);
-  const analogyText: string = phases?.analogical_grounding?.analogy_text || "";
-  const reconPrompts: string[] = phases?.concept_reconstruction?.prompts || [];
-  const sim = phases?.simulation_inquiry || {};
-  const simLabId: string | null = sim?.lab_id || null;
-  const simPrompts: string[] = sim?.inquiry_prompts || [];
+  // Pull from Firestore if present…
+  let diagnosticItems: any[] = keyAndDedupe((phases?.diagnostic?.items || []) as Item[]);
+  let transferItems: any[] = keyAndDedupe((phases?.transfer?.items || []) as Item[]);
+  let analogyText: string = phases?.analogical_grounding?.analogy_text || "";
+  let simLabId: string | null = phases?.simulation_inquiry?.lab_id || null;
+  let simPrompts: string[] = phases?.simulation_inquiry?.inquiry_prompts || [];
+  let reconPrompts: string[] = phases?.concept_reconstruction?.prompts || [];
 
-  const [step, setStep] = useState<"prediction" | "analogy" | "lab" | "build" | "challenge" | "done">("prediction");
+  // …otherwise, inject F1 teaching defaults (so it’s not “questions only”).
+  const needsTeachingFallback =
+    moduleId === "F1" &&
+    (!analogyText.trim() || !reconPrompts.length || !simPrompts.length);
+
+  const f1Fallback = useMemo(() => (needsTeachingFallback ? getF1Fallback(lesson) : null), [needsTeachingFallback, lesson]);
+
+  if (f1Fallback) {
+    if (!analogyText.trim()) analogyText = f1Fallback.analogyText;
+    if (!simPrompts.length) simPrompts = f1Fallback.simPrompts;
+    if (!reconPrompts.length) reconPrompts = f1Fallback.reconPrompts;
+  }
+
+  const [step, setStep] = useState<"gate" | "analogy" | "lab" | "capsules" | "challenge" | "done">("gate");
   const [startedAt, setStartedAt] = useState<number>(Date.now());
   const [status, setStatus] = useState<string>("");
 
@@ -207,16 +301,13 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
   const [feedback, setFeedback] = useState<{ kind: "ok" | "warn"; title: string; body?: string } | null>(null);
 
   const [bestScores, setBestScores] = useState<BestScores>({});
-  const moduleMastery = useMemo(() => computeModuleMastery(bestScores), [bestScores]);
-
-  const [progress, setProgress] = useState<ProgressMe | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") setBestScores(readBestScores(moduleId));
   }, [moduleId]);
 
   useEffect(() => {
-    setStep("prediction");
+    setStep("gate");
     setStartedAt(Date.now());
     setStatus("");
     setFeedback(null);
@@ -226,14 +317,13 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
     setToolWhy("");
   }, [lesson?.id]);
 
-  const title = lesson?.title || "Lesson";
+  const lessonIdForScore = String(lesson?.id || lesson?.lesson_id || lesson?.title || "lesson");
+  const moduleMastery = useMemo(() => computeModuleMastery(bestScores, lessonOrderIds), [bestScores, lessonOrderIds]);
+  const masteryPct = Math.round(moduleMastery * 100);
 
   function durationSeconds() {
-    const ms = Date.now() - startedAt;
-    return Math.max(0, Math.round(ms / 1000));
+    return Math.max(0, Math.round((Date.now() - startedAt) / 1000));
   }
-
-  const lessonIdForScore = String(lesson?.id || lesson?.lesson_id || title);
 
   function persistBestScore(newScore: number) {
     const prev = Number(bestScores[lessonIdForScore] ?? 0);
@@ -244,8 +334,7 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
   }
 
   function isLessonCompleted() {
-    const best = Number(bestScores[lessonIdForScore] ?? 0);
-    return best >= PASS_THRESHOLD;
+    return Number(bestScores[lessonIdForScore] ?? 0) >= PASS_THRESHOLD;
   }
 
   const studentOnlyTagsFor = (items: any[]) => {
@@ -257,15 +346,6 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
     return allowTags([...new Set(tags)], misconceptionAllowlist);
   };
 
-  async function refreshProgress() {
-    try {
-      const p = await apipGet<ProgressMe>("/progress/me");
-      setProgress(p);
-    } catch {
-      // non-fatal
-    }
-  }
-
   async function logEvent(event_type: "diagnostic" | "simulation" | "reflection" | "transfer" | "attempt", score?: number, tags?: string[]) {
     const payload: any = {
       event_type,
@@ -274,131 +354,90 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
       misconception_tags: allowTags(tags || [], misconceptionAllowlist),
       details: { lesson_id: lesson?.id, phase: step },
     };
-
     setStatus("Saving…");
     await apipPost(`/progress/${encodeURIComponent(moduleId)}/event`, payload);
     setStatus("");
   }
 
-  async function submitPredictionGate() {
-    const hasMcq = (diagnosticItems || []).some((x: any) => x.type === "mcq");
-    const hasShort = (diagnosticItems || []).some((x: any) => x.type === "short");
+  async function submitGate() {
+    const hasMcq = diagnosticItems.some((x: any) => x.type === "mcq");
+    const hasShort = diagnosticItems.some((x: any) => x.type === "short");
 
     if (hasMcq) {
-      const unanswered = (diagnosticItems || [])
+      const unanswered = diagnosticItems
         .filter((x: any) => x.type === "mcq")
         .some((q: any) => typeof mcq[String(q.question_id || q.__key || "")] !== "number");
-      if (unanswered) {
-        setFeedback({ kind: "warn", title: "Answer all questions to continue." });
-        return;
-      }
+      if (unanswered) return setFeedback({ kind: "warn", title: "Answer all questions to continue." });
     }
-
     if (hasShort) {
-      const missing = (diagnosticItems || [])
+      const missing = diagnosticItems
         .filter((x: any) => x.type === "short")
         .some((q: any) => !(short[String(q.question_id || q.__key || "")] || "").trim());
-      if (missing) {
-        setFeedback({ kind: "warn", title: "Write an answer for each written question to continue." });
-        return;
-      }
+      if (missing) return setFeedback({ kind: "warn", title: "Write an answer for each written question to continue." });
     }
 
     const s = scoreMcq(diagnosticItems, mcq);
     const score = typeof s === "number" ? s : 0;
 
     await logEvent("diagnostic", score, studentOnlyTagsFor(diagnosticItems));
-    await refreshProgress();
     persistBestScore(score);
-
-    const pct = Math.round(score * 100);
-    setFeedback({
-      kind: score >= PASS_THRESHOLD ? "ok" : "warn",
-      title: score >= PASS_THRESHOLD ? `Great start: ${pct}%` : `Good try: ${pct}%`,
-      body:
-        score >= PASS_THRESHOLD
-          ? "You can continue."
-          : "You can continue now. If you want, you can practice later to improve your mastery.",
-    });
 
     setStartedAt(Date.now());
     setStep("analogy");
+    setFeedback(null);
   }
 
   async function submitAnalogy() {
-    if (!toolChoice) {
-      setFeedback({ kind: "warn", title: "Choose one tool to continue." });
-      return;
-    }
-    if (!toolWhy.trim()) {
-      setFeedback({ kind: "warn", title: "Write 1–2 sentences explaining why." });
-      return;
-    }
+    if (!toolChoice) return setFeedback({ kind: "warn", title: "Choose one tool to continue." });
+    if (!toolWhy.trim()) return setFeedback({ kind: "warn", title: "Write 1–2 sentences explaining why." });
 
-    await logEvent("reflection", undefined, []);
-    await refreshProgress();
-
+    await logEvent("reflection");
     setStartedAt(Date.now());
-    setStep(simLabId ? "lab" : "build");
+    setStep("lab");
+    setFeedback(null);
   }
 
   async function submitLabOnce() {
     const notes = (short["lab_notes"] || "").trim();
-    if (!notes) {
-      setFeedback({ kind: "warn", title: "Write a short observation before continuing." });
-      return;
-    }
+    if (!notes) return setFeedback({ kind: "warn", title: "Write a short observation before continuing." });
 
-    await logEvent("simulation", undefined, studentOnlyTagsFor([]));
-    await refreshProgress();
-
+    await logEvent("simulation");
     setStartedAt(Date.now());
-    setStep("build");
+    setStep("capsules");
+    setFeedback(null);
   }
 
-  async function submitBuildConcepts() {
-    const missing = (reconPrompts || []).some((_: string, i: number) => !(short[`recon_${i}`] || "").trim());
-    if (missing) {
-      setFeedback({ kind: "warn", title: "Answer each question to continue." });
-      return;
-    }
+  async function submitCapsules() {
+    const missing = (reconPrompts || []).some((_: string, i: number) => !(short[`cap_${i}`] || "").trim());
+    if (missing) return setFeedback({ kind: "warn", title: "Answer each capsule question to continue." });
 
-    await logEvent("reflection", undefined, []);
-    await refreshProgress();
-
+    await logEvent("reflection");
     setStartedAt(Date.now());
     setStep("challenge");
+    setFeedback(null);
   }
 
   async function submitChallenge() {
-    const hasMcq = (transferItems || []).some((x: any) => x.type === "mcq");
-    const hasShort = (transferItems || []).some((x: any) => x.type === "short");
+    const hasMcq = transferItems.some((x: any) => x.type === "mcq");
+    const hasShort = transferItems.some((x: any) => x.type === "short");
 
     if (hasMcq) {
-      const unanswered = (transferItems || [])
+      const unanswered = transferItems
         .filter((x: any) => x.type === "mcq")
         .some((q: any) => typeof mcq[String(q.question_id || q.__key || "")] !== "number");
-      if (unanswered) {
-        setFeedback({ kind: "warn", title: "Answer all questions to submit." });
-        return;
-      }
+      if (unanswered) return setFeedback({ kind: "warn", title: "Answer all questions to submit." });
     }
     if (hasShort) {
-      const missing = (transferItems || [])
+      const missing = transferItems
         .filter((x: any) => x.type === "short")
         .some((q: any) => !(short[String(q.question_id || q.__key || "")] || "").trim());
-      if (missing) {
-        setFeedback({ kind: "warn", title: "Write an answer for each written question to submit." });
-        return;
-      }
+      if (missing) return setFeedback({ kind: "warn", title: "Write an answer for each written question to submit." });
     }
 
     const s = scoreMcq(transferItems, mcq);
     const score = typeof s === "number" ? s : 0;
 
     await logEvent("transfer", score, studentOnlyTagsFor(transferItems));
-    await refreshProgress();
-
     persistBestScore(score);
 
     const pct = Math.round(score * 100);
@@ -409,14 +448,14 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
       title: `Score: ${pct}%`,
       body: completed
         ? "Lesson marked completed."
-        : "You can move on to the next lesson now. Repeat later to reach 80–100% and mark it completed.",
+        : "You can move on to the next lesson now. Practice later to reach 80–100% and mark it completed.",
     });
 
     setStep("done");
   }
 
   const completed = isLessonCompleted();
-  const masteryPct = Math.round(moduleMastery * 100);
+  const title = lesson?.title || "Lesson";
 
   const styles = {
     wrap: { maxWidth: 980, margin: "0 auto", padding: "22px 16px 26px 16px" } as React.CSSProperties,
@@ -529,9 +568,7 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
           </div>
         </div>
 
-        <div style={styles.subtitle}>
-          Focus on the prompts. Do your best. You can always practice again to improve your mastery.
-        </div>
+        <div style={styles.subtitle}>Focus on the prompts. Do your best. You can always practice again to improve your mastery.</div>
       </div>
 
       {feedback ? (
@@ -541,39 +578,29 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
         </div>
       ) : null}
 
-      {status ? (
-        <div style={{ ...styles.card, textAlign: "center", marginBottom: 14, opacity: 0.9 }}>{status}</div>
-      ) : null}
+      {status ? <div style={{ ...styles.card, textAlign: "center", marginBottom: 14, opacity: 0.9 }}>{status}</div> : null}
 
       <div style={styles.card}>
-        {step === "prediction" ? (
+        {step === "gate" ? (
           <>
-            <div style={styles.bigH2}>Prediction Gate</div>
-            <p style={styles.bodyText}>Answer first. Then we’ll learn.</p>
-
+            <div style={styles.bigH2}>Gate</div>
+            <p style={styles.bodyText}>Commit to answers first. Then we’ll build understanding.</p>
             <QuestionListStudent items={diagnosticItems} mcq={mcq} setMcq={setMcq} short={short} setShort={setShort} />
-
             <div style={styles.divider} />
-
-            <button style={styles.btnPrimary} onClick={submitPredictionGate}>
-              Continue →
-            </button>
+            <button style={styles.btnPrimary} onClick={submitGate}>Continue →</button>
           </>
         ) : null}
 
         {step === "analogy" ? (
           <>
-            <div style={styles.bigH2}>Measurement Infrastructure Model (MIM)</div>
-
-            {analogyText ? (
-              <p style={{ ...styles.bodyText, whiteSpace: "pre-wrap" }}>{analogyText}</p>
-            ) : (
-              <p style={styles.bodyText}>Anchor the idea with a real engineering analogy.</p>
-            )}
+            <div style={styles.bigH2}>Analogy (MIM)</div>
+            <p style={{ ...styles.bodyText, whiteSpace: "pre-wrap" }}>{analogyText}</p>
 
             <div style={styles.questionCard}>
-              <div style={styles.prompt}>Choose a tool to measure a steel beam.</div>
-              <div style={{ ...styles.bodyText, marginTop: -6, marginBottom: 12 }}>Which would engineers trust more — and why?</div>
+              <div style={styles.prompt}>Tool Trust</div>
+              <div style={{ ...styles.bodyText, marginTop: -6, marginBottom: 12 }}>
+                Choose the tool engineers would trust more — and explain why.
+              </div>
 
               <div style={styles.choiceGrid}>
                 <button style={styles.choiceBtn(toolChoice === "rough")} onClick={() => setToolChoice("rough")}>
@@ -587,14 +614,12 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
               <div style={{ marginTop: 12 }}>
                 <div style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>Your explanation</div>
                 <textarea style={styles.textarea} placeholder="Explain in 1–2 sentences…" value={toolWhy} onChange={(e) => setToolWhy(e.target.value)} />
-                <div style={styles.hint}>Hint: the more precise tool gives more reliable measurements.</div>
+                <div style={styles.hint}>Hint: precision controls reliability.</div>
               </div>
             </div>
 
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={submitAnalogy}>
-                Continue →
-              </button>
+              <button style={styles.btnPrimary} onClick={submitAnalogy}>Continue →</button>
             </div>
           </>
         ) : null}
@@ -602,15 +627,12 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
         {step === "lab" ? (
           <>
             <div style={styles.bigH2}>Virtual Lab</div>
-
-            {simLabId ? <p style={styles.bodyText}>Do the lab once, then write one observation.</p> : null}
+            <p style={styles.bodyText}>Do this once, then write one observation.</p>
 
             {simPrompts?.length ? (
               <div style={{ marginTop: 8, textAlign: "center", opacity: 0.95, fontSize: 18, lineHeight: 1.6 }}>
                 {simPrompts.map((p: string, i: number) => (
-                  <div key={i} style={{ marginBottom: 6 }}>
-                    • {p}
-                  </div>
+                  <div key={i} style={{ marginBottom: 6 }}>• {p}</div>
                 ))}
               </div>
             ) : null}
@@ -623,45 +645,37 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
                 value={short["lab_notes"] || ""}
                 onChange={(e) => setShort({ ...short, lab_notes: e.target.value })}
               />
-              <div style={styles.hint}>Hint: mention precision/uncertainty and how results can change.</div>
+              <div style={styles.hint}>Hint: mention precision/uncertainty and why results can vary.</div>
             </div>
 
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={submitLabOnce}>
-                Continue →
-              </button>
+              <button style={styles.btnPrimary} onClick={submitLabOnce}>Continue →</button>
             </div>
           </>
         ) : null}
 
-        {step === "build" ? (
+        {step === "capsules" ? (
           <>
-            <div style={styles.bigH2}>Build the Idea</div>
-            <p style={styles.bodyText}>Answer these short prompts to make the concept clear before the final challenge.</p>
+            <div style={styles.bigH2}>Concept Capsules</div>
+            <p style={styles.bodyText}>Short explanations you must complete before the challenge.</p>
 
-            {reconPrompts?.length ? (
-              <div style={{ display: "grid", gap: 12, marginTop: 8 }}>
-                {reconPrompts.map((p: string, i: number) => (
-                  <div key={i} style={styles.questionCard}>
-                    <div style={styles.prompt}>{p}</div>
-                    <textarea
-                      style={styles.textarea}
-                      value={short[`recon_${i}`] || ""}
-                      onChange={(e) => setShort({ ...short, [`recon_${i}`]: e.target.value })}
-                      placeholder="Write 2–4 sentences…"
-                    />
-                    <div style={styles.hint}>Hint: keep it simple; use units and examples.</div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p style={styles.bodyText}>No prompts provided.</p>
-            )}
+            <div style={{ display: "grid", gap: 12, marginTop: 8 }}>
+              {reconPrompts.map((p: string, i: number) => (
+                <div key={i} style={styles.questionCard}>
+                  <div style={styles.prompt}>{p}</div>
+                  <textarea
+                    style={styles.textarea}
+                    value={short[`cap_${i}`] || ""}
+                    onChange={(e) => setShort({ ...short, [`cap_${i}`]: e.target.value })}
+                    placeholder="Write 2–4 sentences…"
+                  />
+                  <div style={styles.hint}>Hint: keep it simple; include units and a concrete example.</div>
+                </div>
+              ))}
+            </div>
 
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={submitBuildConcepts}>
-                Continue →
-              </button>
+              <button style={styles.btnPrimary} onClick={submitCapsules}>Continue →</button>
             </div>
           </>
         ) : null}
@@ -674,9 +688,7 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
             <QuestionListStudent items={transferItems} mcq={mcq} setMcq={setMcq} short={short} setShort={setShort} />
 
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={submitChallenge}>
-                Submit ✓
-              </button>
+              <button style={styles.btnPrimary} onClick={submitChallenge}>Submit ✓</button>
             </div>
           </>
         ) : null}
@@ -684,7 +696,6 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
         {step === "done" ? (
           <>
             <div style={styles.bigH2}>Lesson Finished</div>
-
             <p style={styles.bodyText}>
               {isLessonCompleted()
                 ? "Completed ✅"
@@ -692,15 +703,11 @@ export default function LessonRunner({ moduleId, lesson, misconceptionAllowlist,
             </p>
 
             <div style={styles.footerRow}>
-              <button style={styles.btnGhost} onClick={refreshProgress}>
-                Refresh (optional)
-              </button>
-
               <button
                 style={styles.btnGhost}
                 onClick={() => {
                   setFeedback(null);
-                  setStep("prediction");
+                  setStep("gate");
                   setStartedAt(Date.now());
                   setMcq({});
                   setShort({});
@@ -759,7 +766,9 @@ function QuestionListStudent({
               background: "rgba(255,255,255,0.03)",
             }}
           >
-            <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 12, lineHeight: 1.25 }}>{prompt}</div>
+            <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 12, lineHeight: 1.25 }}>
+              {prompt}
+            </div>
 
             {q.type === "mcq" ? (
               <div style={{ display: "grid", gap: 10 }}>
@@ -805,7 +814,9 @@ function QuestionListStudent({
                   onChange={(e) => setShort({ ...short, [key]: e.target.value })}
                   placeholder="Write your answer…"
                 />
-                <div style={{ marginTop: 10, fontSize: 15, opacity: 0.85, lineHeight: 1.45 }}>Hint: {pickHint(q)}</div>
+                <div style={{ marginTop: 10, fontSize: 15, opacity: 0.85, lineHeight: 1.45 }}>
+                  Hint: {pickHint(q)}
+                </div>
               </>
             )}
           </div>
