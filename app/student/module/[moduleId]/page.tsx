@@ -13,12 +13,31 @@ type Module = {
   mastery_outcomes?: string[];
 };
 
+type LessonPhases = {
+  analogical_grounding?: {
+    analogy_text?: string;
+  };
+  simulation_inquiry?: {
+    inquiry_prompts?: string[];
+    lab_id?: string | null;
+  };
+  concept_reconstruction?: {
+    prompts?: string[];
+  };
+  diagnostic?: {
+    items?: unknown[];
+  };
+  transfer?: {
+    items?: unknown[];
+  };
+};
+
 type Lesson = {
   lesson_id?: string;
   title?: string;
   sequence?: number;
   module_id?: string;
-  phases?: any;
+  phases?: LessonPhases;
 };
 
 type ModuleProgress = {
@@ -55,12 +74,11 @@ export default function StudentModulePage() {
 
   const [module, setModule] = useState<Module | null>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
-  const [moduleProgress, setModuleProgress] = useState<ModuleProgress | null>(null);
   const [lessonProgressRows, setLessonProgressRows] = useState<LessonProgress[]>([]);
   const [err, setErr] = useState<string>("");
-
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [refreshKey, setRefreshKey] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const activeLesson = useMemo(() => {
     if (!lessons.length) return null;
@@ -82,24 +100,30 @@ export default function StudentModulePage() {
   }, [lessonProgressRows, activeLessonId]);
 
   useEffect(() => {
-    if (!moduleId) {
-      setErr("Missing module id in route.");
-      setModule(null);
-      setLessons([]);
-      setModuleProgress(null);
-      setLessonProgressRows([]);
-      setActiveIdx(0);
-      return;
-    }
+    let cancelled = false;
 
-    (async () => {
+    async function load() {
+      if (!moduleId) {
+        if (!cancelled) {
+          setErr("Missing module id in route.");
+          setModule(null);
+          setLessons([]);
+          setLessonProgressRows([]);
+          setActiveIdx(0);
+          setIsLoading(false);
+        }
+        return;
+      }
+
       try {
-        setErr("");
+        if (!cancelled) {
+          setIsLoading(true);
+          setErr("");
+        }
 
         const m = await apipGet<{ ok: boolean; module: Module }>(
           `/modules/${encodeURIComponent(moduleId)}`
         );
-        setModule(m.module);
 
         const l = await apipGet<{
           ok: boolean;
@@ -111,29 +135,40 @@ export default function StudentModulePage() {
           (a, b) => (a.sequence ?? 999) - (b.sequence ?? 999)
         );
 
-        setLessons(ordered);
-
         const p = await apipGet<{
           ok: boolean;
           module: ModuleProgress;
           lessons: LessonProgress[];
         }>(`/student/modules/${encodeURIComponent(moduleId)}/progress`);
 
-        setModuleProgress(p.module);
-        setLessonProgressRows((p.lessons || []).sort(
-          (a, b) => (a.sequence ?? 999) - (b.sequence ?? 999)
-        ));
+        if (cancelled) return;
 
+        setModule(m.module);
+        setLessons(ordered);
+        setLessonProgressRows(
+          [...(p.lessons || [])].sort(
+            (a, b) => (a.sequence ?? 999) - (b.sequence ?? 999)
+          )
+        );
         setActiveIdx(0);
-      } catch (e: any) {
-        setErr(String(e?.message || e));
+      } catch (e: unknown) {
+        if (cancelled) return;
+        const message = e instanceof Error ? e.message : String(e);
+        setErr(message);
         setModule(null);
         setLessons([]);
-        setModuleProgress(null);
         setLessonProgressRows([]);
         setActiveIdx(0);
+      } finally {
+        if (!cancelled) setIsLoading(false);
       }
-    })();
+    }
+
+    void load();
+
+    return () => {
+      cancelled = true;
+    };
   }, [moduleId, refreshKey]);
 
   const canGoBack = activeIdx > 0;
@@ -236,7 +271,11 @@ export default function StudentModulePage() {
           margin: "0 auto",
         }}
       >
-        {activeLesson ? (
+        {isLoading ? (
+          <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
+            Loading mission…
+          </div>
+        ) : activeLesson ? (
           <LessonRunner
             moduleId={moduleId}
             lesson={activeLesson}
@@ -247,7 +286,7 @@ export default function StudentModulePage() {
           />
         ) : (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
-            Loading mission…
+            No lesson available.
           </div>
         )}
       </div>

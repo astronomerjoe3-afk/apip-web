@@ -1,11 +1,52 @@
 ﻿"use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { apipGet, apipPost } from "../lib/apipApi";
+
+type LessonItem =
+  | {
+      type: "mcq";
+      prompt: string;
+      choices: string[];
+      __key: string;
+    }
+  | {
+      type: "short";
+      prompt: string;
+      choices: null;
+      __key: string;
+    };
+
+type LessonPhases = {
+  analogical_grounding?: {
+    analogy_text?: string;
+  };
+  simulation_inquiry?: {
+    inquiry_prompts?: string[];
+    lab_id?: string | null;
+  };
+  concept_reconstruction?: {
+    prompts?: string[];
+  };
+  diagnostic?: {
+    items?: unknown[];
+  };
+  transfer?: {
+    items?: unknown[];
+  };
+};
+
+type LessonData = {
+  id?: string;
+  lesson_id?: string;
+  title?: string;
+  sequence?: number;
+  phases?: LessonPhases;
+};
 
 type Props = {
   moduleId: string;
-  lesson: any;
+  lesson: LessonData;
   misconceptionAllowlist: string[];
   lessonOrderIds: string[];
   onRequestNextLesson?: () => void;
@@ -65,34 +106,6 @@ type LessonProgressResponse = {
   lesson: ProgressLesson;
 };
 
-type Item =
-  | {
-      type: "mcq";
-      prompt: string;
-      choices: string[];
-    }
-  | {
-      type: "short";
-      prompt: string;
-      choices?: null;
-    };
-
-const PASS_THRESHOLD = 0.8;
-
-const HINT_BY_TAG: Record<string, string> = {
-  unit_conversion: "Tip: write the conversion factor, then multiply so units cancel.",
-  si_prefixes: "Tip: kilo = 10³, milli = 10⁻³, micro = 10⁻⁶.",
-  scalar_vs_vector: "Tip: vectors need both magnitude and direction.",
-  reading_scales: "Tip: uncertainty is usually about half the smallest division.",
-  significant_figures: "Tip: your final answer cannot be more precise than your least-precise measurement.",
-  rounding_rules: "Tip: round only at the end unless instructed otherwise.",
-  precision_vs_accuracy: "Tip: precision = tight grouping; accuracy = close to true value.",
-  random_vs_systematic_error: "Tip: systematic error shifts results in one direction; random error varies up/down.",
-  uncertainty_estimation: "Tip: report a reasonable ± value based on the instrument scale.",
-  density_concept: "Tip: density is how much mass is packed into each unit volume.",
-  density_units: "Tip: check units carefully, for example g/cm³ vs kg/m³.",
-};
-
 function clamp01(n: number) {
   if (Number.isNaN(n)) return 0;
   if (n < 0) return 0;
@@ -109,39 +122,53 @@ function normalizeText(s: string) {
     .trim();
 }
 
-function keyAndDedupe(items: any[]) {
+function toLessonItems(items: unknown[] | undefined): LessonItem[] {
   const seen = new Set<string>();
-  const out: any[] = [];
+  const out: LessonItem[] = [];
 
-  for (const it of items || []) {
-    const prompt = normalizeText(String(it?.prompt || ""));
-    const choices = Array.isArray(it?.choices)
-      ? it.choices.map((c: any) => normalizeText(String(c))).join("|")
-      : "";
+  for (const raw of items || []) {
+    if (!raw || typeof raw !== "object") continue;
 
-    const fp = `p:${prompt}::c:${choices}`;
+    const record = raw as Record<string, unknown>;
+    const prompt = typeof record.prompt === "string" ? record.prompt : "";
+    const type = record.type === "mcq" ? "mcq" : "short";
+
+    const choices =
+      type === "mcq" && Array.isArray(record.choices)
+        ? record.choices.filter((c): c is string => typeof c === "string")
+        : [];
+
+    const fp = `p:${normalizeText(prompt)}::c:${choices.map(normalizeText).join("|")}`;
     if (seen.has(fp)) continue;
     seen.add(fp);
 
-    out.push({
-      type: it?.type,
-      prompt: it?.prompt,
-      choices: Array.isArray(it?.choices) ? it.choices : null,
-      __key: `q_${out.length}`,
-    });
+    if (type === "mcq") {
+      out.push({
+        type: "mcq",
+        prompt,
+        choices,
+        __key: `q_${out.length}`,
+      });
+    } else {
+      out.push({
+        type: "short",
+        prompt,
+        choices: null,
+        __key: `q_${out.length}`,
+      });
+    }
   }
 
   return out;
 }
 
-function scoreMcq(items: any[], chosenMap: Record<string, number>) {
-  const mcqs = (items || []).filter((x: any) => x?.type === "mcq");
+function scoreMcq(items: LessonItem[], chosenMap: Record<string, number>) {
+  const mcqs = items.filter((x) => x.type === "mcq");
   if (!mcqs.length) return 0;
 
   let answered = 0;
   for (const q of mcqs) {
-    const key = String(q?.__key || "");
-    if (typeof chosenMap[key] === "number") answered += 1;
+    if (typeof chosenMap[q.__key] === "number") answered += 1;
   }
 
   return answered > 0 ? 0.01 : 0;
@@ -154,11 +181,11 @@ function getLessonDisplayStatus(lesson: RunnerLesson | null, progress: ProgressL
 }
 
 function getModuleMasteryPercent(module: RunnerModule | null) {
-  return Math.round(((module?.module_mastery || 0) as number) * 100);
+  return Math.round((module?.module_mastery || 0) * 100);
 }
 
 function getActiveStage(lesson: RunnerLesson | null): string {
-  const stage = lesson?.stages?.find((s) => s.active);
+  const stage = lesson?.stages.find((s) => s.active);
   return stage?.key || "diagnostic";
 }
 
@@ -173,20 +200,21 @@ export default function LessonRunner({
   onLessonStateChanged,
 }: Props) {
   const lessonId = String(lesson?.lesson_id || lesson?.id || "");
-  const phases = lesson?.phases || {};
+  const phases = useMemo(() => lesson?.phases || {}, [lesson]);
 
   const diagnosticItems = useMemo(
-    () => keyAndDedupe((phases?.diagnostic?.items || []) as Item[]),
-    [phases]
-  );
-  const transferItems = useMemo(
-    () => keyAndDedupe((phases?.transfer?.items || []) as Item[]),
+    () => toLessonItems(phases.diagnostic?.items),
     [phases]
   );
 
-  const analogyText: string = phases?.analogical_grounding?.analogy_text || "";
-  const simPrompts: string[] = phases?.simulation_inquiry?.inquiry_prompts || [];
-  const reconPrompts: string[] = phases?.concept_reconstruction?.prompts || [];
+  const transferItems = useMemo(
+    () => toLessonItems(phases.transfer?.items),
+    [phases]
+  );
+
+  const analogyText = phases.analogical_grounding?.analogy_text || "";
+  const simPrompts = phases.simulation_inquiry?.inquiry_prompts || [];
+  const reconPrompts = phases.concept_reconstruction?.prompts || [];
 
   const [runner, setRunner] = useState<RunnerResponse | null>(null);
   const [progress, setProgress] = useState<LessonProgressResponse | null>(null);
@@ -201,7 +229,7 @@ export default function LessonRunner({
   const [feedback, setFeedback] = useState<{ kind: "ok" | "warn"; title: string; body?: string } | null>(null);
   const [startedAt, setStartedAt] = useState<number>(Date.now());
 
-  async function refreshState() {
+  const refreshState = useCallback(async () => {
     if (!moduleId || !lessonId) return;
 
     const [runnerResp, progressResp] = await Promise.all([
@@ -215,7 +243,7 @@ export default function LessonRunner({
 
     setRunner(runnerResp);
     setProgress(progressResp);
-  }
+  }, [moduleId, lessonId]);
 
   useEffect(() => {
     if (!moduleId || !lessonId) return;
@@ -236,18 +264,18 @@ export default function LessonRunner({
         setLoading(false);
       }
     })();
-  }, [moduleId, lessonId]);
+  }, [moduleId, lessonId, refreshState]);
 
   function durationSeconds() {
     return Math.max(0, Math.round((Date.now() - startedAt) / 1000));
   }
 
   async function logEvent(
-    event_type: "diagnostic" | "simulation" | "reflection" | "transfer" | "attempt",
+    eventType: "diagnostic" | "simulation" | "reflection" | "transfer" | "attempt",
     score?: number
   ) {
-    const payload: any = {
-      event_type,
+    const payload: Record<string, unknown> = {
+      event_type: eventType,
       duration_seconds: durationSeconds(),
       score: typeof score === "number" ? clamp01(score) : undefined,
       details: { lesson_id: lessonId },
@@ -262,13 +290,13 @@ export default function LessonRunner({
   }
 
   async function submitDiagnostic() {
-    const hasMcq = diagnosticItems.some((x: any) => x.type === "mcq");
-    const hasShort = diagnosticItems.some((x: any) => x.type === "short");
+    const hasMcq = diagnosticItems.some((x) => x.type === "mcq");
+    const hasShort = diagnosticItems.some((x) => x.type === "short");
 
     if (hasMcq) {
       const unanswered = diagnosticItems
-        .filter((x: any) => x.type === "mcq")
-        .some((q: any) => typeof mcq[String(q.__key || "")] !== "number");
+        .filter((x) => x.type === "mcq")
+        .some((q) => typeof mcq[q.__key] !== "number");
       if (unanswered) {
         setFeedback({ kind: "warn", title: "Answer all questions to continue." });
         return;
@@ -277,8 +305,8 @@ export default function LessonRunner({
 
     if (hasShort) {
       const missing = diagnosticItems
-        .filter((x: any) => x.type === "short")
-        .some((q: any) => !(short[String(q.__key || "")] || "").trim());
+        .filter((x) => x.type === "short")
+        .some((q) => !(short[q.__key] || "").trim());
       if (missing) {
         setFeedback({ kind: "warn", title: "Write an answer for each written question to continue." });
         return;
@@ -319,13 +347,13 @@ export default function LessonRunner({
   }
 
   async function submitMasteryCheck() {
-    const hasMcq = transferItems.some((x: any) => x.type === "mcq");
-    const hasShort = transferItems.some((x: any) => x.type === "short");
+    const hasMcq = transferItems.some((x) => x.type === "mcq");
+    const hasShort = transferItems.some((x) => x.type === "short");
 
     if (hasMcq) {
       const unanswered = transferItems
-        .filter((x: any) => x.type === "mcq")
-        .some((q: any) => typeof mcq[String(q.__key || "")] !== "number");
+        .filter((x) => x.type === "mcq")
+        .some((q) => typeof mcq[q.__key] !== "number");
       if (unanswered) {
         setFeedback({ kind: "warn", title: "Answer all questions to submit." });
         return;
@@ -334,8 +362,8 @@ export default function LessonRunner({
 
     if (hasShort) {
       const missing = transferItems
-        .filter((x: any) => x.type === "short")
-        .some((q: any) => !(short[String(q.__key || "")] || "").trim());
+        .filter((x) => x.type === "short")
+        .some((q) => !(short[q.__key] || "").trim());
       if (missing) {
         setFeedback({ kind: "warn", title: "Write an answer for each written question to submit." });
         return;
@@ -549,9 +577,9 @@ export default function LessonRunner({
               </div>
             </div>
 
-            {reconPrompts?.length ? (
+            {reconPrompts.length ? (
               <div style={{ display: "grid", gap: 12, marginTop: 12 }}>
-                {reconPrompts.map((p: string, i: number) => (
+                {reconPrompts.map((p, i) => (
                   <div key={i} style={styles.questionCard}>
                     <div style={styles.prompt}>{p}</div>
                     <textarea
@@ -577,9 +605,9 @@ export default function LessonRunner({
             <div style={styles.bigH2}>Virtual Lab</div>
             <p style={styles.bodyText}>Do this once, then write one observation.</p>
 
-            {simPrompts?.length ? (
+            {simPrompts.length ? (
               <div style={{ marginTop: 8, textAlign: "center", opacity: 0.95, fontSize: 18, lineHeight: 1.6 }}>
-                {simPrompts.map((p: string, i: number) => (
+                {simPrompts.map((p, i) => (
                   <div key={i} style={{ marginBottom: 6 }}>• {p}</div>
                 ))}
               </div>
@@ -619,7 +647,9 @@ export default function LessonRunner({
           <div style={{ marginTop: 14 }}>
             <div style={styles.feedbackOk}>
               <div style={{ fontSize: 18, fontWeight: 900 }}>Lesson completed</div>
-              <div style={{ marginTop: 6, opacity: 0.9 }}>You reached the mastery threshold and can move to the next lesson.</div>
+              <div style={{ marginTop: 6, opacity: 0.9 }}>
+                You reached the mastery threshold and can move to the next lesson.
+              </div>
             </div>
 
             <div style={styles.footerRow}>
@@ -651,19 +681,18 @@ function QuestionListStudent({
   short,
   setShort,
 }: {
-  items: any[];
+  items: LessonItem[];
   mcq: Record<string, number>;
   setMcq: (x: Record<string, number>) => void;
   short: Record<string, string>;
   setShort: (x: Record<string, string>) => void;
 }) {
-  if (!items?.length) return <div style={{ opacity: 0.85, textAlign: "center" }}>No questions.</div>;
+  if (!items.length) return <div style={{ opacity: 0.85, textAlign: "center" }}>No questions.</div>;
 
   return (
     <div style={{ display: "grid", gap: 12, marginTop: 10 }}>
-      {items.map((q: any, idx: number) => {
-        const prompt = String(q?.prompt || "");
-        const key = String(q?.__key || `q_${idx}`);
+      {items.map((q, idx) => {
+        const key = q.__key || `q_${idx}`;
 
         return (
           <div
@@ -676,12 +705,12 @@ function QuestionListStudent({
             }}
           >
             <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 12, lineHeight: 1.25 }}>
-              {prompt}
+              {q.prompt}
             </div>
 
             {q.type === "mcq" ? (
               <div style={{ display: "grid", gap: 10 }}>
-                {(q.choices || []).map((c: string, cidx: number) => {
+                {q.choices.map((c, cidx) => {
                   const active = mcq[key] === cidx;
                   return (
                     <button
