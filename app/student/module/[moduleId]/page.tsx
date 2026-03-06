@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
@@ -14,7 +14,6 @@ type Module = {
 };
 
 type Lesson = {
-  id: string;
   lesson_id?: string;
   title?: string;
   sequence?: number;
@@ -22,11 +21,29 @@ type Lesson = {
   phases?: any;
 };
 
+type ModuleProgress = {
+  module_id: string;
+  module_mastery: number;
+  lessons_completed_count: number;
+  total_lessons: number;
+};
+
+type LessonProgress = {
+  lesson_id: string;
+  title?: string;
+  sequence?: number;
+  best_score: number;
+  attempt_count: number;
+  completed: boolean;
+  can_advance: boolean;
+  lab_available: boolean;
+  lab_used: boolean;
+  status: string;
+};
+
 export default function StudentModulePage() {
-  // Next returns Record<string, string | string[]>
   const params = useParams() as Record<string, string | string[] | undefined>;
 
-  // Support both keys defensively
   const raw =
     (params["moduleId"] ?? params["module"]) as string | string[] | undefined;
 
@@ -38,10 +55,12 @@ export default function StudentModulePage() {
 
   const [module, setModule] = useState<Module | null>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [moduleProgress, setModuleProgress] = useState<ModuleProgress | null>(null);
+  const [lessonProgressRows, setLessonProgressRows] = useState<LessonProgress[]>([]);
   const [err, setErr] = useState<string>("");
 
-  // ACSRM-only: student progresses linearly; no browsing list.
   const [activeIdx, setActiveIdx] = useState<number>(0);
+  const [refreshKey, setRefreshKey] = useState<number>(0);
 
   const activeLesson = useMemo(() => {
     if (!lessons.length) return null;
@@ -49,16 +68,26 @@ export default function StudentModulePage() {
     return lessons[idx] || null;
   }, [lessons, activeIdx]);
 
+  const activeLessonId = useMemo(() => {
+    return String(activeLesson?.lesson_id || "");
+  }, [activeLesson]);
+
   const progressLabel = useMemo(() => {
     if (!lessons.length) return "";
     return `Mission ${activeIdx + 1} of ${lessons.length}`;
   }, [lessons.length, activeIdx]);
+
+  const activeLessonProgress = useMemo(() => {
+    return lessonProgressRows.find((x) => x.lesson_id === activeLessonId) || null;
+  }, [lessonProgressRows, activeLessonId]);
 
   useEffect(() => {
     if (!moduleId) {
       setErr("Missing module id in route.");
       setModule(null);
       setLessons([]);
+      setModuleProgress(null);
+      setLessonProgressRows([]);
       setActiveIdx(0);
       return;
     }
@@ -83,23 +112,41 @@ export default function StudentModulePage() {
         );
 
         setLessons(ordered);
+
+        const p = await apipGet<{
+          ok: boolean;
+          module: ModuleProgress;
+          lessons: LessonProgress[];
+        }>(`/student/modules/${encodeURIComponent(moduleId)}/progress`);
+
+        setModuleProgress(p.module);
+        setLessonProgressRows((p.lessons || []).sort(
+          (a, b) => (a.sequence ?? 999) - (b.sequence ?? 999)
+        ));
+
         setActiveIdx(0);
       } catch (e: any) {
         setErr(String(e?.message || e));
         setModule(null);
         setLessons([]);
+        setModuleProgress(null);
+        setLessonProgressRows([]);
         setActiveIdx(0);
       }
     })();
-  }, [moduleId]);
+  }, [moduleId, refreshKey]);
 
   const canGoBack = activeIdx > 0;
-  const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
+
+  const canGoNext = useMemo(() => {
+    if (!lessons.length) return false;
+    if (activeIdx >= lessons.length - 1) return false;
+    return Boolean(activeLessonProgress?.can_advance);
+  }, [lessons.length, activeIdx, activeLessonProgress]);
 
   function goBack() {
     if (!canGoBack) return;
     setActiveIdx((i) => Math.max(0, i - 1));
-    // Scroll to top for “new screen” feel
     window?.scrollTo?.({ top: 0, behavior: "smooth" });
   }
 
@@ -107,6 +154,10 @@ export default function StudentModulePage() {
     if (!canGoNext) return;
     setActiveIdx((i) => Math.min(lessons.length - 1, i + 1));
     window?.scrollTo?.({ top: 0, behavior: "smooth" });
+  }
+
+  function handleLessonStateChanged() {
+    setRefreshKey((k) => k + 1);
   }
 
   return (
@@ -117,7 +168,6 @@ export default function StudentModulePage() {
         margin: "0 auto",
       }}
     >
-      {/* ACSRM student shell: centered, big, clean */}
       <div style={{ textAlign: "center", marginBottom: 18 }}>
         <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: -0.5 }}>
           {module?.title || moduleId || "Module"}
@@ -177,7 +227,6 @@ export default function StudentModulePage() {
         </div>
       ) : null}
 
-      {/* Main ACSRM runner card */}
       <div
         style={{
           border: "1px solid #333",
@@ -192,6 +241,9 @@ export default function StudentModulePage() {
             moduleId={moduleId}
             lesson={activeLesson}
             misconceptionAllowlist={module?.misconception_tag_allowlist || []}
+            lessonOrderIds={lessons.map((l) => String(l.lesson_id || ""))}
+            onRequestNextLesson={goNext}
+            onLessonStateChanged={handleLessonStateChanged}
           />
         ) : (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
@@ -200,7 +252,6 @@ export default function StudentModulePage() {
         )}
       </div>
 
-      {/* Student-friendly navigation (linear ACSRM). No lesson list, no IDs. */}
       {lessons.length > 0 ? (
         <div
           style={{
@@ -227,7 +278,9 @@ export default function StudentModulePage() {
           </button>
 
           <div style={{ opacity: 0.8, textAlign: "center" }}>
-            Finish this mission, then continue.
+            {canGoNext
+              ? "You can continue to the next mission."
+              : "Finish this mission to unlock the next one."}
           </div>
 
           <button
