@@ -1,60 +1,49 @@
-﻿"use client";
+"use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { apipGet, apipPost } from "../lib/apipApi";
 
-type LessonItem =
-  | {
-      type: "mcq";
-      prompt: string;
-      choices: string[];
-      __key: string;
-    }
-  | {
-      type: "short";
-      prompt: string;
-      choices: null;
-      __key: string;
-    };
-
-type LessonPhases = {
-  analogical_grounding?: {
-    analogy_text?: string;
-  };
-  simulation_inquiry?: {
-    inquiry_prompts?: string[];
-    lab_id?: string | null;
-  };
-  concept_reconstruction?: {
-    prompts?: string[];
-  };
-  diagnostic?: {
-    items?: unknown[];
-  };
-  transfer?: {
-    items?: unknown[];
-  };
-};
-
-type LessonData = {
+type LessonRef = {
   id?: string;
   lesson_id?: string;
   title?: string;
   sequence?: number;
-  phases?: LessonPhases;
+  phases?: {
+    analogical_grounding?: {
+      analogy_text?: string;
+    };
+    simulation_inquiry?: {
+      lab_id?: string | null;
+      inquiry_prompts?: string[];
+    };
+    concept_reconstruction?: {
+      prompts?: string[];
+    };
+    diagnostic?: {
+      items?: RunnerQuestion[];
+    };
+    transfer?: {
+      items?: RunnerQuestion[];
+    };
+  };
 };
 
 type Props = {
   moduleId: string;
-  lesson: LessonData;
+  lesson: LessonRef;
   misconceptionAllowlist: string[];
   lessonOrderIds: string[];
   onRequestNextLesson?: () => void;
-  onLessonStateChanged?: () => void;
 };
 
+type RunnerStageKey =
+  | "diagnostic"
+  | "scaffolded_teaching"
+  | "simulation"
+  | "mastery_check";
+
 type RunnerStage = {
-  key: string;
+  key: RunnerStageKey;
   label: string;
   available: boolean;
   completed: boolean;
@@ -87,34 +76,52 @@ type RunnerResponse = {
   lesson: RunnerLesson;
 };
 
-type ProgressLesson = {
-  lesson_id: string;
-  title?: string;
-  sequence?: number;
-  best_score: number;
-  attempt_count: number;
-  completed: boolean;
-  can_advance: boolean;
-  lab_available: boolean;
-  lab_used: boolean;
-  status: string;
+type RunnerQuestion =
+  | {
+      type: "mcq";
+      question_id?: string;
+      prompt: string;
+      choices?: string[] | null;
+      correct_index?: number;
+      misconception_tags?: string[];
+      hint?: string;
+    }
+  | {
+      type: "short";
+      question_id?: string;
+      prompt: string;
+      choices?: null;
+      misconception_tags?: string[];
+      hint?: string;
+    };
+
+const HINT_BY_TAG: Record<string, string> = {
+  unit_conversion: "Tip: write the conversion factor so the units cancel cleanly.",
+  si_prefixes: "Tip: kilo = 10³, milli = 10⁻³, micro = 10⁻⁶.",
+  scalar_vs_vector: "Tip: a vector needs both magnitude and direction.",
+  reading_scales: "Tip: use the smallest division to estimate a reasonable reading.",
+  significant_figures: "Tip: your final answer cannot claim more precision than your measurement.",
+  rounding_rules: "Tip: round the final result carefully, not too early.",
+  precision_vs_accuracy: "Tip: precision is grouping; accuracy is closeness to the true value.",
+  random_vs_systematic_error: "Tip: systematic error shifts results one way; random error varies around a value.",
+  uncertainty_estimation: "Tip: uncertainty is usually tied to instrument resolution.",
+  density_concept: "Tip: density means mass packed into each unit volume.",
+  density_units: "Tip: keep density units consistent before comparing values.",
 };
 
-type LessonProgressResponse = {
-  ok: boolean;
-  module: RunnerModule;
-  lesson: ProgressLesson;
-};
-
-function clamp01(n: number) {
-  if (Number.isNaN(n)) return 0;
-  if (n < 0) return 0;
-  if (n > 1) return 1;
-  return n;
+function clamp01(value: number): number {
+  if (Number.isNaN(value)) return 0;
+  if (value < 0) return 0;
+  if (value > 1) return 1;
+  return value;
 }
 
-function normalizeText(s: string) {
-  return (s || "")
+function normalizeLessonId(value: string | undefined | null): string {
+  return String(value || "").replace(/-/g, "_");
+}
+
+function normalizeText(value: string): string {
+  return value
     .toLowerCase()
     .replace(/\s+/g, " ")
     .replace(/[“”]/g, '"')
@@ -122,282 +129,357 @@ function normalizeText(s: string) {
     .trim();
 }
 
-function toLessonItems(items: unknown[] | undefined): LessonItem[] {
+function dedupeQuestions(items: RunnerQuestion[] | undefined): Array<RunnerQuestion & { __key: string }> {
+  const list = Array.isArray(items) ? items : [];
   const seen = new Set<string>();
-  const out: LessonItem[] = [];
+  const out: Array<RunnerQuestion & { __key: string }> = [];
 
-  for (const raw of items || []) {
-    if (!raw || typeof raw !== "object") continue;
+  for (let index = 0; index < list.length; index += 1) {
+    const item = list[index];
+    const qid = normalizeText(String(item.question_id || ""));
+    const prompt = normalizeText(String(item.prompt || ""));
+    const choices = Array.isArray(item.choices)
+      ? item.choices.map((choice) => normalizeText(String(choice))).join("|")
+      : "";
 
-    const record = raw as Record<string, unknown>;
-    const prompt = typeof record.prompt === "string" ? record.prompt : "";
-    const type = record.type === "mcq" ? "mcq" : "short";
-
-    const choices =
-      type === "mcq" && Array.isArray(record.choices)
-        ? record.choices.filter((c): c is string => typeof c === "string")
-        : [];
-
-    const fp = `p:${normalizeText(prompt)}::c:${choices.map(normalizeText).join("|")}`;
-    if (seen.has(fp)) continue;
-    seen.add(fp);
-
-    if (type === "mcq") {
-      out.push({
-        type: "mcq",
-        prompt,
-        choices,
-        __key: `q_${out.length}`,
-      });
-    } else {
-      out.push({
-        type: "short",
-        prompt,
-        choices: null,
-        __key: `q_${out.length}`,
-      });
+    const fingerprint = qid ? `id:${qid}` : `p:${prompt}::c:${choices}`;
+    if (seen.has(fingerprint)) {
+      continue;
     }
+    seen.add(fingerprint);
+
+    out.push({
+      ...item,
+      __key: String(item.question_id || `q_${index}`),
+    });
   }
 
   return out;
 }
 
-function scoreMcq(items: LessonItem[], chosenMap: Record<string, number>) {
-  const mcqs = items.filter((x) => x.type === "mcq");
-  if (!mcqs.length) return 0;
-
-  let answered = 0;
-  for (const q of mcqs) {
-    if (typeof chosenMap[q.__key] === "number") answered += 1;
+function scoreMcq(
+  items: Array<RunnerQuestion & { __key: string }>,
+  chosenMap: Record<string, number>,
+): number | null {
+  const mcqs = items.filter((item) => item.type === "mcq");
+  if (!mcqs.length) {
+    return null;
   }
 
-  return answered > 0 ? 0.01 : 0;
+  let total = 0;
+  let correct = 0;
+
+  for (const question of mcqs) {
+    const key = String(question.question_id || question.__key);
+    const chosen = chosenMap[key];
+    if (typeof chosen !== "number") {
+      continue;
+    }
+
+    total += 1;
+    if (typeof question.correct_index === "number" && chosen === question.correct_index) {
+      correct += 1;
+    }
+  }
+
+  if (total === 0) {
+    return 0;
+  }
+
+  return clamp01(correct / total);
 }
 
-function getLessonDisplayStatus(lesson: RunnerLesson | null, progress: ProgressLesson | null) {
-  if (lesson?.mastery_achieved) return "Completed";
-  if (progress?.status === "not_started") return "Not started";
-  return "In progress";
+function pickHint(question: RunnerQuestion): string {
+  if (typeof question.hint === "string" && question.hint.trim()) {
+    return question.hint.trim();
+  }
+
+  const tags = Array.isArray(question.misconception_tags) ? question.misconception_tags : [];
+  for (const tag of tags) {
+    if (HINT_BY_TAG[tag]) {
+      return HINT_BY_TAG[tag];
+    }
+  }
+
+  return "Tip: show your reasoning clearly and keep your units consistent.";
 }
 
-function getModuleMasteryPercent(module: RunnerModule | null) {
-  return Math.round((module?.module_mastery || 0) * 100);
+function filterAllowedTags(tags: string[] | undefined, allowlist: string[]): string[] {
+  const allow = new Set(allowlist || []);
+  return (tags || []).filter((tag) => allow.has(tag));
 }
 
-function getActiveStage(lesson: RunnerLesson | null): string {
-  const stage = lesson?.stages.find((s) => s.active);
-  return stage?.key || "diagnostic";
+function collectAllowedTags(
+  items: Array<RunnerQuestion & { __key: string }>,
+  allowlist: string[],
+): string[] {
+  const tags = new Set<string>();
+  for (const item of items) {
+    const raw = Array.isArray(item.misconception_tags) ? item.misconception_tags : [];
+    for (const tag of filterAllowedTags(raw, allowlist)) {
+      tags.add(tag);
+    }
+  }
+  return Array.from(tags);
 }
 
-function pickHint(): string {
-  return "Tip: explain your reasoning clearly and include units where relevant.";
+function getActiveStageKey(stages: RunnerStage[]): RunnerStageKey | null {
+  const active = stages.find((stage) => stage.active);
+  return active ? active.key : null;
 }
 
 export default function LessonRunner({
   moduleId,
   lesson,
+  misconceptionAllowlist,
+  lessonOrderIds,
   onRequestNextLesson,
-  onLessonStateChanged,
 }: Props) {
-  const lessonId = String(lesson?.lesson_id || lesson?.id || "");
-  const phases = useMemo(() => lesson?.phases || {}, [lesson]);
+  const lessonId = useMemo(
+    () => normalizeLessonId(lesson.id || lesson.lesson_id),
+    [lesson.id, lesson.lesson_id],
+  );
+
+  const phases = useMemo(() => lesson.phases || {}, [lesson.phases]);
 
   const diagnosticItems = useMemo(
-    () => toLessonItems(phases.diagnostic?.items),
-    [phases]
+    () => dedupeQuestions(phases.diagnostic?.items),
+    [phases.diagnostic?.items],
   );
 
   const transferItems = useMemo(
-    () => toLessonItems(phases.transfer?.items),
-    [phases]
+    () => dedupeQuestions(phases.transfer?.items),
+    [phases.transfer?.items],
   );
 
-  const analogyText = phases.analogical_grounding?.analogy_text || "";
-  const simPrompts = phases.simulation_inquiry?.inquiry_prompts || [];
-  const reconPrompts = phases.concept_reconstruction?.prompts || [];
+  const analogyText = useMemo(
+    () => String(phases.analogical_grounding?.analogy_text || ""),
+    [phases.analogical_grounding?.analogy_text],
+  );
+
+  const simPrompts = useMemo(
+    () => (Array.isArray(phases.simulation_inquiry?.inquiry_prompts) ? phases.simulation_inquiry?.inquiry_prompts : []),
+    [phases.simulation_inquiry?.inquiry_prompts],
+  );
+
+  const reconPrompts = useMemo(
+    () => (Array.isArray(phases.concept_reconstruction?.prompts) ? phases.concept_reconstruction?.prompts : []),
+    [phases.concept_reconstruction?.prompts],
+  );
 
   const [runner, setRunner] = useState<RunnerResponse | null>(null);
-  const [progress, setProgress] = useState<LessonProgressResponse | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingRunner, setLoadingRunner] = useState<boolean>(true);
   const [status, setStatus] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [feedback, setFeedback] = useState<{ kind: "ok" | "warn"; title: string; body?: string } | null>(null);
 
-  const [mcq, setMcq] = useState<Record<string, number>>({});
-  const [short, setShort] = useState<Record<string, string>>({});
+  const [startedAt, setStartedAt] = useState<number>(Date.now());
+  const [mcqAnswers, setMcqAnswers] = useState<Record<string, number>>({});
+  const [shortAnswers, setShortAnswers] = useState<Record<string, string>>({});
   const [toolChoice, setToolChoice] = useState<"rough" | "precision" | "">("");
   const [toolWhy, setToolWhy] = useState<string>("");
 
-  const [feedback, setFeedback] = useState<{ kind: "ok" | "warn"; title: string; body?: string } | null>(null);
-  const [startedAt, setStartedAt] = useState<number>(Date.now());
+  const refreshRunner = useCallback(async () => {
+    if (!moduleId || !lessonId) {
+      setRunner(null);
+      setLoadingRunner(false);
+      setError("Missing lesson context.");
+      return;
+    }
 
-  const refreshState = useCallback(async () => {
-    if (!moduleId || !lessonId) return;
-
-    const [runnerResp, progressResp] = await Promise.all([
-      apipGet<RunnerResponse>(
-        `/student/modules/${encodeURIComponent(moduleId)}/lessons/${encodeURIComponent(lessonId)}/runner`
-      ),
-      apipGet<LessonProgressResponse>(
-        `/student/modules/${encodeURIComponent(moduleId)}/lessons/${encodeURIComponent(lessonId)}/progress`
-      ),
-    ]);
-
-    setRunner(runnerResp);
-    setProgress(progressResp);
-  }, [moduleId, lessonId]);
+    setLoadingRunner(true);
+    try {
+      const data = await apipGet<RunnerResponse>(
+        `/student/modules/${encodeURIComponent(moduleId)}/lessons/${encodeURIComponent(lessonId)}/runner`,
+      );
+      setRunner(data);
+      setError("");
+    } catch (err) {
+      setRunner(null);
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoadingRunner(false);
+    }
+  }, [lessonId, moduleId]);
 
   useEffect(() => {
-    if (!moduleId || !lessonId) return;
-
-    setLoading(true);
+    setStartedAt(Date.now());
     setFeedback(null);
     setStatus("");
-    setMcq({});
-    setShort({});
+    setMcqAnswers({});
+    setShortAnswers({});
     setToolChoice("");
     setToolWhy("");
-    setStartedAt(Date.now());
+    void refreshRunner();
+  }, [refreshRunner]);
 
-    (async () => {
-      try {
-        await refreshState();
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [moduleId, lessonId, refreshState]);
+  const moduleMasteryPct = useMemo(() => {
+    return Math.round(clamp01(Number(runner?.module?.module_mastery || 0)) * 100);
+  }, [runner?.module?.module_mastery]);
 
-  function durationSeconds() {
+  const lessonBestScorePct = useMemo(() => {
+    return Math.round(clamp01(Number(runner?.lesson?.best_score || 0)) * 100);
+  }, [runner?.lesson?.best_score]);
+
+  const activeStage = useMemo(() => {
+    return getActiveStageKey(runner?.lesson?.stages || []);
+  }, [runner?.lesson?.stages]);
+
+  const canAdvance = Boolean(runner?.lesson?.can_advance);
+  const lessonCompleted = Boolean(runner?.lesson?.mastery_achieved);
+
+  function durationSeconds(): number {
     return Math.max(0, Math.round((Date.now() - startedAt) / 1000));
   }
 
-  async function logEvent(
+  async function logProgressEvent(
     eventType: "diagnostic" | "simulation" | "reflection" | "transfer" | "attempt",
-    score?: number
-  ) {
-    const payload: Record<string, unknown> = {
-      event_type: eventType,
-      duration_seconds: durationSeconds(),
-      score: typeof score === "number" ? clamp01(score) : undefined,
-      details: { lesson_id: lessonId },
-    };
-
-    setStatus("Saving…");
-    await apipPost(`/progress/${encodeURIComponent(moduleId)}/event`, payload);
-    setStatus("");
-
-    await refreshState();
-    onLessonStateChanged?.();
+    score?: number,
+    tags?: string[],
+    extraDetails?: Record<string, unknown>,
+  ): Promise<void> {
+    setStatus("Saving...");
+    try {
+      await apipPost(`/progress/${encodeURIComponent(moduleId)}/event`, {
+        event_type: eventType,
+        score: typeof score === "number" ? clamp01(score) : undefined,
+        duration_seconds: durationSeconds(),
+        misconception_tags: tags || [],
+        details: {
+          lesson_id: lessonId,
+          stage: activeStage,
+          ...extraDetails,
+        },
+      });
+    } finally {
+      setStatus("");
+    }
   }
 
-  async function submitDiagnostic() {
-    const hasMcq = diagnosticItems.some((x) => x.type === "mcq");
-    const hasShort = diagnosticItems.some((x) => x.type === "short");
+  async function submitDiagnostic(): Promise<void> {
+    const mcqQuestions = diagnosticItems.filter((item) => item.type === "mcq");
+    const shortQuestions = diagnosticItems.filter((item) => item.type === "short");
 
-    if (hasMcq) {
-      const unanswered = diagnosticItems
-        .filter((x) => x.type === "mcq")
-        .some((q) => typeof mcq[q.__key] !== "number");
-      if (unanswered) {
-        setFeedback({ kind: "warn", title: "Answer all questions to continue." });
-        return;
-      }
+    const missingMcq = mcqQuestions.some(
+      (question) => typeof mcqAnswers[String(question.question_id || question.__key)] !== "number",
+    );
+    if (missingMcq) {
+      setFeedback({ kind: "warn", title: "Answer all diagnostic multiple-choice items first." });
+      return;
     }
 
-    if (hasShort) {
-      const missing = diagnosticItems
-        .filter((x) => x.type === "short")
-        .some((q) => !(short[q.__key] || "").trim());
-      if (missing) {
-        setFeedback({ kind: "warn", title: "Write an answer for each written question to continue." });
-        return;
-      }
+    const missingShort = shortQuestions.some(
+      (question) => !(shortAnswers[String(question.question_id || question.__key)] || "").trim(),
+    );
+    if (missingShort) {
+      setFeedback({ kind: "warn", title: "Write an answer for every diagnostic written item first." });
+      return;
     }
 
-    const score = scoreMcq(diagnosticItems, mcq);
-    await logEvent("diagnostic", score);
-    setFeedback({ kind: "ok", title: "Diagnostic submitted.", body: "Continue with the lesson guidance." });
+    const score = scoreMcq(diagnosticItems, mcqAnswers) ?? 0;
+    const tags = collectAllowedTags(diagnosticItems, misconceptionAllowlist);
+
+    await logProgressEvent("diagnostic", score, tags, { source: "student_runner_diagnostic" });
     setStartedAt(Date.now());
+    setFeedback(null);
+    await refreshRunner();
   }
 
-  async function submitTeachingReflection() {
+  async function submitTeachingCheckpoint(): Promise<void> {
     if (!toolChoice) {
-      setFeedback({ kind: "warn", title: "Choose one tool to continue." });
+      setFeedback({ kind: "warn", title: "Choose the tool you would trust more." });
       return;
     }
     if (!toolWhy.trim()) {
-      setFeedback({ kind: "warn", title: "Write 1–2 sentences explaining why." });
+      setFeedback({ kind: "warn", title: "Write your explanation before continuing." });
       return;
     }
 
-    await logEvent("reflection");
-    setFeedback({ kind: "ok", title: "Good. Continue to the next stage." });
-    setStartedAt(Date.now());
-  }
-
-  async function submitLabOnce() {
-    const notes = (short["lab_notes"] || "").trim();
-    if (!notes) {
-      setFeedback({ kind: "warn", title: "Write a short observation before continuing." });
-      return;
-    }
-
-    await logEvent("simulation");
-    setFeedback({ kind: "ok", title: "Lab recorded.", body: "The virtual lab is now counted as used." });
-    setStartedAt(Date.now());
-  }
-
-  async function submitMasteryCheck() {
-    const hasMcq = transferItems.some((x) => x.type === "mcq");
-    const hasShort = transferItems.some((x) => x.type === "short");
-
-    if (hasMcq) {
-      const unanswered = transferItems
-        .filter((x) => x.type === "mcq")
-        .some((q) => typeof mcq[q.__key] !== "number");
-      if (unanswered) {
-        setFeedback({ kind: "warn", title: "Answer all questions to submit." });
-        return;
-      }
-    }
-
-    if (hasShort) {
-      const missing = transferItems
-        .filter((x) => x.type === "short")
-        .some((q) => !(short[q.__key] || "").trim());
-      if (missing) {
-        setFeedback({ kind: "warn", title: "Write an answer for each written question to submit." });
-        return;
-      }
-    }
-
-    const score = scoreMcq(transferItems, mcq);
-    await logEvent("transfer", score);
-
-    const refreshed = await apipGet<LessonProgressResponse>(
-      `/student/modules/${encodeURIComponent(moduleId)}/lessons/${encodeURIComponent(lessonId)}/progress`
-    );
-    setProgress(refreshed);
-    onLessonStateChanged?.();
-
-    const passed = Boolean(refreshed.lesson.completed);
-    const pct = Math.round((refreshed.lesson.best_score || 0) * 100);
-
-    setFeedback({
-      kind: passed ? "ok" : "warn",
-      title: `Score: ${pct}%`,
-      body: passed
-        ? "Lesson completed. You can continue to the next lesson."
-        : "Keep working until you reach 80% or higher.",
+    await logProgressEvent("reflection", undefined, [], {
+      source: "student_runner_scaffolded_teaching",
+      tool_choice: toolChoice,
+      tool_why: toolWhy.slice(0, 300),
     });
 
     setStartedAt(Date.now());
+    setFeedback(null);
+    await refreshRunner();
   }
 
-  const moduleMastery = getModuleMasteryPercent(runner?.module || null);
-  const lessonStatus = getLessonDisplayStatus(runner?.lesson || null, progress?.lesson || null);
-  const activeStage = getActiveStage(runner?.lesson || null);
-  const canAdvance = Boolean(runner?.lesson?.can_advance);
-  const title = lesson?.title || "Lesson";
+  async function submitSimulation(): Promise<void> {
+    const observation = (shortAnswers.lab_notes || "").trim();
+    if (!observation) {
+      setFeedback({ kind: "warn", title: "Write one observation before leaving the lab." });
+      return;
+    }
+
+    await logProgressEvent("simulation", undefined, [], {
+      source: "student_runner_simulation",
+      observation: observation.slice(0, 300),
+    });
+
+    setStartedAt(Date.now());
+    setFeedback(null);
+    await refreshRunner();
+  }
+
+  async function submitCapsules(): Promise<void> {
+    const missing = reconPrompts.some((_, index) => !(shortAnswers[`cap_${index}`] || "").trim());
+    if (missing) {
+      setFeedback({ kind: "warn", title: "Complete each guided concept response before continuing." });
+      return;
+    }
+
+    await logProgressEvent("reflection", undefined, [], {
+      source: "student_runner_concept_reconstruction",
+    });
+
+    setStartedAt(Date.now());
+    setFeedback(null);
+    await refreshRunner();
+  }
+
+  async function submitMasteryCheck(): Promise<void> {
+    const mcqQuestions = transferItems.filter((item) => item.type === "mcq");
+    const shortQuestions = transferItems.filter((item) => item.type === "short");
+
+    const missingMcq = mcqQuestions.some(
+      (question) => typeof mcqAnswers[String(question.question_id || question.__key)] !== "number",
+    );
+    if (missingMcq) {
+      setFeedback({ kind: "warn", title: "Answer all mastery-check multiple-choice items first." });
+      return;
+    }
+
+    const missingShort = shortQuestions.some(
+      (question) => !(shortAnswers[String(question.question_id || question.__key)] || "").trim(),
+    );
+    if (missingShort) {
+      setFeedback({ kind: "warn", title: "Write an answer for every mastery-check written item first." });
+      return;
+    }
+
+    const score = scoreMcq(transferItems, mcqAnswers) ?? 0;
+    const tags = collectAllowedTags(transferItems, misconceptionAllowlist);
+
+    await logProgressEvent("transfer", score, tags, { source: "student_runner_mastery_check" });
+    await refreshRunner();
+
+    const pct = Math.round(score * 100);
+    if (score >= Number(runner?.lesson?.mastery_threshold || 0.8)) {
+      setFeedback({
+        kind: "ok",
+        title: `Mastery check passed: ${pct}%`,
+        body: "Lesson completed. You can move to the next sub-unit.",
+      });
+    } else {
+      setFeedback({
+        kind: "warn",
+        title: `Mastery check score: ${pct}%`,
+        body: "This does not yet meet the 80% threshold. Review the guided teaching and try again.",
+      });
+    }
+  }
 
   const styles = {
     wrap: { maxWidth: 980, margin: "0 auto", padding: "22px 16px 26px 16px" } as React.CSSProperties,
@@ -465,7 +547,12 @@ export default function LessonRunner({
       marginBottom: 14,
       textAlign: "center",
     } as React.CSSProperties,
-    questionCard: { border: "1px solid rgba(255,255,255,0.12)", borderRadius: 16, padding: 16, marginTop: 12 } as React.CSSProperties,
+    questionCard: {
+      border: "1px solid rgba(255,255,255,0.12)",
+      borderRadius: 16,
+      padding: 16,
+      marginTop: 12,
+    } as React.CSSProperties,
     prompt: { fontSize: 22, fontWeight: 900, marginBottom: 12, lineHeight: 1.25 } as React.CSSProperties,
     choiceGrid: { display: "grid", gap: 10 } as React.CSSProperties,
     choiceBtn: (active: boolean) =>
@@ -479,7 +566,7 @@ export default function LessonRunner({
         fontSize: 18,
         fontWeight: 800,
         color: "white",
-      } as React.CSSProperties),
+      }) as React.CSSProperties,
     textarea: {
       width: "100%",
       minHeight: 88,
@@ -496,11 +583,22 @@ export default function LessonRunner({
     footerRow: { display: "flex", justifyContent: "space-between", gap: 12, marginTop: 14, opacity: 0.9, alignItems: "center" } as React.CSSProperties,
   };
 
-  if (loading) {
+  if (loadingRunner) {
     return (
       <div style={styles.wrap}>
         <div style={styles.card}>
-          <div style={{ textAlign: "center", opacity: 0.85 }}>Loading lesson state…</div>
+          <div style={{ textAlign: "center", opacity: 0.85 }}>Loading lesson runner...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !runner) {
+    return (
+      <div style={styles.wrap}>
+        <div style={styles.feedbackWarn}>
+          <div style={{ fontSize: 18, fontWeight: 900 }}>Runner load failed</div>
+          <div style={{ marginTop: 6 }}>{error || "Unknown error."}</div>
         </div>
       </div>
     );
@@ -509,19 +607,22 @@ export default function LessonRunner({
   return (
     <div style={styles.wrap}>
       <div style={styles.header}>
-        <div style={styles.lessonTitle}>{title}</div>
+        <div style={styles.lessonTitle}>{runner.lesson.title || lesson.title || "Lesson"}</div>
 
         <div style={styles.chipsRow}>
           <div style={styles.chip}>
-            Module mastery: <b>{moduleMastery}%</b>
+            Module mastery: <b>{moduleMasteryPct}%</b>
           </div>
           <div style={styles.chip}>
-            Lesson: <b>{lessonStatus}</b>
+            Best mastery check: <b>{lessonBestScorePct}%</b>
+          </div>
+          <div style={styles.chip}>
+            Lesson: <b>{lessonCompleted ? "Completed" : "In progress"}</b>
           </div>
         </div>
 
         <div style={styles.subtitle}>
-          Focus on the prompts. Do your best. You can always practice again to improve your mastery.
+          This flow is backend-driven. Diagnostic does not count toward mastery. Only the final mastery check does.
         </div>
       </div>
 
@@ -532,35 +633,51 @@ export default function LessonRunner({
         </div>
       ) : null}
 
-      {status ? <div style={{ ...styles.card, textAlign: "center", marginBottom: 14, opacity: 0.9 }}>{status}</div> : null}
+      {status ? (
+        <div style={{ ...styles.card, textAlign: "center", marginBottom: 14, opacity: 0.9 }}>
+          {status}
+        </div>
+      ) : null}
 
       <div style={styles.card}>
         {activeStage === "diagnostic" ? (
           <>
-            <div style={styles.bigH2}>Initial diagnostic</div>
-            <p style={styles.bodyText}>Answer first. Then we will build understanding.</p>
-            <QuestionListStudent items={diagnosticItems} mcq={mcq} setMcq={setMcq} short={short} setShort={setShort} />
+            <div style={styles.bigH2}>Initial Diagnostic</div>
+            <p style={styles.bodyText}>Answer first. This identifies misconceptions, but it does not count toward mastery.</p>
+            <QuestionListStudent
+              items={diagnosticItems}
+              mcq={mcqAnswers}
+              setMcq={setMcqAnswers}
+              short={shortAnswers}
+              setShort={setShortAnswers}
+            />
             <div style={styles.divider} />
-            <button style={styles.btnPrimary} onClick={submitDiagnostic}>Continue →</button>
+            <button style={styles.btnPrimary} onClick={() => void submitDiagnostic()}>
+              Continue →
+            </button>
           </>
         ) : null}
 
         {activeStage === "scaffolded_teaching" ? (
           <>
-            <div style={styles.bigH2}>Guided concept building</div>
+            <div style={styles.bigH2}>Guided Concept Building</div>
+
             {analogyText ? <p style={{ ...styles.bodyText, whiteSpace: "pre-wrap" }}>{analogyText}</p> : null}
 
             <div style={styles.questionCard}>
               <div style={styles.prompt}>Tool Trust</div>
               <div style={{ ...styles.bodyText, marginTop: -6, marginBottom: 12 }}>
-                Choose the tool engineers would trust more — and explain why.
+                Choose the tool engineers would trust more, then explain why.
               </div>
 
               <div style={styles.choiceGrid}>
                 <button style={styles.choiceBtn(toolChoice === "rough")} onClick={() => setToolChoice("rough")}>
                   Rough ruler (±1 cm)
                 </button>
-                <button style={styles.choiceBtn(toolChoice === "precision")} onClick={() => setToolChoice("precision")}>
+                <button
+                  style={styles.choiceBtn(toolChoice === "precision")}
+                  onClick={() => setToolChoice("precision")}
+                >
                   Precision caliper (±0.01 cm)
                 </button>
               </div>
@@ -569,46 +686,57 @@ export default function LessonRunner({
                 <div style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>Your explanation</div>
                 <textarea
                   style={styles.textarea}
-                  placeholder="Explain in 1–2 sentences…"
+                  placeholder="Explain in 1–2 sentences..."
                   value={toolWhy}
-                  onChange={(e) => setToolWhy(e.target.value)}
+                  onChange={(event) => setToolWhy(event.target.value)}
                 />
-                <div style={styles.hint}>Hint: precision controls reliability.</div>
+                <div style={styles.hint}>Hint: precision affects what level of confidence you can reasonably claim.</div>
               </div>
             </div>
 
             {reconPrompts.length ? (
-              <div style={{ display: "grid", gap: 12, marginTop: 12 }}>
-                {reconPrompts.map((p, i) => (
-                  <div key={i} style={styles.questionCard}>
-                    <div style={styles.prompt}>{p}</div>
+              <div style={{ marginTop: 12, display: "grid", gap: 12 }}>
+                {reconPrompts.map((prompt, index) => (
+                  <div key={`cap_${index}`} style={styles.questionCard}>
+                    <div style={styles.prompt}>{prompt}</div>
                     <textarea
                       style={styles.textarea}
-                      value={short[`cap_${i}`] || ""}
-                      onChange={(e) => setShort({ ...short, [`cap_${i}`]: e.target.value })}
-                      placeholder="Write 2–4 sentences…"
+                      value={shortAnswers[`cap_${index}`] || ""}
+                      onChange={(event) =>
+                        setShortAnswers((prev) => ({ ...prev, [`cap_${index}`]: event.target.value }))
+                      }
+                      placeholder="Write 2–4 sentences..."
                     />
-                    <div style={styles.hint}>Hint: keep it simple; include units and a concrete example.</div>
+                    <div style={styles.hint}>Hint: keep the explanation concrete and tied to the lesson idea.</div>
                   </div>
                 ))}
               </div>
             ) : null}
 
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={submitTeachingReflection}>Continue →</button>
+              <button
+                style={styles.btnPrimary}
+                onClick={() =>
+                  reconPrompts.length ? void submitCapsules() : void submitTeachingCheckpoint()
+                }
+              >
+                Continue →
+              </button>
             </div>
           </>
         ) : null}
 
         {activeStage === "simulation" ? (
           <>
-            <div style={styles.bigH2}>Virtual Lab</div>
-            <p style={styles.bodyText}>Do this once, then write one observation.</p>
+            <div style={styles.bigH2}>Sim Lab</div>
+            <p style={styles.bodyText}>Run the lab once, then record one observation.</p>
 
             {simPrompts.length ? (
               <div style={{ marginTop: 8, textAlign: "center", opacity: 0.95, fontSize: 18, lineHeight: 1.6 }}>
-                {simPrompts.map((p, i) => (
-                  <div key={i} style={{ marginBottom: 6 }}>• {p}</div>
+                {simPrompts.map((prompt, index) => (
+                  <div key={`sim_${index}`} style={{ marginBottom: 6 }}>
+                    • {prompt}
+                  </div>
                 ))}
               </div>
             ) : null}
@@ -617,57 +745,72 @@ export default function LessonRunner({
               <div style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>Your observation</div>
               <textarea
                 style={styles.textarea}
-                placeholder="Write what you noticed…"
-                value={short["lab_notes"] || ""}
-                onChange={(e) => setShort({ ...short, lab_notes: e.target.value })}
+                placeholder="Write what you observed..."
+                value={shortAnswers.lab_notes || ""}
+                onChange={(event) =>
+                  setShortAnswers((prev) => ({ ...prev, lab_notes: event.target.value }))
+                }
               />
-              <div style={styles.hint}>Hint: mention precision/uncertainty and why results can vary.</div>
+              <div style={styles.hint}>Hint: focus on what changed, what stayed constant, and what that means.</div>
             </div>
 
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={submitLabOnce}>Continue →</button>
+              <button style={styles.btnPrimary} onClick={() => void submitSimulation()}>
+                Continue →
+              </button>
             </div>
           </>
         ) : null}
 
         {activeStage === "mastery_check" ? (
           <>
-            <div style={styles.bigH2}>Mastery check</div>
-            <p style={styles.bodyText}>Reach 80–100% to unlock the next lesson.</p>
-
-            <QuestionListStudent items={transferItems} mcq={mcq} setMcq={setMcq} short={short} setShort={setShort} />
-
+            <div style={styles.bigH2}>Mastery Check</div>
+            <p style={styles.bodyText}>This final check determines lesson mastery. You need 80% or higher to complete the lesson.</p>
+            <QuestionListStudent
+              items={transferItems}
+              mcq={mcqAnswers}
+              setMcq={setMcqAnswers}
+              short={shortAnswers}
+              setShort={setShortAnswers}
+            />
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={submitMasteryCheck}>Submit ✓</button>
+              <button style={styles.btnPrimary} onClick={() => void submitMasteryCheck()}>
+                Submit mastery check ✓
+              </button>
             </div>
           </>
         ) : null}
 
-        {runner?.lesson?.mastery_achieved ? (
-          <div style={{ marginTop: 14 }}>
-            <div style={styles.feedbackOk}>
-              <div style={{ fontSize: 18, fontWeight: 900 }}>Lesson completed</div>
-              <div style={{ marginTop: 6, opacity: 0.9 }}>
-                You reached the mastery threshold and can move to the next lesson.
-              </div>
-            </div>
+        {!activeStage && lessonCompleted ? (
+          <>
+            <div style={styles.bigH2}>Lesson Finished</div>
+            <p style={styles.bodyText}>Completed ✅ You can move on to the next sub-unit.</p>
 
             <div style={styles.footerRow}>
-              <div style={{ opacity: 0.85 }}>
-                Score: {Math.round((runner.lesson.best_score || 0) * 100)}%
-              </div>
+              <button
+                style={styles.btnGhost}
+                onClick={() => {
+                  setFeedback(null);
+                  setStartedAt(Date.now());
+                  void refreshRunner();
+                }}
+              >
+                Refresh status
+              </button>
 
               <button
                 style={styles.btnGhost}
                 onClick={() => {
-                  if (canAdvance && onRequestNextLesson) onRequestNextLesson();
+                  if (onRequestNextLesson) {
+                    onRequestNextLesson();
+                  }
                 }}
                 disabled={!canAdvance}
               >
                 Next lesson →
               </button>
             </div>
-          </div>
+          </>
         ) : null}
       </div>
     </div>
@@ -681,18 +824,21 @@ function QuestionListStudent({
   short,
   setShort,
 }: {
-  items: LessonItem[];
+  items: Array<RunnerQuestion & { __key: string }>;
   mcq: Record<string, number>;
-  setMcq: (x: Record<string, number>) => void;
+  setMcq: React.Dispatch<React.SetStateAction<Record<string, number>>>;
   short: Record<string, string>;
-  setShort: (x: Record<string, string>) => void;
+  setShort: React.Dispatch<React.SetStateAction<Record<string, string>>>;
 }) {
-  if (!items.length) return <div style={{ opacity: 0.85, textAlign: "center" }}>No questions.</div>;
+  if (!items.length) {
+    return <div style={{ opacity: 0.85, textAlign: "center" }}>No questions available.</div>;
+  }
 
   return (
     <div style={{ display: "grid", gap: 12, marginTop: 10 }}>
-      {items.map((q, idx) => {
-        const key = q.__key || `q_${idx}`;
+      {items.map((question, index) => {
+        const key = String(question.question_id || question.__key || `q_${index}`);
+        const prompt = String(question.prompt || "");
 
         return (
           <div
@@ -705,17 +851,17 @@ function QuestionListStudent({
             }}
           >
             <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 12, lineHeight: 1.25 }}>
-              {q.prompt}
+              {prompt}
             </div>
 
-            {q.type === "mcq" ? (
+            {question.type === "mcq" ? (
               <div style={{ display: "grid", gap: 10 }}>
-                {q.choices.map((c, cidx) => {
-                  const active = mcq[key] === cidx;
+                {(question.choices || []).map((choice, choiceIndex) => {
+                  const active = mcq[key] === choiceIndex;
                   return (
                     <button
-                      key={cidx}
-                      onClick={() => setMcq({ ...mcq, [key]: cidx })}
+                      key={`${key}_${choiceIndex}`}
+                      onClick={() => setMcq((prev) => ({ ...prev, [key]: choiceIndex }))}
                       style={{
                         textAlign: "left",
                         padding: "14px 14px",
@@ -728,7 +874,7 @@ function QuestionListStudent({
                         color: "white",
                       }}
                     >
-                      {c}
+                      {choice}
                     </button>
                   );
                 })}
@@ -749,11 +895,11 @@ function QuestionListStudent({
                     outline: "none",
                   }}
                   value={short[key] || ""}
-                  onChange={(e) => setShort({ ...short, [key]: e.target.value })}
-                  placeholder="Write your answer…"
+                  onChange={(event) => setShort((prev) => ({ ...prev, [key]: event.target.value }))}
+                  placeholder="Write your answer..."
                 />
                 <div style={{ marginTop: 10, fontSize: 15, opacity: 0.85, lineHeight: 1.45 }}>
-                  Hint: {pickHint()}
+                  Hint: {pickHint(question)}
                 </div>
               </>
             )}
