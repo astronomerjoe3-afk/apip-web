@@ -1,26 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase";
+
+function errorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return "Registration failed";
+}
 
 export default function RegisterPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [err, setErr] = useState<string | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState<boolean>(false);
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
+    event.preventDefault();
     setErr(null);
     setBusy(true);
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email.trim(), password);
       router.push("/dashboard");
-    } catch (e: any) {
-      setErr(e?.message ?? "Registration failed");
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
     } finally {
       setBusy(false);
     }
@@ -36,7 +44,7 @@ export default function RegisterPage() {
           <input
             style={{ width: "100%", padding: 10 }}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             type="email"
             required
           />
@@ -47,14 +55,14 @@ export default function RegisterPage() {
           <input
             style={{ width: "100%", padding: 10 }}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             type="password"
             minLength={6}
             required
           />
         </label>
 
-        {err && <p style={{ color: "crimson" }}>{err}</p>}
+        {err ? <p style={{ color: "crimson" }}>{err}</p> : null}
 
         <button disabled={busy} style={{ padding: 12 }}>
           {busy ? "Creating..." : "Create account"}
