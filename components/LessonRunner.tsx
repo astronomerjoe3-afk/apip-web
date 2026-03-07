@@ -52,6 +52,7 @@ type Props = {
   lesson: LessonRef;
   misconceptionAllowlist: string[];
   onRequestNextLesson?: () => void;
+  onRefreshStatus?: () => Promise<void> | void;
 };
 
 type RunnerStageKey =
@@ -94,35 +95,15 @@ type RunnerResponse = {
   lesson: RunnerLesson;
 };
 
-type FeedbackState = {
-  kind: "ok" | "warn";
-  title: string;
-  body?: string;
-};
-
-type ProgressEventType =
-  | "diagnostic"
-  | "simulation"
-  | "reflection"
-  | "transfer"
-  | "attempt";
-
-type ProgressEventPayload = {
-  event_type: ProgressEventType;
-  duration_seconds: number;
-  misconception_tags: string[];
-  details: Record<string, string>;
-  score?: number;
-};
+type JsonPrimitive = string | number | boolean | null;
+type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
+type JsonObject = { [key: string]: JsonValue };
 
 const HINT_BY_TAG: Record<string, string> = {
-  unit_conversion:
-    "Tip: write the conversion factor so the units cancel cleanly.",
+  unit_conversion: "Tip: write the conversion factor so the units cancel cleanly.",
   si_prefixes: "Tip: kilo = 10^3, milli = 10^-3, micro = 10^-6.",
-  scalar_vs_vector:
-    "Tip: a vector needs both magnitude and direction.",
-  reading_scales:
-    "Tip: use the smallest division to estimate a reasonable reading.",
+  scalar_vs_vector: "Tip: a vector needs both magnitude and direction.",
+  reading_scales: "Tip: use the smallest division to estimate a reasonable reading.",
   significant_figures:
     "Tip: your final answer cannot claim more precision than your measurement.",
   rounding_rules: "Tip: round the final result carefully, not too early.",
@@ -132,10 +113,8 @@ const HINT_BY_TAG: Record<string, string> = {
     "Tip: systematic error shifts results one way; random error varies around a value.",
   uncertainty_estimation:
     "Tip: uncertainty is usually tied to instrument resolution.",
-  density_concept:
-    "Tip: density means mass packed into each unit volume.",
-  density_units:
-    "Tip: keep density units consistent before comparing values.",
+  density_concept: "Tip: density means mass packed into each unit volume.",
+  density_units: "Tip: keep density units consistent before comparing values.",
 };
 
 function clamp01(value: number): number {
@@ -243,10 +222,7 @@ function pickHint(question: RunnerQuestion): string {
   return "Tip: show your reasoning clearly and keep your units consistent.";
 }
 
-function filterAllowedTags(
-  tags: string[] | undefined,
-  allowlist: string[],
-): string[] {
+function filterAllowedTags(tags: string[] | undefined, allowlist: string[]): string[] {
   const allow = new Set(allowlist || []);
   return (tags || []).filter((tag) => allow.has(tag));
 }
@@ -277,6 +253,7 @@ export default function LessonRunner({
   lesson,
   misconceptionAllowlist,
   onRequestNextLesson,
+  onRefreshStatus,
 }: Props) {
   const lessonId = useMemo(
     () => normalizeLessonId(lesson.id || lesson.lesson_id),
@@ -320,7 +297,11 @@ export default function LessonRunner({
   const [loadingRunner, setLoadingRunner] = useState<boolean>(true);
   const [status, setStatus] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [feedback, setFeedback] = useState<FeedbackState | null>(null);
+  const [feedback, setFeedback] = useState<{
+    kind: "ok" | "warn";
+    title: string;
+    body?: string;
+  } | null>(null);
 
   const [startedAt, setStartedAt] = useState<number>(Date.now());
   const [mcqAnswers, setMcqAnswers] = useState<Record<string, number>>({});
@@ -328,7 +309,7 @@ export default function LessonRunner({
   const [toolChoice, setToolChoice] = useState<"rough" | "precision" | "">("");
   const [toolWhy, setToolWhy] = useState<string>("");
 
-  const refreshRunner = useCallback(async () => {
+  const refreshRunner = useCallback(async (): Promise<void> => {
     if (!moduleId || !lessonId) {
       setRunner(null);
       setLoadingRunner(false);
@@ -385,34 +366,43 @@ export default function LessonRunner({
   }
 
   async function logProgressEvent(
-    eventType: ProgressEventType,
+    eventType: "diagnostic" | "simulation" | "reflection" | "transfer" | "attempt",
     score?: number,
     tags?: string[],
-    extraDetails?: Record<string, string>,
+    extraDetails?: Record<string, unknown>,
   ): Promise<void> {
+    const details: JsonObject = {
+      lesson_id: lessonId,
+      stage: activeStage,
+    };
+
+    if (extraDetails) {
+      for (const [key, value] of Object.entries(extraDetails)) {
+        if (
+          typeof value === "string" ||
+          typeof value === "number" ||
+          typeof value === "boolean" ||
+          value === null
+        ) {
+          details[key] = value;
+        }
+      }
+    }
+
+    const payload: JsonObject = {
+      event_type: eventType,
+      duration_seconds: durationSeconds(),
+      misconception_tags: tags || [],
+      details,
+    };
+
+    if (typeof score === "number") {
+      payload.score = clamp01(score);
+    }
+
     setStatus("Saving...");
     try {
-      const details: Record<string, string> = {
-        lesson_id: lessonId,
-        stage: activeStage || "",
-        ...(extraDetails || {}),
-      };
-
-      const payload: ProgressEventPayload = {
-        event_type: eventType,
-        duration_seconds: durationSeconds(),
-        misconception_tags: tags || [],
-        details,
-      };
-
-      if (typeof score === "number") {
-        payload.score = clamp01(score);
-      }
-
-      await apipPost<{ ok: boolean }, ProgressEventPayload>(
-        `/progress/${encodeURIComponent(moduleId)}/event`,
-        payload,
-      );
+      await apipPost(`/progress/${encodeURIComponent(moduleId)}/event`, payload);
     } finally {
       setStatus("");
     }
@@ -593,11 +583,7 @@ export default function LessonRunner({
       margin: "0 0 10px 0",
       letterSpacing: -0.5,
     } as React.CSSProperties,
-    subtitle: {
-      fontSize: 18,
-      opacity: 0.85,
-      marginBottom: 14,
-    } as React.CSSProperties,
+    subtitle: { fontSize: 18, opacity: 0.85, marginBottom: 14 } as React.CSSProperties,
     chipsRow: {
       display: "flex",
       justifyContent: "center",
@@ -700,9 +686,7 @@ export default function LessonRunner({
         padding: "14px 14px",
         borderRadius: 14,
         border: "1px solid rgba(255,255,255,0.14)",
-        background: active
-          ? "rgba(155, 81, 224, 0.22)"
-          : "rgba(255,255,255,0.06)",
+        background: active ? "rgba(155, 81, 224, 0.22)" : "rgba(255,255,255,0.06)",
         cursor: "pointer",
         fontSize: 18,
         fontWeight: 800,
@@ -796,7 +780,14 @@ export default function LessonRunner({
       ) : null}
 
       {status ? (
-        <div style={{ ...styles.card, textAlign: "center", marginBottom: 14, opacity: 0.9 }}>
+        <div
+          style={{
+            ...styles.card,
+            textAlign: "center",
+            marginBottom: 14,
+            opacity: 0.9,
+          }}
+        >
           {status}
         </div>
       ) : null}
@@ -806,7 +797,8 @@ export default function LessonRunner({
           <>
             <div style={styles.bigH2}>Initial Diagnostic</div>
             <p style={styles.bodyText}>
-              Answer first. This identifies misconceptions, but it does not count toward mastery.
+              Answer first. This identifies misconceptions, but it does not count
+              toward mastery.
             </p>
             <QuestionListStudent
               items={diagnosticItems}
@@ -965,7 +957,8 @@ export default function LessonRunner({
           <>
             <div style={styles.bigH2}>Mastery Check</div>
             <p style={styles.bodyText}>
-              This final check determines lesson mastery. You need 80% or higher to complete the lesson.
+              This final check determines lesson mastery. You need 80% or higher
+              to complete the lesson.
             </p>
             <QuestionListStudent
               items={transferItems}
@@ -975,7 +968,10 @@ export default function LessonRunner({
               setShort={setShortAnswers}
             />
             <div style={{ marginTop: 14 }}>
-              <button style={styles.btnPrimary} onClick={() => void submitMasteryCheck()}>
+              <button
+                style={styles.btnPrimary}
+                onClick={() => void submitMasteryCheck()}
+              >
                 Submit mastery check ✓
               </button>
             </div>
@@ -995,7 +991,16 @@ export default function LessonRunner({
                 onClick={() => {
                   setFeedback(null);
                   setStartedAt(Date.now());
-                  void refreshRunner();
+
+                  const run = async () => {
+                    if (onRefreshStatus) {
+                      await onRefreshStatus();
+                    } else {
+                      await refreshRunner();
+                    }
+                  };
+
+                  void run();
                 }}
               >
                 Refresh status
@@ -1032,11 +1037,7 @@ function QuestionListStudent({
   setShort: React.Dispatch<React.SetStateAction<Record<string, string>>>;
 }) {
   if (!items.length) {
-    return (
-      <div style={{ opacity: 0.85, textAlign: "center" }}>
-        No questions available.
-      </div>
-    );
+    return <div style={{ opacity: 0.85, textAlign: "center" }}>No questions available.</div>;
   }
 
   return (
@@ -1116,7 +1117,14 @@ function QuestionListStudent({
                   }
                   placeholder="Write your answer..."
                 />
-                <div style={{ marginTop: 10, fontSize: 15, opacity: 0.85, lineHeight: 1.45 }}>
+                <div
+                  style={{
+                    marginTop: 10,
+                    fontSize: 15,
+                    opacity: 0.85,
+                    lineHeight: 1.45,
+                  }}
+                >
                   Hint: {pickHint(question)}
                 </div>
               </>
