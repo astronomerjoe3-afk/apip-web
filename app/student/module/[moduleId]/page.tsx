@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { apipGet } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 
-type Module = {
+type ModuleCatalog = {
   id: string;
   title?: string;
   description?: string;
@@ -32,7 +32,7 @@ type LessonPhases = {
   };
 };
 
-type Lesson = {
+type LessonCatalog = {
   id: string;
   lesson_id?: string;
   title?: string;
@@ -40,6 +40,44 @@ type Lesson = {
   module_id?: string;
   phases?: LessonPhases;
 };
+
+type LessonProgress = {
+  lesson_id: string;
+  title?: string;
+  sequence?: number;
+  best_score: number;
+  attempt_count: number;
+  completed: boolean;
+  can_advance: boolean;
+  lab_available: boolean;
+  lab_used: boolean;
+  status: string;
+};
+
+type StudentModuleProgressResponse = {
+  ok: boolean;
+  module: {
+    module_id: string;
+    module_mastery: number;
+    lessons_completed_count: number;
+    total_lessons: number;
+  };
+  lessons: LessonProgress[];
+};
+
+type LessonsResponse = {
+  ok: boolean;
+  lessons: LessonCatalog[];
+  warnings?: string[];
+};
+
+type ActiveLesson = LessonCatalog & {
+  progress?: LessonProgress;
+};
+
+function normalizeLessonId(value: string | undefined | null): string {
+  return String(value || "").replace(/-/g, "_");
+}
 
 export default function StudentModulePage() {
   const params = useParams() as Record<string, string | string[] | undefined>;
@@ -53,8 +91,8 @@ export default function StudentModulePage() {
     return decodeURIComponent(value);
   }, [raw]);
 
-  const [module, setModule] = useState<Module | null>(null);
-  const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [moduleMeta, setModuleMeta] = useState<ModuleCatalog | null>(null);
+  const [lessons, setLessons] = useState<ActiveLesson[]>([]);
   const [err, setErr] = useState<string>("");
   const [activeIdx, setActiveIdx] = useState<number>(0);
 
@@ -76,7 +114,7 @@ export default function StudentModulePage() {
       if (!moduleId) {
         if (!cancelled) {
           setErr("Missing module id in route.");
-          setModule(null);
+          setModuleMeta(null);
           setLessons([]);
           setActiveIdx(0);
         }
@@ -86,30 +124,55 @@ export default function StudentModulePage() {
       try {
         if (!cancelled) setErr("");
 
-        const moduleResponse = await apipGet<{ ok: boolean; module: Module }>(
-          `/modules/${encodeURIComponent(moduleId)}`,
-        );
+        const [moduleResponse, lessonsResponse, progressResponse] =
+          await Promise.all([
+            apipGet<{ ok: boolean; module: ModuleCatalog }>(
+              `/modules/${encodeURIComponent(moduleId)}`,
+            ),
+            apipGet<LessonsResponse>(
+              `/modules/${encodeURIComponent(moduleId)}/lessons`,
+            ),
+            apipGet<StudentModuleProgressResponse>(
+              `/student/modules/${encodeURIComponent(moduleId)}/progress`,
+            ),
+          ]);
+
         if (cancelled) return;
 
-        const lessonsResponse = await apipGet<{
-          ok: boolean;
-          lessons: Lesson[];
-          warnings?: string[];
-        }>(`/modules/${encodeURIComponent(moduleId)}/lessons`);
-        if (cancelled) return;
+        const progressByLessonId = new Map<string, LessonProgress>();
+        for (const lessonProgress of progressResponse.lessons || []) {
+          progressByLessonId.set(
+            normalizeLessonId(lessonProgress.lesson_id),
+            lessonProgress,
+          );
+        }
 
-        const ordered = [...(lessonsResponse.lessons || [])].sort(
-          (a, b) => (a.sequence ?? 999) - (b.sequence ?? 999),
+        const mergedLessons: ActiveLesson[] = [...(lessonsResponse.lessons || [])]
+          .sort((a, b) => (a.sequence ?? 999) - (b.sequence ?? 999))
+          .map((lesson) => {
+            const lessonId = normalizeLessonId(lesson.lesson_id || lesson.id);
+            return {
+              ...lesson,
+              progress: progressByLessonId.get(lessonId),
+            };
+          });
+
+        const firstIncompleteIndex = mergedLessons.findIndex(
+          (lesson) => lesson.progress?.completed !== true,
         );
 
-        setModule(moduleResponse.module);
-        setLessons(ordered);
-        setActiveIdx(0);
+        setModuleMeta(moduleResponse.module);
+        setLessons(mergedLessons);
+        setActiveIdx(
+          firstIncompleteIndex >= 0
+            ? firstIncompleteIndex
+            : Math.max(mergedLessons.length - 1, 0),
+        );
       } catch (error) {
         if (cancelled) return;
 
         setErr(error instanceof Error ? error.message : String(error));
-        setModule(null);
+        setModuleMeta(null);
         setLessons([]);
         setActiveIdx(0);
       }
@@ -147,10 +210,10 @@ export default function StudentModulePage() {
     >
       <div style={{ textAlign: "center", marginBottom: 18 }}>
         <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: -0.5 }}>
-          {module?.title || moduleId || "Module"}
+          {moduleMeta?.title || moduleId || "Module"}
         </div>
 
-        {module?.description ? (
+        {moduleMeta?.description ? (
           <div
             style={{
               marginTop: 10,
@@ -162,7 +225,7 @@ export default function StudentModulePage() {
               lineHeight: 1.5,
             }}
           >
-            {module.description}
+            {moduleMeta.description}
           </div>
         ) : null}
 
@@ -217,7 +280,9 @@ export default function StudentModulePage() {
           <LessonRunner
             moduleId={moduleId}
             lesson={activeLesson}
-            misconceptionAllowlist={module?.misconception_tag_allowlist || []}
+            misconceptionAllowlist={
+              moduleMeta?.misconception_tag_allowlist || []
+            }
             onRequestNextLesson={goNext}
           />
         ) : (
