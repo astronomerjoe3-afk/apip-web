@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+  type CSSProperties,
+} from "react";
 import {
   onAuthStateChanged,
   getIdTokenResult,
@@ -106,12 +112,12 @@ export default function InstructorPage() {
     return () => unsubscribe();
   }, [router]);
 
-  async function doLogout(): Promise<void> {
+  const doLogout = useCallback(async (): Promise<void> => {
     await signOut(auth);
     router.replace("/");
-  }
+  }, [router]);
 
-  async function load(): Promise<void> {
+  const load = useCallback(async (): Promise<void> => {
     try {
       setErr("");
       setWarnings([]);
@@ -126,13 +132,13 @@ export default function InstructorPage() {
       setErr(errorMessage(error));
       setRows([]);
     }
-  }
+  }, [moduleId]);
 
   useEffect(() => {
     if (role === "instructor" || role === "admin") {
       void load();
     }
-  }, [role, moduleId]);
+  }, [role, load]);
 
   const header = useMemo(() => {
     return role === "admin" ? "Instructor View (Admin)" : "Instructor View";

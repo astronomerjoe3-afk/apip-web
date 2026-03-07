@@ -1,30 +1,16 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { apipFetch, ApiError } from "@/lib/apip";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 
-type RateLimitSummary = {
-  top_n?: number;
-  global_last_hour?: { total?: number };
-  global_last_24h?: { total?: number };
-  top_keys_last_hour?: Array<Record<string, unknown>>;
-  top_keys_last_24h?: Array<Record<string, unknown>>;
-};
-
-type PostureSummary = Record<string, unknown>;
-
 type Metrics = {
   ok?: boolean;
   utc?: string;
-  keys?: {
-    total?: number;
-    active?: number;
-    auto_disabled?: number;
-  };
-  rate_limit?: RateLimitSummary;
-  posture?: PostureSummary;
+  keys?: { total?: number; active?: number; auto_disabled?: number };
+  rate_limit?: unknown;
+  posture?: unknown;
   warnings?: string[];
 };
 
@@ -33,17 +19,8 @@ type KeyRecord = {
   label?: string;
   scopes?: string[];
   active?: boolean;
-  created_utc?: string;
-  updated_utc?: string;
   created_at_utc?: string;
-  last_used_utc?: string;
   last_used_at_utc?: string;
-  rate_limit?: {
-    window_limit?: number;
-    window_seconds?: number;
-    bucket_seconds?: number;
-  };
-  daily_limit?: number;
   rl_window_limit?: number;
   rl_window_seconds?: number;
   rl_bucket_seconds?: number;
@@ -56,27 +33,21 @@ type KeysListResponse = {
   ok?: boolean;
   keys?: KeyRecord[];
   count?: number;
-  limit?: number;
-  utc?: string;
 };
 
 type CreateKeyRequest = {
   label: string;
   scopes: string[];
-  daily_limit: number;
-  window_limit: number;
-  window_seconds: number;
-  bucket_seconds: number;
+  rl_window_limit: number;
+  rl_window_seconds: number;
+  rl_bucket_seconds: number;
+  rl_daily_limit: number;
 };
 
 type CreateKeyResponse = {
   ok?: boolean;
   key_id?: string;
   api_key?: string;
-  active?: boolean;
-  label?: string;
-  scopes?: string[];
-  utc?: string;
   key?: KeyRecord;
 };
 
@@ -109,11 +80,6 @@ function apiBase(): string {
   return (process.env.NEXT_PUBLIC_API_BASE_URL || "").trim();
 }
 
-function normalizeNumber(value: string, fallback: number): number {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
-}
-
 export default function AdminPanel() {
   const base = useMemo(() => apiBase(), []);
   const [token, setToken] = useState<string>("");
@@ -131,10 +97,10 @@ export default function AdminPanel() {
   const [create, setCreate] = useState<CreateKeyRequest>({
     label: "new-key",
     scopes: ["profile:read"],
-    daily_limit: 500,
-    window_limit: 10,
-    window_seconds: 60,
-    bucket_seconds: 10,
+    rl_window_limit: 10,
+    rl_window_seconds: 60,
+    rl_bucket_seconds: 10,
+    rl_daily_limit: 500,
   });
   const [createErr, setCreateErr] = useState<string>("");
   const [createdApiKey, setCreatedApiKey] = useState<string>("");
@@ -142,58 +108,50 @@ export default function AdminPanel() {
 
   const [selectedKeyId, setSelectedKeyId] = useState<string>("");
 
-  const selectedKey = useMemo<KeyRecord | null>(
-    () => keys.find((key) => key.key_id === selectedKeyId) || null,
-    [keys, selectedKeyId],
-  );
+  const selectedKey = useMemo(() => {
+    return keys.find((keyItem) => keyItem.key_id === selectedKeyId) || null;
+  }, [keys, selectedKeyId]);
 
-  async function refreshToken(): Promise<void> {
+  const refreshToken = useCallback(async (): Promise<void> => {
     setAuthErr("");
     try {
-      const user = auth.currentUser;
-      if (!user) {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
         setToken("");
         setMeEmail("");
         setAuthErr("Not logged in. Please login first.");
         return;
       }
 
-      setMeEmail(user.email || "");
-      const freshToken = await user.getIdToken(true);
-      setToken(freshToken);
+      setMeEmail(currentUser.email || "");
+      const nextToken = await currentUser.getIdToken(true);
+      setToken(nextToken);
     } catch (error: unknown) {
       setAuthErr(errToString(error));
     }
-  }
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(() => {
-      void refreshToken();
-    });
-
-    void refreshToken();
-
-    return () => unsubscribe();
   }, []);
 
-  async function loadMetrics(): Promise<void> {
+  const loadMetrics = useCallback(async (): Promise<void> => {
+    if (!token) return;
+
     setMetricsErr("");
     try {
-      const response = await apipFetch<Metrics>("/admin/metrics", {
+      const data = await apipFetch<Metrics>("/admin/metrics", {
         token,
         query: { top_n: 10 },
       });
-      setMetrics(response);
+      setMetrics(data);
     } catch (error: unknown) {
       setMetricsErr(errToString(error));
       setMetrics(null);
     }
-  }
+  }, [token]);
 
-  async function loadKeys(): Promise<void> {
+  const loadKeys = useCallback(async (): Promise<void> => {
+    if (!token) return;
+
     setKeysErr("");
     setKeysLoading(true);
-
     try {
       const response = await apipFetch<KeysListResponse>("/admin/keys", {
         token,
@@ -212,25 +170,27 @@ export default function AdminPanel() {
     } finally {
       setKeysLoading(false);
     }
-  }
+  }, [token, selectedKeyId]);
 
-  async function createKey(): Promise<void> {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(() => {
+      void refreshToken();
+    });
+
+    void refreshToken();
+    return () => unsubscribe();
+  }, [refreshToken]);
+
+  const createKey = useCallback(async (): Promise<void> => {
     setCreateErr("");
     setCreatedApiKey("");
     setCreatedKeyId("");
 
     try {
-      const response = await apipFetch<CreateKeyResponse>("/admin/keys", {
+      const response = await apipFetch<CreateKeyResponse>("/keys", {
         token,
         method: "POST",
-        body: {
-          label: create.label,
-          scopes: create.scopes,
-          daily_limit: create.daily_limit,
-          window_limit: create.window_limit,
-          window_seconds: create.window_seconds,
-          bucket_seconds: create.bucket_seconds,
-        },
+        body: create,
       });
 
       const keyId = response.key_id || response.key?.key_id || "";
@@ -247,55 +207,59 @@ export default function AdminPanel() {
     } catch (error: unknown) {
       setCreateErr(errToString(error));
     }
-  }
+  }, [create, loadKeys, token]);
 
-  async function enableKey(keyId: string): Promise<void> {
-    try {
-      await apipFetch(`/admin/keys/${encodeURIComponent(keyId)}/enable`, {
-        token,
-        method: "POST",
-      });
-      await loadKeys();
-    } catch (error: unknown) {
-      alert(errToString(error));
-    }
-  }
+  const enableKey = useCallback(
+    async (keyId: string): Promise<void> => {
+      try {
+        await apipFetch(`/keys/${encodeURIComponent(keyId)}/enable`, {
+          token,
+          method: "POST",
+        });
+        await loadKeys();
+      } catch (error: unknown) {
+        alert(errToString(error));
+      }
+    },
+    [loadKeys, token],
+  );
 
-  async function resetCounters(keyId: string): Promise<void> {
-    try {
-      await apipFetch(`/admin/keys/${encodeURIComponent(keyId)}/reset-counters`, {
-        token,
-        method: "POST",
-      });
-      await loadKeys();
-    } catch (error: unknown) {
-      alert(errToString(error));
-    }
-  }
+  const resetCounters = useCallback(
+    async (keyId: string): Promise<void> => {
+      try {
+        await apipFetch(`/keys/${encodeURIComponent(keyId)}/reset-counters`, {
+          token,
+          method: "POST",
+        });
+        await loadKeys();
+      } catch (error: unknown) {
+        alert(errToString(error));
+      }
+    },
+    [loadKeys, token],
+  );
 
-  async function copyAdminToken(): Promise<void> {
+  const copyAdminToken = useCallback(async (): Promise<void> => {
     setAuthErr("");
-
     try {
       if (!token) {
         await refreshToken();
       }
 
-      const user = auth.currentUser;
-      if (!user) {
+      if (!auth.currentUser) {
         setAuthErr("Not logged in.");
         return;
       }
 
-      const freshToken = token || (await user.getIdToken(true));
-      await copyToClipboard(freshToken);
+      const resolvedToken = token || (await auth.currentUser.getIdToken(true));
+      await copyToClipboard(resolvedToken);
       alert("Admin ID token copied to clipboard.");
     } catch (error: unknown) {
       setAuthErr(errToString(error));
     }
-  }
+  }, [refreshToken, token]);
 
-  async function doLogout(): Promise<void> {
+  const doLogout = useCallback(async (): Promise<void> => {
     try {
       await signOut(auth);
       setToken("");
@@ -307,13 +271,13 @@ export default function AdminPanel() {
     } catch (error: unknown) {
       alert(errToString(error));
     }
-  }
+  }, []);
 
   useEffect(() => {
     if (!token) return;
     void loadMetrics();
     void loadKeys();
-  }, [token]);
+  }, [token, loadMetrics, loadKeys]);
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: 16 }}>
@@ -369,11 +333,10 @@ export default function AdminPanel() {
           <ul style={{ marginTop: 6 }}>
             <li>
               We do <strong>not</strong> display your token by default
-              (security). Use &ldquo;Copy admin ID token&rdquo;.
+              (security). Use “Copy admin ID token”.
             </li>
             <li>
-              API keys are only shown <strong>once</strong> immediately after
-              creation.
+              API keys are only shown <strong>once</strong> immediately after creation.
             </li>
           </ul>
         </div>
@@ -464,11 +427,11 @@ export default function AdminPanel() {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={create.window_limit}
+              value={create.rl_window_limit}
               onChange={(event) =>
                 setCreate((prev) => ({
                   ...prev,
-                  window_limit: normalizeNumber(event.target.value, prev.window_limit),
+                  rl_window_limit: Number(event.target.value),
                 }))
               }
             />
@@ -479,14 +442,11 @@ export default function AdminPanel() {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={create.window_seconds}
+              value={create.rl_window_seconds}
               onChange={(event) =>
                 setCreate((prev) => ({
                   ...prev,
-                  window_seconds: normalizeNumber(
-                    event.target.value,
-                    prev.window_seconds,
-                  ),
+                  rl_window_seconds: Number(event.target.value),
                 }))
               }
             />
@@ -497,14 +457,11 @@ export default function AdminPanel() {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={create.bucket_seconds}
+              value={create.rl_bucket_seconds}
               onChange={(event) =>
                 setCreate((prev) => ({
                   ...prev,
-                  bucket_seconds: normalizeNumber(
-                    event.target.value,
-                    prev.bucket_seconds,
-                  ),
+                  rl_bucket_seconds: Number(event.target.value),
                 }))
               }
             />
@@ -515,11 +472,11 @@ export default function AdminPanel() {
             <input
               style={{ width: "100%" }}
               type="number"
-              value={create.daily_limit}
+              value={create.rl_daily_limit}
               onChange={(event) =>
                 setCreate((prev) => ({
                   ...prev,
-                  daily_limit: normalizeNumber(event.target.value, prev.daily_limit),
+                  rl_daily_limit: Number(event.target.value),
                 }))
               }
             />
@@ -597,7 +554,7 @@ export default function AdminPanel() {
         >
           <h3 style={{ margin: 0 }}>Keys</h3>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            {keysLoading ? <span style={{ fontSize: 13 }}>Loading...</span> : null}
+            {keysLoading ? <span style={{ fontSize: 13 }}>Loading…</span> : null}
             <button onClick={() => void loadKeys()} disabled={!token}>
               Reload
             </button>
@@ -622,7 +579,6 @@ export default function AdminPanel() {
             <div style={{ fontSize: 13, color: "#555", marginBottom: 8 }}>
               Select a key
             </div>
-
             <select
               style={{ width: "100%", padding: 8 }}
               value={selectedKeyId}
@@ -631,26 +587,31 @@ export default function AdminPanel() {
               <option value="" disabled>
                 (choose)
               </option>
-              {keys.map((key) => (
-                <option key={key.key_id} value={key.key_id}>
-                  {key.key_id} — {key.label || "(no label)"}{" "}
-                  {key.active ? "" : "[disabled]"}
+              {keys.map((keyItem) => (
+                <option key={keyItem.key_id} value={keyItem.key_id}>
+                  {keyItem.key_id} — {keyItem.label || "(no label)"}{" "}
+                  {keyItem.active ? "" : "[disabled]"}
                 </option>
               ))}
             </select>
 
             <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
               <button
-                onClick={() => void (selectedKeyId ? enableKey(selectedKeyId) : Promise.resolve())}
+                onClick={() => {
+                  if (selectedKeyId) {
+                    void enableKey(selectedKeyId);
+                  }
+                }}
                 disabled={!token || !selectedKeyId}
               >
                 Enable key
               </button>
-
               <button
-                onClick={() =>
-                  void (selectedKeyId ? resetCounters(selectedKeyId) : Promise.resolve())
-                }
+                onClick={() => {
+                  if (selectedKeyId) {
+                    void resetCounters(selectedKeyId);
+                  }
+                }}
                 disabled={!token || !selectedKeyId}
               >
                 Reset counters
@@ -662,7 +623,6 @@ export default function AdminPanel() {
             <div style={{ fontSize: 13, color: "#555", marginBottom: 8 }}>
               Selected key details
             </div>
-
             <pre
               style={{
                 background: "#fafafa",
