@@ -3,6 +3,25 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { apipGet, apipPost } from "../lib/apipApi";
 
+type RunnerQuestion =
+  | {
+      type: "mcq";
+      question_id?: string;
+      prompt: string;
+      choices?: string[] | null;
+      correct_index?: number;
+      misconception_tags?: string[];
+      hint?: string;
+    }
+  | {
+      type: "short";
+      question_id?: string;
+      prompt: string;
+      choices?: null;
+      misconception_tags?: string[];
+      hint?: string;
+    };
+
 type LessonRef = {
   id?: string;
   lesson_id?: string;
@@ -20,10 +39,10 @@ type LessonRef = {
       prompts?: string[];
     };
     diagnostic?: {
-      items?: RunnerQuestion[];
+      items?: unknown[];
     };
     transfer?: {
-      items?: RunnerQuestion[];
+      items?: unknown[];
     };
   };
 };
@@ -32,7 +51,6 @@ type Props = {
   moduleId: string;
   lesson: LessonRef;
   misconceptionAllowlist: string[];
-  lessonOrderIds: string[];
   onRequestNextLesson?: () => void;
 };
 
@@ -76,37 +94,48 @@ type RunnerResponse = {
   lesson: RunnerLesson;
 };
 
-type RunnerQuestion =
-  | {
-      type: "mcq";
-      question_id?: string;
-      prompt: string;
-      choices?: string[] | null;
-      correct_index?: number;
-      misconception_tags?: string[];
-      hint?: string;
-    }
-  | {
-      type: "short";
-      question_id?: string;
-      prompt: string;
-      choices?: null;
-      misconception_tags?: string[];
-      hint?: string;
-    };
+type FeedbackState = {
+  kind: "ok" | "warn";
+  title: string;
+  body?: string;
+};
+
+type ProgressEventType =
+  | "diagnostic"
+  | "simulation"
+  | "reflection"
+  | "transfer"
+  | "attempt";
+
+type ProgressEventPayload = {
+  event_type: ProgressEventType;
+  duration_seconds: number;
+  misconception_tags: string[];
+  details: Record<string, string>;
+  score?: number;
+};
 
 const HINT_BY_TAG: Record<string, string> = {
-  unit_conversion: "Tip: write the conversion factor so the units cancel cleanly.",
-  si_prefixes: "Tip: kilo = 10³, milli = 10⁻³, micro = 10⁻⁶.",
-  scalar_vs_vector: "Tip: a vector needs both magnitude and direction.",
-  reading_scales: "Tip: use the smallest division to estimate a reasonable reading.",
-  significant_figures: "Tip: your final answer cannot claim more precision than your measurement.",
+  unit_conversion:
+    "Tip: write the conversion factor so the units cancel cleanly.",
+  si_prefixes: "Tip: kilo = 10^3, milli = 10^-3, micro = 10^-6.",
+  scalar_vs_vector:
+    "Tip: a vector needs both magnitude and direction.",
+  reading_scales:
+    "Tip: use the smallest division to estimate a reasonable reading.",
+  significant_figures:
+    "Tip: your final answer cannot claim more precision than your measurement.",
   rounding_rules: "Tip: round the final result carefully, not too early.",
-  precision_vs_accuracy: "Tip: precision is grouping; accuracy is closeness to the true value.",
-  random_vs_systematic_error: "Tip: systematic error shifts results one way; random error varies around a value.",
-  uncertainty_estimation: "Tip: uncertainty is usually tied to instrument resolution.",
-  density_concept: "Tip: density means mass packed into each unit volume.",
-  density_units: "Tip: keep density units consistent before comparing values.",
+  precision_vs_accuracy:
+    "Tip: precision is grouping; accuracy is closeness to the true value.",
+  random_vs_systematic_error:
+    "Tip: systematic error shifts results one way; random error varies around a value.",
+  uncertainty_estimation:
+    "Tip: uncertainty is usually tied to instrument resolution.",
+  density_concept:
+    "Tip: density means mass packed into each unit volume.",
+  density_units:
+    "Tip: keep density units consistent before comparing values.",
 };
 
 function clamp01(value: number): number {
@@ -129,8 +158,24 @@ function normalizeText(value: string): string {
     .trim();
 }
 
-function dedupeQuestions(items: RunnerQuestion[] | undefined): Array<RunnerQuestion & { __key: string }> {
-  const list = Array.isArray(items) ? items : [];
+function isRunnerQuestion(value: unknown): value is RunnerQuestion {
+  if (!value || typeof value !== "object") return false;
+
+  const q = value as Record<string, unknown>;
+  if (q.type !== "mcq" && q.type !== "short") return false;
+  if (typeof q.prompt !== "string") return false;
+
+  if (q.type === "mcq") {
+    return q.choices == null || Array.isArray(q.choices);
+  }
+
+  return true;
+}
+
+function dedupeQuestions(
+  items: unknown[] | undefined,
+): Array<RunnerQuestion & { __key: string }> {
+  const list = Array.isArray(items) ? items.filter(isRunnerQuestion) : [];
   const seen = new Set<string>();
   const out: Array<RunnerQuestion & { __key: string }> = [];
 
@@ -143,9 +188,7 @@ function dedupeQuestions(items: RunnerQuestion[] | undefined): Array<RunnerQuest
       : "";
 
     const fingerprint = qid ? `id:${qid}` : `p:${prompt}::c:${choices}`;
-    if (seen.has(fingerprint)) {
-      continue;
-    }
+    if (seen.has(fingerprint)) continue;
     seen.add(fingerprint);
 
     out.push({
@@ -162,9 +205,7 @@ function scoreMcq(
   chosenMap: Record<string, number>,
 ): number | null {
   const mcqs = items.filter((item) => item.type === "mcq");
-  if (!mcqs.length) {
-    return null;
-  }
+  if (!mcqs.length) return null;
 
   let total = 0;
   let correct = 0;
@@ -172,20 +213,18 @@ function scoreMcq(
   for (const question of mcqs) {
     const key = String(question.question_id || question.__key);
     const chosen = chosenMap[key];
-    if (typeof chosen !== "number") {
-      continue;
-    }
+    if (typeof chosen !== "number") continue;
 
     total += 1;
-    if (typeof question.correct_index === "number" && chosen === question.correct_index) {
+    if (
+      typeof question.correct_index === "number" &&
+      chosen === question.correct_index
+    ) {
       correct += 1;
     }
   }
 
-  if (total === 0) {
-    return 0;
-  }
-
+  if (total === 0) return 0;
   return clamp01(correct / total);
 }
 
@@ -194,17 +233,20 @@ function pickHint(question: RunnerQuestion): string {
     return question.hint.trim();
   }
 
-  const tags = Array.isArray(question.misconception_tags) ? question.misconception_tags : [];
+  const tags = Array.isArray(question.misconception_tags)
+    ? question.misconception_tags
+    : [];
   for (const tag of tags) {
-    if (HINT_BY_TAG[tag]) {
-      return HINT_BY_TAG[tag];
-    }
+    if (HINT_BY_TAG[tag]) return HINT_BY_TAG[tag];
   }
 
   return "Tip: show your reasoning clearly and keep your units consistent.";
 }
 
-function filterAllowedTags(tags: string[] | undefined, allowlist: string[]): string[] {
+function filterAllowedTags(
+  tags: string[] | undefined,
+  allowlist: string[],
+): string[] {
   const allow = new Set(allowlist || []);
   return (tags || []).filter((tag) => allow.has(tag));
 }
@@ -215,7 +257,9 @@ function collectAllowedTags(
 ): string[] {
   const tags = new Set<string>();
   for (const item of items) {
-    const raw = Array.isArray(item.misconception_tags) ? item.misconception_tags : [];
+    const raw = Array.isArray(item.misconception_tags)
+      ? item.misconception_tags
+      : [];
     for (const tag of filterAllowedTags(raw, allowlist)) {
       tags.add(tag);
     }
@@ -232,7 +276,6 @@ export default function LessonRunner({
   moduleId,
   lesson,
   misconceptionAllowlist,
-  lessonOrderIds,
   onRequestNextLesson,
 }: Props) {
   const lessonId = useMemo(
@@ -258,12 +301,18 @@ export default function LessonRunner({
   );
 
   const simPrompts = useMemo(
-    () => (Array.isArray(phases.simulation_inquiry?.inquiry_prompts) ? phases.simulation_inquiry?.inquiry_prompts : []),
+    () =>
+      Array.isArray(phases.simulation_inquiry?.inquiry_prompts)
+        ? phases.simulation_inquiry.inquiry_prompts
+        : [],
     [phases.simulation_inquiry?.inquiry_prompts],
   );
 
   const reconPrompts = useMemo(
-    () => (Array.isArray(phases.concept_reconstruction?.prompts) ? phases.concept_reconstruction?.prompts : []),
+    () =>
+      Array.isArray(phases.concept_reconstruction?.prompts)
+        ? phases.concept_reconstruction.prompts
+        : [],
     [phases.concept_reconstruction?.prompts],
   );
 
@@ -271,7 +320,7 @@ export default function LessonRunner({
   const [loadingRunner, setLoadingRunner] = useState<boolean>(true);
   const [status, setStatus] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [feedback, setFeedback] = useState<{ kind: "ok" | "warn"; title: string; body?: string } | null>(null);
+  const [feedback, setFeedback] = useState<FeedbackState | null>(null);
 
   const [startedAt, setStartedAt] = useState<number>(Date.now());
   const [mcqAnswers, setMcqAnswers] = useState<Record<string, number>>({});
@@ -313,17 +362,20 @@ export default function LessonRunner({
     void refreshRunner();
   }, [refreshRunner]);
 
-  const moduleMasteryPct = useMemo(() => {
-    return Math.round(clamp01(Number(runner?.module?.module_mastery || 0)) * 100);
-  }, [runner?.module?.module_mastery]);
+  const moduleMasteryPct = useMemo(
+    () => Math.round(clamp01(Number(runner?.module?.module_mastery || 0)) * 100),
+    [runner?.module?.module_mastery],
+  );
 
-  const lessonBestScorePct = useMemo(() => {
-    return Math.round(clamp01(Number(runner?.lesson?.best_score || 0)) * 100);
-  }, [runner?.lesson?.best_score]);
+  const lessonBestScorePct = useMemo(
+    () => Math.round(clamp01(Number(runner?.lesson?.best_score || 0)) * 100),
+    [runner?.lesson?.best_score],
+  );
 
-  const activeStage = useMemo(() => {
-    return getActiveStageKey(runner?.lesson?.stages || []);
-  }, [runner?.lesson?.stages]);
+  const activeStage = useMemo(
+    () => getActiveStageKey(runner?.lesson?.stages || []),
+    [runner?.lesson?.stages],
+  );
 
   const canAdvance = Boolean(runner?.lesson?.can_advance);
   const lessonCompleted = Boolean(runner?.lesson?.mastery_achieved);
@@ -333,24 +385,34 @@ export default function LessonRunner({
   }
 
   async function logProgressEvent(
-    eventType: "diagnostic" | "simulation" | "reflection" | "transfer" | "attempt",
+    eventType: ProgressEventType,
     score?: number,
     tags?: string[],
-    extraDetails?: Record<string, unknown>,
+    extraDetails?: Record<string, string>,
   ): Promise<void> {
     setStatus("Saving...");
     try {
-      await apipPost(`/progress/${encodeURIComponent(moduleId)}/event`, {
+      const details: Record<string, string> = {
+        lesson_id: lessonId,
+        stage: activeStage || "",
+        ...(extraDetails || {}),
+      };
+
+      const payload: ProgressEventPayload = {
         event_type: eventType,
-        score: typeof score === "number" ? clamp01(score) : undefined,
         duration_seconds: durationSeconds(),
         misconception_tags: tags || [],
-        details: {
-          lesson_id: lessonId,
-          stage: activeStage,
-          ...extraDetails,
-        },
-      });
+        details,
+      };
+
+      if (typeof score === "number") {
+        payload.score = clamp01(score);
+      }
+
+      await apipPost<{ ok: boolean }, ProgressEventPayload>(
+        `/progress/${encodeURIComponent(moduleId)}/event`,
+        payload,
+      );
     } finally {
       setStatus("");
     }
@@ -361,25 +423,35 @@ export default function LessonRunner({
     const shortQuestions = diagnosticItems.filter((item) => item.type === "short");
 
     const missingMcq = mcqQuestions.some(
-      (question) => typeof mcqAnswers[String(question.question_id || question.__key)] !== "number",
+      (question) =>
+        typeof mcqAnswers[String(question.question_id || question.__key)] !== "number",
     );
     if (missingMcq) {
-      setFeedback({ kind: "warn", title: "Answer all diagnostic multiple-choice items first." });
+      setFeedback({
+        kind: "warn",
+        title: "Answer all diagnostic multiple-choice items first.",
+      });
       return;
     }
 
     const missingShort = shortQuestions.some(
-      (question) => !(shortAnswers[String(question.question_id || question.__key)] || "").trim(),
+      (question) =>
+        !(shortAnswers[String(question.question_id || question.__key)] || "").trim(),
     );
     if (missingShort) {
-      setFeedback({ kind: "warn", title: "Write an answer for every diagnostic written item first." });
+      setFeedback({
+        kind: "warn",
+        title: "Write an answer for every diagnostic written item first.",
+      });
       return;
     }
 
     const score = scoreMcq(diagnosticItems, mcqAnswers) ?? 0;
     const tags = collectAllowedTags(diagnosticItems, misconceptionAllowlist);
 
-    await logProgressEvent("diagnostic", score, tags, { source: "student_runner_diagnostic" });
+    await logProgressEvent("diagnostic", score, tags, {
+      source: "student_runner_diagnostic",
+    });
     setStartedAt(Date.now());
     setFeedback(null);
     await refreshRunner();
@@ -387,11 +459,17 @@ export default function LessonRunner({
 
   async function submitTeachingCheckpoint(): Promise<void> {
     if (!toolChoice) {
-      setFeedback({ kind: "warn", title: "Choose the tool you would trust more." });
+      setFeedback({
+        kind: "warn",
+        title: "Choose the tool you would trust more.",
+      });
       return;
     }
     if (!toolWhy.trim()) {
-      setFeedback({ kind: "warn", title: "Write your explanation before continuing." });
+      setFeedback({
+        kind: "warn",
+        title: "Write your explanation before continuing.",
+      });
       return;
     }
 
@@ -409,7 +487,10 @@ export default function LessonRunner({
   async function submitSimulation(): Promise<void> {
     const observation = (shortAnswers.lab_notes || "").trim();
     if (!observation) {
-      setFeedback({ kind: "warn", title: "Write one observation before leaving the lab." });
+      setFeedback({
+        kind: "warn",
+        title: "Write one observation before leaving the lab.",
+      });
       return;
     }
 
@@ -424,9 +505,14 @@ export default function LessonRunner({
   }
 
   async function submitCapsules(): Promise<void> {
-    const missing = reconPrompts.some((_, index) => !(shortAnswers[`cap_${index}`] || "").trim());
+    const missing = reconPrompts.some(
+      (_, index) => !(shortAnswers[`cap_${index}`] || "").trim(),
+    );
     if (missing) {
-      setFeedback({ kind: "warn", title: "Complete each guided concept response before continuing." });
+      setFeedback({
+        kind: "warn",
+        title: "Complete each guided concept response before continuing.",
+      });
       return;
     }
 
@@ -444,29 +530,41 @@ export default function LessonRunner({
     const shortQuestions = transferItems.filter((item) => item.type === "short");
 
     const missingMcq = mcqQuestions.some(
-      (question) => typeof mcqAnswers[String(question.question_id || question.__key)] !== "number",
+      (question) =>
+        typeof mcqAnswers[String(question.question_id || question.__key)] !== "number",
     );
     if (missingMcq) {
-      setFeedback({ kind: "warn", title: "Answer all mastery-check multiple-choice items first." });
+      setFeedback({
+        kind: "warn",
+        title: "Answer all mastery-check multiple-choice items first.",
+      });
       return;
     }
 
     const missingShort = shortQuestions.some(
-      (question) => !(shortAnswers[String(question.question_id || question.__key)] || "").trim(),
+      (question) =>
+        !(shortAnswers[String(question.question_id || question.__key)] || "").trim(),
     );
     if (missingShort) {
-      setFeedback({ kind: "warn", title: "Write an answer for every mastery-check written item first." });
+      setFeedback({
+        kind: "warn",
+        title: "Write an answer for every mastery-check written item first.",
+      });
       return;
     }
 
     const score = scoreMcq(transferItems, mcqAnswers) ?? 0;
     const tags = collectAllowedTags(transferItems, misconceptionAllowlist);
 
-    await logProgressEvent("transfer", score, tags, { source: "student_runner_mastery_check" });
+    await logProgressEvent("transfer", score, tags, {
+      source: "student_runner_mastery_check",
+    });
     await refreshRunner();
 
     const pct = Math.round(score * 100);
-    if (score >= Number(runner?.lesson?.mastery_threshold || 0.8)) {
+    const threshold = Number(runner?.lesson?.mastery_threshold || 0.8);
+
+    if (score >= threshold) {
       setFeedback({
         kind: "ok",
         title: `Mastery check passed: ${pct}%`,
@@ -482,11 +580,31 @@ export default function LessonRunner({
   }
 
   const styles = {
-    wrap: { maxWidth: 980, margin: "0 auto", padding: "22px 16px 26px 16px" } as React.CSSProperties,
+    wrap: {
+      maxWidth: 980,
+      margin: "0 auto",
+      padding: "22px 16px 26px 16px",
+    } as React.CSSProperties,
     header: { textAlign: "center", marginBottom: 18 } as React.CSSProperties,
-    lessonTitle: { fontSize: 56, fontWeight: 900, lineHeight: 1.05, margin: "0 0 10px 0", letterSpacing: -0.5 } as React.CSSProperties,
-    subtitle: { fontSize: 18, opacity: 0.85, marginBottom: 14 } as React.CSSProperties,
-    chipsRow: { display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap", marginBottom: 18 } as React.CSSProperties,
+    lessonTitle: {
+      fontSize: 56,
+      fontWeight: 900,
+      lineHeight: 1.05,
+      margin: "0 0 10px 0",
+      letterSpacing: -0.5,
+    } as React.CSSProperties,
+    subtitle: {
+      fontSize: 18,
+      opacity: 0.85,
+      marginBottom: 14,
+    } as React.CSSProperties,
+    chipsRow: {
+      display: "flex",
+      justifyContent: "center",
+      gap: 10,
+      flexWrap: "wrap",
+      marginBottom: 18,
+    } as React.CSSProperties,
     chip: {
       border: "1px solid rgba(255,255,255,0.12)",
       borderRadius: 999,
@@ -505,9 +623,25 @@ export default function LessonRunner({
       backdropFilter: "blur(10px)",
       boxShadow: "0 10px 40px rgba(0,0,0,0.35)",
     } as React.CSSProperties,
-    bigH2: { fontSize: 34, fontWeight: 900, textAlign: "center", margin: "4px 0 10px 0", letterSpacing: -0.2 } as React.CSSProperties,
-    bodyText: { fontSize: 18, opacity: 0.9, textAlign: "center", lineHeight: 1.55, margin: "0 0 14px 0" } as React.CSSProperties,
-    divider: { height: 1, background: "rgba(255,255,255,0.10)", margin: "14px 0" } as React.CSSProperties,
+    bigH2: {
+      fontSize: 34,
+      fontWeight: 900,
+      textAlign: "center",
+      margin: "4px 0 10px 0",
+      letterSpacing: -0.2,
+    } as React.CSSProperties,
+    bodyText: {
+      fontSize: 18,
+      opacity: 0.9,
+      textAlign: "center",
+      lineHeight: 1.55,
+      margin: "0 0 14px 0",
+    } as React.CSSProperties,
+    divider: {
+      height: 1,
+      background: "rgba(255,255,255,0.10)",
+      margin: "14px 0",
+    } as React.CSSProperties,
     btnPrimary: {
       width: "100%",
       height: 64,
@@ -553,7 +687,12 @@ export default function LessonRunner({
       padding: 16,
       marginTop: 12,
     } as React.CSSProperties,
-    prompt: { fontSize: 22, fontWeight: 900, marginBottom: 12, lineHeight: 1.25 } as React.CSSProperties,
+    prompt: {
+      fontSize: 22,
+      fontWeight: 900,
+      marginBottom: 12,
+      lineHeight: 1.25,
+    } as React.CSSProperties,
     choiceGrid: { display: "grid", gap: 10 } as React.CSSProperties,
     choiceBtn: (active: boolean) =>
       ({
@@ -561,7 +700,9 @@ export default function LessonRunner({
         padding: "14px 14px",
         borderRadius: 14,
         border: "1px solid rgba(255,255,255,0.14)",
-        background: active ? "rgba(155, 81, 224, 0.22)" : "rgba(255,255,255,0.06)",
+        background: active
+          ? "rgba(155, 81, 224, 0.22)"
+          : "rgba(255,255,255,0.06)",
         cursor: "pointer",
         fontSize: 18,
         fontWeight: 800,
@@ -579,15 +720,29 @@ export default function LessonRunner({
       lineHeight: 1.4,
       outline: "none",
     } as React.CSSProperties,
-    hint: { marginTop: 10, fontSize: 15, opacity: 0.85, lineHeight: 1.45 } as React.CSSProperties,
-    footerRow: { display: "flex", justifyContent: "space-between", gap: 12, marginTop: 14, opacity: 0.9, alignItems: "center" } as React.CSSProperties,
+    hint: {
+      marginTop: 10,
+      fontSize: 15,
+      opacity: 0.85,
+      lineHeight: 1.45,
+    } as React.CSSProperties,
+    footerRow: {
+      display: "flex",
+      justifyContent: "space-between",
+      gap: 12,
+      marginTop: 14,
+      opacity: 0.9,
+      alignItems: "center",
+    } as React.CSSProperties,
   };
 
   if (loadingRunner) {
     return (
       <div style={styles.wrap}>
         <div style={styles.card}>
-          <div style={{ textAlign: "center", opacity: 0.85 }}>Loading lesson runner...</div>
+          <div style={{ textAlign: "center", opacity: 0.85 }}>
+            Loading lesson runner...
+          </div>
         </div>
       </div>
     );
@@ -597,7 +752,9 @@ export default function LessonRunner({
     return (
       <div style={styles.wrap}>
         <div style={styles.feedbackWarn}>
-          <div style={{ fontSize: 18, fontWeight: 900 }}>Runner load failed</div>
+          <div style={{ fontSize: 18, fontWeight: 900 }}>
+            Runner load failed
+          </div>
           <div style={{ marginTop: 6 }}>{error || "Unknown error."}</div>
         </div>
       </div>
@@ -607,7 +764,9 @@ export default function LessonRunner({
   return (
     <div style={styles.wrap}>
       <div style={styles.header}>
-        <div style={styles.lessonTitle}>{runner.lesson.title || lesson.title || "Lesson"}</div>
+        <div style={styles.lessonTitle}>
+          {runner.lesson.title || lesson.title || "Lesson"}
+        </div>
 
         <div style={styles.chipsRow}>
           <div style={styles.chip}>
@@ -622,14 +781,17 @@ export default function LessonRunner({
         </div>
 
         <div style={styles.subtitle}>
-          This flow is backend-driven. Diagnostic does not count toward mastery. Only the final mastery check does.
+          This flow is backend-driven. Diagnostic does not count toward mastery.
+          Only the final mastery check does.
         </div>
       </div>
 
       {feedback ? (
         <div style={feedback.kind === "ok" ? styles.feedbackOk : styles.feedbackWarn}>
           <div style={{ fontSize: 18, fontWeight: 900 }}>{feedback.title}</div>
-          {feedback.body ? <div style={{ marginTop: 6, opacity: 0.9 }}>{feedback.body}</div> : null}
+          {feedback.body ? (
+            <div style={{ marginTop: 6, opacity: 0.9 }}>{feedback.body}</div>
+          ) : null}
         </div>
       ) : null}
 
@@ -643,7 +805,9 @@ export default function LessonRunner({
         {activeStage === "diagnostic" ? (
           <>
             <div style={styles.bigH2}>Initial Diagnostic</div>
-            <p style={styles.bodyText}>Answer first. This identifies misconceptions, but it does not count toward mastery.</p>
+            <p style={styles.bodyText}>
+              Answer first. This identifies misconceptions, but it does not count toward mastery.
+            </p>
             <QuestionListStudent
               items={diagnosticItems}
               mcq={mcqAnswers}
@@ -662,7 +826,11 @@ export default function LessonRunner({
           <>
             <div style={styles.bigH2}>Guided Concept Building</div>
 
-            {analogyText ? <p style={{ ...styles.bodyText, whiteSpace: "pre-wrap" }}>{analogyText}</p> : null}
+            {analogyText ? (
+              <p style={{ ...styles.bodyText, whiteSpace: "pre-wrap" }}>
+                {analogyText}
+              </p>
+            ) : null}
 
             <div style={styles.questionCard}>
               <div style={styles.prompt}>Tool Trust</div>
@@ -671,7 +839,10 @@ export default function LessonRunner({
               </div>
 
               <div style={styles.choiceGrid}>
-                <button style={styles.choiceBtn(toolChoice === "rough")} onClick={() => setToolChoice("rough")}>
+                <button
+                  style={styles.choiceBtn(toolChoice === "rough")}
+                  onClick={() => setToolChoice("rough")}
+                >
                   Rough ruler (±1 cm)
                 </button>
                 <button
@@ -683,14 +854,18 @@ export default function LessonRunner({
               </div>
 
               <div style={{ marginTop: 12 }}>
-                <div style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>Your explanation</div>
+                <div style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>
+                  Your explanation
+                </div>
                 <textarea
                   style={styles.textarea}
                   placeholder="Explain in 1–2 sentences..."
                   value={toolWhy}
                   onChange={(event) => setToolWhy(event.target.value)}
                 />
-                <div style={styles.hint}>Hint: precision affects what level of confidence you can reasonably claim.</div>
+                <div style={styles.hint}>
+                  Hint: precision affects what level of confidence you can reasonably claim.
+                </div>
               </div>
             </div>
 
@@ -703,11 +878,16 @@ export default function LessonRunner({
                       style={styles.textarea}
                       value={shortAnswers[`cap_${index}`] || ""}
                       onChange={(event) =>
-                        setShortAnswers((prev) => ({ ...prev, [`cap_${index}`]: event.target.value }))
+                        setShortAnswers((prev) => ({
+                          ...prev,
+                          [`cap_${index}`]: event.target.value,
+                        }))
                       }
                       placeholder="Write 2–4 sentences..."
                     />
-                    <div style={styles.hint}>Hint: keep the explanation concrete and tied to the lesson idea.</div>
+                    <div style={styles.hint}>
+                      Hint: keep the explanation concrete and tied to the lesson idea.
+                    </div>
                   </div>
                 ))}
               </div>
@@ -717,7 +897,9 @@ export default function LessonRunner({
               <button
                 style={styles.btnPrimary}
                 onClick={() =>
-                  reconPrompts.length ? void submitCapsules() : void submitTeachingCheckpoint()
+                  reconPrompts.length
+                    ? void submitCapsules()
+                    : void submitTeachingCheckpoint()
                 }
               >
                 Continue →
@@ -729,10 +911,20 @@ export default function LessonRunner({
         {activeStage === "simulation" ? (
           <>
             <div style={styles.bigH2}>Sim Lab</div>
-            <p style={styles.bodyText}>Run the lab once, then record one observation.</p>
+            <p style={styles.bodyText}>
+              Run the lab once, then record one observation.
+            </p>
 
             {simPrompts.length ? (
-              <div style={{ marginTop: 8, textAlign: "center", opacity: 0.95, fontSize: 18, lineHeight: 1.6 }}>
+              <div
+                style={{
+                  marginTop: 8,
+                  textAlign: "center",
+                  opacity: 0.95,
+                  fontSize: 18,
+                  lineHeight: 1.6,
+                }}
+              >
                 {simPrompts.map((prompt, index) => (
                   <div key={`sim_${index}`} style={{ marginBottom: 6 }}>
                     • {prompt}
@@ -742,16 +934,23 @@ export default function LessonRunner({
             ) : null}
 
             <div style={{ marginTop: 14 }}>
-              <div style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>Your observation</div>
+              <div style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>
+                Your observation
+              </div>
               <textarea
                 style={styles.textarea}
                 placeholder="Write what you observed..."
                 value={shortAnswers.lab_notes || ""}
                 onChange={(event) =>
-                  setShortAnswers((prev) => ({ ...prev, lab_notes: event.target.value }))
+                  setShortAnswers((prev) => ({
+                    ...prev,
+                    lab_notes: event.target.value,
+                  }))
                 }
               />
-              <div style={styles.hint}>Hint: focus on what changed, what stayed constant, and what that means.</div>
+              <div style={styles.hint}>
+                Hint: focus on what changed, what stayed constant, and what that means.
+              </div>
             </div>
 
             <div style={{ marginTop: 14 }}>
@@ -765,7 +964,9 @@ export default function LessonRunner({
         {activeStage === "mastery_check" ? (
           <>
             <div style={styles.bigH2}>Mastery Check</div>
-            <p style={styles.bodyText}>This final check determines lesson mastery. You need 80% or higher to complete the lesson.</p>
+            <p style={styles.bodyText}>
+              This final check determines lesson mastery. You need 80% or higher to complete the lesson.
+            </p>
             <QuestionListStudent
               items={transferItems}
               mcq={mcqAnswers}
@@ -784,7 +985,9 @@ export default function LessonRunner({
         {!activeStage && lessonCompleted ? (
           <>
             <div style={styles.bigH2}>Lesson Finished</div>
-            <p style={styles.bodyText}>Completed ✅ You can move on to the next sub-unit.</p>
+            <p style={styles.bodyText}>
+              Completed ✅ You can move on to the next sub-unit.
+            </p>
 
             <div style={styles.footerRow}>
               <button
@@ -801,9 +1004,7 @@ export default function LessonRunner({
               <button
                 style={styles.btnGhost}
                 onClick={() => {
-                  if (onRequestNextLesson) {
-                    onRequestNextLesson();
-                  }
+                  if (onRequestNextLesson) onRequestNextLesson();
                 }}
                 disabled={!canAdvance}
               >
@@ -831,7 +1032,11 @@ function QuestionListStudent({
   setShort: React.Dispatch<React.SetStateAction<Record<string, string>>>;
 }) {
   if (!items.length) {
-    return <div style={{ opacity: 0.85, textAlign: "center" }}>No questions available.</div>;
+    return (
+      <div style={{ opacity: 0.85, textAlign: "center" }}>
+        No questions available.
+      </div>
+    );
   }
 
   return (
@@ -850,7 +1055,14 @@ function QuestionListStudent({
               background: "rgba(255,255,255,0.03)",
             }}
           >
-            <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 12, lineHeight: 1.25 }}>
+            <div
+              style={{
+                fontSize: 22,
+                fontWeight: 900,
+                marginBottom: 12,
+                lineHeight: 1.25,
+              }}
+            >
               {prompt}
             </div>
 
@@ -861,13 +1073,17 @@ function QuestionListStudent({
                   return (
                     <button
                       key={`${key}_${choiceIndex}`}
-                      onClick={() => setMcq((prev) => ({ ...prev, [key]: choiceIndex }))}
+                      onClick={() =>
+                        setMcq((prev) => ({ ...prev, [key]: choiceIndex }))
+                      }
                       style={{
                         textAlign: "left",
                         padding: "14px 14px",
                         borderRadius: 14,
                         border: "1px solid rgba(255,255,255,0.14)",
-                        background: active ? "rgba(155, 81, 224, 0.22)" : "rgba(255,255,255,0.06)",
+                        background: active
+                          ? "rgba(155, 81, 224, 0.22)"
+                          : "rgba(255,255,255,0.06)",
                         cursor: "pointer",
                         fontSize: 18,
                         fontWeight: 800,
@@ -895,7 +1111,9 @@ function QuestionListStudent({
                     outline: "none",
                   }}
                   value={short[key] || ""}
-                  onChange={(event) => setShort((prev) => ({ ...prev, [key]: event.target.value }))}
+                  onChange={(event) =>
+                    setShort((prev) => ({ ...prev, [key]: event.target.value }))
+                  }
                   placeholder="Write your answer..."
                 />
                 <div style={{ marginTop: 10, fontSize: 15, opacity: 0.85, lineHeight: 1.45 }}>
