@@ -47,17 +47,10 @@ type LessonRef = {
   };
 };
 
-type Props = {
-  moduleId: string;
-  lesson: LessonRef;
-  misconceptionAllowlist: string[];
-  onRequestNextLesson?: () => void;
-  onRefreshStatus?: () => Promise<void> | void;
-};
-
 type RunnerStageKey =
   | "diagnostic"
   | "scaffolded_teaching"
+  | "concept_gate"
   | "simulation"
   | "mastery_check";
 
@@ -79,6 +72,28 @@ type RunnerLesson = {
   can_advance: boolean;
   lesson_status: string;
   next_recommended_action: string;
+  diagnostic?: {
+    min_questions: number;
+    max_questions: number;
+    target_question_count: number;
+    completed: boolean;
+    asked_count?: number;
+    latest_score?: number;
+  };
+  mastery_check?: {
+    min_questions: number;
+    max_questions: number;
+    selected_question_count: number;
+    threshold: number;
+    attempt_count: number;
+    best_score: number;
+    required_correct?: number;
+    eligible_for_immediate_retest?: boolean;
+    review_required?: boolean;
+    review_recommended?: boolean;
+    weak_concepts?: string[];
+    recommended_review_refs?: string[];
+  };
   stages: RunnerStage[];
 };
 
@@ -95,9 +110,23 @@ type RunnerResponse = {
   lesson: RunnerLesson;
 };
 
+type Props = {
+  moduleId: string;
+  lesson: LessonRef;
+  misconceptionAllowlist: string[];
+  onRequestNextLesson?: () => void;
+  onRefreshStatus?: () => Promise<void> | void;
+};
+
 type JsonPrimitive = string | number | boolean | null;
 type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
 type JsonObject = { [key: string]: JsonValue };
+
+type FeedbackState = {
+  kind: "ok" | "warn";
+  title: string;
+  body?: string;
+};
 
 const HINT_BY_TAG: Record<string, string> = {
   unit_conversion: "Tip: write the conversion factor so the units cancel cleanly.",
@@ -248,6 +277,24 @@ function getActiveStageKey(stages: RunnerStage[]): RunnerStageKey | null {
   return active ? active.key : null;
 }
 
+function getReviewTitle(reviewRef: string): string {
+  const map: Record<string, string> = {
+    concept_unit_conversion: "Review: Unit conversion",
+    concept_prefix_scaling: "Review: SI prefixes and scaling",
+    concept_scalar_vector_difference: "Review: Scalars vs vectors",
+    concept_reading_scales: "Review: Reading scales correctly",
+    concept_significant_figures: "Review: Significant figures",
+    concept_rounding_rules: "Review: Rounding rules",
+    concept_precision_accuracy: "Review: Precision vs accuracy",
+    concept_random_systematic_error: "Review: Random vs systematic error",
+    concept_uncertainty_estimation: "Review: Estimating uncertainty",
+    concept_density_meaning: "Review: What density means",
+    concept_density_units: "Review: Density units",
+  };
+
+  return map[reviewRef] || reviewRef.replace(/_/g, " ");
+}
+
 export default function LessonRunner({
   moduleId,
   lesson,
@@ -297,17 +344,14 @@ export default function LessonRunner({
   const [loadingRunner, setLoadingRunner] = useState<boolean>(true);
   const [status, setStatus] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [feedback, setFeedback] = useState<{
-    kind: "ok" | "warn";
-    title: string;
-    body?: string;
-  } | null>(null);
+  const [feedback, setFeedback] = useState<FeedbackState | null>(null);
 
   const [startedAt, setStartedAt] = useState<number>(Date.now());
   const [mcqAnswers, setMcqAnswers] = useState<Record<string, number>>({});
   const [shortAnswers, setShortAnswers] = useState<Record<string, string>>({});
   const [toolChoice, setToolChoice] = useState<"rough" | "precision" | "">("");
   const [toolWhy, setToolWhy] = useState<string>("");
+  const [conceptGateAnswer, setConceptGateAnswer] = useState<"rough" | "precision" | "">("");
 
   const refreshRunner = useCallback(async (): Promise<void> => {
     if (!moduleId || !lessonId) {
@@ -340,6 +384,7 @@ export default function LessonRunner({
     setShortAnswers({});
     setToolChoice("");
     setToolWhy("");
+    setConceptGateAnswer("");
     void refreshRunner();
   }, [refreshRunner]);
 
@@ -360,6 +405,10 @@ export default function LessonRunner({
 
   const canAdvance = Boolean(runner?.lesson?.can_advance);
   const lessonCompleted = Boolean(runner?.lesson?.mastery_achieved);
+  const masteryMeta = runner?.lesson?.mastery_check;
+  const diagnosticMeta = runner?.lesson?.diagnostic;
+  const weakConcepts = masteryMeta?.weak_concepts || [];
+  const reviewRefs = masteryMeta?.recommended_review_refs || [];
 
   function durationSeconds(): number {
     return Math.max(0, Math.round((Date.now() - startedAt) / 1000));
@@ -408,6 +457,13 @@ export default function LessonRunner({
     }
   }
 
+  async function refreshAllStatus(): Promise<void> {
+    if (onRefreshStatus) {
+      await onRefreshStatus();
+    }
+    await refreshRunner();
+  }
+
   async function submitDiagnostic(): Promise<void> {
     const mcqQuestions = diagnosticItems.filter((item) => item.type === "mcq");
     const shortQuestions = diagnosticItems.filter((item) => item.type === "short");
@@ -441,10 +497,17 @@ export default function LessonRunner({
 
     await logProgressEvent("diagnostic", score, tags, {
       source: "student_runner_diagnostic",
+      asked_count: diagnosticItems.length,
+      target_question_count: diagnosticMeta?.target_question_count ?? diagnosticItems.length,
     });
+
     setStartedAt(Date.now());
-    setFeedback(null);
-    await refreshRunner();
+    setFeedback({
+      kind: "ok",
+      title: `Diagnostic recorded: ${Math.round(score * 100)}%`,
+      body: "Now the runner can move into guided concept building.",
+    });
+    await refreshAllStatus();
   }
 
   async function submitTeachingCheckpoint(): Promise<void> {
@@ -470,8 +533,84 @@ export default function LessonRunner({
     });
 
     setStartedAt(Date.now());
-    setFeedback(null);
-    await refreshRunner();
+    setFeedback({
+      kind: "ok",
+      title: "Guided concept building saved.",
+      body: "Next you will pass through a concept gate before the lab or mastery check.",
+    });
+    await refreshAllStatus();
+  }
+
+  async function submitCapsules(): Promise<void> {
+    const missing = reconPrompts.some(
+      (_, index) => !(shortAnswers[`cap_${index}`] || "").trim(),
+    );
+    if (missing) {
+      setFeedback({
+        kind: "warn",
+        title: "Complete each guided concept response before continuing.",
+      });
+      return;
+    }
+
+    if (!toolChoice) {
+      setFeedback({
+        kind: "warn",
+        title: "Choose the tool you would trust more before continuing.",
+      });
+      return;
+    }
+
+    if (!toolWhy.trim()) {
+      setFeedback({
+        kind: "warn",
+        title: "Write your explanation before continuing.",
+      });
+      return;
+    }
+
+    await logProgressEvent("reflection", undefined, [], {
+      source: "student_runner_concept_reconstruction",
+      tool_choice: toolChoice,
+      tool_why: toolWhy.slice(0, 300),
+    });
+
+    setStartedAt(Date.now());
+    setFeedback({
+      kind: "ok",
+      title: "Concept reconstruction saved.",
+      body: "Next you will face a concept gate.",
+    });
+    await refreshAllStatus();
+  }
+
+  async function submitConceptGate(): Promise<void> {
+    if (!conceptGateAnswer) {
+      setFeedback({
+        kind: "warn",
+        title: "Answer the concept-gate question before continuing.",
+      });
+      return;
+    }
+
+    const isCorrect = conceptGateAnswer === "precision";
+
+    await logProgressEvent("reflection", isCorrect ? 1 : 0, [], {
+      source: "student_runner_concept_gate",
+      stage: "concept_gate",
+      concept_gate_answer: conceptGateAnswer,
+      concept_gate_correct: isCorrect,
+    });
+
+    setStartedAt(Date.now());
+    setFeedback({
+      kind: isCorrect ? "ok" : "warn",
+      title: isCorrect ? "Concept gate passed." : "Concept gate recorded.",
+      body: isCorrect
+        ? "You can now move forward in the lesson flow."
+        : "That answer was not ideal, but the system has recorded your concept-gate result and updated your guidance.",
+    });
+    await refreshAllStatus();
   }
 
   async function submitSimulation(): Promise<void> {
@@ -490,29 +629,12 @@ export default function LessonRunner({
     });
 
     setStartedAt(Date.now());
-    setFeedback(null);
-    await refreshRunner();
-  }
-
-  async function submitCapsules(): Promise<void> {
-    const missing = reconPrompts.some(
-      (_, index) => !(shortAnswers[`cap_${index}`] || "").trim(),
-    );
-    if (missing) {
-      setFeedback({
-        kind: "warn",
-        title: "Complete each guided concept response before continuing.",
-      });
-      return;
-    }
-
-    await logProgressEvent("reflection", undefined, [], {
-      source: "student_runner_concept_reconstruction",
+    setFeedback({
+      kind: "ok",
+      title: "Simulation progress saved.",
+      body: "You can proceed to the mastery check when the runner refreshes.",
     });
-
-    setStartedAt(Date.now());
-    setFeedback(null);
-    await refreshRunner();
+    await refreshAllStatus();
   }
 
   async function submitMasteryCheck(): Promise<void> {
@@ -548,8 +670,10 @@ export default function LessonRunner({
 
     await logProgressEvent("transfer", score, tags, {
       source: "student_runner_mastery_check",
+      question_count: transferItems.length,
     });
-    await refreshRunner();
+
+    await refreshAllStatus();
 
     const pct = Math.round(score * 100);
     const threshold = Number(runner?.lesson?.mastery_threshold || 0.8);
@@ -564,9 +688,42 @@ export default function LessonRunner({
       setFeedback({
         kind: "warn",
         title: `Mastery check score: ${pct}%`,
-        body: "This does not yet meet the 80% threshold. Review the guided teaching and try again.",
+        body:
+          "This does not yet meet the 80% threshold. You can retest immediately or review the targeted lecture references below.",
       });
     }
+  }
+
+  async function retestNow(): Promise<void> {
+    setFeedback({
+      kind: "ok",
+      title: "Retest prepared.",
+      body:
+        "The runner will reuse the mastery stage, and the backend can choose a reshuffled or fresh set of questions where available.",
+    });
+    setStartedAt(Date.now());
+    setMcqAnswers({});
+    setShortAnswers({});
+    await refreshAllStatus();
+  }
+
+  async function reviewWeakAreas(): Promise<void> {
+    const message =
+      reviewRefs.length > 0
+        ? `Recommended review sections: ${reviewRefs.map(getReviewTitle).join(", ")}`
+        : weakConcepts.length > 0
+          ? `Weak concepts: ${weakConcepts.join(", ")}`
+          : "Review the guided concept building section, then try the mastery check again.";
+
+    setFeedback({
+      kind: "warn",
+      title: "Targeted review recommended.",
+      body: message,
+    });
+
+    setStartedAt(Date.now());
+    setMcqAnswers({});
+    setShortAnswers({});
   }
 
   const styles = {
@@ -717,6 +874,7 @@ export default function LessonRunner({
       marginTop: 14,
       opacity: 0.9,
       alignItems: "center",
+      flexWrap: "wrap",
     } as React.CSSProperties,
   };
 
@@ -762,6 +920,16 @@ export default function LessonRunner({
           <div style={styles.chip}>
             Lesson: <b>{lessonCompleted ? "Completed" : "In progress"}</b>
           </div>
+          {diagnosticMeta ? (
+            <div style={styles.chip}>
+              Diagnostic target: <b>{diagnosticMeta.target_question_count}</b>
+            </div>
+          ) : null}
+          {masteryMeta ? (
+            <div style={styles.chip}>
+              Mastery questions: <b>{masteryMeta.selected_question_count}</b>
+            </div>
+          ) : null}
         </div>
 
         <div style={styles.subtitle}>
@@ -900,6 +1068,46 @@ export default function LessonRunner({
           </>
         ) : null}
 
+        {activeStage === "concept_gate" ? (
+          <>
+            <div style={styles.bigH2}>Concept Gate</div>
+            <p style={styles.bodyText}>
+              Before you continue, answer this conceptual check.
+            </p>
+
+            <div style={styles.questionCard}>
+              <div style={styles.prompt}>
+                Which tool gives the more reliable measurement for careful engineering work?
+              </div>
+
+              <div style={styles.choiceGrid}>
+                <button
+                  style={styles.choiceBtn(conceptGateAnswer === "rough")}
+                  onClick={() => setConceptGateAnswer("rough")}
+                >
+                  Rough ruler (±1 cm)
+                </button>
+                <button
+                  style={styles.choiceBtn(conceptGateAnswer === "precision")}
+                  onClick={() => setConceptGateAnswer("precision")}
+                >
+                  Precision caliper (±0.01 cm)
+                </button>
+              </div>
+
+              <div style={styles.hint}>
+                Hint: the more precise instrument supports tighter uncertainty and stronger trust.
+              </div>
+            </div>
+
+            <div style={{ marginTop: 14 }}>
+              <button style={styles.btnPrimary} onClick={() => void submitConceptGate()}>
+                Continue →
+              </button>
+            </div>
+          </>
+        ) : null}
+
         {activeStage === "simulation" ? (
           <>
             <div style={styles.bigH2}>Sim Lab</div>
@@ -960,6 +1168,24 @@ export default function LessonRunner({
               This final check determines lesson mastery. You need 80% or higher
               to complete the lesson.
             </p>
+
+            {masteryMeta ? (
+              <div style={{ ...styles.questionCard, marginTop: 0 }}>
+                <div style={{ fontWeight: 900, marginBottom: 8 }}>Assessment contract</div>
+                <div style={{ opacity: 0.9, lineHeight: 1.5 }}>
+                  Question count: <b>{masteryMeta.selected_question_count}</b>
+                  {" · "}
+                  Required threshold: <b>{Math.round(masteryMeta.threshold * 100)}%</b>
+                  {typeof masteryMeta.required_correct === "number" ? (
+                    <>
+                      {" · "}
+                      Minimum correct answers: <b>{masteryMeta.required_correct}</b>
+                    </>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+
             <QuestionListStudent
               items={transferItems}
               mcq={mcqAnswers}
@@ -967,6 +1193,7 @@ export default function LessonRunner({
               short={shortAnswers}
               setShort={setShortAnswers}
             />
+
             <div style={{ marginTop: 14 }}>
               <button
                 style={styles.btnPrimary}
@@ -975,6 +1202,46 @@ export default function LessonRunner({
                 Submit mastery check ✓
               </button>
             </div>
+
+            {masteryMeta?.attempt_count && masteryMeta.attempt_count > 0 && !lessonCompleted ? (
+              <div style={styles.footerRow}>
+                <button style={styles.btnGhost} onClick={() => void retestNow()}>
+                  Retest now
+                </button>
+                <button style={styles.btnGhost} onClick={() => void reviewWeakAreas()}>
+                  Review weak areas
+                </button>
+              </div>
+            ) : null}
+
+            {weakConcepts.length > 0 || reviewRefs.length > 0 ? (
+              <div style={styles.questionCard}>
+                <div style={{ fontWeight: 900, marginBottom: 8 }}>Targeted review guidance</div>
+
+                {weakConcepts.length > 0 ? (
+                  <div style={{ marginBottom: 10, opacity: 0.9 }}>
+                    Weak concepts: {weakConcepts.join(", ")}
+                  </div>
+                ) : null}
+
+                {reviewRefs.length > 0 ? (
+                  <div style={{ display: "grid", gap: 8 }}>
+                    {reviewRefs.map((reviewRef) => (
+                      <div
+                        key={reviewRef}
+                        style={{
+                          border: "1px solid rgba(255,255,255,0.10)",
+                          borderRadius: 12,
+                          padding: "10px 12px",
+                        }}
+                      >
+                        {getReviewTitle(reviewRef)}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </>
         ) : null}
 
@@ -991,16 +1258,7 @@ export default function LessonRunner({
                 onClick={() => {
                   setFeedback(null);
                   setStartedAt(Date.now());
-
-                  const run = async () => {
-                    if (onRefreshStatus) {
-                      await onRefreshStatus();
-                    } else {
-                      await refreshRunner();
-                    }
-                  };
-
-                  void run();
+                  void refreshAllStatus();
                 }}
               >
                 Refresh status
