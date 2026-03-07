@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { apipGet } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
@@ -95,6 +95,7 @@ export default function StudentModulePage() {
   const [lessons, setLessons] = useState<ActiveLesson[]>([]);
   const [err, setErr] = useState<string>("");
   const [activeIdx, setActiveIdx] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const activeLesson = useMemo(() => {
     if (!lessons.length) return null;
@@ -107,22 +108,21 @@ export default function StudentModulePage() {
     return `Mission ${activeIdx + 1} of ${lessons.length}`;
   }, [lessons.length, activeIdx]);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    async function load(): Promise<void> {
+  const loadModuleState = useCallback(
+    async (preserveCurrentLesson: boolean = true): Promise<void> => {
       if (!moduleId) {
-        if (!cancelled) {
-          setErr("Missing module id in route.");
-          setModuleMeta(null);
-          setLessons([]);
-          setActiveIdx(0);
-        }
+        setErr("Missing module id in route.");
+        setModuleMeta(null);
+        setLessons([]);
+        setActiveIdx(0);
+        setLoading(false);
         return;
       }
 
+      setLoading(true);
+
       try {
-        if (!cancelled) setErr("");
+        setErr("");
 
         const [moduleResponse, lessonsResponse, progressResponse] =
           await Promise.all([
@@ -136,8 +136,6 @@ export default function StudentModulePage() {
               `/student/modules/${encodeURIComponent(moduleId)}/progress`,
             ),
           ]);
-
-        if (cancelled) return;
 
         const progressByLessonId = new Map<string, LessonProgress>();
         for (const lessonProgress of progressResponse.lessons || []) {
@@ -157,33 +155,56 @@ export default function StudentModulePage() {
             };
           });
 
-        const firstIncompleteIndex = mergedLessons.findIndex(
-          (lesson) => lesson.progress?.completed !== true,
-        );
+        const currentLessonId = preserveCurrentLesson
+          ? normalizeLessonId(activeLesson?.lesson_id || activeLesson?.id)
+          : "";
+
+        let nextIndex = 0;
+
+        if (currentLessonId) {
+          const foundIndex = mergedLessons.findIndex(
+            (lesson) =>
+              normalizeLessonId(lesson.lesson_id || lesson.id) === currentLessonId,
+          );
+          if (foundIndex >= 0) {
+            nextIndex = foundIndex;
+          } else {
+            const firstIncompleteIndex = mergedLessons.findIndex(
+              (lesson) => lesson.progress?.completed !== true,
+            );
+            nextIndex =
+              firstIncompleteIndex >= 0
+                ? firstIncompleteIndex
+                : Math.max(mergedLessons.length - 1, 0);
+          }
+        } else {
+          const firstIncompleteIndex = mergedLessons.findIndex(
+            (lesson) => lesson.progress?.completed !== true,
+          );
+          nextIndex =
+            firstIncompleteIndex >= 0
+              ? firstIncompleteIndex
+              : Math.max(mergedLessons.length - 1, 0);
+        }
 
         setModuleMeta(moduleResponse.module);
         setLessons(mergedLessons);
-        setActiveIdx(
-          firstIncompleteIndex >= 0
-            ? firstIncompleteIndex
-            : Math.max(mergedLessons.length - 1, 0),
-        );
+        setActiveIdx(nextIndex);
       } catch (error) {
-        if (cancelled) return;
-
         setErr(error instanceof Error ? error.message : String(error));
         setModuleMeta(null);
         setLessons([]);
         setActiveIdx(0);
+      } finally {
+        setLoading(false);
       }
-    }
+    },
+    [moduleId, activeLesson],
+  );
 
-    void load();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [moduleId]);
+  useEffect(() => {
+    void loadModuleState(false);
+  }, [loadModuleState]);
 
   const canGoBack = activeIdx > 0;
   const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
@@ -276,7 +297,11 @@ export default function StudentModulePage() {
           margin: "0 auto",
         }}
       >
-        {activeLesson ? (
+        {loading && !activeLesson ? (
+          <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
+            Loading mission...
+          </div>
+        ) : activeLesson ? (
           <LessonRunner
             moduleId={moduleId}
             lesson={activeLesson}
@@ -284,6 +309,7 @@ export default function StudentModulePage() {
               moduleMeta?.misconception_tag_allowlist || []
             }
             onRequestNextLesson={goNext}
+            onRefreshStatus={() => loadModuleState(true)}
           />
         ) : (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
