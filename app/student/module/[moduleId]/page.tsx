@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { apipGet } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
+import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { useAuth } from "../../../../lib/auth";
 
 type ModuleCatalog = {
@@ -255,6 +256,13 @@ export default function StudentModulePage() {
     window?.scrollTo?.({ top: 0, behavior: "smooth" });
   }
 
+  const restartFromBeginning = useCallback(async (): Promise<void> => {
+    if (!moduleId) return;
+    await restartModuleProgress(moduleId);
+    setActiveIdx(0);
+    await loadModuleState(false);
+    window?.scrollTo?.({ top: 0, behavior: "smooth" });
+  }, [loadModuleState, moduleId]);
   return (
     <div
       style={{
@@ -349,6 +357,7 @@ export default function StudentModulePage() {
             lessonId={normalizeLessonId(activeLesson.lesson_id || activeLesson.id)}
             canGoPreviousLesson={canGoBack}
             onGoPreviousLesson={canGoBack ? goBack : undefined}
+            onRestartFromBeginning={restartFromBeginning}
             previousLessonLabel={lessonLabel(previousLesson, activeIdx)}
           />
         ) : (

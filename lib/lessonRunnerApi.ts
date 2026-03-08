@@ -170,6 +170,17 @@ function clearState(moduleId: string, lessonId: string): void {
   writeState(moduleId, lessonId, {});
 }
 
+function clearModuleState(moduleId: string): void {
+  if (typeof window === "undefined") return;
+  const prefix = `lesson-runner:${moduleId}:`;
+  const keys: string[] = [];
+  for (let index = 0; index < window.sessionStorage.length; index += 1) {
+    const key = window.sessionStorage.key(index);
+    if (key && key.startsWith(prefix)) keys.push(key);
+  }
+  for (const key of keys) window.sessionStorage.removeItem(key);
+}
+
 function mcItem(id: string, prompt: string, choices: string[], answerIndex: number, hint: string, explanation: string): UnknownRecord {
   return {
     id,
@@ -977,6 +988,14 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
   throw new Error(`Unsupported lesson runner event: ${request.event_type}`);
 }
 
+
+export async function restartModuleProgress(moduleId: string): Promise<void> {
+  await apipPost<{ ok: boolean }, JsonObject>(
+    "/student/modules/" + encodeURIComponent(moduleId) + "/restart",
+    {}
+  );
+  clearModuleState(moduleId);
+}
 
 export async function restartLessonProgress(moduleId: string, lessonId: string): Promise<void> {
   const normalized = normalizeLessonId(lessonId);

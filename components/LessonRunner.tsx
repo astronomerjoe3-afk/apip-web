@@ -157,6 +157,7 @@ type LessonRunnerProps = {
   lessonId: string;
   canGoPreviousLesson?: boolean;
   onGoPreviousLesson?: () => void;
+  onRestartFromBeginning?: () => Promise<void> | void;
   previousLessonLabel?: string;
 };
 
@@ -309,6 +310,7 @@ export default function LessonRunner({
   lessonId,
   canGoPreviousLesson = false,
   onGoPreviousLesson,
+  onRestartFromBeginning,
   previousLessonLabel = "the previous mission",
 }: LessonRunnerProps) {
   const [runner, setRunner] = useState<RunnerResponse | null>(null);
@@ -365,18 +367,22 @@ export default function LessonRunner({
     setError(null);
 
     try {
-      await restartLessonProgress(moduleId, lessonId);
-      setAnswers({});
-      setReflectionText("");
-      setResumeChoiceMade(false);
-      await loadRunner();
+      if (onRestartFromBeginning) {
+        await onRestartFromBeginning();
+      } else {
+        await restartLessonProgress(moduleId, lessonId);
+        setAnswers({});
+        setReflectionText("");
+        setResumeChoiceMade(false);
+        await loadRunner();
+      }
     } catch (err) {
       console.error(err);
       setError("We could not restart this mission right now.");
     } finally {
       setIsSubmitting(false);
     }
-  }, [lessonId, loadRunner, moduleId]);
+  }, [lessonId, loadRunner, moduleId, onRestartFromBeginning]);
 
   const sendEvent = useCallback(
     async (eventType: string, payload: ApiEventPayload = {}) => {
@@ -1008,7 +1014,7 @@ export default function LessonRunner({
           <p className="text-slate-800">{restartCopy}</p>
           <div className="mt-3">
             <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>
-              Start this mission from the beginning
+              Start over from Lesson 1
             </SecondaryButton>
           </div>
         </div>
@@ -1027,7 +1033,7 @@ export default function LessonRunner({
           <p className="mt-3 max-w-3xl text-slate-700">Pick up where you left off, restart, or go back.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue where I stopped</PrimaryButton>
-            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start from the beginning</SecondaryButton>
+            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start over from Lesson 1</SecondaryButton>
             {canGoPreviousLesson && onGoPreviousLesson ? (
               <SecondaryButton onClick={onGoPreviousLesson} disabled={isSubmitting}>Go back to {previousLessonLabel}</SecondaryButton>
             ) : null}
