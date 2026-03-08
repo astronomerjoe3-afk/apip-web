@@ -3,6 +3,9 @@
 import { apipGet, apipPost } from "./apipApi";
 
 type UnknownRecord = Record<string, unknown>;
+type JsonPrimitive = string | number | boolean | null;
+type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
+type JsonObject = { [key: string]: JsonValue };
 type RunnerRequest = {
   lesson_id: string;
   event_type: string;
@@ -245,13 +248,13 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
 }
 
 function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Promise<unknown> {
-  return apipPost<unknown, Record<string, unknown>>(`/progress/${encodeURIComponent(moduleId)}/event`, {
+  return apipPost<unknown, JsonObject>(`/progress/${encodeURIComponent(moduleId)}/event`, {
     ...body,
     details: {
       lesson_id: normalizeLessonId(lessonId),
       ...asRecord(body.details),
     },
-  });
+  } as JsonObject);
 }
 
 function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: UnknownRecord[]): UnknownRecord {
