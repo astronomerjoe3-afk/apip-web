@@ -155,6 +155,9 @@ type RunnerResponse = {
 type LessonRunnerProps = {
   moduleId: string;
   lessonId: string;
+  canGoPreviousLesson?: boolean;
+  onGoPreviousLesson?: () => void;
+  previousLessonLabel?: string;
 };
 
 type ApiEventPayload = Record<string, unknown>;
@@ -301,7 +304,13 @@ function ReviewReferences({ refs }: { refs?: ReviewReference[] }) {
   );
 }
 
-export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) {
+export default function LessonRunner({
+  moduleId,
+  lessonId,
+  canGoPreviousLesson = false,
+  onGoPreviousLesson,
+  previousLessonLabel = "the previous mission",
+}: LessonRunnerProps) {
   const [runner, setRunner] = useState<RunnerResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -1045,6 +1054,9 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
           <div className="mt-6 flex flex-wrap gap-3">
             <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue where I stopped</PrimaryButton>
             <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start from the beginning</SecondaryButton>
+            {canGoPreviousLesson && onGoPreviousLesson ? (
+              <SecondaryButton onClick={onGoPreviousLesson} disabled={isSubmitting}>Go back to {previousLessonLabel}</SecondaryButton>
+            ) : null}
           </div>
         </div>
       ) : renderStage()}
