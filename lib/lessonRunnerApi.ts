@@ -513,7 +513,6 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
       return [];
   }
 }
-
 function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownRecord[] {
   const prefixes = [
     "Apply the same lesson idea in a new check: ",
@@ -605,22 +604,129 @@ function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Pro
   } as JsonObject);
 }
 
+function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
+  const code = lessonCode(lesson);
+  const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
+
+  switch (code) {
+    case "F1_L1":
+      return {
+        body: "Try this question step by step.",
+        worked_example: {
+          prompt: "Convert 2.5 km to m. Then convert 35 cm to m.",
+          steps: [
+            "Identify the prefix first. kilo- means 1000 times the base unit, while centi- means 1/100 of the base unit.",
+            "Replace the prefixed unit with the base-unit relationship: 1 km = 1000 m and 1 cm = 0.01 m.",
+            "Do the number change carefully: 2.5 x 1000 = 2500 and 35 x 0.01 = 0.35.",
+            "Write each new value with the new unit before you compare or combine anything.",
+          ],
+          answer: "2.5 km = 2500 m and 35 cm = 0.35 m",
+        },
+      };
+    case "F1_L2":
+      return {
+        body: "Try this question step by step.",
+        worked_example: {
+          prompt: "A student says '12 m east' is a scalar because it only has one number. Is the student correct?",
+          steps: [
+            "Look for the two things that matter in this lesson: magnitude and direction.",
+            "The number 12 m gives the magnitude, and east gives the direction.",
+            "A quantity with both magnitude and direction is a vector, not a scalar.",
+            "So the student is not correct, because direction changes the classification.",
+          ],
+          answer: "No. '12 m east' is a vector because it has both magnitude and direction.",
+        },
+      };
+    case "F1_L3":
+      return {
+        body: "Try this question step by step.",
+        worked_example: {
+          prompt: "A ruler has 1 mm divisions and a line reads 6.4 cm. What uncertainty is reasonable to report?",
+          steps: [
+            "Start with the smallest division on the instrument, which is 1 mm.",
+            "For a simple scale reading, a reasonable uncertainty is about half the smallest division.",
+            "Half of 1 mm is 0.5 mm, which is the same as 0.05 cm.",
+            "Attach that uncertainty to the measured value instead of pretending the ruler is more precise than it is.",
+          ],
+          answer: "A reasonable report is 6.4 cm +/- 0.05 cm.",
+        },
+      };
+    case "F1_L4":
+      return {
+        body: "Try this question step by step.",
+        worked_example: {
+          prompt: "Round 12.349 to 3 significant figures.",
+          steps: [
+            "Keep the first three significant figures: 1, 2, and 3.",
+            "Look at the next digit, which is 4.",
+            "Because 4 is less than 5, the third significant figure stays the same.",
+            "Write the result as 12.3, which has 3 significant figures.",
+          ],
+          answer: "12.349 rounded to 3 significant figures is 12.3.",
+        },
+      };
+    case "F1_L5":
+      return {
+        body: "Try this question step by step.",
+        worked_example: {
+          prompt: "A block has mass 200 g and volume 50 cm^3. What is its density?",
+          steps: [
+            "Recall the definition first: density = mass divided by volume.",
+            "Substitute the values into the formula: density = 200 g / 50 cm^3.",
+            "Do the calculation carefully: 200 / 50 = 4.",
+            "Keep the correct unit with the result, because density must include both mass and volume units.",
+          ],
+          answer: "The density is 4 g/cm^3.",
+        },
+      };
+    case "F1_L6":
+      return {
+        body: "Try this question step by step.",
+        worked_example: {
+          prompt: "Four readings are 28.1, 28.2, 28.1, and 28.2 deg C, but the true value is 30.0 deg C. Are the readings precise, accurate, or both?",
+          steps: [
+            "Check how close the readings are to each other first.",
+            "These readings are tightly grouped, so they are precise.",
+            "Now compare the group to the true value of 30.0 deg C.",
+            "Because the whole group is far from the true value, the readings are not accurate.",
+          ],
+          answer: "The readings are precise but not accurate.",
+        },
+      };
+    default:
+      return {
+        body: "Try this question step by step.",
+        worked_example: {
+          prompt: firstPrompt,
+          steps: [
+            "Read the question carefully and identify the quantity or idea being tested.",
+            "Choose the correct rule, definition, formula, or unit relationship for that idea.",
+            "Work through the reasoning one step at a time before deciding on the answer.",
+            "Check that the final statement keeps the right unit, meaning, or classification.",
+          ],
+          answer: "Use the lesson rule carefully and finish with a clear, correctly labelled answer.",
+        },
+      };
+  }
+}
 function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: UnknownRecord[]): UnknownRecord {
   const repairs = feedback.filter((item) => item.is_correct !== true);
   const repairText = repairs.length > 0
     ? repairs.map((item) => (text(item.prompt) + " " + text(item.explanation)).trim()).join("\n")
     : "Your diagnostic was mostly secure, so this lesson widens out to the full sub-unit.";
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
+  const code = lessonCode(lesson);
+  const workedExample = scaffoldWorkedExample(lesson);
   return {
     title,
-    intro: lessonCode(lesson) === "F1_L1" ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
+    intro: code === "F1_L1" ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
     teaching_focus: dedupeText([...repairs.map((item) => text(item.teaching_focus)).filter(Boolean), ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean), ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean), ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean), ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean), "Every measurement has two parts: a number and a unit.", "The unit tells what physical quantity the number belongs to.", "SI units are shared standards, so measurements can be compared anywhere.", "Prefixes such as kilo-, centi-, and milli- create larger or smaller versions of the same base unit.", "Convert by replacing the prefixed unit with its value in the base unit.", "Never compare or combine measurements until the units match."]),
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     sections: [
       { heading: "Fix these ideas", body: repairText },
-      { heading: "Core idea", body: lessonCode(lesson) === "F1_L1" ? "A scientific measurement only makes sense when the number, the unit, and the quantity stay together.\n\nA bare number does not tell the full story in physics. 5 could mean 5 metres, 5 seconds, or 5 kilograms. The unit gives the number meaning, and SI units make that meaning standard everywhere." : "Use the main rule from this lesson before you calculate or classify the quantity." },
-      { heading: "Think of it like this", body: lessonCode(lesson) === "F1_L1" ? (analogyText || "Units work like money. One dollar, one cent, and one thousand dollars are all money, but they are not the same size. Prefixes do the same job for measurements: kilo- makes a larger unit, while centi- and milli- make smaller sub-units.") : (analogyText || "Use the shared idea from this lesson to decide what the quantity means before you answer.") },
-      { heading: "Worked example", body: lessonCode(lesson) === "F1_L1" ? "Question: Convert 2.5 km to m. Then convert 35 cm to m." : "Question: Use the main idea from this lesson to solve a similar problem.", worked_example: lessonCode(lesson) === "F1_L1" ? { prompt: "How do we solve this step by step?", steps: ["Identify the prefix first. kilo- means 1000 times the base unit, while centi- means 1/100 of the base unit.", "Replace the prefixed unit with the base-unit relationship: 1 km = 1000 m and 1 cm = 0.01 m.", "Do the number change carefully: 2.5 x 1000 = 2500 and 35 x 0.01 = 0.35.", "Write each new value with the new unit before you compare or combine anything."], answer: "2.5 km = 2500 m and 35 cm = 0.35 m" } : { prompt: "What should you identify first?", steps: ["Name the quantity or idea being tested.", "Match it to the correct rule, unit, or relationship.", "Work step by step before choosing the answer."], answer: "Use the lesson idea first, then calculate or classify carefully." } },
+      { heading: "Core idea", body: code === "F1_L1" ? "A scientific measurement only makes sense when the number, the unit, and the quantity stay together.\n\nA bare number does not tell the full story in physics. 5 could mean 5 metres, 5 seconds, or 5 kilograms. The unit gives the number meaning, and SI units make that meaning standard everywhere." : "Use the main rule from this lesson before you calculate or classify the quantity." },
+      { heading: "Think of it like this", body: code === "F1_L1" ? (analogyText || "Units work like money. One dollar, one cent, and one thousand dollars are all money, but they are not the same size. Prefixes do the same job for measurements: kilo- makes a larger unit, while centi- and milli- make smaller sub-units.") : (analogyText || "Use the shared idea from this lesson to decide what the quantity means before you answer.") },
+      { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
     ],
     review_refs: reviewRefs(lesson),
   };
