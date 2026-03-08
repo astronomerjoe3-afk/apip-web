@@ -613,7 +613,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
   return {
     title,
-    intro: "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work.",
+    intro: "",
     teaching_focus: dedupeText([...repairs.map((item) => text(item.teaching_focus)).filter(Boolean), ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean), ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean), ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean), ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean), "Every measurement has two parts: a number and a unit.", "The unit tells what physical quantity the number belongs to.", "SI units are shared standards, so measurements can be compared anywhere.", "Prefixes such as kilo-, centi-, and milli- create larger or smaller versions of the same base unit.", "Convert by replacing the prefixed unit with its value in the base unit.", "Never compare or combine measurements until the units match."]),
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     sections: [
