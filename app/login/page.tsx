@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { auth, firebaseConfigured } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
@@ -22,7 +22,9 @@ export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [busy, setBusy] = useState<boolean>(false);
+  const [resetBusy, setResetBusy] = useState<boolean>(false);
   const [err, setErr] = useState<string | null>(null);
+  const [resetMessage, setResetMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (loading || !user) {
@@ -42,6 +44,7 @@ export default function LoginPage() {
   async function handleLogin(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     setErr(null);
+    setResetMessage(null);
 
     if (!firebaseConfigured) {
       setErr("Sign-in is not configured on this app instance yet.");
@@ -66,6 +69,33 @@ export default function LoginPage() {
       setErr(errorMessage(error));
     } finally {
       setBusy(false);
+    }
+  }
+
+  async function handlePasswordReset(): Promise<void> {
+    setErr(null);
+    setResetMessage(null);
+
+    if (!firebaseConfigured) {
+      setErr("Password reset is not configured on this app instance yet.");
+      return;
+    }
+
+    if (!email.trim()) {
+      setErr("Enter your email address first, then choose Forgot password.");
+      return;
+    }
+
+    setResetBusy(true);
+    try {
+      await sendPasswordResetEmail(auth, email.trim(), {
+        url: `${window.location.origin}/login`,
+      });
+      setResetMessage("Password reset email sent. Check your inbox and spam folder.");
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+    } finally {
+      setResetBusy(false);
     }
   }
 
@@ -99,6 +129,25 @@ export default function LoginPage() {
         </label>
 
         {err ? <p style={{ color: "crimson", margin: 0 }}>{err}</p> : null}
+        {resetMessage ? (
+          <p style={{ color: "#1f5f3a", margin: 0 }}>{resetMessage}</p>
+        ) : null}
+
+        <button
+          type="button"
+          onClick={() => void handlePasswordReset()}
+          disabled={busy || resetBusy}
+          style={{
+            padding: 0,
+            border: "none",
+            background: "transparent",
+            color: "#0b3b76",
+            textAlign: "left",
+            cursor: busy || resetBusy ? "default" : "pointer",
+          }}
+        >
+          {resetBusy ? "Sending reset link..." : "Forgot password?"}
+        </button>
 
         <button disabled={busy} style={{ padding: 12 }}>
           {busy ? "Signing in..." : "Sign in"}
