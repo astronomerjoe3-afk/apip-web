@@ -549,8 +549,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seenSources = new Set<string>();
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)];
-  const variants = masteryVariantsFromPool(fallback, lessonCode(lesson));
-  const ordered = generated.length > 0 ? [...generated, ...fallback, ...variants] : [...fallback, ...variants];
+  const ordered = generated.length > 0 ? [...generated, ...fallback] : [...fallback];
   return ordered.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
