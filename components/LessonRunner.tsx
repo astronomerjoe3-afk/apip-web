@@ -881,10 +881,27 @@ export default function LessonRunner({
   const renderMastery = () => {
     const payload = runner.stage_payload as MasteryStagePayload;
     const hasAllAnswers = payload.questions.every((question) => Boolean((answers[question.id] ?? "").trim()));
+    const masteryPercentForDisplay =
+      typeof payload.result?.percent === "number"
+        ? payload.result.percent
+        : typeof runner.progress_summary?.mastery_percent === "number"
+          ? runner.progress_summary.mastery_percent
+          : null;
 
-    if (payload.submitted && payload.result) {
-      const passed = payload.result.passed;
+    if ((payload.submitted || runner.lesson_status === "completed") && typeof masteryPercentForDisplay === "number") {
       const threshold = payload.passing_percent ?? 80;
+      const masteryPercent =
+        typeof payload.result?.percent === "number"
+          ? payload.result.percent
+          : typeof runner.progress_summary?.mastery_percent === "number"
+            ? runner.progress_summary.mastery_percent
+            : null;
+      const passed =
+        typeof payload.result?.passed === "boolean"
+          ? payload.result.passed
+          : typeof masteryPercent === "number"
+            ? masteryPercent >= threshold
+            : false;
 
       return (
         <div className="space-y-4">
@@ -897,7 +914,7 @@ export default function LessonRunner({
               {passed ? "Lesson mastered" : "Almost there"}
             </h3>
             <p className="mt-2 text-slate-700">
-              You scored {payload.result.percent}%. The target for mastery is {threshold}%.
+              Your mastery score is {masteryPercent}%. The target for mastery is {threshold}%.
             </p>
           </div>
 
