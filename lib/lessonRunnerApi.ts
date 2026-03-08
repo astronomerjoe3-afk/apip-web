@@ -530,16 +530,34 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
   );
 }
 
+function masterySourceKey(item: UnknownRecord): string {
+  const prompt = text(item.prompt)
+    .replace(/^(Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
+    .trim();
+  const choices = asList(item.choices)
+    .map((choice) => normalizeOpenAnswer(choice))
+    .filter(Boolean)
+    .sort();
+  const accepted = shortAnswerAccepted(item)
+    .map((answer) => compactOpenAnswer(answer))
+    .filter(Boolean)
+    .sort();
+  return [normalizePromptKey(prompt), choices.join("|"), accepted.join("|")].join("::");
+}
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
-  const seen = new Set<string>();
+  const seenIds = new Set<string>();
+  const seenSources = new Set<string>();
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)];
   const variants = masteryVariantsFromPool(fallback, lessonCode(lesson));
   const ordered = generated.length > 0 ? [...generated, ...fallback, ...variants] : [...fallback, ...variants];
   return ordered.filter((item) => {
-    const id = text(asRecord(item).id);
-    if (!id || seen.has(id)) return false;
-    seen.add(id);
+    const record = asRecord(item);
+    const id = text(record.id);
+    const sourceKey = masterySourceKey(record);
+    if (!id || seenIds.has(id) || (sourceKey && seenSources.has(sourceKey))) return false;
+    seenIds.add(id);
+    if (sourceKey) seenSources.add(sourceKey);
     return true;
   });
 }
