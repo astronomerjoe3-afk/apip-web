@@ -584,8 +584,8 @@ export default function LessonRunner({
 
           {payload.teaching_focus?.length ? (
             <div className="mt-4 rounded-xl bg-slate-50 p-4">
-              <p className="font-medium text-slate-900">Whole lesson map</p>
-              <p className="mt-2 text-slate-700 whitespace-pre-line">{payload.teaching_focus.slice(0, 4).join("\n")}</p>
+              <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
+              <p className="mt-2 text-slate-700 whitespace-pre-line">{payload.teaching_focus.slice(0, 6).join("\n")}</p>
             </div>
           ) : null}
 
@@ -628,6 +628,8 @@ export default function LessonRunner({
           </div>
         ))}
 
+
+        <ReviewReferences refs={payload.review_refs} />
 
         <PrimaryButton
           onClick={() =>
@@ -1050,6 +1052,7 @@ export default function LessonRunner({
     </div>
   );
 }
+
 
 
 

@@ -467,7 +467,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
       { heading: "Think of it like this", body: analogyText || "Units work like shared labels for value: they tell everyone what the number means." },
       { heading: "Worked example", body: "Convert before comparing: 2.5 km = 2500 m and 35 cm = 0.35 m.", worked_example: { prompt: "Convert first, then compare or combine values.", steps: ["kilo means 1000 times the base unit", "centi means one hundredth of the base unit", "match the unit before you judge the measurement"], answer: "2.5 km = 2500 m and 35 cm = 0.35 m" } },
     ],
-    review_refs: [],
+    review_refs: reviewRefs(lesson),
   };
 }
 
@@ -850,4 +850,5 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
 
