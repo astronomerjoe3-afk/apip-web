@@ -309,6 +309,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
 
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [reflectionText, setReflectionText] = useState("");
+  const [resumeChoiceMade, setResumeChoiceMade] = useState(false);
 
   const loadRunner = useCallback(async () => {
     setIsLoading(true);
@@ -346,6 +347,10 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
     void loadRunner();
   }, [loadRunner]);
 
+  useEffect(() => {
+    setResumeChoiceMade(false);
+  }, [lessonId, moduleId]);
+
   const restartMission = useCallback(async () => {
     setIsSubmitting(true);
     setError(null);
@@ -354,6 +359,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
       await restartLessonProgress(moduleId, lessonId);
       setAnswers({});
       setReflectionText("");
+      setResumeChoiceMade(false);
       await loadRunner();
     } catch (err) {
       console.error(err);
@@ -390,8 +396,15 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
   }, []);
 
+  const showResumeChoice = useMemo(() => {
+    if (!runner || resumeChoiceMade) return false;
+    const payload = runner.stage_payload as Partial<MasteryStagePayload>;
+    return runner.active_stage === "mastery" && runner.lesson_status !== "not_started" && payload.submitted !== true;
+  }, [resumeChoiceMade, runner]);
+
   const stageTitle = useMemo(() => {
     if (!runner) return "";
+    if (showResumeChoice) return "Choose how to continue";
     switch (runner.active_stage) {
       case "diagnostic":
         return "Check what you already know";
@@ -408,11 +421,12 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
       default:
         return "";
     }
-  }, [runner]);
+  }, [runner, showResumeChoice]);
 
   const showRestartAction = useMemo(() => {
-    return runner ? runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic" : false;
-  }, [runner]);
+    if (!runner || showResumeChoice) return false;
+    return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic";
+  }, [runner, showResumeChoice]);
 
   const restartCopy = useMemo(() => {
     if (!runner) return "";
@@ -423,6 +437,9 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
 
   const stageSubtitle = useMemo(() => {
     if (!runner) return "";
+    if (showResumeChoice) {
+      return "We found saved progress for this mission. You can continue from where you stopped or begin again from the first learning step.";
+    }
     switch (runner.active_stage) {
       case "diagnostic":
         return "Answer a few short questions so this lesson can focus on what you need most.";
@@ -439,7 +456,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
       default:
         return "";
     }
-  }, [runner]);
+  }, [runner, showResumeChoice]);
 
   if (isLoading) {
     return (
@@ -1020,7 +1037,17 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
         </div>
       ) : null}
 
-      {renderStage()}
+      {showResumeChoice ? (
+        <div className="rounded-3xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
+          <p className="text-sm font-medium uppercase tracking-[0.18em] text-sky-700">Saved progress found</p>
+          <h3 className="mt-3 text-2xl font-semibold text-slate-900">Continue this mission or start again</h3>
+          <p className="mt-3 max-w-3xl text-slate-700">This lesson has saved progress, so you were taken back to your latest step. If you want the full learning journey from the diagnostic onward, start again from the beginning.</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue where I stopped</PrimaryButton>
+            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start from the beginning</SecondaryButton>
+          </div>
+        </div>
+      ) : renderStage()}
     </div>
   );
 }
