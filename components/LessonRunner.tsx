@@ -1020,11 +1020,13 @@ export default function LessonRunner({
   return (
     <div className="space-y-6">
 
-      <StageHeader
-        eyebrow={runner.lesson_title}
-        title={stageTitle}
-        subtitle={stageSubtitle}
-      />
+      {!showResumeChoice ? (
+        <StageHeader
+          eyebrow={runner.lesson_title}
+          title={stageTitle}
+          subtitle={stageSubtitle}
+        />
+      ) : null}
 
       {showRestartAction ? (
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
