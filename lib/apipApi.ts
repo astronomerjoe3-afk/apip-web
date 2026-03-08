@@ -6,17 +6,12 @@ type JsonPrimitive = string | number | boolean | null;
 type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
 type JsonObject = { [key: string]: JsonValue };
 
+const DEFAULT_API_BASE_URL = "https://api.cognispark.tech";
+
 function resolveApiBaseUrl(): string {
   const primary = (process.env.NEXT_PUBLIC_APIP_API_BASE_URL || "").trim();
   const fallback = (process.env.NEXT_PUBLIC_API_BASE_URL || "").trim();
-  const base = primary || fallback;
-
-  if (!base) {
-    throw new Error(
-      "API base URL is not configured. Set NEXT_PUBLIC_APIP_API_BASE_URL or NEXT_PUBLIC_API_BASE_URL in .env.local.",
-    );
-  }
-
+  const base = primary || fallback || DEFAULT_API_BASE_URL;
   return base.replace(/\/+$/, "");
 }
 

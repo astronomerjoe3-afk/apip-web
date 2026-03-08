@@ -1,6 +1,6 @@
 import { auth } from "./firebase";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL!;
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.cognispark.tech").replace(/\/+$/, "");
 
 export async function apiFetch(path: string, init: RequestInit = {}) {
   const user = auth.currentUser;
@@ -18,3 +18,4 @@ export async function apiFetch(path: string, init: RequestInit = {}) {
   }
   return res;
 }
+

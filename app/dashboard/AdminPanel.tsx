@@ -77,7 +77,7 @@ async function copyToClipboard(text: string): Promise<void> {
 }
 
 function apiBase(): string {
-  return (process.env.NEXT_PUBLIC_API_BASE_URL || "").trim();
+  return (process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.cognispark.tech").trim();
 }
 
 export default function AdminPanel() {
@@ -333,7 +333,7 @@ export default function AdminPanel() {
           <ul style={{ marginTop: 6 }}>
             <li>
               We do <strong>not</strong> display your token by default
-              (security). Use “Copy admin ID token”.
+              (security). Use "Copy admin ID token".
             </li>
             <li>
               API keys are only shown <strong>once</strong> immediately after creation.
@@ -519,7 +519,7 @@ export default function AdminPanel() {
               <div>
                 <strong>ONE-TIME API KEY</strong>
                 <div style={{ fontSize: 13, color: "#555" }}>
-                  Copy now — it will not be shown again. Key ID:{" "}
+                  Copy now - it will not be shown again. Key ID:{" "}
                   <code>{createdKeyId || "(unknown)"}</code>
                 </div>
               </div>
@@ -554,7 +554,7 @@ export default function AdminPanel() {
         >
           <h3 style={{ margin: 0 }}>Keys</h3>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            {keysLoading ? <span style={{ fontSize: 13 }}>Loading…</span> : null}
+            {keysLoading ? <span style={{ fontSize: 13 }}>Loading...</span> : null}
             <button onClick={() => void loadKeys()} disabled={!token}>
               Reload
             </button>
@@ -589,7 +589,7 @@ export default function AdminPanel() {
               </option>
               {keys.map((keyItem) => (
                 <option key={keyItem.key_id} value={keyItem.key_id}>
-                  {keyItem.key_id} — {keyItem.label || "(no label)"}{" "}
+                  {keyItem.key_id} - {keyItem.label || "(no label)"}{" "}
                   {keyItem.active ? "" : "[disabled]"}
                 </option>
               ))}
@@ -639,3 +639,4 @@ export default function AdminPanel() {
     </div>
   );
 }
+

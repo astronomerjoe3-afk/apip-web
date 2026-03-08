@@ -1,5 +1,7 @@
 // lib/apip.ts
 
+const DEFAULT_API_BASE_URL = "https://api.cognispark.tech";
+
 export type QueryParamValue = string | number | boolean | null | undefined;
 export type QueryParams = Record<string, QueryParamValue> | URLSearchParams;
 
@@ -37,7 +39,7 @@ export class ApiError extends Error {
 function envBase(): string {
   const preferred = process.env.NEXT_PUBLIC_API_BASE_URL;
   const fallback = process.env.NEXT_PUBLIC_API_BASE;
-  const base = (preferred || fallback || "").trim();
+  const base = (preferred || fallback || DEFAULT_API_BASE_URL).trim();
   return base.replace(/\/+$/, "");
 }
 
