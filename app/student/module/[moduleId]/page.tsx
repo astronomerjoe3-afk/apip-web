@@ -264,9 +264,9 @@ export default function StudentModulePage() {
             }}
           >
             <span style={{ fontWeight: 800 }}>{progressLabel}</span>
-            <span style={{ opacity: 0.8 }}>•</span>
+            <span style={{ opacity: 0.8 }}>|</span>
             <span style={{ opacity: 0.85 }}>
-              Follow the mission steps. No browsing.
+              Work through each step and take your time.
             </span>
           </div>
         ) : null}
@@ -304,12 +304,7 @@ export default function StudentModulePage() {
         ) : activeLesson ? (
           <LessonRunner
             moduleId={moduleId}
-            lesson={activeLesson}
-            misconceptionAllowlist={
-              moduleMeta?.misconception_tag_allowlist || []
-            }
-            onRequestNextLesson={goNext}
-            onRefreshStatus={() => loadModuleState(true)}
+            lessonId={normalizeLessonId(activeLesson.lesson_id || activeLesson.id)}
           />
         ) : (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
@@ -340,7 +335,7 @@ export default function StudentModulePage() {
               fontWeight: 800,
             }}
           >
-            ← Back
+            Back
           </button>
 
           <div style={{ opacity: 0.8, textAlign: "center" }}>
@@ -358,7 +353,7 @@ export default function StudentModulePage() {
               fontWeight: 900,
             }}
           >
-            Continue →
+            Continue
           </button>
         </div>
       ) : null}

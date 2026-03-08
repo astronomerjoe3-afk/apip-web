@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { getLessonRunner, postProgressEvent } from "@/lib/apipApi";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { getLessonRunner, postProgressEvent } from "@/lib/lessonRunnerApi";
 
 type StageName =
   | "diagnostic"
@@ -128,6 +128,7 @@ type MasteryStagePayload = {
   feedback?: MasteryFeedbackItem[];
   result?: MasteryResult;
   review_refs?: ReviewReference[];
+  review_requested?: boolean;
 };
 
 type RunnerResponse = {
@@ -290,10 +291,10 @@ function ReviewReferences({ refs }: { refs?: ReviewReference[] }) {
 
   return (
     <div className="rounded-2xl border bg-slate-50 p-4">
-      <h4 className="font-semibold text-slate-900">Review this part again</h4>
-      <ul className="mt-3 space-y-2 text-slate-700">
+      <h4 className="font-semibold text-slate-900">Review these lesson ideas</h4>
+      <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
         {refs.map((ref) => (
-          <li key={ref.id}>• {ref.label}</li>
+          <li key={ref.id}>{ref.label}</li>
         ))}
       </ul>
     </div>
@@ -400,7 +401,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
       case "scaffold":
         return "This guided explanation helps you repair mistakes and understand the concept clearly.";
       case "concept_gate":
-        return "Let’s make sure the key idea is clear before moving on.";
+        return "Let's make sure the key idea is clear before moving on.";
       case "simulation":
         return "Explore the idea and notice what changes when you test it.";
       case "reflection":
@@ -438,7 +439,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
         <div className="space-y-4">
           <div className="rounded-2xl border bg-white p-5 shadow-sm">
             <h3 className="text-lg font-semibold text-slate-900">
-              Let’s review your answers
+              Let's review your answers
             </h3>
             <p className="mt-2 text-slate-700">
               You will see what was right, what needs fixing, and why.
@@ -535,9 +536,9 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
           {payload.teaching_focus?.length ? (
             <div className="mt-4">
               <h4 className="font-semibold text-slate-900">What to pay attention to</h4>
-              <ul className="mt-2 space-y-1 text-slate-700">
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-700">
                 {payload.teaching_focus.map((item) => (
-                  <li key={item}>• {item}</li>
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
             </div>
@@ -614,7 +615,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
               <h3 className="text-lg font-semibold text-slate-900">
                 {payload.passed
                   ? "You are ready to move on"
-                  : "Let’s strengthen the idea a little more"}
+                  : "Let's strengthen the idea a little more"}
               </h3>
               <p className="mt-2 text-slate-700">
                 {payload.passed
@@ -741,7 +742,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
           </div>
         ) : (
           <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">
-            Simulation area placeholder
+            The interactive activity will appear here when it is ready.
           </div>
         )}
 
@@ -770,7 +771,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
               Good work
             </h3>
             <p className="mt-2 text-slate-700">
-              Your explanation has been added to your lesson progress. Now you can move to the final mastery check.
+              Your explanation is ready. Next comes the final mastery check.
             </p>
           </div>
 
@@ -805,9 +806,9 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
           <p className="mt-2 text-slate-700">{payload.prompt}</p>
 
           {payload.guidance?.length ? (
-            <ul className="mt-4 space-y-1 text-slate-700">
+            <ul className="mt-4 list-disc space-y-1 pl-5 text-slate-700">
               {payload.guidance.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           ) : null}
@@ -870,7 +871,7 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
 
           {passed ? null : (
             <>
-              <ReviewReferences refs={payload.review_refs} />
+              {payload.review_requested ? <ReviewReferences refs={payload.review_refs} /> : null}
               <div className="flex flex-wrap gap-3">
                 <PrimaryButton
                   onClick={() =>
@@ -889,9 +890,9 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
                       from_stage: "mastery",
                     })
                   }
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || payload.review_requested === true}
                 >
-                  Review the lesson first
+                  {payload.review_requested ? "Review notes are below" : "Review the lesson first"}
                 </SecondaryButton>
               </div>
             </>
