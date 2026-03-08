@@ -34,7 +34,7 @@ function buildApiUrl(path: string): string {
 }
 
 async function getBearerToken(): Promise<string | null> {
-  const user = auth.currentUser;
+  const user = auth?.currentUser ?? null;
   if (!user) return null;
   return user.getIdToken();
 }
