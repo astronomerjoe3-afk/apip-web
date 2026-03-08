@@ -49,6 +49,21 @@ type DiagnosticStagePayload = {
   feedback?: DiagnosticFeedbackItem[];
 };
 
+type ScaffoldReferenceTable = {
+  title: string;
+  caption?: string;
+  columns: string[];
+  rows: string[][];
+};
+
+type ScaffoldMediaCard = {
+  kind?: "visual" | "video";
+  title: string;
+  caption: string;
+  highlights?: string[];
+  embed_url?: string;
+};
+
 type ScaffoldSection = {
   heading: string;
   body: string;
@@ -66,6 +81,8 @@ type ScaffoldStagePayload = {
   intro?: string;
   teaching_focus?: string[];
   misconception_targets?: string[];
+  reference_tables?: ScaffoldReferenceTable[];
+  media_cards?: ScaffoldMediaCard[];
   sections: ScaffoldSection[];
   review_refs?: ReviewReference[];
 };
@@ -459,7 +476,7 @@ export default function LessonRunner({
       case "diagnostic":
         return "A few quick questions first.";
       case "scaffold":
-        return "A short lesson covering the whole sub-unit.";
+        return "Study the key ideas for this sub-unit.";
       case "concept_gate":
         return "One quick check before the activity.";
       case "simulation":
@@ -568,10 +585,10 @@ export default function LessonRunner({
     return (
       <div className="space-y-4">
         <div className="rounded-2xl border bg-white p-5 shadow-sm">
-          {payload.intro ? <p className="mt-2 text-slate-700">{payload.intro}</p> : null}
+          {payload.intro ? <p className="text-slate-700">{payload.intro}</p> : null}
 
           {payload.teaching_focus?.length ? (
-            <div className="mt-4 rounded-xl bg-slate-50 p-4">
+            <div className={`${payload.intro ? "mt-4" : ""} rounded-xl bg-slate-50 p-4`}>
               <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-700">
                 {payload.teaching_focus.slice(0, 6).map((item) => (
@@ -580,13 +597,73 @@ export default function LessonRunner({
               </ul>
             </div>
           ) : null}
-
         </div>
+
+        {payload.reference_tables?.length ? (
+          <div className="grid gap-4 xl:grid-cols-2">
+            {payload.reference_tables.map((table) => (
+              <div key={table.title} className="overflow-hidden rounded-2xl border bg-white shadow-sm">
+                <div className="border-b bg-slate-50 p-5">
+                  <h4 className="text-lg font-semibold text-slate-900">{table.title}</h4>
+                  {table.caption ? <p className="mt-2 text-sm text-slate-600">{table.caption}</p> : null}
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full text-left text-sm text-slate-700">
+                    <thead className="bg-white text-slate-500">
+                      <tr>
+                        {table.columns.map((column) => (
+                          <th key={column} className="border-b px-4 py-3 font-semibold">{column}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {table.rows.map((row, rowIndex) => (
+                        <tr key={`${table.title}-${rowIndex}`} className="align-top even:bg-slate-50/70">
+                          {row.map((cell, cellIndex) => (
+                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-4 py-3">{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        {payload.media_cards?.length ? (
+          <div className="grid gap-4 md:grid-cols-2">
+            {payload.media_cards.map((card) => (
+              <div key={`${card.kind ?? "visual"}-${card.title}`} className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-5 shadow-sm">
+                <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
+                  {card.kind === "video" ? "Video support" : "Visual support"}
+                </span>
+                <h4 className="mt-4 text-lg font-semibold text-slate-900">{card.title}</h4>
+                <p className="mt-2 text-slate-700">{card.caption}</p>
+
+                {card.embed_url ? (
+                  <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
+                    <iframe src={card.embed_url} title={card.title} className="h-64 w-full" allowFullScreen />
+                  </div>
+                ) : null}
+
+                {card.highlights?.length ? (
+                  <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                    {card.highlights.map((item) => (
+                      <li key={item} className="rounded-xl bg-white/80 px-3 py-2 shadow-sm ring-1 ring-sky-100">{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            ))}
+          </div>
+        ) : null}
 
         {payload.sections.map((section, index) => (
           <div key={`${section.heading}-${index}`} className="rounded-2xl border bg-white p-5 shadow-sm">
             <h4 className="text-lg font-semibold text-slate-900">{section.heading}</h4>
-            <p className="mt-2 text-slate-700 whitespace-pre-line">{section.body}</p>
+            <p className="mt-2 whitespace-pre-line text-slate-700">{section.body}</p>
 
             {section.analogy ? (
               <div className="mt-4 rounded-xl bg-slate-50 p-4">
@@ -607,7 +684,7 @@ export default function LessonRunner({
                   ))}
                 </ol>
                 <p className="mt-3 text-slate-800">
-                  <span className="font-medium">Answer:</span>{" "}
+                  <span className="font-medium">Final answer:</span>{" "}
                   {section.worked_example.answer}
                 </p>
               </div>
@@ -621,8 +698,6 @@ export default function LessonRunner({
             ) : null}
           </div>
         ))}
-
-
 
         <PrimaryButton
           onClick={() =>

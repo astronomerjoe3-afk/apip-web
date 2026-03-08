@@ -604,6 +604,27 @@ function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Pro
   } as JsonObject);
 }
 
+function scaffoldFocusExtras(code: string): string[] {
+  switch (code) {
+    case "F1_L1":
+      return [
+        "A quantity names what is being measured, while a unit names the agreed size used to measure it.",
+        "Common classroom sub-units include cm, mm, g, mg, ms, and mL.",
+        "Pick a unit size that matches the object so the number stays readable.",
+        "Precision depends on the smallest division the tool can reliably show.",
+      ];
+    case "F1_L2":
+      return [
+        "Scalars describe how much only.",
+        "Vectors describe how much and which way.",
+        "Direction words such as north, east, upward, and backward are strong vector clues.",
+        "Speed and velocity are related, but only velocity includes direction.",
+      ];
+    default:
+      return [];
+  }
+}
+
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const code = lessonCode(lesson);
   const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
@@ -611,35 +632,35 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   switch (code) {
     case "F1_L1":
       return {
-        body: "Try this question step by step.",
+        body: "Start with a real conversion question and solve it step by step.",
         worked_example: {
-          prompt: "Convert 2.5 km to m. Then convert 35 cm to m.",
+          prompt: "A hiking trail is 2.5 km long, and a wire is 35 cm long. Write both lengths in metres.",
           steps: [
-            "Identify the prefix first. kilo- means 1000 times the base unit, while centi- means 1/100 of the base unit.",
-            "Replace the prefixed unit with the base-unit relationship: 1 km = 1000 m and 1 cm = 0.01 m.",
-            "Do the number change carefully: 2.5 x 1000 = 2500 and 35 x 0.01 = 0.35.",
-            "Write each new value with the new unit before you compare or combine anything.",
+            "Name the base unit you want at the end. Here the target unit is the metre.",
+            "Replace each prefix with its scale: 1 km = 1000 m and 1 cm = 0.01 m.",
+            "Convert one value at a time: 2.5 x 1000 = 2500 and 35 x 0.01 = 0.35.",
+            "Rewrite the two answers with the same unit so they can now be compared safely.",
           ],
           answer: "2.5 km = 2500 m and 35 cm = 0.35 m",
         },
       };
     case "F1_L2":
       return {
-        body: "Try this question step by step.",
+        body: "Start with a real classification question and solve it step by step.",
         worked_example: {
-          prompt: "A student says '12 m east' is a scalar because it only has one number. Is the student correct?",
+          prompt: "A delivery robot moves 12 m east. Is that description scalar or vector?",
           steps: [
-            "Look for the two things that matter in this lesson: magnitude and direction.",
-            "The number 12 m gives the magnitude, and east gives the direction.",
-            "A quantity with both magnitude and direction is a vector, not a scalar.",
-            "So the student is not correct, because direction changes the classification.",
+            "Look for magnitude first. The 12 m tells you the size of the motion.",
+            "Look for direction next. The word east gives a direction.",
+            "A quantity that has both magnitude and direction is a vector.",
+            "So the description is a vector, not a scalar.",
           ],
-          answer: "No. '12 m east' is a vector because it has both magnitude and direction.",
+          answer: "It is a vector because it includes both magnitude and direction.",
         },
       };
     case "F1_L3":
       return {
-        body: "Try this question step by step.",
+        body: "Start with a real precision question and solve it step by step.",
         worked_example: {
           prompt: "A ruler has 1 mm divisions and a line reads 6.4 cm. What uncertainty is reasonable to report?",
           steps: [
@@ -648,54 +669,54 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             "Half of 1 mm is 0.5 mm, which is the same as 0.05 cm.",
             "Attach that uncertainty to the measured value instead of pretending the ruler is more precise than it is.",
           ],
-          answer: "A reasonable report is 6.4 cm +/- 0.05 cm.",
+          answer: "6.4 cm +/- 0.05 cm is a reasonable report.",
         },
       };
     case "F1_L4":
       return {
-        body: "Try this question step by step.",
+        body: "Start with a real significant-figures question and solve it step by step.",
         worked_example: {
-          prompt: "Round 12.349 to 3 significant figures.",
+          prompt: "A measurement is 4.5607 g. Write it to 3 significant figures.",
           steps: [
-            "Keep the first three significant figures: 1, 2, and 3.",
-            "Look at the next digit, which is 4.",
-            "Because 4 is less than 5, the third significant figure stays the same.",
-            "Write the result as 12.3, which has 3 significant figures.",
+            "Count significant figures from the first non-zero digit: 4, 5, and 6 are the first three.",
+            "Look at the next digit, which is 0, to decide whether to round the third figure up or keep it.",
+            "Because the next digit is less than 5, keep the 6 unchanged.",
+            "Write the answer as 4.56 g.",
           ],
-          answer: "12.349 rounded to 3 significant figures is 12.3.",
+          answer: "4.56 g",
         },
       };
     case "F1_L5":
       return {
-        body: "Try this question step by step.",
+        body: "Start with a real density question and solve it step by step.",
         worked_example: {
-          prompt: "A block has mass 200 g and volume 50 cm^3. What is its density?",
+          prompt: "A block has mass 120 g and volume 40 cm^3. What is its density?",
           steps: [
-            "Recall the definition first: density = mass divided by volume.",
-            "Substitute the values into the formula: density = 200 g / 50 cm^3.",
-            "Do the calculation carefully: 200 / 50 = 4.",
-            "Keep the correct unit with the result, because density must include both mass and volume units.",
+            "Start with the density relationship: density = mass / volume.",
+            "Substitute the values carefully: 120 g / 40 cm^3.",
+            "Carry out the division: 120 / 40 = 3.",
+            "Keep the compound unit with the answer.",
           ],
-          answer: "The density is 4 g/cm^3.",
+          answer: "3 g/cm^3",
         },
       };
     case "F1_L6":
       return {
-        body: "Try this question step by step.",
+        body: "Start with a real measurement-quality question and solve it step by step.",
         worked_example: {
-          prompt: "Four readings are 28.1, 28.2, 28.1, and 28.2 deg C, but the true value is 30.0 deg C. Are the readings precise, accurate, or both?",
+          prompt: "Two scales give 50.0 g and 49.9 g for the same object. Which reading is more precise?",
           steps: [
-            "Check how close the readings are to each other first.",
-            "These readings are tightly grouped, so they are precise.",
-            "Now compare the group to the true value of 30.0 deg C.",
-            "Because the whole group is far from the true value, the readings are not accurate.",
+            "Look at the resolution each reading suggests. A value written to 0.1 g is more precise than one written to 1 g.",
+            "Precision is about how finely the tool can distinguish values, not whether the reading is exactly true.",
+            "A reading like 49.9 g shows finer resolution than a reading rounded to the nearest whole gram.",
+            "So the scale reporting to 0.1 g is the more precise one.",
           ],
-          answer: "The readings are precise but not accurate.",
+          answer: "The 49.9 g reading is more precise because it shows finer resolution.",
         },
       };
     default:
       return {
-        body: "Try this question step by step.",
+        body: "Start with a real question and solve it step by step.",
         worked_example: {
           prompt: firstPrompt,
           steps: [
@@ -709,6 +730,136 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
   }
 }
+
+function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
+  switch (lessonCode(lesson)) {
+    case "F1_L1":
+      return [
+        {
+          title: "Standard quantities, units, and common sub-units",
+          caption: "Use this as a quick reference while learning the language of measurement.",
+          columns: ["Quantity", "Standard unit", "Common sub-units or related units"],
+          rows: [
+            ["Length", "metre (m)", "km, cm, mm"],
+            ["Mass", "kilogram (kg)", "g, mg"],
+            ["Time", "second (s)", "ms, min"],
+            ["Temperature", "kelvin (K)", "degree Celsius in everyday use"],
+            ["Electric current", "ampere (A)", "mA"],
+            ["Volume", "cubic metre (m^3)", "L, mL, cm^3"],
+          ],
+        },
+        {
+          title: "Prefix ladder",
+          caption: "Move between unit sizes by replacing the prefix with its value in the base unit.",
+          columns: ["Prefix", "Scale", "Example"],
+          rows: [
+            ["kilo-", "1000 times base unit", "1 km = 1000 m"],
+            ["centi-", "1/100 of base unit", "1 cm = 0.01 m"],
+            ["milli-", "1/1000 of base unit", "1 mm = 0.001 m"],
+          ],
+        },
+      ];
+    case "F1_L2":
+      return [
+        {
+          title: "Common scalar quantities",
+          caption: "Scalars tell how much only.",
+          columns: ["Scalar quantity", "Why it is scalar"],
+          rows: [
+            ["Distance", "No direction is required"],
+            ["Speed", "How fast only"],
+            ["Mass", "Amount of matter only"],
+            ["Time", "Duration only"],
+            ["Temperature", "Hotter or colder only"],
+            ["Energy", "Amount only"],
+          ],
+        },
+        {
+          title: "Common vector quantities",
+          caption: "Vectors tell how much and which way.",
+          columns: ["Vector quantity", "What makes it a vector"],
+          rows: [
+            ["Displacement", "Distance with direction"],
+            ["Velocity", "Speed with direction"],
+            ["Force", "Push or pull in a direction"],
+            ["Acceleration", "Change in velocity with direction"],
+            ["Weight", "Force acting downward"],
+            ["Momentum", "Motion with direction"],
+          ],
+        },
+      ];
+    default:
+      return [];
+  }
+}
+
+function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
+  switch (lessonCode(lesson)) {
+    case "F1_L1":
+      return [
+        {
+          kind: "visual",
+          title: "See the unit ladder",
+          caption: "Picture the unit sizes stacked before you convert.",
+          highlights: ["km -> m -> cm -> mm", "To a smaller unit: the number grows", "To a larger unit: the number shrinks"],
+        },
+        {
+          kind: "visual",
+          title: "See why the unit matters",
+          caption: "The same number can represent different quantities once the unit changes.",
+          highlights: ["5 m means a length", "5 s means a time", "5 kg means a mass"],
+        },
+      ];
+    case "F1_L2":
+      return [
+        {
+          kind: "visual",
+          title: "Picture an arrow on a map",
+          caption: "An arrow has a size and it points somewhere. That is the feel of a vector.",
+          highlights: ["Arrow length = magnitude", "Arrow direction = where it points", "Displacement and force behave like this"],
+        },
+        {
+          kind: "visual",
+          title: "Picture a thermometer reading",
+          caption: "A thermometer reading tells how much, but it does not point anywhere.",
+          highlights: ["Magnitude only", "No direction needed", "Temperature, mass, and time behave like this"],
+        },
+      ];
+    default:
+      return [];
+  }
+}
+
+function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
+  switch (lessonCode(lesson)) {
+    case "F1_L1":
+      return [
+        { heading: "Fix these ideas", body: repairText },
+        { heading: "Core idea", body: "A scientific measurement only makes sense when the quantity, the number, and the unit stay together. A bare number does not tell the full story in physics because 5 could mean 5 metres, 5 seconds, or 5 kilograms." },
+        { heading: "Quantities, units, and sub-units", body: "A quantity tells what you are measuring: length, mass, time, temperature, and so on. The unit tells the agreed size used to measure it. A sub-unit is a smaller version that helps when the object is small. Use metres for room length, centimetres for notebook width, and millimetres for coin thickness." },
+        { heading: "Choose units and tools wisely", body: "Pick a unit and a tool that match the scale of the job. A metre rule suits desk length, a balance suits mass, and a caliper helps with very small thicknesses because its finer divisions reduce uncertainty.", check_for_understanding: "Why is millimetre a better unit than metre for the thickness of a coin?" },
+        { heading: "Think of it like this", body: analogyText || "Units work like money. One dollar, one cent, and one thousand dollars are all money, but they are not the same size. Prefixes do the same job for measurements: kilo- makes a larger unit, while centi- and milli- make smaller sub-units." },
+        { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ];
+    case "F1_L2":
+      return [
+        { heading: "Fix these ideas", body: repairText },
+        { heading: "Core idea", body: "A scalar tells how much only. A vector tells how much and which way. That extra direction changes the meaning of the quantity, so distance and displacement are not interchangeable, and speed and velocity are not interchangeable either." },
+        { heading: "How to test any quantity", body: "Ask two questions. First: how much? Second: which way? If only the first question is needed, the quantity is scalar. If the second question is needed as well, the quantity is vector.", check_for_understanding: "Which single word would turn 15 m into a vector description?" },
+        { heading: "Think of it like this", body: analogyText || "A distance is like saying how many steps you walked. A displacement is like showing an arrow from start to finish. The arrow has both a size and a direction, so it behaves like a vector." },
+        { heading: "Common patterns to remember", body: "Distance, speed, mass, time, and temperature are usually scalar. Displacement, velocity, force, acceleration, and weight are vectors because they need direction." },
+        { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ];
+    default:
+      return [
+        { heading: "Fix these ideas", body: repairText },
+        { heading: "Core idea", body: "Use the main rule from this lesson before you calculate, classify, or compare anything." },
+        { heading: "Think of it like this", body: analogyText || "Use the shared idea from this lesson to decide what the quantity means before you answer." },
+        { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ];
+  }
+}
+
 function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: UnknownRecord[]): UnknownRecord {
   const repairs = feedback.filter((item) => item.is_correct !== true);
   const repairText = repairs.length > 0
@@ -720,14 +871,24 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   return {
     title,
     intro: code === "F1_L1" ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
-    teaching_focus: dedupeText([...repairs.map((item) => text(item.teaching_focus)).filter(Boolean), ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean), ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean), ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean), ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean), "Every measurement has two parts: a number and a unit.", "The unit tells what physical quantity the number belongs to.", "SI units are shared standards, so measurements can be compared anywhere.", "Prefixes such as kilo-, centi-, and milli- create larger or smaller versions of the same base unit.", "Convert by replacing the prefixed unit with its value in the base unit.", "Never compare or combine measurements until the units match."]),
+    teaching_focus: dedupeText([
+      ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
+      ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
+      ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
+      ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
+      ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean),
+      ...scaffoldFocusExtras(code),
+      "Every measurement has two parts: a number and a unit.",
+      "The unit tells what physical quantity the number belongs to.",
+      "SI units are shared standards, so measurements can be compared anywhere.",
+      "Prefixes such as kilo-, centi-, and milli- create larger or smaller versions of the same base unit.",
+      "Convert by replacing the prefixed unit with its value in the base unit.",
+      "Never compare or combine measurements until the units match.",
+    ]),
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
-    sections: [
-      { heading: "Fix these ideas", body: repairText },
-      { heading: "Core idea", body: code === "F1_L1" ? "A scientific measurement only makes sense when the number, the unit, and the quantity stay together.\n\nA bare number does not tell the full story in physics. 5 could mean 5 metres, 5 seconds, or 5 kilograms. The unit gives the number meaning, and SI units make that meaning standard everywhere." : "Use the main rule from this lesson before you calculate or classify the quantity." },
-      { heading: "Think of it like this", body: code === "F1_L1" ? (analogyText || "Units work like money. One dollar, one cent, and one thousand dollars are all money, but they are not the same size. Prefixes do the same job for measurements: kilo- makes a larger unit, while centi- and milli- make smaller sub-units.") : (analogyText || "Use the shared idea from this lesson to decide what the quantity means before you answer.") },
-      { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-    ],
+    reference_tables: scaffoldReferenceTables(lesson),
+    media_cards: scaffoldMediaCards(lesson),
+    sections: scaffoldSections(lesson, repairText, analogyText, workedExample),
     review_refs: reviewRefs(lesson),
   };
 }
