@@ -620,11 +620,88 @@ function scaffoldFocusExtras(code: string): string[] {
         "Direction words such as north, east, upward, and backward are strong vector clues.",
         "Speed and velocity are related, but only velocity includes direction.",
       ];
+    case "F1_L3":
+      return [
+        "Resolution is the smallest change an instrument can show.",
+        "A more precise tool usually has finer divisions and a smaller uncertainty.",
+        "A measurement should not pretend to be more exact than the instrument allows.",
+        "Repeated careful readings increase trust when they agree closely.",
+      ];
+    case "F1_L4":
+      return [
+        "Significant figures show how much precision a reported number really carries.",
+        "Leading zeros do not count as significant figures.",
+        "Rounding depends on the next digit after the last figure you want to keep.",
+        "Calculated answers should not claim more precision than the measurements used.",
+      ];
+    case "F1_L5":
+      return [
+        "Density compares mass with volume, so both quantities matter together.",
+        "Dense materials pack more mass into the same volume.",
+        "Keep the compound density unit with the answer, such as g/cm^3 or kg/m^3.",
+        "Unit consistency matters before substituting values into the formula.",
+      ];
+    case "F1_L6":
+      return [
+        "Precision is about closeness among repeated readings.",
+        "Accuracy is about closeness to the accepted or true value.",
+        "A set of readings can be precise without being accurate, and accurate without being very precise.",
+        "Trustworthy measurements balance good technique, suitable tools, and honest uncertainty.",
+      ];
     default:
       return [];
   }
 }
-
+function scaffoldCoreBullets(code: string): string[] {
+  switch (code) {
+    case "F1_L1":
+      return [
+        "Every measurement has two parts: a number and a unit.",
+        "The unit tells what physical quantity the number belongs to.",
+        "SI units are shared standards, so measurements can be compared anywhere.",
+        "Prefixes such as kilo-, centi-, and milli- create larger or smaller versions of the same base unit.",
+        "Convert by replacing the prefixed unit with its value in the base unit.",
+        "Never compare or combine measurements until the units match.",
+      ];
+    case "F1_L2":
+      return [
+        "Vectors need both magnitude and direction.",
+        "Scalars need magnitude only.",
+        "Direction words help you spot vectors quickly.",
+        "Distance is not the same idea as displacement, and speed is not the same idea as velocity.",
+      ];
+    case "F1_L3":
+      return [
+        "State only the precision your instrument supports.",
+        "Smaller scale divisions usually reduce uncertainty.",
+        "Repeat readings to check consistency.",
+        "Choose the tool that matches the size of the object you are measuring.",
+      ];
+    case "F1_L4":
+      return [
+        "Count only the digits that carry measured meaning.",
+        "Leading zeros do not add significant figures.",
+        "Round from the first digit you do not plan to keep.",
+        "Final answers should match the precision of the original measurement.",
+      ];
+    case "F1_L5":
+      return [
+        "Density = mass / volume.",
+        "Mass and volume must be in consistent units before calculation.",
+        "Denser materials pack more mass into the same space.",
+        "Keep the compound density unit in the final answer.",
+      ];
+    case "F1_L6":
+      return [
+        "Precision is about the spread of repeated readings.",
+        "Accuracy is about closeness to the accepted value.",
+        "A result can show one of these strengths without the other.",
+        "Trustworthy measurements report uncertainty honestly.",
+      ];
+    default:
+      return [];
+  }
+}
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const code = lessonCode(lesson);
   const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
@@ -788,10 +865,107 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
           ],
         },
       ];
+    case "F1_L3":
+      return [
+        {
+          title: "Common measurement tools",
+          caption: "Different tools give different resolution and uncertainty.",
+          columns: ["Tool", "Typical use", "What to notice"],
+          rows: [
+            ["Metre rule", "Desk or book length", "Good for medium lengths, moderate resolution"],
+            ["Vernier caliper", "Small diameters or thicknesses", "Finer scale, lower uncertainty"],
+            ["Micrometer screw gauge", "Very small thicknesses", "Very fine resolution"],
+            ["Stopwatch", "Time intervals", "Reaction time affects uncertainty"],
+          ],
+        },
+        {
+          title: "Reading and uncertainty guide",
+          caption: "Report only the precision your instrument can support.",
+          columns: ["Instrument feature", "Meaning", "Example"],
+          rows: [
+            ["Smallest division", "Smallest scale step visible", "1 mm on a ruler"],
+            ["Resolution", "Smallest meaningful change shown", "0.01 cm on a caliper"],
+            ["Reasonable uncertainty", "Often about half the smallest division", "+/-0.5 mm for a 1 mm ruler"],
+          ],
+        },
+      ];
+    case "F1_L4":
+      return [
+        {
+          title: "Significant-figure rules",
+          caption: "Use these rules when deciding which digits count.",
+          columns: ["Pattern", "Rule", "Example"],
+          rows: [
+            ["Leading zeros", "Do not count", "0.0045 has 2 significant figures"],
+            ["Non-zero digits", "Always count", "456 has 3 significant figures"],
+            ["Zeros between non-zero digits", "Count", "4.05 has 3 significant figures"],
+            ["Trailing zeros after a decimal", "Count", "2.300 has 4 significant figures"],
+          ],
+        },
+        {
+          title: "Rounding guide",
+          caption: "Look at the next digit before you round.",
+          columns: ["Target", "Look at", "Result"],
+          rows: [
+            ["3 significant figures in 12.349", "the next digit 4", "12.3"],
+            ["2 decimal places in 7.186", "the next digit 6", "7.19"],
+            ["3 significant figures in 0.00456", "the next digit after the last kept figure", "0.00456"],
+          ],
+        },
+      ];
+    case "F1_L5":
+      return [
+        {
+          title: "Density relationships",
+          caption: "Density links mass and volume in one idea.",
+          columns: ["Quantity", "Meaning", "Common unit"],
+          rows: [
+            ["Mass", "How much matter is present", "g or kg"],
+            ["Volume", "How much space is occupied", "cm^3, m^3, L"],
+            ["Density", "Mass packed into each unit volume", "g/cm^3 or kg/m^3"],
+          ],
+        },
+        {
+          title: "Before using the formula",
+          caption: "Check these steps before substituting numbers.",
+          columns: ["Check", "Why it matters", "Example"],
+          rows: [
+            ["Match the units", "Mixed units can distort the answer", "Convert values into a consistent pair first"],
+            ["Choose the formula", "Density = mass / volume", "Not mass x volume"],
+            ["Keep the unit", "The number alone is incomplete", "3 g/cm^3"],
+          ],
+        },
+      ];
+    case "F1_L6":
+      return [
+        {
+          title: "Accuracy and precision compared",
+          caption: "These ideas are related, but they are not the same.",
+          columns: ["Idea", "Question to ask", "What good performance looks like"],
+          rows: [
+            ["Accuracy", "How close is the result to the accepted value?", "The average reading is near the true value"],
+            ["Precision", "How close are repeated readings to one another?", "The readings cluster tightly"],
+            ["Trustworthiness", "Do the tool and method support the claim?", "Suitable instrument and honest uncertainty"],
+          ],
+        },
+        {
+          title: "Common result patterns",
+          caption: "A set of readings can fall into four common patterns.",
+          columns: ["Pattern", "Meaning", "Example description"],
+          rows: [
+            ["Accurate and precise", "Close to true value and tightly grouped", "Cluster on target"],
+            ["Precise but not accurate", "Tightly grouped but off target", "Cluster away from target"],
+            ["Accurate but not very precise", "Average near target but spread out", "Wide spread around target"],
+            ["Neither", "Spread out and off target", "Scattered away from target"],
+          ],
+        },
+      ];
     default:
       return [];
   }
 }
+
+
 
 function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   switch (lessonCode(lesson)) {
@@ -825,10 +999,72 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           highlights: ["Magnitude only", "No direction needed", "Temperature, mass, and time behave like this"],
         },
       ];
+    case "F1_L3":
+      return [
+        {
+          kind: "visual",
+          title: "Picture a ruler beside a caliper",
+          caption: "Both measure length, but the finer tool can show smaller changes.",
+          highlights: ["Wider scale divisions = lower resolution", "Finer scale divisions = smaller uncertainty", "Choose the tool to match the job"],
+        },
+        {
+          kind: "visual",
+          title: "Picture repeated readings",
+          caption: "A tight cluster of repeated readings usually feels more trustworthy than a scattered set.",
+          highlights: ["Close agreement builds confidence", "Large spread suggests larger uncertainty", "Repeat readings before trusting a result"],
+        },
+      ];
+    case "F1_L4":
+      return [
+        {
+          kind: "visual",
+          title: "Picture the last kept digit",
+          caption: "When rounding, your eyes should move to the next digit after the last one you want to keep.",
+          highlights: ["Next digit 0-4: keep it", "Next digit 5-9: round it up", "Leading zeros do not add precision"],
+        },
+        {
+          kind: "visual",
+          title: "Picture a calculator and a lab notebook",
+          caption: "A calculator may show many digits, but your final answer should match the precision of the measurement.",
+          highlights: ["Display digits are not all meaningful", "Report only justified digits", "Precision belongs to the measurement, not the screen"],
+        },
+      ];
+    case "F1_L5":
+      return [
+        {
+          kind: "visual",
+          title: "Picture equal-sized blocks",
+          caption: "Two blocks can have the same volume but different masses. The heavier one is denser.",
+          highlights: ["Same space, different mass", "More packed matter means greater density", "Dense materials often feel heavier for their size"],
+        },
+        {
+          kind: "visual",
+          title: "Picture sinking and floating",
+          caption: "Density helps explain why some objects sink and others float in a fluid.",
+          highlights: ["Less dense than the fluid: float", "More dense than the fluid: sink", "Compare densities, not just masses"],
+        },
+      ];
+    case "F1_L6":
+      return [
+        {
+          kind: "visual",
+          title: "Picture a target board",
+          caption: "A tight cluster away from the centre is precise but not accurate. A cluster near the centre is accurate.",
+          highlights: ["Cluster shape shows precision", "Position relative to centre shows accuracy", "You need both for strong measurements"],
+        },
+        {
+          kind: "visual",
+          title: "Picture a measurement report",
+          caption: "A trustworthy report names the tool, the value, and the uncertainty instead of pretending the result is exact.",
+          highlights: ["State the measurement", "State the uncertainty", "Match the claim to the instrument"],
+        },
+      ];
     default:
       return [];
   }
 }
+
+
 
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   switch (lessonCode(lesson)) {
@@ -850,6 +1086,42 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
         { heading: "Common patterns to remember", body: "Distance, speed, mass, time, and temperature are usually scalar. Displacement, velocity, force, acceleration, and weight are vectors because they need direction." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
       ];
+    case "F1_L3":
+      return [
+        { heading: "Fix these ideas", body: repairText },
+        { heading: "Core idea", body: "A reading is only as trustworthy as the tool and method behind it. The instrument sets the smallest detail you can see, and that limits the certainty you can claim." },
+        { heading: "Resolution and uncertainty", body: "Resolution is the smallest change the tool can show. Uncertainty tells the reader the range inside which the true value is likely to lie. A fine tool such as a caliper usually gives a smaller uncertainty than a rough ruler.", check_for_understanding: "Why is a finer scale usually more trustworthy for small objects?" },
+        { heading: "Reading a scale honestly", body: "Read to the smallest clear division, estimate carefully between marks when appropriate, and never invent extra digits. The reported value should match the instrument, not the number of digits you wish you had." },
+        { heading: "Think of it like this", body: analogyText || "A blurry photo can show the big shape of an object, but not the tiny details. Low-resolution tools work the same way. A sharper picture is like a finer instrument: it lets you trust smaller differences." },
+        { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ];
+    case "F1_L4":
+      return [
+        { heading: "Fix these ideas", body: repairText },
+        { heading: "Core idea", body: "Significant figures help you report a number with the right amount of precision. They stop you from pretending the measurement is more exact than it really is." },
+        { heading: "Which digits count", body: "Non-zero digits always count. Leading zeros only place the decimal point, so they do not count. Zeros between non-zero digits do count, and trailing zeros after a decimal usually show real precision.", check_for_understanding: "How many significant figures are in 0.0205?" },
+        { heading: "Rounding with purpose", body: "Choose how many figures you want to keep, then look at the next digit. If it is 5 or more, round up. If it is less than 5, keep the kept digit unchanged." },
+        { heading: "Think of it like this", body: analogyText || "Think of a measurement like a photo saved at a certain quality. You cannot honestly add sharper detail after the photo has been taken, just as you cannot add justified digits after the measurement is made." },
+        { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ];
+    case "F1_L5":
+      return [
+        { heading: "Fix these ideas", body: repairText },
+        { heading: "Core idea", body: "Density tells you how much mass is packed into each unit of volume. It is not just about how heavy something is; it is about how heavy it is for its size." },
+        { heading: "Mass, volume, and density", body: "Mass tells how much matter is present. Volume tells how much space is occupied. Density compares the two. That is why a small metal block can be denser than a larger foam block.", check_for_understanding: "If two objects have the same volume, which one is denser: the heavier one or the lighter one?" },
+        { heading: "Use the formula carefully", body: "Write density = mass / volume, substitute the values with consistent units, divide carefully, and keep the compound unit with the answer. If the units are mixed, convert them before calculating." },
+        { heading: "Think of it like this", body: analogyText || "Imagine packing books into two boxes of the same size. The box with more books packed into the same space is like the denser material." },
+        { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ];
+    case "F1_L6":
+      return [
+        { heading: "Fix these ideas", body: repairText },
+        { heading: "Core idea", body: "Accuracy and precision answer different questions. Accuracy asks whether you are close to the accepted value. Precision asks whether repeated readings agree closely with one another." },
+        { heading: "Possible measurement patterns", body: "A set of readings can be accurate and precise, precise but not accurate, accurate but spread out, or neither. Looking only at one idea gives an incomplete judgement of the measurement quality.", check_for_understanding: "If readings are tightly grouped but all far from the accepted value, which idea is strong and which is weak?" },
+        { heading: "What makes a result trustworthy", body: "Trust comes from using a suitable tool, repeating measurements, controlling errors, and reporting honest uncertainty. A result is stronger when the method and the numbers support each other." },
+        { heading: "Think of it like this", body: analogyText || "Imagine throwing darts at a target. A tight cluster shows precision. A cluster near the centre shows accuracy. The best measurements do both at once." },
+        { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ];
     default:
       return [
         { heading: "Fix these ideas", body: repairText },
@@ -859,6 +1131,8 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       ];
   }
 }
+
+
 
 function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: UnknownRecord[]): UnknownRecord {
   const repairs = feedback.filter((item) => item.is_correct !== true);
@@ -878,12 +1152,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
       ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
       ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean),
       ...scaffoldFocusExtras(code),
-      "Every measurement has two parts: a number and a unit.",
-      "The unit tells what physical quantity the number belongs to.",
-      "SI units are shared standards, so measurements can be compared anywhere.",
-      "Prefixes such as kilo-, centi-, and milli- create larger or smaller versions of the same base unit.",
-      "Convert by replacing the prefixed unit with its value in the base unit.",
-      "Never compare or combine measurements until the units match.",
+      ...scaffoldCoreBullets(code),
     ]),
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     reference_tables: scaffoldReferenceTables(lesson),
