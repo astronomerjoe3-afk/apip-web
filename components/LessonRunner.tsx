@@ -440,28 +440,28 @@ export default function LessonRunner({
   const restartCopy = useMemo(() => {
     if (!runner) return "";
     return runner.active_stage === "mastery"
-      ? "This mission already has saved progress. If you want to learn it from the beginning, restart it now."
-      : "If you want to replay this mission from the beginning, you can restart it now.";
+      ? "Saved progress found. Restart if you want the full mission again."
+      : "Restart to take this mission again.";
   }, [runner]);
 
   const stageSubtitle = useMemo(() => {
     if (!runner) return "";
     if (showResumeChoice) {
-      return "We found saved progress for this mission. You can continue from where you stopped or begin again from the first learning step.";
+      return "Continue, restart, or go back.";
     }
     switch (runner.active_stage) {
       case "diagnostic":
-        return "Answer a few short questions so this lesson can focus on what you need most.";
+        return "A few quick questions first.";
       case "scaffold":
-        return "This guided explanation helps you repair mistakes and understand the concept clearly.";
+        return "A focused lesson built from your diagnostic.";
       case "concept_gate":
-        return "Let's make sure the key idea is clear before moving on.";
+        return "One quick check before the activity.";
       case "simulation":
-        return "Explore the idea and notice what changes when you test it.";
+        return "Test the idea.";
       case "reflection":
-        return "Put the idea into your own words so it becomes easier to remember and use.";
+        return "Explain the idea in your own words.";
       case "mastery":
-        return "This final check shows whether you have understood this lesson well enough to move forward.";
+        return "This check decides mastery.";
       default:
         return "";
     }
@@ -493,10 +493,10 @@ export default function LessonRunner({
         <div className="space-y-4">
           <div className="rounded-2xl border bg-white p-5 shadow-sm">
             <h3 className="text-lg font-semibold text-slate-900">
-              Let's review your answers
+              Diagnostic review
             </h3>
             <p className="mt-2 text-slate-700">
-              You will see what was right, what needs fixing, and why.
+              See what was right and what to fix.
             </p>
           </div>
 
@@ -514,11 +514,6 @@ export default function LessonRunner({
                       ? item.correct_answer.join(", ")
                       : item.correct_answer}
                   </p>
-                  {item.teaching_focus ? (
-                    <p>
-                      <span className="font-medium">Focus:</span> {item.teaching_focus}
-                    </p>
-                  ) : null}
 
 
 
@@ -547,7 +542,7 @@ export default function LessonRunner({
     return (
       <div className="space-y-4">
         {payload.recent_feedback ? (
-          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "That answer is correct" : "Not quite yet"} body={payload.recent_feedback.explanation} extra={<p><span className="font-medium">Correct answer:</span> {Array.isArray(payload.recent_feedback.correct_answer) ? payload.recent_feedback.correct_answer.join(", ") : payload.recent_feedback.correct_answer}</p>} />
+          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "Correct" : "Wrong"} body={payload.recent_feedback.explanation} extra={<p><span className="font-medium">Correct answer:</span> {Array.isArray(payload.recent_feedback.correct_answer) ? payload.recent_feedback.correct_answer.join(", ") : payload.recent_feedback.correct_answer}</p>} />
         ) : null}
         {payload.instructions ? (
           <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">{payload.instructions}</div>
@@ -570,7 +565,7 @@ export default function LessonRunner({
           }
           disabled={isSubmitting || !hasAnswer}
         >
-          {payload.action_label ?? "Check my answer"}
+          {payload.action_label ?? "Check answer"}
         </PrimaryButton>
       </div>
     );
@@ -587,16 +582,6 @@ export default function LessonRunner({
           ) : null}
           {payload.intro ? <p className="mt-2 text-slate-700">{payload.intro}</p> : null}
 
-          {payload.teaching_focus?.length ? (
-            <div className="mt-4">
-              <h4 className="font-semibold text-slate-900">What to pay attention to</h4>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-700">
-                {payload.teaching_focus.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
         </div>
 
         {payload.sections.map((section, index) => (
@@ -636,7 +621,6 @@ export default function LessonRunner({
           </div>
         ))}
 
-        <ReviewReferences refs={payload.review_refs} />
 
         <PrimaryButton
           onClick={() =>
@@ -1018,13 +1002,9 @@ export default function LessonRunner({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border bg-slate-50 p-4">
-        <p className="text-sm text-slate-500">{runner.lesson_title}</p>
-        <p className="mt-1 text-lg font-semibold text-slate-900">{stageTitle}</p>
-      </div>
 
       <StageHeader
-        eyebrow="Physics lesson"
+        eyebrow={runner.lesson_title}
         title={stageTitle}
         subtitle={stageSubtitle}
       />
@@ -1050,7 +1030,7 @@ export default function LessonRunner({
         <div className="rounded-3xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-sky-700">Saved progress found</p>
           <h3 className="mt-3 text-2xl font-semibold text-slate-900">Continue this mission or start again</h3>
-          <p className="mt-3 max-w-3xl text-slate-700">This lesson has saved progress, so you were taken back to your latest step. If you want the full learning journey from the diagnostic onward, start again from the beginning.</p>
+          <p className="mt-3 max-w-3xl text-slate-700">Pick up where you left off, restart, or go back.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue where I stopped</PrimaryButton>
             <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start from the beginning</SecondaryButton>
@@ -1063,3 +1043,6 @@ export default function LessonRunner({
     </div>
   );
 }
+
+
+

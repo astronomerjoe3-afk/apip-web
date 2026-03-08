@@ -325,6 +325,10 @@ function resolvedCorrectAnswer(item: UnknownRecord): string {
   const choices = asList(item.choices).map((choice) => text(choice));
   const correctIndex = resolvedAnswerIndex(item);
   if (correctIndex >= 0 && correctIndex < choices.length) return choices[correctIndex];
+
+  const accepted = shortAnswerAccepted(item);
+  if (accepted.length > 0) return accepted[0];
+
   return fallbackMeta(item)?.correctAnswer || "Review the lesson idea and try again.";
 }
 
@@ -398,6 +402,10 @@ function diagnosticTarget(correctCount: number, askedCount: number, availableCou
   return Math.min(5, maxCount);
 }
 
+function dedupeText(values: string[]): string[] {
+  return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+}
+
 function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): UnknownRecord[] {
   const refs: UnknownRecord[] = [];
   const addRef = (id: string, label: string) => {
@@ -445,21 +453,21 @@ function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Pro
 function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: UnknownRecord[]): UnknownRecord {
   const repairs = feedback.filter((item) => item.is_correct !== true);
   const repairText = repairs.length > 0
-    ? repairs.map((item) => `You were mixing up this idea: ${text(item.teaching_focus)}`).join("\n")
-    : "You already have a useful starting point, so this lesson focuses on sharpening the details.";
+    ? repairs.map((item) => (text(item.prompt) + " " + text(item.explanation)).trim()).join("\n")
+    : "Your diagnostic was mostly secure, so this lesson sharpens the core idea.";
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
   return {
     title,
-    intro: "Here is the lesson explanation built from the ideas that need the most attention.",
-    teaching_focus: repairs.length > 0 ? repairs.map((item) => text(item.teaching_focus)).filter(Boolean) : ["Follow how the quantity, the unit, and the meaning stay connected."],
+    intro: "Built from your diagnostic, this explanation focuses on the ideas that matter most.",
+    teaching_focus: repairs.length > 0 ? repairs.map((item) => text(item.teaching_focus)).filter(Boolean) : ["Keep the number, the unit, and the meaning connected."],
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     sections: [
-      { heading: "What needed repair", body: repairText },
-      { heading: "Core idea", body: "A scientific measurement only makes sense when the number and the unit stay together." },
-      { heading: "Analogy bridge", body: "Think of units like currency denominations. The number matters, but the unit tells you what that number is worth.", analogy: analogyText || undefined },
-      { heading: "Precision and trust", body: "A tool with smaller uncertainty gives a tighter measurement, so engineers trust it more when precision matters.", worked_example: { prompt: "Convert 2.5 km and 35 cm into metres.", steps: ["kilo means 1000", "centi means 1/100", "change the scale before comparing or combining values"], answer: "2.5 km = 2500 m and 35 cm = 0.35 m" } },
+      { heading: "Fix these ideas", body: repairText },
+      { heading: "Core idea", body: "A scientific measurement only makes sense when the number, the unit, and the quantity stay together." },
+      { heading: "Think of it like this", body: analogyText || "Units work like shared labels for value: they tell everyone what the number means." },
+      { heading: "Worked example", body: "Convert before comparing: 2.5 km = 2500 m and 35 cm = 0.35 m.", worked_example: { prompt: "Convert first, then compare or combine values.", steps: ["kilo means 1000 times the base unit", "centi means one hundredth of the base unit", "match the unit before you judge the measurement"], answer: "2.5 km = 2500 m and 35 cm = 0.35 m" } },
     ],
-    review_refs: reviewRefs(lesson),
+    review_refs: [],
   };
 }
 
