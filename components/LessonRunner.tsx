@@ -612,7 +612,7 @@ export default function LessonRunner({
                     <thead className="bg-white text-slate-500">
                       <tr>
                         {table.columns.map((column) => (
-                          <th key={column} className="border-b px-4 py-3 font-semibold">{column}</th>
+                          <th key={column} className="border-b px-4 py-3 text-left font-semibold">{column}</th>
                         ))}
                       </tr>
                     </thead>
