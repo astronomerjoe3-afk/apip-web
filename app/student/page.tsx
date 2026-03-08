@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { apipGet } from "../../lib/apipApi";
 import { auth } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
+import { getClientRole, type Role } from "../../lib/authRouting";
 
 type Module = {
   id: string;
@@ -22,8 +23,6 @@ type ModulesResponse = {
   modules: Module[];
 };
 
-type Role = "student" | "instructor" | "admin" | "unknown";
-
 function errorMessage(error: unknown): string {
   if (error instanceof Error) {
     return error.message;
@@ -32,20 +31,7 @@ function errorMessage(error: unknown): string {
 }
 
 async function getRole(user: User): Promise<Role> {
-  try {
-    const tokenResult = await user.getIdTokenResult(true);
-    const claim = tokenResult.claims?.role;
-    if (
-      claim === "student" ||
-      claim === "instructor" ||
-      claim === "admin"
-    ) {
-      return claim;
-    }
-    return "unknown";
-  } catch {
-    return "unknown";
-  }
+  return getClientRole(user);
 }
 
 export default function StudentHomePage() {
@@ -70,7 +56,7 @@ export default function StudentHomePage() {
         if (!cancelled) {
           setRole("unknown");
           setRoleLoading(false);
-          router.replace("/login");
+          router.replace("/login?next=/student");
         }
         return;
       }
@@ -92,7 +78,7 @@ export default function StudentHomePage() {
       }
 
       if (resolvedRole !== "student") {
-        router.replace("/login");
+        router.replace("/login?next=/student");
       }
     }
 
@@ -139,7 +125,7 @@ export default function StudentHomePage() {
     try {
       setStatus("Signing out...");
       await signOut(auth);
-      router.replace("/login");
+      router.replace("/login?next=/student");
     } catch (error: unknown) {
       setStatus("");
       setErr(errorMessage(error));
@@ -298,7 +284,7 @@ export default function StudentHomePage() {
                   </div>
 
                   <div style={{ opacity: 0.75, marginTop: 8, fontSize: 13 }}>
-                    {moduleItem.level ? `Level: ${moduleItem.level} • ` : ""}
+                    {moduleItem.level ? `Level: ${moduleItem.level} | ` : ""}
                     {moduleItem.estimated_minutes
                       ? `Est: ${moduleItem.estimated_minutes} min`
                       : ""}

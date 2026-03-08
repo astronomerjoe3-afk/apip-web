@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import { auth } from "@/lib/firebase";
+import { useRouter, useSearchParams } from "next/navigation";
+import { auth, firebaseConfigured } from "@/lib/firebase";
+import { useAuth } from "@/lib/auth";
+import { getClientRole, resolvePostAuthPath } from "@/lib/authRouting";
 
 function errorMessage(error: unknown): string {
   if (error instanceof Error) {
@@ -14,10 +16,27 @@ function errorMessage(error: unknown): string {
 
 export default function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { user, loading } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (loading || !user) {
+      return;
+    }
+
+    const currentUser = user;
+
+    async function redirectSignedInUser(): Promise<void> {
+      const role = await getClientRole(currentUser);
+      router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+    }
+
+    void redirectSignedInUser();
+  }, [loading, router, searchParams, user]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -25,8 +44,18 @@ export default function RegisterPage() {
     setBusy(true);
 
     try {
-      await createUserWithEmailAndPassword(auth, email.trim(), password);
-      router.push("/dashboard");
+      if (!firebaseConfigured) {
+        setErr("Registration is not configured on this app instance yet.");
+        return;
+      }
+
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email.trim(),
+        password,
+      );
+      const role = await getClientRole(credential.user);
+      router.replace(resolvePostAuthPath(role, searchParams.get("next")));
     } catch (error: unknown) {
       setErr(errorMessage(error));
     } finally {

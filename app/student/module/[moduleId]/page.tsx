@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { apipGet } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
+import { useAuth } from "../../../../lib/auth";
 
 type ModuleCatalog = {
   id: string;
@@ -80,7 +81,9 @@ function normalizeLessonId(value: string | undefined | null): string {
 }
 
 export default function StudentModulePage() {
+  const router = useRouter();
   const params = useParams() as Record<string, string | string[] | undefined>;
+  const { user, loading: authLoading } = useAuth();
 
   const raw =
     (params["moduleId"] ?? params["module"]) as string | string[] | undefined;
@@ -110,6 +113,19 @@ export default function StudentModulePage() {
 
   const loadModuleState = useCallback(
     async (preserveCurrentLesson: boolean = true): Promise<void> => {
+      if (authLoading) {
+        return;
+      }
+
+      if (!user) {
+        setErr("");
+        setModuleMeta(null);
+        setLessons([]);
+        setActiveIdx(0);
+        setLoading(false);
+        return;
+      }
+
       if (!moduleId) {
         setErr("Missing module id in route.");
         setModuleMeta(null);
@@ -199,12 +215,24 @@ export default function StudentModulePage() {
         setLoading(false);
       }
     },
-    [moduleId, activeLesson],
+    [activeLesson, authLoading, moduleId, user],
   );
 
   useEffect(() => {
+    if (authLoading) {
+      return;
+    }
+
+    if (!user) {
+      const nextPath = moduleId
+        ? "/student/module/" + encodeURIComponent(moduleId)
+        : "/student";
+      router.replace("/login?next=" + encodeURIComponent(nextPath));
+      return;
+    }
+
     void loadModuleState(false);
-  }, [loadModuleState]);
+  }, [authLoading, loadModuleState, moduleId, router, user]);
 
   const canGoBack = activeIdx > 0;
   const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
@@ -297,7 +325,15 @@ export default function StudentModulePage() {
           margin: "0 auto",
           background: "rgba(255, 255, 255, 0.78)", boxShadow: "0 30px 80px rgba(15, 23, 42, 0.12)", backdropFilter: "blur(18px)",
         }}>
-        {loading && !activeLesson ? (
+        {authLoading ? (
+          <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
+            Checking your sign-in...
+          </div>
+        ) : !user ? (
+          <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
+            Taking you to sign in...
+          </div>
+        ) : loading && !activeLesson ? (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
             Loading mission...
           </div>
