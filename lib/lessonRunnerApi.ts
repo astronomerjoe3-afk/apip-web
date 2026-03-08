@@ -149,6 +149,10 @@ function writeState(moduleId: string, lessonId: string, state: LocalState): void
   window.sessionStorage.setItem(stateKey(moduleId, lessonId), JSON.stringify(state));
 }
 
+function clearState(moduleId: string, lessonId: string): void {
+  writeState(moduleId, lessonId, {});
+}
+
 function hash(input: string): number {
   let value = 2166136261;
   for (let index = 0; index < input.length; index += 1) {
@@ -464,7 +468,20 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   const runnerLesson = asRecord(resources.runner.lesson);
   const state = readState(moduleId, lessonId);
   const title = lessonTitle(resources.lesson, runnerLesson);
-  const stage = text(runnerLesson.active_stage);
+  const backendStage = text(runnerLesson.active_stage);
+  const stage = (
+    backendStage === "diagnostic" ||
+    backendStage === "scaffolded_teaching" ||
+    backendStage === "concept_gate" ||
+    backendStage === "simulation" ||
+    backendStage === "reflection" ||
+    backendStage === "mastery_check" ||
+    backendStage === "done"
+  )
+    ? backendStage
+    : itemsFrom(resources.lesson, "diagnostic").length > 0
+      ? "diagnostic"
+      : "mastery_check";
 
   if (stage !== "diagnostic") delete state.diagnostic;
   if (stage !== "concept_gate") delete state.conceptGate;
@@ -814,4 +831,14 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
   }
 
   throw new Error(`Unsupported lesson runner event: ${request.event_type}`);
+}
+
+
+export async function restartLessonProgress(moduleId: string, lessonId: string): Promise<void> {
+  const normalized = normalizeLessonId(lessonId);
+  await apipPost<{ ok: boolean }, JsonObject>(
+    "/student/modules/" + encodeURIComponent(moduleId) + "/lessons/" + encodeURIComponent(normalized) + "/restart",
+    {}
+  );
+  clearState(moduleId, lessonId);
 }

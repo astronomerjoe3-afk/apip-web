@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { getLessonRunner, postProgressEvent } from "@/lib/lessonRunnerApi";
+import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
 
 type StageName =
   | "diagnostic"
@@ -346,6 +346,23 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
     void loadRunner();
   }, [loadRunner]);
 
+  const restartMission = useCallback(async () => {
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      await restartLessonProgress(moduleId, lessonId);
+      setAnswers({});
+      setReflectionText("");
+      await loadRunner();
+    } catch (err) {
+      console.error(err);
+      setError("We could not restart this mission right now.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [lessonId, loadRunner, moduleId]);
+
   const sendEvent = useCallback(
     async (eventType: string, payload: ApiEventPayload = {}) => {
       setIsSubmitting(true);
@@ -391,6 +408,17 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
       default:
         return "";
     }
+  }, [runner]);
+
+  const showRestartAction = useMemo(() => {
+    return runner ? runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic" : false;
+  }, [runner]);
+
+  const restartCopy = useMemo(() => {
+    if (!runner) return "";
+    return runner.active_stage === "mastery"
+      ? "This mission already has saved progress. If you want to learn it from the beginning, restart it now."
+      : "If you want to replay this mission from the beginning, you can restart it now.";
   }, [runner]);
 
   const stageSubtitle = useMemo(() => {
@@ -974,6 +1002,17 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
         title={stageTitle}
         subtitle={stageSubtitle}
       />
+
+      {showRestartAction ? (
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+          <p className="text-slate-800">{restartCopy}</p>
+          <div className="mt-3">
+            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>
+              Start this mission from the beginning
+            </SecondaryButton>
+          </div>
+        </div>
+      ) : null}
 
       {error ? (
         <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-800">
