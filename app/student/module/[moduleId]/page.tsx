@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
@@ -224,26 +224,26 @@ export default function StudentModulePage() {
   return (
     <div
       style={{
-        padding: 24,
-        maxWidth: 1200,
+        padding: "40px 24px 56px",
+        maxWidth: 1240,
         margin: "0 auto",
       }}
     >
-      <div style={{ textAlign: "center", marginBottom: 18 }}>
-        <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: -0.5 }}>
+      <div style={{ textAlign: "center", marginBottom: 28 }}>
+        <div style={{ fontSize: 54, fontWeight: 900, letterSpacing: -1.6, fontFamily: "Bahnschrift, Aptos Display, Segoe UI, sans-serif", color: "#10233f" }}>
           {moduleMeta?.title || moduleId || "Module"}
         </div>
 
         {moduleMeta?.description ? (
           <div
             style={{
-              marginTop: 10,
-              fontSize: 18,
-              opacity: 0.9,
+              marginTop: 14,
+              fontSize: 19,
+              color: "#46566b",
               maxWidth: 900,
               marginLeft: "auto",
               marginRight: "auto",
-              lineHeight: 1.5,
+              lineHeight: 1.65,
             }}
           >
             {moduleMeta.description}
@@ -253,16 +253,16 @@ export default function StudentModulePage() {
         {progressLabel ? (
           <div
             style={{
-              marginTop: 14,
+              marginTop: 18,
               display: "inline-flex",
               gap: 10,
               alignItems: "center",
-              padding: "8px 14px",
-              border: "1px solid #333",
+              padding: "10px 18px",
+              border: "1px solid rgba(16, 35, 63, 0.12)",
               borderRadius: 999,
-              opacity: 0.9,
-            }}
-          >
+              background: "rgba(255, 255, 255, 0.72)",
+              boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
+            }}>
             <span style={{ fontWeight: 800 }}>{progressLabel}</span>
             <span style={{ opacity: 0.8 }}>|</span>
             <span style={{ opacity: 0.85 }}>
@@ -290,13 +290,13 @@ export default function StudentModulePage() {
 
       <div
         style={{
-          border: "1px solid #333",
-          borderRadius: 18,
-          padding: 16,
+          border: "1px solid rgba(16, 35, 63, 0.12)",
+          borderRadius: 30,
+          padding: 24,
           maxWidth: 1100,
           margin: "0 auto",
-        }}
-      >
+          background: "rgba(255, 255, 255, 0.78)", boxShadow: "0 30px 80px rgba(15, 23, 42, 0.12)", backdropFilter: "blur(18px)",
+        }}>
         {loading && !activeLesson ? (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
             Loading mission...
@@ -328,13 +328,13 @@ export default function StudentModulePage() {
             onClick={goBack}
             disabled={!canGoBack}
             style={{
-              opacity: canGoBack ? 1 : 0.4,
-              padding: "12px 16px",
-              borderRadius: 12,
-              border: "1px solid #333",
-              fontWeight: 800,
-            }}
-          >
+              opacity: canGoBack ? 1 : 0.42,
+              padding: "12px 18px",
+              borderRadius: 14,
+              border: "1px solid rgba(16, 35, 63, 0.14)",
+              background: "rgba(255, 255, 255, 0.72)",
+              fontWeight: 800, boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
+            }}>
             Back
           </button>
 
@@ -346,13 +346,13 @@ export default function StudentModulePage() {
             onClick={goNext}
             disabled={!canGoNext}
             style={{
-              opacity: canGoNext ? 1 : 0.4,
-              padding: "12px 18px",
-              borderRadius: 12,
-              border: "1px solid #333",
-              fontWeight: 900,
-            }}
-          >
+              opacity: canGoNext ? 1 : 0.42,
+              padding: "12px 20px",
+              borderRadius: 14,
+              border: "none",
+              background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
+              color: "#fff", fontWeight: 900, boxShadow: "0 18px 38px rgba(11, 26, 50, 0.22)",
+            }}>
             Continue
           </button>
         </div>

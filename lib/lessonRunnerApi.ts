@@ -17,6 +17,7 @@ type LocalState = {
     askedIds: string[];
     answers: Record<string, string>;
     feedback?: UnknownRecord[];
+    recentFeedback?: UnknownRecord;
     complete?: boolean;
   };
   conceptGate?: {
@@ -47,6 +48,61 @@ type LessonResources = {
 
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
+const MASTERY_DEFAULT_MIN = 5;
+const MASTERY_DEFAULT_MAX = 10;
+
+type FallbackAnswerMeta = {
+  id: string;
+  answerIndex?: number;
+  acceptedAnswers?: string[];
+  correctAnswer: string;
+  explanation: string;
+  teachingFocus?: string;
+  misconceptionTag?: string;
+};
+
+const FALLBACK_ANSWER_METADATA: Record<string, FallbackAnswerMeta> = {
+  "which is the correct si unit for mass": {
+    id: "F1L1_D1",
+    answerIndex: 1,
+    correctAnswer: "kilogram (kg)",
+    explanation: "Kilogram (kg) is the SI base unit for mass.",
+    teachingFocus: "Match each physical quantity to its agreed SI unit.",
+    misconceptionTag: "unit_quantity_mismatch",
+  },
+  "1 millimeter mm equals": {
+    id: "F1L1_D2",
+    answerIndex: 0,
+    correctAnswer: "10^-3 m",
+    explanation: "milli- means one-thousandth, so 1 mm = 10^-3 m.",
+    teachingFocus: "Prefixes change the size of the base unit, so conversions must keep the scale consistent.",
+    misconceptionTag: "prefix_scale_error",
+  },
+  "convert 2 5 km to meters": {
+    id: "F1L1_D3",
+    acceptedAnswers: ["2500", "2500 m", "2500 meter", "2500 meters", "2500 metre", "2500 metres"],
+    correctAnswer: "2500 m",
+    explanation: "kilo- means 1000, so 2.5 km = 2500 m.",
+    teachingFocus: "Convert prefixes by scaling the base unit before you compare or combine values.",
+    misconceptionTag: "prefix_scale_error",
+  },
+  "which conversion is correct": {
+    id: "F1L1_T1",
+    answerIndex: 0,
+    correctAnswer: "3.0 m = 300 cm",
+    explanation: "Each meter is 100 centimeters, so 3.0 m = 300 cm.",
+    teachingFocus: "Unit conversions must keep the measurement equivalent after the scale changes.",
+    misconceptionTag: "unit_conversion_error",
+  },
+  "convert 4500 g to kg": {
+    id: "F1L1_T2",
+    acceptedAnswers: ["4.5", "4.5 kg", "4.5 kilogram", "4.5 kilograms"],
+    correctAnswer: "4.5 kg",
+    explanation: "1000 g = 1 kg, so 4500 g = 4.5 kg.",
+    teachingFocus: "Use unit factors so the number changes when the unit size changes.",
+    misconceptionTag: "unit_conversion_error",
+  },
+};
 
 function normalizeLessonId(value: unknown): string {
   return String(value || "").replace(/-/g, "_");
@@ -121,17 +177,79 @@ function valueIndex(value: unknown): number {
   return Number.isFinite(numeric) ? numeric : -1;
 }
 
+function normalizePromptKey(value: unknown): string {
+  return text(value)
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeOpenAnswer(value: unknown): string {
+  return text(value)
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/,/g, "")
+    .replace(/metres?/g, "m")
+    .replace(/meters?/g, "m")
+    .replace(/kilograms?/g, "kg")
+    .replace(/grams?/g, "g")
+    .replace(/[^a-z0-9.+\-^/]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function compactOpenAnswer(value: unknown): string {
+  return normalizeOpenAnswer(value).replace(/\s+/g, "");
+}
+
+function numericAnswer(value: unknown): number | null {
+  const raw = compactOpenAnswer(value);
+  if (!raw) return null;
+  const match = raw.match(/^[-+]?\d*\.?\d+$/);
+  return match ? Number.parseFloat(match[0]) : null;
+}
+
+function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
+  return FALLBACK_ANSWER_METADATA[normalizePromptKey(item.prompt)];
+}
+
+function resolvedItemId(item: UnknownRecord, key: string, index: number): string {
+  const explicitId = text(item.id);
+  if (explicitId) return explicitId;
+
+  const meta = fallbackMeta(item);
+  if (meta?.id) return meta.id;
+
+  const promptKey = normalizePromptKey(item.prompt).replace(/\s+/g, "_").slice(0, 36);
+  return `${normalizeLessonId(key)}_${index + 1}_${promptKey || "item"}`;
+}
+
+function withResolvedItem(item: UnknownRecord, key: string, index: number): UnknownRecord {
+  return {
+    ...item,
+    id: resolvedItemId(item, key, index),
+  };
+}
+
 function phases(lesson: UnknownRecord): UnknownRecord {
   return asRecord(lesson.phases);
 }
 
 function itemsFrom(lesson: UnknownRecord, key: string): UnknownRecord[] {
-  return asList(asRecord(phases(lesson)[key]).items).map(asRecord);
+  return asList(asRecord(phases(lesson)[key]).items).map((entry, index) =>
+    withResolvedItem(asRecord(entry), key, index)
+  );
 }
 
 function conceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   const capsules = asList(asRecord(phases(lesson).concept_reconstruction).capsules).map(asRecord);
-  return capsules.flatMap((capsule) => asList(capsule.checks).map(asRecord));
+  return capsules.flatMap((capsule, capsuleIndex) =>
+    asList(capsule.checks).map((entry, checkIndex) =>
+      withResolvedItem(asRecord(entry), `concept_gate_${capsuleIndex + 1}`, checkIndex)
+    )
+  );
 }
 
 function lessonTitle(lesson: UnknownRecord, runnerLesson: UnknownRecord): string {
@@ -193,23 +311,76 @@ function misconceptionTag(prompt: string): string | undefined {
   return undefined;
 }
 
-function grade(item: UnknownRecord, answer: unknown, title: string): UnknownRecord {
+function resolvedAnswerIndex(item: UnknownRecord): number {
+  const explicit = item.answer_index;
+  if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
+  return fallbackMeta(item)?.answerIndex ?? -1;
+}
+
+function resolvedCorrectAnswer(item: UnknownRecord): string {
   const choices = asList(item.choices).map((choice) => text(choice));
+  const correctIndex = resolvedAnswerIndex(item);
+  if (correctIndex >= 0 && correctIndex < choices.length) return choices[correctIndex];
+  return fallbackMeta(item)?.correctAnswer || "Review the lesson idea and try again.";
+}
+
+function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
   const feedback = asList(item.feedback).map((entry) => text(entry));
-  const answerIndex = valueIndex(answer);
-  const correctIndex = numberValue(item.answer_index, -1);
+  if (answerIndex >= 0 && answerIndex < feedback.length && feedback[answerIndex]) {
+    return feedback[answerIndex];
+  }
+  return text(item.hint) || fallbackMeta(item)?.explanation || "Review the lesson idea and try again.";
+}
+
+function shortAnswerAccepted(item: UnknownRecord): string[] {
+  const accepted = asList(item.accepted_answers).map((entry) => text(entry)).filter(Boolean);
+  const meta = fallbackMeta(item);
+  const values = [...accepted, ...(meta?.acceptedAnswers || []), meta?.correctAnswer || ""]
+    .map((entry) => text(entry).trim())
+    .filter(Boolean);
+  return [...new Set(values)];
+}
+
+function shortAnswerMatches(answer: unknown, acceptedAnswers: string[]): boolean {
+  const candidate = normalizeOpenAnswer(answer);
+  if (!candidate) return false;
+
+  const compactCandidate = compactOpenAnswer(answer);
+  const accepted = acceptedAnswers.map((entry) => normalizeOpenAnswer(entry));
+  const compactAccepted = acceptedAnswers.map((entry) => compactOpenAnswer(entry));
+
+  if (accepted.includes(candidate) || compactAccepted.includes(compactCandidate)) {
+    return true;
+  }
+
+  const candidateNumeric = numericAnswer(answer);
+  if (candidateNumeric === null) return false;
+
+  return acceptedAnswers.some((entry) => {
+    const expectedNumeric = numericAnswer(entry);
+    return expectedNumeric !== null && Math.abs(expectedNumeric - candidateNumeric) < 1e-9;
+  });
+}
+
+function grade(item: UnknownRecord, answer: unknown, title: string): UnknownRecord {
   const prompt = text(item.prompt);
-  const correctAnswer = correctIndex >= 0 && correctIndex < choices.length ? choices[correctIndex] : "Review the lesson idea and try again.";
-  const explanation = (answerIndex >= 0 && answerIndex < feedback.length ? feedback[answerIndex] : text(item.hint)) || text(item.hint) || "Review the lesson idea and try again.";
+  const meta = fallbackMeta(item);
+  const choices = asList(item.choices).map((choice) => text(choice));
+  const answerIndex = valueIndex(answer);
+  const acceptedAnswers = shortAnswerAccepted(item);
+  const isCorrect =
+    choices.length > 0
+      ? answerIndex === resolvedAnswerIndex(item)
+      : shortAnswerMatches(answer, acceptedAnswers);
   return {
     question_id: text(item.id),
     prompt,
-    learner_answer: choiceLabel(item, answer),
-    is_correct: answerIndex === correctIndex,
-    correct_answer: correctAnswer,
-    explanation,
-    teaching_focus: teachingFocus(prompt, title),
-    misconception_tag: answerIndex === correctIndex ? undefined : misconceptionTag(prompt),
+    learner_answer: choices.length > 0 ? choiceLabel(item, answer) : text(answer).trim() || null,
+    is_correct: isCorrect,
+    correct_answer: resolvedCorrectAnswer(item),
+    explanation: resolvedExplanation(item, answerIndex),
+    teaching_focus: meta?.teachingFocus || teachingFocus(prompt, title),
+    misconception_tag: isCorrect ? undefined : meta?.misconceptionTag || misconceptionTag(prompt),
   };
 }
 
@@ -245,6 +416,16 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seen = new Set<string>();
   const ordered = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson), ...itemsFrom(lesson, "diagnostic")];
   return ordered.filter((item) => { const id = text(asRecord(item).id); if (!id || seen.has(id)) return false; seen.add(id); return true; });
+}
+
+function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number): number {
+  if (poolLength <= 0) return 0;
+
+  const minQuestions = Math.min(Math.max(numberValue(masteryMeta.min_questions, MASTERY_DEFAULT_MIN), 1), poolLength);
+  const maxQuestions = Math.max(minQuestions, Math.min(numberValue(masteryMeta.max_questions, MASTERY_DEFAULT_MAX), poolLength));
+  const preferred = numberValue(masteryMeta.selected_question_count, minQuestions) || minQuestions;
+
+  return Math.max(minQuestions, Math.min(maxQuestions, preferred));
 }
 
 function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Promise<unknown> {
@@ -298,32 +479,35 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     activeStage = "diagnostic";
     const pool = itemsFrom(resources.lesson, "diagnostic");
     const askedIds = state.diagnostic?.askedIds || [];
-    if (state.diagnostic?.complete && state.diagnostic.feedback?.length) {
+    const answers = state.diagnostic?.answers || {};
+    const feedback = state.diagnostic?.feedback || [];
+    const correctCount = askedIds.reduce((total, id) => {
+      const item = pool.find((entry) => text(asRecord(entry).id) === id);
+      return item && grade(asRecord(item), answers[id], title).is_correct === true ? total + 1 : total;
+    }, 0);
+    const targetCount = diagnosticTarget(correctCount, askedIds.length, pool.length);
+    const nextItem = pool.find((entry) => !askedIds.includes(text(asRecord(entry).id))) || null;
+    const isComplete = Boolean(state.diagnostic?.complete) || (!nextItem && feedback.length > 0);
+    if (isComplete && feedback.length > 0) {
       stagePayload = {
-        instructions: "Take a moment to compare each answer with the corrected idea.",
-        question_count: state.diagnostic.feedback.length,
+        instructions: "Here is the answer-by-answer feedback for this opening check.",
+        question_count: feedback.length,
         questions: [],
         submitted: true,
-        feedback: state.diagnostic.feedback,
+        feedback,
       };
     } else {
-      const answers = state.diagnostic?.answers || {};
-      const correctCount = askedIds.reduce((total, id) => {
-        const item = pool.find((entry) => text(asRecord(entry).id) === id);
-        return item && grade(asRecord(item), answers[id], title).is_correct === true ? total + 1 : total;
-      }, 0);
-      const targetCount = diagnosticTarget(correctCount, askedIds.length, pool.length);
-      const nextItem = pool.find((entry) => !askedIds.includes(text(asRecord(entry).id))) || pool[pool.length - 1];
-      const instruction = askedIds.length < 2
-        ? "Question " + String(askedIds.length + 1) + " of at least 2."
-        : "Question " + String(askedIds.length + 1) + ". Strong answers unlock a few extra checks.";
       stagePayload = {
-        instructions: instruction,
+        instructions: askedIds.length < 2 ? "Question " + String(askedIds.length + 1) + " of at least 2." : "Question " + String(askedIds.length + 1) + " of " + String(targetCount) + ". Strong answers may unlock one more question.",
         question_count: targetCount,
+        answered_count: askedIds.length,
         questions: nextItem ? [question(asRecord(nextItem))] : [],
+        recent_feedback: state.diagnostic?.recentFeedback,
+        action_label: askedIds.length + 1 >= targetCount ? "Check this answer" : "Check and continue",
       };
     }
   }
+
   else if (stage === "scaffolded_teaching") {
     activeStage = "scaffold";
     stagePayload = scaffoldPayload(title, resources.lesson, state.diagnostic?.feedback || []);
@@ -378,7 +562,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const masteryState = state.mastery || { nonce: 0 };
     const masteryMeta = asRecord(runnerLesson.mastery_check);
     const pool = masteryItems(resources.lesson);
-    const count = Math.max(1, Math.min(numberValue(masteryMeta.selected_question_count, pool.length || 1), pool.length || 1));
+    const count = masteryQuestionCount(masteryMeta, pool.length);
     const selected = shuffle(pool, `mastery:${masteryState.nonce || 0}`).slice(0, count);
     stagePayload = masteryState.submitted || stage === "done"
       ? {
@@ -439,21 +623,21 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       .map((id) => pool.find((entry) => text(asRecord(entry).id) === id))
       .filter(Boolean)
       .map((entry) => grade(asRecord(entry), nextAnswers[text(asRecord(entry).id)], title));
+    const currentFeedback = grade(asRecord(item), text(answerValue), title);
     const correctCount = graded.filter((entry) => entry.is_correct === true).length;
     const target = diagnosticTarget(correctCount, graded.length, pool.length);
+    const complete = graded.length >= target || nextAskedIds.length >= pool.length;
     writeState(moduleId, lessonId, {
       ...current,
-      diagnostic: {
-        askedIds: nextAskedIds,
-        answers: nextAnswers,
-        complete: graded.length >= target,
-        feedback: graded.length >= target ? graded : undefined,
-      },
+      diagnostic: { askedIds: nextAskedIds, answers: nextAnswers, recentFeedback: currentFeedback, complete, feedback: complete ? graded : undefined },
       conceptGate: current.conceptGate,
       reflection: current.reflection,
       mastery: current.mastery,
     });
     return;
+
+
+
   }
 
   if (request.event_type === "diagnostic_feedback_acknowledged") {
@@ -596,7 +780,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const masteryMeta = asRecord(runnerLesson.mastery_check);
     const state = readState(moduleId, lessonId);
     const pool = masteryItems(resources.lesson);
-    const count = Math.max(1, Math.min(numberValue(masteryMeta.selected_question_count, pool.length || 1), pool.length || 1));
+    const count = masteryQuestionCount(masteryMeta, pool.length);
     const selected = shuffle(pool, `mastery:${state.mastery?.nonce || 0}`).slice(0, count);
     if (selected.length === 0) throw new Error("The mastery check is not available right now.");
     const answers = asRecord(payload.answers);

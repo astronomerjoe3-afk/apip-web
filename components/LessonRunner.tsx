@@ -432,8 +432,8 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
   if (!runner) return null;
 
   const renderDiagnostic = () => {
-    const payload = runner.stage_payload as DiagnosticStagePayload;
-
+    const payload = runner.stage_payload as DiagnosticStagePayload & { answered_count?: number; action_label?: string; recent_feedback?: DiagnosticFeedbackItem; };
+    const activeQuestion = payload.questions[0]; const hasAnswer = activeQuestion ? Boolean(answers[activeQuestion.id]?.trim()) : false;
     if (payload.submitted && payload.feedback?.length) {
       return (
         <div className="space-y-4">
@@ -465,12 +465,12 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
                       <span className="font-medium">Focus:</span> {item.teaching_focus}
                     </p>
                   ) : null}
-                  {item.misconception_tag ? (
-                    <p>
-                      <span className="font-medium">Common mistake:</span>{" "}
-                      {item.misconception_tag}
-                    </p>
-                  ) : null}
+
+
+
+
+
+
                 </div>
               }
             />
@@ -492,12 +492,12 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
 
     return (
       <div className="space-y-4">
-        {payload.instructions ? (
-          <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">
-            {payload.instructions}
-          </div>
+        {payload.recent_feedback ? (
+          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "That answer is correct" : "Not quite yet"} body={payload.recent_feedback.explanation} extra={<p><span className="font-medium">Correct answer:</span> {Array.isArray(payload.recent_feedback.correct_answer) ? payload.recent_feedback.correct_answer.join(", ") : payload.recent_feedback.correct_answer}</p>} />
         ) : null}
-
+        {payload.instructions ? (
+          <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">{payload.instructions}</div>
+        ) : null}
         {payload.questions.map((question) => (
           <QuestionBlock
             key={question.id}
@@ -514,9 +514,9 @@ export default function LessonRunner({ moduleId, lessonId }: LessonRunnerProps) 
               answers,
             })
           }
-          disabled={isSubmitting}
+          disabled={isSubmitting || !hasAnswer}
         >
-          Check my answers
+          {payload.action_label ?? "Check my answer"}
         </PrimaryButton>
       </div>
     );
