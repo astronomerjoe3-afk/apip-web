@@ -582,6 +582,13 @@ export default function LessonRunner({
           ) : null}
           {payload.intro ? <p className="mt-2 text-slate-700">{payload.intro}</p> : null}
 
+          {payload.teaching_focus?.length ? (
+            <div className="mt-4 rounded-xl bg-slate-50 p-4">
+              <p className="font-medium text-slate-900">Whole lesson map</p>
+              <p className="mt-2 text-slate-700 whitespace-pre-line">{payload.teaching_focus.slice(0, 4).join("\n")}</p>
+            </div>
+          ) : null}
+
         </div>
 
         {payload.sections.map((section, index) => (

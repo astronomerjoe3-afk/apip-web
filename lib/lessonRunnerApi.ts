@@ -454,12 +454,12 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const repairs = feedback.filter((item) => item.is_correct !== true);
   const repairText = repairs.length > 0
     ? repairs.map((item) => (text(item.prompt) + " " + text(item.explanation)).trim()).join("\n")
-    : "Your diagnostic was mostly secure, so this lesson sharpens the core idea.";
+    : "Your diagnostic was mostly secure, so this lesson widens out to the full sub-unit.";
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
   return {
     title,
-    intro: "Built from your diagnostic, this explanation focuses on the ideas that matter most.",
-    teaching_focus: repairs.length > 0 ? repairs.map((item) => text(item.teaching_focus)).filter(Boolean) : ["Keep the number, the unit, and the meaning connected."],
+    intro: "Built from your diagnostic, this lesson covers the full sub-unit while giving extra support where needed.",
+    teaching_focus: dedupeText([...repairs.map((item) => text(item.teaching_focus)).filter(Boolean), ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean), ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean), ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean), ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean)]),
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     sections: [
       { heading: "Fix these ideas", body: repairText },
@@ -850,3 +850,4 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
