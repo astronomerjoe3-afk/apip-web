@@ -453,7 +453,7 @@ export default function LessonRunner({
       case "diagnostic":
         return "A few quick questions first.";
       case "scaffold":
-        return "A focused lesson built from your diagnostic.";
+        return "A short lesson covering the whole sub-unit.";
       case "concept_gate":
         return "One quick check before the activity.";
       case "simulation":
@@ -506,22 +506,7 @@ export default function LessonRunner({
               correct={item.is_correct}
               title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
               body={item.explanation}
-              extra={
-                <div className="space-y-1">
-                  <p>
-                    <span className="font-medium">Correct answer:</span>{" "}
-                    {Array.isArray(item.correct_answer)
-                      ? item.correct_answer.join(", ")
-                      : item.correct_answer}
-                  </p>
-
-
-
-
-
-
-                </div>
-              }
+              extra={item.is_correct ? undefined : (<p><span className="font-medium">Correct answer:</span> {Array.isArray(item.correct_answer) ? item.correct_answer.join(", ") : item.correct_answer}</p>)}
             />
           ))}
 
@@ -542,7 +527,7 @@ export default function LessonRunner({
     return (
       <div className="space-y-4">
         {payload.recent_feedback ? (
-          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "Correct" : "Wrong"} body={payload.recent_feedback.explanation} extra={<p><span className="font-medium">Correct answer:</span> {Array.isArray(payload.recent_feedback.correct_answer) ? payload.recent_feedback.correct_answer.join(", ") : payload.recent_feedback.correct_answer}</p>} />
+          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "Correct" : "Wrong"} body={payload.recent_feedback.explanation} extra={payload.recent_feedback.is_correct ? undefined : <p><span className="font-medium">Correct answer:</span> {Array.isArray(payload.recent_feedback.correct_answer) ? payload.recent_feedback.correct_answer.join(", ") : payload.recent_feedback.correct_answer}</p>} />
         ) : null}
         {payload.instructions ? (
           <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">{payload.instructions}</div>
@@ -577,15 +562,16 @@ export default function LessonRunner({
     return (
       <div className="space-y-4">
         <div className="rounded-2xl border bg-white p-5 shadow-sm">
-          {payload.title ? (
-            <h3 className="text-lg font-semibold text-slate-900">{payload.title}</h3>
-          ) : null}
           {payload.intro ? <p className="mt-2 text-slate-700">{payload.intro}</p> : null}
 
           {payload.teaching_focus?.length ? (
             <div className="mt-4 rounded-xl bg-slate-50 p-4">
               <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
-              <p className="mt-2 text-slate-700 whitespace-pre-line">{payload.teaching_focus.slice(0, 6).join("\n")}</p>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-700">
+                {payload.teaching_focus.slice(0, 6).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
           ) : null}
 
@@ -605,8 +591,10 @@ export default function LessonRunner({
 
             {section.worked_example ? (
               <div className="mt-4 rounded-xl bg-slate-50 p-4">
-                <p className="font-medium text-slate-900">Worked example</p>
+                <p className="font-medium text-slate-900">Example</p>
+                <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-slate-500">Question</p>
                 <p className="mt-2 text-slate-700">{section.worked_example.prompt}</p>
+                <p className="mt-4 text-sm font-medium uppercase tracking-[0.12em] text-slate-500">Step-by-step solution</p>
                 <ol className="mt-3 list-decimal space-y-1 pl-5 text-slate-700">
                   {section.worked_example.steps.map((step, i) => (
                     <li key={i}>{step}</li>
@@ -629,7 +617,6 @@ export default function LessonRunner({
         ))}
 
 
-        <ReviewReferences refs={payload.review_refs} />
 
         <PrimaryButton
           onClick={() =>
@@ -887,6 +874,7 @@ export default function LessonRunner({
 
   const renderMastery = () => {
     const payload = runner.stage_payload as MasteryStagePayload;
+    const hasAllAnswers = payload.questions.every((question) => Boolean((answers[question.id] ?? "").trim()));
 
     if (payload.submitted && payload.result) {
       const passed = payload.result.passed;
@@ -952,13 +940,10 @@ export default function LessonRunner({
       <div className="space-y-4">
         <div className="rounded-2xl border bg-white p-5 shadow-sm">
           <p className="text-slate-700">
-            {payload.instructions ??
-              `Answer this final set of questions. This part decides whether you have mastered the lesson.`}
+            {payload.instructions ?? "Answer the final questions carefully."}
           </p>
           <p className="mt-3 text-sm text-slate-600">
-            {`This check usually contains ${payload.min_questions ?? 5} to ${
-              payload.max_questions ?? 10
-            } questions. You need ${payload.passing_percent ?? 80}% to master this lesson.`}
+            {String(payload.question_count ?? payload.questions.length) + " questions. Aim for " + String(payload.passing_percent ?? 80) + "% to master this lesson."}
           </p>
         </div>
 
@@ -978,7 +963,7 @@ export default function LessonRunner({
               answers,
             })
           }
-          disabled={isSubmitting}
+          disabled={isSubmitting || !hasAllAnswers}
         >
           Submit final mastery check
         </PrimaryButton>

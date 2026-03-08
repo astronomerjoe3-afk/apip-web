@@ -13,6 +13,9 @@ type RunnerRequest = {
 };
 
 type LocalState = {
+  profile?: {
+    diagnosticScore?: number;
+  };
   diagnostic?: {
     askedIds: string[];
     answers: Record<string, string>;
@@ -104,6 +107,20 @@ const FALLBACK_ANSWER_METADATA: Record<string, FallbackAnswerMeta> = {
   },
 };
 
+Object.assign(FALLBACK_ANSWER_METADATA, {
+  "which pair correctly matches quantity to si unit": { id: "F1-L1-D1", answerIndex: 1, correctAnswer: "length -> m", explanation: "The metre (m) is the SI base unit for length.", teachingFocus: "Match each physical quantity to its agreed SI unit before you use it in a calculation.", misconceptionTag: "unit_quantity_mismatch" },
+  "which is the si base unit for mass": { id: "F1-L1-D2", answerIndex: 1, correctAnswer: "kilogram (kg)", explanation: "Kilogram (kg) is the SI base unit for mass.", teachingFocus: "Base units are fixed standards, so each quantity must keep its correct SI unit.", misconceptionTag: "unit_quantity_mismatch" },
+  "a student records 25 for the length of a table what is the scientific problem with this result": { id: "F1-L1-T1", answerIndex: 1, correctAnswer: "No unit is given", explanation: "A measurement must include a unit.", teachingFocus: "A complete measurement always combines a number with a unit.", misconceptionTag: "unit_as_label_only" },
+  "which is a complete measurement": { id: "F1-L1-C1", answerIndex: 1, correctAnswer: "12 cm", explanation: "A complete measurement includes both the number and the unit.", teachingFocus: "Measurements are only meaningful when the number and the unit stay together.", misconceptionTag: "unit_as_label_only" },
+});
+
+Object.assign(FALLBACK_ANSWER_METADATA, {
+  "which quantity is a vector": { id: "F1-L2-D1", answerIndex: 2, correctAnswer: "velocity", explanation: "Velocity is a vector because it needs both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" },
+  "which statement is correct": { id: "F1-L2-D2", answerIndex: 2, correctAnswer: "Vectors have magnitude and direction", explanation: "A vector combines size and direction.", teachingFocus: "Do not treat vectors and scalars as interchangeable descriptions.", misconceptionTag: "vector_scalar_confusion" },
+  "a car moves 5 km east is this a scalar or vector description": { id: "F1-L2-T1", answerIndex: 1, correctAnswer: "Vector", explanation: "The direction east makes it a vector.", teachingFocus: "Direction is the feature that turns a scalar description into a vector one.", misconceptionTag: "vector_scalar_confusion" },
+  "which is a scalar quantity": { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" },
+});
+
 function normalizeLessonId(value: unknown): string {
   return String(value || "").replace(/-/g, "_");
 }
@@ -151,6 +168,39 @@ function writeState(moduleId: string, lessonId: string, state: LocalState): void
 
 function clearState(moduleId: string, lessonId: string): void {
   writeState(moduleId, lessonId, {});
+}
+
+function mcItem(id: string, prompt: string, choices: string[], answerIndex: number, hint: string, explanation: string): UnknownRecord {
+  return {
+    id,
+    prompt,
+    choices,
+    answer_index: answerIndex,
+    hint,
+    feedback: choices.map((_, index) => (index === answerIndex ? explanation : hint)),
+  };
+}
+
+function shortItem(id: string, prompt: string, acceptedAnswers: string[], hint: string): UnknownRecord {
+  return {
+    id,
+    prompt,
+    choices: [],
+    accepted_answers: acceptedAnswers,
+    hint,
+    feedback: [hint],
+  };
+}
+
+function lessonCode(lesson: UnknownRecord, runnerLesson: UnknownRecord = {}): string {
+  return normalizeLessonId(lesson.lesson_id || lesson.id || runnerLesson.lesson_id || runnerLesson.id)
+    .toUpperCase();
+}
+
+function hasMeaningfulFeedback(value: string): boolean {
+  const normalized = value.trim().toLowerCase();
+  if (!normalized) return false;
+  return !["correct", "correct.", "no", "no.", "incorrect", "incorrect.", "incomplete", "incomplete."].includes(normalized);
 }
 
 function hash(input: string): number {
@@ -424,18 +474,95 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
   return refs.slice(0, 4);
 }
 
-function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
-  const seen = new Set<string>();
-  const ordered = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson), ...itemsFrom(lesson, "diagnostic")];
-  return ordered.filter((item) => { const id = text(asRecord(item).id); if (!id || seen.has(id)) return false; seen.add(id); return true; });
+function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
+  switch (lessonCode(lesson)) {
+    case "F1_L1":
+      return [
+        mcItem("F1-L1-M1", "Why do SI units matter in science?", ["They make numbers look larger", "They give measurements a shared standard", "They remove all uncertainty", "They replace calculations"], 1, "Think about communication and consistency.", "SI units let scientists compare measurements using the same standard."),
+        mcItem("F1-L1-M2", "Which is a complete measurement?", ["18", "18 s", "seconds", "time"], 1, "A complete measurement needs a number and a unit.", "18 s is complete because it includes both value and unit."),
+        mcItem("F1-L1-M3", "Which SI unit matches time?", ["kg", "m", "s", "K"], 2, "Time is measured with the second.", "The second (s) is the SI base unit for time."),
+        mcItem("F1-L1-M4", "Which prefix means one-thousandth of the base unit?", ["kilo-", "centi-", "milli-", "mega-"], 2, "Think about the smallest of these prefixes.", "milli- means 1/1000 of the base unit."),
+        mcItem("F1-L1-M5", "Which conversion is correct?", ["0.8 m = 80 cm", "0.8 m = 8 cm", "0.8 m = 800 cm", "0.8 m = 0.08 cm"], 0, "One metre contains 100 centimetres.", "0.8 m equals 80 cm because 1 m equals 100 cm."),
+        mcItem("F1-L1-M6", "A student writes 14 for the mass of a book. What is missing?", ["A graph", "A direction", "A unit", "A decimal point"], 2, "A scientific measurement is incomplete without one key part.", "The unit is missing, so the measurement does not yet tell us what the number means."),
+        shortItem("F1-L1-M7", "Convert 0.35 m to cm.", ["35", "35 cm", "35 centimetres"], "Use 1 m = 100 cm."),
+        shortItem("F1-L1-M8", "Convert 250 cm to m.", ["2.5", "2.5 m", "2.5 metres"], "Use 100 cm = 1 m."),
+      ];
+    case "F1_L2":
+      return [
+        mcItem("F1-L2-M1", "Which quantity is a scalar?", ["velocity", "force", "distance", "displacement"], 2, "A scalar needs size only.", "Distance is a scalar because it has magnitude only."),
+        mcItem("F1-L2-M2", "Which quantity is a vector?", ["speed", "mass", "temperature", "displacement"], 3, "A vector needs direction.", "Displacement is a vector because it includes both size and direction."),
+        mcItem("F1-L2-M3", "Which statement is true?", ["Scalars need direction", "Vectors have only magnitude", "Vectors have magnitude and direction", "Scalars are always positive"], 2, "Think about what extra information a vector needs.", "Vectors combine magnitude with direction."),
+        mcItem("F1-L2-M4", "A jogger runs 3 km west. This description is a...", ["scalar", "vector", "unit", "formula"], 1, "The word west matters here.", "It is a vector because it includes direction."),
+        mcItem("F1-L2-M5", "Which pair contains only scalars?", ["speed and mass", "velocity and force", "displacement and velocity", "force and acceleration"], 0, "Pick the quantities that do not need direction.", "Speed and mass are both scalar quantities."),
+        mcItem("F1-L2-M6", "Which pair contains only vectors?", ["distance and speed", "mass and temperature", "velocity and force", "time and volume"], 2, "Both quantities should need direction.", "Velocity and force are both vectors."),
+        mcItem("F1-L2-M7", "What extra information turns speed into velocity?", ["mass", "direction", "unit prefix", "temperature"], 1, "Velocity is speed with one extra feature.", "Direction turns speed into velocity."),
+        mcItem("F1-L2-M8", "Why can two vectors with the same magnitude still be different?", ["They can have different units", "They can have different directions", "They can only be different at night", "Vectors never differ once magnitudes match"], 1, "Magnitude alone is not enough for vectors.", "Two vectors can differ if their directions are different."),
+      ];
+    default:
+      return [];
+  }
 }
 
-function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number): number {
+function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownRecord[] {
+  const prefixes = [
+    "Apply the same lesson idea in a new check: ",
+    "Use the rule carefully here: ",
+    "Try the concept again in a fresh question: ",
+    "Use the lesson idea one more time here: ",
+  ];
+  return items.flatMap((item, itemIndex) =>
+    prefixes.map((prefix, prefixIndex) => ({
+      ...asRecord(item),
+      id: code + "_VAR_" + String(itemIndex + 1) + "_" + String(prefixIndex + 1),
+      prompt: prefix + text(asRecord(item).prompt),
+    }))
+  );
+}
+
+function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
+  const seen = new Set<string>();
+  const generated = generatedMasteryItems(lesson);
+  const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)];
+  const variants = masteryVariantsFromPool(fallback, lessonCode(lesson));
+  const ordered = generated.length > 0 ? [...generated, ...fallback, ...variants] : [...fallback, ...variants];
+  return ordered.filter((item) => {
+    const id = text(asRecord(item).id);
+    if (!id || seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
+}
+
+function masteryStrengthScore(runnerLesson: UnknownRecord, state: LocalState): number | null {
+  const diagnosticMeta = asRecord(runnerLesson.diagnostic);
+  const latestDiagnostic = typeof diagnosticMeta.latest_score === "number"
+    ? numberValue(diagnosticMeta.latest_score, 0)
+    : typeof state.profile?.diagnosticScore === "number"
+      ? state.profile.diagnosticScore
+      : null;
+  const bestScore = typeof runnerLesson.best_score === "number" ? numberValue(runnerLesson.best_score, 0) : 0;
+  return bestScore > 0 ? bestScore : latestDiagnostic;
+}
+
+function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number, strengthScore: number | null): number {
   if (poolLength <= 0) return 0;
 
   const minQuestions = Math.min(Math.max(numberValue(masteryMeta.min_questions, MASTERY_DEFAULT_MIN), 1), poolLength);
   const maxQuestions = Math.max(minQuestions, Math.min(numberValue(masteryMeta.max_questions, MASTERY_DEFAULT_MAX), poolLength));
-  const preferred = numberValue(masteryMeta.selected_question_count, minQuestions) || minQuestions;
+  const adaptiveTarget = strengthScore === null
+    ? minQuestions
+    : strengthScore < 0.4
+      ? 5
+      : strengthScore < 0.55
+        ? 6
+        : strengthScore < 0.7
+          ? 7
+          : strengthScore < 0.8
+            ? 8
+            : strengthScore < 0.9
+              ? 9
+              : 10;
+  const preferred = Math.max(numberValue(masteryMeta.selected_question_count, 0), adaptiveTarget);
 
   return Math.max(minQuestions, Math.min(maxQuestions, preferred));
 }
@@ -458,14 +585,14 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
   return {
     title,
-    intro: "Built from your diagnostic, this lesson covers the full sub-unit while giving extra support where needed.",
-    teaching_focus: dedupeText([...repairs.map((item) => text(item.teaching_focus)).filter(Boolean), ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean), ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean), ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean), ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean)]),
+    intro: "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work.",
+    teaching_focus: dedupeText([...repairs.map((item) => text(item.teaching_focus)).filter(Boolean), ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean), ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean), ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean), ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean), "Every measurement has two parts: a number and a unit.", "The unit tells what physical quantity the number belongs to.", "SI units are shared standards, so measurements can be compared anywhere.", "Prefixes such as kilo-, centi-, and milli- create larger or smaller versions of the same base unit.", "Convert by replacing the prefixed unit with its value in the base unit.", "Never compare or combine measurements until the units match."]),
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     sections: [
       { heading: "Fix these ideas", body: repairText },
-      { heading: "Core idea", body: "A scientific measurement only makes sense when the number, the unit, and the quantity stay together." },
-      { heading: "Think of it like this", body: analogyText || "Units work like shared labels for value: they tell everyone what the number means." },
-      { heading: "Worked example", body: "Convert before comparing: 2.5 km = 2500 m and 35 cm = 0.35 m.", worked_example: { prompt: "Convert first, then compare or combine values.", steps: ["kilo means 1000 times the base unit", "centi means one hundredth of the base unit", "match the unit before you judge the measurement"], answer: "2.5 km = 2500 m and 35 cm = 0.35 m" } },
+      { heading: "Core idea", body: lessonCode(lesson) === "F1_L1" ? "A scientific measurement only makes sense when the number, the unit, and the quantity stay together.\n\nA bare number does not tell the full story in physics. 5 could mean 5 metres, 5 seconds, or 5 kilograms. The unit gives the number meaning, and SI units make that meaning standard everywhere." : "Use the main rule from this lesson before you calculate or classify the quantity." },
+      { heading: "Think of it like this", body: lessonCode(lesson) === "F1_L1" ? (analogyText || "Units work like money. One dollar, one cent, and one thousand dollars are all money, but they are not the same size. Prefixes do the same job for measurements: kilo- makes a larger unit, while centi- and milli- make smaller sub-units.") : (analogyText || "Use the shared idea from this lesson to decide what the quantity means before you answer.") },
+      { heading: "Worked example", body: lessonCode(lesson) === "F1_L1" ? "Question: Convert 2.5 km to m. Then convert 35 cm to m." : "Question: Use the main idea from this lesson to solve a similar problem.", worked_example: lessonCode(lesson) === "F1_L1" ? { prompt: "How do we solve this step by step?", steps: ["Identify the prefix first. kilo- means 1000 times the base unit, while centi- means 1/100 of the base unit.", "Replace the prefixed unit with the base-unit relationship: 1 km = 1000 m and 1 cm = 0.01 m.", "Do the number change carefully: 2.5 x 1000 = 2500 and 35 x 0.01 = 0.35.", "Write each new value with the new unit before you compare or combine anything."], answer: "2.5 km = 2500 m and 35 cm = 0.35 m" } : { prompt: "What should you identify first?", steps: ["Name the quantity or idea being tested.", "Match it to the correct rule, unit, or relationship.", "Work step by step before choosing the answer."], answer: "Use the lesson idea first, then calculate or classify carefully." } },
     ],
     review_refs: reviewRefs(lesson),
   };
@@ -491,7 +618,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
       ? "diagnostic"
       : "mastery_check";
 
-  if (stage !== "diagnostic") delete state.diagnostic;
+  if (stage !== "diagnostic" && stage !== "scaffolded_teaching") delete state.diagnostic;
   if (stage !== "concept_gate") delete state.conceptGate;
   if (stage !== "reflection") delete state.reflection;
   if (stage !== "mastery_check" && stage !== "done") delete state.mastery;
@@ -587,7 +714,8 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const masteryState = state.mastery || { nonce: 0 };
     const masteryMeta = asRecord(runnerLesson.mastery_check);
     const pool = masteryItems(resources.lesson);
-    const count = masteryQuestionCount(masteryMeta, pool.length);
+    const strengthScore = masteryStrengthScore(runnerLesson, state);
+    const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
     const selected = shuffle(pool, `mastery:${masteryState.nonce || 0}`).slice(0, count);
     stagePayload = masteryState.submitted || stage === "done"
       ? {
@@ -602,7 +730,8 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
           passing_percent: Math.round(numberValue(masteryMeta.threshold, 0.8) * 100),
         }
       : {
-          instructions: `Use what you learned in ${title} to answer the final questions carefully.`,
+          instructions: "Use what you learned in " + title + " to answer " + String(selected.length) + " final questions carefully.",
+          question_count: selected.length,
           questions: selected.map((item, index) => question(asRecord(item), `mastery:${masteryState.nonce || 0}:${index}`)),
           min_questions: numberValue(masteryMeta.min_questions, 5),
           max_questions: numberValue(masteryMeta.max_questions, 10),
@@ -680,6 +809,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       details: { source: "student_runner_diagnostic", asked_count: feedback.length, correct_count: correctCount },
     });
     writeState(moduleId, lessonId, {
+      profile: {
+        ...(state.profile || {}),
+        diagnosticScore: feedback.length > 0 ? correctCount / feedback.length : 0,
+      },
       conceptGate: state.conceptGate,
       reflection: state.reflection,
       mastery: state.mastery,
@@ -713,6 +846,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     });
     const state = readState(moduleId, lessonId);
     writeState(moduleId, lessonId, {
+      profile: state.profile,
       diagnostic: state.diagnostic,
       reflection: state.reflection,
       mastery: state.mastery,
@@ -762,6 +896,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       details: { source: "student_runner_concept_reconstruction", response_text: state.reflection?.learnerResponse || "" },
     });
     writeState(moduleId, lessonId, {
+      profile: state.profile,
       diagnostic: state.diagnostic,
       conceptGate: state.conceptGate,
       mastery: state.mastery,
@@ -805,7 +940,8 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const masteryMeta = asRecord(runnerLesson.mastery_check);
     const state = readState(moduleId, lessonId);
     const pool = masteryItems(resources.lesson);
-    const count = masteryQuestionCount(masteryMeta, pool.length);
+    const strengthScore = masteryStrengthScore(runnerLesson, state);
+    const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
     const selected = shuffle(pool, `mastery:${state.mastery?.nonce || 0}`).slice(0, count);
     if (selected.length === 0) throw new Error("The mastery check is not available right now.");
     const answers = asRecord(payload.answers);
@@ -814,7 +950,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       return {
         question_id: text(graded.question_id),
         is_correct: graded.is_correct,
-        explanation: graded.is_correct === true ? "Correct." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
+        explanation: graded.is_correct === true ? text(graded.explanation) || "Correct." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
       };
     });
     const correctCount = feedback.filter((entry) => entry.is_correct === true).length;
