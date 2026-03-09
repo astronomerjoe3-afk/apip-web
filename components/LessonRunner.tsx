@@ -62,6 +62,7 @@ type ScaffoldMediaCard = {
   title: string;
   caption: string;
   highlights?: string[];
+  image_url?: string;
   embed_url?: string;
 };
 
@@ -658,6 +659,15 @@ export default function LessonRunner({
                 {card.embed_url ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <iframe src={card.embed_url} title={card.title} className="h-64 w-full" allowFullScreen />
+                  </div>
+                ) : card.image_url ? (
+                  <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
+                    <img
+                      src={card.image_url}
+                      alt={card.title}
+                      className="h-64 w-full bg-slate-50 object-contain"
+                      loading="lazy"
+                    />
                   </div>
                 ) : card.kind !== "video" ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">

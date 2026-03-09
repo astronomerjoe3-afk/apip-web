@@ -1007,12 +1007,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "See the unit ladder",
           caption: "Picture the unit sizes stacked before you convert.",
+          image_url: "/lesson-media/f1/f1-l1-metric-system.svg",
           highlights: ["km -> m -> cm -> mm", "To a smaller unit: the number grows", "To a larger unit: the number shrinks"],
         },
         {
           kind: "visual",
           title: "See why the unit matters",
           caption: "The same number can represent different quantities once the unit changes.",
+          image_url: "/lesson-media/f1/f1-l1-metric-system.svg",
           highlights: ["5 m means a length", "5 s means a time", "5 kg means a mass"],
         },
       ];
@@ -1022,12 +1024,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Picture an arrow on a map",
           caption: "An arrow has a size and it points somewhere. That is the feel of a vector.",
+          image_url: "/lesson-media/f1/f1-l2-vectors-scalars.svg",
           highlights: ["Arrow length = magnitude", "Arrow direction = where it points", "Displacement and force behave like this"],
         },
         {
           kind: "visual",
           title: "Picture a thermometer reading",
           caption: "A thermometer reading tells how much, but it does not point anywhere.",
+          image_url: "/lesson-media/f1/f1-l2-vectors-scalars.svg",
           highlights: ["Magnitude only", "No direction needed", "Temperature, mass, and time behave like this"],
         },
       ];
@@ -1037,12 +1041,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Picture a ruler beside a caliper",
           caption: "Both measure length, but the finer tool can show smaller changes.",
+          image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
           highlights: ["Wider scale divisions = lower resolution", "Finer scale divisions = smaller uncertainty", "Choose the tool to match the job"],
         },
         {
           kind: "visual",
           title: "Picture repeated readings",
           caption: "A tight cluster of repeated readings usually feels more trustworthy than a scattered set.",
+          image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
           highlights: ["Close agreement builds confidence", "Large spread suggests larger uncertainty", "Repeat readings before trusting a result"],
         },
       ];
@@ -1052,12 +1058,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Picture the last kept digit",
           caption: "When rounding, your eyes should move to the next digit after the last one you want to keep.",
+          image_url: "/lesson-media/f1/f1-l4-significant-figures.svg",
           highlights: ["Next digit 0-4: keep it", "Next digit 5-9: round it up", "Leading zeros do not add precision"],
         },
         {
           kind: "visual",
           title: "Picture a calculator and a lab notebook",
           caption: "A calculator may show many digits, but your final answer should match the precision of the measurement.",
+          image_url: "/lesson-media/f1/f1-l4-significant-figures.svg",
           highlights: ["Display digits are not all meaningful", "Report only justified digits", "Precision belongs to the measurement, not the screen"],
         },
       ];
@@ -1067,12 +1075,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Picture equal-sized blocks",
           caption: "Two blocks can have the same volume but different masses. The heavier one is denser.",
+          image_url: "/lesson-media/f1/f1-l5-density.svg",
           highlights: ["Same space, different mass", "More packed matter means greater density", "Dense materials often feel heavier for their size"],
         },
         {
           kind: "visual",
           title: "Picture sinking and floating",
           caption: "Density helps explain why some objects sink and others float in a fluid.",
+          image_url: "/lesson-media/f1/f1-l5-density.svg",
           highlights: ["Less dense than the fluid: float", "More dense than the fluid: sink", "Compare densities, not just masses"],
         },
       ];
@@ -1082,12 +1092,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Picture a target board",
           caption: "A tight cluster away from the centre is precise but not accurate. A cluster near the centre is accurate.",
+          image_url: "/lesson-media/f1/f1-l6-accuracy-precision.svg",
           highlights: ["Cluster shape shows precision", "Position relative to centre shows accuracy", "You need both for strong measurements"],
         },
         {
           kind: "visual",
           title: "Picture a measurement report",
           caption: "A trustworthy report names the tool, the value, and the uncertainty instead of pretending the result is exact.",
+          image_url: "/lesson-media/f1/f1-l6-accuracy-precision.svg",
           highlights: ["State the measurement", "State the uncertainty", "Match the claim to the instrument"],
         },
       ];

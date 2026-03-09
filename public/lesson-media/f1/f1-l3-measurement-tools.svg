@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Measurement tools and repeated readings</title>
+  <desc id="desc">A ruler and caliper next to a comparison of tightly clustered and spread-out readings.</desc>
+  <rect width="1200" height="700" rx="36" fill="#f8fbff"/>
+  <text x="70" y="96" font-size="44" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Measurement tools and repeated readings</text>
+  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Finer tools resolve smaller changes, and tighter repeated readings inspire more trust.</text>
+  <g transform="translate(70 210)">
+    <rect width="520" height="360" rx="28" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
+    <text x="36" y="54" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Ruler and caliper</text>
+    <rect x="48" y="124" width="410" height="36" rx="18" fill="#fde68a"/>
+    <path d="M68 124 V160 M98 124 V148 M128 124 V160 M158 124 V148 M188 124 V160 M218 124 V148 M248 124 V160 M278 124 V148 M308 124 V160 M338 124 V148 M368 124 V160 M398 124 V148 M428 124 V160" stroke="#92400e" stroke-width="4"/>
+    <path d="M150 262 H370" stroke="#475569" stroke-width="18" stroke-linecap="round"/>
+    <path d="M180 210 V320 M340 210 V320" stroke="#0f766e" stroke-width="12" stroke-linecap="round"/>
+    <path d="M162 220 L162 304 M198 220 L198 304" stroke="#0f766e" stroke-width="4"/>
+    <path d="M322 220 L322 304 M358 220 L358 304" stroke="#0f766e" stroke-width="4"/>
+    <text x="52" y="340" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Wide ruler marks = lower resolution</text>
+    <text x="52" y="370" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Fine caliper jaws = smaller uncertainty</text>
+  </g>
+  <g transform="translate(650 210)">
+    <rect width="480" height="360" rx="28" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
+    <text x="34" y="54" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Repeated readings</text>
+    <line x1="60" y1="250" x2="420" y2="250" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="170" cy="240" r="14" fill="#0f766e"/>
+    <circle cx="195" cy="252" r="14" fill="#0f766e"/>
+    <circle cx="220" cy="242" r="14" fill="#0f766e"/>
+    <circle cx="245" cy="248" r="14" fill="#0f766e"/>
+    <circle cx="305" cy="184" r="14" fill="#ef4444"/>
+    <circle cx="348" cy="286" r="14" fill="#ef4444"/>
+    <circle cx="390" cy="214" r="14" fill="#ef4444"/>
+    <text x="72" y="120" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Tight cluster = better agreement</text>
+    <text x="72" y="150" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Large spread = larger uncertainty</text>
+  </g>
+</svg>
