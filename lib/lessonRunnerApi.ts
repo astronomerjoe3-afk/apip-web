@@ -610,11 +610,20 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   );
 }
 
+function hasUsableMasteryAnswer(item: UnknownRecord): boolean {
+  const choices = asList(item.choices);
+  const answerIndex = resolvedAnswerIndex(item);
+  if (choices.length > 0 && answerIndex >= 0 && answerIndex < choices.length) return true;
+  if (shortAnswerAccepted(item).length > 0) return true;
+  return hasMeaningfulFeedback(resolvedCorrectAnswer(item));
+}
+
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const generated = generatedMasteryItems(lesson);
-  const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)];
+  const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
+    .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
   const baseItems = generated.length > 0 ? [...generated, ...fallback] : [...fallback];
   const ordered = baseItems.length >= MASTERY_DEFAULT_MIN ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
   return ordered.filter((item) => {
