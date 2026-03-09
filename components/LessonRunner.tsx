@@ -343,6 +343,8 @@ export default function LessonRunner({
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [reflectionText, setReflectionText] = useState("");
   const [resumeChoiceMade, setResumeChoiceMade] = useState(false);
+  const [simTool, setSimTool] = useState<"ruler" | "caliper" | "micrometer">("ruler");
+  const [simLength, setSimLength] = useState(3.276);
 
   void previousLessonLabel;
 
@@ -874,6 +876,20 @@ export default function LessonRunner({
 
   const renderSimulation = () => {
     const payload = runner.stage_payload as SimulationStagePayload;
+    const simulationLessonKey = runner.lesson_id.replace(/-/g, "_").toUpperCase();
+    const simulationToolConfig = {
+      ruler: { label: "Ruler", step: 0.1, uncertainty: "+/- 0.05 cm", spread: 0.12 },
+      caliper: { label: "Caliper", step: 0.01, uncertainty: "+/- 0.005 cm", spread: 0.03 },
+      micrometer: { label: "Micrometer", step: 0.001, uncertainty: "+/- 0.0005 cm", spread: 0.01 },
+    }[simTool];
+    const simulationReading = Math.round(simLength / simulationToolConfig.step) * simulationToolConfig.step;
+    const simulationRepeated = [-2, -1, 0, 1, 2].map((offset) =>
+      (Math.round((simLength + offset * simulationToolConfig.spread) / simulationToolConfig.step) * simulationToolConfig.step)
+        .toFixed(3)
+        .replace(/\.0+$/, "")
+        .replace(/(\.\d*?)0+$/, "$1")
+    );
+
 
     return (
       <div className="space-y-4">
@@ -899,9 +915,46 @@ export default function LessonRunner({
               className="h-[480px] w-full"
             />
           </div>
+        ) : simulationLessonKey === "F1_L3" ? (
+          <div className="grid gap-4 xl:grid-cols-2">
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Instrument comparison</h4>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {(["ruler", "caliper", "micrometer"] as const).map((toolName) => (
+                  <button
+                    key={toolName}
+                    type="button"
+                    onClick={() => setSimTool(toolName)}
+                    className={`rounded-xl border px-4 py-2 text-sm ${simTool === toolName ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"}`}
+                  >
+                    {toolName === "ruler" ? "Ruler" : toolName === "caliper" ? "Caliper" : "Micrometer"}
+                  </button>
+                ))}
+              </div>
+              <label className="mt-4 block text-sm text-slate-700">
+                Object length (cm)
+                <input className="mt-2 w-full" type="range" min="1" max="8" step="0.001" value={simLength} onChange={(e) => setSimLength(Number(e.target.value))} />
+              </label>
+              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Reported reading:</span> {simulationReading.toFixed(3).replace(/\.0+$/, "").replace(/(\.\d*?)0+$/, "$1")} cm</div>
+              <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Estimated uncertainty:</span> {simulationToolConfig.uncertainty}</div>
+            </div>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Repeated readings</h4>
+              <div className="mt-4 grid gap-2 sm:grid-cols-5">
+                {simulationRepeated.map((item, index) => (
+                  <div key={`${item}-${index}`} className="rounded-xl bg-slate-50 px-3 py-3 text-center text-sm font-medium text-slate-800">
+                    {item} cm
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">
+                Finer tools usually give a tighter cluster of readings, which makes the result more trustworthy.
+              </div>
+            </div>
+          </div>
         ) : (
           <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">
-            The interactive activity will appear here when it is ready.
+            Use the task above to test the idea with a few examples before you continue.
           </div>
         )}
 
