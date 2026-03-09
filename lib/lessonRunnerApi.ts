@@ -234,13 +234,20 @@ function runnerStageIndex(stage: string): number {
 }
 
 function hasProgressBeforeMastery(runnerLesson: UnknownRecord, state: LocalState): boolean {
+  const diagnosticProgress = Boolean(
+    state.diagnostic?.complete ||
+    (state.diagnostic?.askedIds?.length || 0) > 0 ||
+    Object.keys(state.diagnostic?.answers || {}).length > 0 ||
+    state.diagnostic?.recentFeedback
+  );
+
   return completedStageKeys(runnerLesson).some((key) =>
     key === "diagnostic" ||
     key === "scaffolded_teaching" ||
     key === "concept_gate" ||
     key === "simulation" ||
     key === "reflection"
-  ) || Boolean(state.diagnostic?.complete || state.conceptGate?.submitted || state.reflection?.submitted);
+  ) || Boolean(diagnosticProgress || state.conceptGate?.submitted || state.reflection?.submitted);
 }
 
 function mcItem(id: string, prompt: string, choices: string[], answerIndex: number, hint: string, explanation: string): UnknownRecord {
