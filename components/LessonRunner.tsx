@@ -611,15 +611,15 @@ export default function LessonRunner({
                   <table className="min-w-full table-fixed border-collapse text-left text-sm text-slate-700">
                     {table.columns.length === 3 ? (
                       <colgroup>
-                        <col className="w-[26%]" />
-                        <col className="w-[26%]" />
-                        <col className="w-[48%]" />
+                        <col className="w-[28%]" />
+                        <col className="w-[28%]" />
+                        <col className="w-[44%]" />
                       </colgroup>
                     ) : null}
                     <thead className="bg-white text-slate-500">
                       <tr>
                         {table.columns.map((column) => (
-                          <th key={column} className="border-b px-5 py-3 align-top text-left font-semibold">{column}</th>
+                          <th key={column} className="border-b px-5 py-3 align-top text-left font-semibold whitespace-normal break-words">{column}</th>
                         ))}
                       </tr>
                     </thead>
@@ -627,7 +627,7 @@ export default function LessonRunner({
                       {table.rows.map((row, rowIndex) => (
                         <tr key={`${table.title}-${rowIndex}`} className="even:bg-slate-50/70">
                           {row.map((cell, cellIndex) => (
-                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-5 py-3 align-top text-left">{cell}</td>
+                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-5 py-3 align-top text-left whitespace-normal break-words leading-6">{cell}</td>
                           ))}
                         </tr>
                       ))}
