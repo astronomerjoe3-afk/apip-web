@@ -116,6 +116,13 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 });
 
 Object.assign(FALLBACK_ANSWER_METADATA, {
+  "a ruler s smallest division is 1 mm a reasonable reported uncertainty is closest to": { id: "F1L3_D1", answerIndex: 1, correctAnswer: "+/- 0.5 mm", explanation: "+/- 0.5 mm is reasonable because a common estimate is about half of the smallest 1 mm division.", teachingFocus: "For a simple scale reading, a reasonable uncertainty is often about half the smallest division.", misconceptionTag: "uncertainty_estimation" },
+  "if you consistently read too high due to a zero error this is best described as": { id: "F1L3_D2", answerIndex: 1, correctAnswer: "systematic error", explanation: "This is systematic error because the same zero error shifts every reading in the same direction.", teachingFocus: "Systematic error pushes measurements the same way each time, often because of zero error or poor calibration.", misconceptionTag: "random_vs_systematic_error" },
+  "a scale has 0 2 cm divisions what is a reasonable uncertainty to report": { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so 0.2 cm divisions suggest +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" },
+  "state one difference between random error and systematic error": { id: "F1-L3-T1", acceptedAnswers: ["random error varies unpredictably while systematic error shifts all readings the same way", "random error makes readings scatter while systematic error gives a consistent offset", "random error is unpredictable while systematic error is consistent", "random error scatters readings while systematic error shifts them all in one direction"], correctAnswer: "Random error varies unpredictably, while systematic error shifts readings in the same direction each time.", explanation: "Random error causes scatter from reading to reading, while systematic error adds the same bias each time.", teachingFocus: "Separate changing scatter from repeated one-direction bias when you classify error.", misconceptionTag: "random_vs_systematic_error" },
+});
+
+Object.assign(FALLBACK_ANSWER_METADATA, {
   "which quantity is a vector": { id: "F1L2_D1", answerIndex: 2, correctAnswer: "displacement", explanation: "Displacement is a vector because it has both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" },
   "speed is a scalar because it has": { id: "F1L2_D2", answerIndex: 0, correctAnswer: "magnitude only", explanation: "Speed is a scalar because it has magnitude only and no direction.", teachingFocus: "Scalars tell how much only, while vectors add direction.", misconceptionTag: "vector_scalar_confusion" },
   "which statement is correct": { id: "F1-L2-D2", answerIndex: 2, correctAnswer: "Vectors have magnitude and direction", explanation: "A vector combines size and direction.", teachingFocus: "Do not treat vectors and scalars as interchangeable descriptions.", misconceptionTag: "vector_scalar_confusion" },
@@ -288,6 +295,15 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   }
   if (itemId === "F1-L2-T1") {
     return { id: "F1-L2-T1", answerIndex: 1, correctAnswer: "Vector", explanation: "The direction east makes it a vector.", teachingFocus: "Direction is the feature that turns a scalar description into a vector one.", misconceptionTag: "vector_scalar_confusion" };
+  }
+  if (itemId === "F1L3_D1" || itemId === "F1-L3-D1") {
+    return { id: "F1L3_D1", answerIndex: 1, correctAnswer: "+/- 0.5 mm", explanation: "+/- 0.5 mm is reasonable because a common estimate is about half of the smallest 1 mm division.", teachingFocus: "For a simple scale reading, a reasonable uncertainty is often about half the smallest division.", misconceptionTag: "uncertainty_estimation" };
+  }
+  if (itemId === "F1L3_D2" || itemId === "F1-L3-D2") {
+    return { id: "F1L3_D2", answerIndex: 1, correctAnswer: "systematic error", explanation: "This is systematic error because the same zero error shifts every reading in the same direction.", teachingFocus: "Systematic error pushes measurements the same way each time, often because of zero error or poor calibration.", misconceptionTag: "random_vs_systematic_error" };
+  }
+  if (itemId === "F1L3_T2" || itemId === "F1-L3-T2") {
+    return { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so 0.2 cm divisions suggest +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" };
   }
   if (itemId === "F1-L2-C1") {
     return { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" };
