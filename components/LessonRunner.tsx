@@ -366,6 +366,7 @@ export default function LessonRunner({
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const answersRef = useRef<Record<string, string>>({});
   const [reflectionText, setReflectionText] = useState("");
+  const reflectionTextareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [simTool, setSimTool] = useState<"ruler" | "caliper" | "micrometer">("ruler");
   const [simLength, setSimLength] = useState(3.276);
   const [simZeroError, setSimZeroError] = useState(0.08);
@@ -1208,11 +1209,83 @@ export default function LessonRunner({
 
   const renderReflection = () => {
     const payload = runner.stage_payload as ReflectionStagePayload;
+    const reflectionLessonKey = runner.lesson_id.replace(/-/g, "_").toUpperCase();
+    const reflectionWordCount = reflectionText.trim()
+      ? reflectionText.trim().split(/\s+/).length
+      : 0;
+    const defaultReflectionCards = [
+      {
+        title: "Say the main idea",
+        text: payload.guidance?.[0] || "State the key idea in one clear sentence first.",
+        starter: "The main idea is that ",
+      },
+      {
+        title: "Give an example",
+        text: payload.guidance?.[1] || "Use one example that would help a classmate see the idea.",
+        starter: "For example, ",
+      },
+      {
+        title: "Warn about a mistake",
+        text: payload.guidance?.[2] || "Point out one mistake or misunderstanding to avoid.",
+        starter: "A common mistake is to think that ",
+      },
+    ];
+    const reflectionMission =
+      reflectionLessonKey === "F1_L3"
+        ? {
+            badge: "Lab Coach Challenge",
+            intro:
+              "A classmate measured the same object with different instruments and got confusing results. Coach them so they know which readings to trust.",
+            placeholder:
+              "Teach a classmate how tool choice, repeated readings, and zero error affect how much you trust a measurement.",
+            cards: [
+              {
+                title: "Choose the right tool",
+                text: "Explain why finer divisions let a tool show more detail and smaller uncertainty.",
+                starter:
+                  "A finer instrument has smaller divisions, so ",
+              },
+              {
+                title: "Use repeated readings",
+                text: "Show how repeated measurements reveal random scatter and improve trust.",
+                starter: "Repeated readings matter because ",
+              },
+              {
+                title: "Check the zero first",
+                text: "Explain what happens if the instrument starts with a zero error.",
+                starter: "If the zero is shifted, then ",
+              },
+            ],
+          }
+        : {
+            badge: "Teach It Like A Coach",
+            intro:
+              "Pretend a classmate missed this mission. Give them a short explanation they would actually understand.",
+            placeholder:
+              "Explain the idea clearly in your own words, as if you were helping a classmate catch up.",
+            cards: defaultReflectionCards,
+          };
+    const reflectionMilestones = [
+      { label: "Started", done: reflectionWordCount >= 1 },
+      { label: "Clear idea", done: reflectionWordCount >= 25 },
+      { label: "Strong detail", done: reflectionWordCount >= 45 },
+    ];
+    const addReflectionStarter = (starter: string) => {
+      setReflectionText((current) =>
+        current.trim() ? `${current.trim()}\n\n${starter}` : starter
+      );
+      requestAnimationFrame(() => {
+        reflectionTextareaRef.current?.focus();
+      });
+    };
 
     if (payload.submitted) {
       return (
         <div className="space-y-4">
-          <div className="rounded-2xl border bg-green-50 p-5">
+          <div className="rounded-[28px] border border-emerald-200 bg-[linear-gradient(135deg,rgba(236,253,245,0.95),rgba(255,255,255,0.98))] p-6 shadow-sm">
+            <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
+              Explanation saved
+            </span>
             <h3 className="text-lg font-semibold text-slate-900">
               Good work
             </h3>
@@ -1244,28 +1317,110 @@ export default function LessonRunner({
     }
 
     return (
-      <div className="space-y-4">
-        <div className="rounded-2xl border bg-white p-5 shadow-sm">
-          {payload.title ? (
-            <h3 className="text-lg font-semibold text-slate-900">{payload.title}</h3>
-          ) : null}
-          <p className="mt-2 text-slate-700">{payload.prompt}</p>
+      <div className="space-y-5">
+        <div className="overflow-hidden rounded-[28px] border border-sky-200 bg-[radial-gradient(circle_at_top_left,_rgba(186,230,253,0.72),_rgba(255,255,255,0.96)_50%),linear-gradient(135deg,rgba(255,247,237,0.94),rgba(239,246,255,0.94))] p-6 shadow-sm">
+          <div className="flex flex-wrap items-start justify-between gap-5">
+            <div className="max-w-3xl">
+              <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
+                {reflectionMission.badge}
+              </span>
+              {payload.title ? (
+                <h3 className="mt-4 text-2xl font-semibold text-slate-900">
+                  {payload.title}
+                </h3>
+              ) : null}
+              <p className="mt-3 text-base leading-7 text-slate-700">
+                {payload.prompt}
+              </p>
+              <div className="mt-4 max-w-3xl rounded-2xl bg-white/85 px-4 py-4 text-sm leading-6 text-slate-700 shadow-sm ring-1 ring-sky-100">
+                {reflectionMission.intro}
+              </div>
+            </div>
 
-          {payload.guidance?.length ? (
-            <ul className="mt-4 list-disc space-y-1 pl-5 text-slate-700">
-              {payload.guidance.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          ) : null}
+            <div className="min-w-[220px] rounded-[24px] bg-slate-950 px-5 py-4 text-white shadow-lg">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
+                Coach meter
+              </p>
+              <p className="mt-3 text-3xl font-semibold">{reflectionWordCount}</p>
+              <p className="text-sm text-slate-300">words written</p>
+              <div className="mt-4 space-y-2">
+                {reflectionMilestones.map((milestone) => (
+                  <div
+                    key={milestone.label}
+                    className={`rounded-full px-3 py-2 text-sm ${
+                      milestone.done
+                        ? "bg-emerald-500/20 text-emerald-100"
+                        : "bg-white/10 text-slate-300"
+                    }`}
+                  >
+                    {milestone.done ? "Unlocked" : "Next"}: {milestone.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            {reflectionMission.cards.map((card) => (
+              <button
+                key={card.title}
+                type="button"
+                onClick={() => addReflectionStarter(card.starter)}
+                className="rounded-[24px] border border-white/90 bg-white/88 p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+                  Idea card
+                </span>
+                <h4 className="mt-3 text-lg font-semibold text-slate-900">
+                  {card.title}
+                </h4>
+                <p className="mt-2 text-sm leading-6 text-slate-700">
+                  {card.text}
+                </p>
+                <p className="mt-4 text-sm font-medium text-sky-700">
+                  Tap to add a starter
+                </p>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="rounded-2xl border bg-white p-5 shadow-sm">
+        {payload.guidance?.length ? (
+          <div className="grid gap-3 md:grid-cols-3">
+            {payload.guidance.map((item, index) => (
+              <div
+                key={item}
+                className="rounded-[24px] border bg-white p-4 shadow-sm"
+              >
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                  Strong answer {index + 1}
+                </span>
+                <p className="mt-3 text-sm leading-6 text-slate-700">{item}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="rounded-[28px] border bg-white p-5 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h4 className="text-lg font-semibold text-slate-900">
+                Build your explanation
+              </h4>
+              <p className="mt-1 text-sm text-slate-600">
+                Use the idea cards, then make the explanation sound like you.
+              </p>
+            </div>
+            <div className="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+              Aim for 2 to 4 clear sentences
+            </div>
+          </div>
           <textarea
-            className="min-h-[180px] w-full rounded-xl border p-3"
+            ref={reflectionTextareaRef}
+            className="mt-4 min-h-[220px] w-full rounded-[24px] border border-slate-200 bg-[linear-gradient(180deg,rgba(248,250,252,0.92),rgba(255,255,255,1))] p-4 text-base leading-7 text-slate-800 shadow-inner outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100"
             value={reflectionText}
             onChange={(e) => setReflectionText(e.target.value)}
-            placeholder="Explain the idea in your own words"
+            placeholder={reflectionMission.placeholder}
           />
         </div>
 
@@ -1278,7 +1433,7 @@ export default function LessonRunner({
           }
           disabled={isSubmitting || !reflectionText.trim()}
         >
-          Submit my explanation
+          Lock in my explanation
         </PrimaryButton>
       </div>
     );
