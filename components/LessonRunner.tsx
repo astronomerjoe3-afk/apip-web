@@ -1115,7 +1115,7 @@ export default function LessonRunner({
               </PrimaryButton>
             ) : null}
             <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>
-              Start this mission again
+              Start this unit all over again
             </SecondaryButton>
           </div>
           {payload.feedback?.map((item, index) => (
@@ -1233,7 +1233,7 @@ export default function LessonRunner({
           <p className="text-slate-800">{restartCopy}</p>
           <div className="mt-3">
             <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>
-              Start this mission again
+              Start this unit all over again
             </SecondaryButton>
           </div>
         </div>
@@ -1248,11 +1248,11 @@ export default function LessonRunner({
       {showResumeChoice ? (
         <div className="rounded-3xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-sky-700">Saved progress found</p>
-          <h3 className="mt-3 text-2xl font-semibold text-slate-900">Continue this mission or start again</h3>
-          <p className="mt-3 max-w-3xl text-slate-700">Pick up where you left off or start this mission again.</p>
+          <h3 className="mt-3 text-2xl font-semibold text-slate-900">Continue this unit or start again</h3>
+          <p className="mt-3 max-w-3xl text-slate-700">Continue from where you stopped or start this unit all over again.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue where I stopped</PrimaryButton>
-            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start this mission again</SecondaryButton>
+            <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue from where I stopped</PrimaryButton>
+            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start this unit all over again</SecondaryButton>
           </div>
         </div>
       ) : renderStage()}
