@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
 
@@ -195,10 +195,10 @@ function StageHeader({
   subtitle?: string;
 }) {
   return (
-    <div className="mb-6 rounded-2xl border bg-white p-5 shadow-sm">
+    <div className="lesson-stage-hero mb-6 rounded-2xl border p-5 shadow-sm">
       <p className="mb-2 text-sm font-medium text-slate-500">{eyebrow}</p>
-      <h2 className="text-2xl font-semibold text-slate-900">{title}</h2>
-      {subtitle ? <p className="mt-2 text-slate-600">{subtitle}</p> : null}
+      <h2 className="lesson-stage-title text-2xl font-semibold text-slate-900">{title}</h2>
+      {subtitle ? <p className="lesson-stage-subtitle mt-2 text-slate-600">{subtitle}</p> : null}
     </div>
   );
 }
@@ -217,7 +217,7 @@ function PrimaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="rounded-xl bg-slate-900 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-50"
+      className="lesson-action-button rounded-xl bg-slate-900 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-50"
     >
       {children}
     </button>
@@ -238,7 +238,7 @@ function SecondaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+      className="lesson-action-button rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {children}
     </button>
@@ -290,28 +290,46 @@ function QuestionBlock({
           placeholder="Write your answer here"
         />
       ) : (
-        <div className="space-y-2">
-          {(question.options ?? []).map((option) => (
-            <label
-              key={option.value}
-              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3"
-            >
-              <input
-                type="radio"
-                name={question.id}
-                value={option.value}
-                checked={value === option.value}
-                onChange={(e) => onChange(question.id, e.target.value)}
-              />
-              <span>{option.label}</span>
-            </label>
-          ))}
+        <div className="space-y-2" role="radiogroup" aria-label={question.prompt}>
+          {(question.options ?? []).map((option) => {
+            const selected = value === option.value;
+
+            return (
+              <button
+                key={option.value}
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                onClick={() => onChange(question.id, option.value)}
+                className="flex w-full items-center gap-3 rounded-xl border p-3 text-left"
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  borderColor: selected ? "rgba(16, 35, 63, 0.28)" : undefined,
+                  background: selected ? "rgba(232, 238, 252, 0.82)" : undefined,
+                  boxShadow: selected ? "0 12px 28px rgba(15, 23, 42, 0.08)" : "none",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    width: 18,
+                    height: 18,
+                    minWidth: 18,
+                    borderRadius: 999,
+                    border: selected ? "5px solid #10233f" : "2px solid rgba(109, 123, 143, 0.8)",
+                    background: "#fff",
+                  }}
+                />
+                <span>{option.label}</span>
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
   );
 }
-
 function masteryFeedbackBody(item: MasteryFeedbackItem, lessonTitle: string): string {
   const explanation = (item.explanation ?? "").trim();
   const placeholder = ["review the lesson idea and try again", "review this idea carefully before trying again"];
@@ -358,11 +376,22 @@ export default function LessonRunner({
   const [error, setError] = useState<string | null>(null);
 
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const answersRef = useRef<Record<string, string>>({});
   const [reflectionText, setReflectionText] = useState("");
-  const [resumeChoiceMade, setResumeChoiceMade] = useState(false);
   const [simTool, setSimTool] = useState<"ruler" | "caliper" | "micrometer">("ruler");
   const [simLength, setSimLength] = useState(3.276);
+  const [simZeroError, setSimZeroError] = useState(0.08);
 
+  const [simMetricMeters, setSimMetricMeters] = useState(0.35);
+  const [simVectorMagnitude, setSimVectorMagnitude] = useState(6);
+  const [simVectorAngle, setSimVectorAngle] = useState(35);
+  const [simSigSample, setSimSigSample] = useState("12.349");
+  const [simSigFigures, setSimSigFigures] = useState(3);
+  const [simDensityMass, setSimDensityMass] = useState(180);
+  const [simDensityVolume, setSimDensityVolume] = useState(120);
+  const [simFluidDensity, setSimFluidDensity] = useState(1);
+  const [simBias, setSimBias] = useState(18);
+  const [simSpread, setSimSpread] = useState(24);
   void previousLessonLabel;
 
   const loadRunner = useCallback(async () => {
@@ -387,6 +416,7 @@ export default function LessonRunner({
         (data as RunnerResponse).active_stage === "concept_gate" ||
         (data as RunnerResponse).active_stage === "mastery"
       ) {
+        answersRef.current = {};
         setAnswers({});
       }
     } catch (err) {
@@ -402,7 +432,19 @@ export default function LessonRunner({
   }, [loadRunner]);
 
   useEffect(() => {
-    setResumeChoiceMade(false);
+    setSimTool("ruler");
+    setSimLength(3.276);
+    setSimZeroError(0.08);
+    setSimMetricMeters(0.35);
+    setSimVectorMagnitude(6);
+    setSimVectorAngle(35);
+    setSimSigSample("12.349");
+    setSimSigFigures(3);
+    setSimBias(18);
+    setSimSpread(24);
+    setSimDensityMass(180);
+    setSimDensityVolume(120);
+    setSimFluidDensity(1);
   }, [lessonId, moduleId]);
 
   const restartMission = useCallback(async (fromBeginning = false) => {
@@ -414,10 +456,10 @@ export default function LessonRunner({
         await onRestartFromBeginning();
       } else {
         await restartLessonProgress(moduleId, lessonId);
+        answersRef.current = {};
         setAnswers({});
         setReflectionText("");
-        setResumeChoiceMade(false);
-        await loadRunner();
+            await loadRunner();
       }
     } catch (err) {
       console.error(err);
@@ -442,7 +484,7 @@ export default function LessonRunner({
         await loadRunner();
       } catch (err) {
         console.error(err);
-        setError("Something went wrong while saving your progress.");
+        setError(err instanceof Error ? err.message : "Something went wrong while saving your progress.");
       } finally {
         setIsSubmitting(false);
       }
@@ -451,18 +493,14 @@ export default function LessonRunner({
   );
 
   const setAnswer = useCallback((questionId: string, value: string) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }));
+    answersRef.current = { ...answersRef.current, [questionId]: value };
+    setAnswers(answersRef.current);
+    setError(null);
   }, []);
 
-  const showResumeChoice = useMemo(() => {
-    if (!runner || resumeChoiceMade) return false;
-    const payload = runner.stage_payload as Partial<MasteryStagePayload>;
-    return runner.active_stage === "mastery" && runner.lesson_status !== "not_started" && payload.submitted !== true;
-  }, [resumeChoiceMade, runner]);
 
   const stageTitle = useMemo(() => {
     if (!runner) return "";
-    if (showResumeChoice) return "Choose how to continue";
     switch (runner.active_stage) {
       case "diagnostic":
         return "Check what you already know";
@@ -479,12 +517,12 @@ export default function LessonRunner({
       default:
         return "";
     }
-  }, [runner, showResumeChoice]);
+  }, [runner]);
 
   const showRestartAction = useMemo(() => {
-    if (!runner || showResumeChoice) return false;
+    if (!runner) return false;
     return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic";
-  }, [runner, showResumeChoice]);
+  }, [runner]);
 
   const restartCopy = useMemo(() => {
     if (!runner) return "";
@@ -495,9 +533,6 @@ export default function LessonRunner({
 
   const stageSubtitle = useMemo(() => {
     if (!runner) return "";
-    if (showResumeChoice) {
-      return "Continue where you stopped or start this mission again.";
-    }
     switch (runner.active_stage) {
       case "diagnostic":
         return "A few quick questions first.";
@@ -514,7 +549,7 @@ export default function LessonRunner({
       default:
         return "";
     }
-  }, [runner, showResumeChoice]);
+  }, [runner]);
 
   if (isLoading) {
     return (
@@ -536,16 +571,60 @@ export default function LessonRunner({
 
   const renderDiagnostic = () => {
     const payload = runner.stage_payload as DiagnosticStagePayload & { answered_count?: number; action_label?: string; recent_feedback?: DiagnosticFeedbackItem; };
-    const activeQuestion = payload.questions[0]; const hasAnswer = activeQuestion ? Boolean(answers[activeQuestion.id]?.trim()) : false;
+    const activeQuestion = payload.questions[0];
+    const actionLabel = payload.action_label ?? "Check my answer";
+    const submitDiagnosticAnswer = () => {
+      if (!activeQuestion) {
+        return;
+      }
+
+      const answer = answersRef.current[activeQuestion.id]?.trim();
+      if (!answer) {
+        setError("Choose an answer before continuing.");
+        return;
+      }
+
+      void sendEvent("diagnostic_submitted", {
+        from_stage: "diagnostic",
+        answers: { [activeQuestion.id]: answer },
+      });
+    };
+    const feedbackExtra = (item: DiagnosticFeedbackItem, showCorrectAnswer = !item.is_correct) => {
+      const learnerAnswer = item.learner_answer == null
+        ? ""
+        : Array.isArray(item.learner_answer)
+          ? item.learner_answer.join(", ")
+          : item.learner_answer;
+
+      return (
+        <div className="space-y-1">
+          {learnerAnswer ? (
+            <p>
+              <span className="font-medium">Your answer:</span> {learnerAnswer}
+            </p>
+          ) : null}
+          {showCorrectAnswer ? (
+            <p>
+              <span className="font-medium">Correct answer:</span> {feedbackAnswer(item.correct_answer)}
+            </p>
+          ) : null}
+          {item.teaching_focus ? (
+            <p>
+              <span className="font-medium">Key idea:</span> {item.teaching_focus}
+            </p>
+          ) : null}
+        </div>
+      );
+    };
     if (payload.submitted && payload.feedback?.length) {
       return (
         <div className="space-y-4">
           <div className="rounded-2xl border bg-white p-5 shadow-sm">
             <h3 className="text-lg font-semibold text-slate-900">
-              Diagnostic review
+              Let&apos;s review your answers
             </h3>
             <p className="mt-2 text-slate-700">
-              See what was right and what to fix.
+              You will see what was right, what needs fixing, and why.
             </p>
           </div>
 
@@ -555,7 +634,7 @@ export default function LessonRunner({
               correct={item.is_correct}
               title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
               body={feedbackBody(item)}
-              extra={item.is_correct ? undefined : (<p><span className="font-medium">Correct answer:</span> {feedbackAnswer(item.correct_answer)}</p>)}
+              extra={feedbackExtra(item, true)}
             />
           ))}
 
@@ -576,7 +655,12 @@ export default function LessonRunner({
     return (
       <div className="space-y-4">
         {payload.recent_feedback ? (
-          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "Correct" : "Wrong"} body={feedbackBody(payload.recent_feedback)} extra={payload.recent_feedback.is_correct ? undefined : <p><span className="font-medium">Correct answer:</span> {feedbackAnswer(payload.recent_feedback.correct_answer)}</p>} />
+          <FeedbackCard
+            correct={payload.recent_feedback.is_correct}
+            title={payload.recent_feedback.is_correct ? "That answer is correct" : "Not quite yet"}
+            body={feedbackBody(payload.recent_feedback)}
+            extra={feedbackExtra(payload.recent_feedback)}
+          />
         ) : null}
         {payload.instructions ? (
           <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">{payload.instructions}</div>
@@ -591,15 +675,10 @@ export default function LessonRunner({
         ))}
 
         <PrimaryButton
-          onClick={() =>
-            void sendEvent("diagnostic_submitted", {
-              from_stage: "diagnostic",
-              answers,
-            })
-          }
-          disabled={isSubmitting || !hasAnswer}
+          onClick={submitDiagnosticAnswer}
+          disabled={isSubmitting}
         >
-          {payload.action_label ?? "Check answer"}
+          {actionLabel}
         </PrimaryButton>
       </div>
     );
@@ -607,16 +686,17 @@ export default function LessonRunner({
 
   const renderScaffold = () => {
     const payload = runner.stage_payload as ScaffoldStagePayload;
+    const seenMediaImageUrls = new Set<string>();
 
     return (
-      <div className="space-y-4">
-        <div className="rounded-2xl border bg-white p-5 shadow-sm">
-          {payload.intro ? <p className="text-slate-700">{payload.intro}</p> : null}
+      <div className="space-y-6">
+        <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
+          {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{payload.intro}</p> : null}
 
           {payload.teaching_focus?.length ? (
-            <div className={`${payload.intro ? "mt-4" : ""} rounded-xl bg-slate-50 p-4`}>
+            <div className={`${payload.intro ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
               <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-700">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
                 {payload.teaching_focus.slice(0, 6).map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -626,9 +706,9 @@ export default function LessonRunner({
         </div>
 
         {payload.reference_tables?.length ? (
-          <div className="grid gap-4 xl:grid-cols-2">
+          <div className="lesson-display-deck">
             {payload.reference_tables.map((table) => (
-              <div key={table.title} className="overflow-hidden rounded-2xl border bg-white shadow-sm">
+              <div key={table.title} className="lesson-display-slide overflow-hidden rounded-2xl border bg-white shadow-sm">
                 <div className="border-b bg-slate-50 p-5">
                   <h4 className="text-lg font-semibold text-slate-900">{table.title}</h4>
                   {table.caption ? <p className="mt-2 text-sm text-slate-600">{table.caption}</p> : null}
@@ -666,11 +746,16 @@ export default function LessonRunner({
         ) : null}
 
         {payload.media_cards?.length ? (
-          <div className="grid gap-4 md:grid-cols-2">
-            {payload.media_cards.map((card) => (
-              <div key={`${card.kind ?? "visual"}-${card.title}`} className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-5 shadow-sm">
+          <div className="lesson-display-deck">
+            {payload.media_cards.map((card) => {
+              const imageUrl = card.image_url || "";
+              const shouldShowImage = imageUrl ? !seenMediaImageUrls.has(imageUrl) : false;
+              if (shouldShowImage) seenMediaImageUrls.add(imageUrl);
+
+              return (
+              <div key={`${card.kind ?? "visual"}-${card.title}`} className="lesson-display-slide rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
                 <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
-                  {card.kind === "video" ? "Video support" : "Visual support"}
+                  {card.kind === "video" ? "Video support" : shouldShowImage ? "Visual support" : "Concept support"}
                 </span>
                 <h4 className="mt-4 text-lg font-semibold text-slate-900">{card.title}</h4>
                 <p className="mt-2 text-slate-700">{card.caption}</p>
@@ -679,10 +764,10 @@ export default function LessonRunner({
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <iframe src={card.embed_url} title={card.title} className="h-64 w-full" allowFullScreen />
                   </div>
-                ) : card.image_url ? (
+                ) : shouldShowImage ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <img
-                      src={card.image_url}
+                      src={imageUrl}
                       alt={card.title}
                       className="h-64 w-full bg-slate-50 object-contain"
                       loading="lazy"
@@ -690,22 +775,31 @@ export default function LessonRunner({
                   </div>
                 ) : card.kind !== "video" ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
-                    <svg viewBox="0 0 520 240" className="h-64 w-full" role="img" aria-label={card.title}>
-                      <rect width="520" height="240" rx="24" fill="#f8fbff" />
-                      <rect x="24" y="24" width="472" height="192" rx="24" fill="#ffffff" opacity="0.94" />
-                      <circle cx="132" cy="112" r="52" fill="#dbeafe" />
-                      <path d="M102 142 C128 92 154 92 180 142" fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
-                      <path d="M192 98 L222 82 L216 116" fill="#0f766e" />
-                      <rect x="230" y="62" width="214" height="36" rx="18" fill="#eff6ff" />
-                      <text x="246" y="85" fontSize="18" fontWeight="700" fill="#0f172a">{card.title}</text>
-                      <text x="246" y="122" fontSize="15" fill="#475569">{card.caption}</text>
-                      {card.highlights?.slice(0, 2).map((item, index) => (
-                        <g key={item}>
-                          <rect x="230" y={142 + index * 34} width="214" height="24" rx="12" fill="#f8fafc" stroke="#dbeafe" />
-                          <text x="244" y={158 + index * 34} fontSize="13" fill="#334155">{item}</text>
-                        </g>
-                      ))}
-                    </svg>
+                    <div className="grid min-h-64 gap-5 bg-[radial-gradient(circle_at_top_left,_rgba(219,234,254,0.75),_rgba(255,255,255,0.96)_58%)] p-5 md:grid-cols-[180px,1fr] md:items-center">
+                      <div className="flex items-center justify-center">
+                        <div className="relative h-36 w-36 rounded-[2rem] bg-sky-100 shadow-inner">
+                          <div className="absolute inset-x-6 top-8 h-4 rounded-full bg-sky-300/80" />
+                          <div className="absolute inset-x-8 top-16 h-4 rounded-full bg-sky-400/70" />
+                          <div className="absolute inset-x-10 top-24 h-4 rounded-full bg-sky-500/65" />
+                          <div className="absolute -right-4 top-14 h-0 w-0 border-y-[18px] border-l-[28px] border-y-transparent border-l-teal-600" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-sky-800">
+                          Concept snapshot
+                        </div>
+                        <p className="mt-4 text-base leading-7 text-slate-700">{card.caption}</p>
+                        {card.highlights?.length ? (
+                          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                            {card.highlights.slice(0, 3).map((item) => (
+                              <div key={item} className="rounded-2xl border border-sky-100 bg-white/90 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
                   </div>
                 ) : null}
 
@@ -717,36 +811,38 @@ export default function LessonRunner({
                   </ul>
                 ) : null}
               </div>
-            ))}
+              );
+            })}
           </div>
         ) : null}
 
-        {payload.sections.map((section, index) => (
-          <div key={`${section.heading}-${index}`} className="rounded-2xl border bg-white p-5 shadow-sm">
+        <div className="lesson-display-deck">
+          {payload.sections.map((section, index) => (
+            <div key={`${section.heading}-${index}`} className="lesson-display-slide rounded-2xl border bg-white p-6 shadow-sm">
             <h4 className="text-lg font-semibold text-slate-900">{section.heading}</h4>
             {section.body && !section.worked_example ? (
-              <p className="mt-2 whitespace-pre-line text-slate-700">{section.body}</p>
+                <p className="mt-3 whitespace-pre-line text-slate-700">{section.body}</p>
             ) : null}
 
             {section.analogy ? (
-              <div className="mt-4 rounded-xl bg-slate-50 p-4">
+                <div className="mt-5 rounded-2xl bg-slate-50 p-5">
                 <p className="font-medium text-slate-900">Analogy bridge</p>
                 <p className="mt-2 text-slate-700">{section.analogy}</p>
               </div>
             ) : null}
 
             {section.worked_example ? (
-              <div className="mt-4 rounded-xl bg-slate-50 p-4">
+                <div className="mt-5 rounded-2xl bg-slate-50 p-5">
                 <p className="font-medium text-slate-900">Example</p>
                 <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-slate-500">Question</p>
                 <p className="mt-2 text-slate-700">{section.worked_example.prompt}</p>
                 <p className="mt-4 text-sm font-medium uppercase tracking-[0.12em] text-slate-500">Step-by-step solution</p>
-                <ol className="mt-3 list-decimal space-y-1 pl-5 text-slate-700">
+                <ol className="mt-3 list-decimal space-y-2 pl-5 text-slate-700">
                   {section.worked_example.steps.map((step, i) => (
                     <li key={i}>{step}</li>
                   ))}
                 </ol>
-                <p className="mt-3 text-slate-800">
+                <p className="mt-4 text-slate-800">
                   <span className="font-medium">Final answer:</span>{" "}
                   {section.worked_example.answer}
                 </p>
@@ -754,13 +850,14 @@ export default function LessonRunner({
             ) : null}
 
             {section.check_for_understanding ? (
-              <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4 text-slate-800">
+                <div className="mt-5 rounded-2xl border border-blue-200 bg-blue-50 p-5 text-slate-800">
                 <span className="font-medium">Think about this:</span>{" "}
                 {section.check_for_understanding}
               </div>
             ) : null}
           </div>
-        ))}
+          ))}
+        </div>
 
         <PrimaryButton
           onClick={() =>
@@ -778,6 +875,7 @@ export default function LessonRunner({
 
   const renderConceptGate = () => {
     const payload = runner.stage_payload as ConceptGateStagePayload;
+    const activeQuestion = payload.questions[0]; const hasAnswer = activeQuestion ? Boolean(answers[activeQuestion.id]?.trim()) : false;
 
     if (payload.submitted && payload.feedback?.length) {
       return (
@@ -899,14 +997,33 @@ export default function LessonRunner({
       caliper: { label: "Caliper", step: 0.01, uncertainty: "+/- 0.005 cm", spread: 0.03 },
       micrometer: { label: "Micrometer", step: 0.001, uncertainty: "+/- 0.0005 cm", spread: 0.01 },
     }[simTool];
+    const formatSimulationNumber = (value: number, decimals = 3) => value.toFixed(decimals).replace(/\.0+$/, "").replace(/(\.\d*?)0+$/, "$1");
     const simulationReading = Math.round(simLength / simulationToolConfig.step) * simulationToolConfig.step;
     const simulationRepeated = [-2, -1, 0, 1, 2].map((offset) =>
-      (Math.round((simLength + offset * simulationToolConfig.spread) / simulationToolConfig.step) * simulationToolConfig.step)
-        .toFixed(3)
-        .replace(/\.0+$/, "")
-        .replace(/(\.\d*?)0+$/, "$1")
+      formatSimulationNumber(Math.round((simLength + offset * simulationToolConfig.spread) / simulationToolConfig.step) * simulationToolConfig.step)
     );
+    const repeatedValues = simulationRepeated.map((item) => Number(item));
+    const repeatedSpread = Math.max(...repeatedValues) - Math.min(...repeatedValues);
+    const toolDivisionLabel = simTool === "ruler" ? "About 0.1 cm scale steps" : simTool === "caliper" ? "About 0.01 cm scale steps" : "About 0.001 cm scale steps";
+    const zeroErrorReading = Math.round((simLength + simZeroError) / simulationToolConfig.step) * simulationToolConfig.step;
+    const correctedReading = Math.round((zeroErrorReading - simZeroError) / simulationToolConfig.step) * simulationToolConfig.step;
+    const zeroIndicatorX = 130 + (simZeroError / 0.2) * 56;
 
+    const simulationPanelGridStyle = { display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", alignItems: "start" };
+    const metricCards = [
+      { unit: "km", value: simMetricMeters / 1000, decimals: 5, note: "A larger unit, so the number stays small." },
+      { unit: "m", value: simMetricMeters, decimals: 2, note: "The base unit for this distance." },
+      { unit: "cm", value: simMetricMeters * 100, decimals: 1, note: "Smaller units need a bigger count." },
+      { unit: "mm", value: simMetricMeters * 1000, decimals: 0, note: "The smallest unit here gives the biggest number." },
+    ];
+    const vectorAngleRadians = (simVectorAngle * Math.PI) / 180;
+    const vectorLength = 22 + simVectorMagnitude * 10;
+    const vectorEndX = 92 + Math.cos(vectorAngleRadians) * vectorLength;
+    const sigFigureCount = Math.max(1, Math.min(5, simSigFigures));
+    const sigNumericValue = Number(simSigSample);
+    const sigRoundedDisplay = Number.isFinite(sigNumericValue) ? sigNumericValue.toPrecision(sigFigureCount) : "";
+    const sigDigits = simSigSample.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    const sigNextDigit = sigDigits[sigFigureCount] || "none";
 
     return (
       <div className="space-y-4">
@@ -935,7 +1052,8 @@ export default function LessonRunner({
         ) : simulationLessonKey === "F1_L3" ? (
           <div className="grid gap-4 xl:grid-cols-2">
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
-              <h4 className="text-lg font-semibold text-slate-900">Instrument comparison</h4>
+              <h4 className="text-lg font-semibold text-slate-900">Tool explorer</h4>
+              <p className="mt-2 text-slate-700">Compare the same object across tools and notice how the reading detail changes.</p>
               <div className="mt-4 flex flex-wrap gap-3">
                 {(["ruler", "caliper", "micrometer"] as const).map((toolName) => (
                   <button
@@ -952,11 +1070,14 @@ export default function LessonRunner({
                 Object length (cm)
                 <input className="mt-2 w-full" type="range" min="1" max="8" step="0.001" value={simLength} onChange={(e) => setSimLength(Number(e.target.value))} />
               </label>
-              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Reported reading:</span> {simulationReading.toFixed(3).replace(/\.0+$/, "").replace(/(\.\d*?)0+$/, "$1")} cm</div>
+              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Reported reading:</span> {formatSimulationNumber(simulationReading)} cm</div>
               <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Estimated uncertainty:</span> {simulationToolConfig.uncertainty}</div>
+              <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Current tool:</span> {simulationToolConfig.label}</div>
+              <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Scale detail:</span> {toolDivisionLabel}</div>
             </div>
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h4 className="text-lg font-semibold text-slate-900">Repeated readings</h4>
+              <p className="mt-2 text-slate-700">Switch tools and watch the cluster tighten as the tool gets finer.</p>
               <div className="mt-4 grid gap-2 sm:grid-cols-5">
                 {simulationRepeated.map((item, index) => (
                   <div key={`${item}-${index}`} className="rounded-xl bg-slate-50 px-3 py-3 text-center text-sm font-medium text-slate-800">
@@ -964,15 +1085,107 @@ export default function LessonRunner({
                   </div>
                 ))}
               </div>
+              <svg viewBox="0 0 260 110" role="img" aria-label="Spread of repeated readings" className="mt-4 h-28 w-full rounded-xl bg-slate-50 p-2">
+                <line x1="26" y1="54" x2="234" y2="54" stroke="#cbd5e1" strokeWidth="6" strokeLinecap="round" />
+                {simulationRepeated.map((item, index) => (
+                  <circle key={`spread-${item}-${index}`} cx={44 + index * 44} cy={54 - (Number(item) - simulationReading) * 220} r="8" fill={Math.abs(Number(item) - simulationReading) <= repeatedSpread / 4 ? "#0f766e" : "#2563eb"} />
+                ))}
+              </svg>
+              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Current spread:</span> {formatSimulationNumber(repeatedSpread)} cm</div>
               <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">
                 Finer tools usually give a tighter cluster of readings, which makes the result more trustworthy.
               </div>
             </div>
           </div>
-        ) : (
-          <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">
-            Use the task above to test the idea with a few examples before you continue.
+        ) : simulationLessonKey === "F1_L1" ? (
+          <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", alignItems: "start" }}>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Unit size explorer</h4>
+              <p className="mt-2 text-slate-700">Move the slider and compare how the same length looks in larger and smaller units.</p>
+              <label className="mt-4 block text-sm text-slate-700">
+                Distance in metres
+                <input className="mt-2 w-full" type="range" min="0.05" max="2.5" step="0.01" value={simMetricMeters} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />
+              </label>
+              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Current distance:</span> {simMetricMeters.toFixed(2).replace(/\.0+$/, "").replace(/(\.\d*?)0+$/, "$1")} m</div>
+            </div>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Equivalent measurements</h4>
+              <div className="mt-4" style={{ display: "grid", gap: "0.75rem", gridTemplateColumns: "repeat(2, minmax(0, 1fr))" }}>
+                <div className="rounded-xl bg-slate-50 p-4"><p className="text-sm font-medium text-slate-500">km</p><p className="mt-2 text-lg font-semibold text-slate-900">{(simMetricMeters / 1000).toFixed(5)} km</p></div>
+                <div className="rounded-xl bg-slate-50 p-4"><p className="text-sm font-medium text-slate-500">m</p><p className="mt-2 text-lg font-semibold text-slate-900">{simMetricMeters.toFixed(2).replace(/\.0+$/, "").replace(/(\.\d*?)0+$/, "$1")} m</p></div>
+                <div className="rounded-xl bg-slate-50 p-4"><p className="text-sm font-medium text-slate-500">cm</p><p className="mt-2 text-lg font-semibold text-slate-900">{(simMetricMeters * 100).toFixed(1).replace(/\.0+$/, "")} cm</p></div>
+                <div className="rounded-xl bg-slate-50 p-4"><p className="text-sm font-medium text-slate-500">mm</p><p className="mt-2 text-lg font-semibold text-slate-900">{Math.round(simMetricMeters * 1000)} mm</p></div>
+              </div>
+            </div>
           </div>
+        ) : simulationLessonKey === "F1_L2" ? (
+          <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", alignItems: "start" }}>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Vector explorer</h4>
+              <p className="mt-2 text-slate-700">Change size and direction. A vector changes when either one changes.</p>
+              <label className="mt-4 block text-sm text-slate-700">
+                Magnitude
+                <input className="mt-2 w-full" type="range" min="1" max="9" step="1" value={simVectorMagnitude} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />
+              </label>
+              <label className="mt-4 block text-sm text-slate-700">
+                Direction (degrees)
+                <input className="mt-2 w-full" type="range" min="0" max="360" step="5" value={simVectorAngle} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />
+              </label>
+            </div>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Arrow view</h4>
+              <svg viewBox="0 0 220 180" role="img" aria-label="Vector direction" style={{ width: "100%", height: 220, background: "#f8fafc", borderRadius: 18 }}>
+                <line x1="20" y1="92" x2="170" y2="92" stroke="#cbd5e1" strokeWidth="2" />
+                <line x1="92" y1="20" x2="92" y2="160" stroke="#cbd5e1" strokeWidth="2" />
+                <circle cx="92" cy="92" r="4" fill="#0f172a" />
+                <line x1="92" y1="92" x2={92 + Math.cos((simVectorAngle * Math.PI) / 180) * (22 + simVectorMagnitude * 10)} y2={92 - Math.sin((simVectorAngle * Math.PI) / 180) * (22 + simVectorMagnitude * 10)} stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
+              </svg>
+              <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">Direction rotates the arrow, but a scalar would only keep the size value.</div>
+            </div>
+          </div>
+        ) : simulationLessonKey === "F1_L5" ? (
+          <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", alignItems: "start" }}>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Density tank</h4>
+              <p className="mt-2 text-slate-700">Change mass and volume to see how density affects floating and sinking.</p>
+              <label className="mt-4 block text-sm text-slate-700">Mass (g)<input className="mt-2 w-full" type="range" min="50" max="300" step="5" value={simDensityMass} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+              <label className="mt-4 block text-sm text-slate-700">Volume (cm^3)<input className="mt-2 w-full" type="range" min="50" max="250" step="5" value={simDensityVolume} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+              <label className="mt-4 block text-sm text-slate-700">Fluid density (g/cm^3)<input className="mt-2 w-full" type="range" min="0.6" max="1.4" step="0.05" value={simFluidDensity} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+            </div>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Float or sink?</h4>
+              <svg viewBox="0 0 260 220" role="img" aria-label="Density tank" style={{ width: "100%", height: 240 }}>
+                <rect x="40" y="20" width="180" height="180" rx="24" fill="#eff6ff" stroke="#93c5fd" strokeWidth="4" />
+                <rect x="44" y="94" width="172" height="102" rx="18" fill="#bfdbfe" />
+                <line x1="44" y1="94" x2="216" y2="94" stroke="#60a5fa" strokeWidth="4" />
+                <rect x={130 - Math.max(54, Math.min(92, 36 + Math.cbrt(simDensityVolume) * 9)) / 2} y={Math.abs(simDensityMass / Math.max(simDensityVolume, 1) - simFluidDensity) <= 0.05 ? 120 - Math.max(54, Math.min(92, 36 + Math.cbrt(simDensityVolume) * 9)) / 2 : simDensityMass / Math.max(simDensityVolume, 1) < simFluidDensity ? 78 - Math.max(54, Math.min(92, 36 + Math.cbrt(simDensityVolume) * 9)) / 2 : 190 - Math.max(54, Math.min(92, 36 + Math.cbrt(simDensityVolume) * 9))} width={Math.max(54, Math.min(92, 36 + Math.cbrt(simDensityVolume) * 9))} height={Math.max(54, Math.min(92, 36 + Math.cbrt(simDensityVolume) * 9))} rx="16" fill={Math.abs(simDensityMass / Math.max(simDensityVolume, 1) - simFluidDensity) <= 0.05 ? "#fbbf24" : simDensityMass / Math.max(simDensityVolume, 1) < simFluidDensity ? "#34d399" : "#f97316"} />
+              </svg>
+              <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Object density:</span> {(simDensityMass / Math.max(simDensityVolume, 1)).toFixed(2)} g/cm^3</div>
+            </div>
+          </div>
+        ) : simulationLessonKey === "F1_L6" ? (
+          <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", alignItems: "start" }}>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Accuracy and precision tuner</h4>
+              <p className="mt-2 text-slate-700">Shift the whole cluster with bias, or spread the points out to reduce precision.</p>
+              <label className="mt-4 block text-sm text-slate-700">Bias from the true value<input className="mt-2 w-full" type="range" min="0" max="30" step="1" value={simBias} onChange={(e) => setSimBias(Number(e.target.value))} /></label>
+              <label className="mt-4 block text-sm text-slate-700">Spread of readings<input className="mt-2 w-full" type="range" min="4" max="30" step="1" value={simSpread} onChange={(e) => setSimSpread(Number(e.target.value))} /></label>
+            </div>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Target pattern</h4>
+              <svg viewBox="0 0 260 220" role="img" aria-label="Accuracy and precision target" style={{ width: "100%", height: 240 }}>
+                <circle cx="120" cy="110" r="72" fill="#eff6ff" stroke="#bfdbfe" strokeWidth="4" />
+                <circle cx="120" cy="110" r="46" fill="#ffffff" stroke="#93c5fd" strokeWidth="3" />
+                <circle cx="120" cy="110" r="20" fill="#dbeafe" stroke="#60a5fa" strokeWidth="3" />
+                {([[0, 0], [0.55, -0.4], [-0.55, 0.2], [0.35, 0.6], [-0.3, -0.65]] as const).map(([dx, dy], index) => (
+                  <circle key={`${dx}-${dy}-${index}`} cx={120 + simBias * 0.7 + dx * simSpread * 0.65} cy={110 + simBias * 0.35 + dy * simSpread * 0.65} r="6" fill="#0f172a" opacity="0.85" />
+                ))}
+              </svg>
+              <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Pattern:</span> {simBias < 12 ? "Accurate" : "Biased"}, {simSpread < 18 ? "Precise" : "Spread out"}</div>
+            </div>
+          </div>
+        ) : (
+          <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">Use the task above to test the idea with a few examples before you continue.</div>
         )}
 
         <PrimaryButton
@@ -1237,13 +1450,11 @@ export default function LessonRunner({
   return (
     <div className="space-y-6">
 
-      {!showResumeChoice ? (
-        <StageHeader
-          eyebrow={runner.lesson_title}
-          title={stageTitle}
-          subtitle={stageSubtitle}
-        />
-      ) : null}
+      <StageHeader
+        eyebrow={runner.lesson_title}
+        title={stageTitle}
+        subtitle={stageSubtitle}
+      />
 
       {showRestartAction ? (
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
@@ -1262,17 +1473,10 @@ export default function LessonRunner({
         </div>
       ) : null}
 
-      {showResumeChoice ? (
-        <div className="rounded-3xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-sky-700">Saved progress found</p>
-          <h3 className="mt-3 text-2xl font-semibold text-slate-900">Continue this unit or start again</h3>
-          <p className="mt-3 max-w-3xl text-slate-700">Continue from where you stopped or start this unit all over again.</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue from where I stopped</PrimaryButton>
-            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start this unit all over again</SecondaryButton>
-          </div>
-        </div>
-      ) : renderStage()}
+      {renderStage()}
     </div>
   );
 }
+
+
+

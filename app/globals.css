@@ -103,6 +103,7 @@ input[type="radio"] {
 .overflow-hidden { overflow: hidden; }
 .text-white { color: #ffffff; }
 .text-red-800 { color: #8f1530; }
+.text-left { text-align: left; }
 .text-slate-500 { color: #6d7b8f; }
 .text-slate-600 { color: var(--text-muted); }
 .text-slate-700 { color: #3f4d61; }
@@ -170,4 +171,104 @@ button.border {
 
 iframe {
   border: 0;
+}
+
+.lesson-stage-hero {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(232, 238, 252, 0.86) 100%);
+  border-color: rgba(96, 126, 181, 0.18);
+  box-shadow: 0 24px 62px rgba(15, 23, 42, 0.1);
+}
+
+.lesson-stage-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.8rem + 1.9vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.lesson-stage-subtitle {
+  max-width: 46rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.lesson-action-button {
+  min-height: 3.35rem;
+  padding: 0.9rem 1.35rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.lesson-display-slide {
+  min-height: 28rem;
+}
+
+.lesson-display-slide h4 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 1.45rem + 0.9vw, 2.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.lesson-display-slide p,
+.lesson-display-slide li,
+.lesson-display-slide td,
+.lesson-display-slide th {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 700px) {
+  .lesson-display-deck > * {
+    flex-basis: calc(100vw - 2rem);
+  }
+}
+
+.lesson-display-deck {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  padding: 0.2rem 0.1rem 0.85rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(96, 126, 181, 0.42) transparent;
+}
+
+.lesson-display-deck > * {
+  flex: 0 0 min(100%, 880px);
+  scroll-snap-align: start;
+}
+
+.lesson-display-deck::-webkit-scrollbar {
+  height: 10px;
+}
+
+.lesson-display-deck::-webkit-scrollbar-thumb {
+  background: rgba(96, 126, 181, 0.36);
+  border-radius: 999px;
+}
+
+.lesson-display-deck {
+  display: grid;
+  gap: 1.35rem;
+  overflow: visible;
+  padding: 0;
+  scroll-snap-type: none;
+  scrollbar-width: none;
+}
+
+.lesson-display-deck > * {
+  flex: none;
+  width: 100%;
+  max-width: none;
+  scroll-snap-align: unset;
+}
+
+.lesson-display-deck::-webkit-scrollbar {
+  display: none;
+}
+
+.lesson-display-slide {
+  min-height: 0;
 }

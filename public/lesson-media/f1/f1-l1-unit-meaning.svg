@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Why the unit matters</title>
+  <desc id="desc">Three matching number cards show that 5 m means length, 5 s means time, and 5 kg means mass.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#eef6ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" rx="36" fill="url(#bg)"/>
+  <text x="72" y="92" font-size="42" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Same number, different meaning</text>
+  <text x="72" y="136" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">The unit tells you what quantity is being measured.</text>
+
+  <g transform="translate(74 196)">
+    <rect width="320" height="410" rx="30" fill="#ffffff" stroke="#d7e6fb" stroke-width="4"/>
+    <circle cx="160" cy="108" r="56" fill="#dbeafe"/>
+    <path d="M108 144 L212 72" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
+    <path d="M200 64 L226 62 L214 86" fill="#2563eb"/>
+    <rect x="58" y="204" width="204" height="92" rx="24" fill="#eff6ff"/>
+    <text x="160" y="262" text-anchor="middle" font-size="46" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f172a">5 m</text>
+    <text x="160" y="336" text-anchor="middle" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Length</text>
+    <text x="160" y="372" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Five metres describes</text>
+    <text x="160" y="404" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">how long something is.</text>
+  </g>
+
+  <g transform="translate(440 196)">
+    <rect width="320" height="410" rx="30" fill="#ffffff" stroke="#d7e6fb" stroke-width="4"/>
+    <circle cx="160" cy="108" r="56" fill="#dcfce7"/>
+    <circle cx="160" cy="108" r="36" fill="none" stroke="#0f766e" stroke-width="12"/>
+    <path d="M160 108 L160 82" stroke="#0f766e" stroke-width="10" stroke-linecap="round"/>
+    <path d="M160 108 L184 120" stroke="#0f766e" stroke-width="10" stroke-linecap="round"/>
+    <rect x="58" y="204" width="204" height="92" rx="24" fill="#ecfdf5"/>
+    <text x="160" y="262" text-anchor="middle" font-size="46" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f172a">5 s</text>
+    <text x="160" y="336" text-anchor="middle" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Time</text>
+    <text x="160" y="372" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Five seconds describes</text>
+    <text x="160" y="404" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">how long something lasts.</text>
+  </g>
+
+  <g transform="translate(806 196)">
+    <rect width="320" height="410" rx="30" fill="#ffffff" stroke="#d7e6fb" stroke-width="4"/>
+    <circle cx="160" cy="108" r="56" fill="#fef3c7"/>
+    <rect x="124" y="62" width="72" height="82" rx="14" fill="#f59e0b"/>
+    <rect x="116" y="136" width="88" height="16" rx="8" fill="#d97706"/>
+    <rect x="58" y="204" width="204" height="92" rx="24" fill="#fffbeb"/>
+    <text x="160" y="262" text-anchor="middle" font-size="46" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f172a">5 kg</text>
+    <text x="160" y="336" text-anchor="middle" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Mass</text>
+    <text x="160" y="372" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Five kilograms describes</text>
+    <text x="160" y="404" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">how much matter there is.</text>
+  </g>
+
+  <rect x="250" y="630" width="700" height="36" rx="18" fill="#10233f"/>
+  <text x="600" y="655" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#ffffff">A number is not enough on its own. The unit gives the scientific meaning.</text>
+</svg>

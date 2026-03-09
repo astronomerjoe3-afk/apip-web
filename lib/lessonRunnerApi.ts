@@ -126,7 +126,7 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 Object.assign(FALLBACK_ANSWER_METADATA, {
   "how many significant figures are in 0 00450": { id: "F1L4_D1", answerIndex: 1, correctAnswer: "3", explanation: "0.00450 has 3 significant figures because the leading zeros do not count, but the trailing zero after the decimal does count.", teachingFocus: "Count significant figures from the first non-zero digit; leading zeros only place the decimal point, but trailing zeros after a decimal can show real precision.", misconceptionTag: "significant_figures" },
   "round 12 349 to 3 significant figures": { id: "F1L4_D2", answerIndex: 0, correctAnswer: "12.3", explanation: "12.349 rounds to 12.3 to 3 significant figures because you keep 1, 2, and 3, then the next digit 4 leaves the 3 unchanged.", teachingFocus: "For significant figures, keep the required digits and use the next digit only to decide whether to round up.", misconceptionTag: "rounding_rules" },
-  "calculate 2 5 3 42 and report the result with correct significant figures": { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 × 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" },
+  "calculate 2 5 3 42 and report the result with correct significant figures": { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 x 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" },
 });
 
 Object.assign(FALLBACK_ANSWER_METADATA, {
@@ -195,6 +195,52 @@ function clearModuleState(moduleId: string): void {
     if (key && key.startsWith(prefix)) keys.push(key);
   }
   for (const key of keys) window.sessionStorage.removeItem(key);
+}
+
+function firstStageForLesson(lesson: UnknownRecord): string {
+  return itemsFrom(lesson, "diagnostic").length > 0 ? "diagnostic" : "scaffolded_teaching";
+}
+
+function completedStageKeys(runnerLesson: UnknownRecord): string[] {
+  return asList(runnerLesson.stages)
+    .map(asRecord)
+    .filter((entry) => entry.completed === true)
+    .map((entry) => text(entry.key))
+    .filter(Boolean);
+}
+
+function inferredStageFromServerProgress(lesson: UnknownRecord, runnerLesson: UnknownRecord): string | null {
+  const completed = new Set(completedStageKeys(runnerLesson));
+  const orderedStages = [
+    ...(firstStageForLesson(lesson) === "diagnostic" ? ["diagnostic"] : []),
+    "scaffolded_teaching",
+    "concept_gate",
+    "simulation",
+    "reflection",
+    "mastery_check",
+  ];
+
+  for (const stage of orderedStages) {
+    if (!completed.has(stage)) {
+      return stage;
+    }
+  }
+
+  return completed.has("mastery_check") ? "done" : null;
+}
+
+function runnerStageIndex(stage: string): number {
+  return ["diagnostic", "scaffolded_teaching", "concept_gate", "simulation", "reflection", "mastery_check", "done"].indexOf(stage);
+}
+
+function hasProgressBeforeMastery(runnerLesson: UnknownRecord, state: LocalState): boolean {
+  return completedStageKeys(runnerLesson).some((key) =>
+    key === "diagnostic" ||
+    key === "scaffolded_teaching" ||
+    key === "concept_gate" ||
+    key === "simulation" ||
+    key === "reflection"
+  ) || Boolean(state.diagnostic?.complete || state.conceptGate?.submitted || state.reflection?.submitted);
 }
 
 function mcItem(id: string, prompt: string, choices: string[], answerIndex: number, hint: string, explanation: string): UnknownRecord {
@@ -319,7 +365,7 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
     return { id: "F1L4_D2", answerIndex: 0, correctAnswer: "12.3", explanation: "12.349 rounds to 12.3 to 3 significant figures because you keep 1, 2, and 3, then the next digit 4 leaves the 3 unchanged.", teachingFocus: "For significant figures, keep the required digits and use the next digit only to decide whether to round up.", misconceptionTag: "rounding_rules" };
   }
   if (itemId === "F1L4_T1" || itemId === "F1-L4-T1") {
-    return { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 × 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" };
+    return { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 x 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" };
   }
   if (itemId === "F1-L2-C1") {
     return { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" };
@@ -1107,7 +1153,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "See why the unit matters",
           caption: "The same number can represent different quantities once the unit changes.",
-          image_url: "/lesson-media/f1/f1-l1-metric-system.svg",
+          image_url: "/lesson-media/f1/f1-l1-unit-meaning.svg",
           highlights: ["5 m means a length", "5 s means a time", "5 kg means a mass"],
         },
       ];
@@ -1133,16 +1179,16 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Picture a ruler beside a caliper",
-          caption: "Both measure length, but the finer tool can show smaller changes.",
+          caption: "Compare the ruler, caliper, and micrometer. Finer tools show smaller changes and support smaller uncertainty.",
           image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
-          highlights: ["Wider scale divisions = lower resolution", "Finer scale divisions = smaller uncertainty", "Choose the tool to match the job"],
+          highlights: ["Large divisions limit resolution", "Finer divisions support smaller uncertainty", "Use the simulation to compare tool readings"],
         },
         {
           kind: "visual",
           title: "Picture repeated readings and zero error",
-          caption: "Spread suggests random error, while the same offset each time points to systematic error.",
-          image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
-          highlights: ["Random error makes readings scatter", "Systematic error shifts every reading the same way", "Check the zero reading before trusting the instrument"],
+          caption: "Compare spread and zero error carefully. Scatter suggests random error, while the same offset each time suggests systematic error.",
+          image_url: "/lesson-media/f1/f1-l3-reading-errors.svg",
+          highlights: ["Random error makes readings spread out", "Zero error shifts every reading together", "Use the simulation to compare spread and offset"],
         },
       ];
     case "F1_L4":
@@ -1158,7 +1204,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Picture a calculator and a lab notebook",
           caption: "A calculator may show many digits, but your final answer should match the precision of the measurement.",
-          image_url: "/lesson-media/f1/f1-l4-significant-figures.svg",
+          image_url: "/lesson-media/f1/f1-l4-calculator-notebook.svg",
           highlights: ["Display digits are not all meaningful", "Report only justified digits", "Precision belongs to the measurement, not the screen"],
         },
       ];
@@ -1167,16 +1213,16 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Picture equal-sized blocks",
-          caption: "Two blocks can have the same volume but different masses. The heavier one is denser.",
+          caption: "Use the density explorer to keep volume the same and raise the mass. The heavier same-size block is denser.",
           image_url: "/lesson-media/f1/f1-l5-density.svg",
-          highlights: ["Same space, different mass", "More packed matter means greater density", "Dense materials often feel heavier for their size"],
+          highlights: ["Keep the volume fixed", "Increase the mass and density rises", "Same space, different mass explains density"],
         },
         {
           kind: "visual",
           title: "Picture sinking and floating",
-          caption: "Density helps explain why some objects sink and others float in a fluid.",
-          image_url: "/lesson-media/f1/f1-l5-density.svg",
-          highlights: ["Less dense than the fluid: float", "More dense than the fluid: sink", "Compare densities, not just masses"],
+          caption: "Use the tank simulation to compare object density with fluid density and predict whether the object floats or sinks.",
+          image_url: "/lesson-media/f1/f1-l5-float-sink.svg",
+          highlights: ["Less dense than the fluid: float", "More dense than the fluid: sink", "Use the simulation to test your prediction"],
         },
       ];
     case "F1_L6":
@@ -1304,22 +1350,44 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
 export async function getLessonRunner(moduleId: string, lessonId: string): Promise<UnknownRecord> {
   const resources = await loadResources(moduleId, lessonId);
   const runnerLesson = asRecord(resources.runner.lesson);
-  const state = readState(moduleId, lessonId);
+  let state = readState(moduleId, lessonId);
   const title = lessonTitle(resources.lesson, runnerLesson);
+  const lessonStatus = text(runnerLesson.lesson_status);
   const backendStage = text(runnerLesson.active_stage);
+  const startStage = firstStageForLesson(resources.lesson);
+  const masteryMeta = asRecord(runnerLesson.mastery_check);
+  const serverCompletedStages = completedStageKeys(runnerLesson);
+  const inferredServerStage = inferredStageFromServerProgress(resources.lesson, runnerLesson);
+  const serverStage = runnerStageIndex(inferredServerStage || "") > runnerStageIndex(backendStage)
+    ? inferredServerStage || backendStage
+    : backendStage;
+  const shouldResetToStart = (
+    lessonStatus === "not_started" &&
+    serverCompletedStages.length === 0 &&
+    !hasProgressBeforeMastery(runnerLesson, state)
+  ) || (
+    (serverStage === "mastery_check" || serverStage === "done") &&
+    numberValue(masteryMeta.attempt_count, 0) < 1 &&
+    !hasProgressBeforeMastery(runnerLesson, state)
+  );
+
+  if (shouldResetToStart) {
+    clearState(moduleId, lessonId);
+    state = {};
+  }
+
+  const effectiveStage = shouldResetToStart ? startStage : serverStage;
   const stage = (
-    backendStage === "diagnostic" ||
-    backendStage === "scaffolded_teaching" ||
-    backendStage === "concept_gate" ||
-    backendStage === "simulation" ||
-    backendStage === "reflection" ||
-    backendStage === "mastery_check" ||
-    backendStage === "done"
+    effectiveStage === "diagnostic" ||
+    effectiveStage === "scaffolded_teaching" ||
+    effectiveStage === "concept_gate" ||
+    effectiveStage === "simulation" ||
+    effectiveStage === "reflection" ||
+    effectiveStage === "mastery_check" ||
+    effectiveStage === "done"
   )
-    ? backendStage
-    : itemsFrom(resources.lesson, "diagnostic").length > 0
-      ? "diagnostic"
-      : "mastery_check";
+    ? effectiveStage
+    : startStage;
 
   if (stage !== "diagnostic" && stage !== "scaffolded_teaching") delete state.diagnostic;
   if (stage !== "concept_gate") delete state.conceptGate;
@@ -1358,7 +1426,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
         answered_count: askedIds.length,
         questions: nextItem ? [question(asRecord(nextItem))] : [],
         recent_feedback: state.diagnostic?.recentFeedback,
-        action_label: askedIds.length + 1 >= targetCount ? "Check this answer" : "Check and continue",
+        action_label: "Check my answer",
       };
     }
   }
@@ -1393,10 +1461,11 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   else if (stage === "simulation") {
     activeStage = "simulation";
     const inquiry = asList(asRecord(phases(resources.lesson).simulation_inquiry).inquiry_prompts).map(asRecord);
+    const simulationCode = lessonCode(resources.lesson);
     stagePayload = {
-      title: "Simulation inquiry",
-      instructions: text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.",
-      task_prompt: text(inquiry[1]?.prompt) || text(inquiry[0]?.hint),
+      title: simulationCode === "F1_L5" ? "Density explorer" : simulationCode === "F1_L4" ? "Significant figures explorer" : simulationCode === "F1_L3" ? "Measurement explorer" : "Simulation inquiry",
+      instructions: simulationCode === "F1_L5" ? "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result." : simulationCode === "F1_L4" ? "Change the measurement and the number of significant figures. Watch how the last kept digit changes when the next digit is small or large." : simulationCode === "F1_L3" ? "Compare the same object with different tools and notice how the reading detail and the spread of repeated readings change." : text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.",
+      task_prompt: simulationCode === "F1_L5" ? "Find one setup that floats and one that sinks, then explain which density comparison changed." : simulationCode === "F1_L4" ? "Try the same value at different significant-figure targets, then explain when the last kept digit stays and when it rounds up." : simulationCode === "F1_L3" ? "Find one tool with a larger spread and one with a smaller spread, then explain why the finer tool gives more trustworthy readings." : text(inquiry[1]?.prompt) || text(inquiry[0]?.hint),
       completion_text: "I have finished exploring this activity",
     };
   }
@@ -1723,6 +1792,7 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
 
 
 

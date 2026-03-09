@@ -1,11 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { signOut } from "firebase/auth";
 import { useParams, useRouter } from "next/navigation";
 import { apipGet } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { useAuth } from "../../../../lib/auth";
+import { auth } from "../../../../lib/firebase";
 
 type ModuleCatalog = {
   id: string;
@@ -84,6 +86,14 @@ function normalizeLessonId(value: string | undefined | null): string {
   return String(value || "").replace(/-/g, "_");
 }
 
+
+function errorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return String(error);
+}
+
 export default function StudentModulePage() {
   const router = useRouter();
   const params = useParams() as Record<string, string | string[] | undefined>;
@@ -103,6 +113,7 @@ export default function StudentModulePage() {
   const [lessons, setLessons] = useState<ActiveLesson[]>([]);
   const [err, setErr] = useState<string>("");
   const [activeIdx, setActiveIdx] = useState<number>(0);
+  const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   const activeLesson = useMemo(() => {
@@ -247,6 +258,21 @@ export default function StudentModulePage() {
   const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
 
 
+  const handleLogout = useCallback(async (): Promise<void> => {
+    try {
+      setErr("");
+      setStatus("Signing out...");
+      await signOut(auth);
+      const nextPath = moduleId
+        ? "/student/module/" + encodeURIComponent(moduleId)
+        : "/student";
+      router.replace("/login?next=" + encodeURIComponent(nextPath));
+    } catch (error: unknown) {
+      setStatus("");
+      setErr(errorMessage(error));
+    }
+  }, [moduleId, router]);
+
   function goBack(): void {
     if (!canGoBack) return;
     setActiveIdx((index) => Math.max(0, index - 1));
@@ -274,6 +300,37 @@ export default function StudentModulePage() {
         margin: "0 auto",
       }}
     >
+      {user ? (
+        <div
+          style={{
+            position: "sticky",
+            top: 16,
+            zIndex: 30,
+            display: "flex",
+            justifyContent: "flex-end",
+            marginBottom: 18,
+          }}
+        >
+          <button
+            onClick={() => void handleLogout()}
+            disabled={status === "Signing out..."}
+            style={{
+              padding: "12px 18px",
+              borderRadius: 999,
+              border: "1px solid rgba(16, 35, 63, 0.14)",
+              background: "rgba(255, 255, 255, 0.88)",
+              color: "#10233f",
+              fontWeight: 900,
+              opacity: status === "Signing out..." ? 0.72 : 1,
+              boxShadow: "0 18px 38px rgba(15, 23, 42, 0.12)",
+              backdropFilter: "blur(18px)",
+            }}
+          >
+            Logout
+          </button>
+        </div>
+      ) : null}
+
       <div style={{ textAlign: "center", marginBottom: 28 }}>
         <div style={{ fontSize: 54, fontWeight: 900, letterSpacing: -1.6, fontFamily: "Bahnschrift, Aptos Display, Segoe UI, sans-serif", color: "#10233f" }}>
           {moduleMeta?.title || moduleId || "Module"}
@@ -357,6 +414,23 @@ export default function StudentModulePage() {
         </div>
       ) : null}
 
+
+      {status ? (
+        <div
+          style={{
+            border: "1px solid rgba(16, 35, 63, 0.12)",
+            padding: 14,
+            borderRadius: 12,
+            marginBottom: 16,
+            maxWidth: 900,
+            marginLeft: "auto",
+            marginRight: "auto",
+            background: "rgba(255, 255, 255, 0.75)",
+          }}
+        >
+          {status}
+        </div>
+      ) : null}
       <div
         style={{
           border: "1px solid rgba(16, 35, 63, 0.12)",
