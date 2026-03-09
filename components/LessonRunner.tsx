@@ -670,7 +670,9 @@ export default function LessonRunner({
         {payload.sections.map((section, index) => (
           <div key={`${section.heading}-${index}`} className="rounded-2xl border bg-white p-5 shadow-sm">
             <h4 className="text-lg font-semibold text-slate-900">{section.heading}</h4>
-            <p className="mt-2 whitespace-pre-line text-slate-700">{section.body}</p>
+            {section.body && !section.worked_example ? (
+              <p className="mt-2 whitespace-pre-line text-slate-700">{section.body}</p>
+            ) : null}
 
             {section.analogy ? (
               <div className="mt-4 rounded-xl bg-slate-50 p-4">
