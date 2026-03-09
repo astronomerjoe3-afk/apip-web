@@ -116,7 +116,8 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 });
 
 Object.assign(FALLBACK_ANSWER_METADATA, {
-  "which quantity is a vector": { id: "F1-L2-D1", answerIndex: 2, correctAnswer: "velocity", explanation: "Velocity is a vector because it needs both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" },
+  "which quantity is a vector": { id: "F1L2_D1", answerIndex: 2, correctAnswer: "displacement", explanation: "Displacement is a vector because it has both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" },
+  "speed is a scalar because it has": { id: "F1L2_D2", answerIndex: 0, correctAnswer: "magnitude only", explanation: "Speed is a scalar because it has magnitude only and no direction.", teachingFocus: "Scalars tell how much only, while vectors add direction.", misconceptionTag: "vector_scalar_confusion" },
   "which statement is correct": { id: "F1-L2-D2", answerIndex: 2, correctAnswer: "Vectors have magnitude and direction", explanation: "A vector combines size and direction.", teachingFocus: "Do not treat vectors and scalars as interchangeable descriptions.", misconceptionTag: "vector_scalar_confusion" },
   "a car moves 5 km east is this a scalar or vector description": { id: "F1-L2-T1", answerIndex: 1, correctAnswer: "Vector", explanation: "The direction east makes it a vector.", teachingFocus: "Direction is the feature that turns a scalar description into a vector one.", misconceptionTag: "vector_scalar_confusion" },
   "which is a scalar quantity": { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" },
@@ -278,6 +279,19 @@ function numericAnswer(value: unknown): number | null {
 }
 
 function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
+  const itemId = text(item.id);
+  if (itemId === "F1-L2-D1") {
+    return { id: "F1-L2-D1", answerIndex: 2, correctAnswer: "velocity", explanation: "Velocity is a vector because it needs both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" };
+  }
+  if (itemId === "F1-L2-D2") {
+    return { id: "F1-L2-D2", answerIndex: 2, correctAnswer: "Vectors have magnitude and direction", explanation: "A vector combines size and direction.", teachingFocus: "Do not treat vectors and scalars as interchangeable descriptions.", misconceptionTag: "vector_scalar_confusion" };
+  }
+  if (itemId === "F1-L2-T1") {
+    return { id: "F1-L2-T1", answerIndex: 1, correctAnswer: "Vector", explanation: "The direction east makes it a vector.", teachingFocus: "Direction is the feature that turns a scalar description into a vector one.", misconceptionTag: "vector_scalar_confusion" };
+  }
+  if (itemId === "F1-L2-C1") {
+    return { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" };
+  }
   return FALLBACK_ANSWER_METADATA[normalizePromptKey(item.prompt)];
 }
 
@@ -396,10 +410,22 @@ function resolvedCorrectAnswer(item: UnknownRecord): string {
 
 function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
   const feedback = asList(item.feedback).map((entry) => text(entry));
-  if (answerIndex >= 0 && answerIndex < feedback.length && feedback[answerIndex]) {
-    return feedback[answerIndex];
+  const answerFeedback = answerIndex >= 0 && answerIndex < feedback.length ? feedback[answerIndex] : "";
+  if (hasMeaningfulFeedback(answerFeedback)) {
+    return answerFeedback;
   }
-  return text(item.hint) || fallbackMeta(item)?.explanation || "Review the lesson idea and try again.";
+
+  const metaExplanation = fallbackMeta(item)?.explanation;
+  if (metaExplanation) {
+    return metaExplanation;
+  }
+
+  const hint = text(item.hint);
+  if (hasMeaningfulFeedback(hint)) {
+    return hint;
+  }
+
+  return "Review the lesson idea and try again.";
 }
 
 function shortAnswerAccepted(item: UnknownRecord): string[] {
