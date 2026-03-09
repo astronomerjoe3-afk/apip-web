@@ -48,6 +48,7 @@ type LessonProgress = {
   title?: string;
   sequence?: number;
   best_score: number;
+  latest_score?: number | null;
   attempt_count: number;
   completed: boolean;
   can_advance: boolean;
@@ -101,6 +102,7 @@ export default function StudentModulePage() {
   }, [raw]);
 
   const [moduleMeta, setModuleMeta] = useState<ModuleCatalog | null>(null);
+  const [moduleProgress, setModuleProgress] = useState<StudentModuleProgressResponse["module"] | null>(null);
   const [lessons, setLessons] = useState<ActiveLesson[]>([]);
   const [err, setErr] = useState<string>("");
   const [activeIdx, setActiveIdx] = useState<number>(0);
@@ -126,6 +128,7 @@ export default function StudentModulePage() {
       if (!user) {
         setErr("");
         setModuleMeta(null);
+        setModuleProgress(null);
         setLessons([]);
         setActiveIdx(0);
         setLoading(false);
@@ -135,6 +138,7 @@ export default function StudentModulePage() {
       if (!moduleId) {
         setErr("Missing module id in route.");
         setModuleMeta(null);
+        setModuleProgress(null);
         setLessons([]);
         setActiveIdx(0);
         setLoading(false);
@@ -210,11 +214,13 @@ export default function StudentModulePage() {
         }
 
         setModuleMeta(moduleResponse.module);
+        setModuleProgress(progressResponse.module);
         setLessons(mergedLessons);
         setActiveIdx(nextIndex);
       } catch (error) {
         setErr(error instanceof Error ? error.message : String(error));
         setModuleMeta(null);
+        setModuleProgress(null);
         setLessons([]);
         setActiveIdx(0);
       } finally {
@@ -309,6 +315,30 @@ export default function StudentModulePage() {
             <span style={{ opacity: 0.8 }}>|</span>
             <span style={{ opacity: 0.85 }}>
               Work through each step and take your time.
+            </span>
+          </div>
+        ) : null}
+
+        {moduleProgress ? (
+          <div
+            style={{
+              marginTop: 14,
+              display: "inline-flex",
+              gap: 12,
+              alignItems: "center",
+              padding: "10px 18px",
+              border: "1px solid rgba(16, 35, 63, 0.1)",
+              borderRadius: 999,
+              background: "rgba(255, 255, 255, 0.68)",
+              color: "#334155",
+            }}
+          >
+            <span style={{ fontWeight: 800 }}>
+              Module mastery average: {Math.round((moduleProgress.module_mastery || 0) * 100)}%
+            </span>
+            <span style={{ opacity: 0.55 }}>|</span>
+            <span>
+              Lessons completed: {moduleProgress.lessons_completed_count}/{moduleProgress.total_lessons}
             </span>
           </div>
         ) : null}

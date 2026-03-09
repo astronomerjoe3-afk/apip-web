@@ -41,6 +41,7 @@ type LocalState = {
     result?: UnknownRecord;
     reviewRefs?: UnknownRecord[];
     reviewRequested?: boolean;
+    forceNewAttempt?: boolean;
   };
 };
 
@@ -1277,21 +1278,33 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     activeStage = "mastery";
     const masteryState = state.mastery || { nonce: 0 };
     const masteryMeta = asRecord(runnerLesson.mastery_check);
+    const threshold = numberValue(masteryMeta.threshold, 0.8);
+    const thresholdPercent = Math.round(threshold * 100);
+    const latestScore = typeof masteryMeta.latest_score === "number"
+      ? numberValue(masteryMeta.latest_score, 0)
+      : typeof runnerLesson.latest_score === "number"
+        ? numberValue(runnerLesson.latest_score, 0)
+        : null;
+    const persistedResult = typeof latestScore === "number"
+      ? { percent: Math.round(latestScore * 100), passed: latestScore >= threshold }
+      : undefined;
+    const hasPersistedResult = numberValue(masteryMeta.attempt_count, 0) >= 1 && Boolean(persistedResult) && masteryState.forceNewAttempt !== true;
     const pool = masteryItems(resources.lesson);
     const strengthScore = masteryStrengthScore(runnerLesson, state);
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
     const selected = shuffle(pool, `mastery:${masteryState.nonce || 0}`).slice(0, count);
-    stagePayload = masteryState.submitted || stage === "done"
+    stagePayload = masteryState.submitted || stage === "done" || hasPersistedResult
       ? {
-          instructions: stage === "done" ? "You have already shown mastery for this lesson." : "Use the feedback below to decide whether to retest or review first.",
+          instructions: stage === "done" ? "You have already shown mastery for this lesson." : "This is your latest mastery result.",
           questions: [],
           submitted: true,
           feedback: masteryState.feedback || [],
-          result: masteryState.result || { percent: Math.round(numberValue(runnerLesson.best_score) * 100), passed: true },
-          review_refs: masteryState.reviewRefs || reviewRefs(resources.lesson, asList(masteryMeta.recommended_review_refs)), review_requested: Boolean(asRecord(masteryState).reviewRequested),
+          result: masteryState.result || persistedResult || { percent: Math.round(numberValue(runnerLesson.best_score) * 100), passed: true },
+          review_refs: masteryState.reviewRefs || reviewRefs(resources.lesson, asList(masteryMeta.recommended_review_refs)),
+          review_requested: Boolean(asRecord(masteryState).reviewRequested),
           min_questions: numberValue(masteryMeta.min_questions, 5),
           max_questions: numberValue(masteryMeta.max_questions, 10),
-          passing_percent: Math.round(numberValue(masteryMeta.threshold, 0.8) * 100),
+          passing_percent: thresholdPercent,
         }
       : {
           instructions: "Use what you learned in " + title + " to answer " + String(selected.length) + " final questions carefully.",
@@ -1303,16 +1316,26 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
         };
   }
 
+  const moduleMeta = asRecord(resources.runner.module);
+  const finalMasteryMeta = asRecord(runnerLesson.mastery_check);
+  const latestMasteryPercent = typeof finalMasteryMeta.latest_score === "number"
+    ? Math.round(numberValue(finalMasteryMeta.latest_score, 0) * 100)
+    : typeof runnerLesson.latest_score === "number"
+      ? Math.round(numberValue(runnerLesson.latest_score, 0) * 100)
+      : null;
+
   return {
-    module_id: text(asRecord(resources.runner.module).module_id) || moduleId,
+    module_id: text(moduleMeta.module_id) || moduleId,
     lesson_id: text(runnerLesson.lesson_id) || normalizeLessonId(lessonId),
     lesson_title: title,
     lesson_status: text(runnerLesson.lesson_status) === "completed" ? "completed" : text(runnerLesson.lesson_status) === "not_started" ? "not_started" : "in_progress",
     active_stage: activeStage,
     stage_payload: stagePayload,
     progress_summary: {
-      attempts: numberValue(asRecord(runnerLesson.mastery_check).attempt_count),
-      mastery_percent: Math.round(numberValue(runnerLesson.best_score) * 100),
+      attempts: numberValue(finalMasteryMeta.attempt_count),
+      latest_mastery_percent: latestMasteryPercent,
+      best_mastery_percent: Math.round(numberValue(runnerLesson.best_score) * 100),
+      module_mastery_percent: Math.round(numberValue(moduleMeta.module_mastery) * 100),
       concept_gate_passed: asList(runnerLesson.stages).map(asRecord).some((entry) => text(entry.key) === "concept_gate" && entry.completed === true),
     },
   };
@@ -1483,7 +1506,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const state = readState(moduleId, lessonId);
     writeState(moduleId, lessonId, {
       ...state,
-      mastery: { nonce: (state.mastery?.nonce || 0) + 1 },
+      mastery: {
+        nonce: (state.mastery?.nonce || 0) + 1,
+        forceNewAttempt: true,
+      },
     });
     return;
   }
@@ -1528,6 +1554,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
         feedback,
         result,
         reviewRefs: reviewRefs(resources.lesson, asList(masteryMeta.recommended_review_refs)),
+        forceNewAttempt: false,
       },
     });
     await postEvent(moduleId, lessonId, {

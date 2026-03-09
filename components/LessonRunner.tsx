@@ -163,7 +163,9 @@ type RunnerResponse = {
     | MasteryStagePayload;
   progress_summary?: {
     attempts?: number;
-    mastery_percent?: number | null;
+    latest_mastery_percent?: number | null;
+    best_mastery_percent?: number | null;
+    module_mastery_percent?: number | null;
     concept_gate_passed?: boolean;
   };
   available_actions?: string[];
@@ -968,8 +970,8 @@ export default function LessonRunner({
     const masteryPercentForDisplay =
       typeof payload.result?.percent === "number"
         ? payload.result.percent
-        : typeof runner.progress_summary?.mastery_percent === "number"
-          ? runner.progress_summary.mastery_percent
+        : typeof runner.progress_summary?.latest_mastery_percent === "number"
+          ? runner.progress_summary.latest_mastery_percent
           : null;
 
     if ((payload.submitted || runner.lesson_status === "completed") && typeof masteryPercentForDisplay === "number") {
@@ -977,9 +979,17 @@ export default function LessonRunner({
       const masteryPercent =
         typeof payload.result?.percent === "number"
           ? payload.result.percent
-          : typeof runner.progress_summary?.mastery_percent === "number"
-            ? runner.progress_summary.mastery_percent
+          : typeof runner.progress_summary?.latest_mastery_percent === "number"
+            ? runner.progress_summary.latest_mastery_percent
             : null;
+      const bestMasteryPercent =
+        typeof runner.progress_summary?.best_mastery_percent === "number"
+          ? runner.progress_summary.best_mastery_percent
+          : null;
+      const moduleMasteryPercent =
+        typeof runner.progress_summary?.module_mastery_percent === "number"
+          ? runner.progress_summary.module_mastery_percent
+          : null;
       const passed =
         typeof payload.result?.passed === "boolean"
           ? payload.result.passed
@@ -998,8 +1008,18 @@ export default function LessonRunner({
               {passed ? "Lesson mastered" : "Almost there"}
             </h3>
             <p className="mt-2 text-slate-700">
-              Your mastery score is {masteryPercent}%. The target for mastery is {threshold}%.
+              Your latest mastery score is {masteryPercent}%. The target for mastery is {threshold}%.
             </p>
+            {typeof bestMasteryPercent === "number" && bestMasteryPercent !== masteryPercent ? (
+              <p className="mt-2 text-sm text-slate-600">
+                Best score so far: {bestMasteryPercent}%
+              </p>
+            ) : null}
+            {typeof moduleMasteryPercent === "number" ? (
+              <p className="mt-2 text-sm text-slate-600">
+                Module mastery average: {moduleMasteryPercent}%
+              </p>
+            ) : null}
           </div>
 
           {payload.feedback?.map((item, index) => (
