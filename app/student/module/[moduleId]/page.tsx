@@ -77,11 +77,7 @@ type LessonsResponse = {
 type ActiveLesson = LessonCatalog & {
   progress?: LessonProgress;
 };
-
-function lessonLabel(lesson: ActiveLesson | null, fallbackIndex: number): string {
-  if (!lesson) return "Mission " + fallbackIndex;
-  return lesson.title || lesson.lesson_id || lesson.id || "Mission " + fallbackIndex;
-}
+
 
 function normalizeLessonId(value: string | undefined | null): string {
   return String(value || "").replace(/-/g, "_");
@@ -247,8 +243,7 @@ export default function StudentModulePage() {
   }, [authLoading, loadModuleState, moduleId, router, user]);
 
   const canGoBack = activeIdx > 0;
-  const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
-  const previousLesson = canGoBack ? lessons[activeIdx - 1] || null : null;
+  const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
 
   function goBack(): void {
     if (!canGoBack) return;
@@ -385,10 +380,8 @@ export default function StudentModulePage() {
           <LessonRunner
             moduleId={moduleId}
             lessonId={normalizeLessonId(activeLesson.lesson_id || activeLesson.id)}
-            canGoPreviousLesson={canGoBack}
-            onGoPreviousLesson={canGoBack ? goBack : undefined}
-            onRestartFromBeginning={restartFromBeginning}
-            previousLessonLabel={lessonLabel(previousLesson, activeIdx)}
+            canGoNextLesson={canGoNext}
+            onGoNextLesson={canGoNext ? goNext : undefined}
           />
         ) : (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>

@@ -174,10 +174,10 @@ type RunnerResponse = {
 type LessonRunnerProps = {
   moduleId: string;
   lessonId: string;
-  canGoPreviousLesson?: boolean;
-  onGoPreviousLesson?: () => void;
+  canGoNextLesson?: boolean;
+  onGoNextLesson?: () => void;
   onRestartFromBeginning?: () => Promise<void> | void;
-  previousLessonLabel?: string;
+  previousLessonLabel?: string;
 };
 
 type ApiEventPayload = Record<string, unknown>;
@@ -327,8 +327,8 @@ function ReviewReferences({ refs }: { refs?: ReviewReference[] }) {
 export default function LessonRunner({
   moduleId,
   lessonId,
-  canGoPreviousLesson = false,
-  onGoPreviousLesson,
+  canGoNextLesson = false,
+  onGoNextLesson,
   onRestartFromBeginning,
   previousLessonLabel = "the previous mission",
 }: LessonRunnerProps) {
@@ -340,6 +340,8 @@ export default function LessonRunner({
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [reflectionText, setReflectionText] = useState("");
   const [resumeChoiceMade, setResumeChoiceMade] = useState(false);
+
+  void previousLessonLabel;
 
   const loadRunner = useCallback(async () => {
     setIsLoading(true);
@@ -381,12 +383,12 @@ export default function LessonRunner({
     setResumeChoiceMade(false);
   }, [lessonId, moduleId]);
 
-  const restartMission = useCallback(async () => {
+  const restartMission = useCallback(async (fromBeginning = false) => {
     setIsSubmitting(true);
     setError(null);
 
     try {
-      if (onRestartFromBeginning) {
+      if (fromBeginning && onRestartFromBeginning) {
         await onRestartFromBeginning();
       } else {
         await restartLessonProgress(moduleId, lessonId);
@@ -465,14 +467,14 @@ export default function LessonRunner({
   const restartCopy = useMemo(() => {
     if (!runner) return "";
     return runner.active_stage === "mastery"
-      ? "Saved progress found. Restart if you want the full mission again."
+      ? "Saved progress found. Restart if you want to replay this mission from the beginning."
       : "Restart to take this mission again.";
   }, [runner]);
 
   const stageSubtitle = useMemo(() => {
     if (!runner) return "";
     if (showResumeChoice) {
-      return "Continue, restart, or go back.";
+      return "Continue where you stopped or start this mission again.";
     }
     switch (runner.active_stage) {
       case "diagnostic":
@@ -1041,6 +1043,16 @@ export default function LessonRunner({
             ) : null}
           </div>
 
+          <div className="mt-4 flex flex-wrap gap-3">
+            {passed && canGoNextLesson && onGoNextLesson ? (
+              <PrimaryButton onClick={onGoNextLesson} disabled={isSubmitting}>
+                Continue to the next mission
+              </PrimaryButton>
+            ) : null}
+            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>
+              Start this mission again
+            </SecondaryButton>
+          </div>
           {payload.feedback?.map((item, index) => (
             <FeedbackCard
               key={item.question_id}
@@ -1156,7 +1168,7 @@ export default function LessonRunner({
           <p className="text-slate-800">{restartCopy}</p>
           <div className="mt-3">
             <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>
-              Start over from Lesson 1
+              Start this mission again
             </SecondaryButton>
           </div>
         </div>
@@ -1172,13 +1184,10 @@ export default function LessonRunner({
         <div className="rounded-3xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-sky-700">Saved progress found</p>
           <h3 className="mt-3 text-2xl font-semibold text-slate-900">Continue this mission or start again</h3>
-          <p className="mt-3 max-w-3xl text-slate-700">Pick up where you left off, restart, or go back.</p>
+          <p className="mt-3 max-w-3xl text-slate-700">Pick up where you left off or start this mission again.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <PrimaryButton onClick={() => setResumeChoiceMade(true)} disabled={isSubmitting}>Continue where I stopped</PrimaryButton>
-            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start over from Lesson 1</SecondaryButton>
-            {canGoPreviousLesson && onGoPreviousLesson ? (
-              <SecondaryButton onClick={onGoPreviousLesson} disabled={isSubmitting}>Go back to {previousLessonLabel}</SecondaryButton>
-            ) : null}
+            <SecondaryButton onClick={() => void restartMission()} disabled={isSubmitting}>Start this mission again</SecondaryButton>
           </div>
         </div>
       ) : renderStage()}
