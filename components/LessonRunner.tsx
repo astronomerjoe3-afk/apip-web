@@ -295,34 +295,22 @@ function QuestionBlock({
             const selected = value === option.value;
 
             return (
-              <button
+              <label
                 key={option.value}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                onClick={() => onChange(question.id, option.value)}
-                className="flex w-full items-center gap-3 rounded-xl border p-3 text-left"
-                style={{
-                  width: "100%",
-                  textAlign: "left",
-                  borderColor: selected ? "rgba(16, 35, 63, 0.28)" : undefined,
-                  background: selected ? "rgba(232, 238, 252, 0.82)" : undefined,
-                  boxShadow: selected ? "0 12px 28px rgba(15, 23, 42, 0.08)" : "none",
-                }}
+                className={`flex w-full cursor-pointer items-center gap-3 rounded-xl border p-3 text-left ${
+                  selected ? "border-slate-400 bg-slate-50 shadow-sm" : "border-slate-200 bg-white"
+                }`}
               >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    width: 18,
-                    height: 18,
-                    minWidth: 18,
-                    borderRadius: 999,
-                    border: selected ? "5px solid #10233f" : "2px solid rgba(109, 123, 143, 0.8)",
-                    background: "#fff",
-                  }}
+                <input
+                  type="radio"
+                  name={question.id}
+                  value={option.value}
+                  checked={selected}
+                  onChange={(e) => onChange(question.id, e.target.value)}
+                  className="h-5 w-5 shrink-0 border-slate-400 text-slate-900 focus:ring-slate-400"
                 />
                 <span>{option.label}</span>
-              </button>
+              </label>
             );
           })}
         </div>
