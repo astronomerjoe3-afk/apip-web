@@ -376,6 +376,7 @@ export default function LessonRunner({
   const [simVectorAngle, setSimVectorAngle] = useState(35);
   const [simSigSample, setSimSigSample] = useState("12.349");
   const [simSigFigures, setSimSigFigures] = useState(3);
+  const [simSigOperation, setSimSigOperation] = useState<"add" | "subtract" | "multiply" | "divide">("multiply");
   const [simDensityMass, setSimDensityMass] = useState(180);
   const [simDensityVolume, setSimDensityVolume] = useState(120);
   const [simFluidDensity, setSimFluidDensity] = useState(1);
@@ -1029,6 +1030,53 @@ export default function LessonRunner({
     const sigRoundedDisplay = Number.isFinite(sigNumericValue) ? sigNumericValue.toPrecision(sigFigureCount) : "";
     const sigDigits = simSigSample.replace(/[^0-9]/g, "").replace(/^0+/, "");
     const sigNextDigit = sigDigits[sigFigureCount] || "none";
+    const sigRoundedNote = sigNextDigit === "none"
+      ? "No extra digit remains, so no further rounding decision is needed."
+      : Number(sigNextDigit) >= 5
+        ? "The next digit is 5 or more, so the last kept digit rounds up."
+        : "The next digit is 0 to 4, so the last kept digit stays the same.";
+    const sigOperationExample = {
+      add: {
+        label: "Addition",
+        symbol: "+",
+        first: "12.34 cm",
+        second: "1.2 cm",
+        raw: "13.54 cm",
+        reported: "13.5 cm",
+        ruleLabel: "Least decimal places",
+        explanation: "The second measurement has only 1 decimal place, so the final sum keeps 1 decimal place.",
+      },
+      subtract: {
+        label: "Subtraction",
+        symbol: "-",
+        first: "8.765 s",
+        second: "0.4 s",
+        raw: "8.365 s",
+        reported: "8.4 s",
+        ruleLabel: "Least decimal places",
+        explanation: "The second measurement has only 1 decimal place, so the final difference keeps 1 decimal place.",
+      },
+      multiply: {
+        label: "Multiplication",
+        symbol: "x",
+        first: "2.5 cm",
+        second: "3.42 cm",
+        raw: "8.55 cm^2",
+        reported: "8.6 cm^2",
+        ruleLabel: "Least significant figures",
+        explanation: "The first measurement has 2 significant figures, so the product keeps 2 significant figures.",
+      },
+      divide: {
+        label: "Division",
+        symbol: "/",
+        first: "9.84 g",
+        second: "2.1 cm^3",
+        raw: "4.685714... g/cm^3",
+        reported: "4.7 g/cm^3",
+        ruleLabel: "Least significant figures",
+        explanation: "The divisor has 2 significant figures, so the quotient keeps 2 significant figures.",
+      },
+    }[simSigOperation];
 
     return (
       <div className="space-y-4">
@@ -1146,6 +1194,47 @@ export default function LessonRunner({
                 <line x1="92" y1="92" x2={92 + Math.cos((simVectorAngle * Math.PI) / 180) * (22 + simVectorMagnitude * 10)} y2={92 - Math.sin((simVectorAngle * Math.PI) / 180) * (22 + simVectorMagnitude * 10)} stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
               </svg>
               <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">Direction rotates the arrow, but a scalar would only keep the size value.</div>
+            </div>
+          </div>
+        ) : simulationLessonKey === "F1_L4" ? (
+          <div className="grid gap-4 xl:grid-cols-2">
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Rounding explorer</h4>
+              <p className="mt-2 text-slate-700">Change the sample value or the target number of significant figures, then inspect the next digit before deciding whether to round up.</p>
+              <label className="mt-4 block text-sm text-slate-700">
+                Sample value
+                <input className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2" type="text" value={simSigSample} onChange={(e) => setSimSigSample(e.target.value)} />
+              </label>
+              <label className="mt-4 block text-sm text-slate-700">
+                Target significant figures: {sigFigureCount}
+                <input className="mt-2 w-full" type="range" min="1" max="5" step="1" value={simSigFigures} onChange={(e) => setSimSigFigures(Number(e.target.value))} />
+              </label>
+              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Rounded result:</span> {sigRoundedDisplay || "Enter a valid number"}</div>
+              <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Next digit:</span> {sigNextDigit}</div>
+              <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">{sigRoundedNote}</div>
+            </div>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Calculation rule explorer</h4>
+              <p className="mt-2 text-slate-700">Switch the operation and notice which reporting rule controls the final written answer.</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {(["add", "subtract", "multiply", "divide"] as const).map((operation) => (
+                  <button
+                    key={operation}
+                    type="button"
+                    onClick={() => setSimSigOperation(operation)}
+                    className={`rounded-xl border px-4 py-2 text-sm ${simSigOperation === operation ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"}`}
+                  >
+                    {operation === "add" ? "Add" : operation === "subtract" ? "Subtract" : operation === "multiply" ? "Multiply" : "Divide"}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-5 rounded-2xl bg-slate-50 p-5 text-slate-800">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Calculator step</p>
+                <p className="mt-3 text-2xl font-semibold text-slate-900">{sigOperationExample.first} {sigOperationExample.symbol} {sigOperationExample.second} = {sigOperationExample.raw}</p>
+              </div>
+              <div className="mt-4 rounded-xl bg-amber-50 px-4 py-3 text-sm text-slate-800"><span className="font-medium text-slate-900">Rule:</span> {sigOperationExample.ruleLabel}</div>
+              <div className="mt-3 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-slate-800"><span className="font-medium text-slate-900">Report this answer:</span> {sigOperationExample.reported}</div>
+              <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">{sigOperationExample.explanation}</div>
             </div>
           </div>
         ) : simulationLessonKey === "F1_L5" ? (

@@ -1090,6 +1090,16 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
             ["3 significant figures in 0.00456", "the next digit after the last kept figure", "0.00456"],
           ],
         },
+        {
+          title: "Calculation reporting rules",
+          caption: "Use one rule for addition or subtraction and a different rule for multiplication or division.",
+          columns: ["Operation", "What controls the final answer", "Example"],
+          rows: [
+            ["Addition or subtraction", "Least decimal places", "12.34 + 1.2 = 13.5"],
+            ["Multiplication or division", "Least significant figures", "2.5 x 3.42 = 8.6"],
+            ["Calculator display", "Do not copy every digit blindly", "Write only the justified answer"],
+          ],
+        },
       ];
     case "F1_L5":
       return [
@@ -1210,9 +1220,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Picture a calculator and a lab notebook",
-          caption: "A calculator may show many digits, but your final answer should match the precision of the measurement.",
+          caption: "A calculator may show many digits, but your final answer must still follow the operation rule: least significant figures for multiplication or division, and least decimal places for addition or subtraction.",
           image_url: "/lesson-media/f1/f1-l4-calculator-notebook.svg",
-          highlights: ["Display digits are not all meaningful", "Report only justified digits", "Precision belongs to the measurement, not the screen"],
+          highlights: ["Multiply or divide: keep the least significant figures", "Add or subtract: keep the least decimal places", "Calculator digits do not automatically belong in the notebook"],
         },
       ];
     case "F1_L5":
@@ -1293,6 +1303,8 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
         { heading: "Core idea", body: "Significant figures help you report a number with the right amount of precision. They stop you from pretending the measurement is more exact than it really is." },
         { heading: "Which digits count", body: "Non-zero digits always count. Leading zeros only place the decimal point, so they do not count. Zeros between non-zero digits do count, and trailing zeros after a decimal usually show real precision.", check_for_understanding: "How many significant figures are in 0.0205?" },
         { heading: "Rounding with purpose", body: "Choose how many figures you want to keep, then look at the next digit. If it is 5 or more, round up. If it is less than 5, keep the kept digit unchanged." },
+        { heading: "Rules for calculations", body: "Use different reporting rules depending on the operation. For multiplication and division, the final answer usually keeps the same number of significant figures as the measurement with the fewest significant figures. For addition and subtraction, the final answer usually keeps the same number of decimal places as the measurement with the fewest decimal places.", check_for_understanding: "Which rule controls 12.34 + 1.2, and which rule controls 2.5 x 3.42?" },
+        { heading: "Calculator answers need a final check", body: "A calculator can show more digits than the measurements justify. Do the calculation first, then apply the correct reporting rule before writing the final answer in your notebook." },
         { heading: "Think of it like this", body: analogyText || "Think of a measurement like a photo saved at a certain quality. You cannot honestly add sharper detail after the photo has been taken, just as you cannot add justified digits after the measurement is made." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
       ];
@@ -1471,8 +1483,8 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const simulationCode = lessonCode(resources.lesson);
     stagePayload = {
       title: simulationCode === "F1_L5" ? "Density explorer" : simulationCode === "F1_L4" ? "Significant figures explorer" : simulationCode === "F1_L3" ? "Measurement explorer" : "Simulation inquiry",
-      instructions: simulationCode === "F1_L5" ? "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result." : simulationCode === "F1_L4" ? "Change the measurement and the number of significant figures. Watch how the last kept digit changes when the next digit is small or large." : simulationCode === "F1_L3" ? "Compare the same object with different tools and notice how the reading detail and the spread of repeated readings change." : text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.",
-      task_prompt: simulationCode === "F1_L5" ? "Find one setup that floats and one that sinks, then explain which density comparison changed." : simulationCode === "F1_L4" ? "Try the same value at different significant-figure targets, then explain when the last kept digit stays and when it rounds up." : simulationCode === "F1_L3" ? "Find one tool with a larger spread and one with a smaller spread, then explain why the finer tool gives more trustworthy readings." : text(inquiry[1]?.prompt) || text(inquiry[0]?.hint),
+      instructions: simulationCode === "F1_L5" ? "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result." : simulationCode === "F1_L4" ? "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division." : simulationCode === "F1_L3" ? "Compare the same object with different tools and notice how the reading detail and the spread of repeated readings change." : text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.",
+      task_prompt: simulationCode === "F1_L5" ? "Find one setup that floats and one that sinks, then explain which density comparison changed." : simulationCode === "F1_L4" ? "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes." : simulationCode === "F1_L3" ? "Find one tool with a larger spread and one with a smaller spread, then explain why the finer tool gives more trustworthy readings." : text(inquiry[1]?.prompt) || text(inquiry[0]?.hint),
       completion_text: "I have finished exploring this activity",
     };
   }
