@@ -178,7 +178,8 @@ type LessonRunnerProps = {
   canGoNextLesson?: boolean;
   onGoNextLesson?: () => void;
   onRestartFromBeginning?: () => Promise<void> | void;
-  previousLessonLabel?: string;
+  previousLessonLabel?: string;
+
 };
 
 type ApiEventPayload = Record<string, unknown>;
@@ -613,18 +614,18 @@ export default function LessonRunner({
                   {table.caption ? <p className="mt-2 text-sm text-slate-600">{table.caption}</p> : null}
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="min-w-full table-fixed border-collapse text-left text-sm text-slate-700">
+                  <table className="w-full table-fixed border-separate border-spacing-0 text-left text-sm text-slate-700">
                     {table.columns.length === 3 ? (
                       <colgroup>
-                        <col className="w-[28%]" />
-                        <col className="w-[28%]" />
-                        <col className="w-[44%]" />
+                        <col style={{ width: "24%" }} />
+                        <col style={{ width: "28%" }} />
+                        <col style={{ width: "48%" }} />
                       </colgroup>
                     ) : null}
                     <thead className="bg-white text-slate-500">
                       <tr>
                         {table.columns.map((column) => (
-                          <th key={column} className="border-b px-5 py-3 align-top text-left font-semibold whitespace-normal break-words">{column}</th>
+                          <th key={column} className="border-b px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">{column}</th>
                         ))}
                       </tr>
                     </thead>
@@ -632,7 +633,7 @@ export default function LessonRunner({
                       {table.rows.map((row, rowIndex) => (
                         <tr key={`${table.title}-${rowIndex}`} className="even:bg-slate-50/70">
                           {row.map((cell, cellIndex) => (
-                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-5 py-3 align-top text-left whitespace-normal break-words leading-6">{cell}</td>
+                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-5 py-3 pr-8 align-top text-left whitespace-normal break-words leading-6">{cell}</td>
                           ))}
                         </tr>
                       ))}
