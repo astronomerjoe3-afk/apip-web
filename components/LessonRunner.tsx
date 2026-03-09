@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
+import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
 
 type StageName =
   | "diagnostic"
@@ -532,8 +533,8 @@ export default function LessonRunner({
               key={item.question_id}
               correct={item.is_correct}
               title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
-              body={item.explanation}
-              extra={item.is_correct ? undefined : (<p><span className="font-medium">Correct answer:</span> {Array.isArray(item.correct_answer) ? item.correct_answer.join(", ") : item.correct_answer}</p>)}
+              body={feedbackBody(item)}
+              extra={item.is_correct ? undefined : (<p><span className="font-medium">Correct answer:</span> {feedbackAnswer(item.correct_answer)}</p>)}
             />
           ))}
 
@@ -554,7 +555,7 @@ export default function LessonRunner({
     return (
       <div className="space-y-4">
         {payload.recent_feedback ? (
-          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "Correct" : "Wrong"} body={payload.recent_feedback.explanation} extra={payload.recent_feedback.is_correct ? undefined : <p><span className="font-medium">Correct answer:</span> {Array.isArray(payload.recent_feedback.correct_answer) ? payload.recent_feedback.correct_answer.join(", ") : payload.recent_feedback.correct_answer}</p>} />
+          <FeedbackCard correct={payload.recent_feedback.is_correct} title={payload.recent_feedback.is_correct ? "Correct" : "Wrong"} body={feedbackBody(payload.recent_feedback)} extra={payload.recent_feedback.is_correct ? undefined : <p><span className="font-medium">Correct answer:</span> {feedbackAnswer(payload.recent_feedback.correct_answer)}</p>} />
         ) : null}
         {payload.instructions ? (
           <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">{payload.instructions}</div>
