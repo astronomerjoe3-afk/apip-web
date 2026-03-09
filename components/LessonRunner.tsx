@@ -312,6 +312,23 @@ function QuestionBlock({
   );
 }
 
+function masteryFeedbackBody(item: MasteryFeedbackItem, lessonTitle: string): string {
+  const explanation = (item.explanation ?? "").trim();
+  const placeholder = ["review the lesson idea and try again", "review this idea carefully before trying again"];
+  const hasPlaceholder = !explanation
+    || placeholder.some((entry) => explanation.toLowerCase().includes(entry));
+
+  if (!hasPlaceholder) {
+    return explanation;
+  }
+
+  if (item.is_correct) {
+    return "Correct. You used the lesson idea correctly.";
+  }
+
+  return `Review ${lessonTitle} again, especially the key ideas from this lesson.`;
+}
+
 function ReviewReferences({ refs }: { refs?: ReviewReference[] }) {
   if (!refs || refs.length === 0) return null;
 
@@ -1123,7 +1140,7 @@ export default function LessonRunner({
               key={item.question_id}
               correct={item.is_correct}
               title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
-              body={item.explanation ?? "Review this idea carefully before trying again."}
+              body={masteryFeedbackBody(item, runner.lesson_title)}
             />
           ))}
 
@@ -1150,7 +1167,7 @@ export default function LessonRunner({
                   }
                   disabled={isSubmitting || payload.review_requested === true}
                 >
-                  {payload.review_requested ? "Review notes are below" : "Review the lesson first"}
+                  {payload.review_requested ? `${runner.lesson_title} notes are below` : `Review ${runner.lesson_title} first`}
                 </SecondaryButton>
               </div>
             </>
@@ -1259,7 +1276,3 @@ export default function LessonRunner({
     </div>
   );
 }
-
-
-
-

@@ -694,6 +694,8 @@ function scaffoldFocusExtras(code: string): string[] {
         "A more precise tool usually has finer divisions and a smaller uncertainty.",
         "A measurement should not pretend to be more exact than the instrument allows.",
         "Repeated careful readings increase trust when they agree closely.",
+        "Random errors make repeated readings scatter unpredictably around a value.",
+        "Systematic errors shift readings the same way each time, often because of zero error or poor calibration.",
       ];
     case "F1_L4":
       return [
@@ -744,6 +746,8 @@ function scaffoldCoreBullets(code: string): string[] {
         "Smaller scale divisions usually reduce uncertainty.",
         "Repeat readings to check consistency.",
         "Choose the tool that matches the size of the object you are measuring.",
+        "Use repeated readings to spot random error.",
+        "Check for zero error or poor calibration to catch systematic error.",
       ];
     case "F1_L4":
       return [
@@ -956,6 +960,16 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
             ["Reasonable uncertainty", "Often about half the smallest division", "+/-0.5 mm for a 1 mm ruler"],
           ],
         },
+        {
+          title: "Types of measurement error",
+          caption: "Different error patterns need different responses.",
+          columns: ["Error type", "What it looks like", "How to reduce it"],
+          rows: [
+            ["Random error", "Readings scatter above and below the best value", "Repeat readings and average them"],
+            ["Systematic error", "Every reading is shifted the same way", "Check zero error and calibrate the instrument"],
+            ["Reading mistake", "A single careless misread stands out", "Read carefully and compare with repeat readings"],
+          ],
+        },
       ];
     case "F1_L4":
       return [
@@ -1082,10 +1096,10 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         },
         {
           kind: "visual",
-          title: "Picture repeated readings",
-          caption: "A tight cluster of repeated readings usually feels more trustworthy than a scattered set.",
+          title: "Picture repeated readings and zero error",
+          caption: "Spread suggests random error, while the same offset each time points to systematic error.",
           image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
-          highlights: ["Close agreement builds confidence", "Large spread suggests larger uncertainty", "Repeat readings before trusting a result"],
+          highlights: ["Random error makes readings scatter", "Systematic error shifts every reading the same way", "Check the zero reading before trusting the instrument"],
         },
       ];
     case "F1_L4":
@@ -1172,6 +1186,8 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
         { heading: "Core idea", body: "A reading is only as trustworthy as the tool and method behind it. The instrument sets the smallest detail you can see, and that limits the certainty you can claim." },
         { heading: "Resolution and uncertainty", body: "Resolution is the smallest change the tool can show. Uncertainty tells the reader the range inside which the true value is likely to lie. A fine tool such as a caliper usually gives a smaller uncertainty than a rough ruler.", check_for_understanding: "Why is a finer scale usually more trustworthy for small objects?" },
         { heading: "Reading a scale honestly", body: "Read to the smallest clear division, estimate carefully between marks when appropriate, and never invent extra digits. The reported value should match the instrument, not the number of digits you wish you had." },
+        { heading: "Different types of error", body: "Random error makes repeated readings scatter above and below the best estimate, often because of reaction time or tiny reading differences. Systematic error shifts every reading the same way, often because of zero error or poor calibration.", check_for_understanding: "If a balance always reads 0.2 g too high, which type of error is that?" },
+        { heading: "How to reduce error", body: "Use repeated readings and averaging to reduce the effect of random error. Check zero readings, calibrate the instrument, and choose the right tool to reduce systematic error. Honest uncertainty should still be reported after careful work." },
         { heading: "Think of it like this", body: analogyText || "A blurry photo can show the big shape of an object, but not the tiny details. Low-resolution tools work the same way. A sharper picture is like a finer instrument: it lets you trust smaller differences." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
       ];
