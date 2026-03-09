@@ -122,6 +122,13 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
   "state one difference between random error and systematic error": { id: "F1-L3-T1", acceptedAnswers: ["random error varies unpredictably while systematic error shifts all readings the same way", "random error makes readings scatter while systematic error gives a consistent offset", "random error is unpredictable while systematic error is consistent", "random error scatters readings while systematic error shifts them all in one direction"], correctAnswer: "Random error varies unpredictably, while systematic error shifts readings in the same direction each time.", explanation: "Random error causes scatter from reading to reading, while systematic error adds the same bias each time.", teachingFocus: "Separate changing scatter from repeated one-direction bias when you classify error.", misconceptionTag: "random_vs_systematic_error" },
 });
 
+
+Object.assign(FALLBACK_ANSWER_METADATA, {
+  "how many significant figures are in 0 00450": { id: "F1L4_D1", answerIndex: 1, correctAnswer: "3", explanation: "0.00450 has 3 significant figures because the leading zeros do not count, but the trailing zero after the decimal does count.", teachingFocus: "Count significant figures from the first non-zero digit; leading zeros only place the decimal point, but trailing zeros after a decimal can show real precision.", misconceptionTag: "significant_figures" },
+  "round 12 349 to 3 significant figures": { id: "F1L4_D2", answerIndex: 0, correctAnswer: "12.3", explanation: "12.349 rounds to 12.3 to 3 significant figures because you keep 1, 2, and 3, then the next digit 4 leaves the 3 unchanged.", teachingFocus: "For significant figures, keep the required digits and use the next digit only to decide whether to round up.", misconceptionTag: "rounding_rules" },
+  "calculate 2 5 3 42 and report the result with correct significant figures": { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 × 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" },
+});
+
 Object.assign(FALLBACK_ANSWER_METADATA, {
   "which quantity is a vector": { id: "F1L2_D1", answerIndex: 2, correctAnswer: "displacement", explanation: "Displacement is a vector because it has both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" },
   "speed is a scalar because it has": { id: "F1L2_D2", answerIndex: 0, correctAnswer: "magnitude only", explanation: "Speed is a scalar because it has magnitude only and no direction.", teachingFocus: "Scalars tell how much only, while vectors add direction.", misconceptionTag: "vector_scalar_confusion" },
@@ -305,6 +312,15 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   if (itemId === "F1L3_T2" || itemId === "F1-L3-T2") {
     return { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so 0.2 cm divisions suggest +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" };
   }
+  if (itemId === "F1L4_D1" || itemId === "F1-L4-D1") {
+    return { id: "F1L4_D1", answerIndex: 1, correctAnswer: "3", explanation: "0.00450 has 3 significant figures because the leading zeros do not count, but the trailing zero after the decimal does count.", teachingFocus: "Count significant figures from the first non-zero digit; leading zeros only place the decimal point, but trailing zeros after a decimal can show real precision.", misconceptionTag: "significant_figures" };
+  }
+  if (itemId === "F1L4_D2" || itemId === "F1-L4-D2") {
+    return { id: "F1L4_D2", answerIndex: 0, correctAnswer: "12.3", explanation: "12.349 rounds to 12.3 to 3 significant figures because you keep 1, 2, and 3, then the next digit 4 leaves the 3 unchanged.", teachingFocus: "For significant figures, keep the required digits and use the next digit only to decide whether to round up.", misconceptionTag: "rounding_rules" };
+  }
+  if (itemId === "F1L4_T1" || itemId === "F1-L4-T1") {
+    return { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 × 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" };
+  }
   if (itemId === "F1-L2-C1") {
     return { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" };
   }
@@ -408,9 +424,11 @@ function misconceptionTag(prompt: string): string | undefined {
 }
 
 function resolvedAnswerIndex(item: UnknownRecord): number {
+  const metaIndex = fallbackMeta(item)?.answerIndex;
+  if (typeof metaIndex === "number" && Number.isFinite(metaIndex)) return metaIndex;
   const explicit = item.answer_index;
   if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
-  return fallbackMeta(item)?.answerIndex ?? -1;
+  return -1;
 }
 
 function resolvedCorrectAnswer(item: UnknownRecord): string {
@@ -427,13 +445,13 @@ function resolvedCorrectAnswer(item: UnknownRecord): string {
 function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
   const feedback = asList(item.feedback).map((entry) => text(entry));
   const answerFeedback = answerIndex >= 0 && answerIndex < feedback.length ? feedback[answerIndex] : "";
-  if (hasMeaningfulFeedback(answerFeedback)) {
-    return answerFeedback;
-  }
-
   const metaExplanation = fallbackMeta(item)?.explanation;
   if (hasMeaningfulFeedback(metaExplanation || "")) {
     return metaExplanation || "";
+  }
+
+  if (hasMeaningfulFeedback(answerFeedback)) {
+    return answerFeedback;
   }
 
   const hint = text(item.hint);
@@ -1705,6 +1723,9 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
+
+
 
 
 
