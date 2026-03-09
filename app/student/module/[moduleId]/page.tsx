@@ -77,7 +77,8 @@ type LessonsResponse = {
 type ActiveLesson = LessonCatalog & {
   progress?: LessonProgress;
 };
-
+
+
 
 function normalizeLessonId(value: string | undefined | null): string {
   return String(value || "").replace(/-/g, "_");
@@ -116,7 +117,7 @@ export default function StudentModulePage() {
   }, [lessons.length, activeIdx]);
 
   const loadModuleState = useCallback(
-    async (preserveCurrentLesson: boolean = true): Promise<void> => {
+    async (preserveCurrentLesson: boolean = true, currentLessonIdOverride?: string): Promise<void> => {
       if (authLoading) {
         return;
       }
@@ -178,7 +179,7 @@ export default function StudentModulePage() {
           });
 
         const currentLessonId = preserveCurrentLesson
-          ? normalizeLessonId(activeLesson?.lesson_id || activeLesson?.id)
+          ? normalizeLessonId(currentLessonIdOverride)
           : "";
 
         let nextIndex = 0;
@@ -223,7 +224,7 @@ export default function StudentModulePage() {
         setLoading(false);
       }
     },
-    [activeLesson, authLoading, moduleId, user],
+    [authLoading, moduleId, user],
   );
 
   useEffect(() => {
@@ -243,7 +244,8 @@ export default function StudentModulePage() {
   }, [authLoading, loadModuleState, moduleId, router, user]);
 
   const canGoBack = activeIdx > 0;
-  const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
+  const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
+
 
   function goBack(): void {
     if (!canGoBack) return;
@@ -381,7 +383,11 @@ export default function StudentModulePage() {
             moduleId={moduleId}
             lessonId={normalizeLessonId(activeLesson.lesson_id || activeLesson.id)}
             canGoNextLesson={canGoNext}
-            onGoNextLesson={canGoNext ? goNext : undefined}
+            onGoNextLesson={canGoNext ? goNext : undefined}
+
+
+
+
           />
         ) : (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
