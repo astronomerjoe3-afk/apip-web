@@ -1185,17 +1185,17 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
       return [
         {
           kind: "visual",
-          title: "Picture a ruler beside a caliper",
-          caption: "Compare the ruler, caliper, and micrometer. Finer tools show smaller changes and support smaller uncertainty.",
+          title: "Compare the same object with three tools",
+          caption: "Measure the same object with a ruler, caliper, and micrometer. Finer divisions reveal more detail and support smaller uncertainty.",
           image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
-          highlights: ["Large divisions limit resolution", "Finer divisions support smaller uncertainty", "Use the simulation to compare tool readings"],
+          highlights: ["The same object looks rougher or finer depending on the tool", "Smaller divisions support smaller uncertainty", "Use the simulation to compare readings from each tool"],
         },
         {
           kind: "visual",
-          title: "Picture repeated readings and zero error",
-          caption: "Compare spread and zero error carefully. Scatter suggests random error, while the same offset each time suggests systematic error.",
+          title: "Compare random error and zero error",
+          caption: "Repeated readings can disagree in two ways: random error causes scatter, while zero error adds the same offset each time.",
           image_url: "/lesson-media/f1/f1-l3-reading-errors.svg",
-          highlights: ["Random error makes readings spread out", "Zero error shifts every reading together", "Use the simulation to compare spread and offset"],
+          highlights: ["Random error shows up as spread between repeated readings", "Zero error shifts every reading by the same amount", "Use the simulation to compare scatter, averaging, and offset"],
         },
       ];
     case "F1_L4":

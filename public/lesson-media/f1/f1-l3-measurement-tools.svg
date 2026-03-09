@@ -1,46 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
-  <title id="title">Measurement tools by resolution</title>
-  <desc id="desc">A ruler, caliper, and micrometer compare how finer tools show smaller changes and smaller uncertainty.</desc>
+  <title id="title">Same object measured with three tools</title>
+  <desc id="desc">A ruler, caliper, and micrometer measure the same object. Finer tools show more detail and support smaller uncertainty.</desc>
   <rect width="1200" height="700" rx="36" fill="#f8fbff"/>
-  <text x="70" y="96" font-size="44" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Choose the tool that matches the job</text>
-  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Finer divisions let you read smaller changes and report smaller uncertainty.</text>
+  <text x="70" y="92" font-size="42" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Measure the same object with different tools</text>
+  <text x="70" y="138" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Smaller divisions let you read more detail and report smaller uncertainty.</text>
 
-  <g transform="translate(86 206)">
-    <rect width="1028" height="404" rx="30" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
+  <g transform="translate(88 188)">
+    <rect width="1024" height="440" rx="30" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
 
-    <g transform="translate(42 46)">
-      <rect width="286" height="310" rx="28" fill="#fffdf2" stroke="#fde68a" stroke-width="3"/>
-      <text x="28" y="42" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Ruler</text>
-      <rect x="30" y="110" width="226" height="40" rx="20" fill="#fde68a"/>
-      <path d="M50 110 V150 M82 110 V138 M114 110 V150 M146 110 V138 M178 110 V150 M210 110 V138 M242 110 V150" stroke="#92400e" stroke-width="4"/>
-      <text x="30" y="206" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Large divisions</text>
-      <text x="30" y="238" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Typical reading: 4.3 cm</text>
-      <text x="30" y="272" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#92400e">Uncertainty about +/- 0.05 cm</text>
+    <g transform="translate(34 38)">
+      <rect width="292" height="348" rx="28" fill="#fffdf2" stroke="#fde68a" stroke-width="3"/>
+      <text x="30" y="42" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Ruler</text>
+      <text x="30" y="78" font-size="21" font-family="Segoe UI, Arial, sans-serif" fill="#475569">Large divisions show less detail.</text>
+      <rect x="34" y="130" width="224" height="36" rx="18" fill="#fde68a"/>
+      <path d="M56 130 V166 M88 130 V150 M120 130 V166 M152 130 V150 M184 130 V166 M216 130 V150 M248 130 V166" stroke="#92400e" stroke-width="4"/>
+      <rect x="74" y="230" width="132" height="34" rx="16" fill="#93c5fd"/>
+      <text x="30" y="310" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Reading: 4.3 cm</text>
+      <text x="30" y="342" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#92400e">Uncertainty: +/- 0.05 cm</text>
     </g>
 
-    <g transform="translate(372 46)">
-      <rect width="286" height="310" rx="28" fill="#f5fbff" stroke="#bfdbfe" stroke-width="3"/>
-      <text x="28" y="42" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Caliper</text>
-      <rect x="34" y="214" width="206" height="20" rx="10" fill="#475569"/>
-      <path d="M72 166 V286 M174 166 V286" stroke="#0f766e" stroke-width="12" stroke-linecap="round"/>
-      <path d="M54 182 V266 M90 182 V266 M156 182 V266 M192 182 V266" stroke="#0f766e" stroke-width="4"/>
-      <text x="28" y="94" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Finer scale and jaws</text>
-      <text x="28" y="126" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Typical reading: 4.27 cm</text>
-      <text x="28" y="286" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#0f766e">Uncertainty about +/- 0.005 cm</text>
+    <g transform="translate(366 38)">
+      <rect width="292" height="348" rx="28" fill="#f5fbff" stroke="#bfdbfe" stroke-width="3"/>
+      <text x="30" y="42" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Caliper</text>
+      <text x="30" y="78" font-size="21" font-family="Segoe UI, Arial, sans-serif" fill="#475569">Finer scale gives more detail.</text>
+      <rect x="44" y="238" width="202" height="20" rx="10" fill="#475569"/>
+      <path d="M82 182 V302 M178 182 V302" stroke="#0f766e" stroke-width="12" stroke-linecap="round"/>
+      <path d="M64 198 V286 M100 198 V286 M160 198 V286 M196 198 V286" stroke="#0f766e" stroke-width="4"/>
+      <rect x="82" y="230" width="132" height="34" rx="16" fill="#93c5fd" opacity="0.88"/>
+      <text x="30" y="310" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Reading: 4.27 cm</text>
+      <text x="30" y="342" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#0f766e">Uncertainty: +/- 0.005 cm</text>
     </g>
 
-    <g transform="translate(702 46)">
-      <rect width="286" height="310" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
-      <text x="28" y="42" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Micrometer</text>
-      <circle cx="78" cy="170" r="54" fill="none" stroke="#475569" stroke-width="18"/>
-      <rect x="122" y="134" width="92" height="34" rx="16" fill="#94a3b8"/>
-      <rect x="196" y="118" width="52" height="68" rx="18" fill="#64748b"/>
-      <text x="28" y="242" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Very fine reading for small objects</text>
-      <text x="28" y="274" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Typical reading: 4.276 cm</text>
-      <text x="28" y="306" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#475569">Uncertainty about +/- 0.0005 cm</text>
+    <g transform="translate(698 38)">
+      <rect width="292" height="348" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+      <text x="30" y="42" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Micrometer</text>
+      <text x="30" y="78" font-size="21" font-family="Segoe UI, Arial, sans-serif" fill="#475569">Very fine scale for tiny objects.</text>
+      <circle cx="84" cy="184" r="54" fill="none" stroke="#475569" stroke-width="18"/>
+      <rect x="128" y="168" width="92" height="32" rx="16" fill="#94a3b8"/>
+      <rect x="204" y="150" width="48" height="68" rx="18" fill="#64748b"/>
+      <rect x="122" y="230" width="110" height="34" rx="16" fill="#93c5fd" opacity="0.88"/>
+      <text x="30" y="310" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Reading: 4.276 cm</text>
+      <text x="30" y="342" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#475569">Uncertainty: +/- 0.0005 cm</text>
     </g>
 
-    <rect x="232" y="370" width="564" height="34" rx="17" fill="#eff6ff"/>
-    <text x="514" y="394" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#1d4ed8">Smaller divisions -> finer resolution -> smaller reading uncertainty</text>
+    <rect x="248" y="394" width="528" height="34" rx="17" fill="#eff6ff"/>
+    <text x="512" y="417" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#1d4ed8">Finer tool -> smaller division -> smaller uncertainty</text>
   </g>
 </svg>

@@ -1,39 +1,64 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
-  <title id="title">Repeated readings and zero error</title>
-  <desc id="desc">One panel shows random error as spread-out readings; another shows zero error as the same offset on every reading.</desc>
+  <title id="title">Random error and zero error</title>
+  <desc id="desc">One panel compares tight and wide repeated-reading spread. Another panel compares a correct zero with a shifted zero that offsets every reading.</desc>
   <rect width="1200" height="700" rx="36" fill="#f8fbff"/>
-  <text x="70" y="96" font-size="44" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Readings can disagree in two different ways</text>
-  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Random error causes spread. Zero error shifts every reading by the same amount.</text>
+  <text x="70" y="92" font-size="42" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Two different problems can spoil a reading</text>
+  <text x="70" y="138" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Random error makes repeated readings spread out. Zero error shifts every reading by the same amount.</text>
 
-  <g transform="translate(86 214)">
-    <rect width="1028" height="386" rx="30" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
+  <g transform="translate(86 188)">
+    <rect width="1028" height="440" rx="30" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
 
-    <g transform="translate(52 42)">
-      <rect width="430" height="302" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
-      <text x="28" y="44" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Random error</text>
-      <line x1="38" y1="208" x2="390" y2="208" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
-      <circle cx="122" cy="198" r="14" fill="#0f766e"/>
-      <circle cx="154" cy="214" r="14" fill="#0f766e"/>
-      <circle cx="188" cy="202" r="14" fill="#0f766e"/>
-      <circle cx="298" cy="152" r="14" fill="#ef4444"/>
-      <circle cx="334" cy="240" r="14" fill="#ef4444"/>
-      <circle cx="366" cy="182" r="14" fill="#ef4444"/>
-      <text x="28" y="92" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Tight cluster = better agreement</text>
-      <text x="28" y="124" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Wide spread = larger uncertainty</text>
-      <text x="28" y="274" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#0f766e">Repeat and average to reduce random scatter.</text>
+    <g transform="translate(36 34)">
+      <rect width="452" height="372" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+      <text x="30" y="44" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Random error</text>
+      <text x="30" y="82" font-size="21" font-family="Segoe UI, Arial, sans-serif" fill="#475569">Read the same object many times and compare the spread.</text>
+
+      <text x="30" y="126" font-size="20" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f766e">Tight cluster</text>
+      <line x1="44" y1="162" x2="400" y2="162" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/>
+      <line x1="220" y1="134" x2="220" y2="190" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="6 6"/>
+      <circle cx="188" cy="158" r="13" fill="#0f766e"/>
+      <circle cx="214" cy="168" r="13" fill="#0f766e"/>
+      <circle cx="240" cy="156" r="13" fill="#0f766e"/>
+      <circle cx="264" cy="164" r="13" fill="#0f766e"/>
+      <text x="30" y="208" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Smaller scatter means smaller random uncertainty.</text>
+
+      <text x="30" y="258" font-size="20" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#b45309">Wide spread</text>
+      <line x1="44" y1="294" x2="400" y2="294" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/>
+      <line x1="220" y1="266" x2="220" y2="322" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="6 6"/>
+      <circle cx="116" cy="286" r="13" fill="#f97316"/>
+      <circle cx="182" cy="306" r="13" fill="#f97316"/>
+      <circle cx="270" cy="282" r="13" fill="#f97316"/>
+      <circle cx="346" cy="302" r="13" fill="#f97316"/>
+      <text x="30" y="340" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Repeat and average to reduce random scatter.</text>
     </g>
 
-    <g transform="translate(544 42)">
-      <rect width="430" height="302" rx="28" fill="#fffdf2" stroke="#fde68a" stroke-width="3"/>
-      <text x="28" y="44" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Zero error</text>
-      <rect x="44" y="98" width="304" height="34" rx="16" fill="#e2e8f0"/>
-      <line x1="88" y1="98" x2="88" y2="132" stroke="#475569" stroke-width="4"/>
-      <line x1="176" y1="98" x2="176" y2="132" stroke="#475569" stroke-width="4"/>
-      <line x1="264" y1="98" x2="264" y2="132" stroke="#475569" stroke-width="4"/>
-      <rect x="74" y="82" width="68" height="66" rx="16" fill="#f59e0b" opacity="0.88"/>
-      <text x="44" y="192" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">The pointer should start at 0.</text>
-      <text x="44" y="224" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">If it starts shifted, every reading is offset.</text>
-      <text x="44" y="270" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#92400e">Check the zero reading before trusting the instrument.</text>
+    <g transform="translate(540 34)">
+      <rect width="452" height="372" rx="28" fill="#fffdf2" stroke="#fde68a" stroke-width="3"/>
+      <text x="30" y="44" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Zero error</text>
+      <text x="30" y="82" font-size="21" font-family="Segoe UI, Arial, sans-serif" fill="#475569">Check the instrument before measuring anything.</text>
+
+      <text x="30" y="126" font-size="20" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f766e">Correct zero</text>
+      <rect x="44" y="146" width="318" height="34" rx="17" fill="#e2e8f0"/>
+      <line x1="82" y1="146" x2="82" y2="180" stroke="#475569" stroke-width="4"/>
+      <line x1="172" y1="146" x2="172" y2="180" stroke="#475569" stroke-width="4"/>
+      <line x1="262" y1="146" x2="262" y2="180" stroke="#475569" stroke-width="4"/>
+      <rect x="34" y="134" width="52" height="58" rx="16" fill="#22c55e" opacity="0.9"/>
+      <text x="44" y="220" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Pointer starts at 0, so later readings begin correctly.</text>
+
+      <text x="30" y="272" font-size="20" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#b45309">Shifted zero</text>
+      <rect x="44" y="292" width="318" height="34" rx="17" fill="#e2e8f0"/>
+      <line x1="82" y1="292" x2="82" y2="326" stroke="#475569" stroke-width="4"/>
+      <line x1="172" y1="292" x2="172" y2="326" stroke="#475569" stroke-width="4"/>
+      <line x1="262" y1="292" x2="262" y2="326" stroke="#475569" stroke-width="4"/>
+      <rect x="74" y="280" width="52" height="58" rx="16" fill="#f59e0b" opacity="0.92"/>
+      <line x1="82" y1="356" x2="100" y2="356" stroke="#f59e0b" stroke-width="4" marker-end="url(#arrow)"/>
+      <text x="110" y="362" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#92400e">Same offset added to every reading.</text>
     </g>
   </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#f59e0b"/>
+    </marker>
+  </defs>
 </svg>
