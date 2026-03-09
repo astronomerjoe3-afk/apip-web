@@ -213,7 +213,7 @@ function lessonCode(lesson: UnknownRecord, runnerLesson: UnknownRecord = {}): st
 function hasMeaningfulFeedback(value: string): boolean {
   const normalized = value.trim().toLowerCase();
   if (!normalized) return false;
-  return !["correct", "correct.", "no", "no.", "incorrect", "incorrect.", "incomplete", "incomplete."].includes(normalized);
+  return !["correct", "correct.", "no", "no.", "incorrect", "incorrect.", "incomplete", "incomplete.", "review the lesson idea and try again", "review the lesson idea and try again.", "review this idea carefully before trying again", "review this idea carefully before trying again."].includes(normalized);
 }
 
 function hash(input: string): number {
@@ -281,7 +281,7 @@ function numericAnswer(value: unknown): number | null {
 function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   const itemId = text(item.id);
   if (itemId === "F1-L2-D1") {
-    return { id: "F1-L2-D1", answerIndex: 2, correctAnswer: "velocity", explanation: "Velocity is a vector because it needs both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" };
+    return { id: "F1-L2-D1", answerIndex: 2, correctAnswer: "displacement", explanation: "Displacement is a vector because it has both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" };
   }
   if (itemId === "F1-L2-D2") {
     return { id: "F1-L2-D2", answerIndex: 2, correctAnswer: "Vectors have magnitude and direction", explanation: "A vector combines size and direction.", teachingFocus: "Do not treat vectors and scalars as interchangeable descriptions.", misconceptionTag: "vector_scalar_confusion" };
@@ -416,8 +416,8 @@ function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
   }
 
   const metaExplanation = fallbackMeta(item)?.explanation;
-  if (metaExplanation) {
-    return metaExplanation;
+  if (hasMeaningfulFeedback(metaExplanation || "")) {
+    return metaExplanation || "";
   }
 
   const hint = text(item.hint);
@@ -468,14 +468,19 @@ function grade(item: UnknownRecord, answer: unknown, title: string): UnknownReco
     choices.length > 0
       ? answerIndex === resolvedAnswerIndex(item)
       : shortAnswerMatches(answer, acceptedAnswers);
+  const explanation = resolvedExplanation(item, answerIndex);
+  const focus = meta?.teachingFocus || teachingFocus(prompt, title);
+  const explanationFallback = isCorrect
+    ? `Correct. ${resolvedCorrectAnswer(item)} is right because ${focus.charAt(0).toLowerCase()}${focus.slice(1)}`
+    : focus;
   return {
     question_id: text(item.id),
     prompt,
     learner_answer: choices.length > 0 ? choiceLabel(item, answer) : text(answer).trim() || null,
     is_correct: isCorrect,
     correct_answer: resolvedCorrectAnswer(item),
-    explanation: resolvedExplanation(item, answerIndex),
-    teaching_focus: meta?.teachingFocus || teachingFocus(prompt, title),
+    explanation: hasMeaningfulFeedback(explanation) ? explanation : explanationFallback,
+    teaching_focus: focus,
     misconception_tag: isCorrect ? undefined : meta?.misconceptionTag || misconceptionTag(prompt),
   };
 }
