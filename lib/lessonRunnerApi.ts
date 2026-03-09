@@ -541,6 +541,28 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F1-L2-M7", "What extra information turns speed into velocity?", ["mass", "direction", "unit prefix", "temperature"], 1, "Velocity is speed with one extra feature.", "Direction turns speed into velocity."),
         mcItem("F1-L2-M8", "Why can two vectors with the same magnitude still be different?", ["They can have different units", "They can have different directions", "They can only be different at night", "Vectors never differ once magnitudes match"], 1, "Magnitude alone is not enough for vectors.", "Two vectors can differ if their directions are different."),
       ];
+    case "F1_L3":
+      return [
+        mcItem("F1-L3-M1", "Which tool is best for measuring the diameter of a small wire?", ["metre rule", "vernier caliper", "stopwatch", "measuring tape"], 1, "Choose the tool with the finer scale for the small object.", "A vernier caliper is better for small diameters because its finer scale gives a more precise reading."),
+        mcItem("F1-L3-M2", "A ruler has 1 mm divisions. What uncertainty is often reasonable to report?", ["+/- 1 mm", "+/- 0.5 mm", "+/- 0.1 mm", "+/- 2 mm"], 1, "A common estimate is about half the smallest division.", "+/- 0.5 mm is reasonable because it is about half of a 1 mm smallest division."),
+        mcItem("F1-L3-M3", "If repeated readings are tightly grouped, what does that suggest?", ["low precision", "greater precision", "wrong unit", "systematic error only"], 1, "Think about how closely the readings agree with each other.", "Tightly grouped readings suggest greater precision because the measurements agree closely."),
+        mcItem("F1-L3-M4", "A balance always reads 0.2 g too high before any mass is placed on it. This is...", ["random error", "systematic error", "rounding only", "no error"], 1, "A repeated shift in the same direction is the clue.", "A constant offset is systematic error because it shifts every reading the same way."),
+        mcItem("F1-L3-M5", "Why is a caliper usually more trustworthy than a rough ruler for a tiny object?", ["It is always digital", "It has finer divisions and smaller uncertainty", "It uses larger units", "It removes all error"], 1, "Trust comes from finer resolution, not from magic.", "A caliper is usually more trustworthy because its finer divisions reduce the uncertainty in the reading."),
+        mcItem("F1-L3-M6", "What does resolution describe?", ["The color of the instrument", "The smallest change the instrument can show", "The true value exactly", "The number of repeated trials"], 1, "Resolution is about the instrument's smallest visible change.", "Resolution is the smallest change an instrument can show."),
+        shortItem("F1-L3-M7", "A scale has 0.2 cm divisions. What uncertainty is often reasonable to report?", ["0.1 cm", "+/- 0.1 cm"], "Use about half the smallest division."),
+        shortItem("F1-L3-M8", "Name one reason repeated measurements improve trust in a result.", ["they show variation", "they show how much the readings vary", "they help estimate uncertainty", "they help us estimate uncertainty", "they show consistency"], "Think about spread, consistency, and uncertainty."),
+      ];
+    case "F1_L4":
+      return [
+        mcItem("F1-L4-M1", "How many significant figures are in 0.00450?", ["2", "3", "4", "5"], 1, "Leading zeros do not count, but trailing zeros after a decimal can count.", "0.00450 has 3 significant figures: 4, 5, and the trailing 0."),
+        mcItem("F1-L4-M2", "Round 12.349 to 3 significant figures.", ["12.3", "12.4", "12.35", "12.34"], 0, "Keep 1, 2, and 3, then look at the next digit.", "12.349 rounds to 12.3 to 3 significant figures because the next digit is 4."),
+        mcItem("F1-L4-M3", "Which zeros do not count as significant figures?", ["Zeros between non-zero digits", "Leading zeros before the first non-zero digit", "Trailing zeros after a decimal point", "All zeros always count"], 1, "Think about zeros that only place the decimal point.", "Leading zeros do not count because they only locate the decimal point."),
+        mcItem("F1-L4-M4", "In multiplication or division, your final answer should usually keep...", ["the most significant figures from any number", "the least significant figures from the measurements", "all digits shown by the calculator", "no significant figures at all"], 1, "The least precise measurement controls the final precision.", "For multiplication or division, the final answer usually keeps the least number of significant figures among the measurements."),
+        mcItem("F1-L4-M5", "Why should you avoid writing extra digits in a final physics answer?", ["Extra digits always improve the science", "They can pretend the measurement is more precise than it is", "They remove units", "They change the formula"], 1, "Think about honesty in reporting precision.", "Extra digits can falsely suggest more precision than the measurement supports."),
+        mcItem("F1-L4-M6", "Which statement about a calculator display is best?", ["Every displayed digit must be reported", "Displayed digits are always exact", "You should report only the digits justified by the measurement", "Calculator digits replace uncertainty"], 2, "The measurement, not the screen, sets the justified precision.", "You should report only digits justified by the measurement."),
+        shortItem("F1-L4-M7", "Round 0.00678 to 2 significant figures.", ["0.0068", "6.8 x 10^-3", "6.8x10^-3"], "Keep the first two significant digits and round using the next digit."),
+        shortItem("F1-L4-M8", "State the addition and subtraction rule for significant figures in a few words.", ["least decimal places", "match the least decimal places", "use the least decimal places", "follow the least decimal places"], "Think about decimal places rather than total significant figures."),
+      ];
     default:
       return [];
   }
@@ -575,12 +597,26 @@ function masterySourceKey(item: UnknownRecord): string {
     .sort();
   return [normalizePromptKey(prompt), choices.join("|"), accepted.join("|")].join("::");
 }
+function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
+  const code = lessonCode(lesson);
+  const lessonPoints = Array.from(new Set([...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].map((item) => item.trim()).filter(Boolean)));
+  const distractors = Array.from(new Set(["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6"]
+    .filter((entry) => entry !== code)
+    .flatMap((entry) => [...scaffoldCoreBullets(entry), ...scaffoldFocusExtras(entry)])
+    .map((item) => item.trim())
+    .filter(Boolean)));
+  return lessonPoints.slice(0, 8).map((point, index) =>
+    mcItem(`${code}-AUTO-M${String(index + 1)}`, "Which statement belongs in this lesson?", [point, distractors[(index * 3) % distractors.length], distractors[(index * 3 + 1) % distractors.length], distractors[(index * 3 + 2) % distractors.length]], 0, "Pick the idea from this lesson.", point)
+  );
+}
+
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)];
-  const ordered = generated.length > 0 ? [...generated, ...fallback] : [...fallback];
+  const baseItems = generated.length > 0 ? [...generated, ...fallback] : [...fallback];
+  const ordered = baseItems.length >= MASTERY_DEFAULT_MIN ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
   return ordered.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
@@ -1628,5 +1664,6 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
 
 
