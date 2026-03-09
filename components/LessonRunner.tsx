@@ -655,6 +655,25 @@ export default function LessonRunner({
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <iframe src={card.embed_url} title={card.title} className="h-64 w-full" allowFullScreen />
                   </div>
+                ) : card.kind !== "video" ? (
+                  <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
+                    <svg viewBox="0 0 520 240" className="h-64 w-full" role="img" aria-label={card.title}>
+                      <rect width="520" height="240" rx="24" fill="#f8fbff" />
+                      <rect x="24" y="24" width="472" height="192" rx="24" fill="#ffffff" opacity="0.94" />
+                      <circle cx="132" cy="112" r="52" fill="#dbeafe" />
+                      <path d="M102 142 C128 92 154 92 180 142" fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
+                      <path d="M192 98 L222 82 L216 116" fill="#0f766e" />
+                      <rect x="230" y="62" width="214" height="36" rx="18" fill="#eff6ff" />
+                      <text x="246" y="85" fontSize="18" fontWeight="700" fill="#0f172a">{card.title}</text>
+                      <text x="246" y="122" fontSize="15" fill="#475569">{card.caption}</text>
+                      {card.highlights?.slice(0, 2).map((item, index) => (
+                        <g key={item}>
+                          <rect x="230" y={142 + index * 34} width="214" height="24" rx="12" fill="#f8fafc" stroke="#dbeafe" />
+                          <text x="244" y={158 + index * 34} fontSize="13" fill="#334155">{item}</text>
+                        </g>
+                      ))}
+                    </svg>
+                  </div>
                 ) : null}
 
                 {card.highlights?.length ? (
