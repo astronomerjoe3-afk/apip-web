@@ -405,23 +405,40 @@ export default function StudentModulePage() {
             justifyContent: "space-between",
             gap: 12,
             alignItems: "center",
+            flexWrap: "wrap",
           }}
         >
-          <button
-            onClick={goBack}
-            disabled={!canGoBack}
-            style={{
-              opacity: canGoBack ? 1 : 0.42,
-              padding: "12px 18px",
-              borderRadius: 14,
-              border: "1px solid rgba(16, 35, 63, 0.14)",
-              background: "rgba(255, 255, 255, 0.72)",
-              fontWeight: 800, boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
-            }}>
-            Back
-          </button>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+            <button
+              onClick={goBack}
+              disabled={!canGoBack}
+              style={{
+                opacity: canGoBack ? 1 : 0.42,
+                padding: "12px 18px",
+                borderRadius: 14,
+                border: "1px solid rgba(16, 35, 63, 0.14)",
+                background: "rgba(255, 255, 255, 0.72)",
+                fontWeight: 800,
+                boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
+              }}>
+              Back
+            </button>
 
-          <div style={{ opacity: 0.8, textAlign: "center" }}>
+            <button
+              onClick={() => void restartFromBeginning()}
+              style={{
+                padding: "12px 18px",
+                borderRadius: 14,
+                border: "1px solid rgba(16, 35, 63, 0.14)",
+                background: "rgba(255, 255, 255, 0.72)",
+                fontWeight: 800,
+                boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
+              }}>
+              Start over from Lesson 1
+            </button>
+          </div>
+
+          <div style={{ opacity: 0.8, textAlign: "center", flex: "1 1 220px" }}>
             Finish this mission, then continue.
           </div>
 
