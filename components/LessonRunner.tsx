@@ -608,19 +608,26 @@ export default function LessonRunner({
                   {table.caption ? <p className="mt-2 text-sm text-slate-600">{table.caption}</p> : null}
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="min-w-full text-left text-sm text-slate-700">
+                  <table className="min-w-full table-fixed border-collapse text-left text-sm text-slate-700">
+                    {table.columns.length === 3 ? (
+                      <colgroup>
+                        <col className="w-[26%]" />
+                        <col className="w-[26%]" />
+                        <col className="w-[48%]" />
+                      </colgroup>
+                    ) : null}
                     <thead className="bg-white text-slate-500">
                       <tr>
                         {table.columns.map((column) => (
-                          <th key={column} className="border-b px-4 py-3 text-left font-semibold">{column}</th>
+                          <th key={column} className="border-b px-5 py-3 align-top text-left font-semibold">{column}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
                       {table.rows.map((row, rowIndex) => (
-                        <tr key={`${table.title}-${rowIndex}`} className="align-top even:bg-slate-50/70">
+                        <tr key={`${table.title}-${rowIndex}`} className="even:bg-slate-50/70">
                           {row.map((cell, cellIndex) => (
-                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-4 py-3">{cell}</td>
+                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-5 py-3 align-top text-left">{cell}</td>
                           ))}
                         </tr>
                       ))}
