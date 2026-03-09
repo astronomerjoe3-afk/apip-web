@@ -481,10 +481,26 @@ export default function LessonRunner({
   );
 
   const setAnswer = useCallback((questionId: string, value: string) => {
-    answersRef.current = { ...answersRef.current, [questionId]: value };
-    setAnswers(answersRef.current);
+    const nextAnswers = { ...answersRef.current, [questionId]: value };
+    answersRef.current = nextAnswers;
+    setAnswers(nextAnswers);
     setError(null);
-  }, []);
+
+    if (isSubmitting || !runner || runner.active_stage !== "diagnostic") {
+      return;
+    }
+
+    const payload = runner.stage_payload as DiagnosticStagePayload;
+    const activeQuestion = payload.questions[0];
+    if (!activeQuestion || activeQuestion.id !== questionId || activeQuestion.type === "short_answer") {
+      return;
+    }
+
+    void sendEvent("diagnostic_submitted", {
+      from_stage: "diagnostic",
+      answers: { [questionId]: value },
+    });
+  }, [isSubmitting, runner, sendEvent]);
 
 
   const stageTitle = useMemo(() => {
