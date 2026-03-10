@@ -530,6 +530,13 @@ export default function LessonRunner({
 
   const stageTitle = useMemo(() => {
     if (!runner) return "";
+    const isFinalModuleWrapUp =
+      runner.active_stage === "mastery" &&
+      runner.lesson_status === "completed" &&
+      !canGoNextLesson &&
+      runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+
+    if (isFinalModuleWrapUp) return "Module complete";
     switch (runner.active_stage) {
       case "diagnostic":
         return "Check what you already know";
@@ -546,12 +553,19 @@ export default function LessonRunner({
       default:
         return "";
     }
-  }, [runner]);
+  }, [canGoNextLesson, runner]);
 
   const showRestartAction = useMemo(() => {
     if (!runner) return false;
+    const isFinalModuleWrapUp =
+      runner.active_stage === "mastery" &&
+      runner.lesson_status === "completed" &&
+      !canGoNextLesson &&
+      runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+
+    if (isFinalModuleWrapUp) return false;
     return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic";
-  }, [runner]);
+  }, [canGoNextLesson, runner]);
 
   const restartCopy = useMemo(() => {
     if (!runner) return "";
@@ -562,6 +576,13 @@ export default function LessonRunner({
 
   const stageSubtitle = useMemo(() => {
     if (!runner) return "";
+    const isFinalModuleWrapUp =
+      runner.active_stage === "mastery" &&
+      runner.lesson_status === "completed" &&
+      !canGoNextLesson &&
+      runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+
+    if (isFinalModuleWrapUp) return "Congratulations. You finished the final mission and wrapped up this measurement module.";
     switch (runner.active_stage) {
       case "diagnostic":
         return "A few quick questions first.";
@@ -578,7 +599,7 @@ export default function LessonRunner({
       default:
         return "";
     }
-  }, [runner]);
+  }, [canGoNextLesson, runner]);
 
   if (isLoading) {
     return (
@@ -1686,9 +1707,23 @@ export default function LessonRunner({
           : typeof masteryPercent === "number"
             ? masteryPercent >= threshold
             : false;
+      const isFinalModuleWrapUp =
+        passed &&
+        runner.lesson_status === "completed" &&
+        !canGoNextLesson &&
+        runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+
 
       return (
         <div className="space-y-4">
+          {isFinalModuleWrapUp ? (
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+              <h3 className="text-lg font-semibold text-slate-900">Congratulations on completing Lesson 6</h3>
+              <p className="mt-2 text-slate-700">
+                You finished the full module. Keep choosing the right tool, using honest significant figures, and reporting uncertainty whenever a result is not exact.
+              </p>
+            </div>
+          ) : null}
           <div
             className={`rounded-2xl border p-5 ${
               passed ? "border-green-200 bg-green-50" : "border-amber-200 bg-amber-50"
