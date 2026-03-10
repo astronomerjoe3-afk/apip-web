@@ -1313,10 +1313,10 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           highlights: ["Cluster shape shows precision", "Position relative to centre shows accuracy", "You need both for strong measurements"],
         },
         {
-          kind: "visual",
-          title: "Picture a measurement report",
-          caption: "A trustworthy report names the tool, the value, and the uncertainty instead of pretending the result is exact.",
-          image_url: "/lesson-media/f1/f1-l6-accuracy-precision.svg",
+          kind: "interactive",
+          interaction_key: "measurement_report_lab",
+          title: "Build a measurement report",
+          caption: "Use the mini lab to test how the tool, the written value, and the uncertainty work together in one trustworthy report.",
           highlights: ["State the measurement", "State the uncertainty", "Match the claim to the instrument"],
         },
       ];
@@ -1874,3 +1874,4 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+

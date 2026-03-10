@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
+import MeasurementReportLab from "./MeasurementReportLab";
 
 type StageName =
   | "diagnostic"
@@ -60,12 +61,13 @@ type ScaffoldReferenceTable = {
 };
 
 type ScaffoldMediaCard = {
-  kind?: "visual" | "video";
+  kind?: "visual" | "video" | "interactive";
   title: string;
   caption: string;
   highlights?: string[];
   image_url?: string;
   embed_url?: string;
+  interaction_key?: string;
 };
 
 type ScaffoldSection = {
@@ -115,6 +117,7 @@ type SimulationStagePayload = {
   title?: string;
   instructions?: string;
   embed_url?: string;
+  interaction_key?: string;
   task_prompt?: string;
   completion_text?: string;
 };
@@ -776,17 +779,22 @@ export default function LessonRunner({
             {payload.media_cards.map((card) => {
               const imageUrl = card.image_url || "";
               const shouldShowImage = imageUrl ? !seenMediaImageUrls.has(imageUrl) : false;
+              const isMeasurementReportLab = card.interaction_key === "measurement_report_lab" || card.title === "Picture a measurement report";
               if (shouldShowImage) seenMediaImageUrls.add(imageUrl);
 
               return (
               <div key={`${card.kind ?? "visual"}-${card.title}`} className="lesson-display-slide rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
                 <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
-                  {card.kind === "video" ? "Video support" : shouldShowImage ? "Visual support" : "Concept support"}
+                  {card.kind === "video" ? "Video support" : isMeasurementReportLab || card.kind === "interactive" ? "Interactive support" : shouldShowImage ? "Visual support" : "Concept support"}
                 </span>
                 <h4 className="mt-4 text-lg font-semibold text-slate-900">{card.title}</h4>
                 <p className="mt-2 text-slate-700">{card.caption}</p>
 
-                {card.embed_url ? (
+                {isMeasurementReportLab ? (
+                  <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
+                    <MeasurementReportLab />
+                  </div>
+                ) : card.embed_url ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <iframe src={card.embed_url} title={card.title} className="h-64 w-full" allowFullScreen />
                   </div>
@@ -1843,3 +1851,7 @@ export default function LessonRunner({
     </div>
   );
 }
+
+
+
+
