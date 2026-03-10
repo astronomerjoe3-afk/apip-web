@@ -535,6 +535,9 @@ function misconceptionTag(prompt: string): string | undefined {
 }
 
 function resolvedAnswerIndex(item: UnknownRecord): number {
+  const itemId = text(item.id);
+  const exactMetaIndex = itemId ? fallbackMeta({ id: itemId })?.answerIndex : undefined;
+  if (typeof exactMetaIndex === "number" && Number.isFinite(exactMetaIndex)) return exactMetaIndex;
   const explicit = item.answer_index;
   if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
   const metaIndex = fallbackMeta(item)?.answerIndex;
