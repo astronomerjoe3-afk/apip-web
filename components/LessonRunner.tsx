@@ -1604,8 +1604,8 @@ export default function LessonRunner({
 
     return (
       <div className="space-y-5">
-        <div className="overflow-hidden rounded-[28px] border border-sky-200 bg-[radial-gradient(circle_at_top_left,_rgba(186,230,253,0.72),_rgba(255,255,255,0.96)_50%),linear-gradient(135deg,rgba(255,247,237,0.94),rgba(239,246,255,0.94))] p-6 shadow-sm">
-          <div className="flex flex-wrap items-start justify-between gap-5">
+        <div className="overflow-hidden rounded-[28px] border border-sky-200 bg-[radial-gradient(circle_at_top_left,_rgba(186,230,253,0.72),_rgba(255,255,255,0.96)_50%),linear-gradient(135deg,rgba(255,247,237,0.94),rgba(239,246,255,0.94))] p-5 shadow-sm md:p-6">
+          <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px] xl:items-start">
             <div className="max-w-3xl">
               <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
                 {reflectionMission.badge}
@@ -1618,25 +1618,25 @@ export default function LessonRunner({
               <p className="mt-3 text-base leading-7 text-slate-700">
                 {payload.prompt}
               </p>
-              <div className="mt-4 max-w-3xl rounded-2xl bg-white/85 px-4 py-4 text-sm leading-6 text-slate-700 shadow-sm ring-1 ring-sky-100">
+              <div className="mt-4 max-w-3xl rounded-2xl bg-white/85 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm ring-1 ring-sky-100">
                 {reflectionMission.intro}
               </div>
             </div>
 
-            <div className="min-w-[220px] rounded-[24px] bg-slate-950 px-5 py-4 text-white shadow-lg">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
+            <div className="rounded-[24px] border border-white/90 bg-white/92 p-4 shadow-sm xl:w-[320px] xl:justify-self-end">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
                 Coach meter
               </p>
               <p className="mt-3 text-3xl font-semibold">{reflectionWordCount}</p>
-              <p className="text-sm text-slate-300">words written</p>
-              <div className="mt-4 space-y-2">
+              <p className="text-sm text-slate-600">words written</p>
+              <div className="mt-4 flex flex-wrap gap-2">
                 {reflectionMilestones.map((milestone) => (
                   <div
                     key={milestone.label}
                     className={`rounded-full px-3 py-2 text-sm ${
                       milestone.done
-                        ? "bg-emerald-500/20 text-emerald-100"
-                        : "bg-white/10 text-slate-300"
+                        ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
+                        : "bg-slate-100 text-slate-600"
                     }`}
                   >
                     {milestone.done ? "Unlocked" : "Next"}: {milestone.label}
@@ -1646,13 +1646,13 @@ export default function LessonRunner({
             </div>
           </div>
 
-          <div className="mt-6 grid gap-3 md:grid-cols-3">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {reflectionMission.cards.map((card) => (
               <button
                 key={card.title}
                 type="button"
                 onClick={() => addReflectionStarter(card.starter)}
-                className="rounded-[24px] border border-white/90 bg-white/88 p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="rounded-[24px] border border-white/90 bg-white/88 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <span className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
                   Idea card
@@ -1703,7 +1703,7 @@ export default function LessonRunner({
           </div>
           <textarea
             ref={reflectionTextareaRef}
-            className="mt-4 min-h-[220px] w-full rounded-[24px] border border-slate-200 bg-[linear-gradient(180deg,rgba(248,250,252,0.92),rgba(255,255,255,1))] p-4 text-base leading-7 text-slate-800 shadow-inner outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100"
+            className="mt-4 min-h-[180px] w-full rounded-[24px] border border-slate-200 bg-[linear-gradient(180deg,rgba(248,250,252,0.92),rgba(255,255,255,1))] p-4 text-base leading-7 text-slate-800 shadow-inner outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100"
             value={reflectionText}
             onChange={(e) => setReflectionText(e.target.value)}
             placeholder={reflectionMission.placeholder}
