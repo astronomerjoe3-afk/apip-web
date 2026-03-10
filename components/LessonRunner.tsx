@@ -757,6 +757,7 @@ export default function LessonRunner({
     const isMediaStep = clampedScaffoldStepIndex >= mediaStart && clampedScaffoldStepIndex < sectionStart;
     const isSectionStep = clampedScaffoldStepIndex >= sectionStart;
 
+    const scaffoldFocusItems = payload.teaching_focus?.slice(0, 4) ?? [];
     return (
       <div className="space-y-6">
         {isIntroStep ? (
@@ -898,8 +899,28 @@ export default function LessonRunner({
           {payload.sections.map((section, index) => (
             clampedScaffoldStepIndex === sectionStart + index ? (
             <div key={`${section.heading}-${index}`} className="lesson-display-slide rounded-2xl border bg-white p-6 shadow-sm">
-            <h4 className="text-lg font-semibold text-slate-900">{section.heading}</h4>
-            {section.body && !section.worked_example ? (
+
+            <h4 className="text-lg font-semibold text-slate-900">{section.heading === "Fix these ideas" && !payload.misconception_targets?.length ? "What this lesson will sharpen" : section.heading}</h4>
+            {section.heading === "Fix these ideas" ? (
+              <div className="mt-3 space-y-4">
+                <p className="text-slate-700">{payload.misconception_targets?.length ? "Focus on these ideas as you move through the next activities." : "Your opening check was fairly strong. Use this lesson to sharpen these ideas before the next check."}</p>
+                {scaffoldFocusItems.length ? (
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {scaffoldFocusItems.map((item) => (
+                      <div key={item} className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 text-sm leading-6 text-slate-700">{item}</div>
+                    ))}
+                  </div>
+                ) : section.body && !section.worked_example ? (
+                  <p className="whitespace-pre-line text-slate-700">{section.body}</p>
+                ) : null}
+                {payload.misconception_targets?.length && section.body ? (
+                  <p className="text-sm whitespace-pre-line text-slate-600">{section.body}</p>
+                ) : (
+                  <p className="text-sm text-slate-600">The next activities, examples, and simulation are arranged to strengthen these ideas one at a time.</p>
+                )}
+              </div>
+            ) : null}
+            {section.body && !section.worked_example && section.heading !== "Fix these ideas" ? (
                 <p className="mt-3 whitespace-pre-line text-slate-700">{section.body}</p>
             ) : null}
 
