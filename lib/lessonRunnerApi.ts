@@ -535,13 +535,12 @@ function misconceptionTag(prompt: string): string | undefined {
 }
 
 function resolvedAnswerIndex(item: UnknownRecord): number {
-  const metaIndex = fallbackMeta(item)?.answerIndex;
-  if (typeof metaIndex === "number" && Number.isFinite(metaIndex)) return metaIndex;
   const explicit = item.answer_index;
   if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
+  const metaIndex = fallbackMeta(item)?.answerIndex;
+  if (typeof metaIndex === "number" && Number.isFinite(metaIndex)) return metaIndex;
   return -1;
 }
-
 function resolvedCorrectAnswer(item: UnknownRecord): string {
   const choices = asList(item.choices).map((choice) => text(choice));
   const correctIndex = resolvedAnswerIndex(item);
