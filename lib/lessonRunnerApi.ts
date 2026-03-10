@@ -130,6 +130,11 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 });
 
 Object.assign(FALLBACK_ANSWER_METADATA, {
+  "a set of measurements are very close to each other but far from the true value this is": { id: "F1L6_D1", answerIndex: 1, correctAnswer: "precise but not accurate", explanation: "The measurements are tightly grouped, so they are precise, but they are far from the true value, so they are not accurate.", teachingFocus: "Precision is about closeness among repeated readings, while accuracy is about closeness to the accepted or true value.", misconceptionTag: "precision_vs_accuracy" },
+  "give one source of systematic error and one source of random error in a measurement": { id: "F1L6_D2", acceptedAnswers: ["Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", "Systematic: zero error. Random: reaction time.", "Systematic: poor calibration. Random: reading fluctuations."], correctAnswer: "Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", explanation: "A strong answer names one cause that shifts readings the same way each time and one cause that makes readings scatter from trial to trial.", teachingFocus: "Systematic error adds a consistent bias, while random error causes scatter between repeated readings.", misconceptionTag: "random_vs_systematic_error" },
+  "you measure length as 12 4 cm with a ruler of 1 mm divisions report the value with a reasonable uncertainty": { id: "F1L6_T1", acceptedAnswers: ["12.4 +/- 0.05 cm", "12.4 cm +/- 0.05 cm", "12.40 +/- 0.05 cm", "12.40 cm +/- 0.05 cm"], correctAnswer: "12.4 +/- 0.05 cm", explanation: "A ruler with 1 mm divisions supports about +/- 0.05 cm uncertainty, so 12.4 cm should be reported with that uncertainty.", teachingFocus: "Report the measured value with a reasonable uncertainty based on the instrument's smallest division.", misconceptionTag: "uncertainty_estimation" },
+});
+Object.assign(FALLBACK_ANSWER_METADATA, {
   "which quantity is a vector": { id: "F1L2_D1", answerIndex: 2, correctAnswer: "displacement", explanation: "Displacement is a vector because it has both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" },
   "speed is a scalar because it has": { id: "F1L2_D2", answerIndex: 0, correctAnswer: "magnitude only", explanation: "Speed is a scalar because it has magnitude only and no direction.", teachingFocus: "Scalars tell how much only, while vectors add direction.", misconceptionTag: "vector_scalar_confusion" },
   "which statement is correct": { id: "F1-L2-D2", answerIndex: 2, correctAnswer: "Vectors have magnitude and direction", explanation: "A vector combines size and direction.", teachingFocus: "Do not treat vectors and scalars as interchangeable descriptions.", misconceptionTag: "vector_scalar_confusion" },
@@ -374,10 +379,59 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   if (itemId === "F1L4_T1" || itemId === "F1-L4-T1") {
     return { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 x 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" };
   }
+  if (itemId === "F1L6_D1" || itemId === "F1-L6-D1") {
+    return { id: "F1L6_D1", answerIndex: 1, correctAnswer: "precise but not accurate", explanation: "The measurements are tightly grouped, so they are precise, but they are far from the true value, so they are not accurate.", teachingFocus: "Precision is about closeness among repeated readings, while accuracy is about closeness to the accepted or true value.", misconceptionTag: "precision_vs_accuracy" };
+  }
+  if (itemId === "F1L6_D2" || itemId === "F1-L6-D2") {
+    return { id: "F1L6_D2", acceptedAnswers: ["Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", "Systematic: zero error. Random: reaction time.", "Systematic: poor calibration. Random: reading fluctuations."], correctAnswer: "Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", explanation: "A strong answer names one cause that shifts readings the same way each time and one cause that makes readings scatter from trial to trial.", teachingFocus: "Systematic error adds a consistent bias, while random error causes scatter between repeated readings.", misconceptionTag: "random_vs_systematic_error" };
+  }
+  if (itemId === "F1L6_T1" || itemId === "F1-L6-T1") {
+    return { id: "F1L6_T1", acceptedAnswers: ["12.4 +/- 0.05 cm", "12.4 cm +/- 0.05 cm", "12.40 +/- 0.05 cm", "12.40 cm +/- 0.05 cm"], correctAnswer: "12.4 +/- 0.05 cm", explanation: "A ruler with 1 mm divisions supports about +/- 0.05 cm uncertainty, so 12.4 cm should be reported with that uncertainty.", teachingFocus: "Report the measured value with a reasonable uncertainty based on the instrument's smallest division.", misconceptionTag: "uncertainty_estimation" };
+  }
   if (itemId === "F1-L2-C1") {
     return { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" };
   }
   return FALLBACK_ANSWER_METADATA[normalizePromptKey(item.prompt)];
+}
+
+function includesAnyPhrase(source: string, phrases: string[]): boolean {
+  return phrases.some((phrase) => source.includes(normalizeOpenAnswer(phrase)));
+}
+
+function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean | null {
+  const itemId = text(item.id);
+  const promptKey = normalizePromptKey(item.prompt);
+  const isLessonSixErrorPrompt =
+    itemId === "F1L6_D2" ||
+    itemId === "F1-L6-D2" ||
+    promptKey === "give one source of systematic error and one source of random error in a measurement";
+
+  if (!isLessonSixErrorPrompt) return null;
+
+  const candidate = normalizeOpenAnswer(answer);
+  if (!candidate) return false;
+
+  const systematicPhrases = [
+    "zero error",
+    "poor calibration",
+    "bad calibration",
+    "miscalibration",
+    "instrument not zeroed",
+    "constant offset",
+    "bias",
+  ];
+  const randomPhrases = [
+    "reaction time",
+    "human reaction",
+    "reading fluctuation",
+    "reading fluctuations",
+    "small reading differences",
+    "scatter",
+    "noise",
+    "vibration",
+  ];
+
+  return includesAnyPhrase(candidate, systematicPhrases) && includesAnyPhrase(candidate, randomPhrases);
 }
 
 function resolvedItemId(item: UnknownRecord, key: string, index: number): string {
@@ -462,6 +516,8 @@ function teachingFocus(prompt: string, title: string): string {
   const source = `${title} ${prompt}`.toLowerCase();
   if (source.includes("unit")) return "A scientific measurement needs both a number and a unit.";
   if (source.includes("prefix") || source.includes("kilo") || source.includes("centi") || source.includes("milli")) return "Prefixes change the size of the base unit, so conversions must keep the scale consistent.";
+  if (source.includes("accuracy") || source.includes("accepted value") || source.includes("true value")) return "Accuracy is closeness to the accepted value, while precision is closeness among repeated readings.";
+  if (source.includes("systematic error") || source.includes("random error") || source.includes("zero error")) return "Systematic error shifts readings the same way each time, while random error causes scatter from one reading to the next.";
   if (source.includes("precision") || source.includes("uncertainty") || source.includes("trust") || source.includes("ruler") || source.includes("caliper")) return "More precise tools reduce uncertainty, which makes a measurement more trustworthy.";
   if (source.includes("vector") || source.includes("direction")) return "Vectors need both size and direction, while scalars only need size.";
   if (source.includes("density")) return "Density compares mass to volume, so both quantities matter together.";
@@ -472,6 +528,8 @@ function misconceptionTag(prompt: string): string | undefined {
   const source = prompt.toLowerCase();
   if (source.includes("unit") || source.includes("measurement")) return "unit_as_label_only";
   if (source.includes("prefix") || source.includes("kilo") || source.includes("centi") || source.includes("milli")) return "prefix_scale_error";
+  if (source.includes("accuracy") || source.includes("accepted value") || source.includes("true value")) return "precision_vs_accuracy";
+  if (source.includes("systematic error") || source.includes("random error") || source.includes("zero error")) return "random_vs_systematic_error";
   if (source.includes("precision") || source.includes("uncertainty") || source.includes("trust") || source.includes("ruler") || source.includes("caliper")) return "precision_trust_error";
   return undefined;
 }
@@ -524,7 +582,7 @@ function shortAnswerAccepted(item: UnknownRecord): string[] {
   return [...new Set(values)];
 }
 
-function shortAnswerMatches(answer: unknown, acceptedAnswers: string[]): boolean {
+function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: UnknownRecord): boolean {
   const candidate = normalizeOpenAnswer(answer);
   if (!candidate) return false;
 
@@ -535,6 +593,9 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[]): boolean
   if (accepted.includes(candidate) || compactAccepted.includes(compactCandidate)) {
     return true;
   }
+
+  const customMatch = customShortAnswerMatch(item, answer);
+  if (customMatch !== null) return customMatch;
 
   const candidateNumeric = numericAnswer(answer);
   if (candidateNumeric === null) return false;
@@ -554,7 +615,7 @@ function grade(item: UnknownRecord, answer: unknown, title: string): UnknownReco
   const isCorrect =
     choices.length > 0
       ? answerIndex === resolvedAnswerIndex(item)
-      : shortAnswerMatches(answer, acceptedAnswers);
+      : shortAnswerMatches(answer, acceptedAnswers, item);
   const explanation = resolvedExplanation(item, answerIndex);
   const focus = meta?.teachingFocus || teachingFocus(prompt, title);
   const explanationFallback = isCorrect
