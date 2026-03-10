@@ -1483,8 +1483,8 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const simulationCode = lessonCode(resources.lesson);
     stagePayload = {
       title: simulationCode === "F1_L5" ? "Density explorer" : simulationCode === "F1_L4" ? "Significant figures explorer" : simulationCode === "F1_L3" ? "Measurement explorer" : "Simulation inquiry",
-      instructions: simulationCode === "F1_L5" ? "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result." : simulationCode === "F1_L4" ? "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division." : simulationCode === "F1_L3" ? "Compare the same object with different tools and notice how the reading detail and the spread of repeated readings change." : text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.",
-      task_prompt: simulationCode === "F1_L5" ? "Find one setup that floats and one that sinks, then explain which density comparison changed." : simulationCode === "F1_L4" ? "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes." : simulationCode === "F1_L3" ? "Find one tool with a larger spread and one with a smaller spread, then explain why the finer tool gives more trustworthy readings." : text(inquiry[1]?.prompt) || text(inquiry[0]?.hint),
+      instructions: simulationCode === "F1_L5" ? "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result." : simulationCode === "F1_L4" ? "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division." : simulationCode === "F1_L3" ? "Use the live tool bench: choose an object, switch instruments, and compare the reading detail, repeated-reading spread, and zero error." : text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.",
+      task_prompt: simulationCode === "F1_L5" ? "Find one setup that floats and one that sinks, then explain which density comparison changed." : simulationCode === "F1_L4" ? "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes." : simulationCode === "F1_L3" ? "Try one object that suits a ruler and one that needs a finer tool, then test a zero-error offset and explain how it would mislead the reading if you forgot to correct it." : text(inquiry[1]?.prompt) || text(inquiry[0]?.hint),
       completion_text: "I have finished exploring this activity",
     };
   }
@@ -1811,10 +1811,3 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
-
-
-
-
-
-
-
