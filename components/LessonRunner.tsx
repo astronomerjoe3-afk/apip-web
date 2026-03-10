@@ -179,6 +179,13 @@ type LessonRunnerProps = {
   canGoNextLesson?: boolean;
   onGoNextLesson?: () => void;
   onRestartFromBeginning?: () => Promise<void> | void;
+  onProgressSummaryChanged?: (summary: {
+    lessonId: string;
+    lessonStatus: LessonStatus;
+    latestMasteryPercent?: number | null;
+    bestMasteryPercent?: number | null;
+    moduleMasteryPercent?: number | null;
+  }) => void;
   previousLessonLabel?: string;
 
 };
@@ -356,6 +363,7 @@ export default function LessonRunner({
   canGoNextLesson = false,
   onGoNextLesson,
   onRestartFromBeginning,
+  onProgressSummaryChanged,
   previousLessonLabel = "the previous mission",
 }: LessonRunnerProps) {
   const [runner, setRunner] = useState<RunnerResponse | null>(null);
@@ -390,11 +398,19 @@ export default function LessonRunner({
 
     try {
       const data = await getLessonRunner(moduleId, lessonId);
-      setRunner(data as RunnerResponse);
+      const runnerData = data as RunnerResponse;
+      setRunner(runnerData);
+      onProgressSummaryChanged?.({
+        lessonId: runnerData.lesson_id,
+        lessonStatus: runnerData.lesson_status,
+        latestMasteryPercent: runnerData.progress_summary?.latest_mastery_percent ?? null,
+        bestMasteryPercent: runnerData.progress_summary?.best_mastery_percent ?? null,
+        moduleMasteryPercent: runnerData.progress_summary?.module_mastery_percent ?? null,
+      });
 
-      const payload = (data as RunnerResponse).stage_payload;
+      const payload = runnerData.stage_payload;
 
-      if ((data as RunnerResponse).active_stage === "reflection") {
+      if (runnerData.active_stage === "reflection") {
         const reflectionPayload = payload as ReflectionStagePayload;
         setReflectionText(reflectionPayload.learner_response ?? "");
       } else {
@@ -402,9 +418,9 @@ export default function LessonRunner({
       }
 
       if (
-        (data as RunnerResponse).active_stage === "diagnostic" ||
-        (data as RunnerResponse).active_stage === "concept_gate" ||
-        (data as RunnerResponse).active_stage === "mastery"
+        runnerData.active_stage === "diagnostic" ||
+        runnerData.active_stage === "concept_gate" ||
+        runnerData.active_stage === "mastery"
       ) {
         answersRef.current = {};
         setAnswers({});
@@ -415,7 +431,7 @@ export default function LessonRunner({
     } finally {
       setIsLoading(false);
     }
-  }, [moduleId, lessonId]);
+  }, [lessonId, moduleId, onProgressSummaryChanged]);
 
   useEffect(() => {
     void loadRunner();

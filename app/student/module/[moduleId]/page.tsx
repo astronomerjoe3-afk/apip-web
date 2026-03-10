@@ -292,6 +292,70 @@ export default function StudentModulePage() {
     await loadModuleState(false);
     window?.scrollTo?.({ top: 0, behavior: "smooth" });
   }, [loadModuleState, moduleId]);
+  const handleRunnerProgressSummaryChanged = useCallback((summary: {
+    lessonId: string;
+    lessonStatus: "not_started" | "in_progress" | "completed";
+    latestMasteryPercent?: number | null;
+    bestMasteryPercent?: number | null;
+    moduleMasteryPercent?: number | null;
+  }): void => {
+    const normalizedLessonId = normalizeLessonId(summary.lessonId);
+
+    setLessons((currentLessons) => {
+      const nextLessons = currentLessons.map((lesson) => {
+        const lessonKey = normalizeLessonId(lesson.lesson_id || lesson.id);
+        if (lessonKey !== normalizedLessonId) {
+          return lesson;
+        }
+
+        const previousProgress = lesson.progress;
+        const nextCompleted = summary.lessonStatus === "completed";
+        const nextLatestScore = typeof summary.latestMasteryPercent === "number"
+          ? summary.latestMasteryPercent / 100
+          : previousProgress?.latest_score ?? null;
+        const nextBestScore = typeof summary.bestMasteryPercent === "number"
+          ? summary.bestMasteryPercent / 100
+          : previousProgress?.best_score ?? 0;
+
+        return {
+          ...lesson,
+          progress: {
+            lesson_id: normalizedLessonId,
+            title: previousProgress?.title ?? lesson.title,
+            sequence: previousProgress?.sequence ?? lesson.sequence,
+            best_score: nextBestScore,
+            latest_score: nextLatestScore,
+            attempt_count: previousProgress?.attempt_count ?? 0,
+            completed: nextCompleted,
+            can_advance: nextCompleted || (previousProgress?.can_advance ?? false),
+            lab_available: previousProgress?.lab_available ?? false,
+            lab_used: previousProgress?.lab_used ?? false,
+            status: summary.lessonStatus,
+          },
+        };
+      });
+
+      const nextCompletedCount = nextLessons.reduce(
+        (count, lesson) => count + (lesson.progress?.completed ? 1 : 0),
+        0,
+      );
+
+      setModuleProgress((currentProgress) =>
+        currentProgress
+          ? {
+              ...currentProgress,
+              module_mastery:
+                typeof summary.moduleMasteryPercent === "number"
+                  ? summary.moduleMasteryPercent / 100
+                  : currentProgress.module_mastery,
+              lessons_completed_count: nextCompletedCount,
+            }
+          : currentProgress,
+      );
+
+      return nextLessons;
+    });
+  }, []);
   return (
     <div
       style={{
@@ -458,6 +522,7 @@ export default function StudentModulePage() {
             lessonId={normalizeLessonId(activeLesson.lesson_id || activeLesson.id)}
             canGoNextLesson={canGoNext}
             onGoNextLesson={canGoNext ? goNext : undefined}
+            onProgressSummaryChanged={handleRunnerProgressSummaryChanged}
 
 
 
