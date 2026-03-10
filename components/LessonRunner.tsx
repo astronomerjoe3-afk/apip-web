@@ -1323,9 +1323,13 @@ export default function LessonRunner({
                 <p className="mt-2 text-sm text-slate-700">A zero error shifts every reading the same way. Move the slider and compare the observed and corrected values.</p>
                 <label className="mt-4 block text-sm text-slate-700">
                   Zero error
-                  <div className="mt-2 flex items-center justify-between text-xs text-slate-500">
-                    <span>Instrument starts {zeroErrorDirection}</span>
-                    <span>{formatSimulationNumber(simZeroError, 2)} cm</span>
+                  <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                    <span className="rounded-full bg-slate-100 px-3 py-1">
+                      Instrument starts: {zeroErrorDirection}
+                    </span>
+                    <span className="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">
+                      Offset {formatSimulationNumber(simZeroError, 2)} cm
+                    </span>
                   </div>
                   <input className="mt-2 w-full" type="range" min={-zeroErrorRange} max={zeroErrorRange} step="0.01" value={simZeroError} onChange={(e) => setSimZeroError(Number(e.target.value))} />
                 </label>
