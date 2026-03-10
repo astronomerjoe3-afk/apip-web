@@ -380,6 +380,7 @@ export default function LessonRunner({
   const answersRef = useRef<Record<string, string>>({});
   const [reflectionText, setReflectionText] = useState("");
   const reflectionTextareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [scaffoldStepIndex, setScaffoldStepIndex] = useState(0);
   const [simTool, setSimTool] = useState<SimulationToolKey>("caliper");
   const [simMeasurementPreset, setSimMeasurementPreset] = useState<MeasurementPresetKey>("marble");
   const [simLength, setSimLength] = useState(1.86);
@@ -459,6 +460,10 @@ export default function LessonRunner({
     setSimDensityVolume(120);
     setSimFluidDensity(1);
   }, [lessonId, moduleId]);
+
+  useEffect(() => {
+    setScaffoldStepIndex(0);
+  }, [lessonId, moduleId, runner?.active_stage]);
 
   const restartMission = useCallback(async (fromBeginning = false) => {
     setIsSubmitting(true);
@@ -738,10 +743,25 @@ export default function LessonRunner({
     const payload = runner.stage_payload as ScaffoldStagePayload;
     const seenMediaImageUrls = new Set<string>();
 
+    const introCount = payload.intro || payload.teaching_focus?.length ? 1 : 0;
+    const tableCount = payload.reference_tables?.length ?? 0;
+    const mediaCount = payload.media_cards?.length ?? 0;
+    const sectionCount = payload.sections.length;
+    const totalScaffoldActivities = introCount + tableCount + mediaCount + sectionCount;
+    const clampedScaffoldStepIndex = Math.max(0, Math.min(scaffoldStepIndex, Math.max(totalScaffoldActivities - 1, 0)));
+    const tableStart = introCount;
+    const mediaStart = tableStart + tableCount;
+    const sectionStart = mediaStart + mediaCount;
+    const isIntroStep = introCount === 1 && clampedScaffoldStepIndex === 0;
+    const isTableStep = clampedScaffoldStepIndex >= tableStart && clampedScaffoldStepIndex < mediaStart;
+    const isMediaStep = clampedScaffoldStepIndex >= mediaStart && clampedScaffoldStepIndex < sectionStart;
+    const isSectionStep = clampedScaffoldStepIndex >= sectionStart;
+
     return (
       <div className="space-y-6">
-        <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
-          {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{payload.intro}</p> : null}
+        {isIntroStep ? (
+          <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
+            {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{payload.intro}</p> : null}
 
           {payload.teaching_focus?.length ? (
             <div className={`${payload.intro ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
@@ -754,10 +774,11 @@ export default function LessonRunner({
             </div>
           ) : null}
         </div>
-
-        {payload.reference_tables?.length ? (
+        ) : null}
+        {payload.reference_tables?.length && isTableStep ? (
           <div className="lesson-display-deck">
-            {payload.reference_tables.map((table) => (
+            {payload.reference_tables.map((table, index) => (
+              clampedScaffoldStepIndex === tableStart + index ? (
               <div key={table.title} className="lesson-display-slide overflow-hidden rounded-2xl border bg-white shadow-sm">
                 <div className="border-b bg-slate-50 p-5">
                   <h4 className="text-lg font-semibold text-slate-900">{table.title}</h4>
@@ -791,19 +812,20 @@ export default function LessonRunner({
                   </table>
                 </div>
               </div>
+              ) : null
             ))}
           </div>
         ) : null}
 
-        {payload.media_cards?.length ? (
+        {payload.media_cards?.length && isMediaStep ? (
           <div className="lesson-display-deck">
-            {payload.media_cards.map((card) => {
+            {payload.media_cards.map((card, index) => {
               const imageUrl = card.image_url || "";
               const shouldShowImage = imageUrl ? !seenMediaImageUrls.has(imageUrl) : false;
               const isMeasurementReportLab = card.interaction_key === "measurement_report_lab" || card.title === "Picture a measurement report";
               if (shouldShowImage) seenMediaImageUrls.add(imageUrl);
 
-              return (
+              return clampedScaffoldStepIndex === mediaStart + index ? (
               <div key={`${card.kind ?? "visual"}-${card.title}`} className="lesson-display-slide rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm">
                 <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
                   {card.kind === "video" ? "Video support" : isMeasurementReportLab || card.kind === "interactive" ? "Interactive support" : shouldShowImage ? "Visual support" : "Concept support"}
@@ -866,13 +888,15 @@ export default function LessonRunner({
                   </ul>
                 ) : null}
               </div>
-              );
+              ) : null;
             })}
           </div>
         ) : null}
 
+        {isSectionStep ? (
         <div className="lesson-display-deck">
           {payload.sections.map((section, index) => (
+            clampedScaffoldStepIndex === sectionStart + index ? (
             <div key={`${section.heading}-${index}`} className="lesson-display-slide rounded-2xl border bg-white p-6 shadow-sm">
             <h4 className="text-lg font-semibold text-slate-900">{section.heading}</h4>
             {section.body && !section.worked_example ? (
@@ -910,20 +934,21 @@ export default function LessonRunner({
                 {section.check_for_understanding}
               </div>
             ) : null}
-          </div>
+            </div>
+            ) : null
           ))}
         </div>
+        ) : null}
 
-        <PrimaryButton
-          onClick={() =>
-            void sendEvent("scaffold_continue", {
-              from_stage: "scaffold",
-            })
-          }
-          disabled={isSubmitting}
-        >
-          Continue to the quick concept check
-        </PrimaryButton>
+        <div className="rounded-2xl border bg-white p-4 shadow-sm">
+          <p className="text-sm font-medium text-slate-900">Activity {clampedScaffoldStepIndex + 1} of {totalScaffoldActivities}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {clampedScaffoldStepIndex > 0 ? <SecondaryButton onClick={() => setScaffoldStepIndex((current) => Math.max(0, current - 1))} disabled={isSubmitting}>Previous</SecondaryButton> : null}
+            <PrimaryButton onClick={() => { if (clampedScaffoldStepIndex < totalScaffoldActivities - 1) { setScaffoldStepIndex((current) => Math.min(totalScaffoldActivities - 1, current + 1)); return; } void sendEvent("scaffold_continue", { from_stage: "scaffold" }); }} disabled={isSubmitting}>
+              {clampedScaffoldStepIndex < totalScaffoldActivities - 1 ? "Next activity" : "Continue to the quick concept check"}
+            </PrimaryButton>
+          </div>
+        </div>
       </div>
     );
   };
