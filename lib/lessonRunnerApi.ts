@@ -1518,7 +1518,8 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const pool = masteryItems(resources.lesson);
     const strengthScore = masteryStrengthScore(runnerLesson, state);
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
-    const selected = shuffle(pool, `mastery:${masteryState.nonce || 0}`).slice(0, count);
+    const selectedPool = lessonCode(resources.lesson) === "F1_L5" ? pool : shuffle(pool, "mastery:" + String(masteryState.nonce || 0));
+    const selected = selectedPool.slice(0, count);
     stagePayload = masteryState.submitted || stage === "done" || hasPersistedResult
       ? {
           instructions: stage === "done" ? "You have already shown mastery for this lesson." : "This is your latest mastery result.",
@@ -1758,7 +1759,8 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const pool = masteryItems(resources.lesson);
     const strengthScore = masteryStrengthScore(runnerLesson, state);
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
-    const selected = shuffle(pool, `mastery:${state.mastery?.nonce || 0}`).slice(0, count);
+    const selectedPool = lessonCode(resources.lesson) === "F1_L5" ? pool : shuffle(pool, "mastery:" + String(state.mastery?.nonce || 0));
+    const selected = selectedPool.slice(0, count);
     if (selected.length === 0) throw new Error("The mastery check is not available right now.");
     const answers = asRecord(payload.answers);
     const feedback = selected.map((item) => {
