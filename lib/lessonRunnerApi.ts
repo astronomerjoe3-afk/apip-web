@@ -756,7 +756,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     .map((item) => item.trim())
     .filter(Boolean)));
   return lessonPoints.slice(0, 8).map((point, index) =>
-    mcItem(`${code}-AUTO-M${String(index + 1)}`, "Which statement belongs in this lesson?", [point, distractors[(index * 3) % distractors.length], distractors[(index * 3 + 1) % distractors.length], distractors[(index * 3 + 2) % distractors.length]], 0, "Pick the idea from this lesson.", point)
+    mcItem(`${code}-AUTO-M${String(index + 1)}`, code === "F1_L5" ? ["Which density reminder is correct?", "Which idea best explains density?", "Which statement fits density and floating?", "Which density rule should you remember?"][index % 4] : "Which statement belongs in this lesson?", [point, distractors[(index * 3) % distractors.length], distractors[(index * 3 + 1) % distractors.length], distractors[(index * 3 + 2) % distractors.length]], 0, "Pick the idea from this lesson.", point)
   );
 }
 
