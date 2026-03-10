@@ -1198,14 +1198,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           title: "Compare the same object with three tools",
           caption: "Measure the same object with a ruler, caliper, and micrometer. Finer divisions reveal more detail and support smaller uncertainty.",
           image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
-          highlights: ["The same object looks rougher or finer depending on the tool", "Smaller divisions support smaller uncertainty", "Use the simulation to compare readings from each tool"],
+          highlights: ["The same object looks rougher or finer depending on the tool", "Smaller divisions support smaller uncertainty", "In the next measurement lab, compare how each tool reads the same object"],
         },
         {
           kind: "visual",
           title: "Compare random error and zero error",
           caption: "Repeated readings can disagree in two ways: random error causes scatter, while zero error adds the same offset each time.",
           image_url: "/lesson-media/f1/f1-l3-reading-errors.svg",
-          highlights: ["Random error shows up as spread between repeated readings", "Zero error shifts every reading by the same amount", "Use the simulation to compare scatter, averaging, and offset"],
+          highlights: ["Random error shows up as spread between repeated readings", "Zero error shifts every reading by the same amount", "In the next measurement lab, compare scatter, averaging, and zero-offset effects"],
         },
       ];
     case "F1_L4":
@@ -1237,9 +1237,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Picture sinking and floating",
-          caption: "Use the tank simulation to compare object density with fluid density and predict whether the object floats or sinks.",
+          caption: "In the next density activity, compare object density with fluid density and predict whether the object floats or sinks.",
           image_url: "/lesson-media/f1/f1-l5-float-sink.svg",
-          highlights: ["Less dense than the fluid: float", "More dense than the fluid: sink", "Use the simulation to test your prediction"],
+          highlights: ["Less dense than the fluid: float", "More dense than the fluid: sink", "In the next density activity, test your prediction"],
         },
       ];
     case "F1_L6":
