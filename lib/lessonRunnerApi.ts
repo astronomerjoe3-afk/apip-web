@@ -769,6 +769,8 @@ function hasUsableMasteryAnswer(item: UnknownRecord): boolean {
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
+  const diagnosticRecords = itemsFrom(lesson, "diagnostic").map(asRecord);
+  const diagnosticSourceKeys = new Set(diagnosticRecords.map((item) => masterySourceKey(item)).filter(Boolean));
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
@@ -778,7 +780,8 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
     const record = asRecord(item);
     const id = text(record.id);
     const sourceKey = masterySourceKey(record);
-    if (!id || seenIds.has(id) || (sourceKey && seenSources.has(sourceKey))) return false;
+    if (!id || (sourceKey && diagnosticSourceKeys.has(sourceKey))) return false;
+    if (seenIds.has(id) || (sourceKey && seenSources.has(sourceKey))) return false;
     seenIds.add(id);
     if (sourceKey) seenSources.add(sourceKey);
     return true;
