@@ -408,7 +408,7 @@ export default function LessonRunner({
       const runnerData = data as RunnerResponse;
       setRunner(runnerData);
       onProgressSummaryChanged?.({
-        lessonId: runnerData.lesson_id,
+        lessonId,
         lessonStatus: runnerData.lesson_status,
         latestMasteryPercent: runnerData.progress_summary?.latest_mastery_percent ?? null,
         bestMasteryPercent: runnerData.progress_summary?.best_mastery_percent ?? null,
