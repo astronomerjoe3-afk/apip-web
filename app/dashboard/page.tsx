@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, getIdTokenResult, User } from "firebase/auth";
+import { getIdTokenResult, onAuthStateChanged, type User } from "firebase/auth";
 
 import { auth } from "../../lib/firebase";
-import TokenBar from "./TokenBar";
 import AdminPanel from "./AdminPanel";
+import TokenBar from "./TokenBar";
 
 type Role = "student" | "instructor" | "admin" | "unknown";
 
@@ -14,17 +14,17 @@ export default function DashboardPage() {
   const [role, setRole] = useState<Role>("unknown");
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (u) => {
-      setUser(u);
-      if (!u) {
+    const unsub = onAuthStateChanged(auth, async (nextUser) => {
+      setUser(nextUser);
+      if (!nextUser) {
         setRole("unknown");
         return;
       }
+
       try {
-        // Pull custom claims (role) from Firebase
-        const tokenResult = await getIdTokenResult(u, true);
-        const r = (tokenResult.claims?.role as Role) || "unknown";
-        setRole(r);
+        const tokenResult = await getIdTokenResult(nextUser, true);
+        const resolvedRole = (tokenResult.claims?.role as Role) || "unknown";
+        setRole(resolvedRole);
       } catch {
         setRole("unknown");
       }
@@ -34,37 +34,55 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div style={{ padding: 24 }}>
-      <h1 style={{ fontSize: 72, margin: "0 0 16px 0" }}>Dashboard</h1>
+    <div className="dashboard-shell">
+      <section className="dashboard-hero">
+        <div>
+          <p className="dashboard-eyebrow">Cognispark control center</p>
+          <h1 className="dashboard-title">{role === "admin" ? "Admin dashboard" : "Dashboard"}</h1>
+          <p className="dashboard-subtitle">
+            Monitor live operations, protect access, and keep the learning platform healthy without losing track of who is signed in and what role they hold.
+          </p>
+        </div>
 
-      <div style={{ fontSize: 18, lineHeight: 1.6 }}>
-        <div><b>Email:</b> {user?.email || "-"}</div>
-        <div><b>UID:</b> {user?.uid || "-"}</div>
-        <div><b>Role (client claims):</b> {role}</div>
-      </div>
-
-      <TokenBar label="Token tools (student/instructor/admin)" />
+        <div className="dashboard-identity-grid">
+          <article className="dashboard-identity-card">
+            <span>Email</span>
+            <strong>{user?.email || "-"}</strong>
+          </article>
+          <article className="dashboard-identity-card">
+            <span>UID</span>
+            <strong>{user?.uid || "-"}</strong>
+          </article>
+          <article className="dashboard-identity-card">
+            <span>Role claim</span>
+            <strong>{role}</strong>
+          </article>
+        </div>
+      </section>
 
       {role === "admin" ? (
         <AdminPanel />
       ) : role === "instructor" ? (
-        <div style={{ marginTop: 18, padding: 16, border: "1px solid #333", borderRadius: 10 }}>
-          <h2 style={{ marginTop: 0 }}>Instructor Mode</h2>
-          <div style={{ opacity: 0.85 }}>
-            Instructor dashboard features will appear here next (cohort metrics, misconception map, engagement analytics).
-          </div>
+        <div className="dashboard-mode-stack">
+          <TokenBar label="Instructor session tools" />
+          <section className="dashboard-mode-card">
+            <h2>Instructor mode</h2>
+            <p>Cohort analytics, misconception mapping, and instructor workflows will appear here next.</p>
+          </section>
         </div>
       ) : role === "student" ? (
-        <div style={{ marginTop: 18, padding: 16, border: "1px solid #333", borderRadius: 10 }}>
-          <h2 style={{ marginTop: 0 }}>Student Mode</h2>
-          <div style={{ opacity: 0.85 }}>
-            Student learning UI will be added next (Module F1 → Lessons → ACSR loop → /progress logging).
-          </div>
+        <div className="dashboard-mode-stack">
+          <TokenBar label="Student session tools" />
+          <section className="dashboard-mode-card">
+            <h2>Student mode</h2>
+            <p>The student learning workflow now lives in the lesson experience rather than this dashboard shell.</p>
+          </section>
         </div>
       ) : (
-        <div style={{ marginTop: 18, opacity: 0.8 }}>
-          Sign in to continue.
-        </div>
+        <section className="dashboard-mode-card">
+          <h2>Sign in to continue</h2>
+          <p>Once you are authenticated, this dashboard will load the tools that match your role.</p>
+        </section>
       )}
     </div>
   );
