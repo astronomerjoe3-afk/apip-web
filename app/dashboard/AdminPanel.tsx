@@ -599,6 +599,9 @@ export default function AdminPanel() {
               <button className="admin-btn admin-btn-secondary" onClick={() => void refreshToken()} disabled={!auth.currentUser}>
                 Refresh session
               </button>
+              <a className="admin-btn admin-btn-secondary" href="/operations-guide#admin-dashboard">
+                Operations guide
+              </a>
               <button className="admin-btn admin-btn-primary" onClick={() => void copyAdminToken()} disabled={!auth.currentUser}>
                 Copy admin token
               </button>

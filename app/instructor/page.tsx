@@ -181,6 +181,7 @@ export default function InstructorPage() {
 
           <div className="admin-toolbar">
             <a className="admin-btn admin-btn-secondary" href="/dashboard">Back to dashboard</a>
+            <a className="admin-btn admin-btn-secondary" href="/operations-guide#instructor-overview">Operations guide</a>
             <button className="admin-btn admin-btn-primary" onClick={() => void load()} type="button">Reload cohort</button>
             <button className="admin-btn admin-btn-secondary" onClick={() => void doLogout()} type="button">Logout</button>
           </div>
