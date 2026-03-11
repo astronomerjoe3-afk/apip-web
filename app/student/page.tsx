@@ -322,31 +322,8 @@ export default function StudentHomePage() {
               <div style={{ fontWeight: 700, marginBottom: 8 }}>
                 No modules returned.
               </div>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                <Link href="/student/module/F1">
-                  <button
-                    style={{
-                      padding: "10px 14px",
-                      borderRadius: 10,
-                      border: "1px solid #333",
-                      fontWeight: 700,
-                    }}
-                  >
-                    Open F1
-                  </button>
-                </Link>
-                <Link href="/student/module/F2">
-                  <button
-                    style={{
-                      padding: "10px 14px",
-                      borderRadius: 10,
-                      border: "1px solid #333",
-                      fontWeight: 700,
-                    }}
-                  >
-                    Open F2
-                  </button>
-                </Link>
+              <div style={{ opacity: 0.8 }}>
+                Module options come from Firestore. If one is missing here, the live API is not returning it.
               </div>
             </div>
           ) : null}
