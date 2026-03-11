@@ -737,6 +737,15 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F1-L6-M7", "Which action usually improves the trustworthiness of a measurement?", ["Use any tool and report extra digits", "Choose a suitable instrument and report a reasonable uncertainty", "Ignore repeat readings once you get one value", "Remove the unit to simplify the answer"], 1, "Think about suitable tools and honest reporting.", "Trustworthiness improves when you use a suitable instrument and report a reasonable uncertainty."),
         shortItem("F1-L6-M8", "In a few words, what does precision describe?", ["closeness of repeated readings", "how close repeated readings are", "spread of repeated readings", "how tightly grouped repeated readings are", "agreement among repeated readings"], "Think about how repeated readings compare with each other."),
       ];
+    case "F2_L1":
+      return [
+        mcItem("F2-L1-M1", "Which quantity needs direction to be complete?", ["distance", "speed", "displacement", "time"], 2, "Only one option needs both size and direction.", "Displacement needs both size and direction."),
+        mcItem("F2-L1-M2", "A cyclist covers 150 m in 30 s. What is the average speed?", ["3 m/s", "4 m/s", "5 m/s", "6 m/s"], 2, "Use average speed = total distance / total time.", "150 m divided by 30 s gives 5 m/s."),
+        mcItem("F2-L1-M3", "A learner walks 12 m east, then 5 m west. Which pair is correct?", ["distance 7 m, displacement 7 m east", "distance 17 m, displacement 7 m east", "distance 17 m, displacement 17 m east", "distance 7 m, displacement 17 m east"], 1, "Distance adds the whole path, while displacement keeps the net change with direction.", "The total path is 17 m and the net change is 7 m east."),
+        mcItem("F2-L1-M4", "Which quantity is scalar?", ["displacement", "velocity", "force", "speed"], 3, "Pick the one that does not need direction.", "Speed is scalar because it needs magnitude only."),
+        mcItem("F2-L1-M5", "Why can distance and displacement be different for the same trip?", ["Distance ignores all motion", "Displacement measures the start-to-finish change while distance measures the full path", "Displacement is always larger", "Distance always needs direction"], 1, "One quantity uses the whole path and the other uses the net change.", "Distance measures the whole path, while displacement measures the start-to-finish change with direction."),
+        shortItem("F2-L1-M6", "A runner covers 240 m in 40 s. What is the average speed?", ["6", "6 m/s"], "Divide total distance by total time."),
+      ];
     default:
       return [];
   }
@@ -781,7 +790,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     ...asList(asRecord(phases(lesson).concept_reconstruction).prompts).map((entry) => text(entry)).filter(Boolean),
     ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((entry) => text(asRecord(entry).hint) || text(asRecord(entry).prompt)).filter(Boolean),
   ].map((item) => item.trim()).filter(Boolean)));
-  const distractors = Array.from(new Set(["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6"]
+  const distractors = Array.from(new Set(["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6"]
     .filter((entry) => entry !== code)
     .flatMap((entry) => [...scaffoldCoreBullets(entry), ...scaffoldFocusExtras(entry)])
     .map((item) => item.trim())
@@ -1490,7 +1499,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const workedExample = scaffoldWorkedExample(lesson);
   return {
     title,
-    intro: code === "F1_L1" ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
+    intro: /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
     teaching_focus: dedupeText([
       ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
       ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
