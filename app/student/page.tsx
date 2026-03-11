@@ -315,7 +315,6 @@ export default function StudentHomePage() {
               </div>
             </div>
           ))}
-
           {modules.length === 0 ? (
             <div
               style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}
@@ -323,18 +322,32 @@ export default function StudentHomePage() {
               <div style={{ fontWeight: 700, marginBottom: 8 }}>
                 No modules returned.
               </div>
-              <Link href="/student/module/F1">
-                <button
-                  style={{
-                    padding: "10px 14px",
-                    borderRadius: 10,
-                    border: "1px solid #333",
-                    fontWeight: 700,
-                  }}
-                >
-                  Open F1
-                </button>
-              </Link>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                <Link href="/student/module/F1">
+                  <button
+                    style={{
+                      padding: "10px 14px",
+                      borderRadius: 10,
+                      border: "1px solid #333",
+                      fontWeight: 700,
+                    }}
+                  >
+                    Open F1
+                  </button>
+                </Link>
+                <Link href="/student/module/F2">
+                  <button
+                    style={{
+                      padding: "10px 14px",
+                      borderRadius: 10,
+                      border: "1px solid #333",
+                      fontWeight: 700,
+                    }}
+                  >
+                    Open F2
+                  </button>
+                </Link>
+              </div>
             </div>
           ) : null}
         </div>

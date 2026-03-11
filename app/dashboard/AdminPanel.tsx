@@ -190,6 +190,11 @@ const ADVANCED_TASKS: CommandCard[] = [
     description: "Use this when you need to refresh the Physical Quantities and Measurement module content in Firestore.",
     command: "python scripts/seed_f1_module.py --apply",
   },
+  {
+    title: "Seed the F2 module content",
+    description: "Use this when you need to publish or refresh the Motion, Forces and Graphs module content in Firestore.",
+    command: "python scripts/seed_f2_module.py --apply",
+  },
 ];
 
 function numberOrNull(value: unknown): number | null {

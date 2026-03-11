@@ -539,7 +539,7 @@ export default function LessonRunner({
       runner.active_stage === "mastery" &&
       runner.lesson_status === "completed" &&
       !canGoNextLesson &&
-      runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+      /_L6$/.test(runner.lesson_id.replace(/-/g, "_").toUpperCase());
 
     if (isFinalModuleWrapUp) return "Module complete";
     switch (runner.active_stage) {
@@ -566,7 +566,7 @@ export default function LessonRunner({
       runner.active_stage === "mastery" &&
       runner.lesson_status === "completed" &&
       !canGoNextLesson &&
-      runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+      /_L6$/.test(runner.lesson_id.replace(/-/g, "_").toUpperCase());
 
     if (isFinalModuleWrapUp) return false;
     return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic";
@@ -585,9 +585,9 @@ export default function LessonRunner({
       runner.active_stage === "mastery" &&
       runner.lesson_status === "completed" &&
       !canGoNextLesson &&
-      runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+      /_L6$/.test(runner.lesson_id.replace(/-/g, "_").toUpperCase());
 
-    if (isFinalModuleWrapUp) return "Congratulations. You finished the final mission and wrapped up this measurement module.";
+    if (isFinalModuleWrapUp) return "Congratulations. You finished the final mission and wrapped up this module.";
     switch (runner.active_stage) {
       case "diagnostic":
         return "A few quick questions first.";
@@ -1761,7 +1761,7 @@ export default function LessonRunner({
         passed &&
         runner.lesson_status === "completed" &&
         !canGoNextLesson &&
-        runner.lesson_id.replace(/-/g, "_").toUpperCase() === "F1_L6";
+        /_L6$/.test(runner.lesson_id.replace(/-/g, "_").toUpperCase());
 
 
       return (
@@ -1770,7 +1770,7 @@ export default function LessonRunner({
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
               <h3 className="text-lg font-semibold text-slate-900">Congratulations on completing Lesson 6</h3>
               <p className="mt-2 text-slate-700">
-                You finished the full module. Keep choosing the right tool, using honest significant figures, and reporting uncertainty whenever a result is not exact.
+                You finished the full module. Keep connecting each answer to the core ideas, checking the units and directions carefully, and explaining the physics clearly.
               </p>
             </div>
           ) : null}
@@ -1936,6 +1936,7 @@ export default function LessonRunner({
     </div>
   );
 }
+
 
 
 

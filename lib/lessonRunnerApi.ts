@@ -760,7 +760,14 @@ function masterySourceKey(item: UnknownRecord): string {
 }
 function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  const lessonPoints = Array.from(new Set([...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].map((item) => item.trim()).filter(Boolean)));
+  const lessonPoints = Array.from(new Set([
+    ...scaffoldCoreBullets(code),
+    ...scaffoldFocusExtras(code),
+    ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
+    ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
+    ...asList(asRecord(phases(lesson).concept_reconstruction).prompts).map((entry) => text(entry)).filter(Boolean),
+    ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((entry) => text(asRecord(entry).hint) || text(asRecord(entry).prompt)).filter(Boolean),
+  ].map((item) => item.trim()).filter(Boolean)));
   const distractors = Array.from(new Set(["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6"]
     .filter((entry) => entry !== code)
     .flatMap((entry) => [...scaffoldCoreBullets(entry), ...scaffoldFocusExtras(entry)])
@@ -833,6 +840,51 @@ function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number, st
   const preferred = Math.max(numberValue(masteryMeta.selected_question_count, 0), adaptiveTarget);
 
   return Math.max(minQuestions, Math.min(maxQuestions, preferred));
+}
+
+function simulationStageTitle(code: string): string {
+  switch (code) {
+    case "F1_L5": return "Density explorer";
+    case "F1_L4": return "Significant figures explorer";
+    case "F1_L3": return "Measurement explorer";
+    case "F2_L1": return "Motion path explorer";
+    case "F2_L2": return "Acceleration explorer";
+    case "F2_L3": return "Distance-time graph explorer";
+    case "F2_L4": return "Velocity-time graph explorer";
+    case "F2_L5": return "Resultant force explorer";
+    case "F2_L6": return "Force and mass explorer";
+    default: return "Simulation inquiry";
+  }
+}
+
+function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): string {
+  switch (code) {
+    case "F1_L5": return "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result.";
+    case "F1_L4": return "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division.";
+    case "F1_L3": return "Use the live tool bench: choose an object, switch instruments, and compare the reading detail, repeated-reading spread, and zero error.";
+    case "F2_L1": return "Change the outward path, return path, and travel time. Compare total distance, net displacement, and average speed.";
+    case "F2_L2": return "Adjust the starting velocity, ending velocity, and time interval to see how the sign and size of acceleration change.";
+    case "F2_L3": return "Change each segment of the trip and watch how the slope of the graph shows the speed in each part.";
+    case "F2_L4": return "Use the same graph to compare slope and area. Slope shows acceleration, and area shows displacement in one-direction motion.";
+    case "F2_L5": return "Pull from the left and the right, then compare the balanced case with the unbalanced case.";
+    case "F2_L6": return "Change force or mass and compare how the acceleration responds.";
+    default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
+  }
+}
+
+function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): string {
+  switch (code) {
+    case "F1_L5": return "Find one setup that floats and one that sinks, then explain which density comparison changed.";
+    case "F1_L4": return "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes.";
+    case "F1_L3": return "Try one object that suits a ruler and one that needs a finer tool, then test a zero-error offset and explain how it would mislead the reading if you forgot to correct it.";
+    case "F2_L1": return "Find one journey where the distance is much larger than the displacement, then explain why.";
+    case "F2_L2": return "Create one positive acceleration example and one negative acceleration example.";
+    case "F2_L3": return "Make one steeper segment and one flatter segment, then explain which part is faster.";
+    case "F2_L4": return "Choose one setup and explain both the acceleration and the displacement from the same graph.";
+    case "F2_L5": return "Build one balanced-force case and one unbalanced-force case, then compare the result.";
+    case "F2_L6": return "Double the force or double the mass and explain which change affects acceleration more in your setup.";
+    default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
+  }
 }
 
 function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Promise<unknown> {
@@ -1559,9 +1611,9 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const inquiry = asList(asRecord(phases(resources.lesson).simulation_inquiry).inquiry_prompts).map(asRecord);
     const simulationCode = lessonCode(resources.lesson);
     stagePayload = {
-      title: simulationCode === "F1_L5" ? "Density explorer" : simulationCode === "F1_L4" ? "Significant figures explorer" : simulationCode === "F1_L3" ? "Measurement explorer" : "Simulation inquiry",
-      instructions: simulationCode === "F1_L5" ? "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result." : simulationCode === "F1_L4" ? "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division." : simulationCode === "F1_L3" ? "Use the live tool bench: choose an object, switch instruments, and compare the reading detail, repeated-reading spread, and zero error." : text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.",
-      task_prompt: simulationCode === "F1_L5" ? "Find one setup that floats and one that sinks, then explain which density comparison changed." : simulationCode === "F1_L4" ? "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes." : simulationCode === "F1_L3" ? "Try one object that suits a ruler and one that needs a finer tool, then test a zero-error offset and explain how it would mislead the reading if you forgot to correct it." : text(inquiry[1]?.prompt) || text(inquiry[0]?.hint),
+      title: simulationStageTitle(simulationCode),
+      instructions: simulationStageInstructions(simulationCode, inquiry),
+      task_prompt: simulationStageTaskPrompt(simulationCode, inquiry),
       completion_text: "I have finished exploring this activity",
     };
   }
@@ -1890,4 +1942,5 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
 
