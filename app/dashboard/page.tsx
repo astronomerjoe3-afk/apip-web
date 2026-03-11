@@ -67,7 +67,10 @@ export default function DashboardPage() {
           <TokenBar label="Instructor session tools" />
           <section className="dashboard-mode-card">
             <h2>Instructor mode</h2>
-            <p>Cohort analytics, misconception mapping, and instructor workflows will appear here next.</p>
+            <p>Open the instructor workspace to view cohort misconceptions, predictive risk, cognitive load, class management tools, and content staging.</p>
+            <div className="admin-toolbar admin-toolbar-tight" style={{ marginTop: "1rem" }}>
+              <a className="admin-btn admin-btn-primary" href="/instructor">Open instructor workspace</a>
+            </div>
           </section>
         </div>
       ) : role === "student" ? (
