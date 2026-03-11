@@ -42,3 +42,8 @@ next-env.d.ts
 
 dev.err.log
 dev.out.log
+
+# local video rendering
+/video-tools/node_modules/
+/video-tools/test.png
+/public/marketing/test-scene.png

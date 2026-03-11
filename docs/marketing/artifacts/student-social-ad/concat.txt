@@ -1,0 +1,13 @@
+file 'C:/Users/User/OneDrive/Documents/Playground/apip-web/docs/marketing/artifacts/student-social-ad/01-hook.png'
+duration 5
+file 'C:/Users/User/OneDrive/Documents/Playground/apip-web/docs/marketing/artifacts/student-social-ad/02-missions.png'
+duration 6
+file 'C:/Users/User/OneDrive/Documents/Playground/apip-web/docs/marketing/artifacts/student-social-ad/03-discovery.png'
+duration 6
+file 'C:/Users/User/OneDrive/Documents/Playground/apip-web/docs/marketing/artifacts/student-social-ad/04-feedback.png'
+duration 7
+file 'C:/Users/User/OneDrive/Documents/Playground/apip-web/docs/marketing/artifacts/student-social-ad/05-confidence.png'
+duration 7
+file 'C:/Users/User/OneDrive/Documents/Playground/apip-web/docs/marketing/artifacts/student-social-ad/06-cta.png'
+duration 7
+file 'C:/Users/User/OneDrive/Documents/Playground/apip-web/docs/marketing/artifacts/student-social-ad/06-cta.png'
