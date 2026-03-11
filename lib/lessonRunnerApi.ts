@@ -516,10 +516,16 @@ function teachingFocus(prompt: string, title: string): string {
   const source = `${title} ${prompt}`.toLowerCase();
   if (source.includes("unit")) return "A scientific measurement needs both a number and a unit.";
   if (source.includes("prefix") || source.includes("kilo") || source.includes("centi") || source.includes("milli")) return "Prefixes change the size of the base unit, so conversions must keep the scale consistent.";
+  if (source.includes("distance-time") || source.includes("distance time graph") || (source.includes("slope") && source.includes("distance"))) return "On a distance-time graph, slope shows speed and a flat section means the object is stopped.";
+  if (source.includes("velocity-time") || source.includes("velocity time graph") || source.includes("area under") || (source.includes("slope") && source.includes("velocity"))) return "On a velocity-time graph, slope shows acceleration while area shows displacement.";
+  if (source.includes("resultant force") || source.includes("balanced force") || source.includes("unbalanced force") || source.includes("net force")) return "Balanced forces give zero resultant force, while unbalanced forces change velocity in the direction of the resultant.";
+  if (source.includes("seatbelt") || source.includes("inertia") || source.includes("f = ma") || (source.includes("force") && source.includes("mass"))) return "Resultant force, mass, and acceleration are linked by F = ma, and inertia resists changes in motion.";
+  if (source.includes("distance") || source.includes("displacement") || source.includes("average speed")) return "Distance counts the full path, displacement keeps the start-to-finish change with direction, and average speed compares total distance with total time.";
+  if (source.includes("velocity") || source.includes("acceleration") || source.includes("direction")) return "Velocity includes direction, and acceleration compares how velocity changes with time.";
   if (source.includes("accuracy") || source.includes("accepted value") || source.includes("true value")) return "Accuracy is closeness to the accepted value, while precision is closeness among repeated readings.";
   if (source.includes("systematic error") || source.includes("random error") || source.includes("zero error")) return "Systematic error shifts readings the same way each time, while random error causes scatter from one reading to the next.";
   if (source.includes("precision") || source.includes("uncertainty") || source.includes("trust") || source.includes("ruler") || source.includes("caliper")) return "More precise tools reduce uncertainty, which makes a measurement more trustworthy.";
-  if (source.includes("vector") || source.includes("direction")) return "Vectors need both size and direction, while scalars only need size.";
+  if (source.includes("vector") || source.includes("scalar")) return "Vectors need both size and direction, while scalars only need size.";
   if (source.includes("density")) return "Density compares mass to volume, so both quantities matter together.";
   return "Reconnect the main idea to the quantity, unit, and meaning in the question.";
 }
@@ -528,6 +534,13 @@ function misconceptionTag(prompt: string): string | undefined {
   const source = prompt.toLowerCase();
   if (source.includes("unit") || source.includes("measurement")) return "unit_as_label_only";
   if (source.includes("prefix") || source.includes("kilo") || source.includes("centi") || source.includes("milli")) return "prefix_scale_error";
+  if (source.includes("distance") || source.includes("displacement") || source.includes("average speed") || source.includes("journey")) return "distance_displacement_confusion";
+  if (source.includes("velocity") || source.includes("direction") || source.includes("acceleration")) return source.includes("acceleration") ? "acceleration_sign_confusion" : "velocity_direction_confusion";
+  if (source.includes("distance-time") || source.includes("distance time graph") || (source.includes("graph") && source.includes("distance"))) return "distance_time_graph_error";
+  if (source.includes("velocity-time") || source.includes("velocity time graph") || source.includes("area under") || (source.includes("graph") && source.includes("velocity"))) return "velocity_time_graph_error";
+  if (source.includes("resultant force") || source.includes("balanced force") || source.includes("unbalanced force") || source.includes("net force")) return source.includes("balanced") ? "balanced_force_motion_confusion" : "resultant_force_error";
+  if (source.includes("seatbelt") || source.includes("inertia")) return "inertia_force_confusion";
+  if (source.includes("f = ma") || source.includes("force") && source.includes("mass")) return "fma_relationship_error";
   if (source.includes("accuracy") || source.includes("accepted value") || source.includes("true value")) return "precision_vs_accuracy";
   if (source.includes("systematic error") || source.includes("random error") || source.includes("zero error")) return "random_vs_systematic_error";
   if (source.includes("precision") || source.includes("uncertainty") || source.includes("trust") || source.includes("ruler") || source.includes("caliper")) return "precision_trust_error";
@@ -1942,5 +1955,7 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
+
 
 
