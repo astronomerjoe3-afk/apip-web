@@ -14,12 +14,10 @@ const AuthContext = createContext<AuthContextValue>({ user: null, loading: true 
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(firebaseConfigured && !!maybeAuth);
 
   useEffect(() => {
     if (!firebaseConfigured || !maybeAuth) {
-      setUser(null);
-      setLoading(false);
       return;
     }
 

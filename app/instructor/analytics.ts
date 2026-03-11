@@ -153,8 +153,8 @@ export function riskProfile(row: StudentRow): RiskProfile {
     reasons.push("stuck on " + topMisconception.tag);
   }
 
-  if (score >= 4) return { level: "high", score, reason: reasons.slice(0, 2).join(" • ") || "Needs prompt follow-up" };
-  if (score >= 2) return { level: "medium", score, reason: reasons.slice(0, 2).join(" • ") || "Watch this learner" };
+  if (score >= 4) return { level: "high", score, reason: reasons.slice(0, 2).join(" - ") || "Needs prompt follow-up" };
+  if (score >= 2) return { level: "medium", score, reason: reasons.slice(0, 2).join(" - ") || "Watch this learner" };
   return { level: "low", score, reason: reasons[0] || "Stable participation" };
 }
 export function loadProfile(row: StudentRow): LoadProfile {
@@ -186,8 +186,8 @@ export function loadProfile(row: StudentRow): LoadProfile {
     score = Math.max(0, score - 1);
   }
 
-  if (score >= 3) return { level: "heavy", score, reason: reasons.slice(0, 2).join(" • ") || "Reduce the mental load" };
-  if (score >= 1) return { level: "watch", score, reason: reasons.slice(0, 2).join(" • ") || "Monitor pacing" };
+  if (score >= 3) return { level: "heavy", score, reason: reasons.slice(0, 2).join(" - ") || "Reduce the mental load" };
+  if (score >= 1) return { level: "watch", score, reason: reasons.slice(0, 2).join(" - ") || "Monitor pacing" };
   return { level: "steady", score, reason: "Healthy pace" };
 }
 

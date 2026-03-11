@@ -80,7 +80,7 @@ export default function ContentPanel(props: ContentPanelProps) {
               <div className="admin-section-header admin-section-header-compact">
                 <div>
                   <strong>{item.name}</strong>
-                  <p className="admin-key-meta">{item.sizeLabel} • {item.section} • {item.tag}</p>
+                  <p className="admin-key-meta">{item.sizeLabel} - {item.section} - {item.tag}</p>
                 </div>
                 <span className={item.status === "Sorted" ? "admin-badge admin-badge-success" : "admin-badge admin-badge-muted"}>{item.status}</span>
               </div>
