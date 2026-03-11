@@ -1017,6 +1017,50 @@ function scaffoldCoreBullets(code: string): string[] {
         "A result can show one of these strengths without the other.",
         "Trustworthy measurements report uncertainty honestly.",
       ];
+
+    case "F2_L1":
+      return [
+        "Distance measures the full journey length.",
+        "Displacement measures the net change from start to finish with direction.",
+        "Average speed = total distance / total time.",
+        "A quantity can be scalar or vector depending on whether direction is required.",
+      ];
+    case "F2_L2":
+      return [
+        "Velocity needs both size and direction.",
+        "Acceleration = change in velocity / time.",
+        "A velocity can change because the speed changes, the direction changes, or both.",
+        "Signs in motion questions depend on the chosen positive direction.",
+      ];
+    case "F2_L3":
+      return [
+        "Distance-time graphs show how total distance changes with time.",
+        "Slope on a distance-time graph represents speed.",
+        "Flat sections represent a stop.",
+        "Steeper sections represent faster motion.",
+      ];
+    case "F2_L4":
+      return [
+        "Velocity-time graphs show how velocity changes with time.",
+        "Slope on a velocity-time graph represents acceleration.",
+        "Area under a velocity-time graph represents displacement.",
+        "Constant velocity appears as a horizontal line.",
+      ];
+    case "F2_L5":
+      return [
+        "Resultant force is the overall force left after combining forces.",
+        "Balanced forces mean zero resultant force.",
+        "Zero resultant force means no change in velocity.",
+        "Unbalanced forces cause acceleration in the direction of the resultant force.",
+      ];
+    case "F2_L6":
+      return [
+        "Force, mass, and acceleration are linked by F = ma.",
+        "Larger resultant force gives larger acceleration when mass stays fixed.",
+        "Larger mass gives smaller acceleration when force stays fixed.",
+        "Inertia explains why objects resist sudden changes in motion.",
+      ];
+
     default:
       return [];
   }
@@ -1110,6 +1154,20 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           answer: "The 49.9 g reading is more precise because it shows finer resolution.",
         },
       };
+    case "F2_L1":
+      return {
+        body: "Separate the full path from the start-to-finish change and solve them one at a time.",
+        worked_example: {
+          prompt: "A learner walks 10 m east and then 4 m west. Which pair is correct?",
+          steps: [
+            "Distance is the total path travelled, so add both parts of the walk: 10 m + 4 m = 14 m.",
+            "Displacement is the net change from start to finish, so compare the two opposite directions instead of adding them.",
+            "The learner ends 6 m east of the start because 10 m east and 4 m west leave a net 6 m east.",
+            "Match both ideas to one answer choice: distance 14 m, displacement 6 m east.",
+          ],
+          answer: "Distance = 14 m, displacement = 6 m east.",
+        },
+      };
     default:
       return {
         body: "Start with a real question and solve it step by step.",
@@ -1126,7 +1184,6 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
   }
 }
-
 function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
   switch (lessonCode(lesson)) {
     case "F1_L1":
