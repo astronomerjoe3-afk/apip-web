@@ -563,7 +563,9 @@ function resolvedCorrectAnswer(item: UnknownRecord): string {
   if (correctIndex >= 0 && correctIndex < choices.length) return choices[correctIndex];
 
   const accepted = shortAnswerAccepted(item);
-  if (accepted.length > 0) return accepted[0];
+  if (accepted.length > 0) {
+    return accepted.find((entry) => /[A-Za-z]/.test(entry)) || accepted[0];
+  }
 
   return fallbackMeta(item)?.correctAnswer || "Review the lesson idea and try again.";
 }
@@ -771,36 +773,36 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
       ];
     case "F2_L2":
       return [
-        mcItem("F2-L2-X1", "Velocity changes from 3 m/s to 11 m/s in 4 s. What is the acceleration?", ["1 m/s/s", "2 m/s/s", "3 m/s/s", "8 m/s/s"], 1, "Use change in velocity divided by time.", "The velocity changes by 8 m/s in 4 s, so the acceleration is 2 m/s/s."),
-        shortItem("F2-L2-X2", "Velocity changes from -2 m/s to 4 m/s in 3 s. What is the acceleration?", ["2", "2 m/s/s"], "Subtract initial velocity from final velocity before dividing by time."),
-        mcItem("F2-L2-X3", "An object keeps the same velocity for 5 s. What is its acceleration?", ["-5 m/s/s", "0 m/s/s", "1 m/s/s", "5 m/s/s"], 1, "No change in velocity means zero acceleration.", "If velocity does not change, the acceleration is 0 m/s/s."),
+        mcItem("F2-L2-X1", "Velocity changes from 3 m/s to 11 m/s in 4 s. What is the acceleration?", ["1 m/s^2", "2 m/s^2", "3 m/s^2", "8 m/s^2"], 1, "Use change in velocity divided by time.", "The velocity changes by 8 m/s in 4 s, so the acceleration is 2 m/s^2."),
+        shortItem("F2-L2-X2", "Velocity changes from -2 m/s to 4 m/s in 3 s. What is the acceleration?", ["2 m/s^2", "2 m/s/s"], "Subtract initial velocity from final velocity before dividing by time."),
+        mcItem("F2-L2-X3", "An object keeps the same velocity for 5 s. What is its acceleration?", ["-5 m/s^2", "0 m/s^2", "1 m/s^2", "5 m/s^2"], 1, "No change in velocity means zero acceleration.", "If velocity does not change, the acceleration is 0 m/s^2."),
         mcItem("F2-L2-X4", "Why can acceleration be non-zero even if speed stays the same?", ["Because acceleration depends on mass only", "Because a change in direction also changes velocity", "Because time becomes negative", "Because speed and velocity are identical"], 1, "Velocity depends on direction as well as speed.", "Acceleration can be non-zero because a direction change is still a velocity change."),
       ];
     case "F2_L3":
       return [
         mcItem("F2-L3-X1", "A horizontal section on a distance-time graph shows that the object is...", ["speeding up", "stopped", "moving backwards", "accelerating negatively"], 1, "If the distance does not change, the object is not moving.", "A horizontal section means the distance stays constant, so the object is stopped."),
-        shortItem("F2-L3-X2", "A graph rises by 18 m in 6 s on one straight section. What speed does that section show?", ["3", "3 m/s"], "Use slope = distance change / time change for that section."),
+        shortItem("F2-L3-X2", "A graph rises by 18 m in 6 s on one straight section. What speed does that section show?", ["3 m/s"], "Use slope = distance change / time change for that section."),
         mcItem("F2-L3-X3", "Which section of a distance-time graph shows the greater speed?", ["the steeper straight section", "the flatter straight section", "the horizontal section", "all sections show the same speed"], 0, "Steeper slope means greater speed on a distance-time graph.", "The steeper straight section represents the greater speed."),
         mcItem("F2-L3-X4", "If a distance-time graph becomes less steep later, what does that mean?", ["the object is moving faster", "the object is moving slower", "the object must be moving backwards", "the object has zero distance"], 1, "A smaller slope means a smaller speed.", "A less-steep section means the speed is smaller later."),
       ];
     case "F2_L4":
       return [
         mcItem("F2-L4-X1", "What does the area under a velocity-time graph represent?", ["force", "displacement", "acceleration", "mass"], 1, "Area combines velocity with time.", "The area under a velocity-time graph represents displacement."),
-        shortItem("F2-L4-X2", "An object moves at 6 m/s for 4 s. What displacement is shown by the graph area?", ["24", "24 m"], "For constant velocity, displacement is velocity multiplied by time."),
-        mcItem("F2-L4-X3", "Velocity rises from 4 m/s to 10 m/s in 3 s. What is the acceleration?", ["1 m/s/s", "2 m/s/s", "3 m/s/s", "6 m/s/s"], 1, "Use slope = change in velocity / time.", "The velocity changes by 6 m/s in 3 s, so the acceleration is 2 m/s/s."),
+        shortItem("F2-L4-X2", "An object moves at 6 m/s for 4 s. What displacement is shown by the graph area?", ["24 m"], "For constant velocity, displacement is velocity multiplied by time."),
+        mcItem("F2-L4-X3", "Velocity rises from 4 m/s to 10 m/s in 3 s. What is the acceleration?", ["1 m/s^2", "2 m/s^2", "3 m/s^2", "6 m/s^2"], 1, "Use slope = change in velocity / time.", "The velocity changes by 6 m/s in 3 s, so the acceleration is 2 m/s^2."),
         mcItem("F2-L4-X4", "Which statement correctly matches the graph feature to the quantity?", ["slope gives displacement and area gives acceleration", "slope gives acceleration and area gives displacement", "both slope and area give velocity only", "neither slope nor area has physical meaning"], 1, "Do not swap the two interpretations.", "On a velocity-time graph, slope gives acceleration and area gives displacement."),
       ];
     case "F2_L5":
       return [
         mcItem("F2-L5-X1", "8 N right and 8 N left give a resultant force of...", ["0 N", "8 N right", "16 N right", "4 N right"], 0, "Equal opposite forces cancel completely.", "The resultant force is 0 N because the forces are equal and opposite."),
-        shortItem("F2-L5-X2", "11 N right and 4 N left give what resultant force?", ["7", "7 N", "7 N right"], "Subtract opposite forces and keep the direction of the larger force."),
+        shortItem("F2-L5-X2", "11 N right and 4 N left give what resultant force?", ["7 N right", "7 N"], "Subtract opposite forces and keep the direction of the larger force."),
         mcItem("F2-L5-X3", "If the resultant force on a moving object is zero, the object can...", ["keep moving at constant velocity", "only stop", "speed up automatically", "reverse direction without a force"], 0, "Zero resultant force means zero acceleration.", "The object can keep moving at constant velocity because zero resultant force means no acceleration."),
         mcItem("F2-L5-X4", "Two forces of 3 N and 5 N both act to the right. What is the resultant force?", ["2 N right", "8 N right", "5 N right", "0 N"], 1, "Forces in the same direction add together.", "The resultant force is 8 N right because the forces act in the same direction."),
       ];
     case "F2_L6":
       return [
-        mcItem("F2-L6-X1", "A 15 N resultant force acts on a 5 kg trolley. What is the acceleration?", ["2 m/s/s", "3 m/s/s", "5 m/s/s", "15 m/s/s"], 1, "Use a = F / m.", "15 N divided by 5 kg gives 3 m/s/s."),
-        shortItem("F2-L6-X2", "A 4 kg trolley accelerates at 2.5 m/s/s. What resultant force acts on it?", ["10", "10 N"], "Use F = ma."),
+        mcItem("F2-L6-X1", "A 15 N resultant force acts on a 5 kg trolley. What is the acceleration?", ["2 m/s^2", "3 m/s^2", "5 m/s^2", "15 m/s^2"], 1, "Use a = F / m.", "15 N divided by 5 kg gives 3 m/s^2."),
+        shortItem("F2-L6-X2", "A 4 kg trolley accelerates at 2.5 m/s^2. What resultant force acts on it?", ["10 N"], "Use F = ma."),
         mcItem("F2-L6-X3", "The same force acts on a 2 kg trolley and a 6 kg trolley. Which trolley accelerates more?", ["the 2 kg trolley", "the 6 kg trolley", "both equally", "neither trolley"], 0, "For the same force, the smaller mass accelerates more.", "The 2 kg trolley accelerates more because a smaller mass gives a larger acceleration for the same force."),
         mcItem("F2-L6-X4", "If the mass doubles while the same resultant force acts, the acceleration...", ["doubles", "halves", "stays the same", "must become negative"], 1, "Acceleration is inversely related to mass when force is fixed.", "The acceleration halves if the mass doubles while the force stays the same."),
       ];
