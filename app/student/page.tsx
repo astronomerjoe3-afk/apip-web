@@ -10,12 +10,32 @@ import { auth } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, type Role } from "../../lib/authRouting";
 
+type PricingOffer = {
+  id?: string;
+  title?: string;
+  price_label?: string;
+  billing_label?: string;
+  effective_monthly_label?: string;
+  description?: string;
+};
+
+type ModuleAccess = {
+  tier?: "free" | "premium" | string;
+  is_unlocked?: boolean;
+  unlock_reason?: string;
+  message?: string;
+  module_purchase?: PricingOffer | null;
+  subscription_plans?: PricingOffer[];
+};
+
 type Module = {
   id: string;
   title?: string;
   description?: string;
   estimated_minutes?: number;
   level?: string;
+  access_tier?: string;
+  access?: ModuleAccess;
 };
 
 type ModulesResponse = {
@@ -32,6 +52,17 @@ function errorMessage(error: unknown): string {
 
 async function getRole(user: User): Promise<Role> {
   return getClientRole(user);
+}
+
+function moduleBadge(moduleItem: Module): { label: string; background: string; color: string } {
+  const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
+  if (moduleItem.access?.tier === "premium") {
+    return locked
+      ? { label: "Premium locked", background: "#fef3c7", color: "#92400e" }
+      : { label: "Premium unlocked", background: "#dcfce7", color: "#166534" };
+  }
+
+  return { label: "Free module", background: "#dbeafe", color: "#1d4ed8" };
 }
 
 export default function StudentHomePage() {
@@ -187,7 +218,7 @@ export default function StudentHomePage() {
         <div>
           <h1 style={{ fontSize: 36, marginBottom: 12 }}>Student</h1>
           <p style={{ opacity: 0.8, marginBottom: 8 }}>
-            Choose a module to begin.
+            F1 is free. Premium modules unlock per module or through subscription.
           </p>
           <div style={{ opacity: 0.7, fontSize: 13 }}>
             Signed in as: {user?.email || "student"}
@@ -261,7 +292,12 @@ export default function StudentHomePage() {
         </div>
       ) : (
         <div style={{ display: "grid", gap: 12 }}>
-          {modules.map((moduleItem) => (
+          {modules.map((moduleItem) => {
+            const badge = moduleBadge(moduleItem);
+            const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
+            const buttonLabel = locked ? "See unlock options" : "Open module";
+
+            return (
             <div
               key={moduleItem.id}
               style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}
@@ -282,6 +318,35 @@ export default function StudentHomePage() {
                   <div style={{ opacity: 0.8, marginTop: 6 }}>
                     {moduleItem.description || ""}
                   </div>
+
+                  <div style={{ marginTop: 8 }}>
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        padding: "4px 10px",
+                        borderRadius: 999,
+                        background: badge.background,
+                        color: badge.color,
+                        fontSize: 12,
+                        fontWeight: 800,
+                      }}
+                    >
+                      {badge.label}
+                    </span>
+                  </div>
+
+                  {moduleItem.access?.message ? (
+                    <div style={{ marginTop: 10, fontSize: 14, opacity: 0.85 }}>
+                      {moduleItem.access.message}
+                    </div>
+                  ) : null}
+
+                  {locked && moduleItem.access?.module_purchase?.price_label ? (
+                    <div style={{ marginTop: 8, fontSize: 14, fontWeight: 700 }}>
+                      One-time unlock: {moduleItem.access.module_purchase.price_label}
+                    </div>
+                  ) : null}
+
 
                   <div style={{ opacity: 0.75, marginTop: 8, fontSize: 13 }}>
                     {moduleItem.level ? `Level: ${moduleItem.level} | ` : ""}
@@ -308,13 +373,14 @@ export default function StudentHomePage() {
                         fontWeight: 700,
                       }}
                     >
-                      Open module
+                      {buttonLabel}
                     </button>
                   </Link>
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
           {modules.length === 0 ? (
             <div
               style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}

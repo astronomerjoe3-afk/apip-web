@@ -9,12 +9,32 @@ import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { useAuth } from "../../../../lib/auth";
 import { auth } from "../../../../lib/firebase";
 
+type PricingOffer = {
+  id?: string;
+  title?: string;
+  price_label?: string;
+  billing_label?: string;
+  effective_monthly_label?: string;
+  description?: string;
+};
+
+type ModuleAccess = {
+  tier?: "free" | "premium" | string;
+  is_unlocked?: boolean;
+  unlock_reason?: string;
+  message?: string;
+  module_purchase?: PricingOffer | null;
+  subscription_plans?: PricingOffer[];
+};
+
 type ModuleCatalog = {
   id: string;
   title?: string;
   description?: string;
   misconception_tag_allowlist?: string[];
   mastery_outcomes?: string[];
+  access_tier?: string;
+  access?: ModuleAccess;
 };
 
 type LessonPhases = {
@@ -127,6 +147,8 @@ export default function StudentModulePage() {
     return `Mission ${activeIdx + 1} of ${lessons.length}`;
   }, [lessons.length, activeIdx]);
 
+  const moduleLocked = moduleMeta?.access?.tier === "premium" && moduleMeta?.access?.is_unlocked === false;
+
   const loadModuleState = useCallback(
     async (preserveCurrentLesson: boolean = true, currentLessonIdOverride?: string): Promise<void> => {
       if (authLoading) {
@@ -158,18 +180,30 @@ export default function StudentModulePage() {
       try {
         setErr("");
 
-        const [moduleResponse, lessonsResponse, progressResponse] =
-          await Promise.all([
-            apipGet<{ ok: boolean; module: ModuleCatalog }>(
-              `/modules/${encodeURIComponent(moduleId)}`,
-            ),
-            apipGet<LessonsResponse>(
-              `/modules/${encodeURIComponent(moduleId)}/lessons`,
-            ),
-            apipGet<StudentModuleProgressResponse>(
-              `/student/modules/${encodeURIComponent(moduleId)}/progress`,
-            ),
-          ]);
+        const moduleResponse = await apipGet<{ ok: boolean; module: ModuleCatalog }>(
+          `/modules/${encodeURIComponent(moduleId)}`,
+        );
+        setModuleMeta(moduleResponse.module);
+
+
+        if (
+          moduleResponse.module.access?.tier === "premium" &&
+          moduleResponse.module.access?.is_unlocked === false
+        ) {
+          setModuleProgress(null);
+          setLessons([]);
+          setActiveIdx(0);
+          return;
+        }
+
+        const [lessonsResponse, progressResponse] = await Promise.all([
+          apipGet<LessonsResponse>(
+            `/modules/${encodeURIComponent(moduleId)}/lessons`,
+          ),
+          apipGet<StudentModuleProgressResponse>(
+            `/student/modules/${encodeURIComponent(moduleId)}/progress`,
+          ),
+        ]);
 
         const progressByLessonId = new Map<string, LessonProgress>();
         for (const lessonProgress of progressResponse.lessons || []) {
@@ -221,7 +255,6 @@ export default function StudentModulePage() {
               : Math.max(mergedLessons.length - 1, 0);
         }
 
-        setModuleMeta(moduleResponse.module);
         setModuleProgress(progressResponse.module);
         setLessons(mergedLessons);
         setActiveIdx(nextIndex);
@@ -511,6 +544,45 @@ export default function StudentModulePage() {
         ) : !user ? (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
             Taking you to sign in...
+          </div>
+        ) : moduleLocked ? (
+          <div style={{ display: "grid", gap: 16 }}>
+            <div style={{ display: "inline-flex", justifyContent: "center" }}>
+              <span style={{ padding: "6px 12px", borderRadius: 999, background: "#fef3c7", color: "#92400e", fontWeight: 800, fontSize: 12 }}>Premium module</span>
+            </div>
+            <div style={{ textAlign: "center", fontSize: 18, color: "#46566b", lineHeight: 1.6 }}>
+              {moduleMeta?.access?.message || "Unlock this premium module with a one-time purchase or a subscription."}
+            </div>
+            {moduleMeta?.access?.module_purchase ? (
+              <div style={{ border: "1px solid rgba(16, 35, 63, 0.12)", borderRadius: 18, padding: 18, background: "rgba(255, 255, 255, 0.82)" }}>
+                <div style={{ fontWeight: 900, fontSize: 20 }}>{moduleMeta.access.module_purchase.title || "Unlock this module forever"}</div>
+                <div style={{ marginTop: 6, fontSize: 28, fontWeight: 900 }}>{moduleMeta.access.module_purchase.price_label}</div>
+                <div style={{ marginTop: 8, opacity: 0.82 }}>{moduleMeta.access.module_purchase.description || "One payment for permanent access to this premium module."}</div>
+              </div>
+            ) : null}
+            {(moduleMeta?.access?.subscription_plans || []).length > 0 ? (
+              <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+                {(moduleMeta?.access?.subscription_plans || []).map((plan) => (
+                  <div key={plan.id || plan.title} style={{ border: "1px solid rgba(16, 35, 63, 0.12)", borderRadius: 18, padding: 18, background: "rgba(255, 255, 255, 0.82)" }}>
+                    <div style={{ fontWeight: 900 }}>{plan.title}</div>
+                    <div style={{ marginTop: 6, fontSize: 24, fontWeight: 900 }}>{plan.price_label}</div>
+                    <div style={{ marginTop: 4, opacity: 0.72 }}>{plan.effective_monthly_label || plan.billing_label}</div>
+                    <div style={{ marginTop: 8, opacity: 0.82 }}>{plan.description}</div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            <div style={{ textAlign: "center", opacity: 0.72 }}>
+              Pricing and access rules are now enforced in the API. Connect your payment processor to turn these plans into live checkout flows.
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                onClick={() => router.push("/student")}
+                style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.72)", fontWeight: 800 }}
+              >
+                Back to modules
+              </button>
+            </div>
           </div>
         ) : loading && !activeLesson ? (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
