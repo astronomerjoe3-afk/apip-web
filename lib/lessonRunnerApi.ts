@@ -822,6 +822,12 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
         shortItem("F2-L6-X2", "A 4 kg trolley accelerates at 2.5 m/s^2. What resultant force acts on it?", ["10 N"], "Use F = ma."),
         mcItem("F2-L6-X3", "The same force acts on a 2 kg trolley and a 6 kg trolley. Which trolley accelerates more?", ["the 2 kg trolley", "the 6 kg trolley", "both equally", "neither trolley"], 0, "For the same force, the smaller mass accelerates more.", "The 2 kg trolley accelerates more because a smaller mass gives a larger acceleration for the same force."),
         mcItem("F2-L6-X4", "If the mass doubles while the same resultant force acts, the acceleration...", ["doubles", "halves", "stays the same", "must become negative"], 1, "Acceleration is inversely related to mass when force is fixed.", "The acceleration halves if the mass doubles while the force stays the same."),
+        mcItem("F2-L6-X5", "If the resultant force doubles while the same mass acts, the acceleration...", ["doubles", "halves", "stays the same", "must become zero"], 0, "For fixed mass, acceleration changes in the same ratio as force.", "If the force doubles while the mass stays fixed, the acceleration doubles too."),
+        mcItem("F2-L6-X6", "If both the resultant force and the mass double, what happens to the acceleration?", ["It stays the same", "It doubles", "It halves", "It becomes zero"], 0, "Use a = F / m and compare the ratio before and after.", "If both force and mass double, their ratio stays the same, so the acceleration stays the same."),
+        mcItem("F2-L6-X7", "Which force should be used in F = ma?", ["the resultant force", "the smallest force only", "the friction force only", "the first force mentioned"], 0, "The equation uses the net force after all forces are combined.", "F = ma uses the resultant force, not just any one force from the diagram."),
+        mcItem("F2-L6-X8", "Why is a heavier trolley harder to accelerate with the same push?", ["A larger mass gives a smaller acceleration for the same force", "A larger mass removes the force", "A larger mass always makes acceleration negative", "A larger mass changes the units of force"], 0, "Mass resists changes in motion.", "A heavier trolley is harder to accelerate because a larger mass gives less acceleration for the same force."),
+        mcItem("F2-L6-X9", "What does inertia describe?", ["resistance to changes in motion", "the force that always makes objects speed up", "the area under a graph", "the unit of acceleration"], 0, "Inertia is not an extra force; it is a property of matter.", "Inertia describes resistance to changes in motion."),
+        mcItem("F2-L6-X10", "If a trolley's mass doubles and you want the same acceleration, what must happen to the resultant force?", ["It must double", "It must halve", "It must stay the same", "It must reverse direction"], 0, "Rearrange F = ma and keep the acceleration fixed.", "If the mass doubles and the acceleration is to stay the same, the resultant force must double."),
       ];
     default:
       return items.flatMap((item, itemIndex) => [
@@ -2668,6 +2674,7 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
 
 
 
