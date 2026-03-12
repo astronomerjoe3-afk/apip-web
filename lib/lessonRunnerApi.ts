@@ -1719,21 +1719,72 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 
 
+function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: string; checkForUnderstanding: string; commonTrap: string } {
+  switch (code) {
+    case "F2_L1":
+      return {
+        coreIdea: "Distance and displacement answer different questions about the same journey. Distance is the total path travelled, while displacement is the net start-to-finish change with direction.",
+        reasoning: "First decide whether the question asks for the whole route, the start-to-finish change, or the average speed for the full trip. For distance, add every segment, including any return part. For displacement, compare the finishing point with the starting point and keep the direction. For average speed, divide the total distance by the total time for the whole journey.",
+        checkForUnderstanding: "If a traveller goes out and partly back, which answer uses every segment and which answer only uses the starting and finishing positions?",
+        commonTrap: "Do not subtract stages for distance, and do not average stage speeds unless the question really asks for the overall average speed.",
+      };
+    case "F2_L2":
+      return {
+        coreIdea: "Velocity includes direction, so a change in speed or direction changes velocity. Acceleration measures how quickly the velocity changes.",
+        reasoning: "Choose a positive direction first. Write the initial and final velocities with signs. Calculate the change in velocity as final velocity minus initial velocity, then divide by the time taken. Interpret the sign only at the end, after you know which direction counts as positive.",
+        checkForUnderstanding: "If forward is positive and the final velocity is smaller than the initial velocity, what sign should the acceleration have?",
+        commonTrap: "A negative acceleration does not automatically mean slowing down. It only tells you that the acceleration points opposite the chosen positive direction.",
+      };
+    case "F2_L3":
+      return {
+        coreIdea: "On a distance-time graph, the slope of each segment tells the speed on that segment. The graph height shows distance, not speed.",
+        reasoning: "Read one segment at a time. Find how much the distance changes and how much time passes on that same segment. Divide the distance change by the time change to get the speed there. If the line is flat, the distance is not changing, so the object is stopped during that interval.",
+        checkForUnderstanding: "Which graph feature tells the speed on one segment: the height of the line or its slope?",
+        commonTrap: "Do not read speed directly from the vertical axis, and do not describe a flat section as moving backwards.",
+      };
+    case "F2_L4":
+      return {
+        coreIdea: "A velocity-time graph tells two different stories from one shape: slope shows acceleration, and area under the graph shows displacement.",
+        reasoning: "Decide first whether the question is asking about how velocity changes or how much motion builds up. Use slope when you need acceleration by comparing velocity change with time change. Use area when you need displacement by finding the area under the graph over the interval. Keep the sign of the velocity in mind when you interpret the displacement.",
+        checkForUnderstanding: "If the graph is a horizontal line above zero, what happens to the acceleration and what happens to the displacement?",
+        commonTrap: "Do not use slope when the question asks for displacement, and do not ignore whether the velocity is positive or negative.",
+      };
+    case "F2_L5":
+      return {
+        coreIdea: "Resultant force is the single overall force left after all the pushes and pulls are combined with their directions.",
+        reasoning: "First check whether the forces act in the same direction or in opposite directions. Add forces that act together. Subtract opposite forces and keep the direction of the larger side. Then decide whether the resultant force is zero or non-zero before you talk about the motion.",
+        checkForUnderstanding: "When two opposite forces are unequal, which direction does the resultant force point?",
+        commonTrap: "Zero resultant force means zero acceleration, not zero motion. An object can still move at constant velocity.",
+      };
+    case "F2_L6":
+      return {
+        coreIdea: "F = ma links resultant force, mass, and acceleration. The same force changes a smaller mass more than a larger mass.",
+        reasoning: "Start with the relationship between force, mass, and acceleration. Use the resultant force, not just one force from the diagram. Rearrange the formula only if needed, then substitute the values with units. After the calculation, compare how changing the force or the mass would change the acceleration.",
+        checkForUnderstanding: "If the force stays the same and the mass doubles, what happens to the acceleration?",
+        commonTrap: "Do not forget that the formula uses resultant force, and do not treat inertia as if it were an extra force.",
+      };
+    default:
+      return {
+        coreIdea: "Use the key idea from the lesson before you calculate or classify anything.",
+        reasoning: "Identify the right quantity or graph feature first, then work through the physics step by step.",
+        checkForUnderstanding: "What should you identify before you start calculating?",
+        commonTrap: "Do not rush into a formula before you know what the quantity means.",
+      };
+  }
+}
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("F2_")) {
-    const core = scaffoldCoreBullets(code);
-    const focus = scaffoldFocusExtras(code);
+    const f2Copy = scaffoldF2SectionCopy(code);
     return [
       { heading: "Fix these ideas", body: repairText },
-      { heading: "Core idea", body: core.slice(0, 2).join(" ") || "Use the main motion or force rule before you calculate or classify anything." },
-      { heading: "How to reason through it", body: core.slice(2).join(" ") || focus.slice(0, 2).join(" "), check_for_understanding: "Which quantity, graph feature, or force comparison matters most before you answer?" },
-      { heading: "Common trap", body: focus.join(" ") || "Slow down and check the sign, direction, and meaning of each quantity before deciding." },
+      { heading: "Core idea", body: f2Copy.coreIdea },
+      { heading: "How to reason through it", body: f2Copy.reasoning, check_for_understanding: f2Copy.checkForUnderstanding },
+      { heading: "Common trap", body: f2Copy.commonTrap },
       { heading: "Analogy", body: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer." },
       { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
     ];
   }
-
   switch (code) {
     case "F1_L1":
       return [
