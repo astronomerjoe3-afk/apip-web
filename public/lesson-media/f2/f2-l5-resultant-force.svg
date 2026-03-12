@@ -31,9 +31,10 @@
     <path d="M322 82 L424 110 L322 138" fill="#0f766e"/>
     <text x="118" y="268" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">6 N left</text>
     <text x="312" y="268" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">10 N right</text>
-    <text x="146" y="72" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f766e">
-      <tspan x="146" dy="0">Resultant points</tspan>
-      <tspan x="146" dy="26">to the right</tspan>
+    <text x="132" y="72" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f766e">
+      <tspan x="132" dy="0">Resultant = 4 N</tspan>
+      <tspan x="132" dy="26">points to the right</tspan>
     </text>
   </g>
 </svg>
+
