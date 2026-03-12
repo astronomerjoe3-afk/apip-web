@@ -593,9 +593,12 @@ function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
 }
 
 function shortAnswerAccepted(item: UnknownRecord): string[] {
-  const accepted = asList(item.accepted_answers).map((entry) => text(entry)).filter(Boolean);
+  const accepted = [...asList(item.accepted_answers), ...asList(item.acceptedAnswers)]
+    .map((entry) => text(entry))
+    .filter(Boolean);
+  const explicitCorrect = text(item.correct_answer || item.correctAnswer).trim();
   const meta = fallbackMeta(item);
-  const values = [...accepted, ...(meta?.acceptedAnswers || []), meta?.correctAnswer || ""]
+  const values = [...accepted, explicitCorrect, ...(meta?.acceptedAnswers || []), meta?.correctAnswer || ""]
     .map((entry) => text(entry).trim())
     .filter(Boolean);
   return [...new Set(values)];
