@@ -516,6 +516,19 @@ function choiceLabel(item: UnknownRecord, answer: unknown): string | null {
 
 function teachingFocus(prompt: string, title: string): string {
   const source = `${title} ${prompt}`.toLowerCase();
+  if (source.includes("work") || (source.includes("force") && source.includes("distance"))) return "Work is energy transferred by a force only when the object moves in the force direction.";
+  if (source.includes("kinetic energy")) return "Kinetic energy depends on mass and speed, and speed matters more strongly because it is squared.";
+  if (source.includes("gravitational potential energy") || source.includes("gpe") || (source.includes("lifted") && source.includes("height"))) return "Gravitational potential energy depends on mass, gravitational field strength, and height above the reference level.";
+  if (source.includes("efficiency") || (source.includes("useful output") && source.includes("input"))) return "Efficiency compares useful output with total input, so it is about how much of the transfer is useful, not how fast it happens.";
+  if (source.includes("power")) return "Power compares how quickly energy is transferred or work is done.";
+  if (source.includes("impulse") || source.includes("force-time") || source.includes("force time")) return "Impulse equals force multiplied by time, and it matches the change in momentum.";
+  if (source.includes("momentum")) {
+    if (source.includes("conservation") || source.includes("collision") || source.includes("stick together") || source.includes("system")) {
+      return "Conservation of momentum is a whole-system rule that works when external forces are negligible during the interaction.";
+    }
+    return "Momentum equals mass multiplied by velocity, so it must keep both size and direction.";
+  }
+  if (source.includes("airbag") || source.includes("crumple") || source.includes("braking") || source.includes("stopping time") || source.includes("injury risk")) return "Safer stopping comes from increasing the stopping time so the same momentum change needs a smaller average force.";
   if (source.includes("unit")) return "A scientific measurement needs both a number and a unit.";
   if (source.includes("prefix") || source.includes("kilo") || source.includes("centi") || source.includes("milli")) return "Prefixes change the size of the base unit, so conversions must keep the scale consistent.";
   if (source.includes("distance-time") || source.includes("distance time graph") || (source.includes("slope") && source.includes("distance"))) return "On a distance-time graph, slope shows speed and a flat section means the object is stopped.";
@@ -534,6 +547,20 @@ function teachingFocus(prompt: string, title: string): string {
 
 function misconceptionTag(prompt: string): string | undefined {
   const source = prompt.toLowerCase();
+  if (source.includes("work") || (source.includes("force") && source.includes("distance"))) return "work_energy_transfer_confusion";
+  if (source.includes("kinetic energy")) return "kinetic_energy_relationship_error";
+  if (source.includes("gravitational potential energy") || source.includes("gpe") || (source.includes("lifted") && source.includes("height"))) return "gravitational_potential_energy_error";
+  if (source.includes("efficiency") || (source.includes("useful output") && source.includes("input"))) return "efficiency_calculation_error";
+  if (source.includes("power")) return "power_rate_confusion";
+  if (source.includes("impulse") || source.includes("force-time") || source.includes("force time")) return "impulse_force_time_confusion";
+  if (source.includes("momentum")) {
+    if (source.includes("conservation") || source.includes("collision") || source.includes("stick together") || source.includes("system")) {
+      return "momentum_conservation_confusion";
+    }
+    return "momentum_vector_confusion";
+  }
+  if (source.includes("airbag") || source.includes("crumple") || source.includes("stopping time") || source.includes("injury risk")) return "collision_safety_reasoning_confusion";
+  if (source.includes("braking")) return "braking_energy_comparison_confusion";
   if (source.includes("unit") || source.includes("measurement")) return "unit_as_label_only";
   if (source.includes("prefix") || source.includes("kilo") || source.includes("centi") || source.includes("milli")) return "prefix_scale_error";
   if (source.includes("distance") || source.includes("displacement") || source.includes("average speed") || source.includes("journey")) return "distance_displacement_confusion";
@@ -548,6 +575,22 @@ function misconceptionTag(prompt: string): string | undefined {
   if (source.includes("precision") || source.includes("uncertainty") || source.includes("trust") || source.includes("ruler") || source.includes("caliper")) return "precision_trust_error";
   return undefined;
 }
+
+function resolvedMisconceptionTag(item: UnknownRecord, prompt: string): string | undefined {
+  const explicit = text(item.misconception_tag).trim();
+  if (explicit) return explicit;
+
+  const listed = asList(item.misconception_tags)
+    .map((entry) => text(entry).trim())
+    .find(Boolean);
+  if (listed) return listed;
+
+  const meta = fallbackMeta(item);
+  if (meta?.misconceptionTag) return meta.misconceptionTag;
+
+  return misconceptionTag(prompt);
+}
+
 
 function resolvedAnswerIndex(item: UnknownRecord): number {
   const itemId = text(item.id);
@@ -639,7 +682,7 @@ function grade(item: UnknownRecord, answer: unknown, title: string): UnknownReco
       ? answerIndex === resolvedAnswerIndex(item)
       : shortAnswerMatches(answer, acceptedAnswers, item);
   const explanation = resolvedExplanation(item, answerIndex);
-  const focus = meta?.teachingFocus || teachingFocus(prompt, title);
+  const focus = meta?.teachingFocus || text(item.hint) || teachingFocus(prompt, title);
   const explanationFallback = isCorrect
     ? `Correct. ${resolvedCorrectAnswer(item)} is right because ${focus.charAt(0).toLowerCase()}${focus.slice(1)}`
     : focus;
@@ -651,7 +694,7 @@ function grade(item: UnknownRecord, answer: unknown, title: string): UnknownReco
     correct_answer: resolvedCorrectAnswer(item),
     explanation: hasMeaningfulFeedback(explanation) ? explanation : explanationFallback,
     teaching_focus: focus,
-    misconception_tag: isCorrect ? undefined : meta?.misconceptionTag || misconceptionTag(prompt),
+    misconception_tag: isCorrect ? undefined : resolvedMisconceptionTag(item, prompt),
   };
 }
 
@@ -2650,12 +2693,14 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
   const code = lessonCode(lesson);
   const workedExample = scaffoldWorkedExample(lesson);
-  const repairTeachingFocus = dedupeText(repairs.map((item) => text(item.teaching_focus)).filter(Boolean)).slice(0, 2);
-  const teachingFocus = code.startsWith("F2_") || code.startsWith("F3_")
-    ? dedupeText([
-        ...repairTeachingFocus,
-        ...scaffoldTeachingFocusBullets(code),
-      ]).slice(0, 4)
+  const repairTeachingFocus = dedupeText(repairs.map((item) => text(item.teaching_focus)).filter(Boolean)).slice(0, 3);
+  const teachingFocus = code.startsWith("F3_")
+    ? (repairTeachingFocus.length > 0 ? repairTeachingFocus : scaffoldTeachingFocusBullets(code).slice(0, 4))
+    : code.startsWith("F2_")
+      ? dedupeText([
+          ...repairTeachingFocus,
+          ...scaffoldTeachingFocusBullets(code),
+        ]).slice(0, 4)
     : dedupeText([
         ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
         ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
