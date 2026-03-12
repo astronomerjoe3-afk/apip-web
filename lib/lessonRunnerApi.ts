@@ -784,8 +784,14 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
       return [
         mcItem("F2-L3-X1", "A horizontal section on a distance-time graph shows that the object is...", ["speeding up", "stopped", "moving backwards", "accelerating negatively"], 1, "If the distance does not change, the object is not moving.", "A horizontal section means the distance stays constant, so the object is stopped."),
         shortItem("F2-L3-X2", "A graph rises by 18 m in 6 s on one straight section. What speed does that section show?", ["3 m/s"], "Use slope = distance change / time change for that section."),
-        mcItem("F2-L3-X3", "Which section of a distance-time graph shows the greater speed?", ["the steeper straight section", "the flatter straight section", "the horizontal section", "all sections show the same speed"], 0, "Steeper slope means greater speed on a distance-time graph.", "The steeper straight section represents the greater speed."),
-        mcItem("F2-L3-X4", "If a distance-time graph becomes less steep later, what does that mean?", ["the object is moving faster", "the object is moving slower", "the object must be moving backwards", "the object has zero distance"], 1, "A smaller slope means a smaller speed.", "A less-steep section means the speed is smaller later."),
+        mcItem("F2-L3-X3", "If the graph is at 24 m when t = 6 s, what does 24 m mean?", ["the speed at 6 s is 24 m/s", "the total distance covered by 6 s is 24 m", "the object has 24 s left to move", "the acceleration is 24 m/s^2"], 1, "Read the graph height as distance, not speed.", "The graph height tells you the total distance covered by that time, so 24 m means 24 m has been covered by 6 s."),
+        mcItem("F2-L3-X4", "Two straight sections have the same steepness. What does that mean?", ["the object stopped in both sections", "the object moved with the same speed in both sections", "the object moved backwards in one section", "the object had zero distance in both sections"], 1, "Equal slope means equal speed on a distance-time graph.", "The same steepness means the same speed because slope represents speed."),
+        mcItem("F2-L3-X5", "If a distance-time graph becomes less steep later, what does that mean?", ["the object is moving faster", "the object is moving slower", "the object must be moving backwards", "the object has zero distance"], 1, "A smaller slope means a smaller speed.", "A less-steep section means the speed is smaller later."),
+        shortItem("F2-L3-X6", "A graph is flat from 3 s to 7 s. For how long is the object stopped?", ["4 s", "4"], "Use the time interval covered by the flat section."),
+        mcItem("F2-L3-X7", "Which section of a distance-time graph shows the greater speed?", ["the steeper straight section", "the flatter straight section", "the horizontal section", "all sections show the same speed"], 0, "Steeper slope means greater speed on a distance-time graph.", "The steeper straight section represents the greater speed."),
+        mcItem("F2-L3-X8", "Why does a flat section not mean the object is moving backwards?", ["Because time is not changing", "Because the distance stays unchanged while time still passes", "Because the graph has become vertical", "Because the speed must be negative"], 1, "A flat line means no change in distance.", "A flat section means the distance is staying the same while time passes, so the object is stationary rather than moving backwards."),
+        mcItem("F2-L3-X9", "A straight distance-time graph keeps the same slope for the whole interval. The object is...", ["speeding up", "stopping and starting", "moving at constant speed", "moving backwards"], 2, "A constant slope means the speed stays the same.", "If the slope stays the same, the object is moving at constant speed."),
+        mcItem("F2-L3-X10", "Which statement about a distance-time graph is correct?", ["A higher point always means a greater speed", "Slope shows speed, while graph height shows distance covered", "A flat section means the object moves backward", "A steeper line means less distance is added each second"], 1, "Keep graph height and slope doing different jobs.", "Slope tells you the speed, while the graph height tells you how much distance has been covered by that time."),
       ];
     case "F2_L4":
       return [
@@ -955,7 +961,9 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
-  const baseItems = generated.length > 0 ? [...generated, ...fallback] : [...fallback];
+  const baseItems = generated.length >= MASTERY_DEFAULT_MAX
+    ? [...generated]
+    : generated.length > 0 ? [...generated, ...fallback] : [...fallback];
   const ordered = baseItems.length >= MASTERY_DEFAULT_MAX ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
   return ordered.filter((item) => {
     const record = asRecord(item);
