@@ -977,47 +977,46 @@ function scaffoldFocusExtras(code: string): string[] {
 
     case "F2_L1":
       return [
-        "Distance is the whole path length, while displacement is the start-to-finish change with direction.",
-        "Average speed compares total distance with total time.",
-        "A return journey can increase the distance without increasing the displacement by the same amount.",
-        "Speed is scalar, but displacement keeps direction.",
+        "Do not subtract stages until you have checked whether the question asks for distance or displacement.",
+        "A round trip can have a large distance but zero displacement.",
+        "Average speed must use the whole journey, not just the fastest stage.",
+        "Keep direction words with displacement and velocity answers.",
       ];
     case "F2_L2":
       return [
-        "Velocity is speed with direction.",
-        "Acceleration compares the change in velocity with the time taken.",
-        "The sign of acceleration depends on the chosen positive direction.",
-        "Acceleration can be positive, negative, or zero.",
+        "Work with final velocity minus initial velocity before you divide by time.",
+        "A negative acceleration is about direction relative to the sign convention, not automatically about slowing down.",
+        "Changing direction changes velocity even when the speed stays the same.",
+        "State the chosen positive direction before you interpret the sign.",
       ];
     case "F2_L3":
       return [
-        "On a distance-time graph, slope shows speed.",
-        "A steeper section means a greater speed.",
-        "A flat section means the distance is not changing, so the object is stopped.",
-        "Changing slope tells a changing motion story.",
+        "The height of a distance-time graph is distance, but the slope tells the speed.",
+        "Compare segments separately instead of judging the whole graph by its overall shape.",
+        "A flat section means the object is stopped, not moving backwards.",
+        "Changing steepness means the speed is changing.",
       ];
     case "F2_L4":
       return [
-        "On a velocity-time graph, slope shows acceleration.",
-        "The area under the graph shows displacement in one-direction motion.",
-        "A horizontal line above zero shows constant positive velocity.",
-        "A downward slope shows negative acceleration in the chosen sign convention.",
+        "Do not confuse slope with area because they answer different questions from the same graph.",
+        "A horizontal line can have zero acceleration and still produce a non-zero displacement.",
+        "Positive and negative velocity affect the sign of the displacement, not just its size.",
+        "Check the time interval before you calculate either slope or area.",
       ];
     case "F2_L5":
       return [
-        "Resultant force compares all the pushes and pulls acting along the same line.",
-        "Equal opposite forces balance to zero resultant force.",
-        "Zero resultant force means no change in velocity, not necessarily rest.",
-        "An unbalanced force leaves a resultant in the direction of the larger force.",
+        "Forces cancel only when they are equal and opposite.",
+        "Zero resultant force means zero acceleration, not zero velocity.",
+        "Subtract opposite forces but add forces that act in the same direction.",
+        "Keep the direction of the larger side when the forces are unequal.",
       ];
     case "F2_L6":
       return [
-        "F = ma links resultant force, mass, and acceleration.",
-        "For the same mass, a larger force gives a larger acceleration.",
-        "For the same force, a larger mass gives a smaller acceleration.",
-        "Inertia is the tendency to resist changes in motion.",
+        "Use the resultant force in F = ma, not just one force from the diagram.",
+        "If force doubles with mass fixed, acceleration doubles.",
+        "If mass doubles with force fixed, acceleration halves.",
+        "Inertia is not an extra force; it is the resistance to motion change.",
       ];
-
     default:
       return [];
   }
@@ -1073,47 +1072,94 @@ function scaffoldCoreBullets(code: string): string[] {
 
     case "F2_L1":
       return [
-        "Distance measures the full journey length.",
-        "Displacement measures the net change from start to finish with direction.",
-        "Average speed = total distance / total time.",
-        "A quantity can be scalar or vector depending on whether direction is required.",
+        "Distance adds every part of the route, even when the traveller doubles back.",
+        "Displacement connects the starting point to the finishing point and must keep direction.",
+        "Average speed uses the total distance and the total time for the whole journey.",
+        "A round trip can have a large distance and zero displacement.",
       ];
     case "F2_L2":
       return [
-        "Velocity needs both size and direction.",
-        "Acceleration = change in velocity / time.",
-        "A velocity can change because the speed changes, the direction changes, or both.",
-        "Signs in motion questions depend on the chosen positive direction.",
+        "Velocity is a vector, so either speed change or direction change can alter it.",
+        "Acceleration measures the rate of change of velocity, not just how fast something is moving.",
+        "Use final velocity minus initial velocity before dividing by time.",
+        "Interpret the sign only after choosing a positive direction.",
       ];
     case "F2_L3":
       return [
-        "Distance-time graphs show how total distance changes with time.",
-        "Slope on a distance-time graph represents speed.",
-        "Flat sections represent a stop.",
-        "Steeper sections represent faster motion.",
+        "A distance-time graph shows how total distance changes across the journey.",
+        "The slope of each segment gives the speed on that segment.",
+        "A flat segment means no change in distance, so the object is stationary.",
+        "Changing steepness means the speed is changing.",
       ];
     case "F2_L4":
       return [
-        "Velocity-time graphs show how velocity changes with time.",
-        "Slope on a velocity-time graph represents acceleration.",
-        "Area under a velocity-time graph represents displacement.",
-        "Constant velocity appears as a horizontal line.",
+        "A velocity-time graph shows how velocity changes with time.",
+        "Slope gives acceleration, while area gives displacement.",
+        "A horizontal line can mean constant non-zero velocity even though acceleration is zero.",
+        "Positive and negative regions carry direction, not just size.",
       ];
     case "F2_L5":
       return [
-        "Resultant force is the overall force left after combining forces.",
-        "Balanced forces mean zero resultant force.",
-        "Zero resultant force means no change in velocity.",
-        "Unbalanced forces cause acceleration in the direction of the resultant force.",
+        "Resultant force is the net force left after combining all forces with direction.",
+        "Balanced forces give zero resultant force.",
+        "Zero resultant force means zero acceleration, so the motion stays unchanged.",
+        "Unbalanced forces cause acceleration in the direction of the resultant.",
       ];
     case "F2_L6":
       return [
-        "Force, mass, and acceleration are linked by F = ma.",
-        "Larger resultant force gives larger acceleration when mass stays fixed.",
-        "Larger mass gives smaller acceleration when force stays fixed.",
-        "Inertia explains why objects resist sudden changes in motion.",
+        "F = ma connects the size of the resultant force to the acceleration it produces.",
+        "Mass resists changes in motion, so a larger mass lowers the acceleration for the same force.",
+        "Force and acceleration change together when mass stays fixed.",
+        "Inertia explains why heavier systems are harder to speed up or slow down.",
       ];
-
+    default:
+      return [];
+  }
+}
+function scaffoldTeachingFocusBullets(code: string): string[] {
+  switch (code) {
+    case "F2_L1":
+      return [
+        "Distance adds every stage of the route, but displacement only compares the finish with the start.",
+        "A journey can have a large distance and a small or zero displacement when parts of the route cancel.",
+        "Average speed uses the total distance and total time for the whole trip.",
+        "Direction matters for displacement and velocity, but not for distance and speed.",
+      ];
+    case "F2_L2":
+      return [
+        "Velocity is a vector, so changing direction can change velocity even if the speed stays constant.",
+        "Acceleration depends on the signed change in velocity over time.",
+        "Always calculate final velocity minus initial velocity before interpreting the sign.",
+        "Negative acceleration points opposite the chosen positive direction; it does not automatically mean slowing down.",
+      ];
+    case "F2_L3":
+      return [
+        "Read a distance-time graph segment by segment because each segment can tell a different speed story.",
+        "Speed comes from slope, not from the graph height.",
+        "Horizontal sections show stops because the distance is not changing.",
+        "Changing steepness shows changing speed across the journey.",
+      ];
+    case "F2_L4":
+      return [
+        "A velocity-time graph can answer two different questions from the same shape: slope for acceleration and area for displacement.",
+        "A horizontal line can show zero acceleration while still building displacement.",
+        "The sign of velocity affects the sign of displacement, not just its size.",
+        "Check both the time interval and the graph feature you need before calculating.",
+      ];
+    case "F2_L5":
+      return [
+        "Resultant force is the net force left after direction is taken into account.",
+        "Balanced forces mean zero resultant force and therefore zero acceleration.",
+        "Zero resultant force can mean rest or constant velocity because both involve no change in motion.",
+        "When forces are unbalanced, the acceleration points with the resultant force.",
+      ];
+    case "F2_L6":
+      return [
+        "F = ma links the cause of motion change to its effect: resultant force produces acceleration.",
+        "For a fixed mass, more force gives more acceleration.",
+        "For a fixed force, more mass gives less acceleration because the system resists motion change more strongly.",
+        "Inertia is not an extra force; it is the tendency to resist changes in motion.",
+      ];
     default:
       return [];
   }
@@ -1209,7 +1255,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F2_L1":
       return {
-        body: "Separate the full route from the start-to-finish change, then state both answers clearly.",
+        body: "Separate the full route from the start-to-finish change before you compare any numbers.",
         worked_example: {
           prompt: "A learner walks 10 m east and then 4 m west. Find the distance travelled and the displacement.",
           steps: [
@@ -1220,16 +1266,77 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           ],
           answer: "Distance = 14 m, displacement = 6 m east.",
         },
-      };    case "F2_L2":
-      return { body: "Use the signed change in velocity before you decide the sign of the acceleration.", worked_example: { prompt: "Velocity changes from 12 m/s forward to 4 m/s forward in 2 s. What is the acceleration?", steps: ["Start with acceleration = change in velocity / time.", "The change in velocity is 4 - 12 = -8 m/s because the object ends with less forward velocity.", "Divide by the time: -8 / 2 = -4 m/s^2.", "The negative sign means the acceleration points opposite the chosen positive direction."], answer: "Acceleration = -4 m/s^2." } };
+      };
+    case "F2_L2":
+      return {
+        body: "Track the signed change in velocity first, then decide what the sign of the acceleration means.",
+        worked_example: {
+          prompt: "A cyclist moving east slows from 12 m/s to 4 m/s in 2 s. Take east as positive. Find the acceleration and interpret its sign.",
+          steps: [
+            "Write the relationship first: acceleration = change in velocity / time.",
+            "Use the sign convention in the question, so the initial velocity is +12 m/s and the final velocity is +4 m/s.",
+            "Calculate the change in velocity: 4 - 12 = -8 m/s, then divide by 2 s to get -4 m/s^2.",
+            "The negative sign shows that the acceleration points west, opposite the chosen positive direction.",
+          ],
+          answer: "Acceleration = -4 m/s^2, so the acceleration points west.",
+        },
+      };
     case "F2_L3":
-      return { body: "Read a distance-time graph one segment at a time instead of guessing from the whole picture.", worked_example: { prompt: "A straight distance-time graph rises 18 m in 6 s. What is the speed on that segment?", steps: ["On a distance-time graph, speed comes from the slope.", "For one straight segment, slope = distance change / time change.", "Calculate 18 / 6 = 3.", "Keep the speed unit with the answer."], answer: "Speed = 3 m/s." } };
+      return {
+        body: "Read one segment at a time so the slope tells the speed on that part of the journey.",
+        worked_example: {
+          prompt: "On a distance-time graph, one straight segment rises from 6 m at 2 s to 18 m at 6 s. Find the speed on that segment.",
+          steps: [
+            "Use the two points from the same straight segment rather than the whole graph.",
+            "Calculate the distance change: 18 - 6 = 12 m.",
+            "Calculate the time change: 6 - 2 = 4 s, then use slope = distance change / time change.",
+            "12 / 4 = 3, so the segment shows a constant speed of 3 m/s.",
+          ],
+          answer: "Speed = 3 m/s.",
+        },
+      };
     case "F2_L4":
-      return { body: "Use the same graph in two ways: slope for acceleration and area for displacement.", worked_example: { prompt: "An object moves at a constant velocity of 4 m/s for 5 s. What displacement is shown on the velocity-time graph?", steps: ["For constant velocity, the graph area is a rectangle.", "Rectangle area = velocity x time.", "Calculate 4 x 5 = 20.", "That area gives the displacement while the velocity stays positive."], answer: "Displacement = 20 m." } };
+      return {
+        body: "Use slope and area separately so the same graph section can tell you both motion change and motion gained.",
+        worked_example: {
+          prompt: "A velocity-time graph shows a horizontal section at 4 m/s lasting 5 s. Find the displacement for that section and state the acceleration.",
+          steps: [
+            "A horizontal section means the velocity stays constant, so its slope is zero.",
+            "Zero slope on a velocity-time graph means zero acceleration for that section.",
+            "Displacement comes from the area under the graph; here the area is a rectangle.",
+            "Area = velocity x time = 4 x 5 = 20, so the object gains 20 m of displacement.",
+          ],
+          answer: "Displacement = 20 m and acceleration = 0 m/s^2.",
+        },
+      };
     case "F2_L5":
-      return { body: "Combine opposite forces first, then decide whether the motion can change.", worked_example: { prompt: "A trolley has 10 N to the right and 6 N to the left. What is the resultant force?", steps: ["The forces act in opposite directions, so subtract the smaller from the larger.", "10 - 6 = 4.", "Keep the direction of the larger force, which is to the right.", "A non-zero resultant force means the trolley can accelerate."], answer: "Resultant force = 4 N to the right." } };
+      return {
+        body: "Combine the forces first, then use the resultant to decide whether the motion can change.",
+        worked_example: {
+          prompt: "A cart is pulled with 10 N to the right and 6 N to the left. Find the resultant force and predict the motion change.",
+          steps: [
+            "The forces act in opposite directions, so compare them rather than adding their sizes.",
+            "Subtract the smaller force from the larger one: 10 - 6 = 4 N.",
+            "Keep the direction of the larger force, so the resultant force is 4 N to the right.",
+            "Because the resultant is not zero, the cart accelerates to the right.",
+          ],
+          answer: "Resultant force = 4 N to the right, so the cart accelerates to the right.",
+        },
+      };
     case "F2_L6":
-      return { body: "Link force and mass before you decide how large the acceleration can be.", worked_example: { prompt: "A 12 N resultant force acts on a 3 kg trolley. What is the acceleration?", steps: ["Use the relationship a = F / m.", "Substitute the values: 12 / 3.", "Calculate the ratio to get 4.", "Write the acceleration unit with the answer."], answer: "Acceleration = 4 m/s^2." } };
+      return {
+        body: "Use F = ma for the calculation, then reason about how changing the mass would alter the response.",
+        worked_example: {
+          prompt: "A 12 N resultant force acts on a 3 kg trolley. Find the acceleration and explain what happens if the mass doubles.",
+          steps: [
+            "Start with a = F / m because the question gives the resultant force and the mass.",
+            "Substitute the values: a = 12 / 3 = 4 m/s^2.",
+            "Now imagine the mass doubling to 6 kg while the force stays 12 N.",
+            "The new acceleration would be 12 / 6 = 2 m/s^2, so doubling the mass halves the acceleration.",
+          ],
+          answer: "Acceleration = 4 m/s^2; if the mass doubles, the acceleration becomes 2 m/s^2.",
+        },
+      };
     default:
       return {
         body: "Start with a real question and solve it step by step.",
@@ -1646,14 +1753,12 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
   const code = lessonCode(lesson);
   const workedExample = scaffoldWorkedExample(lesson);
-  const teachingFocus = code === "F2_L1"
+  const repairTeachingFocus = dedupeText(repairs.map((item) => text(item.teaching_focus)).filter(Boolean)).slice(0, 2);
+  const teachingFocus = code.startsWith("F2_")
     ? dedupeText([
-        ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
-        "Distance totals the full route travelled.",
-        "Displacement compares the finishing point with the starting point and keeps direction.",
-        "A return section can increase distance while reducing or cancelling displacement.",
-        "Average speed = total distance / total time for the whole journey.",
-      ])
+        ...repairTeachingFocus,
+        ...scaffoldTeachingFocusBullets(code),
+      ]).slice(0, 4)
     : dedupeText([
         ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
         ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
