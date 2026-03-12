@@ -119,6 +119,10 @@ type SimulationStagePayload = {
   embed_url?: string;
   interaction_key?: string;
   task_prompt?: string;
+  explore_steps?: string[];
+  watch_for?: string[];
+  try_first?: string;
+  takeaway?: string;
   completion_text?: string;
 };
 
@@ -569,7 +573,7 @@ export default function LessonRunner({
       /_L6$/.test(runner.lesson_id.replace(/-/g, "_").toUpperCase());
 
     if (isFinalModuleWrapUp) return false;
-    return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic";
+    return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic" && runner.active_stage !== "simulation";
   }, [canGoNextLesson, runner]);
 
   const restartCopy = useMemo(() => {
@@ -596,7 +600,7 @@ export default function LessonRunner({
       case "concept_gate":
         return "One quick check before the activity.";
       case "simulation":
-        return "Test the idea.";
+        return "Change one thing at a time, watch what changes, and explain the pattern you notice.";
       case "reflection":
         return "Explain the idea in your own words.";
       case "mastery":
@@ -1093,6 +1097,12 @@ export default function LessonRunner({
   const renderSimulation = () => {
     const payload = runner.stage_payload as SimulationStagePayload;
     const simulationLessonKey = runner.lesson_id.replace(/-/g, "_").toUpperCase();
+    const hasStructuredGuidance = Boolean(
+      (payload.explore_steps?.length ?? 0) ||
+      (payload.watch_for?.length ?? 0) ||
+      payload.try_first ||
+      payload.takeaway
+    );
     const simulationToolConfig = {
       ruler: { label: "Ruler", step: 0.1, uncertainty: "+/- 0.05 cm", spread: 0.12 },
       caliper: { label: "Caliper", step: 0.01, uncertainty: "+/- 0.005 cm", spread: 0.03 },
@@ -1194,7 +1204,37 @@ export default function LessonRunner({
               <span className="font-medium">Your task:</span> {payload.task_prompt}
             </div>
           ) : null}
+          {payload.try_first ? (
+            <div className="mt-4 rounded-xl border border-sky-200 bg-sky-50 p-4 text-sky-950">
+              <span className="font-medium">Try this first:</span> {payload.try_first}
+            </div>
+          ) : null}
         </div>
+
+        {hasStructuredGuidance ? (
+          <div className="rounded-2xl border bg-white p-5 shadow-sm">
+            <h4 className="text-base font-semibold text-slate-900">How to use this explorer</h4>
+            {payload.explore_steps?.length ? (
+              <ol className="mt-3 space-y-2 text-sm text-slate-700">
+                {payload.explore_steps.map((step, index) => (
+                  <li key={`${step}-${index}`}>
+                    <span className="font-medium text-slate-900">Step {index + 1}:</span> {step}
+                  </li>
+                ))}
+              </ol>
+            ) : null}
+            {payload.watch_for?.length ? (
+              <div className="mt-4 text-sm text-slate-700">
+                <span className="font-semibold text-slate-900">Watch for:</span> {payload.watch_for.join(" ")}
+              </div>
+            ) : null}
+            {payload.takeaway ? (
+              <div className="mt-4 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-900">
+                <span className="font-medium">What this should show:</span> {payload.takeaway}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
 
         {payload.embed_url ? (
           <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
@@ -1475,7 +1515,184 @@ export default function LessonRunner({
               <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Pattern:</span> {simBias < 12 ? "Accurate" : "Biased"}, {simSpread < 18 ? "Precise" : "Spread out"}</div>
             </div>
           </div>
-        ) : (
+
+        ) : simulationLessonKey.startsWith("F2_") ? (() => {
+          if (simulationLessonKey === "F2_L1") {
+            const outward = Math.max(4, simMetricMeters);
+            const returnDistance = Math.max(0, Math.min(simVectorMagnitude, outward));
+            const travelTime = Math.max(2, simVectorAngle);
+            const distance = outward + returnDistance;
+            const displacement = outward - returnDistance;
+            const averageSpeed = distance / travelTime;
+            const finishLabel = displacement > 0 ? formatSimulationNumber(displacement, 1) + " m east" : displacement < 0 ? formatSimulationNumber(Math.abs(displacement), 1) + " m west" : "back at the start";
+            return (
+              <div style={simulationPanelGridStyle}>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Journey builder</h4>
+                  <p className="mt-2 text-slate-700">Build an outward path, add a return path, and compare the whole route with the net change.</p>
+                  <label className="mt-4 block text-sm text-slate-700">Outward distance (m)<input className="mt-2 w-full" type="range" min="4" max="20" step="1" value={outward} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Return distance (m)<input className="mt-2 w-full" type="range" min="0" max="20" step="1" value={simVectorMagnitude} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Travel time (s)<input className="mt-2 w-full" type="range" min="2" max="20" step="1" value={travelTime} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+                </div>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Distance versus displacement</h4>
+                  <svg viewBox="0 0 280 120" role="img" aria-label="Journey line" className="mt-4 h-40 w-full rounded-2xl bg-slate-50 p-4">
+                    <line x1="28" y1="66" x2="252" y2="66" stroke="#cbd5e1" strokeWidth="6" strokeLinecap="round" />
+                    <line x1="40" y1="48" x2={40 + outward * 8} y2="48" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
+                    <line x1={40 + outward * 8} y1="84" x2={40 + (outward - returnDistance) * 8} y2="84" stroke="#0f766e" strokeWidth="8" strokeLinecap="round" />
+                    <text x="40" y="28" fontSize="12" fill="#2563eb">Outward path</text>
+                    <text x="40" y="110" fontSize="12" fill="#0f766e">Return path</text>
+                  </svg>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Distance:</span> {formatSimulationNumber(distance, 1)} m</div>
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Displacement:</span> {finishLabel}</div>
+                    <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Average speed:</span> {formatSimulationNumber(averageSpeed, 2)} m/s</div>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          if (simulationLessonKey === "F2_L2") {
+            const startVelocity = simVectorMagnitude;
+            const endVelocity = simVectorAngle;
+            const interval = Math.max(1, simMetricMeters);
+            const acceleration = (endVelocity - startVelocity) / interval;
+            const signLabel = acceleration > 0.01 ? "Positive" : acceleration < -0.01 ? "Negative" : "Zero";
+            return (
+              <div style={simulationPanelGridStyle}>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Acceleration controls</h4>
+                  <label className="mt-4 block text-sm text-slate-700">Start velocity (m/s)<input className="mt-2 w-full" type="range" min="0" max="20" step="1" value={startVelocity} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">End velocity (m/s)<input className="mt-2 w-full" type="range" min="0" max="20" step="1" value={endVelocity} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Time interval (s)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={interval} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                </div>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Velocity change view</h4>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Change in velocity:</span> {formatSimulationNumber(endVelocity - startVelocity, 1)} m/s</div>
+                    <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Acceleration:</span> {formatSimulationNumber(acceleration, 2)} m/s^2</div>
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Sign:</span> {signLabel}</div>
+                  </div>
+                  <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">Positive acceleration means the velocity is increasing in the chosen positive direction. Negative acceleration means the change points the other way.</div>
+                </div>
+              </div>
+            );
+          }
+          if (simulationLessonKey === "F2_L3") {
+            const speedA = Math.max(1, simVectorMagnitude);
+            const pauseTime = Math.max(0, simMetricMeters);
+            const speedB = Math.max(1, simVectorAngle);
+            const d1 = speedA * 4;
+            const d2 = speedB * 4;
+
+            return (
+              <div style={simulationPanelGridStyle}>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Distance-time graph builder</h4>
+                  <label className="mt-4 block text-sm text-slate-700">First section speed (m/s)<input className="mt-2 w-full" type="range" min="1" max="8" step="1" value={speedA} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Pause time (s)<input className="mt-2 w-full" type="range" min="0" max="6" step="1" value={pauseTime} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Second section speed (m/s)<input className="mt-2 w-full" type="range" min="1" max="8" step="1" value={speedB} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+                </div>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Graph story</h4>
+                  <svg viewBox="0 0 280 180" role="img" aria-label="Distance time graph" className="mt-4 h-44 w-full rounded-2xl bg-slate-50 p-3">
+                    <polyline fill="none" stroke="#2563eb" strokeWidth="6" points={`24,144 84,${144 - d1 * 3} 84,${144 - d1 * 3} ${84 + pauseTime * 18},${144 - d1 * 3} 204,${144 - (d1 + d2) * 3}`} />
+                    <line x1="24" y1="144" x2="252" y2="144" stroke="#94a3b8" strokeWidth="2" />
+                    <line x1="24" y1="18" x2="24" y2="144" stroke="#94a3b8" strokeWidth="2" />
+                  </svg>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">First slope:</span> {speedA} m/s</div>
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Flat section:</span> {pauseTime} s stopped</div>
+                    <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Second slope:</span> {speedB} m/s</div>
+                  </div>
+                  <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">Steeper sections are faster. The flat section means the distance stayed unchanged for {pauseTime} s.</div>
+                </div>
+              </div>
+            );
+          }
+          if (simulationLessonKey === "F2_L4") {
+            const startVelocity = simVectorMagnitude;
+            const endVelocity = simVectorAngle;
+            const duration = Math.max(1, simMetricMeters);
+            const acceleration = (endVelocity - startVelocity) / duration;
+            const displacement = ((startVelocity + endVelocity) / 2) * duration;
+            return (
+              <div style={simulationPanelGridStyle}>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Velocity-time controls</h4>
+                  <label className="mt-4 block text-sm text-slate-700">Start velocity (m/s)<input className="mt-2 w-full" type="range" min="0" max="12" step="1" value={startVelocity} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">End velocity (m/s)<input className="mt-2 w-full" type="range" min="0" max="12" step="1" value={endVelocity} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Time interval (s)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={duration} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                </div>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Slope and area view</h4>
+                  <svg viewBox="0 0 280 180" role="img" aria-label="Velocity time graph" className="mt-4 h-44 w-full rounded-2xl bg-slate-50 p-3">
+                    <polygon points={`24,144 24,${144 - startVelocity * 10} 204,${144 - endVelocity * 10} 204,144`} fill="rgba(125,211,252,0.45)" />
+                    <polyline points={`24,${144 - startVelocity * 10} 204,${144 - endVelocity * 10}`} fill="none" stroke="#0f766e" strokeWidth="6" />
+                    <line x1="24" y1="144" x2="252" y2="144" stroke="#94a3b8" strokeWidth="2" />
+                    <line x1="24" y1="18" x2="24" y2="144" stroke="#94a3b8" strokeWidth="2" />
+                  </svg>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Acceleration:</span> {formatSimulationNumber(acceleration, 2)} m/s^2</div>
+                    <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Displacement:</span> {formatSimulationNumber(displacement, 1)} m</div>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          if (simulationLessonKey === "F2_L5") {
+            const leftForce = simVectorMagnitude;
+            const rightForce = simVectorAngle;
+            const resultant = rightForce - leftForce;
+            const motionText = Math.abs(resultant) < 0.01 ? "No change in velocity: rest or constant velocity." : resultant > 0 ? "Unbalanced to the right: velocity changes rightward." : "Unbalanced to the left: velocity changes leftward.";
+            return (
+              <div style={simulationPanelGridStyle}>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Force balance controls</h4>
+                  <label className="mt-4 block text-sm text-slate-700">Left force (N)<input className="mt-2 w-full" type="range" min="0" max="12" step="1" value={leftForce} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Right force (N)<input className="mt-2 w-full" type="range" min="0" max="12" step="1" value={rightForce} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+                </div>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Resultant force</h4>
+                  <svg viewBox="0 0 280 120" role="img" aria-label="Opposing force arrows" className="mt-4 h-36 w-full rounded-2xl bg-slate-50 p-4">
+                    <line x1="140" y1="60" x2={140 - leftForce * 9} y2="60" stroke="#f97316" strokeWidth="8" strokeLinecap="round" />
+                    <line x1="140" y1="84" x2={140 + rightForce * 9} y2="84" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
+                    <text x="28" y="48" fontSize="12" fill="#f97316">Left pull</text>
+                    <text x="178" y="106" fontSize="12" fill="#2563eb">Right pull</text>
+                  </svg>
+                  <div className="mt-4 rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Resultant:</span> {Math.abs(resultant) < 0.01 ? "0 N" : `${formatSimulationNumber(Math.abs(resultant), 1)} N ${resultant > 0 ? "right" : "left"}`}</div>
+                  <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">{motionText}</div>
+                </div>
+              </div>
+            );
+          }
+          if (simulationLessonKey === "F2_L6") {
+            const force = simVectorMagnitude;
+            const mass = Math.max(1, simMetricMeters);
+            const acceleration = force / mass;
+            const doubledForceAcceleration = (force * 2) / mass;
+            const doubledMassAcceleration = force / (mass * 2);
+            return (
+              <div style={simulationPanelGridStyle}>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">F = ma controls</h4>
+                  <label className="mt-4 block text-sm text-slate-700">Resultant force (N)<input className="mt-2 w-full" type="range" min="2" max="20" step="1" value={force} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                  <label className="mt-4 block text-sm text-slate-700">Mass (kg)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={mass} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                </div>
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <h4 className="text-lg font-semibold text-slate-900">Acceleration comparison</h4>
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Current:</span> {formatSimulationNumber(acceleration, 2)} m/s^2</div>
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Double force:</span> {formatSimulationNumber(doubledForceAcceleration, 2)} m/s^2</div>
+                    <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Double mass:</span> {formatSimulationNumber(doubledMassAcceleration, 2)} m/s^2</div>
+                  </div>
+                  <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">With the same mass, more force gives more acceleration. With the same force, more mass gives less acceleration.</div>
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })() : (
           <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">Use the task above to test the idea with a few examples before you continue.</div>
         )}
 

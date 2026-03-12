@@ -893,12 +893,12 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F1_L5": return "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result.";
     case "F1_L4": return "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division.";
     case "F1_L3": return "Use the live tool bench: choose an object, switch instruments, and compare the reading detail, repeated-reading spread, and zero error.";
-    case "F2_L1": return "Change the outward path, return path, and travel time. Compare total distance, net displacement, and average speed.";
-    case "F2_L2": return "Adjust the starting velocity, ending velocity, and time interval to see how the sign and size of acceleration change.";
-    case "F2_L3": return "Change each segment of the trip and watch how the slope of the graph shows the speed in each part.";
-    case "F2_L4": return "Use the same graph to compare slope and area. Slope shows acceleration, and area shows displacement in one-direction motion.";
-    case "F2_L5": return "Pull from the left and the right, then compare the balanced case with the unbalanced case.";
-    case "F2_L6": return "Change force or mass and compare how the acceleration responds.";
+    case "F2_L1": return "Build one journey and read three different ideas from it: total distance, net displacement, and average speed over the whole trip.";
+    case "F2_L2": return "Compare the starting velocity and ending velocity over a chosen time interval, then connect the sign and size of acceleration to the change in velocity.";
+    case "F2_L3": return "Build a moving-stopped-moving journey and read the story from the distance-time graph by matching each segment to what the traveller is doing.";
+    case "F2_L4": return "Use one velocity-time graph to answer two different questions: the slope gives acceleration, and the area under the graph gives displacement.";
+    case "F2_L5": return "Compare equal and unequal opposing forces so you can separate the balanced case from the case that produces acceleration.";
+    case "F2_L6": return "Hold one variable steady while you change the other so you can see clearly how force and mass affect acceleration.";
     default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
   }
 }
@@ -908,16 +908,136 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F1_L5": return "Find one setup that floats and one that sinks, then explain which density comparison changed.";
     case "F1_L4": return "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes.";
     case "F1_L3": return "Try one object that suits a ruler and one that needs a finer tool, then test a zero-error offset and explain how it would mislead the reading if you forgot to correct it.";
-    case "F2_L1": return "Find one journey where the distance is much larger than the displacement, then explain why.";
-    case "F2_L2": return "Create one positive acceleration example and one negative acceleration example.";
-    case "F2_L3": return "Make one steeper segment and one flatter segment, then explain which part is faster.";
-    case "F2_L4": return "Choose one setup and explain both the acceleration and the displacement from the same graph.";
-    case "F2_L5": return "Build one balanced-force case and one unbalanced-force case, then compare the result.";
-    case "F2_L6": return "Double the force or double the mass and explain which change affects acceleration more in your setup.";
+    case "F2_L1": return "Create one round trip with zero displacement and one trip with a long distance but small displacement, then explain how the same journey can produce both results.";
+    case "F2_L2": return "Build one case with positive acceleration, one with negative acceleration, and one with zero acceleration. Explain each sign from the velocity change, not from a guess.";
+    case "F2_L3": return "Make a graph with a steep section, a flat section, and a less-steep section, then explain what the traveller is doing in each part.";
+    case "F2_L4": return "Choose one setup and explain both the acceleration and the displacement from the same graph without mixing up slope and area.";
+    case "F2_L5": return "Create one balanced-force case and one unbalanced-force case, then explain what each case says about acceleration and motion.";
+    case "F2_L6": return "Start with one force-mass pair, then compare what happens when you double the force and when you double the mass.";
     default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
   }
 }
 
+function simulationStageExploreSteps(code: string): string[] {
+  switch (code) {
+    case "F2_L1":
+      return [
+        "Start with no return path so distance and displacement are the same, then add a return path and compare the change.",
+        "Keep the outward path fixed while you increase the return path to see which quantity follows the full route and which quantity follows the finishing point.",
+        "Change the travel time only, then decide which quantity changes because time changed and which two do not.",
+      ];
+    case "F2_L2":
+      return [
+        "Keep the time interval fixed and make the end velocity larger than the start velocity.",
+        "Reverse that pattern so the end velocity is smaller than the start velocity.",
+        "Match the start and end velocities to test the zero-acceleration case.",
+      ];
+    case "F2_L3":
+      return [
+        "Choose a first speed and notice the slope of the first segment.",
+        "Add a pause and identify the flat section where distance stops changing.",
+        "Change the second speed and compare which segment is steeper and therefore faster.",
+      ];
+    case "F2_L4":
+      return [
+        "Pick a start velocity, end velocity, and time interval for one motion.",
+        "Read the slope of the line as the acceleration by comparing the velocity change over the time.",
+        "Read the shaded area under the graph as the displacement and compare it with the slope result.",
+      ];
+    case "F2_L5":
+      return [
+        "Make both forces equal to test the balanced case first.",
+        "Increase one side to create a non-zero resultant force.",
+        "Swap which side is larger and see how the direction of the resultant changes.",
+      ];
+    case "F2_L6":
+      return [
+        "Keep the mass fixed and increase the force so you can compare the acceleration directly.",
+        "Reset, then keep the force fixed and increase the mass.",
+        "Compare the ratios so you can describe the pattern, not just one number.",
+      ];
+    default:
+      return [];
+  }
+}
+function simulationStageWatchFor(code: string): string[] {
+  switch (code) {
+    case "F2_L1":
+      return [
+        "Distance adds every part of the route.",
+        "Displacement compares the finishing point with the starting point and keeps direction.",
+        "Average speed uses total distance divided by total time for the whole journey.",
+      ];
+    case "F2_L2":
+      return [
+        "Acceleration comes from final velocity minus initial velocity, divided by time.",
+        "The sign tells you the direction of the velocity change relative to the chosen positive direction.",
+        "Negative acceleration does not automatically mean slowing down in every situation.",
+      ];
+    case "F2_L3":
+      return [
+        "The slope of a distance-time graph tells you the speed.",
+        "A flat section means the traveller is stopped, not moving backward.",
+        "The graph height is distance from the start, not speed.",
+      ];
+    case "F2_L4":
+      return [
+        "Slope and area come from the same graph but answer different questions.",
+        "Slope gives acceleration.",
+        "Area under the graph gives displacement.",
+      ];
+    case "F2_L5":
+      return [
+        "Equal and opposite forces give zero resultant force.",
+        "Zero resultant force means zero acceleration, not automatically zero velocity.",
+        "The direction of the resultant follows the larger side when the forces are unequal.",
+      ];
+    case "F2_L6":
+      return [
+        "Acceleration is proportional to force when mass stays fixed.",
+        "Acceleration is inversely related to mass when force stays fixed.",
+        "The force in F = ma is the resultant force, not just any one force in a diagram.",
+      ];
+    default:
+      return [];
+  }
+}
+function simulationStageTryFirst(code: string): string | undefined {
+  switch (code) {
+    case "F2_L1":
+      return "Try outward 12 m, return 10 m, and time 4 s. You should get 22 m distance, 2 m east displacement, and 5.5 m/s average speed.";
+    case "F2_L2":
+      return "Try start velocity 4 m/s, end velocity 12 m/s, and time 2 s. The acceleration should be +4 m/s^2.";
+    case "F2_L3":
+      return "Try first speed 2 m/s, pause 3 s, and second speed 6 m/s. The final segment should be steeper than the first, and the middle should be flat.";
+    case "F2_L4":
+      return "Try start velocity 2 m/s, end velocity 8 m/s, and time 4 s. The acceleration is 1.5 m/s^2 and the displacement is 20 m.";
+    case "F2_L5":
+      return "Try 5 N left and 9 N right. The resultant force is 4 N to the right, so the motion changes rightward.";
+    case "F2_L6":
+      return "Try 8 N and 4 kg first. Then double the force to 16 N and compare it with doubling the mass to 8 kg.";
+    default:
+      return undefined;
+  }
+}
+function simulationStageTakeaway(code: string): string | undefined {
+  switch (code) {
+    case "F2_L1":
+      return "One journey can cover a long route yet finish close to the start, so distance and displacement are not interchangeable.";
+    case "F2_L2":
+      return "Acceleration tells the story of how velocity changes, including direction, not just whether an object feels faster.";
+    case "F2_L3":
+      return "Distance-time graphs become clear when you read each segment as part of a motion story.";
+    case "F2_L4":
+      return "A velocity-time graph is powerful because one feature tells you acceleration and another tells you displacement.";
+    case "F2_L5":
+      return "Balanced forces do not create acceleration; only a non-zero resultant force changes motion.";
+    case "F2_L6":
+      return "More resultant force produces more acceleration, while more mass makes the same force less effective.";
+    default:
+      return undefined;
+  }
+}
 function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Promise<unknown> {
   return apipPost<unknown, JsonObject>(`/progress/${encodeURIComponent(moduleId)}/event`, {
     ...body,
@@ -2009,6 +2129,10 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
       title: simulationStageTitle(simulationCode),
       instructions: simulationStageInstructions(simulationCode, inquiry),
       task_prompt: simulationStageTaskPrompt(simulationCode, inquiry),
+      explore_steps: simulationStageExploreSteps(simulationCode),
+      watch_for: simulationStageWatchFor(simulationCode),
+      try_first: simulationStageTryFirst(simulationCode),
+      takeaway: simulationStageTakeaway(simulationCode),
       completion_text: "I have finished exploring this activity",
     };
   }
