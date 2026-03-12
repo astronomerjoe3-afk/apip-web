@@ -1642,6 +1642,66 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           highlights: ["State the measurement", "State the uncertainty", "Match the claim to the instrument"],
         },
       ];
+    case "F2_L1":
+      return [
+        {
+          kind: "visual",
+          title: "Map the route and the arrow",
+          caption: "See the full travel path and the straight displacement arrow at the same time.",
+          image_url: "/lesson-media/f2/f2-l1-distance-displacement.svg",
+          highlights: ["Distance follows every segment of the path", "Displacement joins start to finish with one direction arrow", "A return leg can increase distance while shrinking displacement"],
+        },
+      ];
+    case "F2_L2":
+      return [
+        {
+          kind: "visual",
+          title: "Compare the velocity arrows",
+          caption: "Look at the starting and finishing velocity arrows before deciding what the acceleration must be.",
+          image_url: "/lesson-media/f2/f2-l2-velocity-acceleration.svg",
+          highlights: ["Velocity keeps direction", "Acceleration comes from the change in velocity", "The sign depends on the chosen positive direction"],
+        },
+      ];
+    case "F2_L3":
+      return [
+        {
+          kind: "visual",
+          title: "Read the graph like a journey",
+          caption: "Use the steep, flat, and shallow parts of the graph to tell the motion story segment by segment.",
+          image_url: "/lesson-media/f2/f2-l3-distance-time-graph.svg",
+          highlights: ["Steeper segment = faster motion", "Flat segment = stopped", "Each segment can tell a different speed story"],
+        },
+      ];
+    case "F2_L4":
+      return [
+        {
+          kind: "visual",
+          title: "See slope and area together",
+          caption: "The same velocity-time graph can show acceleration from slope and displacement from area.",
+          image_url: "/lesson-media/f2/f2-l4-velocity-time-graph.svg",
+          highlights: ["Slope answers how velocity changes", "Area answers how much displacement builds up", "Horizontal sections can still have non-zero displacement"],
+        },
+      ];
+    case "F2_L5":
+      return [
+        {
+          kind: "visual",
+          title: "Picture balanced and unbalanced pulls",
+          caption: "Compare equal opposite pulls with unequal pulls to see when a resultant force remains.",
+          image_url: "/lesson-media/f2/f2-l5-resultant-force.svg",
+          highlights: ["Equal opposite forces cancel", "Unequal forces leave a resultant", "The resultant points with the larger side"],
+        },
+      ];
+    case "F2_L6":
+      return [
+        {
+          kind: "visual",
+          title: "Same push, different mass",
+          caption: "Compare a light and heavy trolley under the same force to see why the lighter one accelerates more.",
+          image_url: "/lesson-media/f2/f2-l6-force-mass.svg",
+          highlights: ["The same force can produce different accelerations", "More mass means more resistance to motion change", "F = ma links force, mass, and acceleration"],
+        },
+      ];
     default: {
       const code = lessonCode(lesson);
       if (code.startsWith("F2_")) {
