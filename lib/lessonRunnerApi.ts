@@ -1283,45 +1283,45 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
   switch (code) {
     case "F2_L1":
       return [
-        "Distance adds every stage of the route, but displacement only compares the finish with the start.",
-        "A journey can have a large distance and a small or zero displacement when parts of the route cancel.",
-        "Average speed uses the total distance and total time for the whole trip.",
-        "Direction matters for displacement and velocity, but not for distance and speed.",
+        "Distance counts route length, so every stage adds to it even if later motion partly cancels the position change.",
+        "Displacement compares the finishing position with the starting position, so only the net change and its direction matter.",
+        "Average speed uses total distance over total time, so you need whole-journey totals rather than a quick average of stage speeds.",
+        "Direction is what makes displacement and velocity vectors, so east or west must stay in the final answer while distance and speed do not need direction words.",
       ];
     case "F2_L2":
       return [
-        "Velocity is a vector, so changing direction can change velocity even if the speed stays constant.",
-        "Acceleration depends on the signed change in velocity over time.",
-        "Always calculate final velocity minus initial velocity before interpreting the sign.",
-        "Negative acceleration points opposite the chosen positive direction; it does not automatically mean slowing down.",
+        "Velocity can change because speed changes or because direction changes, which is why turning motion still has changing velocity.",
+        "Acceleration is the rate of change of velocity, so it tracks how quickly the velocity vector changes each second.",
+        "Choose a positive direction first and keep the signs on the initial and final velocities before subtracting.",
+        "To decide whether motion speeds up or slows down, compare the directions of velocity and acceleration; a negative sign alone does not decide it.",
       ];
     case "F2_L3":
       return [
-        "Read a distance-time graph segment by segment because each segment can tell a different speed story.",
-        "Speed comes from slope, not from the graph height.",
-        "Horizontal sections show stops because the distance is not changing.",
-        "Changing steepness shows changing speed across the journey.",
+        "Read the axes first: the graph shows total distance against time, so graph height tells how much distance has been covered by that time.",
+        "Speed comes from slope because slope tells how much distance is added each second, not how high the graph sits.",
+        "A flat section means distance is unchanged while time passes, so the object is stationary during that interval.",
+        "Different segments can represent different speeds, so interpret the graph one stage at a time before summarizing the whole journey.",
       ];
     case "F2_L4":
       return [
-        "A velocity-time graph can answer two different questions from the same shape: slope for acceleration and area for displacement.",
-        "A horizontal line can show zero acceleration while still building displacement.",
-        "The sign of velocity affects the sign of displacement, not just its size.",
-        "Check both the time interval and the graph feature you need before calculating.",
+        "On a velocity-time graph, the vertical value is velocity at that instant, including direction relative to the chosen sign convention.",
+        "Slope answers the acceleration question because it shows how quickly velocity changes with time.",
+        "Area under the graph answers the displacement question because it adds velocity over time, with sign included.",
+        "A horizontal line can still mean motion if the velocity is non-zero, while negative sections show motion opposite to the chosen positive direction.",
       ];
     case "F2_L5":
       return [
-        "Resultant force is the net force left after direction is taken into account.",
-        "Balanced forces mean zero resultant force and therefore zero acceleration.",
-        "Zero resultant force can mean rest or constant velocity because both involve no change in motion.",
-        "When forces are unbalanced, the acceleration points with the resultant force.",
+        "Resultant force is the vector sum of all forces, so direction must be included before adding or subtracting.",
+        "Balanced forces mean zero resultant force and therefore zero acceleration, not automatically zero velocity.",
+        "With zero resultant force, motion stays unchanged: the object can remain at rest or continue at constant velocity.",
+        "When forces are unbalanced, the acceleration points in the direction of the resultant force.",
       ];
     case "F2_L6":
       return [
-        "F = ma links the cause of motion change to its effect: resultant force produces acceleration.",
-        "For a fixed mass, more force gives more acceleration.",
-        "For a fixed force, more mass gives less acceleration because the system resists motion change more strongly.",
-        "Inertia is not an extra force; it is the tendency to resist changes in motion.",
+        "F = ma says resultant force causes acceleration, so the law is about changing motion rather than speed alone.",
+        "The force in the equation must be the net force after all forces are combined, not just one force copied from the diagram.",
+        "For the same force, a larger mass gives less acceleration because mass measures resistance to motion change.",
+        "For a fixed mass, acceleration increases with force; for a fixed force, acceleration decreases as mass increases.",
       ];
     default:
       return [];

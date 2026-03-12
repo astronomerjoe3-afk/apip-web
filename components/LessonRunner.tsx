@@ -70,6 +70,13 @@ type ScaffoldMediaCard = {
   interaction_key?: string;
 };
 
+type TeachingFocusCard = {
+  title: string;
+  detail: string;
+  why_it_matters?: string;
+  think_check?: string;
+};
+
 type ScaffoldSection = {
   heading: string;
   body: string;
@@ -87,6 +94,7 @@ type ScaffoldStagePayload = {
   intro?: string;
   teaching_focus?: string[];
   misconception_targets?: string[];
+  teaching_focus_cards?: TeachingFocusCard[];
   reference_tables?: ScaffoldReferenceTable[];
   media_cards?: ScaffoldMediaCard[];
   sections: ScaffoldSection[];
@@ -761,7 +769,10 @@ export default function LessonRunner({
     const isMediaStep = clampedScaffoldStepIndex >= mediaStart && clampedScaffoldStepIndex < sectionStart;
     const isSectionStep = clampedScaffoldStepIndex >= sectionStart;
 
-    const scaffoldFocusItems = payload.teaching_focus?.slice(0, 4) ?? [];
+    const scaffoldFocusCards = payload.teaching_focus_cards?.slice(0, 4) ?? [];
+    const scaffoldFocusItems = scaffoldFocusCards.length > 0
+      ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
+      : payload.teaching_focus?.slice(0, 4) ?? [];
     return (
       <div className="space-y-6">
         {isIntroStep ? (
@@ -907,7 +918,7 @@ export default function LessonRunner({
             <h4 className="text-lg font-semibold text-slate-900">{section.heading === "Fix these ideas" && !payload.misconception_targets?.length ? "What this lesson will sharpen" : section.heading}</h4>
             {section.heading === "Fix these ideas" ? (
               <div className="mt-3 space-y-4">
-                <p className="text-slate-700">{payload.misconception_targets?.length ? "Focus on these ideas as you move through the next activities." : "Your opening check was fairly strong. Use this lesson to sharpen these ideas before the next check."}</p>
+                <p className="text-slate-700">{payload.misconception_targets?.length ? "Focus on these deeper explanations as you move through the next activities." : "Your opening check was fairly strong. Use this lesson to deepen the meaning behind these ideas before the next check."}</p>
                 {scaffoldFocusItems.length ? (
                   <div className="grid gap-3 sm:grid-cols-2">
                     {scaffoldFocusItems.map((item) => (
