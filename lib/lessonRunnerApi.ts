@@ -681,7 +681,16 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 }
 
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
-  switch (lessonCode(lesson)) {
+  const code = lessonCode(lesson);
+  if (code.startsWith("F2_")) {
+    const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
+      .map(asRecord)
+      .filter((item) => hasUsableMasteryAnswer(item));
+    const f2Variants = masteryVariantsFromPool(f2Base.slice(0, 3), code).map(asRecord);
+    return [...f2Base, ...f2Variants, ...supplementalMasteryItems(lesson)].slice(0, 8);
+  }
+
+  switch (code) {
     case "F1_L1":
       return [
         mcItem("F1-L1-M1", "Why do SI units matter in science?", ["They make numbers look larger", "They give measurements a shared standard", "They remove all uncertainty", "They replace calculations"], 1, "Think about communication and consistency.", "SI units let scientists compare measurements using the same standard."),
@@ -965,6 +974,50 @@ function scaffoldFocusExtras(code: string): string[] {
         "A set of readings can be precise without being accurate, and accurate without being very precise.",
         "Trustworthy measurements balance good technique, suitable tools, and honest uncertainty.",
       ];
+
+    case "F2_L1":
+      return [
+        "Distance is the whole path length, while displacement is the start-to-finish change with direction.",
+        "Average speed compares total distance with total time.",
+        "A return journey can increase the distance without increasing the displacement by the same amount.",
+        "Speed is scalar, but displacement keeps direction.",
+      ];
+    case "F2_L2":
+      return [
+        "Velocity is speed with direction.",
+        "Acceleration compares the change in velocity with the time taken.",
+        "The sign of acceleration depends on the chosen positive direction.",
+        "Acceleration can be positive, negative, or zero.",
+      ];
+    case "F2_L3":
+      return [
+        "On a distance-time graph, slope shows speed.",
+        "A steeper section means a greater speed.",
+        "A flat section means the distance is not changing, so the object is stopped.",
+        "Changing slope tells a changing motion story.",
+      ];
+    case "F2_L4":
+      return [
+        "On a velocity-time graph, slope shows acceleration.",
+        "The area under the graph shows displacement in one-direction motion.",
+        "A horizontal line above zero shows constant positive velocity.",
+        "A downward slope shows negative acceleration in the chosen sign convention.",
+      ];
+    case "F2_L5":
+      return [
+        "Resultant force compares all the pushes and pulls acting along the same line.",
+        "Equal opposite forces balance to zero resultant force.",
+        "Zero resultant force means no change in velocity, not necessarily rest.",
+        "An unbalanced force leaves a resultant in the direction of the larger force.",
+      ];
+    case "F2_L6":
+      return [
+        "F = ma links resultant force, mass, and acceleration.",
+        "For the same mass, a larger force gives a larger acceleration.",
+        "For the same force, a larger mass gives a smaller acceleration.",
+        "Inertia is the tendency to resist changes in motion.",
+      ];
+
     default:
       return [];
   }
@@ -1168,6 +1221,16 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           answer: "Distance = 14 m, displacement = 6 m east.",
         },
       };
+    case "F2_L2":
+      return { body: "Use the signed change in velocity before you decide the sign of the acceleration.", worked_example: { prompt: "Velocity changes from 12 m/s forward to 4 m/s forward in 2 s. What is the acceleration?", steps: ["Start with acceleration = change in velocity / time.", "The change in velocity is 4 - 12 = -8 m/s because the object ends with less forward velocity.", "Divide by the time: -8 / 2 = -4 m/s^2.", "The negative sign means the acceleration points opposite the chosen positive direction."], answer: "Acceleration = -4 m/s^2." } };
+    case "F2_L3":
+      return { body: "Read a distance-time graph one segment at a time instead of guessing from the whole picture.", worked_example: { prompt: "A straight distance-time graph rises 18 m in 6 s. What is the speed on that segment?", steps: ["On a distance-time graph, speed comes from the slope.", "For one straight segment, slope = distance change / time change.", "Calculate 18 / 6 = 3.", "Keep the speed unit with the answer."], answer: "Speed = 3 m/s." } };
+    case "F2_L4":
+      return { body: "Use the same graph in two ways: slope for acceleration and area for displacement.", worked_example: { prompt: "An object moves at a constant velocity of 4 m/s for 5 s. What displacement is shown on the velocity-time graph?", steps: ["For constant velocity, the graph area is a rectangle.", "Rectangle area = velocity x time.", "Calculate 4 x 5 = 20.", "That area gives the displacement while the velocity stays positive."], answer: "Displacement = 20 m." } };
+    case "F2_L5":
+      return { body: "Combine opposite forces first, then decide whether the motion can change.", worked_example: { prompt: "A trolley has 10 N to the right and 6 N to the left. What is the resultant force?", steps: ["The forces act in opposite directions, so subtract the smaller from the larger.", "10 - 6 = 4.", "Keep the direction of the larger force, which is to the right.", "A non-zero resultant force means the trolley can accelerate."], answer: "Resultant force = 4 N to the right." } };
+    case "F2_L6":
+      return { body: "Link force and mass before you decide how large the acceleration can be.", worked_example: { prompt: "A 12 N resultant force acts on a 3 kg trolley. What is the acceleration?", steps: ["Use the relationship a = F / m.", "Substitute the values: 12 / 3.", "Calculate the ratio to get 4.", "Write the acceleration unit with the answer."], answer: "Acceleration = 4 m/s^2." } };
     default:
       return {
         body: "Start with a real question and solve it step by step.",
@@ -1356,8 +1419,14 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
           ],
         },
       ];
-    default:
+    default: {
+      const code = lessonCode(lesson);
+      if (code.startsWith("F2_")) {
+        const essentials = [...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].filter(Boolean);
+        return [{ title: "Lesson essentials", caption: "Keep these key motion or force ideas visible while you work through the lesson.", columns: ["Key idea", "Why it matters"], rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]) }];
+      }
       return [];
+    }
   }
 }
 
@@ -1467,15 +1536,39 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           highlights: ["State the measurement", "State the uncertainty", "Match the claim to the instrument"],
         },
       ];
-    default:
+    default: {
+      const code = lessonCode(lesson);
+      if (code.startsWith("F2_")) {
+        const core = scaffoldCoreBullets(code);
+        const focus = scaffoldFocusExtras(code);
+        return [
+          { kind: "visual", title: "Concept snapshot", caption: core[0] || "Use the main rule from this lesson before you answer.", highlights: core.slice(1, 4) },
+          { kind: "visual", title: "What to watch for", caption: focus[0] || "Watch the main comparison in this lesson carefully.", highlights: focus.slice(1, 4) },
+        ];
+      }
       return [];
+    }
   }
 }
 
 
 
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
-  switch (lessonCode(lesson)) {
+  const code = lessonCode(lesson);
+  if (code.startsWith("F2_")) {
+    const core = scaffoldCoreBullets(code);
+    const focus = scaffoldFocusExtras(code);
+    return [
+      { heading: "Fix these ideas", body: repairText },
+      { heading: "Core idea", body: core.slice(0, 2).join(" ") || "Use the main motion or force rule before you calculate or classify anything." },
+      { heading: "How to reason through it", body: core.slice(2).join(" ") || focus.slice(0, 2).join(" "), check_for_understanding: "Which quantity, graph feature, or force comparison matters most before you answer?" },
+      { heading: "Common trap", body: focus.join(" ") || "Slow down and check the sign, direction, and meaning of each quantity before deciding." },
+      { heading: "Think of it like this", body: analogyText || "Use the model from this lesson to compare the whole situation before you choose a formula or answer." },
+      { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+    ];
+  }
+
+  switch (code) {
     case "F1_L1":
       return [
         { heading: "Fix these ideas", body: repairText },
