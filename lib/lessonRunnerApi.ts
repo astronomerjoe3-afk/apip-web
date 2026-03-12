@@ -335,6 +335,7 @@ function normalizeOpenAnswer(value: unknown): string {
     .replace(/meters?/g, "m")
     .replace(/kilograms?/g, "kg")
     .replace(/grams?/g, "g")
+    .replace(/m\/s\/s/g, "m/s^2")
     .replace(/[^a-z0-9.+\-^/]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
