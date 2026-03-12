@@ -54,7 +54,7 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6"];
 
 type FallbackAnswerMeta = {
   id: string;
@@ -689,7 +689,7 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  if (code.startsWith("F2_")) {
+  if (code.startsWith("F2_") || code.startsWith("F3_")) {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
       .filter((item) => hasUsableMasteryAnswer(item));
@@ -828,6 +828,48 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
         mcItem("F2-L6-X8", "Why is a heavier trolley harder to accelerate with the same push?", ["A larger mass gives a smaller acceleration for the same force", "A larger mass removes the force", "A larger mass always makes acceleration negative", "A larger mass changes the units of force"], 0, "Mass resists changes in motion.", "A heavier trolley is harder to accelerate because a larger mass gives less acceleration for the same force."),
         mcItem("F2-L6-X9", "What does inertia describe?", ["resistance to changes in motion", "the force that always makes objects speed up", "the area under a graph", "the unit of acceleration"], 0, "Inertia is not an extra force; it is a property of matter.", "Inertia describes resistance to changes in motion."),
         mcItem("F2-L6-X10", "If a trolley's mass doubles and you want the same acceleration, what must happen to the resultant force?", ["It must double", "It must halve", "It must stay the same", "It must reverse direction"], 0, "Rearrange F = ma and keep the acceleration fixed.", "If the mass doubles and the acceleration is to stay the same, the resultant force must double."),
+      ];
+    case "F3_L1":
+      return [
+        mcItem("F3-L1-X1", "Which situation definitely involves work being done on an object?", ["A box moves in the direction of the push", "A wall is pushed but never moves", "A book rests on a desk", "A force is mentioned without movement"], 0, "Work needs movement in the force direction.", "Work is done when a force transfers energy by moving the object in its direction."),
+        shortItem("F3-L1-X2", "A 20 N force pulls a crate 4 m in the same direction. What work is done?", ["80 J"], "Use work = force x distance."),
+        mcItem("F3-L1-X3", "If the object does not move, the work done by that force on the object is...", ["zero", "equal to the force size", "equal to the mass", "always positive"], 0, "No movement means no work by that force.", "Without displacement in the force direction, no work is done on the object."),
+        shortItem("F3-L1-X4", "A force does 120 J of work while moving an object 6 m. What is the force?", ["20 N"], "Rearrange work = force x distance."),
+      ];
+    case "F3_L2":
+      return [
+        mcItem("F3-L2-X1", "If speed doubles while mass stays the same, kinetic energy becomes...", ["twice as large", "four times as large", "six times as large", "unchanged"], 1, "Speed is squared in the kinetic energy formula.", "Doubling speed quadruples kinetic energy because v is squared."),
+        shortItem("F3-L2-X2", "A 2 kg trolley moves at 5 m/s. What is its kinetic energy?", ["25 J"], "Use KE = 0.5mv^2."),
+        mcItem("F3-L2-X3", "A 4 kg bag is lifted 3 m. Take g = 10 N/kg. What gravitational potential energy is gained?", ["30 J", "40 J", "120 J", "240 J"], 2, "Use GPE = mgh.", "4 x 10 x 3 = 120 J."),
+        mcItem("F3-L2-X4", "As an object falls freely, which change is correct?", ["GPE rises while KE falls", "GPE falls while KE rises", "both stay fixed", "both become zero"], 1, "Falling converts gravitational potential energy into kinetic energy.", "As the object falls, gravitational potential energy decreases while kinetic energy increases."),
+      ];
+    case "F3_L3":
+      return [
+        mcItem("F3-L3-X1", "A machine transfers 600 J in 3 s. What is its power?", ["50 W", "100 W", "200 W", "600 W"], 2, "Use power = energy transferred / time.", "600 / 3 = 200 W."),
+        mcItem("F3-L3-X2", "A device takes in 500 J and gives 350 J useful output. What is its efficiency?", ["35%", "50%", "70%", "85%"], 2, "Efficiency = useful output / input x 100%.", "350 / 500 = 70%."),
+        shortItem("F3-L3-X3", "A motor with power 120 W runs for 5 s. How much energy is transferred?", ["600 J"], "Use energy = power x time."),
+        mcItem("F3-L3-X4", "Which statement is true?", ["A process can be powerful without being very efficient", "Power and efficiency always mean the same thing", "Efficiency can be more than 100%", "A slow process must be efficient"], 0, "Power and efficiency describe different ideas.", "A machine can transfer energy quickly yet still waste a large fraction of the input."),
+      ];
+    case "F3_L4":
+      return [
+        mcItem("F3-L4-X1", "A 3 kg trolley moves at 4 m/s east. What is its momentum?", ["7 kg m/s east", "12 kg m/s east", "12 kg m/s", "1 kg m/s east"], 1, "Use momentum = mass x velocity and keep direction.", "3 x 4 = 12 kg m/s east."),
+        shortItem("F3-L4-X2", "A 2 kg trolley moving at 6 m/s sticks to a 4 kg trolley at rest. What common speed do they have afterward?", ["2 m/s"], "Use conservation of momentum for the whole system."),
+        mcItem("F3-L4-X3", "Two equal trolleys move in opposite directions with equal speed. The total momentum is...", ["zero", "equal to one trolley", "double one trolley", "impossible to tell"], 0, "Equal and opposite momenta cancel in the total.", "Opposite equal momenta give zero total momentum."),
+        mcItem("F3-L4-X4", "Conservation of momentum is most direct when...", ["external forces during the interaction are negligible", "the heavier object always wins", "one object is stationary", "the collision lasts a long time"], 0, "Treat conservation as a whole-system rule for isolated interactions.", "You use conservation most directly when outside forces are negligible during the interaction."),
+      ];
+    case "F3_L5":
+      return [
+        mcItem("F3-L5-X1", "Impulse is equal to...", ["force x time", "force / time", "momentum / time", "mass x acceleration only"], 0, "Impulse is the product of force and time.", "Impulse equals force multiplied by time, and it matches the change in momentum."),
+        shortItem("F3-L5-X2", "A force of 150 N acts for 0.4 s. What impulse is delivered?", ["60 N s", "60 Ns", "60 kg m/s"], "Use impulse = force x time."),
+        mcItem("F3-L5-X3", "If the same momentum change happens over a longer time, the average force is...", ["larger", "smaller", "unchanged", "zero"], 1, "For a fixed impulse, more time means less force.", "The same momentum change spread over longer time gives a smaller average force."),
+        mcItem("F3-L5-X4", "What does the area under a force-time graph represent?", ["velocity", "impulse", "power", "mass"], 1, "Force-time area gives impulse.", "The area represents impulse, which equals the change in momentum."),
+      ];
+    case "F3_L6":
+      return [
+        mcItem("F3-L6-X1", "A 1000 kg car moves at 12 m/s. What is its momentum?", ["1200 kg m/s", "12000 kg m/s", "120000 kg m/s", "6000 kg m/s"], 1, "Use momentum = mass x velocity.", "1000 x 12 = 12000 kg m/s."),
+        mcItem("F3-L6-X2", "If the speed of the same car doubles, its kinetic energy becomes...", ["twice as large", "three times as large", "four times as large", "unchanged"], 2, "Kinetic energy depends on speed squared.", "Doubling speed quadruples kinetic energy."),
+        shortItem("F3-L6-X3", "A car changes momentum by 6000 kg m/s in 0.3 s. What average force acts?", ["20000 N"], "Use force = change in momentum / time."),
+        mcItem("F3-L6-X4", "Why does a crumple zone reduce injury risk?", ["It removes mass", "It increases stopping time and lowers force", "It increases speed", "It makes kinetic energy disappear instantly"], 1, "Safety features often work by stretching the stop over more time.", "A longer stopping time reduces the average force for the same momentum change."),
       ];
     default:
       return items.flatMap((item, itemIndex) => [
@@ -1037,6 +1079,12 @@ function simulationStageTitle(code: string): string {
     case "F2_L4": return "Velocity-time graph explorer";
     case "F2_L5": return "Resultant force explorer";
     case "F2_L6": return "Force and mass explorer";
+    case "F3_L1": return "Work transfer explorer";
+    case "F3_L2": return "Energy stores explorer";
+    case "F3_L3": return "Power and efficiency explorer";
+    case "F3_L4": return "Momentum system explorer";
+    case "F3_L5": return "Impulse-time explorer";
+    case "F3_L6": return "Braking safety explorer";
     default: return "Simulation inquiry";
   }
 }
@@ -1052,6 +1100,12 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F2_L4": return "Use one velocity-time graph to answer two different questions: the slope gives acceleration, and the area under the graph gives displacement.";
     case "F2_L5": return "Compare equal and unequal opposing forces so you can separate the balanced case from the case that produces acceleration.";
     case "F2_L6": return "Hold one variable steady while you change the other so you can see clearly how force and mass affect acceleration.";
+    case "F3_L1": return "Change force and distance together so work is seen as energy transfer, not just as effort.";
+    case "F3_L2": return "Compare how mass, speed, and height affect kinetic and gravitational potential energy.";
+    case "F3_L3": return "Separate how quickly energy is transferred from how much of the input becomes useful output.";
+    case "F3_L4": return "Track the total momentum before and after a simple collision so conservation is treated as a system rule.";
+    case "F3_L5": return "Compare the same momentum change over different times and read impulse from force-time area.";
+    case "F3_L6": return "Use one braking scenario to compare momentum, kinetic energy, and average stopping force together.";
     default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
   }
 }
@@ -1067,6 +1121,12 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F2_L4": return "Choose one setup and explain both the acceleration and the displacement from the same graph without mixing up slope and area.";
     case "F2_L5": return "Create one balanced-force case and one unbalanced-force case, then explain what each case says about acceleration and motion.";
     case "F2_L6": return "Start with one force-mass pair, then compare what happens when you double the force and when you double the mass.";
+    case "F3_L1": return "Create one moving case and one no-movement case, then explain why only one transfers energy as work.";
+    case "F3_L2": return "Build one comparison where speed matters more than mass, and one where changing height changes the energy store.";
+    case "F3_L3": return "Find one process that is fast but wasteful and another that is slower but more efficient, then explain the difference.";
+    case "F3_L4": return "Create two collisions with different masses and explain how the total momentum controls the shared final motion.";
+    case "F3_L5": return "Keep the momentum change fixed, change the stopping time, and explain why the longer stop is safer.";
+    case "F3_L6": return "Compare a moderate-speed stop with a high-speed stop for the same car, then explain why the faster case is much harder to manage safely.";
     default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
   }
 }
@@ -1108,6 +1168,42 @@ function simulationStageExploreSteps(code: string): string[] {
         "Keep the mass fixed and increase the force so you can compare the acceleration directly.",
         "Reset, then keep the force fixed and increase the mass.",
         "Compare the ratios so you can describe the pattern, not just one number.",
+      ];
+    case "F3_L1":
+      return [
+        "Keep the force fixed and increase the distance to watch work grow in direct proportion.",
+        "Keep the distance fixed and change the force to compare the energy transferred.",
+        "Switch to a zero-movement case and explain why the work becomes zero.",
+      ];
+    case "F3_L2":
+      return [
+        "Hold mass fixed and raise the speed so you can compare the strong change in kinetic energy.",
+        "Reset and raise the mass with the same speed to compare the weaker effect.",
+        "Now raise the height and watch gravitational potential energy change without needing motion.",
+      ];
+    case "F3_L3":
+      return [
+        "Keep the input energy fixed and shorten the time to compare power.",
+        "Keep the input fixed and change the useful output to compare efficiency.",
+        "Compare two cases that look fast but waste different amounts of energy.",
+      ];
+    case "F3_L4":
+      return [
+        "Set the incoming trolley mass and speed first to establish the starting momentum.",
+        "Change the second trolley mass while it starts at rest.",
+        "Compare how the same total momentum is shared after the trolleys stick together.",
+      ];
+    case "F3_L5":
+      return [
+        "Set a momentum change target and calculate the average force for one stopping time.",
+        "Increase the stopping time and compare the new force.",
+        "Read the same idea from the force-time area so the graph and the formula tell one story.",
+      ];
+    case "F3_L6":
+      return [
+        "Keep the mass fixed and raise the speed so you can compare momentum and kinetic energy side by side.",
+        "Now lengthen the stopping time and compare the average force for the same car.",
+        "Use the numbers to explain what safety features are trying to change during a crash.",
       ];
     default:
       return [];
@@ -1151,6 +1247,42 @@ function simulationStageWatchFor(code: string): string[] {
         "Acceleration is inversely related to mass when force stays fixed.",
         "The force in F = ma is the resultant force, not just any one force in a diagram.",
       ];
+    case "F3_L1":
+      return [
+        "Work measures energy transferred by a force.",
+        "A force alone is not enough; movement in the force direction is required.",
+        "For the simple cases in this lesson, work = force x distance moved in the force direction.",
+      ];
+    case "F3_L2":
+      return [
+        "Kinetic energy depends on mass and speed.",
+        "Speed is squared, so doubling speed quadruples kinetic energy.",
+        "Gravitational potential energy depends on mass, g, and height.",
+      ];
+    case "F3_L3":
+      return [
+        "Power is a rate: energy transferred per second.",
+        "Efficiency is a fraction: useful output divided by total input.",
+        "A process can be fast without being efficient.",
+      ];
+    case "F3_L4":
+      return [
+        "Momentum equals mass multiplied by velocity.",
+        "Direction matters because opposite momenta can cancel.",
+        "Use conservation for the whole system when external forces are negligible during the collision.",
+      ];
+    case "F3_L5":
+      return [
+        "Impulse equals force multiplied by time.",
+        "Impulse also equals the change in momentum.",
+        "The same impulse over more time means less average force.",
+      ];
+    case "F3_L6":
+      return [
+        "Momentum rises directly with speed.",
+        "Kinetic energy rises with speed squared.",
+        "Longer stopping time reduces average force for the same momentum change.",
+      ];
     default:
       return [];
   }
@@ -1169,6 +1301,18 @@ function simulationStageTryFirst(code: string): string | undefined {
       return "Try 5 N left and 9 N right. The resultant force is 4 N to the right, so the motion changes rightward.";
     case "F2_L6":
       return "Try 8 N and 4 kg first. Then double the force to 16 N and compare it with doubling the mass to 8 kg.";
+    case "F3_L1":
+      return "Try 20 N over 4 m with movement enabled. The work should be 80 J.";
+    case "F3_L2":
+      return "Try mass 4 kg, speed 6 m/s, and height 3 m. KE should be 72 J and GPE should be 120 J if g = 10 N/kg.";
+    case "F3_L3":
+      return "Try 800 J input, 400 J useful output, and 4 s. The power should be 200 W and the efficiency should be 50%.";
+    case "F3_L4":
+      return "Try incoming mass 2 kg, speed 6 m/s, and second mass 4 kg. The shared speed should be 2 m/s after sticking.";
+    case "F3_L5":
+      return "Try a momentum change of 600 kg m/s over 0.3 s. The average force should be 2000 N.";
+    case "F3_L6":
+      return "Try mass 1000 kg, speed 12 m/s, and stopping time 0.6 s. Momentum should be 12000 kg m/s, KE should be 72000 J, and average stopping force should be 20000 N.";
     default:
       return undefined;
   }
@@ -1187,6 +1331,18 @@ function simulationStageTakeaway(code: string): string | undefined {
       return "Balanced forces do not create acceleration; only a non-zero resultant force changes motion.";
     case "F2_L6":
       return "More resultant force produces more acceleration, while more mass makes the same force less effective.";
+    case "F3_L1":
+      return "Work is the language of energy transfer by forces, so the number tells you how much energy moved into or out of the object.";
+    case "F3_L2":
+      return "Energy can be stored in motion or in position, and the formulas show which physical change matters most in each case.";
+    case "F3_L3":
+      return "Power tells you how fast a process works, while efficiency tells you how much of the input actually achieves the useful job.";
+    case "F3_L4":
+      return "Momentum is a whole-system quantity, so collision reasoning becomes clearer when you total the motion before and after the interaction.";
+    case "F3_L5":
+      return "Impulse explains why stretching a collision over more time can reduce the force even though the total motion change still has to happen.";
+    case "F3_L6":
+      return "High-speed braking is dangerous because both the momentum change and the energy removal become more demanding, and kinetic energy grows especially quickly.";
     default:
       return undefined;
   }
@@ -1290,6 +1446,48 @@ function scaffoldFocusExtras(code: string): string[] {
         "If mass doubles with force fixed, acceleration halves.",
         "Inertia is not an extra force; it is the resistance to motion change.",
       ];
+    case "F3_L1":
+      return [
+        "Work is not the same as effort; it is an energy-transfer quantity.",
+        "In this lesson, only movement in the force direction counts in the simple work calculation.",
+        "No movement means no work is done on the object by that force.",
+        "Interpret the work value as energy transferred, not just as a multiplication result.",
+      ];
+    case "F3_L2":
+      return [
+        "Kinetic energy depends on speed more strongly than mass because speed is squared.",
+        "Gravitational potential energy depends on how high the object is lifted above the reference level.",
+        "The same object can store energy in different ways depending on motion and position.",
+        "Track which variable changed before deciding which store changed.",
+      ];
+    case "F3_L3":
+      return [
+        "Power answers how fast the transfer happens.",
+        "Efficiency answers how much of the input becomes useful output.",
+        "Fast does not automatically mean efficient.",
+        "Efficiency should be reported as a fraction or percentage of the input.",
+      ];
+    case "F3_L4":
+      return [
+        "Momentum keeps direction because velocity keeps direction.",
+        "Total momentum belongs to the system, not to one object alone.",
+        "Conservation works when outside forces are negligible during the interaction.",
+        "Opposite momenta can partly or completely cancel in the total.",
+      ];
+    case "F3_L5":
+      return [
+        "Impulse can be read from a force-time graph as area as well as from force x time.",
+        "The same momentum change can come from many different force-time combinations.",
+        "Longer interaction time reduces force when the impulse is fixed.",
+        "Safer collisions often come from spreading the same change over more time.",
+      ];
+    case "F3_L6":
+      return [
+        "Speed affects momentum and kinetic energy differently, so do not treat them as the same trend.",
+        "A heavier vehicle at the same speed carries more momentum and more kinetic energy.",
+        "Safety features often work by increasing stopping time or stopping distance.",
+        "Braking analysis is strongest when you use both momentum and energy reasoning together.",
+      ];
     default:
       return [];
   }
@@ -1385,6 +1583,48 @@ function scaffoldCoreBullets(code: string): string[] {
         "Force and acceleration change together when mass stays fixed.",
         "Inertia explains why heavier systems are harder to speed up or slow down.",
       ];
+    case "F3_L1":
+      return [
+        "Work = force x distance moved in the force direction.",
+        "Work measures energy transferred by a force.",
+        "No displacement means no work is done on the object by that force.",
+        "Force and distance must be linked to the same interaction.",
+      ];
+    case "F3_L2":
+      return [
+        "Kinetic energy = 0.5mv^2.",
+        "Gravitational potential energy = mgh.",
+        "Speed has a squared effect on kinetic energy.",
+        "Height changes gravitational potential energy directly when g stays fixed.",
+      ];
+    case "F3_L3":
+      return [
+        "Power = energy transferred / time.",
+        "Efficiency = useful output / total input.",
+        "Power is a rate quantity.",
+        "Efficiency compares useful transfer with total transfer.",
+      ];
+    case "F3_L4":
+      return [
+        "Momentum = mass x velocity.",
+        "Momentum needs direction or a sign convention.",
+        "Total system momentum can be conserved in isolated interactions.",
+        "After a collision, compare the whole-system total, not one object by itself.",
+      ];
+    case "F3_L5":
+      return [
+        "Impulse = force x time.",
+        "Impulse = change in momentum.",
+        "Area under a force-time graph gives impulse.",
+        "For a fixed impulse, more time means less average force.",
+      ];
+    case "F3_L6":
+      return [
+        "Momentum changes with speed directly, but kinetic energy changes with speed squared.",
+        "Average stopping force depends on momentum change and stopping time.",
+        "Longer stopping time lowers average force for the same stop.",
+        "Crash safety depends on managing both motion change and energy dissipation.",
+      ];
     default:
       return [];
   }
@@ -1432,6 +1672,48 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
         "The force in the equation must be the net force after all forces are combined, not just one force copied from the diagram.",
         "For the same force, a larger mass gives less acceleration because mass measures resistance to motion change.",
         "For a fixed mass, acceleration increases with force; for a fixed force, acceleration decreases as mass increases.",
+      ];
+    case "F3_L1":
+      return [
+        "Work is the energy transferred by a force, so the quantity only becomes meaningful when you connect the force to an actual displacement in its direction.",
+        "A force can exist without doing work on an object if there is no movement in the force direction during that interaction.",
+        "When the same force acts through a greater distance, more energy is transferred, which is why the work value grows directly with distance.",
+        "Treat the final answer as a statement about energy transfer, not just as a calculator result.",
+      ];
+    case "F3_L2":
+      return [
+        "Kinetic energy belongs to motion, so both mass and speed matter, but speed matters more strongly because it is squared.",
+        "Gravitational potential energy belongs to position in a gravitational field, so the relevant change is height above the chosen reference level.",
+        "When a moving object climbs or falls, energy can move between kinetic and gravitational stores as the situation changes.",
+        "Identify which store the question is asking about before substituting numbers.",
+      ];
+    case "F3_L3":
+      return [
+        "Power and efficiency are often confused because both relate to energy, but power is about rate while efficiency is about useful fraction.",
+        "A machine can be very powerful because it transfers energy quickly while still being inefficient because too much of the input becomes wasted output.",
+        "Efficiency can never exceed 100% because useful output cannot be larger than total input in a real process.",
+        "Decide first whether the question asks how fast the process is or how much of the input is useful.",
+      ];
+    case "F3_L4":
+      return [
+        "Momentum combines how much matter is moving with how fast and in which direction it moves, so direction must stay in the reasoning.",
+        "Conservation of momentum is a system rule: compare the total before and after the interaction rather than tracking one object in isolation.",
+        "Equal and opposite momenta can cancel, which is why zero total momentum does not mean the objects are motionless individually.",
+        "Before using conservation, check that external forces are negligible during the interaction you are analysing.",
+      ];
+    case "F3_L5":
+      return [
+        "Impulse gives a more physical way to discuss collisions because it connects force, interaction time, and momentum change in one relationship.",
+        "The same momentum change can be delivered by a large force acting briefly or a smaller force acting for longer if the impulse is the same.",
+        "A force-time graph is not decorative here: its area is the impulse, so geometry and physics are telling the same story.",
+        "Safety reasoning improves when you stop asking how to remove the momentum change and start asking how to spread it over more time.",
+      ];
+    case "F3_L6":
+      return [
+        "Braking and collisions are not explained well by one formula alone because the vehicle must both change momentum and dissipate kinetic energy.",
+        "Higher speed raises momentum directly, but kinetic energy rises even faster, which is why high-speed braking becomes disproportionately demanding.",
+        "Longer stopping time or distance reduces average force, which is why seatbelts, airbags, and crumple zones matter.",
+        "A complete safety explanation should identify what quantity is changing, what feature increases stopping time, and what that does to force or energy transfer.",
       ];
     default:
       return [];
@@ -1608,6 +1890,90 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             "The new acceleration would be 12 / 6 = 2 m/s^2, so doubling the mass halves the acceleration.",
           ],
           answer: "Acceleration = 4 m/s^2; if the mass doubles, the acceleration becomes 2 m/s^2.",
+        },
+      };
+    case "F3_L1":
+      return {
+        body: "Tie the calculation to an energy-transfer statement so the number has physical meaning.",
+        worked_example: {
+          prompt: "A 20 N force pulls a crate 6 m along the floor in the same direction as the pull. How much work is done, and what does the answer mean?",
+          steps: [
+            "Start with work = force x distance moved in the force direction.",
+            "Substitute the values carefully: work = 20 x 6.",
+            "Calculate the result: work = 120 J.",
+            "Interpret the answer: 120 J means the pulling force transferred 120 J of energy to the crate.",
+          ],
+          answer: "Work = 120 J, meaning 120 J of energy is transferred by the force.",
+        },
+      };
+    case "F3_L2":
+      return {
+        body: "Use the energy-store idea to connect motion and height, not just to plug into one formula.",
+        worked_example: {
+          prompt: "A 2 kg trolley moves at 5 m/s and then climbs a ramp. What kinetic energy does it start with, and what height would have the same amount of gravitational potential energy if g = 10 N/kg?",
+          steps: [
+            "First calculate the kinetic energy: KE = 0.5 x 2 x 5^2 = 25 J.",
+            "Now match that to gravitational potential energy: 2 x 10 x h = 25.",
+            "Solve for the height: h = 25 / 20 = 1.25 m.",
+            "So the same 25 J can appear as gravitational potential energy at 1.25 m.",
+          ],
+          answer: "The trolley starts with 25 J of kinetic energy, which matches a gravitational potential energy gain at 1.25 m.",
+        },
+      };
+    case "F3_L3":
+      return {
+        body: "Solve the rate question and the useful-fraction question separately so the concepts do not blur together.",
+        worked_example: {
+          prompt: "A machine takes in 900 J in 15 s and delivers 540 J as useful output. Find its power and its efficiency.",
+          steps: [
+            "Power compares energy transferred with time, so calculate 900 / 15 = 60 W.",
+            "Efficiency compares useful output with total input, so calculate 540 / 900.",
+            "The fraction is 0.60, which is 60%.",
+            "The machine is transferring energy at 60 W and converting 60% of the input into useful output.",
+          ],
+          answer: "Power = 60 W and efficiency = 60%.",
+        },
+      };
+    case "F3_L4":
+      return {
+        body: "Use conservation on the whole system, then interpret what the shared final motion tells you.",
+        worked_example: {
+          prompt: "A 2 kg trolley moving at 5 m/s hits a 3 kg trolley at rest and they stick together. Find their common speed after the collision.",
+          steps: [
+            "Start with total momentum before the collision: 2 x 5 = 10 kg m/s.",
+            "Because the trolleys stick together, the total mass afterward is 5 kg.",
+            "Use conservation of momentum: 10 = 5v.",
+            "So v = 2 m/s. The same total momentum is now shared by more mass.",
+          ],
+          answer: "The common speed after the collision is 2 m/s.",
+        },
+      };
+    case "F3_L5":
+      return {
+        body: "Connect the force calculation directly to a safety interpretation, not just to the algebra.",
+        worked_example: {
+          prompt: "A cyclist's momentum changes by 240 kg m/s in 0.8 s while braking. Find the average force and explain what would happen if the stopping time doubled.",
+          steps: [
+            "Use force = change in momentum / time for the average force.",
+            "Substitute the values: force = 240 / 0.8 = 300 N.",
+            "Now imagine the same momentum change spread over 1.6 s instead.",
+            "The force would become 240 / 1.6 = 150 N, so doubling the stopping time halves the average force.",
+          ],
+          answer: "Average force = 300 N; if the stopping time doubles, the average force falls to 150 N.",
+        },
+      };
+    case "F3_L6":
+      return {
+        body: "Compare momentum and kinetic energy together so the danger of speed is not reduced to one line.",
+        worked_example: {
+          prompt: "A 1000 kg car increases speed from 10 m/s to 20 m/s. Compare the momentum and kinetic energy in the two cases.",
+          steps: [
+            "Find the first momentum: 1000 x 10 = 10000 kg m/s, then the second: 1000 x 20 = 20000 kg m/s.",
+            "The momentum doubles because speed doubled.",
+            "Now find the kinetic energy: at 10 m/s it is 50000 J, and at 20 m/s it is 200000 J.",
+            "The kinetic energy quadruples, which shows why high-speed braking is much more demanding.",
+          ],
+          answer: "Momentum doubles from 10000 to 20000 kg m/s, while kinetic energy quadruples from 50000 J to 200000 J.",
         },
       };
     default:
@@ -1800,7 +2166,7 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
       ];
     default: {
       const code = lessonCode(lesson);
-      if (code.startsWith("F2_")) {
+      if (code.startsWith("F2_") || code.startsWith("F3_")) {
         const essentials = [...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].filter(Boolean);
         return [{ title: "Lesson essentials", caption: "Keep these key motion or force ideas visible while you work through the lesson.", columns: ["Key idea", "Why it matters"], rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]) }];
       }
@@ -1975,9 +2341,69 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           highlights: ["The same force can produce different accelerations", "More mass means more resistance to motion change", "F = ma links force, mass, and acceleration"],
         },
       ];
+    case "F3_L1":
+      return [
+        {
+          kind: "visual",
+          title: "See work as transferred energy",
+          caption: "Compare a moving crate with a stuck wall so work is tied to motion, not just effort.",
+          image_url: "/lesson-media/f3/f3-l1-work-energy.svg",
+          highlights: ["Movement in the force direction matters", "No movement means no work on the object", "Work is measured in joules because it is energy transferred"],
+        },
+      ];
+    case "F3_L2":
+      return [
+        {
+          kind: "visual",
+          title: "Compare motion energy and height energy",
+          caption: "Use one picture to separate kinetic energy from gravitational potential energy.",
+          image_url: "/lesson-media/f3/f3-l2-energy-stores.svg",
+          highlights: ["Mass matters in both stores", "Speed matters strongly in kinetic energy", "Height matters directly in gravitational potential energy"],
+        },
+      ];
+    case "F3_L3":
+      return [
+        {
+          kind: "visual",
+          title: "Split rate from usefulness",
+          caption: "The same process can be fast, wasteful, both, or neither.",
+          image_url: "/lesson-media/f3/f3-l3-power-efficiency.svg",
+          highlights: ["Power tracks time", "Efficiency tracks useful fraction", "Fast does not automatically mean efficient"],
+        },
+      ];
+    case "F3_L4":
+      return [
+        {
+          kind: "visual",
+          title: "Track total momentum through a collision",
+          caption: "Follow the whole system before and after impact so conservation feels like one continuous story.",
+          image_url: "/lesson-media/f3/f3-l4-momentum-collision.svg",
+          highlights: ["Momentum keeps direction", "Total before equals total after in an isolated interaction", "More shared mass can mean a slower joined speed"],
+        },
+      ];
+    case "F3_L5":
+      return [
+        {
+          kind: "visual",
+          title: "Read impulse from force and time",
+          caption: "The force-time area picture makes the safety idea visible.",
+          image_url: "/lesson-media/f3/f3-l5-impulse-time.svg",
+          highlights: ["Impulse = force x time", "Same area means same impulse", "Longer time can reduce force"],
+        },
+      ];
+    case "F3_L6":
+      return [
+        {
+          kind: "visual",
+          title: "See why speed makes braking harder",
+          caption: "Compare momentum, kinetic energy, and stopping force in one safety diagram.",
+          image_url: "/lesson-media/f3/f3-l6-braking-safety.svg",
+          highlights: ["Momentum grows with speed", "Kinetic energy grows with speed squared", "Longer stopping time lowers average force"],
+        },
+      ];
     default: {
       const code = lessonCode(lesson);
-      if (code.startsWith("F2_")) {
+      if (code.startsWith("F2_") || code.startsWith("F3_")) {
         const core = scaffoldCoreBullets(code);
         const focus = scaffoldFocusExtras(code);
         return [
@@ -1993,6 +2419,17 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 
 function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: string; checkForUnderstanding: string; commonTrap: string } {
+  if (code.startsWith("F3_")) {
+    const core = scaffoldCoreBullets(code);
+    const focus = scaffoldFocusExtras(code);
+    const teaching = scaffoldTeachingFocusBullets(code);
+    return {
+      coreIdea: [core[0], core[1]].filter(Boolean).join(" ") || "Use the main relationship from this lesson before you calculate anything.",
+      reasoning: teaching[0] || "Identify what is being transferred, stored, conserved, or changed before you choose a formula.",
+      checkForUnderstanding: "Which relationship or conserved quantity should you identify before you start calculating?",
+      commonTrap: focus[0] || "Do not rush into a calculation before you know what the quantity means.",
+    };
+  }
   switch (code) {
     case "F2_L1":
       return {
@@ -2047,6 +2484,12 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
 }
 
 function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUnderstanding: string } {
+  if (code.startsWith("F3_")) {
+    return {
+      body: "Use the analogy by matching each part to the physics before you calculate. Ask what is being transferred, what is stored, what is conserved, and which variable changes most strongly in the comparison.",
+      checkForUnderstanding: "Which part of the analogy matches the key quantity or change you are analysing in this lesson?",
+    };
+  }
   switch (code) {
     case "F2_L1":
       return {
@@ -2087,7 +2530,7 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
 }
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  if (code.startsWith("F2_")) {
+  if (code.startsWith("F2_") || code.startsWith("F3_")) {
     const f2Copy = scaffoldF2SectionCopy(code);
     const analogyCopy = scaffoldF2AnalogyBridge(code);
     return [
@@ -2183,6 +2626,17 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
           "Segment C rises more gently from 5 s to 8 s.",
         ],
       };
+    case "F3_L5":
+      return {
+        title: "Force-time graph check",
+        prompt: "Study the graph and explain three things in your reflection: which section has the larger force, which two sections deliver the same impulse, and why the wider section can still be safer even with a smaller force.",
+        image_url: "/lesson-media/f3/f3-l5-force-time-check.svg",
+        callouts: [
+          "Section A is a tall, narrow rectangle.",
+          "Section B is a shorter, wider rectangle with the same area as A.",
+          "Section C is the smallest area of the three.",
+        ],
+      };
     default:
       return undefined;
   }
@@ -2197,7 +2651,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const code = lessonCode(lesson);
   const workedExample = scaffoldWorkedExample(lesson);
   const repairTeachingFocus = dedupeText(repairs.map((item) => text(item.teaching_focus)).filter(Boolean)).slice(0, 2);
-  const teachingFocus = code.startsWith("F2_")
+  const teachingFocus = code.startsWith("F2_") || code.startsWith("F3_")
     ? dedupeText([
         ...repairTeachingFocus,
         ...scaffoldTeachingFocusBullets(code),

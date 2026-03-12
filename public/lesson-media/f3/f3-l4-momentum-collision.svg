@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
+  <rect width="720" height="380" rx="28" fill="#F8FAFC"/>
+  <text x="44" y="54" fill="#0F172A" font-size="28" font-family="Arial, sans-serif" font-weight="700">Track total momentum before and after the collision.</text>
+  <rect x="54" y="108" width="280" height="220" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
+  <text x="78" y="144" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Before</text>
+  <rect x="96" y="214" width="78" height="46" rx="12" fill="#2563EB"/>
+  <rect x="230" y="214" width="96" height="46" rx="12" fill="#F59E0B"/>
+  <line x1="176" y1="238" x2="220" y2="238" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="220,238 192,220 192,256" fill="#2563EB"/>
+  <text x="88" y="292" fill="#475569" font-size="16" font-family="Arial, sans-serif">Incoming trolley carries the system momentum.</text>
+  <rect x="386" y="108" width="280" height="220" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
+  <text x="410" y="144" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">After</text>
+  <rect x="450" y="214" width="148" height="46" rx="12" fill="#0F766E"/>
+  <line x1="604" y1="238" x2="648" y2="238" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="648,238 620,220 620,256" fill="#0F766E"/>
+  <text x="420" y="292" fill="#475569" font-size="16" font-family="Arial, sans-serif">Same total momentum shared by more mass.</text>
+  <rect x="214" y="72" width="300" height="30" rx="14" fill="#E2E8F0"/>
+  <text x="246" y="93" fill="#0F172A" font-size="16" font-family="Arial, sans-serif" font-weight="700">Total momentum before = total momentum after</text>
+</svg>

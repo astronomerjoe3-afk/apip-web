@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
+  <rect width="720" height="380" rx="28" fill="#F8FAFC"/>
+  <text x="44" y="54" fill="#0F172A" font-size="28" font-family="Arial, sans-serif" font-weight="700">Use momentum, kinetic energy, and stopping time together.</text>
+  <rect x="70" y="112" width="194" height="214" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
+  <text x="92" y="146" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Current speed</text>
+  <text x="92" y="192" fill="#2563EB" font-size="18" font-family="Arial, sans-serif" font-weight="700">Momentum rises directly</text>
+  <text x="92" y="220" fill="#475569" font-size="16" font-family="Arial, sans-serif">p = mv</text>
+  <text x="92" y="266" fill="#F97316" font-size="18" font-family="Arial, sans-serif" font-weight="700">Force falls with time</text>
+  <text x="92" y="294" fill="#475569" font-size="16" font-family="Arial, sans-serif">Longer stop = smaller average force</text>
+  <rect x="306" y="112" width="334" height="214" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
+  <text x="330" y="146" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Double the speed</text>
+  <line x1="356" y1="210" x2="470" y2="210" stroke="#2563EB" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="470,210 438,190 438,230" fill="#2563EB"/>
+  <line x1="356" y1="262" x2="560" y2="262" stroke="#DC2626" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="560,262 520,236 520,288" fill="#DC2626"/>
+  <text x="330" y="194" fill="#475569" font-size="16" font-family="Arial, sans-serif">Momentum doubles</text>
+  <text x="330" y="300" fill="#475569" font-size="16" font-family="Arial, sans-serif">Kinetic energy quadruples</text>
+  <text x="330" y="324" fill="#0F766E" font-size="18" font-family="Arial, sans-serif" font-weight="700">High speed makes braking much harder.</text>
+</svg>
