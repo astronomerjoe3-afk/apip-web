@@ -1669,7 +1669,7 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       { heading: "Core idea", body: core.slice(0, 2).join(" ") || "Use the main motion or force rule before you calculate or classify anything." },
       { heading: "How to reason through it", body: core.slice(2).join(" ") || focus.slice(0, 2).join(" "), check_for_understanding: "Which quantity, graph feature, or force comparison matters most before you answer?" },
       { heading: "Common trap", body: focus.join(" ") || "Slow down and check the sign, direction, and meaning of each quantity before deciding." },
-      { heading: "Think of it like this", body: analogyText || "Use the model from this lesson to compare the whole situation before you choose a formula or answer." },
+      { heading: "Analogy", body: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer." },
       { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
     ];
   }
