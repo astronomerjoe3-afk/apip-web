@@ -1209,19 +1209,18 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F2_L1":
       return {
-        body: "Separate the full path from the start-to-finish change and solve them one at a time.",
+        body: "Separate the full route from the start-to-finish change, then state both answers clearly.",
         worked_example: {
-          prompt: "A learner walks 10 m east and then 4 m west. Which pair is correct?",
+          prompt: "A learner walks 10 m east and then 4 m west. Find the distance travelled and the displacement.",
           steps: [
-            "Distance is the total path travelled, so add both parts of the walk: 10 m + 4 m = 14 m.",
-            "Displacement is the net change from start to finish, so compare the two opposite directions instead of adding them.",
-            "The learner ends 6 m east of the start because 10 m east and 4 m west leave a net 6 m east.",
-            "Match both ideas to one answer choice: distance 14 m, displacement 6 m east.",
+            "Distance is the full path travelled, so add both parts of the journey: 10 m + 4 m = 14 m.",
+            "Displacement compares the finishing point with the starting point, so keep the net change in direction.",
+            "After walking 10 m east and then 4 m west, the learner finishes 6 m east of the start.",
+            "State the two answers separately because distance and displacement describe different ideas.",
           ],
           answer: "Distance = 14 m, displacement = 6 m east.",
         },
-      };
-    case "F2_L2":
+      };    case "F2_L2":
       return { body: "Use the signed change in velocity before you decide the sign of the acceleration.", worked_example: { prompt: "Velocity changes from 12 m/s forward to 4 m/s forward in 2 s. What is the acceleration?", steps: ["Start with acceleration = change in velocity / time.", "The change in velocity is 4 - 12 = -8 m/s because the object ends with less forward velocity.", "Divide by the time: -8 / 2 = -4 m/s^2.", "The negative sign means the acceleration points opposite the chosen positive direction."], answer: "Acceleration = -4 m/s^2." } };
     case "F2_L3":
       return { body: "Read a distance-time graph one segment at a time instead of guessing from the whole picture.", worked_example: { prompt: "A straight distance-time graph rises 18 m in 6 s. What is the speed on that segment?", steps: ["On a distance-time graph, speed comes from the slope.", "For one straight segment, slope = distance change / time change.", "Calculate 18 / 6 = 3.", "Keep the speed unit with the answer."], answer: "Speed = 3 m/s." } };
@@ -1647,18 +1646,27 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text);
   const code = lessonCode(lesson);
   const workedExample = scaffoldWorkedExample(lesson);
+  const teachingFocus = code === "F2_L1"
+    ? dedupeText([
+        ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
+        "Distance totals the full route travelled.",
+        "Displacement compares the finishing point with the starting point and keeps direction.",
+        "A return section can increase distance while reducing or cancelling displacement.",
+        "Average speed = total distance / total time for the whole journey.",
+      ])
+    : dedupeText([
+        ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
+        ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
+        ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
+        ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
+        ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean),
+        ...scaffoldFocusExtras(code),
+        ...scaffoldCoreBullets(code),
+      ]);
   return {
     title,
     intro: /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
-    teaching_focus: dedupeText([
-      ...repairs.map((item) => text(item.teaching_focus)).filter(Boolean),
-      ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
-      ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
-      ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
-      ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean),
-      ...scaffoldFocusExtras(code),
-      ...scaffoldCoreBullets(code),
-    ]),
+    teaching_focus: teachingFocus,
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     reference_tables: scaffoldReferenceTables(lesson),
     media_cards: scaffoldMediaCards(lesson),
@@ -1666,7 +1674,6 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     review_refs: reviewRefs(lesson),
   };
 }
-
 export async function getLessonRunner(moduleId: string, lessonId: string): Promise<UnknownRecord> {
   const resources = await loadResources(moduleId, lessonId);
   const runnerLesson = asRecord(resources.runner.lesson);
