@@ -774,7 +774,7 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
     case "F2_L2":
       return [
         mcItem("F2-L2-X1", "Velocity changes from 3 m/s to 11 m/s in 4 s. What is the acceleration?", ["1 m/s^2", "2 m/s^2", "3 m/s^2", "8 m/s^2"], 1, "Use change in velocity divided by time.", "The velocity changes by 8 m/s in 4 s, so the acceleration is 2 m/s^2."),
-        shortItem("F2-L2-X2", "Velocity changes from -2 m/s to 4 m/s in 3 s. What is the acceleration?", ["2 m/s^2", "2 m/s/s"], "Subtract initial velocity from final velocity before dividing by time."),
+        shortItem("F2-L2-X2", "Velocity changes from -2 m/s to 4 m/s in 3 s. What is the acceleration?", ["2 m/s^2"], "Subtract initial velocity from final velocity before dividing by time."),
         mcItem("F2-L2-X3", "An object keeps the same velocity for 5 s. What is its acceleration?", ["-5 m/s^2", "0 m/s^2", "1 m/s^2", "5 m/s^2"], 1, "No change in velocity means zero acceleration.", "If velocity does not change, the acceleration is 0 m/s^2."),
         mcItem("F2-L2-X4", "Why can acceleration be non-zero even if speed stays the same?", ["Because acceleration depends on mass only", "Because a change in direction also changes velocity", "Because time becomes negative", "Because speed and velocity are identical"], 1, "Velocity depends on direction as well as speed.", "Acceleration can be non-zero because a direction change is still a velocity change."),
       ];
@@ -795,7 +795,7 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
     case "F2_L5":
       return [
         mcItem("F2-L5-X1", "8 N right and 8 N left give a resultant force of...", ["0 N", "8 N right", "16 N right", "4 N right"], 0, "Equal opposite forces cancel completely.", "The resultant force is 0 N because the forces are equal and opposite."),
-        shortItem("F2-L5-X2", "11 N right and 4 N left give what resultant force?", ["7 N right", "7 N"], "Subtract opposite forces and keep the direction of the larger force."),
+        shortItem("F2-L5-X2", "11 N right and 4 N left give what resultant force?", ["7 N right"], "Subtract opposite forces and keep the direction of the larger force."),
         mcItem("F2-L5-X3", "If the resultant force on a moving object is zero, the object can...", ["keep moving at constant velocity", "only stop", "speed up automatically", "reverse direction without a force"], 0, "Zero resultant force means zero acceleration.", "The object can keep moving at constant velocity because zero resultant force means no acceleration."),
         mcItem("F2-L5-X4", "Two forces of 3 N and 5 N both act to the right. What is the resultant force?", ["2 N right", "8 N right", "5 N right", "0 N"], 1, "Forces in the same direction add together.", "The resultant force is 8 N right because the forces act in the same direction."),
       ];
