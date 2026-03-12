@@ -1141,23 +1141,23 @@ function scaffoldFocusExtras(code: string): string[] {
     case "F2_L1":
       return [
         "Do not subtract stages until you have checked whether the question asks for distance or displacement.",
-        "A round trip can have a large distance but zero displacement.",
+        "Compare the finishing point with the starting point before you write a displacement answer.",
         "Average speed must use the whole journey, not just the fastest stage.",
         "Keep direction words with displacement and velocity answers.",
       ];
     case "F2_L2":
       return [
-        "Work with final velocity minus initial velocity before you divide by time.",
+        "Keep the sign on both velocities before subtracting to find the change in velocity.",
         "A negative acceleration is about direction relative to the sign convention, not automatically about slowing down.",
         "Changing direction changes velocity even when the speed stays the same.",
-        "State the chosen positive direction before you interpret the sign.",
+        "Decide whether velocity and acceleration point together or opposite ways before you say the object is speeding up or slowing down.",
       ];
     case "F2_L3":
       return [
         "The height of a distance-time graph is distance, but the slope tells the speed.",
         "Compare segments separately instead of judging the whole graph by its overall shape.",
         "A flat section means the object is stopped, not moving backwards.",
-        "Changing steepness means the speed is changing.",
+        "A steeper segment means a greater speed because more distance is added each second.",
       ];
     case "F2_L4":
       return [
