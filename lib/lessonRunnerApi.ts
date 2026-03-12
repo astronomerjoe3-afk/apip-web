@@ -54,6 +54,7 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6"];
 
 type FallbackAnswerMeta = {
   id: string;
@@ -842,14 +843,99 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     ...asList(asRecord(phases(lesson).concept_reconstruction).prompts).map((entry) => text(entry)).filter(Boolean),
     ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((entry) => text(asRecord(entry).hint) || text(asRecord(entry).prompt)).filter(Boolean),
   ].map((item) => item.trim()).filter(Boolean)));
-  const distractors = Array.from(new Set(["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6"]
-    .filter((entry) => entry !== code)
-    .flatMap((entry) => [...scaffoldCoreBullets(entry), ...scaffoldFocusExtras(entry)])
-    .map((item) => item.trim())
-    .filter(Boolean)));
-  return lessonPoints.slice(0, MASTERY_DEFAULT_MAX).map((point, index) =>
-    mcItem(`${code}-AUTO-M${String(index + 1)}`, code === "F1_L5" ? ["Which density reminder is correct?", "Which idea best explains density?", "Which statement fits density and floating?", "Which density rule should you remember?"][index % 4] : "Which statement belongs in this lesson?", [point, distractors[(index * 3) % distractors.length], distractors[(index * 3 + 1) % distractors.length], distractors[(index * 3 + 2) % distractors.length]], 0, "Pick the idea from this lesson.", point)
-  );
+  const contrastCodes = (() => {
+    switch (code) {
+      case "F2_L1":
+        return ["F1_L3", "F1_L4", "F1_L5", "F2_L3", "F2_L5", "F2_L6"];
+      case "F2_L2":
+        return ["F1_L1", "F1_L4", "F1_L5", "F2_L3", "F2_L5", "F2_L6"];
+      case "F2_L3":
+        return ["F1_L2", "F1_L4", "F1_L5", "F2_L5", "F2_L6"];
+      case "F2_L4":
+        return ["F1_L2", "F1_L4", "F1_L5", "F2_L1", "F2_L5"];
+      case "F2_L5":
+        return ["F1_L3", "F1_L4", "F1_L5", "F2_L3", "F2_L6"];
+      case "F2_L6":
+        return ["F1_L2", "F1_L3", "F1_L5", "F2_L3", "F2_L4"];
+      default:
+        return SUPPLEMENTAL_LESSON_CODES.filter((entry) => entry !== code);
+    }
+  })();
+  const promptForPoint = (point: string, index: number): string => {
+    const normalized = normalizePromptKey(point);
+
+    if (code === "F1_L5") {
+      return ["Which density reminder is correct?", "Which idea best explains density?", "Which statement fits density and floating?", "Which density rule should you remember?"][index % 4];
+    }
+
+    switch (code) {
+      case "F2_L1":
+        if (normalized.includes("round trip")) return "Which option correctly explains what a round trip can show about distance and displacement?";
+        if (normalized.includes("distance")) return "Which option correctly explains how distance is worked out for a journey?";
+        if (normalized.includes("displacement") || normalized.includes("starting point") || normalized.includes("finishing point")) return "Which option correctly explains what displacement compares?";
+        if (normalized.includes("average speed")) return "Which option gives the correct whole-journey rule for average speed?";
+        if (normalized.includes("direction")) return "Which option correctly explains why some motion answers must keep a direction word?";
+        return "Which option is the clearest match for this journey lesson?";
+      case "F2_L2":
+        if (normalized.includes("velocity is a vector") || normalized.includes("direction change")) return "Which option correctly explains why velocity can change?";
+        if (normalized.includes("final velocity minus initial velocity")) return "Which option gives the correct setup for calculating acceleration?";
+        if (normalized.includes("positive direction") || normalized.includes("sign")) return "Which option correctly explains how signs should be interpreted?";
+        if (normalized.includes("acceleration")) return "Which option correctly defines acceleration in this lesson?";
+        return "Which option is the clearest match for this velocity and acceleration lesson?";
+      case "F2_L3":
+        if (normalized.includes("distance time graph")) return "Which option correctly describes what a distance-time graph shows?";
+        if (normalized.includes("flat")) return "Which option correctly interprets a flat section on a distance-time graph?";
+        if (normalized.includes("steeper") || normalized.includes("steepness")) return "Which option correctly compares steeper and less steep segments?";
+        if (normalized.includes("slope")) return "Which option correctly explains what the slope means on this graph?";
+        return "Which option is the clearest match for this distance-time graph lesson?";
+      case "F2_L4":
+        if (normalized.includes("velocity time graph")) return "Which option correctly describes what a velocity-time graph shows?";
+        if (normalized.includes("horizontal line")) return "Which option correctly interprets a horizontal line on a velocity-time graph?";
+        if (normalized.includes("positive") || normalized.includes("negative")) return "Which option correctly explains what positive and negative regions mean?";
+        if (normalized.includes("slope") || normalized.includes("area")) return "Which option correctly matches slope and area to their meanings?";
+        return "Which option is the clearest match for this velocity-time graph lesson?";
+      case "F2_L5":
+        if (normalized.includes("balanced forces")) return "Which option correctly describes balanced forces?";
+        if (normalized.includes("zero resultant force") || normalized.includes("zero acceleration")) return "Which option correctly explains what zero resultant force tells you?";
+        if (normalized.includes("unbalanced forces") || normalized.includes("acceleration")) return "Which option correctly explains what unbalanced forces do?";
+        if (normalized.includes("resultant force")) return "Which option correctly explains what resultant force means?";
+        return "Which option is the clearest match for this forces lesson?";
+      case "F2_L6":
+        if (normalized.includes("inertia")) return "Which option correctly explains inertia in this lesson?";
+        if (normalized.includes("mass")) return "Which option correctly explains the effect of mass in F = ma problems?";
+        if (normalized.includes("force")) return "Which option correctly explains the effect of force in F = ma problems?";
+        if (normalized.includes("f ma")) return "Which option correctly explains what F = ma is linking?";
+        return "Which option is the clearest match for this force, mass, and acceleration lesson?";
+      default:
+        return "Which statement belongs in this lesson?";
+    }
+  };
+
+  return lessonPoints.slice(0, MASTERY_DEFAULT_MAX).flatMap((point, index) => {
+    const pointKey = normalizePromptKey(point);
+    const distractors = Array.from(new Set(
+      contrastCodes
+        .flatMap((entry) => [...scaffoldCoreBullets(entry), ...scaffoldFocusExtras(entry)])
+        .map((item) => item.trim())
+        .filter((item) => item && normalizePromptKey(item) !== pointKey)
+    ));
+    if (distractors.length < 3) return [];
+    return [
+      mcItem(
+        `${code}-AUTO-M${String(index + 1)}`,
+        promptForPoint(point, index),
+        [
+          point,
+          distractors[(index * 3) % distractors.length],
+          distractors[(index * 3 + 1) % distractors.length],
+          distractors[(index * 3 + 2) % distractors.length],
+        ],
+        0,
+        "Pick the statement that matches this lesson's main distinction.",
+        point
+      ),
+    ];
+  });
 }
 
 function hasUsableMasteryAnswer(item: UnknownRecord): boolean {
