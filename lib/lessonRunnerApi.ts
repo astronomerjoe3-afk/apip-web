@@ -809,6 +809,12 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
         shortItem("F2-L5-X2", "11 N right and 4 N left give what resultant force?", ["7 N right"], "Subtract opposite forces and keep the direction of the larger force."),
         mcItem("F2-L5-X3", "If the resultant force on a moving object is zero, the object can...", ["keep moving at constant velocity", "only stop", "speed up automatically", "reverse direction without a force"], 0, "Zero resultant force means zero acceleration.", "The object can keep moving at constant velocity because zero resultant force means no acceleration."),
         mcItem("F2-L5-X4", "Two forces of 3 N and 5 N both act to the right. What is the resultant force?", ["2 N right", "8 N right", "5 N right", "0 N"], 1, "Forces in the same direction add together.", "The resultant force is 8 N right because the forces act in the same direction."),
+        mcItem("F2-L5-X5", "What does resultant force mean?", ["the net force left after combining all the forces with direction", "the largest single force in the diagram", "the force that appears first in the question", "the same thing as mass"], 0, "Resultant force is the overall force after the vector combination.", "Resultant force is the net force left after all the forces have been combined with direction."),
+        mcItem("F2-L5-X6", "Balanced forces mean...", ["zero resultant force", "the object must be at rest", "the forces are always small", "the object must move left"], 0, "Balanced forces cancel to zero resultant force.", "Balanced forces mean the resultant force is zero."),
+        mcItem("F2-L5-X7", "A car is moving to the right and the resultant force becomes zero. What happens next?", ["It keeps moving to the right at constant velocity", "It must stop immediately", "It speeds up to the right", "It reverses direction"], 0, "Zero resultant force means no acceleration, so the current motion stays unchanged.", "The car keeps moving to the right at constant velocity because zero resultant force means zero acceleration."),
+        mcItem("F2-L5-X8", "A box has 9 N right, 5 N left, and 2 N right acting on it. What is the resultant force?", ["2 N right", "6 N right", "6 N left", "16 N right"], 1, "Add the forces on the same side before comparing the two directions.", "The total rightward force is 11 N and the leftward force is 5 N, so the resultant force is 6 N right."),
+        mcItem("F2-L5-X9", "If the forces on an object are unbalanced, what must be true?", ["It has acceleration in the direction of the resultant", "It must already be moving", "Its mass must be changing", "Its velocity must be zero"], 0, "Unbalanced forces create a non-zero resultant force, so there is acceleration.", "If the forces are unbalanced, the object accelerates in the direction of the resultant force."),
+        shortItem("F2-L5-X10", "6 N left and 6 N right act on a trolley. What is the resultant force?", ["0 N", "0"], "Equal opposite forces cancel completely, so no force is left over."),
       ];
     case "F2_L6":
       return [
@@ -2662,6 +2668,7 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
 
 
 
