@@ -964,6 +964,18 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         return ["F1_L3", "F1_L4", "F1_L5", "F2_L3", "F2_L6"];
       case "F2_L6":
         return ["F1_L2", "F1_L3", "F1_L5", "F2_L3", "F2_L4"];
+      case "F3_L1":
+        return ["F2_L5", "F2_L6", "F3_L2", "F3_L3", "F3_L4", "F3_L5"];
+      case "F3_L2":
+        return ["F2_L2", "F2_L6", "F3_L1", "F3_L3", "F3_L4", "F3_L6"];
+      case "F3_L3":
+        return ["F2_L1", "F2_L6", "F3_L1", "F3_L2", "F3_L5", "F3_L6"];
+      case "F3_L4":
+        return ["F2_L2", "F2_L5", "F3_L2", "F3_L5", "F3_L6"];
+      case "F3_L5":
+        return ["F2_L4", "F2_L5", "F3_L3", "F3_L4", "F3_L6"];
+      case "F3_L6":
+        return ["F2_L5", "F2_L6", "F3_L2", "F3_L4", "F3_L5"];
       default:
         return SUPPLEMENTAL_LESSON_CODES.filter((entry) => entry !== code);
     }
@@ -1013,11 +1025,42 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         if (normalized.includes("force")) return "Which option correctly explains the effect of force in F = ma problems?";
         if (normalized.includes("f ma")) return "Which option correctly explains what F = ma is linking?";
         return "Which option is the clearest match for this force, mass, and acceleration lesson?";
+      case "F3_L1":
+        if (normalized.includes("no movement") || normalized.includes("movement")) return "Which option correctly explains when work is done on an object?";
+        if (normalized.includes("energy transferred") || normalized.includes("effort")) return "Which option correctly explains what work means in this lesson?";
+        if (normalized.includes("force direction")) return "Which option correctly explains why direction matters in a work calculation?";
+        return "Which option is the clearest match for this work and energy transfer lesson?";
+      case "F3_L2":
+        if (normalized.includes("kinetic energy") || normalized.includes("speed is squared")) return "Which option correctly explains what most strongly changes kinetic energy?";
+        if (normalized.includes("gravitational potential energy") || normalized.includes("reference level") || normalized.includes("height")) return "Which option correctly explains what changes gravitational potential energy?";
+        if (normalized.includes("energy store") || normalized.includes("stored")) return "Which option correctly identifies the energy store in this lesson?";
+        return "Which option is the clearest match for this energy stores lesson?";
+      case "F3_L3":
+        if (normalized.includes("power")) return "Which option correctly defines power in this lesson?";
+        if (normalized.includes("efficiency") || normalized.includes("useful output")) return "Which option correctly explains efficiency?";
+        if (normalized.includes("rate") || normalized.includes("fast does not automatically mean efficient")) return "Which option correctly separates rate from usefulness?";
+        return "Which option is the clearest match for this power and efficiency lesson?";
+      case "F3_L4":
+        if (normalized.includes("total momentum") || normalized.includes("system")) return "Which option correctly explains what must be conserved in a collision?";
+        if (normalized.includes("external forces") || normalized.includes("outside forces")) return "Which option correctly explains when conservation of momentum can be used directly?";
+        if (normalized.includes("direction") || normalized.includes("momentum")) return "Which option correctly explains why momentum must keep direction?";
+        return "Which option is the clearest match for this momentum lesson?";
+      case "F3_L5":
+        if (normalized.includes("force time graph") || normalized.includes("area")) return "Which option correctly interprets the area under a force-time graph?";
+        if (normalized.includes("longer interaction time") || normalized.includes("more time") || normalized.includes("safer collisions")) return "Which option correctly explains why a longer collision time lowers force?";
+        if (normalized.includes("impulse") || normalized.includes("momentum change")) return "Which option correctly explains impulse in this lesson?";
+        return "Which option is the clearest match for this impulse lesson?";
+      case "F3_L6":
+        if (normalized.includes("speed affects momentum and kinetic energy differently") || normalized.includes("speed squared") || normalized.includes("kinetic energy rises much faster")) return "Which option correctly compares how speed changes momentum and kinetic energy?";
+        if (normalized.includes("stopping time") || normalized.includes("safety features") || normalized.includes("average force")) return "Which option correctly explains how safety features reduce force?";
+        if (normalized.includes("heavier vehicle") || normalized.includes("mass")) return "Which option correctly explains why heavier vehicles are harder to stop safely?";
+        return "Which option is the clearest match for this braking and safety lesson?";
       default:
-        return "Which statement belongs in this lesson?";
+        return "Which option directly answers the idea named in this prompt?";
     }
   };
 
+  const paddingHint = code.startsWith("F3_") ? "Choose the statement that directly answers the specific idea in the prompt." : "Pick the statement that matches this lesson's main distinction.";
   return lessonPoints.slice(0, MASTERY_DEFAULT_MAX).flatMap((point, index) => {
     const pointKey = normalizePromptKey(point);
     const distractors = Array.from(new Set(
@@ -1038,7 +1081,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
           distractors[(index * 3 + 2) % distractors.length],
         ],
         0,
-        "Pick the statement that matches this lesson's main distinction.",
+        paddingHint,
         point
       ),
     ];
