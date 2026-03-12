@@ -1935,16 +1935,57 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
       };
   }
 }
+
+function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUnderstanding: string } {
+  switch (code) {
+    case "F2_L1":
+      return {
+        body: "Use the analogy by matching each part carefully. The odometer stands for the whole route actually travelled, so every detour and return segment makes it increase. The straight map arrow stands for the single start-to-finish change, so it only depends on where the journey ends relative to where it began. That is why a long wandering route can still end with a small displacement or even zero displacement.",
+        checkForUnderstanding: "If two travellers finish at the same place but one takes a longer detour, which part of the analogy changes: the odometer reading, the map arrow, or both?",
+      };
+    case "F2_L2":
+      return {
+        body: "Think of the velocity arrow as the motion description at one moment: its length shows how fast the motion is and its direction shows which way it points. Acceleration tells how that arrow changes from one moment to the next. If the arrow gets longer, shorter, or swings round, the acceleration is tracking that change rather than the arrow itself.",
+        checkForUnderstanding: "If the arrow keeps the same length but turns to a new direction, has the velocity changed? What does that imply about acceleration?",
+      };
+    case "F2_L3":
+      return {
+        body: "The travel diary analogy helps because each graph segment is like one diary entry about how quickly distance was being added at that stage. A steep entry means the traveller was covering ground quickly during that interval, while a flat entry means the diary records time passing without extra distance being added. Reading the graph segment by segment is like reading the journey page by page.",
+        checkForUnderstanding: "In the travel-diary picture, what kind of diary entry matches a flat section on the graph?",
+      };
+    case "F2_L4":
+      return {
+        body: "The motion-ledger analogy works because one graph stores several kinds of motion information at once. The graph height is like the current signed entry telling the present velocity, the slope is like how quickly that entry is being updated, and the area is like the running signed total collected over time. The same graph can therefore answer different questions, but only if you choose the right feature for the quantity you want.",
+        checkForUnderstanding: "In the ledger analogy, which part tells the running total of directed motion: the graph height, the slope, or the area?",
+      };
+    case "F2_L5":
+      return {
+        body: "The tug-of-war rope is useful because it shows that direction matters before you decide what the overall effect is. Equal teams pull with equal strength in opposite directions, so the rope feels no net pull and the motion does not change. If one side pulls harder, the rope has a leftover pull in that direction, which is like the non-zero resultant force that causes acceleration.",
+        checkForUnderstanding: "If one tug-of-war team becomes stronger while the other stays the same, what does that represent in the force diagram?",
+      };
+    case "F2_L6":
+      return {
+        body: "The shopping-cart analogy becomes powerful when you compare pushes, not just objects. The same shove changes the empty cart more because less mass means less resistance to changing motion. A heavier loaded cart needs either a bigger push for the same acceleration or it responds with a smaller acceleration to the same push. That is the conceptual meaning behind F = ma before any numbers are substituted.",
+        checkForUnderstanding: "If two carts get the same push but one is loaded, which cart shows the greater acceleration and why?",
+      };
+    default:
+      return {
+        body: "Use the analogy by matching each object or action in the picture to the physics quantity it represents before you calculate anything.",
+        checkForUnderstanding: "Which part of the analogy matches the quantity you are trying to work out?",
+      };
+  }
+}
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("F2_")) {
     const f2Copy = scaffoldF2SectionCopy(code);
+    const analogyCopy = scaffoldF2AnalogyBridge(code);
     return [
       { heading: "Fix these ideas", body: repairText },
       { heading: "Core idea", body: f2Copy.coreIdea },
       { heading: "How to reason through it", body: f2Copy.reasoning, check_for_understanding: f2Copy.checkForUnderstanding },
       { heading: "Common trap", body: f2Copy.commonTrap },
-      { heading: "Analogy", body: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer." },
+      { heading: "Analogy", body: analogyCopy.body, analogy: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer.", check_for_understanding: analogyCopy.checkForUnderstanding },
       { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
     ];
   }
