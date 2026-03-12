@@ -2147,6 +2147,24 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
 
 
 
+function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined {
+  switch (lessonCode(lesson)) {
+    case "F2_L3":
+      return {
+        title: "Distance-time graph check",
+        prompt: "Study the graph and explain three things in your reflection: which segment is fastest, which segment shows the traveller stopped, and why the final segment is slower than the first. Use the slope in your explanation.",
+        image_url: "/lesson-media/f2/f2-l3-reflection-graph-check.svg",
+        callouts: [
+          "Segment A rises steeply from 0 s to 3 s.",
+          "Segment B is flat from 3 s to 5 s.",
+          "Segment C rises more gently from 5 s to 8 s.",
+        ],
+      };
+    default:
+      return undefined;
+  }
+}
+
 function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: UnknownRecord[]): UnknownRecord {
   const repairs = feedback.filter((item) => item.is_correct !== true);
   const repairText = repairs.length > 0
@@ -2315,6 +2333,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
       title: "Explain the idea back",
       prompt: prompts[0] || "Explain the key idea from this lesson in your own words.",
       guidance: inquiry.map((entry) => text(entry.hint) || text(entry.prompt)).filter(Boolean).slice(0, 3),
+      visual_check: reflectionVisualCheck(resources.lesson),
       submitted: state.reflection?.submitted,
       learner_response: state.reflection?.learnerResponse,
     };

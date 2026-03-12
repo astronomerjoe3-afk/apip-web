@@ -134,10 +134,18 @@ type SimulationStagePayload = {
   completion_text?: string;
 };
 
+type ReflectionVisualCheck = {
+  title: string;
+  prompt: string;
+  image_url?: string;
+  callouts?: string[];
+};
+
 type ReflectionStagePayload = {
   title?: string;
   prompt: string;
   guidance?: string[];
+  visual_check?: ReflectionVisualCheck;
   submitted?: boolean;
   learner_response?: string;
 };
@@ -1898,6 +1906,43 @@ export default function LessonRunner({
             ))}
           </div>
         </div>
+
+        {payload.visual_check ? (
+          <div className="rounded-[28px] border bg-white p-5 shadow-sm">
+            <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
+              <div>
+                <span className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-sky-800">
+                  Graph check
+                </span>
+                <h4 className="mt-4 text-lg font-semibold text-slate-900">
+                  {payload.visual_check.title}
+                </h4>
+                <p className="mt-3 text-sm leading-6 text-slate-700">
+                  {payload.visual_check.prompt}
+                </p>
+                {payload.visual_check.callouts?.length ? (
+                  <div className="mt-4 grid gap-3">
+                    {payload.visual_check.callouts.map((item) => (
+                      <div key={item} className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 text-sm leading-6 text-slate-700">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+              {payload.visual_check.image_url ? (
+                <div className="overflow-hidden rounded-2xl border bg-slate-50 shadow-sm">
+                  <img
+                    src={payload.visual_check.image_url}
+                    alt={payload.visual_check.title}
+                    className="h-72 w-full object-contain p-3"
+                    loading="lazy"
+                  />
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
 
         {payload.guidance?.length ? (
           <div className="grid gap-3 md:grid-cols-3">
