@@ -686,8 +686,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
       .filter((item) => hasUsableMasteryAnswer(item));
-    const f2Variants = masteryVariantsFromPool(f2Base.slice(0, 3), code).map(asRecord);
-    return [...f2Base, ...f2Variants, ...supplementalMasteryItems(lesson)].slice(0, 8);
+    return [...f2Base, ...supplementalMasteryItems(lesson)];
   }
 
   switch (code) {
@@ -804,7 +803,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     .flatMap((entry) => [...scaffoldCoreBullets(entry), ...scaffoldFocusExtras(entry)])
     .map((item) => item.trim())
     .filter(Boolean)));
-  return lessonPoints.slice(0, 8).map((point, index) =>
+  return lessonPoints.slice(0, MASTERY_DEFAULT_MAX).map((point, index) =>
     mcItem(`${code}-AUTO-M${String(index + 1)}`, code === "F1_L5" ? ["Which density reminder is correct?", "Which idea best explains density?", "Which statement fits density and floating?", "Which density rule should you remember?"][index % 4] : "Which statement belongs in this lesson?", [point, distractors[(index * 3) % distractors.length], distractors[(index * 3 + 1) % distractors.length], distractors[(index * 3 + 2) % distractors.length]], 0, "Pick the idea from this lesson.", point)
   );
 }
@@ -826,7 +825,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
   const baseItems = generated.length > 0 ? [...generated, ...fallback] : [...fallback];
-  const ordered = baseItems.length >= MASTERY_DEFAULT_MIN ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
+  const ordered = baseItems.length >= MASTERY_DEFAULT_MAX ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
   return ordered.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
