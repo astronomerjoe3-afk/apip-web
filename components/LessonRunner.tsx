@@ -862,7 +862,7 @@ export default function LessonRunner({
                     <img
                       src={imageUrl}
                       alt={card.title}
-                      className="h-64 w-full bg-slate-50 object-contain"
+                      className="h-72 w-full bg-slate-50 object-contain p-3 md:h-80"
                       loading="lazy"
                     />
                   </div>

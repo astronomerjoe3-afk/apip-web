@@ -3,7 +3,10 @@
   <desc id="desc">A long initial velocity arrow, a shorter final velocity arrow, and an opposite acceleration arrow.</desc>
   <rect width="1200" height="700" rx="36" fill="#f7fbff"/>
   <text x="70" y="96" font-size="44" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Velocity and acceleration</text>
-  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Compare the starting and finishing velocity arrows first. Acceleration comes from how the velocity arrow changes.</text>
+  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+    <tspan x="70" dy="0">Compare the starting and finishing velocity arrows first.</tspan>
+    <tspan x="70" dy="30">Acceleration comes from how the velocity arrow changes.</tspan>
+  </text>
   <g transform="translate(70 220)">
     <rect width="1060" height="360" rx="30" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
     <path d="M120 170 H980" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round"/>
@@ -15,7 +18,13 @@
     <path d="M408 258 L304 290 L408 322" fill="#dc2626"/>
     <text x="178" y="84" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">Initial velocity</text>
     <text x="178" y="194" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#2563eb">Final velocity</text>
-    <text x="628" y="338" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#dc2626">Acceleration points opposite the change</text>
-    <text x="136" y="50" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">If the final arrow is shorter in the same positive direction, the acceleration is negative in that sign convention.</text>
+    <text x="594" y="322" font-size="26" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#dc2626">
+      <tspan x="594" dy="0">Acceleration points opposite</tspan>
+      <tspan x="594" dy="30">the change in velocity</tspan>
+    </text>
+    <text x="136" y="50" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">
+      <tspan x="136" dy="0">If the final arrow is shorter in the same positive direction,</tspan>
+      <tspan x="136" dy="26">the acceleration is negative in that sign convention.</tspan>
+    </text>
   </g>
 </svg>

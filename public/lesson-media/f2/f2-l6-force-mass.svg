@@ -3,7 +3,10 @@
   <desc id="desc">Two trolleys of different mass pushed by the same force, showing different accelerations.</desc>
   <rect width="1200" height="700" rx="36" fill="#f7fbff"/>
   <text x="70" y="96" font-size="44" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Same force, different mass</text>
-  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">The same push changes a lighter trolley more. More mass means more resistance to the change in motion.</text>
+  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+    <tspan x="70" dy="0">The same push changes a lighter trolley more.</tspan>
+    <tspan x="70" dy="30">More mass means more resistance to the change in motion.</tspan>
+  </text>
   <g transform="translate(70 220)">
     <rect width="500" height="340" rx="30" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
     <text x="34" y="54" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Light trolley</text>
@@ -30,6 +33,6 @@
     <path d="M332 150 H420" stroke="#0f766e" stroke-width="16" stroke-linecap="round"/>
     <path d="M372 118 L470 150 L372 182" fill="#0f766e"/>
     <text x="74" y="112" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#c2410c">Same force</text>
-    <text x="300" y="118" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f766e">Smaller acceleration</text>
+    <text x="284" y="118" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0f766e">Smaller acceleration</text>
   </g>
 </svg>
