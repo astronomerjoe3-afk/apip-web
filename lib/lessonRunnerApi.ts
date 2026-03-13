@@ -482,6 +482,31 @@ function conceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   );
 }
 
+function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
+  const baseItems = [
+    ...conceptGateItems(lesson),
+    ...itemsFrom(lesson, "transfer").map(asRecord).filter((item) => hasUsableMasteryAnswer(item)),
+  ];
+  const fallbackItems = baseItems.length >= 3 ? [] : generatedMasteryItems(lesson).slice(0, 4);
+  const seenIds = new Set<string>();
+  const seenSources = new Set<string>();
+  return [...baseItems, ...fallbackItems].filter((item) => {
+    const record = asRecord(item);
+    const id = text(record.id);
+    const sourceKey = masterySourceKey(record);
+    if (!id || seenIds.has(id) || (sourceKey && seenSources.has(sourceKey))) return false;
+    seenIds.add(id);
+    if (sourceKey) seenSources.add(sourceKey);
+    return true;
+  });
+}
+
+function conceptGateItemForAttempt(lesson: UnknownRecord, nonce: unknown, retryCount: number): UnknownRecord | null {
+  const pool = conceptGateBank(lesson);
+  if (pool.length === 0) return null;
+  const ordered = shuffle(pool, "concept:" + String(nonce));
+  return asRecord(ordered[retryCount % ordered.length]);
+}
 function lessonTitle(lesson: UnknownRecord, runnerLesson: UnknownRecord): string {
   return text(lesson.title) || text(runnerLesson.title) || normalizeLessonId(lesson.lesson_id || runnerLesson.lesson_id);
 }
@@ -2930,8 +2955,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const retryCount = state.conceptGate?.retryCount || 0;
     const conceptNonce = state.conceptGate?.nonce || 0;
     const conceptSeed = "concept:" + String(conceptNonce) + ":" + String(retryCount);
-    const gatePool = conceptGateItems(resources.lesson);
-    const gateItem = gatePool.length > 0 ? shuffle(gatePool, conceptSeed)[0] : null;
+    const gateItem = conceptGateItemForAttempt(resources.lesson, conceptNonce, retryCount);
     stagePayload = state.conceptGate?.submitted
       ? {
           instructions: "Use the feedback below to tighten the key idea before moving on.",
@@ -3154,8 +3178,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const retryCount = state.conceptGate?.retryCount || 0;
     const conceptNonce = state.conceptGate?.nonce || freshAttemptSeed();
     const conceptSeed = "concept:" + String(conceptNonce) + ":" + String(retryCount);
-    const pool = conceptGateItems(resources.lesson);
-    const item = pool.length > 0 ? shuffle(pool, conceptSeed)[0] : null;
+    const item = conceptGateItemForAttempt(resources.lesson, conceptNonce, retryCount);
     const answerValue = text(asRecord(payload.answers)[text(asRecord(item).id)]);
     if (!item || !answerValue) throw new Error("Choose an answer before continuing.");
     const graded = grade(asRecord(item), answerValue, title);
