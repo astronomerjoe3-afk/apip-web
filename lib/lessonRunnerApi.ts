@@ -55,6 +55,8 @@ type LessonResources = {
 type AttemptHistory = {
   diagnosticUsedIds?: string[];
   diagnosticLastIds?: string[];
+  conceptGateUsedIds?: string[];
+  conceptGateLastIds?: string[];
   masteryUsedIds?: string[];
   masteryLastIds?: string[];
 };
@@ -268,13 +270,13 @@ function mergeAttemptIds(poolIdsForLesson: string[], priorUsedIds: string[], ask
 }
 
 function diagnosticPoolForAttempt(moduleId: string, lessonId: string, lesson: UnknownRecord, nonce: unknown): UnknownRecord[] {
-  const pool = itemsFrom(lesson, "diagnostic").map(asRecord);
+  const pool = diagnosticItems(lesson).map(asRecord);
   const history = readAttemptHistory(moduleId, lessonId);
   return prioritizePoolForAttempt(pool, nonce, "diagnostic", history.diagnosticUsedIds || [], history.diagnosticLastIds || []);
 }
 
 function writeDiagnosticAttemptHistory(moduleId: string, lessonId: string, lesson: UnknownRecord, askedIds: string[]): void {
-  const availableIds = poolIds(itemsFrom(lesson, "diagnostic"));
+  const availableIds = poolIds(diagnosticItems(lesson));
   if (availableIds.length === 0) return;
 
   const history = readAttemptHistory(moduleId, lessonId);
@@ -285,6 +287,27 @@ function writeDiagnosticAttemptHistory(moduleId: string, lessonId: string, lesso
     ...history,
     diagnosticLastIds: merged.lastIds,
     diagnosticUsedIds: merged.usedIds,
+  });
+}
+
+function conceptGatePoolForAttempt(moduleId: string, lessonId: string, lesson: UnknownRecord, nonce: unknown): UnknownRecord[] {
+  const pool = conceptGateBank(lesson);
+  const history = readAttemptHistory(moduleId, lessonId);
+  return prioritizePoolForAttempt(pool, nonce, "concept_gate", history.conceptGateUsedIds || [], history.conceptGateLastIds || []);
+}
+
+function writeConceptGateAttemptHistory(moduleId: string, lessonId: string, lesson: UnknownRecord, askedIds: string[]): void {
+  const availableIds = poolIds(conceptGateBank(lesson));
+  if (availableIds.length === 0) return;
+
+  const history = readAttemptHistory(moduleId, lessonId);
+  const merged = mergeAttemptIds(availableIds, history.conceptGateUsedIds || [], askedIds);
+  if (merged.lastIds.length === 0) return;
+
+  writeAttemptHistory(moduleId, lessonId, {
+    ...history,
+    conceptGateLastIds: merged.lastIds,
+    conceptGateUsedIds: merged.usedIds,
   });
 }
 
@@ -578,6 +601,65 @@ function itemsFrom(lesson: UnknownRecord, key: string): UnknownRecord[] {
   );
 }
 
+function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
+  switch (lessonCode(lesson)) {
+    case "F2_L1":
+      return [
+        mcItem("F2-L1-DG1", "A learner walks 16 m east and then 16 m west. Which quantity is zero at the end?", ["distance", "displacement", "average speed", "time"], 1, "A round trip finishes where it started.", "The displacement is zero because the learner finishes back at the starting point."),
+        shortItem("F2-L1-DG2", "A scooter covers 150 m in 30 s. What is the average speed?", ["5", "5 m/s"], "Use total distance divided by total time."),
+        mcItem("F2-L1-DG3", "A walker goes 20 m north and then 5 m south. What is the displacement?", ["15 m north", "15 m", "25 m north", "25 m"], 0, "Displacement keeps the net change and the direction.", "The walker finishes 15 m north of the start, so the displacement is 15 m north."),
+      ];
+    case "F2_L2":
+      return [
+        mcItem("F2-L2-DG1", "A car moves at constant speed around a bend. Why can its acceleration be non-zero?", ["Because its direction is changing", "Because its mass is changing", "Because time has stopped", "Because speed is a vector"], 0, "A change in direction still changes velocity.", "Acceleration can be non-zero because turning changes the direction of the velocity."),
+        shortItem("F2-L2-DG2", "Velocity changes from -1 m/s to 5 m/s in 2 s. What is the acceleration?", ["3 m/s^2", "3 m/s/s"], "Use change in velocity divided by time."),
+        mcItem("F2-L2-DG3", "What does a negative acceleration sign tell you by itself?", ["It points in the chosen negative direction", "The object must be slowing down", "The object must move backward", "The speed must be zero"], 0, "The sign shows direction relative to the chosen positive direction.", "A negative acceleration sign only tells you that the acceleration points in the chosen negative direction."),
+      ];
+    case "F2_L3":
+      return [
+        mcItem("F2-L3-DG1", "On a distance-time graph, what does the graph height at 8 s show?", ["the speed at 8 s", "the total distance covered by 8 s", "the acceleration at 8 s", "the direction of motion"], 1, "Graph height on a distance-time graph is distance, not speed.", "The graph height shows how much distance has been covered by that time."),
+        shortItem("F2-L3-DG2", "A distance-time graph is flat from 2 s to 6 s. For how long is the object stopped?", ["4", "4 s"], "Use the time interval covered by the flat section."),
+        mcItem("F2-L3-DG3", "Two straight sections have the same steepness on a distance-time graph. What does that mean?", ["the object moved with the same speed in both sections", "the object was stopped in both sections", "the object moved backwards in one section", "the object covered the same total distance in both sections"], 0, "Equal slope means equal speed on a distance-time graph.", "The same steepness means the same speed because slope represents speed."),
+      ];
+    case "F2_L4":
+      return [
+        mcItem("F2-L4-DG1", "What does a section below the time axis mean on a velocity-time graph?", ["velocity in the chosen negative direction", "zero time", "negative mass", "negative displacement only"], 0, "Below the time axis means negative velocity in the chosen sign convention.", "A section below the time axis shows velocity in the chosen negative direction."),
+        shortItem("F2-L4-DG2", "An object moves at 5 m/s for 6 s. What displacement is shown by the graph area?", ["30 m"], "For constant velocity, displacement is velocity multiplied by time."),
+        mcItem("F2-L4-DG3", "If one section of a velocity-time graph has a steeper slope than another, what does that mean?", ["The acceleration magnitude is larger on the steeper section", "The displacement must be smaller on the steeper section", "The object is stopped on the steeper section", "The mass is larger on the steeper section"], 0, "Slope on a velocity-time graph tells you acceleration.", "A steeper slope means the velocity is changing faster, so the acceleration magnitude is larger."),
+      ];
+    case "F2_L5":
+      return [
+        mcItem("F2-L5-DG1", "Two forces of 4 N and 7 N both act to the right. What is the resultant force?", ["3 N right", "7 N right", "11 N right", "0 N"], 2, "Forces in the same direction add together.", "The resultant force is 11 N right because same-direction forces add."),
+        shortItem("F2-L5-DG2", "14 N right and 9 N left act on a box. What is the resultant force?", ["5 N right"], "Subtract opposite forces and keep the direction of the larger side."),
+        mcItem("F2-L5-DG3", "If a moving object has zero resultant force, what can it do?", ["keep moving at constant velocity", "speed up by itself", "reverse direction automatically", "lose its mass"], 0, "Zero resultant force means zero acceleration.", "A moving object can keep moving at constant velocity when the resultant force is zero."),
+      ];
+    case "F2_L6":
+      return [
+        mcItem("F2-L6-DG1", "Which force should be used in F = ma?", ["the resultant force", "the smallest force only", "the friction force only", "the first force listed"], 0, "F = ma uses the net force after all forces are combined.", "You must use the resultant force in F = ma."),
+        shortItem("F2-L6-DG2", "An 18 N resultant force acts on a 6 kg trolley. What is the acceleration?", ["3 m/s^2", "3 m/s/s"], "Use a = F / m."),
+        mcItem("F2-L6-DG3", "If the same force acts on two trolleys and one trolley has three times the mass, how does its acceleration compare?", ["it is one-third as large", "it is three times as large", "it stays the same", "it becomes zero"], 0, "For the same force, larger mass gives smaller acceleration.", "If the mass is three times larger under the same force, the acceleration is one-third as large."),
+      ];
+    default:
+      return [];
+  }
+}
+
+function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
+  const seenIds = new Set<string>();
+  const seenSources = new Set<string>();
+  const seenPrompts = new Set<string>();
+  return [...itemsFrom(lesson, "diagnostic").map(asRecord), ...generatedDiagnosticItems(lesson).map(asRecord)].filter((item) => {
+    const record = asRecord(item);
+    const id = text(record.id);
+    const sourceKey = masterySourceKey(record);
+    const promptKey = normalizePromptKey(text(record.prompt));
+    if (!id || seenIds.has(id) || (sourceKey && seenSources.has(sourceKey)) || (promptKey && seenPrompts.has(promptKey))) return false;
+    seenIds.add(id);
+    if (sourceKey) seenSources.add(sourceKey);
+    if (promptKey) seenPrompts.add(promptKey);
+    return true;
+  });
+}
 function conceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   const capsules = asList(asRecord(phases(lesson).concept_reconstruction).capsules).map(asRecord);
   return capsules.flatMap((capsule, capsuleIndex) =>
@@ -610,10 +692,9 @@ function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   });
 }
 
-function conceptGateItemForAttempt(lesson: UnknownRecord, nonce: unknown, retryCount: number): UnknownRecord | null {
-  const pool = conceptGateBank(lesson);
-  if (pool.length === 0) return null;
-  const ordered = shuffle(pool, "concept:" + String(nonce));
+function conceptGateItemForAttempt(moduleId: string, lessonId: string, lesson: UnknownRecord, nonce: unknown, retryCount: number): UnknownRecord | null {
+  const ordered = conceptGatePoolForAttempt(moduleId, lessonId, lesson, nonce);
+  if (ordered.length === 0) return null;
   return asRecord(ordered[retryCount % ordered.length]);
 }
 function lessonTitle(lesson: UnknownRecord, runnerLesson: UnknownRecord): string {
@@ -1360,17 +1441,20 @@ function hasUsableMasteryAnswer(item: UnknownRecord): boolean {
 }
 
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
+  const code = lessonCode(lesson);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
-  const diagnosticRecords = itemsFrom(lesson, "diagnostic").map(asRecord);
+  const diagnosticRecords = diagnosticItems(lesson).map(asRecord);
   const diagnosticSourceKeys = new Set(diagnosticRecords.map((item) => masterySourceKey(item)).filter(Boolean));
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
-  const baseItems = generated.length >= MASTERY_DEFAULT_MAX
-    ? [...generated]
-    : generated.length > 0 ? [...generated, ...fallback] : [...fallback];
+  const baseItems = code.startsWith("F2_")
+    ? generated.length > 0 ? [...generated, ...fallback] : [...fallback]
+    : generated.length >= MASTERY_DEFAULT_MAX
+      ? [...generated]
+      : generated.length > 0 ? [...generated, ...fallback] : [...fallback];
   const ordered = baseItems.length >= MASTERY_DEFAULT_MAX ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
   return ordered.filter((item) => {
     const record = asRecord(item);
@@ -3157,7 +3241,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
 
   if (stage === "diagnostic") {
     activeStage = "diagnostic";
-    const pool = itemsFrom(resources.lesson, "diagnostic");
+    const pool = diagnosticItems(resources.lesson);
     const diagnosticNonce = state.diagnostic?.nonce || 0;
     const orderedPool = diagnosticPoolForAttempt(moduleId, lessonId, resources.lesson, diagnosticNonce);
     const askedIds = state.diagnostic?.askedIds || [];
@@ -3199,7 +3283,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const retryCount = state.conceptGate?.retryCount || 0;
     const conceptNonce = state.conceptGate?.nonce || 0;
     const conceptSeed = "concept:" + String(conceptNonce) + ":" + String(retryCount);
-    const gateItem = conceptGateItemForAttempt(resources.lesson, conceptNonce, retryCount);
+    const gateItem = conceptGateItemForAttempt(moduleId, lessonId, resources.lesson, conceptNonce, retryCount);
     stagePayload = state.conceptGate?.submitted
       ? {
           instructions: "Use the feedback below to tighten the key idea before moving on.",
@@ -3321,7 +3405,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
   if (request.event_type === "diagnostic_submitted") {
     const resources = await loadResources(moduleId, lessonId);
     const title = lessonTitle(resources.lesson, asRecord(resources.runner.lesson));
-    const pool = itemsFrom(resources.lesson, "diagnostic");
+    const pool = diagnosticItems(resources.lesson);
     const answers = asRecord(payload.answers);
     const firstEntry = Object.entries(answers)[0];
     if (!firstEntry) throw new Error("Choose an answer before continuing.");
@@ -3423,11 +3507,12 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const retryCount = state.conceptGate?.retryCount || 0;
     const conceptNonce = state.conceptGate?.nonce || freshAttemptSeed();
     const conceptSeed = "concept:" + String(conceptNonce) + ":" + String(retryCount);
-    const item = conceptGateItemForAttempt(resources.lesson, conceptNonce, retryCount);
+    const item = conceptGateItemForAttempt(moduleId, lessonId, resources.lesson, conceptNonce, retryCount);
     const answerValue = text(asRecord(payload.answers)[text(asRecord(item).id)]);
     if (!item || !answerValue) throw new Error("Choose an answer before continuing.");
     const graded = grade(asRecord(item), answerValue, title);
     const capsules = asList(asRecord(phases(resources.lesson).concept_reconstruction).capsules).map(asRecord);
+    writeConceptGateAttemptHistory(moduleId, lessonId, resources.lesson, [text(asRecord(item).id)]);
     const capsule = capsules.find((entry) => asList(entry.checks).map(asRecord).some((check) => text(check.id) === text(asRecord(item).id)));
     writeState(moduleId, lessonId, {
       ...state,
