@@ -2549,9 +2549,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Compare the same object with three tools",
-          caption: "Measure the same object with a ruler, caliper, and micrometer. Finer divisions reveal more detail and support smaller uncertainty.",
+          caption: "The object does not change. What changes is the tool resolution, which controls how many digits and how much uncertainty you can justify.",
           image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
-          highlights: ["The same object looks rougher or finer depending on the tool", "Smaller divisions support smaller uncertainty", "In the next measurement lab, compare how each tool reads the same object"],
+          highlights: ["The same object should lead to different justified detail, not a different object", "Smaller divisions support more justified digits and smaller uncertainty", "In the next measurement lab, compare what each tool lets you claim honestly"],
         },
         {
           kind: "visual",
