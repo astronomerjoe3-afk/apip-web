@@ -288,7 +288,9 @@ export default function StudentModulePage() {
   }, [authLoading, loadModuleState, moduleId, router, user]);
 
   const canGoBack = activeIdx > 0;
-  const canGoNext = lessons.length > 0 && activeIdx < lessons.length - 1;
+  const currentLessonCompleted = activeLesson?.progress?.completed === true;
+  const hasNextLesson = lessons.length > 0 && activeIdx < lessons.length - 1;
+  const canGoNext = hasNextLesson && currentLessonCompleted;
 
 
   const handleLogout = useCallback(async (): Promise<void> => {
@@ -650,7 +652,7 @@ export default function StudentModulePage() {
           </div>
 
           <div style={{ opacity: 0.8, textAlign: "center", flex: "1 1 220px" }}>
-            Finish this mission, then continue.
+            {currentLessonCompleted ? "You can continue to the next mission." : "Complete this mission to unlock the next one."}
           </div>
 
           <button
