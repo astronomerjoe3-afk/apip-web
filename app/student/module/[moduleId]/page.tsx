@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { signOut } from "firebase/auth";
-import { useParams, useRouter } from "next/navigation";
-import { apipGet } from "../../../../lib/apipApi";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { useAuth } from "../../../../lib/auth";
@@ -35,6 +35,42 @@ type ModuleCatalog = {
   mastery_outcomes?: string[];
   access_tier?: string;
   access?: ModuleAccess;
+};
+
+type BillingSummary = {
+  configured?: boolean;
+  webhook_configured?: boolean;
+  can_checkout?: boolean;
+  portal_enabled?: boolean;
+  has_customer?: boolean;
+  customer_email?: string | null;
+  purchased_module_ids?: string[];
+  active_subscription_plan_id?: string | null;
+  subscription_expires_utc?: string | null;
+  has_active_subscription?: boolean;
+  subscription?: {
+    status?: string;
+    plan_id?: string;
+    ends_utc?: string;
+  } | null;
+};
+
+type BillingSummaryResponse = {
+  ok: boolean;
+  billing: BillingSummary;
+  module_access?: ModuleAccess;
+};
+
+type CheckoutSessionResponse = {
+  ok: boolean;
+  checkout_url?: string;
+  session_id?: string;
+};
+
+type PortalSessionResponse = {
+  ok: boolean;
+  portal_url?: string;
+  session_id?: string;
 };
 
 type LessonPhases = {
@@ -116,6 +152,7 @@ function errorMessage(error: unknown): string {
 
 export default function StudentModulePage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const params = useParams() as Record<string, string | string[] | undefined>;
   const { user, loading: authLoading } = useAuth();
 
@@ -128,7 +165,21 @@ export default function StudentModulePage() {
     return decodeURIComponent(value);
   }, [raw]);
 
+  const currentModulePath = useMemo(() => {
+    if (!moduleId) return "/student";
+    return "/student/module/" + encodeURIComponent(moduleId);
+  }, [moduleId]);
+
+  const checkoutState = searchParams.get("checkout");
+  const checkoutSessionId = searchParams.get("session_id");
+  const returnedFromBillingPortal = searchParams.get("billing") === "return";
+
   const [moduleMeta, setModuleMeta] = useState<ModuleCatalog | null>(null);
+  const [billingSummary, setBillingSummary] = useState<BillingSummary | null>(null);
+  const [billingErr, setBillingErr] = useState<string>("");
+  const [billingLoading, setBillingLoading] = useState<boolean>(false);
+  const [billingBusyId, setBillingBusyId] = useState<string>("");
+  const confirmedSessionRef = useRef<string>("");
   const [moduleProgress, setModuleProgress] = useState<StudentModuleProgressResponse["module"] | null>(null);
   const [lessons, setLessons] = useState<ActiveLesson[]>([]);
   const [err, setErr] = useState<string>("");
@@ -148,6 +199,27 @@ export default function StudentModulePage() {
   }, [lessons.length, activeIdx]);
 
   const moduleLocked = moduleMeta?.access?.tier === "premium" && moduleMeta?.access?.is_unlocked === false;
+  const billingConfigured = billingSummary?.configured === true;
+  const checkoutEnabled = billingSummary?.can_checkout !== false;
+  const canManageBilling = billingSummary?.portal_enabled === true;
+
+  const loadBillingSummary = useCallback(async (): Promise<void> => {
+    if (!user) {
+      setBillingSummary(null);
+      return;
+    }
+
+    setBillingLoading(true);
+    try {
+      const response = await apipGet<BillingSummaryResponse>("/billing/summary");
+      setBillingSummary(response.billing || null);
+    } catch (error) {
+      setBillingSummary(null);
+      setBillingErr(errorMessage(error));
+    } finally {
+      setBillingLoading(false);
+    }
+  }, [user]);
 
   const loadModuleState = useCallback(
     async (preserveCurrentLesson: boolean = true, currentLessonIdOverride?: string): Promise<void> => {
@@ -287,6 +359,54 @@ export default function StudentModulePage() {
     void loadModuleState(false);
   }, [authLoading, loadModuleState, moduleId, router, user]);
 
+  useEffect(() => {
+    if (!authLoading && user) {
+      void loadBillingSummary();
+    }
+  }, [authLoading, loadBillingSummary, user]);
+
+  useEffect(() => {
+    if (!checkoutState) {
+      return;
+    }
+
+    if (checkoutState === "cancelled") {
+      setStatus("Checkout cancelled. You can choose another option whenever you are ready.");
+    }
+
+    if (returnedFromBillingPortal) {
+      setStatus("Returned from billing management.");
+    }
+  }, [checkoutState, returnedFromBillingPortal]);
+
+  useEffect(() => {
+    if (!user || !checkoutSessionId || checkoutState !== "success") {
+      return;
+    }
+
+    if (confirmedSessionRef.current === checkoutSessionId) {
+      return;
+    }
+    confirmedSessionRef.current = checkoutSessionId;
+
+    setBillingErr("");
+    setStatus("Confirming your payment and refreshing access...");
+
+    void apipPost<BillingSummaryResponse, { session_id: string; module_id: string }>("/billing/checkout-session/confirm", {
+      session_id: checkoutSessionId,
+      module_id: moduleId,
+    })
+      .then(async () => {
+        await Promise.all([loadBillingSummary(), loadModuleState(false)]);
+        setStatus("Payment confirmed. Your access has been refreshed.");
+        router.replace(currentModulePath);
+      })
+      .catch((error) => {
+        setStatus("");
+        setBillingErr(errorMessage(error));
+      });
+  }, [checkoutSessionId, checkoutState, currentModulePath, loadBillingSummary, loadModuleState, moduleId, router, user]);
+
   const canGoBack = activeIdx > 0;
   const currentLessonCompleted = activeLesson?.progress?.completed === true;
   const hasNextLesson = lessons.length > 0 && activeIdx < lessons.length - 1;
@@ -307,6 +427,35 @@ export default function StudentModulePage() {
       setErr(errorMessage(error));
     }
   }, [moduleId, router]);
+
+  const launchCheckout = useCallback(async (purchaseKind: "module_unlock" | "subscription", planId?: string) => {
+    if (!moduleId) return;
+    setBillingErr("");
+    setBillingBusyId(purchaseKind === "module_unlock" ? "module_unlock" : String(planId || "subscription"));
+    try {
+      const response = await apipPost<CheckoutSessionResponse>("/billing/checkout-session", { purchase_kind: purchaseKind, module_id: purchaseKind === "module_unlock" ? moduleId : undefined, plan_id: purchaseKind === "subscription" ? planId : undefined, origin: window.location.origin, success_path: currentModulePath, cancel_path: currentModulePath } as never);
+      if (!response.checkout_url) throw new Error("Checkout did not return a redirect URL.");
+      window.location.assign(response.checkout_url);
+    } catch (error) {
+      setBillingErr(errorMessage(error));
+    } finally {
+      setBillingBusyId("");
+    }
+  }, [currentModulePath, moduleId]);
+
+  const openBillingPortal = useCallback(async () => {
+    setBillingErr("");
+    setBillingBusyId("portal");
+    try {
+      const response = await apipPost<PortalSessionResponse>("/billing/portal-session", { origin: window.location.origin, return_path: "/student" } as never);
+      if (!response.portal_url) throw new Error("Billing portal did not return a redirect URL.");
+      window.location.assign(response.portal_url);
+    } catch (error) {
+      setBillingErr(errorMessage(error));
+    } finally {
+      setBillingBusyId("");
+    }
+  }, []);
 
   function goBack(): void {
     if (!canGoBack) return;
@@ -514,6 +663,12 @@ export default function StudentModulePage() {
       ) : null}
 
 
+      {billingErr ? (
+        <div style={{ border: "1px solid #92400e", padding: 14, borderRadius: 12, marginBottom: 16, maxWidth: 900, marginLeft: "auto", marginRight: "auto", background: "#fff7ed", color: "#9a3412" }}>
+          <b>Billing:</b> {billingErr}
+        </div>
+      ) : null}
+
       {status ? (
         <div
           style={{
@@ -555,11 +710,23 @@ export default function StudentModulePage() {
             <div style={{ textAlign: "center", fontSize: 18, color: "#46566b", lineHeight: 1.6 }}>
               {moduleMeta?.access?.message || "Unlock this premium module with a one-time purchase or a subscription."}
             </div>
+            {billingSummary?.has_active_subscription ? (
+              <div style={{ border: "1px solid rgba(22, 101, 52, 0.16)", borderRadius: 18, padding: 18, background: "#f0fdf4", color: "#166534" }}>
+                <div style={{ fontWeight: 900, fontSize: 18 }}>Active plan: {billingSummary.active_subscription_plan_id || "premium subscription"}</div>
+                <div style={{ marginTop: 6, opacity: 0.84 }}>Your premium subscription should unlock this module. If this card is still showing, use refresh below.</div>
+              </div>
+            ) : null}
             {moduleMeta?.access?.module_purchase ? (
               <div style={{ border: "1px solid rgba(16, 35, 63, 0.12)", borderRadius: 18, padding: 18, background: "rgba(255, 255, 255, 0.82)" }}>
                 <div style={{ fontWeight: 900, fontSize: 20 }}>{moduleMeta.access.module_purchase.title || "Unlock this module forever"}</div>
                 <div style={{ marginTop: 6, fontSize: 28, fontWeight: 900 }}>{moduleMeta.access.module_purchase.price_label}</div>
                 <div style={{ marginTop: 8, opacity: 0.82 }}>{moduleMeta.access.module_purchase.description || "One payment for permanent access to this premium module."}</div>
+                <div style={{ marginTop: 14, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+                  <button onClick={() => void launchCheckout("module_unlock")} disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading} style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)", color: "#fff", fontWeight: 900, opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1 }}>
+                    {billingBusyId === "module_unlock" ? "Opening secure checkout..." : "Unlock this module"}
+                  </button>
+                  <span style={{ opacity: 0.72 }}>One-time purchase. Secure checkout opens in Stripe.</span>
+                </div>
               </div>
             ) : null}
             {(moduleMeta?.access?.subscription_plans || []).length > 0 ? (
@@ -570,20 +737,24 @@ export default function StudentModulePage() {
                     <div style={{ marginTop: 6, fontSize: 24, fontWeight: 900 }}>{plan.price_label}</div>
                     <div style={{ marginTop: 4, opacity: 0.72 }}>{plan.effective_monthly_label || plan.billing_label}</div>
                     <div style={{ marginTop: 8, opacity: 0.82 }}>{plan.description}</div>
+                    <button onClick={() => void launchCheckout("subscription", plan.id)} disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading} style={{ marginTop: 14, width: "100%", padding: "12px 16px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.92)", color: "#10233f", fontWeight: 900, opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1 }}>
+                      {billingBusyId === plan.id ? "Opening secure checkout..." : "Subscribe to " + (plan.title || "premium")}
+                    </button>
                   </div>
                 ))}
               </div>
             ) : null}
             <div style={{ textAlign: "center", opacity: 0.72 }}>
-              Pricing and access rules are now enforced in the API. Connect your payment processor to turn these plans into live checkout flows.
+              {billingConfigured ? "Secure checkout is ready. Choose a one-time unlock or premium subscription." : "Live billing is not configured in this environment yet. Add the Stripe keys and price ids on the API service to enable checkout."}
             </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <button
-                onClick={() => router.push("/student")}
-                style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.72)", fontWeight: 800 }}
-              >
-                Back to modules
-              </button>
+            <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
+              {canManageBilling ? (
+                <button onClick={() => void openBillingPortal()} disabled={billingBusyId !== ""} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.88)", fontWeight: 800, opacity: billingBusyId !== "" ? 0.6 : 1 }}>
+                  {billingBusyId === "portal" ? "Opening billing portal..." : "Manage billing"}
+                </button>
+              ) : null}
+              <button onClick={() => { void Promise.all([loadModuleState(false), loadBillingSummary()]); }} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.88)", fontWeight: 800 }}>Refresh access</button>
+              <button onClick={() => router.push("/student")} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.72)", fontWeight: 800 }}>Back to modules</button>
             </div>
           </div>
         ) : loading && !activeLesson ? (

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { signOut, type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
-import { apipGet } from "../../lib/apipApi";
+import { apipGet, apipPost } from "../../lib/apipApi";
 import { auth } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, type Role } from "../../lib/authRouting";
@@ -43,6 +43,18 @@ type ModulesResponse = {
   modules: Module[];
 };
 
+type BillingSummary = {
+  configured?: boolean;
+  portal_enabled?: boolean;
+  has_active_subscription?: boolean;
+  active_subscription_plan_id?: string | null;
+};
+
+type BillingSummaryResponse = {
+  ok: boolean;
+  billing: BillingSummary;
+};
+
 function errorMessage(error: unknown): string {
   if (error instanceof Error) {
     return error.message;
@@ -73,6 +85,8 @@ export default function StudentHomePage() {
   const [roleLoading, setRoleLoading] = useState<boolean>(true);
 
   const [modules, setModules] = useState<Module[]>([]);
+  const [billingSummary, setBillingSummary] = useState<BillingSummary | null>(null);
+  const [billingBusy, setBillingBusy] = useState<boolean>(false);
   const [modulesLoading, setModulesLoading] = useState<boolean>(true);
   const [err, setErr] = useState<string>("");
   const [status, setStatus] = useState<string>("");
@@ -152,6 +166,38 @@ export default function StudentHomePage() {
     };
   }, [loading, roleLoading, role, user]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadBillingSummary(): Promise<void> {
+      if (loading || roleLoading) return;
+      if (!user || role !== "student") return;
+      try {
+        const data = await apipGet<BillingSummaryResponse>("/billing/summary");
+        if (!cancelled) setBillingSummary(data.billing || null);
+      } catch {}
+    }
+
+    void loadBillingSummary();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [loading, roleLoading, role, user]);
+
+  async function openBillingPortal(): Promise<void> {
+    try {
+      setBillingBusy(true);
+      const data = await apipPost<{ ok: boolean; portal_url?: string }>("/billing/portal-session", { origin: window.location.origin, return_path: "/student" } as never);
+      if (!data.portal_url) throw new Error("Billing portal did not return a redirect URL.");
+      window.location.assign(data.portal_url);
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+    } finally {
+      setBillingBusy(false);
+    }
+  }
+
   async function handleLogout(): Promise<void> {
     try {
       setStatus("Signing out...");
@@ -226,6 +272,11 @@ export default function StudentHomePage() {
         </div>
 
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          {billingSummary?.portal_enabled ? (
+            <button onClick={() => void openBillingPortal()} disabled={billingBusy} style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700, opacity: billingBusy ? 0.65 : 1 }}>
+              {billingBusy ? "Opening billing..." : "Manage billing"}
+            </button>
+          ) : null}
           <button
             onClick={() => router.refresh()}
             style={{
