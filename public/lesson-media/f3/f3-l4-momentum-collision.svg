@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
-  <rect width="720" height="380" rx="28" fill="#F8FAFC"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 408" fill="none">
+  <rect width="720" height="408" rx="28" fill="#F8FAFC"/>
   <text x="44" y="46" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">Track total momentum before and after</text>
   <text x="44" y="76" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">the collision.</text>
   <rect x="54" y="108" width="280" height="220" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
@@ -23,4 +23,9 @@
   </text>
   <rect x="192" y="72" width="336" height="34" rx="16" fill="#E2E8F0"/>
   <text x="360" y="94" fill="#0F172A" font-size="15" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Total momentum before = total momentum after</text>
+  <rect x="150" y="344" width="420" height="42" rx="16" fill="#E0F2FE" stroke="#7DD3FC" stroke-width="2"/>
+  <text fill="#0F172A" font-size="16" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="360" y="362">Using p = mv:</tspan>
+    <tspan x="360" y="380">m1u1 + m2u2 = m1v1 + m2v2</tspan>
+  </text>
 </svg>
