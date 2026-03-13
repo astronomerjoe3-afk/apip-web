@@ -1737,6 +1737,150 @@ export default function LessonRunner({
               </div>
             </div>
           );
+        })() : simulationLessonKey === "F3_L2" ? (() => {
+          const mass = Math.max(1, Math.min(10, simMetricMeters));
+          const speed = Math.max(0, Math.min(12, simVectorMagnitude));
+          const height = Math.max(0, Math.min(10, simVectorAngle));
+          const kineticEnergy = 0.5 * mass * speed * speed;
+          const potentialEnergy = mass * 10 * height;
+          const doubledMassKineticEnergy = kineticEnergy * 2;
+          const doubledSpeedKineticEnergy = kineticEnergy * 4;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Energy store controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Mass (kg)<input className="mt-2 w-full" type="range" min="1" max="10" step="0.5" value={mass} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Speed (m/s)<input className="mt-2 w-full" type="range" min="0" max="12" step="1" value={speed} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Height (m)<input className="mt-2 w-full" type="range" min="0" max="10" step="0.5" value={height} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Current energy picture</h4>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Kinetic energy:</span> {formatSimulationNumber(kineticEnergy, 0)} J</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Potential energy:</span> {formatSimulationNumber(potentialEnergy, 0)} J</div>
+                </div>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Double mass, same speed:</span> {formatSimulationNumber(doubledMassKineticEnergy, 0)} J</div>
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Double speed, same mass:</span> {formatSimulationNumber(doubledSpeedKineticEnergy, 0)} J</div>
+                </div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Changing height only changes gravitational potential energy. Changing speed has the strongest effect on kinetic energy because speed is squared.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F3_L3" ? (() => {
+          const inputEnergy = Math.max(200, Math.min(2000, simDensityMass));
+          const usefulEnergy = Math.max(0, Math.min(inputEnergy, simDensityVolume));
+          const timeSeconds = Math.max(1, Math.min(10, simFluidDensity));
+          const wastedEnergy = inputEnergy - usefulEnergy;
+          const inputPower = inputEnergy / timeSeconds;
+          const usefulPower = usefulEnergy / timeSeconds;
+          const efficiency = inputEnergy === 0 ? 0 : (usefulEnergy / inputEnergy) * 100;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Process controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Input energy (J)<input className="mt-2 w-full" type="range" min="200" max="2000" step="100" value={inputEnergy} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Useful output (J)<input className="mt-2 w-full" type="range" min="0" max={inputEnergy} step="50" value={usefulEnergy} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Time taken (s)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={timeSeconds} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Rate versus usefulness</h4>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Input power:</span> {formatSimulationNumber(inputPower, 0)} W</div>
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Useful power:</span> {formatSimulationNumber(usefulPower, 0)} W</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Efficiency:</span> {formatSimulationNumber(efficiency, 0)}%</div>
+                </div>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Useful energy:</span> {formatSimulationNumber(usefulEnergy, 0)} J</div>
+                  <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Wasted energy:</span> {formatSimulationNumber(wastedEnergy, 0)} J</div>
+                </div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Shorter time raises power. A bigger useful fraction raises efficiency. A process can be powerful without being efficient.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F3_L4" ? (() => {
+          const incomingMass = Math.max(1, Math.min(8, simMetricMeters));
+          const incomingSpeed = Math.max(1, Math.min(10, simVectorMagnitude));
+          const secondMass = Math.max(1, Math.min(8, simVectorAngle));
+          const totalMomentum = incomingMass * incomingSpeed;
+          const totalMass = incomingMass + secondMass;
+          const sharedSpeed = totalMomentum / totalMass;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Collision controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Incoming mass (kg)<input className="mt-2 w-full" type="range" min="1" max="8" step="0.5" value={incomingMass} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Incoming speed (m/s)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={incomingSpeed} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Second trolley mass (kg)<input className="mt-2 w-full" type="range" min="1" max="8" step="0.5" value={secondMass} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">System momentum</h4>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Momentum before:</span> {formatSimulationNumber(totalMomentum, 1)} kg m/s</div>
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Shared final speed:</span> {formatSimulationNumber(sharedSpeed, 2)} m/s</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Momentum after:</span> {formatSimulationNumber(totalMass * sharedSpeed, 1)} kg m/s</div>
+                </div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">The total momentum of the two-trolley system stays the same. If more total mass shares the motion after the collision, the final speed must be smaller.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F3_L5" ? (() => {
+          const momentumChange = Math.max(100, Math.min(1000, simDensityMass));
+          const stoppingTime = Math.max(0.2, Math.min(1.5, simFluidDensity));
+          const longerTime = Math.min(3, stoppingTime * 2);
+          const averageForce = momentumChange / stoppingTime;
+          const longerStopForce = momentumChange / longerTime;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Impulse controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Momentum change (kg m/s)<input className="mt-2 w-full" type="range" min="100" max="1000" step="50" value={momentumChange} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Stopping time (s)<input className="mt-2 w-full" type="range" min="0.2" max="1.5" step="0.1" value={stoppingTime} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Force-time result</h4>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Average force now:</span> {formatSimulationNumber(averageForce, 0)} N</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">If time doubled:</span> {formatSimulationNumber(longerStopForce, 0)} N</div>
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Impulse:</span> {formatSimulationNumber(momentumChange, 0)} N s</div>
+                </div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">The impulse stays equal to the momentum change. Spreading the same change over more time lowers the average force.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F3_L6" ? (() => {
+          const vehicleMass = Math.max(800, Math.min(1800, simBias * 50));
+          const speed = Math.max(5, Math.min(30, simSpread));
+          const stoppingTime = Math.max(0.5, Math.min(2.5, simFluidDensity));
+          const momentum = vehicleMass * speed;
+          const kineticEnergy = 0.5 * vehicleMass * speed * speed;
+          const averageForce = momentum / stoppingTime;
+          const doubledTimeForce = momentum / (stoppingTime * 2);
+          const doubledSpeedMomentum = vehicleMass * (speed * 2);
+          const doubledSpeedKineticEnergy = kineticEnergy * 4;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Braking controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Vehicle mass (kg)<input className="mt-2 w-full" type="range" min="800" max="1800" step="100" value={vehicleMass} onChange={(e) => setSimBias(Number(e.target.value) / 50)} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Speed (m/s)<input className="mt-2 w-full" type="range" min="5" max="30" step="1" value={speed} onChange={(e) => setSimSpread(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Stopping time (s)<input className="mt-2 w-full" type="range" min="0.5" max="2.5" step="0.1" value={stoppingTime} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Safety comparison</h4>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Momentum:</span> {formatSimulationNumber(momentum, 0)} kg m/s</div>
+                  <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Kinetic energy:</span> {formatSimulationNumber(kineticEnergy, 0)} J</div>
+                  <div className="rounded-xl bg-rose-50 p-4 text-rose-800"><span className="font-medium text-rose-900">Average force:</span> {formatSimulationNumber(averageForce, 0)} N</div>
+                </div>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">If stopping time doubled:</span> {formatSimulationNumber(doubledTimeForce, 0)} N</div>
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">If speed doubled:</span> momentum {formatSimulationNumber(doubledSpeedMomentum, 0)} kg m/s, kinetic energy {formatSimulationNumber(doubledSpeedKineticEnergy, 0)} J</div>
+                </div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Longer stopping time lowers the force, but high speed is still much harder to manage because kinetic energy rises much faster than momentum.</div>
+              </div>
+            </div>
+          );
         })() : (
           <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">Use the task above to test the idea with a few examples before you continue.</div>
         )}
