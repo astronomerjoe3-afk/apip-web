@@ -905,8 +905,14 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
       return [
         mcItem("F3-L3-X1", "A machine transfers 600 J in 3 s. What is its power?", ["50 W", "100 W", "200 W", "600 W"], 2, "Use power = energy transferred / time.", "600 / 3 = 200 W."),
         mcItem("F3-L3-X2", "A device takes in 500 J and gives 350 J useful output. What is its efficiency?", ["35%", "50%", "70%", "85%"], 2, "Efficiency = useful output / input x 100%.", "350 / 500 = 70%."),
-        shortItem("F3-L3-X3", "A motor with power 120 W runs for 5 s. How much energy is transferred?", ["600 J"], "Use energy = power x time."),
+        shortItem("F3-L3-X3", "A motor with power 120 W runs for 5 s. How much energy is transferred?", ["600 J", "600 j", "600"], "Use energy = power x time."),
         mcItem("F3-L3-X4", "Which statement is true?", ["A process can be powerful without being very efficient", "Power and efficiency always mean the same thing", "Efficiency can be more than 100%", "A slow process must be efficient"], 0, "Power and efficiency describe different ideas.", "A machine can transfer energy quickly yet still waste a large fraction of the input."),
+        mcItem("F3-L3-X5", "Two machines each transfer 800 J. Machine A takes 4 s and Machine B takes 8 s. Which is more powerful?", ["Machine A", "Machine B", "They have the same power", "It depends on efficiency only"], 0, "For the same energy transfer, the shorter time means the greater power.", "Machine A is more powerful because it transfers the same 800 J in less time."),
+        shortItem("F3-L3-X6", "A machine is 80% efficient and takes in 500 J. How much useful output does it deliver?", ["400 J", "400 j", "400"], "Find 80% of the total input energy."),
+        mcItem("F3-L3-X7", "A device takes in 1000 J and delivers 600 J as useful output. How much energy is wasted?", ["400 J", "600 J", "1000 J", "1600 J"], 0, "Wasted energy is the input minus the useful output.", "The wasted energy is 1000 J - 600 J = 400 J."),
+        mcItem("F3-L3-X8", "Which statement best separates power from efficiency?", ["Power tells how quickly energy is transferred, while efficiency tells what fraction becomes useful output", "Power and efficiency are just two names for the same quantity", "Efficiency tells how quickly work is done, while power tells how much is wasted", "A more powerful device is always more efficient"], 0, "Keep rate and useful fraction as two separate ideas.", "Power measures the rate of energy transfer, while efficiency measures the useful fraction of the input."),
+        shortItem("F3-L3-X9", "A heater transfers 900 J with a power of 150 W. How long does it run for?", ["6 s", "6", "6 sec", "6 seconds"], "Rearrange power = energy / time to time = energy / power."),
+        mcItem("F3-L3-X10", "Two devices are both 60% efficient. One transfers 1200 J in 6 s and the other transfers 1200 J in 3 s. What is true?", ["They are equally efficient, but the second device is more powerful", "They have the same power because their efficiency matches", "The first device is more powerful because it runs longer", "The second device must be more efficient because it is faster"], 0, "Matching efficiency does not force the power to match as well.", "Both devices convert the same fraction of input into useful output, but the second transfers the energy in less time so it has the greater power."),
       ];
     case "F3_L4":
       return [
@@ -3275,9 +3281,3 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
-
-
-
-
-
-
