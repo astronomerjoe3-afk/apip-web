@@ -1209,10 +1209,10 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F2_L6": return "Hold one variable steady while you change the other so you can see clearly how force and mass affect acceleration.";
     case "F3_L1": return "Change force and distance together so work is seen as energy transfer, not just as effort.";
     case "F3_L2": return "Compare how mass, speed, and height affect kinetic and gravitational potential energy.";
-    case "F3_L3": return "Separate how quickly energy is transferred from how much of the input becomes useful output.";
-    case "F3_L4": return "Track the total momentum before and after a simple collision so conservation is treated as a system rule.";
-    case "F3_L5": return "Compare the same momentum change over different times and read impulse from force-time area.";
-    case "F3_L6": return "Use one braking scenario to compare momentum, kinetic energy, and average stopping force together.";
+    case "F3_L3": return "Use the explorer to test two independent levers: shorten the time to change power, or raise the useful fraction to change efficiency.";
+    case "F3_L4": return "Track the whole-system momentum before and after the collision, then compare what happens when the second trolley is lighter or heavier.";
+    case "F3_L5": return "Keep the momentum change fixed, stretch the stopping time, and use the force-time blocks to see why equal area can mean different forces.";
+    case "F3_L6": return "Use the same car to compare three linked ideas at once: momentum now, kinetic energy now, and how stopping time changes the braking force.";
     default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
   }
 }
@@ -1230,10 +1230,10 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F2_L6": return "Start with one force-mass pair, then compare what happens when you double the force and when you double the mass.";
     case "F3_L1": return "Create one moving case and one no-movement case, then explain why only one transfers energy as work.";
     case "F3_L2": return "Build one comparison where speed matters more than mass, and one where changing height changes the energy store.";
-    case "F3_L3": return "Find one process that is fast but wasteful and another that is slower but more efficient, then explain the difference.";
-    case "F3_L4": return "Create two collisions with different masses and explain how the total momentum controls the shared final motion.";
-    case "F3_L5": return "Keep the momentum change fixed, change the stopping time, and explain why the longer stop is safer.";
-    case "F3_L6": return "Compare a moderate-speed stop with a high-speed stop for the same car, then explain why the faster case is much harder to manage safely.";
+    case "F3_L3": return "Build one case where cutting the time raises power but leaves efficiency unchanged, then a second case where increasing useful output raises efficiency without changing the time.";
+    case "F3_L4": return "Start with one incoming momentum, then compare how a lighter second trolley and a heavier second trolley change the shared final speed.";
+    case "F3_L5": return "Hold the momentum change fixed, compare a short stop with a longer stop, and explain why the same impulse can still give a safer collision.";
+    case "F3_L6": return "Use one car to compare the current stop, a doubled-speed stop, and a longer stopping-time case, then explain why speed is such a demanding safety variable.";
     default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
   }
 }
@@ -1290,27 +1290,27 @@ function simulationStageExploreSteps(code: string): string[] {
       ];
     case "F3_L3":
       return [
-        "Keep the input energy fixed and shorten the time to compare power.",
-        "Keep the input fixed and change the useful output to compare efficiency.",
-        "Compare two cases that look fast but waste different amounts of energy.",
+        "Keep the input energy fixed and shorten the time so you can isolate the change in power only.",
+        "Keep the input and time fixed while you change the useful output so only the efficiency changes.",
+        "Compare the faster case with the less-wasteful case and explain why they are not automatically the same process.",
       ];
     case "F3_L4":
       return [
-        "Set the incoming trolley mass and speed first to establish the starting momentum.",
-        "Change the second trolley mass while it starts at rest.",
-        "Compare how the same total momentum is shared after the trolleys stick together.",
+        "Set the incoming trolley mass and speed first so the starting momentum is clear.",
+        "Change only the second trolley mass while it starts at rest.",
+        "Explain why the same total momentum leads to a smaller shared speed when more mass joins the motion.",
       ];
     case "F3_L5":
       return [
-        "Set a momentum change target and calculate the average force for one stopping time.",
-        "Increase the stopping time and compare the new force.",
-        "Read the same idea from the force-time area so the graph and the formula tell one story.",
+        "Choose one momentum change and calculate the average force for a short stopping time.",
+        "Increase the stopping time while keeping the momentum change fixed, then compare the new force.",
+        "Use the force-time blocks to explain why the same area can still have a different height and width.",
       ];
     case "F3_L6":
       return [
-        "Keep the mass fixed and raise the speed so you can compare momentum and kinetic energy side by side.",
-        "Now lengthen the stopping time and compare the average force for the same car.",
-        "Use the numbers to explain what safety features are trying to change during a crash.",
+        "Keep the mass fixed and raise the speed so you can compare how momentum and kinetic energy change by different amounts.",
+        "Now lengthen the stopping time and compare how much the average force falls for the same car.",
+        "Use the three comparisons to explain what safety features are trying to change during a crash.",
       ];
     default:
       return [];
@@ -1368,27 +1368,27 @@ function simulationStageWatchFor(code: string): string[] {
       ];
     case "F3_L3":
       return [
-        "Power is a rate: energy transferred per second.",
-        "Efficiency is a fraction: useful output divided by total input.",
-        "A process can be fast without being efficient.",
+        "Power is a rate: it tells you how quickly the energy transfer is happening.",
+        "Efficiency is a fraction: it tells you how much of the input becomes useful output.",
+        "Changing time and changing useful fraction are different moves, so a process can be fast without being efficient.",
       ];
     case "F3_L4":
       return [
-        "Momentum equals mass multiplied by velocity.",
-        "Direction matters because opposite momenta can cancel.",
-        "Use conservation for the whole system when external forces are negligible during the collision.",
+        "Momentum equals mass multiplied by velocity, so both mass and direction matter in the total.",
+        "Direction matters because opposite momenta can cancel in the system total.",
+        "Use conservation on the whole system when external forces are negligible during the collision.",
       ];
     case "F3_L5":
       return [
-        "Impulse equals force multiplied by time.",
-        "Impulse also equals the change in momentum.",
-        "The same impulse over more time means less average force.",
+        "Impulse equals force multiplied by time, so both the height and width of the force-time block matter.",
+        "Impulse also equals the change in momentum, which is why the total area must stay the same if the momentum change stays the same.",
+        "The same impulse over more time means less average force because the same area is spread wider.",
       ];
     case "F3_L6":
       return [
-        "Momentum rises directly with speed.",
-        "Kinetic energy rises with speed squared.",
-        "Longer stopping time reduces average force for the same momentum change.",
+        "Momentum rises directly with speed, so doubling speed doubles the momentum.",
+        "Kinetic energy rises with speed squared, so doubling speed quadruples the energy that must be removed.",
+        "Longer stopping time reduces average force for the same momentum change, which is the safety lever used by seatbelts, airbags, and crumple zones.",
       ];
     default:
       return [];
@@ -1413,13 +1413,13 @@ function simulationStageTryFirst(code: string): string | undefined {
     case "F3_L2":
       return "Try mass 4 kg, speed 6 m/s, and height 3 m. KE should be 72 J and GPE should be 120 J if g = 10 N/kg.";
     case "F3_L3":
-      return "Try 800 J input, 400 J useful output, and 4 s. The power should be 200 W and the efficiency should be 50%.";
+      return "Try 800 J input, 400 J useful output, and 4 s first. Then keep 800 J input but cut the time to 2 s so you can see power change while efficiency stays 50%.";
     case "F3_L4":
-      return "Try incoming mass 2 kg, speed 6 m/s, and second mass 4 kg. The shared speed should be 2 m/s after sticking.";
+      return "Try incoming mass 2 kg, speed 6 m/s, and second mass 4 kg. The shared speed should be 2 m/s. Then reduce the second mass and notice that the shared speed increases.";
     case "F3_L5":
-      return "Try a momentum change of 600 kg m/s over 0.3 s. The average force should be 2000 N.";
+      return "Try a momentum change of 600 kg m/s over 0.3 s. The average force should be 2000 N. Then double the time and notice the same impulse with half the force.";
     case "F3_L6":
-      return "Try mass 1000 kg, speed 12 m/s, and stopping time 0.6 s. Momentum should be 12000 kg m/s, KE should be 72000 J, and average stopping force should be 20000 N.";
+      return "Try mass 1000 kg, speed 12 m/s, and stopping time 0.6 s. Then double the speed and compare how momentum doubles while kinetic energy quadruples.";
     default:
       return undefined;
   }
@@ -1443,13 +1443,13 @@ function simulationStageTakeaway(code: string): string | undefined {
     case "F3_L2":
       return "Energy can be stored in motion or in position, and the formulas show which physical change matters most in each case.";
     case "F3_L3":
-      return "Power tells you how fast a process works, while efficiency tells you how much of the input actually achieves the useful job.";
+      return "Power and efficiency answer different questions: one asks how quickly energy is transferred, and the other asks how much of that input actually does the useful job.";
     case "F3_L4":
-      return "Momentum is a whole-system quantity, so collision reasoning becomes clearer when you total the motion before and after the interaction.";
+      return "Collision reasoning becomes clearer when you total the whole-system momentum before and after the interaction instead of following only one object.";
     case "F3_L5":
-      return "Impulse explains why stretching a collision over more time can reduce the force even though the total motion change still has to happen.";
+      return "Impulse explains why stretching a collision over more time can reduce the force even though exactly the same momentum change still has to happen.";
     case "F3_L6":
-      return "High-speed braking is dangerous because both the momentum change and the energy removal become more demanding, and kinetic energy grows especially quickly.";
+      return "High-speed braking is dangerous because both the momentum change and the energy removal become more demanding, and kinetic energy grows especially quickly as speed rises.";
     default:
       return undefined;
   }
