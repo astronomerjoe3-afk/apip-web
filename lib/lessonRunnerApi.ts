@@ -1297,11 +1297,11 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         if (normalized.includes("heavier vehicle") || normalized.includes("mass")) return "Which option correctly explains why heavier vehicles are harder to stop safely?";
         return "Which option is the clearest match for this braking and safety lesson?";
       default:
-        return "Which statement best matches the specific idea named in this prompt?";
+        return "Which statement best matches this specific lesson idea?";
     }
   };
 
-  const paddingHint = code.startsWith("F3_") ? "Choose the statement that directly answers the specific idea in the prompt." : "Pick the statement that matches this lesson's main distinction.";
+  const paddingHint = code.startsWith("F3_") ? "Choose the statement that directly answers the specific lesson idea." : "Pick the statement that matches this lesson's main distinction.";
   return lessonPoints.slice(0, MASTERY_DEFAULT_MAX).flatMap((point, index) => {
     const pointKey = normalizePromptKey(point);
     const distractors = Array.from(new Set(
