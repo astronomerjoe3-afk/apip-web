@@ -1711,6 +1711,32 @@ export default function LessonRunner({
             );
           }
           return null;
+        })() : simulationLessonKey === "F3_L1" ? (() => {
+          const force = Math.max(5, Math.min(40, simVectorMagnitude));
+          const distance = Math.max(0, Math.min(8, simMetricMeters));
+          const moving = simVectorAngle >= 1;
+          const work = moving ? force * distance : 0;
+          return (
+            <div className="rounded-2xl border bg-white p-5 shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900">Quick work tester</h4>
+              <p className="mt-2 text-slate-700">Use the controls below to test whether a force is actually doing work.</p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div className="space-y-4">
+                  <label className="block text-sm text-slate-700">Force (N)<input className="mt-2 w-full" type="range" min="5" max="40" step="1" value={force} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
+                  <label className="block text-sm text-slate-700">Distance moved in the force direction (m)<input className="mt-2 w-full" type="range" min="0" max="8" step="0.5" value={distance} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+                  <div className="flex flex-wrap gap-3">
+                    <button type="button" onClick={() => setSimVectorAngle(1)} className={`rounded-xl border px-4 py-2 text-sm ${moving ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"}`}>Movement enabled</button>
+                    <button type="button" onClick={() => setSimVectorAngle(0)} className={`rounded-xl border px-4 py-2 text-sm ${!moving ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"}`}>Object held still</button>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Current work:</span> {formatSimulationNumber(work, 0)} J</div>
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Same force with no movement:</span> 0 J</div>
+                  <div className="rounded-xl border bg-slate-50 p-4 text-slate-700">{moving ? `Because the object moves ${formatSimulationNumber(distance, 1)} m in the force direction, the force transfers ${formatSimulationNumber(work, 0)} J of energy as work.` : "The force is present, but without movement in the force direction no work is done."}</div>
+                </div>
+              </div>
+            </div>
+          );
         })() : (
           <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">Use the task above to test the idea with a few examples before you continue.</div>
         )}
