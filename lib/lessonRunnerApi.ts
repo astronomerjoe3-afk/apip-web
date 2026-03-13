@@ -1556,7 +1556,7 @@ function simulationStageTryFirst(code: string): string | undefined {
     case "F3_L4":
       return "Try incoming mass 2 kg, speed 6 m/s, and second mass 4 kg. The total momentum before is 12 kg m/s, so the shared speed after should be 2 m/s because the law of conservation of linear momentum keeps the whole-system total the same. Then reduce the second mass and notice that the shared speed increases.";
     case "F3_L5":
-      return "Try a momentum change of 600 kg m/s over 0.3 s. The average force should be 2000 N. Then double the time and notice the same impulse with half the force.";
+      return "Try a momentum change of 600 kg m/s over 0.3 s. That means the impulse is 600 N s as well, so the average force is 2000 N. Then double the time and notice the same impulse and momentum change with half the force.";
     case "F3_L6":
       return "Try mass 1000 kg, speed 12 m/s, and stopping time 0.6 s. Then double the speed and compare how momentum doubles while kinetic energy quadruples.";
     default:
@@ -1586,7 +1586,7 @@ function simulationStageTakeaway(code: string): string | undefined {
     case "F3_L4":
       return "The law of conservation of linear momentum becomes clearer when you total the whole-system momentum before and after the interaction instead of following only one object.";
     case "F3_L5":
-      return "Impulse explains why stretching a collision over more time can reduce the force even though exactly the same momentum change still has to happen.";
+      return "Impulse is the name for the momentum change during the interaction, so stretching the collision over more time can reduce force even though exactly the same momentum change still has to happen.";
     case "F3_L6":
       return "High-speed braking is dangerous because both the momentum change and the energy removal become more demanding, and kinetic energy grows especially quickly as speed rises.";
     default:
@@ -1722,8 +1722,8 @@ function scaffoldFocusExtras(code: string): string[] {
       ];
     case "F3_L5":
       return [
-        "Impulse can be read from a force-time graph as area as well as from force x time.",
-        "The same momentum change can come from many different force-time combinations.",
+        "Impulse is the same physical quantity as the change in momentum, so Ft, graph area, and momentum change are three views of one idea.",
+        "Start by identifying the momentum change, then connect it to impulse before you compare different force-time combinations.",
         "Longer interaction time reduces force when the impulse is fixed.",
         "Safer collisions often come from spreading the same change over more time.",
       ];
@@ -1949,8 +1949,8 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
       ];
     case "F3_L5":
       return [
-        "Impulse gives a more physical way to discuss collisions because it connects force, interaction time, and momentum change in one relationship.",
-        "The same momentum change can be delivered by a large force acting briefly or a smaller force acting for longer if the impulse is the same.",
+        "Start from the law impulse = change in momentum, so any force-time calculation is really another way of describing the momentum change.",
+        "Because impulse also equals force x time, the same momentum change can be delivered by a large force acting briefly or a smaller force acting for longer.",
         "A force-time graph is not decorative here: its area is the impulse, so geometry and physics are telling the same story.",
         "Safety reasoning improves when you stop asking how to remove the momentum change and start asking how to spread it over more time.",
       ];
@@ -2197,16 +2197,16 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F3_L5":
       return {
-        body: "Connect the force calculation directly to a safety interpretation, not just to the algebra.",
+        body: "Start from the identity impulse = change in momentum, then connect that same quantity to force and time so the safety interpretation follows naturally.",
         worked_example: {
           prompt: "A cyclist's momentum changes by 240 kg m/s in 0.8 s while braking. Find the average force and explain what would happen if the stopping time doubled.",
           steps: [
-            "Use force = change in momentum / time for the average force.",
-            "Substitute the values: force = 240 / 0.8 = 300 N.",
-            "Now imagine the same momentum change spread over 1.6 s instead.",
-            "The force would become 240 / 1.6 = 150 N, so doubling the stopping time halves the average force.",
+            "Start with the momentum link: impulse = change in momentum = 240 kg m/s.",
+            "Now connect that impulse to force and time by using average force = change in momentum / time = 240 / 0.8 = 300 N.",
+            "If the stopping time doubles to 1.6 s, the momentum change stays the same, so the impulse stays 240 kg m/s.",
+            "The force then becomes 240 / 1.6 = 150 N, so spreading the same impulse over more time halves the average force.",
           ],
-          answer: "Average force = 300 N; if the stopping time doubles, the average force falls to 150 N.",
+          answer: "The impulse equals the 240 kg m/s momentum change, so the average force is 300 N; if the stopping time doubles, the same impulse gives 150 N.",
         },
       };
     case "F3_L6":
@@ -2635,7 +2635,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           title: "Read impulse from force and time",
           caption: "The force-time area picture makes the safety idea visible.",
           image_url: "/lesson-media/f3/f3-l5-impulse-time.svg",
-          highlights: ["Impulse = force x time", "Same area means same impulse", "Longer time can reduce force"],
+          highlights: ["Impulse = force x time = change in momentum", "Same area means same impulse", "Longer time can reduce force"],
         },
       ];
     case "F3_L6":
@@ -2666,6 +2666,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 
 function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: string; checkForUnderstanding: string; commonTrap: string } {
+  if (code === "F3_L5") {
+    return {
+      coreIdea: "Impulse is the name for the change in momentum during an interaction. Because impulse = change in momentum and impulse = force x time, the same event can be described through momentum change, force-time area, or force multiplied by time.",
+      reasoning: "First decide what the momentum change is, because that is the impulse. Then choose how the question represents that same quantity: if force and time are given, multiply them; if the graph is shown, read the area; if the momentum change is given, treat that as the impulse directly. After that, compare how changing the stopping time changes the average force for the same impulse.",
+      checkForUnderstanding: "If the same impulse acts over a longer time, what stays the same and what changes?",
+      commonTrap: "Do not treat impulse as a separate idea from momentum change. They are the same quantity described in two different ways.",
+    };
+  }
   if (code === "F3_L4") {
     return {
       coreIdea: "The law of conservation of linear momentum says that in an isolated system, the total linear momentum before an interaction equals the total linear momentum after it.",
