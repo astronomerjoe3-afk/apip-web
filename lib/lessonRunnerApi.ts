@@ -1351,7 +1351,7 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F3_L3": return "Use the explorer to separate the rate relationship from the usefulness relationship: change time to change power, hold power to track energy transferred, and change useful output to change efficiency.";
     case "F3_L4": return "Track the whole-system momentum before and after the collision, then compare what happens when the second trolley is lighter or heavier.";
     case "F3_L5": return "Keep the momentum change fixed, stretch the stopping time, and use the force-time blocks to see why equal area can mean different forces.";
-    case "F3_L6": return "Use the same car to compare three linked ideas at once: momentum now, kinetic energy now, and how stopping time changes the braking force.";
+    case "F3_L6": return "Use the same car to compare three linked ideas at once: momentum now, kinetic energy now, and how force comes from the rate of change of momentum during the stop.";
     default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
   }
 }
@@ -1372,7 +1372,7 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F3_L3": return "Build one case where the same energy is transferred in less time, one case where the same power runs for longer, and a third case where only the useful fraction changes. Then explain which quantity changed in each case.";
     case "F3_L4": return "Start with one incoming momentum, then compare how a lighter second trolley and a heavier second trolley change the shared final speed.";
     case "F3_L5": return "Hold the momentum change fixed, compare a short stop with a longer stop, and explain why the same impulse can still give a safer collision.";
-    case "F3_L6": return "Use one car to compare the current stop, a doubled-speed stop, and a longer stopping-time case, then explain why speed is such a demanding safety variable.";
+    case "F3_L6": return "Use one car to compare the current stop, a doubled-speed stop, and a longer stopping-time case, then explain how force depends on the rate of change of momentum as well as why speed is such a demanding safety variable.";
     default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
   }
 }
@@ -1448,8 +1448,8 @@ function simulationStageExploreSteps(code: string): string[] {
     case "F3_L6":
       return [
         "Keep the mass fixed and raise the speed so you can compare how momentum and kinetic energy change by different amounts.",
-        "Now lengthen the stopping time and compare how much the average force falls for the same car.",
-        "Use the three comparisons to explain what safety features are trying to change during a crash.",
+        "Now lengthen the stopping time and compare how much the average force falls when the same momentum change happens more slowly.",
+        "Use the three comparisons to explain why force is the rate of change of momentum and what safety features are trying to change during a crash.",
       ];
     default:
       return [];
@@ -1525,9 +1525,9 @@ function simulationStageWatchFor(code: string): string[] {
       ];
     case "F3_L6":
       return [
-        "Momentum rises directly with speed, so doubling speed doubles the momentum.",
+        "Average force is the rate of change of momentum, so the same momentum change in less time means a larger force.",
+        "Momentum rises directly with speed, so doubling speed doubles the momentum that must be changed during the stop.",
         "Kinetic energy rises with speed squared, so doubling speed quadruples the energy that must be removed.",
-        "Longer stopping time reduces average force for the same momentum change, which is the safety lever used by seatbelts, airbags, and crumple zones.",
       ];
     default:
       return [];
@@ -1558,7 +1558,7 @@ function simulationStageTryFirst(code: string): string | undefined {
     case "F3_L5":
       return "Try a momentum change of 600 kg m/s over 0.3 s. That means the impulse is 600 N s as well, so the average force is 2000 N. Then double the time and notice the same impulse and momentum change with half the force.";
     case "F3_L6":
-      return "Try mass 1000 kg, speed 12 m/s, and stopping time 0.6 s. Then double the speed and compare how momentum doubles while kinetic energy quadruples.";
+      return "Try mass 1000 kg, speed 12 m/s, and stopping time 0.6 s. The momentum is 12000 kg m/s, so stopping in 0.6 s gives an average force of 20000 N. Then double the speed and compare how momentum doubles, kinetic energy quadruples, and the same stop time would demand a larger force.";
     default:
       return undefined;
   }
@@ -1588,7 +1588,7 @@ function simulationStageTakeaway(code: string): string | undefined {
     case "F3_L5":
       return "Impulse is the name for the momentum change during the interaction, so stretching the collision over more time can reduce force even though exactly the same momentum change still has to happen.";
     case "F3_L6":
-      return "High-speed braking is dangerous because both the momentum change and the energy removal become more demanding, and kinetic energy grows especially quickly as speed rises.";
+      return "High-speed braking is dangerous because force depends on how quickly momentum is changed, while kinetic energy also rises especially quickly as speed rises.";
     default:
       return undefined;
   }
@@ -1729,10 +1729,10 @@ function scaffoldFocusExtras(code: string): string[] {
       ];
     case "F3_L6":
       return [
+        "Average force = change in momentum / time, so force is the rate of change of momentum.",
         "Speed affects momentum and kinetic energy differently, so do not treat them as the same trend.",
         "A heavier vehicle at the same speed carries more momentum and more kinetic energy.",
-        "Safety features often work by increasing stopping time or stopping distance.",
-        "Braking analysis is strongest when you use both momentum and energy reasoning together.",
+        "Safety features often work by increasing stopping time or stopping distance so the same momentum change happens more slowly.",
       ];
     default:
       return [];
@@ -1866,10 +1866,10 @@ function scaffoldCoreBullets(code: string): string[] {
       ];
     case "F3_L6":
       return [
+        "Average force = change in momentum / time.",
+        "Force is the rate of change of momentum, so the same change spread over more time gives a smaller average force.",
         "Momentum changes with speed directly, but kinetic energy changes with speed squared.",
-        "Average stopping force depends on momentum change and stopping time.",
-        "Longer stopping time lowers average force for the same stop.",
-        "Crash safety depends on managing both motion change and energy dissipation.",
+        "Crash safety depends on managing both the momentum change and the energy dissipation.",
       ];
     default:
       return [];
@@ -1956,10 +1956,10 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
       ];
     case "F3_L6":
       return [
-        "Braking and collisions are not explained well by one formula alone because the vehicle must both change momentum and dissipate kinetic energy.",
+        "Braking and collisions are not explained well by one formula alone because the vehicle must both change momentum and dissipate kinetic energy, and the stopping force depends on how quickly that momentum changes.",
+        "Force can be written as change in momentum divided by time, so a short, sharp stop produces a larger force than the same momentum change spread over longer time.",
         "Higher speed raises momentum directly, but kinetic energy rises even faster, which is why high-speed braking becomes disproportionately demanding.",
-        "Longer stopping time or distance reduces average force, which is why seatbelts, airbags, and crumple zones matter.",
-        "A complete safety explanation should identify what quantity is changing, what feature increases stopping time, and what that does to force or energy transfer.",
+        "A complete safety explanation should identify the momentum change, the stopping time, and how that time changes the force as the rate of change of momentum.",
       ];
     default:
       return [];
@@ -2211,16 +2211,16 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F3_L6":
       return {
-        body: "Compare momentum and kinetic energy together so the danger of speed is not reduced to one line.",
+        body: "Start from the momentum side as well: average force equals change in momentum divided by time, so braking force depends on how quickly the vehicle is brought to a different momentum as well as how much kinetic energy must be removed.",
         worked_example: {
-          prompt: "A 1000 kg car increases speed from 10 m/s to 20 m/s. Compare the momentum and kinetic energy in the two cases.",
+          prompt: "A 1000 kg car moving at 20 m/s is brought to rest in 0.5 s. Find the change in momentum and the average braking force, then explain what happens to the force if the same stop takes 1.0 s.",
           steps: [
-            "Find the first momentum: 1000 x 10 = 10000 kg m/s, then the second: 1000 x 20 = 20000 kg m/s.",
-            "The momentum doubles because speed doubled.",
-            "Now find the kinetic energy: at 10 m/s it is 50000 J, and at 20 m/s it is 200000 J.",
-            "The kinetic energy quadruples, which shows why high-speed braking is much more demanding.",
+            "Find the starting momentum: p = mv = 1000 x 20 = 20000 kg m/s, and the final momentum is 0 because the car stops.",
+            "So the change in momentum is 20000 kg m/s in magnitude during the stop.",
+            "Use average force = change in momentum / time = 20000 / 0.5 = 40000 N.",
+            "If the same momentum change happens in 1.0 s instead, the average force becomes 20000 / 1.0 = 20000 N, so doubling the stopping time halves the force.",
           ],
-          answer: "Momentum doubles from 10000 to 20000 kg m/s, while kinetic energy quadruples from 50000 J to 200000 J.",
+          answer: "The stopping car changes momentum by 20000 kg m/s, so the average braking force is 40000 N in 0.5 s and 20000 N if the same stop takes 1.0 s.",
         },
       };
     default:
@@ -2645,7 +2645,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           title: "See why speed makes braking harder",
           caption: "Compare momentum, kinetic energy, and stopping force in one safety diagram.",
           image_url: "/lesson-media/f3/f3-l6-braking-safety.svg",
-          highlights: ["Momentum grows with speed", "Kinetic energy grows with speed squared", "Longer stopping time lowers average force"],
+          highlights: ["Force = change in momentum / time", "Momentum grows with speed", "Longer stopping time lowers average force"],
         },
       ];
     default: {
@@ -2666,6 +2666,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 
 function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: string; checkForUnderstanding: string; commonTrap: string } {
+  if (code === "F3_L6") {
+    return {
+      coreIdea: "Average force is the rate of change of momentum, so force = change in momentum / time. That means the same momentum change produces a smaller force when it happens over a longer stopping time.",
+      reasoning: "First work out the momentum change, because that tells you how much motion must be removed or redirected. Then divide that momentum change by the stopping time to find the average force. Only after that should you connect the result to the energy story: high speed is especially dangerous because it increases both the momentum change and the kinetic energy that must be dissipated.",
+      checkForUnderstanding: "If the same vehicle has the same momentum change but the stopping time doubles, what happens to the average force and why?",
+      commonTrap: "Do not talk about braking force as if it depends on speed alone. The force depends on how quickly the momentum changes, not just on the size of the momentum by itself.",
+    };
+  }
   if (code === "F3_L5") {
     return {
       coreIdea: "Impulse is the name for the change in momentum during an interaction. Because impulse = change in momentum and impulse = force x time, the same event can be described through momentum change, force-time area, or force multiplied by time.",
