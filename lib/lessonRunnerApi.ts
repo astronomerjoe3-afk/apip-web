@@ -55,6 +55,8 @@ type LessonResources = {
 type AttemptHistory = {
   diagnosticUsedIds?: string[];
   diagnosticLastIds?: string[];
+  masteryUsedIds?: string[];
+  masteryLastIds?: string[];
 };
 
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -233,41 +235,77 @@ function writeAttemptHistory(moduleId: string, lessonId: string, history: Attemp
   window.sessionStorage.setItem(attemptHistoryKey(moduleId, lessonId), JSON.stringify(history));
 }
 
+function poolIds(items: UnknownRecord[]): string[] {
+  return items.map((item) => text(asRecord(item).id)).filter(Boolean);
+}
+
+function prioritizePoolForAttempt(pool: UnknownRecord[], nonce: unknown, seedLabel: string, usedIds: string[], lastIds: string[]): UnknownRecord[] {
+  const ordered = shuffle(pool, seedLabel + ':' + String(nonce || 0));
+  const availableIds = poolIds(ordered);
+  if (availableIds.length < 2) return ordered;
+
+  const usedSet = new Set((usedIds || []).filter((id) => availableIds.includes(id)));
+  const lastSet = new Set((lastIds || []).filter((id) => availableIds.includes(id)));
+  const blockedIds = availableIds.some((id) => !usedSet.has(id)) ? usedSet : lastSet;
+
+  if (blockedIds.size === 0 || blockedIds.size >= availableIds.length) return ordered;
+
+  const preferred = ordered.filter((item) => !blockedIds.has(text(asRecord(item).id)));
+  return preferred.length > 0
+    ? [...preferred, ...ordered.filter((item) => blockedIds.has(text(asRecord(item).id)))]
+    : ordered;
+}
+function mergeAttemptIds(poolIdsForLesson: string[], priorUsedIds: string[], askedIds: string[]): { lastIds: string[]; usedIds: string[] } {
+  const cleanAskedIds = askedIds.filter((id) => poolIdsForLesson.includes(id));
+  const mergedUsedIds = Array.from(new Set([
+    ...(priorUsedIds || []).filter((id) => poolIdsForLesson.includes(id)),
+    ...cleanAskedIds,
+  ]));
+  return {
+    lastIds: cleanAskedIds,
+    usedIds: mergedUsedIds.length >= poolIdsForLesson.length ? cleanAskedIds : mergedUsedIds,
+  };
+}
+
 function diagnosticPoolForAttempt(moduleId: string, lessonId: string, lesson: UnknownRecord, nonce: unknown): UnknownRecord[] {
   const pool = itemsFrom(lesson, "diagnostic").map(asRecord);
-  const ordered = shuffle(pool, "diagnostic:" + String(nonce || 0));
-  const poolIds = ordered.map((item) => text(item.id)).filter(Boolean);
-  if (poolIds.length < 2) return ordered;
-
   const history = readAttemptHistory(moduleId, lessonId);
-  const usedIds = new Set((history.diagnosticUsedIds || []).filter((id) => poolIds.includes(id)));
-  const lastIds = new Set((history.diagnosticLastIds || []).filter((id) => poolIds.includes(id)));
-  const blockedIds = poolIds.some((id) => !usedIds.has(id)) ? usedIds : lastIds;
-
-  if (blockedIds.size === 0 || blockedIds.size >= poolIds.length) return ordered;
-
-  const preferred = ordered.filter((item) => !blockedIds.has(text(item.id)));
-  return preferred.length > 0
-    ? [...preferred, ...ordered.filter((item) => blockedIds.has(text(item.id)))]
-    : ordered;
+  return prioritizePoolForAttempt(pool, nonce, "diagnostic", history.diagnosticUsedIds || [], history.diagnosticLastIds || []);
 }
 
 function writeDiagnosticAttemptHistory(moduleId: string, lessonId: string, lesson: UnknownRecord, askedIds: string[]): void {
-  const poolIds = itemsFrom(lesson, "diagnostic")
-    .map((item) => text(asRecord(item).id))
-    .filter(Boolean);
-  const cleanAskedIds = askedIds.filter((id) => poolIds.includes(id));
-  if (poolIds.length === 0 || cleanAskedIds.length === 0) return;
+  const availableIds = poolIds(itemsFrom(lesson, "diagnostic"));
+  if (availableIds.length === 0) return;
 
   const history = readAttemptHistory(moduleId, lessonId);
-  const mergedUsedIds = Array.from(new Set([
-    ...(history.diagnosticUsedIds || []).filter((id) => poolIds.includes(id)),
-    ...cleanAskedIds,
-  ]));
+  const merged = mergeAttemptIds(availableIds, history.diagnosticUsedIds || [], askedIds);
+  if (merged.lastIds.length === 0) return;
 
   writeAttemptHistory(moduleId, lessonId, {
-    diagnosticLastIds: cleanAskedIds,
-    diagnosticUsedIds: mergedUsedIds.length >= poolIds.length ? cleanAskedIds : mergedUsedIds,
+    ...history,
+    diagnosticLastIds: merged.lastIds,
+    diagnosticUsedIds: merged.usedIds,
+  });
+}
+
+function masteryPoolForAttempt(moduleId: string, lessonId: string, lesson: UnknownRecord, nonce: unknown): UnknownRecord[] {
+  const pool = masteryItems(lesson).map(asRecord);
+  const history = readAttemptHistory(moduleId, lessonId);
+  return prioritizePoolForAttempt(pool, nonce, "mastery", history.masteryUsedIds || [], history.masteryLastIds || []);
+}
+
+function writeMasteryAttemptHistory(moduleId: string, lessonId: string, lesson: UnknownRecord, askedIds: string[]): void {
+  const availableIds = poolIds(masteryItems(lesson));
+  if (availableIds.length === 0) return;
+
+  const history = readAttemptHistory(moduleId, lessonId);
+  const merged = mergeAttemptIds(availableIds, history.masteryUsedIds || [], askedIds);
+  if (merged.lastIds.length === 0) return;
+
+  writeAttemptHistory(moduleId, lessonId, {
+    ...history,
+    masteryLastIds: merged.lastIds,
+    masteryUsedIds: merged.usedIds,
   });
 }
 
@@ -551,6 +589,7 @@ function conceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   const baseItems = [
     ...conceptGateItems(lesson),
+    ...generatedConceptGateItems(lesson),
     ...itemsFrom(lesson, "transfer").map(asRecord).filter((item) => hasUsableMasteryAnswer(item)),
   ];
   const fallbackItems = baseItems.length >= 3 ? [] : generatedMasteryItems(lesson).slice(0, 4);
@@ -562,7 +601,7 @@ function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
     const id = text(record.id);
     const sourceKey = masterySourceKey(record);
     const promptKey = normalizePromptKey(text(record.prompt));
-    if (!id || seenIds.has(id) || (sourceKey && seenSources.has(sourceKey))) return false;
+    if (!id || seenIds.has(id) || (sourceKey && seenSources.has(sourceKey)) || (promptKey && seenPrompts.has(promptKey))) return false;
     seenIds.add(id);
     if (sourceKey) seenSources.add(sourceKey);
     if (promptKey) seenPrompts.add(promptKey);
@@ -865,6 +904,8 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F1-L2-M6", "Which pair contains only vectors?", ["distance and speed", "mass and temperature", "velocity and force", "time and volume"], 2, "Both quantities should need direction.", "Velocity and force are both vectors."),
         mcItem("F1-L2-M7", "What extra information turns speed into velocity?", ["mass", "direction", "unit prefix", "temperature"], 1, "Velocity is speed with one extra feature.", "Direction turns speed into velocity."),
         mcItem("F1-L2-M8", "Why can two vectors with the same magnitude still be different?", ["They can have different units", "They can have different directions", "They can only be different at night", "Vectors never differ once magnitudes match"], 1, "Magnitude alone is not enough for vectors.", "Two vectors can differ if their directions are different."),
+        mcItem("F1-L2-M9", "If an object keeps the same speed but turns around, which quantity must change?", ["mass", "velocity", "temperature", "time"], 1, "A direction change matters for vectors.", "Velocity must change because it includes direction as well as speed."),
+        mcItem("F1-L2-M10", "Which statement best compares distance and displacement?", ["Both always need direction", "Distance is scalar, while displacement is a vector from start to finish", "Displacement ignores direction", "Distance is always smaller than displacement"], 1, "One quantity is scalar and the other is vector.", "Distance is scalar, while displacement is a vector from the starting point to the finishing point."),
       ];
     case "F1_L3":
       return [
@@ -907,6 +948,49 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F2-L1-M4", "Which quantity is scalar?", ["displacement", "velocity", "force", "speed"], 3, "Pick the one that does not need direction.", "Speed is scalar because it needs magnitude only."),
         mcItem("F2-L1-M5", "Why can distance and displacement be different for the same trip?", ["Distance ignores all motion", "Displacement measures the start-to-finish change while distance measures the full path", "Displacement is always larger", "Distance always needs direction"], 1, "One quantity uses the whole path and the other uses the net change.", "Distance measures the whole path, while displacement measures the start-to-finish change with direction."),
         shortItem("F2-L1-M6", "A runner covers 240 m in 40 s. What is the average speed?", ["6", "6 m/s"], "Divide total distance by total time."),
+      ];
+    default:
+      return [];
+  }
+}
+
+function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
+  switch (lessonCode(lesson)) {
+    case "F1_L1":
+      return [
+        mcItem("F1-L1-G1", "Why must a physics measurement include a unit?", ["So the number looks scientific", "So the number can be rounded", "So the reader knows what quantity and scale the number represents", "So calculations become optional"], 2, "A bare number is incomplete in physics.", "A unit tells the reader what quantity and scale the number represents."),
+        mcItem("F1-L1-G2", "Which prefix makes the base unit 1000 times smaller?", ["kilo-", "centi-", "milli-", "mega-"], 2, "Think about one-thousandth of the base unit.", "milli- means one-thousandth of the base unit."),
+        mcItem("F1-L1-G3", "Why is '35 cm' more useful than just '35'?", ["It includes both the value and the unit", "It proves the answer is exact", "It removes the need to convert", "It always uses SI base units"], 0, "A complete measurement needs two parts.", "'35 cm' is more useful because it includes both the number and the unit."),
+      ];
+    case "F1_L2":
+      return [
+        mcItem("F1-L2-G1", "Which description must be a vector?", ["6 m north", "6 m", "6 kg", "6 s"], 0, "Look for the one that includes direction.", "'6 m north' is a vector because it has magnitude and direction."),
+        mcItem("F1-L2-G2", "Which extra feature turns speed into velocity?", ["mass", "direction", "time", "temperature"], 1, "Velocity is speed with one extra feature.", "Direction turns speed into velocity."),
+        mcItem("F1-L2-G3", "Which statement best separates distance from displacement?", ["Both always need direction", "Distance describes route length, while displacement is the start-to-finish change with direction", "Displacement ignores direction", "Distance is always smaller"], 1, "One quantity is scalar and the other is vector.", "Distance describes route length, while displacement is the directed change from start to finish."),
+      ];
+    case "F1_L3":
+      return [
+        mcItem("F1-L3-G1", "A balance reads 0.2 g too high every time. What type of error is this?", ["random error", "systematic error", "no error", "rounding error"], 1, "A repeated one-way shift is the clue.", "A repeated offset in the same direction is systematic error."),
+        mcItem("F1-L3-G2", "Why do repeated readings help?", ["They make units unnecessary", "They reveal spread and help reduce the effect of random error", "They guarantee the true value", "They remove calibration errors automatically"], 1, "Think about scatter and averaging.", "Repeated readings reveal spread and help reduce the effect of random error."),
+        mcItem("F1-L3-G3", "What sets the finest detail an instrument can reliably show?", ["its color", "its resolution", "its battery", "its unit name"], 1, "This is about the smallest change the tool can show.", "An instrument's resolution sets the finest detail it can reliably show."),
+      ];
+    case "F1_L4":
+      return [
+        mcItem("F1-L4-G1", "Which zeros do not count as significant figures?", ["Zeros between non-zero digits", "Leading zeros before the first non-zero digit", "Trailing zeros after a decimal point", "All zeros count"], 1, "Think about zeros that only place the decimal point.", "Leading zeros do not count because they only place the decimal point."),
+        mcItem("F1-L4-G2", "Why should you not copy every calculator digit into a physics answer?", ["Because calculators are always wrong", "Because extra digits can pretend to show more precision than the measurement supports", "Because units disappear", "Because rounding is banned"], 1, "The measurement sets the justified precision.", "Extra digits can falsely suggest more precision than the measurement really supports."),
+        mcItem("F1-L4-G3", "For addition or subtraction, which rule controls the final answer?", ["least decimal places", "most significant figures", "largest unit prefix", "smallest unit only"], 0, "This rule is about decimal places, not total significant figures.", "For addition or subtraction, the final answer should match the least number of decimal places."),
+      ];
+    case "F1_L5":
+      return [
+        mcItem("F1-L5-G1", "What does density compare?", ["mass and time", "mass packed into a given volume", "volume and direction", "force and area"], 1, "Density tells how much mass is packed into space.", "Density compares how much mass is packed into a given volume."),
+        mcItem("F1-L5-G2", "Which unit matches density?", ["kg", "m^3", "kg/m^3", "A"], 2, "Density is mass per volume.", "kg/m^3 is a density unit because it combines mass and volume."),
+        mcItem("F1-L5-G3", "Two blocks have the same volume. Which is denser?", ["The one with more mass", "The one with less mass", "They must have the same density", "You cannot compare density this way"], 0, "Think about mass packed into the same space.", "For the same volume, the one with more mass is denser."),
+      ];
+    case "F1_L6":
+      return [
+        mcItem("F1-L6-G1", "Which situation shows precision without accuracy?", ["Readings tightly grouped around the true value", "Readings tightly grouped but shifted away from the true value", "Readings spread widely around the true value", "One reading with no unit"], 1, "Tight grouping and being off target should appear together.", "Precision without accuracy means the readings are tightly grouped but shifted away from the true value."),
+        mcItem("F1-L6-G2", "Why report uncertainty with a measured value?", ["To make the answer longer", "To show the result is an estimate with a reasonable range", "To remove the need for units", "To guarantee accuracy"], 1, "Uncertainty is about honest reporting.", "Uncertainty shows that the measured value is an estimate with a reasonable range."),
+        mcItem("F1-L6-G3", "Which statement best describes random error?", ["It shifts every reading by the same amount", "It makes readings scatter unpredictably", "It changes the unit", "It guarantees low precision and low accuracy together"], 1, "Random error shows up as scatter.", "Random error makes readings scatter unpredictably around the best estimate."),
       ];
     default:
       return [];
@@ -1213,7 +1297,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         if (normalized.includes("heavier vehicle") || normalized.includes("mass")) return "Which option correctly explains why heavier vehicles are harder to stop safely?";
         return "Which option is the clearest match for this braking and safety lesson?";
       default:
-        return "Which option directly answers the idea named in this prompt?";
+        return "Which statement best matches the specific idea named in this prompt?";
     }
   };
 
@@ -3158,7 +3242,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const pool = masteryItems(resources.lesson);
     const strengthScore = masteryStrengthScore(runnerLesson, state);
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
-    const selectedPool = shuffle(pool, "mastery:" + String(masteryState.nonce || 0));
+    const selectedPool = masteryPoolForAttempt(moduleId, lessonId, resources.lesson, masteryState.nonce || 0);
     const selected = selectedPool.slice(0, count);
     stagePayload = masteryState.submitted || stage === "done" || hasPersistedResult
       ? {
@@ -3403,7 +3487,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const pool = masteryItems(resources.lesson);
     const strengthScore = masteryStrengthScore(runnerLesson, state);
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
-    const selectedPool = shuffle(pool, "mastery:" + String(state.mastery?.nonce || 0));
+    const selectedPool = masteryPoolForAttempt(moduleId, lessonId, resources.lesson, state.mastery?.nonce || 0);
     const selected = selectedPool.slice(0, count);
     if (selected.length === 0) throw new Error("The mastery check is not available right now.");
     const answers = asRecord(payload.answers);
@@ -3419,6 +3503,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const correctCount = feedback.filter((entry) => entry.is_correct === true).length;
     const score = selected.length > 0 ? correctCount / selected.length : 0;
     const result = { percent: Math.round(score * 100), passed: score >= numberValue(masteryMeta.threshold, 0.8) };
+    writeMasteryAttemptHistory(moduleId, lessonId, resources.lesson, selected.map((item) => text(asRecord(item).id)).filter(Boolean));
     writeState(moduleId, lessonId, {
       ...state,
       mastery: {
