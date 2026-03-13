@@ -1348,7 +1348,7 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F2_L6": return "Hold one variable steady while you change the other so you can see clearly how force and mass affect acceleration.";
     case "F3_L1": return "Change force and distance together so work is seen as energy transfer, not just as effort.";
     case "F3_L2": return "Compare how mass, speed, and height affect kinetic and gravitational potential energy.";
-    case "F3_L3": return "Use the explorer to test two independent levers: shorten the time to change power, or raise the useful fraction to change efficiency.";
+    case "F3_L3": return "Use the explorer to separate the rate relationship from the usefulness relationship: change time to change power, hold power to track energy transferred, and change useful output to change efficiency.";
     case "F3_L4": return "Track the whole-system momentum before and after the collision, then compare what happens when the second trolley is lighter or heavier.";
     case "F3_L5": return "Keep the momentum change fixed, stretch the stopping time, and use the force-time blocks to see why equal area can mean different forces.";
     case "F3_L6": return "Use the same car to compare three linked ideas at once: momentum now, kinetic energy now, and how stopping time changes the braking force.";
@@ -1369,7 +1369,7 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F2_L6": return "Start with one force-mass pair, then compare what happens when you double the force and when you double the mass.";
     case "F3_L1": return "Create one moving case and one no-movement case, then explain why only one transfers energy as work.";
     case "F3_L2": return "Build one comparison where speed matters more than mass, and one where changing height changes the energy store.";
-    case "F3_L3": return "Build one case where cutting the time raises power but leaves efficiency unchanged, then a second case where increasing useful output raises efficiency without changing the time.";
+    case "F3_L3": return "Build one case where the same energy is transferred in less time, one case where the same power runs for longer, and a third case where only the useful fraction changes. Then explain which quantity changed in each case.";
     case "F3_L4": return "Start with one incoming momentum, then compare how a lighter second trolley and a heavier second trolley change the shared final speed.";
     case "F3_L5": return "Hold the momentum change fixed, compare a short stop with a longer stop, and explain why the same impulse can still give a safer collision.";
     case "F3_L6": return "Use one car to compare the current stop, a doubled-speed stop, and a longer stopping-time case, then explain why speed is such a demanding safety variable.";
@@ -1507,9 +1507,9 @@ function simulationStageWatchFor(code: string): string[] {
       ];
     case "F3_L3":
       return [
-        "Power is a rate: it tells you how quickly the energy transfer is happening.",
-        "Efficiency is a fraction: it tells you how much of the input becomes useful output.",
-        "Changing time and changing useful fraction are different moves, so a process can be fast without being efficient.",
+        "Power is a rate: P = E / t, so less time for the same energy means more power.",
+        "The same relationship can be rearranged to E = Pt or t = E / P when energy or time is the missing quantity.",
+        "Efficiency is still a separate fraction: useful output divided by total input.",
       ];
     case "F3_L4":
       return [
@@ -1552,7 +1552,7 @@ function simulationStageTryFirst(code: string): string | undefined {
     case "F3_L2":
       return "Try mass 4 kg, speed 6 m/s, and height 3 m. KE should be 72 J and GPE should be 120 J if g = 10 N/kg.";
     case "F3_L3":
-      return "Try 800 J input, 400 J useful output, and 4 s first. Then keep 800 J input but cut the time to 2 s so you can see power change while efficiency stays 50%.";
+      return "Try 800 J input, 400 J useful output, and 4 s first. The power is 200 W and the efficiency is 50%. Then cut the time to 2 s so power rises to 400 W without changing efficiency, and finally keep power at 200 W for 6 s to see energy transferred rise to 1200 J.";
     case "F3_L4":
       return "Try incoming mass 2 kg, speed 6 m/s, and second mass 4 kg. The total momentum before is 12 kg m/s, so the shared speed after should be 2 m/s because the law of conservation of linear momentum keeps the whole-system total the same. Then reduce the second mass and notice that the shared speed increases.";
     case "F3_L5":
@@ -1582,7 +1582,7 @@ function simulationStageTakeaway(code: string): string | undefined {
     case "F3_L2":
       return "Energy can be stored in motion or in position, and the formulas show which physical change matters most in each case.";
     case "F3_L3":
-      return "Power and efficiency answer different questions: one asks how quickly energy is transferred, and the other asks how much of that input actually does the useful job.";
+      return "Power, energy, and time are tied by one rate relationship, while efficiency is a separate useful-fraction check. Keep those two ideas apart when you explain a process.";
     case "F3_L4":
       return "The law of conservation of linear momentum becomes clearer when you total the whole-system momentum before and after the interaction instead of following only one object.";
     case "F3_L5":
@@ -1708,10 +1708,10 @@ function scaffoldFocusExtras(code: string): string[] {
       ];
     case "F3_L3":
       return [
-        "Power answers how fast the transfer happens.",
-        "Efficiency answers how much of the input becomes useful output.",
-        "Fast does not automatically mean efficient.",
-        "Efficiency should be reported as a fraction or percentage of the input.",
+        "Power links transferred energy and time through P = E / t, so the same energy in less time means more power.",
+        "Rearrange the same relationship as E = Pt when energy is unknown and t = E / P when time is unknown.",
+        "Efficiency still answers a different question: how much of the input becomes useful output.",
+        "Fast does not automatically mean efficient, so keep the power calculation separate from the efficiency calculation.",
       ];
     case "F3_L4":
       return [
@@ -1846,9 +1846,9 @@ function scaffoldCoreBullets(code: string): string[] {
     case "F3_L3":
       return [
         "Power = energy transferred / time.",
+        "Energy transferred = power x time.",
+        "Time = energy transferred / power.",
         "Efficiency = useful output / total input.",
-        "Power is a rate quantity.",
-        "Efficiency compares useful transfer with total transfer.",
       ];
     case "F3_L4":
       return [
@@ -1935,10 +1935,10 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
       ];
     case "F3_L3":
       return [
-        "Power and efficiency are often confused because both relate to energy, but power is about rate while efficiency is about useful fraction.",
+        "Power connects three quantities at once: transferred energy, time, and rate, so the lesson should begin by deciding which of the three is missing.",
+        "If the same amount of energy is transferred in less time, the power rises; if the same power runs for longer, the energy transferred rises.",
         "A machine can be very powerful because it transfers energy quickly while still being inefficient because too much of the input becomes wasted output.",
-        "Efficiency can never exceed 100% because useful output cannot be larger than total input in a real process.",
-        "Decide first whether the question asks how fast the process is or how much of the input is useful.",
+        "After using P = E / t or one of its rearrangements, keep efficiency as a separate useful-output comparison that can never exceed 100%.",
       ];
     case "F3_L4":
       return [
@@ -2168,16 +2168,16 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F3_L3":
       return {
-        body: "Solve the rate question and the useful-fraction question separately so the concepts do not blur together.",
+        body: "Start by linking power, energy, and time explicitly: P = E / t, E = Pt, and t = E / P. Then keep that rate relationship separate from the efficiency calculation.",
         worked_example: {
-          prompt: "A machine takes in 900 J in 15 s and delivers 540 J as useful output. Find its power and its efficiency.",
+          prompt: "A machine transfers 900 J in 15 s and delivers 540 J as useful output. Find its power, find how much energy it would transfer in 5 s at the same power, and then find its efficiency.",
           steps: [
-            "Power compares energy transferred with time, so calculate 900 / 15 = 60 W.",
-            "Efficiency compares useful output with total input, so calculate 540 / 900.",
-            "The fraction is 0.60, which is 60%.",
-            "The machine is transferring energy at 60 W and converting 60% of the input into useful output.",
+            "Start with power: P = E / t = 900 / 15 = 60 W, so the machine transfers energy at 60 joules each second.",
+            "Now use the rearranged form E = Pt to find the energy transferred in 5 s at the same power: E = 60 x 5 = 300 J.",
+            "Keep efficiency separate from that rate relationship: efficiency = useful output / total input = 540 / 900 = 0.60.",
+            "Convert the fraction to 60%, then state the two ideas separately: 60 W describes how fast energy is transferred, while 60% describes how much of the input is useful.",
           ],
-          answer: "Power = 60 W and efficiency = 60%.",
+          answer: "Power = 60 W, the same machine would transfer 300 J in 5 s, and its efficiency = 60%.",
         },
       };
     case "F3_L4":
@@ -2615,7 +2615,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           title: "Split rate from usefulness",
           caption: "The same process can be fast, wasteful, both, or neither.",
           image_url: "/lesson-media/f3/f3-l3-power-efficiency.svg",
-          highlights: ["Power tracks time", "Efficiency tracks useful fraction", "Fast does not automatically mean efficient"],
+          highlights: ["Use P = E / t, E = Pt, and t = E / P", "Power tracks time", "Efficiency tracks useful fraction"],
         },
       ];
     case "F3_L4":
@@ -2672,6 +2672,14 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
       reasoning: "First define the system and choose a positive direction or sign convention. Work out the total momentum of all objects before the collision, not just the momentum of one trolley. Then set that total equal to the total momentum after the collision because the system is isolated during the interaction. Only after the whole-system balance is clear should you solve for the unknown speed or direction.",
       checkForUnderstanding: "When can you state that total momentum before a collision equals total momentum after it?",
       commonTrap: "Do not conserve the momentum of one object by itself. It is the total linear momentum of the whole system that stays constant when external forces are negligible.",
+    };
+  }
+  if (code === "F3_L3") {
+    return {
+      coreIdea: "Power links transferred energy and time through P = E / t, so you can also rearrange the same relationship as E = Pt or t = E / P depending on what is unknown.",
+      reasoning: "First decide whether the question is asking for power, transferred energy, or time. If energy and time are given, divide to get power. If power and time are given, multiply to get energy transferred. If energy and power are given, divide to get time. Only after that should you do a separate efficiency calculation using useful output divided by total input.",
+      checkForUnderstanding: "If a device keeps the same power but runs for longer, what happens to the transferred energy, and which rearranged form of the power equation shows that?",
+      commonTrap: "Do not mix the power equation with efficiency. Power tells how quickly energy is transferred; efficiency tells what fraction of the input is useful.",
     };
   }
   if (code.startsWith("F3_")) {
