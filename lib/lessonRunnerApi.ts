@@ -2556,9 +2556,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Compare random error and zero error",
-          caption: "Repeated readings can disagree in two ways: random error causes scatter, while zero error adds the same offset each time.",
+          caption: "Random error makes readings scatter around a best value, while zero error shifts every reading by the same fixed amount and must be corrected.",
           image_url: "/lesson-media/f1/f1-l3-reading-errors.svg",
-          highlights: ["Random error shows up as spread between repeated readings", "Zero error shifts every reading by the same amount", "In the next measurement lab, compare scatter, averaging, and zero-offset effects"],
+          highlights: ["Random error varies from reading to reading, so averaging can help", "Zero error is a constant offset, so averaging alone will not fix it", "In the next measurement lab, compare spread, best estimate, and zero correction"],
         },
       ];
     case "F1_L4":
