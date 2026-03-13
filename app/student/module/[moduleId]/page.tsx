@@ -206,6 +206,7 @@ export default function StudentModulePage() {
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!user) {
       setBillingSummary(null);
+      setBillingErr("");
       return;
     }
 
@@ -213,6 +214,7 @@ export default function StudentModulePage() {
     try {
       const response = await apipGet<BillingSummaryResponse>("/billing/summary");
       setBillingSummary(response.billing || null);
+      setBillingErr("");
     } catch (error) {
       setBillingSummary(null);
       setBillingErr(errorMessage(error));
