@@ -1280,7 +1280,12 @@ export default function LessonRunner({
           <div className="grid gap-4 xl:grid-cols-2">
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h4 className="text-lg font-semibold text-slate-900">Live instrument bench</h4>
-              <p className="mt-2 text-slate-700">Pick a real-world object first, then switch tools and notice how the reading detail changes.</p>
+              <p className="mt-2 text-slate-700">Follow the bench in short checks instead of trying to do everything at once.</p>
+              <ol className="mt-4 space-y-2 text-sm text-slate-700">
+                <li><span className="font-medium text-slate-900">Step 1:</span> Start with chalk and the ruler so the roughest scale feels familiar.</li>
+                <li><span className="font-medium text-slate-900">Step 2:</span> Switch to the marble or wire and compare what changes when you move to a finer tool.</li>
+                <li><span className="font-medium text-slate-900">Step 3:</span> Keep the same object in mind and decide which tool gives the most justified detail.</li>
+              </ol>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {(['wire', 'marble', 'chalk', 'custom'] as const).map((presetKey) => (
                   <button
@@ -1372,7 +1377,11 @@ export default function LessonRunner({
             </div>
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
               <h4 className="text-lg font-semibold text-slate-900">Reading trust lab</h4>
-              <p className="mt-2 text-slate-700">Switch tools, compare repeated readings, and then test what happens when the instrument starts off zero.</p>
+              <p className="mt-2 text-slate-700">Finish with two short trust checks.</p>
+              <ol className="mt-4 space-y-2 text-sm text-slate-700">
+                <li><span className="font-medium text-slate-900">Step 4:</span> Compare the repeated-reading spread and decide whether the cluster looks tight or wide.</li>
+                <li><span className="font-medium text-slate-900">Step 5:</span> Add a zero-error offset and compare the observed reading with the corrected reading.</li>
+              </ol>
               <div className="mt-4 grid gap-2 sm:grid-cols-5">
                 {simulationRepeated.map((item, index) => (
                   <div key={`${item}-${index}`} className="rounded-xl bg-slate-50 px-3 py-3 text-center text-sm font-medium text-slate-800">
