@@ -3164,9 +3164,11 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   const masteryMeta = asRecord(runnerLesson.mastery_check);
   const serverCompletedStages = completedStageKeys(runnerLesson);
   const inferredServerStage = inferredStageFromServerProgress(resources.lesson, runnerLesson);
-  const serverStage = runnerStageIndex(inferredServerStage || "") > runnerStageIndex(backendStage)
+  const inferredStageIndex = runnerStageIndex(inferredServerStage || "");
+  const backendStageIndex = runnerStageIndex(backendStage);
+  const serverStage = inferredStageIndex >= 0 && (backendStageIndex < 0 || inferredStageIndex < backendStageIndex)
     ? inferredServerStage || backendStage
-    : backendStage;
+    : backendStageIndex >= 0 ? backendStage : inferredServerStage || startStage;
   const shouldResetToStart = (
     lessonStatus === "not_started" &&
     serverCompletedStages.length === 0 &&
