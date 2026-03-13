@@ -1374,9 +1374,9 @@ function simulationStageWatchFor(code: string): string[] {
       ];
     case "F3_L4":
       return [
+        "The law of conservation of linear momentum says total system momentum before the collision equals total system momentum after the collision for an isolated system.",
         "Momentum equals mass multiplied by velocity, so both mass and direction matter in the total.",
-        "Direction matters because opposite momenta can cancel in the system total.",
-        "Use conservation on the whole system when external forces are negligible during the collision.",
+        "Apply the law to the whole system only when external forces are negligible during the interaction.",
       ];
     case "F3_L5":
       return [
@@ -1415,7 +1415,7 @@ function simulationStageTryFirst(code: string): string | undefined {
     case "F3_L3":
       return "Try 800 J input, 400 J useful output, and 4 s first. Then keep 800 J input but cut the time to 2 s so you can see power change while efficiency stays 50%.";
     case "F3_L4":
-      return "Try incoming mass 2 kg, speed 6 m/s, and second mass 4 kg. The shared speed should be 2 m/s. Then reduce the second mass and notice that the shared speed increases.";
+      return "Try incoming mass 2 kg, speed 6 m/s, and second mass 4 kg. The total momentum before is 12 kg m/s, so the shared speed after should be 2 m/s because the law of conservation of linear momentum keeps the whole-system total the same. Then reduce the second mass and notice that the shared speed increases.";
     case "F3_L5":
       return "Try a momentum change of 600 kg m/s over 0.3 s. The average force should be 2000 N. Then double the time and notice the same impulse with half the force.";
     case "F3_L6":
@@ -1445,7 +1445,7 @@ function simulationStageTakeaway(code: string): string | undefined {
     case "F3_L3":
       return "Power and efficiency answer different questions: one asks how quickly energy is transferred, and the other asks how much of that input actually does the useful job.";
     case "F3_L4":
-      return "Collision reasoning becomes clearer when you total the whole-system momentum before and after the interaction instead of following only one object.";
+      return "The law of conservation of linear momentum becomes clearer when you total the whole-system momentum before and after the interaction instead of following only one object.";
     case "F3_L5":
       return "Impulse explains why stretching a collision over more time can reduce the force even though exactly the same momentum change still has to happen.";
     case "F3_L6":
@@ -1576,10 +1576,10 @@ function scaffoldFocusExtras(code: string): string[] {
       ];
     case "F3_L4":
       return [
-        "Momentum keeps direction because velocity keeps direction.",
-        "Total momentum belongs to the system, not to one object alone.",
-        "Conservation works when outside forces are negligible during the interaction.",
-        "Opposite momenta can partly or completely cancel in the total.",
+        "The law of conservation of linear momentum says the total linear momentum of an isolated system stays constant through the interaction.",
+        "Momentum keeps direction because velocity keeps direction, so signs or direction words matter in the total.",
+        "Total momentum belongs to the whole system, not to one object alone.",
+        "Opposite momenta can partly or completely cancel in the system total.",
       ];
     case "F3_L5":
       return [
@@ -1713,9 +1713,9 @@ function scaffoldCoreBullets(code: string): string[] {
       ];
     case "F3_L4":
       return [
-        "Momentum = mass x velocity.",
-        "Momentum needs direction or a sign convention.",
-        "Total system momentum can be conserved in isolated interactions.",
+        "Linear momentum = mass x velocity.",
+        "The law of conservation of linear momentum says total system momentum before an isolated interaction equals total system momentum after it.",
+        "Momentum needs direction or a sign convention because opposite directions can cancel in the total.",
         "After a collision, compare the whole-system total, not one object by itself.",
       ];
     case "F3_L5":
@@ -1803,10 +1803,10 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
       ];
     case "F3_L4":
       return [
+        "The law of conservation of linear momentum says the total momentum of an isolated system before the interaction must equal the total momentum after the interaction.",
         "Momentum combines how much matter is moving with how fast and in which direction it moves, so direction must stay in the reasoning.",
-        "Conservation of momentum is a system rule: compare the total before and after the interaction rather than tracking one object in isolation.",
         "Equal and opposite momenta can cancel, which is why zero total momentum does not mean the objects are motionless individually.",
-        "Before using conservation, check that external forces are negligible during the interaction you are analysing.",
+        "Before using the law, check that external forces are negligible during the interaction you are analysing.",
       ];
     case "F3_L5":
       return [
@@ -2043,14 +2043,15 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F3_L4":
       return {
-        body: "Use conservation on the whole system, then interpret what the shared final motion tells you.",
+        body: "Start from the law of conservation of linear momentum: in an isolated system, total momentum before the collision equals total momentum after it. Then use that whole-system balance to interpret the shared final motion.",
         worked_example: {
           prompt: "A 2 kg trolley moving at 5 m/s hits a 3 kg trolley at rest and they stick together. Find their common speed after the collision.",
           steps: [
-            "Start with total momentum before the collision: 2 x 5 = 10 kg m/s.",
+            "Write the law of conservation of linear momentum for the whole system: total momentum before = total momentum after.",
+            "Find the total momentum before the collision: 2 x 5 = 10 kg m/s.",
             "Because the trolleys stick together, the total mass afterward is 5 kg.",
-            "Use conservation of momentum: 10 = 5v.",
-            "So v = 2 m/s. The same total momentum is now shared by more mass.",
+            "Apply the law: 10 = 5v, so the shared speed must satisfy the same total momentum after the collision.",
+            "Solve to get v = 2 m/s. The same total momentum is now shared by more mass.",
           ],
           answer: "The common speed after the collision is 2 m/s.",
         },
@@ -2526,6 +2527,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 
 function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: string; checkForUnderstanding: string; commonTrap: string } {
+  if (code === "F3_L4") {
+    return {
+      coreIdea: "The law of conservation of linear momentum says that in an isolated system, the total linear momentum before an interaction equals the total linear momentum after it.",
+      reasoning: "First define the system and choose a positive direction or sign convention. Work out the total momentum of all objects before the collision, not just the momentum of one trolley. Then set that total equal to the total momentum after the collision because the system is isolated during the interaction. Only after the whole-system balance is clear should you solve for the unknown speed or direction.",
+      checkForUnderstanding: "When can you state that total momentum before a collision equals total momentum after it?",
+      commonTrap: "Do not conserve the momentum of one object by itself. It is the total linear momentum of the whole system that stays constant when external forces are negligible.",
+    };
+  }
   if (code.startsWith("F3_")) {
     const core = scaffoldCoreBullets(code);
     const focus = scaffoldFocusExtras(code);
@@ -2591,6 +2600,12 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
 }
 
 function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUnderstanding: string } {
+  if (code === "F3_L4") {
+    return {
+      body: "In the signed movement-budget analogy, each object brings a positive or negative contribution depending on its direction. The law of conservation of linear momentum says the whole account balance cannot change during the collision if no significant outside forces act on the system. Individual objects can exchange momentum with each other, but the total system balance before and after the interaction must match.",
+      checkForUnderstanding: "In this analogy, what stays the same through the collision: each object's own momentum or the whole system balance?",
+    };
+  }
   if (code.startsWith("F3_")) {
     return {
       body: "Use the analogy by matching each part to the physics before you calculate. Ask what is being transferred, what is stored, what is conserved, and which variable changes most strongly in the comparison.",
