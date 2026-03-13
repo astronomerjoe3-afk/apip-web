@@ -17,6 +17,7 @@ type LocalState = {
     diagnosticScore?: number;
   };
   diagnostic?: {
+    nonce?: number;
     askedIds: string[];
     answers: Record<string, string>;
     feedback?: UnknownRecord[];
@@ -24,6 +25,7 @@ type LocalState = {
     complete?: boolean;
   };
   conceptGate?: {
+    nonce?: number;
     retryCount: number;
     submitted?: boolean;
     passed?: boolean;
@@ -201,6 +203,10 @@ function clearModuleState(moduleId: string): void {
     if (key && key.startsWith(prefix)) keys.push(key);
   }
   for (const key of keys) window.sessionStorage.removeItem(key);
+}
+
+function freshAttemptSeed(): number {
+  return Date.now() + Math.floor(Math.random() * 1000000);
 }
 
 function firstStageForLesson(lesson: UnknownRecord): string {
@@ -2819,6 +2825,41 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   if (stage !== "concept_gate") delete state.conceptGate;
   if (stage !== "reflection") delete state.reflection;
   if (stage !== "mastery_check" && stage !== "done") delete state.mastery;
+
+  if (stage === "diagnostic") {
+    state.diagnostic = {
+      nonce: state.diagnostic?.nonce || freshAttemptSeed(),
+      askedIds: state.diagnostic?.askedIds || [],
+      answers: state.diagnostic?.answers || {},
+      feedback: state.diagnostic?.feedback,
+      recentFeedback: state.diagnostic?.recentFeedback,
+      complete: state.diagnostic?.complete,
+    };
+  }
+
+  if (stage === "concept_gate") {
+    state.conceptGate = {
+      nonce: state.conceptGate?.nonce || freshAttemptSeed(),
+      retryCount: state.conceptGate?.retryCount || 0,
+      submitted: state.conceptGate?.submitted,
+      passed: state.conceptGate?.passed,
+      feedback: state.conceptGate?.feedback,
+      microReteach: state.conceptGate?.microReteach,
+    };
+  }
+
+  if (stage === "mastery_check" || stage === "done") {
+    state.mastery = {
+      nonce: state.mastery?.nonce || freshAttemptSeed(),
+      submitted: state.mastery?.submitted,
+      feedback: state.mastery?.feedback,
+      result: state.mastery?.result,
+      reviewRefs: state.mastery?.reviewRefs,
+      reviewRequested: state.mastery?.reviewRequested,
+      forceNewAttempt: state.mastery?.forceNewAttempt,
+    };
+  }
+
   writeState(moduleId, lessonId, state);
 
   let activeStage = "diagnostic";
@@ -2827,6 +2868,8 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   if (stage === "diagnostic") {
     activeStage = "diagnostic";
     const pool = itemsFrom(resources.lesson, "diagnostic");
+    const diagnosticNonce = state.diagnostic?.nonce || 0;
+    const orderedPool = shuffle(pool, "diagnostic:" + String(diagnosticNonce));
     const askedIds = state.diagnostic?.askedIds || [];
     const answers = state.diagnostic?.answers || {};
     const feedback = state.diagnostic?.feedback || [];
@@ -2835,7 +2878,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
       return item && grade(asRecord(item), answers[id], title).is_correct === true ? total + 1 : total;
     }, 0);
     const targetCount = diagnosticTarget(correctCount, askedIds.length, pool.length);
-    const nextItem = pool.find((entry) => !askedIds.includes(text(asRecord(entry).id))) || null;
+    const nextItem = orderedPool.find((entry) => !askedIds.includes(text(asRecord(entry).id))) || null;
     const isComplete = Boolean(state.diagnostic?.complete) || (!nextItem && feedback.length > 0);
     if (isComplete && feedback.length > 0) {
       stagePayload = {
@@ -2850,7 +2893,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
         instructions: askedIds.length < 2 ? "Question " + String(askedIds.length + 1) + " of at least 2." : "Question " + String(askedIds.length + 1) + " of " + String(targetCount) + ". Strong answers may unlock one more question.",
         question_count: targetCount,
         answered_count: askedIds.length,
-        questions: nextItem ? [question(asRecord(nextItem))] : [],
+        questions: nextItem ? [question(asRecord(nextItem), "diagnostic:" + String(diagnosticNonce) + ":" + String(askedIds.length))] : [],
         recent_feedback: state.diagnostic?.recentFeedback,
         action_label: "Check my answer",
       };
@@ -2864,14 +2907,16 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   else if (stage === "concept_gate") {
     activeStage = "concept_gate";
     const retryCount = state.conceptGate?.retryCount || 0;
+    const conceptNonce = state.conceptGate?.nonce || 0;
+    const conceptSeed = "concept:" + String(conceptNonce) + ":" + String(retryCount);
     const gatePool = conceptGateItems(resources.lesson);
-    const gateItem = gatePool.length > 0 ? shuffle(gatePool, `concept:${retryCount}`)[0] : null;
+    const gateItem = gatePool.length > 0 ? shuffle(gatePool, conceptSeed)[0] : null;
     stagePayload = state.conceptGate?.submitted
       ? {
           instructions: "Use the feedback below to tighten the key idea before moving on.",
           retry_count: retryCount,
           max_retries: CONCEPT_GATE_MAX_RETRIES,
-          questions: gateItem ? [question(asRecord(gateItem), `concept:${retryCount}`)] : [],
+          questions: gateItem ? [question(asRecord(gateItem), conceptSeed)] : [],
           submitted: true,
           passed: state.conceptGate.passed,
           feedback: state.conceptGate.feedback,
@@ -2881,7 +2926,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
           instructions: "Answer this quick check before the activity opens.",
           retry_count: retryCount,
           max_retries: CONCEPT_GATE_MAX_RETRIES,
-          questions: gateItem ? [question(asRecord(gateItem), `concept:${retryCount}`)] : [],
+          questions: gateItem ? [question(asRecord(gateItem), conceptSeed)] : [],
         };
   }
   else if (stage === "simulation") {
@@ -2996,6 +3041,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     if (!item) throw new Error("This question is not available right now.");
 
     const current = readState(moduleId, lessonId);
+    const diagnosticNonce = current.diagnostic?.nonce || freshAttemptSeed();
     const askedIds = current.diagnostic?.askedIds || [];
     const nextAskedIds = askedIds.includes(questionId) ? askedIds : [...askedIds, questionId];
     const nextAnswers = { ...(current.diagnostic?.answers || {}), [questionId]: text(answerValue) };
@@ -3009,7 +3055,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const complete = graded.length >= target || nextAskedIds.length >= pool.length;
     writeState(moduleId, lessonId, {
       ...current,
-      diagnostic: { askedIds: nextAskedIds, answers: nextAnswers, recentFeedback: currentFeedback, complete, feedback: complete ? graded : undefined },
+      diagnostic: { nonce: diagnosticNonce, askedIds: nextAskedIds, answers: nextAnswers, recentFeedback: currentFeedback, complete, feedback: complete ? graded : undefined },
       conceptGate: current.conceptGate,
       reflection: current.reflection,
       mastery: current.mastery,
@@ -3059,7 +3105,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const state = readState(moduleId, lessonId);
     writeState(moduleId, lessonId, {
       ...state,
-      conceptGate: { retryCount: Math.min((state.conceptGate?.retryCount || 0) + 1, CONCEPT_GATE_MAX_RETRIES) },
+      conceptGate: { nonce: state.conceptGate?.nonce || freshAttemptSeed(), retryCount: Math.min((state.conceptGate?.retryCount || 0) + 1, CONCEPT_GATE_MAX_RETRIES) },
     });
     return;
   }
@@ -3083,18 +3129,21 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
   if (request.event_type === "concept_gate_submitted") {
     const resources = await loadResources(moduleId, lessonId);
     const title = lessonTitle(resources.lesson, asRecord(resources.runner.lesson));
-    const retryCount = readState(moduleId, lessonId).conceptGate?.retryCount || 0;
+    const state = readState(moduleId, lessonId);
+    const retryCount = state.conceptGate?.retryCount || 0;
+    const conceptNonce = state.conceptGate?.nonce || freshAttemptSeed();
+    const conceptSeed = "concept:" + String(conceptNonce) + ":" + String(retryCount);
     const pool = conceptGateItems(resources.lesson);
-    const item = pool.length > 0 ? shuffle(pool, `concept:${retryCount}`)[0] : null;
+    const item = pool.length > 0 ? shuffle(pool, conceptSeed)[0] : null;
     const answerValue = text(asRecord(payload.answers)[text(asRecord(item).id)]);
     if (!item || !answerValue) throw new Error("Choose an answer before continuing.");
     const graded = grade(asRecord(item), answerValue, title);
     const capsules = asList(asRecord(phases(resources.lesson).concept_reconstruction).capsules).map(asRecord);
     const capsule = capsules.find((entry) => asList(entry.checks).map(asRecord).some((check) => text(check.id) === text(asRecord(item).id)));
-    const state = readState(moduleId, lessonId);
     writeState(moduleId, lessonId, {
       ...state,
       conceptGate: {
+        nonce: conceptNonce,
         retryCount,
         submitted: true,
         passed: graded.is_correct === true,
@@ -3146,7 +3195,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     writeState(moduleId, lessonId, {
       ...state,
       mastery: {
-        nonce: (state.mastery?.nonce || 0) + 1,
+        nonce: (state.mastery?.nonce || freshAttemptSeed()) + 1,
         forceNewAttempt: true,
       },
     });
@@ -3157,7 +3206,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const state = readState(moduleId, lessonId);
     writeState(moduleId, lessonId, {
       ...state,
-      mastery: { ...(state.mastery || { nonce: 0 }), reviewRequested: true },
+      mastery: { ...(state.mastery || { nonce: freshAttemptSeed() }), reviewRequested: true },
     });
     return;
   }
