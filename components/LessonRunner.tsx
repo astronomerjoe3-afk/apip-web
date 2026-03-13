@@ -220,7 +220,7 @@ type ApiEventPayload = Record<string, unknown>;
 
 function runnerLessonKey(lessonId: string): string {
   const normalized = lessonId.replace(/-/g, "_").toUpperCase();
-  const match = normalized.match(/^F\d+_L\d+/);
+  const match = normalized.match(/F\d+_L\d+/);
   return match?.[0] || normalized;
 }
 
@@ -567,7 +567,7 @@ export default function LessonRunner({
       runner.active_stage === "mastery" &&
       runner.lesson_status === "completed" &&
       !canGoNextLesson &&
-      /_L6$/.test(runnerLessonKey(runner.lesson_id));
+      /_L6$/.test(runnerLessonKey(lessonId || runner.lesson_id));
 
     if (isFinalModuleWrapUp) return "Module complete";
     switch (runner.active_stage) {
@@ -594,7 +594,7 @@ export default function LessonRunner({
       runner.active_stage === "mastery" &&
       runner.lesson_status === "completed" &&
       !canGoNextLesson &&
-      /_L6$/.test(runnerLessonKey(runner.lesson_id));
+      /_L6$/.test(runnerLessonKey(lessonId || runner.lesson_id));
 
     if (isFinalModuleWrapUp) return false;
     return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic" && runner.active_stage !== "simulation";
@@ -613,7 +613,7 @@ export default function LessonRunner({
       runner.active_stage === "mastery" &&
       runner.lesson_status === "completed" &&
       !canGoNextLesson &&
-      /_L6$/.test(runnerLessonKey(runner.lesson_id));
+      /_L6$/.test(runnerLessonKey(lessonId || runner.lesson_id));
 
     if (isFinalModuleWrapUp) return "Congratulations. You finished the final mission and wrapped up this module.";
     switch (runner.active_stage) {
@@ -1123,7 +1123,7 @@ export default function LessonRunner({
 
   const renderSimulation = () => {
     const payload = runner.stage_payload as SimulationStagePayload;
-    const simulationLessonKey = runnerLessonKey(runner.lesson_id);
+    const simulationLessonKey = runnerLessonKey(lessonId || runner.lesson_id);
     const hasStructuredGuidance = Boolean(
       (payload.explore_steps?.length ?? 0) ||
       (payload.watch_for?.length ?? 0) ||
@@ -1909,7 +1909,7 @@ export default function LessonRunner({
 
   const renderReflection = () => {
     const payload = runner.stage_payload as ReflectionStagePayload;
-    const reflectionLessonKey = runnerLessonKey(runner.lesson_id);
+    const reflectionLessonKey = runnerLessonKey(lessonId || runner.lesson_id);
     const reflectionWordCount = reflectionText.trim()
       ? reflectionText.trim().split(/\s+/).length
       : 0;
@@ -2212,7 +2212,7 @@ export default function LessonRunner({
         passed &&
         runner.lesson_status === "completed" &&
         !canGoNextLesson &&
-        /_L6$/.test(runnerLessonKey(runner.lesson_id));
+        /_L6$/.test(runnerLessonKey(lessonId || runner.lesson_id));
 
 
       return (
