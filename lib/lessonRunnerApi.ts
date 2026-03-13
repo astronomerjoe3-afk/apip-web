@@ -52,6 +52,11 @@ type LessonResources = {
   lesson: UnknownRecord;
 };
 
+type AttemptHistory = {
+  diagnosticUsedIds?: string[];
+  diagnosticLastIds?: string[];
+};
+
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
@@ -203,6 +208,67 @@ function clearModuleState(moduleId: string): void {
     if (key && key.startsWith(prefix)) keys.push(key);
   }
   for (const key of keys) window.sessionStorage.removeItem(key);
+}
+
+function attemptHistoryKey(moduleId: string, lessonId: string): string {
+  return `lesson-runner-history:${moduleId}:${normalizeLessonId(lessonId)}`;
+}
+
+function readAttemptHistory(moduleId: string, lessonId: string): AttemptHistory {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.sessionStorage.getItem(attemptHistoryKey(moduleId, lessonId));
+    return raw ? (JSON.parse(raw) as AttemptHistory) : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeAttemptHistory(moduleId: string, lessonId: string, history: AttemptHistory): void {
+  if (typeof window === "undefined") return;
+  if (Object.keys(history).length === 0) {
+    window.sessionStorage.removeItem(attemptHistoryKey(moduleId, lessonId));
+    return;
+  }
+  window.sessionStorage.setItem(attemptHistoryKey(moduleId, lessonId), JSON.stringify(history));
+}
+
+function diagnosticPoolForAttempt(moduleId: string, lessonId: string, lesson: UnknownRecord, nonce: unknown): UnknownRecord[] {
+  const pool = itemsFrom(lesson, "diagnostic").map(asRecord);
+  const ordered = shuffle(pool, "diagnostic:" + String(nonce || 0));
+  const poolIds = ordered.map((item) => text(item.id)).filter(Boolean);
+  if (poolIds.length < 2) return ordered;
+
+  const history = readAttemptHistory(moduleId, lessonId);
+  const usedIds = new Set((history.diagnosticUsedIds || []).filter((id) => poolIds.includes(id)));
+  const lastIds = new Set((history.diagnosticLastIds || []).filter((id) => poolIds.includes(id)));
+  const blockedIds = poolIds.some((id) => !usedIds.has(id)) ? usedIds : lastIds;
+
+  if (blockedIds.size === 0 || blockedIds.size >= poolIds.length) return ordered;
+
+  const preferred = ordered.filter((item) => !blockedIds.has(text(item.id)));
+  return preferred.length > 0
+    ? [...preferred, ...ordered.filter((item) => blockedIds.has(text(item.id)))]
+    : ordered;
+}
+
+function writeDiagnosticAttemptHistory(moduleId: string, lessonId: string, lesson: UnknownRecord, askedIds: string[]): void {
+  const poolIds = itemsFrom(lesson, "diagnostic")
+    .map((item) => text(asRecord(item).id))
+    .filter(Boolean);
+  const cleanAskedIds = askedIds.filter((id) => poolIds.includes(id));
+  if (poolIds.length === 0 || cleanAskedIds.length === 0) return;
+
+  const history = readAttemptHistory(moduleId, lessonId);
+  const mergedUsedIds = Array.from(new Set([
+    ...(history.diagnosticUsedIds || []).filter((id) => poolIds.includes(id)),
+    ...cleanAskedIds,
+  ]));
+
+  writeAttemptHistory(moduleId, lessonId, {
+    diagnosticLastIds: cleanAskedIds,
+    diagnosticUsedIds: mergedUsedIds.length >= poolIds.length ? cleanAskedIds : mergedUsedIds,
+  });
 }
 
 function freshAttemptSeed(): number {
@@ -2963,7 +3029,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     activeStage = "diagnostic";
     const pool = itemsFrom(resources.lesson, "diagnostic");
     const diagnosticNonce = state.diagnostic?.nonce || 0;
-    const orderedPool = shuffle(pool, "diagnostic:" + String(diagnosticNonce));
+    const orderedPool = diagnosticPoolForAttempt(moduleId, lessonId, resources.lesson, diagnosticNonce);
     const askedIds = state.diagnostic?.askedIds || [];
     const answers = state.diagnostic?.answers || {};
     const feedback = state.diagnostic?.feedback || [];
@@ -3146,6 +3212,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const correctCount = graded.filter((entry) => entry.is_correct === true).length;
     const target = diagnosticTarget(correctCount, graded.length, pool.length);
     const complete = graded.length >= target || nextAskedIds.length >= pool.length;
+    if (complete) writeDiagnosticAttemptHistory(moduleId, lessonId, resources.lesson, nextAskedIds);
     writeState(moduleId, lessonId, {
       ...current,
       diagnostic: { nonce: diagnosticNonce, askedIds: nextAskedIds, answers: nextAnswers, recentFeedback: currentFeedback, complete, feedback: complete ? graded : undefined },
