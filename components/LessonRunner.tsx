@@ -152,6 +152,7 @@ type ReflectionStagePayload = {
 
 type MasteryFeedbackItem = {
   question_id: string;
+  prompt?: string;
   is_correct: boolean;
   explanation?: string;
 };
@@ -356,15 +357,16 @@ function masteryFeedbackBody(item: MasteryFeedbackItem, lessonTitle: string): st
   const hasPlaceholder = !explanation
     || placeholder.some((entry) => explanation.toLowerCase().includes(entry));
 
+  const promptPrefix = item.prompt ? `${item.prompt}\n\n` : "";
   if (!hasPlaceholder) {
-    return explanation;
+    return promptPrefix + explanation;
   }
 
   if (item.is_correct) {
-    return "Correct. You used the lesson idea correctly.";
+    return promptPrefix + "Correct. You used the lesson idea correctly.";
   }
 
-  return `Review ${lessonTitle} again, especially the key ideas from this lesson.`;
+  return `${promptPrefix}Review ${lessonTitle} again, especially the key ideas from this lesson.`;
 }
 
 function ReviewReferences({ refs }: { refs?: ReviewReference[] }) {

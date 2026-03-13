@@ -3173,6 +3173,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       const graded = grade(asRecord(item), answers[text(asRecord(item).id)], title);
       return {
         question_id: text(graded.question_id),
+        prompt: text(graded.prompt),
         is_correct: graded.is_correct,
         explanation: graded.is_correct === true ? text(graded.explanation) || "Correct." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
       };
