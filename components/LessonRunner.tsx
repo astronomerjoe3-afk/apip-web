@@ -597,7 +597,12 @@ export default function LessonRunner({
       /_L6$/.test(runnerLessonKey(lessonId || runner.lesson_id));
 
     if (isFinalModuleWrapUp) return false;
-    return runner.lesson_status !== "not_started" && runner.active_stage !== "diagnostic" && runner.active_stage !== "simulation";
+    return (
+      runner.lesson_status !== "not_started" &&
+      runner.active_stage !== "diagnostic" &&
+      runner.active_stage !== "simulation" &&
+      runner.active_stage !== "mastery"
+    );
   }, [canGoNextLesson, runner]);
 
   const restartCopy = useMemo(() => {
