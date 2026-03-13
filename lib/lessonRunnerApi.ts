@@ -490,13 +490,16 @@ function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   const fallbackItems = baseItems.length >= 3 ? [] : generatedMasteryItems(lesson).slice(0, 4);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
+  const seenPrompts = new Set<string>();
   return [...baseItems, ...fallbackItems].filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
     const sourceKey = masterySourceKey(record);
+    const promptKey = normalizePromptKey(text(record.prompt));
     if (!id || seenIds.has(id) || (sourceKey && seenSources.has(sourceKey))) return false;
     seenIds.add(id);
     if (sourceKey) seenSources.add(sourceKey);
+    if (promptKey) seenPrompts.add(promptKey);
     return true;
   });
 }
@@ -1145,6 +1148,7 @@ function hasUsableMasteryAnswer(item: UnknownRecord): boolean {
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
+  const seenPrompts = new Set<string>();
   const diagnosticRecords = itemsFrom(lesson, "diagnostic").map(asRecord);
   const diagnosticSourceKeys = new Set(diagnosticRecords.map((item) => masterySourceKey(item)).filter(Boolean));
   const generated = generatedMasteryItems(lesson);
@@ -1157,10 +1161,12 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   return ordered.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
+    const promptKey = normalizePromptKey(text(record.prompt));
     const sourceKey = masterySourceKey(record);
     if (!id || (sourceKey && diagnosticSourceKeys.has(sourceKey))) return false;
-    if (seenIds.has(id) || (sourceKey && seenSources.has(sourceKey))) return false;
+    if (seenIds.has(id) || (sourceKey && seenSources.has(sourceKey)) || (promptKey && seenPrompts.has(promptKey))) return false;
     seenIds.add(id);
+    if (promptKey) seenPrompts.add(promptKey);
     if (sourceKey) seenSources.add(sourceKey);
     return true;
   });
