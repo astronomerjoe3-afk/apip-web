@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
   <rect width="720" height="380" rx="28" fill="#F8FAFC"/>
-  <text x="44" y="54" fill="#0F172A" font-size="28" font-family="Arial, sans-serif" font-weight="700">Same impulse can come from different force-time shapes.</text>
+  <text x="44" y="46" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">Same impulse can come from different</text>
+  <text x="44" y="76" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">force-time shapes.</text>
   <line x1="76" y1="316" x2="660" y2="316" stroke="#94A3B8" stroke-width="4"/>
   <line x1="76" y1="82" x2="76" y2="316" stroke="#94A3B8" stroke-width="4"/>
   <rect x="126" y="126" width="92" height="190" fill="#2563EB" fill-opacity="0.35" stroke="#2563EB" stroke-width="4"/>

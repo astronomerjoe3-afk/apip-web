@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
   <rect width="720" height="380" rx="28" fill="#F8FAFC"/>
-  <text x="44" y="54" fill="#0F172A" font-size="28" font-family="Arial, sans-serif" font-weight="700">Track total momentum before and after the collision.</text>
+  <text x="44" y="46" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">Track total momentum before and after</text>
+  <text x="44" y="76" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">the collision.</text>
   <rect x="54" y="108" width="280" height="220" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
   <text x="78" y="144" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Before</text>
   <rect x="96" y="214" width="78" height="46" rx="12" fill="#2563EB"/>

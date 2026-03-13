@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
   <rect width="720" height="380" rx="28" fill="#F8FAFC"/>
-  <text x="44" y="54" fill="#0F172A" font-size="28" font-family="Arial, sans-serif" font-weight="700">Kinetic energy grows with speed; GPE grows with height.</text>
+  <text x="44" y="46" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">Kinetic energy grows with speed;</text>
+  <text x="44" y="76" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">GPE grows with height.</text>
   <path d="M70 300 L300 300 L430 170 L640 170" stroke="#94A3B8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="210" cy="280" r="28" fill="#F59E0B"/>
   <circle cx="510" cy="150" r="28" fill="#2563EB"/>
