@@ -4,10 +4,19 @@
   <text x="44" y="76" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">stopping time together.</text>
   <rect x="70" y="112" width="194" height="214" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
   <text x="92" y="146" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Current speed</text>
-  <text x="92" y="192" fill="#2563EB" font-size="18" font-family="Arial, sans-serif" font-weight="700">Momentum rises directly</text>
-  <text x="92" y="220" fill="#475569" font-size="16" font-family="Arial, sans-serif">p = mv</text>
-  <text x="92" y="266" fill="#F97316" font-size="18" font-family="Arial, sans-serif" font-weight="700">Force falls with time</text>
-  <text x="92" y="294" fill="#475569" font-size="16" font-family="Arial, sans-serif">Longer stop = smaller average force</text>
+  <text fill="#2563EB" font-size="18" font-family="Arial, sans-serif" font-weight="700">
+    <tspan x="92" y="184">Momentum rises</tspan>
+    <tspan x="92" y="206">directly</tspan>
+  </text>
+  <text x="92" y="224" fill="#475569" font-size="16" font-family="Arial, sans-serif">p = mv</text>
+  <text fill="#F97316" font-size="18" font-family="Arial, sans-serif" font-weight="700">
+    <tspan x="92" y="252">Force falls</tspan>
+    <tspan x="92" y="274">with time</tspan>
+  </text>
+  <text fill="#475569" font-size="16" font-family="Arial, sans-serif">
+    <tspan x="92" y="300">Longer stop = smaller</tspan>
+    <tspan x="92" y="320">average force</tspan>
+  </text>
   <rect x="306" y="112" width="334" height="214" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
   <text x="330" y="146" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Double the speed</text>
   <rect x="486" y="160" width="124" height="30" rx="15" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2"/>

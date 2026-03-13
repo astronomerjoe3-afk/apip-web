@@ -8,6 +8,12 @@
   <rect x="306" y="198" width="184" height="118" fill="#0F766E" fill-opacity="0.35" stroke="#0F766E" stroke-width="4"/>
   <text x="126" y="108" fill="#2563EB" font-size="18" font-family="Arial, sans-serif" font-weight="700">Large force, short time</text>
   <text x="306" y="180" fill="#0F766E" font-size="18" font-family="Arial, sans-serif" font-weight="700">Smaller force, longer time</text>
-  <text x="124" y="344" fill="#475569" font-size="16" font-family="Arial, sans-serif">Equal shaded area = equal impulse</text>
-  <text x="508" y="344" fill="#475569" font-size="16" font-family="Arial, sans-serif">Longer stop can reduce force</text>
+  <text fill="#475569" font-size="16" font-family="Arial, sans-serif" text-anchor="middle">
+    <tspan x="172" y="344">Equal shaded area</tspan>
+    <tspan x="172" y="364">= equal impulse</tspan>
+  </text>
+  <text fill="#475569" font-size="16" font-family="Arial, sans-serif" text-anchor="middle">
+    <tspan x="566" y="344">Longer stop can</tspan>
+    <tspan x="566" y="364">reduce force</tspan>
+  </text>
 </svg>
