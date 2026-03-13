@@ -16,15 +16,16 @@
     <path d="M428 198 L528 230 L428 262" fill="#2563eb"/>
     <path d="M620 290 H360" stroke="#dc2626" stroke-width="16" stroke-linecap="round"/>
     <path d="M408 258 L304 290 L408 322" fill="#dc2626"/>
-    <text x="178" y="84" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">Initial velocity</text>
-    <text x="178" y="194" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#2563eb">Final velocity</text>
+    <text x="164" y="108" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">Initial velocity</text>
+    <text x="164" y="214" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#2563eb">Final velocity</text>
     <text x="594" y="322" font-size="26" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#dc2626">
       <tspan x="594" dy="0">Acceleration points opposite</tspan>
       <tspan x="594" dy="30">the change in velocity</tspan>
     </text>
-    <text x="136" y="50" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">
-      <tspan x="136" dy="0">If the final arrow is shorter in the same positive direction,</tspan>
-      <tspan x="136" dy="26">the acceleration is negative in that sign convention.</tspan>
+    <text x="620" y="62" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#334155">
+      <tspan x="620" dy="0">If the final arrow is shorter but still points</tspan>
+      <tspan x="620" dy="24">in the same positive direction, the</tspan>
+      <tspan x="620" dy="24">acceleration is negative in that sign convention.</tspan>
     </text>
   </g>
 </svg>
