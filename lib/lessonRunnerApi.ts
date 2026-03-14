@@ -639,6 +639,42 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
         shortItem("F2-L6-DG2", "An 18 N resultant force acts on a 6 kg trolley. What is the acceleration?", ["3 m/s^2", "3 m/s/s"], "Use a = F / m."),
         mcItem("F2-L6-DG3", "If the same force acts on two trolleys and one trolley has three times the mass, how does its acceleration compare?", ["it is one-third as large", "it is three times as large", "it stays the same", "it becomes zero"], 0, "For the same force, larger mass gives smaller acceleration.", "If the mass is three times larger under the same force, the acceleration is one-third as large."),
       ];
+    case "F4_L1":
+      return [
+        mcItem("F4-L1-DG1", "In a closed single-loop circuit, what is the current after one lamp compared with the current before it?", ["the same current", "smaller because the lamp used some current", "zero current", "greater current"], 0, "One complete route keeps the same charge stream rate at every checkpoint.", "The current is the same because a simple closed loop carries one common charge stream."),
+        shortItem("F4-L1-DG2", "36 C of charge pass a checkpoint in 9 s. What current flows?", ["4 A"], "Use current = charge / time."),
+        mcItem("F4-L1-DG3", "If a switch opens anywhere in one simple loop, what happens to the current?", ["it stops everywhere in the loop", "it only stops after the switch", "it doubles before the switch", "it keeps flowing through the lamp only"], 0, "Breaking one single route stops the charge stream everywhere.", "The current stops everywhere because the whole loop is broken."),
+      ];
+    case "F4_L2":
+      return [
+        shortItem("F4-L2-DG1", "20 J are transferred to 4 C of charge. What is the potential difference?", ["5 V"], "Use V = E / Q to find energy transferred per charge."),
+        mcItem("F4-L2-DG2", "If the same charge passes through a source with a larger potential difference, what changes?", ["each coulomb gains more energy", "more charge must exist in the circuit", "the resistance becomes zero", "the current must stop"], 0, "Potential difference tells you the energy transferred per charge.", "A larger potential difference means each coulomb gains more energy."),
+        mcItem("F4-L2-DG3", "If the potential difference stays the same but twice as much charge moves, what happens to the total energy transferred?", ["it doubles", "it stays the same", "it halves", "it becomes zero"], 0, "Total energy depends on both volts and charge moved.", "The total energy transferred doubles because E = VQ."),
+      ];
+    case "F4_L3":
+      return [
+        shortItem("F4-L3-DG1", "A 12 V supply drives 4 A through a resistor. What is the resistance?", ["3 ohm", "3 ohms", "3 O"], "Use resistance = voltage / current."),
+        mcItem("F4-L3-DG2", "If the voltage across an ohmic resistor doubles while the resistance stays the same, the current will...", ["double", "halve", "stay the same", "become zero"], 0, "At fixed resistance, current changes in step with voltage.", "The current doubles because I = V / R for an ohmic resistor."),
+        mcItem("F4-L3-DG3", "Two straight I-V lines pass through the origin. Which line shows the greater resistance?", ["the flatter line", "the steeper line", "they are always equal", "the higher-voltage line"], 0, "More current per volt means less resistance, not more.", "The flatter straight line shows the greater resistance because it gives less current for each volt."),
+      ];
+    case "F4_L4":
+      return [
+        mcItem("F4-L4-DG1", "In one series circuit, what is the current through the second resistor compared with the first?", ["the same", "larger", "smaller", "zero"], 0, "A one-route circuit carries one common current everywhere.", "The current is the same because a series circuit has only one route."),
+        shortItem("F4-L4-DG2", "A circuit has resistors of 2 ohms and 4 ohms in series. What is the total resistance?", ["6 ohm", "6 ohms", "6 O"], "Series resistance adds along the single route."),
+        mcItem("F4-L4-DG3", "A 9 V supply is connected to three identical resistors in series. What happens to the supply voltage?", ["it is shared across the three resistors", "it all appears across the first resistor only", "it becomes current", "it disappears at the cell"], 0, "The source push is shared across the route sections in series.", "The supply voltage is shared across the three series resistors."),
+      ];
+    case "F4_L5":
+      return [
+        mcItem("F4-L5-DG1", "What is the potential difference across each parallel branch compared with the supply?", ["the same as the supply", "half the supply", "different in every branch", "zero in one branch"], 0, "Each branch spans the same two supply points.", "Each parallel branch has the same potential difference as the supply."),
+        shortItem("F4-L5-DG2", "One branch carries 0.25 A and another carries 0.35 A. What total current leaves the source?", ["0.6 A", "0.60 A"], "Add the branch currents to get the total current."),
+        mcItem("F4-L5-DG3", "What usually happens to the total current when an extra branch is added in parallel?", ["it increases", "it decreases to zero", "it stays fixed", "it becomes equal to one branch current"], 0, "An extra branch gives the system another route and reduces overall difficulty.", "The total current increases because another parallel route makes the overall circuit easier for charge to flow through."),
+      ];
+    case "F4_L6":
+      return [
+        shortItem("F4-L6-DG1", "A device works at 24 V and 2 A. What power does it use?", ["48 W"], "Use power = voltage x current."),
+        shortItem("F4-L6-DG2", "A 100 W device runs for 20 s. How much electrical energy is transferred?", ["2000 J", "2000"], "Use energy = power x time."),
+        mcItem("F4-L6-DG3", "Two devices use the same voltage, but one draws the larger current. Which statement is correct?", ["it has the larger power", "it has the smaller power", "both have the same power", "you need the resistance first"], 0, "At fixed voltage, more current means more energy transferred each second.", "The device with the larger current has the larger power because P = VI."),
+      ];
     default:
       return [];
   }
@@ -1052,6 +1088,42 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F2-L1-M5", "Why can distance and displacement be different for the same trip?", ["Distance ignores all motion", "Displacement measures the start-to-finish change while distance measures the full path", "Displacement is always larger", "Distance always needs direction"], 1, "One quantity uses the whole path and the other uses the net change.", "Distance measures the whole path, while displacement measures the start-to-finish change with direction."),
         shortItem("F2-L1-M6", "A runner covers 240 m in 40 s. What is the average speed?", ["6", "6 m/s"], "Divide total distance by total time."),
       ];
+    case "F4_L1":
+      return [
+        mcItem("F4-L1-G1", "What does current measure in a circuit?", ["how much charge passes a point each second", "how much energy each coulomb gains", "how hard the route is", "how much charge exists in total"], 0, "Current is a flow rate, not an amount sitting in the wire.", "Current measures how much charge passes a point each second."),
+        mcItem("F4-L1-G2", "Why is the current the same before and after one lamp in a simple loop?", ["because the same charge stream passes every checkpoint in one route", "because the lamp stores current and returns it later", "because voltage and current are the same thing", "because resistance becomes zero after the lamp"], 0, "One closed path means one common charge stream rate.", "The same closed route carries the same current at every checkpoint in a simple loop."),
+        mcItem("F4-L1-G3", "What happens when a switch opens anywhere in a simple series loop?", ["the current stops everywhere", "the current only stops after the switch", "the current doubles before the switch", "the cell keeps current flowing through one side only"], 0, "Breaking one complete route stops the whole stream.", "The current stops everywhere because the circuit is no longer a complete route."),
+      ];
+    case "F4_L2":
+      return [
+        mcItem("F4-L2-G1", "Potential difference is best understood as...", ["energy transferred per unit charge", "charge transferred per second", "path difficulty", "power transferred per second"], 0, "A volt is a joule per coulomb.", "Potential difference tells how much energy is transferred per unit charge."),
+        mcItem("F4-L2-G2", "If the same potential difference acts but twice as much charge moves, what happens to the total energy transferred?", ["it doubles", "it stays the same", "it halves", "it becomes zero"], 0, "Total energy depends on both volts and charge moved.", "The total energy transferred doubles because E = VQ."),
+        mcItem("F4-L2-G3", "Which statement best explains the role of a cell in a circuit?", ["It gives charge electrical energy per coulomb", "It uses current up", "It removes resistance from the loop", "It makes the charge disappear"], 0, "The cell is the source of the energy boost per charge.", "A cell gives charge electrical energy per coulomb as it passes through the source."),
+      ];
+    case "F4_L3":
+      return [
+        mcItem("F4-L3-G1", "At fixed voltage, what happens to the current if the resistance doubles?", ["it halves", "it doubles", "it stays the same", "it becomes zero in every case"], 0, "A harder path gives a smaller current for the same push.", "The current halves because I = V / R."),
+        mcItem("F4-L3-G2", "What does a steeper straight I-V line show for an ohmic component?", ["lower resistance", "higher resistance", "zero current", "higher charge stored"], 0, "More current for each volt means less resistance.", "A steeper straight I-V line shows lower resistance because it gives more current for each volt."),
+        mcItem("F4-L3-G3", "Which relationship matches the Flow-Grid idea of stream rate = push / difficulty?", ["current = voltage / resistance", "voltage = current / resistance", "resistance = voltage x current", "power = current / voltage"], 0, "Ohm's law summarizes the push-difficulty-stream relationship for an ohmic component.", "Current = voltage / resistance matches the Flow-Grid pattern."),
+      ];
+    case "F4_L4":
+      return [
+        mcItem("F4-L4-G1", "In a series circuit, what stays the same through every component?", ["current", "potential difference", "resistance", "power"], 0, "One route means one common current.", "Current stays the same through every series component."),
+        mcItem("F4-L4-G2", "What happens to the whole loop current when another resistor is added in series?", ["it decreases everywhere in the loop", "it increases everywhere in the loop", "it stays the same", "it only changes after the new resistor"], 0, "More series difficulty makes the whole route harder.", "The current decreases everywhere because adding series resistance increases the total path difficulty."),
+        mcItem("F4-L4-G3", "How is the supply voltage treated in a series circuit?", ["it is shared across the components", "the first component gets all of it", "it becomes current", "it is the same across every component only if the resistances differ"], 0, "The source push is shared across the route sections.", "The supply voltage is shared across the series components."),
+      ];
+    case "F4_L5":
+      return [
+        mcItem("F4-L5-G1", "Why does each parallel branch have the same potential difference?", ["Each branch connects across the same two supply points", "Current is the same in every branch", "Parallel always means identical resistors", "Voltage depends only on branch length"], 0, "Branch voltage depends on the endpoints each branch is connected across.", "Each branch has the same potential difference because it spans the same two supply points."),
+        mcItem("F4-L5-G2", "How is the total current related to the branch currents in a parallel circuit?", ["the total current is the sum of the branch currents", "the total current is the same as one branch current", "the total current must be smaller than every branch current", "the total current is zero at the supply"], 0, "Current splits at a junction and recombines afterward.", "The total current equals the sum of the branch currents."),
+        mcItem("F4-L5-G3", "What usually happens when an extra branch is added in parallel?", ["the overall difficulty drops and the total current rises", "the voltage disappears", "the current becomes equal in every component", "the source stops pushing"], 0, "An extra route makes the whole network easier for charge to move through.", "Adding another branch lowers the overall difficulty and increases the total current."),
+      ];
+    case "F4_L6":
+      return [
+        mcItem("F4-L6-G1", "Which equation gives electrical power?", ["P = VI", "E = V / Q", "I = Q / t", "R = V / I"], 0, "Power tells how fast electrical energy is transferred.", "Electrical power is given by P = VI."),
+        mcItem("F4-L6-G2", "If power stays the same but the device runs for longer, what happens to the total energy transferred?", ["it increases", "it stays the same", "it decreases", "it becomes voltage"], 0, "Energy depends on both power and time.", "The total energy transferred increases because E = Pt."),
+        mcItem("F4-L6-G3", "Why is a fuse or breaker used in a circuit?", ["to interrupt dangerously large current", "to increase the voltage", "to make the resistance zero", "to store energy for later"], 0, "Safety devices act when the current becomes too large.", "A fuse or breaker interrupts dangerously large current before overheating becomes severe."),
+      ];
     default:
       return [];
   }
@@ -1258,6 +1330,13 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
         mcItem("F3-L6-X9", "Why is high-speed braking especially dangerous?", ["Only the mass matters once the brakes are applied", "Momentum and kinetic energy are both larger, and kinetic energy rises especially quickly", "Stopping time always falls to zero at higher speed", "The car becomes lighter as it moves faster"], 1, "Use both momentum and energy reasoning together here.", "Higher speed makes the momentum change larger and also increases kinetic energy very strongly because speed is squared."),
         shortItem("F3-L6-X10", "A 900 kg car slows from 20 m/s to rest in 2 s. What average braking force acts?", ["9000 N"], "Find the momentum change first, then divide by the stopping time."),
       ];
+    case "F4_L1":
+    case "F4_L2":
+    case "F4_L3":
+    case "F4_L4":
+    case "F4_L5":
+    case "F4_L6":
+      return f4MasteryVariants(code);
     default:
       return items.flatMap((item, itemIndex) => [
         {
@@ -1269,6 +1348,66 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
   }
 }
 
+function f4MasteryVariants(code: string): UnknownRecord[] {
+  switch (code) {
+    case "F4_L1":
+      return [
+        mcItem("F4-L1-X1", "What does current measure in a simple circuit?", ["rate of charge flow", "energy transferred per charge", "path difficulty", "total energy transferred"], 0, "Current tells you how much charge passes a point each second.", "Current is the rate of charge flow past a point in the circuit."),
+        shortItem("F4-L1-X2", "24 C pass a checkpoint in 6 s. What current flows?", ["4 A", "4a", "4"], "Use I = Q / t."),
+        shortItem("F4-L1-X3", "A steady current of 3 A flows for 8 s. How much charge passes?", ["24 C", "24c", "24"], "Use Q = It."),
+        mcItem("F4-L1-X4", "In one closed single-path loop, the current before and after a lamp is...", ["the same", "smaller after the lamp", "larger after the lamp", "zero after the lamp"], 0, "The same charge stream passes every point on one continuous route.", "A single closed loop has the same current before and after the lamp."),
+        mcItem("F4-L1-X5", "What happens to the current everywhere if the switch opens in a single loop?", ["It increases near the cell", "It stays the same at the battery only", "It drops to zero everywhere", "It becomes larger after the resistor"], 2, "An open route stops the whole stream in a single-path network.", "Opening the switch breaks the route, so the current falls to zero everywhere in the loop."),
+        mcItem("F4-L1-X6", "Why is the statement 'the lamp uses current up' wrong?", ["The same charge keeps circulating while the lamp transfers energy", "The lamp creates extra charge after it", "Current always increases across a component", "A lamp removes charge only when it glows"], 0, "Separate charge flow from energy transfer.", "The lamp transfers energy from the moving charge but does not use the current up."),
+      ];
+    case "F4_L2":
+      return [
+        mcItem("F4-L2-X1", "Potential difference is best described as...", ["energy transferred per unit charge", "charge passing each second", "path difficulty", "power multiplied by time"], 0, "Voltage tells how much energy each coulomb gains or loses.", "Potential difference is the energy transferred per unit charge."),
+        shortItem("F4-L2-X2", "18 J are transferred by 3 C. What potential difference is involved?", ["6 V", "6v", "6"], "Use V = E / Q."),
+        shortItem("F4-L2-X3", "A charge of 5 C passes through a component with a potential difference of 4 V. How much energy is transferred?", ["20 J", "20j", "20"], "Use E = VQ."),
+        mcItem("F4-L2-X4", "Two cells drive the same amount of charge. Which gives more energy to each coulomb?", ["the cell with the larger potential difference", "the cell with the smaller potential difference", "both give the same energy per coulomb", "the one with the smaller current"], 0, "For the same charge, larger voltage means more energy per charge.", "The cell with the larger potential difference transfers more energy to each coulomb."),
+        mcItem("F4-L2-X5", "Which statement correctly compares a cell and a lamp in one circuit?", ["The cell gives charge electrical energy, while the lamp transfers some of that energy away", "The lamp creates charge, while the cell removes it", "Both always use current up", "The lamp increases the energy per charge and the cell decreases it"], 0, "Cells and components play different energy roles.", "The cell gives electrical energy to the charges, while the lamp transfers some of that energy to other stores."),
+        mcItem("F4-L2-X6", "Why can the same charge return to the cell with less electrical energy than it had before a lamp?", ["The lamp transferred some electrical energy away while the same charge kept moving", "Some charge disappeared inside the lamp", "The potential difference became current", "The circuit stopped for part of the loop"], 0, "Charge can stay the same while energy per charge changes.", "The same charge can keep circulating even though it leaves the lamp with less electrical energy."),
+      ];
+    case "F4_L3":
+      return [
+        shortItem("F4-L3-X1", "A resistor has 12 V across it and a current of 3 A. What is its resistance?", ["4 ohm", "4 ohms", "4 O", "4"], "Use R = V / I."),
+        shortItem("F4-L3-X2", "A 5 ohm resistor has 10 V across it. What current flows?", ["2 A", "2a", "2"], "Use I = V / R."),
+        mcItem("F4-L3-X3", "If the voltage across an ohmic resistor doubles while the resistance stays the same, the current...", ["doubles", "halves", "stays the same", "drops to zero"], 0, "For an ohmic component, current rises directly with voltage.", "Doubling the voltage doubles the current when resistance stays the same."),
+        mcItem("F4-L3-X4", "If the resistance doubles while the voltage stays the same, the current...", ["doubles", "halves", "stays the same", "must become negative"], 1, "At fixed voltage, greater resistance gives less current.", "The current halves if the resistance doubles while the voltage stays fixed."),
+        mcItem("F4-L3-X5", "On a straight I-V graph through the origin, which line has the lower resistance?", ["the steeper line", "the flatter line", "both are equal", "you cannot compare them"], 0, "More current per volt means lower resistance.", "The steeper line has the lower resistance because it gives more current for each volt."),
+        mcItem("F4-L3-X6", "A straight current-voltage line through the origin for an ohmic resistor shows that...", ["current is proportional to voltage", "resistance gets used up", "current stays constant as voltage rises", "voltage depends only on time"], 0, "A straight line through the origin shows direct proportionality.", "For an ohmic resistor, current is proportional to voltage."),
+      ];
+    case "F4_L4":
+      return [
+        mcItem("F4-L4-X1", "In a series circuit, the current in one component compared with the current in the next component is...", ["the same", "always larger", "always smaller", "zero in the second component"], 0, "One route means one stream rate everywhere in the loop.", "The current is the same in each component of a series circuit."),
+        mcItem("F4-L4-X2", "What happens to total resistance when resistors are added in series?", ["It decreases", "It stays the same", "It adds up", "It becomes zero"], 2, "Series difficulties stack along one route.", "In series, resistances add together."),
+        shortItem("F4-L4-X3", "Two 3 ohm resistors are connected in series. What is the total resistance?", ["6 ohm", "6 ohms", "6 O", "6"], "Add series resistances."),
+        mcItem("F4-L4-X4", "If you add another resistor in series to the same battery, what happens to the current everywhere in the loop?", ["It increases everywhere", "It decreases everywhere", "It stays the same everywhere", "It only changes after the new resistor"], 1, "One-path circuits respond as a whole network.", "Adding resistance in series reduces the current everywhere in the loop."),
+        mcItem("F4-L4-X5", "Two equal resistors are connected in series across a battery. How is the battery voltage shared?", ["equally between the resistors", "all across the first resistor", "all across the second resistor", "voltage is not shared in series"], 0, "Equal components in series share the source push equally.", "Equal resistors in series share the battery voltage equally."),
+        shortItem("F4-L4-X6", "A 12 V battery is connected to two equal resistors in series. What potential difference is across one resistor?", ["6 V", "6v", "6"], "Equal series resistors share the total voltage equally."),
+      ];
+    case "F4_L5":
+      return [
+        mcItem("F4-L5-X1", "In a parallel circuit, the potential difference across each branch is...", ["the same as the supply across the branch endpoints", "split equally only if the currents match", "always zero in one branch", "different in every branch by default"], 0, "Branches connect across the same two points.", "Each branch in parallel has the same potential difference across it because the endpoints are the same."),
+        shortItem("F4-L5-X2", "One branch carries 2 A and another branch carries 3 A. What total current leaves the source?", ["5 A", "5a", "5"], "Add the branch currents to get the total current."),
+        mcItem("F4-L5-X3", "What usually happens to the total current drawn from a battery when another branch is added in parallel?", ["It decreases", "It stays the same", "It increases", "It becomes zero"], 2, "Extra routes reduce the network difficulty.", "Adding another branch usually increases the total current because the overall resistance falls."),
+        mcItem("F4-L5-X4", "Two parallel branches have the same voltage across them. Which branch carries more current?", ["the branch with greater resistance", "the branch with lower resistance", "both always carry the same current", "you need the battery mass"], 1, "At the same voltage, lower resistance gives greater current.", "The lower-resistance branch carries more current when the branch voltage is the same."),
+        mcItem("F4-L5-X5", "Which statement best describes current in a parallel circuit?", ["It splits at a junction and recombines later", "It stays identical in every branch regardless of resistance", "It disappears in one branch", "It can only flow in the branch with the largest resistor"], 0, "Think of the total stream dividing between routes.", "Current splits between the branches and recombines when the branches join again."),
+        mcItem("F4-L5-X6", "Why can branch currents be different even though the branch voltages are the same?", ["The branch resistances can be different", "Voltage and current are unrelated", "Charge is used up in one branch", "Parallel circuits force equal current in every route"], 0, "Different path difficulties produce different stream rates.", "Branch currents can differ because the branches can have different resistances even though the voltages are the same."),
+      ];
+    case "F4_L6":
+      return [
+        shortItem("F4-L6-X1", "A device has 12 V across it and a current of 2 A. What power does it use?", ["24 W", "24w", "24"], "Use P = VI."),
+        shortItem("F4-L6-X2", "A 60 W heater runs for 30 s. How much energy does it transfer?", ["1800 J", "1800j", "1800"], "Use E = Pt."),
+        mcItem("F4-L6-X3", "If two devices run at the same voltage, which has the greater power?", ["the one with the greater current", "the one with the smaller current", "they always have the same power", "you need the resistance only"], 0, "At fixed voltage, power rises with current.", "For the same voltage, the device with the greater current uses the greater power."),
+        mcItem("F4-L6-X4", "At constant power, what happens to the total energy transferred if the running time doubles?", ["It halves", "It stays the same", "It doubles", "It becomes zero"], 2, "Energy transfer grows with time when the power stays fixed.", "If the power stays the same and the time doubles, the total energy transferred doubles."),
+        shortItem("F4-L6-X5", "A device runs at 12 V with a current of 2 A for 30 s. How much energy does it transfer?", ["720 J", "720j", "720"], "Use E = VIt or find the power first, then multiply by time."),
+        mcItem("F4-L6-X6", "What is the job of a fuse in a circuit?", ["to stop excessive current before overheating causes damage", "to increase the voltage across every device", "to store extra charge for the battery", "to make every branch carry the same current"], 0, "A fuse is a safety device, not a power booster.", "A fuse breaks the circuit if the current becomes dangerously large."),
+      ];
+    default:
+      return [];
+  }
+}
 
 function masterySourceKey(item: UnknownRecord): string {
   const prompt = text(item.prompt)
@@ -1319,92 +1458,37 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
       case "F3_L5":
         return ["F2_L4", "F2_L5", "F3_L3", "F3_L4", "F3_L6"];
       case "F3_L6":
-        return ["F2_L5", "F2_L6", "F3_L2", "F3_L4", "F3_L5"];
+        return ["F2_L2", "F2_L5", "F3_L2", "F3_L4", "F3_L5"];
+      case "F4_L1":
+        return ["F1_L1", "F2_L1", "F4_L2", "F4_L3", "F4_L4"];
+      case "F4_L2":
+        return ["F3_L1", "F4_L1", "F4_L3", "F4_L4", "F4_L6"];
+      case "F4_L3":
+        return ["F2_L2", "F3_L3", "F4_L1", "F4_L4", "F4_L5"];
+      case "F4_L4":
+        return ["F4_L1", "F4_L2", "F4_L3", "F4_L5", "F4_L6"];
+      case "F4_L5":
+        return ["F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L6"];
+      case "F4_L6":
+        return ["F3_L3", "F3_L6", "F4_L2", "F4_L3", "F4_L5"];
       default:
-        return SUPPLEMENTAL_LESSON_CODES.filter((entry) => entry !== code);
+        return [];
     }
   })();
+
   const promptForPoint = (point: string, index: number): string => {
-    const normalized = normalizePromptKey(point);
-
-    if (code === "F1_L5") {
-      return ["Which density reminder is correct?", "Which idea best explains density?", "Which statement fits density and floating?", "Which density rule should you remember?"][index % 4];
-    }
-
-    switch (code) {
-      case "F2_L1":
-        if (normalized.includes("round trip")) return "Which option correctly explains what a round trip can show about distance and displacement?";
-        if (normalized.includes("distance")) return "Which option correctly explains how distance is worked out for a journey?";
-        if (normalized.includes("displacement") || normalized.includes("starting point") || normalized.includes("finishing point")) return "Which option correctly explains what displacement compares?";
-        if (normalized.includes("average speed")) return "Which option gives the correct whole-journey rule for average speed?";
-        if (normalized.includes("direction")) return "Which option correctly explains why some motion answers must keep a direction word?";
-        return "Which option is the clearest match for this journey lesson?";
-      case "F2_L2":
-        if (normalized.includes("velocity is a vector") || normalized.includes("direction change")) return "Which option correctly explains why velocity can change?";
-        if (normalized.includes("final velocity minus initial velocity")) return "Which option gives the correct setup for calculating acceleration?";
-        if (normalized.includes("positive direction") || normalized.includes("sign")) return "Which option correctly explains how signs should be interpreted?";
-        if (normalized.includes("acceleration")) return "Which option correctly defines acceleration in this lesson?";
-        return "Which option is the clearest match for this velocity and acceleration lesson?";
-      case "F2_L3":
-        if (normalized.includes("distance time graph")) return "Which option correctly describes what a distance-time graph shows?";
-        if (normalized.includes("flat")) return "Which option correctly interprets a flat section on a distance-time graph?";
-        if (normalized.includes("steeper") || normalized.includes("steepness")) return "Which option correctly compares steeper and less steep segments?";
-        if (normalized.includes("slope")) return "Which option correctly explains what the slope means on this graph?";
-        return "Which option is the clearest match for this distance-time graph lesson?";
-      case "F2_L4":
-        if (normalized.includes("velocity time graph")) return "Which option correctly describes what a velocity-time graph shows?";
-        if (normalized.includes("horizontal line")) return "Which option correctly interprets a horizontal line on a velocity-time graph?";
-        if (normalized.includes("positive") || normalized.includes("negative")) return "Which option correctly explains what positive and negative regions mean?";
-        if (normalized.includes("slope") || normalized.includes("area")) return "Which option correctly matches slope and area to their meanings?";
-        return "Which option is the clearest match for this velocity-time graph lesson?";
-      case "F2_L5":
-        if (normalized.includes("balanced forces")) return "Which option correctly describes balanced forces?";
-        if (normalized.includes("zero resultant force") || normalized.includes("zero acceleration")) return "Which option correctly explains what zero resultant force tells you?";
-        if (normalized.includes("unbalanced forces") || normalized.includes("acceleration")) return "Which option correctly explains what unbalanced forces do?";
-        if (normalized.includes("resultant force")) return "Which option correctly explains what resultant force means?";
-        return "Which option is the clearest match for this forces lesson?";
-      case "F2_L6":
-        if (normalized.includes("inertia")) return "Which option correctly explains inertia in this lesson?";
-        if (normalized.includes("mass")) return "Which option correctly explains the effect of mass in F = ma problems?";
-        if (normalized.includes("force")) return "Which option correctly explains the effect of force in F = ma problems?";
-        if (normalized.includes("f ma")) return "Which option correctly explains what F = ma is linking?";
-        return "Which option is the clearest match for this force, mass, and acceleration lesson?";
-      case "F3_L1":
-        if (normalized.includes("no movement") || normalized.includes("movement")) return "Which option correctly explains when work is done on an object?";
-        if (normalized.includes("energy transferred") || normalized.includes("effort")) return "Which option correctly explains what work means in this lesson?";
-        if (normalized.includes("force direction")) return "Which option correctly explains why direction matters in a work calculation?";
-        return "Which option is the clearest match for this work and energy transfer lesson?";
-      case "F3_L2":
-        if (normalized.includes("kinetic energy") || normalized.includes("speed is squared")) return "Which option correctly explains what most strongly changes kinetic energy?";
-        if (normalized.includes("gravitational potential energy") || normalized.includes("reference level") || normalized.includes("height")) return "Which option correctly explains what changes gravitational potential energy?";
-        if (normalized.includes("energy store") || normalized.includes("stored")) return "Which option correctly identifies the energy store in this lesson?";
-        return "Which option is the clearest match for this energy stores lesson?";
-      case "F3_L3":
-        if (normalized.includes("power")) return "Which option correctly defines power in this lesson?";
-        if (normalized.includes("efficiency") || normalized.includes("useful output")) return "Which option correctly explains efficiency?";
-        if (normalized.includes("rate") || normalized.includes("fast does not automatically mean efficient")) return "Which option correctly separates rate from usefulness?";
-        return "Which option is the clearest match for this power and efficiency lesson?";
-      case "F3_L4":
-        if (normalized.includes("total momentum") || normalized.includes("system")) return "Which option correctly explains what must be conserved in a collision?";
-        if (normalized.includes("external forces") || normalized.includes("outside forces")) return "Which option correctly explains when conservation of momentum can be used directly?";
-        if (normalized.includes("direction") || normalized.includes("momentum")) return "Which option correctly explains why momentum must keep direction?";
-        return "Which option is the clearest match for this momentum lesson?";
-      case "F3_L5":
-        if (normalized.includes("force time graph") || normalized.includes("area")) return "Which option correctly interprets the area under a force-time graph?";
-        if (normalized.includes("longer interaction time") || normalized.includes("more time") || normalized.includes("safer collisions")) return "Which option correctly explains why a longer collision time lowers force?";
-        if (normalized.includes("impulse") || normalized.includes("momentum change")) return "Which option correctly explains impulse in this lesson?";
-        return "Which option is the clearest match for this impulse lesson?";
-      case "F3_L6":
-        if (normalized.includes("speed affects momentum and kinetic energy differently") || normalized.includes("speed squared") || normalized.includes("kinetic energy rises much faster")) return "Which option correctly compares how speed changes momentum and kinetic energy?";
-        if (normalized.includes("stopping time") || normalized.includes("safety features") || normalized.includes("average force")) return "Which option correctly explains how safety features reduce force?";
-        if (normalized.includes("heavier vehicle") || normalized.includes("mass")) return "Which option correctly explains why heavier vehicles are harder to stop safely?";
-        return "Which option is the clearest match for this braking and safety lesson?";
-      default:
-        return "Which statement best fits this lesson point?";
-    }
+    if (code === "F4_L1") return "Which option is the clearest match for this charge and current lesson?";
+    if (code === "F4_L2") return "Which option is the clearest match for this potential difference lesson?";
+    if (code === "F4_L3") return "Which option is the clearest match for this resistance and I-V lesson?";
+    if (code === "F4_L4") return "Which option is the clearest match for this series circuit lesson?";
+    if (code === "F4_L5") return "Which option is the clearest match for this parallel circuit lesson?";
+    if (code === "F4_L6") return "Which option is the clearest match for this power and safety lesson?";
+    if (code.startsWith("F3_")) return "Which option directly answers this lesson point?";
+    if (code.startsWith("F2_")) return "Which statement best fits this lesson point?";
+    return index % 2 === 0 ? "Which statement best fits this lesson point?" : "Choose the statement that directly answers this lesson point.";
   };
 
-  const paddingHint = code.startsWith("F3_") ? "Choose the statement that directly answers this lesson point." : "Pick the statement that matches this lesson's main distinction.";
+  const paddingHint = code.startsWith("F3_") || code.startsWith("F4_") ? "Choose the statement that directly answers this lesson point." : "Pick the statement that matches this lesson's main distinction.";
   return lessonPoints.slice(0, MASTERY_DEFAULT_MAX).flatMap((point, index) => {
     const pointKey = normalizePromptKey(point);
     const distractors = Array.from(new Set(
@@ -4071,16 +4155,3 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
