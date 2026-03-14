@@ -202,6 +202,12 @@ export default function StudentModulePage() {
   const billingConfigured = billingSummary?.configured === true;
   const checkoutEnabled = billingSummary?.can_checkout !== false;
   const canManageBilling = billingSummary?.portal_enabled === true;
+  const modulePurchaseTitle = /forever/i.test(moduleMeta?.access?.module_purchase?.title || "")
+    ? "Unlock this module for 1 month"
+    : moduleMeta?.access?.module_purchase?.title || "Unlock this module for 1 month";
+  const modulePurchaseDescription = /(permanent|forever)/i.test(moduleMeta?.access?.module_purchase?.description || "")
+    ? "One payment for 1 month of access to this premium module."
+    : moduleMeta?.access?.module_purchase?.description || "One payment for 1 month of access to this premium module.";
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!user) {
@@ -720,9 +726,9 @@ export default function StudentModulePage() {
             ) : null}
             {moduleMeta?.access?.module_purchase ? (
               <div style={{ border: "1px solid rgba(16, 35, 63, 0.12)", borderRadius: 18, padding: 18, background: "rgba(255, 255, 255, 0.82)" }}>
-                <div style={{ fontWeight: 900, fontSize: 20 }}>{moduleMeta.access.module_purchase.title || "Unlock this module for 1 month"}</div>
+                <div style={{ fontWeight: 900, fontSize: 20 }}>{modulePurchaseTitle}</div>
                 <div style={{ marginTop: 6, fontSize: 28, fontWeight: 900 }}>{moduleMeta.access.module_purchase.price_label}</div>
-                <div style={{ marginTop: 8, opacity: 0.82 }}>{moduleMeta.access.module_purchase.description || "One payment for 1 month of access to this premium module."}</div>
+                <div style={{ marginTop: 8, opacity: 0.82 }}>{modulePurchaseDescription}</div>
                 <div style={{ marginTop: 14, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                   <button onClick={() => void launchCheckout("module_unlock")} disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading} style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)", color: "#fff", fontWeight: 900, opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1 }}>
                     {billingBusyId === "module_unlock" ? "Opening secure checkout..." : "Unlock this module"}
