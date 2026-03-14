@@ -208,6 +208,7 @@ export default function StudentModulePage() {
   const modulePurchaseDescription = /(permanent|forever)/i.test(moduleMeta?.access?.module_purchase?.description || "")
     ? "One payment for 1 month of access to this premium module."
     : moduleMeta?.access?.module_purchase?.description || "One payment for 1 month of access to this premium module.";
+  const showBillingError = Boolean(billingErr) && moduleLocked;
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!user) {
@@ -222,7 +223,6 @@ export default function StudentModulePage() {
       setBillingSummary(response.billing || null);
       setBillingErr("");
     } catch (error) {
-      setBillingSummary(null);
       setBillingErr(errorMessage(error));
     } finally {
       setBillingLoading(false);
@@ -671,7 +671,7 @@ export default function StudentModulePage() {
       ) : null}
 
 
-      {billingErr ? (
+      {showBillingError ? (
         <div style={{ border: "1px solid #92400e", padding: 14, borderRadius: 12, marginBottom: 16, maxWidth: 900, marginLeft: "auto", marginRight: "auto", background: "#fff7ed", color: "#9a3412" }}>
           <b>Billing:</b> {billingErr}
         </div>
