@@ -1903,6 +1903,171 @@ export default function LessonRunner({
               </div>
             </div>
           );
+        })() : simulationLessonKey === "F4_L1" ? (() => {
+          const chargeMoved = Math.max(4, Math.min(40, simDensityMass));
+          const timeSeconds = Math.max(1, Math.min(10, simFluidDensity));
+          const loopClosed = simBias >= 0.5;
+          const current = loopClosed ? chargeMoved / timeSeconds : 0;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Flow-Grid controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Charge moved around the route (C)<input className="mt-2 w-full" type="range" min="4" max="40" step="2" value={chargeMoved} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Time window (s)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={timeSeconds} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <button type="button" onClick={() => setSimBias(1)} className={"rounded-full border px-4 py-2 text-sm font-medium " + (loopClosed ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 bg-white text-slate-700")}>Closed route</button>
+                  <button type="button" onClick={() => setSimBias(0)} className={"rounded-full border px-4 py-2 text-sm font-medium " + (!loopClosed ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 bg-white text-slate-700")}>Open route</button>
+                </div>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Closed-loop checkpoints</h4>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">At the source station:</span> {formatSimulationNumber(current, 1)} A</div>
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">Before the device:</span> {formatSimulationNumber(current, 1)} A</div>
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">After the device:</span> {formatSimulationNumber(current, 1)} A</div>
+                </div>
+                <div className="mt-4 rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Flow-Grid reading:</span> {loopClosed ? "The packet stream rate is the same all around one complete route." : "Break the route anywhere and the packet stream stops everywhere."}</div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Current is a whole-loop stream rate, not something the device uses up. The device transfers energy, but the circulating charge still passes every checkpoint in the same single path.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F4_L2" ? (() => {
+          const chargeMoved = Math.max(1, Math.min(8, simDensityMass));
+          const sourceBoost = Math.max(1, Math.min(12, simDensityVolume));
+          const totalEnergy = chargeMoved * sourceBoost;
+          const doubledChargeEnergy = sourceBoost * chargeMoved * 2;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Source-station controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Energy boost per coulomb (V)<input className="mt-2 w-full" type="range" min="1" max="12" step="1" value={sourceBoost} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Charge moved (C)<input className="mt-2 w-full" type="range" min="1" max="8" step="1" value={chargeMoved} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Energy per packet versus total energy</h4>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-violet-50 p-4 text-violet-800"><span className="font-medium text-violet-900">Potential difference:</span> {formatSimulationNumber(sourceBoost, 0)} V</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Energy transferred now:</span> {formatSimulationNumber(totalEnergy, 0)} J</div>
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">If charge doubled:</span> {formatSimulationNumber(doubledChargeEnergy, 0)} J</div>
+                </div>
+                <div className="mt-4 rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Flow-Grid reading:</span> The source station gives each packet the same energy boost, so voltage is energy per charge. More charge means more total energy, not more volts.</div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Use V = E / Q after the pattern is clear: the push per packet stays the same even when the number of packets changes.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F4_L3" ? (() => {
+          const sourcePush = Math.max(2, Math.min(12, simDensityMass));
+          const pathDifficulty = Math.max(1, Math.min(10, simDensityVolume));
+          const current = sourcePush / pathDifficulty;
+          const doubledPushCurrent = (sourcePush * 2) / pathDifficulty;
+          const doubledDifficultyCurrent = sourcePush / (pathDifficulty * 2);
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Push and difficulty controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Driving force (V)<input className="mt-2 w-full" type="range" min="2" max="12" step="1" value={sourcePush} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Path difficulty (ohms)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={pathDifficulty} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Stream-rate comparison</h4>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">Current now:</span> {formatSimulationNumber(current, 2)} A</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">If push doubled:</span> {formatSimulationNumber(doubledPushCurrent, 2)} A</div>
+                  <div className="rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">If difficulty doubled:</span> {formatSimulationNumber(doubledDifficultyCurrent, 2)} A</div>
+                </div>
+                <div className="mt-4 rounded-xl bg-violet-50 p-4 text-violet-800"><span className="font-medium text-violet-900">Flow-Grid rule:</span> Stream rate = driving force / path difficulty. The equation I = V / R is just the formal circuit version of that behavior.</div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">A steeper I-V line means more current for each volt, so it represents the lower-resistance route.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F4_L4" ? (() => {
+          const supplyVoltage = Math.max(6, Math.min(18, simDensityMass));
+          const gateA = Math.max(1, Math.min(8, simDensityVolume));
+          const gateB = Math.max(1, Math.min(8, simFluidDensity));
+          const totalResistance = gateA + gateB;
+          const current = supplyVoltage / totalResistance;
+          const dropA = current * gateA;
+          const dropB = current * gateB;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Single-route controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Supply voltage (V)<input className="mt-2 w-full" type="range" min="6" max="18" step="1" value={supplyVoltage} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Route difficulty A (ohms)<input className="mt-2 w-full" type="range" min="1" max="8" step="1" value={gateA} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Route difficulty B (ohms)<input className="mt-2 w-full" type="range" min="1" max="8" step="1" value={gateB} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Series-route outcome</h4>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="rounded-xl bg-slate-50 p-4 text-slate-700"><span className="font-medium text-slate-900">Total difficulty:</span> {formatSimulationNumber(totalResistance, 0)} ohms</div>
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">Current everywhere:</span> {formatSimulationNumber(current, 2)} A</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Voltage share on A:</span> {formatSimulationNumber(dropA, 1)} V</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Voltage share on B:</span> {formatSimulationNumber(dropB, 1)} V</div>
+                </div>
+                <div className="mt-4 rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Flow-Grid reading:</span> One continuous route means one shared stream rate. Add difficulty anywhere and the whole network stream slows.</div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Series circuits are one-route systems: the packet stream is common, while the source push is shared across the route sections.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F4_L5" ? (() => {
+          const supplyVoltage = Math.max(6, Math.min(18, simDensityMass));
+          const branchAResistance = Math.max(2, Math.min(12, simDensityVolume));
+          const branchBResistance = Math.max(2, Math.min(12, simFluidDensity));
+          const branchACurrent = supplyVoltage / branchAResistance;
+          const branchBCurrent = supplyVoltage / branchBResistance;
+          const totalCurrent = branchACurrent + branchBCurrent;
+          const equivalentResistance = totalCurrent === 0 ? 0 : supplyVoltage / totalCurrent;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Split-route controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Supply voltage (V)<input className="mt-2 w-full" type="range" min="6" max="18" step="1" value={supplyVoltage} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Branch A difficulty (ohms)<input className="mt-2 w-full" type="range" min="2" max="12" step="1" value={branchAResistance} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Branch B difficulty (ohms)<input className="mt-2 w-full" type="range" min="2" max="12" step="1" value={branchBResistance} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Parallel-route outcome</h4>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="rounded-xl bg-violet-50 p-4 text-violet-800"><span className="font-medium text-violet-900">Voltage on each branch:</span> {formatSimulationNumber(supplyVoltage, 0)} V</div>
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">Branch A current:</span> {formatSimulationNumber(branchACurrent, 2)} A</div>
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">Branch B current:</span> {formatSimulationNumber(branchBCurrent, 2)} A</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Total current:</span> {formatSimulationNumber(totalCurrent, 2)} A</div>
+                </div>
+                <div className="mt-4 rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Flow-Grid reading:</span> Split routes keep the same push across each branch, divide the packet stream, and reduce the overall path difficulty to about {formatSimulationNumber(equivalentResistance, 2)} ohms.</div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Adding another route makes it easier for packets to move through the system, so the total current rises even though the branch voltage stays the same.</div>
+              </div>
+            </div>
+          );
+        })() : simulationLessonKey === "F4_L6" ? (() => {
+          const supplyVoltage = Math.max(6, Math.min(24, simDensityMass));
+          const current = Math.max(1, Math.min(12, simDensityVolume));
+          const timeSeconds = Math.max(5, Math.min(60, simFluidDensity));
+          const fuseLimit = Math.max(2, Math.min(10, simSpread));
+          const power = supplyVoltage * current;
+          const energyTransferred = power * timeSeconds;
+          const safe = current <= fuseLimit;
+          return (
+            <div style={simulationPanelGridStyle}>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Power and safety controls</h4>
+                <label className="mt-4 block text-sm text-slate-700">Supply voltage (V)<input className="mt-2 w-full" type="range" min="6" max="24" step="1" value={supplyVoltage} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Current in the route (A)<input className="mt-2 w-full" type="range" min="1" max="12" step="0.5" value={current} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Running time (s)<input className="mt-2 w-full" type="range" min="5" max="60" step="5" value={timeSeconds} onChange={(e) => setSimFluidDensity(Number(e.target.value))} /></label>
+                <label className="mt-4 block text-sm text-slate-700">Fuse limit (A)<input className="mt-2 w-full" type="range" min="2" max="10" step="0.5" value={fuseLimit} onChange={(e) => setSimSpread(Number(e.target.value))} /></label>
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">Energy-transfer and protection view</h4>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="rounded-xl bg-sky-50 p-4 text-sky-800"><span className="font-medium text-sky-900">Power:</span> {formatSimulationNumber(power, 0)} W</div>
+                  <div className="rounded-xl bg-emerald-50 p-4 text-emerald-800"><span className="font-medium text-emerald-900">Energy in this run:</span> {formatSimulationNumber(energyTransferred, 0)} J</div>
+                  <div className="rounded-xl bg-violet-50 p-4 text-violet-800"><span className="font-medium text-violet-900">Fuse limit:</span> {formatSimulationNumber(fuseLimit, 1)} A</div>
+                  <div className={"rounded-xl p-4 " + (safe ? "bg-emerald-50 text-emerald-800" : "bg-rose-50 text-rose-800")}><span className={"font-medium " + (safe ? "text-emerald-900" : "text-rose-900")}>Protection gate:</span> {safe ? "safe" : "trips"}</div>
+                </div>
+                <div className="mt-4 rounded-xl bg-amber-50 p-4 text-amber-800"><span className="font-medium text-amber-900">Flow-Grid reading:</span> Power tells how quickly energized packets transfer energy through the route. If the stream grows too large, the safety gate must cut the route before the wires overheat.</div>
+                <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-slate-700">Use P = VI for energy each second, then E = Pt for total energy over time. Safety depends on interrupting excessive current, not on allowing the stream to keep climbing.</div>
+              </div>
+            </div>
+          );
         })() : (
           <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">Use the task above to test the idea with a few examples before you continue.</div>
         )}
@@ -2401,6 +2566,12 @@ export default function LessonRunner({
     </div>
   );
 }
+
+
+
+
+
+
 
 
 

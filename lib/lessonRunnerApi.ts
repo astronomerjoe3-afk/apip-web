@@ -65,7 +65,7 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6"];
 
 type FallbackAnswerMeta = {
   id: string;
@@ -956,7 +956,7 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  if (code.startsWith("F2_") || code.startsWith("F3_")) {
+  if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
       .filter((item) => hasUsableMasteryAnswer(item));
@@ -1450,7 +1450,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
-  const baseItems = code.startsWith("F2_")
+  const baseItems = (code.startsWith("F2_") || code.startsWith("F4_"))
     ? generated.length > 0 ? [...generated, ...fallback] : [...fallback]
     : generated.length >= MASTERY_DEFAULT_MAX
       ? [...generated]
@@ -1521,6 +1521,12 @@ function simulationStageTitle(code: string): string {
     case "F3_L4": return "Momentum system explorer";
     case "F3_L5": return "Impulse-time explorer";
     case "F3_L6": return "Braking safety explorer";
+    case "F4_L1": return "Charge and current explorer";
+    case "F4_L2": return "Potential difference explorer";
+    case "F4_L3": return "Resistance and I-V explorer";
+    case "F4_L4": return "Series circuit explorer";
+    case "F4_L5": return "Parallel circuit explorer";
+    case "F4_L6": return "Power and safety explorer";
     default: return "Simulation inquiry";
   }
 }
@@ -1542,6 +1548,12 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F3_L4": return "Track the whole-system momentum before and after the collision, then compare what happens when the second trolley is lighter or heavier.";
     case "F3_L5": return "Keep the momentum change fixed, stretch the stopping time, and use the force-time blocks to see why equal area can mean different forces.";
     case "F3_L6": return "Use the same car to compare three linked ideas at once: momentum now, kinetic energy now, and how force comes from the rate of change of momentum during the stop.";
+    case "F4_L1": return "Use the Flow-Grid loop to compare a closed route with a broken route, then watch how the same charge stream passes every checkpoint in one single path.";
+    case "F4_L2": return "Use the Flow-Grid source station to compare how much energy each packet gains, so voltage becomes the energy boost per charge rather than just another number beside current.";
+    case "F4_L3": return "Change the source push and the path difficulty separately so current is seen as the stream response to voltage and resistance before Ohm's law is introduced formally.";
+    case "F4_L4": return "Build one single-route Flow-Grid network and watch how adding difficulty anywhere changes the stream everywhere while the source push is shared across the route.";
+    case "F4_L5": return "Open a split-route Flow-Grid network so branch voltage stays tied to the same endpoints while the current divides and recombines across the branches.";
+    case "F4_L6": return "Use the Flow-Grid source station, stream rate, and safety gate together so power, total energy transfer, and protective cut-off become one system story.";
     default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
   }
 }
@@ -1563,6 +1575,12 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F3_L4": return "Start with one incoming momentum, then compare how a lighter second trolley and a heavier second trolley change the shared final speed.";
     case "F3_L5": return "Hold the momentum change fixed, compare a short stop with a longer stop, and explain why the same impulse can still give a safer collision.";
     case "F3_L6": return "Use one car to compare the current stop, a doubled-speed stop, and a longer stopping-time case, then explain how force depends on the rate of change of momentum as well as why speed is such a demanding safety variable.";
+    case "F4_L1": return "Build one closed loop and one open loop, then explain why a single-route network keeps the same stream rate at each checkpoint only when the route is complete.";
+    case "F4_L2": return "Compare one case with a bigger source push and another with more charge moved, then explain why voltage is energy transferred per charge rather than the amount of charge itself.";
+    case "F4_L3": return "Hold the path difficulty fixed and raise the source push, then hold the push fixed and make the path harder. Explain how both changes alter stream rate in the Flow-Grid model.";
+    case "F4_L4": return "Start with one route, add a second resistor in series, and explain why the whole network stream rate changes everywhere while the source push is shared between the components.";
+    case "F4_L5": return "Start with one branch, add a second branch between the same two points, and explain why branch voltage stays the same while total current rises.";
+    case "F4_L6": return "Use one route to compare a safe case, a higher-current case, and a longer-running case, then explain how power, total energy, and fuse action are linked in the Flow-Grid story.";
     default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
   }
 }
@@ -1640,6 +1658,42 @@ function simulationStageExploreSteps(code: string): string[] {
         "Keep the mass fixed and raise the speed so you can compare how momentum and kinetic energy change by different amounts.",
         "Now lengthen the stopping time and compare how much the average force falls when the same momentum change happens more slowly.",
         "Use the three comparisons to explain why force is the rate of change of momentum and what safety features are trying to change during a crash.",
+      ];
+    case "F4_L1":
+      return [
+        "Start with a closed loop and count the packet stream at two checkpoints so current is seen as a whole-route flow, not a quantity that gets used up.",
+        "Break the loop at one point and compare what happens to every checkpoint in the network.",
+        "Keep the loop closed but raise the source push, then explain what changes and what stays common around one complete route.",
+      ];
+    case "F4_L2":
+      return [
+        "Keep the same charge moving but raise the source push so each packet gains more energy from the source station.",
+        "Now keep the source push fixed and move more charge so you can separate energy per charge from total energy transferred.",
+        "Compare the source station with a lamp and explain how the same charge can keep moving while its electrical energy per packet changes.",
+      ];
+    case "F4_L3":
+      return [
+        "Hold the path difficulty fixed and raise the source push so you can watch the packet stream rate increase.",
+        "Now hold the push fixed and make the route harder so you can see the stream rate fall.",
+        "Compare two straight I-V lines and explain why the steeper line means an easier path and therefore a lower resistance.",
+      ];
+    case "F4_L4":
+      return [
+        "Start with one single-route loop and note the same packet stream rate at each point on the route.",
+        "Add a second difficult section in series and compare how the current changes everywhere in the loop.",
+        "Use equal and unequal series components to explain how the source push is shared across the route sections.",
+      ];
+    case "F4_L5":
+      return [
+        "Begin with one branch, then open a second branch between the same two supply points.",
+        "Compare the current in each branch with the total current leaving the source station.",
+        "Explain why branch push stays the same while the total stream rate rises when another route opens.",
+      ];
+    case "F4_L6":
+      return [
+        "Hold the voltage fixed and raise the current so power rises as the Flow-Grid moves more energy each second.",
+        "Keep the power fixed but run the route for longer so total transferred energy keeps increasing.",
+        "Raise the current above the safety-gate threshold and explain why the protective cut-off opens the route.",
       ];
     default:
       return [];
@@ -1719,6 +1773,42 @@ function simulationStageWatchFor(code: string): string[] {
         "Momentum rises directly with speed, so doubling speed doubles the momentum that must be changed during the stop.",
         "Kinetic energy rises with speed squared, so doubling speed quadruples the energy that must be removed.",
       ];
+    case "F4_L1":
+      return [
+        "Current is charge flow rate, so it depends on how much charge passes each second.",
+        "In one closed single-route loop, the same current passes every checkpoint.",
+        "A lamp transfers energy but does not use current up.",
+      ];
+    case "F4_L2":
+      return [
+        "Potential difference is energy transferred per unit charge, not the amount of charge moving.",
+        "A cell raises electrical energy per charge, while a component transfers some of that energy away.",
+        "The same charge can keep circulating even though its electrical energy per charge changes.",
+      ];
+    case "F4_L3":
+      return [
+        "At fixed resistance, more voltage gives more current for an ohmic component.",
+        "At fixed voltage, greater resistance gives less current because the path is harder.",
+        "A steeper straight I-V line means more current per volt and therefore lower resistance.",
+      ];
+    case "F4_L4":
+      return [
+        "A series circuit is one complete route, so the same current flows through every component.",
+        "Adding series resistance makes the whole route harder and reduces the current everywhere.",
+        "The supply voltage is shared across the series components.",
+      ];
+    case "F4_L5":
+      return [
+        "Each parallel branch spans the same two supply points, so each branch has the same potential difference.",
+        "Current splits between branches and recombines afterward.",
+        "Adding another branch usually lowers the overall difficulty and increases the total current.",
+      ];
+    case "F4_L6":
+      return [
+        "Power tells how fast electrical energy is transferred: P = VI.",
+        "Total electrical energy still depends on how long that power runs: E = Pt.",
+        "Safety devices protect circuits by cutting off dangerously large current before overheating becomes severe.",
+      ];
     default:
       return [];
   }
@@ -1749,6 +1839,18 @@ function simulationStageTryFirst(code: string): string | undefined {
       return "Try a momentum change of 600 kg m/s over 0.3 s. That means the impulse is 600 N s as well, so the average force is 2000 N. Then double the time and notice the same impulse and momentum change with half the force.";
     case "F3_L6":
       return "Try mass 1000 kg, speed 12 m/s, and stopping time 0.6 s. The momentum is 12000 kg m/s, so stopping in 0.6 s gives an average force of 20000 N. Then double the speed and compare how momentum doubles, kinetic energy quadruples, and the same stop time would demand a larger force.";
+    case "F4_L1":
+      return "Try 12 C in 3 s on a closed loop. The current should be 4 A at every checkpoint. Then open the loop and compare what happens everywhere.";
+    case "F4_L2":
+      return "Try 3 C and 12 J first. The potential difference is 4 V because each coulomb gains 4 J of energy.";
+    case "F4_L3":
+      return "Try 12 V with 4 ohms first. The current is 3 A. Then keep 12 V and raise the resistance to 8 ohms so the current falls to 1.5 A.";
+    case "F4_L4":
+      return "Try a 12 V supply with two 3 ohm resistors in series. The total resistance is 6 ohms, the current is 2 A everywhere, and each resistor has a 6 V drop.";
+    case "F4_L5":
+      return "Try branch currents of 2 A and 1 A across the same 12 V supply. The total current should be 3 A while each branch still has the same 12 V across it.";
+    case "F4_L6":
+      return "Try 12 V, 2 A, and 10 s first. The power is 24 W and the total transferred energy is 240 J. Then raise the current to 4 A and compare the larger power.";
     default:
       return undefined;
   }
@@ -1779,6 +1881,18 @@ function simulationStageTakeaway(code: string): string | undefined {
       return "Impulse is the name for the momentum change during the interaction, so stretching the collision over more time can reduce force even though exactly the same momentum change still has to happen.";
     case "F3_L6":
       return "High-speed braking is dangerous because force depends on how quickly momentum is changed, while kinetic energy also rises especially quickly as speed rises.";
+    case "F4_L1":
+      return "A current story becomes clearer when you see the whole loop carrying one common charge stream instead of treating current as something a device uses up.";
+    case "F4_L2":
+      return "Potential difference makes sense when you treat it as energy transferred per charge, not as a second kind of current.";
+    case "F4_L3":
+      return "Resistance is best understood as the route difficulty that controls how much current a given voltage can drive.";
+    case "F4_L4":
+      return "Series reasoning is one route, one current, and one supply push shared across all the difficult sections.";
+    case "F4_L5":
+      return "Parallel reasoning is shared branch voltage with current splitting and recombining across the branches.";
+    case "F4_L6":
+      return "Electrical power, total energy transfer, and safety all fit one story: how fast energy moves, how long it moves, and when excessive current must be cut off.";
     default:
       return undefined;
   }
@@ -1924,6 +2038,48 @@ function scaffoldFocusExtras(code: string): string[] {
         "A heavier vehicle at the same speed carries more momentum and more kinetic energy.",
         "Safety features often work by increasing stopping time or stopping distance so the same momentum change happens more slowly.",
       ];
+    case "F4_L1":
+      return [
+        "Current is about how much charge passes a point each second, not about how much charge exists in total.",
+        "A closed loop lets the same packet stream pass every checkpoint in one route.",
+        "Opening the route stops the stream everywhere because the whole loop is broken.",
+        "Components transfer energy without using current up.",
+      ];
+    case "F4_L2":
+      return [
+        "Potential difference tells how much electrical energy each coulomb gains or loses.",
+        "The same charge can move with different electrical energy per charge at different parts of the loop.",
+        "Cells give charge electrical energy; components transfer it away to other stores.",
+        "Total energy transfer depends on both volts and the amount of charge moved.",
+      ];
+    case "F4_L3":
+      return [
+        "Resistance is the difficulty of the route, so a harder path gives less current for the same push.",
+        "Ohm's law becomes intuitive when students first see stream rate respond to push and difficulty.",
+        "At fixed resistance, current rises with voltage; at fixed voltage, current falls with resistance.",
+        "A steeper straight I-V line means lower resistance because more current flows per volt.",
+      ];
+    case "F4_L4":
+      return [
+        "A series circuit is one single-route network, so the current is the same everywhere.",
+        "Adding another component in series increases total path difficulty for the whole network.",
+        "The supply push is shared across the series components as separate voltage drops.",
+        "Position in the route does not let one resistor take more current than another.",
+      ];
+    case "F4_L5":
+      return [
+        "A parallel circuit is a split-route network with the same branch endpoints.",
+        "Each branch gets the same potential difference because each spans the same two points.",
+        "Current divides between branches and recombines after the junction.",
+        "Adding another branch gives the source an easier overall network and usually raises the total current.",
+      ];
+    case "F4_L6":
+      return [
+        "Electrical power is the rate of energy transfer, so it depends on both voltage and current.",
+        "Total energy transferred still depends on how long that rate continues.",
+        "Large current increases heating risk, so safety devices are designed to interrupt dangerous current.",
+        "A complete explanation should link power, total energy over time, and protection in one circuit story.",
+      ];
     default:
       return [];
   }
@@ -2060,6 +2216,48 @@ function scaffoldCoreBullets(code: string): string[] {
         "Force is the rate of change of momentum, so the same change spread over more time gives a smaller average force.",
         "Momentum changes with speed directly, but kinetic energy changes with speed squared.",
         "Crash safety depends on managing both the momentum change and the energy dissipation.",
+      ];
+    case "F4_L1":
+      return [
+        "Current = charge / time.",
+        "In one simple loop, the current is the same everywhere.",
+        "Opening the loop stops current everywhere.",
+        "A component can transfer energy without using current up.",
+      ];
+    case "F4_L2":
+      return [
+        "Potential difference = energy transferred / charge.",
+        "Energy transferred = potential difference x charge.",
+        "A cell raises electrical energy per charge, while a component lowers it.",
+        "Charge can keep circulating while electrical energy per charge changes.",
+      ];
+    case "F4_L3":
+      return [
+        "Resistance = voltage / current for an ohmic component.",
+        "Current = voltage / resistance for an ohmic component.",
+        "Greater resistance means less current for the same voltage.",
+        "A steeper straight I-V line means lower resistance.",
+      ];
+    case "F4_L4":
+      return [
+        "Series circuits have one continuous route.",
+        "The current is the same through every series component.",
+        "Total series resistance adds.",
+        "The supply voltage is shared across the series components.",
+      ];
+    case "F4_L5":
+      return [
+        "Parallel circuits have multiple routes between the same two points.",
+        "Each branch has the same potential difference as the supply.",
+        "Total current equals the sum of the branch currents.",
+        "Adding another branch usually increases the total current.",
+      ];
+    case "F4_L6":
+      return [
+        "Electrical power = VI.",
+        "Electrical energy transferred = Pt.",
+        "Electrical energy transferred can also be written as VIt.",
+        "Fuses and circuit breakers protect circuits by breaking the route when current becomes too large.",
       ];
     default:
       return [];
@@ -2413,6 +2611,90 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           answer: "The stopping car changes momentum by 20000 kg m/s, so the average braking force is 40000 N in 0.5 s and 20000 N if the same stop takes 1.0 s.",
         },
       };
+    case "F4_L1":
+      return {
+        body: "Start with the whole closed route, because current is a rate of charge flow around the loop rather than something one lamp keeps or loses.",
+        worked_example: {
+          prompt: "18 C pass a checkpoint in 3 s in a simple closed loop. Find the current and explain whether the current after the lamp is different.",
+          steps: [
+            "Use current = charge / time because the question gives total charge moved and the time taken.",
+            "Substitute the values: I = 18 / 3 = 6 A.",
+            "Now switch from the number to the loop idea: a simple series loop is one continuous route.",
+            "The same 6 A current passes the checkpoint after the lamp as well, because the lamp transfers energy without using current up.",
+          ],
+          answer: "Current = 6 A, and it is still 6 A after the lamp in the same closed loop.",
+        },
+      };
+    case "F4_L2":
+      return {
+        body: "Treat voltage as energy transferred per charge first, then use the same idea to explain why a cell and a lamp affect the same circulating charge differently.",
+        worked_example: {
+          prompt: "A cell transfers 15 J to 3 C of charge. Find the potential difference and explain what that means for each coulomb.",
+          steps: [
+            "Use potential difference = energy transferred / charge because the question is about energy per charge.",
+            "Substitute the values: V = 15 / 3 = 5 V.",
+            "Interpret the number instead of stopping at the calculation: 5 V means each coulomb gains 5 J of electrical energy from the cell.",
+            "That is why voltage is about the energy boost per charge, not about how many charges are moving.",
+          ],
+          answer: "Potential difference = 5 V, meaning each coulomb gains 5 J of energy.",
+        },
+      };
+    case "F4_L3":
+      return {
+        body: "Use the Flow-Grid idea of push and path difficulty before turning it into Ohm's law and graph interpretation.",
+        worked_example: {
+          prompt: "An ohmic resistor has 12 V across it and a current of 3 A. Find its resistance, then say what happens to the current if the same voltage acts on 6 ohms instead.",
+          steps: [
+            "Use resistance = voltage / current for the first part: R = 12 / 3 = 4 ohms.",
+            "Now keep the voltage fixed at 12 V but make the path difficulty 6 ohms instead.",
+            "Use current = voltage / resistance: I = 12 / 6 = 2 A.",
+            "The current falls because the same push is trying to drive charge through a harder route.",
+          ],
+          answer: "The first resistor is 4 ohms, and with 6 ohms at the same 12 V the current becomes 2 A.",
+        },
+      };
+    case "F4_L4":
+      return {
+        body: "Reason from one route first: same current everywhere, but extra series difficulty changes the whole loop and makes the supply push split across the components.",
+        worked_example: {
+          prompt: "A 12 V supply is connected to two identical 3 ohm resistors in series. Find the total resistance, the loop current, and the potential difference across each resistor.",
+          steps: [
+            "Series resistors add because the route difficulties stack: total resistance = 3 + 3 = 6 ohms.",
+            "Use the whole-loop relationship to find the current: I = V / R = 12 / 6 = 2 A.",
+            "Because it is one route, that 2 A current passes through both resistors.",
+            "Each resistor has V = IR = 2 x 3 = 6 V, so the 12 V supply is shared equally across the identical components.",
+          ],
+          answer: "Total resistance = 6 ohms, current = 2 A everywhere, and each resistor has a 6 V drop.",
+        },
+      };
+    case "F4_L5":
+      return {
+        body: "Begin with the split-route picture: branch voltage stays the same because each branch spans the same two points, while the total current is the sum of the branch currents.",
+        worked_example: {
+          prompt: "Two parallel branches carry 0.3 A and 0.5 A from the same supply. Find the total current and explain whether the potential difference across the two branches is the same or different.",
+          steps: [
+            "Add the branch currents because the total current splits and then recombines: 0.3 A + 0.5 A = 0.8 A.",
+            "Now think about the geometry of the circuit: both branches connect across the same two supply points.",
+            "Because the branches share the same start and finish points, each branch has the same potential difference as the supply.",
+            "Different branch currents can still happen because the branch resistances can differ even while the branch voltage stays the same.",
+          ],
+          answer: "Total current = 0.8 A, and the potential difference across the two branches is the same.",
+        },
+      };
+    case "F4_L6":
+      return {
+        body: "Keep the circuit story whole: voltage and current set the power, power over time sets the energy transferred, and safety devices respond when the current becomes dangerously large.",
+        worked_example: {
+          prompt: "A device operates at 12 V and 2 A for 15 s. Find its power, find the total electrical energy transferred, and explain why a fuse would be needed if the current became much larger than the safe rating.",
+          steps: [
+            "Start with power because the question gives voltage and current: P = VI = 12 x 2 = 24 W.",
+            "Now use that rate to find the total transferred energy over time: E = Pt = 24 x 15 = 360 J.",
+            "Keep the safety idea separate but connected: a much larger current would mean more energy transferred each second and more heating in the wires.",
+            "A fuse or breaker protects the circuit by opening the route when the current becomes too large, rather than allowing dangerous heating to continue.",
+          ],
+          answer: "Power = 24 W, total electrical energy transferred = 360 J, and the fuse protects by cutting off dangerously large current.",
+        },
+      };
     default:
       return {
         body: "Start with a real question and solve it step by step.",
@@ -2603,9 +2885,10 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
       ];
     default: {
       const code = lessonCode(lesson);
-      if (code.startsWith("F2_") || code.startsWith("F3_")) {
+      if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
         const essentials = [...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].filter(Boolean);
-        return [{ title: "Lesson essentials", caption: "Keep these key motion or force ideas visible while you work through the lesson.", columns: ["Key idea", "Why it matters"], rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]) }];
+        const isFlowGrid = code.startsWith("F4_");
+        return [{ title: isFlowGrid ? "Circuit essentials" : "Lesson essentials", caption: isFlowGrid ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson." : "Keep these key motion or force ideas visible while you work through the lesson.", columns: ["Key idea", "Why it matters"], rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]) }];
       }
       return [];
     }
@@ -2838,9 +3121,69 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           highlights: ["Force = change in momentum / time", "Momentum grows with speed", "Longer stopping time lowers average force"],
         },
       ];
+    case "F4_L1":
+      return [
+        {
+          kind: "visual",
+          title: "See the closed-loop stream",
+          caption: "The Flow-Grid loop makes current feel like one common packet stream around a complete route.",
+          image_url: "/lesson-media/f4/f4-l1-charge-current.svg",
+          highlights: ["Current means charge per second", "The same stream rate passes every point in one loop", "A lamp transfers energy without using current up"],
+        },
+      ];
+    case "F4_L2":
+      return [
+        {
+          kind: "visual",
+          title: "See energy per charge",
+          caption: "Use the Flow-Grid source station to compare how much energy each packet gains before and after a component.",
+          image_url: "/lesson-media/f4/f4-l2-potential-difference.svg",
+          highlights: ["Voltage = energy per charge", "Cells boost electrical energy per packet", "Components transfer some of that energy away"],
+        },
+      ];
+    case "F4_L3":
+      return [
+        {
+          kind: "visual",
+          title: "Compare push, difficulty, and current",
+          caption: "One Flow-Grid picture links harder routes with lower current and steeper I-V lines with lower resistance.",
+          image_url: "/lesson-media/f4/f4-l3-resistance-iv.svg",
+          highlights: ["More push gives more stream rate", "More difficulty gives less stream rate", "Steeper straight I-V line means lower resistance"],
+        },
+      ];
+    case "F4_L4":
+      return [
+        {
+          kind: "visual",
+          title: "Track one route in series",
+          caption: "One picture shows same current everywhere and the supply push shared across the route sections.",
+          image_url: "/lesson-media/f4/f4-l4-series-circuit.svg",
+          highlights: ["Series means one path", "Current is the same everywhere in that path", "Voltage is shared across the components"],
+        },
+      ];
+    case "F4_L5":
+      return [
+        {
+          kind: "visual",
+          title: "Track the split route in parallel",
+          caption: "The Flow-Grid branch picture keeps branch voltage and current splitting visible at the same time.",
+          image_url: "/lesson-media/f4/f4-l5-parallel-circuit.svg",
+          highlights: ["Each branch gets the same voltage", "Current splits and recombines", "Adding a branch raises the total current"],
+        },
+      ];
+    case "F4_L6":
+      return [
+        {
+          kind: "visual",
+          title: "See power, energy, and safety together",
+          caption: "Use one circuit-energy picture to connect power, running time, and fuse protection.",
+          image_url: "/lesson-media/f4/f4-l6-power-safety.svg",
+          highlights: ["Power tells energy transferred each second", "Total energy depends on time as well", "Fuses respond to dangerously large current"],
+        },
+      ];
     default: {
       const code = lessonCode(lesson);
-      if (code.startsWith("F2_") || code.startsWith("F3_")) {
+      if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
         const core = scaffoldCoreBullets(code);
         const focus = scaffoldFocusExtras(code);
         return [
@@ -2874,18 +3217,58 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
   }
   if (code === "F3_L4") {
     return {
-      coreIdea: "The law of conservation of linear momentum says that in an isolated system, the total linear momentum before an interaction equals the total linear momentum after it.",
-      reasoning: "First define the system and choose a positive direction or sign convention. Work out the total momentum of all objects before the collision, not just the momentum of one trolley. Then set that total equal to the total momentum after the collision because the system is isolated during the interaction. Only after the whole-system balance is clear should you solve for the unknown speed or direction.",
-      checkForUnderstanding: "When can you state that total momentum before a collision equals total momentum after it?",
-      commonTrap: "Do not conserve the momentum of one object by itself. It is the total linear momentum of the whole system that stays constant when external forces are negligible.",
+      coreIdea: "The law of conservation of linear momentum applies to the whole system: total momentum before equals total momentum after when no significant external force acts on the system.",
+      reasoning: "Choose a positive direction first. Work out each signed momentum before the collision, add them for the whole system, and set that total equal to the total system momentum after the interaction. Only after conserving the system total should you solve for an unknown speed or compare how the motion is shared.",
+      checkForUnderstanding: "What stays fixed through the collision if no significant external force acts: each object's own momentum or the total system momentum?",
+      commonTrap: "Do not conserve the momentum of one object by itself. It is the combined system total that stays constant.",
     };
   }
-  if (code === "F3_L3") {
+  if (code === "F4_L1") {
     return {
-      coreIdea: "Power links transferred energy and time through P = E / t, so you can also rearrange the same relationship as E = Pt or t = E / P depending on what is unknown.",
-      reasoning: "First decide whether the question is asking for power, transferred energy, or time. If energy and time are given, divide to get power. If power and time are given, multiply to get energy transferred. If energy and power are given, divide to get time. Only after that should you do a separate efficiency calculation using useful output divided by total input.",
-      checkForUnderstanding: "If a device keeps the same power but runs for longer, what happens to the transferred energy, and which rearranged form of the power equation shows that?",
-      commonTrap: "Do not mix the power equation with efficiency. Power tells how quickly energy is transferred; efficiency tells what fraction of the input is useful.",
+      coreIdea: "Current is the rate at which charge moves through a complete route. In one closed loop, the same current passes every point.",
+      reasoning: "First decide whether the route is closed. If it is, current means charge per second at any checkpoint in the loop. Calculate current with I = Q / t, then use the closed-route idea to explain why the same current appears before and after one device.",
+      checkForUnderstanding: "If the loop is complete and 24 C pass a checkpoint in 6 s, what current flows everywhere in that loop?",
+      commonTrap: "Do not say a device uses current up. Devices transfer energy, but the circulating charge still passes every point in the same single path.",
+    };
+  }
+  if (code === "F4_L2") {
+    return {
+      coreIdea: "Potential difference is the energy transferred to each coulomb, not the amount of charge moving.",
+      reasoning: "Decide first whether the question is about how many coulombs move or how much energy each coulomb gains or loses. Use V = E / Q for energy per charge, and remember that the same charge can keep circulating while its electrical energy per coulomb changes at the source or a component.",
+      checkForUnderstanding: "If a source gives each coulomb more energy but the number of coulombs stays the same, what electrical quantity has increased?",
+      commonTrap: "Do not confuse total energy transfer with voltage. More charge can increase total energy without changing the energy transferred to each coulomb.",
+    };
+  }
+  if (code === "F4_L3") {
+    return {
+      coreIdea: "For an ohmic component, current depends directly on voltage and inversely on resistance.",
+      reasoning: "Identify whether the question is asking about current, resistance, or graph meaning. Use I = V / R or R = V / I for the numeric part, then interpret graph steepness as current gained for each volt. A steeper straight I-V line means lower resistance because the stream responds more strongly to the same push.",
+      checkForUnderstanding: "If the driving force stays the same but the path difficulty doubles, what happens to the current?",
+      commonTrap: "Do not treat resistance as a second kind of current, and do not assume a steeper I-V line means more resistance.",
+    };
+  }
+  if (code === "F4_L4") {
+    return {
+      coreIdea: "Series circuits are one-route networks: the same current flows everywhere, while the supply voltage is shared across the route sections.",
+      reasoning: "Add the route difficulties to get the total resistance first. Use the supply voltage and total resistance to find the one shared current through the route, then work out how the voltage is shared across each section. The whole route responds together because there is only one path for the charge to follow.",
+      checkForUnderstanding: "In a one-route series circuit, which quantity stays the same through every component: current or voltage?",
+      commonTrap: "Do not split the current in a series circuit. It is the supply voltage that gets shared across the components.",
+    };
+  }
+  if (code === "F4_L5") {
+    return {
+      coreIdea: "Parallel circuits are split-route networks: each branch gets the same voltage, while current divides between branches and recombines afterward.",
+      reasoning: "Mark the same start and finish points across each branch first, because that tells you the branch voltage is the same as the supply. Then work out each branch current from its own resistance and add the branch currents to find the total current entering the junction.",
+      checkForUnderstanding: "In a split-route parallel circuit, which quantity is shared across every branch and which quantity adds at the junction?",
+      commonTrap: "Do not share the voltage across parallel branches as if the circuit were series, and do not forget that total current is the sum of the branch currents.",
+    };
+  }
+  if (code === "F4_L6") {
+    return {
+      coreIdea: "Power tells how fast a circuit transfers energy, total energy depends on power and time, and safety depends on limiting current.",
+      reasoning: "Use P = VI to find how quickly the circuit is transferring energy each second. Then use E = Pt to work out the total transferred energy over the running time. After that, compare the current with the fuse or breaker limit to decide whether the route stays safe or must be cut off.",
+      checkForUnderstanding: "If the same device runs at the same power for longer, what changes: the power, the total energy transferred, or both?",
+      commonTrap: "Do not treat a fuse as a device that boosts power. A fuse or breaker protects the circuit by interrupting dangerously large current.",
     };
   }
   if (code.startsWith("F3_")) {
@@ -2959,6 +3342,42 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       checkForUnderstanding: "In this analogy, what stays the same through the collision: each object's own momentum or the whole system balance?",
     };
   }
+  if (code === "F4_L1") {
+    return {
+      body: "The Flow-Grid loop works because it keeps the route whole. The moving packets represent charge carriers, and the number of packets passing a checkpoint each second stands for current. If the route is broken, the stream stops everywhere, not just near the break. That is why a single-loop circuit has the same current at every point while it remains complete.",
+      checkForUnderstanding: "In the Flow-Grid loop, what does the packet stream rate at a checkpoint represent?",
+    };
+  }
+  if (code === "F4_L2") {
+    return {
+      body: "The Flow-Grid source station adds an energy boost to each packet. That boost is the analogue of potential difference: the energy transferred to each coulomb. A lamp or resistor does not destroy the packets; it transfers some of their electrical energy to other stores. The model therefore helps students separate charge itself from the energy carried by each unit of charge.",
+      checkForUnderstanding: "In the Flow-Grid picture, what changes when the source station becomes stronger: the packet count, the energy boost per packet, or both?",
+    };
+  }
+  if (code === "F4_L3") {
+    return {
+      body: "The Flow-Grid route difficulty is useful because it changes the stream response without changing what current means. A wider, easier route stands for lower resistance, so the same source push drives more packets each second. A narrower, harder route stands for higher resistance, so the stream slows. The I-V graph then becomes a graph of how strongly the stream responds to push.",
+      checkForUnderstanding: "If the route becomes harder but the source push stays the same, what happens to the stream rate and what electrical idea does that represent?",
+    };
+  }
+  if (code === "F4_L4") {
+    return {
+      body: "The Flow-Grid single-route network is a strong series analogy because every packet must pass through each difficult section in turn. That is why the same current flows everywhere in a series loop. The total push from the source station is then shared across the sections, which matches how the supply voltage is split across series components.",
+      checkForUnderstanding: "In the single-route analogy, why can the same packet stream rate exist everywhere even though the source push is shared across components?",
+    };
+  }
+  if (code === "F4_L5") {
+    return {
+      body: "The Flow-Grid split-route network captures the key parallel relationships. Each branch begins and ends at the same two points, so each branch gets the same push across it, which stands for equal branch voltage. The packets then divide between branches and recombine afterward, which stands for branch current splitting and total current addition.",
+      checkForUnderstanding: "In the split-route analogy, what stays the same across each branch and what divides between the branches?",
+    };
+  }
+  if (code === "F4_L6") {
+    return {
+      body: "The Flow-Grid safety story links three circuit ideas at once. The number of energised packets pushed through each second stands for electrical power. Letting that stream continue for longer increases the total transferred energy. If the stream rate becomes too large, the safety gate opens the route, which stands for a fuse or breaker interrupting dangerous current before overheating becomes severe.",
+      checkForUnderstanding: "In the Flow-Grid safety story, which part stands for power and which part stands for the protective device?",
+    };
+  }
   if (code.startsWith("F3_")) {
     return {
       body: "Use the analogy by matching each part to the physics before you calculate. Ask what is being transferred, what is stored, what is conserved, and which variable changes most strongly in the comparison.",
@@ -3005,7 +3424,7 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
 }
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  if (code.startsWith("F2_") || code.startsWith("F3_")) {
+  if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
     const f2Copy = scaffoldF2SectionCopy(code);
     const analogyCopy = scaffoldF2AnalogyBridge(code);
     return [
@@ -3652,3 +4071,16 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="70" y="88" fill="#172554" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Closed route keeps one stream rate</text>
+  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">The Flow-Grid source station keeps the packet stream moving around one complete route.</text>
+  <rect x="90" y="220" width="220" height="140" rx="28" fill="#DBEAFE" stroke="#93C5FD" stroke-width="6"/>
+  <text x="130" y="286" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Source station</text>
+  <text x="130" y="324" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">Pushes charge around</text>
+  <text x="130" y="352" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">the closed route.</text>
+  <rect x="820" y="232" width="220" height="120" rx="26" fill="#FEF3C7" stroke="#FBBF24" stroke-width="6"/>
+  <text x="876" y="288" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Lamp</text>
+  <text x="862" y="324" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">Transfers energy,</text>
+  <text x="850" y="350" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">but does not use current up.</text>
+  <path d="M310 290H770" stroke="#2563EB" stroke-width="22" stroke-linecap="round"/>
+  <path d="M770 290L720 250V330L770 290Z" fill="#2563EB"/>
+  <path d="M930 470H310" stroke="#2563EB" stroke-width="22" stroke-linecap="round"/>
+  <path d="M310 470L360 430V510L310 470Z" fill="#2563EB"/>
+  <path d="M200 470V360" stroke="#2563EB" stroke-width="22" stroke-linecap="round"/>
+  <path d="M930 352V470" stroke="#2563EB" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="420" cy="250" r="16" fill="#0EA5E9"/>
+  <circle cx="470" cy="250" r="16" fill="#0EA5E9"/>
+  <circle cx="520" cy="250" r="16" fill="#0EA5E9"/>
+  <circle cx="570" cy="250" r="16" fill="#0EA5E9"/>
+  <circle cx="620" cy="250" r="16" fill="#0EA5E9"/>
+  <circle cx="670" cy="250" r="16" fill="#0EA5E9"/>
+  <rect x="360" y="510" width="220" height="100" rx="26" fill="#E0F2FE" stroke="#38BDF8" stroke-width="5"/>
+  <text x="392" y="556" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Checkpoint A</text>
+  <text x="406" y="592" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">Current = 3 A</text>
+  <rect x="650" y="510" width="220" height="100" rx="26" fill="#E0F2FE" stroke="#38BDF8" stroke-width="5"/>
+  <text x="682" y="556" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Checkpoint B</text>
+  <text x="696" y="592" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">Current = 3 A</text>
+  <text x="90" y="654" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Key idea:</text>
+  <text x="228" y="654" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">In one closed route, the same stream rate passes every checkpoint.</text>
+</svg>
