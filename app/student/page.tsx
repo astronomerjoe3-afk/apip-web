@@ -48,11 +48,22 @@ type BillingSummary = {
   portal_enabled?: boolean;
   has_active_subscription?: boolean;
   active_subscription_plan_id?: string | null;
+  can_checkout?: boolean;
+  subscription?: {
+    plan_id?: string | null;
+    ends_utc?: string | null;
+  } | null;
 };
 
 type BillingSummaryResponse = {
   ok: boolean;
   billing: BillingSummary;
+};
+
+type CheckoutSessionResponse = {
+  ok: boolean;
+  checkout_url?: string;
+  session_id?: string;
 };
 
 function errorMessage(error: unknown): string {
@@ -77,6 +88,55 @@ function moduleBadge(moduleItem: Module): { label: string; background: string; c
   return { label: "Free module", background: "#dbeafe", color: "#1d4ed8" };
 }
 
+function planRank(planId?: string | null): number {
+  switch (String(planId || "")) {
+    case "premium_monthly":
+      return 1;
+    case "premium_six_month":
+      return 2;
+    case "premium_yearly":
+      return 3;
+    default:
+      return 0;
+  }
+}
+
+function planDisplayName(planId?: string | null): string {
+  switch (String(planId || "")) {
+    case "premium_monthly":
+      return "Premium monthly";
+    case "premium_six_month":
+      return "Premium 6 months";
+    case "premium_yearly":
+      return "Premium yearly";
+    default:
+      return "Premium subscription";
+  }
+}
+
+function subscriptionPlanAction(targetPlanId?: string | null, currentPlanId?: string | null): "subscribe" | "upgrade" | "manage" {
+  if (!currentPlanId) {
+    return "subscribe";
+  }
+
+  if (!targetPlanId || targetPlanId === currentPlanId) {
+    return "manage";
+  }
+
+  return planRank(targetPlanId) > planRank(currentPlanId) ? "upgrade" : "manage";
+}
+
+function subscriptionActionLabel(plan: PricingOffer, currentPlanId?: string | null): string {
+  const action = subscriptionPlanAction(plan.id, currentPlanId);
+  if (action === "upgrade") {
+    return "Upgrade to " + (plan.title || "premium");
+  }
+  if (action === "manage") {
+    return "Manage subscription";
+  }
+  return "Subscribe to " + (plan.title || "premium");
+}
+
 export default function StudentHomePage() {
   const router = useRouter();
   const { user, loading } = useAuth();
@@ -86,7 +146,7 @@ export default function StudentHomePage() {
 
   const [modules, setModules] = useState<Module[]>([]);
   const [billingSummary, setBillingSummary] = useState<BillingSummary | null>(null);
-  const [billingBusy, setBillingBusy] = useState<boolean>(false);
+  const [billingBusy, setBillingBusy] = useState<string>("");
   const [modulesLoading, setModulesLoading] = useState<boolean>(true);
   const [err, setErr] = useState<string>("");
   const [status, setStatus] = useState<string>("");
@@ -187,14 +247,28 @@ export default function StudentHomePage() {
 
   async function openBillingPortal(): Promise<void> {
     try {
-      setBillingBusy(true);
+      setBillingBusy("portal");
       const data = await apipPost<{ ok: boolean; portal_url?: string }>("/billing/portal-session", { origin: window.location.origin, return_path: "/student" } as never);
       if (!data.portal_url) throw new Error("Billing portal did not return a redirect URL.");
       window.location.assign(data.portal_url);
     } catch (error: unknown) {
       setErr(errorMessage(error));
     } finally {
-      setBillingBusy(false);
+      setBillingBusy("");
+    }
+  }
+
+  async function launchSubscriptionCheckout(planId?: string): Promise<void> {
+    if (!planId) return;
+    try {
+      setBillingBusy(planId);
+      const data = await apipPost<CheckoutSessionResponse>("/billing/checkout-session", { purchase_kind: "subscription", plan_id: planId, origin: window.location.origin, success_path: "/student", cancel_path: "/student" } as never);
+      if (!data.checkout_url) throw new Error("Subscription billing did not return a redirect URL.");
+      window.location.assign(data.checkout_url);
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+    } finally {
+      setBillingBusy("");
     }
   }
 
@@ -212,6 +286,16 @@ export default function StudentHomePage() {
   const pageReady = useMemo(() => {
     return !loading && !roleLoading && !!user && role === "student";
   }, [loading, roleLoading, role, user]);
+
+  const activeSubscriptionPlanId = billingSummary?.active_subscription_plan_id || billingSummary?.subscription?.plan_id || null;
+  const subscriptionPlans = useMemo(() => {
+    for (const moduleItem of modules) {
+      if (moduleItem.access?.subscription_plans?.length) {
+        return moduleItem.access.subscription_plans;
+      }
+    }
+    return [] as PricingOffer[];
+  }, [modules]);
 
   if (loading || roleLoading) {
     return (
@@ -273,8 +357,8 @@ export default function StudentHomePage() {
 
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
           {billingSummary?.portal_enabled ? (
-            <button onClick={() => void openBillingPortal()} disabled={billingBusy} style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700, opacity: billingBusy ? 0.65 : 1 }}>
-              {billingBusy ? "Opening billing..." : "Manage billing"}
+            <button onClick={() => void openBillingPortal()} disabled={billingBusy !== ""} style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700, opacity: billingBusy !== "" ? 0.65 : 1 }}>
+              {billingBusy === "portal" ? "Opening billing..." : billingSummary?.has_active_subscription ? "Manage subscription" : "Manage billing"}
             </button>
           ) : null}
           <button
@@ -326,6 +410,44 @@ export default function StudentHomePage() {
           }}
         >
           <b>Error:</b> {err}
+        </div>
+      ) : null}
+
+      {billingSummary?.has_active_subscription ? (
+        <div
+          style={{
+            border: "1px solid rgba(22, 101, 52, 0.2)",
+            borderRadius: 14,
+            padding: 16,
+            marginBottom: 16,
+            background: "#f0fdf4",
+            color: "#166534",
+            display: "grid",
+            gap: 12,
+          }}
+        >
+          <div>
+            <div style={{ fontWeight: 900, fontSize: 18 }}>
+              Active subscription: {planDisplayName(activeSubscriptionPlanId)}
+            </div>
+            <div style={{ marginTop: 6, opacity: 0.84 }}>
+              Manage the current plan or upgrade to a longer premium subscription directly here.
+            </div>
+          </div>
+          {subscriptionPlans.length > 0 ? (
+            <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+              {subscriptionPlans.map((plan) => (
+                <button
+                  key={plan.id || plan.title}
+                  onClick={() => void launchSubscriptionCheckout(plan.id)}
+                  disabled={billingBusy !== "" || billingSummary?.can_checkout === false}
+                  style={{ padding: "12px 14px", borderRadius: 12, border: "1px solid rgba(22, 101, 52, 0.16)", background: "rgba(255,255,255,0.92)", fontWeight: 800, color: "#14532d", opacity: billingBusy !== "" || billingSummary?.can_checkout === false ? 0.6 : 1 }}
+                >
+                  {billingBusy === plan.id ? "Opening billing..." : subscriptionActionLabel(plan, activeSubscriptionPlanId)}
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
       ) : null}
 

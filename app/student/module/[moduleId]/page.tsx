@@ -150,6 +150,55 @@ function errorMessage(error: unknown): string {
   return String(error);
 }
 
+function planRank(planId?: string | null): number {
+  switch (String(planId || "")) {
+    case "premium_monthly":
+      return 1;
+    case "premium_six_month":
+      return 2;
+    case "premium_yearly":
+      return 3;
+    default:
+      return 0;
+  }
+}
+
+function planDisplayName(planId?: string | null): string {
+  switch (String(planId || "")) {
+    case "premium_monthly":
+      return "Premium monthly";
+    case "premium_six_month":
+      return "Premium 6 months";
+    case "premium_yearly":
+      return "Premium yearly";
+    default:
+      return "Premium subscription";
+  }
+}
+
+function subscriptionPlanAction(targetPlanId?: string | null, currentPlanId?: string | null): "subscribe" | "upgrade" | "manage" {
+  if (!currentPlanId) {
+    return "subscribe";
+  }
+
+  if (!targetPlanId || targetPlanId === currentPlanId) {
+    return "manage";
+  }
+
+  return planRank(targetPlanId) > planRank(currentPlanId) ? "upgrade" : "manage";
+}
+
+function subscriptionActionLabel(plan: PricingOffer, currentPlanId?: string | null): string {
+  const action = subscriptionPlanAction(plan.id, currentPlanId);
+  if (action === "upgrade") {
+    return "Upgrade to " + (plan.title || "premium");
+  }
+  if (action === "manage") {
+    return "Manage subscription";
+  }
+  return "Subscribe to " + (plan.title || "premium");
+}
+
 export default function StudentModulePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -202,12 +251,20 @@ export default function StudentModulePage() {
   const billingConfigured = billingSummary?.configured === true;
   const checkoutEnabled = billingSummary?.can_checkout !== false;
   const canManageBilling = billingSummary?.portal_enabled === true;
+  const hasActiveSubscription = billingSummary?.has_active_subscription === true;
+  const activeSubscriptionPlanId = billingSummary?.active_subscription_plan_id || billingSummary?.subscription?.plan_id || null;
+  const activeSubscriptionLabel = planDisplayName(activeSubscriptionPlanId);
+  const subscriptionPlans = moduleMeta?.access?.subscription_plans || [];
+  const showModulePurchase = Boolean(moduleMeta?.access?.module_purchase) && !hasActiveSubscription;
   const modulePurchaseTitle = /forever/i.test(moduleMeta?.access?.module_purchase?.title || "")
     ? "Unlock this module for 1 month"
     : moduleMeta?.access?.module_purchase?.title || "Unlock this module for 1 month";
   const modulePurchaseDescription = /(permanent|forever)/i.test(moduleMeta?.access?.module_purchase?.description || "")
     ? "One payment for 1 month of access to this premium module."
     : moduleMeta?.access?.module_purchase?.description || "One payment for 1 month of access to this premium module.";
+  const billingCtaText = hasActiveSubscription
+    ? "Use Manage subscription or upgrade to a longer premium plan below."
+    : "Secure checkout is ready. Choose a 1-month module pass or premium subscription.";
   const showBillingError = Boolean(billingErr) && moduleLocked;
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
@@ -455,7 +512,7 @@ export default function StudentModulePage() {
     setBillingErr("");
     setBillingBusyId("portal");
     try {
-      const response = await apipPost<PortalSessionResponse>("/billing/portal-session", { origin: window.location.origin, return_path: "/student" } as never);
+      const response = await apipPost<PortalSessionResponse>("/billing/portal-session", { origin: window.location.origin, return_path: currentModulePath } as never);
       if (!response.portal_url) throw new Error("Billing portal did not return a redirect URL.");
       window.location.assign(response.portal_url);
     } catch (error) {
@@ -463,7 +520,7 @@ export default function StudentModulePage() {
     } finally {
       setBillingBusyId("");
     }
-  }, []);
+  }, [currentModulePath]);
 
   function goBack(): void {
     if (!canGoBack) return;
@@ -718,16 +775,16 @@ export default function StudentModulePage() {
             <div style={{ textAlign: "center", fontSize: 18, color: "#46566b", lineHeight: 1.6 }}>
               {moduleMeta?.access?.message || "Unlock this premium module for 1 month or subscribe for wider access."}
             </div>
-            {billingSummary?.has_active_subscription ? (
+            {hasActiveSubscription ? (
               <div style={{ border: "1px solid rgba(22, 101, 52, 0.16)", borderRadius: 18, padding: 18, background: "#f0fdf4", color: "#166534" }}>
-                <div style={{ fontWeight: 900, fontSize: 18 }}>Active plan: {billingSummary.active_subscription_plan_id || "premium subscription"}</div>
-                <div style={{ marginTop: 6, opacity: 0.84 }}>Your premium subscription should unlock this module. If this card is still showing, use refresh below.</div>
+                <div style={{ fontWeight: 900, fontSize: 18 }}>Active plan: {activeSubscriptionLabel}</div>
+                <div style={{ marginTop: 6, opacity: 0.84 }}>Your premium subscription should already unlock this module. Refresh access below, manage the subscription, or upgrade to a longer plan here.</div>
               </div>
             ) : null}
-            {moduleMeta?.access?.module_purchase ? (
+            {showModulePurchase ? (
               <div style={{ border: "1px solid rgba(16, 35, 63, 0.12)", borderRadius: 18, padding: 18, background: "rgba(255, 255, 255, 0.82)" }}>
                 <div style={{ fontWeight: 900, fontSize: 20 }}>{modulePurchaseTitle}</div>
-                <div style={{ marginTop: 6, fontSize: 28, fontWeight: 900 }}>{moduleMeta.access.module_purchase.price_label}</div>
+                <div style={{ marginTop: 6, fontSize: 28, fontWeight: 900 }}>{moduleMeta?.access?.module_purchase?.price_label}</div>
                 <div style={{ marginTop: 8, opacity: 0.82 }}>{modulePurchaseDescription}</div>
                 <div style={{ marginTop: 14, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                   <button onClick={() => void launchCheckout("module_unlock")} disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading} style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)", color: "#fff", fontWeight: 900, opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1 }}>
@@ -737,28 +794,28 @@ export default function StudentModulePage() {
                 </div>
               </div>
             ) : null}
-            {(moduleMeta?.access?.subscription_plans || []).length > 0 ? (
+            {subscriptionPlans.length > 0 ? (
               <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-                {(moduleMeta?.access?.subscription_plans || []).map((plan) => (
+                {subscriptionPlans.map((plan) => (
                   <div key={plan.id || plan.title} style={{ border: "1px solid rgba(16, 35, 63, 0.12)", borderRadius: 18, padding: 18, background: "rgba(255, 255, 255, 0.82)" }}>
                     <div style={{ fontWeight: 900 }}>{plan.title}</div>
                     <div style={{ marginTop: 6, fontSize: 24, fontWeight: 900 }}>{plan.price_label}</div>
                     <div style={{ marginTop: 4, opacity: 0.72 }}>{plan.effective_monthly_label || plan.billing_label}</div>
                     <div style={{ marginTop: 8, opacity: 0.82 }}>{plan.description}</div>
                     <button onClick={() => void launchCheckout("subscription", plan.id)} disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading} style={{ marginTop: 14, width: "100%", padding: "12px 16px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.92)", color: "#10233f", fontWeight: 900, opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1 }}>
-                      {billingBusyId === plan.id ? "Opening secure checkout..." : "Subscribe to " + (plan.title || "premium")}
+                      {billingBusyId === plan.id ? "Opening billing..." : subscriptionActionLabel(plan, activeSubscriptionPlanId)}
                     </button>
                   </div>
                 ))}
               </div>
             ) : null}
             <div style={{ textAlign: "center", opacity: 0.72 }}>
-              {billingConfigured ? "Secure checkout is ready. Choose a 1-month module pass or premium subscription." : "Live billing is not configured in this environment yet. Add the Stripe keys and price ids on the API service to enable checkout."}
+              {billingConfigured ? billingCtaText : "Live billing is not configured in this environment yet. Add the Stripe keys and price ids on the API service to enable checkout."}
             </div>
             <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
               {canManageBilling ? (
                 <button onClick={() => void openBillingPortal()} disabled={billingBusyId !== ""} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.88)", fontWeight: 800, opacity: billingBusyId !== "" ? 0.6 : 1 }}>
-                  {billingBusyId === "portal" ? "Opening billing portal..." : "Manage billing"}
+                  {billingBusyId === "portal" ? "Opening billing portal..." : hasActiveSubscription ? "Manage subscription" : "Manage billing"}
                 </button>
               ) : null}
               <button onClick={() => { void Promise.all([loadModuleState(false), loadBillingSummary()]); }} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.88)", fontWeight: 800 }}>Refresh access</button>
