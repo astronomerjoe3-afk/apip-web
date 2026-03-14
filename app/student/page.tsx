@@ -264,7 +264,7 @@ export default function StudentHomePage() {
         <div>
           <h1 style={{ fontSize: 36, marginBottom: 12 }}>Student</h1>
           <p style={{ opacity: 0.8, marginBottom: 8 }}>
-            F1 is free. Premium modules unlock per module or through subscription.
+            F1 is free. Premium modules unlock for 1 month per module or through subscription.
           </p>
           <div style={{ opacity: 0.7, fontSize: 13 }}>
             Signed in as: {user?.email || "student"}
@@ -394,7 +394,7 @@ export default function StudentHomePage() {
 
                   {locked && moduleItem.access?.module_purchase?.price_label ? (
                     <div style={{ marginTop: 8, fontSize: 14, fontWeight: 700 }}>
-                      One-time unlock: {moduleItem.access.module_purchase.price_label}
+                      1-month access: {moduleItem.access.module_purchase.price_label}
                     </div>
                   ) : null}
 

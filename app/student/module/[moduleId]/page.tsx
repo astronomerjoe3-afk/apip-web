@@ -710,7 +710,7 @@ export default function StudentModulePage() {
               <span style={{ padding: "6px 12px", borderRadius: 999, background: "#fef3c7", color: "#92400e", fontWeight: 800, fontSize: 12 }}>Premium module</span>
             </div>
             <div style={{ textAlign: "center", fontSize: 18, color: "#46566b", lineHeight: 1.6 }}>
-              {moduleMeta?.access?.message || "Unlock this premium module with a one-time purchase or a subscription."}
+              {moduleMeta?.access?.message || "Unlock this premium module for 1 month or subscribe for wider access."}
             </div>
             {billingSummary?.has_active_subscription ? (
               <div style={{ border: "1px solid rgba(22, 101, 52, 0.16)", borderRadius: 18, padding: 18, background: "#f0fdf4", color: "#166534" }}>
@@ -720,14 +720,14 @@ export default function StudentModulePage() {
             ) : null}
             {moduleMeta?.access?.module_purchase ? (
               <div style={{ border: "1px solid rgba(16, 35, 63, 0.12)", borderRadius: 18, padding: 18, background: "rgba(255, 255, 255, 0.82)" }}>
-                <div style={{ fontWeight: 900, fontSize: 20 }}>{moduleMeta.access.module_purchase.title || "Unlock this module forever"}</div>
+                <div style={{ fontWeight: 900, fontSize: 20 }}>{moduleMeta.access.module_purchase.title || "Unlock this module for 1 month"}</div>
                 <div style={{ marginTop: 6, fontSize: 28, fontWeight: 900 }}>{moduleMeta.access.module_purchase.price_label}</div>
-                <div style={{ marginTop: 8, opacity: 0.82 }}>{moduleMeta.access.module_purchase.description || "One payment for permanent access to this premium module."}</div>
+                <div style={{ marginTop: 8, opacity: 0.82 }}>{moduleMeta.access.module_purchase.description || "One payment for 1 month of access to this premium module."}</div>
                 <div style={{ marginTop: 14, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                   <button onClick={() => void launchCheckout("module_unlock")} disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading} style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)", color: "#fff", fontWeight: 900, opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1 }}>
                     {billingBusyId === "module_unlock" ? "Opening secure checkout..." : "Unlock this module"}
                   </button>
-                  <span style={{ opacity: 0.72 }}>One-time purchase. Secure checkout opens in Stripe.</span>
+                  <span style={{ opacity: 0.72 }}>One-time purchase for 1 month of access. Secure checkout opens in Stripe.</span>
                 </div>
               </div>
             ) : null}
@@ -747,7 +747,7 @@ export default function StudentModulePage() {
               </div>
             ) : null}
             <div style={{ textAlign: "center", opacity: 0.72 }}>
-              {billingConfigured ? "Secure checkout is ready. Choose a one-time unlock or premium subscription." : "Live billing is not configured in this environment yet. Add the Stripe keys and price ids on the API service to enable checkout."}
+              {billingConfigured ? "Secure checkout is ready. Choose a 1-month module pass or premium subscription." : "Live billing is not configured in this environment yet. Add the Stripe keys and price ids on the API service to enable checkout."}
             </div>
             <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
               {canManageBilling ? (
