@@ -44,6 +44,7 @@ type LocalState = {
     reviewRefs?: UnknownRecord[];
     reviewRequested?: boolean;
     forceNewAttempt?: boolean;
+    displayedItems?: UnknownRecord[];
   };
 };
 
@@ -65,7 +66,15 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6"];
+
+function isExtendedNextgenLessonCode(code: string): boolean {
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_");
+}
+
+function isStructuredMasteryPaddingLessonCode(code: string): boolean {
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_");
+}
 
 type FallbackAnswerMeta = {
   id: string;
@@ -1009,7 +1018,7 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
+  if (isExtendedNextgenLessonCode(code)) {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
       .filter((item) => hasUsableMasteryAnswer(item));
@@ -1502,6 +1511,18 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         return ["F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L6"];
       case "F4_L6":
         return ["F3_L3", "F3_L6", "F4_L2", "F4_L3", "F4_L5"];
+      case "M1_L1":
+        return ["F2_L1", "F2_L3", "M1_L2", "M1_L5", "M1_L6"];
+      case "M1_L2":
+        return ["F2_L2", "F2_L4", "M1_L1", "M1_L3", "M1_L5"];
+      case "M1_L3":
+        return ["F2_L2", "F2_L6", "M1_L2", "M1_L4", "M1_L5"];
+      case "M1_L4":
+        return ["M1_L3", "M1_L5", "M1_L6", "F2_L6", "F3_L6"];
+      case "M1_L5":
+        return ["F2_L3", "F2_L4", "M1_L1", "M1_L2", "M1_L6"];
+      case "M1_L6":
+        return ["F2_L4", "F3_L1", "M1_L2", "M1_L4", "M1_L5"];
       default:
         return [];
     }
@@ -1514,12 +1535,13 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     if (code === "F4_L4") return "Which option is the clearest match for this series circuit lesson?";
     if (code === "F4_L5") return "Which option is the clearest match for this parallel circuit lesson?";
     if (code === "F4_L6") return "Which option is the clearest match for this power and safety lesson?";
+    if (code.startsWith("M1_")) return index % 2 === 0 ? "Which statement best matches this motion-graph lesson point?" : "Choose the option that keeps the motion representation and its meaning aligned.";
     if (code.startsWith("F3_")) return "Which option directly answers this lesson point?";
     if (code.startsWith("F2_")) return "Which statement best fits this lesson point?";
     return index % 2 === 0 ? "Which statement best fits this lesson point?" : "Choose the statement that directly answers this lesson point.";
   };
 
-  const paddingHint = code.startsWith("F3_") || code.startsWith("F4_") ? "Choose the statement that directly answers this lesson point." : "Pick the statement that matches this lesson's main distinction.";
+  const paddingHint = isStructuredMasteryPaddingLessonCode(code) ? "Choose the statement that directly answers this lesson point." : "Pick the statement that matches this lesson's main distinction.";
   return lessonPoints.slice(0, MASTERY_DEFAULT_MAX).flatMap((point, index) => {
     const pointKey = normalizePromptKey(point);
     const distractors = Array.from(new Set(
@@ -1640,6 +1662,12 @@ function simulationStageTitle(code: string): string {
     case "F4_L4": return "Series circuit explorer";
     case "F4_L5": return "Parallel circuit explorer";
     case "F4_L6": return "Power and safety explorer";
+    case "M1_L1": return "Route-log story explorer";
+    case "M1_L2": return "Speed-strip explorer";
+    case "M1_L3": return "Change-rate explorer";
+    case "M1_L4": return "Forecast-console explorer";
+    case "M1_L5": return "Slope-gauge explorer";
+    case "M1_L6": return "Area-accumulator explorer";
     default: return "Simulation inquiry";
   }
 }
@@ -1667,6 +1695,12 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F4_L4": return "Build one single-route Flow-Grid network and watch how adding difficulty anywhere changes the stream everywhere while the source push is shared across the route.";
     case "F4_L5": return "Open a split-route Flow-Grid network so branch voltage stays tied to the same endpoints while the current divides and recombines across the branches.";
     case "F4_L6": return "Use the Flow-Grid source station, stream rate, and safety gate together so power, total energy transfer, and protective cut-off become one system story.";
+    case "M1_L1": return "Use the Motion Control Wall route log to keep graph height, graph steepness, and pauses separate while you compare journeys that can end at the same distance with different stories.";
+    case "M1_L2": return "Use the Motion Control Wall speed strip to separate graph height from graph slope so current speed and rate of change do not collapse into one idea.";
+    case "M1_L3": return "Use the change-rate dial to compare signed velocity changes over time so acceleration becomes a rate with direction, not a synonym for going faster.";
+    case "M1_L4": return "Use the forecast console only when acceleration stays constant, then choose the equation by the missing variable instead of by pattern matching.";
+    case "M1_L5": return "Lay the same slope gauge across different motion graphs so the same tilt is seen to mean different things when the axes change.";
+    case "M1_L6": return "Build rectangle, triangle, and trapezium regions under a speed-time graph so area becomes total distance and different shapes can still represent the same distance.";
     default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
   }
 }
@@ -1694,6 +1728,12 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F4_L4": return "Start with one route, add a second resistor in series, and explain why the whole network stream rate changes everywhere while the source push is shared between the components.";
     case "F4_L5": return "Start with one branch, add a second branch between the same two points, and explain why branch voltage stays the same while total current rises.";
     case "F4_L6": return "Use one route to compare a safe case, a higher-current case, and a longer-running case, then explain how power, total energy, and fuse action are linked in the Flow-Grid story.";
+    case "M1_L1": return "Build one route-log story with motion, a pause, and more motion, then compare it with a different graph that reaches the same final distance.";
+    case "M1_L2": return "Create one flat, one rising, and one falling speed-time line, then explain what height and slope each say at the same instant.";
+    case "M1_L3": return "Choose one positive, one negative, and one zero-acceleration case, then explain each sign from the signed velocity change over time.";
+    case "M1_L4": return "Use one constant-acceleration story to decide which equation finds the missing value, then explain why the same console should not be trusted when acceleration changes.";
+    case "M1_L5": return "Hold one common gradient across two graph types and explain why the same tilt means speed on one graph but acceleration on another.";
+    case "M1_L6": return "Split one speed-time graph into rectangle and triangle parts, then compare it with a different graph that encloses the same total area.";
     default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
   }
 }
@@ -1807,6 +1847,42 @@ function simulationStageExploreSteps(code: string): string[] {
         "Hold the voltage fixed and raise the current so power rises as the Flow-Grid moves more energy each second.",
         "Keep the power fixed but run the route for longer so total transferred energy keeps increasing.",
         "Raise the current above the safety-gate threshold and explain why the protective cut-off opens the route.",
+      ];
+    case "M1_L1":
+      return [
+        "Start with one steady segment, then add a pause so only the flat part of the route log changes.",
+        "Rebuild the journey with different segment slopes but a similar finishing height so the final distance stays separate from the story of how it was reached.",
+        "Name which information comes from graph height and which comes from graph steepness before you describe the motion.",
+      ];
+    case "M1_L2":
+      return [
+        "Begin with a flat speed-time line so the speed is constant and the slope is zero.",
+        "Raise the end speed to create a positive slope, then lower it below the start to create a negative slope.",
+        "Compare one instant on two graphs and decide what the height says there and what the slope says there.",
+      ];
+    case "M1_L3":
+      return [
+        "Choose a positive direction and write the initial and final velocities with signs.",
+        "Compare the same velocity change over a short time and a longer time so the rate idea becomes visible.",
+        "Build one positive, one negative, and one zero case, then decide whether the object is speeding up, slowing down, or changing direction.",
+      ];
+    case "M1_L4":
+      return [
+        "Start with a constant-acceleration story and list the known and unknown variables.",
+        "Choose the equation whose missing-variable pattern fits the story instead of the one that simply looks familiar.",
+        "Switch off the constant-acceleration condition and explain why the forecast console should no longer be used directly.",
+      ];
+    case "M1_L5":
+      return [
+        "Set one common tilt and read it first on a distance-time graph, then on a speed-time graph.",
+        "Keep the gradient fixed while changing the starting height on the speed-time graph so height and slope stay separate.",
+        "Explain the meaning from the axes before you name the quantity.",
+      ];
+    case "M1_L6":
+      return [
+        "Choose start speed, end speed, and time for one straight-line speed-time graph.",
+        "Split the shaded area into a rectangle and a triangle, then add them for the total distance.",
+        "Compare that total with a different graph that encloses the same area so equal distance does not imply identical motion.",
       ];
     default:
       return [];
@@ -1922,6 +1998,42 @@ function simulationStageWatchFor(code: string): string[] {
         "Total electrical energy still depends on how long that power runs: E = Pt.",
         "Safety devices protect circuits by cutting off dangerously large current before overheating becomes severe.",
       ];
+    case "M1_L1":
+      return [
+        "Graph height tells the recorded total distance by that time.",
+        "Graph steepness tells how quickly distance is being added, so it represents speed.",
+        "A flat section means the object is stopped for that interval, and the same finishing height can still come from a different journey story.",
+      ];
+    case "M1_L2":
+      return [
+        "On a speed-time graph, height tells the speed at that instant.",
+        "Slope tells how the speed or velocity is changing, so it is about acceleration, not distance.",
+        "A flat section above zero still means motion, and equal graph height does not guarantee equal acceleration.",
+      ];
+    case "M1_L3":
+      return [
+        "Acceleration is change in velocity divided by time.",
+        "The sign of acceleration depends on the chosen positive direction and the signed change in velocity.",
+        "Negative acceleration does not automatically mean slowing down in every situation.",
+      ];
+    case "M1_L4":
+      return [
+        "The standard motion equations in this lesson assume constant acceleration.",
+        "Equation choice should come from the known variables, the unknown variable, and which variable you want to avoid.",
+        "A sensible unit check and motion-story check help catch a wrong equation choice.",
+      ];
+    case "M1_L5":
+      return [
+        "Gradient meaning depends on the axes, not on steepness alone.",
+        "Distance-time gradient gives speed, while speed-time gradient gives acceleration.",
+        "Graph height and graph gradient must be kept separate on both graph types.",
+      ];
+    case "M1_L6":
+      return [
+        "Area under a speed-time graph gives total distance traveled over the interval.",
+        "Rectangle and triangle pieces can be added to build the total distance.",
+        "Two different graph shapes can enclose the same total area and therefore the same total distance.",
+      ];
     default:
       return [];
   }
@@ -1964,6 +2076,18 @@ function simulationStageTryFirst(code: string): string | undefined {
       return "Try branch currents of 2 A and 1 A across the same 12 V supply. The total current should be 3 A while each branch still has the same 12 V across it.";
     case "F4_L6":
       return "Try 12 V, 2 A, and 10 s first. The power is 24 W and the total transferred energy is 240 J. Then raise the current to 4 A and compare the larger power.";
+    case "M1_L1":
+      return "Try 3 m/s, pause 2 s, then 5 m/s. The graph should rise, go flat, then rise more steeply.";
+    case "M1_L2":
+      return "Try 6 m/s to 12 m/s over 3 s. Height shows speed; slope is +2 m/s^2.";
+    case "M1_L3":
+      return "Try +8 m/s to +2 m/s in 3 s with east positive. The acceleration is -2 m/s^2.";
+    case "M1_L4":
+      return "Try u = 4 m/s, a = 3 m/s^2, and v = 16 m/s. The first choice should be v = u + at.";
+    case "M1_L5":
+      return "Try a gradient of 3. On distance-time it means 3 m/s; on speed-time it means 3 m/s^2.";
+    case "M1_L6":
+      return "Try u = 4 m/s, v = 10 m/s, and t = 6 s. Rectangle plus triangle gives 42 m.";
     default:
       return undefined;
   }
@@ -2006,6 +2130,18 @@ function simulationStageTakeaway(code: string): string | undefined {
       return "Parallel reasoning is shared branch voltage with current splitting and recombining across the branches.";
     case "F4_L6":
       return "Electrical power, total energy transfer, and safety all fit one story: how fast energy moves, how long it moves, and when excessive current must be cut off.";
+    case "M1_L1":
+      return "A distance-time graph becomes readable when height and slope are kept separate.";
+    case "M1_L2":
+      return "A speed-time graph only makes sense when height and slope are read as different motion ideas.";
+    case "M1_L3":
+      return "Acceleration is a signed rate of velocity change, not a synonym for speed.";
+    case "M1_L4":
+      return "The constant-acceleration equations are a forecast toolkit: choose the relation that matches the story.";
+    case "M1_L5":
+      return "The same slope can tell a different physics story when the graph axes change.";
+    case "M1_L6":
+      return "Area under a speed-time graph is a distance story built from time width and speed height together.";
     default:
       return undefined;
   }
@@ -2998,7 +3134,7 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
       ];
     default: {
       const code = lessonCode(lesson);
-      if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
+      if (isExtendedNextgenLessonCode(code)) {
         const essentials = [...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].filter(Boolean);
         const isFlowGrid = code.startsWith("F4_");
         return [{ title: isFlowGrid ? "Circuit essentials" : "Lesson essentials", caption: isFlowGrid ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson." : "Keep these key motion or force ideas visible while you work through the lesson.", columns: ["Key idea", "Why it matters"], rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]) }];
@@ -3296,7 +3432,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
       ];
     default: {
       const code = lessonCode(lesson);
-      if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
+      if (isExtendedNextgenLessonCode(code)) {
         const core = scaffoldCoreBullets(code);
         const focus = scaffoldFocusExtras(code);
         return [
@@ -3537,7 +3673,7 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
 }
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  if (code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_")) {
+  if (isExtendedNextgenLessonCode(code)) {
     const f2Copy = scaffoldF2SectionCopy(code);
     const analogyCopy = scaffoldF2AnalogyBridge(code);
     return [
@@ -3884,6 +4020,16 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
     const selectedPool = masteryPoolForAttempt(moduleId, lessonId, resources.lesson, masteryState.nonce || 0);
     const selected = selectedPool.slice(0, count);
+    if (!masteryState.submitted && stage !== 'done' && !hasPersistedResult) {
+      writeState(moduleId, lessonId, {
+        ...state,
+        mastery: {
+          ...state.mastery,
+          nonce: masteryState.nonce || 0,
+          displayedItems: selected.map((item) => asRecord(item)),
+        },
+      });
+    }
     stagePayload = masteryState.submitted || stage === "done" || hasPersistedResult
       ? {
           instructions: stage === "done" ? "You have already shown mastery for this lesson." : "This is your latest mastery result.",
@@ -4105,6 +4251,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       mastery: {
         nonce: (state.mastery?.nonce || freshAttemptSeed()) + 1,
         forceNewAttempt: true,
+        displayedItems: [],
       },
     });
     return;
@@ -4127,7 +4274,16 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const state = readState(moduleId, lessonId);
     const pool = masteryItems(resources.lesson);
     const submittedIds = asList(payload.question_ids).map((entry) => text(entry)).filter(Boolean);
-    const selected = submittedIds.length ? submittedIds.map((id) => pool.find((item) => text(asRecord(item).id) === id)).filter(Boolean) : masteryPoolForAttempt(moduleId, lessonId, resources.lesson, state.mastery?.nonce || 0).slice(0, masteryQuestionCount(masteryMeta, pool.length, masteryStrengthScore(runnerLesson, state)));
+    const displayedItems = asList(state.mastery?.displayedItems).map(asRecord).filter((item) => text(item.id));
+    const displayedById = new Map(displayedItems.map((item) => [text(item.id), item]));
+    const displayedSelected = submittedIds.length && submittedIds.every((id) => displayedById.has(id))
+      ? submittedIds.map((id) => displayedById.get(id)).filter(Boolean)
+      : [];
+    const selected = displayedSelected.length === submittedIds.length && submittedIds.length > 0
+      ? displayedSelected
+      : submittedIds.length
+        ? submittedIds.map((id) => pool.find((item) => text(asRecord(item).id) === id)).filter(Boolean)
+        : masteryPoolForAttempt(moduleId, lessonId, resources.lesson, state.mastery?.nonce || 0).slice(0, masteryQuestionCount(masteryMeta, pool.length, masteryStrengthScore(runnerLesson, state)));
     if (submittedIds.length && selected.length !== submittedIds.length) throw new Error("This mastery check is out of date. Start a fresh attempt and try again.");
     if (selected.length === 0) throw new Error("The mastery check is not available right now.");
     const answers = asRecord(payload.answers);
