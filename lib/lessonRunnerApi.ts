@@ -1741,7 +1741,7 @@ function simulationStageExploreSteps(code: string): string[] {
       return [
         "Hold the path difficulty fixed and raise the source push so you can watch the packet stream rate increase.",
         "Now hold the push fixed and make the route harder so you can see the stream rate fall.",
-        "Compare two straight I-V lines and explain why the steeper line means an easier path and therefore a lower resistance.",
+        "Compare two straight I-V graph lines and explain why the steeper I-V slope means an easier path and therefore a lower resistance.",
       ];
     case "F4_L4":
       return [
@@ -1855,7 +1855,7 @@ function simulationStageWatchFor(code: string): string[] {
       return [
         "At fixed resistance, more voltage gives more current for an ohmic component.",
         "At fixed voltage, greater resistance gives less current because the path is harder.",
-        "A steeper straight I-V line means more current per volt and therefore lower resistance.",
+        "A steeper straight I-V graph line means more current per volt and therefore lower resistance.",
       ];
     case "F4_L4":
       return [
@@ -2123,7 +2123,7 @@ function scaffoldFocusExtras(code: string): string[] {
         "Resistance is the difficulty of the route, so a harder path gives less current for the same push.",
         "Ohm's law becomes intuitive when students first see stream rate respond to push and difficulty.",
         "At fixed resistance, current rises with voltage; at fixed voltage, current falls with resistance.",
-        "A steeper straight I-V line means lower resistance because more current flows per volt.",
+        "A steeper straight I-V graph slope means lower resistance because more current flows per volt.",
       ];
     case "F4_L4":
       return [
@@ -2302,7 +2302,7 @@ function scaffoldCoreBullets(code: string): string[] {
         "Resistance = voltage / current for an ohmic component.",
         "Current = voltage / resistance for an ohmic component.",
         "Greater resistance means less current for the same voltage.",
-        "A steeper straight I-V line means lower resistance.",
+        "A steeper straight I-V graph slope means lower resistance.",
       ];
     case "F4_L4":
       return [
@@ -3212,9 +3212,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Compare push, difficulty, and current",
-          caption: "One Flow-Grid picture links harder routes with lower current and steeper I-V lines with lower resistance.",
+          caption: "One Flow-Grid picture links harder routes with lower current and steeper I-V graph slopes with lower resistance.",
           image_url: "/lesson-media/f4/f4-l3-resistance-iv.svg",
-          highlights: ["More push gives more stream rate", "More difficulty gives less stream rate", "Steeper straight I-V line means lower resistance"],
+          highlights: ["More push gives more stream rate", "More difficulty gives less stream rate", "Steeper I-V graph slope means lower resistance"],
         },
       ];
     case "F4_L4":
@@ -3308,7 +3308,7 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
   if (code === "F4_L3") {
     return {
       coreIdea: "For an ohmic component, current depends directly on voltage and inversely on resistance.",
-      reasoning: "Identify whether the question is asking about current, resistance, or graph meaning. Use I = V / R or R = V / I for the numeric part, then interpret graph steepness as current gained for each volt. A steeper straight I-V line means lower resistance because the stream responds more strongly to the same push.",
+      reasoning: "Identify whether the question is asking about current, resistance, or I-V graph meaning. Use I = V / R or R = V / I for the numeric part, then interpret the I-V graph slope as current gained for each volt. A steeper straight I-V graph line means lower resistance because the stream responds more strongly to the same push.",
       checkForUnderstanding: "If the driving force stays the same but the path difficulty doubles, what happens to the current?",
       commonTrap: "Do not treat resistance as a second kind of current, and do not assume a steeper I-V line means more resistance.",
     };
@@ -3422,7 +3422,7 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
   }
   if (code === "F4_L3") {
     return {
-      body: "The Flow-Grid route difficulty is useful because it changes the stream response without changing what current means. A wider, easier route stands for lower resistance, so the same source push drives more packets each second. A narrower, harder route stands for higher resistance, so the stream slows. The I-V graph then becomes a graph of how strongly the stream responds to push.",
+      body: "The Flow-Grid route difficulty is useful because it changes the stream response without changing what current means. A wider, easier route stands for lower resistance, so the same source push drives more packets each second. A narrower, harder route stands for higher resistance, so the stream slows. The I-V graph then becomes a graph of how strongly the stream responds to push, and its slope shows how much current is gained per volt.",
       checkForUnderstanding: "If the route becomes harder but the source push stays the same, what happens to the stream rate and what electrical idea does that represent?",
     };
   }
