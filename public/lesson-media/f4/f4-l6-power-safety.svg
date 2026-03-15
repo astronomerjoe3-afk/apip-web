@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
   <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
   <text x="70" y="88" fill="#172554" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Power, energy, and safety work together</text>
   <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">The Flow-Grid safety gate must open when the packet stream becomes dangerously large.</text>
@@ -19,5 +19,8 @@
   <path d="M1010 458V536" stroke="#B91C1C" stroke-width="12" stroke-linecap="round"/>
   <text x="722" y="550" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Fuse limit 6 A: safety gate trips</text>
   <text x="70" y="656" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Key idea:</text>
-  <text x="228" y="656" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Power is energy transferred each second, total energy depends on time, and safety depends on stopping excessive current.</text>
+    <text x="228" y="648" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">
+    <tspan x="228" dy="0">Power is energy transferred each second, total energy depends on time, and safety depends on</tspan>
+    <tspan x="228" dy="30">stopping excessive current before overheating damages the circuit.</tspan>
+  </text>
 </svg>
