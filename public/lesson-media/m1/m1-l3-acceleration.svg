@@ -11,7 +11,10 @@
   <path d="M164 510H250" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
   <path d="M250 510L214 484V536L250 510Z" fill="#16A34A"/>
   <text x="148" y="548" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">v = +3 m/s</text>
-  <text x="126" y="600" fill="#7C3AED" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Boost shift points negative because the velocity change is negative.</text>
+  <text x="126" y="584" fill="#7C3AED" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">
+    <tspan x="126" dy="0">Boost shift points negative because</tspan>
+    <tspan x="126" dy="28">the velocity change is negative.</tspan>
+  </text>
   <rect x="620" y="188" width="508" height="456" rx="28" fill="#EEF2FF" stroke="#C4B5FD" stroke-width="4"/>
   <text x="652" y="236" fill="#5B21B6" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Counterexample</text>
   <path d="M998 356H792" stroke="#DC2626" stroke-width="14" stroke-linecap="round"/>
@@ -21,5 +24,8 @@
   <path d="M792 492L828 466V518L792 492Z" fill="#F59E0B"/>
   <text x="804" y="532" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">v = -3 m/s</text>
   <text x="664" y="332" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Same negative direction, smaller speed</text>
-  <text x="664" y="582" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Positive acceleration can slow the avatar down if it is already moving negative.</text>
+  <text x="664" y="566" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">
+    <tspan x="664" dy="0">Positive acceleration can slow the avatar down</tspan>
+    <tspan x="664" dy="28">if it is already moving negative.</tspan>
+  </text>
 </svg>

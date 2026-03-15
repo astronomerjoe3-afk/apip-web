@@ -12,8 +12,14 @@
   <circle cx="408" cy="341" r="24" fill="#10B981"/>
   <text x="394" y="348" fill="#ECFDF5" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">B</text>
   <text x="112" y="420" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Start Base</text>
-  <text x="112" y="468" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Avatar moves, pauses, then moves again faster.</text>
-  <text x="112" y="516" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Same final progress can still come from a different run story.</text>
+  <text x="112" y="468" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">
+    <tspan x="112" dy="0">Avatar moves, pauses,</tspan>
+    <tspan x="112" dy="30">then moves again faster.</tspan>
+  </text>
+  <text x="112" y="532" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">
+    <tspan x="112" dy="0">Same final progress can still come</tspan>
+    <tspan x="112" dy="30">from a different run story.</tspan>
+  </text>
   <rect x="580" y="188" width="548" height="456" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
   <text x="612" y="236" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Mission log</text>
   <line x1="670" y1="564" x2="1050" y2="564" stroke="#334155" stroke-width="4"/>

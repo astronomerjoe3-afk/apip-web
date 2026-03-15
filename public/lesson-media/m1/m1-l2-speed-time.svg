@@ -9,7 +9,10 @@
   <path d="M210 335L316 335" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
   <path d="M316 335L286 315V355L316 335Z" fill="#16A34A"/>
   <text x="120" y="430" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Pace meter now = 8 m/s</text>
-  <text x="120" y="476" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Fast now is not the same claim as speeding up now.</text>
+  <text x="120" y="476" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">
+    <tspan x="120" dy="0">Fast now is not the same claim</tspan>
+    <tspan x="120" dy="30">as speeding up now.</tspan>
+  </text>
   <rect x="580" y="188" width="548" height="456" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
   <text x="612" y="236" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Pace log</text>
   <line x1="668" y1="564" x2="1050" y2="564" stroke="#334155" stroke-width="4"/>

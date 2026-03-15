@@ -23,5 +23,8 @@
   <text x="882" y="407" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Yes</text>
   <rect x="974" y="372" width="112" height="54" rx="18" fill="#FEE2E2"/>
   <text x="1016" y="407" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">No</text>
-  <text x="842" y="506" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Use the board only for the green case.</text>
+  <text x="842" y="506" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">
+    <tspan x="842" dy="0">Use the board only</tspan>
+    <tspan x="842" dy="30">for the green case.</tspan>
+  </text>
 </svg>
