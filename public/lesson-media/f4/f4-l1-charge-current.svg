@@ -15,6 +15,7 @@
   <path d="M930 470H310" stroke="#2563EB" stroke-width="22" stroke-linecap="round"/>
   <path d="M310 470L360 430V510L310 470Z" fill="#2563EB"/>
   <path d="M200 470V360" stroke="#2563EB" stroke-width="22" stroke-linecap="round"/>
+  <path d="M200 360V290H310" stroke="#2563EB" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M930 352V470" stroke="#2563EB" stroke-width="22" stroke-linecap="round"/>
   <circle cx="420" cy="250" r="16" fill="#0EA5E9"/>
   <circle cx="470" cy="250" r="16" fill="#0EA5E9"/>
@@ -31,3 +32,4 @@
   <text x="90" y="654" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Key idea:</text>
   <text x="228" y="654" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">In one closed route, the same stream rate passes every checkpoint.</text>
 </svg>
+
