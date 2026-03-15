@@ -452,6 +452,7 @@ function valueIndex(value: unknown): number {
 
 function normalizePromptKey(value: unknown): string {
   return text(value)
+    .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/[^a-z0-9]+/g, " ")
@@ -461,6 +462,7 @@ function normalizePromptKey(value: unknown): string {
 
 function normalizeOpenAnswer(value: unknown): string {
   return text(value)
+    .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/,/g, "")
@@ -1434,12 +1436,18 @@ function f4MasteryVariants(code: string): UnknownRecord[] {
       ];
     case "F4_L6":
       return [
-        shortItem("F4-L6-X1", "A device has 12 V across it and a current of 2 A. What power does it use?", ["24 W", "24w", "24"], "Use P = VI."),
-        shortItem("F4-L6-X2", "A 60 W heater runs for 30 s. How much energy does it transfer?", ["1800 J", "1800j", "1800"], "Use E = Pt."),
-        mcItem("F4-L6-X3", "If two devices run at the same voltage, which has the greater power?", ["the one with the greater current", "the one with the smaller current", "they always have the same power", "you need the resistance only"], 0, "At fixed voltage, power rises with current.", "For the same voltage, the device with the greater current uses the greater power."),
-        mcItem("F4-L6-X4", "At constant power, what happens to the total energy transferred if the running time doubles?", ["It halves", "It stays the same", "It doubles", "It becomes zero"], 2, "Energy transfer grows with time when the power stays fixed.", "If the power stays the same and the time doubles, the total energy transferred doubles."),
-        shortItem("F4-L6-X5", "A device runs at 12 V with a current of 2 A for 30 s. How much energy does it transfer?", ["720 J", "720j", "720"], "Use E = VIt or find the power first, then multiply by time."),
+        mcItem("F4-L6-X1", "What does the power of an electrical device tell you?", ["how much electrical energy it transfers each second", "how much charge is stored inside it", "how many branches the circuit has", "how long it must run before current starts"], 0, "Power is a rate, not a stored amount.", "Power tells you how much electrical energy a device transfers each second."),
+        shortItem("F4-L6-X2", "A device has 12 V across it and a current of 2 A. What power does it use?", ["24 W", "24w", "24"], "Use P = VI."),
+        mcItem("F4-L6-X3", "Two heaters run on the same voltage. Heater A draws 2 A and heater B draws 5 A. Which has the greater power?", ["heater A", "heater B", "they have the same power", "you need the running time first"], 1, "At fixed voltage, the larger current means the larger power.", "At the same voltage, heater B has the greater power because it draws the larger current."),
+        shortItem("F4-L6-X4", "A 60 W heater runs for 30 s. How much energy does it transfer?", ["1800 J", "1800j", "1800"], "Use E = Pt."),
+        mcItem("F4-L6-X5", "If a device keeps the same power but runs for twice as long, what happens to the total energy transferred?", ["it halves", "it stays the same", "it doubles", "it becomes zero"], 2, "Total energy depends on how long the power acts.", "If the power stays the same and the running time doubles, the total energy transferred doubles."),
         mcItem("F4-L6-X6", "What is the job of a fuse in a circuit?", ["to stop excessive current before overheating causes damage", "to increase the voltage across every device", "to store extra charge for the battery", "to make every branch carry the same current"], 0, "A fuse is a safety device, not a power booster.", "A fuse breaks the circuit if the current becomes dangerously large."),
+        mcItem("F4-L6-X7", "Why can a low-power device still transfer a large total energy if it is left on for a long time?", ["because total energy depends on time as well as power", "because low power means high current", "because the fuse adds extra voltage over time", "because charge builds up inside the device"], 0, "Distinguish power per second from total energy over time.", "A low-power device can still transfer a large total energy if it runs for long enough because total energy depends on both power and time."),
+        mcItem("F4-L6-X8", "A route is protected by a 6 A fuse but the current rises to 8 A. Why should the safety gate trip?", ["because the current is above the safe limit and overheating risk rises sharply", "because the voltage has dropped to zero", "because the device has stored too much current", "because high current means the battery has stopped working"], 0, "The fuse responds to dangerous current, not to a broken battery.", "The safety gate should trip because the current is above the safe limit, so the wire can overheat dangerously."),
+        mcItem("F4-L6-X9", "Two kettles are both rated 100 W. Kettle A runs for 10 s and kettle B runs for 30 s. Which transfers more energy?", ["kettle A", "kettle B", "they transfer the same energy", "you need the voltage first"], 1, "At the same power, the longer-running device transfers more total energy.", "Kettle B transfers more energy because both have the same power but kettle B runs for longer."),
+        mcItem("F4-L6-X10", "Why does a device on the same voltage usually get hotter faster when it draws a larger current?", ["because it transfers more electrical energy each second", "because it stores more charge instead of using energy", "because current turns into resistance", "because a larger current means the fuse has already opened"], 0, "Link greater current at fixed voltage to greater power.", "At the same voltage, a larger current means a larger power, so the device transfers more electrical energy each second and can heat faster."),
+        mcItem("F4-L6-X11", "In the Flow-Grid model, what should the safety gate respond to?", ["a dangerously large packet stream through the route", "the total number of lamps in the room only", "whether the battery is full of unused charge", "any device that has run for more than one second"], 0, "Tie the analogy directly to current overload.", "In the Flow-Grid model, the safety gate should respond to a dangerously large packet stream, which matches excessive current in a circuit."),
+        mcItem("F4-L6-X12", "Why is it wrong to say that a fuse measures the total energy a device has used?", ["a fuse responds to current that is too large, not to the total energy accumulated over time", "a fuse only works in parallel circuits", "a fuse is the same thing as a battery", "a fuse always raises the resistance to zero"], 0, "Separate current safety from total energy transfer.", "It is wrong because a fuse responds to dangerously large current, not to the total energy a device has used over time."),
       ];
     default:
       return [];
@@ -1448,7 +1456,7 @@ function f4MasteryVariants(code: string): UnknownRecord[] {
 
 function masterySourceKey(item: UnknownRecord): string {
   const prompt = text(item.prompt)
-    .replace(/^(Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
+    .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
     .trim();
   const choices = asList(item.choices)
     .map((choice) => normalizeOpenAnswer(choice))
