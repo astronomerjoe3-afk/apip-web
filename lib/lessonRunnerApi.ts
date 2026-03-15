@@ -642,8 +642,11 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
     case "F4_L1":
       return [
         mcItem("F4-L1-DG1", "In a closed single-loop circuit, what is the current after one lamp compared with the current before it?", ["the same current", "smaller because the lamp used some current", "zero current", "greater current"], 0, "One complete route keeps the same charge stream rate at every checkpoint.", "The current is the same because a simple closed loop carries one common charge stream."),
-        shortItem("F4-L1-DG2", "36 C of charge pass a checkpoint in 9 s. What current flows?", ["4 A"], "Use current = charge / time."),
-        mcItem("F4-L1-DG3", "If a switch opens anywhere in one simple loop, what happens to the current?", ["it stops everywhere in the loop", "it only stops after the switch", "it doubles before the switch", "it keeps flowing through the lamp only"], 0, "Breaking one single route stops the charge stream everywhere.", "The current stops everywhere because the whole loop is broken."),
+        mcItem("F4-L1-DG2", "What does current measure in a circuit?", ["how much charge passes a point each second", "how much energy each charge carries", "how hard the route is", "how much charge is stored in a lamp"], 0, "Current is a flow rate, not stored charge or energy per charge.", "Current measures how much charge passes a point each second."),
+        mcItem("F4-L1-DG3", "Why can a lamp get hot even though the current is the same before and after it?", ["It transfers electrical energy while the same charge keeps flowing", "It creates extra charge inside the lamp", "It stores current and releases it later", "It removes charge from the loop"], 0, "Separate charge flow from energy transfer.", "The lamp transfers electrical energy even though the same charge continues flowing through the loop."),
+        mcItem("F4-L1-DG4", "If a switch opens anywhere in one simple loop, what happens to the current?", ["it stops everywhere in the loop", "it only stops after the switch", "it doubles before the switch", "it keeps flowing through the lamp only"], 0, "Breaking one single route stops the charge stream everywhere.", "The current stops everywhere because the whole loop is broken."),
+        mcItem("F4-L1-DG5", "Two loops move the same 12 C of charge. Loop A takes 3 s and Loop B takes 6 s. Which loop has the greater current?", ["Loop A", "Loop B", "both have the same current", "you need the resistance first"], 0, "Current compares how much charge passes each second.", "Loop A has the greater current because the same charge passes in less time."),
+        shortItem("F4-L1-DG6", "18 C of charge pass a checkpoint in 6 s. What current flows?", ["3 A", "3a", "3"], "Use current = charge / time."),
       ];
     case "F4_L2":
       return [
@@ -1088,42 +1091,6 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F2-L1-M5", "Why can distance and displacement be different for the same trip?", ["Distance ignores all motion", "Displacement measures the start-to-finish change while distance measures the full path", "Displacement is always larger", "Distance always needs direction"], 1, "One quantity uses the whole path and the other uses the net change.", "Distance measures the whole path, while displacement measures the start-to-finish change with direction."),
         shortItem("F2-L1-M6", "A runner covers 240 m in 40 s. What is the average speed?", ["6", "6 m/s"], "Divide total distance by total time."),
       ];
-    case "F4_L1":
-      return [
-        mcItem("F4-L1-G1", "What does current measure in a circuit?", ["how much charge passes a point each second", "how much energy each coulomb gains", "how hard the route is", "how much charge exists in total"], 0, "Current is a flow rate, not an amount sitting in the wire.", "Current measures how much charge passes a point each second."),
-        mcItem("F4-L1-G2", "Why is the current the same before and after one lamp in a simple loop?", ["because the same charge stream passes every checkpoint in one route", "because the lamp stores current and returns it later", "because voltage and current are the same thing", "because resistance becomes zero after the lamp"], 0, "One closed path means one common charge stream rate.", "The same closed route carries the same current at every checkpoint in a simple loop."),
-        mcItem("F4-L1-G3", "What happens when a switch opens anywhere in a simple series loop?", ["the current stops everywhere", "the current only stops after the switch", "the current doubles before the switch", "the cell keeps current flowing through one side only"], 0, "Breaking one complete route stops the whole stream.", "The current stops everywhere because the circuit is no longer a complete route."),
-      ];
-    case "F4_L2":
-      return [
-        mcItem("F4-L2-G1", "Potential difference is best understood as...", ["energy transferred per unit charge", "charge transferred per second", "path difficulty", "power transferred per second"], 0, "A volt is a joule per coulomb.", "Potential difference tells how much energy is transferred per unit charge."),
-        mcItem("F4-L2-G2", "If the same potential difference acts but twice as much charge moves, what happens to the total energy transferred?", ["it doubles", "it stays the same", "it halves", "it becomes zero"], 0, "Total energy depends on both volts and charge moved.", "The total energy transferred doubles because E = VQ."),
-        mcItem("F4-L2-G3", "Which statement best explains the role of a cell in a circuit?", ["It gives charge electrical energy per coulomb", "It uses current up", "It removes resistance from the loop", "It makes the charge disappear"], 0, "The cell is the source of the energy boost per charge.", "A cell gives charge electrical energy per coulomb as it passes through the source."),
-      ];
-    case "F4_L3":
-      return [
-        mcItem("F4-L3-G1", "At fixed voltage, what happens to the current if the resistance doubles?", ["it halves", "it doubles", "it stays the same", "it becomes zero in every case"], 0, "A harder path gives a smaller current for the same push.", "The current halves because I = V / R."),
-        mcItem("F4-L3-G2", "What does a steeper straight I-V line show for an ohmic component?", ["lower resistance", "higher resistance", "zero current", "higher charge stored"], 0, "More current for each volt means less resistance.", "A steeper straight I-V line shows lower resistance because it gives more current for each volt."),
-        mcItem("F4-L3-G3", "Which relationship matches the Flow-Grid idea of stream rate = push / difficulty?", ["current = voltage / resistance", "voltage = current / resistance", "resistance = voltage x current", "power = current / voltage"], 0, "Ohm's law summarizes the push-difficulty-stream relationship for an ohmic component.", "Current = voltage / resistance matches the Flow-Grid pattern."),
-      ];
-    case "F4_L4":
-      return [
-        mcItem("F4-L4-G1", "In a series circuit, what stays the same through every component?", ["current", "potential difference", "resistance", "power"], 0, "One route means one common current.", "Current stays the same through every series component."),
-        mcItem("F4-L4-G2", "What happens to the whole loop current when another resistor is added in series?", ["it decreases everywhere in the loop", "it increases everywhere in the loop", "it stays the same", "it only changes after the new resistor"], 0, "More series difficulty makes the whole route harder.", "The current decreases everywhere because adding series resistance increases the total path difficulty."),
-        mcItem("F4-L4-G3", "How is the supply voltage treated in a series circuit?", ["it is shared across the components", "the first component gets all of it", "it becomes current", "it is the same across every component only if the resistances differ"], 0, "The source push is shared across the route sections.", "The supply voltage is shared across the series components."),
-      ];
-    case "F4_L5":
-      return [
-        mcItem("F4-L5-G1", "Why does each parallel branch have the same potential difference?", ["Each branch connects across the same two supply points", "Current is the same in every branch", "Parallel always means identical resistors", "Voltage depends only on branch length"], 0, "Branch voltage depends on the endpoints each branch is connected across.", "Each branch has the same potential difference because it spans the same two supply points."),
-        mcItem("F4-L5-G2", "How is the total current related to the branch currents in a parallel circuit?", ["the total current is the sum of the branch currents", "the total current is the same as one branch current", "the total current must be smaller than every branch current", "the total current is zero at the supply"], 0, "Current splits at a junction and recombines afterward.", "The total current equals the sum of the branch currents."),
-        mcItem("F4-L5-G3", "What usually happens when an extra branch is added in parallel?", ["the overall difficulty drops and the total current rises", "the voltage disappears", "the current becomes equal in every component", "the source stops pushing"], 0, "An extra route makes the whole network easier for charge to move through.", "Adding another branch lowers the overall difficulty and increases the total current."),
-      ];
-    case "F4_L6":
-      return [
-        mcItem("F4-L6-G1", "Which equation gives electrical power?", ["P = VI", "E = V / Q", "I = Q / t", "R = V / I"], 0, "Power tells how fast electrical energy is transferred.", "Electrical power is given by P = VI."),
-        mcItem("F4-L6-G2", "If power stays the same but the device runs for longer, what happens to the total energy transferred?", ["it increases", "it stays the same", "it decreases", "it becomes voltage"], 0, "Energy depends on both power and time.", "The total energy transferred increases because E = Pt."),
-        mcItem("F4-L6-G3", "Why is a fuse or breaker used in a circuit?", ["to interrupt dangerously large current", "to increase the voltage", "to make the resistance zero", "to store energy for later"], 0, "Safety devices act when the current becomes too large.", "A fuse or breaker interrupts dangerously large current before overheating becomes severe."),
-      ];
     default:
       return [];
   }
@@ -1166,6 +1133,15 @@ function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F1-L6-G1", "Which situation shows precision without accuracy?", ["Readings tightly grouped around the true value", "Readings tightly grouped but shifted away from the true value", "Readings spread widely around the true value", "One reading with no unit"], 1, "Tight grouping and being off target should appear together.", "Precision without accuracy means the readings are tightly grouped but shifted away from the true value."),
         mcItem("F1-L6-G2", "Why report uncertainty with a measured value?", ["To make the answer longer", "To show the result is an estimate with a reasonable range", "To remove the need for units", "To guarantee accuracy"], 1, "Uncertainty is about honest reporting.", "Uncertainty shows that the measured value is an estimate with a reasonable range."),
         mcItem("F1-L6-G3", "Which statement best describes random error?", ["It shifts every reading by the same amount", "It makes readings scatter unpredictably", "It changes the unit", "It guarantees low precision and low accuracy together"], 1, "Random error shows up as scatter.", "Random error makes readings scatter unpredictably around the best estimate."),
+      ];
+    case "F4_L1":
+      return [
+        mcItem("F4-L1-G1", "In the Flow-Grid model, what does stream rate represent in a circuit?", ["the battery voltage", "the current", "the resistance", "the switch state"], 1, "Stream rate tells how much passes a point each second.", "In the Flow-Grid model, stream rate represents current."),
+        mcItem("F4-L1-G2", "Why is the current the same before and after a lamp in one complete loop?", ["The lamp creates extra charge", "The battery adds more charge after the lamp", "The same charge keeps circulating around one route", "Current gets stored briefly inside the lamp"], 2, "Think about one continuous route with no missing charge.", "In one complete loop, the same charge keeps circulating, so the current is the same before and after the lamp."),
+        mcItem("F4-L1-G3", "Why is the statement 'the lamp uses up current' wrong?", ["Because lamps block all current", "Because current is the rate of charge flow, while the lamp transfers energy from the moving charge", "Because current only exists inside the battery", "Because current turns into voltage"], 1, "Separate charge flow from energy transfer.", "The statement is wrong because current is the rate of charge flow, while the lamp transfers energy from the moving charge."),
+        mcItem("F4-L1-G4", "If a switch opens anywhere in a single-route circuit, what happens to the current everywhere else?", ["It keeps flowing past the battery only", "It becomes larger near the source", "It stops everywhere in the loop", "It splits into two smaller currents"], 2, "A broken single route stops the whole circulation.", "If a switch opens anywhere in a single-route circuit, the current stops everywhere in the loop."),
+        mcItem("F4-L1-G5", "A current of 2 A means that each second...", ["2 C of charge pass a point", "2 J of energy are destroyed", "the battery loses 2 V", "2 charges stop at the lamp"], 0, "Current tells charge flow each second.", "A current of 2 A means 2 C of charge pass a point each second."),
+        mcItem("F4-L1-G6", "What changes at a lamp even when the same current enters and leaves it?", ["the total amount of charge in the loop", "the direction of every charge permanently", "the electrical energy carried by the moving charge", "the number of routes in the circuit"], 2, "The charge keeps moving, but something useful is transferred.", "At a lamp, the electrical energy carried by the moving charge changes even though the same current enters and leaves it."),
       ];
     default:
       return [];
@@ -1353,11 +1329,19 @@ function f4MasteryVariants(code: string): UnknownRecord[] {
     case "F4_L1":
       return [
         mcItem("F4-L1-X1", "What does current measure in a simple circuit?", ["rate of charge flow", "energy transferred per charge", "path difficulty", "total energy transferred"], 0, "Current tells you how much charge passes a point each second.", "Current is the rate of charge flow past a point in the circuit."),
-        shortItem("F4-L1-X2", "24 C pass a checkpoint in 6 s. What current flows?", ["4 A", "4a", "4"], "Use I = Q / t."),
-        shortItem("F4-L1-X3", "A steady current of 3 A flows for 8 s. How much charge passes?", ["24 C", "24c", "24"], "Use Q = It."),
-        mcItem("F4-L1-X4", "In one closed single-path loop, the current before and after a lamp is...", ["the same", "smaller after the lamp", "larger after the lamp", "zero after the lamp"], 0, "The same charge stream passes every point on one continuous route.", "A single closed loop has the same current before and after the lamp."),
+        mcItem("F4-L1-X2", "What does a current of 2 A mean?", ["2 C pass a point each second", "2 C stay stored in the bulb", "each charge gains 2 J of energy", "2 routes are available to the charge"], 0, "Amperes tell you the rate of charge flow.", "A current of 2 A means 2 C pass a point each second."),
+        mcItem("F4-L1-X3", "In one closed single-path loop, the current before and after a lamp is...", ["the same", "smaller after the lamp", "larger after the lamp", "zero after the lamp"], 0, "The same charge stream passes every point on one continuous route.", "A single closed loop has the same current before and after the lamp."),
+        mcItem("F4-L1-X4", "Why can a lamp get hot even though the current stays the same through it?", ["It transfers electrical energy while the same charge keeps flowing", "It creates extra charge inside the filament", "It stores current and releases it later", "It removes charge from the loop"], 0, "Separate charge flow from energy transfer.", "The lamp transfers electrical energy even though the same charge keeps flowing through it."),
         mcItem("F4-L1-X5", "What happens to the current everywhere if the switch opens in a single loop?", ["It increases near the cell", "It stays the same at the battery only", "It drops to zero everywhere", "It becomes larger after the resistor"], 2, "An open route stops the whole stream in a single-path network.", "Opening the switch breaks the route, so the current falls to zero everywhere in the loop."),
         mcItem("F4-L1-X6", "Why is the statement 'the lamp uses current up' wrong?", ["The same charge keeps circulating while the lamp transfers energy", "The lamp creates extra charge after it", "Current always increases across a component", "A lamp removes charge only when it glows"], 0, "Separate charge flow from energy transfer.", "The lamp transfers energy from the moving charge but does not use the current up."),
+        mcItem("F4-L1-X7", "At which point in a simple closed loop is the current largest?", ["it is the same at every point in the loop", "just after the battery", "inside the lamp only", "just before the switch"], 0, "A single route carries one common stream rate.", "The current is the same at every point in a simple closed loop."),
+        mcItem("F4-L1-X8", "Two loops each move 12 C of charge. Loop A takes 3 s and Loop B takes 6 s. Which loop has the greater current?", ["Loop A", "Loop B", "both have the same current", "you need the voltage first"], 0, "Current compares how much charge passes each second.", "Loop A has the greater current because the same charge passes in less time."),
+        mcItem("F4-L1-X9", "Which statement best separates charge from current?", ["Charge is an amount, while current is a rate of flow", "Charge and current are exactly the same idea", "Current is stored charge inside a component", "Charge is energy per coulomb"], 0, "One idea is an amount; the other is an amount-per-second rate.", "Charge is an amount, while current is the rate at which charge flows."),
+        mcItem("F4-L1-X10", "Why is 'the bulb stores current and releases it later' a poor explanation in a normal simple circuit?", ["Current is the ongoing flow through the whole loop, not a stockpile kept inside the bulb", "Bulbs are not allowed to contain any charge at all", "The battery always creates new charge after the bulb", "Current only exists inside the cell"], 0, "Current describes flow through the loop, not a stored substance.", "Current is the ongoing flow through the circuit, not something the bulb stores and later returns."),
+        mcItem("F4-L1-X11", "If no charge passes a checkpoint for several seconds, what current is there at that point?", ["0 A", "1 A", "the same as before", "you cannot tell without resistance"], 0, "No charge per second means zero current.", "If no charge is passing the checkpoint, the current there is 0 A."),
+        mcItem("F4-L1-X12", "At a lamp in a simple loop, what changes even when the charge stream rate does not?", ["the electrical energy carried by the charge", "the total amount of charge in the loop", "the number of routes", "the existence of current"], 0, "The same charge stream can keep moving while transferring energy.", "The electrical energy carried by the charge changes as the lamp transfers energy."),
+        mcItem("F4-L1-X13", "Two checkpoints are marked on one simple loop: one just after the cell and one just after the lamp. Which statement is correct?", ["The current is the same at both points, but the electrical energy per charge can differ", "The current is always larger just after the cell", "The lamp removes charge, so less charge exists after it", "The current disappears briefly inside the lamp"], 0, "Keep charge flow and energy transfer separate.", "The current is the same at both points, but the charge can carry different amounts of electrical energy after the lamp."),
+        mcItem("F4-L1-X14", "Which pair of situations shows the same current?", ["6 C in 2 s and 3 C in 1 s", "6 C in 2 s and 6 C in 4 s", "8 C in 2 s and 4 C in 2 s", "10 C in 5 s and 12 C in 4 s"], 0, "Current compares charge moved per second in each case.", "Both situations show 3 C passing each second, so they have the same current."),
       ];
     case "F4_L2":
       return [
@@ -1534,11 +1518,9 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const generated = generatedMasteryItems(lesson);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
-  const baseItems = (code.startsWith("F2_") || code.startsWith("F4_"))
-    ? generated.length > 0 ? [...generated, ...fallback] : [...fallback]
-    : generated.length >= MASTERY_DEFAULT_MAX
-      ? [...generated]
-      : generated.length > 0 ? [...generated, ...fallback] : [...fallback];
+  const baseItems = generated.length >= MASTERY_DEFAULT_MAX
+    ? [...generated]
+    : generated.length > 0 ? [...generated, ...fallback] : [...fallback];
   const ordered = baseItems.length >= MASTERY_DEFAULT_MAX ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
   return ordered.filter((item) => {
     const record = asRecord(item);
