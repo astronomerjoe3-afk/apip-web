@@ -2400,7 +2400,7 @@ export default function LessonRunner({
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
               <h3 className="text-lg font-semibold text-slate-900">Congratulations on completing Lesson 6</h3>
               <p className="mt-2 text-slate-700">
-                You finished the full module. Keep connecting each answer to the core ideas, checking the units and directions carefully, and explaining the physics clearly.
+                You finished the full module. Keep connecting each answer to the core ideas, using the right quantities and relationships, and explaining the physics clearly.
               </p>
             </div>
           ) : null}
