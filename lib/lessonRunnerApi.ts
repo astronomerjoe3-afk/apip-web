@@ -1318,7 +1318,7 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
         {
           ...asRecord(item),
           id: code + "_VAR_" + String(itemIndex + 1),
-          prompt: "Try the same lesson idea in a fresh context: " + text(asRecord(item).prompt),
+          prompt: text(asRecord(item).prompt),
         },
       ]);
   }
@@ -4137,3 +4137,4 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+
