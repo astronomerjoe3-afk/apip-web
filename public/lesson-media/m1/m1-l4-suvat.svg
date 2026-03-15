@@ -1,27 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
-  <rect width="900" height="520" rx="28" fill="#ecfdf5"/>
-  <rect x="24" y="24" width="852" height="472" rx="24" fill="#fff" stroke="#a7f3d0"/>
-  <text x="56" y="70" font-family="Arial" font-size="28" font-weight="700" fill="#0f172a">Constant-acceleration forecast board</text>
-  <text x="56" y="102" font-family="Arial" font-size="18" fill="#475569">Choose the equation by known values, missing value, and the constant-a condition.</text>
-  <rect x="68" y="148" width="178" height="86" rx="16" fill="#f0fdf4" stroke="#86efac"/>
-  <text x="92" y="184" font-family="Arial" font-size="22" font-weight="700" fill="#166534">Known now</text>
-  <text x="92" y="214" font-family="Arial" font-size="18" fill="#166534">u = 4, a = 3, t = 4</text>
-  <rect x="68" y="256" width="178" height="86" rx="16" fill="#fefce8" stroke="#fde68a"/>
-  <text x="92" y="292" font-family="Arial" font-size="22" font-weight="700" fill="#854d0e">Missing</text>
-  <text x="92" y="322" font-family="Arial" font-size="18" fill="#854d0e">Find final velocity v</text>
-  <rect x="282" y="148" width="228" height="86" rx="16" fill="#eff6ff" stroke="#93c5fd"/>
-  <text x="304" y="182" font-family="Arial" font-size="20" font-weight="700" fill="#1d4ed8">Card 1</text>
-  <text x="304" y="214" font-family="Arial" font-size="24" fill="#1d4ed8">v = u + at</text>
-  <rect x="282" y="256" width="228" height="86" rx="16" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="304" y="290" font-family="Arial" font-size="20" font-weight="700" fill="#334155">Card 2</text>
-  <text x="304" y="322" font-family="Arial" font-size="24" fill="#334155">s = ut + 0.5at^2</text>
-  <rect x="574" y="148" width="260" height="158" rx="18" fill="#f0fdf4" stroke="#86efac"/>
-  <text x="600" y="184" font-family="Arial" font-size="21" font-weight="700" fill="#166534">Why Card 1 fits</text>
-  <text x="598" y="218" font-family="Arial" font-size="18" fill="#166534">Known: u, a, t</text>
-  <text x="598" y="246" font-family="Arial" font-size="18" fill="#166534">Unknown: v</text>
-  <text x="598" y="274" font-family="Arial" font-size="18" fill="#166534">No need for s</text>
-  <rect x="574" y="328" width="260" height="114" rx="18" fill="#fff7ed" stroke="#fdba74"/>
-  <text x="600" y="364" font-family="Arial" font-size="21" font-weight="700" fill="#9a3412">Use only if</text>
-  <text x="598" y="396" font-family="Arial" font-size="18" fill="#9a3412">acceleration stays constant</text>
-  <text x="598" y="424" font-family="Arial" font-size="18" fill="#9a3412">Check units and story after solving.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="70" y="88" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Constant-acceleration equations are forecast tools, not magic spells.</text>
+  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Quest-Log reveals each equation as a compact summary of one steady boost pattern.</text>
+  <rect x="78" y="194" width="344" height="438" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <text x="110" y="244" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Knowns first</text>
+  <text x="118" y="320" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">u = 4 m/s</text>
+  <text x="118" y="368" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">a = 3 m/s^2</text>
+  <text x="118" y="416" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">t = 4 s</text>
+  <text x="118" y="504" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Unknown: v</text>
+  <text x="118" y="560" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Best direct choice: v = u + at</text>
+  <rect x="458" y="194" width="302" height="438" rx="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="4"/>
+  <text x="490" y="244" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Block + triangle</text>
+  <rect x="520" y="468" width="152" height="82" fill="#93C5FD"/>
+  <path d="M672 468L742 468L742 370Z" fill="#F59E0B"/>
+  <text x="530" y="588" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">ut + 1/2at^2</text>
+  <text x="510" y="340" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Rectangle = starting pace</text>
+  <text x="518" y="312" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Triangle = added pace</text>
+  <rect x="798" y="194" width="330" height="438" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="4"/>
+  <text x="830" y="244" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Condition check</text>
+  <text x="842" y="330" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Same boost each tick?</text>
+  <rect x="842" y="372" width="112" height="54" rx="18" fill="#DCFCE7"/>
+  <text x="882" y="407" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Yes</text>
+  <rect x="974" y="372" width="112" height="54" rx="18" fill="#FEE2E2"/>
+  <text x="1016" y="407" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">No</text>
+  <text x="842" y="506" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Use the board only for the green case.</text>
 </svg>

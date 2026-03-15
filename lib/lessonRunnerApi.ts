@@ -84,12 +84,12 @@ type QuestionVisualMeta = {
 };
 
 const M1_VISUAL_SUFFIXES: Record<string, string[]> = {
-  M1L1: ["D1", "D3", "C1", "C2", "T1", "T2", "T4"],
-  M1L2: ["D1", "D3", "C1", "C2", "T1", "T4", "T6"],
-  M1L3: ["D1", "D3", "C1", "C2", "T1", "T4", "T5"],
-  M1L4: ["D1", "D2", "C1", "C2", "T1", "T3", "T5"],
-  M1L5: ["D1", "D2", "C1", "C2", "T1", "T4", "T6"],
-  M1L6: ["D1", "D3", "C1", "C2", "T1", "T4", "T6"],
+  M1L1: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
+  M1L2: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
+  M1L3: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
+  M1L4: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
+  M1L5: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
+  M1L6: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
 };
 
 function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined {
@@ -97,30 +97,30 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
     case "M1L1":
       return {
         image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
-        visual_title: "Distance-time route log",
-        visual_caption: "Read the graph as a motion record: height is distance, slope is speed, and a flat section means the journey paused.",
+        visual_title: "Quest lane and mission log",
+        visual_caption: "The lane is where motion happens, and the mission log records how the progress score changes with time.",
         visual_callouts: [
-          "Height at a chosen time shows total distance recorded by then.",
-          "The flat middle section means time passes while distance stays unchanged.",
-          "The steeper final segment tells the faster part of the journey.",
+          "Height shows recorded progress by that time.",
+          "A flat section means the avatar is paused.",
+          "Steeper rise means greater pace.",
         ],
       };
     case "M1L2":
       return {
         image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
-        visual_title: "Speed-time strip",
-        visual_caption: "On this graph, height gives the speed now and slope gives how quickly the speed is changing.",
+        visual_title: "Pace log",
+        visual_caption: "On a pace log, height tells speed now while slope tells how the pace is changing.",
         visual_callouts: [
-          "A high point means a large speed at that instant.",
-          "A rising slope means positive acceleration, not extra distance by itself.",
-          "A flat line above zero still shows motion at constant speed.",
+          "A high point means large speed now.",
+          "A rising line means positive acceleration.",
+          "Flat above zero still means motion.",
         ],
       };
     case "M1L3":
       return {
         image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
-        visual_title: "Signed velocity change",
-        visual_caption: "Acceleration comes from how the velocity arrow changes over time, including the sign set by the chosen positive direction.",
+        visual_title: "Pace arrow and boost shift",
+        visual_caption: "Acceleration comes from the signed change in velocity over time, not from a guess about feeling faster.",
         visual_callouts: [
           "Compare the starting and finishing velocity arrows before naming the acceleration sign.",
           "The same velocity change over less time means a larger acceleration magnitude.",
@@ -130,8 +130,8 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
     case "M1L4":
       return {
         image_url: "/lesson-media/m1/m1-l4-suvat.svg",
-        visual_title: "Constant-acceleration forecast board",
-        visual_caption: "Choose the motion equation by the known values, the unknown value, and the constant-acceleration condition.",
+        visual_title: "Quest forecast board",
+        visual_caption: "Choose equations from the knowns, the unknown, and the constant-acceleration condition.",
         visual_callouts: [
           "u, v, a, s, and t each answer a different question in the story.",
           "Pick the relation that reaches the unknown while avoiding the variable you do not know.",
@@ -141,8 +141,8 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
     case "M1L5":
       return {
         image_url: "/lesson-media/m1/m1-l5-gradient.svg",
-        visual_title: "Same slope, different meaning",
-        visual_caption: "The same tilt means different physics when the graph axes change, so you must name the graph before interpreting the gradient.",
+        visual_title: "Same tilt, different log",
+        visual_caption: "The same slope can mean pace on a progress log or acceleration on a pace log because the axes are different.",
         visual_callouts: [
           "On distance-time, slope compares distance change with time, so it gives speed.",
           "On speed-time, slope compares speed change with time, so it gives acceleration.",
@@ -152,8 +152,8 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
     case "M1L6":
       return {
         image_url: "/lesson-media/m1/m1-l6-area.svg",
-        visual_title: "Area builds distance",
-        visual_caption: "The whole shaded area under a speed-time graph represents distance, and mixed shapes can be split into simple parts before adding.",
+        visual_title: "Area hunter",
+        visual_caption: "Every strip under the pace log is progress earned during one time beat, so the whole area is total distance.",
         visual_callouts: [
           "The rectangle shows distance from the constant-speed part of the story.",
           "The triangle shows the extra distance added while the speed changes steadily.",
@@ -748,6 +748,42 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
         shortItem("F2-L6-DG2", "An 18 N resultant force acts on a 6 kg trolley. What is the acceleration?", ["3 m/s^2", "3 m/s/s"], "Use a = F / m."),
         mcItem("F2-L6-DG3", "If the same force acts on two trolleys and one trolley has three times the mass, how does its acceleration compare?", ["it is one-third as large", "it is three times as large", "it stays the same", "it becomes zero"], 0, "For the same force, larger mass gives smaller acceleration.", "If the mass is three times larger under the same force, the acceleration is one-third as large."),
       ];
+    case "M1_L1":
+      return [
+        mcItem("M1L1_D6", "A progress log that curves upward more steeply most strongly suggests that...", ["the avatar's pace is increasing", "the lane itself becomes steeper", "time is speeding up", "the graph has become a map"], 0, "Think about how the slope changes from one beat to the next.", "An upward-curving progress log suggests the pace is increasing because each later segment becomes steeper."),
+        mcItem("M1L1_D7", "Two avatars have the same progress score at 10 s. What can still be different?", ["their pace histories", "the recorded time", "the final progress score", "the fact that one of them moved"], 0, "Same finishing progress does not fix the whole motion story.", "They can share the same progress score at 10 s while having different pace histories on the way there."),
+        shortItem("M1L1_D8", "A mission log rises by 18 m in 6 s on one straight segment. What pace does that segment show?", ["3", "3 m/s"], "Use change in distance divided by change in time for that segment."),
+      ];
+    case "M1_L2":
+      return [
+        mcItem("M1L2_D6", "A flat pace log at 7 m/s means the avatar is...", ["moving at constant speed", "stopped", "speeding up", "changing direction each second"], 0, "Flat above zero is not rest.", "A flat pace log at 7 m/s means the avatar keeps moving at a constant speed of 7 m/s."),
+        mcItem("M1L2_D7", "Two pace logs have the same height at 4 s, but one is steeper. Which statement is correct?", ["They have the same speed then but different acceleration", "They have different speed and the same acceleration", "They must show the same motion story", "The steeper one must be slower then"], 0, "Height and slope answer different questions.", "Equal height at that instant means equal speed then, but the steeper graph has the larger acceleration."),
+        shortItem("M1L2_D8", "A pace log rises from 2 m/s to 8 m/s in 3 s. What is the acceleration?", ["2", "2 m/s^2", "2 m/s/s"], "Use change in speed divided by time."),
+      ];
+    case "M1_L3":
+      return [
+        mcItem("M1L3_D6", "Velocity changes from -5 m/s to +1 m/s in 3 s. The acceleration is...", ["positive", "negative", "zero", "impossible to tell"], 0, "Look at the signed change in velocity.", "The velocity increases by 6 m/s overall, so the acceleration is positive."),
+        mcItem("M1L3_D7", "Which situation can show negative acceleration while the avatar speeds up?", ["moving in the negative direction and becoming more negative", "moving in the positive direction and becoming less positive", "stopped for the whole interval", "moving in the positive direction with zero acceleration"], 0, "Speeding up depends on both the velocity sign and the acceleration sign.", "If the motion is already negative and the acceleration is negative too, the speed can increase while the acceleration stays negative."),
+        shortItem("M1L3_D8", "Velocity changes from +6 m/s to -2 m/s in 4 s. What is the acceleration?", ["-2", "-2 m/s^2", "-2 m/s/s"], "Find the signed velocity change first, then divide by time."),
+      ];
+    case "M1_L4":
+      return [
+        mcItem("M1L4_D6", "Why is s = (u + v) / 2 x t trustworthy for this lesson's motion stories?", ["Because constant acceleration makes average velocity the midpoint between u and v", "Because it works for any changing acceleration", "Because time does not matter in kinematics", "Because u and v are always equal"], 0, "Think about the condition behind the equation.", "Under constant acceleration, the average velocity is the midpoint between u and v, so multiplying by time gives the displacement."),
+        mcItem("M1L4_D7", "If u, a, and t are known and s is required, which equation is the direct choice?", ["s = ut + 1/2at^2", "v = u + at", "a = (v - u) / t", "s = (u + v) / 2 x t with no other work"], 0, "Choose the relation that uses only the knowns and the unknown.", "s = ut + 1/2at^2 is the direct choice because it links u, a, t, and s without introducing another unknown first."),
+        shortItem("M1L4_D8", "For a constant-acceleration run, u = 5 m/s, a = 3 m/s^2, and t = 4 s. What is v?", ["17", "17 m/s"], "Use v = u + at because the acceleration is constant."),
+      ];
+    case "M1_L5":
+      return [
+        mcItem("M1L5_D6", "Zero slope on a progress log means that the avatar is...", ["stopped", "moving at constant speed", "speeding up", "reversing"], 0, "Progress is not changing while time passes.", "Zero slope on a progress log means distance is not changing, so the avatar is stopped."),
+        mcItem("M1L5_D7", "Zero slope on a pace log means that the avatar is...", ["stopped for sure", "moving with constant speed or at rest", "speeding up steadily", "reversing every second"], 1, "The pace is not changing, but it might still be above zero.", "Zero slope on a pace log means the speed is constant, which can describe steady motion or rest."),
+        shortItem("M1L5_D8", "A straight progress-log segment rises by 15 m in 5 s. What pace does that slope represent?", ["3", "3 m/s"], "On a progress log, slope is change in distance divided by time."),
+      ];
+    case "M1_L6":
+      return [
+        mcItem("M1L6_D6", "Why does the area rule not transfer directly to a distance-time graph?", ["Because the axes are different", "Because area never has meaning in physics", "Because distance-time graphs have no slope", "Because time disappears on that graph"], 0, "Area meaning depends on what the axes measure.", "The area rule belongs to speed-time graphs because the axes are speed and time; changing the axes changes the meaning."),
+        mcItem("M1L6_D7", "Two pace logs enclose the same total area but have different peaks. Which statement is correct?", ["They show the same total distance but not the same speed story", "They must show the same speed at every instant", "The graph with the higher peak always gives more distance", "Area is irrelevant once the peaks differ"], 0, "Equal area secures equal total distance, not identical motion at each instant.", "Equal area means equal total distance, even though the speed story can still differ from one graph to another."),
+        shortItem("M1L6_D8", "A pace log is a rectangle 5 m/s high and 6 s wide. What distance does the area show?", ["30", "30 m"], "Rectangle area on a speed-time graph is speed multiplied by time."),
+      ];
     case "F4_L1":
       return [
         mcItem("F4-L1-DG1", "In a closed single-loop circuit, what is the current after one lamp compared with the current before it?", ["the same current", "smaller because the lamp used some current", "zero current", "greater current"], 0, "One complete route keeps the same charge stream rate at every checkpoint.", "The current is the same because a simple closed loop carries one common charge stream."),
@@ -1257,6 +1293,48 @@ function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F1-L6-G2", "Why report uncertainty with a measured value?", ["To make the answer longer", "To show the result is an estimate with a reasonable range", "To remove the need for units", "To guarantee accuracy"], 1, "Uncertainty is about honest reporting.", "Uncertainty shows that the measured value is an estimate with a reasonable range."),
         mcItem("F1-L6-G3", "Which statement best describes random error?", ["It shifts every reading by the same amount", "It makes readings scatter unpredictably", "It changes the unit", "It guarantees low precision and low accuracy together"], 1, "Random error shows up as scatter.", "Random error makes readings scatter unpredictably around the best estimate."),
       ];
+    case "M1_L1":
+      return [
+        mcItem("M1L1_C4", "Why is it wrong to say the line on a distance-time graph is the road itself?", ["Because the graph records progress over time rather than route shape", "Because roads are always curved", "Because graphs cannot show time", "Because distance has no unit"], 0, "Keep the motion world and graph world separate.", "The graph records how distance changes with time; it is not a sketch of the physical route."),
+        mcItem("M1L1_C5", "Two straight progress-log segments are parallel but start at different heights. What do they share?", ["the same pace", "the same starting point", "the same total distance", "the same pause time"], 0, "Parallel segments have the same slope.", "Parallel straight progress-log segments share the same slope, so they show the same pace."),
+        mcItem("M1L1_C6", "Why can two runs end at the same final progress score yet still be different?", ["Because the pace pattern over time can differ", "Because final progress never matters", "Because only the starting point matters", "Because equal distance forces equal acceleration"], 0, "A final score does not tell the whole story of the run.", "The same final progress can come from different pace patterns, pauses, and segment timings."),
+        mcItem("M1L1_C7", "If time keeps passing but the mission log stays flat, what must be true?", ["The avatar is not gaining distance in that interval", "The avatar must be reversing", "The pace is definitely increasing", "The lane has disappeared"], 0, "Distance is not changing while time is.", "A flat section means no new distance is being gained during that interval."),
+      ];
+    case "M1_L2":
+      return [
+        mcItem("M1L2_C4", "A flat pace log at 6 m/s above the axis means...", ["constant motion at 6 m/s", "the avatar is stopped", "the acceleration is 6 m/s^2", "distance is increasing faster and faster"], 0, "Flat above zero is cruising, not rest.", "A flat pace log above zero means the avatar keeps moving at a constant speed."),
+        mcItem("M1L2_C5", "Why can two pace logs show the same speed at one instant but different acceleration?", ["Because equal height does not force equal slope", "Because speed and acceleration are the same quantity", "Because time is missing from the graph", "Because acceleration depends only on distance"], 0, "Height and slope do different jobs.", "They can have the same height at that instant while having different slopes and therefore different accelerations."),
+        mcItem("M1L2_C6", "A straight rising pace log tells you that the avatar is...", ["speeding up at a steady rate", "covering equal distances each second", "stopped but ready to move", "moving backward with zero acceleration"], 0, "A straight rising line means a constant positive slope.", "A straight rising pace log shows the speed increasing by equal amounts each second, so the acceleration is steady and positive."),
+        mcItem("M1L2_C7", "Why is the highest point on a pace log not automatically the point of greatest acceleration?", ["Because acceleration comes from slope, not height", "Because acceleration only appears on distance-time graphs", "Because a high speed forbids acceleration", "Because height and slope always match"], 0, "Keep current speed separate from rate of change.", "Acceleration is read from the slope of the graph, not from how high the graph is."),
+      ];
+    case "M1_L3":
+      return [
+        mcItem("M1L3_C4", "How can an avatar have positive acceleration while slowing down?", ["It is moving in the negative direction while the acceleration points positive", "Positive acceleration always means speeding up, so it cannot happen", "The time interval must be zero", "Velocity must also be positive"], 0, "Combine the signs of velocity and acceleration carefully.", "If the velocity is negative but the acceleration is positive, the speed can decrease while the acceleration stays positive."),
+        mcItem("M1L3_C5", "Zero acceleration guarantees that the velocity is...", ["zero", "constant", "positive", "negative"], 1, "Zero acceleration means no change in velocity.", "Zero acceleration guarantees constant velocity, which may be zero or non-zero."),
+        mcItem("M1L3_C6", "What decides the sign of acceleration in this lesson?", ["the signed change in velocity relative to the chosen positive direction", "whether the object feels faster", "whether the speed is large", "the size of the mass"], 0, "Set the sign convention first, then compare the velocities.", "The sign comes from the signed change in velocity relative to the chosen positive direction."),
+        mcItem("M1L3_C7", "Why does the same velocity change over a shorter time mean a larger acceleration magnitude?", ["Because acceleration is a rate of change", "Because short times create extra velocity", "Because acceleration ignores time", "Because the sign becomes positive automatically"], 0, "The same change spread over less time is a stronger rate.", "Acceleration is the rate of velocity change, so the same change over less time means a larger magnitude."),
+      ];
+    case "M1_L4":
+      return [
+        mcItem("M1L4_C4", "What should you check before using any suvat equation in this lesson?", ["that acceleration is constant", "that the graph is curved", "that time is zero", "that u and v are equal"], 0, "Every equation here has a condition attached.", "You should first check that acceleration is constant because the suvat equations summarize that specific motion pattern."),
+        mcItem("M1L4_C5", "Why is choosing an equation by the knowns and the unknown better than choosing by memory?", ["Because it ties the formula to the motion story and avoids unnecessary variables", "Because every equation gives the same answer in all stories", "Because the symbols do not matter", "Because unit checks are optional"], 0, "Equation choice should be strategic and story-based.", "Choosing by the knowns and the unknown keeps the formula tied to the motion story and avoids introducing extra unnecessary variables."),
+        mcItem("M1L4_C6", "In s = ut + 1/2at^2, what does the ut part represent conceptually?", ["the distance from the starting velocity alone", "the extra distance from acceleration only", "the final velocity", "the acceleration divided by time"], 0, "Think of the rectangle under the pace log.", "ut represents the distance the object would cover if it kept only its starting velocity for the whole time."),
+        mcItem("M1L4_C7", "Why does s = (u + v) / 2 x t work only under constant acceleration here?", ["Because the average velocity sits halfway between u and v only for uniform change", "Because distance never depends on time", "Because u and v must both be zero", "Because the equation ignores acceleration completely"], 0, "The average-velocity shortcut depends on uniform change.", "It works because the average velocity sits halfway between u and v only when the velocity changes uniformly under constant acceleration."),
+      ];
+    case "M1_L5":
+      return [
+        mcItem("M1L5_C4", "Why must you name the graph before interpreting the slope?", ["Because slope meaning depends on the axes", "Because all slopes mean speed", "Because only speed-time graphs have slope", "Because units never matter"], 0, "The same steepness can describe different rates.", "You must name the graph first because the axes decide whether slope means speed, acceleration, or something else."),
+        mcItem("M1L5_C5", "The same tilt appears on a progress log and a pace log. What can stay the same and what must change?", ["the visual steepness can stay the same, but the physical meaning must change", "both the steepness and the meaning must stay the same", "the meaning stays the same, but the steepness must change", "neither can be compared"], 0, "Separate geometry from physics meaning.", "The tilt can look the same, but the physical meaning changes because the axes are different."),
+        mcItem("M1L5_C6", "Why does zero slope mean stop on a progress log but constant speed on a pace log?", ["Because the graphs record different quantities on the vertical axis", "Because zero always means rest on every graph", "Because pace logs do not use time", "Because progress logs ignore distance"], 0, "The vertical axis changes the story told by zero slope.", "Zero slope means different things because one graph records distance while the other records speed."),
+        mcItem("M1L5_C7", "A point sits high on a pace log but the line there is flat. What is true?", ["the speed is high there and the acceleration is zero there", "the acceleration is high there and the speed is zero there", "both speed and acceleration must be high", "the graph cannot be physical"], 0, "Height and slope still do different jobs on the same graph.", "A high point shows high speed there, while a flat line shows zero acceleration there."),
+      ];
+    case "M1_L6":
+      return [
+        mcItem("M1L6_C4", "What does one thin strip under a pace log represent?", ["the distance gained during that small time interval", "the current speed only", "the acceleration only", "the graph height with no physical meaning"], 0, "A strip combines speed height and time width.", "One thin strip represents the distance gained during that small time interval because it is speed multiplied by time width."),
+        mcItem("M1L6_C5", "Why can two different pace-log shapes give the same total distance?", ["Because equal total area can come from different shapes", "Because only the highest point matters", "Because the time axis can be ignored", "Because distance never depends on speed"], 0, "Area, not shape alone, controls the total distance.", "Two different pace-log shapes can give the same total distance if their total shaded areas are equal."),
+        mcItem("M1L6_C6", "Why does a triangle under a pace log still count as distance?", ["Because its area still multiplies speed by time", "Because triangles always mean acceleration only", "Because only rectangles have physical meaning", "Because the height is distance directly"], 0, "Any area piece under a speed-time graph contributes distance.", "A triangle still counts as distance because its area still combines speed height with time width."),
+        mcItem("M1L6_C7", "Which statement best explains why the area rule belongs to the pace log?", ["The axes are speed and time, so area accumulates distance", "Every graph area always gives distance", "Area works only when the graph is horizontal", "Distance-time area and speed-time area always mean the same thing"], 0, "The axes give the area its meaning.", "The area rule belongs to the pace log because the axes are speed and time, so the area accumulates distance."),
+      ];
     case "F4_L1":
       return [
         mcItem("F4-L1-G1", "In the Flow-Grid model, what does stream rate represent in a circuit?", ["the battery voltage", "the current", "the resistance", "the switch state"], 1, "Stream rate tells how much passes a point each second.", "In the Flow-Grid model, stream rate represents current."),
@@ -1437,6 +1515,66 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
         mcItem("F3-L6-X8", "If the same momentum change happens over twice the stopping time, the average braking force is...", ["twice as large", "half as large", "unchanged", "zero"], 1, "For the same momentum change, increasing the stopping time reduces the average force.", "Doubling the stopping time halves the average force for the same momentum change."),
         mcItem("F3-L6-X9", "Why is high-speed braking especially dangerous?", ["Only the mass matters once the brakes are applied", "Momentum and kinetic energy are both larger, and kinetic energy rises especially quickly", "Stopping time always falls to zero at higher speed", "The car becomes lighter as it moves faster"], 1, "Use both momentum and energy reasoning together here.", "Higher speed makes the momentum change larger and also increases kinetic energy very strongly because speed is squared."),
         shortItem("F3-L6-X10", "A 900 kg car slows from 20 m/s to rest in 2 s. What average braking force acts?", ["9000 N"], "Find the momentum change first, then divide by the stopping time."),
+      ];
+    case "M1_L1":
+      return [
+        mcItem("M1L1_T8", "Which statement best captures the Quest-Log warning about graphs?", ["The lane is where motion happens, and the log is how motion is recorded", "The graph is the road drawn from above", "The highest point is always the fastest point", "A flat graph always means moving backward"], 0, "This lesson begins by separating the motion world from the graph world.", "The key rule is that the lane is where motion happens, and the log is how motion is recorded."),
+        mcItem("M1L1_T9", "A progress log is steep, then flat, then steep again. Which story fits best?", ["move, pause, move again", "high speed, reverse, disappear", "uphill, flat road, downhill", "stop, then move backward, then stop"], 0, "Read each segment as a motion story, not a road picture.", "A steep rise, then a flat section, then another rise means move, pause, then move again."),
+        mcItem("M1L1_T10", "Why does a later point that is higher on the graph not have to be faster than an earlier point?", ["Because speed depends on slope, not graph height", "Because later times remove the idea of speed", "Because distance-time graphs do not show time", "Because higher points always mean lower speed"], 0, "Keep height and slope doing different jobs.", "A higher point only means more distance has been recorded by that time; speed still comes from the slope."),
+        mcItem("M1L1_T11", "Two mission logs finish at 40 m. Log A has a pause and Log B does not. What is true?", ["They can have the same final distance but different pace histories", "They must have the same speed at every moment", "The paused run must have gone farther", "The unpaused run cannot be real"], 0, "Equal finish does not force equal story.", "The same final distance can come from different pace histories, including runs with pauses."),
+        mcItem("M1L1_T12", "A student says a curved progress log proves the lane is curved. What is the best correction?", ["The curve is telling you that the pace is changing, not that the lane bends", "Curved graphs always mean circular motion", "Only straight graphs can represent real motion", "The student is correct"], 0, "The graph records how progress changes with time.", "A curved progress log means the pace is changing; it does not prove the physical lane bends."),
+        shortItem("M1L1_T13", "A straight progress-log segment rises by 24 m in 6 s. What pace does that segment represent?", ["4", "4 m/s"], "Use the gradient of the straight segment."),
+        mcItem("M1L1_T14", "What do parallel straight segments on a progress log show?", ["the same pace at different starting distances", "the same starting point only", "the same pause length only", "the same total distance only"], 0, "Parallel segments share the same slope.", "Parallel straight segments show the same pace even if they sit at different heights on the graph."),
+        mcItem("M1L1_T15", "If the mission log is flat from 3 s to 7 s, what must be true during that interval?", ["No extra distance is being added", "The avatar must be reversing", "The pace must be increasing", "Time has stopped on the graph"], 0, "Distance stays constant while time advances.", "A flat section means no additional distance is being added during that interval."),
+        mcItem("M1L1_T16", "Which comparison is valid when two straight segments rise by the same amount over the same time?", ["They show the same pace even if one is drawn higher", "The higher segment is faster", "The lower segment is faster", "They cannot be compared without mass"], 0, "Equal rise over equal run means equal slope.", "Equal change in distance over equal time means the segments show the same pace."),
+        mcItem("M1L1_T17", "Why is graph-as-picture such a damaging misconception for later motion work?", ["Because it hides the idea that graphs encode relationships between quantities over time", "Because pictures are never allowed in physics", "Because only tables can show motion", "Because it makes calculations too easy"], 0, "Students need graph meaning, not surface shape matching.", "It is damaging because it hides the fact that the graph is encoding how quantities change with time, not drawing the path itself."),
+      ];
+    case "M1_L2":
+      return [
+        mcItem("M1L2_T8", "What does the height of a pace log tell you?", ["the speed at that instant", "the distance covered so far", "the acceleration for the whole graph", "the shape of the route"], 0, "Height is about current speed on this graph.", "The height of a pace log tells you the speed at that instant."),
+        mcItem("M1L2_T9", "What does the slope of a pace log tell you?", ["how the speed is changing", "the total distance covered", "the direction of the road", "the mass of the object"], 0, "Slope is a rate of change here.", "The slope of a pace log tells you how the speed is changing, so it represents acceleration."),
+        mcItem("M1L2_T10", "Why can a flat pace log above zero still represent motion?", ["Because the speed is constant rather than zero", "Because all flat graphs mean no motion", "Because height is irrelevant on this graph", "Because acceleration has become distance"], 0, "Flat above zero is cruising.", "A flat pace log above zero still represents motion because the speed is constant rather than zero."),
+        mcItem("M1L2_T11", "Two pace logs have the same speed at 5 s, but one is steeper. Which statement is correct?", ["They match in speed at that instant but not in acceleration", "They match in acceleration but not in speed", "They must show the same total distance", "The steeper one must be slower then"], 0, "Equal height does not force equal slope.", "They match in speed at that instant because the heights match, but the steeper one has the larger acceleration."),
+        mcItem("M1L2_T12", "A pace log slopes downward while staying above zero. What story fits best?", ["the avatar is slowing down but still moving forward", "the avatar is stopped", "the avatar has zero acceleration and zero speed", "the graph is impossible"], 0, "The speed can fall without reaching zero.", "A downward slope above zero means the avatar is slowing down while still moving."),
+        shortItem("M1L2_T13", "A pace log changes from 4 m/s to 10 m/s in 2 s. What acceleration does that show?", ["3", "3 m/s^2", "3 m/s/s"], "Use change in speed divided by time."),
+        mcItem("M1L2_T14", "Why is the statement 'a higher point means more acceleration' unreliable on a pace log?", ["Because acceleration depends on slope, not height", "Because pace logs cannot show acceleration", "Because high speed removes acceleration", "Because height always equals distance"], 0, "Separate current value from change rate.", "The statement is unreliable because acceleration depends on the slope of the graph, not on its height."),
+        mcItem("M1L2_T15", "A straight rising pace log and a steeper straight rising pace log are compared. What differs?", ["the rate at which the speed is increasing", "whether time is passing", "whether the graph is a speed-time graph", "the existence of speed itself"], 0, "A steeper rising line means a larger acceleration.", "The steeper line has the larger rate of increase of speed, so it has the larger acceleration."),
+        mcItem("M1L2_T16", "Which statement best resists F2-style duplication and stays true to Module 1?", ["A pace log is a record of speed now, not a picture of distance gained", "A pace log is another name for a distance-time graph", "The area under any graph always gives distance", "Acceleration is just a bigger speed"], 0, "Module 1 keeps representations distinct.", "A pace log records speed now; it is not another way of drawing distance-time motion."),
+        mcItem("M1L2_T17", "What does a horizontal line on the time axis itself mean on a pace log?", ["the object is at rest for that interval", "the object moves at constant speed above zero", "the object accelerates steadily", "the graph is measuring distance"], 0, "Flat on zero is different from flat above zero.", "A horizontal line on the time axis means the speed is zero, so the object is at rest for that interval."),
+      ];
+    case "M1_L3":
+      return [
+        mcItem("M1L3_T8", "What is acceleration in the strongest conceptual language for this lesson?", ["the signed rate of change of velocity", "the same thing as speed", "distance divided by time", "the force on the object"], 0, "Velocity change and sign are central here.", "Acceleration is the signed rate of change of velocity."),
+        mcItem("M1L3_T9", "Why does positive acceleration not always mean speeding up?", ["Because the object may be moving in the negative direction", "Because positive signs have no meaning in physics", "Because acceleration ignores direction", "Because only force can be positive"], 0, "Combine the sign of velocity with the sign of acceleration.", "Positive acceleration does not always mean speeding up because the object may be moving in the negative direction."),
+        mcItem("M1L3_T10", "An avatar moves west at -8 m/s and then -2 m/s. What is true if east is positive?", ["the acceleration is positive and the avatar is slowing down", "the acceleration is negative and the avatar is speeding up", "the acceleration is zero", "the motion is impossible"], 0, "The velocity becomes less negative over time.", "The velocity becomes less negative, so the acceleration is positive while the avatar slows down."),
+        mcItem("M1L3_T11", "What does zero acceleration guarantee?", ["constant velocity", "zero velocity", "positive velocity", "that the object is at rest"], 0, "No acceleration means no change in velocity.", "Zero acceleration guarantees constant velocity, not necessarily zero velocity."),
+        mcItem("M1L3_T12", "Why does the chosen positive direction matter before you name the acceleration sign?", ["Because the sign compares the velocity change with that chosen direction", "Because it changes the mass of the object", "Because time can reverse", "Because speed has no sign"], 0, "The sign convention anchors the whole interpretation.", "The chosen positive direction matters because the sign of acceleration depends on how the velocity change compares with it."),
+        shortItem("M1L3_T13", "Velocity changes from -2 m/s to +6 m/s in 4 s. What acceleration does that show?", ["2", "2 m/s^2", "2 m/s/s"], "Use the signed velocity change divided by the time."),
+        mcItem("M1L3_T14", "Which pairing definitely means the object is speeding up?", ["velocity negative and acceleration negative", "velocity positive and acceleration negative", "velocity zero and acceleration zero", "velocity negative and acceleration positive"], 0, "Speed increases when velocity and acceleration point the same way.", "If both velocity and acceleration are negative, the speed is increasing in the negative direction."),
+        mcItem("M1L3_T15", "The same velocity change happens in half the time. What happens to the acceleration magnitude?", ["it doubles", "it halves", "it stays the same", "it becomes zero"], 0, "Acceleration is a rate.", "If the same velocity change happens in half the time, the acceleration magnitude doubles."),
+        mcItem("M1L3_T16", "Why is 'negative acceleration means slowing down' an unsafe rule?", ["Because an object moving in the negative direction can speed up with negative acceleration", "Because acceleration has no direction", "Because all motion graphs use only positive axes", "Because speed and velocity are identical"], 0, "The sign alone does not decide whether speed rises or falls.", "It is unsafe because an object moving in the negative direction can speed up while the acceleration stays negative."),
+        mcItem("M1L3_T17", "What should you compare first when judging the acceleration sign from a story?", ["the starting and ending velocity values with a sign convention", "the total distance traveled", "the size of the time interval only", "the mass of the object"], 0, "Start with signed velocities before any verbal guess.", "You should compare the starting and ending velocity values using the chosen sign convention before naming the acceleration sign."),
+      ];
+    case "M1_L4":
+      return [
+        mcItem("M1L4_T8", "What must be true before using suvat directly?", ["acceleration is constant", "distance is constant", "velocity is positive", "the graph is flat"], 0, "Check the condition first.", "Suvat works directly only when acceleration is constant."),
+        mcItem("M1L4_T9", "Why should equation choice start with the knowns and the unknown?", ["so the formula matches the story directly", "because all equations are interchangeable", "because symbols do not matter", "because the longest formula is best"], 0, "Choose for fit.", "Equation choice should start with the knowns and the unknown so the formula matches the story directly."),
+        mcItem("M1L4_T10", "If u, v, and t are known and s is required, which equation is direct?", ["s = (u + v) / 2 x t", "v = u + at", "a = (v - u) / t", "s = ut + 1/2at^2"], 0, "Use the direct match.", "s = (u + v) / 2 x t is the direct choice here."),
+        mcItem("M1L4_T11", "In s = ut + 1/2at^2, ut represents...", ["distance from the starting velocity alone", "extra distance from acceleration only", "the final velocity", "time without motion"], 0, "Think rectangle first.", "ut is the distance from carrying the starting velocity through the interval."),
+      ];
+    case "M1_L5":
+      return [
+        mcItem("M1L5_T8", "Why must you name the graph before naming the slope meaning?", ["Because the axes decide what rate the slope represents", "Because all slopes mean speed", "Because only pace logs have slope", "Because height and slope are the same thing"], 0, "Axes first.", "You must name the graph first because the axes decide what rate the slope represents."),
+        mcItem("M1L5_T9", "The same tilt appears on a progress log and a pace log. What changes?", ["the physical meaning of the slope", "the amount of time on the axis", "the existence of a slope", "the need for units"], 0, "Geometry can stay the same while meaning changes.", "The physical meaning of the slope changes because the axes are different even if the tilt looks the same."),
+        mcItem("M1L5_T10", "Why does zero slope mean stop on a progress log but not always on a pace log?", ["Because one graph records distance while the other records speed", "Because zero means different times", "Because pace logs ignore time", "Because progress logs have no units"], 0, "Different vertical axes, different stories.", "Zero slope means different things because one graph records distance and the other records speed."),
+        mcItem("M1L5_T11", "A pace log is high but flat at one instant. What is true there?", ["speed is high and acceleration is zero", "speed is zero and acceleration is high", "both speed and acceleration are high", "the graph is impossible"], 0, "Height and slope stay separate.", "A high but flat point means the speed is high there while the acceleration is zero there."),
+      ];
+    case "M1_L6":
+      return [
+        mcItem("M1L6_T8", "What does the whole shaded area under a pace log represent?", ["total distance traveled", "current speed only", "acceleration only", "the shape of the lane"], 0, "Add the strips under the graph.", "The whole shaded area under a pace log represents the total distance traveled."),
+        mcItem("M1L6_T9", "Why can two different pace-log shapes still give the same total distance?", ["Because equal total area can come from different shapes", "Because only the highest point matters", "Because time can be ignored", "Because all graphs with triangles are equal"], 0, "Area controls the total distance here.", "Two different pace-log shapes can give the same total distance if their total areas are equal."),
+        mcItem("M1L6_T10", "Why does a triangle under the graph still count toward distance?", ["Because its area still combines speed and time", "Because triangles always mean acceleration only", "Because only rectangles have units", "Because height alone is distance"], 0, "Any area piece under a speed-time graph contributes distance.", "A triangle still counts because its area still combines speed and time."),
+        mcItem("M1L6_T11", "Why is saying 'the graph with the higher peak traveled farther' unsafe?", ["Because total distance depends on area, not peak height alone", "Because higher peaks always mean less time", "Because peaks have no meaning", "Because only flat graphs can show distance"], 0, "Peak height alone does not fix the total area.", "It is unsafe because total distance depends on the full area under the graph, not on peak height alone."),
       ];
     case "F4_L1":
     case "F4_L2":
@@ -1762,12 +1900,12 @@ function simulationStageTitle(code: string): string {
     case "F4_L4": return "Series circuit explorer";
     case "F4_L5": return "Parallel circuit explorer";
     case "F4_L6": return "Power and safety explorer";
-    case "M1_L1": return "Route-log story explorer";
-    case "M1_L2": return "Speed-strip explorer";
-    case "M1_L3": return "Change-rate explorer";
-    case "M1_L4": return "Forecast-console explorer";
-    case "M1_L5": return "Slope-gauge explorer";
-    case "M1_L6": return "Area-accumulator explorer";
+    case "M1_L1": return "Quest lane and mission log explorer";
+    case "M1_L2": return "Pace log explorer";
+    case "M1_L3": return "Boost-shift explorer";
+    case "M1_L4": return "Quest forecast explorer";
+    case "M1_L5": return "Dual-log gradient explorer";
+    case "M1_L6": return "Area hunter explorer";
     default: return "Simulation inquiry";
   }
 }
@@ -1795,12 +1933,12 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F4_L4": return "Build one single-route Flow-Grid network and watch how adding difficulty anywhere changes the stream everywhere while the source push is shared across the route.";
     case "F4_L5": return "Open a split-route Flow-Grid network so branch voltage stays tied to the same endpoints while the current divides and recombines across the branches.";
     case "F4_L6": return "Use the Flow-Grid source station, stream rate, and safety gate together so power, total energy transfer, and protective cut-off become one system story.";
-    case "M1_L1": return "Use the Motion Control Wall route log to keep graph height, graph steepness, and pauses separate while you compare journeys that can end at the same distance with different stories.";
-    case "M1_L2": return "Use the Motion Control Wall speed strip to separate graph height from graph slope so current speed and rate of change do not collapse into one idea.";
-    case "M1_L3": return "Use the change-rate dial to compare signed velocity changes over time so acceleration becomes a rate with direction, not a synonym for going faster.";
-    case "M1_L4": return "Use the forecast console only when acceleration stays constant, then choose the equation by the missing variable instead of by pattern matching.";
-    case "M1_L5": return "Lay the same slope gauge across different motion graphs so the same tilt is seen to mean different things when the axes change.";
-    case "M1_L6": return "Build rectangle, triangle, and trapezium regions under a speed-time graph so area becomes total distance and different shapes can still represent the same distance.";
+    case "M1_L1": return "Use the Quest-Log lane and mission log together so you keep the motion world separate from the graph world and stop reading the graph as the shape of the route.";
+    case "M1_L2": return "Use the Quest-Log pace log to keep speed-now and change-of-speed separate, so graph height and graph slope stop collapsing into one idea.";
+    case "M1_L3": return "Use signed pace arrows and boost shift so acceleration becomes a directional rate of velocity change rather than a vague idea of getting faster.";
+    case "M1_L4": return "Use the Quest-Log forecast board only when the boost shift stays constant, then choose the equation from the story instead of by pattern matching.";
+    case "M1_L5": return "Lay the same tilt across a progress log and a pace log so the class sees that slope meaning comes from the axes, not from steepness alone.";
+    case "M1_L6": return "Treat the shaded pace-log region as accumulated progress strips so area becomes total distance and different shapes can still represent the same distance.";
     default: return text(inquiry[0]?.prompt) || "Explore the activity and notice what changes as you test the idea.";
   }
 }
@@ -1828,12 +1966,12 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F4_L4": return "Start with one route, add a second resistor in series, and explain why the whole network stream rate changes everywhere while the source push is shared between the components.";
     case "F4_L5": return "Start with one branch, add a second branch between the same two points, and explain why branch voltage stays the same while total current rises.";
     case "F4_L6": return "Use one route to compare a safe case, a higher-current case, and a longer-running case, then explain how power, total energy, and fuse action are linked in the Flow-Grid story.";
-    case "M1_L1": return "Build one route-log story with motion, a pause, and more motion, then compare it with a different graph that reaches the same final distance.";
-    case "M1_L2": return "Create one flat, one rising, and one falling speed-time line, then explain what height and slope each say at the same instant.";
-    case "M1_L3": return "Choose one positive, one negative, and one zero-acceleration case, then explain each sign from the signed velocity change over time.";
-    case "M1_L4": return "Use one constant-acceleration story to decide which equation finds the missing value, then explain why the same console should not be trusted when acceleration changes.";
-    case "M1_L5": return "Hold one common gradient across two graph types and explain why the same tilt means speed on one graph but acceleration on another.";
-    case "M1_L6": return "Split one speed-time graph into rectangle and triangle parts, then compare it with a different graph that encloses the same total area.";
+    case "M1_L1": return "Build one Quest-Log run with motion, a pause tile, and more motion, then compare it with a different mission log that reaches the same final progress score.";
+    case "M1_L2": return "Create one flat, one rising, and one falling pace log, then explain what height and slope each say at the same instant.";
+    case "M1_L3": return "Choose one positive, one negative, and one zero boost-shift case, then explain each sign from the signed velocity change over time.";
+    case "M1_L4": return "Use one constant-boost story to decide which equation finds the missing value, then explain why the same forecast board should not be trusted when acceleration changes.";
+    case "M1_L5": return "Hold one common gradient across two Quest-Log screens and explain why the same tilt means pace on one graph but acceleration on another.";
+    case "M1_L6": return "Split one pace log into rectangle and triangle parts, then compare it with a different graph that encloses the same total area.";
     default: return text(inquiry[1]?.prompt) || text(inquiry[0]?.hint);
   }
 }
@@ -1950,13 +2088,13 @@ function simulationStageExploreSteps(code: string): string[] {
       ];
     case "M1_L1":
       return [
-        "Start with one steady segment, then add a pause so only the flat part of the route log changes.",
+        "Start with one steady run segment, then add a pause tile so only the flat part of the mission log changes.",
         "Rebuild the journey with different segment slopes but a similar finishing height so the final distance stays separate from the story of how it was reached.",
         "Name which information comes from graph height and which comes from graph steepness before you describe the motion.",
       ];
     case "M1_L2":
       return [
-        "Begin with a flat speed-time line so the speed is constant and the slope is zero.",
+        "Begin with a flat pace log so the speed is constant and the slope is zero.",
         "Raise the end speed to create a positive slope, then lower it below the start to create a negative slope.",
         "Compare one instant on two graphs and decide what the height says there and what the slope says there.",
       ];
@@ -1970,7 +2108,7 @@ function simulationStageExploreSteps(code: string): string[] {
       return [
         "Start with a constant-acceleration story and list the known and unknown variables.",
         "Choose the equation whose missing-variable pattern fits the story instead of the one that simply looks familiar.",
-        "Switch off the constant-acceleration condition and explain why the forecast console should no longer be used directly.",
+        "Switch off the constant-acceleration condition and explain why the Quest-Log forecast board should no longer be used directly.",
       ];
     case "M1_L5":
       return [
@@ -3534,7 +3672,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
       return [
         {
           kind: "visual",
-          title: "Read the route log, not the road",
+          title: "Read the mission log, not the lane",
           caption: "One distance-time picture keeps graph height, graph slope, and pauses doing different jobs.",
           image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
           highlights: ["Height = distance recorded by then", "Slope = speed on that segment", "Flat section = stopped"],
@@ -3575,7 +3713,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Keep the same slope, change the axes",
-          caption: "The slope gauge picture shows why the same tilt can mean speed on one graph and acceleration on another.",
+          caption: "The dual-log picture shows why the same tilt can mean pace on one graph and acceleration on another.",
           image_url: "/lesson-media/m1/m1-l5-gradient.svg",
           highlights: ["Distance-time slope = speed", "Speed-time slope = acceleration", "Graph type decides the meaning"],
         },
@@ -3585,7 +3723,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Build distance from area",
-          caption: "The area-accumulator picture keeps rectangle, triangle, and total distance visible in one speed-time story.",
+          caption: "The Area Hunter picture keeps strips, rectangle-plus-triangle reasoning, and total distance visible in one pace-log story.",
           image_url: "/lesson-media/m1/m1-l6-area.svg",
           highlights: ["Rectangle + triangle = total distance", "Area meaning comes from the axes", "Different shapes can still give the same distance"],
         },
@@ -3943,7 +4081,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
     case "M1_L1":
       return {
         title: "Distance-time graph check",
-        prompt: "Use the route-log diagram in your reflection and explain which part shows the pause, which part shows the fastest motion, and why the graph is not a sketch of the road.",
+        prompt: "Use the mission-log diagram in your reflection and explain which part shows the pause, which part shows the fastest motion, and why the graph is not a sketch of the lane.",
         image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
         callouts: [
           "A steep section appears first.",
@@ -3954,7 +4092,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
     case "M1_L2":
       return {
         title: "Speed-time graph check",
-        prompt: "Use the speed-strip diagram in your reflection and explain what the graph height says at one instant, what the slope says over an interval, and why a flat line above zero still means motion.",
+        prompt: "Use the pace-log diagram in your reflection and explain what the graph height says at one instant, what the slope says over an interval, and why a flat line above zero still means motion.",
         image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
         callouts: [
           "One section is horizontal above zero.",
@@ -3965,7 +4103,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
     case "M1_L3":
       return {
         title: "Acceleration sign check",
-        prompt: "Use the signed-velocity diagram in your reflection and explain how the acceleration sign comes from the change in velocity and the chosen positive direction.",
+        prompt: "Use the pace-arrow diagram in your reflection and explain how the acceleration sign comes from the change in velocity and the chosen positive direction.",
         image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
         callouts: [
           "The initial velocity arrow points more strongly east.",
@@ -3976,7 +4114,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
     case "M1_L4":
       return {
         title: "Equation-choice check",
-        prompt: "Use the forecast board in your reflection and explain which known variables make one constant-acceleration equation the best choice and why the same board fails when acceleration is not constant.",
+        prompt: "Use the Quest-Log forecast board in your reflection and explain which known variables make one constant-acceleration equation the best choice and why the same board fails when acceleration is not constant.",
         image_url: "/lesson-media/m1/m1-l4-suvat.svg",
         callouts: [
           "Known variables are grouped together first.",
@@ -3998,7 +4136,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
     case "M1_L6":
       return {
         title: "Area-distance check",
-        prompt: "Use the shaded speed-time diagram in your reflection and explain how the rectangle and triangle combine to make total distance and why a different graph shape can still give the same distance.",
+        prompt: "Use the Area Hunter diagram in your reflection and explain how the rectangle and triangle combine to make total distance and why a different graph shape can still give the same distance.",
         image_url: "/lesson-media/m1/m1-l6-area.svg",
         callouts: [
           "The rectangle shows the base distance contribution.",

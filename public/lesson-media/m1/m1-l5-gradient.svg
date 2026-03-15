@@ -1,21 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
-  <rect width="900" height="520" rx="28" fill="#f5f3ff"/>
-  <rect x="24" y="24" width="852" height="472" rx="24" fill="#fff" stroke="#c4b5fd"/>
-  <text x="56" y="70" font-family="Arial" font-size="28" font-weight="700" fill="#0f172a">Same slope, different meaning</text>
-  <text x="56" y="102" font-family="Arial" font-size="18" fill="#475569">The axes decide whether the same tilt means speed or acceleration.</text>
-  <rect x="82" y="150" width="320" height="256" rx="22" fill="#faf5ff" stroke="#ddd6fe"/>
-  <rect x="498" y="150" width="320" height="256" rx="22" fill="#faf5ff" stroke="#ddd6fe"/>
-  <line x1="136" y1="370" x2="136" y2="194" stroke="#0f172a" stroke-width="4"/>
-  <line x1="136" y1="370" x2="350" y2="370" stroke="#0f172a" stroke-width="4"/>
-  <line x1="552" y1="370" x2="552" y2="194" stroke="#0f172a" stroke-width="4"/>
-  <line x1="552" y1="370" x2="766" y2="370" stroke="#0f172a" stroke-width="4"/>
-  <polyline points="168,338 314,226" fill="none" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round"/>
-  <polyline points="584,338 730,226" fill="none" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round"/>
-  <text x="154" y="192" font-family="Arial" font-size="20" font-weight="700" fill="#4c1d95">distance-time</text>
-  <text x="572" y="192" font-family="Arial" font-size="20" font-weight="700" fill="#4c1d95">speed-time</text>
-  <text x="198" y="410" font-family="Arial" font-size="18" fill="#334155">slope = 3 m/s</text>
-  <text x="608" y="410" font-family="Arial" font-size="18" fill="#334155">slope = 3 m/s^2</text>
-  <text x="380" y="202" font-family="Arial" font-size="18" font-weight="700" fill="#0f172a">same visual tilt</text>
-  <rect x="90" y="434" width="728" height="34" rx="14" fill="#ede9fe"/>
-  <text x="124" y="456" font-family="Arial" font-size="18" fill="#5b21b6">Name the graph first. Then translate the slope using that graph's axes.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="70" y="88" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">The same tilt can tell a different physics story when the axes change.</text>
+  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Module 1 makes students name the graph before naming the rate.</text>
+  <rect x="84" y="188" width="494" height="456" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <text x="118" y="236" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Progress log</text>
+  <line x1="170" y1="556" x2="506" y2="556" stroke="#334155" stroke-width="4"/>
+  <line x1="170" y1="556" x2="170" y2="298" stroke="#334155" stroke-width="4"/>
+  <path d="M210 504L418 368" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <text x="232" y="604" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock</text>
+  <text x="108" y="388" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 108 388)">Progress score</text>
+  <text x="222" y="328" fill="#1E3A8A" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Same tilt = pace</text>
+  <text x="214" y="462" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">Gradient = 3 m/s</text>
+  <rect x="622" y="188" width="494" height="456" rx="28" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="4"/>
+  <text x="656" y="236" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Pace log</text>
+  <line x1="708" y1="556" x2="1044" y2="556" stroke="#334155" stroke-width="4"/>
+  <line x1="708" y1="556" x2="708" y2="298" stroke="#334155" stroke-width="4"/>
+  <path d="M748 504L956 368" stroke="#7C3AED" stroke-width="10" stroke-linecap="round"/>
+  <text x="766" y="604" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock</text>
+  <text x="646" y="388" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 646 388)">Pace</text>
+  <text x="760" y="328" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Same tilt = acceleration</text>
+  <text x="752" y="462" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">Gradient = 3 m/s^2</text>
 </svg>

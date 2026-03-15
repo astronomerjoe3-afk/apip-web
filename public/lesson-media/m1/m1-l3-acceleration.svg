@@ -1,21 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
-  <rect width="900" height="520" rx="28" fill="#fff1f2"/>
-  <rect x="24" y="24" width="852" height="472" rx="24" fill="#fff" stroke="#fda4af"/>
-  <text x="56" y="70" font-family="Arial" font-size="28" font-weight="700" fill="#0f172a">Signed velocity change</text>
-  <text x="56" y="102" font-family="Arial" font-size="18" fill="#475569">Acceleration is signed change in velocity divided by time.</text>
-  <text x="118" y="170" font-family="Arial" font-size="18" font-weight="700" fill="#334155">Choose east as positive</text>
-  <line x1="112" y1="280" x2="642" y2="280" stroke="#0f172a" stroke-width="4"/>
-  <path d="M380 220 L540 220" stroke="#0ea5e9" stroke-width="10" stroke-linecap="round"/>
-  <polygon points="540,220 516,208 516,232" fill="#0ea5e9"/>
-  <text x="394" y="198" font-family="Arial" font-size="18" font-weight="700" fill="#0c4a6e">initial velocity = +8 m/s</text>
-  <path d="M380 344 L470 344" stroke="#f43f5e" stroke-width="10" stroke-linecap="round"/>
-  <polygon points="470,344 446,332 446,356" fill="#f43f5e"/>
-  <text x="394" y="376" font-family="Arial" font-size="18" font-weight="700" fill="#9f1239">final velocity = +2 m/s</text>
-  <rect x="664" y="164" width="166" height="196" rx="16" fill="#ffe4e6" stroke="#fda4af"/>
-  <text x="690" y="200" font-family="Arial" font-size="20" font-weight="700" fill="#881337">Worked rate</text>
-  <text x="688" y="236" font-family="Arial" font-size="18" fill="#881337">delta v = +2 - +8</text>
-  <text x="688" y="264" font-family="Arial" font-size="18" fill="#881337">delta v = -6 m/s</text>
-  <text x="688" y="304" font-family="Arial" font-size="18" fill="#881337">time = 3 s</text>
-  <text x="688" y="336" font-family="Arial" font-size="18" fill="#881337">a = -6 / 3</text>
-  <text x="688" y="364" font-family="Arial" font-size="18" font-weight="700" fill="#881337">a = -2 m/s^2</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="70" y="88" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Boost shift reads the change in the pace arrow, not a feeling of fast.</text>
+  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Signed acceleration becomes clearer when students compare arrows before and after the interval with one chosen positive direction.</text>
+  <rect x="70" y="188" width="500" height="456" rx="28" fill="#FDF2F8" stroke="#F9A8D4" stroke-width="4"/>
+  <text x="102" y="236" fill="#BE185D" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Signed pace arrows</text>
+  <text x="126" y="312" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">East chosen as positive</text>
+  <path d="M164 390H322" stroke="#1D4ED8" stroke-width="14" stroke-linecap="round"/>
+  <path d="M322 390L286 364V416L322 390Z" fill="#1D4ED8"/>
+  <text x="148" y="428" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">u = +8 m/s</text>
+  <path d="M164 510H250" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
+  <path d="M250 510L214 484V536L250 510Z" fill="#16A34A"/>
+  <text x="148" y="548" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">v = +3 m/s</text>
+  <text x="126" y="600" fill="#7C3AED" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Boost shift points negative because the velocity change is negative.</text>
+  <rect x="620" y="188" width="508" height="456" rx="28" fill="#EEF2FF" stroke="#C4B5FD" stroke-width="4"/>
+  <text x="652" y="236" fill="#5B21B6" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Counterexample</text>
+  <path d="M998 356H792" stroke="#DC2626" stroke-width="14" stroke-linecap="round"/>
+  <path d="M792 356L828 330V382L792 356Z" fill="#DC2626"/>
+  <text x="804" y="396" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">u = -8 m/s</text>
+  <path d="M930 492H792" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M792 492L828 466V518L792 492Z" fill="#F59E0B"/>
+  <text x="804" y="532" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">v = -3 m/s</text>
+  <text x="664" y="332" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Same negative direction, smaller speed</text>
+  <text x="664" y="582" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Positive acceleration can slow the avatar down if it is already moving negative.</text>
 </svg>
