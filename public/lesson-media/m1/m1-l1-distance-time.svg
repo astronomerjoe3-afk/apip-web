@@ -1,34 +1,70 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
   <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
-  <text x="70" y="88" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">The lane is where motion happens. The log is how motion is recorded.</text>
-  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Quest-Log keeps the quest lane and mission log separate so the graph is not mistaken for the route.</text>
-  <rect x="70" y="188" width="460" height="456" rx="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="4"/>
-  <text x="102" y="236" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Quest lane</text>
-  <rect x="112" y="332" width="356" height="18" rx="9" fill="#1D4ED8"/>
-  <circle cx="142" cy="341" r="24" fill="#F97316"/>
-  <text x="128" y="348" fill="#FFF7ED" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">A</text>
-  <rect x="250" y="318" width="82" height="46" rx="16" fill="#FDE68A" stroke="#F59E0B" stroke-width="3"/>
-  <text x="269" y="347" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Pause</text>
-  <circle cx="408" cy="341" r="24" fill="#10B981"/>
-  <text x="394" y="348" fill="#ECFDF5" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">B</text>
-  <text x="112" y="420" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Start Base</text>
-  <text x="112" y="468" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">
-    <tspan x="112" dy="0">Avatar moves, pauses,</tspan>
-    <tspan x="112" dy="30">then moves again faster.</tspan>
-  </text>
-  <text x="112" y="532" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">
-    <tspan x="112" dy="0">Same final progress can still come</tspan>
-    <tspan x="112" dy="30">from a different run story.</tspan>
-  </text>
-  <rect x="580" y="188" width="548" height="456" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
-  <text x="612" y="236" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Mission log</text>
-  <line x1="670" y1="564" x2="1050" y2="564" stroke="#334155" stroke-width="4"/>
-  <line x1="670" y1="564" x2="670" y2="286" stroke="#334155" stroke-width="4"/>
-  <path d="M708 520L796 412L856 412L974 320" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="796" cy="412" r="10" fill="#F59E0B"/>
-  <text x="736" y="606" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock</text>
-  <text x="582" y="352" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 582 352)">Progress score</text>
-  <text x="888" y="394" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Flat section = paused</text>
-  <text x="720" y="490" fill="#1E3A8A" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Steeper rise = greater pace</text>
-  <text x="722" y="304" fill="#1E3A8A" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Height = recorded progress by that time</text>
+  <text x="60" y="84" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">The lane is where motion happens. The log is how motion is recorded.</text>
+  <text x="60" y="126" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Quest-Log keeps the lane and the graph separate so students read relationships, not route shape.</text>
+
+  <rect x="56" y="174" width="434" height="474" rx="30" fill="#F0FDF4" stroke="#86EFAC" stroke-width="4"/>
+  <text x="92" y="226" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Quest lane</text>
+  <text x="92" y="262" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Run A on the lane: move, pause, then sprint.</text>
+  <line x1="116" y1="356" x2="436" y2="356" stroke="#2563EB" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="134" cy="356" r="28" fill="#F97316"/>
+  <text x="123" y="364" fill="#FFF7ED" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">A</text>
+  <rect x="246" y="330" width="104" height="52" rx="18" fill="#FEF3C7" stroke="#F59E0B" stroke-width="4"/>
+  <text x="268" y="363" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Pause</text>
+  <circle cx="390" cy="356" r="28" fill="#10B981"/>
+  <text x="379" y="364" fill="#ECFDF5" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">B</text>
+  <line x1="116" y1="418" x2="196" y2="418" stroke="#1D4ED8" stroke-width="10" stroke-linecap="round"/>
+  <line x1="196" y1="418" x2="250" y2="418" stroke="#64748B" stroke-width="10" stroke-linecap="round" stroke-dasharray="8 10"/>
+  <line x1="250" y1="418" x2="410" y2="418" stroke="#0EA5E9" stroke-width="10" stroke-linecap="round"/>
+  <text x="92" y="470" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Distance markers on lane: 0 m, 12 m, 12 m, 32 m</text>
+  <text x="92" y="514" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Clock beats: 0 s, 2 s, 4 s, 8 s</text>
+  <text x="92" y="566" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Key idea: the same final 32 m can come</text>
+  <text x="92" y="600" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">from a different run story.</text>
+
+  <rect x="522" y="174" width="622" height="474" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <text x="560" y="226" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Mission log</text>
+  <text x="560" y="262" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Recorded progress, s, is measured in metres and compared against mission time, t, in seconds.</text>
+
+  <line x1="652" y1="548" x2="1046" y2="548" stroke="#334155" stroke-width="4"/>
+  <line x1="652" y1="548" x2="652" y2="308" stroke="#334155" stroke-width="4"/>
+  <text x="768" y="608" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock, t (s)</text>
+  <text x="572" y="452" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 572 452)">Recorded progress, s (m)</text>
+
+  <g fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="18">
+    <text x="646" y="574">0</text>
+    <text x="742" y="574">2</text>
+    <text x="836" y="574">4</text>
+    <text x="930" y="574">6</text>
+    <text x="1022" y="574">8</text>
+    <text x="620" y="548">0</text>
+    <text x="606" y="488">12</text>
+    <text x="606" y="428">24</text>
+    <text x="606" y="368">36</text>
+  </g>
+  <g stroke="#CBD5E1" stroke-width="2">
+    <line x1="746" y1="548" x2="746" y2="308"/>
+    <line x1="840" y1="548" x2="840" y2="308"/>
+    <line x1="934" y1="548" x2="934" y2="308"/>
+    <line x1="1028" y1="548" x2="1028" y2="308"/>
+    <line x1="652" y1="488" x2="1046" y2="488"/>
+    <line x1="652" y1="428" x2="1046" y2="428"/>
+    <line x1="652" y1="368" x2="1046" y2="368"/>
+  </g>
+
+  <path d="M652 548L746 468L840 468L1028 348" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="746" cy="468" r="8" fill="#F59E0B"/>
+  <circle cx="840" cy="468" r="8" fill="#F59E0B"/>
+  <circle cx="1028" cy="348" r="8" fill="#10B981"/>
+
+  <path d="M710 430L732 454" stroke="#1E3A8A" stroke-width="3" stroke-linecap="round"/>
+  <text x="690" y="408" fill="#1E3A8A" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Steeper rise = faster pace</text>
+
+  <path d="M868 446L842 464" stroke="#92400E" stroke-width="3" stroke-linecap="round"/>
+  <text x="874" y="446" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Flat segment = paused</text>
+
+  <path d="M946 326L1008 350" stroke="#0F766E" stroke-width="3" stroke-linecap="round"/>
+  <text x="862" y="314" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Final point: 32 m at 8 s</text>
+
+  <path d="M782 360L780 462" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round"/>
+  <text x="724" y="344" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Height = total distance by that time</text>
 </svg>

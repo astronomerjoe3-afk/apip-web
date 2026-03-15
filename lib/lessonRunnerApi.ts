@@ -2315,17 +2315,17 @@ function simulationStageTryFirst(code: string): string | undefined {
     case "F4_L6":
       return "Try 12 V, 2 A, and 10 s first. The power is 24 W and the total transferred energy is 240 J. Then raise the current to 4 A and compare the larger power.";
     case "M1_L1":
-      return "Try 3 m/s, pause 2 s, then 5 m/s. The graph should rise, go flat, then rise more steeply.";
+      return "Try Run A with 3 m/s for 2 s, pause for 2 s, then 5 m/s for 4 s. The log should reach 12 m, stay flat, then finish at 32 m after 8 s. Now compare it with a steady 4 m/s run that reaches the same 32 m after 8 s.";
     case "M1_L2":
-      return "Try 6 m/s to 12 m/s over 3 s. Height shows speed; slope is +2 m/s^2.";
+      return "Try 6 m/s to 12 m/s over 3 s. Height shows speed in m/s, while slope is +2 m/s^2. Then compare it with a flat 12 m/s line so the same final speed does not force the same acceleration.";
     case "M1_L3":
-      return "Try +8 m/s to +2 m/s in 3 s with east positive. The acceleration is -2 m/s^2.";
+      return "Try +8 m/s to +2 m/s in 3 s with east positive. The acceleration is -2 m/s^2. Then swap to -8 m/s to -2 m/s in 3 s and explain why the acceleration becomes +2 m/s^2 while the object is still slowing down.";
     case "M1_L4":
-      return "Try u = 4 m/s, a = 3 m/s^2, and v = 16 m/s. The first choice should be v = u + at.";
+      return "Try u = 4 m/s, a = 3 m/s^2, and t = 4 s. Use v = u + at first to get 16 m/s, then use the same story to see why s = ut + 1/2at^2 gives 40 m only because the acceleration stays constant.";
     case "M1_L5":
-      return "Try a gradient of 3. On distance-time it means 3 m/s; on speed-time it means 3 m/s^2.";
+      return "Try a gradient of 3. On distance-time it means 3 m/s; on speed-time it means 3 m/s^2. Then test a zero gradient and compare why one graph means stopped while the other means constant speed.";
     case "M1_L6":
-      return "Try u = 4 m/s, v = 10 m/s, and t = 6 s. Rectangle plus triangle gives 42 m.";
+      return "Try u = 4 m/s, v = 10 m/s, and t = 6 s. Rectangle plus triangle gives 42 m. Then design a second graph with the same 42 m total area but a different speed history.";
     default:
       return undefined;
   }
@@ -2369,17 +2369,17 @@ function simulationStageTakeaway(code: string): string | undefined {
     case "F4_L6":
       return "Electrical power, total energy transfer, and safety all fit one story: how fast energy moves, how long it moves, and when excessive current must be cut off.";
     case "M1_L1":
-      return "A distance-time graph becomes readable when height and slope are kept separate.";
+      return "A distance-time graph becomes readable when you keep route, graph height, and graph steepness doing different jobs.";
     case "M1_L2":
-      return "A speed-time graph only makes sense when height and slope are read as different motion ideas.";
+      return "A speed-time graph only becomes clear when graph height means current speed and graph slope means acceleration.";
     case "M1_L3":
-      return "Acceleration is a signed rate of velocity change, not a synonym for speed.";
+      return "Acceleration is a signed rate of velocity change, so its sign must be read from the chosen direction and the change in velocity.";
     case "M1_L4":
-      return "The constant-acceleration equations are a forecast toolkit: choose the relation that matches the story.";
+      return "The constant-acceleration equations are a forecast toolkit that only works when the motion story really has one steady acceleration.";
     case "M1_L5":
-      return "The same slope can tell a different physics story when the graph axes change.";
+      return "The same slope can tell different physics stories because axes decide whether the rate is speed or acceleration.";
     case "M1_L6":
-      return "Area under a speed-time graph is a distance story built from time width and speed height together.";
+      return "Area under a speed-time graph is total distance because each strip combines a time width with a speed height.";
     default:
       return undefined;
   }
@@ -3758,9 +3758,16 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Read the mission log, not the lane",
-          caption: "One distance-time picture keeps graph height, graph slope, and pauses doing different jobs.",
+          caption: "This Quest-Log graphic labels the axes with units and pins each label to the exact feature it explains.",
           image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
-          highlights: ["Height = distance recorded by then", "Slope = speed on that segment", "Flat section = stopped"],
+          highlights: ["Recorded progress, s (m), is graph height", "Mission clock, t (s), runs on the horizontal axis", "Slope = pace on that segment"],
+        },
+        {
+          kind: "visual",
+          title: "Same finish, different run story",
+          caption: "A second mission-log comparison shows that equal final distance and time do not force identical motion histories.",
+          image_url: "/lesson-media/m1/m1-l1-same-finish.svg",
+          highlights: ["Run A pauses then sprints", "Run B climbs steadily", "Same final point can hide different pace stories"],
         },
       ];
     case "M1_L2":
@@ -4166,12 +4173,12 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
     case "M1_L1":
       return {
         title: "Distance-time graph check",
-        prompt: "Use the mission-log diagram in your reflection and explain which part shows the pause, which part shows the fastest motion, and why the graph is not a sketch of the lane.",
-        image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
+        prompt: "Use the comparison mission-log diagram in your reflection and explain where the axes show metres and seconds, which section is paused, and how two runs can share the same final point without sharing the same motion story.",
+        image_url: "/lesson-media/m1/m1-l1-same-finish.svg",
         callouts: [
-          "A steep section appears first.",
-          "A flat section appears in the middle.",
-          "A gentler rising section finishes the story.",
+          "Both graphs finish at 32 m after 8 s.",
+          "Run A contains a flat paused section.",
+          "Run B keeps one steady slope from start to finish.",
         ],
       };
     case "M1_L2":

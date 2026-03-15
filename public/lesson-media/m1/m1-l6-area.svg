@@ -9,8 +9,8 @@
   <path d="M218 472H374L514 364" stroke="#F97316" stroke-width="10" stroke-linecap="round"/>
   <rect x="218" y="472" width="156" height="84" fill="#93C5FD" opacity="0.9"/>
   <path d="M374 472H514V364Z" fill="#F59E0B" opacity="0.9"/>
-  <text x="230" y="610" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock</text>
-  <text x="110" y="392" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 110 392)">Pace</text>
+  <text x="230" y="610" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock, t (s)</text>
+  <text x="110" y="392" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 110 392)">Pace, v (m/s)</text>
   <text x="228" y="452" fill="#1E3A8A" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Block area</text>
   <text x="392" y="332" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Triangle area</text>
   <text x="224" y="304" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Whole shaded region = total distance</text>
