@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <rect width="900" height="520" rx="28" fill="#fff7ed"/>
+  <rect x="24" y="24" width="852" height="472" rx="24" fill="#fff" stroke="#fed7aa"/>
+  <text x="56" y="70" font-family="Arial" font-size="28" font-weight="700" fill="#0f172a">Speed-time strip</text>
+  <text x="56" y="102" font-family="Arial" font-size="18" fill="#475569">Height answers speed. Slope answers acceleration.</text>
+  <line x1="110" y1="408" x2="110" y2="158" stroke="#0f172a" stroke-width="4"/>
+  <line x1="110" y1="408" x2="706" y2="408" stroke="#0f172a" stroke-width="4"/>
+  <polyline points="148,352 278,294 408,214 536,214 662,170" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="408" y1="214" x2="468" y2="214" stroke="#0f172a" stroke-width="3"/>
+  <line x1="408" y1="214" x2="408" y2="330" stroke="#0f172a" stroke-width="3"/>
+  <text x="482" y="220" font-family="Arial" font-size="18" font-weight="700" fill="#0f172a">height = speed now</text>
+  <text x="266" y="344" font-family="Arial" font-size="18" font-weight="700" fill="#9a3412">slope = acceleration</text>
+  <text x="548" y="190" font-family="Arial" font-size="18" font-weight="700" fill="#0f172a">flat above zero = constant speed</text>
+  <rect x="726" y="166" width="122" height="154" rx="16" fill="#ffedd5" stroke="#fdba74"/>
+  <text x="742" y="198" font-family="Arial" font-size="18" font-weight="700" fill="#9a3412">Remember</text>
+  <text x="742" y="228" font-family="Arial" font-size="18" fill="#7c2d12">High graph does</text>
+  <text x="742" y="252" font-family="Arial" font-size="18" fill="#7c2d12">not mean high</text>
+  <text x="742" y="276" font-family="Arial" font-size="18" fill="#7c2d12">distance.</text>
+</svg>

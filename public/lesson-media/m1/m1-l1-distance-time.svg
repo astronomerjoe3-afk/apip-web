@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <rect width="900" height="520" rx="28" fill="#f8fafc"/>
+  <rect x="24" y="24" width="852" height="472" rx="24" fill="#fff" stroke="#cbd5e1"/>
+  <text x="56" y="70" font-family="Arial" font-size="28" font-weight="700" fill="#0f172a">Distance-time route log</text>
+  <text x="56" y="102" font-family="Arial" font-size="18" fill="#475569">Height is distance, slope is speed, flat means stopped.</text>
+  <line x1="110" y1="408" x2="110" y2="158" stroke="#0f172a" stroke-width="4"/>
+  <line x1="110" y1="408" x2="700" y2="408" stroke="#0f172a" stroke-width="4"/>
+  <polyline points="148,388 252,254 382,254 548,186 664,170" fill="none" stroke="#0ea5e9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="252" y1="254" x2="382" y2="254" stroke="#f97316" stroke-width="4" stroke-dasharray="10 10"/>
+  <text x="176" y="346" font-family="Arial" font-size="18" font-weight="700" fill="#0f172a">steeper = faster</text>
+  <text x="286" y="224" font-family="Arial" font-size="18" font-weight="700" fill="#ea580c">flat = stopped</text>
+  <text x="372" y="144" font-family="Arial" font-size="18" font-weight="700" fill="#0f172a">height = distance</text>
+  <rect x="724" y="156" width="124" height="94" rx="16" fill="#e0f2fe" stroke="#7dd3fc"/>
+  <text x="742" y="192" font-family="Arial" font-size="18" font-weight="700" fill="#0c4a6e">same final</text>
+  <text x="742" y="218" font-family="Arial" font-size="18" fill="#0c4a6e">height can hide</text>
+  <text x="742" y="242" font-family="Arial" font-size="18" fill="#0c4a6e">a new story</text>
+</svg>

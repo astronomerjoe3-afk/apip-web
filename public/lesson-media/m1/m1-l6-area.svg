@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <rect width="900" height="520" rx="28" fill="#fffbeb"/>
+  <rect x="24" y="24" width="852" height="472" rx="24" fill="#fff" stroke="#fcd34d"/>
+  <text x="56" y="70" font-family="Arial" font-size="28" font-weight="700" fill="#0f172a">Area builds distance</text>
+  <text x="56" y="102" font-family="Arial" font-size="18" fill="#475569">Rectangle plus triangle gives the total distance under a speed-time graph.</text>
+  <line x1="116" y1="402" x2="116" y2="164" stroke="#0f172a" stroke-width="4"/>
+  <line x1="116" y1="402" x2="686" y2="402" stroke="#0f172a" stroke-width="4"/>
+  <rect x="148" y="278" width="250" height="124" fill="#93c5fd" fill-opacity="0.65" stroke="#2563eb" stroke-width="3"/>
+  <polygon points="398,402 398,216 568,216 568,402" fill="#fde68a" fill-opacity="0.85" stroke="#d97706" stroke-width="3"/>
+  <polyline points="148,278 398,278 568,216" fill="none" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="196" y="340" font-family="Arial" font-size="20" font-weight="700" fill="#1e3a8a">rectangle</text>
+  <text x="436" y="300" font-family="Arial" font-size="20" font-weight="700" fill="#92400e">triangle</text>
+  <rect x="714" y="170" width="118" height="164" rx="16" fill="#fef3c7" stroke="#fcd34d"/>
+  <text x="738" y="206" font-family="Arial" font-size="20" font-weight="700" fill="#92400e">Total</text>
+  <text x="734" y="242" font-family="Arial" font-size="18" fill="#92400e">distance =</text>
+  <text x="734" y="272" font-family="Arial" font-size="18" fill="#92400e">rectangle</text>
+  <text x="734" y="300" font-family="Arial" font-size="18" fill="#92400e">+</text>
+  <text x="734" y="328" font-family="Arial" font-size="18" fill="#92400e">triangle</text>
+  <rect x="148" y="430" width="536" height="34" rx="14" fill="#fef3c7"/>
+  <text x="170" y="452" font-family="Arial" font-size="18" fill="#92400e">Different graph shapes can still give the same distance if the total shaded area is equal.</text>
+</svg>

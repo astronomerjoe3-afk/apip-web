@@ -76,6 +76,104 @@ function isStructuredMasteryPaddingLessonCode(code: string): boolean {
   return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_");
 }
 
+type QuestionVisualMeta = {
+  image_url: string;
+  visual_title: string;
+  visual_caption: string;
+  visual_callouts: string[];
+};
+
+const M1_VISUAL_SUFFIXES: Record<string, string[]> = {
+  M1L1: ["D1", "D3", "C1", "C2", "T1", "T2", "T4"],
+  M1L2: ["D1", "D3", "C1", "C2", "T1", "T4", "T6"],
+  M1L3: ["D1", "D3", "C1", "C2", "T1", "T4", "T5"],
+  M1L4: ["D1", "D2", "C1", "C2", "T1", "T3", "T5"],
+  M1L5: ["D1", "D2", "C1", "C2", "T1", "T4", "T6"],
+  M1L6: ["D1", "D3", "C1", "C2", "T1", "T4", "T6"],
+};
+
+function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined {
+  switch (lessonKey) {
+    case "M1L1":
+      return {
+        image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
+        visual_title: "Distance-time route log",
+        visual_caption: "Read the graph as a motion record: height is distance, slope is speed, and a flat section means the journey paused.",
+        visual_callouts: [
+          "Height at a chosen time shows total distance recorded by then.",
+          "The flat middle section means time passes while distance stays unchanged.",
+          "The steeper final segment tells the faster part of the journey.",
+        ],
+      };
+    case "M1L2":
+      return {
+        image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
+        visual_title: "Speed-time strip",
+        visual_caption: "On this graph, height gives the speed now and slope gives how quickly the speed is changing.",
+        visual_callouts: [
+          "A high point means a large speed at that instant.",
+          "A rising slope means positive acceleration, not extra distance by itself.",
+          "A flat line above zero still shows motion at constant speed.",
+        ],
+      };
+    case "M1L3":
+      return {
+        image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
+        visual_title: "Signed velocity change",
+        visual_caption: "Acceleration comes from how the velocity arrow changes over time, including the sign set by the chosen positive direction.",
+        visual_callouts: [
+          "Compare the starting and finishing velocity arrows before naming the acceleration sign.",
+          "The same velocity change over less time means a larger acceleration magnitude.",
+          "Negative acceleration only tells you the direction of the change, not automatically slowing down in every story.",
+        ],
+      };
+    case "M1L4":
+      return {
+        image_url: "/lesson-media/m1/m1-l4-suvat.svg",
+        visual_title: "Constant-acceleration forecast board",
+        visual_caption: "Choose the motion equation by the known values, the unknown value, and the constant-acceleration condition.",
+        visual_callouts: [
+          "u, v, a, s, and t each answer a different question in the story.",
+          "Pick the relation that reaches the unknown while avoiding the variable you do not know.",
+          "This board only applies directly when acceleration stays constant.",
+        ],
+      };
+    case "M1L5":
+      return {
+        image_url: "/lesson-media/m1/m1-l5-gradient.svg",
+        visual_title: "Same slope, different meaning",
+        visual_caption: "The same tilt means different physics when the graph axes change, so you must name the graph before interpreting the gradient.",
+        visual_callouts: [
+          "On distance-time, slope compares distance change with time, so it gives speed.",
+          "On speed-time, slope compares speed change with time, so it gives acceleration.",
+          "A zero slope tells a different motion story on each graph type.",
+        ],
+      };
+    case "M1L6":
+      return {
+        image_url: "/lesson-media/m1/m1-l6-area.svg",
+        visual_title: "Area builds distance",
+        visual_caption: "The whole shaded area under a speed-time graph represents distance, and mixed shapes can be split into simple parts before adding.",
+        visual_callouts: [
+          "The rectangle shows distance from the constant-speed part of the story.",
+          "The triangle shows the extra distance added while the speed changes steadily.",
+          "Different graph shapes can still represent the same total distance if the total area matches.",
+        ],
+      };
+    default:
+      return undefined;
+  }
+}
+
+function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined {
+  const id = text(item.id).toUpperCase();
+  const match = id.match(/^(M1L[1-6])_([DCT]\d+)$/);
+  if (!match) return undefined;
+  const lessonKey = match[1];
+  const suffix = match[2];
+  return M1_VISUAL_SUFFIXES[lessonKey]?.includes(suffix) ? m1QuestionVisualMeta(lessonKey) : undefined;
+}
+
 type FallbackAnswerMeta = {
   id: string;
   answerIndex?: number;
@@ -786,11 +884,13 @@ function question(item: UnknownRecord, seed = ""): UnknownRecord {
   const options = seed
     ? shuffle(choices.map((label, index) => ({ value: optionValue(index), label })), seed)
     : choices.map((label, index) => ({ value: optionValue(index), label }));
+  const visual = questionVisualMeta(item);
   return {
     id: text(item.id),
     prompt: text(item.prompt),
     type: choices.length > 0 ? "multiple_choice" : "short_answer",
     options,
+    ...(visual || {}),
   };
 }
 
@@ -3430,6 +3530,66 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           highlights: ["Power tells energy transferred each second", "Total energy depends on time as well", "Fuses respond to dangerously large current"],
         },
       ];
+    case "M1_L1":
+      return [
+        {
+          kind: "visual",
+          title: "Read the route log, not the road",
+          caption: "One distance-time picture keeps graph height, graph slope, and pauses doing different jobs.",
+          image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
+          highlights: ["Height = distance recorded by then", "Slope = speed on that segment", "Flat section = stopped"],
+        },
+      ];
+    case "M1_L2":
+      return [
+        {
+          kind: "visual",
+          title: "Separate level from change",
+          caption: "The speed-time strip makes graph height answer a speed question while slope answers an acceleration question.",
+          image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
+          highlights: ["Height = current speed", "Slope = rate of speed change", "Flat above zero = constant speed"],
+        },
+      ];
+    case "M1_L3":
+      return [
+        {
+          kind: "visual",
+          title: "See the signed velocity change",
+          caption: "The change-rate diagram makes acceleration a directional rate instead of a synonym for going faster.",
+          image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
+          highlights: ["Compare start and finish velocity", "Divide the change by time", "Read the sign from the chosen positive direction"],
+        },
+      ];
+    case "M1_L4":
+      return [
+        {
+          kind: "visual",
+          title: "Choose the right forecast tool",
+          caption: "This suvat board helps students choose equations deliberately only when acceleration stays constant.",
+          image_url: "/lesson-media/m1/m1-l4-suvat.svg",
+          highlights: ["List what is known", "Pick the equation by the missing variable", "Check the constant-acceleration condition"],
+        },
+      ];
+    case "M1_L5":
+      return [
+        {
+          kind: "visual",
+          title: "Keep the same slope, change the axes",
+          caption: "The slope gauge picture shows why the same tilt can mean speed on one graph and acceleration on another.",
+          image_url: "/lesson-media/m1/m1-l5-gradient.svg",
+          highlights: ["Distance-time slope = speed", "Speed-time slope = acceleration", "Graph type decides the meaning"],
+        },
+      ];
+    case "M1_L6":
+      return [
+        {
+          kind: "visual",
+          title: "Build distance from area",
+          caption: "The area-accumulator picture keeps rectangle, triangle, and total distance visible in one speed-time story.",
+          image_url: "/lesson-media/m1/m1-l6-area.svg",
+          highlights: ["Rectangle + triangle = total distance", "Area meaning comes from the axes", "Different shapes can still give the same distance"],
+        },
+      ];
     default: {
       const code = lessonCode(lesson);
       if (isExtendedNextgenLessonCode(code)) {
@@ -3778,6 +3938,72 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
           "Section A is a tall, narrow rectangle.",
           "Section B is a shorter, wider rectangle with the same area as A.",
           "Section C is the smallest area of the three.",
+        ],
+      };
+    case "M1_L1":
+      return {
+        title: "Distance-time graph check",
+        prompt: "Use the route-log diagram in your reflection and explain which part shows the pause, which part shows the fastest motion, and why the graph is not a sketch of the road.",
+        image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
+        callouts: [
+          "A steep section appears first.",
+          "A flat section appears in the middle.",
+          "A gentler rising section finishes the story.",
+        ],
+      };
+    case "M1_L2":
+      return {
+        title: "Speed-time graph check",
+        prompt: "Use the speed-strip diagram in your reflection and explain what the graph height says at one instant, what the slope says over an interval, and why a flat line above zero still means motion.",
+        image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
+        callouts: [
+          "One section is horizontal above zero.",
+          "One section rises steadily.",
+          "A high point and a steep point answer different questions.",
+        ],
+      };
+    case "M1_L3":
+      return {
+        title: "Acceleration sign check",
+        prompt: "Use the signed-velocity diagram in your reflection and explain how the acceleration sign comes from the change in velocity and the chosen positive direction.",
+        image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
+        callouts: [
+          "The initial velocity arrow points more strongly east.",
+          "The final velocity arrow is smaller or reversed in one example.",
+          "The acceleration sign depends on the signed change over time.",
+        ],
+      };
+    case "M1_L4":
+      return {
+        title: "Equation-choice check",
+        prompt: "Use the forecast board in your reflection and explain which known variables make one constant-acceleration equation the best choice and why the same board fails when acceleration is not constant.",
+        image_url: "/lesson-media/m1/m1-l4-suvat.svg",
+        callouts: [
+          "Known variables are grouped together first.",
+          "The unknown variable is highlighted before the equation is chosen.",
+          "A note warns that the board assumes constant acceleration.",
+        ],
+      };
+    case "M1_L5":
+      return {
+        title: "Gradient-context check",
+        prompt: "Use the twin-graph diagram in your reflection and explain why the same slope can mean speed on one graph and acceleration on another.",
+        image_url: "/lesson-media/m1/m1-l5-gradient.svg",
+        callouts: [
+          "The left graph is distance-time.",
+          "The right graph is speed-time.",
+          "The marked tilt is the same in both places.",
+        ],
+      };
+    case "M1_L6":
+      return {
+        title: "Area-distance check",
+        prompt: "Use the shaded speed-time diagram in your reflection and explain how the rectangle and triangle combine to make total distance and why a different graph shape can still give the same distance.",
+        image_url: "/lesson-media/m1/m1-l6-area.svg",
+        callouts: [
+          "The rectangle shows the base distance contribution.",
+          "The triangle adds the extra distance from changing speed.",
+          "The full shaded area is the total distance for the interval.",
         ],
       };
     default:

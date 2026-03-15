@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
 import MeasurementReportLab from "./MeasurementReportLab";
+import M1SimulationPanels from "./M1SimulationPanels";
 
 type StageName =
   | "diagnostic"
@@ -27,6 +28,10 @@ type Question = {
   prompt: string;
   type?: "multiple_choice" | "short_answer" | "true_false";
   options?: QuestionOption[];
+  image_url?: string;
+  visual_title?: string;
+  visual_caption?: string;
+  visual_callouts?: string[];
 };
 
 type DiagnosticFeedbackItem = {
@@ -220,7 +225,7 @@ type ApiEventPayload = Record<string, unknown>;
 
 function runnerLessonKey(lessonId: string): string {
   const normalized = lessonId.replace(/-/g, "_").toUpperCase();
-  const match = normalized.match(/F\d+_L\d+/);
+  const match = normalized.match(/(?:F\d+|M\d+)_L\d+/);
   return match?.[0] || normalized;
 }
 
@@ -319,6 +324,34 @@ function QuestionBlock({
 }) {
   return (
     <div className="rounded-2xl border bg-white p-5 shadow-sm">
+      {question.image_url ? (
+        <div className="mb-5 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+          <div className="border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(224,242,254,0.9),_rgba(255,255,255,1)_62%)] p-4">
+            {question.visual_title ? (
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-sky-700">{question.visual_title}</p>
+            ) : null}
+            {question.visual_caption ? (
+              <p className="mt-2 text-sm leading-6 text-slate-700">{question.visual_caption}</p>
+            ) : null}
+          </div>
+          <img
+            src={question.image_url}
+            alt={question.visual_title || question.prompt}
+            className="h-auto max-h-[24rem] w-full bg-[radial-gradient(circle_at_top,_rgba(248,250,252,0.98),_rgba(255,255,255,1))] object-contain p-4"
+            loading="lazy"
+          />
+          {question.visual_callouts?.length ? (
+            <div className="grid gap-3 border-t border-slate-200 bg-slate-50/90 p-4 md:grid-cols-3">
+              {question.visual_callouts.map((item) => (
+                <div key={item} className="rounded-2xl border border-sky-100 bg-white/95 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
+                  {item}
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
       <p className="mb-4 font-medium text-slate-900">{question.prompt}</p>
 
       {question.type === "short_answer" ? (
@@ -883,7 +916,7 @@ export default function LessonRunner({
                     <img
                       src={imageUrl}
                       alt={card.title}
-                      className="h-72 w-full bg-slate-50 object-contain p-3 md:h-80"
+                      className="h-80 w-full border border-slate-200 bg-[radial-gradient(circle_at_top,_rgba(241,245,249,0.95),_rgba(255,255,255,1))] object-contain p-4 md:h-[26rem]"
                       loading="lazy"
                     />
                   </div>
@@ -2069,7 +2102,26 @@ export default function LessonRunner({
               </div>
             </div>
           );
-        })() : (
+        })() : simulationLessonKey.startsWith("M1_") ? (
+          <M1SimulationPanels
+            lessonKey={simulationLessonKey}
+            simMetricMeters={simMetricMeters}
+            setSimMetricMeters={setSimMetricMeters}
+            simVectorMagnitude={simVectorMagnitude}
+            setSimVectorMagnitude={setSimVectorMagnitude}
+            simVectorAngle={simVectorAngle}
+            setSimVectorAngle={setSimVectorAngle}
+            simDensityMass={simDensityMass}
+            setSimDensityMass={setSimDensityMass}
+            simDensityVolume={simDensityVolume}
+            setSimDensityVolume={setSimDensityVolume}
+            simFluidDensity={simFluidDensity}
+            setSimFluidDensity={setSimFluidDensity}
+            simBias={simBias}
+            setSimBias={setSimBias}
+            formatSimulationNumber={formatSimulationNumber}
+          />
+        ) : (
           <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">Use the task above to test the idea with a few examples before you continue.</div>
         )}
 
@@ -2293,7 +2345,7 @@ export default function LessonRunner({
                   <img
                     src={payload.visual_check.image_url}
                     alt={payload.visual_check.title}
-                    className="h-72 w-full object-contain p-3"
+                    className="h-80 w-full border border-slate-200 bg-[radial-gradient(circle_at_top,_rgba(241,245,249,0.95),_rgba(255,255,255,1))] object-contain p-4 md:h-[24rem]"
                     loading="lazy"
                   />
                 </div>

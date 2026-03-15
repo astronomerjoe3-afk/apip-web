@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <rect width="900" height="520" rx="28" fill="#f5f3ff"/>
+  <rect x="24" y="24" width="852" height="472" rx="24" fill="#fff" stroke="#c4b5fd"/>
+  <text x="56" y="70" font-family="Arial" font-size="28" font-weight="700" fill="#0f172a">Same slope, different meaning</text>
+  <text x="56" y="102" font-family="Arial" font-size="18" fill="#475569">The axes decide whether the same tilt means speed or acceleration.</text>
+  <rect x="82" y="150" width="320" height="256" rx="22" fill="#faf5ff" stroke="#ddd6fe"/>
+  <rect x="498" y="150" width="320" height="256" rx="22" fill="#faf5ff" stroke="#ddd6fe"/>
+  <line x1="136" y1="370" x2="136" y2="194" stroke="#0f172a" stroke-width="4"/>
+  <line x1="136" y1="370" x2="350" y2="370" stroke="#0f172a" stroke-width="4"/>
+  <line x1="552" y1="370" x2="552" y2="194" stroke="#0f172a" stroke-width="4"/>
+  <line x1="552" y1="370" x2="766" y2="370" stroke="#0f172a" stroke-width="4"/>
+  <polyline points="168,338 314,226" fill="none" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round"/>
+  <polyline points="584,338 730,226" fill="none" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round"/>
+  <text x="154" y="192" font-family="Arial" font-size="20" font-weight="700" fill="#4c1d95">distance-time</text>
+  <text x="572" y="192" font-family="Arial" font-size="20" font-weight="700" fill="#4c1d95">speed-time</text>
+  <text x="198" y="410" font-family="Arial" font-size="18" fill="#334155">slope = 3 m/s</text>
+  <text x="608" y="410" font-family="Arial" font-size="18" fill="#334155">slope = 3 m/s^2</text>
+  <text x="380" y="202" font-family="Arial" font-size="18" font-weight="700" fill="#0f172a">same visual tilt</text>
+  <rect x="90" y="434" width="728" height="34" rx="14" fill="#ede9fe"/>
+  <text x="124" y="456" font-family="Arial" font-size="18" fill="#5b21b6">Name the graph first. Then translate the slope using that graph's axes.</text>
+</svg>
