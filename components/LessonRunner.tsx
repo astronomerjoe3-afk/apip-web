@@ -1116,6 +1116,7 @@ export default function LessonRunner({
             void sendEvent("concept_gate_submitted", {
               from_stage: "concept_gate",
               answers,
+              question_ids: payload.questions.map((question) => question.id),
             })
           }
           disabled={isSubmitting}
@@ -2503,6 +2504,7 @@ export default function LessonRunner({
             void sendEvent("mastery_submitted", {
               from_stage: "mastery",
               answers,
+              question_ids: payload.questions.map((question) => question.id),
             })
           }
           disabled={isSubmitting || !hasAllAnswers}

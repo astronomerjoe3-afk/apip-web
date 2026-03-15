@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { apipGet, apipPost } from "./apipApi";
 
@@ -1333,20 +1333,6 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
     case "F4_L2":
     case "F4_L3":
     case "F4_L4":
-      return [
-        mcItem("F4-L4-X1", "In a series circuit, the current in one component compared with the current in the next component is...", ["the same", "always larger", "always smaller", "zero in the second component"], 0, "One route means one stream rate everywhere in the loop.", "The current is the same in each component of a series circuit."),
-        mcItem("F4-L4-X2", "What happens to total resistance when resistors are added in series?", ["It decreases", "It stays the same", "It adds up", "It becomes zero"], 2, "Series difficulties stack along one route.", "In series, resistances add together."),
-        mcItem("F4-L4-X3", "Why does adding another resistor in series usually make every lamp in the loop dimmer?", ["The battery voltage disappears", "The total resistance rises so the current falls everywhere", "Each resistor creates extra current", "Current stops depending on resistance"], 1, "A one-route network responds as a whole when the route gets harder.", "Adding another resistor in series raises the total resistance, so the current falls everywhere in the loop."),
-        mcItem("F4-L4-X4", "If you add another resistor in series to the same battery, what happens to the current everywhere in the loop?", ["It increases everywhere", "It decreases everywhere", "It stays the same everywhere", "It only changes after the new resistor"], 1, "One-path circuits respond as a whole network.", "Adding resistance in series reduces the current everywhere in the loop."),
-        mcItem("F4-L4-X5", "Two equal resistors are connected in series across a battery. How is the battery voltage shared?", ["equally between the resistors", "all across the first resistor", "all across the second resistor", "voltage is not shared in series"], 0, "Equal components in series share the source push equally.", "Equal resistors in series share the battery voltage equally."),
-        mcItem("F4-L4-X6", "Two identical lamps are connected in series to one battery. Why are they usually dimmer than one lamp on the same battery?", ["They share the supply voltage and the total current is lower", "Potential difference cannot exist in series", "Each lamp creates extra current", "The current doubles through both lamps"], 0, "In series, identical lamps share the push and the one-route current is lower.", "Identical lamps in series share the supply voltage and the total current is lower, so each lamp is dimmer."),
-        mcItem("F4-L4-X7", "What happens to the whole series circuit if one lamp breaks and opens the path?", ["Only the broken lamp turns off", "Current keeps flowing around the rest of the loop", "The whole loop stops because the route is broken", "The battery increases its voltage to keep current flowing"], 2, "A series circuit needs one complete route.", "If one lamp breaks in series, the whole route is broken and current stops everywhere."),
-        mcItem("F4-L4-X8", "Two resistors of different sizes are connected in series. Which resistor has the larger potential difference across it?", ["the larger resistor", "the smaller resistor", "they must always be equal", "you cannot compare voltages in series"], 0, "The harder section of the route takes a bigger share of the source push.", "In series, the larger resistor takes a larger share of the total potential difference."),
-        mcItem("F4-L4-X9", "Which statement best describes a series circuit?", ["There is one complete route, the same current passes every component, and the supply voltage is shared", "There are several routes and current always splits equally", "Each component gets the full supply voltage and creates its own current", "The battery sends different currents to different parts of the same loop"], 0, "Pull the current rule and the voltage-sharing rule together.", "A series circuit has one complete route, the same current through each component, and a shared supply voltage."),
-        mcItem("F4-L4-X10", "A student adds a second identical lamp in series and says only the new lamp should be affected. What is the best correction?", ["Only the second lamp changes because it is new", "The whole loop changes because adding difficulty affects the one route everywhere", "The battery cancels the extra resistance", "Series circuits keep the same brightness no matter how many lamps are added"], 1, "One-route networks respond together, not component by component.", "The whole loop changes because adding difficulty to a one-route circuit affects the current everywhere."),
-        mcItem("F4-L4-X11", "In the Flow-Grid analogy, what does adding another gate to the same single route represent?", ["adding a branch in parallel", "reducing the battery push to zero", "adding resistance in series so the stream slows everywhere", "making charge disappear at the lamp"], 2, "Tie the analogy back to the circuit behavior directly.", "Adding another gate to the same single route represents adding resistance in series, so the stream slows everywhere."),
-        mcItem("F4-L4-X12", "Why does a series circuit with more total resistance draw less current from the same battery?", ["The source push stays the same but the route becomes harder", "The battery sends less charge into the circuit each hour only", "Current can no longer pass through resistors", "Resistance changes into voltage"], 0, "Return to push divided by path difficulty.", "With the same battery push, a harder total route gives a smaller current."),
-      ];
     case "F4_L5":
     case "F4_L6":
       return f4MasteryVariants(code);
@@ -4140,10 +4126,9 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const masteryMeta = asRecord(runnerLesson.mastery_check);
     const state = readState(moduleId, lessonId);
     const pool = masteryItems(resources.lesson);
-    const strengthScore = masteryStrengthScore(runnerLesson, state);
-    const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
-    const selectedPool = masteryPoolForAttempt(moduleId, lessonId, resources.lesson, state.mastery?.nonce || 0);
-    const selected = selectedPool.slice(0, count);
+    const submittedIds = asList(payload.question_ids).map((entry) => text(entry)).filter(Boolean);
+    const selected = submittedIds.length ? submittedIds.map((id) => pool.find((item) => text(asRecord(item).id) === id)).filter(Boolean) : masteryPoolForAttempt(moduleId, lessonId, resources.lesson, state.mastery?.nonce || 0).slice(0, masteryQuestionCount(masteryMeta, pool.length, masteryStrengthScore(runnerLesson, state)));
+    if (submittedIds.length && selected.length !== submittedIds.length) throw new Error("This mastery check is out of date. Start a fresh attempt and try again.");
     if (selected.length === 0) throw new Error("The mastery check is not available right now.");
     const answers = asRecord(payload.answers);
     const feedback = selected.map((item) => {
