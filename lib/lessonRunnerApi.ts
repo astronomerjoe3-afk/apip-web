@@ -458,8 +458,17 @@ function completedStageKeys(runnerLesson: UnknownRecord): string[] {
     .filter(Boolean);
 }
 
-function inferredStageFromServerProgress(lesson: UnknownRecord, runnerLesson: UnknownRecord): string | null {
-  const completed = new Set(completedStageKeys(runnerLesson));
+function availableStageKeys(lesson: UnknownRecord, runnerLesson: UnknownRecord): string[] {
+  const stageRows = asList(runnerLesson.stages)
+    .map(asRecord)
+    .filter((entry) => entry.available !== false)
+    .map((entry) => text(entry.key))
+    .filter(Boolean);
+
+  if (stageRows.length > 0) {
+    return stageRows;
+  }
+
   const orderedStages = [
     ...(firstStageForLesson(lesson) === "diagnostic" ? ["diagnostic"] : []),
     "scaffolded_teaching",
@@ -469,13 +478,42 @@ function inferredStageFromServerProgress(lesson: UnknownRecord, runnerLesson: Un
     "mastery_check",
   ];
 
+  return orderedStages.filter((stage) => {
+    if (stage === "diagnostic") return itemsFrom(lesson, "diagnostic").length > 0;
+    if (stage === "scaffolded_teaching") {
+      const phaseMap = phases(lesson);
+      return Boolean(
+        text(asRecord(phaseMap.analogical_grounding).analogy_text) ||
+        asList(asRecord(phaseMap.analogical_grounding).micro_prompts).length > 0 ||
+        asList(asRecord(phaseMap.concept_reconstruction).prompts).length > 0 ||
+        asList(asRecord(phaseMap.concept_reconstruction).capsules).length > 0
+      );
+    }
+    if (stage === "concept_gate") return conceptGateItems(lesson).length > 0;
+    if (stage === "simulation") return Boolean(text(asRecord(phases(lesson).simulation_inquiry).lab_id));
+    if (stage === "reflection") {
+      const reconstruction = asRecord(phases(lesson).concept_reconstruction);
+      return (
+        asList(reconstruction.prompts).length > 0 ||
+        asList(reconstruction.capsules).map(asRecord).some((capsule) => Boolean(text(capsule.prompt)))
+      );
+    }
+    if (stage === "mastery_check") return itemsFrom(lesson, "transfer").length > 0;
+    return false;
+  });
+}
+
+function inferredStageFromServerProgress(lesson: UnknownRecord, runnerLesson: UnknownRecord): string | null {
+  const completed = new Set(completedStageKeys(runnerLesson));
+  const orderedStages = availableStageKeys(lesson, runnerLesson);
+
   for (const stage of orderedStages) {
     if (!completed.has(stage)) {
       return stage;
     }
   }
 
-  return completed.has("mastery_check") ? "done" : null;
+  return orderedStages.includes("mastery_check") && completed.has("mastery_check") ? "done" : null;
 }
 
 function runnerStageIndex(stage: string): number {
@@ -4330,9 +4368,13 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   const inferredServerStage = inferredStageFromServerProgress(resources.lesson, runnerLesson);
   const inferredStageIndex = runnerStageIndex(inferredServerStage || "");
   const backendStageIndex = runnerStageIndex(backendStage);
-  const serverStage = inferredStageIndex >= 0 && (backendStageIndex < 0 || inferredStageIndex < backendStageIndex)
-    ? inferredServerStage || backendStage
-    : backendStageIndex >= 0 ? backendStage : inferredServerStage || startStage;
+  // The backend owns the lesson state machine; client inference is only a fallback
+  // when the stage is missing or malformed.
+  const serverStage = backendStageIndex >= 0
+    ? backendStage
+    : inferredStageIndex >= 0
+      ? inferredServerStage || startStage
+      : startStage;
   const shouldResetToStart = (
     lessonStatus === "not_started" &&
     serverCompletedStages.length === 0 &&
