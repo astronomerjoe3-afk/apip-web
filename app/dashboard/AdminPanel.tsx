@@ -200,6 +200,11 @@ const ADVANCED_TASKS: CommandCard[] = [
     description: "Use this when you need to publish or refresh the extended Motion module content in Firestore.",
     command: "python scripts/seed_m1_module.py --apply",
   },
+  {
+    title: "Seed the M2 module content",
+    description: "Use this when you need to publish or refresh the Thruster-Deck forces module content in Firestore.",
+    command: "python scripts/seed_m2_module.py --apply",
+  },
 ];
 
 function numberOrNull(value: unknown): number | null {

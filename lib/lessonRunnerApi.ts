@@ -1,6 +1,7 @@
 "use client";
 
 import { apipGet, apipPost } from "./apipApi";
+import { m2ContrastCodes, m2GeneratedConceptGateItems, m2GeneratedDiagnosticItems, m2GeneratedMasteryItems, m2PaddingPrompt, m2QuestionVisualMeta, m2ReflectionVisualCheck, m2ScaffoldCoreBullets, m2ScaffoldFocusExtras, m2ScaffoldMediaCards, m2SimulationCopy } from "./m2LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
 type JsonPrimitive = string | number | boolean | null;
@@ -66,14 +67,14 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6"];
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_");
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_");
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_");
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_");
 }
 
 type QuestionVisualMeta = {
@@ -167,6 +168,8 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
 
 function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined {
   const id = text(item.id).toUpperCase();
+  const m2Visual = m2QuestionVisualMeta(id);
+  if (m2Visual) return m2Visual;
   const match = id.match(/^(M1L[1-6])_([DCT]\d+)$/);
   if (!match) return undefined;
   const lessonKey = match[1];
@@ -711,7 +714,9 @@ function itemsFrom(lesson: UnknownRecord, key: string): UnknownRecord[] {
 }
 
 function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
-  switch (lessonCode(lesson)) {
+  const code = lessonCode(lesson);
+  if (code.startsWith("M2_")) return m2GeneratedDiagnosticItems(code);
+  switch (code) {
     case "F2_L1":
       return [
         mcItem("F2-L1-DG1", "A learner walks 16 m east and then 16 m west. Which quantity is zero at the end?", ["distance", "displacement", "average speed", "time"], 1, "A round trip finishes where it started.", "The displacement is zero because the learner finishes back at the starting point."),
@@ -1154,6 +1159,7 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
+  if (code.startsWith("M2_")) return m2GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
@@ -1256,7 +1262,9 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
 }
 
 function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
-  switch (lessonCode(lesson)) {
+  const code = lessonCode(lesson);
+  if (code.startsWith("M2_")) return m2GeneratedConceptGateItems(code);
+  switch (code) {
     case "F1_L1":
       return [
         mcItem("F1-L1-G1", "Why must a physics measurement include a unit?", ["So the number looks scientific", "So the number can be rounded", "So the reader knows what quantity and scale the number represents", "So calculations become optional"], 2, "A bare number is incomplete in physics.", "A unit tells the reader what quantity and scale the number represents."),
@@ -1761,6 +1769,13 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         return ["F2_L3", "F2_L4", "M1_L1", "M1_L2", "M1_L6"];
       case "M1_L6":
         return ["F2_L4", "F3_L1", "M1_L2", "M1_L4", "M1_L5"];
+      case "M2_L1":
+      case "M2_L2":
+      case "M2_L3":
+      case "M2_L4":
+      case "M2_L5":
+      case "M2_L6":
+        return m2ContrastCodes(code);
       default:
         return [];
     }
@@ -1774,6 +1789,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     if (code === "F4_L5") return "Which option is the clearest match for this parallel circuit lesson?";
     if (code === "F4_L6") return "Which option is the clearest match for this power and safety lesson?";
     if (code.startsWith("M1_")) return index % 2 === 0 ? "Which statement best matches this motion-graph lesson point?" : "Choose the option that keeps the motion representation and its meaning aligned.";
+    if (code.startsWith("M2_")) return m2PaddingPrompt(index);
     if (code.startsWith("F3_")) return "Which option directly answers this lesson point?";
     if (code.startsWith("F2_")) return "Which statement best fits this lesson point?";
     return index % 2 === 0 ? "Which statement best fits this lesson point?" : "Choose the statement that directly answers this lesson point.";
@@ -1878,6 +1894,8 @@ function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number, st
 }
 
 function simulationStageTitle(code: string): string {
+  const m2 = m2SimulationCopy(code);
+  if (m2) return m2.title;
   switch (code) {
     case "F1_L5": return "Density explorer";
     case "F1_L4": return "Significant figures explorer";
@@ -1911,6 +1929,8 @@ function simulationStageTitle(code: string): string {
 }
 
 function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): string {
+  const m2 = m2SimulationCopy(code);
+  if (m2) return m2.instructions;
   switch (code) {
     case "F1_L5": return "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result.";
     case "F1_L4": return "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division.";
@@ -1944,6 +1964,8 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
 }
 
 function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): string {
+  const m2 = m2SimulationCopy(code);
+  if (m2) return m2.taskPrompt;
   switch (code) {
     case "F1_L5": return "Find one setup that floats and one that sinks, then explain which density comparison changed.";
     case "F1_L4": return "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes.";
@@ -1977,6 +1999,8 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
 }
 
 function simulationStageExploreSteps(code: string): string[] {
+  const m2 = m2SimulationCopy(code);
+  if (m2) return m2.exploreSteps;
   switch (code) {
     case "F2_L1":
       return [
@@ -2127,6 +2151,8 @@ function simulationStageExploreSteps(code: string): string[] {
   }
 }
 function simulationStageWatchFor(code: string): string[] {
+  const m2 = m2SimulationCopy(code);
+  if (m2) return m2.watchFor;
   switch (code) {
     case "F2_L1":
       return [
@@ -2277,6 +2303,8 @@ function simulationStageWatchFor(code: string): string[] {
   }
 }
 function simulationStageTryFirst(code: string): string | undefined {
+  const m2 = m2SimulationCopy(code);
+  if (m2) return m2.tryFirst;
   switch (code) {
     case "F2_L1":
       return "Try outward 12 m, return 10 m, and time 4 s. You should get 22 m distance, 2 m east displacement, and 5.5 m/s average speed.";
@@ -2331,6 +2359,8 @@ function simulationStageTryFirst(code: string): string | undefined {
   }
 }
 function simulationStageTakeaway(code: string): string | undefined {
+  const m2 = m2SimulationCopy(code);
+  if (m2) return m2.takeaway;
   switch (code) {
     case "F2_L1":
       return "One journey can cover a long route yet finish close to the start, so distance and displacement are not interchangeable.";
@@ -2395,6 +2425,8 @@ function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Pro
 }
 
 function scaffoldFocusExtras(code: string): string[] {
+  const m2 = m2ScaffoldFocusExtras(code);
+  if (m2.length > 0) return m2;
   switch (code) {
     case "F1_L1":
       return [
@@ -2614,6 +2646,8 @@ function scaffoldFocusExtras(code: string): string[] {
   }
 }
 function scaffoldCoreBullets(code: string): string[] {
+  const m2 = m2ScaffoldCoreBullets(code);
+  if (m2.length > 0) return m2;
   switch (code) {
     case "F1_L1":
       return [
@@ -3470,7 +3504,10 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
 
 
 function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
-  switch (lessonCode(lesson)) {
+  const code = lessonCode(lesson);
+  const m2 = m2ScaffoldMediaCards(code);
+  if (m2.length > 0) return m2;
+  switch (code) {
     case "F1_L1":
       return [
         {
@@ -4147,7 +4184,10 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
 
 
 function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined {
-  switch (lessonCode(lesson)) {
+  const code = lessonCode(lesson);
+  const m2 = m2ReflectionVisualCheck(code);
+  if (m2) return m2;
+  switch (code) {
     case "F2_L3":
       return {
         title: "Distance-time graph check",
@@ -4795,3 +4835,4 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
   );
   clearState(moduleId, lessonId);
 }
+

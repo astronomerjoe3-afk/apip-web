@@ -5,6 +5,7 @@ import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
 import MeasurementReportLab from "./MeasurementReportLab";
 import M1SimulationPanels from "./M1SimulationPanels";
+import M2SimulationPanels from "./M2SimulationPanels";
 
 type StageName =
   | "diagnostic"
@@ -2119,6 +2120,27 @@ export default function LessonRunner({
             setSimFluidDensity={setSimFluidDensity}
             simBias={simBias}
             setSimBias={setSimBias}
+            formatSimulationNumber={formatSimulationNumber}
+          />
+        ) : simulationLessonKey.startsWith("M2_") ? (
+          <M2SimulationPanels
+            lessonKey={simulationLessonKey}
+            simMetricMeters={simMetricMeters}
+            setSimMetricMeters={setSimMetricMeters}
+            simVectorMagnitude={simVectorMagnitude}
+            setSimVectorMagnitude={setSimVectorMagnitude}
+            simVectorAngle={simVectorAngle}
+            setSimVectorAngle={setSimVectorAngle}
+            simDensityMass={simDensityMass}
+            setSimDensityMass={setSimDensityMass}
+            simDensityVolume={simDensityVolume}
+            setSimDensityVolume={setSimDensityVolume}
+            simFluidDensity={simFluidDensity}
+            setSimFluidDensity={setSimFluidDensity}
+            simBias={simBias}
+            setSimBias={setSimBias}
+            simSpread={simSpread}
+            setSimSpread={setSimSpread}
             formatSimulationNumber={formatSimulationNumber}
           />
         ) : (

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="60" y="84" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">Arrow Split rewrites one diagonal push into deck-aligned components.</text>
+  <text x="60" y="124" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">The components are not extra forces. They rebuild the same original arrow when combined again.</text>
+  <rect x="78" y="182" width="1042" height="454" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <line x1="238" y1="548" x2="958" y2="548" stroke="#334155" stroke-width="4"/>
+  <line x1="238" y1="548" x2="238" y2="248" stroke="#334155" stroke-width="4"/>
+  <text x="856" y="590" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">x-axis</text>
+  <text x="170" y="308" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 170 308)">y-axis</text>
+  <line x1="238" y1="548" x2="530" y2="320" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="530,320 492,316 518,350" fill="#F97316"/>
+  <text x="478" y="282" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Original diagonal arrow</text>
+  <line x1="238" y1="548" x2="530" y2="548" stroke="#0EA5E9" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="530,548 500,530 500,566" fill="#0EA5E9"/>
+  <line x1="530" y1="548" x2="530" y2="320" stroke="#22C55E" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="530,320 512,350 548,350" fill="#22C55E"/>
+  <text x="304" y="520" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Horizontal component</text>
+  <text x="556" y="452" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Vertical component</text>
+  <rect x="738" y="290" width="286" height="184" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="776" y="344" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Component rule</text>
+  <text x="776" y="392" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">1. Split by axis</text>
+  <text x="776" y="430" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">2. Combine x with x</text>
+  <text x="776" y="468" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">3. Combine y with y</text>
+</svg>
