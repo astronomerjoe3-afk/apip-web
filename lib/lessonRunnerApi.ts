@@ -16,6 +16,7 @@ type RunnerRequest = {
 type LocalState = {
   profile?: {
     diagnosticScore?: number;
+    conceptGateReady?: boolean;
   };
   diagnostic?: {
     nonce?: number;
@@ -458,6 +459,12 @@ function completedStageKeys(runnerLesson: UnknownRecord): string[] {
     .filter(Boolean);
 }
 
+function stageRowForKey(runnerLesson: UnknownRecord, key: string): UnknownRecord | undefined {
+  return asList(runnerLesson.stages)
+    .map(asRecord)
+    .find((entry) => text(entry.key) === key);
+}
+
 function availableStageKeys(lesson: UnknownRecord, runnerLesson: UnknownRecord): string[] {
   const stageRows = asList(runnerLesson.stages)
     .map(asRecord)
@@ -489,7 +496,7 @@ function availableStageKeys(lesson: UnknownRecord, runnerLesson: UnknownRecord):
         asList(asRecord(phaseMap.concept_reconstruction).capsules).length > 0
       );
     }
-    if (stage === "concept_gate") return conceptGateItems(lesson).length > 0;
+    if (stage === "concept_gate") return conceptGateBank(lesson).length > 0;
     if (stage === "simulation") return Boolean(text(asRecord(phases(lesson).simulation_inquiry).lab_id));
     if (stage === "reflection") {
       const reconstruction = asRecord(phases(lesson).concept_reconstruction);
@@ -535,6 +542,27 @@ function hasProgressBeforeMastery(runnerLesson: UnknownRecord, state: LocalState
     key === "simulation" ||
     key === "reflection"
   ) || Boolean(diagnosticProgress || state.conceptGate?.submitted || state.reflection?.submitted);
+}
+
+function shouldInjectConceptGate(
+  lesson: UnknownRecord,
+  runnerLesson: UnknownRecord,
+  serverStage: string,
+  state: LocalState,
+): boolean {
+  const conceptGateRow = stageRowForKey(runnerLesson, "concept_gate");
+  const serverBackedConceptGate =
+    text(conceptGateRow?.key) === "concept_gate" && conceptGateRow?.available !== false;
+  const localConceptGateReady = Boolean(state.profile?.conceptGateReady);
+  const stageIndex = runnerStageIndex(serverStage);
+
+  return (
+    !serverBackedConceptGate &&
+    !localConceptGateReady &&
+    conceptGateBank(lesson).length > 0 &&
+    stageIndex > runnerStageIndex("concept_gate") &&
+    stageIndex < runnerStageIndex("done")
+  );
 }
 
 function mcItem(id: string, prompt: string, choices: string[], answerIndex: number, hint: string, explanation: string): UnknownRecord {
@@ -4390,7 +4418,12 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
     state = {};
   }
 
-  const effectiveStage = shouldResetToStart ? startStage : serverStage;
+  const syntheticConceptGate = !shouldResetToStart && shouldInjectConceptGate(resources.lesson, runnerLesson, serverStage, state);
+  const effectiveStage = shouldResetToStart
+    ? startStage
+    : syntheticConceptGate
+      ? "concept_gate"
+      : serverStage;
   const stage = (
     effectiveStage === "diagnostic" ||
     effectiveStage === "scaffolded_teaching" ||
@@ -4504,7 +4537,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
           micro_reteach: asRecord(state.conceptGate).microReteach,
         }
       : {
-          instructions: "Answer this quick check before the activity opens.",
+          instructions: "Answer this quick check before you move on.",
           retry_count: retryCount,
           max_retries: CONCEPT_GATE_MAX_RETRIES,
           questions: gateItem ? [question(asRecord(gateItem), conceptSeed)] : [],
@@ -4710,7 +4743,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     });
     const state = readState(moduleId, lessonId);
     writeState(moduleId, lessonId, {
-      profile: state.profile,
+      profile: {
+        ...(state.profile || {}),
+        conceptGateReady: true,
+      },
       diagnostic: state.diagnostic,
       reflection: state.reflection,
       mastery: state.mastery,

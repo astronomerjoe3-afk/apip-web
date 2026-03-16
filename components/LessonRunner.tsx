@@ -1103,7 +1103,7 @@ export default function LessonRunner({
                 }
                 disabled={isSubmitting}
               >
-                Continue to the activity
+                Continue to the next step
               </PrimaryButton>
             ) : (
               <SecondaryButton
