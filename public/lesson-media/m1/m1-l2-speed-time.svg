@@ -1,52 +1,70 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
   <style>
-    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
-    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .title { fill: #0f172a; font: 700 32px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
     .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
     .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
     .axis { fill: #64748b; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+    .note { font: 700 18px 'Segoe UI', Arial, sans-serif; }
   </style>
   <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
   <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
-  <text x="74" y="88" class="title">Speed-time graph: level tells speed now, slope tells how speed changes.</text>
-  <text x="74" y="126" class="subtitle">Module 1 separates graph height from graph slope so students can track speed and acceleration without collapsing them into one idea.</text>
+  <text x="74" y="88" class="title">Speed-time graph: height gives speed now, slope gives acceleration.</text>
+  <text x="74" y="124" class="subtitle">Module 1 separates the value shown on the graph from the rate at which that value changes.</text>
 
-  <rect x="74" y="176" width="350" height="430" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3" />
-  <text x="108" y="224" class="panel-title">Reading rules</text>
-  <rect x="108" y="264" width="284" height="88" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
-  <text x="132" y="302" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Graph height</text>
-  <text x="132" y="332" class="body">What is the speed at this instant?</text>
-  <rect x="108" y="372" width="284" height="88" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
-  <text x="132" y="410" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Graph slope</text>
-  <text x="132" y="440" class="body">How quickly is the speed changing?</text>
-  <rect x="108" y="480" width="284" height="88" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
-  <text x="132" y="518" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Flat above zero</text>
-  <text x="132" y="548" class="body">Constant speed, not rest.</text>
+  <rect x="74" y="170" width="350" height="446" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3" />
+  <text x="108" y="218" class="panel-title">Reading rules</text>
+  <rect x="108" y="256" width="284" height="92" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
+  <text x="132" y="296" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Graph height</text>
+  <text x="132" y="326" class="body">What is the speed at this instant?</text>
+  <rect x="108" y="366" width="284" height="92" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
+  <text x="132" y="406" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Graph slope</text>
+  <text x="132" y="436" class="body">How quickly is the speed changing?</text>
+  <rect x="108" y="476" width="284" height="110" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
+  <text x="132" y="516" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Flat above zero</text>
+  <text x="132" y="546" class="body">Constant speed.</text>
+  <text x="132" y="574" class="body">The object is moving, not resting.</text>
 
-  <rect x="460" y="176" width="666" height="430" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
-  <text x="498" y="224" class="panel-title">Pace log</text>
-  <line x1="548" y1="548" x2="1046" y2="548" stroke="#334155" stroke-width="4" />
-  <line x1="548" y1="548" x2="548" y2="282" stroke="#334155" stroke-width="4" />
+  <rect x="460" y="170" width="666" height="446" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
+  <text x="498" y="218" class="panel-title">Speed-time graph</text>
+
+  <line x1="560" y1="548" x2="1040" y2="548" stroke="#334155" stroke-width="4" />
+  <line x1="560" y1="548" x2="560" y2="264" stroke="#334155" stroke-width="4" />
   <g stroke="#CBD5E1" stroke-width="2">
-    <line x1="632" y1="548" x2="632" y2="282" />
-    <line x1="716" y1="548" x2="716" y2="282" />
-    <line x1="800" y1="548" x2="800" y2="282" />
-    <line x1="884" y1="548" x2="884" y2="282" />
-    <line x1="968" y1="548" x2="968" y2="282" />
-    <line x1="548" y1="484" x2="1046" y2="484" />
-    <line x1="548" y1="420" x2="1046" y2="420" />
-    <line x1="548" y1="356" x2="1046" y2="356" />
+    <line x1="640" y1="548" x2="640" y2="264" />
+    <line x1="720" y1="548" x2="720" y2="264" />
+    <line x1="800" y1="548" x2="800" y2="264" />
+    <line x1="880" y1="548" x2="880" y2="264" />
+    <line x1="960" y1="548" x2="960" y2="264" />
+    <line x1="560" y1="484" x2="1040" y2="484" />
+    <line x1="560" y1="420" x2="1040" y2="420" />
+    <line x1="560" y1="356" x2="1040" y2="356" />
   </g>
-  <polyline points="590,484 716,484" fill="none" stroke="#0284C7" stroke-width="10" stroke-linecap="round" />
-  <polyline points="716,484 874,356" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
-  <polyline points="874,356 1012,438" fill="none" stroke="#DC2626" stroke-width="10" stroke-linecap="round" />
-  <circle cx="796" cy="420" r="9" fill="#F59E0B" />
-  <text x="804" y="410" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Height here = current speed</text>
-  <text x="754" y="320" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Rising slope = positive acceleration</text>
-  <text x="892" y="462" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Falling slope = negative acceleration</text>
-  <text x="742" y="578" class="axis">time, t (s)</text>
-  <text x="510" y="432" class="axis" transform="rotate(-90 510 432)">speed, v (m/s)</text>
 
-  <rect x="74" y="626" width="1052" height="40" rx="20" fill="#E0F2FE" />
-  <text x="600" y="653" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Ask two different questions: what is the speed now, and how is the speed changing?</text>
+  <polyline points="600,484 720,484" fill="none" stroke="#0284C7" stroke-width="10" stroke-linecap="round" />
+  <polyline points="720,484 874,356" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
+  <polyline points="874,356 1002,438" fill="none" stroke="#DC2626" stroke-width="10" stroke-linecap="round" />
+  <circle cx="796" cy="420" r="9" fill="#F59E0B" />
+
+  <rect x="726" y="274" width="272" height="66" rx="18" fill="#DBEAFE" />
+  <text x="742" y="301" class="note" fill="#1D4ED8">Rising slope</text>
+  <text x="742" y="326" class="body" fill="#1E3A8A">positive acceleration</text>
+
+  <rect x="890" y="448" width="188" height="70" rx="18" fill="#FEE2E2" />
+  <text x="906" y="476" class="note" fill="#B91C1C">Falling slope</text>
+  <text x="906" y="502" class="body" fill="#7F1D1D">negative acceleration</text>
+
+  <rect x="620" y="566" width="300" height="72" rx="20" fill="#E0F2FE" />
+  <text x="642" y="594" class="note" fill="#0369A1">Flat line above zero</text>
+  <text x="642" y="620" class="body" fill="#075985">constant speed, still moving</text>
+
+  <rect x="808" y="388" width="246" height="62" rx="18" fill="#FEF3C7" />
+  <text x="824" y="414" class="note" fill="#B45309">Point height</text>
+  <text x="824" y="438" class="body" fill="#92400E">speed at that instant</text>
+
+  <text x="742" y="584" class="axis">time, t (s)</text>
+  <text x="528" y="430" class="axis" transform="rotate(-90 528 430)">speed, v (m/s)</text>
+
+  <rect x="74" y="634" width="1052" height="34" rx="17" fill="#E0F2FE" />
+  <text x="600" y="656" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">Keep two questions separate: what is the speed now, and how fast is that speed changing?</text>
 </svg>

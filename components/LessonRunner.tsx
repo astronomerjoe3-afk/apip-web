@@ -1059,7 +1059,11 @@ export default function LessonRunner({
 
   const renderConceptGate = () => {
     const payload = runner.stage_payload as ConceptGateStagePayload;
-    const activeQuestion = payload.questions[0]; const hasAnswer = activeQuestion ? Boolean(answers[activeQuestion.id]?.trim()) : false;
+    const activeQuestion = payload.questions[0];
+    const activeAnswer = activeQuestion
+      ? (answersRef.current[activeQuestion.id] ?? answers[activeQuestion.id] ?? "")
+      : "";
+    const hasAnswer = Boolean(activeAnswer.trim());
 
     if (payload.submitted && payload.feedback?.length) {
       return (
@@ -1162,11 +1166,11 @@ export default function LessonRunner({
           onClick={() =>
             void sendEvent("concept_gate_submitted", {
               from_stage: "concept_gate",
-              answers: answersRef.current,
+              answers: activeQuestion ? { [activeQuestion.id]: activeAnswer } : answersRef.current,
               question_ids: payload.questions.map((question) => question.id),
             })
           }
-          disabled={isSubmitting}
+          disabled={isSubmitting || !hasAnswer}
         >
           Check this idea
         </PrimaryButton>

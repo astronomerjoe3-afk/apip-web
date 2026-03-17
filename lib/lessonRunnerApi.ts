@@ -5274,9 +5274,24 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     const state = readState(moduleId, lessonId);
     const retryCount = state.conceptGate?.retryCount || 0;
     const conceptNonce = state.conceptGate?.nonce || freshAttemptSeed();
-    const conceptSeed = "concept:" + String(conceptNonce) + ":" + String(retryCount);
-    const item = conceptGateItemForAttempt(moduleId, lessonId, resources.lesson, conceptNonce, retryCount);
-    const answerValue = text(asRecord(payload.answers)[text(asRecord(item).id)]);
+    const conceptPool = conceptGatePoolForAttempt(moduleId, lessonId, resources.lesson, conceptNonce);
+    let item = conceptGateItemForAttempt(moduleId, lessonId, resources.lesson, conceptNonce, retryCount);
+    const submittedAnswers = asRecord(payload.answers);
+    const submittedQuestionIds = asList(payload.question_ids).map((entry) => text(entry)).filter(Boolean);
+    const answeredQuestionId = submittedQuestionIds.find((id) => text(submittedAnswers[id]).trim())
+      || Object.keys(submittedAnswers).find((id) => text(submittedAnswers[id]).trim())
+      || submittedQuestionIds[0]
+      || Object.keys(submittedAnswers)[0]
+      || "";
+
+    if (answeredQuestionId && (!item || text(asRecord(item).id) !== answeredQuestionId)) {
+      const matchedItem = conceptPool.find((entry) => text(asRecord(entry).id) === answeredQuestionId);
+      if (matchedItem) {
+        item = asRecord(matchedItem);
+      }
+    }
+
+    const answerValue = text(submittedAnswers[text(asRecord(item).id)] || submittedAnswers[answeredQuestionId]).trim();
     if (!item || !answerValue) throw new Error("Choose an answer before continuing.");
     const graded = grade(asRecord(item), answerValue, title);
     const capsules = asList(asRecord(phases(resources.lesson).concept_reconstruction).capsules).map(asRecord);
