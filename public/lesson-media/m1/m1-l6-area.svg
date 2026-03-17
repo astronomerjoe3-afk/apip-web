@@ -9,7 +9,8 @@
   <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
   <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
   <text x="74" y="88" class="title">Area under a speed-time graph builds total distance.</text>
-  <text x="74" y="126" class="subtitle">Each strip is speed x time for a small part of the journey, so the whole shaded region is accumulated distance rather than just a geometric shape.</text>
+  <text x="74" y="122" class="subtitle">Each strip is speed x time for a small part of the journey.</text>
+  <text x="74" y="150" class="subtitle">So the whole shaded region is accumulated distance, not just a geometric shape.</text>
 
   <rect x="74" y="176" width="640" height="430" rx="28" fill="#FFFBEB" stroke="#FCD34D" stroke-width="3" />
   <text x="110" y="224" class="panel-title">Split the area</text>
@@ -27,8 +28,10 @@
   <text x="786" y="224" class="panel-title">Same-area comparison</text>
   <rect x="804" y="314" width="102" height="140" fill="#60A5FA" fill-opacity="0.88" />
   <polygon points="954,454 1042,454 1042,328" fill="#34D399" fill-opacity="0.88" />
-  <text x="786" y="504" class="body">A taller narrow shape and a lower wider shape can still give the same distance if the total area matches.</text>
-  <text x="786" y="546" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Shape can change while total distance stays the same.</text>
+  <text x="786" y="504" class="body">A taller narrow shape and a lower wider shape</text>
+  <text x="786" y="532" class="body">can still give the same distance if the total area matches.</text>
+  <text x="786" y="570" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Shape can change while</text>
+  <text x="786" y="594" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">total distance stays the same.</text>
 
   <rect x="74" y="626" width="1052" height="40" rx="20" fill="#DBEAFE" />
   <text x="600" y="653" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Area works because speed x time gives distance.</text>

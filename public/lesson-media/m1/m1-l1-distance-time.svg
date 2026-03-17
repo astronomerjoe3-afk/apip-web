@@ -12,7 +12,8 @@
   <rect x="36" y="28" width="1128" height="664" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
 
   <text x="72" y="88" class="title">Distance-time graph: record the journey, do not draw the road.</text>
-  <text x="72" y="126" class="subtitle">Module 1 treats the graph as a representation system: the lane is the motion world, while the mission log records the distance at each clock beat.</text>
+  <text x="72" y="122" class="subtitle">Module 1 treats the graph as a representation system.</text>
+  <text x="72" y="150" class="subtitle">The lane is the motion world, while the mission log records distance at each clock beat.</text>
 
   <rect x="72" y="170" width="402" height="462" rx="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="3" />
   <text x="104" y="218" class="panel-title">Quest lane</text>
@@ -34,7 +35,8 @@
 
   <rect x="510" y="170" width="618" height="462" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
   <text x="546" y="218" class="panel-title">Mission log</text>
-  <text x="546" y="252" class="body">The vertical axis records distance from the start, while the horizontal axis records elapsed time.</text>
+  <text x="546" y="252" class="body">The vertical axis records distance from the start.</text>
+  <text x="546" y="280" class="body">The horizontal axis records elapsed time.</text>
   <line x1="626" y1="558" x2="1050" y2="558" stroke="#334155" stroke-width="4" />
   <line x1="626" y1="558" x2="626" y2="300" stroke="#334155" stroke-width="4" />
   <g stroke="#CBD5E1" stroke-width="2">
@@ -64,12 +66,16 @@
   <circle cx="710" cy="478" r="8" fill="#F59E0B" />
   <circle cx="794" cy="478" r="8" fill="#F59E0B" />
   <circle cx="962" cy="350" r="8" fill="#2563EB" />
-  <text x="684" y="322" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Slope = speed on that segment</text>
-  <text x="796" y="454" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Flat = stopped</text>
-  <text x="822" y="332" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Same final point can hide a different run story</text>
+  <rect x="668" y="304" width="272" height="54" rx="18" fill="#DBEAFE" />
+  <text x="686" y="337" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Slope = speed on that segment</text>
+  <rect x="786" y="438" width="196" height="48" rx="16" fill="#FEF3C7" />
+  <text x="808" y="469" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Flat = stopped</text>
+  <rect x="786" y="294" width="288" height="70" rx="20" fill="#DCFCE7" />
+  <text x="806" y="322" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Same final point can hide</text>
+  <text x="806" y="346" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">a different run story</text>
   <text x="792" y="616" class="axis">time, t (s)</text>
   <text x="552" y="446" class="axis" transform="rotate(-90 552 446)">distance from start, s (m)</text>
 
-  <rect x="72" y="652" width="1056" height="30" rx="15" fill="#DBEAFE" />
-  <text x="600" y="673" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Height = distance by that time | slope = speed | flat section = stopped</text>
+  <rect x="72" y="648" width="1056" height="36" rx="18" fill="#DBEAFE" />
+  <text x="600" y="671" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Height = distance by that time | slope = speed | flat section = stopped</text>
 </svg>

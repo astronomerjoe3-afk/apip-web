@@ -9,7 +9,8 @@
   <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
   <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
   <text x="74" y="88" class="title">Same finish, different motion history.</text>
-  <text x="74" y="126" class="subtitle">Distance-time graphs can share the same ending point without describing the same speeds, pauses, or segment story.</text>
+  <text x="74" y="122" class="subtitle">Distance-time graphs can share the same ending point.</text>
+  <text x="74" y="150" class="subtitle">That does not mean the speeds, pauses, or segment story were the same.</text>
 
   <rect x="74" y="176" width="496" height="430" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
   <rect x="630" y="176" width="496" height="430" rx="28" fill="#ECFDF5" stroke="#86EFAC" stroke-width="3" />
@@ -57,6 +58,6 @@
   <text x="122" y="450" class="axis" transform="rotate(-90 122 450)">distance, s (m)</text>
   <text x="678" y="450" class="axis" transform="rotate(-90 678 450)">distance, s (m)</text>
 
-  <rect x="74" y="626" width="1052" height="40" rx="20" fill="#DBEAFE" />
-  <text x="600" y="653" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Equal final distance and equal final time do not force equal speed at every moment.</text>
+  <rect x="74" y="626" width="1052" height="36" rx="18" fill="#DBEAFE" />
+  <text x="600" y="649" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Equal final distance and equal final time do not force equal speed at every moment.</text>
 </svg>

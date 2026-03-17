@@ -50,9 +50,9 @@
   <text x="742" y="301" class="note" fill="#1D4ED8">Rising slope</text>
   <text x="742" y="326" class="body" fill="#1E3A8A">positive acceleration</text>
 
-  <rect x="890" y="448" width="188" height="70" rx="18" fill="#FEE2E2" />
-  <text x="906" y="476" class="note" fill="#B91C1C">Falling slope</text>
-  <text x="906" y="502" class="body" fill="#7F1D1D">negative acceleration</text>
+  <rect x="850" y="448" width="240" height="70" rx="18" fill="#FEE2E2" />
+  <text x="870" y="476" class="note" fill="#B91C1C">Falling slope</text>
+  <text x="870" y="502" class="body" fill="#7F1D1D">negative acceleration</text>
 
   <rect x="620" y="566" width="300" height="72" rx="20" fill="#E0F2FE" />
   <text x="642" y="594" class="note" fill="#0369A1">Flat line above zero</text>
