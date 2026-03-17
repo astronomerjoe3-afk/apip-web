@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
+import MeasurementInstrumentTour from "./MeasurementInstrumentTour";
 import MeasurementReportLab from "./MeasurementReportLab";
 import M1SimulationPanels from "./M1SimulationPanels";
 import M2SimulationPanels from "./M2SimulationPanels";
@@ -897,6 +898,7 @@ export default function LessonRunner({
             {payload.media_cards.map((card, index) => {
               const imageUrl = card.image_url || "";
               const shouldShowImage = imageUrl ? !seenMediaImageUrls.has(imageUrl) : false;
+              const isMeasurementInstrumentTour = card.interaction_key === "measurement_instrument_tour";
               const isMeasurementReportLab = card.interaction_key === "measurement_report_lab" || card.title === "Picture a measurement report";
               if (shouldShowImage) seenMediaImageUrls.add(imageUrl);
 
@@ -908,7 +910,11 @@ export default function LessonRunner({
                 <h4 className="mt-4 text-lg font-semibold text-slate-900">{card.title}</h4>
                 <p className="mt-2 text-slate-700">{card.caption}</p>
 
-                {isMeasurementReportLab ? (
+                {isMeasurementInstrumentTour ? (
+                  <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
+                    <MeasurementInstrumentTour />
+                  </div>
+                ) : isMeasurementReportLab ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <MeasurementReportLab />
                   </div>

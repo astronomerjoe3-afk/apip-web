@@ -3815,11 +3815,11 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
     case "F1_L3":
       return [
         {
-          kind: "visual",
-          title: "Compare the same object with three tools",
-          caption: "The object does not change. What changes is the tool resolution, which controls how many digits and how much uncertainty you can justify.",
-          image_url: "/lesson-media/f1/f1-l3-measurement-tools.svg",
-          highlights: ["The same object should lead to different justified detail, not a different object", "Smaller divisions support more justified digits and smaller uncertainty", "In the next measurement lab, compare what each tool lets you claim honestly"],
+          kind: "interactive",
+          title: "Manipulate one instrument at a time",
+          caption: "Use the clean instrument tour to switch between ruler, caliper, and micrometer screw gauge without packing all three into one crowded picture.",
+          interaction_key: "measurement_instrument_tour",
+          highlights: ["Keep the same object while you swap tools", "See how smaller divisions justify more digits and smaller uncertainty", "Use the explainer steps like a mini walkthrough for each instrument"],
         },
         {
           kind: "visual",
