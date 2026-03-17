@@ -1,23 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
   <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
-  <text x="60" y="84" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">Drive Arrows combine into one Master Arrow.</text>
-  <text x="60" y="124" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Zero Master Arrow can describe rest or steady cruise. The force story and the motion story are different questions.</text>
-  <rect x="56" y="174" width="512" height="474" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
-  <text x="92" y="226" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Balanced Drive Arrows</text>
-  <line x1="160" y1="360" x2="330" y2="360" stroke="#0EA5E9" stroke-width="18" stroke-linecap="round"/>
-  <polygon points="330,360 294,338 294,382" fill="#0EA5E9"/>
-  <line x1="462" y1="360" x2="292" y2="360" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
-  <polygon points="292,360 328,338 328,382" fill="#F97316"/>
-  <text x="142" y="324" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">8 N forward</text>
-  <text x="372" y="324" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">8 N backward</text>
-  <rect x="158" y="448" width="304" height="74" rx="20" fill="#DBEAFE"/>
-  <text x="196" y="492" fill="#1E3A8A" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Master Arrow = 0 N</text>
-  <text x="126" y="568" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Forces are acting, but they cancel.</text>
-  <rect x="630" y="174" width="512" height="474" rx="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="4"/>
-  <text x="666" y="226" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">No Drive Arrows</text>
-  <rect x="760" y="312" width="256" height="88" rx="24" fill="#DCFCE7" stroke="#22C55E" stroke-width="4" stroke-dasharray="14 10"/>
-  <text x="812" y="364" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">No arrows now</text>
-  <rect x="732" y="448" width="312" height="74" rx="20" fill="#DCFCE7"/>
-  <text x="772" y="492" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Master Arrow = 0 N</text>
-  <text x="694" y="568" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">This craft can still keep cruising if it was already moving.</text>
+  <text x="64" y="86" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Master Arrow is the system summary, not the loudest single force.</text>
+  <text x="64" y="128" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Module 2 upgrades the F2 force idea by treating many force entries as one net steering instruction.</text>
+
+  <rect x="60" y="178" width="500" height="468" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <text x="94" y="228" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Balanced forces still present</text>
+  <line x1="146" y1="348" x2="314" y2="348" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="314,348 282,330 282,366" fill="#F97316"/>
+  <line x1="474" y1="348" x2="306" y2="348" stroke="#2563EB" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="306,348 338,330 338,366" fill="#2563EB"/>
+  <text x="132" y="308" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">8 N forward</text>
+  <text x="344" y="308" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">8 N backward</text>
+  <rect x="180" y="436" width="258" height="72" rx="22" fill="#DBEAFE"/>
+  <text x="214" y="480" fill="#1E3A8A" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Master Arrow = 0 N</text>
+  <text x="96" y="556" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">The forces cancel, so the acceleration is zero.</text>
+  <text x="96" y="594" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">That does not mean the force story is empty.</text>
+
+  <rect x="640" y="178" width="500" height="468" rx="30" fill="#F0FDF4" stroke="#86EFAC" stroke-width="4"/>
+  <text x="676" y="228" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Zero arrows during steady cruise</text>
+  <rect x="822" y="324" width="136" height="48" rx="20" fill="#0F172A"/>
+  <rect x="848" y="308" width="82" height="20" rx="10" fill="#38BDF8"/>
+  <rect x="752" y="438" width="278" height="72" rx="22" fill="#DCFCE7"/>
+  <text x="786" y="482" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Master Arrow = 0 N</text>
+  <text x="700" y="556" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">No arrows act now, yet the craft can keep cruising.</text>
+  <text x="700" y="594" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Zero Master Arrow means no motion change.</text>
 </svg>

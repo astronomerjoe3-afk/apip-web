@@ -1025,6 +1025,165 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ]);
   }
 
+  const isM2ZeroMasterArrowPrompt =
+    promptKey === "in a few words what does zero master arrow mean";
+
+  if (isM2ZeroMasterArrowPrompt) {
+    return (
+      includesAnyPhrase(candidate, [
+        "zero acceleration",
+        "no acceleration",
+        "no motion change",
+        "motion stays unchanged",
+        "velocity stays constant",
+        "constant velocity",
+      ])
+    );
+  }
+
+  const isM2MasterArrowDecidesPrompt =
+    promptKey === "in a few words what does the master arrow decide";
+
+  if (isM2MasterArrowDecidesPrompt) {
+    return includesAnyPhrase(candidate, [
+      "acceleration",
+      "motion change",
+      "how motion changes",
+      "which way motion changes",
+      "change in motion",
+    ]);
+  }
+
+  const isM2ThirdLawAccelerationPrompt =
+    promptKey === "in a few words why can equal third law forces still produce different accelerations";
+
+  if (isM2ThirdLawAccelerationPrompt) {
+    return (
+      includesAnyPhrase(candidate, ["mass", "masses"]) &&
+      includesAnyPhrase(candidate, ["different", "differ", "not the same"])
+    );
+  }
+
+  const isM2CarryScoreSetupPrompt = promptKey === "what two quantities set carry score";
+
+  if (isM2CarryScoreSetupPrompt) {
+    return (
+      includesAnyPhrase(candidate, ["mass", "load"]) &&
+      includesAnyPhrase(candidate, ["velocity", "speed"])
+    );
+  }
+
+  const isM2ConservedPrompt =
+    promptKey === "in a few words what is conserved in a closed dock exchange";
+
+  if (isM2ConservedPrompt) {
+    return (
+      includesAnyPhrase(candidate, ["momentum", "carry score"]) &&
+      includesAnyPhrase(candidate, ["total", "system", "whole system"])
+    );
+  }
+
+  const isM2ForceLanguagePrompt =
+    promptKey === "why is force language alone not enough to solve the shared final speed";
+
+  if (isM2ForceLanguagePrompt) {
+    return (
+      includesAnyPhrase(candidate, ["momentum", "carry score"]) &&
+      includesAnyPhrase(candidate, ["conserved", "conservation", "system total", "total"])
+    );
+  }
+
+  const isM2SpinPullSetupPrompt =
+    promptKey === "what two things decide spin pull";
+
+  if (isM2SpinPullSetupPrompt) {
+    return (
+      includesAnyPhrase(candidate, ["force", "push"]) &&
+      includesAnyPhrase(candidate, ["reach", "distance", "moment arm"])
+    );
+  }
+
+  const isM2PerpendicularReachPrompt =
+    promptKey === "in a few words what does perpendicular reach mean";
+
+  if (isM2PerpendicularReachPrompt) {
+    return (
+      includesAnyPhrase(candidate, ["distance", "reach", "moment arm"]) &&
+      includesAnyPhrase(candidate, ["pivot", "line of action", "force line"])
+    );
+  }
+
+  const isM2TippingPrompt =
+    promptKey === "in a few words what decides whether tipping begins";
+
+  if (isM2TippingPrompt) {
+    return (
+      includesAnyPhrase(candidate, ["line", "weight line", "balance core line", "center of mass line", "centre of mass line"]) &&
+      includesAnyPhrase(candidate, ["edge", "outside", "base", "support", "footprint zone"])
+    );
+  }
+
+  const isM2HeavyStablePrompt =
+    promptKey === "why is heavier means more stable a weak rule";
+
+  if (isM2HeavyStablePrompt) {
+    return (
+      includesAnyPhrase(candidate, ["center of mass", "centre of mass", "balance core", "geometry", "support width", "base"]) ||
+      matchesPhraseGroups(candidate, [
+        ["weight", "mass"],
+        ["not enough", "not alone", "alone does not", "does not decide"],
+      ])
+    );
+  }
+
+  const isM2FootprintPrompt =
+    promptKey === "what does the footprint zone stand for";
+
+  if (isM2FootprintPrompt) {
+    return includesAnyPhrase(candidate, [
+      "base of support",
+      "support area",
+      "support region",
+      "base",
+    ]);
+  }
+
+  const isM2ComponentsPrompt =
+    promptKey === "in a few words what are components";
+
+  if (isM2ComponentsPrompt) {
+    return (
+      includesAnyPhrase(candidate, ["one force", "one vector", "same force", "original vector"]) &&
+      includesAnyPhrase(candidate, ["axes", "axis", "rewritten", "resolved", "parts"])
+    );
+  }
+
+  const isM2AxisByAxisPrompt =
+    promptKey === "why combine components axis by axis";
+
+  if (isM2AxisByAxisPrompt) {
+    return includesAnyPhrase(candidate, [
+      "organize the vector sum",
+      "keep directions clear",
+      "one direction at a time",
+      "bookkeeping",
+      "combine one axis at a time",
+    ]);
+  }
+
+  const isM2ArrowSplitSamePrompt =
+    promptKey === "what stays the same after arrow split";
+
+  if (isM2ArrowSplitSamePrompt) {
+    return includesAnyPhrase(candidate, [
+      "original vector",
+      "same resultant",
+      "same overall force",
+      "same diagonal force",
+      "same force",
+    ]);
+  }
+
   const isLessonSixErrorPrompt =
     itemId === "F1L6_D2" ||
     itemId === "F1-L6-D2" ||
