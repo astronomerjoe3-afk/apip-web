@@ -1413,6 +1413,9 @@ function declaredAssessmentPoolMin(lesson: UnknownRecord, key: string): number {
 }
 
 function prefersLessonOwnedDiagnosticBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "diagnostic").length): boolean {
+  // M1 diagnostics cap at 5 questions, so a 5-item authored bank is already sufficient
+  // and should win over near-duplicate supplemental padding.
+  if (lessonCode(lesson).startsWith("M1_") && authoredCount >= 5) return true;
   const declaredMin = declaredAssessmentPoolMin(lesson, "diagnostic_pool_min");
   return declaredMin > 0 && authoredCount >= declaredMin;
 }
