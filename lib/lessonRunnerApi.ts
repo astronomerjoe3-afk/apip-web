@@ -912,10 +912,13 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
 }
 
 function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
+  const authored = itemsFrom(lesson, "diagnostic").map(asRecord);
+  const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authored.length);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
-  return [...itemsFrom(lesson, "diagnostic").map(asRecord), ...generatedDiagnosticItems(lesson).map(asRecord)].filter((item) => {
+  const bank = preferAuthored ? [...authored] : [...authored, ...generatedDiagnosticItems(lesson).map(asRecord)];
+  return bank.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
     const sourceKey = masterySourceKey(record);
@@ -936,13 +939,41 @@ function conceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   );
 }
 
+function assessmentBankTargets(lesson: UnknownRecord): UnknownRecord {
+  return asRecord(asRecord(lesson.authoring_contract).assessment_bank_targets);
+}
+
+function declaredAssessmentPoolMin(lesson: UnknownRecord, key: string): number {
+  return Math.max(numberValue(assessmentBankTargets(lesson)[key], 0), 0);
+}
+
+function prefersLessonOwnedDiagnosticBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "diagnostic").length): boolean {
+  const declaredMin = declaredAssessmentPoolMin(lesson, "diagnostic_pool_min");
+  return declaredMin > 0 && authoredCount >= declaredMin;
+}
+
+function prefersLessonOwnedConceptGateBank(lesson: UnknownRecord, authoredCount = conceptGateItems(lesson).length): boolean {
+  const declaredMin = declaredAssessmentPoolMin(lesson, "concept_gate_pool_min");
+  return declaredMin > 0 && authoredCount >= declaredMin;
+}
+
+function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "transfer").filter((item) => hasUsableMasteryAnswer(asRecord(item))).length): boolean {
+  const declaredMin = declaredAssessmentPoolMin(lesson, "mastery_pool_min");
+  return declaredMin > 0 && authoredCount >= declaredMin;
+}
+
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
-  const baseItems = [
-    ...conceptGateItems(lesson),
-    ...generatedConceptGateItems(lesson),
-    ...itemsFrom(lesson, "transfer").map(asRecord).filter((item) => hasUsableMasteryAnswer(item)),
-  ];
-  const fallbackItems = baseItems.length >= 3 ? [] : generatedMasteryItems(lesson).slice(0, 4);
+  const authoredConceptItems = conceptGateItems(lesson);
+  const authoredMasteryItems = itemsFrom(lesson, "transfer").map(asRecord).filter((item) => hasUsableMasteryAnswer(item));
+  const preferAuthored = prefersLessonOwnedConceptGateBank(lesson, authoredConceptItems.length);
+  const baseItems = preferAuthored
+    ? [...authoredConceptItems]
+    : [
+        ...authoredConceptItems,
+        ...generatedConceptGateItems(lesson),
+        ...authoredMasteryItems,
+      ];
+  const fallbackItems = preferAuthored || baseItems.length >= 3 ? [] : generatedMasteryItems(lesson).slice(0, 4);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -1905,12 +1936,20 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const diagnosticRecords = diagnosticItems(lesson).map(asRecord);
   const diagnosticSourceKeys = new Set(diagnosticRecords.map((item) => masterySourceKey(item)).filter(Boolean));
   const generated = generatedMasteryItems(lesson);
+  const authoredTransfer = itemsFrom(lesson, "transfer")
+    .map(asRecord)
+    .filter((item) => hasUsableMasteryAnswer(item));
+  const preferAuthored = prefersLessonOwnedMasteryBank(lesson, authoredTransfer.length);
   const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
-  const baseItems = generated.length >= MASTERY_DEFAULT_MAX
-    ? [...generated]
-    : generated.length > 0 ? [...generated, ...fallback] : [...fallback];
-  const ordered = baseItems.length >= MASTERY_DEFAULT_MAX ? baseItems : [...baseItems, ...supplementalMasteryItems(lesson)];
+  const baseItems = preferAuthored
+    ? [...authoredTransfer]
+    : generated.length >= MASTERY_DEFAULT_MAX
+      ? [...generated]
+      : generated.length > 0 ? [...generated, ...fallback] : [...fallback];
+  const ordered = preferAuthored || baseItems.length >= MASTERY_DEFAULT_MAX
+    ? baseItems
+    : [...baseItems, ...supplementalMasteryItems(lesson)];
   return ordered.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
@@ -1963,6 +2002,9 @@ function simulationStageTitle(code: string): string {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.title;
   switch (code) {
+    case "F1_L1": return "Unit and prefix explorer";
+    case "F1_L2": return "Vector direction explorer";
+    case "F1_L6": return "Accuracy and precision explorer";
     case "F1_L5": return "Density explorer";
     case "F1_L4": return "Significant figures explorer";
     case "F1_L3": return "Measurement explorer";
@@ -1998,6 +2040,9 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.instructions;
   switch (code) {
+    case "F1_L1": return "Hold the physical quantity fixed while you swap unit size. Compare what happens when the same length is written in km, m, cm, or mm, and decide which unit keeps the report readable without changing the quantity itself.";
+    case "F1_L2": return "Use the route board and arrow panel together so you keep route length separate from start-to-finish change. Then hold either magnitude or direction fixed to see what really changes a vector.";
+    case "F1_L6": return "Use the target board and reading table together so cluster position, cluster spread, and uncertainty stay separate. Compare bias with scatter instead of collapsing everything into the word error.";
     case "F1_L5": return "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result.";
     case "F1_L4": return "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division.";
     case "F1_L3": return "Use the live tool bench: choose an object, switch instruments, and compare the reading detail, repeated-reading spread, and zero error.";
@@ -2033,6 +2078,9 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.taskPrompt;
   switch (code) {
+    case "F1_L1": return "Use one classroom-sized object and one tiny object, then report each in a sensible unit. Explain why the number changes when the unit changes even though the physical quantity does not.";
+    case "F1_L2": return "Create one journey where the distance is large but the displacement is small, then rotate one arrow without changing its length and explain what changed in the vector description.";
+    case "F1_L6": return "Build one reading set that is precise but inaccurate and one that is accurate on average but less precise. Then estimate the uncertainty and explain the difference between bias and scatter.";
     case "F1_L5": return "Find one setup that floats and one that sinks, then explain which density comparison changed.";
     case "F1_L4": return "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes.";
     case "F1_L3": return "Try one object that suits a ruler and one that needs a finer tool, then test a zero-error offset and explain how it would mislead the reading if you forgot to correct it.";
@@ -2068,6 +2116,42 @@ function simulationStageExploreSteps(code: string): string[] {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.exploreSteps;
   switch (code) {
+    case "F1_L1":
+      return [
+        "Start with one fixed length and rewrite it in a larger unit and then in a smaller unit.",
+        "Keep the quantity fixed while you compare how the reported number grows or shrinks with unit size.",
+        "Test one tiny object and one long journey so you can justify unit choice instead of converting mechanically.",
+      ];
+    case "F1_L2":
+      return [
+        "Hold the arrow length fixed and rotate it so the magnitude stays the same while the direction changes.",
+        "Reset, then hold the direction fixed while you change the magnitude only.",
+        "Build one out-and-back route and compare total route length with the start-to-finish arrow.",
+      ];
+    case "F1_L3":
+      return [
+        "Measure the same object with a coarse tool and then with a finer tool.",
+        "Keep the object fixed while you compare the smallest division and the reported uncertainty.",
+        "Switch on a zero error and explain why repeated readings can still agree with one another while all being biased.",
+      ];
+    case "F1_L4":
+      return [
+        "Round one raw value to different significant-figure targets so the kept digits are easy to track.",
+        "Use one addition example and one multiplication example with the same numbers.",
+        "Explain which reporting rule came from decimal places and which came from significant figures.",
+      ];
+    case "F1_L5":
+      return [
+        "Keep the volume fixed and increase the mass so the packing becomes tighter.",
+        "Reset, then keep the mass fixed and increase the volume so the same mass is spread out.",
+        "Compare the resulting density with water to explain floating and sinking from density rather than from size alone.",
+      ];
+    case "F1_L6":
+      return [
+        "Start with a tight reading cluster centered on the true value.",
+        "Move the cluster away from the true value while keeping it tight so you isolate bias from spread.",
+        "Now widen the spread around the true value and estimate an uncertainty from the repeated readings.",
+      ];
     case "F2_L1":
       return [
         "Start with no return path so distance and displacement are the same, then add a return path and compare the change.",
@@ -2220,6 +2304,42 @@ function simulationStageWatchFor(code: string): string[] {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.watchFor;
   switch (code) {
+    case "F1_L1":
+      return [
+        "The physical quantity stays fixed while the unit size changes.",
+        "Smaller units need more copies of themselves, so the number usually grows.",
+        "A complete measurement keeps the number and the unit together.",
+      ];
+    case "F1_L2":
+      return [
+        "Scalars need magnitude only.",
+        "Vectors need magnitude and direction.",
+        "Distance follows the route, while displacement follows the start-to-finish change.",
+      ];
+    case "F1_L3":
+      return [
+        "A suitable tool matches the object scale and the needed resolution.",
+        "Reported uncertainty should match the smallest useful scale division.",
+        "Random scatter and systematic bias are different trust problems.",
+      ];
+    case "F1_L4":
+      return [
+        "Leading zeros place the decimal point but do not usually count as significant figures.",
+        "Addition and subtraction follow decimal-place limits.",
+        "Multiplication and division follow significant-figure limits.",
+      ];
+    case "F1_L5":
+      return [
+        "Density compares mass with volume, so both matter together.",
+        "Greater density means more mass packed into the same volume.",
+        "Float-or-sink reasoning comes from density comparison, not mass alone.",
+      ];
+    case "F1_L6":
+      return [
+        "Accuracy is about closeness to the accepted value.",
+        "Precision is about closeness among repeated readings.",
+        "Uncertainty should describe the spread or trust limit shown by the data.",
+      ];
     case "F2_L1":
       return [
         "Distance adds every part of the route.",
@@ -2372,6 +2492,18 @@ function simulationStageTryFirst(code: string): string | undefined {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.tryFirst;
   switch (code) {
+    case "F1_L1":
+      return "Try 2.5 m first. Rewrite it as cm and then as mm. The physical length stays the same, but the number grows because the unit chunks got smaller.";
+    case "F1_L2":
+      return "Try a 6 m east arrow, then rotate it north without changing the length. After that, build a 10 m out, 4 m back journey and compare the 14 m distance with the 6 m displacement.";
+    case "F1_L3":
+      return "Try the same object with the ruler and then the caliper. Watch how the finer tool supports a smaller uncertainty, then switch on a zero error and compare what changes.";
+    case "F1_L4":
+      return "Try 12.349 to 3 significant figures first, then compare 12.4 + 0.33 with 12.4 x 0.33 so you can see why the reporting rule changes with the operation.";
+    case "F1_L5":
+      return "Try 40 g in 20 cm^3 first. The density is 2 g/cm^3, so it is denser than water. Then keep the mass fixed and double the volume so the density falls.";
+    case "F1_L6":
+      return "Start with a true value of 10.0, a mean reading of 9.6, and a spread of 0.2. That gives a precise but biased set. Then move the mean to 10.0 and widen the spread to compare accuracy with precision.";
     case "F2_L1":
       return "Try outward 12 m, return 10 m, and time 4 s. You should get 22 m distance, 2 m east displacement, and 5.5 m/s average speed.";
     case "F2_L2":
@@ -2428,6 +2560,18 @@ function simulationStageTakeaway(code: string): string | undefined {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.takeaway;
   switch (code) {
+    case "F1_L1":
+      return "Units are not decorations; they are part of the measurement, and changing the unit size changes the number without changing the physical quantity.";
+    case "F1_L2":
+      return "Vectors become clearer when you treat direction as part of the quantity, while distance and displacement are kept as different questions about the same journey.";
+    case "F1_L3":
+      return "A trustworthy measurement comes from the right tool, an honest reading, and an uncertainty that matches the tool rather than wishful precision.";
+    case "F1_L4":
+      return "A reported answer should carry only the precision the data truly supports, which is why rounding rules depend on the type of calculation.";
+    case "F1_L5":
+      return "Density is the packing story behind mass, volume, floating, and sinking, so size alone can never tell the whole story.";
+    case "F1_L6":
+      return "Measurement trust improves when you separate accuracy, precision, bias, scatter, and uncertainty instead of treating them as one idea.";
     case "F2_L1":
       return "One journey can cover a long route yet finish close to the start, so distance and displacement are not interchangeable.";
     case "F2_L2":
