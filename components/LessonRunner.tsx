@@ -451,6 +451,8 @@ export default function LessonRunner({
   const [simMetricMeters, setSimMetricMeters] = useState(0.35);
   const [simVectorMagnitude, setSimVectorMagnitude] = useState(6);
   const [simVectorAngle, setSimVectorAngle] = useState(35);
+  const [simJourneyOutward, setSimJourneyOutward] = useState(10);
+  const [simJourneyReturn, setSimJourneyReturn] = useState(4);
   const [simSigSample, setSimSigSample] = useState("12.349");
   const [simSigFigures, setSimSigFigures] = useState(3);
   const [simSigOperation, setSimSigOperation] = useState<"add" | "subtract" | "multiply" | "divide">("multiply");
@@ -514,6 +516,8 @@ export default function LessonRunner({
     setSimMetricMeters(0.35);
     setSimVectorMagnitude(6);
     setSimVectorAngle(35);
+    setSimJourneyOutward(10);
+    setSimJourneyReturn(4);
     setSimSigSample("12.349");
     setSimSigFigures(3);
     setSimBias(18);
@@ -1204,6 +1208,15 @@ export default function LessonRunner({
     const vectorAngleRadians = (simVectorAngle * Math.PI) / 180;
     const vectorLength = 22 + simVectorMagnitude * 10;
     const vectorEndX = 92 + Math.cos(vectorAngleRadians) * vectorLength;
+    const vectorEndY = 92 - Math.sin(vectorAngleRadians) * vectorLength;
+    const journeyDistance = simJourneyOutward + simJourneyReturn;
+    const journeyDisplacement = simJourneyOutward - simJourneyReturn;
+    const journeyDisplacementMagnitude = Math.abs(journeyDisplacement);
+    const journeyDisplacementDirection = journeyDisplacement > 0 ? "east" : journeyDisplacement < 0 ? "west" : "zero";
+    const journeyScale = 12;
+    const journeyStartX = 52;
+    const journeyOutwardX = journeyStartX + simJourneyOutward * journeyScale;
+    const journeyFinishX = journeyOutwardX - simJourneyReturn * journeyScale;
     const sigFigureCount = Math.max(1, Math.min(5, simSigFigures));
     const sigNumericValue = Number(simSigSample);
     const sigRoundedDisplay = Number.isFinite(sigNumericValue) ? sigNumericValue.toPrecision(sigFigureCount) : "";
@@ -1504,9 +1517,91 @@ export default function LessonRunner({
                 <line x1="20" y1="92" x2="170" y2="92" stroke="#cbd5e1" strokeWidth="2" />
                 <line x1="92" y1="20" x2="92" y2="160" stroke="#cbd5e1" strokeWidth="2" />
                 <circle cx="92" cy="92" r="4" fill="#0f172a" />
-                <line x1="92" y1="92" x2={92 + Math.cos((simVectorAngle * Math.PI) / 180) * (22 + simVectorMagnitude * 10)} y2={92 - Math.sin((simVectorAngle * Math.PI) / 180) * (22 + simVectorMagnitude * 10)} stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
+                <line x1="92" y1="92" x2={vectorEndX} y2={vectorEndY} stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
               </svg>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+                  <span className="font-medium text-slate-900">Magnitude:</span> {simVectorMagnitude} units
+                </div>
+                <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+                  <span className="font-medium text-slate-900">Direction:</span> {simVectorAngle}&deg;
+                </div>
+              </div>
               <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">Direction rotates the arrow, but a scalar would only keep the size value.</div>
+            </div>
+            <div className="rounded-2xl border bg-white p-5 shadow-sm xl:col-span-2">
+              <h4 className="text-lg font-semibold text-slate-900">Distance and displacement measure</h4>
+              <p className="mt-2 text-slate-700">Adjust the outward and return parts of the journey. Distance tracks the whole route, while displacement only tracks the start-to-finish change.</p>
+              <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.35fr)]">
+                <div>
+                  <label className="block text-sm text-slate-700">
+                    Outward distance: {simJourneyOutward} m east
+                    <input className="mt-2 w-full" type="range" min="2" max="12" step="1" value={simJourneyOutward} onChange={(e) => setSimJourneyOutward(Number(e.target.value))} />
+                  </label>
+                  <label className="mt-4 block text-sm text-slate-700">
+                    Return distance: {simJourneyReturn} m west
+                    <input className="mt-2 w-full" type="range" min="0" max="12" step="1" value={simJourneyReturn} onChange={(e) => setSimJourneyReturn(Number(e.target.value))} />
+                  </label>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-xl bg-indigo-50 px-4 py-3 text-sm text-indigo-900">
+                      <span className="font-medium">Total distance:</span> {journeyDistance} m
+                    </div>
+                    <div className="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+                      <span className="font-medium">Displacement:</span>{" "}
+                      {journeyDisplacementMagnitude === 0
+                        ? "0 m"
+                        : `${journeyDisplacementMagnitude} m ${journeyDisplacementDirection}`}
+                    </div>
+                  </div>
+                  <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-sm text-slate-700">
+                    Every slider change updates both measures. The purple route adds the full trip, but the green arrow only compares your finishing point with where you began.
+                  </div>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <svg
+                    viewBox="0 0 260 200"
+                    role="img"
+                    aria-label="Distance and displacement comparison"
+                    style={{ width: "100%", height: 260, background: "#f8fafc", borderRadius: 18 }}
+                  >
+                    <defs>
+                      <marker id="distance-arrow-f1l2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed" />
+                      </marker>
+                      <marker id="displacement-arrow-f1l2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669" />
+                      </marker>
+                    </defs>
+                    <line x1="24" y1="96" x2="236" y2="96" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 6" />
+                    <line x1={journeyStartX} y1="54" x2={journeyOutwardX} y2="54" stroke="#7c3aed" strokeWidth="8" strokeLinecap="round" markerEnd="url(#distance-arrow-f1l2)" />
+                    <line x1={journeyOutwardX} y1="78" x2={journeyFinishX} y2="78" stroke="#a855f7" strokeWidth="8" strokeLinecap="round" markerEnd="url(#distance-arrow-f1l2)" />
+                    <line x1={journeyStartX} y1="144" x2={journeyFinishX} y2="144" stroke="#059669" strokeWidth="8" strokeLinecap="round" markerEnd={journeyFinishX === journeyStartX ? undefined : "url(#displacement-arrow-f1l2)"} />
+                    <circle cx={journeyStartX} cy="96" r="6" fill="#0f172a" />
+                    <circle cx={journeyOutwardX} cy="96" r="6" fill="#7c3aed" />
+                    <circle cx={journeyFinishX} cy="96" r="6" fill="#059669" />
+                    <text x={journeyStartX} y="118" textAnchor="middle" fontSize="12" fill="#334155">Start</text>
+                    <text x={journeyOutwardX} y="118" textAnchor="middle" fontSize="12" fill="#6d28d9">Turn</text>
+                    <text x={journeyFinishX} y="164" textAnchor="middle" fontSize="12" fill="#047857">Finish</text>
+                    <text x={(journeyStartX + journeyOutwardX) / 2} y="38" textAnchor="middle" fontSize="12" fill="#6d28d9">
+                      {simJourneyOutward} m out
+                    </text>
+                    <text x={(journeyOutwardX + journeyFinishX) / 2} y="64" textAnchor="middle" fontSize="12" fill="#7e22ce">
+                      {simJourneyReturn} m back
+                    </text>
+                    <text x={(journeyStartX + journeyFinishX) / 2} y="136" textAnchor="middle" fontSize="12" fill="#047857">
+                      {journeyDisplacementMagnitude === 0 ? "0 m displacement" : `${journeyDisplacementMagnitude} m ${journeyDisplacementDirection}`}
+                    </text>
+                  </svg>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-violet-900">
+                      <span className="font-medium">Distance path:</span> follow every section of the trip.
+                    </div>
+                    <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+                      <span className="font-medium">Displacement arrow:</span> compare the start and finish only.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ) : simulationLessonKey === "F1_L4" ? (
