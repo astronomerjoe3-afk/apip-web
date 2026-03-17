@@ -1,50 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
-  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
-  <text x="70" y="88" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Same final progress does not force the same motion story.</text>
-  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Two mission logs can finish at the same distance and time while telling different pace histories.</text>
+  <style>
+    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
+    .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+    .axis { fill: #64748b; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+  </style>
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
+  <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+  <text x="74" y="88" class="title">Same finish, different motion history.</text>
+  <text x="74" y="126" class="subtitle">Distance-time graphs can share the same ending point without describing the same speeds, pauses, or segment story.</text>
 
-  <rect x="84" y="188" width="492" height="454" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
-  <text x="122" y="236" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Run A: pause then sprint</text>
-  <line x1="176" y1="554" x2="504" y2="554" stroke="#334155" stroke-width="4"/>
-  <line x1="176" y1="554" x2="176" y2="298" stroke="#334155" stroke-width="4"/>
-  <text x="260" y="606" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock, t (s)</text>
-  <text x="108" y="448" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 108 448)">Recorded progress, s (m)</text>
-  <g fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="18">
-    <text x="170" y="580">0</text>
-    <text x="250" y="580">2</text>
-    <text x="330" y="580">4</text>
-    <text x="410" y="580">6</text>
-    <text x="488" y="580">8</text>
-    <text x="136" y="554">0</text>
-    <text x="122" y="490">12</text>
-    <text x="122" y="426">24</text>
-    <text x="122" y="362">36</text>
+  <rect x="74" y="176" width="496" height="430" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
+  <rect x="630" y="176" width="496" height="430" rx="28" fill="#ECFDF5" stroke="#86EFAC" stroke-width="3" />
+
+  <text x="112" y="224" class="panel-title">Run A: pause then catch up</text>
+  <text x="668" y="224" class="panel-title">Run B: one steady pace</text>
+
+  <g stroke="#CBD5E1" stroke-width="2">
+    <line x1="164" y1="536" x2="496" y2="536" />
+    <line x1="164" y1="536" x2="164" y2="282" />
+    <line x1="230" y1="536" x2="230" y2="282" />
+    <line x1="296" y1="536" x2="296" y2="282" />
+    <line x1="362" y1="536" x2="362" y2="282" />
+    <line x1="428" y1="536" x2="428" y2="282" />
+    <line x1="494" y1="536" x2="494" y2="282" />
+    <line x1="164" y1="472" x2="496" y2="472" />
+    <line x1="164" y1="408" x2="496" y2="408" />
+    <line x1="164" y1="344" x2="496" y2="344" />
   </g>
-  <path d="M176 554L256 474L336 474L496 346" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="496" cy="346" r="8" fill="#10B981"/>
-  <text x="246" y="438" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">pause</text>
-  <text x="342" y="322" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">finish: 32 m at 8 s</text>
-
-  <rect x="624" y="188" width="492" height="454" rx="28" fill="#ECFDF5" stroke="#86EFAC" stroke-width="4"/>
-  <text x="662" y="236" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Run B: steady climb</text>
-  <line x1="716" y1="554" x2="1044" y2="554" stroke="#334155" stroke-width="4"/>
-  <line x1="716" y1="554" x2="716" y2="298" stroke="#334155" stroke-width="4"/>
-  <text x="800" y="606" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock, t (s)</text>
-  <text x="648" y="448" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 648 448)">Recorded progress, s (m)</text>
-  <g fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="18">
-    <text x="710" y="580">0</text>
-    <text x="790" y="580">2</text>
-    <text x="870" y="580">4</text>
-    <text x="950" y="580">6</text>
-    <text x="1028" y="580">8</text>
-    <text x="676" y="554">0</text>
-    <text x="662" y="490">12</text>
-    <text x="662" y="426">24</text>
-    <text x="662" y="362">36</text>
+  <g stroke="#CBD5E1" stroke-width="2">
+    <line x1="720" y1="536" x2="1052" y2="536" />
+    <line x1="720" y1="536" x2="720" y2="282" />
+    <line x1="786" y1="536" x2="786" y2="282" />
+    <line x1="852" y1="536" x2="852" y2="282" />
+    <line x1="918" y1="536" x2="918" y2="282" />
+    <line x1="984" y1="536" x2="984" y2="282" />
+    <line x1="1050" y1="536" x2="1050" y2="282" />
+    <line x1="720" y1="472" x2="1052" y2="472" />
+    <line x1="720" y1="408" x2="1052" y2="408" />
+    <line x1="720" y1="344" x2="1052" y2="344" />
   </g>
-  <path d="M716 554L1044 346" stroke="#10B981" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="1044" cy="346" r="8" fill="#10B981"/>
-  <text x="814" y="408" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">same finish: 32 m at 8 s</text>
+  <line x1="164" y1="536" x2="496" y2="536" stroke="#334155" stroke-width="4" />
+  <line x1="164" y1="536" x2="164" y2="282" stroke="#334155" stroke-width="4" />
+  <line x1="720" y1="536" x2="1052" y2="536" stroke="#334155" stroke-width="4" />
+  <line x1="720" y1="536" x2="720" y2="282" stroke="#334155" stroke-width="4" />
 
-  <text x="116" y="674" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="24">Run A and Run B share the same final point, but Run A includes a pause and a later sprint while Run B stays steady.</text>
+  <polyline points="164,536 230,470 296,470 494,344" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  <polyline points="720,536 1052,344" fill="none" stroke="#10B981" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="494" cy="344" r="9" fill="#2563EB" />
+  <circle cx="1052" cy="344" r="9" fill="#10B981" />
+  <text x="314" y="454" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Pause keeps distance fixed</text>
+  <text x="796" y="322" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">One steady gradient all the way</text>
+  <text x="224" y="578" class="axis">time, t (s)</text>
+  <text x="780" y="578" class="axis">time, t (s)</text>
+  <text x="122" y="450" class="axis" transform="rotate(-90 122 450)">distance, s (m)</text>
+  <text x="678" y="450" class="axis" transform="rotate(-90 678 450)">distance, s (m)</text>
+
+  <rect x="74" y="626" width="1052" height="40" rx="20" fill="#DBEAFE" />
+  <text x="600" y="653" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Equal final distance and equal final time do not force equal speed at every moment.</text>
 </svg>

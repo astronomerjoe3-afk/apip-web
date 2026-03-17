@@ -1,28 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
-  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
-  <text x="70" y="88" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Pace log: level tells speed now, slope tells change.</text>
-  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Module 1 deepens F2 by separating speed-now from boost shift instead of letting both hide inside one graph shape.</text>
-  <rect x="70" y="188" width="460" height="456" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="4"/>
-  <text x="102" y="236" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Quest lane snapshot</text>
-  <rect x="120" y="326" width="320" height="18" rx="9" fill="#1D4ED8"/>
-  <circle cx="210" cy="335" r="26" fill="#F97316"/>
-  <path d="M210 335L316 335" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
-  <path d="M316 335L286 315V355L316 335Z" fill="#16A34A"/>
-  <text x="120" y="430" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Pace meter now = 8 m/s</text>
-  <text x="120" y="476" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">
-    <tspan x="120" dy="0">Fast now is not the same claim</tspan>
-    <tspan x="120" dy="30">as speeding up now.</tspan>
-  </text>
-  <rect x="580" y="188" width="548" height="456" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
-  <text x="612" y="236" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Pace log</text>
-  <line x1="668" y1="564" x2="1050" y2="564" stroke="#334155" stroke-width="4"/>
-  <line x1="668" y1="564" x2="668" y2="286" stroke="#334155" stroke-width="4"/>
-  <path d="M712 476H816" stroke="#0284C7" stroke-width="10" stroke-linecap="round"/>
-  <path d="M816 476L930 358" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M930 358L1012 430" stroke="#DC2626" stroke-width="10" stroke-linecap="round"/>
-  <text x="722" y="606" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Mission clock, t (s)</text>
-  <text x="582" y="378" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22" transform="rotate(-90 582 378)">Pace, v (m/s)</text>
-  <text x="714" y="512" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Flat above zero = constant speed</text>
-  <text x="848" y="324" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Rising slope = positive acceleration</text>
-  <text x="926" y="464" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Falling slope = braking</text>
+  <style>
+    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
+    .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+    .axis { fill: #64748b; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+  </style>
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
+  <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+  <text x="74" y="88" class="title">Speed-time graph: level tells speed now, slope tells how speed changes.</text>
+  <text x="74" y="126" class="subtitle">Module 1 separates graph height from graph slope so students can track speed and acceleration without collapsing them into one idea.</text>
+
+  <rect x="74" y="176" width="350" height="430" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3" />
+  <text x="108" y="224" class="panel-title">Reading rules</text>
+  <rect x="108" y="264" width="284" height="88" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
+  <text x="132" y="302" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Graph height</text>
+  <text x="132" y="332" class="body">What is the speed at this instant?</text>
+  <rect x="108" y="372" width="284" height="88" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
+  <text x="132" y="410" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Graph slope</text>
+  <text x="132" y="440" class="body">How quickly is the speed changing?</text>
+  <rect x="108" y="480" width="284" height="88" rx="22" fill="#FFFFFF" stroke="#FED7AA" stroke-width="2" />
+  <text x="132" y="518" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Flat above zero</text>
+  <text x="132" y="548" class="body">Constant speed, not rest.</text>
+
+  <rect x="460" y="176" width="666" height="430" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
+  <text x="498" y="224" class="panel-title">Pace log</text>
+  <line x1="548" y1="548" x2="1046" y2="548" stroke="#334155" stroke-width="4" />
+  <line x1="548" y1="548" x2="548" y2="282" stroke="#334155" stroke-width="4" />
+  <g stroke="#CBD5E1" stroke-width="2">
+    <line x1="632" y1="548" x2="632" y2="282" />
+    <line x1="716" y1="548" x2="716" y2="282" />
+    <line x1="800" y1="548" x2="800" y2="282" />
+    <line x1="884" y1="548" x2="884" y2="282" />
+    <line x1="968" y1="548" x2="968" y2="282" />
+    <line x1="548" y1="484" x2="1046" y2="484" />
+    <line x1="548" y1="420" x2="1046" y2="420" />
+    <line x1="548" y1="356" x2="1046" y2="356" />
+  </g>
+  <polyline points="590,484 716,484" fill="none" stroke="#0284C7" stroke-width="10" stroke-linecap="round" />
+  <polyline points="716,484 874,356" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
+  <polyline points="874,356 1012,438" fill="none" stroke="#DC2626" stroke-width="10" stroke-linecap="round" />
+  <circle cx="796" cy="420" r="9" fill="#F59E0B" />
+  <text x="804" y="410" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Height here = current speed</text>
+  <text x="754" y="320" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Rising slope = positive acceleration</text>
+  <text x="892" y="462" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Falling slope = negative acceleration</text>
+  <text x="742" y="578" class="axis">time, t (s)</text>
+  <text x="510" y="432" class="axis" transform="rotate(-90 510 432)">speed, v (m/s)</text>
+
+  <rect x="74" y="626" width="1052" height="40" rx="20" fill="#E0F2FE" />
+  <text x="600" y="653" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Ask two different questions: what is the speed now, and how is the speed changing?</text>
 </svg>

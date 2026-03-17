@@ -766,6 +766,10 @@ function includesAnyPhrase(source: string, phrases: string[]): boolean {
   return phrases.some((phrase) => source.includes(normalizeOpenAnswer(phrase)));
 }
 
+function matchesPhraseGroups(source: string, phraseGroups: string[][]): boolean {
+  return phraseGroups.every((group) => includesAnyPhrase(source, group));
+}
+
 function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean | null {
   const itemId = text(item.id);
   const promptKey = normalizePromptKey(item.prompt);
@@ -872,6 +876,153 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       "expected value",
     ]);
     return closenessIdea && targetIdea;
+  }
+
+  const isM1DistanceTimeSlopePrompt =
+    itemId === "M1L1_T8" ||
+    promptKey === "in a few words what does slope mean on a distance time graph";
+
+  if (isM1DistanceTimeSlopePrompt) {
+    return includesAnyPhrase(candidate, [
+      "speed",
+      "pace",
+      "rate of distance change",
+      "how quickly distance changes",
+      "distance per second",
+      "rate at which distance changes",
+    ]);
+  }
+
+  const isM1FinalPointPrompt =
+    itemId === "M1L1_C5" ||
+    promptKey === "can the final point alone tell you whether there was a pause answer in a few words";
+
+  if (isM1FinalPointPrompt) {
+    return (
+      candidate === "no" ||
+      matchesPhraseGroups(candidate, [
+        ["not", "cannot", "cant", "can not", "not enough"],
+        ["final point", "end point", "single point", "whole graph", "whole story", "whole journey"],
+      ])
+    );
+  }
+
+  const isM1SpeedTimeSlopePrompt =
+    itemId === "M1L2_T8" ||
+    promptKey === "in a few words what does slope mean on a speed time graph";
+
+  if (isM1SpeedTimeSlopePrompt) {
+    return includesAnyPhrase(candidate, [
+      "acceleration",
+      "rate of speed change",
+      "rate of velocity change",
+      "change in speed per second",
+      "change in velocity per second",
+    ]);
+  }
+
+  const isM1AccelerationSignPrompt =
+    itemId === "M1L3_T8" ||
+    promptKey === "in a few words what does the sign of acceleration tell you";
+
+  if (isM1AccelerationSignPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["direction", "positive direction", "negative direction", "chosen positive direction"],
+      ["velocity change", "change in velocity", "how velocity changes", "which way velocity changes"],
+    ]);
+  }
+
+  const isM1AccelerationExtraDistancePrompt =
+    itemId === "M1L4_C4" ||
+    promptKey === "in a few words what does the 1 2at 2 part represent";
+
+  if (isM1AccelerationExtraDistancePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["extra distance", "additional distance", "distance added", "triangle distance"],
+        ["acceleration", "accelerating", "steady acceleration"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["beyond ut", "above ut", "on top of ut"],
+        ["extra distance", "additional distance"],
+      ])
+    );
+  }
+
+  const isM1SuvatConditionPrompt =
+    itemId === "M1L4_T8" ||
+    promptKey === "why should you not trust suvat directly when acceleration changes during the motion";
+
+  if (isM1SuvatConditionPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["constant", "uniform", "steady"],
+      ["acceleration", "accelerate"],
+    ]);
+  }
+
+  const isM1ZeroSlopeSpeedTimePrompt =
+    itemId === "M1L5_C4" ||
+    promptKey === "on a speed time graph what does zero slope mean";
+
+  if (isM1ZeroSlopeSpeedTimePrompt) {
+    return includesAnyPhrase(candidate, [
+      "zero acceleration",
+      "no acceleration",
+      "constant speed",
+      "constant velocity",
+      "no change in speed",
+      "speed stays the same",
+    ]);
+  }
+
+  const isM1AxesBeforeSlopePrompt =
+    itemId === "M1L5_T8" ||
+    promptKey === "why must you name the axes before naming the slope";
+
+  if (isM1AxesBeforeSlopePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["axes", "graph type", "graph", "context"],
+        ["meaning", "decide", "determine", "fix", "tell you"],
+        ["slope", "rate"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same tilt", "same slope", "different graphs"],
+        ["different rates", "different meanings", "speed or acceleration"],
+      ])
+    );
+  }
+
+  const isM1AreaWhyPrompt =
+    itemId === "M1L6_C4" ||
+    promptKey === "why does the area rule work on a speed time graph";
+
+  if (isM1AreaWhyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["speed", "velocity"],
+        ["time"],
+        ["distance"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["area", "strip", "rectangle", "triangle"],
+        ["distance", "accumulates distance", "adds distance"],
+      ])
+    );
+  }
+
+  const isM1AreaMeaningPrompt =
+    itemId === "M1L6_T8" ||
+    promptKey === "in a few words what does the area under a speed time graph represent";
+
+  if (isM1AreaMeaningPrompt) {
+    return includesAnyPhrase(candidate, [
+      "total distance",
+      "distance traveled",
+      "distance travelled",
+      "accumulated distance",
+      "distance covered",
+    ]);
   }
 
   const isLessonSixErrorPrompt =

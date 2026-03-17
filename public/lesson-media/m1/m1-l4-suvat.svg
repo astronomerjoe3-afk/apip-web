@@ -1,30 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
-  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
-  <text x="70" y="88" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Constant-acceleration equations are forecast tools, not magic spells.</text>
-  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Quest-Log reveals each equation as a compact summary of one steady boost pattern.</text>
-  <rect x="78" y="194" width="344" height="438" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
-  <text x="110" y="244" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Knowns first</text>
-  <text x="118" y="320" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">u = 4 m/s</text>
-  <text x="118" y="368" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">a = 3 m/s^2</text>
-  <text x="118" y="416" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">t = 4 s</text>
-  <text x="118" y="504" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Unknown: v</text>
-  <text x="118" y="560" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Best direct choice: v = u + at</text>
-  <rect x="458" y="194" width="302" height="438" rx="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="4"/>
-  <text x="490" y="244" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Block + triangle</text>
-  <rect x="520" y="468" width="152" height="82" fill="#93C5FD"/>
-  <path d="M672 468L742 468L742 370Z" fill="#F59E0B"/>
-  <text x="530" y="588" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">ut + 1/2at^2</text>
-  <text x="510" y="340" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Rectangle = starting pace</text>
-  <text x="518" y="312" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Triangle = added pace</text>
-  <rect x="798" y="194" width="330" height="438" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="4"/>
-  <text x="830" y="244" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Condition check</text>
-  <text x="842" y="330" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Same boost each tick?</text>
-  <rect x="842" y="372" width="112" height="54" rx="18" fill="#DCFCE7"/>
-  <text x="882" y="407" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Yes</text>
-  <rect x="974" y="372" width="112" height="54" rx="18" fill="#FEE2E2"/>
-  <text x="1016" y="407" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">No</text>
-  <text x="842" y="506" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">
-    <tspan x="842" dy="0">Use the board only</tspan>
-    <tspan x="842" dy="30">for the green case.</tspan>
-  </text>
+  <style>
+    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
+    .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+  </style>
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
+  <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+  <text x="74" y="88" class="title">Use the motion equations like a forecast board, not like a memory test.</text>
+  <text x="74" y="126" class="subtitle">Module 1 asks students to choose equations from the story: list the knowns, name the unknown, and check the constant-acceleration condition first.</text>
+
+  <rect x="74" y="176" width="322" height="430" rx="28" fill="#ECFDF5" stroke="#86EFAC" stroke-width="3" />
+  <text x="108" y="224" class="panel-title">Step 1: gather the story</text>
+  <rect x="108" y="262" width="256" height="64" rx="18" fill="#FFFFFF" stroke="#BBF7D0" stroke-width="2" />
+  <text x="136" y="302" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Knowns: u, a, t</text>
+  <rect x="108" y="346" width="256" height="64" rx="18" fill="#FFFFFF" stroke="#BBF7D0" stroke-width="2" />
+  <text x="136" y="386" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Unknown: v</text>
+  <rect x="108" y="430" width="256" height="116" rx="22" fill="#FFFFFF" stroke="#BBF7D0" stroke-width="2" />
+  <text x="136" y="468" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Condition check</text>
+  <text x="136" y="502" class="body">Is the acceleration steady for the whole interval?</text>
+  <text x="136" y="532" class="body">If not, do not trust the compact suvat forecast directly.</text>
+
+  <rect x="430" y="176" width="352" height="430" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
+  <text x="464" y="224" class="panel-title">Step 2: choose the direct relation</text>
+  <rect x="464" y="276" width="284" height="94" rx="24" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2" />
+  <text x="606" y="330" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle">v = u + at</text>
+  <text x="464" y="408" class="body">Pick the equation that reaches the unknown without introducing an unnecessary variable.</text>
+  <text x="464" y="446" class="body">This is why equation choice is higher-level than just recalling all four relations.</text>
+
+  <rect x="816" y="176" width="310" height="430" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3" />
+  <text x="850" y="224" class="panel-title">Step 3: connect algebra and graph</text>
+  <line x1="864" y1="548" x2="1080" y2="548" stroke="#334155" stroke-width="4" />
+  <line x1="864" y1="548" x2="864" y2="300" stroke="#334155" stroke-width="4" />
+  <polygon points="864,548 864,436 1080,340 1080,548" fill="#BFDBFE" fill-opacity="0.55" />
+  <polyline points="864,436 1080,340" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
+  <text x="884" y="320" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Uniform slope means uniform acceleration</text>
+  <text x="884" y="584" class="body">When the graph keeps one acceleration pattern, the algebra and the area story stay aligned.</text>
+
+  <rect x="74" y="626" width="1052" height="40" rx="20" fill="#E0F2FE" />
+  <text x="600" y="653" fill="#0C4A6E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Knowns + unknown + constant-acceleration check = deliberate equation choice.</text>
 </svg>
