@@ -410,8 +410,8 @@ export default function M1SimulationPanels(props: Props) {
     const v = u + a * t;
     const s = u * t + 0.5 * a * t * t;
     const topSpeed = Math.max(u, v, 2);
-    const y1 = scalePoint(u, 0, topSpeed, 250, 50);
-    const y2 = scalePoint(v, 0, topSpeed, 250, 50);
+    const y1 = scalePoint(u, 0, topSpeed, 250, 128);
+    const y2 = scalePoint(v, 0, topSpeed, 250, 128);
 
     return (
       <ExplorerLayout
@@ -433,21 +433,25 @@ export default function M1SimulationPanels(props: Props) {
           <svg viewBox="0 0 620 300" role="img" aria-label="Constant acceleration forecast board">
             <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
             <rect x="22" y="20" width="576" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect x="82" y="38" width="206" height="78" rx="20" fill="#ecfdf5" stroke="#86efac" strokeWidth="2" />
+            <rect x="326" y="38" width="232" height="78" rx="20" fill="#fff7ed" stroke="#fdba74" strokeWidth="2" />
             <line x1="70" y1="250" x2="540" y2="250" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="70" y1="250" x2="70" y2="50" stroke="#94a3b8" strokeWidth="3" />
+            <line x1="70" y1="250" x2="70" y2="122" stroke="#94a3b8" strokeWidth="3" />
             <polygon points={`70,250 70,${y1} 540,${y2} 540,250`} fill="#bfdbfe" fillOpacity="0.55" />
             <polyline points={polyline([[70, y1], [540, y2]])} fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
-            <text x="96" y="78" fill="#166534" fontSize="16" fontWeight="700">
+            <text x="98" y="64" fill="#166534" fontSize="18" fontWeight="700">
               Knowns to unknown
             </text>
-            <text x="96" y="102" fill="#475569" fontSize="14">
-              Pick the equation from the story, not from symbol memory.
+            <text x="98" y="88" fill="#475569" fontSize="16" fontWeight="500">
+              <tspan x="98" dy="0">Pick from the story,</tspan>
+              <tspan x="98" dy="20">not from symbol memory.</tspan>
             </text>
-            <text x="330" y="82" fill="#b45309" fontSize="16" fontWeight="700">
+            <text x="344" y="64" fill="#b45309" fontSize="18" fontWeight="700">
               Condition
             </text>
-            <text x="330" y="106" fill="#475569" fontSize="14">
-              This board is valid only while acceleration stays constant.
+            <text x="344" y="88" fill="#475569" fontSize="16" fontWeight="500">
+              <tspan x="344" dy="0">Valid only while</tspan>
+              <tspan x="344" dy="20">acceleration stays constant.</tspan>
             </text>
           </svg>
         }

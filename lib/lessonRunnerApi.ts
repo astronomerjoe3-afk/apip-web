@@ -4067,6 +4067,76 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           answer: "Move steadily, stop, then move again faster than before.",
         },
       };
+    case "M1_L2":
+      return {
+        body: "Keep graph height and graph slope separate: the height gives the speed at a chosen time, while the slope tells how the speed is changing.",
+        worked_example: {
+          prompt: "A speed-time graph is flat at 6 m/s for 4 s, then rises steadily to 12 m/s by 7 s. What story does it tell?",
+          steps: [
+            "Read the flat section first as constant speed, because the graph height stays at 6 m/s.",
+            "Read the later upward slope as speeding up, because the speed rises from 6 m/s to 12 m/s.",
+            "Keep the two ideas separate: graph height tells the speed value, while the upward slope shows positive acceleration.",
+            "So the motion story is steady motion first, then speeding up.",
+          ],
+          answer: "The object moves steadily at 6 m/s, then speeds up to 12 m/s.",
+        },
+      };
+    case "M1_L3":
+      return {
+        body: "Treat acceleration as a signed rate of velocity change, not as a vague feeling of speeding up or slowing down.",
+        worked_example: {
+          prompt: "Take east as positive. A cyclist changes from +10 m/s to +4 m/s in 3 s. Find the acceleration and explain the sign.",
+          steps: [
+            "Write the velocities with signs: the initial velocity is +10 m/s and the final velocity is +4 m/s.",
+            "Find the signed change in velocity: 4 - 10 = -6 m/s.",
+            "Divide by the time: -6 / 3 = -2 m/s^2.",
+            "The negative sign means the acceleration points west, opposite the chosen positive direction.",
+          ],
+          answer: "Acceleration = -2 m/s^2, so the acceleration points west.",
+        },
+      };
+    case "M1_L4":
+      return {
+        body: "Choose the motion equation from the knowns, the unknown, and the constant-acceleration condition rather than from surface memory.",
+        worked_example: {
+          prompt: "A trolley starts at 3 m/s and accelerates steadily at 2 m/s^2 for 4 s. Find the final speed.",
+          steps: [
+            "List the known quantities: u = 3 m/s, a = 2 m/s^2, t = 4 s.",
+            "Notice that the unknown is v, and displacement is not needed.",
+            "Choose the direct relation v = u + at because it connects u, a, t, and v.",
+            "Substitute the values: v = 3 + 2 x 4 = 11 m/s.",
+          ],
+          answer: "The final speed is 11 m/s.",
+        },
+      };
+    case "M1_L5":
+      return {
+        body: "The axes decide what a slope means, so the same tilt can name a speed on one graph and an acceleration on another.",
+        worked_example: {
+          prompt: "A distance-time graph rises from 4 m to 16 m in 6 s, while a speed-time graph rises from 3 m/s to 9 m/s in 3 s. What does each gradient mean?",
+          steps: [
+            "For the distance-time graph, calculate the slope: (16 - 4) / 6 = 2 m/s, so the gradient represents speed.",
+            "For the speed-time graph, calculate the slope: (9 - 3) / 3 = 2 m/s^2, so the gradient represents acceleration.",
+            "The number 2 appears in both calculations, but the axes change the quantity and the unit.",
+            "State the two meanings separately instead of treating every slope as the same physical idea.",
+          ],
+          answer: "The distance-time gradient is 2 m/s, while the speed-time gradient is 2 m/s^2.",
+        },
+      };
+    case "M1_L6":
+      return {
+        body: "Use the full area under the speed-time graph so distance comes from the whole interval, not just from the final graph height.",
+        worked_example: {
+          prompt: "A speed-time graph shows 6 m/s for 4 s and then a straight rise from 6 m/s to 10 m/s over the next 2 s. Find the total distance.",
+          steps: [
+            "Find the area of the first section: rectangle area = 6 x 4 = 24 m.",
+            "Find the area of the second section as a trapezium: average speed x time = (6 + 10) / 2 x 2 = 16 m.",
+            "Add the two areas because total distance is the whole area under the graph.",
+            "24 m + 16 m = 40 m.",
+          ],
+          answer: "The total distance is 40 m.",
+        },
+      };
     default:
       return {
         body: "Start with a real question and solve it step by step.",
