@@ -360,7 +360,7 @@ export default function M1SimulationPanels(props: Props) {
           <svg viewBox="0 0 620 300" role="img" aria-label="Signed velocity arrows and acceleration sign">
             <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
             <rect x="22" y="20" width="576" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <text x="44" y="58" fill="#1e293b" fontSize="18" fontWeight="700">
+            <text x="44" y="58" fill="#1e293b" fontSize="20" fontWeight="700">
               Signed velocity bar
             </text>
             <line x1="90" y1="145" x2="530" y2="145" stroke="#94a3b8" strokeWidth="4" />
@@ -375,8 +375,9 @@ export default function M1SimulationPanels(props: Props) {
               points={`${arrowX(finalVelocity)},185 ${finalVelocity >= 0 ? arrowX(finalVelocity) - 16 : arrowX(finalVelocity) + 16},175 ${finalVelocity >= 0 ? arrowX(finalVelocity) - 16 : arrowX(finalVelocity) + 16},195`}
               fill="#f59e0b"
             />
-            <text x="330" y="230" fill="#475569" fontSize="15">
-              a = (v - u) / t, so the sign comes from the signed velocity change.
+            <text x="74" y="228" fill="#475569" fontSize="17" fontWeight="600">
+              <tspan x="74" dy="0">a = (v - u) / t, so the sign comes from the</tspan>
+              <tspan x="74" dy="22">signed velocity change over the interval.</tspan>
             </text>
           </svg>
         }

@@ -111,7 +111,7 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
         visual_title: "Pace log",
-        visual_caption: "On a pace log, the graph height at a chosen time shows the speed at that time, while the slope shows how the speed is changing.",
+        visual_caption: "On a pace log, the graph height at a chosen time shows the speed at that time, while the slope over a chosen interval shows how quickly the speed is changing during that interval.",
         visual_callouts: [
           "A high point at a chosen time means large speed at that time.",
           "A rising line means positive acceleration.",
@@ -2161,7 +2161,7 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
     case "M1_L2":
       return [
         mcItem("M1L2_T8", "At a chosen time on a pace log, what does the graph height show?", ["the speed at that exact time", "the distance covered so far", "the acceleration for the whole graph", "the shape of the route"], 0, "Read the vertical value at one chosen time.", "The graph height at a chosen time shows the speed at that exact time."),
-        mcItem("M1L2_T9", "What does the slope of a pace log tell you?", ["how the speed is changing", "the total distance covered", "the direction of the road", "the mass of the object"], 0, "Slope is a rate of change here.", "The slope of a pace log tells you how the speed is changing, so it represents acceleration."),
+        mcItem("M1L2_T9", "Over a chosen interval on a pace log, what does the graph slope show?", ["how quickly the speed is changing over that interval", "the total distance covered", "the direction of the road", "the mass of the object"], 0, "Read the tilt over one chosen interval.", "The graph slope over a chosen interval shows how quickly the speed is changing over that interval, so it represents acceleration."),
         mcItem("M1L2_T10", "Why can a flat pace log above zero still represent motion?", ["Because the speed is constant rather than zero", "Because all flat graphs mean no motion", "Because height is irrelevant on this graph", "Because acceleration has become distance"], 0, "Flat above zero is cruising.", "A flat pace log above zero still represents motion because the speed is constant rather than zero."),
         mcItem("M1L2_T11", "Two pace logs have the same speed at 5 s, but one is steeper. Which statement is correct?", ["They match in speed at that instant but not in acceleration", "They match in acceleration but not in speed", "They must show the same total distance", "The steeper one must be slower then"], 0, "Equal height does not force equal slope.", "They match in speed at that instant because the heights match, but the steeper one has the larger acceleration."),
         mcItem("M1L2_T12", "A pace log slopes downward while staying above zero. What story fits best?", ["the avatar is slowing down but still moving forward", "the avatar is stopped", "the avatar has zero acceleration and zero speed", "the graph is impossible"], 0, "The speed can fall without reaching zero.", "A downward slope above zero means the avatar is slowing down while still moving."),
@@ -3695,7 +3695,9 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
 }
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const code = lessonCode(lesson);
-  const authoredExample = asRecord(asList(lesson.worked_examples)[0]);
+  const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
+  const topLevelExamples = asList(lesson.worked_examples);
+  const authoredExample = asRecord(contractExamples[0] ?? topLevelExamples[0]);
   const authoredPrompt = text(authoredExample.prompt);
   const authoredSteps = asList(authoredExample.steps).map((step) => text(step)).filter(Boolean);
   const authoredAnswer = text(authoredExample.final_answer) || text(authoredExample.answer);
