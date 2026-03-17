@@ -282,9 +282,9 @@ export default function M1SimulationPanels(props: Props) {
     return (
       <ExplorerLayout
         title="Pace log reasoning board"
-        mission="Set one flat, one rising, and one falling pace log, then compare what the graph height says and what the graph slope says at the same instant."
+        mission="Set one flat, one rising, and one falling pace log, then compare what the graph height at a chosen time says and what the graph slope over an interval says."
         watchFor={[
-          "Height answers a speed-now question.",
+          "Height at a chosen time answers a speed-at-that-time question.",
           "Slope answers a change-of-speed question.",
           "A flat line above zero still means constant motion, not rest.",
         ]}
@@ -328,7 +328,7 @@ export default function M1SimulationPanels(props: Props) {
             />
           </>
         }
-        note="This lesson is a graph-reading upgrade over F2: students must stop treating graph height and graph slope as the same physical idea."
+        note="This lesson trains students to keep graph height and graph slope as separate physical ideas."
       />
     );
   }
@@ -461,7 +461,7 @@ export default function M1SimulationPanels(props: Props) {
             />
           </>
         }
-        note="This lesson should feel more advanced than F2 because it asks for strategic equation choice, condition checking, and representation links between graph area and algebra."
+        note="This lesson asks for strategic equation choice, condition checking, and representation links between graph area and algebra."
       />
     );
   }
@@ -509,7 +509,7 @@ export default function M1SimulationPanels(props: Props) {
             <MetricChip label="Interpretation" value="You must name the axes before naming the slope." tone="slate" />
           </>
         }
-        note="This is one of the clearest places where M1 should feel above F2: students are not only reading a graph, they are comparing rate meanings across graph families."
+        note="This is one of the clearest places where students compare rate meanings across graph families instead of reading slope by appearance alone."
       />
     );
   }

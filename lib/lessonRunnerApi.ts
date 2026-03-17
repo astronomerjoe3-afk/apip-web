@@ -111,9 +111,9 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
         visual_title: "Pace log",
-        visual_caption: "On a pace log, height tells speed now while slope tells how the pace is changing.",
+        visual_caption: "On a pace log, the graph height at a chosen time shows the speed at that time, while the slope shows how the speed is changing.",
         visual_callouts: [
-          "A high point means large speed now.",
+          "A high point at a chosen time means large speed at that time.",
           "A rising line means positive acceleration.",
           "Flat above zero still means motion.",
         ],
@@ -2160,7 +2160,7 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
       ];
     case "M1_L2":
       return [
-        mcItem("M1L2_T8", "What does the height of a pace log tell you?", ["the speed at that instant", "the distance covered so far", "the acceleration for the whole graph", "the shape of the route"], 0, "Height is about current speed on this graph.", "The height of a pace log tells you the speed at that instant."),
+        mcItem("M1L2_T8", "At a chosen time on a pace log, what does the graph height show?", ["the speed at that exact time", "the distance covered so far", "the acceleration for the whole graph", "the shape of the route"], 0, "Read the vertical value at one chosen time.", "The graph height at a chosen time shows the speed at that exact time."),
         mcItem("M1L2_T9", "What does the slope of a pace log tell you?", ["how the speed is changing", "the total distance covered", "the direction of the road", "the mass of the object"], 0, "Slope is a rate of change here.", "The slope of a pace log tells you how the speed is changing, so it represents acceleration."),
         mcItem("M1L2_T10", "Why can a flat pace log above zero still represent motion?", ["Because the speed is constant rather than zero", "Because all flat graphs mean no motion", "Because height is irrelevant on this graph", "Because acceleration has become distance"], 0, "Flat above zero is cruising.", "A flat pace log above zero still represents motion because the speed is constant rather than zero."),
         mcItem("M1L2_T11", "Two pace logs have the same speed at 5 s, but one is steeper. Which statement is correct?", ["They match in speed at that instant but not in acceleration", "They match in acceleration but not in speed", "They must show the same total distance", "The steeper one must be slower then"], 0, "Equal height does not force equal slope.", "They match in speed at that instant because the heights match, but the steeper one has the larger acceleration."),
@@ -2168,7 +2168,7 @@ function masteryVariantsFromPool(items: UnknownRecord[], code: string): UnknownR
         shortItem("M1L2_T13", "A pace log changes from 4 m/s to 10 m/s in 2 s. What acceleration does that show?", ["3", "3 m/s^2", "3 m/s/s"], "Use change in speed divided by time."),
         mcItem("M1L2_T14", "Why is the statement 'a higher point means more acceleration' unreliable on a pace log?", ["Because acceleration depends on slope, not height", "Because pace logs cannot show acceleration", "Because high speed removes acceleration", "Because height always equals distance"], 0, "Separate current value from change rate.", "The statement is unreliable because acceleration depends on the slope of the graph, not on its height."),
         mcItem("M1L2_T15", "A straight rising pace log and a steeper straight rising pace log are compared. What differs?", ["the rate at which the speed is increasing", "whether time is passing", "whether the graph is a speed-time graph", "the existence of speed itself"], 0, "A steeper rising line means a larger acceleration.", "The steeper line has the larger rate of increase of speed, so it has the larger acceleration."),
-        mcItem("M1L2_T16", "Which statement best resists F2-style duplication and stays true to Module 1?", ["A pace log is a record of speed now, not a picture of distance gained", "A pace log is another name for a distance-time graph", "The area under any graph always gives distance", "Acceleration is just a bigger speed"], 0, "Module 1 keeps representations distinct.", "A pace log records speed now; it is not another way of drawing distance-time motion."),
+        mcItem("M1L2_T16", "Which statement best keeps pace-log meaning clear?", ["A pace log is a record of speed now, not a picture of distance gained", "A pace log is another name for a distance-time graph", "The area under any graph always gives distance", "Acceleration is just a bigger speed"], 0, "Module 1 keeps representations distinct.", "A pace log records speed now; it is not another way of drawing distance-time motion."),
         mcItem("M1L2_T17", "What does a horizontal line on the time axis itself mean on a pace log?", ["the object is at rest for that interval", "the object moves at constant speed above zero", "the object accelerates steadily", "the graph is measuring distance"], 0, "Flat on zero is different from flat above zero.", "A horizontal line on the time axis means the speed is zero, so the object is at rest for that interval."),
       ];
     case "M1_L3":
@@ -2379,17 +2379,17 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
       case "F4_L6":
         return ["F3_L3", "F3_L6", "F4_L2", "F4_L3", "F4_L5"];
       case "M1_L1":
-        return ["F2_L1", "F2_L3", "M1_L2", "M1_L5", "M1_L6"];
+        return ["M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6"];
       case "M1_L2":
-        return ["F2_L2", "F2_L4", "M1_L1", "M1_L3", "M1_L5"];
+        return ["M1_L1", "M1_L3", "M1_L4", "M1_L5", "M1_L6"];
       case "M1_L3":
-        return ["F2_L2", "F2_L6", "M1_L2", "M1_L4", "M1_L5"];
+        return ["M1_L1", "M1_L2", "M1_L4", "M1_L5", "M1_L6"];
       case "M1_L4":
-        return ["M1_L3", "M1_L5", "M1_L6", "F2_L6", "F3_L6"];
+        return ["M1_L1", "M1_L2", "M1_L3", "M1_L5", "M1_L6"];
       case "M1_L5":
-        return ["F2_L3", "F2_L4", "M1_L1", "M1_L2", "M1_L6"];
+        return ["M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L6"];
       case "M1_L6":
-        return ["F2_L4", "F3_L1", "M1_L2", "M1_L4", "M1_L5"];
+        return ["M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5"];
       case "M2_L1":
       case "M2_L2":
       case "M2_L3":
