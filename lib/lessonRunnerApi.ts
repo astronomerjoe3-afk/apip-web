@@ -1139,6 +1139,26 @@ function choiceLabel(item: UnknownRecord, answer: unknown): string | null {
   return index >= 0 && index < choices.length ? choices[index] : null;
 }
 
+function multipleChoiceMatches(item: UnknownRecord, answer: unknown): boolean {
+  const answerIndex = valueIndex(answer);
+  if (answerIndex === resolvedAnswerIndex(item)) {
+    return true;
+  }
+
+  const correctAnswer = normalizeOpenAnswer(resolvedCorrectAnswer(item));
+  if (!correctAnswer) {
+    return false;
+  }
+
+  const submittedChoice = normalizeOpenAnswer(choiceLabel(item, answer) || "");
+  if (submittedChoice && submittedChoice === correctAnswer) {
+    return true;
+  }
+
+  const rawAnswer = normalizeOpenAnswer(answer);
+  return Boolean(rawAnswer) && rawAnswer === correctAnswer;
+}
+
 function teachingFocus(prompt: string, title: string): string {
   const source = `${title} ${prompt}`.toLowerCase();
   if (source.includes("work") || (source.includes("force") && source.includes("distance"))) return "Work is energy transferred by a force only when the object moves in the force direction.";
@@ -1311,7 +1331,7 @@ function grade(item: UnknownRecord, answer: unknown, title: string): UnknownReco
   const acceptedAnswers = shortAnswerAccepted(item);
   const isCorrect =
     choices.length > 0
-      ? answerIndex === resolvedAnswerIndex(item)
+      ? multipleChoiceMatches(item, answer)
       : shortAnswerMatches(answer, acceptedAnswers, item);
   const explanation = resolvedExplanation(item, answerIndex);
   const focus = meta?.teachingFocus || text(item.hint) || teachingFocus(prompt, title);

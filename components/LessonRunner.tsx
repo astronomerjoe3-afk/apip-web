@@ -1162,7 +1162,7 @@ export default function LessonRunner({
           onClick={() =>
             void sendEvent("concept_gate_submitted", {
               from_stage: "concept_gate",
-              answers,
+              answers: answersRef.current,
               question_ids: payload.questions.map((question) => question.id),
             })
           }
@@ -2919,7 +2919,7 @@ export default function LessonRunner({
           onClick={() =>
             void sendEvent("mastery_submitted", {
               from_stage: "mastery",
-              answers,
+              answers: answersRef.current,
               question_ids: payload.questions.map((question) => question.id),
             })
           }
