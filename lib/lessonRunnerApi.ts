@@ -669,6 +669,7 @@ function numericAnswer(value: unknown): number | null {
 
 function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   const itemId = text(item.id);
+  const promptKey = normalizePromptKey(item.prompt);
   if (itemId === "F1-L2-D1") {
     return { id: "F1-L2-D1", answerIndex: 2, correctAnswer: "displacement", explanation: "Displacement is a vector because it has both size and direction.", teachingFocus: "Vectors need magnitude and direction, while scalars only need magnitude.", misconceptionTag: "vector_scalar_confusion" };
   }
@@ -678,37 +679,87 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   if (itemId === "F1-L2-T1") {
     return { id: "F1-L2-T1", answerIndex: 1, correctAnswer: "Vector", explanation: "The direction east makes it a vector.", teachingFocus: "Direction is the feature that turns a scalar description into a vector one.", misconceptionTag: "vector_scalar_confusion" };
   }
-  if (itemId === "F1L3_D1" || itemId === "F1-L3-D1") {
+  if (
+    (itemId === "F1L3_D1" || itemId === "F1-L3-D1") &&
+    promptKey === "a ruler s smallest division is 1 mm a reasonable reported uncertainty is closest to"
+  ) {
     return { id: "F1L3_D1", answerIndex: 1, correctAnswer: "+/- 0.5 mm", explanation: "+/- 0.5 mm is reasonable because a common estimate is about half of the smallest 1 mm division.", teachingFocus: "For a simple scale reading, a reasonable uncertainty is often about half the smallest division.", misconceptionTag: "uncertainty_estimation" };
   }
-  if (itemId === "F1L3_D2" || itemId === "F1-L3-D2") {
+  if (
+    (itemId === "F1L3_D2" || itemId === "F1-L3-D2") &&
+    promptKey === "if you consistently read too high due to a zero error this is best described as"
+  ) {
     return { id: "F1L3_D2", answerIndex: 1, correctAnswer: "systematic error", explanation: "This is systematic error because the same zero error shifts every reading in the same direction.", teachingFocus: "Systematic error pushes measurements the same way each time, often because of zero error or poor calibration.", misconceptionTag: "random_vs_systematic_error" };
   }
-  if (itemId === "F1L3_T2" || itemId === "F1-L3-T2") {
+  if (
+    (itemId === "F1L3_T2" || itemId === "F1-L3-T2") &&
+    promptKey === "a scale has 0 2 cm divisions what is a reasonable uncertainty to report"
+  ) {
     return { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so 0.2 cm divisions suggest +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" };
   }
-  if (itemId === "F1L4_D1" || itemId === "F1-L4-D1") {
+  if (
+    (itemId === "F1L4_D1" || itemId === "F1-L4-D1") &&
+    promptKey === "how many significant figures are in 0 00450"
+  ) {
     return { id: "F1L4_D1", answerIndex: 1, correctAnswer: "3", explanation: "0.00450 has 3 significant figures because the leading zeros do not count, but the trailing zero after the decimal does count.", teachingFocus: "Count significant figures from the first non-zero digit; leading zeros only place the decimal point, but trailing zeros after a decimal can show real precision.", misconceptionTag: "significant_figures" };
   }
-  if (itemId === "F1L4_D2" || itemId === "F1-L4-D2") {
+  if (
+    (itemId === "F1L4_D2" || itemId === "F1-L4-D2") &&
+    promptKey === "round 12 349 to 3 significant figures"
+  ) {
     return { id: "F1L4_D2", answerIndex: 0, correctAnswer: "12.3", explanation: "12.349 rounds to 12.3 to 3 significant figures because you keep 1, 2, and 3, then the next digit 4 leaves the 3 unchanged.", teachingFocus: "For significant figures, keep the required digits and use the next digit only to decide whether to round up.", misconceptionTag: "rounding_rules" };
   }
-  if (itemId === "F1L4_T1" || itemId === "F1-L4-T1") {
+  if (
+    (itemId === "F1L4_T1" || itemId === "F1-L4-T1") &&
+    promptKey === "calculate 2 5 3 42 and report the result with correct significant figures"
+  ) {
     return { id: "F1-L4-T1", acceptedAnswers: ["8.6"], correctAnswer: "8.6", explanation: "2.5 x 3.42 = 8.55, which rounds to 8.6 because the result should keep 2 significant figures.", teachingFocus: "In multiplication and division, the result usually keeps the same number of significant figures as the least precise measurement.", misconceptionTag: "significant_figures" };
   }
-  if (itemId === "F1L6_D1" || itemId === "F1-L6-D1") {
+  if (
+    (itemId === "F1L6_D1" || itemId === "F1-L6-D1") &&
+    promptKey === "a set of measurements are very close to each other but far from the true value this is"
+  ) {
     return { id: "F1L6_D1", answerIndex: 1, correctAnswer: "precise but not accurate", explanation: "The measurements are tightly grouped, so they are precise, but they are far from the true value, so they are not accurate.", teachingFocus: "Precision is about closeness among repeated readings, while accuracy is about closeness to the accepted or true value.", misconceptionTag: "precision_vs_accuracy" };
   }
-  if (itemId === "F1L6_D2" || itemId === "F1-L6-D2") {
+  if (
+    (itemId === "F1L6_D2" || itemId === "F1-L6-D2") &&
+    promptKey === "give one source of systematic error and one source of random error in a measurement"
+  ) {
     return { id: "F1L6_D2", acceptedAnswers: ["Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", "Systematic: zero error. Random: reaction time.", "Systematic: poor calibration. Random: reading fluctuations."], correctAnswer: "Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", explanation: "A strong answer names one cause that shifts readings the same way each time and one cause that makes readings scatter from trial to trial.", teachingFocus: "Systematic error adds a consistent bias, while random error causes scatter between repeated readings.", misconceptionTag: "random_vs_systematic_error" };
   }
-  if (itemId === "F1L6_T1" || itemId === "F1-L6-T1") {
+  if (
+    (itemId === "F1L6_T1" || itemId === "F1-L6-T1") &&
+    promptKey === "you measure length as 12 4 cm with a ruler of 1 mm divisions report the value with a reasonable uncertainty"
+  ) {
     return { id: "F1L6_T1", acceptedAnswers: ["12.4 +/- 0.05 cm", "12.4 cm +/- 0.05 cm", "12.4 cm +/- 0.05", "12.40 +/- 0.05 cm", "12.40 cm +/- 0.05 cm", "12.40 cm +/- 0.05"], correctAnswer: "12.4 +/- 0.05 cm", explanation: "A ruler with 1 mm divisions supports about +/- 0.05 cm uncertainty, so 12.4 cm should be reported with that uncertainty.", teachingFocus: "Report the measured value with a reasonable uncertainty based on the instrument's smallest division.", misconceptionTag: "uncertainty_estimation" };
   }
   if (itemId === "F1-L2-C1") {
     return { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" };
   }
   return FALLBACK_ANSWER_METADATA[normalizePromptKey(item.prompt)];
+}
+
+function canonicalAssessmentOverride(item: UnknownRecord): UnknownRecord | null {
+  const promptKey = normalizePromptKey(item.prompt);
+
+  if (promptKey === "which tool is most suitable for measuring the thickness of a sheet of card") {
+    const choices = ["metre rule", "kitchen scale", "caliper", "micrometer screw gauge"];
+    const answerIndex = 3;
+    const hint = "A very small thickness needs the finest suitable length tool.";
+    const explanation = "A micrometer screw gauge is best because the card is very thin and needs the finest suitable resolution.";
+    return {
+      ...item,
+      id: text(item.id) || "F1L3_D1",
+      prompt: "Which tool is most suitable for measuring the thickness of a sheet of card?",
+      choices,
+      answer_index: answerIndex,
+      hint,
+      feedback: choices.map((_, index) => (index === answerIndex ? explanation : hint)),
+      correct_answer: choices[answerIndex],
+    };
+  }
+
+  return null;
 }
 
 function includesAnyPhrase(source: string, phrases: string[]): boolean {
@@ -763,9 +814,11 @@ function resolvedItemId(item: UnknownRecord, key: string, index: number): string
 }
 
 function withResolvedItem(item: UnknownRecord, key: string, index: number): UnknownRecord {
+  const canonical = canonicalAssessmentOverride(item);
+  const normalized = canonical ? { ...item, ...canonical } : item;
   return {
-    ...item,
-    id: resolvedItemId(item, key, index),
+    ...normalized,
+    id: resolvedItemId(normalized, key, index),
   };
 }
 
@@ -1119,9 +1172,6 @@ function resolvedMisconceptionTag(item: UnknownRecord, prompt: string): string |
 function resolvedAnswerIndex(item: UnknownRecord): number {
   const explicit = item.answer_index;
   if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
-  const itemId = text(item.id);
-  const exactMetaIndex = itemId ? fallbackMeta({ id: itemId })?.answerIndex : undefined;
-  if (typeof exactMetaIndex === "number" && Number.isFinite(exactMetaIndex)) return exactMetaIndex;
   const metaIndex = fallbackMeta(item)?.answerIndex;
   if (typeof metaIndex === "number" && Number.isFinite(metaIndex)) return metaIndex;
   return -1;
