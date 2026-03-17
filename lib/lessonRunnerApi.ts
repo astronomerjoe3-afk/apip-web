@@ -3815,6 +3815,13 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
     case "F1_L3":
       return [
         {
+          kind: "visual",
+          title: "See the measurement-resolution ladder",
+          caption: "Keep the same object fixed and compare how ruler, caliper, and micrometer screw gauge support different justified digits and uncertainties.",
+          image_url: "/lesson-media/f1/f1-l3-tool-resolution.svg",
+          highlights: ["The object stays the same across all three rows", "Finer divisions support more justified detail", "Resolution controls the uncertainty you can honestly report"],
+        },
+        {
           kind: "interactive",
           title: "Manipulate one instrument at a time",
           caption: "Use the clean instrument tour to switch between ruler, caliper, and micrometer screw gauge without packing all three into one crowded picture.",
