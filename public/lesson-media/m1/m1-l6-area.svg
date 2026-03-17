@@ -5,6 +5,7 @@
     .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
     .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
     .axis { fill: #64748b; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+    .guide { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   </style>
   <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
   <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
@@ -19,8 +20,12 @@
   <rect x="216" y="458" width="180" height="90" fill="#93C5FD" fill-opacity="0.9" />
   <polygon points="396,458 564,458 564,348" fill="#F59E0B" fill-opacity="0.82" />
   <polyline points="216,458 396,458 564,348" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
-  <text x="236" y="442" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Rectangle = base distance</text>
-  <text x="410" y="334" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Triangle = extra distance</text>
+  <rect x="224" y="404" width="222" height="48" rx="16" fill="#DBEAFE" />
+  <text x="246" y="435" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Rectangle = base distance</text>
+  <polyline points="446,428 470,428 396,458" class="guide" stroke="#1D4ED8" />
+  <rect x="398" y="292" width="220" height="48" rx="16" fill="#FEF3C7" />
+  <text x="420" y="323" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Triangle = extra distance</text>
+  <polyline points="508,340 520,340 544,356" class="guide" stroke="#B45309" />
   <text x="326" y="580" class="axis">time, t (s)</text>
   <text x="132" y="436" class="axis" transform="rotate(-90 132 436)">speed, v (m/s)</text>
 

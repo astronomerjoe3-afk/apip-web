@@ -4,6 +4,7 @@
     .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
     .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
     .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+    .guide { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   </style>
   <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
   <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
@@ -39,8 +40,10 @@
   <line x1="864" y1="548" x2="864" y2="300" stroke="#334155" stroke-width="4" />
   <polygon points="864,548 864,436 1080,340 1080,548" fill="#BFDBFE" fill-opacity="0.55" />
   <polyline points="864,436 1080,340" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
-  <text x="884" y="320" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Uniform slope means</text>
-  <text x="884" y="344" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">uniform acceleration</text>
+  <rect x="878" y="294" width="188" height="64" rx="18" fill="#FEF3C7" />
+  <text x="896" y="320" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Uniform slope means</text>
+  <text x="896" y="344" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">uniform acceleration</text>
+  <polyline points="972,358 972,384 1032,360" class="guide" stroke="#B45309" />
   <text x="844" y="584" class="body">When the graph keeps one acceleration pattern,</text>
   <text x="844" y="612" class="body">the algebra and the area story stay aligned.</text>
 

@@ -7,6 +7,7 @@
     .chip { fill: #1e293b; font: 700 20px 'Segoe UI', Arial, sans-serif; }
     .small { fill: #64748b; font: 400 18px 'Segoe UI', Arial, sans-serif; }
     .axis { fill: #475569; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+    .guide { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   </style>
   <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
   <rect x="36" y="28" width="1128" height="664" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
@@ -66,13 +67,16 @@
   <circle cx="710" cy="478" r="8" fill="#F59E0B" />
   <circle cx="794" cy="478" r="8" fill="#F59E0B" />
   <circle cx="962" cy="350" r="8" fill="#2563EB" />
-  <rect x="668" y="304" width="272" height="54" rx="18" fill="#DBEAFE" />
-  <text x="686" y="337" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Slope = speed on that segment</text>
-  <rect x="786" y="438" width="196" height="48" rx="16" fill="#FEF3C7" />
-  <text x="808" y="469" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Flat = stopped</text>
-  <rect x="786" y="294" width="288" height="70" rx="20" fill="#DCFCE7" />
-  <text x="806" y="322" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Same final point can hide</text>
-  <text x="806" y="346" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">a different run story</text>
+  <rect x="646" y="308" width="214" height="52" rx="18" fill="#DBEAFE" />
+  <text x="666" y="340" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Slope = speed</text>
+  <polyline points="860,334 896,334 928,378" class="guide" stroke="#1D4ED8" />
+  <rect x="792" y="430" width="188" height="50" rx="16" fill="#FEF3C7" />
+  <text x="814" y="462" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Flat = stopped</text>
+  <polyline points="792,454 770,454 770,478" class="guide" stroke="#B45309" />
+  <rect x="830" y="246" width="238" height="76" rx="20" fill="#DCFCE7" />
+  <text x="850" y="276" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Same final point can hide</text>
+  <text x="850" y="302" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">a different run story</text>
+  <polyline points="948,322 984,322 1012,356" class="guide" stroke="#047857" />
   <text x="792" y="616" class="axis">time, t (s)</text>
   <text x="552" y="446" class="axis" transform="rotate(-90 552 446)">distance from start, s (m)</text>
 
