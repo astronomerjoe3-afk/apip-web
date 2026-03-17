@@ -1117,11 +1117,11 @@ function resolvedMisconceptionTag(item: UnknownRecord, prompt: string): string |
 
 
 function resolvedAnswerIndex(item: UnknownRecord): number {
+  const explicit = item.answer_index;
+  if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
   const itemId = text(item.id);
   const exactMetaIndex = itemId ? fallbackMeta({ id: itemId })?.answerIndex : undefined;
   if (typeof exactMetaIndex === "number" && Number.isFinite(exactMetaIndex)) return exactMetaIndex;
-  const explicit = item.answer_index;
-  if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
   const metaIndex = fallbackMeta(item)?.answerIndex;
   if (typeof metaIndex === "number" && Number.isFinite(metaIndex)) return metaIndex;
   return -1;
@@ -1130,6 +1130,9 @@ function resolvedCorrectAnswer(item: UnknownRecord): string {
   const choices = asList(item.choices).map((choice) => text(choice));
   const correctIndex = resolvedAnswerIndex(item);
   if (correctIndex >= 0 && correctIndex < choices.length) return choices[correctIndex];
+
+  const explicitCorrect = text(item.correct_answer || item.correctAnswer).trim();
+  if (explicitCorrect) return explicitCorrect;
 
   const accepted = shortAnswerAccepted(item);
   if (accepted.length > 0) {
@@ -1142,11 +1145,6 @@ function resolvedCorrectAnswer(item: UnknownRecord): string {
 function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
   const feedback = asList(item.feedback).map((entry) => text(entry));
   const answerFeedback = answerIndex >= 0 && answerIndex < feedback.length ? feedback[answerIndex] : "";
-  const metaExplanation = fallbackMeta(item)?.explanation;
-  if (hasMeaningfulFeedback(metaExplanation || "")) {
-    return metaExplanation || "";
-  }
-
   if (hasMeaningfulFeedback(answerFeedback)) {
     return answerFeedback;
   }
@@ -1154,6 +1152,11 @@ function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
   const hint = text(item.hint);
   if (hasMeaningfulFeedback(hint)) {
     return hint;
+  }
+
+  const metaExplanation = fallbackMeta(item)?.explanation;
+  if (hasMeaningfulFeedback(metaExplanation || "")) {
+    return metaExplanation || "";
   }
 
   return "Review the lesson idea and try again.";
@@ -1164,8 +1167,15 @@ function shortAnswerAccepted(item: UnknownRecord): string[] {
     .map((entry) => text(entry))
     .filter(Boolean);
   const explicitCorrect = text(item.correct_answer || item.correctAnswer).trim();
+  const explicitValues = [...accepted, explicitCorrect]
+    .map((entry) => text(entry).trim())
+    .filter(Boolean);
+  if (explicitValues.length > 0) {
+    return [...new Set(explicitValues)];
+  }
+
   const meta = fallbackMeta(item);
-  const values = [...accepted, explicitCorrect, ...(meta?.acceptedAnswers || []), meta?.correctAnswer || ""]
+  const values = [...(meta?.acceptedAnswers || []), meta?.correctAnswer || ""]
     .map((entry) => text(entry).trim())
     .filter(Boolean);
   return [...new Set(values)];
