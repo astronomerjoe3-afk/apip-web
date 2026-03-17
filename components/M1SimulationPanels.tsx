@@ -78,7 +78,7 @@ function ExplorerLayout({
   controls: ReactNode;
   figure: ReactNode;
   chips: ReactNode;
-  note: string;
+  note?: string;
   mission?: string;
   watchFor?: string[];
 }) {
@@ -111,7 +111,9 @@ function ExplorerLayout({
         <h4 className="text-lg font-semibold text-slate-900">Quest-Log physics board</h4>
         <div className={`mt-4 ${figureClass}`}>{figure}</div>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{chips}</div>
-        <div className="mt-4 rounded-2xl border border-sky-100 bg-sky-50/80 p-4 text-slate-700">{note}</div>
+        {note ? (
+          <div className="mt-4 rounded-2xl border border-sky-100 bg-sky-50/80 p-4 text-slate-700">{note}</div>
+        ) : null}
       </div>
     </div>
   );
@@ -263,7 +265,6 @@ export default function M1SimulationPanels(props: Props) {
             />
           </>
         }
-        note="M1 goes beyond F2 by treating the graph as a representation system. The main job here is separating the physical run from the recorded graph story."
       />
     );
   }

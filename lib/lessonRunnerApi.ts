@@ -3692,7 +3692,23 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
 }
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const code = lessonCode(lesson);
+  const authoredExample = asRecord(asList(lesson.worked_examples)[0]);
+  const authoredPrompt = text(authoredExample.prompt);
+  const authoredSteps = asList(authoredExample.steps).map((step) => text(step)).filter(Boolean);
+  const authoredAnswer = text(authoredExample.final_answer) || text(authoredExample.answer);
+  const authoredWhyItMatters = text(authoredExample.why_it_matters);
   const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
+
+  if (authoredPrompt && authoredSteps.length > 0 && authoredAnswer) {
+    return {
+      body: authoredWhyItMatters || "Work through the logic one step at a time, then finish with a clear physics statement.",
+      worked_example: {
+        prompt: authoredPrompt,
+        steps: authoredSteps,
+        answer: authoredAnswer,
+      },
+    };
+  }
 
   switch (code) {
     case "F1_L1":
@@ -4030,6 +4046,20 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             "A fuse or breaker protects the circuit by opening the route when the current becomes too large, rather than allowing dangerous heating to continue.",
           ],
           answer: "Power = 24 W, total electrical energy transferred = 360 J, and the fuse protects by cutting off dangerously large current.",
+        },
+      };
+    case "M1_L1":
+      return {
+        body: "Read the mission log one segment at a time so the graph turns back into a motion story instead of being mistaken for the route itself.",
+        worked_example: {
+          prompt: "A graph rises from 0 m to 24 m in 6 s, stays flat for 4 s, then rises from 24 m to 36 m in 3 s. What story does it tell?",
+          steps: [
+            "Read the first rising segment as steady motion because the recorded distance increases at a constant rate.",
+            "Read the flat section as a stop because time passes while the distance stays unchanged.",
+            "Read the final rising segment as motion again, then compare its slope with the first moving segment.",
+            "Because the final segment is steeper than the first one, the traveller moves again and this time faster than before.",
+          ],
+          answer: "Move steadily, stop, then move again faster than before.",
         },
       };
     default:
