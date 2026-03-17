@@ -19,6 +19,7 @@ type StageName =
 type LessonStatus = "not_started" | "in_progress" | "completed";
 type SimulationToolKey = "ruler" | "caliper" | "micrometer";
 type MeasurementPresetKey = "wire" | "marble" | "chalk" | "custom";
+type MeasurementExplorerStageKey = "tool_match" | "reading_detail" | "spread_check" | "zero_error";
 
 type QuestionOption = {
   value: string;
@@ -446,6 +447,7 @@ export default function LessonRunner({
   const [scaffoldStepIndex, setScaffoldStepIndex] = useState(0);
   const [simTool, setSimTool] = useState<SimulationToolKey>("caliper");
   const [simMeasurementPreset, setSimMeasurementPreset] = useState<MeasurementPresetKey>("marble");
+  const [simMeasurementStage, setSimMeasurementStage] = useState<MeasurementExplorerStageKey>("tool_match");
   const [simLength, setSimLength] = useState(1.86);
   const [simZeroError, setSimZeroError] = useState(0.08);
 
@@ -512,6 +514,7 @@ export default function LessonRunner({
   useEffect(() => {
     setSimTool("caliper");
     setSimMeasurementPreset("marble");
+    setSimMeasurementStage("tool_match");
     setSimLength(1.86);
     setSimZeroError(0.08);
     setSimMetricMeters(0.35);
@@ -1203,6 +1206,148 @@ export default function LessonRunner({
     const rulerReadEndX = 56 + (simulationReading / 8) * 236;
     const caliperJawX = 118 + (simulationReading / 8) * 132;
     const micrometerGapX = 170 + (Math.min(simLength, 0.9) / 0.9) * 38;
+    const measurementStageOrder: Array<{
+      key: MeasurementExplorerStageKey;
+      stageLabel: string;
+      title: string;
+      description: string;
+    }> = [
+      {
+        key: "tool_match",
+        stageLabel: "Stage 1",
+        title: "Match the object to the instrument",
+        description: "Start by choosing the object and deciding which tool earns your trust before you worry about digits.",
+      },
+      {
+        key: "reading_detail",
+        stageLabel: "Stage 2",
+        title: "Read the scale honestly",
+        description: "Keep the object fixed and compare the reported reading, the smallest division, and the uncertainty the tool can justify.",
+      },
+      {
+        key: "spread_check",
+        stageLabel: "Stage 3",
+        title: "Check repeated-reading spread",
+        description: "Look at several measurements of the same object so random scatter stays separate from resolution.",
+      },
+      {
+        key: "zero_error",
+        stageLabel: "Stage 4",
+        title: "Test zero-error bias",
+        description: "Finish by shifting the zero and comparing the observed reading with the corrected reading.",
+      },
+    ];
+    const activeMeasurementStageIndex = Math.max(0, measurementStageOrder.findIndex((entry) => entry.key === simMeasurementStage));
+    const activeMeasurementStage = measurementStageOrder[activeMeasurementStageIndex] || measurementStageOrder[0];
+    const currentMeasurementPresetLabel = simMeasurementPreset === "wire"
+      ? "Wire thickness"
+      : simMeasurementPreset === "marble"
+        ? "Marble diameter"
+        : simMeasurementPreset === "chalk"
+          ? "Chalk length"
+          : "Custom object";
+    const currentMeasurementPresetNote = simMeasurementPreset === "wire"
+      ? "Thin wire needs a very fine scale, so it is a good stress test for the micrometer."
+      : simMeasurementPreset === "marble"
+        ? "A marble is large enough for a caliper to grip cleanly without needing the very finest scale."
+        : simMeasurementPreset === "chalk"
+          ? "Chalk is large enough that a ruler is usually already honest enough."
+          : simLength < 0.08
+            ? "This is extremely small, so the finest tool is usually the honest choice."
+            : simLength < 2.5
+              ? "This is a small object, so a caliper or micrometer will usually justify the best detail."
+              : "This is a larger object, so a ruler may already be enough.";
+    const recommendedMeasurementTool: SimulationToolKey = simMeasurementPreset === "wire"
+      ? "micrometer"
+      : simMeasurementPreset === "marble"
+        ? "caliper"
+        : simMeasurementPreset === "chalk"
+          ? "ruler"
+          : simLength < 0.08
+            ? "micrometer"
+            : simLength < 2.5
+              ? "caliper"
+              : "ruler";
+    const measurementFit = (() => {
+      if (simMeasurementPreset === "wire") {
+        if (simTool === "micrometer") {
+          return {
+            tone: "border-emerald-200 bg-emerald-50 text-emerald-900",
+            title: "Best match",
+            body: "The micrometer screw gauge is the best fit because the wire is tiny and the finest divisions matter.",
+          };
+        }
+        if (simTool === "caliper") {
+          return {
+            tone: "border-sky-200 bg-sky-50 text-sky-900",
+            title: "Usable, but not finest",
+            body: "A caliper can still help, but the micrometer supports even smaller uncertainty for a thin wire.",
+          };
+        }
+        return {
+          tone: "border-amber-200 bg-amber-50 text-amber-900",
+          title: "Too coarse",
+          body: "A ruler's 1 mm scale is too coarse to justify a thin-wire thickness confidently.",
+        };
+      }
+      if (simMeasurementPreset === "marble") {
+        if (simTool === "caliper") {
+          return {
+            tone: "border-emerald-200 bg-emerald-50 text-emerald-900",
+            title: "Best match",
+            body: "A caliper is the natural fit because its jaws hold the curved edges cleanly while still giving fine detail.",
+          };
+        }
+        if (simTool === "micrometer") {
+          return {
+            tone: "border-sky-200 bg-sky-50 text-sky-900",
+            title: "More detail than needed",
+            body: "The micrometer can measure it, but the caliper is usually the better-matched tool for a marble.",
+          };
+        }
+        return {
+          tone: "border-amber-200 bg-amber-50 text-amber-900",
+          title: "Coarse choice",
+          body: "A ruler gives only a rough diameter, so it is harder to justify the detail for a rounded object.",
+        };
+      }
+      if (simMeasurementPreset === "chalk") {
+        if (simTool === "ruler") {
+          return {
+            tone: "border-emerald-200 bg-emerald-50 text-emerald-900",
+            title: "Best match",
+            body: "A ruler is usually enough here because the object is large and the coarse divisions are still honest.",
+          };
+        }
+        return {
+          tone: "border-sky-200 bg-sky-50 text-sky-900",
+          title: "Finer than needed",
+          body: "The finer tools still work, but they are offering more detail than this larger classroom object usually needs.",
+        };
+      }
+      if (simTool === recommendedMeasurementTool) {
+        return {
+          tone: "border-emerald-200 bg-emerald-50 text-emerald-900",
+          title: "Best current match",
+          body: "For this custom size, this tool is the best match for the level of detail you are trying to justify.",
+        };
+      }
+      return {
+        tone: "border-sky-200 bg-sky-50 text-sky-900",
+        title: "Compare with the recommended tool",
+        body: `Try switching to the ${recommendedMeasurementTool === "ruler" ? "ruler" : recommendedMeasurementTool === "caliper" ? "caliper" : "micrometer screw gauge"} and see whether the reported detail becomes more honest for this object size.`,
+      };
+    })();
+    const spreadCoach = simTool === "ruler"
+      ? "The ruler gives the widest scatter because each reading is limited by the coarse 1 mm divisions."
+      : simTool === "caliper"
+        ? "The caliper usually gives a tighter cluster because the scale steps are finer and the jaws help you repeat the placement."
+        : "The micrometer gives the tightest cluster here because the finest divisions support the most repeatable detail.";
+    const zeroErrorCoach = simZeroError === 0
+      ? "With no zero error, the observed reading and the corrected reading agree."
+      : simZeroError > 0
+        ? "A positive zero error makes every observed reading too large by the same amount until you correct it."
+        : "A negative zero error makes every observed reading too small by the same amount until you correct it.";
 
     const simulationPanelGridStyle = { display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", alignItems: "start" };
     const metricCards = [
@@ -1331,154 +1476,250 @@ export default function LessonRunner({
             />
           </div>
         ) : simulationLessonKey === "F1_L3" ? (
-          <div className="grid gap-4 xl:grid-cols-2">
+          <div className="space-y-4">
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
-              <h4 className="text-lg font-semibold text-slate-900">Live instrument bench</h4>
-              <p className="mt-2 text-slate-700">Follow the bench in short checks instead of trying to do everything at once.</p>
-              <ol className="mt-4 space-y-2 text-sm text-slate-700">
-                <li><span className="font-medium text-slate-900">Step 1:</span> Start with chalk and the ruler so the roughest scale feels familiar.</li>
-                <li><span className="font-medium text-slate-900">Step 2:</span> Switch to the marble or wire and compare what changes when you move to a finer tool.</li>
-                <li><span className="font-medium text-slate-900">Step 3:</span> Keep the same object in mind and decide which tool gives the most justified detail.</li>
-              </ol>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                {(['wire', 'marble', 'chalk', 'custom'] as const).map((presetKey) => (
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+                    {activeMeasurementStage.stageLabel} of {measurementStageOrder.length}
+                  </p>
+                  <h4 className="mt-2 text-lg font-semibold text-slate-900">{activeMeasurementStage.title}</h4>
+                  <p className="mt-2 max-w-3xl text-slate-700">{activeMeasurementStage.description}</p>
+                </div>
+                <div className="flex gap-2">
                   <button
-                    key={presetKey}
                     type="button"
-                    onClick={() => {
-                      setSimMeasurementPreset(presetKey);
-                      if (presetKey === "wire") setSimLength(0.428);
-                      if (presetKey === "marble") setSimLength(1.86);
-                      if (presetKey === "chalk") setSimLength(7.42);
-                    }}
-                    className={`rounded-xl border px-4 py-3 text-left text-sm ${simMeasurementPreset === presetKey ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 bg-slate-50 text-slate-700"}`}
+                    onClick={() => setSimMeasurementStage(measurementStageOrder[Math.max(0, activeMeasurementStageIndex - 1)]!.key)}
+                    disabled={activeMeasurementStageIndex === 0}
+                    className={`rounded-xl border px-4 py-2 text-sm ${activeMeasurementStageIndex === 0 ? "cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"}`}
                   >
-                    {presetKey === "wire" ? "Wire thickness" : presetKey === "marble" ? "Marble diameter" : presetKey === "chalk" ? "Chalk length" : "Custom object"}
+                    Previous stage
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSimMeasurementStage(measurementStageOrder[Math.min(measurementStageOrder.length - 1, activeMeasurementStageIndex + 1)]!.key)}
+                    disabled={activeMeasurementStageIndex === measurementStageOrder.length - 1}
+                    className={`rounded-xl border px-4 py-2 text-sm ${activeMeasurementStageIndex === measurementStageOrder.length - 1 ? "cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400" : "border-slate-900 bg-slate-900 text-white hover:bg-slate-800"}`}
+                  >
+                    Next stage
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-2 md:grid-cols-4">
+                {measurementStageOrder.map((entry, index) => (
+                  <button
+                    key={entry.key}
+                    type="button"
+                    onClick={() => setSimMeasurementStage(entry.key)}
+                    className={`rounded-2xl border px-4 py-3 text-left text-sm transition ${entry.key === simMeasurementStage ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"}`}
+                  >
+                    <span className="block text-xs font-semibold uppercase tracking-[0.14em] opacity-75">Stage {index + 1}</span>
+                    <span className="mt-1 block font-semibold">{entry.title}</span>
                   </button>
                 ))}
               </div>
-              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
-                {simMeasurementPreset === "wire"
-                  ? "Thin wire is where the micrometer starts to shine because tiny differences matter."
-                  : simMeasurementPreset === "marble"
-                    ? "A caliper is often the best match for a small round object because its jaws grip the edges."
-                    : simMeasurementPreset === "chalk"
-                      ? "A ruler is usually good enough for a larger classroom object like chalk."
-                      : "Use the slider and tool buttons together to decide which instrument earns your trust."}
-              </div>
-              <div className="mt-4 flex flex-wrap gap-3">
-                {(["ruler", "caliper", "micrometer"] as const).map((toolName) => (
-                  <button
-                    key={toolName}
-                    type="button"
-                    onClick={() => setSimTool(toolName)}
-                    className={`rounded-xl border px-4 py-2 text-sm ${simTool === toolName ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"}`}
-                  >
-                    {toolName === "ruler" ? "Ruler" : toolName === "caliper" ? "Caliper" : "Micrometer"}
-                  </button>
-                ))}
-              </div>
-              <label className="mt-4 block text-sm text-slate-700">
-                Object length (cm)
-                <input className="mt-2 w-full" type="range" min="0.1" max="8" step="0.001" value={simLength} onChange={(e) => { setSimMeasurementPreset("custom"); setSimLength(Number(e.target.value)); }} />
-              </label>
-              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Reported reading:</span> {formatSimulationNumber(simulationReading)} cm</div>
-              <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Estimated uncertainty:</span> {simulationToolConfig.uncertainty}</div>
-              <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Current tool:</span> {simulationToolConfig.label}</div>
-              <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Scale detail:</span> {toolDivisionLabel}</div>
-              <div className="mt-4 rounded-2xl border bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-slate-900">Live instrument view</p>
-                <p className="mt-1 text-sm text-slate-600">The same object looks different because each instrument resolves a different smallest change.</p>
-                {simTool === "ruler" ? (
-                  <svg viewBox="0 0 340 180" role="img" aria-label="Ruler measuring the object" className="mt-4 h-48 w-full rounded-2xl bg-white p-4">
-                    <rect x="42" y="102" width="256" height="34" rx="17" fill="#fde68a" />
-                    {Array.from({ length: 9 }).map((_, index) => {
-                      const x = 56 + index * 29.5;
-                      return (
-                        <g key={`ruler-major-${index}`}>
-                          <line x1={x} y1="102" x2={x} y2="76" stroke="#92400e" strokeWidth="3" strokeLinecap="round" />
-                          <text x={x - 4} y="154" fontSize="12" fill="#475569">{index}</text>
-                        </g>
-                      );
-                    })}
-                    <rect x="56" y="66" width={Math.max(12, rulerTrueEndX - 56)} height="14" rx="7" fill="#60a5fa" opacity="0.35" />
-                    <line x1={rulerReadEndX} y1="58" x2={rulerReadEndX} y2="144" stroke="#0f172a" strokeWidth="4" strokeLinecap="round" />
-                    <text x="56" y="58" fontSize="12" fill="#2563eb">True object span</text>
-                    <text x={Math.min(rulerReadEndX + 8, 246)} y="70" fontSize="12" fill="#0f172a">Reported mark</text>
-                  </svg>
-                ) : simTool === "caliper" ? (
-                  <svg viewBox="0 0 340 180" role="img" aria-label="Caliper measuring the object" className="mt-4 h-48 w-full rounded-2xl bg-white p-4">
-                    <rect x="58" y="104" width="222" height="18" rx="9" fill="#475569" />
-                    <rect x="84" y="70" width="16" height="84" rx="8" fill="#0f766e" />
-                    <rect x={caliperJawX} y="70" width="16" height="84" rx="8" fill="#0f766e" />
-                    <rect x="100" y="96" width={Math.max(14, caliperJawX - 100)} height="24" rx="12" fill="#93c5fd" opacity="0.8" />
-                    <rect x={caliperJawX - 28} y="86" width="56" height="12" rx="6" fill="#94a3b8" />
-                    <text x="90" y="156" fontSize="12" fill="#0f766e">Fixed jaw</text>
-                    <text x={Math.max(180, caliperJawX - 42)} y="156" fontSize="12" fill="#0f766e">Moving jaw</text>
-                  </svg>
-                ) : (
-                  <svg viewBox="0 0 340 180" role="img" aria-label="Micrometer measuring the object" className="mt-4 h-48 w-full rounded-2xl bg-white p-4">
-                    <path d="M84 58 C48 58 48 130 84 130" fill="none" stroke="#334155" strokeWidth="18" strokeLinecap="round" />
-                    <line x1="84" y1="58" x2="156" y2="58" stroke="#334155" strokeWidth="18" strokeLinecap="round" />
-                    <line x1="84" y1="130" x2="156" y2="130" stroke="#334155" strokeWidth="18" strokeLinecap="round" />
-                    <rect x="146" y="86" width={Math.max(12, micrometerGapX - 146)} height="20" rx="10" fill="#60a5fa" opacity="0.75" />
-                    <rect x={micrometerGapX} y="80" width="74" height="32" rx="16" fill="#475569" />
-                    <rect x="220" y="76" width="44" height="40" rx="14" fill="#94a3b8" />
-                    <text x="138" y="146" fontSize="12" fill="#2563eb">Object held in the measuring gap</text>
-                  </svg>
-                )}
+
+              <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-600">
+                <span className="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">Object: {currentMeasurementPresetLabel}</span>
+                <span className="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">Tool: {simulationToolConfig.label}</span>
+                <span className="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">Reading: {formatSimulationNumber(simulationReading)} cm</span>
+                <span className="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">Uncertainty: {simulationToolConfig.uncertainty}</span>
               </div>
             </div>
-            <div className="rounded-2xl border bg-white p-5 shadow-sm">
-              <h4 className="text-lg font-semibold text-slate-900">Reading trust lab</h4>
-              <p className="mt-2 text-slate-700">Finish with two short trust checks.</p>
-              <ol className="mt-4 space-y-2 text-sm text-slate-700">
-                <li><span className="font-medium text-slate-900">Step 4:</span> Compare the repeated-reading spread and decide whether the cluster looks tight or wide.</li>
-                <li><span className="font-medium text-slate-900">Step 5:</span> Add a zero-error offset and compare the observed reading with the corrected reading.</li>
-              </ol>
-              <div className="mt-4 grid gap-2 sm:grid-cols-5">
-                {simulationRepeated.map((item, index) => (
-                  <div key={`${item}-${index}`} className="rounded-xl bg-slate-50 px-3 py-3 text-center text-sm font-medium text-slate-800">
-                    {item} cm
-                  </div>
-                ))}
-              </div>
-              <svg viewBox="0 0 260 110" role="img" aria-label="Spread of repeated readings" className="mt-4 h-28 w-full rounded-xl bg-slate-50 p-2">
-                <line x1="26" y1="54" x2="234" y2="54" stroke="#cbd5e1" strokeWidth="6" strokeLinecap="round" />
-                {simulationRepeated.map((item, index) => (
-                  <circle key={`spread-${item}-${index}`} cx={44 + index * 44} cy={54 - (Number(item) - simulationReading) * 220} r="8" fill={Math.abs(Number(item) - simulationReading) <= repeatedSpread / 4 ? "#0f766e" : "#2563eb"} />
-                ))}
-              </svg>
-              <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Current spread:</span> {formatSimulationNumber(repeatedSpread)} cm</div>
-              <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-slate-700">
-                Finer tools usually give a tighter cluster of readings, which makes the result more trustworthy.
-              </div>
-              <div className="mt-4 rounded-2xl border bg-white p-4">
-                <h5 className="text-base font-semibold text-slate-900">Zero-error lab</h5>
-                <p className="mt-2 text-sm text-slate-700">A zero error shifts every reading the same way. Move the slider and compare the observed and corrected values.</p>
-                <label className="mt-4 block text-sm text-slate-700">
-                  Zero error
-                  <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                    <span className="rounded-full bg-slate-100 px-3 py-1">
-                      Instrument starts: {zeroErrorDirection}
-                    </span>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">
-                      Offset {formatSimulationNumber(simZeroError, 2)} cm
-                    </span>
-                  </div>
-                  <input className="mt-2 w-full" type="range" min={-zeroErrorRange} max={zeroErrorRange} step="0.01" value={simZeroError} onChange={(e) => setSimZeroError(Number(e.target.value))} />
-                </label>
-                <svg viewBox="0 0 260 94" role="img" aria-label="Zero error indicator" className="mt-4 h-28 w-full rounded-2xl bg-slate-50 p-3">
-                  <line x1="44" y1="56" x2="216" y2="56" stroke="#cbd5e1" strokeWidth="8" strokeLinecap="round" />
-                  <line x1="130" y1="28" x2="130" y2="78" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
-                  <line x1={zeroIndicatorClamped} y1="34" x2={zeroIndicatorClamped} y2="74" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
-                  <text x="102" y="22" fontSize="11" fill="#0f172a">True zero</text>
-                  <text x={Math.max(78, Math.min(162, zeroIndicatorClamped - 18))} y="90" fontSize="11" fill="#ea580c">Instrument zero</text>
-                </svg>
+
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">
+                  {simMeasurementStage === "tool_match" ? "Object and tool match" : simMeasurementStage === "reading_detail" ? "Scale and reading detail" : "Measurement setup"}
+                </h4>
+                <p className="mt-2 text-slate-700">
+                  {simMeasurementStage === "tool_match"
+                    ? "Start small: pick the object, choose the instrument, and justify why that tool is trustworthy."
+                    : simMeasurementStage === "reading_detail"
+                      ? "Keep the object and tool fixed long enough to see which digits and uncertainty the scale can honestly support."
+                      : "These setup controls stay here if you want to jump back and compare another object-tool combination."}
+                </p>
+
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Observed reading:</span> {formatSimulationNumber(zeroErrorReading)} cm</div>
-                  <div className="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800"><span className="font-medium text-emerald-900">Corrected reading:</span> {formatSimulationNumber(correctedReading)} cm</div>
+                  {(["wire", "marble", "chalk", "custom"] as const).map((presetKey) => (
+                    <button
+                      key={presetKey}
+                      type="button"
+                      onClick={() => {
+                        setSimMeasurementPreset(presetKey);
+                        if (presetKey === "wire") setSimLength(0.428);
+                        if (presetKey === "marble") setSimLength(1.86);
+                        if (presetKey === "chalk") setSimLength(7.42);
+                      }}
+                      className={`rounded-xl border px-4 py-3 text-left text-sm ${simMeasurementPreset === presetKey ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 bg-slate-50 text-slate-700"}`}
+                    >
+                      <span className="block font-semibold">
+                        {presetKey === "wire" ? "Wire thickness" : presetKey === "marble" ? "Marble diameter" : presetKey === "chalk" ? "Chalk length" : "Custom object"}
+                      </span>
+                      <span className="mt-1 block text-xs opacity-80">
+                        {presetKey === "wire" ? "Very small" : presetKey === "marble" ? "Small curved object" : presetKey === "chalk" ? "Larger classroom object" : "Choose by size"}
+                      </span>
+                    </button>
+                  ))}
                 </div>
+
+                <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+                  <span className="font-medium text-slate-900">Current object:</span> {currentMeasurementPresetNote}
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {(["ruler", "caliper", "micrometer"] as const).map((toolName) => (
+                    <button
+                      key={toolName}
+                      type="button"
+                      onClick={() => setSimTool(toolName)}
+                      className={`rounded-xl border px-4 py-2 text-sm ${simTool === toolName ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"}`}
+                    >
+                      {toolName === "ruler" ? "Ruler" : toolName === "caliper" ? "Caliper" : "Micrometer screw gauge"}
+                    </button>
+                  ))}
+                </div>
+
+                <div className={`mt-4 rounded-2xl border px-4 py-4 text-sm leading-6 ${measurementFit.tone}`}>
+                  <p className="font-semibold">{measurementFit.title}</p>
+                  <p className="mt-2">{measurementFit.body}</p>
+                </div>
+
+                {simMeasurementStage === "tool_match" ? (
+                  <div className="mt-4 rounded-2xl bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700">
+                    When you can explain why {recommendedMeasurementTool === "ruler" ? "the ruler" : recommendedMeasurementTool === "caliper" ? "the caliper" : "the micrometer screw gauge"} is the best current match, move to Stage 2.
+                  </div>
+                ) : simMeasurementStage === "reading_detail" ? (
+                  <>
+                    <label className="mt-4 block text-sm text-slate-700">
+                      Object length (cm)
+                      <input className="mt-2 w-full" type="range" min="0.1" max="8" step="0.001" value={simLength} onChange={(e) => { setSimMeasurementPreset("custom"); setSimLength(Number(e.target.value)); }} />
+                    </label>
+                    <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                      <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Reported reading:</span> {formatSimulationNumber(simulationReading)} cm</div>
+                      <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Estimated uncertainty:</span> {simulationToolConfig.uncertainty}</div>
+                      <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Current tool:</span> {simulationToolConfig.label}</div>
+                      <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Scale detail:</span> {toolDivisionLabel}</div>
+                    </div>
+                    <div className="mt-4 rounded-2xl border bg-slate-50 p-4">
+                      <p className="text-sm font-semibold text-slate-900">Live instrument view</p>
+                      <p className="mt-1 text-sm text-slate-600">The object stays the same. The instrument changes how much detail can be justified.</p>
+                      {simTool === "ruler" ? (
+                        <svg viewBox="0 0 340 180" role="img" aria-label="Ruler measuring the object" className="mt-4 h-48 w-full rounded-2xl bg-white p-4">
+                          <rect x="42" y="102" width="256" height="34" rx="17" fill="#fde68a" />
+                          {Array.from({ length: 9 }).map((_, index) => {
+                            const x = 56 + index * 29.5;
+                            return (
+                              <g key={`ruler-major-${index}`}>
+                                <line x1={x} y1="102" x2={x} y2="76" stroke="#92400e" strokeWidth="3" strokeLinecap="round" />
+                                <text x={x - 4} y="154" fontSize="12" fill="#475569">{index}</text>
+                              </g>
+                            );
+                          })}
+                          <rect x="56" y="66" width={Math.max(12, rulerTrueEndX - 56)} height="14" rx="7" fill="#60a5fa" opacity="0.35" />
+                          <line x1={rulerReadEndX} y1="58" x2={rulerReadEndX} y2="144" stroke="#0f172a" strokeWidth="4" strokeLinecap="round" />
+                          <text x="56" y="58" fontSize="12" fill="#2563eb">True object span</text>
+                          <text x={Math.min(rulerReadEndX + 8, 246)} y="70" fontSize="12" fill="#0f172a">Reported mark</text>
+                        </svg>
+                      ) : simTool === "caliper" ? (
+                        <svg viewBox="0 0 340 180" role="img" aria-label="Caliper measuring the object" className="mt-4 h-48 w-full rounded-2xl bg-white p-4">
+                          <rect x="58" y="104" width="222" height="18" rx="9" fill="#475569" />
+                          <rect x="84" y="70" width="16" height="84" rx="8" fill="#0f766e" />
+                          <rect x={caliperJawX} y="70" width="16" height="84" rx="8" fill="#0f766e" />
+                          <rect x="100" y="96" width={Math.max(14, caliperJawX - 100)} height="24" rx="12" fill="#93c5fd" opacity="0.8" />
+                          <rect x={caliperJawX - 28} y="86" width="56" height="12" rx="6" fill="#94a3b8" />
+                          <text x="90" y="156" fontSize="12" fill="#0f766e">Fixed jaw</text>
+                          <text x={Math.max(180, caliperJawX - 42)} y="156" fontSize="12" fill="#0f766e">Moving jaw</text>
+                        </svg>
+                      ) : (
+                        <svg viewBox="0 0 340 180" role="img" aria-label="Micrometer measuring the object" className="mt-4 h-48 w-full rounded-2xl bg-white p-4">
+                          <path d="M84 58 C48 58 48 130 84 130" fill="none" stroke="#334155" strokeWidth="18" strokeLinecap="round" />
+                          <line x1="84" y1="58" x2="156" y2="58" stroke="#334155" strokeWidth="18" strokeLinecap="round" />
+                          <line x1="84" y1="130" x2="156" y2="130" stroke="#334155" strokeWidth="18" strokeLinecap="round" />
+                          <rect x="146" y="86" width={Math.max(12, micrometerGapX - 146)} height="20" rx="10" fill="#60a5fa" opacity="0.75" />
+                          <rect x={micrometerGapX} y="80" width="74" height="32" rx="16" fill="#475569" />
+                          <rect x="220" y="76" width="44" height="40" rx="14" fill="#94a3b8" />
+                          <text x="138" y="146" fontSize="12" fill="#2563eb">Object held in the measuring gap</text>
+                        </svg>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="mt-4 rounded-2xl border bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700">
+                    Stages 3 and 4 focus on trust checks. Use the stage buttons above if you want to change the object or instrument first.
+                  </div>
+                )}
+              </div>
+              <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                <h4 className="text-lg font-semibold text-slate-900">
+                  {simMeasurementStage === "spread_check" ? "Random scatter check" : simMeasurementStage === "zero_error" ? "Systematic bias check" : "Trust checks"}
+                </h4>
+                <p className="mt-2 text-slate-700">
+                  {simMeasurementStage === "spread_check"
+                    ? "Stay with repeated readings first so random scatter is clear before you add any zero error."
+                    : simMeasurementStage === "zero_error"
+                      ? "Now hold the object steady and change the instrument zero so the bias pattern becomes obvious."
+                      : "Stages 3 and 4 live here. Use the stage buttons above when you are ready to test reading spread and zero-error bias."}
+                </p>
+
+                {simMeasurementStage === "spread_check" ? (
+                  <>
+                    <div className="mt-4 grid gap-2 sm:grid-cols-5">
+                      {simulationRepeated.map((item, index) => (
+                        <div key={`${item}-${index}`} className="rounded-xl bg-slate-50 px-3 py-3 text-center text-sm font-medium text-slate-800">
+                          {item} cm
+                        </div>
+                      ))}
+                    </div>
+                    <svg viewBox="0 0 260 110" role="img" aria-label="Spread of repeated readings" className="mt-4 h-28 w-full rounded-xl bg-slate-50 p-2">
+                      <line x1="26" y1="54" x2="234" y2="54" stroke="#cbd5e1" strokeWidth="6" strokeLinecap="round" />
+                      {simulationRepeated.map((item, index) => (
+                        <circle key={`spread-${item}-${index}`} cx={44 + index * 44} cy={54 - (Number(item) - simulationReading) * 220} r="8" fill={Math.abs(Number(item) - simulationReading) <= repeatedSpread / 4 ? "#0f766e" : "#2563eb"} />
+                      ))}
+                    </svg>
+                    <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Current spread:</span> {formatSimulationNumber(repeatedSpread)} cm</div>
+                    <div className="mt-4 rounded-2xl border border-sky-200 bg-sky-50 p-4 text-sm leading-6 text-sky-900">
+                      {spreadCoach}
+                    </div>
+                    <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+                      Averaging repeated readings can reduce the effect of random error, but it cannot fix a constant offset.
+                    </div>
+                  </>
+                ) : simMeasurementStage === "zero_error" ? (
+                  <>
+                    <label className="mt-4 block text-sm text-slate-700">
+                      Zero error
+                      <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                        <span className="rounded-full bg-slate-100 px-3 py-1">
+                          Instrument starts: {zeroErrorDirection}
+                        </span>
+                        <span className="rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-700">
+                          Offset {formatSimulationNumber(simZeroError, 2)} cm
+                        </span>
+                      </div>
+                      <input className="mt-2 w-full" type="range" min={-zeroErrorRange} max={zeroErrorRange} step="0.01" value={simZeroError} onChange={(e) => setSimZeroError(Number(e.target.value))} />
+                    </label>
+                    <svg viewBox="0 0 260 94" role="img" aria-label="Zero error indicator" className="mt-4 h-28 w-full rounded-2xl bg-slate-50 p-3">
+                      <line x1="44" y1="56" x2="216" y2="56" stroke="#cbd5e1" strokeWidth="8" strokeLinecap="round" />
+                      <line x1="130" y1="28" x2="130" y2="78" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+                      <line x1={zeroIndicatorClamped} y1="34" x2={zeroIndicatorClamped} y2="74" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
+                      <text x="102" y="22" fontSize="11" fill="#0f172a">True zero</text>
+                      <text x={Math.max(78, Math.min(162, zeroIndicatorClamped - 18))} y="90" fontSize="11" fill="#ea580c">Instrument zero</text>
+                    </svg>
+                    <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                      <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700"><span className="font-medium text-slate-900">Observed reading:</span> {formatSimulationNumber(zeroErrorReading)} cm</div>
+                      <div className="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800"><span className="font-medium text-emerald-900">Corrected reading:</span> {formatSimulationNumber(correctedReading)} cm</div>
+                    </div>
+                    <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
+                      {zeroErrorCoach}
+                    </div>
+                  </>
+                ) : (
+                  <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+                    Use Stages 1 and 2 first to choose the right tool and read the scale honestly. Then come back here for the trust checks.
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -769,15 +769,63 @@ function includesAnyPhrase(source: string, phrases: string[]): boolean {
 function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean | null {
   const itemId = text(item.id);
   const promptKey = normalizePromptKey(item.prompt);
+  const candidate = normalizeOpenAnswer(answer);
+  if (!candidate) return false;
+
+  const isRepeatedTrustPrompt =
+    itemId === "F1-L3-M8" ||
+    promptKey === "name one reason repeated measurements improve trust in a result";
+
+  if (isRepeatedTrustPrompt) {
+    return includesAnyPhrase(candidate, [
+      "shows variation",
+      "show variation",
+      "shows how much the readings vary",
+      "show how much the readings vary",
+      "shows the spread",
+      "show the spread",
+      "shows consistency",
+      "show consistency",
+      "estimate uncertainty",
+      "average the readings",
+      "average out random error",
+      "reduce random error",
+      "reduce the effect of random error",
+      "spot anomalous readings",
+      "spot outliers",
+      "identify outliers",
+      "identify anomalous readings",
+    ]);
+  }
+
+  const isAdditionDecimalRulePrompt =
+    itemId === "F1-L4-M8" ||
+    promptKey === "state the addition and subtraction rule for significant figures in a few words";
+
+  if (isAdditionDecimalRulePrompt) {
+    const hasDecimalIdea = includesAnyPhrase(candidate, [
+      "decimal place",
+      "decimal places",
+      "decimal point",
+      "decimal points",
+      "least precise decimal place",
+      "least precise decimal places",
+    ]);
+    const hasLeastIdea = includesAnyPhrase(candidate, [
+      "least",
+      "fewest",
+      "smallest",
+      "least precise",
+    ]);
+    return hasDecimalIdea && hasLeastIdea;
+  }
+
   const isLessonSixErrorPrompt =
     itemId === "F1L6_D2" ||
     itemId === "F1-L6-D2" ||
     promptKey === "give one source of systematic error and one source of random error in a measurement";
 
   if (!isLessonSixErrorPrompt) return null;
-
-  const candidate = normalizeOpenAnswer(answer);
-  if (!candidate) return false;
 
   const systematicPhrases = [
     "zero error",
@@ -1361,7 +1409,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F1-L3-M5", "Why is a caliper usually more trustworthy than a rough ruler for a tiny object?", ["It is always digital", "It has finer divisions and smaller uncertainty", "It uses larger units", "It removes all error"], 1, "Trust comes from finer resolution, not from magic.", "A caliper is usually more trustworthy because its finer divisions reduce the uncertainty in the reading."),
         mcItem("F1-L3-M6", "What does resolution describe?", ["The color of the instrument", "The smallest change the instrument can show", "The true value exactly", "The number of repeated trials"], 1, "Resolution is about the instrument's smallest visible change.", "Resolution is the smallest change an instrument can show."),
         shortItem("F1-L3-M7", "A scale has 0.2 cm divisions. What uncertainty is often reasonable to report?", ["0.1 cm", "+/- 0.1 cm"], "Use about half the smallest division."),
-        shortItem("F1-L3-M8", "Name one reason repeated measurements improve trust in a result.", ["they show variation", "they show how much the readings vary", "they help estimate uncertainty", "they help us estimate uncertainty", "they show consistency", "they let you average the readings", "they help average out random error", "they reduce random error", "they help spot anomalous readings", "they help spot outliers"], "Think about spread, consistency, uncertainty, averaging, and outliers."),
+        shortItem("F1-L3-M8", "Name one reason repeated measurements improve trust in a result.", ["they show variation", "it shows variation", "shows variation", "they show how much the readings vary", "it shows how much the readings vary", "they help estimate uncertainty", "it helps estimate uncertainty", "they help us estimate uncertainty", "they show consistency", "it shows consistency", "they let you average the readings", "it lets you average the readings", "they help average out random error", "it helps average out random error", "they reduce random error", "it reduces random error", "they help spot anomalous readings", "it helps spot anomalous readings", "they help spot outliers", "it helps spot outliers"], "Think about spread, consistency, uncertainty, averaging, and outliers."),
         mcItem("F1-L3-M9", "Which action best reduces random error when timing a repeated motion?", ["Add extra digits to one reading", "Take several readings and average them", "Ignore any reading that looks unusual without checking", "Change the unit from seconds to minutes"], 1, "Random error is reduced by repeated measurements, not decorative precision.", "Taking several readings and averaging them helps reduce the effect of random error."),
         mcItem("F1-L3-M10", "What is the clearest sign of zero error?", ["Readings scatter above and below the best value", "The instrument starts with a constant offset before measurement", "The unit label is missing", "The scale has fine divisions"], 1, "Zero error is a built-in offset before the real reading even begins.", "A constant offset at the start is the clearest sign of zero error."),
       ];
@@ -1374,7 +1422,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
         mcItem("F1-L4-M5", "Why should you avoid writing extra digits in a final physics answer?", ["Extra digits always improve the science", "They can pretend the measurement is more precise than it is", "They remove units", "They change the formula"], 1, "Think about honesty in reporting precision.", "Extra digits can falsely suggest more precision than the measurement supports."),
         mcItem("F1-L4-M6", "Which statement about a calculator display is best?", ["Every displayed digit must be reported", "Displayed digits are always exact", "You should report only the digits justified by the measurement", "Calculator digits replace uncertainty"], 2, "The measurement, not the screen, sets the justified precision.", "You should report only digits justified by the measurement."),
         shortItem("F1-L4-M7", "Round 0.00678 to 2 significant figures.", ["0.0068", "6.8 x 10^-3", "6.8x10^-3"], "Keep the first two significant digits and round using the next digit."),
-        shortItem("F1-L4-M8", "State the addition and subtraction rule for significant figures in a few words.", ["least decimal places", "least decimal points", "least decimal point", "least number of decimal places", "match the least decimal places", "match the least decimal points", "use the least decimal places", "use the least decimal points", "follow the least decimal places", "follow the least decimal points", "fewest decimal places"], "Think about decimal places rather than total significant figures."),
+        shortItem("F1-L4-M8", "State the addition and subtraction rule for significant figures in a few words.", ["least decimal places", "least decimal points", "least decimal point", "least number of decimal places", "least number of decimal points", "fewest decimal places", "fewest decimal points", "smallest number of decimal places", "match the least decimal places", "match the fewest decimal places", "match the least precise decimal place", "use the least decimal places", "use the fewest decimal places", "use the least precise decimal place", "follow the least decimal places", "follow the fewest decimal places", "keep the least decimal places", "keep the fewest decimal places", "round to the least decimal place", "round to the fewest decimal places", "same number of decimal places as the least precise measurement"], "Think about decimal places rather than total significant figures."),
         mcItem("F1-L4-M9", "When adding 12.34 and 1.2, which reporting rule controls the final answer?", ["least decimal places", "least significant figures", "most decimal places", "calculator display digits"], 0, "Addition and subtraction are controlled by decimal places.", "For addition, the final answer should match the least number of decimal places."),
         shortItem("F1-L4-M10", "Calculate 6.40 / 2.0 and report the answer with correct significant figures.", ["3.2"], "First divide, then keep the least number of significant figures from the measurements."),
       ];
@@ -2105,7 +2153,7 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
     case "F1_L6": return "Use the target board and reading table together so cluster position, cluster spread, and uncertainty stay separate. Compare bias with scatter instead of collapsing everything into the word error.";
     case "F1_L5": return "Keep the volume fixed and change the mass, then keep the mass fixed and change the volume. Watch how the density comparison changes the float-or-sink result.";
     case "F1_L4": return "Compare rounding with calculation rules. Use the next digit to round, the least decimal places for addition or subtraction, and the least significant figures for multiplication or division.";
-    case "F1_L3": return "Use the live tool bench: choose an object, switch instruments, and compare the reading detail, repeated-reading spread, and zero error.";
+    case "F1_L3": return "Move through four short checks: match the object to the tool, read the scale honestly, compare repeated-reading spread, then test zero-error bias.";
     case "F2_L1": return "Build one journey and read three different ideas from it: total distance, net displacement, and average speed over the whole trip.";
     case "F2_L2": return "Compare the starting velocity and ending velocity over a chosen time interval, then connect the sign and size of acceleration to the change in velocity.";
     case "F2_L3": return "Build a moving-stopped-moving journey and read the story from the distance-time graph by matching each segment to what the traveller is doing.";
@@ -2143,7 +2191,7 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
     case "F1_L6": return "Build one reading set that is precise but inaccurate and one that is accurate on average but less precise. Then estimate the uncertainty and explain the difference between bias and scatter.";
     case "F1_L5": return "Find one setup that floats and one that sinks, then explain which density comparison changed.";
     case "F1_L4": return "Try one addition or subtraction example and one multiplication or division example, then explain why the reporting rule changes.";
-    case "F1_L3": return "Try one object that suits a ruler and one that needs a finer tool, then test a zero-error offset and explain how it would mislead the reading if you forgot to correct it.";
+    case "F1_L3": return "Work through the four stages in order and explain what each stage adds to the trustworthiness of the final measurement.";
     case "F2_L1": return "Create one round trip with zero displacement and one trip with a long distance but small displacement, then explain how the same journey can produce both results.";
     case "F2_L2": return "Build one case with positive acceleration, one with negative acceleration, and one with zero acceleration. Explain each sign from the velocity change, not from a guess.";
     case "F2_L3": return "Make a graph with a steep section, a flat section, and a less-steep section, then explain what the traveller is doing in each part.";
@@ -2190,9 +2238,10 @@ function simulationStageExploreSteps(code: string): string[] {
       ];
     case "F1_L3":
       return [
-        "Measure the same object with a coarse tool and then with a finer tool.",
-        "Keep the object fixed while you compare the smallest division and the reported uncertainty.",
-        "Switch on a zero error and explain why repeated readings can still agree with one another while all being biased.",
+        "Stage 1: choose an object and decide which instrument is the best fit for its size.",
+        "Stage 2: keep the object fixed while you compare the smallest division, the reported reading, and the uncertainty.",
+        "Stage 3: inspect repeated readings so you can judge whether the scatter is tight or wide.",
+        "Stage 4: switch on a zero error and compare the observed reading with the corrected reading.",
       ];
     case "F1_L4":
       return [
@@ -2557,7 +2606,7 @@ function simulationStageTryFirst(code: string): string | undefined {
     case "F1_L2":
       return "Try a 6 m east arrow, then rotate it north without changing the length. After that, build a 10 m out, 4 m back journey and compare the 14 m distance with the 6 m displacement.";
     case "F1_L3":
-      return "Try the same object with the ruler and then the caliper. Watch how the finer tool supports a smaller uncertainty, then switch on a zero error and compare what changes.";
+      return "Start with Stage 1 using chalk and the ruler, then move to Stage 2 with the marble or wire so you can feel when a finer tool becomes justified.";
     case "F1_L4":
       return "Try 12.349 to 3 significant figures first, then compare 12.4 + 0.33 with 12.4 x 0.33 so you can see why the reporting rule changes with the operation.";
     case "F1_L5":
@@ -2625,7 +2674,7 @@ function simulationStageTakeaway(code: string): string | undefined {
     case "F1_L2":
       return "Vectors become clearer when you treat direction as part of the quantity, while distance and displacement are kept as different questions about the same journey.";
     case "F1_L3":
-      return "A trustworthy measurement comes from the right tool, an honest reading, and an uncertainty that matches the tool rather than wishful precision.";
+      return "A trustworthy measurement is built in stages: choose the right tool, read only what the scale supports, check the scatter, and then rule out zero-error bias.";
     case "F1_L4":
       return "A reported answer should carry only the precision the data truly supports, which is why rounding rules depend on the type of calculation.";
     case "F1_L5":
