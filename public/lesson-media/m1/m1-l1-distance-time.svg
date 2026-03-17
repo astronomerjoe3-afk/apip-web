@@ -78,7 +78,7 @@
   <text x="866" y="352" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">a different run story</text>
   <polyline points="958,372 988,372 1012,356" class="guide" stroke="#047857" />
   <text x="792" y="616" class="axis">time, t (s)</text>
-  <text x="552" y="446" class="axis" transform="rotate(-90 552 446)">distance from start, s (m)</text>
+  <text x="552" y="462" class="axis" transform="rotate(-90 552 462)">distance from start, s (m)</text>
 
   <rect x="72" y="648" width="1056" height="36" rx="18" fill="#DBEAFE" />
   <text x="600" y="671" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Height = distance by that time | slope = speed | flat section = stopped</text>
