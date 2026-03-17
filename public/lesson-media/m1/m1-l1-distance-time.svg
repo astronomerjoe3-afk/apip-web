@@ -67,16 +67,16 @@
   <circle cx="710" cy="478" r="8" fill="#F59E0B" />
   <circle cx="794" cy="478" r="8" fill="#F59E0B" />
   <circle cx="962" cy="350" r="8" fill="#2563EB" />
-  <rect x="646" y="308" width="214" height="52" rx="18" fill="#DBEAFE" />
-  <text x="666" y="340" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Slope = speed</text>
-  <polyline points="860,334 896,334 928,378" class="guide" stroke="#1D4ED8" />
+  <rect x="640" y="334" width="178" height="50" rx="18" fill="#DBEAFE" />
+  <text x="660" y="365" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Slope = speed</text>
+  <polyline points="818,359 852,359 916,388" class="guide" stroke="#1D4ED8" />
   <rect x="792" y="430" width="188" height="50" rx="16" fill="#FEF3C7" />
   <text x="814" y="462" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Flat = stopped</text>
   <polyline points="792,454 770,454 770,478" class="guide" stroke="#B45309" />
-  <rect x="830" y="246" width="238" height="76" rx="20" fill="#DCFCE7" />
-  <text x="850" y="276" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Same final point can hide</text>
-  <text x="850" y="302" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">a different run story</text>
-  <polyline points="948,322 984,322 1012,356" class="guide" stroke="#047857" />
+  <rect x="846" y="296" width="226" height="76" rx="20" fill="#DCFCE7" />
+  <text x="866" y="326" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Same final point can hide</text>
+  <text x="866" y="352" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">a different run story</text>
+  <polyline points="958,372 988,372 1012,356" class="guide" stroke="#047857" />
   <text x="792" y="616" class="axis">time, t (s)</text>
   <text x="552" y="446" class="axis" transform="rotate(-90 552 446)">distance from start, s (m)</text>
 
