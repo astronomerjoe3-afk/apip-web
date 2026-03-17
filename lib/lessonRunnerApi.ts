@@ -820,6 +820,60 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     return hasDecimalIdea && hasLeastIdea;
   }
 
+  const isPrecisionPrompt =
+    itemId === "F1-L6-M8" ||
+    promptKey === "in a few words what does precision describe";
+
+  if (isPrecisionPrompt) {
+    const repeatedIdea = includesAnyPhrase(candidate, [
+      "repeated readings",
+      "repeat readings",
+      "measurements agree",
+      "readings agree",
+      "agreement among repeated readings",
+      "agreement between repeated readings",
+      "consistency of repeated readings",
+      "consistency between repeated readings",
+    ]);
+    const groupingIdea = includesAnyPhrase(candidate, [
+      "close together",
+      "close to each other",
+      "close to one another",
+      "tightly grouped",
+      "grouped closely",
+      "small spread",
+      "little spread",
+      "narrow spread",
+      "spread of repeated readings",
+      "closeness of repeated readings",
+    ]);
+    return repeatedIdea || groupingIdea;
+  }
+
+  const isAccuracyPrompt =
+    itemId === "F1-L6-M10" ||
+    promptKey === "in a few words what does accuracy describe";
+
+  if (isAccuracyPrompt) {
+    const closenessIdea = includesAnyPhrase(candidate, [
+      "close to",
+      "closeness to",
+      "how close",
+      "near to",
+      "nearness to",
+    ]);
+    const targetIdea = includesAnyPhrase(candidate, [
+      "accepted value",
+      "true value",
+      "actual value",
+      "real value",
+      "correct value",
+      "target value",
+      "expected value",
+    ]);
+    return closenessIdea && targetIdea;
+  }
+
   const isLessonSixErrorPrompt =
     itemId === "F1L6_D2" ||
     itemId === "F1-L6-D2" ||
@@ -1145,12 +1199,41 @@ function multipleChoiceMatches(item: UnknownRecord, answer: unknown): boolean {
     return true;
   }
 
+  const promptKey = normalizePromptKey(item.prompt);
+  const submittedChoice = normalizeOpenAnswer(choiceLabel(item, answer) || "");
+
+  const isAccuracyPrecisionPatternPrompt =
+    text(item.id) === "F1-L6-M4" ||
+    promptKey === "which pattern best shows both good accuracy and good precision";
+
+  if (isAccuracyPrecisionPatternPrompt && submittedChoice) {
+    const hasTargetIdea = includesAnyPhrase(submittedChoice, [
+      "accepted value",
+      "true value",
+      "target value",
+    ]);
+    const hasGroupingIdea = includesAnyPhrase(submittedChoice, [
+      "tightly grouped",
+      "close together",
+      "grouped closely",
+      "small spread",
+    ]);
+    const hasWrongCue = includesAnyPhrase(submittedChoice, [
+      "far from",
+      "wrong value",
+      "widely",
+      "spread out",
+    ]);
+    if (hasTargetIdea && hasGroupingIdea && !hasWrongCue) {
+      return true;
+    }
+  }
+
   const correctAnswer = normalizeOpenAnswer(resolvedCorrectAnswer(item));
   if (!correctAnswer) {
     return false;
   }
 
-  const submittedChoice = normalizeOpenAnswer(choiceLabel(item, answer) || "");
   if (submittedChoice && submittedChoice === correctAnswer) {
     return true;
   }
