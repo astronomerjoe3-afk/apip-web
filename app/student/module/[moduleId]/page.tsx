@@ -139,13 +139,15 @@ type ActiveLesson = LessonCatalog & {
 
 
 function normalizeLessonId(value: string | undefined | null): string {
-  return String(value || "").replace(/-/g, "_");
+  return String(value || "").replace(/-/g, "_").toUpperCase();
 }
 
-function normalizeModuleDescription(moduleId: string | undefined | null, description: string | undefined): string | undefined {
+function normalizeModuleDescription(moduleId: string | undefined | null, title: string | undefined, description: string | undefined): string | undefined {
   const trimmed = String(description || "").trim();
   if (!trimmed) return undefined;
-  if (normalizeLessonId(moduleId) !== "M1") return trimmed;
+  const normalizedModuleId = normalizeLessonId(moduleId);
+  const isModuleOne = normalizedModuleId === "M1" || /Kinematics,\s*Graphs\s*&\s*Constant Acceleration/i.test(String(title || ""));
+  if (!isModuleOne) return trimmed;
   if (/foundation 2|f2/i.test(trimmed)) {
     return "Module 1 treats kinematics as a representation system: journeys, graphs, signed rates, constant-acceleration forecasts, gradient context, and area reasoning must stay aligned without collapsing into basic motion slogans.";
   }
@@ -332,7 +334,7 @@ export default function StudentModulePage() {
         );
         setModuleMeta({
           ...moduleResponse.module,
-          description: normalizeModuleDescription(moduleResponse.module.id || moduleId, moduleResponse.module.description),
+          description: normalizeModuleDescription(moduleResponse.module.id || moduleId, moduleResponse.module.title, moduleResponse.module.description),
         });
 
 

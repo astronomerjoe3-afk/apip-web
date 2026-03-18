@@ -1005,8 +1005,28 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         ["distance"],
       ]) ||
       matchesPhraseGroups(candidate, [
+        ["speed multiplied by time", "speed times time", "speed x time", "speed by time"],
+        ["distance", "gives distance", "is distance", "becomes distance"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["m/s", "m s^-1", "speed"],
+        ["s", "time"],
+        ["m", "distance", "units of distance"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["x axis", "horizontal axis", "time"],
+        ["y axis", "vertical axis", "speed", "velocity"],
+        ["distance", "gives distance", "units of distance"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
         ["area", "strip", "rectangle", "triangle"],
         ["distance", "accumulates distance", "adds distance"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["strip", "slice", "small area", "each bit of area"],
+        ["speed", "height"],
+        ["time", "width"],
+        ["distance", "adds distance", "builds distance"],
       ])
     );
   }
