@@ -22,6 +22,12 @@
   <rect x="848" y="308" width="82" height="20" rx="10" fill="#38BDF8"/>
   <rect x="752" y="438" width="278" height="72" rx="22" fill="#DCFCE7"/>
   <text x="786" y="482" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Master Arrow = 0 N</text>
-  <text x="700" y="556" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">No arrows act now, yet the craft can keep cruising.</text>
-  <text x="700" y="594" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Zero Master Arrow means no motion change.</text>
+  <text x="688" y="548" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">
+    <tspan x="688" dy="0">No arrows act now, yet the craft</tspan>
+    <tspan x="688" dy="30">can keep cruising at steady speed.</tspan>
+  </text>
+  <text x="688" y="618" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">
+    <tspan x="688" dy="0">Zero Master Arrow means</tspan>
+    <tspan x="688" dy="30">no motion change.</tspan>
+  </text>
 </svg>
