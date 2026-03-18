@@ -31,12 +31,14 @@
 
   <rect x="750" y="176" width="376" height="430" rx="28" fill="#ECFDF5" stroke="#86EFAC" stroke-width="3" />
   <text x="786" y="224" class="panel-title">Same-area comparison</text>
-  <rect x="804" y="314" width="102" height="140" fill="#60A5FA" fill-opacity="0.88" />
-  <polygon points="954,454 1042,454 1042,328" fill="#34D399" fill-opacity="0.88" />
-  <text x="786" y="504" class="body">A taller narrow shape and a lower wider shape</text>
-  <text x="786" y="532" class="body">can still give the same distance if the total area matches.</text>
-  <text x="786" y="570" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Shape can change while</text>
-  <text x="786" y="594" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">total distance stays the same.</text>
+  <rect x="804" y="292" width="102" height="140" fill="#60A5FA" fill-opacity="0.88" />
+  <polygon points="954,432 1042,432 1042,306" fill="#34D399" fill-opacity="0.88" />
+  <text x="786" y="470" class="body">A taller narrow shape</text>
+  <text x="786" y="498" class="body">and a lower wider shape</text>
+  <text x="786" y="526" class="body">can still give the same distance</text>
+  <text x="786" y="554" class="body">if the total area matches.</text>
+  <text x="786" y="582" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">Shape can change while total</text>
+  <text x="786" y="604" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">distance stays the same.</text>
 
   <rect x="74" y="626" width="1052" height="40" rx="20" fill="#DBEAFE" />
   <text x="600" y="653" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Area works because speed x time gives distance.</text>
