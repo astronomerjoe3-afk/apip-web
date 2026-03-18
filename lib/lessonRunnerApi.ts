@@ -1198,6 +1198,22 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ]);
   }
 
+  const isM2CombineDriveArrowsPrompt =
+    promptKey === "why must you combine drive arrows before predicting motion";
+
+  if (isM2CombineDriveArrowsPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["resultant", "net force", "combined force", "master arrow", "overall force"],
+        ["acceleration", "motion change", "how motion changes", "predict motion", "change in motion", "change in velocity"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["combine", "add", "cancel", "cancelling", "work out the net", "work out the resultant"],
+        ["leftover", "resultant", "net force", "master arrow", "overall force"],
+      ])
+    );
+  }
+
   const isM2ThirdLawAccelerationPrompt =
     promptKey === "in a few words why can equal third law forces still produce different accelerations";
 
