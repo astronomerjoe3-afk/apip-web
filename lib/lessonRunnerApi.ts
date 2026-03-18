@@ -3737,7 +3737,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const authoredWhyItMatters = text(authoredExample.why_it_matters);
   const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
 
-  if (authoredPrompt && authoredSteps.length > 0 && authoredAnswer) {
+  if (!code.startsWith("M2_") && authoredPrompt && authoredSteps.length > 0 && authoredAnswer) {
     return {
       body: authoredWhyItMatters || "Work through the logic one step at a time, then finish with a clear physics statement.",
       worked_example: {
@@ -4084,6 +4084,90 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             "A fuse or breaker protects the circuit by opening the route when the current becomes too large, rather than allowing dangerous heating to continue.",
           ],
           answer: "Power = 24 W, total electrical energy transferred = 360 J, and the fuse protects by cutting off dangerously large current.",
+        },
+      };
+    case "M2_L1":
+      return {
+        body: "Combine the whole force picture before you decide whether the craft speeds up, slows down, or keeps cruising.",
+        worked_example: {
+          prompt: "A craft is moving west at 3 m/s while 14 N east and 9 N west act on it. Find the Master Arrow and predict the immediate motion change.",
+          steps: [
+            "Combine the opposite Drive Arrows first because they act along the same line: 14 N east and 9 N west leave 5 N east.",
+            "That leftover 5 N east is the Master Arrow, so the acceleration points east because the resultant force sets the motion change.",
+            "Keep the current velocity separate from the new acceleration: the craft is still moving west at this moment.",
+            "An eastward acceleration acting on a westward-moving craft makes it slow down first rather than instantly reverse direction.",
+          ],
+          answer: "Master Arrow = 5 N east, so the craft accelerates east; because it was moving west, it immediately slows down while still traveling west.",
+        },
+      };
+    case "M2_L2":
+      return {
+        body: "Separate one-object response from two-object force-pair reasoning so mass and interaction are not mixed together.",
+        worked_example: {
+          prompt: "The same 18 N Master Arrow acts east on a 3 kg scout and a 6 kg freighter. Find each Motion Shift and explain the difference.",
+          steps: [
+            "Use the one-object rule a = F_net / m for each craft because the question is about response to the same Master Arrow.",
+            "For the 3 kg scout, a = 18 / 3 = 6 m/s^2 east.",
+            "For the 6 kg freighter, a = 18 / 6 = 3 m/s^2 east.",
+            "The scout accelerates more because the same net force is shared across less mass, so the Motion Shift is larger.",
+          ],
+          answer: "Scout: 6 m/s^2 east; freighter: 3 m/s^2 east, because the same Master Arrow produces a bigger Motion Shift when less mass resists the change.",
+        },
+      };
+    case "M2_L3":
+      return {
+        body: "Keep the system total visible so docking problems are solved through conserved Carry Score rather than through force slogans.",
+        worked_example: {
+          prompt: "Take east as positive. A 3 kg craft moves east at 4 m/s and docks with a 1 kg craft moving west at 2 m/s. Find the shared final velocity.",
+          steps: [
+            "Calculate each signed Carry Score first: the 3 kg craft has +12 kg m/s and the 1 kg craft has -2 kg m/s.",
+            "Add them to get the closed-system total before docking: +10 kg m/s.",
+            "Because the craft stick together, the combined mass after docking is 4 kg and that same total momentum must still be shared by the whole system.",
+            "Solve v = total momentum / combined mass = 10 / 4 = 2.5 m/s, and keep the positive sign to show the final motion is east.",
+          ],
+          answer: "The shared final velocity is 2.5 m/s east, because the closed system keeps its total +10 kg m/s Carry Score and that total is shared across 4 kg after docking.",
+        },
+      };
+    case "M2_L4":
+      return {
+        body: "Turning questions only become clear when force size and perpendicular reach are kept together.",
+        worked_example: {
+          prompt: "Compare two door pushes: 6 N applied 0.5 m from the hinge and 3 N applied 1.0 m from the hinge. Which gives the larger Spin Pull?",
+          steps: [
+            "Use Spin Pull = force x perpendicular reach for each case, because torque depends on both quantities together.",
+            "First push: 6 x 0.5 = 3 N m.",
+            "Second push: 3 x 1.0 = 3 N m.",
+            "The Spin Pull values match, so neither push is larger; different force-reach combinations can give the same turning effect.",
+          ],
+          answer: "Both pushes give the same Spin Pull of 3 N m, because torque depends on the product of force and perpendicular reach, not on force size alone.",
+        },
+      };
+    case "M2_L5":
+      return {
+        body: "Judge stability from the margin between the Balance Core line and the base edge, not from weight language by itself.",
+        worked_example: {
+          prompt: "A stack's Balance Core line lands 0.05 m inside the right edge of a narrow base. On a wider platform with the same load position, the line lands 0.30 m inside the edge. Which setup is more stable and why?",
+          steps: [
+            "Stability depends on whether the Balance Core line stays inside the Footprint Zone and how much safety margin remains before it reaches the edge.",
+            "The narrow base leaves only 0.05 m of margin, so a small extra shift could push the line outside the base and start tipping.",
+            "The wider base leaves 0.30 m of margin with the same load position, so the weight line is much farther from the tipping threshold.",
+            "Therefore the wider platform is more stable because it gives more support width under the same Balance Core line.",
+          ],
+          answer: "The wider platform is more stable, because the Balance Core line stays much farther inside the Footprint Zone and leaves a larger safety margin before tipping begins.",
+        },
+      };
+    case "M2_L6":
+      return {
+        body: "Resolve angled pushes onto axes first so the vector bookkeeping stays clear and the final arrow can be rebuilt from clean totals.",
+        worked_example: {
+          prompt: "A diagonal force is resolved into 8 N east and 6 N north. Another 3 N west force acts at the same time. Find the net horizontal component, the net vertical component, and the resultant magnitude.",
+          steps: [
+            "Combine one axis at a time: horizontally, 8 N east and 3 N west leave 5 N east.",
+            "The vertical axis has only 6 N north, so the net vertical component stays 6 N north.",
+            "Now rebuild the resultant from the perpendicular components using Pythagoras: magnitude = sqrt(5^2 + 6^2) = sqrt(61) ≈ 7.8 N.",
+            "The final arrow points northeast because both net components are positive on their chosen axes.",
+          ],
+          answer: "Net components = 5 N east and 6 N north, so the resultant is about 7.8 N northeast, because components must be combined axis by axis before rebuilding the final arrow.",
         },
       };
     case "M1_L1":
@@ -4920,6 +5004,48 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
         checkForUnderstanding: "If two pace logs have equal total area but different shapes, what must be the same and what can differ?",
         commonTrap: "Do not read final speed as total distance, and do not assume two journeys cover different distances just because one graph is taller at one moment.",
       };
+    case "M2_L1":
+      return {
+        coreIdea: "The Master Arrow is the one combined steering instruction from all the Drive Arrows, so force state and motion state must be kept separate.",
+        reasoning: "Collapse the whole force picture first: add same-direction Drive Arrows, subtract opposite ones, and keep the leftover direction. Only after you know the Master Arrow should you predict how the velocity changes. Then compare that acceleration story with the craft's current motion story.",
+        checkForUnderstanding: "If a craft is already moving east and the Master Arrow becomes zero, what stays the same and what stops changing?",
+        commonTrap: "Do not treat zero Master Arrow as zero motion, and do not confuse balanced arrows with no arrows acting at all.",
+      };
+    case "M2_L2":
+      return {
+        coreIdea: "Motion Shift depends on both the Master Arrow and the Load Rating, while third-law pairs compare equal interaction forces on different objects.",
+        reasoning: "Decide first whether the question is a one-object response question or a two-object interaction question. For one craft, use the Master Arrow with its Load Rating to judge acceleration. For an interaction pair, keep the equal-and-opposite forces on different objects and explain any acceleration difference through the masses, not through different pair-force sizes.",
+        checkForUnderstanding: "If two craft feel the same interaction force but one has twice the mass, what matches and what differs?",
+        commonTrap: "Do not say the heavier craft pushes back harder, and do not cancel third-law pairs inside one object's F = ma calculation.",
+      };
+    case "M2_L3":
+      return {
+        coreIdea: "Carry Score is momentum in the lesson model, so it depends on both mass and velocity, and the closed-system total is what stays conserved through docking.",
+        reasoning: "Assign signs to the incoming velocities, calculate each craft's Carry Score, and add them to get the system total before the collision. If the craft stick together, divide that conserved total by the combined mass to get the shared final velocity. Keep the system boundary visible so you do not replace momentum reasoning with force talk.",
+        checkForUnderstanding: "If one craft brings +12 Carry Score and the other brings -4, what total enters the docking event?",
+        commonTrap: "Do not conserve each craft's own speed, and do not swap a momentum question into a force explanation just because the collision involves large forces.",
+      };
+    case "M2_L4":
+      return {
+        coreIdea: "Spin Pull is torque: turning effect depends on both push size and perpendicular reach to the pivot, not on force alone.",
+        reasoning: "Name the pivot first, then find the perpendicular reach from the pivot to the force line. Multiply force by that reach to compare turning effects, and check whether the line of action passes through the pivot. A force can still translate an object even when its turning effect is zero.",
+        checkForUnderstanding: "If the same push slides farther from the hinge while staying perpendicular, what changes and why?",
+        commonTrap: "Do not use ordinary distance along the bar when the question needs perpendicular reach, and do not assume the biggest force automatically gives the biggest turning effect.",
+      };
+    case "M2_L5":
+      return {
+        coreIdea: "Stability depends on where the Balance Core line lands relative to the Footprint Zone, so geometry and mass distribution matter as much as weight.",
+        reasoning: "Picture the weight line dropping through the Balance Core and ask whether it still lands inside the support base. Then test what happens when mass is moved sideways, lifted higher, or supported by a wider base. Stability is a geometry question before it is a weight question.",
+        checkForUnderstanding: "If the same load is raised higher but the base stays the same, what happens to the tipping risk and why?",
+        commonTrap: "Do not assume heavier automatically means more stable, and do not wait for visible tipping motion before checking whether the Balance Core line has already left the base.",
+      };
+    case "M2_L6":
+      return {
+        coreIdea: "Arrow Split rewrites one angled force into axis components so vectors can be combined cleanly without changing the underlying physics.",
+        reasoning: "Choose axes, resolve each angled force into horizontal and vertical parts, and combine each axis separately with signs. Only after the axis totals are clear should you rebuild the final resultant. The original force and its components are two descriptions of the same push.",
+        checkForUnderstanding: "If two horizontal components oppose each other, what should you do before rebuilding the final arrow?",
+        commonTrap: "Do not add component magnitudes blindly without direction, and do not talk as if the components are extra forces acting in addition to the original arrow.",
+      };
     default:
       return {
         coreIdea: "Use the key idea from the lesson before you calculate or classify anything.",
@@ -5039,6 +5165,36 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       return {
         body: "Picture the shaded region as a strip-built distance meter. Each thin strip has a small time width and a speed height, so each strip adds a small piece of distance. Different overall shapes can still build the same total distance if the total shaded area of all the strips matches.",
         checkForUnderstanding: "In the strip-built picture, why can a tall narrow region and a lower wider region still produce the same total distance?",
+      };
+    case "M2_L1":
+      return {
+        body: "Imagine a pilot looking at many thruster indicators but steering from one summary arrow on the main display. The individual Drive Arrows can differ from one story to another, yet the craft responds to the single combined instruction shown by the Master Arrow. A zero summary arrow can describe a parked craft or a steadily gliding one because it speaks about change in motion, not motion already in progress.",
+        checkForUnderstanding: "In the pilot-display picture, what can stay different even when two situations show the same zero summary arrow?",
+      };
+    case "M2_L2":
+      return {
+        body: "Picture the same tow cable pulling a light cargo sled and a heavily loaded one. The cable tension can be equal in both stories, yet the lighter sled jumps more because the same pull is acting on less mass. That makes the analogy useful for separating equal interaction forces from unequal acceleration outcomes.",
+        checkForUnderstanding: "In the tow-cable picture, what stays the same and what changes when the lighter sled reacts more strongly?",
+      };
+    case "M2_L3":
+      return {
+        body: "Think of each craft carrying signed motion tokens into the docking bay. When the craft join, the bay keeps the same total token balance even though the tokens are now shared across the combined mass. The analogy helps because it makes conservation belong to the whole closed system rather than to each craft keeping its old motion.",
+        checkForUnderstanding: "In the motion-token picture, what is preserved when two craft dock in a closed bay: each craft's own share or the total system balance?",
+      };
+    case "M2_L4":
+      return {
+        body: "A door-handle analogy works because the same push can matter differently depending on where it is applied. Push near the hinge and you mostly shove; push far from the hinge and you create a stronger twist. The useful comparison is not just force size but force size together with perpendicular reach.",
+        checkForUnderstanding: "In the door-handle picture, why does moving the same push farther from the hinge change the turning effect?",
+      };
+    case "M2_L5":
+      return {
+        body: "Picture balancing a tall stack on a tray. What matters is not just how heavy the stack is, but whether the line through its balance point still lands inside the tray. Widening the tray or lowering the stack can recover stability even when the total mass stays the same.",
+        checkForUnderstanding: "In the tray picture, which change helps more directly when the balance line is close to the edge: making the tray wider or merely naming the load heavier?",
+      };
+    case "M2_L6":
+      return {
+        body: "Think of a diagonal move on a city-grid map being rewritten as east steps plus north steps. The route has not changed; you have just described it on chosen axes so the bookkeeping becomes clearer. Arrow Split plays the same role for forces: components are a cleaner description of one original vector, not extra pushes added to the scene.",
+        checkForUnderstanding: "In the city-grid picture, what stays the same after the diagonal move is rewritten as east and north parts?",
       };
     default:
       return {
