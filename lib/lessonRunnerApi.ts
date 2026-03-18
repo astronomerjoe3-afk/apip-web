@@ -884,9 +884,13 @@ function matchesPhraseGroups(source: string, phraseGroups: string[][]): boolean 
 
 function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean | null {
   const itemId = text(item.id);
+  const itemIdUpper = itemId.toUpperCase();
   const promptKey = normalizePromptKey(item.prompt);
+  const promptKeyCore = promptKey.replace(/^in a few words /, "");
   const candidate = normalizeOpenAnswer(answer);
   if (!candidate) return false;
+  const matchesM2Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -1157,8 +1161,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ]);
   }
 
-  const isM2ZeroMasterArrowPrompt =
-    promptKey === "in a few words what does zero master arrow mean";
+  const isM2ZeroMasterArrowPrompt = matchesM2Prompt(
+    ["M2L1_D6", "M2L1_D8"],
+    ["what does zero master arrow mean"],
+  );
 
   if (isM2ZeroMasterArrowPrompt) {
     return (
@@ -1186,21 +1192,27 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2MasterArrowDecidesPrompt =
-    promptKey === "in a few words what does the master arrow decide";
+  const isM2MasterArrowDecidesPrompt = matchesM2Prompt(
+    ["M2L1_C5", "M2L1_T7"],
+    ["what does the master arrow decide"],
+  );
 
   if (isM2MasterArrowDecidesPrompt) {
     return includesAnyPhrase(candidate, [
       "acceleration",
       "motion change",
+      "motion shift",
       "how motion changes",
       "which way motion changes",
       "change in motion",
+      "acceleration story",
     ]);
   }
 
-  const isM2CombineDriveArrowsPrompt =
-    promptKey === "why must you combine drive arrows before predicting motion";
+  const isM2CombineDriveArrowsPrompt = matchesM2Prompt(
+    ["M2L1_C6"],
+    ["why must you combine drive arrows before predicting motion"],
+  );
 
   if (isM2CombineDriveArrowsPrompt) {
     return (
@@ -1215,17 +1227,68 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2ThirdLawAccelerationPrompt =
-    promptKey === "in a few words why can equal third law forces still produce different accelerations";
+  const isM2LoadRatingMassPrompt = matchesM2Prompt(
+    ["M2L2_C5"],
+    ["what real quantity is the lesson s load rating standing in for"],
+  );
+
+  if (isM2LoadRatingMassPrompt) {
+    return includesAnyPhrase(candidate, [
+      "mass",
+      "object mass",
+      "craft mass",
+      "the mass",
+      "mass term",
+      "inertial mass",
+    ]);
+  }
+
+  const isM2ThirdLawAccelerationPrompt = matchesM2Prompt(
+    ["M2L2_D6", "M2L2_D7"],
+    ["why can equal third law forces still produce different accelerations"],
+  );
 
   if (isM2ThirdLawAccelerationPrompt) {
     return (
-      includesAnyPhrase(candidate, ["mass", "masses"]) &&
-      includesAnyPhrase(candidate, ["different", "differ", "not the same"])
+      matchesPhraseGroups(candidate, [
+        [
+          "mass",
+          "masses",
+          "load",
+          "load rating",
+          "heavier",
+          "lighter",
+          "more massive",
+          "less massive",
+        ],
+        [
+          "different",
+          "differ",
+          "not the same",
+          "smaller",
+          "larger",
+          "bigger",
+          "less",
+          "more",
+          "lighter",
+          "heavier",
+        ],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same force", "equal force", "equal forces", "third law force", "pair force"],
+        ["different mass", "different masses", "different load", "heavier", "lighter"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["force over mass", "force divided by mass", "f/m", "f / m"],
+        ["mass", "load", "lighter", "heavier"],
+      ])
     );
   }
 
-  const isM2CarryScoreSetupPrompt = promptKey === "what two quantities set carry score";
+  const isM2CarryScoreSetupPrompt = matchesM2Prompt(
+    ["M2L3_D6"],
+    ["what two quantities set carry score"],
+  );
 
   if (isM2CarryScoreSetupPrompt) {
     return (
@@ -1234,8 +1297,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2ConservedPrompt =
-    promptKey === "in a few words what is conserved in a closed dock exchange";
+  const isM2ConservedPrompt = matchesM2Prompt(
+    ["M2L3_C5", "M2L3_C6"],
+    ["what is conserved in a closed dock exchange"],
+  );
 
   if (isM2ConservedPrompt) {
     return (
@@ -1244,8 +1309,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2ForceLanguagePrompt =
-    promptKey === "why is force language alone not enough to solve the shared final speed";
+  const isM2ForceLanguagePrompt = matchesM2Prompt(
+    ["M2L3_T5"],
+    ["why is force language alone not enough to solve the shared final speed"],
+  );
 
   if (isM2ForceLanguagePrompt) {
     return (
@@ -1254,8 +1321,44 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2SpinPullSetupPrompt =
-    promptKey === "what two things decide spin pull";
+  const isM2FirstLawLanguagePrompt = matchesM2Prompt(
+    ["M2L2_T5"],
+    ["what is newton s first law in this lesson s language"],
+  );
+
+  if (isM2FirstLawLanguagePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        [
+          "zero master arrow",
+          "no master arrow",
+          "zero resultant",
+          "no resultant",
+          "zero net force",
+          "no net force",
+        ],
+        [
+          "no acceleration",
+          "zero acceleration",
+          "no motion change",
+          "motion stays unchanged",
+          "no change in velocity",
+          "velocity stays unchanged",
+          "constant velocity",
+        ],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["stay at rest", "stays at rest", "remain at rest", "rest"],
+        ["constant velocity", "keep moving steadily", "uniform velocity", "steady motion"],
+        ["resultant force", "net force", "master arrow", "unbalanced force", "unless"],
+      ])
+    );
+  }
+
+  const isM2SpinPullSetupPrompt = matchesM2Prompt(
+    ["M2L4_D6"],
+    ["what two things decide spin pull"],
+  );
 
   if (isM2SpinPullSetupPrompt) {
     return (
@@ -1264,8 +1367,32 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2PerpendicularReachPrompt =
-    promptKey === "in a few words what does perpendicular reach mean";
+  const isM2DoorHandlePrompt = matchesM2Prompt(
+    ["M2L4_C5", "M2L4_C6"],
+    ["why are door handles placed far from hinges"],
+  );
+
+  if (isM2DoorHandlePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["increase", "larger", "bigger", "greater", "more"],
+        ["turning effect", "torque", "spin pull", "moment arm", "leverage"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same force", "same push"],
+        ["more torque", "more turning effect", "larger spin pull", "larger moment arm"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["less force", "smaller force", "less effort"],
+        ["same torque", "same turning effect", "same spin pull"],
+      ])
+    );
+  }
+
+  const isM2PerpendicularReachPrompt = matchesM2Prompt(
+    ["M2L4_T5"],
+    ["what does perpendicular reach mean"],
+  );
 
   if (isM2PerpendicularReachPrompt) {
     return (
@@ -1274,8 +1401,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2TippingPrompt =
-    promptKey === "in a few words what decides whether tipping begins";
+  const isM2TippingPrompt = matchesM2Prompt(
+    ["M2L5_C5"],
+    ["what decides whether tipping begins"],
+  );
 
   if (isM2TippingPrompt) {
     return (
@@ -1284,8 +1413,26 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2HeavyStablePrompt =
-    promptKey === "why is heavier means more stable a weak rule";
+  const isM2TippingStartsPrompt = matchesM2Prompt(
+    ["M2L5_T3"],
+    ["if the balance core moves beyond the right edge of the footprint zone what happens"],
+  );
+
+  if (isM2TippingStartsPrompt) {
+    return includesAnyPhrase(candidate, [
+      "it tips",
+      "the craft tips",
+      "tipping begins",
+      "tipping starts",
+      "it starts to tip",
+      "the craft starts to tip",
+    ]);
+  }
+
+  const isM2HeavyStablePrompt = matchesM2Prompt(
+    ["M2L5_T5"],
+    ["why is heavier means more stable a weak rule"],
+  );
 
   if (isM2HeavyStablePrompt) {
     return (
@@ -1297,8 +1444,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2FootprintPrompt =
-    promptKey === "what does the footprint zone stand for";
+  const isM2FootprintPrompt = matchesM2Prompt(
+    ["M2L5_T7"],
+    ["what does the footprint zone stand for"],
+  );
 
   if (isM2FootprintPrompt) {
     return includesAnyPhrase(candidate, [
@@ -1309,8 +1458,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ]);
   }
 
-  const isM2ComponentsPrompt =
-    promptKey === "in a few words what are components";
+  const isM2ComponentsPrompt = matchesM2Prompt(
+    ["M2L6_D6"],
+    ["what are components"],
+  );
 
   if (isM2ComponentsPrompt) {
     return (
@@ -1319,21 +1470,31 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM2AxisByAxisPrompt =
-    promptKey === "why combine components axis by axis";
+  const isM2AxisByAxisPrompt = matchesM2Prompt(
+    ["M2L6_C5"],
+    ["why combine components axis by axis"],
+  );
 
   if (isM2AxisByAxisPrompt) {
-    return includesAnyPhrase(candidate, [
-      "organize the vector sum",
-      "keep directions clear",
-      "one direction at a time",
-      "bookkeeping",
-      "combine one axis at a time",
-    ]);
+    return (
+      includesAnyPhrase(candidate, [
+        "organize the vector sum",
+        "keep directions clear",
+        "one direction at a time",
+        "bookkeeping",
+        "combine one axis at a time",
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["axis", "axes", "x and y", "horizontal and vertical", "each direction"],
+        ["separate", "separately", "one at a time", "organize", "keep clear"],
+      ])
+    );
   }
 
-  const isM2ArrowSplitSamePrompt =
-    promptKey === "what stays the same after arrow split";
+  const isM2ArrowSplitSamePrompt = matchesM2Prompt(
+    ["M2L6_T5"],
+    ["what stays the same after arrow split"],
+  );
 
   if (isM2ArrowSplitSamePrompt) {
     return includesAnyPhrase(candidate, [
