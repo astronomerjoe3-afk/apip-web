@@ -1458,7 +1458,22 @@ function prefersLessonOwnedConceptGateBank(lesson: UnknownRecord, authoredCount 
   return declaredMin > 0 && authoredCount >= declaredMin;
 }
 
+function hasRepetitiveM2L1MasteryTransfer(lesson: UnknownRecord): boolean {
+  if (lessonCode(lesson) !== "M2_L1") return false;
+  const repetitivePromptCount = itemsFrom(lesson, "transfer")
+    .map(asRecord)
+    .map((item) => normalizePromptKey(text(item.prompt)))
+    .filter((prompt) =>
+      prompt.includes("what is the master arrow") ||
+      prompt.includes("what master arrow remains") ||
+      prompt.includes("shares the same master arrow")
+    )
+    .length;
+  return repetitivePromptCount > 1;
+}
+
 function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "transfer").filter((item) => hasUsableMasteryAnswer(asRecord(item))).length): boolean {
+  if (hasRepetitiveM2L1MasteryTransfer(lesson)) return false;
   const declaredMin = declaredAssessmentPoolMin(lesson, "mastery_pool_min");
   return declaredMin > 0 && authoredCount >= declaredMin;
 }
