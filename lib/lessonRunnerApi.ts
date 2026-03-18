@@ -4845,6 +4845,48 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
         checkForUnderstanding: "If the force stays the same and the mass doubles, what happens to the acceleration?",
         commonTrap: "Do not forget that the formula uses resultant force, and do not treat inertia as if it were an extra force.",
       };
+    case "M1_L1":
+      return {
+        coreIdea: "A distance-time graph is a progress log: the graph height shows total distance by that time, while the slope shows how quickly distance is changing.",
+        reasoning: "Read the graph one interval at a time. Rising straight sections mean steady motion, steeper rising sections mean faster motion, and flat sections mean time passes without extra distance being added. Turn the graph back into a motion story instead of picturing the route shape.",
+        checkForUnderstanding: "If one section is flat for 3 s, what changes and what stays the same during that interval?",
+        commonTrap: "Do not treat the graph shape as the road itself, and do not assume the highest point is the fastest part.",
+      };
+    case "M1_L2":
+      return {
+        coreIdea: "A speed-time graph is a pace log: graph height gives the speed at a chosen time, while graph slope over an interval gives the acceleration.",
+        reasoning: "Ask first whether the question wants speed now, change of speed, or total distance. Use graph height for speed at an instant, use slope for acceleration over an interval, and keep direction out of the story unless another representation explicitly provides it.",
+        checkForUnderstanding: "If the line is horizontal but above zero, what is the speed story and what is the acceleration story?",
+        commonTrap: "Do not read a downward line as moving backwards, and do not confuse graph height with graph slope.",
+      };
+    case "M1_L3":
+      return {
+        coreIdea: "Acceleration is the signed rate of velocity change, so it comes from how the velocity arrow changes, not from a vague feeling of speeding up.",
+        reasoning: "Choose a positive direction first. Write the initial and final velocities with signs, calculate final velocity minus initial velocity, and then divide by the time interval. Interpret the sign only at the end, after the calculation is complete.",
+        checkForUnderstanding: "If east is positive and velocity changes from +8 m/s to 0 m/s, what sign should the acceleration have?",
+        commonTrap: "Negative acceleration does not automatically mean slowing down, and zero acceleration does not automatically mean zero velocity.",
+      };
+    case "M1_L4":
+      return {
+        coreIdea: "The constant-acceleration equations are a forecast toolkit: choose the relation from the knowns, the unknown, and the condition that acceleration stays constant.",
+        reasoning: "List u, v, a, s, and t first, then mark the unknown and avoid introducing unnecessary variables. Pick the equation that reaches the target directly, but only after checking that the whole interval really has one constant acceleration.",
+        checkForUnderstanding: "If the story gives u, a, and t and asks for v, which variable should you avoid bringing in?",
+        commonTrap: "Do not grab a formula from memory before checking the constant-acceleration condition, and do not use one SUVAT equation across a story that changes acceleration midway.",
+      };
+    case "M1_L5":
+      return {
+        coreIdea: "Slope meaning comes from the axes: on a distance-time graph it gives speed, while on a speed-time graph it gives acceleration.",
+        reasoning: "Name the graph type before you name the slope. Then compare the change in the vertical quantity with the change in time, attach the correct unit, and keep graph height separate from graph slope on both boards.",
+        checkForUnderstanding: "If the same tilt appears on a progress log and a pace log, what can stay the same and what must change?",
+        commonTrap: "Do not say steeper always means faster without naming the graph, and do not use graph height when the question is asking about slope.",
+      };
+    case "M1_L6":
+      return {
+        coreIdea: "On a speed-time graph, area under the graph gives total distance because each strip combines a speed height with a time width.",
+        reasoning: "Split the shaded region into simple shapes such as rectangles, triangles, or trapezia, find each area, and add them for the total distance. When comparing two graphs, judge the total area rather than the peak height.",
+        checkForUnderstanding: "If two pace logs have equal total area but different shapes, what must be the same and what can differ?",
+        commonTrap: "Do not read final speed as total distance, and do not assume two journeys cover different distances just because one graph is taller at one moment.",
+      };
     default:
       return {
         coreIdea: "Use the key idea from the lesson before you calculate or classify anything.",
@@ -4934,6 +4976,36 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       return {
         body: "The shopping-cart analogy becomes powerful when you compare pushes, not just objects. The same shove changes the empty cart more because less mass means less resistance to changing motion. A heavier loaded cart needs either a bigger push for the same acceleration or it responds with a smaller acceleration to the same push. That is the conceptual meaning behind F = ma before any numbers are substituted.",
         checkForUnderstanding: "If two carts get the same push but one is loaded, which cart shows the greater acceleration and why?",
+      };
+    case "M1_L1":
+      return {
+        body: "Think of the progress log like a quest journal that records how much ground has been completed over time. Each straight segment is one chapter of the journey: rising chapters mean progress is being added, and a flat chapter means time passes while the traveller stays put. The journal records accumulated progress, not the shape of the path through the world.",
+        checkForUnderstanding: "In the quest-journal picture, what kind of story chapter matches a flat section on the graph?",
+      };
+    case "M1_L2":
+      return {
+        body: "Think of the pace log like watching a speedometer readout over time. The number shown at one instant is the current speed, but the way that readout rises, falls, or stays flat tells you whether the speed is changing. Height answers the now question, while slope answers the change question.",
+        checkForUnderstanding: "In the speedometer picture, which part tells you the speed now and which part tells you whether the speed is changing?",
+      };
+    case "M1_L3":
+      return {
+        body: "Imagine taking a before-and-after photo of a signed velocity arrow. Acceleration is not the arrow itself; it is the change between the two photos divided by the time between them. If the arrow gets shorter, longer, or flips direction, the acceleration is tracking that signed change.",
+        checkForUnderstanding: "If the second arrow points the same way but is shorter, what changed and what does that say about the acceleration sign?",
+      };
+    case "M1_L4":
+      return {
+        body: "The forecast board works like choosing the right tool from a mission kit. You do not grab every tool at once; you check what information you already have, what answer is missing, and whether the story really matches the constant-acceleration rule. The best equation is the one that reaches the target with the fewest unnecessary detours.",
+        checkForUnderstanding: "In the mission-kit picture, why is choosing the right tool better than pulling out every tool at once?",
+      };
+    case "M1_L5":
+      return {
+        body: "Picture the same tilt placed on two different screens. The geometry can stay the same, but the meaning changes because one screen labels the vertical axis with distance and the other labels it with speed. The slope is like the same gesture interpreted by two different scoreboards.",
+        checkForUnderstanding: "If the tilt stays the same but the screen changes, what has to change: the geometry, the physics meaning, or both?",
+      };
+    case "M1_L6":
+      return {
+        body: "Picture the shaded region as a strip-built distance meter. Each thin strip has a small time width and a speed height, so each strip adds a small piece of distance. Different overall shapes can still build the same total distance if the total shaded area of all the strips matches.",
+        checkForUnderstanding: "In the strip-built picture, why can a tall narrow region and a lower wider region still produce the same total distance?",
       };
     default:
       return {

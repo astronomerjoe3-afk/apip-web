@@ -78,6 +78,14 @@ type ScaffoldMediaCard = {
   interaction_key?: string;
 };
 
+function normalizeTeachingFocusText(value: string): string {
+  const trimmed = value.trim();
+  if (/^Use the triangle area:\s*0\.5 x [\d.]+ x [\d.]+\.?$/i.test(trimmed)) {
+    return "Use the triangle area rule: 0.5 x base x height, with time as the base and speed as the height.";
+  }
+  return trimmed;
+}
+
 type TeachingFocusCard = {
   title: string;
   detail: string;
@@ -740,7 +748,7 @@ export default function LessonRunner({
           ) : null}
           {item.teaching_focus ? (
             <p>
-              <span className="font-medium">Key idea:</span> {item.teaching_focus}
+              <span className="font-medium">Key idea:</span> {normalizeTeachingFocusText(item.teaching_focus)}
             </p>
           ) : null}
         </div>
@@ -833,21 +841,22 @@ export default function LessonRunner({
     const isSectionStep = clampedScaffoldStepIndex >= sectionStart;
 
     const scaffoldFocusCards = payload.teaching_focus_cards?.slice(0, 4) ?? [];
+    const normalizedTeachingFocus = (payload.teaching_focus ?? []).map(normalizeTeachingFocusText);
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
       ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
-      : payload.teaching_focus?.slice(0, 4) ?? [];
+      : normalizedTeachingFocus.slice(0, 4);
     return (
       <div className="space-y-6">
         {isIntroStep ? (
           <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
             {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{payload.intro}</p> : null}
 
-          {payload.teaching_focus?.length ? (
+          {normalizedTeachingFocus.length ? (
             <div className={`${payload.intro ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
               <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
-                {payload.teaching_focus.slice(0, 6).map((item) => (
-                  <li key={item}>{item}</li>
+                {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
+                  <li key={`${index}-${item}`}>{item}</li>
                 ))}
               </ul>
             </div>
