@@ -142,6 +142,16 @@ function normalizeLessonId(value: string | undefined | null): string {
   return String(value || "").replace(/-/g, "_");
 }
 
+function normalizeModuleDescription(moduleId: string | undefined | null, description: string | undefined): string | undefined {
+  const trimmed = String(description || "").trim();
+  if (!trimmed) return undefined;
+  if (normalizeLessonId(moduleId) !== "M1") return trimmed;
+  if (/foundation 2|f2/i.test(trimmed)) {
+    return "Module 1 treats kinematics as a representation system: journeys, graphs, signed rates, constant-acceleration forecasts, gradient context, and area reasoning must stay aligned without collapsing into basic motion slogans.";
+  }
+  return trimmed;
+}
+
 
 function errorMessage(error: unknown): string {
   if (error instanceof Error) {
@@ -320,7 +330,10 @@ export default function StudentModulePage() {
         const moduleResponse = await apipGet<{ ok: boolean; module: ModuleCatalog }>(
           `/modules/${encodeURIComponent(moduleId)}`,
         );
-        setModuleMeta(moduleResponse.module);
+        setModuleMeta({
+          ...moduleResponse.module,
+          description: normalizeModuleDescription(moduleResponse.module.id || moduleId, moduleResponse.module.description),
+        });
 
 
         if (
