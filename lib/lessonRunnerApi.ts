@@ -740,7 +740,8 @@ function moduleTwoStructuredShortAnswerMatch(
 
   if (expectedValues.length > 0) {
     if (candidate.value === null) return false;
-    const matchesValue = expectedValues.some((entry) => Math.abs(entry - candidate.value) < 1e-9);
+    const candidateValue = candidate.value;
+    const matchesValue = expectedValues.some((entry) => Math.abs(entry - candidateValue) < 1e-9);
     if (!matchesValue) return false;
   }
 
