@@ -1055,8 +1055,21 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "no acceleration",
         "no motion change",
         "motion stays unchanged",
+        "no change in motion",
+        "no change in velocity",
+        "velocity stays unchanged",
         "velocity stays constant",
         "constant velocity",
+        "no resultant force",
+        "zero resultant force",
+        "resultant force is zero",
+        "no net force",
+        "zero net force",
+        "net force is zero",
+        "forces cancel",
+        "forces cancel out",
+        "balanced forces",
+        "forces are balanced",
       ])
     );
   }

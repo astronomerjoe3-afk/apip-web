@@ -86,6 +86,20 @@ function normalizeTeachingFocusText(value: string): string {
   return trimmed;
 }
 
+function normalizeSupportText(value: string): string {
+  return value.trim().replace(/\s+/g, " ").toLowerCase();
+}
+
+function dedupeSupportTextItems(items: string[] = [], reserved: string[] = []): string[] {
+  const seen = new Set(reserved.map(normalizeSupportText).filter(Boolean));
+  return items.filter((item) => {
+    const normalized = normalizeSupportText(item);
+    if (!normalized || seen.has(normalized)) return false;
+    seen.add(normalized);
+    return true;
+  });
+}
+
 type TeachingFocusCard = {
   title: string;
   detail: string;
@@ -912,6 +926,14 @@ export default function LessonRunner({
               const shouldShowImage = imageUrl ? !seenMediaImageUrls.has(imageUrl) : false;
               const isMeasurementInstrumentTour = card.interaction_key === "measurement_instrument_tour";
               const isMeasurementReportLab = card.interaction_key === "measurement_report_lab" || card.title === "Picture a measurement report";
+              const isConceptSupportCard =
+                !shouldShowImage &&
+                !card.embed_url &&
+                !isMeasurementInstrumentTour &&
+                !isMeasurementReportLab &&
+                card.kind !== "video" &&
+                card.kind !== "interactive";
+              const supportHighlights = dedupeSupportTextItems(card.highlights || [], [card.title, card.caption]);
               if (shouldShowImage) seenMediaImageUrls.add(imageUrl);
 
               return clampedScaffoldStepIndex === mediaStart + index ? (
@@ -920,7 +942,7 @@ export default function LessonRunner({
                   {card.kind === "video" ? "Video support" : isMeasurementReportLab || card.kind === "interactive" ? "Interactive support" : shouldShowImage ? "Visual support" : "Concept support"}
                 </span>
                 <h4 className="mt-4 text-lg font-semibold text-slate-900">{card.title}</h4>
-                <p className="mt-2 text-slate-700">{card.caption}</p>
+                {!isConceptSupportCard ? <p className="mt-2 text-slate-700">{card.caption}</p> : null}
 
                 {isMeasurementInstrumentTour ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
@@ -943,7 +965,7 @@ export default function LessonRunner({
                       loading="lazy"
                     />
                   </div>
-                ) : card.kind !== "video" ? (
+                ) : isConceptSupportCard ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <div className="grid min-h-64 gap-5 bg-[radial-gradient(circle_at_top_left,_rgba(219,234,254,0.75),_rgba(255,255,255,0.96)_58%)] p-5 md:grid-cols-[180px,1fr] md:items-center">
                       <div className="flex items-center justify-center">
@@ -959,9 +981,9 @@ export default function LessonRunner({
                           Concept snapshot
                         </div>
                         <p className="mt-4 text-base leading-7 text-slate-700">{card.caption}</p>
-                        {card.highlights?.length ? (
+                        {supportHighlights.length ? (
                           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                            {card.highlights.slice(0, 3).map((item) => (
+                            {supportHighlights.slice(0, 3).map((item) => (
                               <div key={item} className="rounded-2xl border border-sky-100 bg-white/90 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
                                 {item}
                               </div>
@@ -973,9 +995,9 @@ export default function LessonRunner({
                   </div>
                 ) : null}
 
-                {card.highlights?.length ? (
+                {supportHighlights.length && !isConceptSupportCard ? (
                   <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                    {card.highlights.map((item) => (
+                    {supportHighlights.map((item) => (
                       <li key={item} className="rounded-xl bg-white/80 px-3 py-2 shadow-sm ring-1 ring-sky-100">{item}</li>
                     ))}
                   </ul>
