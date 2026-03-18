@@ -1376,15 +1376,15 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     return (
       matchesPhraseGroups(candidate, [
         ["increase", "larger", "bigger", "greater", "more"],
-        ["turning effect", "torque", "spin pull", "moment arm", "leverage"],
+        ["turning effect", "torque", "spin pull", "moment arm", "leverage", "moment of a force", "moment of force"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["same force", "same push"],
-        ["more torque", "more turning effect", "larger spin pull", "larger moment arm"],
+        ["more torque", "more turning effect", "larger spin pull", "larger moment arm", "larger moment of a force", "larger moment of force"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["less force", "smaller force", "less effort"],
-        ["same torque", "same turning effect", "same spin pull"],
+        ["same torque", "same turning effect", "same spin pull", "same moment of a force", "same moment of force"],
       ])
     );
   }
@@ -4438,16 +4438,16 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "M2_L4":
       return {
-        body: "Turning questions only become clear when force size and perpendicular reach are kept together.",
+        body: "Turning questions only become clear when force size and perpendicular reach are kept together in torque, the moment of a force.",
         worked_example: {
           prompt: "Compare two door pushes: 6 N applied 0.5 m from the hinge and 3 N applied 1.0 m from the hinge. Which gives the larger Spin Pull?",
           steps: [
-            "Use Spin Pull = force x perpendicular reach for each case, because torque depends on both quantities together.",
+            "Use Spin Pull = torque (moment of a force) = force x perpendicular reach for each case, because the turning effect depends on both quantities together.",
             "First push: 6 x 0.5 = 3 N m.",
             "Second push: 3 x 1.0 = 3 N m.",
             "The Spin Pull values match, so neither push is larger; different force-reach combinations can give the same turning effect.",
           ],
-          answer: "Both pushes give the same Spin Pull of 3 N m, because torque depends on the product of force and perpendicular reach, not on force size alone.",
+          answer: "Both pushes give the same Spin Pull of 3 N m, because torque, the moment of a force, depends on the product of force and perpendicular reach, not on force size alone.",
         },
       };
     case "M2_L5":
@@ -5335,10 +5335,10 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
       };
     case "M2_L4":
       return {
-        coreIdea: "Spin Pull is torque: turning effect depends on both push size and perpendicular reach to the pivot, not on force alone.",
-        reasoning: "Name the pivot first, then find the perpendicular reach from the pivot to the force line. Multiply force by that reach to compare turning effects, and check whether the line of action passes through the pivot. A force can still translate an object even when its turning effect is zero.",
+        coreIdea: "Spin Pull is torque, the moment of a force: turning effect depends on both push size and perpendicular reach to the pivot, not on force alone.",
+        reasoning: "Name the pivot first, then find the perpendicular reach from the pivot to the force line. Multiply force by that reach to compare turning effects, and check whether the line of action passes through the pivot. A force can still translate an object even when its torque, or moment of a force, is zero.",
         checkForUnderstanding: "If the same push slides farther from the hinge while staying perpendicular, what changes and why?",
-        commonTrap: "Do not use ordinary distance along the bar when the question needs perpendicular reach, and do not assume the biggest force automatically gives the biggest turning effect.",
+        commonTrap: "Do not use ordinary distance along the bar when the question needs perpendicular reach, and do not assume the biggest force automatically gives the biggest torque or moment of a force.",
       };
     case "M2_L5":
       return {
@@ -5491,7 +5491,7 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       };
     case "M2_L4":
       return {
-        body: "A door-handle analogy works because the same push can matter differently depending on where it is applied. Push near the hinge and you mostly shove; push far from the hinge and you create a stronger twist. The useful comparison is not just force size but force size together with perpendicular reach.",
+        body: "A door-handle analogy works because the same push can matter differently depending on where it is applied. Push near the hinge and you mostly shove; push far from the hinge and you create a stronger twist. The useful comparison is not just force size but force size together with perpendicular reach. That turning measure is torque, also called the moment of a force.",
         checkForUnderstanding: "In the door-handle picture, why does moving the same push farther from the hinge change the turning effect?",
       };
     case "M2_L5":

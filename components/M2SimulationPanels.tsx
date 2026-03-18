@@ -277,7 +277,7 @@ export default function M2SimulationPanels({
     const torqueB = forceB * reachB;
     const comparison = Math.abs(torqueA - torqueB) < 0.15 ? "about the same Spin Pull" : torqueA > torqueB ? "setup A turns harder" : "setup B turns harder";
     return render(
-      "Spin Pull explorer",
+      "Spin Pull / torque explorer",
       <>
         <label className="mt-4 block text-sm text-slate-700">Force A (N)<input className="mt-2 w-full" type="range" min="1" max="12" step="1" value={forceA} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
         <label className="mt-4 block text-sm text-slate-700">Perpendicular reach A (m)<input className="mt-2 w-full" type="range" min="0" max="1.5" step="0.05" value={reachA} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
@@ -286,23 +286,23 @@ export default function M2SimulationPanels({
       </>,
       <svg viewBox="0 0 640 250" className="w-full">
         <rect x="12" y="12" width="616" height="226" rx="24" fill="#f8fafc" />
-        <text x="36" y="44" fill="#0f172a" fontSize="22" fontWeight="700">Same push size can buy different turning</text>
-        <text x="74" y="200" fill="#9a3412" fontSize="16">A torque: {formatSimulationNumber(torqueA, 2)} N m</text>
-        <text x="366" y="200" fill="#1d4ed8" fontSize="16">B torque: {formatSimulationNumber(torqueB, 2)} N m</text>
+        <text x="36" y="44" fill="#0f172a" fontSize="22" fontWeight="700">Same push size can buy different Spin Pull / torque</text>
+        <text x="74" y="200" fill="#9a3412" fontSize="16">A torque (moment): {formatSimulationNumber(torqueA, 2)} N m</text>
+        <text x="366" y="200" fill="#1d4ed8" fontSize="16">B torque (moment): {formatSimulationNumber(torqueB, 2)} N m</text>
         <text x="74" y="232" fill="#475569" fontSize="16">Comparison: {comparison}</text>
       </svg>,
       <>
-        {metricCard("Spin Pull A", `${formatSimulationNumber(torqueA, 2)} N m`, "border-amber-200 bg-amber-50 text-amber-900")}
-        {metricCard("Spin Pull B", `${formatSimulationNumber(torqueB, 2)} N m`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Spin Pull / torque A", `${formatSimulationNumber(torqueA, 2)} N m`, "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Spin Pull / torque B", `${formatSimulationNumber(torqueB, 2)} N m`, "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Zero-reach check", reachA < 0.01 ? "setup A gives zero turning effect" : "moving off the pivot creates turning", "border-slate-200 bg-slate-50 text-slate-900")}
         {metricCard("Comparison", comparison, "border-emerald-200 bg-emerald-50 text-emerald-900")}
       </>,
       [
-        "Torque needs both the push size and the perpendicular reach from the pivot.",
+        "Torque, also called the moment of a force, needs both the push size and the perpendicular reach from the pivot.",
         "A force through the pivot can still translate the object while creating no turning effect.",
         "Equal torque can come from different force-reach trades.",
       ],
-      "Force size alone is not enough. The turning story changes when the same push acts with a different perpendicular reach.",
+      "Force size alone is not enough. Torque, the moment of a force, changes when the same push acts with a different perpendicular reach.",
     );
   }
 
