@@ -652,12 +652,103 @@ function normalizeOpenAnswer(value: unknown): string {
     .replace(/watts?/g, "w")
     .replace(/m\/s\/s/g, "m/s^2")
     .replace(/[^a-z0-9.+\-^/]+/g, " ")
+    .replace(/^\.+|\.+$/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
 
 function compactOpenAnswer(value: unknown): string {
   return normalizeOpenAnswer(value).replace(/\s+/g, "");
+}
+
+type ModuleTwoStructuredAnswer = {
+  direction: string | null;
+  unitFamily: string | null;
+  value: number | null;
+};
+
+function isModuleTwoItem(item: UnknownRecord): boolean {
+  return /^M2/i.test(text(item.id));
+}
+
+function moduleTwoNormalizedDirection(value: string): string {
+  return ` ${value} `
+    .replace(/\bto the\b/g, " ")
+    .replace(/\btowards?\b/g, " ")
+    .replace(/\bpoints?\b/g, " ")
+    .replace(/\bpointing\b/g, " ")
+    .replace(/\bheaded\b/g, " ")
+    .replace(/\bheading\b/g, " ")
+    .replace(/\beastward\b/g, " east ")
+    .replace(/\bwestward\b/g, " west ")
+    .replace(/\bnorthward\b/g, " north ")
+    .replace(/\bsouthward\b/g, " south ")
+    .replace(/\bleftward\b/g, " left ")
+    .replace(/\brightward\b/g, " right ")
+    .replace(/\bforwards?\b/g, " forward ")
+    .replace(/\bbackwards?\b/g, " backward ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function moduleTwoUnitFamily(value: string): string | null {
+  const compact = value.replace(/\s+/g, "");
+  if (compact.includes("m/s^2")) return "acceleration";
+  if (compact.includes("kgm/s") || compact.includes("ns")) return "momentum";
+  if (compact.includes("nm")) return "torque";
+  if (/\bn\b/.test(value) || compact.endsWith("n")) return "force";
+  return null;
+}
+
+function parseModuleTwoStructuredAnswer(value: unknown): ModuleTwoStructuredAnswer | null {
+  const normalized = moduleTwoNormalizedDirection(normalizeOpenAnswer(value));
+  if (!normalized) return null;
+
+  const directionMatch = normalized.match(/\b(left|right|east|west|north|south|forward|backward|up|down)\b/);
+  const valueMatch = normalized.match(/[-+]?\d*\.?\d+/);
+  const parsed: ModuleTwoStructuredAnswer = {
+    direction: directionMatch ? directionMatch[1] : null,
+    unitFamily: moduleTwoUnitFamily(normalized),
+    value: valueMatch ? Number.parseFloat(valueMatch[0]) : null,
+  };
+
+  return parsed.direction !== null || parsed.unitFamily !== null || parsed.value !== null ? parsed : null;
+}
+
+function moduleTwoStructuredShortAnswerMatch(
+  answer: unknown,
+  acceptedAnswers: string[],
+  item: UnknownRecord,
+): boolean {
+  if (!isModuleTwoItem(item)) return false;
+
+  const candidate = parseModuleTwoStructuredAnswer(answer);
+  if (!candidate) return false;
+
+  const parsedAccepted = acceptedAnswers
+    .map((entry) => parseModuleTwoStructuredAnswer(entry))
+    .filter((entry): entry is ModuleTwoStructuredAnswer => entry !== null);
+  if (parsedAccepted.length === 0) return false;
+
+  const expectedDirections = [...new Set(parsedAccepted.map((entry) => entry.direction).filter(Boolean))];
+  const expectedValues = [...new Set(parsedAccepted.map((entry) => entry.value).filter((entry): entry is number => entry !== null))];
+  const expectedUnits = [...new Set(parsedAccepted.map((entry) => entry.unitFamily).filter(Boolean))];
+
+  if (expectedDirections.length > 0) {
+    if (!candidate.direction || !expectedDirections.includes(candidate.direction)) return false;
+  }
+
+  if (expectedValues.length > 0) {
+    if (candidate.value === null) return false;
+    const matchesValue = expectedValues.some((entry) => Math.abs(entry - candidate.value) < 1e-9);
+    if (!matchesValue) return false;
+  }
+
+  if (candidate.unitFamily && expectedUnits.length > 0 && !expectedUnits.includes(candidate.unitFamily)) {
+    return false;
+  }
+
+  return expectedDirections.length > 0 || expectedValues.length > 0;
 }
 
 function numericAnswer(value: unknown): number | null {
@@ -740,6 +831,7 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
 }
 
 function canonicalAssessmentOverride(item: UnknownRecord): UnknownRecord | null {
+  const itemId = text(item.id);
   const promptKey = normalizePromptKey(item.prompt);
 
   if (promptKey === "which tool is most suitable for measuring the thickness of a sheet of card") {
@@ -756,6 +848,25 @@ function canonicalAssessmentOverride(item: UnknownRecord): UnknownRecord | null 
       hint,
       feedback: choices.map((_, index) => (index === answerIndex ? explanation : hint)),
       correct_answer: choices[answerIndex],
+    };
+  }
+
+  if (
+    itemId === "M2L1_T6" ||
+    promptKey === "a craft is speeding up west which direction is the master arrow" ||
+    promptKey === "a craft is speeding up west which statement must be true"
+  ) {
+    const acceptedAnswers = ["west", "to the west", "the master arrow points west"];
+    const hint =
+      "If the craft is moving only along the east-west line and its westward speed is increasing, the acceleration points west, so the Master Arrow points west.";
+    return {
+      ...item,
+      id: itemId || "M2L1_T6",
+      prompt: "A craft is moving in a straight east-west line, and its westward speed is increasing. Which direction must the Master Arrow point?",
+      accepted_answers: acceptedAnswers,
+      correct_answer: "the Master Arrow points west",
+      hint,
+      feedback: [hint],
     };
   }
 
@@ -1752,6 +1863,10 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
   const compactAccepted = acceptedAnswers.map((entry) => compactOpenAnswer(entry));
 
   if (accepted.includes(candidate) || compactAccepted.includes(compactCandidate)) {
+    return true;
+  }
+
+  if (moduleTwoStructuredShortAnswerMatch(answer, acceptedAnswers, item)) {
     return true;
   }
 
