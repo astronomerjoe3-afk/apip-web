@@ -37,6 +37,15 @@ function metricCard(title: string, value: string, tone: string): ReactNode {
   );
 }
 
+function explainerCard(title: string, body: string, tone: string): ReactNode {
+  return (
+    <div className={`sm:col-span-2 rounded-2xl border p-4 ${tone}`}>
+      <div className="text-xs font-semibold uppercase tracking-[0.18em] opacity-70">{title}</div>
+      <div className="mt-2 text-sm leading-6">{body}</div>
+    </div>
+  );
+}
+
 function boardFrame(title: string, body: ReactNode): ReactNode {
   return (
     <div className={panelClass}>
@@ -176,7 +185,8 @@ export default function M2SimulationPanels({
       </>,
       <svg viewBox="0 0 640 250" className="w-full">
         <rect x="12" y="12" width="616" height="226" rx="24" fill="#f8fafc" />
-        <text x="36" y="44" fill="#0f172a" fontSize="22" fontWeight="700">Same command, different inertia response</text>
+        <text x="36" y="44" fill="#0f172a" fontSize="22" fontWeight="700">Two force comparisons, not one shared calculation</text>
+        <text x="36" y="66" fill="#475569" fontSize="14">Top readouts use the Master Arrow slider. Pair-force readouts use the separate interaction-pair slider.</text>
         <rect x="48" y="76" width="240" height="134" rx="22" fill="#eff6ff" />
         <rect x="352" y="76" width="240" height="134" rx="22" fill="#fff7ed" />
         <text x="74" y="106" fill="#1d4ed8" fontSize="18" fontWeight="700">Craft A</text>
@@ -188,17 +198,27 @@ export default function M2SimulationPanels({
         <text x="154" y="220" fill="#334155" fontSize="16">Equal pair force: {formatSimulationNumber(pairForce, 0)} N each</text>
       </svg>,
       <>
-        {metricCard("Craft A Motion Shift", `${formatSimulationNumber(aShift, 2)} m/s^2`, "border-amber-200 bg-amber-50 text-amber-900")}
-        {metricCard("Craft B Motion Shift", `${formatSimulationNumber(bShift, 2)} m/s^2`, "border-orange-200 bg-orange-50 text-orange-900")}
-        {metricCard("Third-law pair", `${formatSimulationNumber(pairForce, 0)} N on A and ${formatSimulationNumber(pairForce, 0)} N on B`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Pair-force accelerations", `A ${formatSimulationNumber(pairAShift, 2)} | B ${formatSimulationNumber(pairBShift, 2)} m/s^2`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {explainerCard(
+          "Master Arrow response",
+          "These two readouts use the Master Arrow slider only. They show the acceleration each craft gets from that one-object resultant-force case.",
+          "border-amber-200 bg-amber-50 text-amber-900",
+        )}
+        {metricCard("Craft A Motion Shift from Master Arrow", `${formatSimulationNumber(aShift, 2)} m/s^2`, "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Craft B Motion Shift from Master Arrow", `${formatSimulationNumber(bShift, 2)} m/s^2`, "border-orange-200 bg-orange-50 text-orange-900")}
+        {explainerCard(
+          "Third-law pair comparison",
+          "These two readouts use the separate interaction-pair slider. They compare equal forces on two objects, so they only match the Motion Shift cards if the pair force happens to equal the Master Arrow.",
+          "border-emerald-200 bg-emerald-50 text-emerald-900",
+        )}
+        {metricCard("Third-law pair force on each craft", `${formatSimulationNumber(pairForce, 0)} N on A and ${formatSimulationNumber(pairForce, 0)} N on B`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Acceleration from pair force alone", `A ${formatSimulationNumber(pairAShift, 2)} | B ${formatSimulationNumber(pairBShift, 2)} m/s^2`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
       </>,
       [
         "Name the Master Arrow first and the mass second before predicting acceleration.",
         "Use third-law pairs only to compare forces across two objects, not to cancel forces on one object.",
         "The same force can buy a bigger motion shift on the lighter craft.",
       ],
-      "Equal interaction forces do not guarantee equal accelerations. Load Rating decides how much the same push changes each craft.",
+      "The panel is showing two separate force stories side by side: a Master Arrow response case and a third-law pair comparison case. Their numbers only match when those force sliders are set equal.",
     );
   }
 
