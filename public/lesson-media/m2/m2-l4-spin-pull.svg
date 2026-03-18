@@ -18,7 +18,12 @@
   <line x1="808" y1="414" x2="1020" y2="414" stroke="#64748B" stroke-width="12" stroke-linecap="round"/>
   <line x1="920" y1="318" x2="1080" y2="318" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
   <polygon points="1080,318 1048,300 1048,336" fill="#F97316"/>
+  <text x="922" y="286" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Line of action</text>
   <line x1="808" y1="414" x2="808" y2="318" stroke="#22C55E" stroke-width="6" stroke-dasharray="12 10"/>
+  <rect x="644" y="338" width="146" height="58" rx="18" fill="#DCFCE7"/>
+  <text x="661" y="362" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Perpendicular</text>
+  <text x="700" y="384" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">reach</text>
+  <line x1="790" y1="366" x2="804" y2="366" stroke="#16A34A" stroke-width="4" stroke-linecap="round"/>
   <text x="702" y="530" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Same push, larger reach, bigger turning effect.</text>
   <text x="774" y="572" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Spin Pull = force x reach</text>
 </svg>
