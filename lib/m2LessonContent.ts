@@ -455,15 +455,19 @@ export function m2ScaffoldCoreBullets(code: string): string[] {
   switch (code) {
     case "M2_L1":
       return [
+        "Newton's first law: an object remains at rest or moves with constant velocity unless acted on by a non-zero resultant force.",
         "Drive Arrows are individual forces acting on the craft.",
         "The Master Arrow is the resultant force from all Drive Arrows together.",
-        "Zero Master Arrow means zero acceleration.",
+        "In lesson language, zero Master Arrow means zero acceleration, so the motion state stays unchanged.",
       ];
     case "M2_L2":
       return [
+        "Newton's first law: zero resultant force means zero acceleration, so motion stays unchanged.",
+        "Newton's second law: the resultant force on an object equals mass x acceleration, so for constant mass a = Fnet / m.",
+        "Newton's third law: when two objects interact, they exert equal and opposite forces on each other.",
         "Motion Shift is acceleration: how quickly velocity changes.",
         "Load Rating is mass: how hard the craft is to change.",
-        "For the same Master Arrow, larger Load Rating means smaller Motion Shift.",
+        "For the same Master Arrow, larger Load Rating means smaller Motion Shift, and third-law force pairs act on different objects.",
       ];
     case "M2_L3":
       return [

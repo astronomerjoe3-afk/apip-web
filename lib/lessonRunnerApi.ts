@@ -5153,15 +5153,15 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
       };
     case "M2_L1":
       return {
-        coreIdea: "The Master Arrow is the one combined steering instruction from all the Drive Arrows, so force state and motion state must be kept separate.",
-        reasoning: "Collapse the whole force picture first: add same-direction Drive Arrows, subtract opposite ones, and keep the leftover direction. Only after you know the Master Arrow should you predict how the velocity changes. Then compare that acceleration story with the craft's current motion story.",
+        coreIdea: "Newton's first law says an object remains at rest or moves with constant velocity unless acted on by a non-zero resultant force. In this lesson, the Master Arrow is that resultant force, so force state and motion state must be kept separate.",
+        reasoning: "Start with the formal first-law question: is the resultant force zero or non-zero? Collapse the whole force picture first by adding same-direction Drive Arrows, subtracting opposite ones, and keeping the leftover direction. Only after you know the Master Arrow should you predict how the velocity changes, then compare that acceleration story with the craft's current motion story.",
         checkForUnderstanding: "If a craft is already moving east and the Master Arrow becomes zero, what stays the same and what stops changing?",
         commonTrap: "Do not treat zero Master Arrow as zero motion, and do not confuse balanced arrows with no arrows acting at all.",
       };
     case "M2_L2":
       return {
-        coreIdea: "Motion Shift depends on both the Master Arrow and the Load Rating, while third-law pairs compare equal interaction forces on different objects.",
-        reasoning: "Decide first whether the question is a one-object response question or a two-object interaction question. For one craft, use the Master Arrow with its Load Rating to judge acceleration. For an interaction pair, keep the equal-and-opposite forces on different objects and explain any acceleration difference through the masses, not through different pair-force sizes.",
+        coreIdea: "Newton's first law says zero resultant force means no acceleration, Newton's second law says resultant force = mass x acceleration, and Newton's third law says interacting objects exert equal and opposite forces on each other. In this lesson, Motion Shift depends on both the Master Arrow and the Load Rating, while third-law pairs compare equal interaction forces on different objects.",
+        reasoning: "Decide first whether the question is a one-object response question or a two-object interaction question. For one craft, use Newton's second-law structure: identify the Master Arrow, compare it with the Load Rating, and judge the acceleration. For an interaction pair, use Newton's third law to keep the equal-and-opposite forces on different objects, then explain any acceleration difference through the masses rather than through different pair-force sizes.",
         checkForUnderstanding: "If two craft feel the same interaction force but one has twice the mass, what matches and what differs?",
         commonTrap: "Do not say the heavier craft pushes back harder, and do not cancel third-law pairs inside one object's F = ma calculation.",
       };
