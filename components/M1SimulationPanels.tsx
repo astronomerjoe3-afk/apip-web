@@ -130,10 +130,12 @@ function control(
 ) {
   return (
     <label className="block text-sm text-slate-700">
-      <span className="font-medium text-slate-900">{label}</span>
-      <span className="ml-2 text-slate-500">
-        {value}
-        {suffix}
+      <span className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span className="font-medium text-slate-900">{label}</span>
+        <span className="shrink-0 tabular-nums text-slate-500">
+          {value}
+          {suffix}
+        </span>
       </span>
       <input
         className="mt-2 w-full"
