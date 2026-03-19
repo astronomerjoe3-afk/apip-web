@@ -1413,20 +1413,67 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isM2BalanceCoreShiftPrompt = matchesM2Prompt(
+    ["M2L5_D6", "M2L5_M2"],
+    [
+      "if cargo is moved to the right which way does the balance core shift",
+      "cargo is moved to the left side of the craft which way does the balance core shift",
+    ],
+  );
+
+  if (isM2BalanceCoreShiftPrompt) {
+    const promptImpliesLeft = includesAnyPhrase(promptKeyCore, ["left side", "to the left", "left"]);
+    const promptImpliesRight = includesAnyPhrase(promptKeyCore, ["to the right", "right side", "right"]);
+
+    if (promptImpliesLeft) {
+      return (
+        includesAnyPhrase(candidate, ["left", "to the left"]) ||
+        matchesPhraseGroups(candidate, [
+          ["toward", "towards", "toward the", "towards the", "toward moved", "towards moved"],
+          ["moved mass", "moved cargo", "cargo", "moved load", "load"],
+        ]) ||
+        includesAnyPhrase(candidate, ["toward the moved mass", "towards the moved mass", "toward the cargo", "towards the cargo"])
+      );
+    }
+
+    if (promptImpliesRight) {
+      return (
+        includesAnyPhrase(candidate, ["right", "to the right"]) ||
+        matchesPhraseGroups(candidate, [
+          ["toward", "towards", "toward the", "towards the", "toward moved", "towards moved"],
+          ["moved mass", "moved cargo", "cargo", "moved load", "load"],
+        ]) ||
+        includesAnyPhrase(candidate, ["toward the moved mass", "towards the moved mass", "toward the cargo", "towards the cargo"])
+      );
+    }
+  }
+
   const isM2TippingStartsPrompt = matchesM2Prompt(
     ["M2L5_T3"],
     ["if the balance core moves beyond the right edge of the footprint zone what happens"],
   );
 
   if (isM2TippingStartsPrompt) {
-    return includesAnyPhrase(candidate, [
-      "it tips",
-      "the craft tips",
-      "tipping begins",
-      "tipping starts",
-      "it starts to tip",
-      "the craft starts to tip",
-    ]);
+    return (
+      includesAnyPhrase(candidate, [
+        "it tips",
+        "the craft tips",
+        "tipping begins",
+        "tipping starts",
+        "it starts to tip",
+        "the craft starts to tip",
+        "it tips over",
+        "the craft tips over",
+        "it topples",
+        "the craft topples",
+        "it falls over",
+        "the craft falls over",
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["unstable", "tips", "tipping", "topples", "falls"],
+        ["starts", "begins", "will", "becomes"],
+      ])
+    );
   }
 
   const isM2HeavyStablePrompt = matchesM2Prompt(
