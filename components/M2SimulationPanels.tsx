@@ -314,6 +314,21 @@ export default function M2SimulationPanels({
     const tipMargin = supportHalfWidth - Math.abs(cargoOffset);
     const stableNow = tipMargin >= 0;
     const tipAngle = stableNow ? (Math.atan(tipMargin / loadHeight) * 180) / Math.PI : 0;
+    const centerX = 320;
+    const supportBarY = 168;
+    const baseWidthPx = 120 + ((baseWidth - 4) / 8) * 220;
+    const supportHalfPx = baseWidthPx / 2;
+    const supportLeft = centerX - supportHalfPx;
+    const supportRight = centerX + supportHalfPx;
+    const offsetPx = cargoOffset * 24;
+    const lineX = centerX + offsetPx;
+    const loadWidthPx = 88;
+    const loadHeightPx = 58 + ((loadHeight - 1) / 7) * 70;
+    const loadLeft = lineX - loadWidthPx / 2;
+    const loadTop = supportBarY - loadHeightPx - 18;
+    const balanceCoreY = loadTop + 26;
+    const nearestEdgeX = cargoOffset >= 0 ? supportRight : supportLeft;
+    const marginLabel = stableNow ? `${formatSimulationNumber(Math.abs(tipMargin), 2)} m margin` : "outside support";
     return render(
       "Balance Core explorer",
       <>
@@ -324,7 +339,20 @@ export default function M2SimulationPanels({
       <svg viewBox="0 0 640 250" className="w-full">
         <rect x="12" y="12" width="616" height="226" rx="24" fill="#f8fafc" />
         <text x="36" y="44" fill="#0f172a" fontSize="22" fontWeight="700">Stability comes from where the weight line lands</text>
-        <text x="36" y="204" fill="#475569" fontSize="16">{stableNow ? "Balance Core line still lands inside the support zone." : "Balance Core line has crossed the support edge."}</text>
+        <text x="36" y="72" fill="#475569" fontSize="16">{stableNow ? "Balance Core line still lands inside the support zone." : "Balance Core line has crossed the support edge."}</text>
+        <rect x={supportLeft} y={supportBarY - 8} width={baseWidthPx} height="16" rx="8" fill={stableNow ? "#22c55e" : "#f59e0b"} />
+        <line x1={supportLeft} y1={supportBarY - 16} x2={supportLeft} y2={supportBarY + 16} stroke={stableNow ? "#16a34a" : "#d97706"} strokeWidth="4" strokeLinecap="round" />
+        <line x1={supportRight} y1={supportBarY - 16} x2={supportRight} y2={supportBarY + 16} stroke={stableNow ? "#16a34a" : "#d97706"} strokeWidth="4" strokeLinecap="round" />
+        <rect x={loadLeft} y={loadTop} width={loadWidthPx} height={loadHeightPx} rx="16" fill={stableNow ? "#dcfce7" : "#fed7aa"} stroke={stableNow ? "#22c55e" : "#f97316"} strokeWidth="4" />
+        <circle cx={lineX} cy={balanceCoreY} r="12" fill="#0ea5e9" />
+        <line x1={lineX} y1={balanceCoreY} x2={lineX} y2={supportBarY + 8} stroke="#0ea5e9" strokeWidth="5" strokeDasharray="10 8" />
+        <text x={lineX} y={balanceCoreY - 18} fill="#0369a1" fontSize="14" fontWeight="700" textAnchor="middle">Balance Core</text>
+        <text x={centerX} y={supportBarY + 36} fill="#475569" fontSize="14" textAnchor="middle">Footprint Zone</text>
+        <line x1={lineX} y1="204" x2={nearestEdgeX} y2="204" stroke={stableNow ? "#16a34a" : "#dc2626"} strokeWidth="4" strokeLinecap="round" />
+        <polygon points={`${lineX},204 ${lineX + (cargoOffset >= 0 ? 10 : -10)},198 ${lineX + (cargoOffset >= 0 ? 10 : -10)},210`} fill={stableNow ? "#16a34a" : "#dc2626"} />
+        <polygon points={`${nearestEdgeX},204 ${nearestEdgeX + (cargoOffset >= 0 ? -10 : 10)},198 ${nearestEdgeX + (cargoOffset >= 0 ? -10 : 10)},210`} fill={stableNow ? "#16a34a" : "#dc2626"} />
+        <text x={(lineX + nearestEdgeX) / 2} y="196" fill={stableNow ? "#166534" : "#b91c1c"} fontSize="14" fontWeight="700" textAnchor="middle">{marginLabel}</text>
+        <text x="36" y="226" fill="#475569" fontSize="16">{stableNow ? "Wider support or smaller offset leaves more room before tipping." : "The load line has moved beyond the base edge, so tipping begins."}</text>
       </svg>,
       <>
         {metricCard("Balance Core line", cargoOffset === 0 ? "centered" : `${formatSimulationNumber(Math.abs(cargoOffset), 2)} m ${cargoOffset > 0 ? "right" : "left"} of center`, "border-slate-200 bg-slate-50 text-slate-900")}
