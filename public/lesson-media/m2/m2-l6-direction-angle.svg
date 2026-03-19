@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="64" y="86" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Read direction in degrees from the +x axis to the resultant.</text>
+  <text x="64" y="128" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">First find the net x and net y components. Then measure the angle counterclockwise from +x to the rebuilt arrow.</text>
+
+  <rect x="72" y="182" width="1056" height="468" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+
+  <rect x="106" y="220" width="590" height="392" rx="28" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="3"/>
+  <text x="138" y="266" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">How to read the angle</text>
+  <text x="138" y="300" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="20">Example: net x = 5 N east, net y = 12 N north</text>
+
+  <line x1="170" y1="552" x2="170" y2="300" stroke="#334155" stroke-width="4"/>
+  <line x1="170" y1="552" x2="560" y2="552" stroke="#334155" stroke-width="4"/>
+
+  <line x1="170" y1="552" x2="390" y2="552" stroke="#0EA5E9" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="390,552 360,536 360,568" fill="#0EA5E9"/>
+  <text x="220" y="522" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">net x = 5 N east</text>
+
+  <line x1="390" y1="552" x2="390" y2="328" stroke="#22C55E" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="390,328 374,358 406,358" fill="#22C55E"/>
+  <text x="420" y="430" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">net y = 12 N north</text>
+
+  <line x1="170" y1="552" x2="390" y2="328" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="390,328 354,334 376,366" fill="#F97316"/>
+  <text x="240" y="390" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">resultant = 13 N</text>
+
+  <path d="M232 552 A62 62 0 0 0 214 508" stroke="#7C3AED" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <polygon points="217,503 210,522 229,516" fill="#7C3AED"/>
+  <text x="230" y="500" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">theta</text>
+  <text x="138" y="586" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Measure from +x toward the orange arrow, not from the y-axis.</text>
+
+  <rect x="748" y="220" width="332" height="392" rx="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="780" y="266" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Direction recipe</text>
+  <text x="780" y="318" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">1. Combine to get net x and net y.</text>
+  <text x="780" y="356" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">2. Draw the rebuilt resultant.</text>
+  <text x="780" y="394" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">3. Measure from +x counterclockwise.</text>
+  <text x="780" y="432" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">4. In first-quadrant cases, use</text>
+  <text x="806" y="462" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">theta = tan^-1(y / x)</text>
+  <text x="780" y="508" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">5. Check the signs of x and y so the</text>
+  <text x="806" y="538" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">angle lands in the correct quadrant.</text>
+
+  <rect x="780" y="564" width="268" height="28" rx="14" fill="#EDE9FE"/>
+  <text x="816" y="584" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Here theta = tan^-1(12 / 5) about 67.4 deg</text>
+</svg>

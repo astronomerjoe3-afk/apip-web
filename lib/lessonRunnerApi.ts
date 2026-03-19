@@ -5412,9 +5412,9 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
     case "M2_L6":
       return {
         coreIdea: "Arrow Split rewrites one angled force into axis components so vectors can be combined cleanly without changing the underlying physics.",
-        reasoning: "Choose axes, resolve each angled force into horizontal and vertical parts, and combine each axis separately with signs. Only after the axis totals are clear should you rebuild the final resultant. The original force and its components are two descriptions of the same push.",
-        checkForUnderstanding: "If two horizontal components oppose each other, what should you do before rebuilding the final arrow?",
-        commonTrap: "Do not add component magnitudes blindly without direction, and do not talk as if the components are extra forces acting in addition to the original arrow.",
+        reasoning: "Choose axes, resolve each angled force into horizontal and vertical parts, and combine each axis separately with signs. Only after the axis totals are clear should you rebuild the final resultant. Then read the direction counterclockwise from +x; in first-quadrant cases you can use theta = tan^-1(y / x), but the signs of x and y still decide the quadrant.",
+        checkForUnderstanding: "If net x is positive and net y is positive, from which axis should you measure the direction angle and which ratio gives the angle?",
+        commonTrap: "Do not add component magnitudes blindly without direction, do not measure the angle from the y-axis when the lesson is using +x as the reference, and do not talk as if the components are extra forces acting in addition to the original arrow.",
       };
     default:
       return {
@@ -5598,6 +5598,21 @@ function scaffoldWorkedExampleSections(workedExample: UnknownRecord): UnknownRec
 
   return sections;
 }
+
+function scaffoldExtendedExtraSections(code: string): UnknownRecord[] {
+  switch (code) {
+    case "M2_L6":
+      return [
+        {
+          heading: "Reading direction in degrees",
+          body: "After you combine to get the net x and net y components, draw the rebuilt resultant from the origin to that net component point. The direction is measured counterclockwise from the +x axis to that arrow. In first-quadrant cases, use theta = tan^-1(y / x); in all cases, keep the signs of x and y visible so you place the angle in the correct quadrant.",
+          check_for_understanding: "If a rebuilt vector has +x and +y components, where do you start measuring the direction angle, and what ratio tells you the angle size?",
+        },
+      ];
+    default:
+      return [];
+  }
+}
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
@@ -5609,6 +5624,7 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       { heading: "How to reason through it", body: f2Copy.reasoning, check_for_understanding: f2Copy.checkForUnderstanding },
       { heading: "Common trap", body: f2Copy.commonTrap },
       { heading: "Analogy", body: analogyCopy.body, analogy: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer.", check_for_understanding: analogyCopy.checkForUnderstanding },
+      ...scaffoldExtendedExtraSections(code),
       ...scaffoldWorkedExampleSections(workedExample),
     ];
   }

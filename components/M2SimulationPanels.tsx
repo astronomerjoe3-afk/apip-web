@@ -381,7 +381,9 @@ export default function M2SimulationPanels({
     const netHorizontal = horizontal + extraHorizontal;
     const netVertical = vertical + extraVertical;
     const rebuiltMagnitude = Math.sqrt(netHorizontal * netHorizontal + netVertical * netVertical);
-    const rebuiltAngle = (Math.atan2(netVertical, netHorizontal) * 180) / Math.PI;
+    const rebuiltAngleRaw = (Math.atan2(netVertical, netHorizontal) * 180) / Math.PI;
+    const rebuiltAngle = ((rebuiltAngleRaw % 360) + 360) % 360;
+    const hasDirection = rebuiltMagnitude > 1e-9;
     return render(
       "Arrow Split explorer",
       <>
@@ -395,17 +397,18 @@ export default function M2SimulationPanels({
         <text x="36" y="44" fill="#0f172a" fontSize="22" fontWeight="700">Resolve, combine by axis, then rebuild</text>
         <text x="36" y="120" fill="#334155" fontSize="16">Original components: x {formatSimulationNumber(horizontal, 2)} N, y {formatSimulationNumber(vertical, 2)} N</text>
         <text x="36" y="150" fill="#334155" fontSize="16">Net components: x {formatSimulationNumber(netHorizontal, 2)} N, y {formatSimulationNumber(netVertical, 2)} N</text>
-        <text x="36" y="180" fill="#0f172a" fontSize="18" fontWeight="700">Rebuilt resultant: {formatSimulationNumber(rebuiltMagnitude, 2)} N at {formatSimulationNumber(rebuiltAngle, 1)} deg</text>
+        <text x="36" y="180" fill="#0f172a" fontSize="18" fontWeight="700">Rebuilt resultant: {formatSimulationNumber(rebuiltMagnitude, 2)} N{hasDirection ? ` at ${formatSimulationNumber(rebuiltAngle, 1)} deg from +x` : " with no direction because the resultant is zero"}</text>
       </svg>,
       <>
         {metricCard("Arrow Split", `${formatSimulationNumber(horizontal, 2)} N x | ${formatSimulationNumber(vertical, 2)} N y`, "border-slate-200 bg-slate-50 text-slate-900")}
         {metricCard("Net components", `${formatSimulationNumber(netHorizontal, 2)} N x | ${formatSimulationNumber(netVertical, 2)} N y`, "border-amber-200 bg-amber-50 text-amber-900")}
         {metricCard("Rebuilt resultant", `${formatSimulationNumber(rebuiltMagnitude, 2)} N`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Direction", `${formatSimulationNumber(rebuiltAngle, 1)} degrees from +x`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Direction", hasDirection ? `${formatSimulationNumber(rebuiltAngle, 1)} degrees counterclockwise from +x` : "undefined for zero resultant", "border-sky-200 bg-sky-50 text-sky-900")}
       </>,
       [
         "Resolve the diagonal force into axis-aligned parts first.",
         "Combine horizontal with horizontal and vertical with vertical before rebuilding the final vector.",
+        "Read the final direction counterclockwise from +x after the rebuilt resultant is known.",
         "Arrow Split is bookkeeping, not a claim that one force became several different physical pushes.",
       ],
       "Components are not extra forces. They are one angled force rewritten on the deck axes so you can combine each direction cleanly.",

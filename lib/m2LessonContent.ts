@@ -200,14 +200,15 @@ const M2_SIMULATION_COPY: Record<string, M2SimulationCopy> = {
     exploreSteps: [
       "Choose a diagonal Drive Arrow and read off its horizontal and vertical parts.",
       "Add another horizontal contribution so you can combine one axis at a time before rebuilding the resultant.",
-      "Compare two different component pairs that reconstruct the same overall angled push.",
+      "After rebuilding the resultant, measure its direction from the +x axis rather than guessing from the y-axis or from the largest component.",
     ],
     watchFor: [
       "Components are a redescription of one force, not two new physical pushes.",
       "Combine horizontal with horizontal and vertical with vertical before rebuilding the resultant.",
       "Do not add perpendicular components as plain numbers; that only works when the arrows share one axis.",
+      "Read direction counterclockwise from +x after the net components are known.",
     ],
-    tryFirst: "Try a 10 N arrow at about 53 degrees. The components are about 6 N east and 8 N north, but do not add 6 + 8 because those parts are perpendicular. Then add 2 N west on the horizontal axis so the net horizontal part becomes 4 N east before you rebuild the final arrow.",
+    tryFirst: "Try a 10 N arrow at about 53 degrees. The components are about 6 N east and 8 N north, but do not add 6 + 8 because those parts are perpendicular. Then add 2 N west on the horizontal axis so the net horizontal part becomes 4 N east before you rebuild the final arrow and measure the final direction from +x.",
     takeaway: "Arrow Split is a structured way to understand and combine angled forces. The original diagonal arrow is still the same force after it is resolved into components.",
   },
 };
@@ -443,8 +444,9 @@ export function m2ScaffoldFocusExtras(code: string): string[] {
     case "M2_L6":
       return [
         "Arrow Split is a bookkeeping move that rewrites one angled force into components.",
-        "Combine components axis by axis before rebuilding the resultant.",
+        "Direction is read from the +x axis to the rebuilt resultant.",
         "Only same-axis components add like ordinary signed numbers; perpendicular components rebuild a diagonal.",
+        "Once net x and net y are known, use theta = tan^-1(y / x) with a quadrant check.",
       ];
     default:
       return [];
@@ -490,6 +492,7 @@ export function m2ScaffoldCoreBullets(code: string): string[] {
     case "M2_L6":
       return [
         "Arrow Split rewrites a diagonal force as horizontal and vertical components.",
+        "Direction is measured counterclockwise from +x to the rebuilt resultant.",
         "Components recombine to the same original vector.",
         "Same-axis parts add algebraically, but perpendicular parts rebuild the resultant geometrically.",
       ];
@@ -533,6 +536,17 @@ export function m2ScaffoldMediaCards(code: string): UnknownRecord[] {
         "Place the vertical component at the tip of the horizontal component.",
         "The single arrow from the first tail to the final tip is the resultant.",
         "Only same-axis vectors add like ordinary signed numbers; perpendicular ones do not.",
+      ],
+    });
+    cards.splice(2, 0, {
+      kind: "visual",
+      title: "Reading direction in degrees",
+      caption: "Determine the direction after rebuilding the resultant: measure counterclockwise from +x and use the x-y component ratio to get the angle.",
+      image_url: "/lesson-media/m2/m2-l6-direction-angle.svg",
+      highlights: [
+        "Find net x and net y first.",
+        "Measure the angle from +x to the resultant, not from the y-axis.",
+        "Use theta = tan^-1(y / x) and check the quadrant from the signs.",
       ],
     });
   }
