@@ -98,7 +98,7 @@ const M2_VISUAL_META: Record<string, M2QuestionVisualMeta> = {
     visual_callouts: [
       "Components are one angled force redrawn, not extra forces.",
       "Combine one axis at a time before rebuilding the resultant.",
-      "A 6 N east part and 8 N north part rebuild the same 10 N diagonal arrow.",
+      "Perpendicular components rebuild geometrically, not by plain number addition.",
     ],
   },
 };
@@ -205,9 +205,9 @@ const M2_SIMULATION_COPY: Record<string, M2SimulationCopy> = {
     watchFor: [
       "Components are a redescription of one force, not two new physical pushes.",
       "Combine horizontal with horizontal and vertical with vertical before rebuilding the resultant.",
-      "Vector resolution is a bookkeeping move that makes later force combination easier.",
+      "Do not add perpendicular components as plain numbers; that only works when the arrows share one axis.",
     ],
-    tryFirst: "Try a 10 N arrow at about 53 degrees. The components are about 6 N east and 8 N north. Then add 2 N west on the horizontal axis so the net horizontal part becomes 4 N east before you rebuild the final arrow.",
+    tryFirst: "Try a 10 N arrow at about 53 degrees. The components are about 6 N east and 8 N north, but do not add 6 + 8 because those parts are perpendicular. Then add 2 N west on the horizontal axis so the net horizontal part becomes 4 N east before you rebuild the final arrow.",
     takeaway: "Arrow Split is a structured way to understand and combine angled forces. The original diagonal arrow is still the same force after it is resolved into components.",
   },
 };
@@ -257,7 +257,7 @@ export function m2GeneratedDiagnosticItems(code: string): UnknownRecord[] {
         mcItem("M2L6_D4", "A diagonal Drive Arrow is resolved into components. What stays true?", ["the components add back to the same original arrow", "the original force disappears", "the components are two extra forces that now act instead", "direction no longer matters"], 0, "Resolution rewrites one vector; it does not replace the physics.", "The components add back to the same original arrow because vector resolution is a redescription of one force."),
         mcItem("M2L6_D5", "Why do physicists combine components one axis at a time?", ["because it keeps the vector sum organized", "because components remove units", "because each axis becomes a scalar with no direction", "because diagonal arrows cannot be measured"], 0, "Axis-by-axis bookkeeping reduces confusion.", "Combining one axis at a time keeps the vector sum organized and makes multi-force resultants easier to track."),
         shortItem("M2L6_D6", "In a few words, what are components?", ["one force rewritten on chosen axes", "parts of one vector on axes", "one vector resolved on axes", "one force split into axis parts"], "Components are a cleaner description of one angled force."),
-        mcItem("M2L6_D7", "A force has components 8 N east and 15 N north. What resultant magnitude does that give?", ["17 N", "7 N", "23 N", "15 N"], 0, "Use the 8-15-17 right triangle: 8 N east and 15 N north rebuild a 17 N resultant.", "The components 8 N and 15 N rebuild a resultant of 17 N."),
+        mcItem("M2L6_D7", "A force has components 8 N east and 15 N north. What resultant magnitude does that give?", ["17 N", "7 N", "23 N", "15 N"], 0, "Use vector addition: 8 N east and 15 N north are perpendicular, so 23 N is not the resultant. Rebuild the start-to-finish diagonal instead.", "The components 8 N east and 15 N north are perpendicular, so they rebuild a 17 N diagonal resultant rather than adding algebraically to 23 N."),
       ];
     default:
       return [];
@@ -370,12 +370,12 @@ export function m2GeneratedMasteryItems(code: string): UnknownRecord[] {
       ];
     case "M2_L6":
       return [
-        shortItem("M2L6_M1", "A force has components 8 N east and 6 N north. What resultant magnitude does that give?", ["10 N", "10"], "Use the 6-8-10 right triangle: 8 N east and 6 N north rebuild a 10 N resultant."),
+        shortItem("M2L6_M1", "A force has components 8 N east and 6 N north. What resultant magnitude does that give?", ["10 N", "10"], "Use vector addition: the 8 N east and 6 N north components are perpendicular, so rebuild the diagonal resultant instead of adding 8 + 6."),
         mcItem("M2L6_M2", "Why is Arrow Split useful when several angled forces act together?", ["it lets you combine forces one axis at a time", "it removes the need for direction", "it turns vectors into unrelated numbers", "it creates extra forces to cancel"], 0, "Components organize the bookkeeping.", "Arrow Split is useful because it lets you combine forces one axis at a time before rebuilding the resultant."),
         mcItem("M2L6_M3", "A diagonal arrow is resolved into horizontal and vertical parts. What must stay true?", ["those parts reconstruct the original arrow", "the original arrow no longer exists", "the components must each be larger than the original", "direction becomes irrelevant"], 0, "Resolution preserves the original vector.", "The horizontal and vertical parts must reconstruct the original arrow because resolution preserves the original vector."),
         mcItem("M2L6_M4", "If the vertical components are 7 N up and 2 N down, the net vertical part is...", ["5 N up", "5 N down", "9 N up", "9 N down"], 0, "Subtract opposite directions on the same axis.", "7 N up and 2 N down leave a net vertical part of 5 N up."),
         mcItem("M2L6_M5", "Which statement best rejects the misconception that components are extra forces?", ["components are one force rewritten on chosen axes", "components are separate pushes created by the split", "components replace the original vector permanently", "components only work if the mass is zero"], 0, "Component resolution changes the description, not the interaction.", "Components are one force rewritten on chosen axes; they are not separate pushes created by the split."),
-        mcItem("M2L6_M6", "A force has components 12 N east and 5 N north. What resultant magnitude does that give?", ["13 N", "7 N", "17 N", "12 N"], 0, "Use the 5-12-13 right triangle: 12 N east and 5 N north rebuild a 13 N resultant.", "The 12 N east and 5 N north components rebuild a 13 N resultant."),
+        mcItem("M2L6_M6", "A force has components 12 N east and 5 N north. What resultant magnitude does that give?", ["13 N", "7 N", "17 N", "12 N"], 0, "Use vector addition: 12 N east and 5 N north are perpendicular components, so the diagonal resultant is not 17 N from plain addition.", "The 12 N east and 5 N north components rebuild a 13 N diagonal resultant, because perpendicular components combine geometrically rather than by plain addition."),
         shortItem("M2L6_M7", "What stays the same after Arrow Split?", ["the original vector", "the same resultant", "the same overall force", "the same diagonal force"], "Resolving into components does not change the original force represented."),
         shortItem("M2L6_M8", "Two horizontal components are 8 N east and 6 N west. What net horizontal component remains?", ["2 N east", "2 east", "2 N"], "Subtract opposite directions and keep the larger direction."),
       ];
@@ -444,7 +444,7 @@ export function m2ScaffoldFocusExtras(code: string): string[] {
       return [
         "Arrow Split is a bookkeeping move that rewrites one angled force into components.",
         "Combine components axis by axis before rebuilding the resultant.",
-        "Resolved components are not extra physical pushes.",
+        "Only same-axis components add like ordinary signed numbers; perpendicular components rebuild a diagonal.",
       ];
     default:
       return [];
@@ -491,7 +491,7 @@ export function m2ScaffoldCoreBullets(code: string): string[] {
       return [
         "Arrow Split rewrites a diagonal force as horizontal and vertical components.",
         "Components recombine to the same original vector.",
-        "Vector resolution is structured bookkeeping, not a mysterious extra rule.",
+        "Same-axis parts add algebraically, but perpendicular parts rebuild the resultant geometrically.",
       ];
     default:
       return [];
@@ -527,12 +527,12 @@ export function m2ScaffoldMediaCards(code: string): UnknownRecord[] {
     cards.splice(1, 0, {
       kind: "visual",
       title: "Vector addition rebuild",
-      caption: "Tip-to-tail vector addition shows how the horizontal and vertical components recreate the same start-to-finish force.",
+      caption: "Tip-to-tail vector addition shows how perpendicular components recreate one diagonal force, and why that differs from plain algebraic addition.",
       image_url: "/lesson-media/m2/m2-l6-vector-addition.svg",
       highlights: [
         "Place the vertical component at the tip of the horizontal component.",
         "The single arrow from the first tail to the final tip is the resultant.",
-        "6 N east plus 8 N north rebuilds the same 10 N diagonal force.",
+        "Only same-axis vectors add like ordinary signed numbers; perpendicular ones do not.",
       ],
     });
   }

@@ -4526,16 +4526,16 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         },
         extra_examples: [
           {
-            body: "Tip-to-tail vector addition makes the rebuilt diagonal visible, so students can see that the resultant is the same force story as the components.",
+            body: "Tip-to-tail vector addition makes the rebuilt diagonal visible and shows why perpendicular vectors do not combine by ordinary algebraic addition.",
             worked_example: {
-              prompt: "A force is shown as 6 N east followed tip-to-tail by 8 N north. What resultant does that make, and why is it still the same original force?",
+              prompt: "A force has components 8 N east and 15 N north. A learner says the resultant must be 23 N because 8 + 15 = 23. Explain why that is wrong and find the actual resultant.",
               steps: [
-                "Treat the 6 N east and 8 N north arrows as perpendicular components that belong to one vector story, not as unrelated pushes.",
-                "For tip-to-tail addition, draw the resultant from the start of the first arrow to the end of the second arrow.",
-                "Use the 6-8-10 right triangle: 6^2 + 8^2 = 10^2, so the resultant magnitude is 10 N.",
-                "Because the diagonal resultant connects the same overall start and finish points, it represents the same original force written in component form.",
+                "Start by checking directions: 8 N east and 15 N north lie on perpendicular axes, so they are not same-line vectors and cannot be added as 8 + 15.",
+                "Use tip-to-tail vector addition instead: draw the 15 N north component from the tip of the 8 N east component, then read the resultant from the first tail to the final tip.",
+                "That start-to-finish diagonal is the actual resultant. Its magnitude comes from the perpendicular-component triangle: sqrt(8^2 + 15^2) = sqrt(289) = 17 N.",
+                "So 23 N would only make sense for same-axis algebraic addition, while the correct vector resultant here is 17 N northeast.",
               ],
-              answer: "The two components make a 10 N northeast resultant, and it is still the same original force because tip-to-tail addition rebuilds the single start-to-finish vector.",
+              answer: "The learner is wrong: the resultant is 17 N northeast, because perpendicular components combine by vector addition into a diagonal start-to-finish arrow, not by plain algebraic addition to 23 N.",
             },
           },
         ],
