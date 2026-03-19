@@ -12,13 +12,13 @@
   <polygon points="496,560 468,544 468,576" fill="#0EA5E9"/>
   <line x1="496" y1="560" x2="496" y2="338" stroke="#22C55E" stroke-width="14" stroke-linecap="round"/>
   <polygon points="496,338 482,362 510,362" fill="#22C55E"/>
-  <text x="518" y="334" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Original diagonal force</text>
+  <text x="398" y="312" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Original diagonal force</text>
   <text x="280" y="532" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Horizontal component</text>
   <text x="520" y="452" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Vertical component</text>
 
-  <rect x="760" y="286" width="288" height="196" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
-  <text x="796" y="336" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Component workflow</text>
-  <text x="796" y="384" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">1. Resolve onto common axes</text>
-  <text x="796" y="420" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">2. Combine x with x, y with y</text>
-  <text x="796" y="456" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="22">3. Rebuild the same resultant</text>
+  <rect x="820" y="286" width="252" height="196" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="852" y="336" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Component workflow</text>
+  <text x="852" y="384" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">1. Resolve onto common axes</text>
+  <text x="852" y="420" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">2. Combine x with x, y with y</text>
+  <text x="852" y="456" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">3. Rebuild the same resultant</text>
 </svg>
