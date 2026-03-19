@@ -4524,6 +4524,21 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           ],
           answer: "Net components = 5 N east and 6 N north, so the resultant is about 7.8 N northeast, because components must be combined axis by axis before rebuilding the final arrow.",
         },
+        extra_examples: [
+          {
+            body: "Tip-to-tail vector addition makes the rebuilt diagonal visible, so students can see that the resultant is the same force story as the components.",
+            worked_example: {
+              prompt: "A force is shown as 6 N east followed tip-to-tail by 8 N north. What resultant does that make, and why is it still the same original force?",
+              steps: [
+                "Treat the 6 N east and 8 N north arrows as perpendicular components that belong to one vector story, not as unrelated pushes.",
+                "For tip-to-tail addition, draw the resultant from the start of the first arrow to the end of the second arrow.",
+                "Use the 6-8-10 right triangle: 6^2 + 8^2 = 10^2, so the resultant magnitude is 10 N.",
+                "Because the diagonal resultant connects the same overall start and finish points, it represents the same original force written in component form.",
+              ],
+              answer: "The two components make a 10 N northeast resultant, and it is still the same original force because tip-to-tail addition rebuilds the single start-to-finish vector.",
+            },
+          },
+        ],
       };
     case "M1_L1":
       return {
@@ -5558,6 +5573,31 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       };
   }
 }
+
+function scaffoldWorkedExampleSections(workedExample: UnknownRecord): UnknownRecord[] {
+  const sections: UnknownRecord[] = [];
+  const primaryExample = asRecord(workedExample.worked_example);
+  if (Object.keys(primaryExample).length > 0) {
+    sections.push({
+      heading: "Worked example",
+      body: text(workedExample.body),
+      worked_example: primaryExample,
+    });
+  }
+
+  asList(workedExample.extra_examples).forEach((entry, index) => {
+    const extra = asRecord(entry);
+    const extraExample = asRecord(extra.worked_example);
+    if (Object.keys(extraExample).length === 0) return;
+    sections.push({
+      heading: `Worked example ${index + 2}`,
+      body: text(extra.body) || text(workedExample.body),
+      worked_example: extraExample,
+    });
+  });
+
+  return sections;
+}
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
@@ -5569,7 +5609,7 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       { heading: "How to reason through it", body: f2Copy.reasoning, check_for_understanding: f2Copy.checkForUnderstanding },
       { heading: "Common trap", body: f2Copy.commonTrap },
       { heading: "Analogy", body: analogyCopy.body, analogy: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer.", check_for_understanding: analogyCopy.checkForUnderstanding },
-      { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
+      ...scaffoldWorkedExampleSections(workedExample),
     ];
   }
   switch (code) {

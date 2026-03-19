@@ -83,6 +83,18 @@ function normalizeTeachingFocusText(value: string): string {
   if (/^Use the triangle area:\s*0\.5 x [\d.]+ x [\d.]+\.?$/i.test(trimmed)) {
     return "Use the triangle area rule: 0.5 x base x height, with time as the base and speed as the height.";
   }
+  if (/^Use the right-triangle result for 6,\s*8,\s*10\.?$/i.test(trimmed) || /^Use the 6-8-10 right triangle\.?$/i.test(trimmed)) {
+    return "Use the 6-8-10 right triangle: 6 N east and 8 N north rebuild a 10 N resultant.";
+  }
+  if (/^Use the 8-15-17 right triangle\.?$/i.test(trimmed)) {
+    return "Use the 8-15-17 right triangle: 8 N east and 15 N north rebuild a 17 N resultant.";
+  }
+  if (/^Use the 5-12-13 triangle\.?$/i.test(trimmed) || /^Use the 5-12-13 right triangle\.?$/i.test(trimmed)) {
+    return "Use the 5-12-13 right triangle: 12 N east and 5 N north rebuild a 13 N resultant.";
+  }
+  if (/^Use the 3,\s*4,\s*5 triangle\.?$/i.test(trimmed) || /^Use the 3-4-5 right triangle\.?$/i.test(trimmed)) {
+    return "Use the 3-4-5 right triangle: 3 N east and 4 N north rebuild a 5 N resultant.";
+  }
   return trimmed;
 }
 

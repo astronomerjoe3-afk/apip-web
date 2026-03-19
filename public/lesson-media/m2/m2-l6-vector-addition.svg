@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="64" y="86" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Tip-to-tail vector addition rebuilds the same diagonal force.</text>
+  <text x="64" y="128" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">The components are still one force story: start with one part, add the next at its tip, then read the single resultant from start to finish.</text>
+
+  <rect x="72" y="182" width="1056" height="468" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+
+  <line x1="176" y1="564" x2="176" y2="244" stroke="#334155" stroke-width="4"/>
+  <line x1="176" y1="564" x2="700" y2="564" stroke="#334155" stroke-width="4"/>
+
+  <line x1="176" y1="564" x2="496" y2="564" stroke="#0EA5E9" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="496,564 462,546 462,582" fill="#0EA5E9"/>
+  <text x="244" y="532" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">6 N east component</text>
+
+  <line x1="496" y1="564" x2="496" y2="244" stroke="#22C55E" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="496,244 480,274 512,274" fill="#22C55E"/>
+  <text x="526" y="398" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">8 N north component</text>
+
+  <line x1="176" y1="564" x2="496" y2="244" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="496,244 458,246 484,282" fill="#F97316"/>
+  <text x="250" y="342" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">10 N resultant</text>
+
+  <circle cx="176" cy="564" r="8" fill="#0F172A"/>
+  <circle cx="496" cy="564" r="8" fill="#0F172A"/>
+  <circle cx="496" cy="244" r="8" fill="#0F172A"/>
+
+  <rect x="782" y="246" width="274" height="238" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="814" y="298" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Tip-to-tail rule</text>
+  <text x="814" y="346" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">1. Draw the 6 N east arrow.</text>
+  <text x="814" y="382" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">2. Start the 8 N north arrow</text>
+  <text x="840" y="412" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">at the first arrow's tip.</text>
+  <text x="814" y="448" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">3. Read the resultant from the</text>
+  <text x="840" y="478" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">first tail to the final tip.</text>
+
+  <rect x="176" y="604" width="880" height="28" rx="14" fill="#DBEAFE"/>
+  <text x="266" y="624" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Same start and finish points = same overall force, just written in component form.</text>
+</svg>
