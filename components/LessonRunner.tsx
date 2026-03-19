@@ -122,6 +122,7 @@ type ScaffoldSection = {
     prompt: string;
     steps: string[];
     answer: string;
+    answer_reason?: string;
   };
   check_for_understanding?: string;
 };
@@ -1067,6 +1068,12 @@ export default function LessonRunner({
                   <span className="font-medium">Final answer:</span>{" "}
                   {section.worked_example.answer}
                 </p>
+                {section.worked_example.answer_reason ? (
+                  <p className="mt-3 text-slate-700">
+                    <span className="font-medium">Why this answer is right:</span>{" "}
+                    {section.worked_example.answer_reason}
+                  </p>
+                ) : null}
               </div>
             ) : null}
 

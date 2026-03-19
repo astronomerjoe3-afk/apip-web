@@ -882,6 +882,12 @@ function matchesPhraseGroups(source: string, phraseGroups: string[][]): boolean 
   return phraseGroups.every((group) => includesAnyPhrase(source, group));
 }
 
+function authoredAcceptancePhraseGroups(item: UnknownRecord): string[][] {
+  return asList(asRecord(item.acceptance_rules).phrase_groups)
+    .map((group) => asList(group).map((entry) => text(entry)).filter(Boolean))
+    .filter((group) => group.length > 0);
+}
+
 function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean | null {
   const itemId = text(item.id);
   const itemIdUpper = itemId.toUpperCase();
@@ -2093,6 +2099,11 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
 
   if (moduleTwoStructuredShortAnswerMatch(answer, acceptedAnswers, item)) {
     return true;
+  }
+
+  const authoredPhraseGroups = authoredAcceptancePhraseGroups(item);
+  if (authoredPhraseGroups.length > 0) {
+    return matchesPhraseGroups(candidate, authoredPhraseGroups);
   }
 
   const customMatch = customShortAnswerMatch(item, answer);
@@ -4085,21 +4096,38 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const code = lessonCode(lesson);
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
-  const authoredExample = asRecord(contractExamples[0] ?? topLevelExamples[0]);
-  const authoredPrompt = text(authoredExample.prompt);
-  const authoredSteps = asList(authoredExample.steps).map((step) => text(step)).filter(Boolean);
-  const authoredAnswer = text(authoredExample.final_answer) || text(authoredExample.answer);
-  const authoredWhyItMatters = text(authoredExample.why_it_matters);
+  const authoredExamples = [...contractExamples, ...topLevelExamples]
+    .map(asRecord)
+    .map((entry) => ({
+      prompt: text(entry.prompt),
+      steps: asList(entry.steps).map((step) => text(step)).filter(Boolean),
+      answer: text(entry.final_answer) || text(entry.answer),
+      answerReason: text(entry.answer_reason),
+      whyItMatters: text(entry.why_it_matters),
+    }))
+    .filter((entry) => entry.prompt && entry.steps.length > 0 && entry.answer);
   const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
 
-  if (!code.startsWith("M2_") && authoredPrompt && authoredSteps.length > 0 && authoredAnswer) {
-    return {
-      body: authoredWhyItMatters || "Work through the logic one step at a time, then finish with a clear physics statement.",
+  if (authoredExamples.length > 0) {
+    const primary = authoredExamples[0];
+    const extras = authoredExamples.slice(1, 3).map((entry) => ({
+      body: entry.whyItMatters || primary.whyItMatters || "Keep the same logic visible and finish by stating why the answer follows.",
       worked_example: {
-        prompt: authoredPrompt,
-        steps: authoredSteps,
-        answer: authoredAnswer,
+        prompt: entry.prompt,
+        steps: entry.steps,
+        answer: entry.answer,
+        answer_reason: entry.answerReason,
       },
+    }));
+    return {
+      body: primary.whyItMatters || "Work through the logic one step at a time, then finish with a clear physics statement.",
+      worked_example: {
+        prompt: primary.prompt,
+        steps: primary.steps,
+        answer: primary.answer,
+        answer_reason: primary.answerReason,
+      },
+      extra_examples: extras,
     };
   }
 
@@ -5599,6 +5627,40 @@ function scaffoldWorkedExampleSections(workedExample: UnknownRecord): UnknownRec
   return sections;
 }
 
+function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
+  const scaffoldSupport = asRecord(asRecord(lesson.authoring_contract).scaffold_support);
+  if (Object.keys(scaffoldSupport).length === 0) return [];
+
+  const analogyBridge = asRecord(scaffoldSupport.analogy_bridge);
+  const extraSections = asList(scaffoldSupport.extra_sections)
+    .map(asRecord)
+    .filter((section) => text(section.heading) && text(section.body))
+    .map((section) => ({
+      heading: text(section.heading),
+      body: text(section.body),
+      check_for_understanding: text(section.check_for_understanding),
+    }));
+
+  return [
+    { heading: "Fix these ideas", body: repairText },
+    { heading: "Core idea", body: text(scaffoldSupport.core_idea) },
+    {
+      heading: "How to reason through it",
+      body: text(scaffoldSupport.reasoning),
+      check_for_understanding: text(scaffoldSupport.check_for_understanding),
+    },
+    { heading: "Common trap", body: text(scaffoldSupport.common_trap) },
+    {
+      heading: "Analogy",
+      body: text(analogyBridge.body),
+      analogy: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer.",
+      check_for_understanding: text(analogyBridge.check_for_understanding),
+    },
+    ...extraSections,
+    ...scaffoldWorkedExampleSections(workedExample),
+  ];
+}
+
 function scaffoldExtendedExtraSections(code: string): UnknownRecord[] {
   switch (code) {
     case "M2_L6":
@@ -5616,6 +5678,10 @@ function scaffoldExtendedExtraSections(code: string): UnknownRecord[] {
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
+    const authoredSections = authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
+    if (authoredSections.length > 0) {
+      return authoredSections;
+    }
     const f2Copy = scaffoldF2SectionCopy(code);
     const analogyCopy = scaffoldF2AnalogyBridge(code);
     return [
