@@ -99,6 +99,18 @@ function normalizeTeachingFocusText(value: string): string {
   if (/^Rearrange\s+[\d.]+\s*=\s*0\.5\s*x\s*[\d.]+\s*x\s*v\^2\.?$/i.test(trimmed)) {
     return "Rearrange E_k = 0.5mv^2 when speed is the unknown.";
   }
+  if (/^Use GPE = mgh\.?$/i.test(trimmed)) {
+    return "Use the gravitational-potential-energy equation: E_p = mgh.";
+  }
+  if (/^Multiply mass, field strength, and height\.?$/i.test(trimmed)) {
+    return "Multiply mass, gravitational field strength, and height change.";
+  }
+  if (/^Rearrange\s+[\d.]+\s*=\s*[\d.]+\s*x\s*[\d.]+\s*x\s*h\.?$/i.test(trimmed)) {
+    return "Rearrange E_p = mgh when height is the unknown.";
+  }
+  if (/^Rearrange\s+[\d.]+\s*=\s*m\s*x\s*[\d.]+\s*x\s*[\d.]+\.?$/i.test(trimmed)) {
+    return "Rearrange E_p = mgh when mass is the unknown.";
+  }
   if (/^Use the triangle area:\s*0\.5 x [\d.]+ x [\d.]+\.?$/i.test(trimmed)) {
     return "Use the triangle area rule: 0.5 x base x height, with time as the base and speed as the height.";
   }

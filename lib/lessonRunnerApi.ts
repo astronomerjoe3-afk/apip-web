@@ -1134,6 +1134,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   if (!candidate) return false;
   const matchesM2Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM3Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -1814,6 +1816,357 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isM3LedgerMattersPrompt = matchesM3Prompt(
+    ["M3L1_M10"],
+    ["why does a balanced ledger matter in an energy mission"],
+  );
+
+  if (isM3LedgerMattersPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["track", "account", "ledger", "balance", "keep track"],
+        ["store", "stores", "hand off", "hand-off", "transfer", "leak", "trail", "waste"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["energy"],
+        ["accounted for", "tracked", "balanced", "conserved"],
+        ["mission", "step", "store", "leak", "hand off", "hand-off"],
+      ])
+    );
+  }
+
+  const isM3EnergyForcePrompt = matchesM3Prompt(
+    ["M3L1_T5", "M3L1_T8", "M3L1_M6"],
+    [
+      "why is energy not the same as force in the lift launch model",
+      "why is it useful to treat an energy mission as a ledger of stores hand offs and leaks rather than as a force story",
+      "why is energy not the same as force",
+    ],
+  );
+
+  if (isM3EnergyForcePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["store", "stored", "transfer", "transferred", "hand off", "hand-off", "ledger", "leak"],
+        ["force", "push", "interaction"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["track", "account", "ledger", "bookkeeping"],
+        ["force", "push"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["energy"],
+        ["stored", "transfer", "hand off", "hand-off", "accounted"],
+        ["push", "force", "interaction"],
+      ])
+    );
+  }
+
+  const isM3HeightStorePositionPrompt = matchesM3Prompt(
+    ["M3L2_C3", "M3L2_M6"],
+    [
+      "why can a still pod have height store",
+      "why can a raised pod have energy while standing still",
+    ],
+  );
+
+  if (isM3HeightStorePositionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["position", "high", "height", "raised", "elevated"],
+        ["gravitational", "gravity", "field", "potential", "world grip", "fall"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["room to fall", "can fall", "fall later", "fall"],
+        ["high", "height", "raised", "position"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["potential energy", "gravitational potential energy", "height store"],
+        ["position", "height", "high", "raised"],
+      ])
+    );
+  }
+
+  const isM3HeightOnlyWeakPrompt = matchesM3Prompt(
+    ["M3L2_M10"],
+    ["why is a height only explanation weak in this lesson"],
+  );
+
+  if (isM3HeightOnlyWeakPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["mass", "load", "m"],
+        ["g", "gravity", "gravitational", "world grip", "field", "field strength"],
+      ]) ||
+      includesAnyPhrase(candidate, ["mgh", "three factors", "all three factors", "not just height", "more than height"])
+    );
+  }
+
+  const isM3SpeedSquaredPrompt = matchesM3Prompt(
+    ["M3L3_C3", "M3L3_D7"],
+    ["why does doubling speed not just double motion store"],
+  );
+
+  if (isM3SpeedSquaredPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["speed", "v", "pace"],
+      ["squared", "square", "v^2", "quadruple", "four times"],
+    ]);
+  }
+
+  const isM3SpeedVsMassPrompt = matchesM3Prompt(
+    ["M3L3_M6"],
+    ["why is speed more influential than mass in motion store comparisons"],
+  );
+
+  if (isM3SpeedVsMassPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["speed", "v", "pace"],
+        ["squared", "square", "quadruple", "four times", "v^2"],
+        ["mass", "linear", "directly", "double"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["doubling speed", "speed doubles", "faster"],
+        ["quadruple", "four times"],
+        ["doubling mass", "mass doubles", "heavier"],
+      ])
+    );
+  }
+
+  const isM3ScalarNotVectorPrompt = matchesM3Prompt(
+    ["M3L3_C5"],
+    ["what is the cleanest reason that 8 n east and 15 n north style thinking does not belong here"],
+  );
+
+  if (isM3ScalarNotVectorPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["scalar", "store", "energy", "speed size", "magnitude"],
+        ["not vector", "not components", "not vector addition", "not direction", "not a direction sum"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["kinetic energy", "motion store"],
+        ["speed", "magnitude", "size"],
+        ["direction", "components", "vector"],
+      ])
+    );
+  }
+
+  const isM3WorkEffortPrompt = matchesM3Prompt(
+    ["M3L4_C3", "M3L4_C5"],
+    ["why is work effort a poor physics definition"],
+  );
+
+  if (isM3WorkEffortPrompt) {
+    return (
+      includesAnyPhrase(candidate, [
+        "energy transferred",
+        "energy transfer",
+        "transfer of energy",
+        "energy hand off",
+        "energy hand-off",
+        "store change",
+        "change in store",
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["energy", "store"],
+        ["transfer", "hand off", "hand-off", "change"],
+      ])
+    );
+  }
+
+  const isM3NoDisplacementWorkPrompt = matchesM3Prompt(
+    ["M3L4_T5", "M3L4_M4"],
+    ["why is no displacement pushing not counted as work in the simple model"],
+  );
+
+  if (isM3NoDisplacementWorkPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["no movement", "no displacement", "did not move", "does not move", "wall does not move"],
+        ["force direction", "same direction", "aligned", "direction of the force"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["no displacement", "no movement", "wall"],
+        ["no work", "zero work", "no hand off", "no hand-off", "no transfer"],
+      ])
+    );
+  }
+
+  const isM3WorkMeasurePrompt = matchesM3Prompt(
+    ["M3L4_C6"],
+    ["what does work measure in one phrase in this energy story"],
+  );
+
+  if (isM3WorkMeasurePrompt) {
+    return includesAnyPhrase(candidate, [
+      "energy transferred",
+      "energy transfer",
+      "an energy hand off",
+      "an energy hand-off",
+      "a hand off",
+      "a hand-off",
+    ]);
+  }
+
+  const isM3WorkDeltaEPrompt = matchesM3Prompt(
+    ["M3L4_M10"],
+    ["why can w delta e be cleaner than w fd in some problems"],
+  );
+
+  if (isM3WorkDeltaEPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["store", "energy"],
+        ["change", "gain", "loss"],
+        ["given", "known", "direct", "already"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["hand off", "hand-off", "transfer"],
+        ["directly", "given", "known"],
+      ])
+    );
+  }
+
+  const isM3PowerfulInefficientPrompt = matchesM3Prompt(
+    ["M3L5_C3"],
+    ["how can a machine be powerful but inefficient"],
+  );
+
+  if (isM3PowerfulInefficientPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["fast", "quickly", "high rate", "high power", "powerful"],
+        ["waste", "leak", "low efficiency", "low useful yield", "wasteful"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same job quickly", "transfer quickly", "high transfer rate"],
+        ["not much useful", "wastes energy", "lots of waste", "poor yield"],
+      ])
+    );
+  }
+
+  const isM3SamePowerDifferentEfficiencyPrompt = matchesM3Prompt(
+    ["M3L5_T5", "M3L5_M4"],
+    ["why can two machines have the same power but different efficiency"],
+  );
+
+  if (isM3SamePowerDifferentEfficiencyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same rate", "same power", "same transfer rate"],
+        ["different waste", "different useful fraction", "different efficiency", "different yield", "different useful output"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["rate", "power"],
+        ["different", "not the same"],
+        ["efficiency", "yield", "useful fraction", "waste"],
+      ])
+    );
+  }
+
+  const isM3PowerDefinitionPrompt = matchesM3Prompt(
+    ["M3L5_C6"],
+    ["what does power compare in one sentence"],
+  );
+
+  if (isM3PowerDefinitionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["energy", "work", "transfer", "hand off", "hand-off"],
+        ["time", "second", "per", "rate", "how quickly"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "rate of energy transfer",
+        "how quickly energy is transferred",
+        "energy transferred per second",
+        "work done per second",
+      ])
+    );
+  }
+
+  const isM3UsefulYieldPrompt = matchesM3Prompt(
+    ["M3L5_C8"],
+    ["what does useful yield compare"],
+  );
+
+  if (isM3UsefulYieldPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["useful", "useful output", "useful energy"],
+        ["input", "total input", "total"],
+        ["fraction", "proportion", "percentage", "over", "compared", "divided by"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["how much", "how much of the input", "what fraction"],
+        ["input"],
+        ["useful", "becomes useful", "useful output"],
+      ])
+    );
+  }
+
+  const isM3MissionPlanPrompt = matchesM3Prompt(
+    ["M3L6_C3", "M3L6_C5", "M3L6_D7", "M3L6_M3", "M3L6_M10"],
+    [
+      "what should you decide before choosing equations in a long energy mission",
+      "what is the first question to ask in a long energy mission",
+      "why should a long energy problem start with a mission plan instead of a formula guess",
+      "why is equation order part of the physics in m3 l6",
+    ],
+  );
+
+  if (isM3MissionPlanPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["step", "stage", "sequence", "order", "plan"],
+        ["store", "transfer", "hand off", "hand-off", "leak", "target"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["next quantity", "bridge quantity", "what changes", "what comes next"],
+        ["equation", "which equation", "equation choice"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["story", "mission", "sequence"],
+        ["equation", "formula"],
+        ["before", "first", "depends on"],
+      ])
+    );
+  }
+
+  const isM3BackwardPlanningPrompt = matchesM3Prompt(
+    ["M3L6_C8"],
+    ["why is backward planning sometimes helpful in long missions"],
+  );
+
+  if (isM3BackwardPlanningPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["target", "final target", "goal", "required"],
+        ["back", "backward", "work back", "trace back"],
+        ["earlier", "input", "store", "required", "needed"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["final", "target"],
+        ["tells", "determines", "shows"],
+        ["earlier", "required input", "required store"],
+      ])
+    );
+  }
+
+  const isM3FinalComparisonPrompt = matchesM3Prompt(
+    ["M3L6_C6"],
+    ["what is the final comparison in many mission problems"],
+  );
+
+  if (isM3FinalComparisonPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["final", "useful", "final useful amount", "final useful energy"],
+      ["target", "required", "threshold", "goal"],
+      ["compare", "against", "to"],
+    ]);
+  }
+
   const isLessonSixErrorPrompt =
     itemId === "F1L6_D2" ||
     itemId === "F1-L6-D2" ||
@@ -2438,13 +2791,19 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
     return true;
   }
 
-  const authoredPhraseGroups = authoredAcceptancePhraseGroups(item);
-  if (authoredPhraseGroups.length > 0) {
-    return matchesPhraseGroups(candidate, authoredPhraseGroups);
+  const customMatch = customShortAnswerMatch(item, answer);
+  if (customMatch === true) {
+    return true;
   }
 
-  const customMatch = customShortAnswerMatch(item, answer);
-  if (customMatch !== null) return customMatch;
+  const authoredPhraseGroups = authoredAcceptancePhraseGroups(item);
+  if (authoredPhraseGroups.length > 0) {
+    if (matchesPhraseGroups(candidate, authoredPhraseGroups)) {
+      return true;
+    }
+  }
+
+  if (customMatch === false) return false;
 
   const candidateNumeric = numericAnswer(answer);
   if (candidateNumeric === null) return false;
@@ -5990,6 +6349,48 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
         checkForUnderstanding: "If net x is positive and net y is positive, from which axis should you measure the direction angle and which ratio gives the angle?",
         commonTrap: "Do not add component magnitudes blindly without direction, do not measure the angle from the y-axis when the lesson is using +x as the reference, and do not talk as if the components are extra forces acting in addition to the original arrow.",
       };
+    case "M3_L1":
+      return {
+        coreIdea: "Energy sits in stores, moves by hand-offs, and the ledger must balance every mission step.",
+        reasoning: "Name the store story before you touch a number. Then decide whether the question is asking for useful gain, leak trail, or a store change, and write the balance in words before you calculate it.",
+        checkForUnderstanding: "If a mission step has 200 J input and only 150 J useful gain, what must you look for next?",
+        commonTrap: "Do not call energy a force, and do not call the untracked part gone. The job is to find where it went.",
+      };
+    case "M3_L2":
+      return {
+        coreIdea: "Height Store grows with load, world grip, and deck level together.",
+        reasoning: "Decide first that the story is about lifting to a higher position in a gravitational field. Then name the three factors m, g, and h before you substitute any numbers.",
+        checkForUnderstanding: "If two pods reach the same deck in the same world but one is heavier, which factor tells you their Height Stores differ?",
+        commonTrap: "Do not let the word height trick you into deleting mass or world grip from the story.",
+      };
+    case "M3_L3":
+      return {
+        coreIdea: "Motion Store depends on load directly and on speed through a squared relationship.",
+        reasoning: "Name the story as a moving-store problem first. Then write E_k = 0.5mv^2, square the speed, and only then multiply by the mass term and the one-half factor.",
+        checkForUnderstanding: "If the same pod doubles its speed, what should you expect before you touch the calculator?",
+        commonTrap: "Do not compare moving objects by speed alone or by mass alone when both matter.",
+      };
+    case "M3_L4":
+      return {
+        coreIdea: "Work is the energy hand-off that fills or empties stores.",
+        reasoning: "Classify the mission first. If the story gives a store change, use W = Delta E. If it gives a force acting through a distance in the same direction, use W = Fd. Then calculate.",
+        checkForUnderstanding: "If a problem tells you the pod gained 300 J of Motion Store, what should you think about before using any other equation?",
+        commonTrap: "Do not grab W = Fd just because it looks familiar. The story decides the route.",
+      };
+    case "M3_L5":
+      return {
+        coreIdea: "Transfer Rate tells how fast the hand-off happens; Useful Yield tells what fraction of the input was useful.",
+        reasoning: "Ask two separate questions in order: first, is this a rate question or a useful-share question? Then choose P = E/t or the efficiency fraction. Only after that should you calculate.",
+        checkForUnderstanding: "If two machines transfer the same energy but one finishes sooner, which quantity has clearly changed?",
+        commonTrap: "Do not call an efficient machine powerful just because it wastes less, and do not call a powerful machine efficient just because it is fast.",
+      };
+    case "M3_L6":
+      return {
+        coreIdea: "A full energy mission is solved by stepwise ledger reasoning and justified equation choice.",
+        reasoning: "Mark the mission stages first. For each stage, write what changes store, what leaks, and what the target is. Then choose the equation that matches that stage and carry the result forward.",
+        checkForUnderstanding: "If a mission gives total input and efficiency before it asks about height or speed, which quantity should you find first?",
+        commonTrap: "Do not treat a multi-step mission like one giant plug-in exercise. The structure matters before the arithmetic.",
+      };
     default:
       return {
         coreIdea: "Use the key idea from the lesson before you calculate or classify anything.",
@@ -6041,6 +6442,42 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
     return {
       body: "The Flow-Grid safety story links three circuit ideas at once. The number of energised packets pushed through each second stands for electrical power. Letting that stream continue for longer increases the total transferred energy. If the stream rate becomes too large, the safety gate opens the route, which stands for a fuse or breaker interrupting dangerous current before overheating becomes severe.",
       checkForUnderstanding: "In the Flow-Grid safety story, which part stands for power and which part stands for the protective device?",
+    };
+  }
+  if (code === "M3_L1") {
+    return {
+      body: "The Lift-Launch analogy works here because it makes stores, hand-offs, and leaks visible at the same time. The point is not the game art; the point is the accounting structure that stops energy from turning into a vague disappearing quantity.",
+      checkForUnderstanding: "In the analogy, what does the Leak Trail teach you that the store readouts alone cannot?",
+    };
+  }
+  if (code === "M3_L2") {
+    return {
+      body: "The Lift-Launch shelf image is useful because it makes the store look bigger for heavier pods and higher decks. The real takeaway is the three-factor pattern: load, world grip, and deck level all matter together.",
+      checkForUnderstanding: "In the analogy, what does changing the World Grip knob teach you about the formal equation?",
+    };
+  }
+  if (code === "M3_L3") {
+    return {
+      body: "The Motion Grid is helpful because it makes the speed-squared growth feel less arbitrary. Students can see why the store jumps sharply as speed increases instead of treating the square as a random algebra trick.",
+      checkForUnderstanding: "In the analogy, why does the Motion Grid grow faster than the speed slider itself?",
+    };
+  }
+  if (code === "M3_L4") {
+    return {
+      body: "The Lift-Launch model is powerful here because it makes the hand-off idea common across lifts, launches, and pushes. The equations are just different ways into that same story.",
+      checkForUnderstanding: "In the analogy, what clue tells you that Delta E is the cleaner starting point?",
+    };
+  }
+  if (code === "M3_L5") {
+    return {
+      body: "The dual-meter Lift-Launch picture is useful because it stops students from treating good machine as one vague label. Transfer Rate and Useful Yield stay separate all the way through.",
+      checkForUnderstanding: "In the analogy, what does the Useful Yield meter tell you that the Transfer Rate meter cannot?",
+    };
+  }
+  if (code === "M3_L6") {
+    return {
+      body: "The Lift-Launch planner is deliberately explicit so students can see why mixed energy questions are really controlled bookkeeping. Once that structure is secure, the formal equations stop feeling disconnected.",
+      checkForUnderstanding: "In the analogy, why is it dangerous to jump straight to a familiar formula without first marking the mission steps?",
     };
   }
   if (code.startsWith("F3_")) {
