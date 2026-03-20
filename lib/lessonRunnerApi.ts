@@ -1994,7 +1994,20 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       matchesPhraseGroups(candidate, [
         ["no displacement", "no movement", "wall"],
         ["no work", "zero work", "no hand off", "no hand-off", "no transfer"],
-      ])
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["nothing moves", "nothing moved", "stays still", "stationary"],
+        ["force direction", "line of force", "direction of the force", "aligned direction"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["displacement"],
+        ["required", "needed", "must have", "has to have"],
+        ["work", "hand off", "hand-off", "transfer"],
+      ]) ||
+      (
+        includesAnyPhrase(candidate, ["no displacement", "no movement", "nothing moves", "stays still", "stationary"]) &&
+        includesAnyPhrase(candidate, ["no work", "zero work", "no hand off", "no hand-off", "no transfer"])
+      )
     );
   }
 
@@ -2029,6 +2042,23 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       matchesPhraseGroups(candidate, [
         ["hand off", "hand-off", "transfer"],
         ["directly", "given", "known"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["energy change", "change in energy", "change in the store", "store difference", "difference in store"],
+        ["given", "known", "directly", "already"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["delta e", "w delta e", "w = delta e"],
+        ["cleaner", "direct", "better first move", "better first route", "best start"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "energy change is already known",
+        "store change is already known",
+        "energy change is given directly",
+        "store change is given directly",
+        "the hand off is already known",
+        "the hand-off is already known",
+        "the transfer is already known",
       ])
     );
   }
