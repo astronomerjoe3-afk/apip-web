@@ -467,66 +467,77 @@ export default function M4SimulationPanels({
     );
   }
 
-  const seaLevelPressure = clamp(simVectorMagnitude, 95000, 105000);
-  const altitude = clamp(simMetricMeters, 0, 3000);
-  const liquidDepth = clamp(simBias, 0, 8);
-  const density = clamp(simFluidDensity, 800, 1400);
-  const g = clamp(simDensityVolume, 8, 12);
-  const atmospheric = Math.max(50000, seaLevelPressure - altitude * 12);
-  const liquidPressure = density * g * liquidDepth;
-  const totalPressure = atmospheric + liquidPressure;
+  if (lessonKey === "M4_L6") {
+    const seaLevelPressure = clamp(simVectorMagnitude, 95000, 105000);
+    const altitude = clamp(simMetricMeters, 0, 3000);
+    const liquidDepth = clamp(simBias, 0, 8);
+    const density = clamp(simFluidDensity, 800, 1400);
+    const g = clamp(simDensityVolume, 8, 12);
+    const atmospheric = Math.max(50000, seaLevelPressure - altitude * 12);
+    const liquidPressure = density * g * liquidDepth;
+    const totalPressure = atmospheric + liquidPressure;
 
-  return render(
-    "Sky blanket explorer",
-    <>
-      {sliderField(
-        "Sea-level atmospheric pressure (Pa)",
-        `${formatSimulationNumber(seaLevelPressure, 0)} Pa`,
-        <input className="w-full" type="range" min="95000" max="105000" step="500" value={seaLevelPressure} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />,
-      )}
-      {sliderField(
-        "Station altitude (m)",
-        `${formatSimulationNumber(altitude, 0)} m`,
-        <input className="w-full" type="range" min="0" max="3000" step="250" value={altitude} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />,
-      )}
-      {sliderField(
-        "Liquid depth below open surface (m)",
-        `${formatSimulationNumber(liquidDepth, 1)} m`,
-        <input className="w-full" type="range" min="0" max="8" step="0.5" value={liquidDepth} onChange={(e) => setSimBias(Number(e.target.value))} />,
-      )}
-      {sliderField(
-        "Liquid density (kg/m^3)",
-        `${formatSimulationNumber(density, 0)} kg/m^3`,
-        <input className="w-full" type="range" min="800" max="1400" step="50" value={density} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />,
-      )}
-    </>,
-    "Sky blanket and tank board",
-    <svg viewBox="0 0 640 250" className="w-full">
-      <rect x="24" y="26" width="270" height="190" rx="22" fill="#eff6ff" />
-      <path d="M364 70 H548 V208 H404 V92 H364 Z" fill="#dbeafe" stroke="#60a5fa" strokeWidth="4" />
-      <line x1="364" y1="92" x2="548" y2="92" stroke="#2563eb" strokeWidth="4" />
-      <rect x="50" y={52 + altitude / 30} width="72" height="52" rx="16" fill="#bfdbfe" stroke="#2563eb" strokeWidth="4" />
-      <line x1="86" y1={104 + altitude / 30} x2="86" y2="188" stroke="#64748b" strokeWidth="4" />
-      <circle cx="528" cy={92 + liquidDepth * 12} r="11" fill="#16a34a" />
-      <line x1="528" y1="92" x2="528" y2={92 + liquidDepth * 12} stroke="#16a34a" strokeDasharray="6 6" strokeWidth="4" />
-      <text x="46" y="50" fill="#1d4ed8" fontSize="18" fontWeight="700">Sky deck</text>
-      <text x="380" y="50" fill="#1d4ed8" fontSize="18" fontWeight="700">Open liquid</text>
-      <text x="42" y="216" fill="#475569" fontSize="15">Lower altitude means more sky blanket.</text>
-      <text x="378" y="226" fill="#475569" fontSize="15">Total pressure = p_atm + rhogh</text>
-    </svg>,
-    <>
-      {metricCard("Atmospheric pressure here", `${formatSimulationNumber(atmospheric, 0)} Pa`, "border-sky-200 bg-sky-50 text-sky-900")}
-      {metricCard("Liquid contribution", `${formatSimulationNumber(liquidPressure, 0)} Pa`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-      {metricCard("Total pressure", `${formatSimulationNumber(totalPressure, 0)} Pa`, "border-amber-200 bg-amber-50 text-amber-900")}
-      {metricCard("Altitude", `${formatSimulationNumber(altitude, 0)} m`, "border-violet-200 bg-violet-50 text-violet-900")}
-      {metricCard("Liquid depth", `${formatSimulationNumber(liquidDepth, 1)} m`, "border-rose-200 bg-rose-50 text-rose-900")}
-      {metricCard("Total-pressure rule", "p_total = p_atm + rhogh", "border-slate-200 bg-slate-50 text-slate-900")}
-    </>,
-    [
-      "Air is also a fluid, so atmospheric pressure belongs in the same Patch-Dome world as liquid pressure.",
-      "Climbing to higher altitude reduces the sky blanket because there is less air above the patch.",
-      "Below an open liquid surface, total pressure is the atmospheric part plus the liquid-stack part.",
-    ],
-    "The pressure at an open submerged point is a ledger of two loads: the sky blanket above the liquid surface and the liquid stack from the surface down to the patch.",
+    return render(
+      "Sky blanket explorer",
+      <>
+        {sliderField(
+          "Sea-level atmospheric pressure (Pa)",
+          `${formatSimulationNumber(seaLevelPressure, 0)} Pa`,
+          <input className="w-full" type="range" min="95000" max="105000" step="500" value={seaLevelPressure} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />,
+        )}
+        {sliderField(
+          "Station altitude (m)",
+          `${formatSimulationNumber(altitude, 0)} m`,
+          <input className="w-full" type="range" min="0" max="3000" step="250" value={altitude} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />,
+        )}
+        {sliderField(
+          "Liquid depth below open surface (m)",
+          `${formatSimulationNumber(liquidDepth, 1)} m`,
+          <input className="w-full" type="range" min="0" max="8" step="0.5" value={liquidDepth} onChange={(e) => setSimBias(Number(e.target.value))} />,
+        )}
+        {sliderField(
+          "Liquid density (kg/m^3)",
+          `${formatSimulationNumber(density, 0)} kg/m^3`,
+          <input className="w-full" type="range" min="800" max="1400" step="50" value={density} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />,
+        )}
+      </>,
+      "Sky blanket and tank board",
+      <svg viewBox="0 0 640 250" className="w-full">
+        <rect x="24" y="26" width="270" height="190" rx="22" fill="#eff6ff" />
+        <path d="M364 70 H548 V208 H404 V92 H364 Z" fill="#dbeafe" stroke="#60a5fa" strokeWidth="4" />
+        <line x1="364" y1="92" x2="548" y2="92" stroke="#2563eb" strokeWidth="4" />
+        <rect x="50" y={52 + altitude / 30} width="72" height="52" rx="16" fill="#bfdbfe" stroke="#2563eb" strokeWidth="4" />
+        <line x1="86" y1={104 + altitude / 30} x2="86" y2="188" stroke="#64748b" strokeWidth="4" />
+        <circle cx="528" cy={92 + liquidDepth * 12} r="11" fill="#16a34a" />
+        <line x1="528" y1="92" x2="528" y2={92 + liquidDepth * 12} stroke="#16a34a" strokeDasharray="6 6" strokeWidth="4" />
+        <text x="46" y="50" fill="#1d4ed8" fontSize="18" fontWeight="700">Sky deck</text>
+        <text x="380" y="50" fill="#1d4ed8" fontSize="18" fontWeight="700">Open liquid</text>
+        <text x="42" y="216" fill="#475569" fontSize="15">Lower altitude means more sky blanket.</text>
+        <text x="378" y="226" fill="#475569" fontSize="15">Total pressure = p_atm + rhogh</text>
+      </svg>,
+      <>
+        {metricCard("Atmospheric pressure here", `${formatSimulationNumber(atmospheric, 0)} Pa`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Liquid contribution", `${formatSimulationNumber(liquidPressure, 0)} Pa`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Total pressure", `${formatSimulationNumber(totalPressure, 0)} Pa`, "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Altitude", `${formatSimulationNumber(altitude, 0)} m`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Liquid depth", `${formatSimulationNumber(liquidDepth, 1)} m`, "border-rose-200 bg-rose-50 text-rose-900")}
+        {metricCard("Total-pressure rule", "p_total = p_atm + rhogh", "border-slate-200 bg-slate-50 text-slate-900")}
+      </>,
+      [
+        "Air is also a fluid, so atmospheric pressure belongs in the same Patch-Dome world as liquid pressure.",
+        "Climbing to higher altitude reduces the sky blanket because there is less air above the patch.",
+        "Below an open liquid surface, total pressure is the atmospheric part plus the liquid-stack part.",
+      ],
+      "The pressure at an open submerged point is a ledger of two loads: the sky blanket above the liquid surface and the liquid stack from the surface down to the patch.",
+    );
+  }
+
+  return (
+    <div className={panelClass}>
+      <h4 className="text-lg font-semibold text-slate-900">Pressure explorer unavailable</h4>
+      <p className="mt-3 text-sm text-slate-700">
+        This lesson does not have a mapped Module 4 explorer yet.
+      </p>
+    </div>
   );
 }
