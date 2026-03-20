@@ -102,6 +102,18 @@ function normalizeTeachingFocusText(value: string): string {
   if (/^Use GPE = mgh\.?$/i.test(trimmed)) {
     return "Use the gravitational-potential-energy equation: E_p = mgh.";
   }
+  if (/^Use E = Pt\.?$/i.test(trimmed)) {
+    return "Use the energy-transfer relation: E = Pt.";
+  }
+  if (/^Useful output = efficiency x total input\.?$/i.test(trimmed)) {
+    return "Useful output is found by multiplying the efficiency fraction by the total input.";
+  }
+  if (/^Find the work first, then set that equal to GPE\.?$/i.test(trimmed)) {
+    return "If a hand-off becomes Height Store with no extra leak, connect the work done to the gravitational-potential-energy gain.";
+  }
+  if (/^Find total energy with E = Pt,\s*then take [\d.]+% of it\.?$/i.test(trimmed)) {
+    return "Find the total transferred energy with E = Pt, then use the efficiency fraction to find the useful output.";
+  }
   if (/^Multiply mass, field strength, and height\.?$/i.test(trimmed)) {
     return "Multiply mass, gravitational field strength, and height change.";
   }
