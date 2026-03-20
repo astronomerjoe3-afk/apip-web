@@ -22,6 +22,7 @@
   <rect x="706" y="316" width="120" height="40" rx="18" fill="#FECACA"/>
   <text x="748" y="342" fill="#B91C1C" font-family="Arial, sans-serif" font-size="20" font-weight="700">600 J leak</text>
 
-  <rect x="154" y="448" width="652" height="40" rx="18" fill="#EEF5FF"/>
-  <text x="214" y="474" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="22" font-weight="700">Same useful fraction, different time -> different power but same efficiency</text>
+  <rect x="112" y="436" width="736" height="64" rx="22" fill="#EEF5FF"/>
+  <text x="480" y="464" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Same useful fraction, different time</text>
+  <text x="480" y="490" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">-&gt; different power but same efficiency</text>
 </svg>
