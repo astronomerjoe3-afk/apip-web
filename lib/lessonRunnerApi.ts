@@ -1855,9 +1855,72 @@ function resolvedItemId(item: UnknownRecord, key: string, index: number): string
   return `${normalizeLessonId(key)}_${index + 1}_${promptKey || "item"}`;
 }
 
+function sanitizeMetaAssessmentWording(item: UnknownRecord): UnknownRecord {
+  const promptKey = normalizePromptKey(item.prompt);
+  if (promptKey === "which sentence best keeps the module's hierarchy beyond f3") {
+    return {
+      ...item,
+      prompt: "Which statement best describes how energy should be tracked in a Lift-Launch mission?",
+      choices: [
+        "Energy should be tracked as stores, hand-offs, leaks, and targets in one ledger",
+        "Energy is mostly about memorizing one formula",
+        "Energy is just the same as force with new units",
+        "Only moving pods can matter in energy",
+      ],
+      hint: "Track the mission as one connected energy-accounting story.",
+      explanation: "Energy should be tracked as stores, hand-offs, leaks, and targets in one connected ledger.",
+      correct_answer: "Energy should be tracked as stores, hand-offs, leaks, and targets in one ledger",
+    };
+  }
+  if (promptKey === "why does a balanced ledger make m3 more advanced than a formula list") {
+    return {
+      ...item,
+      prompt: "Why does a balanced ledger matter in an energy mission?",
+      accepted_answers: [
+        "because it tracks stores hand offs and leaks across the whole mission",
+        "because it forces energy to be accounted for step by step",
+      ],
+      hint: "Use ledger-accounting language.",
+    };
+  }
+  if (promptKey === "why does m3 treat energy problems as ledger problems rather than force problems") {
+    return {
+      ...item,
+      prompt: "Why is it useful to treat an energy mission as a ledger of stores, hand-offs, and leaks rather than as a force story?",
+      accepted_answers: [
+        "because it asks where energy is stored transferred or leaked rather than only what push acts now",
+        "because ledger reasoning tracks stores and hand offs instead of confusing energy with force",
+      ],
+      hint: "Use store-transfer-ledger language against push-force language.",
+    };
+  }
+  if (promptKey === "which statement best captures why m3 sits above the foundational energy module") {
+    return {
+      ...item,
+      prompt: "Which statement best captures the planning needed in a long energy mission?",
+      choices: [
+        "It needs store-ledger planning, deliberate equation choice, and multi-step mission accounting",
+        "It only repeats the same single-step formula questions with new numbers",
+        "It avoids qualitative reasoning and uses only substitution",
+        "It treats efficiency and power as the same shortcut",
+      ],
+      hint: "Long missions need planning across stores, leaks, and targets.",
+      explanation: "Long energy missions need store-ledger planning, deliberate equation choice, and multi-step mission accounting.",
+      correct_answer: "It needs store-ledger planning, deliberate equation choice, and multi-step mission accounting",
+    };
+  }
+  if (promptKey === "what does work measure in one phrase in this module") {
+    return {
+      ...item,
+      prompt: "What does work measure in one phrase in this energy story?",
+    };
+  }
+  return item;
+}
+
 function withResolvedItem(item: UnknownRecord, key: string, index: number): UnknownRecord {
   const canonical = canonicalAssessmentOverride(item);
-  const normalized = canonical ? { ...item, ...canonical } : item;
+  const normalized = sanitizeMetaAssessmentWording(canonical ? { ...item, ...canonical } : item);
   return {
     ...normalized,
     id: resolvedItemId(normalized, key, index),
