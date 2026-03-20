@@ -1,0 +1,40 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
+  <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D7E6F8" stroke-width="4"/>
+  <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
+    Touch Relay passes energy along a solid without the solid flowing
+  </text>
+  <text x="72" y="146" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <tspan x="72" dy="0">Conduction needs a contact path.</tspan>
+    <tspan x="72" dy="28">In metals, mobile electrons help the relay happen faster.</tspan>
+  </text>
+
+  <rect x="86" y="210" width="490" height="384" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="5"/>
+  <text x="124" y="258" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Metal relay path</text>
+  <rect x="126" y="356" width="392" height="88" rx="36" fill="#CBD5E1"/>
+  <rect x="126" y="356" width="210" height="88" rx="36" fill="#60A5FA"/>
+  <circle cx="176" cy="400" r="12" fill="#FFFFFF"/>
+  <circle cx="242" cy="400" r="12" fill="#FFFFFF"/>
+  <circle cx="308" cy="400" r="12" fill="#FFFFFF"/>
+  <circle cx="374" cy="400" r="12" fill="#FFFFFF"/>
+  <path d="M178 316L206 342" stroke="#EF4444" stroke-width="8" stroke-linecap="round"/>
+  <path d="M248 316L276 342" stroke="#F97316" stroke-width="8" stroke-linecap="round"/>
+  <path d="M318 316L346 342" stroke="#F59E0B" stroke-width="8" stroke-linecap="round"/>
+  <text x="126" y="512" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    Direct contact lets the energy hand-off march down the bar.
+  </text>
+
+  <rect x="624" y="210" width="490" height="384" rx="30" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="5"/>
+  <text x="664" y="258" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Poor conductor or gap</text>
+  <rect x="666" y="356" width="130" height="88" rx="36" fill="#FCA5A5"/>
+  <rect x="840" y="356" width="220" height="88" rx="36" fill="#E2E8F0"/>
+  <rect x="804" y="348" width="24" height="104" rx="12" fill="#FFFFFF" stroke="#EF4444" stroke-width="4"/>
+  <text x="666" y="512" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    Break the contact path and the relay stalls.
+  </text>
+
+  <rect x="96" y="626" width="1008" height="74" rx="22" fill="#EEF4FF"/>
+  <text x="128" y="672" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    Conduction is a contact-to-contact hand-off, not a moving stream of solid matter.
+  </text>
+</svg>
