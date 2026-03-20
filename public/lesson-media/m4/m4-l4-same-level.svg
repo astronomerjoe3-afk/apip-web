@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" rx="36" fill="#F8FAFC"/>
+  <rect x="36" y="36" width="1208" height="648" rx="32" fill="#EEF6FF" stroke="#BFDBFE" stroke-width="4"/>
+  <text x="88" y="118" fill="#0F172A" font-family="Arial, sans-serif" font-size="52" font-weight="700">Same level, same liquid, same patch load</text>
+  <text x="88" y="172" fill="#475569" font-family="Arial, sans-serif" font-size="30">Liquid shape can look different while the pressure at one shared depth stays the same.</text>
+
+  <path d="M116 244 H392 V592 H196 V426 H116 Z" fill="#DBEAFE" stroke="#60A5FA" stroke-width="6"/>
+  <path d="M742 244 H1158 V592 H922 V466 H742 Z" fill="#DBEAFE" stroke="#60A5FA" stroke-width="6"/>
+  <line x1="116" y1="286" x2="392" y2="286" stroke="#2563EB" stroke-width="6"/>
+  <line x1="742" y1="286" x2="1158" y2="286" stroke="#2563EB" stroke-width="6"/>
+  <circle cx="362" cy="432" r="16" fill="#F97316"/>
+  <circle cx="1128" cy="432" r="16" fill="#16A34A"/>
+  <line x1="362" y1="432" x2="1128" y2="432" stroke="#94A3B8" stroke-width="4" stroke-dasharray="10 10"/>
+
+  <text x="144" y="226" fill="#1D4ED8" font-family="Arial, sans-serif" font-size="36" font-weight="700">Wide lower chamber</text>
+  <text x="764" y="226" fill="#1D4ED8" font-family="Arial, sans-serif" font-size="36" font-weight="700">Tall narrow chamber</text>
+  <text x="172" y="640" fill="#0F172A" font-family="Arial, sans-serif" font-size="36">Equal depth line</text>
+  <text x="826" y="640" fill="#0F172A" font-family="Arial, sans-serif" font-size="36">Equal pressure line</text>
+
+  <rect x="182" y="562" width="918" height="58" rx="24" fill="#E2E8F0"/>
+  <text x="226" y="600" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="31" font-weight="700">Shape does not fool the liquid. Depth and liquid type decide the pressure.</text>
+</svg>

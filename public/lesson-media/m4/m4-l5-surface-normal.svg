@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" rx="36" fill="#F8FAFC"/>
+  <rect x="36" y="36" width="1208" height="648" rx="32" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="4"/>
+  <text x="88" y="118" fill="#0F172A" font-family="Arial, sans-serif" font-size="52" font-weight="700">Pressure stays at the point, force turns with the patch</text>
+  <text x="88" y="172" fill="#475569" font-family="Arial, sans-serif" font-size="30">At one fluid location the pressure value is the same, but the force due to pressure is always perpendicular to the chosen surface.</text>
+
+  <circle cx="640" cy="384" r="18" fill="#0F172A"/>
+  <line x1="640" y1="210" x2="640" y2="560" stroke="#38BDF8" stroke-width="6" stroke-dasharray="10 10"/>
+  <line x1="430" y1="384" x2="520" y2="384" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
+  <line x1="760" y1="384" x2="760" y2="288" stroke="#F59E0B" stroke-width="18" stroke-linecap="round"/>
+  <line x1="880" y1="476" x2="990" y2="356" stroke="#FB7185" stroke-width="18" stroke-linecap="round"/>
+
+  <line x1="520" y1="384" x2="600" y2="384" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="600,384 576,370 576,398" fill="#16A34A"/>
+  <line x1="760" y1="288" x2="760" y2="210" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="760,210 746,236 774,236" fill="#16A34A"/>
+  <line x1="990" y1="356" x2="1058" y2="286" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="1058,286 1032,294 1052,314" fill="#16A34A"/>
+
+  <text x="320" y="334" fill="#1D4ED8" font-family="Arial, sans-serif" font-size="34" font-weight="700">Pressure value fixed here</text>
+  <text x="330" y="432" fill="#0F172A" font-family="Arial, sans-serif" font-size="30">Wall patch</text>
+  <text x="700" y="270" fill="#0F172A" font-family="Arial, sans-serif" font-size="30">Floor patch</text>
+  <text x="948" y="336" fill="#0F172A" font-family="Arial, sans-serif" font-size="30">Slanted patch</text>
+  <text x="786" y="614" fill="#166534" font-family="Arial, sans-serif" font-size="34" font-weight="700">Force is normal to the patch</text>
+</svg>

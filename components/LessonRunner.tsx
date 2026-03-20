@@ -8,6 +8,7 @@ import MeasurementReportLab from "./MeasurementReportLab";
 import M1SimulationPanels from "./M1SimulationPanels";
 import M2SimulationPanels from "./M2SimulationPanels";
 import M3SimulationPanels from "./M3SimulationPanels";
+import M4SimulationPanels from "./M4SimulationPanels";
 
 type StageName =
   | "diagnostic"
@@ -2579,6 +2580,27 @@ export default function LessonRunner({
           />
         ) : simulationLessonKey.startsWith("M3_") ? (
           <M3SimulationPanels
+            lessonKey={simulationLessonKey}
+            simMetricMeters={simMetricMeters}
+            setSimMetricMeters={setSimMetricMeters}
+            simVectorMagnitude={simVectorMagnitude}
+            setSimVectorMagnitude={setSimVectorMagnitude}
+            simVectorAngle={simVectorAngle}
+            setSimVectorAngle={setSimVectorAngle}
+            simDensityMass={simDensityMass}
+            setSimDensityMass={setSimDensityMass}
+            simDensityVolume={simDensityVolume}
+            setSimDensityVolume={setSimDensityVolume}
+            simFluidDensity={simFluidDensity}
+            setSimFluidDensity={setSimFluidDensity}
+            simBias={simBias}
+            setSimBias={setSimBias}
+            simSpread={simSpread}
+            setSimSpread={setSimSpread}
+            formatSimulationNumber={formatSimulationNumber}
+          />
+        ) : simulationLessonKey.startsWith("M4_") ? (
+          <M4SimulationPanels
             lessonKey={simulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
