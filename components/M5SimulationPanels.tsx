@@ -347,54 +347,58 @@ export default function M5SimulationPanels({
     );
   }
 
-  const energyInput = clamp(simVectorMagnitude, 0, 200);
-  const pulseShare = clamp(simMetricMeters, 0, 100);
-  const linkShare = 100 - pulseShare;
-  const pulseRise = (energyInput * pulseShare) / 100;
-  const linkRise = (energyInput * linkShare) / 100;
-  const stateProgress = linkRise / 10;
+  if (lessonKey === "M5_L6") {
+    const energyInput = clamp(simVectorMagnitude, 0, 200);
+    const pulseShare = clamp(simMetricMeters, 0, 100);
+    const linkShare = 100 - pulseShare;
+    const pulseRise = (energyInput * pulseShare) / 100;
+    const linkRise = (energyInput * linkShare) / 100;
+    const stateProgress = linkRise / 10;
 
-  return render(
-    "State-change mission deck",
-    <>
-      {sliderField("Added mission energy", `${formatSimulationNumber(energyInput, 0)} units`, <input className="w-full" type="range" min="0" max="200" step="10" value={energyInput} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-      {sliderField("Share to pulse rise", `${formatSimulationNumber(pulseShare, 0)}%`, <input className="w-full" type="range" min="0" max="100" step="5" value={pulseShare} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-      <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
-        <div className="flex items-center justify-between gap-4 text-sm text-emerald-900">
-          <span>Share to link release</span>
-          <span className="rounded-full bg-white/80 px-3 py-1 text-sm font-semibold tabular-nums text-emerald-950">
-            {formatSimulationNumber(linkShare, 0)}%
-          </span>
+    return render(
+      "State-change mission deck",
+      <>
+        {sliderField("Added mission energy", `${formatSimulationNumber(energyInput, 0)} units`, <input className="w-full" type="range" min="0" max="200" step="10" value={energyInput} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Share to pulse rise", `${formatSimulationNumber(pulseShare, 0)}%`, <input className="w-full" type="range" min="0" max="100" step="5" value={pulseShare} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+          <div className="flex items-center justify-between gap-4 text-sm text-emerald-900">
+            <span>Share to link release</span>
+            <span className="rounded-full bg-white/80 px-3 py-1 text-sm font-semibold tabular-nums text-emerald-950">
+              {formatSimulationNumber(linkShare, 0)}%
+            </span>
+          </div>
+          <p className="mt-2 text-sm text-emerald-800">
+            This is the complementary share left after the pulse-rise share is chosen.
+          </p>
         </div>
-        <p className="mt-2 text-sm text-emerald-800">
-          This is the complementary share left after the pulse-rise share is chosen.
-        </p>
-      </div>
-    </>,
-    "State-change energy board",
-    <svg viewBox="0 0 640 250" className="w-full">
-      <rect x="20" y="24" width="600" height="194" rx="26" fill="#f8fafc" />
-      <text x="42" y="50" fill="#0f172a" fontSize="22" fontWeight="700">Added energy can split between pulse and links</text>
-      <rect x="66" y="96" width={Math.min(220, pulseRise * 2)} height="26" rx="13" fill="#3b82f6" />
-      <rect x="66" y="144" width={Math.min(220, linkRise * 2)} height="26" rx="13" fill="#22c55e" />
-      <text x="66" y="88" fill="#1d4ed8" fontSize="16" fontWeight="700">Pulse rise share</text>
-      <text x="66" y="136" fill="#166534" fontSize="16" fontWeight="700">Link release share</text>
-      <rect x="388" y="90" width="170" height="82" rx="24" fill="#ede9fe" stroke="#8b5cf6" strokeWidth="4" />
-      <text x="416" y="122" fill="#6d28d9" fontSize="18" fontWeight="700">State progress</text>
-      <text x="452" y="150" fill="#6d28d9" fontSize="18" fontWeight="700">{formatSimulationNumber(stateProgress, 1)}</text>
-      <text x="66" y="202" fill="#475569" fontSize="15">Large link share means the store can rise strongly while temperature changes only a little.</text>
-    </svg>,
-    <>
-      {metricCard("Pulse rise share", `${formatSimulationNumber(pulseRise, 0)}`, "border-sky-200 bg-sky-50 text-sky-900")}
-      {metricCard("Link release share", `${formatSimulationNumber(linkRise, 0)}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-      {metricCard("State progress", formatSimulationNumber(stateProgress, 1), "border-violet-200 bg-violet-50 text-violet-900")}
-      {metricCard("Internal-energy rise", `${formatSimulationNumber(energyInput, 0)}`, "border-slate-200 bg-slate-50 text-slate-900")}
-    </>,
-    [
-      "Added energy does not always mainly show up as a temperature rise.",
-      "State change often needs energy for arrangement change as well as motion change.",
-      "Tracking the energy destination explains why internal energy can rise faster than temperature.",
-    ],
-    "This board makes the capstone point visible: during a state change, the whole store can climb strongly even when the pulse meter only nudges upward.",
-  );
+      </>,
+      "State-change energy board",
+      <svg viewBox="0 0 640 250" className="w-full">
+        <rect x="20" y="24" width="600" height="194" rx="26" fill="#f8fafc" />
+        <text x="42" y="50" fill="#0f172a" fontSize="22" fontWeight="700">Added energy can split between pulse and links</text>
+        <rect x="66" y="96" width={Math.min(220, pulseRise * 2)} height="26" rx="13" fill="#3b82f6" />
+        <rect x="66" y="144" width={Math.min(220, linkRise * 2)} height="26" rx="13" fill="#22c55e" />
+        <text x="66" y="88" fill="#1d4ed8" fontSize="16" fontWeight="700">Pulse rise share</text>
+        <text x="66" y="136" fill="#166534" fontSize="16" fontWeight="700">Link release share</text>
+        <rect x="388" y="90" width="170" height="82" rx="24" fill="#ede9fe" stroke="#8b5cf6" strokeWidth="4" />
+        <text x="416" y="122" fill="#6d28d9" fontSize="18" fontWeight="700">State progress</text>
+        <text x="452" y="150" fill="#6d28d9" fontSize="18" fontWeight="700">{formatSimulationNumber(stateProgress, 1)}</text>
+        <text x="66" y="202" fill="#475569" fontSize="15">Large link share means the store can rise strongly while temperature changes only a little.</text>
+      </svg>,
+      <>
+        {metricCard("Pulse rise share", `${formatSimulationNumber(pulseRise, 0)}`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Link release share", `${formatSimulationNumber(linkRise, 0)}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("State progress", formatSimulationNumber(stateProgress, 1), "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Internal-energy rise", `${formatSimulationNumber(energyInput, 0)}`, "border-slate-200 bg-slate-50 text-slate-900")}
+      </>,
+      [
+        "Added energy does not always mainly show up as a temperature rise.",
+        "State change often needs energy for arrangement change as well as motion change.",
+        "Tracking the energy destination explains why internal energy can rise faster than temperature.",
+      ],
+      "This board makes the capstone point visible: during a state change, the whole store can climb strongly even when the pulse meter only nudges upward.",
+    );
+  }
+
+  return null;
 }
