@@ -868,6 +868,7 @@ function valueIndex(value: unknown): number {
 function normalizePromptKey(value: unknown): string {
   return text(value)
     .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
+    .replace(/[Δδ]/g, " delta ")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/[^a-z0-9]+/g, " ")
@@ -878,6 +879,7 @@ function normalizePromptKey(value: unknown): string {
 function normalizeOpenAnswer(value: unknown): string {
   return text(value)
     .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
+    .replace(/[Δδ]/g, " delta ")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/,/g, "")
@@ -4941,13 +4943,13 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           },
           extra_examples: [
             {
-              body: "This second route shows a direct Delta E hand-off instead of a force-distance setup.",
+              body: "This second route shows a direct ΔE hand-off instead of a force-distance setup.",
               worked_example: {
                 prompt: "A lift raises a pod so its Height Store increases from 120 J to 420 J with negligible leak. In the lesson's hand-off model, how much work does the lift do?",
                 steps: [
                   "Classify the story as a direct store-change hand-off.",
-                  "Find the store change: Delta E = 420 J - 120 J = 300 J.",
-                  "Use W = Delta E because the energy change is given directly.",
+                  "Find the store change: ΔE = 420 J - 120 J = 300 J.",
+                  "Use W = ΔE because the energy change is given directly.",
                 ],
                 answer: "The lift does 300 J of work.",
                 answer_reason: "With negligible leak, the lift's work equals the change in Height Store, so 300 J is handed into the pod.",
@@ -6393,7 +6395,7 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
     case "M3_L4":
       return {
         coreIdea: "Work is the energy hand-off that fills or empties stores.",
-        reasoning: "Classify the mission first. If the story gives a store change, use W = Delta E. If it gives a force acting through a distance in the same direction, use W = Fd. Then calculate.",
+        reasoning: "Classify the mission first. If the story gives a store change, use W = ΔE. If it gives a force acting through a distance in the same direction, use W = Fd. Then calculate.",
         checkForUnderstanding: "If a problem tells you the pod gained 300 J of Motion Store, what should you think about before using any other equation?",
         commonTrap: "Do not grab W = Fd just because it looks familiar. The story decides the route.",
       };
@@ -6485,7 +6487,7 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
   if (code === "M3_L4") {
     return {
       body: "The Lift-Launch model is powerful here because it makes the hand-off idea common across lifts, launches, and pushes. The equations are just different ways into that same story.",
-      checkForUnderstanding: "In the analogy, what clue tells you that Delta E is the cleaner starting point?",
+      checkForUnderstanding: "In the analogy, what clue tells you that ΔE is the cleaner starting point?",
     };
   }
   if (code === "M3_L5") {

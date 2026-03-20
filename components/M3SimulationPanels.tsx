@@ -311,7 +311,7 @@ export default function M3SimulationPanels({
         {metricCard("Useful gain", `${formatSimulationNumber(usefulGain, 0)} J`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Leak Trail", `${formatSimulationNumber(leak, 0)} J`, "border-rose-200 bg-rose-50 text-rose-900")}
         {metricCard("No-displacement check", distance <= 0.01 ? "0 J work in this simple model" : "displacement allows the hand-off", "border-amber-200 bg-amber-50 text-amber-900")}
-        {explainerCard("Equation choice", inputWork > 0 ? "W = Fd gives the input hand-off here because the force-distance story is explicit. The useful store gain is smaller when part of that hand-off leaks away." : "With zero displacement, the simple aligned-force hand-off is zero. If a problem instead gives the store change directly, W = Delta E is often the better first move.", "border-slate-200 bg-slate-50 text-slate-900")}
+        {explainerCard("Equation choice", inputWork > 0 ? "W = Fd gives the input hand-off here because the force-distance story is explicit. The useful store gain is smaller when part of that hand-off leaks away." : "With zero displacement, the simple aligned-force hand-off is zero. If a problem instead gives the store change directly, W = ΔE is often the better first move.", "border-slate-200 bg-slate-50 text-slate-900")}
       </>,
       [
         "Work is the total hand-off, not a synonym for effort.",

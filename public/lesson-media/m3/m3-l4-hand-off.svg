@@ -24,5 +24,5 @@
   <text x="690" y="398" fill="#B91C1C" font-family="Arial, sans-serif" font-size="24">12 J</text>
 
   <rect x="192" y="448" width="574" height="40" rx="18" fill="#EEF5FF"/>
-  <text x="256" y="474" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="22" font-weight="700">Simple hand-off summary: W = Fd, then compare with Delta E</text>
+  <text x="256" y="474" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="22" font-weight="700">Simple hand-off summary: W = Fd, then compare with ΔE</text>
 </svg>

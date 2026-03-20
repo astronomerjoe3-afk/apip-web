@@ -93,7 +93,7 @@ const M3_VISUAL_META: Record<string, M3QuestionVisualMeta> = {
     visual_caption: "Work is the hand-off that changes a store; sometimes it is read from force and distance, and sometimes from the store change directly.",
     visual_callouts: [
       "No displacement means no work by that force in the simple aligned-force case.",
-      "When the store change is already known, W = Delta E is often the cleaner first move.",
+      "When the store change is already known, W = ΔE is often the cleaner first move.",
       "Work is a transfer idea, not a synonym for trying hard.",
     ],
   },
@@ -179,7 +179,7 @@ const M3_SIMULATION_COPY: Record<string, M3SimulationCopy> = {
   M3_L4: {
     title: "Energy Hand-off explorer",
     instructions: "Compare force-distance hand-offs with direct store-change hand-offs so work is understood as energy transfer, not as effort language.",
-    taskPrompt: "Build one push-distance case, one no-displacement case, and one direct store-gain case. Then explain when W = Fd is the right first tool and when W = Delta E is cleaner.",
+    taskPrompt: "Build one push-distance case, one no-displacement case, and one direct store-gain case. Then explain when W = Fd is the right first tool and when W = ΔE is cleaner.",
     exploreSteps: [
       "Start with an aligned push over a distance so the hand-off is visible as force times distance.",
       "Set the distance to zero and watch the work fall to zero in that simple push story.",
@@ -188,7 +188,7 @@ const M3_SIMULATION_COPY: Record<string, M3SimulationCopy> = {
     watchFor: [
       "Work is a transfer, not a personality trait or an effort rating.",
       "In the simple aligned case, force without displacement gives no work on the pod.",
-      "When the store change is already known, Delta E can be the most direct route.",
+      "When the store change is already known, ΔE can be the most direct route.",
     ],
     tryFirst: "Try 12 N over 5 m with a 20% leak. The input hand-off is 60 J, the useful store gain is 48 J, and the leak is 12 J.",
     takeaway: "Work is best understood as an energy hand-off. Force-distance is one route to it; store change is another.",
@@ -336,7 +336,7 @@ const M3_CONCEPT_ITEMS: Record<string, UnknownRecord[]> = {
   ],
   M3_L4: [
     mcItem("M3L4_C3", "A force acts but there is no displacement in the force direction. In the simple aligned-force model, what work is done?", ["0 J", "the same as the force", "the same as the energy store already present", "the same as the time"], 0, "No displacement means no work in this simple case.", "No displacement in the force direction means 0 J of work in the simple aligned-force model."),
-    mcItem("M3L4_C4", "Which choice is usually cleaner if the question already tells you how much a store changed?", ["W = Delta E", "W = Fd first", "P = E/t", "efficiency = output/input"], 0, "Start from the quantity the story gives directly.", "If the story already gives the store change, W = Delta E is usually the cleaner first move."),
+    mcItem("M3L4_C4", "Which choice is usually cleaner if the question already tells you how much a store changed?", ["W = ΔE", "W = Fd first", "P = E/t", "efficiency = output/input"], 0, "Start from the quantity the story gives directly.", "If the story already gives the store change, W = ΔE is usually the cleaner first move."),
     shortItem("M3L4_C5", "Why is 'work = effort' a poor physics definition?", ["because work is energy transferred", "because work measures hand-off not how hard something feels", "because effort language misses the transfer idea"], "Use hand-off or energy-transfer language.", phraseGroups(["energy", "transfer", "hand-off", "store change", "change in store"])),
     mcItem("M3L4_C6", "A 90 J hand-off increases the pod's store by 90 J with no leak. Which statement is correct?", ["The work done equals the store gain", "The power must be 90 W", "The force must be 90 N", "The efficiency must be below 100%"], 0, "With no leak, input hand-off equals useful store change.", "If there is no leak, the work done equals the store gain exactly."),
   ],
@@ -418,7 +418,7 @@ const M3_MASTERY_ITEMS: Record<string, UnknownRecord[]> = {
   ],
   M3_L4: [
     shortItem("M3L4_M1", "A 20 N push acts through 3 m in the same direction. What work is done?", ["60 J", "60"], "Use W = Fd in the simple aligned-force case.", phraseGroups(["60"])),
-    mcItem("M3L4_M2", "Which scenario is best solved first by W = Delta E?", ["A store rises by 250 J", "A known force pushes through 5 m", "A machine runs for 4 s at known power", "A velocity doubles"], 0, "If the story gives the store change directly, use it.", "A known store rise of 250 J is best solved first by W = Delta E."),
+    mcItem("M3L4_M2", "Which scenario is best solved first by W = ΔE?", ["A store rises by 250 J", "A known force pushes through 5 m", "A machine runs for 4 s at known power", "A velocity doubles"], 0, "If the story gives the store change directly, use it.", "A known store rise of 250 J is best solved first by W = ΔE."),
     mcItem("M3L4_M3", "A launcher does 400 J of work on the pod and 50 J leaks away. What useful store gain remains?", ["350 J", "450 J", "50 J", "400 J"], 0, "Useful gain equals input work minus leak.", "The useful store gain is 400 J minus 50 J, so 350 J remains."),
     shortItem("M3L4_M4", "Why is no-displacement pushing not counted as work in the simple model?", ["because there is no movement in the force direction", "because work needs displacement in the force direction", "because a hand-off is not completed without displacement"], "Use force-direction displacement language.", phraseGroups(["no movement", "no displacement", "wall does not move", "did not move"], ["force direction", "same direction", "aligned"], ["work", "hand-off", "transfer"])),
     mcItem("M3L4_M5", "Which statement keeps work and power separate?", ["Work is the total hand-off; power is how fast the hand-off happens", "Work is rate and power is amount", "Work and power are interchangeable", "Power measures useful fraction only"], 0, "Total transfer and rate are different ideas.", "Work is the total hand-off, while power is how fast that hand-off happens."),
@@ -463,7 +463,7 @@ const M3_MASTERY_EXPANSIONS: Record<string, UnknownRecord[]> = {
   ],
   M3_L4: [
     mcItem("M3L4_M9", "A force does 90 J of work on a pod and 30 J leaks away. What useful store gain results?", ["60 J", "120 J", "30 J", "90 J"], 0, "Subtract the leak from the work input.", "The useful store gain is 90 J - 30 J = 60 J."),
-    shortItem("M3L4_M10", "Why can W = Delta E be cleaner than W = Fd in some problems?", ["because the store change is given directly", "because the energy hand-off is already known from the change in store"], "Use direct-store-change language.", phraseGroups(["store", "energy", "change"], ["given", "known", "direct", "already"])),
+    shortItem("M3L4_M10", "Why can W = ΔE be cleaner than W = Fd in some problems?", ["because the store change is given directly", "because the energy hand-off is already known from the change in store"], "Use direct-store-change language.", phraseGroups(["store", "energy", "change"], ["given", "known", "direct", "already"])),
   ],
   M3_L5: [
     mcItem("M3L5_M9", "Two machines both transfer 900 J. Machine A takes 3 s and is 50% efficient. Machine B takes 6 s and is 80% efficient. Which statement is correct?", ["Machine A is more powerful, but Machine B is more efficient", "Machine B is more powerful and more efficient", "Machine A is both more powerful and more efficient", "They must be equal because the total transfer matches"], 0, "Separate rate from useful fraction.", "Machine A is more powerful because it transfers the same energy faster, but Machine B is more efficient because it has the larger useful fraction."),
@@ -531,7 +531,7 @@ export function m3ScaffoldFocusExtras(code: string): string[] {
       return [
         "Work is the hand-off that changes a store.",
         "Use W = Fd only when the force-distance story supports it.",
-        "Use W = Delta E when the store change is already the cleanest known quantity.",
+        "Use W = ΔE when the store change is already the cleanest known quantity.",
         "The aligned-displacement condition belongs to the reasoning, not just to the fine print.",
       ];
     case "M3_L5":
@@ -580,7 +580,7 @@ export function m3ScaffoldCoreBullets(code: string): string[] {
       return [
         "Work is an energy hand-off.",
         "In the simple aligned-force case, W = Fd.",
-        "Whenever the store change is known directly, W = Delta E can be the cleaner first statement.",
+        "Whenever the store change is known directly, W = ΔE can be the cleaner first statement.",
         "No displacement in the force direction means no work in the lesson's simple model.",
       ];
     case "M3_L5":
