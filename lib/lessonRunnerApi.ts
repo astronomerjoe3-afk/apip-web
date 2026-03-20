@@ -2301,6 +2301,86 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isM4LargeAreaLowerPressurePrompt = matchesM4Prompt(
+    ["M4L1_M6"],
+    ["why do flat training shoes mark the floor less than spikes under the same athlete"],
+  );
+
+  if (isM4LargeAreaLowerPressurePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["larger", "more", "wider", "bigger", "broader"],
+        ["area", "contact area", "footprint", "patch", "spread"],
+        ["lower", "less", "smaller"],
+        ["pressure", "mark", "damage", "load"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same", "equal", "unchanged"],
+        ["force", "push", "weight"],
+        ["larger", "more", "wider"],
+        ["area", "contact area", "footprint", "spread"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "flat shoes spread the same weight over a larger area",
+        "the same force is spread over a larger area",
+        "spikes concentrate the same force on a smaller area",
+        "larger contact area means lower pressure",
+        "bigger footprint gives less pressure on the floor",
+      ])
+    );
+  }
+
+  const isM4ModeratePushUnsafePrompt = matchesM4Prompt(
+    ["M4L2_D6"],
+    ["why can a moderate push still be unsafe on a fragile surface"],
+  );
+
+  if (isM4ModeratePushUnsafePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["area", "contact area", "footprint", "patch", "spread"],
+        ["small", "too small", "narrow", "tiny", "few", "crowded", "concentrated"],
+        ["pressure", "unsafe", "limit", "load"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the area can be too small",
+        "the push can be crowded onto too few patches",
+        "a moderate force on a tiny area can still give high pressure",
+        "small footprint can still overload the surface",
+        "the pressure can still be above the safe limit",
+      ])
+    );
+  }
+
+  const isM4ForceAreaScalingPrompt = matchesM4Prompt(
+    ["M4L2_M5"],
+    ["why does doubling the push require doubling the area when the safe pressure limit is unchanged"],
+  );
+
+  if (isM4ForceAreaScalingPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["force", "push"],
+        ["area", "footprint", "contact area"],
+        ["same", "fixed", "unchanged", "constant"],
+        ["pressure", "limit", "ratio", "f over a", "f/a"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["double", "twice", "in step", "proportional"],
+        ["force", "push"],
+        ["area"],
+        ["same", "fixed", "constant"],
+        ["pressure", "limit"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "to keep the same pressure the area must also double",
+        "if the safe limit stays fixed then force and area must rise together",
+        "the ratio of force to area must stay the same",
+        "the area must increase in step with the push to keep the pressure unchanged",
+      ])
+    );
+  }
+
   const isM4DenserLiquidPrompt = matchesM4Prompt(
     ["M4L3_C3"],
     ["why does a denser liquid give greater pressure at the same depth"],
@@ -2318,6 +2398,53 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "more density means more weight above the patch",
         "a denser liquid has a heavier stack at the same depth",
         "rho is larger so the pressure is larger at the same depth",
+      ])
+    );
+  }
+
+  const isM4HydrostaticFactorsPrompt = matchesM4Prompt(
+    ["M4L3_D5"],
+    ["what three factors set liquid pressure in p = rhogh"],
+  );
+
+  if (isM4HydrostaticFactorsPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["density", "rho"],
+        ["g", "gravity", "gravitational", "world pull", "field strength"],
+        ["depth", "h", "height", "below the surface"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "density gravitational field strength and depth",
+        "rho g and h",
+        "liquid density world pull and depth",
+        "density gravity and depth",
+      ])
+    );
+  }
+
+  const isM4DepthDoublesPressurePrompt = matchesM4Prompt(
+    ["M4L3_M5"],
+    ["why does doubling depth double liquid pressure when density and g stay fixed"],
+  );
+
+  if (isM4DepthDoublesPressurePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["depth", "h"],
+        ["double", "twice", "direct", "proportional", "in step"],
+        ["pressure"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["twice", "double"],
+        ["layers", "layer stack", "more liquid above", "stack above", "above"],
+        ["pressure"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "pressure is directly proportional to depth",
+        "twice the depth gives twice the pressure",
+        "doubling the depth doubles h in rhogh",
+        "there are twice as many liquid layers above",
       ])
     );
   }
@@ -2340,6 +2467,78 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "the local depth matters, not the container shape",
         "the same depth has the same layer stack above it",
         "pressure belongs to the location, not the shape of the vessel",
+      ])
+    );
+  }
+
+  const isM4EqualPressurePrompt = matchesM4Prompt(
+    ["M4L4_D3", "M4L4_M5"],
+    [
+      "what can you say about their pressures",
+      "another water patch at the same depth in a different shaped container has what pressure",
+    ],
+  );
+
+  if (isM4EqualPressurePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same", "equal", "match", "unchanged", "identical"],
+        ["pressure", "pressures", "p", "reading", "meter"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "they have the same pressure",
+        "the pressures are equal",
+        "both read the same pressure",
+        "it stays p",
+        "the reading is unchanged",
+      ])
+    );
+  }
+
+  const isM4LocationPropertyPrompt = matchesM4Prompt(
+    ["M4L4_D6"],
+    ["why is pressure at a point called a location property here"],
+  );
+
+  if (isM4LocationPropertyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["location", "point", "spot", "place"],
+        ["fluid", "liquid"],
+        ["belongs", "set", "determined", "depends"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["shape", "container", "vessel"],
+        ["not", "does not", "doesnt", "cannot"],
+        ["decide", "set", "determine"],
+        ["pressure"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "pressure belongs to the point in the fluid",
+        "it is set by the location in the liquid",
+        "shape elsewhere does not decide it",
+        "the local depth and liquid determine the pressure",
+      ])
+    );
+  }
+
+  const isM4EqualDepthBeatsShapePrompt = matchesM4Prompt(
+    ["M4L4_M2"],
+    ["why does equal depth beat vessel shape in a same liquid comparison"],
+  );
+
+  if (isM4EqualDepthBeatsShapePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same liquid", "same water", "same fluid"],
+        ["same depth", "same level", "same location"],
+        ["same", "equal", "match"],
+        ["pressure", "layer stack", "reading"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "same liquid and same depth give the same pressure",
+        "equal depth beats shape because the local layer stack matches",
+        "the pressure matches because the location in the liquid matches",
       ])
     );
   }
@@ -2370,6 +2569,61 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isM4LargerPatchLargerForcePrompt = matchesM4Prompt(
+    ["M4L5_D5"],
+    ["why does a larger patch feel a larger force at the same pressure"],
+  );
+
+  if (isM4LargerPatchLargerForcePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same pressure", "pressure"],
+        ["larger", "more", "greater", "bigger"],
+        ["area", "surface", "patch"],
+        ["force"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["force", "f"],
+        ["pressure", "p"],
+        ["area", "a"],
+        ["times", "multiplies", "x", "p a", "p*a"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "same pressure on more area gives more force",
+        "a larger area collects the same pressure over more surface",
+        "force equals pressure times area",
+        "f equals p a",
+      ])
+    );
+  }
+
+  const isM4SideWallPressurePrompt = matchesM4Prompt(
+    ["M4L5_M2"],
+    ["why can fluid push on a side wall even though the liquid is not falling sideways"],
+  );
+
+  if (isM4SideWallPressurePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["pressure"],
+        ["location", "point", "fluid", "liquid"],
+        ["wall", "surface", "side"],
+        ["perpendicular", "normal", "direction"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["pressure", "fluid"],
+        ["all directions", "sideways too", "at the wall"],
+        ["wall", "surface"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "pressure exists at the location and the force acts perpendicular to the wall",
+        "fluid pressure acts on side walls too",
+        "pressure is scalar and the wall sets the force direction",
+        "the patch chooses the direction of the force",
+      ])
+    );
+  }
+
   const isM4AirPressurePrompt = matchesM4Prompt(
     ["M4L6_C3"],
     ["why can air produce pressure even though it is invisible"],
@@ -2388,6 +2642,48 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "the atmosphere has weight",
         "air is a fluid and its layers press down",
         "invisible does not mean weightless",
+      ])
+    );
+  }
+
+  const isM4TotalPressureAboveRhoghPrompt = matchesM4Prompt(
+    ["M4L6_D5"],
+    ["why is total pressure below an open liquid surface larger than rhogh alone"],
+  );
+
+  if (isM4TotalPressureAboveRhoghPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["atmosphere", "air", "sky blanket"],
+        ["add", "plus", "also", "in addition"],
+        ["pressure", "surface", "total", "rhogh", "liquid"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "atmospheric pressure is also pressing on the surface",
+        "the sky blanket adds to the liquid stack",
+        "total pressure includes air pressure plus hydrostatic pressure",
+        "rhogh is only the liquid part not the total",
+      ])
+    );
+  }
+
+  const isM4AtmosphereMattersPrompt = matchesM4Prompt(
+    ["M4L6_M5"],
+    ["why does the atmosphere matter in an open liquid pressure problem"],
+  );
+
+  if (isM4AtmosphereMattersPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["atmosphere", "air", "sky blanket"],
+        ["add", "plus", "part of", "included"],
+        ["total", "pressure", "surface", "open liquid"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "it presses on the surface and adds to the total pressure",
+        "atmospheric pressure is part of p total",
+        "the sky blanket adds before the liquid stack does",
+        "without the atmosphere you would only have rhogh",
       ])
     );
   }
