@@ -4941,16 +4941,16 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           },
           extra_examples: [
             {
-              body: "This contrast case stops students from turning work into effort language.",
+              body: "This second route shows a direct Delta E hand-off instead of a force-distance setup.",
               worked_example: {
-                prompt: "A learner pushes hard on a wall for several seconds, but the wall does not move. In the lesson's simple model, how much work is done on the wall?",
+                prompt: "A lift raises a pod so its Height Store increases from 120 J to 420 J with negligible leak. In the lesson's hand-off model, how much work does the lift do?",
                 steps: [
-                  "Ask whether there is displacement in the force direction.",
-                  "Notice that the wall does not move, so the displacement is zero.",
-                  "Use the simple aligned-force condition to decide the work.",
+                  "Classify the story as a direct store-change hand-off.",
+                  "Find the store change: Delta E = 420 J - 120 J = 300 J.",
+                  "Use W = Delta E because the energy change is given directly.",
                 ],
-                answer: "0 J of work is done on the wall in the simple model.",
-                answer_reason: "In the simple model, work needs displacement in the force direction. With no displacement, there is no hand-off to the wall.",
+                answer: "The lift does 300 J of work.",
+                answer_reason: "With negligible leak, the lift's work equals the change in Height Store, so 300 J is handed into the pod.",
               },
             },
           ],
