@@ -90,6 +90,15 @@ function normalizeTeachingFocusText(value: string): string {
   if (/^Multiply force by displacement\.?$/i.test(trimmed)) {
     return "In the simple aligned-force case, work is force multiplied by displacement.";
   }
+  if (/^Use KE = 0\.5mv\^2\.?$/i.test(trimmed)) {
+    return "Use the kinetic-energy equation: E_k = 0.5mv^2.";
+  }
+  if (/^Substitute into KE = 0\.5mv\^2\.?$/i.test(trimmed)) {
+    return "Substitute the known mass and speed into E_k = 0.5mv^2.";
+  }
+  if (/^Rearrange\s+[\d.]+\s*=\s*0\.5\s*x\s*[\d.]+\s*x\s*v\^2\.?$/i.test(trimmed)) {
+    return "Rearrange E_k = 0.5mv^2 when speed is the unknown.";
+  }
   if (/^Use the triangle area:\s*0\.5 x [\d.]+ x [\d.]+\.?$/i.test(trimmed)) {
     return "Use the triangle area rule: 0.5 x base x height, with time as the base and speed as the height.";
   }
