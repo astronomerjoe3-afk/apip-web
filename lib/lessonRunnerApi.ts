@@ -6473,7 +6473,19 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
         const essentials = [...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].filter(Boolean);
         const isFlowGrid = code.startsWith("F4_");
         const isModuleOne = code.startsWith("M1_");
-        return [{ title: isFlowGrid ? "Circuit essentials" : "Lesson essentials", caption: isFlowGrid ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson." : isModuleOne ? "Keep these key graph, motion, and acceleration ideas visible while you work through the lesson." : "Keep these key motion or force ideas visible while you work through the lesson.", columns: ["Key idea", "Why it matters"], rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]) }];
+        const isThermal = code.startsWith("M6_");
+        return [{
+          title: isFlowGrid ? "Circuit essentials" : isThermal ? "Thermal essentials" : "Lesson essentials",
+          caption: isFlowGrid
+            ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
+            : isModuleOne
+              ? "Keep these key graph, motion, and acceleration ideas visible while you work through the lesson."
+              : isThermal
+                ? "Keep these key thermal transfer, phase-change, and energy-bookkeeping ideas visible while you work through the lesson."
+                : "Keep these key motion or force ideas visible while you work through the lesson.",
+          columns: ["Key idea", "Why it matters"],
+          rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]),
+        }];
       }
       return [];
     }

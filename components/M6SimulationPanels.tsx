@@ -215,6 +215,8 @@ export default function M6SimulationPanels({
         <rect x="100" y="176" width={Math.min(420, progress * 420)} height="18" rx="9" fill="#22c55e" />
         <text x="86" y="98" fill="#1d4ed8" fontSize="16">Warm-up stage</text>
         <text x="312" y="98" fill="#7c3aed" fontSize="16">Gate stage</text>
+        <text x="286" y="130" fill="#7c3aed" fontSize="15">Q = m L</text>
+        <text x="312" y="170" fill="#475569" fontSize="14">temperature stays flat here</text>
       </svg>,
       <>
         {metricCard("Paid so far", `${formatSimulationNumber(paid, 0)} J`, "border-sky-200 bg-sky-50 text-sky-900")}
@@ -253,6 +255,7 @@ export default function M6SimulationPanels({
         <text x="84" y="100" fill="#ef4444" fontSize="16">hot</text>
         <text x="510" y="100" fill="#0ea5e9" fontSize="16">cool</text>
         {!pathQuality ? <rect x="300" y="110" width="36" height="40" rx="12" fill="#f8fafc" stroke="#ef4444" strokeWidth="4" /> : null}
+        {!pathQuality ? <text x="268" y="172" fill="#ef4444" fontSize="14">gap breaks contact path</text> : <text x="240" y="172" fill="#475569" fontSize="14">continuous contact path</text>}
       </svg>,
       <>
         {metricCard("Relay rate", formatSimulationNumber(relay, 0), "border-sky-200 bg-sky-50 text-sky-900")}
@@ -282,12 +285,15 @@ export default function M6SimulationPanels({
       "Convection loop board",
       <svg viewBox="0 0 640 250" className="w-full">
         <rect x="116" y="34" width="408" height="176" rx="28" fill="#ecfeff" stroke="#67e8f9" strokeWidth="4" />
+        <rect x="266" y="188" width="110" height="12" rx="6" fill="#f59e0b" />
         <path d="M240 172 C196 132 196 90 248 70" fill="none" stroke="#ef4444" strokeWidth="10" strokeLinecap="round" />
         <path d="M392 74 C444 92 448 142 404 176" fill="none" stroke="#2563eb" strokeWidth="10" strokeLinecap="round" />
         <path d="M248 70 H392" fill="none" stroke="#f59e0b" strokeWidth="10" strokeLinecap="round" />
         <path d="M404 176 H240" fill="none" stroke="#22c55e" strokeWidth="10" strokeLinecap="round" />
+        <text x="276" y="184" fill="#b45309" fontSize="14">heater below</text>
         <text x="190" y="198" fill="#ef4444" fontSize="15">warm parcel rises</text>
         <text x="352" y="198" fill="#2563eb" fontSize="15">cool parcel sinks</text>
+        <text x="236" y="58" fill="#475569" fontSize="14">full loop, not one-way rise</text>
       </svg>,
       <>
         {metricCard("Loop strength", formatSimulationNumber(loopStrength, 0), "border-sky-200 bg-sky-50 text-sky-900")}
@@ -324,11 +330,15 @@ export default function M6SimulationPanels({
         <rect x="56" y="78" width="84" height="84" rx="22" fill="#0f172a" />
         <rect x="488" y="78" width="84" height="84" rx="22" fill="#334155" />
         <path d="M156 120 H472" stroke="#f59e0b" strokeWidth="10" strokeLinecap="round" />
+        <text x="64" y="70" fill="#475569" fontSize="14">source</text>
+        <text x="498" y="70" fill="#475569" fontSize="14">target</text>
         <text x="226" y="108" fill="#f59e0b" fontSize="18">vacuum gap</text>
         <rect x="194" y="178" width={Math.min(240, warmStage / 200)} height="18" rx="9" fill="#3b82f6" />
         <rect x="194" y="206" width={Math.min(240, gateStage / 2000)} height="18" rx="9" fill="#22c55e" />
         <text x="42" y="208" fill="#1d4ed8" fontSize="14">warm-up</text>
         <text x="46" y="232" fill="#166534" fontSize="14">gate</text>
+        <text x="444" y="202" fill="#1d4ed8" fontSize="14">Q = m c delta T</text>
+        <text x="468" y="230" fill="#166534" fontSize="14">Q = m L</text>
       </svg>,
       <>
         {metricCard("Absorbed Glow Cast", `${formatSimulationNumber(absorbed, 0)} J`, "border-sky-200 bg-sky-50 text-sky-900")}

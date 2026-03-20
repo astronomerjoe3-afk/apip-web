@@ -102,7 +102,7 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "The Forge Ledger records transfer, not the current temperature.",
       "Same energy can still give different temperature rises.",
     ],
-    tryFirst: "Start with equal Warmth Levels, give the same payment to both blocks, and then double the mass of one block. The ledger matches, but the level rise does not.",
+    tryFirst: "Set both blocks to the same starting Warmth Level, give each 1200 J, keep Level Cost at 200 J/kg degree C, and change Block B from 1 kg to 3 kg. The ledger still matches, but Block A rises much more because the same payment is spread across less mass.",
     takeaway: "The first thermal distinction to protect is temperature versus transferred energy.",
   },
   M6_L2: {
@@ -119,7 +119,7 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "Mass and c are separate multipliers in the bill.",
       "Rearranging the formula does not change the physical story.",
     ],
-    tryFirst: "Set mass to 2 kg, c to 500, and delta T to 6. Then compute the bill and compare it with the displayed ledger.",
+    tryFirst: "Set mass to 2 kg, c to 500 J/kg degree C, and delta T to 6 degree C. Predict 6000 J before you look, then halve the bill and check that the same block would now rise only 3 degree C.",
     takeaway: "Q = m c delta T is just the Level-Forge warm-up rule written in symbols.",
   },
   M6_L3: {
@@ -136,7 +136,7 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "The Morph Fee stands for latent heat.",
       "Q = m L applies only to the state-change stage.",
     ],
-    tryFirst: "Heat the block to the gate and keep the same power on. The Warmth Level pauses, but the Morph Fee meter and total ledger keep climbing.",
+    tryFirst: "Bring a 1 kg block to the gate, set the Morph Fee to 200000 J/kg, and pay 100000 J into the plateau stage. The Warmth Level stays flat while the Morph progress reaches 50% and the total ledger keeps increasing.",
     takeaway: "State changes become much clearer when learners ask what the energy is paying for.",
   },
   M6_L4: {
@@ -153,7 +153,7 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "Metals conduct well because electrons help.",
       "The solid path stays in place while energy passes through it.",
     ],
-    tryFirst: "Run the same temperature difference through a metal bar and then through an insulated bar. The metal relay reaches the far end much faster.",
+    tryFirst: "Keep a 60 degree C temperature difference, run it through a metal bar first, and then insert a gap or swap to an insulating bar. The far end only warms quickly when the contact path is unbroken and the material is a good conductor.",
     takeaway: "Conduction is a relay through matter, not the whole material moving like a fluid.",
   },
   M6_L5: {
@@ -170,7 +170,7 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "Warm fluid rises because it becomes less dense.",
       "Cool fluid must move in or sink to complete the circulation.",
     ],
-    tryFirst: "Use strong heating from below and watch one parcel loop upward, across, downward, and back toward the heater.",
+    tryFirst: "Heat the lower region strongly and follow one parcel all the way up, across, down, and back. Then weaken the warm-cool contrast and notice that the same loop remains, but the circulation slows.",
     takeaway: "A full convection explanation is stronger than any slogan because it shows the complete fluid loop.",
   },
   M6_L6: {
@@ -187,7 +187,7 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "Dark dull surfaces absorb more strongly than shiny surfaces.",
       "Multi-stage totals must be built from separate bills.",
     ],
-    tryFirst: "Set a vacuum gap, compare a shiny target with a dark target, then total one warm-up bill and one melting bill for the darker target.",
+    tryFirst: "Set a vacuum gap, compare 80% absorption with 30% absorption, then total a 12000 J warm-up stage and a 200000 J gate stage. The route is still radiation across the gap, but the ledger still has to add the stages separately.",
     takeaway: "The capstone skill is route choice first, then stage-by-stage thermal bookkeeping.",
   },
 };
@@ -197,7 +197,46 @@ export function m6SimulationCopy(code: string): M6SimulationCopy | undefined {
 }
 
 export function m6ScaffoldFocusExtras(code: string): string[] {
-  return M6_VISUAL_META[code.replace("_", "")]?.visual_callouts ?? [];
+  switch (code) {
+    case "M6_L1":
+      return [
+        "Match the starting Warmth Level before comparing the outcome.",
+        "Change only one variable at a time: Build Size or Level Cost.",
+        "Explain the response as energy per block, not as stored heat inside it.",
+      ];
+    case "M6_L2":
+      return [
+        "Write the heating bill in the order m, c, and delta T before you multiply.",
+        "Keep the units visible so the cost really means per kilogram per degree.",
+        "Only rearrange the formula after you decide which quantity is unknown.",
+      ];
+    case "M6_L3":
+      return [
+        "Label the warm-up stage and the gate stage separately on the same mission.",
+        "Use the plateau as evidence of continuing transfer rather than a switched-off heater.",
+        "Compare total Morph Fee for different masses at the same Form Gate.",
+      ];
+    case "M6_L4":
+      return [
+        "Trace the unbroken contact path from hot end to cool end before naming the route.",
+        "Separate a better conductor from a hotter starting point when you compare cases.",
+        "If the path breaks, conduction stops even when the endpoints stay different.",
+      ];
+    case "M6_L5":
+      return [
+        "Track one parcel around the whole loop rather than only the upward arrow.",
+        "Link the upward motion to reduced density after heating and expansion.",
+        "Look for the return flow that closes the circulation instead of stopping at 'heat rises'.",
+      ];
+    case "M6_L6":
+      return [
+        "Choose the route across the gap before you choose an equation.",
+        "Keep stage 1 and stage 2 as separate Forge Ledger entries.",
+        "Use surface finish to explain why equal beams need not be equally absorbed.",
+      ];
+    default:
+      return [];
+  }
 }
 
 export function m6ScaffoldCoreBullets(code: string): string[] {
