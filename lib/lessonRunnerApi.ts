@@ -2153,17 +2153,29 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   if (isM3MissionPlanPrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["step", "stage", "sequence", "order", "plan"],
-        ["store", "transfer", "hand off", "hand-off", "leak", "target"],
+        ["step", "stage", "sequence", "order", "plan", "previous", "earlier", "later", "next"],
+        ["store", "transfer", "hand off", "hand-off", "leak", "target", "result", "output", "input", "quantity", "bridge"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["next quantity", "bridge quantity", "what changes", "what comes next"],
-        ["equation", "which equation", "equation choice"],
+        ["next quantity", "bridge quantity", "what changes", "what comes next", "next input", "previous result", "earlier result", "bridge value"],
+        ["equation", "which equation", "equation choice", "formula", "next step", "next stage"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["story", "mission", "sequence"],
-        ["equation", "formula"],
-        ["before", "first", "depends on"],
+        ["story", "mission", "sequence", "chain"],
+        ["equation", "formula", "result", "output", "input"],
+        ["before", "first", "depends on", "feeds", "sets up", "creates", "provides"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["one step", "each stage", "previous step", "earlier step"],
+        ["creates", "gives", "provides", "feeds", "becomes", "sets up"],
+        ["next", "later", "following", "needed quantity", "required input", "next step", "next stage"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the output of one step becomes the input to the next",
+        "one step provides the input needed by the next",
+        "later equations need earlier results",
+        "each stage provides the bridge quantity for the next stage",
+        "the previous step gives the next step what it needs",
       ])
     );
   }
@@ -2176,14 +2188,19 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   if (isM3BackwardPlanningPrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["target", "final target", "goal", "required"],
-        ["back", "backward", "work back", "trace back"],
-        ["earlier", "input", "store", "required", "needed"],
+        ["target", "final target", "goal", "required", "threshold", "final requirement"],
+        ["back", "backward", "work back", "trace back", "reverse"],
+        ["earlier", "previous", "input", "store", "required", "needed", "stage", "step", "value"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["final", "target"],
-        ["tells", "determines", "shows"],
-        ["earlier", "required input", "required store"],
+        ["final", "target", "goal", "requirement"],
+        ["tells", "determines", "shows", "reveals"],
+        ["earlier", "required input", "required store", "earlier value", "previous stage"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the final target tells you what earlier input is needed",
+        "you can work back from the goal through the stages",
+        "the final requirement tells you the earlier store you need",
       ])
     );
   }
