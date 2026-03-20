@@ -142,14 +142,39 @@ function normalizeLessonId(value: string | undefined | null): string {
   return String(value || "").replace(/-/g, "_").toUpperCase();
 }
 
+const MODULE_ONE_DESCRIPTION =
+  "Module 1 treats kinematics as a representation system: journeys, graphs, signed rates, constant-acceleration forecasts, gradient context, and area reasoning must stay aligned without collapsing into basic motion slogans.";
+const MODULE_FOUR_TITLE = "Pressure";
+const MODULE_FOUR_DESCRIPTION =
+  "Pressure in solids, liquid pressure, and atmospheric pressure. Separate pressure from force, track how area and depth matter, and use the main pressure equations carefully.";
+
+function normalizeModuleTitle(moduleId: string | undefined | null, title: string | undefined): string | undefined {
+  const trimmed = String(title || "").trim();
+  if (!trimmed) return undefined;
+  const normalizedModuleId = normalizeLessonId(moduleId);
+  const isModuleFour =
+    normalizedModuleId === "M4" ||
+    /Pressure,\s*Patch Loads\s*&\s*Fluid Fields/i.test(trimmed);
+  if (isModuleFour) {
+    return MODULE_FOUR_TITLE;
+  }
+  return trimmed;
+}
+
 function normalizeModuleDescription(moduleId: string | undefined | null, title: string | undefined, description: string | undefined): string | undefined {
   const trimmed = String(description || "").trim();
   if (!trimmed) return undefined;
   const normalizedModuleId = normalizeLessonId(moduleId);
   const isModuleOne = normalizedModuleId === "M1" || /Kinematics,\s*Graphs\s*&\s*Constant Acceleration/i.test(String(title || ""));
-  if (!isModuleOne) return trimmed;
-  if (/foundation 2|f2/i.test(trimmed)) {
-    return "Module 1 treats kinematics as a representation system: journeys, graphs, signed rates, constant-acceleration forecasts, gradient context, and area reasoning must stay aligned without collapsing into basic motion slogans.";
+  if (isModuleOne && /foundation 2|f2/i.test(trimmed)) {
+    return MODULE_ONE_DESCRIPTION;
+  }
+  const isModuleFour =
+    normalizedModuleId === "M4" ||
+    /Pressure,\s*Patch Loads\s*&\s*Fluid Fields/i.test(String(title || "")) ||
+    /patch-dome|patch load|sky blanket/i.test(trimmed);
+  if (isModuleFour) {
+    return MODULE_FOUR_DESCRIPTION;
   }
   return trimmed;
 }
@@ -334,6 +359,7 @@ export default function StudentModulePage() {
         );
         setModuleMeta({
           ...moduleResponse.module,
+          title: normalizeModuleTitle(moduleResponse.module.id || moduleId, moduleResponse.module.title),
           description: normalizeModuleDescription(moduleResponse.module.id || moduleId, moduleResponse.module.title, moduleResponse.module.description),
         });
 
