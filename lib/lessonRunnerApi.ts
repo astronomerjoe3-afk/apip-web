@@ -503,7 +503,9 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 });
 
 function normalizeLessonId(value: unknown): string {
-  return String(value || "").replace(/-/g, "_").toUpperCase();
+  const normalized = String(value || "").trim().replace(/-/g, "_").toUpperCase();
+  const compactMatch = normalized.match(/^([A-Z]+\d+)_?L(\d+)$/);
+  return compactMatch ? `${compactMatch[1]}_L${compactMatch[2]}` : normalized;
 }
 
 function text(value: unknown, fallback = ""): string {
@@ -3578,7 +3580,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const ordered = preferAuthored || baseItems.length >= MASTERY_DEFAULT_MAX
     ? baseItems
     : [...baseItems, ...supplementalMasteryItems(lesson)];
-  return ordered.filter((item) => {
+  const filtered = ordered.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
     const promptKey = normalizePromptKey(text(record.prompt));
@@ -3590,6 +3592,24 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
     if (sourceKey) seenSources.add(sourceKey);
     return true;
   });
+
+  if (filtered.length > 0) return filtered;
+
+  if (lessonCode(lesson) === "F4_L4") {
+    const rescueIds = new Set<string>();
+    const rescuePrompts = new Set<string>();
+    return filterLessonSpecificMasteryCandidates(lesson, f4MasteryVariants("F4_L4")).filter((item) => {
+      const record = asRecord(item);
+      const id = text(record.id);
+      const promptKey = normalizePromptKey(text(record.prompt));
+      if (!id || rescueIds.has(id) || (promptKey && rescuePrompts.has(promptKey))) return false;
+      rescueIds.add(id);
+      if (promptKey) rescuePrompts.add(promptKey);
+      return true;
+    });
+  }
+
+  return filtered;
 }
 
 function masteryStrengthScore(runnerLesson: UnknownRecord, state: LocalState): number | null {

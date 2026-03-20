@@ -55,6 +55,20 @@ function boardFrame(title: string, body: ReactNode): ReactNode {
   );
 }
 
+function sliderField(label: string, value: string, input: ReactNode): ReactNode {
+  return (
+    <label className="mt-4 block">
+      <div className="flex items-center justify-between gap-4 text-sm text-slate-700">
+        <span>{label}</span>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold tabular-nums text-slate-900">
+          {value}
+        </span>
+      </div>
+      <div className="mt-2">{input}</div>
+    </label>
+  );
+}
+
 export default function M3SimulationPanels({
   lessonKey,
   simMetricMeters,
@@ -121,9 +135,9 @@ export default function M3SimulationPanels({
     return render(
       "Lift-Launch ledger explorer",
       <>
-        <label className="mt-4 block text-sm text-slate-700">Machine input (J)<input className="mt-2 w-full" type="range" min="100" max="600" step="20" value={inputEnergy} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Useful gain (%)<input className="mt-2 w-full" type="range" min="0" max="100" step="5" value={usefulPercent} onChange={(e) => setSimSpread(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Useful share to Height Store (%)<input className="mt-2 w-full" type="range" min="0" max="100" step="5" value={heightShare} onChange={(e) => setSimBias(Number(e.target.value))} /></label>
+        {sliderField("Machine input (J)", `${formatSimulationNumber(inputEnergy, 0)} J`, <input className="w-full" type="range" min="100" max="600" step="20" value={inputEnergy} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Useful gain (%)", `${formatSimulationNumber(usefulPercent, 0)}%`, <input className="w-full" type="range" min="0" max="100" step="5" value={usefulPercent} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
+        {sliderField("Useful share to Height Store (%)", `${formatSimulationNumber(heightShare, 0)}%`, <input className="w-full" type="range" min="0" max="100" step="5" value={heightShare} onChange={(e) => setSimBias(Number(e.target.value))} />)}
       </>,
       "Lift-Launch mission board",
       <svg viewBox="0 0 640 250" className="w-full">
@@ -175,10 +189,10 @@ export default function M3SimulationPanels({
     return render(
       "Height Store explorer",
       <>
-        <label className="mt-4 block text-sm text-slate-700">Load Rating / mass (kg)<input className="mt-2 w-full" type="range" min="1" max="10" step="1" value={load} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Deck level (m)<input className="mt-2 w-full" type="range" min="1" max="12" step="1" value={deckLevel} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">World Grip A (N/kg)<input className="mt-2 w-full" type="range" min="4" max="16" step="1" value={worldGrip} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">World Grip B (N/kg)<input className="mt-2 w-full" type="range" min="4" max="16" step="1" value={compareGrip} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
+        {sliderField("Load Rating / mass (kg)", `${formatSimulationNumber(load, 0)} kg`, <input className="w-full" type="range" min="1" max="10" step="1" value={load} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
+        {sliderField("Deck level (m)", `${formatSimulationNumber(deckLevel, 0)} m`, <input className="w-full" type="range" min="1" max="12" step="1" value={deckLevel} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("World Grip A (N/kg)", `${formatSimulationNumber(worldGrip, 0)} N/kg`, <input className="w-full" type="range" min="4" max="16" step="1" value={worldGrip} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
+        {sliderField("World Grip B (N/kg)", `${formatSimulationNumber(compareGrip, 0)} N/kg`, <input className="w-full" type="range" min="4" max="16" step="1" value={compareGrip} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
       </>,
       "Height Store board",
       <svg viewBox="0 0 640 250" className="w-full">
@@ -223,10 +237,10 @@ export default function M3SimulationPanels({
     return render(
       "Motion Store explorer",
       <>
-        <label className="mt-4 block text-sm text-slate-700">Base load (kg)<input className="mt-2 w-full" type="range" min="1" max="8" step="1" value={load} onChange={(e) => setSimDensityMass(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Base pace (m/s)<input className="mt-2 w-full" type="range" min="1" max="12" step="1" value={baseSpeed} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Comparison pace (m/s)<input className="mt-2 w-full" type="range" min="1" max="12" step="1" value={compareSpeed} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Comparison load at base pace (kg)<input className="mt-2 w-full" type="range" min="1" max="8" step="1" value={compareLoad} onChange={(e) => setSimDensityVolume(Number(e.target.value))} /></label>
+        {sliderField("Base load (kg)", `${formatSimulationNumber(load, 0)} kg`, <input className="w-full" type="range" min="1" max="8" step="1" value={load} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
+        {sliderField("Base pace (m/s)", `${formatSimulationNumber(baseSpeed, 0)} m/s`, <input className="w-full" type="range" min="1" max="12" step="1" value={baseSpeed} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Comparison pace (m/s)", `${formatSimulationNumber(compareSpeed, 0)} m/s`, <input className="w-full" type="range" min="1" max="12" step="1" value={compareSpeed} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
+        {sliderField("Comparison load at base pace (kg)", `${formatSimulationNumber(compareLoad, 0)} kg`, <input className="w-full" type="range" min="1" max="8" step="1" value={compareLoad} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
       </>,
       "Motion Store board",
       <svg viewBox="0 0 640 250" className="w-full">
@@ -270,9 +284,9 @@ export default function M3SimulationPanels({
     return render(
       "Energy Hand-off explorer",
       <>
-        <label className="mt-4 block text-sm text-slate-700">Aligned force (N)<input className="mt-2 w-full" type="range" min="0" max="20" step="1" value={force} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Distance moved in force direction (m)<input className="mt-2 w-full" type="range" min="0" max="10" step="0.5" value={distance} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Leak during hand-off (%)<input className="mt-2 w-full" type="range" min="0" max="60" step="5" value={leakPercent} onChange={(e) => setSimSpread(Number(e.target.value))} /></label>
+        {sliderField("Aligned force (N)", `${formatSimulationNumber(force, 0)} N`, <input className="w-full" type="range" min="0" max="20" step="1" value={force} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Distance moved in force direction (m)", `${formatSimulationNumber(distance, 1)} m`, <input className="w-full" type="range" min="0" max="10" step="0.5" value={distance} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Leak during hand-off (%)", `${formatSimulationNumber(leakPercent, 0)}%`, <input className="w-full" type="range" min="0" max="60" step="5" value={leakPercent} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
       </>,
       "Energy Hand-off board",
       <svg viewBox="0 0 640 250" className="w-full">
@@ -320,10 +334,10 @@ export default function M3SimulationPanels({
     return render(
       "Transfer Rate and Useful Yield explorer",
       <>
-        <label className="mt-4 block text-sm text-slate-700">Total input energy (J)<input className="mt-2 w-full" type="range" min="200" max="2400" step="100" value={inputEnergy} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Machine A time (s)<input className="mt-2 w-full" type="range" min="1" max="12" step="1" value={timeA} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Machine B time (s)<input className="mt-2 w-full" type="range" min="1" max="12" step="1" value={timeB} onChange={(e) => setSimVectorAngle(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Useful Yield (%)<input className="mt-2 w-full" type="range" min="10" max="100" step="5" value={usefulPercent} onChange={(e) => setSimSpread(Number(e.target.value))} /></label>
+        {sliderField("Total input energy (J)", `${formatSimulationNumber(inputEnergy, 0)} J`, <input className="w-full" type="range" min="200" max="2400" step="100" value={inputEnergy} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Machine A time (s)", `${formatSimulationNumber(timeA, 0)} s`, <input className="w-full" type="range" min="1" max="12" step="1" value={timeA} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Machine B time (s)", `${formatSimulationNumber(timeB, 0)} s`, <input className="w-full" type="range" min="1" max="12" step="1" value={timeB} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
+        {sliderField("Useful Yield (%)", `${formatSimulationNumber(usefulPercent, 0)}%`, <input className="w-full" type="range" min="10" max="100" step="5" value={usefulPercent} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
       </>,
       "Rate and Yield board",
       <svg viewBox="0 0 640 250" className="w-full">
@@ -371,10 +385,10 @@ export default function M3SimulationPanels({
     return render(
       "Ledger mission explorer",
       <>
-        <label className="mt-4 block text-sm text-slate-700">Lift input (J)<input className="mt-2 w-full" type="range" min="200" max="2500" step="50" value={liftInput} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Lift Useful Yield (%)<input className="mt-2 w-full" type="range" min="20" max="100" step="5" value={liftYield} onChange={(e) => setSimSpread(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Launch leak (%)<input className="mt-2 w-full" type="range" min="0" max="60" step="5" value={launchLeakPercent} onChange={(e) => setSimBias(Number(e.target.value))} /></label>
-        <label className="mt-4 block text-sm text-slate-700">Gate threshold (J)<input className="mt-2 w-full" type="range" min="100" max="1600" step="50" value={gateThreshold} onChange={(e) => setSimMetricMeters(Number(e.target.value))} /></label>
+        {sliderField("Lift input (J)", `${formatSimulationNumber(liftInput, 0)} J`, <input className="w-full" type="range" min="200" max="2500" step="50" value={liftInput} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Lift Useful Yield (%)", `${formatSimulationNumber(liftYield, 0)}%`, <input className="w-full" type="range" min="20" max="100" step="5" value={liftYield} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
+        {sliderField("Launch leak (%)", `${formatSimulationNumber(launchLeakPercent, 0)}%`, <input className="w-full" type="range" min="0" max="60" step="5" value={launchLeakPercent} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+        {sliderField("Gate threshold (J)", `${formatSimulationNumber(gateThreshold, 0)} J`, <input className="w-full" type="range" min="100" max="1600" step="50" value={gateThreshold} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
       </>,
       "Ledger mission planner",
       <svg viewBox="0 0 640 250" className="w-full">
