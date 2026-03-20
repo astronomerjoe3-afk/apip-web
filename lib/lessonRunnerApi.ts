@@ -2,7 +2,7 @@
 
 import { apipGet, apipPost } from "./apipApi";
 import { m2ContrastCodes, m2GeneratedConceptGateItems, m2GeneratedDiagnosticItems, m2GeneratedMasteryItems, m2PaddingPrompt, m2QuestionVisualMeta, m2ReflectionVisualCheck, m2ScaffoldCoreBullets, m2ScaffoldFocusExtras, m2ScaffoldMediaCards, m2SimulationCopy } from "./m2LessonContent";
-import { m3ContrastCodes, m3GeneratedConceptGateItems, m3GeneratedDiagnosticItems, m3GeneratedMasteryItems, m3PaddingPrompt, m3QuestionVisualMeta, m3ReflectionVisualCheck, m3ScaffoldCoreBullets, m3ScaffoldFocusExtras, m3ScaffoldMediaCards, m3SimulationCopy } from "./m3LessonContent";
+import { m3ContrastCodes, m3GeneratedConceptGateItems, m3GeneratedDiagnosticItems, m3GeneratedMasteryItems, m3PaddingPrompt, m3QuestionVisualMeta, m3ReflectionVisualCheck, m3ScaffoldCoreBullets, m3ScaffoldFocusExtras, m3ScaffoldMediaCards, m3SimulationCopy, m3SupplementalScaffoldSections, m3SupplementalWorkedExampleSections } from "./m3LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
 type JsonPrimitive = string | number | boolean | null;
@@ -86,13 +86,247 @@ type QuestionVisualMeta = {
   visual_callouts: string[];
 };
 
-const M1_VISUAL_SUFFIXES: Record<string, string[]> = {
-  M1L1: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
-  M1L2: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
-  M1L3: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
-  M1L4: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
-  M1L5: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
-  M1L6: ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17"],
+const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
+  F1L1: {
+    image_url: "/lesson-media/f1/f1-l1-metric-system.svg",
+    visual_title: "Metric units and prefixes",
+    visual_caption: "The metric-system visual keeps the quantity fixed while the unit scale changes, so students see that the number changes with the unit, not with the physical amount.",
+    visual_callouts: [
+      "Unit size changes the number written, not the quantity itself.",
+      "Prefixes show how the base unit is scaled.",
+      "Use the visual before converting or comparing values.",
+    ],
+  },
+  F1L2: {
+    image_url: "/lesson-media/f1/f1-l2-vectors-scalars.svg",
+    visual_title: "Scalars and vectors",
+    visual_caption: "The vector-scalar visual separates size-only quantities from size-and-direction quantities before classification questions begin.",
+    visual_callouts: [
+      "Scalars answer how much only.",
+      "Vectors answer how much and which way.",
+      "Direction is the feature that changes the category.",
+    ],
+  },
+  F1L3: {
+    image_url: "/lesson-media/f1/f1-l3-tool-resolution.svg",
+    visual_title: "Tool choice and resolution",
+    visual_caption: "The measurement visual connects object size, tool resolution, and uncertainty so students can justify instrument choice rather than guessing.",
+    visual_callouts: [
+      "Choose the tool that matches the size scale of the object.",
+      "Finer divisions support smaller uncertainty.",
+      "A trustworthy report starts with a suitable tool.",
+    ],
+  },
+  F1L4: {
+    image_url: "/lesson-media/f1/f1-l4-significant-figures.svg",
+    visual_title: "Significant figures and rounding",
+    visual_caption: "The significant-figures visual keeps justified digits visible so learners stop treating the calculator display as automatically correct.",
+    visual_callouts: [
+      "Leading zeros do not count as significant figures.",
+      "Trailing zeros can matter when they show real precision.",
+      "Rounding rules depend on the reporting goal.",
+    ],
+  },
+  F1L5: {
+    image_url: "/lesson-media/f1/f1-l5-density.svg",
+    visual_title: "Density as packed mass",
+    visual_caption: "The density visual turns density into a packed-mass comparison so questions about mass, volume, and floating rest on one picture.",
+    visual_callouts: [
+      "Density compares mass with volume.",
+      "Same mass in less space means greater density.",
+      "Floating depends on density comparison, not mass alone.",
+    ],
+  },
+  F1L6: {
+    image_url: "/lesson-media/f1/f1-l6-accuracy-precision.svg",
+    visual_title: "Accuracy and precision",
+    visual_caption: "The target-board visual separates closeness to the true value from closeness among repeated readings.",
+    visual_callouts: [
+      "Accuracy is closeness to the accepted value.",
+      "Precision is closeness among repeated readings.",
+      "A pattern can be precise without being accurate.",
+    ],
+  },
+  F2L1: {
+    image_url: "/lesson-media/f2/f2-l1-distance-displacement.svg",
+    visual_title: "Distance and displacement",
+    visual_caption: "The path visual keeps route length separate from start-to-finish change so the two ideas do not collapse together.",
+    visual_callouts: [
+      "Distance totals the full route.",
+      "Displacement compares finish with start.",
+      "A round trip can have distance without displacement.",
+    ],
+  },
+  F2L2: {
+    image_url: "/lesson-media/f2/f2-l2-velocity-acceleration.svg",
+    visual_title: "Velocity change and acceleration",
+    visual_caption: "The velocity-acceleration visual shows that acceleration comes from change in velocity over time, including direction changes.",
+    visual_callouts: [
+      "Acceleration tracks velocity change, not speed alone.",
+      "Direction matters because velocity is a vector.",
+      "Zero velocity change means zero acceleration.",
+    ],
+  },
+  F2L3: {
+    image_url: "/lesson-media/f2/f2-l3-distance-time-graph.svg",
+    visual_title: "Distance-time graph",
+    visual_caption: "The distance-time graph visual links graph shape to journey story before students read slope or flat sections.",
+    visual_callouts: [
+      "Graph height shows distance at that time.",
+      "Slope shows speed on a distance-time graph.",
+      "A flat section means the object is stopped.",
+    ],
+  },
+  F2L4: {
+    image_url: "/lesson-media/f2/f2-l4-velocity-time-graph.svg",
+    visual_title: "Velocity-time graph",
+    visual_caption: "The velocity-time graph visual keeps slope and area distinct, so acceleration and displacement are not confused.",
+    visual_callouts: [
+      "Slope shows acceleration.",
+      "Area under the graph shows displacement.",
+      "Height shows velocity at that time.",
+    ],
+  },
+  F2L5: {
+    image_url: "/lesson-media/f2/f2-l5-resultant-force.svg",
+    visual_title: "Balanced and unbalanced force",
+    visual_caption: "The resultant-force visual compares balanced and unbalanced cases so students can predict motion change from the net force.",
+    visual_callouts: [
+      "Balanced forces give zero resultant force.",
+      "Unbalanced forces give a non-zero resultant force.",
+      "The resultant force decides acceleration.",
+    ],
+  },
+  F2L6: {
+    image_url: "/lesson-media/f2/f2-l6-force-mass.svg",
+    visual_title: "Force, mass, and acceleration",
+    visual_caption: "The force-mass visual keeps acceleration tied to both force and mass instead of treating it as a one-variable story.",
+    visual_callouts: [
+      "Greater force gives greater acceleration when mass stays fixed.",
+      "Greater mass gives smaller acceleration for the same force.",
+      "Force and mass must be considered together.",
+    ],
+  },
+  F3L1: {
+    image_url: "/lesson-media/f3/f3-l1-work-energy.svg",
+    visual_title: "Work as energy transfer",
+    visual_caption: "The work-energy visual makes work a transfer idea tied to force and displacement rather than to effort language.",
+    visual_callouts: [
+      "Work needs displacement in the force direction in the simple model.",
+      "A force alone does not guarantee work.",
+      "Work is energy transferred.",
+    ],
+  },
+  F3L2: {
+    image_url: "/lesson-media/f3/f3-l2-energy-stores.svg",
+    visual_title: "Energy stores",
+    visual_caption: "The energy-stores visual contrasts kinetic and gravitational potential energy before students use their equations.",
+    visual_callouts: [
+      "Kinetic energy depends on mass and speed.",
+      "Gravitational potential energy depends on mass, g, and height.",
+      "Speed has a squared effect in kinetic energy.",
+    ],
+  },
+  F3L3: {
+    image_url: "/lesson-media/f3/f3-l3-power-efficiency.svg",
+    visual_title: "Power and efficiency",
+    visual_caption: "The power-efficiency visual keeps rate and useful fraction separate so the two ideas are not merged into one score.",
+    visual_callouts: [
+      "Power is energy transferred per unit time.",
+      "Efficiency is useful output divided by input.",
+      "A machine can be powerful without being efficient.",
+    ],
+  },
+  F3L4: {
+    image_url: "/lesson-media/f3/f3-l4-momentum-collision.svg",
+    visual_title: "Momentum and collision",
+    visual_caption: "The collision visual treats momentum as a system quantity so conservation questions stay tied to the whole interaction.",
+    visual_callouts: [
+      "Momentum is mass times velocity.",
+      "Direction matters because momentum is a vector.",
+      "Conservation belongs to the total isolated system.",
+    ],
+  },
+  F3L5: {
+    image_url: "/lesson-media/f3/f3-l5-impulse-time.svg",
+    visual_title: "Impulse and stopping time",
+    visual_caption: "The impulse-time visual shows why equal momentum change over longer time means smaller average force.",
+    visual_callouts: [
+      "Impulse equals change in momentum.",
+      "Area under a force-time graph shows impulse.",
+      "Longer stopping time reduces average force for the same impulse.",
+    ],
+  },
+  F3L6: {
+    image_url: "/lesson-media/f3/f3-l6-braking-safety.svg",
+    visual_title: "Braking and safety",
+    visual_caption: "The braking-safety visual links momentum, kinetic energy, and stopping force in one road-safety story.",
+    visual_callouts: [
+      "Higher speed raises both momentum and kinetic energy.",
+      "Stopping time changes the average force.",
+      "Safety features often work by increasing stopping time.",
+    ],
+  },
+  F4L1: {
+    image_url: "/lesson-media/f4/f4-l1-charge-current.svg",
+    visual_title: "Charge and current",
+    visual_caption: "The circuit visual turns current into charge flow so students stop saying that current is used up.",
+    visual_callouts: [
+      "Current is the rate of charge flow.",
+      "Charge keeps circulating around a complete loop.",
+      "Components transfer energy without using up current.",
+    ],
+  },
+  F4L2: {
+    image_url: "/lesson-media/f4/f4-l2-potential-difference.svg",
+    visual_title: "Potential difference",
+    visual_caption: "The potential-difference visual treats voltage as energy transferred per charge rather than as just another number on the page.",
+    visual_callouts: [
+      "Voltage is energy per unit charge.",
+      "The source gives charge an energy boost.",
+      "Potential difference is not the same as current.",
+    ],
+  },
+  F4L3: {
+    image_url: "/lesson-media/f4/f4-l3-resistance-iv.svg",
+    visual_title: "Resistance and I-V behaviour",
+    visual_caption: "The I-V visual connects resistance with current response to voltage before students rely on equations alone.",
+    visual_callouts: [
+      "Resistance affects how much current flows for a given voltage.",
+      "A straight I-V line through the origin shows proportionality.",
+      "Current and resistance answer different circuit questions.",
+    ],
+  },
+  F4L4: {
+    image_url: "/lesson-media/f4/f4-l4-series-circuit.svg",
+    visual_title: "Series circuit",
+    visual_caption: "The series-circuit visual keeps current, voltage sharing, and total resistance visible in one single-route story.",
+    visual_callouts: [
+      "Current is the same around a series loop.",
+      "Voltage is shared across series components.",
+      "Adding series resistance reduces current.",
+    ],
+  },
+  F4L5: {
+    image_url: "/lesson-media/f4/f4-l5-parallel-circuit.svg",
+    visual_title: "Parallel circuit",
+    visual_caption: "The parallel-circuit visual keeps branch current and shared voltage separate across multiple routes.",
+    visual_callouts: [
+      "Voltage is the same across parallel branches.",
+      "Current splits between the branches.",
+      "Equivalent resistance changes when more branches are added.",
+    ],
+  },
+  F4L6: {
+    image_url: "/lesson-media/f4/f4-l6-power-safety.svg",
+    visual_title: "Electrical power and safety",
+    visual_caption: "The power-safety visual connects circuit power, energy transfer, and protective devices in one system story.",
+    visual_callouts: [
+      "Power is the rate of electrical energy transfer.",
+      "Safety devices respond to dangerous current or power conditions.",
+      "Power calculations belong to a wider safety picture.",
+    ],
+  },
 };
 
 function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined {
@@ -170,15 +404,15 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
 
 function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined {
   const id = text(item.id).toUpperCase();
-  const m2Visual = m2QuestionVisualMeta(id);
+  const normalizedId = id.replace(/-/g, "");
+  const m2Visual = m2QuestionVisualMeta(normalizedId);
   if (m2Visual) return m2Visual;
-  const m3Visual = m3QuestionVisualMeta(id);
+  const m3Visual = m3QuestionVisualMeta(normalizedId);
   if (m3Visual) return m3Visual;
-  const match = id.match(/^(M1L[1-6])_([DCT]\d+)$/);
-  if (!match) return undefined;
-  const lessonKey = match[1];
-  const suffix = match[2];
-  return M1_VISUAL_SUFFIXES[lessonKey]?.includes(suffix) ? m1QuestionVisualMeta(lessonKey) : undefined;
+  const m1Match = normalizedId.match(/^(M1L[1-6])_[A-Z]+\d+$/);
+  if (m1Match) return m1QuestionVisualMeta(m1Match[1]);
+  const foundationMatch = normalizedId.match(/^(F[1-4]L[1-6])_[A-Z]+\d+$/);
+  return foundationMatch ? FOUNDATION_VISUAL_META[foundationMatch[1]] : undefined;
 }
 
 type FallbackAnswerMeta = {
@@ -2866,7 +3100,6 @@ function hasUsableMasteryAnswer(item: UnknownRecord): boolean {
 }
 
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
-  const code = lessonCode(lesson);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -5842,6 +6075,7 @@ function scaffoldWorkedExampleSections(workedExample: UnknownRecord): UnknownRec
 }
 
 function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
+  const code = lessonCode(lesson);
   const scaffoldSupport = asRecord(asRecord(lesson.authoring_contract).scaffold_support);
   if (Object.keys(scaffoldSupport).length === 0) return [];
 
@@ -5871,7 +6105,9 @@ function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, ana
       check_for_understanding: text(analogyBridge.check_for_understanding),
     },
     ...extraSections,
+    ...(code.startsWith("M3_") ? m3SupplementalScaffoldSections(code) : []),
     ...scaffoldWorkedExampleSections(workedExample),
+    ...(code.startsWith("M3_") ? m3SupplementalWorkedExampleSections(code) : []),
   ];
 }
 
@@ -5905,7 +6141,9 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       { heading: "Common trap", body: f2Copy.commonTrap },
       { heading: "Analogy", body: analogyCopy.body, analogy: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer.", check_for_understanding: analogyCopy.checkForUnderstanding },
       ...scaffoldExtendedExtraSections(code),
+      ...(code.startsWith("M3_") ? m3SupplementalScaffoldSections(code) : []),
       ...scaffoldWorkedExampleSections(workedExample),
+      ...(code.startsWith("M3_") ? m3SupplementalWorkedExampleSections(code) : []),
     ];
   }
   switch (code) {
