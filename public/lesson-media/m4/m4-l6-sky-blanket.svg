@@ -18,7 +18,7 @@
   <circle cx="1046" cy="494" r="16" fill="#16A34A"/>
   <line x1="1046" y1="390" x2="1046" y2="494" stroke="#16A34A" stroke-width="6" stroke-dasharray="10 10"/>
   <text x="756" y="284" fill="#166534" font-family="Arial, sans-serif" font-size="38" font-weight="700">Open liquid patch</text>
-  <text x="756" y="548" fill="#0F172A" font-family="Arial, sans-serif" font-size="32">Total pressure = p_atm + rhogh</text>
+  <text x="756" y="548" fill="#0F172A" font-family="Arial, sans-serif" font-size="32">Total pressure = p_atm + ρgh</text>
 
   <rect x="146" y="622" width="986" height="46" rx="20" fill="#E2E8F0"/>
   <text x="186" y="654" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="30" font-weight="700">Lower altitude -> more air above -> more atmospheric pressure. Open-liquid pressure adds air and liquid together.</text>

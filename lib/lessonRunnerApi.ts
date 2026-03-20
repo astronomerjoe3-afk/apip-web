@@ -875,6 +875,7 @@ function normalizePromptKey(value: unknown): string {
   return text(value)
     .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
     .replace(/[Δδ]/g, " delta ")
+    .replace(/[ρΡ]/g, " rho ")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/[^a-z0-9]+/g, " ")
@@ -886,6 +887,7 @@ function normalizeOpenAnswer(value: unknown): string {
   return text(value)
     .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
     .replace(/[Δδ]/g, " delta ")
+    .replace(/[ρΡ]/g, " rho ")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/,/g, "")
@@ -3089,15 +3091,27 @@ async function loadResources(moduleId: string, lessonId: string): Promise<Lesson
   return { runner: runnerResponse, lesson: asRecord(lessonResponse.lesson) };
 }
 
+function normalizeRenderedPhysicsText(value: string): string {
+  return value
+    .replace(/\bp_total\s*=\s*p_atm\s*\+\s*rhogh\b/gi, "p_total = p_atm + ρgh")
+    .replace(/\bp_atm\s*\+\s*rhogh\b/gi, "p_atm + ρgh")
+    .replace(/\bp\s*=\s*rhogh\b/gi, "p = ρgh")
+    .replace(/\bh\s*=\s*p\s*\/\s*rho\s*g\b/gi, "h = p / ρg")
+    .replace(/\brho\s*g\s*and\s*h\b/gi, "ρ, g, and h")
+    .replace(/\brho\s*g\b/gi, "ρg")
+    .replace(/\brhogh\b/gi, "ρgh")
+    .replace(/\brho\b/gi, "ρ");
+}
+
 function question(item: UnknownRecord, seed = ""): UnknownRecord {
-  const choices = asList(item.choices).map((choice) => text(choice));
+  const choices = asList(item.choices).map((choice) => normalizeRenderedPhysicsText(text(choice)));
   const options = seed
     ? shuffle(choices.map((label, index) => ({ value: optionValue(index), label })), seed)
     : choices.map((label, index) => ({ value: optionValue(index), label }));
   const visual = questionVisualMeta(item);
   return {
     id: text(item.id),
-    prompt: text(item.prompt),
+    prompt: normalizeRenderedPhysicsText(text(item.prompt)),
     type: choices.length > 0 ? "multiple_choice" : "short_answer",
     options,
     ...(visual || {}),
@@ -3247,34 +3261,34 @@ function resolvedAnswerIndex(item: UnknownRecord): number {
 function resolvedCorrectAnswer(item: UnknownRecord): string {
   const choices = asList(item.choices).map((choice) => text(choice));
   const correctIndex = resolvedAnswerIndex(item);
-  if (correctIndex >= 0 && correctIndex < choices.length) return choices[correctIndex];
+  if (correctIndex >= 0 && correctIndex < choices.length) return normalizeRenderedPhysicsText(choices[correctIndex]);
 
   const explicitCorrect = text(item.correct_answer || item.correctAnswer).trim();
-  if (explicitCorrect) return explicitCorrect;
+  if (explicitCorrect) return normalizeRenderedPhysicsText(explicitCorrect);
 
   const accepted = shortAnswerAccepted(item);
   if (accepted.length > 0) {
-    return accepted.find((entry) => /[A-Za-z]/.test(entry)) || accepted[0];
+    return normalizeRenderedPhysicsText(accepted.find((entry) => /[A-Za-z]/.test(entry)) || accepted[0]);
   }
 
-  return fallbackMeta(item)?.correctAnswer || "Review the lesson idea and try again.";
+  return normalizeRenderedPhysicsText(fallbackMeta(item)?.correctAnswer || "Review the lesson idea and try again.");
 }
 
 function resolvedExplanation(item: UnknownRecord, answerIndex: number): string {
   const feedback = asList(item.feedback).map((entry) => text(entry));
   const answerFeedback = answerIndex >= 0 && answerIndex < feedback.length ? feedback[answerIndex] : "";
   if (hasMeaningfulFeedback(answerFeedback)) {
-    return answerFeedback;
+    return normalizeRenderedPhysicsText(answerFeedback);
   }
 
   const hint = text(item.hint);
   if (hasMeaningfulFeedback(hint)) {
-    return hint;
+    return normalizeRenderedPhysicsText(hint);
   }
 
   const metaExplanation = fallbackMeta(item)?.explanation;
   if (hasMeaningfulFeedback(metaExplanation || "")) {
-    return metaExplanation || "";
+    return normalizeRenderedPhysicsText(metaExplanation || "");
   }
 
   return "Review the lesson idea and try again.";
@@ -3339,7 +3353,7 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
 }
 
 function grade(item: UnknownRecord, answer: unknown, title: string): UnknownRecord {
-  const prompt = text(item.prompt);
+  const prompt = normalizeRenderedPhysicsText(text(item.prompt));
   const meta = fallbackMeta(item);
   const choices = asList(item.choices).map((choice) => text(choice));
   const answerIndex = valueIndex(answer);
@@ -3359,8 +3373,8 @@ function grade(item: UnknownRecord, answer: unknown, title: string): UnknownReco
     learner_answer: choices.length > 0 ? choiceLabel(item, answer) : text(answer).trim() || null,
     is_correct: isCorrect,
     correct_answer: resolvedCorrectAnswer(item),
-    explanation: hasMeaningfulFeedback(explanation) ? explanation : explanationFallback,
-    teaching_focus: focus,
+    explanation: normalizeRenderedPhysicsText(hasMeaningfulFeedback(explanation) ? explanation : explanationFallback),
+    teaching_focus: normalizeRenderedPhysicsText(focus),
     misconception_tag: isCorrect ? undefined : resolvedMisconceptionTag(item, prompt),
   };
 }

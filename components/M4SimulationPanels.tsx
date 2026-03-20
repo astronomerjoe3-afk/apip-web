@@ -313,7 +313,7 @@ export default function M4SimulationPanels({
         {metricCard("Density", `${formatSimulationNumber(density, 0)} kg/m^3`, "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("World Pull", `${formatSimulationNumber(g, 1)} N/kg`, "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Pressure difference", `${formatSimulationNumber(Math.abs(pressureA - pressureB), 0)} Pa`, "border-rose-200 bg-rose-50 text-rose-900")}
-        {metricCard("Hydrostatic rule", "p = rhogh", "border-slate-200 bg-slate-50 text-slate-900")}
+        {metricCard("Hydrostatic rule", "p = ρgh", "border-slate-200 bg-slate-50 text-slate-900")}
       </>,
       [
         "Deeper patches carry a taller layer stack above them, so pressure rises with depth.",
@@ -513,7 +513,7 @@ export default function M4SimulationPanels({
         <text x="46" y="50" fill="#1d4ed8" fontSize="18" fontWeight="700">Sky deck</text>
         <text x="380" y="50" fill="#1d4ed8" fontSize="18" fontWeight="700">Open liquid</text>
         <text x="42" y="216" fill="#475569" fontSize="15">Lower altitude means more sky blanket.</text>
-        <text x="378" y="226" fill="#475569" fontSize="15">Total pressure = p_atm + rhogh</text>
+        <text x="378" y="226" fill="#475569" fontSize="15">Total pressure = p_atm + ρgh</text>
       </svg>,
       <>
         {metricCard("Atmospheric pressure here", `${formatSimulationNumber(atmospheric, 0)} Pa`, "border-sky-200 bg-sky-50 text-sky-900")}
@@ -521,7 +521,7 @@ export default function M4SimulationPanels({
         {metricCard("Total pressure", `${formatSimulationNumber(totalPressure, 0)} Pa`, "border-amber-200 bg-amber-50 text-amber-900")}
         {metricCard("Altitude", `${formatSimulationNumber(altitude, 0)} m`, "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Liquid depth", `${formatSimulationNumber(liquidDepth, 1)} m`, "border-rose-200 bg-rose-50 text-rose-900")}
-        {metricCard("Total-pressure rule", "p_total = p_atm + rhogh", "border-slate-200 bg-slate-50 text-slate-900")}
+        {metricCard("Total-pressure rule", "p_total = p_atm + ρgh", "border-slate-200 bg-slate-50 text-slate-900")}
       </>,
       [
         "Air is also a fluid, so atmospheric pressure belongs in the same Patch-Dome world as liquid pressure.",

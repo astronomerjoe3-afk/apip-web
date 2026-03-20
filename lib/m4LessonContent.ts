@@ -76,7 +76,7 @@ const M4_VISUAL_META: Record<string, M4QuestionVisualMeta> = {
     visual_caption: "Air also loads patches, and open-liquid total pressure adds atmospheric pressure to the liquid contribution.",
     visual_callouts: [
       "Lower altitude means more air above and more atmospheric pressure.",
-      "Open-surface total pressure is p_atm + rhogh.",
+      "Open-surface total pressure is p_atm + ρgh.",
       "Air pressure stays in the same Patch-Dome world as liquid pressure.",
     ],
   },
@@ -185,7 +185,7 @@ const M4_SIMULATION_COPY: Record<string, M4SimulationCopy> = {
     ],
     watchFor: [
       "Lower altitude means more air above and more atmospheric pressure.",
-      "rhogh is the liquid contribution only.",
+      "ρgh is the liquid contribution only.",
       "Open-surface total pressure is atmosphere plus liquid stack.",
     ],
     tryFirst: "Start at 100000 Pa atmospheric pressure and add 3 m of water. The liquid adds 30000 Pa, so the total becomes 130000 Pa.",
@@ -233,7 +233,7 @@ export function m4ScaffoldFocusExtras(code: string): string[] {
     case "M4_L6":
       return [
         "Atmospheric pressure comes from the weight of the air above.",
-        "Open-surface total pressure adds atmospheric pressure to rhogh.",
+        "Open-surface total pressure adds atmospheric pressure to ρgh.",
         "Altitude changes the sky blanket while depth changes the liquid stack.",
       ];
     default:
@@ -260,7 +260,7 @@ export function m4ScaffoldCoreBullets(code: string): string[] {
       return [
         "Liquid pressure increases with depth.",
         "Liquid pressure also depends on density and g.",
-        "Use p = rhogh for a resting liquid of roughly constant density.",
+        "Use p = ρgh for a resting liquid of roughly constant density.",
       ];
     case "M4_L4":
       return [
@@ -278,7 +278,7 @@ export function m4ScaffoldCoreBullets(code: string): string[] {
       return [
         "Atmospheric pressure comes from the weight of the air above.",
         "Atmospheric pressure decreases with altitude.",
-        "Below an open liquid surface, total pressure is p_atm + rhogh.",
+        "Below an open liquid surface, total pressure is p_atm + ρgh.",
       ];
     default:
       return [];

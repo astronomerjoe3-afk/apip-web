@@ -2,10 +2,12 @@
   <rect width="1200" height="760" rx="40" fill="#F8FAFF"/>
   <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#DBE5F4" stroke-width="4"/>
   <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
-    Same Pulse Level, different whole-system totals
+    <tspan x="72" dy="0">Same Pulse Level,</tspan>
+    <tspan x="72" dy="38">different whole-system totals</tspan>
   </text>
-  <text x="72" y="144" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    Temperature tracks the average jiggle. It does not automatically tell you the total energy in the plaza.
+  <text x="72" y="170" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <tspan x="72" dy="0">Temperature tracks the average jiggle.</tspan>
+    <tspan x="72" dy="28">It does not automatically tell you the total energy in the plaza.</tspan>
   </text>
 
   <rect x="84" y="196" width="440" height="402" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
@@ -54,8 +56,9 @@
   <text x="724" y="574" fill="#15803D" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Total motion proxy</text>
   <rect x="724" y="588" width="286" height="24" rx="12" fill="#22C55E"/>
 
-  <rect x="98" y="646" width="1000" height="54" rx="22" fill="#EEF4FF"/>
-  <text x="126" y="682" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Equal temperature can still leave different internal energies when the systems are different sizes.
+  <rect x="98" y="638" width="1000" height="72" rx="22" fill="#EEF4FF"/>
+  <text x="126" y="672" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <tspan x="126" dy="0">Equal temperature can still leave different internal energies</tspan>
+    <tspan x="126" dy="26">when the systems are different sizes.</tspan>
   </text>
 </svg>

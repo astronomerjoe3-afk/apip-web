@@ -2,10 +2,12 @@
   <rect width="1200" height="760" rx="40" fill="#F8FAFC"/>
   <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D8E3F2" stroke-width="4"/>
   <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
-    Lock Mode and Slide Mode both stay close-packed
+    <tspan x="72" dy="0">Lock Mode and Slide Mode both stay</tspan>
+    <tspan x="72" dy="38">close-packed</tspan>
   </text>
-  <text x="72" y="144" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    Solids keep fixed positions. Liquids keep closeness but let neighbors swap.
+  <text x="72" y="170" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <tspan x="72" dy="0">Solids keep fixed positions.</tspan>
+    <tspan x="72" dy="28">Liquids keep closeness but let neighbors swap.</tspan>
   </text>
 
   <rect x="76" y="192" width="452" height="392" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
@@ -71,8 +73,9 @@
     Changing neighbors
   </text>
 
-  <rect x="98" y="624" width="1000" height="72" rx="24" fill="#EEF5FF"/>
-  <text x="128" y="670" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">
-    Liquid flow comes from mobility, not from huge gas-like gaps.
+  <rect x="98" y="616" width="1000" height="86" rx="24" fill="#EEF5FF"/>
+  <text x="128" y="656" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    <tspan x="128" dy="0">Liquid flow comes from mobility,</tspan>
+    <tspan x="128" dy="28">not from huge gas-like gaps.</tspan>
   </text>
 </svg>

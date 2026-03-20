@@ -5,7 +5,8 @@
     Brownian motion reveals unseen collisions
   </text>
   <text x="72" y="146" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    The large Wander Pebble jitters because surrounding gas particles hit it unevenly from changing directions.
+    <tspan x="72" dy="0">The large Wander Pebble jitters because surrounding gas particles</tspan>
+    <tspan x="72" dy="28">hit it unevenly from changing directions.</tspan>
   </text>
 
   <rect x="70" y="192" width="1060" height="420" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>

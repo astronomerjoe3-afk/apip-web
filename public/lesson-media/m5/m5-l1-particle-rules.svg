@@ -5,7 +5,8 @@
     Heating changes motion, not particle size
   </text>
   <text x="72" y="146" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    Pulse-Plaza rule: the micro-pucks stay the same size while motion and spacing patterns change.
+    <tspan x="72" dy="0">Pulse-Plaza rule: the micro-pucks stay the same size</tspan>
+    <tspan x="72" dy="28">while motion and spacing patterns change.</tspan>
   </text>
 
   <rect x="74" y="196" width="452" height="354" rx="28" fill="#E0F2FE" stroke="#38BDF8" stroke-width="5"/>
@@ -72,11 +73,12 @@
     <path d="M924 494L934 472L944 494"/>
   </g>
 
-  <rect x="96" y="582" width="1008" height="106" rx="24" fill="#EEF4FF"/>
-  <text x="128" y="626" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">
+  <rect x="96" y="570" width="1008" height="124" rx="24" fill="#EEF4FF"/>
+  <text x="128" y="614" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">
     Particle-size rule
   </text>
-  <text x="128" y="668" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="24">
-    The circles keep the same diameter in both panels. The only changes are how lively they are and how they are arranged.
+  <text x="128" y="654" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="24">
+    <tspan x="128" dy="0">The circles keep the same diameter in both panels.</tspan>
+    <tspan x="128" dy="30">Only the motion level and arrangement pattern change.</tspan>
   </text>
 </svg>

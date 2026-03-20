@@ -5,7 +5,8 @@
     Plaza Store = motion part + link part
   </text>
   <text x="72" y="144" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    Internal energy is the whole-system total, so it counts both particle motion and particle arrangement.
+    <tspan x="72" dy="0">Internal energy is the whole-system total,</tspan>
+    <tspan x="72" dy="28">so it counts both particle motion and particle arrangement.</tspan>
   </text>
 
   <rect x="88" y="204" width="366" height="386" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
@@ -21,7 +22,10 @@
   <rect x="126" y="396" width="196" height="34" rx="17" fill="#60A5FA"/>
   <rect x="126" y="448" width="228" height="34" rx="17" fill="#93C5FD"/>
 
-  <text x="526" y="314" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">How stretched or loosened the links are</text>
+  <text x="526" y="314" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="526" dy="0">How stretched or loosened</tspan>
+    <tspan x="526" dy="24">the links are</tspan>
+  </text>
   <rect x="526" y="344" width="156" height="34" rx="17" fill="#22C55E"/>
   <rect x="526" y="396" width="224" height="34" rx="17" fill="#4ADE80"/>
   <rect x="526" y="448" width="270" height="34" rx="17" fill="#86EFAC"/>
@@ -35,8 +39,9 @@
   <path d="M830 478H880" stroke="#7E22CE" stroke-width="8" stroke-linecap="round"/>
   <path d="M860 452L888 478L860 504" stroke="#7E22CE" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <rect x="110" y="628" width="982" height="58" rx="22" fill="#EEF4FF"/>
-  <text x="136" y="665" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Same temperature does not force the same Plaza Store because arrangement can change the total too.
+  <rect x="110" y="620" width="982" height="74" rx="22" fill="#EEF4FF"/>
+  <text x="136" y="654" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <tspan x="136" dy="0">Same temperature does not force the same Plaza Store</tspan>
+    <tspan x="136" dy="26">because arrangement can change the total too.</tspan>
   </text>
 </svg>
