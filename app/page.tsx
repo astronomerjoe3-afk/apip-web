@@ -85,7 +85,7 @@ export default function HomePage() {
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>Interactive physics that feels like progress</p>
-            <h1 className={styles.heroTitle}>Make every module lesson feel like a launch students want to try.</h1>
+            <h1 className={styles.heroTitle}>Make every module lesson feel like a mission students want to start.</h1>
             <p className={styles.heroText}>
               Cognispark turns physics into guided missions with visuals, simulations, instant feedback, and a clear route from foundational understanding into higher-level module challenges.
             </p>
