@@ -1,0 +1,27 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="32" fill="#F8FBFF"/>
+  <rect x="28" y="28" width="904" height="484" rx="28" fill="#FFFFFF" stroke="#D7E6F9" stroke-width="2"/>
+  <text x="60" y="88" fill="#13213A" font-family="Arial, sans-serif" font-size="34" font-weight="700">Transfer Rate and Useful Yield are different checks</text>
+  <text x="60" y="126" fill="#4B617C" font-family="Arial, sans-serif" font-size="22">Power compares energy with time. Efficiency compares useful output with total input.</text>
+
+  <rect x="86" y="174" width="338" height="232" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <text x="120" y="220" fill="#1D4ED8" font-family="Arial, sans-serif" font-size="30" font-weight="700">Machine A</text>
+  <rect x="132" y="270" width="72" height="92" rx="18" fill="#2563EB"/>
+  <text x="116" y="390" fill="#334155" font-family="Arial, sans-serif" font-size="22">200 W</text>
+  <rect x="258" y="252" width="120" height="40" rx="18" fill="#FDE68A"/>
+  <text x="282" y="278" fill="#92400E" font-family="Arial, sans-serif" font-size="20" font-weight="700">600 J useful</text>
+  <rect x="258" y="316" width="120" height="40" rx="18" fill="#FECACA"/>
+  <text x="300" y="342" fill="#B91C1C" font-family="Arial, sans-serif" font-size="20" font-weight="700">600 J leak</text>
+
+  <rect x="534" y="174" width="338" height="232" rx="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="4"/>
+  <text x="568" y="220" fill="#166534" font-family="Arial, sans-serif" font-size="30" font-weight="700">Machine B</text>
+  <rect x="580" y="234" width="72" height="128" rx="18" fill="#16A34A"/>
+  <text x="562" y="390" fill="#334155" font-family="Arial, sans-serif" font-size="22">400 W</text>
+  <rect x="706" y="252" width="120" height="40" rx="18" fill="#FDE68A"/>
+  <text x="730" y="278" fill="#92400E" font-family="Arial, sans-serif" font-size="20" font-weight="700">600 J useful</text>
+  <rect x="706" y="316" width="120" height="40" rx="18" fill="#FECACA"/>
+  <text x="748" y="342" fill="#B91C1C" font-family="Arial, sans-serif" font-size="20" font-weight="700">600 J leak</text>
+
+  <rect x="154" y="448" width="652" height="40" rx="18" fill="#EEF5FF"/>
+  <text x="214" y="474" fill="#1E3A8A" font-family="Arial, sans-serif" font-size="22" font-weight="700">Same useful fraction, different time -> different power but same efficiency</text>
+</svg>

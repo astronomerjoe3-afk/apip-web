@@ -2,6 +2,7 @@
 
 import { apipGet, apipPost } from "./apipApi";
 import { m2ContrastCodes, m2GeneratedConceptGateItems, m2GeneratedDiagnosticItems, m2GeneratedMasteryItems, m2PaddingPrompt, m2QuestionVisualMeta, m2ReflectionVisualCheck, m2ScaffoldCoreBullets, m2ScaffoldFocusExtras, m2ScaffoldMediaCards, m2SimulationCopy } from "./m2LessonContent";
+import { m3ContrastCodes, m3GeneratedConceptGateItems, m3GeneratedDiagnosticItems, m3GeneratedMasteryItems, m3PaddingPrompt, m3QuestionVisualMeta, m3ReflectionVisualCheck, m3ScaffoldCoreBullets, m3ScaffoldFocusExtras, m3ScaffoldMediaCards, m3SimulationCopy } from "./m3LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
 type JsonPrimitive = string | number | boolean | null;
@@ -68,14 +69,14 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6"];
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_");
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_");
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_");
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_");
 }
 
 type QuestionVisualMeta = {
@@ -171,6 +172,8 @@ function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined
   const id = text(item.id).toUpperCase();
   const m2Visual = m2QuestionVisualMeta(id);
   if (m2Visual) return m2Visual;
+  const m3Visual = m3QuestionVisualMeta(id);
+  if (m3Visual) return m3Visual;
   const match = id.match(/^(M1L[1-6])_([DCT]\d+)$/);
   if (!match) return undefined;
   const lessonKey = match[1];
@@ -1622,6 +1625,7 @@ function itemsFrom(lesson: UnknownRecord, key: string): UnknownRecord[] {
 function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M2_")) return m2GeneratedDiagnosticItems(code);
+  if (code.startsWith("M3_")) return m3GeneratedDiagnosticItems(code);
   switch (code) {
     case "F2_L1":
       return [
@@ -2180,6 +2184,7 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M2_")) return m2GeneratedMasteryItems(code);
+  if (code.startsWith("M3_")) return m3GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
@@ -2284,6 +2289,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
 function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M2_")) return m2GeneratedConceptGateItems(code);
+  if (code.startsWith("M3_")) return m3GeneratedConceptGateItems(code);
   switch (code) {
     case "F1_L1":
       return [
@@ -2796,6 +2802,13 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
       case "M2_L5":
       case "M2_L6":
         return m2ContrastCodes(code);
+      case "M3_L1":
+      case "M3_L2":
+      case "M3_L3":
+      case "M3_L4":
+      case "M3_L5":
+      case "M3_L6":
+        return m3ContrastCodes(code);
       default:
         return [];
     }
@@ -2810,6 +2823,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     if (code === "F4_L6") return "Which option is the clearest match for this power and safety lesson?";
     if (code.startsWith("M1_")) return index % 2 === 0 ? "Which statement best matches this motion-graph lesson point?" : "Choose the option that keeps the motion representation and its meaning aligned.";
     if (code.startsWith("M2_")) return m2PaddingPrompt(index);
+    if (code.startsWith("M3_")) return m3PaddingPrompt(index);
     if (code.startsWith("F3_")) return "Which option directly answers this lesson point?";
     if (code.startsWith("F2_")) return "Which statement best fits this lesson point?";
     return index % 2 === 0 ? "Which statement best fits this lesson point?" : "Choose the statement that directly answers this lesson point.";
@@ -2924,6 +2938,8 @@ function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number, st
 function simulationStageTitle(code: string): string {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.title;
+  const m3 = m3SimulationCopy(code);
+  if (m3) return m3.title;
   switch (code) {
     case "F1_L1": return "Unit and prefix explorer";
     case "F1_L2": return "Vector direction explorer";
@@ -2962,6 +2978,8 @@ function simulationStageTitle(code: string): string {
 function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): string {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.instructions;
+  const m3 = m3SimulationCopy(code);
+  if (m3) return m3.instructions;
   switch (code) {
     case "F1_L1": return "Hold the physical quantity fixed while you swap unit size. Compare what happens when the same length is written in km, m, cm, or mm, and decide which unit keeps the report readable without changing the quantity itself.";
     case "F1_L2": return "Use the route board and arrow panel together so you keep route length separate from start-to-finish change. Then hold either magnitude or direction fixed to see what really changes a vector.";
@@ -3000,6 +3018,8 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
 function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): string {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.taskPrompt;
+  const m3 = m3SimulationCopy(code);
+  if (m3) return m3.taskPrompt;
   switch (code) {
     case "F1_L1": return "Use one classroom-sized object and one tiny object, then report each in a sensible unit. Explain why the number changes when the unit changes even though the physical quantity does not.";
     case "F1_L2": return "Create one journey where the distance is large but the displacement is small, then rotate one arrow without changing its length and explain what changed in the vector description.";
@@ -3038,6 +3058,8 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
 function simulationStageExploreSteps(code: string): string[] {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.exploreSteps;
+  const m3 = m3SimulationCopy(code);
+  if (m3) return m3.exploreSteps;
   switch (code) {
     case "F1_L1":
       return [
@@ -3227,6 +3249,8 @@ function simulationStageExploreSteps(code: string): string[] {
 function simulationStageWatchFor(code: string): string[] {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.watchFor;
+  const m3 = m3SimulationCopy(code);
+  if (m3) return m3.watchFor;
   switch (code) {
     case "F1_L1":
       return [
@@ -3415,6 +3439,8 @@ function simulationStageWatchFor(code: string): string[] {
 function simulationStageTryFirst(code: string): string | undefined {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.tryFirst;
+  const m3 = m3SimulationCopy(code);
+  if (m3) return m3.tryFirst;
   switch (code) {
     case "F1_L1":
       return "Try 2.5 m first. Rewrite it as cm and then as mm. The physical length stays the same, but the number grows because the unit chunks got smaller.";
@@ -3483,6 +3509,8 @@ function simulationStageTryFirst(code: string): string | undefined {
 function simulationStageTakeaway(code: string): string | undefined {
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.takeaway;
+  const m3 = m3SimulationCopy(code);
+  if (m3) return m3.takeaway;
   switch (code) {
     case "F1_L1":
       return "Units are not decorations; they are part of the measurement, and changing the unit size changes the number without changing the physical quantity.";
@@ -3561,6 +3589,8 @@ function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Pro
 function scaffoldFocusExtras(code: string): string[] {
   const m2 = m2ScaffoldFocusExtras(code);
   if (m2.length > 0) return m2;
+  const m3 = m3ScaffoldFocusExtras(code);
+  if (m3.length > 0) return m3;
   switch (code) {
     case "F1_L1":
       return [
@@ -3782,6 +3812,8 @@ function scaffoldFocusExtras(code: string): string[] {
 function scaffoldCoreBullets(code: string): string[] {
   const m2 = m2ScaffoldCoreBullets(code);
   if (m2.length > 0) return m2;
+  const m3 = m3ScaffoldCoreBullets(code);
+  if (m3.length > 0) return m3;
   switch (code) {
     case "F1_L1":
       return [
@@ -4094,6 +4126,186 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
 }
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const code = lessonCode(lesson);
+  if (code.startsWith("M3_")) {
+    switch (code) {
+      case "M3_L1":
+        return {
+          body: "Start with the ledger before any formula. The lesson is about where the energy goes, not about memorizing a symbol first.",
+          worked_example: {
+            prompt: "A launcher inputs 320 J into the pod. The useful store gain is 240 J. How much energy goes into the Leak Trail, and why must that answer follow?",
+            steps: [
+              "Write the ledger statement first: input energy = useful gain + leak trail.",
+              "Substitute the known values: 320 J = 240 J + leak trail.",
+              "Solve the missing part of the ledger by subtraction.",
+            ],
+            answer: "80 J goes into the Leak Trail.",
+            answer_reason: "The ledger must balance, so the 80 J difference between the 320 J input and the 240 J useful gain has to appear as Leak Trail rather than disappearing.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the same ledger logic but moves the useful part into two stores instead of one.",
+              worked_example: {
+                prompt: "A mission inputs 500 J. Of the useful 400 J, 250 J becomes Height Store and the rest becomes Motion Store. How much Motion Store is gained?",
+                steps: [
+                  "Notice that the useful total is already known as 400 J.",
+                  "Subtract the Height Store part from that useful total.",
+                  "Keep the interpretation visible: the remainder is still useful store, but now in Motion Store.",
+                ],
+                answer: "150 J of Motion Store is gained.",
+                answer_reason: "The useful total is 400 J, and after 250 J is assigned to Height Store, the remaining 150 J must be Motion Store.",
+              },
+            },
+          ],
+        };
+      case "M3_L2":
+        return {
+          body: "Height Store is a three-factor story, so the reasoning should keep load, World Grip, and deck level visible together.",
+          worked_example: {
+            prompt: "A 6 kg pod is raised 5 m on a world where g = 10 N/kg. Find the Height Store and explain why the answer depends on all three numbers.",
+            steps: [
+              "Choose the Height Store relation: E_p = mgh.",
+              "Substitute the three physical factors: E_p = 6 x 10 x 5.",
+              "Multiply to find the store amount, then state what each factor contributed conceptually.",
+            ],
+            answer: "The Height Store is 300 J.",
+            answer_reason: "The answer is 300 J because gravitational potential energy depends on load, World Grip, and deck level together; if any one of those three factors changed, the store would change as well.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up uses the same idea in reverse so students treat the formula as a relationship, not as one-way substitution.",
+              worked_example: {
+                prompt: "A pod gains 240 J of Height Store when lifted 6 m on a world where g = 10 N/kg. What is the pod's mass?",
+                steps: [
+                  "Start from E_p = mgh.",
+                  "Rearrange to m = E_p / (gh).",
+                  "Substitute 240 / (10 x 6).",
+                ],
+                answer: "The pod's mass is 4 kg.",
+                answer_reason: "240 J divided by 60 gives 4 kg, so the known store, height, and World Grip together determine the mass.",
+              },
+            },
+          ],
+        };
+      case "M3_L3":
+        return {
+          body: "Motion Store is where proportional reasoning matters. The worked example should show why speed has the stronger effect.",
+          worked_example: {
+            prompt: "A 2 kg pod moves at 8 m/s. Find its Motion Store, then explain why this is four times the Motion Store of the same pod at 4 m/s.",
+            steps: [
+              "Use the Motion Store relation: E_k = 0.5mv^2.",
+              "Substitute the current values: 0.5 x 2 x 8^2.",
+              "Compare that with the same mass at 4 m/s: 0.5 x 2 x 4^2.",
+            ],
+            answer: "The pod has 64 J of Motion Store, which is four times the 16 J at 4 m/s.",
+            answer_reason: "The store quadruples because speed is squared: doubling speed multiplies v^2 by four even though the mass stays the same.",
+          },
+          extra_examples: [
+            {
+              body: "The second example uses inverse reasoning to keep the relationship flexible.",
+              worked_example: {
+                prompt: "A 4 kg pod has 200 J of Motion Store. What speed does it have?",
+                steps: [
+                  "Begin with E_k = 0.5mv^2.",
+                  "Substitute 200 = 0.5 x 4 x v^2, so 200 = 2v^2.",
+                  "Solve v^2 = 100 and then take the positive speed magnitude.",
+                ],
+                answer: "The speed is 10 m/s.",
+                answer_reason: "The algebra gives v^2 = 100, so the pod's speed magnitude is 10 m/s.",
+              },
+            },
+          ],
+        };
+      case "M3_L4":
+        return {
+          body: "The lesson should make work feel like a hand-off first and a formula second.",
+          worked_example: {
+            prompt: "A 15 N push moves the pod 4 m in the same direction, and 12 J leaks away during the hand-off. How much useful store gain remains?",
+            steps: [
+              "Use the simple aligned-force work relation: W = Fd = 15 x 4 = 60 J input hand-off.",
+              "Write the ledger for the hand-off: input work = useful gain + leak.",
+              "Subtract the leak from the total hand-off.",
+            ],
+            answer: "48 J of useful store gain remains.",
+            answer_reason: "The push delivers 60 J of work, and after 12 J leaks away, 48 J remains as useful store gain.",
+          },
+          extra_examples: [
+            {
+              body: "This contrast case stops students from turning work into effort language.",
+              worked_example: {
+                prompt: "A learner pushes hard on a wall for several seconds, but the wall does not move. In the lesson's simple model, how much work is done on the wall?",
+                steps: [
+                  "Ask whether there is displacement in the force direction.",
+                  "Notice that the wall does not move, so the displacement is zero.",
+                  "Use the simple aligned-force condition to decide the work.",
+                ],
+                answer: "0 J of work is done on the wall in the simple model.",
+                answer_reason: "In the simple model, work needs displacement in the force direction. With no displacement, there is no hand-off to the wall.",
+              },
+            },
+          ],
+        };
+      case "M3_L5":
+        return {
+          body: "Students need one solved example that keeps rate and yield separate all the way through.",
+          worked_example: {
+            prompt: "A machine transfers 1200 J in 4 s and delivers 720 J of useful output. Find the power and efficiency, then explain why the two answers are not the same kind of quantity.",
+            steps: [
+              "Find Transfer Rate first: P = E / t = 1200 / 4.",
+              "Then find Useful Yield: efficiency = useful output / total input x 100%.",
+              "State each result with its own meaning instead of blending them together.",
+            ],
+            answer: "The power is 300 W and the efficiency is 60%.",
+            answer_reason: "300 W tells how quickly the 1200 J is transferred, while 60% tells what fraction of the 1200 J became useful. One is a rate and the other is a fraction.",
+          },
+          extra_examples: [
+            {
+              body: "The second example shows that same efficiency does not force same power.",
+              worked_example: {
+                prompt: "Two machines are both 50% efficient. Each transfers 1000 J, but Machine A takes 5 s and Machine B takes 2 s. Which is more powerful?",
+                steps: [
+                  "Notice that the useful fraction matches, so efficiency is not the deciding feature.",
+                  "Compute power from total transfer and time for each machine.",
+                  "Compare the two rates directly.",
+                ],
+                answer: "Machine B is more powerful.",
+                answer_reason: "Both machines have the same efficiency, but Machine B transfers the same total energy in less time, so its power is greater.",
+              },
+            },
+          ],
+        };
+      case "M3_L6":
+        return {
+          body: "The capstone example should make equation order visible and justified.",
+          worked_example: {
+            prompt: "A lift inputs 1500 J at 60% Useful Yield. The pod then loses 20% of that useful amount during launch. A gate needs 700 J to open. Does the mission succeed?",
+            steps: [
+              "Stage 1: use efficiency to find the useful lift gain. 0.60 x 1500 J = 900 J.",
+              "Stage 2: apply the launch leak to the 900 J useful amount. Losing 20% leaves 80%, so 0.80 x 900 J = 720 J.",
+              "Stage 3: compare the final useful amount with the gate threshold.",
+            ],
+            answer: "Yes. The mission succeeds because 720 J reaches the gate, which is 20 J above the 700 J target.",
+            answer_reason: "The order matters: the useful lift gain has to be found first, then the later leak is applied to that result, and only then can the final target check be made.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up uses the same planner logic but asks for the required input instead of the final store.",
+              worked_example: {
+                prompt: "A gate needs 840 J after a launch stage that loses 30% of the useful lift energy. The lift is 70% efficient. What minimum lift input is required?",
+                steps: [
+                  "Work backward from the gate: if 70% remains after launch, divide the required 840 J by 0.70 to get the useful lift energy needed.",
+                  "Now work backward through the lift efficiency: divide that useful lift energy by 0.70 again.",
+                  "State the result as a minimum input because anything smaller would fail the mission.",
+                ],
+                answer: "About 1714 J of lift input is required.",
+                answer_reason: "The mission needs 1200 J before the 30% launch loss, and a 70% efficient lift must input 1200/0.70, which is about 1714 J.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
@@ -4859,6 +5071,8 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const m2 = m2ScaffoldMediaCards(code);
   if (m2.length > 0) return m2;
+  const m3 = m3ScaffoldMediaCards(code);
+  if (m3.length > 0) return m3;
   switch (code) {
     case "F1_L1":
       return [
@@ -5769,6 +5983,8 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
   const code = lessonCode(lesson);
   const m2 = m2ReflectionVisualCheck(code);
   if (m2) return m2;
+  const m3 = m3ReflectionVisualCheck(code);
+  if (m3) return m3;
   switch (code) {
     case "F2_L3":
       return {
