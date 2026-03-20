@@ -101,6 +101,7 @@ const M4_SIMULATION_COPY: Record<string, M4SimulationCopy> = {
       "Pressure is push per patch, not total push alone.",
       "The same push can become dangerous if it is crowded onto too few patches.",
       "A wider footprint protects the surface by sharing the push.",
+      "Pressure is measured in pascals (Pa), meaning newtons per square metre.",
     ],
     tryFirst: "Try 600 N on 6 patches, then keep 600 N and squeeze it onto 3 patches. The total push is unchanged, but each patch load doubles.",
     takeaway: "Pressure in solids is the crowdedness of a push across area, not the push by itself.",
@@ -203,6 +204,7 @@ export function m4ScaffoldFocusExtras(code: string): string[] {
         "Pressure is about how concentrated the push is, not just how large the push is.",
         "Changing area can change pressure even when force does not change.",
         "The same push on fewer patches means more load on each patch.",
+        "Pressure is measured in pascals (Pa), which are equivalent to N/m^2.",
       ];
     case "M4_L2":
       return [
@@ -244,6 +246,7 @@ export function m4ScaffoldCoreBullets(code: string): string[] {
     case "M4_L1":
       return [
         "Pressure in solids is push divided by area.",
+        "The pressure unit is the pascal (Pa), which means one newton per square metre.",
         "The same force can give different pressure if the contact area changes.",
         "Smaller contact area raises pressure by crowding the push onto fewer patches.",
       ];
@@ -361,4 +364,19 @@ export function m4ReflectionVisualCheck(code: string): UnknownRecord | undefined
     image_url: visual.image_url,
     callouts: visual.visual_callouts,
   };
+}
+
+export function m4SupplementalScaffoldSections(code: string): UnknownRecord[] {
+  switch (code) {
+    case "M4_L1":
+      return [
+        {
+          heading: "Pressure units",
+          body: "Pressure is measured in pascals (Pa). One pascal means one newton of force spread over one square metre, so Pa and N/m^2 describe the same pressure unit relationship.",
+          check_for_understanding: "What does 1 Pa mean in force-and-area language?",
+        },
+      ];
+    default:
+      return [];
+  }
 }

@@ -3,7 +3,7 @@
 import { apipGet, apipPost } from "./apipApi";
 import { m2ContrastCodes, m2GeneratedConceptGateItems, m2GeneratedDiagnosticItems, m2GeneratedMasteryItems, m2PaddingPrompt, m2QuestionVisualMeta, m2ReflectionVisualCheck, m2ScaffoldCoreBullets, m2ScaffoldFocusExtras, m2ScaffoldMediaCards, m2SimulationCopy } from "./m2LessonContent";
 import { m3ContrastCodes, m3GeneratedConceptGateItems, m3GeneratedDiagnosticItems, m3GeneratedMasteryItems, m3PaddingPrompt, m3QuestionVisualMeta, m3ReflectionVisualCheck, m3ScaffoldCoreBullets, m3ScaffoldFocusExtras, m3ScaffoldMediaCards, m3SimulationCopy, m3SupplementalScaffoldSections, m3SupplementalWorkedExampleSections } from "./m3LessonContent";
-import { m4QuestionVisualMeta, m4ReflectionVisualCheck, m4ScaffoldCoreBullets, m4ScaffoldFocusExtras, m4ScaffoldMediaCards, m4SimulationCopy } from "./m4LessonContent";
+import { m4QuestionVisualMeta, m4ReflectionVisualCheck, m4ScaffoldCoreBullets, m4ScaffoldFocusExtras, m4ScaffoldMediaCards, m4SimulationCopy, m4SupplementalScaffoldSections } from "./m4LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
 type JsonPrimitive = string | number | boolean | null;
@@ -6905,6 +6905,7 @@ function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, ana
     },
     ...extraSections,
     ...(code.startsWith("M3_") ? m3SupplementalScaffoldSections(code) : []),
+    ...(code.startsWith("M4_") ? m4SupplementalScaffoldSections(code) : []),
     ...scaffoldWorkedExampleSections(workedExample),
     ...(code.startsWith("M3_") ? m3SupplementalWorkedExampleSections(code) : []),
   ];
@@ -6941,6 +6942,7 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       { heading: "Analogy", body: analogyCopy.body, analogy: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer.", check_for_understanding: analogyCopy.checkForUnderstanding },
       ...scaffoldExtendedExtraSections(code),
       ...(code.startsWith("M3_") ? m3SupplementalScaffoldSections(code) : []),
+      ...(code.startsWith("M4_") ? m4SupplementalScaffoldSections(code) : []),
       ...scaffoldWorkedExampleSections(workedExample),
       ...(code.startsWith("M3_") ? m3SupplementalWorkedExampleSections(code) : []),
     ];
