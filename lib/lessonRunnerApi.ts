@@ -7,6 +7,11 @@ import { m4QuestionVisualMeta, m4ReflectionVisualCheck, m4ScaffoldCoreBullets, m
 import { m5QuestionVisualMeta, m5ReflectionVisualCheck, m5ScaffoldCoreBullets, m5ScaffoldFocusExtras, m5ScaffoldMediaCards, m5SimulationCopy } from "./m5LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
+type RenderedQuestionOverride = {
+  prompt: string;
+  choices: string[];
+  answerIndex: number;
+};
 type JsonPrimitive = string | number | boolean | null;
 type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
 type JsonObject = { [key: string]: JsonValue };
@@ -3103,15 +3108,119 @@ function normalizeRenderedPhysicsText(value: string): string {
     .replace(/\brho\b/gi, "ρ");
 }
 
+function m5RenderedQuestionOverride(item: UnknownRecord): RenderedQuestionOverride | null {
+  const itemId = text(item.id).toUpperCase();
+  switch (itemId) {
+    case "M5L1_D1":
+    case "M5-L1-D1":
+      return {
+        prompt: "Which statement best matches the particle model when matter is heated?",
+        choices: [
+          "particles move more",
+          "particles themselves get bigger",
+          "each particle becomes wet",
+          "all attractions are removed immediately",
+        ],
+        answerIndex: 0,
+      };
+    case "M5L1_D2":
+    case "M5-L1-D2":
+      return {
+        prompt: "Which statement best names a bulk material property rather than a one-particle property?",
+        choices: [
+          "the hardness of the whole solid block",
+          "the mass of one particle",
+          "the motion of one particle",
+          "the existence of one particle",
+        ],
+        answerIndex: 0,
+      };
+    case "M5L1_D6":
+    case "M5-L1-D6":
+      return {
+        prompt: "Which description best fits a liquid in the particle model?",
+        choices: [
+          "its particles stay close together and can change neighbors",
+          "its particles are almost as far apart as in a gas",
+          "its particles are fixed in place and motionless",
+          "its particles become larger than solid particles",
+        ],
+        answerIndex: 0,
+      };
+    case "M5L2_D2":
+    case "M5-L2-D2":
+      return {
+        prompt: "Which sentence best distinguishes Slide Mode from Drift Mode?",
+        choices: [
+          "Particles stay close but can change neighbors in Slide Mode",
+          "Particles are almost as far apart as in a gas in Slide Mode",
+          "Particles are fixed in place in Slide Mode",
+          "Particles become larger in Slide Mode",
+        ],
+        answerIndex: 0,
+      };
+    case "M5L3_D2":
+    case "M5-L3-D2":
+      return {
+        prompt: "Which statement correctly explains Brownian motion?",
+        choices: [
+          "It is random visible zigzag motion caused by collisions with surrounding molecules",
+          "It proves the visible particle is self-propelled",
+          "It means the visible particle is growing and shrinking",
+          "It is a steady one-way drift chosen by the particle",
+        ],
+        answerIndex: 0,
+      };
+    case "M5L5_D2":
+    case "M5-L5-D2":
+      return {
+        prompt: "Which statement correctly defines internal energy in this lesson?",
+        choices: [
+          "It is a whole-system total including kinetic and potential energy",
+          "It must be equal whenever temperature is equal",
+          "It is only temperature by another name",
+          "It ignores arrangement and particle number",
+        ],
+        answerIndex: 0,
+      };
+    case "M5L6_D1":
+    case "M5-L6-D1":
+      return {
+        prompt: "Which statement best keeps state-change energy reasoning accurate?",
+        choices: [
+          "Added energy can loosen particle links during a state change",
+          "Added energy must always raise temperature sharply",
+          "Particles must get bigger when energy is added",
+          "Internal energy cannot rise during melting or boiling",
+        ],
+        answerIndex: 0,
+      };
+    default:
+      return null;
+  }
+}
+
+function renderedPromptText(item: UnknownRecord): string {
+  const override = m5RenderedQuestionOverride(item);
+  if (override) return override.prompt;
+  return normalizeRenderedPhysicsText(text(item.prompt));
+}
+
+function renderedChoices(item: UnknownRecord): string[] {
+  const override = m5RenderedQuestionOverride(item);
+  if (override) return override.choices;
+  return asList(item.choices).map((choice) => normalizeRenderedPhysicsText(text(choice)));
+}
+
 function question(item: UnknownRecord, seed = ""): UnknownRecord {
-  const choices = asList(item.choices).map((choice) => normalizeRenderedPhysicsText(text(choice)));
+  const choices = renderedChoices(item);
   const options = seed
     ? shuffle(choices.map((label, index) => ({ value: optionValue(index), label })), seed)
     : choices.map((label, index) => ({ value: optionValue(index), label }));
   const visual = questionVisualMeta(item);
   return {
     id: text(item.id),
-    prompt: normalizeRenderedPhysicsText(text(item.prompt)),
+    prompt: renderedPromptText(item),
     type: choices.length > 0 ? "multiple_choice" : "short_answer",
     options,
     ...(visual || {}),
@@ -3119,7 +3228,7 @@ function question(item: UnknownRecord, seed = ""): UnknownRecord {
 }
 
 function choiceLabel(item: UnknownRecord, answer: unknown): string | null {
-  const choices = asList(item.choices).map((choice) => text(choice));
+  const choices = renderedChoices(item);
   const index = valueIndex(answer);
   return index >= 0 && index < choices.length ? choices[index] : null;
 }
@@ -3252,6 +3361,8 @@ function resolvedMisconceptionTag(item: UnknownRecord, prompt: string): string |
 
 
 function resolvedAnswerIndex(item: UnknownRecord): number {
+  const override = m5RenderedQuestionOverride(item);
+  if (override) return override.answerIndex;
   const explicit = item.answer_index;
   if (typeof explicit === "number" && Number.isFinite(explicit)) return explicit;
   const metaIndex = fallbackMeta(item)?.answerIndex;
@@ -3259,7 +3370,7 @@ function resolvedAnswerIndex(item: UnknownRecord): number {
   return -1;
 }
 function resolvedCorrectAnswer(item: UnknownRecord): string {
-  const choices = asList(item.choices).map((choice) => text(choice));
+  const choices = renderedChoices(item);
   const correctIndex = resolvedAnswerIndex(item);
   if (correctIndex >= 0 && correctIndex < choices.length) return normalizeRenderedPhysicsText(choices[correctIndex]);
 
@@ -3353,9 +3464,9 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
 }
 
 function grade(item: UnknownRecord, answer: unknown, title: string): UnknownRecord {
-  const prompt = normalizeRenderedPhysicsText(text(item.prompt));
+  const prompt = renderedPromptText(item);
   const meta = fallbackMeta(item);
-  const choices = asList(item.choices).map((choice) => text(choice));
+  const choices = renderedChoices(item);
   const answerIndex = valueIndex(answer);
   const acceptedAnswers = shortAnswerAccepted(item);
   const isCorrect =
