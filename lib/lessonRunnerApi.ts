@@ -7425,7 +7425,15 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const code = lessonCode(lesson);
   const workedExample = scaffoldWorkedExample(lesson);
   const repairTeachingFocus = dedupeText(repairs.map((item) => text(item.teaching_focus)).filter(Boolean)).slice(0, 3);
-  const teachingFocus = code.startsWith("F3_")
+  const authoredCoreConcepts = asList(asRecord(lesson.authoring_contract).core_concepts)
+    .map((entry) => text(entry))
+    .filter(Boolean);
+  const teachingFocus = authoredCoreConcepts.length > 0
+    ? dedupeText([
+        ...authoredCoreConcepts,
+        ...repairTeachingFocus,
+      ])
+    : code.startsWith("F3_")
     ? (repairTeachingFocus.length > 0 ? repairTeachingFocus : scaffoldTeachingFocusBullets(code).slice(0, 4))
     : code.startsWith("F2_")
       ? dedupeText([
