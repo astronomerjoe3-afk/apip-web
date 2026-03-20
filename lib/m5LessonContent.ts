@@ -200,39 +200,39 @@ export function m5ScaffoldFocusExtras(code: string): string[] {
   switch (code) {
     case "M5_L1":
       return [
-        "Particles do not get bigger when heated.",
-        "Bulk properties belong to the whole material, not one isolated particle.",
-        "State depends on motion, spacing, and attraction together.",
+        "Test each claim by asking whether it belongs to one particle or to the whole crowd.",
+        "Heating changes the jiggle first, but the state still depends on pulse and grip together.",
+        "If the model changes state, describe the new arrangement rather than inventing bigger particles.",
       ];
     case "M5_L2":
       return [
-        "Solids and liquids both keep particles close together.",
-        "Liquids differ because neighbors can change more readily.",
-        "Flow is not evidence of gas-like spacing.",
+        "Use neighbor swapping to separate liquid flow from solid vibration-in-place.",
+        "A liquid can still keep a surface because its particles remain crowded together.",
+        "If the gaps become large most of the time, the model has crossed into gas reasoning.",
       ];
     case "M5_L3":
       return [
-        "Gas particles are far apart and move freely between collisions.",
-        "Brownian motion is caused by surrounding unseen particles.",
-        "The visible Brownian particle is not self-powered.",
+        "Brownian paths should look jagged and irregular rather than straight or purposeful.",
+        "Stronger heating changes the intensity of the surrounding collisions, not the pebble's intention.",
+        "Use the visible pebble as evidence for unseen particles rather than treating it as self-powered.",
       ];
     case "M5_L4":
       return [
-        "Temperature is an average particle-motion reading.",
-        "Equal temperature does not force equal internal energy.",
-        "Crowd size can change the total without changing the average.",
+        "Compare the average motion first, then check how many particles share that average.",
+        "A larger crowd can match the same pulse while still storing more total energy.",
+        "Do not use temperature as a shortcut for how much energy the whole system has.",
       ];
     case "M5_L5":
       return [
-        "Internal energy is total kinetic and potential energy.",
-        "State arrangement changes the potential-energy part.",
-        "Same pulse does not force the same Plaza Store.",
+        "Ask what changed between the cases: particle number, state arrangement, or both.",
+        "Whole-system totals usually grow when the sample gets larger even if pulse stays fixed.",
+        "Keep average pulse and Plaza Store in separate comparison columns while you reason.",
       ];
     case "M5_L6":
       return [
-        "Added energy does not always mainly raise temperature.",
-        "State change can feed the arrangement or potential-energy part.",
-        "Track where the energy goes before deciding what changed.",
+        "At a state boundary, check whether the new energy is entering motion, arrangement, or both.",
+        "A small pulse rise can still hide a large increase in the total store.",
+        "Explain the new state through loosened links and a changed arrangement pattern.",
       ];
     default:
       return [];
