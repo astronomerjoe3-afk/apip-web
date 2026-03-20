@@ -2070,6 +2070,24 @@ function hasRepetitiveM2L1MasteryTransfer(lesson: UnknownRecord): boolean {
   return repetitivePromptCount > 1;
 }
 
+function isF4L4CalculationStyleMasteryPrompt(prompt: string): boolean {
+  const normalized = normalizePromptKey(prompt);
+  return (
+    normalized.includes("what is the total resistance") ||
+    normalized.includes("what current flows") ||
+    normalized.includes("what current would flow") ||
+    normalized.includes("connected in series to a 12 v supply") ||
+    normalized.includes("a 12 v supply drives a series circuit") ||
+    normalized.includes("two resistors of 3 ohms each") ||
+    normalized.includes("two resistors of 2 ohms and 4 ohms")
+  );
+}
+
+function filterLessonSpecificMasteryCandidates(lesson: UnknownRecord, items: UnknownRecord[]): UnknownRecord[] {
+  if (lessonCode(lesson) !== "F4_L4") return items;
+  return items.filter((item) => !isF4L4CalculationStyleMasteryPrompt(text(asRecord(item).prompt)));
+}
+
 function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "transfer").filter((item) => hasUsableMasteryAnswer(asRecord(item))).length): boolean {
   if (hasRepetitiveM2L1MasteryTransfer(lesson)) return false;
   const declaredMin = declaredAssessmentPoolMin(lesson, "mastery_pool_min");
@@ -3123,12 +3141,12 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seenPrompts = new Set<string>();
   const diagnosticRecords = diagnosticItems(lesson).map(asRecord);
   const diagnosticSourceKeys = new Set(diagnosticRecords.map((item) => masterySourceKey(item)).filter(Boolean));
-  const generated = generatedMasteryItems(lesson);
-  const authoredTransfer = itemsFrom(lesson, "transfer")
+  const generated = filterLessonSpecificMasteryCandidates(lesson, generatedMasteryItems(lesson));
+  const authoredTransfer = filterLessonSpecificMasteryCandidates(lesson, itemsFrom(lesson, "transfer"))
     .map(asRecord)
     .filter((item) => hasUsableMasteryAnswer(item));
   const preferAuthored = prefersLessonOwnedMasteryBank(lesson, authoredTransfer.length);
-  const fallback = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
+  const fallback = filterLessonSpecificMasteryCandidates(lesson, [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)])
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
   const baseItems = preferAuthored
     ? [...authoredTransfer]
