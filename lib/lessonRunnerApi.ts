@@ -1143,6 +1143,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM3Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM4Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -2219,6 +2221,175 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       ["target", "required", "threshold", "goal"],
       ["compare", "against", "to"],
     ]);
+  }
+
+  const isM4ForceAreaPrompt = matchesM4Prompt(
+    ["M4L1_D6"],
+    ["why is greater force means greater pressure not always safe"],
+  );
+
+  if (isM4ForceAreaPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["area", "surface area", "contact area", "footprint", "patch", "spread"],
+        ["also", "too", "as well", "change", "different", "depends", "matters"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["pressure"],
+        ["area", "surface area", "contact area", "footprint", "patch", "spread"],
+        ["depends", "matters", "changes", "different"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "surface area matters too",
+        "contact area matters too",
+        "area matters too",
+        "pressure depends on area",
+        "surface area can also change",
+        "the area can also change",
+        "contact area can also change",
+        "same force on different areas gives different pressure",
+      ])
+    );
+  }
+
+  const isM4SamePushDifferentPatchLoadPrompt = matchesM4Prompt(
+    ["M4L1_C4"],
+    ["why can the same total push give different patch loads"],
+  );
+
+  if (isM4SamePushDifferentPatchLoadPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same push", "same force", "total push", "same load"],
+        ["area", "surface area", "contact area", "footprint", "patch", "spread"],
+        ["change", "different", "matters", "depends", "shared", "smaller", "larger"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["pressure", "patch load"],
+        ["area", "surface area", "contact area", "footprint", "spread"],
+        ["depends", "changes", "different", "matters"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the area can be different",
+        "it can be spread over different areas",
+        "surface area can change",
+        "contact area can change",
+        "the push can be shared by different numbers of patches",
+        "patch spread can change",
+      ])
+    );
+  }
+
+  const isM4MinimumSafeAreaPrompt = matchesM4Prompt(
+    ["M4L2_C3"],
+    ["why is a minimum safe area answer still about pressure"],
+  );
+
+  if (isM4MinimumSafeAreaPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["area", "footprint", "contact area"],
+        ["pressure", "patch load", "pressure limit", "limit", "safe"],
+        ["below", "under", "within", "meet", "keep", "controls"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the area is chosen to keep the pressure below the limit",
+        "it is about keeping the pressure safe",
+        "the footprint is set by the pressure limit",
+        "the area must be large enough to keep pressure under the allowed limit",
+      ])
+    );
+  }
+
+  const isM4DenserLiquidPrompt = matchesM4Prompt(
+    ["M4L3_C3"],
+    ["why does a denser liquid give greater pressure at the same depth"],
+  );
+
+  if (isM4DenserLiquidPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["denser", "density", "rho"],
+        ["heavier", "more weight", "greater weight", "more mass"],
+        ["layer", "stack", "same depth", "same level"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the liquid layers are heavier",
+        "more density means more weight above the patch",
+        "a denser liquid has a heavier stack at the same depth",
+        "rho is larger so the pressure is larger at the same depth",
+      ])
+    );
+  }
+
+  const isM4ShapeNotPressurePrompt = matchesM4Prompt(
+    ["M4L4_C3"],
+    ["why does vessel shape not change the pressure at one depth in a resting liquid"],
+  );
+
+  if (isM4ShapeNotPressurePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same depth", "same level", "same location", "same point"],
+        ["shape", "vessel", "container", "tank"],
+        ["not", "does not", "doesnt", "cannot"],
+        ["pressure", "layer stack", "layer"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "pressure depends on depth not shape",
+        "the local depth matters, not the container shape",
+        "the same depth has the same layer stack above it",
+        "pressure belongs to the location, not the shape of the vessel",
+      ])
+    );
+  }
+
+  const isM4SamePressureDifferentDirectionPrompt = matchesM4Prompt(
+    ["M4L5_C4"],
+    ["why can a wall patch and a floor patch at the same depth have the same pressure but different force directions"],
+  );
+
+  if (isM4SamePressureDifferentDirectionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["pressure"],
+        ["location", "point", "same depth", "same place"],
+        ["force"],
+        ["perpendicular", "normal", "surface", "patch", "orientation", "direction"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["pressure", "scalar"],
+        ["force", "direction"],
+        ["surface", "patch", "wall", "floor"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "pressure is the same at the location but the surface changes the force direction",
+        "the pressure is the same but the force is normal to each surface",
+        "pressure belongs to the point while force direction belongs to the patch",
+      ])
+    );
+  }
+
+  const isM4AirPressurePrompt = matchesM4Prompt(
+    ["M4L6_C3"],
+    ["why can air produce pressure even though it is invisible"],
+  );
+
+  if (isM4AirPressurePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["air", "atmosphere"],
+        ["weight", "layers", "above", "overhead", "fluid"],
+        ["pressure", "presses", "load"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "air has weight",
+        "there is air above us",
+        "the atmosphere has weight",
+        "air is a fluid and its layers press down",
+        "invisible does not mean weightless",
+      ])
+    );
   }
 
   const isLessonSixErrorPrompt =
