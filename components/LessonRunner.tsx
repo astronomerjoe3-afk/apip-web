@@ -81,6 +81,15 @@ type ScaffoldMediaCard = {
 
 function normalizeTeachingFocusText(value: string): string {
   const trimmed = value.trim();
+  if (
+    /^No displacement means no work done on the .+\.?$/i.test(trimmed) ||
+    /^Without displacement, work done on the .+ is zero\.?$/i.test(trimmed)
+  ) {
+    return "No displacement in the force direction means no work is done by that force in the simple model.";
+  }
+  if (/^Multiply force by displacement\.?$/i.test(trimmed)) {
+    return "In the simple aligned-force case, work is force multiplied by displacement.";
+  }
   if (/^Use the triangle area:\s*0\.5 x [\d.]+ x [\d.]+\.?$/i.test(trimmed)) {
     return "Use the triangle area rule: 0.5 x base x height, with time as the base and speed as the height.";
   }

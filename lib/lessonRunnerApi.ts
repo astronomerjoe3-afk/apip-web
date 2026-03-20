@@ -503,7 +503,7 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 });
 
 function normalizeLessonId(value: unknown): string {
-  return String(value || "").replace(/-/g, "_");
+  return String(value || "").replace(/-/g, "_").toUpperCase();
 }
 
 function text(value: unknown, fallback = ""): string {
@@ -1794,6 +1794,24 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       "same diagonal force",
       "same force",
     ]);
+  }
+
+  const isM3LedgerBalancePrompt =
+    itemIdUpper === "M3L1_D7" ||
+    promptKeyCore === "why must the energy ledger balance";
+
+  if (isM3LedgerBalancePrompt) {
+    return (
+      (
+        includesAnyPhrase(candidate, ["energy", "total energy", "ledger"]) &&
+        includesAnyPhrase(candidate, ["conserved", "conservation", "accounted for", "tracked", "balanced"]) &&
+        includesAnyPhrase(candidate, ["system", "closed system", "store", "stores", "leak", "trail", "waste"])
+      ) ||
+      matchesPhraseGroups(candidate, [
+        ["not disappear", "does not disappear", "not destroyed", "does not vanish", "not gone"],
+        ["store", "stores", "leak", "trail", "waste", "accounted", "tracked"],
+      ])
+    );
   }
 
   const isLessonSixErrorPrompt =
