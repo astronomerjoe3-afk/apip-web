@@ -316,36 +316,59 @@ export default function A4SimulationPanels({
     );
   }
 
-  const optionScale = Math.round(clamp(simSpread, 8, 80));
-  const sharing = clamp(simVectorAngle, 0, 100);
-  const lowW = Math.max(4, Math.round(optionScale / 2));
-  const highW = Math.max(lowW + 4, optionScale);
-  const entropyGap = Math.log(highW) - Math.log(lowW);
+  if (lessonKey === "A4_L6") {
+    const optionScale = Math.round(clamp(simSpread, 8, 80));
+    const sharing = clamp(simVectorAngle, 0, 100);
+    const lowW = Math.max(4, Math.round(optionScale / 2));
+    const highW = Math.max(lowW + 4, optionScale);
+    const entropyGap = Math.log(highW) - Math.log(lowW);
+    return renderPanel(
+      "Option-count boss",
+      <>
+        {sliderField("Low option count", `${lowW}`, <input className="w-full" type="range" min="8" max="80" step="1" value={optionScale} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
+        {sliderField("Energy-sharing balance", `${formatSimulationNumber(sharing, 0)}% even`, <input className="w-full" type="range" min="0" max="100" step="1" value={sharing} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
+        {sliderField("Macrostate choice", simBias < 0.5 ? "concentrated" : "spread", <input className="w-full" type="range" min="0" max="1" step="1" value={Math.round(clamp(simBias, 0, 1))} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+      </>,
+      "Entropy board",
+      <svg viewBox="0 0 640 250" className="w-full">
+        <line x1="76" y1="192" x2="560" y2="192" stroke="#64748b" strokeWidth="4" />
+        <line x1="76" y1="44" x2="76" y2="192" stroke="#64748b" strokeWidth="4" />
+        <rect x="152" y={192 - lowW} width="110" height={lowW} rx="18" fill="#94a3b8" />
+        <rect x="352" y={192 - Math.min(highW, 130)} width="110" height={Math.min(highW, 130)} rx="18" fill="#22c55e" />
+        <text x="207" y="214" fill="#334155" fontSize="18" textAnchor="middle">lower W</text>
+        <text x="407" y="214" fill="#334155" fontSize="18" textAnchor="middle">higher W</text>
+        <text x="490" y="78" fill="#a16207" fontSize="24" fontWeight="700">S = k ln W</text>
+        <text x="490" y="112" fill="#475569" fontSize="18">higher W means higher entropy</text>
+      </svg>,
+      <>
+        {metricCard("Low W", `${lowW}`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("High W", `${highW}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Entropy gap", `${formatSimulationNumber(entropyGap, 2)} k-units`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Spontaneous direction", sharing > 50 ? "toward more even sharing" : "still climbing", "border-amber-200 bg-amber-50 text-amber-900")}
+      </>,
+      ["Entropy is stronger as option count than as vague messiness.", "Larger W means larger entropy.", "Spontaneous direction follows larger multiplicity."],
+      "This final board turns the hidden-playbook story into an explicit entropy comparison that also supports hot-cold energy-sharing reasoning.",
+    );
+  }
+
   return renderPanel(
-    "Option-count boss",
+    "Lesson explorer unavailable",
+    <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+      This lesson is waiting for its lesson-specific Bounce-Chamber panel.
+    </div>,
+    "Explorer placeholder",
+    <div className="rounded-3xl border border-dashed border-slate-300 bg-white/80 p-8 text-center text-sm text-slate-600">
+      No generic fallback panel is being substituted here.
+    </div>,
     <>
-      {sliderField("Low option count", `${lowW}`, <input className="w-full" type="range" min="8" max="80" step="1" value={optionScale} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
-      {sliderField("Energy-sharing balance", `${formatSimulationNumber(sharing, 0)}% even`, <input className="w-full" type="range" min="0" max="100" step="1" value={sharing} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
-      {sliderField("Macrostate choice", simBias < 0.5 ? "concentrated" : "spread", <input className="w-full" type="range" min="0" max="1" step="1" value={Math.round(clamp(simBias, 0, 1))} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+      {metricCard("Lesson", lessonKey, "border-sky-200 bg-sky-50 text-sky-900")}
+      {metricCard("Status", "explicit panel required", "border-amber-200 bg-amber-50 text-amber-900")}
     </>,
-    "Entropy board",
-    <svg viewBox="0 0 640 250" className="w-full">
-      <line x1="76" y1="192" x2="560" y2="192" stroke="#64748b" strokeWidth="4" />
-      <line x1="76" y1="44" x2="76" y2="192" stroke="#64748b" strokeWidth="4" />
-      <rect x="152" y={192 - lowW} width="110" height={lowW} rx="18" fill="#94a3b8" />
-      <rect x="352" y={192 - Math.min(highW, 130)} width="110" height={Math.min(highW, 130)} rx="18" fill="#22c55e" />
-      <text x="207" y="214" fill="#334155" fontSize="18" textAnchor="middle">lower W</text>
-      <text x="407" y="214" fill="#334155" fontSize="18" textAnchor="middle">higher W</text>
-      <text x="490" y="78" fill="#a16207" fontSize="24" fontWeight="700">S = k ln W</text>
-      <text x="490" y="112" fill="#475569" fontSize="18">higher W means higher entropy</text>
-    </svg>,
-    <>
-      {metricCard("Low W", `${lowW}`, "border-sky-200 bg-sky-50 text-sky-900")}
-      {metricCard("High W", `${highW}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-      {metricCard("Entropy gap", `${formatSimulationNumber(entropyGap, 2)} k-units`, "border-violet-200 bg-violet-50 text-violet-900")}
-      {metricCard("Spontaneous direction", sharing > 50 ? "toward more even sharing" : "still climbing", "border-amber-200 bg-amber-50 text-amber-900")}
-    </>,
-    ["Entropy is stronger as option count than as vague messiness.", "Larger W means larger entropy.", "Spontaneous direction follows larger multiplicity."],
-    "This final board turns the hidden-playbook story into an explicit entropy comparison that also supports hot-cold energy-sharing reasoning.",
+    [
+      "Each A4 lesson should own its explorer directly.",
+      "If this appears, the lesson wiring needs a dedicated panel.",
+      "The advanced thermal module should not silently fall through to another lesson view.",
+    ],
+    "This safety fallback is intentionally neutral so an unhandled lesson key cannot masquerade as a different A4 activity.",
   );
 }
