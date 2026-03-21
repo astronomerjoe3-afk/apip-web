@@ -1,43 +1,54 @@
 <svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
   <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D7E6F8" stroke-width="4"/>
-  <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
-    The heating bill grows with mass, Level Cost, and level rise
+  <text x="72" y="88" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">
+    <tspan x="72" dy="0">The heating bill grows with mass,</tspan>
+    <tspan x="72" dy="38">Level Cost, and level rise</tspan>
   </text>
-  <text x="72" y="146" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    <tspan x="72" dy="0">Specific heat capacity is the material charge for one kilogram to rise by one degree.</tspan>
-    <tspan x="72" dy="28">The Forge Ledger turns that rule into Q = m c delta T.</tspan>
+  <text x="72" y="164" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="21">
+    <tspan x="72" dy="0">Specific heat capacity is the material charge</tspan>
+    <tspan x="72" dy="27">for one kilogram to rise by one degree.</tspan>
+    <tspan x="72" dy="27">The Forge Ledger turns that rule into Q = m c delta T.</tspan>
   </text>
 
-  <rect x="94" y="204" width="1012" height="162" rx="28" fill="#EEF4FF"/>
-  <text x="128" y="276" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">Q = m c delta T</text>
-  <text x="350" y="270" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">mass</text>
-  <text x="488" y="270" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Level Cost</text>
-  <text x="720" y="270" fill="#7C3AED" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">rise</text>
-  <text x="314" y="318" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">Build Size</text>
-  <text x="464" y="318" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">J per kg per degree C</text>
-  <text x="692" y="318" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">delta T</text>
+  <rect x="94" y="236" width="1012" height="166" rx="28" fill="#EEF4FF"/>
+  <text x="128" y="308" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">Q = m c delta T</text>
+  <text x="350" y="302" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">mass</text>
+  <text x="488" y="302" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Level Cost</text>
+  <text x="720" y="302" fill="#7C3AED" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">rise</text>
+  <text x="314" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">Build Size</text>
+  <text x="464" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">J per kg per degree C</text>
+  <text x="692" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">delta T</text>
 
-  <rect x="94" y="402" width="306" height="210" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
-  <rect x="448" y="402" width="306" height="210" rx="30" fill="#DCFCE7" stroke="#4ADE80" stroke-width="5"/>
-  <rect x="802" y="402" width="304" height="210" rx="30" fill="#F3E8FF" stroke="#C084FC" stroke-width="5"/>
-  <text x="126" y="456" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Build Size</text>
-  <rect x="126" y="492" width="92" height="84" rx="20" fill="#60A5FA"/>
-  <rect x="238" y="470" width="128" height="106" rx="20" fill="#2563EB"/>
-  <text x="124" y="604" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">More mass means more material to warm.</text>
+  <rect x="94" y="434" width="306" height="204" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
+  <rect x="448" y="434" width="306" height="204" rx="30" fill="#DCFCE7" stroke="#4ADE80" stroke-width="5"/>
+  <rect x="802" y="434" width="304" height="204" rx="30" fill="#F3E8FF" stroke="#C084FC" stroke-width="5"/>
+  <text x="126" y="488" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Build Size</text>
+  <rect x="126" y="520" width="92" height="80" rx="20" fill="#60A5FA"/>
+  <rect x="238" y="498" width="128" height="102" rx="20" fill="#2563EB"/>
+  <text x="124" y="598" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="124" dy="0">More mass means more</tspan>
+    <tspan x="124" dy="26">material to warm.</tspan>
+  </text>
 
-  <text x="480" y="456" fill="#15803D" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Level Cost</text>
-  <rect x="486" y="502" width="84" height="64" rx="18" fill="#86EFAC"/>
-  <rect x="596" y="462" width="118" height="104" rx="18" fill="#22C55E"/>
-  <text x="478" y="604" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">Higher c means each degree costs more.</text>
+  <text x="480" y="488" fill="#15803D" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Level Cost</text>
+  <rect x="486" y="528" width="84" height="64" rx="18" fill="#86EFAC"/>
+  <rect x="596" y="490" width="118" height="102" rx="18" fill="#22C55E"/>
+  <text x="478" y="598" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="478" dy="0">Higher c means</tspan>
+    <tspan x="478" dy="26">each degree costs more.</tspan>
+  </text>
 
-  <text x="834" y="456" fill="#7E22CE" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Target rise</text>
-  <path d="M860 556L902 486L944 556" stroke="#C084FC" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M962 556L1016 452L1070 556" stroke="#9333EA" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="832" y="604" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">A bigger delta T needs a bigger bill.</text>
+  <text x="834" y="488" fill="#7E22CE" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Target rise</text>
+  <path d="M860 586L902 518L944 586" stroke="#C084FC" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M962 586L1016 484L1070 586" stroke="#9333EA" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="832" y="598" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="832" dy="0">A bigger delta T needs</tspan>
+    <tspan x="832" dy="26">a bigger bill.</tspan>
+  </text>
 
-  <rect x="96" y="640" width="1008" height="60" rx="22" fill="#EEF4FF"/>
-  <text x="128" y="678" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+  <rect x="96" y="656" width="1008" height="54" rx="22" fill="#EEF4FF"/>
+  <text x="128" y="690" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">
     The total thermal bill is bookkeeping, not memorized magic.
   </text>
 </svg>

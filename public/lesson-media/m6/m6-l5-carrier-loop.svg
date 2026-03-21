@@ -1,12 +1,13 @@
 <svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
   <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D7E6F8" stroke-width="4"/>
-  <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
-    Carrier Loop convection moves the fluid itself
+  <text x="72" y="88" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">
+    <tspan x="72" dy="0">Carrier Loop convection moves</tspan>
+    <tspan x="72" dy="38">the fluid itself</tspan>
   </text>
-  <text x="72" y="146" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+  <text x="72" y="164" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="21">
     <tspan x="72" dy="0">Warm fluid rises because it becomes less dense.</tspan>
-    <tspan x="72" dy="28">Cooler fluid sinks or moves in to complete the loop.</tspan>
+    <tspan x="72" dy="27">Cooler fluid sinks or moves in to complete the loop.</tspan>
   </text>
 
   <rect x="108" y="214" width="984" height="384" rx="30" fill="#ECFEFF" stroke="#67E8F9" stroke-width="5"/>
@@ -25,12 +26,14 @@
 
   <text x="248" y="430" fill="#DC2626" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">warmer, less dense</text>
   <text x="768" y="430" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">cooler, denser</text>
-  <text x="438" y="628" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="24">
-    The transfer route is a moving loop, so convection belongs to fluids.
+  <text x="394" y="610" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <tspan x="394" dy="0">The transfer route is a moving loop,</tspan>
+    <tspan x="394" dy="26">so convection belongs to fluids.</tspan>
   </text>
 
-  <rect x="96" y="646" width="1008" height="54" rx="22" fill="#EEF4FF"/>
-  <text x="128" y="680" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    "Heat rises" is incomplete. What actually rises is the warmer fluid region.
+  <rect x="96" y="648" width="1008" height="64" rx="22" fill="#EEF4FF"/>
+  <text x="128" y="674" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <tspan x="128" dy="0">"Heat rises" is incomplete.</tspan>
+    <tspan x="128" dy="24">What actually rises is the warmer fluid region.</tspan>
   </text>
 </svg>

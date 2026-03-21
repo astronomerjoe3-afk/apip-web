@@ -1,12 +1,13 @@
 <svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
   <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D7E6F8" stroke-width="4"/>
-  <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
-    Touch Relay passes energy along a solid without the solid flowing
+  <text x="72" y="88" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">
+    <tspan x="72" dy="0">Touch Relay passes energy along a solid</tspan>
+    <tspan x="72" dy="38">without the solid flowing</tspan>
   </text>
-  <text x="72" y="146" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+  <text x="72" y="164" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="21">
     <tspan x="72" dy="0">Conduction needs a contact path.</tspan>
-    <tspan x="72" dy="28">In metals, mobile electrons help the relay happen faster.</tspan>
+    <tspan x="72" dy="27">In metals, mobile electrons help the relay happen faster.</tspan>
   </text>
 
   <rect x="86" y="210" width="490" height="384" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="5"/>
@@ -20,8 +21,9 @@
   <path d="M178 316L206 342" stroke="#EF4444" stroke-width="8" stroke-linecap="round"/>
   <path d="M248 316L276 342" stroke="#F97316" stroke-width="8" stroke-linecap="round"/>
   <path d="M318 316L346 342" stroke="#F59E0B" stroke-width="8" stroke-linecap="round"/>
-  <text x="126" y="512" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    Direct contact lets the energy hand-off march down the bar.
+  <text x="126" y="510" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="126" dy="0">Direct contact lets the energy</tspan>
+    <tspan x="126" dy="26">hand-off march down the bar.</tspan>
   </text>
 
   <rect x="624" y="210" width="490" height="384" rx="30" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="5"/>
@@ -29,12 +31,14 @@
   <rect x="666" y="356" width="130" height="88" rx="36" fill="#FCA5A5"/>
   <rect x="840" y="356" width="220" height="88" rx="36" fill="#E2E8F0"/>
   <rect x="804" y="348" width="24" height="104" rx="12" fill="#FFFFFF" stroke="#EF4444" stroke-width="4"/>
-  <text x="666" y="512" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    Break the contact path and the relay stalls.
+  <text x="666" y="510" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="666" dy="0">Break the contact path</tspan>
+    <tspan x="666" dy="26">and the relay stalls.</tspan>
   </text>
 
   <rect x="96" y="626" width="1008" height="74" rx="22" fill="#EEF4FF"/>
-  <text x="128" y="672" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Conduction is a contact-to-contact hand-off, not a moving stream of solid matter.
+  <text x="128" y="668" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <tspan x="128" dy="0">Conduction is a contact-to-contact hand-off,</tspan>
+    <tspan x="128" dy="26">not a moving stream of solid matter.</tspan>
   </text>
 </svg>
