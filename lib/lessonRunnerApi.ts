@@ -1186,6 +1186,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM10Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -3612,6 +3614,388 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       includesAnyPhrase(candidate, [
         "the image is 9 cm behind the mirror because plane-mirror images are the same distance behind as the object is in front",
         "it is 9 cm behind the mirror by symmetry",
+      ])
+    );
+  }
+
+  const isM10ChargeConservationPrompt = matchesM10Prompt(
+    ["M10L1_D4", "M10L1_M2"],
+    [
+      "why is it weak to say that charge gets used up around the loop",
+      "a learner says the bulb uses up the charge what should you say instead",
+    ],
+  );
+
+  if (isM10ChargeConservationPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["charge", "carriers", "tokens"],
+        ["conserved", "still there", "remain", "keep circulating", "keeps circulating", "not used up"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["energy", "boost", "energy per carrier"],
+        ["changes", "transferred", "drops", "is transferred"],
+        ["charge", "carriers"],
+      ])
+    );
+  }
+
+  const isM10ClosedLoopPrompt = matchesM10Prompt(
+    ["M10L1_D7", "M10L1_M5"],
+    [
+      "what does a closed loop allow that a broken loop does not",
+      "why can the same carriers go around the loop again and again",
+    ],
+  );
+
+  if (isM10ClosedLoopPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["closed", "complete", "full"],
+        ["loop", "path", "route", "circuit"],
+        ["charge", "carriers", "tokens"],
+        ["circulate", "flow around", "go around again", "keep moving", "move all the way"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["complete", "closed"],
+        ["path", "loop", "route"],
+        ["current", "sustained current", "steady current"],
+      ])
+    );
+  }
+
+  const isM10ChargeCurrentPrompt = matchesM10Prompt(
+    [
+      "M10L1_C6",
+      "M10L1_M7",
+      "M10L2_D4",
+      "M10L2_D7",
+      "M10L2_C4",
+      "M10L2_M2",
+      "M10L2_M5",
+    ],
+    [
+      "what is the cleanest two part distinction between charge and current",
+      "why is current not the same thing as how much charge is in the loop",
+      "why can a loop with many carriers still have a small current",
+      "what is the difference between carrier count and checkpoint rate",
+      "why is current is how much charge is in the wire weak",
+      "a learner says current is the number of carriers in the circuit what would you fix",
+    ],
+  );
+
+  if (isM10ChargeCurrentPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["charge", "carrier count", "carriers", "amount", "quantity", "total"],
+        ["current", "checkpoint rate"],
+        ["rate", "per second", "passes a point", "flow", "charge flow"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["many carriers", "large amount", "large charge", "same charge"],
+        ["small current", "weak current", "different current", "low current"],
+        ["rate", "per second", "passes", "flow speed", "moves slowly"],
+      ])
+    );
+  }
+
+  const isM10CurrentDefinitionPrompt = matchesM10Prompt(
+    ["M10L2_C1", "M10L2_C6", "M10L2_M7"],
+    [
+      "how would you explain current without using the word electricity",
+      "what stays more useful in the carrier loop story how many tokens exist or how many pass each second when you are defining current",
+      "what does the equation i q t summarize in one sentence",
+    ],
+  );
+
+  if (isM10CurrentDefinitionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["current"],
+        ["charge", "carriers"],
+        ["rate", "per second", "passes a point", "passes the checkpoint", "flow"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "current is charge per second",
+        "current is charge passing a point each second",
+        "current is the rate of charge flow",
+      ])
+    );
+  }
+
+  const isM10BatteryRolePrompt = matchesM10Prompt(
+    ["M10L1_C4", "M10L3_M2"],
+    [
+      "why is battery stores current a weak statement",
+      "what should you say instead of the battery sends current into the circuit",
+    ],
+  );
+
+  if (isM10BatteryRolePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["battery", "source", "lift station"],
+        ["voltage", "energy per charge", "boost", "boost per carrier"],
+        ["not", "rather than"],
+        ["stores current", "current tank", "fixed current", "sends current"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["battery", "source"],
+        ["current"],
+        ["depends on", "whole loop", "route resistance", "route drag", "circuit"],
+      ])
+    );
+  }
+
+  const isM10VoltagePrompt = matchesM10Prompt(
+    ["M10L3_D4", "M10L3_D7", "M10L3_C1", "M10L3_C4", "M10L3_C6", "M10L3_M7", "M10L6_D6"],
+    [
+      "why is voltage better described as boost per carrier than as more current",
+      "why can two circuits have the same current but different voltages",
+      "how would you explain voltage in one sentence using the carrier loop model",
+      "why is it weak to treat voltage as the same quantity as current",
+      "why does a bigger voltage not automatically mean more charge exists",
+      "what does the equation v delta e q say in words",
+      "why does doubling voltage not create new carriers",
+    ],
+  );
+
+  if (isM10VoltagePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["voltage"],
+        ["energy per charge", "boost", "boost per carrier", "each carrier", "per carrier"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["voltage"],
+        ["current"],
+        ["not", "rather than", "different"],
+        ["rate", "flow", "charge per second", "energy per charge", "boost"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["voltage"],
+        ["not", "rather than"],
+        ["more charge", "new carriers", "amount of charge", "carrier count"],
+      ])
+    );
+  }
+
+  const isM10SourceAndRoutePrompt = matchesM10Prompt(
+    ["M10L3_M5", "M10L4_C6", "M10L4_M7", "M10L5_C4", "M10L5_M7", "M10L6_D8", "M10L6_M2"],
+    [
+      "why can the same source give different currents in different loops even though its voltage is fixed",
+      "why can the same source give different currents in two circuits with different routes",
+      "a learner says if the battery is the same the current must be the same what correction should you make",
+      "why is it weak to say that a battery always gives the same current",
+      "a learner says higher voltage means the battery sends more current all by itself what should you add",
+      "why can the same voltage appear in two loops but the currents differ",
+      "a learner says same battery means same current what is the best correction now",
+    ],
+  );
+
+  if (isM10SourceAndRoutePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same battery", "same source", "same voltage", "fixed voltage"],
+        ["different current", "currents differ", "lower current", "higher current"],
+        ["resistance", "route drag", "whole loop", "route", "circuit"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["current"],
+        ["depends on", "also depends on", "not alone", "not by itself"],
+        ["voltage", "source boost"],
+        ["resistance", "route drag"],
+      ])
+    );
+  }
+
+  const isM10ResistanceRoutePrompt = matchesM10Prompt(
+    ["M10L4_D4", "M10L4_C1", "M10L4_C4"],
+    [
+      "why is resistance better treated as a path property than as something the battery decides",
+      "how would you explain resistance in the carrier loop model",
+      "why is the battery makes the resistance a weak statement",
+    ],
+  );
+
+  if (isM10ResistanceRoutePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["resistance"],
+        ["path", "route", "material", "geometry", "route drag", "path difficulty"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["resistance"],
+        ["battery", "source"],
+        ["not", "rather than"],
+        ["path", "route", "material"],
+      ])
+    );
+  }
+
+  const isM10GeometryPrompt = matchesM10Prompt(
+    ["M10L4_D7", "M10L4_M2", "M10L4_M5"],
+    [
+      "how can changing the wire shape change resistance even when the material stays the same",
+      "what should happen to resistance if the route is made twice as long and everything else stays the same",
+      "why is route width part of the resistance story",
+    ],
+  );
+
+  if (isM10GeometryPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["longer", "length", "twice as long"],
+        ["higher", "greater", "more", "increase"],
+        ["resistance", "drag"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["wider", "width", "more room"],
+        ["lower", "less", "reduce"],
+        ["resistance", "drag"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["geometry", "shape", "length", "width"],
+        ["resistance"],
+        ["matters", "changes", "affects", "depends on"],
+      ])
+    );
+  }
+
+  const isM10OhmsLawMeaningPrompt = matchesM10Prompt(
+    ["M10L5_D5", "M10L5_C1", "M10L5_M5"],
+    [
+      "why is ohm s law better introduced as a rate rule for an ohmic route than as a formula to memorize",
+      "what does i v r say in words",
+      "why is ohm s law useful conceptually before it is useful algebraically",
+    ],
+  );
+
+  if (isM10OhmsLawMeaningPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["current"],
+        ["depends on", "set by", "controlled by", "proportional"],
+        ["voltage", "boost"],
+        ["resistance", "drag"],
+        ["ohmic", "ohmic route"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "current equals voltage divided by resistance for an ohmic route",
+        "for an ohmic route current depends on voltage and resistance",
+      ])
+    );
+  }
+
+  const isM10OhmicConditionPrompt = matchesM10Prompt(
+    ["M10L5_C6"],
+    ["what does the word ohmic warn you to remember"],
+  );
+
+  if (isM10OhmicConditionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["ohmic"],
+        ["not every", "not all", "only some", "only for"],
+        ["component", "element", "route", "device"],
+        ["simple rule", "proportional", "ohm s law", "rate rule"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "ohm's law is not automatic for every component",
+        "the simple proportional rule is for ohmic elements",
+      ])
+    );
+  }
+
+  const isM10OhmicProportionalityPrompt = matchesM10Prompt(
+    ["M10L5_D7", "M10L5_M2"],
+    [
+      "how does increasing route drag affect current when the source voltage stays fixed",
+      "how would you predict the effect of doubling resistance at fixed voltage in an ohmic route",
+    ],
+  );
+
+  if (isM10OhmicProportionalityPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same voltage", "fixed voltage"],
+        ["more", "increase", "double"],
+        ["resistance", "route drag"],
+        ["less", "lower", "reduce", "half", "halve"],
+        ["current", "flow"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "more resistance means less current for the same voltage",
+        "doubling the resistance halves the current at fixed voltage",
+      ])
+    );
+  }
+
+  const isM10LedgerPrompt = matchesM10Prompt(
+    ["M10L6_D3", "M10L6_C6", "M10L6_M7"],
+    [
+      "why is a loop ledger useful in electrical quantities",
+      "why is the battery sends electricity weaker than the ledger language in this module",
+      "what does a good loop ledger stop you from collapsing into one vague word",
+    ],
+  );
+
+  if (isM10LedgerPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["charge", "current", "voltage", "resistance"],
+        ["separate", "distinguish", "track", "ledger", "keep apart"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["what moves", "who moves"],
+        ["what each carrier gets", "what is supplied per charge", "boost each carrier"],
+        ["what limits the flow", "route drag", "resistance"],
+      ])
+    );
+  }
+
+  const isM10QuantitySeparationPrompt = matchesM10Prompt(
+    ["M10L6_C1", "M10L6_M5"],
+    [
+      "how would you separate charge current and voltage in one sentence",
+      "why can a circuit keep the same carriers while still changing current and voltage descriptions",
+    ],
+  );
+
+  if (isM10QuantitySeparationPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["charge"],
+        ["carrier", "moves", "quantity"],
+        ["current"],
+        ["rate", "flow rate", "passes a point", "per second"],
+        ["voltage"],
+        ["energy per charge", "boost"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same carriers", "same charge"],
+        ["current", "flow rate"],
+        ["voltage", "energy per charge", "boost"],
+        ["different", "separate"],
+      ])
+    );
+  }
+
+  const isM10ChooseEquationPrompt = matchesM10Prompt(
+    ["M10L6_C4"],
+    ["why is choosing the right equation part of the physics rather than just algebra here"],
+  );
+
+  if (isM10ChooseEquationPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["equation", "formula", "choose"],
+        ["physical quantity", "meaning", "unknown"],
+        ["current", "voltage", "charge", "time", "resistance"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "each equation matches a different physical quantity",
+        "you must know which quantity is unknown before choosing the equation",
       ])
     );
   }
