@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { onAuthStateChanged, type User } from "firebase/auth";
+import { onIdTokenChanged, type User } from "firebase/auth";
 
 import { firebaseConfigured, maybeAuth } from "./firebase";
 
@@ -21,7 +21,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    const unsub = onAuthStateChanged(maybeAuth, (u) => {
+    // Wait for the token-aware auth event so API calls do not start while
+    // Firebase is still settling the usable session token after hydration.
+    const unsub = onIdTokenChanged(maybeAuth, (u) => {
       setUser(u);
       setLoading(false);
     });

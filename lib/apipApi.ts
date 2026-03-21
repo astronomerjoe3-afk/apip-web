@@ -8,6 +8,14 @@ type JsonObject = { [key: string]: JsonValue };
 
 const DEFAULT_API_BASE_URL = "https://api.cognispark.tech";
 
+type FirebaseUserLike = {
+  accessToken?: string;
+  getIdToken: (forceRefresh?: boolean) => Promise<string>;
+  stsTokenManager?: {
+    accessToken?: string;
+  };
+};
+
 function resolveApiBaseUrl(): string {
   const primary = (process.env.NEXT_PUBLIC_APIP_API_BASE_URL || "").trim();
   const fallback = (process.env.NEXT_PUBLIC_API_BASE_URL || "").trim();
@@ -28,10 +36,67 @@ function buildApiUrl(path: string): string {
   return `${resolveApiBaseUrl()}${normalizedPath}`;
 }
 
-async function getBearerToken(): Promise<string | null> {
-  const user = auth?.currentUser ?? null;
+function cachedAccessToken(user: FirebaseUserLike | null): string | null {
+  const direct = typeof user?.accessToken === "string" ? user.accessToken.trim() : "";
+  if (direct) return direct;
+
+  const nested = typeof user?.stsTokenManager?.accessToken === "string"
+    ? user.stsTokenManager.accessToken.trim()
+    : "";
+  return nested || null;
+}
+
+async function getBearerToken(forceRefresh: boolean = false): Promise<string | null> {
+  const user = (auth?.currentUser ?? null) as FirebaseUserLike | null;
   if (!user) return null;
-  return user.getIdToken();
+
+  try {
+    return await user.getIdToken(forceRefresh);
+  } catch (error) {
+    const cached = cachedAccessToken(user);
+    if (cached) {
+      return cached;
+    }
+    throw error;
+  }
+}
+
+function isFetchFailure(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  return error.message === "Failed to fetch" || error.name === "TypeError";
+}
+
+async function performRequest(path: string, init: RequestInit): Promise<Response> {
+  const headers = new Headers(init.headers);
+  const token = await getBearerToken();
+
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
+  try {
+    return await fetch(buildApiUrl(path), {
+      ...init,
+      headers,
+      cache: "no-store",
+    });
+  } catch (error) {
+    if (!isFetchFailure(error) || !auth?.currentUser) {
+      throw error;
+    }
+
+    const retryHeaders = new Headers(init.headers);
+    const retryToken = await getBearerToken(true);
+    if (retryToken) {
+      retryHeaders.set("Authorization", `Bearer ${retryToken}`);
+    }
+
+    return fetch(buildApiUrl(path), {
+      ...init,
+      headers: retryHeaders,
+      cache: "no-store",
+    });
+  }
 }
 
 function summarizeHtmlError(html: string, status: number): string {
@@ -73,18 +138,9 @@ async function parseApiResponse<T>(response: Response): Promise<T> {
 }
 
 export async function apipGet<T>(path: string, init?: RequestInit): Promise<T> {
-  const token = await getBearerToken();
-
-  const headers = new Headers(init?.headers);
-  if (token) {
-    headers.set("Authorization", `Bearer ${token}`);
-  }
-
-  const response = await fetch(buildApiUrl(path), {
+  const response = await performRequest(path, {
     ...init,
     method: "GET",
-    headers,
-    cache: "no-store",
   });
 
   return parseApiResponse<T>(response);
@@ -98,38 +154,23 @@ export async function apipPost<
   body: TBody,
   init?: RequestInit,
 ): Promise<TResponse> {
-  const token = await getBearerToken();
-
   const headers = new Headers(init?.headers);
   headers.set("Content-Type", "application/json");
-  if (token) {
-    headers.set("Authorization", `Bearer ${token}`);
-  }
 
-  const response = await fetch(buildApiUrl(path), {
+  const response = await performRequest(path, {
     ...init,
     method: "POST",
     headers,
     body: JSON.stringify(body),
-    cache: "no-store",
   });
 
   return parseApiResponse<TResponse>(response);
 }
 
 export async function apipDelete<T>(path: string, init?: RequestInit): Promise<T> {
-  const token = await getBearerToken();
-
-  const headers = new Headers(init?.headers);
-  if (token) {
-    headers.set("Authorization", `Bearer ${token}`);
-  }
-
-  const response = await fetch(buildApiUrl(path), {
+  const response = await performRequest(path, {
     ...init,
     method: "DELETE",
-    headers,
-    cache: "no-store",
   });
 
   return parseApiResponse<T>(response);
