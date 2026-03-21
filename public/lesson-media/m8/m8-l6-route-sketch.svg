@@ -1,0 +1,24 @@
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="520" rx="32" fill="#F8FAFC"/>
+  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Route Sketches Separate Line Roles</text>
+  <text x="48" y="108" fill="#475569" font-size="20">A ray diagram mixes real routes, Guide Lines, and dashed extensions to predict real and virtual images.</text>
+  <rect x="48" y="148" width="370" height="308" rx="28" fill="#DBEAFE" stroke="#60A5FA" stroke-width="4"/>
+  <rect x="482" y="148" width="370" height="308" rx="28" fill="#F5F3FF" stroke="#A78BFA" stroke-width="4"/>
+  <text x="78" y="188" fill="#1D4ED8" font-size="22" font-weight="700">True Meeting Point sketch</text>
+  <line x1="88" y1="308" x2="380" y2="308" stroke="#CBD5E1" stroke-width="4"/>
+  <ellipse cx="236" cy="308" rx="18" ry="72" fill="#C4B5FD"/>
+  <path d="M118 308 H236" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M236 308 L340 256" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M118 308 L236 260" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M236 260 L340 256" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="340" cy="256" r="10" fill="#D97706"/>
+  <text x="512" y="188" fill="#7C3AED" font-size="22" font-weight="700">Ghost Meeting Point sketch</text>
+  <rect x="652" y="192" width="12" height="220" rx="6" fill="#94A3B8"/>
+  <path d="M544 284 L652 256" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M544 332 L652 360" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M652 256 L758 284" stroke="#2563EB" stroke-width="4" stroke-dasharray="10 10"/>
+  <path d="M652 360 L758 332" stroke="#0F766E" stroke-width="4" stroke-dasharray="10 10"/>
+  <circle cx="758" cy="308" r="10" fill="#A855F7"/>
+  <text x="78" y="430" fill="#334155" font-size="20">Real routes cross at the image.</text>
+  <text x="512" y="430" fill="#334155" font-size="20">Extensions locate the ghost image.</text>
+</svg>

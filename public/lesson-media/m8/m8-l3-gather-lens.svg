@@ -1,0 +1,17 @@
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="520" rx="32" fill="#FFFBEB"/>
+  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Gather Lens and a True Meeting Point</text>
+  <text x="48" y="108" fill="#57534E" font-size="20">A few key routes are enough to predict where actual refracted routes meet.</text>
+  <rect x="48" y="148" width="804" height="308" rx="28" fill="#FEF3C7" stroke="#F59E0B" stroke-width="4"/>
+  <line x1="84" y1="300" x2="816" y2="300" stroke="#D6D3D1" stroke-width="4"/>
+  <ellipse cx="450" cy="300" rx="28" ry="92" fill="#C4B5FD"/>
+  <path d="M190 300 H450" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M450 300 L618 236" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M190 300 L450 220" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M450 220 L618 236" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="618" cy="236" r="12" fill="#D97706"/>
+  <text x="194" y="210" fill="#1D4ED8" font-size="22" font-weight="700">Parallel route</text>
+  <text x="198" y="388" fill="#0F766E" font-size="22" font-weight="700">Center route</text>
+  <text x="492" y="188" fill="#6D28D9" font-size="22" font-weight="700">Gather Lens</text>
+  <text x="642" y="236" fill="#B45309" font-size="22" font-weight="700">True Meeting Point</text>
+</svg>

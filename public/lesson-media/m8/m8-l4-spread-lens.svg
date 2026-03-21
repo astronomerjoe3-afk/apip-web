@@ -1,0 +1,17 @@
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="520" rx="32" fill="#F5F3FF"/>
+  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Spread Lens and the Ghost Image</text>
+  <text x="48" y="108" fill="#475569" font-size="20">Real routes spread after the lens, so dashed backward extensions locate the virtual image.</text>
+  <rect x="48" y="148" width="804" height="308" rx="28" fill="#EEF2FF" stroke="#818CF8" stroke-width="4"/>
+  <line x1="84" y1="300" x2="816" y2="300" stroke="#CBD5E1" stroke-width="4"/>
+  <path d="M450 208 C420 236 420 364 450 392 C480 364 480 236 450 208 Z" fill="#BFDBFE"/>
+  <path d="M198 300 H450" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M450 300 L668 228" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M450 300 L668 372" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M450 300 L332 248" stroke="#A855F7" stroke-width="4" stroke-dasharray="10 10"/>
+  <path d="M450 300 L332 352" stroke="#A855F7" stroke-width="4" stroke-dasharray="10 10"/>
+  <circle cx="332" cy="300" r="12" fill="#7C3AED"/>
+  <text x="540" y="208" fill="#1D4ED8" font-size="22" font-weight="700">Real routes spread</text>
+  <text x="84" y="220" fill="#7C3AED" font-size="22" font-weight="700">Ghost image by extension</text>
+  <text x="84" y="404" fill="#334155" font-size="22">Extensions are still useful even though they are not actual light.</text>
+</svg>
