@@ -9,6 +9,12 @@ export type M8QuestionVisualMeta = {
   visual_callouts: string[];
 };
 
+export type M8ScaffoldSectionVisual = {
+  image_url: string;
+  caption: string;
+  highlights: string[];
+};
+
 type M8SimulationCopy = {
   title: string;
   instructions: string;
@@ -82,9 +88,81 @@ const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
   },
 };
 
+const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSectionVisual>> = {
+  M8_L1: {
+    "How to reason through it": {
+      image_url: "/lesson-media/m8/m8-l1-equal-angles.svg",
+      caption: "Start from the Guide Line, then compare the incoming and outgoing angles to that same perpendicular reference.",
+      highlights: [
+        "Incoming and reflected angles match when they are measured to the Guide Line.",
+        "The mirror surface is not the angle reference used by the reflection rule.",
+        "Once the reference line is fixed, the mirror answer follows calmly.",
+      ],
+    },
+    "Common trap": {
+      image_url: "/lesson-media/m8/m8-l1-surface-conversion.svg",
+      caption: "A surface angle can be helpful, but it is not the incident angle in the rule until it is converted to the Guide Line.",
+      highlights: [
+        "Surface angle and Guide Line angle add to 90 deg.",
+        "Using the wrong reference line creates the wrong reflected angle.",
+        "Convert first, then apply the equal-angle rule.",
+      ],
+    },
+    "Surface angle trap": {
+      image_url: "/lesson-media/m8/m8-l1-surface-conversion.svg",
+      caption: "The reflection law is normal-first, so a surface reading has to be turned into the angle from the Guide Line before the rule is used.",
+      highlights: [
+        "20 deg to the surface means 70 deg to the Guide Line.",
+        "The useful conversion is surface angle plus Guide Line angle equals 90 deg.",
+        "The rule compares incident and reflected angles only after that conversion.",
+      ],
+    },
+    "Ghost image clue": {
+      image_url: "/lesson-media/m8/m8-l1-ghost-image.svg",
+      caption: "The reflected routes stay in front of the mirror. The image behind the mirror comes from dashed backward extensions, not from real light there.",
+      highlights: [
+        "Only the backward extensions meet behind the mirror.",
+        "Real light travels to the eye in front of the mirror.",
+        "That is why the plane-mirror image is virtual.",
+      ],
+    },
+    "Worked example": {
+      image_url: "/lesson-media/m8/m8-l1-equal-angles.svg",
+      caption: "If the route arrives at 35 deg to the Guide Line, the reflected route also leaves at 35 deg to that same line.",
+      highlights: [
+        "Read the angle from the Guide Line first.",
+        "Apply the equal-angle rule second.",
+        "Keep the same reference line in the final answer.",
+      ],
+    },
+    "Worked example 2": {
+      image_url: "/lesson-media/m8/m8-l1-surface-conversion.svg",
+      caption: "20 deg to the surface becomes 70 deg to the Guide Line because the surface and the Guide Line are perpendicular.",
+      highlights: [
+        "Start with the given surface angle.",
+        "Subtract it from 90 deg to get the normal-based angle.",
+        "Only then use the mirror rule.",
+      ],
+    },
+    "Worked example 3": {
+      image_url: "/lesson-media/m8/m8-l1-image-distance.svg",
+      caption: "A plane mirror places the image the same distance behind the mirror as the object is in front of it.",
+      highlights: [
+        "Object distance and image distance are equal.",
+        "The image is behind the mirror, not on the surface.",
+        "Dashed extensions help locate the ghost image position.",
+      ],
+    },
+  },
+};
+
 export function m8QuestionVisualMeta(itemId: string): M8QuestionVisualMeta | undefined {
   const match = itemId.toUpperCase().match(/^(M8L[1-6])_[A-Z]+\d+$/);
   return match ? M8_VISUAL_META[match[1]] : undefined;
+}
+
+export function m8ScaffoldSectionVisual(code: string, heading: string): M8ScaffoldSectionVisual | undefined {
+  return M8_SCAFFOLD_SECTION_VISUALS[code]?.[heading];
 }
 
 const M8_SIMULATION_COPY: Record<string, M8SimulationCopy> = {

@@ -7,7 +7,7 @@ import { m4QuestionVisualMeta, m4ReflectionVisualCheck, m4ScaffoldCoreBullets, m
 import { m5QuestionVisualMeta, m5ReflectionVisualCheck, m5ScaffoldCoreBullets, m5ScaffoldFocusExtras, m5ScaffoldMediaCards, m5SimulationCopy } from "./m5LessonContent";
 import { m6QuestionVisualMeta, m6ReflectionVisualCheck, m6ScaffoldCoreBullets, m6ScaffoldFocusExtras, m6ScaffoldMediaCards, m6SimulationCopy } from "./m6LessonContent";
 import { m7QuestionVisualMeta, m7ReflectionVisualCheck, m7ScaffoldCoreBullets, m7ScaffoldFocusExtras, m7ScaffoldMediaCards, m7SimulationCopy } from "./m7LessonContent";
-import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8SimulationCopy } from "./m8LessonContent";
+import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8ScaffoldSectionVisual, m8SimulationCopy } from "./m8LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
 type RenderedQuestionOverride = {
@@ -7811,16 +7811,27 @@ function scaffoldExtendedExtraSections(code: string): UnknownRecord[] {
       return [];
   }
 }
+
+function attachScaffoldSectionVisuals(code: string, sections: UnknownRecord[]): UnknownRecord[] {
+  if (!code.startsWith("M8_")) return sections;
+  return sections.map((section) => {
+    const sectionRecord = asRecord(section);
+    const heading = text(sectionRecord.heading);
+    const visual = m8ScaffoldSectionVisual(code, heading);
+    return visual ? { ...sectionRecord, visual } : sectionRecord;
+  });
+}
+
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
     const authoredSections = authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
     if (authoredSections.length > 0) {
-      return authoredSections;
+      return attachScaffoldSectionVisuals(code, authoredSections);
     }
     const f2Copy = scaffoldF2SectionCopy(code);
     const analogyCopy = scaffoldF2AnalogyBridge(code);
-    return [
+    return attachScaffoldSectionVisuals(code, [
       { heading: "Fix these ideas", body: repairText },
       { heading: "Core idea", body: f2Copy.coreIdea },
       { heading: "How to reason through it", body: f2Copy.reasoning, check_for_understanding: f2Copy.checkForUnderstanding },
@@ -7831,7 +7842,7 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       ...(code.startsWith("M4_") ? m4SupplementalScaffoldSections(code) : []),
       ...scaffoldWorkedExampleSections(workedExample),
       ...(code.startsWith("M3_") ? m3SupplementalWorkedExampleSections(code) : []),
-    ];
+    ]);
   }
   switch (code) {
     case "F1_L1":

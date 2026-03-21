@@ -162,10 +162,17 @@ type TeachingFocusCard = {
   think_check?: string;
 };
 
+type ScaffoldSectionVisual = {
+  image_url: string;
+  caption?: string;
+  highlights?: string[];
+};
+
 type ScaffoldSection = {
   heading: string;
   body: string;
   analogy?: string;
+  visual?: ScaffoldSectionVisual;
   worked_example?: {
     prompt: string;
     steps: string[];
@@ -1109,6 +1116,35 @@ export default function LessonRunner({
                 <div className="mt-5 rounded-2xl bg-slate-50 p-5">
                 <p className="font-medium text-slate-900">Analogy bridge</p>
                 <p className="mt-2 text-slate-700">{section.analogy}</p>
+              </div>
+            ) : null}
+
+            {section.visual?.image_url ? (
+              <div className="mt-5 overflow-hidden rounded-2xl border bg-white shadow-sm">
+                <div className="bg-[radial-gradient(circle_at_top,_rgba(219,234,254,0.7),_rgba(255,255,255,0.96)_62%)] p-4 md:p-5">
+                  <img
+                    src={section.visual.image_url}
+                    alt={section.visual.caption || section.heading}
+                    className="h-72 w-full object-contain md:h-80"
+                    loading="lazy"
+                  />
+                </div>
+                {section.visual.caption || section.visual.highlights?.length ? (
+                  <div className="border-t bg-slate-50/80 p-5">
+                    {section.visual.caption ? (
+                      <p className="text-slate-700">{section.visual.caption}</p>
+                    ) : null}
+                    {section.visual.highlights?.length ? (
+                      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                        {section.visual.highlights.slice(0, 4).map((item) => (
+                          <div key={item} className="rounded-2xl border border-sky-100 bg-white px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
             ) : null}
 
