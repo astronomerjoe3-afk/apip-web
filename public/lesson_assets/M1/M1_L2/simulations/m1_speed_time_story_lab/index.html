@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Speed-time change explorer</title>
+<style>
+  body { margin: 0; background: #0f172a; color: white; font-family: Arial, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; }
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .panel { border: 1px solid #334155; border-radius: 18px; padding: 18px; background: #111827; }
+  label { display: block; margin-top: 14px; color: #cbd5e1; }
+  input { width: 100%; margin-top: 8px; }
+  .chips { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 16px; }
+  .chip { border-radius: 14px; padding: 12px; background: #0f172a; border: 1px solid #334155; }
+  svg { width: 100%; height: auto; display: block; }
+  .note { margin-top: 16px; padding: 14px; border-radius: 14px; background: #082f49; color: #e0f2fe; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Speed-time change explorer</h1>
+    <p>Use the Quest-Log pace log to keep speed-now and change-of-speed separate, so graph height and graph slope stop collapsing into one idea.</p>
+    <div class="grid">
+      <div class="panel">
+        <h2>Controls</h2>
+        
+      <label>Start speed (m/s)<input id="startSpeed" type="range" min="0" max="14" step="1" value="4" /></label>
+      <label>End speed (m/s)<input id="endSpeed" type="range" min="0" max="14" step="1" value="10" /></label>
+      <label>Time interval (s)<input id="duration" type="range" min="1" max="8" step="1" value="3" /></label>
+    
+      </div>
+      <div class="panel">
+        <h2>Graph board</h2>
+        
+      <svg viewBox="0 0 560 280" aria-label="Speed-time graph">
+        <rect width="560" height="280" rx="18" fill="#020617" />
+        <line x1="70" y1="230" x2="510" y2="230" stroke="#94a3b8" stroke-width="3" />
+        <line x1="70" y1="230" x2="70" y2="40" stroke="#94a3b8" stroke-width="3" />
+        <polyline id="paceLine" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <circle id="midPoint" r="8" fill="#fbbf24" />
+        <text x="150" y="258" fill="#cbd5e1" font-size="18">time</text>
+        <text x="18" y="120" fill="#cbd5e1" font-size="18" transform="rotate(-90 18 120)">speed</text>
+      </svg>
+    
+        <div class="chips">
+      <div class="chip"><strong>Graph height now</strong><div id="midSpeed"></div></div>
+      <div class="chip"><strong>Slope</strong><div id="accel"></div></div>
+      <div class="chip"><strong>Flat above zero</strong><div>constant speed</div></div>
+    </div>
+        <div class="note" id="note"></div>
+      </div>
+    </div>
+  </div>
+<script>
+
+      function update() {
+        const start = Number(document.getElementById('startSpeed').value);
+        const end = Number(document.getElementById('endSpeed').value);
+        const duration = Number(document.getElementById('duration').value);
+        const accel = (end - start) / duration;
+        const maxSpeed = Math.max(start, end, 2);
+        const p1 = `70,${230 - (start / maxSpeed) * 170}`;
+        const p2 = `510,${230 - (end / maxSpeed) * 170}`;
+        document.getElementById('paceLine').setAttribute('points', `${p1} ${p2}`);
+        document.getElementById('midPoint').setAttribute('cx', '290');
+        document.getElementById('midPoint').setAttribute('cy', String(230 - (((start + end) / 2) / maxSpeed) * 170));
+        document.getElementById('midSpeed').innerText = `${((start + end) / 2).toFixed(1)} m/s at the midpoint`;
+        document.getElementById('accel').innerText = `${accel.toFixed(2)} m/s^2`;
+        document.getElementById('note').innerText = 'Height answers the speed-now question. Slope answers the rate-of-change question. They are not interchangeable.';
+      }
+      document.querySelectorAll('input').forEach((input) => input.addEventListener('input', update));
+      update();
+    
+</script>
+</body>
+</html>
