@@ -6,6 +6,7 @@ import { m3ContrastCodes, m3GeneratedConceptGateItems, m3GeneratedDiagnosticItem
 import { m4QuestionVisualMeta, m4ReflectionVisualCheck, m4ScaffoldCoreBullets, m4ScaffoldFocusExtras, m4ScaffoldMediaCards, m4SimulationCopy, m4SupplementalScaffoldSections } from "./m4LessonContent";
 import { m5QuestionVisualMeta, m5ReflectionVisualCheck, m5ScaffoldCoreBullets, m5ScaffoldFocusExtras, m5ScaffoldMediaCards, m5SimulationCopy } from "./m5LessonContent";
 import { m6QuestionVisualMeta, m6ReflectionVisualCheck, m6ScaffoldCoreBullets, m6ScaffoldFocusExtras, m6ScaffoldMediaCards, m6SimulationCopy } from "./m6LessonContent";
+import { m7QuestionVisualMeta, m7ReflectionVisualCheck, m7ScaffoldCoreBullets, m7ScaffoldFocusExtras, m7ScaffoldMediaCards, m7SimulationCopy } from "./m7LessonContent";
 import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8SimulationCopy } from "./m8LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
@@ -78,14 +79,14 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6"];
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M8_");
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_");
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M8_");
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_");
 }
 
 type QuestionVisualMeta = {
@@ -424,6 +425,8 @@ function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined
   if (m5Visual) return m5Visual;
   const m6Visual = m6QuestionVisualMeta(normalizedId);
   if (m6Visual) return m6Visual;
+  const m7Visual = m7QuestionVisualMeta(normalizedId);
+  if (m7Visual) return m7Visual;
   const m8Visual = m8QuestionVisualMeta(normalizedId);
   if (m8Visual) return m8Visual;
   const m1Match = normalizedId.match(/^(M1L[1-6])_[A-Z]+\d+$/);
@@ -4310,6 +4313,8 @@ function simulationStageTitle(code: string): string {
   if (m5) return m5.title;
   const m6 = m6SimulationCopy(code);
   if (m6) return m6.title;
+  const m7 = m7SimulationCopy(code);
+  if (m7) return m7.title;
   const m8 = m8SimulationCopy(code);
   if (m8) return m8.title;
   switch (code) {
@@ -4358,6 +4363,8 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
   if (m5) return m5.instructions;
   const m6 = m6SimulationCopy(code);
   if (m6) return m6.instructions;
+  const m7 = m7SimulationCopy(code);
+  if (m7) return m7.instructions;
   const m8 = m8SimulationCopy(code);
   if (m8) return m8.instructions;
   switch (code) {
@@ -4406,6 +4413,8 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
   if (m5) return m5.taskPrompt;
   const m6 = m6SimulationCopy(code);
   if (m6) return m6.taskPrompt;
+  const m7 = m7SimulationCopy(code);
+  if (m7) return m7.taskPrompt;
   const m8 = m8SimulationCopy(code);
   if (m8) return m8.taskPrompt;
   switch (code) {
@@ -4454,6 +4463,8 @@ function simulationStageExploreSteps(code: string): string[] {
   if (m5) return m5.exploreSteps;
   const m6 = m6SimulationCopy(code);
   if (m6) return m6.exploreSteps;
+  const m7 = m7SimulationCopy(code);
+  if (m7) return m7.exploreSteps;
   const m8 = m8SimulationCopy(code);
   if (m8) return m8.exploreSteps;
   switch (code) {
@@ -4653,6 +4664,8 @@ function simulationStageWatchFor(code: string): string[] {
   if (m5) return m5.watchFor;
   const m6 = m6SimulationCopy(code);
   if (m6) return m6.watchFor;
+  const m7 = m7SimulationCopy(code);
+  if (m7) return m7.watchFor;
   const m8 = m8SimulationCopy(code);
   if (m8) return m8.watchFor;
   switch (code) {
@@ -4851,6 +4864,8 @@ function simulationStageTryFirst(code: string): string | undefined {
   if (m5) return m5.tryFirst;
   const m6 = m6SimulationCopy(code);
   if (m6) return m6.tryFirst;
+  const m7 = m7SimulationCopy(code);
+  if (m7) return m7.tryFirst;
   const m8 = m8SimulationCopy(code);
   if (m8) return m8.tryFirst;
   switch (code) {
@@ -4929,6 +4944,8 @@ function simulationStageTakeaway(code: string): string | undefined {
   if (m5) return m5.takeaway;
   const m6 = m6SimulationCopy(code);
   if (m6) return m6.takeaway;
+  const m7 = m7SimulationCopy(code);
+  if (m7) return m7.takeaway;
   const m8 = m8SimulationCopy(code);
   if (m8) return m8.takeaway;
   switch (code) {
@@ -5011,6 +5028,8 @@ function scaffoldFocusExtras(code: string): string[] {
   if (m2.length > 0) return m2;
   const m3 = m3ScaffoldFocusExtras(code);
   if (m3.length > 0) return m3;
+  const m7 = m7ScaffoldFocusExtras(code);
+  if (m7.length > 0) return m7;
   const m8 = m8ScaffoldFocusExtras(code);
   if (m8.length > 0) return m8;
   const m4 = m4ScaffoldFocusExtras(code);
@@ -5242,6 +5261,8 @@ function scaffoldCoreBullets(code: string): string[] {
   if (m2.length > 0) return m2;
   const m3 = m3ScaffoldCoreBullets(code);
   if (m3.length > 0) return m3;
+  const m7 = m7ScaffoldCoreBullets(code);
+  if (m7.length > 0) return m7;
   const m8 = m8ScaffoldCoreBullets(code);
   if (m8.length > 0) return m8;
   const m4 = m4ScaffoldCoreBullets(code);
@@ -6524,6 +6545,8 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   if (m2.length > 0) return m2;
   const m3 = m3ScaffoldMediaCards(code);
   if (m3.length > 0) return m3;
+  const m7 = m7ScaffoldMediaCards(code);
+  if (m7.length > 0) return m7;
   const m4 = m4ScaffoldMediaCards(code);
   if (m4.length > 0) return m4;
   const m5 = m5ScaffoldMediaCards(code);
@@ -7529,6 +7552,8 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
   if (m2) return m2;
   const m3 = m3ReflectionVisualCheck(code);
   if (m3) return m3;
+  const m7 = m7ReflectionVisualCheck(code);
+  if (m7) return m7;
   const m4 = m4ReflectionVisualCheck(code);
   if (m4) return m4;
   const m5 = m5ReflectionVisualCheck(code);
