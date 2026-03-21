@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#0f172a"/>
+  <text x="60" y="90" fill="#f8fafc" font-family="Georgia, serif" font-size="58" font-weight="700">Hit dots build the pattern map</text>
+  <text x="60" y="150" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="28">Each event is local. Many events reveal the distribution.</text>
+  <rect x="70" y="220" width="1060" height="500" rx="34" fill="#111827" stroke="#334155" stroke-width="5"/>
+  <text x="120" y="275" fill="#93c5fd" font-family="Arial, sans-serif" font-size="34" font-weight="700">Single events</text>
+  <circle cx="220" cy="420" r="10" fill="#38bdf8"/>
+  <circle cx="310" cy="500" r="10" fill="#38bdf8"/>
+  <circle cx="390" cy="380" r="10" fill="#38bdf8"/>
+  <text x="120" y="620" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="26">One detection is one localized hit dot.</text>
+  <text x="620" y="275" fill="#22c55e" font-family="Arial, sans-serif" font-size="34" font-weight="700">Built-up distribution</text>
+  <g fill="#38bdf8" opacity="0.85">
+    <circle cx="690" cy="420" r="7"/><circle cx="720" cy="380" r="7"/><circle cx="750" cy="460" r="7"/><circle cx="780" cy="340" r="7"/><circle cx="810" cy="500" r="7"/>
+    <circle cx="840" cy="320" r="7"/><circle cx="870" cy="470" r="7"/><circle cx="900" cy="360" r="7"/><circle cx="930" cy="430" r="7"/><circle cx="960" cy="390" r="7"/>
+    <circle cx="690" cy="500" r="7"/><circle cx="720" cy="540" r="7"/><circle cx="750" cy="320" r="7"/><circle cx="780" cy="420" r="7"/><circle cx="810" cy="380" r="7"/>
+    <circle cx="840" cy="450" r="7"/><circle cx="870" cy="340" r="7"/><circle cx="900" cy="520" r="7"/><circle cx="930" cy="310" r="7"/><circle cx="960" cy="470" r="7"/>
+  </g>
+  <text x="620" y="620" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="26">Many hits reveal a wave-like pattern map.</text>
+</svg>

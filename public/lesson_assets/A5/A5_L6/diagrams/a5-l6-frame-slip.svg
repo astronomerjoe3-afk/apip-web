@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#0f172a"/>
+  <text x="60" y="90" fill="#f8fafc" font-family="Georgia, serif" font-size="58" font-weight="700">Frame maps disagree on span and same-now</text>
+  <text x="60" y="150" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="28">Proper length, contracted length, and simultaneity stay on one relativity board.</text>
+  <rect x="80" y="220" width="1040" height="500" rx="34" fill="#111827" stroke="#334155" stroke-width="5"/>
+  <text x="130" y="290" fill="#93c5fd" font-family="Arial, sans-serif" font-size="34" font-weight="700">Proper length</text>
+  <rect x="130" y="340" width="430" height="28" rx="14" fill="#38bdf8"/>
+  <text x="130" y="430" fill="#22c55e" font-family="Arial, sans-serif" font-size="34" font-weight="700">Contracted length</text>
+  <rect x="130" y="480" width="300" height="28" rx="14" fill="#22c55e"/>
+  <line x1="760" y1="340" x2="720" y2="620" stroke="#f97316" stroke-width="6"/>
+  <line x1="920" y1="340" x2="980" y2="620" stroke="#f97316" stroke-width="6"/>
+  <text x="650" y="290" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">Same-now slip</text>
+  <text x="640" y="670" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="26">Different frames need not agree on which separated events are simultaneous.</text>
+</svg>

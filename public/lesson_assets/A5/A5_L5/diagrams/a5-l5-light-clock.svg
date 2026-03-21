@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#f8fafc"/>
+  <text x="60" y="90" fill="#0f172a" font-family="Georgia, serif" font-size="58" font-weight="700">A moving pulse clock stretches its tick</text>
+  <text x="60" y="150" fill="#475569" font-family="Arial, sans-serif" font-size="28">Keep the same signal cap c, and the longer observed light path forces a longer tick.</text>
+  <rect x="80" y="220" width="1040" height="500" rx="34" fill="#eff6ff" stroke="#93c5fd" stroke-width="5"/>
+  <text x="180" y="290" fill="#1e293b" font-family="Arial, sans-serif" font-size="34" font-weight="700">Rest-frame light path</text>
+  <line x1="260" y1="350" x2="260" y2="620" stroke="#0f172a" stroke-width="10"/>
+  <line x1="260" y1="350" x2="260" y2="620" stroke="#38bdf8" stroke-width="6" stroke-dasharray="16 10"/>
+  <text x="170" y="670" fill="#475569" font-family="Arial, sans-serif" font-size="26">Shorter path, shorter tick</text>
+  <text x="645" y="290" fill="#1e293b" font-family="Arial, sans-serif" font-size="34" font-weight="700">Moving-frame view</text>
+  <line x1="720" y1="350" x2="930" y2="620" stroke="#38bdf8" stroke-width="8"/>
+  <line x1="930" y1="620" x2="1040" y2="430" stroke="#38bdf8" stroke-width="8" opacity="0.8"/>
+  <line x1="720" y1="350" x2="720" y2="620" stroke="#0f172a" stroke-width="10"/>
+  <line x1="1040" y1="430" x2="1040" y2="700" stroke="#0f172a" stroke-width="10"/>
+  <text x="705" y="740" fill="#475569" font-family="Arial, sans-serif" font-size="26">Longer path with the same c means a longer tick.</text>
+</svg>
