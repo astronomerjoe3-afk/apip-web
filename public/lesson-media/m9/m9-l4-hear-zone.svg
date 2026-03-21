@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Hear Zone and Super-Scout Mode</title>
+  <desc id="desc">A frequency scale showing the audible range and ultrasound above 20 kilohertz.</desc>
+  <rect width="1200" height="800" fill="#f9fbff"/>
+  <rect x="44" y="34" width="1112" height="732" rx="36" fill="#f1f5ff" stroke="#d8def8" stroke-width="4"/>
+  <text x="84" y="112" fill="#172554" font-size="56" font-weight="700">Hear Zone and Super-Scout Mode</text>
+  <text x="84" y="164" fill="#475569" font-size="28">Ultrasound is still sound. It simply sits above the usual human hearing range.</text>
+  <rect x="118" y="326" width="420" height="58" rx="28" fill="#60a5fa"/>
+  <rect x="542" y="326" width="470" height="58" rx="28" fill="#7c3aed"/>
+  <line x1="540" y1="258" x2="540" y2="466" stroke="#0f172a" stroke-width="5" stroke-dasharray="10 10"/>
+  <circle cx="752" cy="355" r="24" fill="#f59e0b"/>
+  <text x="166" y="286" fill="#1d4ed8" font-size="34" font-weight="700">Hear Zone</text>
+  <text x="662" y="286" fill="#6d28d9" font-size="34" font-weight="700">Super-Scout Mode</text>
+  <text x="446" y="510" fill="#0f172a" font-size="30" font-weight="700">20 kHz boundary</text>
+  <text x="104" y="586" fill="#0f172a" font-size="30">Audible examples: 200 Hz, 2 kHz, 15 kHz</text>
+  <text x="104" y="632" fill="#0f172a" font-size="30">Ultrasound examples: 40 kHz, 100 kHz, 3 MHz</text>
+  <rect x="98" y="676" width="302" height="42" rx="18" fill="#ffffff"/>
+  <rect x="444" y="676" width="302" height="42" rx="18" fill="#ffffff"/>
+  <rect x="790" y="676" width="302" height="42" rx="18" fill="#ffffff"/>
+  <text x="124" y="704" fill="#0f172a" font-size="24">Above 20 kHz = ultrasound</text>
+  <text x="472" y="704" fill="#0f172a" font-size="24">Ultrasound is still sound</text>
+  <text x="820" y="704" fill="#0f172a" font-size="24">It can still reflect from boundaries</text>
+</svg>

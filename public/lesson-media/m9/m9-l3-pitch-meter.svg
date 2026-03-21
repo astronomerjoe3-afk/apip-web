@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Pitch Meter</title>
+  <desc id="desc">Frequency controls pitch while loudness is a separate quantity.</desc>
+  <rect width="1200" height="800" fill="#f8fbff"/>
+  <rect x="44" y="34" width="1112" height="732" rx="36" fill="#eef6ff" stroke="#d3e3f8" stroke-width="4"/>
+  <text x="84" y="112" fill="#172554" font-size="56" font-weight="700">Ping Rate Sets Tone Height</text>
+  <text x="84" y="164" fill="#475569" font-size="28">Pitch follows frequency. Loudness belongs on a separate display.</text>
+  <rect x="112" y="246" width="258" height="280" rx="34" fill="#dbeafe"/>
+  <rect x="456" y="246" width="258" height="280" rx="34" fill="#e0e7ff"/>
+  <rect x="812" y="246" width="180" height="280" rx="34" fill="#dcfce7"/>
+  <text x="172" y="302" fill="#1d4ed8" font-size="34" font-weight="700">Frequency</text>
+  <text x="204" y="372" fill="#1d4ed8" font-size="64" font-weight="700">680 Hz</text>
+  <text x="540" y="302" fill="#312e81" font-size="34" font-weight="700">Pitch</text>
+  <text x="530" y="372" fill="#312e81" font-size="64" font-weight="700">Higher</text>
+  <text x="846" y="302" fill="#166534" font-size="34" font-weight="700">Loudness</text>
+  <rect x="870" y="428" width="64" height="88" rx="18" fill="#16a34a"/>
+  <text x="470" y="470" fill="#475569" font-size="26">Same medium, same sound family.</text>
+  <text x="470" y="510" fill="#475569" font-size="26">Higher frequency means shorter wavelength,</text>
+  <text x="470" y="548" fill="#475569" font-size="26">not automatically a faster sound.</text>
+  <rect x="98" y="628" width="310" height="84" rx="24" fill="#ffffff"/>
+  <rect x="444" y="628" width="310" height="84" rx="24" fill="#ffffff"/>
+  <rect x="790" y="628" width="310" height="84" rx="24" fill="#ffffff"/>
+  <text x="128" y="676" fill="#0f172a" font-size="28">Higher frequency = higher pitch</text>
+  <text x="474" y="664" fill="#0f172a" font-size="28">Pitch and loudness</text>
+  <text x="474" y="696" fill="#0f172a" font-size="28">must stay separate.</text>
+  <text x="820" y="676" fill="#0f172a" font-size="28">Same air means speed stays medium-set.</text>
+</svg>

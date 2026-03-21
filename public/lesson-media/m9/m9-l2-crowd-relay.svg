@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Crowd Relay</title>
+  <desc id="desc">Compressions and rarefactions move through a line of particles while each particle moves locally.</desc>
+  <rect width="1200" height="800" fill="#f8fbff"/>
+  <rect x="44" y="34" width="1112" height="732" rx="36" fill="#f1f5ff" stroke="#d8def8" stroke-width="4"/>
+  <text x="84" y="112" fill="#172554" font-size="56" font-weight="700">Compressions and Rarefactions Relay the Message</text>
+  <text x="84" y="164" fill="#475569" font-size="28">Sound in air is a longitudinal pressure pattern, not a march of particles across the room.</text>
+  <rect x="170" y="252" width="154" height="230" rx="36" fill="#dbeafe"/>
+  <rect x="526" y="252" width="154" height="230" rx="36" fill="#dbeafe"/>
+  <text x="178" y="230" fill="#1d4ed8" font-size="30" font-weight="700">Squeeze band</text>
+  <text x="536" y="230" fill="#1d4ed8" font-size="30" font-weight="700">Squeeze band</text>
+  <text x="372" y="230" fill="#475569" font-size="30" font-weight="700">Release band</text>
+  <g fill="#64748b">
+    <circle cx="184" cy="368" r="18"/><circle cx="224" cy="368" r="18"/><circle cx="264" cy="368" r="18"/><circle cx="304" cy="368" r="18"/>
+    <circle cx="392" cy="368" r="18"/><circle cx="462" cy="368" r="18"/>
+    <circle cx="540" cy="368" r="18"/><circle cx="580" cy="368" r="18"/><circle cx="620" cy="368" r="18"/><circle cx="660" cy="368" r="18"/>
+    <circle cx="772" cy="368" r="18"/><circle cx="842" cy="368" r="18"/><circle cx="912" cy="368" r="18"/>
+  </g>
+  <line x1="130" y1="548" x2="1030" y2="548" stroke="#64748b" stroke-width="6" stroke-dasharray="12 12"/>
+  <line x1="224" y1="604" x2="224" y2="528" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+  <line x1="580" y1="604" x2="580" y2="528" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+  <line x1="842" y1="604" x2="842" y2="528" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+  <text x="84" y="604" fill="#0f172a" font-size="28" font-weight="700">Local particle motion</text>
+  <text x="84" y="646" fill="#475569" font-size="26">Each particle shuttles around its own place while the pressure pattern travels onward.</text>
+  <rect x="98" y="682" width="296" height="42" rx="18" fill="#ffffff"/>
+  <rect x="438" y="682" width="296" height="42" rx="18" fill="#ffffff"/>
+  <rect x="778" y="682" width="296" height="42" rx="18" fill="#ffffff"/>
+  <text x="122" y="710" fill="#0f172a" font-size="24">Compression = crowded region</text>
+  <text x="468" y="710" fill="#0f172a" font-size="24">Rarefaction = spread region</text>
+  <text x="804" y="710" fill="#0f172a" font-size="24">Longitudinal = parallel motion</text>
+</svg>
