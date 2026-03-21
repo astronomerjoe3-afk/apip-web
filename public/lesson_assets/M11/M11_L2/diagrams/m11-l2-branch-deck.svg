@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" rx="36" fill="#f7fff9"/>
+  <text x="64" y="92" fill="#0f172a" font-size="54" font-weight="700">Branch Deck: Shared Voltage, Split Current</text>
+  <text x="64" y="146" fill="#475569" font-size="24">All branches connect between the same two junctions, so each branch receives the same boost.</text>
+  <rect x="76" y="210" width="1128" height="410" rx="40" fill="#effcf5" stroke="#6ee7b7" stroke-width="6"/>
+  <circle cx="202" cy="420" r="12" fill="#2563eb"/>
+  <circle cx="1078" cy="420" r="12" fill="#2563eb"/>
+  <path d="M202 420H344V290H560V420H1078" stroke="#16a34a" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M202 420H344V550H560V420H1078" stroke="#7c3aed" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <rect x="560" y="238" width="198" height="86" rx="24" fill="#dcfce7"/>
+  <rect x="560" y="504" width="198" height="86" rx="24" fill="#ede9fe"/>
+  <text x="612" y="292" fill="#166534" font-size="34" font-weight="700">Branch A</text>
+  <text x="612" y="558" fill="#6d28d9" font-size="34" font-weight="700">Branch B</text>
+  <text x="260" y="390" fill="#0f766e" font-size="28" font-weight="700">same branch voltage</text>
+  <text x="280" y="256" fill="#166534" font-size="26" font-weight="700">current A</text>
+  <text x="280" y="610" fill="#6d28d9" font-size="26" font-weight="700">current B</text>
+  <rect x="176" y="238" width="924" height="54" rx="24" fill="#ffffff" opacity="0.9"/>
+  <text x="206" y="274" fill="#0f172a" font-size="28" font-weight="700">Parallel rule: same two junctions -> same branch voltage, while branch currents can differ and then recombine.</text>
+</svg>

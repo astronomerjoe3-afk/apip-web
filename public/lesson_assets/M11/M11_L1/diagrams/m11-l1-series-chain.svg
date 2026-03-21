@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" rx="36" fill="#f8fbff"/>
+  <text x="64" y="92" fill="#0f172a" font-size="54" font-weight="700">One-Lane Chain: Same Current, Shared Voltage</text>
+  <text x="64" y="146" fill="#475569" font-size="24">Every carrier visits every station because there is only one path.</text>
+  <rect x="76" y="210" width="1128" height="410" rx="40" fill="#edf4ff" stroke="#93c5fd" stroke-width="6"/>
+  <rect x="126" y="374" width="56" height="96" rx="14" fill="#f59e0b"/>
+  <text x="114" y="354" fill="#b45309" font-size="24" font-weight="700">Source</text>
+  <path d="M182 422H320" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
+  <rect x="320" y="366" width="124" height="112" rx="22" fill="#c7d2fe"/>
+  <text x="366" y="431" fill="#1e3a8a" font-size="34" font-weight="700">R1</text>
+  <path d="M444 422H584" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
+  <rect x="584" y="366" width="124" height="112" rx="22" fill="#bfdbfe"/>
+  <text x="630" y="431" fill="#1d4ed8" font-size="34" font-weight="700">R2</text>
+  <path d="M708 422H848" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
+  <rect x="848" y="366" width="124" height="112" rx="22" fill="#dbeafe"/>
+  <text x="894" y="431" fill="#2563eb" font-size="34" font-weight="700">R3</text>
+  <path d="M972 422H1124" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
+  <text x="340" y="560" fill="#1e3a8a" font-size="28" font-weight="700">same current</text>
+  <text x="612" y="560" fill="#1d4ed8" font-size="28" font-weight="700">same current</text>
+  <text x="876" y="560" fill="#2563eb" font-size="28" font-weight="700">same current</text>
+  <rect x="174" y="266" width="934" height="58" rx="24" fill="#ffffff" opacity="0.9"/>
+  <text x="212" y="304" fill="#0f172a" font-size="28" font-weight="700">Series rule: one path -> one common current. The source voltage is shared across the stations.</text>
+</svg>

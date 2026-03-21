@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#eef2ff"/>
+  <text x="640" y="72" text-anchor="middle" font-family="Arial" font-size="34" font-weight="700" fill="#0f172a">Opposite side-kicks on a loop create motor torque</text>
+  <text x="640" y="110" text-anchor="middle" font-family="Arial" font-size="18" fill="#475569">The motor effect is just the force-on-a-wire story applied to opposite sides of a current-carrying coil.</text>
+
+  <rect x="76" y="158" width="1128" height="468" rx="36" fill="#ffffff" stroke="#93c5fd" stroke-width="6"/>
+  <rect x="126" y="278" width="74" height="190" rx="20" fill="#ef4444"/>
+  <rect x="1080" y="278" width="74" height="190" rx="20" fill="#3b82f6"/>
+  <text x="163" y="320" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#ffffff">N</text>
+  <text x="1117" y="320" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#ffffff">S</text>
+
+  <path d="M430 274L766 354L850 474L514 394Z" fill="#dbeafe" stroke="#1d4ed8" stroke-width="8"/>
+  <line x1="640" y1="224" x2="640" y2="554" stroke="#475569" stroke-width="6" stroke-dasharray="10 10"/>
+  <circle cx="640" cy="390" r="14" fill="#0f172a"/>
+  <path d="M500 350V260" stroke="#10b981" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="500,238 484,272 516,272" fill="#10b981"/>
+  <path d="M780 430V520" stroke="#ef4444" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="780,542 764,508 796,508" fill="#ef4444"/>
+  <text x="470" y="236" font-family="Arial" font-size="22" fill="#047857">upward force</text>
+  <text x="742" y="586" font-family="Arial" font-size="22" fill="#b91c1c">downward force</text>
+
+  <rect x="888" y="226" width="250" height="214" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="910" y="268" font-family="Arial" font-size="22" font-weight="700" fill="#0f172a">Torque story</text>
+  <text x="910" y="308" font-family="Arial" font-size="18" fill="#475569">1. Opposite coil sides carry current.</text>
+  <text x="910" y="340" font-family="Arial" font-size="18" fill="#475569">2. Opposite forces act on those sides.</text>
+  <text x="910" y="372" font-family="Arial" font-size="18" fill="#475569">3. The pair makes the loop rotate.</text>
+  <text x="910" y="416" font-family="Arial" font-size="18" fill="#475569">A split-ring commutator swaps current each half-turn so the overall rotation keeps going.</text>
+</svg>

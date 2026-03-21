@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" rx="36" fill="#fffaf3"/>
+  <text x="64" y="92" fill="#0f172a" font-size="54" font-weight="700">Task Stations and Shed Rate</text>
+  <text x="64" y="146" fill="#475569" font-size="24">Power is the energy-transfer rate at the component: more current and or more voltage drop can mean more power.</text>
+  <rect x="76" y="210" width="1128" height="410" rx="40" fill="#fff3e6" stroke="#fdba74" stroke-width="6"/>
+  <rect x="176" y="292" width="294" height="220" rx="34" fill="#ffffff"/>
+  <rect x="810" y="292" width="294" height="220" rx="34" fill="#ffffff"/>
+  <rect x="542" y="314" width="196" height="176" rx="28" fill="#fed7aa"/>
+  <text x="596" y="414" fill="#9a3412" font-size="52" font-weight="700">P = IV</text>
+  <text x="228" y="352" fill="#1d4ed8" font-size="28" font-weight="700">current through station</text>
+  <text x="228" y="402" fill="#2563eb" font-size="40" font-weight="700">I</text>
+  <text x="228" y="470" fill="#475569" font-size="24">charge flow rate</text>
+  <text x="858" y="352" fill="#166534" font-size="28" font-weight="700">voltage across station</text>
+  <text x="858" y="402" fill="#15803d" font-size="40" font-weight="700">V</text>
+  <text x="858" y="470" fill="#475569" font-size="24">boost drop per carrier</text>
+  <rect x="188" y="540" width="892" height="54" rx="24" fill="#ffffff" opacity="0.9"/>
+  <text x="252" y="576" fill="#0f172a" font-size="28" font-weight="700">Power rule: more current and or more voltage drop -> more energy shed each second.</text>
+</svg>
