@@ -39,7 +39,7 @@ const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
     ],
   },
   M8L2: {
-    image_url: "/lesson-media/m8/m8-l2-bend-gate.svg",
+    image_url: "/lesson_assets/M8/M8_L2/diagrams/m8-l2-bend-gate.svg",
     visual_title: "Bend Gates compare fast and slow zones",
     visual_caption: "Refraction changes route direction because light speed changes at a boundary.",
     visual_callouts: [
@@ -49,7 +49,7 @@ const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
     ],
   },
   M8L3: {
-    image_url: "/lesson-media/m8/m8-l3-gather-lens.svg",
+    image_url: "/lesson_assets/M8/M8_L3/diagrams/m8-l3-gather-lens.svg",
     visual_title: "Gather Lens to a True Meeting Point",
     visual_caption: "A few key routes are enough to predict where real refracted routes meet.",
     visual_callouts: [
@@ -59,7 +59,7 @@ const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
     ],
   },
   M8L4: {
-    image_url: "/lesson-media/m8/m8-l4-spread-lens.svg",
+    image_url: "/lesson_assets/M8/M8_L4/diagrams/m8-l4-spread-lens.svg",
     visual_title: "Spread Lens and the Ghost Image",
     visual_caption: "A diverging lens spreads real routes, so dashed backward extensions locate the virtual image.",
     visual_callouts: [
@@ -69,7 +69,7 @@ const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
     ],
   },
   M8L5: {
-    image_url: "/lesson-media/m8/m8-l5-lock-bounce.svg",
+    image_url: "/lesson_assets/M8/M8_L5/diagrams/m8-l5-critical-angle.svg",
     visual_title: "Escape Edge and Lock-Bounce",
     visual_caption: "Critical-angle reasoning is strongest when learners see escape, skim, and total internal reflection as one boundary story.",
     visual_callouts: [
@@ -79,7 +79,7 @@ const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
     ],
   },
   M8L6: {
-    image_url: "/lesson-media/m8/m8-l6-route-sketch.svg",
+    image_url: "/lesson_assets/M8/M8_L6/diagrams/m8-l6-plane-mirror-ghost.svg",
     visual_title: "Route Sketches separate line roles",
     visual_caption: "A ray diagram mixes real routes, Guide Lines, and dashed extensions to predict real and virtual images.",
     visual_callouts: [
@@ -315,6 +315,7 @@ export function m8ScaffoldCoreBullets(code: string): string[] {
 }
 
 export function m8ScaffoldMediaCards(code: string): UnknownRecord[] {
+  if (code !== "M8_L1") return [];
   const visual = M8_VISUAL_META[code.replace("_", "")];
   if (!visual) return [];
   return [{
@@ -327,6 +328,7 @@ export function m8ScaffoldMediaCards(code: string): UnknownRecord[] {
 }
 
 export function m8ReflectionVisualCheck(code: string): UnknownRecord | undefined {
+  if (code !== "M8_L1") return undefined;
   const visual = M8_VISUAL_META[code.replace("_", "")];
   if (!visual) return undefined;
   return {
