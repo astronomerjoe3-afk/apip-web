@@ -1,0 +1,37 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="36" fill="#F8FBFF"/>
+  <rect x="32" y="32" width="1136" height="696" rx="32" fill="#FFFFFF" stroke="#C7DAF8" stroke-width="4"/>
+  <text x="70" y="94" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">Gate Spread diffraction</text>
+  <text x="70" y="138" fill="#475569" font-family="Arial, sans-serif" font-size="22">Diffraction is strongest when the opening size is comparable to the wavelength.</text>
+
+  <rect x="78" y="198" width="470" height="388" rx="30" fill="#EEF6FF" stroke="#60A5FA" stroke-width="4"/>
+  <rect x="654" y="198" width="470" height="388" rx="30" fill="#F0FDF4" stroke="#4ADE80" stroke-width="4"/>
+  <text x="110" y="248" fill="#1D4ED8" font-family="Arial, sans-serif" font-size="28" font-weight="700">Wide gate</text>
+  <text x="686" y="248" fill="#15803D" font-family="Arial, sans-serif" font-size="28" font-weight="700">Narrow gate</text>
+
+  <line x1="284" y1="288" x2="284" y2="510" stroke="#0F172A" stroke-width="12"/>
+  <rect x="276" y="330" width="16" height="126" fill="#EEF6FF"/>
+  <line x1="860" y1="288" x2="860" y2="510" stroke="#0F172A" stroke-width="12"/>
+  <rect x="852" y="388" width="16" height="42" fill="#F0FDF4"/>
+
+  <line x1="126" y1="354" x2="252" y2="354" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+  <line x1="126" y1="412" x2="252" y2="412" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+  <line x1="126" y1="470" x2="252" y2="470" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+  <line x1="702" y1="354" x2="828" y2="354" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+  <line x1="702" y1="412" x2="828" y2="412" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+  <line x1="702" y1="470" x2="828" y2="470" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+
+  <path d="M304 392 Q 430 336 514 318" stroke="#22C55E" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M304 392 Q 430 392 514 392" stroke="#22C55E" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M304 392 Q 430 448 514 466" stroke="#22C55E" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+  <path d="M880 408 Q 960 294 1060 250" stroke="#10B981" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M880 408 Q 986 408 1080 408" stroke="#10B981" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M880 408 Q 960 522 1060 566" stroke="#10B981" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+  <text x="126" y="548" fill="#334155" font-family="Arial, sans-serif" font-size="22">Very wide opening gives only slight spreading.</text>
+  <text x="702" y="548" fill="#334155" font-family="Arial, sans-serif" font-size="22">Comparable opening gives strong spreading.</text>
+
+  <rect x="148" y="626" width="904" height="74" rx="24" fill="#E8F0FF"/>
+  <text x="192" y="672" fill="#334155" font-family="Arial, sans-serif" font-size="24">Diffraction belongs to all waves. The key comparison is opening size versus wavelength.</text>
+</svg>
