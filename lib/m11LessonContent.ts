@@ -25,7 +25,7 @@ const M11_VISUAL_META: Record<string, M11QuestionVisualMeta> = {
   M11L1: {
     image_url: `${M11_ASSET_BASE}/M11_L1/diagrams/m11-l1-series-chain.svg`,
     visual_title: "One-lane chains keep one common current",
-    visual_caption: "The series-chain visual keeps one route, one common current, and shared voltage drops visible together.",
+    visual_caption: "The series-chain visual compares one-route current, staged voltage drops, and the total-resistance story in one deliberate board.",
     visual_callouts: [
       "One path means every carrier visits every station.",
       "Series current is the same everywhere in the chain.",
@@ -35,7 +35,7 @@ const M11_VISUAL_META: Record<string, M11QuestionVisualMeta> = {
   M11L2: {
     image_url: `${M11_ASSET_BASE}/M11_L2/diagrams/m11-l2-branch-deck.svg`,
     visual_title: "Branch decks share voltage while current splits",
-    visual_caption: "The branch-deck visual separates shared branch voltage from split branch currents.",
+    visual_caption: "The branch-deck visual separates common branch voltage, unequal branch currents, and source-current recombination on one map.",
     visual_callouts: [
       "Parallel branches share the same two junctions.",
       "Branch voltage is the same across each branch.",
@@ -45,7 +45,7 @@ const M11_VISUAL_META: Record<string, M11QuestionVisualMeta> = {
   M11L3: {
     image_url: `${M11_ASSET_BASE}/M11_L3/diagrams/m11-l3-shed-rate.svg`,
     visual_title: "Task stations shed energy each second",
-    visual_caption: "The shed-rate visual shows why power is an energy-transfer rate rather than a synonym for current.",
+    visual_caption: "The shed-rate visual ties watts, joules each second, and the separate roles of current and voltage into one power comparison.",
     visual_callouts: [
       "Power is energy transferred each second.",
       "A larger current and or voltage drop can raise power.",
@@ -55,7 +55,7 @@ const M11_VISUAL_META: Record<string, M11QuestionVisualMeta> = {
   M11L4: {
     image_url: `${M11_ASSET_BASE}/M11_L4/diagrams/m11-l4-route-map.svg`,
     visual_title: "Route maps show connection logic",
-    visual_caption: "The route-map visual contrasts physical layout with schematic structure so students read the network, not the furniture.",
+    visual_caption: "The route-map visual contrasts classroom hardware with schematic logic so students can spot valid series-parallel blocks before calculating.",
     visual_callouts: [
       "A schematic is a symbolic map of connections.",
       "Series and parallel are read from junctions and paths.",
@@ -65,7 +65,7 @@ const M11_VISUAL_META: Record<string, M11QuestionVisualMeta> = {
   M11L5: {
     image_url: `${M11_ASSET_BASE}/M11_L5/diagrams/m11-l5-guard-link.svg`,
     visual_title: "Guard links and fault bridges",
-    visual_caption: "The safety visual shows how a low-resistance fault can drive unsafe current and why the guard link must interrupt the path.",
+    visual_caption: "The safety visual contrasts a protected path with a fault shortcut so overload current, fuse action, and insulation roles stay distinct.",
     visual_callouts: [
       "Short circuits create dangerous low-resistance paths.",
       "Fuses and breakers protect by opening the circuit.",
@@ -75,7 +75,7 @@ const M11_VISUAL_META: Record<string, M11QuestionVisualMeta> = {
   M11L6: {
     image_url: `${M11_ASSET_BASE}/M11_L6/diagrams/m11-l6-equivalent-drag.svg`,
     visual_title: "Equivalent drag reduces a network step by step",
-    visual_caption: "The reduction visual shows how a mixed circuit becomes one total resistance through valid series and parallel steps.",
+    visual_caption: "The reduction visual shows each redraw in the mixed-network workflow so learners can justify every reduction step before using the final total resistance.",
     visual_callouts: [
       "Reduce one valid block at a time.",
       "Series and parallel need different reduction rules.",
@@ -96,7 +96,7 @@ const M11_SIMULATION_COPY: Record<string, M11SimulationCopy> = {
     taskPrompt: "Build a one-lane chain, add series stations, and explain why the same current passes every station.",
     exploreSteps: ["Start with two series stations.", "Add a third station and compare the total current.", "Read current and voltage drop as different stories."],
     watchFor: ["One route means one common current.", "Series resistance adds.", "Voltage is shared across the series stations."],
-    tryFirst: "Set two series drags on the same source. The current is the same through both because there is only one path.",
+    tryFirst: "Set two unequal series drags on one source, then add a third station. Watch the same current pass every station while the voltage drops redistribute across the chain.",
     takeaway: "Series chains keep one common current while the source voltage is divided into component drops.",
   },
   M11_L2: {
@@ -105,7 +105,7 @@ const M11_SIMULATION_COPY: Record<string, M11SimulationCopy> = {
     taskPrompt: "Build a branch deck with unequal drags and explain why the branch currents differ while the branch voltage stays shared.",
     exploreSteps: ["Build two branches between the same junctions.", "Change one branch drag only.", "Add a branch and compare the source current."],
     watchFor: ["Parallel branches share voltage.", "Branch currents can differ.", "Adding branches lowers equivalent resistance."],
-    tryFirst: "Set one branch to a larger drag than the other. The branch with the larger drag carries the smaller current even though both branches share the same voltage.",
+    tryFirst: "Build two unequal branches between the same junctions, read both branch currents, then add a third branch. The shared branch voltage stays fixed while the branch and source currents reshuffle.",
     takeaway: "Branch decks share boost across branches while the current splits and recombines.",
   },
   M11_L3: {
@@ -114,7 +114,7 @@ const M11_SIMULATION_COPY: Record<string, M11SimulationCopy> = {
     taskPrompt: "Compare lamps and resistor stations, then explain why power depends on both current and voltage drop.",
     exploreSteps: ["Fix the current and change the voltage drop.", "Fix the voltage drop and change the current.", "Translate watts back into joules each second."],
     watchFor: ["Power is an energy-transfer rate.", "P = IV links current and voltage.", "Brightness and heating follow shed rate, not used-up current."],
-    tryFirst: "Keep the current fixed and double the station voltage drop. The power doubles because the station sheds more energy each second.",
+    tryFirst: "Hold the current steady and increase the station voltage drop, then reverse the comparison by holding voltage steady and changing current. Each move changes the shed rate because power depends on both readings together.",
     takeaway: "Task stations are compared by shed rate, not by how much current they seem to use up.",
   },
   M11_L4: {
@@ -123,7 +123,7 @@ const M11_SIMULATION_COPY: Record<string, M11SimulationCopy> = {
     taskPrompt: "Match physical layouts to schematics and identify the series and parallel sections before calculating anything.",
     exploreSteps: ["Switch between physical and symbolic views.", "Mark the junctions.", "Trace one series path and one branch deck."],
     watchFor: ["Schematics are symbolic maps.", "Shared junctions define parallel.", "One uninterrupted path defines series."],
-    tryFirst: "Take the same network and redraw it in a different layout. The physics stays the same because the connections stay the same.",
+    tryFirst: "Toggle between a bench layout and its schematic, mark the shared junctions, and decide which block reduces first. The layout can change while the connection logic stays identical.",
     takeaway: "Route maps make the connection logic easier to read than literal pictures of the hardware.",
   },
   M11_L5: {
@@ -132,7 +132,7 @@ const M11_SIMULATION_COPY: Record<string, M11SimulationCopy> = {
     taskPrompt: "Introduce a fault bridge, compare the current surge, and explain how the guard link and insulation protect in different ways.",
     exploreSteps: ["Start with a protected normal loop.", "Toggle in a fault bridge.", "Adjust the guard-link rating and compare the outcome."],
     watchFor: ["Short circuits create low-resistance shortcuts.", "Large current can overheat wires.", "Fuses, breakers, and insulation do different jobs."],
-    tryFirst: "Toggle the fault bridge on. The current jumps because the shortcut path has very little drag, so the guard link has to open the loop.",
+    tryFirst: "Start from the protected loop, switch in the fault bridge, and compare the current against the guard-link rating. The unsafe path is the low-drag shortcut, not a mysterious 'extra voltage' effect.",
     takeaway: "Circuit safety depends on controlling dangerous current and blocking dangerous contact.",
   },
   M11_L6: {
@@ -141,7 +141,7 @@ const M11_SIMULATION_COPY: Record<string, M11SimulationCopy> = {
     taskPrompt: "Simplify a mixed network step by step, then use the final equivalent resistance to find the total current.",
     exploreSteps: ["Reduce one parallel block.", "Redraw the remaining series path.", "Use the final total resistance with the source voltage."],
     watchFor: ["Equivalent resistance is one effective drag for the whole network.", "Mixed circuits must be reduced step by step.", "The final reduction unlocks the source-current calculation."],
-    tryFirst: "Reduce the branch deck first, then add the remaining series drag. That final total resistance is what the source sees.",
+    tryFirst: "Reduce one obvious branch block, redraw the remaining network, and only then find the source current. Each redraw should make the next valid series-or-parallel move easier to justify.",
     takeaway: "Equivalent drag turns a complicated network into one effective load without losing the underlying structure.",
   },
 };

@@ -1,21 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" rx="36" fill="#f8fafc"/>
-  <text x="64" y="92" fill="#0f172a" font-size="54" font-weight="700">Route Maps Show Connection Logic</text>
-  <text x="64" y="146" fill="#475569" font-size="24">A schematic is a symbolic map of the network, not a realistic picture of the classroom layout.</text>
-  <rect x="88" y="224" width="490" height="368" rx="34" fill="#eff6ff" stroke="#93c5fd" stroke-width="6"/>
-  <rect x="702" y="224" width="490" height="368" rx="34" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="6"/>
-  <text x="126" y="274" fill="#1e3a8a" font-size="34" font-weight="700">Physical layout</text>
-  <text x="740" y="274" fill="#6d28d9" font-size="34" font-weight="700">Route map</text>
-  <rect x="176" y="346" width="86" height="148" rx="16" fill="#dbeafe"/>
-  <rect x="390" y="346" width="86" height="148" rx="16" fill="#bfdbfe"/>
-  <line x1="262" y1="420" x2="390" y2="420" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
-  <text x="178" y="528" fill="#475569" font-size="24">hardware view</text>
-  <line x1="762" y1="420" x2="1112" y2="420" stroke="#2563eb" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="762" cy="420" r="10" fill="#2563eb"/>
-  <circle cx="1112" cy="420" r="10" fill="#2563eb"/>
-  <rect x="864" y="390" width="74" height="60" rx="14" fill="#ddd6fe"/>
-  <rect x="966" y="390" width="74" height="60" rx="14" fill="#c4b5fd"/>
-  <text x="792" y="534" fill="#475569" font-size="24">same connection logic, cleaner reading</text>
-  <rect x="136" y="612" width="1008" height="52" rx="24" fill="#ffffff" opacity="0.92"/>
-  <text x="172" y="648" fill="#0f172a" font-size="28" font-weight="700">First move: mark the junctions and trace the paths. Series and parallel are connection rules, not picture-shape rules.</text>
+  <rect width="1280" height="720" rx="32" fill="#f8fafc"/>
+  <text x="64" y="82" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="48" font-weight="700">Route Maps Show Connection Logic</text>
+  <text x="64" y="128" fill="#4a5d7a" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">A schematic strips away furniture layout so you can read shared junctions, valid branches, and the first reduction step clearly.</text>
+
+  <rect x="64" y="176" width="356" height="426" rx="28" fill="#eef6ff" stroke="#93c5fd" stroke-width="4"/>
+  <rect x="462" y="176" width="356" height="426" rx="28" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="4"/>
+  <rect x="860" y="176" width="356" height="426" rx="28" fill="#f0fdf4" stroke="#86efac" stroke-width="4"/>
+
+  <text x="96" y="220" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">1. Hardware view</text>
+  <rect x="130" y="286" width="72" height="136" rx="16" fill="#fde68a" stroke="#f59e0b" stroke-width="3"/>
+  <rect x="250" y="258" width="76" height="164" rx="16" fill="#dbeafe" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="250" y="470" width="76" height="84" rx="16" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="3"/>
+  <path d="M202 354H250" stroke="#2563eb" stroke-width="12" stroke-linecap="round"/>
+  <path d="M326 340H372V286H388" stroke="#2563eb" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M326 504H372V554H388" stroke="#2563eb" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M388 286V554" stroke="#94a3b8" stroke-width="6" stroke-dasharray="10 8"/>
+  <text x="124" y="592" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Looks physical, but the key physics</text>
+  <text x="124" y="618" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">question is still which points connect.</text>
+
+  <text x="494" y="220" fill="#6d28d9" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">2. Schematic view</text>
+  <circle cx="540" cy="354" r="10" fill="#2563eb"/>
+  <circle cx="740" cy="354" r="10" fill="#2563eb"/>
+  <path d="M540 354H606V260H742V354" stroke="#16a34a" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M540 354H606V448H742V354" stroke="#7c3aed" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="516" y="330" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="20" font-weight="700">Junction A</text>
+  <text x="682" y="330" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="20" font-weight="700">Junction B</text>
+  <text x="618" y="248" fill="#166534" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">Upper branch</text>
+  <text x="618" y="480" fill="#6d28d9" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">Lower branch</text>
+  <text x="500" y="592" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Same two junctions tells you this is</text>
+  <text x="500" y="618" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">parallel, no matter how the hardware looks.</text>
+
+  <text x="892" y="220" fill="#15803d" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">3. Calculation clue</text>
+  <rect x="910" y="274" width="258" height="106" rx="18" fill="#ffffff" stroke="#86efac" stroke-width="3"/>
+  <text x="936" y="316" fill="#166534" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">First move:</text>
+  <text x="936" y="346" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Mark the two shared junctions,</text>
+  <text x="936" y="374" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">then reduce that branch block.</text>
+  <rect x="910" y="420" width="258" height="120" rx="18" fill="#ffffff" stroke="#86efac" stroke-width="3"/>
+  <text x="936" y="462" fill="#166534" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">Key warning</text>
+  <text x="936" y="492" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Do not decide series or parallel</text>
+  <text x="936" y="520" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">from page shape or spacing alone.</text>
+
+  <rect x="64" y="624" width="1152" height="52" rx="22" fill="#ffffff" stroke="#dbeafe" stroke-width="3"/>
+  <text x="98" y="658" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">Read the map from junctions and paths first; the algebra should follow the connection logic, not the drawing style.</text>
 </svg>

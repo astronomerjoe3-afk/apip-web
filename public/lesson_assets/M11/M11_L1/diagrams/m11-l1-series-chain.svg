@@ -1,23 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" rx="36" fill="#f8fbff"/>
-  <text x="64" y="92" fill="#0f172a" font-size="54" font-weight="700">One-Lane Chain: Same Current, Shared Voltage</text>
-  <text x="64" y="146" fill="#475569" font-size="24">Every carrier visits every station because there is only one path.</text>
-  <rect x="76" y="210" width="1128" height="410" rx="40" fill="#edf4ff" stroke="#93c5fd" stroke-width="6"/>
-  <rect x="126" y="374" width="56" height="96" rx="14" fill="#f59e0b"/>
-  <text x="114" y="354" fill="#b45309" font-size="24" font-weight="700">Source</text>
-  <path d="M182 422H320" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
-  <rect x="320" y="366" width="124" height="112" rx="22" fill="#c7d2fe"/>
-  <text x="366" y="431" fill="#1e3a8a" font-size="34" font-weight="700">R1</text>
-  <path d="M444 422H584" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
-  <rect x="584" y="366" width="124" height="112" rx="22" fill="#bfdbfe"/>
-  <text x="630" y="431" fill="#1d4ed8" font-size="34" font-weight="700">R2</text>
-  <path d="M708 422H848" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
-  <rect x="848" y="366" width="124" height="112" rx="22" fill="#dbeafe"/>
-  <text x="894" y="431" fill="#2563eb" font-size="34" font-weight="700">R3</text>
-  <path d="M972 422H1124" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
-  <text x="340" y="560" fill="#1e3a8a" font-size="28" font-weight="700">same current</text>
-  <text x="612" y="560" fill="#1d4ed8" font-size="28" font-weight="700">same current</text>
-  <text x="876" y="560" fill="#2563eb" font-size="28" font-weight="700">same current</text>
-  <rect x="174" y="266" width="934" height="58" rx="24" fill="#ffffff" opacity="0.9"/>
-  <text x="212" y="304" fill="#0f172a" font-size="28" font-weight="700">Series rule: one path -> one common current. The source voltage is shared across the stations.</text>
+  <rect width="1280" height="720" rx="32" fill="#f8fbff"/>
+  <text x="64" y="82" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="48" font-weight="700">Series Chain: One Path, One Current</text>
+  <text x="64" y="128" fill="#4a5d7a" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">A single route keeps the same current through every station while the source voltage is shared into separate drops.</text>
+
+  <rect x="60" y="170" width="1160" height="318" rx="28" fill="#eaf3ff" stroke="#7db2ff" stroke-width="4"/>
+  <text x="98" y="214" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">Worked board</text>
+
+  <rect x="116" y="274" width="86" height="136" rx="18" fill="#fbbf24" stroke="#d97706" stroke-width="3"/>
+  <text x="124" y="254" fill="#92400e" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">12 V source</text>
+  <text x="138" y="350" fill="#7c2d12" font-family="Trebuchet MS, Verdana, sans-serif" font-size="30" font-weight="700">+ -</text>
+
+  <path d="M202 342H322" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
+  <path d="M438 342H572" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
+  <path d="M688 342H822" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
+  <path d="M938 342H1068" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
+
+  <rect x="322" y="286" width="116" height="112" rx="20" fill="#dbeafe" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="572" y="286" width="116" height="112" rx="20" fill="#c7d2fe" stroke="#818cf8" stroke-width="3"/>
+  <rect x="822" y="286" width="116" height="112" rx="20" fill="#bfdbfe" stroke="#38bdf8" stroke-width="3"/>
+  <text x="353" y="334" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">R1 = 1 ohm</text>
+  <text x="603" y="334" fill="#4338ca" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">R2 = 2 ohm</text>
+  <text x="853" y="334" fill="#0369a1" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">R3 = 3 ohm</text>
+
+  <path d="M246 248H1006" stroke="#0f766e" stroke-width="6" stroke-dasharray="14 12"/>
+  <polygon points="1006,248 980,236 980,260" fill="#0f766e"/>
+  <text x="454" y="230" fill="#0f766e" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">Same current everywhere: I = 2 A</text>
+
+  <path d="M380 430V462" stroke="#1d4ed8" stroke-width="4"/>
+  <path d="M630 430V462" stroke="#4338ca" stroke-width="4"/>
+  <path d="M880 430V462" stroke="#0369a1" stroke-width="4"/>
+  <text x="344" y="494" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">V1 = 2 V</text>
+  <text x="592" y="494" fill="#4338ca" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">V2 = 4 V</text>
+  <text x="842" y="494" fill="#0369a1" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">V3 = 6 V</text>
+
+  <rect x="64" y="528" width="356" height="132" rx="24" fill="#ffffff" stroke="#b9d7ff" stroke-width="3"/>
+  <rect x="462" y="528" width="356" height="132" rx="24" fill="#ffffff" stroke="#c7d2fe" stroke-width="3"/>
+  <rect x="860" y="528" width="356" height="132" rx="24" fill="#ffffff" stroke="#bae6fd" stroke-width="3"/>
+  <text x="90" y="570" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26" font-weight="700">Path rule</text>
+  <text x="90" y="606" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">One uninterrupted route means</text>
+  <text x="90" y="634" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">every carrier passes every station.</text>
+
+  <text x="488" y="570" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26" font-weight="700">Current rule</text>
+  <text x="488" y="606" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Current is common through the chain.</text>
+  <text x="488" y="634" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">It is not used up at the first resistor.</text>
+
+  <text x="886" y="570" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26" font-weight="700">Voltage rule</text>
+  <text x="886" y="606" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">The drops add back to the source:</text>
+  <text x="886" y="634" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">2 V + 4 V + 6 V = 12 V.</text>
 </svg>

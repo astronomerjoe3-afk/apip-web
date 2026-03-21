@@ -1,19 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" rx="36" fill="#f7fff9"/>
-  <text x="64" y="92" fill="#0f172a" font-size="54" font-weight="700">Branch Deck: Shared Voltage, Split Current</text>
-  <text x="64" y="146" fill="#475569" font-size="24">All branches connect between the same two junctions, so each branch receives the same boost.</text>
-  <rect x="76" y="210" width="1128" height="410" rx="40" fill="#effcf5" stroke="#6ee7b7" stroke-width="6"/>
-  <circle cx="202" cy="420" r="12" fill="#2563eb"/>
-  <circle cx="1078" cy="420" r="12" fill="#2563eb"/>
-  <path d="M202 420H344V290H560V420H1078" stroke="#16a34a" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <path d="M202 420H344V550H560V420H1078" stroke="#7c3aed" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <rect x="560" y="238" width="198" height="86" rx="24" fill="#dcfce7"/>
-  <rect x="560" y="504" width="198" height="86" rx="24" fill="#ede9fe"/>
-  <text x="612" y="292" fill="#166534" font-size="34" font-weight="700">Branch A</text>
-  <text x="612" y="558" fill="#6d28d9" font-size="34" font-weight="700">Branch B</text>
-  <text x="260" y="390" fill="#0f766e" font-size="28" font-weight="700">same branch voltage</text>
-  <text x="280" y="256" fill="#166534" font-size="26" font-weight="700">current A</text>
-  <text x="280" y="610" fill="#6d28d9" font-size="26" font-weight="700">current B</text>
-  <rect x="176" y="238" width="924" height="54" rx="24" fill="#ffffff" opacity="0.9"/>
-  <text x="206" y="274" fill="#0f172a" font-size="28" font-weight="700">Parallel rule: same two junctions -> same branch voltage, while branch currents can differ and then recombine.</text>
+  <rect width="1280" height="720" rx="32" fill="#f7fff9"/>
+  <text x="64" y="82" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="48" font-weight="700">Branch Deck: Shared Voltage, Split Current</text>
+  <text x="64" y="128" fill="#4a5d7a" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">Parallel branches connect to the same two junctions, so the branch voltage matches while the branch currents can differ.</text>
+
+  <rect x="60" y="170" width="1160" height="340" rx="28" fill="#ebfbf2" stroke="#6ee7b7" stroke-width="4"/>
+  <text x="96" y="214" fill="#15803d" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">Comparison board</text>
+
+  <circle cx="228" cy="340" r="12" fill="#2563eb"/>
+  <circle cx="1050" cy="340" r="12" fill="#2563eb"/>
+  <text x="178" y="312" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">Left junction</text>
+  <text x="986" y="312" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">Right junction</text>
+
+  <path d="M228 340H344V248H520V340H1050" stroke="#16a34a" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M228 340H344V432H520V340H1050" stroke="#7c3aed" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="520" y="206" width="166" height="86" rx="20" fill="#dcfce7" stroke="#4ade80" stroke-width="3"/>
+  <rect x="520" y="390" width="166" height="86" rx="20" fill="#ede9fe" stroke="#a78bfa" stroke-width="3"/>
+  <text x="552" y="246" fill="#166534" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">Branch A</text>
+  <text x="558" y="274" fill="#166534" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">6 ohm, 2 A</text>
+  <text x="552" y="430" fill="#6d28d9" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">Branch B</text>
+  <text x="558" y="458" fill="#6d28d9" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">3 ohm, 4 A</text>
+
+  <path d="M354 156H948" stroke="#0f766e" stroke-width="6" stroke-dasharray="14 12"/>
+  <polygon points="948,156 922,144 922,168" fill="#0f766e"/>
+  <text x="492" y="142" fill="#0f766e" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">Same branch voltage: 12 V across both branches</text>
+
+  <path d="M746 248H886" stroke="#ef4444" stroke-width="6" stroke-dasharray="10 10"/>
+  <path d="M746 432H926" stroke="#ef4444" stroke-width="6" stroke-dasharray="10 10"/>
+  <text x="786" y="228" fill="#b91c1c" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">Current A = 2 A</text>
+  <text x="786" y="470" fill="#b91c1c" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">Current B = 4 A</text>
+  <text x="792" y="374" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">Source current = 6 A</text>
+
+  <rect x="64" y="548" width="356" height="120" rx="24" fill="#ffffff" stroke="#bbf7d0" stroke-width="3"/>
+  <rect x="462" y="548" width="356" height="120" rx="24" fill="#ffffff" stroke="#ddd6fe" stroke-width="3"/>
+  <rect x="860" y="548" width="356" height="120" rx="24" fill="#ffffff" stroke="#bfdbfe" stroke-width="3"/>
+  <text x="90" y="588" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26" font-weight="700">Voltage rule</text>
+  <text x="90" y="622" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Same two junctions means the</text>
+  <text x="90" y="648" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">branch voltage is shared.</text>
+
+  <text x="488" y="588" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26" font-weight="700">Current rule</text>
+  <text x="488" y="622" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Current depends on each branch</text>
+  <text x="488" y="648" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">resistance, so branches can differ.</text>
+
+  <text x="886" y="588" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26" font-weight="700">Rejoin rule</text>
+  <text x="886" y="622" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">When the branches recombine,</text>
+  <text x="886" y="648" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">their currents add to the source current.</text>
 </svg>
