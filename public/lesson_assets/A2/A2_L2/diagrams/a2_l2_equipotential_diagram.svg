@@ -2,11 +2,13 @@
   <rect width="100%" height="100%" fill="#0b1020"/>
 
   
-  <text x="640" y="80" fill="white" text-anchor="middle" font-size="36" font-family="Arial" font-weight="bold">
+  <text x="640" y="80" fill="white" text-anchor="middle" font-size="32" font-family="Arial" font-weight="bold">
     Equipotential routes stay on one electric terrace
   </text>
-  <text x="640" y="120" fill="#aab4d4" text-anchor="middle" font-size="20" font-family="Arial">
-    Show field arrows crossing same-terrace lines, with two routes between points that either stay on one terrace or cross levels.
+  <text x="640" y="118" fill="#aab4d4" text-anchor="middle" font-size="18" font-family="Arial">
+    <tspan x="640" dy="0">Show field arrows crossing same-terrace lines,</tspan>
+    <tspan x="640" dy="24">with two routes between points that either stay on one terrace</tspan>
+    <tspan x="640" dy="24">or cross levels.</tspan>
   </text>
 
   <rect x="220" y="260" width="840" height="220" rx="24" fill="#111827" stroke="#334155" stroke-width="3"/>
