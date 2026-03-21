@@ -1168,6 +1168,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM4Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -2707,6 +2709,312 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "atmospheric pressure is part of p total",
         "the sky blanket adds before the liquid stack does",
         "without the atmosphere you would only have rhogh",
+      ])
+    );
+  }
+
+  const isM8MirrorAngleRulePrompt = matchesM8Prompt(
+    ["M8L1_D3"],
+    ["state the mirror angle rule"],
+  );
+
+  if (isM8MirrorAngleRulePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["incident", "incidence", "incoming"],
+        ["equal", "equals", "same as", "matches"],
+        ["reflected", "reflection", "outgoing"],
+        ["guide line", "normal"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["incident angle"],
+        ["reflected angle"],
+        ["equal", "same"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "angle of incidence equals angle of reflection",
+        "incident angle equals reflected angle",
+        "the incoming and reflected angles match",
+      ])
+    );
+  }
+
+  const isM8GuideLineReferencePrompt = matchesM8Prompt(
+    ["M8L1_C1", "M8L1_C6", "M8L2_M7"],
+    [
+      "why does the guide line matter more than the surface in reflection questions",
+      "why is measuring from the mirror surface risky",
+      "why is the guide line still important in refraction",
+    ],
+  );
+
+  if (isM8GuideLineReferencePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["guide line", "normal"],
+        ["reference", "measured from", "measurement line", "angle reference"],
+        ["incident", "reflected", "refracted", "angles"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["surface"],
+        ["convert", "converted", "not directly", "risky", "wrong reference"],
+        ["guide line", "normal"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "angles are measured from the normal",
+        "angles are measured from the guide line",
+        "the guide line is the angle reference",
+        "surface angles must be converted first",
+      ])
+    );
+  }
+
+  const isM8VirtualMirrorPrompt = matchesM8Prompt(
+    ["M8L1_D7", "M8L1_C4", "M8L1_M4", "M8L1_M7"],
+    [
+      "why is the mirror image not on the surface",
+      "why are dashed lines drawn behind a mirror",
+      "why is the mirror image a ghost meeting point",
+      "why does the mirror image stay the same distance behind the surface",
+    ],
+  );
+
+  if (isM8VirtualMirrorPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["appear", "apparent", "seem"],
+        ["behind", "behind the mirror"],
+        ["extension", "backward", "dashed"],
+        ["not real", "not actual", "no real light", "rather than real crossings"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same distance", "equal distance", "symmetric", "symmetry"],
+        ["behind", "behind the mirror"],
+        ["object", "in front", "mirror"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the image only appears to come from behind the mirror",
+        "the dashed lines are backward extensions",
+        "the mirror image is an apparent meeting point",
+        "the image is symmetric behind the mirror",
+      ])
+    );
+  }
+
+  const isM8RefractionCausePrompt = matchesM8Prompt(
+    ["M8L2_D3", "M8L2_D5", "M8L2_M3", "M8L2_M4"],
+    [
+      "why does the route bend at a bend gate",
+      "why is the lens pulls the route to the middle weak",
+      "which sentence keeps the cause of refraction correct",
+      "why is a lens best described as a pair of bend gates",
+    ],
+  );
+
+  if (isM8RefractionCausePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["boundary", "surface", "entry", "exit", "medium"],
+        ["speed", "travel"],
+        ["change", "changes", "different", "slows", "speeds up", "refract", "bend"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["first", "entry"],
+        ["second", "exit"],
+        ["refract", "bend"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["not", "rather than"],
+        ["middle", "pull", "pulled"],
+        ["boundary", "surface", "speed change"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "it bends because the speed changes at the boundary",
+        "a lens bends light at the entry and exit surfaces",
+        "the middle does not pull the route",
+        "a lens is two refractions not a middle pull",
+      ])
+    );
+  }
+
+  const isM8TowardAwayPrompt = matchesM8Prompt(
+    ["M8L2_C1", "M8L2_M2"],
+    [
+      "how does slowing down connect to bending toward the guide line",
+      "state what happens when light leaves glass for air",
+    ],
+  );
+
+  if (isM8TowardAwayPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["slow", "slower", "speeds up", "faster"],
+        ["toward", "away"],
+        ["guide line", "normal"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["glass", "slow medium"],
+        ["air", "faster medium", "new medium"],
+        ["away", "away from the normal", "away from the guide line"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "slower means toward the guide line",
+        "slower means toward the normal",
+        "leaving glass for air means away from the normal because it speeds up",
+        "it bends away from the guide line because the new medium is faster",
+      ])
+    );
+  }
+
+  const isM8SelectedRoutesPrompt = matchesM8Prompt(
+    ["M8L3_C1", "M8L6_C1"],
+    [
+      "why are only a few selected routes needed in a converging-lens sketch",
+      "why does a route sketch use only a few carefully chosen routes instead of every possible one",
+    ],
+  );
+
+  if (isM8SelectedRoutesPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["few", "selected"],
+        ["predict", "locate", "show"],
+        ["image", "meeting point"],
+        ["full bundle", "many routes", "full ray bundle", "same result", "same prediction"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a few selected routes are enough to predict the image",
+        "the selected routes stand in for the full ray bundle",
+        "you do not need every route to locate the image",
+      ])
+    );
+  }
+
+  const isM8RealVsVirtualPrompt = matchesM8Prompt(
+    ["M8L3_C6", "M8L4_C6", "M8L6_C6"],
+    [
+      "why is a real converging-lens image different from a plane-mirror image",
+      "why can a diverging-lens route sketch still be trustworthy when it uses dashed extensions",
+      "why could a screen capture the image from a converging lens but not the image behind a plane mirror",
+    ],
+  );
+
+  if (isM8RealVsVirtualPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["real", "actual", "screen", "screenable"],
+        ["routes", "rays"],
+        ["meet", "cross"],
+        ["virtual", "ghost", "mirror", "extension", "apparent"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["extension", "dashed", "backward"],
+        ["useful", "valid", "trustworthy"],
+        ["image", "apparent", "virtual"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "real images come from actual ray crossings",
+        "virtual images come from apparent backward extensions",
+        "a screen can catch real rays where they meet",
+        "dashed extensions can still locate a virtual image reliably",
+      ])
+    );
+  }
+
+  const isM8DivergingPrompt = matchesM8Prompt(
+    ["M8L4_C1", "M8L4_C4"],
+    [
+      "how does the parallel-ray rule differ between gather and spread lenses",
+      "why should dashed extensions behind a diverging lens not be called real routes",
+    ],
+  );
+
+  if (isM8DivergingPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["gather", "converging"],
+        ["far focus"],
+        ["spread", "diverging"],
+        ["near focus", "appear", "seem"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["extension", "construction", "dashed"],
+        ["not real", "not actual", "no light"],
+        ["apparent", "image", "origin"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a converging lens sends the parallel route through the far focus",
+        "a diverging lens makes the parallel route appear to come from the near focus",
+        "no real light travels backward in the dashed extensions",
+      ])
+    );
+  }
+
+  const isM8TIRPrompt = matchesM8Prompt(
+    ["M8L5_C1", "M8L5_C4", "M8L5_C6"],
+    [
+      "why must light be trying to leave the slower medium before tir can happen",
+      "why is lock-bounce different from ordinary reflection at a mirror",
+      "why are optical fibers a strong lock-bounce example",
+    ],
+  );
+
+  if (isM8TIRPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["leave", "escape", "trying to leave"],
+        ["slower", "higher-index"],
+        ["faster", "lower-index", "outside"],
+        ["critical angle", "tir", "total internal reflection"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["boundary", "interface"],
+        ["cannot escape", "failed escape", "trapped"],
+        ["not", "rather than"],
+        ["mirror"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["fiber", "optical fiber", "core", "light pipe"],
+        ["repeated", "keeps", "multiple"],
+        ["total internal reflection", "lock-bounce", "failed escape"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "tir is a failed escape from the slower medium",
+        "lock-bounce happens at a boundary not at a mirror surface",
+        "optical fibers keep light trapped by repeated total internal reflection",
+      ])
+    );
+  }
+
+  const isM8RouteSketchRolesPrompt = matchesM8Prompt(
+    ["M8L6_D6", "M8L6_C4", "M8L6_M5", "M8L6_M8"],
+    [
+      "why can a ray diagram still be trustworthy even when some lines are dashed extensions",
+      "why is every line in the diagram is a real beam weak",
+      "why is a diverging-lens image drawn with backward extensions on the object side",
+      "what three kinds of lines might appear in one optics sketch and why should they be kept separate",
+    ],
+  );
+
+  if (isM8RouteSketchRolesPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["real routes", "actual rays", "real beams"],
+        ["guide line", "normal", "reference"],
+        ["extension", "dashed", "construction", "backward"],
+        ["different", "separate", "different roles", "different jobs"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["spread", "diverge"],
+        ["extension", "backward"],
+        ["appear", "seem", "locate", "meet"],
+        ["virtual", "ghost", "object side"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a ray diagram can mix real routes and dashed extensions",
+        "guide lines are references not beams",
+        "the backward extensions only show where the image appears to come from",
+        "the three line types should be kept separate because they do different jobs",
       ])
     );
   }

@@ -296,53 +296,76 @@ export default function M8SimulationPanels({
     );
   }
 
-  const mirrorMode = simBias > 0.5;
-  const objectDistance = clamp(simMetricMeters, 4, 12);
+  if (lessonKey === "M8_L6") {
+    const mirrorMode = simBias > 0.5;
+    const objectDistance = clamp(simMetricMeters, 4, 12);
+    return renderPanel(
+      "Route Sketch",
+      <>
+        {sliderField("Object distance", `${formatSimulationNumber(objectDistance, 0)} cm`, <input className="w-full" type="range" min="4" max="12" step="1" value={objectDistance} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Sketch mode", mirrorMode ? "ghost image" : "true image", <input className="w-full" type="range" min="0" max="1" step="1" value={mirrorMode ? 1 : 0} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+      </>,
+      "Route Sketch board",
+      <svg viewBox="0 0 640 260" className="w-full">
+        {mirrorMode ? (
+          <>
+            <rect x="300" y="40" width="16" height="180" rx="8" fill="#94a3b8" />
+            <line x1="316" y1="40" x2="316" y2="220" stroke="#7c3aed" strokeWidth="4" strokeDasharray="8 8" />
+            <line x1="180" y1="118" x2="300" y2="94" stroke="#2563eb" strokeWidth="8" />
+            <line x1="180" y1="142" x2="300" y2="166" stroke="#0f766e" strokeWidth="8" />
+            <line x1="300" y1="94" x2="420" y2="118" stroke="#2563eb" strokeWidth="4" strokeDasharray="8 8" />
+            <line x1="300" y1="166" x2="420" y2="142" stroke="#0f766e" strokeWidth="4" strokeDasharray="8 8" />
+            <circle cx="420" cy="130" r="10" fill="#a855f7" />
+            <text x="76" y="54" fill="#1d4ed8" fontSize="18" fontWeight="700">Real routes</text>
+            <text x="366" y="54" fill="#7c3aed" fontSize="18" fontWeight="700">Ghost Meeting Point</text>
+          </>
+        ) : (
+          <>
+            <line x1="40" y1="130" x2="600" y2="130" stroke="#cbd5e1" strokeWidth="4" />
+            <ellipse cx="320" cy="130" rx="22" ry="76" fill="#c4b5fd" />
+            <line x1="150" y1="130" x2="320" y2="130" stroke="#2563eb" strokeWidth="8" />
+            <line x1="320" y1="130" x2="475" y2="86" stroke="#2563eb" strokeWidth="8" />
+            <line x1="150" y1="130" x2="320" y2="84" stroke="#0f766e" strokeWidth="8" />
+            <line x1="320" y1="84" x2="475" y2="86" stroke="#0f766e" strokeWidth="8" />
+            <circle cx="475" cy="86" r="10" fill="#d97706" />
+            <text x="76" y="54" fill="#1d4ed8" fontSize="18" fontWeight="700">Selected real routes</text>
+            <text x="410" y="54" fill="#d97706" fontSize="18" fontWeight="700">True Meeting Point</text>
+          </>
+        )}
+      </svg>,
+      <>
+        {metricCard("Mode", mirrorMode ? "ghost image" : "true image", "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Real routes", mirrorMode ? "left of panel only" : "cross on far side", "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Guide Line", mirrorMode ? "reference only" : "axis and focus references", "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Extensions", mirrorMode ? "needed" : "not needed here", "border-amber-200 bg-amber-50 text-amber-900")}
+      </>,
+      [
+        "A route sketch can mix real routes, references, and extensions.",
+        "True and Ghost Meeting Points come from different line behaviors.",
+        "Screenability is a good clue for real versus ghost images.",
+      ],
+      "The capstone board makes the line roles visible on purpose so the learner reads the sketch as a map of reasoning instead of a pile of lines.",
+    );
+  }
+
   return renderPanel(
-    "Route Sketch",
+    "Lesson explorer unavailable",
+    <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+      This lesson is waiting for its lesson-specific Signal-Stadium panel.
+    </div>,
+    "Explorer placeholder",
+    <div className="rounded-3xl border border-dashed border-slate-300 bg-white/80 p-8 text-center text-sm text-slate-600">
+      No generic fallback panel is being substituted here.
+    </div>,
     <>
-      {sliderField("Object distance", `${formatSimulationNumber(objectDistance, 0)} cm`, <input className="w-full" type="range" min="4" max="12" step="1" value={objectDistance} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-      {sliderField("Sketch mode", mirrorMode ? "ghost image" : "true image", <input className="w-full" type="range" min="0" max="1" step="1" value={mirrorMode ? 1 : 0} onChange={(e) => setSimBias(Number(e.target.value))} />)}
-    </>,
-    "Route Sketch board",
-    <svg viewBox="0 0 640 260" className="w-full">
-      {mirrorMode ? (
-        <>
-          <rect x="300" y="40" width="16" height="180" rx="8" fill="#94a3b8" />
-          <line x1="316" y1="40" x2="316" y2="220" stroke="#7c3aed" strokeWidth="4" strokeDasharray="8 8" />
-          <line x1="180" y1="118" x2="300" y2="94" stroke="#2563eb" strokeWidth="8" />
-          <line x1="180" y1="142" x2="300" y2="166" stroke="#0f766e" strokeWidth="8" />
-          <line x1="300" y1="94" x2="420" y2="118" stroke="#2563eb" strokeWidth="4" strokeDasharray="8 8" />
-          <line x1="300" y1="166" x2="420" y2="142" stroke="#0f766e" strokeWidth="4" strokeDasharray="8 8" />
-          <circle cx="420" cy="130" r="10" fill="#a855f7" />
-          <text x="76" y="54" fill="#1d4ed8" fontSize="18" fontWeight="700">Real routes</text>
-          <text x="366" y="54" fill="#7c3aed" fontSize="18" fontWeight="700">Ghost Meeting Point</text>
-        </>
-      ) : (
-        <>
-          <line x1="40" y1="130" x2="600" y2="130" stroke="#cbd5e1" strokeWidth="4" />
-          <ellipse cx="320" cy="130" rx="22" ry="76" fill="#c4b5fd" />
-          <line x1="150" y1="130" x2="320" y2="130" stroke="#2563eb" strokeWidth="8" />
-          <line x1="320" y1="130" x2="475" y2="86" stroke="#2563eb" strokeWidth="8" />
-          <line x1="150" y1="130" x2="320" y2="84" stroke="#0f766e" strokeWidth="8" />
-          <line x1="320" y1="84" x2="475" y2="86" stroke="#0f766e" strokeWidth="8" />
-          <circle cx="475" cy="86" r="10" fill="#d97706" />
-          <text x="76" y="54" fill="#1d4ed8" fontSize="18" fontWeight="700">Selected real routes</text>
-          <text x="410" y="54" fill="#d97706" fontSize="18" fontWeight="700">True Meeting Point</text>
-        </>
-      )}
-    </svg>,
-    <>
-      {metricCard("Mode", mirrorMode ? "ghost image" : "true image", "border-sky-200 bg-sky-50 text-sky-900")}
-      {metricCard("Real routes", mirrorMode ? "left of panel only" : "cross on far side", "border-emerald-200 bg-emerald-50 text-emerald-900")}
-      {metricCard("Guide Line", mirrorMode ? "reference only" : "axis and focus references", "border-violet-200 bg-violet-50 text-violet-900")}
-      {metricCard("Extensions", mirrorMode ? "needed" : "not needed here", "border-amber-200 bg-amber-50 text-amber-900")}
+      {metricCard("Lesson", lessonKey, "border-sky-200 bg-sky-50 text-sky-900")}
+      {metricCard("Status", "explicit panel required", "border-amber-200 bg-amber-50 text-amber-900")}
     </>,
     [
-      "A route sketch can mix real routes, references, and extensions.",
-      "True and Ghost Meeting Points come from different line behaviors.",
-      "Screenability is a good clue for real versus ghost images.",
+      "Each M8 lesson should own its explorer directly.",
+      "If this appears, the lesson wiring needs a dedicated panel.",
+      "The optics module should not silently fall through to another lesson view.",
     ],
-    "The capstone board makes the line roles visible on purpose so the learner reads the sketch as a map of reasoning instead of a pile of lines.",
+    "This safety fallback is intentionally neutral so an unhandled lesson key cannot masquerade as a different optics activity.",
   );
 }
