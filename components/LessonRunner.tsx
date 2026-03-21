@@ -291,6 +291,7 @@ type LessonRunnerProps = {
   canGoNextLesson?: boolean;
   onGoNextLesson?: () => void;
   onRestartFromBeginning?: () => Promise<void> | void;
+  prefetchedLesson?: Record<string, unknown> | null;
   onProgressSummaryChanged?: (summary: {
     lessonId: string;
     lessonStatus: LessonStatus;
@@ -510,6 +511,7 @@ export default function LessonRunner({
   canGoNextLesson = false,
   onGoNextLesson,
   onRestartFromBeginning,
+  prefetchedLesson = null,
   onProgressSummaryChanged,
   previousLessonLabel = "the previous mission",
 }: LessonRunnerProps) {
@@ -543,13 +545,20 @@ export default function LessonRunner({
   const [simBias, setSimBias] = useState(18);
   const [simSpread, setSimSpread] = useState(24);
   void previousLessonLabel;
+  const prefetchedLessonRef = useRef<Record<string, unknown> | null>(prefetchedLesson);
+
+  useEffect(() => {
+    prefetchedLessonRef.current = prefetchedLesson;
+  }, [prefetchedLesson]);
 
   const loadRunner = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const data = await getLessonRunner(moduleId, lessonId);
+      const data = await getLessonRunner(moduleId, lessonId, {
+        prefetchedLesson: prefetchedLessonRef.current,
+      });
       const runnerData = data as RunnerResponse;
       setRunner(runnerData);
       onProgressSummaryChanged?.({
@@ -645,6 +654,8 @@ export default function LessonRunner({
           lesson_id: lessonId,
           event_type: eventType,
           payload,
+        }, {
+          prefetchedLesson: prefetchedLessonRef.current,
         });
 
         await loadRunner();

@@ -66,6 +66,10 @@ type LessonResources = {
   lesson: UnknownRecord;
 };
 
+type RunnerLoadOptions = {
+  prefetchedLesson?: UnknownRecord | null;
+};
+
 type AttemptHistory = {
   diagnosticUsedIds?: string[];
   diagnosticLastIds?: string[];
@@ -3087,22 +3091,68 @@ function lessonTitle(lesson: UnknownRecord, runnerLesson: UnknownRecord): string
   return text(lesson.title) || text(runnerLesson.title) || normalizeLessonId(lesson.lesson_id || runnerLesson.lesson_id);
 }
 
-async function loadResources(moduleId: string, lessonId: string): Promise<LessonResources> {
+function hasPrefetchedLesson(lessonId: string, lesson: UnknownRecord | null | undefined): lesson is UnknownRecord {
+  return Boolean(
+    lesson &&
+    Object.keys(lesson).length > 0 &&
+    normalizeLessonId(asRecord(lesson).lesson_id || asRecord(lesson).id) === normalizeLessonId(lessonId)
+  );
+}
+
+async function loadLessonFromModuleList(moduleId: string, lessonId: string): Promise<UnknownRecord | null> {
+  const lessonsPath = "/modules/" +
+    encodeURIComponent(moduleId) +
+    "/lessons";
+  const lessonsResponse = await apipGet<UnknownRecord>(lessonsPath);
+  const lessons = asList(asRecord(lessonsResponse).lessons).map(asRecord);
+  return lessons.find((entry) => normalizeLessonId(entry.lesson_id || entry.id) === lessonId) || null;
+}
+
+async function loadResources(moduleId: string, lessonId: string, options: RunnerLoadOptions = {}): Promise<LessonResources> {
   const normalized = normalizeLessonId(lessonId);
   const runnerPath = "/student/modules/" +
     encodeURIComponent(moduleId) +
     "/lessons/" +
     encodeURIComponent(normalized) +
     "/runner";
+  const runnerRequest = apipGet<UnknownRecord>(runnerPath);
+  if (hasPrefetchedLesson(normalized, options.prefetchedLesson)) {
+    return {
+      runner: await runnerRequest,
+      lesson: asRecord(options.prefetchedLesson),
+    };
+  }
+
   const lessonPath = "/modules/" +
     encodeURIComponent(moduleId) +
     "/lessons/" +
     encodeURIComponent(normalized);
-  const [runnerResponse, lessonResponse] = await Promise.all([
-    apipGet<UnknownRecord>(runnerPath),
+  const [runnerResponse, lessonResponse] = await Promise.allSettled([
+    runnerRequest,
     apipGet<UnknownRecord>(lessonPath),
   ]);
-  return { runner: runnerResponse, lesson: asRecord(lessonResponse.lesson) };
+
+  if (runnerResponse.status !== "fulfilled") {
+    throw runnerResponse.reason;
+  }
+
+  if (lessonResponse.status === "fulfilled") {
+    const lesson = asRecord(asRecord(lessonResponse.value).lesson);
+    if (Object.keys(lesson).length > 0) {
+      return { runner: runnerResponse.value, lesson };
+    }
+  }
+
+  const listFallbackLesson = await loadLessonFromModuleList(moduleId, normalized);
+  if (listFallbackLesson) {
+    return { runner: runnerResponse.value, lesson: listFallbackLesson };
+  }
+
+  if (lessonResponse.status !== "fulfilled") {
+    throw lessonResponse.reason;
+  }
+
+  throw new Error("Lesson content is not available right now.");
 }
 
 function normalizeRenderedPhysicsText(value: string): string {
@@ -7700,8 +7750,8 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     review_refs: reviewRefs(lesson),
   };
 }
-export async function getLessonRunner(moduleId: string, lessonId: string): Promise<UnknownRecord> {
-  const resources = await loadResources(moduleId, lessonId);
+export async function getLessonRunner(moduleId: string, lessonId: string, options: RunnerLoadOptions = {}): Promise<UnknownRecord> {
+  const resources = await loadResources(moduleId, lessonId, options);
   const runnerLesson = asRecord(resources.runner.lesson);
   let state = readState(moduleId, lessonId);
   const title = lessonTitle(resources.lesson, runnerLesson);
@@ -7966,12 +8016,12 @@ export async function getLessonRunner(moduleId: string, lessonId: string): Promi
   };
 }
 
-export async function postProgressEvent(moduleId: string, request: RunnerRequest): Promise<void> {
+export async function postProgressEvent(moduleId: string, request: RunnerRequest, options: RunnerLoadOptions = {}): Promise<void> {
   const lessonId = normalizeLessonId(request.lesson_id);
   const payload = request.payload || {};
 
   if (request.event_type === "diagnostic_submitted") {
-    const resources = await loadResources(moduleId, lessonId);
+    const resources = await loadResources(moduleId, lessonId, options);
     const title = lessonTitle(resources.lesson, asRecord(resources.runner.lesson));
     const pool = diagnosticItems(resources.lesson);
     const answers = asRecord(payload.answers);
@@ -8072,7 +8122,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
   }
 
   if (request.event_type === "concept_gate_submitted") {
-    const resources = await loadResources(moduleId, lessonId);
+    const resources = await loadResources(moduleId, lessonId, options);
     const title = lessonTitle(resources.lesson, asRecord(resources.runner.lesson));
     const state = readState(moduleId, lessonId);
     const retryCount = state.conceptGate?.retryCount || 0;
@@ -8173,7 +8223,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
   }
 
   if (request.event_type === "mastery_submitted") {
-    const resources = await loadResources(moduleId, lessonId);
+    const resources = await loadResources(moduleId, lessonId, options);
     const runnerLesson = asRecord(resources.runner.lesson);
     const title = lessonTitle(resources.lesson, runnerLesson);
     const masteryMeta = asRecord(runnerLesson.mastery_check);

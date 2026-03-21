@@ -99,6 +99,7 @@ type LessonCatalog = {
   sequence?: number;
   module_id?: string;
   phases?: LessonPhases;
+  [key: string]: unknown;
 };
 
 type LessonProgress = {
@@ -871,6 +872,7 @@ export default function StudentModulePage() {
           <LessonRunner
             moduleId={moduleId}
             lessonId={normalizeLessonId(activeLesson.lesson_id || activeLesson.id)}
+            prefetchedLesson={activeLesson}
             canGoNextLesson={canGoNext}
             onGoNextLesson={canGoNext ? goNext : undefined}
             onProgressSummaryChanged={handleRunnerProgressSummaryChanged}
