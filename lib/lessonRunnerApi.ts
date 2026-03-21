@@ -3086,10 +3086,11 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   }
 
   const isM8GuideLineReferencePrompt = matchesM8Prompt(
-    ["M8L1_C1", "M8L1_C6", "M8L2_M7"],
+    ["M8L1_C1", "M8L1_C6", "M8L2_C3", "M8L2_M7"],
     [
       "why does the guide line matter more than the surface in reflection questions",
       "why is measuring from the mirror surface risky",
+      "why should refraction angles be measured from the guide line",
       "why is the guide line still important in refraction",
     ],
   );
@@ -3148,10 +3149,11 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   }
 
   const isM8RefractionCausePrompt = matchesM8Prompt(
-    ["M8L2_D3", "M8L2_D5", "M8L2_M3", "M8L2_M4"],
+    ["M8L2_D3", "M8L2_D5", "M8L2_C5", "M8L2_M3", "M8L2_M4"],
     [
       "why does the route bend at a bend gate",
       "why is the lens pulls the route to the middle weak",
+      "why can a lens bend light twice",
       "which sentence keeps the cause of refraction correct",
       "why is a lens best described as a pair of bend gates",
     ],
@@ -3213,9 +3215,11 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   }
 
   const isM8SelectedRoutesPrompt = matchesM8Prompt(
-    ["M8L3_C1", "M8L6_C1"],
+    ["M8L3_C1", "M8L3_M7", "M8L4_M8", "M8L6_C1"],
     [
       "why are only a few selected routes needed in a converging-lens sketch",
+      "why is a few-ray sketch still useful even though many rays exist",
+      "why can a few selected routes still predict the ghost image for a diverging lens",
       "why does a route sketch use only a few carefully chosen routes instead of every possible one",
     ],
   );
@@ -3236,11 +3240,83 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isM8ImageFormationPrompt = matchesM8Prompt(
+    ["M8L3_D7"],
+    ["why is the lens stores the image inside itself weak"],
+  );
+
+  if (isM8ImageFormationPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["redirect", "redirects", "refract", "refracts", "bend", "bends"],
+        ["routes", "rays"],
+        ["meet", "cross", "image point"],
+        ["not", "rather than"],
+        ["store", "stores", "inside", "inside itself"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the lens redirects the rays so they meet at the image",
+        "the lens refracts routes so they meet at an image point",
+        "the image forms where refracted routes meet not inside the lens",
+        "the lens does not store the image inside itself",
+      ])
+    );
+  }
+
+  const isM8RealImagePrompt = matchesM8Prompt(
+    ["M8L3_D4", "M8L3_M4"],
+    [
+      "what makes a true meeting point a real image",
+      "why can a screen catch the image from a converging lens in this case",
+    ],
+  );
+
+  if (isM8RealImagePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["real", "actual", "true meeting point"],
+        ["routes", "rays"],
+        ["meet", "cross"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["screen", "catch", "capture"],
+        ["real", "actual"],
+        ["routes", "rays"],
+        ["meet", "cross"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a real image forms where actual rays cross",
+        "the actual refracted routes meet there",
+        "a screen can catch it because real rays meet there",
+        "it is a true meeting point of real rays",
+      ])
+    );
+  }
+
+  const isM8CentralRayPrompt = matchesM8Prompt(
+    ["M8L3_C4"],
+    ["why is the center route treated as undeviated"],
+  );
+
+  if (isM8CentralRayPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["center", "centre", "central"],
+        ["straight", "undeviated", "unbent", "not bent", "passes straight"],
+        ["thin-lens", "model", "ray diagram", "lens center", "lens centre"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the center ray is treated as straight in the thin-lens model",
+        "the central route is the undeviated reference route",
+        "in a standard ray diagram the center route passes straight through the lens center",
+      ])
+    );
+  }
+
   const isM8RealVsVirtualPrompt = matchesM8Prompt(
-    ["M8L3_C6", "M8L4_C6", "M8L6_C6"],
+    ["M8L3_C6", "M8L6_C6"],
     [
       "why is a real converging-lens image different from a plane-mirror image",
-      "why can a diverging-lens route sketch still be trustworthy when it uses dashed extensions",
       "why could a screen capture the image from a converging lens but not the image behind a plane mirror",
     ],
   );
@@ -3267,11 +3343,38 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isM8ConvergingSpecialCasePrompt = matchesM8Prompt(
+    ["M8L3_M2"],
+    ["describe the 2f converging-lens case"],
+  );
+
+  if (isM8ConvergingSpecialCasePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["real"],
+        ["same size", "equal size"],
+        ["2f", "two focal lengths", "far side", "other side"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["inverted"],
+        ["same size", "equal size"],
+        ["2f", "two focal lengths"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a same-size real image forms at 2f on the far side",
+        "the 2f case gives a real inverted same-size image at 2f",
+        "it forms at two focal lengths on the other side and is the same size",
+      ])
+    );
+  }
+
   const isM8DivergingPrompt = matchesM8Prompt(
-    ["M8L4_C1", "M8L4_C4"],
+    ["M8L4_D3", "M8L4_C1", "M8L4_C4", "M8L4_M5"],
     [
+      "why are dashed backward extensions used with a diverging lens",
       "how does the parallel-ray rule differ between gather and spread lenses",
       "why should dashed extensions behind a diverging lens not be called real routes",
+      "why is the dashed line is a real beam incorrect",
     ],
   );
 
@@ -3296,12 +3399,81 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isM8DivergingImagePrompt = matchesM8Prompt(
+    ["M8L4_D6", "M8L4_C6", "M8L4_M2"],
+    [
+      "why is the diverging-lens image a ghost meeting point",
+      "why can a diverging-lens route sketch still be trustworthy when it uses dashed extensions",
+      "describe the usual image from a diverging lens",
+    ],
+  );
+
+  if (isM8DivergingImagePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["spread", "diverge"],
+        ["extension", "backward", "dashed"],
+        ["appear", "apparent", "seem"],
+        ["meet", "locate", "come from"],
+        ["virtual", "ghost", "image"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["virtual", "ghost"],
+        ["upright"],
+        ["smaller"],
+        ["same side", "object side", "between the lens and the focus", "between the lens and the near focus"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["extension", "dashed"],
+        ["valid", "useful", "trustworthy"],
+        ["predict", "locate", "show"],
+        ["apparent", "virtual", "ghost", "image"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the real rays spread out and only the backward extensions appear to meet",
+        "a diverging lens gives a virtual upright smaller image on the object side",
+        "the dashed extensions are valid geometry tools for locating the ghost image",
+      ])
+    );
+  }
+
+  const isM8TIRConditionsPrompt = matchesM8Prompt(
+    ["M8L5_D3", "M8L5_M3"],
+    [
+      "state the two conditions for lock-bounce total internal reflection",
+      "critical angle 42 degrees incident angle 55 degrees inside glass what happens and why",
+    ],
+  );
+
+  if (isM8TIRConditionsPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["slower", "higher-index", "glass"],
+        ["faster", "lower-index", "air", "outside"],
+        ["greater than", "above", "bigger than", "more than"],
+        ["critical angle"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["leave", "escape", "trying to leave"],
+        ["slower", "higher-index", "glass"],
+        ["faster", "lower-index", "air"],
+        ["critical angle", "above the critical angle"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "light must be leaving the slower medium for a faster one and be above the critical angle",
+        "total internal reflection happens because the angle is above the critical angle while leaving glass for air",
+        "lock-bounce occurs because the route is trying to leave the slower medium and the incident angle is greater than the critical angle",
+      ])
+    );
+  }
+
   const isM8TIRPrompt = matchesM8Prompt(
-    ["M8L5_C1", "M8L5_C4", "M8L5_C6"],
+    ["M8L5_C1", "M8L5_C4", "M8L5_C6", "M8L5_M8"],
     [
       "why must light be trying to leave the slower medium before tir can happen",
       "why is lock-bounce different from ordinary reflection at a mirror",
       "why are optical fibers a strong lock-bounce example",
+      "how is lock-bounce different from the mirror rule in lesson 1",
     ],
   );
 
@@ -3328,6 +3500,51 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "tir is a failed escape from the slower medium",
         "lock-bounce happens at a boundary not at a mirror surface",
         "optical fibers keep light trapped by repeated total internal reflection",
+      ])
+    );
+  }
+
+  const isM8CriticalAngleLimitPrompt = matchesM8Prompt(
+    ["M8L5_D7", "M8L5_M5"],
+    [
+      "why is it weak to treat the critical angle as just a number to memorize",
+      "why is the escape edge called the last possible escape",
+    ],
+  );
+
+  if (isM8CriticalAngleLimitPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["last", "largest", "maximum", "limit", "boundary"],
+        ["escape", "refracted route"],
+        ["before", "between", "beyond"],
+        ["total internal reflection", "lock-bounce", "trapped"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the critical angle is the last possible escape before total internal reflection",
+        "it is the largest angle that still lets light escape",
+        "beyond it the light can no longer escape and tir begins",
+      ])
+    );
+  }
+
+  const isM8TrueVsGhostPrompt = matchesM8Prompt(
+    ["M8L6_D3"],
+    ["what is the difference between a true meeting point and a ghost meeting point"],
+  );
+
+  if (isM8TrueVsGhostPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["true", "real", "actual"],
+        ["routes", "rays"],
+        ["meet", "cross"],
+        ["ghost", "virtual", "apparent"],
+        ["extension", "backward", "appear", "seem"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a true meeting point is where real rays actually meet but a ghost meeting point is only an apparent meeting by extension",
+        "real images come from actual ray crossings while ghost images come from backward extensions",
       ])
     );
   }
@@ -3361,6 +3578,26 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "guide lines are references not beams",
         "the backward extensions only show where the image appears to come from",
         "the three line types should be kept separate because they do different jobs",
+      ])
+    );
+  }
+
+  const isM8MirrorGeometryPrompt = matchesM8Prompt(
+    ["M8L6_M2"],
+    ["a plane mirror has an object 9 cm in front of it where is the image and why"],
+  );
+
+  if (isM8MirrorGeometryPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["9 cm", "9"],
+        ["behind the mirror", "behind"],
+        ["same distance", "symmetric", "symmetry"],
+        ["object", "in front"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the image is 9 cm behind the mirror because plane-mirror images are the same distance behind as the object is in front",
+        "it is 9 cm behind the mirror by symmetry",
       ])
     );
   }
