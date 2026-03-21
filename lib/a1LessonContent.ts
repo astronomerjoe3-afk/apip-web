@@ -197,9 +197,17 @@ export function a1ScaffoldMediaCards(code: string): UnknownRecord[] {
 export function a1ReflectionVisualCheck(code: string): UnknownRecord | undefined {
   const visual = A1_VISUAL_META[code.replace("_", "")];
   if (!visual) return undefined;
+  const promptByLesson: Record<string, string> = {
+    A1_L1: "Use the motion-card visual to explain why SUVAT belongs only to one constant-acceleration event.",
+    A1_L2: "Use the steady-push visual to explain why negative acceleration is a signed direction statement rather than an automatic slowing-down label.",
+    A1_L3: "Use the launch-split visual to explain why the projectile is still accelerating downward at the top of its path.",
+    A1_L4: "Use the orbit-ring visual to explain why constant speed can still involve acceleration.",
+    A1_L5: "Use the gravity-beacon visual to explain why field strength at one location does not depend on which test mass is placed there.",
+    A1_L6: "Use the orbit-bridge visual to explain how gravity can act as the centripetal pull in a simple circular orbit.",
+  };
   return {
     title: visual.visual_title,
-    prompt: "Use the Probe-Field visual to explain the key mechanics relationship from this lesson in one clear sentence.",
+    prompt: promptByLesson[code] || "Use the Probe-Field visual to explain the key mechanics relationship from this lesson in one clear sentence.",
     image_url: visual.image_url,
     callouts: visual.visual_callouts,
   };
