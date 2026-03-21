@@ -329,43 +329,66 @@ export default function M7SimulationPanels({
     );
   }
 
-  const wavelength = clamp(simVectorMagnitude, 1, 10);
-  const gateWidth = clamp(simMetricMeters, 1, 20);
-  const edgeMode = clamp(Math.round(simBias), 0, 1);
-  const ratio = gateWidth / wavelength;
-  const spread = clamp(90 / Math.max(1, ratio), 12, 80);
+  if (lessonKey === "M7_L6") {
+    const wavelength = clamp(simVectorMagnitude, 1, 10);
+    const gateWidth = clamp(simMetricMeters, 1, 20);
+    const edgeMode = clamp(Math.round(simBias), 0, 1);
+    const ratio = gateWidth / wavelength;
+    const spread = clamp(90 / Math.max(1, ratio), 12, 80);
+    return render(
+      "Gate Spread lab",
+      <>
+        {sliderField("Wavelength", `${formatSimulationNumber(wavelength, 1)} cm`, <input className="w-full" type="range" min="1" max="10" step="0.5" value={wavelength} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Gate width", `${formatSimulationNumber(gateWidth, 1)} cm`, <input className="w-full" type="range" min="1" max="20" step="0.5" value={gateWidth} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Boundary type", edgeMode ? "Obstacle edge" : "Gate opening", <input className="w-full" type="range" min="0" max="1" step="1" value={edgeMode} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+      </>,
+      "Diffraction board",
+      <svg viewBox="0 0 640 250" className="w-full">
+        <rect x="30" y="30" width="580" height="176" rx="26" fill="#eef2ff" />
+        <line x1="300" y1="64" x2="300" y2="196" stroke="#0f172a" strokeWidth="12" />
+        {!edgeMode ? <rect x="294" y="110" width="12" height={gateWidth * 4} fill="#eef2ff" /> : null}
+        {!edgeMode
+          ? [0, 1, 2, 3].map((index) => <line key={index} x1="84" y1={88 + index * wavelength * 10} x2="260" y2={88 + index * wavelength * 10} stroke="#2563eb" strokeWidth="6" strokeLinecap="round" />)
+          : [0, 1, 2, 3].map((index) => <line key={index} x1="84" y1={88 + index * wavelength * 10} x2="260" y2={88 + index * wavelength * 10} stroke="#2563eb" strokeWidth="6" strokeLinecap="round" />)}
+        <path d={`M310 128 Q ${360 + spread} ${128 - spread / 2} 540 78`} stroke="#22c55e" strokeWidth="8" fill="none" strokeLinecap="round" />
+        <path d={`M310 128 Q ${360 + spread} 128 540 128`} stroke="#22c55e" strokeWidth="8" fill="none" strokeLinecap="round" />
+        <path d={`M310 128 Q ${360 + spread} ${128 + spread / 2} 540 178`} stroke="#22c55e" strokeWidth="8" fill="none" strokeLinecap="round" />
+        <text x="60" y="58" fill="#0f172a" fontSize="20" fontWeight="700">Gate Spread comparison</text>
+        <text x="60" y="188" fill="#475569" fontSize="15">Comparable gate size and wavelength give a broader outgoing fan.</text>
+      </svg>,
+      <>
+        {metricCard("Gate-width ratio", `${formatSimulationNumber(ratio, 2)} x lambda`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Spread strength", `${formatSimulationNumber(spread, 0)} deg fan`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Boundary", edgeMode ? "edge" : "opening", "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Diffraction", ratio <= 1.5 ? "strong" : ratio <= 3 ? "moderate" : "weak", "border-amber-200 bg-amber-50 text-amber-900")}
+      </>,
+      [
+        "Compare opening size with wavelength first.",
+        "Comparable sizes give stronger diffraction.",
+        "All waves can show this spreading behavior.",
+      ],
+      "This board makes diffraction a size-comparison story instead of a sound-only fact or a random blur.",
+    );
+  }
+
   return render(
-    "Gate Spread lab",
+    "Lesson explorer unavailable",
+    <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+      This lesson is waiting for its lesson-specific Signal-Stadium panel.
+    </div>,
+    "Explorer placeholder",
+    <div className="rounded-3xl border border-dashed border-slate-300 bg-white/80 p-8 text-center text-sm text-slate-600">
+      No generic fallback panel is being substituted here.
+    </div>,
     <>
-      {sliderField("Wavelength", `${formatSimulationNumber(wavelength, 1)} cm`, <input className="w-full" type="range" min="1" max="10" step="0.5" value={wavelength} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-      {sliderField("Gate width", `${formatSimulationNumber(gateWidth, 1)} cm`, <input className="w-full" type="range" min="1" max="20" step="0.5" value={gateWidth} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-      {sliderField("Boundary type", edgeMode ? "Obstacle edge" : "Gate opening", <input className="w-full" type="range" min="0" max="1" step="1" value={edgeMode} onChange={(e) => setSimBias(Number(e.target.value))} />)}
-    </>,
-    "Diffraction board",
-    <svg viewBox="0 0 640 250" className="w-full">
-      <rect x="30" y="30" width="580" height="176" rx="26" fill="#eef2ff" />
-      <line x1="300" y1="64" x2="300" y2="196" stroke="#0f172a" strokeWidth="12" />
-      {!edgeMode ? <rect x="294" y="110" width="12" height={gateWidth * 4} fill="#eef2ff" /> : null}
-      {!edgeMode
-        ? [0, 1, 2, 3].map((index) => <line key={index} x1="84" y1={88 + index * wavelength * 10} x2="260" y2={88 + index * wavelength * 10} stroke="#2563eb" strokeWidth="6" strokeLinecap="round" />)
-        : [0, 1, 2, 3].map((index) => <line key={index} x1="84" y1={88 + index * wavelength * 10} x2="260" y2={88 + index * wavelength * 10} stroke="#2563eb" strokeWidth="6" strokeLinecap="round" />)}
-      <path d={`M310 128 Q ${360 + spread} ${128 - spread / 2} 540 78`} stroke="#22c55e" strokeWidth="8" fill="none" strokeLinecap="round" />
-      <path d={`M310 128 Q ${360 + spread} 128 540 128`} stroke="#22c55e" strokeWidth="8" fill="none" strokeLinecap="round" />
-      <path d={`M310 128 Q ${360 + spread} ${128 + spread / 2} 540 178`} stroke="#22c55e" strokeWidth="8" fill="none" strokeLinecap="round" />
-      <text x="60" y="58" fill="#0f172a" fontSize="20" fontWeight="700">Gate Spread comparison</text>
-      <text x="60" y="188" fill="#475569" fontSize="15">Comparable gate size and wavelength give a broader outgoing fan.</text>
-    </svg>,
-    <>
-      {metricCard("Gate-width ratio", `${formatSimulationNumber(ratio, 2)} x lambda`, "border-sky-200 bg-sky-50 text-sky-900")}
-      {metricCard("Spread strength", `${formatSimulationNumber(spread, 0)} deg fan`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-      {metricCard("Boundary", edgeMode ? "edge" : "opening", "border-violet-200 bg-violet-50 text-violet-900")}
-      {metricCard("Diffraction", ratio <= 1.5 ? "strong" : ratio <= 3 ? "moderate" : "weak", "border-amber-200 bg-amber-50 text-amber-900")}
+      {metricCard("Lesson", lessonKey, "border-sky-200 bg-sky-50 text-sky-900")}
+      {metricCard("Status", "explicit panel required", "border-amber-200 bg-amber-50 text-amber-900")}
     </>,
     [
-      "Compare opening size with wavelength first.",
-      "Comparable sizes give stronger diffraction.",
-      "All waves can show this spreading behavior.",
+      "Each M7 lesson should own its explorer directly.",
+      "If this appears, the lesson wiring needs a dedicated panel.",
+      "The waves module should not silently fall through to another lesson view.",
     ],
-    "This board makes diffraction a size-comparison story instead of a sound-only fact or a random blur.",
+    "This safety fallback is intentionally neutral so an unhandled lesson key cannot masquerade as a different waves activity.",
   );
 }

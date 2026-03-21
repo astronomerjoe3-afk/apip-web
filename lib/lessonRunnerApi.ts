@@ -1168,6 +1168,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM4Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM7Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
@@ -2709,6 +2711,350 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "atmospheric pressure is part of p total",
         "the sky blanket adds before the liquid stack does",
         "without the atmosphere you would only have rhogh",
+      ])
+    );
+  }
+
+  const isM7TravelPatternPrompt = matchesM7Prompt(
+    ["M7L1_D3", "M7L1_C1", "M7L1_M3", "M7L1_M8"],
+    [
+      "why does the model say the pattern travels but each pad stays in place",
+      "why is a wave not the same thing as the pads moving across the field",
+      "in a stadium wave what travels even though each person only stands and sits locally",
+      "why is the sentence the pads move across the arena a weak wave description",
+    ],
+  );
+
+  if (isM7TravelPatternPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["pattern", "disturbance", "wave", "front"],
+        ["travels", "moves across", "moves on", "crosses", "goes around"],
+        ["pad", "pads", "people", "medium", "water particle", "particle"],
+        ["local", "in place", "oscillate", "pulse", "bob", "stays near", "around its place"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the pattern travels while the pads pulse locally",
+        "the disturbance moves across but the medium stays local",
+        "the wave travels but the medium only oscillates",
+        "the people stay local while the stadium pattern moves around",
+      ])
+    );
+  }
+
+  const isM7EnergyTransferPrompt = matchesM7Prompt(
+    ["M7L1_C4"],
+    ["how can a wave carry energy if the medium is not carried all the way across"],
+  );
+
+  if (isM7EnergyTransferPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["energy"],
+        ["transfer", "passes", "moves along", "carries"],
+        ["pattern", "disturbance", "wave"],
+        ["medium", "material", "pads", "particles"],
+        ["local", "in place", "oscillate", "pulse"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the disturbance transfers energy from one part to the next",
+        "energy moves with the pattern while the medium stays local",
+        "the wave carries energy even though each part only oscillates locally",
+      ])
+    );
+  }
+
+  const isM7WaveTypeRelationPrompt = matchesM7Prompt(
+    ["M7L2_D3", "M7L2_C2", "M7L2_D7"],
+    [
+      "what decides whether a wave is transverse or longitudinal",
+      "why can a transverse wave still travel horizontally even if the pads move vertically",
+      "why is the wave goes up and down a weak definition of transverse",
+    ],
+  );
+
+  if (isM7WaveTypeRelationPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["local motion", "particle motion", "disturbance", "pads"],
+        ["travel direction", "propagation", "wave direction"],
+        ["compare", "relative", "with", "against"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["perpendicular", "90", "up and down"],
+        ["parallel", "same direction", "along"],
+        ["travel direction", "propagation"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "you must compare local motion with the direction of travel",
+        "transverse and longitudinal depend on the relation between disturbance and propagation",
+        "up and down on the page is not enough without the propagation direction",
+      ])
+    );
+  }
+
+  const isM7WaveEquationPrompt = matchesM7Prompt(
+    ["M7L3_D4", "M7L3_C2"],
+    [
+      "state the wave speed relation for beat rate pulse gap and ripple run",
+      "how does the equation v = fλ connect beat rate and pulse gap to ripple run",
+    ],
+  );
+
+  if (isM7WaveEquationPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["speed", "wave speed", "ripple run", "v"],
+        ["frequency", "beat rate", "f"],
+        ["wavelength", "pulse gap", "lambda"],
+        ["equals", "is", "comes from", "product", "times", "x"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "wave speed equals frequency times wavelength",
+        "ripple run comes from beat rate times pulse gap",
+        "v equals f lambda",
+      ])
+    );
+  }
+
+  const isM7SourceVsMediumPrompt = matchesM7Prompt(
+    ["M7L3_D7", "M7L3_C5", "M7L3_M4", "M7L5_D7", "M7L5_C2", "M7L5_M2", "M7L5_M8"],
+    [
+      "why is it weak to say higher frequency always means a faster wave",
+      "why should students not treat v = fλ as if frequency alone sets speed in all situations",
+      "why is source frequency a source setting rather than a medium setting",
+      "why is it weak to say the wave bends because the frequency changed",
+      "when a wave enters a new pace zone which quantity belongs to the source and stays fixed",
+      "why can frequency stay fixed while wavelength changes at a boundary",
+      "why is frequency changed so the wave bent a weak explanation of refraction",
+    ],
+  );
+
+  if (isM7SourceVsMediumPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["source", "beat tower"],
+        ["frequency", "beat rate"],
+        ["same", "fixed", "stays", "keeps"],
+        ["medium", "new medium", "pace zone"],
+        ["speed", "wavelength", "lambda"],
+        ["change", "changes", "adjusts", "responds"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the source keeps the frequency fixed while the medium changes the speed",
+        "the new medium changes speed so wavelength changes instead",
+        "frequency is source-set while speed is medium-set",
+        "the source decides the launch rate but the medium controls how the fronts travel",
+      ])
+    );
+  }
+
+  const isM7SameSpeedDifferentPairsPrompt = matchesM7Prompt(
+    ["M7L3_M7"],
+    ["why can two waves have the same ripple run but different beat rates"],
+  );
+
+  if (isM7SameSpeedDifferentPairsPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same", "equal"],
+        ["speed", "ripple run"],
+        ["frequency", "beat rate"],
+        ["wavelength", "lambda"],
+        ["different", "compensate", "product", "pair"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "different frequency wavelength pairs can give the same speed",
+        "a lower frequency can be matched by a larger wavelength",
+        "wave speed depends on the product of frequency and wavelength",
+      ])
+    );
+  }
+
+  const isM7ReflectionLawPrompt = matchesM7Prompt(
+    ["M7L4_D3", "M7L4_M2"],
+    [
+      "what simple geometry rule does reflection keep at a flat wall",
+      "state the reflection law for a plane boundary",
+    ],
+  );
+
+  if (isM7ReflectionLawPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["incident", "incidence"],
+        ["equals", "same as", "matches"],
+        ["reflected", "reflection"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "angle of incidence equals angle of reflection",
+        "incident angle equals reflected angle",
+        "the reflected angle matches the incident angle",
+      ])
+    );
+  }
+
+  const isM7NormalReferencePrompt = matchesM7Prompt(
+    ["M7L4_D7", "M7L4_M5"],
+    [
+      "why should reflection angles be measured from the normal instead of the wall surface",
+      "why is measuring from the wall surface itself a risky way to use the reflection law",
+    ],
+  );
+
+  if (isM7NormalReferencePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["normal"],
+        ["reference", "measured from", "correct line", "standard line"],
+        ["incident", "reflected", "reflection rule", "angles"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the reflection rule uses angles to the normal",
+        "the normal is the correct reference line",
+        "the wall surface is not the reference for the reflection law",
+      ])
+    );
+  }
+
+  const isM7ReflectionVsRefractionPrompt = matchesM7Prompt(
+    ["M7L4_C2", "M7L4_M8", "M7L5_C5"],
+    [
+      "why is a bounce wall not the same as a pace zone",
+      "why is a reflecting wall a boundary behavior rather than a medium change behavior",
+      "why is refraction not just weird reflection",
+    ],
+  );
+
+  if (isM7ReflectionVsRefractionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["reflection", "bounce wall", "reflecting wall"],
+        ["bounce", "back", "redirect"],
+        ["refraction", "pace zone", "new medium"],
+        ["speed change", "turn"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "reflection is a bounce while refraction is a speed change turn",
+        "a bounce wall sends the wave back but a pace zone changes speed",
+        "reflection is not a new-medium speed-change story",
+      ])
+    );
+  }
+
+  const isM7RefractionCausePrompt = matchesM7Prompt(
+    ["M7L5_D4", "M7L5_M5"],
+    [
+      "why does a front bend at a pace zone boundary",
+      "what is the strongest reason a front turns at a pace zone boundary",
+    ],
+  );
+
+  if (isM7RefractionCausePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["speed", "wave speed"],
+        ["changes", "slower", "faster"],
+        ["new medium", "pace zone", "boundary"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["front", "one side", "different parts"],
+        ["different times", "before the other", "first", "pivots", "turns"],
+        ["speed", "slower", "faster"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "different parts of the front change speed at different times",
+        "the front pivots because one side enters the new speed zone first",
+        "the bend happens because the new medium changes the wave speed",
+      ])
+    );
+  }
+
+  const isM7DiffractionStrengthPrompt = matchesM7Prompt(
+    ["M7L6_D3", "M7L6_C2", "M7L6_M2", "M7L6_M8"],
+    [
+      "why does a narrow gate usually cause more spreading than a wide gate",
+      "why does a gap comparable to the wavelength give strong gate spread",
+      "state one condition that makes diffraction especially noticeable",
+      "why does a wide gate usually give less noticeable gate spread than a narrow one",
+    ],
+  );
+
+  if (isM7DiffractionStrengthPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["opening", "gap", "gate"],
+        ["wavelength", "lambda"],
+        ["comparable", "similar", "same order", "closer", "much larger", "less comparable"],
+        ["diffraction", "spreading", "spread"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "diffraction is strongest when the opening is comparable to the wavelength",
+        "a narrow gate is closer to the wavelength so the spreading is stronger",
+        "a wide gate is much larger than the wavelength so the spreading is weaker",
+      ])
+    );
+  }
+
+  const isM7AllWavesDiffractionPrompt = matchesM7Prompt(
+    ["M7L6_D7"],
+    ["why is diffraction is only for sound a weak claim"],
+  );
+
+  if (isM7AllWavesDiffractionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["all", "any"],
+        ["waves"],
+        ["diffract", "diffraction"],
+        ["not", "rather than"],
+        ["sound", "only sound", "sound only"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "all waves can diffract",
+        "diffraction is a general wave behavior not a sound-only one",
+        "it is not unique to sound",
+      ])
+    );
+  }
+
+  const isM7DiffractionVsRefractionPrompt = matchesM7Prompt(
+    ["M7L6_C5"],
+    ["how is diffraction different from refraction"],
+  );
+
+  if (isM7DiffractionVsRefractionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["diffraction"],
+        ["opening", "edge", "spread"],
+        ["refraction"],
+        ["speed change", "new medium", "turn"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "diffraction is spreading around openings or edges while refraction is a speed-change turn",
+        "diffraction is a gate or edge spread not a new-medium bend",
+      ])
+    );
+  }
+
+  const isM7ObstacleSpreadPrompt = matchesM7Prompt(
+    ["M7L6_M5"],
+    ["why can a wave reach an area behind an obstacle edge"],
+  );
+
+  if (isM7ObstacleSpreadPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["diffraction", "spread", "bend"],
+        ["edge", "obstacle"],
+        ["reach", "into"],
+        ["region", "corner", "hidden area", "behind"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "diffraction bends the wave around the edge into the hidden region",
+        "the wave spreads around the obstacle edge",
+        "edge diffraction lets the wave reach behind the obstacle",
       ])
     );
   }
