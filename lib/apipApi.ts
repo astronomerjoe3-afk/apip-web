@@ -50,6 +50,13 @@ async function getBearerToken(forceRefresh: boolean = false): Promise<string | n
   const user = (auth?.currentUser ?? null) as FirebaseUserLike | null;
   if (!user) return null;
 
+  if (!forceRefresh) {
+    const cached = cachedAccessToken(user);
+    if (cached) {
+      return cached;
+    }
+  }
+
   try {
     return await user.getIdToken(forceRefresh);
   } catch (error) {
@@ -67,35 +74,33 @@ function isFetchFailure(error: unknown): boolean {
 }
 
 async function performRequest(path: string, init: RequestInit): Promise<Response> {
-  const headers = new Headers(init.headers);
-  const token = await getBearerToken();
+  const run = async (forceRefreshToken: boolean): Promise<Response> => {
+    const headers = new Headers(init.headers);
+    const token = await getBearerToken(forceRefreshToken);
 
-  if (token) {
-    headers.set("Authorization", `Bearer ${token}`);
-  }
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
 
-  try {
-    return await fetch(buildApiUrl(path), {
+    return fetch(buildApiUrl(path), {
       ...init,
       headers,
       cache: "no-store",
     });
+  };
+
+  try {
+    const response = await run(false);
+    if (response.status === 401 && auth?.currentUser) {
+      return run(true);
+    }
+    return response;
   } catch (error) {
     if (!isFetchFailure(error) || !auth?.currentUser) {
       throw error;
     }
 
-    const retryHeaders = new Headers(init.headers);
-    const retryToken = await getBearerToken(true);
-    if (retryToken) {
-      retryHeaders.set("Authorization", `Bearer ${retryToken}`);
-    }
-
-    return fetch(buildApiUrl(path), {
-      ...init,
-      headers: retryHeaders,
-      cache: "no-store",
-    });
+    return run(true);
   }
 }
 
