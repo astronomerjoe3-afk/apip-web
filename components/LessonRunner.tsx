@@ -17,6 +17,7 @@ import M9SimulationPanels from "./M9SimulationPanels";
 import M10SimulationPanels from "./M10SimulationPanels";
 import M11SimulationPanels from "./M11SimulationPanels";
 import M12SimulationPanels from "./M12SimulationPanels";
+import M13SimulationPanels from "./M13SimulationPanels";
 
 type StageName =
   | "diagnostic"
@@ -2824,6 +2825,27 @@ export default function LessonRunner({
           />
         ) : simulationLessonKey.startsWith("M12_") ? (
           <M12SimulationPanels
+            lessonKey={simulationLessonKey}
+            simMetricMeters={simMetricMeters}
+            setSimMetricMeters={setSimMetricMeters}
+            simVectorMagnitude={simVectorMagnitude}
+            setSimVectorMagnitude={setSimVectorMagnitude}
+            simVectorAngle={simVectorAngle}
+            setSimVectorAngle={setSimVectorAngle}
+            simDensityMass={simDensityMass}
+            setSimDensityMass={setSimDensityMass}
+            simDensityVolume={simDensityVolume}
+            setSimDensityVolume={setSimDensityVolume}
+            simFluidDensity={simFluidDensity}
+            setSimFluidDensity={setSimFluidDensity}
+            simBias={simBias}
+            setSimBias={setSimBias}
+            simSpread={simSpread}
+            setSimSpread={setSimSpread}
+            formatSimulationNumber={formatSimulationNumber}
+          />
+        ) : simulationLessonKey.startsWith("M13_") ? (
+          <M13SimulationPanels
             lessonKey={simulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
