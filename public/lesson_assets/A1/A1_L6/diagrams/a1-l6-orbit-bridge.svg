@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#faf7ff"/>
+  <text x="52" y="74" fill="#16213e" font-family="Georgia, serif" font-size="54" font-weight="700">Orbit Bridge</text>
+  <text x="52" y="126" fill="#475569" font-family="Georgia, serif" font-size="28">Gravity can be the inward center pull that circular motion requires.</text>
+  <rect x="56" y="176" width="1088" height="470" rx="36" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="6"/>
+  <circle cx="286" cy="412" r="126" fill="#ddd6fe"/>
+  <circle cx="286" cy="412" r="26" fill="#4338ca"/>
+  <circle cx="412" cy="412" r="14" fill="#2563eb"/>
+  <line x1="412" y1="412" x2="412" y2="318" stroke="#0f766e" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="412,318 396,346 428,346" fill="#0f766e"/>
+  <line x1="412" y1="412" x2="312" y2="412" stroke="#f97316" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="312,412 340,396 340,428" fill="#f97316"/>
+  <text x="438" y="332" fill="#0f766e" font-family="Georgia, serif" font-size="32" font-weight="700">sideways motion</text>
+  <text x="438" y="398" fill="#c2410c" font-family="Georgia, serif" font-size="32" font-weight="700">gravity inward</text>
+  <rect x="706" y="266" width="332" height="196" rx="28" fill="#ffffff" stroke="#a78bfa" stroke-width="4"/>
+  <text x="736" y="324" fill="#6d28d9" font-family="Georgia, serif" font-size="34" font-weight="700">required a_c = v^2 / r</text>
+  <text x="736" y="382" fill="#7c3aed" font-family="Georgia, serif" font-size="34" font-weight="700">local g = GM / r^2</text>
+  <text x="736" y="436" fill="#15803d" font-family="Georgia, serif" font-size="32" font-weight="700">Bridge question: do they match?</text>
+  <text x="132" y="600" fill="#1f2937" font-family="Georgia, serif" font-size="34" font-weight="700">Orbiting is continuous free fall with tangential speed.</text>
+  <text x="132" y="642" fill="#475569" font-family="Georgia, serif" font-size="30">The whole module closes when the inward turning need and the inward gravity field become the same story.</text>
+</svg>

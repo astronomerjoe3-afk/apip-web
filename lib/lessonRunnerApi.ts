@@ -12,6 +12,7 @@ import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
 import { m12QuestionVisualMeta, m12ReflectionVisualCheck, m12ScaffoldCoreBullets, m12ScaffoldFocusExtras, m12ScaffoldMediaCards, m12SimulationCopy } from "./m12LessonContent";
+import { a1QuestionVisualMeta, a1ReflectionVisualCheck, a1ScaffoldCoreBullets, a1ScaffoldFocusExtras, a1ScaffoldMediaCards, a1SimulationCopy } from "./a1LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
 type RenderedQuestionOverride = {
@@ -87,14 +88,14 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M12_L1", "M12_L2", "M12_L3", "M12_L4", "M12_L5", "M12_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M12_L1", "M12_L2", "M12_L3", "M12_L4", "M12_L5", "M12_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6", "A1_L1", "A1_L2", "A1_L3", "A1_L4", "A1_L5", "A1_L6"];
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_");
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("A1_");
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_");
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("A1_");
 }
 
 type QuestionVisualMeta = {
@@ -425,6 +426,8 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
 function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined {
   const id = text(item.id).toUpperCase();
   const normalizedId = id.replace(/-/g, "");
+  const a1Visual = a1QuestionVisualMeta(normalizedId);
+  if (a1Visual) return a1Visual;
   const m2Visual = m2QuestionVisualMeta(normalizedId);
   if (m2Visual) return m2Visual;
   const m3Visual = m3QuestionVisualMeta(normalizedId);
@@ -6159,6 +6162,8 @@ function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number, st
 }
 
 function simulationStageTitle(code: string): string {
+  const a1 = a1SimulationCopy(code);
+  if (a1) return a1.title;
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.title;
   const m3 = m3SimulationCopy(code);
@@ -6217,6 +6222,8 @@ function simulationStageTitle(code: string): string {
 }
 
 function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): string {
+  const a1 = a1SimulationCopy(code);
+  if (a1) return a1.instructions;
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.instructions;
   const m3 = m3SimulationCopy(code);
@@ -6275,6 +6282,8 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
 }
 
 function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): string {
+  const a1 = a1SimulationCopy(code);
+  if (a1) return a1.taskPrompt;
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.taskPrompt;
   const m3 = m3SimulationCopy(code);
@@ -6333,6 +6342,8 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
 }
 
 function simulationStageExploreSteps(code: string): string[] {
+  const a1 = a1SimulationCopy(code);
+  if (a1) return a1.exploreSteps;
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.exploreSteps;
   const m3 = m3SimulationCopy(code);
@@ -6542,6 +6553,8 @@ function simulationStageExploreSteps(code: string): string[] {
   }
 }
 function simulationStageWatchFor(code: string): string[] {
+  const a1 = a1SimulationCopy(code);
+  if (a1) return a1.watchFor;
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.watchFor;
   const m3 = m3SimulationCopy(code);
@@ -6750,6 +6763,8 @@ function simulationStageWatchFor(code: string): string[] {
   }
 }
 function simulationStageTryFirst(code: string): string | undefined {
+  const a1 = a1SimulationCopy(code);
+  if (a1) return a1.tryFirst;
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.tryFirst;
   const m3 = m3SimulationCopy(code);
@@ -6838,6 +6853,8 @@ function simulationStageTryFirst(code: string): string | undefined {
   }
 }
 function simulationStageTakeaway(code: string): string | undefined {
+  const a1 = a1SimulationCopy(code);
+  if (a1) return a1.takeaway;
   const m2 = m2SimulationCopy(code);
   if (m2) return m2.takeaway;
   const m3 = m3SimulationCopy(code);
@@ -6936,6 +6953,8 @@ function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Pro
 }
 
 function scaffoldFocusExtras(code: string): string[] {
+  const a1 = a1ScaffoldFocusExtras(code);
+  if (a1.length > 0) return a1;
   const m2 = m2ScaffoldFocusExtras(code);
   if (m2.length > 0) return m2;
   const m3 = m3ScaffoldFocusExtras(code);
@@ -7177,6 +7196,8 @@ function scaffoldFocusExtras(code: string): string[] {
   }
 }
 function scaffoldCoreBullets(code: string): string[] {
+  const a1 = a1ScaffoldCoreBullets(code);
+  if (a1.length > 0) return a1;
   const m2 = m2ScaffoldCoreBullets(code);
   if (m2.length > 0) return m2;
   const m3 = m3ScaffoldCoreBullets(code);
@@ -8449,8 +8470,9 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
         const isElectricalQuantities = code.startsWith("M10_");
         const isCircuits = code.startsWith("M11_");
         const isFieldWeave = code.startsWith("M12_");
+        const isAdvancedMechanics = code.startsWith("A1_");
         return [{
-          title: isFlowGrid ? "Circuit essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuit network essentials" : isFieldWeave ? "Field-Weave essentials" : "Lesson essentials",
+          title: isFlowGrid ? "Circuit essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuit network essentials" : isFieldWeave ? "Field-Weave essentials" : isAdvancedMechanics ? "Advanced mechanics essentials" : "Lesson essentials",
           caption: isFlowGrid
             ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
             : isModuleOne
@@ -8467,6 +8489,8 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
                       ? "Keep these series, parallel, power, diagram, safety, and reduction ideas visible while you work through the lesson."
                     : isFieldWeave
                       ? "Keep these field, electromagnet, force, induction, generator, and transformer ideas visible while you work through the lesson."
+                  : isAdvancedMechanics
+                    ? "Keep these constant-acceleration, projectile, circular-motion, and gravity-field ideas visible while you work through the lesson."
                   : "Keep these key lesson ideas visible while you work through the lesson.",
           columns: ["Key idea", "Why it matters"],
           rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]),
@@ -8519,6 +8543,8 @@ function generatedScaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
+  const a1 = a1ScaffoldMediaCards(code);
+  if (a1.length > 0) return a1;
   const m2 = m2ScaffoldMediaCards(code);
   if (m2.length > 0) return m2;
   const m3 = m3ScaffoldMediaCards(code);
@@ -9560,6 +9586,8 @@ function generatedReflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | 
 
 function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined {
   const code = lessonCode(lesson);
+  const a1 = a1ReflectionVisualCheck(code);
+  if (a1) return a1;
   const m2 = m2ReflectionVisualCheck(code);
   if (m2) return m2;
   const m3 = m3ReflectionVisualCheck(code);
