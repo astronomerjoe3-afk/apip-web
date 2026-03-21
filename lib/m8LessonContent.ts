@@ -25,9 +25,11 @@ type M8SimulationCopy = {
   takeaway: string;
 };
 
+const M8_L1_ASSET_BASE = "/lesson_assets/M8/M8_L1/diagrams";
+
 const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
   M8L1: {
-    image_url: "/lesson-media/m8/m8-l1-bounce-panel.svg",
+    image_url: `${M8_L1_ASSET_BASE}/m8-l1-bounce-panel.svg`,
     visual_title: "Bounce Panels use the Guide Line",
     visual_caption: "Mirror reflection is read from the normal, not from the surface, and the plane-mirror image is a ghost position behind the panel.",
     visual_callouts: [
@@ -91,7 +93,7 @@ const M8_VISUAL_META: Record<string, M8QuestionVisualMeta> = {
 const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSectionVisual>> = {
   M8_L1: {
     "How to reason through it": {
-      image_url: "/lesson-media/m8/m8-l1-equal-angles.svg",
+      image_url: `${M8_L1_ASSET_BASE}/m8-l1-equal-angles.svg`,
       caption: "Start from the Guide Line, then compare the incoming and outgoing angles to that same perpendicular reference.",
       highlights: [
         "Incoming and reflected angles match when they are measured to the Guide Line.",
@@ -100,7 +102,7 @@ const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSecti
       ],
     },
     "Common trap": {
-      image_url: "/lesson-media/m8/m8-l1-surface-conversion.svg",
+      image_url: `${M8_L1_ASSET_BASE}/m8-l1-surface-conversion.svg`,
       caption: "A surface angle can be helpful, but it is not the incident angle in the rule until it is converted to the Guide Line.",
       highlights: [
         "Surface angle and Guide Line angle add to 90 deg.",
@@ -109,7 +111,7 @@ const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSecti
       ],
     },
     "Surface angle trap": {
-      image_url: "/lesson-media/m8/m8-l1-surface-conversion.svg",
+      image_url: `${M8_L1_ASSET_BASE}/m8-l1-surface-conversion.svg`,
       caption: "The reflection law is normal-first, so a surface reading has to be turned into the angle from the Guide Line before the rule is used.",
       highlights: [
         "20 deg to the surface means 70 deg to the Guide Line.",
@@ -118,7 +120,7 @@ const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSecti
       ],
     },
     "Ghost image clue": {
-      image_url: "/lesson-media/m8/m8-l1-ghost-image.svg",
+      image_url: `${M8_L1_ASSET_BASE}/m8-l1-ghost-image.svg`,
       caption: "The reflected routes stay in front of the mirror. The image behind the mirror comes from dashed backward extensions, not from real light there.",
       highlights: [
         "Only the backward extensions meet behind the mirror.",
@@ -127,7 +129,7 @@ const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSecti
       ],
     },
     "Worked example": {
-      image_url: "/lesson-media/m8/m8-l1-equal-angles.svg",
+      image_url: `${M8_L1_ASSET_BASE}/m8-l1-equal-angles.svg`,
       caption: "If the route arrives at 35 deg to the Guide Line, the reflected route also leaves at 35 deg to that same line.",
       highlights: [
         "Read the angle from the Guide Line first.",
@@ -136,7 +138,7 @@ const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSecti
       ],
     },
     "Worked example 2": {
-      image_url: "/lesson-media/m8/m8-l1-surface-conversion.svg",
+      image_url: `${M8_L1_ASSET_BASE}/m8-l1-surface-conversion.svg`,
       caption: "20 deg to the surface becomes 70 deg to the Guide Line because the surface and the Guide Line are perpendicular.",
       highlights: [
         "Start with the given surface angle.",
@@ -145,7 +147,7 @@ const M8_SCAFFOLD_SECTION_VISUALS: Record<string, Record<string, M8ScaffoldSecti
       ],
     },
     "Worked example 3": {
-      image_url: "/lesson-media/m8/m8-l1-image-distance.svg",
+      image_url: `${M8_L1_ASSET_BASE}/m8-l1-image-distance.svg`,
       caption: "A plane mirror places the image the same distance behind the mirror as the object is in front of it.",
       highlights: [
         "Object distance and image distance are equal.",
