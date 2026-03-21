@@ -564,6 +564,26 @@ function normalizeLessonId(value: unknown): string {
   return compactMatch ? `${compactMatch[1]}_L${compactMatch[2]}` : normalized;
 }
 
+function normalizeModuleId(value: unknown): string {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  const collapsed = raw.replace(/[^A-Za-z0-9]+/g, "").toUpperCase();
+  if (/^F[1-9]\d*$/.test(collapsed)) return collapsed;
+  if (/^A[1-9]\d*$/.test(collapsed)) return collapsed;
+
+  const advancedAliasMatch = collapsed.match(/^MA([1-9]\d*)$/);
+  if (advancedAliasMatch) return `A${advancedAliasMatch[1]}`;
+
+  const moduleMatch = collapsed.match(/^(?:MODULE)?(\d+)$/);
+  if (moduleMatch) return `M${moduleMatch[1]}`;
+
+  const moduleKeyMatch = collapsed.match(/^M(\d+)$/);
+  if (moduleKeyMatch) return `M${moduleKeyMatch[1]}`;
+
+  return raw;
+}
+
 function text(value: unknown, fallback = ""): string {
   return typeof value === "string" ? value : fallback;
 }
@@ -583,7 +603,7 @@ function asList(value: unknown): unknown[] {
 }
 
 function stateKey(moduleId: string, lessonId: string): string {
-  return `lesson-runner:${moduleId}:${normalizeLessonId(lessonId)}`;
+  return `lesson-runner:${normalizeModuleId(moduleId)}:${normalizeLessonId(lessonId)}`;
 }
 
 function readState(moduleId: string, lessonId: string): LocalState {
@@ -611,17 +631,19 @@ function clearState(moduleId: string, lessonId: string): void {
 
 function clearModuleState(moduleId: string): void {
   if (typeof window === "undefined") return;
-  const prefix = `lesson-runner:${moduleId}:`;
+  const prefixes = Array.from(new Set([String(moduleId || ""), normalizeModuleId(moduleId)]))
+    .filter(Boolean)
+    .map((value) => `lesson-runner:${value}:`);
   const keys: string[] = [];
   for (let index = 0; index < window.sessionStorage.length; index += 1) {
     const key = window.sessionStorage.key(index);
-    if (key && key.startsWith(prefix)) keys.push(key);
+    if (key && prefixes.some((prefix) => key.startsWith(prefix))) keys.push(key);
   }
   for (const key of keys) window.sessionStorage.removeItem(key);
 }
 
 function attemptHistoryKey(moduleId: string, lessonId: string): string {
-  return `lesson-runner-history:${moduleId}:${normalizeLessonId(lessonId)}`;
+  return `lesson-runner-history:${normalizeModuleId(moduleId)}:${normalizeLessonId(lessonId)}`;
 }
 
 function readAttemptHistory(moduleId: string, lessonId: string): AttemptHistory {
@@ -4924,8 +4946,9 @@ function hasPrefetchedLesson(lessonId: string, lesson: UnknownRecord | null | un
 }
 
 async function loadLessonFromModuleList(moduleId: string, lessonId: string): Promise<UnknownRecord | null> {
+  const normalizedModuleId = normalizeModuleId(moduleId);
   const lessonsPath = "/modules/" +
-    encodeURIComponent(moduleId) +
+    encodeURIComponent(normalizedModuleId) +
     "/lessons";
   const lessonsResponse = await apipGet<UnknownRecord>(lessonsPath);
   const lessons = asList(asRecord(lessonsResponse).lessons).map(asRecord);
@@ -4933,9 +4956,10 @@ async function loadLessonFromModuleList(moduleId: string, lessonId: string): Pro
 }
 
 async function loadResources(moduleId: string, lessonId: string, options: RunnerLoadOptions = {}): Promise<LessonResources> {
+  const normalizedModuleId = normalizeModuleId(moduleId);
   const normalized = normalizeLessonId(lessonId);
   const runnerPath = "/student/modules/" +
-    encodeURIComponent(moduleId) +
+    encodeURIComponent(normalizedModuleId) +
     "/lessons/" +
     encodeURIComponent(normalized) +
     "/runner";
@@ -4948,7 +4972,7 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
   }
 
   const lessonPath = "/modules/" +
-    encodeURIComponent(moduleId) +
+    encodeURIComponent(normalizedModuleId) +
     "/lessons/" +
     encodeURIComponent(normalized);
   const [runnerResponse, lessonResponse] = await Promise.allSettled([
@@ -4967,7 +4991,7 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
     }
   }
 
-  const listFallbackLesson = await loadLessonFromModuleList(moduleId, normalized);
+  const listFallbackLesson = await loadLessonFromModuleList(normalizedModuleId, normalized);
   if (listFallbackLesson) {
     return { runner: runnerResponse.value, lesson: listFallbackLesson };
   }
@@ -7028,7 +7052,7 @@ function simulationStageTakeaway(code: string): string | undefined {
   }
 }
 function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Promise<unknown> {
-  return apipPost<unknown, JsonObject>(`/progress/${encodeURIComponent(moduleId)}/event`, {
+  return apipPost<unknown, JsonObject>(`/progress/${encodeURIComponent(normalizeModuleId(moduleId))}/event`, {
     ...body,
     details: {
       lesson_id: normalizeLessonId(lessonId),
@@ -10139,7 +10163,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
       : null;
 
   return {
-    module_id: text(moduleMeta.module_id) || moduleId,
+    module_id: normalizeModuleId(text(moduleMeta.module_id) || moduleId),
     lesson_id: text(runnerLesson.lesson_id) || normalizeLessonId(lessonId),
     lesson_title: title,
     lesson_status: text(runnerLesson.lesson_status) === "completed" ? "completed" : text(runnerLesson.lesson_status) === "not_started" ? "not_started" : "in_progress",
@@ -10419,19 +10443,21 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
 
 
 export async function restartModuleProgress(moduleId: string): Promise<void> {
+  const normalizedModuleId = normalizeModuleId(moduleId);
   await apipPost<{ ok: boolean }, JsonObject>(
-    "/student/modules/" + encodeURIComponent(moduleId) + "/restart",
+    "/student/modules/" + encodeURIComponent(normalizedModuleId) + "/restart",
     {}
   );
-  clearModuleState(moduleId);
+  clearModuleState(normalizedModuleId);
 }
 
 export async function restartLessonProgress(moduleId: string, lessonId: string): Promise<void> {
+  const normalizedModuleId = normalizeModuleId(moduleId);
   const normalized = normalizeLessonId(lessonId);
   await apipPost<{ ok: boolean }, JsonObject>(
-    "/student/modules/" + encodeURIComponent(moduleId) + "/lessons/" + encodeURIComponent(normalized) + "/restart",
+    "/student/modules/" + encodeURIComponent(normalizedModuleId) + "/lessons/" + encodeURIComponent(normalized) + "/restart",
     {}
   );
-  clearState(moduleId, lessonId);
+  clearState(normalizedModuleId, lessonId);
 }
 

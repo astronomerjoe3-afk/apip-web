@@ -143,6 +143,32 @@ function normalizeLessonId(value: string | undefined | null): string {
   return String(value || "").replace(/-/g, "_").toUpperCase();
 }
 
+function normalizeModuleId(value: string | undefined | null): string {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  const collapsed = raw.replace(/[^A-Za-z0-9]+/g, "").toUpperCase();
+  if (/^F[1-9]\d*$/.test(collapsed)) return collapsed;
+  if (/^A[1-9]\d*$/.test(collapsed)) return collapsed;
+
+  const advancedAliasMatch = collapsed.match(/^MA([1-9]\d*)$/);
+  if (advancedAliasMatch) {
+    return `A${advancedAliasMatch[1]}`;
+  }
+
+  const moduleMatch = collapsed.match(/^(?:MODULE)?(\d+)$/);
+  if (moduleMatch) {
+    return `M${moduleMatch[1]}`;
+  }
+
+  const moduleKeyMatch = collapsed.match(/^M(\d+)$/);
+  if (moduleKeyMatch) {
+    return `M${moduleKeyMatch[1]}`;
+  }
+
+  return raw;
+}
+
 const MODULE_ONE_DESCRIPTION =
   "Module 1 treats kinematics as a representation system: journeys, graphs, signed rates, constant-acceleration forecasts, gradient context, and area reasoning must stay aligned without collapsing into basic motion slogans.";
 const MODULE_FOUR_TITLE = "Pressure";
@@ -152,7 +178,7 @@ const MODULE_FOUR_DESCRIPTION =
 function normalizeModuleTitle(moduleId: string | undefined | null, title: string | undefined): string | undefined {
   const trimmed = String(title || "").trim();
   if (!trimmed) return undefined;
-  const normalizedModuleId = normalizeLessonId(moduleId);
+  const normalizedModuleId = normalizeModuleId(moduleId);
   const isModuleFour =
     normalizedModuleId === "M4" ||
     /Pressure,\s*Patch Loads\s*&\s*Fluid Fields/i.test(trimmed);
@@ -165,7 +191,7 @@ function normalizeModuleTitle(moduleId: string | undefined | null, title: string
 function normalizeModuleDescription(moduleId: string | undefined | null, title: string | undefined, description: string | undefined): string | undefined {
   const trimmed = String(description || "").trim();
   if (!trimmed) return undefined;
-  const normalizedModuleId = normalizeLessonId(moduleId);
+  const normalizedModuleId = normalizeModuleId(moduleId);
   const isModuleOne = normalizedModuleId === "M1" || /Kinematics,\s*Graphs\s*&\s*Constant Acceleration/i.test(String(title || ""));
   if (isModuleOne && /foundation 2|f2/i.test(trimmed)) {
     return MODULE_ONE_DESCRIPTION;
@@ -259,16 +285,19 @@ export default function StudentModulePage() {
   const raw =
     (params["moduleId"] ?? params["module"]) as string | string[] | undefined;
 
-  const moduleId = useMemo(() => {
+  const routeModuleId = useMemo(() => {
     if (!raw) return "";
     const value = Array.isArray(raw) ? raw[0] : raw;
     return decodeURIComponent(value);
   }, [raw]);
 
+  const moduleId = useMemo(() => normalizeModuleId(routeModuleId), [routeModuleId]);
+
   const currentModulePath = useMemo(() => {
-    if (!moduleId) return "/student";
-    return "/student/module/" + encodeURIComponent(moduleId);
-  }, [moduleId]);
+    const pathModuleId = routeModuleId || moduleId;
+    if (!pathModuleId) return "/student";
+    return "/student/module/" + encodeURIComponent(pathModuleId);
+  }, [moduleId, routeModuleId]);
 
   const checkoutState = searchParams.get("checkout");
   const checkoutSessionId = searchParams.get("session_id");
@@ -485,15 +514,13 @@ export default function StudentModulePage() {
     }
 
     if (!user) {
-      const nextPath = moduleId
-        ? "/student/module/" + encodeURIComponent(moduleId)
-        : "/student";
+      const nextPath = currentModulePath;
       router.replace("/login?next=" + encodeURIComponent(nextPath));
       return;
     }
 
     void loadModuleState(false);
-  }, [authLoading, loadModuleState, moduleId, router, user]);
+  }, [authLoading, currentModulePath, loadModuleState, router, user]);
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -554,15 +581,13 @@ export default function StudentModulePage() {
       setErr("");
       setStatus("Signing out...");
       await signOut(auth);
-      const nextPath = moduleId
-        ? "/student/module/" + encodeURIComponent(moduleId)
-        : "/student";
+      const nextPath = currentModulePath;
       router.replace("/login?next=" + encodeURIComponent(nextPath));
     } catch (error: unknown) {
       setStatus("");
       setErr(errorMessage(error));
     }
-  }, [moduleId, router]);
+  }, [currentModulePath, router]);
 
   const launchCheckout = useCallback(async (purchaseKind: "module_unlock" | "subscription", planId?: string) => {
     if (!moduleId) return;
@@ -717,7 +742,7 @@ export default function StudentModulePage() {
 
       <div style={{ textAlign: "center", marginBottom: 28 }}>
         <div style={{ fontSize: 54, fontWeight: 900, letterSpacing: -1.6, fontFamily: "Bahnschrift, Aptos Display, Segoe UI, sans-serif", color: "#10233f" }}>
-          {moduleMeta?.title || moduleId || "Module"}
+          {moduleMeta?.title || routeModuleId || moduleId || "Module"}
         </div>
 
         {moduleMeta?.description ? (
