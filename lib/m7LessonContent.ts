@@ -19,9 +19,11 @@ type M7SimulationCopy = {
   takeaway: string;
 };
 
+const M7_ASSET_BASE = "/lesson_assets/M7";
+
 const M7_VISUAL_META: Record<string, M7QuestionVisualMeta> = {
   M7L1: {
-    image_url: "/lesson-media/m7/m7-l1-travel-pattern.svg",
+    image_url: `${M7_ASSET_BASE}/M7_L1/diagrams/m7-l1-travel-pattern.svg`,
     visual_title: "The pattern travels while pads pulse locally",
     visual_caption: "Each pad moves only around its own place, but the front pattern still crosses the whole stadium.",
     visual_callouts: [
@@ -31,7 +33,7 @@ const M7_VISUAL_META: Record<string, M7QuestionVisualMeta> = {
     ],
   },
   M7L2: {
-    image_url: "/lesson-media/m7/m7-l2-mode-match.svg",
+    image_url: `${M7_ASSET_BASE}/M7_L2/diagrams/m7-l2-mode-match.svg`,
     visual_title: "Cross-Sway versus Push-Squeeze",
     visual_caption: "Wave type comes from comparing local motion with propagation direction.",
     visual_callouts: [
@@ -41,7 +43,7 @@ const M7_VISUAL_META: Record<string, M7QuestionVisualMeta> = {
     ],
   },
   M7L3: {
-    image_url: "/lesson-media/m7/m7-l3-vflambda.svg",
+    image_url: `${M7_ASSET_BASE}/M7_L3/diagrams/m7-l3-vflambda.svg`,
     visual_title: "Beat Rate, Pulse Gap, and Ripple Run",
     visual_caption: "Wave speed grows from how often matching fronts are launched and how far apart they are.",
     visual_callouts: [
@@ -51,7 +53,7 @@ const M7_VISUAL_META: Record<string, M7QuestionVisualMeta> = {
     ],
   },
   M7L4: {
-    image_url: "/lesson-media/m7/m7-l4-bounce-wall.svg",
+    image_url: `${M7_ASSET_BASE}/M7_L4/diagrams/m7-l4-bounce-wall.svg`,
     visual_title: "Bounce Wall reflection",
     visual_caption: "Reflection keeps equal angles to the normal line at a flat boundary.",
     visual_callouts: [
@@ -61,7 +63,7 @@ const M7_VISUAL_META: Record<string, M7QuestionVisualMeta> = {
     ],
   },
   M7L5: {
-    image_url: "/lesson-media/m7/m7-l5-pace-zone.svg",
+    image_url: `${M7_ASSET_BASE}/M7_L5/diagrams/m7-l5-pace-zone.svg`,
     visual_title: "Pace Zone refraction",
     visual_caption: "A new medium changes speed, so the front turns and the wavelength changes while frequency stays fixed.",
     visual_callouts: [
@@ -71,7 +73,7 @@ const M7_VISUAL_META: Record<string, M7QuestionVisualMeta> = {
     ],
   },
   M7L6: {
-    image_url: "/lesson-media/m7/m7-l6-gate-spread.svg",
+    image_url: `${M7_ASSET_BASE}/M7_L6/diagrams/m7-l6-gate-spread.svg`,
     visual_title: "Gate Spread diffraction",
     visual_caption: "Diffraction is strongest when the opening size is comparable to the wavelength.",
     visual_callouts: [

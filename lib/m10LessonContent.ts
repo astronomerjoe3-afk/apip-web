@@ -19,9 +19,11 @@ type M10SimulationCopy = {
   takeaway: string;
 };
 
+const M10_ASSET_BASE = "/lesson_assets/M10";
+
 const M10_VISUAL_META: Record<string, M10QuestionVisualMeta> = {
   M10L1: {
-    image_url: "/lesson-media/m10/m10-l1-carrier-loop.svg",
+    image_url: `${M10_ASSET_BASE}/M10_L1/diagrams/m10-l1-carrier-loop.svg`,
     visual_title: "Carrier tokens circulate; the loop stays complete",
     visual_caption: "The moving thing is the charge carrier, while the checkpoint meter tracks rate separately from the total number of carriers.",
     visual_callouts: [
@@ -31,7 +33,7 @@ const M10_VISUAL_META: Record<string, M10QuestionVisualMeta> = {
     ],
   },
   M10L2: {
-    image_url: "/lesson-media/m10/m10-l2-checkpoint-rate.svg",
+    image_url: `${M10_ASSET_BASE}/M10_L2/diagrams/m10-l2-checkpoint-rate.svg`,
     visual_title: "Current is a checkpoint-rate idea",
     visual_caption: "The amount of charge present and the amount passing a point each second are different questions.",
     visual_callouts: [
@@ -41,7 +43,7 @@ const M10_VISUAL_META: Record<string, M10QuestionVisualMeta> = {
     ],
   },
   M10L3: {
-    image_url: "/lesson-media/m10/m10-l3-lift-station.svg",
+    image_url: `${M10_ASSET_BASE}/M10_L3/diagrams/m10-l3-lift-station.svg`,
     visual_title: "Voltage is boost per carrier",
     visual_caption: "The source gives each carrier an energy boost; it does not pour out current as if current were stored liquid.",
     visual_callouts: [
@@ -51,7 +53,7 @@ const M10_VISUAL_META: Record<string, M10QuestionVisualMeta> = {
     ],
   },
   M10L4: {
-    image_url: "/lesson-media/m10/m10-l4-route-drag.svg",
+    image_url: `${M10_ASSET_BASE}/M10_L4/diagrams/m10-l4-route-drag.svg`,
     visual_title: "Resistance belongs to the route",
     visual_caption: "Longer, narrower, or rougher routes make it harder for carriers to move, so the resistance is a path property.",
     visual_callouts: [
@@ -61,7 +63,7 @@ const M10_VISUAL_META: Record<string, M10QuestionVisualMeta> = {
     ],
   },
   M10L5: {
-    image_url: "/lesson-media/m10/m10-l5-ohmic-rule.svg",
+    image_url: `${M10_ASSET_BASE}/M10_L5/diagrams/m10-l5-ohmic-rule.svg`,
     visual_title: "Ohmic routes obey the simple rate rule",
     visual_caption: "For an ohmic route, increasing voltage raises current while increasing resistance reduces current.",
     visual_callouts: [
@@ -71,7 +73,7 @@ const M10_VISUAL_META: Record<string, M10QuestionVisualMeta> = {
     ],
   },
   M10L6: {
-    image_url: "/lesson-media/m10/m10-l6-loop-ledger.svg",
+    image_url: `${M10_ASSET_BASE}/M10_L6/diagrams/m10-l6-loop-ledger.svg`,
     visual_title: "The loop ledger keeps the quantities separate",
     visual_caption: "Charge keeps circulating, the source gives energy per carrier, and the route decides how much current actually flows.",
     visual_callouts: [

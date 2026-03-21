@@ -19,9 +19,11 @@ type M9SimulationCopy = {
   takeaway: string;
 };
 
+const M9_ASSET_BASE = "/lesson_assets/M9";
+
 const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L1: {
-    image_url: "/lesson-media/m9/m9-l1-beacon-launch.svg",
+    image_url: `${M9_ASSET_BASE}/M9_L1/diagrams/m9-l1-beacon-launch.svg`,
     visual_title: "A vibrating beacon launches sound",
     visual_caption: "The source must vibrate first, and the nearby air begins the squeeze-release relay.",
     visual_callouts: [
@@ -31,7 +33,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
     ],
   },
   M9L2: {
-    image_url: "/lesson-media/m9/m9-l2-crowd-relay.svg",
+    image_url: `${M9_ASSET_BASE}/M9_L2/diagrams/m9-l2-crowd-relay.svg`,
     visual_title: "Compressions and rarefactions relay the message",
     visual_caption: "Sound in air is a longitudinal pressure pattern of crowded and spread regions.",
     visual_callouts: [
@@ -41,7 +43,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
     ],
   },
   M9L3: {
-    image_url: "/lesson-media/m9/m9-l3-pitch-meter.svg",
+    image_url: `${M9_ASSET_BASE}/M9_L3/diagrams/m9-l3-pitch-meter.svg`,
     visual_title: "Ping Rate sets Tone Height",
     visual_caption: "Frequency controls pitch, while loudness is a separate sound-strength idea.",
     visual_callouts: [
@@ -51,7 +53,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
     ],
   },
   M9L4: {
-    image_url: "/lesson-media/m9/m9-l4-hear-zone.svg",
+    image_url: `${M9_ASSET_BASE}/M9_L4/diagrams/m9-l4-hear-zone.svg`,
     visual_title: "Hear Zone versus Super-Scout Mode",
     visual_caption: "Ultrasound is still sound; it just sits above the usual human hearing range.",
     visual_callouts: [
@@ -61,7 +63,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
     ],
   },
   M9L5: {
-    image_url: "/lesson-media/m9/m9-l5-echo-map.svg",
+    image_url: `${M9_ASSET_BASE}/M9_L5/diagrams/m9-l5-echo-map.svg`,
     visual_title: "Echo returns place hidden boundaries",
     visual_caption: "Pulse-echo scanning turns return time into depth and many returns into a map.",
     visual_callouts: [
@@ -71,7 +73,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
     ],
   },
   M9L6: {
-    image_url: "/lesson-media/m9/m9-l6-flow-tracker.svg",
+    image_url: `${M9_ASSET_BASE}/M9_L6/diagrams/m9-l6-flow-tracker.svg`,
     visual_title: "Doppler shifts reveal flow",
     visual_caption: "A higher or lower returned frequency can show motion toward or away from the probe.",
     visual_callouts: [

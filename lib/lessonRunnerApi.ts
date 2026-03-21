@@ -102,6 +102,8 @@ type QuestionVisualMeta = {
   visual_callouts: string[];
 };
 
+const F4_ASSET_BASE = "/lesson_assets/F4";
+
 const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
   F1L1: {
     image_url: "/lesson-media/f1/f1-l1-metric-system.svg",
@@ -284,7 +286,7 @@ const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
     ],
   },
   F4L1: {
-    image_url: "/lesson-media/f4/f4-l1-charge-current.svg",
+    image_url: `${F4_ASSET_BASE}/F4_L1/diagrams/f4-l1-charge-current.svg`,
     visual_title: "Charge and current",
     visual_caption: "The circuit visual turns current into charge flow so students stop saying that current is used up.",
     visual_callouts: [
@@ -294,7 +296,7 @@ const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
     ],
   },
   F4L2: {
-    image_url: "/lesson-media/f4/f4-l2-potential-difference.svg",
+    image_url: `${F4_ASSET_BASE}/F4_L2/diagrams/f4-l2-potential-difference.svg`,
     visual_title: "Potential difference",
     visual_caption: "The potential-difference visual treats voltage as energy transferred per charge rather than as just another number on the page.",
     visual_callouts: [
@@ -304,7 +306,7 @@ const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
     ],
   },
   F4L3: {
-    image_url: "/lesson-media/f4/f4-l3-resistance-iv.svg",
+    image_url: `${F4_ASSET_BASE}/F4_L3/diagrams/f4-l3-resistance-iv.svg`,
     visual_title: "Resistance and I-V behaviour",
     visual_caption: "The I-V visual connects resistance with current response to voltage before students rely on equations alone.",
     visual_callouts: [
@@ -314,7 +316,7 @@ const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
     ],
   },
   F4L4: {
-    image_url: "/lesson-media/f4/f4-l4-series-circuit.svg",
+    image_url: `${F4_ASSET_BASE}/F4_L4/diagrams/f4-l4-series-circuit.svg`,
     visual_title: "Series circuit",
     visual_caption: "The series-circuit visual keeps current, voltage sharing, and total resistance visible in one single-route story.",
     visual_callouts: [
@@ -324,7 +326,7 @@ const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
     ],
   },
   F4L5: {
-    image_url: "/lesson-media/f4/f4-l5-parallel-circuit.svg",
+    image_url: `${F4_ASSET_BASE}/F4_L5/diagrams/f4-l5-parallel-circuit.svg`,
     visual_title: "Parallel circuit",
     visual_caption: "The parallel-circuit visual keeps branch current and shared voltage separate across multiple routes.",
     visual_callouts: [
@@ -334,7 +336,7 @@ const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
     ],
   },
   F4L6: {
-    image_url: "/lesson-media/f4/f4-l6-power-safety.svg",
+    image_url: `${F4_ASSET_BASE}/F4_L6/diagrams/f4-l6-power-safety.svg`,
     visual_title: "Electrical power and safety",
     visual_caption: "The power-safety visual connects circuit power, energy transfer, and protective devices in one system story.",
     visual_callouts: [
@@ -7784,7 +7786,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "See the closed-loop stream",
           caption: "The Flow-Grid loop makes current feel like one common packet stream around a complete route.",
-          image_url: "/lesson-media/f4/f4-l1-charge-current.svg",
+          image_url: `${F4_ASSET_BASE}/F4_L1/diagrams/f4-l1-charge-current.svg`,
           highlights: ["Current means charge per second", "The same stream rate passes every point in one loop", "A lamp transfers energy without using current up"],
         },
       ];
@@ -7794,7 +7796,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "See energy per charge",
           caption: "Use the Flow-Grid source station to compare how much energy each packet gains before and after a component.",
-          image_url: "/lesson-media/f4/f4-l2-potential-difference.svg",
+          image_url: `${F4_ASSET_BASE}/F4_L2/diagrams/f4-l2-potential-difference.svg`,
           highlights: ["Voltage = energy per charge", "Cells boost electrical energy per packet", "Components transfer some of that energy away"],
         },
       ];
@@ -7804,7 +7806,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Compare push, difficulty, and current",
           caption: "One Flow-Grid picture links harder routes with lower current and steeper I-V graph slopes with lower resistance.",
-          image_url: "/lesson-media/f4/f4-l3-resistance-iv.svg",
+          image_url: `${F4_ASSET_BASE}/F4_L3/diagrams/f4-l3-resistance-iv.svg`,
           highlights: ["More push gives more stream rate", "More difficulty gives less stream rate", "Steeper I-V graph slope means lower resistance"],
         },
       ];
@@ -7814,7 +7816,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Track one route in series",
           caption: "One picture shows same current everywhere and the supply push shared across the route sections.",
-          image_url: "/lesson-media/f4/f4-l4-series-circuit.svg",
+          image_url: `${F4_ASSET_BASE}/F4_L4/diagrams/f4-l4-series-circuit.svg`,
           highlights: ["Series means one path", "Current is the same everywhere in that path", "Voltage is shared across the components"],
         },
       ];
@@ -7824,7 +7826,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "Track the split route in parallel",
           caption: "The Flow-Grid branch picture keeps branch voltage and current splitting visible at the same time.",
-          image_url: "/lesson-media/f4/f4-l5-parallel-circuit.svg",
+          image_url: `${F4_ASSET_BASE}/F4_L5/diagrams/f4-l5-parallel-circuit.svg`,
           highlights: ["Each branch gets the same voltage", "Current splits and recombines", "Adding a branch raises the total current"],
         },
       ];
@@ -7834,7 +7836,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
           kind: "visual",
           title: "See power, energy, and safety together",
           caption: "Use one circuit-energy picture to connect power, running time, and fuse protection.",
-          image_url: "/lesson-media/f4/f4-l6-power-safety.svg",
+          image_url: `${F4_ASSET_BASE}/F4_L6/diagrams/f4-l6-power-safety.svg`,
           highlights: ["Power tells energy transferred each second", "Total energy depends on time as well", "Fuses respond to dangerously large current"],
         },
       ];
