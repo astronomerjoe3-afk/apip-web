@@ -11,6 +11,7 @@ import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
+import { m12QuestionVisualMeta, m12ReflectionVisualCheck, m12ScaffoldCoreBullets, m12ScaffoldFocusExtras, m12ScaffoldMediaCards, m12SimulationCopy } from "./m12LessonContent";
 
 type UnknownRecord = Record<string, unknown>;
 type RenderedQuestionOverride = {
@@ -86,14 +87,14 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M12_L1", "M12_L2", "M12_L3", "M12_L4", "M12_L5", "M12_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6"];
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M13_");
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_");
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M13_");
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_");
 }
 
 type QuestionVisualMeta = {
@@ -444,6 +445,8 @@ function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined
   if (m10Visual) return m10Visual;
   const m11Visual = m11QuestionVisualMeta(normalizedId);
   if (m11Visual) return m11Visual;
+  const m12Visual = m12QuestionVisualMeta(normalizedId);
+  if (m12Visual) return m12Visual;
   const m1Match = normalizedId.match(/^(M1L[1-6])_[A-Z]+\d+$/);
   if (m1Match) return m1QuestionVisualMeta(m1Match[1]);
   const foundationMatch = normalizedId.match(/^(F[1-4]L[1-6])_[A-Z]+\d+$/);
@@ -5275,6 +5278,8 @@ function simulationStageTitle(code: string): string {
   if (m10) return m10.title;
   const m11 = m11SimulationCopy(code);
   if (m11) return m11.title;
+  const m12 = m12SimulationCopy(code);
+  if (m12) return m12.title;
   switch (code) {
     case "F1_L1": return "Unit and prefix explorer";
     case "F1_L2": return "Vector direction explorer";
@@ -5331,6 +5336,8 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
   if (m10) return m10.instructions;
   const m11 = m11SimulationCopy(code);
   if (m11) return m11.instructions;
+  const m12 = m12SimulationCopy(code);
+  if (m12) return m12.instructions;
   switch (code) {
     case "F1_L1": return "Hold the physical quantity fixed while you swap unit size. Compare what happens when the same length is written in km, m, cm, or mm, and decide which unit keeps the report readable without changing the quantity itself.";
     case "F1_L2": return "Use the route board and arrow panel together so you keep route length separate from start-to-finish change. Then hold either magnitude or direction fixed to see what really changes a vector.";
@@ -5387,6 +5394,8 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
   if (m10) return m10.taskPrompt;
   const m11 = m11SimulationCopy(code);
   if (m11) return m11.taskPrompt;
+  const m12 = m12SimulationCopy(code);
+  if (m12) return m12.taskPrompt;
   switch (code) {
     case "F1_L1": return "Use one classroom-sized object and one tiny object, then report each in a sensible unit. Explain why the number changes when the unit changes even though the physical quantity does not.";
     case "F1_L2": return "Create one journey where the distance is large but the displacement is small, then rotate one arrow without changing its length and explain what changed in the vector description.";
@@ -5443,6 +5452,8 @@ function simulationStageExploreSteps(code: string): string[] {
   if (m10) return m10.exploreSteps;
   const m11 = m11SimulationCopy(code);
   if (m11) return m11.exploreSteps;
+  const m12 = m12SimulationCopy(code);
+  if (m12) return m12.exploreSteps;
   switch (code) {
     case "F1_L1":
       return [
@@ -5650,6 +5661,8 @@ function simulationStageWatchFor(code: string): string[] {
   if (m10) return m10.watchFor;
   const m11 = m11SimulationCopy(code);
   if (m11) return m11.watchFor;
+  const m12 = m12SimulationCopy(code);
+  if (m12) return m12.watchFor;
   switch (code) {
     case "F1_L1":
       return [
@@ -5856,6 +5869,8 @@ function simulationStageTryFirst(code: string): string | undefined {
   if (m10) return m10.tryFirst;
   const m11 = m11SimulationCopy(code);
   if (m11) return m11.tryFirst;
+  const m12 = m12SimulationCopy(code);
+  if (m12) return m12.tryFirst;
   switch (code) {
     case "F1_L1":
       return "Try 2.5 m first. Rewrite it as cm and then as mm. The physical length stays the same, but the number grows because the unit chunks got smaller.";
@@ -5942,6 +5957,8 @@ function simulationStageTakeaway(code: string): string | undefined {
   if (m10) return m10.takeaway;
   const m11 = m11SimulationCopy(code);
   if (m11) return m11.takeaway;
+  const m12 = m12SimulationCopy(code);
+  if (m12) return m12.takeaway;
   switch (code) {
     case "F1_L1":
       return "Units are not decorations; they are part of the measurement, and changing the unit size changes the number without changing the physical quantity.";
@@ -6032,6 +6049,8 @@ function scaffoldFocusExtras(code: string): string[] {
   if (m10.length > 0) return m10;
   const m11 = m11ScaffoldFocusExtras(code);
   if (m11.length > 0) return m11;
+  const m12 = m12ScaffoldFocusExtras(code);
+  if (m12.length > 0) return m12;
   const m4 = m4ScaffoldFocusExtras(code);
   if (m4.length > 0) return m4;
   const m5 = m5ScaffoldFocusExtras(code);
@@ -6271,6 +6290,8 @@ function scaffoldCoreBullets(code: string): string[] {
   if (m10.length > 0) return m10;
   const m11 = m11ScaffoldCoreBullets(code);
   if (m11.length > 0) return m11;
+  const m12 = m12ScaffoldCoreBullets(code);
+  if (m12.length > 0) return m12;
   const m4 = m4ScaffoldCoreBullets(code);
   if (m4.length > 0) return m4;
   const m5 = m5ScaffoldCoreBullets(code);
@@ -7526,8 +7547,9 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
         const isSound = code.startsWith("M9_");
         const isElectricalQuantities = code.startsWith("M10_");
         const isCircuits = code.startsWith("M11_");
+        const isFieldWeave = code.startsWith("M12_");
         return [{
-          title: isFlowGrid ? "Circuit essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuit network essentials" : "Lesson essentials",
+          title: isFlowGrid ? "Circuit essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuit network essentials" : isFieldWeave ? "Field-Weave essentials" : "Lesson essentials",
           caption: isFlowGrid
             ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
             : isModuleOne
@@ -7542,6 +7564,8 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
                       ? "Keep these charge, current, voltage, resistance, and Ohm's law ideas visible while you work through the lesson."
                     : isCircuits
                       ? "Keep these series, parallel, power, diagram, safety, and reduction ideas visible while you work through the lesson."
+                    : isFieldWeave
+                      ? "Keep these field, electromagnet, force, induction, generator, and transformer ideas visible while you work through the lesson."
                   : "Keep these key lesson ideas visible while you work through the lesson.",
           columns: ["Key idea", "Why it matters"],
           rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]),
@@ -7614,6 +7638,8 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   if (m10.length > 0) return m10;
   const m11 = m11ScaffoldMediaCards(code);
   if (m11.length > 0) return m11;
+  const m12 = m12ScaffoldMediaCards(code);
+  if (m12.length > 0) return m12;
   const generated = generatedScaffoldMediaCards(lesson);
   if (generated.length > 0) return generated;
   switch (code) {
@@ -8653,6 +8679,8 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
   if (m10) return m10;
   const m11 = m11ReflectionVisualCheck(code);
   if (m11) return m11;
+  const m12 = m12ReflectionVisualCheck(code);
+  if (m12) return m12;
   const generated = generatedReflectionVisualCheck(lesson);
   if (generated) return generated;
   switch (code) {

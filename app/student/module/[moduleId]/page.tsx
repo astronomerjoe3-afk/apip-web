@@ -188,6 +188,19 @@ function errorMessage(error: unknown): string {
   return String(error);
 }
 
+function isFetchFailure(error: unknown): boolean {
+  return error instanceof Error && (error.message === "Failed to fetch" || error.name === "TypeError");
+}
+
+function emptyModuleProgress(moduleId: string, totalLessons: number): StudentModuleProgressResponse["module"] {
+  return {
+    module_id: moduleId,
+    module_mastery: 0,
+    lessons_completed_count: 0,
+    total_lessons: totalLessons,
+  };
+}
+
 function planRank(planId?: string | null): number {
   switch (String(planId || "")) {
     case "premium_monthly":
@@ -375,7 +388,7 @@ export default function StudentModulePage() {
           return;
         }
 
-        const [lessonsResponse, progressResponse] = await Promise.all([
+        const [lessonsResult, progressResult] = await Promise.allSettled([
           apipGet<LessonsResponse>(
             `/modules/${encodeURIComponent(moduleId)}/lessons`,
           ),
@@ -384,12 +397,22 @@ export default function StudentModulePage() {
           ),
         ]);
 
+        if (lessonsResult.status !== "fulfilled") {
+          throw lessonsResult.reason;
+        }
+
+        const lessonsResponse = lessonsResult.value;
+        const progressResponse =
+          progressResult.status === "fulfilled" ? progressResult.value : null;
+
         const progressByLessonId = new Map<string, LessonProgress>();
-        for (const lessonProgress of progressResponse.lessons || []) {
-          progressByLessonId.set(
-            normalizeLessonId(lessonProgress.lesson_id),
-            lessonProgress,
-          );
+        if (progressResponse) {
+          for (const lessonProgress of progressResponse.lessons || []) {
+            progressByLessonId.set(
+              normalizeLessonId(lessonProgress.lesson_id),
+              lessonProgress,
+            );
+          }
         }
 
         const mergedLessons: ActiveLesson[] = [...(lessonsResponse.lessons || [])]
@@ -434,7 +457,13 @@ export default function StudentModulePage() {
               : Math.max(mergedLessons.length - 1, 0);
         }
 
-        setModuleProgress(progressResponse.module);
+        if (progressResult.status !== "fulfilled" && !isFetchFailure(progressResult.reason)) {
+          setErr(errorMessage(progressResult.reason));
+        }
+
+        setModuleProgress(
+          progressResponse?.module || emptyModuleProgress(moduleId, mergedLessons.length),
+        );
         setLessons(mergedLessons);
         setActiveIdx(nextIndex);
       } catch (error) {
