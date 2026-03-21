@@ -25,7 +25,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L1: {
     image_url: `${M9_ASSET_BASE}/M9_L1/diagrams/m9-l1-beacon-launch.svg`,
     visual_title: "A vibrating beacon launches sound",
-    visual_caption: "The source must vibrate first, and the nearby air begins the squeeze-release relay.",
+    visual_caption: "The source vibration starts the wave, while the nearby air only begins the pressure relay.",
     visual_callouts: [
       "No vibration means no new sound launch.",
       "The source sets the sound frequency.",
@@ -35,7 +35,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L2: {
     image_url: `${M9_ASSET_BASE}/M9_L2/diagrams/m9-l2-crowd-relay.svg`,
     visual_title: "Compressions and rarefactions relay the message",
-    visual_caption: "Sound in air is a longitudinal pressure pattern of crowded and spread regions.",
+    visual_caption: "Sound in air is a longitudinal pressure pattern: crowded and spread regions move on while particles stay local.",
     visual_callouts: [
       "Squeeze Bands are compressions.",
       "Release Bands are rarefactions.",
@@ -45,7 +45,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L3: {
     image_url: `${M9_ASSET_BASE}/M9_L3/diagrams/m9-l3-pitch-meter.svg`,
     visual_title: "Ping Rate sets Tone Height",
-    visual_caption: "Frequency controls pitch, while loudness is a separate sound-strength idea.",
+    visual_caption: "Frequency sets pitch, while loudness stays on a separate sound-strength track.",
     visual_callouts: [
       "Higher frequency means higher pitch.",
       "Pitch and loudness are not the same quantity.",
@@ -55,7 +55,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L4: {
     image_url: `${M9_ASSET_BASE}/M9_L4/diagrams/m9-l4-hear-zone.svg`,
     visual_title: "Hear Zone versus Super-Scout Mode",
-    visual_caption: "Ultrasound is still sound; it just sits above the usual human hearing range.",
+    visual_caption: "Ultrasound is still sound; the only change is that its frequency sits beyond the usual human hearing band.",
     visual_callouts: [
       "Most human hearing sits around 20 Hz to 20 kHz.",
       "Above 20 kHz is ultrasound.",
@@ -65,7 +65,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L5: {
     image_url: `${M9_ASSET_BASE}/M9_L5/diagrams/m9-l5-echo-map.svg`,
     visual_title: "Echo returns place hidden boundaries",
-    visual_caption: "Pulse-echo scanning turns return time into depth and many returns into a map.",
+    visual_caption: "Pulse-echo scanning turns return time into one-way depth and many returns into a boundary map.",
     visual_callouts: [
       "Longer return time usually means greater depth.",
       "The divide-by-two step comes from the round trip.",
@@ -75,7 +75,7 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L6: {
     image_url: `${M9_ASSET_BASE}/M9_L6/diagrams/m9-l6-flow-tracker.svg`,
     visual_title: "Doppler shifts reveal flow",
-    visual_caption: "A higher or lower returned frequency can show motion toward or away from the probe.",
+    visual_caption: "Comparing transmitted and returned frequency reveals motion toward or away from the probe.",
     visual_callouts: [
       "Toward the probe means a higher return frequency.",
       "Away from the probe means a lower return frequency.",
@@ -92,8 +92,8 @@ export function m9QuestionVisualMeta(itemId: string): M9QuestionVisualMeta | und
 const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
   M9_L1: {
     title: "Wake the Beacon lab",
-    instructions: "Start with the source and keep asking what is vibrating before you describe anything else.",
-    taskPrompt: "Change the beacon vibration rate, pause the source, and explain why the sound frequency follows the source while the medium does the relaying.",
+    instructions: "Start with the source and keep asking what is vibrating before you describe any wave property.",
+    taskPrompt: "Change the beacon vibration rate, pause the source, and explain why the sound frequency follows the source while the medium only relays the disturbance.",
     exploreSteps: [
       "Turn the beacon on and off deliberately.",
       "Raise the vibration rate without changing the medium story.",
@@ -104,13 +104,13 @@ const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
       "The source frequency becomes the sound frequency.",
       "The wave is not a packet of air fired across the room.",
     ],
-    tryFirst: "Start with a quiet beacon, then switch it on at 300 vibrations per second. The sound frequency becomes 300 Hz because the source launch rate sets the wave rate.",
+    tryFirst: "Start with the beacon off, then switch it on at 300 vibrations per second. The launched sound becomes 300 Hz because each source cycle launches one sound cycle, while the nearby air only passes the disturbance onward.",
     takeaway: "Sound production stays clear when students anchor every case to a vibrating source first.",
   },
   M9_L2: {
     title: "Crowd Relay lab",
-    instructions: "Track one particle and one pressure band at the same time so local motion does not get confused with wave travel.",
-    taskPrompt: "Watch compressions and rarefactions move through the crowd, then explain why the particles oscillate locally even though the pattern travels onward.",
+    instructions: "Track one particle and one pressure band at the same time so local motion does not get confused with propagation.",
+    taskPrompt: "Watch compressions and rarefactions move through the crowd, then explain why the particles oscillate locally even though the pressure pattern travels onward.",
     exploreSteps: [
       "Highlight one particle first.",
       "Label a Squeeze Band and a Release Band second.",
@@ -121,13 +121,13 @@ const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
       "Compressions are crowded regions and rarefactions are spread-out regions.",
       "The pattern travels; the medium does not march across the room.",
     ],
-    tryFirst: "Keep the wave moving right and watch one highlighted particle shuffle left-right around its own place. The crowd relays the disturbance, but that particle does not travel across the whole arena.",
+    tryFirst: "Keep the pressure pattern moving right and lock onto one highlighted particle. It only shuffles left-right around its own place, which is why the medium relays the sound without the whole crowd marching across the arena.",
     takeaway: "The sound-wave picture becomes much stronger when pattern travel and particle motion are kept separate.",
   },
   M9_L3: {
     title: "Pitch Match lab",
     instructions: "Use one tone meter for pitch and a separate bar for loudness so those ideas stay uncoupled.",
-    taskPrompt: "Raise and lower the ping rate while holding loudness steady, then explain why pitch changes with frequency and why the same-air sound speed does not need to change.",
+    taskPrompt: "Raise and lower the ping rate while holding loudness steady, then explain why pitch changes with frequency and why the same-air sound speed stays medium-owned.",
     exploreSteps: [
       "Set a target tone height first.",
       "Hold loudness fixed while changing frequency.",
@@ -138,13 +138,13 @@ const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
       "Loudness is a separate sound-strength question.",
       "In the same medium, higher frequency means shorter wavelength rather than faster sound.",
     ],
-    tryFirst: "Compare 340 Hz and 680 Hz in the same air. The 680 Hz tone is higher in pitch, while the wavelength is shorter and the sound speed stays tied to the medium.",
+    tryFirst: "Compare 340 Hz and 680 Hz in the same air while leaving the loudness bar alone. The 680 Hz tone is higher in pitch, the wavelength is shorter, and the sound speed still belongs to the medium rather than the frequency change.",
     takeaway: "Pitch questions calm down once frequency, loudness, and speed stop collapsing into one label.",
   },
   M9_L4: {
     title: "Super-Scout lab",
     instructions: "Slide one sound across the hearing boundary and keep the 'still sound' label visible the whole time.",
-    taskPrompt: "Classify frequencies against the Hear Zone, then explain why ultrasound remains sound and can still reflect from hidden boundaries.",
+    taskPrompt: "Classify frequencies against the Hear Zone, then explain why ultrasound remains sound and can still reflect from hidden boundaries once it passes above 20 kHz.",
     exploreSteps: [
       "Start with an audible frequency.",
       "Push above 20 kHz into Super-Scout Mode.",
@@ -155,13 +155,13 @@ const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
       "Ultrasound is sound above that range.",
       "Ultrasound can still reflect because it is still sound in a medium.",
     ],
-    tryFirst: "Move from 5 kHz to 40 kHz and watch the label change from Hear Zone to Super-Scout Mode without ever changing the wave family away from sound.",
+    tryFirst: "Move from 5 kHz to 40 kHz and watch the label change from Hear Zone to Super-Scout Mode. The frequency class changes at the boundary, but the wave stays sound the whole time and still keeps its boundary-reflection job.",
     takeaway: "Ultrasound works best conceptually when it is treated as a high-frequency sound case, not as a separate mysterious beam.",
   },
   M9_L5: {
     title: "Scout Scan lab",
     instructions: "Treat the return time as a round trip first, then convert to one-way depth before you place the boundary.",
-    taskPrompt: "Change echo time and sound speed, compare near and far boundaries, and explain why many echoes are needed to build a map instead of one clue.",
+    taskPrompt: "Change echo time and sound speed, compare near and far boundaries, and explain why many echoes are needed to build a scan map instead of one clue.",
     exploreSteps: [
       "Start with one boundary and one echo.",
       "Move the boundary deeper and compare the new return time.",
@@ -172,7 +172,7 @@ const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
       "Depth uses the divide-by-two step.",
       "Imaging comes from many timed echoes.",
     ],
-    tryFirst: "Set sound speed to 1500 m/s and echo time to 0.002 s. The round-trip distance is 3 m, so the boundary depth is 1.5 m after halving.",
+    tryFirst: "Set sound speed to 1500 m/s and echo time to 0.002 s. The pulse travels 3 m out-and-back, so the boundary sits 1.5 m deep after the divide-by-two step that turns round-trip distance into one-way depth.",
     takeaway: "Echo mapping becomes reliable when students protect the round-trip logic before touching the formula.",
   },
   M9_L6: {
@@ -189,7 +189,7 @@ const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
       "Away from the probe gives a lower returned frequency.",
       "Doppler extends ultrasound into motion and blood-flow tracking.",
     ],
-    tryFirst: "Keep a 3.000 MHz transmitted pulse on screen, then push the target toward the probe until the return reads 3.002 MHz. The positive shift is the clue that the target is moving toward the probe.",
+    tryFirst: "Keep a 3.000 MHz transmitted pulse on screen, then push the target toward the probe until the return reads 3.002 MHz. The positive shift is the first clue, and only after reading that sign should you name the motion as toward the probe.",
     takeaway: "Doppler reasoning becomes much easier when learners read the shift sign before trying to name the medical meaning.",
   },
 };

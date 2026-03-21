@@ -1,8 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <marker id="wave-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M 0 0 L 12 6 L 0 12 z" fill="#38bdf8" />
+    <linearGradient id="bg-l5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff" />
+      <stop offset="100%" stop-color="#f6fff9" />
+    </linearGradient>
+    <marker id="l5-arrow-out" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#2563eb" />
+    </marker>
+    <marker id="l5-arrow-back" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#0f766e" />
     </marker>
   </defs>
-  <rect width="100%" height="100%" fill="#0b1020" />
-<text x="640.00" y="70.00" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Echo map</text><text x="640.00" y="105.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">Shows a pulse leaving the probe, reflecting from a boundary, and returning to build a depth clue.</text><rect x="90.00" y="180.00" width="1100.00" height="360.00" rx="26" fill="#111827" stroke="#334155" stroke-width="3" /><text x="116.00" y="218.00" fill="#93c5fd" text-anchor="start" font-size="24" font-family="Arial" font-weight="bold">Pulse echo imaging</text><rect x="180.00" y="300.00" width="80.00" height="160.00" rx="18" fill="#1d4ed8" /><text x="220.00" y="500.00" fill="#dbeafe" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">probe</text><line x1="260.00" y1="370.00" x2="930.00" y2="370.00" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" marker-end="url(#wave-arrow)" /><line x1="930.00" y1="420.00" x2="260.00" y2="420.00" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 8" marker-end="url(#wave-arrow)" /><line x1="930.00" y1="270.00" x2="930.00" y2="490.00" stroke="#94a3b8" stroke-width="10" stroke-linecap="round" /><text x="930.00" y="248.00" fill="#e2e8f0" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">hidden boundary</text><line x1="400.00" y1="500.00" x2="920.00" y2="500.00" stroke="#86efac" stroke-width="5" stroke-linecap="round" marker-end="url(#wave-arrow)" /><text x="575.00" y="534.00" fill="#bbf7d0" text-anchor="middle" font-size="22" font-family="Arial" font-weight="normal">round trip -&gt; divide by 2 for depth</text><rect x="980.00" y="230.00" width="150.00" height="180.00" rx="22" fill="#0f172a" stroke="#475569" stroke-width="3" /><text x="1055.00" y="280.00" fill="#f8fafc" text-anchor="middle" font-size="26" font-family="Arial" font-weight="bold">scan</text><line x1="1015.00" y1="335.00" x2="1095.00" y2="300.00" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" /><line x1="1015.00" y1="360.00" x2="1095.00" y2="360.00" stroke="#fbbf24" stroke-width="5" stroke-linecap="round" /><line x1="1015.00" y1="385.00" x2="1095.00" y2="340.00" stroke="#34d399" stroke-width="5" stroke-linecap="round" /></svg>
+  <rect width="1280" height="720" fill="url(#bg-l5)" />
+  <text x="88" y="88" fill="#0f172a" font-size="34" font-family="Arial, sans-serif" font-weight="700">Echo time becomes one-way depth</text>
+  <text x="88" y="128" fill="#475569" font-size="20" font-family="Arial, sans-serif">Ultrasound mapping uses reflected pulses. The timed journey is out-and-back, so depth is half the full path.</text>
+
+  <rect x="76" y="176" width="786" height="420" rx="30" fill="#ffffff" stroke="#93c5fd" stroke-width="4" />
+  <text x="110" y="220" fill="#1d4ed8" font-size="26" font-family="Arial, sans-serif" font-weight="700">Pulse-echo scene</text>
+  <rect x="138" y="318" width="74" height="144" rx="22" fill="#2563eb" />
+  <text x="175" y="490" fill="#1d4ed8" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">probe</text>
+
+  <line x1="212" y1="372" x2="620" y2="372" stroke="#2563eb" stroke-width="8" marker-end="url(#l5-arrow-out)" />
+  <text x="404" y="346" fill="#1d4ed8" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">outgoing pulse</text>
+
+  <line x1="620" y1="410" x2="212" y2="454" stroke="#0f766e" stroke-width="8" stroke-dasharray="12 10" marker-end="url(#l5-arrow-back)" />
+  <text x="414" y="498" fill="#0f766e" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">echo return</text>
+
+  <line x1="620" y1="262" x2="620" y2="492" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" />
+  <line x1="752" y1="246" x2="752" y2="508" stroke="#f97316" stroke-width="10" stroke-linecap="round" opacity="0.55" />
+  <text x="620" y="236" fill="#b45309" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">nearer boundary</text>
+  <text x="752" y="236" fill="#c2410c" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">deeper boundary</text>
+
+  <rect x="892" y="176" width="312" height="420" rx="30" fill="#ffffff" stroke="#86efac" stroke-width="4" />
+  <text x="924" y="220" fill="#166534" font-size="26" font-family="Arial, sans-serif" font-weight="700">Map console</text>
+  <rect x="934" y="260" width="228" height="92" rx="22" fill="#ecfdf5" />
+  <text x="960" y="298" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">Given</text>
+  <text x="960" y="326" fill="#475569" font-size="17" font-family="Arial, sans-serif">v = 1500 m/s, t = 0.002 s</text>
+  <rect x="934" y="374" width="228" height="146" rx="22" fill="#f8fafc" stroke="#cbd5e1" />
+  <text x="960" y="412" fill="#0f172a" font-size="18" font-family="Arial, sans-serif" font-weight="700">Calculation</text>
+  <text x="960" y="446" fill="#475569" font-size="17" font-family="Arial, sans-serif">round-trip distance = vt</text>
+  <text x="960" y="476" fill="#475569" font-size="17" font-family="Arial, sans-serif">= 1500 × 0.002 = 3.0 m</text>
+  <text x="960" y="506" fill="#166534" font-size="17" font-family="Arial, sans-serif" font-weight="700">depth = 3.0 / 2 = 1.5 m</text>
+
+  <rect x="76" y="626" width="1128" height="58" rx="18" fill="#ffffff" stroke="#cbd5e1" />
+  <text x="108" y="662" fill="#0f172a" font-size="18" font-family="Arial, sans-serif" font-weight="700">Physics read:</text>
+  <text x="238" y="662" fill="#475569" font-size="18" font-family="Arial, sans-serif">Many echoes from many boundaries build an image; one echo gives one depth clue.</text>
+</svg>
