@@ -1,59 +1,56 @@
-<svg width="900" height="560" viewBox="0 0 900 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="m8-equal-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M0 0 L12 6 L0 12 Z" fill="#2563EB"/>
+    <marker id="equal-blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2563EB"/>
     </marker>
-    <marker id="m8-equal-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M0 0 L12 6 L0 12 Z" fill="#0F766E"/>
+    <marker id="equal-green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#0F766E"/>
     </marker>
   </defs>
-  <rect width="900" height="560" rx="32" fill="#F8FAFC"/>
+  <rect width="900" height="520" rx="32" fill="#F8FBFF"/>
   <g font-family="Segoe UI, Arial, sans-serif">
-    <text x="44" y="58" fill="#0F172A" font-size="34" font-weight="700">Equal Angles to the Guide Line</text>
-    <text x="44" y="96" fill="#475569" font-size="20">Measure both angles from the normal through the point of incidence, not from the mirror surface.</text>
+    <text x="42" y="58" fill="#0F172A" font-size="34" font-weight="700">Equal Angles from the Guide Line</text>
+    <text x="42" y="96" fill="#475569" font-size="18">Reflection is symmetry about the normal. Read both angles from the same perpendicular reference line.</text>
 
-    <rect x="40" y="128" width="820" height="382" rx="30" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-    <rect x="64" y="152" width="508" height="326" rx="24" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3"/>
-    <rect x="596" y="152" width="236" height="326" rx="24" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="34" y="128" width="832" height="356" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
+    <rect x="50" y="146" width="552" height="320" rx="26" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+    <rect x="622" y="146" width="228" height="320" rx="26" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3"/>
 
-    <line x1="118" y1="344" x2="520" y2="344" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
-    <text x="216" y="378" fill="#475569" font-size="19" font-weight="600">mirror surface</text>
-    <line x1="320" y1="188" x2="320" y2="448" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 12"/>
-    <circle cx="320" cy="344" r="12" fill="#F59E0B" stroke="#FFFFFF" stroke-width="3"/>
+    <line x1="128" y1="352" x2="522" y2="352" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
+    <line x1="325" y1="184" x2="325" y2="432" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
+    <circle cx="325" cy="352" r="11" fill="#F59E0B" stroke="#FFFFFF" stroke-width="3"/>
+    <line x1="188" y1="212" x2="325" y2="352" stroke="#2563EB" stroke-width="10" stroke-linecap="round" marker-end="url(#equal-blue-arrow)"/>
+    <line x1="325" y1="352" x2="462" y2="212" stroke="#0F766E" stroke-width="10" stroke-linecap="round" marker-end="url(#equal-green-arrow)"/>
+    <path d="M325 258 A96 96 0 0 0 255 292" stroke="#2563EB" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M325 258 A96 96 0 0 1 395 292" stroke="#0F766E" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <text x="254" y="300" fill="#1D4ED8" font-size="19" font-weight="700">i = 40 deg</text>
+    <text x="363" y="300" fill="#047857" font-size="19" font-weight="700">r = 40 deg</text>
 
-    <line x1="176" y1="188" x2="320" y2="344" stroke="#2563EB" stroke-width="10" stroke-linecap="round" marker-end="url(#m8-equal-blue)"/>
-    <line x1="320" y1="344" x2="464" y2="188" stroke="#0F766E" stroke-width="10" stroke-linecap="round" marker-end="url(#m8-equal-green)"/>
+    <rect x="158" y="174" width="150" height="34" rx="17" fill="#DBEAFE"/>
+    <rect x="342" y="174" width="156" height="34" rx="17" fill="#D1FAE5"/>
+    <text x="179" y="196" fill="#1D4ED8" font-size="17" font-weight="700">incoming route</text>
+    <text x="364" y="196" fill="#047857" font-size="17" font-weight="700">reflected route</text>
 
-    <path d="M320 258 A88 88 0 0 0 264 288" stroke="#2563EB" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <path d="M320 258 A88 88 0 0 1 376 288" stroke="#0F766E" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="278" y="192" width="94" height="34" rx="17" fill="#E0F2FE"/>
+    <text x="296" y="214" fill="#0369A1" font-size="17" font-weight="700">Guide Line</text>
+    <text x="278" y="378" fill="#334155" font-size="18" font-weight="600">mirror surface</text>
 
-    <rect x="116" y="166" width="156" height="38" rx="19" fill="#DBEAFE"/>
-    <rect x="368" y="166" width="158" height="38" rx="19" fill="#D1FAE5"/>
-    <text x="136" y="191" fill="#1D4ED8" font-size="19" font-weight="700">incoming route</text>
-    <text x="388" y="191" fill="#047857" font-size="19" font-weight="700">reflected route</text>
+    <path d="M325 352 V326 H351" stroke="#64748B" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="138" y="396" width="352" height="42" rx="17" fill="#FFFFFF" stroke="#D6E4F5" stroke-width="2"/>
+    <text x="314" y="423" fill="#0F172A" font-size="20" font-weight="700" text-anchor="middle">The normal is 90 deg to the mirror surface.</text>
 
-    <rect x="270" y="200" width="100" height="34" rx="17" fill="#E0F2FE"/>
-    <text x="286" y="223" fill="#0369A1" font-size="18" font-weight="700">Guide Line</text>
+    <text x="648" y="188" fill="#0F172A" font-size="22" font-weight="700">Read the diagram in order</text>
+    <circle cx="648" cy="228" r="13" fill="#DBEAFE"/>
+    <circle cx="648" cy="286" r="13" fill="#DBEAFE"/>
+    <circle cx="648" cy="344" r="13" fill="#DBEAFE"/>
+    <text x="648" y="233" fill="#1D4ED8" font-size="16" font-weight="700" text-anchor="middle">1</text>
+    <text x="648" y="291" fill="#1D4ED8" font-size="16" font-weight="700" text-anchor="middle">2</text>
+    <text x="648" y="349" fill="#1D4ED8" font-size="16" font-weight="700" text-anchor="middle">3</text>
+    <text x="675" y="234" fill="#334155" font-size="17">Draw the Guide Line through the hit point.</text>
+    <text x="675" y="292" fill="#334155" font-size="17">Measure the incident angle to that line.</text>
+    <text x="675" y="350" fill="#334155" font-size="17">Match it on the reflected side.</text>
 
-    <rect x="188" y="258" width="110" height="36" rx="18" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2"/>
-    <rect x="342" y="258" width="110" height="36" rx="18" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="2"/>
-    <text x="205" y="282" fill="#1D4ED8" font-size="18" font-weight="700">i = 40 deg</text>
-    <text x="359" y="282" fill="#047857" font-size="18" font-weight="700">r = 40 deg</text>
-
-    <text x="620" y="190" fill="#0F172A" font-size="22" font-weight="700">Read it in three steps</text>
-    <circle cx="624" cy="228" r="12" fill="#DBEAFE"/>
-    <circle cx="624" cy="282" r="12" fill="#DBEAFE"/>
-    <circle cx="624" cy="336" r="12" fill="#DBEAFE"/>
-    <text x="620" y="233" fill="#1D4ED8" font-size="15" font-weight="700" text-anchor="middle">1</text>
-    <text x="620" y="287" fill="#1D4ED8" font-size="15" font-weight="700" text-anchor="middle">2</text>
-    <text x="620" y="341" fill="#1D4ED8" font-size="15" font-weight="700" text-anchor="middle">3</text>
-    <text x="646" y="234" fill="#334155" font-size="17">Draw the Guide Line through the hit point.</text>
-    <text x="646" y="288" fill="#334155" font-size="17">Measure the incident angle to that line.</text>
-    <text x="646" y="342" fill="#334155" font-size="17">Set the reflected angle equal to it.</text>
-
-    <rect x="618" y="384" width="190" height="42" rx="18" fill="#E0F2FE"/>
-    <text x="713" y="411" fill="#0F172A" font-size="24" font-weight="700" text-anchor="middle">i = r</text>
-    <rect x="108" y="404" width="420" height="50" rx="18" fill="#FFFFFF" opacity="0.96"/>
-    <text x="318" y="435" fill="#334155" font-size="20" text-anchor="middle">Both angles are measured from the same Guide Line.</text>
+    <rect x="650" y="386" width="176" height="44" rx="18" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2"/>
+    <text x="738" y="414" fill="#0F172A" font-size="24" font-weight="700" text-anchor="middle">i = r</text>
   </g>
 </svg>

@@ -1,17 +1,52 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="900" height="520" rx="32" fill="#F5F3FF"/>
-  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Spread Lens and the Ghost Image</text>
-  <text x="48" y="108" fill="#475569" font-size="20">Real routes spread after the lens, so dashed backward extensions locate the virtual image.</text>
-  <rect x="48" y="148" width="804" height="308" rx="28" fill="#EEF2FF" stroke="#818CF8" stroke-width="4"/>
-  <line x1="84" y1="300" x2="816" y2="300" stroke="#CBD5E1" stroke-width="4"/>
-  <path d="M450 208 C420 236 420 364 450 392 C480 364 480 236 450 208 Z" fill="#BFDBFE"/>
-  <path d="M198 300 H450" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 300 L668 228" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 300 L668 372" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 300 L332 248" stroke="#A855F7" stroke-width="4" stroke-dasharray="10 10"/>
-  <path d="M450 300 L332 352" stroke="#A855F7" stroke-width="4" stroke-dasharray="10 10"/>
-  <circle cx="332" cy="300" r="12" fill="#7C3AED"/>
-  <text x="540" y="208" fill="#1D4ED8" font-size="22" font-weight="700">Real routes spread</text>
-  <text x="84" y="220" fill="#7C3AED" font-size="22" font-weight="700">Ghost image by extension</text>
-  <text x="84" y="404" fill="#334155" font-size="22">Extensions are still useful even though they are not actual light.</text>
+  <defs>
+    <marker id="spread-blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="spread-green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#0F766E"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" rx="32" fill="#F8FBFF"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="42" y="58" fill="#0F172A" font-size="31" font-weight="700">Spread Lens: Virtual Image Construction</text>
+    <text x="42" y="96" fill="#475569" font-size="18">Real rays spread after the lens. Backward extensions locate the virtual image.</text>
+
+    <rect x="34" y="126" width="832" height="356" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
+    <rect x="50" y="146" width="602" height="320" rx="26" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+    <rect x="672" y="146" width="178" height="320" rx="26" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="3"/>
+
+    <line x1="82" y1="302" x2="622" y2="302" stroke="#CBD5E1" stroke-width="4"/>
+    <path d="M430 204 C402 230 402 374 430 400" stroke="#60A5FA" stroke-width="4" fill="none"/>
+    <path d="M430 204 C458 230 458 374 430 400" stroke="#60A5FA" stroke-width="4" fill="none"/>
+
+    <circle cx="260" cy="302" r="6" fill="#0F172A"/>
+    <circle cx="560" cy="302" r="6" fill="#0F172A"/>
+    <text x="250" y="330" fill="#334155" font-size="17" font-weight="700">F</text>
+    <text x="550" y="330" fill="#334155" font-size="17" font-weight="700">F</text>
+
+    <line x1="188" y1="302" x2="188" y2="250" stroke="#2563EB" stroke-width="8" stroke-linecap="round" marker-end="url(#spread-blue-arrow)"/>
+    <line x1="182" y1="258" x2="194" y2="258" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+    <text x="154" y="326" fill="#1D4ED8" font-size="18" font-weight="700">object</text>
+
+    <line x1="188" y1="250" x2="430" y2="250" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+    <line x1="430" y1="250" x2="640" y2="188" stroke="#2563EB" stroke-width="6" stroke-linecap="round" marker-end="url(#spread-blue-arrow)"/>
+    <line x1="430" y1="250" x2="260" y2="302" stroke="#7C3AED" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+
+    <line x1="188" y1="250" x2="430" y2="302" stroke="#0F766E" stroke-width="6" stroke-linecap="round"/>
+    <line x1="430" y1="302" x2="640" y2="346" stroke="#0F766E" stroke-width="6" stroke-linecap="round" marker-end="url(#spread-green-arrow)"/>
+    <line x1="430" y1="302" x2="330" y2="280" stroke="#7C3AED" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+
+    <line x1="330" y1="302" x2="330" y2="280" stroke="#7C3AED" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 8"/>
+    <line x1="324" y1="288" x2="336" y2="288" stroke="#7C3AED" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 8"/>
+    <text x="282" y="326" fill="#6D28D9" font-size="18" font-weight="700">virtual image</text>
+
+    <text x="694" y="184" fill="#0F172A" font-size="22" font-weight="700">Read the lens sketch</text>
+    <text x="694" y="226" fill="#334155" font-size="17">Solid lines:</text>
+    <text x="694" y="248" fill="#334155" font-size="17">real refracted light</text>
+    <text x="694" y="298" fill="#334155" font-size="17">Dashed lines:</text>
+    <text x="694" y="320" fill="#334155" font-size="17">backward extensions</text>
+    <text x="694" y="384" fill="#0F172A" font-size="20" font-weight="700">The image is upright,</text>
+    <text x="694" y="408" fill="#0F172A" font-size="20" font-weight="700">smaller, and virtual.</text>
+  </g>
 </svg>

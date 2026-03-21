@@ -1,24 +1,50 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="900" height="520" rx="32" fill="#F8FAFC"/>
-  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Route Sketches Separate Line Roles</text>
-  <text x="48" y="108" fill="#475569" font-size="20">A ray diagram mixes real routes, Guide Lines, and dashed extensions to predict real and virtual images.</text>
-  <rect x="48" y="148" width="370" height="308" rx="28" fill="#DBEAFE" stroke="#60A5FA" stroke-width="4"/>
-  <rect x="482" y="148" width="370" height="308" rx="28" fill="#F5F3FF" stroke="#A78BFA" stroke-width="4"/>
-  <text x="78" y="188" fill="#1D4ED8" font-size="22" font-weight="700">True Meeting Point sketch</text>
-  <line x1="88" y1="308" x2="380" y2="308" stroke="#CBD5E1" stroke-width="4"/>
-  <ellipse cx="236" cy="308" rx="18" ry="72" fill="#C4B5FD"/>
-  <path d="M118 308 H236" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M236 308 L340 256" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M118 308 L236 260" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
-  <path d="M236 260 L340 256" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="340" cy="256" r="10" fill="#D97706"/>
-  <text x="512" y="188" fill="#7C3AED" font-size="22" font-weight="700">Ghost Meeting Point sketch</text>
-  <rect x="652" y="192" width="12" height="220" rx="6" fill="#94A3B8"/>
-  <path d="M544 284 L652 256" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M544 332 L652 360" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
-  <path d="M652 256 L758 284" stroke="#2563EB" stroke-width="4" stroke-dasharray="10 10"/>
-  <path d="M652 360 L758 332" stroke="#0F766E" stroke-width="4" stroke-dasharray="10 10"/>
-  <circle cx="758" cy="308" r="10" fill="#A855F7"/>
-  <text x="78" y="430" fill="#334155" font-size="20">Real routes cross at the image.</text>
-  <text x="512" y="430" fill="#334155" font-size="20">Extensions locate the ghost image.</text>
+  <defs>
+    <marker id="route-blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="route-green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#0F766E"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" rx="32" fill="#F8FBFF"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="42" y="58" fill="#0F172A" font-size="30" font-weight="700">Route Sketches: Real Paths and Extensions</text>
+    <text x="42" y="96" fill="#475569" font-size="18">Use solid lines for actual light and dashed lines only when the sketch is extending a path.</text>
+
+    <rect x="34" y="126" width="832" height="356" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
+    <rect x="50" y="146" width="386" height="320" rx="26" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3"/>
+    <rect x="464" y="146" width="386" height="320" rx="26" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="3"/>
+
+    <rect x="642" y="160" width="178" height="48" rx="18" fill="#FFFFFF" stroke="#DDD6FE" stroke-width="2"/>
+    <line x1="658" y1="184" x2="710" y2="184" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+    <text x="720" y="189" fill="#334155" font-size="16">real light</text>
+    <line x1="658" y1="198" x2="710" y2="198" stroke="#7C3AED" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
+    <text x="720" y="203" fill="#334155" font-size="16">extension only</text>
+
+    <text x="76" y="178" fill="#0F172A" font-size="23" font-weight="700">Real image sketch</text>
+    <line x1="88" y1="304" x2="406" y2="304" stroke="#CBD5E1" stroke-width="4"/>
+    <ellipse cx="246" cy="304" rx="16" ry="88" fill="#BFDBFE" stroke="#60A5FA" stroke-width="4"/>
+    <line x1="132" y1="304" x2="132" y2="224" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+    <line x1="126" y1="232" x2="138" y2="232" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+    <line x1="132" y1="224" x2="246" y2="224" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+    <line x1="246" y1="224" x2="348" y2="372" stroke="#2563EB" stroke-width="6" stroke-linecap="round" marker-end="url(#route-blue-arrow)"/>
+    <line x1="132" y1="224" x2="246" y2="304" stroke="#0F766E" stroke-width="6" stroke-linecap="round"/>
+    <line x1="246" y1="304" x2="348" y2="372" stroke="#0F766E" stroke-width="6" stroke-linecap="round" marker-end="url(#route-green-arrow)"/>
+    <line x1="348" y1="304" x2="348" y2="372" stroke="#B45309" stroke-width="8" stroke-linecap="round"/>
+    <text x="302" y="398" fill="#92400E" font-size="18" font-weight="700">real rays meet</text>
+
+    <text x="490" y="178" fill="#0F172A" font-size="23" font-weight="700">Virtual image sketch</text>
+    <line x1="666" y1="192" x2="666" y2="414" stroke="#94A3B8" stroke-width="10" stroke-linecap="round"/>
+    <line x1="548" y1="374" x2="548" y2="254" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+    <line x1="542" y1="262" x2="554" y2="262" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="594" cy="310" r="14" fill="#FFFFFF" stroke="#334155" stroke-width="3"/>
+    <circle cx="600" cy="310" r="6" fill="#334155"/>
+    <path d="M548 254 L666 270 L594 310" stroke="#2563EB" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M548 254 L666 348 L594 310" stroke="#0F766E" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M666 270 L768 254" stroke="#7C3AED" stroke-width="4" stroke-dasharray="8 8" fill="none" stroke-linecap="round"/>
+    <path d="M666 348 L768 374" stroke="#7C3AED" stroke-width="4" stroke-dasharray="8 8" fill="none" stroke-linecap="round"/>
+    <line x1="768" y1="374" x2="768" y2="254" stroke="#7C3AED" stroke-width="8" stroke-linecap="round" stroke-dasharray="10 8"/>
+    <text x="706" y="398" fill="#6D28D9" font-size="18" font-weight="700">only extensions meet</text>
+  </g>
 </svg>

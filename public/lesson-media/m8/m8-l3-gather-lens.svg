@@ -1,17 +1,49 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="900" height="520" rx="32" fill="#FFFBEB"/>
-  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Gather Lens and a True Meeting Point</text>
-  <text x="48" y="108" fill="#57534E" font-size="20">A few key routes are enough to predict where actual refracted routes meet.</text>
-  <rect x="48" y="148" width="804" height="308" rx="28" fill="#FEF3C7" stroke="#F59E0B" stroke-width="4"/>
-  <line x1="84" y1="300" x2="816" y2="300" stroke="#D6D3D1" stroke-width="4"/>
-  <ellipse cx="450" cy="300" rx="28" ry="92" fill="#C4B5FD"/>
-  <path d="M190 300 H450" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 300 L618 236" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M190 300 L450 220" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 220 L618 236" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="618" cy="236" r="12" fill="#D97706"/>
-  <text x="194" y="210" fill="#1D4ED8" font-size="22" font-weight="700">Parallel route</text>
-  <text x="198" y="388" fill="#0F766E" font-size="22" font-weight="700">Center route</text>
-  <text x="492" y="188" fill="#6D28D9" font-size="22" font-weight="700">Gather Lens</text>
-  <text x="642" y="236" fill="#B45309" font-size="22" font-weight="700">True Meeting Point</text>
+  <defs>
+    <marker id="gather-blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="gather-green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#0F766E"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" rx="32" fill="#F8FBFF"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="42" y="58" fill="#0F172A" font-size="33" font-weight="700">Gather Lens: Real Image Construction</text>
+    <text x="42" y="96" fill="#475569" font-size="18">Use the axis, focal points, and two key rays to predict the real image.</text>
+
+    <rect x="34" y="126" width="832" height="356" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
+    <rect x="50" y="146" width="602" height="320" rx="26" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+    <rect x="672" y="146" width="178" height="320" rx="26" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3"/>
+
+    <line x1="82" y1="302" x2="622" y2="302" stroke="#CBD5E1" stroke-width="4"/>
+    <ellipse cx="430" cy="302" rx="18" ry="98" fill="#BFDBFE" stroke="#60A5FA" stroke-width="4"/>
+
+    <circle cx="300" cy="302" r="6" fill="#0F172A"/>
+    <circle cx="560" cy="302" r="6" fill="#0F172A"/>
+    <text x="290" y="330" fill="#334155" font-size="17" font-weight="700">F</text>
+    <text x="550" y="330" fill="#334155" font-size="17" font-weight="700">F</text>
+
+    <line x1="168" y1="302" x2="168" y2="192" stroke="#2563EB" stroke-width="8" stroke-linecap="round" marker-end="url(#gather-blue-arrow)"/>
+    <line x1="162" y1="200" x2="174" y2="200" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+    <text x="134" y="326" fill="#1D4ED8" font-size="18" font-weight="700">object</text>
+
+    <line x1="168" y1="192" x2="430" y2="192" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+    <line x1="430" y1="192" x2="676" y2="392" stroke="#2563EB" stroke-width="6" stroke-linecap="round" marker-end="url(#gather-blue-arrow)"/>
+    <line x1="168" y1="192" x2="430" y2="302" stroke="#0F766E" stroke-width="6" stroke-linecap="round"/>
+    <line x1="430" y1="302" x2="676" y2="392" stroke="#0F766E" stroke-width="6" stroke-linecap="round" marker-end="url(#gather-green-arrow)"/>
+
+    <line x1="676" y1="302" x2="676" y2="392" stroke="#B45309" stroke-width="8" stroke-linecap="round"/>
+    <line x1="670" y1="384" x2="682" y2="384" stroke="#B45309" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="676" cy="392" r="8" fill="#D97706"/>
+    <text x="618" y="420" fill="#92400E" font-size="18" font-weight="700">true meeting point</text>
+
+    <text x="694" y="184" fill="#0F172A" font-size="22" font-weight="700">Ray rules</text>
+    <text x="694" y="228" fill="#334155" font-size="17">1. Parallel to axis</text>
+    <text x="694" y="252" fill="#334155" font-size="17">refracts through far focus.</text>
+    <text x="694" y="302" fill="#334155" font-size="17">2. Through lens center</text>
+    <text x="694" y="326" fill="#334155" font-size="17">continues straight.</text>
+    <text x="694" y="382" fill="#0F172A" font-size="20" font-weight="700">Where they cross,</text>
+    <text x="694" y="406" fill="#0F172A" font-size="20" font-weight="700">the real image forms.</text>
+  </g>
 </svg>

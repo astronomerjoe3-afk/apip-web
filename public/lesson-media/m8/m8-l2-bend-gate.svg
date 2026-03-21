@@ -1,15 +1,47 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="900" height="520" rx="32" fill="#F8FAFC"/>
-  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Bend Gates, Fast Zones, and Slow Zones</text>
-  <text x="48" y="108" fill="#475569" font-size="20">Refraction changes route direction because light speed changes across the boundary.</text>
-  <rect x="48" y="148" width="804" height="308" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
-  <rect x="450" y="148" width="402" height="308" rx="0" fill="#DCFCE7"/>
-  <line x1="450" y1="148" x2="450" y2="456" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="10 10"/>
-  <path d="M450 290 L320 210" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 290 L570 230" stroke="#16A34A" stroke-width="10" stroke-linecap="round"/>
-  <text x="88" y="190" fill="#1D4ED8" font-size="22" font-weight="700">Fast zone</text>
-  <text x="548" y="190" fill="#166534" font-size="22" font-weight="700">Slow zone</text>
-  <text x="476" y="234" fill="#0369A1" font-size="20" font-weight="700">Guide Line</text>
-  <text x="88" y="404" fill="#334155" font-size="22">Toward the Guide Line means the new zone is slower.</text>
-  <text x="88" y="440" fill="#334155" font-size="22">Away from the Guide Line means the new zone is faster.</text>
+  <defs>
+    <marker id="bend-blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="bend-green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#047857"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" rx="32" fill="#F8FBFF"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="42" y="58" fill="#0F172A" font-size="33" font-weight="700">Bend Gates: Toward or Away from the Guide Line</text>
+    <text x="42" y="96" fill="#475569" font-size="18">Slower medium: bend toward the Guide Line. Faster medium: bend away.</text>
+
+    <rect x="34" y="126" width="832" height="356" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
+    <rect x="50" y="146" width="384" height="320" rx="26" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+    <rect x="466" y="146" width="384" height="320" rx="26" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+
+    <text x="76" y="178" fill="#0F172A" font-size="23" font-weight="700">Entering a slower zone</text>
+    <rect x="74" y="194" width="336" height="96" rx="20" fill="#DBEAFE"/>
+    <rect x="74" y="290" width="336" height="122" rx="20" fill="#DCFCE7"/>
+    <text x="102" y="242" fill="#1D4ED8" font-size="20" font-weight="700">Fast zone</text>
+    <text x="102" y="346" fill="#166534" font-size="20" font-weight="700">Slow zone</text>
+    <line x1="242" y1="198" x2="242" y2="408" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
+    <line x1="106" y1="290" x2="378" y2="290" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+    <line x1="134" y1="216" x2="242" y2="290" stroke="#2563EB" stroke-width="8" stroke-linecap="round" marker-end="url(#bend-blue-arrow)"/>
+    <line x1="242" y1="290" x2="290" y2="386" stroke="#047857" stroke-width="8" stroke-linecap="round" marker-end="url(#bend-green-arrow)"/>
+    <path d="M242 244 A60 60 0 0 0 204 268" stroke="#2563EB" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M242 340 A60 60 0 0 1 270 386" stroke="#047857" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <text x="166" y="274" fill="#1D4ED8" font-size="18" font-weight="700">incident</text>
+    <text x="276" y="362" fill="#047857" font-size="18" font-weight="700">toward Guide Line</text>
+
+    <text x="492" y="178" fill="#0F172A" font-size="23" font-weight="700">Entering a faster zone</text>
+    <rect x="490" y="194" width="336" height="96" rx="20" fill="#DCFCE7"/>
+    <rect x="490" y="290" width="336" height="122" rx="20" fill="#DBEAFE"/>
+    <text x="518" y="242" fill="#166534" font-size="20" font-weight="700">Slow zone</text>
+    <text x="518" y="346" fill="#1D4ED8" font-size="20" font-weight="700">Fast zone</text>
+    <line x1="658" y1="198" x2="658" y2="408" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
+    <line x1="522" y1="290" x2="794" y2="290" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+    <line x1="566" y1="388" x2="658" y2="290" stroke="#2563EB" stroke-width="8" stroke-linecap="round" marker-end="url(#bend-blue-arrow)"/>
+    <line x1="658" y1="290" x2="778" y2="228" stroke="#047857" stroke-width="8" stroke-linecap="round" marker-end="url(#bend-green-arrow)"/>
+    <path d="M658 340 A62 62 0 0 0 622 382" stroke="#2563EB" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M658 242 A86 86 0 0 1 736 266" stroke="#047857" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <text x="592" y="374" fill="#1D4ED8" font-size="18" font-weight="700">incident</text>
+    <text x="690" y="254" fill="#047857" font-size="18" font-weight="700">away from Guide Line</text>
+  </g>
 </svg>

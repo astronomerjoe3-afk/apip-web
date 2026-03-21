@@ -1,15 +1,55 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="900" height="520" rx="32" fill="#ECFEFF"/>
-  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Escape Edge and Lock-Bounce</text>
-  <text x="48" y="108" fill="#475569" font-size="20">Critical-angle reasoning is strongest when escape, skim, and total internal reflection stay in one picture.</text>
-  <rect x="48" y="148" width="804" height="308" rx="28" fill="#CFFAFE" stroke="#06B6D4" stroke-width="4"/>
-  <line x1="84" y1="300" x2="816" y2="300" stroke="#0F172A" stroke-width="4"/>
-  <line x1="450" y1="148" x2="450" y2="456" stroke="#0891B2" stroke-width="4" stroke-dasharray="10 10"/>
-  <path d="M450 300 L360 410" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 300 H640" stroke="#D97706" stroke-width="10" stroke-linecap="round"/>
-  <path d="M450 300 L310 206" stroke="#7C3AED" stroke-width="10" stroke-linecap="round"/>
-  <text x="82" y="188" fill="#0369A1" font-size="22" font-weight="700">Escape below the limit</text>
-  <text x="82" y="224" fill="#D97706" font-size="22" font-weight="700">Skim at the critical angle</text>
-  <text x="82" y="260" fill="#7C3AED" font-size="22" font-weight="700">Lock-Bounce above the limit</text>
-  <text x="82" y="418" fill="#334155" font-size="22">Total internal reflection needs the correct medium direction as well as the angle condition.</text>
+  <defs>
+    <marker id="lock-blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="lock-green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#047857"/>
+    </marker>
+    <marker id="lock-purple-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#7C3AED"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" rx="32" fill="#F8FBFF"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="42" y="58" fill="#0F172A" font-size="33" font-weight="700">Escape Edge and Lock-Bounce</text>
+    <text x="42" y="96" fill="#475569" font-size="18">Compare the three cases in one view: escape, skim, and total internal reflection.</text>
+
+    <rect x="34" y="126" width="832" height="356" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
+    <rect x="50" y="146" width="248" height="320" rx="24" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+    <rect x="326" y="146" width="248" height="320" rx="24" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+    <rect x="602" y="146" width="248" height="320" rx="24" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+
+    <text x="78" y="176" fill="#0369A1" font-size="21" font-weight="700">Below critical angle</text>
+    <rect x="74" y="194" width="200" height="68" rx="18" fill="#DBEAFE"/>
+    <rect x="74" y="262" width="200" height="150" rx="18" fill="#D6F5F0"/>
+    <text x="92" y="232" fill="#1D4ED8" font-size="17" font-weight="700">Fast zone above</text>
+    <text x="92" y="320" fill="#166534" font-size="17" font-weight="700">Slow zone below</text>
+    <line x1="174" y1="198" x2="174" y2="404" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
+    <line x1="96" y1="262" x2="252" y2="262" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+    <line x1="118" y1="360" x2="174" y2="262" stroke="#2563EB" stroke-width="7" stroke-linecap="round" marker-end="url(#lock-blue-arrow)"/>
+    <line x1="174" y1="262" x2="240" y2="224" stroke="#047857" stroke-width="7" stroke-linecap="round" marker-end="url(#lock-green-arrow)"/>
+
+    <text x="354" y="176" fill="#B45309" font-size="21" font-weight="700">At the critical angle</text>
+    <rect x="350" y="194" width="200" height="68" rx="18" fill="#DBEAFE"/>
+    <rect x="350" y="262" width="200" height="150" rx="18" fill="#D6F5F0"/>
+    <text x="368" y="232" fill="#1D4ED8" font-size="17" font-weight="700">Fast zone above</text>
+    <text x="368" y="320" fill="#166534" font-size="17" font-weight="700">Slow zone below</text>
+    <line x1="450" y1="198" x2="450" y2="404" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
+    <line x1="372" y1="262" x2="528" y2="262" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+    <line x1="394" y1="356" x2="450" y2="262" stroke="#2563EB" stroke-width="7" stroke-linecap="round" marker-end="url(#lock-blue-arrow)"/>
+    <line x1="450" y1="262" x2="526" y2="262" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+    <text x="374" y="392" fill="#92400E" font-size="17" font-weight="700">refracted route skims the boundary</text>
+
+    <text x="630" y="176" fill="#7C3AED" font-size="21" font-weight="700">Above the critical angle</text>
+    <rect x="626" y="194" width="200" height="68" rx="18" fill="#DBEAFE"/>
+    <rect x="626" y="262" width="200" height="150" rx="18" fill="#D6F5F0"/>
+    <text x="644" y="232" fill="#1D4ED8" font-size="17" font-weight="700">Fast zone above</text>
+    <text x="644" y="320" fill="#166534" font-size="17" font-weight="700">Slow zone below</text>
+    <line x1="726" y1="198" x2="726" y2="404" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
+    <line x1="648" y1="262" x2="804" y2="262" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+    <line x1="672" y1="350" x2="726" y2="262" stroke="#2563EB" stroke-width="7" stroke-linecap="round" marker-end="url(#lock-blue-arrow)"/>
+    <line x1="726" y1="262" x2="786" y2="356" stroke="#7C3AED" stroke-width="7" stroke-linecap="round" marker-end="url(#lock-purple-arrow)"/>
+    <text x="654" y="392" fill="#6D28D9" font-size="17" font-weight="700">the route reflects back inside</text>
+  </g>
 </svg>
