@@ -1188,6 +1188,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM10Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM12Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -3998,6 +4000,521 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "you must know which quantity is unknown before choosing the equation",
       ])
     );
+  }
+
+  const isM12FieldDensityPrompt = matchesM12Prompt(
+    ["M12L1_D4"],
+    ["why do denser weave lines represent a stronger field"],
+  );
+
+  if (isM12FieldDensityPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["closer", "denser", "tighter"],
+      ["field lines", "weave lines"],
+      ["stronger", "larger"],
+      ["field", "field strength"],
+    ]);
+  }
+
+  const isM12FieldLinesMapPrompt = matchesM12Prompt(
+    ["M12L1_D7", "M12L1_M3"],
+    [
+      "why is it weak to call field lines tracks that particles follow",
+      "a learner says field lines are where the magnetic stuff travels what should you say instead",
+    ],
+  );
+
+  if (isM12FieldLinesMapPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["field lines", "weave lines"],
+      ["map", "diagram"],
+      ["direction", "strength"],
+      ["not", "rather than"],
+      ["path", "track", "railway", "stuff travels"],
+    ]);
+  }
+
+  const isM12CompassPrompt = matchesM12Prompt(
+    ["M12L1_C1", "M12L1_M9"],
+    [
+      "what job does a compass flag do in the field weave model",
+      "why is a compass flag better described as a test probe than as a force meter",
+    ],
+  );
+
+  if (isM12CompassPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["compass", "flag", "test compass", "probe"],
+        ["local", "at that point"],
+        ["field direction", "direction of the field"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["direction", "field direction", "local field"],
+        ["not", "rather than"],
+        ["force", "force size", "meter"],
+      ])
+    );
+  }
+
+  const isM12ElectricMagneticLinkPrompt = matchesM12Prompt(
+    ["M12L1_C4", "M12L1_M5", "M12L2_D9", "M12L2_M8"],
+    [
+      "why is module 12 not a completely separate world from module 10",
+      "why do a permanent magnet and a current carrying wire both belong in the same lesson",
+      "why is an electromagnet already evidence that electricity and magnetism are one linked system",
+      "how does lesson 2 deepen the link between circuits and magnetism",
+    ],
+  );
+
+  if (isM12ElectricMagneticLinkPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["current", "moving charge", "carrier route", "coil", "wire"],
+      ["create", "creates", "produces", "source"],
+      ["magnetic field", "magnetic weave", "magnetic effect"],
+      ["linked", "same story", "same lesson", "not separate", "grows into", "consequence"],
+    ]);
+  }
+
+  const isM12WireFieldReversalPrompt = matchesM12Prompt(
+    ["M12L1_C7"],
+    ["why does reversing current reverse the circular field direction around a wire"],
+  );
+
+  if (isM12WireFieldReversalPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["reverse", "changing"],
+      ["current direction", "carrier direction"],
+      ["field direction", "field weave"],
+      ["around the wire"],
+    ]);
+  }
+
+  const isM12PatternComparePrompt = matchesM12Prompt(
+    ["M12L1_M7"],
+    ["how would you compare the bar magnet field pattern with the straight wire field pattern"],
+  );
+
+  if (isM12PatternComparePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["bar magnet", "magnet"],
+      ["north", "south", "pole-to-pole", "poles"],
+      ["wire", "current-carrying wire"],
+      ["circular", "circles", "wrap around"],
+    ]);
+  }
+
+  const isM12CoreRolePrompt = matchesM12Prompt(
+    ["M12L2_D6", "M12L2_C4", "M12L2_M2"],
+    [
+      "why does adding a soft iron core spine strengthen a coil tower",
+      "why is the core stores current a weak statement",
+      "a classmate says the core is where the current lives what is the better explanation",
+    ],
+  );
+
+  if (isM12CoreRolePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["soft iron", "core", "core spine"],
+        ["concentrate", "strengthen", "increase", "boost"],
+        ["magnetic field", "electromagnet"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["current"],
+        ["coil", "wire"],
+        ["core", "soft iron"],
+        ["not", "rather than"],
+        ["stored", "stores current", "where the current lives"],
+      ])
+    );
+  }
+
+  const isM12CoilStrengthPrompt = matchesM12Prompt(
+    ["M12L2_C1", "M12L2_M4", "M12L2_M10"],
+    [
+      "why is a coil stronger than a single straight wire for magnetic effect",
+      "why do more turns usually strengthen the electromagnet",
+      "why is a solenoid better than a single straight wire for making a practical lifting magnet",
+    ],
+  );
+
+  if (isM12CoilStrengthPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["turns", "coil", "many turns", "solenoid"],
+      ["reinforce", "add", "add together", "combine", "concentrate", "organized"],
+      ["field", "magnetic field", "magnetic effect"],
+      ["stronger", "stronger pattern", "magnet-like"],
+    ]);
+  }
+
+  const isM12CurrentDependencyPrompt = matchesM12Prompt(
+    ["M12L2_C6", "M12L2_M6"],
+    [
+      "why can an electromagnet be useful when you want magnetic lifting that can be turned on and off",
+      "why can turning off the current make a crane electromagnet let go of scrap metal",
+    ],
+  );
+
+  if (isM12CurrentDependencyPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["current"],
+      ["control", "switch on and off", "depends on", "switch off", "turn off"],
+      ["magnetic field", "magnetism", "strength"],
+      ["weakens", "disappears", "removed", "changes"],
+    ]);
+  }
+
+  const isM12SolenoidPolesPrompt = matchesM12Prompt(
+    ["M12L2_C8"],
+    ["how is a solenoid like a bar magnet"],
+  );
+
+  if (isM12SolenoidPolesPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["solenoid", "coil"],
+      ["north", "south", "poles"],
+      ["field pattern", "magnet-like", "bar magnet"],
+    ]);
+  }
+
+  const isM12ForceGeometryPrompt = matchesM12Prompt(
+    ["M12L3_D6", "M12L3_C1", "M12L3_C8", "M12L3_M3"],
+    [
+      "why is the word side kick better than forward shove here",
+      "why can a magnetic field steer a conductor without simply speeding it up along the field line",
+      "why is magnetic fields push charges forward along the lines a weak statement",
+      "a learner says the field pushes the wire forward because the field line points that way what should you say",
+    ],
+  );
+
+  if (isM12ForceGeometryPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["force", "magnetic force", "side-kick"],
+      ["sideways", "perpendicular"],
+      ["field", "field line"],
+      ["current", "conductor", "moving charge", "motion"],
+      ["not", "rather than"],
+      ["forward", "along"],
+    ]);
+  }
+
+  const isM12LeftHandRulePrompt = matchesM12Prompt(
+    ["M12L3_D9", "M12L3_M7"],
+    [
+      "what does fleming s left hand rule help you work out",
+      "what does fleming s left hand rule help you keep track of in a motor effect diagram",
+    ],
+  );
+
+  if (isM12LeftHandRulePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["Fleming", "left-hand rule"],
+      ["direction"],
+      ["field"],
+      ["current", "conductor"],
+      ["force"],
+    ]);
+  }
+
+  const isM12CrossingFieldPrompt = matchesM12Prompt(
+    ["M12L3_C4", "M12L3_M9"],
+    [
+      "why does a conductor parallel to the field not get the same side kick as one crossing the field",
+      "why is the phrase crossing the field useful in this lesson",
+    ],
+  );
+
+  if (isM12CrossingFieldPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["crossing", "across", "cross-field"],
+      ["field"],
+      ["parallel", "not parallel", "not crossing", "no perpendicular"],
+      ["sideways force", "magnetic force", "force"],
+      ["strong", "weak", "zero", "needed geometry"],
+    ]);
+  }
+
+  const isM12FieldInteractionPrompt = matchesM12Prompt(
+    ["M12L3_C6", "M12L3_M5"],
+    [
+      "how does lesson 3 deepen the field story from lessons 1 and 2",
+      "why can a magnetic field change direction of motion without directly doing the same job as a battery",
+    ],
+  );
+
+  if (isM12FieldInteractionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["field", "magnetic field"],
+        ["push", "force", "sideways force"],
+        ["current-carrying conductor", "route", "conductor"],
+        ["not just", "more than", "interaction", "not the same job"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["battery", "source", "voltage"],
+        ["energy per charge", "source job"],
+        ["magnetic field"],
+        ["steer", "change direction", "sideways force"],
+      ])
+    );
+  }
+
+  const isM12TorquePrompt = matchesM12Prompt(
+    ["M12L4_D4", "M12L4_C8", "M12L4_M6"],
+    [
+      "why do opposite forces on opposite sides of the coil cause turning instead of simple sideways motion",
+      "why is the word torque useful in lesson 4",
+      "why do opposite forces on opposite sides of a loop not simply cancel into no effect",
+    ],
+  );
+
+  if (isM12TorquePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["opposite forces", "side-kicks", "different positions", "opposite sides"],
+      ["coil", "loop"],
+      ["torque", "turning moment", "couple", "rotation", "turning"],
+      ["not", "rather than"],
+      ["cancel", "simple sideways shift", "translation"],
+    ]);
+  }
+
+  const isM12CommutatorPrompt = matchesM12Prompt(
+    ["M12L4_D8", "M12L4_C4", "M12L4_C6", "M12L4_M4"],
+    [
+      "why is the commutator needed for continuous turning in a simple d c motor",
+      "why is the commutator makes the magnet stronger a weak statement",
+      "why might a simple coil need help to keep rotating through awkward positions",
+      "why does a split ring commutator help a d c motor keep spinning in one direction",
+    ],
+  );
+
+  if (isM12CommutatorPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["commutator", "split ring"],
+      ["reverse", "flip", "switch"],
+      ["current"],
+      ["half-turn", "right time", "right point"],
+      ["torque", "keep spinning", "continuous turning", "same direction", "keep rotating"],
+    ]);
+  }
+
+  const isM12MotorEffectPrompt = matchesM12Prompt(
+    ["M12L4_C1", "M12L4_M2", "M12L4_M8", "M12L4_M10"],
+    [
+      "how is a motor just lesson 3 arranged to produce rotation",
+      "how would you correct the statement a motor is just induction",
+      "how does lesson 4 deepen the side kick idea from lesson 3",
+      "why is a motor a natural part of the field weave model rather than a random machine chapter",
+    ],
+  );
+
+  if (isM12MotorEffectPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["side-kick", "force-on-conductor", "magnetic force", "field"],
+        ["opposite sides", "coil", "loop", "current-carrying coil"],
+        ["torque", "turning effect", "rotation", "spins"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["motor"],
+        ["force", "current-carrying coil", "torque"],
+        ["induction", "changing flux", "emf"],
+        ["not", "rather than", "separate"],
+      ])
+    );
+  }
+
+  const isM12NeedChangePrompt = matchesM12Prompt(
+    ["M12L5_D6", "M12L5_C1", "M12L5_M2", "M12L5_M10"],
+    [
+      "why is a field induces current just by existing a weak statement",
+      "what does the change thread idea stand for in formal physics",
+      "a learner says the coil should keep producing emf as long as a magnet is nearby what is the correction",
+      "what single question best protects you from many induction mistakes",
+    ],
+  );
+
+  if (isM12NeedChangePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["changing", "change-thread", "what is changing", "rate of change"],
+      ["magnetic flux", "field through the coil", "field through the loop"],
+      ["induced emf", "induction", "emf"],
+      ["not", "rather than", "steady field", "static field", "magnet nearby"],
+    ]);
+  }
+
+  const isM12AcGeneratorPrompt = matchesM12Prompt(
+    ["M12L5_D9", "M12L5_M6"],
+    [
+      "why does an a c generator produce alternating emf",
+      "how would you explain an a c generator using the field weave model",
+    ],
+  );
+
+  if (isM12AcGeneratorPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["rotating", "turn-wheel", "rotating coil", "orientation"],
+      ["changing", "repeatedly", "again and again"],
+      ["magnetic flux", "magnetic thread", "field"],
+      ["induced emf", "emf", "output"],
+      ["alternating", "reverses"],
+    ]);
+  }
+
+  const isM12ReverseFluxPrompt = matchesM12Prompt(
+    ["M12L5_C4"],
+    ["why does reversing the magnet motion reverse the induced emf direction"],
+  );
+
+  if (isM12ReverseFluxPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["reversing", "opposite"],
+      ["magnet motion", "motion"],
+      ["magnetic flux change", "change-thread", "flux"],
+      ["induced emf", "induced effect"],
+      ["reverses", "opposite direction"],
+    ]);
+  }
+
+  const isM12LenzPrompt = matchesM12Prompt(
+    ["M12L5_C6"],
+    ["how does lenz s law help you describe induction without equations"],
+  );
+
+  if (isM12LenzPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["oppose", "resist"],
+      ["change"],
+      ["induced current", "induced emf", "induced effect"],
+    ]);
+  }
+
+  const isM12GeneratorPrinciplePrompt = matchesM12Prompt(
+    ["M12L5_C8", "M12L5_M8"],
+    [
+      "why is a generator not just the motor effect with a different name",
+      "why is a generator naturally placed after the induction lesson rather than before it",
+    ],
+  );
+
+  if (isM12GeneratorPrinciplePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["generator"],
+        ["induction", "changing magnetic flux", "changing flux", "induced emf"],
+        ["motor effect", "force", "torque"],
+        ["not", "rather than", "different"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["generator"],
+        ["application", "uses", "follows"],
+        ["induction"],
+        ["changing flux", "changing magnetic flux"],
+        ["emf", "output"],
+      ])
+    );
+  }
+
+  const isM12TurnsEffectPrompt = matchesM12Prompt(
+    ["M12L5_M4"],
+    ["why does more turn count help induction"],
+  );
+
+  if (isM12TurnsEffectPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["more turns", "extra turns"],
+      ["changing magnetic flux", "change-thread"],
+      ["larger", "stronger"],
+      ["induced emf", "induced effect"],
+    ]);
+  }
+
+  const isM12TransformerAcRequirementPrompt = matchesM12Prompt(
+    ["M12L6_D6"],
+    ["why does steady d c fail to keep an ordinary transformer working after the instant of switching"],
+  );
+
+  if (isM12TransformerAcRequirementPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["changing field", "changing magnetic flux", "changing current"],
+      ["ordinary transformer"],
+      ["steady d.c.", "direct current", "steady dc"],
+      ["not", "fails", "does not provide"],
+      ["sustained", "continuing"],
+      ["secondary emf", "induced output"],
+    ]);
+  }
+
+  const isM12TransmissionLossPrompt = matchesM12Prompt(
+    ["M12L6_D9", "M12L6_M5"],
+    [
+      "why does a smaller transmission current help reduce cable losses",
+      "why does smaller transmission current reduce cable heating",
+    ],
+  );
+
+  if (isM12TransmissionLossPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["smaller", "lower"],
+      ["current"],
+      ["reduce", "lower", "less"],
+      ["losses", "heating", "I^2R"],
+      ["cables", "transmission", "lines"],
+    ]);
+  }
+
+  const isM12TransformerPrinciplePrompt = matchesM12Prompt(
+    ["M12L6_C1", "M12L6_C4", "M12L6_M3"],
+    [
+      "how can the secondary coil receive energy without charge from the primary physically traveling through the core",
+      "why is the current just travels through the core into the second coil a weak explanation",
+      "a learner says the secondary coil gets energy because primary charges flow through the core into it what should you say instead",
+    ],
+  );
+
+  if (isM12TransformerPrinciplePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["changing magnetic field", "changing core field", "changing magnetic flux", "induction"],
+      ["core"],
+      ["secondary", "second coil", "secondary emf", "secondary output"],
+      ["not", "rather than"],
+      ["charge flowing directly", "direct charge transfer", "current through the core", "charges flow through the core"],
+    ]);
+  }
+
+  const isM12GridDeliveryPrompt = matchesM12Prompt(
+    ["M12L6_C6", "M12L6_M9"],
+    [
+      "why is a step up transformer usually followed later by step down transformers before homes and devices",
+      "why is it unsafe to stop the story at just use high voltage everywhere",
+    ],
+  );
+
+  if (isM12GridDeliveryPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["raise", "high voltage", "step-up", "step up"],
+      ["transmission", "efficient", "lower current"],
+      ["lower again", "step-down", "step down", "reduce again"],
+      ["homes", "devices", "user end", "before use", "practical use"],
+    ]);
+  }
+
+  const isM12TwoCoilInductionPrompt = matchesM12Prompt(
+    ["M12L6_C8", "M12L6_M7"],
+    [
+      "how does lesson 6 extend the induction story from lesson 5",
+      "why is a transformer a natural follow up to the induction lesson",
+    ],
+  );
+
+  if (isM12TwoCoilInductionPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["induction", "changing magnetic flux", "changing field"],
+      ["one coil", "primary"],
+      ["another coil", "secondary"],
+      ["turn count", "turns ratio", "control output voltage", "two-coil"],
+    ]);
   }
 
   const isLessonSixErrorPrompt =
