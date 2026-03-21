@@ -73,6 +73,12 @@ function isFetchFailure(error: unknown): boolean {
   return error.message === "Failed to fetch" || error.name === "TypeError";
 }
 
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 async function performRequest(path: string, init: RequestInit): Promise<Response> {
   const run = async (forceRefreshToken: boolean): Promise<Response> => {
     const headers = new Headers(init.headers);
@@ -92,6 +98,7 @@ async function performRequest(path: string, init: RequestInit): Promise<Response
   try {
     const response = await run(false);
     if (response.status === 401 && auth?.currentUser) {
+      await wait(150);
       return run(true);
     }
     return response;
@@ -100,7 +107,18 @@ async function performRequest(path: string, init: RequestInit): Promise<Response
       throw error;
     }
 
-    return run(true);
+    await wait(150);
+
+    try {
+      return await run(false);
+    } catch (retryError) {
+      if (!isFetchFailure(retryError) || !auth?.currentUser) {
+        throw retryError;
+      }
+
+      await wait(150);
+      return run(true);
+    }
   }
 }
 

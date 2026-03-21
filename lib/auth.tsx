@@ -12,6 +12,21 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue>({ user: null, loading: true });
 
+async function primeUserToken(user: User | null): Promise<User | null> {
+  if (!user) {
+    return null;
+  }
+
+  try {
+    await user.getIdToken();
+  } catch {
+    // Allow the app to continue with the current session object even if
+    // Firebase is still settling the token in the background.
+  }
+
+  return user;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(firebaseConfigured && !!maybeAuth);
@@ -21,13 +36,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
+    let cancelled = false;
+    let revision = 0;
+
     // Wait for the token-aware auth event so API calls do not start while
     // Firebase is still settling the usable session token after hydration.
     const unsub = onIdTokenChanged(maybeAuth, (u) => {
-      setUser(u);
-      setLoading(false);
+      const currentRevision = ++revision;
+
+      void (async () => {
+        const primedUser = await primeUserToken(u);
+        if (cancelled || currentRevision !== revision) {
+          return;
+        }
+
+        setUser(primedUser);
+        setLoading(false);
+      })();
     });
-    return () => unsub();
+    return () => {
+      cancelled = true;
+      unsub();
+    };
   }, []);
 
   return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
