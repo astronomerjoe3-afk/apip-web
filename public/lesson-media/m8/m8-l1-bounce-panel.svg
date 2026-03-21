@@ -1,61 +1,20 @@
-<svg width="900" height="560" viewBox="0 0 900 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="m8-bounce-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M0 0 L12 6 L0 12 Z" fill="#2563EB"/>
-    </marker>
-    <marker id="m8-bounce-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M0 0 L12 6 L0 12 Z" fill="#0F766E"/>
-    </marker>
-  </defs>
-  <rect width="900" height="560" rx="32" fill="#F8FBFF"/>
-  <g font-family="Segoe UI, Arial, sans-serif">
-    <text x="42" y="58" fill="#0F172A" font-size="34" font-weight="700">Plane Mirror: Surface Rule and Image Rule</text>
-    <text x="42" y="96" fill="#475569" font-size="20">Use one view for the reflection geometry at the mirror and another for the virtual image behind it.</text>
-
-    <rect x="34" y="126" width="832" height="398" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
-    <rect x="58" y="154" width="370" height="344" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3"/>
-    <rect x="472" y="154" width="370" height="344" rx="28" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="3"/>
-
-    <text x="84" y="196" fill="#0F172A" font-size="22" font-weight="700">1. What the mirror does at the hit point</text>
-    <line x1="96" y1="372" x2="390" y2="372" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
-    <text x="192" y="408" fill="#475569" font-size="20" font-weight="600">mirror surface</text>
-    <line x1="244" y1="204" x2="244" y2="470" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
-    <text x="202" y="228" fill="#0369A1" font-size="18" font-weight="700">Guide Line</text>
-    <circle cx="244" cy="372" r="11" fill="#F59E0B" stroke="#FFFFFF" stroke-width="3"/>
-    <line x1="136" y1="252" x2="244" y2="372" stroke="#2563EB" stroke-width="9" stroke-linecap="round" marker-end="url(#m8-bounce-blue)"/>
-    <line x1="244" y1="372" x2="352" y2="252" stroke="#0F766E" stroke-width="9" stroke-linecap="round" marker-end="url(#m8-bounce-green)"/>
-    <path d="M244 292 A82 82 0 0 0 188 326" stroke="#2563EB" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <path d="M244 292 A82 82 0 0 1 300 326" stroke="#0F766E" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <text x="130" y="248" fill="#1D4ED8" font-size="18" font-weight="700">incident ray</text>
-    <text x="274" y="248" fill="#047857" font-size="18" font-weight="700">reflected ray</text>
-    <text x="182" y="336" fill="#1D4ED8" font-size="18" font-weight="700">i</text>
-    <text x="300" y="336" fill="#047857" font-size="18" font-weight="700">r</text>
-    <rect x="98" y="430" width="290" height="46" rx="18" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2"/>
-    <text x="243" y="459" fill="#0F172A" font-size="19" font-weight="700" text-anchor="middle">Angles are read from the Guide Line.</text>
-
-    <text x="500" y="196" fill="#0F172A" font-size="22" font-weight="700">2. Where the image appears to come from</text>
-    <line x1="690" y1="210" x2="690" y2="454" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
-    <text x="668" y="482" fill="#475569" font-size="20" font-weight="600">mirror</text>
-
-    <line x1="552" y1="418" x2="552" y2="300" stroke="#2563EB" stroke-width="9" stroke-linecap="round"/>
-    <line x1="544" y1="308" x2="560" y2="308" stroke="#2563EB" stroke-width="9" stroke-linecap="round"/>
-    <polygon points="552,282 536,312 568,312" fill="#2563EB"/>
-    <text x="510" y="446" fill="#1D4ED8" font-size="20" font-weight="700">object</text>
-
-    <circle cx="610" cy="332" r="18" fill="#FFFFFF" stroke="#334155" stroke-width="4"/>
-    <circle cx="616" cy="332" r="6" fill="#334155"/>
-    <text x="590" y="300" fill="#475569" font-size="18">eye</text>
-
-    <path d="M552 300 L690 288 L610 332" stroke="#2563EB" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M552 300 L690 390 L610 332" stroke="#0F766E" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <path d="M690 288 L792 276" stroke="#7C3AED" stroke-width="4" stroke-dasharray="10 8" fill="none" stroke-linecap="round"/>
-    <path d="M690 390 L792 418" stroke="#7C3AED" stroke-width="4" stroke-dasharray="10 8" fill="none" stroke-linecap="round"/>
-    <line x1="792" y1="418" x2="792" y2="276" stroke="#7C3AED" stroke-width="8" stroke-dasharray="10 8" stroke-linecap="round"/>
-    <line x1="784" y1="410" x2="800" y2="410" stroke="#7C3AED" stroke-width="8" stroke-dasharray="10 8" stroke-linecap="round"/>
-    <text x="726" y="244" fill="#6D28D9" font-size="20" font-weight="700">virtual image</text>
-
-    <rect x="502" y="430" width="314" height="46" rx="18" fill="#FFFFFF" stroke="#DDD6FE" stroke-width="2"/>
-    <text x="659" y="459" fill="#0F172A" font-size="19" font-weight="700" text-anchor="middle">Dashed extensions place the image.</text>
-  </g>
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="520" rx="32" fill="#F8FAFC"/>
+  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Bounce Panel and Guide Line</text>
+  <text x="48" y="108" fill="#475569" font-size="20">Reflection is read from the Guide Line normal, not from the mirror surface.</text>
+  <rect x="48" y="148" width="360" height="308" rx="28" fill="#E0F2FE" stroke="#38BDF8" stroke-width="4"/>
+  <rect x="500" y="148" width="352" height="308" rx="28" fill="#F5F3FF" stroke="#8B5CF6" stroke-width="4"/>
+  <rect x="218" y="182" width="14" height="230" rx="7" fill="#94A3B8"/>
+  <line x1="225" y1="182" x2="225" y2="412" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="10 10"/>
+  <path d="M224 286 L132 208" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M224 286 L316 208" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M224 286 L304 286" stroke="#A855F7" stroke-width="4" stroke-dasharray="10 10"/>
+  <text x="86" y="188" fill="#0369A1" font-size="20" font-weight="700">Mirror geometry</text>
+  <text x="78" y="430" fill="#334155" font-size="19">Incident and reflected angles match around the Guide Line.</text>
+  <text x="530" y="188" fill="#6D28D9" font-size="20" font-weight="700">Image status</text>
+  <text x="530" y="236" fill="#334155" font-size="26">Ghost image</text>
+  <text x="530" y="276" fill="#334155" font-size="22">Found by backward extensions</text>
+  <text x="530" y="316" fill="#334155" font-size="22">Not real light behind the mirror</text>
+  <text x="530" y="366" fill="#334155" font-size="22">Surface angles must be converted</text>
+  <text x="530" y="406" fill="#334155" font-size="22">before the mirror rule is used.</text>
 </svg>

@@ -1,36 +1,26 @@
-<svg width="900" height="560" viewBox="0 0 900 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="m8-surface-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M0 0 L12 6 L0 12 Z" fill="#2563EB"/>
-    </marker>
-  </defs>
-  <rect width="900" height="560" rx="32" fill="#F8FBFF"/>
-  <g font-family="Segoe UI, Arial, sans-serif">
-    <text x="42" y="58" fill="#0F172A" font-size="34" font-weight="700">Surface Angle Trap vs Guide Line Conversion</text>
-    <text x="42" y="96" fill="#475569" font-size="19">A surface angle may be given first, but the mirror rule only uses the angle measured to the Guide Line normal.</text>
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="520" rx="32" fill="#F8FAFC"/>
+  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Surface Angle Trap vs Guide Line Conversion</text>
+  <text x="48" y="108" fill="#475569" font-size="20">A surface angle is not wrong, but it must be converted before the reflection rule is used.</text>
 
-    <rect x="34" y="126" width="832" height="394" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
-    <rect x="58" y="154" width="370" height="340" rx="28" fill="#FEF2F2" stroke="#F87171" stroke-width="3"/>
-    <rect x="472" y="154" width="370" height="340" rx="28" fill="#ECFDF5" stroke="#34D399" stroke-width="3"/>
+  <rect x="48" y="148" width="378" height="308" rx="28" fill="#FEF2F2" stroke="#F87171" stroke-width="4"/>
+  <rect x="474" y="148" width="378" height="308" rx="28" fill="#ECFDF5" stroke="#34D399" stroke-width="4"/>
 
-    <text x="86" y="194" fill="#B91C1C" font-size="22" font-weight="700">Given angle to the surface</text>
-    <line x1="108" y1="360" x2="378" y2="360" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
-    <line x1="192" y1="242" x2="272" y2="360" stroke="#2563EB" stroke-width="9" stroke-linecap="round" marker-end="url(#m8-surface-blue)"/>
-    <path d="M272 344 A78 78 0 0 0 210 342" stroke="#DC2626" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <text x="144" y="330" fill="#DC2626" font-size="22" font-weight="700">20 deg to surface</text>
-    <text x="134" y="410" fill="#334155" font-size="18">This is a surface angle only.</text>
-    <text x="118" y="436" fill="#334155" font-size="18">It is not yet the incident angle i.</text>
+  <text x="84" y="188" fill="#B91C1C" font-size="22" font-weight="700">Common trap</text>
+  <line x1="96" y1="324" x2="378" y2="324" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
+  <path d="M198 218 L276 324" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M278 310 C248 300 225 302 206 316" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
+  <text x="132" y="286" fill="#DC2626" font-size="20" font-weight="700">20 deg to surface</text>
+  <text x="110" y="378" fill="#334155" font-size="19">Do not call this the incident angle</text>
+  <text x="120" y="404" fill="#334155" font-size="19">until it is converted to the Guide Line.</text>
 
-    <text x="500" y="194" fill="#047857" font-size="22" font-weight="700">Convert to the Guide Line first</text>
-    <line x1="520" y1="360" x2="794" y2="360" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
-    <line x1="656" y1="214" x2="656" y2="472" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 10"/>
-    <text x="618" y="238" fill="#0369A1" font-size="18" font-weight="700">Guide Line</text>
-    <line x1="576" y1="242" x2="656" y2="360" stroke="#2563EB" stroke-width="9" stroke-linecap="round" marker-end="url(#m8-surface-blue)"/>
-    <path d="M656 286 A84 84 0 0 0 602 326" stroke="#10B981" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <path d="M656 344 A78 78 0 0 0 594 342" stroke="#DC2626" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <text x="560" y="292" fill="#047857" font-size="21" font-weight="700">i = 70 deg to Guide Line</text>
-    <text x="538" y="332" fill="#DC2626" font-size="20" font-weight="700">20 deg to surface</text>
-    <rect x="520" y="412" width="286" height="44" rx="18" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="2"/>
-    <text x="663" y="439" fill="#0F172A" font-size="18" font-weight="700" text-anchor="middle">surface angle + Guide Line angle = 90 deg</text>
-  </g>
+  <text x="510" y="188" fill="#047857" font-size="22" font-weight="700">Correct move</text>
+  <line x1="522" y1="324" x2="804" y2="324" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
+  <line x1="664" y1="194" x2="664" y2="414" stroke="#0EA5E9" stroke-width="4" stroke-dasharray="12 12"/>
+  <path d="M584 218 L664 324" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M664 238 C630 252 610 278 602 308" stroke="#10B981" stroke-width="4" stroke-linecap="round"/>
+  <path d="M664 308 C642 300 620 304 594 316" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
+  <text x="574" y="280" fill="#047857" font-size="20" font-weight="700">70 deg to Guide Line</text>
+  <text x="548" y="352" fill="#DC2626" font-size="20" font-weight="700">20 deg to surface</text>
+  <text x="566" y="394" fill="#334155" font-size="19">Surface angle + Guide Line angle = 90 deg.</text>
 </svg>

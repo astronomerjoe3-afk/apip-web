@@ -1,43 +1,32 @@
-<svg width="900" height="560" viewBox="0 0 900 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="m8-distance-green" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <path d="M0 0 L10 5 L0 10 Z" fill="#059669"/>
-    </marker>
-    <marker id="m8-distance-orange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <path d="M0 0 L10 5 L0 10 Z" fill="#D97706"/>
-    </marker>
-  </defs>
-  <rect width="900" height="560" rx="32" fill="#F8FBFF"/>
-  <g font-family="Segoe UI, Arial, sans-serif">
-    <text x="42" y="58" fill="#0F172A" font-size="34" font-weight="700">Plane-Mirror Distance Rule</text>
-    <text x="42" y="96" fill="#475569" font-size="19">Measure the object and image distances perpendicular to the mirror. They match exactly.</text>
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="520" rx="32" fill="#F8FAFC"/>
+  <text x="48" y="64" fill="#0F172A" font-size="34" font-weight="700">Plane-Mirror Symmetry</text>
+  <text x="48" y="108" fill="#475569" font-size="20">The image forms the same distance behind the mirror as the object sits in front.</text>
 
-    <rect x="50" y="136" width="800" height="362" rx="28" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
-    <line x1="450" y1="170" x2="450" y2="448" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
-    <text x="424" y="474" fill="#475569" font-size="20" font-weight="600">mirror</text>
+  <rect x="64" y="148" width="772" height="308" rx="28" fill="#FFFBEB" stroke="#FBBF24" stroke-width="4"/>
+  <rect x="446" y="176" width="18" height="248" rx="9" fill="#94A3B8"/>
+  <text x="420" y="446" fill="#475569" font-size="18">Mirror</text>
 
-    <line x1="234" y1="404" x2="234" y2="256" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-    <line x1="226" y1="264" x2="242" y2="264" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
-    <polygon points="234,238 218,268 250,268" fill="#2563EB"/>
-    <text x="188" y="432" fill="#1D4ED8" font-size="21" font-weight="700">object</text>
+  <line x1="262" y1="350" x2="262" y2="244" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <line x1="238" y1="350" x2="286" y2="350" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="262,226 244,260 280,260" fill="#2563EB"/>
+  <text x="196" y="388" fill="#1D4ED8" font-size="20" font-weight="700">Object</text>
 
-    <line x1="666" y1="404" x2="666" y2="256" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" stroke-dasharray="10 8"/>
-    <line x1="658" y1="264" x2="674" y2="264" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" stroke-dasharray="10 8"/>
-    <polygon points="666,238 650,268 682,268" fill="#7C3AED"/>
-    <text x="612" y="432" fill="#6D28D9" font-size="21" font-weight="700">virtual image</text>
+  <line x1="648" y1="350" x2="648" y2="244" stroke="#A855F7" stroke-width="10" stroke-dasharray="12 10" stroke-linecap="round"/>
+  <line x1="624" y1="350" x2="672" y2="350" stroke="#A855F7" stroke-width="10" stroke-dasharray="12 10" stroke-linecap="round"/>
+  <polygon points="648,226 630,260 666,260" fill="#A855F7"/>
+  <text x="574" y="388" fill="#7C3AED" font-size="20" font-weight="700">Image</text>
 
-    <line x1="234" y1="256" x2="666" y2="256" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 8"/>
-    <line x1="234" y1="420" x2="666" y2="420" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 8"/>
+  <line x1="278" y1="196" x2="434" y2="196" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="278,196 294,188 294,204" fill="#0F766E"/>
+  <polygon points="434,196 418,188 418,204" fill="#0F766E"/>
+  <text x="320" y="182" fill="#0F766E" font-size="20" font-weight="700">5 cm</text>
 
-    <line x1="246" y1="212" x2="438" y2="212" stroke="#059669" stroke-width="4" marker-start="url(#m8-distance-green)" marker-end="url(#m8-distance-green)"/>
-    <line x1="462" y1="212" x2="654" y2="212" stroke="#D97706" stroke-width="4" marker-start="url(#m8-distance-orange)" marker-end="url(#m8-distance-orange)"/>
-    <text x="342" y="198" fill="#059669" font-size="19" font-weight="700" text-anchor="middle">object distance</text>
-    <text x="558" y="198" fill="#D97706" font-size="19" font-weight="700" text-anchor="middle">image distance</text>
+  <line x1="478" y1="196" x2="634" y2="196" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="478,196 494,188 494,204" fill="#D97706"/>
+  <polygon points="634,196 618,188 618,204" fill="#D97706"/>
+  <text x="520" y="182" fill="#D97706" font-size="20" font-weight="700">5 cm</text>
 
-    <text x="342" y="238" fill="#059669" font-size="22" font-weight="700" text-anchor="middle">5 cm</text>
-    <text x="558" y="238" fill="#D97706" font-size="22" font-weight="700" text-anchor="middle">5 cm</text>
-
-    <rect x="182" y="446" width="538" height="34" rx="16" fill="#FFFBEB" stroke="#FCD34D" stroke-width="2"/>
-    <text x="451" y="468" fill="#92400E" font-size="18" font-weight="700" text-anchor="middle">The image is the same distance behind the mirror as the object is in front.</text>
-  </g>
+  <text x="134" y="422" fill="#334155" font-size="19">Same distance in front of the mirror.</text>
+  <text x="536" y="422" fill="#334155" font-size="19">Same distance behind the mirror.</text>
 </svg>
