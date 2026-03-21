@@ -86,14 +86,14 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6"];
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_");
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M13_");
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_");
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M13_");
 }
 
 type QuestionVisualMeta = {
@@ -7554,6 +7554,44 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
 
 
 
+function authoredVisualAssetIndex(lesson: UnknownRecord): Record<string, UnknownRecord> {
+  return asList(asRecord(lesson.authoring_contract).visual_assets)
+    .map(asRecord)
+    .reduce<Record<string, UnknownRecord>>((acc, asset) => {
+      const assetId = text(asset.asset_id);
+      if (assetId) {
+        acc[assetId] = asset;
+      }
+      return acc;
+    }, {});
+}
+
+function generatedScaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
+  const authoredAssets = authoredVisualAssetIndex(lesson);
+  return asList(asRecord(phases(lesson).analogical_grounding).assets)
+    .map(asRecord)
+    .filter((asset) => text(asset.kind) === "diagram" && Boolean(text(asset.url)))
+    .slice(0, 3)
+    .map((asset) => {
+      const authored = authoredAssets[text(asset.asset_id)] || {};
+      const meta = asRecord(asset.meta);
+      const caption = text(authored.caption) || text(meta.description) || text(authored.purpose) || "Use this authored diagram to anchor the lesson idea before you answer.";
+      const highlights = dedupeText([
+        text(authored.purpose),
+        text(authored.caption),
+        text(meta.description),
+      ]).filter((entry) => entry !== caption).slice(0, 3);
+
+      return {
+        kind: "visual",
+        title: text(asset.title) || text(authored.title) || "Concept diagram",
+        caption,
+        image_url: text(asset.url),
+        highlights,
+      };
+    });
+}
+
 function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const m2 = m2ScaffoldMediaCards(code);
@@ -7576,6 +7614,8 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   if (m10.length > 0) return m10;
   const m11 = m11ScaffoldMediaCards(code);
   if (m11.length > 0) return m11;
+  const generated = generatedScaffoldMediaCards(lesson);
+  if (generated.length > 0) return generated;
   switch (code) {
     case "F1_L1":
       return [
@@ -8578,6 +8618,19 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
 
 
 
+function generatedReflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined {
+  const card = asRecord(generatedScaffoldMediaCards(lesson)[0]);
+  const imageUrl = text(card.image_url);
+  if (!imageUrl) return undefined;
+  const highlights = asList(card.highlights).map((entry) => text(entry)).filter(Boolean).slice(0, 3);
+  return {
+    title: text(card.title) || "Concept diagram check",
+    prompt: text(card.caption) || "Use the authored diagram in your reflection and explain how it supports the lesson idea.",
+    image_url: imageUrl,
+    callouts: highlights,
+  };
+}
+
 function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined {
   const code = lessonCode(lesson);
   const m2 = m2ReflectionVisualCheck(code);
@@ -8600,6 +8653,8 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
   if (m10) return m10;
   const m11 = m11ReflectionVisualCheck(code);
   if (m11) return m11;
+  const generated = generatedReflectionVisualCheck(lesson);
+  if (generated) return generated;
   switch (code) {
     case "F2_L3":
       return {
@@ -8901,10 +8956,12 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
   else if (stage === "simulation") {
     activeStage = "simulation";
     const inquiry = asList(asRecord(phases(resources.lesson).simulation_inquiry).inquiry_prompts).map(asRecord);
+    const generatedLab = asRecord(asRecord(phases(resources.lesson).simulation_inquiry).generated_lab);
     const simulationCode = lessonCode(resources.lesson);
     stagePayload = {
       title: simulationStageTitle(simulationCode),
       instructions: simulationStageInstructions(simulationCode, inquiry),
+      embed_url: text(generatedLab.url),
       task_prompt: simulationStageTaskPrompt(simulationCode, inquiry),
       explore_steps: simulationStageExploreSteps(simulationCode),
       watch_for: simulationStageWatchFor(simulationCode),
