@@ -224,6 +224,7 @@ export default function M14SimulationPanels({
     const curvature = hubPull / forwardMotion;
     const routeLabel =
       curvature > 1.35 ? "tightly bent route" : curvature < 0.75 ? "wide route" : "balanced orbit path";
+    const routeStoryLines = ["hub pull bends inward", "forward motion carries onward"];
 
     return renderPanel(
       "Hub pull routes",
@@ -246,13 +247,20 @@ export default function M14SimulationPanels({
         <circle cx={290 + forwardMotion * 20} cy="126" r="16" fill="#38bdf8" />
         <line x1={290 + forwardMotion * 20} y1="126" x2={224 + forwardMotion * 10} y2={100 - hubPull * 10} stroke="#f97316" strokeWidth="5" />
         <line x1={290 + forwardMotion * 20} y1="126" x2={348 + forwardMotion * 16} y2="126" stroke="#22c55e" strokeWidth="5" />
-        <text x="430" y="86" fill="#334155" fontSize="20">
-          hub pull bends inward
+        <text x="404" y="86" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          ROUTE STORY
         </text>
-        <text x="430" y="122" fill="#334155" fontSize="20">
-          forward motion carries onward
+        <text x="404" y="112" fill="#334155" fontSize="18">
+          {routeStoryLines.map((line, index) => (
+            <tspan key={`${line}-${index}`} x="404" dy={index === 0 ? 0 : 22}>
+              {line}
+            </tspan>
+          ))}
         </text>
-        <text x="430" y="166" fill="#0f172a" fontSize="24" fontWeight="700">
+        <text x="404" y="170" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          ORBIT READ
+        </text>
+        <text x="404" y="196" fill="#0f172a" fontSize="22" fontWeight="700">
           {routeLabel}
         </text>
       </svg>,
@@ -318,6 +326,10 @@ export default function M14SimulationPanels({
     const orbitPosition = clamp(simVectorAngle, 0, 100);
     const juneLike = orbitPosition < 50;
     const hemisphere = juneLike ? "northern hemisphere toward Sun" : "southern hemisphere toward Sun";
+    const hemisphereLines = juneLike
+      ? ["northern hemisphere", "leans toward Sun"]
+      : ["southern hemisphere", "leans toward Sun"];
+    const seasonRuleLines = ["seasons follow lean", "and sunlight angle"];
 
     return renderPanel(
       "Season switch",
@@ -346,14 +358,28 @@ export default function M14SimulationPanels({
           strokeWidth="4"
         />
         <line x1="158" y1="126" x2="284" y2={juneLike ? 84 : 168} stroke="#fbbf24" strokeWidth="5" />
-        <text x="458" y="90" fill="#0f172a" fontSize="24" fontWeight="700">
-          {hemisphere}
+        <text x="420" y="84" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          SUNWARD SIDE
         </text>
-        <text x="458" y="126" fill="#334155" fontSize="19">
+        <text x="420" y="110" fill="#0f172a" fontSize="20" fontWeight="700">
+          {hemisphereLines.map((line, index) => (
+            <tspan key={`${line}-${index}`} x="420" dy={index === 0 ? 0 : 22}>
+              {line}
+            </tspan>
+          ))}
+        </text>
+        <text x="420" y="162" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          TILT READ
+        </text>
+        <text x="420" y="186" fill="#334155" fontSize="18">
           tilt = {formatSimulationNumber(tilt, 1)} deg
         </text>
-        <text x="458" y="160" fill="#475569" fontSize="19">
-          seasons follow lean and sunlight angle
+        <text x="420" y="214" fill="#475569" fontSize="16">
+          {seasonRuleLines.map((line, index) => (
+            <tspan key={`${line}-${index}`} x="420" dy={index === 0 ? 0 : 18}>
+              {line}
+            </tspan>
+          ))}
         </text>
       </svg>,
       <>
@@ -381,6 +407,7 @@ export default function M14SimulationPanels({
       [244, 188],
     ] as const;
     const [moonX, moonY] = phasePositions[moonIndex];
+    const phaseStoryLines = ["Sun lights half the Moon", "Earth sees different parts", "of that lit half"];
 
     return renderPanel(
       "Moon face challenge",
@@ -399,14 +426,21 @@ export default function M14SimulationPanels({
         <circle cx="320" cy="126" r="82" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="8 8" />
         <circle cx={moonX} cy={moonY} r="18" fill="#e2e8f0" />
         <line x1="320" y1="126" x2={moonX} y2={moonY} stroke="#38bdf8" strokeWidth="3" />
-        <text x="448" y="88" fill="#0f172a" fontSize="24" fontWeight="700">
+        <text x="412" y="84" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          SHOWN PHASE
+        </text>
+        <text x="412" y="112" fill="#0f172a" fontSize="22" fontWeight="700">
           {phaseName}
         </text>
-        <text x="448" y="124" fill="#334155" fontSize="19">
-          Sun lights half the Moon
+        <text x="412" y="148" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          PHASE STORY
         </text>
-        <text x="448" y="158" fill="#475569" fontSize="19">
-          Earth sees different parts of that lit half
+        <text x="412" y="174" fill="#334155" fontSize="16">
+          {phaseStoryLines.map((line, index) => (
+            <tspan key={`${line}-${index}`} x="412" dy={index === 0 ? 0 : 18}>
+              {line}
+            </tspan>
+          ))}
         </text>
       </svg>,
       <>
@@ -426,6 +460,7 @@ export default function M14SimulationPanels({
     const innerYear = Math.pow(innerDistance, 1.5);
     const outerYear = Math.pow(outerDistance, 1.5);
     const ratio = outerYear / innerYear;
+    const yearRuleLines = ["farther ring", "longer lap"];
 
     return renderPanel(
       "Outer lap puzzle",
@@ -446,14 +481,24 @@ export default function M14SimulationPanels({
         <circle cx="128" cy="126" r="36" fill="#facc15" />
         <ellipse cx="128" cy="126" rx={70 + innerDistance * 24} ry={46 + innerDistance * 16} fill="none" stroke="#22c55e" strokeWidth="4" />
         <ellipse cx="128" cy="126" rx={110 + outerDistance * 24} ry={74 + outerDistance * 16} fill="none" stroke="#60a5fa" strokeWidth="4" />
-        <text x="404" y="88" fill="#16a34a" fontSize="20">
+        <text x="380" y="82" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          YEAR READOUTS
+        </text>
+        <text x="380" y="110" fill="#16a34a" fontSize="18">
           inner year: {formatSimulationNumber(innerYear, 2)}
         </text>
-        <text x="404" y="124" fill="#2563eb" fontSize="20">
+        <text x="380" y="138" fill="#2563eb" fontSize="18">
           outer year: {formatSimulationNumber(outerYear, 2)}
         </text>
-        <text x="404" y="164" fill="#0f172a" fontSize="24" fontWeight="700">
-          {"farther ring -> longer lap"}
+        <text x="380" y="172" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          MAIN RULE
+        </text>
+        <text x="380" y="198" fill="#0f172a" fontSize="22" fontWeight="700">
+          {yearRuleLines.map((line, index) => (
+            <tspan key={`${line}-${index}`} x="380" dy={index === 0 ? 0 : 22}>
+              {line}
+            </tspan>
+          ))}
         </text>
       </svg>,
       <>
