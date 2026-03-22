@@ -30,6 +30,7 @@ const M14_VISUAL_META: Record<string, M14QuestionVisualMeta> = {
       "The Sun is the central star and main light source.",
       "Not everything orbiting the Sun is a planet.",
       "Moons belong as companion riders around larger worlds.",
+      "A dwarf planet can orbit the Sun directly and still stay a separate category.",
     ],
   },
   M14L2: {
@@ -93,18 +94,19 @@ const M14_SIMULATION_COPY: Record<string, M14SimulationCopy> = {
   M14_L1: {
     title: "Solar court sorter",
     instructions: "Keep the whole Solar System on one Sun-centered board so category sorting stays tied to host body and object type.",
-    taskPrompt: "Sort bodies into planet, dwarf planet, moon, asteroid, or comet, then explain why one central Sun and its gravity make this a family rather than a random list.",
+    taskPrompt: "Sort bodies into planet, dwarf planet, moon, asteroid, or comet, then explain why one central Sun, main-host clues, and the dwarf-planet neighborhood rule keep this family organized.",
     exploreSteps: [
       "Start by separating Sun-orbiting worlds from companion riders.",
       "Then compare rocky small bodies with icy visitors.",
-      "Finish by checking why not everything around the Sun counts as a planet.",
+      "Finish by checking why not everything around the Sun counts as a planet, including the dwarf-planet clue.",
     ],
     watchFor: [
       "The Sun is the central lantern and main host.",
       "Moons mainly orbit larger worlds, not the Sun directly.",
       "Comets and asteroids stay different because icy and rocky bodies behave differently.",
+      "Dwarf planets can orbit the Sun directly without counting as full planets.",
     ],
-    tryFirst: "Place the Sun at the center, then sort one planet, one moon, one dwarf planet, one asteroid, and one comet before you add any harder edge cases.",
+    tryFirst: "Place the Sun at the center, then sort one planet, one moon, one dwarf planet, one asteroid, and one comet. After that, compare the planet and dwarf planet and say what extra clue keeps them apart.",
     takeaway: "The Solar System is strongest as one organized Sun-centered family with several distinct body types.",
   },
   M14_L2: {
@@ -201,7 +203,7 @@ export function m14SimulationCopy(code: string): M14SimulationCopy | undefined {
 export function m14ScaffoldFocusExtras(code: string): string[] {
   switch (code) {
     case "M14_L1":
-      return ["Keep the Sun at the center of the family.", "Sort by what the body is and what it mainly orbits.", "Do not collapse planets, moons, asteroids, comets, and dwarf planets into one bucket."];
+      return ["Keep the Sun at the center of the family.", "Sort by what the body is and what it mainly orbits.", "Use the dwarf-planet neighborhood clue before calling every round Sun-orbiting body a full planet.", "Do not collapse planets, moons, asteroids, comets, and dwarf planets into one bucket."];
     case "M14_L2":
       return ["Treat orbit as a path, not a track.", "Use gravity and forward motion together.", "Reuse the same pull story for planets and moons."];
     case "M14_L3":
@@ -220,7 +222,7 @@ export function m14ScaffoldFocusExtras(code: string): string[] {
 export function m14ScaffoldCoreBullets(code: string): string[] {
   switch (code) {
     case "M14_L1":
-      return ["The Solar System is one Sun-centered family.", "Planets, dwarf planets, moons, asteroids, and comets are different categories.", "Main host helps distinguish planets from moons."];
+      return ["The Solar System is one Sun-centered family.", "Planets, dwarf planets, moons, asteroids, and comets are different categories.", "Main host helps distinguish planets from moons.", "A dwarf planet can orbit the Sun directly and still stay distinct because it has not cleared its orbital neighborhood like a full planet has."];
     case "M14_L2":
       return ["Gravity is the hub pull.", "An orbit is a pull-guided path.", "Forward motion and inward pull combine to make the route curve."];
     case "M14_L3":
