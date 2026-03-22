@@ -142,10 +142,10 @@ export default function M14SimulationPanels({
             : selectedBody === "asteroid"
               ? "rock swarm piece"
               : "ice visitor";
-    const hostNote =
+    const hostNoteLines =
       selectedBody === "moon"
-        ? "mainly orbits a larger world"
-        : "belongs in the Sun-centered family";
+        ? ["mainly orbits a", "larger world"]
+        : ["belongs in the", "Sun-centered family"];
 
     return renderPanel(
       "Solar court sorter",
@@ -184,14 +184,27 @@ export default function M14SimulationPanels({
             </text>
           </>
         ) : null}
-        <text x="454" y="78" fill="#0f172a" fontSize="26" fontWeight="700">
+        <text x="438" y="76" fill="#0f172a" fontSize="24" fontWeight="700">
           {selectedBody}
         </text>
-        <text x="454" y="116" fill="#334155" fontSize="20">
-          classification: {classification}
+        <text x="438" y="106" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          CLASSIFICATION
         </text>
-        <text x="454" y="154" fill="#475569" fontSize="18">
-          host: {hostNote}
+        <text x="438" y="130" fill="#334155" fontSize="18">
+          {classification}
+        </text>
+        <text x="438" y="162" fill="#64748b" fontSize="14" fontWeight="700" letterSpacing="0.08em">
+          MAIN HOST
+        </text>
+        <text x="438" y="186" fill="#475569" fontSize="18">
+          {selectedHost}
+        </text>
+        <text x="438" y="208" fill="#475569" fontSize="16">
+          {hostNoteLines.map((line, index) => (
+            <tspan key={`${line}-${index}`} x="438" dy={index === 0 ? 0 : 18}>
+              {line}
+            </tspan>
+          ))}
         </text>
       </svg>,
       <>
