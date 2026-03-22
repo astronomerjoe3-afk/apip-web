@@ -5215,8 +5215,13 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     return (
       matchesPhraseGroups(candidate, [
         ["star", "self-lit", "self-luminous", "produces its own light", "makes its own light", "emits light", "gives off light", "light source", "source of light"],
-        ["planet", "moon", "reflective world", "reflective body", "mirror"],
+        ["planet", "moon", "reflective world", "reflective body", "reflective object", "reflector", "reflector of light", "mirror"],
         ["reflect", "reflection", "borrowed light", "sunlight", "reflected", "reflects", "bounces light"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["brightness", "bright", "appearance", "looks bright", "appear bright"],
+        ["reflect", "reflection", "reflective", "reflector", "reflected", "reflects", "borrowed light"],
+        ["source", "where the light comes from", "self-produced light", "makes its own light", "produces its own light", "light source", "source of light"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["brightness", "bright", "appearance", "looks bright"],
