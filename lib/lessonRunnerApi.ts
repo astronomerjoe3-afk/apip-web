@@ -1216,6 +1216,102 @@ function authoredAcceptancePhraseGroups(item: UnknownRecord): string[][] {
     .filter((group) => group.length > 0);
 }
 
+const SHORT_ACCEPTED_MIN = 10;
+const SHORT_ACCEPTED_MAX = 15;
+const LOW_SIGNAL_VARIANT_WORDS = new Set([
+  "and",
+  "because",
+  "bigger",
+  "both",
+  "branch",
+  "different",
+  "first",
+  "greater",
+  "less",
+  "main",
+  "more",
+  "not",
+  "only",
+  "path",
+  "rather",
+  "route",
+  "same",
+  "smaller",
+  "than",
+]);
+
+function pushUniqueAcceptedAnswer(values: string[], candidate: string): void {
+  const entry = text(candidate).trim();
+  if (!entry) return;
+  const key = normalizeOpenAnswer(entry);
+  if (!key) return;
+  if (values.some((existing) => normalizeOpenAnswer(existing) === key)) return;
+  values.push(entry);
+}
+
+function meaningfulShortAnswerPhrase(phrase: string): boolean {
+  const words = text(phrase)
+    .toLowerCase()
+    .split(/[^a-z0-9+-]+/i)
+    .filter(Boolean);
+  if (words.length === 0) return false;
+  return words.some((word) => !LOW_SIGNAL_VARIANT_WORDS.has(word));
+}
+
+function generatedShortAnswerVariants(acceptedAnswers: string[], phraseGroups: string[][]): string[] {
+  const values: string[] = [];
+
+  acceptedAnswers.forEach((answer) => pushUniqueAcceptedAnswer(values, answer));
+
+  [...values].forEach((answer) => {
+    const lowered = answer.toLowerCase();
+    if (lowered.startsWith("because ")) {
+      pushUniqueAcceptedAnswer(values, answer.slice(8).trim());
+    } else if (answer.length > 1) {
+      pushUniqueAcceptedAnswer(values, `Because ${answer[0].toLowerCase()}${answer.slice(1)}`);
+    } else {
+      pushUniqueAcceptedAnswer(values, `Because ${answer.toLowerCase()}`);
+    }
+  });
+
+  for (const group of phraseGroups) {
+    for (const phrase of group) {
+      if (meaningfulShortAnswerPhrase(phrase)) {
+        pushUniqueAcceptedAnswer(values, `${phrase} matters`);
+        pushUniqueAcceptedAnswer(values, `Because ${phrase} matters`);
+      }
+      if (values.length >= SHORT_ACCEPTED_MIN) break;
+    }
+    if (values.length >= SHORT_ACCEPTED_MIN) break;
+  }
+
+  if (phraseGroups.length > 0 && values.length < SHORT_ACCEPTED_MIN) {
+    let combinations: string[][] = [[]];
+    for (const group of phraseGroups.slice(0, 4)) {
+      const next: string[][] = [];
+      for (const combo of combinations) {
+        for (const phrase of group.slice(0, 4)) {
+          next.push([...combo, phrase]);
+        }
+      }
+      combinations = next;
+      if (combinations.length > 64) {
+        combinations = combinations.slice(0, 64);
+      }
+    }
+
+    for (const combo of combinations) {
+      const joined = combo.map((part) => text(part).trim()).filter(Boolean).join(" ");
+      if (!joined) continue;
+      pushUniqueAcceptedAnswer(values, joined);
+      pushUniqueAcceptedAnswer(values, `Because ${joined}`);
+      if (values.length >= SHORT_ACCEPTED_MIN) break;
+    }
+  }
+
+  return values.slice(0, SHORT_ACCEPTED_MAX);
+}
+
 function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean | null {
   const itemId = text(item.id);
   const itemIdUpper = itemId.toUpperCase();
@@ -6225,15 +6321,16 @@ function shortAnswerAccepted(item: UnknownRecord): string[] {
   const explicitValues = [...accepted, explicitCorrect]
     .map((entry) => text(entry).trim())
     .filter(Boolean);
+  const authoredPhraseGroups = authoredAcceptancePhraseGroups(item);
   if (explicitValues.length > 0) {
-    return [...new Set(explicitValues)];
+    return generatedShortAnswerVariants([...new Set(explicitValues)], authoredPhraseGroups);
   }
 
   const meta = fallbackMeta(item);
   const values = [...(meta?.acceptedAnswers || []), meta?.correctAnswer || ""]
     .map((entry) => text(entry).trim())
     .filter(Boolean);
-  return [...new Set(values)];
+  return generatedShortAnswerVariants([...new Set(values)], authoredPhraseGroups);
 }
 
 function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: UnknownRecord): boolean {
