@@ -5214,20 +5214,29 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   if (isM15StarPrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["star", "self-lit", "self-luminous", "produces its own light", "makes its own light"],
-        ["planet", "moon", "reflective world", "reflective body"],
-        ["reflect", "reflection", "borrowed light", "sunlight"],
+        ["star", "self-lit", "self-luminous", "produces its own light", "makes its own light", "emits light", "gives off light", "light source", "source of light"],
+        ["planet", "moon", "reflective world", "reflective body", "mirror"],
+        ["reflect", "reflection", "borrowed light", "sunlight", "reflected", "reflects", "bounces light"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["brightness", "bright", "appearance"],
-        ["not enough", "too weak", "cannot tell", "not by itself", "mislead"],
-        ["source", "where the light comes from", "self-produced light", "makes its own light"],
+        ["brightness", "bright", "appearance", "looks bright"],
+        ["not enough", "too weak", "cannot tell", "not by itself", "mislead", "does not prove", "cannot prove", "not enough on its own"],
+        ["source", "where the light comes from", "self-produced light", "makes its own light", "light source", "source of light"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["fusion"],
-        ["core", "internal"],
-        ["energy", "power"],
-        ["self-lit", "shine", "luminous", "produces its own light"],
+        ["core", "internal", "inside the star"],
+        ["energy", "power", "energy source"],
+        ["self-lit", "shine", "luminous", "produces its own light", "emits light", "light source"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "it is a light source",
+        "because it is a light source",
+        "because stars are light sources",
+        "because it emits its own light",
+        "because it gives off its own light",
+        "because a star makes its own light",
+        "because it produces its own light",
       ])
     );
   }
@@ -5247,14 +5256,19 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   if (isM15LifecyclePrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["mass", "stellar mass", "more massive", "lower-mass", "high-mass"],
-        ["branch", "later path", "route", "different path", "different ending"],
-        ["remnant", "white dwarf", "black hole", "supernova"],
+        ["mass", "stellar mass", "more massive", "lower-mass", "high-mass", "how massive", "star mass"],
+        ["branch", "later path", "route", "different path", "different ending", "fate", "later route"],
+        ["remnant", "white dwarf", "black hole", "supernova", "final state", "end state"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["not every", "not all", "depends", "only massive", "only very massive"],
+        ["not every", "not all", "depends", "only massive", "only very massive", "different stars end differently"],
         ["supernova", "black hole"],
         ["white dwarf", "different ending", "lower-mass route"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "mass decides how the star ends",
+        "the ending depends on the star's mass",
+        "more massive stars can end differently",
       ])
     );
   }
@@ -5275,19 +5289,24 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     return (
       matchesPhraseGroups(candidate, [
         ["solar system"],
-        ["inside", "part of", "within"],
+        ["inside", "part of", "within", "belongs in"],
         ["milky way", "galaxy"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["galaxy"],
-        ["many stars", "many star systems", "collection of stars", "gravity-bound system"],
+        ["many stars", "many star systems", "collection of stars", "gravity-bound system", "lots of stars"],
         ["universe", "milky way"],
         ["not the same", "not the whole", "only one"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["gravity"],
-        ["hold", "bind", "keep together"],
+        ["hold", "bind", "keep together", "holds together", "keeps it together"],
         ["galaxy", "system", "many stars"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the milky way is a galaxy with many stars",
+        "the solar system is inside the milky way",
+        "a galaxy is one system among many in the universe",
       ])
     );
   }
@@ -5308,20 +5327,25 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     return (
       matchesPhraseGroups(candidate, [
         ["light-year", "light years"],
-        ["distance", "how far", "size", "width", "across"],
+        ["distance", "how far", "size", "width", "across", "distance unit", "distance measure"],
         ["not", "rather than"],
-        ["time", "age", "clock"],
+        ["time", "age", "clock", "clock face"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["huge", "enormous", "very large", "cosmic"],
         ["distance", "scale", "separation"],
-        ["light-year"],
+        ["light-year", "light years"],
         ["easier", "convenient", "manageable"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["year", "time"],
-        ["define", "definition", "used to define"],
+        ["define", "definition", "used to define", "part of the definition"],
         ["distance", "how far"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a light-year is a distance unit",
+        "it measures distance not time",
+        "it tells how far away something is",
       ])
     );
   }
@@ -5341,12 +5365,12 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   if (isM15RedshiftPrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["wavelength", "observed wavelength", "emitted wavelength"],
-        ["longer", "increase", "stretched"],
+        ["wavelength", "observed wavelength", "emitted wavelength", "light wave spacing"],
+        ["longer", "increase", "stretched", "gets longer", "lengthens", "shifted longer"],
         ["redshift"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["stretch", "stretching", "expanded", "during travel", "on the journey"],
+        ["stretch", "stretching", "expanded", "during travel", "on the journey", "while it travels"],
         ["light", "wavelength"],
         ["redshift", "longer"],
       ]) ||
@@ -5361,6 +5385,11 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         ["color", "looks red"],
         ["not enough", "too loose", "not by itself", "rather than"],
         ["wavelength", "comparison", "measurable"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "redshift means the wavelength is longer",
+        "the light is stretched to a longer wavelength",
+        "farther galaxies usually have bigger redshifts",
       ])
     );
   }
@@ -5383,14 +5412,14 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
   if (isM15BigBangPrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["hot", "dense", "early universe", "hot dense state"],
-        ["expand", "expanding", "expansion"],
+        ["hot", "dense", "early universe", "hot dense state", "hot dense beginning"],
+        ["expand", "expanding", "expansion", "space is stretching"],
         ["space", "space itself"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["not", "rather than"],
-        ["center", "centre", "one point", "blast", "explosion"],
-        ["space", "expanding space", "space itself"],
+        ["center", "centre", "one point", "blast", "explosion", "center blast"],
+        ["space", "expanding space", "space itself", "space between galaxies"],
       ]) ||
       matchesPhraseGroups(candidate, [
         ["pattern", "trend", "many galaxies", "across many galaxies"],
@@ -5399,6 +5428,11 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         ["redshift"],
         ["evidence", "supports", "predicts"],
         ["expansion", "big bang"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the big bang is the expansion of space",
+        "space itself expanded from a hot dense beginning",
+        "the redshift pattern supports expansion",
       ])
     );
   }
