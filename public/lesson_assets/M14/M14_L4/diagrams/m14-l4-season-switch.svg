@@ -5,4 +5,48 @@
     </marker>
   </defs>
   <rect width="100%" height="100%" fill="#0b1020" />
-<text x="640.00" y="70.00" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Season switch</text><text x="640.00" y="105.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">Show June and December positions with the same axis direction so the season geometry stays readable.</text><circle cx="270.00" cy="360.00" r="52.00" fill="#facc15" stroke="#fde68a" stroke-width="5" /><line x1="270.00" y1="321.50" x2="270.00" y2="290.00" stroke="#fbbf24" stroke-width="5" /><line x1="303.00" y1="338.00" x2="330.00" y2="320.00" stroke="#fbbf24" stroke-width="5" /><line x1="311.25" y1="360.00" x2="345.00" y2="360.00" stroke="#fbbf24" stroke-width="5" /><line x1="303.00" y1="382.00" x2="330.00" y2="400.00" stroke="#fbbf24" stroke-width="5" /><line x1="270.00" y1="398.50" x2="270.00" y2="430.00" stroke="#fbbf24" stroke-width="5" /><line x1="237.00" y1="382.00" x2="210.00" y2="400.00" stroke="#fbbf24" stroke-width="5" /><line x1="228.75" y1="360.00" x2="195.00" y2="360.00" stroke="#fbbf24" stroke-width="5" /><line x1="237.00" y1="338.00" x2="210.00" y2="320.00" stroke="#fbbf24" stroke-width="5" /><line x1="346.00" y1="296.00" x2="650.00" y2="214.00" stroke="#facc15" stroke-width="4" /><line x1="346.00" y1="424.00" x2="650.00" y2="506.00" stroke="#facc15" stroke-width="4" /><circle cx="760.00" cy="250.00" r="66.00" fill="#2563eb" stroke="#93c5fd" stroke-width="4" /><circle cx="760.00" cy="470.00" r="66.00" fill="#2563eb" stroke="#93c5fd" stroke-width="4" /><line x1="712.00" y1="362.00" x2="808.00" y2="138.00" stroke="#f8fafc" stroke-width="4" /><line x1="712.00" y1="582.00" x2="808.00" y2="358.00" stroke="#f8fafc" stroke-width="4" /><text x="760.00" y="158.00" fill="#bbf7d0" text-anchor="middle" font-size="20" font-family="Arial" font-weight="normal">June position</text><text x="760.00" y="574.00" fill="#fecaca" text-anchor="middle" font-size="20" font-family="Arial" font-weight="normal">December position</text><text x="1030.00" y="220.00" fill="#f8fafc" text-anchor="middle" font-size="22" font-family="Arial" font-weight="normal">tilt rod ~ 23.4 deg</text><text x="1030.00" y="264.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">The axis keeps the same leaning direction in space.</text><text x="1030.00" y="308.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">One hemisphere tilts toward the lantern, then away half a year later.</text><text x="1030.00" y="352.00" fill="#fde68a" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">Seasons come from tilt and sunlight angle, not distance changes.</text></svg>
+
+  <text x="640" y="70" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Season switch</text>
+  <text x="640" y="105" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial">
+    Show June and December positions with the same axis direction so the season geometry stays readable.
+  </text>
+
+  <circle cx="270" cy="360" r="52" fill="#facc15" stroke="#fde68a" stroke-width="5" />
+  <line x1="270" y1="321.5" x2="270" y2="290" stroke="#fbbf24" stroke-width="5" />
+  <line x1="303" y1="338" x2="330" y2="320" stroke="#fbbf24" stroke-width="5" />
+  <line x1="311.25" y1="360" x2="345" y2="360" stroke="#fbbf24" stroke-width="5" />
+  <line x1="303" y1="382" x2="330" y2="400" stroke="#fbbf24" stroke-width="5" />
+  <line x1="270" y1="398.5" x2="270" y2="430" stroke="#fbbf24" stroke-width="5" />
+  <line x1="237" y1="382" x2="210" y2="400" stroke="#fbbf24" stroke-width="5" />
+  <line x1="228.75" y1="360" x2="195" y2="360" stroke="#fbbf24" stroke-width="5" />
+  <line x1="237" y1="338" x2="210" y2="320" stroke="#fbbf24" stroke-width="5" />
+
+  <line x1="346" y1="296" x2="650" y2="214" stroke="#facc15" stroke-width="4" />
+  <line x1="346" y1="424" x2="650" y2="506" stroke="#facc15" stroke-width="4" />
+
+  <circle cx="760" cy="250" r="66" fill="#2563eb" stroke="#93c5fd" stroke-width="4" />
+  <circle cx="760" cy="470" r="66" fill="#2563eb" stroke="#93c5fd" stroke-width="4" />
+  <line x1="712" y1="362" x2="808" y2="138" stroke="#f8fafc" stroke-width="4" />
+  <line x1="712" y1="582" x2="808" y2="358" stroke="#f8fafc" stroke-width="4" />
+
+  <text x="760" y="158" fill="#bbf7d0" text-anchor="middle" font-size="20" font-family="Arial">June position</text>
+  <text x="760" y="574" fill="#fecaca" text-anchor="middle" font-size="20" font-family="Arial">December position</text>
+
+  <text x="900" y="208" fill="#94a3b8" font-size="14" font-family="Arial" font-weight="bold" letter-spacing="1.5">AXIS READ</text>
+  <text x="900" y="240" fill="#f8fafc" font-size="22" font-family="Arial" font-weight="bold">tilt rod ~ 23.4 deg</text>
+
+  <text x="900" y="288" fill="#cbd5e1" font-size="18" font-family="Arial">
+    <tspan x="900" dy="0">The axis keeps the same leaning</tspan>
+    <tspan x="900" dy="24">direction in space.</tspan>
+  </text>
+
+  <text x="900" y="362" fill="#cbd5e1" font-size="18" font-family="Arial">
+    <tspan x="900" dy="0">One hemisphere tilts toward the</tspan>
+    <tspan x="900" dy="24">lantern, then away half a year later.</tspan>
+  </text>
+
+  <text x="900" y="452" fill="#fde68a" font-size="18" font-family="Arial" font-weight="bold">
+    <tspan x="900" dy="0">Seasons come from tilt and sunlight</tspan>
+    <tspan x="900" dy="24">angle, not distance changes.</tspan>
+  </text>
+</svg>
