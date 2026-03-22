@@ -1234,6 +1234,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM14Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM10Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM12Prompt = (ids: string[], prompts: string[]): boolean =>
@@ -4103,6 +4105,197 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       includesAnyPhrase(candidate, [
         "the image is 9 cm behind the mirror because plane-mirror images are the same distance behind as the object is in front",
         "it is 9 cm behind the mirror by symmetry",
+      ])
+    );
+  }
+
+  const isM14SolarFamilyPrompt = matchesM14Prompt(
+    ["M14L1_D4", "M14L1_D10", "M14L1_M4", "M14L1_M10"],
+    [
+      "why is the solar system stronger as one sun centered family than as a random object list",
+      "why is it weak to call every sun orbiting body a planet",
+      "summarize the solar system in one strong lantern ring sentence",
+      "give one clean sorting rule that separates planets from moons in the solar court",
+    ],
+  );
+
+  if (isM14SolarFamilyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["sun", "great lantern"],
+        ["family", "system", "solar court"],
+        ["gravity", "pull", "hub pull", "center"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["planet", "world rider"],
+        ["moon", "companion rider"],
+        ["sun", "larger world", "main host", "orbits"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["not everything", "different categories", "more than one category"],
+        ["sun orbiting", "orbits the sun", "solar family"],
+        ["planet", "comet", "asteroid", "dwarf planet", "moon"],
+      ])
+    );
+  }
+
+  const isM14OrbitPrompt = matchesM14Prompt(
+    ["M14L2_D4", "M14L2_D10", "M14L2_C3", "M14L2_C8", "M14L2_M4", "M14L2_M10"],
+    [
+      "why does a planet keep going around the sun instead of only falling inward",
+      "why is it weak to describe an orbit as a rigid track",
+      "why does the same gravity idea work for both planets and moons",
+      "why does inward pull alone not make the full orbit story",
+      "summarize why planets orbit the sun in one strong sentence",
+      "explain in one sentence why a moon around a planet and a planet around the sun can share the same orbit idea",
+    ],
+  );
+
+  if (isM14OrbitPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["gravity", "hub pull", "sun's pull", "inward pull"],
+        ["forward motion", "moving forward"],
+        ["orbit", "curved path", "route"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["orbit", "route"],
+        ["not", "rather than"],
+        ["track", "rail", "built structure"],
+        ["gravity", "motion", "caused"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["gravity", "same rule", "same idea"],
+        ["sun", "planet"],
+        ["moon", "central body", "host body"],
+      ])
+    );
+  }
+
+  const isM14DayNightPrompt = matchesM14Prompt(
+    ["M14L3_D4", "M14L3_D10", "M14L3_C3", "M14L3_C8", "M14L3_M4", "M14L3_M10"],
+    [
+      "why is it weak to say day and night happen because earth goes around the sun",
+      "why can one side of earth have day while the other has night at the same time",
+      "explain how rotation creates the day night cycle",
+      "why is the half lit half dark picture useful for the day night story",
+      "summarize day and night in one strong sentence",
+      "explain in one sentence why the yearly orbit cannot be the direct cause of the 24 hour day night cycle",
+    ],
+  );
+
+  if (isM14DayNightPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["rotation", "spin"],
+        ["day", "night", "lit half", "dark half", "sunlight"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["orbit", "yearly orbit", "year"],
+        ["not", "rather than", "too long"],
+        ["24 hour", "daily", "rotation", "spin"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["half lit", "lit half", "half dark", "dark half"],
+        ["same time", "simultaneous", "at once"],
+      ])
+    );
+  }
+
+  const isM14SeasonPrompt = matchesM14Prompt(
+    ["M14L4_D4", "M14L4_D10", "M14L4_C3", "M14L4_C8", "M14L4_M4", "M14L4_M10"],
+    [
+      "why is it weak to explain summer by saying earth is simply closer to the sun then",
+      "why do opposite hemispheres not get the same season at the same time",
+      "why do opposite hemispheres get opposite seasons",
+      "why is the fixed axis direction important in the seasons lesson",
+      "summarize the cause of seasons in one strong sentence",
+      "explain in one sentence why the distance only explanation fails for seasons",
+    ],
+  );
+
+  if (isM14SeasonPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["tilt", "axial tilt", "tilted axis"],
+        ["sunlight angle", "direct sunlight", "leans toward", "leans away"],
+        ["season", "year", "hemisphere"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["opposite hemispheres", "one hemisphere", "other hemisphere"],
+        ["toward", "leans toward"],
+        ["away", "leans away"],
+        ["different seasons", "opposite seasons"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["distance"],
+        ["not", "rather than"],
+        ["tilt", "sunlight angle", "hemisphere"],
+      ])
+    );
+  }
+
+  const isM14MoonPrompt = matchesM14Prompt(
+    ["M14L5_D4", "M14L5_D10", "M14L5_C3", "M14L5_C8", "M14L5_M4", "M14L5_M10"],
+    [
+      "why is it weak to say ordinary moon phases are caused by earth's shadow",
+      "why does the moon not need to make its own light to show phases",
+      "explain why the moon is always half lit even though we do not always see a full moon",
+      "why does first quarter not mean only a quarter of the moon is lit",
+      "summarize moon phases in one strong sentence",
+      "explain in one sentence why earth's shadow is not the monthly cause of normal phases",
+    ],
+  );
+
+  if (isM14MoonPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["sun", "sunlight", "reflected sunlight"],
+        ["half lit", "lit half", "sunlit half"],
+        ["view", "changing view", "see different amounts", "viewing geometry"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["earth's shadow"],
+        ["eclipse", "lunar eclipse"],
+        ["not", "rather than"],
+        ["ordinary phases", "monthly phases", "normal phases"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["quarter", "phase cycle", "orbit position"],
+        ["not", "rather than"],
+        ["quarter lit", "only a quarter lit"],
+      ])
+    );
+  }
+
+  const isM14OuterLapPrompt = matchesM14Prompt(
+    ["M14L6_D4", "M14L6_D10", "M14L6_C3", "M14L6_C8", "M14L6_M4", "M14L6_M10"],
+    [
+      "why does a farther ring usually mean a longer year lap in this module",
+      "why is it weak to say all planets should take about one year because they all orbit the sun",
+      "explain the qualitative distance period rule in one sentence",
+      "why does counting laps in the same time window help you compare years",
+      "summarize the outer lap idea in one strong sentence",
+      "explain in one sentence why sharing the same sun does not force all planets to have the same year length",
+    ],
+  );
+
+  if (isM14OuterLapPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["farther", "greater distance", "farther ring", "greater ring reach"],
+        ["longer", "takes longer"],
+        ["orbit", "orbital period", "year lap", "year"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same time", "same interval", "same time window"],
+        ["more laps", "fewer laps", "lap count"],
+        ["shorter period", "longer period", "year"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["same sun", "orbit the sun"],
+        ["different distances", "different ring reaches", "farther or closer"],
+        ["different years", "different periods", "longer or shorter"],
       ])
     );
   }
