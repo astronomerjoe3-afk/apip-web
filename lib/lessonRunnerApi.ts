@@ -5235,6 +5235,7 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         ["self-lit", "shine", "luminous", "produces its own light", "emits light", "light source"],
       ]) ||
       includesAnyPhrase(candidate, [
+        "light source",
         "it is a light source",
         "because it is a light source",
         "because stars are light sources",
@@ -5266,6 +5267,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         ["remnant", "white dwarf", "black hole", "supernova", "final state", "end state"],
       ]) ||
       matchesPhraseGroups(candidate, [
+        ["mass", "masses", "different mass", "different masses"],
+        ["different", "difference", "depends", "determines", "changes", "decides"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
         ["not every", "not all", "depends", "only massive", "only very massive", "different stars end differently"],
         ["supernova", "black hole"],
         ["white dwarf", "different ending", "lower-mass route"],
@@ -5274,6 +5279,12 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "mass decides how the star ends",
         "the ending depends on the star's mass",
         "more massive stars can end differently",
+        "because of the difference in their masses",
+        "because they have different masses",
+        "because their masses are different",
+        "because of their masses",
+        "because mass determines the ending",
+        "because mass changes the ending",
       ])
     );
   }
@@ -5312,6 +5323,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "the milky way is a galaxy with many stars",
         "the solar system is inside the milky way",
         "a galaxy is one system among many in the universe",
+        "because a galaxy has many stars",
+        "because the milky way is a galaxy",
       ])
     );
   }
@@ -5351,6 +5364,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "a light-year is a distance unit",
         "it measures distance not time",
         "it tells how far away something is",
+        "because it is distance not time",
+        "because it is about distance",
       ])
     );
   }
@@ -5395,6 +5410,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "redshift means the wavelength is longer",
         "the light is stretched to a longer wavelength",
         "farther galaxies usually have bigger redshifts",
+        "because the wavelength is longer",
+        "because the light is stretched",
       ])
     );
   }
@@ -5438,6 +5455,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "the big bang is the expansion of space",
         "space itself expanded from a hot dense beginning",
         "the redshift pattern supports expansion",
+        "because space itself expands",
+        "because the universe expanded",
       ])
     );
   }
