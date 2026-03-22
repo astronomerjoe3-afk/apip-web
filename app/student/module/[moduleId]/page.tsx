@@ -174,6 +174,9 @@ const MODULE_ONE_DESCRIPTION =
 const MODULE_FOUR_TITLE = "Pressure";
 const MODULE_FOUR_DESCRIPTION =
   "Pressure in solids, liquid pressure, and atmospheric pressure. Separate pressure from force, track how area and depth matter, and use the main pressure equations carefully.";
+const MODULE_FOURTEEN_TITLE = "Solar System";
+const MODULE_FOURTEEN_DESCRIPTION =
+  "Describe the Solar System as one Sun-centered family, distinguish planets from dwarf planets, moons, asteroids, and comets, and use rotation, axial tilt, Moon-phase geometry, and orbital distance to explain what we observe.";
 
 function normalizeModuleTitle(moduleId: string | undefined | null, title: string | undefined): string | undefined {
   const trimmed = String(title || "").trim();
@@ -204,6 +207,25 @@ function normalizeModuleDescription(moduleId: string | undefined | null, title: 
     return MODULE_FOUR_DESCRIPTION;
   }
   return trimmed;
+}
+
+function fallbackModuleMeta(moduleId: string): ModuleCatalog | null {
+  const normalizedModuleId = normalizeModuleId(moduleId);
+  if (!normalizedModuleId) return null;
+
+  if (normalizedModuleId === "M14") {
+    return {
+      id: "M14",
+      title: MODULE_FOURTEEN_TITLE,
+      description: MODULE_FOURTEEN_DESCRIPTION,
+    };
+  }
+
+  return {
+    id: normalizedModuleId,
+    title: normalizeModuleTitle(normalizedModuleId, normalizedModuleId),
+    description: undefined,
+  };
 }
 
 
@@ -397,27 +419,10 @@ export default function StudentModulePage() {
       try {
         setErr("");
 
-        const moduleResponse = await apipGet<{ ok: boolean; module: ModuleCatalog }>(
-          `/modules/${encodeURIComponent(moduleId)}`,
-        );
-        setModuleMeta({
-          ...moduleResponse.module,
-          title: normalizeModuleTitle(moduleResponse.module.id || moduleId, moduleResponse.module.title),
-          description: normalizeModuleDescription(moduleResponse.module.id || moduleId, moduleResponse.module.title, moduleResponse.module.description),
-        });
-
-
-        if (
-          moduleResponse.module.access?.tier === "premium" &&
-          moduleResponse.module.access?.is_unlocked === false
-        ) {
-          setModuleProgress(null);
-          setLessons([]);
-          setActiveIdx(0);
-          return;
-        }
-
-        const [lessonsResult, progressResult] = await Promise.allSettled([
+        const [moduleResult, lessonsResult, progressResult] = await Promise.allSettled([
+          apipGet<{ ok: boolean; module: ModuleCatalog }>(
+            `/modules/${encodeURIComponent(moduleId)}`,
+          ),
           apipGet<LessonsResponse>(
             `/modules/${encodeURIComponent(moduleId)}/lessons`,
           ),
@@ -425,6 +430,36 @@ export default function StudentModulePage() {
             `/student/modules/${encodeURIComponent(moduleId)}/progress`,
           ),
         ]);
+
+        const moduleResponse =
+          moduleResult.status === "fulfilled" ? moduleResult.value : null;
+        const resolvedModuleMeta = moduleResponse
+          ? {
+              ...moduleResponse.module,
+              title: normalizeModuleTitle(moduleResponse.module.id || moduleId, moduleResponse.module.title),
+              description: normalizeModuleDescription(
+                moduleResponse.module.id || moduleId,
+                moduleResponse.module.title,
+                moduleResponse.module.description,
+              ),
+            }
+          : fallbackModuleMeta(moduleId);
+
+        if (!resolvedModuleMeta && lessonsResult.status !== "fulfilled") {
+          throw (moduleResult.status === "rejected" ? moduleResult.reason : lessonsResult.reason);
+        }
+
+        setModuleMeta(resolvedModuleMeta);
+
+        if (
+          moduleResponse?.module.access?.tier === "premium" &&
+          moduleResponse.module.access?.is_unlocked === false
+        ) {
+          setModuleProgress(null);
+          setLessons([]);
+          setActiveIdx(0);
+          return;
+        }
 
         if (lessonsResult.status !== "fulfilled") {
           throw lessonsResult.reason;
