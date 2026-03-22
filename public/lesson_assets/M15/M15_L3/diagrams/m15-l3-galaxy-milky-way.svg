@@ -8,14 +8,16 @@
   <path d="M 176 430 C 312 566, 522 566, 638 456" fill="none" stroke="#7dd3fc" stroke-width="18"/>
   <circle cx="388" cy="398" r="26" fill="#f8fafc" stroke="#bae6fd" stroke-width="4"/>
   <circle cx="520" cy="372" r="10" fill="#facc15" stroke="#ffffff" stroke-width="2"/>
-  <line x1="544" y1="372" x2="652" y2="326" stroke="#fde68a" stroke-width="4"/>
-  <text x="670" y="320" fill="#fde68a" text-anchor="start" font-size="22" font-family="Arial">Sun inside the Milky Way</text>
-  <rect x="844" y="194" width="356" height="356" rx="24" fill="#111827" stroke="#334155" stroke-width="3"/>
+  <line x1="544" y1="372" x2="646" y2="336" stroke="#fde68a" stroke-width="4"/>
+  <text x="664" y="314" fill="#fde68a" text-anchor="start" font-size="22" font-family="Arial" font-weight="700">Sun position</text>
+  <text x="664" y="342" fill="#fde68a" text-anchor="start" font-size="20" font-family="Arial">inside the Milky Way</text>
+  <rect x="844" y="194" width="356" height="376" rx="24" fill="#111827" stroke="#334155" stroke-width="3"/>
   <text x="1022" y="244" fill="#ffffff" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700">Beacon-city = galaxy</text>
   <text x="1022" y="306" fill="#86efac" text-anchor="middle" font-size="24" font-family="Arial">gravity-bound system</text>
   <text x="1022" y="362" fill="#e2e8f0" text-anchor="middle" font-size="24" font-family="Arial">many stars, gas, and dust</text>
-  <text x="1022" y="418" fill="#bfdbfe" text-anchor="middle" font-size="24" font-family="Arial">Milky Way = our home spiral city</text>
-  <text x="1022" y="474" fill="#f8fafc" text-anchor="middle" font-size="24" font-family="Arial">Solar System sits inside it</text>
+  <text x="1022" y="416" fill="#bfdbfe" text-anchor="middle" font-size="24" font-family="Arial">Milky Way = our home</text>
+  <text x="1022" y="446" fill="#bfdbfe" text-anchor="middle" font-size="24" font-family="Arial">spiral city</text>
+  <text x="1022" y="500" fill="#f8fafc" text-anchor="middle" font-size="24" font-family="Arial">Solar System sits inside it</text>
   <rect x="186" y="576" width="914" height="66" rx="20" fill="#172033" stroke="#334155" stroke-width="2"/>
   <text x="643" y="618" fill="#ffffff" text-anchor="middle" font-size="23" font-family="Arial">A galaxy is far larger than one star system, but it is still only one part of the universe.</text>
 </svg>
