@@ -342,5 +342,24 @@ export default function A5SimulationPanels({
     );
   }
 
-  return null;
+  return renderPanel(
+    "Lesson explorer unavailable",
+    <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+      This lesson is waiting for its lesson-specific Packet-Pattern Frame panel.
+    </div>,
+    "Explorer placeholder",
+    <div className="rounded-3xl border border-dashed border-slate-300 bg-white/80 p-8 text-center text-sm text-slate-600">
+      No generic fallback panel is being substituted here.
+    </div>,
+    <>
+      {metricCard("Lesson", lessonKey, "border-sky-200 bg-sky-50 text-sky-900")}
+      {metricCard("Status", "explicit panel required", "border-amber-200 bg-amber-50 text-amber-900")}
+    </>,
+    [
+      "Each A5 lesson should own its explorer directly.",
+      "If this appears, the lesson wiring needs a dedicated panel.",
+      "Modern physics lessons should not silently fall through to a generic activity.",
+    ],
+    "This safety fallback is intentionally neutral so an unhandled A5 lesson key cannot masquerade as a different explorer.",
+  );
 }

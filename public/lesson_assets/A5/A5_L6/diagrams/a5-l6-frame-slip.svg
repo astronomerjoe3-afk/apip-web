@@ -10,5 +10,6 @@
   <line x1="760" y1="340" x2="720" y2="620" stroke="#f97316" stroke-width="6"/>
   <line x1="920" y1="340" x2="980" y2="620" stroke="#f97316" stroke-width="6"/>
   <text x="650" y="290" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">Same-now slip</text>
-  <text x="640" y="670" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="26">Different frames need not agree on which separated events are simultaneous.</text>
+  <text x="640" y="670" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="24">Different frames need not agree on which</text>
+  <text x="640" y="702" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="24">separated events are simultaneous.</text>
 </svg>

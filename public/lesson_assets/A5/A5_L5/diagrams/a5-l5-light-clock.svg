@@ -12,5 +12,6 @@
   <line x1="930" y1="620" x2="1040" y2="430" stroke="#38bdf8" stroke-width="8" opacity="0.8"/>
   <line x1="720" y1="350" x2="720" y2="620" stroke="#0f172a" stroke-width="10"/>
   <line x1="1040" y1="430" x2="1040" y2="700" stroke="#0f172a" stroke-width="10"/>
-  <text x="705" y="740" fill="#475569" font-family="Arial, sans-serif" font-size="26">Longer path with the same c means a longer tick.</text>
+  <text x="645" y="740" fill="#475569" font-family="Arial, sans-serif" font-size="24">Longer path with the same c</text>
+  <text x="645" y="772" fill="#475569" font-family="Arial, sans-serif" font-size="24">means a longer tick.</text>
 </svg>

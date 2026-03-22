@@ -1225,6 +1225,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM4Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesA5Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM7Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
@@ -3116,6 +3118,445 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
         "diffraction bends the wave around the edge into the hidden region",
         "the wave spreads around the obstacle edge",
         "edge diffraction lets the wave reach behind the obstacle",
+      ])
+    );
+  }
+
+  const isA5ThresholdVsIntensityPrompt = matchesA5Prompt(
+    ["A5L1_D9", "A5L1_C8"],
+    [],
+  );
+
+  if (isA5ThresholdVsIntensityPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["frequency", "high frequency", "photon energy", "energy per photon"],
+        ["threshold", "work function", "unlock toll"],
+        ["brightness", "intensity", "many photons", "more photons"],
+        ["not enough", "cannot eject", "cannot free", "still fail", "fails"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["single photon", "each photon", "one photon"],
+        ["enough energy", "not enough energy"],
+        ["work function", "threshold"],
+      ])
+    );
+  }
+
+  const isA5BeamCountPrompt = matchesA5Prompt(
+    ["A5L1_D10"],
+    [],
+  );
+
+  if (isA5BeamCountPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["photon", "photons", "packets"],
+        ["per second", "arrival rate", "arrive", "arriving"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["intensity", "beam count"],
+        ["number", "count", "rate"],
+        ["photons", "packets"],
+      ])
+    );
+  }
+
+  const isA5ThresholdFrequencyMeaningPrompt = matchesA5Prompt(
+    ["A5L1_C7"],
+    [],
+  );
+
+  if (isA5ThresholdFrequencyMeaningPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["minimum", "lowest"],
+        ["frequency", "photon"],
+        ["enough energy", "work function", "threshold"],
+        ["eject electrons", "photoelectrons", "emit electrons"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the threshold frequency is the minimum frequency needed to eject electrons",
+        "it is the lowest photon frequency that can overcome the work function",
+      ])
+    );
+  }
+
+  const isA5PhotoelectricAllOrNothingPrompt = matchesA5Prompt(
+    ["A5L1_M9"],
+    [],
+  );
+
+  if (isA5PhotoelectricAllOrNothingPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["one photon", "single photon", "each photon"],
+        ["work function", "threshold", "enough energy"],
+        ["single interaction", "one interaction", "immediate", "all or nothing"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["one photon", "single photon"],
+        ["free", "eject", "emit"],
+        ["electron"],
+        ["enough energy", "work function"],
+      ])
+    );
+  }
+
+  const isA5BrightnessVsElectronEnergyPrompt = matchesA5Prompt(
+    ["A5L1_M10"],
+    [],
+  );
+
+  if (isA5BrightnessVsElectronEnergyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["brightness", "intensity"],
+        ["more photons", "number emitted", "count", "more electrons", "more events"],
+        ["frequency", "photon energy"],
+        ["kinetic energy", "maximum kinetic energy", "Kmax"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "intensity changes how many electrons are emitted but frequency sets their maximum kinetic energy",
+        "brighter light means more photons, not more energy per photoelectron",
+      ])
+    );
+  }
+
+  const isA5PhotoelectricBookkeepingPrompt = matchesA5Prompt(
+    ["A5L2_D9", "A5L2_D10", "A5L2_M9"],
+    [],
+  );
+
+  if (isA5PhotoelectricBookkeepingPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["photon energy", "hf"],
+        ["work function", "phi", "unlock toll"],
+        ["kinetic energy", "Kmax", "leftover", "kick"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["remaining", "leftover"],
+        ["energy"],
+        ["kinetic energy", "Kmax"],
+        ["photoelectron", "electron"],
+      ])
+    );
+  }
+
+  const isA5KmaxFrequencyPrompt = matchesA5Prompt(
+    ["A5L2_C7"],
+    [],
+  );
+
+  if (isA5KmaxFrequencyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["higher frequency", "frequency rises", "frequency increases"],
+        ["more energy", "higher photon energy"],
+        ["Kmax", "kinetic energy", "leftover"],
+        ["increases", "rises", "gets larger"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "higher frequency gives more photon energy so Kmax increases",
+        "once the work function is paid, more photon energy leaves more kinetic energy",
+      ])
+    );
+  }
+
+  const isA5IntensityVsKmaxPrompt = matchesA5Prompt(
+    ["A5L2_C8", "A5L2_M10"],
+    [],
+  );
+
+  if (isA5IntensityVsKmaxPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["intensity", "more light", "beam count"],
+        ["more photons", "more events", "more electrons", "count"],
+        ["frequency", "energy per photon"],
+        ["Kmax", "kinetic energy"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["intensity"],
+        ["does not", "doesnt", "not"],
+        ["Kmax", "kinetic energy"],
+        ["fixed frequency", "if frequency is fixed"],
+      ])
+    );
+  }
+
+  const isA5PatternBuildsFromHitsPrompt = matchesA5Prompt(
+    ["A5L3_D9", "A5L3_C7", "A5L3_M9"],
+    [],
+  );
+
+  if (isA5PatternBuildsFromHitsPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["many hits", "many dots", "repeated detections", "many detections"],
+        ["pattern", "distribution", "interference", "probability"],
+        ["single hit", "localized", "dot", "discrete"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["localized", "local", "single hit", "single dot"],
+        ["pattern", "distribution", "wave-like"],
+        ["both", "together", "at once"],
+      ])
+    );
+  }
+
+  const isA5DeBrogliePrompt = matchesA5Prompt(
+    ["A5L3_D10", "A5L3_C8", "A5L3_M10"],
+    [],
+  );
+
+  if (isA5DeBrogliePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["matter", "particle", "electron"],
+        ["wavelength", "lambda", "de broglie"],
+        ["momentum", "p"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["electron diffraction", "electrons", "diffraction"],
+        ["pattern", "interference", "wave-like"],
+        ["wavelength", "de broglie", "matter wave"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["lambda = h/p", "h over p", "h divided by p"],
+        ["momentum"],
+        ["wavelength"],
+        ["inverse", "smaller", "shorter", "larger", "longer"],
+      ])
+    );
+  }
+
+  const isA5NuclearVsChemicalPrompt = matchesA5Prompt(
+    ["A5L4_D9"],
+    [],
+  );
+
+  if (isA5NuclearVsChemicalPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["nucleus", "nuclear"],
+        ["binding energy", "mass defect"],
+        ["chemical", "electron bonds", "electron-shell", "electron bond"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "nuclear energy comes from the nucleus and binding-energy changes, not ordinary chemical bonds",
+        "chemical energy comes from electron bonds, but nuclear energy comes from the nucleus",
+      ])
+    );
+  }
+
+  const isA5MassDefectMeaningPrompt = matchesA5Prompt(
+    ["A5L4_D10", "A5L4_M10"],
+    [],
+  );
+
+  if (isA5MassDefectMeaningPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["mass defect", "mass difference"],
+        ["energy", "mass-energy", "Delta E = Delta m c^2", "c^2"],
+        ["released", "absorbed", "accounted for", "conserved"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["not disappear", "does not disappear", "not just disappear", "conserved", "accounted for"],
+        ["energy", "mass-energy", "Delta E = Delta m c^2"],
+      ])
+    );
+  }
+
+  const isA5MassDefectLargeEnergyPrompt = matchesA5Prompt(
+    ["A5L4_C7"],
+    [],
+  );
+
+  if (isA5MassDefectLargeEnergyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["Delta E = Delta m c^2", "c^2", "speed of light squared"],
+        ["small mass", "tiny mass difference", "small defect"],
+        ["large energy", "big energy", "large released energy"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "c squared is so large that even a small mass defect can mean a large energy change",
+      ])
+    );
+  }
+
+  const isA5TighterBindingPrompt = matchesA5Prompt(
+    ["A5L4_C8", "A5L4_M9"],
+    [],
+  );
+
+  if (isA5TighterBindingPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["lower energy", "more stable", "tighter", "more tightly bound"],
+        ["release energy", "energy released", "binding energy"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["more tightly bound"],
+        ["final nucleus", "final bundle", "nucleus"],
+        ["lower mass-energy", "lower energy", "more stable"],
+      ])
+    );
+  }
+
+  const isA5TimeDilationCausePrompt = matchesA5Prompt(
+    ["A5L5_D9", "A5L5_M9"],
+    [],
+  );
+
+  if (isA5TimeDilationCausePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same speed of light", "c is constant", "invariant c", "fixed c"],
+        ["longer path", "diagonal path"],
+        ["longer time", "tick takes longer", "time dilation", "slower tick"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the light takes longer because it follows a longer path while still moving at c",
+        "a longer light path with the same c gives a longer tick",
+      ])
+    );
+  }
+
+  const isA5MovingClockMeaningPrompt = matchesA5Prompt(
+    ["A5L5_D10", "A5L5_C8", "A5L5_M10"],
+    [],
+  );
+
+  if (isA5MovingClockMeaningPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["frame", "relative", "another observer", "moving frame"],
+        ["moving clock", "proper time", "clock at rest"],
+        ["longer interval", "less elapsed time", "dilated time", "ticks slower"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["not broken", "not faulty", "works normally"],
+        ["frame", "rest frame", "another observer"],
+        ["speed of light", "c", "relativity"],
+      ])
+    );
+  }
+
+  const isA5LightClockModelPrompt = matchesA5Prompt(
+    ["A5L5_C7"],
+    [],
+  );
+
+  if (isA5LightClockModelPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["light clock", "pulse clock"],
+        ["light travel", "c", "speed of light"],
+        ["tick", "time measurement", "clock"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "a light clock makes the speed of light part of the time argument itself",
+        "because its tick is set by light travel, invariant c becomes a timing rule",
+      ])
+    );
+  }
+
+  const isA5ProperLengthPrompt = matchesA5Prompt(
+    ["A5L6_D9"],
+    [],
+  );
+
+  if (isA5ProperLengthPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["proper length", "rest frame"],
+        ["shorter", "contracted"],
+        ["direction of motion", "along the motion"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the proper length is measured in the rest frame, while moving frames measure a shorter length along the motion",
+      ])
+    );
+  }
+
+  const isA5SimultaneityMeaningPrompt = matchesA5Prompt(
+    ["A5L6_D10"],
+    [],
+  );
+
+  if (isA5SimultaneityMeaningPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["simultaneous", "same now", "simultaneity", "same time"],
+        ["frame", "observer"],
+        ["disagree", "not universal", "different"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "different frames need not share one universal now",
+        "simultaneity is frame-dependent",
+      ])
+    );
+  }
+
+  const isA5LengthDirectionPrompt = matchesA5Prompt(
+    ["A5L6_C7"],
+    [],
+  );
+
+  if (isA5LengthDirectionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["direction of motion", "parallel", "motion-aligned"],
+        ["length contraction", "contracted"],
+        ["along", "only along"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "the contraction is along the direction of motion",
+        "only the motion-parallel length is contracted in this treatment",
+      ])
+    );
+  }
+
+  const isA5CAndSimultaneityPrompt = matchesA5Prompt(
+    ["A5L6_C8", "A5L6_M9"],
+    [],
+  );
+
+  if (isA5CAndSimultaneityPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["same speed of light", "invariant c", "fixed c"],
+        ["simultaneous", "same time", "same now"],
+        ["frame", "observer"],
+        ["not universal", "disagree", "different bookkeeping"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "if c is invariant, different frames can disagree about simultaneity",
+        "one universal now cannot survive if every frame keeps the same c",
+      ])
+    );
+  }
+
+  const isA5RelativityMassEnergyLinkPrompt = matchesA5Prompt(
+    ["A5L6_M10"],
+    [],
+  );
+
+  if (isA5RelativityMassEnergyLinkPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["c", "speed of light"],
+        ["relativity", "frames"],
+        ["mass-energy", "E = mc^2", "mass defect"],
+        ["same constant", "shared link", "same c"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "relativity and mass-energy are linked by the same constant c",
+        "the same c that shapes frame effects also appears in E = mc^2",
       ])
     );
   }
