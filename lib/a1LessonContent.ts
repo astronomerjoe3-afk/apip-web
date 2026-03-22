@@ -23,7 +23,7 @@ const A1_ASSET_BASE = "/lesson_assets/A1";
 
 const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
   A1L1: {
-    image_url: `${A1_ASSET_BASE}/A1_L1/diagrams/a1-l1-motion-card.svg`,
+    image_url: `${A1_ASSET_BASE}/A1_L1/diagrams/a1_l1_motion_card_diagram.svg`,
     visual_title: "The five-slot motion card only belongs to constant-acceleration stories",
     visual_caption: "Keep start pace, end pace, run span, steady shift, and clock count on one card so SUVAT feels like one bookkeeping system rather than a bag of letters.",
     visual_callouts: [
@@ -33,7 +33,7 @@ const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
     ],
   },
   A1L2: {
-    image_url: `${A1_ASSET_BASE}/A1_L2/diagrams/a1-l2-steady-push-lane.svg`,
+    image_url: `${A1_ASSET_BASE}/A1_L2/diagrams/a1_l2_steady_push_diagram.svg`,
     visual_title: "A steady push changes the velocity arrow by the same amount each second",
     visual_caption: "The lane view ties signed acceleration, velocity change, and displacement growth together on one board.",
     visual_callouts: [
@@ -43,7 +43,7 @@ const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
     ],
   },
   A1L3: {
-    image_url: `${A1_ASSET_BASE}/A1_L3/diagrams/a1-l3-launch-split.svg`,
+    image_url: `${A1_ASSET_BASE}/A1_L3/diagrams/a1_l3_launch_split_diagram.svg`,
     visual_title: "Projectile motion is one launch built from two independent components",
     visual_caption: "The launch-split visual keeps horizontal and vertical motion separate while time stays common to both.",
     visual_callouts: [
@@ -53,7 +53,7 @@ const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
     ],
   },
   A1L4: {
-    image_url: `${A1_ASSET_BASE}/A1_L4/diagrams/a1-l4-orbit-ring.svg`,
+    image_url: `${A1_ASSET_BASE}/A1_L4/diagrams/a1_l4_orbit_ring_diagram.svg`,
     visual_title: "Circular motion needs a constant inward turn even at constant speed",
     visual_caption: "The orbit-ring visual separates speed from velocity change so inward acceleration stays visible.",
     visual_callouts: [
@@ -63,7 +63,7 @@ const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
     ],
   },
   A1L5: {
-    image_url: `${A1_ASSET_BASE}/A1_L5/diagrams/a1-l5-gravity-beacon.svg`,
+    image_url: `${A1_ASSET_BASE}/A1_L5/diagrams/a1_l5_gravity_beacon_diagram.svg`,
     visual_title: "Gravitational fields are radial pull maps that weaken with distance",
     visual_caption: "The beacon map makes field direction and inverse-square weakening visible before force calculations begin.",
     visual_callouts: [
@@ -73,7 +73,7 @@ const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
     ],
   },
   A1L6: {
-    image_url: `${A1_ASSET_BASE}/A1_L6/diagrams/a1-l6-orbit-bridge.svg`,
+    image_url: `${A1_ASSET_BASE}/A1_L6/diagrams/a1_l6_orbit_bridge_diagram.svg`,
     visual_title: "Orbiting is the bridge where gravity becomes the centripetal pull",
     visual_caption: "The bridge board compares required inward acceleration with local gravitational field strength so orbiting is seen as one connected mechanics story.",
     visual_callouts: [

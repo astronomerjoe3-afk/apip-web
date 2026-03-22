@@ -24,7 +24,7 @@
   <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
 
   <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Parallel plates create a straight electric slope</text>
+        font-size="38" font-family="Arial" font-weight="bold">Orbit Bridge compares inward turning need with inward gravity field</text>
   <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Show large facing plates with a uniform field in the gap, equipotential layers, and labels tying Delta V and d to E.</text>
+        font-size="20" font-family="Arial">Show a satellite with tangent velocity, inward gravitational pull, and a side panel equating gravitational field strength with required centripetal acceleration.</text>
 </svg>
