@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#0b1020"/>
+  <text x="640" y="72" fill="#ffffff" text-anchor="middle" font-size="38" font-family="Arial" font-weight="700">Self-Lit Beacon vs Reflective World</text>
+  <text x="640" y="112" fill="#cbd5e1" text-anchor="middle" font-size="20" font-family="Arial">A star makes light in its core, while a planet mainly shines by reflecting incoming starlight.</text>
+  <rect x="86" y="162" width="486" height="466" rx="28" fill="#111827" stroke="#334155" stroke-width="3"/>
+  <rect x="708" y="162" width="486" height="466" rx="28" fill="#111827" stroke="#334155" stroke-width="3"/>
+  <text x="329" y="212" fill="#fde68a" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700">Beacon: star</text>
+  <text x="951" y="212" fill="#bfdbfe" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700">Lit world: planet</text>
+  <circle cx="329" cy="380" r="92" fill="#facc15" stroke="#fde68a" stroke-width="6"/>
+  <circle cx="329" cy="380" r="36" fill="#f97316"/>
+  <text x="329" y="389" fill="#111827" text-anchor="middle" font-size="28" font-family="Arial" font-weight="700">fusion</text>
+  <text x="329" y="520" fill="#f8fafc" text-anchor="middle" font-size="24" font-family="Arial">core fusion releases energy</text>
+  <text x="329" y="562" fill="#fde68a" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700">self-lit beacon</text>
+  <circle cx="951" cy="392" r="80" fill="#2563eb" stroke="#93c5fd" stroke-width="5"/>
+  <path d="M 450 354 C 620 278, 752 280, 858 342" fill="none" stroke="#fbbf24" stroke-width="9"/>
+  <polygon points="858,342 824,322 834,360" fill="#fbbf24"/>
+  <text x="652" y="300" fill="#fde68a" text-anchor="middle" font-size="22" font-family="Arial">incoming starlight</text>
+  <path d="M 1000 470 C 1088 506, 1144 520, 1198 520" fill="none" stroke="#93c5fd" stroke-width="8"/>
+  <polygon points="1198,520 1162,504 1168,538" fill="#93c5fd"/>
+  <text x="1056" y="564" fill="#bfdbfe" text-anchor="middle" font-size="22" font-family="Arial">reflected light reaches the observer</text>
+  <text x="951" y="520" fill="#f8fafc" text-anchor="middle" font-size="24" font-family="Arial">bright by reflection, not by self-emission</text>
+  <rect x="190" y="602" width="900" height="64" rx="20" fill="#172033" stroke="#334155" stroke-width="2"/>
+  <text x="640" y="642" fill="#ffffff" text-anchor="middle" font-size="24" font-family="Arial">Classification rule: ask where the light comes from before deciding whether the object is a star.</text>
+</svg>

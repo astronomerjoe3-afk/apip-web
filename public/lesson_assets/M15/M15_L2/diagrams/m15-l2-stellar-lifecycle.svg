@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#0b1020"/>
+  <text x="640" y="70" fill="#ffffff" text-anchor="middle" font-size="38" font-family="Arial" font-weight="700">Stellar Lifecycle Branches by Mass</text>
+  <text x="640" y="110" fill="#cbd5e1" text-anchor="middle" font-size="20" font-family="Arial">Stars share an early path, then split into different later routes depending on mass.</text>
+  <rect x="88" y="192" width="190" height="78" rx="22" fill="#1d4ed8" stroke="#93c5fd" stroke-width="3"/>
+  <rect x="342" y="192" width="190" height="78" rx="22" fill="#7c3aed" stroke="#c4b5fd" stroke-width="3"/>
+  <rect x="596" y="192" width="214" height="78" rx="22" fill="#0f766e" stroke="#99f6e4" stroke-width="3"/>
+  <text x="183" y="240" fill="#ffffff" text-anchor="middle" font-size="25" font-family="Arial" font-weight="700">Glow cradle</text>
+  <text x="437" y="240" fill="#ffffff" text-anchor="middle" font-size="25" font-family="Arial" font-weight="700">Young spark</text>
+  <text x="703" y="240" fill="#ffffff" text-anchor="middle" font-size="25" font-family="Arial" font-weight="700">Steady beacon</text>
+  <line x1="278" y1="231" x2="342" y2="231" stroke="#38bdf8" stroke-width="6"/>
+  <line x1="532" y1="231" x2="596" y2="231" stroke="#38bdf8" stroke-width="6"/>
+  <line x1="810" y1="231" x2="916" y2="330" stroke="#38bdf8" stroke-width="6"/>
+  <line x1="810" y1="231" x2="916" y2="504" stroke="#38bdf8" stroke-width="6"/>
+  <rect x="892" y="300" width="230" height="78" rx="22" fill="#ea580c" stroke="#fdba74" stroke-width="3"/>
+  <rect x="896" y="470" width="220" height="78" rx="22" fill="#64748b" stroke="#e2e8f0" stroke-width="3"/>
+  <rect x="896" y="594" width="220" height="78" rx="22" fill="#dc2626" stroke="#fecaca" stroke-width="3"/>
+  <text x="1007" y="348" fill="#ffffff" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700">Swollen ember</text>
+  <text x="1006" y="518" fill="#ffffff" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700">White ember</text>
+  <text x="1006" y="642" fill="#ffffff" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700">Blast bloom -&gt; dense spark / dark well</text>
+  <text x="852" y="412" fill="#fed7aa" text-anchor="end" font-size="20" font-family="Arial">lower-mass path</text>
+  <text x="850" y="578" fill="#fecaca" text-anchor="end" font-size="20" font-family="Arial">higher-mass path</text>
+  <rect x="114" y="602" width="654" height="64" rx="20" fill="#172033" stroke="#334155" stroke-width="2"/>
+  <text x="441" y="642" fill="#ffffff" text-anchor="middle" font-size="23" font-family="Arial">Mass changes the later branch, so not all stars end the same way.</text>
+</svg>

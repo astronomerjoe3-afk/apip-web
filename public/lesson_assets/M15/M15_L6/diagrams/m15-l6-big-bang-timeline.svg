@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#0b1020"/>
+  <text x="640" y="72" fill="#ffffff" text-anchor="middle" font-size="38" font-family="Arial" font-weight="700">The Great Unfurling Expansion Story</text>
+  <text x="640" y="112" fill="#cbd5e1" text-anchor="middle" font-size="20" font-family="Arial">The Big Bang model describes a hot dense early universe and the later expansion of space itself.</text>
+  <circle cx="214" cy="388" r="48" fill="#f97316" stroke="#fde68a" stroke-width="5"/>
+  <text x="214" y="470" fill="#fdba74" text-anchor="middle" font-size="22" font-family="Arial">hot dense early state</text>
+  <line x1="276" y1="388" x2="540" y2="388" stroke="#38bdf8" stroke-width="8"/>
+  <polygon points="540,388 504,370 504,406" fill="#38bdf8"/>
+  <ellipse cx="738" cy="388" rx="110" ry="60" fill="none" stroke="#60a5fa" stroke-width="4"/>
+  <ellipse cx="738" cy="388" rx="176" ry="98" fill="none" stroke="#7dd3fc" stroke-width="3"/>
+  <ellipse cx="738" cy="388" rx="246" ry="136" fill="none" stroke="#bae6fd" stroke-width="2"/>
+  <text x="738" y="562" fill="#bfdbfe" text-anchor="middle" font-size="26" font-family="Arial" font-weight="700">space itself expands</text>
+  <rect x="946" y="214" width="262" height="344" rx="24" fill="#111827" stroke="#334155" stroke-width="3"/>
+  <text x="1077" y="266" fill="#ffffff" text-anchor="middle" font-size="28" font-family="Arial" font-weight="700">Evidence panel</text>
+  <text x="1077" y="332" fill="#e2e8f0" text-anchor="middle" font-size="22" font-family="Arial">farther galaxy</text>
+  <text x="1077" y="376" fill="#fca5a5" text-anchor="middle" font-size="22" font-family="Arial">larger redshift</text>
+  <text x="1077" y="420" fill="#86efac" text-anchor="middle" font-size="22" font-family="Arial">supports expansion</text>
+  <text x="1077" y="486" fill="#fde68a" text-anchor="middle" font-size="20" font-family="Arial">not an explosion into empty space</text>
+  <rect x="118" y="606" width="1042" height="64" rx="20" fill="#172033" stroke="#334155" stroke-width="2"/>
+  <text x="639" y="646" fill="#ffffff" text-anchor="middle" font-size="23" font-family="Arial">The Big Bang model is strongest when the expansion geometry and the redshift evidence are read together.</text>
+</svg>
