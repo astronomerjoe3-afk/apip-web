@@ -186,12 +186,19 @@ type TechnicalWordCard = {
   why_it_matters?: string;
 };
 
+type CurriculumPanel = {
+  title: string;
+  summary?: string;
+  bullets?: string[];
+};
+
 type ScaffoldSection = {
   heading: string;
   body: string;
   analogy?: string;
   visual?: ScaffoldSectionVisual;
   technical_words?: TechnicalWordCard[];
+  curriculum_panels?: CurriculumPanel[];
   worked_example?: {
     prompt: string;
     steps: string[];
@@ -1142,6 +1149,28 @@ export default function LessonRunner({
                         <span className="font-medium text-slate-700">Why it matters:</span>{" "}
                         {entry.why_it_matters}
                       </p>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+
+            {section.curriculum_panels?.length ? (
+              <div className="mt-5 grid gap-4 xl:grid-cols-3">
+                {section.curriculum_panels.map((panel) => (
+                  <div key={panel.title} className="rounded-2xl border border-indigo-100 bg-[radial-gradient(circle_at_top,_rgba(238,242,255,0.92),_rgba(255,255,255,0.98)_72%)] p-5 shadow-sm">
+                    <p className="text-base font-semibold text-slate-900">{panel.title}</p>
+                    {panel.summary ? (
+                      <p className="mt-2 text-sm leading-6 text-slate-700">{panel.summary}</p>
+                    ) : null}
+                    {panel.bullets?.length ? (
+                      <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-700">
+                        {panel.bullets.map((item) => (
+                          <li key={item} className="rounded-xl bg-white/85 px-3 py-2 shadow-sm ring-1 ring-indigo-100">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     ) : null}
                   </div>
                 ))}
