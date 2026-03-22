@@ -350,9 +350,7 @@ function moduleFallbackWords(lesson: UnknownRecord, lessonCode: string): Technic
   const seeds = MODULE_TECHNICAL_WORDS[moduleCode] || [];
   if (seeds.length === 0) return [];
 
-  const strings: string[] = [];
-  collectLessonStrings(lesson, strings);
-  const corpus = normalizeGlossaryText(strings.join(" "));
+  const corpus = lessonCorpus(lesson);
 
   const scored = seeds
     .map((seed, index) => ({
@@ -383,8 +381,48 @@ function moduleFallbackWords(lesson: UnknownRecord, lessonCode: string): Technic
   );
 }
 
+function lessonCorpus(lesson: UnknownRecord): string {
+  const strings: string[] = [];
+  collectLessonStrings(lesson, strings);
+  return normalizeGlossaryText(strings.join(" "));
+}
+
+function scoreEntryAgainstCorpus(entry: TechnicalWordEntry, corpus: string): number {
+  const key = normalizeGlossaryText(entry.term);
+  if (!key) return 0;
+  return corpus.includes(key) ? Math.max(1, key.split(" ").length) : 0;
+}
+
+function rankLessonTechnicalWords(
+  entries: TechnicalWordEntry[],
+  corpus: string,
+  authoredCount: number,
+): TechnicalWordEntry[] {
+  const scored = uniqueEntries(entries)
+    .map((entry, index) => ({
+      entry,
+      index,
+      score: scoreEntryAgainstCorpus(entry, corpus) + (index < authoredCount ? 0.25 : 0),
+    }))
+    .sort((left, right) => {
+      if (right.score !== left.score) return right.score - left.score;
+      return left.index - right.index;
+    });
+
+  const chosen = scored.filter((item) => item.score > 0).slice(0, 6);
+  if (chosen.length < 4) {
+    scored.forEach((item) => {
+      if (chosen.length >= 6) return;
+      if (chosen.some((current) => normalizeGlossaryText(current.entry.term) === normalizeGlossaryText(item.entry.term))) return;
+      chosen.push(item);
+    });
+  }
+
+  return chosen.slice(0, 6).map((item) => item.entry);
+}
+
 export function technicalWordsForLesson(lesson: UnknownRecord, lessonCode: string): TechnicalWordEntry[] {
   const authored = authoredTechnicalWords(lesson);
-  if (authored.length >= 4) return authored.slice(0, 6);
-  return uniqueEntries([...authored, ...moduleFallbackWords(lesson, lessonCode)]).slice(0, 6);
+  const corpus = lessonCorpus(lesson);
+  return rankLessonTechnicalWords([...authored, ...moduleFallbackWords(lesson, lessonCode)], corpus, authored.length);
 }
