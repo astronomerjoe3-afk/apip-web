@@ -1240,6 +1240,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM12Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM15Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -5195,6 +5197,210 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
       ["another coil", "secondary"],
       ["turn count", "turns ratio", "control output voltage", "two-coil"],
     ]);
+  }
+
+  const isM15StarPrompt = matchesM15Prompt(
+    ["M15L1_D4", "M15L1_D8", "M15L1_D10", "M15L1_C5", "M15L1_C7", "M15L1_M6", "M15L1_M9"],
+    [
+      "why is brightness by itself too weak to prove something is a star",
+      "why does reflected light not turn a planet into a star",
+      "why does fusion belong in the star definition at this stage",
+      "why is ask where the light comes from a stronger rule than ask which object looks brightest",
+      "explain in one sentence why the moon can look bright without being a star",
+      "why does a brightness ranking never settle the star versus planet question by itself",
+    ],
+  );
+
+  if (isM15StarPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["star", "self-lit", "self-luminous", "produces its own light", "makes its own light"],
+        ["planet", "moon", "reflective world", "reflective body"],
+        ["reflect", "reflection", "borrowed light", "sunlight"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["brightness", "bright", "appearance"],
+        ["not enough", "too weak", "cannot tell", "not by itself", "mislead"],
+        ["source", "where the light comes from", "self-produced light", "makes its own light"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["fusion"],
+        ["core", "internal"],
+        ["energy", "power"],
+        ["self-lit", "shine", "luminous", "produces its own light"],
+      ])
+    );
+  }
+
+  const isM15LifecyclePrompt = matchesM15Prompt(
+    ["M15L2_D9", "M15L2_D10", "M15L2_C7", "M15L2_C8", "M15L2_M8", "M15L2_M10"],
+    [
+      "why is a supernova not the ending for every star",
+      "why do white dwarfs and black holes belong to different later paths in this lesson",
+      "why does the lifecycle diagram branch instead of staying one straight chain",
+      "why does the same beginning in a glow cradle not guarantee the same ending for every star",
+      "explain in one sentence why mass is the first thing to check before predicting a stellar remnant",
+      "why is a black hole not the default ending for every star in this module",
+    ],
+  );
+
+  if (isM15LifecyclePrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["mass", "stellar mass", "more massive", "lower-mass", "high-mass"],
+        ["branch", "later path", "route", "different path", "different ending"],
+        ["remnant", "white dwarf", "black hole", "supernova"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["not every", "not all", "depends", "only massive", "only very massive"],
+        ["supernova", "black hole"],
+        ["white dwarf", "different ending", "lower-mass route"],
+      ])
+    );
+  }
+
+  const isM15GalaxyPrompt = matchesM15Prompt(
+    ["M15L3_D9", "M15L3_D10", "M15L3_C7", "M15L3_C8", "M15L3_M8", "M15L3_M10"],
+    [
+      "why is the solar system not the same thing as the milky way",
+      "why is a galaxy not the whole universe",
+      "why does gravity belong in the galaxy definition rather than as an extra detail",
+      "why is a star not the same scale as a galaxy even though both shine",
+      "explain in one sentence why the milky way is stronger as a galaxy than as a solar system",
+      "why is the universe stronger as the biggest scale in this lesson than as another word for the milky way",
+    ],
+  );
+
+  if (isM15GalaxyPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["solar system"],
+        ["inside", "part of", "within"],
+        ["milky way", "galaxy"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["galaxy"],
+        ["many stars", "many star systems", "collection of stars", "gravity-bound system"],
+        ["universe", "milky way"],
+        ["not the same", "not the whole", "only one"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["gravity"],
+        ["hold", "bind", "keep together"],
+        ["galaxy", "system", "many stars"],
+      ])
+    );
+  }
+
+  const isM15LightYearPrompt = matchesM15Prompt(
+    ["M15L4_D9", "M15L4_D10", "M15L4_C7", "M15L4_C8", "M15L4_M8", "M15L4_M10"],
+    [
+      "why do astronomers prefer light years to kilometres for very large cosmic separations",
+      "why does 50 light years mean a greater distance than 5 light years",
+      "why can the word year trick students when they first hear light year",
+      "why is a light year still a distance even though time appears in its definition",
+      "explain in one sentence why a light year belongs on a distance ladder instead of a clock face",
+      "why is 100000 light years across stronger as a size statement than as an age statement",
+    ],
+  );
+
+  if (isM15LightYearPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["light-year", "light years"],
+        ["distance", "how far", "size", "width", "across"],
+        ["not", "rather than"],
+        ["time", "age", "clock"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["huge", "enormous", "very large", "cosmic"],
+        ["distance", "scale", "separation"],
+        ["light-year"],
+        ["easier", "convenient", "manageable"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["year", "time"],
+        ["define", "definition", "used to define"],
+        ["distance", "how far"],
+      ])
+    );
+  }
+
+  const isM15RedshiftPrompt = matchesM15Prompt(
+    ["M15L5_D9", "M15L5_D10", "M15L5_C7", "M15L5_C8", "M15L5_M8", "M15L5_M10"],
+    [
+      "why is observed wavelength is longer stronger than the galaxy just looks redder",
+      "why can expansion explain redshift without saying the galaxy itself changed color at the source",
+      "why is the farther city larger redshift pattern useful rather than just interesting",
+      "why is a wavelength bar comparison a stronger teaching tool than a color word alone",
+      "explain in one sentence why redshift is stronger as a wavelength story than as a color name story",
+      "why does larger redshift count as stronger expansion evidence in this module",
+    ],
+  );
+
+  if (isM15RedshiftPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["wavelength", "observed wavelength", "emitted wavelength"],
+        ["longer", "increase", "stretched"],
+        ["redshift"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["stretch", "stretching", "expanded", "during travel", "on the journey"],
+        ["light", "wavelength"],
+        ["redshift", "longer"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["farther", "more distant"],
+        ["larger", "bigger", "more"],
+        ["redshift"],
+        ["evidence", "supports"],
+        ["expansion"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["color", "looks red"],
+        ["not enough", "too loose", "not by itself", "rather than"],
+        ["wavelength", "comparison", "measurable"],
+      ])
+    );
+  }
+
+  const isM15BigBangPrompt = matchesM15Prompt(
+    ["M15L6_D4", "M15L6_D9", "M15L6_D10", "M15L6_C3", "M15L6_C7", "M15L6_C8", "M15L6_M3", "M15L6_M8", "M15L6_M10"],
+    [
+      "why is expanding map better than ordinary explosion as a big bang analogy",
+      "why is center explosion weak wording for the big bang model",
+      "why is the farther galaxy larger redshift pattern important in this final lesson",
+      "why do astronomers treat redshift as evidence for expansion and not just as an isolated color fact",
+      "why does expanding universe fit better than things moving away in ordinary empty space",
+      "why is the redshift pattern stronger than a single galaxy case when arguing for expansion",
+      "summarize the great unfurling idea in one strong sentence",
+      "explain in one sentence why the big bang is stronger as an expansion model than as a center blast picture",
+      "why does the observed redshift pattern make the big bang model stronger rather than weaker",
+    ],
+  );
+
+  if (isM15BigBangPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["hot", "dense", "early universe", "hot dense state"],
+        ["expand", "expanding", "expansion"],
+        ["space", "space itself"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["not", "rather than"],
+        ["center", "centre", "one point", "blast", "explosion"],
+        ["space", "expanding space", "space itself"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["pattern", "trend", "many galaxies", "across many galaxies"],
+        ["farther", "more distant"],
+        ["larger", "bigger"],
+        ["redshift"],
+        ["evidence", "supports", "predicts"],
+        ["expansion", "big bang"],
+      ])
+    );
   }
 
   const isLessonSixErrorPrompt =

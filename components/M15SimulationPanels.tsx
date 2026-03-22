@@ -373,54 +373,75 @@ export default function M15SimulationPanels({
     );
   }
 
-  const expansionRate = clamp(simMetricMeters, 0.4, 2.4);
-  const evidenceIndex = Math.round(clamp(simBias, 0, 2));
-  const modelIndex = Math.round(clamp(simVectorAngle, 0, 1));
-  const evidenceLabel = ["weak pattern", "partial pattern", "farther city -> bigger redshift"][evidenceIndex];
-  const modelLabel = modelIndex === 0 ? "ordinary explosion from one spot" : "expanding space from hot dense early state";
+  if (lessonKey === "M15_L6") {
+    const expansionRate = clamp(simMetricMeters, 0.4, 2.4);
+    const evidenceIndex = Math.round(clamp(simBias, 0, 2));
+    const modelIndex = Math.round(clamp(simVectorAngle, 0, 1));
+    const evidenceLabel = ["weak pattern", "partial pattern", "farther city -> bigger redshift"][evidenceIndex];
+    const modelLabel = modelIndex === 0 ? "ordinary explosion from one spot" : "expanding space from hot dense early state";
+
+    return renderPanel(
+      "Great Unfurling evidence",
+      <>
+        {sliderField(
+          "Stretchmap rate",
+          `${formatSimulationNumber(expansionRate, 2)}x`,
+          <input className="w-full" type="range" min="0.4" max="2.4" step="0.02" value={expansionRate} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />,
+        )}
+        {sliderField(
+          "Evidence pattern",
+          evidenceLabel,
+          <input className="w-full" type="range" min="0" max="2" step="1" value={evidenceIndex} onChange={(e) => setSimBias(Number(e.target.value))} />,
+        )}
+        {sliderField(
+          "Model phrase",
+          modelLabel,
+          <input className="w-full" type="range" min="0" max="1" step="1" value={modelIndex} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />,
+        )}
+      </>,
+      "Expansion story board",
+      <svg viewBox="0 0 640 260" className="w-full">
+        <circle cx="118" cy="132" r="28" fill="#f97316" stroke="#fde68a" strokeWidth="4" />
+        <text x="118" y="184" fill="#ea580c" fontSize="16" textAnchor="middle">hot dense early state</text>
+        <line x1="152" y1="132" x2="312" y2="132" stroke="#38bdf8" strokeWidth="6" />
+        <polygon points="312,132 280,116 280,148" fill="#38bdf8" />
+        <ellipse cx="426" cy="132" rx={74 + expansionRate * 22} ry={40 + expansionRate * 12} fill="none" stroke="#60a5fa" strokeWidth="4" />
+        <ellipse cx="426" cy="132" rx={118 + expansionRate * 24} ry={64 + expansionRate * 14} fill="none" stroke="#93c5fd" strokeWidth="3" />
+        <text x="426" y="210" fill="#334155" fontSize="18" textAnchor="middle">space itself expands</text>
+        <rect x="468" y="26" width="150" height="82" rx="18" fill={modelIndex === 1 ? "#dcfce7" : "#fee2e2"} />
+        <text x="543" y="56" fill="#0f172a" fontSize="16" fontWeight="700" textAnchor="middle">model phrase</text>
+        <text x="543" y="84" fill="#334155" fontSize="14" textAnchor="middle">{modelIndex === 1 ? "expanding-space match" : "weaker center-blast wording"}</text>
+        <rect x="468" y="138" width="150" height="82" rx="18" fill={evidenceIndex === 2 ? "#dcfce7" : "#fef3c7"} />
+        <text x="543" y="168" fill="#0f172a" fontSize="16" fontWeight="700" textAnchor="middle">evidence</text>
+        <text x="543" y="196" fill="#334155" fontSize="14" textAnchor="middle">{evidenceLabel}</text>
+      </svg>,
+      <>
+        {metricCard("Early-state model", "hot and dense", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Evidence pattern", evidenceLabel, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Best wording", modelIndex === 1 && evidenceIndex === 2 ? "expanding universe" : "check wording again", "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Common trap", "center explosion picture", "border-rose-200 bg-rose-50 text-rose-900")}
+      </>,
+      ["Use expanding-space language to keep the geometry right.", "Connect the model to the redshift evidence trend.", "The Big Bang model is more than just 'stuff flying from a point'."],
+      "This final board pairs the model wording with the evidence trend so the Big Bang remains an expansion story rather than a casual explosion metaphor.",
+    );
+  }
 
   return renderPanel(
-    "Great Unfurling evidence",
+    "Universe explorer",
+    <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-5 text-sm text-slate-700">
+      This lesson has no dedicated explorer branch wired yet. Use the authored diagram and the lesson readout instead of relying on a generic fallback panel.
+    </div>,
+    "Placeholder board",
+    <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-10 text-center text-sm text-slate-600">
+      Add a lesson-specific M15 explorer panel here if a new lesson key is introduced.
+    </div>,
     <>
-      {sliderField(
-        "Stretchmap rate",
-        `${formatSimulationNumber(expansionRate, 2)}x`,
-        <input className="w-full" type="range" min="0.4" max="2.4" step="0.02" value={expansionRate} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />,
-      )}
-      {sliderField(
-        "Evidence pattern",
-        evidenceLabel,
-        <input className="w-full" type="range" min="0" max="2" step="1" value={evidenceIndex} onChange={(e) => setSimBias(Number(e.target.value))} />,
-      )}
-      {sliderField(
-        "Model phrase",
-        modelLabel,
-        <input className="w-full" type="range" min="0" max="1" step="1" value={modelIndex} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />,
-      )}
+      {metricCard("Lesson status", "no generic fallback used", "border-slate-200 bg-slate-50 text-slate-900")}
+      {metricCard("Action", "author a lesson-specific panel", "border-sky-200 bg-sky-50 text-sky-900")}
+      {metricCard("Support path", "diagram + scaffold still available", "border-emerald-200 bg-emerald-50 text-emerald-900")}
+      {metricCard("Quality rule", "explicit branches only", "border-violet-200 bg-violet-50 text-violet-900")}
     </>,
-    "Expansion story board",
-    <svg viewBox="0 0 640 260" className="w-full">
-      <circle cx="118" cy="132" r="28" fill="#f97316" stroke="#fde68a" strokeWidth="4" />
-      <text x="118" y="184" fill="#ea580c" fontSize="16" textAnchor="middle">hot dense early state</text>
-      <line x1="152" y1="132" x2="312" y2="132" stroke="#38bdf8" strokeWidth="6" />
-      <polygon points="312,132 280,116 280,148" fill="#38bdf8" />
-      <ellipse cx="426" cy="132" rx={74 + expansionRate * 22} ry={40 + expansionRate * 12} fill="none" stroke="#60a5fa" strokeWidth="4" />
-      <ellipse cx="426" cy="132" rx={118 + expansionRate * 24} ry={64 + expansionRate * 14} fill="none" stroke="#93c5fd" strokeWidth="3" />
-      <text x="426" y="210" fill="#334155" fontSize="18" textAnchor="middle">space itself expands</text>
-      <rect x="468" y="26" width="150" height="82" rx="18" fill={modelIndex === 1 ? "#dcfce7" : "#fee2e2"} />
-      <text x="543" y="56" fill="#0f172a" fontSize="16" fontWeight="700" textAnchor="middle">model phrase</text>
-      <text x="543" y="84" fill="#334155" fontSize="14" textAnchor="middle">{modelIndex === 1 ? "expanding-space match" : "weaker center-blast wording"}</text>
-      <rect x="468" y="138" width="150" height="82" rx="18" fill={evidenceIndex === 2 ? "#dcfce7" : "#fef3c7"} />
-      <text x="543" y="168" fill="#0f172a" fontSize="16" fontWeight="700" textAnchor="middle">evidence</text>
-      <text x="543" y="196" fill="#334155" fontSize="14" textAnchor="middle">{evidenceLabel}</text>
-    </svg>,
-    <>
-      {metricCard("Early-state model", "hot and dense", "border-amber-200 bg-amber-50 text-amber-900")}
-      {metricCard("Evidence pattern", evidenceLabel, "border-sky-200 bg-sky-50 text-sky-900")}
-      {metricCard("Best wording", modelIndex === 1 && evidenceIndex === 2 ? "expanding universe" : "check wording again", "border-emerald-200 bg-emerald-50 text-emerald-900")}
-      {metricCard("Common trap", "center explosion picture", "border-rose-200 bg-rose-50 text-rose-900")}
-    </>,
-    ["Use expanding-space language to keep the geometry right.", "Connect the model to the redshift evidence trend.", "The Big Bang model is more than just 'stuff flying from a point'."],
-    "This final board pairs the model wording with the evidence trend so the Big Bang remains an expansion story rather than a casual explosion metaphor.",
+    ["Every M15 lesson should have an explicit explorer path.", "Unknown lesson keys should fail safely, not silently reuse another panel.", "This placeholder keeps the fallback neutral and visible."],
+    "The neutral placeholder makes missing explorer coverage obvious, which protects lesson-specific simulation design across the module.",
   );
 }
