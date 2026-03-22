@@ -180,11 +180,18 @@ type ScaffoldSectionVisual = {
   highlights?: string[];
 };
 
+type TechnicalWordCard = {
+  term: string;
+  meaning: string;
+  why_it_matters?: string;
+};
+
 type ScaffoldSection = {
   heading: string;
   body: string;
   analogy?: string;
   visual?: ScaffoldSectionVisual;
+  technical_words?: TechnicalWordCard[];
   worked_example?: {
     prompt: string;
     steps: string[];
@@ -1122,6 +1129,23 @@ export default function LessonRunner({
             ) : null}
             {section.body && !section.worked_example && section.heading !== "Fix these ideas" ? (
                 <p className="mt-3 whitespace-pre-line text-slate-700">{section.body}</p>
+            ) : null}
+
+            {section.technical_words?.length ? (
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                {section.technical_words.map((entry) => (
+                  <div key={entry.term} className="rounded-2xl border border-sky-100 bg-sky-50/60 p-4 shadow-sm">
+                    <p className="text-base font-semibold text-slate-900">{entry.term}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-700">{entry.meaning}</p>
+                    {entry.why_it_matters ? (
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
+                        <span className="font-medium text-slate-700">Why it matters:</span>{" "}
+                        {entry.why_it_matters}
+                      </p>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
             ) : null}
 
             {section.analogy ? (

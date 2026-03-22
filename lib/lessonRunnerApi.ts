@@ -20,6 +20,7 @@ import { a2QuestionVisualMeta, a2ReflectionVisualCheck, a2ScaffoldCoreBullets, a
 import { a3QuestionVisualMeta, a3ReflectionVisualCheck, a3ScaffoldCoreBullets, a3ScaffoldFocusExtras, a3ScaffoldMediaCards, a3SimulationCopy } from "./a3LessonContent";
 import { a4QuestionVisualMeta, a4ReflectionVisualCheck, a4ScaffoldCoreBullets, a4ScaffoldFocusExtras, a4ScaffoldMediaCards, a4SimulationCopy } from "./a4LessonContent";
 import { a5QuestionVisualMeta, a5ReflectionVisualCheck, a5ScaffoldCoreBullets, a5ScaffoldFocusExtras, a5ScaffoldMediaCards, a5SimulationCopy } from "./a5LessonContent";
+import { technicalWordsForLesson } from "./technicalWords";
 
 type UnknownRecord = Record<string, unknown>;
 type RenderedQuestionOverride = {
@@ -10579,16 +10580,39 @@ function attachScaffoldSectionVisuals(code: string, sections: UnknownRecord[]): 
   });
 }
 
+function technicalWordsSection(lesson: UnknownRecord): UnknownRecord | null {
+  const code = lessonCode(lesson);
+  const technicalWords = technicalWordsForLesson(lesson, code);
+  if (technicalWords.length === 0) return null;
+  return {
+    heading: "Technical words",
+    body: "These are the main technical words in this lesson. Read the plain-English meanings first so the next activities do not feel like hidden vocabulary tests.",
+    technical_words: technicalWords,
+    check_for_understanding: "Which of these words names the key quantity, process, or object in the next example?",
+  };
+}
+
+function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
+  const technicalSection = technicalWordsSection(lesson);
+  if (!technicalSection) return sections;
+
+  const nextSections = [...sections];
+  const coreIdeaIndex = nextSections.findIndex((section) => text(asRecord(section).heading).toLowerCase() === "core idea");
+  const insertIndex = coreIdeaIndex >= 0 ? coreIdeaIndex + 1 : Math.min(1, nextSections.length);
+  nextSections.splice(insertIndex, 0, technicalSection);
+  return nextSections;
+}
+
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
     const authoredSections = authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
     if (authoredSections.length > 0) {
-      return attachScaffoldSectionVisuals(code, authoredSections);
+      return attachScaffoldSectionVisuals(code, withTechnicalWordsSection(lesson, authoredSections));
     }
     const f2Copy = scaffoldF2SectionCopy(code);
     const analogyCopy = scaffoldF2AnalogyBridge(code);
-    return attachScaffoldSectionVisuals(code, [
+    return attachScaffoldSectionVisuals(code, withTechnicalWordsSection(lesson, [
       { heading: "Fix these ideas", body: repairText },
       { heading: "Core idea", body: f2Copy.coreIdea },
       { heading: "How to reason through it", body: f2Copy.reasoning, check_for_understanding: f2Copy.checkForUnderstanding },
@@ -10599,29 +10623,29 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
       ...(code.startsWith("M4_") ? m4SupplementalScaffoldSections(code) : []),
       ...scaffoldWorkedExampleSections(workedExample),
       ...(code.startsWith("M3_") ? m3SupplementalWorkedExampleSections(code) : []),
-    ]);
+    ]));
   }
   switch (code) {
     case "F1_L1":
-      return [
+      return withTechnicalWordsSection(lesson, [
         { heading: "Fix these ideas", body: repairText },
         { heading: "Core idea", body: "A scientific measurement only makes sense when the quantity, the number, and the unit stay together. A bare number does not tell the full story in physics because 5 could mean 5 metres, 5 seconds, or 5 kilograms." },
         { heading: "Quantities, units, and sub-units", body: "A quantity tells what you are measuring: length, mass, time, temperature, and so on. The unit tells the agreed size used to measure it. A sub-unit is a smaller version that helps when the object is small. Use metres for room length, centimetres for notebook width, and millimetres for coin thickness." },
         { heading: "Choose units and tools wisely", body: "Pick a unit and a tool that match the scale of the job. A metre rule suits desk length, a balance suits mass, and a caliper helps with very small thicknesses because its finer divisions reduce uncertainty.", check_for_understanding: "Why is millimetre a better unit than metre for the thickness of a coin?" },
         { heading: "Analogy", body: analogyText || "Units work like money. One dollar, one cent, and one thousand dollars are all money, but they are not the same size. Prefixes do the same job for measurements: kilo- makes a larger unit, while centi- and milli- make smaller sub-units." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-      ];
+      ]);
     case "F1_L2":
-      return [
+      return withTechnicalWordsSection(lesson, [
         { heading: "Fix these ideas", body: repairText },
         { heading: "Core idea", body: "A scalar tells how much only. A vector tells how much and which way. That extra direction changes the meaning of the quantity, so distance and displacement are not interchangeable, and speed and velocity are not interchangeable either." },
         { heading: "How to test any quantity", body: "Ask two questions. First: how much? Second: which way? If only the first question is needed, the quantity is scalar. If the second question is needed as well, the quantity is vector.", check_for_understanding: "Which single word would turn 15 m into a vector description?" },
         { heading: "Analogy", body: analogyText || "A distance is like saying how many steps you walked. A displacement is like showing an arrow from start to finish. The arrow has both a size and a direction, so it behaves like a vector." },
         { heading: "Common patterns to remember", body: "Distance, speed, mass, time, and temperature are usually scalar. Displacement, velocity, force, acceleration, and weight are vectors because they need direction." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-      ];
+      ]);
     case "F1_L3":
-      return [
+      return withTechnicalWordsSection(lesson, [
         { heading: "Fix these ideas", body: repairText },
         { heading: "Core idea", body: "A reading is only as trustworthy as the tool and method behind it. The instrument sets the smallest detail you can see, and that limits the certainty you can claim." },
         { heading: "Resolution and uncertainty", body: "Resolution is the smallest change the tool can show. Uncertainty tells the reader the range inside which the true value is likely to lie. A fine tool such as a caliper usually gives a smaller uncertainty than a rough ruler.", check_for_understanding: "Why is a finer scale usually more trustworthy for small objects?" },
@@ -10630,9 +10654,9 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
         { heading: "How to reduce error", body: "Use repeated readings and averaging to reduce the effect of random error. Check zero readings, calibrate the instrument, and choose the right tool to reduce systematic error. Honest uncertainty should still be reported after careful work." },
         { heading: "Analogy", body: analogyText || "A blurry photo can show the big shape of an object, but not the tiny details. Low-resolution tools work the same way. A sharper picture is like a finer instrument: it lets you trust smaller differences." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-      ];
+      ]);
     case "F1_L4":
-      return [
+      return withTechnicalWordsSection(lesson, [
         { heading: "Fix these ideas", body: repairText },
         { heading: "Core idea", body: "Significant figures help you report a number with the right amount of precision. They stop you from pretending the measurement is more exact than it really is." },
         { heading: "Which digits count", body: "Non-zero digits always count. Leading zeros only place the decimal point, so they do not count. Zeros between non-zero digits do count, and trailing zeros after a decimal usually show real precision.", check_for_understanding: "How many significant figures are in 0.0205?" },
@@ -10641,32 +10665,32 @@ function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText
         { heading: "Calculator answers need a final check", body: "A calculator can show more digits than the measurements justify. Do the calculation first, then apply the correct reporting rule before writing the final answer in your notebook." },
         { heading: "Analogy", body: analogyText || "Think of a measurement like a photo saved at a certain quality. You cannot honestly add sharper detail after the photo has been taken, just as you cannot add justified digits after the measurement is made." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-      ];
+      ]);
     case "F1_L5":
-      return [
+      return withTechnicalWordsSection(lesson, [
         { heading: "Fix these ideas", body: repairText },
         { heading: "Core idea", body: "Density tells you how much mass is packed into each unit of volume. It is not just about how heavy something is; it is about how heavy it is for its size." },
         { heading: "Mass, volume, and density", body: "Mass tells how much matter is present. Volume tells how much space is occupied. Density compares the two. That is why a small metal block can be denser than a larger foam block.", check_for_understanding: "If two objects have the same volume, which one is denser: the heavier one or the lighter one?" },
         { heading: "Use the formula carefully", body: "Write density = mass / volume, substitute the values with consistent units, divide carefully, and keep the compound unit with the answer. If the units are mixed, convert them before calculating." },
         { heading: "Analogy", body: analogyText || "Imagine packing books into two boxes of the same size. The box with more books packed into the same space is like the denser material." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-      ];
+      ]);
     case "F1_L6":
-      return [
+      return withTechnicalWordsSection(lesson, [
         { heading: "Fix these ideas", body: repairText },
         { heading: "Core idea", body: "Accuracy and precision answer different questions. Accuracy asks whether you are close to the accepted value. Precision asks whether repeated readings agree closely with one another." },
         { heading: "Possible measurement patterns", body: "A set of readings can be accurate and precise, precise but not accurate, accurate but spread out, or neither. Looking only at one idea gives an incomplete judgement of the measurement quality.", check_for_understanding: "If readings are tightly grouped but all far from the accepted value, which idea is strong and which is weak?" },
         { heading: "What makes a result trustworthy", body: "Trust comes from using a suitable tool, repeating measurements, controlling errors, and reporting honest uncertainty. A result is stronger when the method and the numbers support each other." },
         { heading: "Analogy", body: analogyText || "Imagine throwing darts at a target. A tight cluster shows precision. A cluster near the centre shows accuracy. The best measurements do both at once." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-      ];
+      ]);
     default:
-      return [
+      return withTechnicalWordsSection(lesson, [
         { heading: "Fix these ideas", body: repairText },
         { heading: "Core idea", body: "Use the main rule from this lesson before you calculate, classify, or compare anything." },
         { heading: "Analogy", body: analogyText || "Use the shared idea from this lesson to decide what the quantity means before you answer." },
         { heading: "Worked example", body: text(workedExample.body), worked_example: asRecord(workedExample.worked_example) },
-      ];
+      ]);
   }
 }
 
