@@ -6059,8 +6059,19 @@ function conceptGateItemForAttempt(moduleId: string, lessonId: string, lesson: U
   if (ordered.length === 0) return null;
   return asRecord(ordered[retryCount % ordered.length]);
 }
+
+const DISPLAY_LESSON_TITLE_OVERRIDES: Record<string, string> = {
+  F5_L1: "Earth, Moon, and Sun Relationships",
+  F5_L2: "Day and Night",
+  F5_L3: "Seasons",
+  F5_L4: "Moon Phases and Eclipses",
+  F5_L5: "Solar System Overview",
+  F5_L6: "Apparent Sky Motion and Scale",
+};
+
 function lessonTitle(lesson: UnknownRecord, runnerLesson: UnknownRecord): string {
-  return text(lesson.title) || text(runnerLesson.title) || normalizeLessonId(lesson.lesson_id || runnerLesson.lesson_id);
+  const normalizedLessonId = normalizeLessonId(lesson.lesson_id || runnerLesson.lesson_id || lesson.id || runnerLesson.id);
+  return DISPLAY_LESSON_TITLE_OVERRIDES[normalizedLessonId] || text(lesson.title) || text(runnerLesson.title) || normalizedLessonId;
 }
 
 function hasPrefetchedLesson(lessonId: string, lesson: UnknownRecord | null | undefined): lesson is UnknownRecord {

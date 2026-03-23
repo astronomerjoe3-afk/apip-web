@@ -171,6 +171,13 @@ function normalizeModuleId(value: string | undefined | null): string {
 
 const MODULE_ONE_DESCRIPTION =
   "Module 1 treats kinematics as a representation system: journeys, graphs, signed rates, constant-acceleration forecasts, gradient context, and area reasoning must stay aligned without collapsing into basic motion slogans.";
+const FOUNDATION_MODULE_DESCRIPTIONS: Record<string, string> = {
+  F1: "Use SI units and unit conversion, distinguish base and derived quantities, introduce scalar and vector descriptions, measure length, mass, time, and temperature, and handle simple uncertainty, density, and graph interpretation.",
+  F2: "Study distance and displacement, speed, velocity, acceleration, simple motion graphs, intuitive force ideas, friction and air resistance, work done, power, energy stores and transfers, and conservation of energy.",
+  F3: "Use the particle model to explain solids, liquids, and gases, pressure as particle collisions, temperature and internal energy qualitatively, expansion, change of state, conduction, convection, radiation, and heating or cooling behaviour.",
+  F4: "Study waves and vibrations, amplitude, wavelength, and frequency, sound and light as wave phenomena, reflection and refraction qualitatively, simple circuits, current and voltage, series and parallel first models, magnetic effects of current, and electrical safety.",
+  F5: "Study Earth-Moon-Sun relationships, day and night, seasons, Moon phases, eclipses, the Solar System, apparent sky motion, gravity as an introduction to orbits, and the scale of Earth, the Sun, and the planets.",
+};
 const MODULE_FOUR_TITLE = "Pressure";
 const MODULE_FOUR_DESCRIPTION =
   "Pressure in solids, liquid pressure, and atmospheric pressure. Separate pressure from force, track how area and depth matter, and use the main pressure equations carefully.";
@@ -193,8 +200,11 @@ function normalizeModuleTitle(moduleId: string | undefined | null, title: string
 
 function normalizeModuleDescription(moduleId: string | undefined | null, title: string | undefined, description: string | undefined): string | undefined {
   const trimmed = String(description || "").trim();
-  if (!trimmed) return undefined;
   const normalizedModuleId = normalizeModuleId(moduleId);
+  if (normalizedModuleId && FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId]) {
+    return FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId];
+  }
+  if (!trimmed) return undefined;
   const isModuleOne = normalizedModuleId === "M1" || /Kinematics,\s*Graphs\s*&\s*Constant Acceleration/i.test(String(title || ""));
   if (isModuleOne && /foundation 2|f2/i.test(trimmed)) {
     return MODULE_ONE_DESCRIPTION;
