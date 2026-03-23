@@ -6152,6 +6152,66 @@ function normalizeRenderedPhysicsText(value: string): string {
     .replace(/\brho\b/gi, "ρ");
 }
 
+function normalizeCoreConceptBullet(value: string): string {
+  return normalizeRenderedPhysicsText(value)
+    .replace(
+      /\bthe answer should keep \d+ significant figures because [^.]+\./gi,
+      "Keep the same number of significant figures as the least precise given value.",
+    )
+    .replace(
+      /\bthe answer should keep \d+ significant figures\.?/gi,
+      "Keep the same number of significant figures as the least precise given value.",
+    )
+    .replace(
+      /\baddition follows the least number of decimal places, which is \d+ decimal place(?:s)? here\.?/gi,
+      "Addition follows the least number of decimal places.",
+    )
+    .replace(
+      /\bsubtraction follows the least number of decimal places, which is \d+ decimal place(?:s)? here\.?/gi,
+      "Subtraction follows the least number of decimal places.",
+    )
+    .replace(
+      /\bfor significant figures, keep [\d,\sand]+, then (?:use|look at) the next digit(?: \d+)?(?: only)? to decide (?:the )?rounding\.?/gi,
+      "For significant figures, keep the required digits and use the next digit to decide the rounding.",
+    )
+    .replace(
+      /\bkeep [\d,\sand]+, then (?:use|look at|check) the next digit(?: \d+)?(?: only)? to decide (?:the )?rounding\.?/gi,
+      "Keep the required digits, then use the next digit to decide the rounding.",
+    )
+    .replace(
+      /\bcount from the first non-zero digit, then round using the next digit\.?/gi,
+      "Count from the first non-zero digit, then use the next digit to decide the rounding.",
+    )
+    .replace(/\bfor \d+ decimal places, stop after the \d+\b/gi, "Stop after the last decimal place you need")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isGeneralCoreConceptBullet(value: string): boolean {
+  const normalized = normalizeCoreConceptBullet(value).toLowerCase();
+  if (!normalized) return false;
+  if (/\bhere\b/.test(normalized)) return false;
+  if (/\bthis example\b/.test(normalized)) return false;
+  if (/\bfor this\b/.test(normalized)) return false;
+  if (/\bwhich is \d+/.test(normalized)) return false;
+  if (/\bbecause\s+\d/.test(normalized)) return false;
+  if (/\btarget:\s*\d+/.test(normalized)) return false;
+  if (/\blast kept digit\b/.test(normalized)) return false;
+  if (/\bnext digit is \d+/.test(normalized)) return false;
+  if (/\bkeep\s+\d+(?:\s*,\s*\d+)+(?:\s*,?\s*and\s*\d+)?\b/.test(normalized)) return false;
+  return true;
+}
+
+function generalCoreConceptBullets(code: string, authoredCoreConcepts: string[]): string[] {
+  const scaffold = scaffoldCoreBullets(code)
+    .map((entry) => normalizeCoreConceptBullet(entry))
+    .filter((entry) => isGeneralCoreConceptBullet(entry));
+  const authored = authoredCoreConcepts
+    .map((entry) => normalizeCoreConceptBullet(entry))
+    .filter((entry) => isGeneralCoreConceptBullet(entry));
+  return dedupeText([...scaffold, ...authored]).slice(0, 6);
+}
+
 function m5RenderedQuestionOverride(item: UnknownRecord): RenderedQuestionOverride | null {
   const itemId = text(item.id).toUpperCase();
   switch (itemId) {
@@ -11115,11 +11175,22 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   const authoredCoreConcepts = asList(asRecord(lesson.authoring_contract).core_concepts)
     .map((entry) => text(entry))
     .filter(Boolean);
-  const teachingFocus = authoredCoreConcepts.length > 0
-    ? dedupeText([
-        ...authoredCoreConcepts,
-        ...repairTeachingFocus,
-      ])
+  const generalizedCoreConcepts = generalCoreConceptBullets(code, authoredCoreConcepts);
+  const fallbackCoreConcepts = dedupeText([
+    ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
+    ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
+    ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
+    ...asList(asRecord(phases(lesson).analogical_grounding).micro_prompts).map((prompt) => text(asRecord(prompt).hint) || text(asRecord(prompt).prompt)).filter(Boolean),
+    ...scaffoldFocusExtras(code),
+    ...scaffoldCoreBullets(code),
+  ])
+    .map((entry) => normalizeCoreConceptBullet(entry))
+    .filter((entry) => isGeneralCoreConceptBullet(entry))
+    .slice(0, 6);
+  const teachingFocus = generalizedCoreConcepts.length > 0
+    ? generalizedCoreConcepts
+    : fallbackCoreConcepts.length > 0
+    ? fallbackCoreConcepts
     : code.startsWith("F3_")
     ? (repairTeachingFocus.length > 0 ? repairTeachingFocus : scaffoldTeachingFocusBullets(code).slice(0, 4))
     : code.startsWith("F2_")
