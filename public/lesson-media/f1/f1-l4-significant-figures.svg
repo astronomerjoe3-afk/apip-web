@@ -15,7 +15,10 @@
       <circle cx="38" cy="38" r="22" fill="#2563eb"/>
       <text x="38" y="46" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#ffffff">1</text>
       <text x="72" y="48" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Keep 3.47</text>
-      <text x="32" y="90" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#516277">For 2 decimal places, stop after the 7.</text>
+      <text x="32" y="90" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+        <tspan x="32" dy="0">For 2 decimal places,</tspan>
+        <tspan x="32" dy="24">stop after the 7.</tspan>
+      </text>
 
       <rect x="32" y="118" width="220" height="84" rx="22" fill="#ffffff" stroke="#dbeafe" stroke-width="3"/>
       <rect x="138" y="126" width="60" height="68" rx="16" fill="#dbeafe"/>
@@ -34,7 +37,10 @@
       <circle cx="38" cy="38" r="22" fill="#d97706"/>
       <text x="38" y="46" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#ffffff">2</text>
       <text x="72" y="48" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Check the 6</text>
-      <text x="32" y="90" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#516277">The next digit decides whether 7 stays or rises.</text>
+      <text x="32" y="90" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+        <tspan x="32" dy="0">The next digit decides</tspan>
+        <tspan x="32" dy="24">whether 7 stays or rises.</tspan>
+      </text>
 
       <rect x="32" y="118" width="222" height="84" rx="22" fill="#ffffff" stroke="#fde68a" stroke-width="3"/>
       <rect x="168" y="126" width="58" height="68" rx="16" fill="#fde68a"/>
@@ -52,7 +58,10 @@
       <circle cx="38" cy="38" r="22" fill="#0f766e"/>
       <text x="38" y="46" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#ffffff">3</text>
       <text x="72" y="48" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Write 3.48</text>
-      <text x="32" y="90" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Because the next digit is 6, the 7 rounds up to 8.</text>
+      <text x="32" y="90" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+        <tspan x="32" dy="0">Because the next digit is 6,</tspan>
+        <tspan x="32" dy="24">the 7 rounds up to 8.</tspan>
+      </text>
 
       <rect x="32" y="118" width="218" height="92" rx="24" fill="#ffffff" stroke="#bbf7d0" stroke-width="3"/>
       <text x="54" y="186" font-size="82" font-family="Consolas, monospace" font-weight="700" fill="#0f766e">3.48</text>
@@ -62,6 +71,9 @@
     </g>
 
     <rect x="282" y="396" width="528" height="34" rx="17" fill="#eff6ff"/>
-    <text x="546" y="419" text-anchor="middle" font-size="21" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">Rule: next digit 0-4 means keep it, next digit 5-9 means round up.</text>
+    <text x="546" y="418" text-anchor="middle" font-size="19" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">
+      <tspan x="546" dy="0">Rule: next digit 0-4 means keep it,</tspan>
+      <tspan x="546" dy="22">next digit 5-9 means round up.</tspan>
+    </text>
   </g>
 </svg>
