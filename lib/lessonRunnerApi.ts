@@ -11291,6 +11291,30 @@ function foundationFormulaFallbacks(code: string): string[] {
       return ["impulse = FΔt = Δp"];
     case "F3_L6":
       return ["F = Δp / Δt", "E_k = 1/2mv^2"];
+    case "F4_L1":
+      return ["I = Q / t", "Q = It"];
+    case "F4_L2":
+      return ["V = ΔE / Q", "ΔE = VQ"];
+    case "F4_L3":
+      return ["R = V / I", "I = V / R"];
+    case "F4_L4":
+      return ["R_total = R1 + R2 + ...", "V_total = V1 + V2 + ..."];
+    case "F4_L5":
+      return ["I_total = I1 + I2 + ...", "V_branch = V_supply"];
+    case "F4_L6":
+      return ["P = IV", "E = Pt", "E = VIt"];
+    case "F5_L1":
+      return ["orbital motion needs gravity + sideways motion"];
+    case "F5_L2":
+      return ["1 full rotation ≈ 24 h"];
+    case "F5_L3":
+      return ["1 full orbit ≈ 365 d", "Earth axis tilt ≈ 23.5°"];
+    case "F5_L4":
+      return ["Moon phase depends on Sun-Earth-Moon geometry", "Eclipse needs special straight-line alignment"];
+    case "F5_L5":
+      return ["Solar System = Sun + planets + moons + asteroids + comets"];
+    case "F5_L6":
+      return ["1 year ≈ 365 d", "apparent daily sky motion comes from Earth's rotation"];
     default:
       return [];
   }
