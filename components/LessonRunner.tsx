@@ -19,6 +19,7 @@ import M12SimulationPanels from "./M12SimulationPanels";
 import M13SimulationPanels from "./M13SimulationPanels";
 import M14SimulationPanels from "./M14SimulationPanels";
 import M15SimulationPanels from "./M15SimulationPanels";
+import F5SimulationPanels from "./F5SimulationPanels";
 import A1SimulationPanels from "./A1SimulationPanels";
 import A2SimulationPanels from "./A2SimulationPanels";
 import A3SimulationPanels from "./A3SimulationPanels";
@@ -99,7 +100,6 @@ function remapLateSimulationLessonKey(lessonKey: string): string {
   const match = lessonKey.match(/^([A-Z]\d+)_L([1-6])$/);
   if (!match) return lessonKey;
   const lessonNumber = Number(match[2]);
-  if (match[1] === "F5") return `M14_L${lessonNumber}`;
   if (match[1] === "M9") return lessonNumber <= 5 ? `M10_L${lessonNumber}` : "M11_L2";
   if (match[1] === "M10") return `M12_L${lessonNumber}`;
   if (match[1] === "M11") return `M13_L${lessonNumber}`;
@@ -2805,8 +2805,8 @@ export default function LessonRunner({
             formatSimulationNumber={formatSimulationNumber}
           />
         ) : simulationLessonKey.startsWith("F5_") ? (
-          <M14SimulationPanels
-            lessonKey={remappedSimulationLessonKey}
+          <F5SimulationPanels
+            lessonKey={simulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
             simVectorMagnitude={simVectorMagnitude}

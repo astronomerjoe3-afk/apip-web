@@ -15,6 +15,7 @@ import { m12QuestionVisualMeta, m12ReflectionVisualCheck, m12ScaffoldCoreBullets
 import { m13QuestionVisualMeta, m13ReflectionVisualCheck, m13ScaffoldCoreBullets, m13ScaffoldFocusExtras, m13ScaffoldMediaCards, m13SimulationCopy } from "./m13LessonContent";
 import { m14QuestionVisualMeta, m14ReflectionVisualCheck, m14ScaffoldCoreBullets, m14ScaffoldFocusExtras, m14ScaffoldMediaCards, m14SimulationCopy } from "./m14LessonContent";
 import { m15QuestionVisualMeta, m15ReflectionVisualCheck, m15ScaffoldCoreBullets, m15ScaffoldFocusExtras, m15ScaffoldMediaCards, m15SimulationCopy } from "./m15LessonContent";
+import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
 import { a1QuestionVisualMeta, a1ReflectionVisualCheck, a1ScaffoldCoreBullets, a1ScaffoldFocusExtras, a1ScaffoldMediaCards, a1SimulationCopy } from "./a1LessonContent";
 import { a2QuestionVisualMeta, a2ReflectionVisualCheck, a2ScaffoldCoreBullets, a2ScaffoldFocusExtras, a2ScaffoldMediaCards, a2SimulationCopy } from "./a2LessonContent";
 import { a3QuestionVisualMeta, a3ReflectionVisualCheck, a3ScaffoldCoreBullets, a3ScaffoldFocusExtras, a3ScaffoldMediaCards, a3SimulationCopy } from "./a3LessonContent";
@@ -143,7 +144,7 @@ function remappedLateCoreQuestionVisualMeta(itemId: string): QuestionVisualMeta 
   if (!match) return undefined;
   const moduleCode = match[1];
   const lessonNumber = Number(match[2]);
-  if (moduleCode === "F5") return m14QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M14"));
+  if (moduleCode === "F5") return f5QuestionVisualMeta(itemId);
   if (moduleCode === "M9") {
     return lessonNumber <= 5
       ? m10QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M10"))
@@ -159,7 +160,7 @@ function remappedLateCoreQuestionVisualMeta(itemId: string): QuestionVisualMeta 
 function remappedLateCoreSimulationCopy(code: string): SupplementalSimulationCopy | undefined {
   const lessonNumber = lessonNumberFromCode(code);
   if (lessonNumber == null) return undefined;
-  if (code.startsWith("F5_")) return m14SimulationCopy(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("F5_")) return f5SimulationCopy(code);
   if (code.startsWith("M9_")) {
     return lessonNumber <= 5
       ? m10SimulationCopy(replaceLessonCodePrefix(code, "M10"))
@@ -175,7 +176,7 @@ function remappedLateCoreSimulationCopy(code: string): SupplementalSimulationCop
 function remappedLateCoreFocusExtras(code: string): string[] {
   const lessonNumber = lessonNumberFromCode(code);
   if (lessonNumber == null) return [];
-  if (code.startsWith("F5_")) return m14ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("F5_")) return f5ScaffoldFocusExtras(code);
   if (code.startsWith("M9_")) {
     return lessonNumber <= 5
       ? m10ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M10"))
@@ -191,7 +192,7 @@ function remappedLateCoreFocusExtras(code: string): string[] {
 function remappedLateCoreCoreBullets(code: string): string[] {
   const lessonNumber = lessonNumberFromCode(code);
   if (lessonNumber == null) return [];
-  if (code.startsWith("F5_")) return m14ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("F5_")) return f5ScaffoldCoreBullets(code);
   if (code.startsWith("M9_")) {
     return lessonNumber <= 5
       ? m10ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M10"))
@@ -207,7 +208,7 @@ function remappedLateCoreCoreBullets(code: string): string[] {
 function remappedLateCoreMediaCards(code: string): UnknownRecord[] {
   const lessonNumber = lessonNumberFromCode(code);
   if (lessonNumber == null) return [];
-  if (code.startsWith("F5_")) return m14ScaffoldMediaCards(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("F5_")) return f5ScaffoldMediaCards(code);
   if (code.startsWith("M9_")) {
     return lessonNumber <= 5
       ? m10ScaffoldMediaCards(replaceLessonCodePrefix(code, "M10"))
@@ -223,7 +224,7 @@ function remappedLateCoreMediaCards(code: string): UnknownRecord[] {
 function remappedLateCoreReflectionVisualCheck(code: string): UnknownRecord | undefined {
   const lessonNumber = lessonNumberFromCode(code);
   if (lessonNumber == null) return undefined;
-  if (code.startsWith("F5_")) return m14ReflectionVisualCheck(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("F5_")) return f5ReflectionVisualCheck(code);
   if (code.startsWith("M9_")) {
     return lessonNumber <= 5
       ? m10ReflectionVisualCheck(replaceLessonCodePrefix(code, "M10"))
