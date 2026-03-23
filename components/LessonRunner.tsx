@@ -187,6 +187,9 @@ type FormulaReferenceRow = {
   standard_formula: string;
   analogy_equivalent: string;
   constants?: string;
+  meaning?: string;
+  units_text?: string;
+  conditions?: string;
 };
 
 type ScaffoldSection = {
@@ -1157,7 +1160,7 @@ export default function LessonRunner({
                 <div className="mb-3 hidden rounded-xl bg-slate-900/95 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,0.95fr)] md:gap-4">
                   <span>Standard physics formula</span>
                   <span>Analogy equivalent</span>
-                  <span>Standard constants</span>
+                  <span>Constants if any</span>
                 </div>
                 <div className="space-y-3">
                   {section.formula_reference_rows.map((row, index) => (
@@ -1168,13 +1171,31 @@ export default function LessonRunner({
                       <div className="rounded-xl bg-slate-50 p-3">
                         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 md:hidden">Standard physics formula</p>
                         <p className="mt-1 font-mono text-sm leading-6 text-slate-900">{row.standard_formula}</p>
+                        {row.meaning ? (
+                          <p className="mt-2 text-sm leading-6 text-slate-700">
+                            <span className="font-medium text-slate-800">Meaning:</span>{" "}
+                            {row.meaning}
+                          </p>
+                        ) : null}
+                        {row.units_text ? (
+                          <p className="mt-2 text-sm leading-6 text-slate-600">
+                            <span className="font-medium text-slate-700">Units:</span>{" "}
+                            {row.units_text}
+                          </p>
+                        ) : null}
+                        {row.conditions ? (
+                          <p className="mt-2 text-sm leading-6 text-slate-600">
+                            <span className="font-medium text-slate-700">Use when:</span>{" "}
+                            {row.conditions}
+                          </p>
+                        ) : null}
                       </div>
                       <div className="rounded-xl bg-sky-50/70 p-3">
                         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-sky-700 md:hidden">Analogy equivalent</p>
                         <p className="mt-1 text-sm leading-6 text-slate-700">{row.analogy_equivalent}</p>
                       </div>
                       <div className="rounded-xl bg-emerald-50/70 p-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-emerald-700 md:hidden">Standard constants</p>
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-emerald-700 md:hidden">Constants if any</p>
                         <p className="mt-1 text-sm leading-6 text-slate-700">{row.constants || "No named constant is required in this lesson."}</p>
                       </div>
                     </div>

@@ -10819,6 +10819,286 @@ function scaffoldWorkedExampleSections(workedExample: UnknownRecord): UnknownRec
   return sections;
 }
 
+const CORE_MODULE_ANALOGY_LABELS: Record<number, string> = {
+  1: "Quest-Log",
+  2: "Thruster-Deck",
+  3: "Lift-Launch",
+  4: "Patch-Dome",
+  5: "Pulse-Plaza",
+  6: "Level-Forge",
+  7: "Signal-Stadium",
+  8: "Glow-Route",
+  9: "Echo-Scout",
+  10: "Carrier-Loop Ledger",
+  11: "Switchyard-Loop",
+  12: "Field-Weave",
+  13: "Core-Vault",
+  14: "Lantern-Ring",
+};
+
+const CORE_MODULE_ANALOGY_REPLACEMENTS: Record<number, ReadonlyArray<readonly [RegExp, string]>> = {
+  1: [
+    [/\bdisplacement\b/gi, "route span"],
+    [/\bdistance\b/gi, "progress"],
+    [/\bvelocity\b/gi, "pace arrow"],
+    [/\bspeed\b/gi, "pace"],
+    [/\bacceleration\b/gi, "boost shift"],
+    [/\btime\b/gi, "clock-beat count"],
+    [/\bgraph\b/gi, "log board"],
+  ],
+  2: [
+    [/\bresultant force\b/gi, "Master Arrow"],
+    [/\bforce\b/gi, "Drive Arrow"],
+    [/\bmass\b/gi, "Load Rating"],
+    [/\bacceleration\b/gi, "Motion Shift"],
+    [/\bmomentum\b/gi, "Carry Score"],
+    [/\btorque\b/gi, "Spin Pull"],
+    [/\bmoment\b/gi, "Spin Pull"],
+    [/\bcentre of mass\b/gi, "Balance Core"],
+    [/\bstability\b/gi, "Footprint-Zone stability"],
+    [/\bcomponent\b/gi, "Arrow-Split component"],
+  ],
+  3: [
+    [/\bgravitational potential energy\b/gi, "Height Store"],
+    [/\bkinetic energy\b/gi, "Motion Store"],
+    [/\benergy transferred\b/gi, "store hand-off"],
+    [/\bwork done\b/gi, "push hand-off"],
+    [/\bpower\b/gi, "transfer rate"],
+    [/\befficiency\b/gi, "useful-yield fraction"],
+    [/\bgravitational field strength\b/gi, "World Grip"],
+    [/\bheight\b/gi, "deck height"],
+    [/\bmass\b/gi, "load"],
+    [/\bforce\b/gi, "push"],
+    [/\benergy\b/gi, "store credit"],
+  ],
+  4: [
+    [/\batmospheric pressure\b/gi, "sky-blanket load"],
+    [/\bliquid pressure\b/gi, "liquid patch load"],
+    [/\bpressure\b/gi, "patch load"],
+    [/\bforce\b/gi, "push"],
+    [/\barea\b/gi, "patch spread"],
+    [/\bdensity\b/gi, "layer-stack density"],
+    [/\bdepth\b/gi, "stack depth"],
+  ],
+  5: [
+    [/\binternal energy\b/gi, "Pulse-Plaza total energy bank"],
+    [/\btemperature\b/gi, "Pulse Dial level"],
+    [/\bparticles\b/gi, "crowd units"],
+    [/\bparticle\b/gi, "crowd unit"],
+    [/\bkinetic energy\b/gi, "motion share"],
+    [/\bpotential energy\b/gi, "link-store share"],
+    [/\bstate change\b/gi, "link-pattern change"],
+  ],
+  6: [
+    [/\btemperature\b/gi, "Warmth Level"],
+    [/\bheat transferred\b/gi, "Transfer Energy"],
+    [/\benergy transferred\b/gi, "Transfer Energy"],
+    [/\bspecific heat capacity\b/gi, "Level Cost"],
+    [/\blatent heat\b/gi, "Morph Fee"],
+    [/\bmass\b/gi, "Build Size"],
+    [/\bstate change\b/gi, "form change"],
+    [/\bconduction\b/gi, "Touch Relay"],
+    [/\bconvection\b/gi, "Carrier Loop"],
+    [/\bradiation\b/gi, "Glow Cast"],
+  ],
+  7: [
+    [/\bwave speed\b/gi, "ripple-run speed"],
+    [/\bfrequency\b/gi, "beat rate"],
+    [/\bwavelength\b/gi, "pulse gap"],
+    [/\bamplitude\b/gi, "signal height"],
+    [/\bperiod\b/gi, "beat interval"],
+    [/\bwavefront\b/gi, "signal front"],
+    [/\bwave\b/gi, "stadium signal"],
+  ],
+  8: [
+    [/\bnormal\b/gi, "Guide Line"],
+    [/\bmirror\b/gi, "Bounce Panel"],
+    [/\brefraction\b/gi, "bend-gate turning"],
+    [/\bconverging lens\b/gi, "Gather Lens"],
+    [/\bdiverging lens\b/gi, "Spread Lens"],
+    [/\bcritical angle\b/gi, "Escape Edge"],
+    [/\btotal internal reflection\b/gi, "Lock-Bounce"],
+    [/\bray diagram\b/gi, "Route Sketch"],
+    [/\bray\b/gi, "Glow-Route"],
+  ],
+  9: [
+    [/\bcompression\b/gi, "Squeeze Band"],
+    [/\brarefaction\b/gi, "Release Band"],
+    [/\bfrequency\b/gi, "Ping Rate"],
+    [/\bpitch\b/gi, "Tone Height"],
+    [/\bultrasound\b/gi, "Super-Scout Mode"],
+    [/\becho\b/gi, "Echo Return"],
+    [/\bsound source\b/gi, "Scout Beacon"],
+    [/\bsound\b/gi, "scout signal"],
+  ],
+  10: [
+    [/\bcharge\b/gi, "carrier packet count"],
+    [/\bcurrent\b/gi, "carrier flow rate"],
+    [/\bpotential difference\b/gi, "energy-per-carrier push"],
+    [/\bvoltage\b/gi, "push per carrier"],
+    [/\bresistance\b/gi, "route drag"],
+    [/\bohm'?s law\b/gi, "Flow-Grid rule"],
+    [/\bpower\b/gi, "transfer rate"],
+  ],
+  11: [
+    [/\bseries circuit\b/gi, "one-lane chain"],
+    [/\bparallel circuit\b/gi, "branch deck"],
+    [/\bcircuit diagram\b/gi, "route map"],
+    [/\bcomponent\b/gi, "task station"],
+    [/\bresistance\b/gi, "route drag"],
+    [/\bpower\b/gi, "task-station power rate"],
+    [/\bfuse\b/gi, "guard link"],
+    [/\bcircuit breaker\b/gi, "guard breaker"],
+  ],
+  12: [
+    [/\bmagnetic field\b/gi, "field weave"],
+    [/\bfield lines\b/gi, "weave lines"],
+    [/\belectromagnet\b/gi, "Coil Tower"],
+    [/\bsoft iron core\b/gi, "Core Spine"],
+    [/\bforce\b/gi, "side-kick"],
+    [/\bcentripetal\b/gi, "inward-turn"],
+    [/\bmagnetic flux\b/gi, "field-thread"],
+    [/\binduced emf\b/gi, "loop push"],
+    [/\btransformer\b/gi, "Twin-Coil Bridge"],
+  ],
+  13: [
+    [/\bnucleus\b/gi, "core vault"],
+    [/\bproton\b/gi, "identity shard"],
+    [/\bneutron\b/gi, "stability shard"],
+    [/\bisotope\b/gi, "same-badge variant"],
+    [/\bradioactive decay\b/gi, "vault drop"],
+    [/\bradiation\b/gi, "vault emission"],
+    [/\bactivity\b/gi, "detector click rate"],
+    [/\bhalf-life\b/gi, "half-life countdown"],
+  ],
+  14: [
+    [/\borbit\b/gi, "ring route"],
+    [/\borbital period\b/gi, "year lap"],
+    [/\bday and night\b/gi, "day-night turn"],
+    [/\bseasons\b/gi, "tilted-lap seasons"],
+    [/\bmoon\b/gi, "companion rider"],
+    [/\bphase\b/gi, "lit-face phase"],
+    [/\bsolar system\b/gi, "Solar Court"],
+  ],
+};
+
+function coreModuleNumber(code: string): number | null {
+  const match = /^M(\d+)_L\d+$/i.exec(code);
+  if (!match) return null;
+  const value = Number(match[1]);
+  return Number.isFinite(value) ? value : null;
+}
+
+function isM1ToM14Lesson(code: string): boolean {
+  const moduleNumber = coreModuleNumber(code);
+  return moduleNumber !== null && moduleNumber >= 1 && moduleNumber <= 14;
+}
+
+function singleLineText(value: string): string {
+  return text(value).replace(/\s+/g, " ").trim();
+}
+
+function ensureSentence(value: string): string {
+  const trimmed = singleLineText(value);
+  if (!trimmed) return "";
+  return /[.!?]$/.test(trimmed) ? trimmed : `${trimmed}.`;
+}
+
+function lowerFirst(value: string): string {
+  if (!value) return "";
+  return value.charAt(0).toLowerCase() + value.slice(1);
+}
+
+function analogyTextForCoreModule(code: string, value: string): string {
+  const moduleNumber = coreModuleNumber(code);
+  const replacements = moduleNumber ? CORE_MODULE_ANALOGY_REPLACEMENTS[moduleNumber] || [] : [];
+  let rewritten = singleLineText(value);
+  replacements.forEach(([pattern, replacement]) => {
+    rewritten = rewritten.replace(pattern, replacement);
+  });
+  return rewritten;
+}
+
+function trimmedFormulaCondition(value: string): string {
+  return singleLineText(value).replace(/^use (it )?when\s+/i, "").replace(/^use for\s+/i, "");
+}
+
+function formulaUnitsText(formula: UnknownRecord): string {
+  const units = asList(formula.units).map((unit) => text(unit)).filter(Boolean);
+  return units.length ? units.join(", ") : "No unit list supplied.";
+}
+
+function formulaConstantsText(code: string, formula: UnknownRecord): string {
+  const combined = `${text(formula.equation)} ${text(formula.meaning)} ${text(formula.conditions)}`;
+  const notes: string[] = [];
+
+  if (/\bg\b/.test(text(formula.equation)) || /gravitational field strength/i.test(combined)) {
+    notes.push("Near Earth, use g ≈ 10 N/kg (or 9.8 N/kg when specified).");
+  }
+  if (/specific heat/i.test(combined)) {
+    notes.push("c is the material-specific heat capacity.");
+  }
+  if (/latent heat|phase change/i.test(combined)) {
+    notes.push("L is the material-specific latent heat for that state change.");
+  }
+  if (/360\s*degrees|360°|15 degrees per hour/i.test(combined) || /24\s*h\b/i.test(combined)) {
+    notes.push("One full Earth rotation is 360° in 24 h.");
+  }
+  if (/23\.4|23\.5/.test(combined) || /axial tilt/i.test(combined)) {
+    notes.push("Earth's axial tilt is about 23.4°.");
+  }
+  if (/20\s*hz/i.test(combined) || /20[, ]?000\s*hz/i.test(combined) || /audible range/i.test(combined)) {
+    notes.push("Typical human hearing spans about 20 Hz to 20 kHz.");
+  }
+
+  return notes.length ? notes.join(" ") : "No fixed constant highlighted for this relation.";
+}
+
+function formulaAnalogyEquivalent(code: string, formula: UnknownRecord): string {
+  const moduleNumber = coreModuleNumber(code);
+  const label = moduleNumber ? CORE_MODULE_ANALOGY_LABELS[moduleNumber] || "Lesson-model" : "Lesson-model";
+  const meaning = ensureSentence(analogyTextForCoreModule(code, text(formula.meaning)));
+  const condition = trimmedFormulaCondition(analogyTextForCoreModule(code, text(formula.conditions)));
+
+  if (meaning && condition) {
+    return `${label} rule: ${meaning} Use it when ${lowerFirst(condition)}.`;
+  }
+  if (meaning) return `${label} rule: ${meaning}`;
+  if (condition) return `${label} rule: Use it when ${lowerFirst(condition)}.`;
+  return `${label} rule: Match the formal relation to the lesson story before you calculate.`;
+}
+
+function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
+  const code = lessonCode(lesson);
+  if (!isM1ToM14Lesson(code)) return null;
+
+  const formulaCards: UnknownRecord[] = [];
+  asList(asRecord(lesson.authoring_contract).formulas).map(asRecord).forEach((formula) => {
+    const standardFormula =
+      text(formula.equation) ||
+      text(formula.formula) ||
+      text(formula.relation) ||
+      text(formula.expression);
+    if (!standardFormula) return;
+    formulaCards.push({
+      standard_formula: standardFormula,
+      analogy_equivalent: formulaAnalogyEquivalent(code, formula),
+      constants: formulaConstantsText(code, formula),
+      meaning: ensureSentence(text(formula.meaning)),
+      units_text: formulaUnitsText(formula),
+      conditions: ensureSentence(trimmedFormulaCondition(text(formula.conditions))),
+    });
+  });
+
+  if (!formulaCards.length) return null;
+
+  return {
+    heading: "Standard formulas and analogy bridge",
+    body: "Match each formal relation to the lesson model before you start the worked example. Keep the formula, its lesson meaning, and any fixed constants together so the symbols stay tied to the actual physics story.",
+    formula_reference_rows: formulaCards,
+  };
+}
+
 function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const scaffoldSupport = asRecord(asRecord(lesson.authoring_contract).scaffold_support);
@@ -10833,6 +11113,7 @@ function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, ana
       body: text(section.body),
       check_for_understanding: text(section.check_for_understanding),
     }));
+  const formulaBridge = formulaBridgeSection(lesson);
 
   return [
     { heading: "Fix these ideas", body: repairText },
@@ -10852,6 +11133,7 @@ function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, ana
     ...extraSections,
     ...(code.startsWith("M3_") ? m3SupplementalScaffoldSections(code) : []),
     ...(code.startsWith("M4_") ? m4SupplementalScaffoldSections(code) : []),
+    ...(formulaBridge ? [formulaBridge] : []),
     ...scaffoldWorkedExampleSections(workedExample),
     ...(code.startsWith("M3_") ? m3SupplementalWorkedExampleSections(code) : []),
   ];

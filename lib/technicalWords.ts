@@ -13,6 +13,8 @@ type TechnicalWordSeed = TechnicalWordEntry & {
   aliases?: string[];
 };
 
+const STRICT_AUTHORED_TECHNICAL_WORD_MODULES = new Set(["A6", "A7", "A8", "A9", "A10", "A11"]);
+
 const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
   F1: [
     { term: "Physical quantity", aliases: ["quantity", "physical quantity"], meaning: "A physical quantity is something measurable, such as length, mass, or time.", why_it_matters: "It tells you what kind of thing the number is describing." },
@@ -339,7 +341,13 @@ function authoredTechnicalWords(lesson: UnknownRecord): TechnicalWordEntry[] {
         why_it_matters: text(entry.why_it_matters || entry.whyItMatters),
         source: text(entry.source).toLowerCase(),
       }))
-      .filter((entry) => entry.term && entry.meaning && entry.source !== "generated"),
+      .filter(
+        (entry) =>
+          entry.term &&
+          entry.meaning &&
+          entry.source !== "generated" &&
+          entry.source !== "lesson_generated",
+      ),
   );
 }
 
@@ -427,7 +435,13 @@ function rankLessonTechnicalWords(
 }
 
 export function technicalWordsForLesson(lesson: UnknownRecord, lessonCode: string): TechnicalWordEntry[] {
+  const moduleCode = moduleCodeFromLessonCode(lessonCode);
   const authored = authoredTechnicalWords(lesson);
   const corpus = lessonCorpus(lesson);
+
+  if (STRICT_AUTHORED_TECHNICAL_WORD_MODULES.has(moduleCode) && authored.length >= 4) {
+    return rankLessonTechnicalWords([...authored], corpus, authored.length);
+  }
+
   return rankLessonTechnicalWords([...authored, ...moduleFallbackWords(lesson, lessonCode)], corpus, authored.length);
 }
