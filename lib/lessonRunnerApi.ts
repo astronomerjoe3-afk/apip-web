@@ -10836,6 +10836,20 @@ const CORE_MODULE_ANALOGY_LABELS: Record<number, string> = {
   14: "Lantern-Ring",
 };
 
+const ADVANCED_MODULE_ANALOGY_LABELS: Record<number, string> = {
+  1: "Particle-Port Exchange",
+  2: "Ladder-Gate Packet",
+  3: "Phase-Loom",
+  4: "Vector-Rig",
+  5: "Swing-Return",
+  6: "Chamber-State",
+  7: "Source-Route",
+  8: "Slope-Map",
+  9: "Flux-Window",
+  10: "Beamline-Core",
+  11: "Gravity-Ladder",
+};
+
 const CORE_MODULE_ANALOGY_REPLACEMENTS: Record<number, ReadonlyArray<readonly [RegExp, string]>> = {
   1: [
     [/\bdisplacement\b/gi, "route span"],
@@ -10994,6 +11008,18 @@ function isM1ToM14Lesson(code: string): boolean {
   return moduleNumber !== null && moduleNumber >= 1 && moduleNumber <= 14;
 }
 
+function advancedModuleNumber(code: string): number | null {
+  const match = /^A(\d+)_L\d+$/i.exec(code);
+  if (!match) return null;
+  const value = Number(match[1]);
+  return Number.isFinite(value) ? value : null;
+}
+
+function isA1ToA11Lesson(code: string): boolean {
+  const moduleNumber = advancedModuleNumber(code);
+  return moduleNumber !== null && moduleNumber >= 1 && moduleNumber <= 11;
+}
+
 function singleLineText(value: string): string {
   return text(value).replace(/\s+/g, " ").trim();
 }
@@ -11007,6 +11033,12 @@ function ensureSentence(value: string): string {
 function lowerFirst(value: string): string {
   if (!value) return "";
   return value.charAt(0).toLowerCase() + value.slice(1);
+}
+
+function firstAnalogySentence(lesson: UnknownRecord): string {
+  const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text).trim();
+  if (!analogyText) return "";
+  return analogyText.match(/.*?[.!?](?:\s|$)/)?.[0]?.trim() || analogyText;
 }
 
 function analogyTextForCoreModule(code: string, value: string): string {
@@ -11028,7 +11060,7 @@ function formulaUnitsText(formula: UnknownRecord): string {
   return units.length ? units.join(", ") : "No unit list supplied.";
 }
 
-function formulaConstantsText(code: string, formula: UnknownRecord): string {
+function formulaConstantsText(code: string, formula: UnknownRecord): string[] {
   const combined = `${text(formula.equation)} ${text(formula.meaning)} ${text(formula.conditions)}`;
   const notes: string[] = [];
 
@@ -11050,29 +11082,73 @@ function formulaConstantsText(code: string, formula: UnknownRecord): string {
   if (/20\s*hz/i.test(combined) || /20[, ]?000\s*hz/i.test(combined) || /audible range/i.test(combined)) {
     notes.push("Typical human hearing spans about 20 Hz to 20 kHz.");
   }
+  if (/\bplanck\b/i.test(combined) || (/\bh\b/.test(text(formula.equation)) && /photon|quantum|de broglie|frequency|wavelength/i.test(combined))) {
+    notes.push("Use Planck's constant h = 6.63 × 10^-34 J s.");
+  }
+  if (/speed of light|relativ|mass[- ]energy|cosmology|redshift|photon/i.test(combined) && /\bc\b/.test(text(formula.equation))) {
+    notes.push("Use c = 3.0 × 10^8 m/s in vacuum.");
+  }
+  if (/molar gas constant|ideal gas/i.test(combined) || /\bR\b/.test(text(formula.equation))) {
+    notes.push("Use the molar gas constant R = 8.31 J mol^-1 K^-1.");
+  }
+  if (/gravitational constant|newton'?s law of gravitation|inverse-square/i.test(combined) || /\bG\b/.test(text(formula.equation))) {
+    notes.push("Use G = 6.67 × 10^-11 N m^2 kg^-2.");
+  }
+  if (/elementary charge|electron charge|electronvolt|photoelectric/i.test(combined) || (/\be\b/.test(text(formula.equation)) && /charge/i.test(combined))) {
+    notes.push("Use the elementary charge e = 1.60 × 10^-19 C.");
+  }
+  if (/avogadro/i.test(combined) || /N_A/.test(text(formula.equation))) {
+    notes.push("Use Avogadro's constant N_A = 6.02 × 10^23 mol^-1.");
+  }
+  if (/permittivity of free space|epsilon|ε0/.test(combined) || /ε0/.test(text(formula.equation))) {
+    notes.push("Use ε0 = 8.85 × 10^-12 F/m when the relation needs free-space permittivity.");
+  }
+  if (/permeability of free space|mu0|μ0/.test(combined) || /μ0/.test(text(formula.equation))) {
+    notes.push("Use μ0 = 4π × 10^-7 H/m when the relation needs free-space permeability.");
+  }
+  if (/boltzmann/i.test(combined) || /\bk\b/.test(text(formula.equation))) {
+    notes.push("Use Boltzmann's constant k = 1.38 × 10^-23 J K^-1 when the kinetic model needs it.");
+  }
 
-  return notes.length ? notes.join(" ") : "No fixed constant highlighted for this relation.";
+  return dedupeText(notes);
 }
 
-function formulaAnalogyEquivalent(code: string, formula: UnknownRecord): string {
-  const moduleNumber = coreModuleNumber(code);
-  const label = moduleNumber ? CORE_MODULE_ANALOGY_LABELS[moduleNumber] || "Lesson-model" : "Lesson-model";
-  const meaning = ensureSentence(analogyTextForCoreModule(code, text(formula.meaning)));
-  const condition = trimmedFormulaCondition(analogyTextForCoreModule(code, text(formula.conditions)));
+function formulaAnalogyEquivalent(lesson: UnknownRecord, code: string, formula: UnknownRecord): string {
+  const coreModule = coreModuleNumber(code);
+  if (coreModule !== null) {
+    const label = CORE_MODULE_ANALOGY_LABELS[coreModule] || "Lesson-model";
+    const meaning = ensureSentence(analogyTextForCoreModule(code, text(formula.meaning)));
+    const condition = trimmedFormulaCondition(analogyTextForCoreModule(code, text(formula.conditions)));
 
-  if (meaning && condition) {
-    return `${label} rule: ${meaning} Use it when ${lowerFirst(condition)}.`;
+    if (meaning && condition) {
+      return `${label} rule: ${meaning} Use it when ${lowerFirst(condition)}.`;
+    }
+    if (meaning) return `${label} rule: ${meaning}`;
+    if (condition) return `${label} rule: Use it when ${lowerFirst(condition)}.`;
+    return `${label} rule: Match the formal relation to the lesson story before you calculate.`;
   }
-  if (meaning) return `${label} rule: ${meaning}`;
-  if (condition) return `${label} rule: Use it when ${lowerFirst(condition)}.`;
-  return `${label} rule: Match the formal relation to the lesson story before you calculate.`;
+
+  const advancedModule = advancedModuleNumber(code);
+  if (advancedModule !== null) {
+    const label = ADVANCED_MODULE_ANALOGY_LABELS[advancedModule] || "Lesson-model";
+    const analogySentence = ensureSentence(firstAnalogySentence(lesson));
+    const condition = trimmedFormulaCondition(text(formula.conditions));
+    if (analogySentence && condition) {
+      return `${label} bridge: ${analogySentence} Use this relation when ${lowerFirst(condition)}.`;
+    }
+    if (analogySentence) return `${label} bridge: ${analogySentence}`;
+    if (condition) return `${label} bridge: Use this relation when ${lowerFirst(condition)}.`;
+  }
+
+  return "Match the formal relation to the lesson model before you calculate.";
 }
 
 function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
   const code = lessonCode(lesson);
-  if (!isM1ToM14Lesson(code)) return null;
+  if (!isM1ToM14Lesson(code) && !isA1ToA11Lesson(code)) return null;
 
   const formulaCards: UnknownRecord[] = [];
+  const constantsNotes: string[] = [];
   asList(asRecord(lesson.authoring_contract).formulas).map(asRecord).forEach((formula) => {
     const standardFormula =
       text(formula.equation) ||
@@ -11080,10 +11156,12 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
       text(formula.relation) ||
       text(formula.expression);
     if (!standardFormula) return;
+    const constantNotes = formulaConstantsText(code, formula);
+    constantsNotes.push(...constantNotes);
     formulaCards.push({
       standard_formula: standardFormula,
-      analogy_equivalent: formulaAnalogyEquivalent(code, formula),
-      constants: formulaConstantsText(code, formula),
+      analogy_equivalent: formulaAnalogyEquivalent(lesson, code, formula),
+      constants: constantNotes.join(" "),
       meaning: ensureSentence(text(formula.meaning)),
       units_text: formulaUnitsText(formula),
       conditions: ensureSentence(trimmedFormulaCondition(text(formula.conditions))),
@@ -11092,10 +11170,18 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
 
   if (!formulaCards.length) return null;
 
+  const uniqueConstants = dedupeText(constantsNotes);
+  const useSectionConstantNote = uniqueConstants.length === 1;
+  const rows = formulaCards.map((card) => ({
+    ...card,
+    constants: useSectionConstantNote ? "" : text(card.constants),
+  }));
+
   return {
     heading: "Standard formulas and analogy bridge",
     body: "Match each formal relation to the lesson model before you start the worked example. Keep the formula, its lesson meaning, and any fixed constants together so the symbols stay tied to the actual physics story.",
-    formula_reference_rows: formulaCards,
+    formula_reference_rows: rows,
+    formula_constants_note: useSectionConstantNote ? uniqueConstants[0] : "",
   };
 }
 
