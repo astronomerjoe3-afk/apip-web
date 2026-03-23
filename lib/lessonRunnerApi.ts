@@ -21,6 +21,7 @@ import { a2QuestionVisualMeta, a2ReflectionVisualCheck, a2ScaffoldCoreBullets, a
 import { a3QuestionVisualMeta, a3ReflectionVisualCheck, a3ScaffoldCoreBullets, a3ScaffoldFocusExtras, a3ScaffoldMediaCards, a3SimulationCopy } from "./a3LessonContent";
 import { a4QuestionVisualMeta, a4ReflectionVisualCheck, a4ScaffoldCoreBullets, a4ScaffoldFocusExtras, a4ScaffoldMediaCards, a4SimulationCopy } from "./a4LessonContent";
 import { a5QuestionVisualMeta, a5ReflectionVisualCheck, a5ScaffoldCoreBullets, a5ScaffoldFocusExtras, a5ScaffoldMediaCards, a5SimulationCopy } from "./a5LessonContent";
+import { a6ToA11QuestionVisualMeta, a6ToA11ReflectionVisualCheck, a6ToA11ScaffoldCoreBullets, a6ToA11ScaffoldFocusExtras, a6ToA11ScaffoldMediaCards, a6ToA11SimulationCopy } from "./a6ToA11LessonContent";
 import { technicalWordsForLesson } from "./technicalWords";
 
 type UnknownRecord = Record<string, unknown>;
@@ -97,14 +98,29 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "F5_L1", "F5_L2", "F5_L3", "F5_L4", "F5_L5", "F5_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M12_L1", "M12_L2", "M12_L3", "M12_L4", "M12_L5", "M12_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6", "M14_L1", "M14_L2", "M14_L3", "M14_L4", "M14_L5", "M14_L6", "A1_L1", "A1_L2", "A1_L3", "A1_L4", "A1_L5", "A1_L6", "A2_L1", "A2_L2", "A2_L3", "A2_L4", "A2_L5", "A2_L6", "A3_L1", "A3_L2", "A3_L3", "A3_L4", "A3_L5", "A3_L6", "A4_L1", "A4_L2", "A4_L3", "A4_L4", "A4_L5", "A4_L6", "A5_L1", "A5_L2", "A5_L3", "A5_L4", "A5_L5", "A5_L6"];
+const LESSON_SUFFIXES = ["L1", "L2", "L3", "L4", "L5", "L6"] as const;
+const SUPPLEMENTAL_MODULE_CODES = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "M13", "M14", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11"] as const;
+const SUPPLEMENTAL_LESSON_CODES = SUPPLEMENTAL_MODULE_CODES.flatMap((moduleCode) =>
+  LESSON_SUFFIXES.map((lessonSuffix) => `${moduleCode}_${lessonSuffix}`),
+);
+const EXTENDED_NEXTGEN_MODULE_CODES = SUPPLEMENTAL_MODULE_CODES.filter((moduleCode) => moduleCode !== "F1");
+const STRUCTURED_MASTERY_MODULE_CODES = EXTENDED_NEXTGEN_MODULE_CODES.filter((moduleCode) => moduleCode !== "F2");
+const A6_TO_A11_MODULE_PREFIXES = ["A6_", "A7_", "A8_", "A9_", "A10_", "A11_"] as const;
+
+function normalizeSupplementalLessonCode(code: string): string {
+  return String(code || "").trim().replace(/-/g, "_").toUpperCase();
+}
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("F5_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("M14_") || code.startsWith("A1_") || code.startsWith("A2_") || code.startsWith("A3_") || code.startsWith("A4_") || code.startsWith("A5_");
+  const normalized = normalizeSupplementalLessonCode(code);
+  if (!SUPPLEMENTAL_LESSON_CODES.includes(normalized)) return false;
+  return EXTENDED_NEXTGEN_MODULE_CODES.some((moduleCode) => normalized.startsWith(`${moduleCode}_`));
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("F5_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("M14_") || code.startsWith("A1_") || code.startsWith("A2_") || code.startsWith("A3_") || code.startsWith("A4_") || code.startsWith("A5_");
+  const normalized = normalizeSupplementalLessonCode(code);
+  if (!SUPPLEMENTAL_LESSON_CODES.includes(normalized)) return false;
+  return STRUCTURED_MASTERY_MODULE_CODES.some((moduleCode) => normalized.startsWith(`${moduleCode}_`));
 }
 
 type QuestionVisualMeta = {
@@ -128,6 +144,7 @@ function remappedLateCoreQuestionVisualMeta(itemId: string): QuestionVisualMeta 
   const match = itemId.toUpperCase().match(/^([A-Z]\d+)L([1-6])_[A-Z]+\d+$/);
   if (!match) return undefined;
   const moduleCode = match[1];
+  if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => `${moduleCode}_`.startsWith(prefix))) return a6ToA11QuestionVisualMeta(itemId);
   if (moduleCode === "F5") return f5QuestionVisualMeta(itemId);
   if (moduleCode === "M9") return m9QuestionVisualMeta(itemId);
   if (moduleCode === "M10") return m10QuestionVisualMeta(itemId);
@@ -139,6 +156,7 @@ function remappedLateCoreQuestionVisualMeta(itemId: string): QuestionVisualMeta 
 }
 
 function remappedLateCoreSimulationCopy(code: string): SupplementalSimulationCopy | undefined {
+  if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11SimulationCopy(code);
   if (code.startsWith("F5_")) return f5SimulationCopy(code);
   if (code.startsWith("M9_")) return m9SimulationCopy(code);
   if (code.startsWith("M10_")) return m10SimulationCopy(code);
@@ -150,6 +168,7 @@ function remappedLateCoreSimulationCopy(code: string): SupplementalSimulationCop
 }
 
 function remappedLateCoreFocusExtras(code: string): string[] {
+  if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ScaffoldFocusExtras(code);
   if (code.startsWith("F5_")) return f5ScaffoldFocusExtras(code);
   if (code.startsWith("M9_")) return m9ScaffoldFocusExtras(code);
   if (code.startsWith("M10_")) return m10ScaffoldFocusExtras(code);
@@ -161,6 +180,7 @@ function remappedLateCoreFocusExtras(code: string): string[] {
 }
 
 function remappedLateCoreCoreBullets(code: string): string[] {
+  if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ScaffoldCoreBullets(code);
   if (code.startsWith("F5_")) return f5ScaffoldCoreBullets(code);
   if (code.startsWith("M9_")) return m9ScaffoldCoreBullets(code);
   if (code.startsWith("M10_")) return m10ScaffoldCoreBullets(code);
@@ -172,6 +192,7 @@ function remappedLateCoreCoreBullets(code: string): string[] {
 }
 
 function remappedLateCoreMediaCards(code: string): UnknownRecord[] {
+  if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ScaffoldMediaCards(code);
   if (code.startsWith("F5_")) return f5ScaffoldMediaCards(code);
   if (code.startsWith("M9_")) return m9ScaffoldMediaCards(code);
   if (code.startsWith("M10_")) return m10ScaffoldMediaCards(code);
@@ -183,6 +204,7 @@ function remappedLateCoreMediaCards(code: string): UnknownRecord[] {
 }
 
 function remappedLateCoreReflectionVisualCheck(code: string): UnknownRecord | undefined {
+  if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ReflectionVisualCheck(code);
   if (code.startsWith("F5_")) return f5ReflectionVisualCheck(code);
   if (code.startsWith("M9_")) return m9ReflectionVisualCheck(code);
   if (code.startsWith("M10_")) return m10ReflectionVisualCheck(code);
