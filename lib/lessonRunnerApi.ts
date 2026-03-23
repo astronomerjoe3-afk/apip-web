@@ -124,120 +124,77 @@ type SupplementalSimulationCopy = {
   takeaway: string;
 };
 
-function lessonNumberFromCode(code: string): number | null {
-  const match = code.match(/_L([1-6])$/);
-  return match ? Number(match[1]) : null;
-}
-
-function replaceLessonCodePrefix(code: string, targetModule: string): string {
-  return code.replace(/^[A-Z]\d+_L/, `${targetModule}_L`);
-}
-
-function replaceQuestionIdPrefix(itemId: string, targetModule: string, targetLessonNumber?: number): string {
-  const inlineMatch = itemId.match(/^[A-Z]\d+L([1-6])_/);
-  const normalizedLesson = targetLessonNumber ?? (inlineMatch ? Number(inlineMatch[1]) : null) ?? 1;
-  return itemId.replace(/^[A-Z]\d+L\d+/, `${targetModule}L${normalizedLesson}`);
-}
-
 function remappedLateCoreQuestionVisualMeta(itemId: string): QuestionVisualMeta | undefined {
   const match = itemId.toUpperCase().match(/^([A-Z]\d+)L([1-6])_[A-Z]+\d+$/);
   if (!match) return undefined;
   const moduleCode = match[1];
-  const lessonNumber = Number(match[2]);
   if (moduleCode === "F5") return f5QuestionVisualMeta(itemId);
-  if (moduleCode === "M9") {
-    return lessonNumber <= 5
-      ? m10QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M10"))
-      : m11QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M11", 2));
-  }
-  if (moduleCode === "M10") return m12QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M12"));
-  if (moduleCode === "M11") return m13QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M13"));
-  if (moduleCode === "M13") return m14QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M14"));
-  if (moduleCode === "M14") return m15QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M15"));
+  if (moduleCode === "M9") return m9QuestionVisualMeta(itemId);
+  if (moduleCode === "M10") return m10QuestionVisualMeta(itemId);
+  if (moduleCode === "M11") return m11QuestionVisualMeta(itemId);
+  if (moduleCode === "M12") return m12QuestionVisualMeta(itemId);
+  if (moduleCode === "M13") return m13QuestionVisualMeta(itemId);
+  if (moduleCode === "M14") return m14QuestionVisualMeta(itemId);
   return undefined;
 }
 
 function remappedLateCoreSimulationCopy(code: string): SupplementalSimulationCopy | undefined {
-  const lessonNumber = lessonNumberFromCode(code);
-  if (lessonNumber == null) return undefined;
   if (code.startsWith("F5_")) return f5SimulationCopy(code);
-  if (code.startsWith("M9_")) {
-    return lessonNumber <= 5
-      ? m10SimulationCopy(replaceLessonCodePrefix(code, "M10"))
-      : m11SimulationCopy("M11_L2");
-  }
-  if (code.startsWith("M10_")) return m12SimulationCopy(replaceLessonCodePrefix(code, "M12"));
-  if (code.startsWith("M11_")) return m13SimulationCopy(replaceLessonCodePrefix(code, "M13"));
-  if (code.startsWith("M13_")) return m14SimulationCopy(replaceLessonCodePrefix(code, "M14"));
-  if (code.startsWith("M14_")) return m15SimulationCopy(replaceLessonCodePrefix(code, "M15"));
+  if (code.startsWith("M9_")) return m9SimulationCopy(code);
+  if (code.startsWith("M10_")) return m10SimulationCopy(code);
+  if (code.startsWith("M11_")) return m11SimulationCopy(code);
+  if (code.startsWith("M12_")) return m12SimulationCopy(code);
+  if (code.startsWith("M13_")) return m13SimulationCopy(code);
+  if (code.startsWith("M14_")) return m14SimulationCopy(code);
   return undefined;
 }
 
 function remappedLateCoreFocusExtras(code: string): string[] {
-  const lessonNumber = lessonNumberFromCode(code);
-  if (lessonNumber == null) return [];
   if (code.startsWith("F5_")) return f5ScaffoldFocusExtras(code);
-  if (code.startsWith("M9_")) {
-    return lessonNumber <= 5
-      ? m10ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M10"))
-      : m11ScaffoldFocusExtras("M11_L2");
-  }
-  if (code.startsWith("M10_")) return m12ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M12"));
-  if (code.startsWith("M11_")) return m13ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M13"));
-  if (code.startsWith("M13_")) return m14ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M14"));
-  if (code.startsWith("M14_")) return m15ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M15"));
+  if (code.startsWith("M9_")) return m9ScaffoldFocusExtras(code);
+  if (code.startsWith("M10_")) return m10ScaffoldFocusExtras(code);
+  if (code.startsWith("M11_")) return m11ScaffoldFocusExtras(code);
+  if (code.startsWith("M12_")) return m12ScaffoldFocusExtras(code);
+  if (code.startsWith("M13_")) return m13ScaffoldFocusExtras(code);
+  if (code.startsWith("M14_")) return m14ScaffoldFocusExtras(code);
   return [];
 }
 
 function remappedLateCoreCoreBullets(code: string): string[] {
-  const lessonNumber = lessonNumberFromCode(code);
-  if (lessonNumber == null) return [];
   if (code.startsWith("F5_")) return f5ScaffoldCoreBullets(code);
-  if (code.startsWith("M9_")) {
-    return lessonNumber <= 5
-      ? m10ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M10"))
-      : m11ScaffoldCoreBullets("M11_L2");
-  }
-  if (code.startsWith("M10_")) return m12ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M12"));
-  if (code.startsWith("M11_")) return m13ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M13"));
-  if (code.startsWith("M13_")) return m14ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M14"));
-  if (code.startsWith("M14_")) return m15ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M15"));
+  if (code.startsWith("M9_")) return m9ScaffoldCoreBullets(code);
+  if (code.startsWith("M10_")) return m10ScaffoldCoreBullets(code);
+  if (code.startsWith("M11_")) return m11ScaffoldCoreBullets(code);
+  if (code.startsWith("M12_")) return m12ScaffoldCoreBullets(code);
+  if (code.startsWith("M13_")) return m13ScaffoldCoreBullets(code);
+  if (code.startsWith("M14_")) return m14ScaffoldCoreBullets(code);
   return [];
 }
 
 function remappedLateCoreMediaCards(code: string): UnknownRecord[] {
-  const lessonNumber = lessonNumberFromCode(code);
-  if (lessonNumber == null) return [];
   if (code.startsWith("F5_")) return f5ScaffoldMediaCards(code);
-  if (code.startsWith("M9_")) {
-    return lessonNumber <= 5
-      ? m10ScaffoldMediaCards(replaceLessonCodePrefix(code, "M10"))
-      : m11ScaffoldMediaCards("M11_L2");
-  }
-  if (code.startsWith("M10_")) return m12ScaffoldMediaCards(replaceLessonCodePrefix(code, "M12"));
-  if (code.startsWith("M11_")) return m13ScaffoldMediaCards(replaceLessonCodePrefix(code, "M13"));
-  if (code.startsWith("M13_")) return m14ScaffoldMediaCards(replaceLessonCodePrefix(code, "M14"));
-  if (code.startsWith("M14_")) return m15ScaffoldMediaCards(replaceLessonCodePrefix(code, "M15"));
+  if (code.startsWith("M9_")) return m9ScaffoldMediaCards(code);
+  if (code.startsWith("M10_")) return m10ScaffoldMediaCards(code);
+  if (code.startsWith("M11_")) return m11ScaffoldMediaCards(code);
+  if (code.startsWith("M12_")) return m12ScaffoldMediaCards(code);
+  if (code.startsWith("M13_")) return m13ScaffoldMediaCards(code);
+  if (code.startsWith("M14_")) return m14ScaffoldMediaCards(code);
   return [];
 }
 
 function remappedLateCoreReflectionVisualCheck(code: string): UnknownRecord | undefined {
-  const lessonNumber = lessonNumberFromCode(code);
-  if (lessonNumber == null) return undefined;
   if (code.startsWith("F5_")) return f5ReflectionVisualCheck(code);
-  if (code.startsWith("M9_")) {
-    return lessonNumber <= 5
-      ? m10ReflectionVisualCheck(replaceLessonCodePrefix(code, "M10"))
-      : m11ReflectionVisualCheck("M11_L2");
-  }
-  if (code.startsWith("M10_")) return m12ReflectionVisualCheck(replaceLessonCodePrefix(code, "M12"));
-  if (code.startsWith("M11_")) return m13ReflectionVisualCheck(replaceLessonCodePrefix(code, "M13"));
-  if (code.startsWith("M13_")) return m14ReflectionVisualCheck(replaceLessonCodePrefix(code, "M14"));
-  if (code.startsWith("M14_")) return m15ReflectionVisualCheck(replaceLessonCodePrefix(code, "M15"));
+  if (code.startsWith("M9_")) return m9ReflectionVisualCheck(code);
+  if (code.startsWith("M10_")) return m10ReflectionVisualCheck(code);
+  if (code.startsWith("M11_")) return m11ReflectionVisualCheck(code);
+  if (code.startsWith("M12_")) return m12ReflectionVisualCheck(code);
+  if (code.startsWith("M13_")) return m13ReflectionVisualCheck(code);
+  if (code.startsWith("M14_")) return m14ReflectionVisualCheck(code);
   return undefined;
 }
 
 const F4_ASSET_BASE = "/lesson_assets/F4";
+const M1_ASSET_BASE = "/lesson_assets/M1";
 
 const FOUNDATION_VISUAL_META: Record<string, QuestionVisualMeta> = {
   F1L1: {
@@ -486,68 +443,68 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
   switch (lessonKey) {
     case "M1L1":
       return {
-        image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
-        visual_title: "Quest lane and mission log",
-        visual_caption: "The lane is where motion happens, and the mission log records how the progress score changes with time.",
+        image_url: `${M1_ASSET_BASE}/M1_L1/diagrams/m1_l1_distance_time_graph.svg`,
+        visual_title: "Distance-time story board",
+        visual_caption: "The graph-agent plot keeps the axes, pause section, and steeper final segment visible on one proper distance-time graph.",
         visual_callouts: [
-          "Height shows recorded progress by that time.",
-          "A flat section means the avatar is paused.",
-          "Steeper rise means greater pace.",
+          "Graph height shows the recorded distance by that time.",
+          "A flat section means the traveler is paused.",
+          "A steeper segment means a greater speed.",
         ],
       };
     case "M1L2":
       return {
-        image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
-        visual_title: "Pace log",
-        visual_caption: "On a pace log, the graph height at a chosen time shows the speed at that time, while the slope over a chosen interval shows how quickly the speed is changing during that interval.",
+        image_url: `${M1_ASSET_BASE}/M1_L2/diagrams/m1_l2_speed_time_graph.svg`,
+        visual_title: "Speed-time graph",
+        visual_caption: "The graph-agent plot keeps graph height and graph slope separate so students can read speed and acceleration from the correct feature.",
         visual_callouts: [
-          "A high point at a chosen time means large speed at that time.",
+          "Graph height at a chosen time gives the speed at that time.",
           "A rising line means positive acceleration.",
-          "Flat above zero still means motion.",
+          "Flat above zero still means motion at constant speed.",
         ],
       };
     case "M1L3":
       return {
-        image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
-        visual_title: "Pace arrow and boost shift",
-        visual_caption: "Acceleration comes from the signed change in velocity over time, not from a guess about feeling faster.",
+        image_url: `${M1_ASSET_BASE}/M1_L3/diagrams/m1_l3_signed_acceleration_graph.svg`,
+        visual_title: "Signed velocity and acceleration graph",
+        visual_caption: "This graph-agent velocity-time plot keeps velocity sign on the axis and acceleration sign in the slope.",
         visual_callouts: [
-          "Compare the starting and finishing velocity arrows before naming the acceleration sign.",
-          "The same velocity change over less time means a larger acceleration magnitude.",
-          "Negative acceleration only tells you the direction of the change, not automatically slowing down in every story.",
+          "Velocity sign is read from whether the graph is above or below the axis.",
+          "Acceleration sign is read from the slope direction.",
+          "A positive slope can act while the velocity is still negative.",
         ],
       };
     case "M1L4":
       return {
-        image_url: "/lesson-media/m1/m1-l4-suvat.svg",
-        visual_title: "Quest forecast board",
-        visual_caption: "Choose equations from the knowns, the unknown, and the constant-acceleration condition.",
+        image_url: `${M1_ASSET_BASE}/M1_L4/diagrams/m1_l4_constant_acceleration_graph.svg`,
+        visual_title: "Constant-acceleration forecast graph",
+        visual_caption: "The graph-agent velocity-time forecast keeps one steady slope visible so students can see why the compact motion equations require constant acceleration.",
         visual_callouts: [
-          "u, v, a, s, and t each answer a different question in the story.",
-          "Pick the relation that reaches the unknown while avoiding the variable you do not know.",
-          "This board only applies directly when acceleration stays constant.",
+          "A straight velocity-time line means one steady acceleration throughout.",
+          "Graph and equation reasoning agree only while that condition holds.",
+          "The knowns and unknown still decide which equation is the best tool.",
         ],
       };
     case "M1L5":
       return {
-        image_url: "/lesson-media/m1/m1-l5-gradient.svg",
-        visual_title: "Same tilt, different log",
-        visual_caption: "The same slope can mean pace on a progress log or acceleration on a pace log because the axes are different.",
+        image_url: `${M1_ASSET_BASE}/M1_L5/diagrams/m1_l5_speed_gradient_graph.svg`,
+        visual_title: "Gradient meaning comparator",
+        visual_caption: "The M1 comparison now uses graph-agent plots, with one graph for distance-time and one for speed-time, so slope meaning stays tied to the axes.",
         visual_callouts: [
-          "On distance-time, slope compares distance change with time, so it gives speed.",
-          "On speed-time, slope compares speed change with time, so it gives acceleration.",
-          "A zero slope tells a different motion story on each graph type.",
+          "The paired graphs must be named before the slope is named.",
+          "On distance-time, slope gives speed.",
+          "On speed-time, slope gives acceleration.",
         ],
       };
     case "M1L6":
       return {
-        image_url: "/lesson-media/m1/m1-l6-area.svg",
-        visual_title: "Area hunter",
-        visual_caption: "Every strip under the pace log is progress earned during one time beat, so the whole area is total distance.",
+        image_url: `${M1_ASSET_BASE}/M1_L6/diagrams/m1_l6_area_distance_graph.svg`,
+        visual_title: "Area-to-distance builder",
+        visual_caption: "The graph-agent speed-time plot keeps the shaded region under the graph so the total area can be read as total distance.",
         visual_callouts: [
-          "The rectangle shows distance from the constant-speed part of the story.",
-          "The triangle shows the extra distance added while the speed changes steadily.",
-          "Different graph shapes can still represent the same total distance if the total area matches.",
+          "On a speed-time graph, area accumulates distance.",
+          "The whole shaded region matters, not just the outline shape.",
+          "Different shapes can still match if the total area is the same.",
         ],
       };
     default:
@@ -9848,19 +9805,19 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
         const isModuleOne = code.startsWith("M1_");
         const isThermal = code.startsWith("M6_");
         const isOptics = code.startsWith("M8_");
-        const isElectricalCircuits = code.startsWith("M9_");
-        const isFieldWeave = code.startsWith("M10_");
-        const isRadioactivity = code.startsWith("M11_");
-        const isNuclearEnergy = code.startsWith("M12_");
-        const isSolarSystem = code.startsWith("M13_");
-        const isUniverse = code.startsWith("M14_");
+        const isSound = code.startsWith("M9_");
+        const isElectricalQuantities = code.startsWith("M10_");
+        const isCircuits = code.startsWith("M11_");
+        const isElectromagnetism = code.startsWith("M12_");
+        const isRadioactivity = code.startsWith("M13_");
+        const isSolarSystem = code.startsWith("M14_");
         const isAdvancedParticles = code.startsWith("A1_");
         const isAdvancedQuantum = code.startsWith("A2_");
         const isAdvancedWaves = code.startsWith("A3_");
         const isAdvancedMechanicsMaterials = code.startsWith("A4_");
         const isAdvancedOscillations = code.startsWith("A5_");
         return [{
-          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isElectricalCircuits ? "Electrical circuit essentials" : isFieldWeave ? "Magnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isNuclearEnergy ? "Nuclear energy essentials" : isSolarSystem ? "Solar system essentials" : isUniverse ? "Universe essentials" : isAdvancedParticles ? "Particles essentials" : isAdvancedQuantum ? "Quantum essentials" : isAdvancedWaves ? "Advanced waves essentials" : isAdvancedMechanicsMaterials ? "Mechanics and materials essentials" : isAdvancedOscillations ? "Oscillations essentials" : "Lesson essentials",
+          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuits essentials" : isElectromagnetism ? "Electromagnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isSolarSystem ? "Solar system essentials" : isAdvancedParticles ? "Particles essentials" : isAdvancedQuantum ? "Quantum essentials" : isAdvancedWaves ? "Advanced waves essentials" : isAdvancedMechanicsMaterials ? "Mechanics and materials essentials" : isAdvancedOscillations ? "Oscillations essentials" : "Lesson essentials",
           caption: isFlowGrid
             ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
             : isEarthSky
@@ -9871,18 +9828,18 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
                 ? "Keep these key thermal transfer, phase-change, and energy-bookkeeping ideas visible while you work through the lesson."
                 : isOptics
                   ? "Keep these key reflection, refraction, lens, and route-sketch ideas visible while you work through the lesson."
-                  : isElectricalCircuits
-                    ? "Keep these charge, current, voltage, resistance, series-parallel, power, and safety ideas visible while you work through the lesson."
-                    : isFieldWeave
+                  : isSound
+                    ? "Keep these source, vibration, compression, pitch, echo, ultrasound, and Doppler ideas visible while you work through the lesson."
+                    : isElectricalQuantities
+                      ? "Keep these charge, current, voltage, resistance, and Ohm's-law ideas visible while you work through the lesson."
+                    : isCircuits
+                      ? "Keep these series-parallel, circuit-diagram, power, combined-resistance, and safety ideas visible while you work through the lesson."
+                    : isElectromagnetism
                       ? "Keep these field, electromagnet, force, induction, generator, and transformer ideas visible while you work through the lesson."
                   : isRadioactivity
                     ? "Keep these atomic-structure, isotope, radiation, half-life, background, and decay-ledger ideas visible while you work through the lesson."
-                  : isNuclearEnergy
-                    ? "Keep these fission, fusion, chain-reaction, reactor, tracer, hazard, and waste-management ideas visible while you work through the lesson."
                   : isSolarSystem
                     ? "Keep these Sun-centered-family, orbit, rotation, tilt, Moon-phase, and year-lap ideas visible while you work through the lesson."
-                  : isUniverse
-                    ? "Keep these star, galaxy, light-year, redshift, and cosmic-expansion ideas visible while you work through the lesson."
                   : isAdvancedParticles
                     ? "Keep these particle-family, hadron-structure, antiparticle, interaction, and conservation-ledger ideas visible while you work through the lesson."
                   : isAdvancedQuantum
@@ -10282,16 +10239,16 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Read the mission log, not the lane",
-          caption: "This Quest-Log graphic labels the axes with units and pins each label to the exact feature it explains.",
-          image_url: "/lesson-media/m1/m1-l1-distance-time.svg",
+          caption: "This graph-agent distance-time plot labels the axes with units and pins each label to the exact feature it explains.",
+          image_url: `${M1_ASSET_BASE}/M1_L1/diagrams/m1_l1_distance_time_graph.svg`,
           highlights: ["Recorded progress, s (m), is graph height", "Mission clock, t (s), runs on the horizontal axis", "Slope = pace on that segment"],
         },
         {
           kind: "visual",
           title: "Same finish, different run story",
-          caption: "A second mission-log comparison shows that equal final distance and time do not force identical motion histories.",
-          image_url: "/lesson-media/m1/m1-l1-same-finish.svg",
-          highlights: ["Run A pauses then sprints", "Run B climbs steadily", "Same final point can hide different pace stories"],
+          caption: "A second graph-agent comparison shows that equal final distance and time do not force identical motion histories.",
+          image_url: `${M1_ASSET_BASE}/M1_L1/diagrams/m1_l1_same_finish_graph.svg`,
+          highlights: ["Run A pauses then catches up", "Run B keeps one steady slope", "Same final point can hide different pace stories"],
         },
       ];
     case "M1_L2":
@@ -10299,8 +10256,8 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Separate level from change",
-          caption: "The speed-time strip makes graph height answer a speed question while slope answers an acceleration question.",
-          image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
+          caption: "The graph-agent speed-time plot makes graph height answer a speed question while slope answers an acceleration question.",
+          image_url: `${M1_ASSET_BASE}/M1_L2/diagrams/m1_l2_speed_time_graph.svg`,
           highlights: ["Height = current speed", "Slope = rate of speed change", "Flat above zero = constant speed"],
         },
       ];
@@ -10309,9 +10266,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "See the signed velocity change",
-          caption: "The change-rate diagram makes acceleration a directional rate instead of a synonym for going faster.",
-          image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
-          highlights: ["Compare start and finish velocity", "Divide the change by time", "Read the sign from the chosen positive direction"],
+          caption: "The graph-agent velocity-time plot makes acceleration a directional rate instead of a synonym for going faster.",
+          image_url: `${M1_ASSET_BASE}/M1_L3/diagrams/m1_l3_signed_acceleration_graph.svg`,
+          highlights: ["Velocity sign comes from the axis", "Slope sign gives the acceleration sign", "Crossing the axis does not flip the slope rule"],
         },
       ];
     case "M1_L4":
@@ -10319,19 +10276,26 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Choose the right forecast tool",
-          caption: "This suvat board helps students choose equations deliberately only when acceleration stays constant.",
-          image_url: "/lesson-media/m1/m1-l4-suvat.svg",
-          highlights: ["List what is known", "Pick the equation by the missing variable", "Check the constant-acceleration condition"],
+          caption: "This graph-agent forecast plot helps students choose equations deliberately only when acceleration stays constant.",
+          image_url: `${M1_ASSET_BASE}/M1_L4/diagrams/m1_l4_constant_acceleration_graph.svg`,
+          highlights: ["One straight line means one steady acceleration", "Check the constant-acceleration condition", "Then pick the equation from the knowns and unknown"],
         },
       ];
     case "M1_L5":
       return [
         {
           kind: "visual",
-          title: "Keep the same slope, change the axes",
-          caption: "The dual-log picture shows why the same tilt can mean pace on one graph and acceleration on another.",
-          image_url: "/lesson-media/m1/m1-l5-gradient.svg",
-          highlights: ["Distance-time slope = speed", "Speed-time slope = acceleration", "Graph type decides the meaning"],
+          title: "Distance-time slope meaning",
+          caption: "The first graph-agent comparison locks slope to speed when the axes are distance and time.",
+          image_url: `${M1_ASSET_BASE}/M1_L5/diagrams/m1_l5_distance_gradient_graph.svg`,
+          highlights: ["Distance-time slope = speed", "The axes decide the rate meaning", "Steepness alone is not enough"],
+        },
+        {
+          kind: "visual",
+          title: "Speed-time slope meaning",
+          caption: "The second graph-agent comparison keeps the same style of tilt but changes the axes, so the slope now means acceleration.",
+          image_url: `${M1_ASSET_BASE}/M1_L5/diagrams/m1_l5_speed_gradient_graph.svg`,
+          highlights: ["Speed-time slope = acceleration", "Graph type decides the meaning", "The same tilt can answer a different physics question"],
         },
       ];
     case "M1_L6":
@@ -10339,9 +10303,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Build distance from area",
-          caption: "The Area Hunter picture keeps strips, rectangle-plus-triangle reasoning, and total distance visible in one pace-log story.",
-          image_url: "/lesson-media/m1/m1-l6-area.svg",
-          highlights: ["Rectangle + triangle = total distance", "Area meaning comes from the axes", "Different shapes can still give the same distance"],
+          caption: "The graph-agent pace-log plot keeps the shaded region visible so total distance is read from the full area under the graph.",
+          image_url: `${M1_ASSET_BASE}/M1_L6/diagrams/m1_l6_area_distance_graph.svg`,
+          highlights: ["Area meaning comes from the axes", "The full shaded region gives total distance", "Different shapes can still give the same distance"],
         },
       ];
     default: {
@@ -11096,7 +11060,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
       return {
         title: "Distance-time graph check",
         prompt: "Use the comparison mission-log diagram in your reflection and explain where the axes show metres and seconds, which section is paused, and how two runs can share the same final point without sharing the same motion story.",
-        image_url: "/lesson-media/m1/m1-l1-same-finish.svg",
+        image_url: `${M1_ASSET_BASE}/M1_L1/diagrams/m1_l1_same_finish_graph.svg`,
         callouts: [
           "Both graphs finish at 32 m after 8 s.",
           "Run A contains a flat paused section.",
@@ -11107,7 +11071,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
       return {
         title: "Speed-time graph check",
         prompt: "Use the pace-log diagram in your reflection and explain what the graph height says at one instant, what the slope says over an interval, and why a flat line above zero still means motion.",
-        image_url: "/lesson-media/m1/m1-l2-speed-time.svg",
+        image_url: `${M1_ASSET_BASE}/M1_L2/diagrams/m1_l2_speed_time_graph.svg`,
         callouts: [
           "One section is horizontal above zero.",
           "One section rises steadily.",
@@ -11118,10 +11082,10 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
       return {
         title: "Acceleration sign check",
         prompt: "Use the pace-arrow diagram in your reflection and explain how the acceleration sign comes from the change in velocity and the chosen positive direction.",
-        image_url: "/lesson-media/m1/m1-l3-acceleration.svg",
+        image_url: `${M1_ASSET_BASE}/M1_L3/diagrams/m1_l3_signed_acceleration_graph.svg`,
         callouts: [
-          "The initial velocity arrow points more strongly east.",
-          "The final velocity arrow is smaller or reversed in one example.",
+          "The graph begins below the velocity axis and later rises above it.",
+          "The slope stays positive through the plotted interval.",
           "The acceleration sign depends on the signed change over time.",
         ],
       };
@@ -11129,33 +11093,33 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
       return {
         title: "Equation-choice check",
         prompt: "Use the Quest-Log forecast board in your reflection and explain which known variables make one constant-acceleration equation the best choice and why the same board fails when acceleration is not constant.",
-        image_url: "/lesson-media/m1/m1-l4-suvat.svg",
+        image_url: `${M1_ASSET_BASE}/M1_L4/diagrams/m1_l4_constant_acceleration_graph.svg`,
         callouts: [
-          "Known variables are grouped together first.",
-          "The unknown variable is highlighted before the equation is chosen.",
-          "A note warns that the board assumes constant acceleration.",
+          "The plotted line keeps one steady slope.",
+          "That steady slope is the constant-acceleration condition.",
+          "Equation choice still depends on the knowns and the unknown.",
         ],
       };
     case "M1_L5":
       return {
         title: "Gradient-context check",
         prompt: "Use the twin-graph diagram in your reflection and explain why the same slope can mean speed on one graph and acceleration on another.",
-        image_url: "/lesson-media/m1/m1-l5-gradient.svg",
+        image_url: `${M1_ASSET_BASE}/M1_L5/diagrams/m1_l5_speed_gradient_graph.svg`,
         callouts: [
-          "The left graph is distance-time.",
-          "The right graph is speed-time.",
-          "The marked tilt is the same in both places.",
+          "This displayed graph is the speed-time member of the comparison pair.",
+          "Its slope means acceleration because the vertical axis is speed.",
+          "The lesson pairs it with a distance-time graph where slope means speed.",
         ],
       };
     case "M1_L6":
       return {
         title: "Area-distance check",
         prompt: "Use the Area Hunter diagram in your reflection and explain how the rectangle and triangle combine to make total distance and why a different graph shape can still give the same distance.",
-        image_url: "/lesson-media/m1/m1-l6-area.svg",
+        image_url: `${M1_ASSET_BASE}/M1_L6/diagrams/m1_l6_area_distance_graph.svg`,
         callouts: [
-          "The rectangle shows the base distance contribution.",
-          "The triangle adds the extra distance from changing speed.",
-          "The full shaded area is the total distance for the interval.",
+          "The full shaded region is the total distance for the interval.",
+          "The area rule works because the axes are speed and time.",
+          "Different graph shapes can still match if the total area matches.",
         ],
       };
     default:

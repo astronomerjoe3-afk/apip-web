@@ -150,20 +150,40 @@ function control(
   );
 }
 
-function scalePoint(
-  value: number,
-  domainMin: number,
-  domainMax: number,
-  rangeMin: number,
-  rangeMax: number,
-) {
-  if (domainMax === domainMin) return rangeMin;
-  const ratio = (value - domainMin) / (domainMax - domainMin);
-  return rangeMin + ratio * (rangeMax - rangeMin);
-}
-
-function polyline(points: Array<[number, number]>) {
-  return points.map(([x, y]) => `${x},${y}`).join(" ");
+function GraphAgentFigure({
+  primarySrc,
+  primaryAlt,
+  note,
+  secondarySrc,
+  secondaryAlt,
+}: {
+  primarySrc: string;
+  primaryAlt: string;
+  note?: string;
+  secondarySrc?: string;
+  secondaryAlt?: string;
+}) {
+  return (
+    <div className="space-y-4">
+      <img
+        src={primarySrc}
+        alt={primaryAlt}
+        className="w-full rounded-[1.5rem] border border-slate-200 bg-slate-950/95"
+      />
+      {note ? (
+        <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 text-sm leading-6 text-slate-700">
+          {note}
+        </div>
+      ) : null}
+      {secondarySrc ? (
+        <img
+          src={secondarySrc}
+          alt={secondaryAlt || primaryAlt}
+          className="w-full rounded-[1.5rem] border border-slate-200 bg-slate-950/95"
+        />
+      ) : null}
+    </div>
+  );
 }
 
 export default function M1SimulationPanels(props: Props) {
@@ -188,21 +208,6 @@ export default function M1SimulationPanels(props: Props) {
     const totalTime = firstDuration + pauseTime + secondDuration;
     const finishDistance = openingSpeed * firstDuration + closingSpeed * secondDuration;
     const catchUpSpeed = finishDistance / Math.max(totalTime, 1);
-    const maxDistance = Math.max(finishDistance, 20);
-    const graphPoints = [
-      [0, 0],
-      [firstDuration, openingSpeed * firstDuration],
-      [firstDuration + pauseTime, openingSpeed * firstDuration],
-      [totalTime, finishDistance],
-    ] as Array<[number, number]>;
-    const scaled = graphPoints.map(([t, s]) => [
-      scalePoint(t, 0, totalTime, 70, 540),
-      scalePoint(s, 0, maxDistance, 250, 40),
-    ]) as Array<[number, number]>;
-    const comparison = [
-      [70, 250],
-      [540, scalePoint(finishDistance, 0, maxDistance, 250, 40)],
-    ] as Array<[number, number]>;
 
     return (
       <ExplorerLayout
@@ -221,40 +226,13 @@ export default function M1SimulationPanels(props: Props) {
           </>
         }
         figure={
-          <svg viewBox="0 0 620 300" role="img" aria-label="Distance-time mission log comparison">
-            <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
-            <rect x="22" y="20" width="576" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <text x="48" y="54" fill="#1e293b" fontSize="18" fontWeight="700">
-              Mission log
-            </text>
-            <line x1="70" y1="250" x2="540" y2="250" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="70" y1="250" x2="70" y2="40" stroke="#94a3b8" strokeWidth="3" />
-            <polyline points={polyline(scaled)} fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-            <polyline
-              points={polyline(comparison)}
-              fill="none"
-              stroke="#10b981"
-              strokeWidth="6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray="14 10"
-            />
-            <text x="150" y="276" fill="#475569" fontSize="15">
-              mission clock, t
-            </text>
-            <text x="20" y="160" fill="#475569" fontSize="15" transform="rotate(-90 20 160)">
-              recorded progress, s
-            </text>
-            <text x="372" y="96" fill="#1d4ed8" fontSize="16" fontWeight="700">
-              pause keeps height fixed
-            </text>
-            <text x="372" y="116" fill="#475569" fontSize="14">
-              time changes, distance does not
-            </text>
-            <text x="400" y="222" fill="#047857" fontSize="15" fontWeight="700">
-              Same final point, different journey
-            </text>
-          </svg>
+          <GraphAgentFigure
+            primarySrc="/lesson_assets/M1/M1_L1/diagrams/m1_l1_distance_time_graph.svg"
+            primaryAlt="Distance-time story graph"
+            note="These M1 story graphs are now rendered from the physics graph agent, so the axes, scales, and plotted segments stay consistent with the lesson graphs students meet elsewhere in the module."
+            secondarySrc="/lesson_assets/M1/M1_L1/diagrams/m1_l1_same_finish_graph.svg"
+            secondaryAlt="Same finish comparison graph"
+          />
         }
         chips={
           <>
@@ -276,9 +254,6 @@ export default function M1SimulationPanels(props: Props) {
     const endSpeed = Math.max(0, Math.min(12, simVectorAngle));
     const duration = Math.max(1, Math.min(8, Math.round(simMetricMeters)));
     const acceleration = (endSpeed - startSpeed) / duration;
-    const maxSpeed = Math.max(startSpeed, endSpeed, 2);
-    const y1 = scalePoint(startSpeed, 0, maxSpeed, 250, 40);
-    const y2 = scalePoint(endSpeed, 0, maxSpeed, 250, 40);
     const midSpeed = (startSpeed + endSpeed) / 2;
 
     return (
@@ -298,26 +273,11 @@ export default function M1SimulationPanels(props: Props) {
           </>
         }
         figure={
-          <svg viewBox="0 0 620 300" role="img" aria-label="Speed-time graph with height and slope emphasis">
-            <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
-            <rect x="22" y="20" width="576" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <line x1="70" y1="250" x2="540" y2="250" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="70" y1="250" x2="70" y2="40" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="70" y1={y1} x2="540" y2={y2} stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
-            <circle cx="305" cy={scalePoint(midSpeed, 0, maxSpeed, 250, 40)} r="8" fill="#f59e0b" />
-            <text x="332" y="118" fill="#1d4ed8" fontSize="16" fontWeight="700">
-              height = speed now
-            </text>
-            <text x="332" y="138" fill="#475569" fontSize="14">
-              midpoint speed can be read from the graph height
-            </text>
-            <text x="332" y="178" fill="#b45309" fontSize="16" fontWeight="700">
-              slope = acceleration
-            </text>
-            <text x="332" y="198" fill="#475569" fontSize="14">
-              tilt tells how quickly the speed itself is changing
-            </text>
-          </svg>
+          <GraphAgentFigure
+            primarySrc="/lesson_assets/M1/M1_L2/diagrams/m1_l2_speed_time_graph.svg"
+            primaryAlt="Speed-time graph"
+            note="The graph image stays on the graph-agent plot while your chosen numbers below let you test how changing the start, end, and time interval changes the midpoint speed and the slope."
+          />
         }
         chips={
           <>
@@ -340,7 +300,6 @@ export default function M1SimulationPanels(props: Props) {
     const finalVelocity = Math.max(-10, Math.min(10, simVectorAngle));
     const duration = Math.max(1, Math.min(8, Math.round(simMetricMeters)));
     const acceleration = (finalVelocity - initialVelocity) / duration;
-    const arrowX = (value: number) => scalePoint(value, -10, 10, 90, 530);
 
     return (
       <ExplorerLayout
@@ -359,29 +318,11 @@ export default function M1SimulationPanels(props: Props) {
           </>
         }
         figure={
-          <svg viewBox="0 0 620 300" role="img" aria-label="Signed velocity arrows and acceleration sign">
-            <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
-            <rect x="22" y="20" width="576" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <text x="44" y="58" fill="#1e293b" fontSize="20" fontWeight="700">
-              Signed velocity bar
-            </text>
-            <line x1="90" y1="145" x2="530" y2="145" stroke="#94a3b8" strokeWidth="4" />
-            <line x1="310" y1="110" x2="310" y2="180" stroke="#64748b" strokeWidth="3" />
-            <line x1="310" y1="115" x2={arrowX(initialVelocity)} y2="115" stroke="#2563eb" strokeWidth="10" strokeLinecap="round" />
-            <polygon
-              points={`${arrowX(initialVelocity)},115 ${initialVelocity >= 0 ? arrowX(initialVelocity) - 16 : arrowX(initialVelocity) + 16},105 ${initialVelocity >= 0 ? arrowX(initialVelocity) - 16 : arrowX(initialVelocity) + 16},125`}
-              fill="#2563eb"
-            />
-            <line x1="310" y1="185" x2={arrowX(finalVelocity)} y2="185" stroke="#f59e0b" strokeWidth="10" strokeLinecap="round" />
-            <polygon
-              points={`${arrowX(finalVelocity)},185 ${finalVelocity >= 0 ? arrowX(finalVelocity) - 16 : arrowX(finalVelocity) + 16},175 ${finalVelocity >= 0 ? arrowX(finalVelocity) - 16 : arrowX(finalVelocity) + 16},195`}
-              fill="#f59e0b"
-            />
-            <text x="74" y="228" fill="#475569" fontSize="17" fontWeight="600">
-              <tspan x="74" dy="0">a = (v - u) / t, so the sign comes from the</tspan>
-              <tspan x="74" dy="22">signed velocity change over the interval.</tspan>
-            </text>
-          </svg>
+          <GraphAgentFigure
+            primarySrc="/lesson_assets/M1/M1_L3/diagrams/m1_l3_signed_acceleration_graph.svg"
+            primaryAlt="Velocity-time graph for signed acceleration"
+            note="This lesson now uses the graph-agent velocity plot directly, so sign reasoning is tied to a proper velocity-time graph instead of a separate sketch."
+          />
         }
         chips={
           <>
@@ -411,9 +352,6 @@ export default function M1SimulationPanels(props: Props) {
     const t = Math.max(1, Math.min(8, Math.round(simMetricMeters)));
     const v = u + a * t;
     const s = u * t + 0.5 * a * t * t;
-    const topSpeed = Math.max(u, v, 2);
-    const y1 = scalePoint(u, 0, topSpeed, 250, 128);
-    const y2 = scalePoint(v, 0, topSpeed, 250, 128);
 
     return (
       <ExplorerLayout
@@ -432,30 +370,11 @@ export default function M1SimulationPanels(props: Props) {
           </>
         }
         figure={
-          <svg viewBox="0 0 620 300" role="img" aria-label="Constant acceleration forecast board">
-            <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
-            <rect x="22" y="20" width="576" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <rect x="82" y="38" width="206" height="78" rx="20" fill="#ecfdf5" stroke="#86efac" strokeWidth="2" />
-            <rect x="326" y="38" width="232" height="78" rx="20" fill="#fff7ed" stroke="#fdba74" strokeWidth="2" />
-            <line x1="70" y1="250" x2="540" y2="250" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="70" y1="250" x2="70" y2="122" stroke="#94a3b8" strokeWidth="3" />
-            <polygon points={`70,250 70,${y1} 540,${y2} 540,250`} fill="#bfdbfe" fillOpacity="0.55" />
-            <polyline points={polyline([[70, y1], [540, y2]])} fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
-            <text x="98" y="64" fill="#166534" fontSize="18" fontWeight="700">
-              Knowns to unknown
-            </text>
-            <text x="98" y="88" fill="#475569" fontSize="16" fontWeight="500">
-              <tspan x="98" dy="0">Pick from the story,</tspan>
-              <tspan x="98" dy="20">not from symbol memory.</tspan>
-            </text>
-            <text x="344" y="64" fill="#b45309" fontSize="18" fontWeight="700">
-              Condition
-            </text>
-            <text x="344" y="88" fill="#475569" fontSize="16" fontWeight="500">
-              <tspan x="344" dy="0">Valid only while</tspan>
-              <tspan x="344" dy="20">acceleration stays constant.</tspan>
-            </text>
-          </svg>
+          <GraphAgentFigure
+            primarySrc="/lesson_assets/M1/M1_L4/diagrams/m1_l4_constant_acceleration_graph.svg"
+            primaryAlt="Constant-acceleration forecast graph"
+            note="The forecast board now uses the graph-agent straight-line velocity plot, so the constant-acceleration condition is shown on a proper graph before students use the equations."
+          />
         }
         chips={
           <>
@@ -487,27 +406,13 @@ export default function M1SimulationPanels(props: Props) {
         ]}
         controls={<>{control("Shared tilt", 1, 6, 1, sharedTilt, setSimVectorMagnitude)}</>}
         figure={
-          <svg viewBox="0 0 620 300" role="img" aria-label="Same slope on two different graphs">
-            <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
-            <rect x="20" y="20" width="270" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <rect x="330" y="20" width="270" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <line x1="58" y1="235" x2="250" y2="235" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="58" y1="235" x2="58" y2="60" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="95" y1="210" x2="220" y2="95" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
-            <text x="155" y="256" fill="#1d4ed8" fontSize="15" textAnchor="middle">
-              distance-time to speed
-            </text>
-
-            <line x1="368" y1="235" x2="560" y2="235" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="368" y1="235" x2="368" y2="60" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="405" y1="210" x2="530" y2="95" stroke="#f59e0b" strokeWidth="8" strokeLinecap="round" />
-            <text x="465" y="256" fill="#b45309" fontSize="15" textAnchor="middle">
-              speed-time to acceleration
-            </text>
-            <text x="310" y="52" fill="#475569" fontSize="16" textAnchor="middle">
-              Same geometry, different physics
-            </text>
-          </svg>
+          <GraphAgentFigure
+            primarySrc="/lesson_assets/M1/M1_L5/diagrams/m1_l5_distance_gradient_graph.svg"
+            primaryAlt="Distance-time gradient graph"
+            note="Both comparison graphs now come straight from the graph agent, so students are reading two proper plotted graphs instead of one hand-drawn comparison sketch."
+            secondarySrc="/lesson_assets/M1/M1_L5/diagrams/m1_l5_speed_gradient_graph.svg"
+            secondaryAlt="Speed-time gradient graph"
+          />
         }
         chips={
           <>
@@ -528,10 +433,6 @@ export default function M1SimulationPanels(props: Props) {
     const rectangle = Math.min(u, v) * t;
     const triangle = 0.5 * Math.abs(v - u) * t;
     const distance = rectangle + triangle;
-    const topSpeed = Math.max(u, v, 2);
-    const y1 = scalePoint(u, 0, topSpeed, 250, 50);
-    const y2 = scalePoint(v, 0, topSpeed, 250, 50);
-    const baseTop = scalePoint(Math.min(u, v), 0, topSpeed, 250, 50);
 
     return (
       <ExplorerLayout
@@ -550,37 +451,11 @@ export default function M1SimulationPanels(props: Props) {
           </>
         }
         figure={
-          <svg viewBox="0 0 620 300" role="img" aria-label="Area under speed-time graph split into rectangle and triangle">
-            <rect x="0" y="0" width="620" height="300" rx="28" fill="#f8fafc" />
-            <rect x="22" y="20" width="576" height="260" rx="24" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <line x1="70" y1="250" x2="540" y2="250" stroke="#94a3b8" strokeWidth="3" />
-            <line x1="70" y1="250" x2="70" y2="50" stroke="#94a3b8" strokeWidth="3" />
-            <rect x="70" y={baseTop} width="470" height={250 - baseTop} fill="#93c5fd" fillOpacity="0.35" />
-            <polygon
-              points={
-                v >= u
-                  ? polyline([
-                      [70, y1],
-                      [540, y1],
-                      [540, y2],
-                    ])
-                  : polyline([
-                      [70, y2],
-                      [70, y1],
-                      [540, y2],
-                    ])
-              }
-              fill="#f59e0b"
-              fillOpacity="0.42"
-            />
-            <polyline points={polyline([[70, y1], [540, y2]])} fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
-            <text x="210" y="274" fill="#1d4ed8" fontSize="15" textAnchor="middle">
-              rectangle = base distance
-            </text>
-            <text x="430" y="274" fill="#b45309" fontSize="15" textAnchor="middle">
-              triangle = extra distance
-            </text>
-          </svg>
+          <GraphAgentFigure
+            primarySrc="/lesson_assets/M1/M1_L6/diagrams/m1_l6_area_distance_graph.svg"
+            primaryAlt="Area under a speed-time graph"
+            note="The plotted pace-log area is now rendered through the graph agent, so the shaded distance region is tied to a proper speed-time graph instead of a custom sketch."
+          />
         }
         chips={
           <>
