@@ -96,14 +96,14 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
-const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M12_L1", "M12_L2", "M12_L3", "M12_L4", "M12_L5", "M12_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6", "M14_L1", "M14_L2", "M14_L3", "M14_L4", "M14_L5", "M14_L6", "M15_L1", "M15_L2", "M15_L3", "M15_L4", "M15_L5", "M15_L6", "A1_L1", "A1_L2", "A1_L3", "A1_L4", "A1_L5", "A1_L6", "A2_L1", "A2_L2", "A2_L3", "A2_L4", "A2_L5", "A2_L6", "A3_L1", "A3_L2", "A3_L3", "A3_L4", "A3_L5", "A3_L6", "A4_L1", "A4_L2", "A4_L3", "A4_L4", "A4_L5", "A4_L6", "A5_L1", "A5_L2", "A5_L3", "A5_L4", "A5_L5", "A5_L6"];
+const SUPPLEMENTAL_LESSON_CODES = ["F1_L1", "F1_L2", "F1_L3", "F1_L4", "F1_L5", "F1_L6", "F2_L1", "F2_L2", "F2_L3", "F2_L4", "F2_L5", "F2_L6", "F3_L1", "F3_L2", "F3_L3", "F3_L4", "F3_L5", "F3_L6", "F4_L1", "F4_L2", "F4_L3", "F4_L4", "F4_L5", "F4_L6", "F5_L1", "F5_L2", "F5_L3", "F5_L4", "F5_L5", "F5_L6", "M1_L1", "M1_L2", "M1_L3", "M1_L4", "M1_L5", "M1_L6", "M2_L1", "M2_L2", "M2_L3", "M2_L4", "M2_L5", "M2_L6", "M3_L1", "M3_L2", "M3_L3", "M3_L4", "M3_L5", "M3_L6", "M4_L1", "M4_L2", "M4_L3", "M4_L4", "M4_L5", "M4_L6", "M5_L1", "M5_L2", "M5_L3", "M5_L4", "M5_L5", "M5_L6", "M6_L1", "M6_L2", "M6_L3", "M6_L4", "M6_L5", "M6_L6", "M7_L1", "M7_L2", "M7_L3", "M7_L4", "M7_L5", "M7_L6", "M8_L1", "M8_L2", "M8_L3", "M8_L4", "M8_L5", "M8_L6", "M9_L1", "M9_L2", "M9_L3", "M9_L4", "M9_L5", "M9_L6", "M10_L1", "M10_L2", "M10_L3", "M10_L4", "M10_L5", "M10_L6", "M11_L1", "M11_L2", "M11_L3", "M11_L4", "M11_L5", "M11_L6", "M12_L1", "M12_L2", "M12_L3", "M12_L4", "M12_L5", "M12_L6", "M13_L1", "M13_L2", "M13_L3", "M13_L4", "M13_L5", "M13_L6", "M14_L1", "M14_L2", "M14_L3", "M14_L4", "M14_L5", "M14_L6", "A1_L1", "A1_L2", "A1_L3", "A1_L4", "A1_L5", "A1_L6", "A2_L1", "A2_L2", "A2_L3", "A2_L4", "A2_L5", "A2_L6", "A3_L1", "A3_L2", "A3_L3", "A3_L4", "A3_L5", "A3_L6", "A4_L1", "A4_L2", "A4_L3", "A4_L4", "A4_L5", "A4_L6", "A5_L1", "A5_L2", "A5_L3", "A5_L4", "A5_L5", "A5_L6"];
 
 function isExtendedNextgenLessonCode(code: string): boolean {
-  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("M14_") || code.startsWith("M15_") || code.startsWith("A1_") || code.startsWith("A2_") || code.startsWith("A3_") || code.startsWith("A4_") || code.startsWith("A5_");
+  return code.startsWith("F2_") || code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("F5_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("M14_") || code.startsWith("A1_") || code.startsWith("A2_") || code.startsWith("A3_") || code.startsWith("A4_") || code.startsWith("A5_");
 }
 
 function isStructuredMasteryPaddingLessonCode(code: string): boolean {
-  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("M14_") || code.startsWith("M15_") || code.startsWith("A1_") || code.startsWith("A2_") || code.startsWith("A3_") || code.startsWith("A4_") || code.startsWith("A5_");
+  return code.startsWith("F3_") || code.startsWith("F4_") || code.startsWith("F5_") || code.startsWith("M1_") || code.startsWith("M2_") || code.startsWith("M3_") || code.startsWith("M4_") || code.startsWith("M5_") || code.startsWith("M6_") || code.startsWith("M7_") || code.startsWith("M8_") || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_") || code.startsWith("M12_") || code.startsWith("M13_") || code.startsWith("M14_") || code.startsWith("A1_") || code.startsWith("A2_") || code.startsWith("A3_") || code.startsWith("A4_") || code.startsWith("A5_");
 }
 
 type QuestionVisualMeta = {
@@ -112,6 +112,129 @@ type QuestionVisualMeta = {
   visual_caption: string;
   visual_callouts: string[];
 };
+
+type SupplementalSimulationCopy = {
+  title: string;
+  instructions: string;
+  taskPrompt: string;
+  exploreSteps: string[];
+  watchFor: string[];
+  tryFirst: string;
+  takeaway: string;
+};
+
+function lessonNumberFromCode(code: string): number | null {
+  const match = code.match(/_L([1-6])$/);
+  return match ? Number(match[1]) : null;
+}
+
+function replaceLessonCodePrefix(code: string, targetModule: string): string {
+  return code.replace(/^[A-Z]\d+_L/, `${targetModule}_L`);
+}
+
+function replaceQuestionIdPrefix(itemId: string, targetModule: string, targetLessonNumber?: number): string {
+  const inlineMatch = itemId.match(/^[A-Z]\d+L([1-6])_/);
+  const normalizedLesson = targetLessonNumber ?? (inlineMatch ? Number(inlineMatch[1]) : null) ?? 1;
+  return itemId.replace(/^[A-Z]\d+L\d+/, `${targetModule}L${normalizedLesson}`);
+}
+
+function remappedLateCoreQuestionVisualMeta(itemId: string): QuestionVisualMeta | undefined {
+  const match = itemId.toUpperCase().match(/^([A-Z]\d+)L([1-6])_[A-Z]+\d+$/);
+  if (!match) return undefined;
+  const moduleCode = match[1];
+  const lessonNumber = Number(match[2]);
+  if (moduleCode === "F5") return m14QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M14"));
+  if (moduleCode === "M9") {
+    return lessonNumber <= 5
+      ? m10QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M10"))
+      : m11QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M11", 2));
+  }
+  if (moduleCode === "M10") return m12QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M12"));
+  if (moduleCode === "M11") return m13QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M13"));
+  if (moduleCode === "M13") return m14QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M14"));
+  if (moduleCode === "M14") return m15QuestionVisualMeta(replaceQuestionIdPrefix(itemId, "M15"));
+  return undefined;
+}
+
+function remappedLateCoreSimulationCopy(code: string): SupplementalSimulationCopy | undefined {
+  const lessonNumber = lessonNumberFromCode(code);
+  if (lessonNumber == null) return undefined;
+  if (code.startsWith("F5_")) return m14SimulationCopy(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M9_")) {
+    return lessonNumber <= 5
+      ? m10SimulationCopy(replaceLessonCodePrefix(code, "M10"))
+      : m11SimulationCopy("M11_L2");
+  }
+  if (code.startsWith("M10_")) return m12SimulationCopy(replaceLessonCodePrefix(code, "M12"));
+  if (code.startsWith("M11_")) return m13SimulationCopy(replaceLessonCodePrefix(code, "M13"));
+  if (code.startsWith("M13_")) return m14SimulationCopy(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M14_")) return m15SimulationCopy(replaceLessonCodePrefix(code, "M15"));
+  return undefined;
+}
+
+function remappedLateCoreFocusExtras(code: string): string[] {
+  const lessonNumber = lessonNumberFromCode(code);
+  if (lessonNumber == null) return [];
+  if (code.startsWith("F5_")) return m14ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M9_")) {
+    return lessonNumber <= 5
+      ? m10ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M10"))
+      : m11ScaffoldFocusExtras("M11_L2");
+  }
+  if (code.startsWith("M10_")) return m12ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M12"));
+  if (code.startsWith("M11_")) return m13ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M13"));
+  if (code.startsWith("M13_")) return m14ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M14_")) return m15ScaffoldFocusExtras(replaceLessonCodePrefix(code, "M15"));
+  return [];
+}
+
+function remappedLateCoreCoreBullets(code: string): string[] {
+  const lessonNumber = lessonNumberFromCode(code);
+  if (lessonNumber == null) return [];
+  if (code.startsWith("F5_")) return m14ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M9_")) {
+    return lessonNumber <= 5
+      ? m10ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M10"))
+      : m11ScaffoldCoreBullets("M11_L2");
+  }
+  if (code.startsWith("M10_")) return m12ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M12"));
+  if (code.startsWith("M11_")) return m13ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M13"));
+  if (code.startsWith("M13_")) return m14ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M14_")) return m15ScaffoldCoreBullets(replaceLessonCodePrefix(code, "M15"));
+  return [];
+}
+
+function remappedLateCoreMediaCards(code: string): UnknownRecord[] {
+  const lessonNumber = lessonNumberFromCode(code);
+  if (lessonNumber == null) return [];
+  if (code.startsWith("F5_")) return m14ScaffoldMediaCards(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M9_")) {
+    return lessonNumber <= 5
+      ? m10ScaffoldMediaCards(replaceLessonCodePrefix(code, "M10"))
+      : m11ScaffoldMediaCards("M11_L2");
+  }
+  if (code.startsWith("M10_")) return m12ScaffoldMediaCards(replaceLessonCodePrefix(code, "M12"));
+  if (code.startsWith("M11_")) return m13ScaffoldMediaCards(replaceLessonCodePrefix(code, "M13"));
+  if (code.startsWith("M13_")) return m14ScaffoldMediaCards(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M14_")) return m15ScaffoldMediaCards(replaceLessonCodePrefix(code, "M15"));
+  return [];
+}
+
+function remappedLateCoreReflectionVisualCheck(code: string): UnknownRecord | undefined {
+  const lessonNumber = lessonNumberFromCode(code);
+  if (lessonNumber == null) return undefined;
+  if (code.startsWith("F5_")) return m14ReflectionVisualCheck(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M9_")) {
+    return lessonNumber <= 5
+      ? m10ReflectionVisualCheck(replaceLessonCodePrefix(code, "M10"))
+      : m11ReflectionVisualCheck("M11_L2");
+  }
+  if (code.startsWith("M10_")) return m12ReflectionVisualCheck(replaceLessonCodePrefix(code, "M12"));
+  if (code.startsWith("M11_")) return m13ReflectionVisualCheck(replaceLessonCodePrefix(code, "M13"));
+  if (code.startsWith("M13_")) return m14ReflectionVisualCheck(replaceLessonCodePrefix(code, "M14"));
+  if (code.startsWith("M14_")) return m15ReflectionVisualCheck(replaceLessonCodePrefix(code, "M15"));
+  return undefined;
+}
 
 const F4_ASSET_BASE = "/lesson_assets/F4";
 
@@ -434,6 +557,8 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
 function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined {
   const id = text(item.id).toUpperCase();
   const normalizedId = id.replace(/-/g, "");
+  const remappedVisual = remappedLateCoreQuestionVisualMeta(normalizedId);
+  if (remappedVisual) return remappedVisual;
   const m13Visual = m13QuestionVisualMeta(normalizedId);
   if (m13Visual) return m13Visual;
   const m14Visual = m14QuestionVisualMeta(normalizedId);
@@ -7203,6 +7328,8 @@ function masteryQuestionCount(masteryMeta: UnknownRecord, poolLength: number, st
 }
 
 function simulationStageTitle(code: string): string {
+  const remapped = remappedLateCoreSimulationCopy(code);
+  if (remapped) return remapped.title;
   const m13 = m13SimulationCopy(code);
   if (m13) return m13.title;
   const m14 = m14SimulationCopy(code);
@@ -7277,6 +7404,8 @@ function simulationStageTitle(code: string): string {
 }
 
 function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): string {
+  const remapped = remappedLateCoreSimulationCopy(code);
+  if (remapped) return remapped.instructions;
   const m13 = m13SimulationCopy(code);
   if (m13) return m13.instructions;
   const m14 = m14SimulationCopy(code);
@@ -7351,6 +7480,8 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
 }
 
 function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): string {
+  const remapped = remappedLateCoreSimulationCopy(code);
+  if (remapped) return remapped.taskPrompt;
   const m13 = m13SimulationCopy(code);
   if (m13) return m13.taskPrompt;
   const m14 = m14SimulationCopy(code);
@@ -7425,6 +7556,8 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
 }
 
 function simulationStageExploreSteps(code: string): string[] {
+  const remapped = remappedLateCoreSimulationCopy(code);
+  if (remapped) return remapped.exploreSteps;
   const m13 = m13SimulationCopy(code);
   if (m13) return m13.exploreSteps;
   const m14 = m14SimulationCopy(code);
@@ -7650,6 +7783,8 @@ function simulationStageExploreSteps(code: string): string[] {
   }
 }
 function simulationStageWatchFor(code: string): string[] {
+  const remapped = remappedLateCoreSimulationCopy(code);
+  if (remapped) return remapped.watchFor;
   const m13 = m13SimulationCopy(code);
   if (m13) return m13.watchFor;
   const m14 = m14SimulationCopy(code);
@@ -7874,6 +8009,8 @@ function simulationStageWatchFor(code: string): string[] {
   }
 }
 function simulationStageTryFirst(code: string): string | undefined {
+  const remapped = remappedLateCoreSimulationCopy(code);
+  if (remapped) return remapped.tryFirst;
   const m13 = m13SimulationCopy(code);
   if (m13) return m13.tryFirst;
   const m14 = m14SimulationCopy(code);
@@ -7978,6 +8115,8 @@ function simulationStageTryFirst(code: string): string | undefined {
   }
 }
 function simulationStageTakeaway(code: string): string | undefined {
+  const remapped = remappedLateCoreSimulationCopy(code);
+  if (remapped) return remapped.takeaway;
   const m13 = m13SimulationCopy(code);
   if (m13) return m13.takeaway;
   const m14 = m14SimulationCopy(code);
@@ -8092,6 +8231,8 @@ function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Pro
 }
 
 function scaffoldFocusExtras(code: string): string[] {
+  const remapped = remappedLateCoreFocusExtras(code);
+  if (remapped.length > 0) return remapped;
   const m13 = m13ScaffoldFocusExtras(code);
   if (m13.length > 0) return m13;
   const m14 = m14ScaffoldFocusExtras(code);
@@ -8349,6 +8490,8 @@ function scaffoldFocusExtras(code: string): string[] {
   }
 }
 function scaffoldCoreBullets(code: string): string[] {
+  const remapped = remappedLateCoreCoreBullets(code);
+  if (remapped.length > 0) return remapped;
   const m13 = m13ScaffoldCoreBullets(code);
   if (m13.length > 0) return m13;
   const m14 = m14ScaffoldCoreBullets(code);
@@ -9630,40 +9773,40 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
       if (isExtendedNextgenLessonCode(code)) {
         const essentials = [...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].filter(Boolean);
         const isFlowGrid = code.startsWith("F4_");
+        const isEarthSky = code.startsWith("F5_");
         const isModuleOne = code.startsWith("M1_");
         const isThermal = code.startsWith("M6_");
         const isOptics = code.startsWith("M8_");
-        const isSound = code.startsWith("M9_");
-        const isElectricalQuantities = code.startsWith("M10_");
-        const isCircuits = code.startsWith("M11_");
-        const isFieldWeave = code.startsWith("M12_");
-        const isRadioactivity = code.startsWith("M13_");
-        const isSolarSystem = code.startsWith("M14_");
-        const isUniverse = code.startsWith("M15_");
+        const isElectricalCircuits = code.startsWith("M9_");
+        const isFieldWeave = code.startsWith("M10_");
+        const isRadioactivity = code.startsWith("M11_");
+        const isNuclearEnergy = code.startsWith("M12_");
+        const isSolarSystem = code.startsWith("M13_");
+        const isUniverse = code.startsWith("M14_");
         const isAdvancedMechanics = code.startsWith("A1_");
         const isAdvancedFieldTheory = code.startsWith("A3_");
         const isAdvancedThermalStatMech = code.startsWith("A4_");
         const isAdvancedModernPhysics = code.startsWith("A5_");
         return [{
-          title: isFlowGrid ? "Circuit essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuit network essentials" : isFieldWeave ? "Field-Weave essentials" : isRadioactivity ? "Radioactivity essentials" : isSolarSystem ? "Solar system essentials" : isUniverse ? "Universe essentials" : isAdvancedMechanics ? "Advanced mechanics essentials" : isAdvancedFieldTheory ? "Advanced field essentials" : isAdvancedThermalStatMech ? "Advanced thermal essentials" : isAdvancedModernPhysics ? "Modern physics essentials" : "Lesson essentials",
+          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isElectricalCircuits ? "Electrical circuit essentials" : isFieldWeave ? "Magnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isNuclearEnergy ? "Nuclear energy essentials" : isSolarSystem ? "Solar system essentials" : isUniverse ? "Universe essentials" : isAdvancedMechanics ? "Advanced mechanics essentials" : isAdvancedFieldTheory ? "Advanced field essentials" : isAdvancedThermalStatMech ? "Advanced thermal essentials" : isAdvancedModernPhysics ? "Modern physics essentials" : "Lesson essentials",
           caption: isFlowGrid
             ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
+            : isEarthSky
+              ? "Keep these Earth-Moon-Sun, season, phase, eclipse, and Solar System ideas visible while you work through the lesson."
             : isModuleOne
               ? "Keep these key graph, motion, and acceleration ideas visible while you work through the lesson."
               : isThermal
                 ? "Keep these key thermal transfer, phase-change, and energy-bookkeeping ideas visible while you work through the lesson."
                 : isOptics
                   ? "Keep these key reflection, refraction, lens, and route-sketch ideas visible while you work through the lesson."
-                  : isSound
-                    ? "Keep these key sound, pitch, echo, and ultrasound ideas visible while you work through the lesson."
-                    : isElectricalQuantities
-                      ? "Keep these charge, current, voltage, resistance, and Ohm's law ideas visible while you work through the lesson."
-                    : isCircuits
-                      ? "Keep these series, parallel, power, diagram, safety, and reduction ideas visible while you work through the lesson."
+                  : isElectricalCircuits
+                    ? "Keep these charge, current, voltage, resistance, series-parallel, power, and safety ideas visible while you work through the lesson."
                     : isFieldWeave
                       ? "Keep these field, electromagnet, force, induction, generator, and transformer ideas visible while you work through the lesson."
                   : isRadioactivity
                     ? "Keep these atomic-structure, isotope, radiation, half-life, background, and decay-ledger ideas visible while you work through the lesson."
+                  : isNuclearEnergy
+                    ? "Keep these fission, fusion, chain-reaction, reactor, tracer, hazard, and waste-management ideas visible while you work through the lesson."
                   : isSolarSystem
                     ? "Keep these Sun-centered-family, orbit, rotation, tilt, Moon-phase, and year-lap ideas visible while you work through the lesson."
                   : isUniverse
@@ -9728,6 +9871,8 @@ function generatedScaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
+  const remapped = remappedLateCoreMediaCards(code);
+  if (remapped.length > 0) return remapped;
   const m13 = m13ScaffoldMediaCards(code);
   if (m13.length > 0) return m13;
   const m14 = m14ScaffoldMediaCards(code);
@@ -10808,6 +10953,8 @@ function generatedReflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | 
 
 function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined {
   const code = lessonCode(lesson);
+  const remapped = remappedLateCoreReflectionVisualCheck(code);
+  if (remapped) return remapped;
   const m13 = m13ReflectionVisualCheck(code);
   if (m13) return m13;
   const m14 = m14ReflectionVisualCheck(code);

@@ -13,7 +13,6 @@ import M5SimulationPanels from "./M5SimulationPanels";
 import M6SimulationPanels from "./M6SimulationPanels";
 import M7SimulationPanels from "./M7SimulationPanels";
 import M8SimulationPanels from "./M8SimulationPanels";
-import M9SimulationPanels from "./M9SimulationPanels";
 import M10SimulationPanels from "./M10SimulationPanels";
 import M11SimulationPanels from "./M11SimulationPanels";
 import M12SimulationPanels from "./M12SimulationPanels";
@@ -95,6 +94,19 @@ type ScaffoldMediaCard = {
   embed_url?: string;
   interaction_key?: string;
 };
+
+function remapLateSimulationLessonKey(lessonKey: string): string {
+  const match = lessonKey.match(/^([A-Z]\d+)_L([1-6])$/);
+  if (!match) return lessonKey;
+  const lessonNumber = Number(match[2]);
+  if (match[1] === "F5") return `M14_L${lessonNumber}`;
+  if (match[1] === "M9") return lessonNumber <= 5 ? `M10_L${lessonNumber}` : "M11_L2";
+  if (match[1] === "M10") return `M12_L${lessonNumber}`;
+  if (match[1] === "M11") return `M13_L${lessonNumber}`;
+  if (match[1] === "M13") return `M14_L${lessonNumber}`;
+  if (match[1] === "M14") return `M15_L${lessonNumber}`;
+  return lessonKey;
+}
 
 function normalizeTeachingFocusText(value: string): string {
   const trimmed = value.trim();
@@ -1357,6 +1369,7 @@ export default function LessonRunner({
   const renderSimulation = () => {
     const payload = runner.stage_payload as SimulationStagePayload;
     const simulationLessonKey = runnerLessonKey(lessonId || runner.lesson_id);
+    const remappedSimulationLessonKey = remapLateSimulationLessonKey(simulationLessonKey);
     const hasStructuredGuidance = Boolean(
       (payload.explore_steps?.length ?? 0) ||
       (payload.watch_for?.length ?? 0) ||
@@ -2791,9 +2804,9 @@ export default function LessonRunner({
             setSimSpread={setSimSpread}
             formatSimulationNumber={formatSimulationNumber}
           />
-        ) : simulationLessonKey.startsWith("M9_") ? (
-          <M9SimulationPanels
-            lessonKey={simulationLessonKey}
+        ) : simulationLessonKey.startsWith("F5_") ? (
+          <M14SimulationPanels
+            lessonKey={remappedSimulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
             simVectorMagnitude={simVectorMagnitude}
@@ -2812,9 +2825,53 @@ export default function LessonRunner({
             setSimSpread={setSimSpread}
             formatSimulationNumber={formatSimulationNumber}
           />
+        ) : simulationLessonKey.startsWith("M9_") ? (
+          remappedSimulationLessonKey.startsWith("M10_") ? (
+            <M10SimulationPanels
+              lessonKey={remappedSimulationLessonKey}
+              simMetricMeters={simMetricMeters}
+              setSimMetricMeters={setSimMetricMeters}
+              simVectorMagnitude={simVectorMagnitude}
+              setSimVectorMagnitude={setSimVectorMagnitude}
+              simVectorAngle={simVectorAngle}
+              setSimVectorAngle={setSimVectorAngle}
+              simDensityMass={simDensityMass}
+              setSimDensityMass={setSimDensityMass}
+              simDensityVolume={simDensityVolume}
+              setSimDensityVolume={setSimDensityVolume}
+              simFluidDensity={simFluidDensity}
+              setSimFluidDensity={setSimFluidDensity}
+              simBias={simBias}
+              setSimBias={setSimBias}
+              simSpread={simSpread}
+              setSimSpread={setSimSpread}
+              formatSimulationNumber={formatSimulationNumber}
+            />
+          ) : (
+            <M11SimulationPanels
+              lessonKey={remappedSimulationLessonKey}
+              simMetricMeters={simMetricMeters}
+              setSimMetricMeters={setSimMetricMeters}
+              simVectorMagnitude={simVectorMagnitude}
+              setSimVectorMagnitude={setSimVectorMagnitude}
+              simVectorAngle={simVectorAngle}
+              setSimVectorAngle={setSimVectorAngle}
+              simDensityMass={simDensityMass}
+              setSimDensityMass={setSimDensityMass}
+              simDensityVolume={simDensityVolume}
+              setSimDensityVolume={setSimDensityVolume}
+              simFluidDensity={simFluidDensity}
+              setSimFluidDensity={setSimFluidDensity}
+              simBias={simBias}
+              setSimBias={setSimBias}
+              simSpread={simSpread}
+              setSimSpread={setSimSpread}
+              formatSimulationNumber={formatSimulationNumber}
+            />
+          )
         ) : simulationLessonKey.startsWith("M10_") ? (
-          <M10SimulationPanels
-            lessonKey={simulationLessonKey}
+          <M12SimulationPanels
+            lessonKey={remappedSimulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
             simVectorMagnitude={simVectorMagnitude}
@@ -2834,8 +2891,8 @@ export default function LessonRunner({
             formatSimulationNumber={formatSimulationNumber}
           />
         ) : simulationLessonKey.startsWith("M11_") ? (
-          <M11SimulationPanels
-            lessonKey={simulationLessonKey}
+          <M13SimulationPanels
+            lessonKey={remappedSimulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
             simVectorMagnitude={simVectorMagnitude}
@@ -2876,8 +2933,8 @@ export default function LessonRunner({
             formatSimulationNumber={formatSimulationNumber}
           />
         ) : simulationLessonKey.startsWith("M13_") ? (
-          <M13SimulationPanels
-            lessonKey={simulationLessonKey}
+          <M14SimulationPanels
+            lessonKey={remappedSimulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
             simVectorMagnitude={simVectorMagnitude}
@@ -2897,29 +2954,8 @@ export default function LessonRunner({
             formatSimulationNumber={formatSimulationNumber}
           />
         ) : simulationLessonKey.startsWith("M14_") ? (
-          <M14SimulationPanels
-            lessonKey={simulationLessonKey}
-            simMetricMeters={simMetricMeters}
-            setSimMetricMeters={setSimMetricMeters}
-            simVectorMagnitude={simVectorMagnitude}
-            setSimVectorMagnitude={setSimVectorMagnitude}
-            simVectorAngle={simVectorAngle}
-            setSimVectorAngle={setSimVectorAngle}
-            simDensityMass={simDensityMass}
-            setSimDensityMass={setSimDensityMass}
-            simDensityVolume={simDensityVolume}
-            setSimDensityVolume={setSimDensityVolume}
-            simFluidDensity={simFluidDensity}
-            setSimFluidDensity={setSimFluidDensity}
-            simBias={simBias}
-            setSimBias={setSimBias}
-            simSpread={simSpread}
-            setSimSpread={setSimSpread}
-            formatSimulationNumber={formatSimulationNumber}
-          />
-        ) : simulationLessonKey.startsWith("M15_") ? (
           <M15SimulationPanels
-            lessonKey={simulationLessonKey}
+            lessonKey={remappedSimulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
             simVectorMagnitude={simVectorMagnitude}
