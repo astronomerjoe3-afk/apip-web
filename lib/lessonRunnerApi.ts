@@ -1451,8 +1451,7 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM4Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesA5Prompt = (ids: string[], prompts: string[]): boolean =>
-    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesA5Prompt = (_ids: string[], _prompts: string[]): boolean => false;
   const matchesM7Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
@@ -9784,12 +9783,13 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
         const isNuclearEnergy = code.startsWith("M12_");
         const isSolarSystem = code.startsWith("M13_");
         const isUniverse = code.startsWith("M14_");
-        const isAdvancedMechanics = code.startsWith("A1_");
-        const isAdvancedFieldTheory = code.startsWith("A3_");
-        const isAdvancedThermalStatMech = code.startsWith("A4_");
-        const isAdvancedModernPhysics = code.startsWith("A5_");
+        const isAdvancedParticles = code.startsWith("A1_");
+        const isAdvancedQuantum = code.startsWith("A2_");
+        const isAdvancedWaves = code.startsWith("A3_");
+        const isAdvancedMechanicsMaterials = code.startsWith("A4_");
+        const isAdvancedOscillations = code.startsWith("A5_");
         return [{
-          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isElectricalCircuits ? "Electrical circuit essentials" : isFieldWeave ? "Magnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isNuclearEnergy ? "Nuclear energy essentials" : isSolarSystem ? "Solar system essentials" : isUniverse ? "Universe essentials" : isAdvancedMechanics ? "Advanced mechanics essentials" : isAdvancedFieldTheory ? "Advanced field essentials" : isAdvancedThermalStatMech ? "Advanced thermal essentials" : isAdvancedModernPhysics ? "Modern physics essentials" : "Lesson essentials",
+          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isElectricalCircuits ? "Electrical circuit essentials" : isFieldWeave ? "Magnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isNuclearEnergy ? "Nuclear energy essentials" : isSolarSystem ? "Solar system essentials" : isUniverse ? "Universe essentials" : isAdvancedParticles ? "Particles essentials" : isAdvancedQuantum ? "Quantum essentials" : isAdvancedWaves ? "Advanced waves essentials" : isAdvancedMechanicsMaterials ? "Mechanics and materials essentials" : isAdvancedOscillations ? "Oscillations essentials" : "Lesson essentials",
           caption: isFlowGrid
             ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
             : isEarthSky
@@ -9812,14 +9812,16 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
                     ? "Keep these Sun-centered-family, orbit, rotation, tilt, Moon-phase, and year-lap ideas visible while you work through the lesson."
                   : isUniverse
                     ? "Keep these star, galaxy, light-year, redshift, and cosmic-expansion ideas visible while you work through the lesson."
-                  : isAdvancedMechanics
-                    ? "Keep these constant-acceleration, projectile, circular-motion, and gravity-field ideas visible while you work through the lesson."
-                  : isAdvancedFieldTheory
-                    ? "Keep these flux, induction, linkage, Lenz, AC, and RMS ideas visible while you work through the lesson."
-                  : isAdvancedThermalStatMech
-                    ? "Keep these gas-law, kinetic-theory, temperature-as-average-energy, microstate, and entropy ideas visible while you work through the lesson."
-                  : isAdvancedModernPhysics
-                    ? "Keep these photon-packet, pattern-map, binding-energy, and frame-relativity ideas visible while you work through the lesson."
+                  : isAdvancedParticles
+                    ? "Keep these particle-family, hadron-structure, antiparticle, interaction, and conservation-ledger ideas visible while you work through the lesson."
+                  : isAdvancedQuantum
+                    ? "Keep these quantized-level, spectrum, threshold, photon-packet, and matter-wave ideas visible while you work through the lesson."
+                  : isAdvancedWaves
+                    ? "Keep these superposition, standing-wave, interference, diffraction, refraction, and trace-reading ideas visible while you work through the lesson."
+                  : isAdvancedMechanicsMaterials
+                    ? "Keep these vector-balance, component-motion, projectile, collision, circular-motion, and materials-response ideas visible while you work through the lesson."
+                  : isAdvancedOscillations
+                    ? "Keep these restoring-force, SHM, graph, energy-swap, resonance, and damping ideas visible while you work through the lesson."
                   : "Keep these key lesson ideas visible while you work through the lesson.",
           columns: ["Key idea", "Why it matters"],
           rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]),
