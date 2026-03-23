@@ -183,12 +183,19 @@ type TechnicalWordCard = {
   why_it_matters?: string;
 };
 
+type FormulaReferenceRow = {
+  standard_formula: string;
+  analogy_equivalent: string;
+  constants?: string;
+};
+
 type ScaffoldSection = {
   heading: string;
   body: string;
   analogy?: string;
   visual?: ScaffoldSectionVisual;
   technical_words?: TechnicalWordCard[];
+  formula_reference_rows?: FormulaReferenceRow[];
   worked_example?: {
     prompt: string;
     steps: string[];
@@ -1142,6 +1149,37 @@ export default function LessonRunner({
                     ) : null}
                   </div>
                 ))}
+              </div>
+            ) : null}
+
+            {section.formula_reference_rows?.length ? (
+              <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-sm">
+                <div className="mb-3 hidden rounded-xl bg-slate-900/95 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,0.95fr)] md:gap-4">
+                  <span>Standard physics formula</span>
+                  <span>Analogy equivalent</span>
+                  <span>Standard constants</span>
+                </div>
+                <div className="space-y-3">
+                  {section.formula_reference_rows.map((row, index) => (
+                    <div
+                      key={`${row.standard_formula}-${index}`}
+                      className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,0.95fr)]"
+                    >
+                      <div className="rounded-xl bg-slate-50 p-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 md:hidden">Standard physics formula</p>
+                        <p className="mt-1 font-mono text-sm leading-6 text-slate-900">{row.standard_formula}</p>
+                      </div>
+                      <div className="rounded-xl bg-sky-50/70 p-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-sky-700 md:hidden">Analogy equivalent</p>
+                        <p className="mt-1 text-sm leading-6 text-slate-700">{row.analogy_equivalent}</p>
+                      </div>
+                      <div className="rounded-xl bg-emerald-50/70 p-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-emerald-700 md:hidden">Standard constants</p>
+                        <p className="mt-1 text-sm leading-6 text-slate-700">{row.constants || "No named constant is required in this lesson."}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             ) : null}
 

@@ -10882,6 +10882,150 @@ function attachScaffoldSectionVisuals(code: string, sections: UnknownRecord[]): 
   });
 }
 
+function foundationFormulaFallbacks(code: string): string[] {
+  switch (code) {
+    case "F1_L1":
+      return ["1 km = 1000 m", "1 m = 100 cm = 1000 mm", "1 kg = 1000 g"];
+    case "F1_L2":
+      return ["vector quantity = magnitude + direction", "scalar quantity = magnitude only"];
+    case "F1_L3":
+      return ["uncertainty ≈ ±(smallest division / 2)", "best estimate ≈ mean of repeated readings"];
+    case "F1_L4":
+      return [
+        "For × and ÷, keep the fewest significant figures from the inputs.",
+        "For + and −, keep the fewest decimal places from the inputs.",
+      ];
+    case "F1_L5":
+      return ["ρ = m / V", "m = ρV", "V = m / ρ"];
+    case "F1_L6":
+      return ["percentage uncertainty = (absolute uncertainty / measured value) × 100%"];
+    case "F2_L1":
+      return ["average speed = total distance / total time", "displacement = final position − initial position"];
+    case "F2_L2":
+      return ["average velocity = displacement / time", "a = Δv / t"];
+    case "F2_L3":
+      return ["speed = gradient = Δdistance / Δtime"];
+    case "F2_L4":
+      return ["a = gradient = Δv / Δt", "displacement = area under the velocity-time graph"];
+    case "F2_L5":
+      return ["F_resultant = ΣF (with direction/sign)"];
+    case "F2_L6":
+      return ["F = ma", "a = F / m"];
+    case "F3_L1":
+      return ["W = Fs", "ΔE = W"];
+    case "F3_L2":
+      return ["E_k = 1/2mv^2", "E_p = mgh"];
+    case "F3_L3":
+      return ["P = E / t", "efficiency = useful output / total input × 100%"];
+    case "F3_L4":
+      return ["p = mv", "Σp_before = Σp_after"];
+    case "F3_L5":
+      return ["impulse = FΔt = Δp"];
+    case "F3_L6":
+      return ["F = Δp / Δt", "E_k = 1/2mv^2"];
+    default:
+      return [];
+  }
+}
+
+function foundationFormulaConstants(code: string): string {
+  switch (code) {
+    case "F3_L2":
+      return "Use g ≈ 10 N/kg near Earth unless the question gives a different value.";
+    case "F5_L2":
+      return "Earth's rotation period is about 24 h in this lesson model.";
+    case "F5_L3":
+      return "Earth's axis tilt is about 23.5°, and one orbit takes about 365 days.";
+    default:
+      return "No named constant is required in this lesson.";
+  }
+}
+
+function foundationFormulaAnalogyEquivalent(lesson: UnknownRecord, code: string): string {
+  const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
+  const comparison = text(analogyMap.comparison);
+  const mapping = dedupeText(
+    asList(analogyMap.mapping).map((entry) => text(entry)).filter(Boolean)
+  ).slice(0, 2);
+  const mappedSummary = [comparison, ...mapping].filter(Boolean).join(" ");
+  if (mappedSummary) return mappedSummary;
+
+  const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text).trim();
+  if (analogyText) {
+    const firstSentence = analogyText.match(/.*?[.!?](?:\s|$)/)?.[0]?.trim();
+    return firstSentence || analogyText;
+  }
+
+  if (code.startsWith("F1_")) {
+    return "Measurement-world analogies keep scale, units, and reported precision readable before any calculation is done.";
+  }
+  if (code.startsWith("F2_")) {
+    return "Mission-Track analogies keep route, direction, slope, and change visible before the formal relation is used.";
+  }
+  if (code.startsWith("F3_")) {
+    return "Energy-store and collision analogies keep transfer, storage, and conservation visible before the formula is used.";
+  }
+  if (code.startsWith("F4_")) {
+    return "Flow-Grid analogies keep carrier flow, source push, and route difficulty visible before the circuit relation is used.";
+  }
+  if (code.startsWith("F5_")) {
+    return "Skycourt analogies keep Earth, Moon, Sun, motion, and viewing geometry readable before formal astronomy language is applied.";
+  }
+  return "Use the lesson analogy to keep the physical relationship readable before you switch back to the formal relation.";
+}
+
+function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
+  const code = lessonCode(lesson);
+  if (!/^F[1-5]_L\d+$/.test(code)) return [];
+
+  const authoredFormulas = dedupeText(
+    [
+      ...asList(asRecord(lesson.authoring_contract).formulas).map((entry) => {
+        const formula = asRecord(entry);
+        return text(formula.equation) || text(formula.formula) || text(formula.relation) || text(formula.expression);
+      }),
+      ...asList(lesson.formulas).map((entry) => {
+        const formula = asRecord(entry);
+        return text(formula.equation) || text(formula.formula) || text(formula.relation) || text(formula.expression);
+      }),
+    ].filter(Boolean)
+  ).slice(0, 4);
+
+  const formulas = authoredFormulas.length > 0 ? authoredFormulas : foundationFormulaFallbacks(code);
+  if (formulas.length === 0) return [];
+
+  const analogyEquivalent = foundationFormulaAnalogyEquivalent(lesson, code);
+  const constants = foundationFormulaConstants(code);
+
+  return formulas.map((standardFormula) => ({
+    standard_formula: standardFormula,
+    analogy_equivalent: analogyEquivalent,
+    constants,
+  }));
+}
+
+function foundationFormulaSection(lesson: UnknownRecord): UnknownRecord | null {
+  const rows = foundationFormulaRows(lesson);
+  if (rows.length === 0) return null;
+  return {
+    heading: "Formula map",
+    body: "Read the standard physics relation beside the analogy equivalent before you start the worked example. Keep constants separate from the quantities that change during the question.",
+    formula_reference_rows: rows,
+    check_for_understanding: "Which relation in this list belongs to the next example, and which symbol is acting as a fixed constant here, if any?",
+  };
+}
+
+function withFoundationFormulaSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
+  const formulaSection = foundationFormulaSection(lesson);
+  if (!formulaSection) return sections;
+
+  const nextSections = [...sections];
+  const workedExampleIndex = nextSections.findIndex((section) => Object.keys(asRecord(asRecord(section).worked_example)).length > 0);
+  const insertIndex = workedExampleIndex >= 0 ? workedExampleIndex : nextSections.length;
+  nextSections.splice(insertIndex, 0, formulaSection);
+  return nextSections;
+}
+
 function technicalWordsSection(lesson: UnknownRecord): UnknownRecord | null {
   const code = lessonCode(lesson);
   const technicalWords = technicalWordsForLesson(lesson, code);
@@ -10896,13 +11040,14 @@ function technicalWordsSection(lesson: UnknownRecord): UnknownRecord | null {
 
 function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
   const technicalSection = technicalWordsSection(lesson);
-  if (!technicalSection) return sections;
-
   const nextSections = [...sections];
-  const coreIdeaIndex = nextSections.findIndex((section) => text(asRecord(section).heading).toLowerCase() === "core idea");
-  const insertIndex = coreIdeaIndex >= 0 ? coreIdeaIndex + 1 : Math.min(1, nextSections.length);
-  nextSections.splice(insertIndex, 0, technicalSection);
-  return nextSections;
+  if (technicalSection) {
+    const coreIdeaIndex = nextSections.findIndex((section) => text(asRecord(section).heading).toLowerCase() === "core idea");
+    const insertIndex = coreIdeaIndex >= 0 ? coreIdeaIndex + 1 : Math.min(1, nextSections.length);
+    nextSections.splice(insertIndex, 0, technicalSection);
+  }
+
+  return withFoundationFormulaSection(lesson, nextSections);
 }
 
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
