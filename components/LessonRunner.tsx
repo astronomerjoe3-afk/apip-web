@@ -199,6 +199,7 @@ type ScaffoldSection = {
   visual?: ScaffoldSectionVisual;
   technical_words?: TechnicalWordCard[];
   formula_reference_rows?: FormulaReferenceRow[];
+  formula_constants_note?: string;
   worked_example?: {
     prompt: string;
     steps: string[];
@@ -1156,52 +1157,76 @@ export default function LessonRunner({
             ) : null}
 
             {section.formula_reference_rows?.length ? (
-              <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-sm">
-                <div className="mb-3 hidden rounded-xl bg-slate-900/95 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,0.95fr)] md:gap-4">
-                  <span>Standard physics formula</span>
-                  <span>Analogy equivalent</span>
-                  <span>Constants if any</span>
-                </div>
-                <div className="space-y-3">
-                  {section.formula_reference_rows.map((row, index) => (
-                    <div
-                      key={`${row.standard_formula}-${index}`}
-                      className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,0.95fr)]"
-                    >
-                      <div className="rounded-xl bg-slate-50 p-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 md:hidden">Standard physics formula</p>
-                        <p className="mt-1 font-mono text-sm leading-6 text-slate-900">{row.standard_formula}</p>
-                        {row.meaning ? (
-                          <p className="mt-2 text-sm leading-6 text-slate-700">
-                            <span className="font-medium text-slate-800">Meaning:</span>{" "}
-                            {row.meaning}
-                          </p>
-                        ) : null}
-                        {row.units_text ? (
-                          <p className="mt-2 text-sm leading-6 text-slate-600">
-                            <span className="font-medium text-slate-700">Units:</span>{" "}
-                            {row.units_text}
-                          </p>
-                        ) : null}
-                        {row.conditions ? (
-                          <p className="mt-2 text-sm leading-6 text-slate-600">
-                            <span className="font-medium text-slate-700">Use when:</span>{" "}
-                            {row.conditions}
-                          </p>
-                        ) : null}
+              (() => {
+                const formulaRows = section.formula_reference_rows ?? [];
+                const hasRowConstants = formulaRows.some((row) => row.constants);
+                return (
+                  <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-sm">
+                    {section.formula_constants_note ? (
+                      <div className="mb-4 rounded-2xl border border-emerald-100 bg-emerald-50/80 px-4 py-3 text-sm leading-6 text-slate-700">
+                        <span className="font-medium text-slate-900">Constants for this lesson:</span>{" "}
+                        {section.formula_constants_note}
                       </div>
-                      <div className="rounded-xl bg-sky-50/70 p-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-sky-700 md:hidden">Analogy equivalent</p>
-                        <p className="mt-1 text-sm leading-6 text-slate-700">{row.analogy_equivalent}</p>
-                      </div>
-                      <div className="rounded-xl bg-emerald-50/70 p-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-emerald-700 md:hidden">Constants if any</p>
-                        <p className="mt-1 text-sm leading-6 text-slate-700">{row.constants || "No named constant is required in this lesson."}</p>
-                      </div>
+                    ) : null}
+                    <div className="overflow-x-auto">
+                      <table className="w-full table-fixed border-separate border-spacing-0 text-left text-sm text-slate-700">
+                        {hasRowConstants ? (
+                          <colgroup>
+                            <col style={{ width: "34%" }} />
+                            <col style={{ width: "40%" }} />
+                            <col style={{ width: "26%" }} />
+                          </colgroup>
+                        ) : (
+                          <colgroup>
+                            <col style={{ width: "44%" }} />
+                            <col style={{ width: "56%" }} />
+                          </colgroup>
+                        )}
+                        <thead className="bg-slate-900/95 text-white">
+                          <tr>
+                            <th className="border-b border-slate-700 px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">Standard physics formula</th>
+                            <th className="border-b border-slate-700 px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">Analogy equivalent</th>
+                            {hasRowConstants ? (
+                              <th className="border-b border-slate-700 px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">Constants if any</th>
+                            ) : null}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {formulaRows.map((row, index) => (
+                            <tr key={`${row.standard_formula}-${index}`} className="even:bg-white odd:bg-slate-50/70">
+                              <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">
+                                <p className="font-mono text-sm text-slate-900">{row.standard_formula}</p>
+                                {row.meaning ? (
+                                  <p className="mt-2 text-sm leading-6 text-slate-700">
+                                    <span className="font-medium text-slate-800">Meaning:</span>{" "}
+                                    {row.meaning}
+                                  </p>
+                                ) : null}
+                                {row.units_text ? (
+                                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                                    <span className="font-medium text-slate-700">Units:</span>{" "}
+                                    {row.units_text}
+                                  </p>
+                                ) : null}
+                                {row.conditions ? (
+                                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                                    <span className="font-medium text-slate-700">Use when:</span>{" "}
+                                    {row.conditions}
+                                  </p>
+                                ) : null}
+                              </td>
+                              <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{row.analogy_equivalent}</td>
+                              {hasRowConstants ? (
+                                <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{row.constants || "—"}</td>
+                              ) : null}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                );
+              })()
             ) : null}
 
             {section.analogy ? (

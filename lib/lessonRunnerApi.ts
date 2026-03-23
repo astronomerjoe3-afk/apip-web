@@ -11277,22 +11277,22 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
   if (formulas.length === 0) return [];
 
   const analogyEquivalent = foundationFormulaAnalogyEquivalent(lesson, code);
-  const constants = foundationFormulaConstants(code);
 
   return formulas.map((standardFormula) => ({
     standard_formula: standardFormula,
     analogy_equivalent: analogyEquivalent,
-    constants,
   }));
 }
 
 function foundationFormulaSection(lesson: UnknownRecord): UnknownRecord | null {
+  const code = lessonCode(lesson);
   const rows = foundationFormulaRows(lesson);
   if (rows.length === 0) return null;
   return {
     heading: "Formula map",
     body: "Read the standard physics relation beside the analogy equivalent before you start the worked example. Keep constants separate from the quantities that change during the question.",
     formula_reference_rows: rows,
+    formula_constants_note: foundationFormulaConstants(code),
     check_for_understanding: "Which relation in this list belongs to the next example, and which symbol is acting as a fixed constant here, if any?",
   };
 }
