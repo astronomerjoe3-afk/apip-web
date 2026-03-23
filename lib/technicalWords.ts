@@ -6,6 +6,7 @@ export type TechnicalWordEntry = {
   term: string;
   meaning: string;
   why_it_matters?: string;
+  source?: string;
 };
 
 type TechnicalWordSeed = TechnicalWordEntry & {
@@ -306,7 +307,10 @@ function collectLessonStrings(value: unknown, sink: string[], depth = 0): void {
     return;
   }
   if (typeof value === "object") {
-    Object.values(value as UnknownRecord).forEach((item) => collectLessonStrings(item, sink, depth + 1));
+    Object.entries(value as UnknownRecord).forEach(([key, item]) => {
+      if (key === "technical_words") return;
+      collectLessonStrings(item, sink, depth + 1);
+    });
   }
 }
 
@@ -333,8 +337,9 @@ function authoredTechnicalWords(lesson: UnknownRecord): TechnicalWordEntry[] {
         term: text(entry.term),
         meaning: text(entry.meaning),
         why_it_matters: text(entry.why_it_matters || entry.whyItMatters),
+        source: text(entry.source).toLowerCase(),
       }))
-      .filter((entry) => entry.term && entry.meaning),
+      .filter((entry) => entry.term && entry.meaning && entry.source !== "generated"),
   );
 }
 
