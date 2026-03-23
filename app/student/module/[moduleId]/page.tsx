@@ -178,6 +178,19 @@ const FOUNDATION_MODULE_DESCRIPTIONS: Record<string, string> = {
   F4: "Study waves and vibrations, amplitude, wavelength, and frequency, sound and light as wave phenomena, reflection and refraction qualitatively, simple circuits, current and voltage, series and parallel first models, magnetic effects of current, and electrical safety.",
   F5: "Study Earth-Moon-Sun relationships, day and night, seasons, Moon phases, eclipses, the Solar System, apparent sky motion, gravity as an introduction to orbits, and the scale of Earth, the Sun, and the planets.",
 };
+const ADVANCED_MODULE_DESCRIPTIONS: Record<string, string> = {
+  A1: "Study matter, radiation, and particles through particle structure, radiation types, interactions, and evidence for the particle model of matter.",
+  A2: "Study quantum phenomena and atomic spectra through electric fields, potential, capacitance, node potential, and circuit analysis in more complex networks.",
+  A3: "Study advanced waves and optics through wave superposition, interference, diffraction, refraction, optical paths, and image formation.",
+  A4: "Study advanced mechanics and materials through force, motion, stress, strain, elasticity, and how materials respond under load.",
+  A5: "Study oscillations through periodic motion, restoring effects, energy changes, resonance, and the behaviour of ideal oscillating systems.",
+  A6: "Study thermal physics and gases through temperature, internal energy, gas pressure, gas laws, and the particle explanation of thermal behaviour.",
+  A7: "Study DC circuits and capacitors through current, potential difference, resistance, capacitance, charge storage, and steady-state circuit behaviour.",
+  A8: "Study electric and magnetic fields through field patterns, field strength, forces on charges and currents, and the behaviour of particles in fields.",
+  A9: "Study electromagnetic induction and power through changing magnetic flux, induced emf, generators, transformers, and electrical power transfer.",
+  A10: "Study nuclear and particle applications through nuclear structure, decay, interactions, medical and industrial uses, and particle processes.",
+  A11: "Study astrophysics, gravitation, and cosmology through gravitational fields, orbital motion, stellar behaviour, galactic structure, and the evolution of the universe.",
+};
 const MODULE_FOUR_TITLE = "Pressure";
 const MODULE_FOUR_DESCRIPTION =
   "Pressure in solids, liquid pressure, and atmospheric pressure. Separate pressure from force, track how area and depth matter, and use the main pressure equations carefully.";
@@ -203,6 +216,9 @@ function normalizeModuleDescription(moduleId: string | undefined | null, title: 
   const normalizedModuleId = normalizeModuleId(moduleId);
   if (normalizedModuleId && FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId]) {
     return FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId];
+  }
+  if (normalizedModuleId && ADVANCED_MODULE_DESCRIPTIONS[normalizedModuleId]) {
+    return ADVANCED_MODULE_DESCRIPTIONS[normalizedModuleId];
   }
   if (!trimmed) return undefined;
   const isModuleOne = normalizedModuleId === "M1" || /Kinematics,\s*Graphs\s*&\s*Constant Acceleration/i.test(String(title || ""));
