@@ -14,7 +14,6 @@ import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets
 import { m12QuestionVisualMeta, m12ReflectionVisualCheck, m12ScaffoldCoreBullets, m12ScaffoldFocusExtras, m12ScaffoldMediaCards, m12SimulationCopy } from "./m12LessonContent";
 import { m13QuestionVisualMeta, m13ReflectionVisualCheck, m13ScaffoldCoreBullets, m13ScaffoldFocusExtras, m13ScaffoldMediaCards, m13SimulationCopy } from "./m13LessonContent";
 import { m14QuestionVisualMeta, m14ReflectionVisualCheck, m14ScaffoldCoreBullets, m14ScaffoldFocusExtras, m14ScaffoldMediaCards, m14SimulationCopy } from "./m14LessonContent";
-import { m15QuestionVisualMeta, m15ReflectionVisualCheck, m15ScaffoldCoreBullets, m15ScaffoldFocusExtras, m15ScaffoldMediaCards, m15SimulationCopy } from "./m15LessonContent";
 import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
 import { a1QuestionVisualMeta, a1ReflectionVisualCheck, a1ScaffoldCoreBullets, a1ScaffoldFocusExtras, a1ScaffoldMediaCards, a1SimulationCopy } from "./a1LessonContent";
 import { a2QuestionVisualMeta, a2ReflectionVisualCheck, a2ScaffoldCoreBullets, a2ScaffoldFocusExtras, a2ScaffoldMediaCards, a2SimulationCopy } from "./a2LessonContent";
@@ -543,8 +542,6 @@ function questionVisualMeta(item: UnknownRecord): QuestionVisualMeta | undefined
   if (m13Visual) return m13Visual;
   const m14Visual = m14QuestionVisualMeta(normalizedId);
   if (m14Visual) return m14Visual;
-  const m15Visual = m15QuestionVisualMeta(normalizedId);
-  if (m15Visual) return m15Visual;
   const a5Visual = a5QuestionVisualMeta(normalizedId);
   if (a5Visual) return a5Visual;
   const a4Visual = a4QuestionVisualMeta(normalizedId);
@@ -1430,7 +1427,11 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM4Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesA5Prompt = (_ids: string[], _prompts: string[]): boolean => false;
+  const matchesA5Prompt = (ids: string[], prompts: string[]): boolean => {
+    void ids;
+    void prompts;
+    return false;
+  };
   const matchesM7Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
@@ -1441,9 +1442,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM12Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesM15Prompt = (ids: string[], prompts: string[]): boolean =>
+  const matchesM14StarsPrompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) ||
-    ids.map((id) => id.replace(/^M15L/i, "M14L")).includes(itemIdUpper) ||
     prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
@@ -5402,8 +5402,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ]);
   }
 
-  const isM15StarPrompt = matchesM15Prompt(
-    ["M15L1_D4", "M15L1_D8", "M15L1_D10", "M15L1_C5", "M15L1_C7", "M15L1_M6", "M15L1_M9"],
+  const isM14StarTrackPrompt = matchesM14StarsPrompt(
+    ["M14L1_D4", "M14L1_D8", "M14L1_D10", "M14L1_C5", "M14L1_C7", "M14L1_M6", "M14L1_M9"],
     [
       "why is brightness by itself too weak to prove something is a star",
       "why does reflected light not turn a planet into a star",
@@ -5414,7 +5414,7 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ],
   );
 
-  if (isM15StarPrompt) {
+  if (isM14StarTrackPrompt) {
     return (
       matchesPhraseGroups(candidate, [
         ["star", "self-lit", "self-luminous", "produces its own light", "makes its own light", "emits light", "gives off light", "light source", "source of light"],
@@ -5450,19 +5450,19 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM15LifecyclePrompt = matchesM15Prompt(
-    ["M15L2_D9", "M15L2_D10", "M15L2_C7", "M15L2_C8", "M15L2_M8", "M15L2_M10"],
+  const isM14StellarLifecyclePrompt = matchesM14StarsPrompt(
+    ["M14L2_D9", "M14L2_D10", "M14L2_C7", "M14L2_C8", "M14L2_M8", "M14L2_M10"],
     [
       "why is a supernova not the ending for every star",
       "why do white dwarfs and black holes belong to different later paths in this lesson",
       "why does the lifecycle diagram branch instead of staying one straight chain",
-      "why does the same beginning in a glow cradle not guarantee the same ending for every star",
+      "why does the same start in a nebula not guarantee the same ending for every star",
       "explain in one sentence why mass is the first thing to check before predicting a stellar remnant",
       "why is a black hole not the default ending for every star in this module",
     ],
   );
 
-  if (isM15LifecyclePrompt) {
+  if (isM14StellarLifecyclePrompt) {
     return (
       matchesPhraseGroups(candidate, [
         ["mass", "stellar mass", "more massive", "lower-mass", "high-mass", "how massive", "star mass"],
@@ -5492,8 +5492,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM15GalaxyPrompt = matchesM15Prompt(
-    ["M15L3_D9", "M15L3_D10", "M15L3_C7", "M15L3_C8", "M15L3_M8", "M15L3_M10"],
+  const isM14GalaxyScalePrompt = matchesM14StarsPrompt(
+    ["M14L3_D9", "M14L3_D10", "M14L3_C7", "M14L3_C8", "M14L3_M8", "M14L3_M10"],
     [
       "why is the solar system not the same thing as the milky way",
       "why is a galaxy not the whole universe",
@@ -5504,7 +5504,7 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ],
   );
 
-  if (isM15GalaxyPrompt) {
+  if (isM14GalaxyScalePrompt) {
     return (
       matchesPhraseGroups(candidate, [
         ["solar system"],
@@ -5532,8 +5532,8 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM15LightYearPrompt = matchesM15Prompt(
-    ["M15L4_D9", "M15L4_D10", "M15L4_C7", "M15L4_C8", "M15L4_M8", "M15L4_M10"],
+  const isM14LightYearTrackPrompt = matchesM14StarsPrompt(
+    ["M14L4_D9", "M14L4_D10", "M14L4_C7", "M14L4_C8", "M14L4_M8", "M14L4_M10"],
     [
       "why do astronomers prefer light years to kilometres for very large cosmic separations",
       "why does 50 light years mean a greater distance than 5 light years",
@@ -5544,7 +5544,7 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ],
   );
 
-  if (isM15LightYearPrompt) {
+  if (isM14LightYearTrackPrompt) {
     return (
       matchesPhraseGroups(candidate, [
         ["light-year", "light years"],
@@ -5573,19 +5573,19 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM15RedshiftPrompt = matchesM15Prompt(
-    ["M15L5_D9", "M15L5_D10", "M15L5_C7", "M15L5_C8", "M15L5_M8", "M15L5_M10"],
+  const isM14RedshiftTrackPrompt = matchesM14StarsPrompt(
+    ["M14L5_D9", "M14L5_D10", "M14L5_C7", "M14L5_C8", "M14L5_M8", "M14L5_M10"],
     [
       "why is observed wavelength is longer stronger than the galaxy just looks redder",
       "why can expansion explain redshift without saying the galaxy itself changed color at the source",
-      "why is the farther city larger redshift pattern useful rather than just interesting",
+      "why is the farther galaxy larger redshift pattern useful rather than just interesting",
       "why is a wavelength bar comparison a stronger teaching tool than a color word alone",
       "explain in one sentence why redshift is stronger as a wavelength story than as a color name story",
       "why does larger redshift count as stronger expansion evidence in this module",
     ],
   );
 
-  if (isM15RedshiftPrompt) {
+  if (isM14RedshiftTrackPrompt) {
     return (
       matchesPhraseGroups(candidate, [
         ["wavelength", "observed wavelength", "emitted wavelength", "light wave spacing"],
@@ -5619,22 +5619,22 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM15BigBangPrompt = matchesM15Prompt(
-    ["M15L6_D4", "M15L6_D9", "M15L6_D10", "M15L6_C3", "M15L6_C7", "M15L6_C8", "M15L6_M3", "M15L6_M8", "M15L6_M10"],
+  const isM14BigBangTrackPrompt = matchesM14StarsPrompt(
+    ["M14L6_D4", "M14L6_D9", "M14L6_D10", "M14L6_C3", "M14L6_C7", "M14L6_C8", "M14L6_M3", "M14L6_M8", "M14L6_M10"],
     [
-      "why is expanding map better than ordinary explosion as a big bang analogy",
+      "why is expanding space a better model than an ordinary explosion for the big bang",
       "why is center explosion weak wording for the big bang model",
       "why is the farther galaxy larger redshift pattern important in this final lesson",
       "why do astronomers treat redshift as evidence for expansion and not just as an isolated color fact",
       "why does expanding universe fit better than things moving away in ordinary empty space",
       "why is the redshift pattern stronger than a single galaxy case when arguing for expansion",
-      "summarize the great unfurling idea in one strong sentence",
+      "summarize the big bang expansion idea in one strong sentence",
       "explain in one sentence why the big bang is stronger as an expansion model than as a center blast picture",
       "why does the observed redshift pattern make the big bang model stronger rather than weaker",
     ],
   );
 
-  if (isM15BigBangPrompt) {
+  if (isM14BigBangTrackPrompt) {
     return (
       matchesPhraseGroups(candidate, [
         ["hot", "dense", "early universe", "hot dense state", "hot dense beginning"],
@@ -7386,8 +7386,6 @@ function simulationStageTitle(code: string): string {
   if (m13) return m13.title;
   const m14 = m14SimulationCopy(code);
   if (m14) return m14.title;
-  const m15 = m15SimulationCopy(code);
-  if (m15) return m15.title;
   const a5 = a5SimulationCopy(code);
   if (a5) return a5.title;
   const a4 = a4SimulationCopy(code);
@@ -7462,8 +7460,6 @@ function simulationStageInstructions(code: string, inquiry: UnknownRecord[]): st
   if (m13) return m13.instructions;
   const m14 = m14SimulationCopy(code);
   if (m14) return m14.instructions;
-  const m15 = m15SimulationCopy(code);
-  if (m15) return m15.instructions;
   const a5 = a5SimulationCopy(code);
   if (a5) return a5.instructions;
   const a4 = a4SimulationCopy(code);
@@ -7538,8 +7534,6 @@ function simulationStageTaskPrompt(code: string, inquiry: UnknownRecord[]): stri
   if (m13) return m13.taskPrompt;
   const m14 = m14SimulationCopy(code);
   if (m14) return m14.taskPrompt;
-  const m15 = m15SimulationCopy(code);
-  if (m15) return m15.taskPrompt;
   const a5 = a5SimulationCopy(code);
   if (a5) return a5.taskPrompt;
   const a4 = a4SimulationCopy(code);
@@ -7614,8 +7608,6 @@ function simulationStageExploreSteps(code: string): string[] {
   if (m13) return m13.exploreSteps;
   const m14 = m14SimulationCopy(code);
   if (m14) return m14.exploreSteps;
-  const m15 = m15SimulationCopy(code);
-  if (m15) return m15.exploreSteps;
   const a5 = a5SimulationCopy(code);
   if (a5) return a5.exploreSteps;
   const a4 = a4SimulationCopy(code);
@@ -7841,8 +7833,6 @@ function simulationStageWatchFor(code: string): string[] {
   if (m13) return m13.watchFor;
   const m14 = m14SimulationCopy(code);
   if (m14) return m14.watchFor;
-  const m15 = m15SimulationCopy(code);
-  if (m15) return m15.watchFor;
   const a5 = a5SimulationCopy(code);
   if (a5) return a5.watchFor;
   const a4 = a4SimulationCopy(code);
@@ -8067,8 +8057,6 @@ function simulationStageTryFirst(code: string): string | undefined {
   if (m13) return m13.tryFirst;
   const m14 = m14SimulationCopy(code);
   if (m14) return m14.tryFirst;
-  const m15 = m15SimulationCopy(code);
-  if (m15) return m15.tryFirst;
   const a5 = a5SimulationCopy(code);
   if (a5) return a5.tryFirst;
   const a4 = a4SimulationCopy(code);
@@ -8173,8 +8161,6 @@ function simulationStageTakeaway(code: string): string | undefined {
   if (m13) return m13.takeaway;
   const m14 = m14SimulationCopy(code);
   if (m14) return m14.takeaway;
-  const m15 = m15SimulationCopy(code);
-  if (m15) return m15.takeaway;
   const a5 = a5SimulationCopy(code);
   if (a5) return a5.takeaway;
   const a4 = a4SimulationCopy(code);
@@ -8289,8 +8275,6 @@ function scaffoldFocusExtras(code: string): string[] {
   if (m13.length > 0) return m13;
   const m14 = m14ScaffoldFocusExtras(code);
   if (m14.length > 0) return m14;
-  const m15 = m15ScaffoldFocusExtras(code);
-  if (m15.length > 0) return m15;
   const a5 = a5ScaffoldFocusExtras(code);
   if (a5.length > 0) return a5;
   const a4 = a4ScaffoldFocusExtras(code);
@@ -8548,8 +8532,6 @@ function scaffoldCoreBullets(code: string): string[] {
   if (m13.length > 0) return m13;
   const m14 = m14ScaffoldCoreBullets(code);
   if (m14.length > 0) return m14;
-  const m15 = m15ScaffoldCoreBullets(code);
-  if (m15.length > 0) return m15;
   const a5 = a5ScaffoldCoreBullets(code);
   if (a5.length > 0) return a5;
   const a4 = a4ScaffoldCoreBullets(code);
@@ -9932,8 +9914,6 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
   if (m13.length > 0) return m13;
   const m14 = m14ScaffoldMediaCards(code);
   if (m14.length > 0) return m14;
-  const m15 = m15ScaffoldMediaCards(code);
-  if (m15.length > 0) return m15;
   const a5 = a5ScaffoldMediaCards(code);
   if (a5.length > 0) return a5;
   const a4 = a4ScaffoldMediaCards(code);
@@ -10835,7 +10815,7 @@ const CORE_MODULE_ANALOGY_LABELS: Record<number, string> = {
   11: "Switchyard-Loop",
   12: "Field-Weave",
   13: "Core-Vault",
-  14: "Beacon-City Stretchmap",
+  14: "Stars and the Universe",
 };
 
 const ADVANCED_MODULE_ANALOGY_LABELS: Record<number, string> = {
@@ -10987,17 +10967,7 @@ const CORE_MODULE_ANALOGY_REPLACEMENTS: Record<number, ReadonlyArray<readonly [R
     [/\bactivity\b/gi, "detector click rate"],
     [/\bhalf-life\b/gi, "half-life countdown"],
   ],
-  14: [
-    [/\bstars\b/gi, "beacons"],
-    [/\bstar\b/gi, "beacon"],
-    [/\bgalaxies\b/gi, "beacon-cities"],
-    [/\bgalaxy\b/gi, "beacon-city"],
-    [/\blight-year\b/gi, "signal-year"],
-    [/\blight year\b/gi, "signal-year"],
-    [/\bredshift\b/gi, "stretch-red drift"],
-    [/\bbig bang\b/gi, "Great Unfurling"],
-    [/\buniverse\b/gi, "stretchmap cosmos"],
-  ],
+  14: [],
 };
 
 function coreModuleNumber(code: string): number | null {
@@ -11560,8 +11530,6 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
   if (m13) return m13;
   const m14 = m14ReflectionVisualCheck(code);
   if (m14) return m14;
-  const m15 = m15ReflectionVisualCheck(code);
-  if (m15) return m15;
   const a5 = a5ReflectionVisualCheck(code);
   if (a5) return a5;
   const a4 = a4ReflectionVisualCheck(code);

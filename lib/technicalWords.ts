@@ -208,16 +208,6 @@ const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
     { term: "Supernova", aliases: ["supernova"], meaning: "A supernova is a violent stellar explosion near the end of some stars' lives.", why_it_matters: "It helps create heavy elements and different stellar remnants." },
     { term: "Remnant", aliases: ["remnant", "remnants"], meaning: "A remnant is the dense object left after a star finishes its main life or explodes.", why_it_matters: "The remnant type depends strongly on the star's mass." },
   ],
-  M15: [
-    { term: "Star", aliases: ["star", "stars"], meaning: "A star is a self-luminous ball of gas powered by nuclear fusion in its core.", why_it_matters: "It makes stars different from planets or mirrors that only reflect light." },
-    { term: "Fusion", aliases: ["fusion"], meaning: "Fusion is the joining of light nuclei to form heavier nuclei, releasing energy.", why_it_matters: "It is the process that powers stars." },
-    { term: "Galaxy", aliases: ["galaxy", "galaxies"], meaning: "A galaxy is a huge gravitationally bound collection of stars, gas, dust, and dark matter.", why_it_matters: "It is far larger than a star system but smaller than the whole universe." },
-    { term: "Light-year", aliases: ["light year", "light-year"], meaning: "A light-year is a distance: the distance light travels in one year.", why_it_matters: "The word year is part of the definition, but the quantity measured is distance." },
-    { term: "Redshift", aliases: ["redshift"], meaning: "Redshift is the increase in observed wavelength compared with the emitted wavelength.", why_it_matters: "It is evidence that distant galaxies are moving away in the expansion story." },
-    { term: "Big Bang", aliases: ["big bang"], meaning: "The Big Bang model describes the universe expanding from an earlier hot, dense state.", why_it_matters: "It is a model of cosmic history, not an ordinary explosion into empty space." },
-    { term: "Supernova", aliases: ["supernova"], meaning: "A supernova is a violent stellar explosion near the end of some stars' lives.", why_it_matters: "It helps create heavy elements and different stellar remnants." },
-    { term: "Remnant", aliases: ["remnant", "remnants"], meaning: "A remnant is the dense object left after a star finishes its main life or explodes.", why_it_matters: "The remnant type depends strongly on the star's mass." },
-  ],
   A1: [
     { term: "SUVAT", aliases: ["suvat"], meaning: "SUVAT is the set of constant-acceleration equations linking displacement, initial velocity, final velocity, acceleration, and time.", why_it_matters: "It works only when acceleration stays constant." },
     { term: "Projectile motion", aliases: ["projectile motion", "projectile"], meaning: "Projectile motion is two-dimensional motion under gravity after launch, often with horizontal and vertical parts analysed separately.", why_it_matters: "It helps break a curved path into simpler component stories." },
