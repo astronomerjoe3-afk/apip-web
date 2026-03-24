@@ -1435,14 +1435,16 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesM14Prompt = (ids: string[], prompts: string[]): boolean =>
-    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM14Prompt = (_ids: string[], prompts: string[]): boolean =>
+    prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM10Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM12Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM15Prompt = (ids: string[], prompts: string[]): boolean =>
-    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+    ids.includes(itemIdUpper) ||
+    ids.map((id) => id.replace(/^M15L/i, "M14L")).includes(itemIdUpper) ||
+    prompts.some((prompt) => promptKeyCore === prompt);
 
   const isRepeatedTrustPrompt =
     itemId === "F1-L3-M8" ||
@@ -9832,14 +9834,14 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
         const isCircuits = code.startsWith("M11_");
         const isElectromagnetism = code.startsWith("M12_");
         const isRadioactivity = code.startsWith("M13_");
-        const isSolarSystem = code.startsWith("M14_");
+        const isStarsUniverse = code.startsWith("M14_");
         const isAdvancedParticles = code.startsWith("A1_");
         const isAdvancedQuantum = code.startsWith("A2_");
         const isAdvancedWaves = code.startsWith("A3_");
         const isAdvancedMechanicsMaterials = code.startsWith("A4_");
         const isAdvancedOscillations = code.startsWith("A5_");
         return [{
-          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuits essentials" : isElectromagnetism ? "Electromagnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isSolarSystem ? "Solar system essentials" : isAdvancedParticles ? "Particles essentials" : isAdvancedQuantum ? "Quantum essentials" : isAdvancedWaves ? "Advanced waves essentials" : isAdvancedMechanicsMaterials ? "Mechanics and materials essentials" : isAdvancedOscillations ? "Oscillations essentials" : "Lesson essentials",
+          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuits essentials" : isElectromagnetism ? "Electromagnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isStarsUniverse ? "Stars and universe essentials" : isAdvancedParticles ? "Particles essentials" : isAdvancedQuantum ? "Quantum essentials" : isAdvancedWaves ? "Advanced waves essentials" : isAdvancedMechanicsMaterials ? "Mechanics and materials essentials" : isAdvancedOscillations ? "Oscillations essentials" : "Lesson essentials",
           caption: isFlowGrid
             ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
             : isEarthSky
@@ -9860,8 +9862,8 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
                       ? "Keep these field, electromagnet, force, induction, generator, and transformer ideas visible while you work through the lesson."
                   : isRadioactivity
                     ? "Keep these atomic-structure, isotope, radiation, half-life, background, and decay-ledger ideas visible while you work through the lesson."
-                  : isSolarSystem
-                    ? "Keep these Sun-centered-family, orbit, rotation, tilt, Moon-phase, and year-lap ideas visible while you work through the lesson."
+                  : isStarsUniverse
+                    ? "Keep these star, galaxy, Milky Way, light-year, redshift, and Big Bang ideas visible while you work through the lesson."
                   : isAdvancedParticles
                     ? "Keep these particle-family, hadron-structure, antiparticle, interaction, and conservation-ledger ideas visible while you work through the lesson."
                   : isAdvancedQuantum
@@ -10833,7 +10835,7 @@ const CORE_MODULE_ANALOGY_LABELS: Record<number, string> = {
   11: "Switchyard-Loop",
   12: "Field-Weave",
   13: "Core-Vault",
-  14: "Lantern-Ring",
+  14: "Beacon-City Stretchmap",
 };
 
 const ADVANCED_MODULE_ANALOGY_LABELS: Record<number, string> = {
@@ -10986,13 +10988,15 @@ const CORE_MODULE_ANALOGY_REPLACEMENTS: Record<number, ReadonlyArray<readonly [R
     [/\bhalf-life\b/gi, "half-life countdown"],
   ],
   14: [
-    [/\borbit\b/gi, "ring route"],
-    [/\borbital period\b/gi, "year lap"],
-    [/\bday and night\b/gi, "day-night turn"],
-    [/\bseasons\b/gi, "tilted-lap seasons"],
-    [/\bmoon\b/gi, "companion rider"],
-    [/\bphase\b/gi, "lit-face phase"],
-    [/\bsolar system\b/gi, "Solar Court"],
+    [/\bstars\b/gi, "beacons"],
+    [/\bstar\b/gi, "beacon"],
+    [/\bgalaxies\b/gi, "beacon-cities"],
+    [/\bgalaxy\b/gi, "beacon-city"],
+    [/\blight-year\b/gi, "signal-year"],
+    [/\blight year\b/gi, "signal-year"],
+    [/\bredshift\b/gi, "stretch-red drift"],
+    [/\bbig bang\b/gi, "Great Unfurling"],
+    [/\buniverse\b/gi, "stretchmap cosmos"],
   ],
 };
 
