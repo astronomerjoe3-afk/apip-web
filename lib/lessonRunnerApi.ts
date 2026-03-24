@@ -10963,12 +10963,12 @@ function entryLessonAnalogyTable(lesson: UnknownRecord): UnknownRecord | null {
   if (definitionParts.length === 0 && mappingLines.length === 0) return null;
 
   return {
-    title: "Establish the lesson analogy",
+    title: "Lesson analogy",
     caption: [
       ...definitionParts,
       "Before you use the first visual, name the analogy and match each picture object to the physics idea it represents.",
     ].join(" "),
-    columns: ["Explicit analogy-to-physics map"],
+    columns: ["Analogy-to-physics map"],
     rows: (mappingLines.length > 0 ? mappingLines : definitionParts).map((line) => [line]),
   };
 }
