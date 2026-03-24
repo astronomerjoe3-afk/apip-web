@@ -5976,15 +5976,27 @@ function isA1L1MetaMasteryPrompt(prompt: string): boolean {
   );
 }
 
-function filterLessonSpecificMasteryCandidates(lesson: UnknownRecord, items: UnknownRecord[]): UnknownRecord[] {
+function isA1ToA5TemplateWhyPrompt(prompt: string): boolean {
+  return /^Why is it useful to explain .+ by keeping .+ visible\?$/i.test(text(prompt).trim());
+}
+
+function filterLessonSpecificAssessmentCandidates(lesson: UnknownRecord, items: UnknownRecord[]): UnknownRecord[] {
   const code = lessonCode(lesson);
+  let filtered = items.map(asRecord);
+
   if (code === "F4_L4") {
-    return items.filter((item) => !isF4L4CalculationStyleMasteryPrompt(text(asRecord(item).prompt)));
+    filtered = filtered.filter((item) => !isF4L4CalculationStyleMasteryPrompt(text(item.prompt)));
   }
   if (code === "A1_L1") {
-    return items.filter((item) => !isA1L1MetaMasteryPrompt(text(asRecord(item).prompt)));
+    filtered = filtered.filter((item) => !isA1L1MetaMasteryPrompt(text(item.prompt)));
   }
-  return items;
+
+  const advancedModule = advancedModuleNumber(code);
+  if (advancedModule !== null && advancedModule >= 1 && advancedModule <= 5) {
+    filtered = filtered.filter((item) => !isA1ToA5TemplateWhyPrompt(text(item.prompt)));
+  }
+
+  return filtered;
 }
 
 function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "transfer").filter((item) => hasUsableMasteryAnswer(asRecord(item))).length): boolean {
@@ -5994,17 +6006,22 @@ function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = it
 }
 
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
-  const authoredConceptItems = conceptGateItems(lesson);
-  const authoredMasteryItems = itemsFrom(lesson, "transfer").map(asRecord).filter((item) => hasUsableMasteryAnswer(item));
+  const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson));
+  const authoredMasteryItems = filterLessonSpecificAssessmentCandidates(
+    lesson,
+    itemsFrom(lesson, "transfer")
+  ).filter((item) => hasUsableMasteryAnswer(item));
   const preferAuthored = prefersLessonOwnedConceptGateBank(lesson, authoredConceptItems.length);
   const baseItems = preferAuthored
     ? [...authoredConceptItems]
     : [
         ...authoredConceptItems,
-        ...generatedConceptGateItems(lesson),
+        ...filterLessonSpecificAssessmentCandidates(lesson, generatedConceptGateItems(lesson)),
         ...authoredMasteryItems,
       ];
-  const fallbackItems = preferAuthored || baseItems.length >= 3 ? [] : generatedMasteryItems(lesson).slice(0, 4);
+  const fallbackItems = preferAuthored || baseItems.length >= 3
+    ? []
+    : filterLessonSpecificAssessmentCandidates(lesson, generatedMasteryItems(lesson)).slice(0, 4);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -6109,6 +6126,10 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
 
 function normalizeRenderedPhysicsText(value: string): string {
   return value
+    .replace(
+      /^Why is it useful to explain (.+?) by keeping .+ visible\?$/i,
+      "Why does the core physics of $1 matter more than labels alone?"
+    )
     .replace(/\bp_total\s*=\s*p_atm\s*\+\s*rhogh\b/gi, "p_total = p_atm + ρgh")
     .replace(/\bp_atm\s*\+\s*rhogh\b/gi, "p_atm + ρgh")
     .replace(/\bp\s*=\s*rhogh\b/gi, "p = ρgh")
@@ -7284,12 +7305,12 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const seenPrompts = new Set<string>();
   const diagnosticRecords = diagnosticItems(lesson).map(asRecord);
   const diagnosticSourceKeys = new Set(diagnosticRecords.map((item) => masterySourceKey(item)).filter(Boolean));
-  const generated = filterLessonSpecificMasteryCandidates(lesson, generatedMasteryItems(lesson));
-  const authoredTransfer = filterLessonSpecificMasteryCandidates(lesson, itemsFrom(lesson, "transfer"))
+  const generated = filterLessonSpecificAssessmentCandidates(lesson, generatedMasteryItems(lesson));
+  const authoredTransfer = filterLessonSpecificAssessmentCandidates(lesson, itemsFrom(lesson, "transfer"))
     .map(asRecord)
     .filter((item) => hasUsableMasteryAnswer(item));
   const preferAuthored = prefersLessonOwnedMasteryBank(lesson, authoredTransfer.length);
-  const fallback = filterLessonSpecificMasteryCandidates(lesson, [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)])
+  const fallback = filterLessonSpecificAssessmentCandidates(lesson, [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)])
     .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
   const baseItems = preferAuthored
     ? [...authoredTransfer]
@@ -7317,7 +7338,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson) === "F4_L4") {
     const rescueIds = new Set<string>();
     const rescuePrompts = new Set<string>();
-    return filterLessonSpecificMasteryCandidates(lesson, f4MasteryVariants("F4_L4")).filter((item) => {
+    return filterLessonSpecificAssessmentCandidates(lesson, f4MasteryVariants("F4_L4")).filter((item) => {
       const record = asRecord(item);
       const id = text(record.id);
       const promptKey = normalizePromptKey(text(record.prompt));
