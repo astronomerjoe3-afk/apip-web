@@ -584,6 +584,11 @@ function scoreEntryAgainstCorpus(entry: TechnicalWordEntry, corpus: string): num
   return corpusHasAlias(corpus, key) ? Math.max(1, key.split(" ").length) : 0;
 }
 
+function isGeneratedTechnicalWord(entry: TechnicalWordEntry): boolean {
+  const source = text(entry.source).toLowerCase();
+  return source === "lesson_generated" || source === "generated";
+}
+
 function rankLessonTechnicalWords(
   entries: TechnicalWordEntry[],
   corpus: string,
@@ -594,7 +599,9 @@ function rankLessonTechnicalWords(
     .map((entry, index) => ({
       entry,
       index,
-      score: scoreEntryAgainstCorpus(entry, corpus) + (index < authoredCount ? 0.25 : 0),
+      score:
+        scoreEntryAgainstCorpus(entry, corpus) +
+        (index < authoredCount && !isGeneratedTechnicalWord(entry) ? 0.25 : 0),
     }))
     .sort((left, right) => {
       if (right.score !== left.score) return right.score - left.score;
