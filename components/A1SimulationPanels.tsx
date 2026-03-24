@@ -147,9 +147,9 @@ export default function A1SimulationPanels({
         <div className={panelClass}>
           <h4 className="text-lg font-semibold text-slate-900">Inventory board</h4>
           <div className="mt-4 overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-4">
-            <svg viewBox="0 0 640 260" className="w-full">
-              <rect x="24" y="24" width="592" height="212" rx="28" fill="#0f172a" />
-              <text x="46" y="56" fill="#f8fafc" fontSize="22" fontWeight="700">Classify the particle before you tell its interaction story</text>
+            <svg viewBox="0 0 640 300" className="w-full">
+              <rect x="24" y="20" width="592" height="256" rx="28" fill="#0f172a" />
+              <text x="46" y="50" fill="#f8fafc" fontSize="22" fontWeight="700">Classify the particle before you tell its interaction story</text>
               {slotOptions.map((slot) => {
                 const active = slot.key === selectedSlot.key;
                 const occupants = [selectedParticle, comparisonParticle].filter(
@@ -169,7 +169,10 @@ export default function A1SimulationPanels({
                   </g>
                 );
               })}
-              <text x="46" y="224" fill="#cbd5e1" fontSize="18">Sorting by family and role keeps photons, leptons, and nucleons from being collapsed into one vague small-particle label.</text>
+              <text x="46" y="252" fill="#cbd5e1" fontSize="16">
+                <tspan x="46" dy="0">Sorting by family and role keeps photons, leptons, and nucleons</tspan>
+                <tspan x="46" dy="20">from being collapsed into one vague small-particle label.</tspan>
+              </text>
             </svg>
           </div>
         </div>
