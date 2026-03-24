@@ -88,8 +88,8 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "p = rho g h", meaning: "Liquid pressure depends on density, gravitational field strength, and depth.", conditions: "Use for pressure in a static liquid column.", unitsText: "Pa" },
   ],
   M4_L4: [
-    { standardFormula: "same depth in the same liquid -> same pressure", meaning: "Hydrostatic pressure depends on depth and liquid, not vessel shape.", conditions: "Use only when the liquid is the same and both points are at the same level.", unitsText: "" },
-    { standardFormula: "p = rho g h", meaning: "The equality rule comes from the same rho, g, and h at matching depths.", conditions: "Use for points in a resting liquid.", unitsText: "Pa" },
+    { standardFormula: "p1 = p2", meaning: "Two points in the same resting liquid at the same depth have the same pressure.", conditions: "Use only when the liquid is the same and both points are at the same level.", unitsText: "Pa" },
+    { standardFormula: "p = rho g h", meaning: "The equal-pressure result comes from the same rho, g, and h at matching depths.", conditions: "Use for points in a resting liquid.", unitsText: "Pa" },
   ],
   M4_L5: [
     { standardFormula: "F = pA", meaning: "Force due to pressure depends on local pressure and patch area.", conditions: "Use after the pressure at that point is known.", unitsText: "N" },
