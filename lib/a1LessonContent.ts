@@ -36,8 +36,10 @@ const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
   A1L2: {
     image_url: `${A1_ASSET_BASE}/A1_L2/diagrams/a1_l2_quarks_hadrons.svg`,
     visual_title: "Quark packing decides whether the hadron is a baryon or a meson",
-    visual_caption: "The hadron builder keeps three-quark crates separate from quark-antiquark pair parcels so classification comes from composition, not from size or charge alone.",
+    visual_caption: "The hadron builder labels the cargo pieces, the baryon route, and the meson route so hadron classification comes from quark composition rather than from size or charge alone.",
     visual_callouts: [
+      "Quarks are the cargo pieces used to build hadrons.",
+      "A hadron is the umbrella family for baryons and mesons.",
       "Baryons are built from three quarks.",
       "Mesons are built from a quark-antiquark pair.",
       "Protons and neutrons are baryons, not elementary particles.",
