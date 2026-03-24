@@ -22,9 +22,9 @@
     <tspan x="322" dy="33">How hot is the block</tspan>
     <tspan x="322" dy="33">at this moment?</tspan>
   </text>
-  <circle cx="388" cy="474" r="34" fill="#BFDBFE"/>
-  <circle cx="486" cy="474" r="56" fill="#93C5FD"/>
-  <text x="322" y="552" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">
+  <circle cx="384" cy="500" r="28" fill="#BFDBFE"/>
+  <circle cx="478" cy="500" r="48" fill="#93C5FD"/>
+  <text x="322" y="566" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">
     <tspan x="322" dy="0">Same meter idea,</tspan>
     <tspan x="322" dy="26">different block sizes</tspan>
   </text>
