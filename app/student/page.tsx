@@ -66,6 +66,33 @@ type CheckoutSessionResponse = {
   session_id?: string;
 };
 
+type ModuleGroupKey = "foundation" | "corePhysics" | "advancedPhysics";
+
+type ModuleSection = {
+  key: ModuleGroupKey;
+  title: string;
+  description: string;
+  modules: Module[];
+};
+
+const MODULE_SECTION_ORDER: Array<Omit<ModuleSection, "modules">> = [
+  {
+    key: "foundation",
+    title: "Foundation",
+    description: "Measurement, motion, forces, energy, and the first models students build from.",
+  },
+  {
+    key: "corePhysics",
+    title: "Core Physics",
+    description: "The main physics sequence that extends the foundations into broader systems and applications.",
+  },
+  {
+    key: "advancedPhysics",
+    title: "Advanced Physics",
+    description: "Higher-level topics that build on the full core sequence.",
+  },
+];
+
 function errorMessage(error: unknown): string {
   if (error instanceof Error) {
     return error.message;
@@ -86,6 +113,25 @@ function moduleBadge(moduleItem: Module): { label: string; background: string; c
   }
 
   return { label: "Free module", background: "#dbeafe", color: "#1d4ed8" };
+}
+
+function moduleGroupKey(moduleId?: string): ModuleGroupKey {
+  const normalized = String(moduleId || "").trim().toUpperCase();
+  if (normalized.startsWith("F")) return "foundation";
+  if (normalized.startsWith("A")) return "advancedPhysics";
+  return "corePhysics";
+}
+
+function moduleOrderValue(moduleId?: string): number {
+  const match = String(moduleId || "").trim().toUpperCase().match(/^[A-Z]+(\d+)$/);
+  if (!match) return Number.MAX_SAFE_INTEGER;
+  return Number(match[1]);
+}
+
+function compareModules(left: Module, right: Module): number {
+  const orderDifference = moduleOrderValue(left.id) - moduleOrderValue(right.id);
+  if (orderDifference !== 0) return orderDifference;
+  return String(left.id || "").localeCompare(String(right.id || ""));
 }
 
 function planRank(planId?: string | null): number {
@@ -297,6 +343,116 @@ export default function StudentHomePage() {
     return [] as PricingOffer[];
   }, [modules]);
 
+  const moduleSections = useMemo(() => {
+    const grouped: Record<ModuleGroupKey, Module[]> = {
+      foundation: [],
+      corePhysics: [],
+      advancedPhysics: [],
+    };
+
+    for (const moduleItem of modules) {
+      grouped[moduleGroupKey(moduleItem.id)].push(moduleItem);
+    }
+
+    for (const key of Object.keys(grouped) as ModuleGroupKey[]) {
+      grouped[key].sort(compareModules);
+    }
+
+    return MODULE_SECTION_ORDER.map((section) => ({
+      ...section,
+      modules: grouped[section.key],
+    })).filter((section) => section.modules.length > 0);
+  }, [modules]);
+
+  function renderModuleCard(moduleItem: Module): JSX.Element {
+    const badge = moduleBadge(moduleItem);
+    const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
+    const buttonLabel = locked ? "See unlock options" : "Open module";
+
+    return (
+      <div
+        key={moduleItem.id}
+        style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: 10,
+            flexWrap: "wrap",
+          }}
+        >
+          <div style={{ flex: 1, minWidth: 280 }}>
+            <div style={{ fontSize: 18, fontWeight: 700 }}>
+              {moduleItem.title || moduleItem.id}
+            </div>
+
+            <div style={{ opacity: 0.8, marginTop: 6 }}>
+              {moduleItem.description || ""}
+            </div>
+
+            <div style={{ marginTop: 8 }}>
+              <span
+                style={{
+                  display: "inline-flex",
+                  padding: "4px 10px",
+                  borderRadius: 999,
+                  background: badge.background,
+                  color: badge.color,
+                  fontSize: 12,
+                  fontWeight: 800,
+                }}
+              >
+                {badge.label}
+              </span>
+            </div>
+
+            {moduleItem.access?.message ? (
+              <div style={{ marginTop: 10, fontSize: 14, opacity: 0.85 }}>
+                {moduleItem.access.message}
+              </div>
+            ) : null}
+
+            {locked && moduleItem.access?.module_purchase?.price_label ? (
+              <div style={{ marginTop: 8, fontSize: 14, fontWeight: 700 }}>
+                1-month access: {moduleItem.access.module_purchase.price_label}
+              </div>
+            ) : null}
+
+            <div style={{ opacity: 0.75, marginTop: 8, fontSize: 13 }}>
+              {moduleItem.level ? `Level: ${moduleItem.level} | ` : ""}
+              {moduleItem.estimated_minutes
+                ? `Est: ${moduleItem.estimated_minutes} min`
+                : ""}
+            </div>
+          </div>
+
+          <div
+            style={{
+              minWidth: 140,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Link href={`/student/module/${encodeURIComponent(moduleItem.id)}`}>
+              <button
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: 10,
+                  border: "1px solid #333",
+                  fontWeight: 700,
+                }}
+              >
+                {buttonLabel}
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (loading || roleLoading) {
     return (
       <div style={{ padding: 24, maxWidth: 1000, margin: "0 auto" }}>
@@ -464,96 +620,30 @@ export default function StudentHomePage() {
           Loading modules...
         </div>
       ) : (
-        <div style={{ display: "grid", gap: 12 }}>
-          {modules.map((moduleItem) => {
-            const badge = moduleBadge(moduleItem);
-            const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
-            const buttonLabel = locked ? "See unlock options" : "Open module";
-
-            return (
-            <div
-              key={moduleItem.id}
-              style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}
+        <div style={{ display: "grid", gap: 18 }}>
+          {moduleSections.map((section) => (
+            <section
+              key={section.key}
+              style={{
+                display: "grid",
+                gap: 12,
+                border: "1px solid rgba(51, 51, 51, 0.18)",
+                borderRadius: 16,
+                padding: 16,
+                background: "#fcfcfc",
+              }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 10,
-                  flexWrap: "wrap",
-                }}
-              >
-                <div style={{ flex: 1, minWidth: 280 }}>
-                  <div style={{ fontSize: 18, fontWeight: 700 }}>
-                    {moduleItem.title || moduleItem.id}
-                  </div>
-
-                  <div style={{ opacity: 0.8, marginTop: 6 }}>
-                    {moduleItem.description || ""}
-                  </div>
-
-                  <div style={{ marginTop: 8 }}>
-                    <span
-                      style={{
-                        display: "inline-flex",
-                        padding: "4px 10px",
-                        borderRadius: 999,
-                        background: badge.background,
-                        color: badge.color,
-                        fontSize: 12,
-                        fontWeight: 800,
-                      }}
-                    >
-                      {badge.label}
-                    </span>
-                  </div>
-
-                  {moduleItem.access?.message ? (
-                    <div style={{ marginTop: 10, fontSize: 14, opacity: 0.85 }}>
-                      {moduleItem.access.message}
-                    </div>
-                  ) : null}
-
-                  {locked && moduleItem.access?.module_purchase?.price_label ? (
-                    <div style={{ marginTop: 8, fontSize: 14, fontWeight: 700 }}>
-                      1-month access: {moduleItem.access.module_purchase.price_label}
-                    </div>
-                  ) : null}
-
-
-                  <div style={{ opacity: 0.75, marginTop: 8, fontSize: 13 }}>
-                    {moduleItem.level ? `Level: ${moduleItem.level} | ` : ""}
-                    {moduleItem.estimated_minutes
-                      ? `Est: ${moduleItem.estimated_minutes} min`
-                      : ""}
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    minWidth: 140,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <Link href={`/student/module/${encodeURIComponent(moduleItem.id)}`}>
-                    <button
-                      style={{
-                        padding: "10px 14px",
-                        borderRadius: 10,
-                        border: "1px solid #333",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {buttonLabel}
-                    </button>
-                  </Link>
+              <div>
+                <div style={{ fontSize: 22, fontWeight: 900 }}>{section.title}</div>
+                <div style={{ marginTop: 6, opacity: 0.76 }}>
+                  {section.description}
                 </div>
               </div>
-            </div>
-            );
-          })}
+              <div style={{ display: "grid", gap: 12 }}>
+                {section.modules.map((moduleItem) => renderModuleCard(moduleItem))}
+              </div>
+            </section>
+          ))}
           {modules.length === 0 ? (
             <div
               style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}
