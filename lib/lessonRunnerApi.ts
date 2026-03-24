@@ -11143,9 +11143,22 @@ function analogyTextForCoreModule(code: string, value: string): string {
   return rewritten;
 }
 
+function normalizedFormulaConditionLead(wrapper: string, lead: string): string {
+  const normalizedWrapper = wrapper.toLowerCase();
+  const normalizedLead = lead.toLowerCase();
+  if (normalizedWrapper === "only when") {
+    return normalizedLead === "as" ? "only as " : `only when ${normalizedLead} `;
+  }
+  return normalizedLead === "when" ? "when " : `${normalizedLead} `;
+}
+
 function trimmedFormulaCondition(value: string): string {
   return singleLineText(value)
     .replace(/[.!?]+$/g, "")
+    .replace(
+      /\b(only\s+when|when)\s+use\s+(?:(?:this|the)\s+(?:relation|formula|equation)\s+|it\s+)?(when|for|to|as|in|during|with|after)\s+/gi,
+      (_match, wrapper: string, lead: string) => normalizedFormulaConditionLead(wrapper, lead)
+    )
     .replace(
       /^use (?:(?:this|the)\s+(?:relation|formula|equation)\s+|it\s+)?(when|for|to|as|in|during|with|after)\s+/i,
       (_match, lead: string) => `${lead.toLowerCase()} `
