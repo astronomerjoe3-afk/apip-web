@@ -1,5 +1,7 @@
 "use client";
 
+import { advancedConceptVisual } from "./advancedConceptVisuals";
+
 type UnknownRecord = Record<string, unknown>;
 
 export type A5QuestionVisualMeta = {
@@ -19,11 +21,9 @@ type A5SimulationCopy = {
   takeaway: string;
 };
 
-const A5_ASSET_BASE = "/lesson_assets/A5";
-
 const A5_VISUAL_META: Record<string, A5QuestionVisualMeta> = {
   A5L1: {
-    image_url: `${A5_ASSET_BASE}/A5_L1/diagrams/a5_l1_oscillation_basics.svg`,
+    image_url: advancedConceptVisual("A5_L1"),
     visual_title: "Oscillation needs a return tendency toward equilibrium",
     visual_caption: "The oscillation board keeps equilibrium, displacement, amplitude, and return direction on one frame so repeated motion is explained by restoring tendency rather than by repetition alone.",
     visual_callouts: [
@@ -33,7 +33,7 @@ const A5_VISUAL_META: Record<string, A5QuestionVisualMeta> = {
     ],
   },
   A5L2: {
-    image_url: `${A5_ASSET_BASE}/A5_L2/diagrams/a5_l2_simple_harmonic_motion.svg`,
+    image_url: advancedConceptVisual("A5_L2"),
     visual_title: "Simple harmonic motion is the special case with proportional restoring acceleration",
     visual_caption: "The SHM board keeps displacement and acceleration linked so learners see why SHM is more specific than 'any repeated motion'.",
     visual_callouts: [
@@ -43,7 +43,7 @@ const A5_VISUAL_META: Record<string, A5QuestionVisualMeta> = {
     ],
   },
   A5L3: {
-    image_url: `${A5_ASSET_BASE}/A5_L3/diagrams/a5_l3_shm_graphs_equations.svg`,
+    image_url: advancedConceptVisual("A5_L3"),
     visual_title: "Displacement, velocity, and acceleration traces are linked views of one oscillation",
     visual_caption: "The trace board keeps sinusoidal graphs and phase relationships on one display so the equations and graphs are read as one motion story.",
     visual_callouts: [
@@ -53,7 +53,7 @@ const A5_VISUAL_META: Record<string, A5QuestionVisualMeta> = {
     ],
   },
   A5L4: {
-    image_url: `${A5_ASSET_BASE}/A5_L4/diagrams/a5_l4_energy_in_shm.svg`,
+    image_url: advancedConceptVisual("A5_L4"),
     visual_title: "SHM swaps energy between motion and stored stretch without losing the total in the ideal case",
     visual_caption: "The energy board keeps kinetic, potential, and total energy together so the oscillator is not misread as 'using up' energy at equilibrium.",
     visual_callouts: [
@@ -63,7 +63,7 @@ const A5_VISUAL_META: Record<string, A5QuestionVisualMeta> = {
     ],
   },
   A5L5: {
-    image_url: `${A5_ASSET_BASE}/A5_L5/diagrams/a5_l5_forced_resonance.svg`,
+    image_url: advancedConceptVisual("A5_L5"),
     visual_title: "Resonance appears when the driving rhythm matches the natural timing",
     visual_caption: "The driven-oscillator board keeps natural frequency, driving frequency, and response amplitude on one graph so resonance is read as a match condition rather than as a mysterious extra force.",
     visual_callouts: [
@@ -73,7 +73,7 @@ const A5_VISUAL_META: Record<string, A5QuestionVisualMeta> = {
     ],
   },
   A5L6: {
-    image_url: `${A5_ASSET_BASE}/A5_L6/diagrams/a5_l6_damping_applications.svg`,
+    image_url: advancedConceptVisual("A5_L6"),
     visual_title: "Damping is an energy-loss setting that shapes response style",
     visual_caption: "The damping board keeps underdamped, critically damped, and overdamped responses on one frame so application choices are tied to settling behavior.",
     visual_callouts: [

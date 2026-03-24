@@ -1,5 +1,7 @@
 "use client";
 
+import { advancedConceptVisual } from "./advancedConceptVisuals";
+
 type UnknownRecord = Record<string, unknown>;
 
 export type A2QuestionVisualMeta = {
@@ -19,11 +21,9 @@ type A2SimulationCopy = {
   takeaway: string;
 };
 
-const A2_ASSET_BASE = "/lesson_assets/A2";
-
 const A2_VISUAL_META: Record<string, A2QuestionVisualMeta> = {
   A2L1: {
-    image_url: `${A2_ASSET_BASE}/A2_L1/diagrams/a2_l1_quantized_energy_levels.svg`,
+    image_url: advancedConceptVisual("A2_L1"),
     visual_title: "Atomic electrons occupy locked energy floors",
     visual_caption: "The ladder board keeps allowed levels and packet-matched jumps on one frame so quantization is read as a discrete-state rule rather than a continuous ramp.",
     visual_callouts: [
@@ -33,7 +33,7 @@ const A2_VISUAL_META: Record<string, A2QuestionVisualMeta> = {
     ],
   },
   A2L2: {
-    image_url: `${A2_ASSET_BASE}/A2_L2/diagrams/a2_l2_spectral_barcodes.svg`,
+    image_url: advancedConceptVisual("A2_L2"),
     visual_title: "Line spectra are barcodes of allowed atomic transitions",
     visual_caption: "The spectrum board keeps return jumps, missing-color gates, and discrete lines together so emission and absorption stay linked to the same energy-level structure.",
     visual_callouts: [
@@ -43,7 +43,7 @@ const A2_VISUAL_META: Record<string, A2QuestionVisualMeta> = {
     ],
   },
   A2L3: {
-    image_url: `${A2_ASSET_BASE}/A2_L3/diagrams/a2_l3_photoelectric_effect.svg`,
+    image_url: advancedConceptVisual("A2_L3"),
     visual_title: "Photoelectric emission depends on packet energy, not brightness alone",
     visual_caption: "The threshold board keeps frequency, work function, and emission rate on one display so students separate packet energy from packet count.",
     visual_callouts: [
@@ -53,7 +53,7 @@ const A2_VISUAL_META: Record<string, A2QuestionVisualMeta> = {
     ],
   },
   A2L4: {
-    image_url: `${A2_ASSET_BASE}/A2_L4/diagrams/a2_l4_excitation_ionisation.svg`,
+    image_url: advancedConceptVisual("A2_L4"),
     visual_title: "Excitation and ionisation are different thresholds on the same ladder",
     visual_caption: "The ladder-plus-continuum board keeps raised bound states separate from full escape so ionisation is not mistaken for 'just more excitation'.",
     visual_callouts: [
@@ -63,7 +63,7 @@ const A2_VISUAL_META: Record<string, A2QuestionVisualMeta> = {
     ],
   },
   A2L5: {
-    image_url: `${A2_ASSET_BASE}/A2_L5/diagrams/a2_l5_de_broglie_duality.svg`,
+    image_url: advancedConceptVisual("A2_L5"),
     visual_title: "Matter travelers can produce localized hits and wave-like patterns together",
     visual_caption: "The duality board keeps single detections and spreading pattern evidence visible at the same time so de Broglie wavelength is tied to experiment, not treated as a slogan.",
     visual_callouts: [
@@ -73,7 +73,7 @@ const A2_VISUAL_META: Record<string, A2QuestionVisualMeta> = {
     ],
   },
   A2L6: {
-    image_url: `${A2_ASSET_BASE}/A2_L6/diagrams/a2_l6_quantum_evidence.svg`,
+    image_url: advancedConceptVisual("A2_L6"),
     visual_title: "Several experiments point back to one packet-and-level quantum model",
     visual_caption: "The synthesis board keeps spectra, thresholds, and matter-wave evidence on one comparison frame so quantum theory reads as one coherent structure.",
     visual_callouts: [

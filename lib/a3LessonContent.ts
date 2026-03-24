@@ -1,5 +1,7 @@
 "use client";
 
+import { advancedConceptVisual } from "./advancedConceptVisuals";
+
 type UnknownRecord = Record<string, unknown>;
 
 export type A3QuestionVisualMeta = {
@@ -19,11 +21,9 @@ type A3SimulationCopy = {
   takeaway: string;
 };
 
-const A3_ASSET_BASE = "/lesson_assets/A3";
-
 const A3_VISUAL_META: Record<string, A3QuestionVisualMeta> = {
   A3L1: {
-    image_url: `${A3_ASSET_BASE}/A3_L1/diagrams/a3_l1_progressive_superposition.svg`,
+    image_url: advancedConceptVisual("A3_L1"),
     visual_title: "Progressive waves overlap by adding displacement at the same place and time",
     visual_caption: "The overlap board keeps separate wave contributions and the combined trace on one frame so superposition is read as an addition rule rather than alternating turns.",
     visual_callouts: [
@@ -33,7 +33,7 @@ const A3_VISUAL_META: Record<string, A3QuestionVisualMeta> = {
     ],
   },
   A3L2: {
-    image_url: `${A3_ASSET_BASE}/A3_L2/diagrams/a3_l2_stationary_waves.svg`,
+    image_url: advancedConceptVisual("A3_L2"),
     visual_title: "Stationary waves are standing patterns built from matched opposite-traveling waves",
     visual_caption: "The standing-wave board keeps nodes, antinodes, and boundary fit on one picture so stationary waves are not mistaken for single waves that stopped moving.",
     visual_callouts: [
@@ -43,7 +43,7 @@ const A3_VISUAL_META: Record<string, A3QuestionVisualMeta> = {
     ],
   },
   A3L3: {
-    image_url: `${A3_ASSET_BASE}/A3_L3/diagrams/a3_l3_phase_path_interference.svg`,
+    image_url: advancedConceptVisual("A3_L3"),
     visual_title: "Interference depends on path difference and phase difference together",
     visual_caption: "The interference board keeps route difference, phase shift, and fringe outcome on one frame so constructive and destructive cases are read causally.",
     visual_callouts: [
@@ -53,7 +53,7 @@ const A3_VISUAL_META: Record<string, A3QuestionVisualMeta> = {
     ],
   },
   A3L4: {
-    image_url: `${A3_ASSET_BASE}/A3_L4/diagrams/a3_l4_diffraction_gratings.svg`,
+    image_url: advancedConceptVisual("A3_L4"),
     visual_title: "Diffraction gratings turn wavelength into angle-separated order patterns",
     visual_caption: "The grating board keeps slit spacing, order number, and angular spread on one display so pattern geometry stays readable.",
     visual_callouts: [
@@ -63,7 +63,7 @@ const A3_VISUAL_META: Record<string, A3QuestionVisualMeta> = {
     ],
   },
   A3L5: {
-    image_url: `${A3_ASSET_BASE}/A3_L5/diagrams/a3_l5_refraction_tir.svg`,
+    image_url: advancedConceptVisual("A3_L5"),
     visual_title: "Refraction, critical angle, and total internal reflection belong to one route story",
     visual_caption: "The route board keeps refracting boundary, critical-angle threshold, and trapped-light behavior on one picture so TIR stays a change-of-medium story.",
     visual_callouts: [
@@ -73,7 +73,7 @@ const A3_VISUAL_META: Record<string, A3QuestionVisualMeta> = {
     ],
   },
   A3L6: {
-    image_url: `${A3_ASSET_BASE}/A3_L6/diagrams/a3_l6_oscilloscope_wave_evidence.svg`,
+    image_url: advancedConceptVisual("A3_L6"),
     visual_title: "Oscilloscope traces are time graphs that reveal wave behavior",
     visual_caption: "The oscilloscope board keeps trace height, cycle spacing, and measured timing on one graph so learners do not confuse a time trace with a path-in-space drawing.",
     visual_callouts: [

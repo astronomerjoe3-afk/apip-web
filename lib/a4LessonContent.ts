@@ -1,5 +1,7 @@
 "use client";
 
+import { advancedConceptVisual } from "./advancedConceptVisuals";
+
 type UnknownRecord = Record<string, unknown>;
 
 export type A4QuestionVisualMeta = {
@@ -19,11 +21,9 @@ type A4SimulationCopy = {
   takeaway: string;
 };
 
-const A4_ASSET_BASE = "/lesson_assets/A4";
-
 const A4_VISUAL_META: Record<string, A4QuestionVisualMeta> = {
   A4L1: {
-    image_url: `${A4_ASSET_BASE}/A4_L1/diagrams/a4_l1_vector_equilibrium.svg`,
+    image_url: advancedConceptVisual("A4_L1"),
     visual_title: "Diagonal forces must be resolved before balance is judged",
     visual_caption: "The vector rig keeps full arrows, axis components, and resultant checks on one board so equilibrium is tested by components rather than by visual guesswork.",
     visual_callouts: [
@@ -33,7 +33,7 @@ const A4_VISUAL_META: Record<string, A4QuestionVisualMeta> = {
     ],
   },
   A4L2: {
-    image_url: `${A4_ASSET_BASE}/A4_L2/diagrams/a4_l2_kinematics_maps.svg`,
+    image_url: advancedConceptVisual("A4_L2"),
     visual_title: "Position, velocity, and acceleration need separate component stories",
     visual_caption: "The motion map keeps displacement, velocity, and acceleration in separate slots so one blended everyday motion label does not replace the physics.",
     visual_callouts: [
@@ -43,7 +43,7 @@ const A4_VISUAL_META: Record<string, A4QuestionVisualMeta> = {
     ],
   },
   A4L3: {
-    image_url: `${A4_ASSET_BASE}/A4_L3/diagrams/a4_l3_projectile_motion.svg`,
+    image_url: advancedConceptVisual("A4_L3"),
     visual_title: "Projectile motion splits into horizontal and vertical stories sharing one clock",
     visual_caption: "The launch board keeps the two components and the common time on one frame so the parabolic path is explained from the split rather than memorized as one mysterious curve.",
     visual_callouts: [
@@ -53,7 +53,7 @@ const A4_VISUAL_META: Record<string, A4QuestionVisualMeta> = {
     ],
   },
   A4L4: {
-    image_url: `${A4_ASSET_BASE}/A4_L4/diagrams/a4_l4_momentum_collisions.svg`,
+    image_url: advancedConceptVisual("A4_L4"),
     visual_title: "Momentum bookkeeping should be checked before collision shortcuts",
     visual_caption: "The collision ledger keeps before-and-after momentum, impulse, and energy comparison on one board so impact questions stay systematic.",
     visual_callouts: [
@@ -63,7 +63,7 @@ const A4_VISUAL_META: Record<string, A4QuestionVisualMeta> = {
     ],
   },
   A4L5: {
-    image_url: `${A4_ASSET_BASE}/A4_L5/diagrams/a4_l5_circular_motion.svg`,
+    image_url: advancedConceptVisual("A4_L5"),
     visual_title: "Circular motion needs inward acceleration even when speed is constant",
     visual_caption: "The turn board keeps tangential velocity, inward acceleration, and inward resultant force visible together so turning is not mistaken for force-free motion.",
     visual_callouts: [
@@ -73,7 +73,7 @@ const A4_VISUAL_META: Record<string, A4QuestionVisualMeta> = {
     ],
   },
   A4L6: {
-    image_url: `${A4_ASSET_BASE}/A4_L6/diagrams/a4_l6_springs_materials.svg`,
+    image_url: advancedConceptVisual("A4_L6"),
     visual_title: "Materials must be compared with load, geometry, and response together",
     visual_caption: "The response board keeps force, extension, area, and original length visible so stress, strain, and Young modulus are read as normalized ideas rather than force-only facts.",
     visual_callouts: [
