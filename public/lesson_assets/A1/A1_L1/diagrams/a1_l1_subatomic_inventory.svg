@@ -23,6 +23,28 @@
   <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
   <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
 
+  <rect x="304.0" y="408.0" width="168.0" height="56.0" rx="14" fill="#111827" fill-opacity="0.92" stroke="#facc15" stroke-width="2"/>
+  <text x="388.0" y="432.0" fill="#fde68a" text-anchor="middle"
+        font-size="18" font-family="Arial" font-weight="bold">Messenger token</text>
+  <text x="388.0" y="454.0" fill="#f8fafc" text-anchor="middle"
+        font-size="17" font-family="Arial">(photon)</text>
+
+  <rect x="556.0" y="322.0" width="168.0" height="56.0" rx="14" fill="#111827" fill-opacity="0.92" stroke="#38bdf8" stroke-width="2"/>
+  <text x="640.0" y="346.0" fill="#7dd3fc" text-anchor="middle"
+        font-size="18" font-family="Arial" font-weight="bold">Solo traveler</text>
+  <text x="640.0" y="368.0" fill="#f8fafc" text-anchor="middle"
+        font-size="17" font-family="Arial">(lepton)</text>
+
+  <rect x="756.0" y="432.0" width="176.0" height="56.0" rx="14" fill="#111827" fill-opacity="0.92" stroke="#a78bfa" stroke-width="2"/>
+  <text x="844.0" y="456.0" fill="#c4b5fd" text-anchor="middle"
+        font-size="18" font-family="Arial" font-weight="bold">Nucleus bundle</text>
+  <text x="844.0" y="478.0" fill="#f8fafc" text-anchor="middle"
+        font-size="17" font-family="Arial">(nucleon)</text>
+
+  <rect x="466.0" y="512.0" width="348.0" height="44.0" rx="16" fill="#111827" fill-opacity="0.9" stroke="#475569" stroke-width="2"/>
+  <text x="640.0" y="539.0" fill="#e2e8f0" text-anchor="middle"
+        font-size="18" font-family="Arial">Port inventory = particle classification board</text>
+
   <text x="640.0" y="216.0" fill="white" text-anchor="middle"
         font-size="38" font-family="Arial" font-weight="bold">Subatomic Inventory</text>
   <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
