@@ -9,6 +9,131 @@ export type TechnicalWordEntry = {
   source?: string;
 };
 
+const CURRICULUM_TECHNICAL_WORD_SUPPLEMENTS: Record<string, TechnicalWordSeed[]> = {
+  A1: [
+    { term: "Hadron", aliases: ["hadron", "hadrons"], meaning: "A hadron is a composite particle built from quarks and held together by the strong interaction.", why_it_matters: "It is the umbrella family that contains baryons and mesons." },
+    { term: "Quark", aliases: ["quark", "quarks"], meaning: "A quark is a fundamental particle that combines to form hadrons.", why_it_matters: "It explains hadron structure." },
+    { term: "Fundamental interaction", aliases: ["fundamental interaction", "fundamental interactions"], meaning: "A fundamental interaction is a basic way particles influence one another.", why_it_matters: "It organizes particle events into families." },
+    { term: "Strong interaction", aliases: ["strong interaction"], meaning: "The strong interaction binds quarks inside hadrons and helps bind nucleons in nuclei.", why_it_matters: "It explains hadron and nucleus stability." },
+    { term: "Weak interaction", aliases: ["weak interaction"], meaning: "The weak interaction is involved in processes such as beta decay and neutrino interactions.", why_it_matters: "It connects particle change to nuclear and lepton events." },
+    { term: "Reaction channel", aliases: ["reaction channel", "reaction channels"], meaning: "A reaction channel is one allowed set of products from a particle interaction.", why_it_matters: "It organizes alternative outcomes." },
+    { term: "Decay", aliases: ["decay"], meaning: "A decay is the spontaneous transformation of an unstable particle into other particles.", why_it_matters: "It is a common event family that still obeys conservation rules." },
+    { term: "Scattering", aliases: ["scattering"], meaning: "Scattering is an interaction where incoming particles deflect or exchange energy and momentum.", why_it_matters: "It broadens event analysis beyond simple decay." },
+  ],
+  A2: [
+    { term: "Energy level", aliases: ["energy level", "energy levels"], meaning: "An energy level is a discrete allowed energy state for an electron in an atom.", why_it_matters: "It is the foundation of atomic spectra." },
+    { term: "Quantized", aliases: ["quantized", "quantised"], meaning: "Quantized means limited to specific allowed values rather than any continuous value.", why_it_matters: "It protects the ladder-floor idea." },
+    { term: "Excitation", aliases: ["excitation", "excited"], meaning: "Excitation is the lifting of an electron to a higher energy level.", why_it_matters: "It makes later emission and absorption readable." },
+    { term: "Ground state", aliases: ["ground state"], meaning: "The ground state is the lowest allowed energy level of the atom.", why_it_matters: "It is the natural reference point for electron jumps." },
+    { term: "Emission spectrum", aliases: ["emission spectrum"], meaning: "An emission spectrum is the set of discrete wavelengths emitted when electrons fall to lower levels.", why_it_matters: "It turns return jumps into visible evidence." },
+    { term: "Absorption spectrum", aliases: ["absorption spectrum"], meaning: "An absorption spectrum is the set of wavelengths removed when electrons absorb specific photon energies.", why_it_matters: "It shows the same energy gaps from the opposite direction." },
+    { term: "Line spectrum", aliases: ["line spectrum"], meaning: "A line spectrum contains discrete lines rather than a continuous spread.", why_it_matters: "It is the fingerprint of quantized levels." },
+    { term: "Transition", aliases: ["transition", "transitions"], meaning: "A transition is a jump from one energy level to another.", why_it_matters: "It connects the ladder model to the spectrum lines." },
+    { term: "Photoelectric effect", aliases: ["photoelectric effect"], meaning: "The photoelectric effect is the emission of electrons from a surface when light above threshold frequency strikes it.", why_it_matters: "It is key evidence for photon packets." },
+    { term: "Threshold frequency", aliases: ["threshold frequency"], meaning: "Threshold frequency is the minimum light frequency needed to release electrons from a surface.", why_it_matters: "It blocks the intensity-only misconception." },
+    { term: "Work function", aliases: ["work function"], meaning: "The work function is the minimum energy needed to liberate an electron from the surface.", why_it_matters: "It is the unlock gate for the material." },
+    { term: "Photoelectron", aliases: ["photoelectron", "photoelectrons"], meaning: "A photoelectron is an electron emitted from the surface by the photoelectric effect.", why_it_matters: "It is the outgoing traveler in the event." },
+    { term: "Ionisation", aliases: ["ionisation", "ionization"], meaning: "Ionisation is the complete removal of an electron from the atom.", why_it_matters: "It is the full unlock case beyond ordinary excitation." },
+    { term: "Ionisation energy", aliases: ["ionisation energy", "ionization energy"], meaning: "Ionisation energy is the minimum energy needed to remove an electron completely from the atom.", why_it_matters: "It sets the top exit gate of the ladder." },
+    { term: "Excited state", aliases: ["excited state"], meaning: "An excited state is a higher allowed atomic level reached without removing the electron from the atom.", why_it_matters: "It is a lifted but still bound state." },
+    { term: "Continuum", aliases: ["continuum"], meaning: "The continuum is the range of energies above the ionisation threshold where the electron is no longer bound.", why_it_matters: "It separates bound levels from free states." },
+    { term: "Wave-particle duality", aliases: ["wave-particle duality", "wave particle duality"], meaning: "Wave-particle duality means quantum objects show both localized particle-like and wave-like behavior depending on the experiment.", why_it_matters: "It prevents the false either-or view." },
+    { term: "de Broglie wavelength", aliases: ["de broglie wavelength", "debroglie wavelength"], meaning: "The de Broglie wavelength is the wavelength associated with a particle's momentum.", why_it_matters: "It connects matter motion to wave behavior." },
+    { term: "Diffraction", aliases: ["diffraction"], meaning: "Diffraction is the spreading of waves after passing through an aperture or around an obstacle.", why_it_matters: "It provides evidence for wave behavior." },
+    { term: "Momentum", aliases: ["momentum"], meaning: "Momentum is the quantity p = m v for the moving particle.", why_it_matters: "It sets the matter-wave wavelength scale." },
+    { term: "Atomic spectrum", aliases: ["atomic spectrum"], meaning: "An atomic spectrum is the set of allowed spectral lines associated with one atom.", why_it_matters: "It is the fingerprint output of its energy ladder." },
+    { term: "Threshold behavior", aliases: ["threshold behavior", "threshold behaviour"], meaning: "Threshold behavior is the sudden onset of an effect only after a critical value is exceeded.", why_it_matters: "It appears in photoelectric and ionisation ideas." },
+  ],
+  A3: [
+    { term: "Progressive wave", aliases: ["progressive wave", "progressive waves"], meaning: "A progressive wave transfers energy as the disturbance travels through space.", why_it_matters: "It separates traveling patterns from stationary ones." },
+    { term: "Superposition", aliases: ["superposition"], meaning: "Superposition says the total displacement is the sum of the overlapping displacements.", why_it_matters: "It is the core addition rule for waves." },
+    { term: "Displacement", aliases: ["displacement"], meaning: "Displacement is the signed distance of the medium from equilibrium.", why_it_matters: "It is the quantity that adds during overlap." },
+    { term: "Stationary wave", aliases: ["stationary wave", "stationary waves", "standing wave", "standing waves"], meaning: "A stationary wave is a standing pattern formed by two opposite-traveling waves of the same frequency.", why_it_matters: "It explains fixed nodes and antinodes." },
+    { term: "Node", aliases: ["node", "nodes"], meaning: "A node is a point that remains at zero displacement in a stationary wave.", why_it_matters: "It is the fixed quiet point in the pattern." },
+    { term: "Antinode", aliases: ["antinode", "antinodes"], meaning: "An antinode is a point of maximum oscillation amplitude in a stationary wave.", why_it_matters: "It marks where the oscillation is strongest." },
+    { term: "Harmonic", aliases: ["harmonic", "harmonics"], meaning: "A harmonic is one allowed standing-wave mode in the system.", why_it_matters: "It connects boundary conditions to allowed patterns." },
+    { term: "Interference", aliases: ["interference"], meaning: "Interference is the pattern produced when coherent waves superpose.", why_it_matters: "It turns phase comparison into visible outcomes." },
+    { term: "Path difference", aliases: ["path difference"], meaning: "Path difference is the difference in route length traveled by two waves.", why_it_matters: "It is the route measure that sets the meeting condition." },
+    { term: "Phase difference", aliases: ["phase difference"], meaning: "Phase difference compares how far apart two oscillations are in the cycle.", why_it_matters: "It translates route difference into wave alignment." },
+    { term: "Coherent sources", aliases: ["coherent sources", "coherent source"], meaning: "Coherent sources maintain a constant phase relationship.", why_it_matters: "They are needed for stable interference patterns." },
+    { term: "Diffraction grating", aliases: ["diffraction grating"], meaning: "A diffraction grating is a large set of equally spaced slits.", why_it_matters: "It creates sharp interference maxima." },
+    { term: "Grating spacing", aliases: ["grating spacing"], meaning: "Grating spacing is the distance between adjacent slits in the grating.", why_it_matters: "It controls the diffraction angles." },
+    { term: "Order", aliases: ["order"], meaning: "Order labels a bright maximum in the grating pattern.", why_it_matters: "It turns the angle pattern into a countable family." },
+    { term: "Refraction", aliases: ["refraction"], meaning: "Refraction is the change in direction caused by a change in wave speed between media.", why_it_matters: "It ties bending to speed, not sideways force." },
+    { term: "Refractive index", aliases: ["refractive index"], meaning: "Refractive index measures how much the wave speed is reduced in a medium.", why_it_matters: "It helps compare optical density and route bending." },
+    { term: "Critical angle", aliases: ["critical angle"], meaning: "The critical angle is the incident angle in the denser medium that gives a refracted angle of 90 degrees.", why_it_matters: "It marks the threshold for total internal reflection." },
+    { term: "Total internal reflection", aliases: ["total internal reflection"], meaning: "Total internal reflection occurs when no refracted ray emerges and the wave is reflected back into the denser medium.", why_it_matters: "It explains light guiding in optical systems." },
+    { term: "Oscilloscope", aliases: ["oscilloscope"], meaning: "An oscilloscope displays voltage against time as a trace.", why_it_matters: "It makes fast wave behavior readable." },
+    { term: "Time base", aliases: ["time base"], meaning: "The time base sets how much time each horizontal division represents.", why_it_matters: "It is needed to extract frequency or period." },
+  ],
+  A4: [
+    { term: "Vector", aliases: ["vector", "vectors"], meaning: "A vector has magnitude and direction.", why_it_matters: "It is the natural language for forces and motion." },
+    { term: "Component", aliases: ["component", "components"], meaning: "A component is the projection of a vector on a chosen axis.", why_it_matters: "It makes diagonal forces calculable." },
+    { term: "Equilibrium", aliases: ["equilibrium"], meaning: "Equilibrium means the resultant force and resultant moment are balanced for the situation studied.", why_it_matters: "It is the balance condition for the rig." },
+    { term: "Resultant", aliases: ["resultant"], meaning: "The resultant is the single vector equivalent to the combined effect of several vectors.", why_it_matters: "It shows whether the system is balanced or not." },
+    { term: "Velocity", aliases: ["velocity"], meaning: "Velocity is the rate of change of displacement and has direction.", why_it_matters: "It distinguishes directed motion from speed alone." },
+    { term: "Acceleration", aliases: ["acceleration"], meaning: "Acceleration is the rate of change of velocity.", why_it_matters: "It tells how the motion state is changing." },
+    { term: "Displacement", aliases: ["displacement"], meaning: "Displacement is the directed change in position.", why_it_matters: "It anchors kinematics to a vector quantity." },
+    { term: "Component motion", aliases: ["component motion"], meaning: "Component motion treats horizontal and vertical motion separately before recombining them.", why_it_matters: "It is vital in two-dimensional reasoning." },
+    { term: "Projectile", aliases: ["projectile", "projectiles"], meaning: "A projectile is an object moving under gravity after launch, with no further driving force assumed.", why_it_matters: "It frames the path after release." },
+    { term: "Horizontal component", aliases: ["horizontal component"], meaning: "The horizontal component is the sideways part of the launch velocity.", why_it_matters: "It sets the sideways motion." },
+    { term: "Vertical component", aliases: ["vertical component"], meaning: "The vertical component is the up-down part of the launch velocity.", why_it_matters: "It sets the rise and fall behavior." },
+    { term: "Time of flight", aliases: ["time of flight"], meaning: "Time of flight is the total time the projectile remains in the air for the chosen model.", why_it_matters: "It links the two component stories with one clock." },
+    { term: "Momentum", aliases: ["momentum"], meaning: "Momentum is the product of mass and velocity.", why_it_matters: "It is the central bookkeeping quantity in collisions." },
+    { term: "Impulse", aliases: ["impulse"], meaning: "Impulse is the change in momentum produced by a force acting over a time interval.", why_it_matters: "It links force and collision time to momentum change." },
+    { term: "Elastic collision", aliases: ["elastic collision"], meaning: "An elastic collision conserves kinetic energy as well as momentum in the ideal model.", why_it_matters: "It contrasts with inelastic outcomes." },
+    { term: "Inelastic collision", aliases: ["inelastic collision"], meaning: "An inelastic collision conserves momentum but not kinetic energy.", why_it_matters: "It keeps momentum conservation separate from energy distribution." },
+    { term: "Centripetal acceleration", aliases: ["centripetal acceleration"], meaning: "Centripetal acceleration is the inward acceleration required for circular motion.", why_it_matters: "It explains why the velocity direction keeps changing." },
+    { term: "Centripetal force", aliases: ["centripetal force"], meaning: "Centripetal force is the inward resultant force producing the circular path.", why_it_matters: "It is not a separate outward force." },
+    { term: "Tangential velocity", aliases: ["tangential velocity"], meaning: "Tangential velocity is the instantaneous velocity along the tangent to the circular path.", why_it_matters: "It keeps speed and direction distinct." },
+    { term: "Radius", aliases: ["radius"], meaning: "Radius is the distance from the center of the circle to the moving object.", why_it_matters: "It sets the curvature scale of the path." },
+    { term: "Spring constant", aliases: ["spring constant"], meaning: "The spring constant measures how stiff a spring is in Hooke's-law behavior.", why_it_matters: "It links force to extension." },
+    { term: "Stress", aliases: ["stress"], meaning: "Stress is force per unit cross-sectional area.", why_it_matters: "It compares load with the size of the material." },
+    { term: "Strain", aliases: ["strain"], meaning: "Strain is extension divided by original length.", why_it_matters: "It compares change in length with the starting size." },
+    { term: "Young modulus", aliases: ["young modulus", "young's modulus"], meaning: "Young modulus is the ratio of stress to strain in the elastic region.", why_it_matters: "It measures material stiffness rather than spring stiffness." },
+  ],
+  A5: [
+    { term: "Oscillation", aliases: ["oscillation", "oscillations"], meaning: "An oscillation is a repeated motion about an equilibrium position.", why_it_matters: "It defines the whole module world." },
+    { term: "Equilibrium position", aliases: ["equilibrium position"], meaning: "The equilibrium position is the balance point about which the motion occurs.", why_it_matters: "It anchors the return story." },
+    { term: "Restoring force", aliases: ["restoring force"], meaning: "A restoring force acts toward the equilibrium position.", why_it_matters: "It is the reason the motion keeps returning." },
+    { term: "Amplitude", aliases: ["amplitude"], meaning: "Amplitude is the maximum displacement from equilibrium.", why_it_matters: "It measures the size of the oscillation." },
+    { term: "Simple harmonic motion", aliases: ["simple harmonic motion", "shm"], meaning: "Simple harmonic motion is oscillation where acceleration is proportional to displacement and directed toward equilibrium.", why_it_matters: "It gives the formal condition for SHM." },
+    { term: "Displacement", aliases: ["displacement"], meaning: "Displacement is the signed distance from equilibrium.", why_it_matters: "It sets the restoring response." },
+    { term: "Acceleration", aliases: ["acceleration"], meaning: "Acceleration is the rate of change of velocity.", why_it_matters: "In SHM it points toward equilibrium." },
+    { term: "Angular frequency", aliases: ["angular frequency"], meaning: "Angular frequency sets how quickly the SHM cycles repeat.", why_it_matters: "It connects the motion to the equations." },
+    { term: "Phase", aliases: ["phase"], meaning: "Phase tells where the oscillator is in its cycle.", why_it_matters: "It connects the different graphs." },
+    { term: "Period", aliases: ["period"], meaning: "The period is the time for one complete oscillation.", why_it_matters: "It links the graph spacing to frequency." },
+    { term: "Frequency", aliases: ["frequency"], meaning: "Frequency is the number of oscillations per second.", why_it_matters: "It is the reciprocal of the period." },
+    { term: "Sinusoidal graph", aliases: ["sinusoidal graph"], meaning: "A sinusoidal graph is the smooth periodic trace associated with ideal SHM.", why_it_matters: "It gives the recognizable time pattern." },
+    { term: "Kinetic energy", aliases: ["kinetic energy"], meaning: "Kinetic energy is the motion energy of the oscillator.", why_it_matters: "It is largest as the oscillator passes equilibrium." },
+    { term: "Potential energy", aliases: ["potential energy"], meaning: "Potential energy is the stored energy associated with displacement in the restoring system.", why_it_matters: "It is largest at maximum displacement." },
+    { term: "Total energy", aliases: ["total energy"], meaning: "Total energy is the sum of kinetic and potential energy in the ideal oscillator.", why_it_matters: "It stays constant when no damping is present." },
+    { term: "Forced oscillation", aliases: ["forced oscillation", "forced oscillations"], meaning: "A forced oscillation is maintained by an external periodic driving force.", why_it_matters: "It separates self-return from continued driving." },
+    { term: "Natural frequency", aliases: ["natural frequency"], meaning: "The natural frequency is the frequency at which the system oscillates most readily on its own.", why_it_matters: "It sets the preferred timing of the oscillator." },
+    { term: "Resonance", aliases: ["resonance"], meaning: "Resonance is the large-amplitude response when the driving frequency matches the natural frequency closely.", why_it_matters: "It is the key amplification idea." },
+    { term: "Driving frequency", aliases: ["driving frequency"], meaning: "The driving frequency is the frequency of the external periodic force.", why_it_matters: "It is compared against the system's own timing." },
+    { term: "Damping", aliases: ["damping"], meaning: "Damping is the removal of oscillation energy by resistive effects.", why_it_matters: "It explains why real oscillations often fade." },
+    { term: "Underdamped", aliases: ["underdamped"], meaning: "Underdamped means the system still oscillates while the amplitude decreases.", why_it_matters: "It is the repeated-but-fading case." },
+    { term: "Critically damped", aliases: ["critically damped"], meaning: "Critically damped means the system returns to equilibrium quickly without oscillating.", why_it_matters: "It is often the design target for fast settling." },
+    { term: "Overdamped", aliases: ["overdamped"], meaning: "Overdamped means the system returns without oscillating but more slowly than the critically damped case.", why_it_matters: "It contrasts slow return with oscillatory fading." },
+  ],
+};
+
+const FORMULA_SYMBOL_TECHNICAL_WORDS: TechnicalWordSeed[] = [
+  { term: "e", aliases: ["e", "charge in e", "elementary charge"], meaning: "e is the magnitude of the elementary charge, used as the standard charge unit for particles.", why_it_matters: "It lets charge values be compared cleanly in particle and atomic physics." },
+  { term: "eV", aliases: ["ev", "electronvolt", "electron volt"], meaning: "An electronvolt is the energy gained by one elementary charge moving through a potential difference of one volt.", why_it_matters: "It is a convenient small energy unit in atomic and particle physics." },
+  { term: "keV", aliases: ["kev", "kiloelectronvolt"], meaning: "A kiloelectronvolt is one thousand electronvolts.", why_it_matters: "It keeps medium-sized atomic energies readable." },
+  { term: "MeV", aliases: ["mev", "megaelectronvolt", "mega electronvolt"], meaning: "A megaelectronvolt is one million electronvolts.", why_it_matters: "It is a standard energy unit in nuclear and particle physics." },
+  { term: "GeV", aliases: ["gev", "gigaelectronvolt", "giga electronvolt"], meaning: "A gigaelectronvolt is one billion electronvolts.", why_it_matters: "It is useful for high-energy particle events." },
+  { term: "Hz", aliases: ["hz", "hertz"], meaning: "Hertz is the unit of frequency and means cycles per second.", why_it_matters: "It connects repeating behavior to a measurable rate." },
+  { term: "nm", aliases: ["nm", "nanometre", "nanometer"], meaning: "A nanometre is one billionth of a metre.", why_it_matters: "It is a standard unit for wavelengths of light." },
+  { term: "Pa", aliases: ["pa", "pascal", "pascals"], meaning: "A pascal is one newton of force per square metre.", why_it_matters: "It is the standard unit for pressure and stress." },
+  { term: "h", aliases: ["h", "planck constant"], meaning: "h is Planck's constant, the constant that links photon energy with frequency.", why_it_matters: "It anchors several key quantum relations." },
+  { term: "lambda (wavelength symbol)", aliases: ["lambda", "wavelength symbol"], meaning: "lambda is the symbol commonly used for wavelength.", why_it_matters: "It makes wave and quantum equations easier to read." },
+  { term: "omega (angular-frequency symbol)", aliases: ["omega", "angular frequency"], meaning: "omega is the symbol used for angular frequency in oscillation and SHM formulas.", why_it_matters: "It connects the algebra to the oscillator's cycle rate." },
+  { term: "phi (work-function symbol)", aliases: ["phi", "work function symbol"], meaning: "phi is the symbol often used for work function in photoelectric equations.", why_it_matters: "It keeps the threshold-energy term identifiable inside the formula." },
+];
+
 type TechnicalWordSeed = TechnicalWordEntry & {
   aliases?: string[];
 };
@@ -228,14 +353,19 @@ const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
     { term: "Remnant", aliases: ["remnant", "remnants"], meaning: "A remnant is the dense object left after a star finishes its main life or explodes.", why_it_matters: "The remnant type depends strongly on the star's mass." },
   ],
   A1: [
-    { term: "SUVAT", aliases: ["suvat"], meaning: "SUVAT is the set of constant-acceleration equations linking displacement, initial velocity, final velocity, acceleration, and time.", why_it_matters: "It works only when acceleration stays constant." },
-    { term: "Projectile motion", aliases: ["projectile motion", "projectile"], meaning: "Projectile motion is two-dimensional motion under gravity after launch, often with horizontal and vertical parts analysed separately.", why_it_matters: "It helps break a curved path into simpler component stories." },
-    { term: "Horizontal velocity", aliases: ["horizontal velocity"], meaning: "Horizontal velocity is the component of velocity parallel to the ground or chosen x-axis.", why_it_matters: "In simple projectile motion without air resistance, it stays constant." },
-    { term: "Vertical velocity", aliases: ["vertical velocity"], meaning: "Vertical velocity is the component of velocity along the vertical or chosen y-axis.", why_it_matters: "It changes because gravity acts vertically." },
-    { term: "Circular motion", aliases: ["circular motion"], meaning: "Circular motion is motion around a circular path.", why_it_matters: "Even at constant speed, the velocity direction changes, so there is acceleration." },
-    { term: "Centripetal force", aliases: ["centripetal force"], meaning: "Centripetal force is the inward resultant force needed to keep an object moving in a circle.", why_it_matters: "It is not a new extra force but the inward role of the resultant." },
-    { term: "Gravitational field", aliases: ["gravitational field"], meaning: "A gravitational field is the region where masses experience gravitational force.", why_it_matters: "It supports orbital and field-based reasoning." },
-    { term: "Orbital speed", aliases: ["orbital speed"], meaning: "Orbital speed is the speed needed for an object to remain in a stable orbit under gravity.", why_it_matters: "It links circular motion with gravitational attraction." },
+    { term: "Subatomic particle", aliases: ["subatomic particle", "subatomic particles"], meaning: "A subatomic particle is a component or messenger smaller than an atom.", why_it_matters: "It gives the module a clean starting inventory before later structure and interaction stories." },
+    { term: "Photon", aliases: ["photon", "photons"], meaning: "A photon is the quantum messenger of electromagnetic radiation.", why_it_matters: "It keeps radiation inside the particle story without turning it into ordinary matter." },
+    { term: "Lepton", aliases: ["lepton", "leptons"], meaning: "A lepton is a matter particle such as an electron or neutrino that is not built from quarks.", why_it_matters: "It stops every particle from being collapsed into the hadron family." },
+    { term: "Hadron", aliases: ["hadron", "hadrons"], meaning: "A hadron is a composite particle built from quarks and held together by the strong interaction.", why_it_matters: "It is the umbrella family that contains baryons and mesons." },
+    { term: "Nucleon", aliases: ["nucleon", "nucleons"], meaning: "A nucleon is a proton or neutron in the nucleus.", why_it_matters: "It separates nuclear bundles from electrons and other non-nuclear particles." },
+    { term: "Baryon", aliases: ["baryon", "baryons"], meaning: "A baryon is a hadron made from three quarks.", why_it_matters: "It gives protons and neutrons a structural classification rule." },
+    { term: "Meson", aliases: ["meson", "mesons"], meaning: "A meson is a hadron made from a quark-antiquark pair.", why_it_matters: "It distinguishes pair-built hadrons from three-quark baryons." },
+    { term: "Antiparticle", aliases: ["antiparticle", "antiparticles"], meaning: "An antiparticle has the same mass as its partner but opposite charge and matching opposite quantum numbers where relevant.", why_it_matters: "It makes pair production and annihilation readable as balanced events." },
+    { term: "Pair production", aliases: ["pair production"], meaning: "Pair production is the creation of a particle-antiparticle pair from radiation with enough energy.", why_it_matters: "It links photon energy to matter creation while keeping conservation checks in view." },
+    { term: "Annihilation", aliases: ["annihilation"], meaning: "Annihilation is the process in which a particle and its antiparticle turn into allowed radiation or other products.", why_it_matters: "It shows matter-radiation exchange without treating particles as simply disappearing." },
+    { term: "Exchange particle", aliases: ["exchange particle", "exchange particles", "messenger particle", "messenger particles"], meaning: "An exchange particle is the messenger that carries an interaction between particles.", why_it_matters: "It helps students explain forces as carried interactions rather than unexplained pushes." },
+    { term: "Baryon number", aliases: ["baryon number"], meaning: "Baryon number is a conserved bookkeeping quantity used in particle reactions.", why_it_matters: "It blocks impossible reaction stories even when charge alone looks acceptable." },
+    { term: "Lepton number", aliases: ["lepton number"], meaning: "Lepton number is a conserved bookkeeping quantity that tracks lepton-family balance in particle events.", why_it_matters: "It is essential for checking weak-interaction events and decay chains." },
   ],
   A2: [
     { term: "Electric field", aliases: ["electric field"], meaning: "An electric field is the force per unit positive charge at a location.", why_it_matters: "It belongs to the location, not to the test charge itself." },
@@ -308,6 +438,11 @@ function normalizeGlossaryText(value: unknown): string {
     .trim();
 }
 
+function corpusHasAlias(corpus: string, alias: string): boolean {
+  if (!corpus || !alias) return false;
+  return ` ${corpus} `.includes(` ${alias} `);
+}
+
 function collectLessonStrings(value: unknown, sink: string[], depth = 0): void {
   if (depth > 7 || value == null) return;
   if (typeof value === "string") {
@@ -351,13 +486,7 @@ function authoredTechnicalWords(lesson: UnknownRecord): TechnicalWordEntry[] {
         why_it_matters: text(entry.why_it_matters || entry.whyItMatters),
         source: text(entry.source).toLowerCase(),
       }))
-      .filter(
-        (entry) =>
-          entry.term &&
-          entry.meaning &&
-          entry.source !== "generated" &&
-          entry.source !== "lesson_generated",
-      ),
+      .filter((entry) => entry.term && entry.meaning),
   );
 }
 
@@ -365,12 +494,12 @@ function scoreSeedAgainstCorpus(seed: TechnicalWordSeed, corpus: string): number
   const aliases = [seed.term, ...(seed.aliases || [])]
     .map((alias) => normalizeGlossaryText(alias))
     .filter(Boolean);
-  return aliases.reduce((total, alias) => (corpus.includes(alias) ? total + Math.max(1, alias.split(" ").length) : total), 0);
+  return aliases.reduce((total, alias) => (corpusHasAlias(corpus, alias) ? total + Math.max(1, alias.split(" ").length) : total), 0);
 }
 
 function moduleFallbackWords(lesson: UnknownRecord, lessonCode: string): TechnicalWordEntry[] {
   const moduleCode = moduleCodeFromLessonCode(lessonCode);
-  const seeds = MODULE_TECHNICAL_WORDS[moduleCode] || [];
+  const seeds = CURRICULUM_TECHNICAL_WORD_SUPPLEMENTS[moduleCode] || MODULE_TECHNICAL_WORDS[moduleCode] || [];
   if (seeds.length === 0) return [];
 
   const corpus = lessonCorpus(lesson);
@@ -386,21 +515,59 @@ function moduleFallbackWords(lesson: UnknownRecord, lessonCode: string): Technic
       return left.index - right.index;
     });
 
-  const chosen = scored.filter((entry) => entry.score > 0).slice(0, 6);
-  if (chosen.length < 4) {
-    scored.forEach((entry) => {
-      if (chosen.length >= 6) return;
-      if (chosen.some((current) => normalizeGlossaryText(current.seed.term) === normalizeGlossaryText(entry.seed.term))) return;
-      chosen.push(entry);
-    });
-  }
+  const chosen = scored.filter((entry) => entry.score > 0);
 
   return uniqueEntries(
-    chosen.slice(0, 6).map(({ seed }) => ({
+    chosen.map(({ seed }) => ({
       term: seed.term,
       meaning: seed.meaning,
       why_it_matters: seed.why_it_matters,
     })),
+  );
+}
+
+function lessonFormulaCorpus(lesson: UnknownRecord): string {
+  const authoring = asRecord(lesson.authoring_contract);
+  const formulaStrings: string[] = [];
+
+  asList(authoring.formulas)
+    .map(asRecord)
+    .forEach((formula) => {
+      collectLessonStrings(
+        {
+          equation: formula.equation,
+          meaning: formula.meaning,
+          conditions: formula.conditions,
+          units: formula.units,
+        },
+        formulaStrings,
+      );
+    });
+
+  return normalizeGlossaryText(formulaStrings.join(" "));
+}
+
+function formulaDrivenTechnicalWords(lesson: UnknownRecord): TechnicalWordEntry[] {
+  const formulaCorpus = lessonFormulaCorpus(lesson);
+  if (!formulaCorpus) return [];
+
+  return uniqueEntries(
+    FORMULA_SYMBOL_TECHNICAL_WORDS
+      .map((seed, index) => ({
+        seed,
+        index,
+        score: scoreSeedAgainstCorpus(seed, formulaCorpus),
+      }))
+      .filter((entry) => entry.score > 0)
+      .sort((left, right) => {
+        if (right.score !== left.score) return right.score - left.score;
+        return left.index - right.index;
+      })
+      .map(({ seed }) => ({
+        term: seed.term,
+        meaning: seed.meaning,
+        why_it_matters: seed.why_it_matters,
+      })),
   );
 }
 
@@ -413,13 +580,14 @@ function lessonCorpus(lesson: UnknownRecord): string {
 function scoreEntryAgainstCorpus(entry: TechnicalWordEntry, corpus: string): number {
   const key = normalizeGlossaryText(entry.term);
   if (!key) return 0;
-  return corpus.includes(key) ? Math.max(1, key.split(" ").length) : 0;
+  return corpusHasAlias(corpus, key) ? Math.max(1, key.split(" ").length) : 0;
 }
 
 function rankLessonTechnicalWords(
   entries: TechnicalWordEntry[],
   corpus: string,
   authoredCount: number,
+  minimumCount = 0,
 ): TechnicalWordEntry[] {
   const scored = uniqueEntries(entries)
     .map((entry, index) => ({
@@ -432,26 +600,30 @@ function rankLessonTechnicalWords(
       return left.index - right.index;
     });
 
-  const chosen = scored.filter((item) => item.score > 0).slice(0, 6);
-  if (chosen.length < 4) {
+  const chosen = scored.filter((item) => item.score > 0);
+  if (chosen.length < minimumCount) {
     scored.forEach((item) => {
-      if (chosen.length >= 6) return;
+      if (chosen.length >= minimumCount) return;
       if (chosen.some((current) => normalizeGlossaryText(current.entry.term) === normalizeGlossaryText(item.entry.term))) return;
       chosen.push(item);
     });
   }
 
-  return chosen.slice(0, 6).map((item) => item.entry);
+  return chosen.map((item) => item.entry);
 }
 
 export function technicalWordsForLesson(lesson: UnknownRecord, lessonCode: string): TechnicalWordEntry[] {
   const moduleCode = moduleCodeFromLessonCode(lessonCode);
   const authored = authoredTechnicalWords(lesson);
   const corpus = lessonCorpus(lesson);
+  const formulaDriven = formulaDrivenTechnicalWords(lesson);
+  const fallback = moduleFallbackWords(lesson, lessonCode);
 
   if (STRICT_AUTHORED_TECHNICAL_WORD_MODULES.has(moduleCode) && authored.length > 0) {
-    return rankLessonTechnicalWords([...authored], corpus, authored.length);
+    const primary = rankLessonTechnicalWords([...authored], corpus, authored.length);
+    const supplemental = rankLessonTechnicalWords([...formulaDriven, ...fallback], corpus, formulaDriven.length);
+    return uniqueEntries([...primary, ...supplemental]);
   }
 
-  return rankLessonTechnicalWords([...authored, ...moduleFallbackWords(lesson, lessonCode)], corpus, authored.length);
+  return rankLessonTechnicalWords([...authored, ...formulaDriven, ...fallback], corpus, authored.length + formulaDriven.length, 4);
 }

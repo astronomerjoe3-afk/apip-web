@@ -11608,25 +11608,41 @@ function withFoundationFormulaSection(lesson: UnknownRecord, sections: UnknownRe
   return nextSections;
 }
 
-function technicalWordsSection(lesson: UnknownRecord): UnknownRecord | null {
+function chunkTechnicalWords<T>(items: T[], size: number): T[][] {
+  if (size <= 0) return [items];
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
+}
+
+function technicalWordsSections(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const technicalWords = technicalWordsForLesson(lesson, code);
-  if (technicalWords.length === 0) return null;
-  return {
-    heading: "Technical words",
-    body: "These are the main technical words in this lesson. Read the plain-English meanings first so the next activities do not feel like hidden vocabulary tests.",
-    technical_words: technicalWords,
-    check_for_understanding: "Which of these words names the key quantity, process, or object in the next example?",
-  };
+  if (technicalWords.length === 0) return [];
+
+  return chunkTechnicalWords(technicalWords, 4).map((chunk, index, chunks) => ({
+    heading: index === 0 ? "Technical words" : "Technical words continued",
+    body:
+      index === 0
+        ? "These are the main technical words in this lesson. Read the plain-English meanings first so the next activities do not feel like hidden vocabulary tests."
+        : `Keep building the lesson vocabulary map before moving on. This page covers the next ${chunk.length} keyword definition${chunk.length === 1 ? "" : "s"}.`,
+    technical_words: chunk,
+    check_for_understanding:
+      index === chunks.length - 1
+        ? "Which of these words names the key quantity, process, object, or symbol in the next example?"
+        : "Which of these definitions would be hardest to replace with an everyday word, and why?",
+  }));
 }
 
 function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
-  const technicalSection = technicalWordsSection(lesson);
+  const technicalSections = technicalWordsSections(lesson);
   const nextSections = [...sections];
-  if (technicalSection) {
+  if (technicalSections.length > 0) {
     const coreIdeaIndex = nextSections.findIndex((section) => text(asRecord(section).heading).toLowerCase() === "core idea");
     const insertIndex = coreIdeaIndex >= 0 ? coreIdeaIndex + 1 : Math.min(1, nextSections.length);
-    nextSections.splice(insertIndex, 0, technicalSection);
+    nextSections.splice(insertIndex, 0, ...technicalSections);
   }
 
   return withFoundationFormulaSection(lesson, nextSections);
