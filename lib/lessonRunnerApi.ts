@@ -5962,9 +5962,29 @@ function isF4L4CalculationStyleMasteryPrompt(prompt: string): boolean {
   );
 }
 
+function isA1L1MetaMasteryPrompt(prompt: string): boolean {
+  const normalized = normalizePromptKey(prompt);
+  return (
+    normalized.includes("main comparison visible in a new subatomic inventory case") ||
+    normalized.includes("which transfer statement best uses the analogy") ||
+    normalized.includes("which condition check should travel with particle inventory and charge tags") ||
+    normalized.includes("which statement best protects the analogy to formal bridge") ||
+    normalized.includes("particle inventory and charge tags") ||
+    normalized.includes("respond together") ||
+    normalized.includes("analogy without getting trapped by it") ||
+    normalized.includes("fresh subatomic inventory problem")
+  );
+}
+
 function filterLessonSpecificMasteryCandidates(lesson: UnknownRecord, items: UnknownRecord[]): UnknownRecord[] {
-  if (lessonCode(lesson) !== "F4_L4") return items;
-  return items.filter((item) => !isF4L4CalculationStyleMasteryPrompt(text(asRecord(item).prompt)));
+  const code = lessonCode(lesson);
+  if (code === "F4_L4") {
+    return items.filter((item) => !isF4L4CalculationStyleMasteryPrompt(text(asRecord(item).prompt)));
+  }
+  if (code === "A1_L1") {
+    return items.filter((item) => !isA1L1MetaMasteryPrompt(text(asRecord(item).prompt)));
+  }
+  return items;
 }
 
 function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "transfer").filter((item) => hasUsableMasteryAnswer(asRecord(item))).length): boolean {
@@ -8902,6 +8922,95 @@ function workedExampleUsesLessonAnalogy(
   );
 }
 
+function lessonFormulaSignalPhrases(lesson: UnknownRecord): string[] {
+  return dedupeText(
+    lessonFormulaRecords(lesson)
+      .flatMap((formula) => [
+        standardFormulaText(formula),
+        text(formula.meaning),
+        text(formula.conditions),
+      ])
+      .map((entry) => normalizePromptKey(entry))
+      .filter((entry) => entry.length >= 3)
+  );
+}
+
+function textUsesWorkedExampleRelationLanguage(value: string): boolean {
+  const normalized = normalizePromptKey(value);
+  if (!normalized) return false;
+
+  return [
+    "which relation belongs",
+    "what relation belongs",
+    "which equation belongs",
+    "what equation belongs",
+    "which formula belongs",
+    "what formula belongs",
+    "choose the correct relation",
+    "choose the correct equation",
+    "choose the correct formula",
+    "translate the relation back into words",
+    "use the relation only under its stated condition",
+    "formal relation",
+    "formula bridge",
+    "standard formulas",
+    "identify which quantities or ideas the lesson is linking",
+  ].some((phrase) => normalized.includes(phrase));
+}
+
+function textUsesWorkedExampleFormulaUsageLanguage(value: string, lesson: UnknownRecord): boolean {
+  const normalized = normalizePromptKey(value);
+  if (!normalized) return false;
+
+  const mentionsLessonFormula = lessonFormulaSignalPhrases(lesson).some((phrase) => phrase && normalized.includes(phrase));
+  if (!mentionsLessonFormula) return false;
+
+  return [
+    /\bsafe to use\b/i,
+    /\bbefore using\b/i,
+    /\buse\b.+\bonly when\b/i,
+    /\bonly when\b.+\buse\b/i,
+    /\bunder (?:its|the) stated condition\b/i,
+    /\bstated physical condition\b/i,
+    /\bcheck the stated physical condition\b/i,
+    /\blesson units\b/i,
+    /\bunits kept consistent\b/i,
+    /\bwhen should\b.+\buse\b/i,
+  ].some((pattern) => pattern.test(normalized));
+}
+
+function workedExampleUsesRelationSelectionLanguage(
+  entry: { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string },
+  lesson: UnknownRecord
+): boolean {
+  const joined = [entry.prompt, ...entry.steps, entry.answer, entry.answerReason, entry.whyItMatters].join(" ");
+  if (textUsesWorkedExampleRelationLanguage(joined)) return true;
+  if (textUsesWorkedExampleFormulaUsageLanguage(joined, lesson)) return true;
+
+  const prompt = normalizePromptKey(entry.prompt);
+  const answer = normalizePromptKey(entry.answer);
+  if (!/\b(?:relation|equation|formula)\b/.test(prompt)) return false;
+
+  return lessonFormulaSignalPhrases(lesson).some((phrase) =>
+    phrase && (answer === phrase || answer.includes(phrase) || phrase.includes(answer))
+  );
+}
+
+function lessonWorkedExampleCorePhysics(lesson: UnknownRecord): string {
+  const authoring = asRecord(lesson.authoring_contract);
+  const coreIdeas = dedupeText([
+    ...asList(authoring.core_concepts).map((entry) => ensureSentence(text(entry))),
+    ...asList(authoring.concept_targets).map((entry) => ensureSentence(text(entry))),
+  ]).filter(Boolean);
+
+  return (
+    coreIdeas.find((entry) =>
+      !textUsesLessonAnalogyLanguage(entry, lesson) &&
+      !textUsesWorkedExampleRelationLanguage(entry)
+    ) || ""
+  );
+}
+
 function workedExampleStepsFromAssessmentItem(item: UnknownRecord, title: string): string[] {
   const prompt = renderedPromptText(item);
   const focus = ensureSentence(teachingFocus(prompt, title)).replace(/[.!?]+$/g, "");
@@ -8955,7 +9064,7 @@ function workedExampleEntryFromAssessmentItem(
     whyItMatters,
   };
 
-  return workedExampleUsesLessonAnalogy(entry, lesson) ? null : entry;
+  return workedExampleUsesLessonAnalogy(entry, lesson) || workedExampleUsesRelationSelectionLanguage(entry, lesson) ? null : entry;
 }
 
 function workedExampleAssessmentEntries(
@@ -8983,9 +9092,32 @@ function workedExampleAssessmentEntries(
 
 function physicsFirstWorkedExamplePrompt(lesson: UnknownRecord, value: string): string {
   const prompt = normalizeRenderedPhysicsText(text(value)).trim();
-  if (prompt && !textUsesLessonAnalogyLanguage(prompt, lesson)) return prompt;
+  if (
+    prompt &&
+    !textUsesLessonAnalogyLanguage(prompt, lesson) &&
+    !textUsesWorkedExampleRelationLanguage(prompt) &&
+    !textUsesWorkedExampleFormulaUsageLanguage(prompt, lesson)
+  ) {
+    return prompt;
+  }
+
+  const corePhysics = lessonWorkedExampleCorePhysics(lesson);
+  if (corePhysics) {
+    return `Use the core physics of ${lessonTitle(lesson, lesson)} to explain this statement: ${corePhysics}`;
+  }
 
   return `What physics idea from ${lessonTitle(lesson, lesson)} should you apply here, and what conclusion follows?`;
+}
+
+function physicsFirstWorkedExampleAnswer(lesson: UnknownRecord): string {
+  const corePhysics = lessonWorkedExampleCorePhysics(lesson);
+  return corePhysics || "State the lesson's core physics clearly and finish with the correct unit, label, or classification.";
+}
+
+function physicsFirstWorkedExampleReason(lesson: UnknownRecord): string {
+  return lessonWorkedExampleCorePhysics(lesson)
+    ? "This answer follows from the lesson's core physics idea rather than from an analogy label or a relation name."
+    : "This answer follows from the lesson's core physics rather than from analogy or relation wording.";
 }
 
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
@@ -8994,128 +9126,128 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     switch (code) {
       case "M3_L1":
         return {
-          body: "Start with the ledger before any formula. The lesson is about where the energy goes, not about memorizing a symbol first.",
+          body: "Start with the energy ledger before any formula. The lesson is about tracking input energy, useful energy, and dissipated energy clearly.",
           worked_example: {
-            prompt: "A launcher inputs 320 J into the pod. The useful store gain is 240 J. How much energy goes into the Leak Trail, and why must that answer follow?",
+            prompt: "A machine transfers 320 J to a system. The useful energy gain is 240 J. How much energy is dissipated, and why must that answer follow?",
             steps: [
-              "Write the ledger statement first: input energy = useful gain + leak trail.",
-              "Substitute the known values: 320 J = 240 J + leak trail.",
+              "Write the energy ledger first: total energy transferred = useful energy gain + dissipated energy.",
+              "Substitute the known values: 320 J = 240 J + dissipated energy.",
               "Solve the missing part of the ledger by subtraction.",
             ],
-            answer: "80 J goes into the Leak Trail.",
-            answer_reason: "The ledger must balance, so the 80 J difference between the 320 J input and the 240 J useful gain has to appear as Leak Trail rather than disappearing.",
+            answer: "80 J is dissipated.",
+            answer_reason: "The energy ledger must balance, so the 80 J difference between the 320 J input and the 240 J useful gain must appear as dissipated energy rather than disappearing.",
           },
           extra_examples: [
             {
-              body: "This second example keeps the same ledger logic but moves the useful part into two stores instead of one.",
+              body: "This second example keeps the same ledger logic but splits the useful energy into two standard forms.",
               worked_example: {
-                prompt: "A mission inputs 500 J. Of the useful 400 J, 250 J becomes Height Store and the rest becomes Motion Store. How much Motion Store is gained?",
+                prompt: "A system receives 500 J. Of the useful 400 J, 250 J becomes gravitational potential energy and the rest becomes kinetic energy. How much kinetic energy is gained?",
                 steps: [
                   "Notice that the useful total is already known as 400 J.",
-                  "Subtract the Height Store part from that useful total.",
-                  "Keep the interpretation visible: the remainder is still useful store, but now in Motion Store.",
+                  "Subtract the gravitational potential energy part from that useful total.",
+                  "Keep the interpretation visible: the remainder is still useful energy, now in kinetic form.",
                 ],
-                answer: "150 J of Motion Store is gained.",
-                answer_reason: "The useful total is 400 J, and after 250 J is assigned to Height Store, the remaining 150 J must be Motion Store.",
+                answer: "150 J of kinetic energy is gained.",
+                answer_reason: "The useful total is 400 J, and after 250 J is assigned to gravitational potential energy, the remaining 150 J must be kinetic energy.",
               },
             },
           ],
         };
       case "M3_L2":
         return {
-          body: "Height Store is a three-factor story, so the reasoning should keep load, World Grip, and deck level visible together.",
+          body: "Gravitational potential energy depends on three factors, so the reasoning should keep mass, gravitational field strength, and height visible together.",
           worked_example: {
-            prompt: "A 6 kg pod is raised 5 m on a world where g = 10 N/kg. Find the Height Store and explain why the answer depends on all three numbers.",
+            prompt: "A 6 kg object is raised 5 m where g = 10 N/kg. Find the gain in gravitational potential energy and explain why the answer depends on all three quantities.",
             steps: [
-              "Choose the Height Store relation: E_p = mgh.",
-              "Substitute the three physical factors: E_p = 6 x 10 x 5.",
-              "Multiply to find the store amount, then state what each factor contributed conceptually.",
+              "Choose the gravitational potential energy relation: delta E_p = mgh.",
+              "Substitute the three physical factors: delta E_p = 6 x 10 x 5.",
+              "Multiply to find the energy gain, then state what each factor contributes conceptually.",
             ],
-            answer: "The Height Store is 300 J.",
-            answer_reason: "The answer is 300 J because gravitational potential energy depends on load, World Grip, and deck level together; if any one of those three factors changed, the store would change as well.",
+            answer: "The gain in gravitational potential energy is 300 J.",
+            answer_reason: "The answer is 300 J because gravitational potential energy depends on mass, gravitational field strength, and height together; if any one of those three factors changed, the energy gain would change as well.",
           },
           extra_examples: [
             {
               body: "This follow-up uses the same idea in reverse so students treat the formula as a relationship, not as one-way substitution.",
               worked_example: {
-                prompt: "A pod gains 240 J of Height Store when lifted 6 m on a world where g = 10 N/kg. What is the pod's mass?",
+                prompt: "An object gains 240 J of gravitational potential energy when lifted 6 m where g = 10 N/kg. What is its mass?",
                 steps: [
-                  "Start from E_p = mgh.",
-                  "Rearrange to m = E_p / (gh).",
+                  "Start from delta E_p = mgh.",
+                  "Rearrange to m = delta E_p / (gh).",
                   "Substitute 240 / (10 x 6).",
                 ],
-                answer: "The pod's mass is 4 kg.",
-                answer_reason: "240 J divided by 60 gives 4 kg, so the known store, height, and World Grip together determine the mass.",
+                answer: "The object's mass is 4 kg.",
+                answer_reason: "240 J divided by 60 gives 4 kg, so the known energy gain, height, and gravitational field strength together determine the mass.",
               },
             },
           ],
         };
       case "M3_L3":
         return {
-          body: "Motion Store is where proportional reasoning matters. The worked example should show why speed has the stronger effect.",
+          body: "Kinetic energy is where proportional reasoning matters. The worked example should show why speed has the stronger effect.",
           worked_example: {
-            prompt: "A 2 kg pod moves at 8 m/s. Find its Motion Store, then explain why this is four times the Motion Store of the same pod at 4 m/s.",
+            prompt: "A 2 kg object moves at 8 m/s. Find its kinetic energy, then explain why this is four times the kinetic energy of the same object at 4 m/s.",
             steps: [
-              "Use the Motion Store relation: E_k = 0.5mv^2.",
+              "Use the kinetic energy relation: E_k = 0.5mv^2.",
               "Substitute the current values: 0.5 x 2 x 8^2.",
               "Compare that with the same mass at 4 m/s: 0.5 x 2 x 4^2.",
             ],
-            answer: "The pod has 64 J of Motion Store, which is four times the 16 J at 4 m/s.",
-            answer_reason: "The store quadruples because speed is squared: doubling speed multiplies v^2 by four even though the mass stays the same.",
+            answer: "The object has 64 J of kinetic energy, which is four times the 16 J at 4 m/s.",
+            answer_reason: "The energy quadruples because speed is squared: doubling speed multiplies v^2 by four even though the mass stays the same.",
           },
           extra_examples: [
             {
               body: "The second example uses inverse reasoning to keep the relationship flexible.",
               worked_example: {
-                prompt: "A 4 kg pod has 200 J of Motion Store. What speed does it have?",
+                prompt: "A 4 kg object has 200 J of kinetic energy. What speed does it have?",
                 steps: [
                   "Begin with E_k = 0.5mv^2.",
                   "Substitute 200 = 0.5 x 4 x v^2, so 200 = 2v^2.",
                   "Solve v^2 = 100 and then take the positive speed magnitude.",
                 ],
                 answer: "The speed is 10 m/s.",
-                answer_reason: "The algebra gives v^2 = 100, so the pod's speed magnitude is 10 m/s.",
+                answer_reason: "The algebra gives v^2 = 100, so the object's speed magnitude is 10 m/s.",
               },
             },
           ],
         };
       case "M3_L4":
         return {
-          body: "The lesson should make work feel like a hand-off first and a formula second.",
+          body: "The lesson should make work done feel like an energy transfer supported by the equation, not just a number from substitution.",
           worked_example: {
-            prompt: "A 15 N push moves the pod 4 m in the same direction, and 12 J leaks away during the hand-off. How much useful store gain remains?",
+            prompt: "A 15 N force moves an object 4 m in the same direction, and 12 J is dissipated during the transfer. How much useful energy gain remains?",
             steps: [
-              "Use the simple aligned-force work relation: W = Fd = 15 x 4 = 60 J input hand-off.",
-              "Write the ledger for the hand-off: input work = useful gain + leak.",
-              "Subtract the leak from the total hand-off.",
+              "Use the simple aligned-force work relation: W = Fd = 15 x 4 = 60 J of energy transferred.",
+              "Write the energy ledger: work done = useful energy gain + dissipated energy.",
+              "Subtract the dissipated part from the total transferred energy.",
             ],
-            answer: "48 J of useful store gain remains.",
-            answer_reason: "The push delivers 60 J of work, and after 12 J leaks away, 48 J remains as useful store gain.",
+            answer: "48 J of useful energy gain remains.",
+            answer_reason: "The force does 60 J of work, and after 12 J is dissipated, 48 J remains as useful energy gain.",
           },
           extra_examples: [
             {
-              body: "This second route shows a direct ΔE hand-off instead of a force-distance setup.",
+              body: "This second route shows a direct change in energy instead of a force-distance setup.",
               worked_example: {
-                prompt: "A lift raises a pod so its Height Store increases from 120 J to 420 J with negligible leak. In the lesson's hand-off model, how much work does the lift do?",
+                prompt: "A lift raises an object so its gravitational potential energy increases from 120 J to 420 J with negligible dissipation. How much work does the lift do?",
                 steps: [
-                  "Classify the story as a direct store-change hand-off.",
-                  "Find the store change: ΔE = 420 J - 120 J = 300 J.",
-                  "Use W = ΔE because the energy change is given directly.",
+                  "Classify the story as a direct energy-change problem.",
+                  "Find the change in energy: delta E = 420 J - 120 J = 300 J.",
+                  "Use W = delta E because the energy change is given directly.",
                 ],
                 answer: "The lift does 300 J of work.",
-                answer_reason: "With negligible leak, the lift's work equals the change in Height Store, so 300 J is handed into the pod.",
+                answer_reason: "With negligible dissipation, the lift's work equals the 300 J increase in gravitational potential energy.",
               },
             },
           ],
         };
       case "M3_L5":
         return {
-          body: "Students need one solved example that keeps rate and yield separate all the way through.",
+          body: "Students need one solved example that keeps power and efficiency separate all the way through.",
           worked_example: {
             prompt: "A machine transfers 1200 J in 4 s and delivers 720 J of useful output. Find the power and efficiency, then explain why the two answers are not the same kind of quantity.",
             steps: [
-              "Find Transfer Rate first: P = E / t = 1200 / 4.",
-              "Then find Useful Yield: efficiency = useful output / total input x 100%.",
+              "Find power first: P = E / t = 1200 / 4.",
+              "Then find efficiency: efficiency = useful output / total input x 100%.",
               "State each result with its own meaning instead of blending them together.",
             ],
             answer: "The power is 300 W and the efficiency is 60%.",
@@ -9139,29 +9271,29 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         };
       case "M3_L6":
         return {
-          body: "The capstone example should make equation order visible and justified.",
+          body: "The capstone example should make the order of equations visible and justified.",
           worked_example: {
-            prompt: "A lift inputs 1500 J at 60% Useful Yield. The pod then loses 20% of that useful amount during launch. A gate needs 700 J to open. Does the mission succeed?",
+            prompt: "A lift transfers 1500 J with 60% efficiency. The system then loses 20% of that useful energy during launch. A mechanism needs 700 J to operate. Does it succeed?",
             steps: [
-              "Stage 1: use efficiency to find the useful lift gain. 0.60 x 1500 J = 900 J.",
-              "Stage 2: apply the launch leak to the 900 J useful amount. Losing 20% leaves 80%, so 0.80 x 900 J = 720 J.",
-              "Stage 3: compare the final useful amount with the gate threshold.",
+              "Stage 1: use efficiency to find the useful energy after the lift. 0.60 x 1500 J = 900 J.",
+              "Stage 2: apply the later energy loss to the 900 J useful amount. Losing 20% leaves 80%, so 0.80 x 900 J = 720 J.",
+              "Stage 3: compare the final useful energy with the mechanism requirement.",
             ],
-            answer: "Yes. The mission succeeds because 720 J reaches the gate, which is 20 J above the 700 J target.",
-            answer_reason: "The order matters: the useful lift gain has to be found first, then the later leak is applied to that result, and only then can the final target check be made.",
+            answer: "Yes. The system succeeds because 720 J reaches the mechanism, which is 20 J above the 700 J requirement.",
+            answer_reason: "The order matters: the useful energy after the lift has to be found first, then the later energy loss is applied to that result, and only then can the final requirement check be made.",
           },
           extra_examples: [
             {
               body: "This follow-up uses the same planner logic but asks for the required input instead of the final store.",
               worked_example: {
-                prompt: "A gate needs 840 J after a launch stage that loses 30% of the useful lift energy. The lift is 70% efficient. What minimum lift input is required?",
+                prompt: "A mechanism needs 840 J after a stage that loses 30% of the useful lift energy. The lift is 70% efficient. What minimum input energy is required?",
                 steps: [
-                  "Work backward from the gate: if 70% remains after launch, divide the required 840 J by 0.70 to get the useful lift energy needed.",
+                  "Work backward from the mechanism requirement: if 70% remains after the loss, divide the required 840 J by 0.70 to get the useful lift energy needed.",
                   "Now work backward through the lift efficiency: divide that useful lift energy by 0.70 again.",
-                  "State the result as a minimum input because anything smaller would fail the mission.",
+                  "State the result as a minimum input because anything smaller would fail the requirement.",
                 ],
-                answer: "About 1714 J of lift input is required.",
-                answer_reason: "The mission needs 1200 J before the 30% launch loss, and a 70% efficient lift must input 1200/0.70, which is about 1714 J.",
+                answer: "About 1714 J of input energy is required.",
+                answer_reason: "The system needs 1200 J before the 30% loss, and a 70% efficient lift must receive 1200/0.70, which is about 1714 J.",
               },
             },
           ],
@@ -9182,7 +9314,8 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       whyItMatters: text(entry.why_it_matters),
     }))
     .filter((entry) => entry.prompt && entry.steps.length > 0 && entry.answer)
-    .filter((entry) => !workedExampleUsesLessonAnalogy(entry, lesson));
+    .filter((entry) => !workedExampleUsesLessonAnalogy(entry, lesson))
+    .filter((entry) => !workedExampleUsesRelationSelectionLanguage(entry, lesson));
   const assessmentExamples = workedExampleAssessmentEntries(lesson);
   const mergedExamples = [...authoredExamples, ...assessmentExamples].filter((entry, index, entries) =>
     entries.findIndex((candidate) => normalizePromptKey(candidate.prompt) === normalizePromptKey(entry.prompt)) === index
@@ -9745,7 +9878,8 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             "Work through the reasoning one step at a time before deciding on the answer.",
             "Check that the final statement keeps the right unit, meaning, or classification.",
           ],
-          answer: "Use the lesson rule carefully and finish with a clear, correctly labelled answer.",
+          answer: physicsFirstWorkedExampleAnswer(lesson),
+          answer_reason: physicsFirstWorkedExampleReason(lesson),
         },
       };
   }
