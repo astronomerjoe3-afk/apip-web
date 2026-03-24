@@ -6292,7 +6292,24 @@ function m5RenderedQuestionOverride(item: UnknownRecord): RenderedQuestionOverri
   }
 }
 
+function renderedPromptOverride(item: UnknownRecord): string | null {
+  const itemId = text(item.id).toUpperCase();
+  switch (itemId) {
+    case "A1L1_D2":
+    case "A1-L1-D2":
+    case "A1L1_C1":
+    case "A1-L1-C1":
+    case "A1L1_M6":
+    case "A1-L1-M6":
+      return "Why must photons, leptons, and nucleons be kept in distinct categories before later particle stories are built?";
+    default:
+      return null;
+  }
+}
+
 function renderedPromptText(item: UnknownRecord): string {
+  const promptOverride = renderedPromptOverride(item);
+  if (promptOverride) return promptOverride;
   const override = m5RenderedQuestionOverride(item);
   if (override) return override.prompt;
   return normalizeRenderedPhysicsText(text(item.prompt));
