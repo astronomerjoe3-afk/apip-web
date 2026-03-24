@@ -20,6 +20,7 @@ import M12SimulationPanels from "./M12SimulationPanels";
 import M13SimulationPanels from "./M13SimulationPanels";
 import M14SimulationPanels from "./M14SimulationPanels";
 import F5SimulationPanels from "./F5SimulationPanels";
+import A1SimulationPanels from "./A1SimulationPanels";
 import A6ToA11SimulationPanels from "./A6ToA11SimulationPanels";
 
 type StageName =
@@ -2913,6 +2914,16 @@ export default function LessonRunner({
             simSpread={simSpread}
             setSimSpread={setSimSpread}
             formatSimulationNumber={formatSimulationNumber}
+          />
+        ) : simulationLessonKey === "A1_L1" ? (
+          <A1SimulationPanels
+            lessonKey={simulationLessonKey}
+            simMetricMeters={simMetricMeters}
+            setSimMetricMeters={setSimMetricMeters}
+            simVectorMagnitude={simVectorMagnitude}
+            setSimVectorMagnitude={setSimVectorMagnitude}
+            simVectorAngle={simVectorAngle}
+            setSimVectorAngle={setSimVectorAngle}
           />
         ) : simulationLessonKey.startsWith("M9_") ? (
           <M9SimulationPanels
