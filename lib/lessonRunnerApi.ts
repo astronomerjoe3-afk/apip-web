@@ -1315,6 +1315,137 @@ const LOW_SIGNAL_VARIANT_WORDS = new Set([
   "smaller",
   "than",
 ]);
+const CORE_SHORT_ANSWER_FUZZY_STOPWORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "are",
+  "as",
+  "at",
+  "be",
+  "because",
+  "by",
+  "for",
+  "from",
+  "if",
+  "in",
+  "into",
+  "is",
+  "it",
+  "its",
+  "of",
+  "on",
+  "or",
+  "that",
+  "the",
+  "their",
+  "then",
+  "therefore",
+  "this",
+  "to",
+  "when",
+  "where",
+  "which",
+  "with",
+]);
+const CORE_SHORT_ANSWER_CONTRADICTION_TOKENS = new Set(["inverse", "inversely", "never", "no", "not", "opposite"]);
+
+function isCoreModuleShortAnswerItem(item: UnknownRecord): boolean {
+  const itemId = text(item.id).trim().replace(/-/g, "_").toUpperCase();
+  const moduleMatch = itemId.match(/^M(\d+)/);
+  if (!moduleMatch) return false;
+  const moduleNumber = Number.parseInt(moduleMatch[1], 10);
+  return Number.isFinite(moduleNumber) && moduleNumber >= 1 && moduleNumber <= 14;
+}
+
+function meaningfulOpenAnswerTokens(value: unknown): string[] {
+  return normalizeOpenAnswer(value)
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter(Boolean)
+    .filter((token) => !CORE_SHORT_ANSWER_FUZZY_STOPWORDS.has(token))
+    .filter((token) => /[a-z0-9]/.test(token));
+}
+
+function hasMathLikeOpenAnswerTokens(tokens: string[]): boolean {
+  return tokens.some((token) => /[\d/^+-]/.test(token));
+}
+
+function editDistanceWithinLimit(left: string, right: string, limit: number): boolean {
+  if (left === right) return true;
+  if (limit < 0) return false;
+  if (Math.abs(left.length - right.length) > limit) return false;
+
+  const rows = left.length + 1;
+  const cols = right.length + 1;
+  const matrix = Array.from({ length: rows }, () => Array<number>(cols).fill(0));
+
+  for (let row = 0; row < rows; row += 1) matrix[row][0] = row;
+  for (let col = 0; col < cols; col += 1) matrix[0][col] = col;
+
+  for (let row = 1; row < rows; row += 1) {
+    let rowMin = limit + 1;
+    for (let col = 1; col < cols; col += 1) {
+      const cost = left[row - 1] === right[col - 1] ? 0 : 1;
+      const value = Math.min(
+        matrix[row - 1][col] + 1,
+        matrix[row][col - 1] + 1,
+        matrix[row - 1][col - 1] + cost,
+      );
+      matrix[row][col] = value;
+      rowMin = Math.min(rowMin, value);
+    }
+
+    if (rowMin > limit) return false;
+  }
+
+  return matrix[left.length][right.length] <= limit;
+}
+
+function openAnswerTokensApproxMatch(expected: string, candidate: string): boolean {
+  if (expected === candidate) return true;
+
+  const singularExpected = expected.endsWith("s") ? expected.slice(0, -1) : expected;
+  const singularCandidate = candidate.endsWith("s") ? candidate.slice(0, -1) : candidate;
+  if (singularExpected === singularCandidate) return true;
+
+  const maxLength = Math.max(singularExpected.length, singularCandidate.length);
+  if (maxLength < 5) return false;
+
+  const typoLimit = maxLength >= 9 ? 2 : 1;
+  return editDistanceWithinLimit(singularExpected, singularCandidate, typoLimit);
+}
+
+function coreShortAnswerFuzzyMatch(answer: unknown, acceptedAnswers: string[], item: UnknownRecord): boolean {
+  if (!isCoreModuleShortAnswerItem(item)) return false;
+
+  const candidateTokens = meaningfulOpenAnswerTokens(answer);
+  if (candidateTokens.length < 3 || hasMathLikeOpenAnswerTokens(candidateTokens)) return false;
+  const candidateContradictions = candidateTokens.filter((token) => CORE_SHORT_ANSWER_CONTRADICTION_TOKENS.has(token));
+
+  return acceptedAnswers.some((entry) => {
+    const expectedTokens = meaningfulOpenAnswerTokens(entry);
+    if (expectedTokens.length < 3 || hasMathLikeOpenAnswerTokens(expectedTokens)) return false;
+    const expectedContradictions = expectedTokens.filter((token) => CORE_SHORT_ANSWER_CONTRADICTION_TOKENS.has(token));
+    if (
+      candidateContradictions.some((token) => !expectedContradictions.includes(token)) ||
+      expectedContradictions.some((token) => !candidateContradictions.includes(token))
+    ) {
+      return false;
+    }
+
+    const usedCandidateIndexes = new Set<number>();
+    for (const expected of expectedTokens) {
+      const candidateIndex = candidateTokens.findIndex(
+        (candidate, index) => !usedCandidateIndexes.has(index) && openAnswerTokensApproxMatch(expected, candidate),
+      );
+      if (candidateIndex === -1) return false;
+      usedCandidateIndexes.add(candidateIndex);
+    }
+
+    return true;
+  });
+}
 
 function pushUniqueAcceptedAnswer(values: string[], candidate: string): void {
   const entry = text(candidate).trim();
@@ -6571,6 +6702,10 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
   }
 
   if (customMatch === false) return false;
+
+  if (coreShortAnswerFuzzyMatch(answer, acceptedAnswers, item)) {
+    return true;
+  }
 
   const candidateNumeric = numericAnswer(answer);
   if (candidateNumeric === null) return false;
