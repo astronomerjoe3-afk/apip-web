@@ -369,7 +369,7 @@ export default function StudentHomePage() {
     })).filter((section) => section.modules.length > 0);
   }, [modules]);
 
-  function renderModuleCard(moduleItem: Module): JSX.Element {
+  function renderModuleCard(moduleItem: Module) {
     const badge = moduleBadge(moduleItem);
     const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
     const buttonLabel = locked ? "See unlock options" : "Open module";

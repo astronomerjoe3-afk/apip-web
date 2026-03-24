@@ -9,6 +9,12 @@ import { m6QuestionVisualMeta, m6ReflectionVisualCheck, m6ScaffoldCoreBullets, m
 import { m7QuestionVisualMeta, m7ReflectionVisualCheck, m7ScaffoldCoreBullets, m7ScaffoldFocusExtras, m7ScaffoldMediaCards, m7SimulationCopy } from "./m7LessonContent";
 import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8ScaffoldSectionVisual, m8SimulationCopy } from "./m8LessonContent";
 import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
+import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
+import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
+import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
+import { m12QuestionVisualMeta, m12ReflectionVisualCheck, m12ScaffoldCoreBullets, m12ScaffoldFocusExtras, m12ScaffoldMediaCards, m12SimulationCopy } from "./m12LessonContent";
+import { m13QuestionVisualMeta, m13ReflectionVisualCheck, m13ScaffoldCoreBullets, m13ScaffoldFocusExtras, m13ScaffoldMediaCards, m13SimulationCopy } from "./m13LessonContent";
+import { m14QuestionVisualMeta, m14ReflectionVisualCheck, m14ScaffoldCoreBullets, m14ScaffoldFocusExtras, m14ScaffoldMediaCards, m14SimulationCopy } from "./m14LessonContent";
 import { a1QuestionVisualMeta, a1ReflectionVisualCheck, a1ScaffoldCoreBullets, a1ScaffoldFocusExtras, a1ScaffoldMediaCards, a1SimulationCopy } from "./a1LessonContent";
 import { a2QuestionVisualMeta, a2ReflectionVisualCheck, a2ScaffoldCoreBullets, a2ScaffoldFocusExtras, a2ScaffoldMediaCards, a2SimulationCopy } from "./a2LessonContent";
 import { a3QuestionVisualMeta, a3ReflectionVisualCheck, a3ScaffoldCoreBullets, a3ScaffoldFocusExtras, a3ScaffoldMediaCards, a3SimulationCopy } from "./a3LessonContent";
