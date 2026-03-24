@@ -132,6 +132,23 @@ function n(value: number): string {
   return value.toFixed(1);
 }
 
+function wrapText(value: string, maxLineLength: number): string[] {
+  const words = value.trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return [""];
+  const lines: string[] = [];
+  let current = words[0];
+  for (const word of words.slice(1)) {
+    if (`${current} ${word}`.length <= maxLineLength) {
+      current = `${current} ${word}`;
+    } else {
+      lines.push(current);
+      current = word;
+    }
+  }
+  lines.push(current);
+  return lines;
+}
+
 function textLines(
   x: number,
   y: number,
@@ -154,11 +171,14 @@ function textLines(
     .join("")}</text>`;
 }
 
-function rectLabel(x: number, y: number, text: string, palette: Palette, minWidth = 132): string {
-  const width = Math.max(minWidth, text.length * 11 + 34);
+function rectLabel(x: number, y: number, text: string | string[], palette: Palette, minWidth = 132): string {
+  const lines = Array.isArray(text) ? text : [text];
+  const longestLineLength = lines.reduce((max, line) => Math.max(max, line.length), 0);
+  const width = Math.max(minWidth, longestLineLength * 12 + 34);
+  const height = Math.max(42, 20 + lines.length * 23);
   return `
-    <rect x="${n(x)}" y="${n(y)}" width="${n(width)}" height="42" rx="16" fill="${palette.pillFill}" stroke="${palette.pillStroke}" stroke-width="2"/>
-    ${textLines(x + width / 2, y + 27, [text], 19, palette.pillText, { anchor: "middle", weight: 700 })}
+    <rect x="${n(x)}" y="${n(y)}" width="${n(width)}" height="${n(height)}" rx="16" fill="${palette.pillFill}" stroke="${palette.pillStroke}" stroke-width="2"/>
+    ${textLines(x + width / 2, y + 26, lines, 19, palette.pillText, { anchor: "middle", weight: 700, lineHeight: 21 })}
   `;
 }
 
@@ -207,6 +227,12 @@ function buildWavePath(
 
 function renderFrame(key: string, config: ConceptVisualConfig): string {
   const { palette } = config;
+  const titleLines = wrapText(config.title, 28);
+  const subtitleLines = wrapText(config.subtitle, 46);
+  const footerLines = wrapText(config.footer, 34);
+  const titleY = titleLines.length > 1 ? 102 : 124;
+  const subtitleY = titleY + titleLines.length * 34 + 8;
+  const footerX = 640 - Math.max(220, footerLines.reduce((max, line) => Math.max(max, line.length * 6), 0));
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
       <defs>
@@ -224,10 +250,10 @@ function renderFrame(key: string, config: ConceptVisualConfig): string {
       <rect x="48" y="42" width="1184" height="636" rx="40" fill="${palette.boardFill}" fill-opacity="0.93" stroke="${palette.boardStroke}" stroke-width="4"/>
       <rect x="${n(PANEL_X)}" y="${n(PANEL_Y)}" width="${n(PANEL_W)}" height="${n(PANEL_H)}" rx="30" fill="${palette.panelFill}" stroke="${palette.panelStroke}" stroke-width="3"/>
       ${rectLabel(86, 78, key.replace("_", " "), palette, 118)}
-      ${textLines(640, 124, [config.title], 46, palette.title, { anchor: "middle", weight: 700 })}
-      ${textLines(640, 162, [config.subtitle], 23, palette.subtitle, { anchor: "middle", weight: 500 })}
+      ${textLines(640, titleY, titleLines, 46, palette.title, { anchor: "middle", weight: 700, lineHeight: 48 })}
+      ${textLines(640, subtitleY, subtitleLines, 23, palette.subtitle, { anchor: "middle", weight: 500, lineHeight: 28 })}
       ${config.diagram()}
-      ${rectLabel(420, 588, config.footer, palette, 440)}
+      ${rectLabel(footerX, 578, footerLines, palette, 440)}
     </svg>
   `;
   return svgDataUri(svg);
@@ -357,7 +383,7 @@ function quantumEvidenceDiagram(palette: Palette): string {
     ${[1004, 1032, 1060, 1088]
       .map((x, index) => circle(x, 344 + index * 22, index % 2 === 0 ? 5.5 : 7, palette.accentAlt))
       .join("")}
-    ${textLines(640, 502, ["three experiments, one quantum model"], 24, palette.labelText, { anchor: "middle", weight: 700 })}
+    ${textLines(640, 492, ["three experiments,", "one quantum model"], 24, palette.labelText, { anchor: "middle", weight: 700, lineHeight: 28 })}
   `;
 }
 
@@ -472,7 +498,7 @@ function kinematicsMapDiagram(palette: Palette): string {
     <path d="M 340 416 Q 510 280 688 320" fill="none" stroke="${palette.accentAltSoft}" stroke-width="5" stroke-dasharray="12 10"/>
     ${textLines(672, 336, ["velocity x"], 18, palette.accentSoft)}
     ${textLines(480, 454, ["acceleration y"], 18, "#fde68a")}
-    ${textLines(718, 300, ["same motion, separate components"], 21, palette.labelText)}
+    ${textLines(718, 288, ["same motion,", "separate components"], 21, palette.labelText, { lineHeight: 24 })}
   `;
 }
 
@@ -487,7 +513,7 @@ function projectileDiagram(palette: Palette): string {
     ${textLines(438, 444, ["vx"], 18, palette.accentSoft)}
     ${textLines(408, 350, ["vy"], 18, palette.accentAltSoft)}
     ${textLines(900, 346, ["g"], 18, "#fde68a")}
-    ${textLines(676, 502, ["horizontal and vertical share the same time"], 22, palette.labelText, { anchor: "middle", weight: 700 })}
+    ${textLines(676, 490, ["horizontal and vertical", "share the same time"], 22, palette.labelText, { anchor: "middle", weight: 700, lineHeight: 26 })}
   `;
 }
 
@@ -531,7 +557,7 @@ function materialsDiagram(palette: Palette): string {
     <rect x="658" y="280" width="72" height="170" rx="22" fill="${palette.accentThird}" fill-opacity="0.84"/>
     <rect x="850" y="280" width="72" height="112" rx="22" fill="${palette.accent}" fill-opacity="0.84"/>
     ${textLines(274, 486, ["area changes stress"], 19, palette.labelText, { anchor: "middle" })}
-    ${textLines(790, 500, ["extension / original length"], 19, palette.labelText, { anchor: "middle" })}
+    ${textLines(790, 490, ["extension /", "original length"], 19, palette.labelText, { anchor: "middle", lineHeight: 22 })}
   `;
 }
 
@@ -557,7 +583,7 @@ function shmDiagram(palette: Palette): string {
     ${textLines(964, 252, ["a"], 22, palette.accentAltSoft)}
     ${textLines(1016, 494, ["x"], 22, palette.subtitle)}
     ${textLines(392, 276, ["a = - omega^2 x"], 24, palette.labelText)}
-    ${textLines(642, 536, ["farther out -> stronger return"], 23, palette.labelText, { anchor: "middle", weight: 700 })}
+    ${textLines(642, 524, ["farther out ->", "stronger return"], 23, palette.labelText, { anchor: "middle", weight: 700, lineHeight: 27 })}
   `;
 }
 
