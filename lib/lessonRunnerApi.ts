@@ -21,6 +21,7 @@ import { a3QuestionVisualMeta, a3ReflectionVisualCheck, a3ScaffoldCoreBullets, a
 import { a4QuestionVisualMeta, a4ReflectionVisualCheck, a4ScaffoldCoreBullets, a4ScaffoldFocusExtras, a4ScaffoldMediaCards, a4SimulationCopy } from "./a4LessonContent";
 import { a5QuestionVisualMeta, a5ReflectionVisualCheck, a5ScaffoldCoreBullets, a5ScaffoldFocusExtras, a5ScaffoldMediaCards, a5SimulationCopy } from "./a5LessonContent";
 import { a6ToA11QuestionVisualMeta, a6ToA11ReflectionVisualCheck, a6ToA11ScaffoldCoreBullets, a6ToA11ScaffoldFocusExtras, a6ToA11ScaffoldMediaCards, a6ToA11SimulationCopy } from "./a6ToA11LessonContent";
+import { coreFormulaFallbacksForLesson } from "./coreFormulaFallbacks";
 import { curriculumMetaForModule } from "./moduleCurriculum";
 import { revisedLateCoreCoreBullets, revisedLateCoreFocusExtras, revisedLateCoreMediaCards, revisedLateCoreQuestionVisualMeta, revisedLateCoreReflectionVisualCheck, revisedLateCoreSimulationCopy } from "./revisedLateCoreLessonContent";
 import { technicalWordsForLesson } from "./technicalWords";
@@ -11647,11 +11648,9 @@ function formulaAnalogyEquivalent(lesson: UnknownRecord, code: string, formula: 
   return "Match the formal relation to the lesson model before you calculate.";
 }
 
-function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
-  const code = lessonCode(lesson);
-  if (!isM1ToM14Lesson(code) && !isA1ToA11Lesson(code)) return null;
-
+function authoredFormulaCards(lesson: UnknownRecord, code: string): UnknownRecord[] {
   const formulaCards: UnknownRecord[] = [];
+
   lessonFormulaRecords(lesson).forEach((formula) => {
     const standardFormula = standardFormulaText(formula);
     if (!standardFormula) return;
@@ -11665,6 +11664,43 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
       conditions: ensureSentence(trimmedFormulaCondition(text(formula.conditions))),
     });
   });
+
+  return formulaCards;
+}
+
+function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
+  const code = lessonCode(lesson);
+  if (!isM1ToM14Lesson(code)) return [];
+
+  const authoredCards = authoredFormulaCards(lesson, code);
+  if (authoredCards.length > 0) return authoredCards;
+
+  return coreFormulaFallbacksForLesson(code).map((entry) => {
+    const formulaRecord = {
+      equation: entry.standardFormula,
+      meaning: entry.meaning || "",
+      conditions: entry.conditions || "",
+    };
+    const constantNotes = dedupeText([
+      ...formulaConstantsText(code, formulaRecord),
+      ...(entry.constants ? [entry.constants] : []),
+    ]);
+    return {
+      standard_formula: entry.standardFormula,
+      analogy_equivalent: formulaAnalogyEquivalent(lesson, code, formulaRecord),
+      constants: constantNotes.join(" "),
+      meaning: ensureSentence(entry.meaning || ""),
+      units_text: entry.unitsText || "",
+      conditions: ensureSentence(trimmedFormulaCondition(entry.conditions || "")),
+    };
+  });
+}
+
+function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
+  const code = lessonCode(lesson);
+  if (!isM1ToM14Lesson(code) && !isA1ToA11Lesson(code)) return null;
+
+  const formulaCards = isM1ToM14Lesson(code) ? coreFormulaRows(lesson) : authoredFormulaCards(lesson, code);
 
   if (!formulaCards.length) return null;
 
@@ -11912,9 +11948,10 @@ function foundationFormulaSection(lesson: UnknownRecord): UnknownRecord | null {
   };
 }
 
-function withFoundationFormulaSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
-  const formulaSection = foundationFormulaSection(lesson);
+function withStandardFormulaSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
+  const formulaSection = foundationFormulaSection(lesson) || formulaBridgeSection(lesson);
   if (!formulaSection) return sections;
+  if (sections.some((section) => asList(asRecord(section).formula_reference_rows).length > 0)) return sections;
 
   const nextSections = [...sections];
   const workedExampleIndex = nextSections.findIndex((section) => Object.keys(asRecord(asRecord(section).worked_example)).length > 0);
@@ -11960,7 +11997,7 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
     nextSections.splice(insertIndex, 0, ...technicalSections);
   }
 
-  return withFoundationFormulaSection(lesson, nextSections);
+  return withStandardFormulaSection(lesson, nextSections);
 }
 
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
