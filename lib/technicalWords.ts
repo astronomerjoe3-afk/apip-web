@@ -11,6 +11,7 @@ export type TechnicalWordEntry = {
 
 const CURRICULUM_TECHNICAL_WORD_SUPPLEMENTS: Record<string, TechnicalWordSeed[]> = {
   A1: [
+    { term: "Charge tag", aliases: ["charge tag", "charge tags"], meaning: "A charge tag is the electric-charge label attached to a particle, such as +1e, 0, or -1e.", why_it_matters: "It helps compare charged and neutral particles without using charge as the only classification rule." },
     { term: "Hadron", aliases: ["hadron", "hadrons"], meaning: "A hadron is a composite particle built from quarks and held together by the strong interaction.", why_it_matters: "It is the umbrella family that contains baryons and mesons." },
     { term: "Quark", aliases: ["quark", "quarks"], meaning: "A quark is a fundamental particle that combines to form hadrons.", why_it_matters: "It explains hadron structure." },
     { term: "Fundamental interaction", aliases: ["fundamental interaction", "fundamental interactions"], meaning: "A fundamental interaction is a basic way particles influence one another.", why_it_matters: "It organizes particle events into families." },
