@@ -178,6 +178,10 @@ const FOUNDATION_MODULE_DESCRIPTIONS: Record<string, string> = {
   F4: "Study waves and vibrations, amplitude, wavelength, and frequency, sound and light as wave phenomena, reflection and refraction qualitatively, simple circuits, current and voltage, series and parallel first models, magnetic effects of current, and electrical safety.",
   F5: "Study Earth-Moon-Sun relationships, day and night, seasons, Moon phases, eclipses, the Solar System, apparent sky motion, gravity as an introduction to orbits, and the scale of Earth, the Sun, and the planets.",
 };
+const CORE_MODULE_DESCRIPTIONS: Record<string, string> = {
+  M13: "Study the Solar System as a gravity-organized system and use orbital motion, Earth's rotation, axial tilt, Moon-phase geometry, and orbital period comparisons to explain what we observe in the sky.",
+  M14: "Study stars as luminous bodies, broad stellar life cycles, galaxies and the Milky Way, light-years, redshift, and the Big Bang as an expansion model for a hot, dense early universe.",
+};
 const ADVANCED_MODULE_DESCRIPTIONS: Record<string, string> = {
   A1: "Study matter, radiation, and particles through particle structure, radiation types, interactions, and evidence for the particle model of matter.",
   A2: "Study quantum phenomena and atomic spectra through electric fields, potential, capacitance, node potential, and circuit analysis in more complex networks.",
@@ -194,9 +198,11 @@ const ADVANCED_MODULE_DESCRIPTIONS: Record<string, string> = {
 const MODULE_FOUR_TITLE = "Pressure";
 const MODULE_FOUR_DESCRIPTION =
   "Pressure in solids, liquid pressure, and atmospheric pressure. Separate pressure from force, track how area and depth matter, and use the main pressure equations carefully.";
-const MODULE_FOURTEEN_TITLE = "Solar System";
+const MODULE_THIRTEEN_TITLE = "Earth and the Solar System";
+const MODULE_THIRTEEN_DESCRIPTION = CORE_MODULE_DESCRIPTIONS.M13;
+const MODULE_FOURTEEN_TITLE = "Stars and the Universe";
 const MODULE_FOURTEEN_DESCRIPTION =
-  "Describe the Solar System as one Sun-centered family, distinguish planets from dwarf planets, moons, asteroids, and comets, and use rotation, axial tilt, Moon-phase geometry, and orbital distance to explain what we observe.";
+  CORE_MODULE_DESCRIPTIONS.M14;
 
 function normalizeModuleTitle(moduleId: string | undefined | null, title: string | undefined): string | undefined {
   const trimmed = String(title || "").trim();
@@ -216,6 +222,9 @@ function normalizeModuleDescription(moduleId: string | undefined | null, title: 
   const normalizedModuleId = normalizeModuleId(moduleId);
   if (normalizedModuleId && FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId]) {
     return FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId];
+  }
+  if (normalizedModuleId && CORE_MODULE_DESCRIPTIONS[normalizedModuleId]) {
+    return CORE_MODULE_DESCRIPTIONS[normalizedModuleId];
   }
   if (normalizedModuleId && ADVANCED_MODULE_DESCRIPTIONS[normalizedModuleId]) {
     return ADVANCED_MODULE_DESCRIPTIONS[normalizedModuleId];
@@ -238,6 +247,14 @@ function normalizeModuleDescription(moduleId: string | undefined | null, title: 
 function fallbackModuleMeta(moduleId: string): ModuleCatalog | null {
   const normalizedModuleId = normalizeModuleId(moduleId);
   if (!normalizedModuleId) return null;
+
+  if (normalizedModuleId === "M13") {
+    return {
+      id: "M13",
+      title: MODULE_THIRTEEN_TITLE,
+      description: MODULE_THIRTEEN_DESCRIPTION,
+    };
+  }
 
   if (normalizedModuleId === "M14") {
     return {
