@@ -10947,7 +10947,26 @@ function analogyTextForCoreModule(code: string, value: string): string {
 }
 
 function trimmedFormulaCondition(value: string): string {
-  return singleLineText(value).replace(/^use (it )?when\s+/i, "").replace(/^use for\s+/i, "");
+  return singleLineText(value)
+    .replace(/[.!?]+$/g, "")
+    .replace(
+      /^use (?:(?:this|the)\s+(?:relation|formula|equation)\s+|it\s+)?(when|for|to|as|in|during|with|after)\s+/i,
+      (_match, lead: string) => `${lead.toLowerCase()} `
+    )
+    .trim();
+}
+
+function formulaConditionInstruction(value: string, subject = "Use it"): string {
+  const condition = trimmedFormulaCondition(value);
+  if (!condition) return "";
+
+  const explicitLead = /^(when|for|to|as|in|during|with|after)\s+(.+)$/i.exec(condition);
+  if (explicitLead) {
+    const [, lead, rest] = explicitLead;
+    return ensureSentence(`${subject} ${lead.toLowerCase()} ${lowerFirst(rest.trim())}`);
+  }
+
+  return ensureSentence(`${subject} when ${lowerFirst(condition)}`);
 }
 
 function formulaUnitsText(formula: UnknownRecord): string {
@@ -11079,14 +11098,14 @@ function formulaAnalogyEquivalent(lesson: UnknownRecord, code: string, formula: 
   if (coreModule !== null) {
     const label = CORE_MODULE_ANALOGY_LABELS[coreModule] || "Lesson-model";
     const meaning = ensureSentence(analogyTextForCoreModule(code, text(formula.meaning))) || comparison;
-    const condition = ensureSentence(trimmedFormulaCondition(analogyTextForCoreModule(code, text(formula.conditions))));
+    const condition = formulaConditionInstruction(analogyTextForCoreModule(code, text(formula.conditions)));
     const bridgeParts = [
       meaning
         ? `${label} rule: ${meaning}`
         : `${label} rule: Match the formal relation to the lesson story before you calculate.`,
     ];
     if (mappingLine) bridgeParts.push(mappingLine);
-    if (condition) bridgeParts.push(`Use it when ${lowerFirst(condition)}.`);
+    if (condition) bridgeParts.push(condition);
     return bridgeParts.join(" ");
   }
 
@@ -11101,7 +11120,7 @@ function formulaAnalogyEquivalent(lesson: UnknownRecord, code: string, formula: 
     ];
     if (mappingLine) bridgeParts.push(mappingLine);
     if (formalMeaning) bridgeParts.push(`This relation tracks ${lowerFirst(formalMeaning)}.`);
-    if (formalCondition) bridgeParts.push(`Use this relation when ${lowerFirst(formalCondition)}.`);
+    if (formalCondition) bridgeParts.push(formulaConditionInstruction(text(formula.conditions), "Use this relation"));
     return bridgeParts.join(" ");
   }
 
@@ -11302,7 +11321,7 @@ function foundationFormulaAnalogyEquivalent(lesson: UnknownRecord, code: string,
       ...mapping.slice(0, 1),
     ];
     if (formalMeaning) bridgeParts.push(`This relation tracks ${lowerFirst(formalMeaning)}.`);
-    if (formalCondition) bridgeParts.push(`Use it when ${lowerFirst(formalCondition)}.`);
+    if (formalCondition) bridgeParts.push(formulaConditionInstruction(text(formula.conditions)));
     return bridgeParts.join(" ");
   }
 

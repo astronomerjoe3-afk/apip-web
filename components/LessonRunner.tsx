@@ -1229,7 +1229,7 @@ export default function LessonRunner({
                                 ) : null}
                                 {row.conditions ? (
                                   <p className="mt-2 text-sm leading-6 text-slate-600">
-                                    <span className="font-medium text-slate-700">Use when:</span>{" "}
+                                    <span className="font-medium text-slate-700">Best use:</span>{" "}
                                     {row.conditions}
                                   </p>
                                 ) : null}
