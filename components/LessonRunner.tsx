@@ -199,6 +199,7 @@ type ScaffoldSection = {
   technical_words?: TechnicalWordCard[];
   formula_reference_rows?: FormulaReferenceRow[];
   formula_constants_note?: string;
+  shared_formula_analogy?: string;
   worked_example?: {
     prompt: string;
     steps: string[];
@@ -1158,9 +1159,17 @@ export default function LessonRunner({
             {section.formula_reference_rows?.length ? (
               (() => {
                 const formulaRows = section.formula_reference_rows ?? [];
+                const hasSharedFormulaAnalogy = Boolean(section.shared_formula_analogy);
+                const hasRowAnalogies = !hasSharedFormulaAnalogy && formulaRows.some((row) => row.analogy_equivalent);
                 const hasRowConstants = formulaRows.some((row) => row.constants);
                 return (
                   <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-sm">
+                    {section.shared_formula_analogy ? (
+                      <div className="mb-4 rounded-2xl border border-sky-100 bg-sky-50/80 px-4 py-3 text-sm leading-6 text-slate-700">
+                        <span className="font-medium text-slate-900">Shared analogy match:</span>{" "}
+                        {section.shared_formula_analogy}
+                      </div>
+                    ) : null}
                     {section.formula_constants_note ? (
                       <div className="mb-4 rounded-2xl border border-emerald-100 bg-emerald-50/80 px-4 py-3 text-sm leading-6 text-slate-700">
                         <span className="font-medium text-slate-900">Constants for this lesson:</span>{" "}
@@ -1169,22 +1178,33 @@ export default function LessonRunner({
                     ) : null}
                     <div className="overflow-x-auto">
                       <table className="w-full table-fixed border-separate border-spacing-0 text-left text-sm text-slate-700">
-                        {hasRowConstants ? (
+                        {hasRowAnalogies && hasRowConstants ? (
                           <colgroup>
                             <col style={{ width: "34%" }} />
                             <col style={{ width: "40%" }} />
                             <col style={{ width: "26%" }} />
                           </colgroup>
-                        ) : (
+                        ) : hasRowAnalogies ? (
                           <colgroup>
                             <col style={{ width: "44%" }} />
                             <col style={{ width: "56%" }} />
+                          </colgroup>
+                        ) : hasRowConstants ? (
+                          <colgroup>
+                            <col style={{ width: "68%" }} />
+                            <col style={{ width: "32%" }} />
+                          </colgroup>
+                        ) : (
+                          <colgroup>
+                            <col style={{ width: "100%" }} />
                           </colgroup>
                         )}
                         <thead className="bg-slate-900/95 text-white">
                           <tr>
                             <th className="border-b border-slate-700 px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">Standard physics formula</th>
-                            <th className="border-b border-slate-700 px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">Analogy equivalent</th>
+                            {hasRowAnalogies ? (
+                              <th className="border-b border-slate-700 px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">Analogy equivalent</th>
+                            ) : null}
                             {hasRowConstants ? (
                               <th className="border-b border-slate-700 px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">Constants if any</th>
                             ) : null}
@@ -1214,7 +1234,9 @@ export default function LessonRunner({
                                   </p>
                                 ) : null}
                               </td>
-                              <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{row.analogy_equivalent}</td>
+                              {hasRowAnalogies ? (
+                                <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{row.analogy_equivalent}</td>
+                              ) : null}
                               {hasRowConstants ? (
                                 <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{row.constants || "—"}</td>
                               ) : null}

@@ -10987,19 +10987,25 @@ function analogyMappingLines(lesson: UnknownRecord): string[] {
 function formulaSectionRows(
   formulaCards: UnknownRecord[],
   fallbackConstantNote = "",
-): { rows: UnknownRecord[]; constantNote: string } {
+): { rows: UnknownRecord[]; constantNote: string; sharedAnalogy: string } {
   const uniqueConstants = dedupeText([
     ...formulaCards.map((card) => text(card.constants)).filter(Boolean),
     ...(fallbackConstantNote ? [fallbackConstantNote] : []),
   ]);
   const useSectionConstantNote = uniqueConstants.length === 1;
+  const uniqueAnalogies = dedupeText(
+    formulaCards.map((card) => text(card.analogy_equivalent)).filter(Boolean)
+  );
+  const useSharedAnalogy = uniqueAnalogies.length === 1 && formulaCards.length > 1;
 
   return {
     rows: formulaCards.map((card) => ({
       ...card,
       constants: useSectionConstantNote ? "" : text(card.constants),
+      analogy_equivalent: useSharedAnalogy ? "" : text(card.analogy_equivalent),
     })),
     constantNote: useSectionConstantNote ? uniqueConstants[0] : "",
+    sharedAnalogy: useSharedAnalogy ? uniqueAnalogies[0] : "",
   };
 }
 
@@ -11117,13 +11123,14 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
 
   if (!formulaCards.length) return null;
 
-  const { rows, constantNote } = formulaSectionRows(formulaCards);
+  const { rows, constantNote, sharedAnalogy } = formulaSectionRows(formulaCards);
 
   return {
     heading: "Standard formulas and analogy bridge",
     body: "Match each formal relation to the lesson model before you start the worked example. Keep the formula, its lesson meaning, and any fixed constants together so the symbols stay tied to the actual physics story.",
     formula_reference_rows: rows,
     formula_constants_note: constantNote,
+    shared_formula_analogy: sharedAnalogy,
   };
 }
 
@@ -11349,12 +11356,13 @@ function foundationFormulaSection(lesson: UnknownRecord): UnknownRecord | null {
   const code = lessonCode(lesson);
   const formulaRows = foundationFormulaRows(lesson);
   if (formulaRows.length === 0) return null;
-  const { rows, constantNote } = formulaSectionRows(formulaRows, foundationFormulaConstants(code));
+  const { rows, constantNote, sharedAnalogy } = formulaSectionRows(formulaRows, foundationFormulaConstants(code));
   return {
     heading: "Standard formulas and analogy bridge",
     body: "Match each formal relation to the lesson model before you start the worked example. Keep the formula, its lesson meaning, and any fixed constants together so the symbols stay tied to the actual physics story.",
     formula_reference_rows: rows,
     formula_constants_note: constantNote,
+    shared_formula_analogy: sharedAnalogy,
     check_for_understanding: "Which relation in this list belongs to the next example, and which symbol is acting as a fixed constant here, if any?",
   };
 }
