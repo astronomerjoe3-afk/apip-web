@@ -6266,6 +6266,7 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
 
 function normalizeRenderedPhysicsText(value: string): string {
   return value
+    .replace(/\bdelta\s+([A-Za-z](?:_[A-Za-z0-9]+)?)/g, "Δ$1")
     .replace(
       /^Why is it useful to explain (.+?) by keeping .+ visible\?$/i,
       "Why does the core physics of $1 matter more than labels alone?"
@@ -11462,22 +11463,35 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
 
 function scaffoldWorkedExampleSections(workedExample: UnknownRecord): UnknownRecord[] {
   const sections: UnknownRecord[] = [];
-  const primaryExample = asRecord(workedExample.worked_example);
+  const normalizedWorkedExample = (value: UnknownRecord): UnknownRecord => {
+    const prompt = normalizeRenderedPhysicsText(text(value.prompt));
+    const steps = asList(value.steps).map((step) => normalizeRenderedPhysicsText(text(step))).filter(Boolean);
+    const answer = normalizeRenderedPhysicsText(text(value.answer));
+    const answerReason = normalizeRenderedPhysicsText(text(value.answer_reason));
+    if (!prompt && steps.length === 0 && !answer && !answerReason) return {};
+    return {
+      prompt,
+      steps,
+      answer,
+      answer_reason: answerReason,
+    };
+  };
+  const primaryExample = normalizedWorkedExample(asRecord(workedExample.worked_example));
   if (Object.keys(primaryExample).length > 0) {
     sections.push({
       heading: "Worked example",
-      body: text(workedExample.body),
+      body: normalizeRenderedPhysicsText(text(workedExample.body)),
       worked_example: primaryExample,
     });
   }
 
   asList(workedExample.extra_examples).forEach((entry, index) => {
     const extra = asRecord(entry);
-    const extraExample = asRecord(extra.worked_example);
+    const extraExample = normalizedWorkedExample(asRecord(extra.worked_example));
     if (Object.keys(extraExample).length === 0) return;
     sections.push({
       heading: `Worked example ${index + 2}`,
-      body: text(extra.body) || text(workedExample.body),
+      body: normalizeRenderedPhysicsText(text(extra.body) || text(workedExample.body)),
       worked_example: extraExample,
     });
   });
@@ -11949,12 +11963,12 @@ function authoredFormulaCards(lesson: UnknownRecord, code: string): UnknownRecor
     if (!standardFormula) return;
     const constantNotes = formulaConstantsText(code, formula);
     formulaCards.push({
-      standard_formula: standardFormula,
-      analogy_equivalent: formulaAnalogyEquivalent(lesson, code, formula),
-      constants: constantNotes.join(" "),
-      meaning: ensureSentence(text(formula.meaning)),
-      units_text: formulaUnitsText(formula),
-      conditions: ensureSentence(trimmedFormulaCondition(text(formula.conditions))),
+      standard_formula: normalizeRenderedPhysicsText(standardFormula),
+      analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formula)),
+      constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
+      meaning: normalizeRenderedPhysicsText(ensureSentence(text(formula.meaning))),
+      units_text: normalizeRenderedPhysicsText(formulaUnitsText(formula)),
+      conditions: normalizeRenderedPhysicsText(ensureSentence(trimmedFormulaCondition(text(formula.conditions)))),
     });
   });
 
@@ -11979,12 +11993,12 @@ function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
       ...(entry.constants ? [entry.constants] : []),
     ]);
     return {
-      standard_formula: entry.standardFormula,
-      analogy_equivalent: formulaAnalogyEquivalent(lesson, code, formulaRecord),
-      constants: constantNotes.join(" "),
-      meaning: ensureSentence(entry.meaning || ""),
-      units_text: entry.unitsText || "",
-      conditions: ensureSentence(trimmedFormulaCondition(entry.conditions || "")),
+      standard_formula: normalizeRenderedPhysicsText(entry.standardFormula),
+      analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formulaRecord)),
+      constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
+      meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning || "")),
+      units_text: normalizeRenderedPhysicsText(entry.unitsText || ""),
+      conditions: normalizeRenderedPhysicsText(ensureSentence(trimmedFormulaCondition(entry.conditions || ""))),
     };
   });
 }
@@ -12202,12 +12216,12 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
       if (!standardFormula) return null;
       const constantNotes = formulaConstantsText(code, formula);
       return {
-        standard_formula: standardFormula,
-        analogy_equivalent: foundationFormulaAnalogyEquivalent(lesson, code, formula),
-        constants: constantNotes.join(" "),
-        meaning: ensureSentence(text(formula.meaning)),
-        units_text: formulaUnitsText(formula),
-        conditions: ensureSentence(trimmedFormulaCondition(text(formula.conditions))),
+        standard_formula: normalizeRenderedPhysicsText(standardFormula),
+        analogy_equivalent: normalizeRenderedPhysicsText(foundationFormulaAnalogyEquivalent(lesson, code, formula)),
+        constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
+        meaning: normalizeRenderedPhysicsText(ensureSentence(text(formula.meaning))),
+        units_text: normalizeRenderedPhysicsText(formulaUnitsText(formula)),
+        conditions: normalizeRenderedPhysicsText(ensureSentence(trimmedFormulaCondition(text(formula.conditions)))),
       };
     })
     .filter(Boolean) as UnknownRecord[];
@@ -12217,8 +12231,8 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
   if (formulas.length === 0) return [];
 
   return formulas.map((standardFormula) => ({
-    standard_formula: standardFormula,
-    analogy_equivalent: foundationFormulaAnalogyEquivalent(lesson, code),
+    standard_formula: normalizeRenderedPhysicsText(standardFormula),
+    analogy_equivalent: normalizeRenderedPhysicsText(foundationFormulaAnalogyEquivalent(lesson, code)),
     constants: "",
     meaning: "",
     units_text: "",
