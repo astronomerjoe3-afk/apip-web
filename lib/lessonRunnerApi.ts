@@ -10949,6 +10949,60 @@ function formulaUnitsText(formula: UnknownRecord): string {
   return units.length ? units.join(", ") : "No unit list supplied.";
 }
 
+function standardFormulaText(formula: UnknownRecord): string {
+  return (
+    text(formula.equation) ||
+    text(formula.formula) ||
+    text(formula.relation) ||
+    text(formula.expression)
+  );
+}
+
+function lessonFormulaRecords(lesson: UnknownRecord): UnknownRecord[] {
+  const seen = new Set<string>();
+  const formulaRecords: UnknownRecord[] = [];
+
+  [...asList(asRecord(lesson.authoring_contract).formulas), ...asList(lesson.formulas)]
+    .map(asRecord)
+    .forEach((formula) => {
+      const standardFormula = standardFormulaText(formula);
+      const key = singleLineText(standardFormula).toLowerCase();
+      if (!key || seen.has(key)) return;
+      seen.add(key);
+      formulaRecords.push(formula);
+    });
+
+  return formulaRecords;
+}
+
+function analogyMappingLines(lesson: UnknownRecord): string[] {
+  const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
+  return dedupeText(
+    asList(analogyMap.mapping)
+      .map((entry) => ensureSentence(text(entry)))
+      .filter(Boolean)
+  ).slice(0, 2);
+}
+
+function formulaSectionRows(
+  formulaCards: UnknownRecord[],
+  fallbackConstantNote = "",
+): { rows: UnknownRecord[]; constantNote: string } {
+  const uniqueConstants = dedupeText([
+    ...formulaCards.map((card) => text(card.constants)).filter(Boolean),
+    ...(fallbackConstantNote ? [fallbackConstantNote] : []),
+  ]);
+  const useSectionConstantNote = uniqueConstants.length === 1;
+
+  return {
+    rows: formulaCards.map((card) => ({
+      ...card,
+      constants: useSectionConstantNote ? "" : text(card.constants),
+    })),
+    constantNote: useSectionConstantNote ? uniqueConstants[0] : "",
+  };
+}
+
 function formulaConstantsText(code: string, formula: UnknownRecord): string[] {
   const combined = `${text(formula.equation)} ${text(formula.meaning)} ${text(formula.conditions)}`;
   const notes: string[] = [];
@@ -11003,30 +11057,40 @@ function formulaConstantsText(code: string, formula: UnknownRecord): string[] {
 }
 
 function formulaAnalogyEquivalent(lesson: UnknownRecord, code: string, formula: UnknownRecord): string {
+  const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
+  const comparison = ensureSentence(text(analogyMap.comparison));
+  const mapping = analogyMappingLines(lesson);
+  const mappingLine = mapping[0] || "";
+  const formalMeaning = ensureSentence(text(formula.meaning));
+  const formalCondition = ensureSentence(trimmedFormulaCondition(text(formula.conditions)));
   const coreModule = coreModuleNumber(code);
   if (coreModule !== null) {
     const label = CORE_MODULE_ANALOGY_LABELS[coreModule] || "Lesson-model";
-    const meaning = ensureSentence(analogyTextForCoreModule(code, text(formula.meaning)));
-    const condition = trimmedFormulaCondition(analogyTextForCoreModule(code, text(formula.conditions)));
-
-    if (meaning && condition) {
-      return `${label} rule: ${meaning} Use it when ${lowerFirst(condition)}.`;
-    }
-    if (meaning) return `${label} rule: ${meaning}`;
-    if (condition) return `${label} rule: Use it when ${lowerFirst(condition)}.`;
-    return `${label} rule: Match the formal relation to the lesson story before you calculate.`;
+    const meaning = ensureSentence(analogyTextForCoreModule(code, text(formula.meaning))) || comparison;
+    const condition = ensureSentence(trimmedFormulaCondition(analogyTextForCoreModule(code, text(formula.conditions))));
+    const bridgeParts = [
+      meaning
+        ? `${label} rule: ${meaning}`
+        : `${label} rule: Match the formal relation to the lesson story before you calculate.`,
+    ];
+    if (mappingLine) bridgeParts.push(mappingLine);
+    if (condition) bridgeParts.push(`Use it when ${lowerFirst(condition)}.`);
+    return bridgeParts.join(" ");
   }
 
   const advancedModule = advancedModuleNumber(code);
   if (advancedModule !== null) {
     const label = ADVANCED_MODULE_ANALOGY_LABELS[advancedModule] || "Lesson-model";
-    const analogySentence = ensureSentence(firstAnalogySentence(lesson));
-    const condition = trimmedFormulaCondition(text(formula.conditions));
-    if (analogySentence && condition) {
-      return `${label} bridge: ${analogySentence} Use this relation when ${lowerFirst(condition)}.`;
-    }
-    if (analogySentence) return `${label} bridge: ${analogySentence}`;
-    if (condition) return `${label} bridge: Use this relation when ${lowerFirst(condition)}.`;
+    const analogySentence = comparison || ensureSentence(firstAnalogySentence(lesson));
+    const bridgeParts = [
+      analogySentence
+        ? `${label} bridge: ${analogySentence}`
+        : `${label} bridge: Match the formal relation to the lesson model before you calculate.`,
+    ];
+    if (mappingLine) bridgeParts.push(mappingLine);
+    if (formalMeaning) bridgeParts.push(`This relation tracks ${lowerFirst(formalMeaning)}.`);
+    if (formalCondition) bridgeParts.push(`Use this relation when ${lowerFirst(formalCondition)}.`);
+    return bridgeParts.join(" ");
   }
 
   return "Match the formal relation to the lesson model before you calculate.";
@@ -11037,16 +11101,10 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
   if (!isM1ToM14Lesson(code) && !isA1ToA11Lesson(code)) return null;
 
   const formulaCards: UnknownRecord[] = [];
-  const constantsNotes: string[] = [];
-  asList(asRecord(lesson.authoring_contract).formulas).map(asRecord).forEach((formula) => {
-    const standardFormula =
-      text(formula.equation) ||
-      text(formula.formula) ||
-      text(formula.relation) ||
-      text(formula.expression);
+  lessonFormulaRecords(lesson).forEach((formula) => {
+    const standardFormula = standardFormulaText(formula);
     if (!standardFormula) return;
     const constantNotes = formulaConstantsText(code, formula);
-    constantsNotes.push(...constantNotes);
     formulaCards.push({
       standard_formula: standardFormula,
       analogy_equivalent: formulaAnalogyEquivalent(lesson, code, formula),
@@ -11059,18 +11117,13 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
 
   if (!formulaCards.length) return null;
 
-  const uniqueConstants = dedupeText(constantsNotes);
-  const useSectionConstantNote = uniqueConstants.length === 1;
-  const rows = formulaCards.map((card) => ({
-    ...card,
-    constants: useSectionConstantNote ? "" : text(card.constants),
-  }));
+  const { rows, constantNote } = formulaSectionRows(formulaCards);
 
   return {
     heading: "Standard formulas and analogy bridge",
     body: "Match each formal relation to the lesson model before you start the worked example. Keep the formula, its lesson meaning, and any fixed constants together so the symbols stay tied to the actual physics story.",
     formula_reference_rows: rows,
-    formula_constants_note: useSectionConstantNote ? uniqueConstants[0] : "",
+    formula_constants_note: constantNote,
   };
 }
 
@@ -11218,23 +11271,26 @@ function foundationFormulaConstants(code: string): string {
     case "F5_L3":
       return "Earth's axis tilt is about 23.5°, and one orbit takes about 365 days.";
     default:
-      return "No named constant is required in this lesson.";
+      return "";
   }
 }
 
-function foundationFormulaAnalogyEquivalent(lesson: UnknownRecord, code: string): string {
+function foundationFormulaAnalogyEquivalent(lesson: UnknownRecord, code: string, formula: UnknownRecord = {}): string {
   const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
-  const comparison = text(analogyMap.comparison);
-  const mapping = dedupeText(
-    asList(analogyMap.mapping).map((entry) => text(entry)).filter(Boolean)
-  ).slice(0, 2);
-  const mappedSummary = [comparison, ...mapping].filter(Boolean).join(" ");
-  if (mappedSummary) return mappedSummary;
+  const comparison = ensureSentence(text(analogyMap.comparison));
+  const mapping = analogyMappingLines(lesson);
+  const formalMeaning = ensureSentence(text(formula.meaning));
+  const formalCondition = ensureSentence(trimmedFormulaCondition(text(formula.conditions)));
+  const analogySentence = comparison || ensureSentence(firstAnalogySentence(lesson));
 
-  const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text).trim();
-  if (analogyText) {
-    const firstSentence = analogyText.match(/.*?[.!?](?:\s|$)/)?.[0]?.trim();
-    return firstSentence || analogyText;
+  if (analogySentence || mapping.length || formalMeaning || formalCondition) {
+    const bridgeParts = [
+      analogySentence || "Use the lesson analogy to keep the physical relationship readable before you switch back to the formal relation.",
+      ...mapping.slice(0, 1),
+    ];
+    if (formalMeaning) bridgeParts.push(`This relation tracks ${lowerFirst(formalMeaning)}.`);
+    if (formalCondition) bridgeParts.push(`Use it when ${lowerFirst(formalCondition)}.`);
+    return bridgeParts.join(" ");
   }
 
   if (code.startsWith("F1_")) {
@@ -11259,39 +11315,46 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (!/^F[1-5]_L\d+$/.test(code)) return [];
 
-  const authoredFormulas = dedupeText(
-    [
-      ...asList(asRecord(lesson.authoring_contract).formulas).map((entry) => {
-        const formula = asRecord(entry);
-        return text(formula.equation) || text(formula.formula) || text(formula.relation) || text(formula.expression);
-      }),
-      ...asList(lesson.formulas).map((entry) => {
-        const formula = asRecord(entry);
-        return text(formula.equation) || text(formula.formula) || text(formula.relation) || text(formula.expression);
-      }),
-    ].filter(Boolean)
-  ).slice(0, 4);
+  const authoredCards = lessonFormulaRecords(lesson)
+    .map((formula) => {
+      const standardFormula = standardFormulaText(formula);
+      if (!standardFormula) return null;
+      const constantNotes = formulaConstantsText(code, formula);
+      return {
+        standard_formula: standardFormula,
+        analogy_equivalent: foundationFormulaAnalogyEquivalent(lesson, code, formula),
+        constants: constantNotes.join(" "),
+        meaning: ensureSentence(text(formula.meaning)),
+        units_text: formulaUnitsText(formula),
+        conditions: ensureSentence(trimmedFormulaCondition(text(formula.conditions))),
+      };
+    })
+    .filter(Boolean) as UnknownRecord[];
+  if (authoredCards.length > 0) return authoredCards;
 
-  const formulas = authoredFormulas.length > 0 ? authoredFormulas : foundationFormulaFallbacks(code);
+  const formulas = foundationFormulaFallbacks(code);
   if (formulas.length === 0) return [];
-
-  const analogyEquivalent = foundationFormulaAnalogyEquivalent(lesson, code);
 
   return formulas.map((standardFormula) => ({
     standard_formula: standardFormula,
-    analogy_equivalent: analogyEquivalent,
+    analogy_equivalent: foundationFormulaAnalogyEquivalent(lesson, code),
+    constants: "",
+    meaning: "",
+    units_text: "",
+    conditions: "",
   }));
 }
 
 function foundationFormulaSection(lesson: UnknownRecord): UnknownRecord | null {
   const code = lessonCode(lesson);
-  const rows = foundationFormulaRows(lesson);
-  if (rows.length === 0) return null;
+  const formulaRows = foundationFormulaRows(lesson);
+  if (formulaRows.length === 0) return null;
+  const { rows, constantNote } = formulaSectionRows(formulaRows, foundationFormulaConstants(code));
   return {
-    heading: "Formula map",
-    body: "Read the standard physics relation beside the analogy equivalent before you start the worked example. Keep constants separate from the quantities that change during the question.",
+    heading: "Standard formulas and analogy bridge",
+    body: "Match each formal relation to the lesson model before you start the worked example. Keep the formula, its lesson meaning, and any fixed constants together so the symbols stay tied to the actual physics story.",
     formula_reference_rows: rows,
-    formula_constants_note: foundationFormulaConstants(code),
+    formula_constants_note: constantNote,
     check_for_understanding: "Which relation in this list belongs to the next example, and which symbol is acting as a fixed constant here, if any?",
   };
 }
