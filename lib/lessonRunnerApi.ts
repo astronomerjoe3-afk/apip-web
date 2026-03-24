@@ -24,6 +24,7 @@ import { a6ToA11QuestionVisualMeta, a6ToA11ReflectionVisualCheck, a6ToA11Scaffol
 import { coreFormulaFallbacksForLesson } from "./coreFormulaFallbacks";
 import { canonicalizeModuleScopedLessonId, curriculumMetaForModule } from "./moduleCurriculum";
 import { revisedLateCoreCoreBullets, revisedLateCoreFocusExtras, revisedLateCoreMediaCards, revisedLateCoreQuestionVisualMeta, revisedLateCoreReflectionVisualCheck, revisedLateCoreSimulationCopy } from "./revisedLateCoreLessonContent";
+import { supplementalEquationFallbacksForLesson } from "./supplementalEquationFallbacks";
 import { technicalWordsForLesson } from "./technicalWords";
 
 type UnknownRecord = Record<string, unknown>;
@@ -11951,6 +11952,86 @@ function formulaConstantsText(code: string, formula: UnknownRecord): string[] {
   return dedupeText(notes);
 }
 
+function enhancedFormulaConstantsText(code: string, formula: UnknownRecord): string[] {
+  const equationText = text(formula.equation);
+  const combined = `${equationText} ${text(formula.meaning)} ${text(formula.conditions)}`;
+  const notes = formulaConstantsText(code, formula).filter((note) => {
+    if (note.startsWith("Use the molar gas constant")) {
+      return /molar gas constant|ideal gas|gas law/i.test(combined) || /\bnRT\b/i.test(equationText);
+    }
+    if (note.startsWith("Use Boltzmann's constant")) {
+      return /boltzmann|average kinetic energy|kinetic theory|ideal gas|temperature/i.test(combined) && /\bk\b/.test(equationText);
+    }
+    return true;
+  });
+
+  if (/coulomb|electrostatic|point charge|radial charge|test charge/i.test(combined) && /\bk\b/.test(equationText)) {
+    notes.push("Use Coulomb's constant k = 8.99 x 10^9 N m^2 C^-2 in vacuum.");
+  }
+  if (/hubble|expanding universe|cosmology|redshift/i.test(combined) && /H0/i.test(equationText)) {
+    notes.push("Use H0 in the form given by the question, often about 70 km s^-1 Mpc^-1.");
+  }
+  if (/nuclear radius|scattering|rutherford|nucleus/i.test(combined) && (/\bR0\b/i.test(equationText) || /\br0\b/i.test(equationText))) {
+    notes.push("Use R0 about 1.2 x 10^-15 m in the simple nuclear-size relation R = R0 A^(1/3).");
+  }
+  if (/wien|peak wavelength|stellar spectra/i.test(combined) && /\bb\b/.test(equationText)) {
+    notes.push("Use Wien's constant b = 2.90 x 10^-3 m K.");
+  }
+  if (/stefan|luminosity|blackbody/i.test(combined) && /sigma|\u03c3/i.test(equationText)) {
+    notes.push("Use sigma = 5.67 x 10^-8 W m^-2 K^-4 in the Stefan-Boltzmann relation.");
+  }
+  if (/half-life|decay constant|activity/i.test(combined) && /lambda|\u03bb/i.test(equationText)) {
+    notes.push("Use lambda = ln 2 / t_(1/2) when converting between decay constant and half-life.");
+  }
+
+  return dedupeText(notes);
+}
+
+function looksLikeStandardEquationText(formulaText: string): boolean {
+  const compact = singleLineText(formulaText);
+  if (!compact) return false;
+  if (/[=<>]/.test(compact)) {
+    return !/\b(analysis|inventory|identify|identified|depends|belongs|occurs|consistent|before|after|stays|keeps|must|should|built)\b/i.test(compact);
+  }
+  return /\b(sin|cos|tan|log|ln)\b/i.test(compact) || /\b[a-zA-Z]\b\s*[\^/*+-]\s*\b[a-zA-Z0-9]/.test(compact);
+}
+
+function mergeFormulaCards(...groups: UnknownRecord[][]): UnknownRecord[] {
+  const seen = new Set<string>();
+  const merged: UnknownRecord[] = [];
+
+  groups.flat().forEach((card) => {
+    const key = singleLineText(text(card.standard_formula)).toLowerCase();
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    merged.push(card);
+  });
+
+  return merged;
+}
+
+function supplementalFormulaCards(lesson: UnknownRecord, code: string): UnknownRecord[] {
+  return supplementalEquationFallbacksForLesson(code).map((entry) => {
+    const formulaRecord = {
+      equation: entry.standardFormula,
+      meaning: entry.meaning || "",
+      conditions: entry.conditions || "",
+    };
+    const constantNotes = dedupeText([
+      ...enhancedFormulaConstantsText(code, formulaRecord),
+      ...(entry.constants ? [entry.constants] : []),
+    ]);
+    return {
+      standard_formula: normalizeRenderedPhysicsText(entry.standardFormula),
+      analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formulaRecord)),
+      constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
+      meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning || "")),
+      units_text: normalizeRenderedPhysicsText(entry.unitsText || ""),
+      conditions: normalizeRenderedPhysicsText(ensureSentence(trimmedFormulaCondition(entry.conditions || ""))),
+    };
+  });
+}
+
 function formulaAnalogyEquivalent(lesson: UnknownRecord, code: string, formula: UnknownRecord): string {
   const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
   const comparison = ensureSentence(text(analogyMap.comparison));
@@ -11996,8 +12077,8 @@ function authoredFormulaCards(lesson: UnknownRecord, code: string): UnknownRecor
 
   lessonFormulaRecords(lesson).forEach((formula) => {
     const standardFormula = standardFormulaText(formula);
-    if (!standardFormula) return;
-    const constantNotes = formulaConstantsText(code, formula);
+    if (!standardFormula || !looksLikeStandardEquationText(standardFormula)) return;
+    const constantNotes = enhancedFormulaConstantsText(code, formula);
     formulaCards.push({
       standard_formula: normalizeRenderedPhysicsText(standardFormula),
       analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formula)),
@@ -12016,16 +12097,14 @@ function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
   if (!isM1ToM14Lesson(code)) return [];
 
   const authoredCards = authoredFormulaCards(lesson, code);
-  if (authoredCards.length > 0) return authoredCards;
-
-  return coreFormulaFallbacksForLesson(code).map((entry) => {
+  const fallbackCards = coreFormulaFallbacksForLesson(code).map((entry) => {
     const formulaRecord = {
       equation: entry.standardFormula,
       meaning: entry.meaning || "",
       conditions: entry.conditions || "",
     };
     const constantNotes = dedupeText([
-      ...formulaConstantsText(code, formulaRecord),
+      ...enhancedFormulaConstantsText(code, formulaRecord),
       ...(entry.constants ? [entry.constants] : []),
     ]);
     return {
@@ -12037,13 +12116,17 @@ function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
       conditions: normalizeRenderedPhysicsText(ensureSentence(trimmedFormulaCondition(entry.conditions || ""))),
     };
   });
+
+  return mergeFormulaCards(authoredCards, fallbackCards, supplementalFormulaCards(lesson, code));
 }
 
 function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
   const code = lessonCode(lesson);
   if (!isM1ToM14Lesson(code) && !isA1ToA11Lesson(code)) return null;
 
-  const formulaCards = isM1ToM14Lesson(code) ? coreFormulaRows(lesson) : authoredFormulaCards(lesson, code);
+  const formulaCards = isM1ToM14Lesson(code)
+    ? coreFormulaRows(lesson)
+    : mergeFormulaCards(authoredFormulaCards(lesson, code), supplementalFormulaCards(lesson, code));
 
   if (!formulaCards.length) return null;
 
@@ -12249,8 +12332,8 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
   const authoredCards = lessonFormulaRecords(lesson)
     .map((formula) => {
       const standardFormula = standardFormulaText(formula);
-      if (!standardFormula) return null;
-      const constantNotes = formulaConstantsText(code, formula);
+      if (!standardFormula || !looksLikeStandardEquationText(standardFormula)) return null;
+      const constantNotes = enhancedFormulaConstantsText(code, formula);
       return {
         standard_formula: normalizeRenderedPhysicsText(standardFormula),
         analogy_equivalent: normalizeRenderedPhysicsText(foundationFormulaAnalogyEquivalent(lesson, code, formula)),
@@ -12261,12 +12344,9 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
       };
     })
     .filter(Boolean) as UnknownRecord[];
-  if (authoredCards.length > 0) return authoredCards;
 
   const formulas = foundationFormulaFallbacks(code);
-  if (formulas.length === 0) return [];
-
-  return formulas.map((standardFormula) => ({
+  const fallbackCards = formulas.map((standardFormula) => ({
     standard_formula: normalizeRenderedPhysicsText(standardFormula),
     analogy_equivalent: normalizeRenderedPhysicsText(foundationFormulaAnalogyEquivalent(lesson, code)),
     constants: "",
@@ -12274,6 +12354,8 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
     units_text: "",
     conditions: "",
   }));
+
+  return mergeFormulaCards(authoredCards, fallbackCards, supplementalFormulaCards(lesson, code));
 }
 
 function foundationFormulaSection(lesson: UnknownRecord): UnknownRecord | null {
