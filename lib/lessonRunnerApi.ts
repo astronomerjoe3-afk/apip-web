@@ -9495,6 +9495,25 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       answerReason: text(entry.answer_reason),
       whyItMatters: text(entry.why_it_matters),
     }))
+    .map((entry) => {
+      if (
+        code === "M5_L1" &&
+        normalizePromptKey(entry.prompt) === "a learner says one water particle is wet what is the stronger statement"
+      ) {
+        return {
+          prompt: "A steel block is hard. Why is it stronger to say hardness belongs to the whole block rather than to one isolated particle?",
+          steps: [
+            "Separate one particle from the whole material first.",
+            "Keep one-particle properties to things like mass, motion, and position.",
+            "Place hardness on the bulk solid because it comes from many particles arranged and interacting together.",
+          ],
+          answer: "Hardness is a bulk property of the solid, not a property of one isolated particle.",
+          answerReason: "A single particle can have mass and motion, but hardness appears from many particles and their arrangement in the solid together.",
+          whyItMatters: "This keeps the particle model focused on bulk properties emerging from many particles rather than being copied onto one particle.",
+        };
+      }
+      return entry;
+    })
     .filter((entry) => entry.prompt && entry.steps.length > 0 && entry.answer)
     .filter((entry) => !workedExampleUsesLessonAnalogy(entry, lesson))
     .filter((entry) => !workedExampleUsesRelationSelectionLanguage(entry, lesson));
