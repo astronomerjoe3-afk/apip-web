@@ -10936,6 +10936,49 @@ function firstAnalogySentence(lesson: UnknownRecord): string {
   return analogyText.match(/.*?[.!?](?:\s|$)/)?.[0]?.trim() || analogyText;
 }
 
+function isModuleEntryLesson(code: string): boolean {
+  return /^(F[1-5]|M(?:[1-9]|1[0-4])|A(?:[1-9]|1[0-1]))_L1$/i.test(code);
+}
+
+function fullAnalogyMappingLines(lesson: UnknownRecord): string[] {
+  const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
+  return dedupeText(
+    asList(analogyMap.mapping)
+      .map((entry) => ensureSentence(text(entry)))
+      .filter(Boolean)
+  );
+}
+
+function entryLessonAnalogyTable(lesson: UnknownRecord): UnknownRecord | null {
+  const code = lessonCode(lesson);
+  if (!isModuleEntryLesson(code)) return null;
+
+  const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
+  const definitionParts = dedupeText([
+    ensureSentence(text(analogyMap.comparison)),
+    ensureSentence(firstAnalogySentence(lesson)),
+  ]).filter(Boolean);
+  const mappingLines = fullAnalogyMappingLines(lesson);
+
+  if (definitionParts.length === 0 && mappingLines.length === 0) return null;
+
+  return {
+    title: "Establish the lesson analogy",
+    caption: [
+      ...definitionParts,
+      "Before you use the first visual, name the analogy and match each picture object to the physics idea it represents.",
+    ].join(" "),
+    columns: ["Explicit analogy-to-physics map"],
+    rows: (mappingLines.length > 0 ? mappingLines : definitionParts).map((line) => [line]),
+  };
+}
+
+function withEntryLessonAnalogyTable(lesson: UnknownRecord, tables: UnknownRecord[]): UnknownRecord[] {
+  const entryTable = entryLessonAnalogyTable(lesson);
+  if (!entryTable) return tables;
+  return [entryTable, ...tables];
+}
+
 function analogyTextForCoreModule(code: string, value: string): string {
   const moduleNumber = coreModuleNumber(code);
   const replacements = moduleNumber ? CORE_MODULE_ANALOGY_REPLACEMENTS[moduleNumber] || [] : [];
@@ -11001,12 +11044,7 @@ function lessonFormulaRecords(lesson: UnknownRecord): UnknownRecord[] {
 }
 
 function analogyMappingLines(lesson: UnknownRecord): string[] {
-  const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
-  return dedupeText(
-    asList(analogyMap.mapping)
-      .map((entry) => ensureSentence(text(entry)))
-      .filter(Boolean)
-  ).slice(0, 2);
+  return fullAnalogyMappingLines(lesson).slice(0, 2);
 }
 
 function formulaSectionRows(
@@ -11718,7 +11756,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     intro: /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
     teaching_focus: teachingFocus,
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
-    reference_tables: scaffoldReferenceTables(lesson),
+    reference_tables: withEntryLessonAnalogyTable(lesson, scaffoldReferenceTables(lesson)),
     media_cards: scaffoldMediaCards(lesson),
     sections: scaffoldSections(lesson, repairText, analogyText, workedExample),
     review_refs: reviewRefs(lesson),
