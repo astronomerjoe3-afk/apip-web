@@ -10,6 +10,7 @@ import { useAuth } from "../../../../lib/auth";
 import { auth } from "../../../../lib/firebase";
 import {
   applyCurriculumModuleMeta,
+  canonicalizeModuleScopedLessonId,
   curriculumMetaForModule,
   normalizeModuleId,
   sanitizeModuleHeadingDescription,
@@ -145,8 +146,10 @@ type ActiveLesson = LessonCatalog & {
 
 
 
-function normalizeLessonId(value: string | undefined | null): string {
-  return String(value || "").replace(/-/g, "_").toUpperCase();
+function normalizeLessonId(moduleId: string | undefined | null, value: string | undefined | null): string {
+  const canonical = canonicalizeModuleScopedLessonId(moduleId, value);
+  const compactMatch = canonical.match(/^([A-Z]+\d+)_?L(\d+)$/);
+  return compactMatch ? `${compactMatch[1]}_L${compactMatch[2]}` : canonical;
 }
 
 function normalizeModuleTitle(moduleId: string | undefined | null, title: string | undefined): string | undefined {
@@ -417,9 +420,13 @@ export default function StudentModulePage() {
         const progressByLessonId = new Map<string, LessonProgress>();
         if (progressResponse) {
           for (const lessonProgress of progressResponse.lessons || []) {
+            const normalizedLessonId = normalizeLessonId(moduleId, lessonProgress.lesson_id);
             progressByLessonId.set(
-              normalizeLessonId(lessonProgress.lesson_id),
-              lessonProgress,
+              normalizedLessonId,
+              {
+                ...lessonProgress,
+                lesson_id: normalizedLessonId,
+              },
             );
           }
         }
@@ -427,15 +434,16 @@ export default function StudentModulePage() {
         const mergedLessons: ActiveLesson[] = [...(lessonsResponse.lessons || [])]
           .sort((a, b) => (a.sequence ?? 999) - (b.sequence ?? 999))
           .map((lesson) => {
-            const lessonId = normalizeLessonId(lesson.lesson_id || lesson.id);
+            const lessonId = normalizeLessonId(moduleId, lesson.lesson_id || lesson.id);
             return {
               ...lesson,
+              lesson_id: lessonId,
               progress: progressByLessonId.get(lessonId),
             };
           });
 
         const currentLessonId = preserveCurrentLesson
-          ? normalizeLessonId(currentLessonIdOverride)
+          ? normalizeLessonId(moduleId, currentLessonIdOverride)
           : "";
 
         let nextIndex = 0;
@@ -443,7 +451,7 @@ export default function StudentModulePage() {
         if (currentLessonId) {
           const foundIndex = mergedLessons.findIndex(
             (lesson) =>
-              normalizeLessonId(lesson.lesson_id || lesson.id) === currentLessonId,
+              normalizeLessonId(moduleId, lesson.lesson_id || lesson.id) === currentLessonId,
           );
           if (foundIndex >= 0) {
             nextIndex = foundIndex;
@@ -624,11 +632,11 @@ export default function StudentModulePage() {
     bestMasteryPercent?: number | null;
     moduleMasteryPercent?: number | null;
   }): void => {
-    const normalizedLessonId = normalizeLessonId(summary.lessonId);
+    const normalizedLessonId = normalizeLessonId(moduleId, summary.lessonId);
 
     setLessons((currentLessons) => {
       const nextLessons = currentLessons.map((lesson) => {
-        const lessonKey = normalizeLessonId(lesson.lesson_id || lesson.id);
+        const lessonKey = normalizeLessonId(moduleId, lesson.lesson_id || lesson.id);
         if (lessonKey !== normalizedLessonId) {
           return lesson;
         }
@@ -645,7 +653,7 @@ export default function StudentModulePage() {
         return {
           ...lesson,
           progress: {
-            lesson_id: normalizedLessonId,
+            lesson_id: normalizeLessonId(moduleId, normalizedLessonId),
             title: previousProgress?.title ?? lesson.title,
             sequence: previousProgress?.sequence ?? lesson.sequence,
             best_score: nextBestScore,
@@ -680,7 +688,7 @@ export default function StudentModulePage() {
 
       return nextLessons;
     });
-  }, []);
+  }, [moduleId]);
   return (
     <div
       style={{
@@ -905,7 +913,7 @@ export default function StudentModulePage() {
         ) : activeLesson ? (
           <LessonRunner
             moduleId={moduleId}
-            lessonId={normalizeLessonId(activeLesson.lesson_id || activeLesson.id)}
+            lessonId={normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id)}
             prefetchedLesson={activeLesson}
             canGoNextLesson={canGoNext}
             onGoNextLesson={canGoNext ? goNext : undefined}

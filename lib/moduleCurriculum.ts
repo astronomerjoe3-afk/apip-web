@@ -225,6 +225,12 @@ const MODULE_CURRICULUM: Record<string, CurriculumModuleMeta> = {
   },
 };
 
+const REVISED_CURRICULUM_LEGACY_LESSON_PREFIXES: Record<string, string> = {
+  M10: "M12",
+  M11: "M13",
+  M13: "M14",
+};
+
 export function normalizeModuleId(value: string | undefined | null): string {
   const raw = String(value || "").trim();
   if (!raw) return "";
@@ -249,6 +255,20 @@ export function normalizeModuleId(value: string | undefined | null): string {
   }
 
   return raw.toUpperCase();
+}
+
+export function canonicalizeModuleScopedLessonId(moduleId: string | undefined | null, lessonId: string | undefined | null): string {
+  const normalizedLessonId = String(lessonId || "").trim().replace(/-/g, "_").toUpperCase();
+  if (!normalizedLessonId) return "";
+
+  const normalizedModuleId = normalizeModuleId(moduleId);
+  const legacyPrefix = REVISED_CURRICULUM_LEGACY_LESSON_PREFIXES[normalizedModuleId];
+  if (!legacyPrefix) return normalizedLessonId;
+
+  return normalizedLessonId.replace(
+    new RegExp(`^${legacyPrefix}((?:_)?L\\d+(?:_[A-Z0-9]+)*)$`),
+    `${normalizedModuleId}$1`,
+  );
 }
 
 export function curriculumMetaForModule(moduleId: string | undefined | null): CurriculumModuleMeta | undefined {

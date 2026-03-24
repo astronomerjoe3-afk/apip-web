@@ -22,7 +22,7 @@ import { a4QuestionVisualMeta, a4ReflectionVisualCheck, a4ScaffoldCoreBullets, a
 import { a5QuestionVisualMeta, a5ReflectionVisualCheck, a5ScaffoldCoreBullets, a5ScaffoldFocusExtras, a5ScaffoldMediaCards, a5SimulationCopy } from "./a5LessonContent";
 import { a6ToA11QuestionVisualMeta, a6ToA11ReflectionVisualCheck, a6ToA11ScaffoldCoreBullets, a6ToA11ScaffoldFocusExtras, a6ToA11ScaffoldMediaCards, a6ToA11SimulationCopy } from "./a6ToA11LessonContent";
 import { coreFormulaFallbacksForLesson } from "./coreFormulaFallbacks";
-import { curriculumMetaForModule } from "./moduleCurriculum";
+import { canonicalizeModuleScopedLessonId, curriculumMetaForModule } from "./moduleCurriculum";
 import { revisedLateCoreCoreBullets, revisedLateCoreFocusExtras, revisedLateCoreMediaCards, revisedLateCoreQuestionVisualMeta, revisedLateCoreReflectionVisualCheck, revisedLateCoreSimulationCopy } from "./revisedLateCoreLessonContent";
 import { technicalWordsForLesson } from "./technicalWords";
 
@@ -640,6 +640,10 @@ function normalizeLessonId(value: unknown): string {
   return compactMatch ? `${compactMatch[1]}_L${compactMatch[2]}` : normalized;
 }
 
+function normalizeLessonIdForModule(moduleId: string | undefined | null, value: unknown): string {
+  return canonicalizeModuleScopedLessonId(moduleId, normalizeLessonId(value));
+}
+
 function normalizeModuleId(value: unknown): string {
   const raw = String(value || "").trim();
   if (!raw) return "";
@@ -658,6 +662,26 @@ function normalizeModuleId(value: unknown): string {
   if (moduleKeyMatch) return `M${moduleKeyMatch[1]}`;
 
   return raw;
+}
+
+function canonicalizeModuleScopedIdentifiers<T>(moduleId: string, value: T): T {
+  if (typeof value === "string") {
+    return canonicalizeModuleScopedLessonId(moduleId, value) as T;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((entry) => canonicalizeModuleScopedIdentifiers(moduleId, entry)) as T;
+  }
+
+  if (value && typeof value === "object") {
+    const remappedEntries = Object.entries(value as Record<string, unknown>).map(([key, entryValue]) => [
+      key,
+      canonicalizeModuleScopedIdentifiers(moduleId, entryValue),
+    ]);
+    return Object.fromEntries(remappedEntries) as T;
+  }
+
+  return value;
 }
 
 function text(value: unknown, fallback = ""): string {
@@ -679,7 +703,8 @@ function asList(value: unknown): unknown[] {
 }
 
 function stateKey(moduleId: string, lessonId: string): string {
-  return `lesson-runner:${normalizeModuleId(moduleId)}:${normalizeLessonId(lessonId)}`;
+  const normalizedModuleId = normalizeModuleId(moduleId);
+  return `lesson-runner:${normalizedModuleId}:${normalizeLessonIdForModule(normalizedModuleId, lessonId)}`;
 }
 
 function readState(moduleId: string, lessonId: string): LocalState {
@@ -719,7 +744,8 @@ function clearModuleState(moduleId: string): void {
 }
 
 function attemptHistoryKey(moduleId: string, lessonId: string): string {
-  return `lesson-runner-history:${normalizeModuleId(moduleId)}:${normalizeLessonId(lessonId)}`;
+  const normalizedModuleId = normalizeModuleId(moduleId);
+  return `lesson-runner-history:${normalizedModuleId}:${normalizeLessonIdForModule(normalizedModuleId, lessonId)}`;
 }
 
 function readAttemptHistory(moduleId: string, lessonId: string): AttemptHistory {
@@ -981,7 +1007,8 @@ function shortItem(id: string, prompt: string, acceptedAnswers: string[], hint: 
 }
 
 function lessonCode(lesson: UnknownRecord, runnerLesson: UnknownRecord = {}): string {
-  return normalizeLessonId(lesson.lesson_id || lesson.id || runnerLesson.lesson_id || runnerLesson.id)
+  const moduleId = normalizeModuleId(lesson.module_id || runnerLesson.module_id);
+  return normalizeLessonIdForModule(moduleId, lesson.lesson_id || lesson.id || runnerLesson.lesson_id || runnerLesson.id)
     .toUpperCase();
 }
 
@@ -6194,15 +6221,16 @@ const DISPLAY_LESSON_TITLE_OVERRIDES: Record<string, string> = {
 };
 
 function lessonTitle(lesson: UnknownRecord, runnerLesson: UnknownRecord): string {
-  const normalizedLessonId = normalizeLessonId(lesson.lesson_id || runnerLesson.lesson_id || lesson.id || runnerLesson.id);
+  const moduleId = normalizeModuleId(lesson.module_id || runnerLesson.module_id);
+  const normalizedLessonId = normalizeLessonIdForModule(moduleId, lesson.lesson_id || runnerLesson.lesson_id || lesson.id || runnerLesson.id);
   return DISPLAY_LESSON_TITLE_OVERRIDES[normalizedLessonId] || text(lesson.title) || text(runnerLesson.title) || normalizedLessonId;
 }
 
-function hasPrefetchedLesson(lessonId: string, lesson: UnknownRecord | null | undefined): lesson is UnknownRecord {
+function hasPrefetchedLesson(moduleId: string, lessonId: string, lesson: UnknownRecord | null | undefined): lesson is UnknownRecord {
   return Boolean(
     lesson &&
     Object.keys(lesson).length > 0 &&
-    normalizeLessonId(asRecord(lesson).lesson_id || asRecord(lesson).id) === normalizeLessonId(lessonId)
+    normalizeLessonIdForModule(moduleId, asRecord(lesson).lesson_id || asRecord(lesson).id) === normalizeLessonIdForModule(moduleId, lessonId)
   );
 }
 
@@ -6213,22 +6241,24 @@ async function loadLessonFromModuleList(moduleId: string, lessonId: string): Pro
     "/lessons";
   const lessonsResponse = await apipGet<UnknownRecord>(lessonsPath);
   const lessons = asList(asRecord(lessonsResponse).lessons).map(asRecord);
-  return lessons.find((entry) => normalizeLessonId(entry.lesson_id || entry.id) === lessonId) || null;
+  return lessons.find((entry) => normalizeLessonIdForModule(normalizedModuleId, entry.lesson_id || entry.id) === lessonId) || null;
 }
 
 async function loadResources(moduleId: string, lessonId: string, options: RunnerLoadOptions = {}): Promise<LessonResources> {
   const normalizedModuleId = normalizeModuleId(moduleId);
-  const normalized = normalizeLessonId(lessonId);
+  const normalized = normalizeLessonIdForModule(normalizedModuleId, lessonId);
   const runnerPath = "/student/modules/" +
     encodeURIComponent(normalizedModuleId) +
     "/lessons/" +
     encodeURIComponent(normalized) +
     "/runner";
   const runnerRequest = apipGet<UnknownRecord>(runnerPath);
-  if (hasPrefetchedLesson(normalized, options.prefetchedLesson)) {
+  if (hasPrefetchedLesson(normalizedModuleId, normalized, options.prefetchedLesson)) {
+    const runner = canonicalizeModuleScopedIdentifiers(normalizedModuleId, await runnerRequest);
+    const lesson = canonicalizeModuleScopedIdentifiers(normalizedModuleId, asRecord(options.prefetchedLesson));
     return {
-      runner: await runnerRequest,
-      lesson: asRecord(options.prefetchedLesson),
+      runner,
+      lesson,
     };
   }
 
@@ -6245,16 +6275,21 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
     throw runnerResponse.reason;
   }
 
+  const runner = canonicalizeModuleScopedIdentifiers(normalizedModuleId, runnerResponse.value);
+
   if (lessonResponse.status === "fulfilled") {
-    const lesson = asRecord(asRecord(lessonResponse.value).lesson);
+    const lesson = canonicalizeModuleScopedIdentifiers(normalizedModuleId, asRecord(asRecord(lessonResponse.value).lesson));
     if (Object.keys(lesson).length > 0) {
-      return { runner: runnerResponse.value, lesson };
+      return { runner, lesson };
     }
   }
 
   const listFallbackLesson = await loadLessonFromModuleList(normalizedModuleId, normalized);
   if (listFallbackLesson) {
-    return { runner: runnerResponse.value, lesson: listFallbackLesson };
+    return {
+      runner,
+      lesson: canonicalizeModuleScopedIdentifiers(normalizedModuleId, listFallbackLesson),
+    };
   }
 
   if (lessonResponse.status !== "fulfilled") {
@@ -8428,10 +8463,11 @@ function simulationStageTakeaway(code: string): string | undefined {
   }
 }
 function postEvent(moduleId: string, lessonId: string, body: UnknownRecord): Promise<unknown> {
-  return apipPost<unknown, JsonObject>(`/progress/${encodeURIComponent(normalizeModuleId(moduleId))}/event`, {
+  const normalizedModuleId = normalizeModuleId(moduleId);
+  return apipPost<unknown, JsonObject>(`/progress/${encodeURIComponent(normalizedModuleId)}/event`, {
     ...body,
     details: {
-      lesson_id: normalizeLessonId(lessonId),
+      lesson_id: normalizeLessonIdForModule(normalizedModuleId, lessonId),
       ...asRecord(body.details),
     },
   } as JsonObject);
@@ -12857,7 +12893,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
 
   return {
     module_id: normalizeModuleId(text(moduleMeta.module_id) || moduleId),
-    lesson_id: text(runnerLesson.lesson_id) || normalizeLessonId(lessonId),
+    lesson_id: normalizeLessonIdForModule(moduleId, text(runnerLesson.lesson_id) || lessonId),
     lesson_title: title,
     lesson_status: text(runnerLesson.lesson_status) === "completed" ? "completed" : text(runnerLesson.lesson_status) === "not_started" ? "not_started" : "in_progress",
     active_stage: activeStage,
@@ -12873,7 +12909,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
 }
 
 export async function postProgressEvent(moduleId: string, request: RunnerRequest, options: RunnerLoadOptions = {}): Promise<void> {
-  const lessonId = normalizeLessonId(request.lesson_id);
+  const lessonId = normalizeLessonIdForModule(moduleId, request.lesson_id);
   const payload = request.payload || {};
 
   if (request.event_type === "diagnostic_submitted") {
@@ -13146,11 +13182,11 @@ export async function restartModuleProgress(moduleId: string): Promise<void> {
 
 export async function restartLessonProgress(moduleId: string, lessonId: string): Promise<void> {
   const normalizedModuleId = normalizeModuleId(moduleId);
-  const normalized = normalizeLessonId(lessonId);
+  const normalized = normalizeLessonIdForModule(normalizedModuleId, lessonId);
   await apipPost<{ ok: boolean }, JsonObject>(
     "/student/modules/" + encodeURIComponent(normalizedModuleId) + "/lessons/" + encodeURIComponent(normalized) + "/restart",
     {}
   );
-  clearState(normalizedModuleId, lessonId);
+  clearState(normalizedModuleId, normalized);
 }
 
