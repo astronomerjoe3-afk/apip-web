@@ -27,7 +27,7 @@ const A1_VISUAL_META: Record<string, A1QuestionVisualMeta> = {
     visual_title: "Radiation messengers, solo travelers, and nucleus bundles stay distinct",
     visual_caption: "The inventory board keeps photons, leptons, and nucleons in separate slots so particle classification starts from role and structure rather than one generic 'tiny thing' label.",
     visual_callouts: [
-      "Photons are radiation messengers, not matter travelers.",
+      "Matter travelers are matter particles such as electrons and nucleons; photons are radiation messengers, not matter travelers.",
       "Leptons are a different family from hadrons.",
       "Protons and neutrons belong in the nucleus-bundle slot.",
     ],
@@ -95,7 +95,7 @@ const A1_SIMULATION_COPY: Record<string, A1SimulationCopy> = {
     instructions: "Keep photons, leptons, and nucleons on one classification board so matter and radiation are separated before later interaction stories arrive.",
     taskPrompt: "Sort the selected particles by family and role, then explain why a photon, an electron, and a proton should not start in the same category.",
     exploreSteps: [
-      "Start with one clear radiation messenger and one clear matter traveler.",
+      "Start with one clear radiation messenger and one clear matter traveler, meaning a matter particle such as an electron or proton.",
       "Add nucleus particles and compare which ones belong in the nucleus slot.",
       "Explain the inventory rule before using any interaction vocabulary.",
     ],
@@ -201,7 +201,7 @@ export function a1SimulationCopy(code: string): A1SimulationCopy | undefined {
 export function a1ScaffoldFocusExtras(code: string): string[] {
   switch (code) {
     case "A1_L1":
-      return ["Separate radiation messengers from matter particles.", "Use family and role before interaction stories.", "Do not collapse every subatomic object into one generic category."];
+      return ["Matter travelers are matter particles such as electrons and nucleons, while photons are radiation messengers.", "Use family and role before interaction stories.", "Do not collapse every subatomic object into one generic category."];
     case "A1_L2":
       return ["Read quark composition before charge or size.", "Keep baryons and mesons structurally distinct.", "Treat hadron as the umbrella family, not the final answer."];
     case "A1_L3":
@@ -220,7 +220,7 @@ export function a1ScaffoldFocusExtras(code: string): string[] {
 export function a1ScaffoldCoreBullets(code: string): string[] {
   switch (code) {
     case "A1_L1":
-      return ["Atoms contain electrons around nuclei made from protons and neutrons.", "Photons carry radiation and energy inside particle events.", "Leptons are not hadrons, while nucleons are composite hadrons."];
+      return ["Matter travelers are matter particles such as electrons and nucleons, not radiation carriers.", "Atoms contain electrons around nuclei made from protons and neutrons.", "Photons carry radiation and energy inside particle events.", "Leptons are not hadrons, while nucleons are composite hadrons."];
     case "A1_L2":
       return ["Hadrons are composite particles built from quarks.", "Baryons contain three quarks.", "Mesons contain a quark-antiquark pair."];
     case "A1_L3":
