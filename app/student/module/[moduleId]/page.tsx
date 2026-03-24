@@ -8,6 +8,7 @@ import LessonRunner from "../../../../components/LessonRunner";
 import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { useAuth } from "../../../../lib/auth";
 import { auth } from "../../../../lib/firebase";
+import { applyCurriculumModuleMeta, curriculumMetaForModule, normalizeModuleId } from "../../../../lib/moduleCurriculum";
 
 type PricingOffer = {
   id?: string;
@@ -143,131 +144,28 @@ function normalizeLessonId(value: string | undefined | null): string {
   return String(value || "").replace(/-/g, "_").toUpperCase();
 }
 
-function normalizeModuleId(value: string | undefined | null): string {
-  const raw = String(value || "").trim();
-  if (!raw) return "";
-
-  const collapsed = raw.replace(/[^A-Za-z0-9]+/g, "").toUpperCase();
-  if (/^F[1-9]\d*$/.test(collapsed)) return collapsed;
-  if (/^A[1-9]\d*$/.test(collapsed)) return collapsed;
-
-  const advancedAliasMatch = collapsed.match(/^MA([1-9]\d*)$/);
-  if (advancedAliasMatch) {
-    return `A${advancedAliasMatch[1]}`;
-  }
-
-  const moduleMatch = collapsed.match(/^(?:MODULE)?(\d+)$/);
-  if (moduleMatch) {
-    return `M${moduleMatch[1]}`;
-  }
-
-  const moduleKeyMatch = collapsed.match(/^M(\d+)$/);
-  if (moduleKeyMatch) {
-    return `M${moduleKeyMatch[1]}`;
-  }
-
-  return raw;
-}
-
-const MODULE_ONE_DESCRIPTION =
-  "Module 1 treats kinematics as a representation system: journeys, graphs, signed rates, constant-acceleration forecasts, gradient context, and area reasoning must stay aligned without collapsing into basic motion slogans.";
-const FOUNDATION_MODULE_DESCRIPTIONS: Record<string, string> = {
-  F1: "Use SI units and unit conversion, distinguish base and derived quantities, introduce scalar and vector descriptions, measure length, mass, time, and temperature, and handle simple uncertainty, density, and graph interpretation.",
-  F2: "Study distance and displacement, speed, velocity, acceleration, simple motion graphs, intuitive force ideas, friction and air resistance, work done, power, energy stores and transfers, and conservation of energy.",
-  F3: "Use the particle model to explain solids, liquids, and gases, pressure as particle collisions, temperature and internal energy qualitatively, expansion, change of state, conduction, convection, radiation, and heating or cooling behaviour.",
-  F4: "Study waves and vibrations, amplitude, wavelength, and frequency, sound and light as wave phenomena, reflection and refraction qualitatively, simple circuits, current and voltage, series and parallel first models, magnetic effects of current, and electrical safety.",
-  F5: "Study Earth-Moon-Sun relationships, day and night, seasons, Moon phases, eclipses, the Solar System, apparent sky motion, gravity as an introduction to orbits, and the scale of Earth, the Sun, and the planets.",
-};
-const CORE_MODULE_DESCRIPTIONS: Record<string, string> = {
-  M13: "Study the Solar System as a gravity-organized system and use orbital motion, Earth's rotation, axial tilt, Moon-phase geometry, and orbital period comparisons to explain what we observe in the sky.",
-  M14: "Study stars as luminous bodies, broad stellar life cycles, galaxies and the Milky Way, light-years, redshift, and the Big Bang as an expansion model for a hot, dense early universe.",
-};
-const ADVANCED_MODULE_DESCRIPTIONS: Record<string, string> = {
-  A1: "Study matter, radiation, and particles through particle structure, radiation types, interactions, and evidence for the particle model of matter.",
-  A2: "Study quantum phenomena and atomic spectra through electric fields, potential, capacitance, node potential, and circuit analysis in more complex networks.",
-  A3: "Study advanced waves and optics through wave superposition, interference, diffraction, refraction, optical paths, and image formation.",
-  A4: "Study advanced mechanics and materials through force, motion, stress, strain, elasticity, and how materials respond under load.",
-  A5: "Study oscillations through periodic motion, restoring effects, energy changes, resonance, and the behaviour of ideal oscillating systems.",
-  A6: "Study thermal physics and gases through temperature, internal energy, gas pressure, gas laws, and the particle explanation of thermal behaviour.",
-  A7: "Study DC circuits and capacitors through current, potential difference, resistance, capacitance, charge storage, and steady-state circuit behaviour.",
-  A8: "Study electric and magnetic fields through field patterns, field strength, forces on charges and currents, and the behaviour of particles in fields.",
-  A9: "Study electromagnetic induction and power through changing magnetic flux, induced emf, generators, transformers, and electrical power transfer.",
-  A10: "Study nuclear and particle applications through nuclear structure, decay, interactions, medical and industrial uses, and particle processes.",
-  A11: "Study astrophysics, gravitation, and cosmology through gravitational fields, orbital motion, stellar behaviour, galactic structure, and the evolution of the universe.",
-};
-const MODULE_FOUR_TITLE = "Pressure";
-const MODULE_FOUR_DESCRIPTION =
-  "Pressure in solids, liquid pressure, and atmospheric pressure. Separate pressure from force, track how area and depth matter, and use the main pressure equations carefully.";
-const MODULE_THIRTEEN_TITLE = "Earth and the Solar System";
-const MODULE_THIRTEEN_DESCRIPTION = CORE_MODULE_DESCRIPTIONS.M13;
-const MODULE_FOURTEEN_TITLE = "Stars and the Universe";
-const MODULE_FOURTEEN_DESCRIPTION =
-  CORE_MODULE_DESCRIPTIONS.M14;
-
 function normalizeModuleTitle(moduleId: string | undefined | null, title: string | undefined): string | undefined {
+  const curriculumMeta = curriculumMetaForModule(moduleId);
+  if (curriculumMeta) return curriculumMeta.title;
   const trimmed = String(title || "").trim();
-  if (!trimmed) return undefined;
-  const normalizedModuleId = normalizeModuleId(moduleId);
-  const isModuleFour =
-    normalizedModuleId === "M4" ||
-    /Pressure,\s*Patch Loads\s*&\s*Fluid Fields/i.test(trimmed);
-  if (isModuleFour) {
-    return MODULE_FOUR_TITLE;
-  }
-  return trimmed;
+  return trimmed || undefined;
 }
 
 function normalizeModuleDescription(moduleId: string | undefined | null, title: string | undefined, description: string | undefined): string | undefined {
+  void title;
+  const curriculumMeta = curriculumMetaForModule(moduleId);
+  if (curriculumMeta) return curriculumMeta.description;
   const trimmed = String(description || "").trim();
-  const normalizedModuleId = normalizeModuleId(moduleId);
-  if (normalizedModuleId && FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId]) {
-    return FOUNDATION_MODULE_DESCRIPTIONS[normalizedModuleId];
-  }
-  if (normalizedModuleId && CORE_MODULE_DESCRIPTIONS[normalizedModuleId]) {
-    return CORE_MODULE_DESCRIPTIONS[normalizedModuleId];
-  }
-  if (normalizedModuleId && ADVANCED_MODULE_DESCRIPTIONS[normalizedModuleId]) {
-    return ADVANCED_MODULE_DESCRIPTIONS[normalizedModuleId];
-  }
-  if (!trimmed) return undefined;
-  const isModuleOne = normalizedModuleId === "M1" || /Kinematics,\s*Graphs\s*&\s*Constant Acceleration/i.test(String(title || ""));
-  if (isModuleOne && /foundation 2|f2/i.test(trimmed)) {
-    return MODULE_ONE_DESCRIPTION;
-  }
-  const isModuleFour =
-    normalizedModuleId === "M4" ||
-    /Pressure,\s*Patch Loads\s*&\s*Fluid Fields/i.test(String(title || "")) ||
-    /patch-dome|patch load|sky blanket/i.test(trimmed);
-  if (isModuleFour) {
-    return MODULE_FOUR_DESCRIPTION;
-  }
-  return trimmed;
+  return trimmed || undefined;
 }
 
 function fallbackModuleMeta(moduleId: string): ModuleCatalog | null {
-  const normalizedModuleId = normalizeModuleId(moduleId);
-  if (!normalizedModuleId) return null;
-
-  if (normalizedModuleId === "M13") {
-    return {
-      id: "M13",
-      title: MODULE_THIRTEEN_TITLE,
-      description: MODULE_THIRTEEN_DESCRIPTION,
-    };
-  }
-
-  if (normalizedModuleId === "M14") {
-    return {
-      id: "M14",
-      title: MODULE_FOURTEEN_TITLE,
-      description: MODULE_FOURTEEN_DESCRIPTION,
-    };
-  }
-
+  const curriculumMeta = curriculumMetaForModule(moduleId);
+  if (!curriculumMeta) return null;
   return {
-    id: normalizedModuleId,
-    title: normalizeModuleTitle(normalizedModuleId, normalizedModuleId),
-    description: undefined,
+    id: curriculumMeta.id,
+    title: curriculumMeta.title,
+    description: curriculumMeta.description,
   };
 }
 
@@ -477,7 +375,7 @@ export default function StudentModulePage() {
         const moduleResponse =
           moduleResult.status === "fulfilled" ? moduleResult.value : null;
         const resolvedModuleMeta = moduleResponse
-          ? {
+          ? applyCurriculumModuleMeta({
               ...moduleResponse.module,
               title: normalizeModuleTitle(moduleResponse.module.id || moduleId, moduleResponse.module.title),
               description: normalizeModuleDescription(
@@ -485,7 +383,7 @@ export default function StudentModulePage() {
                 moduleResponse.module.title,
                 moduleResponse.module.description,
               ),
-            }
+            })
           : fallbackModuleMeta(moduleId);
 
         if (!resolvedModuleMeta && lessonsResult.status !== "fulfilled") {

@@ -13,7 +13,26 @@ type TechnicalWordSeed = TechnicalWordEntry & {
   aliases?: string[];
 };
 
-const STRICT_AUTHORED_TECHNICAL_WORD_MODULES = new Set(["A6", "A7", "A8", "A9", "A10", "A11"]);
+const STRICT_AUTHORED_TECHNICAL_WORD_MODULES = new Set([
+  "F5",
+  "M9",
+  "M10",
+  "M11",
+  "M12",
+  "M13",
+  "M14",
+  "A1",
+  "A2",
+  "A3",
+  "A4",
+  "A5",
+  "A6",
+  "A7",
+  "A8",
+  "A9",
+  "A10",
+  "A11",
+]);
 
 const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
   F1: [
@@ -430,7 +449,7 @@ export function technicalWordsForLesson(lesson: UnknownRecord, lessonCode: strin
   const authored = authoredTechnicalWords(lesson);
   const corpus = lessonCorpus(lesson);
 
-  if (STRICT_AUTHORED_TECHNICAL_WORD_MODULES.has(moduleCode) && authored.length >= 4) {
+  if (STRICT_AUTHORED_TECHNICAL_WORD_MODULES.has(moduleCode) && authored.length > 0) {
     return rankLessonTechnicalWords([...authored], corpus, authored.length);
   }
 

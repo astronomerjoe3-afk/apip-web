@@ -8,12 +8,6 @@ import { m5QuestionVisualMeta, m5ReflectionVisualCheck, m5ScaffoldCoreBullets, m
 import { m6QuestionVisualMeta, m6ReflectionVisualCheck, m6ScaffoldCoreBullets, m6ScaffoldFocusExtras, m6ScaffoldMediaCards, m6SimulationCopy } from "./m6LessonContent";
 import { m7QuestionVisualMeta, m7ReflectionVisualCheck, m7ScaffoldCoreBullets, m7ScaffoldFocusExtras, m7ScaffoldMediaCards, m7SimulationCopy } from "./m7LessonContent";
 import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8ScaffoldSectionVisual, m8SimulationCopy } from "./m8LessonContent";
-import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
-import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
-import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
-import { m12QuestionVisualMeta, m12ReflectionVisualCheck, m12ScaffoldCoreBullets, m12ScaffoldFocusExtras, m12ScaffoldMediaCards, m12SimulationCopy } from "./m12LessonContent";
-import { m13QuestionVisualMeta, m13ReflectionVisualCheck, m13ScaffoldCoreBullets, m13ScaffoldFocusExtras, m13ScaffoldMediaCards, m13SimulationCopy } from "./m13LessonContent";
-import { m14QuestionVisualMeta, m14ReflectionVisualCheck, m14ScaffoldCoreBullets, m14ScaffoldFocusExtras, m14ScaffoldMediaCards, m14SimulationCopy } from "./m14LessonContent";
 import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
 import { a1QuestionVisualMeta, a1ReflectionVisualCheck, a1ScaffoldCoreBullets, a1ScaffoldFocusExtras, a1ScaffoldMediaCards, a1SimulationCopy } from "./a1LessonContent";
 import { a2QuestionVisualMeta, a2ReflectionVisualCheck, a2ScaffoldCoreBullets, a2ScaffoldFocusExtras, a2ScaffoldMediaCards, a2SimulationCopy } from "./a2LessonContent";
@@ -21,6 +15,8 @@ import { a3QuestionVisualMeta, a3ReflectionVisualCheck, a3ScaffoldCoreBullets, a
 import { a4QuestionVisualMeta, a4ReflectionVisualCheck, a4ScaffoldCoreBullets, a4ScaffoldFocusExtras, a4ScaffoldMediaCards, a4SimulationCopy } from "./a4LessonContent";
 import { a5QuestionVisualMeta, a5ReflectionVisualCheck, a5ScaffoldCoreBullets, a5ScaffoldFocusExtras, a5ScaffoldMediaCards, a5SimulationCopy } from "./a5LessonContent";
 import { a6ToA11QuestionVisualMeta, a6ToA11ReflectionVisualCheck, a6ToA11ScaffoldCoreBullets, a6ToA11ScaffoldFocusExtras, a6ToA11ScaffoldMediaCards, a6ToA11SimulationCopy } from "./a6ToA11LessonContent";
+import { curriculumMetaForModule } from "./moduleCurriculum";
+import { revisedLateCoreCoreBullets, revisedLateCoreFocusExtras, revisedLateCoreMediaCards, revisedLateCoreQuestionVisualMeta, revisedLateCoreReflectionVisualCheck, revisedLateCoreSimulationCopy } from "./revisedLateCoreLessonContent";
 import { technicalWordsForLesson } from "./technicalWords";
 
 type UnknownRecord = Record<string, unknown>;
@@ -145,73 +141,37 @@ function remappedLateCoreQuestionVisualMeta(itemId: string): QuestionVisualMeta 
   const moduleCode = match[1];
   if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => `${moduleCode}_`.startsWith(prefix))) return a6ToA11QuestionVisualMeta(itemId);
   if (moduleCode === "F5") return f5QuestionVisualMeta(itemId);
-  if (moduleCode === "M9") return m9QuestionVisualMeta(itemId);
-  if (moduleCode === "M10") return m10QuestionVisualMeta(itemId);
-  if (moduleCode === "M11") return m11QuestionVisualMeta(itemId);
-  if (moduleCode === "M12") return m12QuestionVisualMeta(itemId);
-  if (moduleCode === "M13") return m13QuestionVisualMeta(itemId);
-  if (moduleCode === "M14") return m14QuestionVisualMeta(itemId);
-  return undefined;
+  return revisedLateCoreQuestionVisualMeta(itemId);
 }
 
 function remappedLateCoreSimulationCopy(code: string): SupplementalSimulationCopy | undefined {
   if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11SimulationCopy(code);
   if (code.startsWith("F5_")) return f5SimulationCopy(code);
-  if (code.startsWith("M9_")) return m9SimulationCopy(code);
-  if (code.startsWith("M10_")) return m10SimulationCopy(code);
-  if (code.startsWith("M11_")) return m11SimulationCopy(code);
-  if (code.startsWith("M12_")) return m12SimulationCopy(code);
-  if (code.startsWith("M13_")) return m13SimulationCopy(code);
-  if (code.startsWith("M14_")) return m14SimulationCopy(code);
-  return undefined;
+  return revisedLateCoreSimulationCopy(code);
 }
 
 function remappedLateCoreFocusExtras(code: string): string[] {
   if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ScaffoldFocusExtras(code);
   if (code.startsWith("F5_")) return f5ScaffoldFocusExtras(code);
-  if (code.startsWith("M9_")) return m9ScaffoldFocusExtras(code);
-  if (code.startsWith("M10_")) return m10ScaffoldFocusExtras(code);
-  if (code.startsWith("M11_")) return m11ScaffoldFocusExtras(code);
-  if (code.startsWith("M12_")) return m12ScaffoldFocusExtras(code);
-  if (code.startsWith("M13_")) return m13ScaffoldFocusExtras(code);
-  if (code.startsWith("M14_")) return m14ScaffoldFocusExtras(code);
-  return [];
+  return revisedLateCoreFocusExtras(code);
 }
 
 function remappedLateCoreCoreBullets(code: string): string[] {
   if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ScaffoldCoreBullets(code);
   if (code.startsWith("F5_")) return f5ScaffoldCoreBullets(code);
-  if (code.startsWith("M9_")) return m9ScaffoldCoreBullets(code);
-  if (code.startsWith("M10_")) return m10ScaffoldCoreBullets(code);
-  if (code.startsWith("M11_")) return m11ScaffoldCoreBullets(code);
-  if (code.startsWith("M12_")) return m12ScaffoldCoreBullets(code);
-  if (code.startsWith("M13_")) return m13ScaffoldCoreBullets(code);
-  if (code.startsWith("M14_")) return m14ScaffoldCoreBullets(code);
-  return [];
+  return revisedLateCoreCoreBullets(code);
 }
 
 function remappedLateCoreMediaCards(code: string): UnknownRecord[] {
   if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ScaffoldMediaCards(code);
   if (code.startsWith("F5_")) return f5ScaffoldMediaCards(code);
-  if (code.startsWith("M9_")) return m9ScaffoldMediaCards(code);
-  if (code.startsWith("M10_")) return m10ScaffoldMediaCards(code);
-  if (code.startsWith("M11_")) return m11ScaffoldMediaCards(code);
-  if (code.startsWith("M12_")) return m12ScaffoldMediaCards(code);
-  if (code.startsWith("M13_")) return m13ScaffoldMediaCards(code);
-  if (code.startsWith("M14_")) return m14ScaffoldMediaCards(code);
-  return [];
+  return revisedLateCoreMediaCards(code);
 }
 
 function remappedLateCoreReflectionVisualCheck(code: string): UnknownRecord | undefined {
   if (A6_TO_A11_MODULE_PREFIXES.some((prefix) => code.startsWith(prefix))) return a6ToA11ReflectionVisualCheck(code);
   if (code.startsWith("F5_")) return f5ReflectionVisualCheck(code);
-  if (code.startsWith("M9_")) return m9ReflectionVisualCheck(code);
-  if (code.startsWith("M10_")) return m10ReflectionVisualCheck(code);
-  if (code.startsWith("M11_")) return m11ReflectionVisualCheck(code);
-  if (code.startsWith("M12_")) return m12ReflectionVisualCheck(code);
-  if (code.startsWith("M13_")) return m13ReflectionVisualCheck(code);
-  if (code.startsWith("M14_")) return m14ReflectionVisualCheck(code);
-  return undefined;
+  return revisedLateCoreReflectionVisualCheck(code);
 }
 
 const F4_ASSET_BASE = "/lesson_assets/F4";
@@ -1438,10 +1398,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM14Prompt = (_ids: string[], prompts: string[]): boolean =>
     prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesM10Prompt = (ids: string[], prompts: string[]): boolean =>
-    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesM12Prompt = (ids: string[], prompts: string[]): boolean =>
-    ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM10Prompt = (_ids: string[], prompts: string[]): boolean =>
+    prompts.some((prompt) => promptKeyCore === prompt);
+  const matchesM12Prompt = (_ids: string[], prompts: string[]): boolean =>
+    prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM14StarsPrompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) ||
     prompts.some((prompt) => promptKeyCore === prompt);
@@ -9806,57 +9766,12 @@ function scaffoldReferenceTables(lesson: UnknownRecord): UnknownRecord[] {
       const code = lessonCode(lesson);
       if (isExtendedNextgenLessonCode(code)) {
         const essentials = [...scaffoldCoreBullets(code), ...scaffoldFocusExtras(code)].filter(Boolean);
-        const isFlowGrid = code.startsWith("F4_");
-        const isEarthSky = code.startsWith("F5_");
-        const isModuleOne = code.startsWith("M1_");
-        const isThermal = code.startsWith("M6_");
-        const isOptics = code.startsWith("M8_");
-        const isSound = code.startsWith("M9_");
-        const isElectricalQuantities = code.startsWith("M10_");
-        const isCircuits = code.startsWith("M11_");
-        const isElectromagnetism = code.startsWith("M12_");
-        const isRadioactivity = code.startsWith("M13_");
-        const isStarsUniverse = code.startsWith("M14_");
-        const isAdvancedParticles = code.startsWith("A1_");
-        const isAdvancedQuantum = code.startsWith("A2_");
-        const isAdvancedWaves = code.startsWith("A3_");
-        const isAdvancedMechanicsMaterials = code.startsWith("A4_");
-        const isAdvancedOscillations = code.startsWith("A5_");
+        const moduleMeta = curriculumMetaForModule(code.split("_")[0]);
         return [{
-          title: isFlowGrid ? "Circuit essentials" : isEarthSky ? "Earth and sky essentials" : isThermal ? "Thermal essentials" : isOptics ? "Light essentials" : isSound ? "Sound essentials" : isElectricalQuantities ? "Electrical quantities essentials" : isCircuits ? "Circuits essentials" : isElectromagnetism ? "Electromagnetism essentials" : isRadioactivity ? "Radioactivity essentials" : isStarsUniverse ? "Stars and universe essentials" : isAdvancedParticles ? "Particles essentials" : isAdvancedQuantum ? "Quantum essentials" : isAdvancedWaves ? "Advanced waves essentials" : isAdvancedMechanicsMaterials ? "Mechanics and materials essentials" : isAdvancedOscillations ? "Oscillations essentials" : "Lesson essentials",
-          caption: isFlowGrid
-            ? "Keep these Flow-Grid and circuit ideas visible while you work through the lesson."
-            : isEarthSky
-              ? "Keep these Earth-Moon-Sun, season, phase, eclipse, and Solar System ideas visible while you work through the lesson."
-            : isModuleOne
-              ? "Keep these key graph, motion, and acceleration ideas visible while you work through the lesson."
-              : isThermal
-                ? "Keep these key thermal transfer, phase-change, and energy-bookkeeping ideas visible while you work through the lesson."
-                : isOptics
-                  ? "Keep these key reflection, refraction, lens, and route-sketch ideas visible while you work through the lesson."
-                  : isSound
-                    ? "Keep these source, vibration, compression, pitch, echo, ultrasound, and Doppler ideas visible while you work through the lesson."
-                    : isElectricalQuantities
-                      ? "Keep these charge, current, voltage, resistance, and Ohm's-law ideas visible while you work through the lesson."
-                    : isCircuits
-                      ? "Keep these series-parallel, circuit-diagram, power, combined-resistance, and safety ideas visible while you work through the lesson."
-                    : isElectromagnetism
-                      ? "Keep these field, electromagnet, force, induction, generator, and transformer ideas visible while you work through the lesson."
-                  : isRadioactivity
-                    ? "Keep these atomic-structure, isotope, radiation, half-life, background, and decay-ledger ideas visible while you work through the lesson."
-                  : isStarsUniverse
-                    ? "Keep these star, galaxy, Milky Way, light-year, redshift, and Big Bang ideas visible while you work through the lesson."
-                  : isAdvancedParticles
-                    ? "Keep these particle-family, hadron-structure, antiparticle, interaction, and conservation-ledger ideas visible while you work through the lesson."
-                  : isAdvancedQuantum
-                    ? "Keep these quantized-level, spectrum, threshold, photon-packet, and matter-wave ideas visible while you work through the lesson."
-                  : isAdvancedWaves
-                    ? "Keep these superposition, standing-wave, interference, diffraction, refraction, and trace-reading ideas visible while you work through the lesson."
-                  : isAdvancedMechanicsMaterials
-                    ? "Keep these vector-balance, component-motion, projectile, collision, circular-motion, and materials-response ideas visible while you work through the lesson."
-                  : isAdvancedOscillations
-                    ? "Keep these restoring-force, SHM, graph, energy-swap, resonance, and damping ideas visible while you work through the lesson."
-                  : "Keep these key lesson ideas visible while you work through the lesson.",
+          title: moduleMeta ? `${moduleMeta.title} essentials` : "Lesson essentials",
+          caption: moduleMeta
+            ? `Keep these key ideas visible while you work through ${moduleMeta.title}.`
+            : "Keep these key lesson ideas visible while you work through the lesson.",
           columns: ["Key idea", "Why it matters"],
           rows: essentials.slice(0, 6).map((item, index) => ["Idea " + String(index + 1), item]),
         }];

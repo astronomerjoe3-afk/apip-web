@@ -9,6 +9,7 @@ import { apipGet, apipPost } from "../../lib/apipApi";
 import { auth } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, type Role } from "../../lib/authRouting";
+import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
 
 type PricingOffer = {
   id?: string;
@@ -253,7 +254,11 @@ export default function StudentHomePage() {
         setErr("");
         const data = await apipGet<ModulesResponse>("/modules");
         if (cancelled) return;
-        setModules(Array.isArray(data.modules) ? data.modules : []);
+        setModules(
+          Array.isArray(data.modules)
+            ? data.modules.map((moduleItem) => applyCurriculumModuleMeta(moduleItem))
+            : [],
+        );
       } catch (error: unknown) {
         if (cancelled) return;
         setErr(errorMessage(error));
