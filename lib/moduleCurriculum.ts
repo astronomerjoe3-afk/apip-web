@@ -15,6 +15,33 @@ type ModuleLike = {
   description?: string;
 };
 
+const INTERNAL_ANALOGY_TERMS = [
+  "Measure-Map",
+  "Mission-Track",
+  "Pulse-Hearth",
+  "Signal-Glow",
+  "Lantern-Ring",
+  "Balance Deck",
+  "Lift-Launch",
+  "Flow-Grid",
+  "Carrier-Loop",
+  "Field-Weave",
+  "Core-Forge",
+  "Beacon-City",
+  "Skycourt",
+  "Stretchmap",
+  "Switchyard",
+];
+
+const ANALOGY_HEADING_CLAUSE_PATTERNS = [
+  /[,:;]?\s+taught through the [^.?!]+/gi,
+  /[,:;]?\s+using the [^.?!]+(?:model|world)[^.?!]*/gi,
+  /[,:;]?\s+through the [^.?!]+(?:model|world)[^.?!]*/gi,
+  /[,:;]?\s+inside one coherent [^.?!]+/gi,
+  /[,:;]?\s+inside the [^.?!]+(?:model|world)[^.?!]*/gi,
+  /[,:;]?\s+so [^.?!]+ stay inside [^.?!]+/gi,
+];
+
 const MODULE_CURRICULUM: Record<string, CurriculumModuleMeta> = {
   F1: {
     id: "F1",
@@ -229,9 +256,43 @@ export function curriculumMetaForModule(moduleId: string | undefined | null): Cu
   return normalized ? MODULE_CURRICULUM[normalized] : undefined;
 }
 
+export function sanitizeModuleHeadingDescription(description: string | undefined | null): string | undefined {
+  let cleaned = String(description || "").trim();
+  if (!cleaned) return undefined;
+
+  for (const pattern of ANALOGY_HEADING_CLAUSE_PATTERNS) {
+    cleaned = cleaned.replace(pattern, "");
+  }
+
+  const firstAnalogyIndex = INTERNAL_ANALOGY_TERMS
+    .map((term) => cleaned.toLowerCase().indexOf(term.toLowerCase()))
+    .filter((index) => index >= 0)
+    .sort((left, right) => left - right)[0];
+
+  if (typeof firstAnalogyIndex === "number") {
+    cleaned = cleaned.slice(0, firstAnalogyIndex);
+  }
+
+  cleaned = cleaned
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/[,:;\s-]+$/g, "")
+    .trim();
+
+  if (!cleaned) return undefined;
+  return /[.!?]$/.test(cleaned) ? cleaned : `${cleaned}.`;
+}
+
 export function applyCurriculumModuleMeta<T extends ModuleLike>(moduleItem: T): T {
   const meta = curriculumMetaForModule(moduleItem.id);
-  if (!meta) return moduleItem;
+  if (!meta) {
+    const sanitizedDescription = sanitizeModuleHeadingDescription(moduleItem.description);
+    if (sanitizedDescription === moduleItem.description) return moduleItem;
+    return {
+      ...moduleItem,
+      description: sanitizedDescription,
+    };
+  }
   return {
     ...moduleItem,
     id: meta.id,

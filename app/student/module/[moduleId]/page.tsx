@@ -8,7 +8,12 @@ import LessonRunner from "../../../../components/LessonRunner";
 import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { useAuth } from "../../../../lib/auth";
 import { auth } from "../../../../lib/firebase";
-import { applyCurriculumModuleMeta, curriculumMetaForModule, normalizeModuleId } from "../../../../lib/moduleCurriculum";
+import {
+  applyCurriculumModuleMeta,
+  curriculumMetaForModule,
+  normalizeModuleId,
+  sanitizeModuleHeadingDescription,
+} from "../../../../lib/moduleCurriculum";
 
 type PricingOffer = {
   id?: string;
@@ -155,8 +160,7 @@ function normalizeModuleDescription(moduleId: string | undefined | null, title: 
   void title;
   const curriculumMeta = curriculumMetaForModule(moduleId);
   if (curriculumMeta) return curriculumMeta.description;
-  const trimmed = String(description || "").trim();
-  return trimmed || undefined;
+  return sanitizeModuleHeadingDescription(description);
 }
 
 function fallbackModuleMeta(moduleId: string): ModuleCatalog | null {

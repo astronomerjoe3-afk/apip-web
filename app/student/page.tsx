@@ -80,7 +80,7 @@ const MODULE_SECTION_ORDER: Array<Omit<ModuleSection, "modules">> = [
   {
     key: "foundation",
     title: "Foundation",
-    description: "Measurement, motion, forces, energy, and the first models students build from.",
+    description: "Measurement, motion, forces, energy, and the first physics relationships students build from.",
   },
   {
     key: "corePhysics",
