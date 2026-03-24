@@ -9512,6 +9512,22 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           whyItMatters: "This keeps the particle model focused on bulk properties emerging from many particles rather than being copied onto one particle.",
         };
       }
+      if (
+        code === "M5_L1" &&
+        normalizePromptKey(entry.prompt) === "a diagram shows close particles that can change neighbors without becoming far apart which state fits best"
+      ) {
+        return {
+          prompt: "A particle diagram for liquid water shows particles close together but able to move past neighboring particles. Why does that identify a liquid rather than a solid or a gas?",
+          steps: [
+            "Check spacing first: the particles are still close together, so the sample is not a gas.",
+            "Then check mobility: the particles can change neighbors, so they are not locked into fixed positions like a solid.",
+            "Match those two particle-model clues together to the liquid state.",
+          ],
+          answer: "It identifies a liquid because the particles stay close together but can move past one another.",
+          answerReason: "Liquids keep particles close like solids, but unlike solids they allow neighbor changes; gases are ruled out because their particles are far apart.",
+          whyItMatters: "This keeps state identification tied to particle spacing and particle motion together, which is the actual physics test in the particle model.",
+        };
+      }
       return entry;
     })
     .filter((entry) => entry.prompt && entry.steps.length > 0 && entry.answer)
