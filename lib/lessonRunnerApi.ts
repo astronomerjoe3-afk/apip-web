@@ -1267,6 +1267,14 @@ function canonicalAssessmentOverride(item: UnknownRecord): UnknownRecord | null 
     };
   }
 
+  if (itemId === "F1L5_T5" || promptKey === "which density is greater") {
+    return {
+      ...item,
+      id: itemId || "F1L5_T5",
+      prompt: "Which sample has the greater density?",
+    };
+  }
+
   return null;
 }
 
