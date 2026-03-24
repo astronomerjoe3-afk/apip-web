@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="440" y="170" fill="#1d4ed8" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">EMF, Terminal PD, and Internal</tspan><tspan x="440" dy="34">Resistance</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="198" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">EMF is the full</tspan><tspan x="198" dy="23">source lift per</tspan><tspan x="198" dy="23">charge.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="406" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Terminal p.d. is</tspan><tspan x="406" dy="23">the delivered lift</tspan><tspan x="406" dy="23">across the</tspan><tspan x="406" dy="23">external circuit.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="614" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Internal</tspan><tspan x="614" dy="23">resistance causes</tspan><tspan x="614" dy="23">the lost volts</tspan><tspan x="614" dy="23">inside the source.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/><text x="136" y="450" fill="#1d4ed8" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Compare open-circuit and loaded readings before you touch</tspan><tspan x="136" dy="31">the equation. That makes the source-loss distinction</tspan><tspan x="136" dy="31">concrete.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="156" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">EMF is the full source lift per</tspan><tspan x="890" dy="29">charge.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="280" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Terminal p.d. is the delivered</tspan><tspan x="890" dy="29">lift across the external</tspan><tspan x="890" dy="29">circuit.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="404" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Internal resistance causes the</tspan><tspan x="890" dy="29">lost volts inside the source.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
-  <text x="890" y="534" fill="#1d4ed8" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Terminal p.d. is the source emf minus the internal voltage drop</tspan><tspan x="890" dy="31">caused by current through internal resistance.</tspan></text>
+  <rect width="1400" height="820" fill="#f8fbff"/>
+  <rect x="34" y="30" width="1332" height="760" rx="40" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+  <text x="700" y="110" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">EMF, Terminal PD, and Internal Resistance</text>
+  <text x="700" y="154" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">Separate the source's full lift from the lost volts inside the cell.</text>
+
+  <rect x="120" y="230" width="1160" height="420" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <path d="M 240 450 H 430 L 470 360 L 540 540 L 620 300 H 860" fill="none" stroke="#1e3a8a" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 860 300 H 1060 V 540 H 240" fill="none" stroke="#1e3a8a" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <rect x="532" y="276" width="136" height="288" rx="28" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="600" y="332" fill="#1d4ed8" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">cell</text>
+  <line x1="566" y1="366" x2="566" y2="476" stroke="#1d4ed8" stroke-width="10" stroke-linecap="round"/>
+  <line x1="624" y1="390" x2="624" y2="452" stroke="#1d4ed8" stroke-width="10" stroke-linecap="round"/>
+  <text x="600" y="516" fill="#1e40af" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">emf source</text>
+
+  <rect x="920" y="362" width="160" height="116" rx="22" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <path d="M 970 392 L 1028 448 M 1028 392 L 970 448" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/>
+  <text x="1000" y="510" fill="#1d4ed8" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">external load</text>
+
+  <path d="M 674 334 Q 758 282 852 300" fill="none" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="852,300 826,296 840,320" fill="#f59e0b"/>
+  <text x="770" y="266" fill="#b45309" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">emf</text>
+
+  <path d="M 672 496 Q 756 548 852 540" fill="none" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="852,540 826,528 830,554" fill="#ef4444"/>
+  <text x="770" y="590" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">lost volts inside cell</text>
+
+  <path d="M 878 284 Q 980 252 1086 284" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="1086,284 1058,278 1068,302" fill="#10b981"/>
+  <text x="982" y="236" fill="#047857" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">terminal p.d.</text>
+
+  <text x="700" y="706" fill="#1d4ed8" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Terminal p.d. = source emf - internal voltage drop.</text>
 </svg>
