@@ -8840,6 +8840,154 @@ function scaffoldTeachingFocusBullets(code: string): string[] {
       return [];
   }
 }
+
+function extractAnalogyLeadPhrase(value: string): string {
+  const cleaned = singleLineText(value).replace(/\s+/g, " ").trim();
+  if (!cleaned) return "";
+  return (cleaned.split(/\s*(?:=|->|=>|:)\s*/)[0] || cleaned).replace(/[.!?]+$/g, "").trim();
+}
+
+function lessonAnalogySignalPhrases(lesson: UnknownRecord): string[] {
+  const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
+  const analogyText = singleLineText(text(asRecord(phases(lesson).analogical_grounding).analogy_text));
+  const comparison = singleLineText(text(analogyMap.comparison));
+  const modelNames = [analogyText, comparison, firstAnalogySentence(lesson)]
+    .map((entry) => singleLineText(entry))
+    .flatMap((entry) => entry.match(/[A-Z][A-Za-z-]+(?:\s+[A-Z][A-Za-z-]+)*\s+Model/g) || []);
+
+  return dedupeText([
+    ...asList(analogyMap.mapping).map((entry) => extractAnalogyLeadPhrase(text(entry))),
+    ...modelNames.map((entry) => singleLineText(entry)),
+  ])
+    .map((entry) => normalizePromptKey(entry))
+    .filter((entry) => entry.length >= 4);
+}
+
+function textUsesLessonAnalogyLanguage(value: string, lesson: UnknownRecord): boolean {
+  const normalized = normalizePromptKey(value);
+  if (!normalized) return false;
+
+  if (/\banalogy\b|\banalogue\b/i.test(normalized)) {
+    return true;
+  }
+
+  if (
+    [
+      "in the analogy",
+      "in this analogy",
+      "which part of the analogy",
+      "tie that relationship back to the analogy",
+      "match the analogy",
+      "use the analogy",
+      "lesson model",
+      "picture object",
+      "analogy bridge",
+    ].some((phrase) => normalized.includes(phrase))
+  ) {
+    return true;
+  }
+
+  const signalHits = lessonAnalogySignalPhrases(lesson).filter((phrase) => normalized.includes(phrase));
+  if (signalHits.some((phrase) => phrase.endsWith(" model"))) return true;
+  return signalHits.length >= 2;
+}
+
+function workedExampleUsesLessonAnalogy(
+  entry: { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string },
+  lesson: UnknownRecord
+): boolean {
+  return textUsesLessonAnalogyLanguage(
+    [entry.prompt, ...entry.steps, entry.answer, entry.answerReason, entry.whyItMatters].join(" "),
+    lesson
+  );
+}
+
+function workedExampleStepsFromAssessmentItem(item: UnknownRecord, title: string): string[] {
+  const prompt = renderedPromptText(item);
+  const focus = ensureSentence(teachingFocus(prompt, title)).replace(/[.!?]+$/g, "");
+  const choices = renderedChoices(item);
+  const numericPrompt = /\d/.test(prompt) || /[=+\-/*^]/.test(prompt);
+
+  if (numericPrompt) {
+    return [
+      "List the known values, units, and the quantity to find.",
+      focus ? `Choose the physics relation that matches the lesson idea: ${focus}.` : "Choose the physics relation that matches the lesson idea.",
+      "Substitute the values carefully and work through the calculation one step at a time.",
+      "State the result with the correct unit and check that it fits the situation described.",
+    ];
+  }
+
+  if (choices.length > 0) {
+    return [
+      focus ? `Start from the deciding physics rule: ${focus}.` : "Start from the deciding physics rule or definition.",
+      "Compare each option against that rule and reject any choice that breaks the definition, sign convention, unit, or relationship.",
+      "Keep the option that still matches the physics and state why it is the best answer.",
+    ];
+  }
+
+  return [
+    focus ? `Identify the physics idea being tested: ${focus}.` : "Identify the physics idea being tested.",
+    "Apply that idea directly to the situation in the prompt.",
+    "Write one clear physics answer with the correct unit, label, or classification.",
+  ];
+}
+
+function workedExampleEntryFromAssessmentItem(
+  lesson: UnknownRecord,
+  item: UnknownRecord
+): { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string } | null {
+  if (!hasUsableMasteryAnswer(item)) return null;
+
+  const prompt = renderedPromptText(item).trim();
+  const answerIndex = resolvedAnswerIndex(item);
+  const answer = resolvedCorrectAnswer(item).trim();
+  const answerReason = resolvedExplanation(item, answerIndex).trim();
+  const title = lessonTitle(lesson, lesson);
+  const whyItMatters = ensureSentence(teachingFocus(prompt, title)) || "Use the lesson physics rule directly and state why the answer follows.";
+
+  if (!prompt || !answer) return null;
+
+  const entry = {
+    prompt,
+    steps: workedExampleStepsFromAssessmentItem(item, title),
+    answer,
+    answerReason: answerReason || whyItMatters,
+    whyItMatters,
+  };
+
+  return workedExampleUsesLessonAnalogy(entry, lesson) ? null : entry;
+}
+
+function workedExampleAssessmentEntries(
+  lesson: UnknownRecord
+): { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string }[] {
+  const seenPrompts = new Set<string>();
+  const candidates = [
+    ...masteryItems(lesson),
+    ...conceptGateBank(lesson),
+    ...diagnosticItems(lesson),
+    ...generatedDiagnosticItems(lesson),
+  ];
+
+  return candidates
+    .map(asRecord)
+    .map((item) => workedExampleEntryFromAssessmentItem(lesson, item))
+    .filter((entry): entry is { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string } => Boolean(entry))
+    .filter((entry) => {
+      const key = normalizePromptKey(entry.prompt);
+      if (!key || seenPrompts.has(key)) return false;
+      seenPrompts.add(key);
+      return true;
+    });
+}
+
+function physicsFirstWorkedExamplePrompt(lesson: UnknownRecord, value: string): string {
+  const prompt = normalizeRenderedPhysicsText(text(value)).trim();
+  if (prompt && !textUsesLessonAnalogyLanguage(prompt, lesson)) return prompt;
+
+  return `What physics idea from ${lessonTitle(lesson, lesson)} should you apply here, and what conclusion follows?`;
+}
+
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const code = lessonCode(lesson);
   if (code.startsWith("M3_")) {
@@ -9033,12 +9181,17 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       answerReason: text(entry.answer_reason),
       whyItMatters: text(entry.why_it_matters),
     }))
-    .filter((entry) => entry.prompt && entry.steps.length > 0 && entry.answer);
+    .filter((entry) => entry.prompt && entry.steps.length > 0 && entry.answer)
+    .filter((entry) => !workedExampleUsesLessonAnalogy(entry, lesson));
+  const assessmentExamples = workedExampleAssessmentEntries(lesson);
+  const mergedExamples = [...authoredExamples, ...assessmentExamples].filter((entry, index, entries) =>
+    entries.findIndex((candidate) => normalizePromptKey(candidate.prompt) === normalizePromptKey(entry.prompt)) === index
+  );
   const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
 
-  if (authoredExamples.length > 0) {
-    const primary = authoredExamples[0];
-    const extras = authoredExamples.slice(1, 3).map((entry) => ({
+  if (mergedExamples.length > 0) {
+    const primary = mergedExamples[0];
+    const extras = mergedExamples.slice(1, 3).map((entry) => ({
       body: entry.whyItMatters || primary.whyItMatters || "Keep the same logic visible and finish by stating why the answer follows.",
       worked_example: {
         prompt: entry.prompt,
@@ -9059,6 +9212,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     };
   }
 
+  const fallbackPrompt = physicsFirstWorkedExamplePrompt(lesson, firstPrompt);
   switch (code) {
     case "F1_L1":
       return {
@@ -9584,7 +9738,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       return {
         body: "Start with a real question and solve it step by step.",
         worked_example: {
-          prompt: firstPrompt,
+          prompt: fallbackPrompt,
           steps: [
             "Read the question carefully and identify the quantity or idea being tested.",
             "Choose the correct rule, definition, formula, or unit relationship for that idea.",
