@@ -154,14 +154,63 @@ function normalizeSupportText(value: string): string {
   return value.trim().replace(/\s+/g, " ").toLowerCase();
 }
 
-const ASSESSMENT_VISUAL_ACRONYMS = ["AC", "DC", "EM", "GPE", "IR", "KE", "RMS", "SI", "UV"] as const;
+const ASSESSMENT_TEXT_ACRONYMS = [
+  "AC",
+  "DC",
+  "EM",
+  "EMF",
+  "GPE",
+  "IGCSE",
+  "IR",
+  "IV",
+  "KE",
+  "RMS",
+  "SHM",
+  "SI",
+  "SUVAT",
+  "UV",
+] as const;
+const ASSESSMENT_TEXT_LOWERCASE_TOKENS = [
+  "a",
+  "c",
+  "cm",
+  "ev",
+  "g",
+  "gev",
+  "hz",
+  "j",
+  "kg",
+  "km",
+  "m",
+  "ma",
+  "mev",
+  "mm",
+  "ms",
+  "mv",
+  "n",
+  "nm",
+  "pa",
+  "s",
+  "v",
+  "w",
+] as const;
 
-function normalizeAssessmentVisualText(value: string): string {
+function normalizeAssessmentText(value: string): string {
   const singleLine = value.trim().replace(/\s+/g, " ");
   if (!singleLine) return singleLine;
 
   const letters = singleLine.match(/[A-Za-z]/g) ?? [];
-  if (letters.length < 4) return singleLine;
+  if (letters.length < 2) {
+    const lowered = singleLine.toLowerCase();
+    if (ASSESSMENT_TEXT_LOWERCASE_TOKENS.includes(lowered as typeof ASSESSMENT_TEXT_LOWERCASE_TOKENS[number])) {
+      return lowered;
+    }
+    const uppered = singleLine.toUpperCase();
+    if (ASSESSMENT_TEXT_ACRONYMS.includes(uppered as typeof ASSESSMENT_TEXT_ACRONYMS[number])) {
+      return uppered;
+    }
+    return singleLine;
+  }
 
   const uppercaseCount = letters.filter((letter) => letter === letter.toUpperCase()).length;
   const lowercaseCount = letters.filter((letter) => letter === letter.toLowerCase()).length;
@@ -176,10 +225,22 @@ function normalizeAssessmentVisualText(value: string): string {
     (_match, prefix: string, first: string) => `${prefix}${first.toUpperCase()}`
   );
 
-  for (const acronym of ASSESSMENT_VISUAL_ACRONYMS) {
+  for (const acronym of ASSESSMENT_TEXT_ACRONYMS) {
     const titleCaseAcronym = acronym.charAt(0) + acronym.slice(1).toLowerCase();
     normalized = normalized.replace(new RegExp(`\\b${titleCaseAcronym}\\b`, "g"), acronym);
   }
+
+  for (const token of ASSESSMENT_TEXT_LOWERCASE_TOKENS) {
+    const capitalizedToken = token.charAt(0).toUpperCase() + token.slice(1);
+    normalized = normalized.replace(new RegExp(`\\b${capitalizedToken}\\b`, "g"), token);
+  }
+
+  normalized = normalized.replace(/\b([a-z]{1,2})-(\d+)\b/g, (_match, symbol: string, count: string) => {
+    const formattedSymbol = symbol.length === 1
+      ? symbol.toUpperCase()
+      : symbol.charAt(0).toUpperCase() + symbol.slice(1).toLowerCase();
+    return `${formattedSymbol}-${count}`;
+  });
 
   return normalized;
 }
@@ -469,10 +530,11 @@ function QuestionBlock({
   value: string;
   onChange: (questionId: string, value: string) => void;
 }) {
-  const visualTitle = question.visual_title ? normalizeAssessmentVisualText(question.visual_title) : "";
-  const visualCaption = question.visual_caption ? normalizeAssessmentVisualText(question.visual_caption) : "";
+  const prompt = normalizeAssessmentText(question.prompt);
+  const visualTitle = question.visual_title ? normalizeAssessmentText(question.visual_title) : "";
+  const visualCaption = question.visual_caption ? normalizeAssessmentText(question.visual_caption) : "";
   const visualCallouts = (question.visual_callouts ?? [])
-    .map(normalizeAssessmentVisualText)
+    .map(normalizeAssessmentText)
     .filter((item) => item.length > 0);
 
   return (
@@ -489,7 +551,7 @@ function QuestionBlock({
           </div>
           <img
             src={question.image_url}
-            alt={visualTitle || question.prompt}
+            alt={visualTitle || prompt}
             className="h-auto max-h-[24rem] w-full bg-[radial-gradient(circle_at_top,_rgba(248,250,252,0.98),_rgba(255,255,255,1))] object-contain p-4"
             loading="lazy"
           />
@@ -505,7 +567,7 @@ function QuestionBlock({
         </div>
       ) : null}
 
-      <p className="mb-4 font-medium text-slate-900 normal-case">{question.prompt}</p>
+      <p className="mb-4 font-medium text-slate-900 normal-case">{prompt}</p>
 
       {question.type === "short_answer" ? (
         <textarea
@@ -534,7 +596,7 @@ function QuestionBlock({
                   onChange={(e) => onChange(question.id, e.target.value)}
                   className="h-5 w-5 shrink-0 border-slate-400 text-slate-900 focus:ring-slate-400"
                 />
-                <span className="normal-case">{option.label}</span>
+                <span className="normal-case">{normalizeAssessmentText(option.label)}</span>
               </label>
             );
           })}
@@ -549,16 +611,16 @@ function masteryFeedbackBody(item: MasteryFeedbackItem, lessonTitle: string): st
   const hasPlaceholder = !explanation
     || placeholder.some((entry) => explanation.toLowerCase().includes(entry));
 
-  const promptPrefix = item.prompt ? `${item.prompt}\n\n` : "";
+  const promptPrefix = item.prompt ? `${normalizeAssessmentText(item.prompt)}\n\n` : "";
   if (!hasPlaceholder) {
-    return promptPrefix + explanation;
+    return normalizeAssessmentText(promptPrefix + explanation);
   }
 
   if (item.is_correct) {
-    return promptPrefix + "Correct. You used the lesson idea correctly.";
+    return normalizeAssessmentText(promptPrefix + "Correct. You used the lesson idea correctly.");
   }
 
-  return `${promptPrefix}Review ${lessonTitle} again, especially the key ideas from this lesson.`;
+  return normalizeAssessmentText(`${promptPrefix}Review ${lessonTitle} again, especially the key ideas from this lesson.`);
 }
 
 function ReviewReferences({ refs }: { refs?: ReviewReference[] }) {
@@ -885,22 +947,27 @@ export default function LessonRunner({
         : Array.isArray(item.learner_answer)
           ? item.learner_answer.join(", ")
           : item.learner_answer;
+      const normalizedLearnerAnswer = normalizeAssessmentText(learnerAnswer);
+      const normalizedCorrectAnswer = normalizeAssessmentText(feedbackAnswer(item.correct_answer));
+      const normalizedTeachingFocus = item.teaching_focus
+        ? normalizeAssessmentText(normalizeTeachingFocusText(item.teaching_focus))
+        : "";
 
       return (
         <div className="space-y-1">
-          {learnerAnswer ? (
+          {normalizedLearnerAnswer ? (
             <p>
-              <span className="font-medium">Your answer:</span> {learnerAnswer}
+              <span className="font-medium">Your answer:</span> {normalizedLearnerAnswer}
             </p>
           ) : null}
           {showCorrectAnswer ? (
             <p>
-              <span className="font-medium">Correct answer:</span> {feedbackAnswer(item.correct_answer)}
+              <span className="font-medium">Correct answer:</span> {normalizedCorrectAnswer}
             </p>
           ) : null}
-          {item.teaching_focus ? (
+          {normalizedTeachingFocus ? (
             <p>
-              <span className="font-medium">Key idea:</span> {normalizeTeachingFocusText(item.teaching_focus)}
+              <span className="font-medium">Key idea:</span> {normalizedTeachingFocus}
             </p>
           ) : null}
         </div>
@@ -923,7 +990,7 @@ export default function LessonRunner({
               key={item.question_id}
               correct={item.is_correct}
               title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
-              body={feedbackBody(item)}
+              body={normalizeAssessmentText(feedbackBody(item))}
               extra={feedbackExtra(item, true)}
             />
           ))}
@@ -948,7 +1015,7 @@ export default function LessonRunner({
           <FeedbackCard
             correct={payload.recent_feedback.is_correct}
             title={payload.recent_feedback.is_correct ? "That answer is correct" : "Not quite yet"}
-            body={feedbackBody(payload.recent_feedback)}
+            body={normalizeAssessmentText(feedbackBody(payload.recent_feedback))}
             extra={feedbackExtra(payload.recent_feedback)}
           />
         ) : null}
@@ -1409,7 +1476,7 @@ export default function LessonRunner({
               key={item.question_id}
               correct={item.is_correct}
               title={`Check ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
-              body={item.explanation}
+              body={normalizeAssessmentText(item.explanation)}
             />
           ))}
 
