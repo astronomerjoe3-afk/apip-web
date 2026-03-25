@@ -419,13 +419,13 @@ function FeedbackCard({
 }) {
   return (
     <div
-      className={`rounded-2xl border p-4 ${
+      className={`rounded-2xl border p-4 normal-case ${
         correct ? "border-green-200 bg-green-50" : "border-amber-200 bg-amber-50"
       }`}
     >
-      <p className="font-semibold text-slate-900">{title}</p>
-      <p className="mt-2 text-slate-700">{body}</p>
-      {extra ? <div className="mt-3 text-sm text-slate-600">{extra}</div> : null}
+      <p className="font-semibold text-slate-900 normal-case">{title}</p>
+      <p className="mt-2 text-slate-700 normal-case">{body}</p>
+      {extra ? <div className="mt-3 text-sm text-slate-600 normal-case">{extra}</div> : null}
     </div>
   );
 }
@@ -440,7 +440,7 @@ function QuestionBlock({
   onChange: (questionId: string, value: string) => void;
 }) {
   return (
-    <div className="rounded-2xl border bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border bg-white p-5 shadow-sm normal-case">
       {question.image_url ? (
         <div className="mb-5 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(224,242,254,0.9),_rgba(255,255,255,1)_62%)] p-4">
@@ -469,11 +469,11 @@ function QuestionBlock({
         </div>
       ) : null}
 
-      <p className="mb-4 font-medium text-slate-900">{question.prompt}</p>
+      <p className="mb-4 font-medium text-slate-900 normal-case">{question.prompt}</p>
 
       {question.type === "short_answer" ? (
         <textarea
-          className="min-h-[96px] w-full rounded-xl border p-3"
+          className="min-h-[96px] w-full rounded-xl border p-3 normal-case"
           value={value}
           onChange={(e) => onChange(question.id, e.target.value)}
           placeholder="Write your answer here"
@@ -498,7 +498,7 @@ function QuestionBlock({
                   onChange={(e) => onChange(question.id, e.target.value)}
                   className="h-5 w-5 shrink-0 border-slate-400 text-slate-900 focus:ring-slate-400"
                 />
-                <span>{option.label}</span>
+                <span className="normal-case">{option.label}</span>
               </label>
             );
           })}
