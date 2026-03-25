@@ -6484,9 +6484,95 @@ function renderedPromptOverride(item: UnknownRecord): string | null {
   }
 }
 
+function lessonCodeFromItemId(itemId: string): string {
+  const match = itemId.toUpperCase().match(/^([A-Z]\d+)(?:-)?L([1-6])[_-][A-Z]+\d+$/);
+  return match ? `${match[1]}_L${match[2]}` : "";
+}
+
+function contrastSubjectLabel(clause: string): string {
+  const compact = singleLineText(clause).replace(/[.]+$/g, "").trim();
+  if (!compact) return "";
+  const lowered = compact.toLowerCase();
+  const markers = [
+    " is ",
+    " are ",
+    " can ",
+    " uses ",
+    " use ",
+    " keeps ",
+    " keep ",
+    " means ",
+    " measure ",
+    " measures ",
+    " tracks ",
+    " track ",
+    " counts ",
+    " count ",
+    " depends ",
+    " depend ",
+    " stays ",
+    " stay ",
+    " becomes ",
+    " become ",
+    " absorbs ",
+    " absorb ",
+    " joins ",
+    " join ",
+    " splits ",
+    " split ",
+    " circulates ",
+    " circulate ",
+    " remains ",
+    " remain ",
+    " belongs ",
+    " belong ",
+    " has ",
+    " have ",
+  ];
+  const cutIndex = markers
+    .map((marker) => lowered.indexOf(marker))
+    .filter((index) => index > 0)
+    .reduce((smallest, index) => Math.min(smallest, index), Number.POSITIVE_INFINITY);
+  return Number.isFinite(cutIndex) ? compact.slice(0, cutIndex).trim() : compact;
+}
+
+function advancedContrastAnswerPrompt(item: UnknownRecord): string | null {
+  const code = lessonCodeFromItemId(text(item.id));
+  if (!isA1ToA11Lesson(code)) return null;
+
+  const prompt = text(item.prompt).trim();
+  const promptMatch = prompt.match(/^How is .+ different from .+?( in .+\?)$/i);
+  if (!promptMatch) return null;
+
+  const contrastAnswer = [
+    text(item.correct_answer || item.correctAnswer).trim(),
+    ...asList(item.accepted_answers).map((entry) => text(entry).trim()),
+    ...asList(item.acceptedAnswers).map((entry) => text(entry).trim()),
+  ].find((entry) => /\bwhile\b/i.test(entry));
+  if (!contrastAnswer) return null;
+
+  const parts = contrastAnswer.split(/\bwhile\b/i);
+  if (parts.length !== 2) return null;
+
+  const left = contrastSubjectLabel(parts[0]);
+  const right = contrastSubjectLabel(parts[1]);
+  if (!left || !right) return null;
+
+  const normalizedPrompt = normalizePromptKey(prompt);
+  const leftKey = normalizePromptKey(left);
+  const rightKey = normalizePromptKey(right);
+  if (leftKey && rightKey && normalizedPrompt.includes(leftKey) && normalizedPrompt.includes(rightKey)) {
+    return null;
+  }
+
+  return `How is ${left} different from ${right}${promptMatch[1]}`;
+}
+
 function renderedPromptText(item: UnknownRecord): string {
   const promptOverride = renderedPromptOverride(item);
   if (promptOverride) return promptOverride;
+  const advancedContrastPrompt = advancedContrastAnswerPrompt(item);
+  if (advancedContrastPrompt) return normalizeRenderedPhysicsText(advancedContrastPrompt);
   const override = m5RenderedQuestionOverride(item);
   if (override) return override.prompt;
   return normalizeRenderedPhysicsText(text(item.prompt));
