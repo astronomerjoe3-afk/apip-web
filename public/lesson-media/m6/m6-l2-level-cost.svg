@@ -8,17 +8,17 @@
   <text x="72" y="164" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="21">
     <tspan x="72" dy="0">Specific heat capacity is the material charge</tspan>
     <tspan x="72" dy="27">for one kilogram to rise by one degree.</tspan>
-    <tspan x="72" dy="27">The Forge Ledger turns that rule into Q = m c delta T.</tspan>
+    <tspan x="72" dy="27">The Forge Ledger turns that rule into Q = mcΔT.</tspan>
   </text>
 
   <rect x="94" y="236" width="1012" height="166" rx="28" fill="#EEF4FF"/>
-  <text x="128" y="308" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">Q = m c delta T</text>
+  <text x="128" y="308" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">Q = mcΔT</text>
   <text x="350" y="302" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">mass</text>
   <text x="488" y="302" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Level Cost</text>
   <text x="720" y="302" fill="#7C3AED" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">rise</text>
   <text x="314" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">Build Size</text>
-  <text x="464" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">J per kg per degree C</text>
-  <text x="692" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">delta T</text>
+  <text x="464" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">J/kg°C</text>
+  <text x="692" y="350" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">ΔT</text>
 
   <rect x="94" y="434" width="306" height="204" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
   <rect x="448" y="434" width="306" height="204" rx="30" fill="#DCFCE7" stroke="#4ADE80" stroke-width="5"/>
@@ -43,7 +43,7 @@
   <path d="M860 586L902 518L944 586" stroke="#C084FC" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M962 586L1016 484L1070 586" stroke="#9333EA" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
   <text x="832" y="598" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
-    <tspan x="832" dy="0">A bigger delta T needs</tspan>
+    <tspan x="832" dy="0">A bigger ΔT needs</tspan>
     <tspan x="832" dy="26">a bigger bill.</tspan>
   </text>
 

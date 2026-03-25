@@ -440,7 +440,7 @@ function diffractionGratingDiagram(palette: Palette): string {
     ${textLines(920, 370, ["m = 0"], 18, "#fde68a")}
     ${textLines(890, 520, ["m = -1"], 18, palette.accentAltSoft)}
     <path d="M 520 360 A 190 190 0 0 1 694 222" fill="none" stroke="${palette.guide}" stroke-width="3" stroke-dasharray="10 8"/>
-    ${textLines(654, 258, ["theta"], 18, palette.guide)}
+    ${textLines(654, 258, ["θ"], 18, palette.guide)}
   `;
 }
 

@@ -238,7 +238,7 @@ export default function M7SimulationPanels({
         {metricCard("Beat Rate", `${formatSimulationNumber(beatRate, 0)} Hz`, "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Pulse Gap", `${formatSimulationNumber(pulseGap, 1)} m`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Ripple Run", `${formatSimulationNumber(speed, 1)} m/s`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Formal rule", "v = f lambda", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Formal rule", "v = fλ", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
       [
         "Frequency is the source launch rate.",
@@ -310,9 +310,9 @@ export default function M7SimulationPanels({
         <line x1="160" y1="170" x2="320" y2="120" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" />
         <line x1="320" y1="120" x2="500" y2={bend === "toward normal" ? 104 : bend === "away from normal" ? 146 : 120} stroke="#22c55e" strokeWidth="8" strokeLinecap="round" />
         <text x="60" y="98" fill="#0f172a" fontSize="16">v = {formatSimulationNumber(speedA, 0)} m/s</text>
-        <text x="60" y="126" fill="#0f172a" fontSize="16">lambda = {formatSimulationNumber(lambdaA, 2)} m</text>
+        <text x="60" y="126" fill="#0f172a" fontSize="16">λ = {formatSimulationNumber(lambdaA, 2)} m</text>
         <text x="354" y="98" fill="#0f172a" fontSize="16">v = {formatSimulationNumber(speedB, 0)} m/s</text>
-        <text x="354" y="126" fill="#0f172a" fontSize="16">lambda = {formatSimulationNumber(lambdaB, 2)} m</text>
+        <text x="354" y="126" fill="#0f172a" fontSize="16">λ = {formatSimulationNumber(lambdaB, 2)} m</text>
       </svg>,
       <>
         {metricCard("Frequency", `${formatSimulationNumber(frequency, 0)} Hz`, "border-sky-200 bg-sky-50 text-sky-900")}
@@ -357,7 +357,7 @@ export default function M7SimulationPanels({
         <text x="60" y="188" fill="#475569" fontSize="15">Comparable gate size and wavelength give a broader outgoing fan.</text>
       </svg>,
       <>
-        {metricCard("Gate-width ratio", `${formatSimulationNumber(ratio, 2)} x lambda`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Gate-width ratio", `${formatSimulationNumber(ratio, 2)} × λ`, "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Spread strength", `${formatSimulationNumber(spread, 0)} deg fan`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Boundary", edgeMode ? "edge" : "opening", "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Diffraction", ratio <= 1.5 ? "strong" : ratio <= 3 ? "moderate" : "weak", "border-amber-200 bg-amber-50 text-amber-900")}

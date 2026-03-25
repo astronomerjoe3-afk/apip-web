@@ -10,7 +10,7 @@
   <text x="158" y="304" fill="#1D4ED8" font-family="Georgia, serif" font-size="30" font-weight="700">carrier in</text>
   <text x="512" y="336" fill="#166534" font-family="Georgia, serif" font-size="34" font-weight="700">Lift station</text>
   <text x="500" y="388" fill="#166534" font-family="Georgia, serif" font-size="30">boost per token</text>
-  <text x="526" y="438" fill="#166534" font-family="Georgia, serif" font-size="36" font-weight="700">V = delta E / Q</text>
+  <text x="526" y="438" fill="#166534" font-family="Georgia, serif" font-size="36" font-weight="700">V = ΔE / Q</text>
   <text x="914" y="304" fill="#92400E" font-family="Georgia, serif" font-size="30" font-weight="700">carrier out</text>
   <line x1="310" y1="390" x2="430" y2="390" stroke="#2563EB" stroke-width="14" stroke-linecap="round"/>
   <line x1="760" y1="390" x2="880" y2="390" stroke="#16A34A" stroke-width="14" stroke-linecap="round"/>

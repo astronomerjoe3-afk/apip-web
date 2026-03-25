@@ -446,7 +446,7 @@ export function m2ScaffoldFocusExtras(code: string): string[] {
         "Arrow Split is a bookkeeping move that rewrites one angled force into components.",
         "Direction is read from the +x axis to the rebuilt resultant.",
         "Only same-axis components add like ordinary signed numbers; perpendicular components rebuild a diagonal.",
-        "Once net x and net y are known, use theta = tan^-1(y / x) with a quadrant check.",
+        "Once net x and net y are known, use θ = tan⁻¹(y / x) with a quadrant check.",
       ];
     default:
       return [];
@@ -546,7 +546,7 @@ export function m2ScaffoldMediaCards(code: string): UnknownRecord[] {
       highlights: [
         "Find net x and net y first.",
         "Measure the angle from +x to the resultant, not from the y-axis.",
-        "Use theta = tan^-1(y / x) and check the quadrant from the signs.",
+        "Use θ = tan⁻¹(y / x) and check the quadrant from the signs.",
       ],
     });
   }

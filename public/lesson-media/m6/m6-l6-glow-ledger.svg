@@ -26,7 +26,7 @@
   <rect x="630" y="236" width="486" height="386" rx="30" fill="#EEF4FF" stroke="#93C5FD" stroke-width="5"/>
   <text x="666" y="282" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Forge Ledger</text>
   <text x="676" y="338" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="24">Stage 1: warm-up</text>
-  <text x="1076" y="338" text-anchor="end" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Q = m c delta T</text>
+  <text x="1076" y="338" text-anchor="end" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Q = mcΔT</text>
   <rect x="676" y="356" width="308" height="34" rx="17" fill="#BFDBFE"/>
   <rect x="676" y="356" width="208" height="34" rx="17" fill="#2563EB"/>
   <text x="676" y="442" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="24">Stage 2: Form Gate</text>

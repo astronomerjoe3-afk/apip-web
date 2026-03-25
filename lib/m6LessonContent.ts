@@ -37,7 +37,7 @@ const M6_VISUAL_META: Record<string, M6QuestionVisualMeta> = {
     visual_callouts: [
       "Bigger Build Size means more material to warm.",
       "Higher Level Cost means more energy per kilogram per degree.",
-      "Q = m c delta T is the formal Forge Ledger rule.",
+      "Q = mcΔT is the formal Forge Ledger rule.",
     ],
   },
   M6L3: {
@@ -102,25 +102,25 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "The Forge Ledger records transfer, not the current temperature.",
       "Same energy can still give different temperature rises.",
     ],
-    tryFirst: "Set both blocks to the same starting Warmth Level, give each 1200 J, keep Level Cost at 200 J/kg degree C, and change Block B from 1 kg to 3 kg. The ledger still matches, but Block A rises much more because the same payment is spread across less mass.",
+    tryFirst: "Set both blocks to the same starting Warmth Level, give each 1200 J, keep Level Cost at 200 J/kg°C, and change Block B from 1 kg to 3 kg. The ledger still matches, but Block A rises much more because the same payment is spread across less mass.",
     takeaway: "The first thermal distinction to protect is temperature versus transferred energy.",
   },
   M6_L2: {
     title: "Level Cost calculator lab",
     instructions: "Turn the warm-up rule into numbers by controlling mass, Level Cost, and target rise.",
-    taskPrompt: "Build one heating bill from scratch with Q = m c delta T, then rearrange the same rule to predict a temperature rise when the energy bill is fixed.",
+    taskPrompt: "Build one heating bill from scratch with Q = mcΔT, then rearrange the same rule to predict a temperature rise when the energy bill is fixed.",
     exploreSteps: [
-      "Choose mass, c, and delta T.",
+      "Choose mass, c, and ΔT.",
       "Predict the Forge Ledger total before reading it.",
-      "Reverse the rule so delta T becomes the unknown.",
+      "Reverse the rule so ΔT becomes the unknown.",
     ],
     watchFor: [
       "Specific heat capacity is energy per kilogram per degree.",
       "Mass and c are separate multipliers in the bill.",
       "Rearranging the formula does not change the physical story.",
     ],
-    tryFirst: "Set mass to 2 kg, c to 500 J/kg degree C, and delta T to 6 degree C. Predict 6000 J before you look, then halve the bill and check that the same block would now rise only 3 degree C.",
-    takeaway: "Q = m c delta T is just the Level-Forge warm-up rule written in symbols.",
+    tryFirst: "Set mass to 2 kg, c to 500 J/kg°C, and ΔT to 6 °C. Predict 6000 J before you look, then halve the bill and check that the same block would now rise only 3 °C.",
+    takeaway: "Q = mcΔT is just the Level-Forge warm-up rule written in symbols.",
   },
   M6_L3: {
     title: "Form Gate lab",
@@ -153,7 +153,7 @@ const M6_SIMULATION_COPY: Record<string, M6SimulationCopy> = {
       "Metals conduct well because electrons help.",
       "The solid path stays in place while energy passes through it.",
     ],
-    tryFirst: "Keep a 60 degree C temperature difference, run it through a metal bar first, and then insert a gap or swap to an insulating bar. The far end only warms quickly when the contact path is unbroken and the material is a good conductor.",
+    tryFirst: "Keep a 60 °C temperature difference, run it through a metal bar first, and then insert a gap or swap to an insulating bar. The far end only warms quickly when the contact path is unbroken and the material is a good conductor.",
     takeaway: "Conduction is a relay through matter, not the whole material moving like a fluid.",
   },
   M6_L5: {
@@ -206,7 +206,7 @@ export function m6ScaffoldFocusExtras(code: string): string[] {
       ];
     case "M6_L2":
       return [
-        "Write the heating bill in the order m, c, and delta T before you multiply.",
+        "Write the heating bill in the order m, c, and ΔT before you multiply.",
         "Keep the units visible so the cost really means per kilogram per degree.",
         "Only rearrange the formula after you decide which quantity is unknown.",
       ];
@@ -250,7 +250,7 @@ export function m6ScaffoldCoreBullets(code: string): string[] {
     case "M6_L2":
       return [
         "Specific heat capacity is energy per kilogram per degree.",
-        "Mass and c both matter in Q = m c delta T.",
+        "Mass and c both matter in Q = mcΔT.",
         "The heating bill grows with mass, cost, and target rise.",
       ];
     case "M6_L3":

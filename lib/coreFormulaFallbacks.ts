@@ -18,7 +18,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "speed = distance / time", meaning: "Speed compares route length with elapsed time.", conditions: "Use when only how fast matters.", unitsText: "m/s" },
   ],
   M1_L3: [
-    { standardFormula: "a = delta v / t", meaning: "Acceleration is the rate of change of velocity.", conditions: "Use when velocity changes over a known time interval.", unitsText: "m/s^2" },
+    { standardFormula: "a = Δv / t", meaning: "Acceleration is the rate of change of velocity.", conditions: "Use when velocity changes over a known time interval.", unitsText: "m/s^2" },
   ],
   M1_L4: [
     { standardFormula: "v = u + at", meaning: "Final velocity comes from initial velocity plus constant acceleration over time.", conditions: "Use only for constant acceleration.", unitsText: "m/s" },
@@ -44,20 +44,20 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "sum of momentum before = sum of momentum after", meaning: "Total momentum is conserved in a closed system.", conditions: "Use only when the whole interacting system is treated as the boundary.", unitsText: "kg m/s" },
   ],
   M2_L4: [
-    { standardFormula: "moment = force x perpendicular distance", meaning: "Turning effect depends on force size and perpendicular reach from the pivot.", conditions: "Use the perpendicular distance to the line of action.", unitsText: "N m" },
+    { standardFormula: "moment = force × perpendicular distance", meaning: "Turning effect depends on force size and perpendicular reach from the pivot.", conditions: "Use the perpendicular distance to the line of action.", unitsText: "N m" },
   ],
   M2_L5: [
     { standardFormula: "sum of clockwise moments = sum of anticlockwise moments", meaning: "Rotational equilibrium needs balanced turning effects.", conditions: "Use when the object is balanced and not rotating.", unitsText: "N m" },
     { standardFormula: "stable if the line of action of weight falls within the base", meaning: "Stability depends on where the weight line falls relative to the support area.", conditions: "Use when comparing tipping and balance.", unitsText: "" },
   ],
   M2_L6: [
-    { standardFormula: "Fx = F cos(theta)", meaning: "The horizontal component is the part of the vector along the x-axis.", conditions: "Use when resolving a vector into perpendicular components.", unitsText: "N" },
-    { standardFormula: "Fy = F sin(theta)", meaning: "The vertical component is the part of the vector along the y-axis.", conditions: "Use when resolving a vector into perpendicular components.", unitsText: "N" },
+    { standardFormula: "Fx = F cos(θ)", meaning: "The horizontal component is the part of the vector along the x-axis.", conditions: "Use when resolving a vector into perpendicular components.", unitsText: "N" },
+    { standardFormula: "Fy = F sin(θ)", meaning: "The vertical component is the part of the vector along the y-axis.", conditions: "Use when resolving a vector into perpendicular components.", unitsText: "N" },
     { standardFormula: "resultant = sqrt(Fx^2 + Fy^2)", meaning: "Perpendicular components rebuild into one resultant vector geometrically.", conditions: "Use after all x-components and y-components are combined separately.", unitsText: "N" },
   ],
   M3_L1: [
     { standardFormula: "total input energy = useful output energy + wasted energy", meaning: "Energy accounting must balance useful gain and losses.", conditions: "Use when tracing an energy transfer or machine process.", unitsText: "J" },
-    { standardFormula: "delta E = energy transferred", meaning: "A transfer changes the energy stored in a system.", conditions: "Use when the store change is known or easier to track than the mechanism.", unitsText: "J" },
+    { standardFormula: "ΔE = energy transferred", meaning: "A transfer changes the energy stored in a system.", conditions: "Use when the store change is known or easier to track than the mechanism.", unitsText: "J" },
   ],
   M3_L2: [
     { standardFormula: "gravitational potential energy = mgh", meaning: "Energy stored by height depends on mass, gravitational field strength, and height.", conditions: "Use near Earth's surface or when g is supplied.", unitsText: "J" },
@@ -66,12 +66,12 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "kinetic energy = 1/2 mv^2", meaning: "Energy stored in motion depends on mass and speed squared.", conditions: "Use for translational motion.", unitsText: "J" },
   ],
   M3_L4: [
-    { standardFormula: "work done = force x distance", meaning: "Aligned force transfers energy when it acts through a distance.", conditions: "Use in the simple aligned-force case.", unitsText: "J" },
+    { standardFormula: "work done = force × distance", meaning: "Aligned force transfers energy when it acts through a distance.", conditions: "Use in the simple aligned-force case.", unitsText: "J" },
     { standardFormula: "work done = change in energy", meaning: "Work is another name for an energy transfer into or out of a store.", conditions: "Use when the store change is already known.", unitsText: "J" },
   ],
   M3_L5: [
     { standardFormula: "power = energy transferred / time", meaning: "Power measures how quickly energy is transferred.", conditions: "Use for the rate of working or transfer.", unitsText: "W" },
-    { standardFormula: "efficiency = useful output / total input x 100%", meaning: "Efficiency measures the fraction of input that becomes useful output.", conditions: "Use when comparing useful energy or power with the total supplied.", unitsText: "%" },
+    { standardFormula: "efficiency = (useful output / total input) × 100%", meaning: "Efficiency measures the fraction of input that becomes useful output.", conditions: "Use when comparing useful energy or power with the total supplied.", unitsText: "%" },
   ],
   M3_L6: [
     { standardFormula: "total energy in = total useful energy out + total wasted energy", meaning: "Multi-stage energy missions still obey one overall energy ledger.", conditions: "Use when a problem has several linked energy stages.", unitsText: "J" },
@@ -85,17 +85,17 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "F = pA", meaning: "Force on a surface equals pressure times area.", conditions: "Use when pressure and contact area are known.", unitsText: "N" },
   ],
   M4_L3: [
-    { standardFormula: "p = rho g h", meaning: "Liquid pressure depends on density, gravitational field strength, and depth.", conditions: "Use for pressure in a static liquid column.", unitsText: "Pa" },
+    { standardFormula: "p = ρgh", meaning: "Liquid pressure depends on density, gravitational field strength, and depth.", conditions: "Use for pressure in a static liquid column.", unitsText: "Pa" },
   ],
   M4_L4: [
     { standardFormula: "p1 = p2", meaning: "Two points in the same resting liquid at the same depth have the same pressure.", conditions: "Use only when the liquid is the same and both points are at the same level.", unitsText: "Pa" },
-    { standardFormula: "p = rho g h", meaning: "The equal-pressure result comes from the same rho, g, and h at matching depths.", conditions: "Use for points in a resting liquid.", unitsText: "Pa" },
+    { standardFormula: "p = ρgh", meaning: "The equal-pressure result comes from the same rho, g, and h at matching depths.", conditions: "Use for points in a resting liquid.", unitsText: "Pa" },
   ],
   M4_L5: [
     { standardFormula: "F = pA", meaning: "Force due to pressure depends on local pressure and patch area.", conditions: "Use after the pressure at that point is known.", unitsText: "N" },
   ],
   M4_L6: [
-    { standardFormula: "p_total = p_atm + rho g h", meaning: "Open-surface liquid pressure adds atmospheric pressure to the liquid contribution.", conditions: "Use for pressure below the surface of a liquid open to the air.", unitsText: "Pa", constants: "Use atmospheric pressure about 1.0 x 10^5 Pa at sea level unless the question gives a different value." },
+    { standardFormula: "p_total = p_atm + ρgh", meaning: "Open-surface liquid pressure adds atmospheric pressure to the liquid contribution.", conditions: "Use for pressure below the surface of a liquid open to the air.", unitsText: "Pa", constants: "Use atmospheric pressure about 1.0 × 10^5 Pa at sea level unless the question gives a different value." },
   ],
   M5_L1: [
     { standardFormula: "state description = particle spacing + particle motion + particle attractions", meaning: "A particle-model state needs spacing, motion, and attraction together.", conditions: "Use when classifying the state of matter.", unitsText: "" },
@@ -123,7 +123,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "temperature change depends on energy transferred, mass, and material", meaning: "The same energy input does not force the same temperature rise in every sample.", conditions: "Use before choosing which thermal quantity is being compared.", unitsText: "" },
   ],
   M6_L2: [
-    { standardFormula: "Q = mc delta T", meaning: "Energy for heating depends on mass, specific heat capacity, and temperature change.", conditions: "Use for a temperature-rise or temperature-drop stage with no state change.", unitsText: "J" },
+    { standardFormula: "Q = mcΔT", meaning: "Energy for heating depends on mass, specific heat capacity, and temperature change.", conditions: "Use for a temperature-rise or temperature-drop stage with no state change.", unitsText: "J" },
   ],
   M6_L3: [
     { standardFormula: "Q = mL", meaning: "Latent-heat energy depends on mass and the latent heat of the material.", conditions: "Use only for a state-change stage.", unitsText: "J" },
@@ -136,7 +136,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "cooler fluid -> higher density -> sink", meaning: "Cooler fluid moves in or sinks to complete the convection loop.", conditions: "Use for the returning part of a convection current.", unitsText: "" },
   ],
   M6_L6: [
-    { standardFormula: "Q_total = m c delta T + mL", meaning: "A full thermal mission can include a warm-up stage and a state-change stage that must be added separately.", conditions: "Use when both a temperature change and a state change occur.", unitsText: "J" },
+    { standardFormula: "Q_total = mcΔT + mL", meaning: "A full thermal mission can include a warm-up stage and a state-change stage that must be added separately.", conditions: "Use when both a temperature change and a state change occur.", unitsText: "J" },
     { standardFormula: "radiation can cross a vacuum", meaning: "Thermal radiation does not need a material medium.", conditions: "Use when identifying the transfer route across a gap.", unitsText: "" },
   ],
   M7_L1: [
@@ -147,13 +147,13 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "longitudinal wave = local motion parallel to wave travel", meaning: "Longitudinal motion stays along the same line as propagation.", conditions: "Use when classifying wave type.", unitsText: "" },
   ],
   M7_L3: [
-    { standardFormula: "v = f lambda", meaning: "Wave speed depends on frequency and wavelength together.", conditions: "Use when any two of speed, frequency, and wavelength are known.", unitsText: "m/s, Hz, m" },
+    { standardFormula: "v = fλ", meaning: "Wave speed depends on frequency and wavelength together.", conditions: "Use when any two of speed, frequency, and wavelength are known.", unitsText: "m/s, Hz, m" },
   ],
   M7_L4: [
     { standardFormula: "angle of incidence = angle of reflection", meaning: "Reflection at a flat surface keeps equal angles to the normal.", conditions: "Measure both angles from the normal.", unitsText: "degrees" },
   ],
   M7_L5: [
-    { standardFormula: "v = f lambda", meaning: "Across a boundary the speed and wavelength can change together while the source keeps the frequency fixed.", conditions: "Use when comparing one medium with another.", unitsText: "m/s, Hz, m" },
+    { standardFormula: "v = fλ", meaning: "Across a boundary the speed and wavelength can change together while the source keeps the frequency fixed.", conditions: "Use when comparing one medium with another.", unitsText: "m/s, Hz, m" },
     { standardFormula: "frequency stays constant across a boundary", meaning: "The source sets the frequency even when the medium changes.", conditions: "Use in refraction reasoning.", unitsText: "Hz" },
   ],
   M7_L6: [
@@ -190,7 +190,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "sound in air = longitudinal wave of compressions and rarefactions", meaning: "The pattern travels while particles only oscillate locally.", conditions: "Use when describing sound in air.", unitsText: "" },
   ],
   M9_L3: [
-    { standardFormula: "v = f lambda", meaning: "Sound speed, frequency, and wavelength are linked by the wave equation.", conditions: "Use when any two sound-wave quantities are known.", unitsText: "m/s, Hz, m" },
+    { standardFormula: "v = fλ", meaning: "Sound speed, frequency, and wavelength are linked by the wave equation.", conditions: "Use when any two sound-wave quantities are known.", unitsText: "m/s, Hz, m" },
   ],
   M9_L4: [
     { standardFormula: "audible range is about 20 Hz to 20 kHz", meaning: "Most human hearing lies between the lower hearing limit and the ultrasound boundary.", conditions: "Use when classifying audible sound versus ultrasound.", unitsText: "Hz" },
@@ -290,7 +290,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "gamma emission: A unchanged and Z unchanged", meaning: "Gamma emission changes nuclear energy state without changing nucleon counts.", conditions: "Use for gamma emission.", unitsText: "" },
   ],
   M13_L4: [
-    { standardFormula: "N = N0 x (1/2)^(t / half-life)", meaning: "Equal half-life intervals halve the number that remains.", conditions: "Use for a large-sample radioactive decay calculation.", unitsText: "" },
+    { standardFormula: "N = N₀ × (1/2)^(t / half-life)", meaning: "Equal half-life intervals halve the number that remains.", conditions: "Use for a large-sample radioactive decay calculation.", unitsText: "" },
     { standardFormula: "remaining fraction halves each half-life", meaning: "Half-life is a multiplicative halving rule, not repeated subtraction of a fixed amount.", conditions: "Use when reasoning without a full calculation.", unitsText: "" },
   ],
   M13_L5: [
@@ -311,10 +311,10 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "galaxy = gravitationally bound system of many stars, gas, and dust", meaning: "Gravity is the reason a galaxy counts as one physical system.", conditions: "Use when separating a star, a Solar System, a galaxy, and the universe.", unitsText: "" },
   ],
   M14_L4: [
-    { standardFormula: "1 light-year = c x 1 year", meaning: "A light-year is the distance light travels in one year.", conditions: "Use when converting the meaning of a light-year into a distance idea.", unitsText: "m or light-years" },
+    { standardFormula: "1 light-year = c × 1 year", meaning: "A light-year is the distance light travels in one year.", conditions: "Use when converting the meaning of a light-year into a distance idea.", unitsText: "m or light-years" },
   ],
   M14_L5: [
-    { standardFormula: "z = (lambda_observed - lambda_emitted) / lambda_emitted", meaning: "Redshift compares the wavelength change with the emitted wavelength.", conditions: "Use when quantifying cosmological redshift.", unitsText: "" },
+    { standardFormula: "z = (λ_observed - λ_emitted) / λ_emitted", meaning: "Redshift compares the wavelength change with the emitted wavelength.", conditions: "Use when quantifying cosmological redshift.", unitsText: "" },
   ],
   M14_L6: [
     { standardFormula: "greater galaxy distance -> greater cosmological redshift", meaning: "The distance-redshift trend is evidence for cosmic expansion.", conditions: "Use when linking observation to the Big Bang model.", unitsText: "" },

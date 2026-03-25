@@ -23,7 +23,7 @@
       "Larger c also needs more energy for the same rise."
     ],
     "tryFirst": "Lock the energy input and change only the level cost. That makes the role of specific heat capacity obvious.",
-    "takeaway": "Specific heat capacity sets the heating cost per kilogram per degree, so the full bookkeeping must keep m, c, and delta T together."
+    "takeaway": "Specific heat capacity sets the heating cost per kilogram per degree, so the full bookkeeping must keep m, c, and ΔT together."
   },
   "A6_L3": {
     "slug": "a6_l3_latent_heat_state_change",
@@ -188,10 +188,10 @@
     "visualCaption": "The plate-gap board keeps voltage drop, gap size, and uniform field arrows together so field strength is read as potential gradient.",
     "visualCallouts": [
       "A uniform field has the same size and direction throughout the central gap.",
-      "Field strength in the gap is delta V divided by separation.",
+      "Field strength in the gap is ΔV divided by separation.",
       "Smaller plate spacing means a steeper electric slope at fixed voltage."
     ],
-    "tryFirst": "Hold the voltage fixed and shrink the gap. That one comparison shows why E = delta V divided by d is an electric-slope story.",
+    "tryFirst": "Hold the voltage fixed and shrink the gap. That one comparison shows why E = ΔV divided by d is an electric-slope story.",
     "takeaway": "Uniform-field strength is the potential drop per unit distance between the plates."
   },
   "A8_L4": {
@@ -358,7 +358,7 @@
     "visualCallouts": [
       "Binding energy is the energy needed to separate the nucleus completely.",
       "Mass defect is the missing mass compared with free nucleons.",
-      "Delta E equals delta m times c squared links that mass difference to energy."
+      "ΔE = Δmc² links that mass difference to energy."
     ],
     "tryFirst": "Start from the separated nucleons. That makes the meaning of missing mass much easier to trust.",
     "takeaway": "Binding energy and mass defect are two views of the same nuclear credit: tighter binding means lower mass and more released energy."

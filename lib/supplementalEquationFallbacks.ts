@@ -5,7 +5,7 @@ import type { FormulaFallbackEntry } from "./coreFormulaFallbacks";
 const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   M8_L2: [
     {
-      standardFormula: "n1 sin(theta1) = n2 sin(theta2)",
+      standardFormula: "n1 sin(θ1) = n2 sin(θ2)",
       meaning: "Snell's law links the angles and refractive indices across a boundary.",
       conditions: "Use for refraction at a boundary between two media.",
       unitsText: "dimensionless refractive index, degrees or radians",
@@ -57,7 +57,7 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   M12_L3: [
     {
-      standardFormula: "F = B I L sin(theta)",
+      standardFormula: "F = BIL sin(θ)",
       meaning: "The magnetic force on a current-carrying conductor depends on field strength, current, conductor length, and angle.",
       conditions: "Use when a straight conductor carries current in a magnetic field.",
       unitsText: "N, T, A, m",
@@ -103,11 +103,11 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   M14_L6: [
     {
-      standardFormula: "v = H0 d",
+      standardFormula: "v = H₀d",
       meaning: "Hubble's law links recession speed to distance for distant galaxies.",
       conditions: "Use for large-scale cosmological recession in the simple Hubble-law model.",
       unitsText: "m/s or km/s",
-      constants: "Use H0 in the form given by the question, often about 70 km s^-1 Mpc^-1.",
+      constants: "Use H₀ in the form given by the question, often about 70 km s^-1 Mpc^-1.",
     },
   ],
   A1_L1: [
@@ -116,12 +116,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       meaning: "Particle charge is an integer multiple of the elementary charge.",
       conditions: "Use when turning a charge tag into the physical charge of a particle.",
       unitsText: "C or e",
-      constants: "Use e = 1.60 x 10^-19 C.",
+      constants: "Use e = 1.60 × 10^-19 C.",
     },
   ],
   A1_L3: [
     {
-      standardFormula: "E = h f",
+      standardFormula: "E = hf",
       meaning: "Photon energy depends on Planck's constant and frequency.",
       conditions: "Use for photon-energy reasoning in pair production or annihilation chains.",
       unitsText: "J or eV",
@@ -139,7 +139,7 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       meaning: "Electromagnetic interaction strength between point charges follows the inverse-square law.",
       conditions: "Use when the interaction is mediated by electric charge in the point-charge model.",
       unitsText: "N",
-      constants: "Use Coulomb's constant k = 8.99 x 10^9 N m^2 C^-2 in vacuum.",
+      constants: "Use Coulomb's constant k = 8.99 × 10^9 N m^2 C^-2 in vacuum.",
     },
   ],
   A1_L5: [
@@ -184,7 +184,7 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A2_L2: [
     {
-      standardFormula: "delta(E) = h f = h c / lambda",
+      standardFormula: "ΔE = hf = hc / λ",
       meaning: "A spectral line comes from an energy gap matched by the emitted or absorbed photon.",
       conditions: "Use for emission or absorption lines tied to atomic energy-level transitions.",
       unitsText: "J, Hz, m",
@@ -192,13 +192,13 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A2_L4: [
     {
-      standardFormula: "delta(E) = h f",
+      standardFormula: "ΔE = hf",
       meaning: "Excitation needs a photon energy that matches the allowed energy gap.",
       conditions: "Use when a photon excites an electron between allowed levels.",
       unitsText: "J, Hz",
     },
     {
-      standardFormula: "h f >= ionisation energy",
+      standardFormula: "hf >= ionisation energy",
       meaning: "Ionisation requires photon energy at least equal to the ionisation threshold.",
       conditions: "Use when deciding whether an incident photon can ionise the atom.",
       unitsText: "J or eV",
@@ -206,13 +206,13 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A2_L6: [
     {
-      standardFormula: "delta(E) = h f",
+      standardFormula: "ΔE = hf",
       meaning: "Photon packets reveal quantized atomic gaps through the energy they carry.",
       conditions: "Use when tying spectral evidence back to atomic energy levels.",
       unitsText: "J, Hz",
     },
     {
-      standardFormula: "lambda = h / p",
+      standardFormula: "λ = h / p",
       meaning: "de Broglie wavelength links matter momentum to wave behaviour.",
       conditions: "Use when connecting particle momentum to wave-like evidence.",
       unitsText: "m, kg m/s",
@@ -294,13 +294,13 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A10_L3: [
     {
-      standardFormula: "activity A = lambda N",
+      standardFormula: "A = λN",
       meaning: "Activity depends on the decay constant and the number of undecayed nuclei.",
       conditions: "Use when linking decay rate to the number of unstable nuclei present.",
       unitsText: "Bq, s^-1",
     },
     {
-      standardFormula: "lambda = ln(2) / t_(1/2)",
+      standardFormula: "λ = ln(2) / t_(1/2)",
       meaning: "The decay constant is linked directly to the half-life.",
       conditions: "Use when converting between half-life and decay constant.",
       unitsText: "s^-1",
@@ -308,22 +308,22 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A10_L4: [
     {
-      standardFormula: "delta(E) = delta(m) c^2",
+      standardFormula: "ΔE = Δmc²",
       meaning: "A mass defect corresponds to binding energy through mass-energy equivalence.",
       conditions: "Use when comparing separated nucleons with the bound nucleus.",
       unitsText: "J, kg",
     },
     {
-      standardFormula: "R = R0 A^(1/3)",
+      standardFormula: "R = R₀A^(1/3)",
       meaning: "Nuclear radius grows with the cube root of nucleon number in the simple nuclear-size model.",
       conditions: "Use for approximate nuclear-size estimates.",
       unitsText: "m",
-      constants: "Use R0 about 1.2 x 10^-15 m unless the question gives a different value.",
+      constants: "Use R₀ about 1.2 × 10^-15 m unless the question gives a different value.",
     },
   ],
   A10_L5: [
     {
-      standardFormula: "delta(E) = delta(m) c^2",
+      standardFormula: "ΔE = Δmc²",
       meaning: "The released fission energy comes from the mass defect between the starting and final states.",
       conditions: "Use when linking nuclear-energy release to binding-energy change in fission.",
       unitsText: "J, kg",
@@ -331,7 +331,7 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A10_L6: [
     {
-      standardFormula: "delta(E) = delta(m) c^2",
+      standardFormula: "ΔE = Δmc²",
       meaning: "Fusion releases energy when the products are more tightly bound and the total mass decreases.",
       conditions: "Use when linking nuclear-energy release to binding-energy change in fusion.",
       unitsText: "J, kg",
@@ -359,7 +359,7 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "N",
     },
     {
-      standardFormula: "T^2 = 4 pi^2 r^3 / (G M)",
+      standardFormula: "T² = 4π²r³ / (GM)",
       meaning: "Orbital period depends on orbital radius and the central mass.",
       conditions: "Use for circular or nearly circular orbits around a dominant central mass.",
       unitsText: "s",
@@ -367,18 +367,18 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A11_L3: [
     {
-      standardFormula: "lambda_max T = b",
+      standardFormula: "λ_max T = b",
       meaning: "Wien's displacement law links a star's peak wavelength to its surface temperature.",
       conditions: "Use when estimating stellar surface temperature from the spectrum peak.",
       unitsText: "m, K",
-      constants: "Use Wien's constant b = 2.90 x 10^-3 m K.",
+      constants: "Use Wien's constant b = 2.90 × 10^-3 m K.",
     },
     {
-      standardFormula: "L = 4 pi R^2 sigma T^4",
+      standardFormula: "L = 4πR²σT⁴",
       meaning: "A star's luminosity depends on radius and surface temperature.",
       conditions: "Use for blackbody-style stellar luminosity estimates.",
       unitsText: "W",
-      constants: "Use sigma = 5.67 x 10^-8 W m^-2 K^-4 when the relation is used quantitatively.",
+      constants: "Use σ = 5.67 x 10^-8 W m^-2 K^-4 when the relation is used quantitatively.",
     },
   ],
   A11_L4: [
@@ -397,17 +397,17 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A11_L6: [
     {
-      standardFormula: "z = delta(lambda) / lambda_emitted",
+      standardFormula: "z = Δλ / λ_emitted",
       meaning: "Redshift compares the wavelength change with the emitted wavelength.",
       conditions: "Use when measuring cosmological redshift from spectral lines.",
       unitsText: "no unit",
     },
     {
-      standardFormula: "v = H0 d",
+      standardFormula: "v = H₀d",
       meaning: "Hubble's law links recession speed to distance for distant galaxies.",
       conditions: "Use for large-scale cosmological recession in the simple Hubble-law model.",
       unitsText: "m/s or km/s",
-      constants: "Use H0 in the form given by the question, often about 70 km s^-1 Mpc^-1.",
+      constants: "Use H₀ in the form given by the question, often about 70 km s^-1 Mpc^-1.",
     },
   ],
 };

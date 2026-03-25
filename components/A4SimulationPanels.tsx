@@ -222,7 +222,7 @@ export default function A4SimulationPanels({
       <>
         {sliderField("Particle count N", `${formatSimulationNumber(count, 2)}`, <input className="w-full" type="range" min="0.8" max="3" step="0.05" value={count} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
         {sliderField("Molecule mass m", `${formatSimulationNumber(mass, 2)}`, <input className="w-full" type="range" min="0.8" max="3" step="0.05" value={mass} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
-        {sliderField("Mean square speed <c^2>", `${formatSimulationNumber(meanSquare, 2)}`, <input className="w-full" type="range" min="0.8" max="3" step="0.05" value={meanSquare} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Mean square speed ⟨c²⟩", `${formatSimulationNumber(meanSquare, 2)}`, <input className="w-full" type="range" min="0.8" max="3" step="0.05" value={meanSquare} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
         {sliderField("Volume V", `${formatSimulationNumber(volume, 2)}`, <input className="w-full" type="range" min="0.8" max="2.4" step="0.05" value={volume} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
       </>,
       "Kinetic-theory board",
@@ -231,7 +231,7 @@ export default function A4SimulationPanels({
         {particleDots(9, 238, 154, true)}
         <line x1="280" y1="122" x2="374" y2="122" stroke="#f97316" strokeWidth="6" />
         <rect x="390" y="60" width="214" height="124" rx="24" fill="#eff6ff" />
-        <text x="497" y="106" fill="#0f172a" fontSize="26" fontWeight="700" textAnchor="middle">pV = (1/3)Nm&lt;c^2&gt;</text>
+        <text x="497" y="106" fill="#0f172a" fontSize="26" fontWeight="700" textAnchor="middle">pV = (1/3)Nm⟨c²⟩</text>
         <text x="497" y="144" fill="#0f172a" fontSize="22" textAnchor="middle">compare with pV = NkT</text>
       </svg>,
       <>

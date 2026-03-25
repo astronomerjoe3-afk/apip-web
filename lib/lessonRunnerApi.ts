@@ -1047,11 +1047,30 @@ function valueIndex(value: unknown): number {
   return Number.isFinite(numeric) ? numeric : -1;
 }
 
-function normalizePromptKey(value: unknown): string {
-  return text(value)
-    .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
+function normalizePhysicsSymbolsForMatching(value: string): string {
+  return value
+    .replace(/μ₀|μ0|mu0/gi, " mu0 ")
+    .replace(/ε₀|ε0|epsilon0/gi, " epsilon0 ")
+    .replace(/λ|Λ/g, " lambda ")
+    .replace(/φ|Φ/g, " phi ")
+    .replace(/θ|Θ/g, " theta ")
+    .replace(/ω/g, " omega ")
+    .replace(/σ|Σ/g, " sigma ")
+    .replace(/π|Π/g, " pi ")
+    .replace(/Ω/g, " ohm ")
     .replace(/[Δδ]/g, " delta ")
     .replace(/[ρΡ]/g, " rho ")
+    .replace(/²/g, "^2")
+    .replace(/³/g, "^3")
+    .replace(/⁴/g, "^4")
+    .replace(/×/g, " x ")
+    .replace(/≈/g, " approx ")
+    .replace(/°/g, " degrees ");
+}
+
+function normalizePromptKey(value: unknown): string {
+  return normalizePhysicsSymbolsForMatching(text(value))
+    .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/[^a-z0-9]+/g, " ")
@@ -1060,10 +1079,8 @@ function normalizePromptKey(value: unknown): string {
 }
 
 function normalizeOpenAnswer(value: unknown): string {
-  return text(value)
+  return normalizePhysicsSymbolsForMatching(text(value))
     .replace(/^(Try the same lesson idea in a fresh context: |Apply the same lesson idea in a new check: |Use the rule carefully here: |Try the concept again in a fresh question: |Use the lesson idea one more time here: )/i, "")
-    .replace(/[Δδ]/g, " delta ")
-    .replace(/[ρΡ]/g, " rho ")
     .toLowerCase()
     .normalize("NFKD")
     .replace(/,/g, "")
@@ -6302,11 +6319,46 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
 
 function normalizeRenderedPhysicsText(value: string): string {
   return value
+    .replace(/\bmu\s*0\b/gi, "μ₀")
+    .replace(/\bepsilon\s*0\b/gi, "ε₀")
+    .replace(/\b([RrHh])0\b/g, "$1₀")
+    .replace(/\bN0\b/g, "N₀")
+    .replace(/\bDelta\s+([A-Za-z](?:_[A-Za-z0-9]+)?)/g, "Δ$1")
     .replace(/\bdelta\s+([A-Za-z](?:_[A-Za-z0-9]+)?)/g, "Δ$1")
+    .replace(/\blambda\b/gi, "λ")
+    .replace(/\bphi\b/gi, "φ")
+    .replace(/\btheta\b/gi, "θ")
+    .replace(/\bomega\b/gi, "ω")
+    .replace(/\bsigma\b/gi, "σ")
+    .replace(/\bpi\b/gi, "π")
+    .replace(/\bKmax\b/g, "K_max")
+    .replace(/\bdegree C\b/gi, "°C")
+    .replace(/\bJ\/kg\s*°C\b/g, "J/kg°C")
+    .replace(/\bJ\/°C\b/g, "J/°C")
+    .replace(/\btan\^-1\b/g, "tan⁻¹")
+    .replace(/\b([0-9.]+)\s*x\s*10\^(-?\d+)\b/g, "$1 × 10^$2")
+    .replace(/<\s*c\^2\s*>/g, "⟨c²⟩")
+    .replace(/<\s*Ek\s*>/g, "⟨E_k⟩")
     .replace(
       /^Why is it useful to explain (.+?) by keeping .+ visible\?$/i,
       "Why does the core physics of $1 matter more than labels alone?"
     )
+    .replace(/\bw\s+Δe\b/gi, "W = ΔE")
+    .replace(/\bw\s*=\s*Δe\b/gi, "W = ΔE")
+    .replace(/\bw\s+fd\b/gi, "W = Fd")
+    .replace(/\bv\s+Δe\s+q\b/gi, "V = ΔE/Q")
+    .replace(/\bΔe\b/g, "ΔE")
+    .replace(/\bΔE\s+equals\s+Δm\s+times\s+c\s+squared\b/gi, "ΔE = Δmc²")
+    .replace(/\bΔE\s*=\s*h\s+f\b/gi, "ΔE = hf")
+    .replace(/\bh\s*f\s*=\s*φ\s*\+\s*K_max\b/gi, "hf = φ + K_max")
+    .replace(/\bλ\s*=\s*h\s*\/\s*p\b/g, "λ = h/p")
+    .replace(/\bλ\s*=\s*v\s*\/\s*f\b/g, "λ = v/f")
+    .replace(/\bv\s+equals\s+f\s+λ\b/gi, "v = fλ")
+    .replace(/\bv\s*=\s*f\s+λ\b/gi, "v = fλ")
+    .replace(/\bQ\s*=\s*m\s*c\s*ΔT\b/g, "Q = mcΔT")
+    .replace(/\bQ\s*=\s*m\s*L\b/g, "Q = mL")
+    .replace(/\bW\s*=\s*ΔE\b/g, "W = ΔE")
+    .replace(/\bc\s+squared\b/gi, "c²")
     .replace(/\bp_total\s*=\s*p_atm\s*\+\s*rhogh\b/gi, "p_total = p_atm + ρgh")
     .replace(/\bp_atm\s*\+\s*rhogh\b/gi, "p_atm + ρgh")
     .replace(/\bp\s*=\s*rhogh\b/gi, "p = ρgh")
@@ -6314,7 +6366,12 @@ function normalizeRenderedPhysicsText(value: string): string {
     .replace(/\brho\s*g\s*and\s*h\b/gi, "ρ, g, and h")
     .replace(/\brho\s*g\b/gi, "ρg")
     .replace(/\brhogh\b/gi, "ρgh")
-    .replace(/\brho\b/gi, "ρ");
+    .replace(/\brho\b/gi, "ρ")
+    .replace(/([0-9A-Za-z)%])\s+x\s+([0-9A-Za-z(])/g, "$1 × $2")
+    .replace(/\bh\s+f\b/g, "hf")
+    .replace(/\b([A-Za-z])\s*\^\s*2\b/g, "$1²")
+    .replace(/\b([A-Za-z])\s*\^\s*3\b/g, "$1³")
+    .replace(/\b([A-Za-z])\s*\^\s*4\b/g, "$1⁴");
 }
 
 function normalizeCoreConceptBullet(value: string): string {
@@ -9614,7 +9671,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         return {
           body: "Keep temperature as a state reading and heat transferred as an energy-transfer process.",
           worked_example: {
-            prompt: "A mug of tea and a bathtub of water are both at 40 degree C. What can you conclude from that shared temperature, and what can you not conclude?",
+            prompt: "A mug of tea and a bathtub of water are both at 40 °C. What can you conclude from that shared temperature, and what can you not conclude?",
             steps: [
               "Start with what temperature actually tells you: it gives the current thermal state, not the total thermal energy involved.",
               "Notice that the amounts of water are very different, so the masses are not the same.",
@@ -9640,14 +9697,14 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             {
               body: "The third example keeps the energy transfer fixed and asks what the different temperature rises reveal.",
               worked_example: {
-                prompt: "Two blocks start at the same temperature and each receive 600 J. One rises by 6 degree C and the other by 2 degree C. What should you conclude first?",
+                prompt: "Two blocks start at the same temperature and each receive 600 J. One rises by 6 °C and the other by 2 °C. What should you conclude first?",
                 steps: [
                   "Keep the equal energy transfer fixed because that part of the story is already controlled.",
                   "Compare the different temperature rises and reject the idea that equal energy must force equal temperature change.",
                   "Conclude that at least one of the mass or the specific heat capacity must be different.",
                 ],
                 answer: "At least one of the mass or the specific heat capacity is different between the two blocks.",
-                answer_reason: "If the same amount of energy causes different temperature rises, the response factors in Q = mc delta T cannot all be the same.",
+                answer_reason: "If the same amount of energy causes different temperature rises, the response factors in Q = mcΔT cannot all be the same.",
               },
             },
           ],
@@ -9660,7 +9717,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             steps: [
               "Keep the mass the same for both blocks because the question already controls it at 1 kg each.",
               "Keep the energy transfer the same as well: both blocks receive 5000 J.",
-              "Use Q = mc delta T qualitatively: with the same Q and m, the larger temperature rise must come from the smaller c value.",
+              "Use Q = mcΔT qualitatively: with the same Q and m, the larger temperature rise must come from the smaller c value.",
             ],
             answer: "Block A has the lower specific heat capacity.",
             answer_reason: "For the same mass and the same energy transfer, the block with the larger temperature rise must have the smaller specific heat capacity.",
@@ -9669,14 +9726,14 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             {
               body: "This second example turns the same idea into a direct calculation.",
               worked_example: {
-                prompt: "A 2 kg metal block with specific heat capacity 400 J/kg degree C receives 2400 J. Find the temperature rise.",
+                prompt: "A 2 kg metal block with specific heat capacity 400 J/kg°C receives 2400 J. Find the temperature rise.",
                 steps: [
-                  "Start with Q = mc delta T because the question gives energy, mass, and specific heat capacity.",
-                  "Rearrange to delta T = Q / (mc).",
-                  "Substitute the values: delta T = 2400 / (2 x 400) = 2400 / 800 = 3.",
+                  "Start with Q = mcΔT because the question gives energy, mass, and specific heat capacity.",
+                  "Rearrange to ΔT = Q / (mc).",
+                  "Substitute the values: ΔT = 2400 / (2 × 400) = 2400 / 800 = 3.",
                 ],
-                answer: "The temperature rise is 3 degree C.",
-                answer_reason: "Dividing the 2400 J transfer by mc = 800 J/degree C gives a 3 degree C rise.",
+                answer: "The temperature rise is 3 °C.",
+                answer_reason: "Dividing the 2400 J transfer by mc = 800 J/°C gives a 3 °C rise.",
               },
             },
             {
@@ -9698,7 +9755,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         return {
           body: "During a state change, the energy story changes even when the thermometer does not.",
           worked_example: {
-            prompt: "Ice at 0 degree C keeps receiving energy while it melts, but the temperature stays at 0 degree C. Where does the energy go?",
+            prompt: "Ice at 0 °C keeps receiving energy while it melts, but the temperature stays at 0 °C. Where does the energy go?",
             steps: [
               "Notice that the temperature is not rising, so the energy is not increasing the particles' average kinetic energy.",
               "Identify the stage as a state change rather than an ordinary warm-up.",
@@ -9724,14 +9781,14 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             {
               body: "The third example checks that the stage rule matches the physics before any substitution begins.",
               worked_example: {
-                prompt: "A sample is melting at constant temperature. Why is Q = mc delta T the wrong rule for that stage?",
+                prompt: "A sample is melting at constant temperature. Why is Q = mcΔT the wrong rule for that stage?",
                 steps: [
-                  "Check what Q = mc delta T assumes: it describes a temperature change.",
+                  "Check what Q = mcΔT assumes: it describes a temperature change.",
                   "Compare that assumption with the actual stage in the prompt, where the temperature is constant.",
                   "Choose the state-change rule instead because the energy is changing the state, not increasing the temperature.",
                 ],
-                answer: "Q = mc delta T is wrong because the temperature is not changing during melting, so the stage needs Q = mL instead.",
-                answer_reason: "The warm-up equation only applies when delta T is non-zero. During melting, the transferred energy pays for the state change, so the latent-heat equation is the correct model.",
+                answer: "Q = mcΔT is wrong because the temperature is not changing during melting, so the stage needs Q = mL instead.",
+                answer_reason: "The warm-up equation only applies when ΔT is non-zero. During melting, the transferred energy pays for the state change, so the latent-heat equation is the correct model.",
               },
             },
           ],
@@ -9837,9 +9894,9 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             {
               body: "This follow-up keeps the stage-by-stage thermal ledger explicit.",
               worked_example: {
-                prompt: "A 1 kg sample warms by 10 degree C with c = 400 J/kg degree C and then melts with L = 250000 J/kg. What total energy is needed?",
+                prompt: "A 1 kg sample warms by 10 °C with c = 400 J/kg°C and then melts with L = 250000 J/kg. What total energy is needed?",
                 steps: [
-                  "Find the warm-up stage first with Q = mc delta T: 1 x 400 x 10 = 4000 J.",
+                  "Find the warm-up stage first with Q = mcΔT: 1 × 400 × 10 = 4000 J.",
                   "Find the melting stage next with Q = mL: 1 x 250000 = 250000 J.",
                   "Add the separate stage energies to get the total.",
                 ],
@@ -9853,10 +9910,10 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
                 prompt: "A process warms a solid, melts it, and then warms the liquid again. Why is one formula not enough for the whole process?",
                 steps: [
                   "Split the story into separate physical stages before choosing any equation.",
-                  "Use Q = mc delta T only on stages where the temperature changes.",
+                  "Use Q = mcΔT only on stages where the temperature changes.",
                   "Use Q = mL on the state-change stage, then add the separate stage energies at the end.",
                 ],
-                answer: "One formula is not enough because different stages use different rules: warming stages use Q = mc delta T, while the melting stage uses Q = mL.",
+                answer: "One formula is not enough because different stages use different rules: warming stages use Q = mcΔT, while the melting stage uses Q = mL.",
                 answer_reason: "A multi-stage process mixes temperature-change physics with state-change physics, so the correct total comes from choosing the right rule for each stage and then summing the results.",
               },
             },
@@ -11344,7 +11401,7 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
     case "M2_L6":
       return {
         coreIdea: "Arrow Split rewrites one angled force into axis components so vectors can be combined cleanly without changing the underlying physics.",
-        reasoning: "Choose axes, resolve each angled force into horizontal and vertical parts, and combine each axis separately with signs. Only after the axis totals are clear should you rebuild the final resultant. Then read the direction counterclockwise from +x; in first-quadrant cases you can use theta = tan^-1(y / x), but the signs of x and y still decide the quadrant.",
+        reasoning: "Choose axes, resolve each angled force into horizontal and vertical parts, and combine each axis separately with signs. Only after the axis totals are clear should you rebuild the final resultant. Then read the direction counterclockwise from +x; in first-quadrant cases you can use θ = tan⁻¹(y / x), but the signs of x and y still decide the quadrant.",
         checkForUnderstanding: "If net x is positive and net y is positive, from which axis should you measure the direction angle and which ratio gives the angle?",
         commonTrap: "Do not add component magnitudes blindly without direction, do not measure the angle from the y-axis when the lesson is using +x as the reference, and do not talk as if the components are extra forces acting in addition to the original arrow.",
       };
@@ -12052,22 +12109,22 @@ function enhancedFormulaConstantsText(code: string, formula: UnknownRecord): str
   });
 
   if (/coulomb|electrostatic|point charge|radial charge|test charge/i.test(combined) && /\bk\b/.test(equationText)) {
-    notes.push("Use Coulomb's constant k = 8.99 x 10^9 N m^2 C^-2 in vacuum.");
+    notes.push("Use Coulomb's constant k = 8.99 × 10^9 N m^2 C^-2 in vacuum.");
   }
   if (/hubble|expanding universe|cosmology|redshift/i.test(combined) && /H0/i.test(equationText)) {
-    notes.push("Use H0 in the form given by the question, often about 70 km s^-1 Mpc^-1.");
+    notes.push("Use H₀ in the form given by the question, often about 70 km s^-1 Mpc^-1.");
   }
   if (/nuclear radius|scattering|rutherford|nucleus/i.test(combined) && (/\bR0\b/i.test(equationText) || /\br0\b/i.test(equationText))) {
-    notes.push("Use R0 about 1.2 x 10^-15 m in the simple nuclear-size relation R = R0 A^(1/3).");
+    notes.push("Use R₀ about 1.2 × 10^-15 m in the simple nuclear-size relation R = R₀A^(1/3).");
   }
   if (/wien|peak wavelength|stellar spectra/i.test(combined) && /\bb\b/.test(equationText)) {
-    notes.push("Use Wien's constant b = 2.90 x 10^-3 m K.");
+    notes.push("Use Wien's constant b = 2.90 × 10^-3 m K.");
   }
   if (/stefan|luminosity|blackbody/i.test(combined) && /sigma|\u03c3/i.test(equationText)) {
-    notes.push("Use sigma = 5.67 x 10^-8 W m^-2 K^-4 in the Stefan-Boltzmann relation.");
+    notes.push("Use σ = 5.67 × 10^-8 W m^-2 K^-4 in the Stefan-Boltzmann relation.");
   }
   if (/half-life|decay constant|activity/i.test(combined) && /lambda|\u03bb/i.test(equationText)) {
-    notes.push("Use lambda = ln 2 / t_(1/2) when converting between decay constant and half-life.");
+    notes.push("Use λ = ln 2 / t_(1/2) when converting between decay constant and half-life.");
   }
 
   return dedupeText(notes);
@@ -12273,7 +12330,7 @@ function scaffoldExtendedExtraSections(code: string): UnknownRecord[] {
       return [
         {
           heading: "Reading direction in degrees",
-          body: "After you combine to get the net x and net y components, draw the rebuilt resultant from the origin to that net component point. The direction is measured counterclockwise from the +x axis to that arrow. In first-quadrant cases, use theta = tan^-1(y / x); in all cases, keep the signs of x and y visible so you place the angle in the correct quadrant.",
+          body: "After you combine to get the net x and net y components, draw the rebuilt resultant from the origin to that net component point. The direction is measured counterclockwise from the +x axis to that arrow. In first-quadrant cases, use θ = tan⁻¹(y / x); in all cases, keep the signs of x and y visible so you place the angle in the correct quadrant.",
           check_for_understanding: "If a rebuilt vector has +x and +y components, where do you start measuring the direction angle, and what ratio tells you the angle size?",
         },
       ];

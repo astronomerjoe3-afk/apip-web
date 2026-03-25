@@ -49,7 +49,7 @@ const M7_VISUAL_META: Record<string, M7QuestionVisualMeta> = {
     visual_callouts: [
       "Beat Rate is frequency.",
       "Pulse Gap is wavelength.",
-      "Ripple Run follows v = f lambda.",
+      "Ripple Run follows v = fλ.",
     ],
   },
   M7L4: {
@@ -136,7 +136,7 @@ const M7_SIMULATION_COPY: Record<string, M7SimulationCopy> = {
     watchFor: [
       "Frequency is set by the source.",
       "Wavelength is the spacing between matching fronts.",
-      "v = f lambda links the two to wave speed.",
+      "v = fλ links the two to wave speed.",
     ],
     tryFirst: "Set Beat Rate to 4 Hz and Pulse Gap to 3 m. The Ripple Run is 12 m/s. Then try 6 Hz with 2 m and notice the same speed can come from a different pair.",
     takeaway: "Wave speed is built from launch rate and front spacing, not from one quantity alone.",
@@ -214,7 +214,7 @@ export function m7ScaffoldFocusExtras(code: string): string[] {
       ];
     case "M7_L3":
       return [
-        "Say what each quantity means before substituting into v = f lambda.",
+        "Say what each quantity means before substituting into v = fλ.",
         "Keep source-set frequency separate from medium-set speed.",
         "Use the product idea to compare same-speed, different-pair cases.",
       ];
@@ -259,7 +259,7 @@ export function m7ScaffoldCoreBullets(code: string): string[] {
       return [
         "Frequency is the number of fronts launched each second.",
         "Wavelength is the spacing between matching fronts.",
-        "Wave speed follows v = f lambda.",
+        "Wave speed follows v = fλ.",
       ];
     case "M7_L4":
       return [

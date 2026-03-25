@@ -180,17 +180,17 @@ export default function A5SimulationPanels({
         <rect x="278" width="120" height={Math.max(20, Math.min(photonEnergy, workFunction) * 18)} y={176 - Math.max(20, Math.min(photonEnergy, workFunction) * 18)} fill="#f97316" rx="16" />
         <rect x="460" width="120" height={Math.max(12, kick * 18)} y={176 - Math.max(12, kick * 18)} fill="#22c55e" rx="16" />
         <text x="156" y="196" textAnchor="middle" fill="#0f172a" fontSize="18">hf</text>
-        <text x="338" y="196" textAnchor="middle" fill="#0f172a" fontSize="18">phi</text>
-        <text x="520" y="196" textAnchor="middle" fill="#0f172a" fontSize="18">Kmax</text>
-        <text x="314" y="84" textAnchor="middle" fill="#475569" fontSize="18">Threshold case appears when Kmax falls to zero</text>
+        <text x="338" y="196" textAnchor="middle" fill="#0f172a" fontSize="18">φ</text>
+        <text x="520" y="196" textAnchor="middle" fill="#0f172a" fontSize="18">K_max</text>
+        <text x="314" y="84" textAnchor="middle" fill="#475569" fontSize="18">Threshold case appears when K_max falls to zero</text>
       </svg>,
       <>
         {metricCard("Photon energy", `${formatSimulationNumber(photonEnergy, 2)} eV`, "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Work function", `${formatSimulationNumber(workFunction, 2)} eV`, "border-orange-200 bg-orange-50 text-orange-900")}
-        {metricCard("Kmax", `${formatSimulationNumber(kick, 2)} eV`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("K_max", `${formatSimulationNumber(kick, 2)} eV`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Event rate clue", `${beamCount} / s`, "border-violet-200 bg-violet-50 text-violet-900")}
       </>,
-      ["Read hf = phi + Kmax as bookkeeping.", "Threshold means the leftover bar shrinks to zero.", "Beam count still changes rate, not Kmax."],
+      ["Read hf = φ + K_max as bookkeeping.", "Threshold means the leftover bar shrinks to zero.", "Beam count still changes rate, not K_max."],
       "The three bars keep incoming energy, unlock toll, and leftover kick on one line of thought.",
     );
   }
@@ -220,7 +220,7 @@ export default function A5SimulationPanels({
       </svg>,
       <>
         {metricCard("Count", `${particleCount} hits`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("lambda", `${formatSimulationNumber(wavelength, 3)} h/p units`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("λ", `${formatSimulationNumber(wavelength, 3)} h/p units`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Pattern width", `${formatSimulationNumber(visualSpread, 1)}`, "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Board lesson", particleCount < 18 ? "mostly dots" : "pattern emerging", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
@@ -257,7 +257,7 @@ export default function A5SimulationPanels({
           ))}
           <text x="0" y="72" textAnchor="middle" fill="#475569" fontSize="18">after</text>
         </g>
-        <text x="318" y="138" textAnchor="middle" fill="#0f766e" fontSize="20" fontWeight="700">Delta E = Delta m c^2</text>
+        <text x="318" y="138" textAnchor="middle" fill="#0f766e" fontSize="20" fontWeight="700">ΔE = Δmc²</text>
       </svg>,
       <>
         {metricCard("Binding gain", `${formatSimulationNumber(released, 2)} arb`, released > 0 ? "border-emerald-200 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-slate-50 text-slate-900")}

@@ -26,7 +26,7 @@
 
   <path d="M232 552 A62 62 0 0 0 214 508" stroke="#7C3AED" stroke-width="6" fill="none" stroke-linecap="round"/>
   <polygon points="217,503 210,522 229,516" fill="#7C3AED"/>
-  <text x="230" y="500" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">theta</text>
+  <text x="230" y="500" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">θ</text>
   <text x="138" y="586" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Measure from +x toward the orange arrow, not from the y-axis.</text>
 
   <rect x="748" y="220" width="332" height="392" rx="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
@@ -35,10 +35,10 @@
   <text x="780" y="356" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">2. Draw the rebuilt resultant.</text>
   <text x="780" y="394" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">3. Measure from +x counterclockwise.</text>
   <text x="780" y="432" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">4. In first-quadrant cases, use</text>
-  <text x="806" y="462" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">theta = tan^-1(y / x)</text>
+  <text x="806" y="462" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">θ = tan⁻¹(y / x)</text>
   <text x="780" y="508" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">5. Check the signs of x and y so the</text>
   <text x="806" y="538" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="21">angle lands in the correct quadrant.</text>
 
   <rect x="780" y="564" width="268" height="28" rx="14" fill="#EDE9FE"/>
-  <text x="816" y="584" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Here theta = tan^-1(12 / 5) about 67.4 deg</text>
+  <text x="816" y="584" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Here θ = tan⁻¹(12 / 5) ≈ 67.4°</text>
 </svg>

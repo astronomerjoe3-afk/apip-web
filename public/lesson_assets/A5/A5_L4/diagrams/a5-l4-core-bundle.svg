@@ -11,7 +11,7 @@
   <g fill="#60a5fa">
     <circle cx="760" cy="420" r="28"/><circle cx="810" cy="370" r="28"/><circle cx="860" cy="420" r="28"/><circle cx="810" cy="470" r="28"/><circle cx="915" cy="420" r="28"/><circle cx="865" cy="470" r="28"/>
   </g>
-  <text x="505" y="430" fill="#0f766e" font-family="Arial, sans-serif" font-size="34" font-weight="700">Delta E = Delta m c^2</text>
+  <text x="505" y="430" fill="#0f766e" font-family="Arial, sans-serif" font-size="34" font-weight="700">ΔE = Δmc²</text>
   <text x="160" y="625" fill="#475569" font-family="Arial, sans-serif" font-size="26">Looser bundle: higher energy state</text>
   <text x="730" y="625" fill="#475569" font-family="Arial, sans-serif" font-size="26">Tighter bundle: lower mass-energy state</text>
 </svg>

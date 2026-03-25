@@ -206,12 +206,12 @@ export default function A2SimulationPanels({
         <text x="154" y="96" fill="#1d4ed8" fontSize="18" fontWeight="700">point A</text>
         <text x="418" y={sameTerrace ? 110 : 198} fill="#0f766e" fontSize="18" fontWeight="700">point B</text>
         <text x="354" y="92" fill="#0284c7" fontSize="18" fontWeight="700">field direction</text>
-        <text x="88" y="206" fill="#475569" fontSize="18">Equipotential travel stays on one terrace. Crossing terrace levels creates Delta V.</text>
+        <text x="88" y="206" fill="#475569" fontSize="18">Equipotential travel stays on one terrace. Crossing terrace levels creates ΔV.</text>
       </svg>,
       <>
         {metricCard("Potential at A", `${formatSimulationNumber(potentialA, 1)} V`, "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Potential at B", `${formatSimulationNumber(potentialB, 1)} V`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Delta V", `${formatSimulationNumber(deltaV, 1)} V`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("ΔV", `${formatSimulationNumber(deltaV, 1)} V`, "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Path type", sameTerrace ? "equipotential route" : "cross-terrace route", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
       ["Potential is electric height per unit charge.", "An equipotential path has zero terrace drop along it.", "Field arrows cross equipotential lines rather than running along them."],
@@ -255,11 +255,11 @@ export default function A2SimulationPanels({
       <>
         {metricCard("Field strength E", `${formatSimulationNumber(fieldStrength, 0)} V/m`, "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Gap d", `${formatSimulationNumber(gap, 3)} m`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Voltage Delta V", `${formatSimulationNumber(plateVoltage, 0)} V`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Voltage ΔV", `${formatSimulationNumber(plateVoltage, 0)} V`, "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Scout response", scoutPositive ? "force along field" : "force opposite field", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
       ["Uniform field strength is voltage drop per distance.", "Smaller gap with the same voltage means steeper electric slope.", "Field direction is fixed by the plates even when the scout sign changes."],
-      "This plate-gap view keeps Delta V and d physically visible, which is the safest way to teach E = Delta V / d conceptually.",
+      "This plate-gap view keeps ΔV and d physically visible, which is the safest way to teach E = ΔV / d conceptually.",
     );
   }
 

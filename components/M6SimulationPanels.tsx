@@ -124,7 +124,7 @@ export default function M6SimulationPanels({
         {sliderField("Transfer Energy", `${formatSimulationNumber(transfer, 0)} J`, <input className="w-full" type="range" min="200" max="5000" step="100" value={transfer} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
         {sliderField("Block A mass", `${formatSimulationNumber(massA, 1)} kg`, <input className="w-full" type="range" min="1" max="8" step="0.5" value={massA} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
         {sliderField("Block B mass", `${formatSimulationNumber(massB, 1)} kg`, <input className="w-full" type="range" min="1" max="8" step="0.5" value={massB} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
-        {sliderField("Shared Level Cost", `${formatSimulationNumber(cost, 0)} J/kg degree C`, <input className="w-full" type="range" min="100" max="900" step="50" value={cost} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Shared Level Cost", `${formatSimulationNumber(cost, 0)} J/kg°C`, <input className="w-full" type="range" min="100" max="900" step="50" value={cost} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
       </>,
       "Warmth Level board",
       <svg viewBox="0 0 640 250" className="w-full">
@@ -134,17 +134,17 @@ export default function M6SimulationPanels({
         <text x="398" y="58" fill="#166534" fontSize="20" fontWeight="700">Block B</text>
         <text x="60" y="96" fill="#0f172a" fontSize="16">Transfer: {formatSimulationNumber(transfer, 0)} J</text>
         <text x="60" y="126" fill="#0f172a" fontSize="16">Mass: {formatSimulationNumber(massA, 1)} kg</text>
-        <text x="60" y="156" fill="#0f172a" fontSize="16">Rise: {formatSimulationNumber(riseA, 2)} degree C</text>
+        <text x="60" y="156" fill="#0f172a" fontSize="16">Rise: {formatSimulationNumber(riseA, 2)} °C</text>
         <text x="398" y="96" fill="#0f172a" fontSize="16">Transfer: {formatSimulationNumber(transfer, 0)} J</text>
         <text x="398" y="126" fill="#0f172a" fontSize="16">Mass: {formatSimulationNumber(massB, 1)} kg</text>
-        <text x="398" y="156" fill="#0f172a" fontSize="16">Rise: {formatSimulationNumber(riseB, 2)} degree C</text>
+        <text x="398" y="156" fill="#0f172a" fontSize="16">Rise: {formatSimulationNumber(riseB, 2)} °C</text>
         <text x="54" y="198" fill="#475569" fontSize="15">Same payment, different rise: the mass still matters.</text>
       </svg>,
       <>
-        {metricCard("Warmth Level rise A", `${formatSimulationNumber(riseA, 2)} degree C`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Warmth Level rise B", `${formatSimulationNumber(riseB, 2)} degree C`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Warmth Level rise A", `${formatSimulationNumber(riseA, 2)} °C`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Warmth Level rise B", `${formatSimulationNumber(riseB, 2)} °C`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Forge Ledger", `${formatSimulationNumber(transfer, 0)} J each`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Level Cost", `${formatSimulationNumber(cost, 0)} J/kg degree C`, "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Level Cost", `${formatSimulationNumber(cost, 0)} J/kg°C`, "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
       [
         "Temperature is the current reading, not the name of the energy transfer.",
@@ -164,24 +164,24 @@ export default function M6SimulationPanels({
       "Level Cost calculator",
       <>
         {sliderField("Build Size", `${formatSimulationNumber(mass, 1)} kg`, <input className="w-full" type="range" min="0.5" max="8" step="0.5" value={mass} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
-        {sliderField("Level Cost", `${formatSimulationNumber(cost, 0)} J/kg degree C`, <input className="w-full" type="range" min="100" max="900" step="50" value={cost} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Target rise", `${formatSimulationNumber(deltaT, 0)} degree C`, <input className="w-full" type="range" min="1" max="40" step="1" value={deltaT} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Level Cost", `${formatSimulationNumber(cost, 0)} J/kg°C`, <input className="w-full" type="range" min="100" max="900" step="50" value={cost} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Target rise", `${formatSimulationNumber(deltaT, 0)} °C`, <input className="w-full" type="range" min="1" max="40" step="1" value={deltaT} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
       </>,
       "Heating bill board",
       <svg viewBox="0 0 640 250" className="w-full">
         <rect x="28" y="30" width="584" height="170" rx="26" fill="#eff6ff" />
-        <text x="54" y="64" fill="#0f172a" fontSize="24" fontWeight="700">Q = m c delta T</text>
+        <text x="54" y="64" fill="#0f172a" fontSize="24" fontWeight="700">Q = mcΔT</text>
         <text x="54" y="102" fill="#1d4ed8" fontSize="18">m = {formatSimulationNumber(mass, 1)} kg</text>
-        <text x="54" y="132" fill="#166534" fontSize="18">c = {formatSimulationNumber(cost, 0)} J/kg degree C</text>
-        <text x="54" y="162" fill="#7c3aed" fontSize="18">delta T = {formatSimulationNumber(deltaT, 0)} degree C</text>
+        <text x="54" y="132" fill="#166534" fontSize="18">c = {formatSimulationNumber(cost, 0)} J/kg°C</text>
+        <text x="54" y="162" fill="#7c3aed" fontSize="18">ΔT = {formatSimulationNumber(deltaT, 0)} °C</text>
         <rect x="360" y="88" width="208" height="60" rx="20" fill="#0f172a" />
         <text x="390" y="126" fill="#fff" fontSize="22" fontWeight="700">Q = {formatSimulationNumber(q, 0)} J</text>
         <text x="54" y="194" fill="#475569" fontSize="15">All three multipliers stay visible in the same bill.</text>
       </svg>,
       <>
         {metricCard("Mass", `${formatSimulationNumber(mass, 1)} kg`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Level Cost", `${formatSimulationNumber(cost, 0)} J/kg degree C`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("delta T", `${formatSimulationNumber(deltaT, 0)} degree C`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Level Cost", `${formatSimulationNumber(cost, 0)} J/kg°C`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("ΔT", `${formatSimulationNumber(deltaT, 0)} °C`, "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Forge Ledger", `${formatSimulationNumber(q, 0)} J`, "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
       [
@@ -242,7 +242,7 @@ export default function M6SimulationPanels({
       "Touch Relay lab",
       <>
         {sliderField("Material relay strength", `${formatSimulationNumber(conductivity, 0)}`, <input className="w-full" type="range" min="1" max="10" step="1" value={conductivity} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Temperature difference", `${formatSimulationNumber(deltaT, 0)} degree C`, <input className="w-full" type="range" min="10" max="120" step="5" value={deltaT} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Temperature difference", `${formatSimulationNumber(deltaT, 0)} °C`, <input className="w-full" type="range" min="10" max="120" step="5" value={deltaT} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
         {sliderField("Path status", pathQuality > 0.5 ? "continuous" : "broken", <input className="w-full" type="range" min="0" max="1" step="1" value={pathQuality > 0.5 ? 1 : 0} onChange={(e) => setSimBias(Number(e.target.value))} />)}
       </>,
       "Relay chain board",
@@ -260,7 +260,7 @@ export default function M6SimulationPanels({
       <>
         {metricCard("Relay rate", formatSimulationNumber(relay, 0), "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Conductivity", formatSimulationNumber(conductivity, 0), "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("delta T", `${formatSimulationNumber(deltaT, 0)} degree C`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("ΔT", `${formatSimulationNumber(deltaT, 0)} °C`, "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Path", pathQuality ? "contact intact" : "gap inserted", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
       [
@@ -337,7 +337,7 @@ export default function M6SimulationPanels({
         <rect x="194" y="206" width={Math.min(240, gateStage / 2000)} height="18" rx="9" fill="#22c55e" />
         <text x="42" y="208" fill="#1d4ed8" fontSize="14">warm-up</text>
         <text x="46" y="232" fill="#166534" fontSize="14">gate</text>
-        <text x="444" y="202" fill="#1d4ed8" fontSize="14">Q = m c delta T</text>
+        <text x="444" y="202" fill="#1d4ed8" fontSize="14">Q = mcΔT</text>
         <text x="468" y="230" fill="#166534" fontSize="14">Q = m L</text>
       </svg>,
       <>
