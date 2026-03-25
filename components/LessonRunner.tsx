@@ -154,6 +154,36 @@ function normalizeSupportText(value: string): string {
   return value.trim().replace(/\s+/g, " ").toLowerCase();
 }
 
+const ASSESSMENT_VISUAL_ACRONYMS = ["AC", "DC", "EM", "GPE", "IR", "KE", "RMS", "SI", "UV"] as const;
+
+function normalizeAssessmentVisualText(value: string): string {
+  const singleLine = value.trim().replace(/\s+/g, " ");
+  if (!singleLine) return singleLine;
+
+  const letters = singleLine.match(/[A-Za-z]/g) ?? [];
+  if (letters.length < 4) return singleLine;
+
+  const uppercaseCount = letters.filter((letter) => letter === letter.toUpperCase()).length;
+  const lowercaseCount = letters.filter((letter) => letter === letter.toLowerCase()).length;
+  const isShouty = lowercaseCount === 0 || uppercaseCount / letters.length > 0.92;
+  if (!isShouty || /[=^_<>]/.test(singleLine)) {
+    return singleLine;
+  }
+
+  let normalized = singleLine.toLowerCase();
+  normalized = normalized.replace(
+    /^(\s*["'“”‘’(\[]*)([a-z])/,
+    (_match, prefix: string, first: string) => `${prefix}${first.toUpperCase()}`
+  );
+
+  for (const acronym of ASSESSMENT_VISUAL_ACRONYMS) {
+    const titleCaseAcronym = acronym.charAt(0) + acronym.slice(1).toLowerCase();
+    normalized = normalized.replace(new RegExp(`\\b${titleCaseAcronym}\\b`, "g"), acronym);
+  }
+
+  return normalized;
+}
+
 function dedupeSupportTextItems(items: string[] = [], reserved: string[] = []): string[] {
   const seen = new Set(reserved.map(normalizeSupportText).filter(Boolean));
   return items.filter((item) => {
@@ -439,27 +469,33 @@ function QuestionBlock({
   value: string;
   onChange: (questionId: string, value: string) => void;
 }) {
+  const visualTitle = question.visual_title ? normalizeAssessmentVisualText(question.visual_title) : "";
+  const visualCaption = question.visual_caption ? normalizeAssessmentVisualText(question.visual_caption) : "";
+  const visualCallouts = (question.visual_callouts ?? [])
+    .map(normalizeAssessmentVisualText)
+    .filter((item) => item.length > 0);
+
   return (
     <div className="rounded-2xl border bg-white p-5 shadow-sm normal-case">
       {question.image_url ? (
         <div className="mb-5 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(224,242,254,0.9),_rgba(255,255,255,1)_62%)] p-4">
-            {question.visual_title ? (
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-sky-700">{question.visual_title}</p>
+            {visualTitle ? (
+              <p className="text-sm font-semibold normal-case text-sky-700">{visualTitle}</p>
             ) : null}
-            {question.visual_caption ? (
-              <p className="mt-2 text-sm leading-6 text-slate-700">{question.visual_caption}</p>
+            {visualCaption ? (
+              <p className="mt-2 text-sm leading-6 text-slate-700 normal-case">{visualCaption}</p>
             ) : null}
           </div>
           <img
             src={question.image_url}
-            alt={question.visual_title || question.prompt}
+            alt={visualTitle || question.prompt}
             className="h-auto max-h-[24rem] w-full bg-[radial-gradient(circle_at_top,_rgba(248,250,252,0.98),_rgba(255,255,255,1))] object-contain p-4"
             loading="lazy"
           />
-          {question.visual_callouts?.length ? (
+          {visualCallouts.length ? (
             <div className="grid gap-3 border-t border-slate-200 bg-slate-50/90 p-4 md:grid-cols-3">
-              {question.visual_callouts.map((item) => (
+              {visualCallouts.map((item) => (
                 <div key={item} className="rounded-2xl border border-sky-100 bg-white/95 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
                   {item}
                 </div>
