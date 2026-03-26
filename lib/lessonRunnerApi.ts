@@ -6073,11 +6073,14 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
 
 function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   const authored = itemsFrom(lesson, "diagnostic").map(asRecord);
-  const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authored.length);
+  const authoredUsable = authored.filter((item) => hasUsableAssessmentAnswer(item));
+  const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authoredUsable.length);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
-  const bank = preferAuthored ? [...authored] : [...authored, ...generatedDiagnosticItems(lesson).map(asRecord)];
+  const bank = preferAuthored
+    ? [...authoredUsable]
+    : [...authoredUsable, ...generatedDiagnosticItems(lesson).map(asRecord)];
   return bank.filter((item) => {
     const record = asRecord(item);
     const id = text(record.id);
@@ -6184,18 +6187,19 @@ function filterLessonSpecificAssessmentCandidates(lesson: UnknownRecord, items: 
   return filtered;
 }
 
-function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "transfer").filter((item) => hasUsableMasteryAnswer(asRecord(item))).length): boolean {
+function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = itemsFrom(lesson, "transfer").filter((item) => hasUsableAssessmentAnswer(asRecord(item))).length): boolean {
   if (hasRepetitiveM2L1MasteryTransfer(lesson)) return false;
   const declaredMin = declaredAssessmentPoolMin(lesson, "mastery_pool_min");
   return declaredMin > 0 && authoredCount >= declaredMin;
 }
 
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
-  const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson));
+  const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson))
+    .filter((item) => hasUsableAssessmentAnswer(item));
   const authoredMasteryItems = filterLessonSpecificAssessmentCandidates(
     lesson,
     itemsFrom(lesson, "transfer")
-  ).filter((item) => hasUsableMasteryAnswer(item));
+  ).filter((item) => hasUsableAssessmentAnswer(item));
   const preferAuthored = prefersLessonOwnedConceptGateBank(lesson, authoredConceptItems.length);
   const baseItems = preferAuthored
     ? [...authoredConceptItems]
@@ -6273,19 +6277,13 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
     encodeURIComponent(normalized) +
     "/runner";
   const runnerRequest = apipGet<UnknownRecord>(runnerPath);
-  if (hasPrefetchedLesson(normalizedModuleId, normalized, options.prefetchedLesson)) {
-    const runner = canonicalizeModuleScopedIdentifiers(normalizedModuleId, await runnerRequest);
-    const lesson = canonicalizeModuleScopedIdentifiers(normalizedModuleId, asRecord(options.prefetchedLesson));
-    return {
-      runner,
-      lesson,
-    };
-  }
-
   const lessonPath = "/modules/" +
     encodeURIComponent(normalizedModuleId) +
     "/lessons/" +
     encodeURIComponent(normalized);
+  const prefetchedLesson = hasPrefetchedLesson(normalizedModuleId, normalized, options.prefetchedLesson)
+    ? canonicalizeModuleScopedIdentifiers(normalizedModuleId, asRecord(options.prefetchedLesson))
+    : null;
   const [runnerResponse, lessonResponse] = await Promise.allSettled([
     runnerRequest,
     apipGet<UnknownRecord>(lessonPath),
@@ -6309,6 +6307,13 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
     return {
       runner,
       lesson: canonicalizeModuleScopedIdentifiers(normalizedModuleId, listFallbackLesson),
+    };
+  }
+
+  if (prefetchedLesson) {
+    return {
+      runner,
+      lesson: prefetchedLesson,
     };
   }
 
@@ -7071,7 +7076,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (isExtendedNextgenLessonCode(code)) {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
-      .filter((item) => hasUsableMasteryAnswer(item));
+      .filter((item) => hasUsableAssessmentAnswer(item));
     const lessonSpecificVariants = masteryVariantsFromPool(f2Base, code).map(asRecord);
     return lessonSpecificVariants.slice(0, MASTERY_DEFAULT_MAX);
   }
@@ -7740,7 +7745,7 @@ function supplementalMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   });
 }
 
-function hasUsableMasteryAnswer(item: UnknownRecord): boolean {
+function hasUsableAssessmentAnswer(item: UnknownRecord): boolean {
   const choices = asList(item.choices);
   const answerIndex = resolvedAnswerIndex(item);
   if (choices.length > 0 && answerIndex >= 0 && answerIndex < choices.length) return true;
@@ -7757,10 +7762,10 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const generated = filterLessonSpecificAssessmentCandidates(lesson, generatedMasteryItems(lesson));
   const authoredTransfer = filterLessonSpecificAssessmentCandidates(lesson, itemsFrom(lesson, "transfer"))
     .map(asRecord)
-    .filter((item) => hasUsableMasteryAnswer(item));
+    .filter((item) => hasUsableAssessmentAnswer(item));
   const preferAuthored = prefersLessonOwnedMasteryBank(lesson, authoredTransfer.length);
   const fallback = filterLessonSpecificAssessmentCandidates(lesson, [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)])
-    .filter((item) => hasUsableMasteryAnswer(asRecord(item)));
+    .filter((item) => hasUsableAssessmentAnswer(asRecord(item)));
   const baseItems = preferAuthored
     ? [...authoredTransfer]
     : generated.length >= MASTERY_DEFAULT_MAX
@@ -9516,7 +9521,7 @@ function workedExampleEntryFromAssessmentItem(
   lesson: UnknownRecord,
   item: UnknownRecord
 ): { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string } | null {
-  if (!hasUsableMasteryAnswer(item)) return null;
+  if (!hasUsableAssessmentAnswer(item)) return null;
 
   const prompt = renderedPromptText(item).trim();
   const answerIndex = resolvedAnswerIndex(item);
@@ -13077,11 +13082,14 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
     const orderedPool = diagnosticPoolForAttempt(moduleId, lessonId, resources.lesson, diagnosticNonce);
     const askedIds = state.diagnostic?.askedIds || [];
     const answers = state.diagnostic?.answers || {};
-    const feedback = state.diagnostic?.feedback || [];
-    const correctCount = askedIds.reduce((total, id) => {
-      const item = pool.find((entry) => text(asRecord(entry).id) === id);
-      return item && grade(asRecord(item), answers[id], title).is_correct === true ? total + 1 : total;
-    }, 0);
+    const gradedFeedback = askedIds
+      .map((id) => pool.find((entry) => text(asRecord(entry).id) === id))
+      .filter(Boolean)
+      .map((entry) => grade(asRecord(entry), answers[text(asRecord(entry).id)], title));
+    const feedback = (state.diagnostic?.feedback?.length ?? 0) > 0
+      ? state.diagnostic?.feedback || []
+      : gradedFeedback;
+    const correctCount = feedback.filter((entry) => entry.is_correct === true).length;
     const targetCount = diagnosticTarget(correctCount, askedIds.length, pool.length);
     const nextItem = orderedPool.find((entry) => !askedIds.includes(text(asRecord(entry).id))) || null;
     const isComplete = Boolean(state.diagnostic?.complete) || (!nextItem && feedback.length > 0);
@@ -13285,7 +13293,16 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
 
   if (request.event_type === "diagnostic_feedback_acknowledged") {
     const state = readState(moduleId, lessonId);
-    const feedback = state.diagnostic?.feedback || [];
+    const resources = await loadResources(moduleId, lessonId, options);
+    const title = lessonTitle(resources.lesson, asRecord(resources.runner.lesson));
+    const diagnosticPool = diagnosticItems(resources.lesson);
+    const diagnosticAnswers = state.diagnostic?.answers || {};
+    const feedback = (state.diagnostic?.feedback?.length ?? 0) > 0
+      ? state.diagnostic?.feedback || []
+      : (state.diagnostic?.askedIds || [])
+        .map((id) => diagnosticPool.find((entry) => text(asRecord(entry).id) === id))
+        .filter(Boolean)
+        .map((entry) => grade(asRecord(entry), diagnosticAnswers[text(asRecord(entry).id)], title));
     const correctCount = feedback.filter((entry) => entry.is_correct === true).length;
     const misconceptionTags = feedback
       .filter((entry) => entry.is_correct !== true)
