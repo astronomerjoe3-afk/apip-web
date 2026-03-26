@@ -3,14 +3,28 @@
 import { signOut, type User } from "firebase/auth";
 
 import { auth } from "./firebase";
+import { BFF_PREFIX } from "./sessionConstants";
 
 export type SessionRole = "student" | "instructor" | "admin" | "unknown";
+
+export type SessionSecurity = {
+  password_policy_version: number;
+  password_policy_target_version: number;
+  strong_password_confirmed: boolean;
+  strong_password_confirmed_utc?: string | null;
+  email_verified: boolean;
+  email_verified_utc?: string | null;
+  hardening_complete: boolean;
+  recommended_actions: string[];
+  recommended_next_step?: string | null;
+};
 
 export type SessionUser = {
   uid: string;
   email?: string | null;
   email_verified?: boolean | null;
   role: SessionRole;
+  security?: SessionSecurity | null;
 };
 
 type SessionResponse = {
@@ -22,11 +36,54 @@ type SessionLoginResponse = SessionResponse & {
   expires_utc?: string;
 };
 
+type PasswordPolicyResponse = {
+  ok?: boolean;
+  security?: SessionSecurity;
+};
+
 function normalizeRole(value: unknown): SessionRole {
   if (value === "student" || value === "instructor" || value === "admin" || value === "unknown") {
     return value;
   }
   return "unknown";
+}
+
+function normalizeSessionSecurity(payload: unknown): SessionSecurity | null {
+  if (!payload || typeof payload !== "object") {
+    return null;
+  }
+
+  const security = payload as Record<string, unknown>;
+  const recommendedActions = Array.isArray(security.recommended_actions)
+    ? security.recommended_actions.filter((value): value is string => typeof value === "string")
+    : [];
+
+  return {
+    password_policy_version:
+      typeof security.password_policy_version === "number"
+        ? security.password_policy_version
+        : 0,
+    password_policy_target_version:
+      typeof security.password_policy_target_version === "number"
+        ? security.password_policy_target_version
+        : 1,
+    strong_password_confirmed: security.strong_password_confirmed === true,
+    strong_password_confirmed_utc:
+      typeof security.strong_password_confirmed_utc === "string"
+        ? security.strong_password_confirmed_utc
+        : null,
+    email_verified: security.email_verified === true,
+    email_verified_utc:
+      typeof security.email_verified_utc === "string"
+        ? security.email_verified_utc
+        : null,
+    hardening_complete: security.hardening_complete === true,
+    recommended_actions: recommendedActions,
+    recommended_next_step:
+      typeof security.recommended_next_step === "string"
+        ? security.recommended_next_step
+        : null,
+  };
 }
 
 function normalizeSessionUser(payload: unknown): SessionUser | null {
@@ -45,6 +102,7 @@ function normalizeSessionUser(payload: unknown): SessionUser | null {
     email: typeof user.email === "string" ? user.email : null,
     email_verified: typeof user.email_verified === "boolean" ? user.email_verified : null,
     role: normalizeRole(user.role),
+    security: normalizeSessionSecurity(user.security),
   };
 }
 
@@ -118,6 +176,23 @@ export async function clearServerSession(): Promise<void> {
     cache: "no-store",
     credentials: "same-origin",
   });
+}
+
+export async function recordStrongPasswordPolicy(passwordPolicyVersion: number): Promise<SessionSecurity | null> {
+  const response = await fetch(`${BFF_PREFIX}/auth/security/password-policy`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({ password_policy_version: passwordPolicyVersion }),
+    cache: "no-store",
+    credentials: "same-origin",
+  });
+
+  await throwIfNotOk(response);
+  const payload = await readJson<PasswordPolicyResponse>(response);
+  return normalizeSessionSecurity(payload.security);
 }
 
 export async function signOutEverywhere(): Promise<void> {

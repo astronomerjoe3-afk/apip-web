@@ -6,10 +6,11 @@ import { type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 import { apipGet, apipPost } from "../../lib/apipApi";
+import { paidAccessRequiresSecurityUpgrade, securityActionLabel } from "../../lib/accountSecurity";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, type Role } from "../../lib/authRouting";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
-import { signOutEverywhere } from "../../lib/sessionClient";
+import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
 
 type PricingOffer = {
   id?: string;
@@ -190,6 +191,8 @@ export default function StudentHomePage() {
 
   const [role, setRole] = useState<Role>("unknown");
   const [roleLoading, setRoleLoading] = useState<boolean>(true);
+  const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
+  const [sessionLoading, setSessionLoading] = useState<boolean>(true);
 
   const [modules, setModules] = useState<Module[]>([]);
   const [billingSummary, setBillingSummary] = useState<BillingSummary | null>(null);
@@ -296,6 +299,42 @@ export default function StudentHomePage() {
     };
   }, [loading, roleLoading, role, user]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadSessionState(): Promise<void> {
+      if (loading || roleLoading) return;
+      if (!user || role !== "student") {
+        if (!cancelled) {
+          setSessionUser(null);
+          setSessionLoading(false);
+        }
+        return;
+      }
+
+      try {
+        const currentSessionUser = await readSessionUser();
+        if (!cancelled) {
+          setSessionUser(currentSessionUser);
+        }
+      } catch {
+        if (!cancelled) {
+          setSessionUser(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setSessionLoading(false);
+        }
+      }
+    }
+
+    void loadSessionState();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [loading, roleLoading, role, user]);
+
   async function openBillingPortal(): Promise<void> {
     try {
       setBillingBusy("portal");
@@ -368,6 +407,11 @@ export default function StudentHomePage() {
       modules: grouped[section.key],
     })).filter((section) => section.modules.length > 0);
   }, [modules]);
+  const needsPaidSecurityUpgrade = useMemo(
+    () => paidAccessRequiresSecurityUpgrade(sessionUser, billingSummary, modules),
+    [billingSummary, modules, sessionUser],
+  );
+  const securityActions = sessionUser?.security?.recommended_actions || [];
 
   function renderModuleCard(moduleItem: Module) {
     const badge = moduleBadge(moduleItem);
@@ -609,6 +653,45 @@ export default function StudentHomePage() {
               ))}
             </div>
           ) : null}
+        </div>
+      ) : null}
+
+      {needsPaidSecurityUpgrade ? (
+        <div
+          style={{
+            border: "1px solid rgba(146, 64, 14, 0.28)",
+            borderRadius: 14,
+            padding: 16,
+            marginBottom: 16,
+            background: "#fff7ed",
+            color: "#9a3412",
+            display: "grid",
+            gap: 10,
+          }}
+        >
+          <div style={{ fontSize: 18, fontWeight: 900 }}>
+            Secure your paid access before continuing
+          </div>
+          <div style={{ lineHeight: 1.6 }}>
+            This account already has a paid module or subscription. Before continuing with premium access, finish the required security steps: {securityActions.length > 0 ? securityActions.map((action) => securityActionLabel(action)).join(", ") : "verify your email and confirm a strong password"}.
+          </div>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <button
+              onClick={() => router.push("/student/security?next=/student")}
+              disabled={sessionLoading}
+              style={{
+                padding: "10px 14px",
+                borderRadius: 10,
+                border: "1px solid rgba(146, 64, 14, 0.28)",
+                background: "#fff",
+                fontWeight: 800,
+                color: "#9a3412",
+                opacity: sessionLoading ? 0.7 : 1,
+              }}
+            >
+              {sessionLoading ? "Checking security..." : "Secure this account"}
+            </button>
+          </div>
         </div>
       ) : null}
 

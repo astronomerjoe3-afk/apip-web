@@ -5,6 +5,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
+import { securityActionLabel } from "../../../../lib/accountSecurity";
 import { useAuth } from "../../../../lib/auth";
 import {
   applyCurriculumModuleMeta,
@@ -13,7 +14,7 @@ import {
   normalizeModuleId,
   sanitizeModuleHeadingDescription,
 } from "../../../../lib/moduleCurriculum";
-import { signOutEverywhere } from "../../../../lib/sessionClient";
+import { readSessionUser, signOutEverywhere, type SessionUser } from "../../../../lib/sessionClient";
 
 type PricingOffer = {
   id?: string;
@@ -277,6 +278,8 @@ export default function StudentModulePage() {
   const [billingErr, setBillingErr] = useState<string>("");
   const [billingLoading, setBillingLoading] = useState<boolean>(false);
   const [billingBusyId, setBillingBusyId] = useState<string>("");
+  const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
+  const [sessionLoading, setSessionLoading] = useState<boolean>(true);
   const confirmedSessionRef = useRef<string>("");
   const [moduleProgress, setModuleProgress] = useState<StudentModuleProgressResponse["module"] | null>(null);
   const [lessons, setLessons] = useState<ActiveLesson[]>([]);
@@ -315,6 +318,10 @@ export default function StudentModulePage() {
     ? "Use Manage subscription or upgrade to a longer premium plan below."
     : "Secure checkout is ready. Choose a 1-month module pass or premium subscription.";
   const showBillingError = Boolean(billingErr) && moduleLocked;
+  const premiumAccessUnlocked = moduleMeta?.access?.tier === "premium" && moduleMeta?.access?.is_unlocked !== false;
+  const moduleNeedsSecurityUpgrade = premiumAccessUnlocked && sessionUser?.security?.hardening_complete !== true;
+  const waitingForSecurityCheck = premiumAccessUnlocked && sessionLoading;
+  const securityActions = sessionUser?.security?.recommended_actions || [];
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!user) {
@@ -514,6 +521,45 @@ export default function StudentModulePage() {
       void loadBillingSummary();
     }
   }, [authLoading, loadBillingSummary, user]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadSessionState(): Promise<void> {
+      if (authLoading) {
+        return;
+      }
+
+      if (!user) {
+        if (!cancelled) {
+          setSessionUser(null);
+          setSessionLoading(false);
+        }
+        return;
+      }
+
+      try {
+        const currentSessionUser = await readSessionUser();
+        if (!cancelled) {
+          setSessionUser(currentSessionUser);
+        }
+      } catch {
+        if (!cancelled) {
+          setSessionUser(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setSessionLoading(false);
+        }
+      }
+    }
+
+    void loadSessionState();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [authLoading, user]);
 
   useEffect(() => {
     if (!checkoutState) {
@@ -903,6 +949,59 @@ export default function StudentModulePage() {
               ) : null}
               <button onClick={() => { void Promise.all([loadModuleState(false), loadBillingSummary()]); }} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.88)", fontWeight: 800 }}>Refresh access</button>
               <button onClick={() => router.push("/student")} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.72)", fontWeight: 800 }}>Back to modules</button>
+            </div>
+          </div>
+        ) : waitingForSecurityCheck ? (
+          <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
+            Checking account security for paid access...
+          </div>
+        ) : moduleNeedsSecurityUpgrade ? (
+          <div style={{ display: "grid", gap: 16, maxWidth: 860, margin: "0 auto" }}>
+            <div style={{ display: "inline-flex", justifyContent: "center" }}>
+              <span style={{ padding: "6px 12px", borderRadius: 999, background: "#fff7ed", color: "#9a3412", fontWeight: 800, fontSize: 12 }}>
+                Security step required
+              </span>
+            </div>
+            <div style={{ textAlign: "center", fontSize: 20, fontWeight: 900, color: "#10233f" }}>
+              Secure this account before continuing with premium lessons
+            </div>
+            <div style={{ textAlign: "center", fontSize: 17, color: "#46566b", lineHeight: 1.65 }}>
+              This premium module is unlocked, but paid access now requires a stronger account baseline first.
+            </div>
+            <div style={{ border: "1px solid rgba(146, 64, 14, 0.2)", borderRadius: 18, padding: 18, background: "#fff7ed", color: "#9a3412" }}>
+              <div style={{ fontWeight: 900, marginBottom: 8 }}>Required next steps</div>
+              <div style={{ lineHeight: 1.6 }}>
+                {securityActions.length > 0
+                  ? securityActions.map((action) => securityActionLabel(action)).join(", ")
+                  : "Verify your email and confirm a strong password."}
+              </div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
+              <button
+                onClick={() => router.push(`/student/security?next=${encodeURIComponent(currentModulePath)}`)}
+                style={{
+                  padding: "12px 18px",
+                  borderRadius: 14,
+                  border: "none",
+                  background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
+                  color: "#fff",
+                  fontWeight: 900,
+                }}
+              >
+                Secure this account
+              </button>
+              <button
+                onClick={() => router.push("/student")}
+                style={{
+                  padding: "12px 18px",
+                  borderRadius: 14,
+                  border: "1px solid rgba(16, 35, 63, 0.14)",
+                  background: "rgba(255, 255, 255, 0.82)",
+                  fontWeight: 800,
+                }}
+              >
+                Back to modules
+              </button>
             </div>
           </div>
         ) : loading && !activeLesson ? (
