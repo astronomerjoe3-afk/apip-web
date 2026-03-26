@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { auth, firebaseConfigured } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, resolvePostAuthPath } from "../../lib/authRouting";
+import { establishSessionFromUser } from "../../lib/sessionClient";
 
 function errorMessage(error: unknown): string {
   if (error instanceof Error) {
@@ -63,6 +64,7 @@ export default function LoginPage() {
         email.trim(),
         password,
       );
+      await establishSessionFromUser(credential.user);
       const role = await getClientRole(credential.user);
       router.replace(resolvePostAuthPath(role, searchParams.get("next")));
     } catch (error: unknown) {

@@ -2,11 +2,13 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState, type ChangeEvent } from "react";
-import { getIdTokenResult, onAuthStateChanged, signOut, type User } from "firebase/auth";
+import { onAuthStateChanged, type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 import { apipGet } from "../../lib/apipApi";
 import { auth } from "../../lib/firebase";
+import { getClientRole } from "../../lib/authRouting";
+import { signOutEverywhere } from "../../lib/sessionClient";
 import {
   buildAnalysedRows,
   buildLessonInsights,
@@ -50,8 +52,7 @@ export default function InstructorPage() {
         return;
       }
       try {
-        const tokenResult = await getIdTokenResult(nextUser, true);
-        const nextRole = typeof tokenResult.claims.role === "string" ? (tokenResult.claims.role as Role) : "unknown";
+        const nextRole = await getClientRole(nextUser);
         setRole(nextRole);
         if (nextRole === "student") {
           router.replace("/student");
@@ -70,7 +71,7 @@ export default function InstructorPage() {
   }, [router]);
 
   const doLogout = useCallback(async (): Promise<void> => {
-    await signOut(auth);
+    await signOutEverywhere();
     router.replace("/");
   }, [router]);
 

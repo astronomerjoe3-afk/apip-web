@@ -1,37 +1,44 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getIdTokenResult, onAuthStateChanged, type User } from "firebase/auth";
+import { type User } from "firebase/auth";
 
-import { auth } from "../../lib/firebase";
+import { useAuth } from "../../lib/auth";
+import { getClientRole } from "../../lib/authRouting";
 import AdminPanel from "./AdminPanel";
 import TokenBar from "./TokenBar";
 
 type Role = "student" | "instructor" | "admin" | "unknown";
 
 export default function DashboardPage() {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, loading } = useAuth();
   const [role, setRole] = useState<Role>("unknown");
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (nextUser) => {
-      setUser(nextUser);
+    let cancelled = false;
+
+    async function resolveRole(nextUser: User | null): Promise<void> {
       if (!nextUser) {
-        setRole("unknown");
+        if (!cancelled) {
+          setRole("unknown");
+        }
         return;
       }
 
-      try {
-        const tokenResult = await getIdTokenResult(nextUser, true);
-        const resolvedRole = (tokenResult.claims?.role as Role) || "unknown";
+      const resolvedRole = await getClientRole(nextUser);
+      if (!cancelled) {
         setRole(resolvedRole);
-      } catch {
-        setRole("unknown");
       }
-    });
+    }
 
-    return () => unsub();
-  }, []);
+    if (!loading) {
+      void resolveRole(user);
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [loading, user]);
 
   return (
     <div className="dashboard-shell">

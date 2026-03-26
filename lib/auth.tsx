@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { onIdTokenChanged, type User } from "firebase/auth";
 
 import { firebaseConfigured, maybeAuth } from "./firebase";
+import { clearServerSession, establishSessionFromUser } from "./sessionClient";
 
 type AuthContextValue = {
   user: User | null;
@@ -14,14 +15,15 @@ const AuthContext = createContext<AuthContextValue>({ user: null, loading: true 
 
 async function primeUserToken(user: User | null): Promise<User | null> {
   if (!user) {
+    await clearServerSession().catch(() => undefined);
     return null;
   }
 
   try {
-    await user.getIdToken();
+    await establishSessionFromUser(user);
   } catch {
     // Allow the app to continue with the current session object even if
-    // Firebase is still settling the token in the background.
+    // session bootstrap is still settling in the background.
   }
 
   return user;

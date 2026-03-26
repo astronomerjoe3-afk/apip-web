@@ -1,6 +1,7 @@
 "use client";
 
-import { getIdTokenResult, type User } from "firebase/auth";
+import { type User } from "firebase/auth";
+import { establishSessionFromUser, readSessionUser } from "./sessionClient";
 
 export type Role = "student" | "instructor" | "admin" | "unknown";
 
@@ -21,17 +22,24 @@ export function sanitizeNextPath(value: string | null | undefined): string | nul
 
 export async function getClientRole(user: User): Promise<Role> {
   try {
-    const tokenResult = await getIdTokenResult(user, true);
-    const claim = tokenResult.claims?.role;
-
-    if (typeof claim === "string" && VALID_ROLES.has(claim as Role)) {
-      return claim as Role;
+    const sessionUser = await readSessionUser();
+    if (sessionUser && VALID_ROLES.has(sessionUser.role as Role)) {
+      return sessionUser.role as Role;
     }
-
-    return "student";
   } catch {
-    return "unknown";
+    // Fall through and try to bootstrap the server session once.
   }
+
+  try {
+    const sessionUser = await establishSessionFromUser(user);
+    if (VALID_ROLES.has(sessionUser.role as Role)) {
+      return sessionUser.role as Role;
+    }
+  } catch {
+    // Return unknown if the server session cannot be established.
+  }
+
+  return "unknown";
 }
 
 export function landingPathForRole(role: Role): string {

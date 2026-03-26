@@ -1,13 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { signOut } from "firebase/auth";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { useAuth } from "../../../../lib/auth";
-import { auth } from "../../../../lib/firebase";
 import {
   applyCurriculumModuleMeta,
   canonicalizeModuleScopedLessonId,
@@ -15,6 +13,7 @@ import {
   normalizeModuleId,
   sanitizeModuleHeadingDescription,
 } from "../../../../lib/moduleCurriculum";
+import { signOutEverywhere } from "../../../../lib/sessionClient";
 
 type PricingOffer = {
   id?: string;
@@ -568,7 +567,7 @@ export default function StudentModulePage() {
     try {
       setErr("");
       setStatus("Signing out...");
-      await signOut(auth);
+      await signOutEverywhere();
       const nextPath = currentModulePath;
       router.replace("/login?next=" + encodeURIComponent(nextPath));
     } catch (error: unknown) {

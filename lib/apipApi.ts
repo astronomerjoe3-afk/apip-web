@@ -1,26 +1,13 @@
 "use client";
 
-import { auth } from "./firebase";
+import { BFF_PREFIX } from "./sessionConstants";
 
 type JsonPrimitive = string | number | boolean | null;
 type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
 type JsonObject = { [key: string]: JsonValue };
 
-const DEFAULT_API_BASE_URL = "https://api.cognispark.tech";
-
-type FirebaseUserLike = {
-  accessToken?: string;
-  getIdToken: (forceRefresh?: boolean) => Promise<string>;
-  stsTokenManager?: {
-    accessToken?: string;
-  };
-};
-
 function resolveApiBaseUrl(): string {
-  const primary = (process.env.NEXT_PUBLIC_APIP_API_BASE_URL || "").trim();
-  const fallback = (process.env.NEXT_PUBLIC_API_BASE_URL || "").trim();
-  const base = primary || fallback || DEFAULT_API_BASE_URL;
-  return base.replace(/\/+$/, "");
+  return BFF_PREFIX;
 }
 
 function buildApiUrl(path: string): string {
@@ -29,43 +16,11 @@ function buildApiUrl(path: string): string {
   }
 
   if (/^https?:\/\//i.test(path)) {
-    return path;
+    throw new Error("Absolute API URLs are not allowed from the browser.");
   }
 
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return `${resolveApiBaseUrl()}${normalizedPath}`;
-}
-
-function cachedAccessToken(user: FirebaseUserLike | null): string | null {
-  const direct = typeof user?.accessToken === "string" ? user.accessToken.trim() : "";
-  if (direct) return direct;
-
-  const nested = typeof user?.stsTokenManager?.accessToken === "string"
-    ? user.stsTokenManager.accessToken.trim()
-    : "";
-  return nested || null;
-}
-
-async function getBearerToken(forceRefresh: boolean = false): Promise<string | null> {
-  const user = (auth?.currentUser ?? null) as FirebaseUserLike | null;
-  if (!user) return null;
-
-  if (!forceRefresh) {
-    const cached = cachedAccessToken(user);
-    if (cached) {
-      return cached;
-    }
-  }
-
-  try {
-    return await user.getIdToken(forceRefresh);
-  } catch (error) {
-    const cached = cachedAccessToken(user);
-    if (cached) {
-      return cached;
-    }
-    throw error;
-  }
 }
 
 function isFetchFailure(error: unknown): boolean {
@@ -80,44 +35,35 @@ function wait(ms: number): Promise<void> {
 }
 
 async function performRequest(path: string, init: RequestInit): Promise<Response> {
-  const run = async (forceRefreshToken: boolean): Promise<Response> => {
+  const run = async (): Promise<Response> => {
     const headers = new Headers(init.headers);
-    const token = await getBearerToken(forceRefreshToken);
-
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
-    }
 
     return fetch(buildApiUrl(path), {
       ...init,
       headers,
       cache: "no-store",
+      credentials: "same-origin",
     });
   };
 
   try {
-    const response = await run(false);
-    if (response.status === 401 && auth?.currentUser) {
-      await wait(150);
-      return run(true);
-    }
-    return response;
+    return await run();
   } catch (error) {
-    if (!isFetchFailure(error) || !auth?.currentUser) {
+    if (!isFetchFailure(error)) {
       throw error;
     }
 
     await wait(150);
 
     try {
-      return await run(false);
+      return await run();
     } catch (retryError) {
-      if (!isFetchFailure(retryError) || !auth?.currentUser) {
+      if (!isFetchFailure(retryError)) {
         throw retryError;
       }
 
       await wait(150);
-      return run(true);
+      return run();
     }
   }
 }

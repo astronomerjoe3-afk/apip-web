@@ -1,6 +1,6 @@
 // lib/apip.ts
 
-const DEFAULT_API_BASE_URL = "https://api.cognispark.tech";
+import { BFF_PREFIX } from "./sessionConstants";
 
 export type QueryParamValue = string | number | boolean | null | undefined;
 export type QueryParams = Record<string, QueryParamValue> | URLSearchParams;
@@ -37,10 +37,7 @@ export class ApiError extends Error {
 }
 
 function envBase(): string {
-  const preferred = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const fallback = process.env.NEXT_PUBLIC_API_BASE;
-  const base = (preferred || fallback || DEFAULT_API_BASE_URL).trim();
-  return base.replace(/\/+$/, "");
+  return BFF_PREFIX;
 }
 
 export function apipBase(): string {
@@ -54,7 +51,7 @@ function buildUrl(path: string, query?: QueryParams): string {
 
   const base = envBase();
   if (!base) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not set");
+    throw new Error("The same-origin API proxy is not available.");
   }
 
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
@@ -117,7 +114,6 @@ function extractErrorMessage(parsed: unknown, status: number): string {
 
 export type ApipFetchOptions = {
   method?: "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
-  token?: string;
   apiKey?: string;
   query?: QueryParams;
   body?: JsonBody;
@@ -135,10 +131,6 @@ export async function apipFetch<T = unknown>(
     Accept: "application/json",
     ...(opts.headers || {}),
   };
-
-  if (opts.token) {
-    headers.Authorization = `Bearer ${opts.token}`;
-  }
 
   if (opts.apiKey) {
     headers["X-API-Key"] = opts.apiKey;
@@ -160,6 +152,8 @@ export async function apipFetch<T = unknown>(
     method,
     headers,
     body,
+    cache: "no-store",
+    credentials: "same-origin",
     signal: opts.signal,
   });
 

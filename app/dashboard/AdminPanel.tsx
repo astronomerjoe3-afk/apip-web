@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { signOut } from "firebase/auth";
 
 import { ApiError, apipBase, apipFetch } from "@/lib/apip";
 import { auth } from "@/lib/firebase";
+import { signOutEverywhere } from "@/lib/sessionClient";
 
 type FlashTone = "success" | "warning" | "error" | "info";
 
@@ -346,8 +346,8 @@ function normalizeCreateResponse(payload: CreateKeyResponse): { keyId: string; a
 
 export default function AdminPanel() {
   const base = useMemo(() => apipBase(), []);
-  const [token, setToken] = useState<string>("");
   const [meEmail, setMeEmail] = useState<string>("");
+  const [hasClientUser, setHasClientUser] = useState<boolean>(false);
   const [authErr, setAuthErr] = useState<string>("");
   const [flash, setFlash] = useState<FlashMessage | null>(null);
 
@@ -394,28 +394,27 @@ export default function AdminPanel() {
 
   const metricsSnapshot = useMemo(() => normalizeMetrics(metrics), [metrics]);
 
-  const refreshToken = useCallback(async (): Promise<void> => {
+  const refreshSession = useCallback(async (): Promise<void> => {
     setAuthErr("");
 
     try {
       const currentUser = auth.currentUser;
       if (!currentUser) {
-        setToken("");
+        setHasClientUser(false);
         setMeEmail("");
         setAuthErr("Not logged in. Sign in again to manage the site.");
         return;
       }
 
+      setHasClientUser(true);
       setMeEmail(currentUser.email || "");
-      const nextToken = await currentUser.getIdToken(true);
-      setToken(nextToken);
     } catch (error: unknown) {
       setAuthErr(errToString(error));
     }
   }, []);
 
   const loadMetrics = useCallback(async (): Promise<void> => {
-    if (!token) {
+    if (!hasClientUser) {
       return;
     }
 
@@ -424,7 +423,6 @@ export default function AdminPanel() {
 
     try {
       const payload = await apipFetch<MetricsResponse>("/admin/metrics", {
-        token,
         query: { top_n: 10 },
       });
       setMetrics(payload);
@@ -434,10 +432,10 @@ export default function AdminPanel() {
     } finally {
       setMetricsLoading(false);
     }
-  }, [token]);
+  }, [hasClientUser]);
 
   const loadKeys = useCallback(async (): Promise<void> => {
-    if (!token) {
+    if (!hasClientUser) {
       return;
     }
 
@@ -446,7 +444,6 @@ export default function AdminPanel() {
 
     try {
       const payload = await apipFetch<KeysListResponse>("/admin/keys", {
-        token,
         query: { limit: 50 },
       });
 
@@ -465,28 +462,31 @@ export default function AdminPanel() {
     } finally {
       setKeysLoading(false);
     }
-  }, [token]);
+  }, [hasClientUser]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(() => {
-      void refreshToken();
+      void refreshSession();
     });
 
-    void refreshToken();
+    void refreshSession();
     return () => unsubscribe();
-  }, [refreshToken]);
+  }, [refreshSession]);
 
   useEffect(() => {
-    if (!token) {
+    if (!hasClientUser) {
+      setMetrics(null);
+      setKeys([]);
+      setSelectedKeyId("");
       return;
     }
 
     void loadMetrics();
     void loadKeys();
-  }, [loadKeys, loadMetrics, token]);
+  }, [hasClientUser, loadKeys, loadMetrics]);
 
   const createKey = useCallback(async (): Promise<void> => {
-    if (!token) {
+    if (!hasClientUser) {
       return;
     }
 
@@ -498,7 +498,6 @@ export default function AdminPanel() {
 
     try {
       const payload = await apipFetch<CreateKeyResponse>("/admin/keys", {
-        token,
         method: "POST",
         body: create,
       });
@@ -523,11 +522,11 @@ export default function AdminPanel() {
     } finally {
       setCreateBusy(false);
     }
-  }, [create, loadKeys, loadMetrics, token]);
+  }, [create, hasClientUser, loadKeys, loadMetrics]);
 
   const runKeyAction = useCallback(
     async (keyId: string, action: "enable" | "disable" | "reset-counters"): Promise<void> => {
-      if (!token || !keyId) {
+      if (!hasClientUser || !keyId) {
         return;
       }
 
@@ -536,7 +535,6 @@ export default function AdminPanel() {
 
       try {
         await apipFetch("/admin/keys/" + encodeURIComponent(keyId) + "/" + action, {
-          token,
           method: "POST",
         });
 
@@ -559,35 +557,13 @@ export default function AdminPanel() {
         setKeyActionBusy("");
       }
     },
-    [loadKeys, loadMetrics, token],
+    [hasClientUser, loadKeys, loadMetrics],
   );
-
-  const copyAdminToken = useCallback(async (): Promise<void> => {
-    setAuthErr("");
-    setFlash(null);
-
-    try {
-      if (!token) {
-        await refreshToken();
-      }
-
-      if (!auth.currentUser) {
-        setAuthErr("Not logged in.");
-        return;
-      }
-
-      const resolvedToken = token || (await auth.currentUser.getIdToken(true));
-      await copyToClipboard(resolvedToken);
-      setFlash({ tone: "info", message: "Fresh admin ID token copied to your clipboard." });
-    } catch (error: unknown) {
-      setAuthErr(errToString(error));
-    }
-  }, [refreshToken, token]);
 
   const doLogout = useCallback(async (): Promise<void> => {
     try {
-      await signOut(auth);
-      setToken("");
+      await signOutEverywhere();
+      setHasClientUser(false);
       setMeEmail("");
       setMetrics(null);
       setKeys([]);
@@ -611,16 +587,13 @@ export default function AdminPanel() {
               </p>
             </div>
             <div className="admin-toolbar">
-              <button className="admin-btn admin-btn-secondary" onClick={() => void refreshToken()} disabled={!auth.currentUser}>
-                Refresh session
+              <button className="admin-btn admin-btn-secondary" onClick={() => void refreshSession()} disabled={!hasClientUser}>
+                Refresh access
               </button>
               <a className="admin-btn admin-btn-secondary" href="/operations-guide#admin-dashboard">
                 Operations guide
               </a>
-              <button className="admin-btn admin-btn-primary" onClick={() => void copyAdminToken()} disabled={!auth.currentUser}>
-                Copy admin token
-              </button>
-              <button className="admin-btn admin-btn-danger" onClick={() => void doLogout()} disabled={!auth.currentUser}>
+              <button className="admin-btn admin-btn-danger" onClick={() => void doLogout()} disabled={!hasClientUser}>
                 Logout
               </button>
             </div>
@@ -664,7 +637,7 @@ export default function AdminPanel() {
                 Use this summary to check whether the platform is healthy or whether key cleanup needs attention first.
               </p>
             </div>
-            <button className="admin-btn admin-btn-secondary" onClick={() => void loadMetrics()} disabled={!token || metricsLoading}>
+            <button className="admin-btn admin-btn-secondary" onClick={() => void loadMetrics()} disabled={!hasClientUser || metricsLoading}>
               {metricsLoading ? "Refreshing..." : "Reload metrics"}
             </button>
           </div>
@@ -816,10 +789,10 @@ export default function AdminPanel() {
           </div>
 
           <div className="admin-toolbar admin-toolbar-tight">
-            <button className="admin-btn admin-btn-primary" onClick={() => void createKey()} disabled={!token || createBusy}>
+            <button className="admin-btn admin-btn-primary" onClick={() => void createKey()} disabled={!hasClientUser || createBusy}>
               {createBusy ? "Creating..." : "Create key"}
             </button>
-            <button className="admin-btn admin-btn-secondary" onClick={() => void loadKeys()} disabled={!token || keysLoading}>
+            <button className="admin-btn admin-btn-secondary" onClick={() => void loadKeys()} disabled={!hasClientUser || keysLoading}>
               Reload key inventory
             </button>
           </div>
@@ -853,7 +826,7 @@ export default function AdminPanel() {
                 Search by key ID, label, or scope. Use disable when a key is exposed or behaving unexpectedly.
               </p>
             </div>
-            <button className="admin-btn admin-btn-secondary" onClick={() => void loadKeys()} disabled={!token || keysLoading}>
+            <button className="admin-btn admin-btn-secondary" onClick={() => void loadKeys()} disabled={!hasClientUser || keysLoading}>
               {keysLoading ? "Loading..." : "Reload keys"}
             </button>
           </div>
@@ -956,7 +929,7 @@ export default function AdminPanel() {
                       onClick={() =>
                         void runKeyAction(selectedKey.key_id, selectedKey.active ? "disable" : "enable")
                       }
-                      disabled={!token || Boolean(keyActionBusy)}
+                      disabled={!hasClientUser || Boolean(keyActionBusy)}
                     >
                       {keyActionBusy === (selectedKey.key_id + ":" + (selectedKey.active ? "disable" : "enable"))
                         ? selectedKey.active
@@ -969,7 +942,7 @@ export default function AdminPanel() {
                     <button
                       className="admin-btn admin-btn-secondary"
                       onClick={() => void runKeyAction(selectedKey.key_id, "reset-counters")}
-                      disabled={!token || Boolean(keyActionBusy)}
+                      disabled={!hasClientUser || Boolean(keyActionBusy)}
                     >
                       {keyActionBusy === selectedKey.key_id + ":reset-counters" ? "Resetting..." : "Reset counters"}
                     </button>
@@ -1001,14 +974,14 @@ export default function AdminPanel() {
           <div className="admin-detail-stack">
             <div className="admin-detail-card">
               <span className="admin-detail-label">API base</span>
-              <strong>{base || "Missing NEXT_PUBLIC_API_BASE_URL"}</strong>
+              <strong>{base || "Unavailable"}</strong>
             </div>
             <div className="admin-detail-card">
               <span className="admin-detail-label">Signed in as</span>
               <strong>{meEmail || "No authenticated session"}</strong>
             </div>
             <div className="admin-notice admin-notice-info">
-              Tokens are never printed automatically on screen. Copy them only when you truly need them, then keep them out of chat logs and screenshots.
+              Admin calls now run through the same-origin BFF with an HttpOnly session cookie, so bearer tokens stay off the browser UI path.
             </div>
           </div>
         </section>

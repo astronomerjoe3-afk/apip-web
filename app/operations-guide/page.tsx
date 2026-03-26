@@ -9,7 +9,7 @@ const ADMIN_SECTIONS = [
     purpose: "Use this area to confirm you are on the right account before making any operational change.",
     actions: [
       "Check the signed-in email, UID, and role claim.",
-      "Use Refresh session if anything looks stale.",
+      "Use Refresh access if anything looks stale.",
       "Open this guide from the toolbar whenever a new admin needs orientation.",
     ],
   },

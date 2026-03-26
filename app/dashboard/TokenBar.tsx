@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, type User, signOut } from "firebase/auth";
+import { onAuthStateChanged, type User } from "firebase/auth";
+
 import { auth } from "../../lib/firebase";
+import { signOutEverywhere } from "../../lib/sessionClient";
 
 type Props = {
   label?: string;
@@ -26,27 +28,15 @@ export default function TokenBar({ label = "Session tools" }: Props) {
     return () => unsubscribe();
   }, []);
 
-  async function copyIdToken(forceRefresh: boolean): Promise<void> {
-    try {
-      setStatus("Fetching token...");
-      if (!user) {
-        setStatus("Not signed in.");
-        return;
-      }
-
-      const token = await user.getIdToken(forceRefresh);
-      await navigator.clipboard.writeText(token);
-      setStatus(forceRefresh ? "Fresh ID token copied." : "ID token copied.");
-      window.setTimeout(() => setStatus(""), 2500);
-    } catch (error: unknown) {
-      setStatus(`Token copy failed: ${errorMessage(error)}`.slice(0, 160));
-    }
+  function refreshWorkspace(): void {
+    setStatus("Refreshing workspace...");
+    window.location.reload();
   }
 
   async function doLogout(): Promise<void> {
     try {
       setStatus("Signing out...");
-      await signOut(auth);
+      await signOutEverywhere();
       setStatus("Signed out.");
       window.location.href = "/login";
     } catch (error: unknown) {
@@ -74,16 +64,13 @@ export default function TokenBar({ label = "Session tools" }: Props) {
         <div>
           <div style={{ fontWeight: 700 }}>{label}</div>
           <div style={{ opacity: 0.75, fontSize: 13 }}>
-            Token is never shown on screen — only copied on click.
+            Session access is managed server-side. No bearer token is copied to the clipboard here.
           </div>
         </div>
 
         <div style={{ display: "flex", gap: 10 }}>
-          <button onClick={() => void copyIdToken(false)} disabled={!user}>
-            Copy ID token
-          </button>
-          <button onClick={() => void copyIdToken(true)} disabled={!user}>
-            Refresh + copy token
+          <button onClick={() => refreshWorkspace()} disabled={!user}>
+            Refresh workspace
           </button>
           <button onClick={() => void doLogout()} disabled={!user}>
             Logout

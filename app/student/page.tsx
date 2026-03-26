@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { signOut, type User } from "firebase/auth";
+import { type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 import { apipGet, apipPost } from "../../lib/apipApi";
-import { auth } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, type Role } from "../../lib/authRouting";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
+import { signOutEverywhere } from "../../lib/sessionClient";
 
 type PricingOffer = {
   id?: string;
@@ -326,7 +326,7 @@ export default function StudentHomePage() {
   async function handleLogout(): Promise<void> {
     try {
       setStatus("Signing out...");
-      await signOut(auth);
+      await signOutEverywhere();
       router.replace("/login?next=/student");
     } catch (error: unknown) {
       setStatus("");
