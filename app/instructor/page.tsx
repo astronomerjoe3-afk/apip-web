@@ -25,6 +25,34 @@ import InstructorSidebar from "./InstructorSidebar";
 import OverviewPanel from "./OverviewPanel";
 import RosterPanel from "./RosterPanel";
 import type { ApiResp, ReadinessFilter, Role, SupportAction, UploadItem } from "./types";
+
+function summarizeWarnings(items: string[]): string[] {
+  const compactItems = items
+    .map((item) => item.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  const indexWarnings = compactItems.filter((item) =>
+    /events_ordering_missing_index_fallback|requires an index|firestore\/indexes\?create/i.test(item)
+  );
+  const otherWarnings = compactItems.filter((item) => !indexWarnings.includes(item));
+  const summaries: string[] = [];
+
+  if (indexWarnings.length) {
+    const countLabel = indexWarnings.length === 1 ? "One analytics query is" : `${indexWarnings.length} analytics queries are`;
+    summaries.push(`${countLabel} using fallback ordering because a Firestore index is still missing. Create the index in Firebase, then reload this dashboard.`);
+  }
+
+  const seen = new Set<string>();
+  for (const warning of otherWarnings) {
+    const normalized = warning.replace(/https?:\/\/\S+/gi, "").replace(/\s+/g, " ").trim();
+    if (!normalized) continue;
+    if (seen.has(normalized)) continue;
+    seen.add(normalized);
+    summaries.push(normalized);
+  }
+
+  return summaries;
+}
+
 export default function InstructorPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
@@ -129,6 +157,7 @@ export default function InstructorPage() {
     });
     return Array.from(counts.entries()).sort((left, right) => right[1] - left[1]);
   }, [uploadQueue]);
+  const visibleWarnings = useMemo(() => summarizeWarnings(warnings), [warnings]);
 
   const cohortPulse = summary.highRisk > 0 ? String(summary.highRisk) + " urgent follow-ups" : "Stable today";
   const header = role === "admin" ? "Instructor Dashboard (Admin)" : "Instructor Dashboard";
@@ -201,7 +230,7 @@ export default function InstructorPage() {
         </section>
       ) : null}
 
-      {warnings.length ? (
+      {visibleWarnings.length ? (
         <section className="admin-card admin-notice admin-notice-warning" style={{ marginTop: "1rem" }}>
           <div className="admin-section-header admin-section-header-compact">
             <div>
@@ -210,7 +239,7 @@ export default function InstructorPage() {
             </div>
           </div>
           <ul className="admin-bullet-list" style={{ marginTop: "0.8rem", paddingLeft: "1.1rem" }}>
-            {warnings.slice(0, 6).map((warning, index) => (
+            {visibleWarnings.slice(0, 6).map((warning, index) => (
               <li key={warning + "-" + String(index)}>{warning}</li>
             ))}
           </ul>

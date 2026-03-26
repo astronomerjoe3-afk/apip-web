@@ -258,6 +258,17 @@ function normalizeAssessmentText(value: string): string {
   return normalized;
 }
 
+function normalizeLessonDisplayText(value: string): string {
+  return normalizeAssessmentText(value);
+}
+
+function normalizeLessonDisplayMultiline(value: string): string {
+  return String(value || "")
+    .split("\n")
+    .map((line) => normalizeLessonDisplayText(line))
+    .join("\n");
+}
+
 function dedupeSupportTextItems(items: string[] = [], reserved: string[] = []): string[] {
   const seen = new Set(reserved.map(normalizeSupportText).filter(Boolean));
   return items.filter((item) => {
@@ -1033,7 +1044,7 @@ export default function LessonRunner({
           />
         ) : null}
         {payload.instructions ? (
-          <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">{payload.instructions}</div>
+          <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">{normalizeLessonDisplayMultiline(payload.instructions)}</div>
         ) : null}
         {payload.questions.map((question) => (
           <QuestionBlock
@@ -1081,14 +1092,14 @@ export default function LessonRunner({
       <div className="space-y-6">
         {isIntroStep ? (
           <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
-            {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{payload.intro}</p> : null}
+            {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{normalizeLessonDisplayMultiline(payload.intro)}</p> : null}
 
           {normalizedTeachingFocus.length ? (
             <div className={`${payload.intro ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
               <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
                 {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
-                  <li key={`${index}-${item}`}>{item}</li>
+                  <li key={`${index}-${item}`}>{normalizeLessonDisplayMultiline(item)}</li>
                 ))}
               </ul>
             </div>
@@ -1101,8 +1112,8 @@ export default function LessonRunner({
               clampedScaffoldStepIndex === tableStart + index ? (
               <div key={table.title} className="lesson-display-slide overflow-hidden rounded-2xl border bg-white shadow-sm">
                 <div className="border-b bg-slate-50 p-5">
-                  <h4 className="text-lg font-semibold text-slate-900">{table.title}</h4>
-                  {table.caption ? <p className="mt-2 text-sm text-slate-600">{table.caption}</p> : null}
+                  <h4 className="text-lg font-semibold text-slate-900">{normalizeLessonDisplayText(table.title)}</h4>
+                  {table.caption ? <p className="mt-2 text-sm text-slate-600">{normalizeLessonDisplayMultiline(table.caption)}</p> : null}
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full table-fixed border-separate border-spacing-0 text-left text-sm text-slate-700">
@@ -1116,7 +1127,7 @@ export default function LessonRunner({
                     <thead className="bg-white text-slate-500">
                       <tr>
                         {table.columns.map((column) => (
-                          <th key={column} className="border-b px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">{column}</th>
+                          <th key={column} className="border-b px-5 py-3 pr-8 align-top text-left font-semibold leading-6 whitespace-normal break-words">{normalizeLessonDisplayText(column)}</th>
                         ))}
                       </tr>
                     </thead>
@@ -1124,7 +1135,7 @@ export default function LessonRunner({
                       {table.rows.map((row, rowIndex) => (
                         <tr key={`${table.title}-${rowIndex}`} className="even:bg-slate-50/70">
                           {row.map((cell, cellIndex) => (
-                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-5 py-3 pr-8 align-top text-left whitespace-normal break-words leading-6">{cell}</td>
+                            <td key={`${table.title}-${rowIndex}-${cellIndex}`} className="border-b border-slate-100 px-5 py-3 pr-8 align-top text-left whitespace-normal break-words leading-6">{normalizeLessonDisplayMultiline(cell)}</td>
                           ))}
                         </tr>
                       ))}
@@ -1159,8 +1170,8 @@ export default function LessonRunner({
                 <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
                   {card.kind === "video" ? "Video support" : isMeasurementReportLab || card.kind === "interactive" ? "Interactive support" : shouldShowImage ? "Visual support" : "Concept support"}
                 </span>
-                <h4 className="mt-4 text-lg font-semibold text-slate-900">{card.title}</h4>
-                {!isConceptSupportCard ? <p className="mt-2 text-slate-700">{card.caption}</p> : null}
+                <h4 className="mt-4 text-lg font-semibold text-slate-900">{normalizeLessonDisplayText(card.title)}</h4>
+                {!isConceptSupportCard ? <p className="mt-2 text-slate-700">{normalizeLessonDisplayMultiline(card.caption)}</p> : null}
 
                 {isMeasurementInstrumentTour ? (
                   <div className="mt-4 overflow-hidden rounded-2xl border bg-white shadow-sm">
@@ -1198,12 +1209,12 @@ export default function LessonRunner({
                         <div className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-sky-800">
                           Concept snapshot
                         </div>
-                        <p className="mt-4 text-base leading-7 text-slate-700">{card.caption}</p>
+                        <p className="mt-4 text-base leading-7 text-slate-700">{normalizeLessonDisplayMultiline(card.caption)}</p>
                         {supportHighlights.length ? (
                           <div className="mt-4 grid gap-3 sm:grid-cols-2">
                             {supportHighlights.slice(0, 3).map((item) => (
                               <div key={item} className="rounded-2xl border border-sky-100 bg-white/90 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
-                                {item}
+                                {normalizeLessonDisplayMultiline(item)}
                               </div>
                             ))}
                           </div>
@@ -1216,7 +1227,7 @@ export default function LessonRunner({
                 {supportHighlights.length && !isConceptSupportCard ? (
                   <ul className="mt-4 space-y-2 text-sm text-slate-700">
                     {supportHighlights.map((item) => (
-                      <li key={item} className="rounded-xl bg-white/80 px-3 py-2 shadow-sm ring-1 ring-sky-100">{item}</li>
+                      <li key={item} className="rounded-xl bg-white/80 px-3 py-2 shadow-sm ring-1 ring-sky-100">{normalizeLessonDisplayMultiline(item)}</li>
                     ))}
                   </ul>
                 ) : null}
@@ -1232,40 +1243,40 @@ export default function LessonRunner({
             clampedScaffoldStepIndex === sectionStart + index ? (
             <div key={`${section.heading}-${index}`} className="lesson-display-slide rounded-2xl border bg-white p-6 shadow-sm">
 
-            <h4 className="text-lg font-semibold text-slate-900">{section.heading === "Fix these ideas" && !payload.misconception_targets?.length ? "What this lesson will sharpen" : section.heading}</h4>
+            <h4 className="text-lg font-semibold text-slate-900">{normalizeLessonDisplayText(section.heading === "Fix these ideas" && !payload.misconception_targets?.length ? "What this lesson will sharpen" : section.heading)}</h4>
             {section.heading === "Fix these ideas" ? (
               <div className="mt-3 space-y-4">
-                <p className="text-slate-700">{payload.misconception_targets?.length ? "Focus on these deeper explanations as you move through the next activities." : "Your opening check was fairly strong. Use this lesson to deepen the meaning behind these ideas before the next check."}</p>
+                <p className="text-slate-700">{normalizeLessonDisplayText(payload.misconception_targets?.length ? "Focus on these deeper explanations as you move through the next activities." : "Your opening check was fairly strong. Use this lesson to deepen the meaning behind these ideas before the next check.")}</p>
                 {scaffoldFocusItems.length ? (
                   <div className="grid gap-3 sm:grid-cols-2">
                     {scaffoldFocusItems.map((item) => (
-                      <div key={item} className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 text-sm leading-6 text-slate-700">{item}</div>
+                      <div key={item} className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 text-sm leading-6 text-slate-700">{normalizeLessonDisplayMultiline(item)}</div>
                     ))}
                   </div>
                 ) : section.body && !section.worked_example ? (
-                  <p className="whitespace-pre-line text-slate-700">{section.body}</p>
+                  <p className="whitespace-pre-line text-slate-700">{normalizeLessonDisplayMultiline(section.body)}</p>
                 ) : null}
                 {payload.misconception_targets?.length && section.body ? (
-                  <p className="text-sm whitespace-pre-line text-slate-600">{section.body}</p>
+                  <p className="text-sm whitespace-pre-line text-slate-600">{normalizeLessonDisplayMultiline(section.body)}</p>
                 ) : (
-                  <p className="text-sm text-slate-600">The next activities, examples, and simulation are arranged to strengthen these ideas one at a time.</p>
+                  <p className="text-sm text-slate-600">{normalizeLessonDisplayText("The next activities, examples, and simulation are arranged to strengthen these ideas one at a time.")}</p>
                 )}
               </div>
             ) : null}
             {section.body && !section.worked_example && section.heading !== "Fix these ideas" ? (
-                <p className="mt-3 whitespace-pre-line text-slate-700">{section.body}</p>
+                <p className="mt-3 whitespace-pre-line text-slate-700">{normalizeLessonDisplayMultiline(section.body)}</p>
             ) : null}
 
             {section.technical_words?.length ? (
               <div className="mt-5 grid gap-4 md:grid-cols-2">
                 {section.technical_words.map((entry) => (
                   <div key={entry.term} className="rounded-2xl border border-sky-100 bg-sky-50/60 p-4 shadow-sm">
-                    <p className="text-base font-semibold text-slate-900">{entry.term}</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-700">{entry.meaning}</p>
+                    <p className="text-base font-semibold text-slate-900">{normalizeLessonDisplayText(entry.term)}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-700">{normalizeLessonDisplayMultiline(entry.meaning)}</p>
                     {entry.why_it_matters ? (
                       <p className="mt-3 text-sm leading-6 text-slate-600">
                         <span className="font-medium text-slate-700">Why it matters:</span>{" "}
-                        {entry.why_it_matters}
+                        {normalizeLessonDisplayMultiline(entry.why_it_matters)}
                       </p>
                     ) : null}
                   </div>
@@ -1284,13 +1295,13 @@ export default function LessonRunner({
                     {section.shared_formula_analogy ? (
                       <div className="mb-4 rounded-2xl border border-sky-100 bg-sky-50/80 px-4 py-3 text-sm leading-6 text-slate-700">
                         <span className="font-medium text-slate-900">Shared analogy match:</span>{" "}
-                        {section.shared_formula_analogy}
+                        {normalizeLessonDisplayMultiline(section.shared_formula_analogy)}
                       </div>
                     ) : null}
                     {section.formula_constants_note ? (
                       <div className="mb-4 rounded-2xl border border-emerald-100 bg-emerald-50/80 px-4 py-3 text-sm leading-6 text-slate-700">
                         <span className="font-medium text-slate-900">Constants for this lesson:</span>{" "}
-                        {section.formula_constants_note}
+                        {normalizeLessonDisplayMultiline(section.formula_constants_note)}
                       </div>
                     ) : null}
                     <div className="overflow-x-auto">
@@ -1335,27 +1346,29 @@ export default function LessonRunner({
                                 {row.meaning ? (
                                   <p className="mt-2 text-sm leading-6 text-slate-700">
                                     <span className="font-medium text-slate-800">Meaning:</span>{" "}
-                                    {row.meaning}
+                                    {normalizeLessonDisplayMultiline(row.meaning)}
                                   </p>
                                 ) : null}
                                 {row.units_text ? (
                                   <p className="mt-2 text-sm leading-6 text-slate-600">
                                     <span className="font-medium text-slate-700">Units:</span>{" "}
-                                    {row.units_text}
+                                    {normalizeLessonDisplayMultiline(row.units_text)}
                                   </p>
                                 ) : null}
                                 {row.conditions ? (
                                   <p className="mt-2 text-sm leading-6 text-slate-600">
                                     <span className="font-medium text-slate-700">Best use:</span>{" "}
-                                    {row.conditions}
+                                    {normalizeLessonDisplayMultiline(row.conditions)}
                                   </p>
                                 ) : null}
                               </td>
                               {hasRowAnalogies ? (
-                                <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{row.analogy_equivalent}</td>
+                                <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{normalizeLessonDisplayMultiline(row.analogy_equivalent)}</td>
                               ) : null}
                               {hasRowConstants ? (
-                                <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">{row.constants || "—"}</td>
+                                <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">
+                                  {row.constants ? normalizeLessonDisplayMultiline(row.constants) : "None"}
+                                </td>
                               ) : null}
                             </tr>
                           ))}
@@ -1370,7 +1383,7 @@ export default function LessonRunner({
             {section.analogy ? (
                 <div className="mt-5 rounded-2xl bg-slate-50 p-5">
                 <p className="font-medium text-slate-900">Analogy bridge</p>
-                <p className="mt-2 text-slate-700">{section.analogy}</p>
+                <p className="mt-2 text-slate-700">{normalizeLessonDisplayMultiline(section.analogy)}</p>
               </div>
             ) : null}
 
@@ -1387,13 +1400,13 @@ export default function LessonRunner({
                 {section.visual.caption || section.visual.highlights?.length ? (
                   <div className="border-t bg-slate-50/80 p-5">
                     {section.visual.caption ? (
-                      <p className="text-slate-700">{section.visual.caption}</p>
+                      <p className="text-slate-700">{normalizeLessonDisplayMultiline(section.visual.caption)}</p>
                     ) : null}
                     {section.visual.highlights?.length ? (
                       <div className="mt-4 grid gap-3 sm:grid-cols-2">
                         {section.visual.highlights.slice(0, 4).map((item) => (
                           <div key={item} className="rounded-2xl border border-sky-100 bg-white px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
-                            {item}
+                            {normalizeLessonDisplayMultiline(item)}
                           </div>
                         ))}
                       </div>
@@ -1407,21 +1420,21 @@ export default function LessonRunner({
                 <div className="mt-5 rounded-2xl bg-slate-50 p-5">
                 <p className="font-medium text-slate-900">Example</p>
                 <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-slate-500">Question</p>
-                <p className="mt-2 text-slate-700">{section.worked_example.prompt}</p>
+                <p className="mt-2 text-slate-700">{normalizeLessonDisplayMultiline(section.worked_example.prompt)}</p>
                 <p className="mt-4 text-sm font-medium uppercase tracking-[0.12em] text-slate-500">Step-by-step solution</p>
                 <ol className="mt-3 list-decimal space-y-2 pl-5 text-slate-700">
                   {section.worked_example.steps.map((step, i) => (
-                    <li key={i}>{step}</li>
+                    <li key={i}>{normalizeLessonDisplayMultiline(step)}</li>
                   ))}
                 </ol>
                 <p className="mt-4 text-slate-800">
                   <span className="font-medium">Final answer:</span>{" "}
-                  {section.worked_example.answer}
+                  {normalizeLessonDisplayMultiline(section.worked_example.answer)}
                 </p>
                 {section.worked_example.answer_reason ? (
                   <p className="mt-3 text-slate-700">
                     <span className="font-medium">Why this answer is right:</span>{" "}
-                    {section.worked_example.answer_reason}
+                    {normalizeLessonDisplayMultiline(section.worked_example.answer_reason)}
                   </p>
                 ) : null}
               </div>
@@ -1430,7 +1443,7 @@ export default function LessonRunner({
             {section.check_for_understanding ? (
                 <div className="mt-5 rounded-2xl border border-blue-200 bg-blue-50 p-5 text-slate-800">
                 <span className="font-medium">Think about this:</span>{" "}
-                {section.check_for_understanding}
+                {normalizeLessonDisplayMultiline(section.check_for_understanding)}
               </div>
             ) : null}
             </div>
@@ -1538,7 +1551,7 @@ export default function LessonRunner({
       <div className="space-y-4">
         {payload.instructions ? (
           <div className="rounded-2xl border bg-white p-5 shadow-sm text-slate-700">
-            {payload.instructions}
+            {normalizeLessonDisplayMultiline(payload.instructions)}
           </div>
         ) : null}
 
@@ -1824,19 +1837,19 @@ export default function LessonRunner({
       <div className="space-y-4">
         <div className="rounded-2xl border bg-white p-5 shadow-sm">
           {payload.title ? (
-            <h3 className="text-lg font-semibold text-slate-900">{payload.title}</h3>
+            <h3 className="text-lg font-semibold text-slate-900">{normalizeLessonDisplayText(payload.title)}</h3>
           ) : null}
           {payload.instructions ? (
-            <p className="mt-2 text-slate-700">{payload.instructions}</p>
+            <p className="mt-2 text-slate-700">{normalizeLessonDisplayMultiline(payload.instructions)}</p>
           ) : null}
           {payload.task_prompt ? (
             <div className="mt-4 rounded-xl bg-slate-50 p-4 text-slate-800">
-              <span className="font-medium">Your task:</span> {payload.task_prompt}
+              <span className="font-medium">Your task:</span> {normalizeLessonDisplayMultiline(payload.task_prompt)}
             </div>
           ) : null}
           {payload.try_first ? (
             <div className="mt-4 rounded-xl border border-sky-200 bg-sky-50 p-4 text-sky-950">
-              <span className="font-medium">Try this first:</span> {payload.try_first}
+              <span className="font-medium">Try this first:</span> {normalizeLessonDisplayMultiline(payload.try_first)}
             </div>
           ) : null}
         </div>
@@ -1848,19 +1861,19 @@ export default function LessonRunner({
               <ol className="mt-3 space-y-2 text-sm text-slate-700">
                 {payload.explore_steps.map((step, index) => (
                   <li key={`${step}-${index}`}>
-                    <span className="font-medium text-slate-900">Step {index + 1}:</span> {step}
+                    <span className="font-medium text-slate-900">Step {index + 1}:</span> {normalizeLessonDisplayMultiline(step)}
                   </li>
                 ))}
               </ol>
             ) : null}
             {payload.watch_for?.length ? (
               <div className="mt-4 text-sm text-slate-700">
-                <span className="font-semibold text-slate-900">Watch for:</span> {payload.watch_for.join(" ")}
+                <span className="font-semibold text-slate-900">Watch for:</span> {normalizeLessonDisplayMultiline(payload.watch_for.join(" "))}
               </div>
             ) : null}
             {payload.takeaway ? (
               <div className="mt-4 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-900">
-                <span className="font-medium">What this should show:</span> {payload.takeaway}
+                <span className="font-medium">What this should show:</span> {normalizeLessonDisplayMultiline(payload.takeaway)}
               </div>
             ) : null}
           </div>
@@ -3205,7 +3218,7 @@ export default function LessonRunner({
           }
           disabled={isSubmitting}
         >
-          {payload.completion_text ?? "I have finished this activity"}
+          {normalizeLessonDisplayText(payload.completion_text ?? "I have finished this activity")}
         </PrimaryButton>
       </div>
     );
@@ -3330,11 +3343,11 @@ export default function LessonRunner({
               </span>
               {payload.title ? (
                 <h3 className="mt-4 text-2xl font-semibold text-slate-900">
-                  {payload.title}
+                  {normalizeLessonDisplayText(payload.title)}
                 </h3>
               ) : null}
               <p className="mt-3 text-base leading-7 text-slate-700">
-                {payload.prompt}
+                {normalizeLessonDisplayMultiline(payload.prompt)}
               </p>
               <div className="mt-4 max-w-3xl rounded-2xl bg-white/85 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm ring-1 ring-sky-100">
                 {reflectionMission.intro}
@@ -3397,16 +3410,16 @@ export default function LessonRunner({
                   Graph check
                 </span>
                 <h4 className="mt-4 text-lg font-semibold text-slate-900">
-                  {payload.visual_check.title}
+                  {normalizeLessonDisplayText(payload.visual_check.title)}
                 </h4>
                 <p className="mt-3 text-sm leading-6 text-slate-700">
-                  {payload.visual_check.prompt}
+                  {normalizeLessonDisplayMultiline(payload.visual_check.prompt)}
                 </p>
                 {payload.visual_check.callouts?.length ? (
                   <div className="mt-4 grid gap-3">
                     {payload.visual_check.callouts.map((item) => (
                       <div key={item} className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 text-sm leading-6 text-slate-700">
-                        {item}
+                        {normalizeLessonDisplayMultiline(item)}
                       </div>
                     ))}
                   </div>
@@ -3436,7 +3449,7 @@ export default function LessonRunner({
                 <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                   Strong answer {index + 1}
                 </span>
-                <p className="mt-3 text-sm leading-6 text-slate-700">{item}</p>
+                <p className="mt-3 text-sm leading-6 text-slate-700">{normalizeLessonDisplayMultiline(item)}</p>
               </div>
             ))}
           </div>
@@ -3607,7 +3620,7 @@ export default function LessonRunner({
       <div className="space-y-4">
         <div className="rounded-2xl border bg-white p-5 shadow-sm">
           <p className="text-slate-700">
-            {payload.instructions ?? "Answer the final questions carefully."}
+            {normalizeLessonDisplayMultiline(payload.instructions ?? "Answer the final questions carefully.")}
           </p>
           <p className="mt-3 text-sm text-slate-600">
             {String(payload.question_count ?? payload.questions.length) + " questions. Aim for " + String(payload.passing_percent ?? 80) + "% to master this lesson."}
