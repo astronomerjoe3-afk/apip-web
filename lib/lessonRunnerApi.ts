@@ -6414,6 +6414,7 @@ function repairDamagedRenderedProse(value: string): string {
 
   normalized = normalized
     .replace(/\b(km|cm|mm|kg|nm|ms|hz|pa|ev|kev|mev|gev)\b/gi, (token) => token.toLowerCase())
+    .replace(/\b(AN|AS|AT|BE|BY|DO|IF|IN|IS|IT|OF|ON|OR|SO|TO|UP|WE)\b/g, (token) => token.toLowerCase())
     .replace(/(\d(?:[\d.]*))\s+([GMS])\b/g, (_match, valueText: string, unit: string) => `${valueText} ${unit.toLowerCase()}`)
     .replace(/\b(to|in|into|from|as|per|of|by)\s+([GMS])\b/g, (_match, prep: string, unit: string) => `${prep} ${unit.toLowerCase()}`)
     .replace(/(^|[.!?]\s+|\n\s*)([a-z])/g, (_match, prefix: string, first: string) => `${prefix}${first.toUpperCase()}`);
