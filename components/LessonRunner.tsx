@@ -171,28 +171,15 @@ const ASSESSMENT_TEXT_ACRONYMS = [
   "UV",
 ] as const;
 const ASSESSMENT_TEXT_LOWERCASE_TOKENS = [
-  "a",
-  "c",
   "cm",
-  "ev",
   "g",
-  "gev",
-  "hz",
-  "j",
   "kg",
   "km",
   "m",
-  "ma",
-  "mev",
   "mm",
   "ms",
-  "mv",
-  "n",
   "nm",
-  "pa",
   "s",
-  "v",
-  "w",
 ] as const;
 const ASSESSMENT_TEXT_LOWERCASE_PREFIXES = [
   "centi-",
@@ -214,6 +201,10 @@ function normalizeAssessmentText(value: string): string {
 
   const letters = singleLine.match(/[A-Za-z]/g) ?? [];
   if (letters.length < 2) {
+    const numericLowercaseUnit = singleLine.match(/^([0-9.]+)\s+([GMS])$/);
+    if (numericLowercaseUnit) {
+      return `${numericLowercaseUnit[1]} ${numericLowercaseUnit[2].toLowerCase()}`;
+    }
     const lowered = singleLine.toLowerCase();
     if (ASSESSMENT_TEXT_LOWERCASE_TOKENS.includes(lowered as typeof ASSESSMENT_TEXT_LOWERCASE_TOKENS[number])) {
       return lowered;
@@ -228,7 +219,7 @@ function normalizeAssessmentText(value: string): string {
   const uppercaseCount = letters.filter((letter) => letter === letter.toUpperCase()).length;
   const lowercaseCount = letters.filter((letter) => letter === letter.toLowerCase()).length;
   const isShouty = lowercaseCount === 0 || uppercaseCount / letters.length > 0.92;
-  if (!isShouty || /[=^_<>]/.test(singleLine)) {
+  if (!isShouty || /[<>]/.test(singleLine)) {
     return singleLine;
   }
 
@@ -240,18 +231,22 @@ function normalizeAssessmentText(value: string): string {
 
   for (const acronym of ASSESSMENT_TEXT_ACRONYMS) {
     const titleCaseAcronym = acronym.charAt(0) + acronym.slice(1).toLowerCase();
-    normalized = normalized.replace(new RegExp(`\\b${titleCaseAcronym}\\b`, "g"), acronym);
+    normalized = normalized.replace(new RegExp(`\\b${titleCaseAcronym}\\b`, "gi"), acronym);
   }
 
   for (const token of ASSESSMENT_TEXT_LOWERCASE_TOKENS) {
     const capitalizedToken = token.charAt(0).toUpperCase() + token.slice(1);
-    normalized = normalized.replace(new RegExp(`\\b${capitalizedToken}\\b`, "g"), token);
+    normalized = normalized.replace(new RegExp(`\\b${capitalizedToken}\\b`, "gi"), token);
   }
 
   for (const prefix of ASSESSMENT_TEXT_LOWERCASE_PREFIXES) {
     const capitalizedPrefix = prefix.charAt(0).toUpperCase() + prefix.slice(1);
     normalized = normalized.replace(new RegExp(capitalizedPrefix.replace("-", "\\-"), "g"), prefix);
   }
+
+  normalized = normalized.replace(/(\d(?:[\d.]*))\s+([GMS])\b/g, (_match, valueText: string, unit: string) => {
+    return `${valueText} ${unit.toLowerCase()}`;
+  });
 
   normalized = normalized.replace(/\b([a-z]{1,2})-(\d+)\b/g, (_match, symbol: string, count: string) => {
     const formattedSymbol = symbol.length === 1
@@ -466,9 +461,9 @@ function StageHeader({
 }) {
   return (
     <div className="lesson-stage-hero mb-6 rounded-2xl border p-5 shadow-sm">
-      <p className="mb-2 text-sm font-medium text-slate-500">{eyebrow}</p>
-      <h2 className="lesson-stage-title text-2xl font-semibold text-slate-900">{title}</h2>
-      {subtitle ? <p className="lesson-stage-subtitle mt-2 text-slate-600">{subtitle}</p> : null}
+      <p className="mb-2 text-sm font-medium text-slate-500">{normalizeAssessmentText(eyebrow)}</p>
+      <h2 className="lesson-stage-title text-2xl font-semibold text-slate-900">{normalizeAssessmentText(title)}</h2>
+      {subtitle ? <p className="lesson-stage-subtitle mt-2 text-slate-600">{normalizeAssessmentText(subtitle)}</p> : null}
     </div>
   );
 }
