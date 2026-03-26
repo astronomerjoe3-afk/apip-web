@@ -317,7 +317,7 @@ export default function StudentSecurityClient() {
                 value={newPassword}
                 onChange={(event) => setNewPassword(event.target.value)}
                 style={{ width: "100%", padding: 10, marginTop: 6 }}
-                minLength={12}
+                minLength={6}
                 required
               />
             </label>
@@ -330,7 +330,7 @@ export default function StudentSecurityClient() {
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
                 style={{ width: "100%", padding: 10, marginTop: 6 }}
-                minLength={12}
+                minLength={6}
                 required
               />
             </label>

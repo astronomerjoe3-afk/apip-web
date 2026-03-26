@@ -10,6 +10,7 @@ const API_BASE = resolveApiBase(
   process.env.NEXT_PUBLIC_APIP_API_BASE_URL,
   process.env.NEXT_PUBLIC_API_BASE_URL,
 );
+const DEFAULT_SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
 
 function sessionCookieBase() {
   return {
@@ -33,7 +34,7 @@ function setSessionCookie(response: NextResponse, value: string, expiresUtc?: st
   const expiresAt = expiresUtc ? Date.parse(expiresUtc) : Number.NaN;
   const maxAgeSeconds = Number.isFinite(expiresAt)
     ? Math.max(0, Math.floor((expiresAt - Date.now()) / 1000))
-    : 24 * 60 * 60;
+    : DEFAULT_SESSION_MAX_AGE_SECONDS;
 
   response.cookies.set({
     ...sessionCookieBase(),

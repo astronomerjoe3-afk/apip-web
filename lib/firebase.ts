@@ -1,7 +1,7 @@
 "use client";
 
 import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
-import { getAuth, type Auth } from "firebase/auth";
+import { browserLocalPersistence, getAuth, setPersistence, type Auth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -29,6 +29,11 @@ const appInstance: FirebaseApp | null = firebaseConfigured
   ? (getApps().length ? getApps()[0] : initializeApp(firebaseConfig))
   : null;
 
-export const maybeAuth: Auth | null = appInstance ? getAuth(appInstance) : null;
+const authInstance: Auth | null = appInstance ? getAuth(appInstance) : null;
+if (authInstance) {
+  void setPersistence(authInstance, browserLocalPersistence).catch(() => undefined);
+}
+
+export const maybeAuth: Auth | null = authInstance;
 export const auth = maybeAuth as Auth;
 export default appInstance;

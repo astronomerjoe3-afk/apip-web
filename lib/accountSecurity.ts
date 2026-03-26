@@ -3,7 +3,7 @@
 import type { SessionUser } from "./sessionClient";
 
 
-export const MIN_PASSWORD_LENGTH = 12;
+export const MIN_PASSWORD_LENGTH = 6;
 export const MIN_PASSWORD_POLICY_VERSION = 1;
 
 const COMMON_PASSWORD_SNIPPETS = [
@@ -17,10 +17,8 @@ const COMMON_PASSWORD_SNIPPETS = [
 
 export type PasswordStrengthCheck = {
   minLength: boolean;
-  hasUppercase: boolean;
-  hasLowercase: boolean;
+  hasLetter: boolean;
   hasDigit: boolean;
-  hasSymbol: boolean;
   avoidsEmailWords: boolean;
   avoidsCommonPatterns: boolean;
   score: number;
@@ -58,10 +56,8 @@ export function evaluatePasswordStrength(password: string, email?: string | null
   const tokens = emailTokens(email);
 
   const minLength = value.length >= MIN_PASSWORD_LENGTH;
-  const hasUppercase = /[A-Z]/.test(value);
-  const hasLowercase = /[a-z]/.test(value);
+  const hasLetter = /[A-Za-z]/.test(value);
   const hasDigit = /\d/.test(value);
-  const hasSymbol = /[^A-Za-z0-9]/.test(value);
   const avoidsEmailWords = tokens.every((token) => !lowered.includes(token));
   const avoidsCommonPatterns = COMMON_PASSWORD_SNIPPETS.every(
     (snippet) => !lowered.includes(snippet),
@@ -69,29 +65,23 @@ export function evaluatePasswordStrength(password: string, email?: string | null
 
   const score = [
     minLength,
-    hasUppercase,
-    hasLowercase,
+    hasLetter,
     hasDigit,
-    hasSymbol,
     avoidsEmailWords,
     avoidsCommonPatterns,
   ].filter(Boolean).length;
 
   return {
     minLength,
-    hasUppercase,
-    hasLowercase,
+    hasLetter,
     hasDigit,
-    hasSymbol,
     avoidsEmailWords,
     avoidsCommonPatterns,
     score,
     isStrong:
       minLength &&
-      hasUppercase &&
-      hasLowercase &&
+      hasLetter &&
       hasDigit &&
-      hasSymbol &&
       avoidsEmailWords &&
       avoidsCommonPatterns,
   };
@@ -109,24 +99,14 @@ export function passwordRequirementRows(check: PasswordStrengthCheck): Array<{
       met: check.minLength,
     },
     {
-      key: "upper",
-      label: "At least one uppercase letter",
-      met: check.hasUppercase,
-    },
-    {
-      key: "lower",
-      label: "At least one lowercase letter",
-      met: check.hasLowercase,
+      key: "letter",
+      label: "At least one letter",
+      met: check.hasLetter,
     },
     {
       key: "digit",
       label: "At least one number",
       met: check.hasDigit,
-    },
-    {
-      key: "symbol",
-      label: "At least one symbol",
-      met: check.hasSymbol,
     },
     {
       key: "email",
