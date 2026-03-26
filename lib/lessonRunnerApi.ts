@@ -12653,7 +12653,14 @@ function chunkTechnicalWords<T>(items: T[], size: number): T[][] {
 
 function technicalWordsSections(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  const technicalWords = technicalWordsForLesson(lesson, code);
+  const technicalWords = technicalWordsForLesson(lesson, code).map((entry) => ({
+    ...entry,
+    term: normalizeRenderedPhysicsText(entry.term),
+    meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning)),
+    why_it_matters: entry.why_it_matters
+      ? normalizeRenderedPhysicsText(ensureSentence(entry.why_it_matters))
+      : "",
+  }));
   if (technicalWords.length === 0) return [];
 
   return chunkTechnicalWords(technicalWords, 4).map((chunk, index, chunks) => ({
