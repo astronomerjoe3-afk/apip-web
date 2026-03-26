@@ -194,9 +194,22 @@ const ASSESSMENT_TEXT_LOWERCASE_TOKENS = [
   "v",
   "w",
 ] as const;
+const ASSESSMENT_TEXT_LOWERCASE_PREFIXES = [
+  "centi-",
+  "deci-",
+  "kilo-",
+  "mega-",
+  "micro-",
+  "milli-",
+  "nano-",
+] as const;
 
 function normalizeAssessmentText(value: string): string {
-  const singleLine = value.trim().replace(/\s+/g, " ");
+  const singleLine = value
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/\b([A-Za-z]{3,})_([A-Za-z]{3,})\b/g, "$1-$2")
+    .replace(/\b([A-Za-z]{3,})_(?=\s|$|[!?.,:;])/g, "$1-");
   if (!singleLine) return singleLine;
 
   const letters = singleLine.match(/[A-Za-z]/g) ?? [];
@@ -233,6 +246,11 @@ function normalizeAssessmentText(value: string): string {
   for (const token of ASSESSMENT_TEXT_LOWERCASE_TOKENS) {
     const capitalizedToken = token.charAt(0).toUpperCase() + token.slice(1);
     normalized = normalized.replace(new RegExp(`\\b${capitalizedToken}\\b`, "g"), token);
+  }
+
+  for (const prefix of ASSESSMENT_TEXT_LOWERCASE_PREFIXES) {
+    const capitalizedPrefix = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+    normalized = normalized.replace(new RegExp(capitalizedPrefix.replace("-", "\\-"), "g"), prefix);
   }
 
   normalized = normalized.replace(/\b([a-z]{1,2})-(\d+)\b/g, (_match, symbol: string, count: string) => {
