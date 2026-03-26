@@ -54,6 +54,7 @@ type LocalState = {
     feedback?: UnknownRecord[];
     recentFeedback?: UnknownRecord;
     complete?: boolean;
+    acknowledged?: boolean;
   };
   conceptGate?: {
     nonce?: number;
@@ -12998,6 +12999,14 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
     : inferredStageIndex >= 0
       ? inferredServerStage || startStage
       : startStage;
+  const localDiagnosticReadyForScaffold = (
+    serverStage === "diagnostic" &&
+    Boolean(state.diagnostic?.acknowledged) &&
+    (
+      (state.diagnostic?.feedback?.length ?? 0) > 0 ||
+      (state.diagnostic?.askedIds?.length ?? 0) > 0
+    )
+  );
   const shouldResetToStart = (
     lessonStatus === "not_started" &&
     serverCompletedStages.length === 0 &&
@@ -13016,6 +13025,8 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
   const syntheticConceptGate = !shouldResetToStart && shouldInjectConceptGate(resources.lesson, runnerLesson, serverStage, state);
   const effectiveStage = shouldResetToStart
     ? startStage
+    : localDiagnosticReadyForScaffold
+      ? "scaffolded_teaching"
     : syntheticConceptGate
       ? "concept_gate"
       : serverStage;
@@ -13044,6 +13055,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
       feedback: state.diagnostic?.feedback,
       recentFeedback: state.diagnostic?.recentFeedback,
       complete: state.diagnostic?.complete,
+      acknowledged: state.diagnostic?.acknowledged,
     };
   }
 
@@ -13318,6 +13330,15 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       profile: {
         ...(state.profile || {}),
         diagnosticScore: feedback.length > 0 ? correctCount / feedback.length : 0,
+      },
+      diagnostic: {
+        nonce: state.diagnostic?.nonce || freshAttemptSeed(),
+        askedIds: state.diagnostic?.askedIds || [],
+        answers: diagnosticAnswers,
+        feedback,
+        recentFeedback: state.diagnostic?.recentFeedback,
+        complete: true,
+        acknowledged: true,
       },
       conceptGate: state.conceptGate,
       reflection: state.reflection,
