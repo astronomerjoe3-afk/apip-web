@@ -1,6 +1,13 @@
 import { NextRequest } from "next/server";
 
 const MUTATING_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"]);
+const DEFAULT_ALLOWED_APP_ORIGINS = [
+  "https://app.cognispark.tech",
+  "http://127.0.0.1:3000",
+  "http://localhost:3000",
+  "https://127.0.0.1:3000",
+  "https://localhost:3000",
+];
 
 function firstHeaderValue(value: string | null): string | null {
   if (!value) {
@@ -50,15 +57,53 @@ function forwardedOrigin(request: NextRequest): string | null {
   );
 }
 
-function sameOrigin(request: NextRequest): boolean {
-  const expectedOrigin = forwardedOrigin(request);
-  if (!expectedOrigin) {
+function allowedAppOrigins(request: NextRequest): Set<string> {
+  const origins = new Set<string>();
+  const candidates = [
+    ...DEFAULT_ALLOWED_APP_ORIGINS,
+    process.env.APP_BASE_URL || "",
+    process.env.NEXT_PUBLIC_APP_BASE_URL || "",
+    process.env.NEXT_PUBLIC_SITE_URL || "",
+    request.nextUrl.origin,
+    forwardedOrigin(request) || "",
+  ];
+
+  for (const candidate of candidates) {
+    const origin = normalizeOrigin(candidate);
+    if (origin) {
+      origins.add(origin);
+    }
+  }
+
+  return origins;
+}
+
+function trustedFetchSite(request: NextRequest): boolean | null {
+  const fetchSite = firstHeaderValue(request.headers.get("sec-fetch-site"))?.toLowerCase();
+  if (!fetchSite) {
+    return null;
+  }
+
+  if (fetchSite === "cross-site") {
     return false;
   }
 
-  const origin = request.headers.get("origin");
+  if (fetchSite === "same-origin" || fetchSite === "same-site") {
+    return true;
+  }
+
+  return null;
+}
+
+function sameOrigin(request: NextRequest): boolean {
+  const allowedOrigins = allowedAppOrigins(request);
+  if (!allowedOrigins.size) {
+    return false;
+  }
+
+  const origin = normalizeOrigin(request.headers.get("origin"));
   if (origin) {
-    return normalizeOrigin(origin) === expectedOrigin;
+    return allowedOrigins.has(origin);
   }
 
   const referer = request.headers.get("referer");
@@ -66,7 +111,8 @@ function sameOrigin(request: NextRequest): boolean {
     return true;
   }
 
-  return normalizeOrigin(referer) === expectedOrigin;
+  const refererOrigin = normalizeOrigin(referer);
+  return !!refererOrigin && allowedOrigins.has(refererOrigin);
 }
 
 export function assertSameOriginMutation(request: NextRequest): Response | null {
@@ -74,7 +120,16 @@ export function assertSameOriginMutation(request: NextRequest): Response | null 
     return null;
   }
 
+  const fetchSite = trustedFetchSite(request);
+  if (fetchSite === false) {
+    return Response.json({ detail: "Cross-site request rejected." }, { status: 403 });
+  }
+
   if (sameOrigin(request)) {
+    return null;
+  }
+
+  if (fetchSite === true) {
     return null;
   }
 
