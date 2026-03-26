@@ -6363,6 +6363,67 @@ const RENDERED_ASSESSMENT_LOWERCASE_PREFIXES = [
   "milli-",
   "nano-",
 ] as const;
+const RENDERED_PROPER_NOUNS = [
+  "Brownian",
+  "Cambridge",
+  "Earth",
+  "Einstein",
+  "Faraday",
+  "Fleming",
+  "Jupiter",
+  "Kepler",
+  "Kirchhoff",
+  "Lenz",
+  "Mars",
+  "Mercury",
+  "Moon",
+  "Neptune",
+  "Newton",
+  "Ohm",
+  "Planck",
+  "Pluto",
+  "Saturn",
+  "Sun",
+  "Uranus",
+  "Venus",
+] as const;
+
+function repairDamagedRenderedProse(value: string): string {
+  let normalized = text(value).replace(/\b([A-Za-z][A-Za-z'-]{2,})\b/g, (word) => {
+    const lower = word.toLowerCase();
+    const upper = word.toUpperCase();
+    if (RENDERED_ASSESSMENT_ACRONYMS.includes(upper as typeof RENDERED_ASSESSMENT_ACRONYMS[number])) {
+      return upper;
+    }
+    if (RENDERED_ASSESSMENT_LOWERCASE_TOKENS.includes(lower as typeof RENDERED_ASSESSMENT_LOWERCASE_TOKENS[number])) {
+      return lower;
+    }
+    if (/^[A-Z][a-z]+(?:['-][A-Za-z]+)*$/.test(word) || /^[a-z]+(?:['-][a-z]+)*$/.test(word)) {
+      return word;
+    }
+    const hasUpper = /[A-Z]/.test(word);
+    const hasLower = /[a-z]/.test(word);
+    if (hasUpper && !hasLower && word.length <= 2) {
+      return word;
+    }
+    if (!hasUpper && hasLower) {
+      return word;
+    }
+    return lower;
+  });
+
+  normalized = normalized
+    .replace(/\b(km|cm|mm|kg|nm|ms|hz|pa|ev|kev|mev|gev)\b/gi, (token) => token.toLowerCase())
+    .replace(/(\d(?:[\d.]*))\s+([GMS])\b/g, (_match, valueText: string, unit: string) => `${valueText} ${unit.toLowerCase()}`)
+    .replace(/\b(to|in|into|from|as|per|of|by)\s+([GMS])\b/g, (_match, prep: string, unit: string) => `${prep} ${unit.toLowerCase()}`)
+    .replace(/(^|[.!?]\s+|\n\s*)([a-z])/g, (_match, prefix: string, first: string) => `${prefix}${first.toUpperCase()}`);
+
+  for (const noun of RENDERED_PROPER_NOUNS) {
+    normalized = normalized.replace(new RegExp(`\\b${noun.toLowerCase()}\\b`, "g"), noun);
+  }
+
+  return normalized;
+}
 
 function normalizeShoutyAssessmentText(value: string): string {
   const singleLine = text(value)
@@ -6393,7 +6454,7 @@ function normalizeShoutyAssessmentText(value: string): string {
   const lowercaseCount = letters.filter((letter) => letter === letter.toLowerCase()).length;
   const isShouty = lowercaseCount === 0 || uppercaseCount / letters.length > 0.92;
   if (!isShouty || /[<>]/.test(singleLine)) {
-    return singleLine;
+    return repairDamagedRenderedProse(singleLine);
   }
 
   let normalized = singleLine.toLowerCase();
@@ -6428,7 +6489,7 @@ function normalizeShoutyAssessmentText(value: string): string {
     return `${formattedSymbol}-${count}`;
   });
 
-  return normalized;
+  return repairDamagedRenderedProse(normalized);
 }
 
 function normalizeRenderedPhysicsText(value: string): string {
@@ -12004,7 +12065,7 @@ function lowerFirst(value: string): string {
 function firstAnalogySentence(lesson: UnknownRecord): string {
   const analogyText = text(asRecord(phases(lesson).analogical_grounding).analogy_text).trim();
   if (!analogyText) return "";
-  return analogyText.match(/.*?[.!?](?:\s|$)/)?.[0]?.trim() || analogyText;
+  return normalizeRenderedPhysicsText(analogyText.match(/.*?[.!?](?:\s|$)/)?.[0]?.trim() || analogyText);
 }
 
 function isModuleEntryLesson(code: string): boolean {
@@ -12015,7 +12076,7 @@ function fullAnalogyMappingLines(lesson: UnknownRecord): string[] {
   const analogyMap = asRecord(asRecord(lesson.authoring_contract).analogy_map);
   return dedupeText(
     asList(analogyMap.mapping)
-      .map((entry) => ensureSentence(text(entry)))
+      .map((entry) => normalizeRenderedPhysicsText(ensureSentence(text(entry))))
       .filter(Boolean)
   );
 }
@@ -12408,26 +12469,26 @@ function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, ana
     .map(asRecord)
     .filter((section) => text(section.heading) && text(section.body))
     .map((section) => ({
-      heading: text(section.heading),
-      body: text(section.body),
-      check_for_understanding: text(section.check_for_understanding),
+      heading: normalizeRenderedPhysicsText(text(section.heading)),
+      body: normalizeRenderedPhysicsText(text(section.body)),
+      check_for_understanding: normalizeRenderedPhysicsText(text(section.check_for_understanding)),
     }));
   const formulaBridge = formulaBridgeSection(lesson);
 
   return [
-    { heading: "Fix these ideas", body: repairText },
-    { heading: "Core idea", body: text(scaffoldSupport.core_idea) },
+    { heading: "Fix these ideas", body: normalizeRenderedPhysicsText(repairText) },
+    { heading: "Core idea", body: normalizeRenderedPhysicsText(text(scaffoldSupport.core_idea)) },
     {
       heading: "How to reason through it",
-      body: text(scaffoldSupport.reasoning),
-      check_for_understanding: text(scaffoldSupport.check_for_understanding),
+      body: normalizeRenderedPhysicsText(text(scaffoldSupport.reasoning)),
+      check_for_understanding: normalizeRenderedPhysicsText(text(scaffoldSupport.check_for_understanding)),
     },
-    { heading: "Common trap", body: text(scaffoldSupport.common_trap) },
+    { heading: "Common trap", body: normalizeRenderedPhysicsText(text(scaffoldSupport.common_trap)) },
     {
       heading: "Analogy",
-      body: text(analogyBridge.body),
-      analogy: analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer.",
-      check_for_understanding: text(analogyBridge.check_for_understanding),
+      body: normalizeRenderedPhysicsText(text(analogyBridge.body)),
+      analogy: normalizeRenderedPhysicsText(analogyText || "Use this analogy to compare the whole situation before you choose a formula or answer."),
+      check_for_understanding: normalizeRenderedPhysicsText(text(analogyBridge.check_for_understanding)),
     },
     ...extraSections,
     ...(code.startsWith("M3_") ? m3SupplementalScaffoldSections(code) : []),

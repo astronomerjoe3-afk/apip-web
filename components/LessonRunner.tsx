@@ -190,6 +190,67 @@ const ASSESSMENT_TEXT_LOWERCASE_PREFIXES = [
   "milli-",
   "nano-",
 ] as const;
+const LESSON_TEXT_PROPER_NOUNS = [
+  "Brownian",
+  "Cambridge",
+  "Earth",
+  "Einstein",
+  "Faraday",
+  "Fleming",
+  "Jupiter",
+  "Kepler",
+  "Kirchhoff",
+  "Lenz",
+  "Mars",
+  "Mercury",
+  "Moon",
+  "Neptune",
+  "Newton",
+  "Ohm",
+  "Planck",
+  "Pluto",
+  "Saturn",
+  "Sun",
+  "Uranus",
+  "Venus",
+] as const;
+
+function repairDamagedLessonProse(value: string): string {
+  let normalized = value.replace(/\b([A-Za-z][A-Za-z'-]{2,})\b/g, (word) => {
+    const lower = word.toLowerCase();
+    const upper = word.toUpperCase();
+    if (ASSESSMENT_TEXT_ACRONYMS.includes(upper as typeof ASSESSMENT_TEXT_ACRONYMS[number])) {
+      return upper;
+    }
+    if (ASSESSMENT_TEXT_LOWERCASE_TOKENS.includes(lower as typeof ASSESSMENT_TEXT_LOWERCASE_TOKENS[number])) {
+      return lower;
+    }
+    if (/^[A-Z][a-z]+(?:['-][A-Za-z]+)*$/.test(word) || /^[a-z]+(?:['-][a-z]+)*$/.test(word)) {
+      return word;
+    }
+    const hasUpper = /[A-Z]/.test(word);
+    const hasLower = /[a-z]/.test(word);
+    if (hasUpper && !hasLower && word.length <= 2) {
+      return word;
+    }
+    if (!hasUpper && hasLower) {
+      return word;
+    }
+    return lower;
+  });
+
+  normalized = normalized
+    .replace(/\b(km|cm|mm|kg|nm|ms|hz|pa|ev|kev|mev|gev)\b/gi, (token) => token.toLowerCase())
+    .replace(/(\d(?:[\d.]*))\s+([GMS])\b/g, (_match, valueText: string, unit: string) => `${valueText} ${unit.toLowerCase()}`)
+    .replace(/\b(to|in|into|from|as|per|of|by)\s+([GMS])\b/g, (_match, prep: string, unit: string) => `${prep} ${unit.toLowerCase()}`)
+    .replace(/(^|[.!?]\s+|\n\s*)([a-z])/g, (_match, prefix: string, first: string) => `${prefix}${first.toUpperCase()}`);
+
+  for (const noun of LESSON_TEXT_PROPER_NOUNS) {
+    normalized = normalized.replace(new RegExp(`\\b${noun.toLowerCase()}\\b`, "g"), noun);
+  }
+
+  return normalized;
+}
 
 function normalizeAssessmentText(value: string): string {
   const singleLine = value
@@ -220,7 +281,7 @@ function normalizeAssessmentText(value: string): string {
   const lowercaseCount = letters.filter((letter) => letter === letter.toLowerCase()).length;
   const isShouty = lowercaseCount === 0 || uppercaseCount / letters.length > 0.92;
   if (!isShouty || /[<>]/.test(singleLine)) {
-    return singleLine;
+    return repairDamagedLessonProse(singleLine);
   }
 
   let normalized = singleLine.toLowerCase();
@@ -255,7 +316,7 @@ function normalizeAssessmentText(value: string): string {
     return `${formattedSymbol}-${count}`;
   });
 
-  return normalized;
+  return repairDamagedLessonProse(normalized);
 }
 
 function normalizeLessonDisplayText(value: string): string {
