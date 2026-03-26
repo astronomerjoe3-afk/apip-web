@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { onIdTokenChanged, type User } from "firebase/auth";
 
 import { firebaseConfigured, maybeAuth } from "./firebase";
-import { clearServerSession, establishSessionFromUser } from "./sessionClient";
+import { establishSessionFromUser } from "./sessionClient";
 
 type AuthContextValue = {
   user: User | null;
@@ -15,7 +15,6 @@ const AuthContext = createContext<AuthContextValue>({ user: null, loading: true 
 
 async function primeUserToken(user: User | null): Promise<User | null> {
   if (!user) {
-    await clearServerSession().catch(() => undefined);
     return null;
   }
 
