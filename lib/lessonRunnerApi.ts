@@ -6241,7 +6241,9 @@ const DISPLAY_LESSON_TITLE_OVERRIDES: Record<string, string> = {
 function lessonTitle(lesson: UnknownRecord, runnerLesson: UnknownRecord): string {
   const moduleId = normalizeModuleId(lesson.module_id || runnerLesson.module_id);
   const normalizedLessonId = normalizeLessonIdForModule(moduleId, lesson.lesson_id || runnerLesson.lesson_id || lesson.id || runnerLesson.id);
-  return DISPLAY_LESSON_TITLE_OVERRIDES[normalizedLessonId] || text(lesson.title) || text(runnerLesson.title) || normalizedLessonId;
+  return normalizeShoutyAssessmentText(
+    DISPLAY_LESSON_TITLE_OVERRIDES[normalizedLessonId] || text(lesson.title) || text(runnerLesson.title) || normalizedLessonId
+  );
 }
 
 function hasPrefetchedLesson(moduleId: string, lessonId: string, lesson: UnknownRecord | null | undefined): lesson is UnknownRecord {
@@ -6317,8 +6319,114 @@ async function loadResources(moduleId: string, lessonId: string, options: Runner
   throw new Error("Lesson content is not available right now.");
 }
 
+const RENDERED_ASSESSMENT_ACRONYMS = [
+  "AC",
+  "DC",
+  "EM",
+  "EMF",
+  "GPE",
+  "IGCSE",
+  "IR",
+  "IV",
+  "KE",
+  "RMS",
+  "SHM",
+  "SI",
+  "SUVAT",
+  "UV",
+] as const;
+
+const RENDERED_ASSESSMENT_LOWERCASE_TOKENS = [
+  "cm",
+  "g",
+  "kg",
+  "km",
+  "m",
+  "mm",
+  "ms",
+  "nm",
+  "s",
+] as const;
+
+const RENDERED_ASSESSMENT_LOWERCASE_PREFIXES = [
+  "centi-",
+  "deci-",
+  "kilo-",
+  "mega-",
+  "micro-",
+  "milli-",
+  "nano-",
+] as const;
+
+function normalizeShoutyAssessmentText(value: string): string {
+  const singleLine = text(value)
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/\b([A-Za-z]{3,})_([A-Za-z]{3,})\b/g, "$1-$2")
+    .replace(/\b([A-Za-z]{3,})_(?=\s|$|[!?.,:;])/g, "$1-");
+  if (!singleLine) return singleLine;
+
+  const letters = singleLine.match(/[A-Za-z]/g) ?? [];
+  if (letters.length < 2) {
+    const numericLowercaseUnit = singleLine.match(/^([0-9.]+)\s+([GMS])$/);
+    if (numericLowercaseUnit) {
+      return `${numericLowercaseUnit[1]} ${numericLowercaseUnit[2].toLowerCase()}`;
+    }
+    const lowered = singleLine.toLowerCase();
+    if (RENDERED_ASSESSMENT_LOWERCASE_TOKENS.includes(lowered as typeof RENDERED_ASSESSMENT_LOWERCASE_TOKENS[number])) {
+      return lowered;
+    }
+    const uppered = singleLine.toUpperCase();
+    if (RENDERED_ASSESSMENT_ACRONYMS.includes(uppered as typeof RENDERED_ASSESSMENT_ACRONYMS[number])) {
+      return uppered;
+    }
+    return singleLine;
+  }
+
+  const uppercaseCount = letters.filter((letter) => letter === letter.toUpperCase()).length;
+  const lowercaseCount = letters.filter((letter) => letter === letter.toLowerCase()).length;
+  const isShouty = lowercaseCount === 0 || uppercaseCount / letters.length > 0.92;
+  if (!isShouty || /[<>]/.test(singleLine)) {
+    return singleLine;
+  }
+
+  let normalized = singleLine.toLowerCase();
+  normalized = normalized.replace(
+    /^(\s*["'“”‘’(\[]*)([a-z])/,
+    (_match, prefix: string, first: string) => `${prefix}${first.toUpperCase()}`
+  );
+
+  for (const acronym of RENDERED_ASSESSMENT_ACRONYMS) {
+    const titleCaseAcronym = acronym.charAt(0) + acronym.slice(1).toLowerCase();
+    normalized = normalized.replace(new RegExp(`\\b${titleCaseAcronym}\\b`, "gi"), acronym);
+  }
+
+  for (const token of RENDERED_ASSESSMENT_LOWERCASE_TOKENS) {
+    const capitalizedToken = token.charAt(0).toUpperCase() + token.slice(1);
+    normalized = normalized.replace(new RegExp(`\\b${capitalizedToken}\\b`, "gi"), token);
+  }
+
+  for (const prefix of RENDERED_ASSESSMENT_LOWERCASE_PREFIXES) {
+    const capitalizedPrefix = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+    normalized = normalized.replace(new RegExp(capitalizedPrefix.replace("-", "\\-"), "g"), prefix);
+  }
+
+  normalized = normalized.replace(/(\d(?:[\d.]*))\s+([GMS])\b/g, (_match, valueText: string, unit: string) => {
+    return `${valueText} ${unit.toLowerCase()}`;
+  });
+
+  normalized = normalized.replace(/\b([a-z]{1,2})-(\d+)\b/g, (_match, symbol: string, count: string) => {
+    const formattedSymbol = symbol.length === 1
+      ? symbol.toUpperCase()
+      : symbol.charAt(0).toUpperCase() + symbol.slice(1).toLowerCase();
+    return `${formattedSymbol}-${count}`;
+  });
+
+  return normalized;
+}
+
 function normalizeRenderedPhysicsText(value: string): string {
-  return value
+  return normalizeShoutyAssessmentText(value
     .replace(/\bmu\s*0\b/gi, "μ₀")
     .replace(/\bepsilon\s*0\b/gi, "ε₀")
     .replace(/\b([RrHh])0\b/g, "$1₀")
@@ -6371,7 +6479,7 @@ function normalizeRenderedPhysicsText(value: string): string {
     .replace(/\bh\s+f\b/g, "hf")
     .replace(/\b([A-Za-z])\s*\^\s*2\b/g, "$1²")
     .replace(/\b([A-Za-z])\s*\^\s*3\b/g, "$1³")
-    .replace(/\b([A-Za-z])\s*\^\s*4\b/g, "$1⁴");
+    .replace(/\b([A-Za-z])\s*\^\s*4\b/g, "$1⁴"));
 }
 
 function normalizeCoreConceptBullet(value: string): string {
