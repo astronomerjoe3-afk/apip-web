@@ -9718,7 +9718,7 @@ function stripGenericWorkedExamplePromptEnding(prompt: string): string {
   if (!trimmed) return "";
 
   const scenarioStem = trimmed.replace(
-    /\s*(?:Which statement is correct|Which option is correct|Which choice is correct|Which conclusion is correct|What is correct)\?$/i,
+    /\s*(?:Which statement is correct|Which option is correct|Which choice is correct|Which conclusion is correct|Which pair is correct|What is correct)\?$/i,
     ""
   ).trim();
   if (scenarioStem && scenarioStem !== trimmed) return scenarioStem;
