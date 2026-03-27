@@ -75,6 +75,7 @@ type LocalState = {
   mastery?: {
     nonce: number;
     submitted?: boolean;
+    submittedAt?: number;
     feedback?: UnknownRecord[];
     result?: UnknownRecord;
     reviewRefs?: UnknownRecord[];
@@ -106,6 +107,7 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const CONCEPT_GATE_MAX_RETRIES = 2;
 const MASTERY_DEFAULT_MIN = 5;
 const MASTERY_DEFAULT_MAX = 10;
+const LOCAL_MASTERY_RESULT_TTL_MS = 60 * 1000;
 const LESSON_SUFFIXES = ["L1", "L2", "L3", "L4", "L5", "L6"] as const;
 const SUPPLEMENTAL_MODULE_CODES = ["F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "M13", "M14", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11"] as const;
 const SUPPLEMENTAL_LESSON_CODES = SUPPLEMENTAL_MODULE_CODES.flatMap((moduleCode) =>
@@ -13269,6 +13271,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
     state.mastery = {
       nonce: state.mastery?.nonce || freshAttemptSeed(),
       submitted: state.mastery?.submitted,
+      submittedAt: state.mastery?.submittedAt,
       feedback: state.mastery?.feedback,
       result: state.mastery?.result,
       reviewRefs: state.mastery?.reviewRefs,
@@ -13393,6 +13396,12 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
       ? { percent: Math.round(latestScore * 100), passed: latestScore >= threshold }
       : undefined;
     const hasPersistedResult = numberValue(masteryMeta.attempt_count, 0) >= 1 && Boolean(persistedResult) && masteryState.forceNewAttempt !== true;
+    const localSubmissionIsFresh = Boolean(
+      masteryState.submitted &&
+      typeof masteryState.submittedAt === "number" &&
+      (Date.now() - masteryState.submittedAt) <= LOCAL_MASTERY_RESULT_TTL_MS
+    );
+    const localFeedbackCount = asList(masteryState.feedback).length;
     const localResult = asRecord(masteryState.result);
     const localResultPercent = typeof localResult.percent === "number"
       ? numberValue(localResult.percent, 0)
@@ -13402,7 +13411,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
       : typeof localResult.passed === "boolean"
         ? Boolean(localResult.passed)
         : null;
-    const localSubmittedResult = masteryState.submitted && typeof localResultPercent === "number"
+    const localSubmittedResult = localSubmissionIsFresh && localFeedbackCount > 0 && typeof localResultPercent === "number"
       ? { percent: localResultPercent, passed: Boolean(localResultPassed) }
       : undefined;
     const confirmedMasteryResult = stage === "done" && bestScorePercent >= thresholdPercent
@@ -13419,11 +13428,23 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
     const selectedPool = masteryPoolForAttempt(moduleId, lessonId, resources.lesson, masteryState.nonce || 0);
     const selected = selectedPool.slice(0, count);
+    if (
+      !hasPersistedResult &&
+      !confirmedMasteryResult &&
+      masteryState.submitted &&
+      !localSubmittedResult
+    ) {
+      state.mastery = {
+        nonce: masteryState.nonce || freshAttemptSeed(),
+        displayedItems: asList(masteryState.displayedItems).map(asRecord),
+        forceNewAttempt: masteryState.forceNewAttempt,
+      };
+    }
     if (!showSubmittedMastery) {
       writeState(moduleId, lessonId, {
         ...state,
         mastery: {
-          ...state.mastery,
+          ...(state.mastery || {}),
           nonce: masteryState.nonce || 0,
           displayedItems: selected.map((item) => asRecord(item)),
         },
@@ -13768,6 +13789,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       mastery: {
         nonce: state.mastery?.nonce || 0,
         submitted: true,
+        submittedAt: Date.now(),
         feedback,
         result,
         reviewRefs: reviewRefs(resources.lesson, asList(masteryMeta.recommended_review_refs)),
