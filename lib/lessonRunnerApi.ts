@@ -892,16 +892,18 @@ function stageRowForKey(runnerLesson: UnknownRecord, key: string): UnknownRecord
     .find((entry) => text(entry.key) === key);
 }
 
+function authoredReflectionPrompts(lesson: UnknownRecord): string[] {
+  return asList(asRecord(lesson.authoring_contract).reflection_prompts)
+    .map((entry) => text(entry))
+    .filter(Boolean);
+}
+
 function availableStageKeys(lesson: UnknownRecord, runnerLesson: UnknownRecord): string[] {
   const stageRows = asList(runnerLesson.stages)
     .map(asRecord)
     .filter((entry) => entry.available !== false)
     .map((entry) => text(entry.key))
     .filter(Boolean);
-
-  if (stageRows.length > 0) {
-    return stageRows;
-  }
 
   const orderedStages = [
     ...(firstStageForLesson(lesson) === "diagnostic" ? ["diagnostic"] : []),
@@ -911,8 +913,7 @@ function availableStageKeys(lesson: UnknownRecord, runnerLesson: UnknownRecord):
     "reflection",
     "mastery_check",
   ];
-
-  return orderedStages.filter((stage) => {
+  const fallbackStages = orderedStages.filter((stage) => {
     if (stage === "diagnostic") return itemsFrom(lesson, "diagnostic").length > 0;
     if (stage === "scaffolded_teaching") {
       const phaseMap = phases(lesson);
@@ -929,12 +930,19 @@ function availableStageKeys(lesson: UnknownRecord, runnerLesson: UnknownRecord):
       const reconstruction = asRecord(phases(lesson).concept_reconstruction);
       return (
         asList(reconstruction.prompts).length > 0 ||
-        asList(reconstruction.capsules).map(asRecord).some((capsule) => Boolean(text(capsule.prompt)))
+        asList(reconstruction.capsules).map(asRecord).some((capsule) => Boolean(text(capsule.prompt))) ||
+        authoredReflectionPrompts(lesson).length > 0
       );
     }
     if (stage === "mastery_check") return itemsFrom(lesson, "transfer").length > 0;
     return false;
   });
+
+  if (stageRows.length === 0) {
+    return fallbackStages;
+  }
+
+  return orderedStages.filter((stage) => stageRows.includes(stage) || fallbackStages.includes(stage));
 }
 
 function inferredStageFromServerProgress(lesson: UnknownRecord, runnerLesson: UnknownRecord): string | null {
@@ -13370,7 +13378,10 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
   }
   else if (stage === "reflection") {
     activeStage = "reflection";
-    const prompts = asList(asRecord(phases(resources.lesson).concept_reconstruction).prompts).map((entry) => text(entry));
+    const prompts = [
+      ...asList(asRecord(phases(resources.lesson).concept_reconstruction).prompts).map((entry) => text(entry)),
+      ...authoredReflectionPrompts(resources.lesson),
+    ].filter(Boolean);
     const inquiry = asList(asRecord(phases(resources.lesson).simulation_inquiry).inquiry_prompts).map(asRecord);
     stagePayload = {
       title: "Explain the idea back",
