@@ -618,6 +618,7 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 Object.assign(FALLBACK_ANSWER_METADATA, {
   "a ruler s smallest division is 1 mm a reasonable reported uncertainty is closest to": { id: "F1L3_D1", answerIndex: 1, correctAnswer: "+/- 0.5 mm", explanation: "+/- 0.5 mm is reasonable because a common estimate is about half of the smallest 1 mm division.", teachingFocus: "For a simple scale reading, a reasonable uncertainty is often about half the smallest division.", misconceptionTag: "uncertainty_estimation" },
   "if you consistently read too high due to a zero error this is best described as": { id: "F1L3_D2", answerIndex: 1, correctAnswer: "systematic error", explanation: "This is systematic error because the same zero error shifts every reading in the same direction.", teachingFocus: "Systematic error pushes measurements the same way each time, often because of zero error or poor calibration.", misconceptionTag: "random_vs_systematic_error" },
+  "a scale s smallest division is 0 2 cm what is a reasonable uncertainty to report": { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so a 0.2 cm smallest division suggests +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" },
   "a scale has 0 2 cm divisions what is a reasonable uncertainty to report": { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so 0.2 cm divisions suggest +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" },
   "state one difference between random error and systematic error": { id: "F1-L3-T1", acceptedAnswers: ["random error varies unpredictably while systematic error shifts all readings the same way", "random error makes readings scatter while systematic error gives a consistent offset", "random error is unpredictable while systematic error is consistent", "random error scatters readings while systematic error shifts them all in one direction"], correctAnswer: "Random error varies unpredictably, while systematic error shifts readings in the same direction each time.", explanation: "Random error causes scatter from reading to reading, while systematic error adds the same bias each time.", teachingFocus: "Separate changing scatter from repeated one-direction bias when you classify error.", misconceptionTag: "random_vs_systematic_error" },
 });
@@ -632,6 +633,7 @@ Object.assign(FALLBACK_ANSWER_METADATA, {
 Object.assign(FALLBACK_ANSWER_METADATA, {
   "a set of measurements are very close to each other but far from the true value this is": { id: "F1L6_D1", answerIndex: 1, correctAnswer: "precise but not accurate", explanation: "The measurements are tightly grouped, so they are precise, but they are far from the true value, so they are not accurate.", teachingFocus: "Precision is about closeness among repeated readings, while accuracy is about closeness to the accepted or true value.", misconceptionTag: "precision_vs_accuracy" },
   "give one source of systematic error and one source of random error in a measurement": { id: "F1L6_D2", acceptedAnswers: ["Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", "Systematic: zero error. Random: reaction time.", "Systematic: poor calibration. Random: reading fluctuations."], correctAnswer: "Systematic error can come from zero error or poor calibration, while random error can come from reaction time or small reading fluctuations.", explanation: "A strong answer names one cause that shifts readings the same way each time and one cause that makes readings scatter from trial to trial.", teachingFocus: "Systematic error adds a consistent bias, while random error causes scatter between repeated readings.", misconceptionTag: "random_vs_systematic_error" },
+  "you measure length as 12 4 cm with a ruler whose smallest division is 1 mm report the value with a reasonable uncertainty": { id: "F1L6_T1", acceptedAnswers: ["12.4 +/- 0.05 cm", "12.4 cm +/- 0.05 cm", "12.4 cm +/- 0.05", "12.40 +/- 0.05 cm", "12.40 cm +/- 0.05 cm", "12.40 cm +/- 0.05"], correctAnswer: "12.4 +/- 0.05 cm", explanation: "A ruler whose smallest division is 1 mm supports about +/- 0.05 cm uncertainty, so 12.4 cm should be reported with that uncertainty.", teachingFocus: "Report the measured value with a reasonable uncertainty based on the instrument's smallest division.", misconceptionTag: "uncertainty_estimation" },
   "you measure length as 12 4 cm with a ruler of 1 mm divisions report the value with a reasonable uncertainty": { id: "F1L6_T1", acceptedAnswers: ["12.4 +/- 0.05 cm", "12.4 cm +/- 0.05 cm", "12.4 cm +/- 0.05", "12.40 +/- 0.05 cm", "12.40 cm +/- 0.05 cm", "12.40 cm +/- 0.05"], correctAnswer: "12.4 +/- 0.05 cm", explanation: "A ruler with 1 mm divisions supports about +/- 0.05 cm uncertainty, so 12.4 cm should be reported with that uncertainty.", teachingFocus: "Report the measured value with a reasonable uncertainty based on the instrument's smallest division.", misconceptionTag: "uncertainty_estimation" },
 });
 Object.assign(FALLBACK_ANSWER_METADATA, {
@@ -1337,9 +1339,12 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   }
   if (
     (itemId === "F1L3_T2" || itemId === "F1-L3-T2") &&
-    promptKey === "a scale has 0 2 cm divisions what is a reasonable uncertainty to report"
+    (
+      promptKey === "a scale s smallest division is 0 2 cm what is a reasonable uncertainty to report" ||
+      promptKey === "a scale has 0 2 cm divisions what is a reasonable uncertainty to report"
+    )
   ) {
-    return { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so 0.2 cm divisions suggest +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" };
+    return { id: "F1-L3-T2", acceptedAnswers: ["0.1 cm", "+/- 0.1 cm"], correctAnswer: "+/- 0.1 cm", explanation: "A reasonable uncertainty is often half the smallest division, so a 0.2 cm smallest division suggests +/- 0.1 cm.", teachingFocus: "Estimate uncertainty from the instrument scale instead of inventing extra precision.", misconceptionTag: "uncertainty_estimation" };
   }
   if (
     (itemId === "F1L4_D1" || itemId === "F1-L4-D1") &&
@@ -1373,9 +1378,12 @@ function fallbackMeta(item: UnknownRecord): FallbackAnswerMeta | undefined {
   }
   if (
     (itemId === "F1L6_T1" || itemId === "F1-L6-T1") &&
-    promptKey === "you measure length as 12 4 cm with a ruler of 1 mm divisions report the value with a reasonable uncertainty"
+    (
+      promptKey === "you measure length as 12 4 cm with a ruler whose smallest division is 1 mm report the value with a reasonable uncertainty" ||
+      promptKey === "you measure length as 12 4 cm with a ruler of 1 mm divisions report the value with a reasonable uncertainty"
+    )
   ) {
-    return { id: "F1L6_T1", acceptedAnswers: ["12.4 +/- 0.05 cm", "12.4 cm +/- 0.05 cm", "12.4 cm +/- 0.05", "12.40 +/- 0.05 cm", "12.40 cm +/- 0.05 cm", "12.40 cm +/- 0.05"], correctAnswer: "12.4 +/- 0.05 cm", explanation: "A ruler with 1 mm divisions supports about +/- 0.05 cm uncertainty, so 12.4 cm should be reported with that uncertainty.", teachingFocus: "Report the measured value with a reasonable uncertainty based on the instrument's smallest division.", misconceptionTag: "uncertainty_estimation" };
+    return { id: "F1L6_T1", acceptedAnswers: ["12.4 +/- 0.05 cm", "12.4 cm +/- 0.05 cm", "12.4 cm +/- 0.05", "12.40 +/- 0.05 cm", "12.40 cm +/- 0.05 cm", "12.40 cm +/- 0.05"], correctAnswer: "12.4 +/- 0.05 cm", explanation: "A ruler whose smallest division is 1 mm supports about +/- 0.05 cm uncertainty, so 12.4 cm should be reported with that uncertainty.", teachingFocus: "Report the measured value with a reasonable uncertainty based on the instrument's smallest division.", misconceptionTag: "uncertainty_estimation" };
   }
   if (itemId === "F1-L2-C1") {
     return { id: "F1-L2-C1", answerIndex: 2, correctAnswer: "distance", explanation: "Distance only needs size, so it is scalar.", teachingFocus: "Scalars tell how much, not which way.", misconceptionTag: "vector_scalar_confusion" };
@@ -7328,12 +7336,12 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
     case "F1_L3":
       return [
         mcItem("F1-L3-M1", "Which tool is most suitable for measuring the diameter of a very thin wire with the smallest uncertainty?", ["metre rule", "vernier caliper", "micrometer screw gauge", "measuring tape"], 2, "For a very thin wire, choose the tool with the finest suitable scale.", "A micrometer screw gauge is most suitable because it is designed for very small diameters and usually gives a smaller uncertainty than a vernier caliper."),
-        mcItem("F1-L3-M2", "A ruler has 1 mm divisions. What uncertainty is often reasonable to report?", ["+/- 1 mm", "+/- 0.5 mm", "+/- 0.1 mm", "+/- 2 mm"], 1, "A common estimate is about half the smallest division.", "+/- 0.5 mm is reasonable because it is about half of a 1 mm smallest division."),
+        mcItem("F1-L3-M2", "A ruler's smallest division is 1 mm. What uncertainty is often reasonable to report?", ["+/- 1 mm", "+/- 0.5 mm", "+/- 0.1 mm", "+/- 2 mm"], 1, "A common estimate is about half the smallest division.", "+/- 0.5 mm is reasonable because it is about half of a 1 mm smallest division."),
         mcItem("F1-L3-M3", "If repeated readings are tightly grouped, what does that suggest?", ["low precision", "greater precision", "wrong unit", "systematic error only"], 1, "Think about how closely the readings agree with each other.", "Tightly grouped readings suggest greater precision because the measurements agree closely."),
         mcItem("F1-L3-M4", "A balance always reads 0.2 g too high before any mass is placed on it. This is...", ["random error", "systematic error", "rounding only", "no error"], 1, "A repeated shift in the same direction is the clue.", "A constant offset is systematic error because it shifts every reading the same way."),
         mcItem("F1-L3-M5", "Why is a caliper usually more trustworthy than a rough ruler for a tiny object?", ["It is always digital", "It has finer divisions and smaller uncertainty", "It uses larger units", "It removes all error"], 1, "Trust comes from finer resolution, not from magic.", "A caliper is usually more trustworthy because its finer divisions reduce the uncertainty in the reading."),
         mcItem("F1-L3-M6", "What does resolution describe?", ["The color of the instrument", "The smallest change the instrument can show", "The true value exactly", "The number of repeated trials"], 1, "Resolution is about the instrument's smallest visible change.", "Resolution is the smallest change an instrument can show."),
-        shortItem("F1-L3-M7", "A scale has 0.2 cm divisions. What uncertainty is often reasonable to report?", ["0.1 cm", "+/- 0.1 cm"], "Use about half the smallest division."),
+        shortItem("F1-L3-M7", "A scale's smallest division is 0.2 cm. What uncertainty is often reasonable to report?", ["0.1 cm", "+/- 0.1 cm"], "Use about half the smallest division."),
         shortItem("F1-L3-M8", "Name one reason repeated measurements improve trust in a result.", ["they show variation", "it shows variation", "shows variation", "they show how much the readings vary", "it shows how much the readings vary", "they help estimate uncertainty", "it helps estimate uncertainty", "they help us estimate uncertainty", "they show consistency", "it shows consistency", "they let you average the readings", "it lets you average the readings", "they help average out random error", "it helps average out random error", "they reduce random error", "it reduces random error", "they help spot anomalous readings", "it helps spot anomalous readings", "they help spot outliers", "it helps spot outliers"], "Think about spread, consistency, uncertainty, averaging, and outliers."),
         mcItem("F1-L3-M9", "Which action best reduces random error when timing a repeated motion?", ["Add extra digits to one reading", "Take several readings and average them", "Ignore any reading that looks unusual without checking", "Change the unit from seconds to minutes"], 1, "Random error is reduced by repeated measurements, not decorative precision.", "Taking several readings and averaging them helps reduce the effect of random error."),
         mcItem("F1-L3-M10", "What is the clearest sign of zero error?", ["Readings scatter above and below the best value", "The instrument starts with a constant offset before measurement", "The unit label is missing", "The scale has fine divisions"], 1, "Zero error is a built-in offset before the real reading even begins.", "A constant offset at the start is the clearest sign of zero error."),
@@ -10365,7 +10373,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       return {
         body: "Start with a real precision question and solve it step by step.",
         worked_example: {
-          prompt: "A ruler has 1 mm divisions and a line reads 6.4 cm. What uncertainty is reasonable to report?",
+          prompt: "A ruler's smallest division is 1 mm and a line reads 6.4 cm. What uncertainty is reasonable to report?",
           steps: [
             "Start with the smallest division on the instrument, which is 1 mm.",
             "For a simple scale reading, a reasonable uncertainty is about half the smallest division.",
