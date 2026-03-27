@@ -9713,6 +9713,74 @@ function workedExampleUsesRelationSelectionLanguage(
   );
 }
 
+function stripGenericWorkedExamplePromptEnding(prompt: string): string {
+  const trimmed = singleLineText(prompt);
+  if (!trimmed) return "";
+
+  const scenarioStem = trimmed.replace(
+    /\s*(?:Which statement is correct|Which option is correct|Which choice is correct|Which conclusion is correct|What is correct)\?$/i,
+    ""
+  ).trim();
+  if (scenarioStem && scenarioStem !== trimmed) return scenarioStem;
+
+  const aboutMatch = trimmed.match(/^Which statement about (.+?) is correct\?$/i);
+  if (aboutMatch) return `The situation is about ${lowerFirst(aboutMatch[1])}`.trim();
+
+  return trimmed;
+}
+
+function workedExampleTaskFromResolvedAnswer(answer: string, answerReason: string): string {
+  const normalized = normalizePromptKey(`${answer} ${answerReason}`);
+  if (!normalized) return "State the correct physics conclusion clearly.";
+
+  if (normalized.includes("distance") && normalized.includes("displacement")) {
+    return "State the total distance travelled and the final displacement.";
+  }
+
+  if (normalized.includes("speed") && normalized.includes("acceleration")) {
+    return "State what is true about the speed and the acceleration.";
+  }
+
+  if (normalized.includes("current") && normalized.includes("power")) {
+    return "State what the current tells you about the power.";
+  }
+
+  if (normalized.includes("current") && normalized.includes("energy per charge")) {
+    return "State what stays the same and what can differ at the two checkpoints.";
+  }
+
+  if (normalized.includes("resistance") && normalized.includes("current")) {
+    return "State which component has the lower resistance and why.";
+  }
+
+  if (normalized.includes("branch currents are equal") || (normalized.includes("parallel") && normalized.includes("current"))) {
+    return "State what happens to the branch currents and why.";
+  }
+
+  if (normalized.includes("same speed") && normalized.includes("acceleration")) {
+    return "State what matches and what differs in the motion description.";
+  }
+
+  if (normalized.includes("same total distance")) {
+    return "State what the graph tells you about the total distance and the motion pattern.";
+  }
+
+  return "State the correct physics conclusion clearly.";
+}
+
+function sharpenWorkedExamplePrompt(prompt: string, answer: string, answerReason: string): string {
+  const normalizedPrompt = normalizeRenderedPhysicsText(text(prompt)).trim();
+  if (!normalizedPrompt) return "";
+
+  const stripped = stripGenericWorkedExamplePromptEnding(normalizedPrompt);
+  if (stripped === normalizedPrompt) return normalizedPrompt;
+
+  const task = workedExampleTaskFromResolvedAnswer(answer, answerReason);
+  if (!stripped) return task;
+
+  return `${ensureSentence(stripped)} ${task}`.trim();
+}
+
 function lessonWorkedExampleCorePhysics(lesson: UnknownRecord): string {
   const authoring = asRecord(lesson.authoring_contract);
   const coreIdeas = dedupeText([
@@ -9764,12 +9832,13 @@ function workedExampleEntryFromAssessmentItem(
 ): { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string } | null {
   if (!hasUsableAssessmentAnswer(item)) return null;
 
-  const prompt = renderedPromptText(item).trim();
+  const rawPrompt = renderedPromptText(item).trim();
   const answerIndex = resolvedAnswerIndex(item);
   const answer = resolvedCorrectAnswer(item).trim();
   const answerReason = resolvedExplanation(item, answerIndex).trim();
   const title = lessonTitle(lesson, lesson);
-  const whyItMatters = ensureSentence(teachingFocus(prompt, title)) || "Use the lesson physics rule directly and state why the answer follows.";
+  const prompt = sharpenWorkedExamplePrompt(rawPrompt, answer, answerReason);
+  const whyItMatters = ensureSentence(teachingFocus(rawPrompt, title)) || "Use the lesson physics rule directly and state why the answer follows.";
 
   if (!prompt || !answer) return null;
 
@@ -11998,10 +12067,10 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
 function scaffoldWorkedExampleSections(workedExample: UnknownRecord): UnknownRecord[] {
   const sections: UnknownRecord[] = [];
   const normalizedWorkedExample = (value: UnknownRecord): UnknownRecord => {
-    const prompt = normalizeRenderedPhysicsText(text(value.prompt));
-    const steps = asList(value.steps).map((step) => normalizeRenderedPhysicsText(text(step))).filter(Boolean);
-    const answer = normalizeRenderedPhysicsText(text(value.answer));
+    const answer = normalizeRenderedPhysicsText(text(value.answer) || text(value.final_answer));
     const answerReason = normalizeRenderedPhysicsText(text(value.answer_reason));
+    const prompt = sharpenWorkedExamplePrompt(text(value.prompt), answer, answerReason);
+    const steps = asList(value.steps).map((step) => normalizeRenderedPhysicsText(text(step))).filter(Boolean);
     if (!prompt && steps.length === 0 && !answer && !answerReason) return {};
     return {
       prompt,
