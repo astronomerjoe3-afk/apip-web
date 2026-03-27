@@ -12818,7 +12818,7 @@ function foundationFormulaFallbacks(code: string): string[] {
     case "F2_L1":
       return ["average speed = total distance / total time", "displacement = final position − initial position"];
     case "F2_L2":
-      return ["average velocity = displacement / time", "a = Δv / t"];
+      return ["v = displacement / time", "a = Δv / t"];
     case "F2_L3":
       return ["speed = gradient = Δdistance / Δtime"];
     case "F2_L4":
