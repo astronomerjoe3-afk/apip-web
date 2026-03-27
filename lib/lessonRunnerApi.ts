@@ -975,14 +975,17 @@ function shouldInjectConceptGate(
   const serverBackedConceptGate =
     text(conceptGateRow?.key) === "concept_gate" && conceptGateRow?.available !== false;
   const localConceptGateReady = Boolean(state.profile?.conceptGateReady);
+  const localConceptGateRequested = Boolean(state.conceptGate && !state.profile?.conceptGateReady);
   const stageIndex = runnerStageIndex(serverStage);
 
   return (
     !serverBackedConceptGate &&
     !localConceptGateReady &&
     conceptGateBank(lesson).length > 0 &&
-    stageIndex > runnerStageIndex("concept_gate") &&
-    stageIndex < runnerStageIndex("done")
+    (
+      (stageIndex > runnerStageIndex("concept_gate") && stageIndex < runnerStageIndex("done")) ||
+      (serverStage === "scaffolded_teaching" && localConceptGateRequested)
+    )
   );
 }
 
@@ -13460,10 +13463,18 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
   }
 
   if (request.event_type === "scaffold_continue") {
+    const state = readState(moduleId, lessonId);
     await postEvent(moduleId, lessonId, {
       event_type: "reflection",
       score: 1,
       details: { source: "student_runner_scaffolded_teaching_viewed" },
+    });
+    writeState(moduleId, lessonId, {
+      ...state,
+      conceptGate: state.conceptGate || {
+        nonce: freshAttemptSeed(),
+        retryCount: 0,
+      },
     });
     return;
   }
