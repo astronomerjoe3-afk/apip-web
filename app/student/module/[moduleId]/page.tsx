@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
-import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
+import { clearAllLessonRunnerState, restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { securityActionLabel } from "../../../../lib/accountSecurity";
 import { useAuth } from "../../../../lib/auth";
 import {
@@ -613,6 +613,7 @@ export default function StudentModulePage() {
     try {
       setErr("");
       setStatus("Signing out...");
+      clearAllLessonRunnerState();
       await signOutEverywhere();
       const nextPath = currentModulePath;
       router.replace("/login?next=" + encodeURIComponent(nextPath));

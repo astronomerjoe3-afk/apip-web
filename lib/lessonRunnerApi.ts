@@ -738,6 +738,11 @@ function clearState(moduleId: string, lessonId: string): void {
   writeState(moduleId, lessonId, {});
 }
 
+function clearAttemptHistory(moduleId: string, lessonId: string): void {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.removeItem(attemptHistoryKey(moduleId, lessonId));
+}
+
 function clearModuleState(moduleId: string): void {
   if (typeof window === "undefined") return;
   const prefixes = Array.from(new Set([String(moduleId || ""), normalizeModuleId(moduleId)]))
@@ -747,6 +752,31 @@ function clearModuleState(moduleId: string): void {
   for (let index = 0; index < window.sessionStorage.length; index += 1) {
     const key = window.sessionStorage.key(index);
     if (key && prefixes.some((prefix) => key.startsWith(prefix))) keys.push(key);
+  }
+  for (const key of keys) window.sessionStorage.removeItem(key);
+}
+
+function clearModuleAttemptHistory(moduleId: string): void {
+  if (typeof window === "undefined") return;
+  const prefixes = Array.from(new Set([String(moduleId || ""), normalizeModuleId(moduleId)]))
+    .filter(Boolean)
+    .map((value) => `lesson-runner-history:${value}:`);
+  const keys: string[] = [];
+  for (let index = 0; index < window.sessionStorage.length; index += 1) {
+    const key = window.sessionStorage.key(index);
+    if (key && prefixes.some((prefix) => key.startsWith(prefix))) keys.push(key);
+  }
+  for (const key of keys) window.sessionStorage.removeItem(key);
+}
+
+export function clearAllLessonRunnerState(): void {
+  if (typeof window === "undefined") return;
+  const keys: string[] = [];
+  for (let index = 0; index < window.sessionStorage.length; index += 1) {
+    const key = window.sessionStorage.key(index);
+    if (key && (key.startsWith("lesson-runner:") || key.startsWith("lesson-runner-history:"))) {
+      keys.push(key);
+    }
   }
   for (const key of keys) window.sessionStorage.removeItem(key);
 }
@@ -13826,6 +13856,7 @@ export async function restartModuleProgress(moduleId: string): Promise<void> {
     {}
   );
   clearModuleState(normalizedModuleId);
+  clearModuleAttemptHistory(normalizedModuleId);
 }
 
 export async function restartLessonProgress(moduleId: string, lessonId: string): Promise<void> {
@@ -13836,5 +13867,6 @@ export async function restartLessonProgress(moduleId: string, lessonId: string):
     {}
   );
   clearState(normalizedModuleId, normalized);
+  clearAttemptHistory(normalizedModuleId, normalized);
 }
 
