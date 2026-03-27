@@ -362,7 +362,7 @@ function normalizeAssessmentText(value: string): string {
 }
 
 function normalizeLessonDisplayText(value: string): string {
-  return normalizeAssessmentText(value);
+  return canonicalizeLessonUnitTokens(normalizeAssessmentText(value));
 }
 
 function normalizeLessonDisplayMultiline(value: string): string {
