@@ -7264,6 +7264,10 @@ function dedupeText(values: string[]): string[] {
   return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
 }
 
+function normalizeFormulaBridgeText(value: string): string {
+  return text(value).replace(/\s+/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
+}
+
 function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): UnknownRecord[] {
   const refs: UnknownRecord[] = [];
   const addRef = (id: string, label: string) => {
@@ -12354,10 +12358,15 @@ function formulaSectionRows(
     ...(fallbackConstantNote ? [fallbackConstantNote] : []),
   ]);
   const useSectionConstantNote = uniqueConstants.length === 1;
-  const uniqueAnalogies = dedupeText(
-    formulaCards.map((card) => text(card.analogy_equivalent)).filter(Boolean)
-  );
-  const useSharedAnalogy = uniqueAnalogies.length === 1 && formulaCards.length > 1;
+  const analogyEntries = formulaCards
+    .map((card) => ({
+      raw: text(card.analogy_equivalent),
+      normalized: normalizeFormulaBridgeText(text(card.analogy_equivalent)),
+    }))
+    .filter((entry) => entry.normalized);
+  const uniqueAnalogies = [...new Set(analogyEntries.map((entry) => entry.normalized))];
+  const useSharedAnalogy = uniqueAnalogies.length === 1 && analogyEntries.length > 1;
+  const sharedAnalogy = useSharedAnalogy ? analogyEntries[0]?.raw.trim() ?? "" : "";
 
   return {
     rows: formulaCards.map((card) => ({
@@ -12366,7 +12375,7 @@ function formulaSectionRows(
       analogy_equivalent: useSharedAnalogy ? "" : text(card.analogy_equivalent),
     })),
     constantNote: useSectionConstantNote ? uniqueConstants[0] : "",
-    sharedAnalogy: useSharedAnalogy ? uniqueAnalogies[0] : "",
+    sharedAnalogy,
   };
 }
 

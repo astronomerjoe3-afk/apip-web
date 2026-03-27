@@ -1390,18 +1390,23 @@ export default function LessonRunner({
             {section.formula_reference_rows?.length ? (
               (() => {
                 const formulaRows = section.formula_reference_rows ?? [];
-                const repeatedRowAnalogies = Array.from(
-                  new Set(
-                    formulaRows
-                      .map((row) => (typeof row.analogy_equivalent === "string" ? row.analogy_equivalent.trim() : ""))
-                      .filter(Boolean),
-                  ),
-                );
+                const normalizedRowAnalogies = formulaRows
+                  .map((row) =>
+                    typeof row.analogy_equivalent === "string"
+                      ? row.analogy_equivalent.replace(/\s+/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim()
+                      : "",
+                  )
+                  .filter(Boolean);
+                const repeatedRowAnalogies = Array.from(new Set(normalizedRowAnalogies));
+                const firstRowAnalogy =
+                  formulaRows.find((row) => typeof row.analogy_equivalent === "string" && row.analogy_equivalent.trim())
+                    ?.analogy_equivalent
+                    ?.trim() ?? "";
                 const derivedSharedFormulaAnalogy =
                   typeof section.shared_formula_analogy === "string" && section.shared_formula_analogy.trim()
                     ? section.shared_formula_analogy.trim()
                     : repeatedRowAnalogies.length === 1 && formulaRows.length > 1
-                      ? repeatedRowAnalogies[0]
+                      ? firstRowAnalogy
                       : "";
                 const hasSharedFormulaAnalogy = Boolean(derivedSharedFormulaAnalogy);
                 const hasRowAnalogies = !hasSharedFormulaAnalogy && formulaRows.some((row) => row.analogy_equivalent);
