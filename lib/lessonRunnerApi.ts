@@ -13166,17 +13166,28 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
   let state = readState(moduleId, lessonId);
   const title = lessonTitle(resources.lesson, runnerLesson);
   const lessonStatus = text(runnerLesson.lesson_status);
+  const masteryMeta = asRecord(runnerLesson.mastery_check);
+  const masteryThreshold = numberValue(masteryMeta.threshold, 0.8);
+  const bestMasteryScore = numberValue(runnerLesson.best_score, 0);
+  const confirmedLessonCompletion = bestMasteryScore >= masteryThreshold;
   const backendStage = text(runnerLesson.active_stage);
   const startStage = firstStageForLesson(resources.lesson);
-  const masteryMeta = asRecord(runnerLesson.mastery_check);
   const serverCompletedStages = completedStageKeys(runnerLesson);
   const inferredServerStage = inferredStageFromServerProgress(resources.lesson, runnerLesson);
   const inferredStageIndex = runnerStageIndex(inferredServerStage || "");
   const backendStageIndex = runnerStageIndex(backendStage);
+  const normalizedBackendStage = (
+    backendStage === "done" &&
+    !confirmedLessonCompletion &&
+    availableStageKeys(resources.lesson, runnerLesson).includes("mastery_check")
+  )
+    ? "mastery_check"
+    : backendStage;
+  const normalizedBackendStageIndex = runnerStageIndex(normalizedBackendStage);
   // The backend owns the lesson state machine; client inference is only a fallback
   // when the stage is missing or malformed.
-  const serverStage = backendStageIndex >= 0
-    ? backendStage
+  const serverStage = normalizedBackendStageIndex >= 0
+    ? normalizedBackendStage
     : inferredStageIndex >= 0
       ? inferredServerStage || startStage
       : startStage;
@@ -13370,9 +13381,9 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
   else {
     activeStage = "mastery";
     const masteryState = state.mastery || { nonce: 0 };
-    const masteryMeta = asRecord(runnerLesson.mastery_check);
     const threshold = numberValue(masteryMeta.threshold, 0.8);
     const thresholdPercent = Math.round(threshold * 100);
+    const bestScorePercent = Math.round(numberValue(runnerLesson.best_score, 0) * 100);
     const latestScore = typeof masteryMeta.latest_score === "number"
       ? numberValue(masteryMeta.latest_score, 0)
       : typeof runnerLesson.latest_score === "number"
@@ -13382,12 +13393,33 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
       ? { percent: Math.round(latestScore * 100), passed: latestScore >= threshold }
       : undefined;
     const hasPersistedResult = numberValue(masteryMeta.attempt_count, 0) >= 1 && Boolean(persistedResult) && masteryState.forceNewAttempt !== true;
+    const localResult = asRecord(masteryState.result);
+    const localResultPercent = typeof localResult.percent === "number"
+      ? numberValue(localResult.percent, 0)
+      : null;
+    const localResultPassed = typeof localResultPercent === "number"
+      ? localResultPercent >= thresholdPercent
+      : typeof localResult.passed === "boolean"
+        ? Boolean(localResult.passed)
+        : null;
+    const localSubmittedResult = masteryState.submitted && typeof localResultPercent === "number"
+      ? { percent: localResultPercent, passed: Boolean(localResultPassed) }
+      : undefined;
+    const confirmedMasteryResult = stage === "done" && bestScorePercent >= thresholdPercent
+      ? { percent: bestScorePercent, passed: true }
+      : undefined;
+    const resolvedMasteryResult = localSubmittedResult || persistedResult || confirmedMasteryResult;
+    const showSubmittedMastery = Boolean(resolvedMasteryResult) && (
+      Boolean(localSubmittedResult) ||
+      hasPersistedResult ||
+      Boolean(confirmedMasteryResult)
+    );
     const pool = masteryItems(resources.lesson);
     const strengthScore = masteryStrengthScore(runnerLesson, state);
     const count = masteryQuestionCount(masteryMeta, pool.length, strengthScore);
     const selectedPool = masteryPoolForAttempt(moduleId, lessonId, resources.lesson, masteryState.nonce || 0);
     const selected = selectedPool.slice(0, count);
-    if (!masteryState.submitted && stage !== 'done' && !hasPersistedResult) {
+    if (!showSubmittedMastery) {
       writeState(moduleId, lessonId, {
         ...state,
         mastery: {
@@ -13397,13 +13429,13 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
         },
       });
     }
-    stagePayload = masteryState.submitted || stage === "done" || hasPersistedResult
+    stagePayload = showSubmittedMastery
       ? {
-          instructions: stage === "done" ? "You have already shown mastery for this lesson." : "This is your latest mastery result.",
+          instructions: confirmedMasteryResult ? "You have already shown mastery for this lesson." : "This is your latest mastery result.",
           questions: [],
           submitted: true,
           feedback: masteryState.feedback || [],
-          result: masteryState.result || persistedResult || { percent: Math.round(numberValue(runnerLesson.best_score) * 100), passed: true },
+          result: resolvedMasteryResult,
           review_refs: masteryState.reviewRefs || reviewRefs(resources.lesson, asList(masteryMeta.recommended_review_refs)),
           review_requested: Boolean(asRecord(masteryState).reviewRequested),
           min_questions: numberValue(masteryMeta.min_questions, 5),
@@ -13432,7 +13464,11 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
     module_id: normalizeModuleId(text(moduleMeta.module_id) || moduleId),
     lesson_id: normalizeLessonIdForModule(moduleId, text(runnerLesson.lesson_id) || lessonId),
     lesson_title: title,
-    lesson_status: text(runnerLesson.lesson_status) === "completed" ? "completed" : text(runnerLesson.lesson_status) === "not_started" ? "not_started" : "in_progress",
+    lesson_status: confirmedLessonCompletion
+      ? "completed"
+      : text(runnerLesson.lesson_status) === "not_started"
+        ? "not_started"
+        : "in_progress",
     active_stage: activeStage,
     stage_payload: stagePayload,
     progress_summary: {

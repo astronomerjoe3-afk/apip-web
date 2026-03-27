@@ -3622,12 +3622,11 @@ export default function LessonRunner({
         typeof runner.progress_summary?.module_mastery_percent === "number"
           ? runner.progress_summary.module_mastery_percent
           : null;
-      const passed =
-        typeof payload.result?.passed === "boolean"
+      const passed = typeof masteryPercent === "number"
+        ? masteryPercent >= threshold
+        : typeof payload.result?.passed === "boolean"
           ? payload.result.passed
-          : typeof masteryPercent === "number"
-            ? masteryPercent >= threshold
-            : false;
+          : false;
       const isFinalModuleWrapUp =
         passed &&
         runner.lesson_status === "completed" &&
