@@ -978,6 +978,14 @@ function shouldInjectConceptGate(
   const localConceptGateRequested = Boolean(state.conceptGate && !state.profile?.conceptGateReady);
   const stageIndex = runnerStageIndex(serverStage);
 
+  if (
+    localConceptGateRequested &&
+    conceptGateBank(lesson).length > 0 &&
+    serverStage === "scaffolded_teaching"
+  ) {
+    return true;
+  }
+
   return (
     !serverBackedConceptGate &&
     !localConceptGateReady &&
