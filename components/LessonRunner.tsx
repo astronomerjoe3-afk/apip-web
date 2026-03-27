@@ -1390,15 +1390,28 @@ export default function LessonRunner({
             {section.formula_reference_rows?.length ? (
               (() => {
                 const formulaRows = section.formula_reference_rows ?? [];
-                const hasSharedFormulaAnalogy = Boolean(section.shared_formula_analogy);
+                const repeatedRowAnalogies = Array.from(
+                  new Set(
+                    formulaRows
+                      .map((row) => (typeof row.analogy_equivalent === "string" ? row.analogy_equivalent.trim() : ""))
+                      .filter(Boolean),
+                  ),
+                );
+                const derivedSharedFormulaAnalogy =
+                  typeof section.shared_formula_analogy === "string" && section.shared_formula_analogy.trim()
+                    ? section.shared_formula_analogy.trim()
+                    : repeatedRowAnalogies.length === 1 && formulaRows.length > 1
+                      ? repeatedRowAnalogies[0]
+                      : "";
+                const hasSharedFormulaAnalogy = Boolean(derivedSharedFormulaAnalogy);
                 const hasRowAnalogies = !hasSharedFormulaAnalogy && formulaRows.some((row) => row.analogy_equivalent);
                 const hasRowConstants = formulaRows.some((row) => row.constants);
                 return (
                   <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-sm">
-                    {section.shared_formula_analogy ? (
+                    {derivedSharedFormulaAnalogy ? (
                       <div className="mb-4 rounded-2xl border border-sky-100 bg-sky-50/80 px-4 py-3 text-sm leading-6 text-slate-700">
                         <span className="font-medium text-slate-900">Shared analogy match:</span>{" "}
-                        {normalizeLessonDisplayMultiline(section.shared_formula_analogy)}
+                        {normalizeLessonDisplayMultiline(derivedSharedFormulaAnalogy)}
                       </div>
                     ) : null}
                     {section.formula_constants_note ? (
