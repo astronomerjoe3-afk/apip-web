@@ -269,6 +269,10 @@ export default function StudentModulePage() {
     if (!pathModuleId) return "/student";
     return "/student/module/" + encodeURIComponent(pathModuleId);
   }, [moduleId, routeModuleId]);
+  const helpCardAnchorId = useMemo(
+    () => `student-help-card-${(moduleId || routeModuleId || "module").toLowerCase()}`,
+    [moduleId, routeModuleId],
+  );
 
   const checkoutState = searchParams.get("checkout");
   const checkoutSessionId = searchParams.get("session_id");
@@ -327,6 +331,7 @@ export default function StudentModulePage() {
     sessionUser?.security?.hardening_complete !== true;
   const waitingForSecurityCheck = premiumAccessUnlocked && !roleBypassesSecurityUpgrade && sessionLoading;
   const securityActions = sessionUser?.security?.recommended_actions || [];
+  const canShowStudentHelp = !sessionLoading && sessionUser?.role !== "admin" && sessionUser?.role !== "instructor";
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!user) {
@@ -1096,8 +1101,8 @@ export default function StudentModulePage() {
         </div>
       ) : null}
 
-      {!sessionLoading && sessionUser?.role !== "admin" && sessionUser?.role !== "instructor" ? (
-        <div style={{ maxWidth: 1100, margin: "18px auto 0 auto" }}>
+      {canShowStudentHelp ? (
+        <div id={helpCardAnchorId} style={{ maxWidth: 1100, margin: "18px auto 0 auto", scrollMarginTop: 96 }}>
           <StudentHelpCard
             moduleId={moduleId}
             moduleTitle={moduleMeta?.title}
@@ -1106,6 +1111,30 @@ export default function StudentModulePage() {
             pagePath={currentModulePath}
           />
         </div>
+      ) : null}
+
+      {canShowStudentHelp ? (
+        <button
+          onClick={() => {
+            if (typeof document === "undefined") return;
+            document.getElementById(helpCardAnchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          style={{
+            position: "fixed",
+            right: 22,
+            bottom: 22,
+            zIndex: 80,
+            padding: "14px 18px",
+            borderRadius: 999,
+            border: "none",
+            background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
+            color: "#fff",
+            fontWeight: 900,
+            boxShadow: "0 18px 38px rgba(11, 26, 50, 0.24)",
+          }}
+        >
+          Help / inquiry
+        </button>
       ) : null}
     </div>
   );

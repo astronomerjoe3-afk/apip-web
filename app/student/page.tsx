@@ -189,6 +189,7 @@ function subscriptionActionLabel(plan: PricingOffer, currentPlanId?: string | nu
 export default function StudentHomePage() {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const helpCardAnchorId = "student-help-card-home";
 
   const [role, setRole] = useState<Role>("unknown");
   const [roleLoading, setRoleLoading] = useState<boolean>(true);
@@ -413,6 +414,7 @@ export default function StudentHomePage() {
     [billingSummary, modules, sessionUser],
   );
   const securityActions = sessionUser?.security?.recommended_actions || [];
+  const canShowStudentHelp = !sessionLoading && role === "student";
 
   function renderModuleCard(moduleItem: Module) {
     const badge = moduleBadge(moduleItem);
@@ -748,12 +750,36 @@ export default function StudentHomePage() {
         </div>
       )}
 
-      <div style={{ marginTop: 20 }}>
+      <div id={helpCardAnchorId} style={{ marginTop: 20, scrollMarginTop: 96 }}>
         <StudentHelpCard
           moduleTitle="Student module list"
           pagePath="/student"
         />
       </div>
+
+      {canShowStudentHelp ? (
+        <button
+          onClick={() => {
+            if (typeof document === "undefined") return;
+            document.getElementById(helpCardAnchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          style={{
+            position: "fixed",
+            right: 22,
+            bottom: 22,
+            zIndex: 80,
+            padding: "14px 18px",
+            borderRadius: 999,
+            border: "none",
+            background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
+            color: "#fff",
+            fontWeight: 900,
+            boxShadow: "0 18px 38px rgba(11, 26, 50, 0.24)",
+          }}
+        >
+          Help / inquiry
+        </button>
+      ) : null}
     </div>
   );
 }
