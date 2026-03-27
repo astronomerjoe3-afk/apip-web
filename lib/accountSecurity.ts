@@ -37,6 +37,10 @@ type ModuleLike = {
   };
 };
 
+export function isSecurityBypassRole(role: SessionUser["role"] | null | undefined): boolean {
+  return role === "admin" || role === "instructor";
+}
+
 function emailTokens(email?: string | null): string[] {
   const normalized = String(email || "").trim().toLowerCase();
   if (!normalized.includes("@")) {
@@ -126,6 +130,10 @@ export function paidAccessRequiresSecurityUpgrade(
   billingSummary: BillingLike,
   modules: ModuleLike[] = [],
 ): boolean {
+  if (isSecurityBypassRole(sessionUser?.role)) {
+    return false;
+  }
+
   const hasSubscription = billingSummary?.has_active_subscription === true;
   const hasPurchasedModule = Array.isArray(billingSummary?.purchased_module_ids)
     && billingSummary.purchased_module_ids.length > 0;

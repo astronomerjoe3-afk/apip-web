@@ -5,7 +5,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import { clearAllLessonRunnerState, restartModuleProgress } from "../../../../lib/lessonRunnerApi";
-import { securityActionLabel } from "../../../../lib/accountSecurity";
+import { isSecurityBypassRole, securityActionLabel } from "../../../../lib/accountSecurity";
 import { useAuth } from "../../../../lib/auth";
 import {
   applyCurriculumModuleMeta,
@@ -319,8 +319,12 @@ export default function StudentModulePage() {
     : "Secure checkout is ready. Choose a 1-month module pass or premium subscription.";
   const showBillingError = Boolean(billingErr) && moduleLocked;
   const premiumAccessUnlocked = moduleMeta?.access?.tier === "premium" && moduleMeta?.access?.is_unlocked !== false;
-  const moduleNeedsSecurityUpgrade = premiumAccessUnlocked && sessionUser?.security?.hardening_complete !== true;
-  const waitingForSecurityCheck = premiumAccessUnlocked && sessionLoading;
+  const roleBypassesSecurityUpgrade = isSecurityBypassRole(sessionUser?.role) || moduleMeta?.access?.unlock_reason === "role_review_access";
+  const moduleNeedsSecurityUpgrade =
+    premiumAccessUnlocked &&
+    !roleBypassesSecurityUpgrade &&
+    sessionUser?.security?.hardening_complete !== true;
+  const waitingForSecurityCheck = premiumAccessUnlocked && !roleBypassesSecurityUpgrade && sessionLoading;
   const securityActions = sessionUser?.security?.recommended_actions || [];
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
