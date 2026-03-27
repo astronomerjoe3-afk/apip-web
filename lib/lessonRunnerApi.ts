@@ -7278,6 +7278,20 @@ function normalizeFormulaBridgeText(value: string): string {
   return text(value).replace(/\s+/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
 }
 
+function formulaBridgeSentences(value: string): string[] {
+  return normalizeFormulaBridgeText(value)
+    .split(/(?<=[.!?])\s+/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+}
+
+function stripFormulaBridgePrefix(value: string, prefixSentences: string[]): string {
+  const sentences = formulaBridgeSentences(value);
+  if (prefixSentences.length === 0) return normalizeFormulaBridgeText(value);
+  const remainder = sentences.slice(prefixSentences.length).join(" ").trim();
+  return remainder;
+}
+
 function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): UnknownRecord[] {
   const refs: UnknownRecord[] = [];
   const addRef = (id: string, label: string) => {
@@ -12372,17 +12386,36 @@ function formulaSectionRows(
     .map((card) => ({
       raw: text(card.analogy_equivalent),
       normalized: normalizeFormulaBridgeText(text(card.analogy_equivalent)),
+      sentences: formulaBridgeSentences(text(card.analogy_equivalent)),
     }))
     .filter((entry) => entry.normalized);
   const uniqueAnalogies = [...new Set(analogyEntries.map((entry) => entry.normalized))];
-  const useSharedAnalogy = uniqueAnalogies.length === 1 && analogyEntries.length > 1;
-  const sharedAnalogy = useSharedAnalogy ? analogyEntries[0]?.raw.trim() ?? "" : "";
+  let sharedAnalogySentences: string[] = [];
+  if (analogyEntries.length > 1) {
+    const maxPrefixLength = Math.min(...analogyEntries.map((entry) => entry.sentences.length));
+    for (let index = 0; index < maxPrefixLength; index += 1) {
+      const candidateSentence = analogyEntries[0]?.sentences[index] ?? "";
+      if (!candidateSentence) break;
+      const allMatch = analogyEntries.every((entry) => entry.sentences[index] === candidateSentence);
+      if (!allMatch) break;
+      sharedAnalogySentences.push(candidateSentence);
+    }
+  }
+  const useSharedAnalogy =
+    (uniqueAnalogies.length === 1 && analogyEntries.length > 1) ||
+    (sharedAnalogySentences.length > 0 && analogyEntries.length > 1);
+  const sharedAnalogy =
+    uniqueAnalogies.length === 1 && analogyEntries.length > 1
+      ? analogyEntries[0]?.raw.trim() ?? ""
+      : sharedAnalogySentences.join(" ").trim();
 
   return {
     rows: formulaCards.map((card) => ({
       ...card,
       constants: useSectionConstantNote ? "" : text(card.constants),
-      analogy_equivalent: useSharedAnalogy ? "" : text(card.analogy_equivalent),
+      analogy_equivalent: useSharedAnalogy
+        ? stripFormulaBridgePrefix(text(card.analogy_equivalent), sharedAnalogySentences)
+        : text(card.analogy_equivalent),
     })),
     constantNote: useSectionConstantNote ? uniqueConstants[0] : "",
     sharedAnalogy,
