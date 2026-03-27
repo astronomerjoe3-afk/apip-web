@@ -977,19 +977,11 @@ function shouldInjectConceptGate(
   const localConceptGateReady = Boolean(state.profile?.conceptGateReady);
   const localConceptGateRequested = Boolean(state.conceptGate && !state.profile?.conceptGateReady);
   const stageIndex = runnerStageIndex(serverStage);
-  const localScaffoldFallbackActive = (
-    serverStage === "diagnostic" &&
-    Boolean(state.diagnostic?.acknowledged) &&
-    (
-      (state.diagnostic?.feedback?.length ?? 0) > 0 ||
-      (state.diagnostic?.askedIds?.length ?? 0) > 0
-    )
-  );
 
   if (
     localConceptGateRequested &&
     conceptGateBank(lesson).length > 0 &&
-    (serverStage === "scaffolded_teaching" || localScaffoldFallbackActive)
+    stageIndex < runnerStageIndex("done")
   ) {
     return true;
   }
