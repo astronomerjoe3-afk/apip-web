@@ -17,7 +17,7 @@
     <circle cx="610" cy="170" r="10" fill="#0f766e"/>
     <circle cx="880" cy="110" r="10" fill="#0f766e"/>
     <text x="28" y="96" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">distance</text>
-    <text x="850" y="412" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">time</text>
+    <text x="900" y="428" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">time</text>
     <g>
       <circle cx="300" cy="126" r="26" fill="#e0f2fe" stroke="#0284c7" stroke-width="4"/>
       <text x="290" y="135" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#0369a1">A</text>
@@ -33,8 +33,11 @@
       <text x="748" y="101" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#15803d">C</text>
       <text x="694" y="52" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#15803d">Shallower segment</text>
     </g>
-    <text x="170" y="410" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#475569">A: distance rises quickly</text>
-    <text x="440" y="410" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#475569">B: distance stays unchanged</text>
-    <text x="710" y="410" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#475569">C: distance rises slowly</text>
+    <text x="170" y="410" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#475569">A: distance rises quickly</text>
+    <text x="430" y="410" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#475569">B: distance stays unchanged</text>
+    <text x="650" y="396" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#475569">
+      <tspan x="650" dy="0">C: distance rises</tspan>
+      <tspan x="650" dy="24">slowly</tspan>
+    </text>
   </g>
 </svg>
