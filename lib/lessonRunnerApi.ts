@@ -6517,7 +6517,6 @@ const RENDERED_UNIT_SYMBOL_MAP: Record<string, string> = {
   kg: "kg",
   km: "km",
   m: "m",
-  ma: "mA",
   mev: "MeV",
   mg: "mg",
   ml: "mL",
@@ -6530,13 +6529,18 @@ const RENDERED_UNIT_SYMBOL_MAP: Record<string, string> = {
 
 function canonicalizeRenderedUnitTokens(value: string): string {
   let normalized = value.replace(
-    /\b(cm|ev|gev|g|hz|kev|kg|km|m|ma|mev|mg|ml|mm|ms|nm|pa|s)\b/gi,
+    /\b(cm|ev|gev|g|hz|kev|kg|km|m|mev|mg|ml|mm|ms|nm|pa|s)\b/gi,
     (token) => RENDERED_UNIT_SYMBOL_MAP[token.toLowerCase()] ?? token
   );
 
   normalized = normalized.replace(
     /(\d(?:[\d.]*))\s+n\b/g,
     (_match, valueText: string) => `${valueText} N`
+  );
+
+  normalized = normalized.replace(
+    /(\d(?:[\d.]*))\s+ma\b/gi,
+    (_match, valueText: string) => `${valueText} mA`
   );
 
   normalized = normalized.replace(
@@ -6548,6 +6552,11 @@ function canonicalizeRenderedUnitTokens(value: string): string {
   normalized = normalized.replace(
     /(^|:\s*|,\s*|\(\s*)([GM])(?=,|\)|$)/g,
     (_match, prefix: string, unit: string) => `${prefix}${unit.toLowerCase()}`
+  );
+
+  normalized = normalized.replace(
+    /(^|:\s*|,\s*|\(\s*)ma(?=,|\)|$)/gi,
+    (_match, prefix: string) => `${prefix}mA`
   );
 
   return normalized;
