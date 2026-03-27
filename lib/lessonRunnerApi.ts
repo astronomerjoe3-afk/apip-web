@@ -12200,8 +12200,10 @@ function formulaConditionInstruction(value: string, subject = "Use it"): string 
 }
 
 function formulaUnitsText(formula: UnknownRecord): string {
-  const units = asList(formula.units).map((unit) => text(unit)).filter(Boolean);
-  return units.length ? units.join(", ") : "No unit list supplied.";
+  const units = asList(formula.units)
+    .map((unit) => canonicalizeRenderedUnitTokens(text(unit)))
+    .filter(Boolean);
+  return units.length ? canonicalizeRenderedUnitTokens(units.join(", ")) : "No unit list supplied.";
 }
 
 function standardFormulaText(formula: UnknownRecord): string {
