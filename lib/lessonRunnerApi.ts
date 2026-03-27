@@ -1197,6 +1197,8 @@ function normalizeOpenAnswer(value: unknown): string {
     .normalize("NFKD")
     .replace(/,/g, "")
     .replace(/[\u00B1]/g, "+/-")
+    .replace(/\bdegrees?\s*c\b/g, "c")
+    .replace(/\bcelsius\b/g, "c")
     .replace(/joules?/g, "j")
     .replace(/metres?/g, "m")
     .replace(/meters?/g, "m")
