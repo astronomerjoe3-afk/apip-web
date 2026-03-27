@@ -11420,9 +11420,9 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Same push, different mass",
-          caption: "Compare a light and heavy trolley under the same force to see why the lighter one accelerates more.",
+          caption: "Compare a light and heavy trolley under the same force to see why the lighter one accelerates more and why the heavier one shows more inertia.",
           image_url: "/lesson-media/f2/f2-l6-force-mass.svg",
-          highlights: ["The same force can produce different accelerations", "More mass means more resistance to motion change", "F = ma links force, mass, and acceleration"],
+          highlights: ["The same force can produce different accelerations", "More mass means more inertia, which is resistance to motion change", "F = ma links force, mass, and acceleration"],
         },
       ];
     case "F3_L1":
@@ -11758,8 +11758,8 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
       };
     case "F2_L6":
       return {
-        coreIdea: "F = ma links resultant force, mass, and acceleration. The same force changes a smaller mass more than a larger mass.",
-        reasoning: "Start with the relationship between force, mass, and acceleration. Use the resultant force, not just one force from the diagram. Rearrange the formula only if needed, then substitute the values with units. After the calculation, compare how changing the force or the mass would change the acceleration.",
+        coreIdea: "F = ma links resultant force, mass, and acceleration. The same force changes a smaller mass more than a larger mass because the larger mass has more inertia.",
+        reasoning: "Start with the relationship between force, mass, and acceleration. Use the resultant force, not just one force from the diagram. Rearrange the formula only if needed, then substitute the values with units. After the calculation, compare how changing the force or the mass would change the acceleration. Name the resistance to motion change as inertia so the trolley and seatbelt examples stay connected.",
         checkForUnderstanding: "If the force stays the same and the mass doubles, what happens to the acceleration?",
         commonTrap: "Do not forget that the formula uses resultant force, and do not treat inertia as if it were an extra force.",
       };
@@ -12012,7 +12012,7 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       };
     case "F2_L6":
       return {
-        body: "The shopping-cart analogy becomes powerful when you compare pushes, not just objects. The same shove changes the empty cart more because less mass means less resistance to changing motion. A heavier loaded cart needs either a bigger push for the same acceleration or it responds with a smaller acceleration to the same push. That is the conceptual meaning behind F = ma before any numbers are substituted.",
+        body: "The shopping-cart analogy becomes powerful when you compare pushes, not just objects. The same shove changes the empty cart more because less mass means less resistance to changing motion. That resistance to motion change is called inertia. A heavier loaded cart has more inertia, so it needs either a bigger push for the same acceleration or it responds with a smaller acceleration to the same push. That is the conceptual meaning behind F = ma before any numbers are substituted.",
         checkForUnderstanding: "If two carts get the same push but one is loaded, which cart shows the greater acceleration and why?",
       };
     case "M1_L1":
