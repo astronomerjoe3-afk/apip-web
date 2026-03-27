@@ -6710,6 +6710,11 @@ function normalizeRenderedPhysicsText(value: string): string {
     .replace(/\b([A-Za-z])\s*\^\s*4\b/g, "$1⁴"));
 }
 
+function canonicalizeFormulaSymbolText(value: string): string {
+  return normalizeRenderedPhysicsText(value)
+    .replace(/^\s*A(?=\s*=\s*(?:gradient\b|Î”v\b|F\b|F_resultant\b))/u, "a");
+}
+
 function normalizeCoreConceptBullet(value: string): string {
   return normalizeRenderedPhysicsText(value)
     .replace(
@@ -12614,7 +12619,7 @@ function supplementalFormulaCards(lesson: UnknownRecord, code: string): UnknownR
       ...(entry.constants ? [entry.constants] : []),
     ]);
     return {
-      standard_formula: normalizeRenderedPhysicsText(entry.standardFormula),
+      standard_formula: canonicalizeFormulaSymbolText(entry.standardFormula),
       analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formulaRecord)),
       constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
       meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning || "")),
@@ -12672,7 +12677,7 @@ function authoredFormulaCards(lesson: UnknownRecord, code: string): UnknownRecor
     if (!standardFormula || !looksLikeStandardEquationText(standardFormula)) return;
     const constantNotes = enhancedFormulaConstantsText(code, formula);
     formulaCards.push({
-      standard_formula: normalizeRenderedPhysicsText(standardFormula),
+      standard_formula: canonicalizeFormulaSymbolText(standardFormula),
       analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formula)),
       constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
       meaning: normalizeRenderedPhysicsText(ensureSentence(text(formula.meaning))),
@@ -12700,7 +12705,7 @@ function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
       ...(entry.constants ? [entry.constants] : []),
     ]);
     return {
-      standard_formula: normalizeRenderedPhysicsText(entry.standardFormula),
+      standard_formula: canonicalizeFormulaSymbolText(entry.standardFormula),
       analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formulaRecord)),
       constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
       meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning || "")),
@@ -12927,7 +12932,7 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
       if (!standardFormula || !looksLikeStandardEquationText(standardFormula)) return null;
       const constantNotes = enhancedFormulaConstantsText(code, formula);
       return {
-        standard_formula: normalizeRenderedPhysicsText(standardFormula),
+        standard_formula: canonicalizeFormulaSymbolText(standardFormula),
         analogy_equivalent: normalizeRenderedPhysicsText(foundationFormulaAnalogyEquivalent(lesson, code, formula)),
         constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
         meaning: normalizeRenderedPhysicsText(ensureSentence(text(formula.meaning))),
@@ -12939,7 +12944,7 @@ function foundationFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
 
   const formulas = foundationFormulaFallbacks(code);
   const fallbackCards = formulas.map((standardFormula) => ({
-    standard_formula: normalizeRenderedPhysicsText(standardFormula),
+    standard_formula: canonicalizeFormulaSymbolText(standardFormula),
     analogy_equivalent: normalizeRenderedPhysicsText(foundationFormulaAnalogyEquivalent(lesson, code)),
     constants: "",
     meaning: "",

@@ -365,6 +365,11 @@ function normalizeLessonDisplayText(value: string): string {
   return canonicalizeLessonUnitTokens(normalizeAssessmentText(value));
 }
 
+function normalizeFormulaDisplayText(value: string): string {
+  return normalizeLessonDisplayText(value)
+    .replace(/^\s*A(?=\s*=\s*(?:gradient\b|Δv\b|F\b|F_resultant\b))/u, "a");
+}
+
 function normalizeLessonDisplayMultiline(value: string): string {
   return String(value || "")
     .split("\n")
@@ -1463,7 +1468,7 @@ export default function LessonRunner({
                           {formulaRows.map((row, index) => (
                             <tr key={`${row.standard_formula}-${index}`} className="even:bg-white odd:bg-slate-50/70">
                               <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">
-                                <p className="font-mono text-sm text-slate-900">{row.standard_formula}</p>
+                                <p className="font-mono text-sm text-slate-900">{normalizeFormulaDisplayText(row.standard_formula)}</p>
                                 {row.meaning ? (
                                   <p className="mt-2 text-sm leading-6 text-slate-700">
                                     <span className="font-medium text-slate-800">Meaning:</span>{" "}
