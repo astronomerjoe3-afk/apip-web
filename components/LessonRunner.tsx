@@ -215,6 +215,47 @@ const LESSON_TEXT_PROPER_NOUNS = [
   "Venus",
 ] as const;
 
+const LESSON_UNIT_SYMBOL_MAP: Record<string, string> = {
+  cm: "cm",
+  ev: "eV",
+  gev: "GeV",
+  g: "g",
+  hz: "Hz",
+  kev: "keV",
+  kg: "kg",
+  km: "km",
+  m: "m",
+  ma: "mA",
+  mev: "MeV",
+  mg: "mg",
+  ml: "mL",
+  mm: "mm",
+  ms: "ms",
+  nm: "nm",
+  pa: "Pa",
+  s: "s",
+};
+
+function canonicalizeLessonUnitTokens(value: string): string {
+  let normalized = value.replace(
+    /\b(cm|ev|gev|g|hz|kev|kg|km|m|ma|mev|mg|ml|mm|ms|nm|pa|s)\b/gi,
+    (token) => LESSON_UNIT_SYMBOL_MAP[token.toLowerCase()] ?? token
+  );
+
+  normalized = normalized.replace(
+    /\b([A-Za-z]+)\^([23])\b/g,
+    (_match, symbol: string, power: string) =>
+      `${LESSON_UNIT_SYMBOL_MAP[symbol.toLowerCase()] ?? symbol}${"^"}${power}`
+  );
+
+  normalized = normalized.replace(
+    /(^|:\s*|,\s*|\(\s*)([GM])(?=,|\)|$)/g,
+    (_match, prefix: string, unit: string) => `${prefix}${unit.toLowerCase()}`
+  );
+
+  return normalized;
+}
+
 function repairDamagedLessonProse(value: string): string {
   let normalized = value.replace(/\b([A-Za-z][A-Za-z'-]{2,})\b/g, (word) => {
     const lower = word.toLowerCase();
@@ -250,7 +291,7 @@ function repairDamagedLessonProse(value: string): string {
     normalized = normalized.replace(new RegExp(`\\b${noun.toLowerCase()}\\b`, "g"), noun);
   }
 
-  return normalized;
+  return canonicalizeLessonUnitTokens(normalized);
 }
 
 function normalizeAssessmentText(value: string): string {
