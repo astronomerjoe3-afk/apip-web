@@ -163,8 +163,13 @@ function ToolCanvas({ tool, length, reading, accentClass }: { tool: ToolKey; len
           <rect x="158" y="106" width={Math.max(14, micrometerGapX - 158)} height="20" rx="10" fill="#60a5fa" opacity="0.8" />
           <rect x={micrometerGapX} y="98" width="82" height="36" rx="18" fill="#475569" />
           <rect x="234" y="94" width="48" height="44" rx="14" fill="#94a3b8" />
-          <text x="144" y="186" fontSize="12" fill="#2563eb">Tiny object held in the measuring gap</text>
-          <text x="48" y="206" fontSize="14" fill="#64748b">This is the cleanest choice when the thickness is very small.</text>
+          <text x="180" y="182" fontSize="12" fill="#2563eb" textAnchor="middle">
+            <tspan x="180" dy="0">Tiny object held</tspan>
+            <tspan x="180" dy="14">in the measuring gap</tspan>
+          </text>
+          <text x="180" y="212" fontSize="12" fill="#64748b" textAnchor="middle">
+            Best when the thickness is very small.
+          </text>
         </svg>
       )}
     </div>
