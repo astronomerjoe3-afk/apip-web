@@ -45,7 +45,11 @@ type RunnerRequest = {
 type LocalState = {
   profile?: {
     diagnosticScore?: number;
+    diagnosticReady?: boolean;
+    scaffoldCompleted?: boolean;
     conceptGateReady?: boolean;
+    simulationReady?: boolean;
+    reflectionReady?: boolean;
   };
   diagnostic?: {
     nonce?: number;
@@ -962,7 +966,61 @@ function hasProgressBeforeMastery(runnerLesson: UnknownRecord, state: LocalState
     key === "concept_gate" ||
     key === "simulation" ||
     key === "reflection"
-  ) || Boolean(diagnosticProgress || state.conceptGate?.submitted || state.reflection?.submitted);
+  ) || Boolean(
+    diagnosticProgress ||
+    state.profile?.diagnosticReady ||
+    state.profile?.scaffoldCompleted ||
+    state.profile?.conceptGateReady ||
+    state.profile?.simulationReady ||
+    state.profile?.reflectionReady ||
+    state.conceptGate?.submitted ||
+    state.reflection?.submitted
+  );
+}
+
+function nextAvailableStageAfter(lesson: UnknownRecord, runnerLesson: UnknownRecord, stage: string): string | null {
+  const orderedStages = availableStageKeys(lesson, runnerLesson);
+  const stageIndex = orderedStages.indexOf(stage);
+  if (stageIndex < 0) return null;
+  for (let index = stageIndex + 1; index < orderedStages.length; index += 1) {
+    const nextStage = orderedStages[index];
+    if (nextStage) return nextStage;
+  }
+  return stage === "mastery_check" || orderedStages.includes("mastery_check") ? "done" : null;
+}
+
+function localStageFloor(lesson: UnknownRecord, runnerLesson: UnknownRecord, state: LocalState): string | null {
+  if (state.profile?.reflectionReady) {
+    return nextAvailableStageAfter(lesson, runnerLesson, "reflection") || "done";
+  }
+
+  if (state.profile?.simulationReady) {
+    return nextAvailableStageAfter(lesson, runnerLesson, "simulation") || "done";
+  }
+
+  if (state.profile?.conceptGateReady) {
+    return nextAvailableStageAfter(lesson, runnerLesson, "concept_gate") || "done";
+  }
+
+  if (state.conceptGate) {
+    return "concept_gate";
+  }
+
+  if (state.profile?.scaffoldCompleted) {
+    return nextAvailableStageAfter(lesson, runnerLesson, "scaffolded_teaching") || "done";
+  }
+
+  if (
+    state.profile?.diagnosticReady ||
+    state.diagnostic?.acknowledged ||
+    typeof state.profile?.diagnosticScore === "number"
+  ) {
+    return availableStageKeys(lesson, runnerLesson).includes("scaffolded_teaching")
+      ? "scaffolded_teaching"
+      : nextAvailableStageAfter(lesson, runnerLesson, "diagnostic");
+  }
+
+  return null;
 }
 
 function shouldInjectConceptGate(
@@ -13146,10 +13204,13 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
   }
 
   const syntheticConceptGate = !shouldResetToStart && shouldInjectConceptGate(resources.lesson, runnerLesson, serverStage, state);
+  const localFloorStage = !shouldResetToStart ? localStageFloor(resources.lesson, runnerLesson, state) : null;
   const effectiveStage = shouldResetToStart
     ? startStage
     : syntheticConceptGate
       ? "concept_gate"
+      : localFloorStage && runnerStageIndex(localFloorStage) > runnerStageIndex(serverStage)
+        ? localFloorStage
       : localDiagnosticReadyForScaffold
         ? "scaffolded_teaching"
         : serverStage;
@@ -13453,6 +13514,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       profile: {
         ...(state.profile || {}),
         diagnosticScore: feedback.length > 0 ? correctCount / feedback.length : 0,
+        diagnosticReady: true,
       },
       diagnostic: {
         nonce: state.diagnostic?.nonce || freshAttemptSeed(),
@@ -13479,6 +13541,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     });
     writeState(moduleId, lessonId, {
       ...state,
+      profile: {
+        ...(state.profile || {}),
+        scaffoldCompleted: true,
+      },
       conceptGate: state.conceptGate || {
         nonce: freshAttemptSeed(),
         retryCount: 0,
@@ -13564,6 +13630,14 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       score: 1,
       details: { source: "student_runner_simulation" },
     });
+    const state = readState(moduleId, lessonId);
+    writeState(moduleId, lessonId, {
+      ...state,
+      profile: {
+        ...(state.profile || {}),
+        simulationReady: true,
+      },
+    });
     return;
   }
 
@@ -13575,7 +13649,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       details: { source: "student_runner_concept_reconstruction", response_text: state.reflection?.learnerResponse || "" },
     });
     writeState(moduleId, lessonId, {
-      profile: state.profile,
+      profile: {
+        ...(state.profile || {}),
+        reflectionReady: true,
+      },
       diagnostic: state.diagnostic,
       conceptGate: state.conceptGate,
       mastery: state.mastery,
