@@ -13148,11 +13148,11 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
   const syntheticConceptGate = !shouldResetToStart && shouldInjectConceptGate(resources.lesson, runnerLesson, serverStage, state);
   const effectiveStage = shouldResetToStart
     ? startStage
-    : localDiagnosticReadyForScaffold
-      ? "scaffolded_teaching"
     : syntheticConceptGate
       ? "concept_gate"
-      : serverStage;
+      : localDiagnosticReadyForScaffold
+        ? "scaffolded_teaching"
+        : serverStage;
   const stage = (
     effectiveStage === "diagnostic" ||
     effectiveStage === "scaffolded_teaching" ||
