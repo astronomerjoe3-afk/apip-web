@@ -24,7 +24,13 @@ import InsightsPanel from "./InsightsPanel";
 import InstructorSidebar from "./InstructorSidebar";
 import OverviewPanel from "./OverviewPanel";
 import RosterPanel from "./RosterPanel";
-import type { ApiResp, ReadinessFilter, Role, SupportAction, UploadItem } from "./types";
+import SupportInboxPanel from "./SupportInboxPanel";
+import type { ApiResp, ReadinessFilter, Role, SupportAction, SupportInquiry, UploadItem } from "./types";
+
+type SupportInboxResp = {
+  ok: boolean;
+  inquiries: SupportInquiry[];
+};
 
 function summarizeWarnings(items: string[]): string[] {
   const compactItems = items
@@ -61,6 +67,8 @@ export default function InstructorPage() {
   const [rows, setRows] = useState<ApiResp["students"]>([]);
   const [err, setErr] = useState<string>("");
   const [warnings, setWarnings] = useState<string[]>([]);
+  const [supportInquiries, setSupportInquiries] = useState<SupportInquiry[]>([]);
+  const [supportLoading, setSupportLoading] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const [search, setSearch] = useState<string>("");
   const [readinessFilter, setReadinessFilter] = useState<ReadinessFilter>("all");
@@ -107,13 +115,36 @@ export default function InstructorPage() {
     try {
       setErr("");
       setWarnings([]);
+      setSupportLoading(true);
       const pathValue = "/instructor/module/" + encodeURIComponent(moduleId) + "/students?limit=50";
-      const data = await apipGet<ApiResp>(pathValue);
+      const supportPath = "/instructor/help-requests?status=open&limit=12&module_id=" + encodeURIComponent(moduleId);
+      const [dataResult, supportResult] = await Promise.allSettled([
+        apipGet<ApiResp>(pathValue),
+        apipGet<SupportInboxResp>(supportPath),
+      ]);
+
+      if (dataResult.status === "rejected") {
+        throw dataResult.reason;
+      }
+
+      const data = dataResult.value;
+      const nextWarnings = Array.isArray(data.warnings) ? [...data.warnings] : [];
       setRows(Array.isArray(data.students) ? data.students : []);
-      setWarnings(Array.isArray(data.warnings) ? data.warnings : []);
+
+      if (supportResult.status === "fulfilled") {
+        setSupportInquiries(Array.isArray(supportResult.value.inquiries) ? supportResult.value.inquiries : []);
+      } else {
+        setSupportInquiries([]);
+        nextWarnings.push("student_help_inbox_unavailable: recent inquiry inbox could not be loaded.");
+      }
+
+      setWarnings(nextWarnings);
     } catch (error: unknown) {
       setErr(errorMessage(error));
       setRows([]);
+      setSupportInquiries([]);
+    } finally {
+      setSupportLoading(false);
     }
   }, [moduleId]);
 
@@ -249,6 +280,7 @@ export default function InstructorPage() {
       <div className="admin-layout">
         <div className="admin-stack">
           <OverviewPanel moduleId={moduleId} cohortPulse={cohortPulse} summary={summary} onModuleChange={setModuleId} />
+          <SupportInboxPanel inquiries={supportInquiries} loading={supportLoading} moduleId={moduleId} />
           <CohortMap cohortSize={summary.cohortSize} items={misconceptionMap} />
           <RosterPanel
             rows={filteredStudents}

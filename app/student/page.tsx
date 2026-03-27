@@ -11,6 +11,7 @@ import { useAuth } from "../../lib/auth";
 import { getClientRole, type Role } from "../../lib/authRouting";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
 import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
+import StudentHelpCard from "../../components/StudentHelpCard";
 
 type PricingOffer = {
   id?: string;
@@ -746,6 +747,13 @@ export default function StudentHomePage() {
           ) : null}
         </div>
       )}
+
+      <div style={{ marginTop: 20 }}>
+        <StudentHelpCard
+          moduleTitle="Student module list"
+          pagePath="/student"
+        />
+      </div>
     </div>
   );
 }

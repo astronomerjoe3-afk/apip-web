@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
+import StudentHelpCard from "../../../../components/StudentHelpCard";
 import { clearAllLessonRunnerState, restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { isSecurityBypassRole, securityActionLabel } from "../../../../lib/accountSecurity";
 import { useAuth } from "../../../../lib/auth";
@@ -1092,6 +1093,18 @@ export default function StudentModulePage() {
             }}>
             Continue
           </button>
+        </div>
+      ) : null}
+
+      {!sessionLoading && sessionUser?.role !== "admin" && sessionUser?.role !== "instructor" ? (
+        <div style={{ maxWidth: 1100, margin: "18px auto 0 auto" }}>
+          <StudentHelpCard
+            moduleId={moduleId}
+            moduleTitle={moduleMeta?.title}
+            lessonId={activeLesson ? normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id) : undefined}
+            lessonTitle={activeLesson?.title}
+            pagePath={currentModulePath}
+          />
         </div>
       ) : null}
     </div>

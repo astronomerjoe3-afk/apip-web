@@ -57,6 +57,24 @@ export type UploadItem = {
   status: "Queued" | "Sorted";
 };
 
+export type SupportInquiry = {
+  id: string;
+  category: string;
+  status: string;
+  subject: string;
+  message: string;
+  module_id?: string | null;
+  module_title?: string | null;
+  lesson_id?: string | null;
+  lesson_title?: string | null;
+  page_path?: string | null;
+  created_utc?: string | null;
+  updated_utc?: string | null;
+  student_uid?: string | null;
+  student_email?: string | null;
+  student_role?: string | null;
+};
+
 export type RiskProfile = {
   level: RiskLevel;
   score: number;
