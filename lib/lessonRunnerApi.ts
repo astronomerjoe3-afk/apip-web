@@ -6535,6 +6535,11 @@ function canonicalizeRenderedUnitTokens(value: string): string {
   );
 
   normalized = normalized.replace(
+    /(\d(?:[\d.]*))\s+n\b/g,
+    (_match, valueText: string) => `${valueText} N`
+  );
+
+  normalized = normalized.replace(
     /\b([A-Za-z]+)\^([23])\b/g,
     (_match, symbol: string, power: string) =>
       `${RENDERED_UNIT_SYMBOL_MAP[symbol.toLowerCase()] ?? symbol}${"^"}${power}`
