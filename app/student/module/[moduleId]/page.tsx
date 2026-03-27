@@ -81,6 +81,11 @@ type PortalSessionResponse = {
   session_id?: string;
 };
 
+type ModulesResponse = {
+  ok: boolean;
+  modules: ModuleCatalog[];
+};
+
 type LessonPhases = {
   analogical_grounding?: {
     analogy_text?: string;
@@ -247,6 +252,25 @@ function subscriptionActionLabel(plan: PricingOffer, currentPlanId?: string | nu
   return "Subscribe to " + (plan.title || "premium");
 }
 
+function moduleSequenceRank(moduleId: string | undefined | null): number {
+  const normalized = normalizeModuleId(moduleId);
+  const match = normalized.match(/^([FMA])(\d+)$/);
+  if (!match) return Number.MAX_SAFE_INTEGER;
+
+  const groupOffset =
+    match[1] === "F" ? 1000 :
+    match[1] === "M" ? 2000 :
+    3000;
+
+  return groupOffset + Number(match[2]);
+}
+
+function compareModuleSequence(left: ModuleCatalog, right: ModuleCatalog): number {
+  const rankDifference = moduleSequenceRank(left.id) - moduleSequenceRank(right.id);
+  if (rankDifference !== 0) return rankDifference;
+  return String(left.id || "").localeCompare(String(right.id || ""));
+}
+
 export default function StudentModulePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -286,6 +310,7 @@ export default function StudentModulePage() {
   const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
   const [sessionLoading, setSessionLoading] = useState<boolean>(true);
   const confirmedSessionRef = useRef<string>("");
+  const [availableModules, setAvailableModules] = useState<ModuleCatalog[]>([]);
   const [moduleProgress, setModuleProgress] = useState<StudentModuleProgressResponse["module"] | null>(null);
   const [lessons, setLessons] = useState<ActiveLesson[]>([]);
   const [err, setErr] = useState<string>("");
@@ -361,6 +386,7 @@ export default function StudentModulePage() {
       if (!user) {
         setErr("");
         setModuleMeta(null);
+        setAvailableModules([]);
         setModuleProgress(null);
         setLessons([]);
         setActiveIdx(0);
@@ -371,6 +397,7 @@ export default function StudentModulePage() {
       if (!moduleId) {
         setErr("Missing module id in route.");
         setModuleMeta(null);
+        setAvailableModules([]);
         setModuleProgress(null);
         setLessons([]);
         setActiveIdx(0);
@@ -383,7 +410,7 @@ export default function StudentModulePage() {
       try {
         setErr("");
 
-        const [moduleResult, lessonsResult, progressResult] = await Promise.allSettled([
+        const [moduleResult, lessonsResult, progressResult, modulesResult] = await Promise.allSettled([
           apipGet<{ ok: boolean; module: ModuleCatalog }>(
             `/modules/${encodeURIComponent(moduleId)}`,
           ),
@@ -393,10 +420,13 @@ export default function StudentModulePage() {
           apipGet<StudentModuleProgressResponse>(
             `/student/modules/${encodeURIComponent(moduleId)}/progress`,
           ),
+          apipGet<ModulesResponse>("/modules"),
         ]);
 
         const moduleResponse =
           moduleResult.status === "fulfilled" ? moduleResult.value : null;
+        const modulesResponse =
+          modulesResult.status === "fulfilled" ? modulesResult.value : null;
         const resolvedModuleMeta = moduleResponse
           ? applyCurriculumModuleMeta({
               ...moduleResponse.module,
@@ -414,6 +444,11 @@ export default function StudentModulePage() {
         }
 
         setModuleMeta(resolvedModuleMeta);
+        setAvailableModules(
+          Array.isArray(modulesResponse?.modules)
+            ? modulesResponse.modules.map((moduleItem) => applyCurriculumModuleMeta(moduleItem))
+            : [],
+        );
 
         if (
           moduleResponse?.module.access?.tier === "premium" &&
@@ -502,6 +537,7 @@ export default function StudentModulePage() {
       } catch (error) {
         setErr(error instanceof Error ? error.message : String(error));
         setModuleMeta(null);
+        setAvailableModules([]);
         setModuleProgress(null);
         setLessons([]);
         setActiveIdx(0);
@@ -617,6 +653,26 @@ export default function StudentModulePage() {
   const currentLessonCompleted = activeLesson?.progress?.completed === true;
   const hasNextLesson = lessons.length > 0 && activeIdx < lessons.length - 1;
   const canGoNext = hasNextLesson && currentLessonCompleted;
+  const lessonsCompletedCount = moduleProgress?.lessons_completed_count ?? lessons.reduce(
+    (count, lesson) => count + (lesson.progress?.completed ? 1 : 0),
+    0,
+  );
+  const totalLessons = moduleProgress?.total_lessons ?? lessons.length;
+  const moduleCompleted = totalLessons > 0 && lessonsCompletedCount >= totalLessons;
+  const nextModule = useMemo(() => {
+    const currentRank = moduleSequenceRank(moduleId);
+    if (!Number.isFinite(currentRank) || currentRank === Number.MAX_SAFE_INTEGER) {
+      return null;
+    }
+
+    return [...availableModules]
+      .sort(compareModuleSequence)
+      .find((candidate) => moduleSequenceRank(candidate.id) > currentRank) || null;
+  }, [availableModules, moduleId]);
+  const nextModuleLocked = nextModule?.access?.tier === "premium" && nextModule?.access?.is_unlocked === false;
+  const nextModulePath = nextModule ? `/student/module/${encodeURIComponent(nextModule.id)}` : "/student";
+  const nextModuleSubscriptionPlans = nextModule?.access?.subscription_plans || [];
+  const recommendedSubscriptionPlan = nextModuleSubscriptionPlans[0] || subscriptionPlans[0] || null;
 
 
   const handleLogout = useCallback(async (): Promise<void> => {
@@ -633,12 +689,29 @@ export default function StudentModulePage() {
     }
   }, [currentModulePath, router]);
 
-  const launchCheckout = useCallback(async (purchaseKind: "module_unlock" | "subscription", planId?: string) => {
-    if (!moduleId) return;
+  const launchCheckout = useCallback(async (
+    purchaseKind: "module_unlock" | "subscription",
+    planId?: string,
+    targetModuleId?: string,
+  ) => {
+    const checkoutModuleId = targetModuleId || moduleId;
+    if (!checkoutModuleId) return;
+    const targetModulePath = `/student/module/${encodeURIComponent(checkoutModuleId)}`;
     setBillingErr("");
-    setBillingBusyId(purchaseKind === "module_unlock" ? "module_unlock" : String(planId || "subscription"));
+    setBillingBusyId(
+      purchaseKind === "module_unlock"
+        ? `module_unlock:${checkoutModuleId}`
+        : String(planId || "subscription"),
+    );
     try {
-      const response = await apipPost<CheckoutSessionResponse>("/billing/checkout-session", { purchase_kind: purchaseKind, module_id: purchaseKind === "module_unlock" ? moduleId : undefined, plan_id: purchaseKind === "subscription" ? planId : undefined, origin: window.location.origin, success_path: currentModulePath, cancel_path: currentModulePath } as never);
+      const response = await apipPost<CheckoutSessionResponse>("/billing/checkout-session", {
+        purchase_kind: purchaseKind,
+        module_id: purchaseKind === "module_unlock" ? checkoutModuleId : undefined,
+        plan_id: purchaseKind === "subscription" ? planId : undefined,
+        origin: window.location.origin,
+        success_path: targetModulePath,
+        cancel_path: targetModulePath,
+      } as never);
       if (!response.checkout_url) throw new Error("Checkout did not return a redirect URL.");
       window.location.assign(response.checkout_url);
     } catch (error) {
@@ -646,7 +719,7 @@ export default function StudentModulePage() {
     } finally {
       setBillingBusyId("");
     }
-  }, [currentModulePath, moduleId]);
+  }, [moduleId]);
 
   const openBillingPortal = useCallback(async () => {
     setBillingErr("");
@@ -661,6 +734,14 @@ export default function StudentModulePage() {
       setBillingBusyId("");
     }
   }, [currentModulePath]);
+
+  const continueToNextModule = useCallback((): void => {
+    if (!nextModule) {
+      router.push("/student");
+      return;
+    }
+    router.push(nextModulePath);
+  }, [nextModule, nextModulePath, router]);
 
   function goBack(): void {
     if (!canGoBack) return;
@@ -928,7 +1009,7 @@ export default function StudentModulePage() {
                 <div style={{ marginTop: 8, opacity: 0.82 }}>{modulePurchaseDescription}</div>
                 <div style={{ marginTop: 14, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                   <button onClick={() => void launchCheckout("module_unlock")} disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading} style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)", color: "#fff", fontWeight: 900, opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1 }}>
-                    {billingBusyId === "module_unlock" ? "Opening secure checkout..." : "Unlock this module"}
+                    {billingBusyId === `module_unlock:${moduleId}` ? "Opening secure checkout..." : "Unlock this module"}
                   </button>
                   <span style={{ opacity: 0.72 }}>One-time purchase for 1 month of access. Secure checkout opens in Stripe.</span>
                 </div>
@@ -1039,6 +1120,128 @@ export default function StudentModulePage() {
         )}
       </div>
 
+      {moduleCompleted ? (
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "16px auto 0 auto",
+            border: "1px solid rgba(16, 35, 63, 0.12)",
+            borderRadius: 24,
+            padding: 24,
+            background: "rgba(255, 255, 255, 0.82)",
+            boxShadow: "0 20px 48px rgba(15, 23, 42, 0.08)",
+            display: "grid",
+            gap: 14,
+          }}
+        >
+          <div style={{ display: "inline-flex", justifyContent: "center" }}>
+            <span
+              style={{
+                padding: "6px 12px",
+                borderRadius: 999,
+                background: "#dcfce7",
+                color: "#166534",
+                fontWeight: 800,
+                fontSize: 12,
+              }}
+            >
+              Module completed
+            </span>
+          </div>
+
+          <div style={{ textAlign: "center", fontSize: 28, fontWeight: 900, color: "#10233f" }}>
+            Nice work. Your next step is ready.
+          </div>
+
+          {nextModule ? (
+            <div style={{ textAlign: "center", fontSize: 17, color: "#46566b", lineHeight: 1.7 }}>
+              Next up is <b>{nextModule.id}</b>: {nextModule.title || "the next module"}.
+              {nextModuleLocked
+                ? " Unlock that module for 1 month, or go premium to keep moving without buying modules one by one."
+                : " Open it when you are ready to continue."}
+            </div>
+          ) : (
+            <div style={{ textAlign: "center", fontSize: 17, color: "#46566b", lineHeight: 1.7 }}>
+              You have finished this module. Browse the rest of the pathway or choose a premium subscription to keep higher-level modules open as you continue.
+            </div>
+          )}
+
+          <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
+            {nextModule ? (
+              nextModuleLocked ? (
+                <>
+                  <button
+                    onClick={() => void launchCheckout("module_unlock", undefined, nextModule.id)}
+                    disabled={!billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading}
+                    style={{
+                      padding: "12px 18px",
+                      borderRadius: 14,
+                      border: "none",
+                      background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
+                      color: "#fff",
+                      fontWeight: 900,
+                      opacity: !billingConfigured || !checkoutEnabled || billingBusyId !== "" || billingLoading ? 0.55 : 1,
+                    }}
+                  >
+                    {billingBusyId === `module_unlock:${nextModule.id}` ? `Opening ${nextModule.id}...` : `Unlock ${nextModule.id}`}
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (recommendedSubscriptionPlan?.id) {
+                        void launchCheckout("subscription", recommendedSubscriptionPlan.id, nextModule.id);
+                        return;
+                      }
+                      continueToNextModule();
+                    }}
+                    disabled={billingBusyId !== "" || billingLoading}
+                    style={{
+                      padding: "12px 18px",
+                      borderRadius: 14,
+                      border: "1px solid rgba(16, 35, 63, 0.14)",
+                      background: "rgba(255, 255, 255, 0.9)",
+                      color: "#10233f",
+                      fontWeight: 800,
+                      opacity: billingBusyId !== "" || billingLoading ? 0.7 : 1,
+                    }}
+                  >
+                    {recommendedSubscriptionPlan
+                      ? subscriptionActionLabel(recommendedSubscriptionPlan, activeSubscriptionPlanId)
+                      : "See premium plans"}
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={continueToNextModule}
+                  style={{
+                    padding: "12px 18px",
+                    borderRadius: 14,
+                    border: "none",
+                    background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
+                    color: "#fff",
+                    fontWeight: 900,
+                  }}
+                >
+                  Open {nextModule.id}
+                </button>
+              )
+            ) : null}
+
+            <button
+              onClick={() => router.push("/student")}
+              style={{
+                padding: "12px 18px",
+                borderRadius: 14,
+                border: "1px solid rgba(16, 35, 63, 0.14)",
+                background: "rgba(255, 255, 255, 0.82)",
+                fontWeight: 800,
+              }}
+            >
+              Back to modules
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       {lessons.length > 0 ? (
         <div
           style={{
@@ -1082,7 +1285,11 @@ export default function StudentModulePage() {
           </div>
 
           <div style={{ opacity: 0.8, textAlign: "center", flex: "1 1 220px" }}>
-            {currentLessonCompleted ? "You can continue to the next mission." : "Complete this mission to unlock the next one."}
+            {moduleCompleted
+              ? "You completed this module. Choose your next step below."
+              : currentLessonCompleted
+                ? "You can continue to the next mission."
+                : "Complete this mission to unlock the next one."}
           </div>
 
           <button
@@ -1096,7 +1303,7 @@ export default function StudentModulePage() {
               background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
               color: "#fff", fontWeight: 900, boxShadow: "0 18px 38px rgba(11, 26, 50, 0.22)",
             }}>
-            Continue
+            {moduleCompleted ? "Module complete" : "Continue"}
           </button>
         </div>
       ) : null}
