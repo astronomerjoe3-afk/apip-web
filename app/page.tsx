@@ -59,6 +59,24 @@ const launchSteps = [
   },
 ];
 
+const institutionCards = [
+  {
+    label: "Institution admin",
+    title: "Launch a school space without giving away platform control.",
+    body: "Cognispark now supports institution accounts with seat-based onboarding, teacher setup, class organization, and school-scoped visibility.",
+  },
+  {
+    label: "Teacher workflow",
+    title: "Assign platform missions, custom tasks, and outside resources in one place.",
+    body: "Teachers can build class work from Cognispark topics, add extra instructions, collect submissions, grade, and return feedback inside the same system.",
+  },
+  {
+    label: "Student experience",
+    title: "Keep class delivery and personal momentum on the same platform.",
+    body: "Institutional students can join classes, submit coursework, review grades and feedback, and still participate in approved topic communities.",
+  },
+];
+
 export default function HomePage() {
   return (
     <main className={styles.page}>
@@ -213,6 +231,35 @@ export default function HomePage() {
               <p>{item.body}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionEyebrow}>For Schools And Organizations</p>
+          <h2>Bring Cognispark into classrooms with an institutional layer built on top of the mission platform.</h2>
+          <p>
+            Schools can subscribe by student volume, onboard teachers, run classes, assign work, track performance, and keep discussion scoped to the right learners.
+          </p>
+        </div>
+
+        <div className={styles.highlightGrid}>
+          {institutionCards.map((card) => (
+            <article key={card.title} className={styles.highlightCard}>
+              <span>{card.label}</span>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.ctaRow} style={{ marginTop: 32 }}>
+          <Link className={styles.primaryCta} href="/login?next=/institution">
+            School team login
+          </Link>
+          <Link className={styles.secondaryCta} href="/register">
+            Create student account
+          </Link>
         </div>
       </section>
 

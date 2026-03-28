@@ -5,7 +5,14 @@ import { signOut, type User } from "firebase/auth";
 import { auth } from "./firebase";
 import { BFF_PREFIX } from "./sessionConstants";
 
-export type SessionRole = "student" | "instructor" | "admin" | "unknown";
+export type SessionRole =
+  | "student"
+  | "teacher"
+  | "institution_admin"
+  | "academic_lead"
+  | "instructor"
+  | "admin"
+  | "unknown";
 
 export type SessionSecurity = {
   password_policy_version: number;
@@ -42,7 +49,15 @@ type PasswordPolicyResponse = {
 };
 
 function normalizeRole(value: unknown): SessionRole {
-  if (value === "student" || value === "instructor" || value === "admin" || value === "unknown") {
+  if (
+    value === "student"
+    || value === "teacher"
+    || value === "institution_admin"
+    || value === "academic_lead"
+    || value === "instructor"
+    || value === "admin"
+    || value === "unknown"
+  ) {
     return value;
   }
   return "unknown";

@@ -38,7 +38,13 @@ type ModuleLike = {
 };
 
 export function isSecurityBypassRole(role: SessionUser["role"] | null | undefined): boolean {
-  return role === "admin" || role === "instructor";
+  return (
+    role === "admin"
+    || role === "instructor"
+    || role === "academic_lead"
+    || role === "teacher"
+    || role === "institution_admin"
+  );
 }
 
 function emailTokens(email?: string | null): string[] {

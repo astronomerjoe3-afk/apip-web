@@ -3,9 +3,55 @@
 import { type User } from "firebase/auth";
 import { establishSessionFromUser, readSessionUser } from "./sessionClient";
 
-export type Role = "student" | "instructor" | "admin" | "unknown";
+export type Role =
+  | "student"
+  | "teacher"
+  | "institution_admin"
+  | "academic_lead"
+  | "instructor"
+  | "admin"
+  | "unknown";
 
-const VALID_ROLES = new Set<Role>(["student", "instructor", "admin", "unknown"]);
+const VALID_ROLES = new Set<Role>([
+  "student",
+  "teacher",
+  "institution_admin",
+  "academic_lead",
+  "instructor",
+  "admin",
+  "unknown",
+]);
+
+export function isAcademicLeadRole(role: Role | null | undefined): boolean {
+  return role === "academic_lead" || role === "instructor";
+}
+
+export function isInstitutionStaffRole(role: Role | null | undefined): boolean {
+  return role === "teacher" || role === "institution_admin";
+}
+
+export function isPrivilegedRole(role: Role | null | undefined): boolean {
+  return role === "admin" || isAcademicLeadRole(role) || isInstitutionStaffRole(role);
+}
+
+export function roleDisplayName(role: Role | null | undefined): string {
+  if (role === "academic_lead" || role === "instructor") {
+    return "Academic Lead";
+  }
+  if (role === "institution_admin") {
+    return "Institution Admin";
+  }
+  if (role === "teacher") {
+    return "Teacher";
+  }
+  if (role === "student") {
+    return "Student";
+  }
+  if (role === "admin") {
+    return "Admin";
+  }
+  return "Unknown";
+}
 
 export function sanitizeNextPath(value: string | null | undefined): string | null {
   if (!value) {
@@ -47,8 +93,12 @@ export function landingPathForRole(role: Role): string {
     return "/dashboard";
   }
 
-  if (role === "instructor") {
+  if (isAcademicLeadRole(role)) {
     return "/instructor";
+  }
+
+  if (isInstitutionStaffRole(role)) {
+    return "/institution";
   }
 
   return "/student";

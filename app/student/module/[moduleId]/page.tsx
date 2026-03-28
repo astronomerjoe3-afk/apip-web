@@ -356,7 +356,7 @@ export default function StudentModulePage() {
     sessionUser?.security?.hardening_complete !== true;
   const waitingForSecurityCheck = premiumAccessUnlocked && !roleBypassesSecurityUpgrade && sessionLoading;
   const securityActions = sessionUser?.security?.recommended_actions || [];
-  const canShowStudentHelp = !sessionLoading && sessionUser?.role !== "admin" && sessionUser?.role !== "instructor";
+  const canShowStudentHelp = !sessionLoading && sessionUser?.role === "student";
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!user) {

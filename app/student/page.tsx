@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { apipGet, apipPost } from "../../lib/apipApi";
 import { paidAccessRequiresSecurityUpgrade, securityActionLabel } from "../../lib/accountSecurity";
 import { useAuth } from "../../lib/auth";
-import { getClientRole, type Role } from "../../lib/authRouting";
+import { getClientRole, isAcademicLeadRole, isInstitutionStaffRole, type Role } from "../../lib/authRouting";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
 import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
 import StudentHelpCard from "../../components/StudentHelpCard";
@@ -61,6 +61,61 @@ type BillingSummary = {
 type BillingSummaryResponse = {
   ok: boolean;
   billing: BillingSummary;
+};
+
+type InstitutionalSubmissionSummary = {
+  id: string;
+  status: string;
+  score?: number | null;
+  feedback?: string | null;
+  submitted_utc?: string | null;
+};
+
+type InstitutionalAssignment = {
+  id: string;
+  class_id: string;
+  class_name: string;
+  title: string;
+  assignment_type: string;
+  instructions: string;
+  due_utc?: string | null;
+  grading_mode: string;
+  resource_module_ids: string[];
+  your_submission?: InstitutionalSubmissionSummary | null;
+};
+
+type InstitutionalClass = {
+  id: string;
+  name: string;
+  join_code?: string | null;
+  teacher_names: string[];
+  assignments: InstitutionalAssignment[];
+};
+
+type InstitutionalDiscussion = {
+  id: string;
+  scope: string;
+  title: string;
+  body: string;
+  module_id?: string | null;
+};
+
+type InstitutionalBlock = {
+  institution: {
+    id: string;
+    name: string;
+    public_community_enabled: boolean;
+  };
+  classes: InstitutionalClass[];
+};
+
+type InstitutionalWorkspaceResponse = {
+  ok: boolean;
+  viewer: {
+    can_access_public_topics: boolean;
+  };
+  public_topic_discussions: InstitutionalDiscussion[];
+  institutions: InstitutionalBlock[];
 };
 
 type CheckoutSessionResponse = {
@@ -202,6 +257,20 @@ export default function StudentHomePage() {
   const [modulesLoading, setModulesLoading] = useState<boolean>(true);
   const [err, setErr] = useState<string>("");
   const [status, setStatus] = useState<string>("");
+  const [institutionWorkspace, setInstitutionWorkspace] = useState<InstitutionalWorkspaceResponse | null>(null);
+  const [institutionBusy, setInstitutionBusy] = useState<string>("");
+  const [submissionForm, setSubmissionForm] = useState({
+    assignment_id: "",
+    text_response: "",
+    link_url: "",
+  });
+  const [discussionForm, setDiscussionForm] = useState({
+    scope: "public_topic",
+    class_id: "",
+    module_id: "",
+    title: "",
+    body: "",
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -224,8 +293,13 @@ export default function StudentHomePage() {
       setRole(resolvedRole);
       setRoleLoading(false);
 
-      if (resolvedRole === "instructor") {
+      if (isAcademicLeadRole(resolvedRole)) {
         router.replace("/instructor");
+        return;
+      }
+
+      if (isInstitutionStaffRole(resolvedRole)) {
+        router.replace("/institution");
         return;
       }
 
@@ -337,6 +411,32 @@ export default function StudentHomePage() {
     };
   }, [loading, roleLoading, role, user]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadInstitutionWorkspace(): Promise<void> {
+      if (loading || roleLoading) return;
+      if (!user || role !== "student") return;
+
+      try {
+        const data = await apipGet<InstitutionalWorkspaceResponse>("/institutions/workspace");
+        if (!cancelled) {
+          setInstitutionWorkspace(data);
+        }
+      } catch {
+        if (!cancelled) {
+          setInstitutionWorkspace(null);
+        }
+      }
+    }
+
+    void loadInstitutionWorkspace();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [loading, roleLoading, role, user]);
+
   async function openBillingPortal(): Promise<void> {
     try {
       setBillingBusy("portal");
@@ -375,6 +475,46 @@ export default function StudentHomePage() {
     }
   }
 
+  async function submitInstitutionAssignment(): Promise<void> {
+    if (!submissionForm.assignment_id) return;
+    try {
+      setInstitutionBusy("submission");
+      await apipPost(`/institutions/assignments/${encodeURIComponent(submissionForm.assignment_id)}/submission`, {
+        text_response: submissionForm.text_response || null,
+        link_url: submissionForm.link_url || null,
+      });
+      setSubmissionForm((current) => ({ ...current, text_response: "", link_url: "" }));
+      const data = await apipGet<InstitutionalWorkspaceResponse>("/institutions/workspace");
+      setInstitutionWorkspace(data);
+      setStatus("Class submission sent.");
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+    } finally {
+      setInstitutionBusy("");
+    }
+  }
+
+  async function postStudentDiscussion(): Promise<void> {
+    try {
+      setInstitutionBusy("discussion");
+      await apipPost("/institutions/discussions", {
+        scope: discussionForm.scope,
+        class_id: discussionForm.scope === "class" ? discussionForm.class_id || null : null,
+        module_id: discussionForm.module_id || null,
+        title: discussionForm.title,
+        body: discussionForm.body,
+      });
+      setDiscussionForm((current) => ({ ...current, title: "", body: "", module_id: "" }));
+      const data = await apipGet<InstitutionalWorkspaceResponse>("/institutions/workspace");
+      setInstitutionWorkspace(data);
+      setStatus("Discussion posted.");
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+    } finally {
+      setInstitutionBusy("");
+    }
+  }
+
   const pageReady = useMemo(() => {
     return !loading && !roleLoading && !!user && role === "student";
   }, [loading, roleLoading, role, user]);
@@ -409,12 +549,36 @@ export default function StudentHomePage() {
       modules: grouped[section.key],
     })).filter((section) => section.modules.length > 0);
   }, [modules]);
+  const institutionalClasses = useMemo(
+    () => (institutionWorkspace?.institutions || []).flatMap((block) => block.classes || []),
+    [institutionWorkspace],
+  );
+  const institutionalAssignments = useMemo(
+    () => institutionalClasses.flatMap((classItem) => classItem.assignments || []),
+    [institutionalClasses],
+  );
   const needsPaidSecurityUpgrade = useMemo(
     () => paidAccessRequiresSecurityUpgrade(sessionUser, billingSummary, modules),
     [billingSummary, modules, sessionUser],
   );
   const securityActions = sessionUser?.security?.recommended_actions || [];
   const canShowStudentHelp = !sessionLoading && role === "student";
+
+  useEffect(() => {
+    if (!submissionForm.assignment_id && institutionalAssignments.length > 0) {
+      setSubmissionForm((current) => ({
+        ...current,
+        assignment_id: institutionalAssignments[0].id,
+      }));
+    }
+    if (!discussionForm.class_id && institutionalClasses.length > 0) {
+      setDiscussionForm((current) => ({
+        ...current,
+        class_id: institutionalClasses[0].id,
+        scope: "class",
+      }));
+    }
+  }, [discussionForm.class_id, institutionalAssignments, institutionalClasses, submissionForm.assignment_id]);
 
   function renderModuleCard(moduleItem: Module) {
     const badge = moduleBadge(moduleItem);
@@ -619,6 +783,245 @@ export default function StudentHomePage() {
         >
           <b>Error:</b> {err}
         </div>
+      ) : null}
+
+      {institutionWorkspace?.institutions.length ? (
+        <section
+          style={{
+            border: "1px solid rgba(15, 23, 42, 0.12)",
+            borderRadius: 16,
+            padding: 16,
+            marginBottom: 16,
+            background: "#f8fafc",
+            display: "grid",
+            gap: 16,
+          }}
+        >
+          <div>
+            <div style={{ fontSize: 22, fontWeight: 900 }}>School classes inside Cognispark</div>
+            <div style={{ marginTop: 6, opacity: 0.78 }}>
+              Your institutional classes now sit alongside the self-serve mission flow, so assignments, feedback, and discussion stay in one place.
+            </div>
+          </div>
+
+          <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
+            {institutionWorkspace.institutions.flatMap((block) =>
+              block.classes.map((classItem) => (
+                <article key={classItem.id} style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
+                  <div style={{ fontWeight: 800, fontSize: 18 }}>{classItem.name}</div>
+                  <div style={{ marginTop: 4, opacity: 0.74 }}>
+                    {block.institution.name} | {classItem.teacher_names.join(", ") || "Teacher"} | Join code {classItem.join_code || "n/a"}
+                  </div>
+                  <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                    {classItem.assignments.map((assignment) => (
+                      <div key={assignment.id} style={{ borderTop: "1px solid rgba(15, 23, 42, 0.08)", paddingTop: 10 }}>
+                        <div style={{ fontWeight: 700 }}>{assignment.title}</div>
+                        <div style={{ fontSize: 13, opacity: 0.76 }}>
+                          {assignment.assignment_type} | {assignment.resource_module_ids.join(", ") || "custom"} | {assignment.due_utc || "No due date"}
+                        </div>
+                        <div style={{ marginTop: 6, fontSize: 14, opacity: 0.86 }}>{assignment.instructions}</div>
+                        {assignment.your_submission ? (
+                          <div style={{ marginTop: 8, padding: 10, borderRadius: 10, background: "#f8fafc", fontSize: 14 }}>
+                            <strong>Status:</strong> {assignment.your_submission.status}
+                            {typeof assignment.your_submission.score === "number" ? ` | Score ${assignment.your_submission.score}` : ""}
+                            {assignment.your_submission.feedback ? <div style={{ marginTop: 6 }}>{assignment.your_submission.feedback}</div> : null}
+                          </div>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              )),
+            )}
+          </div>
+
+          {institutionalAssignments.length ? (
+            <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
+              <article style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
+                <div style={{ fontWeight: 800, fontSize: 18 }}>Submit class assignment</div>
+                <div style={{ marginTop: 6, opacity: 0.74 }}>
+                  Send written work or a link back through the platform so your teacher can grade and reply here.
+                </div>
+                <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                  <label>
+                    Assignment
+                    <select
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      value={submissionForm.assignment_id}
+                      onChange={(event) => setSubmissionForm((current) => ({ ...current, assignment_id: event.target.value }))}
+                    >
+                      {institutionalAssignments.map((assignment) => (
+                        <option key={assignment.id} value={assignment.id}>
+                          {assignment.class_name} | {assignment.title}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    Response
+                    <textarea
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      rows={4}
+                      value={submissionForm.text_response}
+                      onChange={(event) => setSubmissionForm((current) => ({ ...current, text_response: event.target.value }))}
+                    />
+                  </label>
+                  <label>
+                    Link
+                    <input
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      value={submissionForm.link_url}
+                      onChange={(event) => setSubmissionForm((current) => ({ ...current, link_url: event.target.value }))}
+                      placeholder="https://..."
+                    />
+                  </label>
+                  <button
+                    onClick={() => void submitInstitutionAssignment()}
+                    disabled={institutionBusy !== ""}
+                    style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
+                  >
+                    {institutionBusy === "submission" ? "Submitting..." : "Submit assignment"}
+                  </button>
+                </div>
+              </article>
+
+              <article style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
+                <div style={{ fontWeight: 800, fontSize: 18 }}>Discussion</div>
+                <div style={{ marginTop: 6, opacity: 0.74 }}>
+                  Use a class thread for coursework questions or the public topic feed for broader learner discussion.
+                </div>
+                <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                  <label>
+                    Scope
+                    <select
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      value={discussionForm.scope}
+                      onChange={(event) => setDiscussionForm((current) => ({ ...current, scope: event.target.value }))}
+                    >
+                      <option value="class">class</option>
+                      {institutionWorkspace.viewer.can_access_public_topics ? <option value="public_topic">public_topic</option> : null}
+                    </select>
+                  </label>
+                  <label>
+                    Class
+                    <select
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      value={discussionForm.class_id}
+                      onChange={(event) => setDiscussionForm((current) => ({ ...current, class_id: event.target.value }))}
+                    >
+                      {institutionalClasses.map((classItem) => (
+                        <option key={classItem.id} value={classItem.id}>
+                          {classItem.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    Module ID
+                    <input
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      value={discussionForm.module_id}
+                      onChange={(event) => setDiscussionForm((current) => ({ ...current, module_id: event.target.value }))}
+                      placeholder="M3"
+                    />
+                  </label>
+                  <label>
+                    Title
+                    <input
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      value={discussionForm.title}
+                      onChange={(event) => setDiscussionForm((current) => ({ ...current, title: event.target.value }))}
+                    />
+                  </label>
+                  <label>
+                    Body
+                    <textarea
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      rows={4}
+                      value={discussionForm.body}
+                      onChange={(event) => setDiscussionForm((current) => ({ ...current, body: event.target.value }))}
+                    />
+                  </label>
+                  <button
+                    onClick={() => void postStudentDiscussion()}
+                    disabled={institutionBusy !== ""}
+                    style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
+                  >
+                    {institutionBusy === "discussion" ? "Posting..." : "Post discussion"}
+                  </button>
+                </div>
+              </article>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
+      {institutionWorkspace?.viewer.can_access_public_topics ? (
+        <section
+          style={{
+            border: "1px solid rgba(15, 23, 42, 0.12)",
+            borderRadius: 16,
+            padding: 16,
+            marginBottom: 16,
+            background: "#fff",
+            display: "grid",
+            gap: 12,
+          }}
+        >
+          <div>
+            <div style={{ fontSize: 22, fontWeight: 900 }}>Public topic community</div>
+            <div style={{ marginTop: 6, opacity: 0.78 }}>
+              Join broader student discussion by topic, whether you learn independently or through a school subscription.
+            </div>
+          </div>
+          <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
+            {(institutionWorkspace.public_topic_discussions || []).map((item) => (
+              <article key={item.id} style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#f8fafc" }}>
+                <div style={{ fontWeight: 800 }}>{item.title}</div>
+                <div style={{ marginTop: 4, fontSize: 13, opacity: 0.74 }}>{item.module_id || "General topic"}</div>
+                <div style={{ marginTop: 8, opacity: 0.86 }}>{item.body}</div>
+              </article>
+            ))}
+          </div>
+          <div style={{ borderTop: "1px solid rgba(15, 23, 42, 0.08)", paddingTop: 12 }}>
+            <div style={{ fontWeight: 800, marginBottom: 10 }}>Start a public topic thread</div>
+            <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+              <label>
+                Module ID
+                <input
+                  style={{ width: "100%", padding: 10, marginTop: 4 }}
+                  value={discussionForm.module_id}
+                  onChange={(event) => setDiscussionForm((current) => ({ ...current, module_id: event.target.value, scope: "public_topic" }))}
+                  placeholder="M3"
+                />
+              </label>
+              <label>
+                Title
+                <input
+                  style={{ width: "100%", padding: 10, marginTop: 4 }}
+                  value={discussionForm.title}
+                  onChange={(event) => setDiscussionForm((current) => ({ ...current, title: event.target.value, scope: "public_topic" }))}
+                />
+              </label>
+            </div>
+            <label style={{ display: "block", marginTop: 10 }}>
+              Body
+              <textarea
+                style={{ width: "100%", padding: 10, marginTop: 4 }}
+                rows={4}
+                value={discussionForm.body}
+                onChange={(event) => setDiscussionForm((current) => ({ ...current, body: event.target.value, scope: "public_topic" }))}
+              />
+            </label>
+            <button
+              onClick={() => void postStudentDiscussion()}
+              disabled={institutionBusy !== ""}
+              style={{ marginTop: 10, padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
+            >
+              {institutionBusy === "discussion" ? "Posting..." : "Post public topic"}
+            </button>
+          </div>
+        </section>
       ) : null}
 
       {billingSummary?.has_active_subscription ? (

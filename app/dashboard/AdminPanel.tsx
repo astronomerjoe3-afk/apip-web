@@ -174,16 +174,16 @@ const PLAYBOOK_STEPS: PlaybookStep[] = [
 
 const ADVANCED_TASKS: CommandCard[] = [
   {
-    title: "Create a student, instructor, or admin account",
+    title: "Create a student, teacher, or admin account",
     description: "Run this in the API repo when onboarding a new user and optionally provision the Firestore user document.",
     command:
-      "python scripts/create_user.py --email teacher@example.com --password temp-pass --role instructor --provision-user-doc",
+      "python scripts/create_user.py --email teacher@example.com --password temp-pass --role teacher --provision-user-doc",
   },
   {
     title: "Promote or change a user's role",
-    description: "Use this when an existing account needs a new role claim, such as instructor or admin.",
+    description: "Use this when an existing account needs a new role claim, such as institution_admin, academic_lead, or admin.",
     command:
-      "python scripts/set_role.py --email teacher@example.com --role admin --provision-user-doc",
+      "python scripts/set_role.py --email teacher@example.com --role institution_admin --provision-user-doc",
   },
   {
     title: "Seed the F1 module content",

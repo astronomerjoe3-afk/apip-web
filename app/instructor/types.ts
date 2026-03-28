@@ -1,5 +1,12 @@
 
-export type Role = "student" | "instructor" | "admin" | "unknown";
+export type Role =
+  | "student"
+  | "teacher"
+  | "institution_admin"
+  | "academic_lead"
+  | "instructor"
+  | "admin"
+  | "unknown";
 export type ReadinessFilter = "all" | "ready" | "watch" | "support";
 export type SupportAction = "Monitor" | "Reteach" | "Office hours" | "Celebrate";
 export type RiskLevel = "low" | "medium" | "high";

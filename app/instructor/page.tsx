@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { apipGet } from "../../lib/apipApi";
 import { auth } from "../../lib/firebase";
-import { getClientRole } from "../../lib/authRouting";
+import { getClientRole, isAcademicLeadRole, isInstitutionStaffRole, roleDisplayName } from "../../lib/authRouting";
 import { signOutEverywhere } from "../../lib/sessionClient";
 import {
   buildAnalysedRows,
@@ -92,6 +92,8 @@ export default function InstructorPage() {
         setRole(nextRole);
         if (nextRole === "student") {
           router.replace("/student");
+        } else if (isInstitutionStaffRole(nextRole)) {
+          router.replace("/institution");
         } else if (nextRole === "unknown") {
           router.replace("/dashboard");
         }
@@ -149,7 +151,7 @@ export default function InstructorPage() {
   }, [moduleId]);
 
   useEffect(() => {
-    if (role === "instructor" || role === "admin") void load();
+    if (isAcademicLeadRole(role) || role === "admin") void load();
   }, [role, load]);
   const analysedRows = useMemo(() => buildAnalysedRows(rows), [rows]);
   const filteredStudents = useMemo(() => analysedRows.filter((entry) => matchesFilter(entry, readinessFilter, search)), [analysedRows, readinessFilter, search]);
@@ -191,7 +193,7 @@ export default function InstructorPage() {
   const visibleWarnings = useMemo(() => summarizeWarnings(warnings), [warnings]);
 
   const cohortPulse = summary.highRisk > 0 ? String(summary.highRisk) + " urgent follow-ups" : "Stable today";
-  const header = role === "admin" ? "Instructor Dashboard (Admin)" : "Instructor Dashboard";
+  const header = role === "admin" ? "Academic Lead Dashboard (Admin)" : `${roleDisplayName(role)} Dashboard`;
 
   const handleUpload = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
@@ -221,10 +223,10 @@ export default function InstructorPage() {
     setSupportActions((current) => ({ ...current, [uid]: action }));
   }, []);
   if (loading) {
-    return <div style={{ padding: 24, opacity: 0.85 }}>Loading instructor workspace...</div>;
+    return <div style={{ padding: 24, opacity: 0.85 }}>Loading academic lead workspace...</div>;
   }
 
-  if (!(role === "instructor" || role === "admin")) {
+  if (!(isAcademicLeadRole(role) || role === "admin")) {
     return <div style={{ padding: 24, opacity: 0.85 }}>Redirecting...</div>;
   }
 
@@ -233,10 +235,10 @@ export default function InstructorPage() {
       <section className="dashboard-hero">
         <div className="admin-section-header">
           <div>
-            <p className="dashboard-eyebrow">Cognispark teaching studio</p>
+            <p className="dashboard-eyebrow">Cognispark academic studio</p>
             <h1 className="dashboard-title">{header}</h1>
             <p className="dashboard-subtitle">
-              Spot misconceptions early, protect student momentum, organize upcoming content, and coach each cohort from one calm workspace.
+              Spot cross-platform misconceptions early, protect student momentum, organize upcoming content, and oversee academic quality from one calm workspace.
             </p>
           </div>
 
@@ -256,7 +258,7 @@ export default function InstructorPage() {
       </section>
       {err ? (
         <section className="admin-card admin-notice admin-notice-error" style={{ marginTop: "1rem" }}>
-          <strong>Could not load instructor data</strong>
+          <strong>Could not load academic lead data</strong>
           <p className="admin-section-copy">{err}</p>
         </section>
       ) : null}

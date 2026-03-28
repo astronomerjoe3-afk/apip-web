@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 import { type User } from "firebase/auth";
 
 import { useAuth } from "../../lib/auth";
-import { getClientRole } from "../../lib/authRouting";
+import {
+  getClientRole,
+  isAcademicLeadRole,
+  isInstitutionStaffRole,
+  roleDisplayName,
+  type Role,
+} from "../../lib/authRouting";
 import AdminPanel from "./AdminPanel";
 import TokenBar from "./TokenBar";
-
-type Role = "student" | "instructor" | "admin" | "unknown";
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
@@ -62,21 +66,32 @@ export default function DashboardPage() {
           </article>
           <article className="dashboard-identity-card">
             <span>Role claim</span>
-            <strong>{role}</strong>
+            <strong>{roleDisplayName(role)}</strong>
           </article>
         </div>
       </section>
 
       {role === "admin" ? (
         <AdminPanel />
-      ) : role === "instructor" ? (
+      ) : isAcademicLeadRole(role) ? (
         <div className="dashboard-mode-stack">
-          <TokenBar label="Instructor session tools" />
+          <TokenBar label="Academic lead session tools" />
           <section className="dashboard-mode-card">
-            <h2>Instructor mode</h2>
-            <p>Open the instructor workspace to view cohort misconceptions, predictive risk, cognitive load, class management tools, and content staging.</p>
+            <h2>Academic lead mode</h2>
+            <p>Open the academic lead workspace to view cross-platform misconceptions, predictive risk, cognitive load, curriculum quality, and content staging.</p>
             <div className="admin-toolbar admin-toolbar-tight" style={{ marginTop: "1rem" }}>
-              <a className="admin-btn admin-btn-primary" href="/instructor">Open instructor workspace</a>
+              <a className="admin-btn admin-btn-primary" href="/instructor">Open academic lead workspace</a>
+            </div>
+          </section>
+        </div>
+      ) : isInstitutionStaffRole(role) ? (
+        <div className="dashboard-mode-stack">
+          <TokenBar label="Institution session tools" />
+          <section className="dashboard-mode-card">
+            <h2>Institution mode</h2>
+            <p>Open the institution workspace to manage classes, assignments, grading, discussions, school analytics, and seat usage for your own organization.</p>
+            <div className="admin-toolbar admin-toolbar-tight" style={{ marginTop: "1rem" }}>
+              <a className="admin-btn admin-btn-primary" href="/institution">Open institution workspace</a>
             </div>
           </section>
         </div>
