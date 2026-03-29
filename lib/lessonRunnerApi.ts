@@ -13180,12 +13180,31 @@ function chunkTechnicalWords<T>(items: T[], size: number): T[][] {
   return chunks;
 }
 
+function preserveLeadingTechnicalSymbol(term: string, meaning: string): string {
+  const normalizedTerm = text(term).trim();
+  const normalizedMeaning = text(meaning).trim();
+  if (!normalizedTerm || !normalizedMeaning) return normalizedMeaning;
+  if (normalizedTerm.length !== 1) return normalizedMeaning;
+  if (normalizedTerm !== normalizedTerm.toLowerCase() || normalizedTerm === normalizedTerm.toUpperCase()) return normalizedMeaning;
+
+  const capitalizedTerm = normalizedTerm.toUpperCase();
+  if (!normalizedMeaning.startsWith(capitalizedTerm)) return normalizedMeaning;
+
+  const nextChar = normalizedMeaning.charAt(capitalizedTerm.length);
+  if (nextChar && !/[\s=:(-]/.test(nextChar)) return normalizedMeaning;
+
+  return `${normalizedTerm}${normalizedMeaning.slice(capitalizedTerm.length)}`;
+}
+
 function technicalWordsSections(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const technicalWords = technicalWordsForLesson(lesson, code).map((entry) => ({
     ...entry,
     term: normalizeRenderedPhysicsText(entry.term),
-    meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning)),
+    meaning: preserveLeadingTechnicalSymbol(
+      normalizeRenderedPhysicsText(entry.term),
+      normalizeRenderedPhysicsText(ensureSentence(entry.meaning)),
+    ),
     why_it_matters: entry.why_it_matters
       ? normalizeRenderedPhysicsText(ensureSentence(entry.why_it_matters))
       : "",
