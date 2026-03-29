@@ -131,7 +131,7 @@ export default function StudentHelpCard(props: StudentHelpCardProps) {
           Need help or want to ask the admin something?
         </div>
         <div style={{ marginTop: 6, color: "#46566b", lineHeight: 1.65 }}>
-          Send a short note here if you are stuck, spotted a content issue, or need support. The message will appear in the instructor/admin inquiry inbox.
+          Send a short note here if you are stuck, spotted a content issue, or need support.
         </div>
         <div style={{ marginTop: 8, fontSize: 13, color: "#64748b", fontWeight: 700 }}>
           {contextLine}
