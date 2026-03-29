@@ -9773,6 +9773,51 @@ function workedExampleTaskFromResolvedAnswer(answer: string, answerReason: strin
   const normalized = normalizePromptKey(`${answer} ${answerReason}`);
   if (!normalized) return "State the correct physics conclusion clearly.";
 
+  if (
+    normalized.includes("earth moon and sun") &&
+    (normalized.includes("linked system") || normalized.includes("gravity linked") || normalized.includes("gravity and motion") || normalized.includes("one gravity linked board"))
+  ) {
+    return "Explain why Earth, Moon, and Sun should be treated as one linked system.";
+  }
+
+  if (
+    normalized.includes("orbit") &&
+    (normalized.includes("gravity guided path") || normalized.includes("gravity-guided path")) &&
+    (normalized.includes("track") || normalized.includes("rail"))
+  ) {
+    return "Explain why an orbit is a gravity-guided path rather than a rigid track.";
+  }
+
+  if (
+    normalized.includes("rotation") &&
+    normalized.includes("orbit") &&
+    (normalized.includes("day") || normalized.includes("year"))
+  ) {
+    return "Explain how rotation and orbit do different jobs in the Earth-Sun story.";
+  }
+
+  if (
+    normalized.includes("tilt") &&
+    (normalized.includes("opposite seasons") || normalized.includes("hemisphere") || normalized.includes("direct sunlight"))
+  ) {
+    return "Explain why Earth's tilt gives opposite seasonal patterns in opposite hemispheres.";
+  }
+
+  if (
+    normalized.includes("phase") &&
+    (normalized.includes("eclipse") || normalized.includes("shadow"))
+  ) {
+    return "Explain why a Moon phase is a viewing-angle effect rather than an eclipse.";
+  }
+
+  if (
+    normalized.includes("moon") &&
+    normalized.includes("planet") &&
+    (normalized.includes("orbits") || normalized.includes("host"))
+  ) {
+    return "Explain how a moon differs from a planet in the Solar System story.";
+  }
+
   if (normalized.includes("distance") && normalized.includes("displacement")) {
     return "State the total distance travelled and the final displacement.";
   }
@@ -9808,9 +9853,59 @@ function workedExampleTaskFromResolvedAnswer(answer: string, answerReason: strin
   return "State the correct physics conclusion clearly.";
 }
 
-function sharpenWorkedExamplePrompt(prompt: string, answer: string, answerReason: string): string {
+function directWorkedExamplePromptFromGenericStem(prompt: string, focus: string, answer: string, answerReason: string): string {
   const normalizedPrompt = normalizeRenderedPhysicsText(text(prompt)).trim();
   if (!normalizedPrompt) return "";
+
+  const task = workedExampleTaskFromResolvedAnswer(answer, answerReason);
+  const focusSentence = ensureSentence(focus).replace(/[.!?]+$/g, "").trim();
+
+  const bestStatementMatch = normalizedPrompt.match(
+    /^Which statement best (fits|matches|protects|captures|describes|explains|names) (.+?)\?$/i
+  );
+  if (bestStatementMatch) {
+    const subject = lowerFirst(bestStatementMatch[2]).trim();
+    if (task !== "State the correct physics conclusion clearly.") {
+      return task;
+    }
+    if (subject && !/^this lesson(?: point)?$/.test(subject)) {
+      return `State the strongest physics conclusion about ${subject}.`;
+    }
+  }
+
+  const clearestMatch = normalizedPrompt.match(/^Which option is the clearest match for (.+?)\?$/i);
+  if (clearestMatch) {
+    const subject = lowerFirst(clearestMatch[1]).trim();
+    if (task !== "State the correct physics conclusion clearly.") {
+      return task;
+    }
+    if (subject && !/^this lesson(?: point)?$/.test(subject)) {
+      return `State the clearest physics conclusion about ${subject}.`;
+    }
+  }
+
+  if (
+    /^Which statement best fits this lesson point\?$/i.test(normalizedPrompt) ||
+    /^Choose the statement that directly answers this lesson point\.$/i.test(normalizedPrompt) ||
+    /^Which option directly answers this lesson point\?$/i.test(normalizedPrompt)
+  ) {
+    if (task !== "State the correct physics conclusion clearly.") {
+      return task;
+    }
+    if (focusSentence) {
+      return `Use the main lesson idea to answer this directly: ${focusSentence}.`;
+    }
+  }
+
+  return "";
+}
+
+function sharpenWorkedExamplePrompt(prompt: string, answer: string, answerReason: string, focus: string = ""): string {
+  const normalizedPrompt = normalizeRenderedPhysicsText(text(prompt)).trim();
+  if (!normalizedPrompt) return "";
+
+  const directPrompt = directWorkedExamplePromptFromGenericStem(normalizedPrompt, focus, answer, answerReason);
+  if (directPrompt) return directPrompt;
 
   const stripped = stripGenericWorkedExamplePromptEnding(normalizedPrompt);
   if (stripped === normalizedPrompt) return normalizedPrompt;
@@ -9877,8 +9972,8 @@ function workedExampleEntryFromAssessmentItem(
   const answer = resolvedCorrectAnswer(item).trim();
   const answerReason = resolvedExplanation(item, answerIndex).trim();
   const title = lessonTitle(lesson, lesson);
-  const prompt = sharpenWorkedExamplePrompt(rawPrompt, answer, answerReason);
   const whyItMatters = ensureSentence(teachingFocus(rawPrompt, title)) || "Use the lesson physics rule directly and state why the answer follows.";
+  const prompt = sharpenWorkedExamplePrompt(rawPrompt, answer, answerReason, whyItMatters);
 
   if (!prompt || !answer) return null;
 
