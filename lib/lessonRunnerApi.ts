@@ -9793,6 +9793,29 @@ function workedExampleTaskFromResolvedAnswer(answer: string, answerReason: strin
   if (!normalized) return "State the correct physics conclusion clearly.";
 
   if (
+    normalized.includes("day side") &&
+    normalized.includes("half of earth facing the sun")
+  ) {
+    return "State what the day side means in the Earth-Sun model.";
+  }
+
+  if (
+    normalized.includes("lit half") &&
+    normalized.includes("dark half") &&
+    (normalized.includes("earth spins") || normalized.includes("earth rotates"))
+  ) {
+    return "Explain how one city changes from day side to night side as Earth spins.";
+  }
+
+  if (
+    normalized.includes("day and night") &&
+    (normalized.includes("earth rotates") || normalized.includes("earth spins")) &&
+    (normalized.includes("sunlight") || normalized.includes("lit"))
+  ) {
+    return "Explain why Earth's rotation causes day and night.";
+  }
+
+  if (
     normalized.includes("earth moon and sun") &&
     (normalized.includes("linked system") || normalized.includes("gravity linked") || normalized.includes("gravity and motion") || normalized.includes("one gravity linked board"))
   ) {
@@ -9878,6 +9901,17 @@ function directWorkedExamplePromptFromGenericStem(prompt: string, focus: string,
 
   const task = workedExampleTaskFromResolvedAnswer(answer, answerReason);
   const focusSentence = ensureSentence(focus).replace(/[.!?]+$/g, "").trim();
+
+  const lessonMeaningMatch = normalizedPrompt.match(/^Which lesson meaning best matches (.+?)\?$/i);
+  if (lessonMeaningMatch) {
+    const subject = lowerFirst(lessonMeaningMatch[1]).trim();
+    if (task !== "State the correct physics conclusion clearly.") {
+      return task;
+    }
+    if (subject && !/^this lesson(?: point)?$/.test(subject)) {
+      return `State what ${subject} means in this lesson.`;
+    }
+  }
 
   const bestStatementMatch = normalizedPrompt.match(
     /^Which statement best (fits|matches|protects|captures|describes|explains|names) (.+?)\?$/i
