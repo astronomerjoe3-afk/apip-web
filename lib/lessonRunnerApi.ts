@@ -1764,6 +1764,25 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
+  const isSunriseVsOrbitPrompt =
+    promptKeyCore === "why can sunrise happen without earth completing a whole orbit around the sun";
+
+  if (isSunriseVsOrbitPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["spin", "rotate", "rotation", "turn", "axis"],
+        ["sunlight", "lit", "face the sun", "day side", "sunrise", "day and night", "day-night", "full orbit", "orbit", "year", "revolve", "revolves", "around the sun"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "earth spins on its axis so sunrise does not need a full orbit",
+        "earth rotates on its axis so sunrise does not need a full orbit",
+        "earth spins on its axis as it revolves around the sun",
+        "earth rotates on its axis as it revolves around the sun",
+        "rotation not yearly orbit causes day and night",
+      ])
+    );
+  }
+
   const isAdditionDecimalRulePrompt =
     itemId === "F1-L4-M8" ||
     promptKey === "state the addition and subtraction rule for significant figures in a few words";
