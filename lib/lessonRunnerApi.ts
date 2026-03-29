@@ -1743,6 +1743,27 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ]);
   }
 
+  const isOrbitVsRigidTrackPrompt =
+    promptKeyCore === "how is an orbit different from a rigid track" ||
+    promptKeyCore === "why is it weak to describe an orbit as a rigid track";
+
+  if (isOrbitVsRigidTrackPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["orbit", "path", "route"],
+        ["gravity", "pull", "guided", "guide", "forces", "motion"],
+        ["track", "rail", "rigid"],
+        ["physical", "built", "constraint", "constraints", "restriction", "restrictions"],
+      ]) ||
+      includesAnyPhrase(candidate, [
+        "an orbit is a gravity guided path rather than a rigid track",
+        "an orbit is a gravity-guided path rather than a rigid track",
+        "an orbit is guided by gravity while a rigid track is a physical constraint",
+        "a rigid track is guided by physical constraints but an orbit is guided by gravity",
+      ])
+    );
+  }
+
   const isAdditionDecimalRulePrompt =
     itemId === "F1-L4-M8" ||
     promptKey === "state the addition and subtraction rule for significant figures in a few words";
