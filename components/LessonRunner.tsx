@@ -3532,7 +3532,7 @@ export default function LessonRunner({
                   {card.title}
                 </h4>
                 <p className="mt-2 text-sm leading-6 text-slate-700">
-                  {card.text}
+                  {normalizeLessonDisplayMultiline(card.text)}
                 </p>
                 <p className="mt-4 text-sm font-medium text-sky-700">
                   Tap to add a starter
