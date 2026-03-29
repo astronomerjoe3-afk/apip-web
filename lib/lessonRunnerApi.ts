@@ -12868,6 +12868,40 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
   };
 }
 
+function relationTeachingSection(lesson: UnknownRecord): UnknownRecord | null {
+  const formula = lessonFormulaRecords(lesson).find((candidate) => {
+    const standardFormula = standardFormulaText(candidate);
+    return Boolean(standardFormula && looksLikeStandardEquationText(standardFormula));
+  });
+  if (!formula) return null;
+
+  const code = lessonCode(lesson);
+  const equation = canonicalizeFormulaSymbolText(standardFormulaText(formula));
+  const meaning = ensureSentence(text(formula.meaning));
+  const condition = ensureSentence(trimmedFormulaCondition(text(formula.conditions)));
+  const analogyBridge = isM1ToM14Lesson(code) || isA1ToA11Lesson(code)
+    ? formulaAnalogyEquivalent(lesson, code, formula)
+    : foundationFormulaAnalogyEquivalent(lesson, code, formula);
+
+  const bodyParts = [
+    equation ? `The compact lesson relation is ${equation}.` : "",
+    meaning ? `It means ${lowerFirst(meaning)}` : "",
+    condition ? formulaConditionInstruction(text(formula.conditions), "Use this relation") : "",
+    "Say this relation in words before you answer later quick checks or mastery questions.",
+  ].filter(Boolean);
+
+  return {
+    heading: "Lesson relation",
+    body: normalizeRenderedPhysicsText(bodyParts.join(" ")),
+    analogy: normalizeRenderedPhysicsText(analogyBridge),
+    check_for_understanding: "What physical relationship does this lesson relation summarize?",
+  };
+}
+
+function hasLessonRelationSection(sections: UnknownRecord[]): boolean {
+  return sections.some((section) => /lesson relation/i.test(text(asRecord(section).heading)));
+}
+
 function authoredScaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const scaffoldSupport = asRecord(asRecord(lesson.authoring_contract).scaffold_support);
@@ -13102,13 +13136,19 @@ function foundationFormulaSection(lesson: UnknownRecord): UnknownRecord | null {
 
 function withStandardFormulaSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
   const formulaSection = foundationFormulaSection(lesson) || formulaBridgeSection(lesson);
-  if (!formulaSection) return sections;
-  if (sections.some((section) => asList(asRecord(section).formula_reference_rows).length > 0)) return sections;
+  const relationSection = hasLessonRelationSection(sections) ? null : relationTeachingSection(lesson);
+  if (!formulaSection && !relationSection) return sections;
+  if (!relationSection && sections.some((section) => asList(asRecord(section).formula_reference_rows).length > 0)) return sections;
 
   const nextSections = [...sections];
   const workedExampleIndex = nextSections.findIndex((section) => Object.keys(asRecord(asRecord(section).worked_example)).length > 0);
   const insertIndex = workedExampleIndex >= 0 ? workedExampleIndex : nextSections.length;
-  nextSections.splice(insertIndex, 0, formulaSection);
+  const inserts = [
+    ...(relationSection ? [relationSection] : []),
+    ...(formulaSection && !sections.some((section) => asList(asRecord(section).formula_reference_rows).length > 0) ? [formulaSection] : []),
+  ];
+  if (inserts.length === 0) return sections;
+  nextSections.splice(insertIndex, 0, ...inserts);
   return nextSections;
 }
 
