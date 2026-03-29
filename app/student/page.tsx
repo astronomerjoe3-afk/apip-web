@@ -258,12 +258,13 @@ export default function StudentHomePage() {
   const [status, setStatus] = useState<string>("");
   const [institutionWorkspace, setInstitutionWorkspace] = useState<InstitutionalWorkspaceResponse | null>(null);
   const [institutionBusy, setInstitutionBusy] = useState<string>("");
+  const [communityDialogOpen, setCommunityDialogOpen] = useState<boolean>(false);
+  const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
   const [submissionForm, setSubmissionForm] = useState({
     assignment_id: "",
     text_response: "",
     link_url: "",
   });
-  const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
   const [discussionForm, setDiscussionForm] = useState({
     scope: "public_topic",
     class_id: "",
@@ -563,6 +564,10 @@ export default function StudentHomePage() {
   );
   const securityActions = sessionUser?.security?.recommended_actions || [];
   const canShowStudentHelp = !sessionLoading && role === "student";
+  const canShowStudentCommunity = !sessionLoading && role === "student" && (
+    (institutionWorkspace?.institutions.length || 0) > 0 ||
+    institutionWorkspace?.viewer.can_access_public_topics === true
+  );
 
   useEffect(() => {
     if (!submissionForm.assignment_id && institutionalAssignments.length > 0) {
@@ -785,245 +790,6 @@ export default function StudentHomePage() {
         </div>
       ) : null}
 
-      {institutionWorkspace?.institutions.length ? (
-        <section
-          style={{
-            border: "1px solid rgba(15, 23, 42, 0.12)",
-            borderRadius: 16,
-            padding: 16,
-            marginBottom: 16,
-            background: "#f8fafc",
-            display: "grid",
-            gap: 16,
-          }}
-        >
-          <div>
-            <div style={{ fontSize: 22, fontWeight: 900 }}>School classes inside Cognispark</div>
-            <div style={{ marginTop: 6, opacity: 0.78 }}>
-              Your institutional classes now sit alongside the self-serve mission flow, so assignments, feedback, and discussion stay in one place.
-            </div>
-          </div>
-
-          <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
-            {institutionWorkspace.institutions.flatMap((block) =>
-              block.classes.map((classItem) => (
-                <article key={classItem.id} style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
-                  <div style={{ fontWeight: 800, fontSize: 18 }}>{classItem.name}</div>
-                  <div style={{ marginTop: 4, opacity: 0.74 }}>
-                    {block.institution.name} | {classItem.teacher_names.join(", ") || "Teacher"} | Join code {classItem.join_code || "n/a"}
-                  </div>
-                  <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
-                    {classItem.assignments.map((assignment) => (
-                      <div key={assignment.id} style={{ borderTop: "1px solid rgba(15, 23, 42, 0.08)", paddingTop: 10 }}>
-                        <div style={{ fontWeight: 700 }}>{assignment.title}</div>
-                        <div style={{ fontSize: 13, opacity: 0.76 }}>
-                          {assignment.assignment_type} | {assignment.resource_module_ids.join(", ") || "custom"} | {assignment.due_utc || "No due date"}
-                        </div>
-                        <div style={{ marginTop: 6, fontSize: 14, opacity: 0.86 }}>{assignment.instructions}</div>
-                        {assignment.your_submission ? (
-                          <div style={{ marginTop: 8, padding: 10, borderRadius: 10, background: "#f8fafc", fontSize: 14 }}>
-                            <strong>Status:</strong> {assignment.your_submission.status}
-                            {typeof assignment.your_submission.score === "number" ? ` | Score ${assignment.your_submission.score}` : ""}
-                            {assignment.your_submission.feedback ? <div style={{ marginTop: 6 }}>{assignment.your_submission.feedback}</div> : null}
-                          </div>
-                        ) : null}
-                      </div>
-                    ))}
-                  </div>
-                </article>
-              )),
-            )}
-          </div>
-
-          {institutionalAssignments.length ? (
-            <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
-              <article style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
-                <div style={{ fontWeight: 800, fontSize: 18 }}>Submit class assignment</div>
-                <div style={{ marginTop: 6, opacity: 0.74 }}>
-                  Send written work or a link back through the platform so your teacher can grade and reply here.
-                </div>
-                <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
-                  <label>
-                    Assignment
-                    <select
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      value={submissionForm.assignment_id}
-                      onChange={(event) => setSubmissionForm((current) => ({ ...current, assignment_id: event.target.value }))}
-                    >
-                      {institutionalAssignments.map((assignment) => (
-                        <option key={assignment.id} value={assignment.id}>
-                          {assignment.class_name} | {assignment.title}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label>
-                    Response
-                    <textarea
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      rows={4}
-                      value={submissionForm.text_response}
-                      onChange={(event) => setSubmissionForm((current) => ({ ...current, text_response: event.target.value }))}
-                    />
-                  </label>
-                  <label>
-                    Link
-                    <input
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      value={submissionForm.link_url}
-                      onChange={(event) => setSubmissionForm((current) => ({ ...current, link_url: event.target.value }))}
-                      placeholder="https://..."
-                    />
-                  </label>
-                  <button
-                    onClick={() => void submitInstitutionAssignment()}
-                    disabled={institutionBusy !== ""}
-                    style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
-                  >
-                    {institutionBusy === "submission" ? "Submitting..." : "Submit assignment"}
-                  </button>
-                </div>
-              </article>
-
-              <article style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
-                <div style={{ fontWeight: 800, fontSize: 18 }}>Discussion</div>
-                <div style={{ marginTop: 6, opacity: 0.74 }}>
-                  Use a class thread for coursework questions or the public topic feed for broader learner discussion.
-                </div>
-                <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
-                  <label>
-                    Scope
-                    <select
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      value={discussionForm.scope}
-                      onChange={(event) => setDiscussionForm((current) => ({ ...current, scope: event.target.value }))}
-                    >
-                      <option value="class">class</option>
-                      {institutionWorkspace.viewer.can_access_public_topics ? <option value="public_topic">public_topic</option> : null}
-                    </select>
-                  </label>
-                  <label>
-                    Class
-                    <select
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      value={discussionForm.class_id}
-                      onChange={(event) => setDiscussionForm((current) => ({ ...current, class_id: event.target.value }))}
-                    >
-                      {institutionalClasses.map((classItem) => (
-                        <option key={classItem.id} value={classItem.id}>
-                          {classItem.name}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label>
-                    Module ID
-                    <input
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      value={discussionForm.module_id}
-                      onChange={(event) => setDiscussionForm((current) => ({ ...current, module_id: event.target.value }))}
-                      placeholder="M3"
-                    />
-                  </label>
-                  <label>
-                    Title
-                    <input
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      value={discussionForm.title}
-                      onChange={(event) => setDiscussionForm((current) => ({ ...current, title: event.target.value }))}
-                    />
-                  </label>
-                  <label>
-                    Body
-                    <textarea
-                      style={{ width: "100%", padding: 10, marginTop: 4 }}
-                      rows={4}
-                      value={discussionForm.body}
-                      onChange={(event) => setDiscussionForm((current) => ({ ...current, body: event.target.value }))}
-                    />
-                  </label>
-                  <button
-                    onClick={() => void postStudentDiscussion()}
-                    disabled={institutionBusy !== ""}
-                    style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
-                  >
-                    {institutionBusy === "discussion" ? "Posting..." : "Post discussion"}
-                  </button>
-                </div>
-              </article>
-            </div>
-          ) : null}
-        </section>
-      ) : null}
-
-      {institutionWorkspace?.viewer.can_access_public_topics ? (
-        <section
-          style={{
-            border: "1px solid rgba(15, 23, 42, 0.12)",
-            borderRadius: 16,
-            padding: 16,
-            marginBottom: 16,
-            background: "#fff",
-            display: "grid",
-            gap: 12,
-          }}
-        >
-          <div>
-            <div style={{ fontSize: 22, fontWeight: 900 }}>Public topic community</div>
-            <div style={{ marginTop: 6, opacity: 0.78 }}>
-              Join broader student discussion by topic, whether you learn independently or through a school subscription.
-            </div>
-          </div>
-          <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
-            {(institutionWorkspace.public_topic_discussions || []).map((item) => (
-              <article key={item.id} style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#f8fafc" }}>
-                <div style={{ fontWeight: 800 }}>{item.title}</div>
-                <div style={{ marginTop: 4, fontSize: 13, opacity: 0.74 }}>{item.module_id || "General topic"}</div>
-                <div style={{ marginTop: 8, opacity: 0.86 }}>{item.body}</div>
-              </article>
-            ))}
-          </div>
-          <div style={{ borderTop: "1px solid rgba(15, 23, 42, 0.08)", paddingTop: 12 }}>
-            <div style={{ fontWeight: 800, marginBottom: 10 }}>Start a public topic thread</div>
-            <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-              <label>
-                Module ID
-                <input
-                  style={{ width: "100%", padding: 10, marginTop: 4 }}
-                  value={discussionForm.module_id}
-                  onChange={(event) => setDiscussionForm((current) => ({ ...current, module_id: event.target.value, scope: "public_topic" }))}
-                  placeholder="M3"
-                />
-              </label>
-              <label>
-                Title
-                <input
-                  style={{ width: "100%", padding: 10, marginTop: 4 }}
-                  value={discussionForm.title}
-                  onChange={(event) => setDiscussionForm((current) => ({ ...current, title: event.target.value, scope: "public_topic" }))}
-                />
-              </label>
-            </div>
-            <label style={{ display: "block", marginTop: 10 }}>
-              Body
-              <textarea
-                style={{ width: "100%", padding: 10, marginTop: 4 }}
-                rows={4}
-                value={discussionForm.body}
-                onChange={(event) => setDiscussionForm((current) => ({ ...current, body: event.target.value, scope: "public_topic" }))}
-              />
-            </label>
-            <button
-              onClick={() => void postStudentDiscussion()}
-              disabled={institutionBusy !== ""}
-              style={{ marginTop: 10, padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
-            >
-              {institutionBusy === "discussion" ? "Posting..." : "Post public topic"}
-            </button>
-          </div>
-        </section>
-      ) : null}
-
       {billingSummary?.has_active_subscription ? (
         <div
           style={{
@@ -1153,6 +919,289 @@ export default function StudentHomePage() {
         </div>
       )}
 
+      {canShowStudentCommunity && communityDialogOpen ? (
+        <div
+          onClick={() => setCommunityDialogOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 120,
+            background: "rgba(15, 23, 42, 0.42)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 20,
+          }}
+        >
+          <div
+            onClick={(event) => event.stopPropagation()}
+            style={{
+              position: "relative",
+              width: "min(100%, 1100px)",
+              maxHeight: "calc(100vh - 40px)",
+              overflowY: "auto",
+              display: "grid",
+              gap: 16,
+            }}
+          >
+            <button
+              onClick={() => setCommunityDialogOpen(false)}
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                zIndex: 2,
+                padding: "10px 14px",
+                borderRadius: 999,
+                border: "1px solid rgba(16, 35, 63, 0.14)",
+                background: "rgba(255, 255, 255, 0.94)",
+                color: "#10233f",
+                fontWeight: 800,
+              }}
+            >
+              Close
+            </button>
+
+            {institutionWorkspace?.institutions.length ? (
+              <section
+                style={{
+                  border: "1px solid rgba(15, 23, 42, 0.12)",
+                  borderRadius: 16,
+                  padding: 16,
+                  background: "#f8fafc",
+                  display: "grid",
+                  gap: 16,
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: 22, fontWeight: 900 }}>School classes inside Cognispark</div>
+                  <div style={{ marginTop: 6, opacity: 0.78 }}>
+                    Your institutional classes now sit alongside the self-serve mission flow, so assignments, feedback, and discussion stay in one place.
+                  </div>
+                </div>
+
+                <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
+                  {institutionWorkspace.institutions.flatMap((block) =>
+                    block.classes.map((classItem) => (
+                      <article key={classItem.id} style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
+                        <div style={{ fontWeight: 800, fontSize: 18 }}>{classItem.name}</div>
+                        <div style={{ marginTop: 4, opacity: 0.74 }}>
+                          {block.institution.name} | {classItem.teacher_names.join(", ") || "Teacher"} | Join code {classItem.join_code || "n/a"}
+                        </div>
+                        <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                          {classItem.assignments.map((assignment) => (
+                            <div key={assignment.id} style={{ borderTop: "1px solid rgba(15, 23, 42, 0.08)", paddingTop: 10 }}>
+                              <div style={{ fontWeight: 700 }}>{assignment.title}</div>
+                              <div style={{ fontSize: 13, opacity: 0.76 }}>
+                                {assignment.assignment_type} | {assignment.resource_module_ids.join(", ") || "custom"} | {assignment.due_utc || "No due date"}
+                              </div>
+                              <div style={{ marginTop: 6, fontSize: 14, opacity: 0.86 }}>{assignment.instructions}</div>
+                              {assignment.your_submission ? (
+                                <div style={{ marginTop: 8, padding: 10, borderRadius: 10, background: "#f8fafc", fontSize: 14 }}>
+                                  <strong>Status:</strong> {assignment.your_submission.status}
+                                  {typeof assignment.your_submission.score === "number" ? ` | Score ${assignment.your_submission.score}` : ""}
+                                  {assignment.your_submission.feedback ? <div style={{ marginTop: 6 }}>{assignment.your_submission.feedback}</div> : null}
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+                        </div>
+                      </article>
+                    )),
+                  )}
+                </div>
+
+                {institutionalAssignments.length ? (
+                  <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
+                    <article style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
+                      <div style={{ fontWeight: 800, fontSize: 18 }}>Submit class assignment</div>
+                      <div style={{ marginTop: 6, opacity: 0.74 }}>
+                        Send written work or a link back through the platform so your teacher can grade and reply here.
+                      </div>
+                      <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                        <label>
+                          Assignment
+                          <select
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            value={submissionForm.assignment_id}
+                            onChange={(event) => setSubmissionForm((current) => ({ ...current, assignment_id: event.target.value }))}
+                          >
+                            {institutionalAssignments.map((assignment) => (
+                              <option key={assignment.id} value={assignment.id}>
+                                {assignment.class_name} | {assignment.title}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                        <label>
+                          Response
+                          <textarea
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            rows={4}
+                            value={submissionForm.text_response}
+                            onChange={(event) => setSubmissionForm((current) => ({ ...current, text_response: event.target.value }))}
+                          />
+                        </label>
+                        <label>
+                          Link
+                          <input
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            value={submissionForm.link_url}
+                            onChange={(event) => setSubmissionForm((current) => ({ ...current, link_url: event.target.value }))}
+                            placeholder="https://..."
+                          />
+                        </label>
+                        <button
+                          onClick={() => void submitInstitutionAssignment()}
+                          disabled={institutionBusy !== ""}
+                          style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
+                        >
+                          {institutionBusy === "submission" ? "Submitting..." : "Submit assignment"}
+                        </button>
+                      </div>
+                    </article>
+
+                    <article style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#fff" }}>
+                      <div style={{ fontWeight: 800, fontSize: 18 }}>Discussion</div>
+                      <div style={{ marginTop: 6, opacity: 0.74 }}>
+                        Use a class thread for coursework questions or the public topic feed for broader learner discussion.
+                      </div>
+                      <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                        <label>
+                          Scope
+                          <select
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            value={discussionForm.scope}
+                            onChange={(event) => setDiscussionForm((current) => ({ ...current, scope: event.target.value }))}
+                          >
+                            <option value="class">class</option>
+                            {institutionWorkspace.viewer.can_access_public_topics ? <option value="public_topic">public_topic</option> : null}
+                          </select>
+                        </label>
+                        <label>
+                          Class
+                          <select
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            value={discussionForm.class_id}
+                            onChange={(event) => setDiscussionForm((current) => ({ ...current, class_id: event.target.value }))}
+                          >
+                            {institutionalClasses.map((classItem) => (
+                              <option key={classItem.id} value={classItem.id}>
+                                {classItem.name}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                        <label>
+                          Module ID
+                          <input
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            value={discussionForm.module_id}
+                            onChange={(event) => setDiscussionForm((current) => ({ ...current, module_id: event.target.value }))}
+                            placeholder="M3"
+                          />
+                        </label>
+                        <label>
+                          Title
+                          <input
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            value={discussionForm.title}
+                            onChange={(event) => setDiscussionForm((current) => ({ ...current, title: event.target.value }))}
+                          />
+                        </label>
+                        <label>
+                          Body
+                          <textarea
+                            style={{ width: "100%", padding: 10, marginTop: 4 }}
+                            rows={4}
+                            value={discussionForm.body}
+                            onChange={(event) => setDiscussionForm((current) => ({ ...current, body: event.target.value }))}
+                          />
+                        </label>
+                        <button
+                          onClick={() => void postStudentDiscussion()}
+                          disabled={institutionBusy !== ""}
+                          style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
+                        >
+                          {institutionBusy === "discussion" ? "Posting..." : "Post discussion"}
+                        </button>
+                      </div>
+                    </article>
+                  </div>
+                ) : null}
+              </section>
+            ) : null}
+
+            {institutionWorkspace?.viewer.can_access_public_topics ? (
+              <section
+                style={{
+                  border: "1px solid rgba(15, 23, 42, 0.12)",
+                  borderRadius: 16,
+                  padding: 16,
+                  background: "#fff",
+                  display: "grid",
+                  gap: 12,
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: 22, fontWeight: 900 }}>Public topic community</div>
+                  <div style={{ marginTop: 6, opacity: 0.78 }}>
+                    Join broader student discussion by topic, whether you learn independently or through a school subscription.
+                  </div>
+                </div>
+                <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
+                  {(institutionWorkspace.public_topic_discussions || []).map((item) => (
+                    <article key={item.id} style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 14, padding: 14, background: "#f8fafc" }}>
+                      <div style={{ fontWeight: 800 }}>{item.title}</div>
+                      <div style={{ marginTop: 4, fontSize: 13, opacity: 0.74 }}>{item.module_id || "General topic"}</div>
+                      <div style={{ marginTop: 8, opacity: 0.86 }}>{item.body}</div>
+                    </article>
+                  ))}
+                </div>
+                <div style={{ borderTop: "1px solid rgba(15, 23, 42, 0.08)", paddingTop: 12 }}>
+                  <div style={{ fontWeight: 800, marginBottom: 10 }}>Start a public topic thread</div>
+                  <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+                    <label>
+                      Module ID
+                      <input
+                        style={{ width: "100%", padding: 10, marginTop: 4 }}
+                        value={discussionForm.module_id}
+                        onChange={(event) => setDiscussionForm((current) => ({ ...current, module_id: event.target.value, scope: "public_topic" }))}
+                        placeholder="M3"
+                      />
+                    </label>
+                    <label>
+                      Title
+                      <input
+                        style={{ width: "100%", padding: 10, marginTop: 4 }}
+                        value={discussionForm.title}
+                        onChange={(event) => setDiscussionForm((current) => ({ ...current, title: event.target.value, scope: "public_topic" }))}
+                      />
+                    </label>
+                  </div>
+                  <label style={{ display: "block", marginTop: 10 }}>
+                    Body
+                    <textarea
+                      style={{ width: "100%", padding: 10, marginTop: 4 }}
+                      rows={4}
+                      value={discussionForm.body}
+                      onChange={(event) => setDiscussionForm((current) => ({ ...current, body: event.target.value, scope: "public_topic" }))}
+                    />
+                  </label>
+                  <button
+                    onClick={() => void postStudentDiscussion()}
+                    disabled={institutionBusy !== ""}
+                    style={{ marginTop: 10, padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700 }}
+                  >
+                    {institutionBusy === "discussion" ? "Posting..." : "Post public topic"}
+                  </button>
+                </div>
+              </section>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+
       {canShowStudentHelp && helpDialogOpen ? (
         <div
           onClick={() => setHelpDialogOpen(false)}
@@ -1199,6 +1248,27 @@ export default function StudentHomePage() {
             />
           </div>
         </div>
+      ) : null}
+
+      {canShowStudentCommunity ? (
+        <button
+          onClick={() => setCommunityDialogOpen(true)}
+          style={{
+            position: "fixed",
+            right: 22,
+            bottom: canShowStudentHelp ? 86 : 22,
+            zIndex: 80,
+            padding: "14px 18px",
+            borderRadius: 999,
+            border: "1px solid rgba(16, 35, 63, 0.14)",
+            background: "rgba(255, 255, 255, 0.96)",
+            color: "#10233f",
+            fontWeight: 900,
+            boxShadow: "0 18px 38px rgba(11, 26, 50, 0.18)",
+          }}
+        >
+          Social threads
+        </button>
       ) : null}
 
       {canShowStudentHelp ? (
