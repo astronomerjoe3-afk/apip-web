@@ -293,10 +293,6 @@ export default function StudentModulePage() {
     if (!pathModuleId) return "/student";
     return "/student/module/" + encodeURIComponent(pathModuleId);
   }, [moduleId, routeModuleId]);
-  const helpCardAnchorId = useMemo(
-    () => `student-help-card-${(moduleId || routeModuleId || "module").toLowerCase()}`,
-    [moduleId, routeModuleId],
-  );
 
   const checkoutState = searchParams.get("checkout");
   const checkoutSessionId = searchParams.get("session_id");
@@ -317,6 +313,7 @@ export default function StudentModulePage() {
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
 
   const activeLesson = useMemo(() => {
     if (!lessons.length) return null;
@@ -1308,24 +1305,60 @@ export default function StudentModulePage() {
         </div>
       ) : null}
 
-      {canShowStudentHelp ? (
-        <div id={helpCardAnchorId} style={{ maxWidth: 1100, margin: "18px auto 0 auto", scrollMarginTop: 96 }}>
-          <StudentHelpCard
-            moduleId={moduleId}
-            moduleTitle={moduleMeta?.title}
-            lessonId={activeLesson ? normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id) : undefined}
-            lessonTitle={activeLesson?.title}
-            pagePath={currentModulePath}
-          />
+      {canShowStudentHelp && helpDialogOpen ? (
+        <div
+          onClick={() => setHelpDialogOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 120,
+            background: "rgba(15, 23, 42, 0.42)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 20,
+          }}
+        >
+          <div
+            onClick={(event) => event.stopPropagation()}
+            style={{
+              position: "relative",
+              width: "min(100%, 980px)",
+              maxHeight: "calc(100vh - 40px)",
+              overflowY: "auto",
+            }}
+          >
+            <button
+              onClick={() => setHelpDialogOpen(false)}
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                zIndex: 2,
+                padding: "10px 14px",
+                borderRadius: 999,
+                border: "1px solid rgba(16, 35, 63, 0.14)",
+                background: "rgba(255, 255, 255, 0.94)",
+                color: "#10233f",
+                fontWeight: 800,
+              }}
+            >
+              Close
+            </button>
+            <StudentHelpCard
+              moduleId={moduleId}
+              moduleTitle={moduleMeta?.title}
+              lessonId={activeLesson ? normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id) : undefined}
+              lessonTitle={activeLesson?.title}
+              pagePath={currentModulePath}
+            />
+          </div>
         </div>
       ) : null}
 
       {canShowStudentHelp ? (
         <button
-          onClick={() => {
-            if (typeof document === "undefined") return;
-            document.getElementById(helpCardAnchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
+          onClick={() => setHelpDialogOpen(true)}
           style={{
             position: "fixed",
             right: 22,

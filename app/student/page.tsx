@@ -244,7 +244,6 @@ function subscriptionActionLabel(plan: PricingOffer, currentPlanId?: string | nu
 export default function StudentHomePage() {
   const router = useRouter();
   const { user, loading } = useAuth();
-  const helpCardAnchorId = "student-help-card-home";
 
   const [role, setRole] = useState<Role>("unknown");
   const [roleLoading, setRoleLoading] = useState<boolean>(true);
@@ -264,6 +263,7 @@ export default function StudentHomePage() {
     text_response: "",
     link_url: "",
   });
+  const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
   const [discussionForm, setDiscussionForm] = useState({
     scope: "public_topic",
     class_id: "",
@@ -1153,19 +1153,57 @@ export default function StudentHomePage() {
         </div>
       )}
 
-      <div id={helpCardAnchorId} style={{ marginTop: 20, scrollMarginTop: 96 }}>
-        <StudentHelpCard
-          moduleTitle="Student module list"
-          pagePath="/student"
-        />
-      </div>
+      {canShowStudentHelp && helpDialogOpen ? (
+        <div
+          onClick={() => setHelpDialogOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 120,
+            background: "rgba(15, 23, 42, 0.42)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 20,
+          }}
+        >
+          <div
+            onClick={(event) => event.stopPropagation()}
+            style={{
+              position: "relative",
+              width: "min(100%, 980px)",
+              maxHeight: "calc(100vh - 40px)",
+              overflowY: "auto",
+            }}
+          >
+            <button
+              onClick={() => setHelpDialogOpen(false)}
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                zIndex: 2,
+                padding: "10px 14px",
+                borderRadius: 999,
+                border: "1px solid rgba(16, 35, 63, 0.14)",
+                background: "rgba(255, 255, 255, 0.94)",
+                color: "#10233f",
+                fontWeight: 800,
+              }}
+            >
+              Close
+            </button>
+            <StudentHelpCard
+              moduleTitle="Student module list"
+              pagePath="/student"
+            />
+          </div>
+        </div>
+      ) : null}
 
       {canShowStudentHelp ? (
         <button
-          onClick={() => {
-            if (typeof document === "undefined") return;
-            document.getElementById(helpCardAnchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
+          onClick={() => setHelpDialogOpen(true)}
           style={{
             position: "fixed",
             right: 22,
