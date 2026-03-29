@@ -551,8 +551,7 @@ export default function StudentModulePage() {
     }
 
     if (!user) {
-      const nextPath = currentModulePath;
-      router.replace("/login?next=" + encodeURIComponent(nextPath));
+      router.replace("/login?next=/student");
       return;
     }
 
@@ -678,13 +677,12 @@ export default function StudentModulePage() {
       setStatus("Signing out...");
       clearAllLessonRunnerState();
       await signOutEverywhere();
-      const nextPath = currentModulePath;
-      router.replace("/login?next=" + encodeURIComponent(nextPath));
+      router.replace("/login?next=/student");
     } catch (error: unknown) {
       setStatus("");
       setErr(errorMessage(error));
     }
-  }, [currentModulePath, router]);
+  }, [router]);
 
   const launchCheckout = useCallback(async (
     purchaseKind: "module_unlock" | "subscription",

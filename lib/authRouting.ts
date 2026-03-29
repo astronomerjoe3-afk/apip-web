@@ -105,5 +105,9 @@ export function landingPathForRole(role: Role): string {
 }
 
 export function resolvePostAuthPath(role: Role, nextPath?: string | null): string {
+  if (role === "student") {
+    return landingPathForRole(role);
+  }
+
   return sanitizeNextPath(nextPath) || landingPathForRole(role);
 }

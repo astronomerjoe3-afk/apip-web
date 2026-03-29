@@ -93,8 +93,7 @@ export default function StudentSecurityClient() {
       }
 
       if (!user) {
-        const nextLoginPath = `/student/security?next=${encodeURIComponent(nextPath)}`;
-        router.replace(`/login?next=${encodeURIComponent(nextLoginPath)}`);
+        router.replace("/login?next=/student");
         return;
       }
 
