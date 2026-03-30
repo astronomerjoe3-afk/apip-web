@@ -3,8 +3,9 @@
   <rect x="24" y="24" width="1232" height="672" rx="32" fill="#ffffff" stroke="#dbeafe" stroke-width="4"/>
 
   <text x="70" y="96" fill="#0f172a" font-family="Arial, sans-serif" font-size="52" font-weight="700">Moon Phases and Eclipses</text>
-  <text x="70" y="144" fill="#475569" font-family="Arial, sans-serif" font-size="28">
-    The Moon stays half lit; phases come from viewpoint, while eclipses need a special shadow line-up.
+  <text x="70" y="140" fill="#475569" font-family="Arial, sans-serif" font-size="26">
+    <tspan x="70" dy="0">The Moon stays half lit at all times.</tspan>
+    <tspan x="70" dy="34">Phases come from viewpoint; eclipses need a special line-up.</tspan>
   </text>
 
   <circle cx="150" cy="360" r="54" fill="#facc15" stroke="#f59e0b" stroke-width="6"/>
@@ -19,7 +20,7 @@
 
   <circle cx="468" cy="180" r="24" fill="#e2e8f0" stroke="#64748b" stroke-width="4"/>
   <path d="M468 156 A24 24 0 0 1 468 204" fill="#111827"/>
-  <text x="468" y="132" fill="#334155" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">quarter</text>
+  <text x="468" y="226" fill="#334155" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">quarter</text>
 
   <circle cx="288" cy="360" r="24" fill="#e2e8f0" stroke="#64748b" stroke-width="4"/>
   <ellipse cx="298" cy="360" rx="10" ry="22" fill="#111827"/>
@@ -30,14 +31,14 @@
 
   <rect x="822" y="184" width="352" height="336" rx="28" fill="#eff6ff" stroke="#bfdbfe" stroke-width="4"/>
   <text x="864" y="240" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Reading guide</text>
-  <text x="864" y="298" fill="#0f172a" font-family="Arial, sans-serif" font-size="28">
+  <text x="864" y="294" fill="#0f172a" font-family="Arial, sans-serif" font-size="24">
     <tspan x="864" dy="0">Phases: how much of the</tspan>
-    <tspan x="864" dy="36">sunlit half we can see.</tspan>
-    <tspan x="864" dy="48">Eclipse: a special line-up</tspan>
-    <tspan x="864" dy="36">where one body enters</tspan>
-    <tspan x="864" dy="36">another body's shadow.</tspan>
-    <tspan x="864" dy="48">The monthly phase pattern</tspan>
-    <tspan x="864" dy="36">is not Earth's shadow.</tspan>
+    <tspan x="864" dy="32">sunlit half we can see.</tspan>
+    <tspan x="864" dy="42">Eclipse: a special line-up</tspan>
+    <tspan x="864" dy="32">where one body enters</tspan>
+    <tspan x="864" dy="32">another body's shadow.</tspan>
+    <tspan x="864" dy="42">Monthly phases are not</tspan>
+    <tspan x="864" dy="32">caused by Earth's shadow.</tspan>
   </text>
 
   <rect x="78" y="594" width="1124" height="66" rx="20" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
