@@ -441,7 +441,7 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: `${M1_ASSET_BASE}/M1_L1/diagrams/m1_l1_distance_time_graph.svg`,
         visual_title: "Distance-time story board",
-        visual_caption: "The graph-agent plot keeps the axes, pause section, and steeper final segment visible on one proper distance-time graph.",
+        visual_caption: "The distance-time graph keeps the axes, pause section, and steeper final segment visible in one journey story.",
         visual_callouts: [
           "Graph height shows the recorded distance by that time.",
           "A flat section means the traveler is paused.",
@@ -452,7 +452,7 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: `${M1_ASSET_BASE}/M1_L2/diagrams/m1_l2_speed_time_graph.svg`,
         visual_title: "Speed-time graph",
-        visual_caption: "The graph-agent plot keeps graph height and graph slope separate so students can read speed and acceleration from the correct feature.",
+        visual_caption: "This graph keeps graph height and graph slope separate so speed and acceleration are read from the correct feature.",
         visual_callouts: [
           "Graph height at a chosen time gives the speed at that time.",
           "A rising line means positive acceleration.",
@@ -463,7 +463,7 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: `${M1_ASSET_BASE}/M1_L3/diagrams/m1_l3_signed_acceleration_graph.svg`,
         visual_title: "Signed velocity and acceleration graph",
-        visual_caption: "This graph-agent velocity-time plot keeps velocity sign on the axis and acceleration sign in the slope.",
+        visual_caption: "This velocity-time graph keeps velocity sign on the axis and acceleration sign in the slope.",
         visual_callouts: [
           "Velocity sign is read from whether the graph is above or below the axis.",
           "Acceleration sign is read from the slope direction.",
@@ -474,7 +474,7 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: `${M1_ASSET_BASE}/M1_L4/diagrams/m1_l4_constant_acceleration_graph.svg`,
         visual_title: "Constant-acceleration forecast graph",
-        visual_caption: "The graph-agent velocity-time forecast keeps one steady slope visible so students can see why the compact motion equations require constant acceleration.",
+        visual_caption: "This velocity-time forecast keeps one steady slope visible so the constant-acceleration condition is easy to see.",
         visual_callouts: [
           "A straight velocity-time line means one steady acceleration throughout.",
           "Graph and equation reasoning agree only while that condition holds.",
@@ -485,7 +485,7 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: `${M1_ASSET_BASE}/M1_L5/diagrams/m1_l5_speed_gradient_graph.svg`,
         visual_title: "Gradient meaning comparator",
-        visual_caption: "The M1 comparison now uses graph-agent plots, with one graph for distance-time and one for speed-time, so slope meaning stays tied to the axes.",
+        visual_caption: "The M1 comparison uses one distance-time graph and one speed-time graph so slope meaning stays tied to the axes.",
         visual_callouts: [
           "The paired graphs must be named before the slope is named.",
           "On distance-time, slope gives speed.",
@@ -496,7 +496,7 @@ function m1QuestionVisualMeta(lessonKey: string): QuestionVisualMeta | undefined
       return {
         image_url: `${M1_ASSET_BASE}/M1_L6/diagrams/m1_l6_area_distance_graph.svg`,
         visual_title: "Area-to-distance builder",
-        visual_caption: "The graph-agent speed-time plot keeps the shaded region under the graph so the total area can be read as total distance.",
+        visual_caption: "This speed-time graph keeps the shaded region under the graph so the total area can be read as total distance.",
         visual_callouts: [
           "On a speed-time graph, area accumulates distance.",
           "The whole shaded region matters, not just the outline shape.",
@@ -11719,14 +11719,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Read the mission log, not the lane",
-          caption: "This graph-agent distance-time plot labels the axes with units and pins each label to the exact feature it explains.",
+          caption: "This distance-time graph labels the axes with units and pins each label to the exact feature it explains.",
           image_url: `${M1_ASSET_BASE}/M1_L1/diagrams/m1_l1_distance_time_graph.svg`,
           highlights: ["Recorded progress, s (m), is graph height", "Mission clock, t (s), runs on the horizontal axis", "Slope = pace on that segment"],
         },
         {
           kind: "visual",
           title: "Same finish, different run story",
-          caption: "A second graph-agent comparison shows that equal final distance and time do not force identical motion histories.",
+          caption: "A second graph comparison shows that equal final distance and time do not force identical motion histories.",
           image_url: `${M1_ASSET_BASE}/M1_L1/diagrams/m1_l1_same_finish_graph.svg`,
           highlights: ["Run A pauses then catches up", "Run B keeps one steady slope", "Same final point can hide different pace stories"],
         },
@@ -11736,7 +11736,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Separate level from change",
-          caption: "The graph-agent speed-time plot makes graph height answer a speed question while slope answers an acceleration question.",
+          caption: "This speed-time graph makes graph height answer a speed question while slope answers an acceleration question.",
           image_url: `${M1_ASSET_BASE}/M1_L2/diagrams/m1_l2_speed_time_graph.svg`,
           highlights: ["Height = current speed", "Slope = rate of speed change", "Flat above zero = constant speed"],
         },
@@ -11746,7 +11746,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "See the signed velocity change",
-          caption: "The graph-agent velocity-time plot makes acceleration a directional rate instead of a synonym for going faster.",
+          caption: "This velocity-time graph makes acceleration a directional rate instead of a synonym for going faster.",
           image_url: `${M1_ASSET_BASE}/M1_L3/diagrams/m1_l3_signed_acceleration_graph.svg`,
           highlights: ["Velocity sign comes from the axis", "Slope sign gives the acceleration sign", "Crossing the axis does not flip the slope rule"],
         },
@@ -11756,7 +11756,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Choose the right forecast tool",
-          caption: "This graph-agent forecast plot helps students choose equations deliberately only when acceleration stays constant.",
+          caption: "This forecast graph helps students choose equations deliberately only when acceleration stays constant.",
           image_url: `${M1_ASSET_BASE}/M1_L4/diagrams/m1_l4_constant_acceleration_graph.svg`,
           highlights: ["One straight line means one steady acceleration", "Check the constant-acceleration condition", "Then pick the equation from the knowns and unknown"],
         },
@@ -11766,14 +11766,14 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Distance-time slope meaning",
-          caption: "The first graph-agent comparison locks slope to speed when the axes are distance and time.",
+          caption: "The first graph comparison locks slope to speed when the axes are distance and time.",
           image_url: `${M1_ASSET_BASE}/M1_L5/diagrams/m1_l5_distance_gradient_graph.svg`,
           highlights: ["Distance-time slope = speed", "The axes decide the rate meaning", "Steepness alone is not enough"],
         },
         {
           kind: "visual",
           title: "Speed-time slope meaning",
-          caption: "The second graph-agent comparison keeps the same style of tilt but changes the axes, so the slope now means acceleration.",
+          caption: "The second graph comparison keeps the same style of tilt but changes the axes, so the slope now means acceleration.",
           image_url: `${M1_ASSET_BASE}/M1_L5/diagrams/m1_l5_speed_gradient_graph.svg`,
           highlights: ["Speed-time slope = acceleration", "Graph type decides the meaning", "The same tilt can answer a different physics question"],
         },
@@ -11783,7 +11783,7 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
         {
           kind: "visual",
           title: "Build distance from area",
-          caption: "The graph-agent pace-log plot keeps the shaded region visible so total distance is read from the full area under the graph.",
+          caption: "This pace-log graph keeps the shaded region visible so total distance is read from the full area under the graph.",
           image_url: `${M1_ASSET_BASE}/M1_L6/diagrams/m1_l6_area_distance_graph.svg`,
           highlights: ["Area meaning comes from the axes", "The full shaded region gives total distance", "Different shapes can still give the same distance"],
         },

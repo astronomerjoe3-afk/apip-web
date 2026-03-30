@@ -229,7 +229,7 @@ export default function M1SimulationPanels(props: Props) {
           <GraphAgentFigure
             primarySrc="/lesson_assets/M1/M1_L1/diagrams/m1_l1_distance_time_graph.svg"
             primaryAlt="Distance-time story graph"
-            note="These M1 story graphs are now rendered from the physics graph agent, so the axes, scales, and plotted segments stay consistent with the lesson graphs students meet elsewhere in the module."
+            note="Use these two graphs to compare different journey stories that still end at the same final distance."
             secondarySrc="/lesson_assets/M1/M1_L1/diagrams/m1_l1_same_finish_graph.svg"
             secondaryAlt="Same finish comparison graph"
           />
@@ -276,7 +276,7 @@ export default function M1SimulationPanels(props: Props) {
           <GraphAgentFigure
             primarySrc="/lesson_assets/M1/M1_L2/diagrams/m1_l2_speed_time_graph.svg"
             primaryAlt="Speed-time graph"
-            note="The graph image stays on the graph-agent plot while your chosen numbers below let you test how changing the start, end, and time interval changes the midpoint speed and the slope."
+            note="Use the graph to compare the speed shown at one moment with the slope that shows how speed is changing over time."
           />
         }
         chips={
@@ -321,7 +321,7 @@ export default function M1SimulationPanels(props: Props) {
           <GraphAgentFigure
             primarySrc="/lesson_assets/M1/M1_L3/diagrams/m1_l3_signed_acceleration_graph.svg"
             primaryAlt="Velocity-time graph for signed acceleration"
-            note="This lesson now uses the graph-agent velocity plot directly, so sign reasoning is tied to a proper velocity-time graph instead of a separate sketch."
+            note="Read the sign from the change in velocity on the graph, not from a vague feeling about whether the object seems faster or slower."
           />
         }
         chips={
@@ -373,7 +373,7 @@ export default function M1SimulationPanels(props: Props) {
           <GraphAgentFigure
             primarySrc="/lesson_assets/M1/M1_L4/diagrams/m1_l4_constant_acceleration_graph.svg"
             primaryAlt="Constant-acceleration forecast graph"
-            note="The forecast board now uses the graph-agent straight-line velocity plot, so the constant-acceleration condition is shown on a proper graph before students use the equations."
+            note="The straight-line graph is the clue that acceleration is constant, which is why these equations apply."
           />
         }
         chips={
@@ -409,7 +409,7 @@ export default function M1SimulationPanels(props: Props) {
           <GraphAgentFigure
             primarySrc="/lesson_assets/M1/M1_L5/diagrams/m1_l5_distance_gradient_graph.svg"
             primaryAlt="Distance-time gradient graph"
-            note="Both comparison graphs now come straight from the graph agent, so students are reading two proper plotted graphs instead of one hand-drawn comparison sketch."
+            note="The two graphs share the same steepness on purpose, so you can compare how the axes change the meaning of the slope."
             secondarySrc="/lesson_assets/M1/M1_L5/diagrams/m1_l5_speed_gradient_graph.svg"
             secondaryAlt="Speed-time gradient graph"
           />
@@ -454,7 +454,7 @@ export default function M1SimulationPanels(props: Props) {
           <GraphAgentFigure
             primarySrc="/lesson_assets/M1/M1_L6/diagrams/m1_l6_area_distance_graph.svg"
             primaryAlt="Area under a speed-time graph"
-            note="The plotted pace-log area is now rendered through the graph agent, so the shaded distance region is tied to a proper speed-time graph instead of a custom sketch."
+            note="Split the shaded region into simple shapes first, then add their areas to explain the total distance."
           />
         }
         chips={
@@ -476,7 +476,7 @@ export default function M1SimulationPanels(props: Props) {
       controls={<>{control("Reference tilt", 1, 8, 1, fallbackAngle, () => {}, "")}</>}
       figure={
         <div className="rounded-2xl border border-dashed border-slate-300 bg-white/80 p-5 text-slate-600">
-          M1 explorer support is authored lesson by lesson, so this fallback card should not appear in normal M1 use.
+          This comparison board is loading. Use the lesson explorer controls to compare the graph patterns step by step.
         </div>
       }
       chips={<MetricChip label="Support" value="Check the lesson-specific M1 explorer branch." tone="rose" />}
