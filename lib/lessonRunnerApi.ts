@@ -1161,6 +1161,8 @@ function valueIndex(value: unknown): number {
 
 function normalizePhysicsSymbolsForMatching(value: string): string {
   return value
+    .replace(/[−–—‒﹣－]/g, "-")
+    .replace(/(^|[\s(])_(?=\d)/g, "$1-")
     .replace(/μ₀|μ0|mu0/gi, " mu0 ")
     .replace(/ε₀|ε0|epsilon0/gi, " epsilon0 ")
     .replace(/λ|Λ/g, " lambda ")
@@ -1197,6 +1199,8 @@ function normalizeOpenAnswer(value: unknown): string {
     .normalize("NFKD")
     .replace(/,/g, "")
     .replace(/[\u00B1]/g, "+/-")
+    .replace(/\bminus\s+(?=\d)/g, "-")
+    .replace(/\bnegative\s+(?=\d)/g, "-")
     .replace(/\bdegrees?\s*c\b/g, "c")
     .replace(/\bcelsius\b/g, "c")
     .replace(/joules?/g, "j")
@@ -6709,6 +6713,8 @@ function normalizeShoutyAssessmentText(value: string): string {
 
 function normalizeRenderedPhysicsText(value: string): string {
   return normalizeShoutyAssessmentText(value
+    .replace(/[−–—‒﹣－]/g, "-")
+    .replace(/(^|[\s(])_(?=\d)/g, "$1-")
     .replace(/\bmu\s*0\b/gi, "μ₀")
     .replace(/\bepsilon\s*0\b/gi, "ε₀")
     .replace(/\b([RrHh])0\b/g, "$1₀")
