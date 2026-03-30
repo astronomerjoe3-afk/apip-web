@@ -186,6 +186,212 @@ function GraphAgentFigure({
   );
 }
 
+type DistanceTimePoint = {
+  time: number;
+  distance: number;
+};
+
+function chartX(time: number, totalTime: number, left: number, right: number): number {
+  const span = Math.max(totalTime, 1);
+  return left + (time / span) * (right - left);
+}
+
+function chartY(distance: number, maxDistance: number, top: number, bottom: number): number {
+  const span = Math.max(maxDistance, 1);
+  return bottom - (distance / span) * (bottom - top);
+}
+
+function linePoints(
+  points: DistanceTimePoint[],
+  totalTime: number,
+  maxDistance: number,
+  left: number,
+  right: number,
+  top: number,
+  bottom: number,
+): string {
+  return points
+    .map((point) => `${chartX(point.time, totalTime, left, right)},${chartY(point.distance, maxDistance, top, bottom)}`)
+    .join(" ");
+}
+
+function DistanceTimeStoryFigure({
+  openingSpeed,
+  pauseTime,
+  closingSpeed,
+  totalTime,
+  finishDistance,
+  catchUpSpeed,
+  formatSimulationNumber,
+}: {
+  openingSpeed: number;
+  pauseTime: number;
+  closingSpeed: number;
+  totalTime: number;
+  finishDistance: number;
+  catchUpSpeed: number;
+  formatSimulationNumber: (value: number, digits?: number) => string;
+}) {
+  const left = 70;
+  const right = 592;
+  const top = 58;
+  const bottom = 232;
+  const maxDistance = Math.max(24, Math.ceil(finishDistance / 4) * 4);
+
+  const storyPoints: DistanceTimePoint[] = [
+    { time: 0, distance: 0 },
+    { time: 4, distance: openingSpeed * 4 },
+    { time: 4 + pauseTime, distance: openingSpeed * 4 },
+    { time: totalTime, distance: finishDistance },
+  ];
+
+  const comparisonRunB: DistanceTimePoint[] = [
+    { time: 0, distance: 0 },
+    { time: totalTime, distance: finishDistance },
+  ];
+
+  const storyPolyline = linePoints(storyPoints, totalTime, maxDistance, left, right, top, bottom);
+  const comparisonAPolyline = storyPolyline;
+  const comparisonBPolyline = linePoints(comparisonRunB, totalTime, maxDistance, left, right, top, bottom);
+
+  const firstMidX = chartX(2, totalTime, left, right);
+  const firstMidY = chartY((openingSpeed * 4) / 2, maxDistance, top, bottom) - 12;
+  const pauseMidX = chartX(4 + pauseTime / 2, totalTime, left, right);
+  const pauseMidY = chartY(openingSpeed * 4, maxDistance, top, bottom) - 14;
+  const closingMidX = chartX(4 + pauseTime + 2, totalTime, left, right);
+  const closingMidDistance = openingSpeed * 4 + closingSpeed * 2;
+  const closingMidY = chartY(closingMidDistance, maxDistance, top, bottom) - 12;
+  const runBLabelX = chartX(totalTime * 0.68, totalTime, left, right);
+  const runBLabelY = chartY(finishDistance * 0.68, maxDistance, top, bottom) - 12;
+
+  const ticks = Array.from({ length: 5 }, (_, index) => index / 4);
+
+  const renderGrid = () => (
+    <>
+      {ticks.map((ratio) => {
+        const x = left + ratio * (right - left);
+        const y = top + ratio * (bottom - top);
+        return (
+          <g key={`grid-${ratio}`}>
+            <line x1={x} y1={top} x2={x} y2={bottom} stroke="#1f2937" strokeWidth="1" />
+            <line x1={left} y1={y} x2={right} y2={y} stroke="#1f2937" strokeWidth="1" />
+          </g>
+        );
+      })}
+    </>
+  );
+
+  const renderAxisLabels = () => (
+    <>
+      <line x1={left} y1={bottom} x2={right} y2={bottom} stroke="#64748b" strokeWidth="2" />
+      <line x1={left} y1={top} x2={left} y2={bottom} stroke="#64748b" strokeWidth="2" />
+      <text x={(left + right) / 2} y="266" fill="#e2e8f0" fontSize="16" textAnchor="middle">
+        Time (s)
+      </text>
+      <text x="22" y={(top + bottom) / 2} fill="#e2e8f0" fontSize="16" textAnchor="middle" transform={`rotate(-90 22 ${(top + bottom) / 2})`}>
+        Distance from start (m)
+      </text>
+      <text x={left} y="250" fill="#94a3b8" fontSize="12" textAnchor="middle">
+        0
+      </text>
+      <text x={chartX(totalTime / 2, totalTime, left, right)} y="250" fill="#94a3b8" fontSize="12" textAnchor="middle">
+        {formatSimulationNumber(totalTime / 2, 1)}
+      </text>
+      <text x={right} y="250" fill="#94a3b8" fontSize="12" textAnchor="middle">
+        {formatSimulationNumber(totalTime, 0)}
+      </text>
+      <text x="54" y={bottom + 4} fill="#94a3b8" fontSize="12" textAnchor="end">
+        0
+      </text>
+      <text x="54" y={chartY(maxDistance / 2, maxDistance, top, bottom) + 4} fill="#94a3b8" fontSize="12" textAnchor="end">
+        {formatSimulationNumber(maxDistance / 2, 0)}
+      </text>
+      <text x="54" y={top + 4} fill="#94a3b8" fontSize="12" textAnchor="end">
+        {formatSimulationNumber(maxDistance, 0)}
+      </text>
+    </>
+  );
+
+  return (
+    <div className="space-y-4">
+      <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-950/95 p-4">
+        <svg viewBox="0 0 640 280" className="w-full">
+          <text x="320" y="28" fill="#f8fafc" fontSize="20" fontWeight="700" textAnchor="middle">
+            Distance-Time Story Board
+          </text>
+          <text x="320" y="48" fill="#cbd5e1" fontSize="13" textAnchor="middle">
+            Move the sliders and watch the journey shape change in real time.
+          </text>
+          {renderGrid()}
+          {renderAxisLabels()}
+          <polyline points={storyPolyline} fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          {storyPoints.map((point) => (
+            <circle
+              key={`story-point-${point.time}-${point.distance}`}
+              cx={chartX(point.time, totalTime, left, right)}
+              cy={chartY(point.distance, maxDistance, top, bottom)}
+              r="3.5"
+              fill="#38bdf8"
+            />
+          ))}
+          <text x={firstMidX} y={Math.max(top + 18, firstMidY)} fill="#bbf7d0" fontSize="12" textAnchor="middle">
+            opening slope = {formatSimulationNumber(openingSpeed, 0)} m/s
+          </text>
+          <text x={pauseMidX} y={Math.max(top + 18, pauseMidY)} fill="#fde68a" fontSize="12" textAnchor="middle">
+            pause = 0 slope for {pauseTime} s
+          </text>
+          <text x={closingMidX} y={Math.max(top + 18, closingMidY)} fill="#93c5fd" fontSize="12" textAnchor="middle">
+            closing slope = {formatSimulationNumber(closingSpeed, 0)} m/s
+          </text>
+        </svg>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 text-sm leading-6 text-slate-700">
+        Run A pauses and then catches up. Run B changes automatically so both journeys still finish at the same distance after the same total time.
+      </div>
+
+      <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-950/95 p-4">
+        <svg viewBox="0 0 640 280" className="w-full">
+          <text x="320" y="28" fill="#f8fafc" fontSize="20" fontWeight="700" textAnchor="middle">
+            Same Finish Comparison
+          </text>
+          <text x="320" y="48" fill="#cbd5e1" fontSize="13" textAnchor="middle">
+            Compare Run A's changing slope with Run B's steady slope over the same time.
+          </text>
+          {renderGrid()}
+          {renderAxisLabels()}
+          <polyline points={comparisonAPolyline} fill="none" stroke="#2563eb" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          <polyline points={comparisonBPolyline} fill="none" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          {storyPoints.map((point) => (
+            <circle
+              key={`comparison-point-${point.time}-${point.distance}`}
+              cx={chartX(point.time, totalTime, left, right)}
+              cy={chartY(point.distance, maxDistance, top, bottom)}
+              r="3.5"
+              fill="#2563eb"
+            />
+          ))}
+          <circle cx={right} cy={top + (bottom - top) - ((finishDistance / Math.max(maxDistance, 1)) * (bottom - top))} r="4" fill="#10b981" />
+          <rect x="474" y="66" width="116" height="52" rx="12" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+          <line x1="490" y1="85" x2="508" y2="85" stroke="#2563eb" strokeWidth="3" />
+          <text x="518" y="89" fill="#e2e8f0" fontSize="12">Run A</text>
+          <line x1="490" y1="104" x2="508" y2="104" stroke="#10b981" strokeWidth="3" />
+          <text x="518" y="108" fill="#e2e8f0" fontSize="12">Run B</text>
+          <text x={pauseMidX} y={Math.max(top + 18, pauseMidY)} fill="#fde68a" fontSize="12" textAnchor="middle">
+            Run A pauses here
+          </text>
+          <text x={runBLabelX} y={Math.max(top + 18, runBLabelY)} fill="#6ee7b7" fontSize="12" textAnchor="middle">
+            Run B steady slope = {formatSimulationNumber(catchUpSpeed, 2)} m/s
+          </text>
+          <text x={right - 10} y={chartY(finishDistance, maxDistance, top, bottom) - 10} fill="#e2e8f0" fontSize="12" textAnchor="end">
+            same finish
+          </text>
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 export default function M1SimulationPanels(props: Props) {
   const {
     lessonKey,
@@ -226,12 +432,14 @@ export default function M1SimulationPanels(props: Props) {
           </>
         }
         figure={
-          <GraphAgentFigure
-            primarySrc="/lesson_assets/M1/M1_L1/diagrams/m1_l1_distance_time_graph.svg"
-            primaryAlt="Distance-time story graph"
-            note="Use these two graphs to compare different journey stories that still end at the same final distance."
-            secondarySrc="/lesson_assets/M1/M1_L1/diagrams/m1_l1_same_finish_graph.svg"
-            secondaryAlt="Same finish comparison graph"
+          <DistanceTimeStoryFigure
+            openingSpeed={openingSpeed}
+            pauseTime={pauseTime}
+            closingSpeed={closingSpeed}
+            totalTime={totalTime}
+            finishDistance={finishDistance}
+            catchUpSpeed={catchUpSpeed}
+            formatSimulationNumber={formatSimulationNumber}
           />
         }
         chips={
