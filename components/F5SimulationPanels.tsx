@@ -385,27 +385,29 @@ export default function F5SimulationPanels({
   }
 
   if (lessonKey === "F5_L6") {
-    const innerLaps = Math.round(clamp(simBias, 1, 8));
-    const outerLaps = Math.max(1, Math.round(clamp(simMetricMeters, 1, 4)));
-    const rotationDays = Math.round(clamp(simDensityMass, 1, 3));
+    const sharedDays = Math.round(clamp(simDensityMass, 1, 6));
+    const innerLaps = Math.round(clamp(simBias, 2, 8));
+    const outerLag = Math.round(clamp(simMetricMeters, 1, 4));
+    const outerLaps = Math.max(1, innerLaps - outerLag);
+    const ratioLabel = `${innerLaps}:${outerLaps}`;
 
     return renderPanel(
       "Sky motion and scale",
       <>
         {sliderField(
-          "Inner-world laps in one shared interval",
+          "Shared time window",
+          `${sharedDays} day${sharedDays === 1 ? "" : "s"}`,
+          <input className="w-full" type="range" min="1" max="6" step="1" value={sharedDays} onChange={(e) => setSimDensityMass(Number(e.target.value))} />,
+        )}
+        {sliderField(
+          "Inner-world laps in that shared time window",
           `${innerLaps} laps`,
-          <input className="w-full" type="range" min="1" max="8" step="1" value={innerLaps} onChange={(e) => setSimBias(Number(e.target.value))} />,
+          <input className="w-full" type="range" min="2" max="8" step="1" value={innerLaps} onChange={(e) => setSimBias(Number(e.target.value))} />,
         )}
         {sliderField(
-          "Outer-world laps in the same interval",
-          `${outerLaps} laps`,
-          <input className="w-full" type="range" min="1" max="4" step="1" value={outerLaps} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />,
-        )}
-        {sliderField(
-          "Earth rotations",
-          `${rotationDays} days`,
-          <input className="w-full" type="range" min="1" max="3" step="1" value={rotationDays} onChange={(e) => setSimDensityMass(Number(e.target.value))} />,
+          "How much slower is the outer world?",
+          `${outerLag} fewer lap${outerLag === 1 ? "" : "s"}`,
+          <input className="w-full" type="range" min="1" max="4" step="1" value={outerLag} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />,
         )}
       </>,
       "Motion and scale board",
@@ -413,23 +415,28 @@ export default function F5SimulationPanels({
         <circle cx="116" cy="126" r="34" fill="#facc15" />
         <circle cx="276" cy="126" r="44" fill="none" stroke="#60a5fa" strokeWidth="4" />
         <circle cx="276" cy="126" r="84" fill="none" stroke="#cbd5e1" strokeWidth="3" strokeDasharray="8 8" />
+        <text x="320" y="30" fill="#334155" fontSize="16" textAnchor="middle">same time window = {sharedDays} day{sharedDays === 1 ? "" : "s"}</text>
         <text x="276" y="118" fill="#0f172a" fontSize="18" textAnchor="middle">inner</text>
         <text x="276" y="140" fill="#0f172a" fontSize="18" textAnchor="middle">{innerLaps} laps</text>
         <text x="450" y="118" fill="#0f172a" fontSize="18" textAnchor="middle">outer</text>
         <text x="450" y="140" fill="#0f172a" fontSize="18" textAnchor="middle">{outerLaps} laps</text>
-        <text x="450" y="184" fill="#475569" fontSize="16" textAnchor="middle">farther ring means a longer year</text>
+        <text x="450" y="184" fill="#475569" fontSize="16" textAnchor="middle">farther ring means fewer laps in the same time</text>
         <rect x="66" y="190" width="468" height="14" rx="7" fill="#cbd5e1" />
         <rect x="66" y="190" width="112" height="14" rx="7" fill="#38bdf8" />
         <text x="300" y="226" fill="#334155" fontSize="16" textAnchor="middle">scale bar is compressed for the drawing</text>
       </svg>,
       <>
-        {metricCard("Day clue", `${rotationDays} rotation${rotationDays === 1 ? "" : "s"}`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Year clue", outerLaps < innerLaps ? "outer world takes longer" : "compare same interval carefully", "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Day clue", `${sharedDays} day${sharedDays === 1 ? "" : "s"} is a rotation-timescale window`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Year clue", `inner vs outer laps = ${ratioLabel}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Apparent motion", "what we see in the sky", "border-violet-200 bg-violet-50 text-violet-900")}
         {metricCard("Scale warning", "drawing is compressed", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
-      ["Separate day from year.", "Use viewpoint language for apparent sky motion.", "Trust the pattern without assuming the sketch is true scale."],
-      "This final board keeps daily appearance, yearly timing, and compressed Solar System scale in separate slots so the story stays coherent.",
+      [
+        "Compare both worlds over one shared time window.",
+        "If the outer ring is farther out, it should complete fewer laps in that same time.",
+        "Use one day for rotation, and one year for orbit, instead of collapsing them together.",
+      ],
+      "This board compares two orbit sizes over the same number of days. When the outer world completes fewer laps than the inner world, students can see why a farther orbit means a longer year, even though the sketch compresses the real distances.",
     );
   }
 
