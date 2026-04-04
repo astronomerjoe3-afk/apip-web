@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback, useState } from "react";
+
 import type { SupportInquiry } from "./types";
 
 type SupportInboxPanelProps = {
@@ -33,7 +35,42 @@ function contextLabel(inquiry: SupportInquiry): string | null {
   return parts.length ? parts.join(" | ") : null;
 }
 
+function previewMessage(value?: string | null, maxLength = 180): string {
+  const text = String(value || "").trim();
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trimEnd() + "...";
+}
+
+function gmailDraftUrl(inquiry: SupportInquiry): string {
+  const params = new URLSearchParams({
+    view: "cm",
+    fs: "1",
+    to: inquiry.student_email || "",
+    su: `Re: ${inquiry.subject}`,
+  });
+  return `https://mail.google.com/mail/?${params.toString()}`;
+}
+
 export default function SupportInboxPanel({ inquiries, loading, moduleId, resolvingId, onResolve }: SupportInboxPanelProps) {
+  const [copiedToken, setCopiedToken] = useState<string>("");
+
+  const copyText = useCallback(async (value: string, token: string): Promise<void> => {
+    const text = String(value || "").trim();
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedToken(token);
+      window.setTimeout(() => {
+        setCopiedToken((current) => (current === token ? "" : current));
+      }, 1600);
+    } catch {
+      setCopiedToken(`manual-${token}`);
+      window.setTimeout(() => {
+        setCopiedToken((current) => (current === `manual-${token}` ? "" : current));
+      }, 2200);
+    }
+  }, []);
+
   return (
     <section className="admin-card">
       <div className="admin-section-header admin-section-header-compact">
@@ -78,7 +115,39 @@ export default function SupportInboxPanel({ inquiries, loading, moduleId, resolv
 
               <div>
                 <div style={{ fontSize: "1.02rem", fontWeight: 900, color: "#10233f" }}>{inquiry.subject}</div>
-                <div style={{ marginTop: "0.35rem", color: "#46566b", lineHeight: 1.65 }}>{inquiry.message}</div>
+                <div
+                  style={{
+                    marginTop: "0.35rem",
+                    color: "#46566b",
+                    lineHeight: 1.65,
+                    whiteSpace: "pre-wrap",
+                    overflowWrap: "anywhere",
+                  }}
+                >
+                  {previewMessage(inquiry.message)}
+                </div>
+                {String(inquiry.message || "").trim().length > 180 ? (
+                  <details style={{ marginTop: "0.55rem" }}>
+                    <summary style={{ cursor: "pointer", color: "#1d4ed8", fontWeight: 700 }}>
+                      View full message
+                    </summary>
+                    <div
+                      style={{
+                        marginTop: "0.65rem",
+                        padding: "0.9rem",
+                        borderRadius: "14px",
+                        border: "1px solid rgba(16, 35, 63, 0.12)",
+                        background: "rgba(248, 250, 252, 0.92)",
+                        color: "#334155",
+                        lineHeight: 1.7,
+                        whiteSpace: "pre-wrap",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      {inquiry.message}
+                    </div>
+                  </details>
+                ) : null}
               </div>
 
               <div style={{ display: "grid", gap: "0.3rem", color: "#64748b", fontSize: "0.94rem" }}>
@@ -96,12 +165,29 @@ export default function SupportInboxPanel({ inquiries, loading, moduleId, resolv
               {inquiry.student_email || onResolve ? (
                 <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                   {inquiry.student_email ? (
-                    <a
-                      className="admin-btn admin-btn-secondary"
-                      href={`mailto:${inquiry.student_email}?subject=${encodeURIComponent(`Re: ${inquiry.subject}`)}`}
-                    >
-                      Reply by email
-                    </a>
+                    <>
+                      <a
+                        className="admin-btn admin-btn-secondary"
+                        href={`mailto:${inquiry.student_email}?subject=${encodeURIComponent(`Re: ${inquiry.subject}`)}`}
+                      >
+                        Reply by email
+                      </a>
+                      <a
+                        className="admin-btn admin-btn-secondary"
+                        href={gmailDraftUrl(inquiry)}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Open Gmail draft
+                      </a>
+                      <button
+                        className="admin-btn admin-btn-secondary"
+                        onClick={() => void copyText(inquiry.student_email || "", `email-${inquiry.id}`)}
+                        type="button"
+                      >
+                        {copiedToken === `email-${inquiry.id}` ? "Email copied" : copiedToken === `manual-email-${inquiry.id}` ? "Copy blocked" : "Copy email"}
+                      </button>
+                    </>
                   ) : null}
                   {onResolve ? (
                     <button
@@ -113,6 +199,11 @@ export default function SupportInboxPanel({ inquiries, loading, moduleId, resolv
                       {resolvingId === inquiry.id ? "Resolving..." : "Mark resolved"}
                     </button>
                   ) : null}
+                </div>
+              ) : null}
+              {copiedToken === `manual-email-${inquiry.id}` ? (
+                <div style={{ color: "#64748b", fontSize: "0.92rem" }}>
+                  Clipboard access was blocked in this browser. You can still use the Gmail draft or copy the address manually from the card.
                 </div>
               ) : null}
             </article>
