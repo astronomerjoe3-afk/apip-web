@@ -6,6 +6,8 @@ type SupportInboxPanelProps = {
   inquiries: SupportInquiry[];
   loading: boolean;
   moduleId: string;
+  resolvingId?: string;
+  onResolve?: (inquiryId: string) => Promise<void> | void;
 };
 
 function formatTimestamp(value?: string | null): string {
@@ -15,7 +17,23 @@ function formatTimestamp(value?: string | null): string {
   return parsed.toLocaleString();
 }
 
-export default function SupportInboxPanel({ inquiries, loading, moduleId }: SupportInboxPanelProps) {
+function startCase(value?: string | null): string {
+  const normalized = String(value || "").replace(/[_-]+/g, " ").trim();
+  if (!normalized) return "-";
+  return normalized
+    .split(/\s+/)
+    .map((token) => token.charAt(0).toUpperCase() + token.slice(1))
+    .join(" ");
+}
+
+function contextLabel(inquiry: SupportInquiry): string | null {
+  const modulePart = inquiry.module_id || inquiry.module_title;
+  const lessonPart = inquiry.lesson_title || inquiry.lesson_id;
+  const parts = [modulePart, lessonPart].filter(Boolean);
+  return parts.length ? parts.join(" | ") : null;
+}
+
+export default function SupportInboxPanel({ inquiries, loading, moduleId, resolvingId, onResolve }: SupportInboxPanelProps) {
   return (
     <section className="admin-card">
       <div className="admin-section-header admin-section-header-compact">
@@ -52,9 +70,9 @@ export default function SupportInboxPanel({ inquiries, loading, moduleId }: Supp
                   className="admin-chip"
                   style={{ background: "rgba(219, 234, 254, 0.9)", color: "#1d4ed8" }}
                 >
-                  {inquiry.category}
+                  {startCase(inquiry.category)}
                 </span>
-                <span className="admin-chip">{inquiry.status}</span>
+                <span className="admin-chip">{startCase(inquiry.status)}</span>
                 <span style={{ opacity: 0.7 }}>{formatTimestamp(inquiry.created_utc)}</span>
               </div>
 
@@ -67,22 +85,34 @@ export default function SupportInboxPanel({ inquiries, loading, moduleId }: Supp
                 <div>
                   From: <strong>{inquiry.student_email || inquiry.student_uid || "Unknown student"}</strong>
                 </div>
-                {(inquiry.lesson_id || inquiry.module_id) ? (
+                {contextLabel(inquiry) ? (
                   <div>
-                    Context: {[inquiry.module_id || inquiry.module_title, inquiry.lesson_id || inquiry.lesson_title].filter(Boolean).join(" | ")}
+                    Context: {contextLabel(inquiry)}
                   </div>
                 ) : null}
                 {inquiry.page_path ? <div>Page: {inquiry.page_path}</div> : null}
               </div>
 
-              {inquiry.student_email ? (
+              {inquiry.student_email || onResolve ? (
                 <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                  <a
-                    className="admin-btn admin-btn-secondary"
-                    href={`mailto:${inquiry.student_email}?subject=${encodeURIComponent(`Re: ${inquiry.subject}`)}`}
-                  >
-                    Reply by email
-                  </a>
+                  {inquiry.student_email ? (
+                    <a
+                      className="admin-btn admin-btn-secondary"
+                      href={`mailto:${inquiry.student_email}?subject=${encodeURIComponent(`Re: ${inquiry.subject}`)}`}
+                    >
+                      Reply by email
+                    </a>
+                  ) : null}
+                  {onResolve ? (
+                    <button
+                      className="admin-btn admin-btn-secondary"
+                      onClick={() => void onResolve(inquiry.id)}
+                      type="button"
+                      disabled={resolvingId === inquiry.id}
+                    >
+                      {resolvingId === inquiry.id ? "Resolving..." : "Mark resolved"}
+                    </button>
+                  ) : null}
                 </div>
               ) : null}
             </article>

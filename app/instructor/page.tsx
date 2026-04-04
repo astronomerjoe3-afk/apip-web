@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState, type ChangeEvent } from "rea
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
-import { apipGet } from "../../lib/apipApi";
+import { apipGet, apipPost } from "../../lib/apipApi";
 import { auth } from "../../lib/firebase";
 import { getClientRole, isAcademicLeadRole, isInstitutionStaffRole, roleDisplayName } from "../../lib/authRouting";
 import { signOutEverywhere } from "../../lib/sessionClient";
@@ -30,6 +30,11 @@ import type { ApiResp, ReadinessFilter, Role, SupportAction, SupportInquiry, Upl
 type SupportInboxResp = {
   ok: boolean;
   inquiries: SupportInquiry[];
+};
+
+type SupportInquiryActionResp = {
+  ok: boolean;
+  request?: SupportInquiry;
 };
 
 function summarizeWarnings(items: string[]): string[] {
@@ -69,6 +74,7 @@ export default function InstructorPage() {
   const [warnings, setWarnings] = useState<string[]>([]);
   const [supportInquiries, setSupportInquiries] = useState<SupportInquiry[]>([]);
   const [supportLoading, setSupportLoading] = useState<boolean>(true);
+  const [resolvingInquiryId, setResolvingInquiryId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [search, setSearch] = useState<string>("");
   const [readinessFilter, setReadinessFilter] = useState<ReadinessFilter>("all");
@@ -219,6 +225,20 @@ export default function InstructorPage() {
     setUploadQueue((current) => current.filter((item) => item.id !== uploadId));
   }, []);
 
+  const resolveInquiry = useCallback(async (inquiryId: string): Promise<void> => {
+    if (!inquiryId || resolvingInquiryId) return;
+    setResolvingInquiryId(inquiryId);
+    setErr("");
+    try {
+      await apipPost<SupportInquiryActionResp, Record<string, never>>(`/instructor/help-requests/${encodeURIComponent(inquiryId)}/resolve`, {});
+      setSupportInquiries((current) => current.filter((item) => item.id !== inquiryId));
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+    } finally {
+      setResolvingInquiryId("");
+    }
+  }, [resolvingInquiryId]);
+
   const assignAction = useCallback((uid: string, action: SupportAction) => {
     setSupportActions((current) => ({ ...current, [uid]: action }));
   }, []);
@@ -282,7 +302,13 @@ export default function InstructorPage() {
       <div className="admin-layout">
         <div className="admin-stack">
           <OverviewPanel moduleId={moduleId} cohortPulse={cohortPulse} summary={summary} onModuleChange={setModuleId} />
-          <SupportInboxPanel inquiries={supportInquiries} loading={supportLoading} moduleId={moduleId} />
+          <SupportInboxPanel
+            inquiries={supportInquiries}
+            loading={supportLoading}
+            moduleId={moduleId}
+            resolvingId={resolvingInquiryId}
+            onResolve={resolveInquiry}
+          />
           <CohortMap cohortSize={summary.cohortSize} items={misconceptionMap} />
           <RosterPanel
             rows={filteredStudents}
