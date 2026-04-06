@@ -391,6 +391,24 @@ function normalizeLessonDisplayMultiline(value: string): string {
     .join("\n");
 }
 
+function preserveLeadingTechnicalWordSymbol(term: string, meaning: string): string {
+  const normalizedTerm = String(term || "").trim();
+  const normalizedMeaning = String(meaning || "").trim();
+  if (!normalizedTerm || !normalizedMeaning) return normalizedMeaning;
+  if (normalizedTerm.length !== 1) return normalizedMeaning;
+  if (normalizedTerm !== normalizedTerm.toLowerCase() || normalizedTerm === normalizedTerm.toUpperCase()) {
+    return normalizedMeaning;
+  }
+
+  const capitalizedTerm = normalizedTerm.toUpperCase();
+  if (!normalizedMeaning.startsWith(capitalizedTerm)) return normalizedMeaning;
+
+  const nextChar = normalizedMeaning.charAt(capitalizedTerm.length);
+  if (nextChar && !/[\s=:(-]/.test(nextChar)) return normalizedMeaning;
+
+  return `${normalizedTerm}${normalizedMeaning.slice(capitalizedTerm.length)}`;
+}
+
 function dedupeSupportTextItems(items: string[] = [], reserved: string[] = []): string[] {
   const seen = new Set(reserved.map(normalizeSupportText).filter(Boolean));
   return items.filter((item) => {
@@ -1391,18 +1409,25 @@ export default function LessonRunner({
 
             {section.technical_words?.length ? (
               <div className="mt-5 grid gap-4 md:grid-cols-2">
-                {section.technical_words.map((entry) => (
-                  <div key={entry.term} className="rounded-2xl border border-sky-100 bg-sky-50/60 p-4 shadow-sm">
-                    <p className="text-base font-semibold text-slate-900">{normalizeLessonDisplayText(entry.term)}</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-700">{normalizeLessonDisplayMultiline(entry.meaning)}</p>
-                    {entry.why_it_matters ? (
-                      <p className="mt-3 text-sm leading-6 text-slate-600">
-                        <span className="font-medium text-slate-700">Why it matters:</span>{" "}
-                        {normalizeLessonDisplayMultiline(entry.why_it_matters)}
-                      </p>
-                    ) : null}
-                  </div>
-                ))}
+                {section.technical_words.map((entry) => {
+                  const displayTerm = normalizeLessonDisplayText(entry.term);
+                  const displayMeaning = preserveLeadingTechnicalWordSymbol(
+                    displayTerm,
+                    normalizeLessonDisplayMultiline(entry.meaning),
+                  );
+                  return (
+                    <div key={entry.term} className="rounded-2xl border border-sky-100 bg-sky-50/60 p-4 shadow-sm">
+                      <p className="text-base font-semibold text-slate-900">{displayTerm}</p>
+                      <p className="mt-2 text-sm leading-6 text-slate-700">{displayMeaning}</p>
+                      {entry.why_it_matters ? (
+                        <p className="mt-3 text-sm leading-6 text-slate-600">
+                          <span className="font-medium text-slate-700">Why it matters:</span>{" "}
+                          {normalizeLessonDisplayMultiline(entry.why_it_matters)}
+                        </p>
+                      ) : null}
+                    </div>
+                  );
+                })}
               </div>
             ) : null}
 
