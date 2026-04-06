@@ -10155,6 +10155,43 @@ function workedExampleAssessmentEntries(
     });
 }
 
+function normalizeWorkedExamplePromptKey(prompt: string): string {
+  return normalizePromptKey(prompt)
+    .replace(/^state the (?:strongest|clearest|correct) physics conclusion about /, "state the physics conclusion about ")
+    .replace(/^state the (?:strongest|clearest|correct) conclusion about /, "state the conclusion about ");
+}
+
+function workedExampleSubstantiveAnswerKey(answer: string): string {
+  const answerTokens = meaningfulOpenAnswerTokens(answer);
+  if (answerTokens.length < 5) return "";
+  if (!/[a-z]/i.test(answer)) return "";
+  return normalizePromptKey(answer);
+}
+
+function dedupeWorkedExampleEntries(
+  entries: { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string }[]
+): { prompt: string; steps: string[]; answer: string; answerReason: string; whyItMatters: string }[] {
+  const seenPrompts = new Set<string>();
+  const seenNormalizedPrompts = new Set<string>();
+  const seenSubstantiveAnswers = new Set<string>();
+
+  return entries.filter((entry) => {
+    const promptKey = normalizePromptKey(entry.prompt);
+    if (!promptKey || seenPrompts.has(promptKey)) return false;
+
+    const normalizedPromptKey = normalizeWorkedExamplePromptKey(entry.prompt);
+    if (normalizedPromptKey && seenNormalizedPrompts.has(normalizedPromptKey)) return false;
+
+    const substantiveAnswerKey = workedExampleSubstantiveAnswerKey(entry.answer);
+    if (substantiveAnswerKey && seenSubstantiveAnswers.has(substantiveAnswerKey)) return false;
+
+    seenPrompts.add(promptKey);
+    if (normalizedPromptKey) seenNormalizedPrompts.add(normalizedPromptKey);
+    if (substantiveAnswerKey) seenSubstantiveAnswers.add(substantiveAnswerKey);
+    return true;
+  });
+}
+
 function physicsFirstWorkedExamplePrompt(lesson: UnknownRecord, value: string): string {
   const prompt = normalizeRenderedPhysicsText(text(value)).trim();
   if (
@@ -10675,9 +10712,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     .filter((entry) => !workedExampleUsesLessonAnalogy(entry, lesson))
     .filter((entry) => !workedExampleUsesRelationSelectionLanguage(entry, lesson));
   const assessmentExamples = workedExampleAssessmentEntries(lesson);
-  const mergedExamples = [...authoredExamples, ...assessmentExamples].filter((entry, index, entries) =>
-    entries.findIndex((candidate) => normalizePromptKey(candidate.prompt) === normalizePromptKey(entry.prompt)) === index
-  );
+  const mergedExamples = dedupeWorkedExampleEntries([...authoredExamples, ...assessmentExamples]);
   const firstPrompt = text(asRecord(itemsFrom(lesson, "transfer")[0]).prompt) || text(asRecord(itemsFrom(lesson, "diagnostic")[0]).prompt) || "Use the key idea from this lesson to solve a similar problem.";
 
   if (mergedExamples.length > 0) {
