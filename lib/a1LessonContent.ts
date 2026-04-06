@@ -113,21 +113,21 @@ const A1_SIMULATION_COPY: Record<string, A1SimulationCopy> = {
     takeaway: "A strong particle story begins with clean classification of messengers, travelers, and nucleus bundles.",
   },
   A1_L2: {
-    title: "Hadron builder lab",
-    instructions: "Use the quark-packing board to compare three-quark crates with quark-antiquark pair parcels before naming the hadron family.",
-    taskPrompt: "Build several hadrons, then explain why quark composition is a stronger classification rule than size or charge alone.",
+    title: "Quark packing lab",
+    instructions: "Use the quark-packing board to compare three-quark bundles with quark-antiquark pair bundles before deciding whether the particle is a baryon or a meson.",
+    taskPrompt: "Build several quark bundles, then explain why quark composition is a stronger classification rule than size or charge alone.",
     exploreSteps: [
       "Start with a known baryon and count the quarks.",
       "Switch on an antiquark and compare the new packing rule.",
-      "Use the final composition to classify the finished hadron.",
+      "Use the final composition to decide whether the finished particle is a baryon or a meson.",
     ],
     watchFor: [
       "Three quarks means baryon.",
       "Quark plus antiquark means meson.",
-      "Hadron is the umbrella family, not the final category itself.",
+      "Use quark packing before size or charge.",
     ],
-    tryFirst: "Compare a proton with a pion-like pair and say what changed in the packing before you talk about charge.",
-    takeaway: "Hadron classification is strongest when the quark-packing rule is read first.",
+    tryFirst: "Compare a proton with a quark-antiquark pair and say what changed in the packing before you talk about charge.",
+    takeaway: "Baryon-versus-meson classification is strongest when the quark-packing rule is read first.",
   },
   A1_L3: {
     title: "Antimatter pair lab",
