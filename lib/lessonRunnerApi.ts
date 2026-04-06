@@ -827,6 +827,49 @@ function prioritizePoolForAttempt(pool: UnknownRecord[], nonce: unknown, seedLab
     ? [...preferred, ...ordered.filter((item) => blockedIds.has(text(asRecord(item).id)))]
     : ordered;
 }
+
+function masteryConceptGroup(item: UnknownRecord): string {
+  const prompt = renderedPromptText(item);
+  const explicitSkill = [
+    ...asList(item.skill_tags),
+    ...asList(item.skillTags),
+  ]
+    .map((entry) => normalizePromptKey(text(entry)))
+    .find(Boolean);
+  if (explicitSkill) return `skill:${explicitSkill}`;
+
+  const misconception = normalizePromptKey(resolvedMisconceptionTag(item, prompt) || "");
+  if (misconception) return `mis:${misconception}`;
+
+  const correctAnswer = normalizePromptKey(resolvedCorrectAnswer(item));
+  if (correctAnswer && correctAnswer !== normalizePromptKey("Review the lesson idea and try again.")) {
+    return `answer:${correctAnswer}`;
+  }
+
+  const focus = normalizePromptKey(text(item.teaching_focus || item.teachingFocus || item.hint));
+  if (focus) return `focus:${focus}`;
+
+  return `prompt:${normalizePromptKey(prompt)}`;
+}
+
+function diversifyMasteryPool(pool: UnknownRecord[]): UnknownRecord[] {
+  const seenGroups = new Set<string>();
+  const uniqueFirst: UnknownRecord[] = [];
+  const overflow: UnknownRecord[] = [];
+
+  for (const item of pool) {
+    const group = masteryConceptGroup(asRecord(item));
+    if (!seenGroups.has(group)) {
+      seenGroups.add(group);
+      uniqueFirst.push(asRecord(item));
+      continue;
+    }
+    overflow.push(asRecord(item));
+  }
+
+  return [...uniqueFirst, ...overflow];
+}
+
 function mergeAttemptIds(poolIdsForLesson: string[], priorUsedIds: string[], askedIds: string[]): { lastIds: string[]; usedIds: string[] } {
   const cleanAskedIds = askedIds.filter((id) => poolIdsForLesson.includes(id));
   const mergedUsedIds = Array.from(new Set([
@@ -884,7 +927,9 @@ function writeConceptGateAttemptHistory(moduleId: string, lessonId: string, less
 function masteryPoolForAttempt(moduleId: string, lessonId: string, lesson: UnknownRecord, nonce: unknown): UnknownRecord[] {
   const pool = masteryItems(lesson).map(asRecord);
   const history = readAttemptHistory(moduleId, lessonId);
-  return prioritizePoolForAttempt(pool, nonce, "mastery", history.masteryUsedIds || [], history.masteryLastIds || []);
+  return diversifyMasteryPool(
+    prioritizePoolForAttempt(pool, nonce, "mastery", history.masteryUsedIds || [], history.masteryLastIds || [])
+  );
 }
 
 function writeMasteryAttemptHistory(moduleId: string, lessonId: string, lesson: UnknownRecord, askedIds: string[]): void {
