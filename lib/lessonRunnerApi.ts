@@ -1793,6 +1793,41 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ]);
   }
 
+  const isA1L2MechanismPrompt =
+    itemIdUpper === "A1L2_D9" ||
+    itemIdUpper === "A1-L2-D9" ||
+    itemIdUpper === "A1L2_M8" ||
+    itemIdUpper === "A1-L2-M8" ||
+    promptKeyCore === "what mechanism should stay visible when you explain quarks baryons and mesons" ||
+    promptKeyCore === "what lesson mechanism must remain visible in this new quarks baryons and mesons case";
+
+  if (isA1L2MechanismPrompt) {
+    return (
+      includesAnyPhrase(candidate, [
+        "quark composition",
+        "quark compositions",
+        "quark packing",
+        "quark packing rule",
+        "packing rule",
+        "composition rule",
+        "quark structure",
+        "quark arrangement",
+        "three quarks or a quark antiquark pair",
+        "three quarks vs quark antiquark pair",
+        "three quark vs quark antiquark pair",
+        "three-quark vs quark-antiquark pair",
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["quark", "quarks"],
+        ["composition", "packing", "structure", "arrangement", "rule"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["three quarks", "three-quark", "three quark"],
+        ["quark antiquark pair", "quark-antiquark pair", "antiquark pair"],
+      ])
+    );
+  }
+
   const isOrbitVsRigidTrackPrompt =
     promptKeyCore === "how is an orbit different from a rigid track" ||
     promptKeyCore === "why is it weak to describe an orbit as a rigid track";
