@@ -1,30 +1,91 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0b1020"/>
-      <stop offset="100%" stop-color="#172554"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#eef4ff"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#db2777"/>
+    </marker>
+    <style>
+      .title { font: 700 42px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 24px Arial, sans-serif; fill: #475569; }
+      .panel-title { font: 700 28px Arial, sans-serif; fill: #0f172a; }
+      .body { font: 21px Arial, sans-serif; fill: #334155; }
+      .small { font: 18px Arial, sans-serif; fill: #475569; }
+      .ledger { font: 700 20px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 700 22px Arial, sans-serif; fill: white; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <text x="70" y="70" class="title">Antiparticles, Pair Production, and Annihilation</text>
+  <text x="70" y="108" class="subtitle">Read both processes as balanced events: mirror partners match, threshold matters, and the ledger still has to close.</text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="60" y="150" width="550" height="470" rx="28" fill="#ffffff" stroke="#c7d2fe" stroke-width="3"/>
+  <rect x="670" y="150" width="550" height="470" rx="28" fill="#ffffff" stroke="#c7d2fe" stroke-width="3"/>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <text x="95" y="200" class="panel-title">Pair production</text>
+  <text x="95" y="232" class="body">A photon with enough energy can become an electron and a positron.</text>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Antiparticles, Pair Production and Annihilation</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Visualise antiparticles, pair production and annihilation inside the Particle-Port Exchange Model.</text>
+  <circle cx="165" cy="335" r="34" fill="#facc15" stroke="#eab308" stroke-width="3"/>
+  <text x="165" y="343" text-anchor="middle" class="label">gamma</text>
+  <line x1="205" y1="335" x2="305" y2="335" stroke="#f59e0b" stroke-width="8" marker-end="url(#arrow-gold)"/>
+
+  <circle cx="340" cy="335" r="10" fill="#0f172a"/>
+  <line x1="350" y1="330" x2="470" y2="245" stroke="#2563eb" stroke-width="7" marker-end="url(#arrow-blue)"/>
+  <line x1="350" y1="340" x2="470" y2="425" stroke="#db2777" stroke-width="7" marker-end="url(#arrow-pink)"/>
+
+  <circle cx="495" cy="225" r="28" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
+  <text x="495" y="233" text-anchor="middle" class="label">e-</text>
+  <circle cx="495" cy="445" r="28" fill="#f472b6" stroke="#db2777" stroke-width="3"/>
+  <text x="495" y="453" text-anchor="middle" class="label">e+</text>
+
+  <circle cx="392" cy="450" r="46" fill="#fdba74" stroke="#f97316" stroke-width="4"/>
+  <text x="392" y="446" text-anchor="middle" class="ledger">near</text>
+  <text x="392" y="470" text-anchor="middle" class="ledger">nucleus</text>
+
+  <text x="95" y="520" class="body">Threshold clue: the incoming photon must carry enough energy to make both partners.</text>
+  <text x="95" y="555" class="small">Charge ledger: 0 -&gt; (-1) + (+1) = 0</text>
+  <text x="95" y="585" class="small">Mirror-partner clue: same mass, opposite charge.</text>
+
+  <text x="705" y="200" class="panel-title">Annihilation</text>
+  <text x="705" y="232" class="body">An electron and a positron can meet and turn back into photon energy.</text>
+
+  <circle cx="785" cy="265" r="28" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
+  <text x="785" y="273" text-anchor="middle" class="label">e-</text>
+  <circle cx="785" cy="405" r="28" fill="#f472b6" stroke="#db2777" stroke-width="3"/>
+  <text x="785" y="413" text-anchor="middle" class="label">e+</text>
+
+  <line x1="815" y1="275" x2="930" y2="335" stroke="#2563eb" stroke-width="7" marker-end="url(#arrow-blue)"/>
+  <line x1="815" y1="395" x2="930" y2="335" stroke="#db2777" stroke-width="7" marker-end="url(#arrow-pink)"/>
+  <circle cx="950" cy="335" r="10" fill="#0f172a"/>
+
+  <line x1="960" y1="330" x2="1090" y2="245" stroke="#f59e0b" stroke-width="8" marker-end="url(#arrow-gold)"/>
+  <line x1="960" y1="340" x2="1090" y2="425" stroke="#f59e0b" stroke-width="8" marker-end="url(#arrow-gold)"/>
+
+  <circle cx="1115" cy="225" r="34" fill="#facc15" stroke="#eab308" stroke-width="3"/>
+  <text x="1115" y="233" text-anchor="middle" class="label">gamma</text>
+  <circle cx="1115" cy="445" r="34" fill="#facc15" stroke="#eab308" stroke-width="3"/>
+  <text x="1115" y="453" text-anchor="middle" class="label">gamma</text>
+
+  <text x="705" y="520" class="body">Conservation clue: the partner charges cancel, so the event can close cleanly.</text>
+  <text x="705" y="555" class="small">Charge ledger: (-1) + (+1) -&gt; 0</text>
+  <text x="705" y="585" class="small">Energy clue: the rest mass reappears as outgoing photons.</text>
+
+  <rect x="70" y="645" width="1140" height="44" rx="20" fill="url(#header)"/>
+  <text x="640" y="674" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="white">
+    Same event logic both ways: check mirror partners, check threshold, and check that the before-and-after ledger still balances.
+  </text>
 </svg>
