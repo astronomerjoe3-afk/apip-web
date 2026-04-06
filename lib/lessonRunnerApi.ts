@@ -1491,6 +1491,32 @@ function canonicalAssessmentOverride(item: UnknownRecord): UnknownRecord | null 
     };
   }
 
+  if (
+    itemId === "A1L2_C7" ||
+    itemId === "A1-L2-C7" ||
+    promptKey === "which definition best matches hadron here"
+  ) {
+    const choices = [
+      "A hadron is the umbrella family for baryons and mesons.",
+      "A baryon is a hadron made from three quarks.",
+      "A meson is a hadron made from a quark-antiquark pair.",
+      "A quark is a fundamental particle that combines to form hadrons.",
+    ];
+    const answerIndex = 0;
+    const hint = "Use the hadron-family idea taught in this lesson before later interaction details are introduced.";
+    const explanation = "In this lesson, hadron is the umbrella family containing baryons and mesons, so that is the best-matched definition here.";
+    return {
+      ...item,
+      id: itemId || "A1L2_C7",
+      prompt: "Which definition best matches hadron here?",
+      choices,
+      answer_index: answerIndex,
+      hint,
+      feedback: choices.map((_, index) => (index === answerIndex ? explanation : hint)),
+      correct_answer: choices[answerIndex],
+    };
+  }
+
   return null;
 }
 
