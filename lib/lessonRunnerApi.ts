@@ -6320,6 +6320,10 @@ function isA1L1MetaMasteryPrompt(prompt: string): boolean {
   return (
     normalized.includes("main comparison visible in a new subatomic inventory case") ||
     normalized.includes("which transfer statement best uses the analogy") ||
+    normalized.includes("which definition still matters most when you transfer") ||
+    normalized.includes("which relation belongs here") ||
+    normalized.includes("which relation clue best belongs to subatomic inventory") ||
+    normalized.includes("which relation or rule should guide a fresh subatomic inventory check") ||
     normalized.includes("which condition check should travel with particle inventory and charge tags") ||
     normalized.includes("which statement best protects the analogy to formal bridge") ||
     normalized.includes("particle inventory and charge tags") ||
