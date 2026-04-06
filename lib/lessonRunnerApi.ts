@@ -1201,6 +1201,7 @@ function normalizeOpenAnswer(value: unknown): string {
     .replace(/[\u00B1]/g, "+/-")
     .replace(/\bminus\s+(?=\d)/g, "-")
     .replace(/\bnegative\s+(?=\d)/g, "-")
+    .replace(/\s*=\s*/g, " equals ")
     .replace(/\bdegrees?\s*c\b/g, "c")
     .replace(/\bcelsius\b/g, "c")
     .replace(/joules?/g, "j")
