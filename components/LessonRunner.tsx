@@ -3209,7 +3209,7 @@ export default function LessonRunner({
             setSimSpread={setSimSpread}
             formatSimulationNumber={formatSimulationNumber}
           />
-        ) : simulationLessonKey === "A1_L1" ? (
+        ) : simulationLessonKey.startsWith("A1_") ? (
           <A1SimulationPanels
             lessonKey={simulationLessonKey}
             simMetricMeters={simMetricMeters}
