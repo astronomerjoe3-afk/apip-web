@@ -1,0 +1,245 @@
+WEBVTT
+
+1
+. --> .
+Before we touch the worked example, notice the trap that a calculator creates.
+
+2
+. --> .
+It can print a long string of digits, but that does not mean all of those digits belong in your final physics answer.
+
+3
+. --> .
+Significant figures exist to stop you from pretending that a measurement is more exact than it really is.
+
+4
+. --> .
+A student who copies every displayed digit is mixing mathematical output with experimental evidence, and in physics the evidence always wins.
+
+5
+. --> .
+So this lesson is not about decorative rounding.
+
+6
+. --> .
+It is about reporting only the precision that the original measurement can honestly support.
+
+7
+. --> .
+Start with the basic counting rule.
+
+8
+. --> .
+Non-zero digits count.
+
+9
+. --> .
+Leading zeros do not count because they only place the decimal point.
+
+10
+. --> .
+Zeros between non-zero digits do count, and trailing zeros after a decimal usually show real precision.
+
+11
+. --> .
+The safest mental move is to begin counting from the first non-zero digit, not from the front of the number.
+
+12
+. --> .
+That one habit protects you in tiny values like zero point zero zero four five zero and in longer numbers filled with place-holding zeros.
+
+13
+. --> .
+Zeros are where students often lose confidence, so slow the logic down.
+
+14
+. --> .
+In zero point zero zero four five zero, the zeros before the four only move the decimal point into place.
+
+15
+. --> .
+They do not add precision.
+
+16
+. --> .
+But the trailing zero after the five does matter because it shows that the reading was recorded to that level.
+
+17
+. --> .
+So zero point zero zero four five zero has three significant figures, not two and not five.
+
+18
+. --> .
+If you explain the job each zero is doing, you usually know whether it should be counted.
+
+19
+. --> .
+Now bring in the rounding move.
+
+20
+. --> .
+First decide how many significant figures or decimal places you want to keep.
+
+21
+. --> .
+Then stop at the last digit you plan to keep and check the next digit only.
+
+22
+. --> .
+If that next digit is four or less, the kept digit stays as it is.
+
+23
+. --> .
+If the next digit is five or more, you round the kept digit up.
+
+24
+. --> .
+So in twelve point three four nine to three significant figures, you keep one, two, and three, then look at the four.
+
+25
+. --> .
+Because the next digit is less than five, the answer becomes twelve point three.
+
+26
+. --> .
+You do not need to stare at every later digit once that immediate rounding decision has been made.
+
+27
+. --> .
+The lesson then splits the reporting rules by operation type.
+
+28
+. --> .
+For addition and subtraction, the final answer usually follows the fewest decimal places among the measurements.
+
+29
+. --> .
+For multiplication and division, the final answer usually follows the fewest significant figures among the measurements.
+
+30
+. --> .
+So twelve point three four plus one point two becomes thirteen point five because the weaker input had one decimal place.
+
+31
+. --> .
+But two point five times three point four two becomes eight point six because the weaker input had two significant figures.
+
+32
+. --> .
+This is why two calculations can be done on the same calculator, yet still need different reporting rules at the end.
+
+33
+. --> .
+This is why a calculator display needs a final check.
+
+34
+. --> .
+It may show many more digits than the measurements justify.
+
+35
+. --> .
+Those extra digits are fine as working digits while you calculate, but they do not all belong in the notebook.
+
+36
+. --> .
+Scientists often keep those extra digits during the middle of a calculation so they do not round too early and lose accuracy.
+
+37
+. --> .
+So the scientific habit is calculate first, then trim the result using the correct rule for the operation you used.
+
+38
+. --> .
+Use two anchors to keep the rules straight.
+
+39
+. --> .
+First, twelve point three four plus one point two.
+
+40
+. --> .
+Addition follows decimal places, so the answer keeps one decimal place and becomes thirteen point five.
+
+41
+. --> .
+Second, two point five times three point four two.
+
+42
+. --> .
+Multiplication follows significant figures, so the answer keeps two significant figures and becomes eight point six.
+
+43
+. --> .
+Notice that both raw calculator answers carry more detail than the final reported answers.
+
+44
+. --> .
+Once students hold those two examples side by side, the rule shift becomes easier to remember.
+
+45
+. --> .
+Pause and check your own thinking.
+
+46
+. --> .
+How many significant figures are in zero point zero zero four five zero?
+
+47
+. --> .
+Three.
+
+48
+. --> .
+Round twelve point three four nine to three significant figures.
+
+49
+. --> .
+Twelve point three.
+
+50
+. --> .
+And which rule controls two point five times three point four two?
+
+51
+. --> .
+The least significant figures rule controls that result.
+
+52
+. --> .
+If any one of those felt shaky, return to the zero rules and the operation split before moving on.
+
+53
+. --> .
+You are now ready for the worked example in this lesson.
+
+54
+. --> .
+The guided example starts with four point five six zero seven grams and asks for three significant figures.
+
+55
+. --> .
+Read it in a clean sequence.
+
+56
+. --> .
+First, count from the first non-zero digit so the kept figures are four, five, and six.
+
+57
+. --> .
+Second, look only at the next digit, which is zero.
+
+58
+. --> .
+Because that next digit is less than five, the six stays unchanged.
+
+59
+. --> .
+So the final answer becomes four point five six grams.
+
+60
+. --> .
+That same chain works on later questions too: choose the target precision, lock the kept digits, then let the next digit make the rounding decision.
+
+61
+. --> .
+If that chain already feels clear, the worked example will feel like confirmation rather than a surprise.

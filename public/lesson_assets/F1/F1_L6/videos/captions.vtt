@@ -1,0 +1,289 @@
+WEBVTT
+
+1
+. --> .
+Before we touch the worked example, separate the three ideas that students often blur together.
+
+2
+. --> .
+Accuracy asks whether a result is close to the accepted or true value.
+
+3
+. --> .
+Precision asks whether repeated readings agree closely with one another.
+
+4
+. --> .
+And trustworthiness asks a wider question: do the tool, the method, and the reported uncertainty justify the claim you are making.
+
+5
+. --> .
+A set of readings can be precise but still wrong.
+
+6
+. --> .
+A result can look close to the accepted value once, but still come from a weak method.
+
+7
+. --> .
+So this lesson is about judging measurement quality with more than one lens.
+
+8
+. --> .
+Start with the language of the lesson.
+
+9
+. --> .
+Accuracy asks, how close is the result to the accepted value.
+
+10
+. --> .
+Precision asks, how tightly do repeated readings cluster together.
+
+11
+. --> .
+Trustworthiness asks, does the whole measurement story make sense, including the chosen instrument, repeat readings, possible errors, and stated uncertainty.
+
+12
+. --> .
+That means you should not call a result excellent just because it has many digits or because one reading looks neat.
+
+13
+. --> .
+You need to know which question you are answering first.
+
+14
+. --> .
+Now use the lesson analogy.
+
+15
+. --> .
+Imagine a target board.
+
+16
+. --> .
+If the dart cluster lands near the centre, that suggests accuracy because the average result is close to the accepted value.
+
+17
+. --> .
+If the darts land tightly together, that suggests precision because the readings agree closely with each other.
+
+18
+. --> .
+A tight cluster far from the centre is precise but not accurate.
+
+19
+. --> .
+A wide cluster near the centre can be accurate on average but not very precise.
+
+20
+. --> .
+This picture gives you a fast visual test before you even touch the worked example.
+
+21
+. --> .
+The lesson then lays out the common patterns explicitly.
+
+22
+. --> .
+Accurate and precise means the readings are close to the accepted value and tightly grouped.
+
+23
+. --> .
+Precise but not accurate means the readings agree with one another, but the whole cluster is shifted away from the accepted value.
+
+24
+. --> .
+Accurate but not very precise means the readings are spread out, yet the average lands near the accepted value.
+
+25
+. --> .
+And neither means the readings are scattered and also off target.
+
+26
+. --> .
+Looking at only one of these ideas gives an incomplete judgement of the measurement quality.
+
+27
+. --> .
+This is where systematic error matters.
+
+28
+. --> .
+Suppose a balance always reads zero point two grams too high.
+
+29
+. --> .
+Repeated measurements may cluster tightly, so the set can look precise.
+
+30
+. --> .
+But the whole group is shifted in the same direction, which weakens the accuracy.
+
+31
+. --> .
+That is why precision does not guarantee truth.
+
+32
+. --> .
+A constant offset, a zero error, or a calibration problem can keep every reading neatly grouped while still pushing them away from the accepted value.
+
+33
+. --> .
+Random error looks different.
+
+34
+. --> .
+Instead of shifting every reading the same way, it makes the readings bounce above and below the best estimate.
+
+35
+. --> .
+That spread tells you about precision.
+
+36
+. --> .
+If the spread is wide, the precision is weaker.
+
+37
+. --> .
+If the spread is narrow, the precision is stronger.
+
+38
+. --> .
+This is why repeat readings matter so much.
+
+39
+. --> .
+They let you see whether the method is stable or whether the values are wandering too much to inspire confidence.
+
+40
+. --> .
+The lesson then widens the judgement to trustworthiness.
+
+41
+. --> .
+Trust comes from choosing a suitable instrument, taking repeated readings when needed, watching for systematic and random error, and reporting a reasonable uncertainty instead of pretending to exactness.
+
+42
+. --> .
+A result becomes stronger when the method and the numbers support each other.
+
+43
+. --> .
+So a trustworthy measurement is not just a neat number on a screen.
+
+44
+. --> .
+It is a number that has been earned by a sensible process.
+
+45
+. --> .
+Honest reporting is part of trustworthiness too.
+
+46
+. --> .
+A measurement should not pretend to be exact if the tool and method do not justify that claim.
+
+47
+. --> .
+That is why uncertainty matters.
+
+48
+. --> .
+And when you want to compare how large that uncertainty is relative to the measured value, the lesson gives you another tool: percentage uncertainty equals absolute uncertainty divided by measured value, then multiplied by one hundred percent.
+
+49
+. --> .
+Even if the worked example in this lesson is not a percentage-uncertainty calculation, that formula strengthens the bigger idea that trustworthy measurement is about justified claims.
+
+50
+. --> .
+Use two anchors to keep the lesson practical.
+
+51
+. --> .
+First, imagine a tight cluster of readings well away from the accepted value.
+
+52
+. --> .
+That set is precise but not accurate.
+
+53
+. --> .
+Second, compare a coarse reading rounded to the nearest whole gram with a finer reading shown to the nearest tenth of a gram.
+
+54
+. --> .
+The finer reading is more precise because it comes from a measurement with smaller resolution steps.
+
+55
+. --> .
+Together, those two examples stop students from confusing neat agreement with truth.
+
+56
+. --> .
+Pause and check your own thinking.
+
+57
+. --> .
+If readings are tightly grouped but far from the accepted value, which idea is strong and which is weak?
+
+58
+. --> .
+Precision is strong, but accuracy is weak.
+
+59
+. --> .
+If readings are spread out, what part of measurement quality should you question first?
+
+60
+. --> .
+The precision.
+
+61
+. --> .
+And what helps make a result trustworthy besides the number itself?
+
+62
+. --> .
+A suitable tool, sensible repeats, controlled errors, and honest uncertainty.
+
+63
+. --> .
+If any one of those felt shaky, return to the target-board picture before moving on.
+
+64
+. --> .
+You are now ready for the worked example in this lesson.
+
+65
+. --> .
+The guided example asks which reading is more precise when two scales report the same object in different ways.
+
+66
+. --> .
+Read it in a clean sequence.
+
+67
+. --> .
+First, do not ask which reading seems more correct.
+
+68
+. --> .
+Ask which one shows finer resolution.
+
+69
+. --> .
+Second, notice that a reading reported to the nearest tenth of a gram carries more detail than one rounded to the nearest whole gram.
+
+70
+. --> .
+Third, connect that finer scale step to precision, because precision is about how finely the measurement can distinguish values.
+
+71
+. --> .
+So the finer tenth-gram reading is the more precise one.
+
+72
+. --> .
+If that chain already feels clear, the worked example will feel like confirmation rather than a surprise.

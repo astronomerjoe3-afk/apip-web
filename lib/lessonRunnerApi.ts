@@ -13423,87 +13423,87 @@ function preWorkedExampleVideoMeta(code: string): {
   switch (code) {
     case "F1_L1":
       return {
-        body: "Use this AI-narrated walkthrough to consolidate how a complete measurement combines the quantity, the number, and the unit before you move into the worked example.",
-        caption: "AI-narrated explainer: SI units, prefixes, and sensible unit choice before the lesson example.",
+        body: "Use this video to consolidate how a complete measurement combines the quantity, the number, and the unit before you move into the worked example.",
+        caption: "Video explainer: SI units, prefixes, and sensible unit choice before the lesson example.",
         highlights: [
           "Keep the number and the unit together",
           "Choose prefixes that match the scale of the object",
           "Move into the example with the language of measurement already clear",
         ],
         checkForUnderstanding: "Which part of a measurement tells the scale being used: the number alone, or the unit attached to it?",
-        video_url: "/api/lesson-assets/F1_L1/video",
-        poster_url: "/api/lesson-assets/F1_L1/poster",
-        captions_url: "/api/lesson-assets/F1_L1/captions",
+        video_url: "/lesson_assets/F1/F1_L1/videos/final.mp4",
+        poster_url: "/lesson_assets/F1/F1_L1/videos/thumbnail.png",
+        captions_url: "/lesson_assets/F1/F1_L1/videos/captions.vtt",
       };
     case "F1_L2":
       return {
-        body: "Use this AI-narrated walkthrough to reinforce the scalar-versus-vector test, distance versus displacement, and why direction changes the meaning of a quantity before the example starts.",
-        caption: "AI-narrated explainer: scalar and vector thinking, with route-length and start-to-finish comparisons before the worked example.",
+        body: "Use this video to reinforce the scalar-versus-vector test, distance versus displacement, and why direction changes the meaning of a quantity before the example starts.",
+        caption: "Video explainer: scalar and vector thinking, with route-length and start-to-finish comparisons before the worked example.",
         highlights: [
           "Ask both how much and which way",
           "Distance follows the full path, displacement keeps the net change",
           "Use direction carefully before reading the example",
         ],
         checkForUnderstanding: "What extra feature turns a scalar description into a vector description in this lesson?",
-        video_url: "/api/lesson-assets/F1_L2/video",
-        poster_url: "/api/lesson-assets/F1_L2/poster",
-        captions_url: "/api/lesson-assets/F1_L2/captions",
+        video_url: "/lesson_assets/F1/F1_L2/videos/final.mp4",
+        poster_url: "/lesson_assets/F1/F1_L2/videos/thumbnail.png",
+        captions_url: "/lesson_assets/F1/F1_L2/videos/captions.vtt",
       };
     case "F1_L3":
       return {
-        body: "Use this AI-narrated walkthrough to lock in tool choice, resolution, uncertainty, and the difference between random and systematic error before you study the worked example.",
-        caption: "AI-narrated explainer: instrument resolution, honest reading, and measurement error patterns before the lesson example.",
+        body: "Use this video to lock in tool choice, resolution, uncertainty, and the difference between random and systematic error before you study the worked example.",
+        caption: "Video explainer: instrument resolution, honest reading, and measurement error patterns before the lesson example.",
         highlights: [
           "The instrument limits the detail you can justify",
           "Random error creates scatter, systematic error creates bias",
           "Trustworthy measurement starts with a suitable tool",
         ],
         checkForUnderstanding: "If a reading is always shifted the same way, which error pattern should you suspect first?",
-        video_url: "/api/lesson-assets/F1_L3/video",
-        poster_url: "/api/lesson-assets/F1_L3/poster",
-        captions_url: "/api/lesson-assets/F1_L3/captions",
+        video_url: "/lesson_assets/F1/F1_L3/videos/final.mp4",
+        poster_url: "/lesson_assets/F1/F1_L3/videos/thumbnail.png",
+        captions_url: "/lesson_assets/F1/F1_L3/videos/captions.vtt",
       };
     case "F1_L4":
       return {
-        body: "Use this AI-narrated walkthrough to reinforce significant figures, rounding decisions, and the final calculator check before you move into the lesson example.",
-        caption: "AI-narrated explainer: significant figures, decimal-place rules, and calculator discipline before the worked example.",
+        body: "Use this video to reinforce significant figures, rounding decisions, and the final calculator check before you move into the lesson example.",
+        caption: "Video explainer: significant figures, decimal-place rules, and calculator discipline before the worked example.",
         highlights: [
           "Count from the first non-zero digit",
           "Use the next digit to decide the rounding",
           "Do not copy every calculator digit into the notebook",
         ],
         checkForUnderstanding: "For multiplication and division, which measurement controls how many significant figures the final answer should keep?",
-        video_url: "/api/lesson-assets/F1_L4/video",
-        poster_url: "/api/lesson-assets/F1_L4/poster",
-        captions_url: "/api/lesson-assets/F1_L4/captions",
+        video_url: "/lesson_assets/F1/F1_L4/videos/final.mp4",
+        poster_url: "/lesson_assets/F1/F1_L4/videos/thumbnail.png",
+        captions_url: "/lesson_assets/F1/F1_L4/videos/captions.vtt",
       };
     case "F1_L5":
       return {
-        body: "Use this AI-narrated walkthrough to deepen the mass-volume-density comparison, unit consistency, and float-or-sink reasoning before the worked example begins.",
-        caption: "AI-narrated explainer: density as mass per volume, with comparison reasoning and unit discipline before the lesson example.",
+        body: "Use this video to deepen the mass-volume-density comparison, unit consistency, and float-or-sink reasoning before the worked example begins.",
+        caption: "Video explainer: density as mass per volume, with comparison reasoning and unit discipline before the lesson example.",
         highlights: [
           "More mass in the same space means greater density",
           "Keep mass and volume units consistent before calculating",
           "Compare object density with fluid density for float or sink predictions",
         ],
         checkForUnderstanding: "If two samples have the same mass, what must be true of the denser one: does it take up more space or less space?",
-        video_url: "/api/lesson-assets/F1_L5/video",
-        poster_url: "/api/lesson-assets/F1_L5/poster",
-        captions_url: "/api/lesson-assets/F1_L5/captions",
+        video_url: "/lesson_assets/F1/F1_L5/videos/final.mp4",
+        poster_url: "/lesson_assets/F1/F1_L5/videos/thumbnail.png",
+        captions_url: "/lesson_assets/F1/F1_L5/videos/captions.vtt",
       };
     case "F1_L6":
       return {
-        body: "Use this AI-narrated walkthrough to separate accuracy, precision, and trustworthiness before you judge the precision-focused worked example.",
-        caption: "AI-narrated explainer: target-board accuracy, clustering precision, and trustworthy measurement before the lesson example.",
+        body: "Use this video to separate accuracy, precision, and trustworthiness before you judge the precision-focused worked example.",
+        caption: "Video explainer: target-board accuracy, clustering precision, and trustworthy measurement before the lesson example.",
         highlights: [
           "Accuracy asks about closeness to the accepted value",
           "Precision asks about how tightly readings cluster",
           "Trustworthiness also depends on the tool, errors, and reported uncertainty",
         ],
         checkForUnderstanding: "If readings are tightly grouped but far from the accepted value, which part of measurement quality is stronger: accuracy or precision?",
-        video_url: "/api/lesson-assets/F1_L6/video",
-        poster_url: "/api/lesson-assets/F1_L6/poster",
-        captions_url: "/api/lesson-assets/F1_L6/captions",
+        video_url: "/lesson_assets/F1/F1_L6/videos/final.mp4",
+        poster_url: "/lesson_assets/F1/F1_L6/videos/thumbnail.png",
+        captions_url: "/lesson_assets/F1/F1_L6/videos/captions.vtt",
       };
     default:
       return null;
