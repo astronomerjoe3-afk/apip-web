@@ -427,7 +427,10 @@ type TeachingFocusCard = {
 };
 
 type ScaffoldSectionVisual = {
-  image_url: string;
+  image_url?: string;
+  video_url?: string;
+  poster_url?: string;
+  captions_url?: string;
   caption?: string;
   highlights?: string[];
 };
@@ -1552,15 +1555,36 @@ export default function LessonRunner({
               </div>
             ) : null}
 
-            {section.visual?.image_url ? (
+            {section.visual && (section.visual.video_url || section.visual.image_url) ? (
               <div className="mt-5 overflow-hidden rounded-2xl border bg-white shadow-sm">
                 <div className="bg-[radial-gradient(circle_at_top,_rgba(219,234,254,0.7),_rgba(255,255,255,0.96)_62%)] p-4 md:p-5">
-                  <img
-                    src={section.visual.image_url}
-                    alt={section.visual.caption || section.heading}
-                    className="h-72 w-full object-contain md:h-80"
-                    loading="lazy"
-                  />
+                  {section.visual.video_url ? (
+                    <video
+                      className="h-72 w-full rounded-2xl bg-slate-950 object-contain md:h-80"
+                      controls
+                      playsInline
+                      preload="metadata"
+                      poster={section.visual.poster_url}
+                    >
+                      <source src={section.visual.video_url} type="video/mp4" />
+                      {section.visual.captions_url ? (
+                        <track
+                          kind="captions"
+                          label="English"
+                          srcLang="en"
+                          src={section.visual.captions_url}
+                          default
+                        />
+                      ) : null}
+                    </video>
+                  ) : (
+                    <img
+                      src={section.visual.image_url}
+                      alt={section.visual.caption || section.heading}
+                      className="h-72 w-full object-contain md:h-80"
+                      loading="lazy"
+                    />
+                  )}
                 </div>
                 {section.visual.caption || section.visual.highlights?.length ? (
                   <div className="border-t bg-slate-50/80 p-5">

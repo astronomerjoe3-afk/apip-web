@@ -13411,6 +13411,128 @@ function technicalWordsSections(lesson: UnknownRecord): UnknownRecord[] {
   }));
 }
 
+function preWorkedExampleVideoMeta(code: string): {
+  body: string;
+  caption: string;
+  highlights: string[];
+  checkForUnderstanding: string;
+  video_url: string;
+  poster_url: string;
+  captions_url: string;
+} | null {
+  switch (code) {
+    case "F1_L1":
+      return {
+        body: "Use this AI-narrated walkthrough to consolidate how a complete measurement combines the quantity, the number, and the unit before you move into the worked example.",
+        caption: "AI-narrated explainer: SI units, prefixes, and sensible unit choice before the lesson example.",
+        highlights: [
+          "Keep the number and the unit together",
+          "Choose prefixes that match the scale of the object",
+          "Move into the example with the language of measurement already clear",
+        ],
+        checkForUnderstanding: "Which part of a measurement tells the scale being used: the number alone, or the unit attached to it?",
+        video_url: "/api/lesson-assets/F1_L1/video",
+        poster_url: "/api/lesson-assets/F1_L1/poster",
+        captions_url: "/api/lesson-assets/F1_L1/captions",
+      };
+    case "F1_L2":
+      return {
+        body: "Use this AI-narrated walkthrough to reinforce the scalar-versus-vector test, distance versus displacement, and why direction changes the meaning of a quantity before the example starts.",
+        caption: "AI-narrated explainer: scalar and vector thinking, with route-length and start-to-finish comparisons before the worked example.",
+        highlights: [
+          "Ask both how much and which way",
+          "Distance follows the full path, displacement keeps the net change",
+          "Use direction carefully before reading the example",
+        ],
+        checkForUnderstanding: "What extra feature turns a scalar description into a vector description in this lesson?",
+        video_url: "/api/lesson-assets/F1_L2/video",
+        poster_url: "/api/lesson-assets/F1_L2/poster",
+        captions_url: "/api/lesson-assets/F1_L2/captions",
+      };
+    case "F1_L3":
+      return {
+        body: "Use this AI-narrated walkthrough to lock in tool choice, resolution, uncertainty, and the difference between random and systematic error before you study the worked example.",
+        caption: "AI-narrated explainer: instrument resolution, honest reading, and measurement error patterns before the lesson example.",
+        highlights: [
+          "The instrument limits the detail you can justify",
+          "Random error creates scatter, systematic error creates bias",
+          "Trustworthy measurement starts with a suitable tool",
+        ],
+        checkForUnderstanding: "If a reading is always shifted the same way, which error pattern should you suspect first?",
+        video_url: "/api/lesson-assets/F1_L3/video",
+        poster_url: "/api/lesson-assets/F1_L3/poster",
+        captions_url: "/api/lesson-assets/F1_L3/captions",
+      };
+    case "F1_L4":
+      return {
+        body: "Use this AI-narrated walkthrough to reinforce significant figures, rounding decisions, and the final calculator check before you move into the lesson example.",
+        caption: "AI-narrated explainer: significant figures, decimal-place rules, and calculator discipline before the worked example.",
+        highlights: [
+          "Count from the first non-zero digit",
+          "Use the next digit to decide the rounding",
+          "Do not copy every calculator digit into the notebook",
+        ],
+        checkForUnderstanding: "For multiplication and division, which measurement controls how many significant figures the final answer should keep?",
+        video_url: "/api/lesson-assets/F1_L4/video",
+        poster_url: "/api/lesson-assets/F1_L4/poster",
+        captions_url: "/api/lesson-assets/F1_L4/captions",
+      };
+    case "F1_L5":
+      return {
+        body: "Use this AI-narrated walkthrough to deepen the mass-volume-density comparison, unit consistency, and float-or-sink reasoning before the worked example begins.",
+        caption: "AI-narrated explainer: density as mass per volume, with comparison reasoning and unit discipline before the lesson example.",
+        highlights: [
+          "More mass in the same space means greater density",
+          "Keep mass and volume units consistent before calculating",
+          "Compare object density with fluid density for float or sink predictions",
+        ],
+        checkForUnderstanding: "If two samples have the same mass, what must be true of the denser one: does it take up more space or less space?",
+        video_url: "/api/lesson-assets/F1_L5/video",
+        poster_url: "/api/lesson-assets/F1_L5/poster",
+        captions_url: "/api/lesson-assets/F1_L5/captions",
+      };
+    case "F1_L6":
+      return {
+        body: "Use this AI-narrated walkthrough to separate accuracy, precision, and trustworthiness before you judge the precision-focused worked example.",
+        caption: "AI-narrated explainer: target-board accuracy, clustering precision, and trustworthy measurement before the lesson example.",
+        highlights: [
+          "Accuracy asks about closeness to the accepted value",
+          "Precision asks about how tightly readings cluster",
+          "Trustworthiness also depends on the tool, errors, and reported uncertainty",
+        ],
+        checkForUnderstanding: "If readings are tightly grouped but far from the accepted value, which part of measurement quality is stronger: accuracy or precision?",
+        video_url: "/api/lesson-assets/F1_L6/video",
+        poster_url: "/api/lesson-assets/F1_L6/poster",
+        captions_url: "/api/lesson-assets/F1_L6/captions",
+      };
+    default:
+      return null;
+  }
+}
+
+function withPreWorkedExampleVideoSection(code: string, sections: UnknownRecord[]): UnknownRecord[] {
+  const meta = preWorkedExampleVideoMeta(code);
+  if (!meta) return sections;
+  const workedExampleIndex = sections.findIndex((section) => Object.keys(asRecord(asRecord(section).worked_example)).length > 0);
+  if (workedExampleIndex < 0) return sections;
+  if (sections.some((section) => text(asRecord(asRecord(section).visual).video_url) === meta.video_url)) return sections;
+
+  const nextSections = [...sections];
+  nextSections.splice(workedExampleIndex, 0, {
+    heading: "Video walkthrough",
+    body: meta.body,
+    visual: {
+      video_url: meta.video_url,
+      poster_url: meta.poster_url,
+      captions_url: meta.captions_url,
+      caption: meta.caption,
+      highlights: meta.highlights,
+    },
+    check_for_understanding: meta.checkForUnderstanding,
+  });
+  return nextSections;
+}
+
 function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecord[]): UnknownRecord[] {
   const technicalSections = technicalWordsSections(lesson);
   const nextSections = [...sections];
@@ -13420,7 +13542,7 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
     nextSections.splice(insertIndex, 0, ...technicalSections);
   }
 
-  return withStandardFormulaSection(lesson, nextSections);
+  return withPreWorkedExampleVideoSection(lessonCode(lesson), withStandardFormulaSection(lesson, nextSections));
 }
 
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
