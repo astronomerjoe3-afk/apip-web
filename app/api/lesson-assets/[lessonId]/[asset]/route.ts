@@ -4,6 +4,7 @@ import path from "node:path";
 import { Readable } from "node:stream";
 
 export const runtime = "nodejs";
+const DEFAULT_VIDEO_CHUNK_BYTES = 1024 * 1024;
 
 const LESSON_FOLDER_MAP: Record<string, string> = {
   F1_L1: "F1_L1",
@@ -77,6 +78,9 @@ export async function GET(
     const fileStat = await stat(filePath);
     const rangeHeader = request.headers.get("range");
 
+    let start = 0;
+    let end = Math.min(DEFAULT_VIDEO_CHUNK_BYTES - 1, fileStat.size - 1);
+
     if (rangeHeader) {
       const match = /^bytes=(\d*)-(\d*)$/u.exec(rangeHeader);
       if (!match) {
@@ -86,9 +90,9 @@ export async function GET(
         });
       }
 
-      const start = match[1] ? Number.parseInt(match[1], 10) : 0;
+      start = match[1] ? Number.parseInt(match[1], 10) : 0;
       const requestedEnd = match[2] ? Number.parseInt(match[2], 10) : fileStat.size - 1;
-      const end = Math.min(requestedEnd, fileStat.size - 1);
+      end = Math.min(requestedEnd, fileStat.size - 1);
 
       if (Number.isNaN(start) || Number.isNaN(end) || start < 0 || start > end) {
         return new Response("Invalid range request.", {
@@ -96,8 +100,10 @@ export async function GET(
           headers: { "Content-Range": `bytes */${fileStat.size}` },
         });
       }
+    }
 
-      const stream = createReadStream(filePath, { start, end });
+    const stream = createReadStream(filePath, { start, end });
+    if (rangeHeader || fileStat.size > DEFAULT_VIDEO_CHUNK_BYTES) {
       return new Response(asWebStream(stream), {
         status: 206,
         headers: {
@@ -110,8 +116,8 @@ export async function GET(
       });
     }
 
-    const stream = createReadStream(filePath);
-    return new Response(asWebStream(stream), {
+    const fullStream = createReadStream(filePath);
+    return new Response(asWebStream(fullStream), {
       headers: {
         "Content-Type": "video/mp4",
         "Content-Length": String(fileStat.size),
