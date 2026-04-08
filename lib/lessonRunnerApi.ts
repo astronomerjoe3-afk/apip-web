@@ -14283,6 +14283,90 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("F4_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("F4_L6", "captions.vtt"),
       };
+    case "F5_L1":
+      return {
+        body: "Use this video to keep the Earth-Moon-Sun family on one mental board before you begin the worked example.",
+        caption: "Video explainer: host relationships, gravity, and orbit meaning in the Earth-Moon-Sun system before the lesson example.",
+        highlights: [
+          "Earth mainly orbits the Sun",
+          "The Moon mainly orbits Earth",
+          "One shared system picture supports many later sky lessons",
+        ],
+        checkForUnderstanding: "If the Moon travels with Earth around the Sun, which body is still its main host in this lesson model?",
+        video_url: staticVideoAssetUrl("F5_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F5_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F5_L1", "captions.vtt"),
+      };
+    case "F5_L2":
+      return {
+        body: "Use this video to separate Earth's daily spin from its yearly orbit before the worked example starts.",
+        caption: "Video explainer: rotation, sunlight, and the true cause of day and night before the lesson example.",
+        highlights: [
+          "Day and night come from Earth's rotation",
+          "Half the planet is lit at one time",
+          "Orbit explains the year, not the daily light-dark cycle",
+        ],
+        checkForUnderstanding: "If one city moves from daylight into darkness over a few hours, which motion of Earth explains that change first?",
+        video_url: staticVideoAssetUrl("F5_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F5_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F5_L2", "captions.vtt"),
+      };
+    case "F5_L3":
+      return {
+        body: "Use this video to connect seasons to tilt and orbit position before the worked example begins.",
+        caption: "Video explainer: fixed axis direction, hemisphere lean, and why seasons are not a simple distance story before the lesson example.",
+        highlights: [
+          "Earth's axis stays tilted in a fixed direction through the orbit",
+          "One hemisphere leans toward the Sun while the other leans away",
+          "Opposite hemispheres can have opposite seasons at the same time",
+        ],
+        checkForUnderstanding: "If the Northern Hemisphere leans toward the Sun, what should be happening in the Southern Hemisphere at the same time?",
+        video_url: staticVideoAssetUrl("F5_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F5_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F5_L3", "captions.vtt"),
+      };
+    case "F5_L4":
+      return {
+        body: "Use this video to separate moon phases from eclipses before you start the worked example.",
+        caption: "Video explainer: sunlit half, viewpoint phases, and special eclipse alignment before the lesson example.",
+        highlights: [
+          "The Moon stays half lit by the Sun",
+          "Phases depend on how much of the lit half we can see from Earth",
+          "Eclipses need a special straight-line shadow alignment",
+        ],
+        checkForUnderstanding: "What stays true through all the phases in this lesson: the Moon changes how much sunlight it gets, or we change how much of the sunlit half we can see?",
+        video_url: staticVideoAssetUrl("F5_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F5_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F5_L4", "captions.vtt"),
+      };
+    case "F5_L5":
+      return {
+        body: "Use this video to classify Solar System bodies by host and type before the worked example begins.",
+        caption: "Video explainer: planets, moons, dwarf planets, asteroids, and comets in one organized Solar System family before the lesson example.",
+        highlights: [
+          "Planets and dwarf planets orbit the Sun directly",
+          "Moons mainly orbit larger worlds",
+          "Body type and main host together give a stronger classification",
+        ],
+        checkForUnderstanding: "If an object mainly orbits a planet rather than the Sun, which family label becomes most likely in this lesson?",
+        video_url: staticVideoAssetUrl("F5_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F5_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F5_L5", "captions.vtt"),
+      };
+    case "F5_L6":
+      return {
+        body: "Use this video to separate apparent sky motion, real motions, and model scale before the worked example starts.",
+        caption: "Video explainer: daily sky appearance, yearly orbit timing, and compressed model scale before the lesson example.",
+        highlights: [
+          "The Sun's daily apparent path comes from Earth's rotation",
+          "Year length links to orbital motion around the Sun",
+          "Useful classroom models usually compress real distance scale strongly",
+        ],
+        checkForUnderstanding: "If a model shows the pattern correctly but shrinks the distances heavily, what part is still trustworthy: the exact scale, or the relationship pattern?",
+        video_url: staticVideoAssetUrl("F5_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F5_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F5_L6", "captions.vtt"),
+      };
     default:
       return null;
   }
