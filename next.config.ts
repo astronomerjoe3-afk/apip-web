@@ -100,6 +100,27 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // Cloud Run rejects large non-range public MP4 responses from `public/`
+        // as oversized, so preserve the public lesson asset URLs while streaming
+        // video, poster, and caption files through the route handler instead.
+        {
+          source: "/lesson_assets/:moduleId/:lessonId/videos/final.mp4",
+          destination: "/api/lesson-assets/:lessonId/video",
+        },
+        {
+          source: "/lesson_assets/:moduleId/:lessonId/videos/thumbnail.png",
+          destination: "/api/lesson-assets/:lessonId/poster",
+        },
+        {
+          source: "/lesson_assets/:moduleId/:lessonId/videos/captions.vtt",
+          destination: "/api/lesson-assets/:lessonId/captions",
+        },
+      ],
+    };
+  },
   async headers() {
     return [
       {

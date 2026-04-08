@@ -13420,9 +13420,9 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260408d";
-  const routedVideoAssetUrl = (lessonId: string, asset: "video" | "poster" | "captions") =>
-    `/api/lesson-assets/${lessonId}/${asset}?v=${assetVersion}`;
+  const assetVersion = "20260408e";
+  const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") =>
+    `/lesson_assets/F1/${lessonId}/videos/${filename}?v=${assetVersion}`;
   switch (code) {
     case "F1_L1":
       return {
@@ -13434,9 +13434,9 @@ function preWorkedExampleVideoMeta(code: string): {
           "Move into the example with the language of measurement already clear",
         ],
         checkForUnderstanding: "Which part of a measurement tells the scale being used: the number alone, or the unit attached to it?",
-        video_url: routedVideoAssetUrl("F1_L1", "video"),
-        poster_url: routedVideoAssetUrl("F1_L1", "poster"),
-        captions_url: routedVideoAssetUrl("F1_L1", "captions"),
+        video_url: staticVideoAssetUrl("F1_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F1_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F1_L1", "captions.vtt"),
       };
     case "F1_L2":
       return {
@@ -13448,9 +13448,9 @@ function preWorkedExampleVideoMeta(code: string): {
           "Use direction carefully before reading the example",
         ],
         checkForUnderstanding: "What extra feature turns a scalar description into a vector description in this lesson?",
-        video_url: routedVideoAssetUrl("F1_L2", "video"),
-        poster_url: routedVideoAssetUrl("F1_L2", "poster"),
-        captions_url: routedVideoAssetUrl("F1_L2", "captions"),
+        video_url: staticVideoAssetUrl("F1_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F1_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F1_L2", "captions.vtt"),
       };
     case "F1_L3":
       return {
@@ -13462,9 +13462,9 @@ function preWorkedExampleVideoMeta(code: string): {
           "Trustworthy measurement starts with a suitable tool",
         ],
         checkForUnderstanding: "If a reading is always shifted the same way, which error pattern should you suspect first?",
-        video_url: routedVideoAssetUrl("F1_L3", "video"),
-        poster_url: routedVideoAssetUrl("F1_L3", "poster"),
-        captions_url: routedVideoAssetUrl("F1_L3", "captions"),
+        video_url: staticVideoAssetUrl("F1_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F1_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F1_L3", "captions.vtt"),
       };
     case "F1_L4":
       return {
@@ -13476,9 +13476,9 @@ function preWorkedExampleVideoMeta(code: string): {
           "Do not copy every calculator digit into the notebook",
         ],
         checkForUnderstanding: "For multiplication and division, which measurement controls how many significant figures the final answer should keep?",
-        video_url: routedVideoAssetUrl("F1_L4", "video"),
-        poster_url: routedVideoAssetUrl("F1_L4", "poster"),
-        captions_url: routedVideoAssetUrl("F1_L4", "captions"),
+        video_url: staticVideoAssetUrl("F1_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F1_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F1_L4", "captions.vtt"),
       };
     case "F1_L5":
       return {
@@ -13490,9 +13490,9 @@ function preWorkedExampleVideoMeta(code: string): {
           "Compare object density with fluid density for float or sink predictions",
         ],
         checkForUnderstanding: "If two samples have the same mass, what must be true of the denser one: does it take up more space or less space?",
-        video_url: routedVideoAssetUrl("F1_L5", "video"),
-        poster_url: routedVideoAssetUrl("F1_L5", "poster"),
-        captions_url: routedVideoAssetUrl("F1_L5", "captions"),
+        video_url: staticVideoAssetUrl("F1_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F1_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F1_L5", "captions.vtt"),
       };
     case "F1_L6":
       return {
@@ -13504,9 +13504,9 @@ function preWorkedExampleVideoMeta(code: string): {
           "Trustworthiness also depends on the tool, errors, and reported uncertainty",
         ],
         checkForUnderstanding: "If readings are tightly grouped but far from the accepted value, which part of measurement quality is stronger: accuracy or precision?",
-        video_url: routedVideoAssetUrl("F1_L6", "video"),
-        poster_url: routedVideoAssetUrl("F1_L6", "poster"),
-        captions_url: routedVideoAssetUrl("F1_L6", "captions"),
+        video_url: staticVideoAssetUrl("F1_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F1_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F1_L6", "captions.vtt"),
       };
     default:
       return null;
