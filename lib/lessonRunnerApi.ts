@@ -13947,6 +13947,90 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("F2_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("F2_L6", "captions.vtt"),
       };
+    case "F4_L1":
+      return {
+        body: "Use this video to lock in what current actually measures before you begin the worked example.",
+        caption: "Video explainer: charge flow, current meaning, and same-current reasoning before the lesson example.",
+        highlights: [
+          "Current measures charge passing a point each second",
+          "In one closed series loop, the current stays the same at every point",
+          "Use I = Q / t after the meaning is secure",
+        ],
+        checkForUnderstanding: "If 12 coulombs pass a point in 3 seconds, what quantity are you calculating and what does it describe physically?",
+        video_url: staticVideoAssetUrl("F4_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F4_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F4_L1", "captions.vtt"),
+      };
+    case "F4_L2":
+      return {
+        body: "Use this video to understand potential difference as energy transferred per coulomb before the worked example starts.",
+        caption: "Video explainer: battery push, energy transfer, and potential difference meaning before the lesson example.",
+        highlights: [
+          "Potential difference tells energy transferred per coulomb",
+          "A bigger voltage means more energy given to each coulomb",
+          "Use V = E / Q with the energy story still attached",
+        ],
+        checkForUnderstanding: "If each coulomb gains 9 joules from a battery, what is the potential difference and what does that number mean?",
+        video_url: staticVideoAssetUrl("F4_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F4_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F4_L2", "captions.vtt"),
+      };
+    case "F4_L3":
+      return {
+        body: "Use this video to connect resistance, current, voltage, and I-V graph shape before you move into the worked example.",
+        caption: "Video explainer: opposition to current, Ohm's law, and I-V graph reading before the lesson example.",
+        highlights: [
+          "Resistance describes how strongly a component opposes current",
+          "For an ohmic resistor, current is proportional to voltage",
+          "On an I-V graph, the straight-line pattern reveals constant resistance",
+        ],
+        checkForUnderstanding: "If the voltage doubles across an ohmic resistor, how should the current change and what graph pattern supports that idea?",
+        video_url: staticVideoAssetUrl("F4_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F4_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F4_L3", "captions.vtt"),
+      };
+    case "F4_L4":
+      return {
+        body: "Use this video to settle the rules of series circuits before you start the worked example.",
+        caption: "Video explainer: one loop, shared current, and voltage sharing in a series circuit before the lesson example.",
+        highlights: [
+          "Series components share one loop current",
+          "Potential difference is shared across the components",
+          "Adding resistors in series increases the total resistance",
+        ],
+        checkForUnderstanding: "In one simple series loop, which quantity stays the same through every component and which quantity gets shared out?",
+        video_url: staticVideoAssetUrl("F4_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F4_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F4_L4", "captions.vtt"),
+      };
+    case "F4_L5":
+      return {
+        body: "Use this video to make the branch logic of parallel circuits feel secure before the worked example begins.",
+        caption: "Video explainer: branch current, shared voltage, and total current in a parallel circuit before the lesson example.",
+        highlights: [
+          "Each branch gets the full supply voltage",
+          "Current splits across branches and recombines later",
+          "Adding a branch lowers total resistance and can raise total current",
+        ],
+        checkForUnderstanding: "In a parallel circuit, which quantity is the same across each branch and which quantity splits between branches?",
+        video_url: staticVideoAssetUrl("F4_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F4_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F4_L5", "captions.vtt"),
+      };
+    case "F4_L6":
+      return {
+        body: "Use this video to connect power, energy, and electrical safety before you attempt the worked example.",
+        caption: "Video explainer: rate of energy transfer, power equations, and safety choices before the lesson example.",
+        highlights: [
+          "Power is the rate of energy transfer",
+          "Energy grows when power acts for longer",
+          "Fuse and wire choices depend on current and safe operating limits",
+        ],
+        checkForUnderstanding: "If an appliance uses more power at the same voltage, what must happen to the current and why does that matter for safety?",
+        video_url: staticVideoAssetUrl("F4_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F4_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F4_L6", "captions.vtt"),
+      };
     default:
       return null;
   }

@@ -1,0 +1,325 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.805
+Parallel circuits feel different from series circuits because the structure is different from the start.
+
+2
+00:00:04.805 --> 00:00:09.610
+Instead of one path, the current has branch choices.
+
+3
+00:00:09.610 --> 00:00:14.415
+That means the current can split between branches and recombine later.
+
+4
+00:00:14.415 --> 00:00:19.220
+But because each branch is connected across the same two supply points, the potential difference across every branch is the same as the supply.
+
+5
+00:00:19.220 --> 00:00:24.025
+Once those two ideas are secure, the rest of the lesson becomes much easier to predict.
+
+6
+00:00:24.025 --> 00:00:28.830
+Keep this takeaway in view: Parallel reasoning begins with branch structure, then applies the voltage and current rules.
+
+7
+00:00:28.830 --> 00:00:33.635
+Structure means multiple branches.
+
+8
+00:00:33.635 --> 00:00:38.440
+Charges have more than one path to travel through.
+
+9
+00:00:38.440 --> 00:00:43.245
+Voltage means same on each branch.
+
+10
+00:00:43.245 --> 00:00:48.050
+Every branch sits across the same supply points.
+
+11
+00:00:48.050 --> 00:00:54.768
+In a parallel diagram, each branch connects across the same two points of the supply.
+
+12
+00:00:54.768 --> 00:01:01.485
+That is why the potential difference across every branch is the same.
+
+13
+00:01:01.485 --> 00:01:08.202
+But the current does not have to be the same in each branch, because the charges can divide between the available routes depending on the resistance of each branch.
+
+14
+00:01:08.202 --> 00:01:14.920
+When the branches join back together, the total current is the sum of the branch currents.
+
+15
+00:01:14.920 --> 00:01:21.637
+The structure itself explains the rules.
+
+16
+00:01:21.637 --> 00:01:28.355
+Keep this takeaway in view: The branch layout explains both the same-voltage rule and the split-current rule.
+
+17
+00:01:28.355 --> 00:01:35.072
+Same two points: Every branch is connected across the same supply terminals.
+
+18
+00:01:35.072 --> 00:01:41.790
+Same branch voltage: That is why each branch has the full supply voltage.
+
+19
+00:01:41.790 --> 00:01:46.653
+Imagine a road that splits into two routes and then rejoins at the same destination.
+
+20
+00:01:46.653 --> 00:01:51.515
+The cars can divide between the two routes, so each route may carry a different flow.
+
+21
+00:01:51.515 --> 00:01:56.378
+But both routes begin and end at the same places.
+
+22
+00:01:56.378 --> 00:02:01.241
+That is similar to a parallel circuit.
+
+23
+00:02:01.241 --> 00:02:06.104
+Each branch connects across the same two points, so the branch voltage is common.
+
+24
+00:02:06.104 --> 00:02:10.966
+The traffic analogy helps because it makes the idea of splitting and recombining much more natural.
+
+25
+00:02:10.966 --> 00:02:15.829
+Keep this takeaway in view: Parallel circuits are branch-route stories before they are equation stories.
+
+26
+00:02:15.829 --> 00:02:20.692
+Two routes means parallel branches.
+
+27
+00:02:20.692 --> 00:02:25.555
+The flow can divide between the available paths.
+
+28
+00:02:25.555 --> 00:02:30.417
+Same endpoints means same voltage.
+
+29
+00:02:30.417 --> 00:02:35.280
+Each branch connects across the same two circuit points.
+
+30
+00:02:35.280 --> 00:02:40.227
+Two relations matter most here.
+
+31
+00:02:40.227 --> 00:02:45.175
+First, the total current equals the sum of the branch currents.
+
+32
+00:02:45.175 --> 00:02:50.122
+Second, the voltage across each branch equals the supply voltage.
+
+33
+00:02:50.122 --> 00:02:55.069
+Those rules fit together because the circuit splits into branches that share the same endpoints.
+
+34
+00:02:55.069 --> 00:03:00.016
+If another branch is added, the total current can increase because the circuit now offers another route for charge flow.
+
+35
+00:03:00.016 --> 00:03:04.964
+Keep this takeaway in view: Parallel formulas are just compact versions of the branch logic.
+
+36
+00:03:04.964 --> 00:03:09.911
+Current rule: Total current is the sum of the currents in the branches.
+
+37
+00:03:09.911 --> 00:03:14.858
+Voltage rule: Each branch has the same potential difference as the supply.
+
+38
+00:03:14.858 --> 00:03:19.805
+I_total = I1 + I2 + ...
+
+39
+00:03:19.805 --> 00:03:24.753
+V_branch = V_supply.
+
+40
+00:03:24.753 --> 00:03:29.700
+Each branch gets the full supply voltage, while the current divides between the branches.
+
+41
+00:03:29.700 --> 00:03:35.344
+When another branch is added in parallel, the circuit offers an extra path for charge flow.
+
+42
+00:03:35.344 --> 00:03:40.989
+That means the total resistance of the whole circuit becomes smaller, and for the same supply voltage the total current can become larger.
+
+43
+00:03:40.989 --> 00:03:46.633
+This is different from series circuits, where adding a resistor makes the total resistance larger.
+
+44
+00:03:46.633 --> 00:03:52.278
+Parallel circuits reward branch-based thinking: more routes usually mean easier overall flow.
+
+45
+00:03:52.278 --> 00:03:57.922
+Keep this takeaway in view: More parallel branches usually mean easier total flow through the circuit.
+
+46
+00:03:57.922 --> 00:04:03.567
+Add branch means more paths.
+
+47
+00:04:03.567 --> 00:04:09.211
+Charge has an extra route through the circuit.
+
+48
+00:04:09.211 --> 00:04:14.856
+Whole-circuit effect means lower total resistance.
+
+49
+00:04:14.856 --> 00:04:20.500
+The circuit becomes easier overall for charge to move through.
+
+50
+00:04:20.500 --> 00:04:25.865
+A common mistake is to assume that same voltage must mean same current in every branch.
+
+51
+00:04:25.865 --> 00:04:31.230
+That is only true when the branch resistances are the same.
+
+52
+00:04:31.230 --> 00:04:36.595
+In general, current depends on both the voltage and the resistance of the branch.
+
+53
+00:04:36.595 --> 00:04:41.960
+So the same supply voltage across two different branches can still produce different branch currents.
+
+54
+00:04:41.960 --> 00:04:47.325
+Keeping that distinction clear helps learners avoid overgeneralizing the same-voltage rule.
+
+55
+00:04:47.325 --> 00:04:52.690
+Keep this takeaway in view: Same branch voltage does not automatically mean same branch current.
+
+56
+00:04:52.690 --> 00:04:58.055
+Parallel branches share the same voltage.
+
+57
+00:04:58.055 --> 00:05:03.420
+Branch currents do not have to be equal.
+
+58
+00:05:03.420 --> 00:05:07.097
+Ask yourself three quick questions.
+
+59
+00:05:07.097 --> 00:05:10.774
+In a parallel circuit, what is the same across each branch?
+
+60
+00:05:10.774 --> 00:05:14.451
+The voltage.
+
+61
+00:05:14.451 --> 00:05:18.128
+What happens to the current at a split?
+
+62
+00:05:18.128 --> 00:05:21.805
+It divides between the branches.
+
+63
+00:05:21.805 --> 00:05:25.482
+And how do you find the total current after the branches rejoin?
+
+64
+00:05:25.482 --> 00:05:29.158
+Add the branch currents.
+
+65
+00:05:29.158 --> 00:05:32.835
+Those three statements are the lesson core.
+
+66
+00:05:32.835 --> 00:05:36.512
+Keep this takeaway in view: Parallel means same voltage, split current, and added total current.
+
+67
+00:05:36.512 --> 00:05:40.189
+Same quantity means voltage.
+
+68
+00:05:40.189 --> 00:05:43.866
+Each branch gets the full supply potential difference.
+
+69
+00:05:43.866 --> 00:05:47.543
+At the split means current divides.
+
+70
+00:05:47.543 --> 00:05:51.220
+The flow can separate into the available routes.
+
+71
+00:05:51.220 --> 00:05:56.674
+You are ready for the worked example now.
+
+72
+00:05:56.674 --> 00:06:02.127
+In a parallel circuit, each branch gets the full supply voltage, and the total current is found by adding the branch currents.
+
+73
+00:06:02.127 --> 00:06:07.581
+So if one branch carries 2 amperes and another carries 3 amperes, the total current is 5 amperes.
+
+74
+00:06:07.581 --> 00:06:13.035
+Keep the meaning attached: the current split across the branches and then recombined.
+
+75
+00:06:13.035 --> 00:06:18.488
+The same-voltage rule and the added-current rule come directly from the branch structure.
+
+76
+00:06:18.488 --> 00:06:23.942
+Keep this takeaway in view: The worked example is ready: use the branch rules, then calculate the total current.
+
+77
+00:06:23.942 --> 00:06:29.395
+Step 1: Recognize the circuit as parallel because it has branches.
+
+78
+00:06:29.395 --> 00:06:34.849
+Step 2: Read or calculate the current in each branch.
+
+79
+00:06:34.849 --> 00:06:40.303
+I_total = I1 + I2.
+
+80
+00:06:40.303 --> 00:06:45.756
+I_total = 2 + 3.
+
+81
+00:06:45.756 --> 00:06:51.210
+Use the branch-current rule because this is a parallel circuit.
