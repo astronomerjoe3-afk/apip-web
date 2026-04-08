@@ -494,7 +494,6 @@ function ScaffoldVideoPlayer({
             label="English"
             srcLang="en"
             src={captionsUrl}
-            default
           />
         ) : null}
       </video>
