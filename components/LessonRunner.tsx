@@ -477,73 +477,17 @@ function ScaffoldVideoPlayer({
   poster?: string;
   captionsUrl?: string;
 }) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [fallbackHref, setFallbackHref] = useState(src);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const cacheBustedSrc = src.includes("?")
-      ? `${src}&player_boot=${Date.now()}`
-      : `${src}?player_boot=${Date.now()}`;
-
-    setFallbackHref(cacheBustedSrc);
-
-    let cancelled = false;
-    let cleanupTimer: number | null = null;
-
-    const restorePausedStart = () => {
-      if (cancelled) return;
-      video.pause();
-      try {
-        video.currentTime = 0;
-      } catch {
-        // Ignore currentTime reset failures until metadata is ready.
-      }
-      video.muted = false;
-    };
-
-    const primePlayback = async () => {
-      try {
-        video.muted = true;
-        video.load();
-        await video.play();
-        cleanupTimer = window.setTimeout(() => restorePausedStart(), 180);
-      } catch {
-        video.load();
-      }
-    };
-
-    const handleCanPlay = () => {
-      if (!cancelled) {
-        restorePausedStart();
-      }
-    };
-
-    video.addEventListener("canplay", handleCanPlay);
-    void primePlayback();
-
-    return () => {
-      cancelled = true;
-      if (cleanupTimer !== null) {
-        window.clearTimeout(cleanupTimer);
-      }
-      video.removeEventListener("canplay", handleCanPlay);
-    };
-  }, [src]);
-
   return (
     <div>
       <video
-        ref={videoRef}
+        key={src}
         className="h-72 w-full rounded-2xl bg-slate-950 object-contain md:h-80"
         controls
         playsInline
-        preload="auto"
+        preload="metadata"
         poster={poster}
-        src={src}
       >
+        <source src={src} type="video/mp4" />
         {captionsUrl ? (
           <track
             kind="captions"
@@ -556,7 +500,7 @@ function ScaffoldVideoPlayer({
       </video>
       <div className="mt-3 text-sm">
         <a
-          href={fallbackHref}
+          href={src}
           target="_blank"
           rel="noreferrer"
           className="text-sky-700 underline underline-offset-4"
