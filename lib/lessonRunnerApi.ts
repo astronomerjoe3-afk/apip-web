@@ -13779,6 +13779,90 @@ function preWorkedExampleVideoMeta(code: string): {
     return `/lesson_assets/${moduleId}/${lessonId}/videos/${filename}?v=${assetVersion}`;
   };
   switch (code) {
+    case "M1_L1":
+      return {
+        body: "Use this video to read a mission log one segment at a time before you start the worked example.",
+        caption: "Video explainer: distance-time story reading, slope meaning, and pause detection before the lesson example.",
+        highlights: [
+          "The graph is a record of progress, not a map of the path",
+          "A flat section means time passes while distance stays unchanged",
+          "Steeper distance-time slope means a faster pace on that segment",
+        ],
+        checkForUnderstanding: "If two mission logs finish at the same distance and time, what part of the motion story can still be different?",
+        video_url: staticVideoAssetUrl("M1_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M1_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M1_L1", "captions.vtt"),
+      };
+    case "M1_L2":
+      return {
+        body: "Use this video to keep graph height and graph slope separate on a speed-time graph before the worked example begins.",
+        caption: "Video explainer: speed-now, change-in-speed, and section-by-section reading on a speed-time graph before the lesson example.",
+        highlights: [
+          "Graph height gives the speed at that instant",
+          "Graph slope gives the acceleration over an interval",
+          "A flat line above zero still means motion, not rest",
+        ],
+        checkForUnderstanding: "On a speed-time graph, which feature answers the speed-now question and which feature answers the acceleration question?",
+        video_url: staticVideoAssetUrl("M1_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M1_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M1_L2", "captions.vtt"),
+      };
+    case "M1_L3":
+      return {
+        body: "Use this video to secure signed acceleration before you attempt the worked example.",
+        caption: "Video explainer: signed velocity change, positive direction, and acceleration sign before the lesson example.",
+        highlights: [
+          "Choose a positive direction before interpreting signs",
+          "Acceleration comes from signed change in velocity over time",
+          "Negative acceleration does not always mean slowing down",
+        ],
+        checkForUnderstanding: "If velocity changes from minus five metres per second to plus one metre per second, what can you say first about the sign of the acceleration?",
+        video_url: staticVideoAssetUrl("M1_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M1_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M1_L3", "captions.vtt"),
+      };
+    case "M1_L4":
+      return {
+        body: "Use this video to choose constant-acceleration equations deliberately before you move into the worked example.",
+        caption: "Video explainer: knowns, unknowns, and constant-acceleration equation choice before the lesson example.",
+        highlights: [
+          "Check the constant-acceleration condition first",
+          "Choose the equation from the knowns and the unknown",
+          "Keep the motion story attached while substituting values",
+        ],
+        checkForUnderstanding: "If u, a, and t are known and v is required, which relationship is the direct first choice and why?",
+        video_url: staticVideoAssetUrl("M1_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M1_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M1_L4", "captions.vtt"),
+      };
+    case "M1_L5":
+      return {
+        body: "Use this video to lock slope meaning to the axes before the worked example starts.",
+        caption: "Video explainer: same tilt, different axes, and context-dependent gradient meaning before the lesson example.",
+        highlights: [
+          "Distance-time slope means speed",
+          "Speed-time slope means acceleration",
+          "The same numerical tilt can carry different units and meanings",
+        ],
+        checkForUnderstanding: "If two graphs have the same steepness but different vertical axes, what has to change in your interpretation?",
+        video_url: staticVideoAssetUrl("M1_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M1_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M1_L5", "captions.vtt"),
+      };
+    case "M1_L6":
+      return {
+        body: "Use this video to build total distance from the full area under a speed-time graph before the worked example begins.",
+        caption: "Video explainer: rectangle, triangle, trapezium, and total area meaning on a speed-time graph before the lesson example.",
+        highlights: [
+          "Area meaning comes from the speed-time axes",
+          "Total distance uses the whole shaded region, not just the final height",
+          "Different graph shapes can still give the same total distance",
+        ],
+        checkForUnderstanding: "Why can two different speed-time shapes still represent the same total distance over an interval?",
+        video_url: staticVideoAssetUrl("M1_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M1_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M1_L6", "captions.vtt"),
+      };
     case "F1_L1":
       return {
         body: "Use this video to consolidate how a complete measurement combines the quantity, the number, and the unit before you move into the worked example.",

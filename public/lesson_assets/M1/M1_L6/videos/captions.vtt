@@ -1,0 +1,345 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.743
+This lesson gives area a physical meaning.
+
+2
+00:00:05.743 --> 00:00:11.486
+On a speed-time graph, the area under the graph equals the distance travelled.
+
+3
+00:00:11.486 --> 00:00:17.229
+That is because each small strip has a speed height and a time width, so each strip contributes a small distance.
+
+4
+00:00:17.229 --> 00:00:22.972
+When all the strips are combined, the total shaded area becomes the total distance for the interval.
+
+5
+00:00:22.972 --> 00:00:28.715
+Once that meaning is secure, rectangles, triangles, and trapezia stop feeling like random geometry tasks.
+
+6
+00:00:28.715 --> 00:00:34.458
+Keep this takeaway in view: On a speed-time graph, the full area under the line gives total distance.
+
+7
+00:00:34.458 --> 00:00:40.201
+Graph type means speed-time.
+
+8
+00:00:40.201 --> 00:00:45.944
+Area gets its meaning from the axes, not from the word graph alone.
+
+9
+00:00:45.944 --> 00:00:51.687
+Shaded region means total distance.
+
+10
+00:00:51.687 --> 00:00:57.430
+The full area under the graph is the total distance travelled.
+
+11
+00:00:57.430 --> 00:01:03.060
+The area diagram is powerful because it turns the motion story into visible blocks and wedges.
+
+12
+00:01:03.060 --> 00:01:08.690
+Every part of the shaded region contributes to the total distance.
+
+13
+00:01:08.690 --> 00:01:14.320
+A rectangle shows constant speed for a time interval.
+
+14
+00:01:14.320 --> 00:01:19.950
+A triangle or trapezium shows a changing speed across the interval.
+
+15
+00:01:19.950 --> 00:01:25.580
+The full shaded region matters, not just the top edge of the graph.
+
+16
+00:01:25.580 --> 00:01:31.210
+That is the central idea the worked example is about to use.
+
+17
+00:01:31.210 --> 00:01:36.840
+Keep this takeaway in view: Distance comes from the full area, even when the graph shape changes along the way.
+
+18
+00:01:36.840 --> 00:01:42.470
+Rectangle region: Constant speed times time gives a distance block.
+
+19
+00:01:42.470 --> 00:01:48.100
+Sloped region: Changing speed can still be handled by a triangle or trapezium area.
+
+20
+00:01:48.100 --> 00:01:53.376
+A strong analogy is a strip-built distance meter.
+
+21
+00:01:53.376 --> 00:01:58.653
+Picture the graph area sliced into many thin vertical strips.
+
+22
+00:01:58.653 --> 00:02:03.929
+Each strip has a tiny time width and a speed height.
+
+23
+00:02:03.929 --> 00:02:09.205
+Speed times time gives a small distance for that strip.
+
+24
+00:02:09.205 --> 00:02:14.482
+Add all the strips and you get the total distance.
+
+25
+00:02:14.482 --> 00:02:19.758
+This analogy matters because it shows why even unusual shapes can still represent total distance: every strip still contributes its share.
+
+26
+00:02:19.758 --> 00:02:25.035
+Keep this takeaway in view: Area means accumulated distance because each thin strip contributes speed x time.
+
+27
+00:02:25.035 --> 00:02:30.311
+Thin strip means small time x speed.
+
+28
+00:02:30.311 --> 00:02:35.587
+Each strip adds a little piece of distance.
+
+29
+00:02:35.587 --> 00:02:40.864
+Many strips means total distance.
+
+30
+00:02:40.864 --> 00:02:46.140
+Adding the strips gives the whole journey distance.
+
+31
+00:02:46.140 --> 00:02:51.702
+In practice, learners usually split the graph into familiar shapes.
+
+32
+00:02:51.702 --> 00:02:57.263
+A rectangle gives speed times time.
+
+33
+00:02:57.263 --> 00:03:02.825
+A triangle gives one-half base times height.
+
+34
+00:03:02.825 --> 00:03:08.387
+A trapezium gives one-half open bracket a plus b close bracket times h, or average speed times time.
+
+35
+00:03:08.387 --> 00:03:13.948
+The important thing is not to worship the geometry.
+
+36
+00:03:13.948 --> 00:03:19.510
+The point is that each area is representing a distance contribution from that section of the motion story.
+
+37
+00:03:19.510 --> 00:03:25.072
+Keep this takeaway in view: Choose shapes to represent distance contributions cleanly, then add them.
+
+38
+00:03:25.072 --> 00:03:30.633
+Rectangle: Best for constant-speed sections.
+
+39
+00:03:30.633 --> 00:03:36.195
+Triangle: Useful when the line rises or falls from zero in a straight way.
+
+40
+00:03:36.195 --> 00:03:41.757
+rectangle: area = speed x time.
+
+41
+00:03:41.757 --> 00:03:47.318
+triangle: area = 1/2 x base x height.
+
+42
+00:03:47.318 --> 00:03:52.880
+Choose the area shape that matches the graph section, then add all sections for the total distance.
+
+43
+00:03:52.880 --> 00:03:58.328
+One of the deepest ideas in this lesson is that different speed-time shapes can still represent the same total distance if the total area matches.
+
+44
+00:03:58.328 --> 00:04:03.776
+One graph may have a tall narrow peak.
+
+45
+00:04:03.776 --> 00:04:09.224
+Another may have a lower wider region.
+
+46
+00:04:09.224 --> 00:04:14.672
+If the full areas are equal, the total distance is equal even though the speed histories are different.
+
+47
+00:04:14.672 --> 00:04:20.120
+This helps learners stop judging total distance from the highest point alone.
+
+48
+00:04:20.120 --> 00:04:25.568
+Keep this takeaway in view: Equal total area means equal total distance even when the graphs look different.
+
+49
+00:04:25.568 --> 00:04:31.016
+Tall narrow shape means one speed story.
+
+50
+00:04:31.016 --> 00:04:36.464
+A sharper pace pattern can still produce a certain total area.
+
+51
+00:04:36.464 --> 00:04:41.912
+Lower wider shape means another speed story.
+
+52
+00:04:41.912 --> 00:04:47.360
+A gentler pace pattern can match the same total area.
+
+53
+00:04:47.360 --> 00:04:53.085
+A major trap in this lesson is to look at the graph's final height and think that number must be the total distance.
+
+54
+00:04:53.085 --> 00:04:58.810
+But the final height is just the final speed on a speed-time graph.
+
+55
+00:04:58.810 --> 00:05:04.535
+Total distance comes from the area under the graph over the full interval.
+
+56
+00:05:04.535 --> 00:05:10.260
+Another trap is to calculate one section and forget to add the rest.
+
+57
+00:05:10.260 --> 00:05:15.985
+The lesson wants full-area thinking, not last-point thinking.
+
+58
+00:05:15.985 --> 00:05:21.710
+Keep this takeaway in view: Distance comes from the full area, not from the last point on the line.
+
+59
+00:05:21.710 --> 00:05:27.435
+Final graph height gives final speed, not total distance.
+
+60
+00:05:27.435 --> 00:05:33.160
+Area meaning belongs specifically to speed-time graphs.
+
+61
+00:05:33.160 --> 00:05:36.605
+Check yourself.
+
+62
+00:05:36.605 --> 00:05:40.051
+Why does area have meaning here?
+
+63
+00:05:40.051 --> 00:05:43.496
+Because the axes are speed and time.
+
+64
+00:05:43.496 --> 00:05:46.942
+What gives the total distance?
+
+65
+00:05:46.942 --> 00:05:50.387
+The full shaded region under the graph.
+
+66
+00:05:50.387 --> 00:05:53.832
+Can two different shapes give the same total distance?
+
+67
+00:05:53.832 --> 00:05:57.278
+Yes, if their total areas are equal.
+
+68
+00:05:57.278 --> 00:06:00.723
+Those three answers are the complete logic of the lesson.
+
+69
+00:06:00.723 --> 00:06:04.168
+Keep this takeaway in view: Area, not height, is the distance story on this graph type.
+
+70
+00:06:04.168 --> 00:06:07.614
+Why area works means speed x time.
+
+71
+00:06:07.614 --> 00:06:11.059
+The axes give the area a distance meaning.
+
+72
+00:06:11.059 --> 00:06:14.505
+What to use means whole shaded region.
+
+73
+00:06:14.505 --> 00:06:17.950
+Total distance comes from all sections together.
+
+74
+00:06:17.950 --> 00:06:23.762
+You are ready for the worked example now.
+
+75
+00:06:23.762 --> 00:06:29.573
+The graph shows six metres per second for four seconds, then a straight rise from six to ten metres per second over the next two seconds.
+
+76
+00:06:29.573 --> 00:06:35.385
+Start with the first section: rectangle area equals six times four, which gives twenty-four metres.
+
+77
+00:06:35.385 --> 00:06:41.196
+Then use the second section as a trapezium.
+
+78
+00:06:41.196 --> 00:06:47.008
+Average speed is open bracket six plus ten close bracket over two, which is eight.
+
+79
+00:06:47.008 --> 00:06:52.819
+Multiply by two seconds to get sixteen metres.
+
+80
+00:06:52.819 --> 00:06:58.631
+Add the two areas: twenty-four plus sixteen gives forty metres total distance.
+
+81
+00:06:58.631 --> 00:07:04.442
+Keep this takeaway in view: The worked example is ready: build total distance from the whole area under the graph.
+
+82
+00:07:04.442 --> 00:07:10.254
+Step 1: Split the graph into manageable shapes that match each section.
+
+83
+00:07:10.254 --> 00:07:16.065
+Step 2: Find the distance contribution from each area separately.
+
+84
+00:07:16.065 --> 00:07:21.877
+rectangle: 6 x 4 = 24 m.
+
+85
+00:07:21.877 --> 00:07:27.688
+trapezium: ((6 + 10) / 2) x 2 = 16 m.
+
+86
+00:07:27.688 --> 00:07:33.500
+The total distance comes from adding the area contributions of all graph sections.
