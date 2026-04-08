@@ -7053,6 +7053,352 @@ function renderedPromptOverride(item: UnknownRecord): string | null {
   }
 }
 
+function shortAnswerDisplayCandidates(item: UnknownRecord): string[] {
+  const explicitValues = [
+    text(item.correct_answer || item.correctAnswer).trim(),
+    ...asList(item.accepted_answers).map((entry) => text(entry).trim()),
+    ...asList(item.acceptedAnswers).map((entry) => text(entry).trim()),
+  ].filter(Boolean);
+
+  if (explicitValues.length > 0) {
+    return [...new Set(explicitValues)];
+  }
+
+  const meta = fallbackMeta(item);
+  return [...new Set([
+    text(meta?.correctAnswer).trim(),
+    ...(meta?.acceptedAnswers || []).map((entry) => text(entry).trim()),
+  ].filter(Boolean))];
+}
+
+function isGenericLessonLanguagePrompt(prompt: string): boolean {
+  const key = normalizePromptKey(prompt);
+  if (!key) return false;
+  return (
+    /^use the lesson s .+ language(?: rather than .+)?$/.test(key) ||
+    /^state the lesson s .+$/.test(key) ||
+    key.includes("cause and effect language") ||
+    key.includes("memorized slogan") ||
+    key.includes("lesson point") ||
+    key.includes("main distinction") ||
+    key.includes("underlying relationship") ||
+    key.includes("label only")
+  );
+}
+
+function isGenericShortAnswerDisplayAnswer(answer: string): boolean {
+  const key = normalizePromptKey(answer);
+  if (!key) return true;
+  return (
+    isGenericLessonLanguagePrompt(answer) ||
+    key === "review the lesson idea and try again" ||
+    key.startsWith("reconnect the main idea") ||
+    key.includes("main lesson idea") ||
+    key.includes("main distinction") ||
+    key.includes("lesson point")
+  );
+}
+
+function shortAnswerDisplaySpecificityScore(answer: string): number {
+  const candidate = text(answer).trim();
+  if (!candidate) return Number.NEGATIVE_INFINITY;
+
+  const tokens = meaningfulOpenAnswerTokens(candidate);
+  let score = Math.min(tokens.length, 18);
+
+  if (/^because\b/i.test(candidate)) score += 2;
+  if (/[.?!]$/.test(candidate)) score += 1;
+  if (candidate.length >= 60) score += 2;
+  if (candidate.length >= 110) score += 1;
+  if (isGenericShortAnswerDisplayAnswer(candidate)) score -= 12;
+  if (tokens.length < 4) score -= 4;
+
+  return score;
+}
+
+function bestShortAnswerDisplayCandidate(item: UnknownRecord): string {
+  const candidates = shortAnswerDisplayCandidates(item);
+  if (candidates.length === 0) return "";
+
+  return [...candidates].sort((left, right) => {
+    const scoreDelta = shortAnswerDisplaySpecificityScore(right) - shortAnswerDisplaySpecificityScore(left);
+    if (scoreDelta !== 0) return scoreDelta;
+    return right.length - left.length;
+  })[0];
+}
+
+function a1ShortAnswerSignalText(item: UnknownRecord): string {
+  return normalizePromptKey([
+    text(item.prompt).trim(),
+    text(item.hint).trim(),
+    text(item.teaching_focus || item.teachingFocus).trim(),
+    ...shortAnswerDisplayCandidates(item),
+  ].filter(Boolean).join(" "));
+}
+
+function a1ShortAnswerFallbackAnswer(item: UnknownRecord): string {
+  const code = lessonCodeFromItemId(text(item.id));
+  const signals = a1ShortAnswerSignalText(item);
+
+  if (signals.includes("same mass") && signals.includes("opposite charge")) {
+    return "Because an antiparticle matches its partner's mass but carries the opposite charge, so pair events stay balanced.";
+  }
+
+  if (
+    signals.includes("vanishing trick") ||
+    signals.includes("disappear") ||
+    signals.includes("matter radiation exchange")
+  ) {
+    return "Because annihilation is a balanced matter-radiation exchange, not simple disappearance, so the event ledger still has to close.";
+  }
+
+  if (
+    signals.includes("pair production") ||
+    signals.includes("rest energy") ||
+    signals.includes("threshold")
+  ) {
+    return "Because pair production must supply the rest energy of both new particles while still satisfying the conservation ledger.";
+  }
+
+  if (
+    signals.includes("baryon number") ||
+    signals.includes("lepton number") ||
+    (signals.includes("charge") && signals.includes("conserve"))
+  ) {
+    return "Because an allowed particle event must conserve charge, baryon number, and lepton number together, not charge alone.";
+  }
+
+  if (
+    signals.includes("messenger") ||
+    signals.includes("exchange particle") ||
+    signals.includes("interaction family") ||
+    signals.includes("strong interaction") ||
+    signals.includes("weak interaction")
+  ) {
+    return "Because messenger particles and particle-change clues help distinguish strong binding events from weak interaction events.";
+  }
+
+  if (
+    signals.includes("particle layout") ||
+    signals.includes("interaction clue") ||
+    signals.includes("conservation ledger") ||
+    signals.includes("more than one clue")
+  ) {
+    return "Because a good particle interpretation combines the particle layout, the interaction clue, and the conservation ledger before you name the event.";
+  }
+
+  if (
+    signals.includes("quark") &&
+    (signals.includes("baryon") || signals.includes("meson") || signals.includes("antiquark"))
+  ) {
+    return "Because baryons are three-quark hadrons while mesons are quark-antiquark hadrons, so quark packing is the safest classifier.";
+  }
+
+  if (
+    signals.includes("photon") &&
+    signals.includes("lepton") &&
+    signals.includes("nucleon")
+  ) {
+    return "Because photons are radiation messengers, leptons are solo matter particles, and nucleons are nucleus bundles, so keeping them separate prevents later particle stories from collapsing together.";
+  }
+
+  switch (code) {
+    case "A1_L1":
+      return "Because photons are radiation messengers, leptons are solo matter particles, and nucleons are nucleus bundles, so keeping them separate prevents later particle stories from collapsing together.";
+    case "A1_L2":
+      return "Because baryons are three-quark hadrons while mesons are quark-antiquark hadrons, so quark packing is the safest classifier.";
+    case "A1_L3":
+      return "Because pair production must supply the rest energy of both new particles while still satisfying the conservation ledger.";
+    case "A1_L4":
+      return "Because messenger particles and particle-change clues help distinguish strong binding events from weak interaction events.";
+    case "A1_L5":
+      return "Because an allowed particle event must conserve charge, baryon number, and lepton number together, not charge alone.";
+    case "A1_L6":
+      return "Because a good particle interpretation combines the particle layout, the interaction clue, and the conservation ledger before you name the event.";
+    default:
+      return "";
+  }
+}
+
+function a1ShortAnswerFallbackPrompt(item: UnknownRecord): string {
+  const code = lessonCodeFromItemId(text(item.id));
+  const signals = a1ShortAnswerSignalText(item);
+
+  if (signals.includes("same mass") && signals.includes("opposite charge")) {
+    return "What makes a particle and its antiparticle mirror partners in pair events?";
+  }
+
+  if (
+    signals.includes("vanishing trick") ||
+    signals.includes("disappear") ||
+    signals.includes("matter radiation exchange")
+  ) {
+    return "Why should annihilation be read as a balanced exchange instead of particles simply disappearing?";
+  }
+
+  if (
+    signals.includes("pair production") ||
+    signals.includes("rest energy") ||
+    signals.includes("threshold")
+  ) {
+    return "Why must pair production clear both the rest-energy threshold and the conservation ledger?";
+  }
+
+  if (
+    signals.includes("baryon number") ||
+    signals.includes("lepton number") ||
+    (signals.includes("charge") && signals.includes("conserve"))
+  ) {
+    return "Why is charge alone not enough when you decide whether a particle event is allowed?";
+  }
+
+  if (
+    signals.includes("messenger") ||
+    signals.includes("exchange particle") ||
+    signals.includes("interaction family") ||
+    signals.includes("strong interaction") ||
+    signals.includes("weak interaction")
+  ) {
+    return "How do messenger particles help you tell strong and weak interaction stories apart?";
+  }
+
+  if (
+    signals.includes("particle layout") ||
+    signals.includes("interaction clue") ||
+    signals.includes("conservation ledger") ||
+    signals.includes("more than one clue")
+  ) {
+    return "Why should you combine particle layout, interaction clues, and the conservation ledger before naming the event?";
+  }
+
+  if (
+    signals.includes("quark") &&
+    (signals.includes("baryon") || signals.includes("meson") || signals.includes("antiquark"))
+  ) {
+    return "Why is quark packing the safest way to distinguish baryons from mesons?";
+  }
+
+  if (
+    signals.includes("photon") &&
+    signals.includes("lepton") &&
+    signals.includes("nucleon")
+  ) {
+    return "Why must photons, leptons, and nucleons be kept in distinct categories before later particle stories are built?";
+  }
+
+  switch (code) {
+    case "A1_L1":
+      return "Why must photons, leptons, and nucleons be kept in distinct categories before later particle stories are built?";
+    case "A1_L2":
+      return "Why is quark packing the safest way to distinguish baryons from mesons?";
+    case "A1_L3":
+      return "Why must pair production clear both the rest-energy threshold and the conservation ledger?";
+    case "A1_L4":
+      return "How do messenger particles help you tell strong and weak interaction stories apart?";
+    case "A1_L5":
+      return "Why is charge alone not enough when you decide whether a particle event is allowed?";
+    case "A1_L6":
+      return "Why should you combine particle layout, interaction clues, and the conservation ledger before naming the event?";
+    default:
+      return "";
+  }
+}
+
+function a1ShortAnswerFallbackTeachingFocus(item: UnknownRecord): string {
+  const code = lessonCodeFromItemId(text(item.id));
+  const signals = a1ShortAnswerSignalText(item);
+
+  if (
+    signals.includes("pair production") ||
+    signals.includes("rest energy") ||
+    signals.includes("threshold")
+  ) {
+    return "Pair production needs enough rest energy for the new pair, and the before-and-after ledger still has to balance.";
+  }
+
+  if (
+    signals.includes("messenger") ||
+    signals.includes("exchange particle") ||
+    signals.includes("interaction family") ||
+    signals.includes("strong interaction") ||
+    signals.includes("weak interaction")
+  ) {
+    return "Messenger particles and particle-change clues help distinguish strong binding stories from weak interaction stories.";
+  }
+
+  if (
+    signals.includes("baryon number") ||
+    signals.includes("lepton number") ||
+    (signals.includes("charge") && signals.includes("conserve"))
+  ) {
+    return "Accept a particle event only when charge, baryon number, and lepton number all conserve together.";
+  }
+
+  if (
+    signals.includes("particle layout") ||
+    signals.includes("interaction clue") ||
+    signals.includes("conservation ledger") ||
+    signals.includes("more than one clue")
+  ) {
+    return "A strong particle interpretation combines the particle layout, the interaction clue, and the conservation ledger before you commit to one label.";
+  }
+
+  if (
+    signals.includes("quark") &&
+    (signals.includes("baryon") || signals.includes("meson") || signals.includes("antiquark"))
+  ) {
+    return "Classify hadrons by quark packing: three quarks means baryon, while quark-antiquark pair means meson.";
+  }
+
+  if (
+    signals.includes("photon") &&
+    signals.includes("lepton") &&
+    signals.includes("nucleon")
+  ) {
+    return "Separate photons, leptons, and nucleons before you build later particle stories on top of them.";
+  }
+
+  switch (code) {
+    case "A1_L1":
+      return "Separate photons, leptons, and nucleons before you build later particle stories on top of them.";
+    case "A1_L2":
+      return "Classify hadrons by quark packing: three quarks means baryon, while quark-antiquark pair means meson.";
+    case "A1_L3":
+      return "Pair production needs enough rest energy for the new pair, and the before-and-after ledger still has to balance.";
+    case "A1_L4":
+      return "Messenger particles and particle-change clues help distinguish strong binding stories from weak interaction stories.";
+    case "A1_L5":
+      return "Accept a particle event only when charge, baryon number, and lepton number all conserve together.";
+    case "A1_L6":
+      return "A strong particle interpretation combines the particle layout, the interaction clue, and the conservation ledger before you commit to one label.";
+    default:
+      return "";
+  }
+}
+
+function a1ShortAnswerPromptOverride(item: UnknownRecord): string | null {
+  if (asList(item.choices).length > 0) return null;
+  const code = lessonCodeFromItemId(text(item.id));
+  if (!/^A1_L[1-6]$/.test(code)) return null;
+  if (!isGenericLessonLanguagePrompt(text(item.prompt))) return null;
+  const prompt = a1ShortAnswerFallbackPrompt(item);
+  return prompt || null;
+}
+
+function resolvedTeachingFocus(item: UnknownRecord, prompt: string, title: string): string {
+  const metaFocus = text(fallbackMeta(item)?.teachingFocus).trim();
+  if (metaFocus) return metaFocus;
+
+  const explicitFocus = text(item.teaching_focus || item.teachingFocus || item.hint).trim();
+  const code = lessonCodeFromItemId(text(item.id));
+  if (/^A1_L[1-6]$/.test(code) && (!explicitFocus || isGenericLessonLanguagePrompt(explicitFocus))) {
+    const fallbackFocus = a1ShortAnswerFallbackTeachingFocus(item);
+    if (fallbackFocus) return fallbackFocus;
+  }
+
+  return explicitFocus || teachingFocus(prompt, title);
+}
+
 function lessonCodeFromItemId(itemId: string): string {
   const match = itemId.toUpperCase().match(/^([A-Z]\d+)(?:-)?L([1-6])[_-][A-Z]+\d+$/);
   return match ? `${match[1]}_L${match[2]}` : "";
@@ -7140,6 +7486,8 @@ function advancedContrastAnswerPrompt(item: UnknownRecord): string | null {
 function renderedPromptText(item: UnknownRecord): string {
   const promptOverride = renderedPromptOverride(item);
   if (promptOverride) return promptOverride;
+  const a1ShortAnswerPrompt = a1ShortAnswerPromptOverride(item);
+  if (a1ShortAnswerPrompt) return normalizeRenderedPhysicsText(a1ShortAnswerPrompt);
   const advancedContrastPrompt = advancedContrastAnswerPrompt(item);
   if (advancedContrastPrompt) return normalizeRenderedPhysicsText(advancedContrastPrompt);
   const override = m5RenderedQuestionOverride(item);
@@ -7315,12 +7663,18 @@ function resolvedCorrectAnswer(item: UnknownRecord): string {
   const correctIndex = resolvedAnswerIndex(item);
   if (correctIndex >= 0 && correctIndex < choices.length) return normalizeRenderedPhysicsText(choices[correctIndex]);
 
-  const explicitCorrect = text(item.correct_answer || item.correctAnswer).trim();
-  if (explicitCorrect) return normalizeRenderedPhysicsText(explicitCorrect);
+  const displayCandidate = bestShortAnswerDisplayCandidate(item);
+  if (displayCandidate && !isGenericShortAnswerDisplayAnswer(displayCandidate)) {
+    return normalizeRenderedPhysicsText(displayCandidate);
+  }
 
-  const accepted = shortAnswerAccepted(item);
-  if (accepted.length > 0) {
-    return normalizeRenderedPhysicsText(accepted.find((entry) => /[A-Za-z]/.test(entry)) || accepted[0]);
+  const a1Fallback = a1ShortAnswerFallbackAnswer(item);
+  if (a1Fallback) {
+    return normalizeRenderedPhysicsText(a1Fallback);
+  }
+
+  if (displayCandidate) {
+    return normalizeRenderedPhysicsText(displayCandidate);
   }
 
   return normalizeRenderedPhysicsText(fallbackMeta(item)?.correctAnswer || "Review the lesson idea and try again.");
@@ -7411,7 +7765,6 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
 
 function grade(item: UnknownRecord, answer: unknown, title: string): UnknownRecord {
   const prompt = renderedPromptText(item);
-  const meta = fallbackMeta(item);
   const choices = renderedChoices(item);
   const answerIndex = valueIndex(answer);
   const acceptedAnswers = shortAnswerAccepted(item);
@@ -7420,7 +7773,7 @@ function grade(item: UnknownRecord, answer: unknown, title: string): UnknownReco
       ? multipleChoiceMatches(item, answer)
       : shortAnswerMatches(answer, acceptedAnswers, item);
   const explanation = resolvedExplanation(item, answerIndex);
-  const focus = meta?.teachingFocus || text(item.hint) || teachingFocus(prompt, title);
+  const focus = resolvedTeachingFocus(item, prompt, title);
   const explanationFallback = isCorrect
     ? `Correct. ${resolvedCorrectAnswer(item)} is right because ${focus.charAt(0).toLowerCase()}${focus.slice(1)}`
     : focus;
@@ -10103,7 +10456,7 @@ function lessonWorkedExampleCorePhysics(lesson: UnknownRecord): string {
 
 function workedExampleStepsFromAssessmentItem(item: UnknownRecord, title: string): string[] {
   const prompt = renderedPromptText(item);
-  const focus = ensureSentence(teachingFocus(prompt, title)).replace(/[.!?]+$/g, "");
+  const focus = ensureSentence(resolvedTeachingFocus(item, prompt, title)).replace(/[.!?]+$/g, "");
   const choices = renderedChoices(item);
   const numericPrompt = /\d/.test(prompt) || /[=+\-/*^]/.test(prompt);
 
@@ -10142,7 +10495,7 @@ function workedExampleEntryFromAssessmentItem(
   const answer = resolvedCorrectAnswer(item).trim();
   const answerReason = resolvedExplanation(item, answerIndex).trim();
   const title = lessonTitle(lesson, lesson);
-  const whyItMatters = ensureSentence(teachingFocus(rawPrompt, title)) || "Use the lesson physics rule directly and state why the answer follows.";
+  const whyItMatters = ensureSentence(resolvedTeachingFocus(item, rawPrompt, title)) || "Use the lesson physics rule directly and state why the answer follows.";
   const prompt = sharpenWorkedExamplePrompt(rawPrompt, answer, answerReason, whyItMatters);
 
   if (!prompt || !answer) return null;
