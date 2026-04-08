@@ -1,0 +1,317 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.658
+This lesson becomes much easier when components are treated as a new description of the same vector rather than as extra forces added to the scene.
+
+2
+00:00:06.658 --> 00:00:13.316
+A diagonal push can be rewritten as horizontal and vertical parts on chosen axes.
+
+3
+00:00:13.316 --> 00:00:19.973
+Once that is done, each axis can be handled cleanly with signs, and only after that should the final resultant be rebuilt.
+
+4
+00:00:19.973 --> 00:00:26.631
+This is the core discipline of vector components.
+
+5
+00:00:26.631 --> 00:00:33.289
+Keep this takeaway in view: Components are a cleaner description of one vector, not extra forces added on top.
+
+6
+00:00:33.289 --> 00:00:39.947
+Original arrow means one force.
+
+7
+00:00:39.947 --> 00:00:46.604
+The diagonal vector is the real starting force story.
+
+8
+00:00:46.604 --> 00:00:53.262
+Arrow Split means component description.
+
+9
+00:00:53.262 --> 00:00:59.920
+Horizontal and vertical parts describe that same vector on chosen axes.
+
+10
+00:00:59.920 --> 00:01:06.284
+The arrow-split diagram shows the central move of the lesson: rewrite the diagonal force as perpendicular horizontal and vertical components.
+
+11
+00:01:06.284 --> 00:01:12.649
+The original vector has not changed.
+
+12
+00:01:12.649 --> 00:01:19.013
+Only its description has changed.
+
+13
+00:01:19.013 --> 00:01:25.377
+This matters because axis bookkeeping is much easier with straight horizontal and vertical pieces than with diagonal arrows that must be compared all at once.
+
+14
+00:01:25.377 --> 00:01:31.741
+Keep this takeaway in view: Resolve first so the axis bookkeeping becomes simple and trustworthy.
+
+15
+00:01:31.741 --> 00:01:38.106
+Same vector: The diagonal force and its components describe the same underlying push.
+
+16
+00:01:38.106 --> 00:01:44.470
+Chosen axes: Components depend on the axes chosen for the problem.
+
+17
+00:01:44.470 --> 00:01:51.799
+Once the net horizontal and net vertical components are known, the final resultant is rebuilt as a diagonal from those perpendicular totals.
+
+18
+00:01:51.799 --> 00:01:59.127
+This is why plain same-line algebraic addition is not enough here.
+
+19
+00:01:59.127 --> 00:02:06.456
+Perpendicular components need vector addition, which leads to a diagonal resultant.
+
+20
+00:02:06.456 --> 00:02:13.784
+The geometry of that diagonal is what brings in Pythagoras and the direction angle.
+
+21
+00:02:13.784 --> 00:02:21.113
+Keep this takeaway in view: Perpendicular component totals lead to a diagonal resultant, not a plain arithmetic sum.
+
+22
+00:02:21.113 --> 00:02:28.441
+Horizontal total: Combine left-right components with signs on the x-axis first.
+
+23
+00:02:28.441 --> 00:02:35.770
+Vertical total: Combine up-down components with signs on the y-axis first.
+
+24
+00:02:35.770 --> 00:02:40.854
+A strong analogy is a city-grid route.
+
+25
+00:02:40.854 --> 00:02:45.937
+A diagonal trip can be described as a certain number of east steps and a certain number of north steps.
+
+26
+00:02:45.937 --> 00:02:51.021
+The destination is the same either way.
+
+27
+00:02:51.021 --> 00:02:56.105
+Only the bookkeeping changed.
+
+28
+00:02:56.105 --> 00:03:01.188
+That is exactly what components do for a diagonal force.
+
+29
+00:03:01.188 --> 00:03:06.272
+The vector stays the same, but the axis description becomes cleaner and easier to combine with other axis-aligned quantities.
+
+30
+00:03:06.272 --> 00:03:11.355
+Keep this takeaway in view: Arrow Split is a cleaner axis description of one original vector.
+
+31
+00:03:11.355 --> 00:03:16.439
+Diagonal trip means original vector.
+
+32
+00:03:16.439 --> 00:03:21.523
+This is the full move before it is split.
+
+33
+00:03:21.523 --> 00:03:26.606
+East and north steps means components.
+
+34
+00:03:26.606 --> 00:03:31.690
+These are the axis descriptions of the same move.
+
+35
+00:03:31.690 --> 00:03:39.088
+If the net horizontal and net vertical components are perpendicular, the resultant magnitude comes from Pythagoras.
+
+36
+00:03:39.088 --> 00:03:46.486
+The direction is then measured counterclockwise from the plus x-axis in this lesson.
+
+37
+00:03:46.486 --> 00:03:53.884
+In first-quadrant cases, the angle size can be found with tan inverse of y over x.
+
+38
+00:03:53.884 --> 00:04:01.282
+But the signs of the net components still matter, because they tell you which quadrant the resultant actually lies in.
+
+39
+00:04:01.282 --> 00:04:08.680
+Keep this takeaway in view: First combine components with signs, then use geometry to rebuild the final vector.
+
+40
+00:04:08.680 --> 00:04:16.078
+Magnitude: Use Pythagoras only after the net axis components are known.
+
+41
+00:04:16.078 --> 00:04:23.476
+Direction: Measure counterclockwise from the positive x-axis in this lesson.
+
+42
+00:04:23.476 --> 00:04:30.874
+resultant magnitude = sqrt(x^2 + y^2).
+
+43
+00:04:30.874 --> 00:04:38.272
+theta = tan^-1(y / x) in first-quadrant cases.
+
+44
+00:04:38.272 --> 00:04:45.670
+Use the net x and net y totals after signed component combination, then measure direction from +x.
+
+45
+00:04:45.670 --> 00:04:52.660
+A common trap is to add eight and six and say the resultant must be fourteen.
+
+46
+00:04:52.660 --> 00:04:59.650
+That would only work for same-line arrows.
+
+47
+00:04:59.650 --> 00:05:06.640
+Another trap is to forget the sign of one component and lose the correct quadrant.
+
+48
+00:05:06.640 --> 00:05:13.630
+A third trap is to measure the direction from the y-axis even though the lesson has defined the angle from the positive x-axis.
+
+49
+00:05:13.630 --> 00:05:20.620
+These are all bookkeeping errors, and the cure is the same: resolve first, combine by axis, then rebuild carefully.
+
+50
+00:05:20.620 --> 00:05:27.610
+Keep this takeaway in view: Component questions are won by disciplined bookkeeping, not by rushing the final arrow.
+
+51
+00:05:27.610 --> 00:05:34.600
+Resolve the diagonal vector before combining it with other forces.
+
+52
+00:05:34.600 --> 00:05:41.590
+Combine horizontal and vertical parts separately with signs.
+
+53
+00:05:41.590 --> 00:05:44.820
+Check yourself.
+
+54
+00:05:44.820 --> 00:05:48.050
+What should happen first with a diagonal vector?
+
+55
+00:05:48.050 --> 00:05:51.280
+Resolve it into components on chosen axes.
+
+56
+00:05:51.280 --> 00:05:54.510
+What do you combine next?
+
+57
+00:05:54.510 --> 00:05:57.740
+Net horizontal and net vertical components separately with signs.
+
+58
+00:05:57.740 --> 00:06:00.970
+What comes only after that?
+
+59
+00:06:00.970 --> 00:06:04.200
+The final resultant magnitude and direction.
+
+60
+00:06:04.200 --> 00:06:07.430
+Those three steps are the entire routine of the lesson.
+
+61
+00:06:07.430 --> 00:06:10.660
+Keep this takeaway in view: Resolve, combine, rebuild: that is the full component routine.
+
+62
+00:06:10.660 --> 00:06:13.890
+First means resolve.
+
+63
+00:06:13.890 --> 00:06:17.120
+Rewrite the diagonal vector as component parts.
+
+64
+00:06:17.120 --> 00:06:20.350
+Second means combine by axis.
+
+65
+00:06:20.350 --> 00:06:23.580
+Keep x and y bookkeeping separate and signed.
+
+66
+00:06:23.580 --> 00:06:28.909
+You are ready for the worked example now.
+
+67
+00:06:28.909 --> 00:06:34.239
+First resolve the diagonal force into eight newtons east and six newtons north.
+
+68
+00:06:34.239 --> 00:06:39.568
+Then combine one axis at a time.
+
+69
+00:06:39.568 --> 00:06:44.897
+Horizontally, eight east and three west leave five newtons east.
+
+70
+00:06:44.897 --> 00:06:50.226
+Vertically, the six newtons north stays unchanged.
+
+71
+00:06:50.226 --> 00:06:55.556
+Now rebuild the final resultant from those perpendicular totals.
+
+72
+00:06:55.556 --> 00:07:00.885
+Its magnitude is the square root of five squared plus six squared, which is the square root of sixty-one, about seven point eight newtons.
+
+73
+00:07:00.885 --> 00:07:06.214
+Because both net components are positive, the resultant points northeast.
+
+74
+00:07:06.214 --> 00:07:11.544
+Keep this takeaway in view: The worked example is ready: resolve, combine, then rebuild the northeast resultant.
+
+75
+00:07:11.544 --> 00:07:16.873
+Step 1: Resolve the diagonal force into horizontal and vertical components.
+
+76
+00:07:16.873 --> 00:07:22.202
+Step 2: Combine net x and net y separately with signs.
+
+77
+00:07:22.202 --> 00:07:27.531
+net x = 8 east - 3 west = 5 N east.
+
+78
+00:07:27.531 --> 00:07:32.861
+net y = 6 N north.
+
+79
+00:07:32.861 --> 00:07:38.190
+Combine by axis first, then rebuild the final vector from the perpendicular totals.

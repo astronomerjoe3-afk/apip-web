@@ -1,0 +1,337 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.336
+This lesson adds a geometric idea to the force story.
+
+2
+00:00:05.336 --> 00:00:10.672
+A push can be large, but if it acts very close to the pivot its turning effect may still be modest.
+
+3
+00:00:10.672 --> 00:00:16.008
+A smaller push applied farther away can create the same turning effect.
+
+4
+00:00:16.008 --> 00:00:21.344
+That is why Spin Pull is not force alone.
+
+5
+00:00:21.344 --> 00:00:26.680
+It is torque, also called the moment of a force, and it depends on both the force size and the perpendicular reach to the pivot.
+
+6
+00:00:26.680 --> 00:00:32.016
+Keep this takeaway in view: Turning effect belongs to force and perpendicular reach together, not to force alone.
+
+7
+00:00:32.016 --> 00:00:37.352
+Force means push size.
+
+8
+00:00:37.352 --> 00:00:42.688
+A larger push can increase turning effect, but force alone is not enough.
+
+9
+00:00:42.688 --> 00:00:48.024
+Reach means perpendicular distance.
+
+10
+00:00:48.024 --> 00:00:53.360
+Distance from the pivot matters only in the perpendicular sense.
+
+11
+00:00:53.360 --> 00:01:00.939
+The spin-pull diagram shows why comparing force size alone can be misleading.
+
+12
+00:01:00.939 --> 00:01:08.517
+A stronger push closer to the pivot and a weaker push farther away can produce the same turning effect.
+
+13
+00:01:08.517 --> 00:01:16.096
+The picture helps because the geometry becomes visible: the pivot is fixed, the push line is visible, and the effective reach is read perpendicularly.
+
+14
+00:01:16.096 --> 00:01:23.674
+This is the moment idea in a single image.
+
+15
+00:01:23.674 --> 00:01:31.253
+Keep this takeaway in view: Torque comparison begins with the pivot and the perpendicular distance, not just the arrow length.
+
+16
+00:01:31.253 --> 00:01:38.831
+Near push: A larger force can still give only a moderate torque if applied close to the pivot.
+
+17
+00:01:38.831 --> 00:01:46.410
+Far push: A smaller force can match the torque when applied farther away.
+
+18
+00:01:46.410 --> 00:01:51.290
+A door-handle analogy works because everyone has felt it.
+
+19
+00:01:51.290 --> 00:01:56.170
+Push near the hinge and the door mostly resists.
+
+20
+00:01:56.170 --> 00:02:01.050
+Push at the handle, much farther from the hinge, and the same push becomes much more effective at turning the door.
+
+21
+00:02:01.050 --> 00:02:05.930
+The reason is not mysterious.
+
+22
+00:02:05.930 --> 00:02:10.810
+The perpendicular reach has become larger.
+
+23
+00:02:10.810 --> 00:02:15.690
+That simple experience is the physical meaning behind torque, the moment of a force.
+
+24
+00:02:15.690 --> 00:02:20.570
+Keep this takeaway in view: Torque is the physics version of why a door handle works better than a push near the hinge.
+
+25
+00:02:20.570 --> 00:02:25.450
+Near hinge means small turning effect.
+
+26
+00:02:25.450 --> 00:02:30.330
+The push has little leverage because the reach is small.
+
+27
+00:02:30.330 --> 00:02:35.210
+At handle means large turning effect.
+
+28
+00:02:35.210 --> 00:02:40.090
+The same push gains leverage because the reach is larger.
+
+29
+00:02:40.090 --> 00:02:45.313
+The formal relation is torque equals force times perpendicular distance from the pivot.
+
+30
+00:02:45.313 --> 00:02:50.537
+This is also called the moment of a force.
+
+31
+00:02:50.537 --> 00:02:55.760
+The word perpendicular matters.
+
+32
+00:02:55.760 --> 00:03:00.983
+It is not just any distance along the object.
+
+33
+00:03:00.983 --> 00:03:06.207
+It is the shortest distance from the pivot to the line of action of the force.
+
+34
+00:03:06.207 --> 00:03:11.430
+That is why the equation should always be read with the geometry in mind rather than as a blind multiplication rule.
+
+35
+00:03:11.430 --> 00:03:16.653
+Keep this takeaway in view: Torque calculations only make sense when the pivot and perpendicular reach are clearly identified.
+
+36
+00:03:16.653 --> 00:03:21.877
+Pivot: The turning point must be identified before the distance can be chosen.
+
+37
+00:03:21.877 --> 00:03:27.100
+Perpendicular reach: This is the effective lever arm for the force.
+
+38
+00:03:27.100 --> 00:03:32.323
+torque = force x perpendicular distance.
+
+39
+00:03:32.323 --> 00:03:37.547
+moment of a force = F x d_perp.
+
+40
+00:03:37.547 --> 00:03:42.770
+Use the perpendicular reach from the pivot to the line of action of the force.
+
+41
+00:03:42.770 --> 00:03:47.382
+Suppose one push is six newtons at zero point five metres and another is three newtons at one metre.
+
+42
+00:03:47.382 --> 00:03:51.994
+Both products give three newton metres.
+
+43
+00:03:51.994 --> 00:03:56.605
+So the turning effect is the same.
+
+44
+00:03:56.605 --> 00:04:01.217
+This matters because it trains learners to compare the full product.
+
+45
+00:04:01.217 --> 00:04:05.829
+The biggest force number is not always the biggest torque.
+
+46
+00:04:05.829 --> 00:04:10.441
+The geometry can compensate or dominate.
+
+47
+00:04:10.441 --> 00:04:15.053
+Keep this takeaway in view: Compare the whole force-distance product before deciding which turning effect is larger.
+
+48
+00:04:15.053 --> 00:04:19.665
+Case A means 6 x 0.5 = 3 N m.
+
+49
+00:04:19.665 --> 00:04:24.276
+Stronger push, shorter reach.
+
+50
+00:04:24.276 --> 00:04:28.888
+Case B means 3 x 1.0 = 3 N m.
+
+51
+00:04:28.888 --> 00:04:33.500
+Smaller push, longer reach.
+
+52
+00:04:33.500 --> 00:04:39.139
+A common trap is to measure along the bar instead of to the force line perpendicularly.
+
+53
+00:04:39.139 --> 00:04:44.778
+Another trap is to choose the larger force without checking the reach.
+
+54
+00:04:44.778 --> 00:04:50.416
+Both mistakes ignore the geometry that makes torque meaningful.
+
+55
+00:04:50.416 --> 00:04:56.055
+A third subtle trap is to forget that a force through the pivot can still push the object without producing any turning effect at all.
+
+56
+00:04:56.055 --> 00:05:01.694
+Translation and rotation must be separated carefully.
+
+57
+00:05:01.694 --> 00:05:07.332
+Keep this takeaway in view: Torque questions are geometry questions as much as force questions.
+
+58
+00:05:07.332 --> 00:05:12.971
+Mark the pivot first.
+
+59
+00:05:12.971 --> 00:05:18.610
+Use the perpendicular reach to the force line, not just any length.
+
+60
+00:05:18.610 --> 00:05:22.133
+Check yourself.
+
+61
+00:05:22.133 --> 00:05:25.656
+What two things determine torque?
+
+62
+00:05:25.656 --> 00:05:29.179
+Force size and perpendicular reach from the pivot.
+
+63
+00:05:29.179 --> 00:05:32.702
+What is another name for torque?
+
+64
+00:05:32.702 --> 00:05:36.225
+The moment of a force.
+
+65
+00:05:36.225 --> 00:05:39.748
+Can a smaller force produce the same turning effect as a larger force?
+
+66
+00:05:39.748 --> 00:05:43.272
+Yes, if it acts farther from the pivot so the product matches.
+
+67
+00:05:43.272 --> 00:05:46.795
+Those three answers capture the whole lesson core.
+
+68
+00:05:46.795 --> 00:05:50.318
+Keep this takeaway in view: Torque becomes simple when the pivot geometry is kept visible.
+
+69
+00:05:50.318 --> 00:05:53.841
+Determinants means F and d_perp.
+
+70
+00:05:53.841 --> 00:05:57.364
+Turning effect needs both push size and effective reach.
+
+71
+00:05:57.364 --> 00:06:00.887
+Formal name means moment of a force.
+
+72
+00:06:00.887 --> 00:06:04.410
+This is the standard physics term for torque.
+
+73
+00:06:04.410 --> 00:06:10.305
+You are ready for the worked example now.
+
+74
+00:06:10.305 --> 00:06:16.200
+Compare two pushes: six newtons applied zero point five metres from the hinge and three newtons applied one point zero metres from the hinge.
+
+75
+00:06:16.200 --> 00:06:22.095
+Use torque equals force times perpendicular distance.
+
+76
+00:06:22.095 --> 00:06:27.990
+The first gives six times zero point five, which is three newton metres.
+
+77
+00:06:27.990 --> 00:06:33.885
+The second gives three times one point zero, which is also three newton metres.
+
+78
+00:06:33.885 --> 00:06:39.780
+So both pushes give the same Spin Pull, or torque, because the products match exactly.
+
+79
+00:06:39.780 --> 00:06:45.675
+Keep this takeaway in view: The worked example is ready: calculate the moment of a force, then compare the turning effects directly.
+
+80
+00:06:45.675 --> 00:06:51.570
+Step 1: Identify the pivot and the perpendicular reach for each push.
+
+81
+00:06:51.570 --> 00:06:57.465
+Step 2: Calculate torque for each case using force times perpendicular distance.
+
+82
+00:06:57.465 --> 00:07:03.360
+6 x 0.5 = 3 N m.
+
+83
+00:07:03.360 --> 00:07:09.255
+3 x 1.0 = 3 N m.
+
+84
+00:07:09.255 --> 00:07:15.150
+Different force-distance pairs can produce the same moment of a force.

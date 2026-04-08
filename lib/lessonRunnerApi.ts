@@ -13863,6 +13863,90 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("M1_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M1_L6", "captions.vtt"),
       };
+    case "M2_L1":
+      return {
+        body: "Use this video to separate force state from motion state before you begin the worked example.",
+        caption: "Video explainer: Master Arrow, balanced forces, and immediate motion change before the lesson example.",
+        highlights: [
+          "Resultant force decides acceleration, not current motion by itself",
+          "Zero Master Arrow means zero acceleration, not automatic rest",
+          "Combine same-line forces before predicting the motion change",
+        ],
+        checkForUnderstanding: "If a craft is already moving east and the Master Arrow becomes zero, what stays the same and what stops changing?",
+        video_url: staticVideoAssetUrl("M2_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M2_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M2_L1", "captions.vtt"),
+      };
+    case "M2_L2":
+      return {
+        body: "Use this video to separate one-object response from two-object interaction reasoning before the worked example starts.",
+        caption: "Video explainer: F = ma, equal interaction forces, and why mass changes response before the lesson example.",
+        highlights: [
+          "The same net force can produce different accelerations on different masses",
+          "Third-law interaction pairs are equal and opposite on different objects",
+          "Do not mix third-law pairs into one object's net-force calculation",
+        ],
+        checkForUnderstanding: "If two craft feel the same interaction force but one has twice the mass, what stays equal and what changes?",
+        video_url: staticVideoAssetUrl("M2_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M2_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M2_L2", "captions.vtt"),
+      };
+    case "M2_L3":
+      return {
+        body: "Use this video to keep the system total visible in momentum and docking questions before the worked example begins.",
+        caption: "Video explainer: Carry Score, signed momentum, and closed-system conservation before the lesson example.",
+        highlights: [
+          "Momentum depends on both mass and velocity",
+          "Use signs before adding momentum in one axis",
+          "Conservation belongs to the whole closed system, not each object separately",
+        ],
+        checkForUnderstanding: "If one craft brings positive momentum and another brings negative momentum, what should you combine before talking about the final shared motion?",
+        video_url: staticVideoAssetUrl("M2_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M2_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M2_L3", "captions.vtt"),
+      };
+    case "M2_L4":
+      return {
+        body: "Use this video to connect turning effect to both force and perpendicular reach before the worked example starts.",
+        caption: "Video explainer: Spin Pull, torque, and the moment of a force before the lesson example.",
+        highlights: [
+          "Turning effect depends on force and perpendicular distance together",
+          "Different force-distance pairs can produce the same torque",
+          "A larger force alone does not guarantee a larger turning effect",
+        ],
+        checkForUnderstanding: "If the same push moves farther from the hinge while staying perpendicular, what changes and why?",
+        video_url: staticVideoAssetUrl("M2_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M2_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M2_L4", "captions.vtt"),
+      };
+    case "M2_L5":
+      return {
+        body: "Use this video to judge stability from support geometry and Balance Core position before the worked example begins.",
+        caption: "Video explainer: Balance Core, Footprint Zone, and tipping margin before the lesson example.",
+        highlights: [
+          "Stability depends on where the weight line lands relative to the base",
+          "A wider base gives a bigger safety margin against tipping",
+          "Heavier does not automatically mean more stable",
+        ],
+        checkForUnderstanding: "If the same load is raised higher while the base stays the same, what happens to tipping risk and why?",
+        video_url: staticVideoAssetUrl("M2_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M2_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M2_L5", "captions.vtt"),
+      };
+    case "M2_L6":
+      return {
+        body: "Use this video to resolve angled forces into components and rebuild the resultant cleanly before the worked example starts.",
+        caption: "Video explainer: Arrow Split, vector addition, and direction angle reading before the lesson example.",
+        highlights: [
+          "Resolve the vector onto chosen axes first",
+          "Combine horizontal and vertical components separately with signs",
+          "Rebuild the resultant only after the net axis totals are clear",
+        ],
+        checkForUnderstanding: "If the net horizontal and net vertical components are both positive, from which axis should you measure the direction angle in this lesson?",
+        video_url: staticVideoAssetUrl("M2_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M2_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M2_L6", "captions.vtt"),
+      };
     case "F1_L1":
       return {
         body: "Use this video to consolidate how a complete measurement combines the quantity, the number, and the unit before you move into the worked example.",
