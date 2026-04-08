@@ -4,6 +4,7 @@ import path from "node:path";
 import { Readable } from "node:stream";
 
 export const runtime = "nodejs";
+const VIDEO_CHUNK_SIZE = 4 * 1024 * 1024;
 
 type AssetKind = "video" | "poster" | "captions";
 
@@ -56,7 +57,7 @@ function baseHeaders(asset: AssetKind, size: number): Record<string, string> {
       "Content-Type": "video/mp4",
       "Content-Length": String(size),
       "Accept-Ranges": "bytes",
-      "Cache-Control": "public, max-age=3600",
+      "Cache-Control": "public, max-age=3600, no-transform",
       "Content-Disposition": "inline",
     };
   }
@@ -76,6 +77,29 @@ function baseHeaders(asset: AssetKind, size: number): Record<string, string> {
   };
 }
 
+function resolveVideoWindow(fileSize: number, rangeHeader: string | null): { start: number; end: number } | null {
+  if (!rangeHeader) {
+    return {
+      start: 0,
+      end: Math.min(VIDEO_CHUNK_SIZE - 1, fileSize - 1),
+    };
+  }
+
+  const match = /^bytes=(\d*)-(\d*)$/u.exec(rangeHeader);
+  if (!match) return null;
+
+  const start = match[1] ? Number.parseInt(match[1], 10) : 0;
+  const explicitEnd = match[2] ? Number.parseInt(match[2], 10) : null;
+  const cappedEnd = start + VIDEO_CHUNK_SIZE - 1;
+  const end = Math.min(explicitEnd ?? cappedEnd, cappedEnd, fileSize - 1);
+
+  if (Number.isNaN(start) || Number.isNaN(end) || start < 0 || start > end) {
+    return null;
+  }
+
+  return { start, end };
+}
+
 export async function HEAD(
   request: Request,
   context: { params: Promise<{ lessonId: string; asset: string }> },
@@ -89,19 +113,8 @@ export async function HEAD(
     const rangeHeader = request.headers.get("range");
 
     if (resolved.asset === "video" && rangeHeader) {
-      const match = /^bytes=(\d*)-(\d*)$/u.exec(rangeHeader);
-      if (!match) {
-        return new Response(null, {
-          status: 416,
-          headers: { "Content-Range": `bytes */${fileStat.size}` },
-        });
-      }
-
-      const start = match[1] ? Number.parseInt(match[1], 10) : 0;
-      const requestedEnd = match[2] ? Number.parseInt(match[2], 10) : fileStat.size - 1;
-      const end = Math.min(requestedEnd, fileStat.size - 1);
-
-      if (Number.isNaN(start) || Number.isNaN(end) || start < 0 || start > end) {
+      const window = resolveVideoWindow(fileStat.size, rangeHeader);
+      if (!window) {
         return new Response(null, {
           status: 416,
           headers: { "Content-Range": `bytes */${fileStat.size}` },
@@ -112,8 +125,8 @@ export async function HEAD(
         status: 206,
         headers: {
           ...headers,
-          "Content-Length": String(end - start + 1),
-          "Content-Range": `bytes ${start}-${end}/${fileStat.size}`,
+          "Content-Length": String(window.end - window.start + 1),
+          "Content-Range": `bytes ${window.start}-${window.end}/${fileStat.size}`,
         },
       });
     }
@@ -149,41 +162,21 @@ export async function GET(
 
     const fileStat = await stat(resolved.filePath);
     const rangeHeader = request.headers.get("range");
-
-    if (rangeHeader) {
-      const match = /^bytes=(\d*)-(\d*)$/u.exec(rangeHeader);
-      if (!match) {
-        return new Response("Invalid range request.", {
-          status: 416,
-          headers: { "Content-Range": `bytes */${fileStat.size}` },
-        });
-      }
-
-      const start = match[1] ? Number.parseInt(match[1], 10) : 0;
-      const requestedEnd = match[2] ? Number.parseInt(match[2], 10) : fileStat.size - 1;
-      const end = Math.min(requestedEnd, fileStat.size - 1);
-
-      if (Number.isNaN(start) || Number.isNaN(end) || start < 0 || start > end) {
-        return new Response("Invalid range request.", {
-          status: 416,
-          headers: { "Content-Range": `bytes */${fileStat.size}` },
-        });
-      }
-
-      const stream = createReadStream(resolved.filePath, { start, end });
-      return new Response(asWebStream(stream), {
-        status: 206,
-        headers: {
-          ...baseHeaders(resolved.asset, fileStat.size),
-          "Content-Length": String(end - start + 1),
-          "Content-Range": `bytes ${start}-${end}/${fileStat.size}`,
-        },
+    const window = resolveVideoWindow(fileStat.size, rangeHeader);
+    if (!window) {
+      return new Response("Invalid range request.", {
+        status: 416,
+        headers: { "Content-Range": `bytes */${fileStat.size}` },
       });
     }
-
-    const fullStream = createReadStream(resolved.filePath);
-    return new Response(asWebStream(fullStream), {
-      headers: baseHeaders(resolved.asset, fileStat.size),
+    const stream = createReadStream(resolved.filePath, { start: window.start, end: window.end });
+    return new Response(asWebStream(stream), {
+      status: 206,
+      headers: {
+        ...baseHeaders(resolved.asset, fileStat.size),
+        "Content-Length": String(window.end - window.start + 1),
+        "Content-Range": `bytes ${window.start}-${window.end}/${fileStat.size}`,
+      },
     });
   }
   catch {

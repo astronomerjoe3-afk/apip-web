@@ -13420,7 +13420,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260408f";
+  const assetVersion = "20260408g";
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") =>
     `/lesson_assets/F1/${lessonId}/videos/${filename}?v=${assetVersion}`;
   switch (code) {
