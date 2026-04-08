@@ -1,0 +1,385 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.487
+Velocity-time graphs often feel crowded because students try to make one feature answer every question.
+
+2
+00:00:05.487 --> 00:00:10.975
+This lesson fixes that by giving the graph two clear jobs.
+
+3
+00:00:10.975 --> 00:00:16.462
+Slope tells acceleration because it compares change in velocity with time.
+
+4
+00:00:16.462 --> 00:00:21.949
+Area under the graph tells displacement because it measures velocity spread across time.
+
+5
+00:00:21.949 --> 00:00:27.436
+The graph height itself tells the current velocity.
+
+6
+00:00:27.436 --> 00:00:32.924
+Once those three roles are separated, the graph starts behaving like a motion ledger instead of a puzzle.
+
+7
+00:00:32.924 --> 00:00:38.411
+Keep this takeaway in view: On a velocity-time graph, height, slope, and area each answer a different motion question.
+
+8
+00:00:38.411 --> 00:00:43.898
+Height means velocity.
+
+9
+00:00:43.898 --> 00:00:49.385
+The vertical position tells the current signed velocity.
+
+10
+00:00:49.385 --> 00:00:54.873
+Slope means acceleration.
+
+11
+00:00:54.873 --> 00:01:00.360
+How sharply the graph rises or falls tells how quickly velocity is changing.
+
+12
+00:01:00.360 --> 00:01:07.444
+Take the simplest case first: a horizontal line above zero.
+
+13
+00:01:07.444 --> 00:01:14.528
+Because the line is horizontal, its slope is zero, so the acceleration is zero.
+
+14
+00:01:14.528 --> 00:01:21.611
+But the velocity is still positive, so motion is still happening.
+
+15
+00:01:21.611 --> 00:01:28.695
+That means the area under the graph keeps growing as time passes, and that area represents displacement.
+
+16
+00:01:28.695 --> 00:01:35.779
+This single picture is very powerful because it proves that zero acceleration and non-zero displacement can happen at the same time.
+
+17
+00:01:35.779 --> 00:01:42.862
+Keep this takeaway in view: A constant velocity section has zero acceleration but still accumulates displacement through its area.
+
+18
+00:01:42.862 --> 00:01:49.946
+Slope: Horizontal means zero slope, so the acceleration is zero.
+
+19
+00:01:49.946 --> 00:01:57.030
+Area: A rectangle still forms under the line, so displacement builds up.
+
+20
+00:01:57.030 --> 00:02:01.922
+The slope formula now changes meaning because the vertical axis is velocity rather than distance.
+
+21
+00:02:01.922 --> 00:02:06.814
+Here, slope is change in velocity divided by time.
+
+22
+00:02:06.814 --> 00:02:11.706
+That is exactly acceleration.
+
+23
+00:02:11.706 --> 00:02:16.599
+So if one section is steeper than another, the acceleration magnitude is larger on that steeper section.
+
+24
+00:02:16.599 --> 00:02:21.491
+This is why it is dangerous to memorize slope without checking the graph axes first.
+
+25
+00:02:21.491 --> 00:02:26.383
+On a distance-time graph, slope meant speed.
+
+26
+00:02:26.383 --> 00:02:31.275
+On a velocity-time graph, slope means acceleration.
+
+27
+00:02:31.275 --> 00:02:36.167
+Keep this takeaway in view: Axes decide meaning.
+
+28
+00:02:36.167 --> 00:02:41.059
+On a velocity-time graph, slope belongs to acceleration.
+
+29
+00:02:41.059 --> 00:02:45.951
+Same geometry: A line can be tilted in two graph types, but the meaning changes with the axes.
+
+30
+00:02:45.951 --> 00:02:50.844
+Graph habit: Name the graph type before you name the slope meaning.
+
+31
+00:02:50.844 --> 00:02:55.736
+acceleration = slope = Δvelocity / Δtime.
+
+32
+00:02:55.736 --> 00:03:00.628
+Read the axes first.
+
+33
+00:03:00.628 --> 00:03:05.520
+The graph type decides what the slope means.
+
+34
+00:03:05.520 --> 00:03:10.702
+Area becomes much easier when it is read as accumulated motion.
+
+35
+00:03:10.702 --> 00:03:15.883
+Velocity tells how many metres per second are being gained in a given direction.
+
+36
+00:03:15.883 --> 00:03:21.065
+Time tells how long that velocity lasts.
+
+37
+00:03:21.065 --> 00:03:26.246
+When you multiply the two, you get metres of displacement.
+
+38
+00:03:26.246 --> 00:03:31.428
+That is why a rectangle under a constant-velocity section gives displacement directly, and why other shapes can be broken into simpler areas.
+
+39
+00:03:31.428 --> 00:03:36.609
+The shape under the graph is storing directed motion over time.
+
+40
+00:03:36.609 --> 00:03:41.791
+Keep this takeaway in view: Area is displacement because velocity sustained through time accumulates into directed motion.
+
+41
+00:03:41.791 --> 00:03:46.972
+Rectangle idea: Constant velocity times time gives a rectangular area, and that area equals displacement.
+
+42
+00:03:46.972 --> 00:03:52.154
+Signed meaning: If the graph lies below the axis, the displacement for that region is in the chosen negative direction.
+
+43
+00:03:52.154 --> 00:03:57.335
+Need acceleration?
+
+44
+00:03:57.335 --> 00:04:02.517
+Read the slope.
+
+45
+00:04:02.517 --> 00:04:07.698
+Need displacement?
+
+46
+00:04:07.698 --> 00:04:12.880
+Read the area.
+
+47
+00:04:12.880 --> 00:04:18.497
+Signed motion still matters on this graph.
+
+48
+00:04:18.497 --> 00:04:24.113
+If a section lies below the time axis, the velocity on that section is negative in the chosen sign convention.
+
+49
+00:04:24.113 --> 00:04:29.730
+That means the motion points in the chosen negative direction.
+
+50
+00:04:29.730 --> 00:04:35.347
+It also means the area there contributes negative displacement rather than positive displacement.
+
+51
+00:04:35.347 --> 00:04:40.963
+So the graph is not just describing size.
+
+52
+00:04:40.963 --> 00:04:46.580
+It is also carrying direction through the sign of the velocity.
+
+53
+00:04:46.580 --> 00:04:52.197
+Keep this takeaway in view: Signed velocity changes the meaning of the area, not just the look of the graph.
+
+54
+00:04:52.197 --> 00:04:57.813
+Above axis: Positive velocity in the chosen positive direction.
+
+55
+00:04:57.813 --> 00:05:03.430
+Below axis: Negative velocity in the chosen negative direction.
+
+56
+00:05:03.430 --> 00:05:07.665
+Now take the classic rectangle example.
+
+57
+00:05:07.665 --> 00:05:11.899
+A horizontal section sits at 4 metres per second for 5 seconds.
+
+58
+00:05:11.899 --> 00:05:16.134
+Because the section is horizontal, its slope is zero, so the acceleration is zero.
+
+59
+00:05:16.134 --> 00:05:20.368
+The area underneath is a rectangle with height 4 and width 5.
+
+60
+00:05:20.368 --> 00:05:24.603
+Area equals 4 times 5, which gives 20.
+
+61
+00:05:24.603 --> 00:05:28.838
+So the displacement on that section is 20 metres.
+
+62
+00:05:28.838 --> 00:05:33.072
+One section, two answers: acceleration zero, displacement 20 metres.
+
+63
+00:05:33.072 --> 00:05:37.307
+Keep this takeaway in view: Horizontal section -> zero acceleration.
+
+64
+00:05:37.307 --> 00:05:41.542
+Rectangle area -> displacement.
+
+65
+00:05:41.542 --> 00:05:45.776
+Velocity level means 4 m/s.
+
+66
+00:05:45.776 --> 00:05:50.011
+The graph height gives the constant velocity on that section.
+
+67
+00:05:50.011 --> 00:05:54.245
+Time width means 5 s.
+
+68
+00:05:54.245 --> 00:05:58.480
+This is the duration of the section on the time axis.
+
+69
+00:05:58.480 --> 00:06:02.153
+Check the roles quickly.
+
+70
+00:06:02.153 --> 00:06:05.826
+If the graph asks how velocity is changing, which feature do you read?
+
+71
+00:06:05.826 --> 00:06:09.499
+The slope.
+
+72
+00:06:09.499 --> 00:06:13.171
+If the graph asks how much directed motion has built up, which feature do you read?
+
+73
+00:06:13.171 --> 00:06:16.844
+The area under the graph.
+
+74
+00:06:16.844 --> 00:06:20.517
+If the section is horizontal above zero, what is the acceleration?
+
+75
+00:06:20.517 --> 00:06:24.190
+Zero.
+
+76
+00:06:24.190 --> 00:06:27.863
+And what still happens to the displacement?
+
+77
+00:06:27.863 --> 00:06:31.536
+It keeps increasing because the area keeps growing.
+
+78
+00:06:31.536 --> 00:06:35.209
+Keep this takeaway in view: The graph is calm once the jobs are separated: slope for acceleration, area for displacement.
+
+79
+00:06:35.209 --> 00:06:38.881
+Need acceleration means read slope.
+
+80
+00:06:38.881 --> 00:06:42.554
+That is the change-in-velocity feature.
+
+81
+00:06:42.554 --> 00:06:46.227
+Need displacement means read area.
+
+82
+00:06:46.227 --> 00:06:49.900
+That is the accumulated-motion feature.
+
+83
+00:06:49.900 --> 00:06:55.542
+You are ready for the worked example now.
+
+84
+00:06:55.542 --> 00:07:01.184
+The graph shows a horizontal section at 4 metres per second for 5 seconds.
+
+85
+00:07:01.184 --> 00:07:06.826
+Start with the slope.
+
+86
+00:07:06.826 --> 00:07:12.469
+Because the section is horizontal, the slope is zero, so the acceleration is zero metres per second squared.
+
+87
+00:07:12.469 --> 00:07:18.111
+Then switch jobs and read the area.
+
+88
+00:07:18.111 --> 00:07:23.753
+The region under the graph is a rectangle, so displacement equals velocity times time, which is 4 times 5.
+
+89
+00:07:23.753 --> 00:07:29.395
+That gives 20 metres.
+
+90
+00:07:29.395 --> 00:07:35.037
+So the section has displacement 20 metres and acceleration zero.
+
+91
+00:07:35.037 --> 00:07:40.679
+Keep this takeaway in view: The worked example is ready: slope for acceleration, area for displacement, no mixing of jobs.
+
+92
+00:07:40.679 --> 00:07:46.321
+Step 1: Identify the section shape and read its slope for acceleration.
+
+93
+00:07:46.321 --> 00:07:51.964
+Step 2: Find the area under that section for displacement.
+
+94
+00:07:51.964 --> 00:07:57.606
+horizontal line -> slope = 0 -> a = 0 m/s^2.
+
+95
+00:07:57.606 --> 00:08:03.248
+displacement = area = 4 × 5 = 20 m.
+
+96
+00:08:03.248 --> 00:08:08.890
+Solve slope and area separately so the graph can answer both questions cleanly.

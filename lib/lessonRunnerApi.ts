@@ -13773,9 +13773,11 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260408g";
-  const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") =>
-    `/lesson_assets/F1/${lessonId}/videos/${filename}?v=${assetVersion}`;
+  const assetVersion = "20260408h";
+  const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
+    const moduleId = lessonId.split("_", 1)[0];
+    return `/lesson_assets/${moduleId}/${lessonId}/videos/${filename}?v=${assetVersion}`;
+  };
   switch (code) {
     case "F1_L1":
       return {
@@ -13860,6 +13862,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("F1_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("F1_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("F1_L6", "captions.vtt"),
+      };
+    case "F2_L1":
+      return {
+        body: "Use this video to separate full route, start-to-finish change, and average speed before you begin the worked example.",
+        caption: "Video explainer: distance, displacement, and average speed with route-versus-arrow thinking before the lesson example.",
+        highlights: [
+          "Distance uses the whole route",
+          "Displacement keeps the net change with direction",
+          "Average speed uses total distance and total time for the full trip",
+        ],
+        checkForUnderstanding: "If a journey includes a detour and a return section, which quantity uses every segment and which quantity only cares about where the journey ends?",
+        video_url: staticVideoAssetUrl("F2_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F2_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F2_L1", "captions.vtt"),
+      };
+    case "F2_L2":
+      return {
+        body: "Use this video to reinforce velocity, sign convention, and the real meaning of acceleration before the worked example starts.",
+        caption: "Video explainer: velocity arrows, signed change, and acceleration meaning before the lesson example.",
+        highlights: [
+          "Velocity needs both size and direction",
+          "Acceleration tracks change in velocity, not just speeding up",
+          "The sign only makes sense after you choose a positive direction",
+        ],
+        checkForUnderstanding: "If the chosen positive direction is east and the velocity becomes less positive, what sign should the acceleration have?",
+        video_url: staticVideoAssetUrl("F2_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F2_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F2_L2", "captions.vtt"),
+      };
+    case "F2_L3":
+      return {
+        body: "Use this video to read a distance-time graph as a motion story before you attempt the worked example.",
+        caption: "Video explainer: graph height, graph slope, and segment-by-segment speed reading before the lesson example.",
+        highlights: [
+          "Graph height is distance, not speed",
+          "Slope on each segment gives the speed on that segment",
+          "A flat section means time passes without extra distance being added",
+        ],
+        checkForUnderstanding: "On a distance-time graph, which feature tells you the speed on one segment: the vertical height of the line or its slope?",
+        video_url: staticVideoAssetUrl("F2_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F2_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F2_L3", "captions.vtt"),
+      };
+    case "F2_L4":
+      return {
+        body: "Use this video to split the two jobs of a velocity-time graph before the worked example begins.",
+        caption: "Video explainer: slope for acceleration and area for displacement on a velocity-time graph before the lesson example.",
+        highlights: [
+          "Slope answers how quickly velocity changes",
+          "Area answers how much directed motion has built up",
+          "A horizontal section can still produce displacement while acceleration stays zero",
+        ],
+        checkForUnderstanding: "If a velocity-time graph stays horizontal above zero, what happens to the acceleration and what still happens to the displacement?",
+        video_url: staticVideoAssetUrl("F2_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F2_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F2_L4", "captions.vtt"),
+      };
+    case "F2_L5":
+      return {
+        body: "Use this video to make resultant force, balanced forces, and direction logic feel secure before the worked example starts.",
+        caption: "Video explainer: combining forces, finding the resultant, and linking it to motion change before the lesson example.",
+        highlights: [
+          "Same-direction forces add",
+          "Opposite forces subtract and keep the larger direction",
+          "Zero resultant force means zero acceleration, not automatic rest",
+        ],
+        checkForUnderstanding: "When two opposite forces are unequal, what decides the direction of the resultant force?",
+        video_url: staticVideoAssetUrl("F2_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F2_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F2_L5", "captions.vtt"),
+      };
+    case "F2_L6":
+      return {
+        body: "Use this video to connect resultant force, mass, inertia, and F = ma before you move into the worked example.",
+        caption: "Video explainer: same push, different mass, and the meaning of F = ma before the lesson example.",
+        highlights: [
+          "Use the resultant force in F = ma",
+          "For the same force, more mass gives less acceleration",
+          "Inertia is resistance to motion change, and larger mass means more inertia",
+        ],
+        checkForUnderstanding: "If two trolleys get the same resultant force but one has twice the mass, how should their accelerations compare?",
+        video_url: staticVideoAssetUrl("F2_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F2_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F2_L6", "captions.vtt"),
       };
     default:
       return null;
