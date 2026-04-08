@@ -1,8 +1,106 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <marker id="wave-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M 0 0 L 12 6 L 0 12 z" fill="#38bdf8" />
+    <marker id="travel-arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 14 7 L 0 14 z" fill="#38bdf8" />
     </marker>
+    <filter id="crest-glow" x="-40%" y="-80%" width="180%" height="220%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="100%" height="100%" fill="#0b1020" />
-<text x="640.00" y="70.00" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Traveling pattern, local pads</text><text x="640.00" y="105.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">Shows one front crossing a line of pads while each pad only moves around its own position.</text><rect x="90.00" y="180.00" width="1100.00" height="360.00" rx="26" fill="#111827" stroke="#334155" stroke-width="3" /><text x="116.00" y="218.00" fill="#93c5fd" text-anchor="start" font-size="24" font-family="Arial" font-weight="bold">Pattern travel vs local motion</text><line x1="150.00" y1="450.00" x2="1130.00" y2="450.00" stroke="#475569" stroke-width="4" stroke-linecap="round" /><line x1="220.00" y1="320.00" x2="220.00" y2="470.00" stroke="#38bdf8" stroke-width="10" stroke-linecap="round" /><path d="M 220 245 Q 350 200 470 245 Q 590 290 710 245 Q 830 200 950 245" stroke="#38bdf8" stroke-width="6" fill="none" /><line x1="260.00" y1="220.00" x2="420.00" y2="220.00" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" marker-end="url(#wave-arrow)" /><text x="340.00" y="196.00" fill="#bae6fd" text-anchor="middle" font-size="22" font-family="Arial" font-weight="normal">front pattern travels</text><line x1="610.00" y1="492.00" x2="610.00" y2="380.00" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" marker-end="url(#wave-arrow)" /><line x1="610.00" y1="380.00" x2="610.00" y2="492.00" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" marker-end="url(#wave-arrow)" /><text x="650.00" y="434.00" fill="#fde68a" text-anchor="start" font-size="22" font-family="Arial" font-weight="normal">one pad only moves locally</text><circle cx="170.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="240.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="310.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="380.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="450.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="520.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="590.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="660.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="730.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="800.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="870.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="940.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="1010.00" cy="450.00" r="12.00" fill="#cbd5e1" /><circle cx="1080.00" cy="450.00" r="12.00" fill="#cbd5e1" /></svg>
+
+  <rect width="1280" height="720" fill="#0b1020" />
+
+  <text x="640" y="70" fill="#f8fafc" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">
+    One crest travels, one pad stays local
+  </text>
+  <text x="640" y="106" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial">
+    M7_L1 should show a moving wavefront and one fixed medium point pulsing in place when the front reaches it.
+  </text>
+
+  <line x1="220" y1="146" x2="1060" y2="146" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" marker-end="url(#travel-arrow)" />
+  <text x="640" y="136" fill="#7dd3fc" text-anchor="middle" font-size="20" font-family="Arial" font-weight="bold">
+    crest direction of travel
+  </text>
+
+  <rect x="70" y="185" width="1140" height="425" rx="28" fill="#111827" stroke="#334155" stroke-width="3" />
+
+  <g transform="translate(100 225)">
+    <rect x="0" y="0" width="320" height="320" rx="24" fill="#0f172a" stroke="#334155" stroke-width="3" />
+    <text x="160" y="36" fill="#93c5fd" text-anchor="middle" font-size="24" font-family="Arial" font-weight="bold">1. Front is still left</text>
+    <text x="160" y="64" fill="#cbd5e1" text-anchor="middle" font-size="15" font-family="Arial">Chosen pad has not responded yet.</text>
+    <line x1="36" y1="220" x2="284" y2="220" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+    <path d="M 54 128 Q 96 86 138 128 Q 180 170 222 128" fill="none" stroke="#38bdf8" stroke-width="7" filter="url(#crest-glow)" />
+    <g fill="#cbd5e1">
+      <circle cx="54" cy="220" r="11" />
+      <circle cx="88" cy="220" r="11" />
+      <circle cx="122" cy="220" r="11" />
+      <circle cx="156" cy="220" r="11" />
+      <circle cx="190" cy="220" r="11" />
+      <circle cx="224" cy="220" r="11" />
+      <circle cx="258" cy="220" r="11" />
+    </g>
+    <circle cx="224" cy="220" r="14" fill="none" stroke="#fbbf24" stroke-width="5" />
+    <text x="224" y="268" fill="#fde68a" text-anchor="middle" font-size="17" font-family="Arial" font-weight="bold">same chosen pad</text>
+    <text x="160" y="292" fill="#94a3b8" text-anchor="middle" font-size="16" font-family="Arial">
+      <tspan x="160" dy="0">The pattern is elsewhere, so</tspan>
+      <tspan x="160" dy="20">this pad stays at its own place.</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(480 225)">
+    <rect x="0" y="0" width="320" height="320" rx="24" fill="#0f172a" stroke="#334155" stroke-width="3" />
+    <text x="160" y="36" fill="#93c5fd" text-anchor="middle" font-size="24" font-family="Arial" font-weight="bold">2. Front reaches the pad</text>
+    <text x="160" y="64" fill="#cbd5e1" text-anchor="middle" font-size="15" font-family="Arial">The pad moves up, but does not drift sideways.</text>
+    <line x1="36" y1="220" x2="284" y2="220" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+    <path d="M 88 128 Q 130 86 172 128 Q 214 170 256 128" fill="none" stroke="#38bdf8" stroke-width="7" filter="url(#crest-glow)" />
+    <g fill="#cbd5e1">
+      <circle cx="54" cy="220" r="11" />
+      <circle cx="88" cy="220" r="11" />
+      <circle cx="122" cy="220" r="11" />
+      <circle cx="156" cy="220" r="11" />
+      <circle cx="190" cy="220" r="11" />
+      <circle cx="224" cy="220" r="11" />
+      <circle cx="258" cy="220" r="11" />
+    </g>
+    <circle cx="190" cy="170" r="14" fill="#fbbf24" />
+    <line x1="190" y1="214" x2="190" y2="184" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" marker-end="url(#travel-arrow)" />
+    <text x="190" y="268" fill="#fde68a" text-anchor="middle" font-size="17" font-family="Arial" font-weight="bold">local up-down pulse</text>
+    <text x="160" y="292" fill="#94a3b8" text-anchor="middle" font-size="16" font-family="Arial">
+      <tspan x="160" dy="0">Energy passes the disturbance onward</tspan>
+      <tspan x="160" dy="20">while this point only oscillates.</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(860 225)">
+    <rect x="0" y="0" width="320" height="320" rx="24" fill="#0f172a" stroke="#334155" stroke-width="3" />
+    <text x="160" y="36" fill="#93c5fd" text-anchor="middle" font-size="24" font-family="Arial" font-weight="bold">3. Front has moved on</text>
+    <text x="160" y="64" fill="#cbd5e1" text-anchor="middle" font-size="15" font-family="Arial">The chosen pad returns, but the crest keeps traveling.</text>
+    <line x1="36" y1="220" x2="284" y2="220" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+    <path d="M 136 128 Q 178 86 220 128 Q 262 170 304 128" fill="none" stroke="#38bdf8" stroke-width="7" filter="url(#crest-glow)" />
+    <g fill="#cbd5e1">
+      <circle cx="54" cy="220" r="11" />
+      <circle cx="88" cy="220" r="11" />
+      <circle cx="122" cy="220" r="11" />
+      <circle cx="156" cy="220" r="11" />
+      <circle cx="190" cy="220" r="11" />
+      <circle cx="224" cy="220" r="11" />
+      <circle cx="258" cy="220" r="11" />
+    </g>
+    <circle cx="156" cy="220" r="14" fill="none" stroke="#fbbf24" stroke-width="5" />
+    <text x="156" y="268" fill="#fde68a" text-anchor="middle" font-size="17" font-family="Arial" font-weight="bold">same chosen pad again</text>
+    <text x="160" y="282" fill="#94a3b8" text-anchor="middle" font-size="16" font-family="Arial">
+      <tspan x="160" dy="0">The medium point returns near equilibrium</tspan>
+      <tspan x="160" dy="20">while the wavefront is now</tspan>
+      <tspan x="160" dy="20">farther right.</tspan>
+    </text>
+  </g>
+
+  <rect x="180" y="635" width="920" height="42" rx="18" fill="#1e293b" stroke="#334155" stroke-width="2" />
+  <text x="640" y="662" fill="#e2e8f0" text-anchor="middle" font-size="20" font-family="Arial" font-weight="bold">
+    Key idea: the pattern travels across the row, but each point in the medium only moves around its own place.
+  </text>
+</svg>
