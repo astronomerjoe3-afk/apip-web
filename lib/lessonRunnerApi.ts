@@ -14115,6 +14115,90 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("F2_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("F2_L6", "captions.vtt"),
       };
+    case "F3_L1":
+      return {
+        body: "Use this video to connect work to energy transfer before you begin the worked example.",
+        caption: "Video explainer: work as transferred energy, motion in the force direction, and zero-work traps before the lesson example.",
+        highlights: [
+          "Work happens when a force causes displacement in its direction",
+          "No movement means no work is done on the object by that force",
+          "The answer in joules should be read as energy transferred",
+        ],
+        checkForUnderstanding: "If you push hard on a wall and it does not move, what happens to the work done on the wall by that push?",
+        video_url: staticVideoAssetUrl("F3_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F3_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F3_L1", "captions.vtt"),
+      };
+    case "F3_L2":
+      return {
+        body: "Use this video to compare motion energy and height energy before the worked example starts.",
+        caption: "Video explainer: kinetic energy, gravitational potential energy, and variable comparison before the lesson example.",
+        highlights: [
+          "Mass matters in both energy stores",
+          "Speed has a strong squared effect in kinetic energy",
+          "Height changes gravitational potential energy directly",
+        ],
+        checkForUnderstanding: "If mass stays the same but speed doubles, which energy store changes most strongly in this lesson and why?",
+        video_url: staticVideoAssetUrl("F3_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F3_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F3_L2", "captions.vtt"),
+      };
+    case "F3_L3":
+      return {
+        body: "Use this video to separate rate from usefulness before you start the worked example.",
+        caption: "Video explainer: power, energy-time links, and efficiency as a useful fraction before the lesson example.",
+        highlights: [
+          "Power tells how quickly energy is transferred",
+          "Energy depends on power and time together",
+          "Efficiency is about the useful fraction, not the speed of transfer by itself",
+        ],
+        checkForUnderstanding: "If two machines transfer energy at the same power but one wastes more, which quantity stays the same and which quantity changes?",
+        video_url: staticVideoAssetUrl("F3_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F3_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F3_L3", "captions.vtt"),
+      };
+    case "F3_L4":
+      return {
+        body: "Use this video to keep the whole-system momentum story visible before you move into the worked example.",
+        caption: "Video explainer: signed momentum, isolated-system conservation, and joined-speed reasoning before the lesson example.",
+        highlights: [
+          "Momentum depends on mass and velocity together",
+          "Total momentum is conserved in an isolated system",
+          "When objects stick together, the same total momentum is shared by the combined mass",
+        ],
+        checkForUnderstanding: "If the total mass after a sticking collision is larger but total momentum stays the same, what should happen to the shared final speed?",
+        video_url: staticVideoAssetUrl("F3_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F3_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F3_L4", "captions.vtt"),
+      };
+    case "F3_L5":
+      return {
+        body: "Use this video to connect impulse, momentum change, and force-time area before the worked example begins.",
+        caption: "Video explainer: impulse, same-area reasoning, and safer stops through longer time before the lesson example.",
+        highlights: [
+          "Impulse is the change in momentum",
+          "On a force-time graph, area represents impulse",
+          "The same impulse spread over longer time gives a smaller average force",
+        ],
+        checkForUnderstanding: "If the momentum change stays fixed but the stopping time gets longer, what happens to the average force?",
+        video_url: staticVideoAssetUrl("F3_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F3_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F3_L5", "captions.vtt"),
+      };
+    case "F3_L6":
+      return {
+        body: "Use this video to connect braking force, momentum change, stopping time, and speed before the worked example starts.",
+        caption: "Video explainer: braking force, momentum rate, kinetic energy, and safer stopping strategies before the lesson example.",
+        highlights: [
+          "Average force depends on change in momentum and stopping time",
+          "Higher speed means larger momentum and much larger kinetic energy",
+          "Longer stopping time reduces the average braking force",
+        ],
+        checkForUnderstanding: "Why does increasing stopping time help even when the total momentum change of the car is the same?",
+        video_url: staticVideoAssetUrl("F3_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("F3_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("F3_L6", "captions.vtt"),
+      };
     case "F4_L1":
       return {
         body: "Use this video to lock in what current actually measures before you begin the worked example.",
