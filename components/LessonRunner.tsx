@@ -468,6 +468,106 @@ type ScaffoldSection = {
   check_for_understanding?: string;
 };
 
+function ScaffoldVideoPlayer({
+  src,
+  poster,
+  captionsUrl,
+}: {
+  src: string;
+  poster?: string;
+  captionsUrl?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [fallbackHref, setFallbackHref] = useState(src);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const cacheBustedSrc = src.includes("?")
+      ? `${src}&player_boot=${Date.now()}`
+      : `${src}?player_boot=${Date.now()}`;
+
+    setFallbackHref(cacheBustedSrc);
+
+    let cancelled = false;
+    let cleanupTimer: number | null = null;
+
+    const restorePausedStart = () => {
+      if (cancelled) return;
+      video.pause();
+      try {
+        video.currentTime = 0;
+      } catch {
+        // Ignore currentTime reset failures until metadata is ready.
+      }
+      video.muted = false;
+    };
+
+    const primePlayback = async () => {
+      try {
+        video.muted = true;
+        video.load();
+        await video.play();
+        cleanupTimer = window.setTimeout(() => restorePausedStart(), 180);
+      } catch {
+        video.load();
+      }
+    };
+
+    const handleCanPlay = () => {
+      if (!cancelled) {
+        restorePausedStart();
+      }
+    };
+
+    video.addEventListener("canplay", handleCanPlay);
+    void primePlayback();
+
+    return () => {
+      cancelled = true;
+      if (cleanupTimer !== null) {
+        window.clearTimeout(cleanupTimer);
+      }
+      video.removeEventListener("canplay", handleCanPlay);
+    };
+  }, [src]);
+
+  return (
+    <div>
+      <video
+        ref={videoRef}
+        className="h-72 w-full rounded-2xl bg-slate-950 object-contain md:h-80"
+        controls
+        playsInline
+        preload="auto"
+        poster={poster}
+        src={src}
+      >
+        {captionsUrl ? (
+          <track
+            kind="captions"
+            label="English"
+            srcLang="en"
+            src={captionsUrl}
+            default
+          />
+        ) : null}
+      </video>
+      <div className="mt-3 text-sm">
+        <a
+          href={fallbackHref}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sky-700 underline underline-offset-4"
+        >
+          Open video in a new tab
+        </a>
+      </div>
+    </div>
+  );
+}
+
 type ScaffoldStagePayload = {
   title?: string;
   intro?: string;
@@ -1559,24 +1659,11 @@ export default function LessonRunner({
               <div className="mt-5 overflow-hidden rounded-2xl border bg-white shadow-sm">
                 <div className="bg-[radial-gradient(circle_at_top,_rgba(219,234,254,0.7),_rgba(255,255,255,0.96)_62%)] p-4 md:p-5">
                   {section.visual.video_url ? (
-                    <video
-                      className="h-72 w-full rounded-2xl bg-slate-950 object-contain md:h-80"
-                      controls
-                      playsInline
-                      preload="metadata"
+                    <ScaffoldVideoPlayer
+                      src={section.visual.video_url}
                       poster={section.visual.poster_url}
-                    >
-                      <source src={section.visual.video_url} type="video/mp4" />
-                      {section.visual.captions_url ? (
-                        <track
-                          kind="captions"
-                          label="English"
-                          srcLang="en"
-                          src={section.visual.captions_url}
-                          default
-                        />
-                      ) : null}
-                    </video>
+                      captionsUrl={section.visual.captions_url}
+                    />
                   ) : (
                     <img
                       src={section.visual.image_url}
