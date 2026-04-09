@@ -1,10 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="440" y="170" fill="#1d4ed8" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Capacitance and Charge Storage</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="198" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Capacitance is</tspan><tspan x="198" dy="23">charge stored per</tspan><tspan x="198" dy="23">volt.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="406" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">A larger</tspan><tspan x="406" dy="23">capacitance stores</tspan><tspan x="406" dy="23">more charge for</tspan><tspan x="406" dy="23">the same voltage.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="614" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Geometry and</tspan><tspan x="614" dy="23">dielectric</tspan><tspan x="614" dy="23">material affect</tspan><tspan x="614" dy="23">storage.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/><text x="136" y="450" fill="#1d4ed8" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Hold voltage fixed and compare stored charge in two</tspan><tspan x="136" dy="31">capacitors. That isolates what capacitance really</tspan><tspan x="136" dy="31">measures.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="156" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Capacitance is charge stored per</tspan><tspan x="890" dy="29">volt.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="280" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">A larger capacitance stores more</tspan><tspan x="890" dy="29">charge for the same voltage.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="404" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Geometry and dielectric material</tspan><tspan x="890" dy="29">affect storage.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
-  <text x="890" y="534" fill="#1d4ed8" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Capacitance is the storage ratio linking charge and potential</tspan><tspan x="890" dy="31">difference, not the charge itself.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#3b82f6" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Capacitance Is Charge Stored Per Volt
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Holding voltage fixed lets you see what capacitance really measures: how much separated charge the capacitor can store for each volt.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="548" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="726" y="226" width="548" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="400" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Same voltage, different capacitance
+  </text>
+  <text x="1000" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Why capacitance changes
+  </text>
+
+  <rect x="170" y="340" width="110" height="240" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="362" y="340" width="110" height="240" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="476" y="340" width="110" height="240" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="226" y="340" width="136" height="240" rx="16" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 10"/>
+
+  <circle cx="204" cy="374" r="10" fill="#ef4444"/><circle cx="204" cy="420" r="10" fill="#ef4444"/><circle cx="204" cy="466" r="10" fill="#ef4444"/><circle cx="204" cy="512" r="10" fill="#ef4444"/>
+  <circle cx="552" cy="374" r="10" fill="#1d4ed8"/><circle cx="552" cy="420" r="10" fill="#1d4ed8"/><circle cx="552" cy="466" r="10" fill="#1d4ed8"/><circle cx="552" cy="512" r="10" fill="#1d4ed8"/>
+
+  <circle cx="396" cy="360" r="10" fill="#ef4444"/><circle cx="396" cy="396" r="10" fill="#ef4444"/><circle cx="396" cy="432" r="10" fill="#ef4444"/><circle cx="396" cy="468" r="10" fill="#ef4444"/><circle cx="396" cy="504" r="10" fill="#ef4444"/><circle cx="396" cy="540" r="10" fill="#ef4444"/>
+  <circle cx="514" cy="360" r="10" fill="#1d4ed8"/><circle cx="514" cy="396" r="10" fill="#1d4ed8"/><circle cx="514" cy="432" r="10" fill="#1d4ed8"/><circle cx="514" cy="468" r="10" fill="#1d4ed8"/><circle cx="514" cy="504" r="10" fill="#1d4ed8"/><circle cx="514" cy="540" r="10" fill="#1d4ed8"/>
+
+  <text x="225" y="628" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    smaller C
+  </text>
+  <text x="225" y="660" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    less charge at same V
+  </text>
+  <text x="474" y="628" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    larger C
+  </text>
+  <text x="474" y="660" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    more charge at same V
+  </text>
+
+  <rect x="792" y="322" width="160" height="280" rx="18" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="1088" y="322" width="160" height="280" rx="18" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="952" y="322" width="136" height="280" rx="18" fill="#dbeafe" stroke="#10b981" stroke-width="3"/>
+  <text x="1020" y="360" fill="#047857" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">dielectric</text>
+  <text x="1000" y="648" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    plate area, separation, and dielectric all change storage.
+  </text>
 </svg>

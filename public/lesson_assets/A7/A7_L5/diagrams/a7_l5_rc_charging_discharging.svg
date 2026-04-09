@@ -1,10 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="440" y="170" fill="#1d4ed8" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">RC Charging and Discharging</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="198" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Charging current</tspan><tspan x="198" dy="23">starts large and</tspan><tspan x="198" dy="23">then falls.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="406" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Capacitor p.d.</tspan><tspan x="406" dy="23">rises toward the</tspan><tspan x="406" dy="23">supply during</tspan><tspan x="406" dy="23">charging.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="614" y="284" fill="#1d4ed8" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">The time constant</tspan><tspan x="614" dy="23">sets the response</tspan><tspan x="614" dy="23">timescale.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/><text x="136" y="450" fill="#1d4ed8" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Watch current and capacitor p.d. together during the first</tspan><tspan x="136" dy="31">moments of charging. Their opposite trends are the key</tspan><tspan x="136" dy="31">pattern.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="156" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Charging current starts large</tspan><tspan x="890" dy="29">and then falls.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="280" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Capacitor p.d. rises toward the</tspan><tspan x="890" dy="29">supply during charging.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#2563eb" stroke-width="2"/><text x="890" y="404" fill="#1d4ed8" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">The time constant sets the</tspan><tspan x="890" dy="29">response timescale.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
-  <text x="890" y="534" fill="#1d4ed8" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">RC behaviour is a changing-rate process governed by the time</tspan><tspan x="890" dy="31">constant, not a straight-line fill or emptying.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#3b82f6" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    RC Charging and Discharging Are Changing-Rate Processes
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Current falls away while capacitor p.d. rises during charging, and both change exponentially rather than in straight lines.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="548" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="726" y="226" width="548" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="400" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Charging
+  </text>
+  <text x="1000" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Discharging
+  </text>
+
+  <line x1="196" y1="622" x2="606" y2="622" stroke="#1e40af" stroke-width="4"/>
+  <line x1="196" y1="336" x2="196" y2="622" stroke="#1e40af" stroke-width="4"/>
+  <text x="614" y="630" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">time</text>
+
+  <path d="M220 592 C320 420, 420 366, 580 350" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+  <path d="M220 362 C320 378, 430 458, 580 598" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <line x1="378" y1="336" x2="378" y2="622" stroke="#93c5fd" stroke-width="3" stroke-dasharray="10 10"/>
+  <text x="378" y="324" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">tau</text>
+  <text x="468" y="390" fill="#047857" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">Vc rises</text>
+  <text x="468" y="528" fill="#b45309" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">I falls</text>
+
+  <line x1="796" y1="622" x2="1206" y2="622" stroke="#1e40af" stroke-width="4"/>
+  <line x1="796" y1="336" x2="796" y2="622" stroke="#1e40af" stroke-width="4"/>
+  <text x="1214" y="630" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">time</text>
+
+  <path d="M820 350 C936 386, 1048 484, 1180 594" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+  <path d="M820 350 C936 386, 1048 484, 1180 594" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="980" y1="336" x2="980" y2="622" stroke="#93c5fd" stroke-width="3" stroke-dasharray="10 10"/>
+  <text x="980" y="324" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">tau</text>
+  <text x="1048" y="440" fill="#047857" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">Vc falls</text>
+  <text x="1000" y="682" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    The time constant sets the timescale, not a straight-line rate.
+  </text>
 </svg>
