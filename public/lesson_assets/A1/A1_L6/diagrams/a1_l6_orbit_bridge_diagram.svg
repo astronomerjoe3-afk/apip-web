@@ -1,30 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-  <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0b1020"/>
-      <stop offset="100%" stop-color="#172554"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
+  <rect width="1280" height="720" fill="#1b2750"/>
+  <text x="640" y="74" fill="#ffffff" text-anchor="middle" font-size="34" font-family="Arial" font-weight="700">Orbit bridge: inward turning need vs inward gravity field</text>
+  <text x="640" y="114" fill="#dbeafe" text-anchor="middle" font-size="20" font-family="Arial">Show a satellite with tangent velocity, inward gravitational pull, and the bridge idea that both point inward.</text>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect x="150" y="146" width="980" height="472" rx="28" fill="#172033" stroke="#334155" stroke-width="3"/>
+  <circle cx="350" cy="390" r="58" fill="#facc15"/>
+  <circle cx="602" cy="338" r="30" fill="#38bdf8"/>
+  <circle cx="816" cy="466" r="24" fill="#a78bfa"/>
+  <line x1="408" y1="390" x2="574" y2="354" stroke="#38bdf8" stroke-width="5"/>
+  <line x1="630" y1="356" x2="790" y2="452" stroke="#a78bfa" stroke-width="5"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <circle cx="410" cy="420" r="98" fill="none" stroke="#60a5fa" stroke-width="6" opacity="0.35"/>
+  <circle cx="410" cy="420" r="24" fill="#1f2937"/>
+  <circle cx="508" cy="420" r="14" fill="#2563eb"/>
+  <line x1="508" y1="420" x2="448" y2="420" stroke="#f97316" stroke-width="10"/>
+  <polygon points="448,420 472,404 472,436" fill="#f97316"/>
+  <text x="530" y="396" fill="#f97316" font-size="20" font-family="Arial" font-weight="700">gravity inward</text>
+  <line x1="508" y1="420" x2="508" y2="316" stroke="#0f766e" stroke-width="10"/>
+  <polygon points="508,316 492,342 524,342" fill="#0f766e"/>
+  <text x="544" y="330" fill="#0f766e" font-size="20" font-family="Arial" font-weight="700">sideways motion</text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="792" y="282" width="270" height="178" rx="26" fill="#eff6ff" stroke="#8b5cf6" stroke-width="4"/>
+  <text x="820" y="334" fill="#7c3aed" font-size="22" font-family="Arial" font-weight="700">required a_c = v^2 / r</text>
+  <text x="820" y="384" fill="#7c3aed" font-size="22" font-family="Arial" font-weight="700">local g = GM / r^2</text>
+  <text x="820" y="434" fill="#0f766e" font-size="20" font-family="Arial" font-weight="700">Bridge question: do they match?</text>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
-
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Orbit Bridge compares inward turning need with inward gravity field</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Show a satellite with tangent velocity, inward gravitational pull, and a side panel equating gravitational field strength with required centripetal acceleration.</text>
+  <rect x="170" y="548" width="910" height="48" rx="18" fill="#1f2c46" stroke="#475569" stroke-width="2"/>
+  <text x="625" y="579" fill="#f8fafc" text-anchor="middle" font-size="19" font-family="Arial">If gravity supplies the inward acceleration the orbit needs, the bridge closes.</text>
 </svg>
