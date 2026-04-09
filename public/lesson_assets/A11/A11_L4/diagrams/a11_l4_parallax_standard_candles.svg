@@ -36,11 +36,11 @@
   <text x="922" y="444" fill="#f8fafc" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">standard candles</text>
   <text x="922" y="532" fill="#f8fafc" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">parallax</text>
   <text x="922" y="620" fill="#f8fafc" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">Solar System baseline</text>
-  <circle cx="1128" cy="440" r="36" fill="#f59e0b"/>
-  <circle cx="1128" cy="440" r="62" fill="none" stroke="#fb7185" stroke-width="6" stroke-dasharray="14 10"/>
-  <text x="1128" y="448" fill="#fff7ed" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Cepheid</text>
-  <rect x="992" y="408" width="244" height="92" rx="20" fill="#2a173b" stroke="#fb7185" stroke-width="2"/>
-  <text x="1114" y="446" fill="#f5d0fe" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">known luminosity plus</text>
-  <text x="1114" y="474" fill="#f5d0fe" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">observed brightness</text>
+  <circle cx="1140" cy="392" r="36" fill="#f59e0b"/>
+  <circle cx="1140" cy="392" r="62" fill="none" stroke="#fb7185" stroke-width="6" stroke-dasharray="14 10"/>
+  <text x="1140" y="400" fill="#fff7ed" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Cepheid</text>
+  <rect x="1000" y="474" width="252" height="82" rx="20" fill="#2a173b" stroke="#fb7185" stroke-width="2"/>
+  <text x="1126" y="508" fill="#f5d0fe" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">known luminosity plus</text>
+  <text x="1126" y="534" fill="#f5d0fe" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">observed brightness</text>
   <text x="1128" y="684" fill="#ddd6fe" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">Different scales need different evidence methods.</text>
 </svg>

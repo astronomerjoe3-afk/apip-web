@@ -26,8 +26,8 @@
   <circle cx="584" cy="456" r="12" fill="#f8fafc"/>
   <circle cx="520" cy="456" r="12" fill="#f8fafc"/>
   <text x="602" y="414" fill="#dbeafe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">weaker g farther out</text>
-  <text x="420" y="518" fill="#dbeafe" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">stronger g</text>
-  <text x="420" y="546" fill="#dbeafe" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">closer in</text>
+  <text x="384" y="526" fill="#dbeafe" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">stronger g</text>
+  <text x="384" y="552" fill="#dbeafe" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">closer in</text>
   <text x="372" y="708" fill="#93c5fd" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">field strength is the inward pull per unit mass</text>
 
   <path d="M 780 284 C 844 336 872 410 922 490 C 970 568 1058 602 1180 604" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round"/>
