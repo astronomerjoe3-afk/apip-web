@@ -1,15 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc" style="font-family: Arial, Helvetica, sans-serif;">
   <title id="title">Crowd Relay</title>
   <desc id="desc">Compressions and rarefactions move through a line of particles while each particle moves locally.</desc>
   <rect width="1200" height="800" fill="#f8fbff"/>
   <rect x="44" y="34" width="1112" height="732" rx="36" fill="#f1f5ff" stroke="#d8def8" stroke-width="4"/>
-  <text x="84" y="112" fill="#172554" font-size="56" font-weight="700">Compressions and Rarefactions Relay the Message</text>
-  <text x="84" y="164" fill="#475569" font-size="28">Sound in air is a longitudinal pressure pattern, not a march of particles across the room.</text>
+  <text x="84" y="104" fill="#172554" font-size="50" font-weight="700">
+    <tspan x="84" dy="0">Compressions and rarefactions</tspan>
+    <tspan x="84" dy="52">relay the message</tspan>
+  </text>
+  <text x="84" y="208" fill="#475569" font-size="26">Sound in air is a longitudinal pressure pattern, not a march of particles across the room.</text>
   <rect x="170" y="252" width="154" height="230" rx="36" fill="#dbeafe"/>
   <rect x="526" y="252" width="154" height="230" rx="36" fill="#dbeafe"/>
-  <text x="178" y="230" fill="#1d4ed8" font-size="30" font-weight="700">Squeeze band</text>
-  <text x="536" y="230" fill="#1d4ed8" font-size="30" font-weight="700">Squeeze band</text>
-  <text x="372" y="230" fill="#475569" font-size="30" font-weight="700">Release band</text>
+  <text x="200" y="286" fill="#1d4ed8" font-size="22" font-weight="700">Squeeze band</text>
+  <text x="390" y="286" fill="#475569" font-size="22" font-weight="700">Release band</text>
+  <text x="546" y="286" fill="#1d4ed8" font-size="22" font-weight="700">Squeeze band</text>
   <g fill="#64748b">
     <circle cx="184" cy="368" r="18"/><circle cx="224" cy="368" r="18"/><circle cx="264" cy="368" r="18"/><circle cx="304" cy="368" r="18"/>
     <circle cx="392" cy="368" r="18"/><circle cx="462" cy="368" r="18"/>

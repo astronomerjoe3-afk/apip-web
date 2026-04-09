@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc" style="font-family: Arial, Helvetica, sans-serif;">
   <title id="title">Pitch Meter</title>
   <desc id="desc">Frequency controls pitch while loudness is a separate quantity.</desc>
   <rect width="1200" height="800" fill="#f8fbff"/>
@@ -9,19 +9,20 @@
   <rect x="456" y="246" width="258" height="280" rx="34" fill="#e0e7ff"/>
   <rect x="812" y="246" width="180" height="280" rx="34" fill="#dcfce7"/>
   <text x="172" y="302" fill="#1d4ed8" font-size="34" font-weight="700">Frequency</text>
-  <text x="204" y="372" fill="#1d4ed8" font-size="64" font-weight="700">680 Hz</text>
+  <text x="224" y="372" fill="#1d4ed8" font-size="58" font-weight="700">680 Hz</text>
   <text x="540" y="302" fill="#312e81" font-size="34" font-weight="700">Pitch</text>
-  <text x="530" y="372" fill="#312e81" font-size="64" font-weight="700">Higher</text>
+  <text x="508" y="372" fill="#312e81" font-size="62" font-weight="700">Higher</text>
   <text x="846" y="302" fill="#166534" font-size="34" font-weight="700">Loudness</text>
   <rect x="870" y="428" width="64" height="88" rx="18" fill="#16a34a"/>
-  <text x="470" y="470" fill="#475569" font-size="26">Same medium, same sound family.</text>
-  <text x="470" y="510" fill="#475569" font-size="26">Higher frequency means shorter wavelength,</text>
-  <text x="470" y="548" fill="#475569" font-size="26">not automatically a faster sound.</text>
+  <rect x="430" y="542" width="580" height="70" rx="22" fill="#ffffff" opacity="0.96"/>
+  <text x="456" y="574" fill="#475569" font-size="22">Same medium: higher frequency means shorter wavelength.</text>
+  <text x="456" y="602" fill="#475569" font-size="22">Loudness is separate, and sound speed stays medium-set.</text>
   <rect x="98" y="628" width="310" height="84" rx="24" fill="#ffffff"/>
   <rect x="444" y="628" width="310" height="84" rx="24" fill="#ffffff"/>
   <rect x="790" y="628" width="310" height="84" rx="24" fill="#ffffff"/>
-  <text x="128" y="676" fill="#0f172a" font-size="28">Higher frequency = higher pitch</text>
-  <text x="474" y="664" fill="#0f172a" font-size="28">Pitch and loudness</text>
-  <text x="474" y="696" fill="#0f172a" font-size="28">must stay separate.</text>
-  <text x="820" y="676" fill="#0f172a" font-size="28">Same air means speed stays medium-set.</text>
+  <text x="128" y="676" fill="#0f172a" font-size="24">Higher frequency = higher pitch</text>
+  <text x="474" y="664" fill="#0f172a" font-size="24">Pitch and loudness</text>
+  <text x="474" y="694" fill="#0f172a" font-size="24">must stay separate.</text>
+  <text x="820" y="664" fill="#0f172a" font-size="24">Same air means speed</text>
+  <text x="820" y="694" fill="#0f172a" font-size="24">stays medium-set.</text>
 </svg>
