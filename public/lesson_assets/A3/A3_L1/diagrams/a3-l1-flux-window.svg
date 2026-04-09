@@ -1,11 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <marker id="field-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M 0 0 L 12 6 L 0 12 z" fill="#38bdf8" />
-    </marker>
-    <marker id="induced-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M 0 0 L 12 6 L 0 12 z" fill="#f97316" />
-    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 48px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #94a3b8; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
-  <rect width="100%" height="100%" fill="#0b1020" />
-<text x="640.00" y="70.00" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Field threads through the window loop</text><text x="640.00" y="105.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">Show how field strength, window size, and tilt change the through-thread score.</text><line x1="200.00" y1="150.00" x2="200.00" y2="470.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="240.00" y1="150.00" x2="240.00" y2="470.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="280.00" y1="150.00" x2="280.00" y2="470.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="320.00" y1="150.00" x2="320.00" y2="470.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="360.00" y1="150.00" x2="360.00" y2="470.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="400.00" y1="150.00" x2="400.00" y2="470.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="440.00" y1="150.00" x2="440.00" y2="470.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><g transform="rotate(18.00 640.00 380.00)"><rect x="545.00" y="310.00" width="190.00" height="140.00" rx="18" fill="none" stroke="#f8fafc" stroke-width="7" /></g><line x1="640.00" y1="370.00" x2="640.00" y2="260.00" stroke="#facc15" stroke-width="5" marker-end="url(#field-arrow)" /><text x="686.00" y="264.00" fill="#fde68a" text-anchor="start" font-size="18" font-family="Arial" font-weight="normal">window normal</text><text x="640.00" y="215.00" fill="#bae6fd" text-anchor="middle" font-size="22" font-family="Arial" font-weight="normal">Face-on catches the maximum thread count</text><text x="640.00" y="516.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal"><tspan x="640.00" dy="0">Flux is field through the window,</tspan><tspan x="640.00" dy="22">not field strength alone</tspan></text><text x="226.00" y="500.00" fill="#38bdf8" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">stronger B</text><text x="414.00" y="500.00" fill="#e2e8f0" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">same window</text></svg>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
+
+  <text x="640" y="84" class="title" text-anchor="middle">Constructive vs Destructive Overlap</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    Same-phase inputs reinforce. Crest-plus-trough cancels when the displacements are equal and opposite.
+  </text>
+
+  <rect x="110" y="176" width="1060" height="478" rx="34" class="card"/>
+  <rect x="146" y="226" width="448" height="372" rx="26" class="panel"/>
+  <rect x="686" y="226" width="448" height="372" rx="26" class="panel"/>
+
+  <text x="370" y="268" class="label" text-anchor="middle">Constructive case</text>
+  <text x="910" y="268" class="label" text-anchor="middle">Destructive case</text>
+
+  <text x="188" y="326" class="small">input A</text>
+  <line x1="248" y1="320" x2="530" y2="320" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 248 320 C 278 286 308 286 338 320 C 368 354 398 354 428 320 C 458 286 488 286 518 320"
+        fill="none" stroke="#67e8f9" stroke-width="6"/>
+  <text x="188" y="404" class="small">input B</text>
+  <line x1="248" y1="398" x2="530" y2="398" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 248 398 C 278 364 308 364 338 398 C 368 432 398 432 428 398 C 458 364 488 364 518 398"
+        fill="none" stroke="#a78bfa" stroke-width="6"/>
+  <text x="188" y="500" class="small">result</text>
+  <line x1="248" y1="494" x2="530" y2="494" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 248 494 C 278 438 308 438 338 494 C 368 550 398 550 428 494 C 458 438 488 438 518 494"
+        fill="none" stroke="#22c55e" stroke-width="7"/>
+  <text x="370" y="560" class="body" text-anchor="middle">crests meet crests, so the amplitude grows</text>
+
+  <text x="728" y="326" class="small">input A</text>
+  <line x1="788" y1="320" x2="1070" y2="320" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 788 320 C 818 286 848 286 878 320 C 908 354 938 354 968 320 C 998 286 1028 286 1058 320"
+        fill="none" stroke="#67e8f9" stroke-width="6"/>
+  <text x="728" y="404" class="small">input B</text>
+  <line x1="788" y1="398" x2="1070" y2="398" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 788 398 C 818 432 848 432 878 398 C 908 364 938 364 968 398 C 998 432 1028 432 1058 398"
+        fill="none" stroke="#f97316" stroke-width="6"/>
+  <text x="728" y="500" class="small">result</text>
+  <line x1="788" y1="494" x2="1070" y2="494" stroke="#22c55e" stroke-width="7"/>
+  <text x="910" y="560" class="body" text-anchor="middle">equal opposite displacements cancel to zero</text>
+</svg>

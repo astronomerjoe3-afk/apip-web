@@ -1,11 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <marker id="field-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M 0 0 L 12 6 L 0 12 z" fill="#38bdf8" />
-    </marker>
-    <marker id="induced-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M 0 0 L 12 6 L 0 12 z" fill="#f97316" />
-    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 47px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #94a3b8; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
-  <rect width="100%" height="100%" fill="#0b1020" />
-<text x="640.00" y="70.00" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Many linked windows strengthen the effect</text><text x="640.00" y="105.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal"><tspan x="640.00" dy="0">Show a multi-turn coil sharing the same field so the</tspan><tspan x="640.00" dy="22">total linkage becomes visible.</tspan></text><text x="640.00" y="223.00" fill="#bae6fd" text-anchor="middle" font-size="22" font-family="Arial" font-weight="normal">More linked turns mean a larger total thread score</text><line x1="222.22" y1="220.00" x2="222.22" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="306.67" y1="220.00" x2="306.67" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="391.11" y1="220.00" x2="391.11" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="475.56" y1="220.00" x2="475.56" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="560.00" y1="220.00" x2="560.00" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="644.44" y1="220.00" x2="644.44" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="728.89" y1="220.00" x2="728.89" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="813.33" y1="220.00" x2="813.33" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><line x1="897.78" y1="220.00" x2="897.78" y2="460.00" stroke="#38bdf8" stroke-width="4" marker-end="url(#field-arrow)" /><circle cx="240.00" cy="390.00" r="20.00" fill="none" stroke="#a78bfa" stroke-width="4" /><circle cx="310.00" cy="390.00" r="20.00" fill="none" stroke="#a78bfa" stroke-width="4" /><circle cx="380.00" cy="390.00" r="20.00" fill="none" stroke="#a78bfa" stroke-width="4" /><circle cx="450.00" cy="390.00" r="20.00" fill="none" stroke="#a78bfa" stroke-width="4" /><circle cx="520.00" cy="390.00" r="20.00" fill="none" stroke="#a78bfa" stroke-width="4" /><text x="640.00" y="275.00" fill="#ddd6fe" text-anchor="middle" font-size="20" font-family="Arial" font-weight="bold">5 turns</text><text x="640.00" y="476.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal"><tspan x="640.00" dy="0">Flux linkage N Phi multiplies the through-thread score</tspan><tspan x="640.00" dy="22">by the number of turns in the coil.</tspan></text><line x1="260.00" y1="330.00" x2="260.00" y2="260.00" stroke="#facc15" stroke-width="5" /><text x="260.00" y="245.00" fill="#fde68a" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">Phi on each turn</text><line x1="730.00" y1="330.00" x2="730.00" y2="260.00" stroke="#f97316" stroke-width="5" /><text x="730.00" y="245.00" fill="#fdba74" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">N Phi total</text></svg>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
+
+  <text x="640" y="84" class="title" text-anchor="middle">Phase Difference Sets the Fringe Type</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    Use the path difference as a shortcut to phase: zero or one lambda reinforces, half a lambda cancels.
+  </text>
+
+  <rect x="108" y="176" width="1064" height="478" rx="34" class="card"/>
+  <rect x="144" y="226" width="292" height="372" rx="26" class="panel"/>
+  <rect x="494" y="226" width="292" height="372" rx="26" class="panel"/>
+  <rect x="844" y="226" width="292" height="372" rx="26" class="panel"/>
+
+  <text x="290" y="266" class="label" text-anchor="middle">0 lambda</text>
+  <text x="640" y="266" class="label" text-anchor="middle">0.5 lambda</text>
+  <text x="990" y="266" class="label" text-anchor="middle">1 lambda</text>
+
+  <line x1="184" y1="384" x2="396" y2="384" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 184 384 C 212 348 240 348 268 384 C 296 420 324 420 352 384 C 380 348 392 348 396 384"
+        fill="none" stroke="#67e8f9" stroke-width="6"/>
+  <path d="M 184 456 C 212 420 240 420 268 456 C 296 492 324 492 352 456 C 380 420 392 420 396 456"
+        fill="none" stroke="#a78bfa" stroke-width="6"/>
+  <text x="290" y="538" class="body" text-anchor="middle">in step, bright result</text>
+
+  <line x1="534" y1="384" x2="746" y2="384" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 534 384 C 562 348 590 348 618 384 C 646 420 674 420 702 384 C 730 348 742 348 746 384"
+        fill="none" stroke="#67e8f9" stroke-width="6"/>
+  <path d="M 534 456 C 562 492 590 492 618 456 C 646 420 674 420 702 456 C 730 492 742 492 746 456"
+        fill="none" stroke="#f97316" stroke-width="6"/>
+  <text x="640" y="538" class="body" text-anchor="middle">crest meets trough, dark result</text>
+
+  <line x1="884" y1="384" x2="1096" y2="384" stroke="#475569" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <path d="M 884 384 C 912 348 940 348 968 384 C 996 420 1024 420 1052 384 C 1080 348 1092 348 1096 384"
+        fill="none" stroke="#67e8f9" stroke-width="6"/>
+  <path d="M 884 456 C 912 420 940 420 968 456 C 996 492 1024 492 1052 456 C 1080 420 1092 420 1096 456"
+        fill="none" stroke="#a78bfa" stroke-width="6"/>
+  <text x="990" y="538" class="body" text-anchor="middle">back in step, bright again</text>
+
+  <text x="640" y="620" class="body" text-anchor="middle">Whole-number lambda differences reinforce. Half-number differences cancel.</text>
+</svg>

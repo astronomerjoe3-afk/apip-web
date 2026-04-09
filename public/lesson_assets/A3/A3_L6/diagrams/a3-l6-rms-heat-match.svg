@@ -1,1 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><rect width="100%" height="100%" fill="#0b1020" /><text x="640.00" y="65.00" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Crest Level vs Heat-Match Level</text><text x="640.00" y="100.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">RMS compares sinusoidal AC with equal-heating DC</text><rect x="110.00" y="150.00" width="1080.00" height="460.00" fill="#111827" stroke="#334155" stroke-width="2" rx="18" /><line x1="110.00" y1="150.00" x2="110.00" y2="610.00" stroke="#1f2937" stroke-width="1" /><text x="110.00" y="640.00" fill="#94a3b8" text-anchor="middle" font-size="14" font-family="Arial" font-weight="normal">-0.08</text><line x1="326.00" y1="150.00" x2="326.00" y2="610.00" stroke="#1f2937" stroke-width="1" /><text x="326.00" y="640.00" fill="#94a3b8" text-anchor="middle" font-size="14" font-family="Arial" font-weight="normal">0.15</text><line x1="542.00" y1="150.00" x2="542.00" y2="610.00" stroke="#1f2937" stroke-width="1" /><text x="542.00" y="640.00" fill="#94a3b8" text-anchor="middle" font-size="14" font-family="Arial" font-weight="normal">0.38</text><line x1="758.00" y1="150.00" x2="758.00" y2="610.00" stroke="#1f2937" stroke-width="1" /><text x="758.00" y="640.00" fill="#94a3b8" text-anchor="middle" font-size="14" font-family="Arial" font-weight="normal">0.62</text><line x1="974.00" y1="150.00" x2="974.00" y2="610.00" stroke="#1f2937" stroke-width="1" /><text x="974.00" y="640.00" fill="#94a3b8" text-anchor="middle" font-size="14" font-family="Arial" font-weight="normal">0.85</text><line x1="1190.00" y1="150.00" x2="1190.00" y2="610.00" stroke="#1f2937" stroke-width="1" /><text x="1190.00" y="640.00" fill="#94a3b8" text-anchor="middle" font-size="14" font-family="Arial" font-weight="normal">1.08</text><line x1="110.00" y1="150.00" x2="1190.00" y2="150.00" stroke="#1f2937" stroke-width="1" /><text x="94.00" y="155.00" fill="#94a3b8" text-anchor="end" font-size="14" font-family="Arial" font-weight="normal">3.72</text><line x1="110.00" y1="242.00" x2="1190.00" y2="242.00" stroke="#1f2937" stroke-width="1" /><text x="94.00" y="247.00" fill="#94a3b8" text-anchor="end" font-size="14" font-family="Arial" font-weight="normal">2.23</text><line x1="110.00" y1="334.00" x2="1190.00" y2="334.00" stroke="#1f2937" stroke-width="1" /><text x="94.00" y="339.00" fill="#94a3b8" text-anchor="end" font-size="14" font-family="Arial" font-weight="normal">0.74</text><line x1="110.00" y1="426.00" x2="1190.00" y2="426.00" stroke="#1f2937" stroke-width="1" /><text x="94.00" y="431.00" fill="#94a3b8" text-anchor="end" font-size="14" font-family="Arial" font-weight="normal">-0.74</text><line x1="110.00" y1="518.00" x2="1190.00" y2="518.00" stroke="#1f2937" stroke-width="1" /><text x="94.00" y="523.00" fill="#94a3b8" text-anchor="end" font-size="14" font-family="Arial" font-weight="normal">-2.23</text><line x1="110.00" y1="610.00" x2="1190.00" y2="610.00" stroke="#1f2937" stroke-width="1" /><text x="94.00" y="615.00" fill="#94a3b8" text-anchor="end" font-size="14" font-family="Arial" font-weight="normal">-3.72</text><line x1="184.48" y1="150.00" x2="184.48" y2="610.00" stroke="#64748b" stroke-width="3" /><line x1="110.00" y1="380.00" x2="1190.00" y2="380.00" stroke="#64748b" stroke-width="3" /><text x="650.00" y="692.00" fill="#e2e8f0" text-anchor="middle" font-size="20" font-family="Arial" font-weight="normal">Time (cycles)</text><text x="34.00" y="380.00" fill="#e2e8f0" text-anchor="middle" font-size="20" font-family="Arial" font-weight="normal" transform="rotate(-90.00 34.00 380.00)">Voltage / current</text><polyline points="184.48,380.00 197.42,363.83 210.37,347.79 223.31,331.99 236.25,316.56 249.10,301.61 262.04,287.26 274.98,273.61 287.92,260.77 300.86,248.84 313.80,237.91 326.74,228.06 339.69,219.36 352.63,211.90 365.48,205.70 378.42,200.83 391.36,197.34 404.30,195.22 417.24,194.52 430.18,195.22 443.12,197.34 456.07,200.83 469.01,205.70 481.86,211.90 494.80,219.36 507.74,228.06 520.68,237.91 533.62,248.84 546.56,260.77 559.50,273.61 572.44,287.26 585.39,301.61 598.23,316.56 611.18,331.99 624.12,347.79 637.06,363.83 650.00,380.00 662.94,396.17 675.88,412.21 688.82,428.01 701.77,443.44 714.61,458.39 727.56,472.74 740.50,486.39 753.44,499.23 766.38,511.16 779.32,522.09 792.26,531.94 805.20,540.64 818.14,548.10 830.99,554.30 843.93,559.17 856.88,562.66 869.82,564.78 882.76,565.48 895.70,564.78 908.64,562.66 921.58,559.17 934.52,554.30 947.37,548.10 960.31,540.64 973.26,531.94 986.20,522.09 999.14,511.16 1012.08,499.23 1025.02,486.39 1037.96,472.74 1050.90,458.39 1063.75,443.44 1076.69,428.01 1089.63,412.21 1102.58,396.17 1115.52,380.00" fill="none" stroke="#38bdf8" stroke-width="4" /><circle cx="1115.52" cy="380.00" r="4.00" fill="#38bdf8" stroke="#38bdf8" stroke-width="0" /><polyline points="184.48,248.84 1115.52,248.84" fill="none" stroke="#f97316" stroke-width="4" /><circle cx="1115.52" cy="248.84" r="4.00" fill="#f97316" stroke="#f97316" stroke-width="0" /><polyline points="184.48,511.16 1115.52,511.16" fill="none" stroke="#22c55e" stroke-width="4" /><circle cx="1115.52" cy="511.16" r="4.00" fill="#22c55e" stroke="#22c55e" stroke-width="0" /><rect x="980.00" y="170.00" width="190" height="138.00" fill="#0f172a" stroke="#334155" stroke-width="2" rx="16" /><line x1="998.00" y1="190.00" x2="1038.00" y2="190.00" stroke="#38bdf8" stroke-width="4" /><text x="1050.00" y="196.00" fill="#e2e8f0" text-anchor="start" font-size="16" font-family="Arial" font-weight="normal">Swing drive</text><line x1="998.00" y1="224.00" x2="1038.00" y2="224.00" stroke="#f97316" stroke-width="4" /><text x="1050.00" y="230.00" fill="#e2e8f0" text-anchor="start" font-size="16" font-family="Arial" font-weight="normal">+RMS</text><line x1="998.00" y1="258.00" x2="1038.00" y2="258.00" stroke="#22c55e" stroke-width="4" /><text x="1050.00" y="264.00" fill="#e2e8f0" text-anchor="start" font-size="16" font-family="Arial" font-weight="normal">-RMS</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 46px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #94a3b8; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
+
+  <text x="640" y="84" class="title" text-anchor="middle">Compare Height and Spacing Separately</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    On an oscilloscope, taller traces mean larger amplitude and tighter spacing means higher frequency. Do not mix the two readings.
+  </text>
+
+  <rect x="108" y="176" width="1064" height="478" rx="34" class="card"/>
+  <rect x="144" y="226" width="448" height="372" rx="26" class="panel"/>
+  <rect x="688" y="226" width="448" height="372" rx="26" class="panel"/>
+
+  <text x="368" y="268" class="label" text-anchor="middle">Higher amplitude</text>
+  <text x="912" y="268" class="label" text-anchor="middle">Higher frequency</text>
+
+  <g stroke="#334155" stroke-width="2">
+    <line x1="196" y1="320" x2="540" y2="320"/>
+    <line x1="196" y1="396" x2="540" y2="396"/>
+    <line x1="196" y1="472" x2="540" y2="472"/>
+    <line x1="196" y1="548" x2="540" y2="548"/>
+    <line x1="196" y1="320" x2="196" y2="548"/>
+    <line x1="282" y1="320" x2="282" y2="548"/>
+    <line x1="368" y1="320" x2="368" y2="548"/>
+    <line x1="454" y1="320" x2="454" y2="548"/>
+    <line x1="540" y1="320" x2="540" y2="548"/>
+  </g>
+  <line x1="196" y1="434" x2="540" y2="434" stroke="#64748b" stroke-width="3" stroke-dasharray="10 10"/>
+  <path d="M 196 434 C 232 366 268 366 304 434 C 340 502 376 502 412 434 C 448 366 484 366 520 434"
+        fill="none" stroke="#67e8f9" stroke-width="8"/>
+  <line x1="250" y1="434" x2="250" y2="366" stroke="#fbbf24" stroke-width="4"/>
+  <line x1="238" y1="366" x2="262" y2="366" stroke="#fbbf24" stroke-width="4"/>
+  <line x1="238" y1="434" x2="262" y2="434" stroke="#fbbf24" stroke-width="4"/>
+  <text x="368" y="574" class="body" text-anchor="middle">same spacing, taller peaks</text>
+
+  <g stroke="#334155" stroke-width="2">
+    <line x1="740" y1="320" x2="1084" y2="320"/>
+    <line x1="740" y1="396" x2="1084" y2="396"/>
+    <line x1="740" y1="472" x2="1084" y2="472"/>
+    <line x1="740" y1="548" x2="1084" y2="548"/>
+    <line x1="740" y1="320" x2="740" y2="548"/>
+    <line x1="826" y1="320" x2="826" y2="548"/>
+    <line x1="912" y1="320" x2="912" y2="548"/>
+    <line x1="998" y1="320" x2="998" y2="548"/>
+    <line x1="1084" y1="320" x2="1084" y2="548"/>
+  </g>
+  <line x1="740" y1="434" x2="1084" y2="434" stroke="#64748b" stroke-width="3" stroke-dasharray="10 10"/>
+  <path d="M 740 434 C 762 386 784 386 806 434 C 828 482 850 482 872 434 C 894 386 916 386 938 434 C 960 482 982 482 1004 434 C 1026 386 1048 386 1070 434"
+        fill="none" stroke="#22c55e" stroke-width="8"/>
+  <line x1="780" y1="526" x2="888" y2="526" stroke="#f472b6" stroke-width="4"/>
+  <line x1="780" y1="514" x2="780" y2="538" stroke="#f472b6" stroke-width="4"/>
+  <line x1="888" y1="514" x2="888" y2="538" stroke="#f472b6" stroke-width="4"/>
+  <text x="912" y="564" class="body" text-anchor="middle">same height, tighter spacing</text>
+</svg>
