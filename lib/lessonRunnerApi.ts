@@ -13904,7 +13904,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260409a";
+  const assetVersion = "20260409b";
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const moduleId = lessonId.split("_", 1)[0];
     return `/lesson_assets/${moduleId}/${lessonId}/videos/${filename}?v=${assetVersion}`;
@@ -14077,6 +14077,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M2_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M2_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M2_L6", "captions.vtt"),
+      };
+    case "M3_L1":
+      return {
+        body: "Use this video to read M3 as an energy ledger before the worked example begins.",
+        caption: "Video explainer: stores, hand-offs, Leak Trail, and energy-ledger balance before the lesson example.",
+        highlights: [
+          "Energy sits in stores and moves by hand-offs",
+          "Useful gain plus Leak Trail must balance the input hand-off",
+          "Name the store story before choosing an equation",
+        ],
+        checkForUnderstanding: "If the input hand-off stays fixed but the useful gain becomes smaller, what must happen elsewhere in the ledger?",
+        video_url: staticVideoAssetUrl("M3_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M3_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M3_L1", "captions.vtt"),
+      };
+    case "M3_L2":
+      return {
+        body: "Use this video to keep mass, height, and World Grip visible together before the worked example starts.",
+        caption: "Video explainer: Height Store, mgh, and factor-by-factor reasoning before the lesson example.",
+        highlights: [
+          "A still object can still hold energy if it is raised",
+          "Height Store depends on mass, gravitational field strength, and height",
+          "Changing one factor at a time makes the store story much clearer",
+        ],
+        checkForUnderstanding: "If height and mass stay the same but World Grip increases, what should happen to the Height Store first?",
+        video_url: staticVideoAssetUrl("M3_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M3_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M3_L2", "captions.vtt"),
+      };
+    case "M3_L3":
+      return {
+        body: "Use this video to lock in the speed-squared effect before the worked example begins.",
+        caption: "Video explainer: Motion Store, speed-squared scaling, and factor-comparison reasoning before the lesson example.",
+        highlights: [
+          "Motion Store depends on both load and speed",
+          "Speed has the stronger effect because it is squared",
+          "Doubling speed quadruples the store when mass stays fixed",
+        ],
+        checkForUnderstanding: "If mass stays fixed and speed doubles, what should you expect first about the Motion Store: double or quadruple?",
+        video_url: staticVideoAssetUrl("M3_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M3_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M3_L3", "captions.vtt"),
+      };
+    case "M3_L4":
+      return {
+        body: "Use this video to read work as an energy hand-off before the worked example starts.",
+        caption: "Video explainer: work done, force-distance transfer, store change, and no-displacement cases before the lesson example.",
+        highlights: [
+          "Work is an energy transfer, not just a statement about effort",
+          "In the simple aligned case, W = Fd",
+          "If the store change is already known, W = change in energy can be the cleaner route",
+        ],
+        checkForUnderstanding: "If a force acts but the object does not move in that simple aligned model, what should happen to the work done?",
+        video_url: staticVideoAssetUrl("M3_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M3_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M3_L4", "captions.vtt"),
+      };
+    case "M3_L5":
+      return {
+        body: "Use this video to keep transfer rate and useful yield separate before the worked example begins.",
+        caption: "Video explainer: power, efficiency, rate-versus-fraction reasoning, and machine comparison before the lesson example.",
+        highlights: [
+          "Power asks how quickly energy moves",
+          "Efficiency asks what fraction of the input becomes useful",
+          "A machine can be powerful but inefficient, or efficient but not especially powerful",
+        ],
+        checkForUnderstanding: "If two machines transfer the same energy but one does it in half the time, what changes first: power, efficiency, or both?",
+        video_url: staticVideoAssetUrl("M3_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M3_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M3_L5", "captions.vtt"),
+      };
+    case "M3_L6":
+      return {
+        body: "Use this video to plan a full energy mission in stages before the final worked example begins.",
+        caption: "Video explainer: multi-stage energy ledgers, useful-output chaining, equation order, and target checks before the lesson example.",
+        highlights: [
+          "Long energy problems are solved as linked stages, not one giant substitution",
+          "Useful output from one stage often becomes the input to the next",
+          "Equation order is part of the reasoning, not an afterthought",
+        ],
+        checkForUnderstanding: "If a final stage target is given together with that stage's efficiency, what planning move is often safest before doing any other calculation?",
+        video_url: staticVideoAssetUrl("M3_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M3_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M3_L6", "captions.vtt"),
       };
     case "F1_L1":
       return {
