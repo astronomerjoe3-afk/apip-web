@@ -4,27 +4,61 @@
       <stop offset="0%" stop-color="#0b1020"/>
       <stop offset="100%" stop-color="#172554"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.16"/>
       <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
     </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 52px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 22px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 19px Arial, Helvetica, sans-serif; }
+      .small { fill: #94a3b8; font: 18px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="270" r="350" fill="url(#glow)"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <text x="640" y="86" class="title" text-anchor="middle">Single Hits Still Build a Wave Pattern</text>
+  <text x="640" y="126" class="subtitle" text-anchor="middle">
+    Quantum objects can land at one point on the screen while the full class of hits follows a diffraction pattern.
+  </text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="100" y="180" width="1080" height="470" rx="34" class="card"/>
+  <rect x="132" y="220" width="1016" height="390" rx="28" class="panel"/>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <text x="180" y="258" class="label">Matter source</text>
+  <text x="536" y="258" class="label">Double slit</text>
+  <text x="942" y="258" class="label">Detection screen</text>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">de Broglie Wavelength and Wave-Particle Duality</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Visualise de broglie wavelength and wave-particle duality inside the Ladder-Gate Packet Model of Quantum Atoms.</text>
+  <circle cx="220" cy="404" r="18" fill="#38bdf8"/>
+  <path d="M 250 404 C 346 344 438 344 522 404 C 438 464 346 464 250 404" fill="none" stroke="#38bdf8" stroke-width="5"/>
+  <rect x="546" y="314" width="26" height="180" rx="10" fill="#94a3b8"/>
+  <rect x="592" y="314" width="26" height="180" rx="10" fill="#94a3b8"/>
+  <line x1="612" y1="306" x2="612" y2="502" stroke="#475569" stroke-width="2"/>
+
+  <rect x="954" y="292" width="18" height="224" rx="8" fill="#e2e8f0"/>
+  <circle cx="904" cy="388" r="7" fill="#c4b5fd"/>
+  <circle cx="920" cy="364" r="7" fill="#c4b5fd"/>
+  <circle cx="934" cy="430" r="7" fill="#c4b5fd"/>
+  <circle cx="944" cy="404" r="7" fill="#c4b5fd"/>
+  <circle cx="982" cy="348" r="7" fill="#f472b6"/>
+  <circle cx="988" cy="390" r="7" fill="#f472b6"/>
+  <circle cx="994" cy="444" r="7" fill="#f472b6"/>
+  <circle cx="1002" cy="316" r="7" fill="#f472b6"/>
+  <circle cx="1018" cy="364" r="7" fill="#f472b6"/>
+  <circle cx="1024" cy="412" r="7" fill="#f472b6"/>
+  <circle cx="1030" cy="454" r="7" fill="#f472b6"/>
+  <circle cx="1042" cy="388" r="7" fill="#c4b5fd"/>
+  <circle cx="1050" cy="340" r="7" fill="#c4b5fd"/>
+
+  <path d="M 634 330 C 756 286 850 316 950 388" fill="none" stroke="#67e8f9" stroke-width="4" stroke-dasharray="10 10"/>
+  <path d="M 634 478 C 756 522 850 492 950 420" fill="none" stroke="#67e8f9" stroke-width="4" stroke-dasharray="10 10"/>
+
+  <text x="640" y="566" class="body" text-anchor="middle">
+    One hit is local, but many hits reveal the wave-guided probability pattern.
+  </text>
 </svg>

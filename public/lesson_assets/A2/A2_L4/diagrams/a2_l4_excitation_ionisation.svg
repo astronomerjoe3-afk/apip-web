@@ -4,27 +4,52 @@
       <stop offset="0%" stop-color="#0b1020"/>
       <stop offset="100%" stop-color="#172554"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.16"/>
       <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
     </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 52px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 22px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 19px Arial, Helvetica, sans-serif; }
+      .small { fill: #94a3b8; font: 18px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="270" r="350" fill="url(#glow)"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <text x="640" y="86" class="title" text-anchor="middle">Excitation Stays Bound, Ionisation Escapes</text>
+  <text x="640" y="126" class="subtitle" text-anchor="middle">
+    Both need energy, but only ionisation removes the electron from the atom completely.
+  </text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="100" y="180" width="1080" height="470" rx="34" class="card"/>
+  <rect x="132" y="220" width="470" height="390" rx="28" class="panel"/>
+  <rect x="678" y="220" width="470" height="390" rx="28" class="panel"/>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <text x="208" y="258" class="label">Excitation</text>
+  <text x="752" y="258" class="label">Ionisation</text>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Excitation and Ionisation</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Visualise excitation and ionisation inside the Ladder-Gate Packet Model of Quantum Atoms.</text>
+  <line x1="278" y1="304" x2="278" y2="530" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+  <line x1="214" y1="512" x2="342" y2="512" stroke="#60a5fa" stroke-width="5" stroke-linecap="round"/>
+  <line x1="214" y1="414" x2="342" y2="414" stroke="#c084fc" stroke-width="5" stroke-linecap="round"/>
+  <line x1="214" y1="316" x2="342" y2="316" stroke="#f59e0b" stroke-width="4" stroke-dasharray="12 10"/>
+  <text x="170" y="322" class="small">still bound</text>
+  <circle cx="278" cy="414" r="13" fill="#f8fafc"/>
+  <line x1="278" y1="490" x2="278" y2="438" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="278,412 263,444 293,444" fill="#22c55e"/>
+  <text x="278" y="560" class="body" text-anchor="middle">electron lands on a higher allowed level</text>
+
+  <line x1="824" y1="304" x2="824" y2="530" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+  <line x1="760" y1="512" x2="888" y2="512" stroke="#60a5fa" stroke-width="5" stroke-linecap="round"/>
+  <line x1="748" y1="316" x2="900" y2="316" stroke="#f59e0b" stroke-width="4" stroke-dasharray="12 10"/>
+  <text x="906" y="322" class="small">escape threshold</text>
+  <circle cx="934" cy="280" r="12" fill="#f8fafc"/>
+  <line x1="824" y1="490" x2="916" y2="304" stroke="#f97316" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="930,278 900,302 926,316" fill="#f97316"/>
+  <text x="834" y="560" class="body" text-anchor="middle">enough energy lifts the electron beyond the bound ladder</text>
 </svg>

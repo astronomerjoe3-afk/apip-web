@@ -4,27 +4,57 @@
       <stop offset="0%" stop-color="#0b1020"/>
       <stop offset="100%" stop-color="#172554"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.16"/>
       <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
     </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 52px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 22px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 17px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="270" r="350" fill="url(#glow)"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <text x="640" y="86" class="title" text-anchor="middle">Three Experiments, One Quantum Habit</text>
+  <text x="640" y="126" class="subtitle" text-anchor="middle">
+    Keep asking what the evidence says about packets, allowed levels, and wave behavior.
+  </text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="100" y="180" width="1080" height="470" rx="34" class="card"/>
+  <rect x="138" y="230" width="290" height="280" rx="24" class="panel"/>
+  <rect x="495" y="230" width="290" height="280" rx="24" class="panel"/>
+  <rect x="852" y="230" width="290" height="280" rx="24" class="panel"/>
+  <rect x="320" y="542" width="640" height="70" rx="24" fill="#1d4ed8" stroke="#60a5fa" stroke-width="2.5"/>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <text x="284" y="268" class="label" text-anchor="middle">Spectra</text>
+  <line x1="228" y1="318" x2="228" y2="382" stroke="#f472b6" stroke-width="8"/>
+  <line x1="284" y1="318" x2="284" y2="382" stroke="#fde047" stroke-width="8"/>
+  <line x1="340" y1="318" x2="340" y2="382" stroke="#38bdf8" stroke-width="8"/>
+  <text x="284" y="430" class="body" text-anchor="middle">discrete lines imply</text>
+  <text x="284" y="454" class="body" text-anchor="middle">discrete atomic gaps</text>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Loop audits track terrace rises and drops through a complex mesh</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Show a source lift, several component drops, node-height labels, and one closed audit path whose total returns to zero.</text>
+  <text x="640" y="268" class="label" text-anchor="middle">Photoelectric</text>
+  <path d="M 548 346 C 584 314 620 378 658 346 C 696 314 728 378 756 346" fill="none" stroke="#a78bfa" stroke-width="7"/>
+  <circle cx="668" cy="410" r="10" fill="#f8fafc"/>
+  <line x1="676" y1="402" x2="724" y2="360" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+  <text x="640" y="430" class="body" text-anchor="middle">one packet must clear</text>
+  <text x="640" y="454" class="body" text-anchor="middle">the threshold cost</text>
+
+  <text x="996" y="268" class="label" text-anchor="middle">Matter waves</text>
+  <path d="M 898 346 C 930 304 962 304 994 346 C 1026 388 1058 388 1090 346" fill="none" stroke="#67e8f9" stroke-width="6"/>
+  <circle cx="1008" cy="364" r="8" fill="#f8fafc"/>
+  <circle cx="1038" cy="392" r="8" fill="#f8fafc"/>
+  <circle cx="1070" cy="378" r="8" fill="#f8fafc"/>
+  <text x="996" y="430" class="body" text-anchor="middle">single hits still trace</text>
+  <text x="996" y="454" class="body" text-anchor="middle">a wave-guided pattern</text>
+
+  <text x="640" y="586" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">
+    Shared habit: read the experiment, then infer the quantum rule.
+  </text>
 </svg>
