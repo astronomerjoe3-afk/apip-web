@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="440" y="170" fill="#991b1b" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Decay Equations and Activity</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="198" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Nuclear equations</tspan><tspan x="198" dy="23">must balance</tspan><tspan x="198" dy="23">nucleon and proton</tspan><tspan x="198" dy="23">number.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="406" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Activity is the</tspan><tspan x="406" dy="23">decay rate,</tspan><tspan x="406" dy="23">measured in</tspan><tspan x="406" dy="23">becquerels.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="614" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Decay process and</tspan><tspan x="614" dy="23">decay rate are</tspan><tspan x="614" dy="23">linked but</tspan><tspan x="614" dy="23">different ideas.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#dc2626" stroke-width="2"/><text x="136" y="450" fill="#991b1b" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Balance the equation before you talk about activity. One</tspan><tspan x="136" dy="31">tells you what changes, the other tells you how quickly.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="156" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Nuclear equations must balance</tspan><tspan x="890" dy="29">nucleon and proton number.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="280" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Activity is the decay rate,</tspan><tspan x="890" dy="29">measured in becquerels.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="404" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Decay process and decay rate are</tspan><tspan x="890" dy="29">linked but different ideas.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
-  <text x="890" y="534" fill="#991b1b" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Decay equations show what changes in the nucleus, while activity</tspan><tspan x="890" dy="31">measures how fast those decays are happening.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#fff7ed" stroke="#ea580c" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#c2410c" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Decay Equations Balance Nucleons While Activity Tracks Rate
+  </text>
+  <text x="700" y="140" fill="#9a3412" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    The equation tells you what changes in the nuclide. Activity tells you how many decays happen each second.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#fdba74" stroke-width="3"/>
+  <rect x="126" y="226" width="596" height="486" rx="30" fill="#fff7ed" stroke="#fed7aa" stroke-width="2.5"/>
+  <rect x="754" y="226" width="520" height="486" rx="30" fill="#fff7ed" stroke="#fed7aa" stroke-width="2.5"/>
+
+  <text x="424" y="268" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Equation balance
+  </text>
+  <text x="1014" y="268" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Activity curve
+  </text>
+
+  <rect x="176" y="324" width="500" height="120" rx="24" fill="#ffffff" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="426" y="378" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    226 Ra -> 222 Rn + 4 He
+  </text>
+  <text x="426" y="414" fill="#9a3412" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    alpha decay keeps nucleon number and proton number balanced
+  </text>
+
+  <rect x="176" y="484" width="500" height="120" rx="24" fill="#ffffff" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="426" y="538" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    14 C -> 14 N + beta- + antinu
+  </text>
+  <text x="426" y="574" fill="#9a3412" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    beta decay changes proton count but keeps total nucleon count the same
+  </text>
+
+  <line x1="814" y1="618" x2="1186" y2="618" stroke="#7c2d12" stroke-width="4"/>
+  <line x1="814" y1="346" x2="814" y2="618" stroke="#7c2d12" stroke-width="4"/>
+  <text x="1200" y="626" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">time</text>
+  <text x="800" y="360" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="end">activity</text>
+  <path d="M834 392 C914 416, 994 492, 1160 588" fill="none" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <line x1="934" y1="346" x2="934" y2="618" stroke="#fed7aa" stroke-width="3" stroke-dasharray="8 10"/>
+  <line x1="1048" y1="346" x2="1048" y2="618" stroke="#fed7aa" stroke-width="3" stroke-dasharray="8 10"/>
+  <text x="982" y="420" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    becquerel = decays per second
+  </text>
+  <text x="1010" y="652" fill="#7c2d12" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    what changes and how fast are linked, but not the same idea
+  </text>
 </svg>

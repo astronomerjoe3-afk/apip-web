@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="440" y="170" fill="#991b1b" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Binding Energy and Mass Defect</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="198" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Binding energy is</tspan><tspan x="198" dy="23">the energy needed</tspan><tspan x="198" dy="23">to separate the</tspan><tspan x="198" dy="23">nucleus</tspan><tspan x="198" dy="23">completely.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="406" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Mass defect is the</tspan><tspan x="406" dy="23">missing mass</tspan><tspan x="406" dy="23">compared with free</tspan><tspan x="406" dy="23">nucleons.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="614" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">ΔE = Δmc²</tspan><tspan x="614" dy="23">links missing mass</tspan><tspan x="614" dy="23">to released</tspan><tspan x="614" dy="23">binding energy.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#dc2626" stroke-width="2"/><text x="136" y="450" fill="#991b1b" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Start from the separated nucleons. That makes the meaning</tspan><tspan x="136" dy="31">of missing mass much easier to trust.</tspan></text>
-  <rect x="860" y="128" width="470" height="132" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="158" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="190" fill="#334155" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Binding energy is the energy</tspan><tspan x="890" dy="28">needed to separate the nucleus</tspan><tspan x="890" dy="28">completely.</tspan></text><rect x="860" y="280" width="470" height="112" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="310" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="342" fill="#334155" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Mass defect is the missing mass</tspan><tspan x="890" dy="28">compared with free nucleons.</tspan></text><rect x="860" y="412" width="470" height="126" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="442" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="474" fill="#334155" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">ΔE = Δmc² links missing mass</tspan><tspan x="890" dy="28">difference to released energy.</tspan></text>
-  <rect x="860" y="558" width="470" height="144" rx="28" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
-  <text x="890" y="592" fill="#991b1b" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="628" fill="#334155" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Binding energy and mass defect are two</tspan><tspan x="890" dy="28">views of the same nuclear credit:</tspan><tspan x="890" dy="28">tighter binding means lower mass and</tspan><tspan x="890" dy="28">more released energy.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#f5f3ff" stroke="#7c3aed" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#5b21b6" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Mass Defect Is the Energy Credit of Binding
+  </text>
+  <text x="700" y="140" fill="#6d28d9" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Free nucleons have more total mass than the bound nucleus. That missing mass is the binding energy credit through E = mc^2.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#a78bfa" stroke-width="3"/>
+  <rect x="126" y="226" width="592" height="486" rx="30" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2.5"/>
+  <rect x="750" y="226" width="524" height="486" rx="30" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2.5"/>
+
+  <text x="422" y="268" fill="#5b21b6" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Free nucleons
+  </text>
+  <text x="1012" y="268" fill="#5b21b6" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Bound nucleus and energy
+  </text>
+
+  <circle cx="248" cy="414" r="28" fill="#ef4444"/>
+  <circle cx="334" cy="414" r="28" fill="#ef4444"/>
+  <circle cx="420" cy="414" r="28" fill="#ef4444"/>
+  <circle cx="291" cy="502" r="28" fill="#3b82f6"/>
+  <circle cx="377" cy="502" r="28" fill="#3b82f6"/>
+  <text x="356" y="596" fill="#6d28d9" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    total free-particle mass is larger
+  </text>
+  <text x="356" y="628" fill="#6d28d9" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    separating everything needs energy input
+  </text>
+
+  <circle cx="958" cy="454" r="112" fill="#ddd6fe" stroke="#7c3aed" stroke-width="6"/>
+  <circle cx="920" cy="426" r="22" fill="#ef4444"/>
+  <circle cx="1000" cy="432" r="22" fill="#ef4444"/>
+  <circle cx="952" cy="498" r="22" fill="#ef4444"/>
+  <circle cx="906" cy="488" r="22" fill="#3b82f6"/>
+  <circle cx="1008" cy="496" r="22" fill="#3b82f6"/>
+  <text x="958" y="626" fill="#5b21b6" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    bound nucleus has lower total mass
+  </text>
+  <path d="M1090 454 C1148 454, 1186 412, 1204 358" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="1204,358 1176,374 1208,390" fill="#f97316"/>
+  <text x="1126" y="342" fill="#c2410c" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">mass defect -> energy</text>
+  <text x="1058" y="390" fill="#c2410c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">delta E = delta m c^2</text>
 </svg>

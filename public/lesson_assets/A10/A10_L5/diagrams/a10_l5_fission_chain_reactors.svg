@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="440" y="170" fill="#991b1b" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Fission, Chain Reactions, and</tspan><tspan x="440" dy="34">Thermal Reactors</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="198" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Fission splits a</tspan><tspan x="198" dy="23">heavy nucleus into</tspan><tspan x="198" dy="23">lighter products</tspan><tspan x="198" dy="23">and released</tspan><tspan x="198" dy="23">energy.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="406" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Released neutrons</tspan><tspan x="406" dy="23">can trigger</tspan><tspan x="406" dy="23">further fission</tspan><tspan x="406" dy="23">events.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="614" y="284" fill="#991b1b" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">A thermal reactor</tspan><tspan x="614" dy="23">needs moderation</tspan><tspan x="614" dy="23">and control to</tspan><tspan x="614" dy="23">keep the chain</tspan><tspan x="614" dy="23">reaction steady.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#dc2626" stroke-width="2"/><text x="136" y="450" fill="#991b1b" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Watch one generation of neutrons before you talk about the</tspan><tspan x="136" dy="31">whole reactor. Chain behaviour begins there.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="156" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Fission splits a heavy nucleus</tspan><tspan x="890" dy="29">into lighter products and</tspan><tspan x="890" dy="29">released energy.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="280" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Released neutrons can trigger</tspan><tspan x="890" dy="29">further fission events.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#dc2626" stroke-width="2"/><text x="890" y="404" fill="#991b1b" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">A thermal reactor needs</tspan><tspan x="890" dy="29">moderation and control to keep</tspan><tspan x="890" dy="29">the chain reaction steady.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
-  <text x="890" y="534" fill="#991b1b" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Fission power depends on a controlled neutron chain, so reactor</tspan><tspan x="890" dy="31">design is about both energy release and stability.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#fff7ed" stroke="#ea580c" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#c2410c" font-size="40" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    One Fission Event Can Start a Chain, So Control Matters
+  </text>
+  <text x="700" y="136" fill="#9a3412" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    <tspan x="700" dy="0">A heavy nucleus splits, releases energy and neutrons, and those neutrons can trigger</tspan>
+    <tspan x="700" dy="24">more events unless the reactor design controls them.</tspan>
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#fdba74" stroke-width="3"/>
+  <rect x="126" y="226" width="1232" height="486" rx="30" fill="#fff7ed" stroke="#fed7aa" stroke-width="2.5"/>
+
+  <circle cx="282" cy="468" r="64" fill="#c2410c"/>
+  <text x="282" y="478" fill="#ffffff" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">U-235</text>
+  <circle cx="172" cy="468" r="16" fill="#2563eb"/>
+  <line x1="188" y1="468" x2="218" y2="468" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="218,468 190,452 190,484" fill="#2563eb"/>
+  <text x="176" y="430" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">neutron in</text>
+
+  <path d="M346 468 C400 430, 454 430, 510 468" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="510,468 482,452 482,484" fill="#f97316"/>
+  <text x="434" y="416" fill="#c2410c" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">fission splits the nucleus</text>
+
+  <circle cx="622" cy="418" r="42" fill="#fb7185"/>
+  <circle cx="704" cy="520" r="38" fill="#f59e0b"/>
+  <text x="622" y="426" fill="#ffffff" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">product</text>
+  <text x="704" y="528" fill="#ffffff" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">product</text>
+
+  <circle cx="626" cy="340" r="14" fill="#2563eb"/>
+  <line x1="626" y1="354" x2="626" y2="388" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="748" cy="428" r="14" fill="#2563eb"/>
+  <line x1="734" y1="428" x2="714" y2="428" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="782" cy="566" r="14" fill="#2563eb"/>
+  <line x1="770" y1="554" x2="744" y2="528" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+  <text x="742" y="304" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">released neutrons</text>
+
+  <circle cx="944" cy="392" r="52" fill="#c2410c"/>
+  <text x="944" y="402" fill="#ffffff" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">next fuel</text>
+  <circle cx="1096" cy="392" r="20" fill="#166534"/>
+  <rect x="1066" y="470" width="58" height="156" rx="16" fill="#334155"/>
+  <text x="1095" y="654" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">control rod</text>
+  <rect x="900" y="470" width="58" height="156" rx="16" fill="#94a3b8"/>
+  <text x="928" y="654" fill="#475569" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">moderator</text>
+  <text x="1022" y="286" fill="#9a3412" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="1022" dy="0">reactor design must keep</tspan>
+    <tspan x="1022" dy="24">the chain steady</tspan>
+  </text>
 </svg>
