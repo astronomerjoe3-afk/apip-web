@@ -5,9 +5,9 @@
     <tspan x="72" dy="0">Lock Mode and Slide Mode both stay</tspan>
     <tspan x="72" dy="38">close-packed</tspan>
   </text>
-  <text x="72" y="170" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+  <text x="72" y="160" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">
     <tspan x="72" dy="0">Solids keep fixed positions.</tspan>
-    <tspan x="72" dy="28">Liquids keep closeness but let neighbors swap.</tspan>
+    <tspan x="72" dy="24">Liquids keep closeness but let neighbors swap.</tspan>
   </text>
 
   <rect x="76" y="192" width="452" height="392" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>

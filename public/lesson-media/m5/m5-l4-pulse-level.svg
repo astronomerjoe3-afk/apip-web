@@ -5,9 +5,9 @@
     <tspan x="72" dy="0">Same Pulse Level,</tspan>
     <tspan x="72" dy="38">different whole-system totals</tspan>
   </text>
-  <text x="72" y="170" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+  <text x="72" y="160" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">
     <tspan x="72" dy="0">Temperature tracks the average jiggle.</tspan>
-    <tspan x="72" dy="28">It does not automatically tell you the total energy in the plaza.</tspan>
+    <tspan x="72" dy="24">It does not automatically tell you the total energy in the plaza.</tspan>
   </text>
 
   <rect x="84" y="196" width="440" height="402" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
