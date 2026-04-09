@@ -14582,6 +14582,90 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("M7_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M7_L6", "captions.vtt"),
       };
+    case "M8_L1":
+      return {
+        body: "Use this video to lock mirror angles to the Guide Line and place the ghost image correctly before the worked example begins.",
+        caption: "Video explainer: mirror reflection, Guide Line geometry, surface-angle conversion, and plane-mirror image position before the lesson example.",
+        highlights: [
+          "Mirror angles are measured from the Guide Line or normal",
+          "Surface angles must be converted before using the equal-angle rule",
+          "A plane-mirror image is virtual and sits the same distance behind the mirror",
+        ],
+        checkForUnderstanding: "If an incoming light route is given as an angle to the mirror surface, what should you fix first before applying the reflection rule?",
+        video_url: staticVideoAssetUrl("M8_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M8_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M8_L1", "captions.vtt"),
+      };
+    case "M8_L2":
+      return {
+        body: "Use this video to connect refraction with speed change, bend direction, and lens-surface bending before the worked example starts.",
+        caption: "Video explainer: light-speed change, toward-or-away bending, and two-surface lens reasoning before the lesson example.",
+        highlights: [
+          "Refraction is caused by a speed change at a boundary",
+          "Toward the Guide Line means slower medium and away means faster medium",
+          "A lens bends at entry and exit surfaces rather than because the middle pulls rays",
+        ],
+        checkForUnderstanding: "If light crosses into a slower optical zone, which way should the route bend first relative to the Guide Line?",
+        video_url: staticVideoAssetUrl("M8_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M8_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M8_L2", "captions.vtt"),
+      };
+    case "M8_L3":
+      return {
+        body: "Use this video to build converging-lens image formation from selected routes, focus rules, and real-image logic before the worked example begins.",
+        caption: "Video explainer: converging-lens route selection, focus markers, real-image formation, and object-position cases before the lesson example.",
+        highlights: [
+          "A parallel route through a converging lens goes through the far focus",
+          "A center route is treated as undeviated in the thin-lens model",
+          "A real image is a true meeting point that actual routes can reach",
+        ],
+        checkForUnderstanding: "When a converging lens forms a real image, what has to be true about the actual refracted routes on the far side of the lens?",
+        video_url: staticVideoAssetUrl("M8_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M8_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M8_L3", "captions.vtt"),
+      };
+    case "M8_L4":
+      return {
+        body: "Use this video to keep real spread routes and dashed backward extensions separate before the diverging-lens worked example starts.",
+        caption: "Video explainer: diverging-lens route rules, near-focus extensions, virtual-image logic, and common diagram traps before the lesson example.",
+        highlights: [
+          "A parallel route through a diverging lens appears to come from the near focus",
+          "The usual diverging-lens image is virtual, upright, and smaller",
+          "Backward extensions locate the image without being real light paths",
+        ],
+        checkForUnderstanding: "If no actual refracted routes meet after a diverging lens, what kind of meeting point are you looking for instead?",
+        video_url: staticVideoAssetUrl("M8_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M8_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M8_L4", "captions.vtt"),
+      };
+    case "M8_L5":
+      return {
+        body: "Use this video to connect critical angle, escape-limit reasoning, and total internal reflection before the worked example begins.",
+        caption: "Video explainer: critical-angle geometry, denser-to-rarer direction, total internal reflection, and optical-fiber logic before the lesson example.",
+        highlights: [
+          "The critical angle is the last possible escape angle",
+          "Total internal reflection needs both the correct medium direction and an angle above the limit",
+          "Optical fibers work by repeated internal reflection",
+        ],
+        checkForUnderstanding: "What two conditions must be true before you can claim total internal reflection instead of ordinary refraction?",
+        video_url: staticVideoAssetUrl("M8_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M8_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M8_L5", "captions.vtt"),
+      };
+    case "M8_L6":
+      return {
+        body: "Use this video to read ray diagrams by line role before the mixed optics worked example begins.",
+        caption: "Video explainer: selected routes, Guide Lines, dashed extensions, and real-versus-virtual image reading before the lesson example.",
+        highlights: [
+          "A few selected routes can stand in for the full ray bundle",
+          "Guide Lines are references, not beams",
+          "True meeting points come from actual crossings while ghost meeting points come from extensions",
+        ],
+        checkForUnderstanding: "When you look at a ray diagram, what should you identify before naming the image: where every line is, or what each line is doing?",
+        video_url: staticVideoAssetUrl("M8_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M8_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M8_L6", "captions.vtt"),
+      };
     default:
       return null;
   }
