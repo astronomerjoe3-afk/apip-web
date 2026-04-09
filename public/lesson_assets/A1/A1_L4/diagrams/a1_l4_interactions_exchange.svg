@@ -1,30 +1,132 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0b1020"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1326"/>
       <stop offset="100%" stop-color="#172554"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111c38"/>
+    </linearGradient>
+    <linearGradient id="strong-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="weak-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="footer" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow-left" cx="35%" cy="40%" r="34%">
+      <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="glow-right" cx="70%" cy="44%" r="34%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5eead4"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7dd3fc"/>
+    </marker>
+    <style>
+      .title { font: 700 42px Arial, sans-serif; fill: #f8fafc; }
+      .subtitle { font: 20px Arial, sans-serif; fill: #cbd5e1; }
+      .panelTitle { font: 700 30px Arial, sans-serif; fill: #f8fafc; }
+      .body { font: 20px Arial, sans-serif; fill: #dbeafe; }
+      .small { font: 18px Arial, sans-serif; fill: #cbd5e1; }
+      .chip { font: 700 16px Arial, sans-serif; fill: #f8fafc; letter-spacing: 1px; }
+      .nodeLabel { font: 700 22px Arial, sans-serif; fill: #0f172a; }
+      .nodeSub { font: 18px Arial, sans-serif; fill: #0f172a; }
+      .token { font: 700 20px Arial, sans-serif; fill: #f8fafc; }
+      .footer { font: 700 20px Arial, sans-serif; fill: #f8fafc; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="360" cy="345" r="250" fill="url(#glow-left)"/>
+  <circle cx="940" cy="340" r="250" fill="url(#glow-right)"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <text x="80" y="76" class="title">Interactions and Exchange Particles</text>
+  <text x="80" y="112" class="subtitle">
+    <tspan x="80" dy="0">Read the interaction from what the messenger does: strong interaction binds matter together,</tspan>
+    <tspan x="80" dy="26">while weak interaction allows one particle story to change into another.</tspan>
+  </text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="452" y="138" width="376" height="54" rx="24" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="640" y="171" text-anchor="middle" class="chip">EXCHANGE PARTICLE = THE INTERACTION MESSENGER</text>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <rect x="72" y="220" width="540" height="390" rx="30" fill="url(#panel)" stroke="#334155" stroke-width="3"/>
+  <rect x="668" y="220" width="540" height="390" rx="30" fill="url(#panel)" stroke="#334155" stroke-width="3"/>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Interactions and Exchange Particles</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Visualise interactions and exchange particles inside the Particle-Port Exchange Model.</text>
+  <rect x="102" y="246" width="178" height="34" rx="17" fill="url(#strong-band)"/>
+  <text x="191" y="268" text-anchor="middle" class="chip">BINDING STORY</text>
+  <text x="102" y="320" class="panelTitle">Strong interaction</text>
+  <text x="102" y="355" class="body">
+    <tspan x="102" dy="0">The exchange messenger keeps quarks</tspan>
+    <tspan x="102" dy="24">or nucleons tied together.</tspan>
+  </text>
+
+  <circle cx="196" cy="475" r="58" fill="#fde68a" stroke="#facc15" stroke-width="4"/>
+  <text x="196" y="468" text-anchor="middle" class="nodeLabel">matter</text>
+  <text x="196" y="492" text-anchor="middle" class="nodeSub">bundle A</text>
+
+  <circle cx="488" cy="475" r="58" fill="#bfdbfe" stroke="#60a5fa" stroke-width="4"/>
+  <text x="488" y="468" text-anchor="middle" class="nodeLabel">matter</text>
+  <text x="488" y="492" text-anchor="middle" class="nodeSub">bundle B</text>
+
+  <rect x="275" y="435" width="136" height="80" rx="24" fill="#0f766e" stroke="#5eead4" stroke-width="3"/>
+  <text x="343" y="466" text-anchor="middle" class="token">gluon</text>
+  <text x="343" y="492" text-anchor="middle" class="token">exchange</text>
+
+  <line x1="254" y1="475" x2="275" y2="475" stroke="#5eead4" stroke-width="6" marker-end="url(#arrow-teal)"/>
+  <line x1="411" y1="475" x2="430" y2="475" stroke="#5eead4" stroke-width="6" marker-end="url(#arrow-teal)"/>
+  <line x1="432" y1="493" x2="411" y2="493" stroke="#5eead4" stroke-width="6" marker-end="url(#arrow-teal)"/>
+  <line x1="273" y1="493" x2="254" y2="493" stroke="#5eead4" stroke-width="6" marker-end="url(#arrow-teal)"/>
+
+  <text x="102" y="563" class="small">Messenger clue: gluons carry the strong interaction.</text>
+  <text x="102" y="592" class="small">Event clue: the story is about holding matter together, not changing the particle family.</text>
+
+  <rect x="698" y="246" width="176" height="34" rx="17" fill="url(#weak-band)"/>
+  <text x="786" y="268" text-anchor="middle" class="chip">CHANGE STORY</text>
+  <text x="698" y="320" class="panelTitle">Weak interaction</text>
+  <text x="698" y="355" class="body">
+    <tspan x="698" dy="0">The exchange messenger allows one</tspan>
+    <tspan x="698" dy="24">particle description to change.</tspan>
+  </text>
+
+  <rect x="726" y="425" width="120" height="92" rx="24" fill="#bfdbfe" stroke="#60a5fa" stroke-width="4"/>
+  <text x="786" y="466" text-anchor="middle" class="nodeLabel">n</text>
+  <text x="786" y="494" text-anchor="middle" class="nodeSub">start</text>
+
+  <rect x="889" y="430" width="110" height="82" rx="22" fill="#1d4ed8" stroke="#7dd3fc" stroke-width="4"/>
+  <text x="944" y="463" text-anchor="middle" class="token">W boson</text>
+  <text x="944" y="488" text-anchor="middle" class="token">token</text>
+
+  <line x1="848" y1="471" x2="889" y2="471" stroke="#7dd3fc" stroke-width="6" marker-end="url(#arrow-blue)"/>
+
+  <circle cx="1056" cy="390" r="42" fill="#fde68a" stroke="#facc15" stroke-width="4"/>
+  <text x="1056" y="397" text-anchor="middle" class="nodeLabel">p</text>
+
+  <circle cx="1140" cy="472" r="42" fill="#f9a8d4" stroke="#ec4899" stroke-width="4"/>
+  <text x="1140" y="479" text-anchor="middle" class="nodeLabel">e-</text>
+
+  <circle cx="1056" cy="554" r="42" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="4"/>
+  <text x="1056" y="548" text-anchor="middle" class="nodeLabel">anti</text>
+  <text x="1056" y="570" text-anchor="middle" class="nodeSub">nu</text>
+
+  <line x1="999" y1="460" x2="1018" y2="412" stroke="#7dd3fc" stroke-width="6" marker-end="url(#arrow-blue)"/>
+  <line x1="999" y1="471" x2="1090" y2="472" stroke="#7dd3fc" stroke-width="6" marker-end="url(#arrow-blue)"/>
+  <line x1="999" y1="482" x2="1018" y2="532" stroke="#7dd3fc" stroke-width="6" marker-end="url(#arrow-blue)"/>
+
+  <text x="698" y="563" class="small">Messenger clue: W bosons are tied to weak, particle-changing events.</text>
+  <text x="698" y="592" class="small">Event clue: a neutron can change into a proton plus an electron and an anti-neutrino.</text>
+
+  <rect x="80" y="642" width="1120" height="48" rx="20" fill="url(#footer)"/>
+  <text x="640" y="672" text-anchor="middle" class="footer">Ask the event question first: if it binds matter, think strong; if it changes the particle story, think weak.</text>
 </svg>

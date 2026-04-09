@@ -1,30 +1,111 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0b1020"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1326"/>
       <stop offset="100%" stop-color="#172554"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111c38"/>
+    </linearGradient>
+    <linearGradient id="pass-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <linearGradient id="fail-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a3412"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <linearGradient id="footer" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 42px Arial, sans-serif; fill: #f8fafc; }
+      .subtitle { font: 20px Arial, sans-serif; fill: #cbd5e1; }
+      .panelTitle { font: 700 30px Arial, sans-serif; fill: #f8fafc; }
+      .body { font: 20px Arial, sans-serif; fill: #dbeafe; }
+      .small { font: 18px Arial, sans-serif; fill: #cbd5e1; }
+      .chip { font: 700 16px Arial, sans-serif; fill: #f8fafc; letter-spacing: 1px; }
+      .event { font: 700 24px Arial, sans-serif; fill: #f8fafc; }
+      .ledgerHead { font: 700 18px Arial, sans-serif; fill: #f8fafc; }
+      .ledgerCell { font: 700 22px Arial, sans-serif; fill: #0f172a; }
+      .ledgerBody { font: 18px Arial, sans-serif; fill: #0f172a; }
+      .footer { font: 700 20px Arial, sans-serif; fill: #f8fafc; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <text x="80" y="76" class="title">Conservation Rules</text>
+  <text x="80" y="112" class="subtitle">
+    <tspan x="80" dy="0">Before and after a particle event, the charge, baryon number, and lepton number ledgers</tspan>
+    <tspan x="80" dy="26">must all balance. One good total is never enough.</tspan>
+  </text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="72" y="190" width="540" height="442" rx="30" fill="url(#panel)" stroke="#334155" stroke-width="3"/>
+  <rect x="668" y="190" width="540" height="442" rx="30" fill="url(#panel)" stroke="#334155" stroke-width="3"/>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <rect x="102" y="216" width="168" height="34" rx="17" fill="url(#pass-band)"/>
+  <text x="186" y="238" text-anchor="middle" class="chip">ALLOWED EVENT</text>
+  <text x="102" y="294" class="panelTitle">Ledger closes</text>
+  <text x="102" y="330" class="body">
+    <tspan x="102" dy="0">Example: neutron beta decay</tspan>
+  </text>
+  <text x="102" y="378" class="event">n  -&gt;  p  +  e-  +  anti-nu</text>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Conservation Rules</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Visualise conservation rules inside the Particle-Port Exchange Model.</text>
+  <rect x="102" y="415" width="480" height="54" rx="16" fill="#1e293b"/>
+  <rect x="102" y="483" width="480" height="54" rx="16" fill="#1e293b"/>
+  <rect x="102" y="551" width="480" height="54" rx="16" fill="#1e293b"/>
+
+  <rect x="102" y="415" width="160" height="54" rx="16" fill="#86efac"/>
+  <rect x="102" y="483" width="160" height="54" rx="16" fill="#86efac"/>
+  <rect x="102" y="551" width="160" height="54" rx="16" fill="#86efac"/>
+
+  <text x="182" y="448" text-anchor="middle" class="ledgerCell">charge</text>
+  <text x="182" y="516" text-anchor="middle" class="ledgerCell">baryon #</text>
+  <text x="182" y="584" text-anchor="middle" class="ledgerCell">lepton #</text>
+
+  <text x="292" y="449" class="ledgerHead">0 -&gt; 0</text>
+  <text x="292" y="517" class="ledgerHead">1 -&gt; 1</text>
+  <text x="292" y="585" class="ledgerHead">0 -&gt; 0</text>
+
+  <text x="392" y="449" class="small">balanced</text>
+  <text x="392" y="517" class="small">balanced</text>
+  <text x="392" y="585" class="small">balanced</text>
+
+  <text x="102" y="645" class="small">Reason: every bookkeeping rule survives the event, so the reaction is allowed.</text>
+
+  <rect x="698" y="216" width="170" height="34" rx="17" fill="url(#fail-band)"/>
+  <text x="783" y="238" text-anchor="middle" class="chip">REJECT EVENT</text>
+  <text x="698" y="294" class="panelTitle">Ledger breaks</text>
+  <text x="698" y="330" class="body">
+    <tspan x="698" dy="0">Looks close, but one rule fails</tspan>
+  </text>
+  <text x="698" y="378" class="event">n  -&gt;  p  +  e-</text>
+
+  <rect x="698" y="415" width="480" height="54" rx="16" fill="#1e293b"/>
+  <rect x="698" y="483" width="480" height="54" rx="16" fill="#1e293b"/>
+  <rect x="698" y="551" width="480" height="54" rx="16" fill="#1e293b"/>
+
+  <rect x="698" y="415" width="160" height="54" rx="16" fill="#86efac"/>
+  <rect x="698" y="483" width="160" height="54" rx="16" fill="#86efac"/>
+  <rect x="698" y="551" width="160" height="54" rx="16" fill="#fdba74"/>
+
+  <text x="778" y="448" text-anchor="middle" class="ledgerCell">charge</text>
+  <text x="778" y="516" text-anchor="middle" class="ledgerCell">baryon #</text>
+  <text x="778" y="584" text-anchor="middle" class="ledgerCell">lepton #</text>
+
+  <text x="888" y="449" class="ledgerHead">0 -&gt; 0</text>
+  <text x="888" y="517" class="ledgerHead">1 -&gt; 1</text>
+  <text x="888" y="585" class="ledgerHead">0 -&gt; 1</text>
+
+  <text x="998" y="449" class="small">balanced</text>
+  <text x="998" y="517" class="small">balanced</text>
+  <text x="998" y="585" class="small">fails</text>
+
+  <text x="698" y="645" class="small">Reason: removing the anti-neutrino leaves the lepton ledger unbalanced, so the event is rejected.</text>
+
+  <rect x="80" y="658" width="1120" height="42" rx="18" fill="url(#footer)"/>
+  <text x="640" y="685" text-anchor="middle" class="footer">A particle event is only allowed when charge, baryon number, and lepton number all agree before and after.</text>
 </svg>
