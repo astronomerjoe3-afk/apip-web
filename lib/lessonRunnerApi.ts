@@ -14462,6 +14462,90 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("F5_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("F5_L6", "captions.vtt"),
       };
+    case "M7_L1":
+      return {
+        body: "Use this video to separate the travel of a wave from the local motion of the medium before the worked example begins.",
+        caption: "Video explainer: traveling disturbance, local oscillation, wavefront speed, and medium motion before the lesson example.",
+        highlights: [
+          "The pattern travels across the medium",
+          "Each point in the medium only oscillates locally",
+          "Wave speed belongs to front travel, not one particle crossing the whole space",
+        ],
+        checkForUnderstanding: "If a wave crosses a rope from left to right, what actually moves across the rope: the rope material itself, or the disturbance pattern?",
+        video_url: staticVideoAssetUrl("M7_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M7_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M7_L1", "captions.vtt"),
+      };
+    case "M7_L2":
+      return {
+        body: "Use this video to classify waves by comparing local motion with propagation direction before the worked example starts.",
+        caption: "Video explainer: transverse versus longitudinal reasoning, directional comparison, and common classification traps before the lesson example.",
+        highlights: [
+          "Transverse means local motion is perpendicular to travel",
+          "Longitudinal means local motion is parallel to travel",
+          "Wave type comes from comparison, not from page orientation alone",
+        ],
+        checkForUnderstanding: "If the wave moves to the right while the particles move up and down, which wave type should you name first and why?",
+        video_url: staticVideoAssetUrl("M7_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M7_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M7_L2", "captions.vtt"),
+      };
+    case "M7_L3":
+      return {
+        body: "Use this video to build the wave equation from launch rate and front spacing before you begin the worked example.",
+        caption: "Video explainer: frequency, wavelength, wave speed, same-speed different-pair reasoning, and unit discipline before the lesson example.",
+        highlights: [
+          "Frequency is how many fronts are launched each second",
+          "Wavelength is the spacing between matching fronts",
+          "Wave speed follows v = f x lambda and the units must stay consistent",
+        ],
+        checkForUnderstanding: "If one wave has frequency 4 hertz and wavelength 3 metres, what should you calculate first before comparing it with another wave?",
+        video_url: staticVideoAssetUrl("M7_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M7_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M7_L3", "captions.vtt"),
+      };
+    case "M7_L4":
+      return {
+        body: "Use this video to lock reflection angles to the normal before you move into the worked example.",
+        caption: "Video explainer: boundary bounce, equal-angle reflection, normal-line measurement, and head-on reflection before the lesson example.",
+        highlights: [
+          "Reflection is a boundary bounce",
+          "Incident angle equals reflected angle",
+          "Both angles must be measured from the normal",
+        ],
+        checkForUnderstanding: "When a wave meets a flat wall, which line should you measure the angle from before you decide whether the reflection rule is satisfied?",
+        video_url: staticVideoAssetUrl("M7_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M7_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M7_L4", "captions.vtt"),
+      };
+    case "M7_L5":
+      return {
+        body: "Use this video to connect turning at a boundary with speed change, fixed frequency, and changing wavelength before the worked example begins.",
+        caption: "Video explainer: refraction, slower and faster media, source-fixed frequency, wavelength change, and bend direction before the lesson example.",
+        highlights: [
+          "Refraction is turning caused by a speed change in a new medium",
+          "The source keeps the frequency fixed across the boundary",
+          "Speed and wavelength change together, so the front bends toward or away from the normal",
+        ],
+        checkForUnderstanding: "If a wave enters a slower medium and the source frequency stays the same, which quantity must shorten before you explain the bend?",
+        video_url: staticVideoAssetUrl("M7_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M7_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M7_L5", "captions.vtt"),
+      };
+    case "M7_L6":
+      return {
+        body: "Use this video to judge diffraction from the size comparison between gap and wavelength before the worked example starts.",
+        caption: "Video explainer: spreading at openings, comparable-size reasoning, edge cases, and all-wave diffraction before the lesson example.",
+        highlights: [
+          "Diffraction is wave spreading around gaps and edges",
+          "Spreading is strongest when the opening size is comparable to the wavelength",
+          "Diffraction is a general wave behavior, not a sound-only idea",
+        ],
+        checkForUnderstanding: "If two waves meet the same gap, which one should spread more strongly first: the one with the longer wavelength or the one with the much shorter wavelength?",
+        video_url: staticVideoAssetUrl("M7_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M7_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M7_L6", "captions.vtt"),
+      };
     default:
       return null;
   }
