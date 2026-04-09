@@ -26,9 +26,9 @@
   <text x="842" y="276" font-family="Arial" font-size="20" fill="#334155">perpendicular to current</text>
   <text x="842" y="308" font-family="Arial" font-size="20" fill="#334155">and perpendicular to field</text>
 
-  <rect x="886" y="360" width="250" height="120" rx="22" fill="#ffffff" stroke="#d8b4fe" stroke-width="3"/>
-  <text x="908" y="398" font-family="Arial" font-size="20" font-weight="700" fill="#7c3aed">Reverse current</text>
-  <text x="908" y="430" font-family="Arial" font-size="18" fill="#475569">force reverses</text>
-  <text x="908" y="462" font-family="Arial" font-size="18" fill="#475569">Reverse field</text>
-  <text x="1010" y="462" font-family="Arial" font-size="18" fill="#475569">force reverses</text>
+  <rect x="872" y="346" width="268" height="148" rx="22" fill="#ffffff" stroke="#d8b4fe" stroke-width="3"/>
+  <text x="896" y="386" font-family="Arial" font-size="20" font-weight="700" fill="#7c3aed">Reverse current</text>
+  <text x="896" y="414" font-family="Arial" font-size="18" fill="#475569">and the force reverses.</text>
+  <text x="896" y="450" font-family="Arial" font-size="20" font-weight="700" fill="#7c3aed">Reverse field</text>
+  <text x="896" y="478" font-family="Arial" font-size="18" fill="#475569">and the force reverses.</text>
 </svg>

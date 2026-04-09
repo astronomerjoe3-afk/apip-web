@@ -19,10 +19,14 @@
   <text x="470" y="236" font-family="Arial" font-size="22" fill="#047857">upward force</text>
   <text x="742" y="586" font-family="Arial" font-size="22" fill="#b91c1c">downward force</text>
 
-  <rect x="888" y="226" width="250" height="214" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
-  <text x="910" y="268" font-family="Arial" font-size="22" font-weight="700" fill="#0f172a">Torque story</text>
-  <text x="910" y="308" font-family="Arial" font-size="18" fill="#475569">1. Opposite coil sides carry current.</text>
-  <text x="910" y="340" font-family="Arial" font-size="18" fill="#475569">2. Opposite forces act on those sides.</text>
-  <text x="910" y="372" font-family="Arial" font-size="18" fill="#475569">3. The pair makes the loop rotate.</text>
-  <text x="910" y="416" font-family="Arial" font-size="18" fill="#475569">A split-ring commutator swaps current each half-turn so the overall rotation keeps going.</text>
+  <rect x="804" y="196" width="238" height="296" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="828" y="256" font-family="Arial" font-size="22" font-weight="700" fill="#0f172a">Torque story</text>
+  <text x="828" y="294" font-family="Arial" font-size="17" fill="#475569">1. Opposite coil sides</text>
+  <text x="828" y="318" font-family="Arial" font-size="17" fill="#475569">carry current.</text>
+  <text x="828" y="348" font-family="Arial" font-size="17" fill="#475569">2. Opposite forces act</text>
+  <text x="828" y="372" font-family="Arial" font-size="17" fill="#475569">on those sides.</text>
+  <text x="828" y="402" font-family="Arial" font-size="17" fill="#475569">3. The pair makes the</text>
+  <text x="828" y="426" font-family="Arial" font-size="17" fill="#475569">loop rotate.</text>
+  <text x="828" y="454" font-family="Arial" font-size="16" fill="#475569">The split-ring commutator</text>
+  <text x="828" y="476" font-family="Arial" font-size="16" fill="#475569">keeps the turning direction going.</text>
 </svg>
