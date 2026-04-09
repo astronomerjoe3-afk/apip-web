@@ -1528,6 +1528,10 @@ function matchesPhraseGroups(source: string, phraseGroups: string[][]): boolean 
   return phraseGroups.every((group) => includesAnyPhrase(source, group));
 }
 
+function matchedPhraseGroupCount(source: string, phraseGroups: string[][]): number {
+  return phraseGroups.reduce((count, group) => count + (includesAnyPhrase(source, group) ? 1 : 0), 0);
+}
+
 function authoredAcceptancePhraseGroups(item: UnknownRecord): string[][] {
   return asList(asRecord(item.acceptance_rules).phrase_groups)
     .map((group) => asList(group).map((entry) => text(entry)).filter(Boolean))
@@ -1600,6 +1604,11 @@ function isCoreModuleShortAnswerItem(item: UnknownRecord): boolean {
   return Number.isFinite(moduleNumber) && moduleNumber >= 1 && moduleNumber <= 14;
 }
 
+function isModuleSevenShortAnswerItem(item: UnknownRecord): boolean {
+  const itemId = text(item.id).trim().replace(/-/g, "_").toUpperCase();
+  return /^M7L\d+_[A-Z]\d+$/.test(itemId);
+}
+
 function meaningfulOpenAnswerTokens(value: unknown): string[] {
   return normalizeOpenAnswer(value)
     .split(/\s+/)
@@ -1658,6 +1667,20 @@ function openAnswerTokensApproxMatch(expected: string, candidate: string): boole
   return editDistanceWithinLimit(singularExpected, singularCandidate, typoLimit);
 }
 
+function approxMatchedOpenAnswerTokenCount(expectedTokens: string[], candidateTokens: string[]): number {
+  const usedCandidateIndexes = new Set<number>();
+  let matchCount = 0;
+  for (const expected of expectedTokens) {
+    const candidateIndex = candidateTokens.findIndex(
+      (candidate, index) => !usedCandidateIndexes.has(index) && openAnswerTokensApproxMatch(expected, candidate),
+    );
+    if (candidateIndex === -1) continue;
+    usedCandidateIndexes.add(candidateIndex);
+    matchCount += 1;
+  }
+  return matchCount;
+}
+
 function coreShortAnswerFuzzyMatch(answer: unknown, acceptedAnswers: string[], item: UnknownRecord): boolean {
   if (!isCoreModuleShortAnswerItem(item)) return false;
 
@@ -1676,16 +1699,42 @@ function coreShortAnswerFuzzyMatch(answer: unknown, acceptedAnswers: string[], i
       return false;
     }
 
-    const usedCandidateIndexes = new Set<number>();
-    for (const expected of expectedTokens) {
-      const candidateIndex = candidateTokens.findIndex(
-        (candidate, index) => !usedCandidateIndexes.has(index) && openAnswerTokensApproxMatch(expected, candidate),
-      );
-      if (candidateIndex === -1) return false;
-      usedCandidateIndexes.add(candidateIndex);
+    return approxMatchedOpenAnswerTokenCount(expectedTokens, candidateTokens) === expectedTokens.length;
+  });
+}
+
+function moduleSevenShortAnswerMarginMatch(
+  answer: unknown,
+  acceptedAnswers: string[],
+  item: UnknownRecord,
+  phraseGroups: string[][],
+): boolean {
+  if (!isModuleSevenShortAnswerItem(item) || phraseGroups.length < 3) return false;
+
+  const candidate = normalizeOpenAnswer(answer);
+  if (!candidate) return false;
+
+  const candidateTokens = meaningfulOpenAnswerTokens(answer);
+  if (candidateTokens.length < 3 || hasMathLikeOpenAnswerTokens(candidateTokens)) return false;
+
+  const matchedGroups = matchedPhraseGroupCount(candidate, phraseGroups);
+  if (matchedGroups < phraseGroups.length - 1) return false;
+
+  const candidateContradictions = candidateTokens.filter((token) => CORE_SHORT_ANSWER_CONTRADICTION_TOKENS.has(token));
+
+  return acceptedAnswers.some((entry) => {
+    const expectedTokens = meaningfulOpenAnswerTokens(entry);
+    if (expectedTokens.length < 3 || hasMathLikeOpenAnswerTokens(expectedTokens)) return false;
+
+    const expectedContradictions = expectedTokens.filter((token) => CORE_SHORT_ANSWER_CONTRADICTION_TOKENS.has(token));
+    if (
+      candidateContradictions.some((token) => !expectedContradictions.includes(token)) ||
+      expectedContradictions.some((token) => !candidateContradictions.includes(token))
+    ) {
+      return false;
     }
 
-    return true;
+    return approxMatchedOpenAnswerTokenCount(expectedTokens, candidateTokens) >= 3;
   });
 }
 
@@ -7744,6 +7793,9 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
   const authoredPhraseGroups = authoredAcceptancePhraseGroups(item);
   if (authoredPhraseGroups.length > 0) {
     if (matchesPhraseGroups(candidate, authoredPhraseGroups)) {
+      return true;
+    }
+    if (moduleSevenShortAnswerMarginMatch(answer, acceptedAnswers, item, authoredPhraseGroups)) {
       return true;
     }
   }
@@ -15220,7 +15272,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
         submitted: true,
         passed: graded.is_correct === true,
         feedback: [{ question_id: text(graded.question_id), is_correct: graded.is_correct, explanation: graded.is_correct === true ? "That is right. You have shown the key idea clearly." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.` }],
-        microReteach: graded.is_correct === true ? undefined : { title: retryCount >= CONCEPT_GATE_MAX_RETRIES ? "Quick refresher" : "Remember this", body: text(capsule?.prompt) || text(graded.teaching_focus) },
+        microReteach: graded.is_correct === true ? undefined : {
+          title: retryCount >= CONCEPT_GATE_MAX_RETRIES ? "Quick refresher" : "Remember this",
+          body: normalizeRenderedPhysicsText(text(capsule?.prompt) || text(graded.teaching_focus)),
+        },
       },
     });
     return;
