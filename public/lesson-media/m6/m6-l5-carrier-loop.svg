@@ -11,8 +11,8 @@
   </text>
 
   <rect x="108" y="214" width="984" height="384" rx="30" fill="#ECFEFF" stroke="#67E8F9" stroke-width="5"/>
-  <rect x="432" y="548" width="338" height="24" rx="12" fill="#F59E0B"/>
-  <text x="490" y="538" fill="#B45309" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">heater</text>
+  <rect x="432" y="540" width="338" height="24" rx="12" fill="#F59E0B"/>
+  <text x="490" y="530" fill="#B45309" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">heater</text>
 
   <path d="M396 488C316 420 308 322 404 254" fill="none" stroke="#EF4444" stroke-width="14" stroke-linecap="round"/>
   <path d="M404 254H772" fill="none" stroke="#F97316" stroke-width="14" stroke-linecap="round"/>
@@ -26,14 +26,14 @@
 
   <text x="248" y="430" fill="#DC2626" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">warmer, less dense</text>
   <text x="768" y="430" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">cooler, denser</text>
-  <text x="394" y="610" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">
-    <tspan x="394" dy="0">The transfer route is a moving loop,</tspan>
-    <tspan x="394" dy="26">so convection belongs to fluids.</tspan>
+  <text x="378" y="604" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="378" dy="0">The transfer route is a moving loop,</tspan>
+    <tspan x="378" dy="24">so convection belongs to fluids.</tspan>
   </text>
 
-  <rect x="96" y="648" width="1008" height="64" rx="22" fill="#EEF4FF"/>
-  <text x="128" y="674" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+  <rect x="96" y="660" width="1008" height="56" rx="22" fill="#EEF4FF"/>
+  <text x="128" y="682" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">
     <tspan x="128" dy="0">"Heat rises" is incomplete.</tspan>
-    <tspan x="128" dy="24">What actually rises is the warmer fluid region.</tspan>
+    <tspan x="128" dy="22">What actually rises is the warmer fluid region.</tspan>
   </text>
 </svg>
