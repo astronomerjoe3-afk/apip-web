@@ -13904,7 +13904,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260409b";
+  const assetVersion = "20260409c";
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const moduleId = lessonId.split("_", 1)[0];
     return `/lesson_assets/${moduleId}/${lessonId}/videos/${filename}?v=${assetVersion}`;
@@ -14161,6 +14161,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M3_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M3_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M3_L6", "captions.vtt"),
+      };
+    case "M4_L1":
+      return {
+        body: "Use this video to read pressure in solids as force spread over area before the worked example begins.",
+        caption: "Video explainer: patch load, force per area, footprint comparisons, and pascal meaning before the lesson example.",
+        highlights: [
+          "Pressure is force spread over area, not force alone",
+          "A smaller contact area raises the patch load",
+          "Wider footprints protect fragile surfaces",
+        ],
+        checkForUnderstanding: "If the total push stays the same but the footprint becomes smaller, what should happen to the pressure first?",
+        video_url: staticVideoAssetUrl("M4_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M4_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M4_L1", "captions.vtt"),
+      };
+    case "M4_L2":
+      return {
+        body: "Use this video to design a safe footprint from a pressure limit before the worked example starts.",
+        caption: "Video explainer: safe pressure limits, backward design, and rearranging p = F/A before the lesson example.",
+        highlights: [
+          "Pressure limits create safe and unsafe designs",
+          "Minimum area is a pressure answer, not just a geometry answer",
+          "Rearranging the equation preserves the same physical story",
+        ],
+        checkForUnderstanding: "If the allowed pressure is fixed and the force gets larger, what must happen to the required area?",
+        video_url: staticVideoAssetUrl("M4_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M4_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M4_L2", "captions.vtt"),
+      };
+    case "M4_L3":
+      return {
+        body: "Use this video to read liquid pressure as a layer-stack story before the worked example begins.",
+        caption: "Video explainer: depth load, density, gravitational field strength, and p = rho gh before the lesson example.",
+        highlights: [
+          "Deeper patches carry more liquid above them",
+          "Denser liquids create greater pressure at the same depth",
+          "Tank shape is not one of the hydrostatic factors",
+        ],
+        checkForUnderstanding: "If two points are at the same depth but one liquid is denser, which point should have the greater pressure first?",
+        video_url: staticVideoAssetUrl("M4_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M4_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M4_L3", "captions.vtt"),
+      };
+    case "M4_L4":
+      return {
+        body: "Use this video to keep same-depth reasoning stronger than container-shape intuition before the worked example begins.",
+        caption: "Video explainer: same level, same liquid, same pressure, and container-shape misconceptions before the lesson example.",
+        highlights: [
+          "Equal depth in the same resting liquid gives equal pressure",
+          "Shape changes the outline, not the local pressure at that level",
+          "The equality fails only when the liquid or depth changes",
+        ],
+        checkForUnderstanding: "If two patches are in the same liquid but one is deeper, should the same-level rule still apply?",
+        video_url: staticVideoAssetUrl("M4_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M4_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M4_L4", "captions.vtt"),
+      };
+    case "M4_L5":
+      return {
+        body: "Use this video to separate pressure at a point from force on a chosen patch before the worked example begins.",
+        caption: "Video explainer: pressure as a scalar, force normal to the surface, and F = pA before the lesson example.",
+        highlights: [
+          "Pressure belongs to the location in the fluid",
+          "Force due to pressure acts normal to the chosen surface",
+          "At fixed pressure, larger area gives larger total force",
+        ],
+        checkForUnderstanding: "If the pressure at a point stays the same but the chosen patch area doubles, what should happen to the total force on that patch?",
+        video_url: staticVideoAssetUrl("M4_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M4_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M4_L5", "captions.vtt"),
+      };
+    case "M4_L6":
+      return {
+        body: "Use this video to combine atmospheric pressure with liquid pressure before the final worked example begins.",
+        caption: "Video explainer: sky blanket pressure, open-surface total pressure, and p_total = p_atm + rho gh before the lesson example.",
+        highlights: [
+          "Atmospheric pressure is another fluid-pressure load",
+          "Open-surface total pressure adds atmospheric and liquid contributions",
+          "Altitude changes the air contribution before any liquid is added",
+        ],
+        checkForUnderstanding: "In an open liquid, if depth increases while atmospheric pressure stays the same, which part of the total pressure changes?",
+        video_url: staticVideoAssetUrl("M4_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M4_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M4_L6", "captions.vtt"),
       };
     case "F1_L1":
       return {

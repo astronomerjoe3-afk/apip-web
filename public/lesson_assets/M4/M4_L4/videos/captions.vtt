@@ -1,0 +1,301 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.192
+Lesson 4 exists because container shapes are so visually persuasive.
+
+2
+00:00:06.192 --> 00:00:12.384
+A tall narrow vessel and a wide curved vessel look very different, and students often expect the pressure at equal levels to differ as well.
+
+3
+00:00:12.384 --> 00:00:18.576
+But if the liquid is the same and both points are at the same depth in a resting liquid, the pressure is the same.
+
+4
+00:00:18.576 --> 00:00:24.768
+This lesson is really about trusting local hydrostatic rules over global shape impressions.
+
+5
+00:00:24.768 --> 00:00:30.960
+The worked example becomes much easier when the student can ignore the silhouette and focus on the depth line.
+
+6
+00:00:30.960 --> 00:00:37.152
+Keep this takeaway in view: M4_L4 trains students to trust the same-depth rule more than the shape of the container around it.
+
+7
+00:00:37.152 --> 00:00:43.344
+Same liquid means same material.
+
+8
+00:00:43.344 --> 00:00:49.536
+The equality rule only applies when the liquid is the same on both sides.
+
+9
+00:00:49.536 --> 00:00:55.728
+Same depth means same pressure.
+
+10
+00:00:55.728 --> 00:01:01.920
+Matching level in the same resting liquid means matching local pressure.
+
+11
+00:01:01.920 --> 00:01:08.340
+This diagram matters because it challenges visual intuition directly.
+
+12
+00:01:08.340 --> 00:01:14.760
+The vessels look different, but the equal-depth markers sit on the same horizontal level in the same liquid.
+
+13
+00:01:14.760 --> 00:01:21.180
+That means the rho, g, and h values match, so the pressure matches.
+
+14
+00:01:21.180 --> 00:01:27.600
+When one marker is moved deeper, the equality breaks.
+
+15
+00:01:27.600 --> 00:01:34.020
+The board helps students learn which features matter and which are distracting.
+
+16
+00:01:34.020 --> 00:01:40.440
+Keep this takeaway in view: A level-mark diagram makes the same-pressure rule much easier to trust than a vague verbal statement.
+
+17
+00:01:40.440 --> 00:01:46.860
+Equal level: Matching depth in the same liquid means matching pressure.
+
+18
+00:01:46.860 --> 00:01:53.280
+Different shape: The outline can change without changing the local pressure rule.
+
+19
+00:01:53.280 --> 00:01:58.946
+Imagine two oddly shaped rooms on the same floor of a building.
+
+20
+00:01:58.946 --> 00:02:04.611
+The rooms may have different widths and outlines, but a point on the same floor level is still at the same height.
+
+21
+00:02:04.611 --> 00:02:10.277
+This analogy helps because it encourages students to think in terms of level rather than overall shape.
+
+22
+00:02:10.277 --> 00:02:15.942
+The hydrostatic rule is local in that same way.
+
+23
+00:02:15.942 --> 00:02:21.608
+Keep this takeaway in view: The floor-level analogy helps students ignore distracting vessel shape when the same-depth condition is satisfied.
+
+24
+00:02:21.608 --> 00:02:27.273
+Same floor means same level.
+
+25
+00:02:27.273 --> 00:02:32.939
+The relevant comparison is the vertical level, not the room shape.
+
+26
+00:02:32.939 --> 00:02:38.604
+Different room shape means still equal height.
+
+27
+00:02:38.604 --> 00:02:44.270
+Shape can look different while the height comparison remains the same.
+
+28
+00:02:44.270 --> 00:02:50.422
+The direct rule is p1 equals p2 when two points are in the same resting liquid at the same depth.
+
+29
+00:02:50.422 --> 00:02:56.575
+The deeper reason is still the hydrostatic relationship p equals rho g h.
+
+30
+00:02:56.575 --> 00:03:02.727
+If the liquid is the same, rho matches.
+
+31
+00:03:02.727 --> 00:03:08.879
+If the field is the same, g matches.
+
+32
+00:03:08.879 --> 00:03:15.032
+If the depth is the same, h matches.
+
+33
+00:03:15.032 --> 00:03:21.184
+So the pressure matches too.
+
+34
+00:03:21.184 --> 00:03:27.336
+This is a good example of a local equality rule that comes directly from the more general formula.
+
+35
+00:03:27.336 --> 00:03:33.488
+Keep this takeaway in view: The same-depth rule becomes reliable when students know both the quick statement and the deeper hydrostatic reason.
+
+36
+00:03:33.488 --> 00:03:39.641
+Equality route: Use the direct equality statement when the same-depth condition is clearly satisfied.
+
+37
+00:03:39.641 --> 00:03:45.793
+Explanation route: Use rho g h to justify why the same-depth result follows.
+
+38
+00:03:45.793 --> 00:03:51.945
+p1 = p2 for two points in the same resting liquid at the same depth.
+
+39
+00:03:51.945 --> 00:03:58.098
+p = rho g h explains why the equality works.
+
+40
+00:03:58.098 --> 00:04:04.250
+Use the equal-pressure rule only when the liquid is the same and the points really are at the same depth.
+
+41
+00:04:04.250 --> 00:04:08.754
+A useful routine here is to ignore the vessel shape first and check the level markers instead.
+
+42
+00:04:08.754 --> 00:04:13.259
+Ask whether the points are in the same resting liquid and whether they are at the same depth.
+
+43
+00:04:13.259 --> 00:04:17.763
+If yes, the pressure matches.
+
+44
+00:04:17.763 --> 00:04:22.268
+Only if one of those conditions fails should the student stop using the equality rule.
+
+45
+00:04:22.268 --> 00:04:26.772
+Keep this takeaway in view: The same-level routine gives students a calm way to defeat the container-shape misconception.
+
+46
+00:04:26.772 --> 00:04:31.277
+Step 1 means same liquid?.
+
+47
+00:04:31.277 --> 00:04:35.781
+Confirm that both points are in the same fluid.
+
+48
+00:04:35.781 --> 00:04:40.286
+Step 2 means same depth?.
+
+49
+00:04:40.286 --> 00:04:44.790
+Compare the level markers, not the vessel outlines.
+
+50
+00:04:44.790 --> 00:04:48.056
+Try four checks.
+
+51
+00:04:48.056 --> 00:04:51.322
+If the liquid is the same and the depth is the same, is the pressure the same?
+
+52
+00:04:51.322 --> 00:04:54.588
+Yes.
+
+53
+00:04:54.588 --> 00:04:57.854
+Does vessel shape alone break that rule?
+
+54
+00:04:57.854 --> 00:05:01.120
+No.
+
+55
+00:05:01.120 --> 00:05:04.386
+If one point is deeper, can the pressures still be equal automatically?
+
+56
+00:05:04.386 --> 00:05:07.652
+No.
+
+57
+00:05:07.652 --> 00:05:10.918
+And why does the rule work?
+
+58
+00:05:10.918 --> 00:05:14.184
+Because rho, g, and h are the same at both points.
+
+59
+00:05:14.184 --> 00:05:17.450
+Those are the core ideas of the lesson.
+
+60
+00:05:17.450 --> 00:05:20.716
+Keep this takeaway in view: The worked example is ready: same-depth comparisons can now be judged from the real conditions instead of from the vessel silhouette.
+
+61
+00:05:20.716 --> 00:05:23.982
+Same liquid and depth means same pressure.
+
+62
+00:05:23.982 --> 00:05:27.248
+That is the central equality rule.
+
+63
+00:05:27.248 --> 00:05:30.514
+Different vessel shape means still can match.
+
+64
+00:05:30.514 --> 00:05:33.780
+Shape alone does not break the rule.
+
+65
+00:05:33.780 --> 00:05:39.279
+You are ready for the worked example now.
+
+66
+00:05:39.279 --> 00:05:44.778
+Start by asking whether both points are in the same resting liquid and whether they sit at the same depth.
+
+67
+00:05:44.778 --> 00:05:50.277
+If they do, use the equality rule confidently.
+
+68
+00:05:50.277 --> 00:05:55.776
+If not, explain which condition failed and return to the hydrostatic formula.
+
+69
+00:05:55.776 --> 00:06:01.275
+The strongest answers say why the pressures match or fail to match, not just whether they do.
+
+70
+00:06:01.275 --> 00:06:06.775
+Keep this takeaway in view: The worked example is ready: same-depth pressure reasoning can now survive even visually misleading containers.
+
+71
+00:06:06.775 --> 00:06:12.274
+Step 1: Ignore the container outline long enough to inspect the real conditions.
+
+72
+00:06:12.274 --> 00:06:17.773
+Step 2: Trust the level markers more than the shape of the vessel.
+
+73
+00:06:17.773 --> 00:06:23.272
+check whether the liquid is the same.
+
+74
+00:06:23.272 --> 00:06:28.771
+check whether the depth markers match.
+
+75
+00:06:28.771 --> 00:06:34.270
+The best answers explain the level condition before giving the pressure conclusion.
