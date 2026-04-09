@@ -1,30 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0b1020"/>
-      <stop offset="100%" stop-color="#172554"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#26446b"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
     </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 47px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #4a6891; stroke-width: 3; }
+      .panel { fill: #172742; stroke: #55769d; stroke-width: 2.5; }
+      .label { fill: #f8fafc; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <text x="640" y="84" class="title" text-anchor="middle">Constant Speed Still Needs Inward Acceleration</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    The speed can stay constant while the velocity keeps changing direction, so the acceleration and resultant force point inward.
+  </text>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <rect x="96" y="176" width="1088" height="478" rx="34" class="card"/>
+  <rect x="132" y="226" width="706" height="370" rx="26" class="panel"/>
+  <rect x="868" y="226" width="280" height="370" rx="26" class="panel"/>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <text x="486" y="268" class="label" text-anchor="middle">Turning object</text>
+  <text x="1008" y="268" class="label" text-anchor="middle">Reading clues</text>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">Circular Motion</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Visualise circular motion inside the Vector-Rig Model of Mechanics and Materials.</text>
+  <circle cx="430" cy="412" r="140" fill="none" stroke="#475569" stroke-width="4"/>
+  <circle cx="530" cy="316" r="14" fill="#f8fafc"/>
+  <line x1="530" y1="316" x2="650" y2="316" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="650,316 624,302 624,330" fill="#34d399"/>
+  <line x1="530" y1="316" x2="430" y2="412" stroke="#f43f5e" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="430,412 438,378 462,402" fill="#f43f5e"/>
+  <line x1="530" y1="316" x2="470" y2="374" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="470,374 478,340 502,364" fill="#f59e0b"/>
+  <text x="676" y="320" class="small">velocity v is tangent</text>
+  <text x="330" y="392" class="small">acceleration inward</text>
+  <text x="332" y="430" class="small">resultant force inward</text>
+  <text x="486" y="556" class="body" text-anchor="middle">velocity direction changes continuously</text>
+
+  <text x="916" y="336" class="body">speed can stay constant</text>
+  <text x="916" y="392" class="body">velocity still changes</text>
+  <text x="916" y="448" class="body">ac points to center</text>
+  <text x="916" y="504" class="body">Fnet points to center</text>
+  <text x="1008" y="560" class="body" text-anchor="middle">No outward driving force is needed.</text>
 </svg>

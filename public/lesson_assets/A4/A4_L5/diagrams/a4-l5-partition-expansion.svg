@@ -1,8 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <marker id="thermal-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M 0 0 L 12 6 L 0 12 z" fill="#38bdf8" />
-    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#26446b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 45px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #4a6891; stroke-width: 3; }
+      .panel { fill: #172742; stroke: #55769d; stroke-width: 2.5; }
+      .label { fill: #f8fafc; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
-  <rect width="100%" height="100%" fill="#0b1020" />
-<text x="640.00" y="70.00" fill="white" text-anchor="middle" font-size="34" font-family="Arial" font-weight="bold">Partition drop and multiplicity</text><text x="640.00" y="105.00" fill="#cbd5e1" text-anchor="middle" font-size="18" font-family="Arial" font-weight="normal">Show the chamber before and after a divider is removed so multiplicity stays visible as the reason for spreading.</text><rect x="90.00" y="200.00" width="470.00" height="260.00" rx="24" fill="#111827" stroke="#60a5fa" stroke-width="4" /><rect x="720.00" y="200.00" width="470.00" height="260.00" rx="24" fill="#111827" stroke="#22c55e" stroke-width="4" /><line x1="325.00" y1="200.00" x2="325.00" y2="460.00" stroke="#f8fafc" stroke-width="6" /><text x="325.00" y="170.00" fill="#bae6fd" text-anchor="middle" font-size="24" font-family="Arial" font-weight="normal">Before partition drop</text><text x="955.00" y="170.00" fill="#bbf7d0" text-anchor="middle" font-size="24" font-family="Arial" font-weight="normal">After partition drop</text><circle cx="155.12" cy="285.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="155.12" y1="285.00" x2="171.12" y2="275.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="189.38" cy="285.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="189.38" y1="285.00" x2="165.38" y2="300.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="223.62" cy="285.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="223.62" y1="285.00" x2="255.62" y2="305.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="257.88" cy="285.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="257.88" y1="285.00" x2="241.88" y2="260.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="155.12" cy="375.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="155.12" y1="375.00" x2="179.12" y2="385.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="189.38" cy="375.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="189.38" y1="375.00" x2="157.38" y2="390.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="223.62" cy="375.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="223.62" y1="375.00" x2="239.62" y2="355.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="257.88" cy="375.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="257.88" y1="375.00" x2="233.88" y2="400.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><text x="325.00" y="492.00" fill="#cbd5e1" text-anchor="middle" font-size="20" font-family="Arial" font-weight="normal">gas crowded on one side</text><circle cx="799.00" cy="270.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="799.00" y1="270.00" x2="815.00" y2="260.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="877.00" cy="270.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="877.00" y1="270.00" x2="853.00" y2="285.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="955.00" cy="270.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="955.00" y1="270.00" x2="987.00" y2="290.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="1033.00" cy="270.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="1033.00" y1="270.00" x2="1017.00" y2="245.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="1111.00" cy="270.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="1111.00" y1="270.00" x2="1135.00" y2="280.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="799.00" cy="330.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="799.00" y1="330.00" x2="767.00" y2="345.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="877.00" cy="330.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="877.00" y1="330.00" x2="893.00" y2="310.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="955.00" cy="330.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="955.00" y1="330.00" x2="931.00" y2="355.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="1033.00" cy="330.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="1033.00" y1="330.00" x2="1065.00" y2="340.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="1111.00" cy="330.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="1111.00" y1="330.00" x2="1095.00" y2="315.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="799.00" cy="390.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="799.00" y1="390.00" x2="823.00" y2="410.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><circle cx="877.00" cy="390.00" r="9.00" fill="#93c5fd" stroke="#93c5fd" stroke-width="0" /><line x1="877.00" y1="390.00" x2="845.00" y2="415.00" stroke="#93c5fd" stroke-width="3" marker-end="url(#thermal-arrow)" /><text x="955.00" y="492.00" fill="#cbd5e1" text-anchor="middle" font-size="20" font-family="Arial" font-weight="normal">more accessible hidden playbooks</text><line x1="595.00" y1="330.00" x2="680.00" y2="330.00" stroke="#facc15" stroke-width="8" marker-end="url(#thermal-arrow)" /><text x="640.00" y="560.00" fill="#fde68a" text-anchor="middle" font-size="22" font-family="Arial" font-weight="normal">Removing the partition increases the number of accessible microstates.</text></svg>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
+
+  <text x="640" y="84" class="title" text-anchor="middle">Speed and Radius Set the Inward Requirement</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    Faster motion or a tighter turn demands a larger centripetal acceleration, because a_c = v squared over r.
+  </text>
+
+  <rect x="106" y="176" width="1068" height="478" rx="34" class="card"/>
+  <rect x="144" y="226" width="448" height="370" rx="26" class="panel"/>
+  <rect x="688" y="226" width="448" height="370" rx="26" class="panel"/>
+
+  <text x="368" y="268" class="label" text-anchor="middle">Slow and wide</text>
+  <text x="912" y="268" class="label" text-anchor="middle">Fast and tight</text>
+
+  <circle cx="368" cy="412" r="122" fill="none" stroke="#475569" stroke-width="4"/>
+  <circle cx="448" cy="320" r="12" fill="#f8fafc"/>
+  <line x1="448" y1="320" x2="542" y2="320" stroke="#34d399" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="542,320 516,306 516,334" fill="#34d399"/>
+  <line x1="448" y1="320" x2="392" y2="382" stroke="#f43f5e" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="392,382 398,350 422,372" fill="#f43f5e"/>
+  <text x="368" y="556" class="body" text-anchor="middle">smaller inward arrow</text>
+
+  <circle cx="912" cy="412" r="88" fill="none" stroke="#475569" stroke-width="4"/>
+  <circle cx="968" cy="342" r="12" fill="#f8fafc"/>
+  <line x1="968" y1="342" x2="1084" y2="342" stroke="#34d399" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="1084,342 1058,328 1058,356" fill="#34d399"/>
+  <line x1="968" y1="342" x2="884" y2="426" stroke="#f43f5e" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="884,426 892,392 916,416" fill="#f43f5e"/>
+  <text x="912" y="556" class="body" text-anchor="middle">larger inward arrow</text>
+</svg>
