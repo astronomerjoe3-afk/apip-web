@@ -1,30 +1,34 @@
 <svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
-  <text x="60" y="84" fill="#172554" font-family="Georgia, serif" font-size="54" font-weight="700">The loop ledger keeps the quantities separate</text>
-  <text x="60" y="138" fill="#475569" font-family="Georgia, serif" font-size="26">Charge moves, the source gives energy per charge, and the route drag limits the checkpoint rate.</text>
+  <text x="60" y="84" fill="#172554" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">The loop ledger keeps the quantities separate</text>
+  <text x="60" y="138" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="24">
+    <tspan x="60" dy="0">Charge moves, the source gives energy per charge,</tspan>
+    <tspan x="60" dy="30">and the route drag limits the checkpoint rate.</tspan>
+  </text>
 
   <rect x="80" y="202" width="1040" height="430" rx="34" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
   <rect x="120" y="246" width="216" height="94" rx="28" fill="#DBEAFE"/>
-  <text x="150" y="302" fill="#1D4ED8" font-family="Georgia, serif" font-size="30" font-weight="700">Charge carriers</text>
-  <text x="150" y="334" fill="#1D4ED8" font-family="Georgia, serif" font-size="24">what moves</text>
+  <text x="150" y="302" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Charge carriers</text>
+  <text x="150" y="334" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="24">what moves</text>
 
   <rect x="378" y="246" width="216" height="94" rx="28" fill="#BBF7D0"/>
-  <text x="426" y="302" fill="#166534" font-family="Georgia, serif" font-size="30" font-weight="700">Voltage</text>
-  <text x="410" y="334" fill="#166534" font-family="Georgia, serif" font-size="24">boost per charge</text>
+  <text x="426" y="302" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Voltage</text>
+  <text x="410" y="334" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="24">boost per charge</text>
 
   <rect x="636" y="246" width="216" height="94" rx="28" fill="#FDE68A"/>
-  <text x="670" y="302" fill="#92400E" font-family="Georgia, serif" font-size="30" font-weight="700">Resistance</text>
-  <text x="680" y="334" fill="#92400E" font-family="Georgia, serif" font-size="24">route drag</text>
+  <text x="670" y="302" fill="#92400E" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Resistance</text>
+  <text x="680" y="334" fill="#92400E" font-family="Arial, Helvetica, sans-serif" font-size="24">route drag</text>
 
   <rect x="894" y="246" width="186" height="94" rx="28" fill="#FECACA"/>
-  <text x="944" y="302" fill="#B91C1C" font-family="Georgia, serif" font-size="30" font-weight="700">Current</text>
-  <text x="936" y="334" fill="#B91C1C" font-family="Georgia, serif" font-size="24">checkpoint rate</text>
+  <text x="944" y="302" fill="#B91C1C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Current</text>
+  <text x="936" y="334" fill="#B91C1C" font-family="Arial, Helvetica, sans-serif" font-size="24">checkpoint rate</text>
 
   <line x1="228" y1="388" x2="228" y2="544" stroke="#1D4ED8" stroke-width="10" stroke-linecap="round"/>
   <line x1="486" y1="388" x2="486" y2="544" stroke="#16A34A" stroke-width="10" stroke-linecap="round"/>
   <line x1="744" y1="388" x2="744" y2="544" stroke="#CA8A04" stroke-width="10" stroke-linecap="round"/>
   <line x1="986" y1="388" x2="986" y2="544" stroke="#DC2626" stroke-width="10" stroke-linecap="round"/>
 
-  <rect x="150" y="540" width="860" height="56" rx="22" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="3"/>
-  <text x="184" y="576" fill="#1E293B" font-family="Georgia, serif" font-size="28" font-weight="700">Same source can give different currents because the whole loop decides the rate.</text>
+  <rect x="130" y="524" width="900" height="84" rx="22" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="3"/>
+  <text x="580" y="560" fill="#1E293B" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Same source can give different currents</text>
+  <text x="580" y="588" fill="#1E293B" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">because the whole loop decides the rate.</text>
 </svg>

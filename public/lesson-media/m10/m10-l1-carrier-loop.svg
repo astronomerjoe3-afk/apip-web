@@ -1,15 +1,18 @@
 <svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
-  <text x="60" y="84" fill="#172554" font-family="Georgia, serif" font-size="54" font-weight="700">Charge means the carriers that move</text>
-  <text x="60" y="138" fill="#475569" font-family="Georgia, serif" font-size="26">The same tokens circulate in a closed loop. Current is the checkpoint rate, not the total number of tokens.</text>
+  <text x="60" y="84" fill="#172554" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Charge means the carriers that move</text>
+  <text x="60" y="138" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="24">
+    <tspan x="60" dy="0">The same tokens circulate in a closed loop. Current is the checkpoint rate,</tspan>
+    <tspan x="60" dy="30">not the total number of tokens.</tspan>
+  </text>
 
   <rect x="64" y="190" width="496" height="430" rx="32" fill="#EFF6FF" stroke="#60A5FA" stroke-width="4"/>
-  <text x="108" y="242" fill="#1D4ED8" font-family="Georgia, serif" font-size="32" font-weight="700">Closed loop</text>
+  <text x="108" y="242" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">Closed loop</text>
   <rect x="118" y="292" width="388" height="160" rx="80" fill="none" stroke="#2563EB" stroke-width="14"/>
   <rect x="446" y="270" width="40" height="204" rx="18" fill="#22C55E"/>
-  <text x="408" y="258" fill="#166534" font-family="Georgia, serif" font-size="22" font-weight="700">Lift station</text>
+  <text x="408" y="258" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Lift station</text>
   <rect x="122" y="342" width="22" height="60" rx="10" fill="#F59E0B"/>
-  <text x="88" y="432" fill="#B45309" font-family="Georgia, serif" font-size="21" font-weight="700">Checkpoint</text>
+  <text x="88" y="432" fill="#B45309" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Checkpoint</text>
   <circle cx="182" cy="320" r="14" fill="#2563EB"/>
   <circle cx="258" cy="320" r="14" fill="#2563EB"/>
   <circle cx="334" cy="320" r="14" fill="#2563EB"/>
@@ -20,15 +23,15 @@
   <circle cx="246" cy="426" r="14" fill="#2563EB"/>
   <circle cx="172" cy="382" r="14" fill="#2563EB"/>
   <rect x="116" y="510" width="392" height="74" rx="24" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="3"/>
-  <text x="142" y="554" fill="#1E293B" font-family="Georgia, serif" font-size="26" font-weight="700">Same carriers can keep going round.</text>
+  <text x="142" y="554" fill="#1E293B" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Same carriers can keep going round.</text>
 
   <rect x="640" y="190" width="496" height="430" rx="32" fill="#FEF2F2" stroke="#F87171" stroke-width="4"/>
-  <text x="684" y="242" fill="#B91C1C" font-family="Georgia, serif" font-size="32" font-weight="700">Open loop</text>
+  <text x="684" y="242" fill="#B91C1C" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">Open loop</text>
   <path d="M694 372C694 318 738 274 792 274H964C1018 274 1062 318 1062 372C1062 426 1018 470 964 470H792C738 470 694 426 694 372Z" stroke="#DC2626" stroke-width="14" stroke-dasharray="250 28 40 28"/>
   <rect x="1002" y="270" width="40" height="204" rx="18" fill="#22C55E"/>
-  <text x="964" y="258" fill="#166534" font-family="Georgia, serif" font-size="22" font-weight="700">Lift station</text>
+  <text x="964" y="258" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Lift station</text>
   <rect x="698" y="342" width="22" height="60" rx="10" fill="#F59E0B"/>
-  <text x="664" y="432" fill="#B45309" font-family="Georgia, serif" font-size="21" font-weight="700">Checkpoint</text>
+  <text x="664" y="432" fill="#B45309" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Checkpoint</text>
   <circle cx="758" cy="320" r="14" fill="#DC2626"/>
   <circle cx="834" cy="320" r="14" fill="#DC2626"/>
   <circle cx="910" cy="320" r="14" fill="#DC2626"/>
@@ -36,6 +39,7 @@
   <circle cx="912" cy="426" r="14" fill="#DC2626"/>
   <circle cx="838" cy="426" r="14" fill="#DC2626"/>
   <circle cx="764" cy="426" r="14" fill="#DC2626"/>
-  <rect x="694" y="510" width="392" height="74" rx="24" fill="#FFFFFF" stroke="#FECACA" stroke-width="3"/>
-  <text x="724" y="554" fill="#1E293B" font-family="Georgia, serif" font-size="26" font-weight="700">Broken route means no steady current.</text>
+  <rect x="694" y="502" width="392" height="88" rx="24" fill="#FFFFFF" stroke="#FECACA" stroke-width="3"/>
+  <text x="890" y="539" fill="#1E293B" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="middle">Broken route means</text>
+  <text x="890" y="567" fill="#1E293B" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="middle">no steady current.</text>
 </svg>
