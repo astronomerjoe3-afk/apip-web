@@ -1609,6 +1609,11 @@ function isModuleSevenShortAnswerItem(item: UnknownRecord): boolean {
   return /^M7L\d+_[A-Z]\d+$/.test(itemId);
 }
 
+function isModuleEightShortAnswerItem(item: UnknownRecord): boolean {
+  const itemId = text(item.id).trim().replace(/-/g, "_").toUpperCase();
+  return /^M8L\d+_[A-Z]\d+$/.test(itemId);
+}
+
 function meaningfulOpenAnswerTokens(value: unknown): string[] {
   return normalizeOpenAnswer(value)
     .split(/\s+/)
@@ -1710,6 +1715,41 @@ function moduleSevenShortAnswerMarginMatch(
   phraseGroups: string[][],
 ): boolean {
   if (!isModuleSevenShortAnswerItem(item) || phraseGroups.length < 3) return false;
+
+  const candidate = normalizeOpenAnswer(answer);
+  if (!candidate) return false;
+
+  const candidateTokens = meaningfulOpenAnswerTokens(answer);
+  if (candidateTokens.length < 3 || hasMathLikeOpenAnswerTokens(candidateTokens)) return false;
+
+  const matchedGroups = matchedPhraseGroupCount(candidate, phraseGroups);
+  if (matchedGroups < phraseGroups.length - 1) return false;
+
+  const candidateContradictions = candidateTokens.filter((token) => CORE_SHORT_ANSWER_CONTRADICTION_TOKENS.has(token));
+
+  return acceptedAnswers.some((entry) => {
+    const expectedTokens = meaningfulOpenAnswerTokens(entry);
+    if (expectedTokens.length < 3 || hasMathLikeOpenAnswerTokens(expectedTokens)) return false;
+
+    const expectedContradictions = expectedTokens.filter((token) => CORE_SHORT_ANSWER_CONTRADICTION_TOKENS.has(token));
+    if (
+      candidateContradictions.some((token) => !expectedContradictions.includes(token)) ||
+      expectedContradictions.some((token) => !candidateContradictions.includes(token))
+    ) {
+      return false;
+    }
+
+    return approxMatchedOpenAnswerTokenCount(expectedTokens, candidateTokens) >= 3;
+  });
+}
+
+function moduleEightShortAnswerMarginMatch(
+  answer: unknown,
+  acceptedAnswers: string[],
+  item: UnknownRecord,
+  phraseGroups: string[][],
+): boolean {
+  if (!isModuleEightShortAnswerItem(item) || phraseGroups.length < 3) return false;
 
   const candidate = normalizeOpenAnswer(answer);
   if (!candidate) return false;
@@ -7796,6 +7836,9 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
       return true;
     }
     if (moduleSevenShortAnswerMarginMatch(answer, acceptedAnswers, item, authoredPhraseGroups)) {
+      return true;
+    }
+    if (moduleEightShortAnswerMarginMatch(answer, acceptedAnswers, item, authoredPhraseGroups)) {
       return true;
     }
   }
