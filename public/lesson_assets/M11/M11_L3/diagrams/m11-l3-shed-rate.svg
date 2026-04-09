@@ -1,7 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
   <rect width="1280" height="720" rx="32" fill="#fffaf2"/>
   <text x="64" y="82" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="48" font-weight="700">Task Stations and Shed Rate</text>
-  <text x="64" y="128" fill="#4a5d7a" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">Power is the rate of energy transfer, so you must read current and voltage together instead of treating power like a synonym for current.</text>
+  <text x="64" y="128" fill="#4a5d7a" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">
+    <tspan x="64" dy="0">Power is the rate of energy transfer, so read current and voltage together</tspan>
+    <tspan x="64" dy="28">instead of treating power like a synonym for current.</tspan>
+  </text>
 
   <rect x="60" y="176" width="1160" height="314" rx="28" fill="#fff2df" stroke="#f6ad55" stroke-width="4"/>
   <rect x="104" y="220" width="286" height="222" rx="24" fill="#ffffff" stroke="#93c5fd" stroke-width="3"/>
@@ -12,22 +15,29 @@
   <text x="144" y="304" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">I = 2 A</text>
   <text x="144" y="338" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">V = 6 V</text>
   <text x="144" y="392" fill="#1d4ed8" font-family="Trebuchet MS, Verdana, sans-serif" font-size="38" font-weight="700">P = 12 W</text>
-  <text x="144" y="426" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">12 J transferred each second</text>
+  <text x="247" y="422" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="20" text-anchor="middle">12 J transferred</text>
+  <text x="247" y="448" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="20" text-anchor="middle">each second</text>
 
   <text x="560" y="258" fill="#9a3412" font-family="Trebuchet MS, Verdana, sans-serif" font-size="34" font-weight="700">Power rule</text>
   <text x="560" y="316" fill="#9a3412" font-family="Trebuchet MS, Verdana, sans-serif" font-size="54" font-weight="700">P = I x V</text>
   <text x="556" y="360" fill="#7c2d12" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">Current tells charge flow rate.</text>
   <text x="556" y="392" fill="#7c2d12" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">Voltage tells energy per charge.</text>
-  <text x="556" y="424" fill="#7c2d12" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">Power tells energy transferred each second.</text>
+  <text x="556" y="424" fill="#7c2d12" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Power tells energy</text>
+  <text x="556" y="452" fill="#7c2d12" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">transferred each second.</text>
 
   <text x="928" y="262" fill="#15803d" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">Station B</text>
   <text x="928" y="304" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">I = 2 A</text>
   <text x="928" y="338" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">V = 3 V</text>
   <text x="928" y="392" fill="#15803d" font-family="Trebuchet MS, Verdana, sans-serif" font-size="38" font-weight="700">P = 6 W</text>
-  <text x="928" y="426" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">6 J transferred each second</text>
+  <text x="1031" y="422" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="20" text-anchor="middle">6 J transferred</text>
+  <text x="1031" y="448" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="20" text-anchor="middle">each second</text>
 
-  <rect x="64" y="526" width="1152" height="138" rx="24" fill="#ffffff" stroke="#fed7aa" stroke-width="3"/>
+  <rect x="64" y="514" width="1152" height="162" rx="24" fill="#ffffff" stroke="#fed7aa" stroke-width="3"/>
   <text x="96" y="570" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="28" font-weight="700">How to read the comparison</text>
-  <text x="96" y="608" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Station A and Station B carry the same current, but Station A has the larger voltage drop, so it transfers more energy each second.</text>
-  <text x="96" y="638" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">That is why power explains brightness and heating better than the weak phrase 'the first lamp uses up current'.</text>
+  <text x="96" y="590" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="17">
+    <tspan x="96" dy="0">Station A and Station B carry the same current, but Station A has the larger voltage drop,</tspan>
+    <tspan x="96" dy="22">so it transfers more energy each second.</tspan>
+    <tspan x="96" dy="26">That is why power explains brightness and heating better than saying</tspan>
+    <tspan x="96" dy="22">'the first lamp uses up current'.</tspan>
+  </text>
 </svg>

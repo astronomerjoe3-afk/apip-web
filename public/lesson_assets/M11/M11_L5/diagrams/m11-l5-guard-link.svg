@@ -1,7 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
   <rect width="1280" height="720" rx="32" fill="#fff7f7"/>
   <text x="64" y="82" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="48" font-weight="700">Guard Links, Fault Bridges, and Safety</text>
-  <text x="64" y="128" fill="#4a5d7a" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24">The danger is the low-resistance shortcut and the large current it drives, not a mysterious extra store of current inside the battery.</text>
+  <text x="64" y="128" fill="#4a5d7a" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">
+    <tspan x="64" dy="0">The danger is the low-resistance shortcut and the large current it drives,</tspan>
+    <tspan x="64" dy="28">not a mysterious extra store of current inside the battery.</tspan>
+  </text>
 
   <rect x="64" y="176" width="544" height="376" rx="28" fill="#eef6ff" stroke="#93c5fd" stroke-width="4"/>
   <rect x="672" y="176" width="544" height="376" rx="28" fill="#fff1f2" stroke="#fca5a5" stroke-width="4"/>
@@ -25,12 +28,16 @@
   <path d="M916 356H1074" stroke="#2563eb" stroke-width="12" stroke-linecap="round"/>
   <rect x="1074" y="304" width="86" height="104" rx="18" fill="#dbeafe" stroke="#60a5fa" stroke-width="3"/>
   <path d="M734 356C860 222 1020 222 1146 356" stroke="#dc2626" stroke-width="14" stroke-dasharray="14 10" fill="none" stroke-linecap="round"/>
-  <text x="810" y="264" fill="#b91c1c" font-family="Trebuchet MS, Verdana, sans-serif" font-size="24" font-weight="700">Fault path: 1 ohm shortcut</text>
+  <rect x="802" y="234" width="282" height="42" rx="18" fill="#fff1f2" opacity="0.94"/>
+  <text x="824" y="262" fill="#b91c1c" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22" font-weight="700">Fault path: 1 ohm shortcut</text>
   <text x="748" y="448" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">12 V / 1 ohm -> 12 A</text>
   <text x="748" y="478" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Large current means rapid heating risk</text>
   <text x="748" y="508" fill="#475569" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">The guard link must open this unsafe path</text>
 
-  <rect x="64" y="590" width="1152" height="82" rx="24" fill="#ffffff" stroke="#fecaca" stroke-width="3"/>
+  <rect x="64" y="578" width="1152" height="102" rx="24" fill="#ffffff" stroke="#fecaca" stroke-width="3"/>
   <text x="96" y="626" fill="#10213f" font-family="Trebuchet MS, Verdana, sans-serif" font-size="26" font-weight="700">Safety reading</text>
-  <text x="96" y="656" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="22">Low resistance is dangerous because it can drive large current. Fuses and breakers interrupt that current; insulation prevents unsafe touch.</text>
+  <text x="96" y="654" fill="#42526b" font-family="Trebuchet MS, Verdana, sans-serif" font-size="20">
+    <tspan x="96" dy="0">Low resistance is dangerous because it can drive large current.</tspan>
+    <tspan x="96" dy="26">Fuses and breakers interrupt that current; insulation blocks unsafe touch.</tspan>
+  </text>
 </svg>
