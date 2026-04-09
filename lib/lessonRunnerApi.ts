@@ -13904,7 +13904,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260408h";
+  const assetVersion = "20260409a";
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const moduleId = lessonId.split("_", 1)[0];
     return `/lesson_assets/${moduleId}/${lessonId}/videos/${filename}?v=${assetVersion}`;
@@ -14665,6 +14665,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M8_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M8_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M8_L6", "captions.vtt"),
+      };
+    case "A1_L1":
+      return {
+        body: "Use this video to separate radiation messengers, matter particles, and nucleus particles before the worked example begins.",
+        caption: "Video explainer: particle families, charge tags, photons versus matter particles, and subatomic inventory before the lesson example.",
+        highlights: [
+          "Photons are radiation messengers, not matter particles",
+          "Leptons and hadrons belong to different families",
+          "Charge tags help, but family and structure matter more than charge alone",
+        ],
+        checkForUnderstanding: "If a particle is electrically neutral, what should you still check before deciding which family it belongs to?",
+        video_url: staticVideoAssetUrl("A1_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A1_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A1_L1", "captions.vtt"),
+      };
+    case "A1_L2":
+      return {
+        body: "Use this video to classify hadrons by quark packing before the worked example starts.",
+        caption: "Video explainer: quarks, hadrons, baryons, mesons, and why structure beats charge-only guessing before the lesson example.",
+        highlights: [
+          "Hadrons are composite particles built from quarks",
+          "Baryons contain three quarks",
+          "Mesons contain a quark-antiquark pair",
+        ],
+        checkForUnderstanding: "If a particle is known to be a hadron, what structural question should you ask first before naming it a baryon or meson?",
+        video_url: staticVideoAssetUrl("A1_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A1_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A1_L2", "captions.vtt"),
+      };
+    case "A1_L3":
+      return {
+        body: "Use this video to connect antiparticles, pair production, annihilation, and energy thresholds before the worked example begins.",
+        caption: "Video explainer: matched partners, photon-threshold reasoning, pair production, annihilation, and conservation before the lesson example.",
+        highlights: [
+          "Antiparticles are matched partners with opposite charge where relevant",
+          "Pair production needs enough photon energy to create both members",
+          "Annihilation and pair production both still obey conservation rules",
+        ],
+        checkForUnderstanding: "If a photon does not have enough energy to make both members of a particle-antiparticle pair, what should you conclude before checking anything else?",
+        video_url: staticVideoAssetUrl("A1_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A1_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A1_L3", "captions.vtt"),
+      };
+    case "A1_L4":
+      return {
+        body: "Use this video to separate interaction families by what they do before the worked example starts.",
+        caption: "Video explainer: exchange particles, strong interaction, weak interaction, and event-type clues before the lesson example.",
+        highlights: [
+          "Exchange particles carry interactions in particle models",
+          "Strong interaction is the binding story",
+          "Weak interaction is associated with particle-changing events",
+        ],
+        checkForUnderstanding: "If an event changes one particle type into another rather than just holding matter together, which interaction family should you suspect first?",
+        video_url: staticVideoAssetUrl("A1_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A1_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A1_L4", "captions.vtt"),
+      };
+    case "A1_L5":
+      return {
+        body: "Use this video to run charge, baryon-number, and lepton-number checks together before the worked example begins.",
+        caption: "Video explainer: conservation ledgers, before-and-after bookkeeping, and reaction screening before the lesson example.",
+        highlights: [
+          "Charge must balance before and after the event",
+          "Baryon number blocks impossible matter-balance stories",
+          "Lepton number is essential in beta and neutrino events",
+        ],
+        checkForUnderstanding: "If a reaction keeps charge balanced but breaks lepton number, what should your final judgment be?",
+        video_url: staticVideoAssetUrl("A1_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A1_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A1_L5", "captions.vtt"),
+      };
+    case "A1_L6":
+      return {
+        body: "Use this video to combine classification, interaction clues, and conservation evidence before the final worked example begins.",
+        caption: "Video explainer: particle-event analysis, reaction channels, conservation checks, and multi-clue interpretation before the lesson example.",
+        highlights: [
+          "The safest interpretation uses several clues at once",
+          "Decay and scattering are different event families",
+          "Conservation checks and particle identity should agree before a channel is accepted",
+        ],
+        checkForUnderstanding: "When two possible event explanations look plausible, what should you compare next before committing to one of them?",
+        video_url: staticVideoAssetUrl("A1_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A1_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A1_L6", "captions.vtt"),
       };
     default:
       return null;
