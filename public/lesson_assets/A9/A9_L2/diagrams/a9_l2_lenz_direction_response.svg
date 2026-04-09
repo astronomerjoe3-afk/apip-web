@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#ecfeff" stroke="#0f766e" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#0f766e" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#ecfeff" stroke="#0f766e" stroke-width="2"/><text x="440" y="170" fill="#115e59" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Lenz's Law and Direction of</tspan><tspan x="440" dy="34">Response</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#ecfeff" stroke="#0f766e" stroke-width="2"/><text x="198" y="284" fill="#115e59" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">The induced effect</tspan><tspan x="198" dy="23">opposes the change</tspan><tspan x="198" dy="23">that causes it.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#ecfeff" stroke="#0f766e" stroke-width="2"/><text x="406" y="284" fill="#115e59" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Lenz's law is</tspan><tspan x="406" dy="23">about direction,</tspan><tspan x="406" dy="23">not about making</tspan><tspan x="406" dy="23">the effect vanish.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#ecfeff" stroke="#0f766e" stroke-width="2"/><text x="614" y="284" fill="#115e59" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Energy</tspan><tspan x="614" dy="23">conservation sits</tspan><tspan x="614" dy="23">behind the</tspan><tspan x="614" dy="23">opposition rule.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#0f766e" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#0f766e" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#0f766e" stroke-width="2"/><text x="136" y="450" fill="#115e59" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Name the change first, then name what the loop would need</tspan><tspan x="136" dy="31">to do to oppose it. That order makes Lenz's law much</tspan><tspan x="136" dy="31">clearer.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#0f766e" stroke-width="2"/><text x="890" y="156" fill="#115e59" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">The induced effect opposes the</tspan><tspan x="890" dy="29">change that causes it.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#0f766e" stroke-width="2"/><text x="890" y="280" fill="#115e59" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Lenz's law is about direction,</tspan><tspan x="890" dy="29">not about making the effect</tspan><tspan x="890" dy="29">vanish.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#0f766e" stroke-width="2"/><text x="890" y="404" fill="#115e59" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Energy conservation sits behind</tspan><tspan x="890" dy="29">the opposition rule.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
-  <text x="890" y="534" fill="#115e59" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Lenz's law sets the induced direction by opposition to the</tspan><tspan x="890" dy="31">original change in flux.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#effcf6" stroke="#0f766e" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#115e59" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Lenz's Law Opposes the Change
+  </text>
+  <text x="700" y="140" fill="#0f766e" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Name the flux change first. Then choose the induced current direction that pushes back against that change.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#5eead4" stroke-width="3"/>
+  <rect x="126" y="226" width="560" height="486" rx="30" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2.5"/>
+  <rect x="714" y="226" width="560" height="486" rx="30" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2.5"/>
+
+  <text x="406" y="268" fill="#115e59" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Magnet moves toward loop
+  </text>
+  <text x="994" y="268" fill="#115e59" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Magnet moves away from loop
+  </text>
+
+  <rect x="194" y="364" width="132" height="180" rx="20" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <text x="260" y="434" fill="#1e40af" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">N</text>
+  <text x="260" y="496" fill="#1e40af" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">S</text>
+  <line x1="348" y1="454" x2="446" y2="454" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="446,454 418,438 418,470" fill="#f97316"/>
+  <text x="396" y="432" fill="#c2410c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">approach</text>
+  <ellipse cx="560" cy="454" rx="70" ry="116" fill="none" stroke="#0f766e" stroke-width="8"/>
+  <path d="M560 338 C612 364, 622 446, 580 546" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="580,546 556,526 588,518" fill="#10b981"/>
+  <text x="406" y="588" fill="#047857" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="406" dy="0">induced current makes the loop face</tspan>
+    <tspan x="406" dy="24">nearest the magnet act like N</tspan>
+  </text>
+  <text x="406" y="646" fill="#115e59" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="406" dy="0">Rising inward flux is opposed</tspan>
+    <tspan x="406" dy="22">by a field that pushes back.</tspan>
+  </text>
+
+  <rect x="868" y="364" width="132" height="180" rx="20" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <text x="934" y="434" fill="#1e40af" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">N</text>
+  <text x="934" y="496" fill="#1e40af" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">S</text>
+  <line x1="846" y1="454" x2="748" y2="454" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="748,454 776,438 776,470" fill="#f97316"/>
+  <text x="796" y="432" fill="#c2410c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">retreat</text>
+  <ellipse cx="786" cy="454" rx="70" ry="116" fill="none" stroke="#0f766e" stroke-width="8"/>
+  <path d="M786 338 C734 364, 724 446, 766 546" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="766,546 758,518 790,526" fill="#10b981"/>
+  <text x="994" y="588" fill="#047857" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="994" dy="0">induced current tries to keep the</tspan>
+    <tspan x="994" dy="24">original flux from dropping</tspan>
+  </text>
+  <text x="994" y="646" fill="#115e59" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="994" dy="0">Falling flux is opposed by a field</tspan>
+    <tspan x="994" dy="22">in the original direction.</tspan>
+  </text>
 </svg>
