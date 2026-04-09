@@ -1,10 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#f97316" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="440" y="170" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Kinetic Theory of Gases</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="198" y="284" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Gas particles move</tspan><tspan x="198" dy="23">randomly between</tspan><tspan x="198" dy="23">collisions.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="406" y="284" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Pressure comes</tspan><tspan x="406" dy="23">from wall</tspan><tspan x="406" dy="23">collisions.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="614" y="284" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Higher temperature</tspan><tspan x="614" dy="23">means larger</tspan><tspan x="614" dy="23">average kinetic</tspan><tspan x="614" dy="23">energy.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#f97316" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#f97316" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#f97316" stroke-width="2"/><text x="136" y="450" fill="#7c2d12" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Watch how often particles strike the wall before you talk</tspan><tspan x="136" dy="31">about pressure. The collision story is the foundation</tspan><tspan x="136" dy="31">here.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#f97316" stroke-width="2"/><text x="890" y="156" fill="#7c2d12" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Gas particles move randomly</tspan><tspan x="890" dy="29">between collisions.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#f97316" stroke-width="2"/><text x="890" y="280" fill="#7c2d12" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Pressure comes from wall</tspan><tspan x="890" dy="29">collisions.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#f97316" stroke-width="2"/><text x="890" y="404" fill="#7c2d12" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Higher temperature means larger</tspan><tspan x="890" dy="29">average kinetic energy.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#f97316" stroke-width="2"/>
-  <text x="890" y="534" fill="#7c2d12" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Kinetic theory links gas pressure and temperature back to</tspan><tspan x="890" dy="31">particle motion, collisions, and average kinetic energy.</tspan></text>
+  <rect width="1400" height="820" fill="#fffaf5"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#fff7ed" stroke="#f97316" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#7c2d12" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Random Motion and Wall Hits Explain Gas Pressure
+  </text>
+  <text x="700" y="140" fill="#9a3412" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Kinetic theory links particle motion, collision rate, and average kinetic energy into one explanation for pressure and temperature.
+  </text>
+
+  <rect x="86" y="186" width="1228" height="566" rx="34" fill="#ffffff" stroke="#fb923c" stroke-width="3"/>
+
+  <rect x="122" y="226" width="498" height="486" rx="30" fill="#fff7ed" stroke="#fdba74" stroke-width="2.5"/>
+  <rect x="780" y="226" width="498" height="486" rx="30" fill="#fff7ed" stroke="#fdba74" stroke-width="2.5"/>
+
+  <text x="371" y="268" fill="#7c2d12" font-size="29" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Cooler sample
+  </text>
+  <text x="1029" y="268" fill="#7c2d12" font-size="29" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Hotter sample
+  </text>
+
+  <rect x="176" y="320" width="390" height="258" rx="28" fill="#ffffff" stroke="#fb923c" stroke-width="2"/>
+  <rect x="834" y="320" width="390" height="258" rx="28" fill="#ffffff" stroke="#fb923c" stroke-width="2"/>
+
+  <circle cx="252" cy="390" r="14" fill="#f97316"/><line x1="266" y1="390" x2="292" y2="382" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="330" cy="474" r="14" fill="#f97316"/><line x1="344" y1="474" x2="368" y2="466" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="430" cy="424" r="14" fill="#f97316"/><line x1="444" y1="424" x2="468" y2="416" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="514" cy="502" r="14" fill="#f97316"/><line x1="528" y1="502" x2="550" y2="494" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <text x="371" y="606" fill="#334155" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    shorter arrows and fewer hard wall hits
+  </text>
+
+  <circle cx="910" cy="386" r="14" fill="#f97316"/><line x1="924" y1="386" x2="968" y2="370" stroke="#ea580c" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="986" cy="474" r="14" fill="#f97316"/><line x1="1000" y1="474" x2="1048" y2="456" stroke="#ea580c" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="1080" cy="420" r="14" fill="#f97316"/><line x1="1094" y1="420" x2="1138" y2="404" stroke="#ea580c" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="1162" cy="504" r="14" fill="#f97316"/><line x1="1176" y1="504" x2="1222" y2="486" stroke="#ea580c" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="936" cy="534" r="14" fill="#f97316"/><line x1="950" y1="534" x2="994" y2="516" stroke="#ea580c" stroke-width="6" stroke-linecap="round"/>
+  <text x="1029" y="606" fill="#334155" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    longer arrows and stronger wall-hit rate
+  </text>
+
+  <line x1="566" y1="392" x2="650" y2="392" stroke="#f97316" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="650,392 620,374 620,410" fill="#f97316"/>
+  <text x="652" y="382" fill="#7c2d12" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">higher T</text>
+
+  <rect x="440" y="636" width="520" height="62" rx="22" fill="#ffffff" stroke="#fb923c" stroke-width="2"/>
+  <text x="700" y="662" fill="#7c2d12" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Pressure comes from particle collisions with the walls.
+  </text>
+  <text x="700" y="688" fill="#334155" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    Higher temperature means larger average kinetic energy and stronger wall hits.
+  </text>
+
+  <text x="700" y="734" fill="#7c2d12" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    Random motion, collisions, and average particle energy are the foundation of the gas model.
+  </text>
 </svg>

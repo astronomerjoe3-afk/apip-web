@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#f97316" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="440" y="170" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Gas Laws and State Graphs</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="198" y="284" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Each gas-law path</tspan><tspan x="198" dy="23">depends on a</tspan><tspan x="198" dy="23">stated fixed</tspan><tspan x="198" dy="23">quantity.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="406" y="284" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">A graph shape only</tspan><tspan x="406" dy="23">makes sense when</tspan><tspan x="406" dy="23">the condition is</tspan><tspan x="406" dy="23">named.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#fff7ed" stroke="#f97316" stroke-width="2"/><text x="614" y="284" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">State diagrams are</tspan><tspan x="614" dy="23">maps of linked</tspan><tspan x="614" dy="23">variables, not</tspan><tspan x="614" dy="23">picture art.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#f97316" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#f97316" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#f97316" stroke-width="2"/><text x="136" y="450" fill="#7c2d12" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Name the fixed quantity before you describe the graph.</tspan><tspan x="136" dy="31">That one habit stops most gas-graph confusion.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#f97316" stroke-width="2"/><text x="890" y="156" fill="#7c2d12" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Each gas-law path depends on a</tspan><tspan x="890" dy="29">stated fixed quantity.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#f97316" stroke-width="2"/><text x="890" y="280" fill="#7c2d12" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">A graph shape only makes sense</tspan><tspan x="890" dy="29">when the condition is named.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#f97316" stroke-width="2"/><text x="890" y="404" fill="#7c2d12" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">State diagrams are maps of</tspan><tspan x="890" dy="29">linked variables, not picture</tspan><tspan x="890" dy="29">art.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#f97316" stroke-width="2"/>
-  <text x="890" y="534" fill="#7c2d12" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Gas-law graphs only become meaningful when the path is linked to</tspan><tspan x="890" dy="31">the condition that stays fixed.</tspan></text>
+  <rect width="1400" height="820" fill="#fffaf5"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#fff7ed" stroke="#f97316" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#7c2d12" font-size="38" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Gas-Law Graphs Need the Fixed Quantity Named
+  </text>
+  <text x="700" y="140" fill="#9a3412" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    A curve or straight line is not enough by itself. You have to state what stays fixed while the other variables change.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#fb923c" stroke-width="3"/>
+
+  <rect x="122" y="228" width="350" height="470" rx="30" fill="#fff7ed" stroke="#fdba74" stroke-width="2.5"/>
+  <rect x="526" y="228" width="350" height="470" rx="30" fill="#fff7ed" stroke="#fdba74" stroke-width="2.5"/>
+  <rect x="930" y="228" width="350" height="470" rx="30" fill="#fff7ed" stroke="#fdba74" stroke-width="2.5"/>
+
+  <text x="297" y="268" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Isothermal</text>
+  <text x="701" y="268" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Isobaric</text>
+  <text x="1105" y="268" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Isochoric</text>
+
+  <text x="297" y="300" fill="#334155" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">T fixed</text>
+  <text x="701" y="300" fill="#334155" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">p fixed</text>
+  <text x="1105" y="300" fill="#334155" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">V fixed</text>
+
+  <line x1="188" y1="598" x2="404" y2="598" stroke="#7c2d12" stroke-width="4"/>
+  <line x1="188" y1="354" x2="188" y2="598" stroke="#7c2d12" stroke-width="4"/>
+  <text x="412" y="606" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">V</text>
+  <text x="174" y="346" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">p</text>
+  <path d="M220 570 C254 488, 292 438, 364 382" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <text x="297" y="640" fill="#334155" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    p falls as V rises at fixed T
+  </text>
+
+  <line x1="592" y1="598" x2="808" y2="598" stroke="#7c2d12" stroke-width="4"/>
+  <line x1="592" y1="354" x2="592" y2="598" stroke="#7c2d12" stroke-width="4"/>
+  <text x="816" y="606" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">T</text>
+  <text x="578" y="346" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">V</text>
+  <path d="M620 568 L782 398" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <text x="701" y="640" fill="#334155" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    V rises linearly with T at fixed p
+  </text>
+
+  <line x1="996" y1="598" x2="1212" y2="598" stroke="#7c2d12" stroke-width="4"/>
+  <line x1="996" y1="354" x2="996" y2="598" stroke="#7c2d12" stroke-width="4"/>
+  <text x="1220" y="606" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">T</text>
+  <text x="982" y="346" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">p</text>
+  <path d="M1024 570 L1186 392" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <text x="1105" y="640" fill="#334155" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    p rises linearly with T at fixed V
+  </text>
+
+  <text x="700" y="734" fill="#7c2d12" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    Name the fixed quantity first. That one habit keeps gas-law graphs tied to the chamber story.
+  </text>
 </svg>
