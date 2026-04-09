@@ -7142,12 +7142,48 @@ function renderedPromptOverride(item: UnknownRecord): string | null {
   }
 }
 
+function promptInvitesBecauseAnswer(prompt: string): boolean {
+  const key = normalizePromptKey(prompt);
+  if (!key) return false;
+  return (
+    key.startsWith("why ") ||
+    key.startsWith("explain why ") ||
+    key.startsWith("describe why ") ||
+    key.startsWith("tell why ") ||
+    key.startsWith("state why ") ||
+    key.includes("strongest reason") ||
+    key.includes("main reason") ||
+    key.includes("what is the reason") ||
+    key.includes("give the reason")
+  );
+}
+
+function stripLeadingBecause(answer: string): string {
+  const candidate = text(answer).trim();
+  if (!/^because\b/i.test(candidate)) return candidate;
+  const stripped = candidate.replace(/^because\b[:\s]*/i, "").trim();
+  if (!stripped) return candidate;
+  return stripped[0].toUpperCase() + stripped.slice(1);
+}
+
+function displayShortAnswerCandidateVariants(item: UnknownRecord, answer: string): string[] {
+  const candidate = text(answer).trim();
+  if (!candidate) return [];
+
+  const values = [candidate];
+  if (!promptInvitesBecauseAnswer(text(item.prompt))) {
+    const stripped = stripLeadingBecause(candidate);
+    if (stripped && stripped !== candidate) values.push(stripped);
+  }
+  return [...new Set(values)];
+}
+
 function shortAnswerDisplayCandidates(item: UnknownRecord): string[] {
   const explicitValues = [
     text(item.correct_answer || item.correctAnswer).trim(),
     ...asList(item.accepted_answers).map((entry) => text(entry).trim()),
     ...asList(item.acceptedAnswers).map((entry) => text(entry).trim()),
-  ].filter(Boolean);
+  ].filter(Boolean).flatMap((entry) => displayShortAnswerCandidateVariants(item, entry));
 
   if (explicitValues.length > 0) {
     return [...new Set(explicitValues)];
@@ -7157,7 +7193,7 @@ function shortAnswerDisplayCandidates(item: UnknownRecord): string[] {
   return [...new Set([
     text(meta?.correctAnswer).trim(),
     ...(meta?.acceptedAnswers || []).map((entry) => text(entry).trim()),
-  ].filter(Boolean))];
+  ].filter(Boolean).flatMap((entry) => displayShortAnswerCandidateVariants(item, entry)))];
 }
 
 function isGenericLessonLanguagePrompt(prompt: string): boolean {
@@ -7188,14 +7224,14 @@ function isGenericShortAnswerDisplayAnswer(answer: string): boolean {
   );
 }
 
-function shortAnswerDisplaySpecificityScore(answer: string): number {
+function shortAnswerDisplaySpecificityScore(answer: string, item: UnknownRecord): number {
   const candidate = text(answer).trim();
   if (!candidate) return Number.NEGATIVE_INFINITY;
 
   const tokens = meaningfulOpenAnswerTokens(candidate);
   let score = Math.min(tokens.length, 18);
 
-  if (/^because\b/i.test(candidate)) score += 2;
+  if (/^because\b/i.test(candidate)) score += promptInvitesBecauseAnswer(text(item.prompt)) ? 2 : -2;
   if (/[.?!]$/.test(candidate)) score += 1;
   if (candidate.length >= 60) score += 2;
   if (candidate.length >= 110) score += 1;
@@ -7210,7 +7246,7 @@ function bestShortAnswerDisplayCandidate(item: UnknownRecord): string {
   if (candidates.length === 0) return "";
 
   return [...candidates].sort((left, right) => {
-    const scoreDelta = shortAnswerDisplaySpecificityScore(right) - shortAnswerDisplaySpecificityScore(left);
+    const scoreDelta = shortAnswerDisplaySpecificityScore(right, item) - shortAnswerDisplaySpecificityScore(left, item);
     if (scoreDelta !== 0) return scoreDelta;
     return right.length - left.length;
   })[0];
