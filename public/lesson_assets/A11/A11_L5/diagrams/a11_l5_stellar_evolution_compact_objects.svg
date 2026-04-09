@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="440" y="170" fill="#1e3a8a" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Stellar Evolution and Compact</tspan><tspan x="440" dy="34">Objects</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="198" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Stellar evolution</tspan><tspan x="198" dy="23">depends strongly</tspan><tspan x="198" dy="23">on initial mass.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="406" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Lower-mass stars</tspan><tspan x="406" dy="23">can end as white</tspan><tspan x="406" dy="23">dwarfs.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="614" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Massive stars can</tspan><tspan x="614" dy="23">leave neutron</tspan><tspan x="614" dy="23">stars or black</tspan><tspan x="614" dy="23">holes after</tspan><tspan x="614" dy="23">supernovae.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2"/><text x="136" y="450" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Compare two starting masses first. The branch difference</tspan><tspan x="136" dy="31">matters more than memorizing isolated remnant names.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="156" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Stellar evolution depends</tspan><tspan x="890" dy="29">strongly on initial mass.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="280" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Lower-mass stars can end as</tspan><tspan x="890" dy="29">white dwarfs.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="404" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Massive stars can leave neutron</tspan><tspan x="890" dy="29">stars or black holes after</tspan><tspan x="890" dy="29">supernovae.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
-  <text x="890" y="534" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Compact objects are mass-dependent stellar endings, not separate</tspan><tspan x="890" dy="31">disconnected astronomy facts.</tspan></text>
+  <rect width="1400" height="820" fill="#030712"/>
+  <rect x="34" y="28" width="1332" height="764" rx="38" fill="#101a2d" stroke="#f97316" stroke-width="3"/>
+  <text x="700" y="96" fill="#f8fbff" font-size="40" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Stellar Evolution and Compact Objects</text>
+  <text x="700" y="136" fill="#fdba74" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">A star's initial mass sets which path it follows and which compact remnant, if any, is left at the end.</text>
+
+  <rect x="84" y="176" width="1232" height="580" rx="34" fill="#151f33" stroke="#475569" stroke-width="3"/>
+  <text x="142" y="226" fill="#fdba74" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">mass-dependent pathways</text>
+
+  <ellipse cx="176" cy="420" rx="92" ry="56" fill="#334155"/>
+  <ellipse cx="146" cy="410" rx="38" ry="24" fill="#475569"/>
+  <ellipse cx="212" cy="432" rx="44" ry="26" fill="#64748b"/>
+  <text x="176" y="500" fill="#e2e8f0" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">stellar nebula</text>
+
+  <circle cx="382" cy="420" r="54" fill="#f59e0b"/>
+  <circle cx="382" cy="420" r="82" fill="none" stroke="#fdba74" stroke-opacity="0.28" stroke-width="20"/>
+  <text x="382" y="500" fill="#fde68a" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">main sequence</text>
+
+  <line x1="268" y1="420" x2="312" y2="420" stroke="#f8fafc" stroke-width="5"/>
+  <polygon points="312,420 288,406 288,434" fill="#f8fafc"/>
+
+  <path d="M 442 402 C 500 354 562 322 628 302" fill="none" stroke="#38bdf8" stroke-width="5"/>
+  <polygon points="628,302 610,296 616,316" fill="#38bdf8"/>
+  <path d="M 442 438 C 500 494 562 538 628 564" fill="none" stroke="#f97316" stroke-width="5"/>
+  <polygon points="628,564 610,550 606,572" fill="#f97316"/>
+  <text x="546" y="318" fill="#bae6fd" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">lower starting mass</text>
+  <text x="542" y="604" fill="#fdba74" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">higher starting mass</text>
+
+  <circle cx="732" cy="292" r="62" fill="#fb7185"/>
+  <text x="732" y="378" fill="#fecdd3" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">red giant</text>
+  <line x1="794" y1="292" x2="878" y2="292" stroke="#f8fafc" stroke-width="5"/>
+  <polygon points="878,292 854,278 854,306" fill="#f8fafc"/>
+  <circle cx="970" cy="292" r="34" fill="#e2e8f0"/>
+  <circle cx="970" cy="292" r="58" fill="none" stroke="#cbd5e1" stroke-width="6" stroke-dasharray="12 10"/>
+  <text x="970" y="378" fill="#e2e8f0" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">white dwarf</text>
+
+  <circle cx="732" cy="560" r="74" fill="#ef4444"/>
+  <text x="732" y="660" fill="#fecaca" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">red supergiant</text>
+  <line x1="808" y1="560" x2="892" y2="560" stroke="#f8fafc" stroke-width="5"/>
+  <polygon points="892,560 868,546 868,574" fill="#f8fafc"/>
+  <circle cx="964" cy="560" r="46" fill="#f59e0b"/>
+  <circle cx="964" cy="560" r="78" fill="none" stroke="#fbbf24" stroke-width="7" stroke-dasharray="10 10"/>
+  <text x="964" y="660" fill="#fde68a" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">supernova</text>
+
+  <line x1="1014" y1="546" x2="1090" y2="504" stroke="#93c5fd" stroke-width="5"/>
+  <polygon points="1090,504 1074,502 1084,518" fill="#93c5fd"/>
+  <line x1="1014" y1="574" x2="1090" y2="616" stroke="#c084fc" stroke-width="5"/>
+  <polygon points="1090,616 1084,600 1074,616" fill="#c084fc"/>
+  <circle cx="1164" cy="492" r="26" fill="#60a5fa"/>
+  <circle cx="1164" cy="492" r="42" fill="none" stroke="#93c5fd" stroke-width="5"/>
+  <text x="1164" y="568" fill="#bfdbfe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">neutron star</text>
+  <circle cx="1164" cy="628" r="30" fill="#020617"/>
+  <circle cx="1164" cy="628" r="56" fill="none" stroke="#a855f7" stroke-width="5"/>
+  <text x="1164" y="708" fill="#ddd6fe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">black hole</text>
 </svg>

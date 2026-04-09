@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="440" y="170" fill="#1e3a8a" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Parallax, Standard Candles, and</tspan><tspan x="440" dy="34">the Distance Ladder</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="198" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Parallax works</tspan><tspan x="198" dy="23">well for</tspan><tspan x="198" dy="23">relatively nearby</tspan><tspan x="198" dy="23">stars.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="406" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Standard candles</tspan><tspan x="406" dy="23">use known</tspan><tspan x="406" dy="23">luminosity to</tspan><tspan x="406" dy="23">infer distance</tspan><tspan x="406" dy="23">from apparent</tspan><tspan x="406" dy="23">brightness.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="614" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">The distance</tspan><tspan x="614" dy="23">ladder uses</tspan><tspan x="614" dy="23">different methods</tspan><tspan x="614" dy="23">for different</tspan><tspan x="614" dy="23">scales.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2"/><text x="136" y="450" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Use the nearby parallax rung first, then ask why it stops</tspan><tspan x="136" dy="31">being practical. That motivates the ladder idea naturally.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="156" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Parallax works well for</tspan><tspan x="890" dy="29">relatively nearby stars.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="280" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Standard candles use known</tspan><tspan x="890" dy="29">luminosity to infer distance</tspan><tspan x="890" dy="29">from apparent brightness.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="404" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">The distance ladder uses</tspan><tspan x="890" dy="29">different methods for different</tspan><tspan x="890" dy="29">scales.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
-  <text x="890" y="534" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Astronomical distance measurement is a ladder because different</tspan><tspan x="890" dy="31">scales require different evidence methods.</tspan></text>
+  <rect width="1400" height="820" fill="#04111c"/>
+  <rect x="34" y="28" width="1332" height="764" rx="38" fill="#0f2131" stroke="#8b5cf6" stroke-width="3"/>
+  <text x="700" y="96" fill="#f8fbff" font-size="40" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Parallax, Standard Candles, and the Distance Ladder</text>
+  <text x="700" y="136" fill="#ddd6fe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">Nearby stars can be triangulated. Farther targets need brightness-calibrated rungs on the same distance ladder.</text>
+
+  <rect x="84" y="176" width="596" height="580" rx="34" fill="#14263a" stroke="#475569" stroke-width="3"/>
+  <text x="142" y="226" fill="#c4b5fd" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">parallax for nearby stars</text>
+  <circle cx="372" cy="418" r="54" fill="#fbbf24"/>
+  <text x="372" y="428" fill="#1f2937" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Sun</text>
+  <circle cx="196" cy="598" r="20" fill="#60a5fa"/>
+  <circle cx="548" cy="598" r="20" fill="#60a5fa"/>
+  <text x="196" y="640" fill="#bfdbfe" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">Earth 1</text>
+  <text x="548" y="640" fill="#bfdbfe" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">Earth 2</text>
+  <circle cx="372" cy="232" r="18" fill="#f8fafc"/>
+  <text x="372" y="198" fill="#f8fafc" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">nearby star</text>
+  <line x1="196" y1="598" x2="372" y2="232" stroke="#c084fc" stroke-width="4"/>
+  <line x1="548" y1="598" x2="372" y2="232" stroke="#c084fc" stroke-width="4"/>
+  <line x1="196" y1="598" x2="548" y2="598" stroke="#f59e0b" stroke-width="4" stroke-dasharray="12 8"/>
+  <text x="372" y="584" fill="#fde68a" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">baseline from opposite sides of orbit</text>
+  <circle cx="500" cy="270" r="8" fill="#94a3b8"/>
+  <circle cx="538" cy="254" r="8" fill="#94a3b8"/>
+  <circle cx="576" cy="274" r="8" fill="#94a3b8"/>
+  <text x="508" y="218" fill="#cbd5e1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">background stars</text>
+  <text x="372" y="708" fill="#ddd6fe" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">Parallax shift is useful nearby, then the angle becomes too tiny.</text>
+
+  <rect x="714" y="176" width="602" height="580" rx="34" fill="#14263a" stroke="#475569" stroke-width="3"/>
+  <text x="772" y="226" fill="#c4b5fd" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">distance ladder for larger scales</text>
+  <line x1="860" y1="664" x2="860" y2="300" stroke="#e9d5ff" stroke-width="8" stroke-linecap="round"/>
+  <line x1="832" y1="612" x2="888" y2="612" stroke="#e9d5ff" stroke-width="8" stroke-linecap="round"/>
+  <line x1="832" y1="524" x2="888" y2="524" stroke="#e9d5ff" stroke-width="8" stroke-linecap="round"/>
+  <line x1="832" y1="436" x2="888" y2="436" stroke="#e9d5ff" stroke-width="8" stroke-linecap="round"/>
+  <line x1="832" y1="348" x2="888" y2="348" stroke="#e9d5ff" stroke-width="8" stroke-linecap="round"/>
+  <text x="922" y="356" fill="#f8fafc" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">galaxy-scale rungs</text>
+  <text x="922" y="444" fill="#f8fafc" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">standard candles</text>
+  <text x="922" y="532" fill="#f8fafc" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">parallax</text>
+  <text x="922" y="620" fill="#f8fafc" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">Solar System baseline</text>
+  <circle cx="1128" cy="440" r="36" fill="#f59e0b"/>
+  <circle cx="1128" cy="440" r="62" fill="none" stroke="#fb7185" stroke-width="6" stroke-dasharray="14 10"/>
+  <text x="1128" y="448" fill="#fff7ed" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Cepheid</text>
+  <rect x="992" y="408" width="244" height="92" rx="20" fill="#2a173b" stroke="#fb7185" stroke-width="2"/>
+  <text x="1114" y="446" fill="#f5d0fe" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">known luminosity plus</text>
+  <text x="1114" y="474" fill="#f5d0fe" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">observed brightness</text>
+  <text x="1128" y="684" fill="#ddd6fe" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">Different scales need different evidence methods.</text>
 </svg>

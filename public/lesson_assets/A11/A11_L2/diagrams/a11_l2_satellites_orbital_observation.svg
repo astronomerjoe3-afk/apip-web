@@ -1,10 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="440" y="170" fill="#1e3a8a" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Satellites and Orbital Observation</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="198" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Gravity provides</tspan><tspan x="198" dy="23">the centripetal</tspan><tspan x="198" dy="23">pull for satellite</tspan><tspan x="198" dy="23">motion.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="406" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Orbital altitude</tspan><tspan x="406" dy="23">changes speed and</tspan><tspan x="406" dy="23">period.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="614" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Observation</tspan><tspan x="614" dy="23">purpose depends on</tspan><tspan x="614" dy="23">the chosen orbit.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2"/><text x="136" y="450" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Compare low orbit and geostationary-style orbit side by</tspan><tspan x="136" dy="31">side before you talk about applications.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="156" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Gravity provides the centripetal</tspan><tspan x="890" dy="29">pull for satellite motion.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="280" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Orbital altitude changes speed</tspan><tspan x="890" dy="29">and period.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="404" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Observation purpose depends on</tspan><tspan x="890" dy="29">the chosen orbit.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
-  <text x="890" y="534" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Satellite behaviour and usefulness both come from</tspan><tspan x="890" dy="31">gravity-provided orbiting and the altitude chosen for the</tspan><tspan x="890" dy="31">mission.</tspan></text>
+  <rect width="1400" height="820" fill="#02111f"/>
+  <rect x="34" y="28" width="1332" height="764" rx="38" fill="#09243d" stroke="#60a5fa" stroke-width="3"/>
+  <text x="700" y="96" fill="#f8fbff" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Satellites and Orbital Observation</text>
+  <text x="700" y="136" fill="#b7e1ff" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">Gravity bends motion into orbit, and altitude changes speed, period, and what the mission can observe.</text>
+
+  <rect x="84" y="176" width="742" height="580" rx="34" fill="#0d2d4a" stroke="#2f5d84" stroke-width="3"/>
+  <text x="154" y="214" fill="#93c5fd" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">orbit comparison</text>
+  <circle cx="392" cy="474" r="118" fill="#1d4ed8"/>
+  <path d="M 392 314 A 160 160 0 1 1 391.9 314" fill="none" stroke="#38bdf8" stroke-width="5"/>
+  <path d="M 392 224 A 250 250 0 1 1 391.9 224" fill="none" stroke="#22c55e" stroke-width="5" stroke-dasharray="12 10"/>
+  <rect x="530" y="438" width="28" height="18" rx="6" fill="#e2e8f0"/>
+  <rect x="542" y="426" width="8" height="42" rx="4" fill="#cbd5e1"/>
+  <line x1="522" y1="447" x2="498" y2="447" stroke="#e2e8f0" stroke-width="4"/>
+  <line x1="566" y1="447" x2="590" y2="447" stroke="#e2e8f0" stroke-width="4"/>
+  <rect x="378" y="215" width="28" height="18" rx="6" fill="#dcfce7"/>
+  <rect x="390" y="203" width="8" height="42" rx="4" fill="#bbf7d0"/>
+  <line x1="370" y1="224" x2="346" y2="224" stroke="#dcfce7" stroke-width="4"/>
+  <line x1="414" y1="224" x2="438" y2="224" stroke="#dcfce7" stroke-width="4"/>
+  <path d="M 546 400 C 532 378 532 356 546 334" fill="none" stroke="#38bdf8" stroke-width="5"/>
+  <polygon points="546,334 532,344 552,354" fill="#38bdf8"/>
+  <path d="M 322 226 C 350 208 382 202 418 206" fill="none" stroke="#22c55e" stroke-width="5"/>
+  <polygon points="418,206 398,196 400,218" fill="#22c55e"/>
+  <line x1="392" y1="474" x2="544" y2="447" stroke="#60a5fa" stroke-width="4" stroke-dasharray="8 8"/>
+  <line x1="392" y1="474" x2="392" y2="224" stroke="#4ade80" stroke-width="4" stroke-dasharray="8 8"/>
+  <text x="506" y="286" fill="#bae6fd" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">low orbit</text>
+  <text x="506" y="316" fill="#e2e8f0" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">faster, shorter period,</text>
+  <text x="506" y="342" fill="#e2e8f0" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">sharper detail</text>
+  <text x="132" y="258" fill="#bbf7d0" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">high orbit</text>
+  <text x="132" y="288" fill="#dcfce7" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">slower, longer period,</text>
+  <text x="132" y="314" fill="#dcfce7" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">wide-area watch</text>
+  <text x="392" y="486" fill="#dbeafe" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Earth</text>
+  <text x="392" y="694" fill="#b7e1ff" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">gravity provides the centripetal pull that keeps each satellite turning</text>
+
+  <rect x="858" y="176" width="458" height="176" rx="28" fill="#102c46" stroke="#4a7aa8" stroke-width="3"/>
+  <text x="890" y="220" fill="#dbeafe" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">mission fit</text>
+  <rect x="900" y="254" width="164" height="64" rx="20" fill="#153e75"/>
+  <text x="982" y="294" fill="#eff6ff" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">weather</text>
+  <rect x="1084" y="254" width="188" height="64" rx="20" fill="#14532d"/>
+  <text x="1178" y="294" fill="#ecfdf5" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">mapping</text>
+  <text x="890" y="334" fill="#b7e1ff" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">orbit choice changes coverage, repeat time,</text>
+  <text x="890" y="360" fill="#b7e1ff" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">and image detail</text>
+
+  <rect x="858" y="378" width="458" height="168" rx="28" fill="#102c46" stroke="#4a7aa8" stroke-width="3"/>
+  <text x="890" y="424" fill="#dbeafe" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">core ideas</text>
+  <text x="890" y="466" fill="#eff6ff" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">1. gravity turns straight-line motion into orbit</text>
+  <text x="890" y="500" fill="#eff6ff" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">2. altitude changes orbital speed and period</text>
+  <text x="890" y="534" fill="#eff6ff" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">3. observation goals decide which orbit is useful</text>
+
+  <rect x="858" y="572" width="458" height="184" rx="28" fill="#102c46" stroke="#4a7aa8" stroke-width="3"/>
+  <text x="1087" y="626" fill="#f8fbff" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Satellites are not just "up there".</text>
+  <text x="1087" y="668" fill="#b7e1ff" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">Their orbit sets how fast they move,</text>
+  <text x="1087" y="698" fill="#b7e1ff" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">how often they return, and what they can see.</text>
 </svg>

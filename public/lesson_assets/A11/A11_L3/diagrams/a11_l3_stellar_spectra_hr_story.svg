@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="440" y="170" fill="#1e3a8a" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Stellar Spectra and the H-R Story</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="198" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">A star's spectrum</tspan><tspan x="198" dy="23">carries</tspan><tspan x="198" dy="23">temperature and</tspan><tspan x="198" dy="23">composition clues.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="406" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">The H-R diagram</tspan><tspan x="406" dy="23">compares</tspan><tspan x="406" dy="23">luminosity with</tspan><tspan x="406" dy="23">temperature.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2"/><text x="614" y="284" fill="#1e3a8a" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Main sequence,</tspan><tspan x="614" dy="23">giants, and white</tspan><tspan x="614" dy="23">dwarfs occupy</tspan><tspan x="614" dy="23">different H-R</tspan><tspan x="614" dy="23">regions.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#1d4ed8" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2"/><text x="136" y="450" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Read the spectrum before you name the H-R region. The</tspan><tspan x="136" dy="31">spectral clue anchors the temperature story first.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="156" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">A star's spectrum carries</tspan><tspan x="890" dy="29">temperature and composition</tspan><tspan x="890" dy="29">clues.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="280" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">The H-R diagram compares</tspan><tspan x="890" dy="29">luminosity with temperature.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/><text x="890" y="404" fill="#1e3a8a" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Main sequence, giants, and white</tspan><tspan x="890" dy="29">dwarfs occupy different H-R</tspan><tspan x="890" dy="29">regions.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
-  <text x="890" y="534" fill="#1e3a8a" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Stellar spectra and H-R position work together to reveal</tspan><tspan x="890" dy="31">temperature, luminosity, and evolutionary stage.</tspan></text>
+  <defs>
+    <linearGradient id="spectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="28%" stop-color="#e0f2fe"/>
+      <stop offset="55%" stop-color="#fef08a"/>
+      <stop offset="78%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="820" fill="#020617"/>
+  <rect x="34" y="28" width="1332" height="764" rx="38" fill="#0f172a" stroke="#818cf8" stroke-width="3"/>
+  <text x="700" y="96" fill="#f8fbff" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Stellar Spectra and the H-R Story</text>
+  <text x="700" y="136" fill="#c7d2fe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">A spectrum gives temperature clues, and the H-R diagram shows where that star sits in the wider stellar story.</text>
+
+  <rect x="84" y="176" width="544" height="580" rx="34" fill="#111c34" stroke="#475569" stroke-width="3"/>
+  <text x="144" y="226" fill="#a5b4fc" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">reading the spectrum</text>
+  <circle cx="214" cy="352" r="54" fill="#fbbf24"/>
+  <circle cx="214" cy="352" r="76" fill="none" stroke="#fcd34d" stroke-opacity="0.35" stroke-width="22"/>
+  <text x="214" y="448" fill="#fde68a" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">star light</text>
+  <line x1="284" y1="352" x2="358" y2="352" stroke="#f8fafc" stroke-width="5"/>
+  <polygon points="358,352 334,338 334,366" fill="#f8fafc"/>
+  <rect x="150" y="520" width="412" height="70" rx="20" fill="url(#spectrum)" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="220" y1="520" x2="220" y2="590" stroke="#020617" stroke-width="10"/>
+  <line x1="302" y1="520" x2="302" y2="590" stroke="#020617" stroke-width="8"/>
+  <line x1="388" y1="520" x2="388" y2="590" stroke="#020617" stroke-width="9"/>
+  <line x1="466" y1="520" x2="466" y2="590" stroke="#020617" stroke-width="7"/>
+  <text x="356" y="498" fill="#e2e8f0" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">absorption lines reveal composition and temperature clues</text>
+  <text x="186" y="648" fill="#93c5fd" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">blue-hot end</text>
+  <text x="484" y="648" fill="#fca5a5" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="end">red-cool end</text>
+  <text x="144" y="692" fill="#cbd5e1" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">Spectral pattern first: ask what colour the star is</text>
+  <text x="144" y="720" fill="#cbd5e1" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">and which absorption lines stand out.</text>
+
+  <rect x="662" y="176" width="654" height="580" rx="34" fill="#111c34" stroke="#475569" stroke-width="3"/>
+  <text x="722" y="226" fill="#a5b4fc" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">placing the star on the H-R diagram</text>
+  <line x1="762" y1="664" x2="1222" y2="664" stroke="#cbd5e1" stroke-width="4"/>
+  <line x1="762" y1="664" x2="762" y2="298" stroke="#cbd5e1" stroke-width="4"/>
+  <text x="990" y="714" fill="#cbd5e1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">temperature: hot on the left, cooler on the right</text>
+  <text x="716" y="486" fill="#cbd5e1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" transform="rotate(-90 716 486)" text-anchor="middle">luminosity</text>
+
+  <path d="M 814 616 C 906 548 1000 474 1132 332" fill="none" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="858" cy="570" r="18" fill="#93c5fd"/>
+  <circle cx="978" cy="476" r="20" fill="#93c5fd"/>
+  <circle cx="1096" cy="368" r="22" fill="#93c5fd"/>
+  <text x="1020" y="470" fill="#dbeafe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">main sequence</text>
+
+  <ellipse cx="1126" cy="302" rx="90" ry="56" fill="#f59e0b" fill-opacity="0.35" stroke="#fbbf24" stroke-width="3"/>
+  <text x="1126" y="308" fill="#fde68a" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">giants</text>
+
+  <ellipse cx="856" cy="352" rx="86" ry="44" fill="#38bdf8" fill-opacity="0.25" stroke="#7dd3fc" stroke-width="3"/>
+  <text x="856" y="360" fill="#bae6fd" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">white dwarfs</text>
+
+  <rect x="930" y="534" width="310" height="110" rx="24" fill="#172554" stroke="#818cf8" stroke-width="3"/>
+  <text x="1085" y="576" fill="#eef2ff" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">Put the spectrum clue together</text>
+  <text x="1085" y="606" fill="#c7d2fe" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">with H-R position to infer</text>
+  <text x="1085" y="632" fill="#c7d2fe" font-size="19" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">temperature, luminosity, and stage.</text>
 </svg>
