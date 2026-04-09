@@ -1,15 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-  <rect width="1200" height="800" fill="#0f172a"/>
-  <text x="60" y="90" fill="#f8fafc" font-family="Georgia, serif" font-size="58" font-weight="700">Frame maps disagree on span and same-now</text>
-  <text x="60" y="150" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="28">Proper length, contracted length, and simultaneity stay on one relativity board.</text>
-  <rect x="80" y="220" width="1040" height="500" rx="34" fill="#111827" stroke="#334155" stroke-width="5"/>
-  <text x="130" y="290" fill="#93c5fd" font-family="Arial, sans-serif" font-size="34" font-weight="700">Proper length</text>
-  <rect x="130" y="340" width="430" height="28" rx="14" fill="#38bdf8"/>
-  <text x="130" y="430" fill="#22c55e" font-family="Arial, sans-serif" font-size="34" font-weight="700">Contracted length</text>
-  <rect x="130" y="480" width="300" height="28" rx="14" fill="#22c55e"/>
-  <line x1="760" y1="340" x2="720" y2="620" stroke="#f97316" stroke-width="6"/>
-  <line x1="920" y1="340" x2="980" y2="620" stroke="#f97316" stroke-width="6"/>
-  <text x="650" y="290" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">Same-now slip</text>
-  <text x="640" y="670" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="24">Different frames need not agree on which</text>
-  <text x="640" y="702" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="24">separated events are simultaneous.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#08101e"/>
+      <stop offset="100%" stop-color="#17385d"/>
+    </linearGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 44px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 20px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #47627f; stroke-width: 3; }
+      .panel { fill: #16243a; stroke: #587797; stroke-width: 2.4; }
+      .label { fill: #f8fafc; font: 700 23px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="640" y="84" class="title" text-anchor="middle">Choose the Damping Style That Fits the Application</text>
+  <text x="640" y="119" class="subtitle" text-anchor="middle">
+    Application questions are really settling-style questions: do you want a small fade-out, the fastest clean return, or a slower careful return?
+  </text>
+
+  <rect x="96" y="164" width="1088" height="496" rx="34" class="card"/>
+  <rect x="128" y="214" width="320" height="392" rx="28" class="panel"/>
+  <rect x="480" y="214" width="320" height="392" rx="28" class="panel"/>
+  <rect x="832" y="214" width="320" height="392" rx="28" class="panel"/>
+
+  <text x="288" y="252" class="label" text-anchor="middle">Suspension style</text>
+  <text x="640" y="252" class="label" text-anchor="middle">Needle or door closer</text>
+  <text x="992" y="252" class="label" text-anchor="middle">Slow safe return</text>
+
+  <path d="M168 382 C198 314, 226 314, 254 382 S310 450, 338 382 S366 354, 408 382" fill="none" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/>
+  <text x="288" y="472" class="body" text-anchor="middle">A little overshoot is acceptable</text>
+  <text x="288" y="500" class="body" text-anchor="middle">if the motion settles quickly after bumps.</text>
+
+  <path d="M520 314 C568 356, 612 390, 762 438" fill="none" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
+  <text x="640" y="474" class="body" text-anchor="middle">Use critical damping when you want</text>
+  <text x="640" y="502" class="body" text-anchor="middle">the fastest clean stop without oscillation.</text>
+
+  <path d="M872 330 C928 362, 988 392, 1112 438" fill="none" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+  <text x="992" y="478" class="body" text-anchor="middle">Heavy damping is safer when slow settling</text>
+  <text x="992" y="506" class="body" text-anchor="middle">matters more than quick response.</text>
+
+  <text x="640" y="630" class="small" text-anchor="middle">Read the application goal first, then pick the damping trace that matches it.</text>
 </svg>

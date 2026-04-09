@@ -1,30 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0b1020"/>
-      <stop offset="100%" stop-color="#172554"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#09111f"/>
+      <stop offset="100%" stop-color="#17375b"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
-    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 46px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #486480; stroke-width: 3; }
+      .panel { fill: #15243a; stroke: #587798; stroke-width: 2.4; }
+      .label { fill: #f8fafc; font: 700 24px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="640.0" cy="360.0" r="201.6" fill="url(#glow)"/>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="640" y="84" class="title" text-anchor="middle">Displacement, Velocity, and Acceleration Stay Linked</text>
+  <text x="640" y="121" class="subtitle" text-anchor="middle">
+    The three SHM traces are not separate stories. They are phase-linked views of the same oscillation.
+  </text>
 
-  <rect x="179.2" y="144.0" width="921.6" height="432.0"
-        rx="28" fill="#0f172a" fill-opacity="0.78" stroke="#334155" stroke-width="3"/>
+  <rect x="84" y="162" width="1112" height="500" rx="34" class="card"/>
+  <rect x="122" y="208" width="742" height="404" rx="28" class="panel"/>
+  <rect x="892" y="208" width="266" height="404" rx="28" class="panel"/>
 
-  <circle cx="384.0" cy="345.6" r="43.2" fill="#facc15"/>
-  <circle cx="640.0" cy="288.0" r="25.2" fill="#38bdf8"/>
-  <circle cx="844.8" cy="403.2" r="18.0" fill="#a78bfa"/>
+  <text x="493" y="246" class="label" text-anchor="middle">One cycle across three traces</text>
+  <text x="1025" y="246" class="label" text-anchor="middle">Phase clues</text>
 
-  <line x1="384.0" y1="345.6" x2="640.0" y2="288.0" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="640.0" y1="288.0" x2="844.8" y2="403.2" stroke="#a78bfa" stroke-width="4"/>
+  <line x1="182" y1="302" x2="804" y2="302" stroke="#415a77" stroke-width="2"/>
+  <line x1="182" y1="410" x2="804" y2="410" stroke="#415a77" stroke-width="2"/>
+  <line x1="182" y1="518" x2="804" y2="518" stroke="#415a77" stroke-width="2"/>
+  <line x1="182" y1="254" x2="182" y2="560" stroke="#64748b" stroke-width="3"/>
 
-  <text x="640.0" y="216.0" fill="white" text-anchor="middle"
-        font-size="38" font-family="Arial" font-weight="bold">SHM Graphs and Equations</text>
-  <text x="640.0" y="259.2" fill="#cbd5e1" text-anchor="middle"
-        font-size="20" font-family="Arial">Visualise shm graphs and equations inside the Swing-Return Model of Oscillations.</text>
+  <path d="M194 302 C244 250, 294 250, 344 302 S444 354, 494 302 S594 250, 644 302 S744 354, 794 302" fill="none" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M194 410 C244 462, 294 462, 344 410 S444 358, 494 410 S594 462, 644 410 S744 358, 794 410" fill="none" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
+  <path d="M194 518 C244 446, 294 446, 344 518 S444 590, 494 518 S594 446, 644 518 S744 590, 794 518" fill="none" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+
+  <text x="136" y="308" class="small">x</text>
+  <text x="136" y="416" class="small">v</text>
+  <text x="136" y="524" class="small">a</text>
+
+  <line x1="194" y1="228" x2="494" y2="228" stroke="#e2e8f0" stroke-width="3" marker-start="url(#none)" marker-end="url(#none)"/>
+  <line x1="194" y1="238" x2="194" y2="286" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"/>
+  <line x1="494" y1="238" x2="494" y2="286" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="344" y="220" class="body" text-anchor="middle">period T</text>
+
+  <text x="1025" y="316" class="body" text-anchor="middle">When x is zero, speed is largest.</text>
+  <text x="1025" y="378" class="body" text-anchor="middle">At the turning points, velocity is zero.</text>
+  <text x="1025" y="440" class="body" text-anchor="middle">Acceleration is opposite in phase to x.</text>
+  <text x="1025" y="502" class="body" text-anchor="middle">Frequency comes from the cycle spacing:</text>
+  <text x="1025" y="530" class="body" text-anchor="middle">shorter T means larger f.</text>
+  <text x="1025" y="586" class="small" text-anchor="middle">Equations and graphs should agree on the same cycle timing.</text>
 </svg>

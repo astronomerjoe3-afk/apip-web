@@ -1,17 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-  <rect width="1200" height="800" fill="#f8fafc"/>
-  <text x="60" y="90" fill="#0f172a" font-family="Georgia, serif" font-size="58" font-weight="700">A moving pulse clock stretches its tick</text>
-  <text x="60" y="150" fill="#475569" font-family="Arial, sans-serif" font-size="28">Keep the same signal cap c, and the longer observed light path forces a longer tick.</text>
-  <rect x="80" y="220" width="1040" height="500" rx="34" fill="#eff6ff" stroke="#93c5fd" stroke-width="5"/>
-  <text x="180" y="290" fill="#1e293b" font-family="Arial, sans-serif" font-size="34" font-weight="700">Rest-frame light path</text>
-  <line x1="260" y1="350" x2="260" y2="620" stroke="#0f172a" stroke-width="10"/>
-  <line x1="260" y1="350" x2="260" y2="620" stroke="#38bdf8" stroke-width="6" stroke-dasharray="16 10"/>
-  <text x="170" y="670" fill="#475569" font-family="Arial, sans-serif" font-size="26">Shorter path, shorter tick</text>
-  <text x="645" y="290" fill="#1e293b" font-family="Arial, sans-serif" font-size="34" font-weight="700">Moving-frame view</text>
-  <line x1="720" y1="350" x2="930" y2="620" stroke="#38bdf8" stroke-width="8"/>
-  <line x1="930" y1="620" x2="1040" y2="430" stroke="#38bdf8" stroke-width="8" opacity="0.8"/>
-  <line x1="720" y1="350" x2="720" y2="620" stroke="#0f172a" stroke-width="10"/>
-  <line x1="1040" y1="430" x2="1040" y2="700" stroke="#0f172a" stroke-width="10"/>
-  <text x="645" y="740" fill="#475569" font-family="Arial, sans-serif" font-size="24">Longer path with the same c</text>
-  <text x="645" y="772" fill="#475569" font-family="Arial, sans-serif" font-size="24">means a longer tick.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#09111f"/>
+      <stop offset="100%" stop-color="#17375c"/>
+    </linearGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 44px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 20px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #47637f; stroke-width: 3; }
+      .panel { fill: #16243a; stroke: #577796; stroke-width: 2.4; }
+      .label { fill: #f8fafc; font: 700 23px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="640" y="84" class="title" text-anchor="middle">Driving Rhythm Controls How Big the Response Becomes</text>
+  <text x="640" y="119" class="subtitle" text-anchor="middle">
+    Push too slowly or too quickly and the response stays modest. Match the natural rhythm and the amplitude grows the most.
+  </text>
+
+  <rect x="96" y="164" width="1088" height="492" rx="34" class="card"/>
+  <rect x="126" y="214" width="300" height="390" rx="28" class="panel"/>
+  <rect x="490" y="214" width="300" height="390" rx="28" class="panel"/>
+  <rect x="854" y="214" width="300" height="390" rx="28" class="panel"/>
+
+  <text x="276" y="252" class="label" text-anchor="middle">Driver too slow</text>
+  <text x="640" y="252" class="label" text-anchor="middle">Driver matched</text>
+  <text x="1004" y="252" class="label" text-anchor="middle">Driver too fast</text>
+
+  <rect x="188" y="316" width="176" height="24" rx="12" fill="#38bdf8" opacity="0.25"/>
+  <rect x="552" y="286" width="176" height="54" rx="20" fill="#34d399" opacity="0.85"/>
+  <rect x="916" y="326" width="176" height="14" rx="7" fill="#fbbf24" opacity="0.75"/>
+
+  <text x="276" y="378" class="body" text-anchor="middle">energy arrives out of step</text>
+  <text x="640" y="378" class="body" text-anchor="middle">energy arrives at the useful moment</text>
+  <text x="1004" y="378" class="body" text-anchor="middle">pushes interrupt the natural swing</text>
+
+  <path d="M170 492 C220 462, 250 462, 300 492 S380 522, 382 492" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M534 458 C586 398, 640 398, 692 458 S746 518, 746 458" fill="none" stroke="#34d399" stroke-width="8" stroke-linecap="round"/>
+  <path d="M900 498 C930 462, 960 462, 990 498 S1050 534, 1080 498" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linecap="round"/>
+
+  <text x="276" y="560" class="small" text-anchor="middle">small response amplitude</text>
+  <text x="640" y="560" class="small" text-anchor="middle">largest response amplitude</text>
+  <text x="1004" y="560" class="small" text-anchor="middle">small response amplitude</text>
 </svg>
