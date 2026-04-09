@@ -1,10 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="440" y="170" fill="#5b21b6" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Magnetic Force on Currents and</tspan><tspan x="440" dy="34">Charges</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="198" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Magnetic force</tspan><tspan x="198" dy="23">acts sideways to</tspan><tspan x="198" dy="23">the motion and the</tspan><tspan x="198" dy="23">field.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="406" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Reversing current</tspan><tspan x="406" dy="23">or field reverses</tspan><tspan x="406" dy="23">the force</tspan><tspan x="406" dy="23">direction.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="614" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">A magnetic field</tspan><tspan x="614" dy="23">steers motion</tspan><tspan x="614" dy="23">rather than</tspan><tspan x="614" dy="23">speeding it up</tspan><tspan x="614" dy="23">along the field.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#7c3aed" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#7c3aed" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/><text x="136" y="450" fill="#5b21b6" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Keep the field fixed and reverse only the current first.</tspan><tspan x="136" dy="31">That makes the direction rule easier to see.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><text x="890" y="156" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Magnetic force acts sideways to</tspan><tspan x="890" dy="29">the motion and the field.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><text x="890" y="280" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Reversing current or field</tspan><tspan x="890" dy="29">reverses the force direction.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><text x="890" y="404" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">A magnetic field steers motion</tspan><tspan x="890" dy="29">rather than speeding it up along</tspan><tspan x="890" dy="29">the field.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="890" y="534" fill="#5b21b6" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Magnetic force is a sideways steering effect set by the geometry</tspan><tspan x="890" dy="31">of field and motion.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#effcf6" stroke="#16a34a" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#15803d" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Magnetic Force Acts Sideways to B and Motion
+  </text>
+  <text x="700" y="140" fill="#166534" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    A magnetic field bends a moving charge or current path at right angles. It steers instead of pushing forward along B.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#86efac" stroke-width="3"/>
+  <rect x="126" y="226" width="590" height="486" rx="30" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="2.5"/>
+  <rect x="748" y="226" width="526" height="486" rx="30" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="2.5"/>
+
+  <text x="421" y="268" fill="#15803d" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Moving charge
+  </text>
+  <text x="1011" y="268" fill="#15803d" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Current direction test
+  </text>
+
+  <text x="224" y="360" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="286" y="360" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="348" y="360" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="224" y="438" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="286" y="438" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="348" y="438" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="224" y="516" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="286" y="516" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="348" y="516" fill="#166534" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">x</text>
+  <text x="248" y="578" fill="#166534" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">B into page</text>
+
+  <circle cx="440" cy="438" r="34" fill="#2563eb"/>
+  <text x="440" y="450" fill="#ffffff" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">+</text>
+  <line x1="490" y1="438" x2="618" y2="438" stroke="#0ea5e9" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="618,438 590,422 590,454" fill="#0ea5e9"/>
+  <text x="554" y="420" fill="#0369a1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">v</text>
+  <line x1="440" y1="388" x2="440" y2="292" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="440,292 424,320 456,320" fill="#ef4444"/>
+  <text x="462" y="318" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">F</text>
+  <text x="422" y="646" fill="#166534" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    Force is perpendicular to both v and B.
+  </text>
+
+  <rect x="804" y="326" width="414" height="142" rx="28" fill="#ffffff" stroke="#4ade80" stroke-width="2.5"/>
+  <line x1="858" y1="398" x2="1018" y2="398" stroke="#0ea5e9" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="1018,398 990,382 990,414" fill="#0ea5e9"/>
+  <text x="938" y="378" fill="#0369a1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">I right</text>
+  <line x1="938" y1="398" x2="938" y2="318" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="938,318 922,346 954,346" fill="#ef4444"/>
+  <text x="962" y="346" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">F up</text>
+  <text x="1094" y="360" fill="#166534" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">same B into page</text>
+  <text x="1094" y="396" fill="#166534" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">use field + current</text>
+  <text x="1094" y="432" fill="#166534" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">to predict force</text>
+
+  <rect x="804" y="500" width="414" height="142" rx="28" fill="#ffffff" stroke="#4ade80" stroke-width="2.5"/>
+  <line x1="1018" y1="572" x2="858" y2="572" stroke="#0ea5e9" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="858,572 886,556 886,588" fill="#0ea5e9"/>
+  <text x="938" y="552" fill="#0369a1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">reverse I</text>
+  <line x1="938" y1="572" x2="938" y2="652" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="938,652 922,624 954,624" fill="#ef4444"/>
+  <text x="962" y="626" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">F down</text>
+  <text x="1094" y="552" fill="#166534" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">reversing field or current</text>
+  <text x="1094" y="588" fill="#166534" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">flips the magnetic force</text>
 </svg>

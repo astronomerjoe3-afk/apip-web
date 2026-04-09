@@ -1,78 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-  <rect x="106" y="132" width="668" height="94" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="440" y="170" fill="#5b21b6" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
-    <tspan x="440" dy="0">Uniform Fields and Parallel Plates</tspan>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#2563eb" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Parallel Plates Make a Uniform Electric Slope
   </text>
-  <rect x="118" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="198" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
-    <tspan x="198" dy="0">A uniform field</tspan>
-    <tspan x="198" dy="23">has the same size</tspan>
-    <tspan x="198" dy="23">and direction</tspan>
-    <tspan x="198" dy="23">throughout the</tspan>
-    <tspan x="198" dy="23">central gap.</tspan>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Between wide flat plates, the central gap carries nearly parallel arrows, so E reads as dV divided by separation.
   </text>
-  <rect x="326" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="406" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
-    <tspan x="406" dy="0">Field strength in</tspan>
-    <tspan x="406" dy="23">the gap is ΔV</tspan>
-    <tspan x="406" dy="23">divided by</tspan>
-    <tspan x="406" dy="23">separation.</tspan>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="590" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="748" y="226" width="526" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="421" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Uniform gap field
   </text>
-  <rect x="534" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="614" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
-    <tspan x="614" dy="0">Smaller plate</tspan>
-    <tspan x="614" dy="23">spacing means a</tspan>
-    <tspan x="614" dy="23">steeper electric</tspan>
-    <tspan x="614" dy="23">slope at fixed</tspan>
-    <tspan x="614" dy="23">voltage.</tspan>
+  <text x="1011" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Same dV, different gap
   </text>
-  <line x1="280" y1="316" x2="314" y2="316" stroke="#7c3aed" stroke-width="8" stroke-linecap="round"/>
-  <line x1="488" y1="316" x2="522" y2="316" stroke="#7c3aed" stroke-width="8" stroke-linecap="round"/>
-  <rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
-  <text x="136" y="450" fill="#5b21b6" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start">
-    <tspan x="136" dy="0">Try it in action</tspan>
+
+  <rect x="220" y="328" width="72" height="282" rx="18" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <rect x="528" y="328" width="72" height="282" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="256" y="316" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">+ plate</text>
+  <text x="564" y="316" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">- plate</text>
+
+  <line x1="308" y1="380" x2="504" y2="380" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,380 474,364 474,396" fill="#16a34a"/>
+  <line x1="308" y1="440" x2="504" y2="440" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,440 474,424 474,456" fill="#16a34a"/>
+  <line x1="308" y1="500" x2="504" y2="500" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,500 474,484 474,516" fill="#16a34a"/>
+  <line x1="308" y1="560" x2="504" y2="560" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,560 474,544 474,576" fill="#16a34a"/>
+  <text x="420" y="652" fill="#1e40af" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Central arrows stay parallel and equal-sized.
   </text>
-  <text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start">
-    <tspan x="136" dy="0">Hold the voltage fixed and shrink the gap. That one</tspan>
-    <tspan x="136" dy="31">comparison shows why E = ΔV divided by d is an</tspan>
-    <tspan x="136" dy="31">electric-slope story.</tspan>
+  <text x="420" y="684" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    That is the uniform-field approximation used in the lesson.
   </text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="890" y="156" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start">
-    <tspan x="890" dy="0">Key 1</tspan>
+
+  <text x="1011" y="340" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Wide gap, same dV
   </text>
-  <text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">
-    <tspan x="890" dy="0">A uniform field has the same</tspan>
-    <tspan x="890" dy="29">size and direction throughout</tspan>
-    <tspan x="890" dy="29">the central gap.</tspan>
+  <rect x="812" y="376" width="54" height="138" rx="16" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <rect x="1126" y="376" width="54" height="138" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <line x1="882" y1="410" x2="1100" y2="410" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="1100,410 1072,394 1072,426" fill="#38bdf8"/>
+  <line x1="882" y1="476" x2="1100" y2="476" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="1100,476 1072,460 1072,492" fill="#38bdf8"/>
+  <text x="1011" y="548" fill="#0369a1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    larger d means gentler field
   </text>
-  <rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="890" y="280" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start">
-    <tspan x="890" dy="0">Key 2</tspan>
+
+  <text x="1011" y="602" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Narrow gap, same dV
   </text>
-  <text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">
-    <tspan x="890" dy="0">Field strength in the gap is</tspan>
-    <tspan x="890" dy="29">ΔV divided by separation.</tspan>
-  </text>
-  <rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="890" y="404" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start">
-    <tspan x="890" dy="0">Key 3</tspan>
-  </text>
-  <text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">
-    <tspan x="890" dy="0">Smaller plate spacing means a</tspan>
-    <tspan x="890" dy="29">steeper electric slope at fixed</tspan>
-    <tspan x="890" dy="29">voltage.</tspan>
-  </text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="890" y="534" fill="#5b21b6" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start">
-    <tspan x="890" dy="0">Lesson takeaway</tspan>
-  </text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">
-    <tspan x="890" dy="0">Uniform-field strength is the potential drop per unit distance</tspan>
-    <tspan x="890" dy="31">between the plates.</tspan>
+  <rect x="908" y="624" width="54" height="52" rx="16" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <rect x="1060" y="624" width="54" height="52" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <line x1="970" y1="650" x2="1050" y2="650" stroke="#0ea5e9" stroke-width="9" stroke-linecap="round"/>
+  <polygon points="1050,650 1022,634 1022,666" fill="#0ea5e9"/>
+  <text x="1011" y="706" fill="#0369a1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    smaller d means steeper field
   </text>
 </svg>

@@ -1,10 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
-  <rect width="1400" height="820" fill="#ffffff"/>
-  <rect x="24" y="24" width="1352" height="772" rx="40" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
-  <rect x="70" y="90" width="740" height="518" rx="36" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><rect x="106" y="132" width="668" height="94" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="440" y="170" fill="#5b21b6" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><tspan x="440" dy="0">Point Charges and Coulomb's Law</tspan></text><rect x="118" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="198" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="198" dy="0">Like charges repel</tspan><tspan x="198" dy="23">and unlike charges</tspan><tspan x="198" dy="23">attract.</tspan></text><rect x="326" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="406" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="406" dy="0">Force depends on</tspan><tspan x="406" dy="23">both charge</tspan><tspan x="406" dy="23">values.</tspan></text><rect x="534" y="248" width="160" height="136" rx="28" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="614" y="284" fill="#5b21b6" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle"><tspan x="614" dy="0">Force falls with</tspan><tspan x="614" dy="23">the square of</tspan><tspan x="614" dy="23">separation.</tspan></text><line x1="280" y1="316" x2="314" y2="316" stroke="#7c3aed" stroke-width="8" stroke-linecap="round"/><line x1="488" y1="316" x2="522" y2="316" stroke="#7c3aed" stroke-width="8" stroke-linecap="round"/><rect x="106" y="414" width="668" height="156" rx="28" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/><text x="136" y="450" fill="#5b21b6" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="136" dy="0">Try it in action</tspan></text><text x="136" y="486" fill="#334155" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="start"><tspan x="136" dy="0">Change the separation before you change the charge size.</tspan><tspan x="136" dy="31">That makes the inverse-square effect easier to spot.</tspan></text>
-  <rect x="860" y="128" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><text x="890" y="156" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 1</tspan></text><text x="890" y="186" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Like charges repel and unlike</tspan><tspan x="890" dy="29">charges attract.</tspan></text><rect x="860" y="252" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><text x="890" y="280" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 2</tspan></text><text x="890" y="310" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Force depends on both charge</tspan><tspan x="890" dy="29">values.</tspan></text><rect x="860" y="376" width="470" height="96" rx="24" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/><text x="890" y="404" fill="#5b21b6" font-size="15" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Key 3</tspan></text><text x="890" y="434" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Force falls with the square of</tspan><tspan x="890" dy="29">separation.</tspan></text>
-  <rect x="860" y="500" width="470" height="108" rx="28" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-  <text x="890" y="534" fill="#5b21b6" font-size="16" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="start"><tspan x="890" dy="0">Lesson takeaway</tspan></text>
-  <text x="890" y="568" fill="#334155" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start"><tspan x="890" dy="0">Coulomb's law is a radial charge-and-distance rule with</tspan><tspan x="890" dy="31">inverse-square weakening.</tspan></text>
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#fff7ed" stroke="#f97316" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#c2410c" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Coulomb Force Depends on Charge Size and Separation
+  </text>
+  <text x="700" y="140" fill="#9a3412" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Attraction versus repulsion comes from charge sign. Strength comes from charge product and weakens with one over r squared.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#fdba74" stroke-width="3"/>
+  <rect x="126" y="226" width="552" height="486" rx="30" fill="#fff7ed" stroke="#fed7aa" stroke-width="2.5"/>
+  <rect x="722" y="226" width="552" height="486" rx="30" fill="#fff7ed" stroke="#fed7aa" stroke-width="2.5"/>
+
+  <text x="402" y="268" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Sign sets direction
+  </text>
+  <text x="998" y="268" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Size and separation set strength
+  </text>
+
+  <circle cx="250" cy="430" r="42" fill="#2563eb"/>
+  <text x="250" y="442" fill="#ffffff" font-size="34" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">+</text>
+  <circle cx="550" cy="430" r="42" fill="#2563eb"/>
+  <text x="550" y="442" fill="#ffffff" font-size="34" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">+</text>
+  <line x1="316" y1="430" x2="404" y2="430" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="316,430 344,414 344,446" fill="#ef4444"/>
+  <line x1="484" y1="430" x2="396" y2="430" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="484,430 456,414 456,446" fill="#ef4444"/>
+  <text x="400" y="388" fill="#b91c1c" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    like charges repel
+  </text>
+
+  <circle cx="250" cy="584" r="42" fill="#2563eb"/>
+  <text x="250" y="596" fill="#ffffff" font-size="34" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">+</text>
+  <circle cx="550" cy="584" r="42" fill="#f97316"/>
+  <text x="550" y="596" fill="#ffffff" font-size="34" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">-</text>
+  <line x1="316" y1="584" x2="396" y2="584" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="396,584 368,568 368,600" fill="#16a34a"/>
+  <line x1="484" y1="584" x2="404" y2="584" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="404,584 432,568 432,600" fill="#16a34a"/>
+  <text x="400" y="642" fill="#166534" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    unlike charges attract
+  </text>
+
+  <rect x="806" y="332" width="388" height="128" rx="28" fill="#ffffff" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="1000" y="378" fill="#c2410c" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    F grows with bigger q1 and q2
+  </text>
+  <text x="1000" y="414" fill="#9a3412" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    More source charge means a stronger electric interaction.
+  </text>
+
+  <rect x="806" y="492" width="388" height="170" rx="28" fill="#ffffff" stroke="#fb923c" stroke-width="2.5"/>
+  <line x1="854" y1="578" x2="1146" y2="578" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="904" cy="578" r="22" fill="#2563eb"/>
+  <text x="904" y="586" fill="#ffffff" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">+</text>
+  <circle cx="1096" cy="578" r="22" fill="#f97316"/>
+  <text x="1096" y="586" fill="#ffffff" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">-</text>
+  <text x="1000" y="534" fill="#c2410c" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Double r and force drops by four
+  </text>
+  <text x="1000" y="620" fill="#9a3412" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    That is the inverse-square part of Coulomb's law.
+  </text>
 </svg>
