@@ -58,7 +58,7 @@
     <tspan x="80" dy="26">while weak interaction allows one particle story to change into another.</tspan>
   </text>
 
-  <rect x="452" y="138" width="376" height="54" rx="24" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <rect x="430" y="138" width="420" height="54" rx="24" fill="#1e293b" stroke="#475569" stroke-width="2"/>
   <text x="640" y="171" text-anchor="middle" class="chip">EXCHANGE PARTICLE = THE INTERACTION MESSENGER</text>
 
   <rect x="72" y="220" width="540" height="390" rx="30" fill="url(#panel)" stroke="#334155" stroke-width="3"/>
@@ -89,8 +89,9 @@
   <line x1="432" y1="493" x2="411" y2="493" stroke="#5eead4" stroke-width="6" marker-end="url(#arrow-teal)"/>
   <line x1="273" y1="493" x2="254" y2="493" stroke="#5eead4" stroke-width="6" marker-end="url(#arrow-teal)"/>
 
-  <text x="102" y="563" class="small">Messenger clue: gluons carry the strong interaction.</text>
-  <text x="102" y="592" class="small">Event clue: the story is about holding matter together, not changing the particle family.</text>
+  <text x="102" y="548" class="small">Messenger clue: gluons carry the strong interaction.</text>
+  <text x="102" y="575" class="small">Event clue: the story is binding matter together,</text>
+  <text x="102" y="598" class="small">not changing the particle family.</text>
 
   <rect x="698" y="246" width="176" height="34" rx="17" fill="url(#weak-band)"/>
   <text x="786" y="268" text-anchor="middle" class="chip">CHANGE STORY</text>
@@ -124,8 +125,9 @@
   <line x1="999" y1="471" x2="1090" y2="472" stroke="#7dd3fc" stroke-width="6" marker-end="url(#arrow-blue)"/>
   <line x1="999" y1="482" x2="1018" y2="532" stroke="#7dd3fc" stroke-width="6" marker-end="url(#arrow-blue)"/>
 
-  <text x="698" y="563" class="small">Messenger clue: W bosons are tied to weak, particle-changing events.</text>
-  <text x="698" y="592" class="small">Event clue: a neutron can change into a proton plus an electron and an anti-neutrino.</text>
+  <text x="698" y="548" class="small">Messenger clue: W bosons mark weak, particle-changing events.</text>
+  <text x="698" y="575" class="small">Event clue: a neutron can become a proton, an electron,</text>
+  <text x="698" y="598" class="small">and an anti-neutrino.</text>
 
   <rect x="80" y="642" width="1120" height="48" rx="20" fill="url(#footer)"/>
   <text x="640" y="672" text-anchor="middle" class="footer">Ask the event question first: if it binds matter, think strong; if it changes the particle story, think weak.</text>

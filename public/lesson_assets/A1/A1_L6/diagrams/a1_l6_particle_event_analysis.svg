@@ -70,34 +70,32 @@
   <circle cx="318" cy="540" r="28" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="4"/>
   <text x="318" y="533" text-anchor="middle" class="nodeText">anti</text>
   <text x="318" y="554" text-anchor="middle" class="nodeText">nu</text>
-  <text x="108" y="592" class="small">Identity clue: the particle list already narrows the possible channels.</text>
+  <text x="108" y="592" class="small">Identity clue: the particle list already narrows the channel.</text>
 
   <rect x="493" y="350" width="180" height="34" rx="17" fill="url(#blue-band)"/>
   <text x="583" y="372" text-anchor="middle" class="chip">CHECK 2</text>
   <text x="493" y="420" class="panelTitle">Read the interaction clue</text>
   <text x="493" y="456" class="body">
-    <tspan x="493" dy="0">Ask whether the event looks like</tspan>
-    <tspan x="493" dy="24">a decay, a scattering, or another</tspan>
-    <tspan x="493" dy="24">interaction family.</tspan>
+    <tspan x="493" dy="0">Ask whether the event looks more like decay</tspan>
+    <tspan x="493" dy="24">or scattering before choosing the channel.</tspan>
   </text>
   <rect x="523" y="520" width="108" height="50" rx="18" fill="#bfdbfe" stroke="#60a5fa" stroke-width="3"/>
   <text x="577" y="551" text-anchor="middle" class="nodeText">decay</text>
   <rect x="648" y="520" width="124" height="50" rx="18" fill="#bae6fd" stroke="#38bdf8" stroke-width="3"/>
   <text x="710" y="551" text-anchor="middle" class="nodeText">scattering</text>
-  <text x="493" y="592" class="small">Event clue: decay and scattering are different stories, even when one product looks familiar.</text>
+  <text x="493" y="592" class="small">Event clue: the overall story matters as much as one product.</text>
 
   <rect x="878" y="350" width="180" height="34" rx="17" fill="url(#gold-band)"/>
   <text x="968" y="372" text-anchor="middle" class="chip">CHECK 3</text>
   <text x="878" y="420" class="panelTitle">Close the ledger</text>
   <text x="878" y="456" class="body">
-    <tspan x="878" dy="0">Test charge, baryon number,</tspan>
-    <tspan x="878" dy="24">and lepton number before you</tspan>
-    <tspan x="878" dy="24">accept the event story.</tspan>
+    <tspan x="878" dy="0">Test charge, baryon number, and lepton number</tspan>
+    <tspan x="878" dy="24">before accepting the event story.</tspan>
   </text>
   <rect x="908" y="515" width="232" height="66" rx="20" fill="#1e293b"/>
   <text x="930" y="543" class="checkTitle">charge   baryon #   lepton #</text>
   <text x="930" y="570" class="small">all three checks must still balance</text>
-  <text x="878" y="592" class="small">Ledger clue: one failed total can reject an otherwise tempting explanation.</text>
+  <text x="878" y="592" class="small">Ledger clue: one failed total rejects the channel.</text>
 
   <rect x="80" y="632" width="1120" height="44" rx="18" fill="url(#footer)"/>
   <text x="640" y="660" text-anchor="middle" class="footerText">Best-fit answer = the channel that matches particle identity, interaction type, and conservation together.</text>
