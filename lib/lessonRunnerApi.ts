@@ -14679,87 +14679,184 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   switch (code) {
     case "F1_L1":
       return {
-        body: "Start with a real conversion question and solve it step by step.",
+        body: "Unit work should force the learner to hold the physical quantity fixed while the written number changes, then justify which unit is sensible for the scale of the object.",
         worked_example: {
-          prompt: "A hiking trail is 2.5 km long, and a wire is 35 cm long. Write both lengths in metres.",
+          prompt: "A cable is 2.4 km long, a notebook is 18 cm wide, and a coin is 1.8 mm thick. Write all three lengths in metres, then state which original unit is the most sensible for each object.",
           steps: [
-            "Name the base unit you want at the end. Here the target unit is the metre.",
-            "Replace each prefix with its scale: 1 km = 1000 m and 1 cm = 0.01 m.",
-            "Convert one value at a time: 2.5 x 1000 = 2500 and 35 x 0.01 = 0.35.",
-            "Rewrite the two answers with the same unit so they can now be compared safely.",
+            "Choose the common unit first: the metre is the target unit for all three quantities.",
+            "Convert one value at a time: 2.4 km = 2400 m, 18 cm = 0.18 m, and 1.8 mm = 0.0018 m.",
+            "Now judge the original units by scale: kilometre fits the long cable, centimetre fits the notebook width, and millimetre fits the coin thickness.",
+            "Keep the physical quantity and the unit choice separate: changing the unit changes the number written, not the actual size of the object.",
           ],
-          answer: "2.5 km = 2500 m and 35 cm = 0.35 m",
+          answer: "2.4 km = 2400 m, 18 cm = 0.18 m, and 1.8 mm = 0.0018 m. The original units are sensible because they match the scale of each object.",
+          answer_reason: "A sensible unit keeps the number readable without changing the quantity itself. Prefixes only scale the unit size, so the written number changes when the unit changes.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps mass prefixes in the same unit-choice story instead of treating length conversions as a special case.",
+            worked_example: {
+              prompt: "Convert 0.75 kg and 320 mg into grams.",
+              steps: [
+                "Use the gram as the common unit.",
+                "Convert the kilogram first: 0.75 kg = 750 g.",
+                "Convert the milligram second: 320 mg = 0.320 g.",
+              ],
+              answer: "0.75 kg = 750 g and 320 mg = 0.320 g.",
+              answer_reason: "The same prefix logic works across quantities: kilo- makes the unit larger, while milli- makes it smaller.",
+            },
+          },
+        ],
       };
     case "F1_L2":
       return {
-        body: "Start with a real classification question and solve it step by step.",
+        body: "Vector work should make direction do real conceptual work rather than just adding a direction word to one otherwise easy classification label.",
         worked_example: {
-          prompt: "A delivery robot moves 12 m east. Is that description scalar or vector?",
+          prompt: "A drone moves at 12 m/s east and later at 12 m/s north. Has its speed changed? Has its velocity changed? Explain.",
           steps: [
-            "Look for magnitude first. The 12 m tells you the size of the motion.",
-            "Look for direction next. The word east gives a direction.",
-            "A quantity that has both magnitude and direction is a vector.",
-            "So the description is a vector, not a scalar.",
+            "Check the magnitude first: the speed is 12 m/s in both cases, so the scalar speed has not changed.",
+            "Check the direction next: the motion changes from east to north.",
+            "Velocity is a vector, so changing the direction changes the velocity even if the speed stays the same.",
+            "Separate the scalar question from the vector question before giving the final answer.",
           ],
-          answer: "It is a vector because it includes both magnitude and direction.",
+          answer: "The speed has not changed, but the velocity has changed because the direction changed from east to north.",
+          answer_reason: "Scalars use magnitude only, while vectors use magnitude and direction. A direction change can leave the speed unchanged while still changing the velocity.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps distance and displacement from being treated as interchangeable route descriptions.",
+            worked_example: {
+              prompt: "A walker travels 10 m east and then 6 m west. Which quantity is 16 m, and which quantity is 4 m east?",
+              steps: [
+                "Add the whole route to find the distance: 10 m + 6 m = 16 m.",
+                "Compare the start and finish positions to find the displacement: 10 m east then 6 m west leaves 4 m east.",
+                "Classify them correctly: distance is scalar, while displacement is a vector.",
+              ],
+              answer: "The distance is 16 m and the displacement is 4 m east.",
+              answer_reason: "Distance follows the whole route, while displacement keeps the net start-to-finish change with direction.",
+            },
+          },
+        ],
       };
     case "F1_L3":
       return {
-        body: "Start with a real precision question and solve it step by step.",
+        body: "Measurement-trust work should combine resolution, repeated readings, and honest reporting instead of treating uncertainty as a decorative extra at the end.",
         worked_example: {
-          prompt: "A ruler's smallest division is 1 mm and a line reads 6.4 cm. What uncertainty is reasonable to report?",
+          prompt: "A ruler has 1 mm divisions. A line is measured three times as 6.3 cm, 6.4 cm, and 6.4 cm. Give a sensible best estimate, a reasonable reading uncertainty, and the type of error shown by the small spread.",
           steps: [
-            "Start with the smallest division on the instrument, which is 1 mm.",
-            "For a simple scale reading, a reasonable uncertainty is about half the smallest division.",
-            "Half of 1 mm is 0.5 mm, which is the same as 0.05 cm.",
-            "Attach that uncertainty to the measured value instead of pretending the ruler is more precise than it is.",
+            "Use the repeated readings to choose a sensible best estimate: the values cluster around about 6.4 cm.",
+            "Use the ruler resolution next: 1 mm divisions suggest a reading uncertainty of about half a division, which is 0.5 mm or 0.05 cm.",
+            "Report the value honestly as about 6.4 cm +/- 0.05 cm instead of inventing unjustified extra digits.",
+            "Interpret the small spread correctly: it shows random variation between readings, not a one-way systematic shift.",
           ],
-          answer: "6.4 cm +/- 0.05 cm is a reasonable report.",
+          answer: "A sensible report is about 6.4 cm +/- 0.05 cm, and the small spread shows random error.",
+          answer_reason: "Resolution limits the precision you can claim, and repeated readings reveal scatter. Honest measurement reporting uses both pieces of information together.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps systematic error distinct from random scatter.",
+            worked_example: {
+              prompt: "A balance reads 0.20 g too high every time, even when the same mass is measured repeatedly. What type of error is this?",
+              steps: [
+                "Look for a repeated shift in the same direction.",
+                "Notice that every reading is offset upward by the same amount.",
+                "Classify that pattern as systematic error, not random scatter.",
+              ],
+              answer: "It is systematic error.",
+              answer_reason: "Systematic error pushes every reading the same way, often because of zero error or poor calibration.",
+            },
+          },
+        ],
       };
     case "F1_L4":
       return {
-        body: "Start with a real significant-figures question and solve it step by step.",
+        body: "Reporting-precision work should move beyond one easy rounding task and force the learner to choose the correct rule for the operation being used.",
         worked_example: {
-          prompt: "A measurement is 4.5607 g. Write it to 3 significant figures.",
+          prompt: "Calculate 2.5 x 3.42 and report the result with the correct number of significant figures.",
           steps: [
-            "Count significant figures from the first non-zero digit: 4, 5, and 6 are the first three.",
-            "Look at the next digit, which is 0, to decide whether to round the third figure up or keep it.",
-            "Because the next digit is less than 5, keep the 6 unchanged.",
-            "Write the answer as 4.56 g.",
+            "Do the raw calculation first: 2.5 x 3.42 = 8.55.",
+            "Now choose the reporting rule for multiplication: keep the same number of significant figures as the least precise input.",
+            "The least precise input is 2.5, which has 2 significant figures.",
+            "Round 8.55 to 2 significant figures to get 8.6.",
           ],
-          answer: "4.56 g",
+          answer: "8.6",
+          answer_reason: "For multiplication and division, the final answer should usually keep the same number of significant figures as the input with the fewest significant figures.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up contrasts the multiplication rule with the decimal-place rule used in addition.",
+            worked_example: {
+              prompt: "Calculate 12.34 + 1.2 and report the answer with the correct precision.",
+              steps: [
+                "Add the values first: 12.34 + 1.2 = 13.54.",
+                "Use the addition rule this time: keep the same number of decimal places as the least precise input.",
+                "The least precise input is 1.2, which has 1 decimal place.",
+                "Round 13.54 to 1 decimal place to get 13.5.",
+              ],
+              answer: "13.5",
+              answer_reason: "For addition and subtraction, decimal places control the final reporting precision rather than total significant figures.",
+            },
+          },
+        ],
       };
     case "F1_L5":
       return {
-        body: "Start with a real density question and solve it step by step.",
+        body: "Density work should connect calculation, comparison, and rearrangement so the formula is used as a physical idea rather than as one easy division trick.",
         worked_example: {
-          prompt: "A block has mass 120 g and volume 40 cm^3. What is its density?",
+          prompt: "A metal block has mass 180 g and volume 24 cm^3. Find its density and decide whether it would sink or float in a liquid of density 1.2 g/cm^3.",
           steps: [
             "Start with the density relationship: density = mass / volume.",
-            "Substitute the values carefully: 120 g / 40 cm^3.",
-            "Carry out the division: 120 / 40 = 3.",
-            "Keep the compound unit with the answer.",
+            "Substitute the block values carefully: 180 g / 24 cm^3.",
+            "Carry out the division: 180 / 24 = 7.5, so the block density is 7.5 g/cm^3.",
+            "Compare densities to predict the behavior: the block is denser than the 1.2 g/cm^3 liquid, so it would sink.",
           ],
-          answer: "3 g/cm^3",
+          answer: "The block density is 7.5 g/cm^3, so it would sink in the liquid.",
+          answer_reason: "Density compares mass with volume. Floating or sinking is decided by comparing the object's density with the fluid density, not by mass alone.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up makes the learner rearrange the density relation instead of always dividing mass by volume.",
+            worked_example: {
+              prompt: "An oil sample has density 0.80 g/cm^3 and mass 40 g. What is its volume?",
+              steps: [
+                "Start with density = mass / volume.",
+                "Rearrange to find volume: volume = mass / density.",
+                "Substitute the values: volume = 40 / 0.80 = 50 cm^3.",
+              ],
+              answer: "The volume is 50 cm^3.",
+              answer_reason: "A useful density lesson must move both ways through the formula, not only from mass and volume to density.",
+            },
+          },
+        ],
       };
     case "F1_L6":
       return {
-        body: "Start with a real measurement-quality question and solve it step by step.",
+        body: "Measurement-quality work should separate accuracy, precision, and uncertainty in the same example, because mixing those ideas is the main trap in this lesson.",
         worked_example: {
-          prompt: "Two scales give 50.0 g and 49.9 g for the same object. Which reading is more precise?",
+          prompt: "The accepted mass of a calibration block is 50.0 g. Scale A gives 50.1 g, 50.0 g, and 49.9 g. Scale B gives 48.6 g, 48.7 g, and 48.6 g. Which scale is more accurate, which is more precise, and which one is more trustworthy overall?",
           steps: [
-            "Look at the resolution each reading suggests. A value written to 0.1 g is more precise than one written to 1 g.",
-            "Precision is about how finely the tool can distinguish values, not whether the reading is exactly true.",
-            "A reading like 49.9 g shows finer resolution than a reading rounded to the nearest whole gram.",
-            "So the scale reporting to 0.1 g is the more precise one.",
+            "Judge accuracy first by comparing each set with the accepted value of 50.0 g. Scale A is much closer overall than Scale B.",
+            "Judge precision second by looking at the spread of the repeated readings. Scale B is slightly tighter because its values cluster between 48.6 g and 48.7 g, while Scale A spans 49.9 g to 50.1 g.",
+            "Now combine the two ideas to judge trustworthiness. A result that is close to the accepted value and still reasonably tight is more trustworthy overall than one that is tightly grouped but clearly biased.",
+            "State the full conclusion instead of using precision as a synonym for accuracy.",
           ],
-          answer: "The 49.9 g reading is more precise because it shows finer resolution.",
+          answer: "Scale A is more accurate, Scale B is slightly more precise, and Scale A is more trustworthy overall.",
+          answer_reason: "Precision and accuracy are different. A set can cluster tightly and still be wrong if a systematic shift moves it away from the accepted value.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up brings the lesson's percentage-uncertainty calculation into the measurement-quality story.",
+            worked_example: {
+              prompt: "A length is reported as 24.0 cm +/- 0.5 cm. What is the percentage uncertainty?",
+              steps: [
+                "Use the percentage-uncertainty formula: (absolute uncertainty / measured value) x 100%.",
+                "Substitute the values: (0.5 / 24.0) x 100%.",
+                "Calculate the result: about 2.08%, which can be reported as about 2.1%.",
+              ],
+              answer: "The percentage uncertainty is about 2.1%.",
+              answer_reason: "Percentage uncertainty shows the size of the uncertainty relative to the measurement itself, which helps compare the trustworthiness of different measurements.",
+            },
+          },
+        ],
       };
     case "F2_L1":
       return {
