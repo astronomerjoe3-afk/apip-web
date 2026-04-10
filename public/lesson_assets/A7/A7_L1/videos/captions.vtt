@@ -1,0 +1,417 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.330
+This lesson becomes clearer when before the worked example, separate emf, terminal p.d., and internal resistance instead of treating the battery as an ideal black box.
+
+2
+00:00:07.330 --> 00:00:14.660
+Full lift means emf: EMF is the total energy supplied per coulomb by the source before any internal loss is removed.
+
+3
+00:00:14.660 --> 00:00:21.990
+Delivered lift means terminal p.d.: The external circuit receives the terminal p.d., not always the full emf.
+
+4
+00:00:21.990 --> 00:00:29.320
+Main trap means ideal-source thinking: A real source loses volts internally when current flows, so loaded readings drop.
+
+5
+00:00:29.320 --> 00:00:36.650
+A real source should be read as emf split into delivered voltage and internal loss.
+
+6
+00:00:36.650 --> 00:00:43.980
+Keep this takeaway in view: A real source should be read as emf split into delivered voltage and internal loss.
+
+7
+00:00:43.980 --> 00:00:51.310
+Full lift means emf.
+
+8
+00:00:51.310 --> 00:00:58.640
+EMF is the total energy supplied per coulomb by the source before any internal loss is removed.
+
+9
+00:00:58.640 --> 00:01:05.970
+Delivered lift means terminal p.d..
+
+10
+00:01:05.970 --> 00:01:13.300
+The external circuit receives the terminal p.d., not always the full emf.
+
+11
+00:01:13.300 --> 00:01:19.974
+This diagram matters because the picture matters because every later equation is really describing this one split route.
+
+12
+00:01:19.974 --> 00:01:26.648
+Open circuit shows that With no current, there is no internal voltage drop, so the terminal p.d.
+
+13
+00:01:26.648 --> 00:01:33.322
+matches the emf.
+
+14
+00:01:33.322 --> 00:01:39.996
+Loaded circuit shows that When current flows, the internal resistance steals part of the source lift inside the battery.
+
+15
+00:01:39.996 --> 00:01:46.670
+Reading habit shows that Compare full lift and delivered lift before choosing any equation.
+
+16
+00:01:46.670 --> 00:01:53.344
+The source picture is one split: full emf, internal drop, and terminal delivery.
+
+17
+00:01:53.344 --> 00:02:00.018
+Keep this takeaway in view: The source picture is one split: full emf, internal drop, and terminal delivery.
+
+18
+00:02:00.018 --> 00:02:06.692
+Open circuit: With no current, there is no internal voltage drop, so the terminal p.d.
+
+19
+00:02:06.692 --> 00:02:13.366
+matches the emf.
+
+20
+00:02:13.366 --> 00:02:20.040
+Loaded circuit: When current flows, the internal resistance steals part of the source lift inside the battery.
+
+21
+00:02:20.040 --> 00:02:25.871
+The full pressure rise is like emf, and the delivered outlet pressure is like terminal p.d.
+
+22
+00:02:25.871 --> 00:02:31.702
+That analogy helps because the loss belongs to the source route, not to the measurement instrument.
+
+23
+00:02:31.702 --> 00:02:37.532
+Pump rise means full source lift: The pump can be thought of as the source giving the full available energy rise.
+
+24
+00:02:37.532 --> 00:02:43.363
+Internal friction means loss inside: Part of the rise is consumed internally when the flow through the machine increases.
+
+25
+00:02:43.363 --> 00:02:49.194
+Outlet reading means delivered result: The outlet pressure is like terminal p.d.: it is the delivered remainder, not the whole lift.
+
+26
+00:02:49.194 --> 00:02:55.025
+The pump analogy makes terminal p.d.
+
+27
+00:02:55.025 --> 00:03:00.855
+feel like the delivered remainder after internal loss.
+
+28
+00:03:00.855 --> 00:03:06.686
+Keep this takeaway in view: The pump analogy makes terminal p.d.
+
+29
+00:03:06.686 --> 00:03:12.517
+feel like the delivered remainder after internal loss.
+
+30
+00:03:12.517 --> 00:03:18.348
+Pump rise means full source lift.
+
+31
+00:03:18.348 --> 00:03:24.178
+The pump can be thought of as the source giving the full available energy rise.
+
+32
+00:03:24.178 --> 00:03:30.009
+Internal friction means loss inside.
+
+33
+00:03:30.009 --> 00:03:35.840
+Part of the rise is consumed internally when the flow through the machine increases.
+
+34
+00:03:35.840 --> 00:03:41.831
+Every algebra step should keep the full source lift and the internal drop visible at the same time.
+
+35
+00:03:41.831 --> 00:03:47.822
+That is what keeps the equations from becoming blind substitution.
+
+36
+00:03:47.822 --> 00:03:53.814
+A key relation is epsilon = V + I r.
+
+37
+00:03:53.814 --> 00:03:59.805
+A key relation is V = epsilon - I r.
+
+38
+00:03:59.805 --> 00:04:05.796
+A key relation is P_internal = I^2 r.
+
+39
+00:04:05.796 --> 00:04:11.787
+The lost volts term I r belongs inside the source, so it should be read before the terminal p.d.
+
+40
+00:04:11.787 --> 00:04:17.779
+is interpreted.
+
+41
+00:04:17.779 --> 00:04:23.770
+Find the lost volts first matters because Subtract the terminal p.d.
+
+42
+00:04:23.770 --> 00:04:29.761
+from the emf before solving for internal resistance.
+
+43
+00:04:29.761 --> 00:04:35.752
+Current causes the loss matters because No current means no I r drop, which is why open-circuit readings equal the emf.
+
+44
+00:04:35.752 --> 00:04:41.744
+Power stays physical matters because The internal power relation describes heating inside the source itself.
+
+45
+00:04:41.744 --> 00:04:47.735
+The source equations work best when they are read as full lift equals delivered lift plus internal loss.
+
+46
+00:04:47.735 --> 00:04:53.726
+Keep this takeaway in view: The source equations work best when they are read as full lift equals delivered lift plus internal loss.
+
+47
+00:04:53.726 --> 00:04:59.718
+Find the lost volts first: Subtract the terminal p.d.
+
+48
+00:04:59.718 --> 00:05:05.709
+from the emf before solving for internal resistance.
+
+49
+00:05:05.709 --> 00:05:11.700
+Current causes the loss: No current means no I r drop, which is why open-circuit readings equal the emf.
+
+50
+00:05:11.700 --> 00:05:18.358
+That routine turns the question from battery mythology into consistent voltage bookkeeping.
+
+51
+00:05:18.358 --> 00:05:25.016
+It is the safest pattern for the first worked example in this lesson.
+
+52
+00:05:25.016 --> 00:05:31.675
+Step 1 means compare full and delivered: Start by identifying the emf and the actual terminal reading under the given condition.
+
+53
+00:05:31.675 --> 00:05:38.333
+Step 2 means find the loss: The difference between those values is the internal drop caused by current.
+
+54
+00:05:38.333 --> 00:05:44.991
+Step 3 means solve from the loss: Use the lost volts with the current to find internal resistance and then any internal power.
+
+55
+00:05:44.991 --> 00:05:51.649
+Full lift, lost part, delivered part is the safest reading pattern for real-source questions.
+
+56
+00:05:51.649 --> 00:05:58.307
+Keep this takeaway in view: Full lift, lost part, delivered part is the safest reading pattern for real-source questions.
+
+57
+00:05:58.307 --> 00:06:04.965
+Step 1 means compare full and delivered.
+
+58
+00:06:04.965 --> 00:06:11.624
+Start by identifying the emf and the actual terminal reading under the given condition.
+
+59
+00:06:11.624 --> 00:06:18.282
+Step 2 means find the loss.
+
+60
+00:06:18.282 --> 00:06:24.940
+The difference between those values is the internal drop caused by current.
+
+61
+00:06:24.940 --> 00:06:30.194
+A heavier load does not change the emf itself, but it can increase the internal drop and lower the terminal p.d.
+
+62
+00:06:30.194 --> 00:06:35.447
+That extra distinction prevents the learner from saying the battery became weaker without explaining why.
+
+63
+00:06:35.447 --> 00:06:40.701
+What stays fixed means emf meaning: The source lift is still the full available energy rise per coulomb.
+
+64
+00:06:40.701 --> 00:06:45.954
+What changes means I r drop: More current means more internal lost volts inside the source.
+
+65
+00:06:45.954 --> 00:06:51.208
+Visible result means lower terminal p.d.: The external circuit receives a smaller delivered p.d.
+
+66
+00:06:51.208 --> 00:06:56.461
+when the internal loss grows.
+
+67
+00:06:56.461 --> 00:07:01.715
+A falling terminal p.d.
+
+68
+00:07:01.715 --> 00:07:06.969
+under heavier load is an increased internal-drop story, not a redefinition of emf.
+
+69
+00:07:06.969 --> 00:07:12.222
+Keep this takeaway in view: A falling terminal p.d.
+
+70
+00:07:12.222 --> 00:07:17.476
+under heavier load is an increased internal-drop story, not a redefinition of emf.
+
+71
+00:07:17.476 --> 00:07:22.729
+What stays fixed means emf meaning.
+
+72
+00:07:22.729 --> 00:07:27.983
+The source lift is still the full available energy rise per coulomb.
+
+73
+00:07:27.983 --> 00:07:33.236
+What changes means I r drop.
+
+74
+00:07:33.236 --> 00:07:38.490
+More current means more internal lost volts inside the source.
+
+75
+00:07:38.490 --> 00:07:43.735
+Test the source-split idea before the worked example begins.
+
+76
+00:07:43.735 --> 00:07:48.980
+If these checks feel obvious, the battery calculation will feel much cleaner.
+
+77
+00:07:48.980 --> 00:07:54.225
+EMF means full lift: This is the total source rise before internal loss is removed.
+
+78
+00:07:54.225 --> 00:07:59.470
+Terminal p.d.
+
+79
+00:07:59.470 --> 00:08:04.715
+means delivered lift: This is the part available to the external circuit.
+
+80
+00:08:04.715 --> 00:08:09.960
+Internal drop means current dependent: The I r term grows when the current grows for the same source.
+
+81
+00:08:09.960 --> 00:08:15.205
+Internal power means loss inside: This heating power belongs inside the battery, not in the load.
+
+82
+00:08:15.205 --> 00:08:20.450
+The worked example is ready once the learner can defend emf, terminal p.d., and internal loss as separate ideas.
+
+83
+00:08:20.450 --> 00:08:25.695
+Keep this takeaway in view: The worked example is ready once the learner can defend emf, terminal p.d., and internal loss as separate ideas.
+
+84
+00:08:25.695 --> 00:08:30.940
+EMF means full lift.
+
+85
+00:08:30.940 --> 00:08:36.185
+This is the total source rise before internal loss is removed.
+
+86
+00:08:36.185 --> 00:08:41.430
+Terminal p.d.
+
+87
+00:08:41.430 --> 00:08:46.675
+means delivered lift.
+
+88
+00:08:46.675 --> 00:08:51.920
+This is the part available to the external circuit.
+
+89
+00:08:51.920 --> 00:08:58.052
+Now solve the example by naming the full emf, the delivered terminal p.d., and the lost volts in that order.
+
+90
+00:08:58.052 --> 00:09:04.184
+That keeps the answer attached to the source story instead of to symbol hunting.
+
+91
+00:09:04.184 --> 00:09:10.316
+First, identify emf and terminal p.d.
+
+92
+00:09:10.316 --> 00:09:16.448
+separately.
+
+93
+00:09:16.448 --> 00:09:22.579
+First, calculate lost volts inside the source first.
+
+94
+00:09:22.579 --> 00:09:28.711
+First, use the loss with current to find r and any internal power.
+
+95
+00:09:28.711 --> 00:09:34.843
+Do not start from r blindly matters because The internal resistance is easiest to see once the internal voltage drop has been identified.
+
+96
+00:09:34.843 --> 00:09:40.975
+Keep the source story verbal matters because A clear sentence about where the volts are spent often prevents the algebra from drifting.
+
+97
+00:09:40.975 --> 00:09:47.107
+State the loss location matters because The answer should make it clear that the lost power is inside the battery.
+
+98
+00:09:47.107 --> 00:09:53.239
+The first A7 worked example improves immediately once the learner tracks full lift, internal drop, and delivered p.d.
+
+99
+00:09:53.239 --> 00:09:59.371
+separately.
+
+100
+00:09:59.371 --> 00:10:05.502
+Keep this takeaway in view: The first A7 worked example improves immediately once the learner tracks full lift, internal drop, and delivered p.d.
+
+101
+00:10:05.502 --> 00:10:11.634
+separately.
+
+102
+00:10:11.634 --> 00:10:17.766
+Do not start from r blindly: The internal resistance is easiest to see once the internal voltage drop has been identified.
+
+103
+00:10:17.766 --> 00:10:23.898
+Keep the source story verbal: A clear sentence about where the volts are spent often prevents the algebra from drifting.
+
+104
+00:10:23.898 --> 00:10:30.030
+A good solution keeps the full source lift visible all the way through the calculation.

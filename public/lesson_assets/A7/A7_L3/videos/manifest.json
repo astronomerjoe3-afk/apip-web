@@ -1,0 +1,27 @@
+{
+  "lesson_id": "A7_L3",
+  "module": "A7",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 596.55,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: read the output as a fraction of the full supply set by the resistance ratio before touching the numbers.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "loaded_divider",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a7_preworked_v1\\videos\\03_a7_l3_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a7_preworked_v1\\videos\\03_a7_l3_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a7_preworked_v1\\videos\\03_a7_l3_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a7_preworked_v1\\videos\\03_a7_l3_preworked_explainer\\thumbnail.png"
+  }
+}

@@ -19817,6 +19817,90 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("A6_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("A6_L6", "captions.vtt"),
       };
+    case "A7_L1":
+      return {
+        body: "Use this video to separate source lift, delivered terminal p.d., and internal loss before the worked example begins.",
+        caption: "Video explainer: emf, terminal p.d., internal resistance, and lost-volts bookkeeping before the lesson example.",
+        highlights: [
+          "EMF is the full energy lift per coulomb inside the source",
+          "Terminal p.d. is the part delivered to the external circuit",
+          "Internal resistance explains why the source loses volts when current flows",
+        ],
+        checkForUnderstanding: "If a battery reading falls when the load is connected, what should you compare first before blaming the voltmeter?",
+        video_url: staticVideoAssetUrl("A7_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A7_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A7_L1", "captions.vtt"),
+      };
+    case "A7_L2":
+      return {
+        body: "Use this video to keep node balance and loop balance as two different conservation stories before the worked example begins.",
+        caption: "Video explainer: junction current bookkeeping, loop voltage balance, and Kirchhoff method order before the lesson example.",
+        highlights: [
+          "Current conservation belongs to junctions",
+          "Voltage balance belongs to closed loops",
+          "Kirchhoff questions become safer when the rules are applied in a fixed order",
+        ],
+        checkForUnderstanding: "When a circuit branches and then recombines, which rule should you usually test first: the junction rule or the loop rule?",
+        video_url: staticVideoAssetUrl("A7_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A7_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A7_L2", "captions.vtt"),
+      };
+    case "A7_L3":
+      return {
+        body: "Use this video to read a potential divider as one supply drop shared across a series route before the worked example begins.",
+        caption: "Video explainer: divider ratio, tapped output, and loading effect before the lesson example.",
+        highlights: [
+          "A divider output is a chosen fraction of the supply",
+          "The voltage split follows the resistance ratio in the series path",
+          "Attaching a load can change the effective lower resistance and the output",
+        ],
+        checkForUnderstanding: "If the lower divider resistance becomes a larger fraction of the total, what should happen to the output taken across it?",
+        video_url: staticVideoAssetUrl("A7_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A7_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A7_L3", "captions.vtt"),
+      };
+    case "A7_L4":
+      return {
+        body: "Use this video to read capacitance as a storage ratio rather than as charge alone before the worked example begins.",
+        caption: "Video explainer: Q = C V, storage-per-volt thinking, and geometry or dielectric effects before the lesson example.",
+        highlights: [
+          "Capacitance tells how much charge is stored for each volt",
+          "Larger capacitance means more stored charge at the same voltage",
+          "Plate geometry and dielectric material both affect the storage ratio",
+        ],
+        checkForUnderstanding: "At fixed voltage, what should you compare first to decide which capacitor stores more charge?",
+        video_url: staticVideoAssetUrl("A7_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A7_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A7_L4", "captions.vtt"),
+      };
+    case "A7_L5":
+      return {
+        body: "Use this video to treat RC behavior as a changing-rate process before the worked example begins.",
+        caption: "Video explainer: time constant, exponential charging and discharging, and graph reading before the lesson example.",
+        highlights: [
+          "Charging starts fast and then slows",
+          "Discharging starts steeply and then flattens",
+          "The time constant sets the natural response timescale of the RC circuit",
+        ],
+        checkForUnderstanding: "When the capacitor p.d. is rising during charging, what should be happening to the charging current at the same time?",
+        video_url: staticVideoAssetUrl("A7_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A7_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A7_L5", "captions.vtt"),
+      };
+    case "A7_L6":
+      return {
+        body: "Use this video to connect capacitor energy to field storage and to distinguish fixed-voltage from fixed-charge dielectric situations before the worked example begins.",
+        caption: "Video explainer: capacitor energy formulas, dielectric effects, and connected-versus-isolated reasoning before the lesson example.",
+        highlights: [
+          "Capacitors store energy in the electric field between the plates",
+          "Different energy formulas fit different known quantities",
+          "A dielectric changes the outcome differently depending on whether voltage or charge is held fixed",
+        ],
+        checkForUnderstanding: "Before predicting what a dielectric changes, what should you decide first: whether the capacitor stays connected to the supply, or whether the capacitance formula looks familiar?",
+        video_url: staticVideoAssetUrl("A7_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A7_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A7_L6", "captions.vtt"),
+      };
     case "A1_L1":
       return {
         body: "Use this video to separate radiation messengers, matter particles, and nucleus particles before the worked example begins.",

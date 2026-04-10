@@ -1,0 +1,409 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.155
+This lesson becomes clearer when before the worked example, connect the energy formulas to field storage and separate connected-capacitor cases from isolated-capacitor cases.
+
+2
+00:00:07.155 --> 00:00:14.310
+Stored energy means field energy: The energy belongs to the electric field between the plates.
+
+3
+00:00:14.310 --> 00:00:21.465
+Dielectric effect means raises C: A dielectric increases capacitance by changing the field response between the plates.
+
+4
+00:00:21.465 --> 00:00:28.620
+Main trap means forgetting the constraint: Connected and isolated capacitors behave differently because the fixed quantity changes.
+
+5
+00:00:28.620 --> 00:00:35.775
+Dielectric questions become safe once the learner names the fixed quantity before predicting energy or voltage changes.
+
+6
+00:00:35.775 --> 00:00:42.930
+Keep this takeaway in view: Dielectric questions become safe once the learner names the fixed quantity before predicting energy or voltage changes.
+
+7
+00:00:42.930 --> 00:00:50.085
+Stored energy means field energy.
+
+8
+00:00:50.085 --> 00:00:57.240
+The energy belongs to the electric field between the plates.
+
+9
+00:00:57.240 --> 00:01:04.395
+Dielectric effect means raises C.
+
+10
+00:01:04.395 --> 00:01:11.550
+A dielectric increases capacitance by changing the field response between the plates.
+
+11
+00:01:11.550 --> 00:01:19.696
+This diagram matters because the diagram matters because it ties formulas back to field storage instead of letting them float as separate facts.
+
+12
+00:01:19.696 --> 00:01:27.842
+Energy location shows that The stored energy belongs to the electric field between the capacitor plates.
+
+13
+00:01:27.842 --> 00:01:35.989
+Dielectric action shows that Inserting a dielectric increases capacitance by changing the field response.
+
+14
+00:01:35.989 --> 00:01:44.135
+Constraint check shows that The connected-or-isolated condition decides which quantity remains fixed.
+
+15
+00:01:44.135 --> 00:01:52.281
+Field energy and circuit constraint should be read together before any dielectric prediction is made.
+
+16
+00:01:52.281 --> 00:02:00.428
+Keep this takeaway in view: Field energy and circuit constraint should be read together before any dielectric prediction is made.
+
+17
+00:02:00.428 --> 00:02:08.574
+Energy location: The stored energy belongs to the electric field between the capacitor plates.
+
+18
+00:02:08.574 --> 00:02:16.720
+Dielectric action: Inserting a dielectric increases capacitance by changing the field response.
+
+19
+00:02:16.720 --> 00:02:24.082
+Changing the medium or stiffness changes the storage behavior, but the outcome depends on what is being held fixed.
+
+20
+00:02:24.082 --> 00:02:31.444
+That analogy helps because dielectric questions are really constraint questions in disguise.
+
+21
+00:02:31.444 --> 00:02:38.805
+Stored system means energy under a constraint: The stored energy depends on both the system property and what the surroundings are holding fixed.
+
+22
+00:02:38.805 --> 00:02:46.167
+Changed property means bigger storage ability: The dielectric changes the storage capability, just as a different spring changes the storage response.
+
+23
+00:02:46.167 --> 00:02:53.529
+Best question means what is fixed: The fixed quantity must be identified before predicting how energy or voltage changes.
+
+24
+00:02:53.529 --> 00:03:00.891
+The analogy works because it turns dielectric reasoning into a clear fixed-quantity question.
+
+25
+00:03:00.891 --> 00:03:08.253
+Keep this takeaway in view: The analogy works because it turns dielectric reasoning into a clear fixed-quantity question.
+
+26
+00:03:08.253 --> 00:03:15.615
+Stored system means energy under a constraint.
+
+27
+00:03:15.615 --> 00:03:22.976
+The stored energy depends on both the system property and what the surroundings are holding fixed.
+
+28
+00:03:22.976 --> 00:03:30.338
+Changed property means bigger storage ability.
+
+29
+00:03:30.338 --> 00:03:37.700
+The dielectric changes the storage capability, just as a different spring changes the storage response.
+
+30
+00:03:37.700 --> 00:03:44.681
+The learner should not memorize three forms as strangers because they all describe the same stored field energy.
+
+31
+00:03:44.681 --> 00:03:51.663
+What matters is choosing the form that matches the fixed or known quantities.
+
+32
+00:03:51.663 --> 00:03:58.644
+A key relation is E = 1/2 C V^2.
+
+33
+00:03:58.644 --> 00:04:05.626
+A key relation is E = 1/2 Q V.
+
+34
+00:04:05.626 --> 00:04:12.607
+A key relation is E = Q^2 / (2 C).
+
+35
+00:04:12.607 --> 00:04:19.589
+Choose the form that matches the fixed quantity.
+
+36
+00:04:19.589 --> 00:04:26.570
+The wrong fixed-quantity assumption leads to the wrong dielectric prediction even if the algebra is neat.
+
+37
+00:04:26.570 --> 00:04:33.551
+Connected to supply matters because Voltage stays fixed, so an increased capacitance raises the stored energy.
+
+38
+00:04:33.551 --> 00:04:40.533
+Isolated capacitor matters because Charge stays fixed, so an increased capacitance lowers the voltage and changes the energy differently.
+
+39
+00:04:40.533 --> 00:04:47.514
+Equation choice matters matters because Pick the energy form that respects the actual physical constraint.
+
+40
+00:04:47.514 --> 00:04:54.496
+Capacitor energy formulas become easy to trust once the learner chooses the form that matches the fixed quantity.
+
+41
+00:04:54.496 --> 00:05:01.477
+Keep this takeaway in view: Capacitor energy formulas become easy to trust once the learner chooses the form that matches the fixed quantity.
+
+42
+00:05:01.477 --> 00:05:08.459
+Connected to supply: Voltage stays fixed, so an increased capacitance raises the stored energy.
+
+43
+00:05:08.459 --> 00:05:15.440
+Isolated capacitor: Charge stays fixed, so an increased capacitance lowers the voltage and changes the energy differently.
+
+44
+00:05:15.440 --> 00:05:22.831
+That routine prevents the learner from predicting the right capacitance change but the wrong voltage or energy outcome.
+
+45
+00:05:22.831 --> 00:05:30.222
+It is the safest route into the worked example for this final lesson.
+
+46
+00:05:30.222 --> 00:05:37.613
+Step 1 means state the condition: Decide whether the capacitor stays connected to the supply or is isolated after charging.
+
+47
+00:05:37.613 --> 00:05:45.004
+Step 2 means name the fixed quantity: Connected usually means fixed voltage, while isolated usually means fixed charge.
+
+48
+00:05:45.004 --> 00:05:52.395
+Step 3 means choose the matching energy view: Use the form of the energy relation that respects the fixed quantity before you calculate.
+
+49
+00:05:52.395 --> 00:05:59.785
+Condition first and formula second is the safest routine for capacitor energy and dielectric questions.
+
+50
+00:05:59.785 --> 00:06:07.176
+Keep this takeaway in view: Condition first and formula second is the safest routine for capacitor energy and dielectric questions.
+
+51
+00:06:07.176 --> 00:06:14.567
+Step 1 means state the condition.
+
+52
+00:06:14.567 --> 00:06:21.958
+Decide whether the capacitor stays connected to the supply or is isolated after charging.
+
+53
+00:06:21.958 --> 00:06:29.349
+Step 2 means name the fixed quantity.
+
+54
+00:06:29.349 --> 00:06:36.740
+Connected usually means fixed voltage, while isolated usually means fixed charge.
+
+55
+00:06:36.740 --> 00:06:43.898
+The same dielectric insertion raises capacitance in both cases, but the follow-on story changes because the constraint changes.
+
+56
+00:06:43.898 --> 00:06:51.056
+That side-by-side view is the fastest way to stop half-remembered rules from colliding.
+
+57
+00:06:51.056 --> 00:06:58.215
+Connected case means V fixed: Increasing capacitance allows more stored charge and raises the stored energy.
+
+58
+00:06:58.215 --> 00:07:05.373
+Isolated case means Q fixed: Increasing capacitance lowers the voltage and changes the energy through the fixed-charge route.
+
+59
+00:07:05.373 --> 00:07:12.531
+Shared fact means C increases: The dielectric raises capacitance in both situations, but the consequences differ.
+
+60
+00:07:12.531 --> 00:07:19.689
+The two dielectric cases separate cleanly once the learner compares them through the fixed quantity.
+
+61
+00:07:19.689 --> 00:07:26.847
+Keep this takeaway in view: The two dielectric cases separate cleanly once the learner compares them through the fixed quantity.
+
+62
+00:07:26.847 --> 00:07:34.005
+Connected case means V fixed.
+
+63
+00:07:34.005 --> 00:07:41.164
+Increasing capacitance allows more stored charge and raises the stored energy.
+
+64
+00:07:41.164 --> 00:07:48.322
+Isolated case means Q fixed.
+
+65
+00:07:48.322 --> 00:07:55.480
+Increasing capacitance lowers the voltage and changes the energy through the fixed-charge route.
+
+66
+00:07:55.480 --> 00:08:02.195
+The learner should not force every question through one half C V squared if the problem is naturally describing fixed charge instead.
+
+67
+00:08:02.195 --> 00:08:08.909
+That deeper formula-choice habit makes advanced capacitor questions feel much calmer.
+
+68
+00:08:08.909 --> 00:08:15.624
+Use C V squared means when V is fixed: This form makes fixed-voltage dielectric outcomes easy to read immediately.
+
+69
+00:08:15.624 --> 00:08:22.338
+Use Q squared over 2C means when Q is fixed: This form makes isolated-capacitor reasoning much more direct.
+
+70
+00:08:22.338 --> 00:08:29.053
+Best habit means match form to story: Choose the equation that respects the constraint and reveals the consequence most clearly.
+
+71
+00:08:29.053 --> 00:08:35.767
+Energy-form choice is a reasoning tool, not just an algebra preference.
+
+72
+00:08:35.767 --> 00:08:42.482
+Keep this takeaway in view: Energy-form choice is a reasoning tool, not just an algebra preference.
+
+73
+00:08:42.482 --> 00:08:49.196
+Use C V squared means when V is fixed.
+
+74
+00:08:49.196 --> 00:08:55.911
+This form makes fixed-voltage dielectric outcomes easy to read immediately.
+
+75
+00:08:55.911 --> 00:09:02.625
+Use Q squared over 2C means when Q is fixed.
+
+76
+00:09:02.625 --> 00:09:09.340
+This form makes isolated-capacitor reasoning much more direct.
+
+77
+00:09:09.340 --> 00:09:15.935
+Test the field-energy and fixed-quantity ideas before the worked example begins.
+
+78
+00:09:15.935 --> 00:09:22.529
+If these checks feel stable, dielectric predictions become much safer.
+
+79
+00:09:22.529 --> 00:09:29.124
+Energy location means field between plates: Capacitor energy belongs to the electric field, not to a hidden store elsewhere.
+
+80
+00:09:29.124 --> 00:09:35.718
+Dielectric action means raises C: The dielectric increases the storage capability of the capacitor.
+
+81
+00:09:35.718 --> 00:09:42.313
+Connected case means V fixed: The supply keeps the p.d.
+
+82
+00:09:42.313 --> 00:09:48.908
+fixed while charge can adjust.
+
+83
+00:09:48.908 --> 00:09:55.502
+Isolated case means Q fixed: With the supply removed, the stored charge cannot simply flow away or be replenished.
+
+84
+00:09:55.502 --> 00:10:02.097
+The worked example is ready once the learner can decide the fixed quantity before using an energy formula.
+
+85
+00:10:02.097 --> 00:10:08.692
+Keep this takeaway in view: The worked example is ready once the learner can decide the fixed quantity before using an energy formula.
+
+86
+00:10:08.692 --> 00:10:15.286
+Energy location means field between plates.
+
+87
+00:10:15.286 --> 00:10:21.881
+Capacitor energy belongs to the electric field, not to a hidden store elsewhere.
+
+88
+00:10:21.881 --> 00:10:28.475
+Dielectric action means raises C.
+
+89
+00:10:28.475 --> 00:10:35.070
+The dielectric increases the storage capability of the capacitor.
+
+90
+00:10:35.070 --> 00:10:42.771
+Now solve the example by naming the circuit condition, the fixed quantity, and the most revealing energy formula before calculating.
+
+91
+00:10:42.771 --> 00:10:50.472
+That keeps the answer attached to field storage and dielectric reasoning instead of to memorized rule fragments.
+
+92
+00:10:50.472 --> 00:10:58.172
+First, state whether the capacitor is connected or isolated.
+
+93
+00:10:58.172 --> 00:11:05.873
+First, name the fixed quantity that follows from that condition.
+
+94
+00:11:05.873 --> 00:11:13.574
+First, choose the most revealing capacitor or energy relation before substituting.
+
+95
+00:11:13.574 --> 00:11:21.275
+Do not merge the two cases matters because Connected and isolated capacitors should not be answered with the same automatic change pattern.
+
+96
+00:11:21.275 --> 00:11:28.975
+Keep energy physical matters because The answer should mention the field storage meaning, not only the equation symbol.
+
+97
+00:11:28.975 --> 00:11:36.676
+Equation choice should explain matters because Pick the form that makes the consequence easiest to see before you calculate.
+
+98
+00:11:36.676 --> 00:11:44.377
+The final A7 worked example becomes much calmer once the learner decides the fixed quantity before predicting dielectric outcomes.
+
+99
+00:11:44.377 --> 00:11:52.078
+Keep this takeaway in view: The final A7 worked example becomes much calmer once the learner decides the fixed quantity before predicting dielectric outcomes.
+
+100
+00:11:52.078 --> 00:11:59.778
+Do not merge the two cases: Connected and isolated capacitors should not be answered with the same automatic change pattern.
+
+101
+00:11:59.778 --> 00:12:07.479
+Keep energy physical: The answer should mention the field storage meaning, not only the equation symbol.
+
+102
+00:12:07.479 --> 00:12:15.180
+A strong dielectric solution sounds like a fixed-quantity argument first and a calculation second.
