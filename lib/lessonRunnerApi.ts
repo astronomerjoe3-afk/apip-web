@@ -14860,87 +14860,183 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F2_L1":
       return {
-        body: "Separate the full route from the start-to-finish change before you compare any numbers.",
+        body: "Journey questions should separate route length, net change, and overall average speed in one go, because mixing those three ideas is the main trap in this lesson.",
         worked_example: {
-          prompt: "A learner walks 10 m east and then 4 m west. Find the distance travelled and the displacement.",
+          prompt: "A learner walks 18 m east in 12 s, then 7 m west in 5 s. Find the total distance, the displacement, and the average speed for the whole journey.",
           steps: [
-            "Distance is the full path travelled, so add both parts of the journey: 10 m + 4 m = 14 m.",
-            "Displacement compares the finishing point with the starting point, so keep the net change in direction.",
-            "After walking 10 m east and then 4 m west, the learner finishes 6 m east of the start.",
-            "State the two answers separately because distance and displacement describe different ideas.",
+            "Add every stage of the route to find the total distance: 18 m + 7 m = 25 m.",
+            "Compare the finishing point with the starting point to find the displacement: 18 m east followed by 7 m west leaves a net change of 11 m east.",
+            "Use the whole journey time for average speed: total time = 12 s + 5 s = 17 s.",
+            "Average speed = total distance / total time = 25 / 17 about 1.47 m/s, which can be reported as about 1.5 m/s.",
           ],
-          answer: "Distance = 14 m, displacement = 6 m east.",
+          answer: "Distance = 25 m, displacement = 11 m east, and average speed is about 1.5 m/s.",
+          answer_reason: "Distance uses every part of the route, displacement uses only the net start-to-finish change with direction, and average speed uses the whole journey distance divided by the whole journey time.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps zero displacement separate from zero distance.",
+            worked_example: {
+              prompt: "A runner completes one full 400 m lap and finishes exactly where they started after 80 s. What are the distance, displacement, and average speed?",
+              steps: [
+                "Use the full lap length for the distance: 400 m.",
+                "Because the runner finishes where they started, the displacement is 0 m.",
+                "Average speed uses the whole route and the whole time: 400 / 80 = 5.0 m/s.",
+              ],
+              answer: "Distance = 400 m, displacement = 0 m, and average speed = 5.0 m/s.",
+              answer_reason: "A round trip can have a large distance and a non-zero average speed while still having zero displacement.",
+            },
+          },
+        ],
       };
     case "F2_L2":
       return {
-        body: "Track the signed change in velocity first, then decide what the sign of the acceleration means.",
+        body: "Acceleration work should force the learner to use signed velocity carefully and separate a negative sign from the everyday idea of simply slowing down.",
         worked_example: {
-          prompt: "A cyclist moving east slows from 12 m/s to 4 m/s in 2 s. Take east as positive. Find the acceleration and interpret its sign.",
+          prompt: "Take east as positive. A trolley moves at +6 m/s and 3.0 s later its velocity is -3 m/s. Find the acceleration and explain what the sign means.",
           steps: [
-            "Write the relationship first: acceleration = change in velocity / time.",
-            "Use the sign convention in the question, so the initial velocity is +12 m/s and the final velocity is +4 m/s.",
-            "Calculate the change in velocity: 4 - 12 = -8 m/s, then divide by 2 s to get -4 m/s^2.",
-            "The negative sign shows that the acceleration points west, opposite the chosen positive direction.",
+            "Write the signed velocities first: initial velocity u = +6 m/s and final velocity v = -3 m/s.",
+            "Find the change in velocity: Delta v = v - u = -3 - 6 = -9 m/s.",
+            "Divide by the time: a = Delta v / t = -9 / 3.0 = -3.0 m/s^2.",
+            "Interpret the sign using the chosen positive direction: the negative sign means the acceleration points west, not merely that the object is 'slowing down'.",
           ],
-          answer: "Acceleration = -4 m/s^2, so the acceleration points west.",
+          answer: "The acceleration is -3.0 m/s^2, so it points west.",
+          answer_reason: "Acceleration comes from the signed change in velocity. Because the velocity changes from eastward to westward, the change is negative in the chosen sign convention.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up protects the learner from forgetting that direction change alone still changes velocity.",
+            worked_example: {
+              prompt: "Why can an object moving at constant speed around a bend still have non-zero acceleration?",
+              steps: [
+                "Separate speed from velocity first.",
+                "Constant speed means the magnitude of the motion stays the same, but turning changes the direction.",
+                "Because velocity includes direction, a direction change means the velocity changes, so the acceleration is non-zero.",
+              ],
+              answer: "It can still accelerate because its direction changes, and velocity depends on direction as well as speed.",
+              answer_reason: "Acceleration tracks change in velocity, not just change in speed.",
+            },
+          },
+        ],
       };
     case "F2_L3":
       return {
-        body: "Read one segment at a time so the slope tells the speed on that part of the journey.",
+        body: "Distance-time graph work should read the motion story segment by segment, because graph height, slope, and flat sections answer different questions.",
         worked_example: {
-          prompt: "On a distance-time graph, one straight segment rises from 6 m at 2 s to 18 m at 6 s. Find the speed on that segment.",
+          prompt: "A distance-time graph has a straight rising section from 4 m at 2 s to 28 m at 8 s, followed by a flat section from 8 s to 11 s. Find the speed on the rising section and state what the flat section means.",
           steps: [
-            "Use the two points from the same straight segment rather than the whole graph.",
-            "Calculate the distance change: 18 - 6 = 12 m.",
-            "Calculate the time change: 6 - 2 = 4 s, then use slope = distance change / time change.",
-            "12 / 4 = 3, so the segment shows a constant speed of 3 m/s.",
+            "Use the two points from the same rising segment, not the whole graph at once.",
+            "Find the distance change: 28 - 4 = 24 m.",
+            "Find the time change: 8 - 2 = 6 s, then use speed = slope = 24 / 6 = 4.0 m/s.",
+            "Interpret the flat section separately: if the graph stays horizontal from 8 s to 11 s, the distance is not changing, so the object is stopped for 3 s.",
           ],
-          answer: "Speed = 3 m/s.",
+          answer: "The speed on the rising section is 4.0 m/s, and the flat section means the object is stopped for 3 s.",
+          answer_reason: "On a distance-time graph, slope gives speed on a segment, while a flat section shows time passing with no extra distance being added.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up checks whether the learner can compare speeds from steepness rather than from graph height.",
+            worked_example: {
+              prompt: "Two straight sections on a distance-time graph have different starting heights, but one is steeper than the other. Which section shows the greater speed?",
+              steps: [
+                "Ignore the graph height and compare the steepness of the sections.",
+                "On a distance-time graph, greater steepness means larger slope.",
+                "A larger slope means a larger speed, so the steeper section is the faster one.",
+              ],
+              answer: "The steeper section shows the greater speed.",
+              answer_reason: "Graph height shows distance already covered, but slope shows how quickly the distance is changing.",
+            },
+          },
+        ],
       };
     case "F2_L4":
       return {
-        body: "Use slope and area separately so the same graph section can tell you both motion change and motion gained.",
+        body: "Velocity-time graph work should force the learner to use slope for acceleration and area for displacement without mixing those two graph features together.",
         worked_example: {
-          prompt: "A velocity-time graph shows a horizontal section at 4 m/s lasting 5 s. Find the displacement for that section and state the acceleration.",
+          prompt: "A velocity-time graph shows velocity increasing uniformly from 2 m/s to 8 m/s over 3.0 s. Find the acceleration and the displacement during that interval.",
           steps: [
-            "A horizontal section means the velocity stays constant, so its slope is zero.",
-            "Zero slope on a velocity-time graph means zero acceleration for that section.",
-            "Displacement comes from the area under the graph; here the area is a rectangle.",
-            "Area = velocity x time = 4 x 5 = 20, so the object gains 20 m of displacement.",
+            "Use the slope first for acceleration: a = Delta v / t = (8 - 2) / 3.0 = 2.0 m/s^2.",
+            "Now use area under the graph for displacement, not the slope again.",
+            "The area is a trapezium with parallel sides 2 and 8 and width 3.0 s.",
+            "Displacement = average velocity x time = ((2 + 8) / 2) x 3.0 = 15 m.",
           ],
-          answer: "Displacement = 20 m and acceleration = 0 m/s^2.",
+          answer: "Acceleration = 2.0 m/s^2 and displacement = 15 m.",
+          answer_reason: "A velocity-time graph stores two different quantities: the slope tells how quickly velocity changes, while the area under the graph tells the total displacement gained.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the constant-velocity case available as a simpler contrast.",
+            worked_example: {
+              prompt: "A horizontal section on a velocity-time graph stays at 5 m/s for 4 s. What are the acceleration and displacement for that section?",
+              steps: [
+                "A horizontal section has zero slope, so the acceleration is 0 m/s^2.",
+                "Displacement comes from the rectangle area under the graph.",
+                "Area = 5 x 4 = 20 m.",
+              ],
+              answer: "Acceleration = 0 m/s^2 and displacement = 20 m.",
+              answer_reason: "A constant-velocity section still gives displacement because the area under the graph is non-zero, even though the acceleration is zero.",
+            },
+          },
+        ],
       };
     case "F2_L5":
       return {
-        body: "Combine the forces first, then use the resultant to decide whether the motion can change.",
+        body: "Force-combination work should make the learner build the resultant before talking about motion, because balanced and unbalanced situations are decided by the net force, not by the presence of individual forces.",
         worked_example: {
-          prompt: "A cart is pulled with 10 N to the right and 6 N to the left. Find the resultant force and predict the motion change.",
+          prompt: "A trolley has 18 N to the right from a pull, 7 N to the right from a second pull, and 15 N to the left from friction and drag together. Find the resultant force and predict the direction of acceleration.",
           steps: [
-            "The forces act in opposite directions, so compare them rather than adding their sizes.",
-            "Subtract the smaller force from the larger one: 10 - 6 = 4 N.",
-            "Keep the direction of the larger force, so the resultant force is 4 N to the right.",
-            "Because the resultant is not zero, the cart accelerates to the right.",
+            "Combine forces that act in the same direction first: 18 N right + 7 N right = 25 N right.",
+            "Now compare the opposite directions to find the net effect: 25 N right - 15 N left = 10 N right.",
+            "Keep the direction of the larger total, so the resultant force is 10 N to the right.",
+            "Because the resultant is not zero, the trolley accelerates to the right.",
           ],
-          answer: "Resultant force = 4 N to the right, so the cart accelerates to the right.",
+          answer: "The resultant force is 10 N to the right, so the trolley accelerates to the right.",
+          answer_reason: "Motion changes are decided by the resultant force. Individual forces can be present without changing the motion if they balance to zero overall.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the balanced-force case conceptually sharp.",
+            worked_example: {
+              prompt: "If a cart has 12 N to the right and 12 N to the left, what is the resultant force and what does that imply about acceleration?",
+              steps: [
+                "Compare the opposite forces directly.",
+                "Equal opposite forces give a resultant force of 0 N.",
+                "A zero resultant force means no acceleration, though the cart could still be at rest or moving at constant velocity.",
+              ],
+              answer: "The resultant force is 0 N, so the acceleration is 0 m/s^2.",
+              answer_reason: "Balanced forces mean no change in velocity, not necessarily no motion.",
+            },
+          },
+        ],
       };
     case "F2_L6":
       return {
-        body: "Use F = ma for the calculation, then reason about how changing the mass would alter the response.",
+        body: "Newton's-second-law work should connect resultant force, mass, acceleration, and inertia in the same chain instead of treating F = ma as a one-step divide-only trick.",
         worked_example: {
-          prompt: "A 12 N resultant force acts on a 3 kg trolley. Find the acceleration and explain what happens if the mass doubles.",
+          prompt: "A trolley is pushed with 20 N forward while friction acts with 8 N backward. The trolley mass is 3.0 kg. Find the acceleration, then state what resultant force would be needed to keep the same acceleration if the mass doubled.",
           steps: [
-            "Start with a = F / m because the question gives the resultant force and the mass.",
-            "Substitute the values: a = 12 / 3 = 4 m/s^2.",
-            "Now imagine the mass doubling to 6 kg while the force stays 12 N.",
-            "The new acceleration would be 12 / 6 = 2 m/s^2, so doubling the mass halves the acceleration.",
+            "Find the resultant force first: 20 N forward - 8 N backward = 12 N forward.",
+            "Use a = F / m with the resultant force: a = 12 / 3.0 = 4.0 m/s^2.",
+            "Now double the mass to 6.0 kg but keep the same acceleration target of 4.0 m/s^2.",
+            "Use F = ma to find the new required resultant force: F = 6.0 x 4.0 = 24 N forward.",
           ],
-          answer: "Acceleration = 4 m/s^2; if the mass doubles, the acceleration becomes 2 m/s^2.",
+          answer: "The acceleration is 4.0 m/s^2, and a doubled mass would need a 24 N resultant force to keep that same acceleration.",
+          answer_reason: "F = ma links three quantities at once. More mass means more inertia, so keeping the same acceleration requires a larger resultant force.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps inertia from being mistaken for an extra force.",
+            worked_example: {
+              prompt: "Why does a heavier trolley accelerate less than a lighter trolley when the same resultant force acts on both?",
+              steps: [
+                "Start from a = F / m with the same F for both trolleys.",
+                "A larger mass makes the F / m ratio smaller.",
+                "Describe that resistance to motion change as greater inertia, not as a new opposing force.",
+              ],
+              answer: "The heavier trolley accelerates less because the same resultant force is spread over a larger mass, so it has greater inertia and a smaller acceleration.",
+              answer_reason: "Inertia is a property of matter that resists changes in motion; it is not an extra separate force in the force diagram.",
+            },
+          },
+        ],
       };
     case "F3_L1":
       return {
