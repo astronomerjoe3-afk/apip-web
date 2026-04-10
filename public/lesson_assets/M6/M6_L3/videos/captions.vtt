@@ -1,0 +1,305 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.856
+Lesson 3 is where M6 becomes conceptually richer.
+
+2
+00:00:05.856 --> 00:00:11.713
+Students often see a flat temperature and conclude that nothing much is happening.
+
+3
+00:00:11.713 --> 00:00:17.569
+But during a state change, that conclusion fails.
+
+4
+00:00:17.569 --> 00:00:23.425
+The heater can still be transferring energy continuously while the temperature stays flat because the energy is being used to change the state rather than to raise the thermal level.
+
+5
+00:00:23.425 --> 00:00:29.282
+That is why latent heat is such an important idea.
+
+6
+00:00:29.282 --> 00:00:35.138
+The worked example becomes much clearer once learners stop reading a plateau as a dead stage and start reading it as an energy-payment stage.
+
+7
+00:00:35.138 --> 00:00:40.995
+Keep this takeaway in view: The lesson turns a temperature plateau from a confusing graph feature into a meaningful energy clue.
+
+8
+00:00:40.995 --> 00:00:46.851
+Plateau clue means temperature flat.
+
+9
+00:00:46.851 --> 00:00:52.707
+A flat temperature does not automatically mean zero energy input.
+
+10
+00:00:52.707 --> 00:00:58.564
+State-change clue means latent heat.
+
+11
+00:00:58.564 --> 00:01:04.420
+Energy is being used to change the state rather than raise the temperature.
+
+12
+00:01:04.420 --> 00:01:11.731
+This diagram matters because it separates the meter reading from the energy ledger.
+
+13
+00:01:11.731 --> 00:01:19.042
+The temperature line sits flat at the Form Gate, yet the Morph Fee ledger keeps rising because energy is still being paid into the process.
+
+14
+00:01:19.042 --> 00:01:26.354
+That energy is not being wasted or disappearing.
+
+15
+00:01:26.354 --> 00:01:33.665
+It is being used to change the arrangement and state of the material.
+
+16
+00:01:33.665 --> 00:01:40.976
+Once students can say that sentence confidently, latent heat stops feeling like an exception and starts feeling like a consistent thermal story.
+
+17
+00:01:40.976 --> 00:01:48.288
+Keep this takeaway in view: A strong latent-heat diagram shows that a flat temperature can still sit on top of an active energy stream.
+
+18
+00:01:48.288 --> 00:01:55.599
+Flat reading: The temperature remains steady during this stage.
+
+19
+00:01:55.599 --> 00:02:02.910
+Active ledger: The energy transfer into the sample continues while the state is changing.
+
+20
+00:02:02.910 --> 00:02:09.115
+A helpful analogy is climbing a building where, at one stage, you must pay a large door fee before the next floor becomes available.
+
+21
+00:02:09.115 --> 00:02:15.320
+While you are paying the fee, your floor number does not rise, but your spending is still real and increasing.
+
+22
+00:02:15.320 --> 00:02:21.525
+Latent heat works similarly.
+
+23
+00:02:21.525 --> 00:02:27.730
+The temperature can stay flat while energy still enters the sample because the payment is buying a state change rather than a higher thermal level.
+
+24
+00:02:27.730 --> 00:02:33.935
+The analogy matters because it shows why a flat reading is not the same as an inactive process.
+
+25
+00:02:33.935 --> 00:02:40.140
+Keep this takeaway in view: The door-fee analogy helps learners stop reading a plateau as a dead interval.
+
+26
+00:02:40.140 --> 00:02:46.345
+Flat floor number means same level.
+
+27
+00:02:46.345 --> 00:02:52.550
+The reading does not move yet, even though the process is still active.
+
+28
+00:02:52.550 --> 00:02:58.755
+Ongoing payment means fee rises.
+
+29
+00:02:58.755 --> 00:03:04.960
+Energy continues to be supplied during the state-change stage.
+
+30
+00:03:04.960 --> 00:03:13.292
+The key equation is Q equals mL.
+
+31
+00:03:13.292 --> 00:03:21.625
+Q is the energy transferred during the state change, m is the mass, and L is the latent heat of the material.
+
+32
+00:03:21.625 --> 00:03:29.957
+This rule applies only to a state-change stage.
+
+33
+00:03:29.957 --> 00:03:38.290
+That condition matters because students often try to push Q equals mc delta T through the plateau.
+
+34
+00:03:38.290 --> 00:03:46.622
+But the plateau is exactly where the state-change bill takes over.
+
+35
+00:03:46.622 --> 00:03:54.955
+The worked example becomes much cleaner once the learner can tell those two bills apart.
+
+36
+00:03:54.955 --> 00:04:03.288
+Keep this takeaway in view: The latent-heat formula becomes reliable when students treat it as a stage-specific bill rather than as a replacement for all thermal equations.
+
+37
+00:04:03.288 --> 00:04:11.620
+If the sample is warming: Use the `mcΔT` bill for that stage instead.
+
+38
+00:04:11.620 --> 00:04:19.952
+If the sample is changing state: Use the latent-heat bill because the energy is paying for the transition.
+
+39
+00:04:19.952 --> 00:04:28.285
+Q = mL.
+
+40
+00:04:28.285 --> 00:04:36.618
+latent heat is the state-change energy payment.
+
+41
+00:04:36.618 --> 00:04:44.950
+Do not let a flat temperature line trick you into deleting the energy-transfer stage from the ledger.
+
+42
+00:04:44.950 --> 00:04:51.073
+A strong routine is to ask what kind of stage the sample is in.
+
+43
+00:04:51.073 --> 00:04:57.197
+If the temperature is flat at a known Form Gate while energy is still being supplied, label the stage as a state-change stage immediately.
+
+44
+00:04:57.197 --> 00:05:03.320
+Then move to the latent-heat bill rather than the warm-up bill.
+
+45
+00:05:03.320 --> 00:05:09.443
+This naming move is small, but it prevents the learner from applying the wrong equation and from misreading the plateau as inactivity.
+
+46
+00:05:09.443 --> 00:05:15.567
+Keep this takeaway in view: The plateau-then-stage routine is one of the safest habits in the whole thermal module.
+
+47
+00:05:15.567 --> 00:05:21.690
+Step 1 means spot the plateau.
+
+48
+00:05:21.690 --> 00:05:27.813
+Notice when the temperature stays fixed while the process continues.
+
+49
+00:05:27.813 --> 00:05:33.937
+Step 2 means name the stage.
+
+50
+00:05:33.937 --> 00:05:40.060
+Call it a state-change stage rather than a simple warm-up stage.
+
+51
+00:05:40.060 --> 00:05:43.367
+Try four checks.
+
+52
+00:05:43.367 --> 00:05:46.675
+If the temperature is flat during a state change, can energy still be entering?
+
+53
+00:05:46.675 --> 00:05:49.982
+Yes.
+
+54
+00:05:49.982 --> 00:05:53.289
+Is that energy mainly paying for a temperature rise in that stage?
+
+55
+00:05:53.289 --> 00:05:56.597
+No.
+
+56
+00:05:56.597 --> 00:05:59.904
+Is Q equals mL the correct state-change bill?
+
+57
+00:05:59.904 --> 00:06:03.211
+Yes.
+
+58
+00:06:03.211 --> 00:06:06.519
+And should a plateau be ignored when planning the thermal ledger?
+
+59
+00:06:06.519 --> 00:06:09.826
+Definitely not.
+
+60
+00:06:09.826 --> 00:06:13.133
+Those are the decisions the worked example will need.
+
+61
+00:06:13.133 --> 00:06:16.441
+Keep this takeaway in view: The worked example is ready once the learner can treat a plateau as a meaningful energy-transfer stage.
+
+62
+00:06:16.441 --> 00:06:19.748
+Flat temperature means energy can still enter.
+
+63
+00:06:19.748 --> 00:06:23.055
+A plateau is not proof of an inactive heater.
+
+64
+00:06:23.055 --> 00:06:26.363
+Energy route means state change.
+
+65
+00:06:26.363 --> 00:06:29.670
+The payment is going into the transition rather than a thermal rise.
+
+66
+00:06:29.670 --> 00:06:35.135
+You are ready for the worked example now.
+
+67
+00:06:35.135 --> 00:06:40.601
+Start by deciding whether the sample is at a state-change gate.
+
+68
+00:06:40.601 --> 00:06:46.066
+If it is, do not force the warm-up bill through that interval.
+
+69
+00:06:46.066 --> 00:06:51.532
+Use the latent-heat stage instead, and explain that the flat temperature does not mean zero transfer.
+
+70
+00:06:51.532 --> 00:06:56.997
+The strongest answers in this lesson state why the plateau is happening before they calculate anything.
+
+71
+00:06:56.997 --> 00:07:02.463
+Keep this takeaway in view: The worked example is ready: the learner can now read latent heat as a real thermal payment during a flat-temperature stage.
+
+72
+00:07:02.463 --> 00:07:07.928
+Graph move: Use the plateau as a clue, not as a reason to stop thinking.
+
+73
+00:07:07.928 --> 00:07:13.394
+Equation move: Switch from the warm-up rule to the latent-heat rule at the right stage.
+
+74
+00:07:13.394 --> 00:07:18.859
+spot the flat-temperature stage.
+
+75
+00:07:18.859 --> 00:07:24.325
+label it as a state-change interval.
+
+76
+00:07:24.325 --> 00:07:29.790
+A strong solution makes the plateau meaningful before it makes it numerical.

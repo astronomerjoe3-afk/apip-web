@@ -1,0 +1,329 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.823
+The final lesson of M6 is the richest because it combines two kinds of reasoning.
+
+2
+00:00:07.823 --> 00:00:15.646
+First, the learner has to identify the transfer route correctly, especially when radiation is involved across a gap or even a vacuum.
+
+3
+00:00:15.646 --> 00:00:23.469
+Second, the learner has to keep the thermal mission in stages: a warm-up stage may use Q equals mc delta T, while a later state-change stage may use Q equals mL.
+
+4
+00:00:23.469 --> 00:00:31.292
+These parts must be totaled carefully, not blended into one careless substitution.
+
+5
+00:00:31.292 --> 00:00:39.115
+Once students can do both jobs in order, the final worked example becomes much more manageable.
+
+6
+00:00:39.115 --> 00:00:46.938
+Keep this takeaway in view: The capstone lesson is strongest when students treat route choice and stage bookkeeping as two linked but separate decisions.
+
+7
+00:00:46.938 --> 00:00:54.761
+Route clue means radiation crosses gaps.
+
+8
+00:00:54.761 --> 00:01:02.584
+Radiation can move energy even where a material medium is absent.
+
+9
+00:01:02.584 --> 00:01:10.407
+Surface clue means dark vs shiny.
+
+10
+00:01:10.407 --> 00:01:18.230
+Surface finish changes how strongly the energy is absorbed or emitted.
+
+11
+00:01:18.230 --> 00:01:27.193
+This diagram matters because it keeps two crucial ideas in one frame without mixing them up.
+
+12
+00:01:27.193 --> 00:01:36.156
+One side shows that radiation can cross a gap, even a vacuum, because it does not require a material medium the way conduction and convection do.
+
+13
+00:01:36.156 --> 00:01:45.119
+The other side shows the ledger logic: warm-up energy and state-change energy often belong to different stages and must be calculated separately before being added.
+
+14
+00:01:45.119 --> 00:01:54.081
+Students who can read both sides of this picture are ready for the richest thermal examples in the module.
+
+15
+00:01:54.081 --> 00:02:03.044
+Keep this takeaway in view: A strong capstone diagram lets the learner see both the route decision and the stage-total decision without confusing them.
+
+16
+00:02:03.044 --> 00:02:12.007
+Gap route: Radiation can still transfer energy where contact and fluid loops are absent.
+
+17
+00:02:12.007 --> 00:02:20.970
+Surface effect: Dark dull finishes often absorb or emit more strongly than shiny finishes.
+
+18
+00:02:20.970 --> 00:02:25.599
+A helpful analogy is a project where a signal has to cross a gap and then the receiving system must be upgraded in two paid stages.
+
+19
+00:02:25.599 --> 00:02:30.228
+First you decide how the signal crosses the gap.
+
+20
+00:02:30.228 --> 00:02:34.858
+Then you calculate the separate invoices for the stages of the upgrade.
+
+21
+00:02:34.858 --> 00:02:39.487
+M6 Lesson 6 works the same way.
+
+22
+00:02:39.487 --> 00:02:44.116
+First the learner identifies radiation as the gap-crossing route.
+
+23
+00:02:44.116 --> 00:02:48.745
+Then the learner totals the warm-up and state-change bills stage by stage.
+
+24
+00:02:48.745 --> 00:02:53.374
+The analogy matters because it keeps route selection and ledger construction in the right order.
+
+25
+00:02:53.374 --> 00:02:58.003
+Keep this takeaway in view: The signal-and-invoices analogy helps the learner keep the capstone lesson ordered and readable.
+
+26
+00:02:58.003 --> 00:03:02.632
+Cross the gap means choose the route.
+
+27
+00:03:02.632 --> 00:03:07.262
+The signal still gets across even without a material bridge.
+
+28
+00:03:07.262 --> 00:03:11.891
+Invoice one means warm-up stage.
+
+29
+00:03:11.891 --> 00:03:16.520
+One bill may belong to a temperature-change stage.
+
+30
+00:03:16.520 --> 00:03:23.206
+The main numerical rule here is that a full thermal mission may require Q total equals mc delta T plus mL, or some other stage-by-stage combination, depending on the process.
+
+31
+00:03:23.206 --> 00:03:29.892
+The learner should never collapse that into one thoughtless substitution.
+
+32
+00:03:29.892 --> 00:03:36.578
+The warm-up stage uses the temperature-change bill.
+
+33
+00:03:36.578 --> 00:03:43.265
+The state-change stage uses the latent-heat bill.
+
+34
+00:03:43.265 --> 00:03:49.951
+And before any of that, the learner may need to explain that radiation is the route carrying energy across a gap.
+
+35
+00:03:49.951 --> 00:03:56.637
+The lesson is not hard because the equations are exotic.
+
+36
+00:03:56.637 --> 00:04:03.323
+It is hard because it rewards ordered thinking.
+
+37
+00:04:03.323 --> 00:04:10.009
+Keep this takeaway in view: The capstone formula logic becomes manageable when students let each stage keep its own bill and its own meaning.
+
+38
+00:04:10.009 --> 00:04:16.695
+If a gap appears: Check whether radiation is the only route that can carry energy across it.
+
+39
+00:04:16.695 --> 00:04:23.382
+If the sample warms first: Use the temperature-change bill for that opening stage.
+
+40
+00:04:23.382 --> 00:04:30.068
+Q_total = mcΔT + mL for a warm-up stage followed by a state-change stage.
+
+41
+00:04:30.068 --> 00:04:36.754
+radiation can cross a vacuum gap.
+
+42
+00:04:36.754 --> 00:04:43.440
+A strong answer decides the transfer route first and only then begins the stage-by-stage thermal ledger.
+
+43
+00:04:43.440 --> 00:04:48.328
+A strong planning routine is to choose the route first and split the stages second.
+
+44
+00:04:48.328 --> 00:04:53.217
+Ask how the energy gets across the setup.
+
+45
+00:04:53.217 --> 00:04:58.105
+If a gap or vacuum is involved, radiation may be the key route.
+
+46
+00:04:58.105 --> 00:05:02.994
+Then ask how many thermal stages the sample goes through.
+
+47
+00:05:02.994 --> 00:05:07.882
+Does it simply warm?
+
+48
+00:05:07.882 --> 00:05:12.771
+Does it later reach a state-change gate?
+
+49
+00:05:12.771 --> 00:05:17.659
+Once those stages are separated, the learner can assign the correct bill to each stage and total them carefully.
+
+50
+00:05:17.659 --> 00:05:22.548
+This routine is the heart of the final lesson.
+
+51
+00:05:22.548 --> 00:05:27.436
+Keep this takeaway in view: The route-then-stages routine turns a complex thermal mission into a sequence of understandable decisions.
+
+52
+00:05:27.436 --> 00:05:32.325
+Step 1 means route choice.
+
+53
+00:05:32.325 --> 00:05:37.213
+Identify the transfer mechanism before touching the equations.
+
+54
+00:05:37.213 --> 00:05:42.102
+Step 2 means split stages.
+
+55
+00:05:42.102 --> 00:05:46.990
+Break the mission into warm-up and state-change intervals where needed.
+
+56
+00:05:46.990 --> 00:05:50.914
+Try four checks.
+
+57
+00:05:50.914 --> 00:05:54.838
+Can radiation cross a vacuum gap?
+
+58
+00:05:54.838 --> 00:05:58.762
+Yes.
+
+59
+00:05:58.762 --> 00:06:02.686
+Should dark and shiny surfaces always absorb equally?
+
+60
+00:06:02.686 --> 00:06:06.610
+No.
+
+61
+00:06:06.610 --> 00:06:10.534
+If a problem contains both a warm-up and a state-change stage, should one equation be pushed blindly across the whole process?
+
+62
+00:06:10.534 --> 00:06:14.458
+No.
+
+63
+00:06:14.458 --> 00:06:18.382
+And is it safer to decide the transfer route before building the thermal ledger?
+
+64
+00:06:18.382 --> 00:06:22.306
+Absolutely.
+
+65
+00:06:22.306 --> 00:06:26.230
+Those are the final habits the worked example needs.
+
+66
+00:06:26.230 --> 00:06:30.154
+Keep this takeaway in view: The final worked example is ready once the learner can organize the capstone thermal mission in the right order.
+
+67
+00:06:30.154 --> 00:06:34.078
+Gap crossing means radiation works.
+
+68
+00:06:34.078 --> 00:06:38.002
+This route can carry energy where contact and convection cannot.
+
+69
+00:06:38.002 --> 00:06:41.926
+Surface finish means absorption differs.
+
+70
+00:06:41.926 --> 00:06:45.850
+Dark dull and shiny surfaces do not behave identically.
+
+71
+00:06:45.850 --> 00:06:52.192
+You are ready for the final worked example now.
+
+72
+00:06:52.192 --> 00:06:58.535
+Begin by deciding how the energy is transferred in the setup.
+
+73
+00:06:58.535 --> 00:07:04.878
+If the problem includes a gap, explain whether radiation is the key route.
+
+74
+00:07:04.878 --> 00:07:11.220
+Then split the sample's thermal journey into stages: a temperature-change stage may use `Q = mcΔT`, while a later state-change stage may use `Q = mL`.
+
+75
+00:07:11.220 --> 00:07:17.562
+Calculate each stage separately and total them only at the end.
+
+76
+00:07:17.562 --> 00:07:23.905
+The strongest answers in this lesson sound calm because they follow the correct order of thinking.
+
+77
+00:07:23.905 --> 00:07:30.248
+Keep this takeaway in view: The final worked example is ready: the learner can now handle route choice and multi-stage thermal bookkeeping in one coherent solution.
+
+78
+00:07:30.248 --> 00:07:36.590
+Route move: Explain why the chosen transfer mechanism fits the physical setup.
+
+79
+00:07:36.590 --> 00:07:42.932
+Ledger move: Keep each thermal stage on its own bill line before totaling.
+
+80
+00:07:42.932 --> 00:07:49.275
+choose the transfer route before starting the ledger.
+
+81
+00:07:49.275 --> 00:07:55.618
+split the mission into warm-up and state-change stages.
+
+82
+00:07:55.618 --> 00:08:01.960
+A complete final answer is orderly because it separates mechanism choice from thermal bookkeeping.
