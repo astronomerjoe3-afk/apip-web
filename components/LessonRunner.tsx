@@ -21,6 +21,7 @@ import M13SimulationPanels from "./M13SimulationPanels";
 import M14SimulationPanels from "./M14SimulationPanels";
 import F5SimulationPanels from "./F5SimulationPanels";
 import A1SimulationPanels from "./A1SimulationPanels";
+import A4SimulationPanels from "./A4SimulationPanels";
 import A6ToA11SimulationPanels from "./A6ToA11SimulationPanels";
 
 type StageName =
@@ -3272,6 +3273,27 @@ export default function LessonRunner({
             setSimVectorMagnitude={setSimVectorMagnitude}
             simVectorAngle={simVectorAngle}
             setSimVectorAngle={setSimVectorAngle}
+          />
+        ) : simulationLessonKey.startsWith("A4_") ? (
+          <A4SimulationPanels
+            lessonKey={simulationLessonKey}
+            simMetricMeters={simMetricMeters}
+            setSimMetricMeters={setSimMetricMeters}
+            simVectorMagnitude={simVectorMagnitude}
+            setSimVectorMagnitude={setSimVectorMagnitude}
+            simVectorAngle={simVectorAngle}
+            setSimVectorAngle={setSimVectorAngle}
+            simDensityMass={simDensityMass}
+            setSimDensityMass={setSimDensityMass}
+            simDensityVolume={simDensityVolume}
+            setSimDensityVolume={setSimDensityVolume}
+            simFluidDensity={simFluidDensity}
+            setSimFluidDensity={setSimFluidDensity}
+            simBias={simBias}
+            setSimBias={setSimBias}
+            simSpread={simSpread}
+            setSimSpread={setSimSpread}
+            formatSimulationNumber={formatSimulationNumber}
           />
         ) : simulationLessonKey.startsWith("M9_") ? (
           <M9SimulationPanels

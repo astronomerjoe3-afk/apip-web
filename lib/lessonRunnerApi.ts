@@ -11172,6 +11172,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A4_")) {
+    switch (code) {
+      case "A4_L1":
+        return {
+          body: "The first advanced mechanics example should force a clean component resolution and an explicit equilibrium check instead of a picture-only guess.",
+          worked_example: {
+            prompt: "A 250 N support cable pulls 30 deg above the horizontal on a bracket. A horizontal brace and a vertical support keep the bracket in equilibrium. Find the cable's horizontal and vertical components, then state the balancing forces required.",
+            steps: [
+              "Resolve the 250 N cable into perpendicular components: Fx = 250 cos 30 deg and Fy = 250 sin 30 deg.",
+              "Evaluate the components numerically before saying anything about equilibrium.",
+              "For equilibrium, match each component with an equal and opposite balancing force on the same axis.",
+            ],
+            answer: "The cable components are about 217 N horizontally and 125 N vertically, so equilibrium needs about 217 N opposite horizontally and 125 N opposite vertically.",
+            answer_reason: "Equilibrium is not judged from the diagonal arrow itself. The 250 N cable must first be resolved into 250 cos 30 deg and 250 sin 30 deg, then each component is balanced separately by an equal and opposite force.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner rebuild a diagonal resultant rather than only splitting one apart.",
+              worked_example: {
+                prompt: "A ring is pulled by 80 N east and 60 N north. Find the magnitude and direction of the single resultant force.",
+                steps: [
+                  "Treat the east and north pulls as perpendicular components of one resultant vector.",
+                  "Use Pythagoras for the magnitude: R = sqrt(80^2 + 60^2).",
+                  "Use tan theta = 60 / 80 to find the angle above the east direction.",
+                ],
+                answer: "The resultant force is 100 N at about 36.9 deg north of east.",
+                answer_reason: "Perpendicular components do not add as plain numbers. The magnitude comes from Pythagoras, and the direction comes from the vertical-to-horizontal ratio.",
+              },
+            },
+          ],
+        };
+      case "A4_L2":
+        return {
+          body: "This lesson should make two-dimensional motion feel like two linked one-dimensional calculations sharing a clock, not like one blended formula problem.",
+          worked_example: {
+            prompt: "A probe starts with velocity components 6 m/s east and 4 m/s north. For 3.0 s it has acceleration components 2.0 m/s^2 east and -1.0 m/s^2 north. Find the final velocity components and the displacement components after 3.0 s.",
+            steps: [
+              "Work on the x-axis first: vx = ux + axt and x = uxt + 0.5 axt^2.",
+              "Work on the y-axis separately with the same time value: vy = uy + ayt and y = uyt + 0.5 ayt^2.",
+              "Only after both component stories are complete should you summarize the overall motion state.",
+            ],
+            answer: "After 3.0 s, vx = 12 m/s east and vy = 1 m/s north. The displacement components are 27 m east and 7.5 m north.",
+            answer_reason: "The same 3.0 s applies on both axes, but the acceleration on each axis is different. That is why the component equations must be solved separately before the motion is recombined.",
+          },
+          extra_examples: [
+            {
+              body: "The second example protects the learner from letting one zero component erase the other direction story.",
+              worked_example: {
+                prompt: "A skater moves 5.0 m/s east with zero horizontal acceleration while also accelerating 1.5 m/s^2 north from rest for 4.0 s. What are the horizontal and vertical displacements after 4.0 s?",
+                steps: [
+                  "Use the x-story first: x = vt because the horizontal acceleration is zero.",
+                  "Use the y-story second: y = ut + 0.5at^2 with u = 0 in the north direction.",
+                  "State both displacements without pretending one direction cancels the other.",
+                ],
+                answer: "The skater moves 20 m east and 12 m north.",
+                answer_reason: "Zero acceleration on one axis does not remove motion on the other axis. The eastward motion stays uniform while the northward motion grows from the separate acceleration.",
+              },
+            },
+          ],
+        };
+      case "A4_L3":
+        return {
+          body: "Projectile work should be challenging enough to require time-linking across multiple quantities, not just one substitution into one equation.",
+          worked_example: {
+            prompt: "A ball is launched at 20 m/s at 40 deg above the horizontal. Ignore air resistance and take g = 9.8 m/s^2. Find the time to maximum height, the maximum height, and the horizontal range.",
+            steps: [
+              "Resolve the launch velocity into components: ux = 20 cos 40 deg and uy = 20 sin 40 deg.",
+              "Use the vertical story to reach the top where vy = 0: t_up = uy / g, then use y = uyt - 0.5gt^2 for the maximum height.",
+              "Use the full flight time 2t_up with the horizontal story x = uxt to find the range.",
+            ],
+            answer: "The projectile reaches maximum height after about 1.31 s, rises to about 8.26 m, and travels about 40.2 m horizontally.",
+            answer_reason: "Projectile motion is solved by splitting the launch into horizontal and vertical components. Gravity changes only the vertical component, while the horizontal component remains constant in the ideal model.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up uses a horizontal launch so the learner still has to keep the two component stories separate.",
+              worked_example: {
+                prompt: "A package leaves a 25 m platform horizontally at 12 m/s. Ignore air resistance. Find the time to hit the ground and the horizontal distance traveled.",
+                steps: [
+                  "Use the vertical story first because the landing time is set by the 25 m drop with uy = 0.",
+                  "Solve 25 = 0.5gt^2 for the flight time.",
+                  "Use the constant horizontal velocity with x = uxt to find the horizontal distance.",
+                ],
+                answer: "The package lands after about 2.26 s and travels about 27.1 m horizontally.",
+                answer_reason: "Even with a horizontal launch, the landing time comes entirely from the vertical fall, while the horizontal distance is found from the constant horizontal component over that same time.",
+              },
+            },
+          ],
+        };
+      case "A4_L4":
+        return {
+          body: "The collision example should force momentum bookkeeping first and then deliberately separate that from kinetic-energy judgment.",
+          worked_example: {
+            prompt: "A 0.80 kg cart moving at 6.0 m/s collides head-on with a 1.20 kg cart moving at 2.0 m/s in the opposite direction. They stick together. Find the common velocity after impact and compare the kinetic energy before and after.",
+            steps: [
+              "Choose one positive direction and keep the sign on both initial velocities before adding momenta.",
+              "Use conservation of momentum for the whole system to find the shared final velocity.",
+              "Then calculate kinetic energy before and after separately to decide what changed besides momentum bookkeeping.",
+            ],
+            answer: "The joined carts move at 1.2 m/s in the original direction of the 0.80 kg cart. The kinetic energy falls from 16.8 J before impact to 1.44 J after impact.",
+            answer_reason: "Total momentum is conserved for the system, so the signed momentum sum fixes the common final velocity. The large drop in kinetic energy shows that a sticking collision is inelastic even though the momentum ledger still balances.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps impulse tied to momentum change in a rebound, where the sign matters twice.",
+              worked_example: {
+                prompt: "A 0.15 kg ball approaches a wall at 18 m/s and rebounds straight back at 22 m/s. If the contact lasts 0.012 s, find the change in momentum and the average force on the ball.",
+                steps: [
+                  "Choose one positive direction and write the rebound velocity with the opposite sign from the approach velocity.",
+                  "Find the momentum change Delta p = mv - mu using the signed velocities.",
+                  "Use average force = Delta p / Delta t and state the direction from the sign.",
+                ],
+                answer: "The momentum change is 6.0 kg m/s, so the average force magnitude is 500 N opposite to the ball's original motion.",
+                answer_reason: "A rebound flips direction, so the momentum change is larger than a simple speed difference. The signed momentum calculation captures both the slowdown and the reversal before the force is found.",
+              },
+            },
+          ],
+        };
+      case "A4_L5":
+        return {
+          body: "The circular-motion example should keep the turning geometry visible and make the inward direction part of the mathematical answer.",
+          worked_example: {
+            prompt: "A 1200 kg car takes a flat circular bend of radius 45 m at 18 m/s. Find the centripetal acceleration and the resultant centripetal force on the car.",
+            steps: [
+              "Use a = v^2 / r to calculate the inward acceleration from the turning speed and radius.",
+              "Then use F = ma with the car's mass to convert the acceleration into the required resultant force.",
+              "State both answers as inward quantities because circular motion changes direction continuously.",
+            ],
+            answer: "The centripetal acceleration is 7.2 m/s^2 inward and the resultant centripetal force is 8640 N inward.",
+            answer_reason: "Constant speed does not remove acceleration here because the velocity direction is changing all the time. The required acceleration and resultant force both point toward the center of the circle.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up uses rotational frequency so the learner has to connect different circular-motion descriptions.",
+              worked_example: {
+                prompt: "A 0.25 kg bung moves in a horizontal circle of radius 0.80 m at 2.5 revolutions per second. Find the speed of the bung and the centripetal force.",
+                steps: [
+                  "Convert frequency into speed using v = 2pi rf.",
+                  "Then use F = mv^2 / r for the centripetal force.",
+                  "Keep the final force as an inward force rather than as a bare number only.",
+                ],
+                answer: "The speed is about 12.6 m/s and the centripetal force is about 49.3 N inward.",
+                answer_reason: "Frequency tells how often the full circle is completed, so it determines the tangential speed first. That speed then sets the required inward force through mv^2 / r.",
+              },
+            },
+          ],
+        };
+      case "A4_L6":
+        return {
+          body: "The materials example should normalize the load response properly so stress, strain, and Young modulus are all used with units and scale checks.",
+          worked_example: {
+            prompt: "A wire is 1.80 m long with cross-sectional area 1.5 x 10^-6 m^2. A 270 N load stretches it by 1.8 mm. Find the stress, the strain, and the Young modulus.",
+            steps: [
+              "Convert the extension into metres before starting the strain calculation.",
+              "Use stress = force / area and strain = extension / original length.",
+              "Use Young modulus = stress / strain and keep the final answer in pascals or a clear gigapascal form.",
+            ],
+            answer: "The stress is 1.8 x 10^8 Pa, the strain is 1.0 x 10^-3, and the Young modulus is 1.8 x 10^11 Pa (about 180 GPa).",
+            answer_reason: "Stress and strain are normalized quantities, so the geometry matters as much as the load. Young modulus then compares those normalized quantities to describe the material's elastic stiffness.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the force the same and asks for a normalized comparison rather than another full substitution.",
+              worked_example: {
+                prompt: "Two wires are made from the same material and have the same original length. Wire B has twice the cross-sectional area of Wire A. If the same tensile force is applied in the elastic region, how does the extension of Wire B compare with Wire A?",
+                steps: [
+                  "Keep the material and original length fixed so Young modulus and L do not change.",
+                  "Use E = FL / Ax qualitatively to compare how extension depends on area.",
+                  "State the comparison without losing the proportional reasoning.",
+                ],
+                answer: "Wire B extends half as much as Wire A.",
+                answer_reason: "With the same force, length, and material, extension is inversely proportional to cross-sectional area. Doubling the area halves the elastic extension.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
@@ -13283,7 +13463,7 @@ function formulaSectionRows(
     }))
     .filter((entry) => entry.normalized);
   const uniqueAnalogies = [...new Set(analogyEntries.map((entry) => entry.normalized))];
-  let sharedAnalogySentences: string[] = [];
+  const sharedAnalogySentences: string[] = [];
   if (analogyEntries.length > 1) {
     const maxPrefixLength = Math.min(...analogyEntries.map((entry) => entry.sentences.length));
     for (let index = 0; index < maxPrefixLength; index += 1) {
@@ -13904,7 +14084,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260409c";
+  const assetVersion = "20260410b";
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const moduleId = lessonId.split("_", 1)[0];
     return `/lesson_assets/${moduleId}/${lessonId}/videos/${filename}?v=${assetVersion}`;
@@ -14245,6 +14425,174 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M4_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M4_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M4_L6", "captions.vtt"),
+      };
+    case "M5_L1":
+      return {
+        body: "Use this video to separate particle rules from whole-material properties before the worked example begins.",
+        caption: "Video explainer: fixed particle size, spacing-motion-attraction state language, and one-particle versus whole-crowd reasoning before the lesson example.",
+        highlights: [
+          "Heating changes motion and spacing patterns, not particle size",
+          "Bulk properties belong to the whole material, not one isolated particle",
+          "A strong state description combines spacing, motion, and attraction",
+        ],
+        checkForUnderstanding: "If a sample is heated, which feature should stay fixed in this model first: particle size, particle motion, or particle spacing?",
+        video_url: staticVideoAssetUrl("M5_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M5_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M5_L1", "captions.vtt"),
+      };
+    case "M5_L2":
+      return {
+        body: "Use this video to separate solids from liquids without drifting into gas language before the worked example starts.",
+        caption: "Video explainer: close packing, fixed positions, changing neighbors, and Lock Mode versus Slide Mode before the lesson example.",
+        highlights: [
+          "Solids and liquids both keep particles close together",
+          "Liquids flow because neighbors can change, not because giant gaps appear",
+          "Position rule and movement rule must be used together",
+        ],
+        checkForUnderstanding: "If particles remain close together but can swap neighbors, which state should that model suggest first: solid, liquid, or gas?",
+        video_url: staticVideoAssetUrl("M5_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M5_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M5_L2", "captions.vtt"),
+      };
+    case "M5_L3":
+      return {
+        body: "Use this video to connect gas behavior with Brownian evidence before the worked example begins.",
+        caption: "Video explainer: Drift Mode, wide spacing, random collisions, and why Brownian motion makes invisible particles believable before the lesson example.",
+        highlights: [
+          "Gas particles are far apart and move randomly between collisions",
+          "Brownian motion is a visible clue caused by invisible particle hits",
+          "The visible particle is not self-powered",
+        ],
+        checkForUnderstanding: "If the surrounding particles move more vigorously, what should happen first to the Brownian jitter of the visible particle?",
+        video_url: staticVideoAssetUrl("M5_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M5_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M5_L3", "captions.vtt"),
+      };
+    case "M5_L4":
+      return {
+        body: "Use this video to keep temperature as an average idea instead of a total-store idea before the worked example begins.",
+        caption: "Video explainer: Pulse Level, average kinetic energy per particle, and same-temperature different-crowd reasoning before the lesson example.",
+        highlights: [
+          "Temperature is tied to average particle motion",
+          "Same temperature does not guarantee the same whole-system total",
+          "Crowd size can change total energy without changing temperature",
+        ],
+        checkForUnderstanding: "If two samples have the same temperature but one has more particles, what should you question first: the average motion or the total internal energy?",
+        video_url: staticVideoAssetUrl("M5_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M5_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M5_L4", "captions.vtt"),
+      };
+    case "M5_L5":
+      return {
+        body: "Use this video to read internal energy as a whole-system total before the worked example begins.",
+        caption: "Video explainer: Plaza Store, total kinetic plus total potential energy, and why same temperature can still hide different internal energies before the lesson example.",
+        highlights: [
+          "Internal energy belongs to the whole sample",
+          "Both motion energy and arrangement energy matter",
+          "Same temperature can still leave different total stores",
+        ],
+        checkForUnderstanding: "If two samples share the same temperature but one sample is larger, which quantity can differ first: average kinetic energy per particle or total internal energy?",
+        video_url: staticVideoAssetUrl("M5_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M5_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M5_L5", "captions.vtt"),
+      };
+    case "M5_L6":
+      return {
+        body: "Use this video to track where added energy goes during a state change before the final worked example begins.",
+        caption: "Video explainer: heating, internal-energy rise, link loosening, and why temperature may change only a little during a state change before the lesson example.",
+        highlights: [
+          "Added energy does not always mainly raise temperature",
+          "State change can feed the potential-energy part strongly",
+          "Internal energy can rise even when the temperature response is small",
+        ],
+        checkForUnderstanding: "During a state change, if the temperature barely rises but energy is still being supplied, which part of the internal-energy story should you check first?",
+        video_url: staticVideoAssetUrl("M5_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M5_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M5_L6", "captions.vtt"),
+      };
+    case "M6_L1":
+      return {
+        body: "Use this video to separate temperature from transferred energy before the worked example begins.",
+        caption: "Video explainer: Warmth Level, Forge Ledger, and why equal energy transfers do not force equal temperature rises before the lesson example.",
+        highlights: [
+          "Temperature is a current reading, not stored heat",
+          "Heat means transferred energy, not a substance trapped inside matter",
+          "The same energy payment can produce different temperature rises",
+        ],
+        checkForUnderstanding: "If two blocks receive the same energy but one rises less in temperature, which idea should you question first: the transfer amount or the properties of the block?",
+        video_url: staticVideoAssetUrl("M6_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M6_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M6_L1", "captions.vtt"),
+      };
+    case "M6_L2":
+      return {
+        body: "Use this video to read `Q = mc delta T` as a full heating bill before the worked example starts.",
+        caption: "Video explainer: mass, specific heat capacity, temperature rise, and the Forge Ledger warm-up rule before the lesson example.",
+        highlights: [
+          "Specific heat capacity is energy per kilogram per degree",
+          "Mass, material, and target rise all contribute to the bill",
+          "Rearranging the formula does not change the physical story",
+        ],
+        checkForUnderstanding: "If the mass and temperature rise stay fixed but the material has a larger specific heat capacity, what should happen first to the required energy?",
+        video_url: staticVideoAssetUrl("M6_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M6_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M6_L2", "captions.vtt"),
+      };
+    case "M6_L3":
+      return {
+        body: "Use this video to understand latent heat as a real energy payment during a temperature plateau before the worked example begins.",
+        caption: "Video explainer: Form Gate plateaus, Morph Fee, and why the heater can still be working while temperature stays flat before the lesson example.",
+        highlights: [
+          "A temperature plateau does not mean zero energy transfer",
+          "Latent heat is the state-change energy payment",
+          "State-change stages need their own ledger line",
+        ],
+        checkForUnderstanding: "If the temperature stays flat during a state change while energy is still supplied, what should you ask first: where the energy is going or whether the heater stopped?",
+        video_url: staticVideoAssetUrl("M6_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M6_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M6_L3", "captions.vtt"),
+      };
+    case "M6_L4":
+      return {
+        body: "Use this video to read conduction as a contact route through matter before the worked example begins.",
+        caption: "Video explainer: direct contact, relay paths, good and poor conductors, and why the solid itself does not flow before the lesson example.",
+        highlights: [
+          "Conduction needs an unbroken contact path",
+          "Metals conduct well because electrons help the transfer",
+          "The material stays in place while energy passes through it",
+        ],
+        checkForUnderstanding: "If the contact path is broken, which part of the conduction story should fail first: the temperature difference or the transfer route?",
+        video_url: staticVideoAssetUrl("M6_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M6_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M6_L4", "captions.vtt"),
+      };
+    case "M6_L5":
+      return {
+        body: "Use this video to explain convection as a full moving-fluid loop before the worked example begins.",
+        caption: "Video explainer: density changes, rising warm fluid, sinking cooler fluid, and complete Carrier Loops before the lesson example.",
+        highlights: [
+          "Convection is a moving-fluid transfer route",
+          "Warm fluid rises because it becomes less dense",
+          "Cooler fluid must return to complete the loop",
+        ],
+        checkForUnderstanding: "If warm fluid rises in one part of the system, what must happen elsewhere if a true convection current is forming?",
+        video_url: staticVideoAssetUrl("M6_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M6_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M6_L5", "captions.vtt"),
+      };
+    case "M6_L6":
+      return {
+        body: "Use this video to combine radiation reasoning with multi-stage thermal bookkeeping before the final worked example begins.",
+        caption: "Video explainer: radiation across gaps, absorber differences, and separate stage totals for `mc delta T` and latent-heat steps before the lesson example.",
+        highlights: [
+          "Radiation can cross a vacuum gap",
+          "Surface finish changes absorption and emission strength",
+          "Complex thermal missions need separate stage totals before the final sum",
+        ],
+        checkForUnderstanding: "If a problem includes both a temperature rise and a state change, what planning move is usually safest before you calculate anything?",
+        video_url: staticVideoAssetUrl("M6_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M6_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M6_L6", "captions.vtt"),
       };
     case "F1_L1":
       return {
@@ -14833,6 +15181,174 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M8_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M8_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M8_L6", "captions.vtt"),
+      };
+    case "A2_L1":
+      return {
+        body: "Use this video to read atomic energy levels as locked floors rather than a continuous ramp before the worked example begins.",
+        caption: "Video explainer: discrete atomic levels, packet-gap matching, ground and excited states, and all-or-nothing transitions before the lesson example.",
+        highlights: [
+          "Atomic electrons occupy discrete allowed energy levels",
+          "A photon packet must match the energy gap for an allowed jump",
+          "Excited states are still allowed bound states, not arbitrary heights",
+        ],
+        checkForUnderstanding: "If a photon packet is slightly too small for the next allowed jump, what should happen first: a partial lift, or no transition?",
+        video_url: staticVideoAssetUrl("A2_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A2_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A2_L1", "captions.vtt"),
+      };
+    case "A2_L2":
+      return {
+        body: "Use this video to connect line spectra directly to allowed atomic transitions before the worked example starts.",
+        caption: "Video explainer: emission lines, absorption lines, return jumps, and spectral barcodes before the lesson example.",
+        highlights: [
+          "Emission lines come from downward transitions",
+          "Absorption lines come from upward transitions",
+          "Each atom's barcode depends on its own allowed level spacings",
+        ],
+        checkForUnderstanding: "If two atoms have different energy-gap patterns, what should you expect first about their line spectra: the same barcode, or different ones?",
+        video_url: staticVideoAssetUrl("A2_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A2_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A2_L2", "captions.vtt"),
+      };
+    case "A2_L3":
+      return {
+        body: "Use this video to separate photon energy from beam brightness before the worked example begins.",
+        caption: "Video explainer: threshold frequency, work function, photon packets, and why brightness alone cannot force photoelectric emission before the lesson example.",
+        highlights: [
+          "Below threshold frequency, no electrons are emitted however bright the beam becomes",
+          "Above threshold, intensity mainly changes the number emitted",
+          "Photon energy pays the work-function unlock cost first",
+        ],
+        checkForUnderstanding: "If the light is very bright but the frequency is still below threshold, what should happen first: more emitted electrons, or no emission at all?",
+        video_url: staticVideoAssetUrl("A2_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A2_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A2_L3", "captions.vtt"),
+      };
+    case "A2_L4":
+      return {
+        body: "Use this video to separate excitation from ionisation before the worked example begins.",
+        caption: "Video explainer: bound-state jumps, full escape thresholds, the continuum, and why ionisation is not just stronger excitation before the lesson example.",
+        highlights: [
+          "Excitation keeps the electron bound",
+          "Ionisation frees the electron completely",
+          "The continuum begins beyond the ionisation threshold",
+        ],
+        checkForUnderstanding: "If the electron ends in a higher allowed level but remains attached to the atom, which outcome should you name first: excitation or ionisation?",
+        video_url: staticVideoAssetUrl("A2_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A2_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A2_L4", "captions.vtt"),
+      };
+    case "A2_L5":
+      return {
+        body: "Use this video to keep localized detections and wave-like patterns on the same evidence board before the worked example begins.",
+        caption: "Video explainer: de Broglie wavelength, localized hits, diffraction buildup, and why quantum objects are not forced into a classical either-or picture before the lesson example.",
+        highlights: [
+          "Wave-like behavior appears in pattern buildup",
+          "Localized detections still occur at specific hit points",
+          "Greater momentum gives a shorter de Broglie wavelength",
+        ],
+        checkForUnderstanding: "If the momentum increases, what should happen first to the de Broglie wavelength: become longer, become shorter, or stay the same?",
+        video_url: staticVideoAssetUrl("A2_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A2_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A2_L5", "captions.vtt"),
+      };
+    case "A2_L6":
+      return {
+        body: "Use this video to connect spectra, thresholds, and matter-wave evidence into one coherent quantum model before the final worked example begins.",
+        caption: "Video explainer: discrete levels, packet transfer, photoelectric thresholds, and matter-wave evidence in one synthesis story before the lesson example.",
+        highlights: [
+          "Spectra support discrete energy levels",
+          "Photoelectric thresholds support packet-like photon energy transfer",
+          "Matter-wave evidence extends quantum reasoning beyond atomic ladders alone",
+        ],
+        checkForUnderstanding: "If several experiments point to discrete levels and packet-style transfers, what becomes stronger first: one isolated fact, or one shared quantum model?",
+        video_url: staticVideoAssetUrl("A2_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A2_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A2_L6", "captions.vtt"),
+      };
+    case "A3_L1":
+      return {
+        body: "Use this video to read superposition as a same-place, same-time displacement rule before the worked example begins.",
+        caption: "Video explainer: progressive waves, overlap, reinforcement, cancellation, and superposition before the lesson example.",
+        highlights: [
+          "Overlapping waves add displacement at the same place and time",
+          "Reinforcement and cancellation depend on phase relationship",
+          "Superposition is not wave turn-taking",
+        ],
+        checkForUnderstanding: "When two waves overlap at one point, what should you combine first: their routes, or their displacements at that same instant?",
+        video_url: staticVideoAssetUrl("A3_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A3_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A3_L1", "captions.vtt"),
+      };
+    case "A3_L2":
+      return {
+        body: "Use this video to connect nodes, antinodes, and harmonic fit before the worked example begins.",
+        caption: "Video explainer: stationary waves, opposite-traveling waves, boundary fit, harmonics, and node spacing before the lesson example.",
+        highlights: [
+          "Stationary waves are built from matched opposite-traveling waves",
+          "Nodes stay fixed while antinodes oscillate strongly",
+          "Only harmonics that fit the boundary condition survive cleanly",
+        ],
+        checkForUnderstanding: "If a pattern does not fit the boundary condition, what should you doubt first: the harmonic label, or the existence of nodes altogether?",
+        video_url: staticVideoAssetUrl("A3_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A3_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A3_L2", "captions.vtt"),
+      };
+    case "A3_L3":
+      return {
+        body: "Use this video to connect path difference to fringe outcome before the worked example begins.",
+        caption: "Video explainer: phase relation, path difference, constructive interference, destructive interference, and fringe logic before the lesson example.",
+        highlights: [
+          "Path difference is the route into the phase story",
+          "Constructive and destructive cases follow from different phase relations",
+          "Fringe outcome should be read only after both paths are compared",
+        ],
+        checkForUnderstanding: "Before you call a point bright or dark in an interference pattern, what should you compare first: one path alone, or the difference between the two paths?",
+        video_url: staticVideoAssetUrl("A3_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A3_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A3_L3", "captions.vtt"),
+      };
+    case "A3_L4":
+      return {
+        body: "Use this video to turn diffraction-grating geometry into a readable order pattern before the worked example begins.",
+        caption: "Video explainer: diffraction gratings, slit spacing, order number, wavelength separation, and allowed directions before the lesson example.",
+        highlights: [
+          "Gratings produce discrete orders rather than a vague spread",
+          "The pattern angle depends on wavelength, spacing, and order",
+          "Longer wavelength or tighter spacing can widen the pattern",
+        ],
+        checkForUnderstanding: "When a diffraction-grating pattern opens out more widely, which ingredients should you suspect first: wavelength, grating spacing, or both?",
+        video_url: staticVideoAssetUrl("A3_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A3_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A3_L4", "captions.vtt"),
+      };
+    case "A3_L5":
+      return {
+        body: "Use this video to keep refraction, critical angle, and total internal reflection in one threshold story before the worked example begins.",
+        caption: "Video explainer: Snell-style route changes, critical angle, total internal reflection, and trapped-light logic before the lesson example.",
+        highlights: [
+          "Refraction changes direction because wave speed changes",
+          "Critical angle is the last escape case",
+          "Total internal reflection needs the correct medium direction and enough angle",
+        ],
+        checkForUnderstanding: "Before claiming total internal reflection, what should you check first: just the incident angle, or both the travel direction and the angle?",
+        video_url: staticVideoAssetUrl("A3_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A3_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A3_L5", "captions.vtt"),
+      };
+    case "A3_L6":
+      return {
+        body: "Use this video to read oscilloscope traces as time graphs before the worked example begins.",
+        caption: "Video explainer: oscilloscope axes, amplitude, period, frequency, and trace interpretation before the lesson example.",
+        highlights: [
+          "An oscilloscope trace is plotted against time",
+          "Amplitude and period come from different features of the graph",
+          "A trace is evidence about the wave, not the wave path through space",
+        ],
+        checkForUnderstanding: "If you forget that the horizontal axis is time, what kind of mistake are you likely to make first: misreading the graph as a path through space, or forgetting the units entirely?",
+        video_url: staticVideoAssetUrl("A3_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A3_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A3_L6", "captions.vtt"),
       };
     case "A1_L1":
       return {

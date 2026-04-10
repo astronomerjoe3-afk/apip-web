@@ -68,7 +68,7 @@ function renderPanel(
           {controls}
         </div>
         <div className={panelClass}>
-          <h4 className="text-lg font-semibold text-slate-900">Bounce-Chamber lens</h4>
+          <h4 className="text-lg font-semibold text-slate-900">Vector-Rig lens</h4>
           <ul className="mt-4 grid gap-3 text-sm text-slate-700">
             {lens.map((item) => (
               <li key={item} className="rounded-2xl bg-slate-50 px-4 py-3">
@@ -93,32 +93,63 @@ function renderPanel(
   );
 }
 
-function particleDots(count: number, width: number, height: number, hot: boolean): ReactNode[] {
-  const dots: ReactNode[] = [];
-  const cols = Math.max(3, Math.min(6, Math.ceil(Math.sqrt(count))));
-  const rows = Math.max(2, Math.ceil(count / cols));
-  for (let index = 0; index < count; index += 1) {
-    const col = index % cols;
-    const row = Math.floor(index / cols);
-    const x = 40 + ((width - 80) * (col + 0.5)) / cols;
-    const y = 36 + ((height - 72) * (row + 0.5)) / rows;
-    const dx = hot ? 18 + (index % 3) * 4 : 10 + (index % 3) * 3;
-    const dy = hot ? 10 + (index % 4) * 3 : 6 + (index % 4) * 2;
-    const fill = hot ? (index % 2 === 0 ? "#f59e0b" : "#38bdf8") : "#60a5fa";
-    dots.push(<circle key={`p-${index}`} cx={x} cy={y} r="6" fill={fill} />);
-    dots.push(
-      <line
-        key={`v-${index}`}
-        x1={x}
-        y1={y}
-        x2={x + (index % 2 === 0 ? dx : -dx)}
-        y2={y + (index % 3 === 0 ? -dy : dy)}
-        stroke={fill}
-        strokeWidth="2.5"
-      />,
-    );
+function horizontalArrow(
+  x1: number,
+  y: number,
+  length: number,
+  color: string,
+): ReactNode {
+  const direction = length >= 0 ? 1 : -1;
+  const x2 = x1 + length;
+  const arrowSize = 12;
+  return (
+    <>
+      <line x1={x1} y1={y} x2={x2} y2={y} stroke={color} strokeWidth="6" strokeLinecap="round" />
+      <polygon
+        points={
+          direction > 0
+            ? `${x2},${y} ${x2 - arrowSize},${y - 7} ${x2 - arrowSize},${y + 7}`
+            : `${x2},${y} ${x2 + arrowSize},${y - 7} ${x2 + arrowSize},${y + 7}`
+        }
+        fill={color}
+      />
+    </>
+  );
+}
+
+function sampleProjectilePoints(
+  speed: number,
+  angleDeg: number,
+  gravity: number,
+  width: number,
+  height: number,
+): string {
+  const angle = (angleDeg * Math.PI) / 180;
+  const vx = speed * Math.cos(angle);
+  const vy = speed * Math.sin(angle);
+  const flightTime = Math.max((2 * vy) / gravity, 0.1);
+  const range = Math.max(vx * flightTime, 1);
+  const maxHeight = Math.max((vy * vy) / (2 * gravity), 1);
+  const points: string[] = [];
+
+  for (let index = 0; index <= 50; index += 1) {
+    const t = (flightTime * index) / 50;
+    const x = vx * t;
+    const y = vy * t - 0.5 * gravity * t * t;
+    const px = 36 + (x / range) * (width - 72);
+    const py = height - 28 - (y / maxHeight) * (height - 76);
+    points.push(`${px},${py}`);
   }
-  return dots;
+
+  return points.join(" ");
+}
+
+function circlePoint(cx: number, cy: number, radius: number, angleDeg: number): { x: number; y: number } {
+  const angle = (angleDeg * Math.PI) / 180;
+  return {
+    x: cx + radius * Math.cos(angle),
+    y: cy + radius * Math.sin(angle),
+  };
 }
 
 export default function A4SimulationPanels({
@@ -133,8 +164,6 @@ export default function A4SimulationPanels({
   setSimDensityMass,
   simDensityVolume,
   setSimDensityVolume,
-  simFluidDensity,
-  setSimFluidDensity,
   simBias,
   setSimBias,
   simSpread,
@@ -142,233 +171,332 @@ export default function A4SimulationPanels({
   formatSimulationNumber,
 }: Props) {
   if (lessonKey === "A4_L1") {
-    const crowd = Math.round(clamp(simFluidDensity, 6, 20));
-    const room = clamp(simMetricMeters, 0.8, 2.4);
-    const dash = clamp(simVectorMagnitude, 0.8, 2.2);
-    const pressure = (crowd * dash) / room;
+    const force = clamp(simVectorMagnitude, 20, 160);
+    const angleDeg = clamp(simVectorAngle, 10, 80);
+    const balanceX = clamp(simBias, 0, 160);
+    const balanceY = clamp(simSpread, 0, 160);
+    const angle = (angleDeg * Math.PI) / 180;
+    const fx = force * Math.cos(angle);
+    const fy = force * Math.sin(angle);
+    const residualX = fx - balanceX;
+    const residualY = fy - balanceY;
+    const residual = Math.hypot(residualX, residualY);
+    const scale = 1.6;
+    const originX = 148;
+    const originY = 174;
+    const endX = originX + fx * scale;
+    const endY = originY - fy * scale;
+
     return renderPanel(
-      "Wall-hit builder",
+      "Component balance",
       <>
-        {sliderField("Crowd count", `${crowd}`, <input className="w-full" type="range" min="6" max="20" step="1" value={crowd} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
-        {sliderField("Room size", `${formatSimulationNumber(room, 2)} V-units`, <input className="w-full" type="range" min="0.8" max="2.4" step="0.05" value={room} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Dash level", `${formatSimulationNumber(dash, 2)} T-units`, <input className="w-full" type="range" min="0.8" max="2.2" step="0.05" value={dash} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Angled force", `${formatSimulationNumber(force, 0)} N`, <input className="w-full" type="range" min="20" max="160" step="1" value={force} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Angle above horizontal", `${formatSimulationNumber(angleDeg, 0)} deg`, <input className="w-full" type="range" min="10" max="80" step="1" value={angleDeg} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
+        {sliderField("Horizontal balancing force", `${formatSimulationNumber(balanceX, 0)} N`, <input className="w-full" type="range" min="0" max="160" step="1" value={balanceX} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+        {sliderField("Vertical balancing force", `${formatSimulationNumber(balanceY, 0)} N`, <input className="w-full" type="range" min="0" max="160" step="1" value={balanceY} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
       </>,
-      "Pressure board",
+      "Vector-resolution board",
       <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="30" y="30" width={220 * room} height="150" rx="24" fill="#111827" stroke="#38bdf8" strokeWidth="5" />
-        {particleDots(crowd, 220 * room, 150, dash > 1.4)}
-        <line x1={60 + 220 * room} y1="74" x2={180 + 220 * room} y2="74" stroke="#f97316" strokeWidth="5" />
-        <line x1={60 + 220 * room} y1="118" x2={180 + 220 * room} y2="118" stroke="#f97316" strokeWidth="5" />
-        <line x1={60 + 220 * room} y1="162" x2={180 + 220 * room} y2="162" stroke="#f97316" strokeWidth="5" />
-        <text x={170 + 220 * room} y="124" fill="#f97316" fontSize="20">wall-hit load</text>
-        <text x="54" y="212" fill="#475569" fontSize="18">Smaller room or hotter / more numerous dashers raise pressure.</text>
+        <rect x="28" y="24" width="584" height="194" rx="24" fill="#eff6ff" />
+        <text x="54" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Resolve the angled force before you judge equilibrium</text>
+        <line x1={originX} y1="52" x2={originX} y2="194" stroke="#94a3b8" strokeWidth="3" />
+        <line x1="72" y1={originY} x2="548" y2={originY} stroke="#94a3b8" strokeWidth="3" />
+        <circle cx={originX} cy={originY} r="6" fill="#0f172a" />
+        <line x1={originX} y1={originY} x2={endX} y2={endY} stroke="#2563eb" strokeWidth="6" strokeLinecap="round" />
+        <polygon points={`${endX},${endY} ${endX - 16},${endY + 2} ${endX - 6},${endY + 14}`} fill="#2563eb" />
+        <line x1={originX} y1={originY} x2={endX} y2={originY} stroke="#14b8a6" strokeWidth="5" strokeDasharray="8 7" />
+        <line x1={endX} y1={originY} x2={endX} y2={endY} stroke="#f97316" strokeWidth="5" strokeDasharray="8 7" />
+        {horizontalArrow(originX, 204, -balanceX * 1.2, "#7c3aed")}
+        <line x1="574" y1={originY} x2="574" y2={originY - balanceY * 1.1} stroke="#dc2626" strokeWidth="6" strokeLinecap="round" />
+        <polygon points={`574,${originY - balanceY * 1.1} 566,${originY - balanceY * 1.1 + 12} 582,${originY - balanceY * 1.1 + 12}`} fill="#dc2626" />
+        <text x={endX + 12} y={endY - 8} fill="#1d4ed8" fontSize="18" fontWeight="700">F</text>
+        <text x={(originX + endX) / 2} y={originY - 10} fill="#0f766e" fontSize="17" fontWeight="700" textAnchor="middle">Fx</text>
+        <text x={endX + 14} y={(originY + endY) / 2} fill="#c2410c" fontSize="17" fontWeight="700">Fy</text>
+        <text x="68" y="210" fill="#6d28d9" fontSize="17" fontWeight="700">balance x</text>
+        <text x="520" y="74" fill="#b91c1c" fontSize="17" fontWeight="700">balance y</text>
+        <text x="360" y="210" fill="#334155" fontSize="18">Residual = ({formatSimulationNumber(residualX, 1)}, {formatSimulationNumber(residualY, 1)}) N</text>
       </svg>,
       <>
-        {metricCard("Pressure", `${formatSimulationNumber(pressure, 2)} arb`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Collision story", crowd > 12 ? "many hits" : "fewer hits", "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Room effect", room < 1.2 ? "crowded chamber" : "more room", "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Dash effect", dash > 1.4 ? "harder hits" : "gentler hits", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Fx", `${formatSimulationNumber(fx, 1)} N`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Fy", `${formatSimulationNumber(fy, 1)} N`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Residual magnitude", `${formatSimulationNumber(residual, 1)} N`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Status", residual < 2 ? "near equilibrium" : "not balanced yet", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
-      ["Pressure is a wall-collision story.", "Crowd count, room size, and dash level all matter.", "Equilibrium keeps the averages steady, not the particles still."],
-      "This board keeps pressure tied to collisions and chamber geometry before the ideal gas law appears.",
+      ["Equilibrium is tested by matching x-components and y-components separately.", "A diagonal arrow can look balanced while still leaving a hidden component mismatch.", "The resultant goes to zero only after both axes are checked."],
+      "This panel removes the visual-guess trap: the angled force is not compared directly with one opposing arrow; it is resolved first and balanced component by component.",
     );
   }
 
   if (lessonKey === "A4_L2") {
-    const amount = clamp(simFluidDensity, 0.8, 2.6);
-    const volume = clamp(simMetricMeters, 0.8, 2.4);
-    const temperature = clamp(simVectorMagnitude, 0.8, 2.2);
-    const pressure = (amount * temperature) / volume;
-    const left = pressure * volume;
-    const right = amount * temperature;
+    const vx0 = clamp(simVectorMagnitude, 2, 18);
+    const vy0 = clamp(simVectorAngle, -8, 16);
+    const ax = clamp(simBias, -4, 4);
+    const ay = clamp(simSpread, -10, 4);
+    const time = clamp(simMetricMeters, 0, 4);
+    const x = vx0 * time + 0.5 * ax * time * time;
+    const y = vy0 * time + 0.5 * ay * time * time;
+    const vx = vx0 + ax * time;
+    const vy = vy0 + ay * time;
+    const xScale = 7;
+    const yScale = 7;
+
     return renderPanel(
-      "Chamber resize",
+      "Two-axis motion",
       <>
-        {sliderField("Amount of gas", `${formatSimulationNumber(amount, 2)} n-units`, <input className="w-full" type="range" min="0.8" max="2.6" step="0.05" value={amount} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
-        {sliderField("Volume", `${formatSimulationNumber(volume, 2)} V-units`, <input className="w-full" type="range" min="0.8" max="2.4" step="0.05" value={volume} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Temperature", `${formatSimulationNumber(temperature, 2)} T-units`, <input className="w-full" type="range" min="0.8" max="2.2" step="0.05" value={temperature} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Initial x-velocity", `${formatSimulationNumber(vx0, 1)} m/s`, <input className="w-full" type="range" min="2" max="18" step="0.1" value={vx0} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Initial y-velocity", `${formatSimulationNumber(vy0, 1)} m/s`, <input className="w-full" type="range" min="-8" max="16" step="0.1" value={vy0} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
+        {sliderField("x-acceleration", `${formatSimulationNumber(ax, 1)} m/s^2`, <input className="w-full" type="range" min="-4" max="4" step="0.1" value={ax} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+        {sliderField("y-acceleration", `${formatSimulationNumber(ay, 1)} m/s^2`, <input className="w-full" type="range" min="-10" max="4" step="0.1" value={ay} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
+        {sliderField("Time", `${formatSimulationNumber(time, 2)} s`, <input className="w-full" type="range" min="0" max="4" step="0.05" value={time} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
       </>,
-      "Gas-law balance board",
+      "Component-story board",
       <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="44" y="52" width="200" height="130" rx="24" fill="#dbeafe" />
-        <rect x="396" y="52" width="200" height="130" rx="24" fill="#dcfce7" />
-        <text x="144" y="118" fill="#0f172a" fontSize="46" fontWeight="700" textAnchor="middle">pV</text>
-        <text x="496" y="118" fill="#0f172a" fontSize="46" fontWeight="700" textAnchor="middle">nRT</text>
-        <text x="144" y="154" fill="#334155" fontSize="18" textAnchor="middle">wall-hit side</text>
-        <text x="496" y="154" fill="#334155" fontSize="18" textAnchor="middle">crowd-dash side</text>
-        <line x1="244" y1="116" x2="396" y2="116" stroke="#facc15" strokeWidth="8" />
-        <text x="320" y="96" fill="#a16207" fontSize="18" textAnchor="middle">balance</text>
+        <rect x="28" y="24" width="584" height="194" rx="24" fill="#eef2ff" />
+        <text x="52" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Keep x-motion and y-motion separate, then recombine at the end</text>
+        <line x1="64" y1="106" x2="576" y2="106" stroke="#94a3b8" strokeWidth="3" />
+        <line x1="64" y1="176" x2="576" y2="176" stroke="#94a3b8" strokeWidth="3" />
+        <circle cx={clamp(92 + x * xScale, 92, 560)} cy="106" r="10" fill="#2563eb" />
+        <circle cx="92" cy={clamp(176 - y * yScale, 68, 196)} r="10" fill="#dc2626" />
+        <line x1="92" y1="92" x2={clamp(92 + x * xScale, 92, 560)} y2="92" stroke="#38bdf8" strokeWidth="5" />
+        <line x1="92" y1="190" x2="92" y2={clamp(190 - y * yScale, 68, 196)} stroke="#f97316" strokeWidth="5" />
+        <text x="68" y="82" fill="#1d4ed8" fontSize="18" fontWeight="700">x(t)</text>
+        <text x="68" y="162" fill="#b91c1c" fontSize="18" fontWeight="700">y(t)</text>
+        <text x="392" y="82" fill="#334155" fontSize="17">x = ut + 0.5at^2</text>
+        <text x="392" y="162" fill="#334155" fontSize="17">y = ut + 0.5at^2</text>
+        <text x="392" y="108" fill="#334155" fontSize="17">vx = u + at = {formatSimulationNumber(vx, 1)} m/s</text>
+        <text x="392" y="188" fill="#334155" fontSize="17">vy = u + at = {formatSimulationNumber(vy, 1)} m/s</text>
       </svg>,
       <>
-        {metricCard("pV", `${formatSimulationNumber(left, 2)}`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("nRT", `${formatSimulationNumber(right, 2)}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Pressure", `${formatSimulationNumber(pressure, 2)}`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Status", Math.abs(left - right) < 0.01 ? "balanced" : "tracking", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("x displacement", `${formatSimulationNumber(x, 2)} m`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("y displacement", `${formatSimulationNumber(y, 2)} m`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("vx at t", `${formatSimulationNumber(vx, 2)} m/s`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("vy at t", `${formatSimulationNumber(vy, 2)} m/s`, "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
-      ["pV = nRT is a balance rule.", "Holding two variables fixed makes the third easier to explain.", "The particle and mole forms describe the same chamber state."],
-      "Use the board as a physical reminder that each symbol stands for part of one chamber story.",
+      ["A zero change on one axis does not cancel motion on the other axis.", "Velocity components and acceleration components answer different questions.", "Recombining too early hides where the change is actually happening."],
+      "The mathematics is the same on each axis, but the inputs can differ. Strong 2D reasoning comes from keeping the two one-dimensional stories separate until the final interpretation.",
     );
   }
 
   if (lessonKey === "A4_L3") {
-    const count = clamp(simFluidDensity, 0.8, 3.0);
-    const mass = clamp(simDensityMass, 0.8, 3.0);
-    const meanSquare = clamp(simVectorMagnitude, 0.8, 3.0);
-    const volume = clamp(simMetricMeters, 0.8, 2.4);
-    const pv = (count * mass * meanSquare) / 3;
-    const pressure = pv / volume;
+    const speed = clamp(simVectorMagnitude, 10, 35);
+    const angleDeg = clamp(simVectorAngle, 15, 75);
+    const gravity = clamp(simSpread, 5, 12);
+    const angle = (angleDeg * Math.PI) / 180;
+    const vx = speed * Math.cos(angle);
+    const vy0 = speed * Math.sin(angle);
+    const flightTime = Math.max((2 * vy0) / gravity, 0.2);
+    const maxSliderTime = Math.max(0.2, Math.min(5, flightTime));
+    const time = clamp(simMetricMeters, 0, maxSliderTime);
+    const x = vx * time;
+    const y = Math.max(0, vy0 * time - 0.5 * gravity * time * time);
+    const vy = vy0 - gravity * time;
+    const range = vx * flightTime;
+    const maxHeight = (vy0 * vy0) / (2 * gravity);
+
     return renderPanel(
-      "Dash-level bridge",
+      "Projectile split",
       <>
-        {sliderField("Particle count N", `${formatSimulationNumber(count, 2)}`, <input className="w-full" type="range" min="0.8" max="3" step="0.05" value={count} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
-        {sliderField("Molecule mass m", `${formatSimulationNumber(mass, 2)}`, <input className="w-full" type="range" min="0.8" max="3" step="0.05" value={mass} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
-        {sliderField("Mean square speed ⟨c²⟩", `${formatSimulationNumber(meanSquare, 2)}`, <input className="w-full" type="range" min="0.8" max="3" step="0.05" value={meanSquare} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-        {sliderField("Volume V", `${formatSimulationNumber(volume, 2)}`, <input className="w-full" type="range" min="0.8" max="2.4" step="0.05" value={volume} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Launch speed", `${formatSimulationNumber(speed, 1)} m/s`, <input className="w-full" type="range" min="10" max="35" step="0.1" value={speed} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Launch angle", `${formatSimulationNumber(angleDeg, 0)} deg`, <input className="w-full" type="range" min="15" max="75" step="1" value={angleDeg} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
+        {sliderField("Gravity", `${formatSimulationNumber(gravity, 1)} m/s^2`, <input className="w-full" type="range" min="5" max="12" step="0.1" value={gravity} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
+        {sliderField("Time marker", `${formatSimulationNumber(time, 2)} s`, <input className="w-full" type="range" min="0" max={maxSliderTime} step="0.02" value={time} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
       </>,
-      "Kinetic-theory board",
+      "Projectile board",
       <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="36" y="44" width="238" height="154" rx="24" fill="#111827" stroke="#38bdf8" strokeWidth="4" />
-        {particleDots(9, 238, 154, true)}
-        <line x1="280" y1="122" x2="374" y2="122" stroke="#f97316" strokeWidth="6" />
-        <rect x="390" y="60" width="214" height="124" rx="24" fill="#eff6ff" />
-        <text x="497" y="106" fill="#0f172a" fontSize="26" fontWeight="700" textAnchor="middle">pV = (1/3)Nm⟨c²⟩</text>
-        <text x="497" y="144" fill="#0f172a" fontSize="22" textAnchor="middle">compare with pV = NkT</text>
+        <rect x="28" y="24" width="584" height="194" rx="24" fill="#eff6ff" />
+        <text x="54" y="54" fill="#0f172a" fontSize="22" fontWeight="700">One launch, two linked stories: constant vx and gravity-driven vy</text>
+        <line x1="52" y1="196" x2="596" y2="196" stroke="#94a3b8" strokeWidth="3" />
+        <line x1="52" y1="42" x2="52" y2="196" stroke="#94a3b8" strokeWidth="3" />
+        <polyline points={sampleProjectilePoints(speed, angleDeg, gravity, 640, 250)} fill="none" stroke="#2563eb" strokeWidth="5" />
+        <circle
+          cx={52 + (x / Math.max(range, 1)) * 540}
+          cy={196 - (y / Math.max(maxHeight, 1)) * 134}
+          r="8"
+          fill="#dc2626"
+        />
+        <text x="384" y="88" fill="#1d4ed8" fontSize="18" fontWeight="700">vx = {formatSimulationNumber(vx, 2)} m/s (constant)</text>
+        <text x="384" y="116" fill="#b91c1c" fontSize="18" fontWeight="700">vy = {formatSimulationNumber(vy, 2)} m/s</text>
+        <text x="384" y="144" fill="#334155" fontSize="17">range = {formatSimulationNumber(range, 2)} m</text>
+        <text x="384" y="170" fill="#334155" fontSize="17">max height = {formatSimulationNumber(maxHeight, 2)} m</text>
       </svg>,
       <>
-        {metricCard("pV", `${formatSimulationNumber(pv, 2)}`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Pressure", `${formatSimulationNumber(pressure, 2)}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Speed term", meanSquare > 1.8 ? "strong motion term" : "moderate motion term", "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Bridge", "micro -> macro", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Time of flight", `${formatSimulationNumber(flightTime, 2)} s`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Horizontal range", `${formatSimulationNumber(range, 2)} m`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Max height", `${formatSimulationNumber(maxHeight, 2)} m`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Current vy", `${formatSimulationNumber(vy, 2)} m/s`, "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
-      ["Pressure is built from wall momentum change.", "Mean square speed belongs in the bridge.", "Comparing the pV equations links temperature to molecular motion."],
-      "This explorer keeps the microscopic inputs visible so the gas law feels explained, not duplicated.",
+      ["Horizontal motion is uniform in the ideal model.", "Vertical motion changes because gravity acts vertically throughout the flight.", "Time is the bridge variable shared by both components."],
+      "The path looks curved only after the two component stories are recombined. The mathematics stays clearer when you solve x and y separately and link them with the same time value.",
     );
   }
 
   if (lessonKey === "A4_L4") {
-    const temperature = clamp(simVectorMagnitude, 150, 700);
-    const massA = clamp(simDensityMass, 1, 5);
-    const massB = clamp(simDensityVolume, 1, 5);
-    const sampleSize = Math.round(clamp(simFluidDensity, 4, 16));
-    const avgEk = 1.5 * temperature;
-    const speedA = Math.sqrt(avgEk / massA);
-    const speedB = Math.sqrt(avgEk / massB);
+    const m1 = clamp(simDensityMass, 0.5, 3);
+    const m2 = clamp(simDensityVolume, 0.5, 3);
+    const u1 = clamp(simVectorMagnitude, 2, 14);
+    const u2 = clamp(simVectorAngle, -8, 6);
+    const mode = Math.round(clamp(simBias, 0, 1));
+    const modeLabel = mode === 0 ? "perfectly inelastic" : "elastic";
+    const pBefore = m1 * u1 + m2 * u2;
+    const v1 =
+      mode === 0
+        ? pBefore / (m1 + m2)
+        : ((m1 - m2) / (m1 + m2)) * u1 + ((2 * m2) / (m1 + m2)) * u2;
+    const v2 =
+      mode === 0
+        ? v1
+        : ((2 * m1) / (m1 + m2)) * u1 + ((m2 - m1) / (m1 + m2)) * u2;
+    const pAfter = m1 * v1 + m2 * v2;
+    const keBefore = 0.5 * m1 * u1 * u1 + 0.5 * m2 * u2 * u2;
+    const keAfter = 0.5 * m1 * v1 * v1 + 0.5 * m2 * v2 * v2;
+
     return renderPanel(
-      "Average dash energy",
+      "Collision ledger",
       <>
-        {sliderField("Temperature", `${formatSimulationNumber(temperature, 0)} K`, <input className="w-full" type="range" min="150" max="700" step="10" value={temperature} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-        {sliderField("Gas A mass", `${formatSimulationNumber(massA, 2)} m-units`, <input className="w-full" type="range" min="1" max="5" step="0.1" value={massA} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
-        {sliderField("Gas B mass", `${formatSimulationNumber(massB, 2)} m-units`, <input className="w-full" type="range" min="1" max="5" step="0.1" value={massB} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
-        {sliderField("Sample size", `${sampleSize}`, <input className="w-full" type="range" min="4" max="16" step="1" value={sampleSize} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
+        {sliderField("Mass 1", `${formatSimulationNumber(m1, 2)} kg`, <input className="w-full" type="range" min="0.5" max="3" step="0.05" value={m1} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
+        {sliderField("Velocity 1", `${formatSimulationNumber(u1, 1)} m/s`, <input className="w-full" type="range" min="2" max="14" step="0.1" value={u1} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Mass 2", `${formatSimulationNumber(m2, 2)} kg`, <input className="w-full" type="range" min="0.5" max="3" step="0.05" value={m2} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
+        {sliderField("Velocity 2", `${formatSimulationNumber(u2, 1)} m/s`, <input className="w-full" type="range" min="-8" max="6" step="0.1" value={u2} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
+        {sliderField("Collision mode", modeLabel, <input className="w-full" type="range" min="0" max="1" step="1" value={mode} onChange={(e) => setSimBias(Number(e.target.value))} />)}
       </>,
-      "Temperature board",
+      "Before-and-after momentum board",
       <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="34" y="44" width="250" height="150" rx="24" fill="#dbeafe" />
-        <rect x="356" y="44" width="250" height="150" rx="24" fill="#ffedd5" />
-        <text x="159" y="78" fill="#0f172a" fontSize="20" fontWeight="700" textAnchor="middle">Gas A</text>
-        <text x="481" y="78" fill="#0f172a" fontSize="20" fontWeight="700" textAnchor="middle">Gas B</text>
-        <line x1="90" y1="138" x2={90 + speedA * 26} y2="138" stroke="#0ea5e9" strokeWidth="6" />
-        <line x1="412" y1="138" x2={412 + speedB * 26} y2="138" stroke="#f97316" strokeWidth="6" />
-        <text x="320" y="226" fill="#334155" fontSize="18" textAnchor="middle">{"Same temperature -> same average energy per molecule, not same speed"}</text>
+        <rect x="28" y="24" width="584" height="194" rx="24" fill="#f8fafc" />
+        <text x="52" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Check total momentum first; classify the collision second</text>
+        <text x="132" y="88" fill="#334155" fontSize="18" fontWeight="700">Before</text>
+        <text x="412" y="88" fill="#334155" fontSize="18" fontWeight="700">After</text>
+        {horizontalArrow(84, 128, u1 * 16, "#2563eb")}
+        {horizontalArrow(84, 170, u2 * 16, "#14b8a6")}
+        {horizontalArrow(364, 128, v1 * 16, "#2563eb")}
+        {horizontalArrow(364, 170, v2 * 16, "#14b8a6")}
+        <text x="84" y="112" fill="#1d4ed8" fontSize="17" fontWeight="700">m1</text>
+        <text x="84" y="154" fill="#0f766e" fontSize="17" fontWeight="700">m2</text>
+        <text x="364" y="112" fill="#1d4ed8" fontSize="17" fontWeight="700">m1</text>
+        <text x="364" y="154" fill="#0f766e" fontSize="17" fontWeight="700">m2</text>
+        <text x="234" y="208" fill="#334155" fontSize="18" textAnchor="middle">p before = {formatSimulationNumber(pBefore, 2)} kg m/s</text>
+        <text x="500" y="208" fill="#334155" fontSize="18" textAnchor="middle">p after = {formatSimulationNumber(pAfter, 2)} kg m/s</text>
       </svg>,
       <>
-        {metricCard("Average energy", `${formatSimulationNumber(avgEk, 0)} arb`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Gas A speed hint", `${formatSimulationNumber(speedA, 2)}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Gas B speed hint", `${formatSimulationNumber(speedB, 2)}`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Total energy note", `${sampleSize} molecules change total, not T`, "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Total momentum before", `${formatSimulationNumber(pBefore, 2)} kg m/s`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Total momentum after", `${formatSimulationNumber(pAfter, 2)} kg m/s`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("KE before", `${formatSimulationNumber(keBefore, 2)} J`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("KE after", `${formatSimulationNumber(keAfter, 2)} J`, "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
-      ["Temperature is average energy per molecule.", "Same temperature does not force equal molecular speed.", "Sample size changes total energy more easily than temperature."],
-      "This board keeps average energy, mass, and speed separate so the temperature idea stays precise.",
+      ["Momentum conservation is the safest first ledger for the whole system.", "Impulse changes one object's momentum; the total-system momentum check comes first.", "Elastic and inelastic labels are decided by kinetic-energy behavior after the momentum ledger is secure."],
+      "This explorer deliberately separates the momentum decision from the energy decision. That makes the module less repetitive and more rigorous than treating every collision as a one-equation substitution exercise.",
     );
   }
 
   if (lessonKey === "A4_L5") {
-    const total = Math.round(clamp(simFluidDensity, 6, 18));
-    const leftCount = Math.round(clamp(simBias, 1, total - 1));
-    const openLevel = clamp(simMetricMeters, 0, 1);
-    const spreadFactor = openLevel === 0 ? leftCount : total;
-    const options = openLevel === 0 ? Math.max(4, leftCount * 2) : Math.max(12, total * total);
+    const mass = clamp(simDensityMass, 0.5, 5);
+    const speed = clamp(simVectorMagnitude, 3, 24);
+    const radius = clamp(simMetricMeters, 0.5, 4);
+    const markerAngle = clamp(simVectorAngle, 0, 359);
+    const aC = (speed * speed) / radius;
+    const force = mass * aC;
+    const period = (2 * Math.PI * radius) / speed;
+    const centerX = 320;
+    const centerY = 128;
+    const drawRadius = 72;
+    const point = circlePoint(centerX, centerY, drawRadius, markerAngle - 90);
+    const tangentAngle = ((markerAngle - 90 + 90) * Math.PI) / 180;
+    const tangentX = point.x + 46 * Math.cos(tangentAngle);
+    const tangentY = point.y + 46 * Math.sin(tangentAngle);
+
     return renderPanel(
-      "Partition drop",
+      "Circular-motion turn",
       <>
-        {sliderField("Particle count", `${total}`, <input className="w-full" type="range" min="6" max="18" step="1" value={total} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
-        {sliderField("Confined left count", `${leftCount}`, <input className="w-full" type="range" min="1" max={Math.max(2, total - 1)} step="1" value={leftCount} onChange={(e) => setSimBias(Number(e.target.value))} />)}
-        {sliderField("Partition state", openLevel < 0.5 ? "closed" : "open", <input className="w-full" type="range" min="0" max="1" step="1" value={Math.round(openLevel)} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Mass", `${formatSimulationNumber(mass, 2)} kg`, <input className="w-full" type="range" min="0.5" max="5" step="0.05" value={mass} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
+        {sliderField("Speed", `${formatSimulationNumber(speed, 1)} m/s`, <input className="w-full" type="range" min="3" max="24" step="0.1" value={speed} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Radius", `${formatSimulationNumber(radius, 2)} m`, <input className="w-full" type="range" min="0.5" max="4" step="0.05" value={radius} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Orbit marker", `${formatSimulationNumber(markerAngle, 0)} deg`, <input className="w-full" type="range" min="0" max="359" step="1" value={markerAngle} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
       </>,
-      "Macrostate / microstate board",
+      "Centripetal board",
       <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="34" y="44" width="250" height="150" rx="24" fill="#111827" stroke="#60a5fa" strokeWidth="4" />
-        <rect x="356" y="44" width="250" height="150" rx="24" fill="#111827" stroke="#22c55e" strokeWidth="4" />
-        <line x1="159" y1="44" x2="159" y2="194" stroke="#e2e8f0" strokeWidth="5" />
-        {particleDots(leftCount, 120, 110, false)}
-        {particleDots(spreadFactor, 250, 150, false)}
-        <text x="159" y="214" fill="#334155" fontSize="18" textAnchor="middle">before</text>
-        <text x="481" y="214" fill="#334155" fontSize="18" textAnchor="middle">after</text>
+        <rect x="28" y="24" width="584" height="194" rx="24" fill="#eef2ff" />
+        <text x="52" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Constant speed still needs inward acceleration because the velocity direction keeps changing</text>
+        <circle cx={centerX} cy={centerY} r={drawRadius} fill="none" stroke="#94a3b8" strokeWidth="4" />
+        <circle cx={point.x} cy={point.y} r="10" fill="#2563eb" />
+        <line x1={point.x} y1={point.y} x2={centerX} y2={centerY} stroke="#dc2626" strokeWidth="5" />
+        <polygon points={`${centerX},${centerY} ${centerX - 10},${centerY - 6} ${centerX - 10},${centerY + 6}`} fill="#dc2626" />
+        <line x1={point.x} y1={point.y} x2={tangentX} y2={tangentY} stroke="#14b8a6" strokeWidth="5" />
+        <polygon points={`${tangentX},${tangentY} ${tangentX - 12},${tangentY - 6} ${tangentX - 8},${tangentY + 8}`} fill="#14b8a6" />
+        <text x="118" y="96" fill="#b91c1c" fontSize="18" fontWeight="700">inward a and inward F</text>
+        <text x="438" y="96" fill="#0f766e" fontSize="18" fontWeight="700">tangent v</text>
+        <text x="420" y="206" fill="#334155" fontSize="18">a = v^2 / r, F = mv^2 / r</text>
       </svg>,
       <>
-        {metricCard("Visible macrostate", openLevel < 0.5 ? "confined" : "expanded", "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Hidden playbooks", `${options}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Spread trend", openLevel < 0.5 ? "limited volume" : "more accessible volume", "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Statistical favorite", openLevel < 0.5 ? "not yet" : "spread state", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Centripetal acceleration", `${formatSimulationNumber(aC, 2)} m/s^2`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Resultant inward force", `${formatSimulationNumber(force, 2)} N`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Period", `${formatSimulationNumber(period, 2)} s`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Turning status", speed > 16 || radius < 1 ? "tight / demanding turn" : "gentler turn", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
-      ["Macrostate is the dashboard state.", "Microstate is one exact hidden arrangement.", "Opening more volume increases the number of accessible playbooks."],
-      "The partition board helps the learner explain expansion statistically instead of saying the gas just 'likes disorder.'",
+      ["The velocity vector is tangential, but the acceleration vector is inward.", "Constant speed does not mean zero acceleration when direction is changing.", "There is no extra outward driving force in the inertial-frame explanation."],
+      "A4 needs the direction-change story to be explicit. This board makes the inward requirement visible before any number work begins.",
     );
   }
 
   if (lessonKey === "A4_L6") {
-    const optionScale = Math.round(clamp(simSpread, 8, 80));
-    const sharing = clamp(simVectorAngle, 0, 100);
-    const lowW = Math.max(4, Math.round(optionScale / 2));
-    const highW = Math.max(lowW + 4, optionScale);
-    const entropyGap = Math.log(highW) - Math.log(lowW);
+    const force = clamp(simVectorMagnitude, 500, 4000);
+    const areaMm2 = clamp(simDensityMass, 0.6, 3.0);
+    const originalLength = clamp(simMetricMeters, 0.6, 2.0);
+    const extensionMm = clamp(simDensityVolume, 0.2, 4.0);
+    const area = areaMm2 * 1e-6;
+    const extension = extensionMm / 1000;
+    const stressPa = force / area;
+    const stressMPa = stressPa / 1e6;
+    const strain = extension / originalLength;
+    const youngPa = strain > 0 ? stressPa / strain : 0;
+    const youngGPa = youngPa / 1e9;
+    const regime = strain < 0.002 ? "close to linear-elastic" : strain < 0.01 ? "elastic but check graph" : "beyond simple linear use";
+
     return renderPanel(
-      "Option-count boss",
+      "Materials response",
       <>
-        {sliderField("Low option count", `${lowW}`, <input className="w-full" type="range" min="8" max="80" step="1" value={optionScale} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
-        {sliderField("Energy-sharing balance", `${formatSimulationNumber(sharing, 0)}% even`, <input className="w-full" type="range" min="0" max="100" step="1" value={sharing} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
-        {sliderField("Macrostate choice", simBias < 0.5 ? "concentrated" : "spread", <input className="w-full" type="range" min="0" max="1" step="1" value={Math.round(clamp(simBias, 0, 1))} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+        {sliderField("Force", `${formatSimulationNumber(force, 0)} N`, <input className="w-full" type="range" min="500" max="4000" step="10" value={force} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {sliderField("Cross-sectional area", `${formatSimulationNumber(areaMm2, 2)} mm^2`, <input className="w-full" type="range" min="0.6" max="3.0" step="0.02" value={areaMm2} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
+        {sliderField("Original length", `${formatSimulationNumber(originalLength, 2)} m`, <input className="w-full" type="range" min="0.6" max="2.0" step="0.02" value={originalLength} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {sliderField("Extension", `${formatSimulationNumber(extensionMm, 2)} mm`, <input className="w-full" type="range" min="0.2" max="4.0" step="0.02" value={extensionMm} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
       </>,
-      "Entropy board",
+      "Stress-strain board",
       <svg viewBox="0 0 640 250" className="w-full">
-        <line x1="76" y1="192" x2="560" y2="192" stroke="#64748b" strokeWidth="4" />
-        <line x1="76" y1="44" x2="76" y2="192" stroke="#64748b" strokeWidth="4" />
-        <rect x="152" y={192 - lowW} width="110" height={lowW} rx="18" fill="#94a3b8" />
-        <rect x="352" y={192 - Math.min(highW, 130)} width="110" height={Math.min(highW, 130)} rx="18" fill="#22c55e" />
-        <text x="207" y="214" fill="#334155" fontSize="18" textAnchor="middle">lower W</text>
-        <text x="407" y="214" fill="#334155" fontSize="18" textAnchor="middle">higher W</text>
-        <text x="490" y="78" fill="#a16207" fontSize="24" fontWeight="700">S = k ln W</text>
-        <text x="490" y="112" fill="#475569" fontSize="18">higher W means higher entropy</text>
+        <rect x="28" y="24" width="584" height="194" rx="24" fill="#f8fafc" />
+        <text x="52" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Do not compare load alone; normalize by area and original length</text>
+        <rect x="144" y="78" width="16" height="102" rx="8" fill="#94a3b8" />
+        <rect x="160" y="78" width="16" height={102 + extensionMm * 10} rx="8" fill="#2563eb" />
+        <line x1="240" y1="92" x2="374" y2="92" stroke="#dc2626" strokeWidth="6" />
+        <polygon points="374,92 360,84 360,100" fill="#dc2626" />
+        <text x="306" y="78" fill="#b91c1c" fontSize="18" fontWeight="700" textAnchor="middle">force</text>
+        <text x="108" y="198" fill="#334155" fontSize="18">original</text>
+        <text x="168" y="214" fill="#334155" fontSize="18">loaded</text>
+        <text x="404" y="116" fill="#334155" fontSize="18">stress = F / A</text>
+        <text x="404" y="144" fill="#334155" fontSize="18">strain = extension / original length</text>
+        <text x="404" y="172" fill="#334155" fontSize="18">E = stress / strain</text>
       </svg>,
       <>
-        {metricCard("Low W", `${lowW}`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("High W", `${highW}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Entropy gap", `${formatSimulationNumber(entropyGap, 2)} k-units`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Spontaneous direction", sharing > 50 ? "toward more even sharing" : "still climbing", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Stress", `${formatSimulationNumber(stressMPa, 2)} MPa`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metricCard("Strain", `${formatSimulationNumber(strain, 5)}`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
+        {metricCard("Young modulus", `${formatSimulationNumber(youngGPa, 2)} GPa`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metricCard("Region check", regime, "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
-      ["Entropy is stronger as option count than as vague messiness.", "Larger W means larger entropy.", "Spontaneous direction follows larger multiplicity."],
-      "This final board turns the hidden-playbook story into an explicit entropy comparison that also supports hot-cold energy-sharing reasoning.",
+      ["Stress compares force with area, so a thicker sample can carry the same load differently.", "Strain is fractional change, not raw extension alone.", "Young modulus is meaningful only when the sample is being treated in the elastic region."],
+      "This final panel makes the normalization explicit. That keeps the worked examples mathematically rigorous instead of reducing materials to a simple force-extension slogan.",
     );
   }
 
   return renderPanel(
-    "Lesson explorer unavailable",
+    "A4 explorer unavailable",
     <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
-      This lesson is waiting for its lesson-specific Bounce-Chamber panel.
+      This lesson is waiting for its Advanced Mechanics and Materials explorer.
     </div>,
     "Explorer placeholder",
     <div className="rounded-3xl border border-dashed border-slate-300 bg-white/80 p-8 text-center text-sm text-slate-600">
-      No generic fallback panel is being substituted here.
+      Load an A4 lesson key to see vector, projectile, momentum, circular-motion, or materials-response reasoning.
     </div>,
     <>
-      {metricCard("Lesson", lessonKey, "border-sky-200 bg-sky-50 text-sky-900")}
-      {metricCard("Status", "explicit panel required", "border-amber-200 bg-amber-50 text-amber-900")}
+      {metricCard("Status", "not loaded", "border-slate-200 bg-slate-50 text-slate-900")}
     </>,
-    [
-      "Each A4 lesson should own its explorer directly.",
-      "If this appears, the lesson wiring needs a dedicated panel.",
-      "The advanced thermal module should not silently fall through to another lesson view.",
-    ],
-    "This safety fallback is intentionally neutral so an unhandled lesson key cannot masquerade as a different A4 activity.",
+    ["A4 lessons need module-specific explorers.", "Each board should match the exact lesson physics.", "The panel should support the worked example rather than distract from it."],
+    "If this fallback appears during an A4 lesson, the lesson key is not being routed into the right explorer.",
   );
 }
