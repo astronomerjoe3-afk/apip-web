@@ -11719,6 +11719,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M10_")) {
+    switch (code) {
+      case "M10_L1":
+        return {
+          body: "Introductory circuit work should separate moving charge from current and make the closed-loop condition explicit instead of letting the battery be treated as a pump of used-up charge.",
+          worked_example: {
+            prompt: "A lamp is connected to a cell by a switch and metal wires. Explain what happens to the current when the switch is opened, and state whether charge is used up by the lamp when the loop is closed.",
+            steps: [
+              "Check the route first: a steady current needs a complete conducting loop.",
+              "When the switch is opened, the route is broken, so a sustained current cannot continue around the circuit.",
+              "When the loop is closed, the same charge carriers circulate; the lamp transfers energy from the carriers, but it does not use the charge up.",
+            ],
+            answer: "Opening the switch stops the steady current because the loop is broken. Charge is not used up by the lamp; it keeps circulating when the circuit is closed.",
+            answer_reason: "Current is a loop-flow story, so the first condition is a complete path. Components transfer energy from the moving charge, but charge itself is conserved around the circuit.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks whether the learner can keep carrier count and current as different ideas.",
+              worked_example: {
+                prompt: "Why is 'there is more current because there is more charge already in the wire' a weak explanation?",
+                steps: [
+                  "Separate amount from rate before comparing anything.",
+                  "Current measures charge passing a point each second, not the total amount of charge present in the loop.",
+                  "Conclude that more charge in the wire does not by itself guarantee a larger current unless the flow rate at a point also increases.",
+                ],
+                answer: "It is weak because current is a rate of charge flow, not the total amount of charge sitting in the wire.",
+                answer_reason: "A loop can contain many carriers but still have a small current if only a small amount of charge passes a checkpoint each second.",
+              },
+            },
+          ],
+        };
+      case "M10_L2":
+        return {
+          body: "Current examples should force charge-per-second reasoning and make learners move comfortably between direct calculation and rearrangement instead of treating amperes as a mysterious label.",
+          worked_example: {
+            prompt: "A current of 0.75 A flows for 8.0 minutes through a component. Find the charge that passes the component in that time.",
+            steps: [
+              "Use Q = I t because current and time are given.",
+              "Convert the time into seconds first: 8.0 min = 480 s.",
+              "Substitute the values: Q = 0.75 x 480 = 360 C.",
+            ],
+            answer: "The charge passed is 360 C.",
+            answer_reason: "An ampere is a coulomb per second, so multiplying the steady current by the time in seconds gives the total charge that passed the component.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the rate story visible by comparing two cases with the same total charge.",
+              worked_example: {
+                prompt: "Loop A passes 24 C in 6.0 s. Loop B passes the same 24 C in 3.0 s. Find both currents and decide which loop has the larger current.",
+                steps: [
+                  "Use I = Q / t for each loop.",
+                  "For Loop A, I = 24 / 6.0 = 4.0 A. For Loop B, I = 24 / 3.0 = 8.0 A.",
+                  "Compare the rates: the same charge delivered in less time means the larger current.",
+                ],
+                answer: "Loop A has current 4.0 A and Loop B has current 8.0 A, so Loop B has the larger current.",
+                answer_reason: "Current is about how quickly charge passes a point. Keeping Q the same while reducing the time increases the current.",
+              },
+            },
+          ],
+        };
+      case "M10_L3":
+        return {
+          body: "Voltage examples should make energy-per-charge explicit and keep it distinct from current, so the source is understood as giving each carrier a boost rather than storing a fixed current.",
+          worked_example: {
+            prompt: "A battery transfers 54 J of energy while moving 6.0 C of charge through a lamp. Find the potential difference across the lamp and explain what the result means physically.",
+            steps: [
+              "Use V = E / Q because the energy transfer and the moved charge are given.",
+              "Substitute the values: V = 54 / 6.0 = 9.0 V.",
+              "Interpret the result physically: 9.0 V means 9.0 J of energy are transferred for each coulomb of charge passing through the lamp.",
+            ],
+            answer: "The potential difference is 9.0 V, meaning 9.0 J are transferred per coulomb of charge.",
+            answer_reason: "Voltage is not total energy and not current. It is the energy-per-charge measure that tells how much boost or transfer each coulomb experiences.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up reverses the relation so the learner still has to keep the per-charge meaning alive while calculating energy.",
+              worked_example: {
+                prompt: "A 12 V source moves 0.40 C of charge through a component. How much energy is transferred?",
+                steps: [
+                  "Use E = V Q because the voltage and charge are known.",
+                  "Substitute the values: E = 12 x 0.40 = 4.8 J.",
+                  "Restate the meaning: each coulomb gets 12 J, so 0.40 C gets 4.8 J in total.",
+                ],
+                answer: "The energy transferred is 4.8 J.",
+                answer_reason: "Once voltage is understood as energy per coulomb, multiplying by the number of coulombs gives the total energy transfer.",
+              },
+            },
+          ],
+        };
+      case "M10_L4":
+        return {
+          body: "Resistance work should stay route-centered and comparative, forcing the learner to reason from path length, cross-sectional area, and material instead of treating resistance as a second kind of current.",
+          worked_example: {
+            prompt: "Three wires are made from the same material. Wire A is 1.0 m long and thin. Wire B is 2.0 m long and thin. Wire C is 1.0 m long and thick. Rank the wires by resistance from greatest to least and justify the order.",
+            steps: [
+              "Use the length comparison first: for the same material and thickness, a longer wire has greater resistance.",
+              "Use the width comparison second: for the same material and length, a thicker wire has lower resistance.",
+              "Combine the comparisons: Wire B has the greatest resistance because it is the longest and still thin, Wire A comes next, and Wire C has the least resistance because it is shorter and thicker.",
+            ],
+            answer: "The resistance order is B greatest, then A, then C least.",
+            answer_reason: "Resistance belongs to the route. Longer paths oppose carrier motion more, while wider paths give carriers more room and therefore reduce resistance.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the battery out of the wrong part of the story.",
+              worked_example: {
+                prompt: "Why is it weak to say 'the battery makes the resistance bigger' when a thin, long wire is swapped for a short, thick wire on the same battery?",
+                steps: [
+                  "Identify which part of the circuit owns the resistance.",
+                  "Notice that only the route geometry changed, while the battery stayed the same.",
+                  "Conclude that the resistance changed because the wire changed, not because the battery altered the path property.",
+                ],
+                answer: "It is weak because resistance belongs to the wire and its geometry, not to the battery.",
+                answer_reason: "Changing the route changes the resistance. The battery can set the voltage across the circuit, but it does not define the wire's resistance.",
+              },
+            },
+          ],
+        };
+      case "M10_L5":
+        return {
+          body: "Ohm's-law work should be genuinely quantitative and should force the learner to keep track of which variable is being held fixed, rather than treating V = IR as a one-step slogan.",
+          worked_example: {
+            prompt: "An ohmic resistor of 6.0 ohms is connected across a 12 V supply. Find the current. Then predict the current if the supply is raised to 18 V while the resistor stays ohmic and unchanged.",
+            steps: [
+              "Use I = V / R for the first case: I = 12 / 6.0 = 2.0 A.",
+              "Keep the resistance fixed for the second case because the resistor is unchanged and ohmic.",
+              "Find the new current: I = 18 / 6.0 = 3.0 A, so the current rises in direct proportion to the voltage.",
+            ],
+            answer: "The current is 2.0 A at 12 V and 3.0 A at 18 V.",
+            answer_reason: "For an ohmic component with fixed resistance, the current is controlled by the ratio V/R. Raising the voltage while holding resistance fixed increases the current proportionally.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up uses rearrangement so resistance stays interpretable rather than becoming just the leftover symbol.",
+              worked_example: {
+                prompt: "A component has 2.4 V across it and a current of 0.30 A through it. Find its resistance.",
+                steps: [
+                  "Start from V = I R.",
+                  "Rearrange to R = V / I.",
+                  "Substitute the values: R = 2.4 / 0.30 = 8.0 ohms.",
+                ],
+                answer: "The resistance is 8.0 ohms.",
+                answer_reason: "Resistance is the ratio of potential difference to current for an ohmic component, so dividing the voltage by the current gives the route opposition value.",
+              },
+            },
+          ],
+        };
+      case "M10_L6":
+        return {
+          body: "The capstone should combine voltage, current, resistance, and power in one ledger so learners stop collapsing electrical quantities into one vague 'more electricity' idea.",
+          worked_example: {
+            prompt: "A 12 V source is connected first to a 6.0 ohm resistor and then to a 3.0 ohm resistor. For each case, find the current and the electrical power. Then state what stayed the same and what changed between the two circuits.",
+            steps: [
+              "Use Ohm's law for each circuit: with 6.0 ohms, I = 12 / 6.0 = 2.0 A; with 3.0 ohms, I = 12 / 3.0 = 4.0 A.",
+              "Use P = I V for each case: the 6.0 ohm circuit gives P = 2.0 x 12 = 24 W, and the 3.0 ohm circuit gives P = 4.0 x 12 = 48 W.",
+              "Summarize the ledger carefully: the source voltage stayed the same, but the resistance changed, so the current and therefore the power changed too.",
+            ],
+            answer: "For 6.0 ohms, the current is 2.0 A and the power is 24 W. For 3.0 ohms, the current is 4.0 A and the power is 48 W. The voltage stayed the same, while resistance, current, and power changed.",
+            answer_reason: "A same-voltage source can produce different currents in different loops because the route resistance changes. Once the current changes, the power changes as well through P = I V.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps quantity labels clean in an explanation rather than in a calculation.",
+              worked_example: {
+                prompt: "Why is 'the battery gives 12 amps' a weak sentence for a 12 V source connected to different circuits?",
+                steps: [
+                  "Identify what the 12 belongs to: volts measure energy transferred per unit charge.",
+                  "Notice that current depends on both the source voltage and the circuit resistance.",
+                  "Replace the weak sentence with the stronger one: the battery provides 12 V, while the current depends on the complete circuit it is connected to.",
+                ],
+                answer: "It is weak because 12 describes the battery's voltage, not its current. The current depends on the whole circuit, especially the resistance.",
+                answer_reason: "Voltage and current are different electrical quantities. The source provides an energy-per-charge boost, while the resulting current is set by the full loop.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A4_")) {
     switch (code) {
       case "A4_L1":
