@@ -1356,6 +1356,25 @@ const A3_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const A4_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  A4_L1: [
+    {
+      standardFormula: "ΣF_x = 0 and ΣF_y = 0",
+      meaning: "Translational equilibrium requires the net force component on each chosen axis to cancel.",
+      conditions: "Use for static or steady-motion cases where translational equilibrium is being tested.",
+      unitsText: "N",
+    },
+  ],
+  A4_L4: [
+    {
+      standardFormula: "Σp_before = Σp_after",
+      meaning: "Total momentum stays constant for the full system across a collision when external impulse is negligible.",
+      conditions: "Use for collision and explosion problems after defining the system and before relying on energy labels.",
+      unitsText: "kg m/s",
+    },
+  ],
+};
+
 const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A1_L1: [
     {
@@ -1570,6 +1589,9 @@ export function supplementalEquationFallbacksForLesson(code: string): FormulaFal
   }
   if (M4_FORMULA_OVERRIDES[code]) {
     return M4_FORMULA_OVERRIDES[code];
+  }
+  if (A4_FORMULA_OVERRIDES[code]) {
+    return A4_FORMULA_OVERRIDES[code];
   }
   if (A3_FORMULA_OVERRIDES[code]) {
     return A3_FORMULA_OVERRIDES[code];
