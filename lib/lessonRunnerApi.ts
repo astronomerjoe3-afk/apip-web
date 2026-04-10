@@ -11725,14 +11725,15 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         return {
           body: "Introductory circuit work should separate moving charge from current and make the closed-loop condition explicit instead of letting the battery be treated as a pump of used-up charge.",
           worked_example: {
-            prompt: "A lamp is connected to a cell by a switch and metal wires. Explain what happens to the current when the switch is opened, and state whether charge is used up by the lamp when the loop is closed.",
+            prompt: "A simple lamp circuit has moving charge carriers and a checkpoint meter. Explain what the checkpoint reads when the loop is closed, what changes when the switch is opened, and why saying the lamp 'uses up current' is wrong.",
             steps: [
-              "Check the route first: a steady current needs a complete conducting loop.",
-              "When the switch is opened, the route is broken, so a sustained current cannot continue around the circuit.",
-              "When the loop is closed, the same charge carriers circulate; the lamp transfers energy from the carriers, but it does not use the charge up.",
+              "Start with the measurement meaning: current is the amount of charge passing a checkpoint each second, not the total number of carriers sitting in the loop.",
+              "Check the route next: when the loop is closed, the charge carriers can circulate all the way round, so the checkpoint shows a steady current.",
+              "When the switch is opened, the route is broken, so a sustained current cannot continue and the checkpoint reading falls to zero everywhere in the loop.",
+              "The lamp transfers energy from the moving carriers, but it does not remove charge from the circuit or use current up.",
             ],
-            answer: "Opening the switch stops the steady current because the loop is broken. Charge is not used up by the lamp; it keeps circulating when the circuit is closed.",
-            answer_reason: "Current is a loop-flow story, so the first condition is a complete path. Components transfer energy from the moving charge, but charge itself is conserved around the circuit.",
+            answer: "With the loop closed, the checkpoint shows a steady current because charge carriers circulate around a complete route. Opening the switch makes the current zero everywhere, and the lamp does not use up current; it transfers energy while the same charge carriers circulate.",
+            answer_reason: "The lesson is about keeping carrier count, current, and loop status separate. A steady current needs a complete route, and components transfer energy without destroying charge.",
           },
           extra_examples: [
             {
