@@ -11813,6 +11813,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A10_")) {
+    switch (code) {
+      case "A10_L1":
+        return {
+          body: "Scattering work should read the whole pattern as evidence, so the learner has to connect the overwhelming straight-through majority, the few deflections, and the rare bounce-backs into one structural model of the atom.",
+          worked_example: {
+            prompt: "In a Rutherford scattering test, almost all alpha particles pass straight through the foil, a small fraction are deflected through small angles, and about 1 in 8000 rebounds through an angle greater than 90 degrees. What three conclusions about atomic structure follow from this pattern?",
+            steps: [
+              "Use the straight-through majority to infer something about the amount of empty space in the atom.",
+              "Use the existence of deflections to infer where the positive charge must be.",
+              "Use the very rare large-angle rebounds to infer something about how concentrated and massive that positive region must be.",
+            ],
+            answer: "The atom is mostly empty space, its positive charge is concentrated rather than spread through the whole atom, and that concentrated region is tiny, dense, and massive enough to repel an alpha particle strongly during a very close approach.",
+            answer_reason: "If charge were spread throughout the atom, large deflections would be common and the beam would not mostly pass straight through. The actual pattern shows that most alpha particles miss any concentrated positive core, while the rare particles that come very close can be strongly turned or even bounced back by a small dense nucleus.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the evidential logic sharper than a vague 'nucleus exists' statement.",
+              worked_example: {
+                prompt: "Why does the scattering pattern rule out the plum-pudding model rather than just showing that atoms contain positive charge somewhere?",
+                steps: [
+                  "Compare what a spread-out positive charge would do to the beam with what a concentrated charge would do.",
+                  "Focus especially on the rarity and size of the largest deflections.",
+                  "State why the actual data need concentrated positive charge, not a diffuse positive background.",
+                ],
+                answer: "The plum-pudding model is ruled out because a diffuse positive background could not produce the rare very large deflections and occasional rebounds seen in the experiment.",
+                answer_reason: "A spread-out positive charge would only give many weak nudges, not a tiny number of dramatic turns. The observation of rare strong deflections requires most of the positive charge and mass to be concentrated in a tiny nucleus.",
+              },
+            },
+          ],
+        };
+      case "A10_L2":
+        return {
+          body: "Accelerator and detector work should connect beam preparation to measurable tracks, so the learner has to move from accelerating potential to particle energy, then to curved-path evidence in a magnetic field.",
+          worked_example: {
+            prompt: "A proton is accelerated from rest through a potential difference of 2.0 MV and then enters a 0.50 T magnetic field at right angles. Find its kinetic energy in joules, its speed, and the radius of its path in the field.",
+            steps: [
+              "Use E_k = q V to find the gained kinetic energy from the accelerating potential.",
+              "Then use E_k = 1/2 m v^2 to find the proton speed.",
+              "Finally use r = m v / (q B) for circular motion in the magnetic field.",
+            ],
+            answer: "The proton gains 3.2 x 10^-13 J of kinetic energy, its speed is about 2.0 x 10^7 m/s, and the path radius is about 0.41 m.",
+            answer_reason: "The gained energy is 1.60 x 10^-19 x 2.0 x 10^6 = 3.2 x 10^-13 J. Using E_k = 1/2 m v^2 gives v about 1.96 x 10^7 m/s. Then r = m v / (q B) gives about 0.41 m in the 0.50 T field.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps detector reasoning tied to momentum and charge sign rather than to picture-reading alone.",
+              worked_example: {
+                prompt: "Two particles enter the same magnetic field with the same speed. One track curves more tightly than the other. What can you infer about their momentum-to-charge ratio magnitude?",
+                steps: [
+                  "Start from the magnetic-track relation r = p / (B q), or equivalently p = B q r.",
+                  "Hold the field fixed because both particles are in the same detector field.",
+                  "Compare the tighter curve with the larger curve to infer the relative p / q values.",
+                ],
+                answer: "The more tightly curving track has the smaller momentum-to-charge ratio magnitude.",
+                answer_reason: "At fixed magnetic field, track radius is proportional to p / q. A smaller radius means a smaller momentum per unit charge magnitude.",
+              },
+            },
+          ],
+        };
+      case "A10_L3":
+        return {
+          body: "Decay work should combine balancing and rate reasoning, so the learner has to keep nuclear bookkeeping separate from activity bookkeeping rather than repeating one idea in two disguises.",
+          worked_example: {
+            prompt: "A radioactive source has half-life 6.0 h and activity 4.8 x 10^8 Bq. Find the decay constant and the number of undecayed nuclei in the sample.",
+            steps: [
+              "Convert the half-life into seconds before using lambda = ln(2) / t_(1/2).",
+              "Then use A = lambda N to find the number of undecayed nuclei.",
+              "Keep activity as decays per second, not as a particle count.",
+            ],
+            answer: "The decay constant is about 3.2 x 10^-5 s^-1, and the sample contains about 1.5 x 10^13 undecayed nuclei.",
+            answer_reason: "Six hours is 21600 s, so lambda = 0.693 / 21600 which is about 3.2 x 10^-5 s^-1. Then N = A / lambda = 4.8 x 10^8 / 3.2 x 10^-5 which is about 1.5 x 10^13.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps decay-equation balancing distinct from activity calculation.",
+              worked_example: {
+                prompt: "Complete the beta-minus decay equation for carbon-14 and explain why the mass number stays the same while the proton number changes.",
+                steps: [
+                  "Use beta-minus decay to increase the proton number by 1 while keeping the nucleon count unchanged.",
+                  "Write the daughter nuclide and emitted beta particle.",
+                  "Explain the change in terms of a neutron turning into a proton inside the nucleus.",
+                ],
+                answer: "The equation is carbon-14 -> nitrogen-14 + beta-minus + antineutrino. The mass number stays the same because one neutron changes into one proton, so the total number of nucleons is unchanged.",
+                answer_reason: "Beta-minus decay changes the nuclear charge without adding or removing nucleons from the nucleus. That is why the proton number rises by 1 while the mass number stays fixed.",
+              },
+            },
+          ],
+        };
+      case "A10_L4":
+        return {
+          body: "Binding-energy work should be more than quoting E = mc^2; the learner should have to move from mass defect to total binding energy and then to binding energy per nucleon.",
+          worked_example: {
+            prompt: "Use proton mass 1.00728 u, neutron mass 1.00867 u, and helium-4 nucleus mass 4.00150 u. Find the mass defect, the total binding energy in MeV, and the binding energy per nucleon.",
+            steps: [
+              "Find the mass of the separated nucleons first: two protons plus two neutrons.",
+              "Subtract the actual nucleus mass to get the mass defect.",
+              "Convert the mass defect into binding energy with 931.5 MeV per u, then divide by 4 nucleons.",
+            ],
+            answer: "The mass defect is about 0.0304 u, the total binding energy is about 28.3 MeV, and the binding energy per nucleon is about 7.1 MeV.",
+            answer_reason: "The separated nucleons have mass 2(1.00728) + 2(1.00867) = 4.03190 u. Subtracting the helium-4 nucleus mass gives a defect of about 0.0304 u. Multiplying by 931.5 MeV per u gives about 28.3 MeV, and dividing by 4 gives about 7.1 MeV per nucleon.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the nuclear-size relation present without turning the lesson into a second copy of the mass-defect calculation.",
+              worked_example: {
+                prompt: "Estimate the nuclear radius of a nucleus with nucleon number A = 64 using R = R0 A^(1/3) with R0 = 1.2 x 10^-15 m.",
+                steps: [
+                  "Take the cube root of 64 first.",
+                  "Then multiply by the constant R0.",
+                  "Keep the result in meters with the nuclear scale visible.",
+                ],
+                answer: "The estimated nuclear radius is 4.8 x 10^-15 m.",
+                answer_reason: "Since 64^(1/3) = 4, the radius is 1.2 x 10^-15 x 4 = 4.8 x 10^-15 m.",
+              },
+            },
+          ],
+        };
+      case "A10_L5":
+        return {
+          body: "Fission work should tie the nuclear-energy scale to real reactor output and controlled multiplication, so the learner has to move beyond a generic 'fission releases energy' statement.",
+          worked_example: {
+            prompt: "A reactor produces 1.0 GW of thermal power. If each fission releases 200 MeV, estimate the number of fissions per second and the mass of uranium-235 consumed per day. Take the mass of one uranium-235 nucleus as 3.90 x 10^-25 kg.",
+            steps: [
+              "Convert 200 MeV into joules for one fission event.",
+              "Use power = energy per second to find the fission rate.",
+              "Then multiply by the mass per nucleus and by the number of seconds in a day.",
+            ],
+            answer: "The reactor needs about 3.1 x 10^19 fissions each second and consumes about 1.1 kg of uranium-235 per day.",
+            answer_reason: "Each fission releases 200 x 1.60 x 10^-13 = 3.2 x 10^-11 J. The rate is 1.0 x 10^9 / 3.2 x 10^-11 which is about 3.1 x 10^19 fissions per second. Multiplying by 3.90 x 10^-25 kg per nucleus gives about 1.22 x 10^-5 kg/s, which is about 1.1 kg per day.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes reactor control quantitative instead of purely verbal.",
+              worked_example: {
+                prompt: "If each fission event produces on average 2.4 neutrons, what fraction of those neutrons must fail to trigger another fission to keep the reactor exactly critical?",
+                steps: [
+                  "Remember that exactly one neutron from each fission must cause the next fission in a critical reactor.",
+                  "Compare that one needed neutron with the average 2.4 produced.",
+                  "Convert the unused share into a fraction or percentage.",
+                ],
+                answer: "About 58% of the neutrons must be absorbed without causing further fission or must escape.",
+                answer_reason: "Only 1 out of 2.4 neutrons should continue the chain in a critical reactor. The fraction that must not continue is 1 - 1/2.4, which is about 0.583 or 58%.",
+              },
+            },
+          ],
+        };
+      case "A10_L6":
+        return {
+          body: "Fusion work should connect mass defect to energy release and then back to the binding-energy story, so the comparison with other nuclear processes stays physically grounded rather than slogan-based.",
+          worked_example: {
+            prompt: "Use these nuclear masses: deuterium 2.01410 u, tritium 3.01605 u, helium-4 4.00260 u, neutron 1.00866 u. Find the energy released in the fusion reaction deuterium + tritium -> helium-4 + neutron, first in MeV and then in joules.",
+            steps: [
+              "Add the reactant masses and then the product masses.",
+              "Find the mass defect by subtracting product mass from reactant mass.",
+              "Convert the defect into energy using 931.5 MeV per u, then convert MeV into joules.",
+            ],
+            answer: "The reaction releases about 17.6 MeV, which is about 2.8 x 10^-12 J.",
+            answer_reason: "The reactants total 5.03015 u and the products total 5.01126 u, so the defect is 0.01889 u. Multiplying by 931.5 MeV per u gives about 17.6 MeV. Converting that with 1 MeV = 1.60 x 10^-13 J gives about 2.8 x 10^-12 J.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the process-comparison side rigorous without repeating the same mass-defect calculation.",
+              worked_example: {
+                prompt: "Why can fusion of light nuclei release energy even though work is needed to force the nuclei close together at first?",
+                steps: [
+                  "Start from the binding-energy-per-nucleon curve for light nuclei.",
+                  "Compare the initial separate nuclei with the more tightly bound fusion products.",
+                  "Explain why the net result can still be an energy release after the barrier is overcome.",
+                ],
+                answer: "Fusion can release energy because the product nucleus has a higher binding energy per nucleon than the starting light nuclei, so the final state is more tightly bound and lower in total mass-energy.",
+                answer_reason: "Light nuclei lie on the rising part of the binding-energy-per-nucleon curve. Once the repulsive barrier is overcome and they join, the product is more stable, so the drop in mass-energy appears as released energy.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]

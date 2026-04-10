@@ -586,49 +586,93 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "W",
     },
   ],
+  A10_L2: [
+    {
+      standardFormula: "E_k = q V",
+      meaning: "A charged particle gains kinetic energy when accelerated through a potential difference.",
+      conditions: "Use for accelerator-beam energy calculations.",
+      unitsText: "J, C, V",
+    },
+    {
+      standardFormula: "r = m v / (q B)",
+      meaning: "A magnetic field bends a charged-particle beam into a circular path with radius set by momentum per unit charge.",
+      conditions: "Use for detector-track curvature or accelerator beam steering when the motion is perpendicular to the field.",
+      unitsText: "m, kg, m/s, C, T",
+    },
+  ],
   A10_L3: [
     {
-      standardFormula: "A = λN",
+      standardFormula: "A = lambda N",
       meaning: "Activity depends on the decay constant and the number of undecayed nuclei.",
       conditions: "Use when linking decay rate to the number of unstable nuclei present.",
       unitsText: "Bq, s^-1",
     },
     {
-      standardFormula: "λ = ln(2) / t_(1/2)",
+      standardFormula: "lambda = ln(2) / t_(1/2)",
       meaning: "The decay constant is linked directly to the half-life.",
       conditions: "Use when converting between half-life and decay constant.",
       unitsText: "s^-1",
     },
+    {
+      standardFormula: "N = N_0 (1/2)^(t / t_(1/2))",
+      meaning: "The number of undecayed nuclei falls exponentially with successive half-lives.",
+      conditions: "Use for remaining-nuclei or count-rate questions expressed in half-life form.",
+      unitsText: "count",
+    },
   ],
   A10_L4: [
     {
-      standardFormula: "ΔE = Δmc²",
+      standardFormula: "Delta E = Delta m c^2",
       meaning: "A mass defect corresponds to binding energy through mass-energy equivalence.",
       conditions: "Use when comparing separated nucleons with the bound nucleus.",
       unitsText: "J, kg",
     },
     {
-      standardFormula: "R = R₀A^(1/3)",
+      standardFormula: "binding energy per nucleon = total binding energy / A",
+      meaning: "Binding energy per nucleon compares how tightly nucleons are bound in different nuclei.",
+      conditions: "Use after calculating or being given the total binding energy of a nucleus.",
+      unitsText: "J or MeV per nucleon",
+    },
+    {
+      standardFormula: "R = R0 A^(1/3)",
       meaning: "Nuclear radius grows with the cube root of nucleon number in the simple nuclear-size model.",
       conditions: "Use for approximate nuclear-size estimates.",
       unitsText: "m",
-      constants: "Use R₀ about 1.2 × 10^-15 m unless the question gives a different value.",
+      constants: "Use R0 about 1.2 x 10^-15 m unless the question gives a different value.",
     },
   ],
   A10_L5: [
     {
-      standardFormula: "ΔE = Δmc²",
+      standardFormula: "Delta E = Delta m c^2",
       meaning: "The released fission energy comes from the mass defect between the starting and final states.",
       conditions: "Use when linking nuclear-energy release to binding-energy change in fission.",
       unitsText: "J, kg",
     },
+    {
+      standardFormula: "P = E / t",
+      meaning: "Reactor power is the energy released per unit time.",
+      conditions: "Use when connecting fission energy per event to total reactor output.",
+      unitsText: "W, J, s",
+    },
+    {
+      standardFormula: "fission rate = power / energy per fission",
+      meaning: "The required number of fission events each second is set by reactor power divided by the energy released per event.",
+      conditions: "Use for reactor-output and fuel-use calculations.",
+      unitsText: "s^-1",
+    },
   ],
   A10_L6: [
     {
-      standardFormula: "ΔE = Δmc²",
+      standardFormula: "Delta E = Delta m c^2",
       meaning: "Fusion releases energy when the products are more tightly bound and the total mass decreases.",
       conditions: "Use when linking nuclear-energy release to binding-energy change in fusion.",
       unitsText: "J, kg",
+    },
+    {
+      standardFormula: "binding energy per nucleon = total binding energy / A",
+      meaning: "Fusion of light nuclei is favorable when the products move to a higher binding energy per nucleon.",
+      conditions: "Use when comparing fusion with other nuclear processes using the binding-energy-per-nucleon curve.",
+      unitsText: "J or MeV per nucleon",
     },
   ],
   A11_L1: [
