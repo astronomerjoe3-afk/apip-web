@@ -269,6 +269,70 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       conditions: "Use for ideal-gas particle-model reasoning with temperature measured in kelvin.",
       unitsText: "J, K",
     },
+    {
+      standardFormula: "U = 3/2 N k T",
+      meaning: "For an ideal gas, the total internal energy depends on both the number of particles and the absolute temperature.",
+      conditions: "Use when comparing whole-sample internal energy for ideal-gas samples with different amounts of gas or different temperatures.",
+      unitsText: "J, K",
+    },
+  ],
+  A6_L2: [
+    {
+      standardFormula: "Q = m c Delta T",
+      meaning: "Heating energy depends on the sample mass, the material specific heat capacity, and the temperature change together.",
+      conditions: "Use for heating or cooling stages where the temperature changes but the state does not.",
+      unitsText: "J, kg, J/(kg K), K",
+    },
+  ],
+  A6_L3: [
+    {
+      standardFormula: "Q = m L",
+      meaning: "Latent heat is the energy needed per kilogram for a change of state at constant temperature.",
+      conditions: "Use for melting, boiling, freezing, or condensing stages where the temperature stays constant during the state change.",
+      unitsText: "J, kg, J/kg",
+    },
+  ],
+  A6_L4: [
+    {
+      standardFormula: "p V = n R T",
+      meaning: "The ideal-gas law links pressure, volume, amount of gas, and absolute temperature in one state relation.",
+      conditions: "Use for ideal-gas state calculations with temperature measured in kelvin and SI units for pressure and volume.",
+      unitsText: "Pa, m^3, mol, K",
+    },
+  ],
+  A6_L5: [
+    {
+      standardFormula: "p1 V1 = p2 V2",
+      meaning: "For a fixed amount of gas at constant temperature, pressure and volume vary inversely.",
+      conditions: "Use for isothermal processes.",
+      unitsText: "Pa, m^3",
+    },
+    {
+      standardFormula: "V1 / T1 = V2 / T2",
+      meaning: "For a fixed amount of gas at constant pressure, volume is proportional to absolute temperature.",
+      conditions: "Use for isobaric processes with temperature in kelvin.",
+      unitsText: "m^3, K",
+    },
+    {
+      standardFormula: "p1 / T1 = p2 / T2",
+      meaning: "For a fixed amount of gas at constant volume, pressure is proportional to absolute temperature.",
+      conditions: "Use for isochoric processes with temperature in kelvin.",
+      unitsText: "Pa, K",
+    },
+  ],
+  A6_L6: [
+    {
+      standardFormula: "p = 1/3 rho c_rms^2",
+      meaning: "Gas pressure can be linked to particle motion through the gas density and the rms particle speed.",
+      conditions: "Use for kinetic-theory calculations that connect macroscopic pressure to microscopic motion.",
+      unitsText: "Pa, kg/m^3, m/s",
+    },
+    {
+      standardFormula: "average kinetic energy = 3/2 k T",
+      meaning: "Higher absolute temperature means greater average kinetic energy per gas particle.",
+      conditions: "Use when linking temperature changes to particle-speed changes in kinetic-theory reasoning.",
+      unitsText: "J, K",
+    },
   ],
   A9_L2: [
     {

@@ -11093,6 +11093,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A6_")) {
+    switch (code) {
+      case "A6_L1":
+        return {
+          body: "The first thermal example should force a clean separation between average particle energy and the whole-sample internal-energy store.",
+          worked_example: {
+            prompt: "Two sealed ideal-gas containers are both at 300 K. Container A has 1.0 x 10^23 particles and Container B has 3.0 x 10^23 particles. Compare their average particle kinetic energies and their total internal energies.",
+            steps: [
+              "Use temperature first: for an ideal gas, equal absolute temperature means equal average kinetic energy per particle.",
+              "Then switch to the whole-sample comparison: total internal energy depends on both the average per-particle energy and the number of particles.",
+              "Scale the total internal energy with particle count once the average-per-particle part has been held fixed.",
+            ],
+            answer: "The two containers have the same average particle kinetic energy, but Container B has three times the total internal energy of Container A.",
+            answer_reason: "Temperature sets the average kinetic energy per particle, not the whole-store total. With the same average per particle but three times as many particles, Container B must have three times the total internal energy.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the temperature scale rigorous by using kelvin rather than casual 'hotter' language alone.",
+              worked_example: {
+                prompt: "For the same ideal-gas sample, the temperature rises from 300 K to 450 K. By what factor does the average kinetic energy per particle change?",
+                steps: [
+                  "Use the ideal-gas rule that average kinetic energy is proportional to absolute temperature.",
+                  "Form the ratio of final to initial temperature: 450 / 300.",
+                  "Apply the same factor directly to the average kinetic energy.",
+                ],
+                answer: "The average kinetic energy per particle becomes 1.5 times as large.",
+                answer_reason: "For an ideal gas, average kinetic energy is directly proportional to kelvin temperature, so raising T from 300 K to 450 K multiplies the average kinetic energy by 1.5.",
+              },
+            },
+          ],
+        };
+      case "A6_L2":
+        return {
+          body: "Specific heat capacity should be taught as full bookkeeping, not as a one-step plug-in exercise, so the learner must keep mass, material, and temperature rise visible together.",
+          worked_example: {
+            prompt: "A 1.8 kg aluminum block of specific heat capacity 900 J/kg K is heated from 20 C to 75 C. Find the thermal energy supplied.",
+            steps: [
+              "Identify this as a temperature-change stage and choose Q = m c Delta T.",
+              "Find the temperature rise carefully: Delta T = 75 - 20 = 55 K.",
+              "Substitute all three factors: Q = 1.8 x 900 x 55.",
+            ],
+            answer: "The thermal energy supplied is 8.91 x 10^4 J.",
+            answer_reason: "Heating cost depends on mass, specific heat capacity, and temperature rise together. Multiplying 1.8 kg by 900 J/kg K by 55 K gives 89100 J.",
+          },
+          extra_examples: [
+            {
+              body: "This second example makes the learner rearrange the relation rather than only substitute into it.",
+              worked_example: {
+                prompt: "A 0.75 kg sample absorbs 6300 J and warms by 20 K. Find its specific heat capacity.",
+                steps: [
+                  "Start from Q = m c Delta T because the stage is a temperature rise with no state change.",
+                  "Rearrange to c = Q / (m Delta T).",
+                  "Substitute 6300 / (0.75 x 20) and keep the units.",
+                ],
+                answer: "The specific heat capacity is 420 J/kg K.",
+                answer_reason: "Dividing the supplied 6300 J by m Delta T = 15 kg K gives 420 J/kg K, so each kilogram needs 420 J for each kelvin rise.",
+              },
+            },
+          ],
+        };
+      case "A6_L3":
+        return {
+          body: "Latent-heat work should be challenging enough to force stage selection, because the core idea is not just the formula but knowing when the temperature-change formula stops applying.",
+          worked_example: {
+            prompt: "A 0.40 kg block of ice at 0 C melts completely and the resulting water is then heated to 25 C. Take the specific latent heat of fusion of ice as 3.34 x 10^5 J/kg and the specific heat capacity of water as 4200 J/kg K. Find the total energy needed.",
+            steps: [
+              "Split the process into two stages before calculating anything: melting at constant temperature, then warming the liquid water.",
+              "Use Q = mL for the melting stage and Q = m c Delta T for the warming stage.",
+              "Add the two stage energies only after each stage has been calculated separately.",
+            ],
+            answer: "The total energy needed is about 1.76 x 10^5 J.",
+            answer_reason: "Melting needs 0.40 x 3.34 x 10^5 = 1.336 x 10^5 J, and then warming the water by 25 K needs 0.40 x 4200 x 25 = 4.20 x 10^4 J. The full process therefore needs 1.756 x 10^5 J, which is about 1.76 x 10^5 J.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the plateau meaning explicit so the learner does not mistake constant temperature for zero transfer.",
+              worked_example: {
+                prompt: "A heater continues supplying 500 W during a boiling plateau that lasts 180 s. How much energy enters the liquid during the plateau, and what does that energy do?",
+                steps: [
+                  "Use E = P t because the question gives a transfer rate and a duration.",
+                  "Calculate the transferred energy with 500 x 180.",
+                  "State the role of that energy during the plateau in state-change language rather than temperature-rise language.",
+                ],
+                answer: "9.0 x 10^4 J enters the liquid, and that energy goes into the change of state rather than raising the temperature.",
+                answer_reason: "A constant-temperature plateau can still have substantial energy transfer. Here the heater supplies 90000 J, and during boiling that energy is spent separating particles into the new state.",
+              },
+            },
+          ],
+        };
+      case "A6_L4":
+        return {
+          body: "The ideal-gas lesson should use real state-variable bookkeeping in SI units so the relation is treated as one state equation rather than a symbol slogan.",
+          worked_example: {
+            prompt: "A cylinder contains 0.50 mol of an ideal gas at 300 K in a volume of 1.2 x 10^-2 m^3. Find the pressure.",
+            steps: [
+              "Choose the ideal-gas law p V = n R T because the question gives n, T, and V for one state.",
+              "Rearrange to p = n R T / V.",
+              "Substitute the SI values using R = 8.31 J/mol K.",
+            ],
+            answer: "The pressure is about 1.04 x 10^5 Pa.",
+            answer_reason: "Using p = (0.50 x 8.31 x 300) / (1.2 x 10^-2) gives about 103875 Pa, so the state pressure is about 1.04 x 10^5 Pa.",
+          },
+          extra_examples: [
+            {
+              body: "This second example makes the learner use the same state relation in reverse to find temperature.",
+              worked_example: {
+                prompt: "An ideal gas is at pressure 2.0 x 10^5 Pa in a volume of 8.0 x 10^-3 m^3. The amount of gas is 0.64 mol. Find the temperature.",
+                steps: [
+                  "Start from p V = n R T because all four state variables belong to one equation.",
+                  "Rearrange to T = p V / (n R).",
+                  "Substitute the given SI values and keep the answer in kelvin.",
+                ],
+                answer: "The temperature is about 301 K.",
+                answer_reason: "Using T = (2.0 x 10^5 x 8.0 x 10^-3) / (0.64 x 8.31) gives about 301 K, so the gas is very close to room temperature.",
+              },
+            },
+          ],
+        };
+      case "A6_L5":
+        return {
+          body: "Gas-law graph work should force the learner to name the fixed quantity, choose the correct law, and explain the graph shape from that condition.",
+          worked_example: {
+            prompt: "An ideal gas is compressed isothermally from 2.4 x 10^-2 m^3 to 1.5 x 10^-2 m^3. Its initial pressure is 1.2 x 10^5 Pa. Find the final pressure and state the shape of the p-V graph for this process.",
+            steps: [
+              "Identify the fixed quantity first: isothermal means constant temperature for a fixed amount of gas.",
+              "Use Boyle's law p1 V1 = p2 V2 to find the final pressure.",
+              "Then describe the graph shape from the inverse p-V relation rather than from appearance alone.",
+            ],
+            answer: "The final pressure is 1.92 x 10^5 Pa, and the p-V graph is a downward-curving isotherm.",
+            answer_reason: "At constant temperature, pressure and volume vary inversely, so p2 = (1.2 x 10^5 x 2.4 x 10^-2) / (1.5 x 10^-2) = 1.92 x 10^5 Pa. That inverse relation gives a hyperbolic p-V curve rather than a straight line.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks a different fixed condition so the gas laws do not blend together.",
+              worked_example: {
+                prompt: "A gas is heated at constant pressure from 280 K to 350 K. Its volume is initially 1.8 x 10^-3 m^3. Find the final volume and identify the straight-line graph that would represent this law.",
+                steps: [
+                  "Name the fixed quantity first: constant pressure means an isobaric process.",
+                  "Use V1 / T1 = V2 / T2 with temperature in kelvin.",
+                  "State the graph that becomes linear for this law.",
+                ],
+                answer: "The final volume is 2.25 x 10^-3 m^3, and the straight-line graph is volume against temperature in kelvin.",
+                answer_reason: "At constant pressure, volume is proportional to absolute temperature, so V2 = 1.8 x 10^-3 x 350 / 280 = 2.25 x 10^-3 m^3. A V against T(K) graph is therefore linear.",
+              },
+            },
+          ],
+        };
+      case "A6_L6":
+        return {
+          body: "Kinetic-theory work should connect particle motion to both pressure and temperature so the explanation stays microscopic rather than drifting back into formula-only recall.",
+          worked_example: {
+            prompt: "An ideal gas has density 0.90 kg/m^3 and rms particle speed 500 m/s. Find the pressure using p = 1/3 rho c_rms^2.",
+            steps: [
+              "Use the kinetic-theory pressure relation because the given quantities are density and rms speed.",
+              "Substitute p = (1/3) x 0.90 x 500^2.",
+              "Carry the square on the rms speed carefully before multiplying.",
+            ],
+            answer: "The pressure is 7.5 x 10^4 Pa.",
+            answer_reason: "Since 500^2 = 250000, the pressure is (1/3) x 0.90 x 250000 = 75000 Pa. The result comes directly from linking wall-collision pressure to particle motion.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the conceptual explanation tied to collision rate and momentum transfer instead of to vague 'heat rises' style wording.",
+              worked_example: {
+                prompt: "A rigid gas container is heated while its volume stays constant. Explain why the pressure rises in kinetic-theory terms.",
+                steps: [
+                  "At constant volume, heating raises the average kinetic energy and therefore the average particle speed.",
+                  "Faster particles hit the walls more often and with greater momentum change per collision.",
+                  "Use those two collision effects together to explain the higher pressure.",
+                ],
+                answer: "The pressure rises because hotter particles move faster, so wall collisions become both harder and more frequent, increasing the force per unit area on the walls.",
+                answer_reason: "Kinetic theory explains pressure through wall impacts. Raising the temperature increases average kinetic energy, which increases particle speed and therefore boosts both collision rate and momentum transfer to the walls.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
