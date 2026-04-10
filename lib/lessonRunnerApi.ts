@@ -11539,6 +11539,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M9_")) {
+    switch (code) {
+      case "M9_L1":
+        return {
+          body: "Sound-launch examples should tie the wave frequency back to the vibrating source and keep the medium's relay role separate from the source's vibration rate.",
+          worked_example: {
+            prompt: "A loudspeaker cone makes 480 complete vibrations in 2.0 s. Find the sound frequency and period, then state what this tells you about the sound wave launched into the air.",
+            steps: [
+              "Use the source motion first: frequency = vibrations / time = 480 / 2.0 = 240 Hz.",
+              "Find the period from T = 1 / f = 1 / 240 about 4.17 x 10^-3 s.",
+              "State the sound meaning clearly: each source vibration launches one sound cycle, so the sound frequency in the air is also 240 Hz even though the air itself is only relaying the disturbance.",
+            ],
+            answer: "The sound frequency is 240 Hz and the period is about 4.17 x 10^-3 s. The launched sound has the same frequency as the vibrating source.",
+            answer_reason: "The frequency belongs first to the source vibration. The nearby air does not choose a new frequency; it passes on the cycle rate launched by the speaker cone.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up protects the source-first story by removing the vibration entirely.",
+              worked_example: {
+                prompt: "Why does a silent loudspeaker cone produce no new sound wave even though air is still present around it?",
+                steps: [
+                  "Ask what actually launches a sound wave.",
+                  "Notice that sound needs a vibrating source to start repeated pressure changes in the air.",
+                  "Conclude that without the cone vibrating, there are no new compressions and rarefactions being launched.",
+                ],
+                answer: "No new sound is produced because without a vibrating source there is no repeated pressure disturbance to launch into the air.",
+                answer_reason: "The medium can relay a sound wave, but it does not spontaneously create the wave when the source stops vibrating.",
+              },
+            },
+          ],
+        };
+      case "M9_L2":
+        return {
+          body: "Longitudinal-wave examples should force the learner to separate local particle motion from pattern travel and to use compression-rarefaction language accurately.",
+          worked_example: {
+            prompt: "A sound wave travels east through air. One marked air particle oscillates east-west by 0.50 mm while a compression pattern moves 1.2 m across the tube in 4.0 ms. State the wave type, find the wave speed, and explain what does and does not travel.",
+            steps: [
+              "Compare local motion with propagation: east-west particle motion is parallel to eastward wave travel, so the wave is longitudinal.",
+              "Find the pattern speed from distance and time: v = 1.2 / 0.004 = 300 m/s.",
+              "Keep the roles separate: the compression pattern travels along the tube, while the marked particle only oscillates locally about one position.",
+            ],
+            answer: "The wave is longitudinal and its speed is 300 m/s. The compression pattern travels through the tube, while the particle only oscillates locally.",
+            answer_reason: "Sound in air is identified by the parallel relation between particle motion and propagation. The wave speed belongs to the moving pressure pattern, not to one particle crossing the whole tube.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks whether the learner can reject a common weak sentence instead of only naming the correct wave type.",
+              worked_example: {
+                prompt: "Why is 'sound is a wave because the air moves across the room' a weak explanation?",
+                steps: [
+                  "Separate what the sound pattern does from what one air particle does.",
+                  "Recall that air particles in a sound wave oscillate back and forth locally rather than traveling all the way from source to listener.",
+                  "Replace the weak claim with the stronger one: the pressure pattern propagates while the particles mostly stay near their original positions.",
+                ],
+                answer: "It is weak because the air particles do not travel across the room with the sound. The traveling part is the compression-rarefaction pattern.",
+                answer_reason: "Sound transmission is pattern propagation through local particle oscillations, not bulk transport of the air from source to listener.",
+              },
+            },
+          ],
+        };
+      case "M9_L3":
+        return {
+          body: "Pitch examples should stay quantitative enough to connect frequency, wavelength, and same-medium speed while keeping loudness out of the wrong causal role.",
+          worked_example: {
+            prompt: "Two sounds travel through the same air at 340 m/s. Tone A has frequency 170 Hz and Tone B has frequency 680 Hz. Find the wavelength of each tone and decide which has the higher pitch.",
+            steps: [
+              "Use v = f lambda in the same medium, so lambda = v / f.",
+              "Find each wavelength: Tone A gives 340 / 170 = 2.0 m, and Tone B gives 340 / 680 = 0.50 m.",
+              "Use the frequency for pitch: the higher-frequency Tone B has the higher pitch, while the sound speed stays the same because the medium has not changed.",
+            ],
+            answer: "Tone A has wavelength 2.0 m, Tone B has wavelength 0.50 m, and Tone B has the higher pitch.",
+            answer_reason: "In the same air, speed is medium-owned, so a higher frequency produces a shorter wavelength rather than a faster sound. Pitch follows frequency, not loudness.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up protects the learner from using amplitude language to answer a pitch question.",
+              worked_example: {
+                prompt: "A student says, 'This sound is higher pitch because it is louder.' What should be corrected first?",
+                steps: [
+                  "Name the quantities before comparing them: pitch links to frequency, while loudness links to sound strength or amplitude.",
+                  "Reject the idea that a larger amplitude by itself implies a higher frequency.",
+                  "Replace the claim with the safer one: a sound is higher pitch only if its frequency is higher.",
+                ],
+                answer: "The first correction is that pitch depends on frequency, not on loudness.",
+                answer_reason: "A louder sound can have the same frequency and therefore the same pitch as a quieter one.",
+              },
+            },
+          ],
+        };
+      case "M9_L4":
+        return {
+          body: "Ultrasound examples should classify frequency bands sharply and then connect that classification to a real boundary-reflection use rather than treating ultrasound as a different kind of wave.",
+          worked_example: {
+            prompt: "A scanner can emit either a 15 kHz sound or a 4.0 MHz sound into the body. Which one is ultrasound, and what is its wavelength in tissue if the sound speed there is 1500 m/s?",
+            steps: [
+              "Classify the frequencies first: 15 kHz = 15000 Hz is within the usual human hearing range, while 4.0 MHz = 4.0 x 10^6 Hz is far above 20 kHz and is therefore ultrasound.",
+              "Use lambda = v / f for the ultrasound wave in tissue: lambda = 1500 / (4.0 x 10^6) = 3.75 x 10^-4 m.",
+              "Keep the meaning honest: ultrasound is still sound, just at a much higher frequency, so it can still reflect from boundaries and be used in scanning.",
+            ],
+            answer: "The 4.0 MHz wave is ultrasound, and its wavelength in tissue is 3.75 x 10^-4 m.",
+            answer_reason: "Ultrasound is classified by frequency above the usual hearing limit, not by becoming a different kind of wave. Once classified, it still obeys the ordinary sound-wave relation lambda = v / f.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks whether the learner keeps the 'still sound' label after the hearing boundary is crossed.",
+              worked_example: {
+                prompt: "Why is it weak to say that ultrasound is 'not really sound anymore'?",
+                steps: [
+                  "Recall how ultrasound is defined.",
+                  "Notice that the definition changes only the frequency band, not the fact that the wave is sound in a medium.",
+                  "Conclude that ultrasound remains sound and therefore still reflects, refracts, and travels as a sound wave does.",
+                ],
+                answer: "It is weak because ultrasound is still sound; it is simply sound with frequency above the usual human hearing range.",
+                answer_reason: "Crossing the hearing boundary changes the classification band, not the physical identity of the wave as sound in a medium.",
+              },
+            },
+          ],
+        };
+      case "M9_L5":
+        return {
+          body: "Pulse-echo work should demand round-trip discipline and make the learner turn timed returns into a boundary map rather than one isolated substitution.",
+          worked_example: {
+            prompt: "An ultrasound pulse travels through tissue at 1500 m/s. Two echoes return after 0.80 ms and 1.60 ms. Find the depth of each boundary and state which boundary is nearer the probe.",
+            steps: [
+              "Use the pulse-echo rule with the divide-by-two step: depth = v t / 2.",
+              "For the first echo, depth = 1500 x 0.00080 / 2 = 0.60 m. For the second echo, depth = 1500 x 0.00160 / 2 = 1.20 m.",
+              "Order the boundaries by return time: the earlier echo comes from the nearer boundary, so the 0.60 m boundary is nearer the probe.",
+            ],
+            answer: "The boundaries are at depths of 0.60 m and 1.20 m, and the 0.60 m boundary is nearer the probe.",
+            answer_reason: "Echo time records the out-and-back trip, so the path must be halved to get one-way depth. A shorter return time means a shorter round trip and therefore a nearer boundary.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks whether the learner can explain the divide-by-two step rather than only use it.",
+              worked_example: {
+                prompt: "Why would using depth = v t without dividing by 2 overestimate the boundary depth in pulse-echo scanning?",
+                steps: [
+                  "Interpret what the measured time actually covers.",
+                  "Notice that the recorded time includes both the outward trip to the boundary and the return trip back to the probe.",
+                  "Conclude that using v t directly gives the full round-trip distance, which is twice the one-way depth.",
+                ],
+                answer: "It overestimates the depth because v t gives the round-trip distance, not the one-way distance to the boundary.",
+                answer_reason: "Pulse-echo timing includes both legs of the journey, so the one-way boundary depth must be half of v t.",
+              },
+            },
+          ],
+        };
+      case "M9_L6":
+        return {
+          body: "Doppler examples should turn returned-minus-transmitted frequency into a motion-direction decision first, then connect that sign to the medical flow story.",
+          worked_example: {
+            prompt: "A Doppler probe transmits 3.000 MHz and receives a return at 3.004 MHz from moving blood. Find the Doppler shift and state whether the blood is moving toward or away from the probe.",
+            steps: [
+              "Use the shift definition first: returned frequency minus transmitted frequency = 3.004 MHz - 3.000 MHz = 0.004 MHz.",
+              "Convert if desired: 0.004 MHz = 4.0 kHz.",
+              "Interpret the sign before anything else: because the returned frequency is higher than the transmitted frequency, the blood is moving toward the probe.",
+            ],
+            answer: "The Doppler shift is +0.004 MHz, or +4.0 kHz, and the blood is moving toward the probe.",
+            answer_reason: "The sign of the shift is the safest first clue. A higher returned frequency means motion toward the probe, while a lower returned frequency means motion away.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the sign story alive by reversing the case.",
+              worked_example: {
+                prompt: "If the same probe instead receives 2.998 MHz from a moving target after transmitting 3.000 MHz, what does that say about the target motion?",
+                steps: [
+                  "Compare the returned frequency with the transmitted frequency.",
+                  "Notice that the returned frequency is now lower, so the Doppler shift is negative.",
+                  "Use the sign rule: a lower returned frequency means the target is moving away from the probe.",
+                ],
+                answer: "The target is moving away from the probe.",
+                answer_reason: "A negative Doppler shift means the returned frequency has dropped below the transmitted frequency, which is the away-from-probe case.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A4_")) {
     switch (code) {
       case "A4_L1":
@@ -16458,7 +16638,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410i";
+  const assetVersion = "20260410d";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
