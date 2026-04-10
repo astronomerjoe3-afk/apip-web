@@ -15040,88 +15040,190 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F3_L1":
       return {
-        body: "Tie the calculation to an energy-transfer statement so the number has physical meaning.",
+        body: "Work examples should connect the multiplication to a physical transfer story, so the learner sees when energy is transferred and when a force does no work at all.",
         worked_example: {
-          prompt: "A 20 N force pulls a crate 6 m along the floor in the same direction as the pull. How much work is done, and what does the answer mean?",
+          prompt: "A 25 N force pulls a crate 8 m along the floor in the same direction as the pull. Find the work done by the pulling force, then state what the answer means physically.",
           steps: [
             "Start with work = force x distance moved in the force direction.",
-            "Substitute the values carefully: work = 20 x 6.",
-            "Calculate the result: work = 120 J.",
-            "Interpret the answer: 120 J means the pulling force transferred 120 J of energy to the crate.",
+            "Substitute the values: work = 25 x 8.",
+            "Calculate the result: work = 200 J.",
+            "Interpret the number instead of stopping at the multiplication: 200 J means the pulling force transferred 200 J of energy to the crate.",
+            "That interpretation matters because work is not everyday effort; it is an energy-transfer quantity tied to movement in the force direction.",
           ],
-          answer: "Work = 120 J, meaning 120 J of energy is transferred by the force.",
+          answer: "Work = 200 J, meaning the pulling force transfers 200 J of energy to the crate.",
+          answer_reason: "In this lesson model, work is the energy transferred when a force causes displacement in its own direction, so the joule value should be read as an energy-transfer statement.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the zero-work trap visible so force is not mistaken for work by itself.",
+            worked_example: {
+              prompt: "A student pushes a wall with 180 N for several seconds, but the wall does not move. How much work is done on the wall by that push?",
+              steps: [
+                "Start with the same rule: work needs movement in the force direction.",
+                "Here the displacement is zero because the wall does not move.",
+                "So work = force x distance = 180 x 0 = 0 J.",
+              ],
+              answer: "The work done on the wall is 0 J.",
+              answer_reason: "A force can exist without doing work on an object if there is no displacement in the force direction during that interaction.",
+            },
+          },
+        ],
       };
     case "F3_L2":
       return {
-        body: "Use the energy-store idea to connect motion and height, not just to plug into one formula.",
+        body: "Energy-store work should force comparison between kinetic and gravitational pathways, not just a one-formula substitution.",
         worked_example: {
-          prompt: "A 2 kg trolley moves at 5 m/s and then climbs a ramp. What kinetic energy does it start with, and what height would have the same amount of gravitational potential energy if g = 10 N/kg?",
+          prompt: "A 2.0 kg trolley moves at 6.0 m/s and then climbs a ramp to a height of 1.2 m. Take g = 10 N/kg. Find its starting kinetic energy, the gravitational potential energy gained, and the kinetic energy remaining if no energy is lost.",
           steps: [
-            "First calculate the kinetic energy: KE = 0.5 x 2 x 5^2 = 25 J.",
-            "Now match that to gravitational potential energy: 2 x 10 x h = 25.",
-            "Solve for the height: h = 25 / 20 = 1.25 m.",
-            "So the same 25 J can appear as gravitational potential energy at 1.25 m.",
+            "First find the starting kinetic energy: KE = 0.5 x 2.0 x 6.0^2 = 36 J.",
+            "Now find the gravitational potential energy gained on the ramp: GPE = mgh = 2.0 x 10 x 1.2 = 24 J.",
+            "If no energy is lost, the missing kinetic energy must be the amount transferred into gravitational potential energy.",
+            "So the kinetic energy remaining is 36 J - 24 J = 12 J.",
+            "This comparison shows how motion energy can be partly converted into height energy without disappearing.",
           ],
-          answer: "The trolley starts with 25 J of kinetic energy, which matches a gravitational potential energy gain at 1.25 m.",
+          answer: "Starting KE = 36 J, GPE gained = 24 J, and KE remaining = 12 J.",
+          answer_reason: "Kinetic energy depends on mass and speed, while gravitational potential energy depends on mass, g, and height. Comparing both stores helps the learner track where the energy goes.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the squared speed effect sharper than the mass effect.",
+            worked_example: {
+              prompt: "Two identical trolleys have the same mass, but one moves at 4 m/s and the other at 8 m/s. How does the faster trolley's kinetic energy compare?",
+              steps: [
+                "The mass is the same, so compare only the speed factor.",
+                "Kinetic energy depends on v^2, not on v alone.",
+                "Doubling speed from 4 to 8 multiplies v^2 by 4, so the kinetic energy is four times as large.",
+              ],
+              answer: "The faster trolley has four times the kinetic energy.",
+              answer_reason: "Speed has a squared effect in the kinetic energy relation, so changing speed matters more strongly than the same-factor mass change.",
+            },
+          },
+        ],
       };
     case "F3_L3":
       return {
-        body: "Start by linking power, energy, and time explicitly: P = E / t, E = Pt, and t = E / P. Then keep that rate relationship separate from the efficiency calculation.",
+        body: "Power and efficiency work should separate rate from usefulness, so the learner does not collapse two different ideas into one percentage or one watt value.",
         worked_example: {
-          prompt: "A machine transfers 900 J in 15 s and delivers 540 J as useful output. Find its power, find how much energy it would transfer in 5 s at the same power, and then find its efficiency.",
+          prompt: "A lift motor transfers 2400 J in 30 s and delivers 1800 J as useful output. Find its power, the energy it would transfer in 8 s at the same power, and its efficiency.",
           steps: [
-            "Start with power: P = E / t = 900 / 15 = 60 W, so the machine transfers energy at 60 joules each second.",
-            "Now use the rearranged form E = Pt to find the energy transferred in 5 s at the same power: E = 60 x 5 = 300 J.",
-            "Keep efficiency separate from that rate relationship: efficiency = useful output / total input = 540 / 900 = 0.60.",
-            "Convert the fraction to 60%, then state the two ideas separately: 60 W describes how fast energy is transferred, while 60% describes how much of the input is useful.",
+            "Use power = energy / time first: P = 2400 / 30 = 80 W, so the motor transfers 80 J each second.",
+            "Now keep the same power and use E = Pt for 8 s: E = 80 x 8 = 640 J.",
+            "Treat efficiency as a separate check on usefulness, not on speed: efficiency = useful output / total input = 1800 / 2400 = 0.75.",
+            "Convert 0.75 to 75% and state the meanings clearly: 80 W is the transfer rate, while 75% is the useful fraction of the input energy.",
           ],
-          answer: "Power = 60 W, the same machine would transfer 300 J in 5 s, and its efficiency = 60%.",
+          answer: "Power = 80 W, the same motor would transfer 640 J in 8 s, and its efficiency = 75%.",
+          answer_reason: "Power tells how quickly energy is transferred, whereas efficiency tells how much of the input becomes useful output. The two ideas are linked to the same process but answer different questions.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps high power from being confused with high efficiency.",
+            worked_example: {
+              prompt: "Machine A transfers 1000 J in 5 s with 50% efficiency. Machine B transfers 1000 J in 10 s with 80% efficiency. Which is more powerful, and which is more efficient?",
+              steps: [
+                "Compare power by using energy / time: A = 1000 / 5 = 200 W and B = 1000 / 10 = 100 W.",
+                "So Machine A is more powerful because it transfers the same energy in less time.",
+                "Now compare the given efficiencies directly: B is 80% efficient while A is 50% efficient.",
+              ],
+              answer: "Machine A is more powerful, but Machine B is more efficient.",
+              answer_reason: "A device can transfer energy faster yet still waste a larger fraction of the input, so power and efficiency must be judged separately.",
+            },
+          },
+        ],
       };
     case "F3_L4":
       return {
-        body: "Start from the law of conservation of linear momentum: in an isolated system, total momentum before the collision equals total momentum after it. Then use that whole-system balance to interpret the shared final motion.",
+        body: "Momentum work should use the whole-system balance and, where needed, a signed direction choice, so collisions do not turn into mass-only guessing.",
         worked_example: {
-          prompt: "A 2 kg trolley moving at 5 m/s hits a 3 kg trolley at rest and they stick together. Find their common speed after the collision.",
+          prompt: "Take right as positive. A 0.50 kg trolley moves right at 4.0 m/s and collides head-on with a 1.5 kg trolley moving left at 2.0 m/s. They stick together. Find their common velocity after the collision.",
           steps: [
             "Write the law of conservation of linear momentum for the whole system: total momentum before = total momentum after.",
-            "Find the total momentum before the collision: 2 x 5 = 10 kg m/s.",
-            "Because the trolleys stick together, the total mass afterward is 5 kg.",
-            "Apply the law: 10 = 5v, so the shared speed must satisfy the same total momentum after the collision.",
-            "Solve to get v = 2 m/s. The same total momentum is now shared by more mass.",
+            "Use the chosen sign convention before calculating: first trolley momentum = 0.50 x 4.0 = +2.0 kg m/s and second trolley momentum = 1.5 x -2.0 = -3.0 kg m/s.",
+            "Add the signed momenta to get the total before collision: +2.0 + -3.0 = -1.0 kg m/s.",
+            "Because the trolleys stick, the combined mass after collision is 0.50 + 1.5 = 2.0 kg.",
+            "Apply conservation of momentum: -1.0 = 2.0v, so v = -0.50 m/s.",
+            "The negative sign means the joined trolleys move left after the collision.",
           ],
-          answer: "The common speed after the collision is 2 m/s.",
+          answer: "The common velocity after the collision is -0.50 m/s, which means 0.50 m/s to the left.",
+          answer_reason: "Momentum is a vector quantity, so direction must be tracked consistently. Conservation works on the total signed momentum of the whole system, not on the magnitudes separately.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the simpler sticking-at-rest pattern available as a contrast.",
+            worked_example: {
+              prompt: "A 3 kg trolley moving at 4 m/s hits a 1 kg trolley at rest and they stick together. What is their common speed?",
+              steps: [
+                "Find the total momentum before: 3 x 4 = 12 kg m/s.",
+                "Add the masses after the sticking collision: 3 + 1 = 4 kg.",
+                "Use 12 = 4v, so v = 3 m/s in the original direction.",
+              ],
+              answer: "Their common speed is 3 m/s in the original direction.",
+              answer_reason: "The same total momentum is shared by the combined mass after the collision, so the shared speed is lower than the original 4 m/s.",
+            },
+          },
+        ],
       };
     case "F3_L5":
       return {
-        body: "Start from the identity impulse = change in momentum, then connect that same quantity to force and time so the safety interpretation follows naturally.",
+        body: "Impulse work should connect motion change, force-time, and safer stopping in one chain rather than treating impulse as a detached formula.",
         worked_example: {
-          prompt: "A cyclist's momentum changes by 240 kg m/s in 0.8 s while braking. Find the average force and explain what would happen if the stopping time doubled.",
+          prompt: "Take right as positive. A 0.40 kg ball moves right at 8.0 m/s, hits a wall, and rebounds left at 6.0 m/s in 0.20 s. Find the change in momentum and the average force on the ball.",
           steps: [
-            "Start with the momentum link: impulse = change in momentum = 240 kg m/s.",
-            "Now connect that impulse to force and time by using average force = change in momentum / time = 240 / 0.8 = 300 N.",
-            "If the stopping time doubles to 1.6 s, the momentum change stays the same, so the impulse stays 240 kg m/s.",
-            "The force then becomes 240 / 1.6 = 150 N, so spreading the same impulse over more time halves the average force.",
+            "Work with signed momentum, not just speed magnitudes: initial momentum = 0.40 x 8.0 = +3.2 kg m/s.",
+            "After the rebound the ball moves left, so final momentum = 0.40 x -6.0 = -2.4 kg m/s.",
+            "Find the change in momentum: Delta p = final - initial = -2.4 - 3.2 = -5.6 kg m/s.",
+            "Use average force = Delta p / Delta t = -5.6 / 0.20 = -28 N.",
+            "The negative sign shows the average force is to the left; its magnitude is 28 N.",
           ],
-          answer: "The impulse equals the 240 kg m/s momentum change, so the average force is 300 N; if the stopping time doubles, the same impulse gives 150 N.",
+          answer: "The change in momentum is -5.6 kg m/s, so the average force is -28 N, meaning 28 N to the left.",
+          answer_reason: "Impulse equals the change in momentum, so a rebound gives a larger momentum change than a simple stop because the final momentum points in the opposite direction.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the safety-time interpretation easy to connect back to collisions.",
+            worked_example: {
+              prompt: "A cyclist's momentum changes by 240 kg m/s during braking. If the stopping time doubles from 0.8 s to 1.6 s, what happens to the average force?",
+              steps: [
+                "The momentum change stays the same, so the impulse stays the same.",
+                "Average force = change in momentum / time, so spreading the same change over twice the time halves the force.",
+                "Numerically, the force changes from 240 / 0.8 = 300 N to 240 / 1.6 = 150 N.",
+              ],
+              answer: "The average force halves, dropping from 300 N to 150 N.",
+              answer_reason: "For the same impulse, a longer interaction time reduces the average force.",
+            },
+          },
+        ],
       };
     case "F3_L6":
       return {
-        body: "Start from the momentum side as well: average force equals change in momentum divided by time, so braking force depends on how quickly the vehicle is brought to a different momentum as well as how much kinetic energy must be removed.",
+        body: "Braking-safety work should combine momentum change, stopping time, and kinetic-energy demand so speed is treated as the dangerous multiplier it really is.",
         worked_example: {
-          prompt: "A 1000 kg car moving at 20 m/s is brought to rest in 0.5 s. Find the change in momentum and the average braking force, then explain what happens to the force if the same stop takes 1.0 s.",
+          prompt: "A 1000 kg car moving at 20 m/s is brought to rest in 0.50 s. Find the change in momentum, the average braking force, and the kinetic energy lost. Then state what happens to the force if the same stop takes 1.0 s instead.",
           steps: [
             "Find the starting momentum: p = mv = 1000 x 20 = 20000 kg m/s, and the final momentum is 0 because the car stops.",
             "So the change in momentum is 20000 kg m/s in magnitude during the stop.",
             "Use average force = change in momentum / time = 20000 / 0.5 = 40000 N.",
+            "Now calculate the kinetic energy that must be removed during the stop: KE = 0.5 x 1000 x 20^2 = 200000 J.",
             "If the same momentum change happens in 1.0 s instead, the average force becomes 20000 / 1.0 = 20000 N, so doubling the stopping time halves the force.",
+            "This is why safer braking explanations should mention both the size of the momentum change and how long the change is allowed to take.",
           ],
-          answer: "The stopping car changes momentum by 20000 kg m/s, so the average braking force is 40000 N in 0.5 s and 20000 N if the same stop takes 1.0 s.",
+          answer: "The car changes momentum by 20000 kg m/s, the average braking force is 40000 N in 0.50 s, the kinetic energy lost is 200000 J, and the force falls to 20000 N if the stop takes 1.0 s.",
+          answer_reason: "Average force depends on the rate of change of momentum, while the kinetic-energy calculation shows how much motion energy must be dissipated during the stop. Both matter in a complete safety explanation.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the speed comparison sharp without repeating the whole calculation.",
+            worked_example: {
+              prompt: "For the same car, what happens to momentum and kinetic energy if the speed doubles from 20 m/s to 40 m/s before braking begins?",
+              steps: [
+                "Momentum depends directly on speed, so doubling speed doubles the momentum.",
+                "Kinetic energy depends on speed squared, so doubling speed multiplies the kinetic energy by four.",
+                "That is why high-speed braking is especially demanding even before you calculate the stopping force.",
+              ],
+              answer: "The momentum doubles, but the kinetic energy quadruples.",
+              answer_reason: "Speed changes momentum and kinetic energy by different factors, so they should never be treated as interchangeable trends in braking questions.",
+            },
+          },
+        ],
       };
     case "F4_L1":
       return {
