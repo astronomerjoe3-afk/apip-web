@@ -11273,6 +11273,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A7_")) {
+    switch (code) {
+      case "A7_L1":
+        return {
+          body: "The source lesson should force the learner to separate full emf, delivered terminal p.d., and internal loss instead of treating the cell as an ideal black box.",
+          worked_example: {
+            prompt: "A battery has emf 12.0 V. When it supplies a current of 4.0 A, the terminal p.d. is 10.4 V. Find the internal resistance and the power dissipated inside the battery.",
+            steps: [
+              "Start with the source split: emf = terminal p.d. + internal drop, so the lost volts are 12.0 - 10.4.",
+              "Use r = lost volts / current to find the internal resistance.",
+              "Then use P_internal = I^2 r to find the heating power inside the battery.",
+            ],
+            answer: "The internal resistance is 0.40 ohm and the internal power dissipation is 6.4 W.",
+            answer_reason: "The battery loses 1.6 V internally at 4.0 A, so r = 1.6 / 4.0 = 0.40 ohm. The internal loss power is then 4.0^2 x 0.40 = 6.4 W.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps open-circuit and loaded readings conceptually separate.",
+              worked_example: {
+                prompt: "What is the terminal p.d. of the same battery when no current is drawn, and why?",
+                steps: [
+                  "Use V = epsilon - I r for the terminal p.d.",
+                  "Set I = 0 for the open-circuit condition.",
+                  "State what that means physically about the internal voltage drop.",
+                ],
+                answer: "The terminal p.d. is 12.0 V because with no current there is no internal voltage drop.",
+                answer_reason: "When I = 0, the term I r vanishes, so the terminal p.d. equals the full emf. The source only loses volts internally when current flows.",
+              },
+            },
+          ],
+        };
+      case "A7_L2":
+        return {
+          body: "Kirchhoff work should be challenging enough to require both a junction check and a loop-voltage calculation, not just one isolated current fact.",
+          worked_example: {
+            prompt: "A 15 V supply feeds a 3 ohm resistor in series before a junction. The current then splits through a 6 ohm branch and a 3 ohm branch that later recombine. Find the total current and the current in each branch.",
+            steps: [
+              "Combine the parallel section first: 1/R_parallel = 1/6 + 1/3, so R_parallel = 2 ohm.",
+              "Add the series resistor to get the total resistance, then use the supply voltage to find the total current.",
+              "Use the current through the 3 ohm series resistor to find the p.d. across the parallel network, then apply that same branch voltage to each parallel resistor.",
+            ],
+            answer: "The total current is 3.0 A. The 6 ohm branch carries 1.0 A and the 3 ohm branch carries 2.0 A.",
+            answer_reason: "The circuit has total resistance 3 + 2 = 5 ohm, so the supply current is 15 / 5 = 3.0 A. The series resistor drops 3.0 x 3 = 9 V, leaving 6 V across each branch. That gives 6 / 6 = 1.0 A in the 6 ohm branch and 6 / 3 = 2.0 A in the 3 ohm branch, which also satisfies the junction rule 1.0 + 2.0 = 3.0 A.",
+          },
+          extra_examples: [
+            {
+              body: "This second example makes the learner use the loop rule as a voltage-balance statement rather than as a memorized slogan.",
+              worked_example: {
+                prompt: "A loop contains a 9 V cell and two series resistors of 2 ohm and 7 ohm. Find the current and the p.d. across each resistor.",
+                steps: [
+                  "Add the series resistances to get the whole-loop opposition.",
+                  "Use I = V / R_total to find the loop current.",
+                  "Find each voltage drop with V = I R and check that the drops add back to the 9 V supply.",
+                ],
+                answer: "The current is 1.0 A, so the 2 ohm resistor has 2 V across it and the 7 ohm resistor has 7 V across it.",
+                answer_reason: "The total resistance is 9 ohm, so the loop current is 9 / 9 = 1.0 A. The separate drops are then 1.0 x 2 = 2 V and 1.0 x 7 = 7 V, which sum to the 9 V supply as Kirchhoff's loop rule requires.",
+              },
+            },
+          ],
+        };
+      case "A7_L3":
+        return {
+          body: "Potential-divider work should be more than half-supply pattern recognition; it should make the resistance ratio do real predictive work.",
+          worked_example: {
+            prompt: "A 12 V supply is connected across a divider with an 8.0 kohm top resistor and an unknown lower resistor. The output is taken across the lower resistor and is 3.0 V. Find the lower resistance.",
+            steps: [
+              "Use the divider rule V_out = V_supply x R_lower / (R_upper + R_lower).",
+              "Substitute the known values 3.0 = 12 x R_lower / (8000 + R_lower).",
+              "Solve the ratio equation carefully for the unknown lower resistance.",
+            ],
+            answer: "The lower resistance is about 2.67 kohm.",
+            answer_reason: "Since the output is one quarter of the supply, the lower resistor must be one quarter of the total divider resistance. Solving 3(8000 + R) = 12R gives 24000 = 9R, so R is about 2667 ohm.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the output change tied to a changing sensor resistance instead of to vague 'more voltage' language.",
+              worked_example: {
+                prompt: "A 9.0 V divider uses a fixed 6.0 kohm top resistor and an LDR as the lower resistor. Find the output across the LDR when it is 3.0 kohm, then when it is 12.0 kohm.",
+                steps: [
+                  "Use the same divider rule both times because only the lower resistance changes.",
+                  "First substitute R_lower = 3.0 kohm.",
+                  "Then substitute R_lower = 12.0 kohm and compare the new ratio with the old one.",
+                ],
+                answer: "The output is 3.0 V when the LDR is 3.0 kohm and 6.0 V when the LDR is 12.0 kohm.",
+                answer_reason: "With 3.0 kohm below 6.0 kohm, the lower resistor is one third of the total 9.0 kohm and gets one third of the 9.0 V supply. With 12.0 kohm below 6.0 kohm, it becomes two thirds of the total 18.0 kohm and gets two thirds of the supply.",
+              },
+            },
+          ],
+        };
+      case "A7_L4":
+        return {
+          body: "Capacitance should be treated as a storage ratio, so the worked example should make the learner move both ways across Q = C V rather than only substituting in one direction.",
+          worked_example: {
+            prompt: "A capacitor stores 4.8 mC of charge when the p.d. across it is 12 V. Find its capacitance. Then find the charge it would store at 18 V if the capacitance stays the same.",
+            steps: [
+              "Use C = Q / V first because the charge and voltage are given for one capacitor.",
+              "Convert the milli-coulomb value carefully into coulombs before dividing.",
+              "Then use Q = C V again with the new voltage and the same capacitance.",
+            ],
+            answer: "The capacitance is 4.0 x 10^-4 F, or 400 microfarads, and at 18 V it stores 7.2 mC of charge.",
+            answer_reason: "The first state gives C = 4.8 x 10^-3 / 12 = 4.0 x 10^-4 F. Keeping that same capacitance at 18 V gives Q = 4.0 x 10^-4 x 18 = 7.2 x 10^-3 C.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the storage ratio language visible during comparison.",
+              worked_example: {
+                prompt: "Two capacitors are both at 10 V. Capacitor A has twice the capacitance of Capacitor B. Compare their stored charges.",
+                steps: [
+                  "Keep the voltage fixed because both capacitors share the same p.d.",
+                  "Use Q = C V qualitatively so charge is proportional to capacitance at fixed voltage.",
+                  "Translate the factor change in capacitance directly into the stored-charge comparison.",
+                ],
+                answer: "Capacitor A stores twice as much charge as Capacitor B.",
+                answer_reason: "At fixed voltage, Q is directly proportional to C. Doubling the capacitance doubles the stored charge for the same p.d.",
+              },
+            },
+          ],
+        };
+      case "A7_L5":
+        return {
+          body: "RC work should feel like a changing-rate process, so the learner should use the time constant and exponential response rather than imagining a straight-line fill.",
+          worked_example: {
+            prompt: "A 1000 microfarad capacitor charges through a 2.2 kohm resistor from a 12 V supply. Find the time constant and the capacitor voltage after one time constant.",
+            steps: [
+              "Calculate the time constant with tau = R C, converting microfarads into farads first.",
+              "Use the charging relation V_C = V_supply (1 - e^(-t / R C)).",
+              "At t = tau, substitute t / R C = 1 and evaluate the exponential factor.",
+            ],
+            answer: "The time constant is 2.2 s, and after one time constant the capacitor voltage is about 7.6 V.",
+            answer_reason: "Since 1000 microfarads is 1.0 x 10^-3 F, tau = 2200 x 1.0 x 10^-3 = 2.2 s. At one time constant, V_C = 12(1 - e^-1) which is about 12 x 0.632 = 7.6 V.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the discharging pattern just as explicit as the charging one.",
+              worked_example: {
+                prompt: "A charged capacitor starts discharging through the same 2.2 kohm and 1000 microfarad RC circuit from 12 V. What is the capacitor voltage after one time constant, and what fraction of the initial voltage remains?",
+                steps: [
+                  "Keep the same time constant because R and C have not changed.",
+                  "Use the discharging law V_C = V_0 e^(-t / R C).",
+                  "At t = tau, evaluate e^-1 and interpret it as a remaining fraction.",
+                ],
+                answer: "After one time constant the capacitor voltage is about 4.4 V, so about 37% of the initial voltage remains.",
+                answer_reason: "At one time constant, the remaining fraction is e^-1 which is about 0.368. Multiplying 12 V by 0.368 gives about 4.4 V.",
+              },
+            },
+          ],
+        };
+      case "A7_L6":
+        return {
+          body: "The energy lesson should join calculation and physical interpretation, especially the effect of a dielectric under different constraints.",
+          worked_example: {
+            prompt: "A 4.0 microfarad capacitor is charged to 200 V. Find the energy stored. Then a dielectric is inserted while the capacitor remains connected to the 200 V supply, tripling the capacitance. Find the new stored energy.",
+            steps: [
+              "Use E = 1/2 C V^2 for the initial stored energy.",
+              "Keep the voltage fixed at 200 V when the capacitor stays connected to the supply.",
+              "Recalculate the energy with the tripled capacitance and compare the two results.",
+            ],
+            answer: "The initial energy is 0.080 J, and the new stored energy is 0.24 J.",
+            answer_reason: "Initially E = 0.5 x 4.0 x 10^-6 x 200^2 = 0.080 J. With the supply still connected, the voltage stays fixed and tripling C triples the stored energy, giving 0.24 J.",
+          },
+          extra_examples: [
+            {
+              body: "This second example is more demanding because the charge is fixed instead of the voltage.",
+              worked_example: {
+                prompt: "Take the same 4.0 microfarad capacitor charged to 200 V, but now disconnect it from the supply before inserting the dielectric so the capacitance becomes 12 microfarads. Find the new voltage.",
+                steps: [
+                  "Find the initial stored charge first with Q = C V.",
+                  "Keep that charge fixed because the capacitor is isolated after disconnection.",
+                  "Use V = Q / C with the new larger capacitance to find the new voltage.",
+                ],
+                answer: "The new voltage is about 66.7 V.",
+                answer_reason: "The initial charge is 4.0 x 10^-6 x 200 = 8.0 x 10^-4 C. After isolation the charge stays the same, so with C = 12 x 10^-6 F the new voltage is 8.0 x 10^-4 / 12 x 10^-6 which is about 66.7 V.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]

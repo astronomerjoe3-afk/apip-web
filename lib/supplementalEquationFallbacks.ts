@@ -334,6 +334,84 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "J, K",
     },
   ],
+  A7_L1: [
+    {
+      standardFormula: "V = epsilon - I r",
+      meaning: "Terminal p.d. equals emf minus the internal voltage drop inside the source.",
+      conditions: "Use for loaded sources when current flows through internal resistance.",
+      unitsText: "V, A, ohm",
+    },
+    {
+      standardFormula: "P_internal = I^2 r",
+      meaning: "Internal resistance dissipates power inside the source when current flows.",
+      conditions: "Use when finding heating or lost power inside a non-ideal source.",
+      unitsText: "W",
+    },
+  ],
+  A7_L2: [
+    {
+      standardFormula: "sum I_in = sum I_out",
+      meaning: "Current is conserved at a junction.",
+      conditions: "Use for branch-current bookkeeping at nodes.",
+      unitsText: "A",
+    },
+    {
+      standardFormula: "sum V_rises = sum V_drops",
+      meaning: "Potential changes balance around a closed loop.",
+      conditions: "Use for Kirchhoff loop equations.",
+      unitsText: "V",
+    },
+  ],
+  A7_L3: [
+    {
+      standardFormula: "V_out = V_supply x R_lower / (R_upper + R_lower)",
+      meaning: "A potential divider output is a fraction of the supply set by the resistance ratio.",
+      conditions: "Use for unloaded two-resistor potential dividers.",
+      unitsText: "V, ohm",
+    },
+  ],
+  A7_L4: [
+    {
+      standardFormula: "Q = C V",
+      meaning: "Capacitance links stored charge to potential difference.",
+      conditions: "Use for capacitor charge-storage calculations.",
+      unitsText: "C, F, V",
+    },
+  ],
+  A7_L5: [
+    {
+      standardFormula: "tau = R C",
+      meaning: "The RC time constant sets the timescale for charging and discharging.",
+      conditions: "Use for RC response timing.",
+      unitsText: "s, ohm, F",
+    },
+    {
+      standardFormula: "V_C = V_supply (1 - e^(-t / R C))",
+      meaning: "Charging capacitor p.d. rises exponentially toward the supply.",
+      conditions: "Use for capacitor charging through a resistor.",
+      unitsText: "V, s",
+    },
+    {
+      standardFormula: "V_C = V_0 e^(-t / R C)",
+      meaning: "Discharging capacitor p.d. falls exponentially with time.",
+      conditions: "Use for capacitor discharge through a resistor.",
+      unitsText: "V, s",
+    },
+  ],
+  A7_L6: [
+    {
+      standardFormula: "E = 1/2 C V^2",
+      meaning: "Capacitor energy depends on both capacitance and potential difference.",
+      conditions: "Use for energy stored in a charged capacitor.",
+      unitsText: "J, F, V",
+    },
+    {
+      standardFormula: "C proportional to epsilon_r A / d",
+      meaning: "Capacitance increases with dielectric response and plate area, and decreases with plate separation.",
+      conditions: "Use when comparing how geometry or dielectric insertion changes capacitance.",
+      unitsText: "F",
+    },
+  ],
   A9_L2: [
     {
       standardFormula: "induced emf = -N delta(Phi) / delta(t)",
