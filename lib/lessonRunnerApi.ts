@@ -12173,6 +12173,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A2_")) {
+    switch (code) {
+      case "A2_L1":
+        return {
+          body: "The first quantum lesson should make the learner test exact packet-gap matching, so the atom is read as a discrete energy ladder rather than a continuous ramp.",
+          worked_example: {
+            prompt: "An atom has allowed energy levels at -5.0 eV, -3.0 eV, and -1.0 eV. It starts in the ground state at -5.0 eV. Which photon energies from this list can be absorbed: 1.5 eV, 2.0 eV, 3.0 eV, 4.0 eV?",
+            steps: [
+              "Work out the allowed upward energy gaps from the ground state: from -5.0 to -3.0 and from -5.0 to -1.0.",
+              "Compare each offered photon energy with those exact gaps.",
+              "Accept only the photon energies that match an allowed gap exactly.",
+            ],
+            answer: "The atom can absorb 2.0 eV and 4.0 eV photons, but not 1.5 eV or 3.0 eV photons.",
+            answer_reason: "The allowed gaps from the ground state are 2.0 eV and 4.0 eV. A photon must match one of those discrete gaps exactly, so unmatched packet sizes are not absorbed for those transitions.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the ground-state reference visible instead of letting the ladder turn into a list of isolated numbers.",
+              worked_example: {
+                prompt: "If the atom is already at -3.0 eV instead of the ground state, which of the same photon energies could now be absorbed?",
+                steps: [
+                  "Use the new starting level rather than the original ground state.",
+                  "Find the allowed upward gap from -3.0 eV.",
+                  "Check which listed photon energy matches that one exact gap.",
+                ],
+                answer: "Only the 2.0 eV photon could be absorbed from -3.0 eV.",
+                answer_reason: "From -3.0 eV the only higher listed level is -1.0 eV, so the allowed upward gap is 2.0 eV. The other photon energies do not match an allowed transition from that starting state.",
+              },
+            },
+          ],
+        };
+      case "A2_L2":
+        return {
+          body: "Spectral work should connect one line directly to one transition, so the learner moves from level difference to wavelength and understands why the same gap appears in both emission and absorption.",
+          worked_example: {
+            prompt: "An electron drops between two atomic levels separated by 3.0 eV. Find the wavelength of the emitted photon. Use h c = 1240 eV nm.",
+            steps: [
+              "Treat the level gap as the photon energy released in the downward transition.",
+              "Use lambda = h c / E with the energy in eV and h c in eV nm.",
+              "Calculate the wavelength and keep the line tied to that one transition gap.",
+            ],
+            answer: "The emitted wavelength is about 413 nm.",
+            answer_reason: "Using lambda = 1240 / 3.0 gives about 413 nm. That line is the spectral fingerprint of a 3.0 eV transition in the atom.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps emission and absorption linked to the same ladder rather than treated as unrelated effects.",
+              worked_example: {
+                prompt: "Would the same 413 nm photon also be the correct wavelength for absorption across the same two levels? Why?",
+                steps: [
+                  "Keep the same pair of levels in mind.",
+                  "Notice that absorption upward needs the same energy gap as emission downward.",
+                  "Translate that shared gap into the same photon wavelength.",
+                ],
+                answer: "Yes. The absorption wavelength is the same because the upward and downward transitions involve the same 3.0 eV energy gap.",
+                answer_reason: "Emission and absorption are opposite directions across the same level spacing. The photon packet that bridges the gap therefore has the same energy and wavelength in both cases.",
+              },
+            },
+          ],
+        };
+      case "A2_L3":
+        return {
+          body: "Photoelectric work should make frequency, work function, and stopping potential sit in one chain, so the learner cannot replace threshold logic with brightness language.",
+          worked_example: {
+            prompt: "Ultraviolet light of wavelength 250 nm shines on a metal with work function 2.3 eV. Find the maximum photoelectron kinetic energy and the stopping potential. Use h c = 1240 eV nm.",
+            steps: [
+              "Find the photon energy first with E = h c / lambda.",
+              "Use the photoelectric equation K_max = E_photon - work function.",
+              "Then use stopping potential = K_max / e, so the value in eV becomes the same number in volts.",
+            ],
+            answer: "The maximum kinetic energy is about 2.66 eV and the stopping potential is about 2.66 V.",
+            answer_reason: "The photon energy is 1240 / 250 = 4.96 eV. Subtracting the 2.3 eV work function gives K_max about 2.66 eV. A stopping potential of 2.66 V is then needed to remove that maximum kinetic energy.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps threshold frequency stronger than intensity language.",
+              worked_example: {
+                prompt: "If the same metal is illuminated by brighter light at 600 nm, will photoelectrons be emitted?",
+                steps: [
+                  "Find the photon energy at 600 nm before thinking about brightness.",
+                  "Compare that energy with the 2.3 eV work function.",
+                  "Use the threshold result to decide whether any electrons can be emitted.",
+                ],
+                answer: "No photoelectrons are emitted.",
+                answer_reason: "The 600 nm photons carry about 1240 / 600 = 2.07 eV, which is below the 2.3 eV work function. Brighter low-energy light increases photon count, not photon energy, so it still cannot eject electrons.",
+              },
+            },
+          ],
+        };
+      case "A2_L4":
+        return {
+          body: "Excitation-versus-ionisation work should force the learner to compare packet energy with two different thresholds, so bounded jumps and full escape do not blur together.",
+          worked_example: {
+            prompt: "An atom has its first excitation energy at 4.9 eV and ionisation energy at 13.6 eV. A 10.2 eV electron collides with the atom. What outcome is possible: no effect, excitation, or ionisation?",
+            steps: [
+              "Compare the incoming energy with the excitation threshold first.",
+              "Then compare it with the ionisation threshold.",
+              "Use those two comparisons to decide whether the atom can be excited, ionised, or neither.",
+            ],
+            answer: "Excitation is possible, but ionisation is not.",
+            answer_reason: "The 10.2 eV collision energy is above the 4.9 eV excitation threshold, so it can raise the electron to a higher bound state. But it is still below the 13.6 eV ionisation threshold, so full escape is not possible.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps ionisation from being described as just a bigger bound jump.",
+              worked_example: {
+                prompt: "If the collision energy is 15.0 eV instead, how much kinetic energy could a freed electron have after ionisation?",
+                steps: [
+                  "Use the ionisation energy as the minimum energy needed to free the electron.",
+                  "Subtract the ionisation threshold from the incoming energy.",
+                  "Interpret the leftover as kinetic energy of the freed electron.",
+                ],
+                answer: "The freed electron could have up to 1.4 eV of kinetic energy.",
+                answer_reason: "After using 13.6 eV to ionise the atom, the remaining 15.0 - 13.6 = 1.4 eV appears as kinetic energy of the liberated electron.",
+              },
+            },
+          ],
+        };
+      case "A2_L5":
+        return {
+          body: "Matter-wave work should be quantitative enough to make wavelength depend on momentum, so the learner sees why changing momentum changes diffraction behaviour.",
+          worked_example: {
+            prompt: "An electron is accelerated through 150 V. Estimate its de Broglie wavelength. Use h = 6.63 x 10^-34 J s, electron mass = 9.11 x 10^-31 kg, and electron charge = 1.60 x 10^-19 C.",
+            steps: [
+              "Find the electron kinetic energy gained from the accelerating potential: E = e V.",
+              "Convert that energy into momentum with p = sqrt(2 m E).",
+              "Then use the de Broglie relation lambda = h / p.",
+            ],
+            answer: "The de Broglie wavelength is about 1.0 x 10^-10 m.",
+            answer_reason: "The electron gains 1.60 x 10^-19 x 150 = 2.4 x 10^-17 J. Using p = sqrt(2 m E) gives about 6.6 x 10^-24 kg m/s. Then lambda = 6.63 x 10^-34 / 6.6 x 10^-24, which is about 1.0 x 10^-10 m. That is on the atomic-spacing scale and therefore suitable for diffraction.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps wavelength tied to momentum instead of to particle type alone.",
+              worked_example: {
+                prompt: "If the electron momentum doubles, what happens to its de Broglie wavelength?",
+                steps: [
+                  "Start from lambda = h / p.",
+                  "Keep Planck's constant fixed.",
+                  "Apply the momentum change directly to the wavelength.",
+                ],
+                answer: "The wavelength halves.",
+                answer_reason: "De Broglie wavelength is inversely proportional to momentum. Doubling p makes lambda become half as large.",
+              },
+            },
+          ],
+        };
+      case "A2_L6":
+        return {
+          body: "The synthesis lesson should join several experiments into one quantum argument, so the learner has to connect discrete photon packets, threshold behavior, and matter-wave evidence rather than memorizing separate tricks.",
+          worked_example: {
+            prompt: "A hydrogen transition emits a 2.55 eV photon. The photon strikes a metal with work function 2.30 eV. Find the maximum photoelectron kinetic energy and explain what this shows about linking spectral lines to the photoelectric effect.",
+            steps: [
+              "Treat the spectral line as a photon packet with energy fixed by the atomic transition.",
+              "Apply the photoelectric equation K_max = E_photon - work function.",
+              "Use the result to explain how one quantum experiment can feed directly into another.",
+            ],
+            answer: "The maximum photoelectron kinetic energy is 0.25 eV, showing that a discrete spectral photon can trigger photoelectric emission only if its packet energy exceeds the work function.",
+            answer_reason: "Subtracting the 2.30 eV work function from the 2.55 eV photon energy leaves 0.25 eV for the fastest emitted electrons. This links discrete atomic transition energy directly to threshold photoelectric behavior.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps matter-wave evidence inside the same quantum synthesis instead of leaving it as a disconnected add-on.",
+              worked_example: {
+                prompt: "Why does electron diffraction strengthen the quantum model instead of only supporting a classical particle picture?",
+                steps: [
+                  "Start from the observation that electrons still arrive as localized detections.",
+                  "Then add the wave-like diffraction pattern built from many such detections.",
+                  "Explain why the combined evidence exceeds a purely classical particle story.",
+                ],
+                answer: "Electron diffraction strengthens the quantum model because electrons give localized hits but still build wave-like interference patterns, so a purely classical particle picture is incomplete.",
+                answer_reason: "Classical particles alone do not explain diffraction buildup, while classical waves alone do not explain localized detection events. The combined evidence points to the quantum matter-wave description.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A1_")) {
     switch (code) {
       case "A1_L1":

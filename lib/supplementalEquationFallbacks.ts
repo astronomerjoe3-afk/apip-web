@@ -750,6 +750,105 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
 };
 
+const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  A2_L1: [
+    {
+      standardFormula: "Delta E = h f = h c / lambda",
+      meaning: "An atomic transition occurs only when the incoming or outgoing packet matches the exact energy gap.",
+      conditions: "Use for discrete atomic level transitions and packet-gap matching.",
+      unitsText: "J or eV",
+    },
+  ],
+  A2_L2: [
+    {
+      standardFormula: "Delta E = h f = h c / lambda",
+      meaning: "A spectral line comes from an energy gap matched by the emitted or absorbed photon.",
+      conditions: "Use for emission or absorption lines tied to atomic energy-level transitions.",
+      unitsText: "J or eV",
+    },
+  ],
+  A2_L3: [
+    {
+      standardFormula: "h f = phi + K_max",
+      meaning: "Photoelectric packet energy is split between the work function and the maximum electron kinetic energy.",
+      conditions: "Use for photoelectric-effect calculations above threshold.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "f_0 = phi / h",
+      meaning: "Threshold frequency is the minimum frequency needed to eject electrons from a metal surface.",
+      conditions: "Use when deciding whether a given light frequency can cause photoemission.",
+      unitsText: "Hz",
+    },
+    {
+      standardFormula: "e V_s = K_max",
+      meaning: "Stopping potential measures the maximum kinetic energy of emitted photoelectrons.",
+      conditions: "Use when a stopping-potential measurement is given in a photoelectric question.",
+      unitsText: "J, V",
+    },
+  ],
+  A2_L4: [
+    {
+      standardFormula: "Delta E = h f",
+      meaning: "Excitation needs a photon or collision energy that matches an allowed bound-state gap exactly.",
+      conditions: "Use for excitation questions below the ionisation threshold.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "E_incoming >= ionisation energy",
+      meaning: "Ionisation requires at least the full escape threshold energy.",
+      conditions: "Use when deciding whether the atom is ionised rather than merely excited.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "K_freed electron = E_incoming - ionisation energy",
+      meaning: "Any energy above the ionisation threshold appears as kinetic energy of the freed electron.",
+      conditions: "Use when the incoming packet or collision energy exceeds the ionisation threshold.",
+      unitsText: "J or eV",
+    },
+  ],
+  A2_L5: [
+    {
+      standardFormula: "lambda = h / p",
+      meaning: "Matter wavelength is inversely proportional to momentum.",
+      conditions: "Use for de Broglie wavelength calculations.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "p = sqrt(2 m E_k)",
+      meaning: "Particle momentum can be found from non-relativistic kinetic energy before using the de Broglie relation.",
+      conditions: "Use when a matter-wave problem gives kinetic energy or accelerating potential.",
+      unitsText: "kg m/s",
+    },
+    {
+      standardFormula: "E_k = e V",
+      meaning: "A charged particle accelerated through a potential difference gains kinetic energy eV.",
+      conditions: "Use when an electron beam or other charged beam is accelerated before diffraction.",
+      unitsText: "J",
+    },
+  ],
+  A2_L6: [
+    {
+      standardFormula: "Delta E = h f = h c / lambda",
+      meaning: "Spectral lines and other packet-transfer evidence tie quantum behavior to discrete photon energies.",
+      conditions: "Use when linking spectral evidence to photoelectric or threshold reasoning.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "h f = phi + K_max",
+      meaning: "Photoelectric evidence shows that packet energy transfer is threshold-based, not continuous.",
+      conditions: "Use when synthesizing threshold behavior with other quantum evidence.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "lambda = h / p",
+      meaning: "Matter-wave evidence links particle momentum to wavelength and supports the wider quantum model.",
+      conditions: "Use when synthesis questions bring diffraction or de Broglie reasoning into the same story.",
+      unitsText: "m",
+    },
+  ],
+};
+
 const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A1_L1: [
     {
@@ -953,6 +1052,9 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 };
 
 export function supplementalEquationFallbacksForLesson(code: string): FormulaFallbackEntry[] {
+  if (A2_FORMULA_OVERRIDES[code]) {
+    return A2_FORMULA_OVERRIDES[code];
+  }
   if (A1_FORMULA_OVERRIDES[code]) {
     return A1_FORMULA_OVERRIDES[code];
   }
