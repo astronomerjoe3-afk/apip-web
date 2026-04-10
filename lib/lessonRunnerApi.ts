@@ -11453,6 +11453,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A8_")) {
+    switch (code) {
+      case "A8_L1":
+        return {
+          body: "Electric-field work should separate the field at a location from the force on whichever test charge happens to sample it, so the learner has to keep source, field, and probe distinct.",
+          worked_example: {
+            prompt: "At one point in space, a 2.0 nC test charge experiences a force of 6.0 x 10^-6 N to the right. Find the electric field strength at that point. Then find the force on a -5.0 nC charge placed at the same point.",
+            steps: [
+              "Use E = F / q with the first probe charge to find the field itself.",
+              "Keep the field fixed because the location and the source charges have not changed.",
+              "Then use F = q E for the new charge and use the sign of the charge to decide whether the force is with or against the field direction.",
+            ],
+            answer: "The electric field strength is 3.0 x 10^3 N/C to the right. The -5.0 nC charge feels a force of 1.5 x 10^-5 N to the left.",
+            answer_reason: "The field is 6.0 x 10^-6 / 2.0 x 10^-9 = 3.0 x 10^3 N/C. Using that same field again gives a force magnitude of 5.0 x 10^-9 x 3.0 x 10^3 = 1.5 x 10^-5 N, but the negative charge feels the force opposite to the field direction.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the field fixed while the probe changes, which prevents the common mistake of treating field strength as belonging to one chosen test charge.",
+              worked_example: {
+                prompt: "At the same point, the test charge is doubled while the source charges stay unchanged. What happens to the electric field strength there, and what happens to the force on the probe?",
+                steps: [
+                  "Keep the location and source charges unchanged, so the electric field stays the same.",
+                  "Use F = q E to decide how the force responds when q changes.",
+                  "State clearly which quantity belongs to the location and which belongs to the probe.",
+                ],
+                answer: "The electric field strength stays the same, but the force on the doubled test charge doubles.",
+                answer_reason: "The field is set by the source charges and the chosen location. Force depends on both field and test charge, so doubling q doubles F while E stays fixed.",
+              },
+            },
+          ],
+        };
+      case "A8_L2":
+        return {
+          body: "Potential work should connect field maps to energy transfer, so the learner should use potential difference as energy per charge and keep path independence visible.",
+          worked_example: {
+            prompt: "A +2.0 microcoulomb charge moves from a 180 V equipotential to a 60 V equipotential. Find the change in electric potential energy, and state whether the route taken between the two equipotentials matters.",
+            steps: [
+              "Use delta(E_p) = q delta(V), with delta(V) defined as final minus initial potential.",
+              "Substitute the charge and the potential change from 180 V down to 60 V.",
+              "Explain why only the endpoints matter when the question is about potential difference between equipotentials.",
+            ],
+            answer: "The electric potential energy changes by -2.4 x 10^-4 J, and the route does not matter.",
+            answer_reason: "The potential change is 60 - 180 = -120 V, so delta(E_p) = 2.0 x 10^-6 x (-120) = -2.4 x 10^-4 J. Electric potential difference depends on the starting and finishing equipotentials, not on the path taken between them.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps equipotential language sharp instead of collapsing it into generic 'same place' wording.",
+              worked_example: {
+                prompt: "How much work is needed to move a charge along one equipotential surface, and why?",
+                steps: [
+                  "Recognize that all points on one equipotential have the same electric potential.",
+                  "Set the potential difference between the start and finish points to zero.",
+                  "Use work per charge language to explain the result.",
+                ],
+                answer: "No work is needed because the potential difference along one equipotential is zero.",
+                answer_reason: "Electric potential difference is the work done per unit charge. If the charge stays on one equipotential, delta(V) is zero, so there is no energy transfer associated with that move.",
+              },
+            },
+          ],
+        };
+      case "A8_L3":
+        return {
+          body: "Uniform-field work should be more than a plug-in for E = V / d; it should connect plate spacing, field strength, force, and particle response in one chain.",
+          worked_example: {
+            prompt: "Parallel plates have a 300 V potential difference across a 2.0 cm gap. An electron is released between the plates. Find the electric field strength and the magnitude of the electron's acceleration.",
+            steps: [
+              "Find the uniform field with E = V / d, converting the gap into meters first.",
+              "Use F = q E to find the electric force magnitude on the electron.",
+              "Then use a = F / m with the electron mass to find the acceleration magnitude.",
+            ],
+            answer: "The field strength is 1.5 x 10^4 N/C, and the acceleration magnitude is about 2.6 x 10^15 m/s^2.",
+            answer_reason: "The gap is 0.020 m, so E = 300 / 0.020 = 1.5 x 10^4 N/C. The force magnitude is 1.60 x 10^-19 x 1.5 x 10^4 = 2.4 x 10^-15 N. Dividing by the electron mass 9.11 x 10^-31 kg gives about 2.6 x 10^15 m/s^2.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the plate-gap idea geometric rather than treating field strength as an arbitrary label.",
+              worked_example: {
+                prompt: "The same plate system keeps the 300 V supply, but the gap is halved. What happens to the field strength?",
+                steps: [
+                  "Use E = V / d with the same voltage as before.",
+                  "Compare the new gap with the original gap.",
+                  "Translate the gap change directly into the field-strength change.",
+                ],
+                answer: "The field strength doubles.",
+                answer_reason: "At fixed voltage, field strength is inversely proportional to gap size. Halving d doubles V / d, so the field becomes twice as strong.",
+              },
+            },
+          ],
+        };
+      case "A8_L4":
+        return {
+          body: "Coulomb-law work should make both charge size and separation matter explicitly, so inverse-square reasoning does real work rather than being reduced to a slogan.",
+          worked_example: {
+            prompt: "Two point charges, +3.0 microcoulomb and -2.0 microcoulomb, are 0.40 m apart. Find the force magnitude between them and state whether the force is attractive or repulsive.",
+            steps: [
+              "Use Coulomb's law F = k Q q / r^2 with magnitudes for the calculation.",
+              "Square the separation carefully before dividing.",
+              "Then use the signs of the charges to decide whether the interaction is attraction or repulsion.",
+            ],
+            answer: "The force magnitude is about 0.34 N, and it is attractive.",
+            answer_reason: "The magnitude is 8.99 x 10^9 x (3.0 x 10^-6)(2.0 x 10^-6) / 0.40^2, which is about 0.34 N. The charges have opposite signs, so they attract.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the inverse-square part visible instead of leaving it hidden inside the calculator.",
+              worked_example: {
+                prompt: "If the same two charges are moved to 0.80 m separation, what happens to the force magnitude?",
+                steps: [
+                  "Compare the new separation with the old one.",
+                  "Use the inverse-square dependence on distance.",
+                  "Translate doubling the separation into the force factor change.",
+                ],
+                answer: "The force magnitude becomes one quarter of the original value.",
+                answer_reason: "Coulomb force scales as 1 / r^2. Doubling the separation multiplies r^2 by 4, so the force falls to one quarter.",
+              },
+            },
+          ],
+        };
+      case "A8_L5":
+        return {
+          body: "Magnetic-force work should keep the perpendicular geometry visible, so the learner must separate the part of the motion aligned with the field from the part that actually feels the sideways kick.",
+          worked_example: {
+            prompt: "A proton moves at 4.0 x 10^6 m/s through a 0.25 T magnetic field at 30 degrees to the field direction. Find the magnetic force magnitude.",
+            steps: [
+              "Use F = B q v sin(theta) for a moving charge in a magnetic field.",
+              "Substitute the field strength, proton charge, speed, and the sine of 30 degrees.",
+              "Keep the angle factor visible so the answer is tied to the perpendicular component of the motion.",
+            ],
+            answer: "The magnetic force magnitude is 8.0 x 10^-14 N.",
+            answer_reason: "The force is 0.25 x 1.60 x 10^-19 x 4.0 x 10^6 x sin 30 degrees. Since sin 30 degrees is 0.5, the result is 8.0 x 10^-14 N.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the current-carrying-wire version tied to the same perpendicular-force geometry.",
+              worked_example: {
+                prompt: "A straight wire segment of length 0.12 m carries 3.0 A at right angles to a 0.50 T field. Find the magnetic force on the wire.",
+                steps: [
+                  "Use F = B I L sin(theta) for the motor-effect force on a wire.",
+                  "Set theta = 90 degrees because the wire is at right angles to the field.",
+                  "Substitute the field, current, and active length.",
+                ],
+                answer: "The magnetic force on the wire is 0.18 N.",
+                answer_reason: "With sin 90 degrees = 1, the force is 0.50 x 3.0 x 0.12 = 0.18 N. The wire feels the strongest magnetic force when it is perpendicular to the field.",
+              },
+            },
+          ],
+        };
+      case "A8_L6":
+        return {
+          body: "The final lesson should connect magnetic force to both circular particle motion and motor turning, so the mathematics and the geometry reinforce one another instead of feeling like two unrelated tricks.",
+          worked_example: {
+            prompt: "An electron enters a 0.20 T magnetic field at right angles with speed 3.0 x 10^7 m/s. Find the radius of the circular path.",
+            steps: [
+              "Use magnetic force as the centripetal force: q v B = m v^2 / r.",
+              "Rearrange to r = m v / (q B).",
+              "Substitute the electron mass, speed, charge magnitude, and field strength.",
+            ],
+            answer: "The orbit radius is about 8.5 x 10^-4 m.",
+            answer_reason: "Using r = m v / (q B) gives (9.11 x 10^-31 x 3.0 x 10^7) / (1.60 x 10^-19 x 0.20), which is about 8.5 x 10^-4 m. The magnetic force stays perpendicular to the motion, so it bends the path without changing the speed.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the motor-effect side of the lesson active without needing a full torque derivation.",
+              worked_example: {
+                prompt: "A rectangular coil has two active sides, each 4.0 cm long, in a 0.30 T field. If the current is 2.5 A, what force acts on each active side, and why does the coil turn instead of simply translating?",
+                steps: [
+                  "Use F = B I L for each active side because each side is perpendicular to the field.",
+                  "Calculate the force on one side, then recognize the opposite side has the same force magnitude in the opposite direction.",
+                  "Explain why equal and opposite forces on different sides form a turning couple.",
+                ],
+                answer: "Each active side experiences 0.030 N, and the coil turns because the equal opposite forces act at different positions and form a couple.",
+                answer_reason: "Each side feels 0.30 x 2.5 x 0.040 = 0.030 N. Since the forces act on opposite sides of the coil in opposite directions, they do not cancel into simple translation; they produce a turning effect.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]

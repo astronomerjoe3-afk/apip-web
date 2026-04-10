@@ -412,6 +412,96 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "F",
     },
   ],
+  A8_L1: [
+    {
+      standardFormula: "E = F / q",
+      meaning: "Electric field strength is the force per unit positive charge at a location.",
+      conditions: "Use when inferring the field from the force on a known test charge.",
+      unitsText: "N/C, N, C",
+    },
+    {
+      standardFormula: "F = q E",
+      meaning: "A charge placed in an electric field feels a force set by both its charge and the local field.",
+      conditions: "Use when finding the electric force on a charge in a known field.",
+      unitsText: "N, C, N/C",
+    },
+  ],
+  A8_L2: [
+    {
+      standardFormula: "delta(E_p) = q delta(V)",
+      meaning: "A change in electric potential corresponds to a change in electric potential energy for a charge.",
+      conditions: "Use when linking potential difference to energy transfer.",
+      unitsText: "J, C, V",
+    },
+    {
+      standardFormula: "V = W / Q",
+      meaning: "Potential difference is work done per unit charge.",
+      conditions: "Use when reasoning about equipotentials, energy per charge, or work between points.",
+      unitsText: "V, J, C",
+    },
+  ],
+  A8_L3: [
+    {
+      standardFormula: "E = V / d",
+      meaning: "Uniform electric field strength between parallel plates is the potential gradient across the gap.",
+      conditions: "Use for parallel-plate uniform fields.",
+      unitsText: "N/C, V, m",
+    },
+    {
+      standardFormula: "F = q E",
+      meaning: "A charge in a uniform electric field feels a constant electric force.",
+      conditions: "Use when connecting field strength to charged-particle motion between plates.",
+      unitsText: "N, C, N/C",
+    },
+    {
+      standardFormula: "a = F / m",
+      meaning: "A constant electric force produces a constant acceleration on the particle.",
+      conditions: "Use after finding the electric force on a particle of known mass.",
+      unitsText: "m/s^2, N, kg",
+    },
+  ],
+  A8_L4: [
+    {
+      standardFormula: "F = k Q q / r^2",
+      meaning: "Coulomb force depends on both charge sizes and falls with the square of separation.",
+      conditions: "Use for point-charge interactions.",
+      unitsText: "N, C, m",
+    },
+  ],
+  A8_L5: [
+    {
+      standardFormula: "F = B q v sin(theta)",
+      meaning: "A moving charge feels magnetic force from the component of its motion perpendicular to the field.",
+      conditions: "Use for magnetic force on charged particles.",
+      unitsText: "N, T, C, m/s",
+    },
+    {
+      standardFormula: "F = B I L sin(theta)",
+      meaning: "A current-carrying conductor in a magnetic field feels a force from the active length perpendicular to the field.",
+      conditions: "Use for magnetic force on wires and motor-effect calculations.",
+      unitsText: "N, T, A, m",
+    },
+  ],
+  A8_L6: [
+    {
+      standardFormula: "q v B = m v^2 / r",
+      meaning: "Magnetic force can provide the centripetal force for circular motion.",
+      conditions: "Use when a charged particle moves perpendicular to a magnetic field in a circular path.",
+      unitsText: "N, T, C, m/s, kg, m",
+    },
+    {
+      standardFormula: "r = m v / (q B)",
+      meaning: "The radius of the magnetic orbit grows with particle momentum and shrinks with stronger field or larger charge.",
+      conditions: "Use after equating magnetic force with centripetal force.",
+      unitsText: "m, kg, m/s, C, T",
+    },
+    {
+      standardFormula: "F = B I L",
+      meaning: "Each active side of a coil can feel a magnetic force that contributes to a turning couple.",
+      conditions: "Use for simple motor-effect force calculations when the wire is perpendicular to the field.",
+      unitsText: "N, T, A, m",
+    },
+  ],
   A9_L2: [
     {
       standardFormula: "induced emf = -N delta(Phi) / delta(t)",
