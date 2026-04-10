@@ -13229,87 +13229,183 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "M1_L1":
       return {
-        body: "Read the mission log one segment at a time so the graph turns back into a motion story instead of being mistaken for the route itself.",
+        body: "Distance-time work should do more than label rises and flats. The learner should be able to recover segment speeds, pauses, and the overall journey average from one graph without treating the line as the route itself.",
         worked_example: {
-          prompt: "A graph rises from 0 m to 24 m in 6 s, stays flat for 4 s, then rises from 24 m to 36 m in 3 s. What story does it tell?",
+          prompt: "A distance-time graph rises from 0 m to 30 m in the first 5 s, stays at 30 m until 8 s, then rises to 66 m by 12 s. Find the speed on each moving section, identify the pause, and calculate the overall average speed for the full 12 s journey.",
           steps: [
-            "Read the first rising segment as steady motion because the recorded distance increases at a constant rate.",
-            "Read the flat section as a stop because time passes while the distance stays unchanged.",
-            "Read the final rising segment as motion again, then compare its slope with the first moving segment.",
-            "Because the final segment is steeper than the first one, the traveller moves again and this time faster than before.",
+            "Use the gradient of the first straight section: 30 m in 5 s gives 6 m/s.",
+            "Read the flat section from 5 s to 8 s as a pause because time passes while distance stays unchanged.",
+            "Use the gradient of the final section: the distance rises from 30 m to 66 m in 4 s, so the speed there is 36 / 4 = 9 m/s.",
+            "Use the whole journey for the overall average speed: total distance 66 m over total time 12 s.",
           ],
-          answer: "Move steadily, stop, then move again faster than before.",
+          answer: "The traveler moves at 6 m/s, pauses from 5 s to 8 s, then moves at 9 m/s. The overall average speed is 5.5 m/s.",
+          answer_reason: "The slope of each rising section gives the speed on that section, while the flat section marks a stop. The overall average uses the whole journey, so 66 / 12 = 5.5 m/s, which is lower than either moving speed because the pause is included.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps same-finish and same-story separate.",
+            worked_example: {
+              prompt: "Another runner covers the same 66 m in 12 s on one straight distance-time line. What is that runner's constant speed, and why does sharing the same finish not mean sharing the same journey story?",
+              steps: [
+                "Use the straight-line run to calculate one constant speed from total distance and total time.",
+                "Compare that value with the 6 m/s section, the pause, and the 9 m/s section from the first graph.",
+                "State clearly what is the same and what is different.",
+              ],
+              answer: "The constant speed is 5.5 m/s, and the two runners share the same overall average and finish point but not the same motion story.",
+              answer_reason: "A straight line from start to finish gives 66 / 12 = 5.5 m/s all the way through. The first journey had two different moving speeds and a pause, so equal final distance and time do not force the same section-by-section motion.",
+            },
+          },
+        ],
       };
     case "M1_L2":
       return {
-        body: "Keep graph height and graph slope separate: the height gives the speed at a chosen time, while the slope tells how the speed is changing.",
+        body: "Speed-time work should keep height and slope doing different jobs. The learner should be able to read a speed at one instant and an acceleration over an interval from the same graph without mixing them.",
         worked_example: {
-          prompt: "A speed-time graph is flat at 6 m/s for 4 s, then rises steadily to 12 m/s by 7 s. What story does it tell?",
+          prompt: "A speed-time graph is flat at 4 m/s from 0 s to 2 s, rises linearly to 10 m/s by 5 s, then falls linearly to 6 m/s by 7 s. What is the speed at 4 s, and what are the accelerations on the 2-5 s and 5-7 s sections?",
           steps: [
-            "Read the flat section first as constant speed, because the graph height stays at 6 m/s.",
-            "Read the later upward slope as speeding up, because the speed rises from 6 m/s to 12 m/s.",
-            "Keep the two ideas separate: graph height tells the speed value, while the upward slope shows positive acceleration.",
-            "So the motion story is steady motion first, then speeding up.",
+            "Read the flat section as constant 4 m/s because the graph height stays unchanged from 0 s to 2 s.",
+            "For the 2-5 s section, calculate the acceleration from the slope: (10 - 4) / (5 - 2) = 2 m/s^2.",
+            "Use that straight-line rise to find the speed at 4 s: 2 s after the rise begins, the speed is 4 + 2 x 2 = 8 m/s.",
+            "For the 5-7 s section, calculate the acceleration from the slope again: (6 - 10) / (7 - 5) = -2 m/s^2.",
           ],
-          answer: "The object moves steadily at 6 m/s, then speeds up to 12 m/s.",
+          answer: "The speed at 4 s is 8 m/s. The acceleration is +2 m/s^2 from 2-5 s and -2 m/s^2 from 5-7 s.",
+          answer_reason: "Height gives the speed at a chosen instant, while slope gives the acceleration over a section. The rising line adds 2 m/s each second, so the speed reaches 8 m/s at 4 s. The falling line removes 2 m/s each second, so that last section has negative acceleration.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the highest point distinct from the steepest point.",
+            worked_example: {
+              prompt: "Why is the point at 5 s the highest speed but not automatically the greatest acceleration?",
+              steps: [
+                "Separate graph height from graph slope.",
+                "Read the height at 5 s as the speed there.",
+                "Compare the slope just before and just after 5 s instead of looking only at the height.",
+              ],
+              answer: "It is the highest speed because the graph is tallest there, but the acceleration depends on slope, not on height.",
+              answer_reason: "At 5 s the speed has reached 10 m/s, which is the maximum graph height. But the acceleration is read from the gradient of the line, so a high point can still lie on a section with modest slope or even at a turning point between two different slopes.",
+            },
+          },
+        ],
       };
     case "M1_L3":
       return {
-        body: "Treat acceleration as a signed rate of velocity change, not as a vague feeling of speeding up or slowing down.",
+        body: "Signed acceleration should be handled with real direction logic. The learner should calculate the sign from the velocity change and explain what happens physically when a motion reverses direction during the interval.",
         worked_example: {
-          prompt: "Take east as positive. A cyclist changes from +10 m/s to +4 m/s in 3 s. Find the acceleration and explain the sign.",
+          prompt: "Take east as positive. A cart changes velocity from -12 m/s to +3 m/s in 5 s. Find the acceleration and explain what must happen during the interval.",
           steps: [
-            "Write the velocities with signs: the initial velocity is +10 m/s and the final velocity is +4 m/s.",
-            "Find the signed change in velocity: 4 - 10 = -6 m/s.",
-            "Divide by the time: -6 / 3 = -2 m/s^2.",
-            "The negative sign means the acceleration points west, opposite the chosen positive direction.",
+            "Keep the velocity signs: the initial velocity is -12 m/s and the final velocity is +3 m/s.",
+            "Find the signed change in velocity: 3 - (-12) = +15 m/s.",
+            "Divide by the time: 15 / 5 = +3 m/s^2.",
+            "Interpret the positive sign and the change in motion: the cart must first slow while moving west, then stop briefly, then speed up moving east.",
           ],
-          answer: "Acceleration = -2 m/s^2, so the acceleration points west.",
+          answer: "The acceleration is +3 m/s^2, directed east.",
+          answer_reason: "The velocity increases by 15 m/s over 5 s, so the acceleration is +3 m/s^2. Because the motion starts westward but ends eastward, the cart must reverse direction during the interval: positive acceleration first reduces the westward speed to zero and then increases the eastward speed.",
         },
+        extra_examples: [
+          {
+            body: "This second example keeps negative acceleration separate from automatic slowing down.",
+            worked_example: {
+              prompt: "Take east as positive again. A second cart changes from -12 m/s to -21 m/s in 3 s. Find the acceleration and decide whether the cart is speeding up or slowing down.",
+              steps: [
+                "Keep both velocities negative before subtracting.",
+                "Calculate the signed change: -21 - (-12) = -9 m/s.",
+                "Divide by time and then compare the signs of velocity and acceleration.",
+              ],
+              answer: "The acceleration is -3 m/s^2, and the cart is speeding up westward.",
+              answer_reason: "The acceleration is -9 / 3 = -3 m/s^2. Because both the velocity and the acceleration are negative, the cart's speed increases while it continues moving west.",
+            },
+          },
+        ],
       };
     case "M1_L4":
       return {
-        body: "Choose the motion equation from the knowns, the unknown, and the constant-acceleration condition rather than from surface memory.",
+        body: "The constant-acceleration lesson should feel like tool choice, not equation recitation. The learner should select the direct relation from the knowns and then carry the calculation through with units and conditions intact.",
         worked_example: {
-          prompt: "A trolley starts at 3 m/s and accelerates steadily at 2 m/s^2 for 4 s. Find the final speed.",
+          prompt: "A skateboarder moves at 5 m/s and accelerates uniformly at 1.5 m/s^2 for 6 s. Find the final speed and the displacement in those 6 s, and name the direct equation used for each quantity.",
           steps: [
-            "List the known quantities: u = 3 m/s, a = 2 m/s^2, t = 4 s.",
-            "Notice that the unknown is v, and displacement is not needed.",
-            "Choose the direct relation v = u + at because it connects u, a, t, and v.",
-            "Substitute the values: v = 3 + 2 x 4 = 11 m/s.",
+            "List the known quantities: u = 5 m/s, a = 1.5 m/s^2, and t = 6 s, with constant acceleration stated explicitly.",
+            "Choose v = u + at for the final speed because it uses only u, a, t, and v.",
+            "Substitute to get v = 5 + 1.5 x 6 = 14 m/s.",
+            "Choose s = ut + 1/2 a t^2 for the displacement because it uses u, a, t, and s directly: s = 5 x 6 + 1/2 x 1.5 x 6^2 = 57 m.",
           ],
-          answer: "The final speed is 11 m/s.",
+          answer: "The final speed is 14 m/s and the displacement is 57 m.",
+          answer_reason: "Under constant acceleration, v = u + at gives the direct speed update, while s = ut + 1/2 a t^2 gives the direct displacement. The first part tracks the final velocity after the steady boost, and the second combines the distance from the starting pace with the extra distance added by the acceleration.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps equation choice strategic when time is absent.",
+            worked_example: {
+              prompt: "A bicycle increases speed uniformly from 4 m/s to 10 m/s over 21 m. Which equation is the direct choice for the acceleration, and what is the acceleration?",
+              steps: [
+                "Notice that u, v, and s are known, but time is not.",
+                "Choose the relation that avoids time: v^2 = u^2 + 2 a s.",
+                "Substitute the values and solve for a.",
+              ],
+              answer: "Use v^2 = u^2 + 2 a s, and the acceleration is 2.0 m/s^2.",
+              answer_reason: "Substituting gives 10^2 = 4^2 + 2 a x 21, so 100 = 16 + 42a, and 84 = 42a. That gives a = 2.0 m/s^2. This is the direct choice because it reaches the target without introducing an unnecessary time variable.",
+            },
+          },
+        ],
       };
     case "M1_L5":
       return {
-        body: "The axes decide what a slope means, so the same tilt can name a speed on one graph and an acceleration on another.",
+        body: "Gradient-context work should make units and meaning shift together with the axes. The learner should be able to calculate the same-looking gradient on two graph types and name two different physical quantities confidently.",
         worked_example: {
-          prompt: "A distance-time graph rises from 4 m to 16 m in 6 s, while a speed-time graph rises from 3 m/s to 9 m/s in 3 s. What does each gradient mean?",
+          prompt: "A distance-time graph rises from 12 m to 30 m in 6 s. A speed-time graph rises from 2 m/s to 8 m/s over the same 6 s. Find each gradient and state clearly what each gradient means, including units.",
           steps: [
-            "For the distance-time graph, calculate the slope: (16 - 4) / 6 = 2 m/s, so the gradient represents speed.",
-            "For the speed-time graph, calculate the slope: (9 - 3) / 3 = 2 m/s^2, so the gradient represents acceleration.",
-            "The number 2 appears in both calculations, but the axes change the quantity and the unit.",
-            "State the two meanings separately instead of treating every slope as the same physical idea.",
+            "For the distance-time graph, calculate the gradient: (30 - 12) / 6 = 3 m/s.",
+            "For the speed-time graph, calculate the gradient: (8 - 2) / 6 = 1 m/s^2.",
+            "State the meanings from the axes: the first gradient is speed, while the second gradient is acceleration.",
+            "Keep the units attached so the same graph geometry is not mistaken for the same physics quantity.",
           ],
-          answer: "The distance-time gradient is 2 m/s, while the speed-time gradient is 2 m/s^2.",
+          answer: "The distance-time gradient is 3 m/s, and the speed-time gradient is 1 m/s^2.",
+          answer_reason: "The same slope method is used in both calculations, but the vertical axis changes the meaning. Distance divided by time gives speed, while speed divided by time gives acceleration.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps zero gradient from collapsing into one universal story.",
+            worked_example: {
+              prompt: "If both graphs became flat instead, what would zero gradient mean on each graph?",
+              steps: [
+                "Name the graph type before you interpret the flat line.",
+                "On a distance-time graph, zero gradient means distance is no longer changing.",
+                "On a speed-time graph, zero gradient means the speed is no longer changing.",
+              ],
+              answer: "On a distance-time graph, zero gradient means stopped. On a speed-time graph, zero gradient means constant speed, which could be zero or non-zero.",
+              answer_reason: "A flat distance-time graph means the object is not gaining any extra distance. A flat speed-time graph means the speed stays fixed, so the object could be cruising steadily or sitting at rest depending on the graph height.",
+            },
+          },
+        ],
       };
     case "M1_L6":
       return {
-        body: "Use the full area under the speed-time graph so distance comes from the whole interval, not just from the final graph height.",
+        body: "Area-under-the-graph work should feel like real bookkeeping, not one rectangle trick. The learner should split a multi-part speed-time graph into simple shapes and recover total distance from the whole interval.",
         worked_example: {
-          prompt: "A speed-time graph shows 6 m/s for 4 s and then a straight rise from 6 m/s to 10 m/s over the next 2 s. Find the total distance.",
+          prompt: "A speed-time graph shows 4 m/s for 3 s, then rises linearly from 4 m/s to 12 m/s over 4 s, then falls linearly from 12 m/s to 0 m/s over 2 s. Find the total distance traveled.",
           steps: [
-            "Find the area of the first section: rectangle area = 6 x 4 = 24 m.",
-            "Find the area of the second section as a trapezium: average speed x time = (6 + 10) / 2 x 2 = 16 m.",
-            "Add the two areas because total distance is the whole area under the graph.",
-            "24 m + 16 m = 40 m.",
+            "Split the graph into three simple areas: a rectangle, a trapezium, and a triangle.",
+            "Rectangle area: 4 x 3 = 12 m.",
+            "Trapezium area: (4 + 12) / 2 x 4 = 32 m. Triangle area: 1/2 x 2 x 12 = 12 m.",
+            "Add the full area under the graph: 12 + 32 + 12 = 56 m.",
           ],
-          answer: "The total distance is 40 m.",
+          answer: "The total distance traveled is 56 m.",
+          answer_reason: "Each area piece is speed x time and therefore contributes distance. The full graph contains a 12 m rectangle, a 32 m trapezium, and a 12 m triangle, so the total distance is 56 m.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up protects the idea that equal distance does not force identical graph shape.",
+            worked_example: {
+              prompt: "Could a constant-speed journey over the same 9 s still give the same 56 m total distance? If so, what constant speed would it need?",
+              steps: [
+                "Use the same total distance of 56 m and the same total time of 9 s.",
+                "Apply average speed = total distance / total time.",
+                "Use the result to explain why a different shape can still enclose the same total area.",
+              ],
+              answer: "Yes. It would need a constant speed of about 6.22 m/s.",
+              answer_reason: "A constant-speed graph over 9 s would need speed = 56 / 9 about 6.22 m/s. That rectangular graph would have the same total area as the mixed-shape graph, so the total distance could match even though the speed story is different.",
+            },
+          },
+        ],
       };
     default:
       return {

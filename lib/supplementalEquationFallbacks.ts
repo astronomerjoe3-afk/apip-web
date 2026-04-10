@@ -750,6 +750,105 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
 };
 
+const M1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M1_L1: [
+    {
+      standardFormula: "segment speed = delta(distance) / delta(time)",
+      meaning: "The gradient of a distance-time segment gives the speed on that segment.",
+      conditions: "Use on a straight section of a distance-time graph.",
+      unitsText: "m/s",
+    },
+    {
+      standardFormula: "average speed = total distance / total time",
+      meaning: "Overall average speed compares the whole journey distance with the full elapsed time, including pauses.",
+      conditions: "Use for the whole journey or a named interval.",
+      unitsText: "m/s",
+    },
+  ],
+  M1_L2: [
+    {
+      standardFormula: "acceleration = delta(speed) / delta(time)",
+      meaning: "On a speed-time graph, the slope of a straight section gives the acceleration.",
+      conditions: "Use when speed changes over a known time interval.",
+      unitsText: "m/s^2",
+    },
+    {
+      standardFormula: "graph height on a speed-time graph = speed at that instant",
+      meaning: "The vertical reading tells the current speed, while the slope tells whether it is changing.",
+      conditions: "Use when reading a speed-time graph at a particular moment.",
+      unitsText: "m/s",
+    },
+  ],
+  M1_L3: [
+    {
+      standardFormula: "a = (v - u) / t",
+      meaning: "Average acceleration comes from the signed change in velocity divided by the elapsed time.",
+      conditions: "Use after choosing a positive direction and keeping the velocity signs.",
+      unitsText: "m/s^2",
+    },
+    {
+      standardFormula: "velocity and acceleration same sign -> speeding up; opposite signs -> slowing down",
+      meaning: "Whether speed grows or shrinks depends on the sign combination, not on the acceleration sign alone.",
+      conditions: "Use when interpreting signed-motion stories.",
+      unitsText: "decision rule",
+    },
+  ],
+  M1_L4: [
+    {
+      standardFormula: "v = u + at",
+      meaning: "Use this when initial velocity, constant acceleration, time, and final velocity are the active variables.",
+      conditions: "Use only when acceleration is constant.",
+      unitsText: "m/s",
+    },
+    {
+      standardFormula: "s = ut + 1/2 a t^2",
+      meaning: "Displacement under constant acceleration combines the distance from the starting speed with the extra distance from the acceleration.",
+      conditions: "Use only when acceleration is constant.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "s = (u + v) t / 2",
+      meaning: "For constant acceleration, the average velocity is the midpoint between u and v.",
+      conditions: "Use only when acceleration is constant.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "v^2 = u^2 + 2 a s",
+      meaning: "This relation avoids time and links velocity change directly to displacement.",
+      conditions: "Use only when acceleration is constant and time is not needed.",
+      unitsText: "m^2/s^2",
+    },
+  ],
+  M1_L5: [
+    {
+      standardFormula: "gradient of distance-time graph = speed",
+      meaning: "The same visual steepness can mean speed when the vertical axis is distance.",
+      conditions: "Use for distance-time graphs.",
+      unitsText: "m/s",
+    },
+    {
+      standardFormula: "gradient of speed-time graph = acceleration",
+      meaning: "The same visual steepness can mean acceleration when the vertical axis is speed.",
+      conditions: "Use for speed-time graphs.",
+      unitsText: "m/s^2",
+    },
+  ],
+  M1_L6: [
+    {
+      standardFormula: "distance = total area under a speed-time graph",
+      meaning: "Each area strip combines a speed height with a time width, so the total area gives total distance.",
+      conditions: "Use when every contribution is counted positively.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "trapezium area = (a + b) h / 2",
+      meaning: "A straight-line change in speed over time often creates a trapezium that must be included in the total area.",
+      conditions: "Use when a speed-time section has parallel top and bottom edges.",
+      unitsText: "m^2 in pure geometry, then convert through graph units to distance",
+    },
+  ],
+};
+
 const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A2_L1: [
     {
@@ -1169,6 +1268,9 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 };
 
 export function supplementalEquationFallbacksForLesson(code: string): FormulaFallbackEntry[] {
+  if (M1_FORMULA_OVERRIDES[code]) {
+    return M1_FORMULA_OVERRIDES[code];
+  }
   if (A3_FORMULA_OVERRIDES[code]) {
     return A3_FORMULA_OVERRIDES[code];
   }
