@@ -11993,6 +11993,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A11_")) {
+    switch (code) {
+      case "A11_L1":
+        return {
+          body: "Gravitational-field work should keep field strength and potential distinct, so the learner has to separate force-per-mass from energy-per-mass on the same gravitational landscape.",
+          worked_example: {
+            prompt: "A planet has mass 6.0 x 10^24 kg and radius 7.0 x 10^6 m. Find the gravitational field strength and gravitational potential at the surface.",
+            steps: [
+              "Use g = G M / r^2 for the field strength at the surface.",
+              "Then use V = -G M / r for the gravitational potential at the same radius.",
+              "Keep the minus sign on potential because zero is taken at infinity.",
+            ],
+            answer: "The surface field strength is about 8.2 N/kg, and the surface gravitational potential is about -5.7 x 10^7 J/kg.",
+            answer_reason: "Using g = G M / r^2 gives 6.67 x 10^-11 x 6.0 x 10^24 divided by (7.0 x 10^6)^2, which is about 8.2 N/kg. Using V = -G M / r gives about -5.7 x 10^7 J/kg.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps inverse-square field strength separate from inverse-first-power potential.",
+              worked_example: {
+                prompt: "At twice the planet's radius, how do the field strength and potential compare with their surface values?",
+                steps: [
+                  "Use the r^-2 dependence for gravitational field strength.",
+                  "Use the r^-1 dependence for gravitational potential.",
+                  "Compare the values at 2r with those at r.",
+                ],
+                answer: "At twice the radius, the field strength is one quarter of the surface value and the potential is half as negative as the surface value.",
+                answer_reason: "Doubling r makes g fall by a factor of 2^2 = 4, while V scales as 1 / r, so its magnitude halves. The potential stays negative because infinity is still the zero reference.",
+              },
+            },
+          ],
+        };
+      case "A11_L2":
+        return {
+          body: "Orbital work should make gravity and observation role sit on the same calculation, so the learner has to connect orbital radius to speed, period, and why one orbit suits one job better than another.",
+          worked_example: {
+            prompt: "A satellite orbits a planet of mass 6.0 x 10^24 kg at radius 4.2 x 10^7 m from the center. Find the orbital speed and period.",
+            steps: [
+              "Use v = sqrt(G M / r) for the circular orbital speed.",
+              "Then use T = 2 pi r / v to find the orbital period.",
+              "Compare the resulting timescale with familiar daily motion to interpret the orbit.",
+            ],
+            answer: "The orbital speed is about 3.1 x 10^3 m/s and the period is about 8.5 x 10^4 s, or about 23.8 h.",
+            answer_reason: "Using v = sqrt(G M / r) gives sqrt((6.67 x 10^-11 x 6.0 x 10^24) / (4.2 x 10^7)), which is about 3.1 x 10^3 m/s. Then T = 2 pi r / v gives about 8.5 x 10^4 s, which is close to 24 h.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps orbital classification tied to mechanics instead of labels alone.",
+              worked_example: {
+                prompt: "Why must a geostationary satellite orbit above the equator and have a period of one sidereal day?",
+                steps: [
+                  "Start from the requirement that it remains above one fixed point on the rotating Earth.",
+                  "Match the satellite's angular speed to Earth's rotation.",
+                  "Then keep the orbit in the equatorial plane so the satellite does not drift north and south in the sky.",
+                ],
+                answer: "A geostationary satellite must match Earth's rotation period and orbit in the equatorial plane so it stays above the same point on Earth's surface.",
+                answer_reason: "If the period were different, the satellite would drift east-west relative to the ground. If the orbit were inclined, it would move north-south in the sky instead of staying fixed above one location.",
+              },
+            },
+          ],
+        };
+      case "A11_L3":
+        return {
+          body: "Stellar-spectrum work should connect temperature and luminosity instead of treating the H-R diagram as a memorized chart, so the learner has to use spectrum evidence quantitatively.",
+          worked_example: {
+            prompt: "A star has peak wavelength 5.0 x 10^-7 m and radius 7.0 x 10^8 m. Estimate its surface temperature and luminosity.",
+            steps: [
+              "Use Wien's displacement law lambda_max T = b to find the surface temperature.",
+              "Then use L = 4 pi R^2 sigma T^4 for the luminosity.",
+              "Keep the result tied to both color-temperature evidence and total power output.",
+            ],
+            answer: "The surface temperature is about 5.8 x 10^3 K and the luminosity is about 4.0 x 10^26 W.",
+            answer_reason: "Using T = 2.90 x 10^-3 / 5.0 x 10^-7 gives about 5.8 x 10^3 K. Substituting that and R = 7.0 x 10^8 m into L = 4 pi R^2 sigma T^4 gives about 4.0 x 10^26 W.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps H-R reasoning relational rather than descriptive only.",
+              worked_example: {
+                prompt: "Two stars have the same luminosity, but Star A is hotter than Star B. Which star has the smaller radius, and why?",
+                steps: [
+                  "Start from L = 4 pi R^2 sigma T^4.",
+                  "Keep luminosity fixed while comparing the stars.",
+                  "Use the hotter surface temperature to infer what must happen to the radius.",
+                ],
+                answer: "The hotter star has the smaller radius.",
+                answer_reason: "If luminosity stays fixed while temperature increases, the radius must decrease to keep 4 pi R^2 sigma T^4 unchanged. That is why hot but dim white dwarfs sit low-left on an H-R diagram.",
+              },
+            },
+          ],
+        };
+      case "A11_L4":
+        return {
+          body: "Distance-ladder work should make the learner choose the right rung for the scale, so the examples should use both parallax and standard-candle logic without collapsing them into one method.",
+          worked_example: {
+            prompt: "A standard candle has luminosity 3.9 x 10^28 W and apparent brightness 1.0 x 10^-9 W/m^2. Find its distance in meters and in parsecs. Use 1 pc = 3.09 x 10^16 m.",
+            steps: [
+              "Use I = L / (4 pi d^2) and rearrange to solve for distance.",
+              "Calculate the distance in meters first.",
+              "Then divide by 3.09 x 10^16 m per parsec to convert into parsecs.",
+            ],
+            answer: "The distance is about 1.8 x 10^18 m, which is about 57 pc.",
+            answer_reason: "Rearranging gives d = sqrt(L / (4 pi I)). Substituting 3.9 x 10^28 W and 1.0 x 10^-9 W/m^2 gives about 1.76 x 10^18 m. Dividing by 3.09 x 10^16 m per parsec gives about 57 pc.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps parallax on its own rung instead of treating all astronomical distances the same way.",
+              worked_example: {
+                prompt: "A nearby star has parallax angle 0.025 arcsec. Find its distance in parsecs and explain why parallax is not the main tool for distant galaxies.",
+                steps: [
+                  "Use d(pc) = 1 / p(arcsec) for the parallax distance.",
+                  "Calculate the distance first, then think about what happens when the angle becomes extremely tiny.",
+                  "Explain why that shrinking angle limits the method at large distances.",
+                ],
+                answer: "The star is 40 pc away, and parallax becomes impractical for distant galaxies because the parallax angle becomes too small to measure accurately.",
+                answer_reason: "Using d = 1 / 0.025 gives 40 pc. As distance increases, the parallax angle rapidly shrinks, so beyond nearby stars the geometric shift is too tiny to be measured well and astronomers move to brighter-distance indicators such as standard candles.",
+              },
+            },
+          ],
+        };
+      case "A11_L5":
+        return {
+          body: "Compact-object work should connect stellar fate to both mass pathway and extreme-gravity calculation, so the learner has to move beyond a simple list of endpoints.",
+          worked_example: {
+            prompt: "A collapsed stellar remnant has mass 3.0 times the Sun's mass. Find its Schwarzschild radius and decide whether it would be a black hole if its physical radius were 7.0 km. Take solar mass as 1.99 x 10^30 kg.",
+            steps: [
+              "Convert the remnant mass into kilograms.",
+              "Use R_s = 2 G M / c^2 to find the Schwarzschild radius.",
+              "Compare the actual radius with the Schwarzschild radius to decide whether light can escape.",
+            ],
+            answer: "The Schwarzschild radius is about 8.9 km, so a 7.0 km remnant of that mass would be a black hole.",
+            answer_reason: "The mass is 3.0 x 1.99 x 10^30 = 5.97 x 10^30 kg. Substituting into R_s = 2 G M / c^2 gives about 8.9 x 10^3 m, or 8.9 km. Since the object's radius is smaller than that, it lies inside its event horizon.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the mass-dependent evolution story explicit.",
+              worked_example: {
+                prompt: "Why does a low-mass star end as a white dwarf while a much more massive star can leave a neutron star or black hole?",
+                steps: [
+                  "Compare how much gravitational compression the final core must resist.",
+                  "Connect stellar mass to the mass of the leftover core after nuclear fuel is exhausted.",
+                  "Then match the stronger collapse to the more extreme compact-object outcome.",
+                ],
+                answer: "More massive stars leave heavier cores, so gravity overwhelms the support mechanisms more strongly and can drive collapse past white-dwarf structure into neutron-star or black-hole outcomes.",
+                answer_reason: "Low-mass stars do not leave cores massive enough to collapse beyond electron-degenerate support, so they end as white dwarfs. Higher-mass stars leave much more massive remnants, making collapse more extreme and allowing neutron stars or black holes to form.",
+              },
+            },
+          ],
+        };
+      case "A11_L6":
+        return {
+          body: "Cosmology work should connect spectral evidence to expansion numerically, so the learner has to move from redshift to recession speed to Hubble distance rather than treating expansion as a bare claim.",
+          worked_example: {
+            prompt: "A galaxy has an emitted spectral line at 500 nm, but it is observed at 650 nm. Find the redshift z, estimate the recession speed using v approx z c, and then estimate the distance using H0 = 70 km/s/Mpc.",
+            steps: [
+              "Use z = Delta lambda / lambda_emitted to find the redshift from the wavelength shift.",
+              "Then estimate recession speed with v approx z c.",
+              "Finally apply Hubble's law v = H0 d to estimate the distance in Mpc.",
+            ],
+            answer: "The redshift is 0.30, the recession speed is about 9.0 x 10^4 km/s, and the distance is about 1.3 x 10^3 Mpc.",
+            answer_reason: "The wavelength shift is 650 - 500 = 150 nm, so z = 150 / 500 = 0.30. Then v approx 0.30 x 3.0 x 10^5 km/s = 9.0 x 10^4 km/s. Dividing by H0 gives d about 9.0 x 10^4 / 70, which is about 1.29 x 10^3 Mpc.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the Hubble pattern relational rather than turning it into one isolated calculation.",
+              worked_example: {
+                prompt: "In the simple Hubble-law model, what happens to recession speed if galaxy distance doubles?",
+                steps: [
+                  "Start with the proportional relation v = H0 d.",
+                  "Keep H0 fixed because it is the slope of the same model.",
+                  "Apply the distance change directly to the recession speed.",
+                ],
+                answer: "The recession speed doubles.",
+                answer_reason: "Hubble's law says recession speed is directly proportional to distance in the simple model. Doubling d doubles v.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]

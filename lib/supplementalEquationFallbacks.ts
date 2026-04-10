@@ -750,6 +750,99 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
 };
 
+const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  A11_L1: [
+    {
+      standardFormula: "g = G M / r^2",
+      meaning: "Gravitational field strength around a spherical mass follows the inverse-square law.",
+      conditions: "Use outside a spherical mass distribution.",
+      unitsText: "N/kg",
+    },
+    {
+      standardFormula: "V = -G M / r",
+      meaning: "Gravitational potential is the work done per unit mass in bringing a test mass from infinity.",
+      conditions: "Use outside a spherical mass distribution with zero potential taken at infinity.",
+      unitsText: "J/kg",
+    },
+  ],
+  A11_L2: [
+    {
+      standardFormula: "v = sqrt(G M / r)",
+      meaning: "Circular orbital speed is set by the central mass and orbital radius.",
+      conditions: "Use for circular satellite orbits around a much larger central mass.",
+      unitsText: "m/s",
+    },
+    {
+      standardFormula: "T^2 = 4 pi^2 r^3 / (G M)",
+      meaning: "Orbital period depends on orbital radius and the central mass.",
+      conditions: "Use for circular or nearly circular orbits around a dominant central mass.",
+      unitsText: "s",
+    },
+  ],
+  A11_L3: [
+    {
+      standardFormula: "lambda_max T = b",
+      meaning: "Wien's displacement law links a star's peak wavelength to its surface temperature.",
+      conditions: "Use when estimating stellar surface temperature from the spectrum peak.",
+      unitsText: "m, K",
+      constants: "Use Wien's constant b = 2.90 x 10^-3 m K.",
+    },
+    {
+      standardFormula: "L = 4 pi R^2 sigma T^4",
+      meaning: "A star's luminosity depends on radius and surface temperature.",
+      conditions: "Use for blackbody-style stellar luminosity estimates.",
+      unitsText: "W",
+      constants: "Use sigma = 5.67 x 10^-8 W m^-2 K^-4 when the relation is used quantitatively.",
+    },
+  ],
+  A11_L4: [
+    {
+      standardFormula: "d(pc) = 1 / p(arcsec)",
+      meaning: "Parallax distance in parsecs is the reciprocal of the parallax angle in arcseconds.",
+      conditions: "Use for nearby stars where the parallax angle can be measured.",
+      unitsText: "pc, arcsec",
+    },
+    {
+      standardFormula: "I = L / (4 pi d^2)",
+      meaning: "Apparent brightness falls with the square of distance from a source of fixed luminosity.",
+      conditions: "Use when a standard candle's luminosity is known.",
+      unitsText: "W/m^2, W, m",
+    },
+  ],
+  A11_L5: [
+    {
+      standardFormula: "R_s = 2 G M / c^2",
+      meaning: "The Schwarzschild radius gives the event-horizon radius for a non-rotating black hole.",
+      conditions: "Use when checking whether a compact remnant of given mass would be inside its event horizon.",
+      unitsText: "m",
+    },
+  ],
+  A11_L6: [
+    {
+      standardFormula: "z = Delta lambda / lambda_emitted",
+      meaning: "Redshift compares the wavelength change with the emitted wavelength.",
+      conditions: "Use when measuring cosmological redshift from spectral lines.",
+      unitsText: "no unit",
+    },
+    {
+      standardFormula: "v approx z c",
+      meaning: "For modest cosmological redshifts, recession speed can be estimated from redshift times the speed of light.",
+      conditions: "Use as the low-redshift approximation before applying Hubble's law.",
+      unitsText: "m/s or km/s",
+    },
+    {
+      standardFormula: "v = H0 d",
+      meaning: "Hubble's law links recession speed to distance for distant galaxies.",
+      conditions: "Use for large-scale cosmological recession in the simple Hubble-law model.",
+      unitsText: "m/s or km/s",
+      constants: "Use H0 in the form given by the question, often about 70 km s^-1 Mpc^-1.",
+    },
+  ],
+};
+
 export function supplementalEquationFallbacksForLesson(code: string): FormulaFallbackEntry[] {
+  if (A11_FORMULA_OVERRIDES[code]) {
+    return A11_FORMULA_OVERRIDES[code];
+  }
   return SUPPLEMENTAL_EQUATION_FALLBACKS[code] || [];
 }
