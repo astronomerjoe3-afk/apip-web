@@ -1,0 +1,389 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.822
+The last lesson pulls several circuit ideas together, which is exactly why it can blur if the learner stops naming quantities carefully.
+
+2
+00:00:05.822 --> 00:00:11.643
+Charge is what moves around the loop.
+
+3
+00:00:11.643 --> 00:00:17.465
+Voltage is the energy transferred per coulomb by the source.
+
+4
+00:00:17.465 --> 00:00:23.287
+Resistance belongs to the route and helps set the current.
+
+5
+00:00:23.287 --> 00:00:29.108
+Power tells how quickly energy is transferred.
+
+6
+00:00:29.108 --> 00:00:34.930
+A clean capstone answer keeps those quantities separate and then links them in the right order.
+
+7
+00:00:34.930 --> 00:00:40.752
+That is how the same source can produce different currents and powers in different loops without changing its voltage label.
+
+8
+00:00:40.752 --> 00:00:46.573
+Keep this takeaway in view: Lesson 6 becomes safer once the learner treats each electrical quantity as a separate ledger entry with its own job.
+
+9
+00:00:46.573 --> 00:00:52.395
+Charge means what moves.
+
+10
+00:00:52.395 --> 00:00:58.217
+Charge carriers circulate around the loop rather than being used up by the components.
+
+11
+00:00:58.217 --> 00:01:04.038
+Voltage and resistance means what sets the current.
+
+12
+00:01:04.038 --> 00:01:09.860
+The source provides the push per charge, while the route opposition controls how much current results.
+
+13
+00:01:09.860 --> 00:01:15.956
+This diagram matters because it keeps every quantity on its own line.
+
+14
+00:01:15.956 --> 00:01:22.051
+The charge carriers circulate around the full loop.
+
+15
+00:01:22.051 --> 00:01:28.147
+The source gives each carrier an energy boost measured by voltage.
+
+16
+00:01:28.147 --> 00:01:34.242
+The route provides the resistance that limits how much current actually flows.
+
+17
+00:01:34.242 --> 00:01:40.338
+And power is then read as the rate of energy transfer once the current and voltage are known.
+
+18
+00:01:40.338 --> 00:01:46.433
+The board prevents the learner from letting one number stand in for the whole circuit story.
+
+19
+00:01:46.433 --> 00:01:52.529
+Keep this takeaway in view: A strong capstone explanation starts by keeping the electrical quantities separate before linking them together.
+
+20
+00:01:52.529 --> 00:01:58.624
+Moving quantity: Charge is the quantity carried around the loop by the carriers.
+
+21
+00:01:58.624 --> 00:02:04.720
+Control quantities: Voltage belongs to the source boost and resistance belongs to the route.
+
+22
+00:02:04.720 --> 00:02:10.469
+A delivery-route analogy helps because it gives each circuit quantity a job.
+
+23
+00:02:10.469 --> 00:02:16.218
+The vehicles are like moving charge carriers.
+
+24
+00:02:16.218 --> 00:02:21.967
+The depot gives each vehicle fuel for the trip, which mirrors the energy-per-charge role of voltage.
+
+25
+00:02:21.967 --> 00:02:27.716
+Narrow or rough roads act like resistance because they reduce how easily the vehicles can move around the route.
+
+26
+00:02:27.716 --> 00:02:33.465
+The number of trips per minute is like current, and the total work done each minute is like power.
+
+27
+00:02:33.465 --> 00:02:39.215
+The analogy matters because it trains the learner to separate the quantities before relating them.
+
+28
+00:02:39.215 --> 00:02:44.964
+Keep this takeaway in view: The analogy helps the learner keep the capstone quantities distinct before the calculations begin.
+
+29
+00:02:44.964 --> 00:02:50.713
+Vehicles means moving charge.
+
+30
+00:02:50.713 --> 00:02:56.462
+Something moves around the route and keeps circulating through the system.
+
+31
+00:02:56.462 --> 00:03:02.211
+Fuel and road means voltage and resistance.
+
+32
+00:03:02.211 --> 00:03:07.960
+The supplied boost and the route difficulty are different controls on the outcome.
+
+33
+00:03:07.960 --> 00:03:13.449
+The capstone uses a small set of connected formulas.
+
+34
+00:03:13.449 --> 00:03:18.938
+Ohm's law tells you the current from the source voltage and the route resistance.
+
+35
+00:03:18.938 --> 00:03:24.428
+Power can then be found from power equals current times voltage.
+
+36
+00:03:24.428 --> 00:03:29.917
+The important thing is not to let these formulas erase the meaning of the quantities.
+
+37
+00:03:29.917 --> 00:03:35.406
+Voltage still means energy per charge.
+
+38
+00:03:35.406 --> 00:03:40.895
+Resistance still belongs to the route.
+
+39
+00:03:40.895 --> 00:03:46.385
+Current is still the flow rate that results, and power is still the rate of energy transfer produced by that current and voltage together.
+
+40
+00:03:46.385 --> 00:03:51.874
+Keep this takeaway in view: The formula scene becomes trustworthy once the learner can explain why the same source can produce different currents and powers in different loops.
+
+41
+00:03:51.874 --> 00:03:57.363
+Current step: Use the same source voltage with each route resistance to find the resulting current.
+
+42
+00:03:57.363 --> 00:04:02.852
+Power step: Once the current is known, combine it with the voltage to find the energy transfer rate.
+
+43
+00:04:02.852 --> 00:04:08.342
+I = V / R.
+
+44
+00:04:08.342 --> 00:04:13.831
+P = I V.
+
+45
+00:04:13.831 --> 00:04:19.320
+Keep the ledger clean: calculate the current first, then use it with the voltage to find the power.
+
+46
+00:04:19.320 --> 00:04:25.187
+A strong routine for this lesson has three steps.
+
+47
+00:04:25.187 --> 00:04:31.054
+First name the quantities and say which one belongs to the source, which belongs to the route, and which one is being asked for.
+
+48
+00:04:31.054 --> 00:04:36.921
+Second link them with the right formulas by finding current before power if needed.
+
+49
+00:04:36.921 --> 00:04:42.788
+Third summarize what stayed the same and what changed across the compared circuits.
+
+50
+00:04:42.788 --> 00:04:48.655
+This keeps the capstone question organized and protects the learner from writing one number as though it explains the whole loop.
+
+51
+00:04:48.655 --> 00:04:54.522
+Keep this takeaway in view: Name, link, and summarize is the safest routine for every capstone circuit comparison.
+
+52
+00:04:54.522 --> 00:05:00.389
+Step 1 means name the quantity roles.
+
+53
+00:05:00.389 --> 00:05:06.256
+Separate moving charge, source voltage, route resistance, current, and power before calculation.
+
+54
+00:05:06.256 --> 00:05:12.123
+Step 2 means link them in order.
+
+55
+00:05:12.123 --> 00:05:17.990
+Use voltage and resistance to find current, then use current with voltage to find power.
+
+56
+00:05:17.990 --> 00:05:23.814
+A common weak sentence says the battery gives the same current no matter what it is connected to.
+
+57
+00:05:23.814 --> 00:05:29.638
+This is exactly what the capstone must correct.
+
+58
+00:05:29.638 --> 00:05:35.462
+The battery may provide the same voltage across two different circuits, but if the route resistance changes then the resulting current changes as well.
+
+59
+00:05:35.462 --> 00:05:41.286
+That is why two loops on the same source can have different current and power values.
+
+60
+00:05:41.286 --> 00:05:47.110
+The source label alone is not the whole circuit story.
+
+61
+00:05:47.110 --> 00:05:52.934
+Keep this takeaway in view: Lesson 6 becomes safer once the learner stops treating a battery voltage label as though it were a fixed current promise.
+
+62
+00:05:52.934 --> 00:05:58.758
+Same source means same voltage.
+
+63
+00:05:58.758 --> 00:06:04.582
+The battery can keep its voltage while different routes produce different outcomes.
+
+64
+00:06:04.582 --> 00:06:10.406
+Different routes means different current.
+
+65
+00:06:10.406 --> 00:06:16.230
+Changing the resistance changes how much current the loop can sustain.
+
+66
+00:06:16.230 --> 00:06:22.179
+Power is not another name for current, and it is not another name for voltage either.
+
+67
+00:06:22.179 --> 00:06:28.128
+It tells you how quickly energy is being transferred in the circuit.
+
+68
+00:06:28.128 --> 00:06:34.077
+That is why a higher current at the same voltage produces a larger power value.
+
+69
+00:06:34.077 --> 00:06:40.026
+In the capstone example, reducing the resistance increases the current, and that in turn increases the power.
+
+70
+00:06:40.026 --> 00:06:45.975
+Keeping power on its own line makes the final comparison much more meaningful.
+
+71
+00:06:45.975 --> 00:06:51.924
+Keep this takeaway in view: Lesson 6 stays rich when power is treated as the circuit's output-rate line, not as a renamed current.
+
+72
+00:06:51.924 --> 00:06:57.873
+Power meaning means energy transfer rate.
+
+73
+00:06:57.873 --> 00:07:03.822
+Power tells how quickly energy is delivered or transferred in the circuit.
+
+74
+00:07:03.822 --> 00:07:09.771
+Same V, more I means more power.
+
+75
+00:07:09.771 --> 00:07:15.720
+At fixed voltage, a larger current produces a larger power value.
+
+76
+00:07:15.720 --> 00:07:20.048
+Run four checks.
+
+77
+00:07:20.048 --> 00:07:24.376
+Charge is what moves.
+
+78
+00:07:24.376 --> 00:07:28.705
+Voltage is energy per charge from the source.
+
+79
+00:07:28.705 --> 00:07:33.033
+Resistance belongs to the route and helps set the current.
+
+80
+00:07:33.033 --> 00:07:37.361
+And power tells how quickly energy is transferred once current and voltage are known.
+
+81
+00:07:37.361 --> 00:07:41.689
+Those four checks capture the capstone structure before the arithmetic begins.
+
+82
+00:07:41.689 --> 00:07:46.017
+Keep this takeaway in view: The worked example is ready once the learner can keep the circuit quantities separate while linking them in order.
+
+83
+00:07:46.017 --> 00:07:50.345
+Charge means what moves.
+
+84
+00:07:50.345 --> 00:07:54.674
+The carriers circulate around the loop and are not used up.
+
+85
+00:07:54.674 --> 00:07:59.002
+Voltage means energy per charge.
+
+86
+00:07:59.002 --> 00:08:03.330
+The source provides the per-coulomb boost, not a guaranteed current.
+
+87
+00:08:03.330 --> 00:08:09.345
+Start by writing down what the source gives and what the route changes.
+
+88
+00:08:09.345 --> 00:08:15.361
+Then use Ohm's law to find the current in each case.
+
+89
+00:08:15.361 --> 00:08:21.376
+After that, use power equals current times voltage to compare the output rates.
+
+90
+00:08:21.376 --> 00:08:27.392
+Finish by saying explicitly what stayed the same and what changed across the two circuits.
+
+91
+00:08:27.392 --> 00:08:33.407
+That is the cleanest route into the worked example.
+
+92
+00:08:33.407 --> 00:08:39.423
+Keep this takeaway in view: Lesson 6 becomes much safer once the learner can explain a same-source, different-loop comparison without merging the electrical quantities.
+
+93
+00:08:39.423 --> 00:08:45.438
+Do not skip the quantity labels: Say which number is voltage, which is resistance, which is current, and which is power.
+
+94
+00:08:45.438 --> 00:08:51.454
+Do not skip the same-source check: If the voltage stayed the same, say so before explaining why the current changed.
+
+95
+00:08:51.454 --> 00:08:57.469
+name the source voltage and the route resistance.
+
+96
+00:08:57.469 --> 00:09:03.485
+find the current in each case using Ohm's law.
+
+97
+00:09:03.485 --> 00:09:09.500
+The best answers finish with a clean summary of what stayed fixed and what changed.

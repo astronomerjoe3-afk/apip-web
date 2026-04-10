@@ -1,0 +1,26 @@
+{
+  "lesson_id": "M10_L1",
+  "module": "M10",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 402.71,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: name the moving carriers first, then check whether the loop is complete before you talk about current.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m10_preworked_v1\\videos\\01_m10_l1_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m10_preworked_v1\\videos\\01_m10_l1_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m10_preworked_v1\\videos\\01_m10_l1_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m10_preworked_v1\\videos\\01_m10_l1_preworked_explainer\\thumbnail.png"
+  }
+}

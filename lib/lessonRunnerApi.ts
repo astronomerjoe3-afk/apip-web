@@ -18117,7 +18117,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410m9";
+  const assetVersion = "20260410m10";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
@@ -19311,6 +19311,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M9_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L6", "captions.vtt"),
+      };
+    case "M10_L1":
+      return {
+        body: "Use this video to separate moving charge, current, and the closed-loop condition before the worked example begins.",
+        caption: "Video explainer: charge carriers, complete-loop current, and charge conservation before the lesson example.",
+        highlights: [
+          "Charge is represented by the moving carriers in the loop",
+          "A steady current needs a complete conducting path",
+          "Components transfer energy but do not use the charge up",
+        ],
+        checkForUnderstanding: "If the switch opens, which idea should you check first before talking about current: the loop path, or the number of carriers already in the wire?",
+        video_url: staticVideoAssetUrl("M10_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M10_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M10_L1", "captions.vtt"),
+      };
+    case "M10_L2":
+      return {
+        body: "Use this video to read current as charge per second before the worked example begins.",
+        caption: "Video explainer: current as rate, Q = I t, and seconds conversion before the lesson example.",
+        highlights: [
+          "Current is the rate of charge flow past a point",
+          "1 A means 1 C passes a checkpoint each second",
+          "Use Q = I t with time in seconds",
+        ],
+        checkForUnderstanding: "If the same total charge passes in half the time, what should happen first to the current?",
+        video_url: staticVideoAssetUrl("M10_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M10_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M10_L2", "captions.vtt"),
+      };
+    case "M10_L3":
+      return {
+        body: "Use this video to treat voltage as energy per charge before the worked example begins.",
+        caption: "Video explainer: V = E / Q, E = VQ, and source boost per carrier before the lesson example.",
+        highlights: [
+          "Voltage is energy transferred per unit charge",
+          "Use V = E / Q when the per-charge value is unknown",
+          "Do not swap volts and amps in the explanation",
+        ],
+        checkForUnderstanding: "If each coulomb gets a larger energy boost from the source, which quantity should increase first: the voltage or the charge itself?",
+        video_url: staticVideoAssetUrl("M10_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M10_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M10_L3", "captions.vtt"),
+      };
+    case "M10_L4":
+      return {
+        body: "Use this video to keep resistance on the route rather than on the battery before the worked example begins.",
+        caption: "Video explainer: route-owned resistance, length-width comparison, and wire ranking before the lesson example.",
+        highlights: [
+          "Resistance belongs to the route and its material and geometry",
+          "Longer wires usually have greater resistance",
+          "Wider wires usually have lower resistance",
+        ],
+        checkForUnderstanding: "If two wires use the same source but one route is longer and thinner, which part of the circuit story should you blame for the larger resistance?",
+        video_url: staticVideoAssetUrl("M10_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M10_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M10_L4", "captions.vtt"),
+      };
+    case "M10_L5":
+      return {
+        body: "Use this video to lock the fixed quantity before applying Ohm's law in the worked example.",
+        caption: "Video explainer: I = V / R, fixed-variable comparisons, and ohmic-route reasoning before the lesson example.",
+        highlights: [
+          "For an ohmic route, current depends on both voltage and resistance",
+          "At fixed resistance, larger voltage gives larger current",
+          "At fixed voltage, larger resistance gives smaller current",
+        ],
+        checkForUnderstanding: "Before you predict how the current changes, what should you name first: the fixed quantity, or the final answer?",
+        video_url: staticVideoAssetUrl("M10_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M10_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M10_L5", "captions.vtt"),
+      };
+    case "M10_L6":
+      return {
+        body: "Use this video to keep charge, current, voltage, resistance, and power on separate ledger lines before the worked example begins.",
+        caption: "Video explainer: same-source different-loop comparisons, current from resistance, and power reading before the lesson example.",
+        highlights: [
+          "The same source voltage can produce different currents in different loops",
+          "Use I = V / R before comparing power",
+          "Power is the rate of energy transfer, not another name for current",
+        ],
+        checkForUnderstanding: "If the source voltage stays the same but the resistance falls, which two output quantities should you expect to increase first?",
+        video_url: staticVideoAssetUrl("M10_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M10_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M10_L6", "captions.vtt"),
       };
     case "A2_L1":
       return {

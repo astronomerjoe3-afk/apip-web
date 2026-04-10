@@ -1,0 +1,305 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.118
+Introductory circuit questions get slippery when the learner uses one vague phrase like more electricity for everything.
+
+2
+00:00:05.118 --> 00:00:10.236
+Charge is the moving carrier quantity in the wire.
+
+3
+00:00:10.236 --> 00:00:15.355
+Current is the rate at which that charge passes a checkpoint.
+
+4
+00:00:15.355 --> 00:00:20.473
+And a steady current needs a complete conducting loop.
+
+5
+00:00:20.473 --> 00:00:25.591
+Components can transfer energy from the moving carriers, but they do not use the charge up.
+
+6
+00:00:25.591 --> 00:00:30.709
+Keeping those ideas separated early makes the first worked example much calmer.
+
+7
+00:00:30.709 --> 00:00:35.827
+Keep this takeaway in view: Lesson 1 becomes safer once charge, current, and complete-loop logic are given different jobs.
+
+8
+00:00:35.827 --> 00:00:40.945
+Charge means moving carriers.
+
+9
+00:00:40.945 --> 00:00:46.064
+Charge is represented by the carriers moving around the circuit loop.
+
+10
+00:00:46.064 --> 00:00:51.182
+Current means flow rate.
+
+11
+00:00:51.182 --> 00:00:56.300
+Current is about how much charge passes a chosen point each second.
+
+12
+00:00:56.300 --> 00:01:02.250
+This diagram matters because it keeps the moving thing and the measured thing separate.
+
+13
+00:01:02.250 --> 00:01:08.200
+The carriers represent charge moving around the path.
+
+14
+00:01:08.200 --> 00:01:14.150
+The checkpoint meter represents current as a rate.
+
+15
+00:01:14.150 --> 00:01:20.100
+When the loop is closed, the same carriers can keep circulating.
+
+16
+00:01:20.100 --> 00:01:26.050
+When the switch opens, the sustained flow around the full loop collapses because the route is broken.
+
+17
+00:01:26.050 --> 00:01:32.000
+That is the exact picture the learner needs before answering whether the lamp uses charge up.
+
+18
+00:01:32.000 --> 00:01:37.950
+Keep this takeaway in view: A strong circuit answer names what moves, what is measured, and whether the loop is complete.
+
+19
+00:01:37.950 --> 00:01:43.900
+Carrier tokens: Use these to represent the charge that moves around the loop.
+
+20
+00:01:43.900 --> 00:01:49.850
+Closed switch: A complete route is the first condition for a sustained current.
+
+21
+00:01:49.850 --> 00:01:54.578
+A train-loop analogy helps because it separates amount from rate.
+
+22
+00:01:54.578 --> 00:01:59.307
+The carriages on the track play the role of charge carriers.
+
+23
+00:01:59.307 --> 00:02:04.035
+The station gate plays the role of a current checkpoint.
+
+24
+00:02:04.035 --> 00:02:08.763
+If the loop is broken, the steady circulation stops.
+
+25
+00:02:08.763 --> 00:02:13.492
+But the carriages themselves still exist.
+
+26
+00:02:13.492 --> 00:02:18.220
+That is why saying the lamp uses up the charge is too weak.
+
+27
+00:02:18.220 --> 00:02:22.948
+The better explanation is that the component transfers energy while the carriers keep circulating in a complete loop.
+
+28
+00:02:22.948 --> 00:02:27.677
+Keep this takeaway in view: The analogy helps the learner keep charge amount and current rate apart before calculation begins.
+
+29
+00:02:27.677 --> 00:02:32.405
+Carriages means charge idea.
+
+30
+00:02:32.405 --> 00:02:37.133
+These stand for the carriers moving around the route.
+
+31
+00:02:37.133 --> 00:02:41.862
+Gate counter means current idea.
+
+32
+00:02:41.862 --> 00:02:46.590
+The count per second at one point matches the current story.
+
+33
+00:02:46.590 --> 00:02:52.793
+Current is the rate of charge flow, so it depends on how much charge passes a point per unit time rather than on how much charge exists in the loop altogether.
+
+34
+00:02:52.793 --> 00:02:58.995
+A steady current also depends on the route being complete.
+
+35
+00:02:58.995 --> 00:03:05.198
+The other key statement is that charge is conserved around the loop.
+
+36
+00:03:05.198 --> 00:03:11.401
+That is why the right sentence is not the lamp uses current up.
+
+37
+00:03:11.401 --> 00:03:17.604
+The stronger sentence is that the lamp transfers energy from the carriers while the charge keeps moving round the loop.
+
+38
+00:03:17.604 --> 00:03:23.806
+Keep this takeaway in view: The formula scene works once the learner can explain why a broken loop stops current without deleting charge.
+
+39
+00:03:23.806 --> 00:03:30.009
+Quantity shield: Charge tells you what is moving, while current tells you how fast it passes a checkpoint.
+
+40
+00:03:30.009 --> 00:03:36.212
+Loop shield: A sustained current cannot continue if the route is broken.
+
+41
+00:03:36.212 --> 00:03:42.415
+charge is carried by the moving carriers in the loop.
+
+42
+00:03:42.415 --> 00:03:48.617
+current is the rate of charge flow past a point.
+
+43
+00:03:48.617 --> 00:03:54.820
+Keep amount, rate, and route status in different slots before solving the worked example.
+
+44
+00:03:54.820 --> 00:03:59.818
+A strong routine for this lesson has three steps.
+
+45
+00:03:59.818 --> 00:04:04.816
+First name the moving carriers as the charge.
+
+46
+00:04:04.816 --> 00:04:09.815
+Second check whether the route is complete enough for sustained circulation.
+
+47
+00:04:09.815 --> 00:04:14.813
+Third describe the current as the charge flow rate past a point.
+
+48
+00:04:14.813 --> 00:04:19.811
+If the question asks about what the component does, add the conservation sentence at the end: the component transfers energy, but it does not use up the charge.
+
+49
+00:04:19.811 --> 00:04:24.809
+This routine is enough to carry the first worked example cleanly.
+
+50
+00:04:24.809 --> 00:04:29.807
+Keep this takeaway in view: Mover first, route second, rate third is the safest opening routine for Lesson 1.
+
+51
+00:04:29.807 --> 00:04:34.805
+Step 1 means name the movers.
+
+52
+00:04:34.805 --> 00:04:39.804
+Say that charge is carried by the moving carriers in the wire.
+
+53
+00:04:39.804 --> 00:04:44.802
+Step 2 means check the loop.
+
+54
+00:04:44.802 --> 00:04:49.800
+Decide whether the route is complete enough for a sustained current.
+
+55
+00:04:49.800 --> 00:04:54.088
+Run four checks.
+
+56
+00:04:54.088 --> 00:04:58.376
+Charge is carried by the moving carriers.
+
+57
+00:04:58.376 --> 00:05:02.665
+Current is the rate of charge flow past a point.
+
+58
+00:05:02.665 --> 00:05:06.953
+A sustained current needs a complete loop.
+
+59
+00:05:06.953 --> 00:05:11.241
+And a component does not use charge up even though it can transfer energy from the carriers.
+
+60
+00:05:11.241 --> 00:05:15.529
+Those four checks capture the whole structure of the lesson before the worked example starts.
+
+61
+00:05:15.529 --> 00:05:19.817
+Keep this takeaway in view: The worked example is ready once the learner can explain why current stops when the switch opens but charge carriers still exist.
+
+62
+00:05:19.817 --> 00:05:24.105
+Charge means the mover.
+
+63
+00:05:24.105 --> 00:05:28.394
+Keep this as the carrier quantity rather than the flow-rate quantity.
+
+64
+00:05:28.394 --> 00:05:32.682
+Current means the rate.
+
+65
+00:05:32.682 --> 00:05:36.970
+Treat this as charge passing a point each second.
+
+66
+00:05:36.970 --> 00:05:42.946
+Start by saying what is moving: charge carried by the carriers in the wire.
+
+67
+00:05:42.946 --> 00:05:48.923
+Then inspect the loop.
+
+68
+00:05:48.923 --> 00:05:54.899
+If the switch is open, the route is broken, so a sustained current cannot continue.
+
+69
+00:05:54.899 --> 00:06:00.875
+If the loop is closed, the same charge keeps circulating and the component transfers energy from the carriers rather than consuming the charge itself.
+
+70
+00:06:00.875 --> 00:06:06.852
+That sequence is the cleanest route into the worked example.
+
+71
+00:06:06.852 --> 00:06:12.828
+Keep this takeaway in view: Lesson 1 improves immediately once charge, current, and loop status are kept apart.
+
+72
+00:06:12.828 --> 00:06:18.805
+Do not skip the loop: The circuit must be complete before a sustained current explanation can work.
+
+73
+00:06:18.805 --> 00:06:24.781
+Do not skip conservation: Finish by saying that the charge circulates even while energy is transferred.
+
+74
+00:06:24.781 --> 00:06:30.757
+identify the moving charge carriers.
+
+75
+00:06:30.757 --> 00:06:36.734
+check whether the loop is complete.
+
+76
+00:06:36.734 --> 00:06:42.710
+The strongest answers keep the mover, the route, and the rate in separate sentences.
