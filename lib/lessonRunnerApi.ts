@@ -11633,6 +11633,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A9_")) {
+    switch (code) {
+      case "A9_L1":
+        return {
+          body: "Faraday work should make flux-change bookkeeping explicit, so the learner has to track turns, flux per turn, and time together rather than treating induction as a vague 'magnet nearby' effect.",
+          worked_example: {
+            prompt: "A 250-turn coil experiences a change in magnetic flux per turn from 8.0 x 10^-4 Wb to 2.0 x 10^-4 Wb in 0.050 s. Find the average induced emf magnitude.",
+            steps: [
+              "Use the Faraday-law magnitude relation induced emf = N delta(Phi) / delta(t).",
+              "Find the flux change per turn first, then multiply by the number of turns to get the change in flux linkage.",
+              "Divide by the time interval to find the average induced emf magnitude.",
+            ],
+            answer: "The average induced emf magnitude is 3.0 V.",
+            answer_reason: "The flux change per turn is 6.0 x 10^-4 Wb, so the flux-linkage change is 250 x 6.0 x 10^-4 = 0.15 Wb-turn. Dividing by 0.050 s gives 3.0 V.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the geometry inside the flux story instead of reducing flux to a bare symbol.",
+              worked_example: {
+                prompt: "A single loop of area 0.020 m^2 sits in a 0.40 T field. It rotates from face-on to edge-on to the field. Find the change in magnetic flux through the loop.",
+                steps: [
+                  "Start with Phi = B A cos(theta).",
+                  "For the face-on position, the field is fully through the loop area; for the edge-on position, the flux is zero.",
+                  "Subtract the final flux from the initial flux to find the change.",
+                ],
+                answer: "The magnetic flux changes by 8.0 x 10^-3 Wb.",
+                answer_reason: "Initially the flux is 0.40 x 0.020 = 8.0 x 10^-3 Wb. Edge-on means cos 90 degrees = 0, so the final flux is zero. The change is therefore 8.0 x 10^-3 Wb.",
+              },
+            },
+          ],
+        };
+      case "A9_L2":
+        return {
+          body: "Lenz's-law work should force the learner to oppose the change, not the field itself, so the induced response is treated as a physical reaction rule rather than as memorized wording.",
+          worked_example: {
+            prompt: "Looking straight at a conducting loop, the magnetic flux into the page through the loop is increasing. What direction must the induced magnetic field point, and what current direction does that require?",
+            steps: [
+              "Identify the original change first: the into-page flux is increasing.",
+              "Use Lenz's law to choose an induced field that opposes that increase.",
+              "Then use the right-hand grip rule to match that induced field direction to the loop current direction.",
+            ],
+            answer: "The induced field must point out of the page, so the induced current is counterclockwise.",
+            answer_reason: "Since the into-page flux is increasing, the loop responds by trying to produce an out-of-page field. A counterclockwise current produces an out-of-page magnetic field through the loop.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the 'oppose the change' test active by flipping the sign of the flux change.",
+              worked_example: {
+                prompt: "Again looking at the loop, the magnetic flux into the page is now decreasing. What induced field and current direction result?",
+                steps: [
+                  "Notice that the change is now a decrease of into-page flux rather than an increase.",
+                  "Choose the induced field that resists that decrease.",
+                  "Map the induced field direction to the current direction with the right-hand grip rule.",
+                ],
+                answer: "The induced field must point into the page, so the induced current is clockwise.",
+                answer_reason: "If the into-page flux is decreasing, the induced response tries to keep it from falling by producing more into-page field. A clockwise current gives an into-page field through the loop.",
+              },
+            },
+          ],
+        };
+      case "A9_L3":
+        return {
+          body: "Generator work should join periodic motion to periodic emf, so the learner has to connect rotation rate, flux-linkage change, and alternating output instead of treating a.c. as an unexplained waveform.",
+          worked_example: {
+            prompt: "A simple generator coil has 400 turns. The magnetic flux per turn changes from +3.0 x 10^-4 Wb to -3.0 x 10^-4 Wb in half a turn. The coil rotates at 25 rev/s. Find the a.c. frequency and the average induced emf magnitude over that half-turn.",
+            steps: [
+              "Use one rotation per cycle for a simple generator to connect rotational frequency to a.c. frequency.",
+              "Work out the half-turn time from the rotation rate.",
+              "Then use induced emf = N delta(Phi) / delta(t) with the full flux swing over that half-turn.",
+            ],
+            answer: "The a.c. frequency is 25 Hz and the average induced emf magnitude over the half-turn is 12 V.",
+            answer_reason: "At 25 rev/s, the generator produces 25 cycles each second, so the frequency is 25 Hz. Half a turn takes 0.020 s. The flux change per turn is 6.0 x 10^-4 Wb, so the flux-linkage change is 400 x 6.0 x 10^-4 = 0.24 Wb-turn. Dividing by 0.020 s gives 12 V.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps frequency and induced emf tied to the rotation rate instead of to separate memorized facts.",
+              worked_example: {
+                prompt: "If the same generator spins at twice the original rotation rate while the flux swing stays the same, what happens to the frequency and the average induced emf magnitude?",
+                steps: [
+                  "Double the rotation rate and use the one-rotation-per-cycle link again.",
+                  "Notice that the same flux change now happens in half the time.",
+                  "Translate both consequences into the new frequency and induced emf.",
+                ],
+                answer: "Both the frequency and the average induced emf magnitude double.",
+                answer_reason: "Twice as many rotations per second give twice as many cycles per second. The same change in flux linkage happening in half the time doubles delta(Phi) / delta(t), so the induced emf doubles as well.",
+              },
+            },
+          ],
+        };
+      case "A9_L4":
+        return {
+          body: "Transformer work should demand both the turns ratio and near-power conservation, so the learner has to move between voltage and current rather than stopping at a single ratio statement.",
+          worked_example: {
+            prompt: "An ideal transformer has 600 turns on the primary and 75 turns on the secondary. The primary is connected to 240 V and the secondary current is 4.0 A. Find the secondary voltage and the primary current.",
+            steps: [
+              "Use the turns ratio relation V_p / V_s = N_p / N_s to find the secondary voltage.",
+              "Then use ideal-transformer power balance V_p I_p = V_s I_s.",
+              "Solve for the primary current and compare how it changes with the voltage step.",
+            ],
+            answer: "The secondary voltage is 30 V and the primary current is 0.50 A.",
+            answer_reason: "The voltage ratio is 600 / 75 = 8, so the secondary voltage is 240 / 8 = 30 V. The secondary power is 30 x 4.0 = 120 W, so for an ideal transformer the primary current is 120 / 240 = 0.50 A.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the step-up versus step-down language quantitative.",
+              worked_example: {
+                prompt: "A transformer has 200 turns on the primary and 1000 on the secondary. Is it step-up or step-down, and by what factor does the voltage change ideally?",
+                steps: [
+                  "Compare the secondary turns with the primary turns.",
+                  "Use the turns ratio to infer the voltage change factor.",
+                  "Translate the factor into the step-up or step-down label.",
+                ],
+                answer: "It is a step-up transformer, and the voltage increases by a factor of 5.",
+                answer_reason: "The secondary has five times as many turns as the primary, so the secondary voltage is five times the primary voltage in the ideal turns-ratio model.",
+              },
+            },
+          ],
+        };
+      case "A9_L5":
+        return {
+          body: "RMS and transmission work should show why high-voltage a.c. matters numerically, so the learner must compare current and cable loss rather than repeating a slogan about efficiency.",
+          worked_example: {
+            prompt: "A station transmits 2.0 MW through cables with total resistance 5.0 ohm. Compare the power lost in the cables if the transmission voltage is 20 kV versus 400 kV.",
+            steps: [
+              "Use I = P / V to find the transmission current at each voltage.",
+              "Then use cable-loss power P_loss = I^2 R for each case.",
+              "Compare the losses and connect the difference to the choice of transmission voltage.",
+            ],
+            answer: "At 20 kV the cable loss is 50 kW, while at 400 kV the cable loss is 125 W.",
+            answer_reason: "At 20 kV, the current is 2.0 x 10^6 / 2.0 x 10^4 = 100 A, so the loss is 100^2 x 5.0 = 5.0 x 10^4 W. At 400 kV, the current is 2.0 x 10^6 / 4.0 x 10^5 = 5.0 A, so the loss is 5.0^2 x 5.0 = 125 W. Raising the transmission voltage sharply reduces current and therefore I^2 R heating losses.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps RMS meaning quantitative instead of treating it as just a vocabulary label.",
+              worked_example: {
+                prompt: "A sinusoidal supply has peak voltage 325 V. Find the rms voltage. If it powers a 65 ohm heater, find the rms current.",
+                steps: [
+                  "Use V_rms = V_peak / sqrt(2).",
+                  "Then apply Ohm's law with the rms values for the resistor.",
+                  "Keep the interpretation clear: the rms values are the d.c.-equivalent values for heating effect.",
+                ],
+                answer: "The rms voltage is about 230 V and the rms current is about 3.5 A.",
+                answer_reason: "Dividing 325 V by sqrt(2) gives about 230 V. Then I_rms = V_rms / R = 230 / 65 which is about 3.5 A.",
+              },
+            },
+          ],
+        };
+      case "A9_L6":
+        return {
+          body: "The applications lesson should tie real uses back to induced-current loops and resistive loss, so the learner sees braking, heating, and design choices as the same induction physics in different settings.",
+          worked_example: {
+            prompt: "An induction heater drives an eddy current of 12 A around a conducting region with resistance 0.15 ohm. Find the heating power. Then explain why laminating or slotting a conductor reduces unwanted eddy-current heating.",
+            steps: [
+              "Use P = I^2 R to find the heating power from the induced current.",
+              "Then think about how laminations or slots affect the size and continuity of the current loops.",
+              "Link the design change back to current size and therefore to I^2 R heating.",
+            ],
+            answer: "The heating power is 21.6 W, and laminations or slots reduce eddy-current heating by interrupting current loops and increasing their effective resistance.",
+            answer_reason: "The power is 12^2 x 0.15 = 21.6 W. Breaking up the conductor stops large eddy-current loops from circulating easily, so the induced currents become smaller and the resistive heating is reduced.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the application logic broader than heating alone.",
+              worked_example: {
+                prompt: "Why does a solid metal disc moving through a magnetic field experience stronger eddy-current braking than a slotted disc of the same material?",
+                steps: [
+                  "Compare how easily each disc supports closed current loops.",
+                  "Use Lenz's law to connect those induced loops to a force opposing the motion.",
+                  "Explain why breaking the loops weakens the braking effect.",
+                ],
+                answer: "The solid disc supports larger eddy-current loops, so it produces a stronger opposing magnetic response and therefore stronger braking than the slotted disc.",
+                answer_reason: "A solid conductor allows larger induced currents to circulate when the flux changes through the moving disc. Those currents create a magnetic effect that opposes the motion. Slots interrupt the loops, so the induced currents and the braking force are both reduced.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]

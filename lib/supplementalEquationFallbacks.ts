@@ -502,12 +502,74 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "N, T, A, m",
     },
   ],
+  A9_L1: [
+    {
+      standardFormula: "induced emf = N delta(Phi) / delta(t)",
+      meaning: "An induced emf appears when magnetic flux linkage changes with time.",
+      conditions: "Use for Faraday-law magnitude calculations before considering the Lenz-law sign.",
+      unitsText: "V, Wb, s",
+    },
+    {
+      standardFormula: "Phi = B A cos(theta)",
+      meaning: "Magnetic flux depends on field strength, loop area, and the tilt of the loop relative to the field.",
+      conditions: "Use when geometry changes the flux through a loop.",
+      unitsText: "Wb, T, m^2",
+    },
+  ],
   A9_L2: [
     {
       standardFormula: "induced emf = -N delta(Phi) / delta(t)",
       meaning: "The minus sign shows the induced response opposes the change in magnetic flux linkage.",
       conditions: "Use when both Faraday's law and Lenz's-law direction must be kept together.",
       unitsText: "V, Wb, s",
+    },
+  ],
+  A9_L3: [
+    {
+      standardFormula: "induced emf = N delta(Phi) / delta(t)",
+      meaning: "Generator emf comes from repeated changes in flux linkage as the coil rotates.",
+      conditions: "Use for average emf calculations over part of a cycle.",
+      unitsText: "V, Wb, s",
+    },
+    {
+      standardFormula: "f = 1 / T",
+      meaning: "Frequency and period describe the timing of the alternating output.",
+      conditions: "Use when converting between cycle time and a.c. frequency.",
+      unitsText: "Hz, s",
+    },
+  ],
+  A9_L4: [
+    {
+      standardFormula: "V_p / V_s = N_p / N_s",
+      meaning: "In an ideal transformer, the voltage ratio matches the turns ratio.",
+      conditions: "Use for primary-secondary voltage comparisons.",
+      unitsText: "V",
+    },
+    {
+      standardFormula: "V_p I_p = V_s I_s",
+      meaning: "Ideal transformers approximately conserve power between primary and secondary.",
+      conditions: "Use when relating transformer voltage and current on opposite sides.",
+      unitsText: "W, V, A",
+    },
+  ],
+  A9_L5: [
+    {
+      standardFormula: "V_rms = V_peak / sqrt(2)",
+      meaning: "The rms voltage is the d.c.-equivalent value for the heating effect of a sinusoidal a.c. signal.",
+      conditions: "Use for sinusoidal a.c. peak-to-rms conversions.",
+      unitsText: "V",
+    },
+    {
+      standardFormula: "I_rms = I_peak / sqrt(2)",
+      meaning: "The rms current gives the d.c.-equivalent heating effect of a sinusoidal a.c. current.",
+      conditions: "Use for sinusoidal a.c. current conversions.",
+      unitsText: "A",
+    },
+    {
+      standardFormula: "P_loss = I^2 R",
+      meaning: "Transmission losses in cables rise with the square of the current.",
+      conditions: "Use when comparing line heating losses at different transmission currents.",
+      unitsText: "W, A, ohm",
     },
   ],
   A9_L6: [
