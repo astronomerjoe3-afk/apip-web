@@ -1143,7 +1143,7 @@ const M4_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A2_L1: [
     {
-      standardFormula: "Delta E = h f = h c / lambda",
+      standardFormula: "ΔE = hf = hc / λ",
       meaning: "An atomic transition occurs only when the incoming or outgoing packet matches the exact energy gap.",
       conditions: "Use for discrete atomic level transitions and packet-gap matching.",
       unitsText: "J or eV",
@@ -1151,7 +1151,7 @@ const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
   A2_L2: [
     {
-      standardFormula: "Delta E = h f = h c / lambda",
+      standardFormula: "ΔE = hf = hc / λ",
       meaning: "A spectral line comes from an energy gap matched by the emitted or absorbed photon.",
       conditions: "Use for emission or absorption lines tied to atomic energy-level transitions.",
       unitsText: "J or eV",
@@ -1159,19 +1159,19 @@ const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
   A2_L3: [
     {
-      standardFormula: "h f = phi + K_max",
+      standardFormula: "hf = φ + K_max",
       meaning: "Photoelectric packet energy is split between the work function and the maximum electron kinetic energy.",
       conditions: "Use for photoelectric-effect calculations above threshold.",
       unitsText: "J or eV",
     },
     {
-      standardFormula: "f_0 = phi / h",
+      standardFormula: "f_0 = φ / h",
       meaning: "Threshold frequency is the minimum frequency needed to eject electrons from a metal surface.",
       conditions: "Use when deciding whether a given light frequency can cause photoemission.",
       unitsText: "Hz",
     },
     {
-      standardFormula: "e V_s = K_max",
+      standardFormula: "eV_s = K_max",
       meaning: "Stopping potential measures the maximum kinetic energy of emitted photoelectrons.",
       conditions: "Use when a stopping-potential measurement is given in a photoelectric question.",
       unitsText: "J, V",
@@ -1179,7 +1179,7 @@ const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
   A2_L4: [
     {
-      standardFormula: "Delta E = h f",
+      standardFormula: "ΔE = hf",
       meaning: "Excitation needs a photon or collision energy that matches an allowed bound-state gap exactly.",
       conditions: "Use for excitation questions below the ionisation threshold.",
       unitsText: "J or eV",
@@ -1219,13 +1219,13 @@ const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
   A2_L6: [
     {
-      standardFormula: "Delta E = h f = h c / lambda",
+      standardFormula: "ΔE = hf = hc / λ",
       meaning: "Spectral lines and other packet-transfer evidence tie quantum behavior to discrete photon energies.",
       conditions: "Use when linking spectral evidence to photoelectric or threshold reasoning.",
       unitsText: "J or eV",
     },
     {
-      standardFormula: "h f = phi + K_max",
+      standardFormula: "hf = φ + K_max",
       meaning: "Photoelectric evidence shows that packet energy transfer is threshold-based, not continuous.",
       conditions: "Use when synthesizing threshold behavior with other quantum evidence.",
       unitsText: "J or eV",
