@@ -849,6 +849,111 @@ const M1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const M2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M2_L1: [
+    {
+      standardFormula: "F_resultant = vector sum of all forces",
+      meaning: "The Master Arrow is found by combining every force on the object, not by picking the largest arrow.",
+      conditions: "Use before predicting any motion change.",
+      unitsText: "N",
+    },
+    {
+      standardFormula: "F_resultant = 0 -> acceleration = 0",
+      meaning: "Zero resultant force means no change in velocity, so the object may remain at rest or keep moving at constant velocity.",
+      conditions: "Use for balanced-force and no-force comparisons.",
+      unitsText: "decision rule",
+    },
+  ],
+  M2_L2: [
+    {
+      standardFormula: "a = F_resultant / m",
+      meaning: "Acceleration depends on the resultant force and the object's mass together.",
+      conditions: "Use for a one-object response calculation after the Master Arrow is known.",
+      unitsText: "m/s^2",
+    },
+    {
+      standardFormula: "F_on_A_by_B = -F_on_B_by_A",
+      meaning: "Third-law forces are equal in magnitude and opposite in direction, but they act on different objects.",
+      conditions: "Use when checking an interaction pair rather than a one-object resultant.",
+      unitsText: "N",
+    },
+  ],
+  M2_L3: [
+    {
+      standardFormula: "p = m v",
+      meaning: "Momentum combines mass with signed velocity, so direction must stay in the calculation.",
+      conditions: "Use before and after a collision or docking event.",
+      unitsText: "kg m/s",
+    },
+    {
+      standardFormula: "sum(momentum before) = sum(momentum after)",
+      meaning: "In a closed system, the total momentum stays constant through the interaction.",
+      conditions: "Use when the full interacting system is the boundary.",
+      unitsText: "kg m/s",
+    },
+    {
+      standardFormula: "v_final(if objects stick) = total momentum / total mass",
+      meaning: "When objects stick together, one shared final velocity must carry the conserved total momentum.",
+      conditions: "Use for perfectly inelastic docking or sticking collisions.",
+      unitsText: "m/s",
+    },
+  ],
+  M2_L4: [
+    {
+      standardFormula: "torque (moment of a force) = force x perpendicular distance",
+      meaning: "Turning effect depends on both force size and the perpendicular reach from the pivot to the line of action.",
+      conditions: "Use for single-force turning calculations.",
+      unitsText: "N m",
+    },
+    {
+      standardFormula: "line of action through pivot -> torque = 0",
+      meaning: "Even a large force produces no turning effect if its perpendicular distance from the pivot is zero.",
+      conditions: "Use when deciding whether a push causes rotation.",
+      unitsText: "decision rule",
+    },
+  ],
+  M2_L5: [
+    {
+      standardFormula: "sum(clockwise moments) = sum(anticlockwise moments)",
+      meaning: "A balanced object has no net turning effect about the chosen pivot.",
+      conditions: "Use for static equilibrium problems.",
+      unitsText: "N m",
+    },
+    {
+      standardFormula: "stable if the line of action of weight stays inside the base",
+      meaning: "Tipping starts when the weight line moves to the edge and then outside the support region.",
+      conditions: "Use when comparing stability or tipping risk.",
+      unitsText: "stability rule",
+    },
+    {
+      standardFormula: "larger base or lower center of mass -> larger stability margin",
+      meaning: "Stability improves when the object has more room before the weight line reaches an edge.",
+      conditions: "Use for qualitative comparisons of tipping resistance.",
+      unitsText: "comparison rule",
+    },
+  ],
+  M2_L6: [
+    {
+      standardFormula: "Fx = F cos(theta), Fy = F sin(theta)",
+      meaning: "An angled force can be rewritten as horizontal and vertical components on chosen axes.",
+      conditions: "Use when theta is measured from the +x axis.",
+      unitsText: "N",
+    },
+    {
+      standardFormula: "R = sqrt(Fx_total^2 + Fy_total^2)",
+      meaning: "After combining components on each axis, the resultant magnitude comes from the perpendicular-component triangle.",
+      conditions: "Use after all horizontal and vertical totals are known.",
+      unitsText: "N",
+    },
+    {
+      standardFormula: "theta = tan^-1(Fy_total / Fx_total)",
+      meaning: "Direction is recovered from the ratio of the net components, with the final quadrant checked from the signs.",
+      conditions: "Use after the net x and net y components are known.",
+      unitsText: "degrees or radians",
+    },
+  ],
+};
+
 const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A2_L1: [
     {
@@ -1270,6 +1375,9 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 export function supplementalEquationFallbacksForLesson(code: string): FormulaFallbackEntry[] {
   if (M1_FORMULA_OVERRIDES[code]) {
     return M1_FORMULA_OVERRIDES[code];
+  }
+  if (M2_FORMULA_OVERRIDES[code]) {
+    return M2_FORMULA_OVERRIDES[code];
   }
   if (A3_FORMULA_OVERRIDES[code]) {
     return A3_FORMULA_OVERRIDES[code];

@@ -13132,84 +13132,165 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "M2_L1":
       return {
-        body: "Combine the whole force picture before you decide whether the craft speeds up, slows down, or keeps cruising.",
+        body: "Collapse the full force map to one Master Arrow first, then keep velocity separate from acceleration so zero-resultant and opposite-direction cases do not get muddled together.",
         worked_example: {
-          prompt: "A craft is moving west at 3 m/s while 14 N east and 9 N west act on it. Find the Master Arrow and predict the immediate motion change.",
+          prompt: "A drone is already moving east at 6 m/s. Forces on it are 11 N east, 7 N west, and 4 N west. Find the Master Arrow, predict the immediate motion change, and then compare that with the case where all three forces are removed while the drone is still moving east.",
           steps: [
-            "Combine the opposite Drive Arrows first because they act along the same line: 14 N east and 9 N west leave 5 N east.",
-            "That leftover 5 N east is the Master Arrow, so the acceleration points east because the resultant force sets the motion change.",
-            "Keep the current velocity separate from the new acceleration: the craft is still moving west at this moment.",
-            "An eastward acceleration acting on a westward-moving craft makes it slow down first rather than instantly reverse direction.",
+            "Combine the same-line forces first: 11 N east is exactly balanced by 7 N west plus 4 N west, so the Master Arrow is 0 N.",
+            "A zero Master Arrow means zero acceleration, so the drone does not change its velocity at that moment.",
+            "Because it was already moving east at 6 m/s, it keeps cruising east at 6 m/s rather than stopping.",
+            "If all three forces are removed completely, the Master Arrow is still 0 N and the motion stays the same, but the force story is different: no forces is not the same situation as balanced forces.",
           ],
-          answer: "Master Arrow = 5 N east, so the craft accelerates east; because it was moving west, it immediately slows down while still traveling west.",
+          answer: "The Master Arrow is 0 N, so the drone keeps moving east at 6 m/s with no change in motion. Removing all three forces gives the same motion outcome but a different force story.",
+          answer_reason: "The resultant force determines acceleration, not velocity itself. Zero Master Arrow means zero acceleration, so an already moving object keeps its current velocity. Balanced forces and no forces can therefore produce the same motion while still being physically different setups.",
         },
+        extra_examples: [
+          {
+            body: "An unbalanced force opposite to the current motion does not reverse the craft instantly; it first removes speed in the old direction.",
+            worked_example: {
+              prompt: "A craft is moving west at 2 m/s while 13 N east and 5 N west act on it. Find the Master Arrow and predict the next motion change.",
+              steps: [
+                "Combine the same-line forces: 13 N east and 5 N west leave 8 N east.",
+                "That 8 N east Master Arrow means the acceleration is eastward.",
+                "The craft is still traveling west at this instant, so an eastward acceleration opposes the current motion.",
+                "Therefore the craft slows down while still moving west before any later reversal could happen.",
+              ],
+              answer: "The Master Arrow is 8 N east, so the craft immediately slows down while still moving west.",
+            },
+          },
+        ],
       };
     case "M2_L2":
       return {
-        body: "Separate one-object response from two-object force-pair reasoning so mass and interaction are not mixed together.",
+        body: "Separate same-resultant-force response from third-law pair reasoning so equal forces, unequal masses, and one-object acceleration stories do not get mixed together.",
         worked_example: {
-          prompt: "The same 18 N Master Arrow acts east on a 3 kg scout and a 6 kg freighter. Find each Motion Shift and explain the difference.",
+          prompt: "A tug and a cargo pod interact through a towline force of 15 N. The tug has mass 3 kg and the pod has mass 9 kg. Find the acceleration of each from this third-law pair, then compare that with a separate case where a 24 N Master Arrow acts on the pod alone.",
           steps: [
-            "Use the one-object rule a = F_net / m for each craft because the question is about response to the same Master Arrow.",
-            "For the 3 kg scout, a = 18 / 3 = 6 m/s^2 east.",
-            "For the 6 kg freighter, a = 18 / 6 = 3 m/s^2 east.",
-            "The scout accelerates more because the same net force is shared across less mass, so the Motion Shift is larger.",
+            "Start with the third-law pair correctly: the towline pulls each craft with 15 N in opposite directions, so the force magnitudes are equal even though the masses differ.",
+            "Use a = F / m on the tug: 15 / 3 = 5.0 m/s^2.",
+            "Use the same rule on the pod: 15 / 9 = 1.67 m/s^2, so the heavier pod changes motion less even under the same force magnitude.",
+            "Now keep that separate from the other force story: if a 24 N Master Arrow acts on the pod alone, its acceleration is 24 / 9 = 2.67 m/s^2.",
+            "Equal third-law forces do not guarantee equal accelerations, and a one-object Master Arrow case must not be confused with the two-object interaction pair.",
           ],
-          answer: "Scout: 6 m/s^2 east; freighter: 3 m/s^2 east, because the same Master Arrow produces a bigger Motion Shift when less mass resists the change.",
+          answer: "From the 15 N interaction pair, the tug accelerates at 5.0 m/s^2 and the pod at 1.67 m/s^2 in opposite directions. In the separate 24 N Master Arrow case, the pod would accelerate at 2.67 m/s^2.",
+          answer_reason: "Acceleration depends on both force and mass. Third-law pairs guarantee equal and opposite forces on different objects, but the resulting accelerations can differ because the masses differ. A separate Master Arrow problem is a different force story again.",
         },
+        extra_examples: [
+          {
+            body: "The same target acceleration can be used to work backward to the needed Master Arrow.",
+            worked_example: {
+              prompt: "What Master Arrow is needed to give a 7 kg rover an acceleration of 2.5 m/s^2?",
+              steps: [
+                "Use the rearranged form of Newton's second law: F = m a.",
+                "Substitute the values: F = 7 x 2.5 = 17.5 N.",
+                "State the meaning of the number clearly: this is the resultant force required, not just one force in isolation.",
+              ],
+              answer: "The rover needs a 17.5 N Master Arrow.",
+            },
+          },
+        ],
       };
     case "M2_L3":
       return {
-        body: "Keep the system total visible so docking problems are solved through conserved Carry Score rather than through force slogans.",
+        body: "Keep the whole-system ledger visible so docking problems are solved by conserved total momentum rather than by force language or by conserving each object's motion separately.",
         worked_example: {
-          prompt: "Take east as positive. A 3 kg craft moves east at 4 m/s and docks with a 1 kg craft moving west at 2 m/s. Find the shared final velocity.",
+          prompt: "Take east as positive. A 4 kg module moves east at 5 m/s and docks with a 2 kg module moving west at 7 m/s. Find the shared final velocity and explain what the sign of the result means.",
           steps: [
-            "Calculate each signed Carry Score first: the 3 kg craft has +12 kg m/s and the 1 kg craft has -2 kg m/s.",
-            "Add them to get the closed-system total before docking: +10 kg m/s.",
-            "Because the craft stick together, the combined mass after docking is 4 kg and that same total momentum must still be shared by the whole system.",
-            "Solve v = total momentum / combined mass = 10 / 4 = 2.5 m/s, and keep the positive sign to show the final motion is east.",
+            "Find each signed momentum first: the 4 kg module has +20 kg m/s and the 2 kg module has -14 kg m/s.",
+            "Add them to get the closed-system total before docking: +6 kg m/s.",
+            "Because the modules stick together, the combined mass afterward is 6 kg and the same total momentum must now be shared by that whole 6 kg.",
+            "Use v = total momentum / total mass = 6 / 6 = 1.0 m/s.",
+            "The positive sign means the joined pair moves east after docking, even though one incoming module was moving west.",
           ],
-          answer: "The shared final velocity is 2.5 m/s east, because the closed system keeps its total +10 kg m/s Carry Score and that total is shared across 4 kg after docking.",
+          answer: "The shared final velocity is 1.0 m/s east.",
+          answer_reason: "Momentum is conserved for the whole closed system. The initial total is +6 kg m/s, and after the modules stick that same total is shared by 6 kg, giving +1.0 m/s. The positive sign shows the final motion is east.",
         },
+        extra_examples: [
+          {
+            body: "A zero total momentum case is a useful check because sticking then forces a zero shared final speed.",
+            worked_example: {
+              prompt: "A 3 kg craft moves east at 4 m/s and a 2 kg craft moves west at 6 m/s. They stick together. What is the shared final velocity?",
+              steps: [
+                "Find the signed momenta: +12 kg m/s and -12 kg m/s.",
+                "Add them to get a total momentum of 0 kg m/s.",
+                "After sticking, the combined mass is 5 kg, but 0 shared across any mass still gives 0 velocity.",
+              ],
+              answer: "The shared final velocity is 0 m/s.",
+            },
+          },
+        ],
       };
     case "M2_L4":
       return {
-        body: "Turning questions only become clear when force size and perpendicular reach are kept together in torque, the moment of a force.",
+        body: "Turning questions only become sharp when force size and perpendicular reach stay together in torque, the moment of a force, instead of being judged from force size alone.",
         worked_example: {
-          prompt: "Compare two door pushes: 6 N applied 0.5 m from the hinge and 3 N applied 1.0 m from the hinge. Which gives the larger Spin Pull?",
+          prompt: "A mechanic can push a hatch with 12 N perpendicular at 0.30 m from the hinge or with 20 N perpendicular at 0.15 m from the hinge. Which push gives the larger Spin Pull, and what force would be needed at 0.50 m to match that larger turning effect?",
           steps: [
-            "Use Spin Pull = torque (moment of a force) = force x perpendicular reach for each case, because the turning effect depends on both quantities together.",
-            "First push: 6 x 0.5 = 3 N m.",
-            "Second push: 3 x 1.0 = 3 N m.",
-            "The Spin Pull values match, so neither push is larger; different force-reach combinations can give the same turning effect.",
+            "Use Spin Pull = torque (moment of a force) = force x perpendicular reach for each case.",
+            "First push: 12 x 0.30 = 3.6 N m.",
+            "Second push: 20 x 0.15 = 3.0 N m, so the first push gives the larger turning effect even though its force is smaller.",
+            "To match 3.6 N m at a reach of 0.50 m, rearrange to force = torque / reach = 3.6 / 0.50 = 7.2 N.",
+            "The comparison shows why torque, the moment of a force, cannot be judged from force size alone; the perpendicular reach is equally important.",
           ],
-          answer: "Both pushes give the same Spin Pull of 3 N m, because torque, the moment of a force, depends on the product of force and perpendicular reach, not on force size alone.",
+          answer: "The 12 N push at 0.30 m gives the larger Spin Pull at 3.6 N m, and a 7.2 N push at 0.50 m would match it.",
+          answer_reason: "Torque, the moment of a force, is the product of force and perpendicular reach. The larger force does not automatically win if it acts closer to the pivot.",
         },
+        extra_examples: [
+          {
+            body: "A force can be large and still produce no turning effect if its line of action passes through the pivot.",
+            worked_example: {
+              prompt: "A 25 N force acts exactly through the pivot. What torque does it produce?",
+              steps: [
+                "Torque uses force multiplied by perpendicular distance from the pivot to the line of action.",
+                "If the line of action passes through the pivot, the perpendicular distance is 0 m.",
+                "So torque = 25 x 0 = 0 N m.",
+              ],
+              answer: "It produces 0 N m of torque.",
+            },
+          },
+        ],
       };
     case "M2_L5":
       return {
-        body: "Judge stability from the margin between the Balance Core line and the base edge, not from weight language by itself.",
+        body: "Judge stability from the margin between the weight line and the base edge, not from mass language alone, and make tipping predictions by checking whether later shifts push that line outside the support region.",
         worked_example: {
-          prompt: "A stack's Balance Core line lands 0.05 m inside the right edge of a narrow base. On a wider platform with the same load position, the line lands 0.30 m inside the edge. Which setup is more stable and why?",
+          prompt: "A stack's weight line lands 0.08 m inside the right edge on a narrow platform. On a wider platform with the same load position, the line lands 0.28 m inside the edge. Which setup is more stable, and what happens if an extra sideways shift of 0.10 m to the right occurs?",
           steps: [
-            "Stability depends on whether the Balance Core line stays inside the Footprint Zone and how much safety margin remains before it reaches the edge.",
-            "The narrow base leaves only 0.05 m of margin, so a small extra shift could push the line outside the base and start tipping.",
-            "The wider base leaves 0.30 m of margin with the same load position, so the weight line is much farther from the tipping threshold.",
-            "Therefore the wider platform is more stable because it gives more support width under the same Balance Core line.",
+            "Stability depends on whether the weight line stays inside the base and how much margin remains before it reaches the tipping edge.",
+            "The narrow platform leaves only 0.08 m of margin, while the wider platform leaves 0.28 m, so the wider one is initially more stable.",
+            "Now apply the extra 0.10 m shift. On the narrow platform, the line moves past the edge because 0.10 m is larger than the original 0.08 m margin.",
+            "On the wider platform, the line still remains 0.18 m inside the edge because 0.28 - 0.10 = 0.18 m.",
+            "So the narrow platform tips, while the wider platform stays stable under the same extra disturbance.",
           ],
-          answer: "The wider platform is more stable, because the Balance Core line stays much farther inside the Footprint Zone and leaves a larger safety margin before tipping begins.",
+          answer: "The wider platform is more stable. After the extra 0.10 m shift, the narrow platform tips but the wider platform remains stable with 0.18 m of margin left.",
+          answer_reason: "Stability is controlled by how far the weight line is from the base edge. A bigger margin gives more tolerance before the line leaves the support area and tipping begins.",
         },
+        extra_examples: [
+          {
+            body: "A lower center of mass usually helps because the body must rotate through a larger angle before the weight line reaches the edge.",
+            worked_example: {
+              prompt: "Two carts have the same base width and the same sideways weight-line position, but one has its load stacked much higher. Which is easier to tip?",
+              steps: [
+                "The equal sideways position means the immediate edge margin is the same at that instant.",
+                "But the higher load raises the center of mass, so a smaller tilt is needed before the weight line moves outside the base.",
+                "That makes the higher-loaded cart easier to tip under a disturbance.",
+              ],
+              answer: "The cart with the higher load is easier to tip.",
+            },
+          },
+        ],
       };
     case "M2_L6":
-      return {
-        body: "Resolve angled pushes onto axes first so the vector bookkeeping stays clear and the final arrow can be rebuilt from clean totals.",
+      return Object.assign(
+        {
+        body: "Resolve angled forces onto axes first, combine totals axis by axis, then rebuild both the magnitude and the direction from those net components instead of guessing from the diagonal sketch.",
         worked_example: {
-          prompt: "A diagonal force is resolved into 8 N east and 6 N north. Another 3 N west force acts at the same time. Find the net horizontal component, the net vertical component, and the resultant magnitude.",
+          prompt: "A 20 N force acts at 30 degrees above the +x axis. At the same time, a 6 N west force and a 4 N south force act. Find the net x-component, the net y-component, the resultant magnitude, and the final direction measured from the +x axis.",
           steps: [
-            "Combine one axis at a time: horizontally, 8 N east and 3 N west leave 5 N east.",
-            "The vertical axis has only 6 N north, so the net vertical component stays 6 N north.",
+            "Resolve the 20 N force first: Fx = 20 cos 30 degrees approx 17.3 N east and Fy = 20 sin 30 degrees = 10.0 N north.",
+            "Combine one axis at a time. Horizontally, 17.3 N east and 6 N west leave 11.3 N east. Vertically, 10.0 N north and 4 N south leave 6.0 N north.",
             "Now rebuild the resultant from the perpendicular components using Pythagoras: magnitude = sqrt(5^2 + 6^2) = sqrt(61) ≈ 7.8 N.",
-            "The final arrow points northeast because both net components are positive on their chosen axes.",
+            "State the quadrant as well: the resultant points 28 degrees above the +x axis because both net components are positive.",
           ],
           answer: "Net components = 5 N east and 6 N north, so the resultant is about 7.8 N northeast, because components must be combined axis by axis before rebuilding the final arrow.",
         },
@@ -13228,7 +13309,37 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             },
           },
         ],
-      };
+        },
+        {
+          worked_example: {
+            prompt: "A 20 N force acts at 30 degrees above the +x axis. At the same time, a 6 N west force and a 4 N south force act. Find the net x-component, the net y-component, the resultant magnitude, and the final direction measured from the +x axis.",
+            steps: [
+              "Resolve the 20 N force first: Fx = 20 cos 30 degrees approx 17.3 N east and Fy = 20 sin 30 degrees = 10.0 N north.",
+              "Combine one axis at a time. Horizontally, 17.3 N east and 6 N west leave 11.3 N east. Vertically, 10.0 N north and 4 N south leave 6.0 N north.",
+              "Rebuild the resultant magnitude from the perpendicular net components: R = sqrt(11.3^2 + 6.0^2) approx 12.8 N.",
+              "Find the direction from the +x axis with tan(theta) = 6.0 / 11.3, giving theta approx 28 degrees.",
+              "State the quadrant as well: the resultant points 28 degrees above the +x axis because both net components are positive.",
+            ],
+            answer: "The net components are 11.3 N east and 6.0 N north, so the resultant is about 12.8 N at about 28 degrees above the +x axis.",
+            answer_reason: "Vector addition becomes reliable only after all horizontal contributions are combined with horizontal ones and all vertical contributions with vertical ones. The diagonal is then rebuilt from those totals using Pythagoras and trig.",
+          },
+          extra_examples: [
+            {
+              body: "Plain-number addition fails for perpendicular vectors because magnitude depends on geometry, not on ordinary same-axis arithmetic.",
+              worked_example: {
+                prompt: "A force has components 8 N east and 15 N north. A learner says the resultant must be 23 N because 8 + 15 = 23. Explain why that is wrong and find the actual resultant.",
+                steps: [
+                  "Start by checking directions: 8 N east and 15 N north lie on perpendicular axes, so they are not same-line vectors and cannot be added as 8 + 15.",
+                  "Use tip-to-tail vector addition instead: draw the 15 N north component from the tip of the 8 N east component, then read the resultant from the first tail to the final tip.",
+                  "That start-to-finish diagonal is the actual resultant. Its magnitude comes from the perpendicular-component triangle: sqrt(8^2 + 15^2) = sqrt(289) = 17 N.",
+                  "So 23 N would only make sense for same-axis algebraic addition, while the correct vector resultant here is 17 N northeast.",
+                ],
+                answer: "The learner is wrong: the resultant is 17 N northeast, because perpendicular components combine by vector addition into a diagonal start-to-finish arrow, not by plain algebraic addition to 23 N.",
+              },
+            },
+          ],
+        },
+      );
     case "M1_L1":
       return {
         body: "Distance-time work should do more than label rises and flats. The learner should be able to recover segment speeds, pauses, and the overall journey average from one graph without treating the line as the route itself.",
@@ -13258,7 +13369,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
             },
           },
         ],
-      };
+        };
     case "M1_L2":
       return {
         body: "Speed-time work should keep height and slope doing different jobs. The learner should be able to read a speed at one instant and an acceleration over an interval from the same graph without mixing them.",
@@ -15543,10 +15654,23 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410e";
+  const assetVersion = "20260410d";
+  const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
+    A1_L5: {
+      "final.mp4": "final-20260410d.mp4",
+      "thumbnail.png": "thumbnail-20260410d.png",
+      "captions.vtt": "captions-20260410d.vtt",
+    },
+    A1_L6: {
+      "final.mp4": "final-20260410d.mp4",
+      "thumbnail.png": "thumbnail-20260410d.png",
+      "captions.vtt": "captions-20260410d.vtt",
+    },
+  };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const moduleId = lessonId.split("_", 1)[0];
-    return `/lesson_assets/${moduleId}/${lessonId}/videos/${filename}?v=${assetVersion}`;
+    const publishedFilename = versionedAssetFilenames[lessonId]?.[filename] ?? filename;
+    return `/lesson_assets/${moduleId}/${lessonId}/videos/${publishedFilename}?v=${assetVersion}`;
   };
   switch (code) {
     case "M1_L1":
@@ -17220,7 +17344,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
           "The slope stays positive through the plotted interval.",
           "The acceleration sign depends on the signed change over time.",
         ],
-      };
+        };
     case "M1_L4":
       return {
         title: "Equation-choice check",
@@ -17231,7 +17355,7 @@ function reflectionVisualCheck(lesson: UnknownRecord): UnknownRecord | undefined
           "That steady slope is the constant-acceleration condition.",
           "Equation choice still depends on the knowns and the unknown.",
         ],
-      };
+        };
     case "M1_L5":
       return {
         title: "Gradient-context check",
