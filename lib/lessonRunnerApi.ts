@@ -15834,7 +15834,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410d";
+  const assetVersion = "20260410f";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
