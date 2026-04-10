@@ -15227,87 +15227,187 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
       };
     case "F4_L1":
       return {
-        body: "Start with the whole closed route, because current is a rate of charge flow around the loop rather than something one lamp keeps or loses.",
+        body: "Current examples should keep the whole closed loop visible, so charge flow rate is separated from the idea of components using current up.",
         worked_example: {
-          prompt: "18 C pass a checkpoint in 3 s in a simple closed loop. Find the current and explain whether the current after the lamp is different.",
+          prompt: "In a simple closed loop, 24 C of charge pass a checkpoint in 6 s. Find the current, then find how much charge passes a second checkpoint after the lamp in 5 s.",
           steps: [
             "Use current = charge / time because the question gives total charge moved and the time taken.",
-            "Substitute the values: I = 18 / 3 = 6 A.",
-            "Now switch from the number to the loop idea: a simple series loop is one continuous route.",
-            "The same 6 A current passes the checkpoint after the lamp as well, because the lamp transfers energy without using current up.",
+            "Substitute the values at the first checkpoint: I = 24 / 6 = 4 A.",
+            "Now switch from the number back to the circuit story: a simple closed loop is one continuous route, so the same 4 A current passes the checkpoint after the lamp as well.",
+            "Use Q = It at the second checkpoint for 5 s: Q = 4 x 5 = 20 C.",
+            "The lamp can transfer energy while still allowing the same charge stream rate to continue around the loop.",
           ],
-          answer: "Current = 6 A, and it is still 6 A after the lamp in the same closed loop.",
+          answer: "The current is 4 A, and 20 C pass the second checkpoint in 5 s.",
+          answer_reason: "Current is the rate of charge flow, so in one complete single-route loop the same current passes every checkpoint even though components transfer energy from the moving charge.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the broken-loop case sharp so current is not treated as something that only stops after the gap.",
+            worked_example: {
+              prompt: "What happens to the current everywhere in a single-route loop if a switch opens at one point?",
+              steps: [
+                "A single-route circuit needs one complete path for charge to circulate.",
+                "Opening the switch breaks that one route.",
+                "So the current becomes zero everywhere in the loop, not just after the switch.",
+              ],
+              answer: "The current stops everywhere in the loop.",
+              answer_reason: "Charge cannot keep circulating in a single-route network once the route is broken at any point.",
+            },
+          },
+        ],
       };
     case "F4_L2":
       return {
-        body: "Treat voltage as energy transferred per charge first, then use the same idea to explain why a cell and a lamp affect the same circulating charge differently.",
+        body: "Potential-difference work should keep energy per charge separate from total energy transferred, because that distinction carries most of the conceptual weight in this lesson.",
         worked_example: {
-          prompt: "A cell transfers 15 J to 3 C of charge. Find the potential difference and explain what that means for each coulomb.",
+          prompt: "A cell transfers 24 J of energy to 4 C of charge. Find the potential difference, then find how much energy 7 C would gain from the same cell.",
           steps: [
             "Use potential difference = energy transferred / charge because the question is about energy per charge.",
-            "Substitute the values: V = 15 / 3 = 5 V.",
-            "Interpret the number instead of stopping at the calculation: 5 V means each coulomb gains 5 J of electrical energy from the cell.",
-            "That is why voltage is about the energy boost per charge, not about how many charges are moving.",
+            "Substitute the values for the cell: V = 24 / 4 = 6 V.",
+            "Interpret the 6 V before moving on: each coulomb gains 6 J of electrical energy from the cell.",
+            "Now use E = VQ for a different amount of charge passing through the same cell: E = 6 x 7 = 42 J.",
+            "This keeps the distinction clear: voltage stays as energy per charge, while the total energy transferred grows when more charge moves.",
           ],
-          answer: "Potential difference = 5 V, meaning each coulomb gains 5 J of energy.",
+          answer: "The potential difference is 6 V, and 7 C would gain 42 J from the same cell.",
+          answer_reason: "Potential difference tells you the energy transferred to each coulomb, while total energy transferred depends on both the potential difference and the amount of charge moved.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps source and component roles distinct.",
+            worked_example: {
+              prompt: "A lamp has 9 V across it. What does that mean physically for each coulomb passing through the lamp?",
+              steps: [
+                "Potential difference is energy transferred per unit charge.",
+                "At a source, charge gains that energy; at a component, charge transfers that energy away.",
+                "So 9 V across the lamp means each coulomb transfers 9 J of energy in the lamp.",
+              ],
+              answer: "Each coulomb transfers 9 J of energy in the lamp.",
+              answer_reason: "Voltage is not how much charge is present. It tells how much energy is transferred for each coulomb that passes.",
+            },
+          },
+        ],
       };
     case "F4_L3":
       return {
-        body: "Use the Flow-Grid idea of push and path difficulty before turning it into Ohm's law and graph interpretation.",
+        body: "Resistance work should connect push, path difficulty, and proportional current change instead of leaving Ohm's law as a disconnected divide rule.",
         worked_example: {
-          prompt: "An ohmic resistor has 12 V across it and a current of 3 A. Find its resistance, then say what happens to the current if the same voltage acts on 6 ohms instead.",
+          prompt: "An ohmic resistor has 12 V across it and a current of 3 A. Find its resistance, then find the current if the same resistor is connected to 18 V instead.",
           steps: [
             "Use resistance = voltage / current for the first part: R = 12 / 3 = 4 ohms.",
-            "Now keep the voltage fixed at 12 V but make the path difficulty 6 ohms instead.",
-            "Use current = voltage / resistance: I = 12 / 6 = 2 A.",
-            "The current falls because the same push is trying to drive charge through a harder route.",
+            "Now keep the same ohmic resistor, so the resistance stays 4 ohms.",
+            "Use current = voltage / resistance at 18 V: I = 18 / 4 = 4.5 A.",
+            "Because the resistor is ohmic, current stays proportional to voltage, so the larger push gives the larger current.",
           ],
-          answer: "The first resistor is 4 ohms, and with 6 ohms at the same 12 V the current becomes 2 A.",
+          answer: "The resistance is 4 ohms, and at 18 V the current is 4.5 A.",
+          answer_reason: "For an ohmic component, resistance stays constant, so increasing voltage increases current in direct proportion according to I = V / R.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps I-V graph meaning tied to the calculation story.",
+            worked_example: {
+              prompt: "Two straight I-V graph lines go through the origin. Line A is steeper than Line B. Which line shows the lower resistance?",
+              steps: [
+                "A steeper straight I-V line means more current for each volt.",
+                "More current for the same voltage means the route is easier, not harder.",
+                "So the steeper line has the lower resistance.",
+              ],
+              answer: "The steeper line shows the lower resistance.",
+              answer_reason: "Resistance compares how much current is produced by a given voltage. More current per volt means lower resistance.",
+            },
+          },
+        ],
       };
     case "F4_L4":
       return {
-        body: "Reason from one route first: same current everywhere, but extra series difficulty changes the whole loop and makes the supply push split across the components.",
+        body: "Series-circuit work should move beyond identical-component symmetry, because the real conceptual gain is seeing the same current with unequal voltage sharing.",
         worked_example: {
-          prompt: "A 12 V supply is connected to two identical 3 ohm resistors in series. Find the total resistance, the loop current, and the potential difference across each resistor.",
+          prompt: "A 12 V supply is connected to a 2 ohm resistor and a 4 ohm resistor in series. Find the total resistance, the current in the loop, and the potential difference across each resistor.",
           steps: [
-            "Series resistors add because the route difficulties stack: total resistance = 3 + 3 = 6 ohms.",
+            "Series resistors add because the route difficulties stack along one path: total resistance = 2 + 4 = 6 ohms.",
             "Use the whole-loop relationship to find the current: I = V / R = 12 / 6 = 2 A.",
             "Because it is one route, that 2 A current passes through both resistors.",
-            "Each resistor has V = IR = 2 x 3 = 6 V, so the 12 V supply is shared equally across the identical components.",
+            "Now find the separate voltage drops using V = IR on each resistor: the 2 ohm resistor has 2 x 2 = 4 V across it, and the 4 ohm resistor has 2 x 4 = 8 V across it.",
+            "The larger resistor gets the larger share of the supply voltage even though the same current passes through both components.",
           ],
-          answer: "Total resistance = 6 ohms, current = 2 A everywhere, and each resistor has a 6 V drop.",
+          answer: "Total resistance = 6 ohms, the loop current is 2 A, the 2 ohm resistor has 4 V across it, and the 4 ohm resistor has 8 V across it.",
+          answer_reason: "In a series circuit there is one common current everywhere, but the supply voltage is shared across the components. The larger resistance takes the larger voltage drop.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the break-in-series consequence available as a non-calculation check.",
+            worked_example: {
+              prompt: "What happens to the current in the rest of a series circuit if one lamp breaks and opens the path?",
+              steps: [
+                "A series circuit has only one complete route.",
+                "If one lamp breaks, that route is broken everywhere.",
+                "So the current becomes zero throughout the whole loop.",
+              ],
+              answer: "The current stops everywhere in the circuit.",
+              answer_reason: "A single-route circuit cannot keep current flowing past a break because there is no alternative path.",
+            },
+          },
+        ],
       };
     case "F4_L5":
       return {
-        body: "Begin with the split-route picture: branch voltage stays the same because each branch spans the same two points, while the total current is the sum of the branch currents.",
+        body: "Parallel-circuit work should force branch-by-branch reasoning, because the key lesson is that the same voltage can coexist with different branch currents.",
         worked_example: {
-          prompt: "Two parallel branches carry 0.3 A and 0.5 A from the same supply. Find the total current and explain whether the potential difference across the two branches is the same or different.",
+          prompt: "A 12 V supply is connected to two parallel branches: one branch has 6 ohms resistance and the other has 3 ohms resistance. Find the current in each branch and the total current from the supply.",
           steps: [
-            "Add the branch currents because the total current splits and then recombines: 0.3 A + 0.5 A = 0.8 A.",
-            "Now think about the geometry of the circuit: both branches connect across the same two supply points.",
-            "Because the branches share the same start and finish points, each branch has the same potential difference as the supply.",
-            "Different branch currents can still happen because the branch resistances can differ even while the branch voltage stays the same.",
+            "Begin with the branch voltage rule: each branch spans the same two supply points, so each branch has the full 12 V across it.",
+            "Use I = V / R for the 6 ohm branch: I = 12 / 6 = 2 A.",
+            "Use I = V / R for the 3 ohm branch: I = 12 / 3 = 4 A.",
+            "Now add the branch currents because total current splits and recombines: 2 A + 4 A = 6 A.",
+            "The lower-resistance branch draws the larger current even though both branches have the same voltage.",
           ],
-          answer: "Total current = 0.8 A, and the potential difference across the two branches is the same.",
+          answer: "The branch currents are 2 A and 4 A, and the total current from the supply is 6 A.",
+          answer_reason: "In parallel, each branch has the same potential difference as the supply, but the branch currents can differ because the branch resistances differ. The total source current is the sum of the branch currents.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the effect of adding branches conceptually sharp.",
+            worked_example: {
+              prompt: "What usually happens to the total current from the source when an extra branch is added in parallel?",
+              steps: [
+                "Adding a branch creates another route for charge to move through.",
+                "That makes the overall network easier for current to flow through.",
+                "So the total current from the source usually increases.",
+              ],
+              answer: "The total current usually increases.",
+              answer_reason: "An extra parallel route lowers the overall circuit difficulty, so the source can drive a larger total current.",
+            },
+          },
+        ],
       };
     case "F4_L6":
       return {
-        body: "Keep the circuit story whole: voltage and current set the power, power over time sets the energy transferred, and safety devices respond when the current becomes dangerously large.",
+        body: "Power-and-safety work should combine circuit rate, total transfer, and protective action instead of leaving the fuse idea as a detached sentence after the calculation.",
         worked_example: {
-          prompt: "A device operates at 12 V and 2 A for 15 s. Find its power, find the total electrical energy transferred, and explain why a fuse would be needed if the current became much larger than the safe rating.",
+          prompt: "A heater operates at 12 V and 3 A for 40 s on a circuit protected by a 5 A fuse. Find its power and the total electrical energy transferred, then explain what would happen if a fault caused the current to rise to 8 A.",
           steps: [
-            "Start with power because the question gives voltage and current: P = VI = 12 x 2 = 24 W.",
-            "Now use that rate to find the total transferred energy over time: E = Pt = 24 x 15 = 360 J.",
-            "Keep the safety idea separate but connected: a much larger current would mean more energy transferred each second and more heating in the wires.",
-            "A fuse or breaker protects the circuit by opening the route when the current becomes too large, rather than allowing dangerous heating to continue.",
+            "Start with power because the question gives voltage and current directly: P = VI = 12 x 3 = 36 W.",
+            "Now use that rate to find total electrical energy transferred in 40 s: E = Pt = 36 x 40 = 1440 J.",
+            "Keep the safety part tied to the current rating: the normal 3 A is below the 5 A fuse rating, so the fuse should stay intact in normal operation.",
+            "If a fault raises the current to 8 A, that is above the fuse rating, so the fuse should melt and break the circuit to stop dangerous overheating.",
           ],
-          answer: "Power = 24 W, total electrical energy transferred = 360 J, and the fuse protects by cutting off dangerously large current.",
+          answer: "Power = 36 W, total electrical energy transferred = 1440 J, and an 8 A fault current would blow the 5 A fuse and cut off the circuit.",
+          answer_reason: "Power tells how much electrical energy is transferred each second, total energy adds time into the story, and a fuse is a safety device that opens the circuit when current exceeds its safe rating.",
         },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the power-current relationship visible at fixed voltage.",
+            worked_example: {
+              prompt: "Two devices run from the same 12 V supply. Device A draws 1 A and Device B draws 4 A. Which has the greater power?",
+              steps: [
+                "At fixed voltage, compare P = VI for both devices.",
+                "Device A has P = 12 x 1 = 12 W, while Device B has P = 12 x 4 = 48 W.",
+                "So the larger current at the same voltage means the larger power.",
+              ],
+              answer: "Device B has the greater power.",
+              answer_reason: "When voltage is fixed, the device drawing more current transfers more electrical energy each second.",
+            },
+          },
+        ],
       };
     case "M2_L1":
       return {
