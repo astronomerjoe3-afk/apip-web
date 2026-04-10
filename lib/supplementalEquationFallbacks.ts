@@ -750,6 +750,118 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
 };
 
+const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  A1_L1: [
+    {
+      standardFormula: "q = n e",
+      meaning: "Particle charge is an integer multiple of the elementary charge.",
+      conditions: "Use when turning a charge tag into the physical charge of a particle.",
+      unitsText: "C or e",
+      constants: "Use e = 1.60 x 10^-19 C.",
+    },
+    {
+      standardFormula: "Q_total = sum(individual particle charges)",
+      meaning: "A system charge is found by adding the charge tags of the particles present.",
+      conditions: "Use when comparing the total charge of a particle set or event side.",
+      unitsText: "e or C",
+    },
+  ],
+  A1_L2: [
+    {
+      standardFormula: "Q_hadron = sum(quark charges)",
+      meaning: "The net charge of a hadron comes from adding the charges of its constituent quarks or antiquarks.",
+      conditions: "Use when checking whether a proposed quark bundle matches the named hadron.",
+      unitsText: "e",
+    },
+    {
+      standardFormula: "baryon -> qqq ; meson -> q qbar",
+      meaning: "Quark packing distinguishes the two main hadron subclasses.",
+      conditions: "Use when classifying a hadron by structure rather than by size or charge alone.",
+      unitsText: "classification rule",
+    },
+  ],
+  A1_L3: [
+    {
+      standardFormula: "E = h f",
+      meaning: "Photon energy depends on Planck's constant and frequency.",
+      conditions: "Use for photon-energy reasoning in pair production or annihilation chains.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "E = h c / lambda",
+      meaning: "Photon energy can also be found from wavelength instead of frequency.",
+      conditions: "Use when pair-production or annihilation work is phrased in wavelength terms.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "E_gamma >= 2 m c^2",
+      meaning: "A photon needs at least the combined rest energy of the created pair.",
+      conditions: "Use for threshold reasoning in pair production to one particle-antiparticle pair.",
+      unitsText: "J or eV",
+    },
+  ],
+  A1_L4: [
+    {
+      standardFormula: "particle identity changes -> weak interaction clue",
+      meaning: "A particle-changing event points to the weak interaction rather than to a simple binding story.",
+      conditions: "Use when classifying beta-decay-style or flavor-changing particle events.",
+      unitsText: "classification rule",
+    },
+    {
+      standardFormula: "nuclear or hadron binding without particle change -> strong interaction clue",
+      meaning: "Binding quarks or nucleons together is a strong-interaction signature in this lesson's model.",
+      conditions: "Use when separating binding events from particle-changing events.",
+      unitsText: "classification rule",
+    },
+  ],
+  A1_L5: [
+    {
+      standardFormula: "sum(charge)_before = sum(charge)_after",
+      meaning: "Charge conservation requires the total charge to balance across the event.",
+      conditions: "Use for particle reactions, decays, and collision events.",
+      unitsText: "e or C",
+    },
+    {
+      standardFormula: "sum(baryon number)_before = sum(baryon number)_after",
+      meaning: "Baryon number conservation must balance across the event.",
+      conditions: "Use for particle reactions, decays, and collision events.",
+      unitsText: "no unit",
+    },
+    {
+      standardFormula: "sum(lepton number)_before = sum(lepton number)_after",
+      meaning: "Lepton number conservation must balance across the event.",
+      conditions: "Use for particle reactions, decays, and collision events.",
+      unitsText: "no unit",
+    },
+  ],
+  A1_L6: [
+    {
+      standardFormula: "sum(charge)_before = sum(charge)_after",
+      meaning: "Particle-event analysis starts by checking that total charge balances.",
+      conditions: "Use when screening a proposed decay, collision, or reaction channel.",
+      unitsText: "e or C",
+    },
+    {
+      standardFormula: "sum(baryon number)_before = sum(baryon number)_after",
+      meaning: "A full event analysis should still check baryon number, not just electric charge.",
+      conditions: "Use when screening a proposed decay, collision, or reaction channel.",
+      unitsText: "no unit",
+    },
+    {
+      standardFormula: "sum(lepton number)_before = sum(lepton number)_after",
+      meaning: "Lepton-number balance helps identify missing neutrinos or impossible channels.",
+      conditions: "Use when screening a proposed decay, collision, or reaction channel.",
+      unitsText: "no unit",
+    },
+    {
+      standardFormula: "sum(energy)_before = sum(energy)_after",
+      meaning: "Total energy must balance across the full particle event.",
+      conditions: "Use when interpreting products, thresholds, and missing-energy clues.",
+      unitsText: "J or eV",
+    },
+  ],
+};
+
 const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A11_L1: [
     {
@@ -841,6 +953,9 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 };
 
 export function supplementalEquationFallbacksForLesson(code: string): FormulaFallbackEntry[] {
+  if (A1_FORMULA_OVERRIDES[code]) {
+    return A1_FORMULA_OVERRIDES[code];
+  }
   if (A11_FORMULA_OVERRIDES[code]) {
     return A11_FORMULA_OVERRIDES[code];
   }

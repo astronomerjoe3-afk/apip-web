@@ -12173,6 +12173,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A1_")) {
+    switch (code) {
+      case "A1_L1":
+        return {
+          body: "The first lesson should make the learner separate particle family, role, and charge tag in one move instead of treating every subatomic object as one generic 'particle'.",
+          worked_example: {
+            prompt: "A board lists four objects: a photon with charge 0e, an electron with charge -1e, a proton with charge +1e, and a neutron with charge 0e. Sort them into radiation messenger, lepton, and nucleons. Then find the total charge of one proton, one electron, and one neutron together.",
+            steps: [
+              "Classify by role and family first: photons are radiation messengers, electrons are leptons, and protons plus neutrons are nucleons.",
+              "Keep 'nucleon' separate from 'lepton' because nucleons are composite nucleus particles while the electron is a solo lepton.",
+              "Then add the charge tags for proton, electron, and neutron: +1e + (-1e) + 0e.",
+            ],
+            answer: "Photon: radiation messenger. Electron: lepton. Proton and neutron: nucleons. The total charge of one proton, one electron, and one neutron is 0e.",
+            answer_reason: "The photon carries radiation rather than matter, the electron is a lepton, and the proton plus neutron belong to the nucleon family. Their charge tags cancel because +1e and -1e sum to zero while the neutron is neutral.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps charge tags and particle families distinct so learners do not classify particles by charge alone.",
+              worked_example: {
+                prompt: "Why can a photon and a neutron both have charge 0e but still belong in different categories?",
+                steps: [
+                  "Start with the shared fact that both are neutral.",
+                  "Then separate category by role and structure, not by charge alone.",
+                  "Use photon as radiation messenger and neutron as nucleon to explain the difference.",
+                ],
+                answer: "They have the same charge tag, but a photon is a radiation messenger while a neutron is a nucleon, so charge alone does not determine the family.",
+                answer_reason: "Charge is only one label. The photon is not a matter particle in the same sense as the neutron, and the neutron belongs to the nucleus-building nucleon family while the photon does not.",
+              },
+            },
+          ],
+        };
+      case "A1_L2":
+        return {
+          body: "Hadron work should use quark packing and charge bookkeeping together, so the learner classifies by structure and then checks that the resulting particle identity is consistent.",
+          worked_example: {
+            prompt: "Classify these three quark bundles and find each net charge: uud, udd, and u anti-d. Use quark charges u = +2/3e, d = -1/3e, and anti-d = +1/3e.",
+            steps: [
+              "Use quark packing first: three-quark bundles are baryons, while a quark-antiquark pair is a meson.",
+              "Then add the quark charges for each bundle.",
+              "Match the structure and charge result to the familiar particle examples.",
+            ],
+            answer: "uud is a baryon with charge +1e, udd is a baryon with charge 0e, and u anti-d is a meson with charge +1e.",
+            answer_reason: "The first two bundles each contain three quarks, so they are baryons. Their charges are +2/3 + 2/3 - 1/3 = +1e and +2/3 - 1/3 - 1/3 = 0e. The u anti-d pair is a meson, and its charge is +2/3 + 1/3 = +1e.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps 'hadron' as the umbrella family rather than the final classifier.",
+              worked_example: {
+                prompt: "Why is saying 'it is a hadron' not enough to finish the classification of a particle made from quarks?",
+                steps: [
+                  "Use hadron as the umbrella family first.",
+                  "Then ask whether the quark packing is three quarks or a quark-antiquark pair.",
+                  "Explain why that second step is what distinguishes baryon from meson.",
+                ],
+                answer: "Because hadron only tells you the particle is quark-built; you still need the quark packing to decide whether it is a baryon or a meson.",
+                answer_reason: "Both baryons and mesons are hadrons. The decisive classifier is the structure: three quarks means baryon, while quark-antiquark pair means meson.",
+              },
+            },
+          ],
+        };
+      case "A1_L3":
+        return {
+          body: "Pair-process work should make threshold energy explicit, so the learner must balance both the energy ledger and the particle ledger rather than treating pair production as free creation.",
+          worked_example: {
+            prompt: "Find the threshold wavelength for a photon to produce an electron-positron pair. Use total threshold energy 1.022 MeV and hc = 1240 eV nm.",
+            steps: [
+              "Use the threshold condition E_gamma = 2 m c^2, given here as 1.022 MeV.",
+              "Convert that threshold energy into eV so it matches the hc value.",
+              "Then use lambda = hc / E to find the threshold wavelength.",
+            ],
+            answer: "The threshold wavelength is about 0.00121 nm, or 1.21 pm.",
+            answer_reason: "Using lambda = 1240 eV nm divided by 1.022 x 10^6 eV gives about 1.21 x 10^-3 nm. Any longer wavelength photon would carry too little energy to create the pair.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps annihilation as the reverse energy ledger rather than as disappearance without accounting.",
+              worked_example: {
+                prompt: "An electron and a positron annihilate from rest. What total photon energy must appear, and why?",
+                steps: [
+                  "Start with the combined rest energy of the electron and positron.",
+                  "Use the same total threshold value from pair production, but now in reverse.",
+                  "State that the outgoing photons must carry that energy to conserve the ledger.",
+                ],
+                answer: "The outgoing photons must carry a total of 1.022 MeV.",
+                answer_reason: "The electron and positron each contribute 0.511 MeV of rest energy. If they annihilate from rest, the photons must carry the full 1.022 MeV total so energy is conserved.",
+              },
+            },
+          ],
+        };
+      case "A1_L4":
+        return {
+          body: "Interaction-family work should force the learner to classify by what the event does, not by one memorized label, so binding stories and particle-change stories stay separate.",
+          worked_example: {
+            prompt: "A neutron changes into a proton, an electron, and an antineutrino. Which interaction is responsible, and what clue makes that interaction the best fit?",
+            steps: [
+              "Look at what changes in the event rather than at the particle list alone.",
+              "Notice that one particle type changes identity, which is different from simple binding or scattering.",
+              "Use that particle-change clue to choose the interaction family.",
+            ],
+            answer: "The event is a weak interaction because it changes particle identity rather than simply binding particles together.",
+            answer_reason: "Weak interactions are associated with particle-changing processes such as beta decay. A strong-interaction story is typically about binding quarks or nucleons, not changing a neutron into a proton plus leptons.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the strong interaction tied to binding rather than to any event involving hadrons.",
+              worked_example: {
+                prompt: "Why is the force holding nucleons together inside a nucleus classified as strong rather than weak?",
+                steps: [
+                  "Start from what the interaction is doing inside the nucleus.",
+                  "Notice that it is maintaining a binding structure rather than changing particle identity.",
+                  "Use that role to choose the interaction family.",
+                ],
+                answer: "It is classified as strong because its job there is binding nucleons together in the nucleus.",
+                answer_reason: "The strong interaction is the binding story for hadrons and nuclei. Weak interaction is the interaction family associated with particle-changing processes, not ordinary nuclear binding.",
+              },
+            },
+          ],
+        };
+      case "A1_L5":
+        return {
+          body: "Conservation work should be challenging enough to require all three ledgers at once, so the learner cannot pass a reaction by checking charge only.",
+          worked_example: {
+            prompt: "A student writes neutron -> proton + electron as a complete decay equation. Use charge, baryon number, and lepton number to decide whether the equation is complete. If not, identify the missing particle.",
+            steps: [
+              "Check charge first to see whether the simplest ledger balances.",
+              "Then check baryon number before and after.",
+              "Finally check lepton number and use that ledger to decide whether an extra particle is required.",
+            ],
+            answer: "The equation is not complete. An electron antineutrino must be included, so the full decay is neutron -> proton + electron + antineutrino.",
+            answer_reason: "Charge balances and baryon number balances, but lepton number does not: the electron contributes +1 lepton number while the neutron and proton contribute 0. Adding an antineutrino with lepton number -1 restores the balance.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps conservation as an event filter instead of a last-minute repair step.",
+              worked_example: {
+                prompt: "Why is charge alone not enough to decide whether a proposed particle event is allowed?",
+                steps: [
+                  "Recognize that more than one conservation ledger can constrain the event.",
+                  "Compare charge balance with baryon and lepton balance.",
+                  "Explain why an event can pass one ledger and still fail another.",
+                ],
+                answer: "Because an event can conserve charge but still violate baryon number or lepton number.",
+                answer_reason: "Charge is only one part of the bookkeeping. A proposed reaction that looks fine by charge can still be impossible if it breaks baryon-number or lepton-number conservation.",
+              },
+            },
+          ],
+        };
+      case "A1_L6":
+        return {
+          body: "The final lesson should combine classification, interaction clues, and conservation in one event analysis, so the learner has to justify the interpretation rather than guess from one striking product.",
+          worked_example: {
+            prompt: "Analyze the event neutron -> proton + electron + antineutrino. Classify the products by family, identify the interaction, and verify the charge, baryon-number, and lepton-number ledgers.",
+            steps: [
+              "Classify the proton as a nucleon, the electron as a lepton, and the antineutrino as an antiparticle partner in the lepton family.",
+              "Use the particle-change clue to identify the interaction family.",
+              "Then check charge, baryon number, and lepton number before and after the event.",
+            ],
+            answer: "The products are a nucleon, a lepton, and an antineutrino; the event is a weak interaction, and the charge, baryon-number, and lepton-number ledgers all balance.",
+            answer_reason: "The neutron-to-proton change marks the event as weak interaction. Charge balances because 0 becomes +1 + (-1) + 0. Baryon number balances because 1 becomes 1 + 0 + 0. Lepton number balances because 0 becomes 0 + 1 + (-1).",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the full event-analysis habit stronger than single-clue guessing.",
+              worked_example: {
+                prompt: "Why is it stronger to identify a particle event by combining family, interaction clue, and conservation evidence instead of using only one product in the final state?",
+                steps: [
+                  "Notice that one product can fit several incomplete stories on its own.",
+                  "Use particle family to narrow the event, interaction clue to identify the process type, and conservation to test whether the full story is allowed.",
+                  "Explain why those checks together are safer than one-product guessing.",
+                ],
+                answer: "Because the combined test is more reliable: particle family, interaction clue, and conservation evidence together can confirm a full event story in a way that one dramatic product alone cannot.",
+                answer_reason: "One product can be misleading on its own. The stronger interpretation is the one that classifies the particles correctly, matches the right interaction clue, and still satisfies the conservation ledger.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
