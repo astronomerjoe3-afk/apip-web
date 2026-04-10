@@ -12439,6 +12439,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M14_")) {
+    switch (code) {
+      case "M14_L1":
+        return {
+          body: "The opening astronomy lesson should force classification by physical light source rather than apparent brightness, because bright-looking planets are the quickest route into a bad definition of a star.",
+          worked_example: {
+            prompt: "Object A shines because fusion in its core produces energy. Object B looks bright in the night sky but only by reflecting light from a nearby star. Which object is the star, and why is brightness alone not enough to decide?",
+            steps: [
+              "Classify by the source of the light first, not by how bright the object appears.",
+              "Object A is self-luminous because fusion inside it is producing the light.",
+              "Object B can still look bright, but it is not a star if it is only reflecting incoming starlight.",
+            ],
+            answer: "Object A is the star. Brightness alone is not enough because planets can appear bright by reflecting starlight without producing their own light.",
+            answer_reason: "The defining clue for a star is self-produced light powered by fusion. Apparent brightness depends on other factors as well, including reflection and distance.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up stops learners from confusing 'visible' with 'self-luminous'.",
+              worked_example: {
+                prompt: "Why is 'it shines in the sky, so it must be a star' a weak argument?",
+                steps: [
+                  "Notice that many objects are visible in the sky without making their own light.",
+                  "Ask where the light is coming from before naming the object.",
+                  "Conclude that visibility alone is too weak; you need to know whether the object emits light or reflects it.",
+                ],
+                answer: "It is weak because an object can shine by reflected light. To classify it as a star, you must know that it produces its own light.",
+                answer_reason: "Astronomy classification becomes stronger when it starts with energy source rather than appearance.",
+              },
+            },
+          ],
+        };
+      case "M14_L2":
+        return {
+          body: "Stellar-lifecycle examples should keep the early shared stages and later mass-dependent branching visible together, otherwise the topic turns into one flat memorized list of stage names.",
+          worked_example: {
+            prompt: "Star X has initial mass 1.0 solar mass and Star Y has initial mass 20 solar masses. After the main-sequence stage, which one can go supernova, and what compact remnant is more plausible for Star Y?",
+            steps: [
+              "Separate the stars by mass before listing any later stages.",
+              "Recognize that the lower-mass star follows the red-giant to white-dwarf route rather than the supernova route.",
+              "Recognize that the high-mass star can become a red supergiant and then go supernova, leaving a neutron star or, if massive enough, a black hole.",
+            ],
+            answer: "Star Y can go supernova. A plausible compact remnant for Star Y is a neutron star or, if the remaining core is massive enough, a black hole.",
+            answer_reason: "The key controlling variable is stellar mass. Many stars share early stages, but the later route branches because high-mass stars evolve and end differently from lower-mass stars.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that learners do not give every star the high-mass ending.",
+              worked_example: {
+                prompt: "Why is 'all stars eventually explode as supernovae' incorrect?",
+                steps: [
+                  "Start by separating lower-mass stars from higher-mass stars.",
+                  "Recall that lower-mass stars do not reach the supernova pathway.",
+                  "Conclude that supernova is only a high-mass ending, not a universal fate for every star.",
+                ],
+                answer: "It is incorrect because only sufficiently high-mass stars go supernova. Lower-mass stars end more gently, for example as white dwarfs.",
+                answer_reason: "The stellar life cycle is a branched story controlled by mass, not one identical script for every star.",
+              },
+            },
+          ],
+        };
+      case "M14_L3":
+        return {
+          body: "Scale examples should make learners classify star, Solar System, galaxy, and universe with real hierarchy logic instead of letting those four terms blur into one vague idea of 'space'.",
+          worked_example: {
+            prompt: "A student says, 'The Milky Way is the same thing as our Solar System, just written bigger.' State what the Milky Way actually is and where the Solar System fits inside it.",
+            steps: [
+              "Define the Milky Way at the correct scale first: it is a galaxy containing many stars, gas, and dust held together by gravity.",
+              "Locate our Solar System within that larger structure.",
+              "State the hierarchy explicitly: one star system belongs inside one galaxy, and the galaxy is still only one part of the universe.",
+            ],
+            answer: "The Milky Way is our home galaxy, a gravitationally bound system of many stars, gas, and dust. The Solar System is one small star system inside it.",
+            answer_reason: "The strongest scale answer separates the levels cleanly: star, Solar System, galaxy, then universe. A galaxy is not just one star system drawn larger.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps gravity in the galaxy definition.",
+              worked_example: {
+                prompt: "Why does a galaxy count as one physical system rather than as a random scatter of unrelated stars?",
+                steps: [
+                  "Ask what makes the stars, gas, and dust behave as one system.",
+                  "Use the idea of gravity binding many objects together over enormous scales.",
+                  "Conclude that a galaxy is one system because gravity holds its contents together.",
+                ],
+                answer: "A galaxy counts as one physical system because gravity binds its stars, gas, and dust together.",
+                answer_reason: "Without the gravitational-binding idea, the galaxy definition loses the physical reason it counts as one object at all.",
+              },
+            },
+          ],
+        };
+      case "M14_L4":
+        return {
+          body: "Distance-unit work should be quantitative enough to stop 'light-year = time' errors and should explain why astronomy needs a much larger unit than kilometers for interstellar scales.",
+          worked_example: {
+            prompt: "A star is 4.2 light-years away. Explain what this means, then estimate the distance in meters using c = 3.0 x 10^8 m/s and 1 year = 3.15 x 10^7 s.",
+            steps: [
+              "Start with the unit meaning: a light-year is the distance light travels in one year, so this is a distance, not a time.",
+              "Find one light-year in meters: 3.0 x 10^8 x 3.15 x 10^7 = 9.45 x 10^15 m.",
+              "Multiply by 4.2: distance = 4.2 x 9.45 x 10^15 about 3.97 x 10^16 m, which can be quoted as about 4.0 x 10^16 m.",
+            ],
+            answer: "The star is at a distance such that light takes 4.2 years to reach us. The distance is about 4.0 x 10^16 m.",
+            answer_reason: "The name of the unit includes year because the definition uses one year's travel time for light, but the quantity itself answers a distance question.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up targets the unit-type confusion directly.",
+              worked_example: {
+                prompt: "Why is 'a light-year is a long time' incorrect even though the unit contains the word year?",
+                steps: [
+                  "Look at the definition rather than the word alone.",
+                  "Notice that the definition multiplies speed by time to produce a distance.",
+                  "Conclude that the unit is a distance unit built from one year of light travel, not a duration unit.",
+                ],
+                answer: "It is incorrect because a light-year is the distance light travels in one year, so it is a distance unit, not a time unit.",
+                answer_reason: "The word year appears inside the definition, but the finished quantity still measures how far, not how long.",
+              },
+            },
+          ],
+        };
+      case "M14_L5":
+        return {
+          body: "Redshift examples should move beyond the slogan 'farther means redder' and make learners use wavelength evidence quantitatively while still explaining the physical stretching story.",
+          worked_example: {
+            prompt: "A spectral line from a distant galaxy is emitted at 500 nm but observed at 540 nm. Calculate the redshift z and state what the positive redshift suggests about the galaxy.",
+            steps: [
+              "Use the redshift formula: z = (lambda_observed - lambda_emitted) / lambda_emitted.",
+              "Substitute the values: z = (540 - 500) / 500 = 40 / 500 = 0.080.",
+              "Interpret the sign and wavelength change: the observed wavelength is longer, so the light is redshifted, which suggests the galaxy is receding as the universe expands.",
+            ],
+            answer: "The redshift is z = 0.080, and the positive redshift suggests the galaxy is moving away from us in the expanding-universe picture.",
+            answer_reason: "Redshift is measured from wavelength stretch, not from color words alone. A longer observed wavelength is the evidence that the light has been shifted toward the red end.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the stretch explanation tied to the bigger cosmology story.",
+              worked_example: {
+                prompt: "Why do farther galaxies usually show larger redshifts than nearby galaxies?",
+                steps: [
+                  "Start from the idea that the light has traveled across more expanding space.",
+                  "Notice that more expansion during the journey means more wavelength stretching.",
+                  "Conclude that farther galaxies usually show larger redshifts because their light has had more expansion history to stretch it.",
+                ],
+                answer: "Farther galaxies usually show larger redshifts because their light has traveled through more expanding space and so has been stretched more.",
+                answer_reason: "The distance-redshift trend is not just a color observation. It is one of the key pattern clues supporting cosmic expansion.",
+              },
+            },
+          ],
+        };
+      case "M14_L6":
+        return {
+          body: "The final cosmology lesson should tie the Big Bang model to evidence and quantitative recession reasoning, so it does not collapse into a vague story about 'everything exploded once'.",
+          worked_example: {
+            prompt: "Use Hubble's law with H0 = 70 km s^-1 Mpc^-1 to estimate the recession speed of a galaxy 200 Mpc away. Then state how this supports the expanding-universe model.",
+            steps: [
+              "Use Hubble's law directly: v = H0 d.",
+              "Substitute the values: v = 70 x 200 = 14,000 km/s.",
+              "Interpret the result with the distance-redshift trend: more distant galaxies recede faster, which is the large-scale pattern expected in an expanding universe.",
+            ],
+            answer: "The recession speed is about 14,000 km/s. This supports the expanding-universe model because Hubble's law shows that more distant galaxies recede faster.",
+            answer_reason: "The Big Bang model is supported by evidence of expansion, especially the large-scale relation between galaxy distance and recession speed or redshift. It is not just an unsupported origin story.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the Big Bang from being described as an ordinary explosion into pre-existing empty space.",
+              worked_example: {
+                prompt: "Why is 'the Big Bang was just an explosion from one point into empty space' a weak description?",
+                steps: [
+                  "Compare an ordinary explosion with the modern cosmology model.",
+                  "Notice that the Big Bang model describes space itself expanding from an early hot dense state.",
+                  "Conclude that the model is better described as expansion of space rather than debris flying out through pre-existing emptiness from a central point.",
+                ],
+                answer: "It is weak because the Big Bang model describes the expansion of space from an early hot dense state, not a simple explosion from one point into empty space.",
+                answer_reason: "Using expanding-space language keeps the model aligned with the evidence and avoids importing the wrong everyday picture.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A4_")) {
     switch (code) {
       case "A4_L1":
