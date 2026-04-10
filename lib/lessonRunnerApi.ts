@@ -11359,6 +11359,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M8_")) {
+    switch (code) {
+      case "M8_L1":
+        return {
+          body: "Mirror work should force Guide-Line-first geometry and keep the ghost image tied to backward extensions rather than to imaginary light behind the mirror.",
+          worked_example: {
+            prompt: "A light route strikes a plane mirror at 32 deg to the mirror surface. The object is 18 cm in front of the mirror. Find the angle of incidence, the angle of reflection, and the image distance behind the mirror.",
+            steps: [
+              "Convert the surface angle into the Guide Line or normal angle first: 90 - 32 = 58 deg.",
+              "Apply the mirror rule to that Guide Line angle: angle of reflection = angle of incidence = 58 deg.",
+              "Use the plane-mirror distance rule separately: the image is the same distance behind the mirror as the object is in front, so 18 cm behind.",
+            ],
+            answer: "The angle of incidence is 58 deg, the angle of reflection is 58 deg, and the image is 18 cm behind the mirror.",
+            answer_reason: "Mirror angles are measured from the Guide Line, not the surface. The plane-mirror image is virtual, but its position is still fixed by equal object and image distances.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps screenability tied to real-versus-virtual status instead of to where the dashed lines happen to meet.",
+              worked_example: {
+                prompt: "Why can a screen not catch the image behind a plane mirror even though the dashed backward extensions meet there?",
+                steps: [
+                  "Separate the real reflected routes in front of the mirror from the dashed backward extensions behind it.",
+                  "Notice that only the extensions meet behind the mirror; no real light travels there.",
+                  "Conclude that a screen cannot catch the image because the image point is virtual rather than a true crossing of real routes.",
+                ],
+                answer: "A screen cannot catch the mirror image because only backward extensions meet behind the mirror; no real reflected routes cross there.",
+                answer_reason: "Virtual images are geometry positions found from extensions, not real energy-carrying crossings that a screen can intercept.",
+              },
+            },
+          ],
+        };
+      case "M8_L2":
+        return {
+          body: "Refraction examples should connect the cause, the geometry, and the source-fixed frequency in one chain instead of leaving Snell's law as a disconnected calculator step.",
+          worked_example: {
+            prompt: "A light route travels from air into glass with refractive index 1.50 at 40 deg to the Guide Line. Find the refracted angle. Then state whether the route bends toward or away from the Guide Line and whether the frequency changes.",
+            steps: [
+              "Use Snell's law with n1 sin(theta1) = n2 sin(theta2): 1.00 sin(40 deg) = 1.50 sin(theta2).",
+              "Solve for the refracted angle: sin(theta2) = sin(40 deg) / 1.50 about 0.429, so theta2 is about 25.4 deg.",
+              "Interpret the geometry and cause together: the angle becomes smaller, so the route bends toward the Guide Line in the slower medium, while the source still keeps the frequency fixed.",
+            ],
+            answer: "The refracted angle is about 25.4 deg. The route bends toward the Guide Line, and the frequency does not change.",
+            answer_reason: "Entering the higher-index medium makes the route turn closer to the Guide Line because light slows down there. The boundary changes speed and wavelength, not the source frequency.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps lens language physically honest by treating a lens as two boundary events rather than a middle pull.",
+              worked_example: {
+                prompt: "Why is 'the middle of the lens pulls the route inward' a weak explanation for a converging lens?",
+                steps: [
+                  "Start from what actually causes bending in optics: a speed change at a boundary between media.",
+                  "Notice that a lens has an entry surface and an exit surface, so the route is bent at two boundaries.",
+                  "Replace the weak claim with the safer one: the lens effect comes from two refractions, not from the middle of the glass pulling light.",
+                ],
+                answer: "It is weak because a lens bends light at its surfaces through refraction; the middle of the lens does not pull the route inward on its own.",
+                answer_reason: "Refraction is a boundary-speed-change process. Treating the lens as a two-surface system keeps the cause story accurate.",
+              },
+            },
+          ],
+        };
+      case "M8_L3":
+        return {
+          body: "Converging-lens work should be demanding enough to combine the thin-lens equation, magnification, and image classification instead of stopping at one distance calculation.",
+          worked_example: {
+            prompt: "A converging lens has focal length 12 cm. An object is placed 30 cm from the lens and is 4.5 cm tall. Find the image distance, the magnification, the image height, and the image classification.",
+            steps: [
+              "Use the thin-lens equation: 1/f = 1/u + 1/v, so 1/12 = 1/30 + 1/v.",
+              "Solve for the image distance: 1/v = 1/12 - 1/30 = 3/60 = 1/20, so v = 20 cm.",
+              "Use magnification = v/u = 20/30 about 0.67, then find the image height: 0.67 x 4.5 about 3.0 cm. Because the image is formed by actual crossing routes on the far side, it is real and inverted.",
+            ],
+            answer: "The image distance is 20 cm, the magnification is about 0.67, and the image height is about 3.0 cm. The image is real, inverted, and smaller than the object.",
+            answer_reason: "A converging lens with the object beyond the focal length forms a real image on the far side. The thin-lens equation gives the location, and the distance ratio gives the size change.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks whether the learner knows when the selected-ray method stops giving a real screen image.",
+              worked_example: {
+                prompt: "If the same object is moved inside the focal length of a converging lens, why can the image no longer be caught on a screen?",
+                steps: [
+                  "Track what the actual refracted routes do after the lens when the object is inside the focal length.",
+                  "Notice that they no longer meet on the far side; only their backward extensions meet on the object side.",
+                  "Conclude that the image becomes virtual, so a screen cannot catch it.",
+                ],
+                answer: "The image cannot be caught on a screen because the refracted routes do not actually meet after the lens; only backward extensions meet, so the image is virtual.",
+                answer_reason: "Screenability depends on a real crossing of actual routes, not on where dashed extensions appear to meet.",
+              },
+            },
+          ],
+        };
+      case "M8_L4":
+        return {
+          body: "Diverging-lens work should preserve the virtual-image sign story and still make magnification quantitative, so the lesson does not collapse into pure diagram-labeling.",
+          worked_example: {
+            prompt: "Using the lesson sign convention, a diverging lens has focal length -12 cm and an object is 18 cm from the lens. Find the image distance, the magnification, and the image height for a 3.0 cm object.",
+            steps: [
+              "Use the thin-lens equation with the sign convention: 1/f = 1/u + 1/v, so 1/(-12) = 1/18 + 1/v.",
+              "Solve for the image distance: 1/v = -1/12 - 1/18 = -5/36, so v = -7.2 cm.",
+              "Use the magnitude of the magnification from the distance ratio: |v|/u = 7.2/18 = 0.40, so the image height is 0.40 x 3.0 = 1.2 cm. The negative image distance means the image is virtual on the object side.",
+            ],
+            answer: "The image distance is -7.2 cm, the magnification magnitude is 0.40, and the image height is 1.2 cm. The image is virtual, upright, and smaller.",
+            answer_reason: "A diverging lens produces a virtual image on the object side, which is why the lesson sign convention gives a negative image distance. The size reduction follows from the distance ratio.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the learner from treating dashed construction lines as optional decoration.",
+              worked_example: {
+                prompt: "Why are dashed backward extensions essential in a diverging-lens sketch?",
+                steps: [
+                  "Start from the real routes after the lens and notice that they spread apart instead of meeting.",
+                  "Use the backward extensions to locate the apparent source point on the object side.",
+                  "Conclude that the extensions are what reveal the virtual image position when there is no true crossing of real routes.",
+                ],
+                answer: "The dashed backward extensions are essential because the real routes spread apart; only the extensions show the virtual image position on the object side.",
+                answer_reason: "Without the backward extensions, the sketch would show spreading rays but no recoverable ghost-image location.",
+              },
+            },
+          ],
+        };
+      case "M8_L5":
+        return {
+          body: "Critical-angle work should be taught as an escape-limit story with threshold calculation and case judgment together, not as a memorized slogan about total internal reflection.",
+          worked_example: {
+            prompt: "Light travels from glass of refractive index 1.50 into air. Find the critical angle. Then decide what happens for incident angles of 37 deg and 50 deg inside the glass.",
+            steps: [
+              "Use the critical-angle relation for light leaving the denser medium: sin(c) = 1 / n = 1 / 1.50 about 0.667.",
+              "Find the critical angle: c about 41.8 deg.",
+              "Compare each case with the threshold: 37 deg is below the critical angle so refraction still occurs, while 50 deg is above it so total internal reflection occurs.",
+            ],
+            answer: "The critical angle is about 41.8 deg. At 37 deg the light refracts out; at 50 deg it undergoes total internal reflection.",
+            answer_reason: "The critical angle is the last escape case. Above that limit, no refracted route can emerge into the less dense medium.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up protects the direction condition, which is easy to forget when learners focus only on the size of the angle.",
+              worked_example: {
+                prompt: "Why can light not show total internal reflection when it travels from air into glass, however large the incident angle in air becomes?",
+                steps: [
+                  "State the direction condition first: total internal reflection needs light to be traveling from the optically denser medium toward the less dense medium.",
+                  "Notice that air to glass reverses that direction requirement.",
+                  "Conclude that the route may refract strongly, but it cannot meet the full conditions for total internal reflection.",
+                ],
+                answer: "It cannot happen because the light is traveling into the denser medium, not out of it. Total internal reflection needs the opposite medium direction as well as a large enough angle.",
+                answer_reason: "The angle threshold matters only after the denser-to-less-dense travel condition has already been satisfied.",
+              },
+            },
+          ],
+        };
+      case "M8_L6":
+        return {
+          body: "The synthesis lesson should make line roles explicit before magnification and screenability are discussed, so real and virtual image language stays anchored to the route sketch itself.",
+          worked_example: {
+            prompt: "A 2.0 cm object forms a 6.0 cm image on a screen using a converging lens. The object is 10 cm from the lens. Find the magnification and image distance, then state what feature in the route sketch proves the image is real.",
+            steps: [
+              "Use the size ratio first: magnification = image height / object height = 6.0 / 2.0 = 3.0.",
+              "Use the distance form of magnification next: image distance / object distance = 3.0, so the image distance is 3.0 x 10 = 30 cm.",
+              "Link the number to the sketch: a real image is proved by actual refracted routes crossing at the image point, which is why a screen can catch it.",
+            ],
+            answer: "The magnification is 3.0, the image distance is 30 cm, and the image is real because actual refracted routes meet at the image point.",
+            answer_reason: "Magnification can be read as either a size ratio or a distance ratio. A screenable image must come from a true crossing of real routes, not from dashed backward extensions.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the learner honest about what each line in a mixed sketch is doing.",
+              worked_example: {
+                prompt: "In a route sketch, why is it risky to treat the Guide Line, the real route, and the dashed extension as if they were the same kind of line?",
+                steps: [
+                  "Give each line a role first: the Guide Line is a reference, the real route shows where light travels, and the dashed extension is a construction aid.",
+                  "Notice that mixing those roles can create false claims about where light actually goes or where a screen could work.",
+                  "Conclude that line-role discipline is what makes a ray diagram trustworthy rather than decorative.",
+                ],
+                answer: "It is risky because the three lines do different jobs. The Guide Line is a reference, the real route carries light, and the dashed extension only helps locate a virtual image.",
+                answer_reason: "Optics sketches only stay reliable when each line is interpreted by role before the image is named or measured.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A4_")) {
     switch (code) {
       case "A4_L1":
