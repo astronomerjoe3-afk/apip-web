@@ -10302,7 +10302,40 @@ function physicsFirstWorkedExampleReason(lesson: UnknownRecord): string {
 }
 
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
-  const code = lessonCode(lesson);
+  const sourceCode = lessonCode(lesson);
+  if (sourceCode === "M9_L6") {
+    return {
+      body: "The circuit-comparison lesson should keep one-route and branch-route behavior side by side, so learners decide the network type before mixing current and voltage rules.",
+      worked_example: {
+        prompt: "Circuit A has two 3.0 ohm lamps in series on a 12 V supply. Circuit B has the same two 3.0 ohm lamps in parallel on a 12 V supply. Compare the total current from the source and state the main current-voltage rule for each circuit.",
+        steps: [
+          "Start with Circuit A, the series case: the total resistance is 3.0 + 3.0 = 6.0 ohms, so the source current is I = 12 / 6.0 = 2.0 A.",
+          "Keep the series rule visible: in a one-route circuit, that same 2.0 A passes through both lamps while the supply voltage is shared between them.",
+          "Now switch to Circuit B, the parallel case: each 3.0 ohm branch gets the full 12 V, so each branch current is 12 / 3.0 = 4.0 A.",
+          "Add the branch currents to get the source current: 4.0 A + 4.0 A = 8.0 A, then summarize the difference in rules instead of only quoting the numbers.",
+        ],
+        answer: "Circuit A draws 2.0 A from the source, while Circuit B draws 8.0 A. In series, the current is the same through each component and the voltage is shared. In parallel, the voltage is the same across each branch and the branch currents add to give the source current.",
+        answer_reason: "The route shape changes the whole electrical behavior. One-path circuits keep one common current, while branch circuits keep a common branch voltage and allow the source current to split and recombine.",
+      },
+      extra_examples: [
+        {
+          body: "This follow-up keeps the network-structure decision active before any formula is chosen.",
+          worked_example: {
+            prompt: "Why is it risky to say 'all circuits just share the current the same way' before checking whether the network is series or parallel?",
+            steps: [
+              "Identify the route type first: a series circuit has one uninterrupted path, while a parallel circuit has multiple branches.",
+              "Notice that the current rule depends on that structure: same current fits the one-path case, but split-and-recombine fits the branch case.",
+              "Conclude that using one current rule for every network hides the real effect of the circuit layout.",
+            ],
+            answer: "It is risky because current behavior depends on the route structure. Series circuits keep one common current, but parallel circuits split the current between branches.",
+            answer_reason: "Current rules are network rules, not decorative labels. The learner has to decide the circuit structure before choosing the correct current-voltage story.",
+          },
+        },
+      ],
+    };
+  }
+
+  const code = /^M9_L[1-5]$/.test(sourceCode) ? sourceCode.replace(/^M9_/, "M10_") : sourceCode;
   if (code.startsWith("M3_")) {
     switch (code) {
       case "M3_L1":
@@ -14600,8 +14633,9 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
-  const contractExamples = asList(asRecord(lesson.authoring_contract).worked_examples);
-  const topLevelExamples = asList(lesson.worked_examples);
+  const preferLocalWorkedExamples = sourceCode.startsWith("M9_");
+  const contractExamples = preferLocalWorkedExamples ? [] : asList(asRecord(lesson.authoring_contract).worked_examples);
+  const topLevelExamples = preferLocalWorkedExamples ? [] : asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
     .map(asRecord)
     .map((entry) => ({
