@@ -12259,6 +12259,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M13_")) {
+    switch (code) {
+      case "M13_L1":
+        return {
+          body: "The first radioactivity lesson should force students to keep element identity, mass number, and charge state on separate ledgers instead of letting all three collapse into one vague atom label.",
+          worked_example: {
+            prompt: "An ion has atomic number 17, mass number 37, and charge 1-. Find the numbers of protons, neutrons, and electrons, then state what would and would not change if one more electron were added.",
+            steps: [
+              "Use atomic number first: Z = 17 means 17 protons.",
+              "Use mass number next: neutrons = 37 - 17 = 20.",
+              "Use the 1- charge to infer electrons: there must be one more electron than protons, so electrons = 18. If one more electron were added, the charge would change but the element identity would not because the proton count stays 17.",
+            ],
+            answer: "The ion has 17 protons, 20 neutrons, and 18 electrons. Adding one more electron would change the charge state but not the element.",
+            answer_reason: "Proton number fixes the element, mass number counts protons plus neutrons, and electron number controls ion charge. Those three roles must stay separate for the atomic model to stay clear.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that learners do not confuse changing electrons with changing the nucleus.",
+              worked_example: {
+                prompt: "Why is 'this atom became a different element because it lost an electron' a weak statement?",
+                steps: [
+                  "Start from what decides the element identity: proton number in the nucleus.",
+                  "Notice that losing an electron changes only the outer electron count.",
+                  "Conclude that the particle becomes a positive ion, but it remains the same element because the proton number is unchanged.",
+                ],
+                answer: "It is weak because losing an electron changes the charge, not the element. The element changes only if the proton number changes.",
+                answer_reason: "Element identity is a nuclear property, not an electron-count label.",
+              },
+            },
+          ],
+        };
+      case "M13_L2":
+        return {
+          body: "Isotope work should be comparative and disciplined, with proton number settling the identity question before neutron number and stability are discussed.",
+          worked_example: {
+            prompt: "Two nuclei are chlorine-35 and chlorine-37. Find the neutron number in each nucleus and explain why they are isotopes of the same element rather than different elements.",
+            steps: [
+              "Use chlorine's atomic number first: chlorine has Z = 17, so each nucleus has 17 protons.",
+              "Find the neutron numbers by subtraction: 35 - 17 = 18 neutrons and 37 - 17 = 20 neutrons.",
+              "State the identity rule clearly: same proton number means same element, while different neutron numbers make them different isotopes.",
+            ],
+            answer: "Chlorine-35 has 18 neutrons and chlorine-37 has 20 neutrons. They are isotopes of the same element because both have 17 protons.",
+            answer_reason: "Mass number can change while the element stays the same. The decisive identity test is proton number, not total nucleon count.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps isotope stability separate from isotope identity.",
+              worked_example: {
+                prompt: "Why is 'the heavier isotope must be a different element because it is less stable' a weak conclusion?",
+                steps: [
+                  "Separate identity from stability before judging the statement.",
+                  "Use proton number to decide whether two nuclei are the same element.",
+                  "Conclude that stability can differ between isotopes, but a change in stability alone does not change the element family.",
+                ],
+                answer: "It is weak because element identity depends on proton number, while stability is a separate property that can differ between isotopes of the same element.",
+                answer_reason: "The lesson is stronger when identity and stability are not allowed to answer each other's questions.",
+              },
+            },
+          ],
+        };
+      case "M13_L3":
+        return {
+          body: "Decay-type examples should be rigorous enough to track both the emitted radiation and the nuclear bookkeeping, while also keeping shielding and penetration distinct from count change.",
+          worked_example: {
+            prompt: "A nucleus of radium-226 undergoes alpha decay. Write the daughter nucleus, then state which changes more between alpha and gamma: the shielding needed or the nuclear counts.",
+            steps: [
+              "Apply the alpha rule first: mass number falls by 4 and atomic number falls by 2.",
+              "From radium-226 with Z = 88, the daughter has A = 222 and Z = 86, which is radon-222.",
+              "Then compare alpha with gamma conceptually: alpha changes both nuclear counts, while gamma changes neither count but needs much stronger shielding.",
+            ],
+            answer: "The daughter nucleus is radon-222. Between alpha and gamma, the shielding requirement changes far more, while alpha changes the nuclear counts and gamma does not.",
+            answer_reason: "Alpha, beta, and gamma must stay separate in two ways at once: what leaves the nucleus and what happens to A and Z. Shielding comparisons are important, but they do not replace the bookkeeping.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that beta-minus is not confused with electron loss from the atom shell.",
+              worked_example: {
+                prompt: "Why does beta-minus decay increase atomic number by 1 even though the nucleus emits an electron?",
+                steps: [
+                  "Start inside the nucleus, not in the electron shell.",
+                  "Recall that in beta-minus decay, a neutron changes into a proton and an electron is emitted.",
+                  "Conclude that the new proton raises the atomic number by 1 while the mass number stays the same.",
+                ],
+                answer: "Beta-minus decay increases atomic number because a neutron turns into a proton, so the nucleus gains one proton even though an electron is emitted.",
+                answer_reason: "Beta-minus is a nuclear conversion process, not the loss of an ordinary orbital electron.",
+              },
+            },
+          ],
+        };
+      case "M13_L4":
+        return {
+          body: "Half-life work should be genuinely quantitative and should also guard against the common mistake of subtracting a fixed amount instead of halving what remains.",
+          worked_example: {
+            prompt: "A radioactive sample starts at 640 counts per minute and has a half-life of 6.0 hours. What count rate remains after 18 hours, and what fraction of the original sample is still undecayed?",
+            steps: [
+              "Count the number of half-lives first: 18 / 6.0 = 3 half-lives.",
+              "Halve what remains at each interval: 640 -> 320 -> 160 -> 80 counts per minute.",
+              "Express the remaining fraction after three halvings as (1/2)^3 = 1/8.",
+            ],
+            answer: "After 18 hours, the count rate is 80 counts per minute and 1/8 of the original sample remains undecayed.",
+            answer_reason: "Half-life is a multiplicative halving rule. Each equal interval cuts the amount that remains in half, so the number removed each round gets smaller as the sample shrinks.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up targets the fixed-subtraction misconception directly.",
+              worked_example: {
+                prompt: "Why is 'a 200-count sample with a half-life of 5 minutes loses 100 counts every 5 minutes forever' incorrect?",
+                steps: [
+                  "Recall that half-life halves what remains, not the same fixed number each time.",
+                  "After the first 5 minutes, 200 becomes 100, but after the next 5 minutes, 100 becomes 50, not 0.",
+                  "Conclude that radioactive decay follows repeated halving, so the loss per interval shrinks as the sample shrinks.",
+                ],
+                answer: "It is incorrect because half-life means halving what remains, so the amount lost each interval gets smaller rather than staying fixed at 100 counts.",
+                answer_reason: "The whole decay curve depends on repeated multiplication by one half, not repeated subtraction of a constant amount.",
+              },
+            },
+          ],
+        };
+      case "M13_L5":
+        return {
+          body: "Detector work should make background subtraction unavoidable, because raw readings alone are too weak to support clean claims about a source.",
+          worked_example: {
+            prompt: "A detector reads 86 counts per second near a sample. The background count rate is 14 counts per second. Later the detector reads 62 counts per second near a second sample in the same background. Find the corrected source count rates and decide which sample is more active.",
+            steps: [
+              "Correct the first reading by subtracting background: 86 - 14 = 72 counts per second.",
+              "Correct the second reading the same way: 62 - 14 = 48 counts per second.",
+              "Compare the corrected source rates, not the raw readings, to decide which sample is more active.",
+            ],
+            answer: "The corrected source count rates are 72 counts per second and 48 counts per second, so the first sample is more active.",
+            answer_reason: "Background radiation is part of every measurement, so the fair comparison quantity is the corrected source count rate. Raw detector readings mix source plus environment together.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps non-zero background from being misread as contamination proof.",
+              worked_example: {
+                prompt: "Why does a detector still clicking in an empty room not prove there is a hidden source nearby?",
+                steps: [
+                  "Start from the idea that background radiation is a normal environmental presence.",
+                  "Notice that the detector responds to that background even with no added source present.",
+                  "Conclude that a non-zero reading alone is not enough evidence; you need comparison against a measured background and a change beyond it.",
+                ],
+                answer: "It does not prove a hidden source because background radiation already gives a non-zero reading. You must compare against background before concluding anything extra is present.",
+                answer_reason: "A detector is sensitive to normal surroundings as well as to an added radioactive source.",
+              },
+            },
+          ],
+        };
+      case "M13_L6":
+        return {
+          body: "Balancing nuclear equations should be a full ledger exercise, with the decay type, daughter nucleus, and both conservation rules all visible at once.",
+          worked_example: {
+            prompt: "Complete the beta-minus decay equation for carbon-14: 14/6 C -> ? + beta-. Identify the daughter nucleus and check both balancing rules.",
+            steps: [
+              "Use the beta-minus rule: mass number stays the same while atomic number increases by 1.",
+              "So the daughter must have A = 14 and Z = 7, which is nitrogen-14.",
+              "Check the ledger: mass number 14 is balanced on both sides, and atomic number 6 on the left becomes 7 plus -1 on the right, so atomic number is also conserved.",
+            ],
+            answer: "The daughter nucleus is nitrogen-14, so the equation is 14/6 C -> 14/7 N + beta-.",
+            answer_reason: "Balancing a nuclear equation means conserving both mass number and atomic number. Beta-minus decay changes the element because the atomic number rises by 1.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner distinguish the unchanged-count gamma case from alpha and beta-minus.",
+              worked_example: {
+                prompt: "What is the strongest quick check that a proposed decay process is gamma emission rather than alpha or beta-minus?",
+                steps: [
+                  "Look first at whether the nucleus keeps the same mass number and atomic number.",
+                  "If both A and Z are unchanged, the event is consistent with gamma emission.",
+                  "If either count changes, it cannot be pure gamma emission.",
+                ],
+                answer: "The strongest quick check is that both mass number and atomic number stay unchanged. If either count changes, it is not pure gamma emission.",
+                answer_reason: "Gamma emission changes the nuclear energy state without changing the nuclear composition ledger.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A4_")) {
     switch (code) {
       case "A4_L1":
