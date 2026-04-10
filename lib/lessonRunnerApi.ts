@@ -11101,6 +11101,264 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M7_")) {
+    switch (code) {
+      case "M7_L1":
+        return {
+          body: "Wave-introduction work should separate front travel from medium motion and make the learner compute the pattern speed without inventing bulk transport of matter.",
+          worked_example: {
+            prompt: "A ripple crest crosses 1.8 m of water in 0.60 s while one cork on the surface only bobs up and down through a total vertical range of 5.0 cm. Find the wave speed and state what actually travels across the tank.",
+            steps: [
+              "Use the front travel first: wave speed = distance / time = 1.8 / 0.60 = 3.0 m/s.",
+              "Treat the cork motion separately from the crest motion. The cork only oscillates locally about its equilibrium position; it does not drift 1.8 m with the ripple.",
+              "Conclude that the disturbance pattern and its energy transfer move across the tank, while the water itself mainly moves up and down locally.",
+            ],
+            answer: "The wave speed is 3.0 m/s, and the traveling disturbance moves across the tank while the cork only oscillates locally.",
+            answer_reason: "Wave speed belongs to the pattern crossing distance, not to one particle of the medium traveling the whole route. The cork's small vertical motion is local oscillation, not bulk transport across the tank.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the same idea but switches to a stadium-wave setting so the learner has to protect the pattern-medium distinction in a new context.",
+              worked_example: {
+                prompt: "In a stadium wave, the crest moves across 24 seats in 3.0 s while each spectator only stands up and sits down once in place. What is the crest speed in seats per second, and what is the main conceptual mistake in saying that 'the people travel around the stadium'?",
+                steps: [
+                  "Calculate the pattern speed from the crest travel: 24 / 3.0 = 8 seats/s.",
+                  "Keep the spectators' motion local: each person rises and falls where they are seated.",
+                  "Reject the medium-travels claim because the pattern propagates while the people do not move around the stadium with it.",
+                ],
+                answer: "The crest speed is 8 seats/s, and the mistake is confusing the traveling pattern with the local motion of the people.",
+                answer_reason: "A wave can propagate through a medium even when each part of the medium only oscillates around one position.",
+              },
+            },
+            {
+              body: "The last example tests whether the learner can separate amplitude from travel distance instead of treating bigger oscillation as faster propagation.",
+              worked_example: {
+                prompt: "Two ropes carry pulses that each cross 4.0 m in 2.0 s. Rope A has amplitude 2 cm and Rope B has amplitude 5 cm. Which rope has the greater wave speed?",
+                steps: [
+                  "Use the travel data for each pulse: speed = 4.0 / 2.0 = 2.0 m/s on both ropes.",
+                  "Notice that the amplitudes are different, but amplitude is not part of the speed calculation here.",
+                  "Conclude that the ropes have the same wave speed even though one oscillates through a larger displacement.",
+                ],
+                answer: "Neither is faster; both waves travel at 2.0 m/s.",
+                answer_reason: "The propagation speed comes from crossing distance and time. Amplitude changes how large the local oscillation is, not the speed implied by the given travel data.",
+              },
+            },
+          ],
+        };
+      case "M7_L2":
+        return {
+          body: "Wave-type examples should force a direction comparison instead of letting the learner guess from how the picture happens to be drawn on the page.",
+          worked_example: {
+            prompt: "Wave A travels east while markers on the medium move only north-south. Wave B also travels east, but the medium oscillates east-west in compressions and rarefactions. Classify each wave and state the rule you used.",
+            steps: [
+              "Compare local motion with propagation for Wave A: north-south motion is perpendicular to eastward travel.",
+              "Compare local motion with propagation for Wave B: east-west motion is parallel to eastward travel.",
+              "Name the rule explicitly: transverse means local motion perpendicular to travel, while longitudinal means local motion parallel to travel.",
+            ],
+            answer: "Wave A is transverse and Wave B is longitudinal. The classification comes from comparing local motion with the direction the wave travels.",
+            answer_reason: "The page orientation is not the deciding feature. The safe test is the angle between the medium's oscillation and the propagation direction.",
+          },
+          extra_examples: [
+            {
+              body: "This second example checks whether the learner can resist a tempting page-based description.",
+              worked_example: {
+                prompt: "A pulse is drawn as an up-down shape on the page, but the pulse actually travels vertically upward while the medium moves left-right. Is the wave transverse or longitudinal?",
+                steps: [
+                  "Ignore the sketch orientation and compare the actual travel direction with the local motion direction.",
+                  "The travel is upward while the medium motion is left-right, so the two directions are perpendicular.",
+                  "Classify the wave as transverse because the local oscillation is at right angles to the propagation.",
+                ],
+                answer: "It is transverse.",
+                answer_reason: "Wave type is set by the perpendicular-versus-parallel comparison, not by whether the drawn shape looks vertical or horizontal.",
+              },
+            },
+            {
+              body: "The last example makes the learner describe why a weak definition fails, not just memorize the correct label.",
+              worked_example: {
+                prompt: "Why is the sentence 'a transverse wave is one that goes up and down' incomplete?",
+                steps: [
+                  "Test the sentence against the real definition of transverse motion.",
+                  "Notice that 'up and down' only describes motion on one page and says nothing about the wave's travel direction.",
+                  "Replace it with the proper rule: a transverse wave has local motion perpendicular to the direction of propagation.",
+                ],
+                answer: "It is incomplete because it ignores the travel direction. A transverse wave is defined by local motion being perpendicular to propagation, not by simply going up and down on a page.",
+                answer_reason: "Without the propagation direction, the statement can misclassify waves that are drawn in different orientations.",
+              },
+            },
+          ],
+        };
+      case "M7_L3":
+        return {
+          body: "Wave-equation work should be quantitative enough to make students compare products, control units, and recognize that different frequency-wavelength pairs can still give the same speed.",
+          worked_example: {
+            prompt: "Wave P has frequency 12 Hz and wavelength 18 cm. Wave Q has frequency 9.0 Hz and wavelength 24 cm. Find both wave speeds and decide whether one wave is faster.",
+            steps: [
+              "Convert the wavelengths into metres first: 18 cm = 0.18 m and 24 cm = 0.24 m.",
+              "Use v = f lambda for each wave: Wave P gives 12 x 0.18 = 2.16 m/s, and Wave Q gives 9.0 x 0.24 = 2.16 m/s.",
+              "Compare the products, not the frequency or wavelength alone, before deciding about speed.",
+            ],
+            answer: "Both waves travel at 2.16 m/s, so neither is faster.",
+            answer_reason: "Wave speed depends on the product of frequency and wavelength. A higher frequency can be exactly balanced by a shorter wavelength, giving the same speed.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up reverses the formula so the learner still has to keep the units clean while solving for wavelength.",
+              worked_example: {
+                prompt: "A wave travels at 3.6 m/s and has frequency 15 Hz. What is its wavelength?",
+                steps: [
+                  "Start with v = f lambda.",
+                  "Rearrange to lambda = v / f.",
+                  "Substitute the values: lambda = 3.6 / 15 = 0.24 m.",
+                ],
+                answer: "The wavelength is 0.24 m.",
+                answer_reason: "Once speed and frequency are known, the wavelength is found by dividing the speed by the launch rate.",
+              },
+            },
+            {
+              body: "The last example protects students from making a one-variable claim when the product is what matters.",
+              worked_example: {
+                prompt: "A student says, 'Wave R must be faster because its frequency is larger.' Why is that not enough information?",
+                steps: [
+                  "Start from the full relation v = f lambda.",
+                  "Notice that frequency alone does not determine the product unless the wavelength is also known or controlled.",
+                  "State that a larger frequency could still give the same speed or a smaller speed if the wavelength changes appropriately.",
+                ],
+                answer: "Frequency alone is not enough because wave speed depends on both frequency and wavelength together.",
+                answer_reason: "A speed judgment requires the full product in v = f lambda, not just one factor from the product.",
+              },
+            },
+          ],
+        };
+      case "M7_L4":
+        return {
+          body: "Reflection examples should force correct angle measurement from the normal and make the learner convert from surface angles before applying the equal-angle rule.",
+          worked_example: {
+            prompt: "An incident wave travels toward a straight barrier making 25 deg to the barrier surface. What is the angle of incidence, and what angle will the reflected wave make to the barrier surface?",
+            steps: [
+              "Convert the given surface angle to the normal angle first: the normal is 90 deg to the surface, so the angle of incidence is 90 - 25 = 65 deg.",
+              "Apply the reflection law using the normal, not the surface: angle of reflection = 65 deg.",
+              "Convert back to a surface angle if asked: 90 - 65 = 25 deg to the barrier surface.",
+            ],
+            answer: "The angle of incidence is 65 deg, and the reflected wave makes 25 deg to the barrier surface.",
+            answer_reason: "Reflection keeps equal angles to the normal. Surface angles can be used only after they are converted from or back to the normal reference.",
+          },
+          extra_examples: [
+            {
+              body: "This second example checks the special head-on case, where equal angles still apply but both are zero.",
+              worked_example: {
+                prompt: "A wave strikes a barrier straight along the normal. What are the incident and reflected angles, and what path does the reflected wave follow?",
+                steps: [
+                  "Recognize that traveling along the normal means the incident angle is 0 deg.",
+                  "Apply the equal-angle rule so the reflected angle is also 0 deg.",
+                  "Conclude that the wave retraces its path straight back along the normal.",
+                ],
+                answer: "Both angles are 0 deg, and the reflected wave travels straight back along the same line.",
+                answer_reason: "The equal-angle rule still applies in the head-on case; zero equals zero.",
+              },
+            },
+            {
+              body: "The last example keeps reflection distinct from refraction instead of letting every boundary be described with one vague bending story.",
+              worked_example: {
+                prompt: "Why is 'the wave changes speed and therefore reflects' a weak explanation for ordinary reflection at a rigid wall?",
+                steps: [
+                  "Identify the physical process first: reflection is a boundary bounce from the barrier.",
+                  "Notice that the statement imports a new-medium speed-change story, which belongs to refraction instead.",
+                  "State the safer explanation: the barrier redirects the wave so the angle to the normal out matches the angle to the normal in.",
+                ],
+                answer: "It is weak because reflection is a boundary bounce, not a new-medium speed-change event. The correct geometry is equal angles to the normal.",
+                answer_reason: "Speed-change reasoning explains refraction at a medium boundary, while equal-angle bounce geometry explains reflection at a rigid barrier.",
+              },
+            },
+          ],
+        };
+      case "M7_L5":
+        return {
+          body: "Refraction work should connect source-fixed frequency, changed speed, changed wavelength, and bend direction in one chain instead of treating them as separate facts to memorize.",
+          worked_example: {
+            prompt: "Water waves of frequency 5.0 Hz travel at 1.2 m/s in deep water and then enter shallow water where their speed falls to 0.75 m/s. Find the wavelength before and after the boundary, then state whether the waves bend toward or away from the normal.",
+            steps: [
+              "Use lambda = v / f before the boundary: lambda_1 = 1.2 / 5.0 = 0.24 m.",
+              "Keep the frequency fixed because the source still launches 5.0 fronts each second, then find the new wavelength: lambda_2 = 0.75 / 5.0 = 0.15 m.",
+              "Use the slower-medium rule: entering a slower region makes the wave bend toward the normal.",
+            ],
+            answer: "The wavelength changes from 0.24 m to 0.15 m, and the waves bend toward the normal.",
+            answer_reason: "The source sets the frequency, so the speed drop must be matched by a shorter wavelength through v = f lambda. A slower medium produces bending toward the normal.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner handle the opposite case, where the new medium is faster.",
+              worked_example: {
+                prompt: "A wave keeps frequency 8.0 Hz while crossing into a region where its speed rises from 0.60 m/s to 0.96 m/s. What happens to the wavelength, and which way does the wave bend?",
+                steps: [
+                  "Keep the frequency fixed at 8.0 Hz because the source has not changed.",
+                  "Calculate the old and new wavelengths: 0.60 / 8.0 = 0.075 m and 0.96 / 8.0 = 0.12 m.",
+                  "Use the faster-medium rule: the wave bends away from the normal.",
+                ],
+                answer: "The wavelength increases from 0.075 m to 0.12 m, and the wave bends away from the normal.",
+                answer_reason: "At fixed frequency, a higher speed requires a larger wavelength. Faster-medium entry gives bending away from the normal.",
+              },
+            },
+            {
+              body: "The last example checks whether the learner can reject a common but incorrect cause story.",
+              worked_example: {
+                prompt: "A student says, 'The frequency changes at the boundary, so the wave bends.' What should be corrected first?",
+                steps: [
+                  "Identify what belongs to the source and what belongs to the medium.",
+                  "Keep the source frequency fixed across the boundary.",
+                  "Replace the claim with the proper chain: the new medium changes speed, the wavelength changes with it, and the front turns because one side of the wavefront enters the new speed region first.",
+                ],
+                answer: "The first correction is that the frequency does not change at the boundary; the medium changes the speed, so the wavelength changes instead and the front bends.",
+                answer_reason: "Refraction is driven by a speed change in the new medium, not by the source suddenly changing its launch rate.",
+              },
+            },
+          ],
+        };
+      case "M7_L6":
+        return {
+          body: "Diffraction examples should make students compare gap size with wavelength explicitly, because 'narrow' and 'wide' are only meaningful relative to the wave being sent through the opening.",
+          worked_example: {
+            prompt: "Two water waves meet the same 0.30 m gap. Wave P has wavelength 0.25 m and Wave Q has wavelength 0.05 m. Which wave diffracts more strongly, and why?",
+            steps: [
+              "Compare each wavelength with the fixed gap size rather than calling the gap narrow or wide by itself.",
+              "For Wave P, 0.30 m is comparable to 0.25 m, so strong spreading is expected.",
+              "For Wave Q, 0.30 m is much larger than 0.05 m, so the spreading is much weaker.",
+            ],
+            answer: "Wave P diffracts more strongly because its wavelength is much closer to the size of the gap.",
+            answer_reason: "Diffraction is strongest when the opening size is comparable to the wavelength. The same gap can produce different amounts of spreading for different wavelengths.",
+          },
+          extra_examples: [
+            {
+              body: "This second example holds the wavelength fixed so the learner has to compare openings instead of waves.",
+              worked_example: {
+                prompt: "A wave of wavelength 0.12 m passes first through a 0.60 m gap and then through a 0.10 m gap. Through which gap is diffraction more noticeable?",
+                steps: [
+                  "Keep the wavelength fixed at 0.12 m.",
+                  "Compare the two opening sizes with that wavelength: 0.60 m is much larger, while 0.10 m is very close to the wavelength scale.",
+                  "Choose the 0.10 m gap as the one with stronger spreading.",
+                ],
+                answer: "Diffraction is more noticeable at the 0.10 m gap.",
+                answer_reason: "The 0.10 m opening is comparable to the 0.12 m wavelength, while the 0.60 m opening is much larger than the wavelength and therefore gives weaker spreading.",
+              },
+            },
+            {
+              body: "The last example prevents students from treating diffraction as a sound-only trick.",
+              worked_example: {
+                prompt: "Why is 'only sound waves diffract' a weak statement?",
+                steps: [
+                  "Start from the definition of diffraction as wave spreading at gaps or edges.",
+                  "Notice that the definition refers to wave behavior in general, not to one particular type of wave.",
+                  "State that all waves can diffract, although how noticeable it is depends on the wavelength-gap comparison.",
+                ],
+                answer: "It is weak because diffraction is a general wave behavior. All waves can diffract when they meet gaps or edges; the amount just depends on the wavelength comparison.",
+                answer_reason: "Sound often makes diffraction easy to notice, but the underlying spreading rule belongs to waves generally rather than to sound alone.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A4_")) {
     switch (code) {
       case "A4_L1":
@@ -16020,7 +16278,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410h";
+  const assetVersion = "20260410d";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
