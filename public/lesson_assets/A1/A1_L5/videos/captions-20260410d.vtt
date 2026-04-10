@@ -1,0 +1,521 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.348
+Lesson 5 is where particle physics becomes more selective.
+
+2
+00:00:04.348 --> 00:00:08.696
+Up to this point, a student can often describe particles, pairs, and interactions in words.
+
+3
+00:00:08.696 --> 00:00:13.044
+But event questions now demand a harder filter.
+
+4
+00:00:13.044 --> 00:00:17.392
+A proposed decay or reaction is not accepted because it sounds familiar.
+
+5
+00:00:17.392 --> 00:00:21.739
+It is accepted only if the conserved quantities balance.
+
+6
+00:00:21.739 --> 00:00:26.087
+Charge must balance.
+
+7
+00:00:26.087 --> 00:00:30.435
+Baryon number must balance.
+
+8
+00:00:30.435 --> 00:00:34.783
+Lepton number must balance.
+
+9
+00:00:34.783 --> 00:00:39.131
+These are not three optional checks.
+
+10
+00:00:39.131 --> 00:00:43.479
+They are a combined screening system.
+
+11
+00:00:43.479 --> 00:00:47.827
+One broken total is enough to reject the event.
+
+12
+00:00:47.827 --> 00:00:52.175
+That makes this lesson richer than a simple formula lesson.
+
+13
+00:00:52.175 --> 00:00:56.523
+It teaches students how to distrust a tempting story until the bookkeeping agrees.
+
+14
+00:00:56.523 --> 00:01:00.871
+The worked example is much easier when that audit mindset is already in place.
+
+15
+00:01:00.871 --> 00:01:05.218
+Keep this takeaway in view: A particle event is only acceptable when every conservation gate agrees at the same time.
+
+16
+00:01:05.218 --> 00:01:09.566
+Gate one means charge.
+
+17
+00:01:09.566 --> 00:01:13.914
+Total charge before and after must match exactly.
+
+18
+00:01:13.914 --> 00:01:18.262
+Gate two means baryon number.
+
+19
+00:01:18.262 --> 00:01:22.610
+Matter-balance stories must preserve baryon count.
+
+20
+00:01:22.610 --> 00:01:30.678
+This conservation diagram is useful because it forces the learner to slow down in the right way.
+
+21
+00:01:30.678 --> 00:01:38.746
+Instead of jumping straight from the particle names to a conclusion, the student has to build a before column and an after column, then attach the correct labels to each participant.
+
+22
+00:01:38.746 --> 00:01:46.813
+Charge is usually the first check students remember, but the diagram makes it obvious that charge is only one part of the audit.
+
+23
+00:01:46.813 --> 00:01:54.881
+Baryon number protects the matter story, and lepton number becomes especially important whenever beta decay, electrons, positrons, neutrinos, or antineutrinos are involved.
+
+24
+00:01:54.881 --> 00:02:02.949
+The power of the board is not just that it shows three rules.
+
+25
+00:02:02.949 --> 00:02:11.017
+It shows how the three rules work together on one event.
+
+26
+00:02:11.017 --> 00:02:19.084
+Keep this takeaway in view: A visible ledger makes conservation feel like a rigorous audit rather than a vague memory rule.
+
+27
+00:02:19.084 --> 00:02:27.152
+Before-and-after frame: Always write the full event before doing any conservation arithmetic.
+
+28
+00:02:27.152 --> 00:02:35.220
+Triple audit: Charge, baryon number, and lepton number must all be checked, not just the easiest one.
+
+29
+00:02:35.220 --> 00:02:39.344
+Imagine a vault protected by three separate locks.
+
+30
+00:02:39.344 --> 00:02:43.468
+One key opens the charge lock.
+
+31
+00:02:43.468 --> 00:02:47.592
+Another opens the baryon-number lock.
+
+32
+00:02:47.592 --> 00:02:51.716
+A third opens the lepton-number lock.
+
+33
+00:02:51.716 --> 00:02:55.841
+Turning only one or two locks is not enough.
+
+34
+00:02:55.841 --> 00:02:59.965
+The vault still stays closed.
+
+35
+00:02:59.965 --> 00:03:04.089
+Conservation questions behave in the same way.
+
+36
+00:03:04.089 --> 00:03:08.213
+Students sometimes feel encouraged when charge balances and then stop too early.
+
+37
+00:03:08.213 --> 00:03:12.337
+This analogy breaks that habit.
+
+38
+00:03:12.337 --> 00:03:16.461
+A reaction is not partly allowed.
+
+39
+00:03:16.461 --> 00:03:20.585
+It is either allowed by all the locks together or blocked by the first lock that fails.
+
+40
+00:03:20.585 --> 00:03:24.709
+The analogy matters because it changes the student's attitude from hopeful guessing to disciplined checking.
+
+41
+00:03:24.709 --> 00:03:28.834
+Keep this takeaway in view: Conservation is a multi-lock decision: every lock has to open before the event is accepted.
+
+42
+00:03:28.834 --> 00:03:32.958
+First lock means charge.
+
+43
+00:03:32.958 --> 00:03:37.082
+Useful and quick, but never the only condition.
+
+44
+00:03:37.082 --> 00:03:41.206
+Second lock means baryon number.
+
+45
+00:03:41.206 --> 00:03:45.330
+This prevents impossible matter-accounting stories from slipping through.
+
+46
+00:03:45.330 --> 00:03:50.430
+The formal core of this lesson is simple to state and important to apply carefully.
+
+47
+00:03:50.430 --> 00:03:55.530
+The total charge before must equal the total charge after.
+
+48
+00:03:55.530 --> 00:04:00.630
+The total baryon number before must equal the total baryon number after.
+
+49
+00:04:00.630 --> 00:04:05.730
+The total lepton number before must equal the total lepton number after.
+
+50
+00:04:05.730 --> 00:04:10.830
+On paper, these three statements look compact.
+
+51
+00:04:10.830 --> 00:04:15.930
+In real questions, they become a workflow.
+
+52
+00:04:15.930 --> 00:04:21.030
+Students list the particles, assign the correct numbers, total the columns, and compare.
+
+53
+00:04:21.030 --> 00:04:26.130
+What makes the lesson richer is that different reactions fail for different reasons.
+
+54
+00:04:26.130 --> 00:04:31.230
+Some fail immediately on charge.
+
+55
+00:04:31.230 --> 00:04:36.330
+Others pass charge but fail on baryon number.
+
+56
+00:04:36.330 --> 00:04:41.430
+Others survive both of those and fail only when lepton number is checked.
+
+57
+00:04:41.430 --> 00:04:46.530
+That is why the formulas must be treated as a package.
+
+58
+00:04:46.530 --> 00:04:51.630
+Keep this takeaway in view: The three conservation equations are strongest when they are used as one coordinated audit.
+
+59
+00:04:51.630 --> 00:04:56.730
+Fast first pass: Charge is often the quickest screen, but it is only the first gate.
+
+60
+00:04:56.730 --> 00:05:01.830
+Matter audit: Baryon number keeps track of baryons through decays and collisions.
+
+61
+00:05:01.830 --> 00:05:06.930
+sum(charge)_before = sum(charge)_after.
+
+62
+00:05:06.930 --> 00:05:12.030
+sum(baryon number)_before = sum(baryon number)_after.
+
+63
+00:05:12.030 --> 00:05:17.130
+A reaction is accepted only when all three ledgers balance together.
+
+64
+00:05:17.130 --> 00:05:22.482
+A strong habit for this lesson is a four-step routine.
+
+65
+00:05:22.482 --> 00:05:27.834
+First, freeze the event by writing the complete before-and-after particle list.
+
+66
+00:05:27.834 --> 00:05:33.186
+Second, label every relevant particle with charge, baryon number, and lepton number.
+
+67
+00:05:33.186 --> 00:05:38.539
+Third, total each side carefully.
+
+68
+00:05:38.539 --> 00:05:43.891
+Fourth, decide immediately whether the channel survives or fails.
+
+69
+00:05:43.891 --> 00:05:49.243
+This routine matters because it protects the learner from being seduced by familiar words like neutron, proton, electron, or neutrino.
+
+70
+00:05:49.243 --> 00:05:54.595
+The particle names are not enough.
+
+71
+00:05:54.595 --> 00:05:59.947
+The labels have to be carried all the way into the totals.
+
+72
+00:05:59.947 --> 00:06:05.299
+Once students adopt this fixed pattern, event screening becomes calmer, faster, and more accurate.
+
+73
+00:06:05.299 --> 00:06:10.651
+Keep this takeaway in view: Conservation questions become much more manageable when every event is processed through the same fixed audit routine.
+
+74
+00:06:10.651 --> 00:06:16.004
+Step 1 means freeze the event.
+
+75
+00:06:16.004 --> 00:06:21.356
+Write the full reaction before trying to judge it.
+
+76
+00:06:21.356 --> 00:06:26.708
+Step 2 means label every particle.
+
+77
+00:06:26.708 --> 00:06:32.060
+Attach charge, baryon number, and lepton number to every relevant participant.
+
+78
+00:06:32.060 --> 00:06:38.911
+This is where particle reactions start to feel genuinely advanced.
+
+79
+00:06:38.911 --> 00:06:45.762
+A channel can look neat at first glance because the charge total balances perfectly, yet the event still fails because baryon number or lepton number does not survive the change.
+
+80
+00:06:45.762 --> 00:06:52.613
+That is why one balanced column is never enough.
+
+81
+00:06:52.613 --> 00:06:59.464
+The learner has to hold three ledgers in view at the same time and reject the reaction the instant one of them breaks.
+
+82
+00:06:59.464 --> 00:07:06.315
+This extra slide matters because it trains the student to stop trusting familiar particle names or elegant-looking products too early.
+
+83
+00:07:06.315 --> 00:07:13.165
+The event only becomes physically acceptable when every bookkeeping gate stays open together.
+
+84
+00:07:13.165 --> 00:07:20.016
+Keep this takeaway in view: A believable-looking reaction is not an allowed reaction until all three conservation ledgers agree.
+
+85
+00:07:20.016 --> 00:07:26.867
+Charge pass means still not enough.
+
+86
+00:07:26.867 --> 00:07:33.718
+A reaction can keep charge balanced and still fail the full screening.
+
+87
+00:07:33.718 --> 00:07:40.569
+Hidden failure means baryon or lepton number.
+
+88
+00:07:40.569 --> 00:07:47.420
+The impossible part is often exposed only after the second or third ledger is checked.
+
+89
+00:07:47.420 --> 00:07:53.871
+A very useful reaction family for this lesson is the beta-style event.
+
+90
+00:07:53.871 --> 00:08:00.322
+The charge story may seem manageable, but the real discipline arrives when leptons enter the event list.
+
+91
+00:08:00.322 --> 00:08:06.772
+If an electron appears, the learner should immediately ask what happened to the lepton ledger as a whole.
+
+92
+00:08:06.772 --> 00:08:13.223
+Was a matching neutrino or antineutrino needed to keep the total consistent?
+
+93
+00:08:13.223 --> 00:08:19.674
+Was a shortcut answer written that sounds familiar but leaves the bookkeeping incomplete?
+
+94
+00:08:19.674 --> 00:08:26.125
+This richer step matters because many particle questions are not lost on the first formula.
+
+95
+00:08:26.125 --> 00:08:32.575
+They are lost when one missing particle is ignored.
+
+96
+00:08:32.575 --> 00:08:39.026
+Writing every participant clearly is what turns conservation from a slogan into a reliable decision tool.
+
+97
+00:08:39.026 --> 00:08:45.477
+Keep this takeaway in view: Whenever leptons appear, the safest move is to write the full event and audit lepton number explicitly.
+
+98
+00:08:45.477 --> 00:08:51.928
+Allowed pattern means all participants written.
+
+99
+00:08:51.928 --> 00:08:58.378
+A channel only survives when every relevant particle needed for the conservation ledger is included.
+
+100
+00:08:58.378 --> 00:09:04.829
+Rejected shortcut means missing lepton balance.
+
+101
+00:09:04.829 --> 00:09:11.280
+A familiar reaction story can still fail if one lepton-side participant has been left out.
+
+102
+00:09:11.280 --> 00:09:15.346
+Run four quick reminders.
+
+103
+00:09:15.346 --> 00:09:19.412
+If charge balances but lepton number fails, is the event allowed?
+
+104
+00:09:19.412 --> 00:09:23.478
+No.
+
+105
+00:09:23.478 --> 00:09:27.544
+If baryon number changes across the event, can a familiar-looking reaction still be rejected?
+
+106
+00:09:27.544 --> 00:09:31.610
+Yes.
+
+107
+00:09:31.610 --> 00:09:35.676
+Should charge be checked alone or with the other ledgers?
+
+108
+00:09:35.676 --> 00:09:39.742
+With the other ledgers.
+
+109
+00:09:39.742 --> 00:09:43.808
+And what is the safest moment to reject a reaction?
+
+110
+00:09:43.808 --> 00:09:47.874
+The instant one conservation rule fails.
+
+111
+00:09:47.874 --> 00:09:51.940
+These checks matter because they turn conservation from a last-minute afterthought into the first serious filter.
+
+112
+00:09:51.940 --> 00:09:56.006
+Keep this takeaway in view: The worked example is ready: the event can now be screened with a disciplined triple-ledger audit.
+
+113
+00:09:56.006 --> 00:10:00.072
+Charge only means not enough.
+
+114
+00:10:00.072 --> 00:10:04.138
+A balanced charge total does not rescue a broken baryon or lepton ledger.
+
+115
+00:10:04.138 --> 00:10:08.204
+Baryon alert means matter bookkeeping.
+
+116
+00:10:08.204 --> 00:10:12.270
+If baryon number changes improperly, the channel is rejected.
+
+117
+00:10:12.270 --> 00:10:17.577
+You are ready for the worked example now.
+
+118
+00:10:17.577 --> 00:10:22.884
+Start by writing the full reaction clearly.
+
+119
+00:10:22.884 --> 00:10:28.191
+Then assign charge, baryon number, and lepton number to each relevant particle on both sides.
+
+120
+00:10:28.191 --> 00:10:33.499
+Total the three ledgers carefully and compare before and after.
+
+121
+00:10:33.499 --> 00:10:38.806
+If one ledger fails, reject the event immediately and say why.
+
+122
+00:10:38.806 --> 00:10:44.113
+If all three survive, then the event has passed the main conservation screen.
+
+123
+00:10:44.113 --> 00:10:49.420
+That is the discipline this lesson is trying to install: do not trust the reaction because it sounds familiar.
+
+124
+00:10:49.420 --> 00:10:54.727
+Trust it only after the bookkeeping agrees.
+
+125
+00:10:54.727 --> 00:11:00.034
+Keep this takeaway in view: The worked example is ready: the conservation lesson now has a full audit routine, not just a list of formulas.
+
+126
+00:11:00.034 --> 00:11:05.341
+Step 1: Build the complete before-and-after event so nothing is hidden.
+
+127
+00:11:05.341 --> 00:11:10.649
+Step 2: Attach every conservation label before you total anything.
+
+128
+00:11:10.649 --> 00:11:15.956
+write the full before-and-after event.
+
+129
+00:11:15.956 --> 00:11:21.263
+assign charge, baryon number, and lepton number to each particle.
+
+130
+00:11:21.263 --> 00:11:26.570
+The safest reaction answers are bookkeeping-first, not intuition-first.
