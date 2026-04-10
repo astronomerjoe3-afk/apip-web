@@ -1863,11 +1863,6 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM4Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesA5Prompt = (ids: string[], prompts: string[]): boolean => {
-    void ids;
-    void prompts;
-    return false;
-  };
   const matchesM7Prompt = (ids: string[], prompts: string[]): boolean =>
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM8Prompt = (ids: string[], prompts: string[]): boolean =>
@@ -3843,444 +3838,10 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isA5ThresholdVsIntensityPrompt = matchesA5Prompt(
-    ["A5L1_D9", "A5L1_C8"],
-    [],
-  );
-
-  if (isA5ThresholdVsIntensityPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["frequency", "high frequency", "photon energy", "energy per photon"],
-        ["threshold", "work function", "unlock toll"],
-        ["brightness", "intensity", "many photons", "more photons"],
-        ["not enough", "cannot eject", "cannot free", "still fail", "fails"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["single photon", "each photon", "one photon"],
-        ["enough energy", "not enough energy"],
-        ["work function", "threshold"],
-      ])
-    );
-  }
-
-  const isA5BeamCountPrompt = matchesA5Prompt(
-    ["A5L1_D10"],
-    [],
-  );
-
-  if (isA5BeamCountPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["photon", "photons", "packets"],
-        ["per second", "arrival rate", "arrive", "arriving"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["intensity", "beam count"],
-        ["number", "count", "rate"],
-        ["photons", "packets"],
-      ])
-    );
-  }
-
-  const isA5ThresholdFrequencyMeaningPrompt = matchesA5Prompt(
-    ["A5L1_C7"],
-    [],
-  );
-
-  if (isA5ThresholdFrequencyMeaningPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["minimum", "lowest"],
-        ["frequency", "photon"],
-        ["enough energy", "work function", "threshold"],
-        ["eject electrons", "photoelectrons", "emit electrons"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "the threshold frequency is the minimum frequency needed to eject electrons",
-        "it is the lowest photon frequency that can overcome the work function",
-      ])
-    );
-  }
-
-  const isA5PhotoelectricAllOrNothingPrompt = matchesA5Prompt(
-    ["A5L1_M9"],
-    [],
-  );
-
-  if (isA5PhotoelectricAllOrNothingPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["one photon", "single photon", "each photon"],
-        ["work function", "threshold", "enough energy"],
-        ["single interaction", "one interaction", "immediate", "all or nothing"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["one photon", "single photon"],
-        ["free", "eject", "emit"],
-        ["electron"],
-        ["enough energy", "work function"],
-      ])
-    );
-  }
-
-  const isA5BrightnessVsElectronEnergyPrompt = matchesA5Prompt(
-    ["A5L1_M10"],
-    [],
-  );
-
-  if (isA5BrightnessVsElectronEnergyPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["brightness", "intensity"],
-        ["more photons", "number emitted", "count", "more electrons", "more events"],
-        ["frequency", "photon energy"],
-        ["kinetic energy", "maximum kinetic energy", "Kmax"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "intensity changes how many electrons are emitted but frequency sets their maximum kinetic energy",
-        "brighter light means more photons, not more energy per photoelectron",
-      ])
-    );
-  }
-
-  const isA5PhotoelectricBookkeepingPrompt = matchesA5Prompt(
-    ["A5L2_D9", "A5L2_D10", "A5L2_M9"],
-    [],
-  );
-
-  if (isA5PhotoelectricBookkeepingPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["photon energy", "hf"],
-        ["work function", "phi", "unlock toll"],
-        ["kinetic energy", "Kmax", "leftover", "kick"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["remaining", "leftover"],
-        ["energy"],
-        ["kinetic energy", "Kmax"],
-        ["photoelectron", "electron"],
-      ])
-    );
-  }
-
-  const isA5KmaxFrequencyPrompt = matchesA5Prompt(
-    ["A5L2_C7"],
-    [],
-  );
-
-  if (isA5KmaxFrequencyPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["higher frequency", "frequency rises", "frequency increases"],
-        ["more energy", "higher photon energy"],
-        ["Kmax", "kinetic energy", "leftover"],
-        ["increases", "rises", "gets larger"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "higher frequency gives more photon energy so Kmax increases",
-        "once the work function is paid, more photon energy leaves more kinetic energy",
-      ])
-    );
-  }
-
-  const isA5IntensityVsKmaxPrompt = matchesA5Prompt(
-    ["A5L2_C8", "A5L2_M10"],
-    [],
-  );
-
-  if (isA5IntensityVsKmaxPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["intensity", "more light", "beam count"],
-        ["more photons", "more events", "more electrons", "count"],
-        ["frequency", "energy per photon"],
-        ["Kmax", "kinetic energy"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["intensity"],
-        ["does not", "doesnt", "not"],
-        ["Kmax", "kinetic energy"],
-        ["fixed frequency", "if frequency is fixed"],
-      ])
-    );
-  }
-
-  const isA5PatternBuildsFromHitsPrompt = matchesA5Prompt(
-    ["A5L3_D9", "A5L3_C7", "A5L3_M9"],
-    [],
-  );
-
-  if (isA5PatternBuildsFromHitsPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["many hits", "many dots", "repeated detections", "many detections"],
-        ["pattern", "distribution", "interference", "probability"],
-        ["single hit", "localized", "dot", "discrete"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["localized", "local", "single hit", "single dot"],
-        ["pattern", "distribution", "wave-like"],
-        ["both", "together", "at once"],
-      ])
-    );
-  }
-
-  const isA5DeBrogliePrompt = matchesA5Prompt(
-    ["A5L3_D10", "A5L3_C8", "A5L3_M10"],
-    [],
-  );
-
-  if (isA5DeBrogliePrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["matter", "particle", "electron"],
-        ["wavelength", "lambda", "de broglie"],
-        ["momentum", "p"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["electron diffraction", "electrons", "diffraction"],
-        ["pattern", "interference", "wave-like"],
-        ["wavelength", "de broglie", "matter wave"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["lambda = h/p", "h over p", "h divided by p"],
-        ["momentum"],
-        ["wavelength"],
-        ["inverse", "smaller", "shorter", "larger", "longer"],
-      ])
-    );
-  }
-
-  const isA5NuclearVsChemicalPrompt = matchesA5Prompt(
-    ["A5L4_D9"],
-    [],
-  );
-
-  if (isA5NuclearVsChemicalPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["nucleus", "nuclear"],
-        ["binding energy", "mass defect"],
-        ["chemical", "electron bonds", "electron-shell", "electron bond"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "nuclear energy comes from the nucleus and binding-energy changes, not ordinary chemical bonds",
-        "chemical energy comes from electron bonds, but nuclear energy comes from the nucleus",
-      ])
-    );
-  }
-
-  const isA5MassDefectMeaningPrompt = matchesA5Prompt(
-    ["A5L4_D10", "A5L4_M10"],
-    [],
-  );
-
-  if (isA5MassDefectMeaningPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["mass defect", "mass difference"],
-        ["energy", "mass-energy", "Delta E = Delta m c^2", "c^2"],
-        ["released", "absorbed", "accounted for", "conserved"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["not disappear", "does not disappear", "not just disappear", "conserved", "accounted for"],
-        ["energy", "mass-energy", "Delta E = Delta m c^2"],
-      ])
-    );
-  }
-
-  const isA5MassDefectLargeEnergyPrompt = matchesA5Prompt(
-    ["A5L4_C7"],
-    [],
-  );
-
-  if (isA5MassDefectLargeEnergyPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["Delta E = Delta m c^2", "c^2", "speed of light squared"],
-        ["small mass", "tiny mass difference", "small defect"],
-        ["large energy", "big energy", "large released energy"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "c squared is so large that even a small mass defect can mean a large energy change",
-      ])
-    );
-  }
-
-  const isA5TighterBindingPrompt = matchesA5Prompt(
-    ["A5L4_C8", "A5L4_M9"],
-    [],
-  );
-
-  if (isA5TighterBindingPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["lower energy", "more stable", "tighter", "more tightly bound"],
-        ["release energy", "energy released", "binding energy"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["more tightly bound"],
-        ["final nucleus", "final bundle", "nucleus"],
-        ["lower mass-energy", "lower energy", "more stable"],
-      ])
-    );
-  }
-
-  const isA5TimeDilationCausePrompt = matchesA5Prompt(
-    ["A5L5_D9", "A5L5_M9"],
-    [],
-  );
-
-  if (isA5TimeDilationCausePrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["same speed of light", "c is constant", "invariant c", "fixed c"],
-        ["longer path", "diagonal path"],
-        ["longer time", "tick takes longer", "time dilation", "slower tick"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "the light takes longer because it follows a longer path while still moving at c",
-        "a longer light path with the same c gives a longer tick",
-      ])
-    );
-  }
-
-  const isA5MovingClockMeaningPrompt = matchesA5Prompt(
-    ["A5L5_D10", "A5L5_C8", "A5L5_M10"],
-    [],
-  );
-
-  if (isA5MovingClockMeaningPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["frame", "relative", "another observer", "moving frame"],
-        ["moving clock", "proper time", "clock at rest"],
-        ["longer interval", "less elapsed time", "dilated time", "ticks slower"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["not broken", "not faulty", "works normally"],
-        ["frame", "rest frame", "another observer"],
-        ["speed of light", "c", "relativity"],
-      ])
-    );
-  }
-
-  const isA5LightClockModelPrompt = matchesA5Prompt(
-    ["A5L5_C7"],
-    [],
-  );
-
-  if (isA5LightClockModelPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["light clock", "pulse clock"],
-        ["light travel", "c", "speed of light"],
-        ["tick", "time measurement", "clock"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "a light clock makes the speed of light part of the time argument itself",
-        "because its tick is set by light travel, invariant c becomes a timing rule",
-      ])
-    );
-  }
-
-  const isA5ProperLengthPrompt = matchesA5Prompt(
-    ["A5L6_D9"],
-    [],
-  );
-
-  if (isA5ProperLengthPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["proper length", "rest frame"],
-        ["shorter", "contracted"],
-        ["direction of motion", "along the motion"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "the proper length is measured in the rest frame, while moving frames measure a shorter length along the motion",
-      ])
-    );
-  }
-
-  const isA5SimultaneityMeaningPrompt = matchesA5Prompt(
-    ["A5L6_D10"],
-    [],
-  );
-
-  if (isA5SimultaneityMeaningPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["simultaneous", "same now", "simultaneity", "same time"],
-        ["frame", "observer"],
-        ["disagree", "not universal", "different"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "different frames need not share one universal now",
-        "simultaneity is frame-dependent",
-      ])
-    );
-  }
-
-  const isA5LengthDirectionPrompt = matchesA5Prompt(
-    ["A5L6_C7"],
-    [],
-  );
-
-  if (isA5LengthDirectionPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["direction of motion", "parallel", "motion-aligned"],
-        ["length contraction", "contracted"],
-        ["along", "only along"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "the contraction is along the direction of motion",
-        "only the motion-parallel length is contracted in this treatment",
-      ])
-    );
-  }
-
-  const isA5CAndSimultaneityPrompt = matchesA5Prompt(
-    ["A5L6_C8", "A5L6_M9"],
-    [],
-  );
-
-  if (isA5CAndSimultaneityPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["same speed of light", "invariant c", "fixed c"],
-        ["simultaneous", "same time", "same now"],
-        ["frame", "observer"],
-        ["not universal", "disagree", "different bookkeeping"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "if c is invariant, different frames can disagree about simultaneity",
-        "one universal now cannot survive if every frame keeps the same c",
-      ])
-    );
-  }
-
-  const isA5RelativityMassEnergyLinkPrompt = matchesA5Prompt(
-    ["A5L6_M10"],
-    [],
-  );
-
-  if (isA5RelativityMassEnergyLinkPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["c", "speed of light"],
-        ["relativity", "frames"],
-        ["mass-energy", "E = mc^2", "mass defect"],
-        ["same constant", "shared link", "same c"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "relativity and mass-energy are linked by the same constant c",
-        "the same c that shapes frame effects also appears in E = mc^2",
-      ])
-    );
-  }
+  // Module A5 now covers oscillations. The retired modern-physics prompt overrides
+  // were more harmful than helpful because they hard-coded answers for a previous
+  // version of the module. Current A5 items should flow through the generic matcher
+  // until lesson-specific oscillation short-answer patterns are explicitly authored.
 
   const isM8MirrorAngleRulePrompt = matchesM8Prompt(
     ["M8L1_D3"],
@@ -11344,6 +10905,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
                 ],
                 answer: "Wire B extends half as much as Wire A.",
                 answer_reason: "With the same force, length, and material, extension is inversely proportional to cross-sectional area. Doubling the area halves the elastic extension.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
+  if (code.startsWith("A5_")) {
+    switch (code) {
+      case "A5_L1":
+        return {
+          body: "The opening oscillation example should separate equilibrium, amplitude, and restoring direction before later SHM formulas are introduced.",
+          worked_example: {
+            prompt: "A mass on a spring is released from rest 0.18 m to the right of equilibrium and later reaches 0.18 m to the left. State the amplitude, the total excursion between turning points, and the direction of the restoring force immediately after release.",
+            steps: [
+              "Use equilibrium as the zero reference and read amplitude as the maximum one-side displacement from that center.",
+              "Find the peak-to-peak excursion by comparing the two turning points, not by relabeling the amplitude.",
+              "State the restoring direction from the rule that the force always points back toward equilibrium.",
+            ],
+            answer: "The amplitude is 0.18 m, the total excursion between turning points is 0.36 m, and the restoring force initially points left toward equilibrium.",
+            answer_reason: "Amplitude is measured from the center to one turning point, while the full excursion runs from one turning point to the other. From the right-hand turning point, the restoring effect must point back toward the center.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that amplitude is not confused with the total distance covered in a cycle.",
+              worked_example: {
+                prompt: "An oscillator has amplitude 0.14 m. How far does it travel in one complete cycle?",
+                steps: [
+                  "One full cycle runs from +A to -A and back to +A.",
+                  "That journey covers four amplitude lengths, not one.",
+                  "Multiply the amplitude by four and keep the unit.",
+                ],
+                answer: "The oscillator travels 0.56 m in one complete cycle.",
+                answer_reason: "A full cycle covers center-to-edge, edge-to-opposite-edge, and back again, so the distance traveled is 4A rather than A or 2A.",
+              },
+            },
+          ],
+        };
+      case "A5_L2":
+        return {
+          body: "This lesson should make the SHM condition mathematical enough to test proportionality and sign, not just repeat that motion is 'back and forth.'",
+          worked_example: {
+            prompt: "A 0.40 kg mass is attached to a spring of constant 25 N/m. When it is 0.12 m to the right of equilibrium, find the restoring force and acceleration. Then state the acceleration when the displacement is 0.06 m to the right.",
+            steps: [
+              "Use the restoring-force law F = -kx so the sign keeps the force directed back toward equilibrium.",
+              "Convert force into acceleration with a = F/m for the 0.12 m position.",
+              "Repeat the same relation at 0.06 m and compare the two accelerations to test proportionality.",
+            ],
+            answer: "At 0.12 m, the restoring force is -3.0 N and the acceleration is -7.5 m/s^2. At 0.06 m, the acceleration is -3.75 m/s^2.",
+            answer_reason: "The minus sign shows the return direction, and halving the displacement halves both the restoring force and the acceleration magnitude for the same mass-spring system.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps the sign flip visible across the equilibrium position.",
+              worked_example: {
+                prompt: "For the same 0.40 kg mass-spring system, what is the acceleration when the mass is 0.08 m to the left of equilibrium?",
+                steps: [
+                  "Treat left-of-equilibrium displacement as negative: x = -0.08 m.",
+                  "Use a = -(k/m)x with k/m = 25/0.40.",
+                  "Keep the sign in the final answer because the acceleration direction matters.",
+                ],
+                answer: "The acceleration is +5.0 m/s^2, so it points to the right toward equilibrium.",
+                answer_reason: "A negative displacement must give a positive restoring acceleration in SHM. The sign reversal is part of the defining rule, not an optional extra comment.",
+              },
+            },
+          ],
+        };
+      case "A5_L3":
+        return {
+          body: "The graph lesson should force the learner to extract period, frequency, and phase-linked quantities from one SHM description rather than treating each trace as a separate topic.",
+          worked_example: {
+            prompt: "An oscillator has displacement x = 0.080 cos(4pi t) m. Find the amplitude, frequency, period, and maximum speed.",
+            steps: [
+              "Match the equation to x = A cos(omega t) to read off A = 0.080 m and omega = 4pi rad/s.",
+              "Convert angular frequency into ordinary frequency with f = omega / 2pi, then use T = 1/f.",
+              "Use v max = omega A for the maximum speed in SHM.",
+            ],
+            answer: "The amplitude is 0.080 m, the frequency is 2.0 Hz, the period is 0.50 s, and the maximum speed is about 1.01 m/s.",
+            answer_reason: "One SHM equation carries the whole motion story: the coefficient gives amplitude, the angular frequency sets both f and T, and the same omega fixes the maximum speed through omega A.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner connect a specific time to the phase relationship instead of only reading constants from the equation.",
+              worked_example: {
+                prompt: "For x = 0.080 cos(4pi t) m, find the displacement at t = 0.125 s and state whether the speed is zero, intermediate, or maximum at that instant.",
+                steps: [
+                  "Calculate the phase first: 4pi x 0.125 = pi/2.",
+                  "Use cos(pi/2) = 0 to find the displacement.",
+                  "At equilibrium in SHM, decide the speed category from the phase-linked motion pattern.",
+                ],
+                answer: "The displacement is 0 m, and the speed is maximum at that instant.",
+                answer_reason: "A phase of pi/2 places the oscillator at equilibrium. In SHM the speed is largest when displacement is zero because all the energy is kinetic there.",
+              },
+            },
+          ],
+        };
+      case "A5_L4":
+        return {
+          body: "The energy lesson should be multi-step enough to make the learner track the total, the split at a chosen position, and the resulting speed.",
+          worked_example: {
+            prompt: "A 0.50 kg mass-spring oscillator has k = 36 N/m and amplitude 0.12 m. Find the total energy. Then, when the displacement is 0.06 m, find the elastic potential energy, kinetic energy, and speed.",
+            steps: [
+              "Use the amplitude to set the total energy first: E total = 1/2 kA^2.",
+              "At x = 0.06 m, calculate elastic potential energy with E p = 1/2 kx^2.",
+              "Subtract from the total to get kinetic energy, then use E k = 1/2 mv^2 for the speed.",
+            ],
+            answer: "The total energy is 0.259 J. At x = 0.06 m, the elastic potential energy is 0.0648 J, the kinetic energy is 0.194 J, and the speed is about 0.88 m/s.",
+            answer_reason: "The amplitude fixes the total energy of the ideal oscillator. Once the elastic share is calculated at the chosen displacement, the remaining share must be kinetic energy, which then determines the speed.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up protects against the common mistake of forgetting where the maximum speed occurs.",
+              worked_example: {
+                prompt: "For the same oscillator, what is the maximum speed?",
+                steps: [
+                  "Maximum speed occurs at equilibrium where the displacement is zero.",
+                  "At equilibrium all of the total energy is kinetic.",
+                  "Solve 1/2 mv^2 = 0.2592 J or use v max = A sqrt(k/m).",
+                ],
+                answer: "The maximum speed is about 1.02 m/s.",
+                answer_reason: "At equilibrium the elastic potential energy is zero, so the full conserved energy appears as kinetic energy and gives the largest speed in the cycle.",
+              },
+            },
+          ],
+        };
+      case "A5_L5":
+        return {
+          body: "The resonance example should feel like a real response-curve judgment, with the frequency match and the damping effect both made explicit.",
+          worked_example: {
+            prompt: "A driven oscillator has natural frequency 2.5 Hz. A driver can run at 1.6 Hz, 2.4 Hz, or 3.1 Hz. Which frequency gives the largest steady-state amplitude? Then state what happens to the resonance peak if damping is increased.",
+            steps: [
+              "Compare each driving frequency with the natural frequency instead of picking the numerically largest frequency.",
+              "Choose the response that is closest to natural-frequency match for the largest steady amplitude.",
+              "State the damping effect in terms of both peak height and peak width.",
+            ],
+            answer: "The 2.4 Hz driver gives the largest steady-state amplitude. Increasing damping lowers the peak amplitude and broadens the resonance peak.",
+            answer_reason: "Resonance is strongest near frequency match, not at the highest available driving frequency. Damping removes energy from the response, so the peak becomes smaller and less sharply centered on the match frequency.",
+          },
+          extra_examples: [
+            {
+              body: "This second example makes the learner move between period language and resonance language.",
+              worked_example: {
+                prompt: "A suspension system has natural period 0.40 s. Find its natural frequency and decide whether a 2.5 Hz road forcing is a resonance risk.",
+                steps: [
+                  "Convert period into frequency with f = 1/T.",
+                  "Compare the resulting natural frequency directly with the forcing frequency.",
+                  "Judge the resonance risk from the closeness of that match.",
+                ],
+                answer: "The natural frequency is 2.5 Hz, so a 2.5 Hz road forcing is a direct resonance risk.",
+                answer_reason: "A period of 0.40 s corresponds to a natural frequency of 2.5 Hz. A forcing frequency that matches that value most strongly drives the system's response.",
+              },
+            },
+          ],
+        };
+      case "A5_L6":
+        return {
+          body: "The damping lesson should join quantitative decay with application judgment so it does not collapse into a vague 'more friction is better' story.",
+          worked_example: {
+            prompt: "An underdamped oscillator has amplitude A = A0 e^(-0.30 t) with A0 = 6.0 cm. Find the amplitude after 4.0 s, then state why this is still underdamped rather than critically damped.",
+            steps: [
+              "Substitute t = 4.0 s into the decay law before classifying the response.",
+              "Evaluate the exponential factor and multiply by the initial amplitude.",
+              "Use the definition of underdamped motion to explain the classification in words.",
+            ],
+            answer: "After 4.0 s the amplitude is about 1.81 cm, and the motion is still underdamped because it keeps oscillating while the amplitude shrinks.",
+            answer_reason: "The exponential law shows the envelope decreasing, but the term 'underdamped' means the system still crosses equilibrium repeatedly. A critically damped system would return fastest without oscillating.",
+          },
+          extra_examples: [
+            {
+              body: "This application check makes the learner choose damping style by response goal rather than by habit.",
+              worked_example: {
+                prompt: "Which damping style is best for a laboratory pointer that should settle to its final reading as quickly as possible without overshooting?",
+                steps: [
+                  "List the job requirement first: fast return with no overshoot.",
+                  "Reject underdamping because it overshoots and oscillates.",
+                  "Reject overdamping because it avoids overshoot but returns more slowly than necessary.",
+                ],
+                answer: "Critical damping is the best choice.",
+                answer_reason: "Critical damping is defined as the fastest non-oscillatory return to equilibrium, so it matches the stated measurement goal better than either underdamping or overdamping.",
               },
             },
           ],
