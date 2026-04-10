@@ -19859,7 +19859,10 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
-    const authoredSections = authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
+    const preferLocalScaffold = code === "M1_L1";
+    const authoredSections = preferLocalScaffold
+      ? []
+      : authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
     if (authoredSections.length > 0) {
       return attachScaffoldSectionVisuals(code, withTechnicalWordsSection(lesson, authoredSections));
     }
