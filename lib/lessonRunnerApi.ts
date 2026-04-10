@@ -10335,7 +10335,12 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     };
   }
 
-  const code = /^M9_L[1-5]$/.test(sourceCode) ? sourceCode.replace(/^M9_/, "M10_") : sourceCode;
+  const code =
+    /^M9_L[1-5]$/.test(sourceCode)
+      ? sourceCode.replace(/^M9_/, "M10_")
+      : /^M10_L[1-6]$/.test(sourceCode)
+        ? sourceCode.replace(/^M10_/, "M12_")
+        : sourceCode;
   if (code.startsWith("M3_")) {
     switch (code) {
       case "M3_L1":
@@ -14633,7 +14638,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
-  const preferLocalWorkedExamples = sourceCode.startsWith("M9_");
+  const preferLocalWorkedExamples = sourceCode.startsWith("M9_") || sourceCode.startsWith("M10_");
   const contractExamples = preferLocalWorkedExamples ? [] : asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = preferLocalWorkedExamples ? [] : asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
