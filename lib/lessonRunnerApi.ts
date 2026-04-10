@@ -10847,117 +10847,117 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     switch (code) {
       case "M6_L1":
         return {
-          body: "Keep temperature as a state reading and heat transferred as an energy-transfer process.",
+          body: "Keep temperature as a state reading and heat as transferred energy, then test what equal readings do and do not guarantee.",
           worked_example: {
-            prompt: "A mug of tea and a bathtub of water are both at 40 °C. What can you conclude from that shared temperature, and what can you not conclude?",
+            prompt: "A 0.20 kg mug of tea and a large bathtub are both at 40 °C. A student says they 'contain the same heat' because the thermometer reading matches. What is correct in that claim, and what is wrong?",
             steps: [
-              "Start with what temperature actually tells you: it gives the current thermal state, not the total thermal energy involved.",
-              "Notice that the amounts of water are very different, so the masses are not the same.",
-              "Conclude that the tea and the bath can share the same temperature while still having very different total thermal energy changes and cooling bills.",
+              "Keep the correct part first: the matching thermometer reading means both samples are at the same temperature at that moment.",
+              "Reject the jump from equal temperature to equal total thermal energy, because the amounts of water are very different.",
+              "Conclude that equal temperature does not guarantee the same total energy involved or the same energy needed to change each sample by a chosen number of degrees.",
             ],
-            answer: "They share the same temperature reading, but you cannot conclude that they have the same total thermal energy or need the same energy change.",
-            answer_reason: "Temperature tells you how hot each sample is at that moment, but the total energy involved in heating or cooling also depends on mass and material.",
+            answer: "They are at the same temperature, but you cannot conclude that they have the same total thermal energy or would need the same energy transfer for the same temperature change.",
+            answer_reason: "Temperature is a current-state reading, not a measure of the whole thermal energy story. Amount of substance and material response still matter.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps the cooling story as an energy-transfer process instead of a disappearing-temperature story.",
+              body: "This follow-up fixes the material and the transfer, so only the amount of substance can explain the different response.",
               worked_example: {
-                prompt: "A hot metal block cools on a bench. What must be happening to thermal energy while it cools?",
+                prompt: "Two copper blocks start at the same temperature. A 1 kg block and a 3 kg block each receive 600 J. Which one rises more in temperature, and why?",
                 steps: [
-                  "Link cooling to a temperature difference between the block and its surroundings.",
-                  "Use that temperature difference to decide the direction of energy transfer.",
-                  "State the process in physics language: energy is transferred from the hotter block to the cooler surroundings.",
+                  "Keep the material and transferred energy the same so the mass comparison stays clean.",
+                  "Notice that the same energy is being shared across different amounts of copper.",
+                  "Conclude that the smaller block rises more because the same transfer is spread across less mass.",
                 ],
-                answer: "Thermal energy is being transferred from the hot block to its cooler surroundings.",
-                answer_reason: "Cooling means the block is losing energy to something cooler nearby; the temperature fall is the result of that transfer, not a separate process.",
+                answer: "The 1 kg block rises more in temperature.",
+                answer_reason: "With the same material and the same energy transfer, the smaller mass shows the larger temperature rise.",
               },
             },
             {
-              body: "The third example keeps the energy transfer fixed and asks what the different temperature rises reveal.",
+              body: "The third example holds the mass fixed as well, so the different temperature rise now points at the material response instead.",
               worked_example: {
-                prompt: "Two blocks start at the same temperature and each receive 600 J. One rises by 6 °C and the other by 2 °C. What should you conclude first?",
+                prompt: "A 1 kg aluminium block and a 1 kg copper block each receive 900 J. Their temperature rises are different. What should you conclude first?",
                 steps: [
-                  "Keep the equal energy transfer fixed because that part of the story is already controlled.",
-                  "Compare the different temperature rises and reject the idea that equal energy must force equal temperature change.",
-                  "Conclude that at least one of the mass or the specific heat capacity must be different.",
+                  "Keep the mass matched at 1 kg and the energy transfer matched at 900 J.",
+                  "Reject the idea that equal transfer must force equal temperature rise when the material changes.",
+                  "Conclude that the two materials do not respond identically to heating and therefore do not have the same specific heat capacity.",
                 ],
-                answer: "At least one of the mass or the specific heat capacity is different between the two blocks.",
-                answer_reason: "If the same amount of energy causes different temperature rises, the response factors in Q = mcΔT cannot all be the same.",
+                answer: "The materials must have different specific heat capacities.",
+                answer_reason: "Once mass and energy transfer are both controlled, a different temperature rise points to a different material response.",
               },
             },
           ],
         };
       case "M6_L2":
         return {
-          body: "Specific heat capacity questions get clearer when energy transfer, mass, and temperature change are kept separate.",
+          body: "Specific heat capacity should now carry the numerical load: identify the controlled quantities, choose the unknown, and keep the units meaningful.",
           worked_example: {
-            prompt: "Two 1 kg blocks each receive 5000 J. Block A rises by more degrees than Block B. What does that tell you about their specific heat capacities?",
+            prompt: "How much energy is needed to raise 1.5 kg of aluminium, c = 900 J/kg°C, from 20 °C to 32 °C? Then compare it with 1.5 kg of copper, c = 390 J/kg°C, over the same temperature rise.",
             steps: [
-              "Keep the mass the same for both blocks because the question already controls it at 1 kg each.",
-              "Keep the energy transfer the same as well: both blocks receive 5000 J.",
-              "Use Q = mcΔT qualitatively: with the same Q and m, the larger temperature rise must come from the smaller c value.",
+              "Find the temperature change first: ΔT = 32 - 20 = 12 °C.",
+              "Use Q = mcΔT for the aluminium block: Q = 1.5 × 900 × 12 = 16200 J.",
+              "Compare with copper over the same rise: Q = 1.5 × 390 × 12 = 7020 J, so aluminium needs more energy for the same mass and temperature change.",
             ],
-            answer: "Block A has the lower specific heat capacity.",
-            answer_reason: "For the same mass and the same energy transfer, the block with the larger temperature rise must have the smaller specific heat capacity.",
+            answer: "The aluminium needs 16200 J, while the copper needs 7020 J.",
+            answer_reason: "For the same mass and temperature rise, the material with the larger specific heat capacity needs the larger energy transfer.",
           },
           extra_examples: [
             {
-              body: "This second example turns the same idea into a direct calculation.",
+              body: "This second example turns the formula around so the material property has to be inferred from a heating test.",
               worked_example: {
-                prompt: "A 2 kg metal block with specific heat capacity 400 J/kg°C receives 2400 J. Find the temperature rise.",
+                prompt: "A 2 kg metal sample receives 4800 J and warms by 6 °C. Find its specific heat capacity.",
                 steps: [
-                  "Start with Q = mcΔT because the question gives energy, mass, and specific heat capacity.",
-                  "Rearrange to ΔT = Q / (mc).",
-                  "Substitute the values: ΔT = 2400 / (2 × 400) = 2400 / 800 = 3.",
+                  "Start with Q = mcΔT because the question gives energy, mass, and temperature rise.",
+                  "Rearrange to c = Q / (mΔT).",
+                  "Substitute the values: c = 4800 / (2 × 6) = 4800 / 12 = 400 J/kg°C.",
                 ],
-                answer: "The temperature rise is 3 °C.",
-                answer_reason: "Dividing the 2400 J transfer by mc = 800 J/°C gives a 3 °C rise.",
+                answer: "The specific heat capacity is 400 J/kg°C.",
+                answer_reason: "Once the total energy is shared across the known mass and temperature rise, the remaining factor is the material's specific heat capacity.",
               },
             },
             {
-              body: "The last example keeps the reasoning conceptual by comparing two common materials.",
+              body: "The last example keeps the arithmetic active, but now the unknown is the amount of water a fixed heater could warm.",
               worked_example: {
-                prompt: "Equal masses of water and copper each receive the same energy. Why does the water usually warm less?",
+                prompt: "A heater supplies 3360 J to water, c = 4200 J/kg°C, and the water warms by 4 °C. What mass of water was heated?",
                 steps: [
-                  "Keep the mass and the energy transfer matched so the material property is the main difference left.",
-                  "Compare the specific heat capacities of the two materials.",
-                  "State the consequence: the higher specific heat capacity material needs more energy per kilogram per degree, so its temperature rises less for the same transfer.",
+                  "Use Q = mcΔT because the energy transfer, specific heat capacity, and temperature rise are known.",
+                  "Rearrange to m = Q / (cΔT).",
+                  "Substitute the values: m = 3360 / (4200 × 4) = 3360 / 16800 = 0.20 kg.",
                 ],
-                answer: "Water usually warms less because it has a higher specific heat capacity than copper.",
-                answer_reason: "A higher specific heat capacity means more energy is needed for each kilogram to rise by each degree, so the same energy transfer produces a smaller temperature change.",
+                answer: "The mass heated was 0.20 kg.",
+                answer_reason: "Once Q, c, and ΔT are fixed, the formula gives the amount of material that could have been warmed.",
               },
             },
           ],
         };
       case "M6_L3":
         return {
-          body: "During a state change, the energy story changes even when the thermometer does not.",
+          body: "State-change questions should force a stage decision before any substitution: warming and changing state are different energy jobs.",
           worked_example: {
-            prompt: "Ice at 0 °C keeps receiving energy while it melts, but the temperature stays at 0 °C. Where does the energy go?",
+            prompt: "A 0.20 kg ice sample at 0 °C receives 5.0 x 10^4 J. The specific latent heat of fusion is 3.3 x 10^5 J/kg. Does all the ice melt? If not, how much is still solid?",
             steps: [
-              "Notice that the temperature is not rising, so the energy is not increasing the particles' average kinetic energy.",
-              "Identify the stage as a state change rather than an ordinary warm-up.",
-              "State that the incoming energy is used to overcome attractions and change the state from solid to liquid.",
+              "Use the stage rule first: because the sample is already at the melting point, the relevant equation is Q = mL.",
+              "Find the energy needed to melt all of it: Q_full = 0.20 × 3.3 x 10^5 = 6.6 x 10^4 J.",
+              "Compare the available 5.0 x 10^4 J with the required 6.6 x 10^4 J, then find the melted mass: m = Q / L ≈ 0.152 kg, so about 0.048 kg remains solid.",
             ],
-            answer: "The energy goes into changing the state by overcoming attractions between particles, not into raising the temperature.",
-            answer_reason: "During melting, energy is still transferred in, but it is used for the state change, so the temperature can stay constant until melting is complete.",
+            answer: "No, not all the ice melts. About 0.048 kg remains solid.",
+            answer_reason: "The supplied energy is less than the full melting bill, so only part of the sample can change state.",
           },
           extra_examples: [
             {
-              body: "This follow-up turns the latent-heat idea into a direct stage calculation.",
+              body: "This follow-up uses the same rule at the boiling stage, where the temperature is again flat even though energy keeps arriving.",
               worked_example: {
-                prompt: "A 0.5 kg sample melts with specific latent heat 200000 J/kg. How much energy is needed for the melting stage?",
+                prompt: "Water already at 100 °C receives 2.26 x 10^5 J. The specific latent heat of vaporization is 2.26 x 10^6 J/kg. How much water evaporates?",
                 steps: [
-                  "Use the latent-heat relation Q = mL because this is a state-change stage.",
-                  "Substitute the values: Q = 0.5 x 200000.",
-                  "Multiply to get the total energy needed for melting.",
+                  "Choose Q = mL because this is a boiling stage at constant temperature.",
+                  "Rearrange to m = Q / L.",
+                  "Substitute the values: m = 2.26 x 10^5 / 2.26 x 10^6 = 0.10 kg.",
                 ],
-                answer: "100000 J is needed.",
-                answer_reason: "Multiplying 0.5 kg by 200000 J/kg gives 100000 J for the melting stage.",
+                answer: "0.10 kg of water evaporates.",
+                answer_reason: "At constant boiling temperature, the transferred energy pays the vaporization fee rather than raising the temperature.",
               },
             },
             {
-              body: "The third example checks that the stage rule matches the physics before any substitution begins.",
+              body: "The third example checks the stage choice before any substitution begins.",
               worked_example: {
                 prompt: "A sample is melting at constant temperature. Why is Q = mcΔT the wrong rule for that stage?",
                 steps: [
@@ -10973,75 +10973,75 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         };
       case "M6_L4":
         return {
-          body: "Conduction must be explained as energy passed through a contact path, not as the solid itself flowing.",
+          body: "Conduction explanations must trace a contact path and a material comparison without drifting into bulk-motion language.",
           worked_example: {
-            prompt: "A metal spoon is left in hot soup and later the handle becomes hot. How did energy reach the handle?",
+            prompt: "A copper spoon and a wooden spoon are both left with one end in hot soup for the same time. The far end of the copper spoon becomes hot first. Give the transfer route and the material reason.",
             steps: [
-              "Start by identifying the route: the spoon is a solid in direct contact from the hot end to the handle.",
-              "Use conduction to explain the transfer through the metal without saying the whole spoon moves.",
-              "Add the metal detail: free electrons and particle collisions help carry thermal energy along the spoon.",
+              "Keep the geometry and heating time matched so the material difference is the main clue.",
+              "Identify the route as conduction through a continuous solid contact path from the hot end to the handle.",
+              "State the material reason: copper is a much better thermal conductor than wood, so energy reaches the far end faster.",
             ],
-            answer: "Energy reached the handle by conduction through the metal spoon.",
-            answer_reason: "The spoon provides a continuous solid contact path, and in metals the transfer is helped by free electrons as well as particle interactions.",
+            answer: "The energy reaches the far end by conduction, and the copper spoon responds first because copper conducts thermal energy much more effectively than wood.",
+            answer_reason: "Both spoons provide a path, but the quality of that path depends strongly on the material.",
           },
           extra_examples: [
             {
-              body: "This follow-up links everyday safety design back to conduction physics.",
+              body: "This follow-up checks whether the contact path is still continuous once a gap appears.",
               worked_example: {
-                prompt: "Why is a plastic or wooden handle safer than a metal handle on a hot pan?",
+                prompt: "A metal rod is heated at one end, but a 2 cm air gap is introduced halfway along it. Why does the far end stop warming quickly once the gap appears?",
                 steps: [
-                  "Compare the materials as conductors rather than comparing their temperatures only.",
-                  "Recognize plastic and wood as much poorer thermal conductors than metal.",
-                  "Conclude that less thermal energy is transferred to the hand in the same time.",
+                  "Trace the route from the hot end to the cool end and look for a continuous contact path.",
+                  "Notice that the air gap interrupts the direct solid-to-solid relay.",
+                  "Conclude that conduction along the rod is greatly reduced because the main contact path has been broken.",
                 ],
-                answer: "A plastic or wooden handle is safer because it conducts thermal energy to the hand much more slowly than metal.",
-                answer_reason: "Poor conductors reduce the rate of energy transfer along the handle, so the hand warms less quickly.",
+                answer: "The far end stops warming quickly because the air gap breaks the continuous contact path needed for strong conduction along the rod.",
+                answer_reason: "Conduction through a solid depends on an unbroken route for energy transfer.",
               },
             },
             {
-              body: "The last example keeps the material comparison focused on conductivity.",
+              body: "The last example links pan-handle design back to the rate of transfer rather than to a vague idea of 'less heat'.",
               worked_example: {
-                prompt: "A metal bar and a plastic bar of the same size are heated at one end. Which usually warms at the far end first, and why?",
+                prompt: "Why does wrapping a saucepan handle in foam make it safer to hold even while the pan itself remains hot?",
                 steps: [
-                  "Keep the size and heating setup matched so the material is the deciding difference.",
-                  "Compare how well metal and plastic conduct thermal energy.",
-                  "State which far end warms first and tie the answer to conduction through the material.",
+                  "Separate the hot pan from the handle covering instead of treating the whole object as one temperature.",
+                  "Identify foam as a poor conductor that slows the conduction route into the hand.",
+                  "State the useful consequence: the rate of energy transfer to the hand is reduced.",
                 ],
-                answer: "The metal bar usually warms at the far end first because metal conducts thermal energy more effectively than plastic.",
-                answer_reason: "A better conductor passes thermal energy through the bar faster, so the distant end responds sooner.",
+                answer: "The foam makes the handle safer because it reduces the rate of thermal energy transfer to the hand.",
+                answer_reason: "A poor conductor does not stop the pan being hot, but it slows the conduction path into the user's skin.",
               },
             },
           ],
         };
       case "M6_L5":
         return {
-          body: "Convection questions should keep the moving fluid visible from start to finish.",
+          body: "Convection answers should show the whole loop: heating, expansion, density change, rise, and return flow.",
           worked_example: {
-            prompt: "Why does warm air above a radiator rise while cooler room air moves in below it?",
+            prompt: "A beaker of water is heated from below. Describe one complete convection cycle for a parcel of water starting at the bottom.",
             steps: [
-              "Start with the effect of heating on the nearby air: it expands and becomes less dense.",
-              "Use the density change to explain why that warmer air rises.",
-              "Complete the convection current by bringing cooler, denser air in below to replace the rising air.",
+              "Start at the heated bottom layer: the parcel gains energy, expands, and becomes less dense.",
+              "Use that density change to explain why the parcel rises through the cooler liquid above it.",
+              "Complete the loop by noting that cooler denser water moves down to replace it, and the moving parcel can cool and sink later.",
             ],
-            answer: "The warm air rises because heating makes it less dense, and cooler denser air moves in below to complete the convection current.",
-            answer_reason: "Convection is the movement of the fluid itself: warm air rises, cooler air replaces it, and the circulating loop carries thermal energy through the room.",
+            answer: "The heated parcel rises because it becomes less dense, cooler denser water moves in below, and a circulating loop is set up.",
+            answer_reason: "Convection is a bulk-flow process in the fluid itself, not just a one-way upward arrow.",
           },
           extra_examples: [
             {
-              body: "This second example fixes the common shortcut phrase before it becomes a misconception.",
+              body: "This second example asks whether the heating arrangement actually encourages a strong density-driven loop.",
               worked_example: {
-                prompt: "Why is the sentence 'heat rises' an incomplete explanation of convection?",
+                prompt: "Why does heating a room from near the floor usually set up a stronger convection current than heating it from the ceiling?",
                 steps: [
-                  "Separate thermal energy from the fluid that carries it.",
-                  "Identify what actually moves in convection: warm fluid regions rise and cooler regions sink or move in.",
-                  "State the full loop so the return flow is not hidden.",
+                  "Think about the density arrangement created by each heater position.",
+                  "Heating near the floor makes low-density warm air form underneath cooler denser air, so the arrangement is unstable and circulation begins readily.",
+                  "Heating from the ceiling leaves much of the warm low-density air already high up, so the density contrast drives a weaker loop.",
                 ],
-                answer: "It is incomplete because convection is not heat floating upward; it is the fluid itself moving in a loop, with warm regions rising and cooler regions replacing them.",
-                answer_reason: "The phrase 'heat rises' hides the mechanism. Convection depends on the motion of the fluid, not on a substance called heat drifting upward by itself.",
+                answer: "Heating from near the floor usually drives stronger convection because it creates warm low-density air underneath cooler denser air, which encourages a full circulation loop.",
+                answer_reason: "Convection strength depends on how effectively the density difference can set the fluid moving.",
               },
             },
             {
-              body: "The third example compares a fluid with a solid so the route stays clear.",
+              body: "The third example compares a fluid with a solid so the route stays physically honest.",
               worked_example: {
                 prompt: "Why can boiling water circulate but a solid metal block cannot set up the same kind of convection current inside itself?",
                 steps: [
@@ -11057,33 +11057,33 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         };
       case "M6_L6":
         return {
-          body: "The capstone lesson combines route choice with stage-by-stage energy bookkeeping.",
+          body: "The capstone should combine route choice, surface properties, and stage-by-stage energy totals without forcing one rule across the whole story.",
           worked_example: {
-            prompt: "Why is radiation the only route that can transfer energy directly from the Sun to Earth through space?",
+            prompt: "A dull black can and a shiny silver can are placed the same distance from a heater across an air gap. Which one warms faster, and what transfer route carries the energy across the gap?",
             steps: [
-              "Identify the gap between the Sun and Earth as mostly vacuum, not a material medium.",
-              "Rule out conduction and convection because both need matter or direct contact.",
-              "Choose radiation because electromagnetic waves can cross the vacuum gap.",
+              "Identify the cross-gap route first: there is no solid contact path, so the heater-to-can transfer across the gap is radiation.",
+              "Compare the surfaces as absorbers rather than treating both cans as identical receivers.",
+              "Conclude that the dull black can warms faster because it absorbs the incoming radiation more effectively than the shiny silver can.",
             ],
-            answer: "Radiation is the only route because electromagnetic waves can transfer energy across a vacuum.",
-            answer_reason: "Space does not provide the medium needed for conduction or convection, so radiation is the only thermal transfer route that still works across the gap.",
+            answer: "The dull black can warms faster, and the energy crosses the gap mainly by radiation.",
+            answer_reason: "Surface finish affects absorption, while radiation is the transfer route that works cleanly across a gap without contact.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps the stage-by-stage thermal ledger explicit.",
+              body: "This follow-up keeps the stage-by-stage thermal ledger explicit in a genuine two-stage calculation.",
               worked_example: {
-                prompt: "A 1 kg sample warms by 10 °C with c = 400 J/kg°C and then melts with L = 250000 J/kg. What total energy is needed?",
+                prompt: "A 0.80 kg sample warms from 20 °C to 70 °C with c = 420 J/kg°C and then melts at 70 °C with L = 1.8 x 10^5 J/kg. What total energy is needed?",
                 steps: [
-                  "Find the warm-up stage first with Q = mcΔT: 1 × 400 × 10 = 4000 J.",
-                  "Find the melting stage next with Q = mL: 1 x 250000 = 250000 J.",
-                  "Add the separate stage energies to get the total.",
+                  "Find the warm-up bill first: Q1 = mcΔT = 0.80 × 420 × 50 = 16800 J.",
+                  "Find the melting bill next: Q2 = mL = 0.80 × 1.8 x 10^5 = 144000 J.",
+                  "Add the separate stage energies: Q_total = 16800 + 144000 = 160800 J.",
                 ],
-                answer: "The total energy needed is 254000 J.",
-                answer_reason: "The process has two different stages, so the total is the sum of 4000 J for warming and 250000 J for melting.",
+                answer: "The total energy needed is 160800 J.",
+                answer_reason: "A multi-stage thermal process needs the correct equation for each stage and then a final sum.",
               },
             },
             {
-              body: "The last example protects students from forcing one formula across a multi-stage process.",
+              body: "The last example protects students from forcing one rule across unlike stages.",
               worked_example: {
                 prompt: "A process warms a solid, melts it, and then warms the liquid again. Why is one formula not enough for the whole process?",
                 steps: [
@@ -16020,7 +16020,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410g";
+  const assetVersion = "20260410d";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
