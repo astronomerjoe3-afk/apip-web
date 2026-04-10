@@ -954,6 +954,105 @@ const M2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const M3_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M3_L1: [
+    {
+      standardFormula: "total input energy = sum(useful energy gains) + dissipated energy",
+      meaning: "An energy-transfer ledger must balance, so every joule of input must appear in a useful store gain or in a dissipated pathway.",
+      conditions: "Use when tracking where transferred energy ends up in a system.",
+      unitsText: "J",
+    },
+    {
+      standardFormula: "missing energy term = total known input - other listed destinations",
+      meaning: "The unknown branch of an energy ledger is found by subtracting the known destinations from the total input.",
+      conditions: "Use when one destination in an energy-transfer diagram is missing.",
+      unitsText: "J",
+    },
+  ],
+  M3_L2: [
+    {
+      standardFormula: "delta E_p = m g delta h",
+      meaning: "Gravitational potential energy change depends on mass, gravitational field strength, and vertical height change together.",
+      conditions: "Use for lifting or falling between two heights.",
+      unitsText: "J",
+    },
+    {
+      standardFormula: "for fixed mass and height change, delta E_p is proportional to g",
+      meaning: "If mass and vertical rise stay the same, the world with the larger gravitational field strength gives the larger gravitational potential energy change.",
+      conditions: "Use when comparing the same lift on different planets or moons.",
+      unitsText: "comparison rule",
+    },
+  ],
+  M3_L3: [
+    {
+      standardFormula: "E_k = 1/2 m v^2",
+      meaning: "Kinetic energy depends on both mass and the square of speed, so speed changes usually have the stronger effect.",
+      conditions: "Use for the motion store of a moving object.",
+      unitsText: "J",
+    },
+    {
+      standardFormula: "delta E_k = 1/2 m (v^2 - u^2)",
+      meaning: "The change in kinetic energy comes from comparing the squared final and initial speeds of the same mass.",
+      conditions: "Use when an object speeds up or slows down.",
+      unitsText: "J",
+    },
+  ],
+  M3_L4: [
+    {
+      standardFormula: "W = F d",
+      meaning: "When force and motion are in the same direction, work done equals force multiplied by displacement.",
+      conditions: "Use for constant aligned-force transfers.",
+      unitsText: "J",
+    },
+    {
+      standardFormula: "W = delta E",
+      meaning: "Work done is an energy transfer, so the total work equals the total energy gained plus any energy dissipated.",
+      conditions: "Use when linking force-distance calculations to store changes.",
+      unitsText: "J",
+    },
+  ],
+  M3_L5: [
+    {
+      standardFormula: "P = E / t",
+      meaning: "Power measures how quickly energy is transferred.",
+      conditions: "Use when the total transferred energy and the time taken are known.",
+      unitsText: "W",
+    },
+    {
+      standardFormula: "efficiency = useful output / total input",
+      meaning: "Efficiency measures what fraction of the input becomes useful rather than being dissipated.",
+      conditions: "Use for energy, work, or power comparisons between useful output and total input.",
+      unitsText: "no unit or %",
+    },
+    {
+      standardFormula: "useful power = useful energy / time",
+      meaning: "Useful output power is found from the useful transfer rate, not from the total input rate.",
+      conditions: "Use when a question distinguishes input power from useful output power.",
+      unitsText: "W",
+    },
+  ],
+  M3_L6: [
+    {
+      standardFormula: "stage output = stage input x efficiency",
+      meaning: "In a multi-stage transfer, the useful output from one stage becomes the available input for the next stage.",
+      conditions: "Use when tracking energy through linked stages with efficiencies.",
+      unitsText: "J",
+    },
+    {
+      standardFormula: "energy after a loss = starting energy x retained fraction",
+      meaning: "A later loss is applied to the energy actually available at that stage, not to the original starting input unless the question says so.",
+      conditions: "Use when a percentage loss happens after an earlier conversion stage.",
+      unitsText: "J",
+    },
+    {
+      standardFormula: "required energy before a loss = target energy / retained fraction",
+      meaning: "Working backward through a staged system means dividing by each retained fraction in reverse order.",
+      conditions: "Use when a question asks for the minimum starting input for a required final energy.",
+      unitsText: "J",
+    },
+  ],
+};
+
 const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A2_L1: [
     {
@@ -1378,6 +1477,9 @@ export function supplementalEquationFallbacksForLesson(code: string): FormulaFal
   }
   if (M2_FORMULA_OVERRIDES[code]) {
     return M2_FORMULA_OVERRIDES[code];
+  }
+  if (M3_FORMULA_OVERRIDES[code]) {
+    return M3_FORMULA_OVERRIDES[code];
   }
   if (A3_FORMULA_OVERRIDES[code]) {
     return A3_FORMULA_OVERRIDES[code];

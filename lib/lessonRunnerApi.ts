@@ -10301,174 +10301,174 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     switch (code) {
       case "M3_L1":
         return {
-          body: "Start with the energy ledger before any formula. The lesson is about tracking input energy, useful energy, and dissipated energy clearly.",
+          body: "Start with the energy ledger before any formula. The lesson is about tracking total input, multiple useful destinations, and dissipated energy without letting anything disappear.",
           worked_example: {
-            prompt: "A machine transfers 320 J to a system. The useful energy gain is 240 J. How much energy is dissipated, and why must that answer follow?",
+            prompt: "A launcher transfers 1200 J to a pod. A quarter of the input is dissipated as heating, and 360 J becomes gravitational potential energy. How much becomes kinetic energy, and how do you know the ledger is complete?",
             steps: [
-              "Write the energy ledger first: total energy transferred = useful energy gain + dissipated energy.",
-              "Substitute the known values: 320 J = 240 J + dissipated energy.",
-              "Solve the missing part of the ledger by subtraction.",
+              "Write the full ledger first: total input = dissipated + gravitational potential gain + kinetic gain.",
+              "Find the dissipated share: 25% of 1200 J = 300 J.",
+              "Substitute the known parts: 1200 J = 300 J + 360 J + kinetic gain, then solve the remainder.",
             ],
-            answer: "80 J is dissipated.",
-            answer_reason: "The energy ledger must balance, so the 80 J difference between the 320 J input and the 240 J useful gain must appear as dissipated energy rather than disappearing.",
+            answer: "540 J becomes kinetic energy.",
+            answer_reason: "The energy ledger must balance. After 300 J is dissipated and 360 J becomes gravitational potential energy, the remaining 540 J of the 1200 J input must appear as kinetic energy.",
           },
           extra_examples: [
             {
-              body: "This second example keeps the same ledger logic but splits the useful energy into two standard forms.",
+              body: "This second example keeps the same ledger logic but asks for the missing total input instead of the missing destination.",
               worked_example: {
-                prompt: "A system receives 500 J. Of the useful 400 J, 250 J becomes gravitational potential energy and the rest becomes kinetic energy. How much kinetic energy is gained?",
+                prompt: "A device gives a cart 280 J of kinetic energy and 120 J of gravitational potential energy while 100 J is dissipated. What total input energy was transferred?",
                 steps: [
-                  "Notice that the useful total is already known as 400 J.",
-                  "Subtract the gravitational potential energy part from that useful total.",
-                  "Keep the interpretation visible: the remainder is still useful energy, now in kinetic form.",
+                  "List every destination for the transferred energy.",
+                  "Add the useful stores first: 280 J + 120 J = 400 J.",
+                  "Add the dissipated part to the useful total to recover the full input.",
                 ],
-                answer: "150 J of kinetic energy is gained.",
-                answer_reason: "The useful total is 400 J, and after 250 J is assigned to gravitational potential energy, the remaining 150 J must be kinetic energy.",
+                answer: "500 J of input energy was transferred.",
+                answer_reason: "Energy transferred equals all useful gains plus dissipation, so 280 J + 120 J + 100 J = 500 J.",
               },
             },
           ],
         };
       case "M3_L2":
         return {
-          body: "Gravitational potential energy depends on three factors, so the reasoning should keep mass, gravitational field strength, and height visible together.",
+          body: "Gravitational potential energy depends on mass, gravitational field strength, and vertical height change together, so the worked example should keep all three visible and compare what changes across worlds.",
           worked_example: {
-            prompt: "A 6 kg object is raised 5 m where g = 10 N/kg. Find the gain in gravitational potential energy and explain why the answer depends on all three quantities.",
+            prompt: "A 7 kg crate is lifted from a platform 2 m above the ground to a shelf 11 m above the ground. Find the gravitational potential energy gain on Earth where g = 10 N/kg, then find the gain on a moon where g = 6 N/kg.",
             steps: [
-              "Choose the gravitational potential energy relation: delta E_p = mgh.",
-              "Substitute the three physical factors: delta E_p = 6 x 10 x 5.",
-              "Multiply to find the energy gain, then state what each factor contributes conceptually.",
+              "Use the height change, not the final height: delta h = 11 m - 2 m = 9 m.",
+              "Apply delta E_p = m g delta h on Earth: 7 x 10 x 9.",
+              "Keep the same mass and height change on the moon, but replace g with 6 N/kg and compare the two gains.",
             ],
-            answer: "The gain in gravitational potential energy is 300 J.",
-            answer_reason: "The answer is 300 J because gravitational potential energy depends on mass, gravitational field strength, and height together; if any one of those three factors changed, the energy gain would change as well.",
+            answer: "The gain is 630 J on Earth and 378 J on the moon.",
+            answer_reason: "The vertical rise is 9 m in both cases, so the only change is gravitational field strength. With the same mass and height change, the energy gain is larger where g is larger.",
           },
           extra_examples: [
             {
-              body: "This follow-up uses the same idea in reverse so students treat the formula as a relationship, not as one-way substitution.",
+              body: "This follow-up runs the same relation in reverse so students treat it as a relationship, not as a one-way plug-in rule.",
               worked_example: {
-                prompt: "An object gains 240 J of gravitational potential energy when lifted 6 m where g = 10 N/kg. What is its mass?",
+                prompt: "A climber gains 960 J of gravitational potential energy by moving up 12 m where g = 10 N/kg. What total mass was lifted?",
                 steps: [
-                  "Start from delta E_p = mgh.",
-                  "Rearrange to m = delta E_p / (gh).",
-                  "Substitute 240 / (10 x 6).",
+                  "Start from delta E_p = m g delta h.",
+                  "Rearrange for mass: m = delta E_p / (g delta h).",
+                  "Substitute 960 / (10 x 12).",
                 ],
-                answer: "The object's mass is 4 kg.",
-                answer_reason: "240 J divided by 60 gives 4 kg, so the known energy gain, height, and gravitational field strength together determine the mass.",
+                answer: "The lifted mass is 8 kg.",
+                answer_reason: "Dividing the 960 J gain by 10 x 12 = 120 gives 8 kg, so the mass is set by the energy gain, field strength, and vertical rise together.",
               },
             },
           ],
         };
       case "M3_L3":
         return {
-          body: "Kinetic energy is where proportional reasoning matters. The worked example should show why speed has the stronger effect.",
+          body: "Kinetic energy is where proportional reasoning matters most. The worked example should make students compare two moving objects rather than calculate one number in isolation.",
           worked_example: {
-            prompt: "A 2 kg object moves at 8 m/s. Find its kinetic energy, then explain why this is four times the kinetic energy of the same object at 4 m/s.",
+            prompt: "Pod A has mass 3 kg and speed 10 m/s. Pod B has mass 6 kg and speed 8 m/s. Find the kinetic energy of each pod and state which has the larger motion store.",
             steps: [
-              "Use the kinetic energy relation: E_k = 0.5mv^2.",
-              "Substitute the current values: 0.5 x 2 x 8^2.",
-              "Compare that with the same mass at 4 m/s: 0.5 x 2 x 4^2.",
+              "Use E_k = 0.5 m v^2 for Pod A: 0.5 x 3 x 10^2.",
+              "Use the same relation for Pod B: 0.5 x 6 x 8^2.",
+              "Compare the two answers and notice that the higher mass does not automatically guarantee the larger kinetic energy.",
             ],
-            answer: "The object has 64 J of kinetic energy, which is four times the 16 J at 4 m/s.",
-            answer_reason: "The energy quadruples because speed is squared: doubling speed multiplies v^2 by four even though the mass stays the same.",
+            answer: "Pod A has 150 J, Pod B has 192 J, and Pod B has the larger motion store.",
+            answer_reason: "Even though Pod B is not much faster, its larger mass and the squared-speed factor together give it the larger kinetic energy.",
           },
           extra_examples: [
             {
-              body: "The second example uses inverse reasoning to keep the relationship flexible.",
+              body: "The second example uses a change in speed so students must compare motion stores before and after acceleration.",
               worked_example: {
-                prompt: "A 4 kg object has 200 J of kinetic energy. What speed does it have?",
+                prompt: "A 4 kg trolley speeds up from 3 m/s to 9 m/s. How much does its kinetic energy increase?",
                 steps: [
-                  "Begin with E_k = 0.5mv^2.",
-                  "Substitute 200 = 0.5 x 4 x v^2, so 200 = 2v^2.",
-                  "Solve v^2 = 100 and then take the positive speed magnitude.",
+                  "Find the initial kinetic energy: 0.5 x 4 x 3^2.",
+                  "Find the final kinetic energy: 0.5 x 4 x 9^2.",
+                  "Subtract initial from final to get the increase in the motion store.",
                 ],
-                answer: "The speed is 10 m/s.",
-                answer_reason: "The algebra gives v^2 = 100, so the object's speed magnitude is 10 m/s.",
+                answer: "The kinetic energy increases by 144 J.",
+                answer_reason: "The trolley rises from 18 J to 162 J, so the motion store increases by 162 J - 18 J = 144 J.",
               },
             },
           ],
         };
       case "M3_L4":
         return {
-          body: "The lesson should make work done feel like an energy transfer supported by the equation, not just a number from substitution.",
+          body: "The lesson should make work done feel like an energy transfer story backed by the equation, not just a one-line substitution.",
           worked_example: {
-            prompt: "A 15 N force moves an object 4 m in the same direction, and 12 J is dissipated during the transfer. How much useful energy gain remains?",
+            prompt: "A tow robot pulls with a force of 18 N for 5 m in the same direction as the motion. During the transfer, 24 J is dissipated. Find the total work done, then the useful energy gain.",
             steps: [
-              "Use the simple aligned-force work relation: W = Fd = 15 x 4 = 60 J of energy transferred.",
-              "Write the energy ledger: work done = useful energy gain + dissipated energy.",
-              "Subtract the dissipated part from the total transferred energy.",
+              "Use the aligned-force work relation: W = F d = 18 x 5.",
+              "Interpret that result as the total energy transferred by the pull.",
+              "Write the ledger: total work done = useful gain + dissipated energy, then subtract the 24 J loss.",
             ],
-            answer: "48 J of useful energy gain remains.",
-            answer_reason: "The force does 60 J of work, and after 12 J is dissipated, 48 J remains as useful energy gain.",
+            answer: "The total work done is 90 J, and the useful energy gain is 66 J.",
+            answer_reason: "The pull transfers 90 J in total. After 24 J is dissipated, the remaining 66 J must appear as useful energy gain.",
           },
           extra_examples: [
             {
-              body: "This second route shows a direct change in energy instead of a force-distance setup.",
+              body: "This second route reverses the calculation so students must use work and distance to recover the needed force.",
               worked_example: {
-                prompt: "A lift raises an object so its gravitational potential energy increases from 120 J to 420 J with negligible dissipation. How much work does the lift do?",
+                prompt: "A motor must do 72 J of work while moving a crate through 3 m in the same direction. What constant pulling force is required?",
                 steps: [
-                  "Classify the story as a direct energy-change problem.",
-                  "Find the change in energy: delta E = 420 J - 120 J = 300 J.",
-                  "Use W = delta E because the energy change is given directly.",
+                  "Use W = F d because the force is constant and aligned with the motion.",
+                  "Rearrange for force: F = W / d.",
+                  "Substitute 72 / 3.",
                 ],
-                answer: "The lift does 300 J of work.",
-                answer_reason: "With negligible dissipation, the lift's work equals the 300 J increase in gravitational potential energy.",
+                answer: "A constant force of 24 N is required.",
+                answer_reason: "Dividing the required 72 J of work by the 3 m displacement gives 24 N.",
               },
             },
           ],
         };
       case "M3_L5":
         return {
-          body: "Students need one solved example that keeps power and efficiency separate all the way through.",
+          body: "Students need one solved example that keeps input power, useful power, and efficiency separate all the way through.",
           worked_example: {
-            prompt: "A machine transfers 1200 J in 4 s and delivers 720 J of useful output. Find the power and efficiency, then explain why the two answers are not the same kind of quantity.",
+            prompt: "A machine transfers 2400 J in 8 s and delivers 1500 J of useful output in that same time. Find the input power, useful output power, and efficiency.",
             steps: [
-              "Find power first: P = E / t = 1200 / 4.",
-              "Then find efficiency: efficiency = useful output / total input x 100%.",
-              "State each result with its own meaning instead of blending them together.",
+              "Find the input power from the total transfer rate: P_in = 2400 / 8.",
+              "Find the useful output power from the useful transfer rate: P_useful = 1500 / 8.",
+              "Find efficiency separately as useful output divided by total input, then express it as a percentage.",
             ],
-            answer: "The power is 300 W and the efficiency is 60%.",
-            answer_reason: "300 W tells how quickly the 1200 J is transferred, while 60% tells what fraction of the 1200 J became useful. One is a rate and the other is a fraction.",
+            answer: "The input power is 300 W, the useful output power is 187.5 W, and the efficiency is 62.5%.",
+            answer_reason: "Power measures energy transferred each second, while efficiency measures what fraction of the input becomes useful. They are related, but they are not the same physical quantity.",
           },
           extra_examples: [
             {
-              body: "The second example shows that same efficiency does not force same power.",
+              body: "The second example shows that the same power does not guarantee the same efficiency.",
               worked_example: {
-                prompt: "Two machines are both 50% efficient. Each transfers 1000 J, but Machine A takes 5 s and Machine B takes 2 s. Which is more powerful?",
+                prompt: "Two heaters each transfer energy at 200 W. Heater A gives 160 W of useful heating, while Heater B gives 120 W of useful heating. Which heater is more efficient?",
                 steps: [
-                  "Notice that the useful fraction matches, so efficiency is not the deciding feature.",
-                  "Compute power from total transfer and time for each machine.",
-                  "Compare the two rates directly.",
+                  "Use efficiency = useful power / input power.",
+                  "Calculate Heater A's efficiency as 160 / 200.",
+                  "Calculate Heater B's efficiency as 120 / 200, then compare the percentages.",
                 ],
-                answer: "Machine B is more powerful.",
-                answer_reason: "Both machines have the same efficiency, but Machine B transfers the same total energy in less time, so its power is greater.",
+                answer: "Heater A is more efficient.",
+                answer_reason: "Heater A converts 80% of its input power into useful heating, while Heater B converts 60%, so Heater A wastes less of the same input rate.",
               },
             },
           ],
         };
       case "M3_L6":
         return {
-          body: "The capstone example should make the order of equations visible and justified.",
+          body: "The capstone example should make the order of stages visible and justified, because the output of one stage becomes the input to the next.",
           worked_example: {
-            prompt: "A lift transfers 1500 J with 60% efficiency. The system then loses 20% of that useful energy during launch. A mechanism needs 700 J to operate. Does it succeed?",
+            prompt: "A lifting system receives 2000 J of input energy and is 75% efficient. It raises a 10 kg pod on a world where g = 10 N/kg. After the lift, 20% of the gravitational potential energy is lost before release. If the remaining energy becomes kinetic energy, what release speed is possible?",
             steps: [
-              "Stage 1: use efficiency to find the useful energy after the lift. 0.60 x 1500 J = 900 J.",
-              "Stage 2: apply the later energy loss to the 900 J useful amount. Losing 20% leaves 80%, so 0.80 x 900 J = 720 J.",
-              "Stage 3: compare the final useful energy with the mechanism requirement.",
+              "Stage 1: find the useful lift output from efficiency. 75% of 2000 J gives 1500 J of gravitational potential energy.",
+              "Stage 2: use delta E_p = m g delta h to find the height reached: 1500 = 10 x 10 x delta h, so delta h = 15 m.",
+              "Stage 3: apply the later loss to the 1500 J height store. Losing 20% leaves 80%, so 1200 J remains. Set that equal to 0.5 m v^2 and solve for v.",
             ],
-            answer: "Yes. The system succeeds because 720 J reaches the mechanism, which is 20 J above the 700 J requirement.",
-            answer_reason: "The order matters: the useful energy after the lift has to be found first, then the later energy loss is applied to that result, and only then can the final requirement check be made.",
+            answer: "The pod reaches a height gain of 15 m, and the release speed is about 15.5 m/s.",
+            answer_reason: "The stage order matters. The lift first creates 1500 J of gravitational potential energy, the later 20% loss reduces that to 1200 J, and only then can the remaining energy be converted into kinetic energy to find the speed.",
           },
           extra_examples: [
             {
-              body: "This follow-up uses the same planner logic but asks for the required input instead of the final store.",
+              body: "This follow-up uses the same planner logic but works backward from the required final kinetic energy.",
               worked_example: {
-                prompt: "A mechanism needs 840 J after a stage that loses 30% of the useful lift energy. The lift is 70% efficient. What minimum input energy is required?",
+                prompt: "A sled must leave a ramp with 980 J of kinetic energy. Just before release it loses 30% of the useful lift energy, and the lifting stage is only 70% efficient. What minimum input energy is needed at the start?",
                 steps: [
-                  "Work backward from the mechanism requirement: if 70% remains after the loss, divide the required 840 J by 0.70 to get the useful lift energy needed.",
-                  "Now work backward through the lift efficiency: divide that useful lift energy by 0.70 again.",
-                  "State the result as a minimum input because anything smaller would fail the requirement.",
+                  "Work backward from the final requirement. If 70% remains after the loss, divide 980 J by 0.70 to get the useful lift energy needed before that loss.",
+                  "Now work backward through the 70% efficient lift by dividing again by 0.70.",
+                  "State the result as the minimum starting input because any smaller input would leave the final kinetic energy short.",
                 ],
-                answer: "About 1714 J of input energy is required.",
-                answer_reason: "The system needs 1200 J before the 30% loss, and a 70% efficient lift must receive 1200/0.70, which is about 1714 J.",
+                answer: "About 2000 J of input energy is required.",
+                answer_reason: "The sled needs 1400 J before the 30% loss, and a 70% efficient lift must receive 1400/0.70 = 2000 J of input energy.",
               },
             },
           ],
