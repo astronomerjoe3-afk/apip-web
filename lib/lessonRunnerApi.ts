@@ -19691,7 +19691,7 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
-    const preferLocalScaffold = code === "M1_L1";
+    const preferLocalScaffold = code === "M1_L1" || code === "M10_L1";
     const authoredSections = preferLocalScaffold
       ? []
       : authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
