@@ -12079,6 +12079,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M12_")) {
+    switch (code) {
+      case "M12_L1":
+        return {
+          body: "The first magnetism lesson should stop field lines becoming imaginary travel tracks and instead make learners read direction, source pattern, and relative strength from the same map.",
+          worked_example: {
+            prompt: "A field map shows circular magnetic lines around a straight conductor. At point P above the wire, the compass flag points east. At point Q the lines are farther apart than at P. What does the map tell you about the source, the field direction at P, and the relative field strength at Q?",
+            steps: [
+              "Identify the source from the pattern first: circular field lines around a straight route point to a current-carrying wire, not a bar magnet.",
+              "Read the local direction from the compass flag at P instead of treating the whole pattern as one arrow.",
+              "Use the line spacing to compare strengths: wider spacing at Q means the field there is weaker than at P.",
+            ],
+            answer: "The source is a current-carrying straight wire, the field at P points east, and the field at Q is weaker than at P.",
+            answer_reason: "Magnetic field maps answer three different questions at once: the overall pattern reveals the source type, the local tangent direction shows which way a compass points, and the line density gives the relative strength.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps current reversal tied to field reversal without inventing a new source.",
+              worked_example: {
+                prompt: "Why does reversing the current in a straight wire reverse the circular field direction even though the wire stays in the same place?",
+                steps: [
+                  "Start from the idea that the magnetic field is created by the current in the wire.",
+                  "Change only the current direction, not the wire geometry.",
+                  "Conclude that the circular field pattern stays centered on the wire, but the sense of circulation reverses because the current direction has reversed.",
+                ],
+                answer: "Reversing the current reverses the magnetic field direction because the field is produced by the current, while the wire only fixes where the field is centered.",
+                answer_reason: "The source location and the field direction are separate parts of the story. Keeping the wire fixed does not keep the field direction fixed if the current changes sign.",
+              },
+            },
+          ],
+        };
+      case "M12_L2":
+        return {
+          body: "Electromagnet work should be comparative and causal, so learners explain why turns, current, and a soft-iron core strengthen one field story instead of memorizing three disconnected tricks.",
+          worked_example: {
+            prompt: "Electromagnet A has 60 turns and carries 1.5 A with no core. Electromagnet B has 120 turns, the same current, and a soft-iron core. Which one should lift more paper clips, and which changes make the difference?",
+            steps: [
+              "Compare the turn counts first: B has more turns, so the field from each loop reinforces more strongly.",
+              "Notice that the current is the same, so current does not explain the difference here.",
+              "Add the core argument last: the soft-iron core in B concentrates the field, so B should be stronger for two reasons, not one.",
+            ],
+            answer: "Electromagnet B should lift more because it has more turns and also has a soft-iron core, while the current is unchanged.",
+            answer_reason: "A stronger electromagnet comes from stronger field reinforcement in the coil and better field concentration in the core. The best explanation separates which factor changed and which one stayed fixed.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that the learner keeps temporary magnetization separate from permanent-magnet language.",
+              worked_example: {
+                prompt: "Why is soft iron used as the core of an electromagnet instead of a hard permanent magnet material?",
+                steps: [
+                  "Recall that an electromagnet should become strong when current flows.",
+                  "Then recall that it should also lose most of its magnetism when the current is switched off.",
+                  "Choose the material that strengthens the field but does not stay strongly magnetized afterward.",
+                ],
+                answer: "Soft iron is used because it strengthens the electromagnet while remaining easy to magnetize and demagnetize when the current changes.",
+                answer_reason: "Electromagnets are supposed to be controllable. A core material that stays strongly magnetized would blur the on-off behavior.",
+              },
+            },
+          ],
+        };
+      case "M12_L3":
+        return {
+          body: "Motor-effect examples should be mathematically sharp enough to use the force formula and conceptually sharp enough to keep the force sideways to both field and current.",
+          worked_example: {
+            prompt: "A straight wire of length 0.25 m carries 3.0 A at 90 deg to a 0.40 T magnetic field. Find the force on the wire, then state what happens to the force direction if the current is reversed.",
+            steps: [
+              "Use the conductor-force formula with the angle included: F = B I L sin(theta).",
+              "Substitute the values: F = 0.40 x 3.0 x 0.25 x sin 90 deg = 0.30 N.",
+              "Keep the direction argument separate from the magnitude: reversing the current reverses the force direction while keeping the same force size.",
+            ],
+            answer: "The wire experiences a force of 0.30 N, and reversing the current reverses the force direction.",
+            answer_reason: "The force magnitude comes from field strength, current, length, and crossing angle, while the direction comes from the relative directions of field and current. Changing the current sign flips the sideways kick.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner use the angle factor instead of assuming every crossing is maximum-force.",
+              worked_example: {
+                prompt: "The same wire and current are now at 30 deg to the field instead of 90 deg. What is the new force?",
+                steps: [
+                  "Keep B, I, and L the same and change only the angle factor.",
+                  "Use sin 30 deg = 0.5 in the same formula.",
+                  "Evaluate the new force: F = 0.40 x 3.0 x 0.25 x 0.5 = 0.15 N.",
+                ],
+                answer: "The new force is 0.15 N.",
+                answer_reason: "A conductor parallel to the field gets little or no sideways push, and a perpendicular conductor gets the maximum. The angle factor explains the smaller force here.",
+              },
+            },
+          ],
+        };
+      case "M12_L4":
+        return {
+          body: "Motor examples should feel like an upgraded force-on-a-wire problem, with torque, turns, and commutation all kept visible instead of treated as mysterious machine facts.",
+          worked_example: {
+            prompt: "A motor coil has 120 turns, carries 0.80 A, has area 2.5 x 10^-3 m^2, and sits in a 0.18 T magnetic field at the position of maximum turning effect. Find the turning moment on the coil.",
+            steps: [
+              "Use the maximum-torque formula: turning moment = B I N A.",
+              "Substitute the values carefully: torque = 0.18 x 0.80 x 120 x 2.5 x 10^-3.",
+              "Evaluate the product: torque = 0.0432 N m, then keep the result as a turning effect rather than a plain force.",
+            ],
+            answer: "The turning moment is 0.0432 N m.",
+            answer_reason: "A motor coil turns because opposite sides feel opposite magnetic forces that form a couple. The formula packages that turning effect into field strength, current, turns, and coil area.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the commutator from being mislearned as an extra energy source.",
+              worked_example: {
+                prompt: "Why does a split-ring commutator matter in a d.c. motor?",
+                steps: [
+                  "Start from what would happen without it: after half a turn, the torque would reverse and the coil would tend to stall or rock back.",
+                  "Recall that the commutator swaps the current direction every half-turn.",
+                  "Conclude that the swap keeps the turning effect acting in the same overall rotation direction.",
+                ],
+                answer: "The split-ring commutator keeps the motor turning the same way by reversing the current each half-turn.",
+                answer_reason: "The commutator does not add extra power. Its job is to preserve the direction of the torque as the coil rotates.",
+              },
+            },
+          ],
+        };
+      case "M12_L5":
+        return {
+          body: "Induction work should be explicitly about changing flux, with enough quantitative bite to connect generator ideas to Faraday-style rate-of-change reasoning.",
+          worked_example: {
+            prompt: "A 120-turn coil experiences a flux change from 0.020 Wb to 0.005 Wb in 0.10 s. Find the magnitude of the induced emf.",
+            steps: [
+              "Find the flux change magnitude first: delta(Phi) = 0.020 - 0.005 = 0.015 Wb.",
+              "Use the induction formula for magnitude: induced emf = N delta(Phi) / delta(t).",
+              "Substitute the values: emf = 120 x 0.015 / 0.10 = 18 V.",
+            ],
+            answer: "The induced emf has magnitude 18 V.",
+            answer_reason: "Induction depends on how much magnetic flux changes and how quickly it changes. More turns or a faster change gives a larger emf because the flux-linkage rate is larger.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up stops students from treating any nearby magnet as automatic induction.",
+              worked_example: {
+                prompt: "Why does a stationary magnet held motionless inside a stationary coil fail to produce a sustained induced emf?",
+                steps: [
+                  "Ask what quantity induction depends on before talking about magnets in general.",
+                  "Notice that if the magnet and coil are both still, the magnetic flux through the coil stays constant.",
+                  "Conclude that without a change in flux there is no sustained induced emf.",
+                ],
+                answer: "There is no sustained induced emf because the flux through the coil is not changing when the magnet and coil stay still.",
+                answer_reason: "Induction is a change effect, not a field-presence effect. A magnetic field can be present without producing emf if the flux linkage remains constant.",
+              },
+            },
+          ],
+        };
+      case "M12_L6":
+        return {
+          body: "Transformer examples should link turns ratio, ideal power transfer, and transmission efficiency so the lesson does not collapse into one isolated voltage formula.",
+          worked_example: {
+            prompt: "An ideal transformer has 800 turns on the primary and 40 turns on the secondary. The primary voltage is 240 V and the secondary current is 3.0 A. Find the secondary voltage and the primary current.",
+            steps: [
+              "Use the turns ratio for the voltage first: Vp / Vs = Np / Ns, so 240 / Vs = 800 / 40 = 20.",
+              "Solve for the secondary voltage: Vs = 240 / 20 = 12 V.",
+              "Then use ideal power balance: Vp Ip = Vs Is, so 240 Ip = 12 x 3.0 = 36, giving Ip = 0.15 A.",
+            ],
+            answer: "The secondary voltage is 12 V and the primary current is 0.15 A.",
+            answer_reason: "A step-down transformer lowers voltage according to the turns ratio, and in the ideal model the power transferred on each side is the same, so the current adjusts in the opposite direction.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps transmission-loss reasoning quantitative instead of slogan-based.",
+              worked_example: {
+                prompt: "A power line must transmit 10 kW. Compare the line current if the transmission voltage is 25 kV and if it is 250 kV, then state which case gives lower cable losses.",
+                steps: [
+                  "Use P = V I for each case with the same transmitted power.",
+                  "At 25 kV, I = 10000 / 25000 = 0.40 A. At 250 kV, I = 10000 / 250000 = 0.040 A.",
+                  "Use the idea that cable heating losses scale with I^2 R, so the higher-voltage case gives much smaller losses because the line current is much smaller.",
+                ],
+                answer: "The line current is 0.40 A at 25 kV and 0.040 A at 250 kV, so the 250 kV transmission case gives lower cable losses.",
+                answer_reason: "For fixed power, increasing the transmission voltage decreases the current. Smaller current means much smaller I^2 R heating losses in the cables.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A4_")) {
     switch (code) {
       case "A4_L1":
