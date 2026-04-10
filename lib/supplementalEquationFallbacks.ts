@@ -1053,6 +1053,93 @@ const M3_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const M4_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M4_L1: [
+    {
+      standardFormula: "p = F / A",
+      meaning: "Pressure in solids depends on how concentrated the force is over the contact area.",
+      conditions: "Use for contact pressure in solids and simple footprint comparisons.",
+      unitsText: "Pa or N/m^2",
+    },
+    {
+      standardFormula: "for fixed force, pressure is inversely proportional to area",
+      meaning: "If the same force is spread over a smaller area, the pressure rises by the same factor that the area shrinks.",
+      conditions: "Use for ratio reasoning when force stays constant but contact area changes.",
+      unitsText: "comparison rule",
+    },
+  ],
+  M4_L2: [
+    {
+      standardFormula: "A_min = F / p_limit",
+      meaning: "Design questions start from the maximum allowed pressure and work backward to the minimum safe contact area.",
+      conditions: "Use when a safe pressure limit is given and area is the unknown.",
+      unitsText: "m^2",
+    },
+    {
+      standardFormula: "F_max = p_limit A",
+      meaning: "A given support area can safely carry only the force that keeps pressure at or below the limit.",
+      conditions: "Use when the area is fixed and the safe force is the unknown.",
+      unitsText: "N",
+    },
+  ],
+  M4_L3: [
+    {
+      standardFormula: "p = rho g h",
+      meaning: "Hydrostatic pressure in a resting liquid depends on density, gravitational field strength, and depth.",
+      conditions: "Use for static liquids of roughly constant density.",
+      unitsText: "Pa",
+    },
+    {
+      standardFormula: "delta p = rho g delta h",
+      meaning: "Pressure difference between two depths in the same liquid comes from the extra liquid stack between them.",
+      conditions: "Use when comparing two points in the same liquid with the same rho and g.",
+      unitsText: "Pa",
+    },
+  ],
+  M4_L4: [
+    {
+      standardFormula: "same liquid + same depth -> same pressure",
+      meaning: "Pressure equality in connected resting liquids is a location rule, not a vessel-shape rule.",
+      conditions: "Use only when the liquid and depth both match.",
+      unitsText: "comparison rule",
+    },
+    {
+      standardFormula: "p1 = p2 because rho, g, and h match",
+      meaning: "The same-level rule is justified by the hydrostatic relation, not by visual symmetry alone.",
+      conditions: "Use when explaining why equal-depth points in the same liquid have equal pressure.",
+      unitsText: "Pa",
+    },
+  ],
+  M4_L5: [
+    {
+      standardFormula: "F = pA",
+      meaning: "Once the local pressure is known, the total fluid force on a chosen patch depends on the patch area.",
+      conditions: "Use for force on a submerged or fluid-contact surface patch.",
+      unitsText: "N",
+    },
+    {
+      standardFormula: "pressure is scalar at a point; force acts normal to the surface",
+      meaning: "The pressure value belongs to the location, while the force direction is set by the orientation of the chosen patch.",
+      conditions: "Use when comparing floor, wall, or slanted surfaces at the same point or depth.",
+      unitsText: "direction rule",
+    },
+  ],
+  M4_L6: [
+    {
+      standardFormula: "p_total = p_atm + rho g h",
+      meaning: "At a point below an open liquid surface, total pressure combines atmospheric pressure with the liquid contribution.",
+      conditions: "Use for open-surface liquids rather than sealed containers or gauge-only questions.",
+      unitsText: "Pa",
+    },
+    {
+      standardFormula: "liquid contribution = rho g h only",
+      meaning: "The hydrostatic term gives the pressure added by the liquid stack; it does not include the atmospheric part.",
+      conditions: "Use when a question asks separately for gauge pressure and total pressure.",
+      unitsText: "Pa",
+    },
+  ],
+};
+
 const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A2_L1: [
     {
@@ -1480,6 +1567,9 @@ export function supplementalEquationFallbacksForLesson(code: string): FormulaFal
   }
   if (M3_FORMULA_OVERRIDES[code]) {
     return M3_FORMULA_OVERRIDES[code];
+  }
+  if (M4_FORMULA_OVERRIDES[code]) {
+    return M4_FORMULA_OVERRIDES[code];
   }
   if (A3_FORMULA_OVERRIDES[code]) {
     return A3_FORMULA_OVERRIDES[code];

@@ -10477,6 +10477,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M4_")) {
+    switch (code) {
+      case "M4_L1":
+        return {
+          body: "Pressure in solids should be treated as a force-crowding comparison, not as a force-only question.",
+          worked_example: {
+            prompt: "A 960 N machine stands first on a base area of 0.24 m^2 and then on a narrower maintenance frame of 0.06 m^2. Find the pressure in each case and state how many times larger the second pressure is.",
+            steps: [
+              "Use p = F / A for the wide base first: 960 / 0.24.",
+              "Use the same total force on the narrower frame: 960 / 0.06.",
+              "Compare the two answers as a ratio so the area effect stays visible.",
+            ],
+            answer: "The pressures are 4000 Pa and 16000 Pa, so the narrower frame gives four times the pressure.",
+            answer_reason: "The total force is unchanged, so the pressure change comes entirely from the contact area. Reducing the area to one quarter makes the pressure four times larger.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the same pressure idea but runs it backward from a floor limit.",
+              worked_example: {
+                prompt: "A fragile floor can safely handle 5000 Pa. If a crate pushes down with 750 N, what minimum contact area is needed?",
+                steps: [
+                  "Start from the pressure relation p = F / A.",
+                  "Rearrange to A = F / p because the safe area is the unknown.",
+                  "Substitute 750 / 5000 to find the minimum area that keeps the pressure at or below the limit.",
+                ],
+                answer: "The minimum contact area is 0.15 m^2.",
+                answer_reason: "Dividing the 750 N force by the 5000 Pa limit gives 0.15 m^2, so any smaller area would crowd the force too much and exceed the safe pressure.",
+              },
+            },
+          ],
+        };
+      case "M4_L2":
+        return {
+          body: "Pressure-design questions should feel like safe-footprint planning, not just formula rearrangement practice.",
+          worked_example: {
+            prompt: "A 1200 N drone lands on three identical skids. The sand can safely tolerate 4000 Pa. What minimum total contact area is needed, and what minimum area must each skid provide if the load is shared equally?",
+            steps: [
+              "Use the safe-pressure design rule A_total = F / p_limit for the whole drone first.",
+              "Substitute 1200 / 4000 to find the total minimum contact area.",
+              "Because the load is shared equally by three skids, divide the total area by 3 to find the minimum area per skid.",
+            ],
+            answer: "The minimum total area is 0.30 m^2, so each skid must provide at least 0.10 m^2.",
+            answer_reason: "Safe design starts from the pressure limit. The drone needs 1200 / 4000 = 0.30 m^2 in total, and equal sharing across three skids gives 0.10 m^2 per skid.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up flips the design question so the learner solves for the maximum safe force instead of the minimum area.",
+              worked_example: {
+                prompt: "A support plate has area 0.18 m^2 and the floor limit is 6000 Pa. What is the maximum safe force the plate can apply?",
+                steps: [
+                  "Use F = pA because the pressure limit and area are known.",
+                  "Substitute 6000 x 0.18.",
+                  "Interpret the result as a maximum safe force, not just a calculated force.",
+                ],
+                answer: "The maximum safe force is 1080 N.",
+                answer_reason: "At the pressure limit, the plate can apply 6000 x 0.18 = 1080 N. Any greater force would push the pressure above the safe value.",
+              },
+            },
+          ],
+        };
+      case "M4_L3":
+        return {
+          body: "Hydrostatic pressure should compare depth, density, and gravitational field strength together so learners stop blaming container width.",
+          worked_example: {
+            prompt: "Point A is 6 m below the surface in seawater of density 1030 kg/m^3. Point B is 8 m below the surface in oil of density 800 kg/m^3. Take g = 10 N/kg for both. Find the pressure at each point and state which is greater.",
+            steps: [
+              "Use p = rho g h for Point A: 1030 x 10 x 6.",
+              "Use the same relation for Point B: 800 x 10 x 8.",
+              "Compare the two pressures and explain the result using both depth and density rather than one factor alone.",
+            ],
+            answer: "Point A has 61800 Pa, Point B has 64000 Pa, and Point B is greater by 2200 Pa.",
+            answer_reason: "Hydrostatic pressure depends on rho, g, and h together. Point B is in a less dense liquid, but its greater depth is enough to give the larger pressure overall.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner use pressure difference rather than two full separate calculations.",
+              worked_example: {
+                prompt: "In water with density 1000 kg/m^3, how much does pressure increase between depths of 2 m and 5.5 m when g = 10 N/kg?",
+                steps: [
+                  "Use the depth change directly: delta h = 5.5 - 2.0 = 3.5 m.",
+                  "Apply delta p = rho g delta h instead of recalculating both full pressures from zero.",
+                  "Substitute 1000 x 10 x 3.5.",
+                ],
+                answer: "The pressure increases by 35000 Pa.",
+                answer_reason: "Only the extra 3.5 m of liquid stack matters for the increase, so the pressure rise is 1000 x 10 x 3.5 = 35000 Pa.",
+              },
+            },
+          ],
+        };
+      case "M4_L4":
+        return {
+          body: "The same-level rule should defeat the vessel-shape misconception by comparing multiple points, not by repeating a slogan.",
+          worked_example: {
+            prompt: "In the same resting tank of water, sensors A and B are at the same depth but on different-shaped sides of the vessel. Sensor C is 0.8 m deeper than A. Which sensor readings match, and how can you justify that with hydrostatic reasoning?",
+            steps: [
+              "Start with the same-level rule: in the same liquid, equal depth means equal pressure.",
+              "Use that to match A and B even though the vessel shape is different around them.",
+              "Compare C with A by noting that C has a larger h value in p = rho g h, so its pressure must be greater.",
+            ],
+            answer: "Sensors A and B match, while sensor C reads a higher pressure.",
+            answer_reason: "Pressure at a point in a resting liquid depends on the liquid, g, and depth. A and B share the same liquid and the same depth, so they match; C is deeper, so its pressure is larger.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that the learner knows exactly when the same-level shortcut is allowed.",
+              worked_example: {
+                prompt: "Two patches are at the same depth, but one is in water and one is in oil. Can you still say their pressures are equal?",
+                steps: [
+                  "Check the full same-level condition instead of stopping at the equal depth.",
+                  "Notice that the liquids are different, so rho is not the same in p = rho g h.",
+                  "Conclude that equal depth alone is not enough for equal pressure across different liquids.",
+                ],
+                answer: "No. Equal depth alone is not enough because the liquids have different densities.",
+                answer_reason: "The same-level shortcut only works when the liquid is the same as well. If rho changes, the pressure can change even at the same depth.",
+              },
+            },
+          ],
+        };
+      case "M4_L5":
+        return {
+          body: "Pressure-at-a-point questions should separate the scalar pressure value from the force on a chosen surface patch.",
+          worked_example: {
+            prompt: "At one point in water, the pressure is 18000 Pa. A wall patch of area 0.30 m^2 and a hatch patch of area 0.45 m^2 both pass through that point. Find the force on each patch and explain why the forces can point in different directions even though the pressure is the same.",
+            steps: [
+              "Use F = pA for the wall patch: 18000 x 0.30.",
+              "Use the same pressure with the hatch area: 18000 x 0.45.",
+              "Keep the distinction clear: pressure belongs to the location, but each force acts normal to its own patch.",
+            ],
+            answer: "The wall patch feels 5400 N and the hatch patch feels 8100 N. The forces can point in different directions because each force is perpendicular to its own surface.",
+            answer_reason: "The pressure is the same at that location in the fluid, but a larger area collects more total force. Force direction depends on patch orientation, not on pressure becoming a vector itself.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the same point pressure but asks for the missing area instead of the force.",
+              worked_example: {
+                prompt: "A submerged inspection panel feels a total fluid force of 9600 N where the pressure is 24000 Pa. What is the panel area?",
+                steps: [
+                  "Use F = pA because force and pressure are known.",
+                  "Rearrange to A = F / p.",
+                  "Substitute 9600 / 24000.",
+                ],
+                answer: "The panel area is 0.40 m^2.",
+                answer_reason: "Dividing the total force by the local pressure gives the required area: 9600 / 24000 = 0.40 m^2.",
+              },
+            },
+          ],
+        };
+      case "M4_L6":
+        return {
+          body: "Open-liquid pressure questions should explicitly combine atmospheric pressure with the liquid contribution instead of quietly dropping one of them.",
+          worked_example: {
+            prompt: "At a mountain station, atmospheric pressure is 8.6 x 10^4 Pa. A point is 5.0 m below the surface of water of density 1000 kg/m^3, with g = 10 N/kg. Find the liquid contribution and the total pressure at the point.",
+            steps: [
+              "Find the liquid contribution first with rho g h = 1000 x 10 x 5.0.",
+              "Keep that result separate from the atmospheric part rather than mixing them too early.",
+              "Add atmospheric pressure and liquid pressure to get the total open-liquid pressure.",
+            ],
+            answer: "The liquid contribution is 5.0 x 10^4 Pa, so the total pressure is 1.36 x 10^5 Pa.",
+            answer_reason: "In an open liquid, the point carries both the sky-blanket load and the liquid-stack load. That is why the total is 8.6 x 10^4 Pa + 5.0 x 10^4 Pa = 1.36 x 10^5 Pa.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up compares two open-liquid locations so altitude and liquid depth both stay visible.",
+              worked_example: {
+                prompt: "Two divers are each 3 m below the surface of water. Diver A is at sea level where atmospheric pressure is 1.01 x 10^5 Pa. Diver B is on a plateau where atmospheric pressure is 8.9 x 10^4 Pa. Which diver experiences the greater total pressure, and by how much?",
+                steps: [
+                  "Notice that the liquid contribution is the same for both divers because rho, g, and h are the same.",
+                  "Find that shared liquid contribution: 1000 x 10 x 3 = 3.0 x 10^4 Pa.",
+                  "Add the same liquid part to each atmospheric value, then compare the totals.",
+                ],
+                answer: "Diver A experiences the greater total pressure by 1.2 x 10^4 Pa.",
+                answer_reason: "Both divers get the same 3.0 x 10^4 Pa from the water, so the difference in total pressure comes entirely from the different atmospheric pressures: 1.01 x 10^5 - 8.9 x 10^4 = 1.2 x 10^4 Pa.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("M6_")) {
     switch (code) {
       case "M6_L1":
@@ -17016,6 +17196,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("A4_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("A4_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("A4_L6", "captions.vtt"),
+      };
+    case "A5_L1":
+      return {
+        body: "Use this video to separate equilibrium, amplitude, excursion, and restoring direction before the worked example begins.",
+        caption: "Video explainer: equilibrium, amplitude, restoring tendency, and cycle-distance reading before the lesson example.",
+        highlights: [
+          "Oscillation is motion about an equilibrium position",
+          "Amplitude is a one-side maximum displacement, not the full excursion",
+          "The restoring effect always points back toward equilibrium",
+        ],
+        checkForUnderstanding: "If a mass starts at the right-hand turning point, what should you decide first before doing any calculation: the restoring direction, or the total distance in a cycle?",
+        video_url: staticVideoAssetUrl("A5_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A5_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A5_L1", "captions.vtt"),
+      };
+    case "A5_L2":
+      return {
+        body: "Use this video to make the SHM condition precise before the worked example begins.",
+        caption: "Video explainer: restoring force, sign-aware acceleration, and proportional SHM reasoning before the lesson example.",
+        highlights: [
+          "SHM is a special oscillation with restoring acceleration proportional to displacement",
+          "The sign shows that acceleration points back toward equilibrium",
+          "Halving displacement halves the restoring acceleration magnitude in the same system",
+        ],
+        checkForUnderstanding: "If the displacement flips sign across equilibrium, what must happen to the restoring acceleration sign in SHM?",
+        video_url: staticVideoAssetUrl("A5_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A5_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A5_L2", "captions.vtt"),
+      };
+    case "A5_L3":
+      return {
+        body: "Use this video to connect SHM equations, time graphs, and phase checkpoints before the worked example begins.",
+        caption: "Video explainer: sinusoidal traces, period-frequency links, phase checkpoints, and maximum-speed reading before the lesson example.",
+        highlights: [
+          "One SHM equation can reveal amplitude, angular frequency, period, and frequency together",
+          "Displacement, velocity, and acceleration are phase-linked views of one motion",
+          "Equilibrium crossings and turning points tell you which quantity is largest",
+        ],
+        checkForUnderstanding: "When the displacement is zero in ideal SHM, which quantity should you inspect next before guessing the motion state: speed, acceleration, or neither?",
+        video_url: staticVideoAssetUrl("A5_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A5_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A5_L3", "captions.vtt"),
+      };
+    case "A5_L4":
+      return {
+        body: "Use this video to run the SHM energy ledger before the worked example begins.",
+        caption: "Video explainer: total energy, elastic share, kinetic share, and maximum-speed checkpoints before the lesson example.",
+        highlights: [
+          "Amplitude fixes the total energy of the ideal oscillator",
+          "Potential and kinetic energy swap roles as the oscillator moves",
+          "Maximum speed occurs where the displacement is zero",
+        ],
+        checkForUnderstanding: "If you already know the amplitude of a mass-spring oscillator, what should you calculate first before finding energy at a specific displacement?",
+        video_url: staticVideoAssetUrl("A5_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A5_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A5_L4", "captions.vtt"),
+      };
+    case "A5_L5":
+      return {
+        body: "Use this video to compare natural frequency, driving frequency, and damping before the worked example begins.",
+        caption: "Video explainer: forced oscillations, resonance matching, period-frequency conversion, and damping-peak shape before the lesson example.",
+        highlights: [
+          "Natural frequency belongs to the system while driving frequency belongs to the source",
+          "The strongest steady response appears near frequency match",
+          "Damping lowers and broadens the resonance peak",
+        ],
+        checkForUnderstanding: "If several drivers are available, what should you compare first before predicting the largest steady-state amplitude: the biggest number, or the closest match to the natural frequency?",
+        video_url: staticVideoAssetUrl("A5_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A5_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A5_L5", "captions.vtt"),
+      };
+    case "A5_L6":
+      return {
+        body: "Use this video to combine exponential decay, damping classes, and application choice before the worked example begins.",
+        caption: "Video explainer: amplitude decay, underdamped versus critical versus overdamped response, and application-fit reasoning before the lesson example.",
+        highlights: [
+          "Damping removes energy so the motion envelope shrinks over time",
+          "Underdamped motion still oscillates while the amplitude decays",
+          "Critical damping is the fastest non-oscillatory return, while overdamping is slower",
+        ],
+        checkForUnderstanding: "When a system settles without overshooting, what should you decide next before naming the damping style: whether it still oscillates, or whether the initial amplitude was large?",
+        video_url: staticVideoAssetUrl("A5_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A5_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A5_L6", "captions.vtt"),
       };
     case "A1_L1":
       return {
