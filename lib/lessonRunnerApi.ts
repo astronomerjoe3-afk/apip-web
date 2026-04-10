@@ -6488,6 +6488,8 @@ function normalizeRenderedPhysicsText(value: string): string {
     .replace(/\bomega\b/gi, "ω")
     .replace(/\bsigma\b/gi, "σ")
     .replace(/\bpi\b/gi, "π")
+    .replace(/[\u03A3\u03C3]\s*f\s*_?\s*([xy])\b/gi, (_match, axis: string) => `\u03A3F_${axis.toLowerCase()}`)
+    .replace(/[\u03A3\u03C3]\s*f\b/gi, "\u03A3F")
     .replace(/\bKmax\b/g, "K_max")
     .replace(/\bdegree C\b/gi, "°C")
     .replace(/\bJ\/kg\s*°C\b/g, "J/kg°C")
