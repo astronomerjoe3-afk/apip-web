@@ -18117,7 +18117,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410e";
+  const assetVersion = "20260410m9";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
@@ -19227,6 +19227,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M8_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M8_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M8_L6", "captions.vtt"),
+      };
+    case "M9_L1":
+      return {
+        body: "Use this video to separate the vibrating source from the medium's relay role before the worked example begins.",
+        caption: "Video explainer: vibrating source, launched frequency, source-period reading, and medium-relay logic before the lesson example.",
+        highlights: [
+          "Sound starts with a vibrating source",
+          "The source frequency becomes the sound frequency",
+          "The medium relays the disturbance instead of inventing a new cycle rate",
+        ],
+        checkForUnderstanding: "If a speaker cone stops vibrating while air is still present, what part of the sound story disappears first?",
+        video_url: staticVideoAssetUrl("M9_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L1", "captions.vtt"),
+      };
+    case "M9_L2":
+      return {
+        body: "Use this video to separate local particle motion from pattern travel before the worked example begins.",
+        caption: "Video explainer: longitudinal sound, compression-rarefaction reading, and pattern-speed interpretation before the lesson example.",
+        highlights: [
+          "Sound in air is a longitudinal pressure wave",
+          "Particles oscillate locally while the pressure pattern moves onward",
+          "Wave speed belongs to the moving pattern, not to one particle crossing the tube",
+        ],
+        checkForUnderstanding: "When a compression pattern travels east, what should you check first before deciding whether the wave is longitudinal or transverse?",
+        video_url: staticVideoAssetUrl("M9_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L2", "captions.vtt"),
+      };
+    case "M9_L3":
+      return {
+        body: "Use this video to keep pitch, loudness, wavelength, and same-medium speed in the correct roles before the worked example begins.",
+        caption: "Video explainer: frequency-pitch link, wavelength reading, same-medium speed, and loudness separation before the lesson example.",
+        highlights: [
+          "Pitch follows frequency",
+          "In the same medium, higher frequency means shorter wavelength rather than faster sound",
+          "Loudness should not be used to answer a pitch question",
+        ],
+        checkForUnderstanding: "If two sounds travel through the same air and one has the higher pitch, what quantity is safest to compare first?",
+        video_url: staticVideoAssetUrl("M9_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L3", "captions.vtt"),
+      };
+    case "M9_L4":
+      return {
+        body: "Use this video to classify ultrasound correctly and keep the 'still sound' idea alive before the worked example begins.",
+        caption: "Video explainer: hearing-band classification, ultrasound wavelength, and boundary-reflection use before the lesson example.",
+        highlights: [
+          "Ultrasound is sound above the usual human hearing range",
+          "It still obeys the ordinary sound-wave relation lambda = v / f",
+          "Boundary reflection use only makes sense after the frequency band is classified correctly",
+        ],
+        checkForUnderstanding: "Before explaining why a medical scanner can use ultrasound, what should you classify first: the frequency band or the application story?",
+        video_url: staticVideoAssetUrl("M9_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L4", "captions.vtt"),
+      };
+    case "M9_L5":
+      return {
+        body: "Use this video to treat echo timing as a round-trip story before the worked example begins.",
+        caption: "Video explainer: pulse-echo timing, divide-by-two depth reading, and multi-echo scan mapping before the lesson example.",
+        highlights: [
+          "Echo time records an out-and-back journey",
+          "Depth uses v t / 2, not just v t",
+          "A scan image comes from many ordered echoes, not one isolated return",
+        ],
+        checkForUnderstanding: "When an echo returns later than another echo, what should you decide first before using the formula: which path was longer, or which number looks larger?",
+        video_url: staticVideoAssetUrl("M9_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L5", "captions.vtt"),
+      };
+    case "M9_L6":
+      return {
+        body: "Use this video to read the Doppler shift sign before naming the motion direction before the worked example begins.",
+        caption: "Video explainer: transmitted-versus-returned comparison, shift sign, and ultrasound flow reading before the lesson example.",
+        highlights: [
+          "Compare returned frequency with transmitted frequency first",
+          "A higher returned frequency means motion toward the probe",
+          "A lower returned frequency means motion away from the probe",
+        ],
+        checkForUnderstanding: "If the returned frequency is lower than the transmitted frequency, what should you name first: the sign of the shift or the medical meaning?",
+        video_url: staticVideoAssetUrl("M9_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L6", "captions.vtt"),
       };
     case "A2_L1":
       return {

@@ -1,0 +1,373 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.777
+Pulse-echo questions become much easier once the learner hears the timing as an out-and-back journey instead of as a one-way trip.
+
+2
+00:00:05.777 --> 00:00:11.555
+The probe sends a pulse, the boundary reflects part of it, and the echo returns.
+
+3
+00:00:11.555 --> 00:00:17.332
+That means the measured time belongs to two legs of travel.
+
+4
+00:00:17.332 --> 00:00:23.109
+The divide-by-two step is not a trick to memorize.
+
+5
+00:00:23.109 --> 00:00:28.886
+It is simply the mathematical way of turning round-trip distance into one-way depth.
+
+6
+00:00:28.886 --> 00:00:34.664
+This lesson gets richer because one echo gives one clue, while many echoes together build a scan map.
+
+7
+00:00:34.664 --> 00:00:40.441
+Keep this takeaway in view: Lesson 5 becomes safer once measured echo time is treated as a full round trip before any formula is used.
+
+8
+00:00:40.441 --> 00:00:46.218
+Pulse out means first leg.
+
+9
+00:00:46.218 --> 00:00:51.995
+The ultrasound pulse travels from the probe to a boundary in the tissue.
+
+10
+00:00:51.995 --> 00:00:57.773
+Echo back means second leg.
+
+11
+00:00:57.773 --> 00:01:03.550
+The reflected part of the pulse returns to the probe and completes the round trip.
+
+12
+00:01:03.550 --> 00:01:09.813
+This diagram matters because it shows the outward journey and the return journey as one linked event.
+
+13
+00:01:09.813 --> 00:01:16.077
+The probe sends the pulse.
+
+14
+00:01:16.077 --> 00:01:22.340
+A boundary reflects part of the sound.
+
+15
+00:01:22.340 --> 00:01:28.603
+The echo comes back to the probe, and only then is the time recorded.
+
+16
+00:01:28.603 --> 00:01:34.867
+That is why the full time covers twice the one-way depth.
+
+17
+00:01:34.867 --> 00:01:41.130
+The same board can also hint at something richer: once several boundaries give several returns, the learner can start to see how an image grows out of many ordered echo times.
+
+18
+00:01:41.130 --> 00:01:47.393
+Keep this takeaway in view: A good pulse-echo explanation makes the round-trip picture visible before the formula appears.
+
+19
+00:01:47.393 --> 00:01:53.657
+Outward leg: The first half of the measured journey carries the pulse from the probe to the boundary.
+
+20
+00:01:53.657 --> 00:01:59.920
+Return leg: The second half of the measured journey carries the echo back to the probe.
+
+21
+00:01:59.920 --> 00:02:06.246
+A canyon-echo analogy helps because it makes the round-trip logic obvious.
+
+22
+00:02:06.246 --> 00:02:12.571
+You shout, the sound travels outward to a distant wall, and then the echo travels back to you.
+
+23
+00:02:12.571 --> 00:02:18.897
+If you timed the whole wait, you would never call that time the one-way travel time unless you were willing to divide the journey into two equal legs.
+
+24
+00:02:18.897 --> 00:02:25.222
+Ultrasound scanning is more controlled and more precise than a canyon echo, but the same round-trip logic is doing the work underneath the medical application.
+
+25
+00:02:25.222 --> 00:02:31.548
+Keep this takeaway in view: The canyon picture makes the halving step feel earned instead of memorized.
+
+26
+00:02:31.548 --> 00:02:37.873
+Outward travel means to the wall.
+
+27
+00:02:37.873 --> 00:02:44.199
+The sound needs time to reach the reflecting boundary.
+
+28
+00:02:44.199 --> 00:02:50.524
+Return travel means back to you.
+
+29
+00:02:50.524 --> 00:02:56.850
+The echo needs additional time to come back after the reflection.
+
+30
+00:02:56.850 --> 00:03:03.206
+The core relation is depth equals speed times echo time divided by two.
+
+31
+00:03:03.206 --> 00:03:09.563
+The speed tells you how quickly the pulse moves through the tissue.
+
+32
+00:03:09.563 --> 00:03:15.919
+The time tells you how long the full out-and-back journey took.
+
+33
+00:03:15.919 --> 00:03:22.275
+Dividing by two converts that full journey into the one-way depth to the reflecting boundary.
+
+34
+00:03:22.275 --> 00:03:28.632
+Once that is secure, the learner can compare two echoes and immediately say that the earlier return came from the nearer boundary because its round trip was shorter.
+
+35
+00:03:28.632 --> 00:03:34.988
+Keep this takeaway in view: The formula scene becomes strong once the learner hears depth = v t / 2 as a story about the full journey being halved.
+
+36
+00:03:34.988 --> 00:03:41.345
+One boundary: A single echo return can locate one reflecting boundary by using the halved path.
+
+37
+00:03:41.345 --> 00:03:47.701
+Two boundaries: Comparing return times reveals which boundary is nearer and which is deeper.
+
+38
+00:03:47.701 --> 00:03:54.057
+echo time records the full out-and-back journey.
+
+39
+00:03:54.057 --> 00:04:00.414
+Say 'round trip first' before using the formula.
+
+40
+00:04:00.414 --> 00:04:06.770
+That keeps the divide-by-two step physically meaningful.
+
+41
+00:04:06.770 --> 00:04:12.838
+A strong routine for this lesson has three steps.
+
+42
+00:04:12.838 --> 00:04:18.906
+First say that the pulse launches, reflects, and returns, so the time is round-trip time.
+
+43
+00:04:18.906 --> 00:04:24.974
+Second use depth equals speed times time divided by two to get the one-way depth.
+
+44
+00:04:24.974 --> 00:04:31.042
+Third compare the echo arrival order to decide which boundary is nearer or farther.
+
+45
+00:04:31.042 --> 00:04:37.110
+This keeps the lesson disciplined and prevents the most common error, which is treating the measured time as though it already belonged to one-way travel.
+
+46
+00:04:37.110 --> 00:04:43.178
+Keep this takeaway in view: Launch, return, and depth is the safest routine for every pulse-echo calculation.
+
+47
+00:04:43.178 --> 00:04:49.246
+Step 1 means name the full journey.
+
+48
+00:04:49.246 --> 00:04:55.314
+Say out loud that the pulse travels out and back before the time is used.
+
+49
+00:04:55.314 --> 00:05:01.382
+Step 2 means halve the path.
+
+50
+00:05:01.382 --> 00:05:07.450
+Use depth = v t / 2 to convert the full travel distance into one-way depth.
+
+51
+00:05:07.450 --> 00:05:13.170
+Many learners can use the divide-by-two step without being able to explain it, and that is too fragile for a rich lesson.
+
+52
+00:05:13.170 --> 00:05:18.890
+The measured time starts when the pulse leaves the probe and stops when the echo returns.
+
+53
+00:05:18.890 --> 00:05:24.610
+That means the pulse has already travelled to the boundary and back again.
+
+54
+00:05:24.610 --> 00:05:30.330
+The value v t therefore represents the full distance of both legs together.
+
+55
+00:05:30.330 --> 00:05:36.050
+Only after that full path is recognized should it be halved to give the one-way depth.
+
+56
+00:05:36.050 --> 00:05:41.770
+That explanatory pause prevents a huge number of mistakes later.
+
+57
+00:05:41.770 --> 00:05:47.490
+Keep this takeaway in view: The divide-by-two step becomes trustworthy once the learner can defend what v t means physically.
+
+58
+00:05:47.490 --> 00:05:53.210
+Measured time means from launch to return.
+
+59
+00:05:53.210 --> 00:05:58.930
+The timer covers the whole journey, not just the outward leg.
+
+60
+00:05:58.930 --> 00:06:04.650
+v t meaning means full path length.
+
+61
+00:06:04.650 --> 00:06:10.370
+Speed times total echo time gives the out-and-back distance travelled by the pulse.
+
+62
+00:06:10.370 --> 00:06:16.181
+A richer scan story needs more than one boundary.
+
+63
+00:06:16.181 --> 00:06:21.992
+The earliest echo usually comes from the nearest reflector.
+
+64
+00:06:21.992 --> 00:06:27.803
+Later echoes come from deeper boundaries because their round-trip paths are longer.
+
+65
+00:06:27.803 --> 00:06:33.614
+When the probe sends many pulses across nearby positions, those timed returns can be assembled into a map of hidden structure.
+
+66
+00:06:33.614 --> 00:06:39.425
+This scene matters because it stops the lesson from shrinking into one formula line and instead shows why pulse-echo timing is useful for imaging at all.
+
+67
+00:06:39.425 --> 00:06:45.236
+Keep this takeaway in view: Lesson 5 stays rich when the learner sees pulse-echo timing as image-building logic, not just formula substitution.
+
+68
+00:06:45.236 --> 00:06:51.047
+Early return means near boundary.
+
+69
+00:06:51.047 --> 00:06:56.858
+A shorter round trip means the reflector is closer to the probe.
+
+70
+00:06:56.858 --> 00:07:02.669
+Late return means deeper boundary.
+
+71
+00:07:02.669 --> 00:07:08.480
+A longer round trip means the reflector sits farther from the probe.
+
+72
+00:07:08.480 --> 00:07:12.803
+Run four checks.
+
+73
+00:07:12.803 --> 00:07:17.125
+Echo time is round-trip time.
+
+74
+00:07:17.125 --> 00:07:21.448
+Depth comes from speed times time divided by two.
+
+75
+00:07:21.448 --> 00:07:25.771
+An earlier echo comes from a nearer boundary when the medium speed is unchanged.
+
+76
+00:07:25.771 --> 00:07:30.094
+And many echoes together can build a scan map instead of giving just one isolated clue.
+
+77
+00:07:30.094 --> 00:07:34.416
+Those four checks capture the whole lesson structure before the arithmetic begins.
+
+78
+00:07:34.416 --> 00:07:38.739
+Keep this takeaway in view: The worked example is ready once the learner can explain why the measured time must be halved before depth is stated.
+
+79
+00:07:38.739 --> 00:07:43.062
+Time means round-trip.
+
+80
+00:07:43.062 --> 00:07:47.385
+The timer runs from pulse launch to echo return.
+
+81
+00:07:47.385 --> 00:07:51.707
+Depth means v t / 2.
+
+82
+00:07:51.707 --> 00:07:56.030
+Halve the full journey to get the one-way boundary depth.
+
+83
+00:07:56.030 --> 00:08:02.574
+Start by saying that each echo time covers the journey out to a boundary and back again.
+
+84
+00:08:02.574 --> 00:08:09.117
+Then use depth equals speed times time divided by two for each return.
+
+85
+00:08:09.117 --> 00:08:15.661
+After both depths are found, compare the arrival times and say which boundary is nearer to the probe.
+
+86
+00:08:15.661 --> 00:08:22.205
+If a follow-up asks why the divide-by-two step matters, return to the launch-and-return picture before touching the numbers again.
+
+87
+00:08:22.205 --> 00:08:28.748
+That is the cleanest route into the worked example.
+
+88
+00:08:28.748 --> 00:08:35.292
+Keep this takeaway in view: Lesson 5 becomes much safer once the learner can explain both the halving step and the many-echo scan story.
+
+89
+00:08:35.292 --> 00:08:41.835
+Do not skip the story: Say why the time is round-trip time before using depth = v t / 2.
+
+90
+00:08:41.835 --> 00:08:48.379
+Do not skip the ordering: After calculating depths, use the arrival order to state which boundary is nearer.
+
+91
+00:08:48.379 --> 00:08:54.923
+echo time = round-trip time.
+
+92
+00:08:54.923 --> 00:09:01.466
+use depth = v t / 2 for each return.
+
+93
+00:09:01.466 --> 00:09:08.010
+The best answers protect the round-trip logic before they protect the arithmetic.

@@ -1,0 +1,28 @@
+{
+  "lesson_id": "M9_L5",
+  "module": "M9",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 548.01,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: echo time is round-trip time, so use depth = v t / 2, then order the echoes by arrival time to build the boundary map.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "round_trip_logic",
+    "scan_building",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\05_m9_l5_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\05_m9_l5_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\05_m9_l5_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\05_m9_l5_preworked_explainer\\thumbnail.png"
+  }
+}
