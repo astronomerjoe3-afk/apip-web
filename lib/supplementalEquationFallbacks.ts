@@ -849,6 +849,123 @@ const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const A3_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  A3_L1: [
+    {
+      standardFormula: "resultant displacement = sum(individual displacements)",
+      meaning: "Superposition combines the displacements from each overlapping wave at the same place and time.",
+      conditions: "Use when two or more waves overlap and the question asks for the net displacement.",
+      unitsText: "m, cm, or mm",
+    },
+    {
+      standardFormula: "in-phase equal-sign contributions -> reinforcement; opposite-sign contributions -> cancellation",
+      meaning: "The sign and phase relation of the overlapping displacements control whether the resultant is larger or smaller.",
+      conditions: "Use when classifying overlap as constructive, destructive, or partial cancellation.",
+      unitsText: "classification rule",
+    },
+  ],
+  A3_L2: [
+    {
+      standardFormula: "L = n lambda / 2",
+      meaning: "A string fixed at both ends supports only harmonics whose wavelength fits an integer number of half-wavelengths into the length.",
+      conditions: "Use for stationary waves on strings or similar fixed-fixed boundaries.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "f = v / lambda = n v / (2 L)",
+      meaning: "The harmonic frequency follows from the wave speed and the fitted wavelength.",
+      conditions: "Use when a standing-wave question gives length, harmonic number, and wave speed.",
+      unitsText: "Hz",
+    },
+  ],
+  A3_L3: [
+    {
+      standardFormula: "constructive: path difference = n lambda",
+      meaning: "A bright interference point occurs when the two paths differ by a whole number of wavelengths.",
+      conditions: "Use for double-slit or coherent-source interference classification.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "destructive: path difference = (n + 1/2) lambda",
+      meaning: "A dark interference point occurs when the path difference is a half-integer number of wavelengths.",
+      conditions: "Use for double-slit or coherent-source interference classification.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "w = lambda D / a",
+      meaning: "Fringe spacing depends on wavelength, screen distance, and slit separation.",
+      conditions: "Use for small-angle double-slit fringe calculations.",
+      unitsText: "m",
+    },
+  ],
+  A3_L4: [
+    {
+      standardFormula: "n lambda = d sin(theta)",
+      meaning: "A diffraction grating sends each order into the angle that satisfies the path-difference condition.",
+      conditions: "Use for diffraction-grating order-angle calculations.",
+      unitsText: "m or deg",
+    },
+    {
+      standardFormula: "d = 1 / line density",
+      meaning: "The slit spacing is the reciprocal of the number of lines per unit length.",
+      conditions: "Use when grating questions give lines per mm or lines per m instead of spacing directly.",
+      unitsText: "m",
+    },
+    {
+      standardFormula: "n_max <= d / lambda",
+      meaning: "The highest possible order is limited by the fact that sin(theta) cannot exceed 1.",
+      conditions: "Use when deciding whether a grating order is possible or forbidden.",
+      unitsText: "no unit",
+    },
+  ],
+  A3_L5: [
+    {
+      standardFormula: "n1 sin(theta1) = n2 sin(theta2)",
+      meaning: "Snell's law links angle change to refractive index change at a boundary.",
+      conditions: "Use for refraction at a boundary between two media.",
+      unitsText: "deg",
+    },
+    {
+      standardFormula: "sin(c) = n2 / n1",
+      meaning: "The critical angle applies only when light travels from higher refractive index to lower refractive index.",
+      conditions: "Use for critical-angle and total-internal-reflection calculations with n1 > n2.",
+      unitsText: "deg",
+    },
+    {
+      standardFormula: "TIR if n1 > n2 and theta1 > c",
+      meaning: "Total internal reflection needs both the correct direction of travel and an incident angle above the critical angle.",
+      conditions: "Use when deciding whether the ray refracts out or reflects back internally.",
+      unitsText: "decision rule",
+    },
+  ],
+  A3_L6: [
+    {
+      standardFormula: "Vpp = (vertical divisions) x (volts per division)",
+      meaning: "Peak-to-peak voltage is read directly from the vertical height of the trace.",
+      conditions: "Use when an oscilloscope question gives the screen height in divisions.",
+      unitsText: "V",
+    },
+    {
+      standardFormula: "T = (horizontal divisions per cycle) x (time per division)",
+      meaning: "The period comes from the width of one full cycle on the time axis.",
+      conditions: "Use for oscilloscope traces where the time base is given.",
+      unitsText: "s",
+    },
+    {
+      standardFormula: "f = 1 / T",
+      meaning: "Frequency is the reciprocal of period.",
+      conditions: "Use after reading the period from a trace or from timing data.",
+      unitsText: "Hz",
+    },
+    {
+      standardFormula: "V_rms = V_peak / sqrt(2)",
+      meaning: "For a sine wave, the rms value is the equal-heating DC equivalent.",
+      conditions: "Use only for sinusoidal alternating signals.",
+      unitsText: "V",
+    },
+  ],
+};
+
 const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A1_L1: [
     {
@@ -1052,6 +1169,9 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 };
 
 export function supplementalEquationFallbacksForLesson(code: string): FormulaFallbackEntry[] {
+  if (A3_FORMULA_OVERRIDES[code]) {
+    return A3_FORMULA_OVERRIDES[code];
+  }
   if (A2_FORMULA_OVERRIDES[code]) {
     return A2_FORMULA_OVERRIDES[code];
   }

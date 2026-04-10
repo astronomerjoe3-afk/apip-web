@@ -12353,6 +12353,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("A3_")) {
+    switch (code) {
+      case "A3_L1":
+        return {
+          body: "The first A3 lesson should keep superposition quantitative enough to stop overlap being described as wave turn-taking. The learner should add same-place, same-time displacements and then interpret the result physically.",
+          worked_example: {
+            prompt: "At one instant, wave P gives a displacement of +3.2 mm at a point and wave Q gives -1.4 mm at that same point. What is the resultant displacement there, and is the overlap fully constructive, fully destructive, or partial?",
+            steps: [
+              "Use the superposition rule at one place and one time: add the two displacements algebraically.",
+              "Calculate the sum: +3.2 mm + (-1.4 mm).",
+              "Classify the overlap by checking whether the waves reinforce completely, cancel completely, or only partly reduce each other.",
+            ],
+            answer: "The resultant displacement is +1.8 mm, and the overlap is partial cancellation.",
+            answer_reason: "Superposition adds displacements directly, so the point has +1.8 mm displacement at that instant. Because the two contributions have opposite signs but unequal size, they partly cancel rather than fully cancel or fully reinforce.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps phase language tied to the actual displacement outcome instead of turning constructive interference into a slogan.",
+              worked_example: {
+                prompt: "Two equal waves each have amplitude 2.5 mm. If they arrive exactly in antiphase at one point, what is the resultant displacement when one is at +2.5 mm?",
+                steps: [
+                  "If the waves are in exact antiphase and equal in amplitude, the second wave has the same size with opposite sign.",
+                  "Write the two instantaneous displacements at that point.",
+                  "Add them algebraically to test whether the point is a cancellation case.",
+                ],
+                answer: "The resultant displacement is 0 mm.",
+                answer_reason: "The two contributions are +2.5 mm and -2.5 mm, so they sum to zero. Equal-amplitude antiphase overlap gives complete cancellation at that instant.",
+              },
+            },
+          ],
+        };
+      case "A3_L2":
+        return {
+          body: "Stationary-wave work should require harmonic fit, wavelength reasoning, and frequency calculation together, so the learner sees a standing mode as a boundary-matched pattern rather than a frozen traveling wave.",
+          worked_example: {
+            prompt: "A string fixed at both ends is 1.20 m long and carries waves at 180 m/s. It vibrates in the third harmonic. Find the wavelength, frequency, and number of antinodes.",
+            steps: [
+              "For a string fixed at both ends, use L = n lambda / 2 for the nth harmonic.",
+              "Substitute L = 1.20 m and n = 3 to find lambda.",
+              "Then use f = v / lambda to find the frequency, and count antinodes from the harmonic number.",
+            ],
+            answer: "The wavelength is 0.80 m, the frequency is 225 Hz, and there are 3 antinodes.",
+            answer_reason: "Using 1.20 = 3 lambda / 2 gives lambda = 0.80 m. Then f = 180 / 0.80 = 225 Hz. In the third harmonic there are 3 loops, so there are 3 antinodes and 4 nodes.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps node counting tied to boundary fit rather than to memorized pictures.",
+              worked_example: {
+                prompt: "For the same string, how many nodes are present in the third harmonic, and why is that not the same count as the number of antinodes?",
+                steps: [
+                  "Start from the fact that a fixed-end string has a node at each end.",
+                  "A third-harmonic pattern contains 3 antinodes between the ends.",
+                  "Count the boundary nodes and interior nodes together.",
+                ],
+                answer: "There are 4 nodes.",
+                answer_reason: "A third-harmonic standing wave has 3 antinodes separated by nodes, with the two fixed ends also acting as nodes. That gives one more node than antinode on a fixed-fixed string.",
+              },
+            },
+          ],
+        };
+      case "A3_L3":
+        return {
+          body: "Interference work should combine fringe spacing with bright-versus-dark classification, so route difference and phase difference stay quantitative instead of being taught as detached vocabulary.",
+          worked_example: {
+            prompt: "A double-slit experiment uses wavelength 600 nm, slit separation 0.30 mm, and screen distance 2.0 m. Find the fringe spacing. Then decide whether a point 6.0 mm from the central maximum is bright or dark.",
+            steps: [
+              "Use the double-slit fringe-spacing relation w = lambda D / a.",
+              "Substitute lambda = 600 nm, D = 2.0 m, and a = 0.30 mm to calculate w.",
+              "Compare 6.0 mm with the fringe spacing to see whether the point lands on an integer multiple of w or a half-integer multiple.",
+            ],
+            answer: "The fringe spacing is 4.0 mm, and the point 6.0 mm from the center is dark.",
+            answer_reason: "The spacing is w = (600 x 10^-9 x 2.0) / (0.30 x 10^-3) = 4.0 x 10^-3 m = 4.0 mm. A point 6.0 mm from the center is at 6.0 / 4.0 = 1.5 fringe spacings, which is a half-integer condition, so it is a destructive-interference point.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the path-difference rule visible without needing a full screen geometry each time.",
+              worked_example: {
+                prompt: "If the path difference to a point is 2.5 lambda, should that point be bright or dark?",
+                steps: [
+                  "Write the constructive condition as whole-number multiples of lambda.",
+                  "Write the destructive condition as half-integer multiples of lambda.",
+                  "Classify 2.5 lambda against those two patterns.",
+                ],
+                answer: "The point is dark.",
+                answer_reason: "A path difference of 2.5 lambda is a half-integer multiple of lambda, so the waves arrive out of phase enough to give destructive interference.",
+              },
+            },
+          ],
+        };
+      case "A3_L4":
+        return {
+          body: "Diffraction-grating work should feel sharper than ordinary fringe work, so the learner must connect slit spacing, order, and allowed-angle limits in one calculation.",
+          worked_example: {
+            prompt: "A diffraction grating has 600 lines per mm and is illuminated by light of wavelength 500 nm. Find the angle of the second-order maximum and the highest observable order.",
+            steps: [
+              "Convert the line density into slit spacing with d = 1 / (600 x 10^3) m.",
+              "Use the grating equation n lambda = d sin(theta) for n = 2.",
+              "Then test the largest possible order by requiring sin(theta) <= 1.",
+            ],
+            answer: "The second-order maximum is at about 36.9 deg, and the highest observable order is third order.",
+            answer_reason: "The slit spacing is d = 1.67 x 10^-6 m. For second order, sin(theta) = 2 x 500 x 10^-9 / 1.67 x 10^-6 = 0.60, so theta is about 36.9 deg. The maximum order must satisfy n <= d / lambda = 1.67 x 10^-6 / 5.00 x 10^-7 = 3.34, so the highest whole-number order is n = 3.",
+          },
+          extra_examples: [
+            {
+              body: "This second example keeps impossible orders from being treated as merely very faint ones.",
+              worked_example: {
+                prompt: "Why is fourth order impossible for that same grating and wavelength?",
+                steps: [
+                  "Test the order directly in n lambda = d sin(theta).",
+                  "Calculate the required value of sin(theta) for n = 4.",
+                  "Check whether that value is physically allowed.",
+                ],
+                answer: "Fourth order is impossible because it would require sin(theta) greater than 1.",
+                answer_reason: "For n = 4, the required value is sin(theta) = 4 x 500 x 10^-9 / 1.67 x 10^-6 = 1.20, which cannot happen for a real angle. So fourth order is not just faint; it is forbidden.",
+              },
+            },
+          ],
+        };
+      case "A3_L5":
+        return {
+          body: "Refraction and total internal reflection should be taught as one threshold story, so the learner calculates both the critical angle and the actual route outcome instead of memorizing TIR as a standalone trick.",
+          worked_example: {
+            prompt: "Light travels inside glass of refractive index 1.50 toward air. Find the critical angle. Then decide what happens if the incident angle is 50 deg.",
+            steps: [
+              "Use sin(c) = n_2 / n_1 for a boundary from higher index to lower index.",
+              "Substitute n_1 = 1.50 and n_2 = 1.00 to find the critical angle.",
+              "Compare the given 50 deg incident angle with that critical angle to decide between refraction and total internal reflection.",
+            ],
+            answer: "The critical angle is about 41.8 deg, so at 50 deg the ray undergoes total internal reflection.",
+            answer_reason: "sin(c) = 1.00 / 1.50 = 0.667, so c is about 41.8 deg. Because 50 deg is larger than the critical angle and the ray is traveling from the higher-index medium into the lower-index medium, no refracted ray escapes and TIR occurs.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps Snell's law active below the threshold instead of treating every glass-air case as TIR.",
+              worked_example: {
+                prompt: "For the same glass-air boundary, what happens if the incident angle is 30 deg instead?",
+                steps: [
+                  "Check that 30 deg is below the critical angle.",
+                  "Use Snell's law n_1 sin(theta_1) = n_2 sin(theta_2) to find the refracted angle.",
+                  "State whether the ray bends toward or away from the normal.",
+                ],
+                answer: "The ray refracts into the air at about 48.6 deg and bends away from the normal.",
+                answer_reason: "Because 30 deg is below the 41.8 deg critical angle, refraction still occurs. Using 1.50 sin(30 deg) = 1.00 sin(theta_2) gives sin(theta_2) = 0.75, so theta_2 is about 48.6 deg. Moving into the lower-index medium makes the ray bend away from the normal.",
+              },
+            },
+          ],
+        };
+      case "A3_L6":
+        return {
+          body: "Oscilloscope work should force the learner to read the graph quantitatively before naming a wave property, so amplitude, period, frequency, and rms meaning are all tied to the trace itself.",
+          worked_example: {
+            prompt: "An oscilloscope trace is 6 vertical divisions peak-to-peak at 1.5 V/div. One full cycle spans 4 horizontal divisions at 0.50 ms/div. Find the peak-to-peak voltage, peak voltage, period, frequency, and rms voltage for the sine wave.",
+            steps: [
+              "Use the vertical scale to find Vpp from divisions x volts per division.",
+              "Halve Vpp to find the peak voltage for a centered sine wave.",
+              "Use the horizontal scale to find the period, then invert to get frequency, and finally use V_rms = V_peak / sqrt(2).",
+            ],
+            answer: "Vpp = 9.0 V, Vpeak = 4.5 V, period = 2.0 ms, frequency = 500 Hz, and Vrms is about 3.18 V.",
+            answer_reason: "The vertical reading gives 6 x 1.5 = 9.0 V peak-to-peak, so the peak value is 4.5 V. The horizontal reading gives T = 4 x 0.50 ms = 2.0 ms, so f = 1 / 0.002 = 500 Hz. For a sine wave, Vrms = 4.5 / sqrt(2) about 3.18 V.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up protects the time-graph meaning before the learner starts describing the signal physically.",
+              worked_example: {
+                prompt: "Why would it be wrong to say the oscilloscope trace shows the wave path through space?",
+                steps: [
+                  "Identify what the horizontal axis on an oscilloscope actually represents.",
+                  "Compare that with what a path-through-space picture would require.",
+                  "Use that contrast to explain the trace correctly.",
+                ],
+                answer: "It is wrong because the oscilloscope trace is voltage against time, not a picture of the wave's route through space.",
+                answer_reason: "The screen records how the signal changes with time at the input, so the horizontal axis is time. A spatial wave sketch would need position along the medium, which the oscilloscope trace does not show.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("A1_")) {
     switch (code) {
       case "A1_L1":
@@ -16530,6 +16710,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("A3_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("A3_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("A3_L6", "captions.vtt"),
+      };
+    case "A4_L1":
+      return {
+        body: "Use this video to resolve diagonal forces into components before the worked example begins.",
+        caption: "Video explainer: vectors, components, equilibrium, and resultant-force checks before the lesson example.",
+        highlights: [
+          "Diagonal forces should be resolved before balance is judged",
+          "Equilibrium depends on zero resultant, not on arrow count",
+          "Shared axes make hidden imbalances visible",
+        ],
+        checkForUnderstanding: "Before deciding that a diagonal-force diagram is balanced, what should you inspect first: the picture shape, or the horizontal and vertical components?",
+        video_url: staticVideoAssetUrl("A4_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A4_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A4_L1", "captions.vtt"),
+      };
+    case "A4_L2":
+      return {
+        body: "Use this video to separate displacement, velocity, and acceleration into component stories before the worked example begins.",
+        caption: "Video explainer: two-dimensional kinematics, component motion, velocity versus acceleration, and coordinate reading before the lesson example.",
+        highlights: [
+          "Displacement, velocity, and acceleration are different quantities",
+          "Horizontal and vertical components should stay separate until the end",
+          "A zero change on one axis does not erase change on the other",
+        ],
+        checkForUnderstanding: "If horizontal acceleration is zero but vertical acceleration is not, what should you keep first: one combined story, or two separate component stories?",
+        video_url: staticVideoAssetUrl("A4_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A4_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A4_L2", "captions.vtt"),
+      };
+    case "A4_L3":
+      return {
+        body: "Use this video to split projectile motion into horizontal and vertical components before the worked example begins.",
+        caption: "Video explainer: launch components, common time, gravity, and projectile-path logic before the lesson example.",
+        highlights: [
+          "Projectile motion is rebuilt from horizontal and vertical component stories",
+          "The components share time but not the same acceleration",
+          "Gravity acts vertically throughout the ideal flight",
+        ],
+        checkForUnderstanding: "When you analyze a projectile, what should you split first: the curved path itself, or the launch velocity into components?",
+        video_url: staticVideoAssetUrl("A4_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A4_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A4_L3", "captions.vtt"),
+      };
+    case "A4_L4":
+      return {
+        body: "Use this video to run a momentum ledger before the worked example begins.",
+        caption: "Video explainer: momentum, impulse, collision bookkeeping, and elastic-versus-inelastic reasoning before the lesson example.",
+        highlights: [
+          "Momentum is the first safe collision ledger",
+          "Impulse measures momentum change",
+          "Energy labels should follow the momentum check, not replace it",
+        ],
+        checkForUnderstanding: "Before calling a collision elastic or inelastic, what should you secure first: the momentum ledger, or the energy label?",
+        video_url: staticVideoAssetUrl("A4_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A4_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A4_L4", "captions.vtt"),
+      };
+    case "A4_L5":
+      return {
+        body: "Use this video to read circular motion as continuous turning before the worked example begins.",
+        caption: "Video explainer: changing velocity direction, centripetal acceleration, inward force, and radius-speed effects before the lesson example.",
+        highlights: [
+          "Constant speed can still include acceleration when direction changes",
+          "Centripetal acceleration points inward",
+          "There is no extra outward driving force in the inertial-frame explanation",
+        ],
+        checkForUnderstanding: "If an object moves in a circle at constant speed, what changes first: its speed, or the direction of its velocity?",
+        video_url: staticVideoAssetUrl("A4_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A4_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A4_L5", "captions.vtt"),
+      };
+    case "A4_L6":
+      return {
+        body: "Use this video to compare materials using stress, strain, and Young modulus before the worked example begins.",
+        caption: "Video explainer: Hooke-style response, stress, strain, elastic comparison, and normalized material reasoning before the lesson example.",
+        highlights: [
+          "Force alone is not enough to compare material response",
+          "Stress and strain normalize size and geometry effects",
+          "Young modulus compares elastic resistance to stretching",
+        ],
+        checkForUnderstanding: "If two samples stretch differently under the same force, what should you compare before judging the material itself: force alone, or normalized quantities like stress and strain?",
+        video_url: staticVideoAssetUrl("A4_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A4_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A4_L6", "captions.vtt"),
       };
     case "A1_L1":
       return {
