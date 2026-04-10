@@ -1239,6 +1239,93 @@ const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const M5_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M5_L1: [
+    {
+      standardFormula: "particle size stays fixed in the simple model",
+      meaning: "Heating changes motion and spacing patterns of the sample rather than changing the size of the particles themselves.",
+      conditions: "Use when checking whether a particle-model statement is acceptable.",
+      unitsText: "model rule",
+    },
+    {
+      standardFormula: "state description = spacing + motion + attraction",
+      meaning: "A strong particle-model description needs all three clues together rather than one isolated phrase.",
+      conditions: "Use when classifying or describing solids, liquids, and gases.",
+      unitsText: "description rule",
+    },
+  ],
+  M5_L2: [
+    {
+      standardFormula: "solid -> close particles + fixed positions + vibration",
+      meaning: "A solid keeps particles close while they vibrate about fixed positions.",
+      conditions: "Use when describing the solid state in the simple particle model.",
+      unitsText: "state rule",
+    },
+    {
+      standardFormula: "liquid -> close particles + changing neighbors + flow",
+      meaning: "A liquid keeps particles close together but allows them to move around one another.",
+      conditions: "Use when distinguishing liquids from solids and gases.",
+      unitsText: "state rule",
+    },
+  ],
+  M5_L3: [
+    {
+      standardFormula: "gas -> wide spacing + random motion + collisions",
+      meaning: "Gas particles are far apart and move freely between collisions.",
+      conditions: "Use when describing the gas state or identifying gas behavior.",
+      unitsText: "state rule",
+    },
+    {
+      standardFormula: "Brownian motion = uneven collisions from surrounding particles",
+      meaning: "The visible random path comes from many unseen molecular collisions rather than from self-powered motion of the visible particle.",
+      conditions: "Use when explaining Brownian motion as particle evidence.",
+      unitsText: "evidence rule",
+    },
+  ],
+  M5_L4: [
+    {
+      standardFormula: "temperature is proportional to average kinetic energy per particle",
+      meaning: "Temperature answers an average-particle motion question, not a total-energy question for the whole sample.",
+      conditions: "Use when comparing equal temperatures or deciding what a thermometer reading means.",
+      unitsText: "concept rule",
+    },
+    {
+      standardFormula: "same temperature != same total energy",
+      meaning: "Two samples can share the same temperature while having different total kinetic or internal energy if the number of particles differs.",
+      conditions: "Use when sample size changes but the temperature reading matches.",
+      unitsText: "comparison rule",
+    },
+  ],
+  M5_L5: [
+    {
+      standardFormula: "internal energy = total kinetic energy + total potential energy of particles",
+      meaning: "Internal energy is a whole-system total that includes both particle motion and arrangement.",
+      conditions: "Use when comparing whole-sample energy stores.",
+      unitsText: "J or concept rule",
+    },
+    {
+      standardFormula: "same temperature still allows different internal energy",
+      meaning: "Matching temperature does not force matching internal energy because sample size or arrangement can still differ.",
+      conditions: "Use when comparing different masses or different states at the same temperature.",
+      unitsText: "comparison rule",
+    },
+  ],
+  M5_L6: [
+    {
+      standardFormula: "increase in internal energy = heating input",
+      meaning: "Adding energy by heating increases the internal energy even if the temperature response is small.",
+      conditions: "Use when deciding whether the total store rises during warming or a state change.",
+      unitsText: "J or concept rule",
+    },
+    {
+      standardFormula: "during a state change, added energy can mainly increase potential energy",
+      meaning: "At melting or boiling, much of the added energy is used to loosen links rather than mainly raising temperature.",
+      conditions: "Use when comparing ordinary warming with a state-change stage.",
+      unitsText: "stage rule",
+    },
+  ],
+};
+
 const A3_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A3_L1: [
     {
@@ -1589,6 +1676,9 @@ export function supplementalEquationFallbacksForLesson(code: string): FormulaFal
   }
   if (M4_FORMULA_OVERRIDES[code]) {
     return M4_FORMULA_OVERRIDES[code];
+  }
+  if (M5_FORMULA_OVERRIDES[code]) {
+    return M5_FORMULA_OVERRIDES[code];
   }
   if (A4_FORMULA_OVERRIDES[code]) {
     return A4_FORMULA_OVERRIDES[code];

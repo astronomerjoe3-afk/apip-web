@@ -10659,6 +10659,186 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
+  if (code.startsWith("M5_")) {
+    switch (code) {
+      case "M5_L1":
+        return {
+          body: "The opening particle-model example should force a clean separation between single-particle claims and whole-material claims.",
+          worked_example: {
+            prompt: "A metal block is heated and expands slightly. A student says, 'the particles got bigger, the particles moved more, and the average spacing increased a little.' Which parts of that statement fit the simple particle model, and which part must be rejected?",
+            steps: [
+              "Check each claim separately instead of accepting or rejecting the whole sentence at once.",
+              "Keep the model rule visible: particle size stays fixed in the simple particle model.",
+              "Allow the claims that heating increases particle motion and can increase average spacing slightly, then reject the claim that the particles themselves got bigger.",
+            ],
+            answer: "The increase in particle motion and the slight increase in average spacing fit the model, but 'the particles got bigger' must be rejected.",
+            answer_reason: "In the simple particle model, heating changes motion and spacing patterns of the crowd. Expansion is explained by a change in average spacing, not by larger particles.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks whether the learner can classify a property as particle-level or bulk-level without mixing the two.",
+              worked_example: {
+                prompt: "Is density best described as a property of one particle or of the whole material, and why?",
+                steps: [
+                  "Ask whether density can be defined from one isolated particle alone.",
+                  "Notice that density compares the mass and volume of a whole sample.",
+                  "Classify it as a whole-material or bulk property rather than a single-particle property.",
+                ],
+                answer: "Density is a bulk property of the whole material.",
+                answer_reason: "Density depends on the mass and volume of the sample as a whole, so it does not belong to one isolated particle in the simple model.",
+              },
+            },
+          ],
+        };
+      case "M5_L2":
+        return {
+          body: "The solid-liquid comparison should be challenging enough to stop students from treating liquids as 'half-gases.'",
+          worked_example: {
+            prompt: "Diagram A shows particles packed closely and vibrating about fixed positions. Diagram B shows particles still close together but changing neighbors and flowing around the container. Identify the state in each diagram and explain why Diagram B is not a gas.",
+            steps: [
+              "Use both spacing and mobility to classify Diagram A and Diagram B.",
+              "Identify Diagram A as a solid because the particles stay close and keep fixed positions apart from vibration.",
+              "Identify Diagram B as a liquid because the particles remain close but can move around one another, then reject the gas idea because the large gaps of a gas are missing.",
+            ],
+            answer: "Diagram A is a solid and Diagram B is a liquid. Diagram B is not a gas because its particles are still close together rather than far apart.",
+            answer_reason: "A strong state description needs spacing and motion together. Liquids flow because neighbors can change, not because the particles are separated by gas-like huge gaps.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner compare shape and volume without losing the particle-model story.",
+              worked_example: {
+                prompt: "Why can a liquid take the shape of its container while usually keeping nearly the same volume?",
+                steps: [
+                  "Keep the particles close together so the sample does not spread into a gas-like huge volume.",
+                  "Use neighbor mobility to explain why the sample can flow and change shape.",
+                  "Combine those two clues into one state description instead of giving only one of them.",
+                ],
+                answer: "A liquid takes the container's shape because its particles can move around one another, but it keeps nearly the same volume because the particles are still close together.",
+                answer_reason: "The particle model explains liquid behavior with close spacing plus mobility. Those two features together explain why shape can change while volume changes much less.",
+              },
+            },
+          ],
+        };
+      case "M5_L3":
+        return {
+          body: "Gas and Brownian-motion work should connect the visible evidence back to the unseen collision model instead of stopping at a picture label.",
+          worked_example: {
+            prompt: "A smoke particle in air shows a more jagged path when the air is warmed. Explain what that tells you about the surrounding air molecules and why the smoke particle's path is still irregular rather than straight.",
+            steps: [
+              "Treat the smoke particle as evidence, not as the cause of the motion.",
+              "Use the warmer air to infer faster surrounding molecules and more vigorous collisions.",
+              "Explain the irregular path by the collisions being uneven and random from moment to moment rather than perfectly balanced.",
+            ],
+            answer: "The warmer air molecules are moving faster and colliding more vigorously, and the smoke particle stays on an irregular path because those collisions are random and uneven.",
+            answer_reason: "Brownian motion is visible evidence for unseen particle motion. Heating strengthens the random collisions from the surrounding molecules, so the visible particle jitters more strongly.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up keeps the learner from confusing the visible particle with the invisible gas particles.",
+              worked_example: {
+                prompt: "Why is Brownian motion evidence for moving air molecules even though you cannot see the molecules directly?",
+                steps: [
+                  "Notice that the visible smoke particle changes direction without any built-in motor.",
+                  "Ask what could produce those repeated irregular pushes.",
+                  "Infer the unseen moving air molecules from the visible effect they produce on the smoke particle.",
+                ],
+                answer: "Brownian motion is evidence for moving air molecules because the smoke particle's random jiggling is caused by many unseen collisions from the surrounding molecules.",
+                answer_reason: "The molecules are too small to see directly, but their collisions with the visible particle create a visible effect that reveals their motion.",
+              },
+            },
+          ],
+        };
+      case "M5_L4":
+        return {
+          body: "Temperature should be framed as an average-particle idea, with enough quantitative structure to stop it being confused with the total energy of the whole sample.",
+          worked_example: {
+            prompt: "Sample A contains 20 particles, each with average kinetic energy 3 units. Sample B contains 50 particles, each with the same average kinetic energy 3 units. Which sample has the higher temperature, and which sample has the greater total kinetic energy?",
+            steps: [
+              "Use the phrase 'average kinetic energy per particle' to judge temperature first.",
+              "Because the averages match, the temperatures match as well.",
+              "Then compare total kinetic energy by multiplying the average per particle by the number of particles in each sample.",
+            ],
+            answer: "The samples have the same temperature, but Sample B has the greater total kinetic energy.",
+            answer_reason: "Temperature tracks the average kinetic energy per particle, not the number of particles. With the same average but more particles, Sample B has the larger whole-sample kinetic-energy total.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that a larger sample can share the same temperature reading without sharing the same total store.",
+              worked_example: {
+                prompt: "Two cups of the same liquid are both at 60 C, but Cup B contains twice as much liquid as Cup A. What matches between them, and what is likely larger for Cup B?",
+                steps: [
+                  "Keep the equal temperature reading as the average-particle clue.",
+                  "Use the larger amount of liquid to infer more particles in Cup B.",
+                  "Conclude that Cup B can have a larger total internal-energy store even though the temperature is the same.",
+                ],
+                answer: "The temperature matches, but Cup B is likely to have the larger total internal energy.",
+                answer_reason: "The equal temperature means the average particle-motion reading matches, but the larger sample contains more particles, so the total energy can be larger.",
+              },
+            },
+          ],
+        };
+      case "M5_L5":
+        return {
+          body: "Internal-energy questions should force the learner to track both the motion part and the arrangement part of the store.",
+          worked_example: {
+            prompt: "Two equal-mass samples of the same substance are at the same temperature. Sample A is liquid and Sample B is gas. Which sample has the greater internal energy, and why?",
+            steps: [
+              "Use the same temperature to keep the average kinetic-energy idea matched first.",
+              "Then compare the potential-energy part by asking which state has particles that are more separated and less tightly linked.",
+              "Add the kinetic and potential ideas together before deciding which sample has the greater total internal energy.",
+            ],
+            answer: "Sample B, the gas, has the greater internal energy.",
+            answer_reason: "At the same temperature the motion part is matched more closely, but the gas has a larger potential-energy share because its particles are less tightly bound and more separated. That makes the total internal energy larger.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up makes the learner compare sample size at fixed temperature without forgetting the whole-system total.",
+              worked_example: {
+                prompt: "Two samples of the same liquid are at the same temperature, but Sample B has twice the mass of Sample A. Which sample has the greater internal energy?",
+                steps: [
+                  "Hold the temperature fixed so the average per-particle motion clue is the same.",
+                  "Notice that the larger mass means more particles are present in Sample B.",
+                  "Use the word total carefully: more particles at the same average state give the larger internal-energy total.",
+                ],
+                answer: "Sample B has the greater internal energy.",
+                answer_reason: "Internal energy is a whole-system total. If the material and temperature are matched, the larger sample usually has the larger total store because it contains more particles contributing to the total.",
+              },
+            },
+          ],
+        };
+      case "M5_L6":
+        return {
+          body: "The capstone lesson should separate temperature change from internal-energy change, especially during state changes.",
+          worked_example: {
+            prompt: "Two identical 100 J heating stages are applied to the same substance. In Stage A the substance is a solid well below melting point. In Stage B it is melting at constant temperature. In which stage does more of the added energy increase potential energy, and what happens to internal energy in each stage?",
+            steps: [
+              "Keep the equal 100 J input visible in both stages so the difference comes from where the energy goes.",
+              "Use Stage A as an ordinary warm-up where more of the added energy raises particle motion and therefore temperature.",
+              "Use Stage B as a state-change stage where more of the added energy loosens links and raises the potential-energy part while internal energy still increases.",
+            ],
+            answer: "More of the added energy increases potential energy in Stage B, and internal energy increases in both stages.",
+            answer_reason: "Heating does not stop increasing internal energy during a state change. The key difference is the destination: away from a boundary more energy raises motion, while during melting more energy is routed into arrangement or potential-energy change.",
+          },
+          extra_examples: [
+            {
+              body: "This follow-up checks that the learner does not use temperature as the only marker of energy gain.",
+              worked_example: {
+                prompt: "Why can a sample absorb energy during boiling even if the thermometer reading changes very little?",
+                steps: [
+                  "Separate the thermometer reading from the full internal-energy story.",
+                  "Use boiling as a state-change stage where energy is used to overcome attractions and increase the potential-energy part.",
+                  "Conclude that internal energy can still rise even when temperature changes only a little.",
+                ],
+                answer: "Because during boiling much of the added energy goes into overcoming attractions and increasing the potential-energy part, not mainly into raising temperature.",
+                answer_reason: "The thermometer tracks the motion-related temperature reading, but the total internal energy also includes the arrangement part. During boiling that arrangement part can increase strongly.",
+              },
+            },
+          ],
+        };
+      default:
+        break;
+    }
+  }
   if (code.startsWith("M6_")) {
     switch (code) {
       case "M6_L1":
@@ -15836,7 +16016,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410f";
+  const assetVersion = "20260410d";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
