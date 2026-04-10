@@ -15409,6 +15409,190 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           },
         ],
       };
+    case "F5_L1":
+      return {
+        body: "Earth-Moon-Sun work should use nested host relationships, so learners stop treating 'orbits Earth' and 'orbits the Sun' as mutually exclusive statements.",
+        worked_example: {
+          prompt: "A learner says, 'The Moon cannot orbit Earth because both Earth and Moon move around the Sun.' Use the Earth-Moon-Sun system picture to identify Earth's main host, the Moon's main host, and explain how both motions can be true at once.",
+          steps: [
+            "Start with the main host relation for Earth: Earth mainly orbits the Sun.",
+            "Now identify the Moon's main host: the Moon mainly orbits Earth.",
+            "These statements do not conflict because the Earth-Moon pair also travels around the Sun together.",
+            "So the Moon follows Earth around the Sun while also circling Earth locally inside that larger journey.",
+            "That layered picture is consistent with orbital motion: gravity provides the pull, while sideways motion keeps the body circling instead of falling straight in.",
+          ],
+          answer: "Earth's main host is the Sun, the Moon's main host is Earth, and both motions can be true because the Earth-Moon system travels around the Sun while the Moon also circles Earth.",
+          answer_reason: "Orbit relationships can be nested. The Moon does not need Earth to stand still in order to orbit it; the smaller Earth-Moon motion sits inside the larger motion of the whole pair around the Sun.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps 'main host' language available for new examples.",
+            worked_example: {
+              prompt: "An artificial satellite circles Earth while Earth travels around the Sun. Which body is the satellite's main host?",
+              steps: [
+                "Main host means the body the object mainly orbits directly.",
+                "The satellite circles Earth, not the Sun directly in the lesson model.",
+                "So Earth is the satellite's main host even though the whole Earth-satellite system also moves around the Sun.",
+              ],
+              answer: "Earth is the satellite's main host.",
+              answer_reason: "The host is the body the object mainly orbits, not the largest body anywhere in the wider system.",
+            },
+          },
+        ],
+      };
+    case "F5_L2":
+      return {
+        body: "Day-and-night work should make Earth’s 24-hour rotation do the explanatory work, not vague language about Earth 'moving somehow.'",
+        worked_example: {
+          prompt: "At one moment, City A is at local noon while City B on the opposite side of Earth is at local midnight. About 6 hours later, what lighting condition should each city be moving toward, and which Earth motion causes the change?",
+          steps: [
+            "Opposite sides of Earth start with opposite lighting conditions: one side faces the Sun while the opposite side faces away.",
+            "Earth rotates once in about 24 hours, so in 6 hours it turns by about one quarter of a full rotation.",
+            "A city starting at local noon moves toward sunset as Earth turns it away from the Sun-facing position.",
+            "A city starting at local midnight moves toward sunrise as Earth turns it back toward the Sun-facing side.",
+            "The changing lighting is caused by Earth's rotation, not by Earth completing a new orbit around the Sun.",
+          ],
+          answer: "About 6 hours later, City A is moving toward sunset and City B is moving toward sunrise, and Earth's rotation causes the change.",
+          answer_reason: "Day and night come from Earth spinning so different places move into and out of sunlight. The yearly orbit explains the year, not the daily light-dark cycle.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the half-turn consequence sharp.",
+            worked_example: {
+              prompt: "If a place is at local noon now, what lighting condition should it have about 12 hours later?",
+              steps: [
+                "Twelve hours is about half of Earth's 24-hour rotation.",
+                "A half-turn carries the place from the Sun-facing side to the away-from-Sun side.",
+                "So local noon changes to roughly local midnight.",
+              ],
+              answer: "It should be at roughly local midnight.",
+              answer_reason: "Half a rotation swaps a place from the lit half of Earth to the dark half.",
+            },
+          },
+        ],
+      };
+    case "F5_L3":
+      return {
+        body: "Season work should use tilt, hemisphere, and orbit position together so the learner stops reaching for the incorrect 'closer to the Sun' shortcut.",
+        worked_example: {
+          prompt: "At one orbital position, the Northern Hemisphere leans toward the Sun. State the season in each hemisphere, then say what happens after Earth moves to the opposite side of its orbit.",
+          steps: [
+            "When the Northern Hemisphere leans toward the Sun, it gets more direct sunlight and longer daylight hours, so it is summer in the north.",
+            "At the same time, the Southern Hemisphere leans away from the Sun, so it gets less direct sunlight and shorter daylight hours, giving winter in the south.",
+            "Earth's axis keeps the same tilted direction as Earth moves around the Sun.",
+            "After Earth reaches the opposite side of its orbit, the lean relation reverses: the Northern Hemisphere now leans away while the Southern Hemisphere leans toward the Sun.",
+            "So the seasons swap after roughly half an orbit: north goes to winter while south goes to summer.",
+          ],
+          answer: "If the Northern Hemisphere leans toward the Sun, it is summer in the north and winter in the south. About half an orbit later, those seasons reverse.",
+          answer_reason: "Seasons depend on axial tilt and orbit position together. The opposite hemispheres can have opposite seasons at the same time, which is why simple Earth-Sun distance cannot be the main explanation.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up directly checks the common wrong explanation.",
+            worked_example: {
+              prompt: "Why does the fact that the hemispheres have opposite seasons at the same time argue against 'distance from the Sun' as the main cause?",
+              steps: [
+                "If Earth-Sun distance were the main cause, both hemispheres would share the same season at the same time because they are almost the same distance from the Sun.",
+                "But one hemisphere can have summer while the other has winter at the same moment.",
+                "That pattern points to tilt and sunlight angle, not to a simple near-far story.",
+              ],
+              answer: "Opposite simultaneous seasons show that tilt, not simple Earth-Sun distance, is the main cause.",
+              answer_reason: "The hemispheres are on the same planet, so a near-far explanation would affect both almost equally, but real seasons split by hemisphere.",
+            },
+          },
+        ],
+      };
+    case "F5_L4":
+      return {
+        body: "Moon-phase work should separate what stays physically true about sunlight from what changes in our viewpoint, and it should keep eclipses as special alignment events rather than ordinary phases.",
+        worked_example: {
+          prompt: "An observer sees a first-quarter Moon. What fraction of the Moon is actually sunlit, what fraction of that lit half can the observer see, and can a lunar eclipse be happening at the same time?",
+          steps: [
+            "Start with the constant truth: the Moon is always half lit by the Sun in this lesson model, except for brief special shadow events.",
+            "At first quarter, we see half of the Moon's sunlit half, so the visible Moon appears half illuminated.",
+            "Now separate phases from eclipses: phases happen all the time because our viewing angle changes as the Moon orbits Earth.",
+            "A lunar eclipse needs a special straight-line Sun-Earth-Moon alignment, which happens near full Moon, not at first quarter.",
+          ],
+          answer: "The Moon is half lit, we can see half of that lit half at first quarter, and a lunar eclipse cannot be happening at the same time.",
+          answer_reason: "Phases are a viewpoint effect on the always-sunlit half of the Moon, while eclipses are special alignment events. First quarter is not the geometry needed for a lunar eclipse.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps full Moon separate from automatic eclipse thinking.",
+            worked_example: {
+              prompt: "Does a full Moon automatically mean a lunar eclipse? Explain briefly.",
+              steps: [
+                "A full Moon means we can see the whole sunlit half facing Earth.",
+                "But a lunar eclipse needs an especially straight Sun-Earth-Moon alignment so Earth's shadow actually falls on the Moon.",
+                "That special alignment does not happen every full Moon.",
+              ],
+              answer: "No. A full Moon does not automatically mean a lunar eclipse.",
+              answer_reason: "Full Moon is a phase geometry, but eclipse needs a much more exact shadow alignment.",
+            },
+          },
+        ],
+      };
+    case "F5_L5":
+      return {
+        body: "Solar-System overview work should classify bodies by both host and type, so the learner is not relying on one vague 'space object' category.",
+        worked_example: {
+          prompt: "Classify these four bodies by their most likely family label: a large rocky world mainly orbiting the Sun, a smaller body mainly orbiting Jupiter, an icy body on a long stretched orbit that can grow a tail near the Sun, and a small rocky or metallic body orbiting the Sun directly.",
+          steps: [
+            "A large world mainly orbiting the Sun fits the planet family because its main host is the Sun and it behaves like a major world.",
+            "A smaller body mainly orbiting Jupiter fits the moon family because its main host is a planet rather than the Sun.",
+            "An icy body on a stretched path that can grow a tail near the Sun fits the comet family.",
+            "A small rocky or metallic body orbiting the Sun directly fits the asteroid family.",
+            "This is why host and type together give a stronger classification than size words alone.",
+          ],
+          answer: "The four labels are planet, moon, comet, and asteroid, in that order.",
+          answer_reason: "Solar-System classification becomes more reliable when you combine the object's main host with its physical type and orbital behavior.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps direct-Sun orbit and planet-host orbit distinct.",
+            worked_example: {
+              prompt: "Why is 'mainly orbits a planet' a strong clue that an object is a moon rather than a planet?",
+              steps: [
+                "Planets mainly orbit the Sun directly in this lesson model.",
+                "Moons mainly orbit larger worlds such as planets.",
+                "So a planet-host orbit is a strong clue for the moon family.",
+              ],
+              answer: "Because moons mainly orbit planets, while planets mainly orbit the Sun directly.",
+              answer_reason: "Main host is one of the strongest family clues in the Solar System unit.",
+            },
+          },
+        ],
+      };
+    case "F5_L6":
+      return {
+        body: "Apparent-sky-motion work should connect what we see in one day to Earth’s rotation, while also teaching learners not to trust classroom model scale literally.",
+        worked_example: {
+          prompt: "A classroom model shows Earth spinning once every 10 s and orbiting the Sun once every 30 s, with Earth and the Sun only 2 m apart. Which real Earth motion explains the Sun's daily apparent path across the sky, how long does the real yearly orbit actually take, and what warning must be given about the model?",
+          steps: [
+            "The Sun's daily apparent motion across the sky is explained by Earth's rotation, not by Earth completing a new orbit each day.",
+            "In the lesson model, one real orbit of Earth around the Sun takes about 365 days, not 30 s.",
+            "So the model is not trustworthy for exact time scale, and the 2 m separation also shows it is not trustworthy for exact distance scale.",
+            "What the model can still show well is the relationship pattern: Earth spins daily, orbits yearly, and a model can preserve that structure while strongly compressing scale.",
+          ],
+          answer: "Earth's rotation explains the Sun's daily apparent path, the real yearly orbit takes about 365 days, and the model must be treated as badly compressed in time and distance scale even if its relationship pattern is useful.",
+          answer_reason: "Astronomy models often keep the right pattern while shrinking distances and times dramatically. The safe reading is to trust the relationship structure, not the literal scale.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the 'pattern versus exact scale' distinction crisp.",
+            worked_example: {
+              prompt: "If a model gets the order of bodies and the direction of motion right but shrinks the distances heavily, what part is still trustworthy?",
+              steps: [
+                "Check what the model is trying to show first.",
+                "If the order and motion pattern are preserved, those relationships can still be useful.",
+                "But the exact distances should not be read literally from the compressed model.",
+              ],
+              answer: "The relationship pattern is still trustworthy, but the exact scale is not.",
+              answer_reason: "Useful models can represent structure accurately while deliberately distorting size or distance to make the pattern visible.",
+            },
+          },
+        ],
+      };
     case "M2_L1":
       return {
         body: "Collapse the full force map to one Master Arrow first, then keep velocity separate from acceleration so zero-resultant and opposite-direction cases do not get muddled together.",
