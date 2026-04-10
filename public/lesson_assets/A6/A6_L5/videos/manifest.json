@@ -1,0 +1,28 @@
+{
+  "lesson_id": "A6_L5",
+  "module": "A6",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 469.7,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: name the fixed quantity first, then choose the gas law, then explain the graph shape from that condition.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "condition_switch",
+    "graph_reader",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\05_a6_l5_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\05_a6_l5_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\05_a6_l5_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\05_a6_l5_preworked_explainer\\thumbnail.png"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "lesson_id": "A6_L4",
+  "module": "A6",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 423.51,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: keep p, V, n, and T in one chamber-state equation, convert to SI units, and then rearrange only once.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "si_guardrail",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\04_a6_l4_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\04_a6_l4_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\04_a6_l4_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a6_preworked_v1\\videos\\04_a6_l4_preworked_explainer\\thumbnail.png"
+  }
+}

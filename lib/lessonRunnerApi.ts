@@ -18117,7 +18117,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410d";
+  const assetVersion = "20260410e";
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
@@ -19563,6 +19563,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("A5_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("A5_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("A5_L6", "captions.vtt"),
+      };
+    case "A6_L1":
+      return {
+        body: "Use this video to separate temperature from internal energy before the worked example begins.",
+        caption: "Video explainer: average particle kinetic energy, whole-sample internal energy, and equal-temperature comparison before the lesson example.",
+        highlights: [
+          "Temperature tracks average kinetic energy per particle",
+          "Internal energy belongs to the whole microscopic store of the sample",
+          "Equal temperature does not automatically mean equal internal energy",
+        ],
+        checkForUnderstanding: "If two gas samples have the same temperature but one contains more particles, what should you compare next before deciding whether their internal energies match?",
+        video_url: staticVideoAssetUrl("A6_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A6_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A6_L1", "captions.vtt"),
+      };
+    case "A6_L2":
+      return {
+        body: "Use this video to keep mass, material, and temperature rise together before the worked example begins.",
+        caption: "Video explainer: heating-cost bookkeeping, specific heat capacity, and Delta-T reading before the lesson example.",
+        highlights: [
+          "Specific heat capacity is the heating cost per kilogram per degree",
+          "Larger mass needs more energy for the same temperature rise",
+          "Larger c also needs more energy for the same temperature rise",
+        ],
+        checkForUnderstanding: "If two blocks receive the same energy but one has a larger specific heat capacity, what should happen first to its temperature rise?",
+        video_url: staticVideoAssetUrl("A6_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A6_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A6_L2", "captions.vtt"),
+      };
+    case "A6_L3":
+      return {
+        body: "Use this video to separate temperature change from state change before the worked example begins.",
+        caption: "Video explainer: latent heat, plateau meaning, stage splitting, and total-energy bookkeeping before the lesson example.",
+        highlights: [
+          "Latent heat changes state without changing temperature",
+          "A heating plateau can still mean continuous energy transfer",
+          "Multi-stage thermal questions need separate formulas for each stage",
+        ],
+        checkForUnderstanding: "If the thermometer stays flat while heating continues, what should you check before saying no energy is entering the substance?",
+        video_url: staticVideoAssetUrl("A6_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A6_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A6_L3", "captions.vtt"),
+      };
+    case "A6_L4":
+      return {
+        body: "Use this video to keep pressure, volume, amount, and temperature in one state equation before the worked example begins.",
+        caption: "Video explainer: ideal-gas-law bookkeeping, SI units, and state-variable reading before the lesson example.",
+        highlights: [
+          "Pressure, volume, amount, and temperature belong to one chamber-state relation",
+          "The ideal gas law should be used with SI units",
+          "Rearranging the same equation is often safer than memorizing separate rules",
+        ],
+        checkForUnderstanding: "Before substituting into pV = nRT, what should you inspect first: whether the variables are in SI form, or whether the numbers look familiar?",
+        video_url: staticVideoAssetUrl("A6_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A6_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A6_L4", "captions.vtt"),
+      };
+    case "A6_L5":
+      return {
+        body: "Use this video to name the fixed quantity before reading any gas-law graph or process before the worked example begins.",
+        caption: "Video explainer: isothermal, isobaric, isochoric conditions, graph shape, and state-path reading before the lesson example.",
+        highlights: [
+          "A gas-law graph only makes sense once the fixed condition is named",
+          "Different fixed quantities produce different graph shapes and straight-line plots",
+          "State diagrams are maps of linked variables, not decorative curves",
+        ],
+        checkForUnderstanding: "When you meet a gas-law graph, what should you decide first before naming the curve: the prettiest shape, or the quantity that stayed fixed?",
+        video_url: staticVideoAssetUrl("A6_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A6_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A6_L5", "captions.vtt"),
+      };
+    case "A6_L6":
+      return {
+        body: "Use this video to explain gas pressure from particle motion before the worked example begins.",
+        caption: "Video explainer: random motion, wall collisions, rms speed, and temperature-pressure links before the lesson example.",
+        highlights: [
+          "Pressure comes from particle collisions with the walls",
+          "Higher temperature means greater average kinetic energy and faster particles",
+          "Kinetic-theory formulas summarize a collision story rather than replace it",
+        ],
+        checkForUnderstanding: "If a rigid gas container is heated, what should you explain first before quoting a pressure formula: how the wall collisions change, or just that the gas got hotter?",
+        video_url: staticVideoAssetUrl("A6_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("A6_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("A6_L6", "captions.vtt"),
       };
     case "A1_L1":
       return {
