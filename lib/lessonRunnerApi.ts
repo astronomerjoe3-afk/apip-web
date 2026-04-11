@@ -11761,175 +11761,174 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     switch (code) {
       case "M10_L1":
         return {
-          body: "Introductory circuit work should separate moving charge from current and make the closed-loop condition explicit instead of letting the battery be treated as a pump of used-up charge.",
+          body: "The first magnetism lesson should stop field lines becoming imaginary travel tracks and instead make learners read direction, source pattern, and relative strength from the same map.",
           worked_example: {
-            prompt: "A simple lamp circuit has moving charge carriers and a checkpoint meter. Explain what the checkpoint reads when the loop is closed, what changes when the switch is opened, and why saying the lamp 'uses up current' is wrong.",
+            prompt: "A field map shows circular magnetic lines around a straight conductor. At point P above the wire, the compass flag points east. At point Q the lines are farther apart than at P. What does the map tell you about the source, the field direction at P, and the relative field strength at Q?",
             steps: [
-              "Start with the measurement meaning: current is the amount of charge passing a checkpoint each second, not the total number of carriers sitting in the loop.",
-              "Check the route next: when the loop is closed, the charge carriers can circulate all the way round, so the checkpoint shows a steady current.",
-              "When the switch is opened, the route is broken, so a sustained current cannot continue and the checkpoint reading falls to zero everywhere in the loop.",
-              "The lamp transfers energy from the moving carriers, but it does not remove charge from the circuit or use current up.",
+              "Identify the source from the pattern first: circular field lines around a straight route point to a current-carrying wire, not a bar magnet.",
+              "Read the local direction from the compass flag at P instead of treating the whole pattern as one arrow.",
+              "Use the line spacing to compare strengths: wider spacing at Q means the field there is weaker than at P.",
             ],
-            answer: "With the loop closed, the checkpoint shows a steady current because charge carriers circulate around a complete route. Opening the switch makes the current zero everywhere, and the lamp does not use up current; it transfers energy while the same charge carriers circulate.",
-            answer_reason: "The lesson is about keeping carrier count, current, and loop status separate. A steady current needs a complete route, and components transfer energy without destroying charge.",
+            answer: "The source is a current-carrying straight wire, the field at P points east, and the field at Q is weaker than at P.",
+            answer_reason: "Magnetic field maps answer three different questions at once: the overall pattern reveals the source type, the local tangent direction shows which way a compass points, and the line density gives the relative strength.",
           },
           extra_examples: [
             {
-              body: "This follow-up checks whether the learner can keep carrier count and current as different ideas.",
+              body: "This follow-up keeps current reversal tied to field reversal without inventing a new source.",
               worked_example: {
-                prompt: "Why is 'there is more current because there is more charge already in the wire' a weak explanation?",
+                prompt: "Why does reversing the current in a straight wire reverse the circular field direction even though the wire stays in the same place?",
                 steps: [
-                  "Separate amount from rate before comparing anything.",
-                  "Current measures charge passing a point each second, not the total amount of charge present in the loop.",
-                  "Conclude that more charge in the wire does not by itself guarantee a larger current unless the flow rate at a point also increases.",
+                  "Start from the idea that the magnetic field is created by the current in the wire.",
+                  "Change only the current direction, not the wire geometry.",
+                  "Conclude that the circular field pattern stays centered on the wire, but the sense of circulation reverses because the current direction has reversed.",
                 ],
-                answer: "It is weak because current is a rate of charge flow, not the total amount of charge sitting in the wire.",
-                answer_reason: "A loop can contain many carriers but still have a small current if only a small amount of charge passes a checkpoint each second.",
+                answer: "Reversing the current reverses the magnetic field direction because the field is produced by the current, while the wire only fixes where the field is centered.",
+                answer_reason: "The source location and the field direction are separate parts of the story. Keeping the wire fixed does not keep the field direction fixed if the current changes sign.",
               },
             },
           ],
         };
       case "M10_L2":
         return {
-          body: "Current examples should force charge-per-second reasoning and make learners move comfortably between direct calculation and rearrangement instead of treating amperes as a mysterious label.",
+          body: "Electromagnet work should be comparative and causal, so learners explain why turns, current, and a soft-iron core strengthen one field story instead of memorizing three disconnected tricks.",
           worked_example: {
-            prompt: "A current of 0.75 A flows for 8.0 minutes through a component. Find the charge that passes the component in that time.",
+            prompt: "Electromagnet A has 60 turns and carries 1.5 A with no core. Electromagnet B has 120 turns, the same current, and a soft-iron core. Which one should lift more paper clips, and which changes make the difference?",
             steps: [
-              "Use Q = I t because current and time are given.",
-              "Convert the time into seconds first: 8.0 min = 480 s.",
-              "Substitute the values: Q = 0.75 x 480 = 360 C.",
+              "Compare the turn counts first: B has more turns, so the field from each loop reinforces more strongly.",
+              "Notice that the current is the same, so current does not explain the difference here.",
+              "Add the core argument last: the soft-iron core in B concentrates the field, so B should be stronger for two reasons, not one.",
             ],
-            answer: "The charge passed is 360 C.",
-            answer_reason: "An ampere is a coulomb per second, so multiplying the steady current by the time in seconds gives the total charge that passed the component.",
+            answer: "Electromagnet B should lift more because it has more turns and also has a soft-iron core, while the current is unchanged.",
+            answer_reason: "A stronger electromagnet comes from stronger field reinforcement in the coil and better field concentration in the core. The best explanation separates which factor changed and which one stayed fixed.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps the rate story visible by comparing two cases with the same total charge.",
+              body: "This follow-up checks that the learner keeps temporary magnetization separate from permanent-magnet language.",
               worked_example: {
-                prompt: "Loop A passes 24 C in 6.0 s. Loop B passes the same 24 C in 3.0 s. Find both currents and decide which loop has the larger current.",
+                prompt: "Why is soft iron used as the core of an electromagnet instead of a hard permanent magnet material?",
                 steps: [
-                  "Use I = Q / t for each loop.",
-                  "For Loop A, I = 24 / 6.0 = 4.0 A. For Loop B, I = 24 / 3.0 = 8.0 A.",
-                  "Compare the rates: the same charge delivered in less time means the larger current.",
+                  "Recall that an electromagnet should become strong when current flows.",
+                  "Then recall that it should also lose most of its magnetism when the current is switched off.",
+                  "Choose the material that strengthens the field but does not stay strongly magnetized afterward.",
                 ],
-                answer: "Loop A has current 4.0 A and Loop B has current 8.0 A, so Loop B has the larger current.",
-                answer_reason: "Current is about how quickly charge passes a point. Keeping Q the same while reducing the time increases the current.",
+                answer: "Soft iron is used because it strengthens the electromagnet while remaining easy to magnetize and demagnetize when the current changes.",
+                answer_reason: "Electromagnets are supposed to be controllable. A core material that stays strongly magnetized would blur the on-off behavior.",
               },
             },
           ],
         };
       case "M10_L3":
         return {
-          body: "Voltage examples should make energy-per-charge explicit and keep it distinct from current, so the source is understood as giving each carrier a boost rather than storing a fixed current.",
+          body: "Motor-effect examples should be mathematically sharp enough to use the force formula and conceptually sharp enough to keep the force sideways to both field and current.",
           worked_example: {
-            prompt: "A battery transfers 54 J of energy while moving 6.0 C of charge through a lamp. Find the potential difference across the lamp and explain what the result means physically.",
+            prompt: "A straight wire of length 0.25 m carries 3.0 A at 90 deg to a 0.40 T magnetic field. Find the force on the wire, then state what happens to the force direction if the current is reversed.",
             steps: [
-              "Use V = E / Q because the energy transfer and the moved charge are given.",
-              "Substitute the values: V = 54 / 6.0 = 9.0 V.",
-              "Interpret the result physically: 9.0 V means 9.0 J of energy are transferred for each coulomb of charge passing through the lamp.",
+              "Use the conductor-force formula with the angle included: F = B I L sin(theta).",
+              "Substitute the values: F = 0.40 x 3.0 x 0.25 x sin 90 deg = 0.30 N.",
+              "Keep the direction argument separate from the magnitude: reversing the current reverses the force direction while keeping the same force size.",
             ],
-            answer: "The potential difference is 9.0 V, meaning 9.0 J are transferred per coulomb of charge.",
-            answer_reason: "Voltage is not total energy and not current. It is the energy-per-charge measure that tells how much boost or transfer each coulomb experiences.",
+            answer: "The wire experiences a force of 0.30 N, and reversing the current reverses the force direction.",
+            answer_reason: "The force magnitude comes from field strength, current, length, and crossing angle, while the direction comes from the relative directions of field and current. Changing the current sign flips the sideways kick.",
           },
           extra_examples: [
             {
-              body: "This follow-up reverses the relation so the learner still has to keep the per-charge meaning alive while calculating energy.",
+              body: "This follow-up makes the learner use the angle factor instead of assuming every crossing is maximum-force.",
               worked_example: {
-                prompt: "A 12 V source moves 0.40 C of charge through a component. How much energy is transferred?",
+                prompt: "The same wire and current are now at 30 deg to the field instead of 90 deg. What is the new force?",
                 steps: [
-                  "Use E = V Q because the voltage and charge are known.",
-                  "Substitute the values: E = 12 x 0.40 = 4.8 J.",
-                  "Restate the meaning: each coulomb gets 12 J, so 0.40 C gets 4.8 J in total.",
+                  "Keep B, I, and L the same and change only the angle factor.",
+                  "Use sin 30 deg = 0.5 in the same formula.",
+                  "Evaluate the new force: F = 0.40 x 3.0 x 0.25 x 0.5 = 0.15 N.",
                 ],
-                answer: "The energy transferred is 4.8 J.",
-                answer_reason: "Once voltage is understood as energy per coulomb, multiplying by the number of coulombs gives the total energy transfer.",
+                answer: "The new force is 0.15 N.",
+                answer_reason: "A conductor parallel to the field gets little or no sideways push, and a perpendicular conductor gets the maximum. The angle factor explains the smaller force here.",
               },
             },
           ],
         };
       case "M10_L4":
         return {
-          body: "Resistance work should stay route-centered and comparative, forcing the learner to reason from path length, cross-sectional area, and material instead of treating resistance as a second kind of current.",
+          body: "Motor examples should feel like an upgraded force-on-a-wire problem, with torque, turns, and commutation all kept visible instead of treated as mysterious machine facts.",
           worked_example: {
-            prompt: "Three wires are made from the same material. Wire A is 1.0 m long and thin. Wire B is 2.0 m long and thin. Wire C is 1.0 m long and thick. Rank the wires by resistance from greatest to least and justify the order.",
+            prompt: "A motor coil has 120 turns, carries 0.80 A, has area 2.5 x 10^-3 m^2, and sits in a 0.18 T magnetic field at the position of maximum turning effect. Find the turning moment on the coil.",
             steps: [
-              "Use the length comparison first: for the same material and thickness, a longer wire has greater resistance.",
-              "Use the width comparison second: for the same material and length, a thicker wire has lower resistance.",
-              "Combine the comparisons: Wire B has the greatest resistance because it is the longest and still thin, Wire A comes next, and Wire C has the least resistance because it is shorter and thicker.",
+              "Use the maximum-torque formula: turning moment = B I N A.",
+              "Substitute the values carefully: torque = 0.18 x 0.80 x 120 x 2.5 x 10^-3.",
+              "Evaluate the product: torque = 0.0432 N m, then keep the result as a turning effect rather than a plain force.",
             ],
-            answer: "The resistance order is B greatest, then A, then C least.",
-            answer_reason: "Resistance belongs to the route. Longer paths oppose carrier motion more, while wider paths give carriers more room and therefore reduce resistance.",
+            answer: "The turning moment is 0.0432 N m.",
+            answer_reason: "A motor coil turns because opposite sides feel opposite magnetic forces that form a couple. The formula packages that turning effect into field strength, current, turns, and coil area.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps the battery out of the wrong part of the story.",
+              body: "This follow-up keeps the commutator from being mislearned as an extra energy source.",
               worked_example: {
-                prompt: "Why is it weak to say 'the battery makes the resistance bigger' when a thin, long wire is swapped for a short, thick wire on the same battery?",
+                prompt: "Why does a split-ring commutator matter in a d.c. motor?",
                 steps: [
-                  "Identify which part of the circuit owns the resistance.",
-                  "Notice that only the route geometry changed, while the battery stayed the same.",
-                  "Conclude that the resistance changed because the wire changed, not because the battery altered the path property.",
+                  "Start from what would happen without it: after half a turn, the torque would reverse and the coil would tend to stall or rock back.",
+                  "Recall that the commutator swaps the current direction every half-turn.",
+                  "Conclude that the swap keeps the turning effect acting in the same overall rotation direction.",
                 ],
-                answer: "It is weak because resistance belongs to the wire and its geometry, not to the battery.",
-                answer_reason: "Changing the route changes the resistance. The battery can set the voltage across the circuit, but it does not define the wire's resistance.",
+                answer: "The split-ring commutator keeps the motor turning the same way by reversing the current each half-turn.",
+                answer_reason: "The commutator does not add extra power. Its job is to preserve the direction of the torque as the coil rotates.",
               },
             },
           ],
         };
       case "M10_L5":
         return {
-          body: "Ohm's-law work should be genuinely quantitative and should force the learner to keep track of which variable is being held fixed, rather than treating V = IR as a one-step slogan.",
+          body: "Induction work should be explicitly about changing flux, with enough quantitative bite to connect generator ideas to Faraday-style rate-of-change reasoning.",
           worked_example: {
-            prompt: "An ohmic resistor of 6.0 ohms is connected across a 12 V supply. Find the current. Then predict the current if the supply is raised to 18 V while the resistor stays ohmic and unchanged.",
+            prompt: "A 120-turn coil experiences a flux change from 0.020 Wb to 0.005 Wb in 0.10 s. Find the magnitude of the induced emf.",
             steps: [
-              "Use I = V / R for the first case: I = 12 / 6.0 = 2.0 A.",
-              "Keep the resistance fixed for the second case because the resistor is unchanged and ohmic.",
-              "Find the new current: I = 18 / 6.0 = 3.0 A, so the current rises in direct proportion to the voltage.",
+              "Find the flux change magnitude first: delta(Phi) = 0.020 - 0.005 = 0.015 Wb.",
+              "Use the induction formula for magnitude: induced emf = N delta(Phi) / delta(t).",
+              "Substitute the values: emf = 120 x 0.015 / 0.10 = 18 V.",
             ],
-            answer: "The current is 2.0 A at 12 V and 3.0 A at 18 V.",
-            answer_reason: "For an ohmic component with fixed resistance, the current is controlled by the ratio V/R. Raising the voltage while holding resistance fixed increases the current proportionally.",
+            answer: "The induced emf has magnitude 18 V.",
+            answer_reason: "Induction depends on how much magnetic flux changes and how quickly it changes. More turns or a faster change gives a larger emf because the flux-linkage rate is larger.",
           },
           extra_examples: [
             {
-              body: "This follow-up uses rearrangement so resistance stays interpretable rather than becoming just the leftover symbol.",
+              body: "This follow-up stops students from treating any nearby magnet as automatic induction.",
               worked_example: {
-                prompt: "A component has 2.4 V across it and a current of 0.30 A through it. Find its resistance.",
+                prompt: "Why does a stationary magnet held motionless inside a stationary coil fail to produce a sustained induced emf?",
                 steps: [
-                  "Start from V = I R.",
-                  "Rearrange to R = V / I.",
-                  "Substitute the values: R = 2.4 / 0.30 = 8.0 ohms.",
+                  "Ask what quantity induction depends on before talking about magnets in general.",
+                  "Notice that if the magnet and coil are both still, the magnetic flux through the coil stays constant.",
+                  "Conclude that without a change in flux there is no sustained induced emf.",
                 ],
-                answer: "The resistance is 8.0 ohms.",
-                answer_reason: "Resistance is the ratio of potential difference to current for an ohmic component, so dividing the voltage by the current gives the route opposition value.",
+                answer: "There is no sustained induced emf because the flux through the coil is not changing when the magnet and coil stay still.",
+                answer_reason: "Induction is a change effect, not a field-presence effect. A magnetic field can be present without producing emf if the flux linkage remains constant.",
               },
             },
           ],
         };
       case "M10_L6":
         return {
-          body: "The capstone should combine voltage, current, resistance, and power in one ledger so learners stop collapsing electrical quantities into one vague 'more electricity' idea.",
+          body: "Transformer examples should link turns ratio, ideal power transfer, and transmission efficiency so the lesson does not collapse into one isolated voltage formula.",
           worked_example: {
-            prompt: "A 12 V source is connected first to a 6.0 ohm resistor and then to a 3.0 ohm resistor. For each case, find the current and the electrical power. Then state what stayed the same and what changed between the two circuits.",
+            prompt: "An ideal transformer has 800 turns on the primary and 40 turns on the secondary. The primary voltage is 240 V and the secondary current is 3.0 A. Find the secondary voltage and the primary current.",
             steps: [
-              "Use Ohm's law for each circuit: with 6.0 ohms, I = 12 / 6.0 = 2.0 A; with 3.0 ohms, I = 12 / 3.0 = 4.0 A.",
-              "Use P = I V for each case: the 6.0 ohm circuit gives P = 2.0 x 12 = 24 W, and the 3.0 ohm circuit gives P = 4.0 x 12 = 48 W.",
-              "Summarize the ledger carefully: the source voltage stayed the same, but the resistance changed, so the current and therefore the power changed too.",
+              "Use the turns ratio for the voltage first: Vp / Vs = Np / Ns, so 240 / Vs = 800 / 40 = 20.",
+              "Solve for the secondary voltage: Vs = 240 / 20 = 12 V.",
+              "Then use ideal power balance: Vp Ip = Vs Is, so 240 Ip = 12 x 3.0 = 36, giving Ip = 0.15 A.",
             ],
-            answer: "For 6.0 ohms, the current is 2.0 A and the power is 24 W. For 3.0 ohms, the current is 4.0 A and the power is 48 W. The voltage stayed the same, while resistance, current, and power changed.",
-            answer_reason: "A same-voltage source can produce different currents in different loops because the route resistance changes. Once the current changes, the power changes as well through P = I V.",
+            answer: "The secondary voltage is 12 V and the primary current is 0.15 A.",
+            answer_reason: "A step-down transformer lowers voltage according to the turns ratio, and in the ideal model the power transferred on each side is the same, so the current adjusts in the opposite direction.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps quantity labels clean in an explanation rather than in a calculation.",
+              body: "This follow-up keeps transmission-loss reasoning quantitative instead of slogan-based.",
               worked_example: {
-                prompt: "Why is 'the battery gives 12 amps' a weak sentence for a 12 V source connected to different circuits?",
+                prompt: "A power line must transmit 10 kW. Compare the line current if the transmission voltage is 25 kV and if it is 250 kV, then state which case gives lower cable losses.",
                 steps: [
-                  "Identify what the 12 belongs to: volts measure energy transferred per unit charge.",
-                  "Notice that current depends on both the source voltage and the circuit resistance.",
-                  "Replace the weak sentence with the stronger one: the battery provides 12 V, while the current depends on the complete circuit it is connected to.",
+                  "Use P = V I for each case with the same transmitted power.",
+                  "At 25 kV, I = 10000 / 25000 = 0.40 A. At 250 kV, I = 10000 / 250000 = 0.040 A.",
+                  "Use the idea that cable heating losses scale with I^2 R, so the higher-voltage case gives much smaller losses because the line current is much smaller.",
                 ],
-                answer: "It is weak because 12 describes the battery's voltage, not its current. The current depends on the whole circuit, especially the resistance.",
-                answer_reason: "Voltage and current are different electrical quantities. The source provides an energy-per-charge boost, while the resulting current is set by the full loop.",
+                answer: "The line current is 0.40 A at 25 kV and 0.040 A at 250 kV, so the 250 kV transmission case gives lower cable losses.",
+                answer_reason: "For fixed power, increasing the transmission voltage decreases the current. Smaller current means much smaller I^2 R heating losses in the cables.",
               },
             },
           ],
@@ -16738,6 +16737,48 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
         checkForUnderstanding: "In a parallel circuit, which quantity is common across each branch and which quantity splits between the branches?",
         commonTrap: "Do not use the series current rule on a branching circuit or the parallel voltage rule on a one-path chain.",
       };
+    case "M10_L1":
+      return {
+        coreIdea: "Magnetic field maps must be read as direction-and-strength guides, not as literal travel tracks.",
+        reasoning: "Identify the source from the field pattern first, then read the local direction from the compass clue, and only after that compare line spacing to judge relative field strength.",
+        checkForUnderstanding: "If the field lines are closer together near one point than another, what changes and what does not?",
+        commonTrap: "Do not treat field lines as the path a particle has to follow, and do not collapse direction and strength into one vague description.",
+      };
+    case "M10_L2":
+      return {
+        coreIdea: "Electromagnets become stronger because current, turns, and a soft-iron core all reinforce the same field story.",
+        reasoning: "Hold one factor fixed while changing another so you can say which strength lever actually changed. Then combine the turn-count, current, and core arguments into one causal explanation instead of a memorized list.",
+        checkForUnderstanding: "If current stays fixed but the number of turns doubles, what should happen to the electromagnet and why?",
+        commonTrap: "Do not talk as if the core is just a permanent magnet hidden inside the coil. The coil current is still the field source.",
+      };
+    case "M10_L3":
+      return {
+        coreIdea: "The motor effect is a sideways magnetic force on a current-carrying conductor, perpendicular to both current and field.",
+        reasoning: "Keep field direction, current direction, and force direction in separate slots. Then use the force formula for the magnitude and change only one direction at a time when you decide how the force flips.",
+        checkForUnderstanding: "If the current reverses while the magnetic field stays the same, what happens to the force direction?",
+        commonTrap: "Do not push the conductor along the field lines. The magnetic force is sideways, not forward along the weave.",
+      };
+    case "M10_L4":
+      return {
+        coreIdea: "A motor turns because opposite sides of the coil feel opposite magnetic forces that form a torque.",
+        reasoning: "Read the two side-kicks before you name the turning effect. Then connect torque to field, current, turns, and coil area, and finally explain the commutator as a direction-keeping device rather than as a power source.",
+        checkForUnderstanding: "Why does a split-ring commutator matter even when the coil is already carrying current?",
+        commonTrap: "Do not describe the motor as one force pushing the loop around. The turning comes from a pair of opposite forces on opposite sides.",
+      };
+    case "M10_L5":
+      return {
+        coreIdea: "Induction is a change-in-flux story, not a field-is-present story.",
+        reasoning: "Ask what quantity is changing before you mention emf. Then compare how quickly the flux changes and how many turns are linked so you can explain why some induction cases are stronger than others.",
+        checkForUnderstanding: "If the magnet and coil stay still relative to each other, what happens to the induced emf and why?",
+        commonTrap: "Do not say a nearby magnet automatically induces emf. A static field can exist without any sustained induction.",
+      };
+    case "M10_L6":
+      return {
+        coreIdea: "A transformer links two separate coils through changing flux, and the turns ratio sets the voltage change.",
+        reasoning: "Read the induction link first, then use the turns ratio for the voltage change, and only after that connect the result to transmission logic about lower current and lower cable losses.",
+        checkForUnderstanding: "Why does raising transmission voltage help even when the transmitted power stays the same?",
+        commonTrap: "Do not imagine charge flowing directly from the primary into the secondary. The two circuits are linked by changing magnetic flux instead.",
+      };
     default:
       break;
   }
@@ -17035,6 +17076,36 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       return {
         body: "The Switchyard-Loop analogy keeps one-path chains separate from branching networks. In a one-path route, every carrier stream passes every component in turn, so the same current appears everywhere. In a branch network, each branch connects across the same two junctions, so the voltage is shared while the current divides and recombines.",
         checkForUnderstanding: "In the Switchyard-Loop picture, what clue tells you that branch voltage stays the same even though the current can split?",
+      };
+    case "M10_L1":
+      return {
+        body: "The Field-Weave picture is strongest when it keeps three jobs separate. The pattern shape tells you the source type, the local tangent tells you the field direction at one chosen point, and the weave density tells you relative strength. That is why a field map is a reading tool rather than a literal route map for particles.",
+        checkForUnderstanding: "In the Field-Weave picture, which clue answers the direction question and which clue answers the strength question?",
+      };
+    case "M10_L2":
+      return {
+        body: "The coil-tower picture works because current loops reinforce one magnetic weave instead of creating several unrelated effects. More turns stack more loop contributions together, larger current strengthens each loop's contribution, and a soft-iron core concentrates the weave so the electromagnet becomes stronger for clear physical reasons.",
+        checkForUnderstanding: "In the coil-tower picture, what changes when the turn count increases but the current stays fixed?",
+      };
+    case "M10_L3":
+      return {
+        body: "The side-kick picture keeps the magnetic force from collapsing into a forward push story. A current-carrying route crossing the field gets kicked sideways, and reversing either the field or the current flips that sideways kick. The model works because it keeps all three directions separate before the left-hand rule is used.",
+        checkForUnderstanding: "In the side-kick picture, why can the force reverse even though the wire stays in the same place?",
+      };
+    case "M10_L4":
+      return {
+        body: "The spin-frame picture turns the side-kick idea into motor torque. One side of the loop is kicked one way and the opposite side is kicked the other way, so the pair creates a turn rather than a sideways translation. The commutator matters because it swaps the current each half-turn and preserves the overall rotation direction.",
+        checkForUnderstanding: "In the spin-frame picture, what does the commutator protect: the energy supply, or the direction of the turning effect?",
+      };
+    case "M10_L5":
+      return {
+        body: "The change-thread picture makes induction a rate-of-change story. A steady field-thread through the coil is not enough on its own, but moving the magnet, moving the coil, or rotating the loop changes the thread and produces emf. Faster change means a stronger induced effect because the flux-linkage rate is larger.",
+        checkForUnderstanding: "In the change-thread picture, what has to change before the induced effect appears strongly?",
+      };
+    case "M10_L6":
+      return {
+        body: "The grid-bridge picture keeps the transformer as one changing-flux link between two separate coils. The turns ratio sets the voltage step-up or step-down, and the transmission panel shows why a higher line voltage can carry the same power with smaller current and therefore smaller cable losses.",
+        checkForUnderstanding: "In the grid-bridge picture, why does a higher line voltage make the cable-loss problem easier for the same power transfer?",
       };
     default:
       break;
@@ -18302,10 +18373,66 @@ function revisedM9TechnicalWords(code: string): Array<{ term: string; meaning: s
   }
 }
 
+function revisedM10TechnicalWords(code: string): Array<{ term: string; meaning: string; why_it_matters: string }> {
+  switch (code) {
+    case "M10_L1":
+      return [
+        { term: "Magnetic field", meaning: "A magnetic field is the region where a magnetic force would act on magnets, magnetic materials, or moving charges.", why_it_matters: "It is the invisible structure behind many magnetic effects." },
+        { term: "Field line", meaning: "Field lines are drawn lines that show the direction and pattern of a field.", why_it_matters: "They are a map of the field, not actual physical strings." },
+        { term: "Compass", meaning: "A compass is a small magnet that turns to align with the local magnetic field direction.", why_it_matters: "It helps read field direction at a specific point instead of guessing from the whole pattern." },
+        { term: "Current-carrying wire", meaning: "A current-carrying wire is a conductor whose current creates a magnetic field around it.", why_it_matters: "Its field pattern differs from a bar magnet and must be identified from the map." },
+      ];
+    case "M10_L2":
+      return [
+        { term: "Electromagnet", meaning: "An electromagnet is a magnet created by electric current, often using a coil and an iron core.", why_it_matters: "It links electricity and magnetism in a controllable way." },
+        { term: "Solenoid", meaning: "A solenoid is a coil of wire that can produce a magnetic field when current flows through it.", why_it_matters: "It is a standard structure for electromagnets." },
+        { term: "Soft-iron core", meaning: "A soft-iron core is an easily magnetized core placed inside a coil to strengthen the electromagnet.", why_it_matters: "It strengthens the field without behaving like a stubborn permanent magnet." },
+        { term: "Magnetic field", meaning: "A magnetic field is the region where a magnetic force would act on magnets, magnetic materials, or moving charges.", why_it_matters: "Current, turns, and the core all work by strengthening this same field story." },
+      ];
+    case "M10_L3":
+      return [
+        { term: "Motor effect", meaning: "The motor effect is the force on a current-carrying conductor in a magnetic field.", why_it_matters: "It explains how electric motors produce motion." },
+        { term: "Conductor", meaning: "A conductor is a material that allows charge carriers to move fairly easily.", why_it_matters: "It is the current-carrying route that feels the magnetic side-kick." },
+        { term: "Magnetic field", meaning: "A magnetic field is the region where a magnetic force would act on magnets, magnetic materials, or moving charges.", why_it_matters: "The force direction depends on how the conductor crosses this field." },
+        { term: "Force", meaning: "A force is a push or pull that can change an object's motion.", why_it_matters: "Here the force is sideways to both current and field directions." },
+      ];
+    case "M10_L4":
+      return [
+        { term: "Torque", meaning: "Torque is the turning effect produced by a force or force pair about an axis.", why_it_matters: "It explains why the motor coil turns rather than just shifting sideways." },
+        { term: "Commutator", meaning: "A commutator is the rotating contact system that reverses or manages current connections in some machines.", why_it_matters: "It helps keep motor torque working in the same overall direction." },
+        { term: "Motor effect", meaning: "The motor effect is the force on a current-carrying conductor in a magnetic field.", why_it_matters: "A motor is a turning arrangement built from this same sideways-force idea." },
+        { term: "Coil", meaning: "A coil is a looped conductor whose opposite sides can feel opposite magnetic forces.", why_it_matters: "It is the part of the motor that experiences the turning pair." },
+      ];
+    case "M10_L5":
+      return [
+        { term: "Electromagnetic induction", meaning: "Electromagnetic induction is the creation of an emf when magnetic flux through a conductor changes.", why_it_matters: "It is the central idea behind generators and transformers." },
+        { term: "Magnetic flux", meaning: "Magnetic flux measures how much magnetic field passes through an area.", why_it_matters: "Changing flux is what drives induction." },
+        { term: "Generator", meaning: "A generator is a device that converts mechanical energy into electrical energy by induction.", why_it_matters: "It is repeated induction caused by continuous motion." },
+        { term: "EMF", meaning: "EMF is the energy supplied per unit charge by a source or induced process.", why_it_matters: "It is the induced output students are trying to explain in induction questions." },
+      ];
+    case "M10_L6":
+      return [
+        { term: "Transformer", meaning: "A transformer is a device that uses induction between coils to change voltage in alternating-current systems.", why_it_matters: "It is essential for efficient power transmission." },
+        { term: "Alternating current", meaning: "Alternating current changes direction periodically.", why_it_matters: "It is needed so the shared core flux keeps changing in the transformer." },
+        { term: "Primary coil", meaning: "The primary coil is the input coil connected to the source in a transformer.", why_it_matters: "Its changing current creates the changing flux that links the two coils." },
+        { term: "Secondary coil", meaning: "The secondary coil is the output coil where the transformed voltage appears.", why_it_matters: "Its turns count helps set the output voltage in the turns-ratio story." },
+      ];
+    default:
+      return [];
+  }
+}
+
 function technicalWordsSections(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const revisedM9Words = revisedM9TechnicalWords(code);
-  const technicalWords = (revisedM9Words.length > 0 ? revisedM9Words : technicalWordsForLesson(lesson, code)).map((entry) => ({
+  const revisedM10Words = revisedM10TechnicalWords(code);
+  const selectedWords =
+    revisedM9Words.length > 0
+      ? revisedM9Words
+      : revisedM10Words.length > 0
+        ? revisedM10Words
+        : technicalWordsForLesson(lesson, code);
+  const technicalWords = selectedWords.map((entry) => ({
     ...entry,
     term: normalizeRenderedPhysicsText(entry.term),
     meaning: preserveLeadingTechnicalSymbol(
@@ -19915,7 +20042,7 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
-    const preferLocalScaffold = code === "M1_L1" || code === "M10_L1" || code.startsWith("M9_");
+    const preferLocalScaffold = code === "M1_L1" || code.startsWith("M9_") || code.startsWith("M10_");
     const authoredSections = preferLocalScaffold
       ? []
       : authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
