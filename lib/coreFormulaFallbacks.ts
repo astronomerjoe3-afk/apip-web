@@ -258,25 +258,28 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "atomic number before = atomic number after", meaning: "Nuclear equations must also conserve atomic number.", conditions: "Use when balancing a nuclear equation.", unitsText: "" },
   ],
   M12_L1: [
-    { standardFormula: "field direction = direction a north pole would point", meaning: "Field lines show the direction of the magnetic field at each point.", conditions: "Use when reading field maps around magnets and wires.", unitsText: "" },
-    { standardFormula: "closer field lines -> stronger magnetic field", meaning: "Field-line density is the school-model clue to relative field strength.", conditions: "Use when comparing stronger and weaker regions of a field map.", unitsText: "" },
+    { standardFormula: "E = delta m c^2", meaning: "A mass change is equivalent to a nuclear energy change.", conditions: "Use when linking mass defect to binding energy or released nuclear energy.", unitsText: "J" },
+    { standardFormula: "binding energy per nucleon = total binding energy / nucleon number", meaning: "Binding energy per nucleon is the fair first comparison of stability for nuclei of different sizes.", conditions: "Use when deciding which nucleus is more tightly bound.", unitsText: "J per nucleon" },
   ],
   M12_L2: [
-    { standardFormula: "electromagnet strength increases with current and number of turns", meaning: "A coil's field gets stronger when the current or turn count increases.", conditions: "Use when comparing electromagnets built from the same basic setup.", unitsText: "" },
-    { standardFormula: "a soft-iron core strengthens the electromagnet", meaning: "The core concentrates the magnetic field of the solenoid.", conditions: "Use for a temporary electromagnet rather than a permanent magnet.", unitsText: "" },
+    { standardFormula: "energy released = delta m c^2", meaning: "The fission energy release is tied to the mass difference between reactants and products.", conditions: "Use when a fission question gives or implies a mass change.", unitsText: "J" },
+    { standardFormula: "controlled chain reaction: about one neutron from each fission causes one further fission on average", meaning: "Reactor control depends on the neutron budget in the next generation.", conditions: "Use when deciding whether the chain dies out, stays steady, or grows.", unitsText: "" },
   ],
   M12_L3: [
-    { standardFormula: "magnetic force on a current-carrying conductor is perpendicular to both field and current", meaning: "The motor effect gives a sideways force rather than a push along the field lines.", conditions: "Use when a conductor carries current across a magnetic field.", unitsText: "" },
+    { standardFormula: "energy released = delta m c^2", meaning: "Fusion can release energy when the joined product has lower mass than the starting nuclei.", conditions: "Use when fusion questions give or imply a mass change.", unitsText: "J" },
+    { standardFormula: "fusion needs high temperature to overcome electrostatic repulsion", meaning: "High temperature helps light nuclei get close enough for the strong nuclear force to bind them.", conditions: "Use when explaining why fusion needs extreme conditions before it can occur.", unitsText: "" },
   ],
   M12_L4: [
-    { standardFormula: "opposite magnetic forces on opposite sides of a coil create torque", meaning: "A motor turns because the magnetic forces form a couple on the coil.", conditions: "Use when explaining why a motor rotates rather than translating sideways.", unitsText: "" },
+    { standardFormula: "P = E / t", meaning: "Power is the rate of energy transfer through the reactor system.", conditions: "Use when comparing electrical output or thermal transfer rate.", unitsText: "W" },
+    { standardFormula: "efficiency = useful electrical output / total thermal input x 100%", meaning: "Not all reactor heat becomes useful electrical output.", conditions: "Use when comparing the useful output with the total energy entering the plant stages.", unitsText: "%" },
   ],
   M12_L5: [
-    { standardFormula: "induced emf depends on the rate of change of magnetic flux", meaning: "A changing magnetic field link is what produces induction.", conditions: "Use when the magnet, coil, or orientation changes.", unitsText: "" },
+    { standardFormula: "remaining fraction after n half-lives = (1/2)^n", meaning: "Radioactive samples halve repeatedly, not by fixed subtraction.", conditions: "Use when matching isotope lifetime to an application or working out what remains after several half-lives.", unitsText: "" },
+    { standardFormula: "corrected count rate = measured count rate - background count rate", meaning: "Background radiation must be removed before the source signal is interpreted fairly.", conditions: "Use when tracer or detector readings include environmental background.", unitsText: "counts/s" },
   ],
   M12_L6: [
-    { standardFormula: "Vp / Vs = Np / Ns", meaning: "In the school transformer model, the voltage ratio follows the turns ratio.", conditions: "Use for an ideal transformer with changing current in the primary.", unitsText: "V" },
-    { standardFormula: "P = VI", meaning: "Power in transmission depends on voltage and current together.", conditions: "Use when comparing high-voltage low-current transmission with lower-voltage higher-current transmission.", unitsText: "W" },
+    { standardFormula: "dose increases with longer time near the source", meaning: "Exposure generally rises when time near an ionising source is increased.", conditions: "Use when comparing safer and less safe handling conditions.", unitsText: "" },
+    { standardFormula: "shielding, distance, and time are key exposure-control variables", meaning: "Risk is reduced by limiting how much radiation reaches people and for how long.", conditions: "Use when evaluating controls for nuclear hazards or applications.", unitsText: "" },
   ],
   M13_L1: [
     { standardFormula: "atomic number Z = number of protons", meaning: "Proton count fixes the element identity.", conditions: "Use when identifying the element.", unitsText: "" },

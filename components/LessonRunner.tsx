@@ -16,7 +16,7 @@ import M8SimulationPanels from "./M8SimulationPanels";
 import M9SimulationPanels from "./M9SimulationPanels";
 import M10SimulationPanels from "./M10SimulationPanels";
 import M11SimulationPanels from "./M11SimulationPanels";
-import M12SimulationPanels from "./M12SimulationPanels";
+import M12NuclearSimulationPanels from "./M12NuclearSimulationPanels";
 import M13SimulationPanels from "./M13SimulationPanels";
 import M14SimulationPanels from "./M14SimulationPanels";
 import F5SimulationPanels from "./F5SimulationPanels";
@@ -3403,7 +3403,7 @@ export default function LessonRunner({
             formatSimulationNumber={formatSimulationNumber}
           />
         ) : simulationLessonKey.startsWith("M12_") ? (
-          <M12SimulationPanels
+          <M12NuclearSimulationPanels
             lessonKey={simulationLessonKey}
             simMetricMeters={simMetricMeters}
             setSimMetricMeters={setSimMetricMeters}
