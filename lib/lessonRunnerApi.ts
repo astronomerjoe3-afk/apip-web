@@ -11,6 +11,7 @@ import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m
 import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
 import { m9GeneratedConceptGateItems, m9GeneratedDiagnosticItems, m9GeneratedMasteryItems } from "./m9AssessmentBanks";
 import { m10GeneratedConceptGateItems, m10GeneratedDiagnosticItems, m10GeneratedMasteryItems } from "./m10AssessmentBanks";
+import { m11GeneratedConceptGateItems, m11GeneratedDiagnosticItems, m11GeneratedMasteryItems } from "./m11AssessmentBanks";
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
@@ -6000,6 +6001,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M9_")) return m9GeneratedDiagnosticItems(code);
   if (code.startsWith("M10_")) return m10GeneratedDiagnosticItems(code);
+  if (code.startsWith("M11_")) return m11GeneratedDiagnosticItems(code);
   if (code.startsWith("M2_")) return m2GeneratedDiagnosticItems(code);
   if (code.startsWith("M3_")) return m3GeneratedDiagnosticItems(code);
   switch (code) {
@@ -6134,6 +6136,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
 function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   const authored = itemsFrom(lesson, "diagnostic").map(asRecord);
   const authoredUsable = authored.filter((item) => hasUsableAssessmentAnswer(item));
   const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authoredUsable.length);
@@ -6262,6 +6265,7 @@ function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = it
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson))
     .filter((item) => hasUsableAssessmentAnswer(item));
   const authoredMasteryItems = filterLessonSpecificAssessmentCandidates(
@@ -7686,6 +7690,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M9_")) return m9GeneratedMasteryItems(code);
   if (code.startsWith("M10_")) return m10GeneratedMasteryItems(code);
+  if (code.startsWith("M11_")) return m11GeneratedMasteryItems(code);
   if (code.startsWith("M2_")) return m2GeneratedMasteryItems(code);
   if (code.startsWith("M3_")) return m3GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
@@ -7793,6 +7798,7 @@ function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M9_")) return m9GeneratedConceptGateItems(code);
   if (code.startsWith("M10_")) return m10GeneratedConceptGateItems(code);
+  if (code.startsWith("M11_")) return m11GeneratedConceptGateItems(code);
   if (code.startsWith("M2_")) return m2GeneratedConceptGateItems(code);
   if (code.startsWith("M3_")) return m3GeneratedConceptGateItems(code);
   switch (code) {
@@ -8373,6 +8379,7 @@ function hasUsableAssessmentAnswer(item: UnknownRecord): boolean {
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -10639,7 +10646,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const m9WorkedExample = scaffoldM9WorkedExample(sourceCode);
   if (m9WorkedExample) return m9WorkedExample;
 
-  const code = sourceCode;
+  const code = sourceCode.startsWith("M11_") ? sourceCode.replace(/^M11_/, "M13_") : sourceCode;
   if (code.startsWith("M3_")) {
     switch (code) {
       case "M3_L1":
@@ -12052,186 +12059,6 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
                 ],
                 answer: "The line current is 0.40 A at 25 kV and 0.040 A at 250 kV, so the 250 kV transmission case gives lower cable losses.",
                 answer_reason: "For fixed power, increasing the transmission voltage decreases the current. Smaller current means much smaller I^2 R heating losses in the cables.",
-              },
-            },
-          ],
-        };
-      default:
-        break;
-    }
-  }
-  if (code.startsWith("M11_")) {
-    switch (code) {
-      case "M11_L1":
-        return {
-          body: "Series-circuit work should force learners to keep one-path current, shared voltage, and total resistance in one connected calculation rather than memorizing disconnected rules.",
-          worked_example: {
-            prompt: "A 12 V source is connected to three series resistors of 2.0 ohms, 3.0 ohms, and 7.0 ohms. Find the total resistance, the circuit current, and the voltage drop across the 3.0 ohm resistor.",
-            steps: [
-              "Use the series-resistance rule first: R_total = 2.0 + 3.0 + 7.0 = 12.0 ohms.",
-              "Use the total resistance with the source voltage to find the one common series current: I = V / R_total = 12 / 12.0 = 1.0 A.",
-              "Use that same current through the 3.0 ohm resistor to find its voltage drop: V_3 = I R = 1.0 x 3.0 = 3.0 V.",
-            ],
-            answer: "The total resistance is 12.0 ohms, the series current is 1.0 A, and the 3.0 ohm resistor has a 3.0 V drop.",
-            answer_reason: "A series chain has one uninterrupted path, so the resistance adds directly and the current is the same through every component. The source voltage is then shared across the individual resistors.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up checks whether the learner can reject a common series misconception instead of only calculating.",
-              worked_example: {
-                prompt: "Why is 'the first resistor uses up current, so less current reaches the second resistor' a weak explanation for a series circuit?",
-                steps: [
-                  "Start from the one-path structure of a series circuit.",
-                  "Recall that the same charge flow rate passes every point in a single uninterrupted path.",
-                  "Replace the weak claim with the stronger one: the current stays the same through each series component, while the voltage is shared across them.",
-                ],
-                answer: "It is weak because the current is the same through every series component; current is not used up by the first resistor.",
-                answer_reason: "In a one-path circuit, charge carriers pass every station in sequence. Components transfer energy, but they do not consume the current itself.",
-              },
-            },
-          ],
-        };
-      case "M11_L2":
-        return {
-          body: "Parallel-circuit work should make shared branch voltage and split current live on separate lines of reasoning, because mixing the series rules into branches is the main conceptual trap.",
-          worked_example: {
-            prompt: "A 12 V supply is connected across two parallel resistors of 6.0 ohms and 4.0 ohms. Find the current in each branch and the total current from the source.",
-            steps: [
-              "Use the parallel-voltage rule first: each branch has the full 12 V across it.",
-              "Find each branch current separately: I1 = 12 / 6.0 = 2.0 A and I2 = 12 / 4.0 = 3.0 A.",
-              "Use the current-sum rule at the rejoin point: I_total = 2.0 + 3.0 = 5.0 A.",
-            ],
-            answer: "The 6.0 ohm branch carries 2.0 A, the 4.0 ohm branch carries 3.0 A, and the source current is 5.0 A.",
-            answer_reason: "Parallel branches share the same two junctions, so they share the same voltage. The branch currents are found separately and then added to get the source current.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up keeps the equivalent-resistance story conceptually sharp.",
-              worked_example: {
-                prompt: "Why does adding another resistor branch in parallel usually reduce the total resistance of the circuit?",
-                steps: [
-                  "Think about what adding a branch does to the number of available paths.",
-                  "Notice that another branch gives charge carriers an extra route through the network.",
-                  "Conclude that more routes make the overall opposition smaller, so the equivalent resistance falls.",
-                ],
-                answer: "Adding a branch reduces the total resistance because it creates an extra path for charge, so the whole network offers less opposition overall.",
-                answer_reason: "Parallel branches widen the route options for current, which is why the equivalent resistance becomes lower than any single branch resistance.",
-              },
-            },
-          ],
-        };
-      case "M11_L3":
-        return {
-          body: "Power examples should be mathematically flexible enough to move between the equivalent formulas and conceptually honest enough to keep power as an energy-transfer rate rather than a statement about used-up current.",
-          worked_example: {
-            prompt: "A heater has resistance 24 ohms and is connected across a 12 V supply. Find the current, the power, and the energy transferred in 5.0 minutes.",
-            steps: [
-              "Find the current first with Ohm's law: I = V / R = 12 / 24 = 0.50 A.",
-              "Find the power using either P = I V = 0.50 x 12 = 6.0 W or P = V^2 / R = 144 / 24 = 6.0 W.",
-              "Convert the time into seconds and use E = P t: 5.0 min = 300 s, so E = 6.0 x 300 = 1800 J.",
-            ],
-            answer: "The current is 0.50 A, the power is 6.0 W, and the energy transferred in 5.0 minutes is 1800 J.",
-            answer_reason: "Power is the energy transferred each second. Once the circuit current is known, the power follows, and multiplying that rate by the elapsed time gives the total energy transfer.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up keeps the student from collapsing brightness or heating into a current-only story.",
-              worked_example: {
-                prompt: "Why is 'this lamp is brighter because it gets more current, full stop' incomplete?",
-                steps: [
-                  "Start from the definition of power as energy transferred each second.",
-                  "Recall that electrical power depends on both current and voltage across the component.",
-                  "Conclude that a full explanation of brightness or heating should use power, not current alone.",
-                ],
-                answer: "It is incomplete because brightness and heating depend on power, and power depends on both current and voltage.",
-                answer_reason: "Current matters, but it is only one part of the energy-transfer-rate story. The clean comparison quantity is power.",
-              },
-            },
-          ],
-        };
-      case "M11_L4":
-        return {
-          body: "Circuit-diagram work should be rigorous enough to classify from junction logic rather than drawing layout, because misreading the network structure ruins every later calculation.",
-          worked_example: {
-            prompt: "A diagram shows two lamps connected between the same pair of junctions, while that two-lamp block is connected in one uninterrupted path with a resistor and a cell. Which components are in parallel, which are in series, and what should be reduced first if you want the equivalent resistance?",
-            steps: [
-              "Identify the shared-junction rule first: components between the same two junctions are in parallel.",
-              "Notice that the resistor and cell lie on the single remaining path outside that branch block, so that part is in series with the whole parallel section.",
-              "Choose the reduction order from the structure: reduce the two-lamp parallel block first, then combine that equivalent resistor with the series part.",
-            ],
-            answer: "The two lamps are in parallel, and that parallel block is in series with the resistor. The parallel block should be reduced first.",
-            answer_reason: "Series and parallel are read from connection logic, not from whether components happen to be drawn side by side or one above another on the page.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up checks whether the learner can explain why two different drawings can still represent the same circuit.",
-              worked_example: {
-                prompt: "Why can two diagrams that look different on the page still represent the same circuit?",
-                steps: [
-                  "Ignore the cosmetic layout first and look only at how the junctions and paths connect.",
-                  "Compare which components share the same nodes and which lie on the same uninterrupted path.",
-                  "Conclude that if the connection logic matches, the diagrams represent the same circuit even if one is drawn more neatly or differently.",
-                ],
-                answer: "They can represent the same circuit because what matters is the connection logic between junctions and paths, not the page layout.",
-                answer_reason: "Circuit diagrams are symbolic maps. The geometry of the drawing can change while the electrical relationships stay identical.",
-              },
-            },
-          ],
-        };
-      case "M11_L5":
-        return {
-          body: "Safety examples should connect low-resistance faults to dangerous current and then separate the jobs of fuses, breakers, and insulation rather than letting all protection ideas blur together.",
-          worked_example: {
-            prompt: "A 230 V mains appliance normally has total resistance 460 ohms, but a fault creates a 2.0 ohm short-circuit path across the supply. Find the normal current and the fault current, then explain why a fuse or breaker is needed.",
-            steps: [
-              "Find the normal operating current: I_normal = 230 / 460 = 0.50 A.",
-              "Find the fault current through the short path: I_fault = 230 / 2.0 = 115 A.",
-              "Compare the two currents and explain the safety response: the short circuit creates a huge current because the resistance collapses, so a fuse or breaker must open the circuit before overheating and fire damage occur.",
-            ],
-            answer: "The normal current is 0.50 A and the fault current is 115 A. A fuse or breaker is needed because the short circuit produces a dangerously large current.",
-            answer_reason: "A short circuit is dangerous because it creates a very low-resistance path, not because the voltage becomes bigger. Protection devices work by breaking the circuit when the current becomes unsafe.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up keeps insulation distinct from overcurrent protection.",
-              worked_example: {
-                prompt: "Why is insulation not the same thing as a fuse?",
-                steps: [
-                  "Identify the job of a fuse or breaker first: it protects against unsafe current by opening the circuit.",
-                  "Identify the job of insulation second: it protects users by preventing unwanted contact with live conductors.",
-                  "Conclude that both are safety devices, but they solve different dangers.",
-                ],
-                answer: "Insulation is not the same as a fuse because insulation prevents dangerous contact, while a fuse protects by breaking the circuit when the current is too large.",
-                answer_reason: "Electrical safety has more than one hazard, so different protective measures are needed for overcurrent and electric-shock risks.",
-              },
-            },
-          ],
-        };
-      case "M11_L6":
-        return {
-          body: "Mixed-network work should be challenging enough to require deliberate block reduction and a final current calculation, not just one obvious series or parallel substitution.",
-          worked_example: {
-            prompt: "A 12 V supply is connected to a 4.0 ohm resistor in series with a parallel pair of 6.0 ohm and 3.0 ohm resistors. Find the equivalent resistance and the total current from the supply.",
-            steps: [
-              "Reduce the valid parallel block first: 1 / R_parallel = 1 / 6.0 + 1 / 3.0 = 1 / 6 + 2 / 6 = 3 / 6 = 1 / 2, so R_parallel = 2.0 ohms.",
-              "Combine that result with the series resistor: R_total = 4.0 + 2.0 = 6.0 ohms.",
-              "Use the final total resistance with the source voltage: I_total = 12 / 6.0 = 2.0 A.",
-            ],
-            answer: "The equivalent resistance is 6.0 ohms and the total current is 2.0 A.",
-            answer_reason: "A mixed network must be reduced one valid block at a time. Once the circuit becomes one equivalent resistance, the total current follows from Ohm's law.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up checks whether the learner knows why reduction order matters.",
-              worked_example: {
-                prompt: "Why is it risky to add all the resistors first in a mixed circuit without checking which ones are truly in series or parallel?",
-                steps: [
-                  "Start from the fact that series and parallel use different reduction rules.",
-                  "Notice that a mixed circuit can contain both one-path sections and shared-junction sections.",
-                  "Conclude that adding everything directly can give the wrong answer because only genuinely series components may be added as plain numbers.",
-                ],
-                answer: "It is risky because mixed circuits contain different connection types, and only genuinely series resistors can be added directly. You must identify valid series or parallel blocks first.",
-                answer_reason: "Equivalent resistance depends on network structure. The right arithmetic comes only after the circuit has been read correctly.",
               },
             },
           ],
@@ -14760,7 +14587,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
-  const preferLocalWorkedExamples = sourceCode.startsWith("M9_") || sourceCode.startsWith("M10_");
+  const preferLocalWorkedExamples = sourceCode.startsWith("M9_") || sourceCode.startsWith("M10_") || sourceCode.startsWith("M11_");
   const contractExamples = preferLocalWorkedExamples ? [] : asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = preferLocalWorkedExamples ? [] : asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
@@ -18083,13 +17910,12 @@ function localM9FormulaFallbacks(code: string): Array<{ standardFormula: string;
 
 function remappedLateCoreFormulaCode(code: string): string {
   const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
-  if (/^M11_L[1-6]$/.test(normalized)) return normalized.replace(/^M11_/, "M13_");
   return normalized;
 }
 
 function preferLocalCoreFormulaCards(code: string): boolean {
   const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
-  if (normalized.startsWith("M9_") || normalized.startsWith("M10_")) return true;
+  if (normalized.startsWith("M9_") || normalized.startsWith("M10_") || normalized.startsWith("M11_")) return true;
   return remappedLateCoreFormulaCode(code) !== normalized;
 }
 
@@ -18631,6 +18457,7 @@ function preWorkedExampleVideoMeta(code: string): {
   captions_url: string;
 } | null {
   const assetVersion = "20260410m10";
+  const effectiveCode = String(code || "").trim().toUpperCase().replace(/^M11_/, "M13_");
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
       "final.mp4": "final-20260410d.mp4",
@@ -18645,12 +18472,14 @@ function preWorkedExampleVideoMeta(code: string): {
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
-    const assetLessonId = normalizedLessonId.replace(/^M10_/, "M12_");
+    const assetLessonId = normalizedLessonId
+      .replace(/^M10_/, "M12_")
+      .replace(/^M11_/, "M13_");
     const assetModuleId = assetLessonId.split("_", 1)[0];
-    const publishedFilename = versionedAssetFilenames[normalizedLessonId]?.[filename] ?? filename;
+    const publishedFilename = versionedAssetFilenames[assetLessonId]?.[filename] ?? filename;
     return `/lesson_assets/${assetModuleId}/${assetLessonId}/videos/${publishedFilename}?v=${assetVersion}`;
   };
-  switch (code) {
+  switch (effectiveCode) {
     case "M1_L1":
       return {
         body: "Use this video to read a mission log one segment at a time before you start the worked example.",
@@ -20542,7 +20371,7 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
-    const preferLocalScaffold = code === "M1_L1" || code.startsWith("M9_") || code.startsWith("M10_");
+    const preferLocalScaffold = code === "M1_L1" || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_");
     const authoredSections = preferLocalScaffold
       ? []
       : authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
