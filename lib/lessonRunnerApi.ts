@@ -16695,6 +16695,53 @@ function scaffoldMediaCards(lesson: UnknownRecord): UnknownRecord[] {
 
 
 function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: string; checkForUnderstanding: string; commonTrap: string } {
+  switch (code) {
+    case "M9_L1":
+      return {
+        coreIdea: "Charge is the moving carrier quantity, and a steady current only exists when the loop stays complete.",
+        reasoning: "Name the moving carriers first, then decide whether the route is closed. After that, separate carrier count from current and explain why opening the loop stops the checkpoint rate everywhere.",
+        checkForUnderstanding: "If the same carriers are still in the wire but the switch is open, what changes and why?",
+        commonTrap: "Do not say the battery sends out a fixed current regardless of the loop. A broken route kills the sustained current even though charge carriers are still present.",
+      };
+    case "M9_L2":
+      return {
+        coreIdea: "Current is charge flow rate, so the total charge present and the charge passing a point each second must stay separate.",
+        reasoning: "Start with the checkpoint story: decide how much charge passes one point in the stated time. Then turn that rate into amperes and say it back in words as coulombs per second.",
+        checkForUnderstanding: "If 8 C pass a checkpoint in 2 s, what current flows there?",
+        commonTrap: "Do not treat a large amount of charge as automatically meaning a large current. Current depends on charge and time together.",
+      };
+    case "M9_L3":
+      return {
+        coreIdea: "Voltage is the energy transferred to each coulomb, not the amount of charge moving around the loop.",
+        reasoning: "Ask what one carrier gets from the source before you think about flow rate. Then describe voltage as energy per charge and keep that source-boost story separate from the current story.",
+        checkForUnderstanding: "If each coulomb gets more energy but the charge flow rate stays the same, which electrical quantity increased?",
+        commonTrap: "Do not say the battery stores current. The source gives energy per charge; it does not guarantee one fixed current in every circuit.",
+      };
+    case "M9_L4":
+      return {
+        coreIdea: "Resistance belongs to the route, so material and geometry decide how hard carrier motion is.",
+        reasoning: "Compare route length, width, and material before touching algebra. Then explain how those route features change resistance and therefore change how much current a given source can drive.",
+        checkForUnderstanding: "If two wires are the same material but one is longer, which wire has the greater resistance and why?",
+        commonTrap: "Do not put resistance on the battery and do not talk as if resistance were just another name for current.",
+      };
+    case "M9_L5":
+      return {
+        coreIdea: "For an ohmic route, current depends jointly on voltage and resistance.",
+        reasoning: "Hold one variable fixed while you change the other, then describe how the current responds. Only after the pattern is clear should you compress it into Ohm's law symbols.",
+        checkForUnderstanding: "If the voltage doubles while the resistance stays fixed, what happens to the current?",
+        commonTrap: "Do not use Ohm's law as a magic chant without saying what stayed fixed and why the current changed.",
+      };
+    case "M9_L6":
+      return {
+        coreIdea: "Route structure comes first: one-path circuits keep one common current, while branching circuits keep a common branch voltage.",
+        reasoning: "Decide whether the network is series or parallel before you use any current or voltage rule. Then compare what stays the same in each route type and what gets shared, split, or added at junctions.",
+        checkForUnderstanding: "In a parallel circuit, which quantity is common across each branch and which quantity splits between the branches?",
+        commonTrap: "Do not use the series current rule on a branching circuit or the parallel voltage rule on a one-path chain.",
+      };
+    default:
+      break;
+  }
+
   if (code === "F3_L6") {
     return {
       coreIdea: "Average force is the rate of change of momentum, so force = change in momentum / time. That means the same momentum change produces a smaller force when it happens over a longer stopping time.",
@@ -16958,6 +17005,41 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
 }
 
 function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUnderstanding: string } {
+  switch (code) {
+    case "M9_L1":
+      return {
+        body: "The Carrier-Loop Ledger is strongest when it keeps the moving carriers and the route status separate. The tokens stand for charge carriers, and the checkpoint meter stands for current. Closing the loop lets the same carriers circulate repeatedly; opening the route collapses the current because the circuit is no longer complete.",
+        checkForUnderstanding: "In the Carrier-Loop Ledger, what keeps the same carriers moving again and again instead of the flow stopping immediately?",
+      };
+    case "M9_L2":
+      return {
+        body: "The checkpoint-gate version of the Carrier-Loop Ledger makes current a rate question instead of an amount question. What matters is how much charge crosses one checkpoint in one second, not how many carriers exist somewhere else in the loop. That is why amperes are best read as coulombs per second.",
+        checkForUnderstanding: "In the checkpoint picture, what does changing the passage time teach you about current even if the total charge stays the same?",
+      };
+    case "M9_L3":
+      return {
+        body: "The lift-station picture keeps voltage on the energy-per-carrier side of the story. Each token is still charge, but the source station gives every token an energy boost. That boost stands for voltage, so the analogy helps students separate what moves, charge, from what each mover gets, energy per charge.",
+        checkForUnderstanding: "In the lift-station picture, what changes when the source becomes stronger: the number of tokens, the boost per token, or both?",
+      };
+    case "M9_L4":
+      return {
+        body: "The route-drag picture makes resistance a path property instead of a battery property. A longer, narrower, or rougher route opposes token motion more strongly, while a shorter or wider route lets the stream through more easily. The same source can therefore produce different currents because the routes are different.",
+        checkForUnderstanding: "In the route-drag picture, why can two loops with the same source still give different current stories?",
+      };
+    case "M9_L5":
+      return {
+        body: "The ohmic-route picture works when one control is held fixed while the other changes. Raising the source boost while the same route stays in place increases the stream rate; making the route harder while the same source stays in place reduces it. That is the qualitative meaning behind Ohm's law before the symbols are written.",
+        checkForUnderstanding: "In the ohmic-route picture, what stays fixed when you want to isolate the effect of changing resistance alone?",
+      };
+    case "M9_L6":
+      return {
+        body: "The Switchyard-Loop analogy keeps one-path chains separate from branching networks. In a one-path route, every carrier stream passes every component in turn, so the same current appears everywhere. In a branch network, each branch connects across the same two junctions, so the voltage is shared while the current divides and recombines.",
+        checkForUnderstanding: "In the Switchyard-Loop picture, what clue tells you that branch voltage stays the same even though the current can split?",
+      };
+    default:
+      break;
+  }
+
   if (code === "F3_L4") {
     return {
       body: "In the signed movement-budget analogy, each object brings a positive or negative contribution depending on its direction. The law of conservation of linear momentum says the whole account balance cannot change during the collision if no significant outside forces act on the system. Individual objects can exchange momentum with each other, but the total system balance before and after the interaction must match.",
@@ -17763,7 +17845,8 @@ function authoredFormulaCards(lesson: UnknownRecord, code: string): UnknownRecor
 
 function remappedLateCoreFormulaCode(code: string): string {
   const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
-  if (/^M9_L[1-6]$/.test(normalized)) return normalized.replace(/^M9_/, "M10_");
+  if (/^M9_L[1-5]$/.test(normalized)) return normalized.replace(/^M9_/, "M10_");
+  if (normalized === "M9_L6") return "M11_L2";
   if (/^M10_L[1-6]$/.test(normalized)) return normalized.replace(/^M10_/, "M12_");
   if (/^M11_L[1-6]$/.test(normalized)) return normalized.replace(/^M11_/, "M13_");
   return normalized;
@@ -17773,25 +17856,41 @@ function preferLocalCoreFormulaCards(code: string): boolean {
   return remappedLateCoreFormulaCode(code) !== String(code || "").trim().replace(/-/g, "_").toUpperCase();
 }
 
+function coreFormulaFallbackEntries(code: string): Array<{ targetCode: string; entry: { standardFormula: string; meaning?: string; conditions?: string; unitsText?: string; constants?: string } }> {
+  if (code === "M9_L6") {
+    const seriesEntries = coreFormulaFallbacksForLesson("M11_L1")
+      .filter((entry) => /current is the same/i.test(entry.standardFormula))
+      .map((entry) => ({ targetCode: "M11_L1", entry }));
+    const parallelEntries = coreFormulaFallbacksForLesson("M11_L2")
+      .filter((entry) => /voltage is the same across parallel branches|I_total/i.test(entry.standardFormula))
+      .map((entry) => ({ targetCode: "M11_L2", entry }));
+    return [...seriesEntries, ...parallelEntries];
+  }
+
+  const targetCode = remappedLateCoreFormulaCode(code);
+  return coreFormulaFallbacksForLesson(targetCode).map((entry) => ({ targetCode, entry }));
+}
+
 function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (!isM1ToM14Lesson(code)) return [];
   const effectiveCode = remappedLateCoreFormulaCode(code);
+  const fallbackEntries = coreFormulaFallbackEntries(code);
 
   const authoredCards = preferLocalCoreFormulaCards(code) ? [] : authoredFormulaCards(lesson, effectiveCode);
-  const fallbackCards = coreFormulaFallbacksForLesson(effectiveCode).map((entry) => {
+  const fallbackCards = fallbackEntries.map(({ targetCode, entry }) => {
     const formulaRecord = {
       equation: entry.standardFormula,
       meaning: entry.meaning || "",
       conditions: entry.conditions || "",
     };
     const constantNotes = dedupeText([
-      ...enhancedFormulaConstantsText(effectiveCode, formulaRecord),
+      ...enhancedFormulaConstantsText(targetCode, formulaRecord),
       ...(entry.constants ? [entry.constants] : []),
     ]);
     return {
       standard_formula: canonicalizeFormulaSymbolText(entry.standardFormula),
-      analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, effectiveCode, formulaRecord)),
+      analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, targetCode, formulaRecord)),
       constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
       meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning || "")),
       units_text: normalizeRenderedPhysicsText(entry.unitsText || ""),
@@ -18154,9 +18253,59 @@ function preserveLeadingTechnicalSymbol(term: string, meaning: string): string {
   return `${normalizedTerm}${normalizedMeaning.slice(capitalizedTerm.length)}`;
 }
 
+function revisedM9TechnicalWords(code: string): Array<{ term: string; meaning: string; why_it_matters: string }> {
+  switch (code) {
+    case "M9_L1":
+      return [
+        { term: "Charge", meaning: "Charge is the conserved electrical quantity carried by particles such as electrons.", why_it_matters: "It is the moving stuff in the circuit story." },
+        { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "It is about flow rate, not about how much charge exists in total." },
+        { term: "Circuit", meaning: "A circuit is a complete conducting path that allows charge to move.", why_it_matters: "No complete loop means no sustained current." },
+        { term: "Cell or battery", meaning: "A cell or battery provides an energy rise per unit charge for the circuit.", why_it_matters: "It is a source of energy per charge, not a tank of current." },
+      ];
+    case "M9_L2":
+      return [
+        { term: "Charge", meaning: "Charge is the conserved electrical quantity carried by particles such as electrons.", why_it_matters: "It is what the current rate is counting." },
+        { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "1 A means 1 C passes that point each second." },
+        { term: "Circuit", meaning: "A circuit is a complete conducting path that allows charge to move.", why_it_matters: "A checkpoint-rate story still needs a complete route." },
+        { term: "Conductor", meaning: "A conductor is a material that allows charge carriers to move fairly easily.", why_it_matters: "It helps explain how charge can pass a checkpoint in the first place." },
+      ];
+    case "M9_L3":
+      return [
+        { term: "Voltage", meaning: "Voltage is the energy transferred per unit charge.", why_it_matters: "It tells what each carrier gets from the source." },
+        { term: "Charge", meaning: "Charge is the conserved electrical quantity carried by particles such as electrons.", why_it_matters: "Voltage is always measured per unit charge." },
+        { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "It must stay separate from the voltage story." },
+        { term: "Cell or battery", meaning: "A cell or battery provides an energy rise per unit charge for the circuit.", why_it_matters: "It is the source of the voltage boost around the loop." },
+      ];
+    case "M9_L4":
+      return [
+        { term: "Resistance", meaning: "Resistance is how strongly a component or path opposes current.", why_it_matters: "It belongs to the route, not to the battery." },
+        { term: "Conductor", meaning: "A conductor is a material that allows charge carriers to move fairly easily.", why_it_matters: "Material type helps decide how large the resistance is." },
+        { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "Resistance changes how much current a given route allows." },
+        { term: "Voltage", meaning: "Voltage is the energy transferred per unit charge.", why_it_matters: "The same voltage can drive different currents through routes with different resistance." },
+      ];
+    case "M9_L5":
+      return [
+        { term: "Ohm's law", meaning: "Ohm's law states that current is proportional to voltage for an ohmic conductor when other conditions stay constant.", why_it_matters: "It connects voltage, current, and resistance without treating them as the same thing." },
+        { term: "Resistance", meaning: "Resistance is how strongly a component or path opposes current.", why_it_matters: "It is one of the two quantities that controls current in the ohmic rule." },
+        { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "It is the response quantity in the ohmic rule." },
+        { term: "Voltage", meaning: "Voltage is the energy transferred per unit charge.", why_it_matters: "It is the driving quantity in the ohmic rule." },
+      ];
+    case "M9_L6":
+      return [
+        { term: "Series circuit", meaning: "A series circuit has one path, so the same current passes through each component in that path.", why_it_matters: "One-path behavior is the key comparison rule for this lesson." },
+        { term: "Parallel circuit", meaning: "A parallel circuit has branches connected between the same two junctions.", why_it_matters: "Branch structure changes the current and voltage story completely." },
+        { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "In series it stays common, but in parallel it splits and recombines." },
+        { term: "Potential difference", meaning: "Potential difference is the energy transferred per unit charge between two points.", why_it_matters: "In parallel it is shared across each branch between the same two junctions." },
+      ];
+    default:
+      return [];
+  }
+}
+
 function technicalWordsSections(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
-  const technicalWords = technicalWordsForLesson(lesson, code).map((entry) => ({
+  const revisedM9Words = revisedM9TechnicalWords(code);
+  const technicalWords = (revisedM9Words.length > 0 ? revisedM9Words : technicalWordsForLesson(lesson, code)).map((entry) => ({
     ...entry,
     term: normalizeRenderedPhysicsText(entry.term),
     meaning: preserveLeadingTechnicalSymbol(
@@ -20102,7 +20251,7 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
-    const preferLocalScaffold = code === "M1_L1" || code === "M10_L1";
+    const preferLocalScaffold = code === "M1_L1" || code === "M10_L1" || code.startsWith("M9_");
     const authoredSections = preferLocalScaffold
       ? []
       : authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
