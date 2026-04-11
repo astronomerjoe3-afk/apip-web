@@ -17761,24 +17761,37 @@ function authoredFormulaCards(lesson: UnknownRecord, code: string): UnknownRecor
   return formulaCards;
 }
 
+function remappedLateCoreFormulaCode(code: string): string {
+  const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
+  if (/^M9_L[1-6]$/.test(normalized)) return normalized.replace(/^M9_/, "M10_");
+  if (/^M10_L[1-6]$/.test(normalized)) return normalized.replace(/^M10_/, "M12_");
+  if (/^M11_L[1-6]$/.test(normalized)) return normalized.replace(/^M11_/, "M13_");
+  return normalized;
+}
+
+function preferLocalCoreFormulaCards(code: string): boolean {
+  return remappedLateCoreFormulaCode(code) !== String(code || "").trim().replace(/-/g, "_").toUpperCase();
+}
+
 function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (!isM1ToM14Lesson(code)) return [];
+  const effectiveCode = remappedLateCoreFormulaCode(code);
 
-  const authoredCards = authoredFormulaCards(lesson, code);
-  const fallbackCards = coreFormulaFallbacksForLesson(code).map((entry) => {
+  const authoredCards = preferLocalCoreFormulaCards(code) ? [] : authoredFormulaCards(lesson, effectiveCode);
+  const fallbackCards = coreFormulaFallbacksForLesson(effectiveCode).map((entry) => {
     const formulaRecord = {
       equation: entry.standardFormula,
       meaning: entry.meaning || "",
       conditions: entry.conditions || "",
     };
     const constantNotes = dedupeText([
-      ...enhancedFormulaConstantsText(code, formulaRecord),
+      ...enhancedFormulaConstantsText(effectiveCode, formulaRecord),
       ...(entry.constants ? [entry.constants] : []),
     ]);
     return {
       standard_formula: canonicalizeFormulaSymbolText(entry.standardFormula),
-      analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, code, formulaRecord)),
+      analogy_equivalent: normalizeRenderedPhysicsText(formulaAnalogyEquivalent(lesson, effectiveCode, formulaRecord)),
       constants: normalizeRenderedPhysicsText(constantNotes.join(" ")),
       meaning: normalizeRenderedPhysicsText(ensureSentence(entry.meaning || "")),
       units_text: normalizeRenderedPhysicsText(entry.unitsText || ""),
@@ -17786,7 +17799,7 @@ function coreFormulaRows(lesson: UnknownRecord): UnknownRecord[] {
     };
   });
 
-  return mergeFormulaCards(authoredCards, fallbackCards, supplementalFormulaCards(lesson, code));
+  return mergeFormulaCards(authoredCards, fallbackCards, supplementalFormulaCards(lesson, effectiveCode));
 }
 
 function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
@@ -17811,13 +17824,35 @@ function formulaBridgeSection(lesson: UnknownRecord): UnknownRecord | null {
 }
 
 function relationTeachingSection(lesson: UnknownRecord): UnknownRecord | null {
+  const code = lessonCode(lesson);
+  if (isM1ToM14Lesson(code) && preferLocalCoreFormulaCards(code)) {
+    const formulaCard = coreFormulaRows(lesson)[0];
+    if (!formulaCard) return null;
+
+    const equation = canonicalizeFormulaSymbolText(text(formulaCard.standard_formula));
+    const meaning = ensureSentence(text(formulaCard.meaning));
+    const condition = ensureSentence(trimmedFormulaCondition(text(formulaCard.conditions)));
+    const bodyParts = [
+      equation ? `The compact lesson relation is ${equation}.` : "",
+      meaning ? `It means ${lowerFirst(meaning)}` : "",
+      condition ? formulaConditionInstruction(text(formulaCard.conditions), "Use this relation") : "",
+      "Say this relation in words before you answer later quick checks or mastery questions.",
+    ].filter(Boolean);
+
+    return {
+      heading: "Lesson relation",
+      body: normalizeRenderedPhysicsText(bodyParts.join(" ")),
+      analogy: normalizeRenderedPhysicsText(text(formulaCard.analogy_equivalent)),
+      check_for_understanding: "What physical relationship does this lesson relation summarize?",
+    };
+  }
+
   const formula = lessonFormulaRecords(lesson).find((candidate) => {
     const standardFormula = standardFormulaText(candidate);
     return Boolean(standardFormula && looksLikeStandardEquationText(standardFormula));
   });
   if (!formula) return null;
 
-  const code = lessonCode(lesson);
   const equation = canonicalizeFormulaSymbolText(standardFormulaText(formula));
   const meaning = ensureSentence(text(formula.meaning));
   const condition = ensureSentence(trimmedFormulaCondition(text(formula.conditions)));
