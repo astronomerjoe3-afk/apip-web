@@ -12,6 +12,7 @@ import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f
 import { m9GeneratedConceptGateItems, m9GeneratedDiagnosticItems, m9GeneratedMasteryItems } from "./m9AssessmentBanks";
 import { m10GeneratedConceptGateItems, m10GeneratedDiagnosticItems, m10GeneratedMasteryItems } from "./m10AssessmentBanks";
 import { m11GeneratedConceptGateItems, m11GeneratedDiagnosticItems, m11GeneratedMasteryItems } from "./m11AssessmentBanks";
+import { m12GeneratedConceptGateItems, m12GeneratedDiagnosticItems, m12GeneratedMasteryItems } from "./m12AssessmentBanks";
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
@@ -6002,6 +6003,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M9_")) return m9GeneratedDiagnosticItems(code);
   if (code.startsWith("M10_")) return m10GeneratedDiagnosticItems(code);
   if (code.startsWith("M11_")) return m11GeneratedDiagnosticItems(code);
+  if (code.startsWith("M12_")) return m12GeneratedDiagnosticItems(code);
   if (code.startsWith("M2_")) return m2GeneratedDiagnosticItems(code);
   if (code.startsWith("M3_")) return m3GeneratedDiagnosticItems(code);
   switch (code) {
@@ -6137,6 +6139,7 @@ function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M12_")) return m12GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   const authored = itemsFrom(lesson, "diagnostic").map(asRecord);
   const authoredUsable = authored.filter((item) => hasUsableAssessmentAnswer(item));
   const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authoredUsable.length);
@@ -6266,6 +6269,7 @@ function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M12_")) return m12GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson))
     .filter((item) => hasUsableAssessmentAnswer(item));
   const authoredMasteryItems = filterLessonSpecificAssessmentCandidates(
@@ -7716,6 +7720,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M9_")) return m9GeneratedMasteryItems(code);
   if (code.startsWith("M10_")) return m10GeneratedMasteryItems(code);
   if (code.startsWith("M11_")) return m11GeneratedMasteryItems(code);
+  if (code.startsWith("M12_")) return m12GeneratedMasteryItems(code);
   if (code.startsWith("M2_")) return m2GeneratedMasteryItems(code);
   if (code.startsWith("M3_")) return m3GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
@@ -7824,6 +7829,7 @@ function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M9_")) return m9GeneratedConceptGateItems(code);
   if (code.startsWith("M10_")) return m10GeneratedConceptGateItems(code);
   if (code.startsWith("M11_")) return m11GeneratedConceptGateItems(code);
+  if (code.startsWith("M12_")) return m12GeneratedConceptGateItems(code);
   if (code.startsWith("M2_")) return m2GeneratedConceptGateItems(code);
   if (code.startsWith("M3_")) return m3GeneratedConceptGateItems(code);
   switch (code) {
@@ -8405,6 +8411,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M12_")) return m12GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -12096,174 +12103,174 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     switch (code) {
       case "M12_L1":
         return {
-          body: "The first magnetism lesson should stop field lines becoming imaginary travel tracks and instead make learners read direction, source pattern, and relative strength from the same map.",
+          body: "Binding-energy examples should keep mass defect, binding energy per nucleon, and stability in one chain so nuclear energy is read as a nucleus-level cause-and-effect story.",
           worked_example: {
-            prompt: "A field map shows circular magnetic lines around a straight conductor. At point P above the wire, the compass flag points east. At point Q the lines are farther apart than at P. What does the map tell you about the source, the field direction at P, and the relative field strength at Q?",
+            prompt: "Nucleus A has a binding energy of 56 MeV for 8 nucleons. Nucleus B has a binding energy of 63 MeV for 7 nucleons. Which nucleus is more stable, and what does that tell you about a reaction that moves from A-like nuclei to B-like nuclei?",
             steps: [
-              "Identify the source from the pattern first: circular field lines around a straight route point to a current-carrying wire, not a bar magnet.",
-              "Read the local direction from the compass flag at P instead of treating the whole pattern as one arrow.",
-              "Use the line spacing to compare strengths: wider spacing at Q means the field there is weaker than at P.",
+              "Compare binding energy per nucleon first, because the nuclei have different sizes.",
+              "For A, 56 / 8 = 7.0 MeV per nucleon. For B, 63 / 7 = 9.0 MeV per nucleon.",
+              "Conclude that B is more tightly bound, so a reaction that moves from an A-like arrangement toward a B-like arrangement can release energy because the products are more stable.",
             ],
-            answer: "The source is a current-carrying straight wire, the field at P points east, and the field at Q is weaker than at P.",
-            answer_reason: "Magnetic field maps answer three different questions at once: the overall pattern reveals the source type, the local tangent direction shows which way a compass points, and the line density gives the relative strength.",
+            answer: "Nucleus B is more stable because it has the higher binding energy per nucleon, and moving toward a B-like product can release energy because the products are more tightly bound.",
+            answer_reason: "Total binding energy alone is a weak first comparison when nuclei differ in size. The stability clue is binding energy per nucleon, and energy release is explained by the products ending up more tightly bound.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps current reversal tied to field reversal without inventing a new source.",
+              body: "This follow-up keeps mass defect tied to the same binding story instead of turning it into a separate vocabulary fact.",
               worked_example: {
-                prompt: "Why does reversing the current in a straight wire reverse the circular field direction even though the wire stays in the same place?",
+                prompt: "Why can a tiny mass defect still correspond to a very large energy change?",
                 steps: [
-                  "Start from the idea that the magnetic field is created by the current in the wire.",
-                  "Change only the current direction, not the wire geometry.",
-                  "Conclude that the circular field pattern stays centered on the wire, but the sense of circulation reverses because the current direction has reversed.",
+                  "Start from the relation E = delta m c^2.",
+                  "Notice that c^2 is a very large factor, so even a small mass change is multiplied strongly.",
+                  "Conclude that a small mass defect can still represent a large nuclear energy change.",
                 ],
-                answer: "Reversing the current reverses the magnetic field direction because the field is produced by the current, while the wire only fixes where the field is centered.",
-                answer_reason: "The source location and the field direction are separate parts of the story. Keeping the wire fixed does not keep the field direction fixed if the current changes sign.",
+                answer: "A tiny mass defect can correspond to a large energy change because the mass-energy relation multiplies delta m by the very large factor c^2.",
+                answer_reason: "Mass defect is not 'missing matter with no story'; it is the mass equivalent of the nuclear binding-energy change.",
               },
             },
           ],
         };
       case "M12_L2":
         return {
-          body: "Electromagnet work should be comparative and causal, so learners explain why turns, current, and a soft-iron core strengthen one field story instead of memorizing three disconnected tricks.",
+          body: "Fission examples should keep the trigger, released neutrons, and next-step multiplication together so the chain reaction is explained rather than merely named.",
           worked_example: {
-            prompt: "Electromagnet A has 60 turns and carries 1.5 A with no core. Electromagnet B has 120 turns, the same current, and a soft-iron core. Which one should lift more paper clips, and which changes make the difference?",
+            prompt: "One fission event releases 3 neutrons. On average, 1 neutron escapes, 1 neutron is absorbed without causing fission, and the remaining neutrons go on to cause further fission. Does the chain reaction die out, stay steady, or grow?",
             steps: [
-              "Compare the turn counts first: B has more turns, so the field from each loop reinforces more strongly.",
-              "Notice that the current is the same, so current does not explain the difference here.",
-              "Add the core argument last: the soft-iron core in B concentrates the field, so B should be stronger for two reasons, not one.",
+              "Count how many neutrons per fission continue the chain.",
+              "If 3 are released and 2 are lost from the chain, then 1 neutron per event continues to trigger further fission.",
+              "A chain reaction with about one continuing neutron per event stays steady and controlled.",
             ],
-            answer: "Electromagnet B should lift more because it has more turns and also has a soft-iron core, while the current is unchanged.",
-            answer_reason: "A stronger electromagnet comes from stronger field reinforcement in the coil and better field concentration in the core. The best explanation separates which factor changed and which one stayed fixed.",
+            answer: "The chain reaction stays steady because about one neutron from each fission goes on to cause one more fission.",
+            answer_reason: "The key question is not just how many neutrons are produced, but how many keep the chain going. Controlled reactors aim for about one continuing neutron per fission on average.",
           },
           extra_examples: [
             {
-              body: "This follow-up checks that the learner keeps temporary magnetization separate from permanent-magnet language.",
+              body: "This follow-up keeps control rods tied to neutron economy instead of vague 'cooling down' language.",
               worked_example: {
-                prompt: "Why is soft iron used as the core of an electromagnet instead of a hard permanent magnet material?",
+                prompt: "Why does inserting control rods further into a reactor reduce the fission rate?",
                 steps: [
-                  "Recall that an electromagnet should become strong when current flows.",
-                  "Then recall that it should also lose most of its magnetism when the current is switched off.",
-                  "Choose the material that strengthens the field but does not stay strongly magnetized afterward.",
+                  "Start from the chain-reaction idea that later fissions depend on available neutrons.",
+                  "Recall that control rods absorb neutrons.",
+                  "Conclude that more inserted rods leave fewer neutrons available to trigger the next fission events, so the rate falls.",
                 ],
-                answer: "Soft iron is used because it strengthens the electromagnet while remaining easy to magnetize and demagnetize when the current changes.",
-                answer_reason: "Electromagnets are supposed to be controllable. A core material that stays strongly magnetized would blur the on-off behavior.",
+                answer: "Control rods reduce the fission rate because they absorb neutrons that would otherwise continue the chain reaction.",
+                answer_reason: "Control is fundamentally about neutron population, not about directly 'removing heat' from the core.",
               },
             },
           ],
         };
       case "M12_L3":
         return {
-          body: "Motor-effect examples should be mathematically sharp enough to use the force formula and conceptually sharp enough to keep the force sideways to both field and current.",
+          body: "Fusion examples should keep joining, repulsion, and product stability in one route so the lesson does not collapse into 'fusion is just the opposite of fission.'",
           worked_example: {
-            prompt: "A straight wire of length 0.25 m carries 3.0 A at 90 deg to a 0.40 T magnetic field. Find the force on the wire, then state what happens to the force direction if the current is reversed.",
+            prompt: "Why does fusion of light nuclei need extremely high temperature before it can release energy?",
             steps: [
-              "Use the conductor-force formula with the angle included: F = B I L sin(theta).",
-              "Substitute the values: F = 0.40 x 3.0 x 0.25 x sin 90 deg = 0.30 N.",
-              "Keep the direction argument separate from the magnitude: reversing the current reverses the force direction while keeping the same force size.",
+              "Start from the fact that both nuclei are positively charged, so they repel each other electrostatically.",
+              "High temperature gives the nuclei enough kinetic energy to approach closely enough for the strong nuclear force to take over.",
+              "Once they join and form a more tightly bound nucleus, energy can be released.",
             ],
-            answer: "The wire experiences a force of 0.30 N, and reversing the current reverses the force direction.",
-            answer_reason: "The force magnitude comes from field strength, current, length, and crossing angle, while the direction comes from the relative directions of field and current. Changing the current sign flips the sideways kick.",
+            answer: "Fusion needs extremely high temperature because the nuclei must overcome electrostatic repulsion before they can get close enough to join, and only then can the more tightly bound product release energy.",
+            answer_reason: "The lesson mechanism is condition first, then joining, then energy release. Leaving out the repulsion barrier makes fusion look causeless.",
           },
           extra_examples: [
             {
-              body: "This follow-up makes the learner use the angle factor instead of assuming every crossing is maximum-force.",
+              body: "This follow-up keeps stars linked to the same fusion conditions rather than treating stellar energy as a separate topic.",
               worked_example: {
-                prompt: "The same wire and current are now at 30 deg to the field instead of 90 deg. What is the new force?",
+                prompt: "Why are stars used as the standard real-world context for fusion?",
                 steps: [
-                  "Keep B, I, and L the same and change only the angle factor.",
-                  "Use sin 30 deg = 0.5 in the same formula.",
-                  "Evaluate the new force: F = 0.40 x 3.0 x 0.25 x 0.5 = 0.15 N.",
+                  "Recall the two key entry conditions: extremely high temperature and enough pressure for nuclei to be forced close together repeatedly.",
+                  "Recognize that stellar cores provide those conditions naturally.",
+                  "Conclude that stars are the familiar setting where sustained fusion can occur and release energy continuously.",
                 ],
-                answer: "The new force is 0.15 N.",
-                answer_reason: "A conductor parallel to the field gets little or no sideways push, and a perpendicular conductor gets the maximum. The angle factor explains the smaller force here.",
+                answer: "Stars are the standard fusion context because their cores provide the high temperature and pressure needed for nuclei to overcome repulsion and fuse repeatedly.",
+                answer_reason: "The star example is not decorative; it is the physical case that keeps the required fusion conditions visible.",
               },
             },
           ],
         };
       case "M12_L4":
         return {
-          body: "Motor examples should feel like an upgraded force-on-a-wire problem, with torque, turns, and commutation all kept visible instead of treated as mysterious machine facts.",
+          body: "Reactor examples should read as linked systems, with control, heat transfer, and electricity generation all staying in the same explanation.",
           worked_example: {
-            prompt: "A motor coil has 120 turns, carries 0.80 A, has area 2.5 x 10^-3 m^2, and sits in a 0.18 T magnetic field at the position of maximum turning effect. Find the turning moment on the coil.",
+            prompt: "Describe the energy path through a nuclear power station from the fission fuel to the electrical output.",
             steps: [
-              "Use the maximum-torque formula: turning moment = B I N A.",
-              "Substitute the values carefully: torque = 0.18 x 0.80 x 120 x 2.5 x 10^-3.",
-              "Evaluate the product: torque = 0.0432 N m, then keep the result as a turning effect rather than a plain force.",
+              "Start in the reactor core, where fission releases nuclear energy that becomes thermal energy in the fuel and coolant.",
+              "Follow the thermal energy as it produces steam that turns a turbine, giving kinetic energy to the rotating system.",
+              "Finish at the generator, where the turbine's rotation is converted into electrical energy.",
             ],
-            answer: "The turning moment is 0.0432 N m.",
-            answer_reason: "A motor coil turns because opposite sides feel opposite magnetic forces that form a couple. The formula packages that turning effect into field strength, current, turns, and coil area.",
+            answer: "The energy path is nuclear -> thermal -> kinetic -> electrical.",
+            answer_reason: "A reactor does not produce electricity directly. The lesson is strongest when the chain reaction, heat transfer, turbine motion, and generator stage are all kept visible.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps the commutator from being mislearned as an extra energy source.",
+              body: "This follow-up keeps moderator, control rods, and coolant from being blurred into one vague 'reactor stuff' category.",
               worked_example: {
-                prompt: "Why does a split-ring commutator matter in a d.c. motor?",
+                prompt: "What is the difference between the moderator and the coolant in a thermal reactor?",
                 steps: [
-                  "Start from what would happen without it: after half a turn, the torque would reverse and the coil would tend to stall or rock back.",
-                  "Recall that the commutator swaps the current direction every half-turn.",
-                  "Conclude that the swap keeps the turning effect acting in the same overall rotation direction.",
+                  "Ask first which part changes neutron behavior and which part moves energy.",
+                  "The moderator slows neutrons so further fission is more likely in the controlled chain reaction.",
+                  "The coolant carries thermal energy away from the core to later stages in the plant.",
                 ],
-                answer: "The split-ring commutator keeps the motor turning the same way by reversing the current each half-turn.",
-                answer_reason: "The commutator does not add extra power. Its job is to preserve the direction of the torque as the coil rotates.",
+                answer: "The moderator slows neutrons to support the controlled chain reaction, while the coolant transfers heat away from the core.",
+                answer_reason: "One role is about reaction control; the other is about energy transfer. Merging them hides the reactor-system logic.",
               },
             },
           ],
         };
       case "M12_L5":
         return {
-          body: "Induction work should be explicitly about changing flux, with enough quantitative bite to connect generator ideas to Faraday-style rate-of-change reasoning.",
+          body: "Radioisotope-application examples should feel like matching problems: the task decides the half-life and radiation type you actually want.",
           worked_example: {
-            prompt: "A 120-turn coil experiences a flux change from 0.020 Wb to 0.005 Wb in 0.10 s. Find the magnitude of the induced emf.",
+            prompt: "A hospital needs an isotope for a short imaging procedure. Option A is a gamma emitter with a short half-life. Option B is an alpha emitter with a very long half-life. Which is better, and why?",
             steps: [
-              "Find the flux change magnitude first: delta(Phi) = 0.020 - 0.005 = 0.015 Wb.",
-              "Use the induction formula for magnitude: induced emf = N delta(Phi) / delta(t).",
-              "Substitute the values: emf = 120 x 0.015 / 0.10 = 18 V.",
+              "Identify the task need first: short-duration imaging needs radiation that can be detected from outside the body and should not remain active for longer than necessary.",
+              "Gamma radiation can leave the body and be detected externally, while alpha radiation cannot do that well from outside.",
+              "A short half-life is also better for a temporary scan because it reduces long-term exposure after the test.",
             ],
-            answer: "The induced emf has magnitude 18 V.",
-            answer_reason: "Induction depends on how much magnetic flux changes and how quickly it changes. More turns or a faster change gives a larger emf because the flux-linkage rate is larger.",
+            answer: "Option A is better because its gamma radiation can be detected externally and its short half-life better matches a temporary imaging task.",
+            answer_reason: "Radioisotopes are chosen by property matching. The strongest answer keeps the task, half-life, and radiation type together instead of choosing by label alone.",
           },
           extra_examples: [
             {
-              body: "This follow-up stops students from treating any nearby magnet as automatic induction.",
+              body: "This follow-up keeps tracer work separate from treatment work.",
               worked_example: {
-                prompt: "Why does a stationary magnet held motionless inside a stationary coil fail to produce a sustained induced emf?",
+                prompt: "Why is it weak to describe all medical radioisotope uses as 'scans'?",
                 steps: [
-                  "Ask what quantity induction depends on before talking about magnets in general.",
-                  "Notice that if the magnet and coil are both still, the magnetic flux through the coil stays constant.",
-                  "Conclude that without a change in flux there is no sustained induced emf.",
+                  "Recall that some medical radioisotopes are used to trace or image, while others are used to damage harmful tissue in treatment.",
+                  "Imaging and treatment need different radiation choices and different justifications.",
+                  "Conclude that 'scan' is too narrow because it hides the treatment role.",
                 ],
-                answer: "There is no sustained induced emf because the flux through the coil is not changing when the magnet and coil stay still.",
-                answer_reason: "Induction is a change effect, not a field-presence effect. A magnetic field can be present without producing emf if the flux linkage remains constant.",
+                answer: "It is weak because some medical radioisotopes are used for treatment rather than imaging, so 'scan' does not cover the full application set.",
+                answer_reason: "The lesson distinguishes tracing, imaging, and treatment by the physics job the isotope is chosen to do.",
               },
             },
           ],
         };
       case "M12_L6":
         return {
-          body: "Transformer examples should link turns ratio, ideal power transfer, and transmission efficiency so the lesson does not collapse into one isolated voltage formula.",
+          body: "Benefits-and-hazards examples should force a balanced judgment, with usefulness, biological risk, and control measures all held together.",
           worked_example: {
-            prompt: "An ideal transformer has 800 turns on the primary and 40 turns on the secondary. The primary voltage is 240 V and the secondary current is 3.0 A. Find the secondary voltage and the primary current.",
+            prompt: "Give one reason why a medical radioisotope can be justified and one reason why it still needs strict control.",
             steps: [
-              "Use the turns ratio for the voltage first: Vp / Vs = Np / Ns, so 240 / Vs = 800 / 40 = 20.",
-              "Solve for the secondary voltage: Vs = 240 / 20 = 12 V.",
-              "Then use ideal power balance: Vp Ip = Vs Is, so 240 Ip = 12 x 3.0 = 36, giving Ip = 0.15 A.",
+              "Start with the benefit side: radioisotopes can help diagnose disease or treat harmful tissue in ways ordinary methods cannot always do as effectively.",
+              "Then add the hazard side: ionising radiation can damage living tissue if exposure is not controlled.",
+              "Finish with the control logic: shielding, timing, handling procedures, and suitable isotope choice are needed because usefulness does not erase hazard.",
             ],
-            answer: "The secondary voltage is 12 V and the primary current is 0.15 A.",
-            answer_reason: "A step-down transformer lowers voltage according to the turns ratio, and in the ideal model the power transferred on each side is the same, so the current adjusts in the opposite direction.",
+            answer: "A medical radioisotope can be justified because it offers real diagnostic or treatment benefit, but it still needs strict control because ionising radiation can damage healthy tissue if dose and handling are not managed.",
+            answer_reason: "The strongest nuclear-technology judgment includes both benefit and hazard, then explains how the risk is reduced rather than pretending it disappears.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps transmission-loss reasoning quantitative instead of slogan-based.",
+              body: "This follow-up keeps contamination and irradiation separate, because many weak answers blur them together.",
               worked_example: {
-                prompt: "A power line must transmit 10 kW. Compare the line current if the transmission voltage is 25 kV and if it is 250 kV, then state which case gives lower cable losses.",
+                prompt: "Why is internal contamination often more dangerous than being briefly irradiated by an external alpha source?",
                 steps: [
-                  "Use P = V I for each case with the same transmitted power.",
-                  "At 25 kV, I = 10000 / 25000 = 0.40 A. At 250 kV, I = 10000 / 250000 = 0.040 A.",
-                  "Use the idea that cable heating losses scale with I^2 R, so the higher-voltage case gives much smaller losses because the line current is much smaller.",
+                  "Recall that alpha radiation is strongly ionising but not very penetrating.",
+                  "Outside the body, skin can stop alpha fairly easily, but inside the body the source sits close to living tissue.",
+                  "Conclude that internal contamination can cause serious local damage because the strongly ionising source is now inside the tissue it affects.",
                 ],
-                answer: "The line current is 0.40 A at 25 kV and 0.040 A at 250 kV, so the 250 kV transmission case gives lower cable losses.",
-                answer_reason: "For fixed power, increasing the transmission voltage decreases the current. Smaller current means much smaller I^2 R heating losses in the cables.",
+                answer: "Internal contamination can be more dangerous because alpha radiation is strongly ionising, and once the source is inside the body that energy is deposited directly in nearby tissue.",
+                answer_reason: "The danger comparison depends on context. A fixed 'most dangerous radiation' slogan is weaker than an explanation that uses penetration and ionisation together.",
               },
             },
           ],
@@ -14612,7 +14619,11 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
         break;
     }
   }
-  const preferLocalWorkedExamples = sourceCode.startsWith("M9_") || sourceCode.startsWith("M10_") || sourceCode.startsWith("M11_");
+  const preferLocalWorkedExamples =
+    sourceCode.startsWith("M9_") ||
+    sourceCode.startsWith("M10_") ||
+    sourceCode.startsWith("M11_") ||
+    sourceCode.startsWith("M12_");
   const contractExamples = preferLocalWorkedExamples ? [] : asList(asRecord(lesson.authoring_contract).worked_examples);
   const topLevelExamples = preferLocalWorkedExamples ? [] : asList(lesson.worked_examples);
   const authoredExamples = [...contractExamples, ...topLevelExamples]
@@ -16754,6 +16765,48 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
         checkForUnderstanding: "Why does raising transmission voltage help even when the transmitted power stays the same?",
         commonTrap: "Do not imagine charge flowing directly from the primary into the secondary. The two circuits are linked by changing magnetic flux instead.",
       };
+    case "M12_L1":
+      return {
+        coreIdea: "Binding energy and mass defect explain why nuclear processes can release large energy when nuclei move toward more stable arrangements.",
+        reasoning: "Compare binding energy per nucleon before anything else when nuclei differ in size. Then link the stability comparison to the mass-energy relation and explain why a small mass defect can still matter.",
+        checkForUnderstanding: "If two nuclei have different sizes, which stability comparison is stronger first: total binding energy or binding energy per nucleon?",
+        commonTrap: "Do not treat nuclear energy like ordinary chemical-bond energy, and do not compare total binding energy alone when the nuclei have different nucleon counts.",
+      };
+    case "M12_L2":
+      return {
+        coreIdea: "Fission is a chain-reaction story: one split matters because the released neutrons may trigger the next one.",
+        reasoning: "Start with the neutron-triggered split, then count what the released neutrons do next. Only after that should you classify the case as dying out, steady, or runaway, and explain how control rods affect the chain.",
+        checkForUnderstanding: "What determines whether a fission chain reaction grows, stays steady, or dies out?",
+        commonTrap: "Do not describe fission as just 'a heavy nucleus breaking.' The lesson depends on the neutron-multiplication and control story.",
+      };
+    case "M12_L3":
+      return {
+        coreIdea: "Fusion joins light nuclei, but it only works as an energy source when the nuclei can overcome electrostatic repulsion and form a more tightly bound product.",
+        reasoning: "Keep the barrier and the outcome together. First ask what stops the nuclei joining at low energy, then explain what extreme conditions change, and only then describe the energy release.",
+        checkForUnderstanding: "Why is high temperature part of the fusion explanation before energy release is even mentioned?",
+        commonTrap: "Do not say fusion releases energy just because nuclei join. The entry conditions and the more-stable product both matter.",
+      };
+    case "M12_L4":
+      return {
+        coreIdea: "A nuclear reactor is a controlled chain-reaction heat source linked to coolant, steam, turbine, and generator stages.",
+        reasoning: "Trace the system in order: reaction control in the core, thermal-energy transfer out of the core, then mechanical and electrical output stages. Keep moderator, control rods, and coolant in separate roles.",
+        checkForUnderstanding: "Which part changes neutron behavior, which part moves heat, and which part makes electricity?",
+        commonTrap: "Do not say the reactor makes electricity directly, and do not merge the moderator, control rods, and coolant into one vague component.",
+      };
+    case "M12_L5":
+      return {
+        coreIdea: "Radioisotopes are chosen by matching half-life and radiation type to the task, not by label or source strength alone.",
+        reasoning: "Name the task first: tracing, imaging, treatment, thickness monitoring, or sterilisation. Then decide which half-life and radiation behavior make that job workable and safer.",
+        checkForUnderstanding: "Why is a short half-life often useful for a temporary medical tracer but not a complete rule by itself?",
+        commonTrap: "Do not choose an isotope by the strongest source or by half-life alone. The application has to fit both duration and emission behavior.",
+      };
+    case "M12_L6":
+      return {
+        coreIdea: "Nuclear technologies should be judged with benefit, hazard, and control in the same answer.",
+        reasoning: "State the useful application first, then add the radiation risk and the main control method. Finish by deciding whether the benefit justifies the controlled risk instead of using a slogan.",
+        checkForUnderstanding: "What is missing if a nuclear-technology answer gives only the benefit or only the hazard?",
+        commonTrap: "Do not write 'nuclear is good' or 'nuclear is bad' without evidence. Balanced judgment is part of the physics understanding here.",
+      };
     default:
       break;
   }
@@ -17081,6 +17134,36 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       return {
         body: "The grid-bridge picture keeps the transformer as one changing-flux link between two separate coils. The turns ratio sets the voltage step-up or step-down, and the transmission panel shows why a higher line voltage can carry the same power with smaller current and therefore smaller cable losses.",
         checkForUnderstanding: "In the grid-bridge picture, why does a higher line voltage make the cable-loss problem easier for the same power transfer?",
+      };
+    case "M12_L1":
+      return {
+        body: "The nuclear-binding ledger works only when the mass column and the stability column stay tied together. Separate nucleons are like a more expensive starting ledger; the bound nucleus is the lower-mass, more stable finished state. The mass difference is not a bookkeeping error but the mass equivalent of the binding energy that would be needed to pull the nucleus apart again.",
+        checkForUnderstanding: "In the nuclear-binding ledger, what does the 'missing' mass really stand for?",
+      };
+    case "M12_L2":
+      return {
+        body: "The chain-reaction relay picture is strongest when each split hands forward a neutron budget to the next step. One fission event is not the whole story; what matters is how many of the released neutrons continue the relay, how many are lost, and how control rods change that relay balance.",
+        checkForUnderstanding: "In the relay picture, what has to stay near one-per-step for the chain to remain controlled?",
+      };
+    case "M12_L3":
+      return {
+        body: "The fusion-gate picture keeps the barrier and the joining event on the same board. The two nuclei are like entrants that must get through a strong repulsion gate before the short-range joining force can lock them together. That is why the lesson needs extreme temperature before it can talk about released energy.",
+        checkForUnderstanding: "In the fusion-gate picture, what does the high temperature help the nuclei do first?",
+      };
+    case "M12_L4":
+      return {
+        body: "The reactor-control desk picture works because each station has a different job. One panel controls the neutron budget, one loop carries thermal energy away, and one turbine-generator train turns that transferred heat into electrical output. The plant only makes sense when those desks stay distinct but linked.",
+        checkForUnderstanding: "In the reactor-control desk picture, which station belongs to neutron control and which belongs to energy transfer?",
+      };
+    case "M12_L5":
+      return {
+        body: "The isotope-matching board is a job-fit analogy rather than a label list. Each task card asks for a certain lifetime and a certain kind of signal or treatment effect. A good match is the isotope whose half-life and radiation type fit the task window, while a bad match either cannot be detected properly or leaves unnecessary exposure behind.",
+        checkForUnderstanding: "In the isotope-matching board, why is 'strongest source' not the same thing as 'best source'?",
+      };
+    case "M12_L6":
+      return {
+        body: "The benefit-risk ledger is strongest when it never closes after only one column. Useful energy, imaging, or treatment belongs in one column; tissue damage, contamination, and waste belong in the other; and shielding, timing, handling, and storage are the control notes that explain why the technology is managed rather than treated as automatically safe or automatically unacceptable.",
+        checkForUnderstanding: "In the benefit-risk ledger, what third column has to sit beside benefit and hazard to make the judgment physically honest?",
       };
     default:
       break;
@@ -17940,7 +18023,7 @@ function remappedLateCoreFormulaCode(code: string): string {
 
 function preferLocalCoreFormulaCards(code: string): boolean {
   const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
-  if (normalized.startsWith("M9_") || normalized.startsWith("M10_") || normalized.startsWith("M11_")) return true;
+  if (normalized.startsWith("M9_") || normalized.startsWith("M10_") || normalized.startsWith("M11_") || normalized.startsWith("M12_")) return true;
   return remappedLateCoreFormulaCode(code) !== normalized;
 }
 
@@ -18435,16 +18518,68 @@ function revisedM10TechnicalWords(code: string): Array<{ term: string; meaning: 
   }
 }
 
+function revisedM12TechnicalWords(code: string): Array<{ term: string; meaning: string; why_it_matters: string }> {
+  switch (code) {
+    case "M12_L1":
+      return [
+        { term: "Binding energy", meaning: "Binding energy is the energy needed to separate a nucleus completely into free nucleons.", why_it_matters: "It is the central stability idea behind nuclear energy release." },
+        { term: "Mass defect", meaning: "Mass defect is the difference between the mass of the separated nucleons and the smaller mass of the bound nucleus.", why_it_matters: "It links nuclear binding directly to the mass-energy relation." },
+        { term: "Binding energy per nucleon", meaning: "Binding energy per nucleon is the average binding energy assigned to each nucleon in the nucleus.", why_it_matters: "It is the fairest first comparison of nuclear stability across different-sized nuclei." },
+        { term: "Stability", meaning: "Nuclear stability describes how strongly the nucleus is held together against change or breakup.", why_it_matters: "It explains why some nuclear arrangements release energy when they change to more tightly bound ones." },
+      ];
+    case "M12_L2":
+      return [
+        { term: "Fission", meaning: "Fission is the splitting of a heavy nucleus into smaller nuclei with energy release.", why_it_matters: "It is the core process behind reactor chain reactions." },
+        { term: "Chain reaction", meaning: "A chain reaction is a self-propagating sequence in which one fission event helps trigger later ones.", why_it_matters: "It is what makes fission either useful in reactors or dangerous if uncontrolled." },
+        { term: "Control rod", meaning: "A control rod is a neutron-absorbing component used to reduce the fission rate in a reactor.", why_it_matters: "It keeps the neutron population under control." },
+        { term: "Critical state", meaning: "A critical state is the controlled condition in which about one neutron from each fission causes one more fission on average.", why_it_matters: "It distinguishes a steady reactor from a dying or runaway chain reaction." },
+      ];
+    case "M12_L3":
+      return [
+        { term: "Fusion", meaning: "Fusion is the joining of light nuclei to form a heavier nucleus with energy release.", why_it_matters: "It is the nuclear process that powers stars." },
+        { term: "Electrostatic repulsion", meaning: "Electrostatic repulsion is the electric force pushing positively charged nuclei apart.", why_it_matters: "It is the barrier that must be overcome before fusion can happen." },
+        { term: "High temperature", meaning: "High temperature means particles have very large average kinetic energy.", why_it_matters: "It helps nuclei approach closely enough for fusion to become possible." },
+        { term: "Star core", meaning: "A star core is the extremely hot, dense central region of a star where fusion occurs.", why_it_matters: "It is the standard real-world context for sustained fusion." },
+      ];
+    case "M12_L4":
+      return [
+        { term: "Moderator", meaning: "A moderator is a material that slows neutrons so further fission is more likely in a thermal reactor.", why_it_matters: "It belongs to reaction control, not to electricity generation directly." },
+        { term: "Coolant", meaning: "A coolant is a fluid or gas that carries thermal energy away from the reactor core.", why_it_matters: "It links the reactor to later steam and turbine stages." },
+        { term: "Turbine", meaning: "A turbine is a rotating machine turned by moving steam or fluid.", why_it_matters: "It converts transferred thermal energy into rotational kinetic energy." },
+        { term: "Generator", meaning: "A generator is a machine that converts rotational kinetic energy into electrical energy.", why_it_matters: "It is the final output stage in the reactor energy-transfer path." },
+      ];
+    case "M12_L5":
+      return [
+        { term: "Radioisotope", meaning: "A radioisotope is an unstable isotope that emits ionising radiation as it decays.", why_it_matters: "Different radioisotopes are chosen for different practical jobs." },
+        { term: "Tracer", meaning: "A tracer is a radioisotope used to follow the movement or distribution of a substance.", why_it_matters: "Its signal must be detectable and its lifetime must fit the task." },
+        { term: "Half-life", meaning: "Half-life is the time taken for the activity or undecayed nuclei in a sample to fall to half.", why_it_matters: "It helps decide whether an isotope is suitable for a short or long application." },
+        { term: "Gamma radiation", meaning: "Gamma radiation is high-energy electromagnetic radiation emitted from the nucleus.", why_it_matters: "It is often useful for external detection in imaging because it can leave the body or material being studied." },
+      ];
+    case "M12_L6":
+      return [
+        { term: "Contamination", meaning: "Contamination is the unwanted presence of radioactive material on or inside an object or person.", why_it_matters: "It differs from simple exposure and can continue irradiating tissue." },
+        { term: "Irradiation", meaning: "Irradiation is exposure to ionising radiation from a source without the source necessarily entering the object.", why_it_matters: "It keeps source exposure separate from radioactive material transfer." },
+        { term: "Shielding", meaning: "Shielding is the use of absorbing material to reduce radiation reaching people or equipment.", why_it_matters: "It is one of the main ways nuclear risk is controlled." },
+        { term: "Nuclear waste", meaning: "Nuclear waste is radioactive material remaining after nuclear processes or uses that must be managed safely.", why_it_matters: "It keeps long-term hazard and storage part of the full nuclear-technology judgment." },
+      ];
+    default:
+      return [];
+  }
+}
+
 function technicalWordsSections(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   const revisedM9Words = revisedM9TechnicalWords(code);
   const revisedM10Words = revisedM10TechnicalWords(code);
+  const revisedM12Words = revisedM12TechnicalWords(code);
   const selectedWords =
     revisedM9Words.length > 0
       ? revisedM9Words
       : revisedM10Words.length > 0
         ? revisedM10Words
-        : technicalWordsForLesson(lesson, code);
+        : revisedM12Words.length > 0
+          ? revisedM12Words
+          : technicalWordsForLesson(lesson, code);
   const technicalWords = selectedWords.map((entry) => ({
     ...entry,
     term: normalizeRenderedPhysicsText(entry.term),
@@ -18481,7 +18616,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260411m10b";
+  const assetVersion = "20260410d";
   const effectiveCode = String(code || "").trim().toUpperCase().replace(/^M11_/, "M13_");
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
@@ -18523,36 +18658,6 @@ function preWorkedExampleVideoMeta(code: string): {
       "final.mp4": "final-20260411a.mp4",
       "thumbnail.png": "thumbnail-20260411a.png",
       "captions.vtt": "captions-20260411a.vtt",
-    },
-    M12_L1: {
-      "final.mp4": "final-20260411m10b.mp4",
-      "thumbnail.png": "thumbnail-20260411m10b.png",
-      "captions.vtt": "captions-20260411m10b.vtt",
-    },
-    M12_L2: {
-      "final.mp4": "final-20260411m10b.mp4",
-      "thumbnail.png": "thumbnail-20260411m10b.png",
-      "captions.vtt": "captions-20260411m10b.vtt",
-    },
-    M12_L3: {
-      "final.mp4": "final-20260411m10b.mp4",
-      "thumbnail.png": "thumbnail-20260411m10b.png",
-      "captions.vtt": "captions-20260411m10b.vtt",
-    },
-    M12_L4: {
-      "final.mp4": "final-20260411m10b.mp4",
-      "thumbnail.png": "thumbnail-20260411m10b.png",
-      "captions.vtt": "captions-20260411m10b.vtt",
-    },
-    M12_L5: {
-      "final.mp4": "final-20260411m10b.mp4",
-      "thumbnail.png": "thumbnail-20260411m10b.png",
-      "captions.vtt": "captions-20260411m10b.vtt",
-    },
-    M12_L6: {
-      "final.mp4": "final-20260411m10b.mp4",
-      "thumbnail.png": "thumbnail-20260411m10b.png",
-      "captions.vtt": "captions-20260411m10b.vtt",
     },
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
@@ -19741,90 +19846,6 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("M9_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L6", "captions.vtt"),
       };
-    case "M10_L1":
-      return {
-        body: "Use this video to separate field pattern, local direction, and field strength before the worked example begins.",
-        caption: "Video explainer: magnetic maps, compass-tangent reading, circular wire fields, and strength-from-spacing reasoning before the lesson example.",
-        highlights: [
-          "Field lines are a map of the magnetic field, not literal travel tracks",
-          "The local field direction is read from the tangent or compass clue at one point",
-          "Closer line spacing means a stronger field region",
-        ],
-        checkForUnderstanding: "If two points sit on the same field map but one has much closer line spacing, what changes first and what does not?",
-        video_url: staticVideoAssetUrl("M10_L1", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M10_L1", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M10_L1", "captions.vtt"),
-      };
-    case "M10_L2":
-      return {
-        body: "Use this video to explain electromagnets through current, turns, and core reinforcement before the worked example begins.",
-        caption: "Video explainer: solenoid concentration, turn-count comparison, current-strength logic, and soft-iron reinforcement before the lesson example.",
-        highlights: [
-          "A solenoid concentrates the field from many loops into one magnet-like pattern",
-          "Increasing current or turn count strengthens the electromagnet",
-          "A soft-iron core strengthens the same field story rather than replacing it",
-        ],
-        checkForUnderstanding: "If current stays fixed but the number of turns doubles, what should happen to the electromagnet and why?",
-        video_url: staticVideoAssetUrl("M10_L2", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M10_L2", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M10_L2", "captions.vtt"),
-      };
-    case "M10_L3":
-      return {
-        body: "Use this video to keep the motor effect as a sideways force story before the worked example begins.",
-        caption: "Video explainer: current-field crossing, force direction, BIL sin(theta), and reversal checks before the lesson example.",
-        highlights: [
-          "The magnetic force on a current-carrying wire is sideways to both current and field",
-          "The force is largest when the conductor is at 90 degrees to the field",
-          "Reversing the current or the field reverses the force direction",
-        ],
-        checkForUnderstanding: "Before using the left-hand rule, which three directions must be kept separate first?",
-        video_url: staticVideoAssetUrl("M10_L3", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M10_L3", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M10_L3", "captions.vtt"),
-      };
-    case "M10_L4":
-      return {
-        body: "Use this video to build motor torque from paired magnetic forces before the worked example begins.",
-        caption: "Video explainer: opposite side-kicks, turning pairs, coil torque, and commutator logic before the lesson example.",
-        highlights: [
-          "Opposite sides of a current loop feel opposite magnetic forces",
-          "Those forces create a turning moment rather than one straight push",
-          "The commutator keeps the overall rotation direction consistent",
-        ],
-        checkForUnderstanding: "If a motor coil already carries current, why is the commutator still needed?",
-        video_url: staticVideoAssetUrl("M10_L4", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M10_L4", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M10_L4", "captions.vtt"),
-      };
-    case "M10_L5":
-      return {
-        body: "Use this video to tie induction to changing flux before the worked example begins.",
-        caption: "Video explainer: changing magnetic thread, Faraday-style rate thinking, turn-count effects, and generator links before the lesson example.",
-        highlights: [
-          "Induction needs changing magnetic flux, not just a nearby magnetic field",
-          "Faster change and more turns increase the induced emf",
-          "A generator is repeated induction produced by continuous rotation",
-        ],
-        checkForUnderstanding: "If a magnet sits motionless inside a coil, which part of the induction story fails first?",
-        video_url: staticVideoAssetUrl("M10_L5", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M10_L5", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M10_L5", "captions.vtt"),
-      };
-    case "M10_L6":
-      return {
-        body: "Use this video to link transformers, turns ratio, and transmission efficiency before the worked example begins.",
-        caption: "Video explainer: primary-secondary flux linkage, voltage ratio, ideal power balance, and grid-loss reasoning before the lesson example.",
-        highlights: [
-          "Transformers link two separate circuits through changing flux in the core",
-          "Voltage ratio follows turns ratio in the school model",
-          "Higher transmission voltage means lower current for the same power and lower cable losses",
-        ],
-        checkForUnderstanding: "If the transmitted power stays the same but the transmission voltage rises, which line quantity should fall first?",
-        video_url: staticVideoAssetUrl("M10_L6", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M10_L6", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M10_L6", "captions.vtt"),
-      };
     case "A2_L1":
       return {
         body: "Use this video to read atomic energy levels as locked floors rather than a continuous ramp before the worked example begins.",
@@ -20161,174 +20182,6 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("A5_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("A5_L6", "captions.vtt"),
       };
-    case "A6_L1":
-      return {
-        body: "Use this video to separate temperature from internal energy before the worked example begins.",
-        caption: "Video explainer: average particle kinetic energy, whole-sample internal energy, and equal-temperature comparison before the lesson example.",
-        highlights: [
-          "Temperature tracks average kinetic energy per particle",
-          "Internal energy belongs to the whole microscopic store of the sample",
-          "Equal temperature does not automatically mean equal internal energy",
-        ],
-        checkForUnderstanding: "If two gas samples have the same temperature but one contains more particles, what should you compare next before deciding whether their internal energies match?",
-        video_url: staticVideoAssetUrl("A6_L1", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A6_L1", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A6_L1", "captions.vtt"),
-      };
-    case "A6_L2":
-      return {
-        body: "Use this video to keep mass, material, and temperature rise together before the worked example begins.",
-        caption: "Video explainer: heating-cost bookkeeping, specific heat capacity, and Delta-T reading before the lesson example.",
-        highlights: [
-          "Specific heat capacity is the heating cost per kilogram per degree",
-          "Larger mass needs more energy for the same temperature rise",
-          "Larger c also needs more energy for the same temperature rise",
-        ],
-        checkForUnderstanding: "If two blocks receive the same energy but one has a larger specific heat capacity, what should happen first to its temperature rise?",
-        video_url: staticVideoAssetUrl("A6_L2", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A6_L2", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A6_L2", "captions.vtt"),
-      };
-    case "A6_L3":
-      return {
-        body: "Use this video to separate temperature change from state change before the worked example begins.",
-        caption: "Video explainer: latent heat, plateau meaning, stage splitting, and total-energy bookkeeping before the lesson example.",
-        highlights: [
-          "Latent heat changes state without changing temperature",
-          "A heating plateau can still mean continuous energy transfer",
-          "Multi-stage thermal questions need separate formulas for each stage",
-        ],
-        checkForUnderstanding: "If the thermometer stays flat while heating continues, what should you check before saying no energy is entering the substance?",
-        video_url: staticVideoAssetUrl("A6_L3", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A6_L3", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A6_L3", "captions.vtt"),
-      };
-    case "A6_L4":
-      return {
-        body: "Use this video to keep pressure, volume, amount, and temperature in one state equation before the worked example begins.",
-        caption: "Video explainer: ideal-gas-law bookkeeping, SI units, and state-variable reading before the lesson example.",
-        highlights: [
-          "Pressure, volume, amount, and temperature belong to one chamber-state relation",
-          "The ideal gas law should be used with SI units",
-          "Rearranging the same equation is often safer than memorizing separate rules",
-        ],
-        checkForUnderstanding: "Before substituting into pV = nRT, what should you inspect first: whether the variables are in SI form, or whether the numbers look familiar?",
-        video_url: staticVideoAssetUrl("A6_L4", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A6_L4", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A6_L4", "captions.vtt"),
-      };
-    case "A6_L5":
-      return {
-        body: "Use this video to name the fixed quantity before reading any gas-law graph or process before the worked example begins.",
-        caption: "Video explainer: isothermal, isobaric, isochoric conditions, graph shape, and state-path reading before the lesson example.",
-        highlights: [
-          "A gas-law graph only makes sense once the fixed condition is named",
-          "Different fixed quantities produce different graph shapes and straight-line plots",
-          "State diagrams are maps of linked variables, not decorative curves",
-        ],
-        checkForUnderstanding: "When you meet a gas-law graph, what should you decide first before naming the curve: the prettiest shape, or the quantity that stayed fixed?",
-        video_url: staticVideoAssetUrl("A6_L5", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A6_L5", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A6_L5", "captions.vtt"),
-      };
-    case "A6_L6":
-      return {
-        body: "Use this video to explain gas pressure from particle motion before the worked example begins.",
-        caption: "Video explainer: random motion, wall collisions, rms speed, and temperature-pressure links before the lesson example.",
-        highlights: [
-          "Pressure comes from particle collisions with the walls",
-          "Higher temperature means greater average kinetic energy and faster particles",
-          "Kinetic-theory formulas summarize a collision story rather than replace it",
-        ],
-        checkForUnderstanding: "If a rigid gas container is heated, what should you explain first before quoting a pressure formula: how the wall collisions change, or just that the gas got hotter?",
-        video_url: staticVideoAssetUrl("A6_L6", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A6_L6", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A6_L6", "captions.vtt"),
-      };
-    case "A7_L1":
-      return {
-        body: "Use this video to separate source lift, delivered terminal p.d., and internal loss before the worked example begins.",
-        caption: "Video explainer: emf, terminal p.d., internal resistance, and lost-volts bookkeeping before the lesson example.",
-        highlights: [
-          "EMF is the full energy lift per coulomb inside the source",
-          "Terminal p.d. is the part delivered to the external circuit",
-          "Internal resistance explains why the source loses volts when current flows",
-        ],
-        checkForUnderstanding: "If a battery reading falls when the load is connected, what should you compare first before blaming the voltmeter?",
-        video_url: staticVideoAssetUrl("A7_L1", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A7_L1", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A7_L1", "captions.vtt"),
-      };
-    case "A7_L2":
-      return {
-        body: "Use this video to keep node balance and loop balance as two different conservation stories before the worked example begins.",
-        caption: "Video explainer: junction current bookkeeping, loop voltage balance, and Kirchhoff method order before the lesson example.",
-        highlights: [
-          "Current conservation belongs to junctions",
-          "Voltage balance belongs to closed loops",
-          "Kirchhoff questions become safer when the rules are applied in a fixed order",
-        ],
-        checkForUnderstanding: "When a circuit branches and then recombines, which rule should you usually test first: the junction rule or the loop rule?",
-        video_url: staticVideoAssetUrl("A7_L2", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A7_L2", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A7_L2", "captions.vtt"),
-      };
-    case "A7_L3":
-      return {
-        body: "Use this video to read a potential divider as one supply drop shared across a series route before the worked example begins.",
-        caption: "Video explainer: divider ratio, tapped output, and loading effect before the lesson example.",
-        highlights: [
-          "A divider output is a chosen fraction of the supply",
-          "The voltage split follows the resistance ratio in the series path",
-          "Attaching a load can change the effective lower resistance and the output",
-        ],
-        checkForUnderstanding: "If the lower divider resistance becomes a larger fraction of the total, what should happen to the output taken across it?",
-        video_url: staticVideoAssetUrl("A7_L3", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A7_L3", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A7_L3", "captions.vtt"),
-      };
-    case "A7_L4":
-      return {
-        body: "Use this video to read capacitance as a storage ratio rather than as charge alone before the worked example begins.",
-        caption: "Video explainer: Q = C V, storage-per-volt thinking, and geometry or dielectric effects before the lesson example.",
-        highlights: [
-          "Capacitance tells how much charge is stored for each volt",
-          "Larger capacitance means more stored charge at the same voltage",
-          "Plate geometry and dielectric material both affect the storage ratio",
-        ],
-        checkForUnderstanding: "At fixed voltage, what should you compare first to decide which capacitor stores more charge?",
-        video_url: staticVideoAssetUrl("A7_L4", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A7_L4", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A7_L4", "captions.vtt"),
-      };
-    case "A7_L5":
-      return {
-        body: "Use this video to treat RC behavior as a changing-rate process before the worked example begins.",
-        caption: "Video explainer: time constant, exponential charging and discharging, and graph reading before the lesson example.",
-        highlights: [
-          "Charging starts fast and then slows",
-          "Discharging starts steeply and then flattens",
-          "The time constant sets the natural response timescale of the RC circuit",
-        ],
-        checkForUnderstanding: "When the capacitor p.d. is rising during charging, what should be happening to the charging current at the same time?",
-        video_url: staticVideoAssetUrl("A7_L5", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A7_L5", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A7_L5", "captions.vtt"),
-      };
-    case "A7_L6":
-      return {
-        body: "Use this video to connect capacitor energy to field storage and to distinguish fixed-voltage from fixed-charge dielectric situations before the worked example begins.",
-        caption: "Video explainer: capacitor energy formulas, dielectric effects, and connected-versus-isolated reasoning before the lesson example.",
-        highlights: [
-          "Capacitors store energy in the electric field between the plates",
-          "Different energy formulas fit different known quantities",
-          "A dielectric changes the outcome differently depending on whether voltage or charge is held fixed",
-        ],
-        checkForUnderstanding: "Before predicting what a dielectric changes, what should you decide first: whether the capacitor stays connected to the supply, or whether the capacitance formula looks familiar?",
-        video_url: staticVideoAssetUrl("A7_L6", "final.mp4"),
-        poster_url: staticVideoAssetUrl("A7_L6", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("A7_L6", "captions.vtt"),
-      };
     case "A1_L1":
       return {
         body: "Use this video to separate radiation messengers, matter particles, and nucleus particles before the worked example begins.",
@@ -20456,7 +20309,12 @@ function withTechnicalWordsSection(lesson: UnknownRecord, sections: UnknownRecor
 function scaffoldSections(lesson: UnknownRecord, repairText: string, analogyText: string, workedExample: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (isExtendedNextgenLessonCode(code)) {
-    const preferLocalScaffold = code === "M1_L1" || code.startsWith("M9_") || code.startsWith("M10_") || code.startsWith("M11_");
+    const preferLocalScaffold =
+      code === "M1_L1" ||
+      code.startsWith("M9_") ||
+      code.startsWith("M10_") ||
+      code.startsWith("M11_") ||
+      code.startsWith("M12_");
     const authoredSections = preferLocalScaffold
       ? []
       : authoredScaffoldSections(lesson, repairText, analogyText, workedExample);
