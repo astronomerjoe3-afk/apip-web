@@ -210,21 +210,27 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "closer field lines -> stronger magnetic field", meaning: "Field-line density is the school-model clue to relative field strength.", conditions: "Use when comparing stronger and weaker regions of a field map.", unitsText: "" },
   ],
   M10_L2: [
-    { standardFormula: "electromagnet strength increases with current and number of turns", meaning: "A coil's field gets stronger when the current or turn count increases.", conditions: "Use when comparing electromagnets built from the same basic setup.", unitsText: "" },
+    { standardFormula: "electromagnet strength is proportional to current x turns", meaning: "For the same coil geometry, increasing current or turn count strengthens the solenoid field.", conditions: "Use qualitatively when comparing simple school electromagnets built from the same basic setup.", unitsText: "" },
     { standardFormula: "a soft-iron core strengthens the electromagnet", meaning: "The core concentrates the magnetic field of the solenoid.", conditions: "Use for a temporary electromagnet rather than a permanent magnet.", unitsText: "" },
   ],
   M10_L3: [
-    { standardFormula: "magnetic force on a current-carrying conductor is perpendicular to both field and current", meaning: "The motor effect gives a sideways force rather than a push along the field lines.", conditions: "Use when a conductor carries current across a magnetic field.", unitsText: "" },
+    { standardFormula: "F = B I L sin(theta)", meaning: "The motor-effect force on a straight current-carrying conductor depends on field strength, current, active length, and crossing angle.", conditions: "Use for a straight conductor in a uniform magnetic field, with theta measured between the current direction and the field.", unitsText: "N" },
+    { standardFormula: "force direction is perpendicular to both field and current", meaning: "The motor effect gives a sideways force rather than a push along the field lines.", conditions: "Use with the left-hand rule or equivalent direction reasoning after the force magnitude has been found.", unitsText: "" },
   ],
   M10_L4: [
-    { standardFormula: "opposite magnetic forces on opposite sides of a coil create torque", meaning: "A motor turns because the magnetic forces form a couple on the coil.", conditions: "Use when explaining why a motor rotates rather than translating sideways.", unitsText: "" },
+    { standardFormula: "torque = B I N A sin(theta)", meaning: "The turning effect on a motor coil depends on field strength, current, turn count, coil area, and coil angle.", conditions: "Use for a current-carrying coil in a magnetic field, with theta taken between the field and the normal to the coil.", unitsText: "N m" },
+    { standardFormula: "maximum torque = B I N A", meaning: "The motor gives its largest turning effect when the sin(theta) factor is 1.", conditions: "Use at the position of maximum turning effect.", unitsText: "N m" },
   ],
   M10_L5: [
-    { standardFormula: "induced emf depends on the rate of change of magnetic flux", meaning: "A changing magnetic field link is what produces induction.", conditions: "Use when the magnet, coil, or orientation changes.", unitsText: "" },
+    { standardFormula: "emf = N delta(Phi) / delta(t)", meaning: "The magnitude of induced emf depends on the rate of change of magnetic flux linkage.", conditions: "Use for induction and generator problems when the flux change and time interval are known.", unitsText: "V" },
+    { standardFormula: "faster flux change -> larger induced emf", meaning: "A changing magnetic field link is what produces induction.", conditions: "Use when comparing stronger and weaker induction cases qualitatively.", unitsText: "" },
   ],
   M10_L6: [
     { standardFormula: "Vp / Vs = Np / Ns", meaning: "In the school transformer model, the voltage ratio follows the turns ratio.", conditions: "Use for an ideal transformer with changing current in the primary.", unitsText: "V" },
+    { standardFormula: "Vp Ip = Vs Is", meaning: "In the ideal transformer model, the electrical power into the primary equals the electrical power out of the secondary.", conditions: "Use for ideal-transformer power-transfer questions.", unitsText: "W" },
+    { standardFormula: "Ip / Is = Ns / Np", meaning: "For an ideal transformer, current ratio is inverse to the turns ratio.", conditions: "Use when the transformer is treated as ideal and the turns ratio is known.", unitsText: "A" },
     { standardFormula: "P = VI", meaning: "Power in transmission depends on voltage and current together.", conditions: "Use when comparing high-voltage low-current transmission with lower-voltage higher-current transmission.", unitsText: "W" },
+    { standardFormula: "power loss in lines = I^2 R", meaning: "Cable heating losses rise strongly with transmission current.", conditions: "Use when comparing why higher transmission voltage lowers resistive losses for the same delivered power.", unitsText: "W" },
   ],
   M11_L1: [
     { standardFormula: "R_total = R1 + R2 + ...", meaning: "Series resistances add directly because there is one path through all components.", conditions: "Use for components in series.", unitsText: "ohms" },

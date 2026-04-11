@@ -41,6 +41,8 @@ export default function M10SimulationPanels({
   setSimSpread,
   formatSimulationNumber,
 }: Props) {
+  // M10 reuses the corrected magnetism/electromagnetic-effects simulator implementation
+  // while the dedicated M10 simulation asset namespace is being remapped.
   return (
     <M12SimulationPanels
       lessonKey={lessonKey.replace(/^M10_/, "M12_")}
