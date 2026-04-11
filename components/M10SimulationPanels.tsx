@@ -33,6 +33,8 @@ export default function M10SimulationPanels({
   setSimDensityMass,
   simDensityVolume,
   setSimDensityVolume,
+  simFluidDensity,
+  setSimFluidDensity,
   simBias,
   setSimBias,
   simSpread,
@@ -52,6 +54,8 @@ export default function M10SimulationPanels({
       setSimDensityMass={setSimDensityMass}
       simDensityVolume={simDensityVolume}
       setSimDensityVolume={setSimDensityVolume}
+      simFluidDensity={simFluidDensity}
+      setSimFluidDensity={setSimFluidDensity}
       simBias={simBias}
       setSimBias={setSimBias}
       simSpread={simSpread}
