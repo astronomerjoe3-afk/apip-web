@@ -206,28 +206,25 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "toward probe -> higher returned frequency; away -> lower returned frequency", meaning: "The sign of the shift is the first clue to flow direction.", conditions: "Use when interpreting a Doppler trace.", unitsText: "" },
   ],
   M10_L1: [
-    { standardFormula: "a steady current needs a complete circuit", meaning: "Charge carriers need an unbroken loop for sustained flow.", conditions: "Use when explaining why a current stops or continues.", unitsText: "" },
-    { standardFormula: "charge is conserved around the circuit", meaning: "Carriers circulate through the loop rather than being used up.", conditions: "Use when separating charge from energy transfer.", unitsText: "C" },
+    { standardFormula: "field direction = direction a north pole would point", meaning: "Field lines show the direction of the magnetic field at each point.", conditions: "Use when reading field maps around magnets and wires.", unitsText: "" },
+    { standardFormula: "closer field lines -> stronger magnetic field", meaning: "Field-line density is the school-model clue to relative field strength.", conditions: "Use when comparing stronger and weaker regions of a field map.", unitsText: "" },
   ],
   M10_L2: [
-    { standardFormula: "I = Q / t", meaning: "Current is charge flow rate.", conditions: "Use when charge passing a point and time are known.", unitsText: "A, C, s" },
-    { standardFormula: "Q = It", meaning: "Charge passed depends on current and time.", conditions: "Use when current is steady over the time interval.", unitsText: "C" },
+    { standardFormula: "electromagnet strength increases with current and number of turns", meaning: "A coil's field gets stronger when the current or turn count increases.", conditions: "Use when comparing electromagnets built from the same basic setup.", unitsText: "" },
+    { standardFormula: "a soft-iron core strengthens the electromagnet", meaning: "The core concentrates the magnetic field of the solenoid.", conditions: "Use for a temporary electromagnet rather than a permanent magnet.", unitsText: "" },
   ],
   M10_L3: [
-    { standardFormula: "V = E / Q", meaning: "Potential difference is energy transferred per unit charge.", conditions: "Use when the energy per carrier is being compared.", unitsText: "V, J/C" },
-    { standardFormula: "E = VQ", meaning: "Energy transferred depends on potential difference and charge moved.", conditions: "Use when voltage and charge are known.", unitsText: "J" },
+    { standardFormula: "magnetic force on a current-carrying conductor is perpendicular to both field and current", meaning: "The motor effect gives a sideways force rather than a push along the field lines.", conditions: "Use when a conductor carries current across a magnetic field.", unitsText: "" },
   ],
   M10_L4: [
-    { standardFormula: "greater length -> greater resistance", meaning: "A longer route gives carriers more opposition.", conditions: "Use when comparing wires of the same material and cross-sectional area.", unitsText: "" },
-    { standardFormula: "greater cross-sectional area -> lower resistance", meaning: "A wider route gives carriers more room to move.", conditions: "Use when comparing wires of the same material and length.", unitsText: "" },
+    { standardFormula: "opposite magnetic forces on opposite sides of a coil create torque", meaning: "A motor turns because the magnetic forces form a couple on the coil.", conditions: "Use when explaining why a motor rotates rather than translating sideways.", unitsText: "" },
   ],
   M10_L5: [
-    { standardFormula: "V = IR", meaning: "Potential difference, current, and resistance are linked by Ohm's law for ohmic conductors.", conditions: "Use for ohmic components.", unitsText: "V, A, ohms" },
-    { standardFormula: "I = V / R", meaning: "At fixed resistance, larger voltage gives larger current.", conditions: "Use for ohmic components.", unitsText: "A" },
+    { standardFormula: "induced emf depends on the rate of change of magnetic flux", meaning: "A changing magnetic field link is what produces induction.", conditions: "Use when the magnet, coil, or orientation changes.", unitsText: "" },
   ],
   M10_L6: [
-    { standardFormula: "P = IV", meaning: "Electrical power depends on current and potential difference together.", conditions: "Use when the component current and voltage are known.", unitsText: "W" },
-    { standardFormula: "keep charge, current, voltage, and resistance as separate quantities", meaning: "A full circuit explanation needs the moving charge, flow rate, boost per charge, and route opposition kept distinct.", conditions: "Use when combining several electrical quantities in one explanation.", unitsText: "" },
+    { standardFormula: "Vp / Vs = Np / Ns", meaning: "In the school transformer model, the voltage ratio follows the turns ratio.", conditions: "Use for an ideal transformer with changing current in the primary.", unitsText: "V" },
+    { standardFormula: "P = VI", meaning: "Power in transmission depends on voltage and current together.", conditions: "Use when comparing high-voltage low-current transmission with lower-voltage higher-current transmission.", unitsText: "W" },
   ],
   M11_L1: [
     { standardFormula: "R_total = R1 + R2 + ...", meaning: "Series resistances add directly because there is one path through all components.", conditions: "Use for components in series.", unitsText: "ohms" },
