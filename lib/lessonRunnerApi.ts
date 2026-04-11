@@ -20711,7 +20711,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     .map((entry) => text(entry))
     .filter(Boolean);
   const generalizedCoreConcepts = generalCoreConceptBullets(code, authoredCoreConcepts);
-  const fallbackCoreConcepts = dedupeText([
+  const fallbackCoreConcepts = dedupeCoreConceptBullets([
     ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
     ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
     ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
@@ -20719,7 +20719,6 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     ...scaffoldFocusExtras(code),
     ...scaffoldCoreBullets(code),
   ])
-    .map((entry) => normalizeCoreConceptBullet(entry))
     .filter((entry) => isGeneralCoreConceptBullet(entry))
     .slice(0, 6);
   const teachingFocus = generalizedCoreConcepts.length > 0
@@ -20745,7 +20744,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   return {
     title,
     intro: /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
-    teaching_focus: teachingFocus,
+    teaching_focus: /_L1$/.test(code) ? dedupeCoreConceptBullets(teachingFocus).slice(0, 6) : teachingFocus,
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     reference_tables: withEntryLessonAnalogyTable(lesson, scaffoldReferenceTables(lesson)),
     media_cards: scaffoldMediaCards(lesson),
