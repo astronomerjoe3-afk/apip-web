@@ -6721,9 +6721,34 @@ function normalizeCoreConceptBullet(value: string): string {
       /\bcount from the first non-zero digit, then round using the next digit\.?/gi,
       "Count from the first non-zero digit, then use the next digit to decide the rounding.",
     )
+    .replace(/\bplus\b/gi, "and")
+    .replace(/\bwhich element the atom is\b/gi, "the element identity")
+    .replace(/\bwhich element an atom is\b/gi, "the element identity")
+    .replace(/\bwhich element it is\b/gi, "the element identity")
     .replace(/\bfor \d+ decimal places, stop after the \d+\b/gi, "Stop after the last decimal place you need")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function coreConceptDedupKey(value: string): string {
+  return normalizeCoreConceptBullet(value)
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function dedupeCoreConceptBullets(values: string[]): string[] {
+  const seen = new Set<string>();
+  const unique: string[] = [];
+  for (const value of values) {
+    const normalized = normalizeCoreConceptBullet(value);
+    const key = coreConceptDedupKey(normalized);
+    if (!normalized || !key || seen.has(key)) continue;
+    seen.add(key);
+    unique.push(normalized);
+  }
+  return unique;
 }
 
 function isGeneralCoreConceptBullet(value: string): boolean {
@@ -6748,7 +6773,7 @@ function generalCoreConceptBullets(code: string, authoredCoreConcepts: string[])
   const authored = authoredCoreConcepts
     .map((entry) => normalizeCoreConceptBullet(entry))
     .filter((entry) => isGeneralCoreConceptBullet(entry));
-  return dedupeText([...scaffold, ...authored]).slice(0, 6);
+  return dedupeCoreConceptBullets([...scaffold, ...authored]).slice(0, 6);
 }
 
 function m5RenderedQuestionOverride(item: UnknownRecord): RenderedQuestionOverride | null {
