@@ -1,5 +1,7 @@
 "use client";
 
+import { m10SimulationCopy } from "./m10LessonContent";
+
 type UnknownRecord = Record<string, unknown>;
 
 export type M9QuestionVisualMeta = {
@@ -19,241 +21,220 @@ type M9SimulationCopy = {
   takeaway: string;
 };
 
-const M9_ASSET_BASE = "/lesson_assets/M9";
-
 const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L1: {
-    image_url: `${M9_ASSET_BASE}/M9_L1/diagrams/m9-l1-beacon-launch.svg`,
-    visual_title: "A vibrating beacon launches sound",
-    visual_caption: "The source vibration starts the wave, while the nearby air only begins the pressure relay.",
+    image_url: "/lesson_assets/M10/M10_L1/diagrams/m10-l1-carrier-loop.svg",
+    visual_title: "Charge carriers circulate only when the loop stays complete",
+    visual_caption: "The same carriers move all around one closed route, while the current story belongs to the common rate at every checkpoint.",
     visual_callouts: [
-      "No vibration means no new sound launch.",
-      "The source sets the sound frequency.",
-      "Nearby air is disturbed; it is not fired across the room.",
+      "A steady current needs one complete conducting path.",
+      "Charge carriers circulate; they are not used up by the lamp.",
+      "Current in a simple loop is the same before and after a component.",
     ],
   },
   M9L2: {
-    image_url: `${M9_ASSET_BASE}/M9_L2/diagrams/m9-l2-crowd-relay.svg`,
-    visual_title: "Compressions and rarefactions relay the message",
-    visual_caption: "Sound in air is a longitudinal pressure pattern: crowded and spread regions move on while particles stay local.",
+    image_url: "/lesson_assets/M10/M10_L2/diagrams/m10-l2-checkpoint-rate.svg",
+    visual_title: "Current is charge flow rate through a checkpoint",
+    visual_caption: "The quantity of charge present and the rate at which charge passes one point are different electrical ideas.",
     visual_callouts: [
-      "Squeeze Bands are compressions.",
-      "Release Bands are rarefactions.",
-      "Particles move locally while the pattern travels onward.",
+      "Current measures charge per second.",
+      "1 A means 1 C passes a point each second.",
+      "A large charge store does not automatically mean a large current.",
     ],
   },
   M9L3: {
-    image_url: `${M9_ASSET_BASE}/M9_L3/diagrams/m9-l3-pitch-meter.svg`,
-    visual_title: "Ping Rate sets Tone Height",
-    visual_caption: "Frequency sets pitch, while loudness stays on a separate sound-strength track.",
+    image_url: "/lesson_assets/M10/M10_L3/diagrams/m10-l3-lift-station.svg",
+    visual_title: "Voltage is energy transferred to each coulomb",
+    visual_caption: "The source raises the energy of each unit of charge, so voltage belongs to energy per charge rather than to charge amount or current.",
     visual_callouts: [
-      "Higher frequency means higher pitch.",
-      "Pitch and loudness are not the same quantity.",
-      "In the same medium, frequency changes wavelength more directly than sound speed.",
+      "Voltage is measured in joules per coulomb.",
+      "A larger potential difference gives more energy to each coulomb.",
+      "Voltage and current are linked in circuits but are not the same quantity.",
     ],
   },
   M9L4: {
-    image_url: `${M9_ASSET_BASE}/M9_L4/diagrams/m9-l4-hear-zone.svg`,
-    visual_title: "Hear Zone versus Super-Scout Mode",
-    visual_caption: "Ultrasound is still sound; the only change is that its frequency sits beyond the usual human hearing band.",
+    image_url: "/lesson_assets/M10/M10_L4/diagrams/m10-l4-route-drag.svg",
+    visual_title: "Resistance belongs to the route, not to the battery",
+    visual_caption: "Length, cross-sectional area, and material determine how strongly the path opposes charge flow.",
     visual_callouts: [
-      "Most human hearing sits around 20 Hz to 20 kHz.",
-      "Above 20 kHz is ultrasound.",
-      "Ultrasound can still reflect from boundaries because it is still sound.",
+      "Longer wires give greater resistance.",
+      "Wider wires give lower resistance.",
+      "Resistance depends on material and geometry together.",
     ],
   },
   M9L5: {
-    image_url: `${M9_ASSET_BASE}/M9_L5/diagrams/m9-l5-echo-map.svg`,
-    visual_title: "Echo returns place hidden boundaries",
-    visual_caption: "Pulse-echo scanning turns return time into one-way depth and many returns into a boundary map.",
+    image_url: "/lesson_assets/M10/M10_L5/diagrams/m10-l5-ohmic-rule.svg",
+    visual_title: "Ohm's law links voltage, current, and resistance for ohmic conductors",
+    visual_caption: "At fixed conditions, current is proportional to voltage and inversely related to resistance for an ohmic component.",
     visual_callouts: [
-      "Longer return time usually means greater depth.",
-      "The divide-by-two step comes from the round trip.",
-      "Many echoes are needed to build an image.",
+      "At fixed resistance, increasing voltage increases current.",
+      "At fixed voltage, increasing resistance decreases current.",
+      "A straight I-V graph through the origin is the ohmic clue.",
     ],
   },
   M9L6: {
-    image_url: `${M9_ASSET_BASE}/M9_L6/diagrams/m9-l6-flow-tracker.svg`,
-    visual_title: "Doppler shifts reveal flow",
-    visual_caption: "Comparing transmitted and returned frequency reveals motion toward or away from the probe.",
+    image_url: "/lesson_assets/M11/M11_L4/diagrams/m11-l4-route-map.svg",
+    visual_title: "Series and parallel circuits must be read from the route structure",
+    visual_caption: "One-path chains and branch networks obey different current-and-voltage rules, so the route shape has to be identified first.",
     visual_callouts: [
-      "Toward the probe means a higher return frequency.",
-      "Away from the probe means a lower return frequency.",
-      "Doppler extends ultrasound into flow tracking.",
+      "Series circuits have one uninterrupted path.",
+      "Parallel branches connect across the same two junctions.",
+      "Series and parallel networks do not share the same current-and-voltage rule.",
     ],
   },
 };
 
+const M9_L6_SIMULATION: M9SimulationCopy = {
+  title: "Series and parallel compare lab",
+  instructions: "Switch between a one-path chain and a branching network before you decide which current-and-voltage rule to use.",
+  taskPrompt: "Compare one series route with one parallel route, then explain which quantity stays common in each circuit and how the total current changes.",
+  exploreSteps: [
+    "Start with the series route and read the one common current story.",
+    "Switch to the parallel route and read the common branch-voltage story.",
+    "Change one resistor and compare how the source current responds in each network.",
+  ],
+  watchFor: [
+    "Series circuits keep one common current through the chain.",
+    "Parallel branches share the same potential difference across matching junctions.",
+    "Adding or removing branches changes the total behaviour of the whole circuit.",
+  ],
+  tryFirst: "Start with two equal resistors in series on one supply, then switch the same two resistors into parallel and compare the source current before saying anything about brightness or layout.",
+  takeaway: "Circuit behaviour stays much safer when the learner identifies the route structure first and only then chooses the current-and-voltage rule.",
+};
+
+function normalizeItemId(itemId: string): string {
+  return String(itemId || "").trim().replace(/-/g, "_").toUpperCase();
+}
+
+function normalizeCode(code: string): string {
+  return String(code || "").trim().replace(/-/g, "_").toUpperCase();
+}
+
+function remapM9ToM10(code: string): string {
+  return normalizeCode(code).replace(/^M9_/, "M10_");
+}
+
 export function m9QuestionVisualMeta(itemId: string): M9QuestionVisualMeta | undefined {
-  const match = itemId.toUpperCase().match(/^(M9L[1-6])_[A-Z]+\d+$/);
+  const normalized = normalizeItemId(itemId);
+  const match = normalized.match(/^(M9L[1-6])_[A-Z]+\d+$/);
   return match ? M9_VISUAL_META[match[1]] : undefined;
 }
 
-const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
-  M9_L1: {
-    title: "Wake the Beacon lab",
-    instructions: "Start with the source and keep asking what is vibrating before you describe any wave property.",
-    taskPrompt: "Change the beacon vibration rate, pause the source, and explain why the sound frequency follows the source while the medium only relays the disturbance.",
-    exploreSteps: [
-      "Turn the beacon on and off deliberately.",
-      "Raise the vibration rate without changing the medium story.",
-      "Name the source job before the medium job.",
-    ],
-    watchFor: [
-      "No vibration means no new sound wave launch.",
-      "The source frequency becomes the sound frequency.",
-      "The wave is not a packet of air fired across the room.",
-    ],
-    tryFirst: "Start with the beacon off, then switch it on at 300 vibrations per second. The launched sound becomes 300 Hz because each source cycle launches one sound cycle, while the nearby air only passes the disturbance onward.",
-    takeaway: "Sound production stays clear when students anchor every case to a vibrating source first.",
-  },
-  M9_L2: {
-    title: "Crowd Relay lab",
-    instructions: "Track one particle and one pressure band at the same time so local motion does not get confused with propagation.",
-    taskPrompt: "Watch compressions and rarefactions move through the crowd, then explain why the particles oscillate locally even though the pressure pattern travels onward.",
-    exploreSteps: [
-      "Highlight one particle first.",
-      "Label a Squeeze Band and a Release Band second.",
-      "Compare local motion with propagation direction.",
-    ],
-    watchFor: [
-      "Sound in air is longitudinal.",
-      "Compressions are crowded regions and rarefactions are spread-out regions.",
-      "The pattern travels; the medium does not march across the room.",
-    ],
-    tryFirst: "Keep the pressure pattern moving right and lock onto one highlighted particle. It only shuffles left-right around its own place, which is why the medium relays the sound without the whole crowd marching across the arena.",
-    takeaway: "The sound-wave picture becomes much stronger when pattern travel and particle motion are kept separate.",
-  },
-  M9_L3: {
-    title: "Pitch Match lab",
-    instructions: "Use one tone meter for pitch and a separate bar for loudness so those ideas stay uncoupled.",
-    taskPrompt: "Raise and lower the ping rate while holding loudness steady, then explain why pitch changes with frequency and why the same-air sound speed stays medium-owned.",
-    exploreSteps: [
-      "Set a target tone height first.",
-      "Hold loudness fixed while changing frequency.",
-      "Read the wavelength change in the same medium.",
-    ],
-    watchFor: [
-      "Pitch follows frequency.",
-      "Loudness is a separate sound-strength question.",
-      "In the same medium, higher frequency means shorter wavelength rather than faster sound.",
-    ],
-    tryFirst: "Compare 340 Hz and 680 Hz in the same air while leaving the loudness bar alone. The 680 Hz tone is higher in pitch, the wavelength is shorter, and the sound speed still belongs to the medium rather than the frequency change.",
-    takeaway: "Pitch questions calm down once frequency, loudness, and speed stop collapsing into one label.",
-  },
-  M9_L4: {
-    title: "Super-Scout lab",
-    instructions: "Slide one sound across the hearing boundary and keep the 'still sound' label visible the whole time.",
-    taskPrompt: "Classify frequencies against the Hear Zone, then explain why ultrasound remains sound and can still reflect from hidden boundaries once it passes above 20 kHz.",
-    exploreSteps: [
-      "Start with an audible frequency.",
-      "Push above 20 kHz into Super-Scout Mode.",
-      "Keep the boundary-use explanation visible.",
-    ],
-    watchFor: [
-      "Most human hearing sits between about 20 Hz and 20 kHz.",
-      "Ultrasound is sound above that range.",
-      "Ultrasound can still reflect because it is still sound in a medium.",
-    ],
-    tryFirst: "Move from 5 kHz to 40 kHz and watch the label change from Hear Zone to Super-Scout Mode. The frequency class changes at the boundary, but the wave stays sound the whole time and still keeps its boundary-reflection job.",
-    takeaway: "Ultrasound works best conceptually when it is treated as a high-frequency sound case, not as a separate mysterious beam.",
-  },
-  M9_L5: {
-    title: "Scout Scan lab",
-    instructions: "Treat the return time as a round trip first, then convert to one-way depth before you place the boundary.",
-    taskPrompt: "Change echo time and sound speed, compare near and far boundaries, and explain why many echoes are needed to build a scan map instead of one clue.",
-    exploreSteps: [
-      "Start with one boundary and one echo.",
-      "Move the boundary deeper and compare the new return time.",
-      "Add a second boundary and sort the echoes by arrival order.",
-    ],
-    watchFor: [
-      "Longer return time means a longer round trip.",
-      "Depth uses the divide-by-two step.",
-      "Imaging comes from many timed echoes.",
-    ],
-    tryFirst: "Set sound speed to 1500 m/s and echo time to 0.002 s. The pulse travels 3 m out-and-back, so the boundary sits 1.5 m deep after the divide-by-two step that turns round-trip distance into one-way depth.",
-    takeaway: "Echo mapping becomes reliable when students protect the round-trip logic before touching the formula.",
-  },
-  M9_L6: {
-    title: "Flow Tracker lab",
-    instructions: "Compare the returned frequency with the transmitted one before saying anything about motion direction.",
-    taskPrompt: "Move the target toward and away from the probe, then explain how positive and negative shifts reveal flow direction in Doppler ultrasound.",
-    exploreSteps: [
-      "Start with zero shift and a stationary target.",
-      "Move the target toward the probe.",
-      "Reverse the motion and compare the sign of the shift.",
-    ],
-    watchFor: [
-      "Toward the probe gives a higher returned frequency.",
-      "Away from the probe gives a lower returned frequency.",
-      "Doppler extends ultrasound into motion and blood-flow tracking.",
-    ],
-    tryFirst: "Keep a 3.000 MHz transmitted pulse on screen, then push the target toward the probe until the return reads 3.002 MHz. The positive shift is the first clue, and only after reading that sign should you name the motion as toward the probe.",
-    takeaway: "Doppler reasoning becomes much easier when learners read the shift sign before trying to name the medical meaning.",
-  },
-};
-
 export function m9SimulationCopy(code: string): M9SimulationCopy | undefined {
-  return M9_SIMULATION_COPY[code];
+  const normalized = normalizeCode(code);
+  if (/^M9_L[1-5]$/.test(normalized)) {
+    return m10SimulationCopy(remapM9ToM10(normalized));
+  }
+  if (normalized === "M9_L6") return M9_L6_SIMULATION;
+  return undefined;
 }
 
 export function m9ScaffoldFocusExtras(code: string): string[] {
-  switch (code) {
+  switch (normalizeCode(code)) {
     case "M9_L1":
-      return ["Ask what is vibrating before naming any sound property.", "Separate the source role from the medium role.", "Treat the launched frequency as source-owned."];
+      return [
+        "Name the moving charge carriers before naming the current.",
+        "Use complete-loop language for sustained current.",
+        "Keep charge conservation separate from energy transfer.",
+      ];
     case "M9_L2":
-      return ["Track one particle and one pressure band separately.", "Use compression and rarefaction language explicitly.", "Keep longitudinal motion parallel to the travel direction."];
+      return [
+        "Read current as charge per second at one point.",
+        "Keep amount of charge separate from rate of flow.",
+        "Translate amperes back into coulombs per second.",
+      ];
     case "M9_L3":
-      return ["Use Hz as cycles-per-second language, not as a mysterious label.", "Keep pitch and loudness apart.", "If the medium stays the same, frequency changes wavelength more directly than speed."];
+      return [
+        "Treat voltage as energy per unit charge.",
+        "Keep source-boost language separate from current language.",
+        "Do not describe a battery as a store of current.",
+      ];
     case "M9_L4":
-      return ["Classify the frequency band before the application.", "Use 'still sound' language for ultrasound.", "Keep the hearing boundary and echo behavior as separate ideas."];
+      return [
+        "Put the resistance story on the route, not the source.",
+        "Use length, area, and material before algebra.",
+        "Compare how route changes affect current for the same supply.",
+      ];
     case "M9_L5":
-      return ["Ask first whether the time is round-trip time.", "Sort echoes by arrival time before naming boundary order.", "One echo gives one clue; many echoes build a map."];
+      return [
+        "Hold one variable fixed before changing the other.",
+        "Use Ohm's law as an observed rule for ohmic conductors.",
+        "Link I-V graph shape back to proportional reasoning.",
+      ];
     case "M9_L6":
-      return ["Compare returned frequency with transmitted frequency first.", "Read higher-versus-lower shift before naming flow direction.", "Treat Doppler as motion-reading ultrasound, not as a brighter still image."];
+      return [
+        "Decide first whether the network is series or parallel.",
+        "Keep same-current and same-voltage rules separate.",
+        "Use junctions and paths rather than page layout to classify the circuit.",
+      ];
     default:
       return [];
   }
 }
 
 export function m9ScaffoldCoreBullets(code: string): string[] {
-  switch (code) {
+  switch (normalizeCode(code)) {
     case "M9_L1":
-      return ["Sound starts with a vibrating source.", "The source frequency becomes the sound frequency.", "The wave is not a blob of air moving across the room."];
+      return [
+        "Charge carriers move around the loop and are not used up by components.",
+        "A steady current needs a complete circuit.",
+        "In a simple loop, the current is the same at every point.",
+      ];
     case "M9_L2":
-      return ["Sound in air is a longitudinal pressure wave.", "Compressions are crowded regions and rarefactions are spread regions.", "Particles oscillate locally while the pattern travels onward."];
+      return [
+        "Current is the rate of charge flow.",
+        "1 A means 1 C of charge passes a point each second.",
+        "Current is not the same as the total charge in the circuit.",
+      ];
     case "M9_L3":
-      return ["Frequency controls pitch.", "Pitch and loudness are different ideas.", "In the same medium, higher frequency means shorter wavelength rather than much faster sound."];
+      return [
+        "Potential difference is energy transferred per unit charge.",
+        "A source gives each coulomb an energy rise.",
+        "Voltage and current are different electrical quantities.",
+      ];
     case "M9_L4":
-      return ["Most human hearing sits around 20 Hz to 20 kHz.", "Ultrasound is sound above the audible range.", "Ultrasound can still reflect from boundaries because it is still sound."];
+      return [
+        "Resistance is a property of the component or path.",
+        "Longer routes increase resistance.",
+        "Greater cross-sectional area reduces resistance.",
+      ];
     case "M9_L5":
-      return ["Echo returns come from reflected pulses.", "Longer return time usually means greater depth.", "Depth comes from round-trip timing and a divide-by-two step."];
+      return [
+        "For an ohmic conductor, current is proportional to voltage when conditions stay constant.",
+        "At fixed resistance, larger voltage gives larger current.",
+        "At fixed voltage, larger resistance gives smaller current.",
+      ];
     case "M9_L6":
-      return ["Doppler ultrasound tracks motion through frequency shifts.", "Toward the probe gives a higher return frequency.", "Away from the probe gives a lower return frequency."];
+      return [
+        "Series circuits have one path and the same current through each component.",
+        "Parallel branches share the same potential difference across matching junctions.",
+        "Current splits at a junction and recombines after parallel branches.",
+      ];
     default:
       return [];
   }
 }
 
 export function m9ScaffoldMediaCards(code: string): UnknownRecord[] {
-  const visual = M9_VISUAL_META[code.replace("_", "")];
+  const visual = M9_VISUAL_META[normalizeCode(code).replace("_", "")];
   if (!visual) return [];
-  return [{
-    kind: "visual",
-    title: visual.visual_title,
-    caption: visual.visual_caption,
-    image_url: visual.image_url,
-    highlights: visual.visual_callouts,
-  }];
+  return [
+    {
+      kind: "visual",
+      title: visual.visual_title,
+      caption: visual.visual_caption,
+      image_url: visual.image_url,
+      highlights: visual.visual_callouts,
+    },
+  ];
 }
 
 export function m9ReflectionVisualCheck(code: string): UnknownRecord | undefined {
-  const visual = M9_VISUAL_META[code.replace("_", "")];
+  const visual = M9_VISUAL_META[normalizeCode(code).replace("_", "")];
   if (!visual) return undefined;
   return {
     title: visual.visual_title,
-    prompt: "Use the visual to explain the key sound relationship from this lesson in one clear sentence.",
+    prompt: "Use the visual to explain the key electrical relationship from this lesson in one clear sentence.",
     image_url: visual.image_url,
     callouts: visual.visual_callouts,
   };

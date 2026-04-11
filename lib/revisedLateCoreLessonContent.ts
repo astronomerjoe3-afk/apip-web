@@ -1,6 +1,6 @@
 "use client";
 
-import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
+import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m12QuestionVisualMeta, m12ReflectionVisualCheck, m12ScaffoldCoreBullets, m12ScaffoldFocusExtras, m12ScaffoldMediaCards, m12SimulationCopy } from "./m12LessonContent";
 import { m13QuestionVisualMeta, m13ReflectionVisualCheck, m13ScaffoldCoreBullets, m13ScaffoldFocusExtras, m13ScaffoldMediaCards, m13SimulationCopy } from "./m13LessonContent";
 import { m14QuestionVisualMeta, m14ReflectionVisualCheck, m14ScaffoldCoreBullets, m14ScaffoldFocusExtras, m14ScaffoldMediaCards, m14SimulationCopy } from "./m14LessonContent";
@@ -239,88 +239,27 @@ const M13_SOLAR_SIMULATION_COPY: Record<string, RevisedLateCoreSimulationCopy> =
 };
 
 function revisedM9QuestionVisualMeta(itemId: string): RevisedLateCoreQuestionVisualMeta | undefined {
-  const normalized = normalizeItemId(itemId);
-  if (/^M9L[1-5]_/.test(normalized)) {
-    return m10QuestionVisualMeta(remapItemIdToModule(normalized, "M10"));
-  }
-  if (/^M9L6_/.test(normalized)) {
-    return M9_L6_VISUAL;
-  }
-  return undefined;
+  return m9QuestionVisualMeta(normalizeItemId(itemId));
 }
 
 function revisedM9SimulationCopy(code: string): RevisedLateCoreSimulationCopy | undefined {
-  const normalized = normalizeCode(code);
-  if (/^M9_L[1-5]$/.test(normalized)) {
-    return m10SimulationCopy(remapCodeToModule(normalized, "M10"));
-  }
-  if (normalized === "M9_L6") {
-    return M9_L6_SIMULATION;
-  }
-  return undefined;
+  return m9SimulationCopy(normalizeCode(code));
 }
 
 function revisedM9FocusExtras(code: string): string[] {
-  const normalized = normalizeCode(code);
-  if (/^M9_L[1-5]$/.test(normalized)) {
-    return m10ScaffoldFocusExtras(remapCodeToModule(normalized, "M10"));
-  }
-  if (normalized === "M9_L6") {
-    return [
-      "Decide first whether the route is series or parallel.",
-      "Keep current behaviour separate from voltage behaviour.",
-      "Use junctions and paths to explain the rule, not the picture alone.",
-    ];
-  }
-  return [];
+  return m9ScaffoldFocusExtras(normalizeCode(code));
 }
 
 function revisedM9CoreBullets(code: string): string[] {
-  const normalized = normalizeCode(code);
-  if (/^M9_L[1-5]$/.test(normalized)) {
-    return m10ScaffoldCoreBullets(remapCodeToModule(normalized, "M10"));
-  }
-  if (normalized === "M9_L6") {
-    return [
-      "Series circuits keep one common current in the single path.",
-      "Parallel branches share the same potential difference across the same two junctions.",
-      "Changing the route structure changes the whole circuit behaviour.",
-    ];
-  }
-  return [];
+  return m9ScaffoldCoreBullets(normalizeCode(code));
 }
 
 function revisedM9MediaCards(code: string): UnknownRecord[] {
-  const normalized = normalizeCode(code);
-  if (/^M9_L[1-5]$/.test(normalized)) {
-    return m10ScaffoldMediaCards(remapCodeToModule(normalized, "M10"));
-  }
-  if (normalized === "M9_L6") {
-    return [{
-      kind: "visual",
-      title: M9_L6_VISUAL.visual_title,
-      caption: M9_L6_VISUAL.visual_caption,
-      image_url: M9_L6_VISUAL.image_url,
-      highlights: M9_L6_VISUAL.visual_callouts,
-    }];
-  }
-  return [];
+  return m9ScaffoldMediaCards(normalizeCode(code));
 }
 
 function revisedM9ReflectionVisualCheck(code: string): UnknownRecord | undefined {
-  const normalized = normalizeCode(code);
-  if (/^M9_L[1-5]$/.test(normalized)) {
-    return m10ReflectionVisualCheck(remapCodeToModule(normalized, "M10"));
-  }
-  if (normalized === "M9_L6") {
-    return {
-      title: M9_L6_VISUAL.visual_title,
-      prompt: "Use the visual to explain how series and parallel circuit behaviour differ.",
-      image_url: M9_L6_VISUAL.image_url,
-      callouts: M9_L6_VISUAL.visual_callouts,
-    };
-  }
-  return undefined;
+  return m9ReflectionVisualCheck(normalizeCode(code));
 }
 
 function revisedM13QuestionVisualMeta(itemId: string): RevisedLateCoreQuestionVisualMeta | undefined {

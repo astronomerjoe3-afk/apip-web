@@ -9,6 +9,7 @@ import { m6QuestionVisualMeta, m6ReflectionVisualCheck, m6ScaffoldCoreBullets, m
 import { m7QuestionVisualMeta, m7ReflectionVisualCheck, m7ScaffoldCoreBullets, m7ScaffoldFocusExtras, m7ScaffoldMediaCards, m7SimulationCopy } from "./m7LessonContent";
 import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8ScaffoldSectionVisual, m8SimulationCopy } from "./m8LessonContent";
 import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
+import { m9GeneratedConceptGateItems, m9GeneratedDiagnosticItems, m9GeneratedMasteryItems } from "./m9AssessmentBanks";
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
@@ -5861,6 +5862,7 @@ function itemsFrom(lesson: UnknownRecord, key: string): UnknownRecord[] {
 
 function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
+  if (code.startsWith("M9_")) return m9GeneratedDiagnosticItems(code);
   if (code.startsWith("M2_")) return m2GeneratedDiagnosticItems(code);
   if (code.startsWith("M3_")) return m3GeneratedDiagnosticItems(code);
   switch (code) {
@@ -5993,6 +5995,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
 }
 
 function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
+  if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   const authored = itemsFrom(lesson, "diagnostic").map(asRecord);
   const authoredUsable = authored.filter((item) => hasUsableAssessmentAnswer(item));
   const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authoredUsable.length);
@@ -6119,6 +6122,7 @@ function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = it
 }
 
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
+  if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson))
     .filter((item) => hasUsableAssessmentAnswer(item));
   const authoredMasteryItems = filterLessonSpecificAssessmentCandidates(
@@ -7541,6 +7545,7 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
+  if (code.startsWith("M9_")) return m9GeneratedMasteryItems(code);
   if (code.startsWith("M2_")) return m2GeneratedMasteryItems(code);
   if (code.startsWith("M3_")) return m3GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
@@ -7646,6 +7651,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
 
 function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
+  if (code.startsWith("M9_")) return m9GeneratedConceptGateItems(code);
   if (code.startsWith("M2_")) return m2GeneratedConceptGateItems(code);
   if (code.startsWith("M3_")) return m3GeneratedConceptGateItems(code);
   switch (code) {
@@ -8224,6 +8230,7 @@ function hasUsableAssessmentAnswer(item: UnknownRecord): boolean {
 }
 
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
+  if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -10301,44 +10308,195 @@ function physicsFirstWorkedExampleReason(lesson: UnknownRecord): string {
     : "This answer follows from the lesson's core physics rather than from analogy or relation wording.";
 }
 
+function scaffoldM9WorkedExample(code: string): UnknownRecord | null {
+  switch (code) {
+    case "M9_L1":
+      return {
+        body: "The opening circuits lesson should keep route completion, shared current, and charge conservation together so students do not slide back into 'current gets used up' language.",
+        worked_example: {
+          prompt: "A cell, switch, lamp, and motor are connected in one simple loop. The switch is closed and an ammeter just before the lamp reads 0.40 A. What should an ammeter just after the motor read, and why does the lamp still work without using up the current?",
+          steps: [
+            "Name the route type first: this is one complete loop, so there is only one current path.",
+            "Use the one-path rule: the same current passes each point in a simple series loop, so the second ammeter also reads 0.40 A.",
+            "Separate charge flow from energy transfer: the lamp works by transferring energy from the moving charge, not by removing charge from the circuit.",
+          ],
+          answer: "The ammeter after the motor should also read 0.40 A. The lamp still works because it transfers energy from the moving charge while the same current continues around the complete loop.",
+          answer_reason: "A simple loop has one common current all the way round. Components transfer energy, but the charge carriers keep circulating and are not used up.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the route condition separate from the presence of charge carriers in the wire.",
+            worked_example: {
+              prompt: "Why can a wire still contain charge carriers even when an open switch makes the current zero?",
+              steps: [
+                "Identify what the open switch changes first: it breaks the conducting path.",
+                "Keep the particle story separate: electrons can still exist in the metal even when there is no complete route.",
+                "Conclude that current becomes zero because sustained flow needs a complete circuit, not because the wire has lost all charge carriers.",
+              ],
+              answer: "The wire can still contain charge carriers because the switch only breaks the route. Current becomes zero because the circuit is incomplete, not because the wire has no charges left in it.",
+              answer_reason: "Charge carriers being present is not enough on its own. A steady current needs one complete conducting loop.",
+            },
+          },
+        ],
+      };
+    case "M9_L2":
+      return {
+        body: "Current examples should read amperes as charge-per-second statements, so the learner compares amount and time together instead of treating current as stored charge.",
+        worked_example: {
+          prompt: "A charge of 12 C passes a checkpoint in a wire in 4.0 s. Find the current. Then state the current if the same 12 C passes in 2.0 s instead.",
+          steps: [
+            "Use the definition of current: I = Q / t.",
+            "For the first case, I = 12 / 4.0 = 3.0 A.",
+            "For the second case, the same charge passes in less time, so I = 12 / 2.0 = 6.0 A and the current is larger because the rate is larger.",
+          ],
+          answer: "The first current is 3.0 A, and the second current is 6.0 A.",
+          answer_reason: "Current measures charge flow rate. The same amount of charge passing in half the time means the current doubles.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up protects the learner from mixing total charge with charge flow rate.",
+            worked_example: {
+              prompt: "Why is it weak to say 'this wire has more current because it has more charge in it' without mentioning time?",
+              steps: [
+                "Recall what current measures before comparing the wires.",
+                "Notice that current depends on how much charge passes a point each second, not on the total charge present somewhere in the circuit.",
+                "Conclude that charge amount alone is not enough; the time interval has to be part of the statement.",
+              ],
+              answer: "It is weak because current is charge per second, not charge by itself. You need both the amount of charge and the time taken.",
+              answer_reason: "Current is a rate. Amount-only statements hide the time part that makes the rate meaningful.",
+            },
+          },
+        ],
+      };
+    case "M9_L3":
+      return {
+        body: "Voltage work should keep energy-per-charge language visible so students stop describing a cell as a tank of current.",
+        worked_example: {
+          prompt: "A component transfers 24 J of energy when 4.0 C of charge passes through it. Find the potential difference across the component, then state what that value means physically.",
+          steps: [
+            "Use the voltage definition first: V = E / Q.",
+            "Substitute the values: V = 24 / 4.0 = 6.0 V.",
+            "Translate the symbol answer back into the lesson meaning: 6.0 V means 6.0 J of energy is transferred for each coulomb of charge.",
+          ],
+          answer: "The potential difference is 6.0 V, which means 6.0 J of energy is transferred per coulomb.",
+          answer_reason: "Voltage is energy transferred per unit charge. The best answer keeps the numerical result tied to the physical meaning of joules per coulomb.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the source role on the energy side of the circuit story.",
+            worked_example: {
+              prompt: "A 12 V cell moves 3.0 C of charge around a circuit. How much energy does the cell transfer, and why is that not the same as saying the cell stores current?",
+              steps: [
+                "Use E = VQ to find the transferred energy: E = 12 x 3.0 = 36 J.",
+                "Interpret the result through the lesson meaning: the cell gives 12 J to each coulomb, so 3.0 C receives 36 J in total.",
+                "Keep the quantities separate: current is charge flow rate, while the cell's role here is to provide energy per charge.",
+              ],
+              answer: "The cell transfers 36 J. That does not mean it stores current; it means it gives energy to each coulomb that moves through the circuit.",
+              answer_reason: "Voltage belongs to energy per charge, not to the amount or rate of charge flow by itself.",
+            },
+          },
+        ],
+      };
+    case "M9_L4":
+      return {
+        body: "Resistance examples should stay comparative and route-based, so the learner explains current changes through wire properties rather than blaming the battery.",
+        worked_example: {
+          prompt: "Wire A and wire B are made from the same material and have the same cross-sectional area, but wire B is twice as long as wire A. Which wire has the greater resistance, and what happens to the current if each wire is connected separately to the same cell?",
+          steps: [
+            "Compare the route properties before mentioning current: longer wire means greater resistance when material and area are unchanged.",
+            "Decide the resistance ranking: wire B has the greater resistance because it is longer.",
+            "Now bring the source back in: with the same cell, the wire with greater resistance allows a smaller current.",
+          ],
+          answer: "Wire B has the greater resistance, and it would carry the smaller current when connected to the same cell.",
+          answer_reason: "Resistance belongs to the path. A longer route opposes charge flow more strongly, so the same source drives less current through it.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps material and geometry in the same resistance explanation.",
+            worked_example: {
+              prompt: "Why does a short thick copper wire usually have lower resistance than a long thin nichrome wire?",
+              steps: [
+                "Compare the geometry first: short and thick both act to reduce resistance.",
+                "Then compare the material: copper is a better conductor than nichrome.",
+                "Combine the two arguments instead of choosing only one feature.",
+              ],
+              answer: "It has lower resistance because it is shorter, thicker, and made of a material that opposes charge flow less strongly than nichrome.",
+              answer_reason: "Resistance depends on material and geometry together. The strongest answers keep both parts visible.",
+            },
+          },
+        ],
+      };
+    case "M9_L5":
+      return {
+        body: "Ohm's-law examples should hold one variable fixed at a time so the learner can see why current changes instead of reciting the formula without meaning.",
+        worked_example: {
+          prompt: "An ohmic resistor of 4.0 ohms is connected to a 12 V supply. Find the current. Then state the current if the supply is increased to 24 V while the resistance stays the same.",
+          steps: [
+            "Use Ohm's law for the first case: I = V / R = 12 / 4.0 = 3.0 A.",
+            "Keep the resistance fixed and change only the voltage in the second case: I = 24 / 4.0 = 6.0 A.",
+            "Summarize the pattern in words: for an ohmic resistor at fixed resistance, doubling the voltage doubles the current.",
+          ],
+          answer: "The current is 3.0 A at 12 V and 6.0 A at 24 V.",
+          answer_reason: "Ohm's law links current to voltage and resistance together. With resistance fixed, current is proportional to voltage for an ohmic conductor.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the graph clue tied to the proportional statement.",
+            worked_example: {
+              prompt: "Why does a straight I-V graph through the origin support the statement that a component is ohmic under fixed conditions?",
+              steps: [
+                "Read the graph shape before naming the rule: a straight line through the origin means current and voltage increase in direct proportion.",
+                "Connect that proportionality to the lesson statement instead of leaving it as a graph description only.",
+                "State the condition clearly: the component must be under fixed conditions for the relation to hold.",
+              ],
+              answer: "It supports the ohmic statement because the straight origin-passing graph shows current is proportional to voltage when conditions stay fixed.",
+              answer_reason: "The graph is evidence for proportional reasoning, not a separate topic from Ohm's law.",
+            },
+          },
+        ],
+      };
+    case "M9_L6":
+      return {
+        body: "The circuit-comparison lesson should keep one-route and branch-route behavior side by side, so learners decide the network type before mixing current and voltage rules.",
+        worked_example: {
+          prompt: "Circuit A has two 3.0 ohm lamps in series on a 12 V supply. Circuit B has the same two 3.0 ohm lamps in parallel on a 12 V supply. Compare the total current from the source and state the main current-voltage rule for each circuit.",
+          steps: [
+            "Start with Circuit A, the series case: the total resistance is 3.0 + 3.0 = 6.0 ohms, so the source current is I = 12 / 6.0 = 2.0 A.",
+            "Keep the series rule visible: in a one-route circuit, that same 2.0 A passes through both lamps while the supply voltage is shared between them.",
+            "Now switch to Circuit B, the parallel case: each 3.0 ohm branch gets the full 12 V, so each branch current is 12 / 3.0 = 4.0 A.",
+            "Add the branch currents to get the source current: 4.0 A + 4.0 A = 8.0 A, then summarize the difference in rules instead of only quoting the numbers.",
+          ],
+          answer: "Circuit A draws 2.0 A from the source, while Circuit B draws 8.0 A. In series, the current is the same through each component and the voltage is shared. In parallel, the voltage is the same across each branch and the branch currents add to give the source current.",
+          answer_reason: "The route shape changes the whole electrical behavior. One-path circuits keep one common current, while branch circuits keep a common branch voltage and allow the source current to split and recombine.",
+        },
+        extra_examples: [
+          {
+            body: "This follow-up keeps the network-structure decision active before any formula is chosen.",
+            worked_example: {
+              prompt: "Why is it risky to say 'all circuits just share the current the same way' before checking whether the network is series or parallel?",
+              steps: [
+                "Identify the route type first: a series circuit has one uninterrupted path, while a parallel circuit has multiple branches.",
+                "Notice that the current rule depends on that structure: same current fits the one-path case, but split-and-recombine fits the branch case.",
+                "Conclude that using one current rule for every network hides the real effect of the circuit layout.",
+              ],
+              answer: "It is risky because current behavior depends on the route structure. Series circuits keep one common current, but parallel circuits split the current between branches.",
+              answer_reason: "Current rules are network rules, not decorative labels. The learner has to decide the circuit structure before choosing the correct current-voltage story.",
+            },
+          },
+        ],
+      };
+    default:
+      return null;
+  }
+}
+
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const sourceCode = lessonCode(lesson);
-  if (sourceCode === "M9_L6") {
-    return {
-      body: "The circuit-comparison lesson should keep one-route and branch-route behavior side by side, so learners decide the network type before mixing current and voltage rules.",
-      worked_example: {
-        prompt: "Circuit A has two 3.0 ohm lamps in series on a 12 V supply. Circuit B has the same two 3.0 ohm lamps in parallel on a 12 V supply. Compare the total current from the source and state the main current-voltage rule for each circuit.",
-        steps: [
-          "Start with Circuit A, the series case: the total resistance is 3.0 + 3.0 = 6.0 ohms, so the source current is I = 12 / 6.0 = 2.0 A.",
-          "Keep the series rule visible: in a one-route circuit, that same 2.0 A passes through both lamps while the supply voltage is shared between them.",
-          "Now switch to Circuit B, the parallel case: each 3.0 ohm branch gets the full 12 V, so each branch current is 12 / 3.0 = 4.0 A.",
-          "Add the branch currents to get the source current: 4.0 A + 4.0 A = 8.0 A, then summarize the difference in rules instead of only quoting the numbers.",
-        ],
-        answer: "Circuit A draws 2.0 A from the source, while Circuit B draws 8.0 A. In series, the current is the same through each component and the voltage is shared. In parallel, the voltage is the same across each branch and the branch currents add to give the source current.",
-        answer_reason: "The route shape changes the whole electrical behavior. One-path circuits keep one common current, while branch circuits keep a common branch voltage and allow the source current to split and recombine.",
-      },
-      extra_examples: [
-        {
-          body: "This follow-up keeps the network-structure decision active before any formula is chosen.",
-          worked_example: {
-            prompt: "Why is it risky to say 'all circuits just share the current the same way' before checking whether the network is series or parallel?",
-            steps: [
-              "Identify the route type first: a series circuit has one uninterrupted path, while a parallel circuit has multiple branches.",
-              "Notice that the current rule depends on that structure: same current fits the one-path case, but split-and-recombine fits the branch case.",
-              "Conclude that using one current rule for every network hides the real effect of the circuit layout.",
-            ],
-            answer: "It is risky because current behavior depends on the route structure. Series circuits keep one common current, but parallel circuits split the current between branches.",
-            answer_reason: "Current rules are network rules, not decorative labels. The learner has to decide the circuit structure before choosing the correct current-voltage story.",
-          },
-        },
-      ],
-    };
-  }
+  const m9WorkedExample = scaffoldM9WorkedExample(sourceCode);
+  if (m9WorkedExample) return m9WorkedExample;
 
   const code =
-    /^M9_L[1-5]$/.test(sourceCode)
-      ? sourceCode.replace(/^M9_/, "M10_")
-      : /^M10_L[1-6]$/.test(sourceCode)
+    /^M10_L[1-6]$/.test(sourceCode)
         ? sourceCode.replace(/^M10_/, "M12_")
         : sourceCode;
   if (code.startsWith("M3_")) {
@@ -17914,28 +18072,63 @@ function authoredFormulaCards(lesson: UnknownRecord, code: string): UnknownRecor
   return formulaCards;
 }
 
+function localM9FormulaFallbacks(code: string): Array<{ standardFormula: string; meaning?: string; conditions?: string; unitsText?: string; constants?: string }> {
+  switch (code) {
+    case "M9_L1":
+      return [
+        { standardFormula: "a steady current needs a complete circuit", meaning: "Charge carriers need one unbroken conducting path for sustained flow.", conditions: "Use when explaining why current stops or continues in a simple loop.", unitsText: "" },
+        { standardFormula: "charge is conserved around the circuit", meaning: "Charge carriers circulate through the loop rather than being used up by a component.", conditions: "Use when separating charge flow from energy transfer.", unitsText: "C" },
+      ];
+    case "M9_L2":
+      return [
+        { standardFormula: "I = Q / t", meaning: "Current is charge flow rate.", conditions: "Use when the charge passing a point and the time taken are known.", unitsText: "A, C, s" },
+        { standardFormula: "Q = It", meaning: "Charge passed depends on current and time.", conditions: "Use when the current is steady over the stated interval.", unitsText: "C" },
+      ];
+    case "M9_L3":
+      return [
+        { standardFormula: "V = E / Q", meaning: "Potential difference is energy transferred per unit charge.", conditions: "Use when the energy per coulomb is being compared.", unitsText: "V, J/C" },
+        { standardFormula: "E = VQ", meaning: "Energy transferred depends on potential difference and charge moved.", conditions: "Use when voltage and charge are known.", unitsText: "J" },
+      ];
+    case "M9_L4":
+      return [
+        { standardFormula: "greater length -> greater resistance", meaning: "A longer route gives charge carriers more opposition.", conditions: "Use when comparing wires of the same material and cross-sectional area.", unitsText: "" },
+        { standardFormula: "greater cross-sectional area -> lower resistance", meaning: "A wider route gives charge carriers more room to move.", conditions: "Use when comparing wires of the same material and length.", unitsText: "" },
+        { standardFormula: "resistance depends on material and geometry", meaning: "Resistance belongs to the route, not to the source.", conditions: "Use when comparing components or wires qualitatively.", unitsText: "" },
+      ];
+    case "M9_L5":
+      return [
+        { standardFormula: "V = IR", meaning: "Potential difference, current, and resistance are linked by Ohm's law for ohmic conductors.", conditions: "Use for ohmic components when conditions stay constant.", unitsText: "V, A, ohms" },
+        { standardFormula: "I = V / R", meaning: "At fixed resistance, larger voltage gives larger current.", conditions: "Use for ohmic components.", unitsText: "A" },
+        { standardFormula: "straight I-V graph through the origin -> current is proportional to voltage", meaning: "A straight origin-passing I-V graph is the ohmic clue.", conditions: "Use when interpreting I-V data or graph shape.", unitsText: "" },
+      ];
+    case "M9_L6":
+      return [
+        { standardFormula: "current is the same at every point in a series circuit", meaning: "One path means the same charge flow rate through every component.", conditions: "Use for a single-path circuit.", unitsText: "A" },
+        { standardFormula: "voltage is the same across parallel branches", meaning: "Each parallel branch shares the same two junctions and so the same potential difference.", conditions: "Use for branches connected across the same supply.", unitsText: "V" },
+        { standardFormula: "I_total = I1 + I2 + ...", meaning: "Source current equals the sum of the branch currents in a parallel circuit.", conditions: "Use at a junction where current splits or recombines.", unitsText: "A" },
+        { standardFormula: "R_total = R1 + R2 + ...", meaning: "Series resistances add directly because there is one path through all components.", conditions: "Use for components in series.", unitsText: "ohms" },
+      ];
+    default:
+      return [];
+  }
+}
+
 function remappedLateCoreFormulaCode(code: string): string {
   const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
-  if (/^M9_L[1-5]$/.test(normalized)) return normalized.replace(/^M9_/, "M10_");
-  if (normalized === "M9_L6") return "M11_L2";
   if (/^M10_L[1-6]$/.test(normalized)) return normalized.replace(/^M10_/, "M12_");
   if (/^M11_L[1-6]$/.test(normalized)) return normalized.replace(/^M11_/, "M13_");
   return normalized;
 }
 
 function preferLocalCoreFormulaCards(code: string): boolean {
-  return remappedLateCoreFormulaCode(code) !== String(code || "").trim().replace(/-/g, "_").toUpperCase();
+  const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
+  if (normalized.startsWith("M9_")) return true;
+  return remappedLateCoreFormulaCode(code) !== normalized;
 }
 
 function coreFormulaFallbackEntries(code: string): Array<{ targetCode: string; entry: { standardFormula: string; meaning?: string; conditions?: string; unitsText?: string; constants?: string } }> {
-  if (code === "M9_L6") {
-    const seriesEntries = coreFormulaFallbacksForLesson("M11_L1")
-      .filter((entry) => /current is the same/i.test(entry.standardFormula))
-      .map((entry) => ({ targetCode: "M11_L1", entry }));
-    const parallelEntries = coreFormulaFallbacksForLesson("M11_L2")
-      .filter((entry) => /voltage is the same across parallel branches|I_total/i.test(entry.standardFormula))
-      .map((entry) => ({ targetCode: "M11_L2", entry }));
-    return [...seriesEntries, ...parallelEntries];
+  if (code.startsWith("M9_")) {
+    return localM9FormulaFallbacks(code).map((entry) => ({ targetCode: code, entry }));
   }
 
   const targetCode = remappedLateCoreFormulaCode(code);
