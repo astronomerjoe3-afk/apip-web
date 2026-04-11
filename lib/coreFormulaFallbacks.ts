@@ -184,10 +184,12 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "virtual image = apparent intersection of backward extensions", meaning: "A virtual image comes from extension lines rather than real crossings.", conditions: "Use when real rays do not actually meet at the image point.", unitsText: "" },
   ],
   M9_L1: [
-    { standardFormula: "sound frequency = source vibration frequency", meaning: "Each source vibration launches one sound cycle.", conditions: "Use when linking a vibrating source to the wave it produces.", unitsText: "Hz" },
+    { standardFormula: "a steady current needs a complete circuit", meaning: "Charge carriers need one unbroken conducting path for sustained flow.", conditions: "Use when explaining why current stops or continues in a simple loop.", unitsText: "" },
+    { standardFormula: "charge is conserved around the circuit", meaning: "Charge carriers circulate through the loop rather than being used up by a component.", conditions: "Use when separating charge flow from energy transfer.", unitsText: "C" },
   ],
   M9_L2: [
-    { standardFormula: "sound in air = longitudinal wave of compressions and rarefactions", meaning: "The pattern travels while particles only oscillate locally.", conditions: "Use when describing sound in air.", unitsText: "" },
+    { standardFormula: "I = Q / t", meaning: "Current is charge flow rate.", conditions: "Use when the charge passing a point and the time taken are known.", unitsText: "A, C, s" },
+    { standardFormula: "Q = It", meaning: "Charge passed depends on current and time.", conditions: "Use when the current is steady over the stated interval.", unitsText: "C" },
   ],
   M9_L3: [
     { standardFormula: "v = fλ", meaning: "Sound speed, frequency, and wavelength are linked by the wave equation.", conditions: "Use when any two sound-wave quantities are known.", unitsText: "m/s, Hz, m" },
