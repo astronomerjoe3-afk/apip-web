@@ -1870,8 +1870,6 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     ids.includes(itemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM14Prompt = (_ids: string[], prompts: string[]): boolean =>
     prompts.some((prompt) => promptKeyCore === prompt);
-  const matchesM10Prompt = (_ids: string[], prompts: string[]): boolean =>
-    prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM12Prompt = (_ids: string[], prompts: string[]): boolean =>
     prompts.some((prompt) => promptKeyCore === prompt);
   const matchesM14StarsPrompt = (ids: string[], prompts: string[]): boolean =>
@@ -4578,386 +4576,523 @@ function customShortAnswerMatch(item: UnknownRecord, answer: unknown): boolean |
     );
   }
 
-  const isM10ChargeConservationPrompt = matchesM10Prompt(
-    ["M10L1_D4", "M10L1_M2"],
-    [
-      "why is it weak to say that charge gets used up around the loop",
-      "a learner says the bulb uses up the charge what should you say instead",
-    ],
+  const remappedM10ItemIdUpper = itemIdUpper.replace(/^M10L/, "M12L");
+  const matchesMappedM10Prompt = (ids: string[], prompts: string[]): boolean =>
+    ids.includes(remappedM10ItemIdUpper) || prompts.some((prompt) => promptKeyCore === prompt);
+
+  const isM10FieldDensityPrompt = matchesMappedM10Prompt(
+    ["M12L1_D4"],
+    ["why do denser weave lines represent a stronger field"],
   );
 
-  if (isM10ChargeConservationPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["charge", "carriers", "tokens"],
-        ["conserved", "still there", "remain", "keep circulating", "keeps circulating", "not used up"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["energy", "boost", "energy per carrier"],
-        ["changes", "transferred", "drops", "is transferred"],
-        ["charge", "carriers"],
-      ])
-    );
+  if (isM10FieldDensityPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["closer", "denser", "tighter"],
+      ["field lines", "weave lines"],
+      ["stronger", "larger"],
+      ["field", "field strength"],
+    ]);
   }
 
-  const isM10ClosedLoopPrompt = matchesM10Prompt(
-    ["M10L1_D7", "M10L1_M5"],
+  const isM10FieldLinesMapPrompt = matchesMappedM10Prompt(
+    ["M12L1_D7", "M12L1_M3"],
     [
-      "what does a closed loop allow that a broken loop does not",
-      "why can the same carriers go around the loop again and again",
+      "why is it weak to call field lines tracks that particles follow",
+      "a learner says field lines are where the magnetic stuff travels what should you say instead",
     ],
   );
 
-  if (isM10ClosedLoopPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["closed", "complete", "full"],
-        ["loop", "path", "route", "circuit"],
-        ["charge", "carriers", "tokens"],
-        ["circulate", "flow around", "go around again", "keep moving", "move all the way"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["complete", "closed"],
-        ["path", "loop", "route"],
-        ["current", "sustained current", "steady current"],
-      ])
-    );
+  if (isM10FieldLinesMapPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["field lines", "weave lines"],
+      ["map", "diagram"],
+      ["direction", "strength"],
+      ["not", "rather than"],
+      ["path", "track", "railway", "stuff travels"],
+    ]);
   }
 
-  const isM10ChargeCurrentPrompt = matchesM10Prompt(
+  const isM10CompassPrompt = matchesMappedM10Prompt(
+    ["M12L1_C1", "M12L1_M9"],
     [
-      "M10L1_C6",
-      "M10L1_M7",
-      "M10L2_D4",
-      "M10L2_D7",
-      "M10L2_C4",
-      "M10L2_M2",
-      "M10L2_M5",
-    ],
-    [
-      "what is the cleanest two part distinction between charge and current",
-      "why is current not the same thing as how much charge is in the loop",
-      "why can a loop with many carriers still have a small current",
-      "what is the difference between carrier count and checkpoint rate",
-      "why is current is how much charge is in the wire weak",
-      "a learner says current is the number of carriers in the circuit what would you fix",
+      "what job does a compass flag do in the field weave model",
+      "why is a compass flag better described as a test probe than as a force meter",
     ],
   );
 
-  if (isM10ChargeCurrentPrompt) {
+  if (isM10CompassPrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["charge", "carrier count", "carriers", "amount", "quantity", "total"],
-        ["current", "checkpoint rate"],
-        ["rate", "per second", "passes a point", "flow", "charge flow"],
+        ["compass", "flag", "test compass", "probe"],
+        ["local", "at that point"],
+        ["field direction", "direction of the field"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["many carriers", "large amount", "large charge", "same charge"],
-        ["small current", "weak current", "different current", "low current"],
-        ["rate", "per second", "passes", "flow speed", "moves slowly"],
-      ])
-    );
-  }
-
-  const isM10CurrentDefinitionPrompt = matchesM10Prompt(
-    ["M10L2_C1", "M10L2_C6", "M10L2_M7"],
-    [
-      "how would you explain current without using the word electricity",
-      "what stays more useful in the carrier loop story how many tokens exist or how many pass each second when you are defining current",
-      "what does the equation i q t summarize in one sentence",
-    ],
-  );
-
-  if (isM10CurrentDefinitionPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["current"],
-        ["charge", "carriers"],
-        ["rate", "per second", "passes a point", "passes the checkpoint", "flow"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "current is charge per second",
-        "current is charge passing a point each second",
-        "current is the rate of charge flow",
-      ])
-    );
-  }
-
-  const isM10BatteryRolePrompt = matchesM10Prompt(
-    ["M10L1_C4", "M10L3_M2"],
-    [
-      "why is battery stores current a weak statement",
-      "what should you say instead of the battery sends current into the circuit",
-    ],
-  );
-
-  if (isM10BatteryRolePrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["battery", "source", "lift station"],
-        ["voltage", "energy per charge", "boost", "boost per carrier"],
+        ["direction", "field direction", "local field"],
         ["not", "rather than"],
-        ["stores current", "current tank", "fixed current", "sends current"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["battery", "source"],
-        ["current"],
-        ["depends on", "whole loop", "route resistance", "route drag", "circuit"],
+        ["force", "force size", "meter"],
       ])
     );
   }
 
-  const isM10VoltagePrompt = matchesM10Prompt(
-    ["M10L3_D4", "M10L3_D7", "M10L3_C1", "M10L3_C4", "M10L3_C6", "M10L3_M7", "M10L6_D6"],
+  const isM10ElectricMagneticLinkPrompt = matchesMappedM10Prompt(
+    ["M12L1_C4", "M12L1_M5", "M12L2_D9", "M12L2_M8"],
     [
-      "why is voltage better described as boost per carrier than as more current",
-      "why can two circuits have the same current but different voltages",
-      "how would you explain voltage in one sentence using the carrier loop model",
-      "why is it weak to treat voltage as the same quantity as current",
-      "why does a bigger voltage not automatically mean more charge exists",
-      "what does the equation v delta e q say in words",
-      "why does doubling voltage not create new carriers",
+      "why is module 12 not a completely separate world from module 10",
+      "why do a permanent magnet and a current carrying wire both belong in the same lesson",
+      "why is an electromagnet already evidence that electricity and magnetism are one linked system",
+      "how does lesson 2 deepen the link between circuits and magnetism",
     ],
   );
 
-  if (isM10VoltagePrompt) {
+  if (isM10ElectricMagneticLinkPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["current", "moving charge", "carrier route", "coil", "wire"],
+      ["create", "creates", "produces", "source"],
+      ["magnetic field", "magnetic weave", "magnetic effect"],
+      ["linked", "same story", "same lesson", "not separate", "grows into", "consequence"],
+    ]);
+  }
+
+  const isM10WireFieldReversalPrompt = matchesMappedM10Prompt(
+    ["M12L1_C7"],
+    ["why does reversing current reverse the circular field direction around a wire"],
+  );
+
+  if (isM10WireFieldReversalPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["reverse", "changing"],
+      ["current direction", "carrier direction"],
+      ["field direction", "field weave"],
+      ["around the wire"],
+    ]);
+  }
+
+  const isM10PatternComparePrompt = matchesMappedM10Prompt(
+    ["M12L1_M7"],
+    ["how would you compare the bar magnet field pattern with the straight wire field pattern"],
+  );
+
+  if (isM10PatternComparePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["bar magnet", "magnet"],
+      ["north", "south", "pole-to-pole", "poles"],
+      ["wire", "current-carrying wire"],
+      ["circular", "circles", "wrap around"],
+    ]);
+  }
+
+  const isM10CoreRolePrompt = matchesMappedM10Prompt(
+    ["M12L2_D6", "M12L2_C4", "M12L2_M2"],
+    [
+      "why does adding a soft iron core spine strengthen a coil tower",
+      "why is the core stores current a weak statement",
+      "a classmate says the core is where the current lives what is the better explanation",
+    ],
+  );
+
+  if (isM10CoreRolePrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["voltage"],
-        ["energy per charge", "boost", "boost per carrier", "each carrier", "per carrier"],
+        ["soft iron", "core", "core spine"],
+        ["concentrate", "strengthen", "increase", "boost"],
+        ["magnetic field", "electromagnet"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["voltage"],
         ["current"],
+        ["coil", "wire"],
+        ["core", "soft iron"],
+        ["not", "rather than"],
+        ["stored", "stores current", "where the current lives"],
+      ])
+    );
+  }
+
+  const isM10CoilStrengthPrompt = matchesMappedM10Prompt(
+    ["M12L2_C1", "M12L2_M4", "M12L2_M10"],
+    [
+      "why is a coil stronger than a single straight wire for magnetic effect",
+      "why do more turns usually strengthen the electromagnet",
+      "why is a solenoid better than a single straight wire for making a practical lifting magnet",
+    ],
+  );
+
+  if (isM10CoilStrengthPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["turns", "coil", "many turns", "solenoid"],
+      ["reinforce", "add", "add together", "combine", "concentrate", "organized"],
+      ["field", "magnetic field", "magnetic effect"],
+      ["stronger", "stronger pattern", "magnet-like"],
+    ]);
+  }
+
+  const isM10CurrentDependencyPrompt = matchesMappedM10Prompt(
+    ["M12L2_C6", "M12L2_M6"],
+    [
+      "why can an electromagnet be useful when you want magnetic lifting that can be turned on and off",
+      "why can turning off the current make a crane electromagnet let go of scrap metal",
+    ],
+  );
+
+  if (isM10CurrentDependencyPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["current"],
+      ["control", "switch on and off", "depends on", "switch off", "turn off"],
+      ["magnetic field", "magnetism", "strength"],
+      ["weakens", "disappears", "removed", "changes"],
+    ]);
+  }
+
+  const isM10SolenoidPolesPrompt = matchesMappedM10Prompt(
+    ["M12L2_C8"],
+    ["how is a solenoid like a bar magnet"],
+  );
+
+  if (isM10SolenoidPolesPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["solenoid", "coil"],
+      ["north", "south", "poles"],
+      ["field pattern", "magnet-like", "bar magnet"],
+    ]);
+  }
+
+  const isM10ForceGeometryPrompt = matchesMappedM10Prompt(
+    ["M12L3_D6", "M12L3_C1", "M12L3_C8", "M12L3_M3"],
+    [
+      "why is the word side kick better than forward shove here",
+      "why can a magnetic field steer a conductor without simply speeding it up along the field line",
+      "why is magnetic fields push charges forward along the lines a weak statement",
+      "a learner says the field pushes the wire forward because the field line points that way what should you say",
+    ],
+  );
+
+  if (isM10ForceGeometryPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["force", "magnetic force", "side-kick"],
+      ["sideways", "perpendicular"],
+      ["field", "field line"],
+      ["current", "conductor", "moving charge", "motion"],
+      ["not", "rather than"],
+      ["forward", "along"],
+    ]);
+  }
+
+  const isM10LeftHandRulePrompt = matchesMappedM10Prompt(
+    ["M12L3_D9", "M12L3_M7"],
+    [
+      "what does fleming s left hand rule help you work out",
+      "what does fleming s left hand rule help you keep track of in a motor effect diagram",
+    ],
+  );
+
+  if (isM10LeftHandRulePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["Fleming", "left-hand rule"],
+      ["direction"],
+      ["field"],
+      ["current", "conductor"],
+      ["force"],
+    ]);
+  }
+
+  const isM10CrossingFieldPrompt = matchesMappedM10Prompt(
+    ["M12L3_C4", "M12L3_M9"],
+    [
+      "why does a conductor parallel to the field not get the same side kick as one crossing the field",
+      "why is the phrase crossing the field useful in this lesson",
+    ],
+  );
+
+  if (isM10CrossingFieldPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["crossing", "across", "cross-field"],
+      ["field"],
+      ["parallel", "not parallel", "not crossing", "no perpendicular"],
+      ["sideways force", "magnetic force", "force"],
+      ["strong", "weak", "zero", "needed geometry"],
+    ]);
+  }
+
+  const isM10FieldInteractionPrompt = matchesMappedM10Prompt(
+    ["M12L3_C6", "M12L3_M5"],
+    [
+      "how does lesson 3 deepen the field story from lessons 1 and 2",
+      "why can a magnetic field change direction of motion without directly doing the same job as a battery",
+    ],
+  );
+
+  if (isM10FieldInteractionPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["field", "magnetic field"],
+        ["push", "force", "sideways force"],
+        ["current-carrying conductor", "route", "conductor"],
+        ["not just", "more than", "interaction", "not the same job"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["battery", "source", "voltage"],
+        ["energy per charge", "source job"],
+        ["magnetic field"],
+        ["steer", "change direction", "sideways force"],
+      ])
+    );
+  }
+
+  const isM10TorquePrompt = matchesMappedM10Prompt(
+    ["M12L4_D4", "M12L4_C8", "M12L4_M6"],
+    [
+      "why do opposite forces on opposite sides of the coil cause turning instead of simple sideways motion",
+      "why is the word torque useful in lesson 4",
+      "why do opposite forces on opposite sides of a loop not simply cancel into no effect",
+    ],
+  );
+
+  if (isM10TorquePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["opposite forces", "side-kicks", "different positions", "opposite sides"],
+      ["coil", "loop"],
+      ["torque", "turning moment", "couple", "rotation", "turning"],
+      ["not", "rather than"],
+      ["cancel", "simple sideways shift", "translation"],
+    ]);
+  }
+
+  const isM10CommutatorPrompt = matchesMappedM10Prompt(
+    ["M12L4_D8", "M12L4_C4", "M12L4_C6", "M12L4_M4"],
+    [
+      "why is the commutator needed for continuous turning in a simple d c motor",
+      "why is the commutator makes the magnet stronger a weak statement",
+      "why might a simple coil need help to keep rotating through awkward positions",
+      "why does a split ring commutator help a d c motor keep spinning in one direction",
+    ],
+  );
+
+  if (isM10CommutatorPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["commutator", "split ring"],
+      ["reverse", "flip", "switch"],
+      ["current"],
+      ["half-turn", "right time", "right point"],
+      ["torque", "keep spinning", "continuous turning", "same direction", "keep rotating"],
+    ]);
+  }
+
+  const isM10MotorEffectPrompt = matchesMappedM10Prompt(
+    ["M12L4_C1", "M12L4_M2", "M12L4_M8", "M12L4_M10"],
+    [
+      "how is a motor just lesson 3 arranged to produce rotation",
+      "how would you correct the statement a motor is just induction",
+      "how does lesson 4 deepen the side kick idea from lesson 3",
+      "why is a motor a natural part of the field weave model rather than a random machine chapter",
+    ],
+  );
+
+  if (isM10MotorEffectPrompt) {
+    return (
+      matchesPhraseGroups(candidate, [
+        ["side-kick", "force-on-conductor", "magnetic force", "field"],
+        ["opposite sides", "coil", "loop", "current-carrying coil"],
+        ["torque", "turning effect", "rotation", "spins"],
+      ]) ||
+      matchesPhraseGroups(candidate, [
+        ["motor"],
+        ["force", "current-carrying coil", "torque"],
+        ["induction", "changing flux", "emf"],
         ["not", "rather than", "different"],
-        ["rate", "flow", "charge per second", "energy per charge", "boost"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["voltage"],
-        ["not", "rather than"],
-        ["more charge", "new carriers", "amount of charge", "carrier count"],
       ])
     );
   }
 
-  const isM10SourceAndRoutePrompt = matchesM10Prompt(
-    ["M10L3_M5", "M10L4_C6", "M10L4_M7", "M10L5_C4", "M10L5_M7", "M10L6_D8", "M10L6_M2"],
+  const isM10NeedChangePrompt = matchesMappedM10Prompt(
+    ["M12L5_D6", "M12L5_C1", "M12L5_M2", "M12L5_M10"],
     [
-      "why can the same source give different currents in different loops even though its voltage is fixed",
-      "why can the same source give different currents in two circuits with different routes",
-      "a learner says if the battery is the same the current must be the same what correction should you make",
-      "why is it weak to say that a battery always gives the same current",
-      "a learner says higher voltage means the battery sends more current all by itself what should you add",
-      "why can the same voltage appear in two loops but the currents differ",
-      "a learner says same battery means same current what is the best correction now",
+      "why is a field induces current just by existing a weak statement",
+      "what does the change thread idea stand for in formal physics",
+      "a learner says the coil should keep producing emf as long as a magnet is nearby what is the correction",
+      "what single question best protects you from many induction mistakes",
     ],
   );
 
-  if (isM10SourceAndRoutePrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["same battery", "same source", "same voltage", "fixed voltage"],
-        ["different current", "currents differ", "lower current", "higher current"],
-        ["resistance", "route drag", "whole loop", "route", "circuit"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["current"],
-        ["depends on", "also depends on", "not alone", "not by itself"],
-        ["voltage", "source boost"],
-        ["resistance", "route drag"],
-      ])
-    );
+  if (isM10NeedChangePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["changing", "change-thread", "what is changing", "rate of change"],
+      ["magnetic flux", "field through the coil", "field through the loop"],
+      ["induced emf", "induction", "emf"],
+      ["not", "rather than", "steady field", "static field", "magnet nearby"],
+    ]);
   }
 
-  const isM10ResistanceRoutePrompt = matchesM10Prompt(
-    ["M10L4_D4", "M10L4_C1", "M10L4_C4"],
+  const isM10AcGeneratorPrompt = matchesMappedM10Prompt(
+    ["M12L5_D9", "M12L5_M6"],
     [
-      "why is resistance better treated as a path property than as something the battery decides",
-      "how would you explain resistance in the carrier loop model",
-      "why is the battery makes the resistance a weak statement",
+      "why does an a c generator produce alternating emf",
+      "how would you explain an a c generator using the field weave model",
     ],
   );
 
-  if (isM10ResistanceRoutePrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["resistance"],
-        ["path", "route", "material", "geometry", "route drag", "path difficulty"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["resistance"],
-        ["battery", "source"],
-        ["not", "rather than"],
-        ["path", "route", "material"],
-      ])
-    );
+  if (isM10AcGeneratorPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["rotating", "turn-wheel", "rotating coil", "orientation"],
+      ["changing", "repeatedly", "again and again"],
+      ["magnetic flux", "magnetic thread", "field"],
+      ["induced emf", "emf", "output"],
+      ["alternating", "reverses"],
+    ]);
   }
 
-  const isM10GeometryPrompt = matchesM10Prompt(
-    ["M10L4_D7", "M10L4_M2", "M10L4_M5"],
+  const isM10ReverseFluxPrompt = matchesMappedM10Prompt(
+    ["M12L5_C4"],
+    ["why does reversing the magnet motion reverse the induced emf direction"],
+  );
+
+  if (isM10ReverseFluxPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["reversing", "opposite"],
+      ["magnet motion", "motion"],
+      ["magnetic flux change", "change-thread", "flux"],
+      ["induced emf", "induced effect"],
+      ["reverses", "opposite direction"],
+    ]);
+  }
+
+  const isM10LenzPrompt = matchesMappedM10Prompt(
+    ["M12L5_C6"],
+    ["how does lenz s law help you describe induction without equations"],
+  );
+
+  if (isM10LenzPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["oppose", "resist"],
+      ["change"],
+      ["induced current", "induced emf", "induced effect"],
+    ]);
+  }
+
+  const isM10GeneratorPrinciplePrompt = matchesMappedM10Prompt(
+    ["M12L5_C8", "M12L5_M8"],
     [
-      "how can changing the wire shape change resistance even when the material stays the same",
-      "what should happen to resistance if the route is made twice as long and everything else stays the same",
-      "why is route width part of the resistance story",
+      "why is a generator not just the motor effect with a different name",
+      "why is a generator naturally placed after the induction lesson rather than before it",
     ],
   );
 
-  if (isM10GeometryPrompt) {
+  if (isM10GeneratorPrinciplePrompt) {
     return (
       matchesPhraseGroups(candidate, [
-        ["longer", "length", "twice as long"],
-        ["higher", "greater", "more", "increase"],
-        ["resistance", "drag"],
+        ["generator"],
+        ["induction", "changing magnetic flux", "changing flux", "induced emf"],
+        ["motor effect", "force", "torque"],
+        ["not", "rather than", "different"],
       ]) ||
       matchesPhraseGroups(candidate, [
-        ["wider", "width", "more room"],
-        ["lower", "less", "reduce"],
-        ["resistance", "drag"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["geometry", "shape", "length", "width"],
-        ["resistance"],
-        ["matters", "changes", "affects", "depends on"],
+        ["generator"],
+        ["application", "uses", "follows"],
+        ["induction"],
+        ["changing flux", "changing magnetic flux"],
+        ["emf", "output"],
       ])
     );
   }
 
-  const isM10OhmsLawMeaningPrompt = matchesM10Prompt(
-    ["M10L5_D5", "M10L5_C1", "M10L5_M5"],
+  const isM10TurnsEffectPrompt = matchesMappedM10Prompt(
+    ["M12L5_M4"],
+    ["why does more turn count help induction"],
+  );
+
+  if (isM10TurnsEffectPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["more turns", "extra turns"],
+      ["changing magnetic flux", "change-thread"],
+      ["larger", "stronger"],
+      ["induced emf", "induced effect"],
+    ]);
+  }
+
+  const isM10TransformerAcRequirementPrompt = matchesMappedM10Prompt(
+    ["M12L6_D6"],
+    ["why does steady d c fail to keep an ordinary transformer working after the instant of switching"],
+  );
+
+  if (isM10TransformerAcRequirementPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["changing field", "changing magnetic flux", "changing current"],
+      ["ordinary transformer"],
+      ["steady d.c.", "direct current", "steady dc"],
+      ["not", "fails", "does not provide"],
+      ["sustained", "continuing"],
+      ["secondary emf", "induced output"],
+    ]);
+  }
+
+  const isM10TransmissionLossPrompt = matchesMappedM10Prompt(
+    ["M12L6_D9", "M12L6_M5"],
     [
-      "why is ohm s law better introduced as a rate rule for an ohmic route than as a formula to memorize",
-      "what does i v r say in words",
-      "why is ohm s law useful conceptually before it is useful algebraically",
+      "why does a smaller transmission current help reduce cable losses",
+      "why does smaller transmission current reduce cable heating",
     ],
   );
 
-  if (isM10OhmsLawMeaningPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["current"],
-        ["depends on", "set by", "controlled by", "proportional"],
-        ["voltage", "boost"],
-        ["resistance", "drag"],
-        ["ohmic", "ohmic route"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "current equals voltage divided by resistance for an ohmic route",
-        "for an ohmic route current depends on voltage and resistance",
-      ])
-    );
+  if (isM10TransmissionLossPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["smaller", "lower"],
+      ["current"],
+      ["reduce", "lower", "less"],
+      ["losses", "heating", "I^2R"],
+      ["cables", "transmission", "lines"],
+    ]);
   }
 
-  const isM10OhmicConditionPrompt = matchesM10Prompt(
-    ["M10L5_C6"],
-    ["what does the word ohmic warn you to remember"],
-  );
-
-  if (isM10OhmicConditionPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["ohmic"],
-        ["not every", "not all", "only some", "only for"],
-        ["component", "element", "route", "device"],
-        ["simple rule", "proportional", "ohm s law", "rate rule"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "ohm's law is not automatic for every component",
-        "the simple proportional rule is for ohmic elements",
-      ])
-    );
-  }
-
-  const isM10OhmicProportionalityPrompt = matchesM10Prompt(
-    ["M10L5_D7", "M10L5_M2"],
+  const isM10TransformerPrinciplePrompt = matchesMappedM10Prompt(
+    ["M12L6_C1", "M12L6_C4", "M12L6_M3"],
     [
-      "how does increasing route drag affect current when the source voltage stays fixed",
-      "how would you predict the effect of doubling resistance at fixed voltage in an ohmic route",
+      "how can the secondary coil receive energy without charge from the primary physically traveling through the core",
+      "why is the current just travels through the core into the second coil a weak explanation",
+      "a learner says the secondary coil gets energy because primary charges flow through the core into it what should you say instead",
     ],
   );
 
-  if (isM10OhmicProportionalityPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["same voltage", "fixed voltage"],
-        ["more", "increase", "double"],
-        ["resistance", "route drag"],
-        ["less", "lower", "reduce", "half", "halve"],
-        ["current", "flow"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "more resistance means less current for the same voltage",
-        "doubling the resistance halves the current at fixed voltage",
-      ])
-    );
+  if (isM10TransformerPrinciplePrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["changing magnetic field", "changing core field", "changing magnetic flux", "induction"],
+      ["core"],
+      ["secondary", "second coil", "secondary emf", "secondary output"],
+      ["not", "rather than"],
+      ["charge flowing directly", "direct charge transfer", "current through the core", "charges flow through the core"],
+    ]);
   }
 
-  const isM10LedgerPrompt = matchesM10Prompt(
-    ["M10L6_D3", "M10L6_C6", "M10L6_M7"],
+  const isM10GridDeliveryPrompt = matchesMappedM10Prompt(
+    ["M12L6_C6", "M12L6_M9"],
     [
-      "why is a loop ledger useful in electrical quantities",
-      "why is the battery sends electricity weaker than the ledger language in this module",
-      "what does a good loop ledger stop you from collapsing into one vague word",
+      "why is a step up transformer usually followed later by step down transformers before homes and devices",
+      "why is it unsafe to stop the story at just use high voltage everywhere",
     ],
   );
 
-  if (isM10LedgerPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["charge", "current", "voltage", "resistance"],
-        ["separate", "distinguish", "track", "ledger", "keep apart"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["what moves", "who moves"],
-        ["what each carrier gets", "what is supplied per charge", "boost each carrier"],
-        ["what limits the flow", "route drag", "resistance"],
-      ])
-    );
+  if (isM10GridDeliveryPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["raise", "high voltage", "step-up", "step up"],
+      ["transmission", "efficient", "lower current"],
+      ["lower again", "step-down", "step down", "reduce again"],
+      ["homes", "devices", "user end", "before use", "practical use"],
+    ]);
   }
 
-  const isM10QuantitySeparationPrompt = matchesM10Prompt(
-    ["M10L6_C1", "M10L6_M5"],
+  const isM10TwoCoilInductionPrompt = matchesMappedM10Prompt(
+    ["M12L6_C8", "M12L6_M7"],
     [
-      "how would you separate charge current and voltage in one sentence",
-      "why can a circuit keep the same carriers while still changing current and voltage descriptions",
+      "how does lesson 6 extend the induction story from lesson 5",
+      "why is a transformer a natural follow up to the induction lesson",
     ],
   );
 
-  if (isM10QuantitySeparationPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["charge"],
-        ["carrier", "moves", "quantity"],
-        ["current"],
-        ["rate", "flow rate", "passes a point", "per second"],
-        ["voltage"],
-        ["energy per charge", "boost"],
-      ]) ||
-      matchesPhraseGroups(candidate, [
-        ["same carriers", "same charge"],
-        ["current", "flow rate"],
-        ["voltage", "energy per charge", "boost"],
-        ["different", "separate"],
-      ])
-    );
-  }
-
-  const isM10ChooseEquationPrompt = matchesM10Prompt(
-    ["M10L6_C4"],
-    ["why is choosing the right equation part of the physics rather than just algebra here"],
-  );
-
-  if (isM10ChooseEquationPrompt) {
-    return (
-      matchesPhraseGroups(candidate, [
-        ["equation", "formula", "choose"],
-        ["physical quantity", "meaning", "unknown"],
-        ["current", "voltage", "charge", "time", "resistance"],
-      ]) ||
-      includesAnyPhrase(candidate, [
-        "each equation matches a different physical quantity",
-        "you must know which quantity is unknown before choosing the equation",
-      ])
-    );
+  if (isM10TwoCoilInductionPrompt) {
+    return matchesPhraseGroups(candidate, [
+      ["induction", "changing magnetic flux", "changing field"],
+      ["one coil", "primary"],
+      ["another coil", "secondary"],
+      ["turn count", "turns ratio", "control output voltage", "two-coil"],
+    ]);
   }
 
   const isM12FieldDensityPrompt = matchesM12Prompt(
