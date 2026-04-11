@@ -18469,6 +18469,36 @@ function preWorkedExampleVideoMeta(code: string): {
       "thumbnail.png": "thumbnail-20260410d.png",
       "captions.vtt": "captions-20260410d.vtt",
     },
+    M9_L1: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L2: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L3: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L4: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L5: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L6: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
@@ -19574,84 +19604,84 @@ function preWorkedExampleVideoMeta(code: string): {
       };
     case "M9_L1":
       return {
-        body: "Use this video to separate the vibrating source from the medium's relay role before the worked example begins.",
-        caption: "Video explainer: vibrating source, launched frequency, source-period reading, and medium-relay logic before the lesson example.",
+        body: "Use this video to separate moving charge, current, and the complete-loop condition before the worked example begins.",
+        caption: "Video explainer: moving carriers, checkpoint current, and complete-circuit logic before the lesson example.",
         highlights: [
-          "Sound starts with a vibrating source",
-          "The source frequency becomes the sound frequency",
-          "The medium relays the disturbance instead of inventing a new cycle rate",
+          "Charge is carried by moving carriers in the loop",
+          "Current is the rate measured at a checkpoint, not the charge itself",
+          "A steady current needs one complete conducting path",
         ],
-        checkForUnderstanding: "If a speaker cone stops vibrating while air is still present, what part of the sound story disappears first?",
+        checkForUnderstanding: "If the switch opens while charge carriers are still present in the wire, what part of the circuit story collapses first?",
         video_url: staticVideoAssetUrl("M9_L1", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L1", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L1", "captions.vtt"),
       };
     case "M9_L2":
       return {
-        body: "Use this video to separate local particle motion from pattern travel before the worked example begins.",
-        caption: "Video explainer: longitudinal sound, compression-rarefaction reading, and pattern-speed interpretation before the lesson example.",
+        body: "Use this video to keep current tied to charge-per-second reasoning before the worked example begins.",
+        caption: "Video explainer: checkpoint flow rate, ampere meaning, and amount-versus-rate separation before the lesson example.",
         highlights: [
-          "Sound in air is a longitudinal pressure wave",
-          "Particles oscillate locally while the pressure pattern moves onward",
-          "Wave speed belongs to the moving pattern, not to one particle crossing the tube",
+          "Current is charge passing a point each second",
+          "1 A means 1 C per second",
+          "The same total charge can still give different currents if the times differ",
         ],
-        checkForUnderstanding: "When a compression pattern travels east, what should you check first before deciding whether the wave is longitudinal or transverse?",
+        checkForUnderstanding: "If two wires move the same total charge but one does it faster, which quantity must be larger first?",
         video_url: staticVideoAssetUrl("M9_L2", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L2", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L2", "captions.vtt"),
       };
     case "M9_L3":
       return {
-        body: "Use this video to keep pitch, loudness, wavelength, and same-medium speed in the correct roles before the worked example begins.",
-        caption: "Video explainer: frequency-pitch link, wavelength reading, same-medium speed, and loudness separation before the lesson example.",
+        body: "Use this video to keep voltage as energy per charge and separate it from current before the worked example begins.",
+        caption: "Video explainer: joules-per-coulomb meaning, source boost per carrier, and voltage-current separation before the lesson example.",
         highlights: [
-          "Pitch follows frequency",
-          "In the same medium, higher frequency means shorter wavelength rather than faster sound",
-          "Loudness should not be used to answer a pitch question",
+          "Voltage is energy transferred per unit charge",
+          "A source gives each coulomb an energy boost",
+          "Voltage and current are linked in circuits, but they are not the same quantity",
         ],
-        checkForUnderstanding: "If two sounds travel through the same air and one has the higher pitch, what quantity is safest to compare first?",
+        checkForUnderstanding: "When a source is labeled 12 V, what should you read first: energy per coulomb or current in the loop?",
         video_url: staticVideoAssetUrl("M9_L3", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L3", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L3", "captions.vtt"),
       };
     case "M9_L4":
       return {
-        body: "Use this video to classify ultrasound correctly and keep the 'still sound' idea alive before the worked example begins.",
-        caption: "Video explainer: hearing-band classification, ultrasound wavelength, and boundary-reflection use before the lesson example.",
+        body: "Use this video to keep resistance attached to the route and its geometry before the worked example begins.",
+        caption: "Video explainer: route length, route width, material effects, and why resistance is not a battery property before the lesson example.",
         highlights: [
-          "Ultrasound is sound above the usual human hearing range",
-          "It still obeys the ordinary sound-wave relation lambda = v / f",
-          "Boundary reflection use only makes sense after the frequency band is classified correctly",
+          "Resistance belongs to the route",
+          "Longer routes increase resistance while wider routes reduce it",
+          "Changing the wire can change resistance even when the source stays the same",
         ],
-        checkForUnderstanding: "Before explaining why a medical scanner can use ultrasound, what should you classify first: the frequency band or the application story?",
+        checkForUnderstanding: "If the battery stays the same but the wire becomes longer and thinner, which part of the circuit story changed first?",
         video_url: staticVideoAssetUrl("M9_L4", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L4", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L4", "captions.vtt"),
       };
     case "M9_L5":
       return {
-        body: "Use this video to treat echo timing as a round-trip story before the worked example begins.",
-        caption: "Video explainer: pulse-echo timing, divide-by-two depth reading, and multi-echo scan mapping before the lesson example.",
+        body: "Use this video to keep Ohm's law tied to fixed conditions and to use the I-V graph as the honesty check before the worked example begins.",
+        caption: "Video explainer: V = I R, fixed-variable logic, and I-V graph evidence for constant resistance before the lesson example.",
         highlights: [
-          "Echo time records an out-and-back journey",
-          "Depth uses v t / 2, not just v t",
-          "A scan image comes from many ordered echoes, not one isolated return",
+          "At fixed resistance, larger voltage gives larger current",
+          "At fixed voltage, larger resistance gives smaller current",
+          "A straight origin-passing I-V graph is the constant-resistance clue",
         ],
-        checkForUnderstanding: "When an echo returns later than another echo, what should you decide first before using the formula: which path was longer, or which number looks larger?",
+        checkForUnderstanding: "Before you trust one constant resistance value for a whole component, what graph feature should you check first?",
         video_url: staticVideoAssetUrl("M9_L5", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L5", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L5", "captions.vtt"),
       };
     case "M9_L6":
       return {
-        body: "Use this video to read the Doppler shift sign before naming the motion direction before the worked example begins.",
-        caption: "Video explainer: transmitted-versus-returned comparison, shift sign, and ultrasound flow reading before the lesson example.",
+        body: "Use this video to identify the valid series or parallel block before the worked example begins.",
+        caption: "Video explainer: same-current chains, same-voltage branches, and mixed-network reduction before the lesson example.",
         highlights: [
-          "Compare returned frequency with transmitted frequency first",
-          "A higher returned frequency means motion toward the probe",
-          "A lower returned frequency means motion away from the probe",
+          "Series rules apply only on one uninterrupted path",
+          "Parallel rules apply only across the same pair of junctions",
+          "Mixed circuits are solved section by section, not with one global slogan",
         ],
-        checkForUnderstanding: "If the returned frequency is lower than the transmitted frequency, what should you name first: the sign of the shift or the medical meaning?",
+        checkForUnderstanding: "In a circuit with one series resistor feeding a parallel pair, which section should be reduced first and why?",
         video_url: staticVideoAssetUrl("M9_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L6", "captions.vtt"),

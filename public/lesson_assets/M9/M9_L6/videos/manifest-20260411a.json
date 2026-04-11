@@ -1,0 +1,29 @@
+{
+  "lesson_id": "M9_L6",
+  "module": "M9",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 627.38,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: reduce the valid parallel block first, then rebuild the source current and the branch values in order.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "series_rule",
+    "parallel_rule",
+    "mixed_reduction",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\06_m9_l6_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\06_m9_l6_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\06_m9_l6_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\06_m9_l6_preworked_explainer\\thumbnail.png"
+  }
+}
