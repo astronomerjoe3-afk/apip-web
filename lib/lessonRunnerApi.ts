@@ -18469,6 +18469,36 @@ function preWorkedExampleVideoMeta(code: string): {
       "thumbnail.png": "thumbnail-20260410d.png",
       "captions.vtt": "captions-20260410d.vtt",
     },
+    M9_L1: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L2: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L3: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L4: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L5: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
+    M9_L6: {
+      "final.mp4": "final-20260411a.mp4",
+      "thumbnail.png": "thumbnail-20260411a.png",
+      "captions.vtt": "captions-20260411a.vtt",
+    },
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
     const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
@@ -19571,6 +19601,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M8_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M8_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M8_L6", "captions.vtt"),
+      };
+    case "M9_L1":
+      return {
+        body: "Use this video to separate moving charge, current, and the complete-loop condition before the worked example begins.",
+        caption: "Video explainer: moving carriers, checkpoint current, and complete-circuit logic before the lesson example.",
+        highlights: [
+          "Charge is carried by moving carriers in the loop",
+          "Current is the rate measured at a checkpoint, not the charge itself",
+          "A steady current needs one complete conducting path",
+        ],
+        checkForUnderstanding: "If the switch opens while charge carriers are still present in the wire, what part of the circuit story collapses first?",
+        video_url: staticVideoAssetUrl("M9_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L1", "captions.vtt"),
+      };
+    case "M9_L2":
+      return {
+        body: "Use this video to keep current tied to charge-per-second reasoning before the worked example begins.",
+        caption: "Video explainer: checkpoint flow rate, ampere meaning, and amount-versus-rate separation before the lesson example.",
+        highlights: [
+          "Current is charge passing a point each second",
+          "1 A means 1 C per second",
+          "The same total charge can still give different currents if the times differ",
+        ],
+        checkForUnderstanding: "If two wires move the same total charge but one does it faster, which quantity must be larger first?",
+        video_url: staticVideoAssetUrl("M9_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L2", "captions.vtt"),
+      };
+    case "M9_L3":
+      return {
+        body: "Use this video to keep voltage as energy per charge and separate it from current before the worked example begins.",
+        caption: "Video explainer: joules-per-coulomb meaning, source boost per carrier, and voltage-current separation before the lesson example.",
+        highlights: [
+          "Voltage is energy transferred per unit charge",
+          "A source gives each coulomb an energy boost",
+          "Voltage and current are linked in circuits, but they are not the same quantity",
+        ],
+        checkForUnderstanding: "When a source is labeled 12 V, what should you read first: energy per coulomb or current in the loop?",
+        video_url: staticVideoAssetUrl("M9_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L3", "captions.vtt"),
+      };
+    case "M9_L4":
+      return {
+        body: "Use this video to keep resistance attached to the route and its geometry before the worked example begins.",
+        caption: "Video explainer: route length, route width, material effects, and why resistance is not a battery property before the lesson example.",
+        highlights: [
+          "Resistance belongs to the route",
+          "Longer routes increase resistance while wider routes reduce it",
+          "Changing the wire can change resistance even when the source stays the same",
+        ],
+        checkForUnderstanding: "If the battery stays the same but the wire becomes longer and thinner, which part of the circuit story changed first?",
+        video_url: staticVideoAssetUrl("M9_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L4", "captions.vtt"),
+      };
+    case "M9_L5":
+      return {
+        body: "Use this video to keep Ohm's law tied to fixed conditions and to use the I-V graph as the honesty check before the worked example begins.",
+        caption: "Video explainer: V = I R, fixed-variable logic, and I-V graph evidence for constant resistance before the lesson example.",
+        highlights: [
+          "At fixed resistance, larger voltage gives larger current",
+          "At fixed voltage, larger resistance gives smaller current",
+          "A straight origin-passing I-V graph is the constant-resistance clue",
+        ],
+        checkForUnderstanding: "Before you trust one constant resistance value for a whole component, what graph feature should you check first?",
+        video_url: staticVideoAssetUrl("M9_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L5", "captions.vtt"),
+      };
+    case "M9_L6":
+      return {
+        body: "Use this video to identify the valid series or parallel block before the worked example begins.",
+        caption: "Video explainer: same-current chains, same-voltage branches, and mixed-network reduction before the lesson example.",
+        highlights: [
+          "Series rules apply only on one uninterrupted path",
+          "Parallel rules apply only across the same pair of junctions",
+          "Mixed circuits are solved section by section, not with one global slogan",
+        ],
+        checkForUnderstanding: "In a circuit with one series resistor feeding a parallel pair, which section should be reduced first and why?",
+        video_url: staticVideoAssetUrl("M9_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M9_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M9_L6", "captions.vtt"),
       };
     case "A2_L1":
       return {

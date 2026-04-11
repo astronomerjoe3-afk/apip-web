@@ -1,0 +1,27 @@
+{
+  "lesson_id": "M9_L3",
+  "module": "M9",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 478.5,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: read voltage as energy per coulomb first, then use V = E / Q or E = V Q without letting voltage turn into current language.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "volts_not_amps",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\03_m9_l3_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\03_m9_l3_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\03_m9_l3_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_m9_preworked_v1\\videos\\03_m9_l3_preworked_explainer\\thumbnail.png"
+  }
+}
