@@ -1,0 +1,417 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.530
+Lesson 4 takes the single-wire motor effect and builds a machine out of it.
+
+2
+00:00:06.530 --> 00:00:13.060
+A current loop in a magnetic field experiences forces on opposite sides of the coil.
+
+3
+00:00:13.060 --> 00:00:19.590
+Those forces act in opposite directions and form a turning pair, so the coil rotates instead of sliding away.
+
+4
+00:00:19.590 --> 00:00:26.120
+Once students really see that pair, later details become easier.
+
+5
+00:00:26.120 --> 00:00:32.650
+More turns mean more repeating force pairs, larger current means stronger forces, and a stronger field means stronger turning effect.
+
+6
+00:00:32.650 --> 00:00:39.180
+The commutator then keeps the overall rotation direction going instead of letting the coil stall.
+
+7
+00:00:39.180 --> 00:00:45.710
+This lesson stays rich by keeping those ideas tied together instead of teaching them as disconnected motor facts.
+
+8
+00:00:45.710 --> 00:00:52.240
+Keep this takeaway in view: A motor is easiest to understand when it is read as torque built from two magnetic side-kicks.
+
+9
+00:00:52.240 --> 00:00:58.770
+Opposite sides means opposite forces.
+
+10
+00:00:58.770 --> 00:01:05.300
+The two active sides of the coil feel forces in opposite directions.
+
+11
+00:01:05.300 --> 00:01:11.830
+Combined result means turning effect.
+
+12
+00:01:11.830 --> 00:01:18.360
+The pair of forces makes torque about the axle instead of one straight translation.
+
+13
+00:01:18.360 --> 00:01:24.809
+This diagram matters because it turns the motor from a named device into a readable mechanism.
+
+14
+00:01:24.809 --> 00:01:31.258
+The left side of the loop is pushed one way and the right side is pushed the opposite way.
+
+15
+00:01:31.258 --> 00:01:37.707
+Because those forces act at different sides of the axle, they produce a turning effect.
+
+16
+00:01:37.707 --> 00:01:44.156
+That is the heart of the motor.
+
+17
+00:01:44.156 --> 00:01:50.604
+The commutator then changes the current connection each half-turn so the torque keeps helping the same overall rotation.
+
+18
+00:01:50.604 --> 00:01:57.053
+Once the learner has this picture, the worked example's turning-moment formula feels like a compact version of the diagram rather than a sudden new topic.
+
+19
+00:01:57.053 --> 00:02:03.502
+Keep this takeaway in view: The spin-frame picture makes the motor a force-pair story instead of a mystery device.
+
+20
+00:02:03.502 --> 00:02:09.951
+Left side: One side of the loop feels one magnetic side-kick.
+
+21
+00:02:09.951 --> 00:02:16.400
+Right side: The opposite side feels the opposite magnetic side-kick.
+
+22
+00:02:16.400 --> 00:02:22.495
+A door analogy helps because it emphasizes how separated forces cause turning.
+
+23
+00:02:22.495 --> 00:02:28.591
+If one side of a door is pushed one way while another force acts on the opposite side, the result is not just translation of the whole door.
+
+24
+00:02:28.591 --> 00:02:34.686
+The hinge makes the result a turn.
+
+25
+00:02:34.686 --> 00:02:40.782
+A motor coil is similar in spirit.
+
+26
+00:02:40.782 --> 00:02:46.877
+The magnetic field produces opposite forces on opposite sides of the loop, and the axle plays the role of the hinge.
+
+27
+00:02:46.877 --> 00:02:52.973
+This analogy gives the learner a physical feel for torque before the mathematics is added.
+
+28
+00:02:52.973 --> 00:02:59.068
+Keep this takeaway in view: The door analogy helps because it turns the abstract idea of torque into an everyday force-pair story.
+
+29
+00:02:59.068 --> 00:03:05.164
+Separated pushes means force pair.
+
+30
+00:03:05.164 --> 00:03:11.259
+Two forces applied at different sides can create a turn even if the net straight push is not the point.
+
+31
+00:03:11.259 --> 00:03:17.355
+Hinge means like the axle.
+
+32
+00:03:17.355 --> 00:03:23.450
+The axle is the turning reference about which the coil rotates.
+
+33
+00:03:23.450 --> 00:03:28.345
+At maximum turning effect, the torque on a rectangular coil can be written as tau equals B I N A.
+
+34
+00:03:28.345 --> 00:03:33.241
+The symbols capture what the diagram has already shown.
+
+35
+00:03:33.241 --> 00:03:38.136
+A stronger field means stronger magnetic forces.
+
+36
+00:03:38.136 --> 00:03:43.031
+A larger current means stronger forces on the coil sides.
+
+37
+00:03:43.031 --> 00:03:47.927
+More turns mean more copies of the same force-pair effect.
+
+38
+00:03:47.927 --> 00:03:52.822
+A larger area gives the forces more leverage for turning.
+
+39
+00:03:52.822 --> 00:03:57.717
+The formula therefore belongs to the machine picture.
+
+40
+00:03:57.717 --> 00:04:02.613
+It does not replace it.
+
+41
+00:04:02.613 --> 00:04:07.508
+Students who remember that usually handle motor questions much more confidently.
+
+42
+00:04:07.508 --> 00:04:12.403
+Keep this takeaway in view: The coil-torque formula is easiest to trust when it is read as a summary of the force-pair mechanism.
+
+43
+00:04:12.403 --> 00:04:17.299
+Why B matters: A stronger field gives stronger magnetic forces on the active sides.
+
+44
+00:04:17.299 --> 00:04:22.194
+Why N matters: More turns mean more loop segments contributing to the same turning effect.
+
+45
+00:04:22.194 --> 00:04:27.089
+tau = B I N A.
+
+46
+00:04:27.089 --> 00:04:31.985
+larger B, I, N, or A => larger turning effect.
+
+47
+00:04:31.985 --> 00:04:36.880
+Use the torque formula after you have identified why the coil turns at all.
+
+48
+00:04:36.880 --> 00:04:42.082
+A dependable routine for Lesson 4 has four moves.
+
+49
+00:04:42.082 --> 00:04:47.283
+First identify the two active sides of the coil.
+
+50
+00:04:47.283 --> 00:04:52.485
+Second state that the sides feel opposite magnetic forces.
+
+51
+00:04:52.485 --> 00:04:57.687
+Third describe the result as torque about the axle.
+
+52
+00:04:57.687 --> 00:05:02.888
+Fourth use the formula and, if needed, explain the commutator as the reason the turning keeps the same overall sense.
+
+53
+00:05:02.888 --> 00:05:08.090
+This order matters because the formula alone does not explain why the motor rotates.
+
+54
+00:05:08.090 --> 00:05:13.292
+The mechanism has to stay visible.
+
+55
+00:05:13.292 --> 00:05:18.493
+Keep this takeaway in view: Pair, then torque, then control is the safest reasoning pattern for motor questions.
+
+56
+00:05:18.493 --> 00:05:23.695
+Step 1 means find the active sides.
+
+57
+00:05:23.695 --> 00:05:28.897
+The opposite sides in the field are the important current-carrying sections.
+
+58
+00:05:28.897 --> 00:05:34.098
+Step 2 means state the force pair.
+
+59
+00:05:34.098 --> 00:05:39.300
+Each side feels a magnetic force in the opposite direction.
+
+60
+00:05:39.300 --> 00:05:44.748
+A motor is not best explained by saying one magnetic force pushes the coil around.
+
+61
+00:05:44.748 --> 00:05:50.196
+That picture hides the real cause of rotation.
+
+62
+00:05:50.196 --> 00:05:55.644
+The real cause is that opposite sides of the coil feel opposite forces, and those forces act at different positions relative to the axle.
+
+63
+00:05:55.644 --> 00:06:01.092
+That is what creates the turning effect.
+
+64
+00:06:01.092 --> 00:06:06.540
+Once the learner sees that, torque becomes a natural word instead of a forced vocabulary item.
+
+65
+00:06:06.540 --> 00:06:11.988
+Keep this takeaway in view: Motors turn because of a force pair, not because of one force pushing the coil around.
+
+66
+00:06:11.988 --> 00:06:17.436
+Wrong picture means one push.
+
+67
+00:06:17.436 --> 00:06:22.884
+A single-force picture misses why the motion is rotational.
+
+68
+00:06:22.884 --> 00:06:28.332
+Right picture means force pair.
+
+69
+00:06:28.332 --> 00:06:33.780
+Opposite forces on opposite sides create a turning moment.
+
+70
+00:06:33.780 --> 00:06:39.179
+Without the commutator, the current direction in the coil would not swap at the right moment, and the torque would no longer keep helping the same overall rotation.
+
+71
+00:06:39.179 --> 00:06:44.578
+The coil could stall or rock instead of spinning continuously.
+
+72
+00:06:44.578 --> 00:06:49.977
+That is why the commutator is not just a hardware detail.
+
+73
+00:06:49.977 --> 00:06:55.376
+It is part of the reasoning chain that explains continuous motor action.
+
+74
+00:06:55.376 --> 00:07:00.775
+Giving it its own scene keeps the lesson from ending too early.
+
+75
+00:07:00.775 --> 00:07:06.174
+Keep this takeaway in view: The commutator matters because it keeps the torque helping rather than cancelling.
+
+76
+00:07:06.174 --> 00:07:11.573
+What it does means swaps connections.
+
+77
+00:07:11.573 --> 00:07:16.972
+The commutator reverses the current connection each half-turn.
+
+78
+00:07:16.972 --> 00:07:22.371
+Why that helps means torque keeps assisting.
+
+79
+00:07:22.371 --> 00:07:27.770
+The turning effect stays in the same overall rotational sense.
+
+80
+00:07:27.770 --> 00:07:31.236
+Ask four checks.
+
+81
+00:07:31.236 --> 00:07:34.702
+Do opposite sides of the coil feel opposite forces?
+
+82
+00:07:34.702 --> 00:07:38.168
+Yes.
+
+83
+00:07:38.168 --> 00:07:41.634
+Do those forces create torque rather than one simple sideways motion?
+
+84
+00:07:41.634 --> 00:07:45.100
+Yes.
+
+85
+00:07:45.100 --> 00:07:48.566
+Do larger current and more turns increase the turning effect?
+
+86
+00:07:48.566 --> 00:07:52.032
+Yes.
+
+87
+00:07:52.032 --> 00:07:55.498
+And does the commutator help keep the same overall rotation direction?
+
+88
+00:07:55.498 --> 00:07:58.964
+Yes.
+
+89
+00:07:58.964 --> 00:08:02.430
+Those checks confirm that the learner is ready for the motor calculation that follows.
+
+90
+00:08:02.430 --> 00:08:05.896
+Keep this takeaway in view: The quick check confirms that motor torque is now being read as a mechanism, not a slogan.
+
+91
+00:08:05.896 --> 00:08:09.362
+Coil check means opposite forces.
+
+92
+00:08:09.362 --> 00:08:12.828
+The two active sides of the loop feel forces in opposite directions.
+
+93
+00:08:12.828 --> 00:08:16.294
+Torque check means turning effect.
+
+94
+00:08:16.294 --> 00:08:19.760
+The result is rotation about the axle, not simple translation.
+
+95
+00:08:19.760 --> 00:08:25.896
+The worked example that follows is easier if you start with the mechanism instead of the equation.
+
+96
+00:08:25.896 --> 00:08:32.032
+Opposite sides of the coil feel opposite magnetic forces, those forces create torque, and the size of that torque grows with field strength, current, turn count, and coil area.
+
+97
+00:08:32.032 --> 00:08:38.168
+Once those ideas are active, the turning-moment formula looks like a summary rather than a surprise.
+
+98
+00:08:38.168 --> 00:08:44.304
+That is exactly the mental state the example needs.
+
+99
+00:08:44.304 --> 00:08:50.440
+Keep this takeaway in view: The worked example becomes shorter once the motor is already understood as a force-pair machine.
+
+100
+00:08:50.440 --> 00:08:56.576
+First move: Say why the coil turns rather than slides.
+
+101
+00:08:56.576 --> 00:09:02.712
+Second move: Identify which factors make the turning effect larger.
+
+102
+00:09:02.712 --> 00:09:08.848
+identify the opposite-force pair.
+
+103
+00:09:08.848 --> 00:09:14.984
+translate the pair into torque about the axle.
+
+104
+00:09:14.984 --> 00:09:21.120
+Do not start with the formula before the turning-pair mechanism is visible.

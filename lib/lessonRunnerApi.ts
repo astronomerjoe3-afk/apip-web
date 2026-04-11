@@ -18456,7 +18456,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410m10";
+  const assetVersion = "20260411m10b";
   const effectiveCode = String(code || "").trim().toUpperCase().replace(/^M11_/, "M13_");
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
@@ -18498,6 +18498,36 @@ function preWorkedExampleVideoMeta(code: string): {
       "final.mp4": "final-20260411a.mp4",
       "thumbnail.png": "thumbnail-20260411a.png",
       "captions.vtt": "captions-20260411a.vtt",
+    },
+    M12_L1: {
+      "final.mp4": "final-20260411m10b.mp4",
+      "thumbnail.png": "thumbnail-20260411m10b.png",
+      "captions.vtt": "captions-20260411m10b.vtt",
+    },
+    M12_L2: {
+      "final.mp4": "final-20260411m10b.mp4",
+      "thumbnail.png": "thumbnail-20260411m10b.png",
+      "captions.vtt": "captions-20260411m10b.vtt",
+    },
+    M12_L3: {
+      "final.mp4": "final-20260411m10b.mp4",
+      "thumbnail.png": "thumbnail-20260411m10b.png",
+      "captions.vtt": "captions-20260411m10b.vtt",
+    },
+    M12_L4: {
+      "final.mp4": "final-20260411m10b.mp4",
+      "thumbnail.png": "thumbnail-20260411m10b.png",
+      "captions.vtt": "captions-20260411m10b.vtt",
+    },
+    M12_L5: {
+      "final.mp4": "final-20260411m10b.mp4",
+      "thumbnail.png": "thumbnail-20260411m10b.png",
+      "captions.vtt": "captions-20260411m10b.vtt",
+    },
+    M12_L6: {
+      "final.mp4": "final-20260411m10b.mp4",
+      "thumbnail.png": "thumbnail-20260411m10b.png",
+      "captions.vtt": "captions-20260411m10b.vtt",
     },
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
@@ -19688,84 +19718,84 @@ function preWorkedExampleVideoMeta(code: string): {
       };
     case "M10_L1":
       return {
-        body: "Use this video to separate moving charge, current, and the closed-loop condition before the worked example begins.",
-        caption: "Video explainer: charge carriers, complete-loop current, and charge conservation before the lesson example.",
+        body: "Use this video to separate field pattern, local direction, and field strength before the worked example begins.",
+        caption: "Video explainer: magnetic maps, compass-tangent reading, circular wire fields, and strength-from-spacing reasoning before the lesson example.",
         highlights: [
-          "Charge is represented by the moving carriers in the loop",
-          "A steady current needs a complete conducting path",
-          "Components transfer energy but do not use the charge up",
+          "Field lines are a map of the magnetic field, not literal travel tracks",
+          "The local field direction is read from the tangent or compass clue at one point",
+          "Closer line spacing means a stronger field region",
         ],
-        checkForUnderstanding: "If the switch opens, which idea should you check first before talking about current: the loop path, or the number of carriers already in the wire?",
+        checkForUnderstanding: "If two points sit on the same field map but one has much closer line spacing, what changes first and what does not?",
         video_url: staticVideoAssetUrl("M10_L1", "final.mp4"),
         poster_url: staticVideoAssetUrl("M10_L1", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M10_L1", "captions.vtt"),
       };
     case "M10_L2":
       return {
-        body: "Use this video to read current as charge per second before the worked example begins.",
-        caption: "Video explainer: current as rate, Q = I t, and seconds conversion before the lesson example.",
+        body: "Use this video to explain electromagnets through current, turns, and core reinforcement before the worked example begins.",
+        caption: "Video explainer: solenoid concentration, turn-count comparison, current-strength logic, and soft-iron reinforcement before the lesson example.",
         highlights: [
-          "Current is the rate of charge flow past a point",
-          "1 A means 1 C passes a checkpoint each second",
-          "Use Q = I t with time in seconds",
+          "A solenoid concentrates the field from many loops into one magnet-like pattern",
+          "Increasing current or turn count strengthens the electromagnet",
+          "A soft-iron core strengthens the same field story rather than replacing it",
         ],
-        checkForUnderstanding: "If the same total charge passes in half the time, what should happen first to the current?",
+        checkForUnderstanding: "If current stays fixed but the number of turns doubles, what should happen to the electromagnet and why?",
         video_url: staticVideoAssetUrl("M10_L2", "final.mp4"),
         poster_url: staticVideoAssetUrl("M10_L2", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M10_L2", "captions.vtt"),
       };
     case "M10_L3":
       return {
-        body: "Use this video to treat voltage as energy per charge before the worked example begins.",
-        caption: "Video explainer: V = E / Q, E = VQ, and source boost per carrier before the lesson example.",
+        body: "Use this video to keep the motor effect as a sideways force story before the worked example begins.",
+        caption: "Video explainer: current-field crossing, force direction, BIL sin(theta), and reversal checks before the lesson example.",
         highlights: [
-          "Voltage is energy transferred per unit charge",
-          "Use V = E / Q when the per-charge value is unknown",
-          "Do not swap volts and amps in the explanation",
+          "The magnetic force on a current-carrying wire is sideways to both current and field",
+          "The force is largest when the conductor is at 90 degrees to the field",
+          "Reversing the current or the field reverses the force direction",
         ],
-        checkForUnderstanding: "If each coulomb gets a larger energy boost from the source, which quantity should increase first: the voltage or the charge itself?",
+        checkForUnderstanding: "Before using the left-hand rule, which three directions must be kept separate first?",
         video_url: staticVideoAssetUrl("M10_L3", "final.mp4"),
         poster_url: staticVideoAssetUrl("M10_L3", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M10_L3", "captions.vtt"),
       };
     case "M10_L4":
       return {
-        body: "Use this video to keep resistance on the route rather than on the battery before the worked example begins.",
-        caption: "Video explainer: route-owned resistance, length-width comparison, and wire ranking before the lesson example.",
+        body: "Use this video to build motor torque from paired magnetic forces before the worked example begins.",
+        caption: "Video explainer: opposite side-kicks, turning pairs, coil torque, and commutator logic before the lesson example.",
         highlights: [
-          "Resistance belongs to the route and its material and geometry",
-          "Longer wires usually have greater resistance",
-          "Wider wires usually have lower resistance",
+          "Opposite sides of a current loop feel opposite magnetic forces",
+          "Those forces create a turning moment rather than one straight push",
+          "The commutator keeps the overall rotation direction consistent",
         ],
-        checkForUnderstanding: "If two wires use the same source but one route is longer and thinner, which part of the circuit story should you blame for the larger resistance?",
+        checkForUnderstanding: "If a motor coil already carries current, why is the commutator still needed?",
         video_url: staticVideoAssetUrl("M10_L4", "final.mp4"),
         poster_url: staticVideoAssetUrl("M10_L4", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M10_L4", "captions.vtt"),
       };
     case "M10_L5":
       return {
-        body: "Use this video to lock the fixed quantity before applying Ohm's law in the worked example.",
-        caption: "Video explainer: I = V / R, fixed-variable comparisons, and ohmic-route reasoning before the lesson example.",
+        body: "Use this video to tie induction to changing flux before the worked example begins.",
+        caption: "Video explainer: changing magnetic thread, Faraday-style rate thinking, turn-count effects, and generator links before the lesson example.",
         highlights: [
-          "For an ohmic route, current depends on both voltage and resistance",
-          "At fixed resistance, larger voltage gives larger current",
-          "At fixed voltage, larger resistance gives smaller current",
+          "Induction needs changing magnetic flux, not just a nearby magnetic field",
+          "Faster change and more turns increase the induced emf",
+          "A generator is repeated induction produced by continuous rotation",
         ],
-        checkForUnderstanding: "Before you predict how the current changes, what should you name first: the fixed quantity, or the final answer?",
+        checkForUnderstanding: "If a magnet sits motionless inside a coil, which part of the induction story fails first?",
         video_url: staticVideoAssetUrl("M10_L5", "final.mp4"),
         poster_url: staticVideoAssetUrl("M10_L5", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M10_L5", "captions.vtt"),
       };
     case "M10_L6":
       return {
-        body: "Use this video to keep charge, current, voltage, resistance, and power on separate ledger lines before the worked example begins.",
-        caption: "Video explainer: same-source different-loop comparisons, current from resistance, and power reading before the lesson example.",
+        body: "Use this video to link transformers, turns ratio, and transmission efficiency before the worked example begins.",
+        caption: "Video explainer: primary-secondary flux linkage, voltage ratio, ideal power balance, and grid-loss reasoning before the lesson example.",
         highlights: [
-          "The same source voltage can produce different currents in different loops",
-          "Use I = V / R before comparing power",
-          "Power is the rate of energy transfer, not another name for current",
+          "Transformers link two separate circuits through changing flux in the core",
+          "Voltage ratio follows turns ratio in the school model",
+          "Higher transmission voltage means lower current for the same power and lower cable losses",
         ],
-        checkForUnderstanding: "If the source voltage stays the same but the resistance falls, which two output quantities should you expect to increase first?",
+        checkForUnderstanding: "If the transmitted power stays the same but the transmission voltage rises, which line quantity should fall first?",
         video_url: staticVideoAssetUrl("M10_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M10_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M10_L6", "captions.vtt"),
