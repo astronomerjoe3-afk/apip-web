@@ -18616,7 +18616,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260410d";
+  const assetVersion = "20260412m11a";
   const effectiveCode = String(code || "").trim().toUpperCase().replace(/^M11_/, "M13_");
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
@@ -18658,6 +18658,36 @@ function preWorkedExampleVideoMeta(code: string): {
       "final.mp4": "final-20260411a.mp4",
       "thumbnail.png": "thumbnail-20260411a.png",
       "captions.vtt": "captions-20260411a.vtt",
+    },
+    M13_L1: {
+      "final.mp4": "final-20260412m11a.mp4",
+      "thumbnail.png": "thumbnail-20260412m11a.png",
+      "captions.vtt": "captions-20260412m11a.vtt",
+    },
+    M13_L2: {
+      "final.mp4": "final-20260412m11a.mp4",
+      "thumbnail.png": "thumbnail-20260412m11a.png",
+      "captions.vtt": "captions-20260412m11a.vtt",
+    },
+    M13_L3: {
+      "final.mp4": "final-20260412m11a.mp4",
+      "thumbnail.png": "thumbnail-20260412m11a.png",
+      "captions.vtt": "captions-20260412m11a.vtt",
+    },
+    M13_L4: {
+      "final.mp4": "final-20260412m11a.mp4",
+      "thumbnail.png": "thumbnail-20260412m11a.png",
+      "captions.vtt": "captions-20260412m11a.vtt",
+    },
+    M13_L5: {
+      "final.mp4": "final-20260412m11a.mp4",
+      "thumbnail.png": "thumbnail-20260412m11a.png",
+      "captions.vtt": "captions-20260412m11a.vtt",
+    },
+    M13_L6: {
+      "final.mp4": "final-20260412m11a.mp4",
+      "thumbnail.png": "thumbnail-20260412m11a.png",
+      "captions.vtt": "captions-20260412m11a.vtt",
     },
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
@@ -20265,6 +20295,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("A1_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("A1_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("A1_L6", "captions.vtt"),
+      };
+    case "M13_L1":
+      return {
+        body: "Use this video to separate atomic number, mass number, and charge state before the worked example begins.",
+        caption: "Video explainer: nucleus identity, proton-neutron-electron ledgers, and ion-versus-element logic before the lesson example.",
+        highlights: [
+          "Element identity follows proton number in the nucleus",
+          "Mass number counts protons and neutrons together",
+          "Changing electrons changes charge state without changing the element",
+        ],
+        checkForUnderstanding: "If one more electron is added while the nucleus stays the same, which ledger changes first and which ledger does not?",
+        video_url: staticVideoAssetUrl("M13_L1", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M13_L1", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M13_L1", "captions.vtt"),
+      };
+    case "M13_L2":
+      return {
+        body: "Use this video to keep proton number fixed before discussing isotope differences in the worked example.",
+        caption: "Video explainer: same-element isotope comparison, neutron-number differences, and stability separation before the lesson example.",
+        highlights: [
+          "Same proton count means the same element family",
+          "Different neutron counts create isotopes of that element",
+          "Stability can differ without changing the element identity",
+        ],
+        checkForUnderstanding: "If two nuclei have the same proton number but different mass numbers, what should you decide about identity before saying anything about stability?",
+        video_url: staticVideoAssetUrl("M13_L2", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M13_L2", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M13_L2", "captions.vtt"),
+      };
+    case "M13_L3":
+      return {
+        body: "Use this video to compare alpha, beta-minus, and gamma by both nuclear change and shielding before the worked example begins.",
+        caption: "Video explainer: decay-type signals, count-change bookkeeping, penetration order, and shielding logic before the lesson example.",
+        highlights: [
+          "Alpha changes both mass number and atomic number",
+          "Beta-minus changes atomic number while mass number stays the same",
+          "Gamma changes energy state without changing the nuclear counts",
+        ],
+        checkForUnderstanding: "Which is more dangerous to mix up first in a decay question: the shielding order or the nuclear-count change?",
+        video_url: staticVideoAssetUrl("M13_L3", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M13_L3", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M13_L3", "captions.vtt"),
+      };
+    case "M13_L4":
+      return {
+        body: "Use this video to read half-life as repeated halving of what remains before the worked example begins.",
+        caption: "Video explainer: equal-interval halving, decay-curve reading, remaining fraction, and large-sample predictability before the lesson example.",
+        highlights: [
+          "Half-life halves what remains, not a fixed number each round",
+          "Large samples show a stable halving pattern even though single nuclei are random",
+          "The graph and the crowd picture should tell the same decay story",
+        ],
+        checkForUnderstanding: "If three half-lives pass, which idea should you trust first: subtracting three equal chunks, or halving what remains three times?",
+        video_url: staticVideoAssetUrl("M13_L4", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M13_L4", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M13_L4", "captions.vtt"),
+      };
+    case "M13_L5":
+      return {
+        body: "Use this video to subtract background before judging detector evidence in the worked example.",
+        caption: "Video explainer: measured count rate, background radiation, corrected source reading, and detector reasoning before the lesson example.",
+        highlights: [
+          "Background radiation is always part of the raw reading",
+          "Corrected source count equals measured count minus background",
+          "A non-zero detector reading alone does not prove a strong source",
+        ],
+        checkForUnderstanding: "If two raw readings come from different background conditions, what should you correct first before comparing source activity?",
+        video_url: staticVideoAssetUrl("M13_L5", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M13_L5", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M13_L5", "captions.vtt"),
+      };
+    case "M13_L6":
+      return {
+        body: "Use this video to balance nuclear equations by both mass number and atomic number before the worked example begins.",
+        caption: "Video explainer: parent-daughter bookkeeping, emitted radiation, and A-Z balancing rules before the lesson example.",
+        highlights: [
+          "Decay equations conserve mass number and atomic number",
+          "The emitted alpha, beta-minus, or gamma term is part of the bookkeeping",
+          "A change in atomic number means the daughter is a different element",
+        ],
+        checkForUnderstanding: "When a nuclear equation feels incomplete, which two ledger totals should you check before guessing the daughter nucleus?",
+        video_url: staticVideoAssetUrl("M13_L6", "final.mp4"),
+        poster_url: staticVideoAssetUrl("M13_L6", "thumbnail.png"),
+        captions_url: staticVideoAssetUrl("M13_L6", "captions.vtt"),
       };
     default:
       return null;

@@ -1,0 +1,437 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.222
+Half-life is one of the most commonly memorized but least carefully visualized ideas in radioactivity.
+
+2
+00:00:03.222 --> 00:00:06.445
+Students often know the phrase but then subtract the same fixed amount each time.
+
+3
+00:00:06.445 --> 00:00:09.668
+This lesson is here to fix that.
+
+4
+00:00:09.668 --> 00:00:12.890
+Equal half-life intervals halve what remains.
+
+5
+00:00:12.890 --> 00:00:16.112
+That means the amount removed in each step keeps changing because the sample itself keeps shrinking.
+
+6
+00:00:16.112 --> 00:00:19.335
+The lesson also needs one more layer: a single nucleus decays unpredictably, but a large sample still follows a smooth statistical pattern.
+
+7
+00:00:19.335 --> 00:00:22.558
+Keeping those ideas together makes the later calculation much more trustworthy.
+
+8
+00:00:22.558 --> 00:00:25.780
+Keep this takeaway in view: Half-life is best understood as repeated halving of what remains in a large population.
+
+9
+00:00:25.780 --> 00:00:29.002
+Equal intervals means same half-life each round.
+
+10
+00:00:29.002 --> 00:00:32.225
+The time step stays fixed even though the number decaying each round changes.
+
+11
+00:00:32.225 --> 00:00:35.448
+Population rule means halve what remains.
+
+12
+00:00:35.448 --> 00:00:38.670
+Each half-life cuts the remaining undecayed sample by half.
+
+13
+00:00:38.670 --> 00:00:45.402
+This diagram matters because it turns half-life from a phrase into a visible trend.
+
+14
+00:00:45.402 --> 00:00:52.135
+The curve drops steeply at first when many undecayed nuclei are present.
+
+15
+00:00:52.135 --> 00:00:58.868
+Later it falls more gently because there are fewer nuclei left to decay.
+
+16
+00:00:58.868 --> 00:01:05.600
+Equal horizontal steps in time correspond to halving the remaining height, not subtracting the same vertical amount each time.
+
+17
+00:01:05.600 --> 00:01:12.333
+That is exactly the habit the worked example will need.
+
+18
+00:01:12.333 --> 00:01:19.065
+Keep this takeaway in view: The curve makes it clear that half-life is a halving pattern, not a countdown staircase.
+
+19
+00:01:19.065 --> 00:01:25.798
+Equal time step: Each half-life interval is the same width along the time axis.
+
+20
+00:01:25.798 --> 00:01:32.530
+Shrinking height: The graph height represents what remains undecayed after each interval.
+
+21
+00:01:32.530 --> 00:01:37.461
+A crowd-halving analogy helps because it makes the pattern intuitive.
+
+22
+00:01:37.461 --> 00:01:42.392
+If half the people still in a hall leave every equal time round, the first exit removes many people, the next removes fewer, and the next fewer still.
+
+23
+00:01:42.392 --> 00:01:47.322
+Yet the rule has not changed.
+
+24
+00:01:47.322 --> 00:01:52.253
+The rule is always half of what remains.
+
+25
+00:01:52.253 --> 00:01:57.184
+That is exactly how half-life should be pictured.
+
+26
+00:01:57.184 --> 00:02:02.115
+The sample is not losing a fixed number each step.
+
+27
+00:02:02.115 --> 00:02:07.046
+It is losing a fixed fraction each step.
+
+28
+00:02:07.046 --> 00:02:11.977
+Keep this takeaway in view: The crowd picture makes the halving rule feel much more natural than fixed subtraction.
+
+29
+00:02:11.977 --> 00:02:16.908
+Round 1 means large drop.
+
+30
+00:02:16.908 --> 00:02:21.838
+The first halving removes many because the starting crowd is large.
+
+31
+00:02:21.838 --> 00:02:26.769
+Round 2 means smaller drop.
+
+32
+00:02:26.769 --> 00:02:31.700
+The second halving removes fewer because the crowd has already shrunk.
+
+33
+00:02:31.700 --> 00:02:37.507
+The practical rule for this lesson is that after n half-lives, the remaining sample is the original amount multiplied by one half to the power n.
+
+34
+00:02:37.507 --> 00:02:43.314
+Students do not always need to write it in that exact symbolic form, but they do need to think that way.
+
+35
+00:02:43.314 --> 00:02:49.121
+Each equal interval multiplies the remaining amount by one half again.
+
+36
+00:02:49.121 --> 00:02:54.928
+That same logic also gives the remaining fraction immediately.
+
+37
+00:02:54.928 --> 00:03:00.735
+After three half-lives, one eighth remains.
+
+38
+00:03:00.735 --> 00:03:06.542
+After four, one sixteenth remains.
+
+39
+00:03:06.542 --> 00:03:12.348
+The fraction link is part of the lesson, not an extra trick.
+
+40
+00:03:12.348 --> 00:03:18.155
+Keep this takeaway in view: The formula panel is strongest when it is read as repeated halving, not as a mysterious new pattern.
+
+41
+00:03:18.155 --> 00:03:23.962
+If time is given: Divide elapsed time by the half-life to find how many halving intervals occurred.
+
+42
+00:03:23.962 --> 00:03:29.769
+If count remains is asked: Apply the halving pattern that many times to the original count.
+
+43
+00:03:29.769 --> 00:03:35.576
+remaining amount = original x (1/2)^n.
+
+44
+00:03:35.576 --> 00:03:41.383
+n = number of half-life intervals.
+
+45
+00:03:41.383 --> 00:03:47.190
+Think in repeated halving steps even when the formula is not written explicitly.
+
+46
+00:03:47.190 --> 00:03:52.582
+A dependable routine for Lesson 4 has three moves.
+
+47
+00:03:52.582 --> 00:03:57.974
+First convert elapsed time into a number of half-life intervals.
+
+48
+00:03:57.974 --> 00:04:03.366
+Second halve the remaining sample that many times, or use the compact fraction rule.
+
+49
+00:04:03.366 --> 00:04:08.758
+Third translate the result into the requested form, such as count rate, remaining mass, or remaining fraction.
+
+50
+00:04:08.758 --> 00:04:14.150
+This order matters because students often jump straight to arithmetic without deciding how many halving steps have actually happened.
+
+51
+00:04:14.150 --> 00:04:19.542
+Keep this takeaway in view: Time, then intervals, then remaining amount is the safest half-life routine.
+
+52
+00:04:19.542 --> 00:04:24.934
+Step 1 means find n.
+
+53
+00:04:24.934 --> 00:04:30.326
+Work out how many half-life intervals fit into the elapsed time.
+
+54
+00:04:30.326 --> 00:04:35.718
+Step 2 means halve what remains.
+
+55
+00:04:35.718 --> 00:04:41.110
+Apply the halving rule to the remaining sample, not to a fixed chunk.
+
+56
+00:04:41.110 --> 00:04:45.526
+The crowd view is valuable because it makes the decaying sample feel like a shrinking population instead of an abstract graph height.
+
+57
+00:04:45.526 --> 00:04:49.941
+After one half-life, half the crowd remains.
+
+58
+00:04:49.941 --> 00:04:54.357
+After two, one quarter remains.
+
+59
+00:04:54.357 --> 00:04:58.772
+After three, one eighth remains.
+
+60
+00:04:58.772 --> 00:05:03.188
+This second representation is not separate from the graph.
+
+61
+00:05:03.188 --> 00:05:07.603
+It is the same pattern made concrete.
+
+62
+00:05:07.603 --> 00:05:12.019
+Keep this takeaway in view: The crowd view makes the fraction pattern easier to trust.
+
+63
+00:05:12.019 --> 00:05:16.434
+One half-life: Half of the original crowd remains.
+
+64
+00:05:16.434 --> 00:05:20.850
+Two half-lives: One quarter of the original crowd remains.
+
+65
+00:05:20.850 --> 00:05:26.349
+One nucleus does not carry a countdown timer that we can read.
+
+66
+00:05:26.349 --> 00:05:31.848
+Its decay is unpredictable.
+
+67
+00:05:31.848 --> 00:05:37.347
+But when a very large number of nuclei are present, the overall fraction decaying in each equal interval becomes stable enough to form the half-life pattern.
+
+68
+00:05:37.347 --> 00:05:42.846
+This distinction matters because it explains why radioactivity is random at one scale and predictable at another.
+
+69
+00:05:42.846 --> 00:05:48.344
+Keep this takeaway in view: Half-life is a large-sample statistical rule, not a personal countdown clock for one nucleus.
+
+70
+00:05:48.344 --> 00:05:53.843
+Single nucleus means random.
+
+71
+00:05:53.843 --> 00:05:59.342
+There is no exact decay schedule for one chosen nucleus.
+
+72
+00:05:59.342 --> 00:06:04.841
+Large sample means predictable trend.
+
+73
+00:06:04.841 --> 00:06:10.340
+The group follows a stable overall halving pattern.
+
+74
+00:06:10.340 --> 00:06:15.801
+Many half-life questions quietly ask for two answers at once: the remaining count and the remaining fraction.
+
+75
+00:06:15.801 --> 00:06:21.262
+The fraction is not a bonus detail.
+
+76
+00:06:21.262 --> 00:06:26.723
+It is built into the halving story.
+
+77
+00:06:26.723 --> 00:06:32.184
+If three half-lives pass, the count is one eighth of the original, whatever the original count happened to be.
+
+78
+00:06:32.184 --> 00:06:37.645
+This scene helps learners move fluently between actual numbers and fraction form.
+
+79
+00:06:37.645 --> 00:06:43.106
+Keep this takeaway in view: Remaining fraction is part of the half-life answer, not a separate topic.
+
+80
+00:06:43.106 --> 00:06:48.567
+After 1 half-life means 1/2 remains.
+
+81
+00:06:48.567 --> 00:06:54.028
+The fraction rule and the count rule tell the same story.
+
+82
+00:06:54.028 --> 00:06:59.489
+After 2 half-lives means 1/4 remains.
+
+83
+00:06:59.489 --> 00:07:04.950
+The remaining sample is one quarter of the original.
+
+84
+00:07:04.950 --> 00:07:07.853
+Ask four checks.
+
+85
+00:07:07.853 --> 00:07:10.757
+Does half-life halve what remains?
+
+86
+00:07:10.757 --> 00:07:13.660
+Yes.
+
+87
+00:07:13.660 --> 00:07:16.563
+Are the time intervals equal?
+
+88
+00:07:16.563 --> 00:07:19.467
+Yes.
+
+89
+00:07:19.467 --> 00:07:22.370
+Does three half-lives mean one eighth remains?
+
+90
+00:07:22.370 --> 00:07:25.273
+Yes.
+
+91
+00:07:25.273 --> 00:07:28.177
+And should the same fixed number be subtracted each round?
+
+92
+00:07:28.177 --> 00:07:31.080
+No.
+
+93
+00:07:31.080 --> 00:07:33.983
+Those checks show that the lesson's main correction has landed.
+
+94
+00:07:33.983 --> 00:07:36.887
+Keep this takeaway in view: The quick check confirms that the half-life story is now being read as repeated halving.
+
+95
+00:07:36.887 --> 00:07:39.790
+Pattern check means halve what remains.
+
+96
+00:07:39.790 --> 00:07:42.693
+The remaining sample is halved, not the same fixed number subtracted.
+
+97
+00:07:42.693 --> 00:07:45.597
+Interval check means equal times.
+
+98
+00:07:45.597 --> 00:07:48.500
+Half-life intervals have equal duration.
+
+99
+00:07:48.500 --> 00:07:53.544
+The worked example that follows gives an initial count rate, a half-life, and an elapsed time.
+
+100
+00:07:53.544 --> 00:07:58.587
+Start by converting time into the number of half-life intervals.
+
+101
+00:07:58.587 --> 00:08:03.631
+Then halve what remains that many times.
+
+102
+00:08:03.631 --> 00:08:08.675
+Finally state both the remaining count rate and the remaining fraction if the question wants both.
+
+103
+00:08:08.675 --> 00:08:13.718
+That route keeps the calculation faithful to the physics story.
+
+104
+00:08:13.718 --> 00:08:18.762
+Keep this takeaway in view: The worked example is easiest when halving intervals are counted before any numbers are changed.
+
+105
+00:08:18.762 --> 00:08:23.805
+First move: Work out how many half-life intervals have passed.
+
+106
+00:08:23.805 --> 00:08:28.849
+Second move: Apply the halving rule to what remains.
+
+107
+00:08:28.849 --> 00:08:33.893
+n = elapsed time / half-life.
+
+108
+00:08:33.893 --> 00:08:38.936
+remaining = original x (1/2)^n.
+
+109
+00:08:38.936 --> 00:08:43.980
+Do not subtract the same fixed amount each interval.
