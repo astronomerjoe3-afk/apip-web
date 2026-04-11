@@ -10,6 +10,7 @@ import { m7QuestionVisualMeta, m7ReflectionVisualCheck, m7ScaffoldCoreBullets, m
 import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8ScaffoldSectionVisual, m8SimulationCopy } from "./m8LessonContent";
 import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
 import { m9GeneratedConceptGateItems, m9GeneratedDiagnosticItems, m9GeneratedMasteryItems } from "./m9AssessmentBanks";
+import { m10GeneratedConceptGateItems, m10GeneratedDiagnosticItems, m10GeneratedMasteryItems } from "./m10AssessmentBanks";
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
@@ -5998,6 +5999,7 @@ function itemsFrom(lesson: UnknownRecord, key: string): UnknownRecord[] {
 function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M9_")) return m9GeneratedDiagnosticItems(code);
+  if (code.startsWith("M10_")) return m10GeneratedDiagnosticItems(code);
   if (code.startsWith("M2_")) return m2GeneratedDiagnosticItems(code);
   if (code.startsWith("M3_")) return m3GeneratedDiagnosticItems(code);
   switch (code) {
@@ -6131,6 +6133,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
 
 function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   const authored = itemsFrom(lesson, "diagnostic").map(asRecord);
   const authoredUsable = authored.filter((item) => hasUsableAssessmentAnswer(item));
   const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authoredUsable.length);
@@ -6258,6 +6261,7 @@ function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = it
 
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson))
     .filter((item) => hasUsableAssessmentAnswer(item));
   const authoredMasteryItems = filterLessonSpecificAssessmentCandidates(
@@ -7681,6 +7685,7 @@ function reviewRefs(lesson: UnknownRecord, explicitRefs: unknown[] = []): Unknow
 function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M9_")) return m9GeneratedMasteryItems(code);
+  if (code.startsWith("M10_")) return m10GeneratedMasteryItems(code);
   if (code.startsWith("M2_")) return m2GeneratedMasteryItems(code);
   if (code.startsWith("M3_")) return m3GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
@@ -7787,6 +7792,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
 function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   const code = lessonCode(lesson);
   if (code.startsWith("M9_")) return m9GeneratedConceptGateItems(code);
+  if (code.startsWith("M10_")) return m10GeneratedConceptGateItems(code);
   if (code.startsWith("M2_")) return m2GeneratedConceptGateItems(code);
   if (code.startsWith("M3_")) return m3GeneratedConceptGateItems(code);
   switch (code) {
@@ -8366,6 +8372,7 @@ function hasUsableAssessmentAnswer(item: UnknownRecord): boolean {
 
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M9_")) return m9GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -10632,10 +10639,7 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const m9WorkedExample = scaffoldM9WorkedExample(sourceCode);
   if (m9WorkedExample) return m9WorkedExample;
 
-  const code =
-    /^M10_L[1-6]$/.test(sourceCode)
-        ? sourceCode.replace(/^M10_/, "M12_")
-        : sourceCode;
+  const code = sourceCode;
   if (code.startsWith("M3_")) {
     switch (code) {
       case "M3_L1":
@@ -18079,14 +18083,13 @@ function localM9FormulaFallbacks(code: string): Array<{ standardFormula: string;
 
 function remappedLateCoreFormulaCode(code: string): string {
   const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
-  if (/^M10_L[1-6]$/.test(normalized)) return normalized.replace(/^M10_/, "M12_");
   if (/^M11_L[1-6]$/.test(normalized)) return normalized.replace(/^M11_/, "M13_");
   return normalized;
 }
 
 function preferLocalCoreFormulaCards(code: string): boolean {
   const normalized = String(code || "").trim().replace(/-/g, "_").toUpperCase();
-  if (normalized.startsWith("M9_")) return true;
+  if (normalized.startsWith("M9_") || normalized.startsWith("M10_")) return true;
   return remappedLateCoreFormulaCode(code) !== normalized;
 }
 
@@ -18641,9 +18644,11 @@ function preWorkedExampleVideoMeta(code: string): {
     },
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
-    const moduleId = lessonId.split("_", 1)[0];
-    const publishedFilename = versionedAssetFilenames[lessonId]?.[filename] ?? filename;
-    return `/lesson_assets/${moduleId}/${lessonId}/videos/${publishedFilename}?v=${assetVersion}`;
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    const assetLessonId = normalizedLessonId.replace(/^M10_/, "M12_");
+    const assetModuleId = assetLessonId.split("_", 1)[0];
+    const publishedFilename = versionedAssetFilenames[normalizedLessonId]?.[filename] ?? filename;
+    return `/lesson_assets/${assetModuleId}/${assetLessonId}/videos/${publishedFilename}?v=${assetVersion}`;
   };
   switch (code) {
     case "M1_L1":
