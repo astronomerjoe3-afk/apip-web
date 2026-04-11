@@ -124,7 +124,7 @@ const MODULE_CURRICULUM: Record<string, CurriculumModuleMeta> = {
   M9: {
     id: "M9",
     title: "Electrical Quantities and Circuits",
-    description: "Study charge, current, voltage, resistance, Ohm's law, and the behaviour of series and parallel circuits.",
+    description: "Study charge conservation, current as charge flow rate, voltage as energy per charge, resistance from material and geometry, Ohm's law and I-V characteristics, and quantitative analysis of series, parallel, and mixed circuits.",
     group: "corePhysics",
   },
   M10: {

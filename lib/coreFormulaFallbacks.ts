@@ -321,6 +321,27 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const M9_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M9_L3: [
+    { standardFormula: "V = E / Q", meaning: "Potential difference is energy transferred per unit charge.", conditions: "Use when the energy gained or lost by each coulomb is being compared.", unitsText: "V, J/C" },
+    { standardFormula: "E = VQ", meaning: "Total electrical energy transferred depends on the voltage and the charge moved.", conditions: "Use when the potential difference and the charge are known.", unitsText: "J" },
+  ],
+  M9_L4: [
+    { standardFormula: "R is proportional to length / area", meaning: "For the same material, longer wires have greater resistance and wider wires have lower resistance.", conditions: "Use when comparing route geometry rather than battery strength.", unitsText: "" },
+    { standardFormula: "resistance depends on material and geometry", meaning: "Resistance belongs to the route or component, not to the source.", conditions: "Use when explaining why the same supply can drive different currents in different wires.", unitsText: "" },
+  ],
+  M9_L5: [
+    { standardFormula: "V = IR", meaning: "For an ohmic conductor under fixed conditions, voltage, current, and resistance are linked by Ohm's law.", conditions: "Use for ohmic components when temperature and other relevant conditions are fixed.", unitsText: "V, A, ohm" },
+    { standardFormula: "straight I-V graph through the origin -> constant resistance", meaning: "A straight origin-passing I-V characteristic is the school-level clue for ohmic behaviour over the measured range.", conditions: "Use when interpreting I-V data or graph shape.", unitsText: "" },
+  ],
+  M9_L6: [
+    { standardFormula: "R_total = R1 + R2 + ...", meaning: "Series resistances add because there is one common current path through the whole chain.", conditions: "Use for valid series sections of a circuit.", unitsText: "ohm" },
+    { standardFormula: "1 / R_total = 1 / R1 + 1 / R2 + ...", meaning: "Parallel branches reduce equivalent resistance because they provide additional current routes.", conditions: "Use for valid parallel sections between the same two junctions.", unitsText: "1/ohm" },
+    { standardFormula: "I_total = I1 + I2 + ...", meaning: "At a junction, the source current equals the sum of the branch currents.", conditions: "Use when current splits or recombines in a parallel section.", unitsText: "A" },
+    { standardFormula: "voltage is the same across parallel branches", meaning: "Each branch connected between the same two junctions has the same potential difference.", conditions: "Use for parallel sections and mixed networks after the branch endpoints are identified.", unitsText: "V" },
+  ],
+};
+
 export function coreFormulaFallbacksForLesson(code: string): FormulaFallbackEntry[] {
-  return CORE_FORMULA_FALLBACKS[code] || [];
+  return M9_FORMULA_OVERRIDES[code] || CORE_FORMULA_FALLBACKS[code] || [];
 }

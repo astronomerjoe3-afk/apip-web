@@ -1,7 +1,5 @@
 "use client";
 
-import { m10SimulationCopy } from "./m10LessonContent";
-
 type UnknownRecord = Record<string, unknown>;
 
 export type M9QuestionVisualMeta = {
@@ -45,11 +43,11 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
   M9L3: {
     image_url: "/lesson_assets/M10/M10_L3/diagrams/m10-l3-lift-station.svg",
     visual_title: "Voltage is energy transferred to each coulomb",
-    visual_caption: "The source raises the energy of each unit of charge, so voltage belongs to energy per charge rather than to charge amount or current.",
+    visual_caption: "The source raises the energy of each unit of charge, and component drops share that energy story around the loop rather than changing the amount of charge present.",
     visual_callouts: [
       "Voltage is measured in joules per coulomb.",
       "A larger potential difference gives more energy to each coulomb.",
-      "Voltage and current are linked in circuits but are not the same quantity.",
+      "Source and component voltages track energy transfer, not charge loss.",
     ],
   },
   M9L4: {
@@ -57,49 +55,136 @@ const M9_VISUAL_META: Record<string, M9QuestionVisualMeta> = {
     visual_title: "Resistance belongs to the route, not to the battery",
     visual_caption: "Length, cross-sectional area, and material determine how strongly the path opposes charge flow.",
     visual_callouts: [
-      "Longer wires give greater resistance.",
-      "Wider wires give lower resistance.",
+      "For the same material, longer wires give greater resistance.",
+      "For the same material, wider wires give lower resistance.",
       "Resistance depends on material and geometry together.",
     ],
   },
   M9L5: {
     image_url: "/lesson_assets/M10/M10_L5/diagrams/m10-l5-ohmic-rule.svg",
-    visual_title: "Ohm's law links voltage, current, and resistance for ohmic conductors",
-    visual_caption: "At fixed conditions, current is proportional to voltage and inversely related to resistance for an ohmic component.",
+    visual_title: "Ohm's law and I-V characteristics show when resistance stays constant",
+    visual_caption: "At fixed conditions, an ohmic component gives a straight origin-passing I-V graph, while non-ohmic behaviour appears when the effective resistance changes.",
     visual_callouts: [
       "At fixed resistance, increasing voltage increases current.",
       "At fixed voltage, increasing resistance decreases current.",
-      "A straight I-V graph through the origin is the ohmic clue.",
+      "A straight I-V graph through the origin is the constant-resistance clue.",
     ],
   },
   M9L6: {
     image_url: "/lesson_assets/M11/M11_L4/diagrams/m11-l4-route-map.svg",
-    visual_title: "Series and parallel circuits must be read from the route structure",
-    visual_caption: "One-path chains and branch networks obey different current-and-voltage rules, so the route shape has to be identified first.",
+    visual_title: "Series, parallel, and mixed circuits must be reduced from structure first",
+    visual_caption: "One-path chains, shared-junction branches, and mixed networks obey different current-and-voltage rules, so the valid section must be identified before the calculation starts.",
     visual_callouts: [
       "Series circuits have one uninterrupted path.",
       "Parallel branches connect across the same two junctions.",
-      "Series and parallel networks do not share the same current-and-voltage rule.",
+      "Mixed circuits are solved section by section, not with one global slogan.",
     ],
   },
 };
 
-const M9_L6_SIMULATION: M9SimulationCopy = {
-  title: "Series and parallel compare lab",
-  instructions: "Switch between a one-path chain and a branching network before you decide which current-and-voltage rule to use.",
-  taskPrompt: "Compare one series route with one parallel route, then explain which quantity stays common in each circuit and how the total current changes.",
-  exploreSteps: [
-    "Start with the series route and read the one common current story.",
-    "Switch to the parallel route and read the common branch-voltage story.",
-    "Change one resistor and compare how the source current responds in each network.",
-  ],
-  watchFor: [
-    "Series circuits keep one common current through the chain.",
-    "Parallel branches share the same potential difference across matching junctions.",
-    "Adding or removing branches changes the total behaviour of the whole circuit.",
-  ],
-  tryFirst: "Start with two equal resistors in series on one supply, then switch the same two resistors into parallel and compare the source current before saying anything about brightness or layout.",
-  takeaway: "Circuit behaviour stays much safer when the learner identifies the route structure first and only then chooses the current-and-voltage rule.",
+const M9_SIMULATION_COPY: Record<string, M9SimulationCopy> = {
+  M9_L1: {
+    title: "Complete-loop current ledger",
+    instructions: "Open and close the route, then compare the current before and after the components while keeping charge conservation separate from energy transfer.",
+    taskPrompt: "Use the switch, source, and component sliders to test whether one-path current changes position or only stops when the route breaks.",
+    exploreSteps: [
+      "Close the route and compare the two ammeter checkpoints.",
+      "Open the route and notice which quantity collapses immediately.",
+      "Raise the source voltage and keep watching what stays equal around the loop.",
+    ],
+    watchFor: [
+      "A steady current needs one complete conducting path.",
+      "In a simple loop, the current is the same before and after each component.",
+      "Components transfer energy without using up charge carriers.",
+    ],
+    tryFirst: "Start with the switch open, then close it and compare the current at the two checkpoints before you change any resistance.",
+    takeaway: "The safest first move is to test the route condition, then separate conserved charge flow from energy transfer in the components.",
+  },
+  M9_L2: {
+    title: "Charge checkpoint rate lab",
+    instructions: "Treat current as a rate question by changing charge and time independently at one checkpoint.",
+    taskPrompt: "Compare amount and time together, then translate the reading back into coulombs per second instead of using a memorized symbol only.",
+    exploreSteps: [
+      "Fix the charge and shorten the time to see the current rise.",
+      "Fix the time and raise the charge to see the current rise for a different reason.",
+      "Read the result back as both amperes and charge per second.",
+    ],
+    watchFor: [
+      "1 A means 1 C passes a point each second.",
+      "A large total charge does not automatically mean a large current.",
+      "Charge amount and charge-flow rate are different electrical ideas.",
+    ],
+    tryFirst: "Set 12 C and 6 s, then halve the time without changing the charge and explain why the current doubles.",
+    takeaway: "Current questions become safer when the learner treats them as checkpoint-rate stories rather than as stored-charge stories.",
+  },
+  M9_L3: {
+    title: "Energy-per-charge lift lab",
+    instructions: "Compare the source voltage with one component voltage, then track how much energy each coulomb gains and loses around the same loop.",
+    taskPrompt: "Use the source, component, and charge sliders to turn volts into joules per coulomb and total transferred energy.",
+    exploreSteps: [
+      "Set a source voltage and decide how much energy each coulomb gets from it.",
+      "Choose a component voltage and calculate how much of that energy is transferred there.",
+      "Compare the component drop with the rest of the loop instead of collapsing everything into one number.",
+    ],
+    watchFor: [
+      "Voltage is energy transferred per unit charge.",
+      "The same charge can transfer different amounts of energy at different voltages.",
+      "Source and component voltages belong to the energy story, not the current story.",
+    ],
+    tryFirst: "Use a 12 V source with a 5 V lamp drop and 2 C of charge, then compare the lamp energy with the rest-of-circuit energy.",
+    takeaway: "Potential-difference reasoning becomes stronger when each voltage is read as joules per coulomb before the total energy is calculated.",
+  },
+  M9_L4: {
+    title: "Resistance route designer",
+    instructions: "Change material factor, length, and cross-sectional area one at a time so the route property stays visible before the current response.",
+    taskPrompt: "Build easier and harder routes, then explain why the same source drives different currents through them.",
+    exploreSteps: [
+      "Hold material and area fixed while you increase the length.",
+      "Hold material and length fixed while you widen the route.",
+      "Change the material factor and compare how the source current responds.",
+    ],
+    watchFor: [
+      "For the same material, greater length gives greater resistance.",
+      "For the same material, greater cross-sectional area gives lower resistance.",
+      "Resistance depends on material and geometry together.",
+    ],
+    tryFirst: "Double the route length, then halve the route area and explain why the resistance jumps much faster than a one-word 'harder wire' answer suggests.",
+    takeaway: "Route comparisons become much safer when material and geometry are named explicitly before the current change is predicted.",
+  },
+  M9_L5: {
+    title: "I-V characteristic explorer",
+    instructions: "Switch between ohmic and non-ohmic behaviour, then compare the graph shape with the current response instead of treating Ohm's law as a chant.",
+    taskPrompt: "Use voltage, resistance, and mode controls to decide when resistance stays constant and when the I-V curve stops being straight.",
+    exploreSteps: [
+      "Keep the component ohmic and raise the voltage to check proportional current growth.",
+      "Switch to the non-ohmic mode and compare the new current response.",
+      "Use the graph cue to explain whether resistance is staying constant or changing.",
+    ],
+    watchFor: [
+      "A straight origin-passing I-V graph is the constant-resistance clue.",
+      "For an ohmic component, voltage and current stay proportional under fixed conditions.",
+      "A curved I-V response means the effective resistance is changing over the range.",
+    ],
+    tryFirst: "Keep the resistance fixed in ohmic mode, then double the voltage and compare that with the same change in non-ohmic mode.",
+    takeaway: "Ohm's law becomes more rigorous when the learner tests the graph shape and the fixed-conditions rule together.",
+  },
+  M9_L6: {
+    title: "Network reduction and branch-law lab",
+    instructions: "Switch between series, parallel, and mixed networks before you decide which current-and-voltage rule to use.",
+    taskPrompt: "Reduce the valid section first, then explain what stays common, what splits, and how the source current is rebuilt.",
+    exploreSteps: [
+      "Start with the series chain and read the one common current story.",
+      "Switch to the parallel pair and read the common branch-voltage story.",
+      "Move to the mixed network and reduce the branch block before predicting the source current.",
+    ],
+    watchFor: [
+      "Series circuits keep one common current through the chain.",
+      "Parallel branches share the same potential difference across matching junctions.",
+      "Mixed circuits are solved section by section rather than by one global rule.",
+    ],
+    tryFirst: "Start with a 2 ohm series resistor feeding 6 ohm and 3 ohm branches, then reduce the branch block before calculating any current.",
+    takeaway: "Circuit analysis becomes much stronger when the learner identifies the valid series or parallel section first and only then applies the current-voltage rule.",
+  },
 };
 
 function normalizeItemId(itemId: string): string {
@@ -110,10 +195,6 @@ function normalizeCode(code: string): string {
   return String(code || "").trim().replace(/-/g, "_").toUpperCase();
 }
 
-function remapM9ToM10(code: string): string {
-  return normalizeCode(code).replace(/^M9_/, "M10_");
-}
-
 export function m9QuestionVisualMeta(itemId: string): M9QuestionVisualMeta | undefined {
   const normalized = normalizeItemId(itemId);
   const match = normalized.match(/^(M9L[1-6])_[A-Z]+\d+$/);
@@ -121,12 +202,7 @@ export function m9QuestionVisualMeta(itemId: string): M9QuestionVisualMeta | und
 }
 
 export function m9SimulationCopy(code: string): M9SimulationCopy | undefined {
-  const normalized = normalizeCode(code);
-  if (/^M9_L[1-5]$/.test(normalized)) {
-    return m10SimulationCopy(remapM9ToM10(normalized));
-  }
-  if (normalized === "M9_L6") return M9_L6_SIMULATION;
-  return undefined;
+  return M9_SIMULATION_COPY[normalizeCode(code)];
 }
 
 export function m9ScaffoldFocusExtras(code: string): string[] {
@@ -146,7 +222,7 @@ export function m9ScaffoldFocusExtras(code: string): string[] {
     case "M9_L3":
       return [
         "Treat voltage as energy per unit charge.",
-        "Keep source-boost language separate from current language.",
+        "Track source and component drops in the same loop-energy story.",
         "Do not describe a battery as a store of current.",
       ];
     case "M9_L4":
@@ -159,13 +235,13 @@ export function m9ScaffoldFocusExtras(code: string): string[] {
       return [
         "Hold one variable fixed before changing the other.",
         "Use Ohm's law as an observed rule for ohmic conductors.",
-        "Link I-V graph shape back to proportional reasoning.",
+        "Link I-V graph shape back to constant or changing resistance.",
       ];
     case "M9_L6":
       return [
-        "Decide first whether the network is series or parallel.",
-        "Keep same-current and same-voltage rules separate.",
-        "Use junctions and paths rather than page layout to classify the circuit.",
+        "Decide first whether the network is series, parallel, or mixed.",
+        "Keep same-current and same-voltage rules tied to the correct section only.",
+        "Reduce the valid block before calculating the source current.",
       ];
     default:
       return [];
@@ -189,26 +265,26 @@ export function m9ScaffoldCoreBullets(code: string): string[] {
     case "M9_L3":
       return [
         "Potential difference is energy transferred per unit charge.",
-        "A source gives each coulomb an energy rise.",
+        "A source gives each coulomb an energy rise and components take defined shares of it.",
         "Voltage and current are different electrical quantities.",
       ];
     case "M9_L4":
       return [
         "Resistance is a property of the component or path.",
-        "Longer routes increase resistance.",
-        "Greater cross-sectional area reduces resistance.",
+        "For the same material, longer routes increase resistance.",
+        "For the same material, greater cross-sectional area reduces resistance.",
       ];
     case "M9_L5":
       return [
         "For an ohmic conductor, current is proportional to voltage when conditions stay constant.",
         "At fixed resistance, larger voltage gives larger current.",
-        "At fixed voltage, larger resistance gives smaller current.",
+        "A straight origin-passing I-V graph is the constant-resistance clue.",
       ];
     case "M9_L6":
       return [
         "Series circuits have one path and the same current through each component.",
         "Parallel branches share the same potential difference across matching junctions.",
-        "Current splits at a junction and recombines after parallel branches.",
+        "Mixed circuits are reduced section by section before the source current is calculated.",
       ];
     default:
       return [];

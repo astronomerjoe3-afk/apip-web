@@ -478,11 +478,14 @@ function l5ConceptRaw(): RawItem[] {
     mc("Which sentence best matches IGCSE-style circuit reasoning?", ["For a given ohmic resistor, larger potential difference gives proportionally larger current.", "Potential difference is just another name for current.", "Resistance depends only on charge and time.", "Any straight graph means charge is conserved."], 0, "Use the proper quantity meanings and the proportional rule.", hint),
     mc("What is the cleanest check if a student gives a current answer from Ohm's law?", ["Ask whether the voltage and resistance used belong to the same component or route under discussion.", "Ask whether the wire color looks correct.", "Ask whether the battery brand is famous.", "Ask whether the charge carriers are visible."], 0, "Good Ohm's-law work still has to match the physical circuit.", hint),
     mc("When does the formula V = IR become a safer answer?", ["When the learner can also explain the current-voltage-resistance relation in words.", "As soon as the symbols are memorized with no meaning.", "Only when the current is zero.", "Only in circuits with one lamp."], 0, "Formula and meaning should stay linked.", hint),
+    mc("A component gives a curved I-V graph that becomes shallower as voltage rises. What is the strongest interpretation?", ["Its effective resistance is increasing as the operating point changes.", "Its resistance must stay constant because the graph still rises.", "It is behaving ohmically because current still increases.", "Its current and voltage are unrelated."], 0, "A shallower rise means less extra current for each extra volt.", hint),
+    mc("Two straight origin-passing I-V graphs are drawn on the same axes. Graph X is steeper than graph Y. Which component has the lower resistance?", ["X", "Y", "Both have the same resistance.", "The graph does not give any resistance clue."], 0, "More current for each volt means a lower resistance.", hint),
+    mc("A single point on an I-V graph gives 6 V and 2 A. Which statement is safest?", ["The resistance at that operating point is 3 ohms, but one point alone does not prove the whole component is ohmic.", "The component must be ohmic because V / I can be calculated once.", "The resistance can never change after that point.", "The voltage and current are the same quantity there."], 0, "One point gives one ratio, not the whole graph behaviour.", hint),
+    mc("Why is a filament lamp often used as a contrast to an ohmic resistor?", ["Its I-V graph curves because the resistance changes as it heats up.", "Its graph is always a straight line through the origin.", "It keeps the same resistance at every operating point.", "It removes the need to compare voltage and current."], 0, "The contrast is about changing resistance, not about having no relationship at all.", hint),
   ];
 }
 
 function l5MasteryRaw(): RawItem[] {
-  const hint = "Use V = IR, I = V / R, or R = V / I, and keep the proportional reasoning in words.";
   return [
     ...l5ConceptRaw(),
     short("A 24 V supply is connected across an 8 ohm resistor. What current flows?", answers("3", "A"), "Use I = V / R."),
@@ -505,6 +508,12 @@ function l5MasteryRaw(): RawItem[] {
     short("A current of 2.5 A flows through a 8 ohm resistor. What voltage is across it?", answers("20", "V"), "Use V = IR."),
     short("A current of 1.2 A flows through a 5 ohm resistor. What voltage is across it?", answers("6", "V"), "Use V = IR."),
     short("A current of 6 A flows through a 2 ohm resistor. What voltage is across it?", answers("12", "V"), "Use V = IR."),
+    short("An ohmic resistor gives the point (3 V, 0.75 A). What is its resistance?", answers("4", "ohms"), "Use R = V / I at that operating point."),
+    short("The same straight origin-passing I-V graph also includes (9 V, ?). What current should match 9 V?", answers("2.25", "A", "2.25 A"), "For the same ohmic resistor, keep the same resistance or use direct proportionality."),
+    short("A filament lamp gives 3.0 V and 0.50 A at one operating point. What is the resistance at that point?", answers("6", "ohms"), "Use R = V / I for that one operating point."),
+    short("The same filament lamp gives 9.0 V and 0.80 A at a hotter operating point. What is the resistance there?", answers("11.25", "ohms", "11.3 ohms"), "Use R = V / I again and compare the new value."),
+    short("A straight origin-passing I-V graph includes the point (10 V, 2 A). What current should the same component carry at 15 V?", answers("3", "A"), "Keep the same resistance or use direct proportionality."),
+    short("A resistor carries 0.60 A when 12 V is applied. What is its resistance?", answers("20", "ohms"), "Use R = V / I."),
   ];
 }
 
@@ -557,11 +566,15 @@ function l6ConceptRaw(): RawItem[] {
     mc("Why is it helpful to compare junctions when deciding whether a question is about series or parallel behaviour?", ["Because shared junctions reveal where current can split or recombine.", "Because junctions show where voltage disappears.", "Because junctions measure resistance directly.", "Because junctions replace the need for a battery."], 0, "Junctions show whether multiple routes exist.", hint),
     mc("Which sentence best matches rigorous circuit language?", ["In series the current is common to the whole route, while in parallel the potential difference is common to each branch.", "In every circuit both current and voltage are the same everywhere.", "Series circuits share current and parallel circuits share current too.", "Voltage and current swap meanings when branches are added."], 0, "Keep the rule paired to the correct topology.", hint),
     mc("What should be checked before using a branch-current sum to find the source current?", ["That the listed currents belong to branches meeting at the same source split or recombination.", "That every resistor has the same value.", "That the battery voltage is zero.", "That the circuit is definitely series."], 0, "The current-sum rule belongs at junctions in a branch network.", hint),
+    mc("In a mixed circuit containing one series resistor followed by a parallel pair, what should usually be reduced first?", ["the parallel pair", "the whole network in one step", "the source only", "the branch currents before any equivalent resistance"], 0, "Reduce the valid local block first.", hint),
+    mc("Why is the current through the resistor before a junction the same as the source current in a mixed circuit?", ["Because that resistor lies in the single route before the current splits.", "Because every resistor in every network always has the same current.", "Because parallel branches force equal current everywhere.", "Because voltage and current are identical before a junction."], 0, "The topology before the split is still a one-path section.", hint),
+    mc("A parallel block sits after a series resistor, so the full supply is not directly across the block. What should be found before branch currents are calculated?", ["the voltage across the parallel block", "the current in each branch by guessing equal shares", "the total resistance of each branch added directly", "the source current divided by the number of branches"], 0, "Branch currents need the actual branch voltage.", hint),
+    mc("Which statement about equivalent resistance in a parallel pair is strongest?", ["It is smaller than the resistance of the smallest branch.", "It must equal the sum of the branch resistances.", "It must be larger than every branch resistance.", "It depends only on the battery voltage."], 0, "Parallel routes reduce the overall opposition.", hint),
+    mc("Two equal resistors form a parallel pair and share the same branch voltage. Which branch-current statement is strongest?", ["The branch currents are equal because the branch voltages and resistances are equal.", "One branch must carry more current because it is nearer the cell.", "The branch currents cannot be compared in parallel.", "Both branch currents are zero unless the circuit is series."], 0, "Same V across equal R gives equal I.", hint),
   ];
 }
 
 function l6MasteryRaw(): RawItem[] {
-  const hint = "Use the topology first, then apply the current, voltage, and resistance rule that belongs to that layout.";
   return [
     ...l6ConceptRaw(),
     short("A 3 ohm resistor and a 5 ohm resistor are connected in series. What is the total resistance?", answers("8", "ohms"), "In series, add the resistances."),
@@ -584,6 +597,16 @@ function l6MasteryRaw(): RawItem[] {
     short("In that same series circuit, what potential difference is across the 3 ohm resistor?", answers("6", "V"), "Use V = IR with the series current and that resistor."),
     short("Two identical 12 ohm branches are connected in parallel across a 12 V supply. What current flows in each branch?", answers("1", "A"), "Each branch gets 12 V, so use I = V / R."),
     short("In that same parallel circuit, what total current leaves the source?", answers("2", "A"), "Add the equal branch currents."),
+    short("A 6 ohm resistor and a 3 ohm resistor are connected in parallel. What is their equivalent resistance?", answers("2", "ohms"), "Use the parallel-resistance relation."),
+    short("A 2 ohm resistor is in series with that 6 ohm || 3 ohm parallel block. What is the total resistance?", answers("4", "ohms"), "Reduce the parallel block first, then add the series resistor."),
+    short("A 12 V supply is connected to a 2 ohm resistor in series with a parallel pair of 6 ohm and 3 ohm. What current leaves the source?", answers("3", "A"), "Use the total resistance of the mixed network."),
+    short("In that same mixed circuit, what potential difference is across the parallel block?", answers("6", "V"), "Find the series resistor drop first, then use the remaining supply."),
+    short("In that same mixed circuit, what current flows in the 6 ohm branch?", answers("1", "A"), "Use the branch voltage with I = V / R."),
+    short("In that same mixed circuit, what current flows in the 3 ohm branch?", answers("2", "A"), "Use the same branch voltage with the other branch resistance."),
+    short("An 8 ohm resistor is in series with two 8 ohm branches in parallel. What is the equivalent resistance of the parallel pair?", answers("4", "ohms"), "Two equal 8 ohm branches in parallel halve the resistance."),
+    short("A 12 V supply is connected to that 8 ohm series resistor plus the 8 ohm || 8 ohm block. What total current leaves the source?", answers("1.5", "A", "1.50 A"), "Find the total resistance first."),
+    short("In that same mixed circuit, what potential difference is across the parallel block?", answers("6", "V"), "The two 4 ohm equivalent sections share the 12 V supply equally."),
+    short("In that same mixed circuit, what current flows in each 8 ohm branch?", answers("0.75", "A", "0.75 A"), "Use the 6 V branch voltage with I = V / R."),
   ];
 }
 

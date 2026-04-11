@@ -10447,16 +10447,17 @@ function scaffoldM9WorkedExample(code: string): UnknownRecord | null {
   switch (code) {
     case "M9_L1":
       return {
-        body: "The opening circuits lesson should keep route completion, shared current, and charge conservation together so students do not slide back into 'current gets used up' language.",
+        body: "The opening M9 example should already move beyond F4 by keeping one-path current, component energy transfer, and route completion inside the same explanation instead of treating them as separate slogans.",
         worked_example: {
-          prompt: "A cell, switch, lamp, and motor are connected in one simple loop. The switch is closed and an ammeter just before the lamp reads 0.40 A. What should an ammeter just after the motor read, and why does the lamp still work without using up the current?",
+          prompt: "A 12 V cell, switch, lamp, and resistor are connected in one simple loop. When the switch is closed, an ammeter just before the lamp reads 0.40 A and a voltmeter across the lamp reads 5.0 V. What should an ammeter just after the resistor read, and how much energy is transferred in the lamp when 2.0 C of charge passes through it?",
           steps: [
             "Name the route type first: this is one complete loop, so there is only one current path.",
             "Use the one-path rule: the same current passes each point in a simple series loop, so the second ammeter also reads 0.40 A.",
-            "Separate charge flow from energy transfer: the lamp works by transferring energy from the moving charge, not by removing charge from the circuit.",
+            "Use the lamp voltage as an energy-per-charge statement: 5.0 V means 5.0 J per coulomb, so the lamp transfers E = VQ = 5.0 x 2.0 = 10 J.",
+            "Keep the loop story explicit: the lamp transfers energy from the moving charge while the same current continues around the complete loop.",
           ],
-          answer: "The ammeter after the motor should also read 0.40 A. The lamp still works because it transfers energy from the moving charge while the same current continues around the complete loop.",
-          answer_reason: "A simple loop has one common current all the way round. Components transfer energy, but the charge carriers keep circulating and are not used up.",
+          answer: "The ammeter after the resistor should also read 0.40 A, and the lamp transfers 10 J when 2.0 C passes through it.",
+          answer_reason: "A simple loop has one common current all the way round. The lamp voltage gives energy per coulomb, so E = VQ adds the energy-transfer part without changing the conserved-current story.",
         },
         extra_examples: [
           {
@@ -10476,16 +10477,17 @@ function scaffoldM9WorkedExample(code: string): UnknownRecord | null {
       };
     case "M9_L2":
       return {
-        body: "Current examples should read amperes as charge-per-second statements, so the learner compares amount and time together instead of treating current as stored charge.",
+        body: "Current examples should push beyond a single division step by making amperes a checkpoint-rate statement and, when helpful, linking the charge value back to the number of electrons involved.",
         worked_example: {
-          prompt: "A charge of 12 C passes a checkpoint in a wire in 4.0 s. Find the current. Then state the current if the same 12 C passes in 2.0 s instead.",
+          prompt: "A charge of 3.2 C passes a checkpoint in a wire in 0.80 s. Find the current. Then estimate how many electrons this charge corresponds to if the charge of one electron is 1.6 x 10^-19 C.",
           steps: [
             "Use the definition of current: I = Q / t.",
-            "For the first case, I = 12 / 4.0 = 3.0 A.",
-            "For the second case, the same charge passes in less time, so I = 12 / 2.0 = 6.0 A and the current is larger because the rate is larger.",
+            "Calculate the current first: I = 3.2 / 0.80 = 4.0 A.",
+            "Now convert the same charge into electron count: N = Q / e = 3.2 / (1.6 x 10^-19) = 2.0 x 10^19 electrons.",
+            "Translate the result back into words: 4.0 A means 4.0 C of charge passes the checkpoint each second, and the total 3.2 C corresponds to a huge number of electrons.",
           ],
-          answer: "The first current is 3.0 A, and the second current is 6.0 A.",
-          answer_reason: "Current measures charge flow rate. The same amount of charge passing in half the time means the current doubles.",
+          answer: "The current is 4.0 A, and the charge corresponds to 2.0 x 10^19 electrons.",
+          answer_reason: "Current measures charge flow rate, so charge and time must be used together. The same charge can also be interpreted as a count of elementary charges by dividing by the charge of one electron.",
         },
         extra_examples: [
           {
@@ -10505,45 +10507,45 @@ function scaffoldM9WorkedExample(code: string): UnknownRecord | null {
       };
     case "M9_L3":
       return {
-        body: "Voltage work should keep energy-per-charge language visible so students stop describing a cell as a tank of current.",
+        body: "Voltage work should be loop-aware by now: source voltage, component voltage, and total transferred energy should all stay inside one energy-per-charge ledger instead of turning into separate facts.",
         worked_example: {
-          prompt: "A component transfers 24 J of energy when 4.0 C of charge passes through it. Find the potential difference across the component, then state what that value means physically.",
+          prompt: "A 12 V cell drives 2.0 C of charge around a loop containing a lamp with a 5.0 V drop and a resistor with a 7.0 V drop. How much energy is transferred by the cell, how much in the lamp, and how much in the resistor?",
           steps: [
-            "Use the voltage definition first: V = E / Q.",
-            "Substitute the values: V = 24 / 4.0 = 6.0 V.",
-            "Translate the symbol answer back into the lesson meaning: 6.0 V means 6.0 J of energy is transferred for each coulomb of charge.",
+            "Use the source voltage as energy per charge first: 12 V means 12 J per coulomb, so the cell transfers E = VQ = 12 x 2.0 = 24 J.",
+            "Now apply the same idea to the lamp: E_lamp = 5.0 x 2.0 = 10 J.",
+            "Apply it to the resistor: E_resistor = 7.0 x 2.0 = 14 J, and notice that the component energies add back to the cell's 24 J.",
           ],
-          answer: "The potential difference is 6.0 V, which means 6.0 J of energy is transferred per coulomb.",
-          answer_reason: "Voltage is energy transferred per unit charge. The best answer keeps the numerical result tied to the physical meaning of joules per coulomb.",
+          answer: "The cell transfers 24 J in total, of which 10 J is transferred in the lamp and 14 J in the resistor.",
+          answer_reason: "Potential difference is energy transferred per unit charge. Once the same 2.0 C is moving through each component in the one-path loop, each voltage drop can be turned into a component energy transfer and the energy ledger still balances.",
         },
         extra_examples: [
           {
             body: "This follow-up keeps the source role on the energy side of the circuit story.",
             worked_example: {
-              prompt: "A 12 V cell moves 3.0 C of charge around a circuit. How much energy does the cell transfer, and why is that not the same as saying the cell stores current?",
+              prompt: "Why is 'this source is 12 V, so the current must be 12 A' a weak sentence even before the circuit details are known?",
               steps: [
-                "Use E = VQ to find the transferred energy: E = 12 x 3.0 = 36 J.",
-                "Interpret the result through the lesson meaning: the cell gives 12 J to each coulomb, so 3.0 C receives 36 J in total.",
-                "Keep the quantities separate: current is charge flow rate, while the cell's role here is to provide energy per charge.",
+                "Name the two quantities before comparing them: voltage is energy per charge, while current is charge flow rate.",
+                "Notice that current also depends on the circuit resistance or network structure, which have not yet been stated.",
+                "Conclude that 12 V tells you what each coulomb gets from the source, not how many coulombs pass each second in every possible circuit.",
               ],
-              answer: "The cell transfers 36 J. That does not mean it stores current; it means it gives energy to each coulomb that moves through the circuit.",
-              answer_reason: "Voltage belongs to energy per charge, not to the amount or rate of charge flow by itself.",
+              answer: "It is weak because 12 V describes energy per charge, not current. The current cannot be fixed until the circuit details are known.",
+              answer_reason: "Voltage and current are linked in circuit analysis, but they are different quantities and cannot be merged into one label.",
             },
           },
         ],
       };
     case "M9_L4":
       return {
-        body: "Resistance examples should stay comparative and route-based, so the learner explains current changes through wire properties rather than blaming the battery.",
+        body: "Resistance examples should now use proportional reasoning, not just adjectives, so route length, area, and material all stay mathematically visible before the current response is predicted.",
         worked_example: {
-          prompt: "Wire A and wire B are made from the same material and have the same cross-sectional area, but wire B is twice as long as wire A. Which wire has the greater resistance, and what happens to the current if each wire is connected separately to the same cell?",
+          prompt: "Wire B is made of the same material as wire A, but wire B is twice as long and has half the cross-sectional area. Compare the resistance of B with A and state what happens to the current if each wire is connected separately across the same 6 V source.",
           steps: [
-            "Compare the route properties before mentioning current: longer wire means greater resistance when material and area are unchanged.",
-            "Decide the resistance ranking: wire B has the greater resistance because it is longer.",
-            "Now bring the source back in: with the same cell, the wire with greater resistance allows a smaller current.",
+            "Use the proportional route rule: for the same material, resistance is proportional to length divided by area.",
+            "Doubling the length multiplies the resistance by 2, and halving the area multiplies it by another 2, so wire B has 4 times the resistance of wire A.",
+            "Now bring the source back in: with the same 6 V supply, the wire with 4 times the resistance carries one quarter of the current.",
           ],
-          answer: "Wire B has the greater resistance, and it would carry the smaller current when connected to the same cell.",
-          answer_reason: "Resistance belongs to the path. A longer route opposes charge flow more strongly, so the same source drives less current through it.",
+          answer: "Wire B has 4 times the resistance of wire A, so with the same source it carries one quarter of the current.",
+          answer_reason: "Resistance belongs to the route. Once material is fixed, the combined length-and-area change can be tracked proportionally before the current consequence is stated.",
         },
         extra_examples: [
           {
@@ -10563,59 +10565,59 @@ function scaffoldM9WorkedExample(code: string): UnknownRecord | null {
       };
     case "M9_L5":
       return {
-        body: "Ohm's-law examples should hold one variable fixed at a time so the learner can see why current changes instead of reciting the formula without meaning.",
+        body: "Ohm's-law examples should now connect formula, proportional data, and I-V shape, because by M9 the learner should be able to decide when constant resistance is actually being shown.",
         worked_example: {
-          prompt: "An ohmic resistor of 4.0 ohms is connected to a 12 V supply. Find the current. Then state the current if the supply is increased to 24 V while the resistance stays the same.",
+          prompt: "A component gives the data pairs (2.0 V, 0.50 A) and (8.0 V, 2.0 A) under fixed conditions. Find the resistance, predict the current at 12 V, and explain why a curved filament-lamp graph would not let you keep using that same resistance value.",
           steps: [
-            "Use Ohm's law for the first case: I = V / R = 12 / 4.0 = 3.0 A.",
-            "Keep the resistance fixed and change only the voltage in the second case: I = 24 / 4.0 = 6.0 A.",
-            "Summarize the pattern in words: for an ohmic resistor at fixed resistance, doubling the voltage doubles the current.",
+            "Check the resistance from either data pair: R = V / I = 2.0 / 0.50 = 4.0 ohm, and the 8.0 V pair gives the same value so the resistance is constant over that range.",
+            "Use Ohm's law with that constant resistance: at 12 V, I = V / R = 12 / 4.0 = 3.0 A.",
+            "Now protect the graph meaning: a curved filament-lamp graph would show that V/I is changing, so one constant resistance value would not describe the whole graph.",
           ],
-          answer: "The current is 3.0 A at 12 V and 6.0 A at 24 V.",
-          answer_reason: "Ohm's law links current to voltage and resistance together. With resistance fixed, current is proportional to voltage for an ohmic conductor.",
+          answer: "The resistance is 4.0 ohm and the predicted current at 12 V is 3.0 A. A curved filament-lamp graph would mean the effective resistance is changing, so the same constant resistance could not be used all the way along it.",
+          answer_reason: "Ohm's law is the constant-resistance rule for an ohmic conductor under fixed conditions. Straight proportional data support that rule, while a curved I-V graph shows that the ratio V/I is no longer staying constant.",
         },
         extra_examples: [
           {
             body: "This follow-up keeps the graph clue tied to the proportional statement.",
             worked_example: {
-              prompt: "Why does a straight I-V graph through the origin support the statement that a component is ohmic under fixed conditions?",
+              prompt: "On the same axes, resistor A has a steeper straight origin-passing I-V line than resistor B. Which resistor has the lower resistance, and why?",
               steps: [
-                "Read the graph shape before naming the rule: a straight line through the origin means current and voltage increase in direct proportion.",
-                "Connect that proportionality to the lesson statement instead of leaving it as a graph description only.",
-                "State the condition clearly: the component must be under fixed conditions for the relation to hold.",
+                "Start from what the gradient means on an I-V graph: a steeper line gives more current for each volt.",
+                "More current for the same voltage means smaller V/I and therefore lower resistance.",
+                "Conclude that the steeper straight line belongs to the lower-resistance resistor, as long as both are being compared on the same graph scales.",
               ],
-              answer: "It supports the ohmic statement because the straight origin-passing graph shows current is proportional to voltage when conditions stay fixed.",
-              answer_reason: "The graph is evidence for proportional reasoning, not a separate topic from Ohm's law.",
+              answer: "Resistor A has the lower resistance because its steeper line gives more current for each volt.",
+              answer_reason: "I-V graphs are not decorative. Their steepness compares the current response to voltage, which is exactly what resistance is controlling.",
             },
           },
         ],
       };
     case "M9_L6":
       return {
-        body: "The circuit-comparison lesson should keep one-route and branch-route behavior side by side, so learners decide the network type before mixing current and voltage rules.",
+        body: "By the end of M9 the worked example should be a genuine step above F4, so the learner has to reduce a mixed network section by section instead of choosing between only a pure series or pure parallel slogan.",
         worked_example: {
-          prompt: "Circuit A has two 3.0 ohm lamps in series on a 12 V supply. Circuit B has the same two 3.0 ohm lamps in parallel on a 12 V supply. Compare the total current from the source and state the main current-voltage rule for each circuit.",
+          prompt: "A 12 V supply is connected to a 2.0 ohm resistor in series with a parallel pair of 6.0 ohm and 3.0 ohm resistors. Find the total resistance, the source current, the voltage across the parallel block, and the current in each branch.",
           steps: [
-            "Start with Circuit A, the series case: the total resistance is 3.0 + 3.0 = 6.0 ohms, so the source current is I = 12 / 6.0 = 2.0 A.",
-            "Keep the series rule visible: in a one-route circuit, that same 2.0 A passes through both lamps while the supply voltage is shared between them.",
-            "Now switch to Circuit B, the parallel case: each 3.0 ohm branch gets the full 12 V, so each branch current is 12 / 3.0 = 4.0 A.",
-            "Add the branch currents to get the source current: 4.0 A + 4.0 A = 8.0 A, then summarize the difference in rules instead of only quoting the numbers.",
+            "Reduce the valid parallel section first: 1 / R_parallel = 1 / 6.0 + 1 / 3.0 = 1 / 2.0, so the parallel pair is equivalent to 2.0 ohm.",
+            "Now add the series part: R_total = 2.0 + 2.0 = 4.0 ohm, so the source current is I = 12 / 4.0 = 3.0 A.",
+            "Use the series part to find its voltage drop: V_series = IR = 3.0 x 2.0 = 6.0 V, so the parallel block also has 6.0 V across it.",
+            "Use the common branch voltage to find the branch currents: I_6ohm = 6.0 / 6.0 = 1.0 A and I_3ohm = 6.0 / 3.0 = 2.0 A, which add back to the 3.0 A source current.",
           ],
-          answer: "Circuit A draws 2.0 A from the source, while Circuit B draws 8.0 A. In series, the current is the same through each component and the voltage is shared. In parallel, the voltage is the same across each branch and the branch currents add to give the source current.",
-          answer_reason: "The route shape changes the whole electrical behavior. One-path circuits keep one common current, while branch circuits keep a common branch voltage and allow the source current to split and recombine.",
+          answer: "The total resistance is 4.0 ohm, the source current is 3.0 A, the parallel block has 6.0 V across it, and the branch currents are 1.0 A and 2.0 A.",
+          answer_reason: "Mixed circuits are solved section by section. First reduce the parallel block, then use the series current rule, and finally return to the common branch-voltage rule to rebuild the branch currents.",
         },
         extra_examples: [
           {
             body: "This follow-up keeps the network-structure decision active before any formula is chosen.",
             worked_example: {
-              prompt: "Why is it risky to say 'all circuits just share the current the same way' before checking whether the network is series or parallel?",
+              prompt: "Why is it risky to apply the series current rule to the whole mixed network before reducing the branch block?",
               steps: [
-                "Identify the route type first: a series circuit has one uninterrupted path, while a parallel circuit has multiple branches.",
-                "Notice that the current rule depends on that structure: same current fits the one-path case, but split-and-recombine fits the branch case.",
-                "Conclude that using one current rule for every network hides the real effect of the circuit layout.",
+                "Identify where the current path is genuinely one route and where it splits into branches.",
+                "Notice that the current is the same only through the true series parts; once the current reaches the junction, branch currents can differ.",
+                "Conclude that section-by-section reduction is safer than trying to force one current rule across the entire mixed network at once.",
               ],
-              answer: "It is risky because current behavior depends on the route structure. Series circuits keep one common current, but parallel circuits split the current between branches.",
-              answer_reason: "Current rules are network rules, not decorative labels. The learner has to decide the circuit structure before choosing the correct current-voltage story.",
+              answer: "It is risky because the current is the same only in the true series section. After the junction, the branch currents must be found from the shared branch voltage instead.",
+              answer_reason: "Mixed networks are not solved by one global slogan. The valid local structure has to be identified before the correct current or voltage rule is used.",
             },
           },
         ],
@@ -11871,184 +11873,8 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     }
   }
   if (code.startsWith("M9_")) {
-    switch (code) {
-      case "M9_L1":
-        return {
-          body: "Sound-launch examples should tie the wave frequency back to the vibrating source and keep the medium's relay role separate from the source's vibration rate.",
-          worked_example: {
-            prompt: "A loudspeaker cone makes 480 complete vibrations in 2.0 s. Find the sound frequency and period, then state what this tells you about the sound wave launched into the air.",
-            steps: [
-              "Use the source motion first: frequency = vibrations / time = 480 / 2.0 = 240 Hz.",
-              "Find the period from T = 1 / f = 1 / 240 about 4.17 x 10^-3 s.",
-              "State the sound meaning clearly: each source vibration launches one sound cycle, so the sound frequency in the air is also 240 Hz even though the air itself is only relaying the disturbance.",
-            ],
-            answer: "The sound frequency is 240 Hz and the period is about 4.17 x 10^-3 s. The launched sound has the same frequency as the vibrating source.",
-            answer_reason: "The frequency belongs first to the source vibration. The nearby air does not choose a new frequency; it passes on the cycle rate launched by the speaker cone.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up protects the source-first story by removing the vibration entirely.",
-              worked_example: {
-                prompt: "Why does a silent loudspeaker cone produce no new sound wave even though air is still present around it?",
-                steps: [
-                  "Ask what actually launches a sound wave.",
-                  "Notice that sound needs a vibrating source to start repeated pressure changes in the air.",
-                  "Conclude that without the cone vibrating, there are no new compressions and rarefactions being launched.",
-                ],
-                answer: "No new sound is produced because without a vibrating source there is no repeated pressure disturbance to launch into the air.",
-                answer_reason: "The medium can relay a sound wave, but it does not spontaneously create the wave when the source stops vibrating.",
-              },
-            },
-          ],
-        };
-      case "M9_L2":
-        return {
-          body: "Longitudinal-wave examples should force the learner to separate local particle motion from pattern travel and to use compression-rarefaction language accurately.",
-          worked_example: {
-            prompt: "A sound wave travels east through air. One marked air particle oscillates east-west by 0.50 mm while a compression pattern moves 1.2 m across the tube in 4.0 ms. State the wave type, find the wave speed, and explain what does and does not travel.",
-            steps: [
-              "Compare local motion with propagation: east-west particle motion is parallel to eastward wave travel, so the wave is longitudinal.",
-              "Find the pattern speed from distance and time: v = 1.2 / 0.004 = 300 m/s.",
-              "Keep the roles separate: the compression pattern travels along the tube, while the marked particle only oscillates locally about one position.",
-            ],
-            answer: "The wave is longitudinal and its speed is 300 m/s. The compression pattern travels through the tube, while the particle only oscillates locally.",
-            answer_reason: "Sound in air is identified by the parallel relation between particle motion and propagation. The wave speed belongs to the moving pressure pattern, not to one particle crossing the whole tube.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up checks whether the learner can reject a common weak sentence instead of only naming the correct wave type.",
-              worked_example: {
-                prompt: "Why is 'sound is a wave because the air moves across the room' a weak explanation?",
-                steps: [
-                  "Separate what the sound pattern does from what one air particle does.",
-                  "Recall that air particles in a sound wave oscillate back and forth locally rather than traveling all the way from source to listener.",
-                  "Replace the weak claim with the stronger one: the pressure pattern propagates while the particles mostly stay near their original positions.",
-                ],
-                answer: "It is weak because the air particles do not travel across the room with the sound. The traveling part is the compression-rarefaction pattern.",
-                answer_reason: "Sound transmission is pattern propagation through local particle oscillations, not bulk transport of the air from source to listener.",
-              },
-            },
-          ],
-        };
-      case "M9_L3":
-        return {
-          body: "Pitch examples should stay quantitative enough to connect frequency, wavelength, and same-medium speed while keeping loudness out of the wrong causal role.",
-          worked_example: {
-            prompt: "Two sounds travel through the same air at 340 m/s. Tone A has frequency 170 Hz and Tone B has frequency 680 Hz. Find the wavelength of each tone and decide which has the higher pitch.",
-            steps: [
-              "Use v = f lambda in the same medium, so lambda = v / f.",
-              "Find each wavelength: Tone A gives 340 / 170 = 2.0 m, and Tone B gives 340 / 680 = 0.50 m.",
-              "Use the frequency for pitch: the higher-frequency Tone B has the higher pitch, while the sound speed stays the same because the medium has not changed.",
-            ],
-            answer: "Tone A has wavelength 2.0 m, Tone B has wavelength 0.50 m, and Tone B has the higher pitch.",
-            answer_reason: "In the same air, speed is medium-owned, so a higher frequency produces a shorter wavelength rather than a faster sound. Pitch follows frequency, not loudness.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up protects the learner from using amplitude language to answer a pitch question.",
-              worked_example: {
-                prompt: "A student says, 'This sound is higher pitch because it is louder.' What should be corrected first?",
-                steps: [
-                  "Name the quantities before comparing them: pitch links to frequency, while loudness links to sound strength or amplitude.",
-                  "Reject the idea that a larger amplitude by itself implies a higher frequency.",
-                  "Replace the claim with the safer one: a sound is higher pitch only if its frequency is higher.",
-                ],
-                answer: "The first correction is that pitch depends on frequency, not on loudness.",
-                answer_reason: "A louder sound can have the same frequency and therefore the same pitch as a quieter one.",
-              },
-            },
-          ],
-        };
-      case "M9_L4":
-        return {
-          body: "Ultrasound examples should classify frequency bands sharply and then connect that classification to a real boundary-reflection use rather than treating ultrasound as a different kind of wave.",
-          worked_example: {
-            prompt: "A scanner can emit either a 15 kHz sound or a 4.0 MHz sound into the body. Which one is ultrasound, and what is its wavelength in tissue if the sound speed there is 1500 m/s?",
-            steps: [
-              "Classify the frequencies first: 15 kHz = 15000 Hz is within the usual human hearing range, while 4.0 MHz = 4.0 x 10^6 Hz is far above 20 kHz and is therefore ultrasound.",
-              "Use lambda = v / f for the ultrasound wave in tissue: lambda = 1500 / (4.0 x 10^6) = 3.75 x 10^-4 m.",
-              "Keep the meaning honest: ultrasound is still sound, just at a much higher frequency, so it can still reflect from boundaries and be used in scanning.",
-            ],
-            answer: "The 4.0 MHz wave is ultrasound, and its wavelength in tissue is 3.75 x 10^-4 m.",
-            answer_reason: "Ultrasound is classified by frequency above the usual hearing limit, not by becoming a different kind of wave. Once classified, it still obeys the ordinary sound-wave relation lambda = v / f.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up checks whether the learner keeps the 'still sound' label after the hearing boundary is crossed.",
-              worked_example: {
-                prompt: "Why is it weak to say that ultrasound is 'not really sound anymore'?",
-                steps: [
-                  "Recall how ultrasound is defined.",
-                  "Notice that the definition changes only the frequency band, not the fact that the wave is sound in a medium.",
-                  "Conclude that ultrasound remains sound and therefore still reflects, refracts, and travels as a sound wave does.",
-                ],
-                answer: "It is weak because ultrasound is still sound; it is simply sound with frequency above the usual human hearing range.",
-                answer_reason: "Crossing the hearing boundary changes the classification band, not the physical identity of the wave as sound in a medium.",
-              },
-            },
-          ],
-        };
-      case "M9_L5":
-        return {
-          body: "Pulse-echo work should demand round-trip discipline and make the learner turn timed returns into a boundary map rather than one isolated substitution.",
-          worked_example: {
-            prompt: "An ultrasound pulse travels through tissue at 1500 m/s. Two echoes return after 0.80 ms and 1.60 ms. Find the depth of each boundary and state which boundary is nearer the probe.",
-            steps: [
-              "Use the pulse-echo rule with the divide-by-two step: depth = v t / 2.",
-              "For the first echo, depth = 1500 x 0.00080 / 2 = 0.60 m. For the second echo, depth = 1500 x 0.00160 / 2 = 1.20 m.",
-              "Order the boundaries by return time: the earlier echo comes from the nearer boundary, so the 0.60 m boundary is nearer the probe.",
-            ],
-            answer: "The boundaries are at depths of 0.60 m and 1.20 m, and the 0.60 m boundary is nearer the probe.",
-            answer_reason: "Echo time records the out-and-back trip, so the path must be halved to get one-way depth. A shorter return time means a shorter round trip and therefore a nearer boundary.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up checks whether the learner can explain the divide-by-two step rather than only use it.",
-              worked_example: {
-                prompt: "Why would using depth = v t without dividing by 2 overestimate the boundary depth in pulse-echo scanning?",
-                steps: [
-                  "Interpret what the measured time actually covers.",
-                  "Notice that the recorded time includes both the outward trip to the boundary and the return trip back to the probe.",
-                  "Conclude that using v t directly gives the full round-trip distance, which is twice the one-way depth.",
-                ],
-                answer: "It overestimates the depth because v t gives the round-trip distance, not the one-way distance to the boundary.",
-                answer_reason: "Pulse-echo timing includes both legs of the journey, so the one-way boundary depth must be half of v t.",
-              },
-            },
-          ],
-        };
-      case "M9_L6":
-        return {
-          body: "Doppler examples should turn returned-minus-transmitted frequency into a motion-direction decision first, then connect that sign to the medical flow story.",
-          worked_example: {
-            prompt: "A Doppler probe transmits 3.000 MHz and receives a return at 3.004 MHz from moving blood. Find the Doppler shift and state whether the blood is moving toward or away from the probe.",
-            steps: [
-              "Use the shift definition first: returned frequency minus transmitted frequency = 3.004 MHz - 3.000 MHz = 0.004 MHz.",
-              "Convert if desired: 0.004 MHz = 4.0 kHz.",
-              "Interpret the sign before anything else: because the returned frequency is higher than the transmitted frequency, the blood is moving toward the probe.",
-            ],
-            answer: "The Doppler shift is +0.004 MHz, or +4.0 kHz, and the blood is moving toward the probe.",
-            answer_reason: "The sign of the shift is the safest first clue. A higher returned frequency means motion toward the probe, while a lower returned frequency means motion away.",
-          },
-          extra_examples: [
-            {
-              body: "This follow-up keeps the sign story alive by reversing the case.",
-              worked_example: {
-                prompt: "If the same probe instead receives 2.998 MHz from a moving target after transmitting 3.000 MHz, what does that say about the target motion?",
-                steps: [
-                  "Compare the returned frequency with the transmitted frequency.",
-                  "Notice that the returned frequency is now lower, so the Doppler shift is negative.",
-                  "Use the sign rule: a lower returned frequency means the target is moving away from the probe.",
-                ],
-                answer: "The target is moving away from the probe.",
-                answer_reason: "A negative Doppler shift means the returned frequency has dropped below the transmitted frequency, which is the away-from-probe case.",
-              },
-            },
-          ],
-        };
-      default:
-        break;
-    }
+    const localM9WorkedExample = scaffoldM9WorkedExample(code);
+    if (localM9WorkedExample) return localM9WorkedExample;
   }
   if (code.startsWith("M10_")) {
     switch (code) {
@@ -17018,17 +16844,17 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
       };
     case "M9_L5":
       return {
-        coreIdea: "For an ohmic route, current depends jointly on voltage and resistance.",
-        reasoning: "Hold one variable fixed while you change the other, then describe how the current responds. Only after the pattern is clear should you compress it into Ohm's law symbols.",
-        checkForUnderstanding: "If the voltage doubles while the resistance stays fixed, what happens to the current?",
-        commonTrap: "Do not use Ohm's law as a magic chant without saying what stayed fixed and why the current changed.",
+        coreIdea: "Ohm's law is the constant-resistance rule, and the I-V graph is the evidence check for whether that rule is valid.",
+        reasoning: "Hold one variable fixed while you change the other, then compare both the numerical ratio and the graph shape. Only after the current stays proportional to voltage under fixed conditions should you compress the pattern into Ohm's law symbols.",
+        checkForUnderstanding: "What graph feature tells you that one constant resistance can describe the measured range?",
+        commonTrap: "Do not use Ohm's law as a magic chant or assume one data point proves a whole component is ohmic.",
       };
     case "M9_L6":
       return {
-        coreIdea: "Route structure comes first: one-path circuits keep one common current, while branching circuits keep a common branch voltage.",
-        reasoning: "Decide whether the network is series or parallel before you use any current or voltage rule. Then compare what stays the same in each route type and what gets shared, split, or added at junctions.",
-        checkForUnderstanding: "In a parallel circuit, which quantity is common across each branch and which quantity splits between the branches?",
-        commonTrap: "Do not use the series current rule on a branching circuit or the parallel voltage rule on a one-path chain.",
+        coreIdea: "Mixed-circuit analysis starts from structure: reduce the valid series or parallel block first, then rebuild the source and branch quantities section by section.",
+        reasoning: "Decide which part of the network is genuinely series and which part is genuinely parallel before you use any rule. Then reduce the valid local block, find the source current, and return to the branch voltage or branch current story only where it actually applies.",
+        checkForUnderstanding: "In a circuit with one series resistor feeding a parallel pair, which section should be reduced first and why?",
+        commonTrap: "Do not force one current rule or one voltage rule across the whole mixed network before the branch block has been reduced.",
       };
     case "M10_L1":
       return {
@@ -17362,13 +17188,13 @@ function scaffoldF2AnalogyBridge(code: string): { body: string; checkForUndersta
       };
     case "M9_L5":
       return {
-        body: "The ohmic-route picture works when one control is held fixed while the other changes. Raising the source boost while the same route stays in place increases the stream rate; making the route harder while the same source stays in place reduces it. That is the qualitative meaning behind Ohm's law before the symbols are written.",
-        checkForUnderstanding: "In the ohmic-route picture, what stays fixed when you want to isolate the effect of changing resistance alone?",
+        body: "The ohmic-route picture works only when the route keeps the same resistance while the source boost changes. In that case the stream-rate graph is a straight line through the origin, so the same resistance describes the whole measured range. If the route warms or changes behaviour, the graph bends and one constant resistance no longer tells the whole story.",
+        checkForUnderstanding: "In the ohmic-route picture, what graph clue shows that one resistance value stays valid across the whole test range?",
       };
     case "M9_L6":
       return {
-        body: "The Switchyard-Loop analogy keeps one-path chains separate from branching networks. In a one-path route, every carrier stream passes every component in turn, so the same current appears everywhere. In a branch network, each branch connects across the same two junctions, so the voltage is shared while the current divides and recombines.",
-        checkForUnderstanding: "In the Switchyard-Loop picture, what clue tells you that branch voltage stays the same even though the current can split?",
+        body: "The Switchyard-Loop analogy is strongest when it includes a mixed route, not just a pure chain or pure branch deck. The incoming stream first passes the true series section, then reaches a branch block that shares the same node-to-node push across each branch. That is why the safe method is to collapse the valid branch block first, rebuild the total opposition, and only then return to the branch currents.",
+        checkForUnderstanding: "In the Switchyard-Loop picture, why must the branch block be reduced before you try to use one source current for the whole network?",
       };
     case "M10_L1":
       return {
@@ -18226,6 +18052,7 @@ function localM9FormulaFallbacks(code: string): Array<{ standardFormula: string;
       ];
     case "M9_L4":
       return [
+        { standardFormula: "R is proportional to length / area", meaning: "For the same material, resistance rises with length and falls with cross-sectional area.", conditions: "Use when comparing wires of the same material.", unitsText: "" },
         { standardFormula: "greater length -> greater resistance", meaning: "A longer route gives charge carriers more opposition.", conditions: "Use when comparing wires of the same material and cross-sectional area.", unitsText: "" },
         { standardFormula: "greater cross-sectional area -> lower resistance", meaning: "A wider route gives charge carriers more room to move.", conditions: "Use when comparing wires of the same material and length.", unitsText: "" },
         { standardFormula: "resistance depends on material and geometry", meaning: "Resistance belongs to the route, not to the source.", conditions: "Use when comparing components or wires qualitatively.", unitsText: "" },
@@ -18242,6 +18069,8 @@ function localM9FormulaFallbacks(code: string): Array<{ standardFormula: string;
         { standardFormula: "voltage is the same across parallel branches", meaning: "Each parallel branch shares the same two junctions and so the same potential difference.", conditions: "Use for branches connected across the same supply.", unitsText: "V" },
         { standardFormula: "I_total = I1 + I2 + ...", meaning: "Source current equals the sum of the branch currents in a parallel circuit.", conditions: "Use at a junction where current splits or recombines.", unitsText: "A" },
         { standardFormula: "R_total = R1 + R2 + ...", meaning: "Series resistances add directly because there is one path through all components.", conditions: "Use for components in series.", unitsText: "ohms" },
+        { standardFormula: "1 / R_total = 1 / R1 + 1 / R2 + ...", meaning: "Parallel branches reduce the overall opposition because they provide multiple current routes.", conditions: "Use for resistors connected in parallel.", unitsText: "ohms" },
+        { standardFormula: "mixed circuits are reduced section by section", meaning: "Only the valid local series or parallel block should be combined at each stage.", conditions: "Use before calculating total current or branch values in a mixed network.", unitsText: "" },
       ];
     default:
       return [];
@@ -18685,6 +18514,7 @@ function revisedM9TechnicalWords(code: string): Array<{ term: string; meaning: s
     case "M9_L5":
       return [
         { term: "Ohm's law", meaning: "Ohm's law states that current is proportional to voltage for an ohmic conductor when other conditions stay constant.", why_it_matters: "It connects voltage, current, and resistance without treating them as the same thing." },
+        { term: "I-V characteristic", meaning: "An I-V characteristic is a graph showing how current changes as voltage changes for a component.", why_it_matters: "Its shape reveals whether one constant resistance can describe the component." },
         { term: "Resistance", meaning: "Resistance is how strongly a component or path opposes current.", why_it_matters: "It is one of the two quantities that controls current in the ohmic rule." },
         { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "It is the response quantity in the ohmic rule." },
         { term: "Voltage", meaning: "Voltage is the energy transferred per unit charge.", why_it_matters: "It is the driving quantity in the ohmic rule." },
@@ -18693,6 +18523,7 @@ function revisedM9TechnicalWords(code: string): Array<{ term: string; meaning: s
       return [
         { term: "Series circuit", meaning: "A series circuit has one path, so the same current passes through each component in that path.", why_it_matters: "One-path behavior is the key comparison rule for this lesson." },
         { term: "Parallel circuit", meaning: "A parallel circuit has branches connected between the same two junctions.", why_it_matters: "Branch structure changes the current and voltage story completely." },
+        { term: "Equivalent resistance", meaning: "Equivalent resistance is the single resistance that could replace a whole network without changing the source current.", why_it_matters: "It is the bridge between reading the structure and solving the mixed network." },
         { term: "Current", meaning: "Current is the rate of charge flow past a point.", why_it_matters: "In series it stays common, but in parallel it splits and recombines." },
         { term: "Potential difference", meaning: "Potential difference is the energy transferred per unit charge between two points.", why_it_matters: "In parallel it is shared across each branch between the same two junctions." },
       ];
