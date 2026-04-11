@@ -2,6 +2,7 @@
 
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
+import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
 import { m13QuestionVisualMeta, m13ReflectionVisualCheck, m13ScaffoldCoreBullets, m13ScaffoldFocusExtras, m13ScaffoldMediaCards, m13SimulationCopy } from "./m13LessonContent";
 import { m14QuestionVisualMeta, m14ReflectionVisualCheck, m14ScaffoldCoreBullets, m14ScaffoldFocusExtras, m14ScaffoldMediaCards, m14SimulationCopy } from "./m14LessonContent";
 import { m12NuclearQuestionVisualMeta, m12NuclearReflectionVisualCheck, m12NuclearScaffoldCoreBullets, m12NuclearScaffoldFocusExtras, m12NuclearScaffoldMediaCards, m12NuclearSimulationCopy } from "./m12NuclearLessonContent";
@@ -331,7 +332,7 @@ export function revisedLateCoreQuestionVisualMeta(itemId: string): RevisedLateCo
   const normalized = normalizeItemId(itemId);
   if (normalized.startsWith("M9L")) return revisedM9QuestionVisualMeta(normalized);
   if (normalized.startsWith("M10L")) return m10QuestionVisualMeta(normalized);
-  if (normalized.startsWith("M11L")) return m13QuestionVisualMeta(remapItemIdToModule(normalized, "M13"));
+  if (normalized.startsWith("M11L")) return m11QuestionVisualMeta(normalized);
   if (normalized.startsWith("M12L")) return m12NuclearQuestionVisualMeta(normalized);
   if (normalized.startsWith("M13L")) return revisedM13QuestionVisualMeta(normalized);
   if (normalized.startsWith("M14L")) return m14QuestionVisualMeta(normalized);
@@ -342,7 +343,7 @@ export function revisedLateCoreSimulationCopy(code: string): RevisedLateCoreSimu
   const normalized = normalizeCode(code);
   if (normalized.startsWith("M9_")) return revisedM9SimulationCopy(normalized);
   if (normalized.startsWith("M10_")) return m10SimulationCopy(normalized);
-  if (normalized.startsWith("M11_")) return m13SimulationCopy(remapCodeToModule(normalized, "M13"));
+  if (normalized.startsWith("M11_")) return m11SimulationCopy(normalized);
   if (normalized.startsWith("M12_")) return m12NuclearSimulationCopy(normalized);
   if (normalized.startsWith("M13_")) return revisedM13SimulationCopy(normalized);
   if (normalized.startsWith("M14_")) return m14SimulationCopy(normalized);
@@ -353,7 +354,7 @@ export function revisedLateCoreFocusExtras(code: string): string[] {
   const normalized = normalizeCode(code);
   if (normalized.startsWith("M9_")) return revisedM9FocusExtras(normalized);
   if (normalized.startsWith("M10_")) return m10ScaffoldFocusExtras(normalized);
-  if (normalized.startsWith("M11_")) return m13ScaffoldFocusExtras(remapCodeToModule(normalized, "M13"));
+  if (normalized.startsWith("M11_")) return m11ScaffoldFocusExtras(normalized);
   if (normalized.startsWith("M12_")) return m12NuclearScaffoldFocusExtras(normalized);
   if (normalized.startsWith("M13_")) return revisedM13FocusExtras(normalized);
   if (normalized.startsWith("M14_")) return m14ScaffoldFocusExtras(normalized);
@@ -364,7 +365,7 @@ export function revisedLateCoreCoreBullets(code: string): string[] {
   const normalized = normalizeCode(code);
   if (normalized.startsWith("M9_")) return revisedM9CoreBullets(normalized);
   if (normalized.startsWith("M10_")) return m10ScaffoldCoreBullets(normalized);
-  if (normalized.startsWith("M11_")) return m13ScaffoldCoreBullets(remapCodeToModule(normalized, "M13"));
+  if (normalized.startsWith("M11_")) return m11ScaffoldCoreBullets(normalized);
   if (normalized.startsWith("M12_")) return m12NuclearScaffoldCoreBullets(normalized);
   if (normalized.startsWith("M13_")) return revisedM13CoreBullets(normalized);
   if (normalized.startsWith("M14_")) return m14ScaffoldCoreBullets(normalized);
@@ -375,7 +376,7 @@ export function revisedLateCoreMediaCards(code: string): UnknownRecord[] {
   const normalized = normalizeCode(code);
   if (normalized.startsWith("M9_")) return revisedM9MediaCards(normalized);
   if (normalized.startsWith("M10_")) return m10ScaffoldMediaCards(normalized);
-  if (normalized.startsWith("M11_")) return m13ScaffoldMediaCards(remapCodeToModule(normalized, "M13"));
+  if (normalized.startsWith("M11_")) return m11ScaffoldMediaCards(normalized);
   if (normalized.startsWith("M12_")) return m12NuclearScaffoldMediaCards(normalized);
   if (normalized.startsWith("M13_")) return revisedM13MediaCards(normalized);
   if (normalized.startsWith("M14_")) return m14ScaffoldMediaCards(normalized);
@@ -386,7 +387,7 @@ export function revisedLateCoreReflectionVisualCheck(code: string): UnknownRecor
   const normalized = normalizeCode(code);
   if (normalized.startsWith("M9_")) return revisedM9ReflectionVisualCheck(normalized);
   if (normalized.startsWith("M10_")) return m10ReflectionVisualCheck(normalized);
-  if (normalized.startsWith("M11_")) return m13ReflectionVisualCheck(remapCodeToModule(normalized, "M13"));
+  if (normalized.startsWith("M11_")) return m11ReflectionVisualCheck(normalized);
   if (normalized.startsWith("M12_")) return m12NuclearReflectionVisualCheck(normalized);
   if (normalized.startsWith("M13_")) return revisedM13ReflectionVisualCheck(normalized);
   if (normalized.startsWith("M14_")) return m14ReflectionVisualCheck(normalized);
