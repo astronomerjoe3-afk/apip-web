@@ -136,6 +136,26 @@ const CURRICULUM_TECHNICAL_WORD_SUPPLEMENTS: Record<string, TechnicalWordSeed[]>
     { term: "Centripetal force", aliases: ["centripetal force"], meaning: "Centripetal force is the inward resultant force needed for circular motion.", why_it_matters: "It explains how magnetic force can keep a charged particle in a curved path." },
     { term: "Turning couple", aliases: ["turning couple", "couple", "torque"], meaning: "A turning couple is a pair of equal and opposite forces separated by a distance that causes rotation.", why_it_matters: "It is the mechanism behind the turning of a current loop in a motor." },
   ],
+  A9: [
+    { term: "Magnetic flux", aliases: ["magnetic flux", "flux"], meaning: "Magnetic flux is the magnetic field passing through a chosen area.", why_it_matters: "It is the quantity that must change for electromagnetic induction to occur." },
+    { term: "Flux linkage", aliases: ["flux linkage"], meaning: "Flux linkage is the magnetic flux linked with all the turns of a coil.", why_it_matters: "Faraday's law uses the change in flux linkage to set the induced emf." },
+    { term: "Induced emf", aliases: ["induced emf", "emf"], meaning: "An induced emf is the voltage produced when magnetic flux linkage changes.", why_it_matters: "It is the electrical response in induction, generators, and transformers." },
+    { term: "Faraday's law", aliases: ["faraday's law", "faradays law"], meaning: "Faraday's law states that induced emf depends on the rate of change of magnetic flux linkage.", why_it_matters: "It connects change in flux to voltage generation." },
+    { term: "Lenz's law", aliases: ["lenz's law", "lenzs law"], meaning: "Lenz's law states that the induced effect opposes the change that produces it.", why_it_matters: "It fixes the direction of induced current or field." },
+    { term: "Generator", aliases: ["generator", "ac generator", "a.c. generator"], meaning: "A generator converts mechanical energy into electrical energy by electromagnetic induction.", why_it_matters: "It shows how repeated flux change produces alternating output." },
+    { term: "Alternating current", aliases: ["alternating current", "ac", "a.c."], meaning: "Alternating current is current that reverses direction periodically.", why_it_matters: "It is the natural output of a simple generator and the required input for transformer action." },
+    { term: "Slip rings", aliases: ["slip ring", "slip rings"], meaning: "Slip rings are conducting rings that maintain contact with a rotating coil in an a.c. generator.", why_it_matters: "They allow alternating output without reversing the external connection." },
+    { term: "Transformer", aliases: ["transformer", "transformers"], meaning: "A transformer is a device that uses changing magnetic flux to transfer energy between coils.", why_it_matters: "It changes voltage and current levels in a.c. systems." },
+    { term: "Primary coil", aliases: ["primary coil", "primary winding"], meaning: "The primary coil is the input coil of a transformer.", why_it_matters: "Its alternating current creates the changing core flux." },
+    { term: "Secondary coil", aliases: ["secondary coil", "secondary winding"], meaning: "The secondary coil is the output coil of a transformer.", why_it_matters: "It receives the induced emf from the changing flux in the core." },
+    { term: "Turns ratio", aliases: ["turns ratio"], meaning: "The turns ratio compares the number of turns on the primary and secondary coils.", why_it_matters: "It sets the voltage ratio in the ideal transformer model." },
+    { term: "Rms value", aliases: ["rms", "rms value", "root mean square"], meaning: "The rms value of an a.c. supply is the d.c.-equivalent value for heating effect.", why_it_matters: "It is the practical value used for mains ratings and power calculations." },
+    { term: "Peak value", aliases: ["peak value", "peak voltage", "peak current"], meaning: "The peak value is the maximum magnitude reached in an a.c. cycle.", why_it_matters: "It is converted to rms value when comparing practical power effects." },
+    { term: "Transmission loss", aliases: ["transmission loss", "line loss", "cable loss"], meaning: "Transmission loss is power wasted as heating in power lines.", why_it_matters: "It explains why high-voltage, low-current transmission is useful." },
+    { term: "Eddy current", aliases: ["eddy current", "eddy currents"], meaning: "An eddy current is an induced circulating current inside a bulk conductor.", why_it_matters: "It explains induction heating, magnetic braking, and unwanted core losses." },
+    { term: "Lamination", aliases: ["lamination", "laminations", "laminated core"], meaning: "Laminations are thin insulated layers used to break up large eddy-current paths.", why_it_matters: "They reduce unwanted heating loss in transformer cores." },
+    { term: "Magnetic braking", aliases: ["magnetic braking"], meaning: "Magnetic braking is motion slowdown caused by induced currents whose magnetic effect opposes the motion.", why_it_matters: "It is a practical Lenz's-law application." },
+  ],
 };
 
 const FORMULA_SYMBOL_TECHNICAL_WORDS: TechnicalWordSeed[] = [

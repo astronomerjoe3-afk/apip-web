@@ -569,6 +569,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       conditions: "Use when relating transformer voltage and current on opposite sides.",
       unitsText: "W, V, A",
     },
+    {
+      standardFormula: "I_p / I_s = N_s / N_p",
+      meaning: "In the ideal model, current changes inversely to the turns and voltage ratios.",
+      conditions: "Use when a transformer steps voltage up or down and the current tradeoff must stay visible.",
+      unitsText: "A",
+    },
   ],
   A9_L5: [
     {
@@ -588,6 +594,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       meaning: "Transmission losses in cables rise with the square of the current.",
       conditions: "Use when comparing line heating losses at different transmission currents.",
       unitsText: "W, A, ohm",
+    },
+    {
+      standardFormula: "P = V I",
+      meaning: "For a given transmitted power, raising voltage lowers current.",
+      conditions: "Use when comparing high-voltage and low-voltage transmission routes that deliver the same power.",
+      unitsText: "W, V, A",
     },
   ],
   A9_L6: [
