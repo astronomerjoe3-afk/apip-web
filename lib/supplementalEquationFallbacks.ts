@@ -602,10 +602,22 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "J, C, V",
     },
     {
+      standardFormula: "E_k = 1/2 m v^2",
+      meaning: "Beam energy can be translated into particle speed in the non-relativistic school model.",
+      conditions: "Use after qV has been found and the resulting speed is still within the non-relativistic approximation used by the question.",
+      unitsText: "J, kg, m/s",
+    },
+    {
       standardFormula: "r = m v / (q B)",
       meaning: "A magnetic field bends a charged-particle beam into a circular path with radius set by momentum per unit charge.",
       conditions: "Use for detector-track curvature or accelerator beam steering when the motion is perpendicular to the field.",
       unitsText: "m, kg, m/s, C, T",
+    },
+    {
+      standardFormula: "p = q B r",
+      meaning: "Detector curvature gives the particle momentum from charge, field strength, and track radius.",
+      conditions: "Use when the particle path is perpendicular to the magnetic field and the detector geometry gives the radius directly.",
+      unitsText: "kg m/s, C, T, m",
     },
   ],
   A10_L3: [
@@ -627,13 +639,31 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       conditions: "Use for remaining-nuclei or count-rate questions expressed in half-life form.",
       unitsText: "count",
     },
+    {
+      standardFormula: "A = A_0 (1/2)^(t / t_(1/2))",
+      meaning: "Activity halves on the same timetable as the number of undecayed nuclei for one nuclide.",
+      conditions: "Use for activity-after-time questions expressed in half-life form.",
+      unitsText: "Bq",
+    },
   ],
   A10_L4: [
+    {
+      standardFormula: "mass defect = Z m_p + N m_n - m_nucleus",
+      meaning: "Mass defect is found by comparing the total free-nucleon mass with the actual bound-nucleus mass.",
+      conditions: "Use when proton count, neutron count, and nuclear mass are given explicitly.",
+      unitsText: "u or kg",
+    },
     {
       standardFormula: "Delta E = Delta m c^2",
       meaning: "A mass defect corresponds to binding energy through mass-energy equivalence.",
       conditions: "Use when comparing separated nucleons with the bound nucleus.",
       unitsText: "J, kg",
+    },
+    {
+      standardFormula: "binding energy = mass defect x 931.5 MeV",
+      meaning: "Atomic-mass-unit mass defects can be converted directly into nuclear binding energy in MeV.",
+      conditions: "Use when the mass defect is given in u and the answer is required in MeV.",
+      unitsText: "MeV, u",
     },
     {
       standardFormula: "binding energy per nucleon = total binding energy / A",
@@ -668,6 +698,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       conditions: "Use for reactor-output and fuel-use calculations.",
       unitsText: "s^-1",
     },
+    {
+      standardFormula: "critical reactor: k = 1",
+      meaning: "A thermal reactor is critical when each fission produces on average one further fission event.",
+      conditions: "Use when comparing subcritical, critical, and supercritical chain-reaction states.",
+      unitsText: "no unit",
+    },
   ],
   A10_L6: [
     {
@@ -675,6 +711,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       meaning: "Fusion releases energy when the products are more tightly bound and the total mass decreases.",
       conditions: "Use when linking nuclear-energy release to binding-energy change in fusion.",
       unitsText: "J, kg",
+    },
+    {
+      standardFormula: "fusion energy released = (mass of reactants - mass of products) c^2",
+      meaning: "Fusion output comes from the mass-energy drop between the starting nuclei and the products.",
+      conditions: "Use when a fusion reaction is described by reactant and product masses rather than by a ready-made mass defect.",
+      unitsText: "J or MeV",
     },
     {
       standardFormula: "binding energy per nucleon = total binding energy / A",
