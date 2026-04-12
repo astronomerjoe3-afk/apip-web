@@ -335,6 +335,21 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const M3_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M3_L1: [
+    { standardFormula: "total input energy = useful output energy + wasted energy", meaning: "Energy accounting must balance useful gain and losses.", conditions: "Use when tracing an energy transfer or machine process.", unitsText: "J" },
+    { standardFormula: "delta E = energy transferred", meaning: "A transfer changes the energy stored in a system.", conditions: "Use when the store change is known or easier to track than the mechanism.", unitsText: "J" },
+  ],
+  M3_L4: [
+    { standardFormula: "work done = force x distance", meaning: "Aligned force transfers energy when it acts through a distance.", conditions: "Use in the simple aligned-force case.", unitsText: "J" },
+    { standardFormula: "work done = change in energy", meaning: "Work is another name for an energy transfer into or out of a store.", conditions: "Use when the store change is already known.", unitsText: "J" },
+  ],
+  M3_L5: [
+    { standardFormula: "power = energy transferred / time", meaning: "Power measures how quickly energy is transferred.", conditions: "Use for the rate of working or transfer.", unitsText: "W" },
+    { standardFormula: "efficiency = (useful output / total input) x 100%", meaning: "Efficiency measures the fraction of input that becomes useful output.", conditions: "Use when comparing useful energy or power with the total supplied.", unitsText: "%" },
+  ],
+};
+
 const M9_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   M9_L3: [
     { standardFormula: "V = E / Q", meaning: "Potential difference is energy transferred per unit charge.", conditions: "Use when the energy gained or lost by each coulomb is being compared.", unitsText: "V, J/C" },
@@ -412,5 +427,5 @@ const M13_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 };
 
 export function coreFormulaFallbacksForLesson(code: string): FormulaFallbackEntry[] {
-  return M9_FORMULA_OVERRIDES[code] || M11_FORMULA_OVERRIDES[code] || M13_FORMULA_OVERRIDES[code] || CORE_FORMULA_FALLBACKS[code] || [];
+  return M3_FORMULA_OVERRIDES[code] || M9_FORMULA_OVERRIDES[code] || M11_FORMULA_OVERRIDES[code] || M13_FORMULA_OVERRIDES[code] || CORE_FORMULA_FALLBACKS[code] || [];
 }

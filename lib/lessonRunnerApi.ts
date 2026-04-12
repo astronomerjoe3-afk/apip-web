@@ -3,7 +3,8 @@
 import { apipGet, apipPost } from "./apipApi";
 import { m2ContrastCodes, m2PaddingPrompt, m2QuestionVisualMeta, m2ReflectionVisualCheck, m2ScaffoldCoreBullets, m2ScaffoldFocusExtras, m2ScaffoldMediaCards, m2SimulationCopy } from "./m2LessonContent";
 import { m2GeneratedConceptGateItems, m2GeneratedDiagnosticItems, m2GeneratedMasteryItems } from "./m2AssessmentBanks";
-import { m3ContrastCodes, m3GeneratedConceptGateItems, m3GeneratedDiagnosticItems, m3GeneratedMasteryItems, m3PaddingPrompt, m3QuestionVisualMeta, m3ReflectionVisualCheck, m3ScaffoldCoreBullets, m3ScaffoldFocusExtras, m3ScaffoldMediaCards, m3SimulationCopy, m3SupplementalScaffoldSections, m3SupplementalWorkedExampleSections } from "./m3LessonContent";
+import { m3ContrastCodes, m3PaddingPrompt, m3QuestionVisualMeta, m3ReflectionVisualCheck, m3ScaffoldCoreBullets, m3ScaffoldFocusExtras, m3ScaffoldMediaCards, m3SimulationCopy, m3SupplementalScaffoldSections, m3SupplementalWorkedExampleSections } from "./m3LessonContent";
+import { m3GeneratedConceptGateItems, m3GeneratedDiagnosticItems, m3GeneratedMasteryItems } from "./m3AssessmentBanks";
 import { m4QuestionVisualMeta, m4ReflectionVisualCheck, m4ScaffoldCoreBullets, m4ScaffoldFocusExtras, m4ScaffoldMediaCards, m4SimulationCopy, m4SupplementalScaffoldSections } from "./m4LessonContent";
 import { m5QuestionVisualMeta, m5ReflectionVisualCheck, m5ScaffoldCoreBullets, m5ScaffoldFocusExtras, m5ScaffoldMediaCards, m5SimulationCopy } from "./m5LessonContent";
 import { m6QuestionVisualMeta, m6ReflectionVisualCheck, m6ScaffoldCoreBullets, m6ScaffoldFocusExtras, m6ScaffoldMediaCards, m6SimulationCopy } from "./m6LessonContent";
