@@ -309,18 +309,24 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "planet = body seen mainly by reflected starlight", meaning: "A planet can look bright without producing its own light.", conditions: "Use when comparing luminous and reflective bodies.", unitsText: "" },
   ],
   M14_L2: [
+    { standardFormula: "low-mass star -> red giant -> white dwarf", meaning: "A lower-mass star does not follow the supernova route and instead ends as a white dwarf remnant after its giant phase.", conditions: "Use when separating low-mass stellar endings from high-mass ones.", unitsText: "" },
+    { standardFormula: "high-mass star -> red supergiant -> supernova -> neutron star or black hole", meaning: "High-mass stars follow the explosive route and can leave very dense compact remnants.", conditions: "Use when reading the mass-dependent branch in stellar evolution.", unitsText: "" },
     { standardFormula: "stellar mass controls the later life cycle and remnant", meaning: "Low-mass and high-mass stars share early stages but branch later because mass changes the path.", conditions: "Use when comparing white-dwarf endings with supernova routes.", unitsText: "" },
   ],
   M14_L3: [
     { standardFormula: "galaxy = gravitationally bound system of many stars, gas, and dust", meaning: "Gravity is the reason a galaxy counts as one physical system.", conditions: "Use when separating a star, a Solar System, a galaxy, and the universe.", unitsText: "" },
   ],
   M14_L4: [
-    { standardFormula: "1 light-year = c × 1 year", meaning: "A light-year is the distance light travels in one year.", conditions: "Use when converting the meaning of a light-year into a distance idea.", unitsText: "m or light-years" },
+    { standardFormula: "distance = speed x time", meaning: "The light-year definition comes from the standard motion relation, using the speed of light and one year of travel.", conditions: "Use when building the meaning of a light-year from first principles.", unitsText: "m" },
+    { standardFormula: "1 light-year = c x 1 year approx 9.46 x 10^15 m", meaning: "A light-year is the distance light travels in one year, which is a very large distance in metres.", conditions: "Use when converting between light-years and metres or explaining why the unit is useful in astronomy.", unitsText: "m or light-years" },
   ],
   M14_L5: [
-    { standardFormula: "z = (λ_observed - λ_emitted) / λ_emitted", meaning: "Redshift compares the wavelength change with the emitted wavelength.", conditions: "Use when quantifying cosmological redshift.", unitsText: "" },
+    { standardFormula: "z = (lambda_observed - lambda_emitted) / lambda_emitted", meaning: "Redshift compares the wavelength change with the emitted wavelength as a fractional increase.", conditions: "Use when quantifying cosmological redshift from spectral-line data.", unitsText: "" },
+    { standardFormula: "for small redshift, v approx zc", meaning: "At low redshift, the fractional wavelength shift gives an approximate recession speed as a fraction of the speed of light.", conditions: "Use for school-level links between measured redshift and recession speed when z is small.", unitsText: "m/s or km/s" },
   ],
   M14_L6: [
+    { standardFormula: "v = H0 d", meaning: "Hubble's law links galaxy recession speed to distance on the large-scale expansion model.", conditions: "Use when estimating recession speed from a known distance or when reading a Hubble-law graph.", unitsText: "km/s, Mpc" },
+    { standardFormula: "greater galaxy distance -> greater recession speed and usually greater redshift", meaning: "The distance-redshift trend is the observable pattern behind the expanding-universe model.", conditions: "Use when linking redshift evidence, Hubble's law, and the Big Bang model.", unitsText: "" },
     { standardFormula: "greater galaxy distance -> greater cosmological redshift", meaning: "The distance-redshift trend is evidence for cosmic expansion.", conditions: "Use when linking observation to the Big Bang model.", unitsText: "" },
     { standardFormula: "Big Bang model = expanding-space model from an early hot dense state", meaning: "The model describes expansion of space rather than an ordinary explosion from one point.", conditions: "Use when explaining why the Big Bang is an expansion story.", unitsText: "" },
   ],
