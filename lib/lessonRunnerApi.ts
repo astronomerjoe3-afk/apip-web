@@ -14,6 +14,7 @@ import { m6GeneratedConceptGateItems, m6GeneratedDiagnosticItems, m6GeneratedMas
 import { m7QuestionVisualMeta, m7ReflectionVisualCheck, m7ScaffoldCoreBullets, m7ScaffoldFocusExtras, m7ScaffoldMediaCards, m7SimulationCopy } from "./m7LessonContent";
 import { m7GeneratedConceptGateItems, m7GeneratedDiagnosticItems, m7GeneratedMasteryItems } from "./m7AssessmentBanks";
 import { m8QuestionVisualMeta, m8ReflectionVisualCheck, m8ScaffoldCoreBullets, m8ScaffoldFocusExtras, m8ScaffoldMediaCards, m8ScaffoldSectionVisual, m8SimulationCopy } from "./m8LessonContent";
+import { m8GeneratedConceptGateItems, m8GeneratedDiagnosticItems, m8GeneratedMasteryItems } from "./m8AssessmentBanks";
 import { f5QuestionVisualMeta, f5ReflectionVisualCheck, f5ScaffoldCoreBullets, f5ScaffoldFocusExtras, f5ScaffoldMediaCards, f5SimulationCopy } from "./f5LessonContent";
 import { m1GeneratedConceptGateItems, m1GeneratedDiagnosticItems, m1GeneratedMasteryItems } from "./m1AssessmentBanks";
 import { m9GeneratedConceptGateItems, m9GeneratedDiagnosticItems, m9GeneratedMasteryItems } from "./m9AssessmentBanks";
@@ -6084,6 +6085,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M5_")) return m5GeneratedDiagnosticItems(code);
   if (code.startsWith("M6_")) return m6GeneratedDiagnosticItems(code);
   if (code.startsWith("M7_")) return m7GeneratedDiagnosticItems(code);
+  if (code.startsWith("M8_")) return m8GeneratedDiagnosticItems(code);
   switch (code) {
     case "F2_L1":
       return [
@@ -6220,6 +6222,7 @@ function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M5_")) return m5GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M6_")) return m6GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M7_")) return m7GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M8_")) return m8GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F1_")) return f1GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F5_")) return f5GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F4_")) return f4GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
@@ -6372,6 +6375,7 @@ function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M5_")) return m5GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M6_")) return m6GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M7_")) return m7GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M8_")) return m8GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F1_")) return f1GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F2_")) return f2GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F3_")) return f3GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
@@ -8163,6 +8167,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M5_")) return m5GeneratedMasteryItems(code);
   if (code.startsWith("M6_")) return m6GeneratedMasteryItems(code);
   if (code.startsWith("M7_")) return m7GeneratedMasteryItems(code);
+  if (code.startsWith("M8_")) return m8GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
     const f2Base = [...itemsFrom(lesson, "transfer"), ...conceptGateItems(lesson)]
       .map(asRecord)
@@ -8295,6 +8300,7 @@ function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M5_")) return m5GeneratedConceptGateItems(code);
   if (code.startsWith("M6_")) return m6GeneratedConceptGateItems(code);
   if (code.startsWith("M7_")) return m7GeneratedConceptGateItems(code);
+  if (code.startsWith("M8_")) return m8GeneratedConceptGateItems(code);
   switch (code) {
     case "F1_L1":
       return [
@@ -8877,6 +8883,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M5_")) return m5GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M6_")) return m6GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M7_")) return m7GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M8_")) return m8GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F1_")) return f1GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F2_")) return f2GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F3_")) return f3GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);

@@ -180,26 +180,38 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   M8_L1: [
     { standardFormula: "angle of incidence = angle of reflection", meaning: "Mirror reflection keeps equal angles to the normal.", conditions: "Measure from the guide line or normal, not from the mirror surface.", unitsText: "degrees" },
     { standardFormula: "object distance = image distance", meaning: "A plane mirror puts the virtual image the same distance behind the mirror as the object is in front.", conditions: "Use for plane mirrors.", unitsText: "m" },
+    { standardFormula: "surface angle + normal angle = 90 degrees", meaning: "A surface reading must be converted into the normal-based angle before the reflection rule is used.", conditions: "Use when the given angle is measured to the mirror surface.", unitsText: "degrees" },
+    { standardFormula: "head-on incidence -> reflected ray retraces the same line", meaning: "A ray at 0 degrees to the normal reflects straight back along its original path.", conditions: "Use for normal incidence at a plane mirror.", unitsText: "" },
   ],
   M8_L2: [
     { standardFormula: "toward the normal -> slower medium", meaning: "A refracted ray bends toward the normal when light slows down.", conditions: "Use when comparing fast and slow media.", unitsText: "" },
     { standardFormula: "away from the normal -> faster medium", meaning: "A refracted ray bends away from the normal when light speeds up.", conditions: "Use when comparing fast and slow media.", unitsText: "" },
+    { standardFormula: "no speed change -> no refraction bend", meaning: "If the wave speed stays the same across the boundary, the route direction does not turn by refraction.", conditions: "Use when comparing two media with equal optical effect.", unitsText: "" },
+    { standardFormula: "parallel faces -> emergent ray parallel to incident ray", meaning: "A rectangular block gives opposite entry and exit turns, so the final ray leaves parallel to the original direction.", conditions: "Use for refraction through a block with parallel sides.", unitsText: "" },
   ],
   M8_L3: [
     { standardFormula: "parallel ray through a converging lens -> through the far focus", meaning: "A key ray rule locates the real image for a converging lens.", conditions: "Use in the thin-lens ray model.", unitsText: "" },
     { standardFormula: "central ray -> approximately undeviated", meaning: "The center ray gives a second reliable construction line for image location.", conditions: "Use in the thin-lens ray model.", unitsText: "" },
+    { standardFormula: "object at 2F -> image at 2F, same size, inverted", meaning: "The 2F anchor case gives a symmetric real-image construction for a converging lens.", conditions: "Use for a converging lens with the object placed at twice the focal length.", unitsText: "" },
+    { standardFormula: "real image -> actual rays meet and can be screened", meaning: "A true meeting point means the image can usually be projected onto a screen.", conditions: "Use when classifying the image formed by a converging lens.", unitsText: "" },
   ],
   M8_L4: [
     { standardFormula: "parallel ray through a diverging lens -> appears to come from the near focus", meaning: "A diverging lens spreads real rays but their backward extensions locate the virtual image.", conditions: "Use in the thin-lens ray model.", unitsText: "" },
     { standardFormula: "virtual image = backward extensions meet, not real rays", meaning: "The image location is apparent rather than a true crossing of real light rays.", conditions: "Use when classifying the image formed by a diverging lens.", unitsText: "" },
+    { standardFormula: "diverging-lens image -> virtual, upright, smaller", meaning: "The standard single-lens diverging case gives a diminished image on the object side.", conditions: "Use for a real object in front of a single diverging lens.", unitsText: "" },
+    { standardFormula: "virtual image -> cannot be caught on a screen", meaning: "A screen needs actual rays to meet at the image point, which does not happen for the usual diverging-lens image.", conditions: "Use when checking screenability.", unitsText: "" },
   ],
   M8_L5: [
     { standardFormula: "critical angle = incident angle in the denser medium that gives a 90 degree refracted ray", meaning: "The critical angle is the last possible escape angle.", conditions: "Use only when light travels from a denser medium to a less dense medium.", unitsText: "degrees" },
     { standardFormula: "total internal reflection happens for angle > critical angle", meaning: "Above the critical angle there is no refracted escape ray.", conditions: "Use only when light is leaving the denser medium.", unitsText: "" },
+    { standardFormula: "angle = critical angle -> refracted ray travels along the boundary", meaning: "The exact critical-angle case still has an escaping refracted ray, but only along the surface.", conditions: "Use for the threshold case between escape and total internal reflection.", unitsText: "" },
+    { standardFormula: "TIR needs denser-to-less-dense direction and angle above critical", meaning: "Both the medium direction and the angle condition must be satisfied together.", conditions: "Use when deciding whether total internal reflection is possible.", unitsText: "" },
   ],
   M8_L6: [
     { standardFormula: "true image = actual ray intersection", meaning: "A real image comes from real rays meeting.", conditions: "Use when checking whether the image can form on a screen.", unitsText: "" },
     { standardFormula: "virtual image = apparent intersection of backward extensions", meaning: "A virtual image comes from extension lines rather than real crossings.", conditions: "Use when real rays do not actually meet at the image point.", unitsText: "" },
+    { standardFormula: "selected rays stand in for the full ray bundle", meaning: "A ray diagram is a route map, so a few disciplined construction rays are enough to predict the image.", conditions: "Use in standard IGCSE ray-diagram constructions.", unitsText: "" },
+    { standardFormula: "screen catches real image, not virtual image", meaning: "Screenability is the practical test that separates actual ray crossings from apparent ones.", conditions: "Use when classifying the image after a ray sketch.", unitsText: "" },
   ],
   M9_L1: [
     { standardFormula: "a steady current needs a complete circuit", meaning: "Charge carriers need one unbroken conducting path for sustained flow.", conditions: "Use when explaining why current stops or continues in a simple loop.", unitsText: "" },
