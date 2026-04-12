@@ -1,7 +1,8 @@
 "use client";
 
 import { apipGet, apipPost } from "./apipApi";
-import { m2ContrastCodes, m2GeneratedConceptGateItems, m2GeneratedDiagnosticItems, m2GeneratedMasteryItems, m2PaddingPrompt, m2QuestionVisualMeta, m2ReflectionVisualCheck, m2ScaffoldCoreBullets, m2ScaffoldFocusExtras, m2ScaffoldMediaCards, m2SimulationCopy } from "./m2LessonContent";
+import { m2ContrastCodes, m2PaddingPrompt, m2QuestionVisualMeta, m2ReflectionVisualCheck, m2ScaffoldCoreBullets, m2ScaffoldFocusExtras, m2ScaffoldMediaCards, m2SimulationCopy } from "./m2LessonContent";
+import { m2GeneratedConceptGateItems, m2GeneratedDiagnosticItems, m2GeneratedMasteryItems } from "./m2AssessmentBanks";
 import { m3ContrastCodes, m3GeneratedConceptGateItems, m3GeneratedDiagnosticItems, m3GeneratedMasteryItems, m3PaddingPrompt, m3QuestionVisualMeta, m3ReflectionVisualCheck, m3ScaffoldCoreBullets, m3ScaffoldFocusExtras, m3ScaffoldMediaCards, m3SimulationCopy, m3SupplementalScaffoldSections, m3SupplementalWorkedExampleSections } from "./m3LessonContent";
 import { m4QuestionVisualMeta, m4ReflectionVisualCheck, m4ScaffoldCoreBullets, m4ScaffoldFocusExtras, m4ScaffoldMediaCards, m4SimulationCopy, m4SupplementalScaffoldSections } from "./m4LessonContent";
 import { m5QuestionVisualMeta, m5ReflectionVisualCheck, m5ScaffoldCoreBullets, m5ScaffoldFocusExtras, m5ScaffoldMediaCards, m5SimulationCopy } from "./m5LessonContent";
@@ -6204,6 +6205,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
 }
 
 function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
+  if (lessonCode(lesson).startsWith("M2_")) return m2GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M1_")) return m1GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F1_")) return f1GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F5_")) return f5GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
@@ -6351,6 +6353,7 @@ function prefersLessonOwnedMasteryBank(lesson: UnknownRecord, authoredCount = it
 }
 
 function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
+  if (lessonCode(lesson).startsWith("M2_")) return m2GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M1_")) return m1GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F1_")) return f1GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F2_")) return f2GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
@@ -8843,6 +8846,7 @@ function hasUsableAssessmentAnswer(item: UnknownRecord): boolean {
 }
 
 function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
+  if (lessonCode(lesson).startsWith("M2_")) return m2GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M1_")) return m1GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F1_")) return f1GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("F2_")) return f2GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
@@ -16325,10 +16329,11 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
           steps: [
             "Resolve the 20 N force first: Fx = 20 cos 30 degrees approx 17.3 N east and Fy = 20 sin 30 degrees = 10.0 N north.",
             "Combine one axis at a time. Horizontally, 17.3 N east and 6 N west leave 11.3 N east. Vertically, 10.0 N north and 4 N south leave 6.0 N north.",
-            "Now rebuild the resultant from the perpendicular components using Pythagoras: magnitude = sqrt(5^2 + 6^2) = sqrt(61) ≈ 7.8 N.",
+            "Rebuild the resultant magnitude from the perpendicular net components: R = sqrt(11.3^2 + 6.0^2) approx 12.8 N.",
+            "Find the direction from the +x axis with tan(theta) = 6.0 / 11.3, giving theta approx 28 degrees.",
             "State the quadrant as well: the resultant points 28 degrees above the +x axis because both net components are positive.",
           ],
-          answer: "Net components = 5 N east and 6 N north, so the resultant is about 7.8 N northeast, because components must be combined axis by axis before rebuilding the final arrow.",
+          answer: "The net components are 11.3 N east and 6.0 N north, so the resultant is about 12.8 N at about 28 degrees above the +x axis.",
         },
         extra_examples: [
           {
@@ -17565,7 +17570,7 @@ function scaffoldF2SectionCopy(code: string): { coreIdea: string; reasoning: str
     case "M2_L6":
       return {
         coreIdea: "Arrow Split rewrites one angled force into axis components so vectors can be combined cleanly without changing the underlying physics.",
-        reasoning: "Choose axes, resolve each angled force into horizontal and vertical parts, and combine each axis separately with signs. Only after the axis totals are clear should you rebuild the final resultant. Then read the direction counterclockwise from +x; in first-quadrant cases you can use θ = tan⁻¹(y / x), but the signs of x and y still decide the quadrant.",
+        reasoning: "Choose axes, resolve each angled force into horizontal and vertical parts, and combine each axis separately with signs. Only after the axis totals are clear should you rebuild the final resultant. Then read the direction counterclockwise from +x; in first-quadrant cases you can use tan(theta) = y / x, but the signs of x and y still decide the quadrant.",
         checkForUnderstanding: "If net x is positive and net y is positive, from which axis should you measure the direction angle and which ratio gives the angle?",
         commonTrap: "Do not add component magnitudes blindly without direction, do not measure the angle from the y-axis when the lesson is using +x as the reference, and do not talk as if the components are extra forces acting in addition to the original arrow.",
       };
@@ -18728,7 +18733,7 @@ function scaffoldExtendedExtraSections(code: string): UnknownRecord[] {
       return [
         {
           heading: "Reading direction in degrees",
-          body: "After you combine to get the net x and net y components, draw the rebuilt resultant from the origin to that net component point. The direction is measured counterclockwise from the +x axis to that arrow. In first-quadrant cases, use θ = tan⁻¹(y / x); in all cases, keep the signs of x and y visible so you place the angle in the correct quadrant.",
+          body: "After you combine to get the net x and net y components, draw the rebuilt resultant from the origin to that net component point. The direction is measured counterclockwise from the +x axis to that arrow. In first-quadrant cases, use tan(theta) = y / x; in all cases, keep the signs of x and y visible so you place the angle in the correct quadrant.",
           check_for_understanding: "If a rebuilt vector has +x and +y components, where do you start measuring the direction angle, and what ratio tells you the angle size?",
         },
       ];
