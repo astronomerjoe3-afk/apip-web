@@ -19204,6 +19204,14 @@ function preWorkedExampleVideoMeta(code: string): {
     const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
     return staticPublishedVideoAssetUrl("A8", normalizedLessonId, filename, currentA8FieldsAssetVersion);
   };
+  const currentA9InductionAssetVersion = "20260412a9a";
+  const staticA9InductionVideoAssetUrl = (
+    lessonId: string,
+    filename: "final.mp4" | "thumbnail.png" | "captions.vtt",
+  ) => {
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    return staticPublishedVideoAssetUrl("A9", normalizedLessonId, filename, currentA9InductionAssetVersion);
+  };
   switch (effectiveCode) {
     case "A8_L1":
       return {
@@ -19288,6 +19296,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticA8FieldsVideoAssetUrl("A8_L6", "final.mp4"),
         poster_url: staticA8FieldsVideoAssetUrl("A8_L6", "thumbnail.png"),
         captions_url: staticA8FieldsVideoAssetUrl("A8_L6", "captions.vtt"),
+      };
+    case "A9_L1":
+      return {
+        body: "Use this video to connect changing flux linkage to induced emf before the worked example begins.",
+        caption: "Video explainer: magnetic flux, flux linkage, Faraday's law, and why no change means no induced emf before the lesson example.",
+        highlights: [
+          "Magnetic flux is field through an area",
+          "Induced emf depends on how quickly flux linkage changes",
+          "No change in flux means no induced emf",
+        ],
+        checkForUnderstanding: "If a loop sits in a magnetic field but nothing about the flux through it changes, what should happen to the induced emf?",
+        video_url: staticA9InductionVideoAssetUrl("A9_L1", "final.mp4"),
+        poster_url: staticA9InductionVideoAssetUrl("A9_L1", "thumbnail.png"),
+        captions_url: staticA9InductionVideoAssetUrl("A9_L1", "captions.vtt"),
+      };
+    case "A9_L2":
+      return {
+        body: "Use this video to keep the original flux change and the induced response order clear before the worked example begins.",
+        caption: "Video explainer: Lenz's law as opposition to change, direction reasoning, and energy-conservation meaning before the lesson example.",
+        highlights: [
+          "The induced effect opposes the change that causes it",
+          "Direction questions are easiest when the original change is named first",
+          "Lenz's law is a physical opposition rule, not a memorized slogan",
+        ],
+        checkForUnderstanding: "If into-page flux is increasing, what field direction should the induced response try to produce?",
+        video_url: staticA9InductionVideoAssetUrl("A9_L2", "final.mp4"),
+        poster_url: staticA9InductionVideoAssetUrl("A9_L2", "thumbnail.png"),
+        captions_url: staticA9InductionVideoAssetUrl("A9_L2", "captions.vtt"),
+      };
+    case "A9_L3":
+      return {
+        body: "Use this video to connect generator rotation, changing flux linkage, and alternating emf before the worked example begins.",
+        caption: "Video explainer: rotating coils, alternating emf, generator frequency, and why faster turning increases both frequency and induced emf before the lesson example.",
+        highlights: [
+          "A rotating coil changes its flux linkage continuously",
+          "The output alternates because coil orientation reverses each half-turn",
+          "Faster rotation raises both the cycle rate and the induced emf",
+        ],
+        checkForUnderstanding: "If the same generator spins faster while the flux swing stays the same, what happens to the frequency and the induced emf?",
+        video_url: staticA9InductionVideoAssetUrl("A9_L3", "final.mp4"),
+        poster_url: staticA9InductionVideoAssetUrl("A9_L3", "thumbnail.png"),
+        captions_url: staticA9InductionVideoAssetUrl("A9_L3", "captions.vtt"),
+      };
+    case "A9_L4":
+      return {
+        body: "Use this video to keep transformer action, turns ratio, and ideal power balance together before the worked example begins.",
+        caption: "Video explainer: linked coils, shared changing core flux, step-up and step-down voltage ratios, and current trade-offs in ideal transformers before the lesson example.",
+        highlights: [
+          "Transformers need changing current in the primary coil",
+          "Voltage ratio follows the turns ratio",
+          "Ideal power balance explains why current changes opposite to voltage",
+        ],
+        checkForUnderstanding: "If the secondary has more turns than the primary, what happens to the voltage and the current in an ideal transformer?",
+        video_url: staticA9InductionVideoAssetUrl("A9_L4", "final.mp4"),
+        poster_url: staticA9InductionVideoAssetUrl("A9_L4", "thumbnail.png"),
+        captions_url: staticA9InductionVideoAssetUrl("A9_L4", "captions.vtt"),
+      };
+    case "A9_L5":
+      return {
+        body: "Use this video to keep rms meaning, transmission current, and cable-loss reasoning together before the worked example begins.",
+        caption: "Video explainer: rms values, peak-to-rms conversion, power-current links, and why high-voltage transmission reduces I squared R losses before the lesson example.",
+        highlights: [
+          "RMS values give the d.c.-equivalent heating effect of an a.c. supply",
+          "For a fixed power, higher voltage means lower current",
+          "Lower current sharply reduces transmission loss because loss scales with I squared R",
+        ],
+        checkForUnderstanding: "If the delivered power stays the same but the transmission voltage increases, what happens to the current and the cable loss?",
+        video_url: staticA9InductionVideoAssetUrl("A9_L5", "final.mp4"),
+        poster_url: staticA9InductionVideoAssetUrl("A9_L5", "thumbnail.png"),
+        captions_url: staticA9InductionVideoAssetUrl("A9_L5", "captions.vtt"),
+      };
+    case "A9_L6":
+      return {
+        body: "Use this video to connect local induced loops to heating, braking, and design choices before the worked example begins.",
+        caption: "Video explainer: eddy currents as local induction loops, magnetic braking, induction heating, and why laminations or slots reduce unwanted heating before the lesson example.",
+        highlights: [
+          "Changing flux inside a bulk conductor drives local circulating currents",
+          "Those currents can produce useful heating or useful braking",
+          "Design features like laminations reduce unwanted eddy-current loops",
+        ],
+        checkForUnderstanding: "Why does cutting slots or laminations into a conductor reduce unwanted eddy-current heating?",
+        video_url: staticA9InductionVideoAssetUrl("A9_L6", "final.mp4"),
+        poster_url: staticA9InductionVideoAssetUrl("A9_L6", "thumbnail.png"),
+        captions_url: staticA9InductionVideoAssetUrl("A9_L6", "captions.vtt"),
       };
     case "M1_L1":
       return {

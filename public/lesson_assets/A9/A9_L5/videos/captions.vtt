@@ -1,0 +1,437 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.374
+Lesson 5 becomes much clearer when rms values and power transmission are treated as one chain: meaningful a.c.
+
+2
+00:00:06.374 --> 00:00:12.747
+readings lead into meaningful loss calculations.
+
+3
+00:00:12.747 --> 00:00:19.121
+RMS values means heating-equivalent readings.
+
+4
+00:00:19.121 --> 00:00:25.495
+They let an alternating supply be compared to a d.c.
+
+5
+00:00:25.495 --> 00:00:31.868
+supply in terms of heating effect.
+
+6
+00:00:31.868 --> 00:00:38.242
+Power link means current depends on voltage.
+
+7
+00:00:38.242 --> 00:00:44.615
+For a given delivered power, current is smaller when the transmission voltage is larger.
+
+8
+00:00:44.615 --> 00:00:50.989
+Loss link means I squared R.
+
+9
+00:00:50.989 --> 00:00:57.363
+Cable heating depends very strongly on the current.
+
+10
+00:00:57.363 --> 00:01:03.736
+RMS readings and high-voltage transmission belong on the same practical power-delivery route.
+
+11
+00:01:03.736 --> 00:01:10.110
+Keep this takeaway in view: RMS readings and high-voltage transmission belong on the same practical power-delivery route.
+
+12
+00:01:10.110 --> 00:01:15.474
+This diagram matters because it keeps the meaning of the rms reading tied to the current and loss consequences in the transmission line.
+
+13
+00:01:15.474 --> 00:01:20.839
+Wave size means peak and rms.
+
+14
+00:01:20.839 --> 00:01:26.203
+The alternating supply still needs a practical way to report its effect.
+
+15
+00:01:26.203 --> 00:01:31.568
+Current route means I = P / V.
+
+16
+00:01:31.568 --> 00:01:36.932
+Delivered power and transmission voltage fix the line current.
+
+17
+00:01:36.932 --> 00:01:42.297
+Loss route means P_loss = I^2 R.
+
+18
+00:01:42.297 --> 00:01:47.661
+Once the current is known, cable heating follows immediately.
+
+19
+00:01:47.661 --> 00:01:53.026
+The practical reading and the practical loss story belong together.
+
+20
+00:01:53.026 --> 00:01:58.390
+Keep this takeaway in view: The practical reading and the practical loss story belong together.
+
+21
+00:01:58.390 --> 00:02:03.721
+An effort-versus-flow analogy helps because transmission is really about delivering the same power while reducing the burden carried by the current in the cables.
+
+22
+00:02:03.721 --> 00:02:09.052
+Delivered job means fixed power target.
+
+23
+00:02:09.052 --> 00:02:14.383
+The amount of power reaching the destination is the quantity being held steady.
+
+24
+00:02:14.383 --> 00:02:19.714
+Higher push means higher voltage.
+
+25
+00:02:19.714 --> 00:02:25.046
+A larger voltage means the same power can be carried with less current.
+
+26
+00:02:25.046 --> 00:02:30.377
+Lower route stress means smaller current loss.
+
+27
+00:02:30.377 --> 00:02:35.708
+Smaller current means much less heating in the cables.
+
+28
+00:02:35.708 --> 00:02:41.039
+High-voltage transmission works because it lowers the current needed for the same power.
+
+29
+00:02:41.039 --> 00:02:46.370
+Keep this takeaway in view: High-voltage transmission works because it lowers the current needed for the same power.
+
+30
+00:02:46.370 --> 00:02:53.465
+Lesson 5 is strongest when the learner treats the rms relation, the power relation, and the loss relation as consecutive steps in one chain.
+
+31
+00:02:53.465 --> 00:03:00.559
+RMS job means equivalent heating effect.
+
+32
+00:03:00.559 --> 00:03:07.654
+The rms value is the d.c.-equivalent reading for the same heating effect.
+
+33
+00:03:07.654 --> 00:03:14.748
+Current job means depends on power and voltage.
+
+34
+00:03:14.748 --> 00:03:21.843
+At fixed power, larger voltage means smaller current.
+
+35
+00:03:21.843 --> 00:03:28.937
+Loss job means depends on current squared.
+
+36
+00:03:28.937 --> 00:03:36.032
+Small drops in current create large drops in heating loss.
+
+37
+00:03:36.032 --> 00:03:43.126
+Keep these relations visible: V_rms = V_peak / sqrt(2); I_rms = V_rms / R for a resistor; P = V I; and P_loss = I^2 R.
+
+38
+00:03:43.126 --> 00:03:50.221
+Use rms values when talking about practical readings and heating effect, then use the current found from the power relation in the cable-loss calculation.
+
+39
+00:03:50.221 --> 00:03:57.315
+Lesson 5 works best as one linked quantitative chain.
+
+40
+00:03:57.315 --> 00:04:04.410
+Keep this takeaway in view: Lesson 5 works best as one linked quantitative chain.
+
+41
+00:04:04.410 --> 00:04:09.754
+A dependable Lesson 5 route starts by holding the delivered power fixed, then changing only the transmission voltage, then recalculating the current and the cable loss.
+
+42
+00:04:09.754 --> 00:04:15.099
+Step 1 means fix the delivered power.
+
+43
+00:04:15.099 --> 00:04:20.443
+Keep the power target the same in both comparisons.
+
+44
+00:04:20.443 --> 00:04:25.788
+Step 2 means find the line current.
+
+45
+00:04:25.788 --> 00:04:31.132
+Use I = P / V for each voltage choice.
+
+46
+00:04:31.132 --> 00:04:36.477
+Step 3 means find the cable loss.
+
+47
+00:04:36.477 --> 00:04:41.821
+Use P_loss = I^2 R and compare the results.
+
+48
+00:04:41.821 --> 00:04:47.166
+Transmission comparisons become easy once current is treated as the hinge quantity.
+
+49
+00:04:47.166 --> 00:04:52.510
+Keep this takeaway in view: Transmission comparisons become easy once current is treated as the hinge quantity.
+
+50
+00:04:52.510 --> 00:04:56.772
+The first deep idea is the meaning of rms.
+
+51
+00:04:56.772 --> 00:05:01.034
+It is not an average wave height.
+
+52
+00:05:01.034 --> 00:05:05.295
+It is the steady-value comparison that matches the heating effect in a resistor.
+
+53
+00:05:05.295 --> 00:05:09.557
+RMS meaning means d.c.-equivalent heating.
+
+54
+00:05:09.557 --> 00:05:13.819
+This is what gives the reading physical value.
+
+55
+00:05:13.819 --> 00:05:18.081
+Peak value means larger than rms.
+
+56
+00:05:18.081 --> 00:05:22.343
+The wave reaches the peak only momentarily.
+
+57
+00:05:22.343 --> 00:05:26.605
+Lesson gain means readings make sense.
+
+58
+00:05:26.605 --> 00:05:30.866
+The practical supply value is connected to what the circuit actually experiences thermally.
+
+59
+00:05:30.866 --> 00:05:35.128
+Protect the heating-equivalence meaning whenever rms appears.
+
+60
+00:05:35.128 --> 00:05:39.390
+Keep this takeaway in view: Protect the heating-equivalence meaning whenever rms appears.
+
+61
+00:05:39.390 --> 00:05:45.039
+A peak-to-rms conversion matters because many questions describe the wave by its peak size and then expect a practical supply reading or resistor current.
+
+62
+00:05:45.039 --> 00:05:50.688
+Voltage bridge means V_rms = V_peak / sqrt(2).
+
+63
+00:05:50.688 --> 00:05:56.337
+This converts the sinusoidal peak voltage into the practical rms reading.
+
+64
+00:05:56.337 --> 00:06:01.986
+Current bridge means same pattern for current.
+
+65
+00:06:01.986 --> 00:06:07.634
+The same square-root-of-two bridge holds for sinusoidal current.
+
+66
+00:06:07.634 --> 00:06:13.283
+Use case means resistive calculations.
+
+67
+00:06:13.283 --> 00:06:18.932
+Rms values are the right values for heating and power calculations in these contexts.
+
+68
+00:06:18.932 --> 00:06:24.581
+Use the rms bridge before doing practical resistor or supply calculations.
+
+69
+00:06:24.581 --> 00:06:30.230
+Keep this takeaway in view: Use the rms bridge before doing practical resistor or supply calculations.
+
+70
+00:06:30.230 --> 00:06:35.012
+The key transmission idea is that the delivered power target can stay the same while the current falls when the voltage is raised.
+
+71
+00:06:35.012 --> 00:06:39.794
+Fixed target means same delivered power.
+
+72
+00:06:39.794 --> 00:06:44.577
+The comparison keeps the power being sent unchanged.
+
+73
+00:06:44.577 --> 00:06:49.359
+Higher voltage means lower current.
+
+74
+00:06:49.359 --> 00:06:54.141
+Because I = P / V, raising V lowers I.
+
+75
+00:06:54.141 --> 00:06:58.923
+Lesson gain means the slogan becomes quantitative.
+
+76
+00:06:58.923 --> 00:07:03.706
+High-voltage transmission is a calculation, not a catchphrase.
+
+77
+00:07:03.706 --> 00:07:08.488
+For the same power, higher transmission voltage means lower current.
+
+78
+00:07:08.488 --> 00:07:13.270
+Keep this takeaway in view: For the same power, higher transmission voltage means lower current.
+
+79
+00:07:13.270 --> 00:07:18.611
+The final transmission bridge is the loss calculation.
+
+80
+00:07:18.611 --> 00:07:23.952
+Once the current falls, the heating loss falls much more sharply because the current is squared in the loss relation.
+
+81
+00:07:23.952 --> 00:07:29.293
+Loss formula means P_loss = I^2 R.
+
+82
+00:07:29.293 --> 00:07:34.634
+This is the route to cable heating.
+
+83
+00:07:34.634 --> 00:07:39.975
+Big payoff means small current means much smaller loss.
+
+84
+00:07:39.975 --> 00:07:45.316
+Squaring the current magnifies the benefit of reducing it.
+
+85
+00:07:45.316 --> 00:07:50.657
+Practical result means greater transmission efficiency.
+
+86
+00:07:50.657 --> 00:07:55.998
+More of the generated power reaches the destination instead of heating the line.
+
+87
+00:07:55.998 --> 00:08:01.339
+The I squared dependence is why voltage stepping matters so much in transmission.
+
+88
+00:08:01.339 --> 00:08:06.680
+Keep this takeaway in view: The I squared dependence is why voltage stepping matters so much in transmission.
+
+89
+00:08:06.680 --> 00:08:08.853
+Use this checkpoint to test whether the learner has connected the power relation to the cable-loss relation in the right order.
+
+90
+00:08:08.853 --> 00:08:11.027
+Question means higher transmission voltage.
+
+91
+00:08:11.027 --> 00:08:13.200
+What should happen to the line current and the cable heating loss?
+
+92
+00:08:13.200 --> 00:08:15.373
+Route means current falls first.
+
+93
+00:08:15.373 --> 00:08:17.547
+Use I = P / V before thinking about the loss.
+
+94
+00:08:17.547 --> 00:08:19.720
+Answer check means loss falls sharply.
+
+95
+00:08:19.720 --> 00:08:21.893
+Because current is smaller, the I squared R loss becomes much smaller too.
+
+96
+00:08:21.893 --> 00:08:24.067
+Higher voltage lowers current, and lower current sharply lowers line loss.
+
+97
+00:08:24.067 --> 00:08:26.240
+Keep this takeaway in view: Higher voltage lowers current, and lower current sharply lowers line loss.
+
+98
+00:08:26.240 --> 00:08:32.185
+Carry one route into the worked example.
+
+99
+00:08:32.185 --> 00:08:38.130
+Convert peak values to rms when needed, use power and voltage to find the transmission current, then use the cable resistance and I squared R to compare the losses.
+
+100
+00:08:38.130 --> 00:08:44.075
+Step 1 means rms if needed.
+
+101
+00:08:44.075 --> 00:08:50.020
+Use the practical reading first.
+
+102
+00:08:50.020 --> 00:08:55.965
+Step 2 means current.
+
+103
+00:08:55.965 --> 00:09:01.910
+Find current from the delivered power and voltage.
+
+104
+00:09:01.910 --> 00:09:07.855
+Step 3 means loss.
+
+105
+00:09:07.855 --> 00:09:13.800
+Use that current in I squared R.
+
+106
+00:09:13.800 --> 00:09:19.745
+Keep these relations visible: convert peak to rms when the question gives peak values; use P = V I to find the current; and use P_loss = I^2 R to compare cable losses.
+
+107
+00:09:19.745 --> 00:09:25.690
+The current should be treated as the hinge quantity between the practical supply reading and the transmission-loss calculation.
+
+108
+00:09:25.690 --> 00:09:31.635
+Lesson 5 questions become straightforward when the chain is followed in order.
+
+109
+00:09:31.635 --> 00:09:37.580
+Keep this takeaway in view: Lesson 5 questions become straightforward when the chain is followed in order.

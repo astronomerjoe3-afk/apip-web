@@ -1,0 +1,397 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.642
+Lesson 1 becomes much clearer when magnetic flux is treated as a measurable field-through-area story and induced emf is treated as a rate-of-change story.
+
+2
+00:00:05.642 --> 00:00:11.284
+Flux means field through an area.
+
+3
+00:00:11.284 --> 00:00:16.925
+The loop intercepts magnetic field through its surface.
+
+4
+00:00:16.925 --> 00:00:22.567
+Flux linkage means turns matter too.
+
+5
+00:00:22.567 --> 00:00:28.209
+More turns mean the same flux change can produce a bigger linked effect.
+
+6
+00:00:28.209 --> 00:00:33.851
+Faraday lens means change per time.
+
+7
+00:00:33.851 --> 00:00:39.493
+Induced emf depends on how quickly the linked flux changes.
+
+8
+00:00:39.493 --> 00:00:45.135
+The weak move is to say induction happens because a magnet is present, even when the flux through the loop is staying constant.
+
+9
+00:00:45.135 --> 00:00:50.776
+Once the changing quantity is named properly, the worked example becomes a bookkeeping exercise instead of vague magnet language.
+
+10
+00:00:50.776 --> 00:00:56.418
+No changing flux linkage means no induced emf.
+
+11
+00:00:56.418 --> 00:01:02.060
+Keep this takeaway in view: No changing flux linkage means no induced emf.
+
+12
+00:01:02.060 --> 00:01:06.321
+This diagram matters because it makes the sources of flux change visible.
+
+13
+00:01:06.321 --> 00:01:10.582
+Field strength can change, loop area can change, and orientation can change.
+
+14
+00:01:10.582 --> 00:01:14.843
+Field strength means more or less B.
+
+15
+00:01:14.843 --> 00:01:19.104
+A stronger field sends more magnetic thread through the loop.
+
+16
+00:01:19.104 --> 00:01:23.365
+Loop area means bigger or smaller window.
+
+17
+00:01:23.365 --> 00:01:27.626
+Changing the area changes how much field is captured.
+
+18
+00:01:27.626 --> 00:01:31.887
+Tilt means more face-on or edge-on.
+
+19
+00:01:31.887 --> 00:01:36.148
+Changing orientation changes the effective field through the loop.
+
+20
+00:01:36.148 --> 00:01:40.409
+Flux is geometric and physical, not just symbolic.
+
+21
+00:01:40.409 --> 00:01:44.670
+Keep this takeaway in view: Flux is geometric and physical, not just symbolic.
+
+22
+00:01:44.670 --> 00:01:48.809
+A window-in-the-rain analogy works because the amount passing through depends on the opening, the direction, and how those features change over time.
+
+23
+00:01:48.809 --> 00:01:52.948
+More rain density means stronger field.
+
+24
+00:01:52.948 --> 00:01:57.087
+A heavier rain corresponds to a stronger field.
+
+25
+00:01:57.087 --> 00:02:01.226
+Bigger window means larger area.
+
+26
+00:02:01.226 --> 00:02:05.364
+A larger opening lets more through.
+
+27
+00:02:05.364 --> 00:02:09.503
+Tilted window means orientation effect.
+
+28
+00:02:09.503 --> 00:02:13.642
+A tilted opening catches less straight-through flow.
+
+29
+00:02:13.642 --> 00:02:17.781
+Flux is about what threads through the loop area.
+
+30
+00:02:17.781 --> 00:02:21.920
+Keep this takeaway in view: Flux is about what threads through the loop area.
+
+31
+00:02:21.920 --> 00:02:26.653
+The formula board is strongest when the learner reads flux linkage change first and induced emf second.
+
+32
+00:02:26.653 --> 00:02:31.385
+First move means identify the flux change.
+
+33
+00:02:31.385 --> 00:02:36.118
+Ask what changed: B, A, or orientation.
+
+34
+00:02:36.118 --> 00:02:40.851
+Second move means scale by turns.
+
+35
+00:02:40.851 --> 00:02:45.584
+Multiple turns multiply the linked change.
+
+36
+00:02:45.584 --> 00:02:50.316
+Third move means divide by time.
+
+37
+00:02:50.316 --> 00:02:55.049
+Faster change gives larger induced emf.
+
+38
+00:02:55.049 --> 00:02:59.782
+Keep these relations visible: induced emf = N delta(Phi) / delta(t); Phi = B A cos(theta); and no flux change means no induced emf.
+
+39
+00:02:59.782 --> 00:03:04.515
+Use the geometry to identify the flux change, then use turns and time to scale the induced emf.
+
+40
+00:03:04.515 --> 00:03:09.247
+Induced emf is a rate-of-change quantity.
+
+41
+00:03:09.247 --> 00:03:13.980
+Keep this takeaway in view: Induced emf is a rate-of-change quantity.
+
+42
+00:03:13.980 --> 00:03:18.647
+A dependable Lesson 1 routine starts by naming the changing physical cause, then converts that cause into a flux change before using the induction formula.
+
+43
+00:03:18.647 --> 00:03:23.313
+Step 1 means name the change.
+
+44
+00:03:23.313 --> 00:03:27.980
+Field, area, orientation, or turns?
+
+45
+00:03:27.980 --> 00:03:32.647
+Step 2 means find delta Phi.
+
+46
+00:03:32.647 --> 00:03:37.313
+Work out the change in flux per turn.
+
+47
+00:03:37.313 --> 00:03:41.980
+Step 3 means apply N and delta t.
+
+48
+00:03:41.980 --> 00:03:46.647
+Turn flux change into induced emf.
+
+49
+00:03:46.647 --> 00:03:51.313
+Name the change before you touch the formula.
+
+50
+00:03:51.313 --> 00:03:55.980
+Keep this takeaway in view: Name the change before you touch the formula.
+
+51
+00:03:55.980 --> 00:03:59.320
+If the flux through the loop stays constant, there is nothing for the induced emf to react to.
+
+52
+00:03:59.320 --> 00:04:02.660
+Flux present means can still be steady.
+
+53
+00:04:02.660 --> 00:04:06.000
+A loop can sit in a field without producing induction.
+
+54
+00:04:06.000 --> 00:04:09.340
+No change means no induced emf.
+
+55
+00:04:09.340 --> 00:04:12.680
+Faraday induction reacts to change, not to mere presence.
+
+56
+00:04:12.680 --> 00:04:16.020
+Lesson gain means zero case.
+
+57
+00:04:16.020 --> 00:04:19.360
+This is the easiest reasonableness check in the topic.
+
+58
+00:04:19.360 --> 00:04:22.700
+Steady flux gives zero induced emf.
+
+59
+00:04:22.700 --> 00:04:26.040
+Keep this takeaway in view: Steady flux gives zero induced emf.
+
+60
+00:04:26.040 --> 00:04:30.063
+A coil with more turns does not need a bigger flux change to get a bigger induced emf.
+
+61
+00:04:30.063 --> 00:04:34.086
+It needs the same change linked more times.
+
+62
+00:04:34.086 --> 00:04:38.109
+One loop means single flux change.
+
+63
+00:04:38.109 --> 00:04:42.132
+This is the per-turn picture.
+
+64
+00:04:42.132 --> 00:04:46.155
+Many turns means repeated linkage.
+
+65
+00:04:46.155 --> 00:04:50.178
+The same change counts through each turn.
+
+66
+00:04:50.178 --> 00:04:54.201
+Lesson gain means N scales emf.
+
+67
+00:04:54.201 --> 00:04:58.224
+Turns multiply the linked change before time is applied.
+
+68
+00:04:58.224 --> 00:05:02.247
+Flux linkage is the right bridge between loop geometry and coil emf.
+
+69
+00:05:02.247 --> 00:05:06.270
+Keep this takeaway in view: Flux linkage is the right bridge between loop geometry and coil emf.
+
+70
+00:05:06.270 --> 00:05:10.537
+Orientation matters because a loop facing the field fully is not intercepting the same field-thread as a loop turned edge-on.
+
+71
+00:05:10.537 --> 00:05:14.803
+Face-on means larger through-flow.
+
+72
+00:05:14.803 --> 00:05:19.070
+More field threads the loop surface.
+
+73
+00:05:19.070 --> 00:05:23.337
+Edge-on means smaller through-flow.
+
+74
+00:05:23.337 --> 00:05:27.603
+Flux can shrink all the way to zero.
+
+75
+00:05:27.603 --> 00:05:31.870
+Lesson gain means rotation creates induction.
+
+76
+00:05:31.870 --> 00:05:36.137
+Changing angle is enough to create flux change.
+
+77
+00:05:36.137 --> 00:05:40.403
+Tilt changes flux and can therefore create induction.
+
+78
+00:05:40.403 --> 00:05:44.670
+Keep this takeaway in view: Tilt changes flux and can therefore create induction.
+
+79
+00:05:44.670 --> 00:05:47.820
+Use this checkpoint to test whether change-versus-presence is now clear.
+
+80
+00:05:47.820 --> 00:05:50.970
+Question means steady flux.
+
+81
+00:05:50.970 --> 00:05:54.120
+What happens to the induced emf?
+
+82
+00:05:54.120 --> 00:05:57.270
+Route means Faraday responds to change.
+
+83
+00:05:57.270 --> 00:06:00.420
+No change means the rate term is zero.
+
+84
+00:06:00.420 --> 00:06:03.570
+Answer check means zero induced emf.
+
+85
+00:06:03.570 --> 00:06:06.720
+A steady flux does not induce emf.
+
+86
+00:06:06.720 --> 00:06:09.870
+Induction begins with change.
+
+87
+00:06:09.870 --> 00:06:13.020
+Keep this takeaway in view: Induction begins with change.
+
+88
+00:06:13.020 --> 00:06:17.775
+Carry one route into the worked example.
+
+89
+00:06:17.775 --> 00:06:22.530
+Name the changing cause, calculate the flux change per turn, multiply by turns, and divide by the time interval.
+
+90
+00:06:22.530 --> 00:06:27.285
+Step 1 means find delta Phi.
+
+91
+00:06:27.285 --> 00:06:32.040
+Start with the geometry or field change.
+
+92
+00:06:32.040 --> 00:06:36.795
+Step 2 means multiply by N.
+
+93
+00:06:36.795 --> 00:06:41.550
+Count how many turns link the change.
+
+94
+00:06:41.550 --> 00:06:46.305
+Step 3 means divide by delta t.
+
+95
+00:06:46.305 --> 00:06:51.060
+Faster change means bigger induced emf.
+
+96
+00:06:51.060 --> 00:06:55.815
+Keep these relations visible: find delta Phi from the physical change; multiply by N for flux linkage change; and divide by delta t for induced emf.
+
+97
+00:06:55.815 --> 00:07:00.570
+Keep the no-change case in mind as a quick check before calculation.
+
+98
+00:07:00.570 --> 00:07:05.325
+Flux change first, emf second.
+
+99
+00:07:05.325 --> 00:07:10.080
+Keep this takeaway in view: Flux change first, emf second.

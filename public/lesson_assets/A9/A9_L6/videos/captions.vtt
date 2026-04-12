@@ -1,0 +1,449 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.710
+Lesson 6 becomes much clearer when every application is traced back to the same mechanism: changing flux drives local circulating currents inside the conductor.
+
+2
+00:00:05.710 --> 00:00:11.420
+Changing flux means local induction trigger.
+
+3
+00:00:11.420 --> 00:00:17.130
+A changing magnetic state inside the conductor is what starts the loops.
+
+4
+00:00:17.130 --> 00:00:22.840
+Eddy currents means circulating loops.
+
+5
+00:00:22.840 --> 00:00:28.550
+The currents swirl around within the material rather than through a separate wire circuit.
+
+6
+00:00:28.550 --> 00:00:34.260
+Application outcome means heating or braking.
+
+7
+00:00:34.260 --> 00:00:39.970
+The same loops can be useful, harmful, or both depending on the design goal.
+
+8
+00:00:39.970 --> 00:00:45.680
+Every eddy-current application starts from local induction loops inside the conductor.
+
+9
+00:00:45.680 --> 00:00:51.390
+Keep this takeaway in view: Every eddy-current application starts from local induction loops inside the conductor.
+
+10
+00:00:51.390 --> 00:00:56.206
+This diagram matters because it keeps the local loops visible.
+
+11
+00:00:56.206 --> 00:01:01.022
+Once the loops are visible, the heating and braking outcomes stop looking like separate topics.
+
+12
+00:01:01.022 --> 00:01:05.838
+Cause means changing flux in a conductor.
+
+13
+00:01:05.838 --> 00:01:10.654
+The conductor is sitting in a changing magnetic environment.
+
+14
+00:01:10.654 --> 00:01:15.470
+Mechanism means circulating induced loops.
+
+15
+00:01:15.470 --> 00:01:20.286
+Local closed paths of current form inside the material.
+
+16
+00:01:20.286 --> 00:01:25.102
+Outcome means heating or damping.
+
+17
+00:01:25.102 --> 00:01:29.918
+Those currents cause resistive heating and can create opposing magnetic effects.
+
+18
+00:01:29.918 --> 00:01:34.734
+The loops are the bridge that unifies the whole lesson.
+
+19
+00:01:34.734 --> 00:01:39.550
+Keep this takeaway in view: The loops are the bridge that unifies the whole lesson.
+
+20
+00:01:39.550 --> 00:01:44.421
+A swirl analogy helps because eddy currents are not a single wire current.
+
+21
+00:01:44.421 --> 00:01:49.292
+They are local circulating responses distributed through the conductor where the magnetic change is being experienced.
+
+22
+00:01:49.292 --> 00:01:54.163
+Distributed region means whole conductor can respond.
+
+23
+00:01:54.163 --> 00:01:59.034
+The induction is spread through the material, not confined to one external wire path.
+
+24
+00:01:59.034 --> 00:02:03.905
+Local loops means circulation pattern.
+
+25
+00:02:03.905 --> 00:02:08.776
+The induced current naturally closes on itself within the conductor.
+
+26
+00:02:08.776 --> 00:02:13.647
+Lesson gain means applications make sense.
+
+27
+00:02:13.647 --> 00:02:18.518
+Heating and braking both come from the same loop behavior.
+
+28
+00:02:18.518 --> 00:02:23.389
+Think local circulation, not one long straight current path.
+
+29
+00:02:23.389 --> 00:02:28.260
+Keep this takeaway in view: Think local circulation, not one long straight current path.
+
+30
+00:02:28.260 --> 00:02:34.684
+Lesson 6 is strongest when the learner keeps two outcomes visible at once: eddy currents create opposing magnetic responses through Lenz's law and create heating through resistive loss.
+
+31
+00:02:34.684 --> 00:02:41.107
+Force side means opposes motion or change.
+
+32
+00:02:41.107 --> 00:02:47.531
+Lenz's law explains why braking effects point against the cause.
+
+33
+00:02:47.531 --> 00:02:53.955
+Heating side means resistive loss.
+
+34
+00:02:53.955 --> 00:03:00.378
+Any current loop in a resistive material will dissipate energy as heat.
+
+35
+00:03:00.378 --> 00:03:06.802
+Design side means useful or unwanted.
+
+36
+00:03:06.802 --> 00:03:13.225
+The goal of the device decides whether we strengthen or weaken the loops.
+
+37
+00:03:13.225 --> 00:03:19.649
+Keep these relations visible: changing flux drives local induced loops; the induced response opposes the change that caused it; and heating power follows P = I^2 R.
+
+38
+00:03:19.649 --> 00:03:26.073
+The same local current loops can therefore cause braking and heating at the same time.
+
+39
+00:03:26.073 --> 00:03:32.496
+Eddy currents matter because they create both opposing effects and heating.
+
+40
+00:03:32.496 --> 00:03:38.920
+Keep this takeaway in view: Eddy currents matter because they create both opposing effects and heating.
+
+41
+00:03:38.920 --> 00:03:43.996
+A dependable Lesson 6 route begins with the magnetic change, then identifies the local loops, then names the physical effect they cause, and finally explains why the designer either wants or suppresses that effect.
+
+42
+00:03:43.996 --> 00:03:49.073
+Step 1 means changing flux.
+
+43
+00:03:49.073 --> 00:03:54.149
+Find the magnetic change acting on the conductor.
+
+44
+00:03:54.149 --> 00:03:59.225
+Step 2 means local loops.
+
+45
+00:03:59.225 --> 00:04:04.302
+Picture the induced circulating currents inside the material.
+
+46
+00:04:04.302 --> 00:04:09.378
+Step 3 means effect.
+
+47
+00:04:09.378 --> 00:04:14.455
+Decide whether the loops mainly matter through heating, braking, or both.
+
+48
+00:04:14.455 --> 00:04:19.531
+Step 4 means design choice.
+
+49
+00:04:19.531 --> 00:04:24.607
+Explain why the device wants stronger loops or weaker loops.
+
+50
+00:04:24.607 --> 00:04:29.684
+Application questions become easier when the mechanism is named before the device purpose.
+
+51
+00:04:29.684 --> 00:04:34.760
+Keep this takeaway in view: Application questions become easier when the mechanism is named before the device purpose.
+
+52
+00:04:34.760 --> 00:04:39.210
+The first deep idea is the origin of the loops.
+
+53
+00:04:39.210 --> 00:04:43.660
+The conductor does not need to be a separate coil.
+
+54
+00:04:43.660 --> 00:04:48.110
+The changing magnetic state inside the material can still drive circulating current paths.
+
+55
+00:04:48.110 --> 00:04:52.560
+Bulk conductor means whole region can participate.
+
+56
+00:04:52.560 --> 00:04:57.010
+The induction is spread through the conducting material.
+
+57
+00:04:57.010 --> 00:05:01.460
+Closed loops means current completes itself locally.
+
+58
+00:05:01.460 --> 00:05:05.910
+The loops circulate within the conductor.
+
+59
+00:05:05.910 --> 00:05:10.360
+Lesson gain means same mechanism everywhere.
+
+60
+00:05:10.360 --> 00:05:14.810
+This one picture explains many apparently different devices.
+
+61
+00:05:14.810 --> 00:05:19.260
+Eddy currents are local induction loops hosted by the conductor itself.
+
+62
+00:05:19.260 --> 00:05:23.710
+Keep this takeaway in view: Eddy currents are local induction loops hosted by the conductor itself.
+
+63
+00:05:23.710 --> 00:05:29.101
+A heating scene matters because the learner should see that induction heaters work by encouraging strong eddy currents in the target material.
+
+64
+00:05:29.101 --> 00:05:34.492
+Strong loops means more induced current.
+
+65
+00:05:34.492 --> 00:05:39.883
+Bigger circulating currents raise the resistive heating power.
+
+66
+00:05:39.883 --> 00:05:45.274
+Heating relation means P = I^2 R.
+
+67
+00:05:45.274 --> 00:05:50.666
+That is the route from loop current to thermal effect.
+
+68
+00:05:50.666 --> 00:05:56.057
+Useful outcome means intentional heating.
+
+69
+00:05:56.057 --> 00:06:01.448
+In an induction heater the heating is the desired effect.
+
+70
+00:06:01.448 --> 00:06:06.839
+Induction heating works by making eddy-current loops strong enough to heat the conductor.
+
+71
+00:06:06.839 --> 00:06:12.230
+Keep this takeaway in view: Induction heating works by making eddy-current loops strong enough to heat the conductor.
+
+72
+00:06:12.230 --> 00:06:17.473
+A braking scene matters because the eddy-current lesson should not collapse into heating alone.
+
+73
+00:06:17.473 --> 00:06:22.716
+The induced loops also create magnetic effects that oppose the motion or field change causing them.
+
+74
+00:06:22.716 --> 00:06:27.959
+Changing motion state means induces loops.
+
+75
+00:06:27.959 --> 00:06:33.202
+Moving conductor and magnetic field change produce the local currents.
+
+76
+00:06:33.202 --> 00:06:38.445
+Opposing response means resists the change.
+
+77
+00:06:38.445 --> 00:06:43.688
+The induced magnetic response acts against the original motion or change.
+
+78
+00:06:43.688 --> 00:06:48.931
+Useful outcome means damping or braking.
+
+79
+00:06:48.931 --> 00:06:54.174
+This is why magnetic braking systems can work without contact.
+
+80
+00:06:54.174 --> 00:06:59.417
+Magnetic braking is the Lenz-opposition side of eddy currents.
+
+81
+00:06:59.417 --> 00:07:04.660
+Keep this takeaway in view: Magnetic braking is the Lenz-opposition side of eddy currents.
+
+82
+00:07:04.660 --> 00:07:10.226
+The final deep idea is control.
+
+83
+00:07:10.226 --> 00:07:15.792
+When eddy currents are unwanted, designers reduce them by preventing large easy loops from circulating through a solid conducting region.
+
+84
+00:07:15.792 --> 00:07:21.358
+Break the path means smaller or interrupted loops.
+
+85
+00:07:21.358 --> 00:07:26.924
+Slots and laminations stop large circulating currents from forming easily.
+
+86
+00:07:26.924 --> 00:07:32.490
+Weaker current means less heating and weaker damping.
+
+87
+00:07:32.490 --> 00:07:38.056
+Reducing loop size or continuity weakens the induced current.
+
+88
+00:07:38.056 --> 00:07:43.622
+Design logic means use or suppress deliberately.
+
+89
+00:07:43.622 --> 00:07:49.188
+The device goal decides whether strong loops are valuable or harmful.
+
+90
+00:07:49.188 --> 00:07:54.754
+Reducing the available loop paths is how designers control unwanted eddy currents.
+
+91
+00:07:54.754 --> 00:08:00.320
+Keep this takeaway in view: Reducing the available loop paths is how designers control unwanted eddy currents.
+
+92
+00:08:00.320 --> 00:08:05.217
+Use this checkpoint to test whether the learner can move from the local-loop picture to the design consequence.
+
+93
+00:08:05.217 --> 00:08:10.113
+Question means slots or laminations.
+
+94
+00:08:10.113 --> 00:08:15.010
+Why should these features reduce the heating effect?
+
+95
+00:08:15.010 --> 00:08:19.907
+Route means break up the loops.
+
+96
+00:08:19.907 --> 00:08:24.803
+The change should make circulating current paths smaller or harder to maintain.
+
+97
+00:08:24.803 --> 00:08:29.700
+Answer check means less current means less I squared R heating.
+
+98
+00:08:29.700 --> 00:08:34.597
+Weaker loops reduce the dissipated heating power.
+
+99
+00:08:34.597 --> 00:08:39.493
+Eddy-current control works by weakening the current loops themselves.
+
+100
+00:08:39.493 --> 00:08:44.390
+Keep this takeaway in view: Eddy-current control works by weakening the current loops themselves.
+
+101
+00:08:44.390 --> 00:08:51.015
+Carry one route into the worked example.
+
+102
+00:08:51.015 --> 00:08:57.640
+Start with the magnetic change acting on the conductor, picture the circulating loops that it induces, then use Lenz opposition or I squared R heating to explain the application outcome and the design choice.
+
+103
+00:08:57.640 --> 00:09:04.265
+Step 1 means magnetic change.
+
+104
+00:09:04.265 --> 00:09:10.890
+Start with what is changing.
+
+105
+00:09:10.890 --> 00:09:17.515
+Step 2 means local loops.
+
+106
+00:09:17.515 --> 00:09:24.140
+Picture the induced current paths.
+
+107
+00:09:24.140 --> 00:09:30.765
+Step 3 means effect and design.
+
+108
+00:09:30.765 --> 00:09:37.390
+Explain heating, braking, and whether the device strengthens or suppresses the loops.
+
+109
+00:09:37.390 --> 00:09:44.015
+Keep these relations visible: identify the changing magnetic situation; picture the local induced loops; use opposition and P = I^2 R to explain braking or heating; and explain how slots or laminations weaken the loops when needed.
+
+110
+00:09:44.015 --> 00:09:50.640
+The applications stop feeling scattered when every answer is routed through the local-loop mechanism first.
+
+111
+00:09:50.640 --> 00:09:57.265
+The eddy-current lesson is easiest when every application is traced back to the same local-loop mechanism.
+
+112
+00:09:57.265 --> 00:10:03.890
+Keep this takeaway in view: The eddy-current lesson is easiest when every application is traced back to the same local-loop mechanism.
