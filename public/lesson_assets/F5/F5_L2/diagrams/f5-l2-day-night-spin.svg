@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#eff6ff"/>
+  <rect x="24" y="24" width="1232" height="672" rx="32" fill="#ffffff" stroke="#dbeafe" stroke-width="4"/>
+
+  <text x="70" y="96" fill="#0f172a" font-family="Arial, sans-serif" font-size="56" font-weight="700">Spin Makes Day and Night</text>
+  <text x="70" y="144" fill="#475569" font-family="Arial, sans-serif" font-size="28">
+    Rotation carries one place into sunlight and later turns it back into darkness.
+  </text>
+
+  <circle cx="180" cy="360" r="56" fill="#facc15" stroke="#f59e0b" stroke-width="6"/>
+  <text x="180" y="372" fill="#0f172a" font-family="Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle">Sun</text>
+
+  <line x1="242" y1="360" x2="400" y2="360" stroke="#fbbf24" stroke-width="10"/>
+
+  <circle cx="610" cy="360" r="148" fill="#2563eb"/>
+  <path d="M610 212 A148 148 0 0 1 610 508 Z" fill="#0f172a"/>
+  <line x1="610" y1="182" x2="610" y2="538" stroke="#f8fafc" stroke-width="5"/>
+  <circle cx="712" cy="424" r="14" fill="#ef4444" stroke="#ffffff" stroke-width="4"/>
+  <text x="746" y="430" fill="#0f172a" font-family="Arial, sans-serif" font-size="24" font-weight="700">city marker</text>
+
+  <text x="486" y="216" fill="#f59e0b" font-family="Arial, sans-serif" font-size="28" font-weight="700">day side</text>
+  <text x="664" y="532" fill="#334155" font-family="Arial, sans-serif" font-size="28" font-weight="700">night side</text>
+
+  <rect x="860" y="220" width="300" height="278" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="900" y="274" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">What matters here</text>
+  <text x="900" y="326" fill="#0f172a" font-family="Arial, sans-serif" font-size="28">
+    <tspan x="900" dy="0">One full spin gives one day.</tspan>
+    <tspan x="900" dy="44">Half the world is lit at once.</tspan>
+    <tspan x="900" dy="44">A city changes state because</tspan>
+    <tspan x="900" dy="36">Earth rotates, not because</tspan>
+    <tspan x="900" dy="36">Earth finishes a yearly orbit.</tspan>
+  </text>
+
+  <rect x="100" y="580" width="1080" height="72" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="640" y="624" fill="#475569" font-family="Arial, sans-serif" font-size="26" text-anchor="middle">
+    Use spin first: the daily light-dark cycle belongs to rotation, while the year belongs to orbit.
+  </text>
+</svg>

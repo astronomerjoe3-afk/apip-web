@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 46px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #94a3b8; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
+
+  <text x="640" y="84" class="title" text-anchor="middle">Direction of Travel Decides the Turn</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    Toward the normal in the slower medium, away from the normal in the faster medium. TIR only happens on the slow-to-fast route.
+  </text>
+
+  <rect x="106" y="176" width="1068" height="478" rx="34" class="card"/>
+  <rect x="144" y="226" width="448" height="372" rx="26" class="panel"/>
+  <rect x="688" y="226" width="448" height="372" rx="26" class="panel"/>
+
+  <text x="368" y="268" class="label" text-anchor="middle">Into slower medium</text>
+  <text x="912" y="268" class="label" text-anchor="middle">Into faster medium</text>
+
+  <rect x="184" y="338" width="368" height="10" rx="5" fill="#cbd5e1"/>
+  <line x1="368" y1="292" x2="368" y2="540" stroke="#64748b" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="242" y1="258" x2="368" y2="338" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+  <line x1="368" y1="338" x2="430" y2="492" stroke="#67e8f9" stroke-width="7" stroke-linecap="round"/>
+  <path d="M 392 338 A 46 46 0 0 0 426 376" fill="none" stroke="#94a3b8" stroke-width="3"/>
+  <text x="448" y="384" class="small">toward normal</text>
+  <text x="368" y="558" class="body" text-anchor="middle">speed drops, angle shrinks</text>
+
+  <rect x="728" y="338" width="368" height="10" rx="5" fill="#cbd5e1"/>
+  <line x1="912" y1="292" x2="912" y2="540" stroke="#64748b" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="786" y1="492" x2="912" y2="338" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+  <line x1="912" y1="338" x2="1038" y2="258" stroke="#22c55e" stroke-width="7" stroke-linecap="round"/>
+  <path d="M 936 338 A 64 64 0 0 1 992 292" fill="none" stroke="#94a3b8" stroke-width="3"/>
+  <text x="1022" y="294" class="small">away from normal</text>
+  <text x="912" y="558" class="body" text-anchor="middle">speed rises, angle grows</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg width="900" height="560" viewBox="0 0 900 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="gather-blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="gather-green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#0F766E"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" rx="32" fill="#F8FBFF"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="42" y="58" fill="#0F172A" font-size="34" font-weight="700">Converging Lens: Real Image Ray Diagram</text>
+    <text x="42" y="96" fill="#475569" font-size="19">Use the principal axis, focal points, and two standard rays. Where the real rays meet, the image forms.</text>
+
+    <rect x="34" y="126" width="832" height="394" rx="30" fill="#FFFFFF" stroke="#D9E2F1" stroke-width="2"/>
+    <rect x="54" y="150" width="610" height="346" rx="26" fill="#F8FAFC" stroke="#D6E4F5" stroke-width="2"/>
+    <rect x="684" y="150" width="162" height="346" rx="26" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3"/>
+
+    <line x1="86" y1="334" x2="636" y2="334" stroke="#CBD5E1" stroke-width="4"/>
+    <text x="500" y="324" fill="#475569" font-size="17" font-weight="600">principal axis</text>
+    <ellipse cx="430" cy="334" rx="20" ry="108" fill="#DBEAFE" stroke="#60A5FA" stroke-width="4"/>
+    <circle cx="430" cy="334" r="5" fill="#0F172A"/>
+    <text x="444" y="322" fill="#334155" font-size="16" font-weight="700">optical center</text>
+
+    <circle cx="300" cy="334" r="6" fill="#0F172A"/>
+    <circle cx="220" cy="334" r="6" fill="#0F172A"/>
+    <circle cx="560" cy="334" r="6" fill="#0F172A"/>
+    <circle cx="640" cy="334" r="6" fill="#0F172A"/>
+    <text x="294" y="362" fill="#334155" font-size="17" font-weight="700">F</text>
+    <text x="208" y="362" fill="#334155" font-size="17" font-weight="700">2F</text>
+    <text x="552" y="362" fill="#334155" font-size="17" font-weight="700">F</text>
+    <text x="628" y="362" fill="#334155" font-size="17" font-weight="700">2F</text>
+
+    <line x1="150" y1="334" x2="150" y2="194" stroke="#2563EB" stroke-width="9" stroke-linecap="round"/>
+    <line x1="142" y1="202" x2="158" y2="202" stroke="#2563EB" stroke-width="9" stroke-linecap="round"/>
+    <polygon points="150,176 134,206 166,206" fill="#2563EB"/>
+    <text x="114" y="362" fill="#1D4ED8" font-size="18" font-weight="700">object</text>
+
+    <line x1="150" y1="194" x2="430" y2="194" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+    <line x1="430" y1="194" x2="608" y2="418" stroke="#2563EB" stroke-width="6" stroke-linecap="round" marker-end="url(#gather-blue-arrow)"/>
+    <line x1="150" y1="194" x2="430" y2="334" stroke="#0F766E" stroke-width="6" stroke-linecap="round"/>
+    <line x1="430" y1="334" x2="608" y2="418" stroke="#0F766E" stroke-width="6" stroke-linecap="round" marker-end="url(#gather-green-arrow)"/>
+
+    <line x1="608" y1="334" x2="608" y2="418" stroke="#B45309" stroke-width="9" stroke-linecap="round"/>
+    <line x1="600" y1="410" x2="616" y2="410" stroke="#B45309" stroke-width="9" stroke-linecap="round"/>
+    <polygon points="608,436 592,406 624,406" fill="#B45309"/>
+    <text x="566" y="458" fill="#92400E" font-size="18" font-weight="700">real image</text>
+
+    <text x="702" y="190" fill="#0F172A" font-size="22" font-weight="700">Ray rules</text>
+    <text x="702" y="236" fill="#334155" font-size="17">1. Parallel ray</text>
+    <text x="702" y="260" fill="#334155" font-size="17">refracts through F.</text>
+    <text x="702" y="316" fill="#334155" font-size="17">2. Central ray</text>
+    <text x="702" y="340" fill="#334155" font-size="17">continues straight.</text>
+    <text x="702" y="410" fill="#0F172A" font-size="19" font-weight="700">The real image is inverted</text>
+    <text x="702" y="434" fill="#0F172A" font-size="19" font-weight="700">and forms where the rays meet.</text>
+  </g>
+</svg>

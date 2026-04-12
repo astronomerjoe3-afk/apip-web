@@ -1,0 +1,47 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
+  <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D9E6F7" stroke-width="4"/>
+  <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
+    Plaza Store = motion part + link part
+  </text>
+  <text x="72" y="144" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <tspan x="72" dy="0">Internal energy is the whole-system total,</tspan>
+    <tspan x="72" dy="28">so it counts both particle motion and particle arrangement.</tspan>
+  </text>
+
+  <rect x="88" y="204" width="366" height="386" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
+  <rect x="488" y="204" width="366" height="386" rx="30" fill="#DCFCE7" stroke="#4ADE80" stroke-width="5"/>
+  <rect x="888" y="204" width="224" height="386" rx="30" fill="#F3E8FF" stroke="#A855F7" stroke-width="5"/>
+
+  <text x="126" y="254" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Motion part</text>
+  <text x="526" y="254" fill="#15803D" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Link part</text>
+  <text x="926" y="254" fill="#7E22CE" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Plaza Store</text>
+
+  <text x="126" y="314" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">All particles jiggling</text>
+  <rect x="126" y="344" width="268" height="34" rx="17" fill="#3B82F6"/>
+  <rect x="126" y="396" width="196" height="34" rx="17" fill="#60A5FA"/>
+  <rect x="126" y="448" width="228" height="34" rx="17" fill="#93C5FD"/>
+
+  <text x="526" y="314" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="526" dy="0">How stretched or loosened</tspan>
+    <tspan x="526" dy="24">the links are</tspan>
+  </text>
+  <rect x="526" y="344" width="156" height="34" rx="17" fill="#22C55E"/>
+  <rect x="526" y="396" width="224" height="34" rx="17" fill="#4ADE80"/>
+  <rect x="526" y="448" width="270" height="34" rx="17" fill="#86EFAC"/>
+
+  <text x="920" y="318" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">Whole-system answer</text>
+  <rect x="920" y="354" width="164" height="42" rx="21" fill="#8B5CF6"/>
+  <rect x="920" y="418" width="164" height="42" rx="21" fill="#A855F7"/>
+  <text x="938" y="382" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">motion total</text>
+  <text x="956" y="446" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">link total</text>
+
+  <path d="M830 478H880" stroke="#7E22CE" stroke-width="8" stroke-linecap="round"/>
+  <path d="M860 452L888 478L860 504" stroke="#7E22CE" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="110" y="620" width="982" height="74" rx="22" fill="#EEF4FF"/>
+  <text x="136" y="654" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <tspan x="136" dy="0">Same temperature does not force the same Plaza Store</tspan>
+    <tspan x="136" dy="26">because arrangement can change the total too.</tspan>
+  </text>
+</svg>

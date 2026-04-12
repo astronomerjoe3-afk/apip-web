@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <style>
+    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
+    .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+    .axis { fill: #64748b; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+    .guide { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
+  <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+  <text x="74" y="88" class="title">Area under a speed-time graph builds total distance.</text>
+  <text x="74" y="122" class="subtitle">Each strip is speed x time for a small part of the journey.</text>
+  <text x="74" y="150" class="subtitle">So the whole shaded region is accumulated distance, not just a geometric shape.</text>
+
+  <rect x="74" y="176" width="640" height="430" rx="28" fill="#FFFBEB" stroke="#FCD34D" stroke-width="3" />
+  <text x="110" y="224" class="panel-title">Split the area</text>
+  <line x1="170" y1="548" x2="630" y2="548" stroke="#334155" stroke-width="4" />
+  <line x1="170" y1="548" x2="170" y2="300" stroke="#334155" stroke-width="4" />
+  <rect x="216" y="458" width="180" height="90" fill="#93C5FD" fill-opacity="0.9" />
+  <polygon points="396,458 564,458 564,348" fill="#F59E0B" fill-opacity="0.82" />
+  <polyline points="216,458 396,458 564,348" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
+  <rect x="224" y="404" width="222" height="48" rx="16" fill="#DBEAFE" />
+  <text x="246" y="435" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Rectangle = base distance</text>
+  <polyline points="446,428 470,428 396,458" class="guide" stroke="#1D4ED8" />
+  <rect x="398" y="292" width="220" height="48" rx="16" fill="#FEF3C7" />
+  <text x="420" y="323" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Triangle = extra distance</text>
+  <polyline points="508,340 520,340 544,356" class="guide" stroke="#B45309" />
+  <text x="326" y="580" class="axis">time, t (s)</text>
+  <text x="132" y="436" class="axis" transform="rotate(-90 132 436)">speed, v (m/s)</text>
+
+  <rect x="750" y="176" width="376" height="430" rx="28" fill="#ECFDF5" stroke="#86EFAC" stroke-width="3" />
+  <text x="786" y="224" class="panel-title">Same-area comparison</text>
+  <rect x="804" y="292" width="102" height="140" fill="#60A5FA" fill-opacity="0.88" />
+  <polygon points="954,432 1042,432 1042,306" fill="#34D399" fill-opacity="0.88" />
+  <text x="786" y="470" class="body">A taller narrow shape</text>
+  <text x="786" y="498" class="body">and a lower wider shape</text>
+  <text x="786" y="526" class="body">can still give the same distance</text>
+  <text x="786" y="554" class="body">if the total area matches.</text>
+  <text x="786" y="582" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">Shape can change while total</text>
+  <text x="786" y="604" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">distance stays the same.</text>
+
+  <rect x="74" y="626" width="1052" height="40" rx="20" fill="#DBEAFE" />
+  <text x="600" y="653" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Area works because speed x time gives distance.</text>
+</svg>

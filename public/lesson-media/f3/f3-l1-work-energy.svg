@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" fill="none">
+  <rect width="720" height="380" rx="28" fill="#F8FAFC"/>
+  <text x="44" y="54" fill="#0F172A" font-size="28" font-family="Arial, sans-serif" font-weight="700">Work transfers energy when force causes motion.</text>
+  <rect x="44" y="96" width="290" height="230" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
+  <text x="66" y="132" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Moving crate</text>
+  <rect x="86" y="208" width="92" height="66" rx="14" fill="#F59E0B"/>
+  <line x1="74" y1="282" x2="280" y2="282" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/>
+  <line x1="200" y1="230" x2="286" y2="230" stroke="#2563EB" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="286,230 252,210 252,250" fill="#2563EB"/>
+  <text x="196" y="200" fill="#2563EB" font-size="18" font-family="Arial, sans-serif" font-weight="700">Force</text>
+  <text x="92" y="316" fill="#0F766E" font-size="18" font-family="Arial, sans-serif" font-weight="700">Work &gt; 0 J</text>
+  <text x="66" y="342" fill="#475569" font-size="16" font-family="Arial, sans-serif">Crate moves in the force direction.</text>
+  <rect x="386" y="96" width="290" height="230" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4"/>
+  <text x="408" y="132" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">Stuck wall</text>
+  <rect x="580" y="156" width="42" height="130" rx="10" fill="#94A3B8"/>
+  <line x1="434" y1="222" x2="548" y2="222" stroke="#DC2626" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="548,222 514,202 514,242" fill="#DC2626"/>
+  <text x="436" y="192" fill="#DC2626" font-size="18" font-family="Arial, sans-serif" font-weight="700">Force present</text>
+  <text x="412" y="316" fill="#0F766E" font-size="18" font-family="Arial, sans-serif" font-weight="700">Work = 0 J</text>
+  <text x="408" y="342" fill="#475569" font-size="16" font-family="Arial, sans-serif">No displacement in the force direction.</text>
+</svg>

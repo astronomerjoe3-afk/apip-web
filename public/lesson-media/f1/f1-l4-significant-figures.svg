@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Round by checking the next digit</title>
+  <desc id="desc">A three-step significant figures diagram showing how 3.4768 rounds to 3.48 by keeping 3.47, checking the next digit 6, and rounding up.</desc>
+  <rect width="1200" height="700" rx="36" fill="#fffaf5"/>
+  <text x="70" y="92" font-size="42" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Round by checking the next digit</text>
+  <text x="70" y="138" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Keep the digits you need, inspect the next digit, then write the rounded answer.</text>
+
+  <g transform="translate(54 184)">
+    <rect width="1092" height="446" rx="32" fill="#ffffff" stroke="#f3d0a6" stroke-width="4"/>
+    <rect x="36" y="28" width="248" height="48" rx="18" fill="#eff6ff"/>
+    <text x="160" y="59" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">Target: 2 decimal places</text>
+
+    <g transform="translate(42 102)">
+      <rect width="286" height="272" rx="28" fill="#f8fbff" stroke="#bfdbfe" stroke-width="3"/>
+      <circle cx="38" cy="38" r="22" fill="#2563eb"/>
+      <text x="38" y="46" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#ffffff">1</text>
+      <text x="72" y="48" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Keep 3.47</text>
+      <text x="32" y="90" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+        <tspan x="32" dy="0">For 2 decimal places,</tspan>
+        <tspan x="32" dy="24">stop after the 7.</tspan>
+      </text>
+
+      <rect x="32" y="118" width="220" height="84" rx="22" fill="#ffffff" stroke="#dbeafe" stroke-width="3"/>
+      <rect x="138" y="126" width="60" height="68" rx="16" fill="#dbeafe"/>
+      <text x="52" y="178" font-size="74" font-family="Consolas, monospace" font-weight="700" fill="#0f172a">3.47</text>
+      <text x="188" y="178" font-size="74" font-family="Consolas, monospace" font-weight="700" fill="#94a3b8">68</text>
+
+      <rect x="32" y="220" width="184" height="34" rx="17" fill="#dbeafe"/>
+      <text x="124" y="243" text-anchor="middle" font-size="19" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">Last kept digit = 7</text>
+    </g>
+
+    <path d="M352 238 H414" stroke="#0f766e" stroke-width="10" stroke-linecap="round"/>
+    <path d="M390 214 L414 238 L390 262" fill="none" stroke="#0f766e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(402 102)">
+      <rect width="286" height="272" rx="28" fill="#fffdf2" stroke="#fde68a" stroke-width="3"/>
+      <circle cx="38" cy="38" r="22" fill="#d97706"/>
+      <text x="38" y="46" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#ffffff">2</text>
+      <text x="72" y="48" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Check the 6</text>
+      <text x="32" y="90" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+        <tspan x="32" dy="0">The next digit decides</tspan>
+        <tspan x="32" dy="24">whether 7 stays or rises.</tspan>
+      </text>
+
+      <rect x="32" y="118" width="222" height="84" rx="22" fill="#ffffff" stroke="#fde68a" stroke-width="3"/>
+      <rect x="168" y="126" width="58" height="68" rx="16" fill="#fde68a"/>
+      <text x="52" y="178" font-size="74" font-family="Consolas, monospace" font-weight="700" fill="#0f172a">3.4768</text>
+
+      <rect x="32" y="220" width="198" height="34" rx="17" fill="#fef3c7"/>
+      <text x="131" y="243" text-anchor="middle" font-size="19" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#92400e">6 is 5 or more</text>
+    </g>
+
+    <path d="M712 238 H774" stroke="#0f766e" stroke-width="10" stroke-linecap="round"/>
+    <path d="M750 214 L774 238 L750 262" fill="none" stroke="#0f766e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(762 102)">
+      <rect width="286" height="272" rx="28" fill="#ecfdf5" stroke="#86efac" stroke-width="3"/>
+      <circle cx="38" cy="38" r="22" fill="#0f766e"/>
+      <text x="38" y="46" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#ffffff">3</text>
+      <text x="72" y="48" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Write 3.48</text>
+      <text x="32" y="90" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#516277">
+        <tspan x="32" dy="0">Because the next digit is 6,</tspan>
+        <tspan x="32" dy="24">the 7 rounds up to 8.</tspan>
+      </text>
+
+      <rect x="32" y="118" width="218" height="92" rx="24" fill="#ffffff" stroke="#bbf7d0" stroke-width="3"/>
+      <text x="54" y="186" font-size="82" font-family="Consolas, monospace" font-weight="700" fill="#0f766e">3.48</text>
+
+      <rect x="32" y="220" width="182" height="34" rx="17" fill="#d1fae5"/>
+      <text x="123" y="243" text-anchor="middle" font-size="19" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#166534">7 becomes 8</text>
+    </g>
+
+    <rect x="282" y="396" width="528" height="34" rx="17" fill="#eff6ff"/>
+    <text x="546" y="418" text-anchor="middle" font-size="19" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#1d4ed8">
+      <tspan x="546" dy="0">Rule: next digit 0-4 means keep it,</tspan>
+      <tspan x="546" dy="22">next digit 5-9 means round up.</tspan>
+    </text>
+  </g>
+</svg>

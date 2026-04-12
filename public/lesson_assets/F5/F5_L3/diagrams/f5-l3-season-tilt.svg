@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <rect x="24" y="24" width="1232" height="672" rx="32" fill="#ffffff" stroke="#dbeafe" stroke-width="4"/>
+
+  <text x="70" y="96" fill="#0f172a" font-family="Arial, sans-serif" font-size="56" font-weight="700">Tilt Makes Seasons</text>
+  <text x="70" y="144" fill="#475569" font-family="Arial, sans-serif" font-size="28">
+    Keep the axis direction fixed in space and compare which hemisphere leans toward the Sun.
+  </text>
+
+  <circle cx="186" cy="360" r="62" fill="#facc15" stroke="#f59e0b" stroke-width="6"/>
+  <text x="186" y="372" fill="#0f172a" font-family="Arial, sans-serif" font-size="32" font-weight="700" text-anchor="middle">Sun</text>
+
+  <circle cx="500" cy="250" r="66" fill="#2563eb" stroke="#93c5fd" stroke-width="5"/>
+  <line x1="462" y1="326" x2="538" y2="174" stroke="#f8fafc" stroke-width="6"/>
+  <line x1="248" y1="342" x2="432" y2="272" stroke="#fbbf24" stroke-width="5"/>
+  <text x="500" y="344" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle">June-like side</text>
+
+  <circle cx="500" cy="470" r="66" fill="#2563eb" stroke="#93c5fd" stroke-width="5"/>
+  <line x1="462" y1="546" x2="538" y2="394" stroke="#f8fafc" stroke-width="6"/>
+  <line x1="248" y1="378" x2="432" y2="448" stroke="#fbbf24" stroke-width="5"/>
+  <text x="500" y="566" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle">December-like side</text>
+
+  <rect x="792" y="196" width="346" height="324" rx="28" fill="#eff6ff" stroke="#bfdbfe" stroke-width="4"/>
+  <text x="834" y="250" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Season clues</text>
+  <text x="834" y="304" fill="#0f172a" font-family="Arial, sans-serif" font-size="28">
+    <tspan x="834" dy="0">The same tilt stays pointed</tspan>
+    <tspan x="834" dy="36">the same way in space.</tspan>
+    <tspan x="834" dy="48">One hemisphere leans toward</tspan>
+    <tspan x="834" dy="36">the Sun while the other</tspan>
+    <tspan x="834" dy="36">leans away.</tspan>
+    <tspan x="834" dy="48">This is stronger than a simple</tspan>
+    <tspan x="834" dy="36">distance-from-the-Sun story.</tspan>
+  </text>
+
+  <rect x="92" y="600" width="1096" height="60" rx="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="640" y="638" fill="#475569" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">
+    Opposite hemispheres can have opposite seasons at the same time because tilt changes the sunlight angle.
+  </text>
+</svg>

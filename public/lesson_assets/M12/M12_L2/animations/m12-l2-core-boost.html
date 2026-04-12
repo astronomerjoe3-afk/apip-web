@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Core boost</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: radial-gradient(circle at top, #3f1d0d, #120701); color: white; display: grid; place-items: center; min-height: 100vh; }
+  .wrap { width: min(980px, 92vw); padding: 36px; border-radius: 28px; background: rgba(120, 53, 15, 0.76); border: 1px solid #fdba74; }
+  .title { font-size: 40px; font-weight: 800; text-align: center; }
+  .desc { margin-top: 14px; text-align: center; color: #fed7aa; font-size: 21px; }
+  .stack { margin-top: 30px; display: grid; gap: 18px; }
+  .bar { height: 54px; border-radius: 999px; animation: grow 4s ease-in-out infinite alternate; }
+  .bar:nth-child(1) { width: 40%; background: #fdba74; }
+  .bar:nth-child(2) { width: 62%; background: #fb923c; animation-delay: 0.5s; }
+  .bar:nth-child(3) { width: 84%; background: #f97316; animation-delay: 1s; }
+  @keyframes grow { from { transform: scaleX(0.82); opacity: 0.72; } to { transform: scaleX(1); opacity: 1; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Core boost</div>
+    <div class="desc">As turns, current, and the soft-iron core are added, the electromagnet strength rises because the coil field becomes more concentrated.</div>
+    <div class="stack">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+</body>
+</html>

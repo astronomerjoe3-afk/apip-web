@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="64" y="86" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Arrow Split rewrites one diagonal force into axis-aligned bookkeeping.</text>
+  <text x="64" y="128" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">Module 2 uses components to keep multi-force reasoning organized without inventing extra forces.</text>
+
+  <rect x="72" y="182" width="1056" height="468" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <line x1="212" y1="560" x2="930" y2="560" stroke="#334155" stroke-width="4"/>
+  <line x1="212" y1="560" x2="212" y2="248" stroke="#334155" stroke-width="4"/>
+  <line x1="212" y1="560" x2="496" y2="338" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="496,338 462,334 482,368" fill="#F97316"/>
+  <line x1="212" y1="560" x2="496" y2="560" stroke="#0EA5E9" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="496,560 468,544 468,576" fill="#0EA5E9"/>
+  <line x1="496" y1="560" x2="496" y2="338" stroke="#22C55E" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="496,338 482,362 510,362" fill="#22C55E"/>
+  <text x="398" y="312" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Original diagonal force</text>
+  <text x="280" y="532" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Horizontal component</text>
+  <text x="520" y="452" fill="#166534" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Vertical component</text>
+
+  <rect x="820" y="286" width="252" height="196" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="852" y="336" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Component workflow</text>
+  <text x="852" y="384" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">1. Resolve onto common axes</text>
+  <text x="852" y="420" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">2. Combine x with x, y with y</text>
+  <text x="852" y="456" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="20">3. Rebuild the same resultant</text>
+</svg>

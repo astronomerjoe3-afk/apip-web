@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#1b2750"/>
+  <text x="640" y="74" fill="#ffffff" text-anchor="middle" font-size="34" font-family="Arial" font-weight="700">Gravity beacon: radial direction and inverse-square weakening</text>
+  <text x="640" y="114" fill="#dbeafe" text-anchor="middle" font-size="20" font-family="Arial">Show inward field arrows at several radii with a clear near-strong and far-weak comparison.</text>
+
+  <rect x="140" y="146" width="1000" height="470" rx="28" fill="#172033" stroke="#334155" stroke-width="3"/>
+  <circle cx="438" cy="390" r="58" fill="#facc15"/>
+  <circle cx="690" cy="390" r="44" fill="#38bdf8"/>
+  <circle cx="906" cy="504" r="26" fill="#a78bfa"/>
+  <line x1="496" y1="390" x2="646" y2="356" stroke="#38bdf8" stroke-width="5"/>
+  <line x1="720" y1="408" x2="878" y2="490" stroke="#a78bfa" stroke-width="5"/>
+
+  <circle cx="640" cy="400" r="54" fill="#374151"/>
+  <circle cx="640" cy="400" r="124" fill="none" stroke="#94a3b8" stroke-width="4" opacity="0.5"/>
+  <circle cx="640" cy="400" r="194" fill="none" stroke="#94a3b8" stroke-width="4" opacity="0.35"/>
+  <circle cx="640" cy="400" r="264" fill="none" stroke="#94a3b8" stroke-width="4" opacity="0.22"/>
+
+  <line x1="640" y1="194" x2="640" y2="292" stroke="#0f766e" stroke-width="12"/>
+  <polygon points="640,194 620,224 660,224" fill="#0f766e"/>
+  <line x1="890" y1="400" x2="792" y2="400" stroke="#0f766e" stroke-width="12"/>
+  <polygon points="792,400 822,380 822,420" fill="#0f766e"/>
+  <line x1="640" y1="608" x2="640" y2="510" stroke="#0f766e" stroke-width="12"/>
+  <polygon points="640,510 620,540 660,540" fill="#0f766e"/>
+  <line x1="390" y1="400" x2="488" y2="400" stroke="#0f766e" stroke-width="12"/>
+  <polygon points="488,400 458,380 458,420" fill="#0f766e"/>
+
+  <text x="810" y="308" fill="#0f766e" font-size="22" font-family="Arial" font-weight="700">field points inward</text>
+  <text x="840" y="438" fill="#dbeafe" font-size="18" font-family="Arial">same direction around the beacon</text>
+  <text x="792" y="466" fill="#dbeafe" font-size="18" font-family="Arial">but weaker farther away</text>
+
+  <rect x="178" y="548" width="676" height="48" rx="18" fill="#1f2c46" stroke="#475569" stroke-width="2"/>
+  <text x="516" y="579" fill="#f8fafc" text-anchor="middle" font-size="19" font-family="Arial">Nearer rings feel stronger pull per kilogram; farther rings feel weaker pull.</text>
+</svg>

@@ -1,0 +1,333 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.078
+The last lesson in M4 is concept-dense because it asks students to combine two pressure sources into one clean total.
+
+2
+00:00:06.078 --> 00:00:12.156
+The atmosphere is not empty nothingness above the liquid.
+
+3
+00:00:12.156 --> 00:00:18.235
+It is a fluid blanket of air pressing on the open surface.
+
+4
+00:00:18.235 --> 00:00:24.313
+That means a point inside an open liquid is not carrying only the pressure from the liquid above it.
+
+5
+00:00:24.313 --> 00:00:30.391
+It is carrying atmospheric pressure plus the extra hydrostatic contribution from the liquid column.
+
+6
+00:00:30.391 --> 00:00:36.469
+Once that story is secure, the final worked example stops feeling like a formula trick and starts feeling like a layered load picture.
+
+7
+00:00:36.469 --> 00:00:42.547
+Keep this takeaway in view: Open-liquid pressure becomes easier when students think in layers: atmosphere first, liquid depth second.
+
+8
+00:00:42.547 --> 00:00:48.625
+At the open surface means already p_atm.
+
+9
+00:00:48.625 --> 00:00:54.704
+The atmosphere sets the starting pressure before depth is added.
+
+10
+00:00:54.704 --> 00:01:00.782
+Deeper in the liquid means add rho g h.
+
+11
+00:01:00.782 --> 00:01:06.860
+The liquid column contributes extra pressure below the surface.
+
+12
+00:01:06.860 --> 00:01:13.949
+This diagram matters because it stops students from resetting the pressure to zero at the liquid surface.
+
+13
+00:01:13.949 --> 00:01:21.038
+In an open tank, the air above the liquid is pressing down already.
+
+14
+00:01:21.038 --> 00:01:28.127
+So the surface pressure is atmospheric pressure.
+
+15
+00:01:28.127 --> 00:01:35.216
+Move deeper and the liquid adds more pressure on top of that starting value.
+
+16
+00:01:35.216 --> 00:01:42.304
+The result is total pressure equal to atmospheric pressure plus rho g h.
+
+17
+00:01:42.304 --> 00:01:49.393
+This picture is especially useful in worked examples where students might remember rho g h but forget what the open surface is already carrying before the depth term begins.
+
+18
+00:01:49.393 --> 00:01:56.482
+Keep this takeaway in view: The diagram is strongest when students can say what is present at the surface before talking about what depth adds.
+
+19
+00:01:56.482 --> 00:02:03.571
+Surface condition: At the open surface, the pressure is atmospheric pressure.
+
+20
+00:02:03.571 --> 00:02:10.660
+Depth condition: Going deeper adds the liquid contribution rho g h.
+
+21
+00:02:10.660 --> 00:02:15.935
+A helpful analogy is to imagine a point in the liquid lying under two blankets.
+
+22
+00:02:15.935 --> 00:02:21.210
+The first blanket is the atmosphere, which covers the whole open surface from above.
+
+23
+00:02:21.210 --> 00:02:26.485
+The second blanket is the liquid column directly above the point.
+
+24
+00:02:26.485 --> 00:02:31.760
+At the surface you already feel the air blanket.
+
+25
+00:02:31.760 --> 00:02:37.035
+As you move deeper, the water blanket gets thicker and heavier, so the total load increases.
+
+26
+00:02:37.035 --> 00:02:42.310
+This analogy is useful because it prevents students from treating atmospheric pressure as optional decoration.
+
+27
+00:02:42.310 --> 00:02:47.585
+In an open liquid, it is part of the physical load from the start.
+
+28
+00:02:47.585 --> 00:02:52.860
+Keep this takeaway in view: The double-blanket picture helps students keep the atmospheric term in the story instead of dropping it too early.
+
+29
+00:02:52.860 --> 00:02:58.135
+Blanket one means air load.
+
+30
+00:02:58.135 --> 00:03:03.410
+Atmospheric pressure is present before depth is considered.
+
+31
+00:03:03.410 --> 00:03:08.685
+Blanket two means liquid load.
+
+32
+00:03:08.685 --> 00:03:13.960
+The liquid column adds a depth-dependent contribution.
+
+33
+00:03:13.960 --> 00:03:20.230
+The key equation is p total equals p atmospheric plus rho g h.
+
+34
+00:03:20.230 --> 00:03:26.500
+The first term is the pressure applied by the air at the open surface.
+
+35
+00:03:26.500 --> 00:03:32.770
+The second term is the extra pressure caused by the liquid column above the point.
+
+36
+00:03:32.770 --> 00:03:39.040
+If the atmosphere stays the same and the depth increases, only the rho g h part changes.
+
+37
+00:03:39.040 --> 00:03:45.310
+If the depth stays the same but atmospheric conditions change, the baseline shifts everywhere in the liquid.
+
+38
+00:03:45.310 --> 00:03:51.580
+This richer reading matters because some questions ask for total pressure while others ask only for the liquid contribution.
+
+39
+00:03:51.580 --> 00:03:57.850
+Keep this takeaway in view: The formula becomes memorable when students hear it as atmospheric baseline plus depth-dependent addition.
+
+40
+00:03:57.850 --> 00:04:04.120
+At h = 0: The total pressure is p_atm at the open surface.
+
+41
+00:04:04.120 --> 00:04:10.390
+As h increases: The liquid term grows while the atmospheric baseline may stay constant.
+
+42
+00:04:10.390 --> 00:04:16.660
+p_total = p_atm + rho g h.
+
+43
+00:04:16.660 --> 00:04:22.930
+p_atm is the starting surface pressure.
+
+44
+00:04:22.930 --> 00:04:29.200
+Read carefully whether the question wants total pressure or just the pressure due to the liquid.
+
+45
+00:04:29.200 --> 00:04:34.642
+Use a simple routine.
+
+46
+00:04:34.642 --> 00:04:40.083
+First, ask whether the liquid is open to the atmosphere.
+
+47
+00:04:40.083 --> 00:04:45.525
+If it is, begin the pressure story at p atmospheric.
+
+48
+00:04:45.525 --> 00:04:50.967
+Second, measure the depth below the free surface, not below the floor or the container base.
+
+49
+00:04:50.967 --> 00:04:56.408
+Third, add rho g h for the liquid contribution.
+
+50
+00:04:56.408 --> 00:05:01.850
+If two points are compared in the same open liquid, notice that the atmospheric part may be common to both, which can help comparisons even though it is still physically present.
+
+51
+00:05:01.850 --> 00:05:07.292
+This routine gives students a dependable map for the final worked example.
+
+52
+00:05:07.292 --> 00:05:12.733
+Keep this takeaway in view: The open-liquid routine helps students keep both the starting baseline and the added depth term visible.
+
+53
+00:05:12.733 --> 00:05:18.175
+Step 1 means is it open?.
+
+54
+00:05:18.175 --> 00:05:23.617
+An open surface means atmospheric pressure is the starting point.
+
+55
+00:05:23.617 --> 00:05:29.058
+Step 2 means measure h correctly.
+
+56
+00:05:29.058 --> 00:05:34.500
+Depth is measured below the liquid surface, not from the tank bottom.
+
+57
+00:05:34.500 --> 00:05:39.157
+Try four checks.
+
+58
+00:05:39.157 --> 00:05:43.815
+At the open surface, is the pressure zero?
+
+59
+00:05:43.815 --> 00:05:48.472
+No, it is atmospheric pressure.
+
+60
+00:05:48.472 --> 00:05:53.129
+Deeper in the same liquid, does the total pressure increase?
+
+61
+00:05:53.129 --> 00:05:57.787
+Yes, because rho g h increases.
+
+62
+00:05:57.787 --> 00:06:02.444
+If the depth is unchanged but atmospheric pressure changed, would the total pressure change too?
+
+63
+00:06:02.444 --> 00:06:07.101
+Yes, because the baseline has shifted.
+
+64
+00:06:07.101 --> 00:06:11.759
+And if a question asks only for the liquid contribution, should p atmospheric still be written in the final numerical answer?
+
+65
+00:06:11.759 --> 00:06:16.416
+No, not unless total pressure is required.
+
+66
+00:06:16.416 --> 00:06:21.073
+Those distinctions matter a great deal in final pressure questions.
+
+67
+00:06:21.073 --> 00:06:25.731
+Keep this takeaway in view: The worked example is ready once students can keep the atmospheric baseline and the liquid addition distinct.
+
+68
+00:06:25.731 --> 00:06:30.388
+Open surface means p = p_atm.
+
+69
+00:06:30.388 --> 00:06:35.045
+The surface is not a zero-pressure location.
+
+70
+00:06:35.045 --> 00:06:39.703
+Go deeper means total rises.
+
+71
+00:06:39.703 --> 00:06:44.360
+The liquid contribution adds to the same atmospheric baseline.
+
+72
+00:06:44.360 --> 00:06:51.416
+You are ready for the final worked example now.
+
+73
+00:06:51.416 --> 00:06:58.472
+Begin by deciding whether the liquid is open to the atmosphere.
+
+74
+00:06:58.472 --> 00:07:05.528
+If it is, state that the pressure at the surface is p atmospheric.
+
+75
+00:07:05.528 --> 00:07:12.583
+Then measure the depth below that surface and add rho g h for the liquid contribution.
+
+76
+00:07:12.583 --> 00:07:19.639
+Finally, read the question again to check whether it wants total pressure, the pressure due to the liquid alone, or a comparison between points.
+
+77
+00:07:19.639 --> 00:07:26.695
+The strongest solutions in this lesson are not just accurate; they are explicit about which pressure is being reported and why.
+
+78
+00:07:26.695 --> 00:07:33.751
+Keep this takeaway in view: The final worked example is ready: open-liquid pressure can now be read as atmospheric baseline plus hydrostatic addition.
+
+79
+00:07:33.751 --> 00:07:40.807
+Surface move: Never begin an open-liquid pressure story as though the surface pressure were zero.
+
+80
+00:07:40.807 --> 00:07:47.862
+Depth move: Use depth below the free surface, because that is what controls the liquid addition.
+
+81
+00:07:47.862 --> 00:07:54.918
+start with p_atm at the open surface.
+
+82
+00:07:54.918 --> 00:08:01.974
+measure h below the surface and add rho g h.
+
+83
+00:08:01.974 --> 00:08:09.030
+Many mistakes disappear when the solution states the surface condition before substituting numbers.

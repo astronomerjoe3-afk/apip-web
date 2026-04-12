@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f8fbff"/>
+  <text x="52" y="74" fill="#16213e" font-family="Georgia, serif" font-size="54" font-weight="700">Launch Split</text>
+  <text x="52" y="126" fill="#475569" font-family="Georgia, serif" font-size="28">Projectiles are one launch built from a horizontal story and a vertical story.</text>
+  <rect x="54" y="176" width="1092" height="466" rx="36" fill="#eef6ff" stroke="#93c5fd" stroke-width="6"/>
+  <line x1="112" y1="546" x2="1092" y2="546" stroke="#94a3b8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M136 536 Q370 160 612 250 T1060 536" fill="none" stroke="#2563eb" stroke-width="10"/>
+  <line x1="136" y1="536" x2="350" y2="412" stroke="#1d4ed8" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="350,412 320,402 334,432" fill="#1d4ed8"/>
+  <line x1="136" y1="536" x2="314" y2="536" stroke="#0f766e" stroke-width="10" stroke-dasharray="12 10"/>
+  <line x1="314" y1="536" x2="314" y2="336" stroke="#f97316" stroke-width="10" stroke-dasharray="12 10"/>
+  <text x="346" y="530" fill="#0f766e" font-family="Georgia, serif" font-size="34" font-weight="700">u_x constant</text>
+  <text x="336" y="332" fill="#c2410c" font-family="Georgia, serif" font-size="34" font-weight="700">u_y changes under g</text>
+  <line x1="618" y1="250" x2="618" y2="326" stroke="#dc2626" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="618,326 602,298 634,298" fill="#dc2626"/>
+  <text x="650" y="302" fill="#b91c1c" font-family="Georgia, serif" font-size="34" font-weight="700">drop field still acts here</text>
+  <text x="130" y="602" fill="#475569" font-family="Georgia, serif" font-size="30">At the top of the path, vertical velocity can be zero for an instant while downward acceleration remains.</text>
+</svg>

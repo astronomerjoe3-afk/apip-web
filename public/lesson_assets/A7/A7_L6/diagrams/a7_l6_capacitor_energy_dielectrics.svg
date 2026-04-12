@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#3b82f6" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Capacitors Store Energy in the Field Between Their Plates
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    The dielectric changes how the field behaves between the plates, raising capacitance and changing how much energy can be stored.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="550" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="724" y="226" width="550" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="401" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Field energy picture
+  </text>
+  <text x="999" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Dielectric effect
+  </text>
+
+  <rect x="232" y="320" width="70" height="300" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="500" y="320" width="70" height="300" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <line x1="302" y1="360" x2="500" y2="360" stroke="#60a5fa" stroke-width="6" stroke-dasharray="12 10"/>
+  <line x1="302" y1="420" x2="500" y2="420" stroke="#60a5fa" stroke-width="6" stroke-dasharray="12 10"/>
+  <line x1="302" y1="480" x2="500" y2="480" stroke="#60a5fa" stroke-width="6" stroke-dasharray="12 10"/>
+  <line x1="302" y1="540" x2="500" y2="540" stroke="#60a5fa" stroke-width="6" stroke-dasharray="12 10"/>
+  <text x="401" y="662" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    Energy is stored in the electric field region.
+  </text>
+
+  <rect x="820" y="320" width="70" height="300" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="1108" y="320" width="70" height="300" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="890" y="320" width="218" height="300" rx="16" fill="#dcfce7" stroke="#10b981" stroke-width="3"/>
+  <line x1="890" y1="360" x2="1108" y2="360" stroke="#16a34a" stroke-width="6" stroke-dasharray="12 8"/>
+  <line x1="890" y1="420" x2="1108" y2="420" stroke="#16a34a" stroke-width="6" stroke-dasharray="12 8"/>
+  <line x1="890" y1="480" x2="1108" y2="480" stroke="#16a34a" stroke-width="6" stroke-dasharray="12 8"/>
+  <line x1="890" y1="540" x2="1108" y2="540" stroke="#16a34a" stroke-width="6" stroke-dasharray="12 8"/>
+  <text x="999" y="662" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    A dielectric changes the field response and increases C.
+  </text>
+
+  <rect x="532" y="672" width="336" height="44" rx="18" fill="#2563eb"/>
+  <text x="700" y="701" fill="#eff6ff" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    E depends on C and V
+  </text>
+</svg>

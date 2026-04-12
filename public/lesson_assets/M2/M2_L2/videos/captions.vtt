@@ -1,0 +1,337 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.039
+This lesson sits between Newton's second and third laws, so it is easy for learners to blend them accidentally.
+
+2
+00:00:06.039 --> 00:00:12.078
+For one object, the response depends on the net force and the mass.
+
+3
+00:00:12.078 --> 00:00:18.117
+That is Newton's second-law structure.
+
+4
+00:00:18.117 --> 00:00:24.156
+For two interacting objects, the pair forces are equal and opposite on different objects.
+
+5
+00:00:24.156 --> 00:00:30.195
+That is Newton's third-law structure.
+
+6
+00:00:30.195 --> 00:00:36.235
+The biggest win of the lesson is knowing which story you are in before you start the reasoning.
+
+7
+00:00:36.235 --> 00:00:42.274
+Keep this takeaway in view: First decide whether the question is about response of one object or interaction between two objects.
+
+8
+00:00:42.274 --> 00:00:48.313
+One-object question means F = ma.
+
+9
+00:00:48.313 --> 00:00:54.352
+Use net force and mass to predict the object's acceleration.
+
+10
+00:00:54.352 --> 00:01:00.391
+Two-object interaction means equal and opposite pair.
+
+11
+00:01:00.391 --> 00:01:06.430
+The force pair matches in size and opposes in direction on different objects.
+
+12
+00:01:06.430 --> 00:01:11.761
+Here the same Master Arrow acts on two different crafts.
+
+13
+00:01:11.761 --> 00:01:17.092
+The lighter craft shows a larger Motion Shift.
+
+14
+00:01:17.092 --> 00:01:22.423
+The heavier craft shows a smaller Motion Shift.
+
+15
+00:01:22.423 --> 00:01:27.754
+Nothing mysterious has happened to the force.
+
+16
+00:01:27.754 --> 00:01:33.086
+The difference comes from the mass.
+
+17
+00:01:33.086 --> 00:01:38.417
+This picture is powerful because it lets learners see that equal force does not force equal acceleration when the resisting mass is different.
+
+18
+00:01:38.417 --> 00:01:43.748
+Keep this takeaway in view: The response size depends on both the net force and the mass, not on force alone.
+
+19
+00:01:43.748 --> 00:01:49.079
+Same force: Both crafts experience the same Master Arrow.
+
+20
+00:01:49.079 --> 00:01:54.410
+Lighter craft: Less mass means the same net force produces a bigger Motion Shift.
+
+21
+00:01:54.410 --> 00:01:59.797
+Imagine the same tow cable pulling two different sleds.
+
+22
+00:01:59.797 --> 00:02:05.183
+The cable tension can match in both stories, but the lighter sled responds more because less mass resists the motion change.
+
+23
+00:02:05.183 --> 00:02:10.570
+This analogy is useful because it preserves the force equality while allowing the acceleration outcomes to differ.
+
+24
+00:02:10.570 --> 00:02:15.957
+That is exactly the distinction learners need before the worked example begins.
+
+25
+00:02:15.957 --> 00:02:21.343
+Keep this takeaway in view: Equal force and equal acceleration are not the same statement.
+
+26
+00:02:21.343 --> 00:02:26.730
+Tow cable means interaction force.
+
+27
+00:02:26.730 --> 00:02:32.117
+The pull itself can be equal in different cases.
+
+28
+00:02:32.117 --> 00:02:37.503
+Light sled means larger acceleration.
+
+29
+00:02:37.503 --> 00:02:42.890
+Less mass means the same pull causes more motion change.
+
+30
+00:02:42.890 --> 00:02:48.156
+The second-law relation is acceleration equals net force divided by mass.
+
+31
+00:02:48.156 --> 00:02:53.423
+In words, the Motion Shift comes from the Master Arrow shared across the object's mass.
+
+32
+00:02:53.423 --> 00:02:58.689
+A larger Master Arrow gives a larger acceleration if the mass stays fixed.
+
+33
+00:02:58.689 --> 00:03:03.955
+A larger mass gives a smaller acceleration if the net force stays fixed.
+
+34
+00:03:03.955 --> 00:03:09.222
+This is the clean response model for one-object questions.
+
+35
+00:03:09.222 --> 00:03:14.488
+Keep this takeaway in view: For one object, acceleration belongs to the net force and the mass together.
+
+36
+00:03:14.488 --> 00:03:19.755
+Bigger net force: If mass stays the same, acceleration becomes larger.
+
+37
+00:03:19.755 --> 00:03:25.021
+Bigger mass: If net force stays the same, acceleration becomes smaller.
+
+38
+00:03:25.021 --> 00:03:30.287
+a = F_net / m.
+
+39
+00:03:30.287 --> 00:03:35.554
+F_net = ma.
+
+40
+00:03:35.554 --> 00:03:40.820
+Use the Master Arrow, or resultant force, not just one listed force from the scene.
+
+41
+00:03:40.820 --> 00:03:46.375
+Newton's third law says interacting objects exert equal and opposite forces on each other.
+
+42
+00:03:46.375 --> 00:03:51.930
+Those two forces belong to different objects.
+
+43
+00:03:51.930 --> 00:03:57.485
+So they are not the pair you cancel when finding one object's net force.
+
+44
+00:03:57.485 --> 00:04:03.040
+To find one object's acceleration, use only the forces acting on that one object and combine them into its own Master Arrow.
+
+45
+00:04:03.040 --> 00:04:08.595
+This distinction protects the learner from saying the heavier object pushes back harder simply because it accelerates less.
+
+46
+00:04:08.595 --> 00:04:14.150
+Keep this takeaway in view: Third-law equality and second-law response live in different reasoning boxes.
+
+47
+00:04:14.150 --> 00:04:19.705
+Third-law pair means different objects.
+
+48
+00:04:19.705 --> 00:04:25.260
+Equal and opposite interaction forces act on two separate bodies.
+
+49
+00:04:25.260 --> 00:04:30.815
+Net force question means one object only.
+
+50
+00:04:30.815 --> 00:04:36.370
+Use only the forces acting on the chosen object.
+
+51
+00:04:36.370 --> 00:04:42.792
+A common trap is to look at the smaller acceleration of the heavier craft and decide that the interaction forces must be different.
+
+52
+00:04:42.792 --> 00:04:49.214
+That is wrong.
+
+53
+00:04:49.214 --> 00:04:55.637
+The interaction forces can still be equal and opposite.
+
+54
+00:04:55.637 --> 00:05:02.059
+The difference in acceleration comes from the difference in mass.
+
+55
+00:05:02.059 --> 00:05:08.481
+Another trap is to place a third-law pair into one object's net-force balance and cancel it there.
+
+56
+00:05:08.481 --> 00:05:14.903
+The force pair acts on different objects, so that cancellation is not allowed in a one-object response question.
+
+57
+00:05:14.903 --> 00:05:21.326
+Keep this takeaway in view: Mass explains the response difference; it does not break force-pair equality.
+
+58
+00:05:21.326 --> 00:05:27.748
+Equal interaction forces can still produce different accelerations.
+
+59
+00:05:27.748 --> 00:05:34.170
+Different accelerations come from different masses under the same net force.
+
+60
+00:05:34.170 --> 00:05:38.179
+Check yourself.
+
+61
+00:05:38.179 --> 00:05:42.188
+For a one-object response question, which relation do you use?
+
+62
+00:05:42.188 --> 00:05:46.198
+A equals F net over m.
+
+63
+00:05:46.198 --> 00:05:50.207
+If two objects interact, what does Newton's third law tell you?
+
+64
+00:05:50.207 --> 00:05:54.216
+The forces are equal and opposite on different objects.
+
+65
+00:05:54.216 --> 00:05:58.225
+If one object accelerates less under the same net force, what changed?
+
+66
+00:05:58.225 --> 00:06:02.235
+Its mass is larger.
+
+67
+00:06:02.235 --> 00:06:06.244
+Those three checks are the spine of the lesson.
+
+68
+00:06:06.244 --> 00:06:10.253
+Keep this takeaway in view: Response and interaction must be sorted before the arithmetic begins.
+
+69
+00:06:10.253 --> 00:06:14.262
+Response model means a = F_net / m.
+
+70
+00:06:14.262 --> 00:06:18.272
+Use this for one-object acceleration questions.
+
+71
+00:06:18.272 --> 00:06:22.281
+Interaction model means equal and opposite pair.
+
+72
+00:06:22.281 --> 00:06:26.290
+Use this for force-pair reasoning between objects.
+
+73
+00:06:26.290 --> 00:06:32.513
+You are ready for the worked example now.
+
+74
+00:06:32.513 --> 00:06:38.735
+The same eighteen newton Master Arrow acts east on a three kilogram scout and a six kilogram freighter.
+
+75
+00:06:38.735 --> 00:06:44.958
+Use a equals F net over m for each craft separately.
+
+76
+00:06:44.958 --> 00:06:51.180
+For the scout, eighteen divided by three gives six metres per second squared east.
+
+77
+00:06:51.180 --> 00:06:57.403
+For the freighter, eighteen divided by six gives three metres per second squared east.
+
+78
+00:06:57.403 --> 00:07:03.625
+The scout accelerates more because the same Master Arrow is shared across less mass.
+
+79
+00:07:03.625 --> 00:07:09.848
+Keep this takeaway in view: The worked example is ready: same net force, different mass, different acceleration.
+
+80
+00:07:09.848 --> 00:07:16.070
+Step 1: Recognize this as a one-object response question for each craft.
+
+81
+00:07:16.070 --> 00:07:22.292
+Step 2: Use a = F_net / m separately for each mass.
+
+82
+00:07:22.292 --> 00:07:28.515
+scout: a = 18 / 3 = 6 m/s^2 east.
+
+83
+00:07:28.515 --> 00:07:34.738
+freighter: a = 18 / 6 = 3 m/s^2 east.
+
+84
+00:07:34.738 --> 00:07:40.960
+The same Master Arrow produces different Motion Shifts because the masses differ.

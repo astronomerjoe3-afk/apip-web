@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <style>
+    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
+    .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+  </style>
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
+  <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+  <text x="74" y="88" class="title">Acceleration sign comes from signed velocity change.</text>
+  <text x="74" y="122" class="subtitle">Choose a positive direction first.</text>
+  <text x="74" y="150" class="subtitle">Then compare the initial and final velocity arrows before deciding the acceleration sign.</text>
+
+  <rect x="74" y="176" width="1052" height="118" rx="28" fill="#EEF2FF" stroke="#C4B5FD" stroke-width="3" />
+  <text x="102" y="220" class="panel-title">Reference rule</text>
+  <text x="102" y="252" class="body">a = (v - u) / t.</text>
+  <text x="102" y="280" class="body">The sign belongs to the chosen direction of the velocity change.</text>
+  <text x="760" y="252" fill="#5B21B6" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Take east as positive</text>
+  <text x="760" y="278" fill="#5B21B6" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">before you subtract.</text>
+
+  <rect x="74" y="326" width="496" height="280" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
+  <rect x="630" y="326" width="496" height="280" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3" />
+  <text x="110" y="372" class="panel-title">Case A: negative acceleration</text>
+  <text x="666" y="372" class="panel-title">Case B: positive acceleration</text>
+
+  <line x1="130" y1="458" x2="514" y2="458" stroke="#94A3B8" stroke-width="4" />
+  <line x1="322" y1="420" x2="322" y2="496" stroke="#64748B" stroke-width="3" />
+  <line x1="322" y1="418" x2="470" y2="418" stroke="#2563EB" stroke-width="12" stroke-linecap="round" />
+  <polygon points="470,418 438,398 438,438" fill="#2563EB" />
+  <line x1="322" y1="500" x2="404" y2="500" stroke="#0EA5E9" stroke-width="12" stroke-linecap="round" />
+  <polygon points="404,500 372,480 372,520" fill="#0EA5E9" />
+  <text x="144" y="408" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">u = +8 m/s</text>
+  <text x="144" y="546" fill="#0369A1" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">v = +3 m/s</text>
+  <text x="144" y="580" class="body">Velocity becomes less positive,</text>
+  <text x="144" y="606" class="body">so acceleration is negative.</text>
+
+  <line x1="686" y1="458" x2="1070" y2="458" stroke="#94A3B8" stroke-width="4" />
+  <line x1="878" y1="420" x2="878" y2="496" stroke="#64748B" stroke-width="3" />
+  <line x1="878" y1="418" x2="748" y2="418" stroke="#DC2626" stroke-width="12" stroke-linecap="round" />
+  <polygon points="748,418 780,398 780,438" fill="#DC2626" />
+  <line x1="878" y1="500" x2="810" y2="500" stroke="#F59E0B" stroke-width="12" stroke-linecap="round" />
+  <polygon points="810,500 842,480 842,520" fill="#F59E0B" />
+  <text x="684" y="408" fill="#B91C1C" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">u = -8 m/s</text>
+  <text x="684" y="546" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">v = -3 m/s</text>
+  <text x="684" y="580" class="body">Velocity becomes less negative,</text>
+  <text x="684" y="606" class="body">so acceleration is positive.</text>
+
+  <rect x="74" y="626" width="1052" height="52" rx="20" fill="#F3E8FF" />
+  <text x="600" y="648" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">The same object can slow down with negative acceleration or with positive acceleration,</text>
+  <text x="600" y="670" fill="#6D28D9" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">depending on its velocity direction.</text>
+</svg>

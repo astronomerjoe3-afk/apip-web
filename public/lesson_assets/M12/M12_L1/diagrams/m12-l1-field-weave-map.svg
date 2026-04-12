@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <text x="640" y="72" text-anchor="middle" font-family="Arial" font-size="34" font-weight="700" fill="#0f172a">Field towers and carrier routes both create readable weave patterns</text>
+  <text x="640" y="110" text-anchor="middle" font-family="Arial" font-size="18" fill="#475569">Use compass flags for direction and line spacing for strength. A bar magnet and a live wire produce different magnetic-field geometries.</text>
+
+  <rect x="70" y="160" width="520" height="470" rx="34" fill="#e0f2fe" stroke="#60a5fa" stroke-width="6"/>
+  <text x="110" y="210" font-family="Arial" font-size="26" font-weight="700" fill="#0f172a">Field tower</text>
+  <rect x="274" y="298" width="70" height="180" rx="18" fill="#ef4444"/>
+  <rect x="344" y="298" width="70" height="180" rx="18" fill="#3b82f6"/>
+  <text x="309" y="332" text-anchor="middle" font-family="Arial" font-size="26" font-weight="700" fill="#ffffff">N</text>
+  <text x="379" y="332" text-anchor="middle" font-family="Arial" font-size="26" font-weight="700" fill="#ffffff">S</text>
+  <path d="M168 388C214 246 474 246 520 388" fill="none" stroke="#2563eb" stroke-width="8"/>
+  <path d="M188 432C232 334 456 334 500 432" fill="none" stroke="#60a5fa" stroke-width="7"/>
+  <path d="M168 388C214 528 474 528 520 388" fill="none" stroke="#2563eb" stroke-width="8"/>
+  <path d="M210 278H250" stroke="#1d4ed8" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="252,278 236,270 236,286" fill="#1d4ed8"/>
+  <path d="M468 498H508" stroke="#1d4ed8" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="510,498 494,490 494,506" fill="#1d4ed8"/>
+  <circle cx="186" cy="312" r="28" fill="#ffffff" stroke="#334155" stroke-width="4"/>
+  <path d="M186 312l18-14" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="492" cy="312" r="28" fill="#ffffff" stroke="#334155" stroke-width="4"/>
+  <path d="M492 312l18 14" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+  <text x="110" y="570" font-family="Arial" font-size="20" fill="#334155">Compass flags line up with local direction.</text>
+  <text x="110" y="600" font-family="Arial" font-size="20" fill="#334155">Closer weave lines mean stronger field regions.</text>
+
+  <rect x="690" y="160" width="520" height="470" rx="34" fill="#ecfeff" stroke="#22d3ee" stroke-width="6"/>
+  <text x="730" y="210" font-family="Arial" font-size="26" font-weight="700" fill="#0f172a">Carrier route</text>
+  <circle cx="948" cy="386" r="30" fill="#0f172a"/>
+  <circle cx="948" cy="386" r="10" fill="#ffffff"/>
+  <path d="M948 270a116 116 0 1 1 0 232a116 116 0 1 1 0-232" fill="none" stroke="#0ea5e9" stroke-width="8" stroke-dasharray="14 10"/>
+  <path d="M948 316a70 70 0 1 1 0 140a70 70 0 1 1 0-140" fill="none" stroke="#38bdf8" stroke-width="7" stroke-dasharray="10 9"/>
+  <path d="M1028 318c18 8 26 18 30 34" fill="none" stroke="#0369a1" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="1062,356 1048,344 1045,362" fill="#0369a1"/>
+  <text x="1038" y="302" font-family="Arial" font-size="20" fill="#0f172a">circular weave</text>
+  <circle cx="1118" cy="386" r="28" fill="#ffffff" stroke="#334155" stroke-width="4"/>
+  <path d="M1118 386l-14 18" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="778" cy="386" r="28" fill="#ffffff" stroke="#334155" stroke-width="4"/>
+  <path d="M778 386l14-18" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+  <text x="730" y="570" font-family="Arial" font-size="20" fill="#334155">A straight current-carrying wire makes circular field lines.</text>
+  <text x="730" y="600" font-family="Arial" font-size="20" fill="#334155">Reverse the current and the circular field direction reverses.</text>
+</svg>

@@ -1,0 +1,30 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC"/>
+  <text x="70" y="88" fill="#172554" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Push and difficulty set the stream rate</text>
+  <text x="70" y="132" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="22">A stronger push increases current; a harder path reduces it.</text>
+  <rect x="88" y="206" width="470" height="390" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="6"/>
+  <text x="124" y="264" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Flow-Grid comparison</text>
+  <text x="126" y="320" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Same push: 12 V</text>
+  <rect x="124" y="356" width="130" height="28" rx="14" fill="#60A5FA"/>
+  <text x="124" y="428" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Route A difficulty: 3 ohms</text>
+  <text x="124" y="468" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Current = 4 A</text>
+  <rect x="124" y="516" width="220" height="28" rx="14" fill="#1E3A8A"/>
+  <text x="124" y="588" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">Route B difficulty: 6 ohms</text>
+  <text x="124" y="628" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Current = 2 A</text>
+  <rect x="644" y="206" width="470" height="390" rx="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="6"/>
+  <text x="688" y="264" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Ohmic I-V view</text>
+  <line x1="724" y1="544" x2="724" y2="322" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+  <line x1="724" y1="544" x2="1034" y2="544" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+  <text x="684" y="338" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="20">Current</text>
+  <text x="984" y="586" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="20">Voltage</text>
+  <line x1="724" y1="544" x2="946" y2="362" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <line x1="724" y1="544" x2="990" y2="446" stroke="#F59E0B" stroke-width="10" stroke-linecap="round"/>
+  <text x="954" y="356" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">A</text>
+  <text x="998" y="446" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">B</text>
+  <text x="848" y="336" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Route A: steeper slope</text>
+  <text x="848" y="362" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">= lower resistance</text>
+  <text x="824" y="476" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Route B: flatter slope</text>
+  <text x="824" y="502" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">= higher resistance</text>
+  <text x="70" y="652" fill="#0F766E" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Key idea:</text>
+  <text x="228" y="652" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="24">The formal rule I = V / R is the circuit version of stream rate = push / path difficulty.</text>
+</svg>

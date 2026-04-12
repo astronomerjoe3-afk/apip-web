@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#2563eb" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Parallel Plates Make a Uniform Electric Slope
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Between wide flat plates, the central gap carries nearly parallel arrows, so E reads as dV divided by separation.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="590" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="748" y="226" width="526" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="421" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Uniform gap field
+  </text>
+  <text x="1011" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Same dV, different gap
+  </text>
+
+  <rect x="220" y="328" width="72" height="282" rx="18" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <rect x="528" y="328" width="72" height="282" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="256" y="316" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">+ plate</text>
+  <text x="564" y="316" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">- plate</text>
+
+  <line x1="308" y1="380" x2="504" y2="380" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,380 474,364 474,396" fill="#16a34a"/>
+  <line x1="308" y1="440" x2="504" y2="440" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,440 474,424 474,456" fill="#16a34a"/>
+  <line x1="308" y1="500" x2="504" y2="500" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,500 474,484 474,516" fill="#16a34a"/>
+  <line x1="308" y1="560" x2="504" y2="560" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="504,560 474,544 474,576" fill="#16a34a"/>
+  <text x="420" y="652" fill="#1e40af" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Central arrows stay parallel and equal-sized.
+  </text>
+  <text x="420" y="684" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    That is the uniform-field approximation used in the lesson.
+  </text>
+
+  <text x="1011" y="340" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Wide gap, same dV
+  </text>
+  <rect x="812" y="376" width="54" height="138" rx="16" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <rect x="1126" y="376" width="54" height="138" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <line x1="882" y1="410" x2="1100" y2="410" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="1100,410 1072,394 1072,426" fill="#38bdf8"/>
+  <line x1="882" y1="476" x2="1100" y2="476" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="1100,476 1072,460 1072,492" fill="#38bdf8"/>
+  <text x="1011" y="548" fill="#0369a1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    larger d means gentler field
+  </text>
+
+  <text x="1011" y="602" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Narrow gap, same dV
+  </text>
+  <rect x="908" y="624" width="54" height="52" rx="16" fill="#bfdbfe" stroke="#2563eb" stroke-width="3"/>
+  <rect x="1060" y="624" width="54" height="52" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <line x1="970" y1="650" x2="1050" y2="650" stroke="#0ea5e9" stroke-width="9" stroke-linecap="round"/>
+  <polygon points="1050,650 1022,634 1022,666" fill="#0ea5e9"/>
+  <text x="1011" y="706" fill="#0369a1" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    smaller d means steeper field
+  </text>
+</svg>

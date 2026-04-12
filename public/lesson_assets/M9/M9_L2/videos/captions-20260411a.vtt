@@ -1,0 +1,277 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.680
+Current questions feel much lighter once the learner hears an ampere as a rate sentence.
+
+2
+00:00:05.680 --> 00:00:11.360
+One ampere means one coulomb passes a point each second.
+
+3
+00:00:11.360 --> 00:00:17.040
+That immediately tells you why multiplying current by time gives total charge, and why dividing charge by time gives current.
+
+4
+00:00:17.040 --> 00:00:22.720
+The biggest trap is letting total charge and current collapse into one idea.
+
+5
+00:00:22.720 --> 00:00:28.400
+This lesson works best when the checkpoint-rate story stays visible in every calculation.
+
+6
+00:00:28.400 --> 00:00:34.080
+Keep this takeaway in view: Lesson 2 becomes calmer once current is treated as a rate and charge as the amount accumulated over time.
+
+7
+00:00:34.080 --> 00:00:39.760
+Current means charge each second.
+
+8
+00:00:39.760 --> 00:00:45.440
+An ampere is a rate of charge flow, not a stored amount.
+
+9
+00:00:45.440 --> 00:00:51.120
+Charge means total amount passed.
+
+10
+00:00:51.120 --> 00:00:56.800
+Charge tells you how much passed the checkpoint over the full time interval.
+
+11
+00:00:56.800 --> 00:01:03.204
+This diagram matters because it keeps the checkpoint idea visible.
+
+12
+00:01:03.204 --> 00:01:09.608
+Current is not the total number of carriers in the whole loop.
+
+13
+00:01:09.608 --> 00:01:16.011
+It is how much charge passes one chosen point per second.
+
+14
+00:01:16.011 --> 00:01:22.415
+If the same total charge passes in less time, the current is larger because the rate is greater.
+
+15
+00:01:22.415 --> 00:01:28.819
+Once the learner can say that sentence out loud, the move between Q equals I t and I equals Q over t becomes much easier.
+
+16
+00:01:28.819 --> 00:01:35.222
+Keep this takeaway in view: A strong current answer keeps the checkpoint, the time, and the total passed clearly separate.
+
+17
+00:01:35.222 --> 00:01:41.626
+Checkpoint: Use one chosen point in the loop to define the current measurement.
+
+18
+00:01:41.626 --> 00:01:48.030
+Timer: The time interval decides how long the rate has been running.
+
+19
+00:01:48.030 --> 00:01:53.466
+A turnstile analogy helps because it makes rate and amount feel different immediately.
+
+20
+00:01:53.466 --> 00:01:58.902
+The crowd-per-second at the gate is the current story.
+
+21
+00:01:58.902 --> 00:02:04.338
+The total number of people who passed during the full event is the charge story.
+
+22
+00:02:04.338 --> 00:02:09.774
+If the same crowd total passes in a shorter time, the gate rate must be larger.
+
+23
+00:02:09.774 --> 00:02:15.210
+That is exactly the logic the learner needs when comparing loops that move the same charge in different times.
+
+24
+00:02:15.210 --> 00:02:20.646
+Keep this takeaway in view: The analogy helps the learner defend why current is a rate even when the same total charge is involved.
+
+25
+00:02:20.646 --> 00:02:26.082
+Per-second count means current idea.
+
+26
+00:02:26.082 --> 00:02:31.518
+The gate rate matches charge passing a checkpoint each second.
+
+27
+00:02:31.518 --> 00:02:36.954
+Event total means charge idea.
+
+28
+00:02:36.954 --> 00:02:42.390
+The full count over the whole interval matches the total charge passed.
+
+29
+00:02:42.390 --> 00:02:48.363
+If current is charge per second, then multiplying that rate by the number of seconds gives total charge.
+
+30
+00:02:48.363 --> 00:02:54.336
+That is all Q equals I t is saying.
+
+31
+00:02:54.336 --> 00:03:00.309
+Reversing the same idea gives I equals Q over t.
+
+32
+00:03:00.309 --> 00:03:06.282
+The only common danger is forgetting that the time must be in seconds when the current is in amperes and the charge is in coulombs.
+
+33
+00:03:06.282 --> 00:03:12.255
+Once that unit discipline is secure, the calculations become very straightforward.
+
+34
+00:03:12.255 --> 00:03:18.228
+Keep this takeaway in view: The formula scene works once the learner can read Q = I t as a direct translation of the rate story.
+
+35
+00:03:18.228 --> 00:03:24.201
+Direction one: Known current and time give total charge.
+
+36
+00:03:24.201 --> 00:03:30.174
+Direction two: Known charge and time give current.
+
+37
+00:03:30.174 --> 00:03:36.147
+I = Q / t.
+
+38
+00:03:36.147 --> 00:03:42.120
+Translate minutes into seconds before substituting into Q = I t or I = Q / t.
+
+39
+00:03:42.120 --> 00:03:47.488
+A strong routine for this lesson has three steps.
+
+40
+00:03:47.488 --> 00:03:52.856
+First say what the current means at the checkpoint in coulombs per second.
+
+41
+00:03:52.856 --> 00:03:58.224
+Second convert the time into seconds if needed.
+
+42
+00:03:58.224 --> 00:04:03.592
+Third multiply or divide depending on whether the unknown is the total charge or the current.
+
+43
+00:04:03.592 --> 00:04:08.960
+That routine prevents the calculation from floating free of the meaning and prevents most unit mistakes at the same time.
+
+44
+00:04:08.960 --> 00:04:14.328
+Keep this takeaway in view: Checkpoint first, seconds second, operation third is the safest routine for Lesson 2.
+
+45
+00:04:14.328 --> 00:04:19.696
+Step 1 means read the rate.
+
+46
+00:04:19.696 --> 00:04:25.064
+Translate amperes back into charge per second before substituting.
+
+47
+00:04:25.064 --> 00:04:30.432
+Step 2 means fix the time unit.
+
+48
+00:04:30.432 --> 00:04:35.800
+Convert minutes into seconds when the relation uses amperes and coulombs.
+
+49
+00:04:35.800 --> 00:04:40.430
+Run four checks.
+
+50
+00:04:40.430 --> 00:04:45.060
+One ampere means one coulomb per second.
+
+51
+00:04:45.060 --> 00:04:49.690
+Current is a rate, not a stored amount.
+
+52
+00:04:49.690 --> 00:04:54.320
+Q equals I t when charge is the unknown, and I equals Q over t when current is the unknown.
+
+53
+00:04:54.320 --> 00:04:58.950
+And the time should be in seconds when amperes and coulombs are being used together.
+
+54
+00:04:58.950 --> 00:05:03.580
+Those four checks cover the whole lesson structure.
+
+55
+00:05:03.580 --> 00:05:08.210
+Keep this takeaway in view: The worked example is ready once the learner can explain why the same total charge delivered faster means a larger current.
+
+56
+00:05:08.210 --> 00:05:12.840
+Ampere means coulomb per second.
+
+57
+00:05:12.840 --> 00:05:17.470
+Translate the unit meaning before touching the symbols.
+
+58
+00:05:17.470 --> 00:05:22.100
+Charge means rate times time.
+
+59
+00:05:22.100 --> 00:05:26.730
+Use Q = I t when the current and the duration are known.
+
+60
+00:05:26.730 --> 00:05:33.347
+Start by saying what the current means in charge per second.
+
+61
+00:05:33.347 --> 00:05:39.964
+Then convert the time into seconds if the question gives minutes.
+
+62
+00:05:39.964 --> 00:05:46.581
+Use Q equals I t when the unknown is the total charge passed, or I equals Q over t when the unknown is the current.
+
+63
+00:05:46.581 --> 00:05:53.198
+Finish by restating the meaning: a larger current means the same checkpoint sees more charge each second.
+
+64
+00:05:53.198 --> 00:05:59.815
+That is the cleanest route into the worked example.
+
+65
+00:05:59.815 --> 00:06:06.432
+Keep this takeaway in view: Lesson 2 improves immediately once the learner treats current as a rate story rather than as a mysterious symbol.
+
+66
+00:06:06.432 --> 00:06:13.049
+Do not skip the unit meaning: An ampere should be heard as coulombs per second before the numbers are combined.
+
+67
+00:06:13.049 --> 00:06:19.666
+Do not skip the seconds conversion: Most mistakes in this lesson come from mixing minutes with amperes.
+
+68
+00:06:19.666 --> 00:06:26.283
+translate amperes into coulombs per second.
+
+69
+00:06:26.283 --> 00:06:32.900
+The best answers keep the rate meaning alive all the way through the arithmetic.

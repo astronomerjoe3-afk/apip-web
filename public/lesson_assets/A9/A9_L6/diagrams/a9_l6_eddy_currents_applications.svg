@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#2563eb" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Eddy Currents Are Local Induction Loops Inside Conductors
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Change the flux through a solid conductor and it can grow circulating currents that heat, brake, or sense motion.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="568" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="722" y="226" width="552" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="410" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Flux change in a metal plate
+  </text>
+  <text x="998" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    What the loops can do
+  </text>
+
+  <rect x="220" y="342" width="318" height="256" rx="20" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <path d="M296 400 C340 372, 390 372, 438 404 C406 454, 406 504, 438 548 C390 580, 340 580, 296 548 C328 502, 328 448, 296 400" fill="none" stroke="#0f766e" stroke-width="8" stroke-linecap="round"/>
+  <path d="M348 432 C374 416, 400 416, 426 434 C408 464, 408 488, 426 516 C398 534, 372 534, 346 514 C364 486, 364 462, 348 432" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+  <line x1="180" y1="470" x2="220" y2="470" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="220,470 192,454 192,486" fill="#f97316"/>
+  <text x="174" y="446" fill="#c2410c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">moving</text>
+  <text x="174" y="472" fill="#c2410c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">magnet</text>
+  <text x="410" y="630" fill="#1e40af" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="410" dy="0">Each loop is an induced current</tspan>
+    <tspan x="410" dy="24">path inside the conductor.</tspan>
+  </text>
+
+  <rect x="790" y="326" width="400" height="118" rx="24" fill="#ffffff" stroke="#60a5fa" stroke-width="2.5"/>
+  <text x="990" y="370" fill="#1d4ed8" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Heating
+  </text>
+  <text x="990" y="404" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    Resistive current loops can warm the metal.
+  </text>
+
+  <rect x="790" y="482" width="400" height="118" rx="24" fill="#ffffff" stroke="#60a5fa" stroke-width="2.5"/>
+  <text x="990" y="526" fill="#1d4ed8" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Braking and damping
+  </text>
+  <text x="990" y="560" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    Induced fields oppose motion changes and slow the system.
+  </text>
+
+  <text x="998" y="630" fill="#1e40af" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="998" dy="0">The device decides whether those</tspan>
+    <tspan x="998" dy="24">local loops are useful or unwanted.</tspan>
+  </text>
+</svg>

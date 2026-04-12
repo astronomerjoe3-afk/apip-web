@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#effcf6" stroke="#16a34a" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#15803d" font-size="40" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Fusion Joins Light Nuclei, Then We Compare It with Fission
+  </text>
+  <text x="700" y="136" fill="#166534" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    <tspan x="700" dy="0">Fusion needs very high temperature and confinement. Comparison with fission should stay</tspan>
+    <tspan x="700" dy="24">grounded in binding change, fuel, and control conditions.</tspan>
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#86efac" stroke-width="3"/>
+  <rect x="126" y="226" width="588" height="486" rx="30" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="2.5"/>
+  <rect x="746" y="226" width="528" height="486" rx="30" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="2.5"/>
+
+  <text x="420" y="268" fill="#15803d" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Fusion example
+  </text>
+  <text x="1010" y="268" fill="#15803d" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Fusion versus fission
+  </text>
+
+  <circle cx="248" cy="454" r="40" fill="#38bdf8"/>
+  <text x="248" y="464" fill="#ffffff" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">D</text>
+  <circle cx="384" cy="454" r="40" fill="#60a5fa"/>
+  <text x="384" y="464" fill="#ffffff" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">T</text>
+  <text x="316" y="394" fill="#166534" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">very high temperature</text>
+  <text x="316" y="420" fill="#166534" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">and confinement</text>
+
+  <line x1="430" y1="454" x2="536" y2="454" stroke="#22c55e" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="536,454 508,438 508,470" fill="#22c55e"/>
+  <circle cx="616" cy="454" r="44" fill="#10b981"/>
+  <text x="616" y="462" fill="#ffffff" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">He</text>
+  <circle cx="670" cy="366" r="18" fill="#2563eb"/>
+  <line x1="670" y1="384" x2="670" y2="428" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+  <text x="670" y="340" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">neutron out</text>
+  <text x="420" y="622" fill="#166534" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    products are more tightly bound, so energy is released
+  </text>
+
+  <rect x="812" y="326" width="396" height="118" rx="24" fill="#ffffff" stroke="#4ade80" stroke-width="2.5"/>
+  <text x="1010" y="370" fill="#15803d" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Fusion
+  </text>
+  <text x="1010" y="398" fill="#166534" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    <tspan x="1010" dy="0">light nuclei, extreme temperature,</tspan>
+    <tspan x="1010" dy="22">confinement challenge</tspan>
+  </text>
+
+  <rect x="812" y="482" width="396" height="118" rx="24" fill="#ffffff" stroke="#4ade80" stroke-width="2.5"/>
+  <text x="1010" y="526" fill="#15803d" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Fission
+  </text>
+  <text x="1010" y="554" fill="#166534" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    <tspan x="1010" dy="0">heavy nuclei, chain reaction,</tspan>
+    <tspan x="1010" dy="22">moderation and control</tspan>
+  </text>
+
+  <text x="1010" y="650" fill="#166534" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <tspan x="1010" dy="0">compare them by binding-energy change,</tspan>
+    <tspan x="1010" dy="24">fuel, and operating conditions</tspan>
+  </text>
+</svg>

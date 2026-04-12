@@ -1,0 +1,64 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="40" fill="#F8FAFF"/>
+  <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#DBE5F4" stroke-width="4"/>
+  <text x="72" y="98" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
+    <tspan x="72" dy="0">Same Pulse Level,</tspan>
+    <tspan x="72" dy="38">different whole-system totals</tspan>
+  </text>
+  <text x="72" y="160" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <tspan x="72" dy="0">Temperature tracks the average jiggle.</tspan>
+    <tspan x="72" dy="24">It does not automatically tell you the total energy in the plaza.</tspan>
+  </text>
+
+  <rect x="84" y="196" width="440" height="402" rx="30" fill="#DBEAFE" stroke="#60A5FA" stroke-width="5"/>
+  <rect x="676" y="196" width="440" height="402" rx="30" fill="#DCFCE7" stroke="#4ADE80" stroke-width="5"/>
+  <text x="122" y="248" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Smaller crowd</text>
+  <text x="714" y="248" fill="#15803D" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Larger crowd</text>
+
+  <rect x="132" y="286" width="210" height="44" rx="18" fill="#EDE9FE"/>
+  <rect x="724" y="286" width="210" height="44" rx="18" fill="#EDE9FE"/>
+  <text x="160" y="315" fill="#6D28D9" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Pulse Level = 6</text>
+  <text x="752" y="315" fill="#6D28D9" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Pulse Level = 6</text>
+
+  <g fill="#3B82F6">
+    <circle cx="162" cy="398" r="13"/>
+    <circle cx="214" cy="398" r="13"/>
+    <circle cx="266" cy="398" r="13"/>
+    <circle cx="318" cy="398" r="13"/>
+    <circle cx="188" cy="448" r="13"/>
+    <circle cx="240" cy="448" r="13"/>
+    <circle cx="292" cy="448" r="13"/>
+    <circle cx="344" cy="448" r="13"/>
+  </g>
+  <g fill="#22C55E">
+    <circle cx="754" cy="390" r="13"/>
+    <circle cx="806" cy="390" r="13"/>
+    <circle cx="858" cy="390" r="13"/>
+    <circle cx="910" cy="390" r="13"/>
+    <circle cx="962" cy="390" r="13"/>
+    <circle cx="780" cy="440" r="13"/>
+    <circle cx="832" cy="440" r="13"/>
+    <circle cx="884" cy="440" r="13"/>
+    <circle cx="936" cy="440" r="13"/>
+    <circle cx="988" cy="440" r="13"/>
+    <circle cx="754" cy="490" r="13"/>
+    <circle cx="806" cy="490" r="13"/>
+    <circle cx="858" cy="490" r="13"/>
+    <circle cx="910" cy="490" r="13"/>
+    <circle cx="962" cy="490" r="13"/>
+  </g>
+
+  <text x="132" y="536" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">Average jiggle: matched</text>
+  <text x="724" y="536" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">Average jiggle: matched</text>
+
+  <text x="132" y="574" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Total motion proxy</text>
+  <rect x="132" y="588" width="168" height="24" rx="12" fill="#3B82F6"/>
+  <text x="724" y="574" fill="#15803D" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Total motion proxy</text>
+  <rect x="724" y="588" width="286" height="24" rx="12" fill="#22C55E"/>
+
+  <rect x="98" y="638" width="1000" height="72" rx="22" fill="#EEF4FF"/>
+  <text x="126" y="672" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <tspan x="126" dy="0">Equal temperature can still leave different internal energies</tspan>
+    <tspan x="126" dy="26">when the systems are different sizes.</tspan>
+  </text>
+</svg>

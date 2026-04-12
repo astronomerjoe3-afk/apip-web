@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <rect x="24" y="24" width="1232" height="672" rx="32" fill="#ffffff" stroke="#dbeafe" stroke-width="4"/>
+
+  <text x="70" y="96" fill="#0f172a" font-family="Arial, sans-serif" font-size="56" font-weight="700">
+    Earth, Moon, and Sun in One Court
+  </text>
+  <text x="70" y="144" fill="#475569" font-family="Arial, sans-serif" font-size="28">
+    Keep the whole system on one board so gravity, orbit, and scale stay linked.
+  </text>
+
+  <circle cx="220" cy="378" r="62" fill="#facc15" stroke="#f59e0b" stroke-width="6"/>
+  <text x="220" y="390" fill="#0f172a" font-family="Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle">Sun</text>
+
+  <ellipse cx="420" cy="378" rx="220" ry="128" fill="none" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="14 10"/>
+  <circle cx="640" cy="378" r="32" fill="#2563eb" stroke="#93c5fd" stroke-width="5"/>
+  <text x="640" y="434" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle">Earth</text>
+
+  <circle cx="640" cy="378" r="96" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="722" cy="328" r="18" fill="#e2e8f0" stroke="#64748b" stroke-width="4"/>
+  <text x="748" y="320" fill="#334155" font-family="Arial, sans-serif" font-size="24" font-weight="700">Moon</text>
+
+  <line x1="278" y1="378" x2="608" y2="378" stroke="#f59e0b" stroke-width="6"/>
+  <line x1="668" y1="360" x2="708" y2="336" stroke="#60a5fa" stroke-width="5"/>
+
+  <rect x="842" y="232" width="332" height="280" rx="28" fill="#eff6ff" stroke="#bfdbfe" stroke-width="4"/>
+  <text x="882" y="286" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">System clues</text>
+  <text x="882" y="334" fill="#0f172a" font-family="Arial, sans-serif" font-size="28">
+    <tspan x="882" dy="0">Earth mainly orbits the Sun.</tspan>
+    <tspan x="882" dy="44">The Moon mainly orbits Earth.</tspan>
+    <tspan x="882" dy="44">Gravity keeps the family linked.</tspan>
+    <tspan x="882" dy="44">The real spacing is much larger</tspan>
+    <tspan x="882" dy="36">than this classroom sketch.</tspan>
+  </text>
+
+  <rect x="96" y="566" width="1088" height="84" rx="20" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="640" y="618" fill="#475569" font-family="Arial, sans-serif" font-size="26" text-anchor="middle">
+    One shared Earth-Moon-Sun picture can explain day-night, phases, eclipses, and orbit ideas together.
+  </text>
+</svg>

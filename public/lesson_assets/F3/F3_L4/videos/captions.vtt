@@ -1,0 +1,305 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.643
+This lesson gets much easier when momentum is treated as a whole-system quantity during a collision.
+
+2
+00:00:05.643 --> 00:00:11.286
+Each object can have its own momentum, but the conservation law belongs to the total of the isolated system.
+
+3
+00:00:11.286 --> 00:00:16.929
+That means the learner should not watch only one trolley.
+
+4
+00:00:16.929 --> 00:00:22.572
+The correct habit is to total the momentum before the collision and total it again after the collision.
+
+5
+00:00:22.572 --> 00:00:28.215
+If external forces can be ignored, those totals match.
+
+6
+00:00:28.215 --> 00:00:33.858
+Keep this takeaway in view: Conservation is a system-total statement, not a one-object shortcut.
+
+7
+00:00:33.858 --> 00:00:39.501
+Momentum means mass x velocity.
+
+8
+00:00:39.501 --> 00:00:45.144
+Momentum describes motion with both amount of mass and direction-sensitive velocity.
+
+9
+00:00:45.144 --> 00:00:50.787
+System view means total matters.
+
+10
+00:00:50.787 --> 00:00:56.430
+The conservation statement belongs to the whole collision system.
+
+11
+00:00:56.430 --> 00:00:59.366
+This visual shows momentum as something that passes through the collision story rather than disappearing.
+
+12
+00:00:59.366 --> 00:01:02.302
+Before impact, the moving trolley carries the total momentum.
+
+13
+00:01:02.302 --> 00:01:05.239
+After impact, if the trolleys stick together, the same total momentum is shared by the combined mass.
+
+14
+00:01:05.239 --> 00:01:08.175
+That is why the final speed can be smaller.
+
+15
+00:01:08.175 --> 00:01:11.111
+The momentum total is preserved, but more mass is now carrying it.
+
+16
+00:01:11.111 --> 00:01:14.048
+Keep this takeaway in view: The total momentum survives the collision, even though the speed pattern changes.
+
+17
+00:01:14.048 --> 00:01:16.984
+Before: The moving trolley carries the system momentum.
+
+18
+00:01:16.984 --> 00:01:19.920
+After: The joined mass carries the same total momentum.
+
+19
+00:01:19.920 --> 00:01:25.644
+Imagine momentum as a carry score attached to moving objects.
+
+20
+00:01:25.644 --> 00:01:31.368
+A larger mass or larger velocity gives a bigger score, and direction decides the sign of the score.
+
+21
+00:01:31.368 --> 00:01:37.092
+During an isolated interaction, the total carry score of the whole system is preserved.
+
+22
+00:01:37.092 --> 00:01:42.816
+Objects can exchange it, combine it, or share it differently, but the total remains the same.
+
+23
+00:01:42.816 --> 00:01:48.540
+The analogy helps because it turns conservation into a bookkeeping idea before the formulas arrive.
+
+24
+00:01:48.540 --> 00:01:54.264
+Keep this takeaway in view: Treat momentum like a signed total that must still balance across the collision.
+
+25
+00:01:54.264 --> 00:01:59.988
+Bigger mass means bigger score.
+
+26
+00:01:59.988 --> 00:02:05.712
+More mass carrying the same velocity means more momentum.
+
+27
+00:02:05.712 --> 00:02:11.436
+Bigger velocity means bigger score.
+
+28
+00:02:11.436 --> 00:02:17.160
+Faster motion also increases momentum.
+
+29
+00:02:17.160 --> 00:02:22.539
+Momentum is given by mass times velocity.
+
+30
+00:02:22.539 --> 00:02:27.918
+The conservation law says total momentum before equals total momentum after for an isolated system.
+
+31
+00:02:27.918 --> 00:02:33.297
+When objects stick together, the final side often becomes one combined mass times one shared velocity.
+
+32
+00:02:33.297 --> 00:02:38.676
+That is why these questions often feel tidy once the before-total is calculated carefully.
+
+33
+00:02:38.676 --> 00:02:44.055
+Keep this takeaway in view: Use the conservation law as a before-and-after balance, not as a memory trick.
+
+34
+00:02:44.055 --> 00:02:49.434
+Individual momentum: Each object contributes mass times velocity.
+
+35
+00:02:49.434 --> 00:02:54.813
+Total before: Add all momenta in the system before impact.
+
+36
+00:02:54.813 --> 00:03:00.192
+p = m v.
+
+37
+00:03:00.192 --> 00:03:05.571
+Sigma p_before = Sigma p_after.
+
+38
+00:03:05.571 --> 00:03:10.950
+Keep direction or sign visible when momentum can act in opposite directions.
+
+39
+00:03:10.950 --> 00:03:16.518
+Suppose one trolley brings 10 kilogram metres per second of momentum into the collision and the second trolley is initially at rest.
+
+40
+00:03:16.518 --> 00:03:22.086
+If they stick together, the final total mass is larger than the moving mass alone.
+
+41
+00:03:22.086 --> 00:03:27.653
+Since the total momentum is unchanged, the shared speed has to be smaller than the original 5 metres per second.
+
+42
+00:03:27.653 --> 00:03:33.221
+That expectation matters because it gives a quick sense-check for the final answer.
+
+43
+00:03:33.221 --> 00:03:38.789
+Keep this takeaway in view: Predict the direction of the speed change before doing the division.
+
+44
+00:03:38.789 --> 00:03:44.357
+Same total momentum means unchanged total.
+
+45
+00:03:44.357 --> 00:03:49.924
+The isolated-system momentum stays constant.
+
+46
+00:03:49.924 --> 00:03:55.492
+More mass after means lower shared speed.
+
+47
+00:03:55.492 --> 00:04:01.060
+The total has to be carried by the combined mass.
+
+48
+00:04:01.060 --> 00:04:05.386
+Try three checks.
+
+49
+00:04:05.386 --> 00:04:09.712
+What two quantities make momentum?
+
+50
+00:04:09.712 --> 00:04:14.038
+Mass and velocity.
+
+51
+00:04:14.038 --> 00:04:18.365
+What stays the same in an isolated collision?
+
+52
+00:04:18.365 --> 00:04:22.691
+Total momentum of the system.
+
+53
+00:04:22.691 --> 00:04:27.017
+And if two objects stick together after the collision, why is the shared speed often smaller than the first object's original speed?
+
+54
+00:04:27.017 --> 00:04:31.343
+Because the same total momentum is now shared by a larger mass.
+
+55
+00:04:31.343 --> 00:04:35.669
+Those three answers are the whole lesson in compressed form.
+
+56
+00:04:35.669 --> 00:04:39.995
+Keep this takeaway in view: The system-total logic is now strong enough to support the calculation.
+
+57
+00:04:39.995 --> 00:04:44.322
+Momentum ingredients means mass and velocity.
+
+58
+00:04:44.322 --> 00:04:48.648
+Both matter, and direction matters through velocity.
+
+59
+00:04:48.648 --> 00:04:52.974
+Conserved quantity means total momentum.
+
+60
+00:04:52.974 --> 00:04:57.300
+The total system value is preserved in an isolated collision.
+
+61
+00:04:57.300 --> 00:05:03.052
+You are ready for the worked example now.
+
+62
+00:05:03.052 --> 00:05:08.805
+A 2 kilogram trolley moving at 5 metres per second hits a 3 kilogram trolley at rest and they stick together.
+
+63
+00:05:08.805 --> 00:05:14.558
+Start with the momentum before.
+
+64
+00:05:14.558 --> 00:05:20.310
+The moving trolley contributes 2 times 5, which is 10 kilogram metres per second.
+
+65
+00:05:20.310 --> 00:05:26.062
+The second trolley contributes zero.
+
+66
+00:05:26.062 --> 00:05:31.815
+So the total before is 10.
+
+67
+00:05:31.815 --> 00:05:37.568
+After the collision the total mass is 5 kilograms and the total momentum must still be 10.
+
+68
+00:05:37.568 --> 00:05:43.320
+So write 10 equals 5 v.
+
+69
+00:05:43.320 --> 00:05:49.072
+Solving gives v equals 2 metres per second.
+
+70
+00:05:49.072 --> 00:05:54.825
+That answer makes physical sense because more mass is now sharing the same total momentum.
+
+71
+00:05:54.825 --> 00:06:00.578
+Keep this takeaway in view: The worked example is ready: conserve the total momentum and solve for the shared speed.
+
+72
+00:06:00.578 --> 00:06:06.330
+Step 1: Calculate the total momentum before the collision.
+
+73
+00:06:06.330 --> 00:06:12.082
+Step 2: Write the final momentum using combined mass times shared velocity.
+
+74
+00:06:12.082 --> 00:06:17.835
+p_before = 2 x 5 + 3 x 0 = 10 kg m/s.
+
+75
+00:06:17.835 --> 00:06:23.588
+p_after = (2 + 3) v = 5v.
+
+76
+00:06:23.588 --> 00:06:29.340
+State why the final speed should be lower before you solve.

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 52px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #cbd5e1; font: 22px Arial, Helvetica, sans-serif; }
+      .card { fill: #0f172a; stroke: #334155; stroke-width: 3; }
+      .panel { fill: #111b34; stroke: #334155; stroke-width: 2.5; }
+      .label { fill: #e2e8f0; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #cbd5e1; font: 19px Arial, Helvetica, sans-serif; }
+      .small { fill: #94a3b8; font: 18px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="270" r="350" fill="url(#glow)"/>
+
+  <text x="640" y="86" class="title" text-anchor="middle">Threshold Frequency Unlocks Emission</text>
+  <text x="640" y="126" class="subtitle" text-anchor="middle">
+    An electron escapes only when one photon packet pays the work-function cost.
+  </text>
+
+  <rect x="100" y="180" width="1080" height="470" rx="34" class="card"/>
+  <rect x="132" y="220" width="470" height="390" rx="28" class="panel"/>
+  <rect x="678" y="220" width="470" height="390" rx="28" class="panel"/>
+
+  <text x="204" y="258" class="label">Below threshold</text>
+  <text x="746" y="258" class="label">Above threshold</text>
+
+  <rect x="244" y="436" width="230" height="34" rx="16" fill="#475569"/>
+  <rect x="790" y="436" width="230" height="34" rx="16" fill="#475569"/>
+  <text x="359" y="492" class="small" text-anchor="middle">metal surface</text>
+  <text x="905" y="492" class="small" text-anchor="middle">metal surface</text>
+
+  <path d="M 180 330 C 240 300 290 360 350 330 C 410 300 460 360 520 330" fill="none" stroke="#f97316" stroke-width="8"/>
+  <rect x="262" y="290" width="132" height="44" rx="18" fill="#7c2d12" stroke="#fdba74" stroke-width="3"/>
+  <text x="328" y="318" fill="#ffedd5" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
+    low frequency
+  </text>
+  <text x="366" y="540" class="body" text-anchor="middle">Each packet is below</text>
+  <text x="366" y="566" class="body" text-anchor="middle">the work-function cost.</text>
+
+  <path d="M 726 312 C 770 272 824 352 870 312 C 916 272 968 352 1020 312" fill="none" stroke="#a78bfa" stroke-width="8"/>
+  <rect x="790" y="270" width="132" height="44" rx="18" fill="#4c1d95" stroke="#c4b5fd" stroke-width="3"/>
+  <text x="856" y="298" fill="#ede9fe" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
+    high frequency
+  </text>
+  <circle cx="904" cy="412" r="12" fill="#f8fafc"/>
+  <line x1="914" y1="402" x2="972" y2="350" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="990,334 958,350 978,372" fill="#22c55e"/>
+  <text x="913" y="540" class="body" text-anchor="middle">One packet now exceeds</text>
+  <text x="913" y="566" class="body" text-anchor="middle">the work function, so an electron escapes.</text>
+</svg>

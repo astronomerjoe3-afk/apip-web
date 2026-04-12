@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Constant-acceleration equation explorer</title>
+<style>
+  body { margin: 0; background: #0f172a; color: white; font-family: Arial, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; }
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .panel { border: 1px solid #334155; border-radius: 18px; padding: 18px; background: #111827; }
+  label { display: block; margin-top: 14px; color: #cbd5e1; }
+  input { width: 100%; margin-top: 8px; }
+  .chips { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 16px; }
+  .chip { border-radius: 14px; padding: 12px; background: #0f172a; border: 1px solid #334155; }
+  svg { width: 100%; height: auto; display: block; }
+  .note { margin-top: 16px; padding: 14px; border-radius: 14px; background: #082f49; color: #e0f2fe; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Constant-acceleration equation explorer</h1>
+    <p>Use the Quest-Log forecast board to choose equations from the motion story, but only after checking that the boost shift stays constant.</p>
+    <div class="grid">
+      <div class="panel">
+        <h2>Controls</h2>
+        
+      <label>Initial speed u (m/s)<input id="u" type="range" min="0" max="14" step="1" value="4" /></label>
+      <label>Acceleration a (m/s^2)<input id="a" type="range" min="-4" max="4" step="1" value="3" /></label>
+      <label>Time t (s)<input id="t" type="range" min="1" max="8" step="1" value="2" /></label>
+    
+      </div>
+      <div class="panel">
+        <h2>Graph board</h2>
+        
+      <svg viewBox="0 0 560 280" aria-label="Constant acceleration forecast board">
+        <rect width="560" height="280" rx="18" fill="#020617" />
+        <line x1="70" y1="230" x2="500" y2="230" stroke="#94a3b8" stroke-width="3" />
+        <line x1="70" y1="230" x2="70" y2="40" stroke="#94a3b8" stroke-width="3" />
+        <polygon id="areaShape" points="" fill="#38bdf8" fill-opacity="0.22" />
+        <polyline id="forecastLine" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    
+        <div class="chips">
+      <div class="chip"><strong>v = u + at</strong><div id="vOut"></div></div>
+      <div class="chip"><strong>s = ut + 1/2at^2</strong><div id="sOut"></div></div>
+      <div class="chip"><strong>Condition</strong><div>constant acceleration</div></div>
+    </div>
+        <div class="note" id="note"></div>
+      </div>
+    </div>
+  </div>
+<script>
+
+      function update() {
+        const u = Number(document.getElementById('u').value);
+        const a = Number(document.getElementById('a').value);
+        const t = Number(document.getElementById('t').value);
+        const v = u + a * t;
+        const s = u * t + 0.5 * a * t * t;
+        const maxSpeed = Math.max(u, v, 2);
+        const p1 = [70, 230 - (u / maxSpeed) * 170];
+        const p2 = [500, 230 - (v / maxSpeed) * 170];
+        document.getElementById('forecastLine').setAttribute('points', `${p1[0]},${p1[1]} ${p2[0]},${p2[1]}`);
+        document.getElementById('areaShape').setAttribute('points', `70,230 70,${p1[1]} 500,${p2[1]} 500,230`);
+        document.getElementById('vOut').innerText = `${v.toFixed(1)} m/s`;
+        document.getElementById('sOut').innerText = `${s.toFixed(1)} m`;
+        document.getElementById('note').innerText = 'This board is safe only when acceleration stays constant. Then the graph, the algebra, and the area story all agree.';
+      }
+      document.querySelectorAll('input').forEach((input) => input.addEventListener('input', update));
+      update();
+    
+</script>
+</body>
+</html>

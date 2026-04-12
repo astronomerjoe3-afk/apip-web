@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#3b82f6" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Potential Dividers Split One Supply Drop Along a Series Route
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    The output is a fraction of the supply because the resistors share the same source voltage in proportion to their resistance.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="760" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="918" y="226" width="356" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="506" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Divider circuit
+  </text>
+  <text x="1096" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Reading clues
+  </text>
+
+  <line x1="248" y1="318" x2="248" y2="612" stroke="#1e3a8a" stroke-width="10" stroke-linecap="round"/>
+  <line x1="248" y1="318" x2="704" y2="318" stroke="#1e3a8a" stroke-width="10" stroke-linecap="round"/>
+  <line x1="248" y1="612" x2="704" y2="612" stroke="#1e3a8a" stroke-width="10" stroke-linecap="round"/>
+
+  <rect x="212" y="394" width="72" height="140" rx="24" fill="#dbeafe" stroke="#60a5fa" stroke-width="2"/>
+  <text x="248" y="478" fill="#1d4ed8" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Vs</text>
+
+  <rect x="644" y="342" width="64" height="164" rx="22" fill="#ffffff" stroke="#2563eb" stroke-width="4"/>
+  <rect x="644" y="506" width="64" height="90" rx="22" fill="#ffffff" stroke="#2563eb" stroke-width="4"/>
+  <text x="676" y="434" fill="#1e40af" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">R1</text>
+  <text x="676" y="560" fill="#1e40af" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">R2</text>
+
+  <circle cx="676" cy="506" r="12" fill="#10b981"/>
+  <line x1="676" y1="506" x2="840" y2="506" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+  <text x="844" y="498" fill="#047857" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">Vout tap</text>
+
+  <line x1="760" y1="342" x2="760" y2="596" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="10 10"/>
+  <text x="764" y="336" fill="#1e40af" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">shared source drop</text>
+
+  <path d="M724 342 C790 360, 790 442, 724 462" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <path d="M724 506 C790 516, 790 562, 724 592" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <text x="814" y="426" fill="#b45309" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">drop across R1</text>
+  <text x="814" y="572" fill="#b45309" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">drop across R2</text>
+
+  <text x="1096" y="382" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    Equal resistors give half-supply output.
+  </text>
+  <text x="1096" y="448" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    Larger top resistor means more of the source drop
+  </text>
+  <text x="1096" y="480" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    is used before the tap, so Vout gets smaller.
+  </text>
+  <text x="1096" y="564" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    Loading the tap adds another path and can
+  </text>
+  <text x="1096" y="596" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    change the resistance ratio seen by the source.
+  </text>
+</svg>

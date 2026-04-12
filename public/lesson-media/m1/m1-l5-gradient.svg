@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <style>
+    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
+    .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+    .guide { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
+  <rect x="40" y="32" width="1120" height="656" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+  <text x="74" y="88" class="title">Same tilt, different meaning: the axes decide the physics.</text>
+  <text x="74" y="122" class="subtitle">A gradient is a rate-family idea.</text>
+  <text x="74" y="150" class="subtitle">The geometry can match while the physical meaning changes because the axes change.</text>
+
+  <rect x="74" y="176" width="496" height="430" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
+  <rect x="630" y="176" width="496" height="430" rx="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3" />
+  <text x="110" y="224" class="panel-title">Distance-time graph</text>
+  <text x="666" y="224" class="panel-title">Speed-time graph</text>
+
+  <line x1="150" y1="548" x2="506" y2="548" stroke="#334155" stroke-width="4" />
+  <line x1="150" y1="548" x2="150" y2="288" stroke="#334155" stroke-width="4" />
+  <line x1="198" y1="518" x2="450" y2="340" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
+  <rect x="180" y="558" width="212" height="70" rx="18" fill="#DBEAFE" />
+  <text x="202" y="586" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Slope = speed</text>
+  <text x="202" y="612" class="body">distance change / time change</text>
+  <polyline points="392,592 430,592 424,358" class="guide" stroke="#1D4ED8" />
+
+  <line x1="706" y1="548" x2="1062" y2="548" stroke="#334155" stroke-width="4" />
+  <line x1="706" y1="548" x2="706" y2="288" stroke="#334155" stroke-width="4" />
+  <line x1="754" y1="518" x2="1006" y2="340" stroke="#F59E0B" stroke-width="10" stroke-linecap="round" />
+  <rect x="734" y="558" width="248" height="70" rx="18" fill="#FEF3C7" />
+  <text x="756" y="586" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Slope = acceleration</text>
+  <text x="756" y="612" class="body">speed change / time change</text>
+  <polyline points="734,592 706,592 980,358" class="guide" stroke="#B45309" />
+
+  <rect x="488" y="254" width="224" height="56" rx="28" fill="#DBEAFE" />
+  <text x="600" y="290" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">Same tilt</text>
+
+  <rect x="74" y="626" width="1052" height="40" rx="20" fill="#EDE9FE" />
+  <text x="600" y="653" fill="#5B21B6" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Name the axes before you name the slope.</text>
+</svg>

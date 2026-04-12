@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#eff6ff"/>
+  <rect x="24" y="24" width="1232" height="672" rx="32" fill="#ffffff" stroke="#dbeafe" stroke-width="4"/>
+
+  <text x="70" y="96" fill="#0f172a" font-family="Arial, sans-serif" font-size="54" font-weight="700">Solar System Family</text>
+  <text x="70" y="144" fill="#475569" font-family="Arial, sans-serif" font-size="28">
+    Sort by body type and main host so the Sun-centered family stays organized.
+  </text>
+
+  <circle cx="180" cy="364" r="56" fill="#facc15" stroke="#f59e0b" stroke-width="6"/>
+  <text x="180" y="376" fill="#0f172a" font-family="Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle">Sun</text>
+
+  <circle cx="180" cy="364" r="104" fill="none" stroke="#cbd5e1" stroke-width="3"/>
+  <circle cx="180" cy="364" r="160" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="10 8"/>
+  <circle cx="180" cy="364" r="214" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="10 8"/>
+
+  <circle cx="284" cy="364" r="18" fill="#60a5fa"/>
+  <text x="284" y="406" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">planet</text>
+
+  <circle cx="340" cy="296" r="14" fill="#a78bfa"/>
+  <text x="340" y="250" fill="#6d28d9" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">dwarf planet</text>
+
+  <circle cx="390" cy="420" r="11" fill="#f97316"/>
+  <text x="390" y="464" fill="#c2410c" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">asteroid</text>
+
+  <circle cx="456" cy="316" r="12" fill="#38bdf8"/>
+  <path d="M468 308 C506 288, 544 280, 580 286" fill="none" stroke="#7dd3fc" stroke-width="4"/>
+  <text x="562" y="274" fill="#0369a1" font-family="Arial, sans-serif" font-size="22" font-weight="700">comet</text>
+
+  <circle cx="620" cy="364" r="34" fill="#60a5fa" stroke="#93c5fd" stroke-width="5"/>
+  <circle cx="620" cy="364" r="70" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="670" cy="332" r="11" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+  <text x="620" y="426" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">moon around a larger world</text>
+
+  <rect x="840" y="194" width="336" height="334" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="882" y="248" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Classification guide</text>
+  <text x="882" y="304" fill="#0f172a" font-family="Arial, sans-serif" font-size="28">
+    <tspan x="882" dy="0">Planets and dwarf planets</tspan>
+    <tspan x="882" dy="36">orbit the Sun directly.</tspan>
+    <tspan x="882" dy="48">Moons mainly orbit larger</tspan>
+    <tspan x="882" dy="36">worlds instead.</tspan>
+    <tspan x="882" dy="48">Asteroids are mostly rocky.</tspan>
+    <tspan x="882" dy="36">Comets are icy visitors that</tspan>
+    <tspan x="882" dy="36">can grow a glowing tail.</tspan>
+  </text>
+
+  <rect x="86" y="594" width="1108" height="66" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="640" y="636" fill="#475569" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">
+    Host body plus body type gives a stronger Solar System classification than using one clue alone.
+  </text>
+</svg>

@@ -1,0 +1,43 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
+  <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D7E6F8" stroke-width="4"/>
+  <text x="72" y="88" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">
+    <tspan x="72" dy="0">Glow Cast crosses the gap,</tspan>
+    <tspan x="72" dy="38">then the ledger adds each stage bill</tspan>
+  </text>
+  <text x="72" y="164" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="21">
+    <tspan x="72" dy="0">Radiation works across empty space, and multi-stage thermal problems</tspan>
+    <tspan x="72" dy="27">need separate totals.</tspan>
+    <tspan x="72" dy="27">Warm-up and Form Gate stages are not one blended calculation.</tspan>
+  </text>
+
+  <rect x="84" y="236" width="502" height="386" rx="30" fill="#FEF3C7" stroke="#FBBF24" stroke-width="5"/>
+  <text x="122" y="282" fill="#92400E" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Glow Cast route</text>
+  <circle cx="210" cy="420" r="72" fill="#F59E0B"/>
+  <circle cx="210" cy="420" r="112" stroke="#FDE68A" stroke-width="14"/>
+  <rect x="422" y="346" width="96" height="148" rx="28" fill="#334155"/>
+  <path d="M298 420H398" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <text x="282" y="388" fill="#B45309" font-family="Arial, Helvetica, sans-serif" font-size="22">vacuum gap</text>
+  <text x="120" y="556" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="21">
+    <tspan x="120" dy="0">Radiation does not need air,</tspan>
+    <tspan x="120" dy="26">contact, or a moving fluid.</tspan>
+  </text>
+
+  <rect x="630" y="236" width="486" height="386" rx="30" fill="#EEF4FF" stroke="#93C5FD" stroke-width="5"/>
+  <text x="666" y="282" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Forge Ledger</text>
+  <text x="676" y="338" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="24">Stage 1: warm-up</text>
+  <text x="1076" y="338" text-anchor="end" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Q = mcΔT</text>
+  <rect x="676" y="356" width="308" height="34" rx="17" fill="#BFDBFE"/>
+  <rect x="676" y="356" width="208" height="34" rx="17" fill="#2563EB"/>
+  <text x="676" y="442" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="24">Stage 2: Form Gate</text>
+  <text x="1076" y="442" text-anchor="end" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Q = m L</text>
+  <rect x="676" y="460" width="308" height="34" rx="17" fill="#D9F99D"/>
+  <rect x="676" y="460" width="256" height="34" rx="17" fill="#22C55E"/>
+  <rect x="676" y="530" width="356" height="54" rx="20" fill="#0F172A"/>
+  <text x="714" y="566" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Total = stage 1 + stage 2</text>
+
+  <rect x="96" y="648" width="1008" height="54" rx="22" fill="#EEF4FF"/>
+  <text x="128" y="682" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">
+    First choose the transfer route. Then add the thermal stages one by one.
+  </text>
+</svg>

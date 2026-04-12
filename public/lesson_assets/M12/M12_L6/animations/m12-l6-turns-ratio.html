@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Turns ratio</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: radial-gradient(circle at top, #1e3a8a, #0f172a); color: white; display: grid; place-items: center; min-height: 100vh; }
+  .wrap { width: min(980px, 92vw); padding: 36px; border-radius: 28px; background: rgba(30, 58, 138, 0.78); border: 1px solid #bfdbfe; }
+  .title { font-size: 40px; font-weight: 800; text-align: center; }
+  .desc { margin-top: 14px; text-align: center; color: #dbeafe; font-size: 21px; }
+  .ratio { margin-top: 28px; display: flex; justify-content: center; gap: 26px; align-items: center; font-size: 54px; font-weight: 800; }
+  .badge { min-width: 180px; padding: 24px; border-radius: 24px; text-align: center; animation: pulse 4s ease-in-out infinite alternate; }
+  .left { background: #1d4ed8; }
+  .right { background: #059669; }
+  @keyframes pulse { from { transform: scale(0.94); opacity: 0.8; } to { transform: scale(1); opacity: 1; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Turns ratio</div>
+    <div class="desc">The school transformer model ties the voltage ratio to the turns ratio while the changing core field links the two coils.</div>
+    <div class="ratio">
+      <div class="badge left">Vp / Vs</div>
+      <div>=</div>
+      <div class="badge right">Np / Ns</div>
+    </div>
+  </div>
+</body>
+</html>

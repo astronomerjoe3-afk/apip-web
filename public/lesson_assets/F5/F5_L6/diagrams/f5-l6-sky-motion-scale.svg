@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <rect x="24" y="24" width="1232" height="672" rx="32" fill="#ffffff" stroke="#dbeafe" stroke-width="4"/>
+
+  <text x="70" y="94" fill="#0f172a" font-family="Arial, sans-serif" font-size="50" font-weight="700">Apparent Sky Motion and Scale</text>
+  <text x="70" y="142" fill="#475569" font-family="Arial, sans-serif" font-size="28">
+    Keep daily appearance, yearly orbit timing, and compressed scale in separate slots.
+  </text>
+
+  <rect x="82" y="206" width="320" height="214" rx="28" fill="#eff6ff" stroke="#bfdbfe" stroke-width="4"/>
+  <text x="118" y="258" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Daily appearance</text>
+  <circle cx="152" cy="332" r="22" fill="#facc15"/>
+  <path d="M198 352 C246 288, 320 280, 360 338" fill="none" stroke="#f59e0b" stroke-width="5"/>
+  <text x="116" y="388" fill="#0f172a" font-family="Arial, sans-serif" font-size="26">
+    <tspan x="116" dy="0">The Sun seems to cross</tspan>
+    <tspan x="116" dy="34">the sky in one day.</tspan>
+  </text>
+
+  <rect x="462" y="206" width="320" height="214" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="498" y="258" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Real motions</text>
+  <circle cx="548" cy="330" r="40" fill="#2563eb"/>
+  <line x1="548" y1="274" x2="548" y2="386" stroke="#ffffff" stroke-width="4"/>
+  <circle cx="688" cy="330" r="26" fill="#facc15"/>
+  <ellipse cx="688" cy="330" rx="70" ry="42" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 8"/>
+  <text x="498" y="390" fill="#0f172a" font-family="Arial, sans-serif" font-size="24">
+    <tspan x="498" dy="0">day -> Earth's rotation</tspan>
+    <tspan x="498" dy="32">year -> Earth's orbit</tspan>
+  </text>
+
+  <rect x="842" y="206" width="332" height="214" rx="28" fill="#eff6ff" stroke="#bfdbfe" stroke-width="4"/>
+  <text x="878" y="258" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Orbit size and year</text>
+  <circle cx="930" cy="330" r="18" fill="#60a5fa"/>
+  <circle cx="930" cy="330" r="48" fill="none" stroke="#60a5fa" stroke-width="3"/>
+  <circle cx="1056" cy="330" r="18" fill="#60a5fa"/>
+  <circle cx="1056" cy="330" r="86" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="10 8"/>
+  <text x="878" y="392" fill="#0f172a" font-family="Arial, sans-serif" font-size="24">
+    <tspan x="878" dy="0">inner orbit -> shorter year</tspan>
+    <tspan x="878" dy="32">outer orbit -> longer year</tspan>
+  </text>
+
+  <rect x="82" y="486" width="1092" height="120" rx="28" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="118" y="540" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Scale warning</text>
+  <rect x="118" y="564" width="808" height="14" rx="7" fill="#cbd5e1"/>
+  <rect x="118" y="564" width="164" height="14" rx="7" fill="#38bdf8"/>
+  <text x="956" y="578" fill="#0f172a" font-family="Arial, sans-serif" font-size="24">compressed drawing</text>
+
+  <text x="118" y="636" fill="#475569" font-family="Arial, sans-serif" font-size="24">
+    <tspan x="118" dy="0">A useful model can show the pattern while still compressing the real distances heavily.</tspan>
+  </text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Same volume, different density</title>
+  <desc id="desc">Two equal-size blocks have the same volume, but the heavier block has greater density because more mass is packed into the same space.</desc>
+  <rect width="1200" height="700" rx="36" fill="#f7fbff"/>
+  <text x="70" y="96" font-size="44" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Same volume, different density</text>
+  <text x="70" y="144" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#516277">Density compares how much mass is packed into the same amount of space.</text>
+  <g transform="translate(70 210)">
+    <rect width="520" height="360" rx="28" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
+    <text x="34" y="58" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Equal size, different mass</text>
+    <rect x="84" y="128" width="130" height="130" rx="18" fill="#93c5fd"/>
+    <rect x="304" y="128" width="130" height="130" rx="18" fill="#2563eb"/>
+    <text x="149" y="306" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">100 g in 100 cm^3</text>
+    <text x="369" y="306" text-anchor="middle" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">200 g in 100 cm^3</text>
+    <text x="56" y="348" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#334155">Same space, more mass packed in means greater density.</text>
+  </g>
+  <g transform="translate(650 210)">
+    <rect width="480" height="360" rx="28" fill="#ffffff" stroke="#d8e6f7" stroke-width="4"/>
+    <text x="34" y="58" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#10233f">Key idea</text>
+    <rect x="40" y="96" width="400" height="92" rx="22" fill="#fffbeb" stroke="#fde68a" stroke-width="3"/>
+    <text x="68" y="146" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#92400e">density = mass / volume</text>
+    <text x="52" y="242" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">If the volume stays the same, the object with</text>
+    <text x="52" y="278" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#334155">more mass packed into it is the denser one.</text>
+    <rect x="52" y="300" width="376" height="34" rx="17" fill="#f8fafc"/>
+    <text x="240" y="323" text-anchor="middle" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#2563eb">Same size + more mass = greater density</text>
+  </g>
+</svg>
+

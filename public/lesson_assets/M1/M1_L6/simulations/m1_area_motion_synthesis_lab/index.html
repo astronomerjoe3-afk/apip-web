@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Area and motion synthesis explorer</title>
+<style>
+  body { margin: 0; background: #0f172a; color: white; font-family: Arial, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; }
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .panel { border: 1px solid #334155; border-radius: 18px; padding: 18px; background: #111827; }
+  label { display: block; margin-top: 14px; color: #cbd5e1; }
+  input { width: 100%; margin-top: 8px; }
+  .chips { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 16px; }
+  .chip { border-radius: 14px; padding: 12px; background: #0f172a; border: 1px solid #334155; }
+  svg { width: 100%; height: auto; display: block; }
+  .note { margin-top: 16px; padding: 14px; border-radius: 14px; background: #082f49; color: #e0f2fe; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Area and motion synthesis explorer</h1>
+    <p>Use the Quest-Log pace log as accumulated progress strips so area becomes total distance, not just a shape under a graph.</p>
+    <div class="grid">
+      <div class="panel">
+        <h2>Controls</h2>
+        
+      <label>Initial speed u (m/s)<input id="u" type="range" min="0" max="10" step="1" value="2" /></label>
+      <label>Final speed v (m/s)<input id="v" type="range" min="0" max="14" step="1" value="10" /></label>
+      <label>Time t (s)<input id="t" type="range" min="1" max="8" step="1" value="4" /></label>
+    
+      </div>
+      <div class="panel">
+        <h2>Graph board</h2>
+        
+      <svg viewBox="0 0 560 280" aria-label="Area under speed-time graph">
+        <rect width="560" height="280" rx="18" fill="#020617" />
+        <line x1="70" y1="230" x2="500" y2="230" stroke="#94a3b8" stroke-width="3" />
+        <line x1="70" y1="230" x2="70" y2="40" stroke="#94a3b8" stroke-width="3" />
+        <rect id="rectArea" x="70" y="230" width="0" height="0" fill="#60a5fa" fill-opacity="0.32" />
+        <polygon id="triArea" points="" fill="#f59e0b" fill-opacity="0.45" />
+        <polyline id="areaLine" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    
+        <div class="chips">
+      <div class="chip"><strong>Rectangle</strong><div id="rectOut"></div></div>
+      <div class="chip"><strong>Triangle</strong><div id="triOut"></div></div>
+      <div class="chip"><strong>Total distance</strong><div id="distOut"></div></div>
+    </div>
+        <div class="note" id="note"></div>
+      </div>
+    </div>
+  </div>
+<script>
+
+      function update() {
+        const u = Number(document.getElementById('u').value);
+        const v = Number(document.getElementById('v').value);
+        const t = Number(document.getElementById('t').value);
+        const rectangle = Math.min(u, v) * t;
+        const triangle = 0.5 * Math.abs(v - u) * t;
+        const distance = rectangle + triangle;
+        const maxSpeed = Math.max(u, v, 2);
+        const lineY1 = 230 - (u / maxSpeed) * 170;
+        const lineY2 = 230 - (v / maxSpeed) * 170;
+        document.getElementById('areaLine').setAttribute('points', `70,${lineY1} 500,${lineY2}`);
+        const rectTop = 230 - (Math.min(u, v) / maxSpeed) * 170;
+        document.getElementById('rectArea').setAttribute('x', '70');
+        document.getElementById('rectArea').setAttribute('y', String(rectTop));
+        document.getElementById('rectArea').setAttribute('width', '430');
+        document.getElementById('rectArea').setAttribute('height', String(230 - rectTop));
+        if (v >= u) {
+          document.getElementById('triArea').setAttribute('points', `70,${lineY1} 500,${lineY1} 500,${lineY2}`);
+        } else {
+          document.getElementById('triArea').setAttribute('points', `70,${lineY2} 70,${lineY1} 500,${lineY2}`);
+        }
+        document.getElementById('rectOut').innerText = `${rectangle.toFixed(1)} m`;
+        document.getElementById('triOut').innerText = `${triangle.toFixed(1)} m`;
+        document.getElementById('distOut').innerText = `${distance.toFixed(1)} m`;
+        document.getElementById('note').innerText = 'Each thin strip is a little piece of distance. Add every strip and you get the full journey distance from the shaded area.';
+      }
+      document.querySelectorAll('input').forEach((input) => input.addEventListener('input', update));
+      update();
+    
+</script>
+</body>
+</html>

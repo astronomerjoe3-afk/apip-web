@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#eef4ff"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#db2777"/>
+    </marker>
+    <style>
+      .title { font: 700 40px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 20px Arial, sans-serif; fill: #475569; }
+      .panel-title { font: 700 28px Arial, sans-serif; fill: #0f172a; }
+      .body { font: 20px Arial, sans-serif; fill: #334155; }
+      .small { font: 18px Arial, sans-serif; fill: #475569; }
+      .ledger { font: 700 20px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 700 18px Arial, sans-serif; fill: white; }
+      .banner { font: 700 18px Arial, sans-serif; fill: white; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <text x="70" y="70" class="title">Antiparticles, Pair Production, and Annihilation</text>
+  <text x="70" y="106" class="subtitle">
+    <tspan x="70" dy="0">Read both processes as balanced events: mirror partners match, threshold matters,</tspan>
+    <tspan x="70" dy="26">and the before-and-after ledger still has to close.</tspan>
+  </text>
+
+  <rect x="60" y="165" width="550" height="455" rx="28" fill="#ffffff" stroke="#c7d2fe" stroke-width="3"/>
+  <rect x="670" y="165" width="550" height="455" rx="28" fill="#ffffff" stroke="#c7d2fe" stroke-width="3"/>
+
+  <text x="95" y="210" class="panel-title">Pair production</text>
+  <text x="95" y="244" class="body">
+    <tspan x="95" dy="0">A photon with enough energy</tspan>
+    <tspan x="95" dy="24">can become an electron</tspan>
+    <tspan x="95" dy="24">and a positron.</tspan>
+  </text>
+
+  <circle cx="165" cy="360" r="36" fill="#facc15" stroke="#eab308" stroke-width="3"/>
+  <text x="165" y="367" text-anchor="middle" class="label">gamma</text>
+  <line x1="207" y1="360" x2="305" y2="360" stroke="#f59e0b" stroke-width="8" marker-end="url(#arrow-gold)"/>
+
+  <circle cx="340" cy="360" r="10" fill="#0f172a"/>
+  <line x1="350" y1="355" x2="468" y2="322" stroke="#2563eb" stroke-width="7" marker-end="url(#arrow-blue)"/>
+  <line x1="350" y1="365" x2="468" y2="430" stroke="#db2777" stroke-width="7" marker-end="url(#arrow-pink)"/>
+
+  <circle cx="500" cy="300" r="28" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
+  <text x="500" y="307" text-anchor="middle" class="label">e-</text>
+  <circle cx="500" cy="448" r="28" fill="#f472b6" stroke="#db2777" stroke-width="3"/>
+  <text x="500" y="455" text-anchor="middle" class="label">e+</text>
+
+  <circle cx="392" cy="448" r="46" fill="#fdba74" stroke="#f97316" stroke-width="4"/>
+  <text x="392" y="444" text-anchor="middle" class="ledger">near</text>
+  <text x="392" y="468" text-anchor="middle" class="ledger">nucleus</text>
+
+  <text x="95" y="508" class="body">
+    <tspan x="95" dy="0">Threshold clue: the incoming photon must carry</tspan>
+    <tspan x="95" dy="24">enough energy to make both partners.</tspan>
+  </text>
+  <text x="95" y="565" class="small">Charge ledger: 0 -&gt; (-1) + (+1) = 0</text>
+  <text x="95" y="594" class="small">Mirror-partner clue: same mass, opposite charge.</text>
+
+  <text x="705" y="210" class="panel-title">Annihilation</text>
+  <text x="705" y="244" class="body">
+    <tspan x="705" dy="0">An electron and a positron can meet</tspan>
+    <tspan x="705" dy="24">and turn back into photon energy.</tspan>
+  </text>
+
+  <circle cx="780" cy="300" r="28" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
+  <text x="780" y="307" text-anchor="middle" class="label">e-</text>
+  <circle cx="780" cy="430" r="28" fill="#f472b6" stroke="#db2777" stroke-width="3"/>
+  <text x="780" y="437" text-anchor="middle" class="label">e+</text>
+
+  <line x1="810" y1="308" x2="920" y2="360" stroke="#2563eb" stroke-width="7" marker-end="url(#arrow-blue)"/>
+  <line x1="810" y1="422" x2="920" y2="360" stroke="#db2777" stroke-width="7" marker-end="url(#arrow-pink)"/>
+  <circle cx="945" cy="360" r="10" fill="#0f172a"/>
+
+  <line x1="955" y1="355" x2="1080" y2="275" stroke="#f59e0b" stroke-width="8" marker-end="url(#arrow-gold)"/>
+  <line x1="955" y1="365" x2="1080" y2="435" stroke="#f59e0b" stroke-width="8" marker-end="url(#arrow-gold)"/>
+
+  <circle cx="1105" cy="255" r="36" fill="#facc15" stroke="#eab308" stroke-width="3"/>
+  <text x="1105" y="262" text-anchor="middle" class="label">gamma</text>
+  <circle cx="1105" cy="470" r="36" fill="#facc15" stroke="#eab308" stroke-width="3"/>
+  <text x="1105" y="477" text-anchor="middle" class="label">gamma</text>
+
+  <text x="705" y="508" class="body">
+    <tspan x="705" dy="0">Conservation clue: the partner</tspan>
+    <tspan x="705" dy="24">charges cancel, so the event</tspan>
+    <tspan x="705" dy="24">can close cleanly.</tspan>
+  </text>
+  <text x="705" y="578" class="small">Charge ledger: (-1) + (+1) -&gt; 0</text>
+  <text x="705" y="606" class="small">Energy clue: the rest mass reappears as outgoing photons.</text>
+
+  <rect x="70" y="640" width="1140" height="58" rx="20" fill="url(#header)"/>
+  <text x="640" y="662" text-anchor="middle" class="banner">
+    <tspan x="640" dy="0">Same event logic both ways: check mirror partners, check threshold,</tspan>
+    <tspan x="640" dy="22">and check that the before-and-after ledger still balances.</tspan>
+  </text>
+</svg>

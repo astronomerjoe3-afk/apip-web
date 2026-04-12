@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <style>
+    .title { fill: #0f172a; font: 700 34px 'Segoe UI', Arial, sans-serif; }
+    .subtitle { fill: #475569; font: 400 22px 'Segoe UI', Arial, sans-serif; }
+    .panel-title { fill: #0f172a; font: 700 28px 'Segoe UI', Arial, sans-serif; }
+    .body { fill: #475569; font: 400 20px 'Segoe UI', Arial, sans-serif; }
+    .chip { fill: #1e293b; font: 700 20px 'Segoe UI', Arial, sans-serif; }
+    .small { fill: #64748b; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+    .axis { fill: #475569; font: 400 18px 'Segoe UI', Arial, sans-serif; }
+    .guide { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <rect width="1200" height="720" rx="36" fill="#F8FAFC" />
+  <rect x="36" y="28" width="1128" height="664" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+
+  <text x="72" y="88" class="title">Distance-time graph: record the journey, do not draw the road.</text>
+  <text x="72" y="122" class="subtitle">Module 1 treats the graph as a representation system.</text>
+  <text x="72" y="150" class="subtitle">The lane is the motion world, while the mission log records distance at each clock beat.</text>
+
+  <rect x="72" y="170" width="402" height="462" rx="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="3" />
+  <text x="104" y="218" class="panel-title">Quest lane</text>
+  <text x="104" y="252" class="body">One physical run can include motion, a pause, and faster motion later.</text>
+  <line x1="116" y1="370" x2="428" y2="370" stroke="#2563EB" stroke-width="18" stroke-linecap="round" />
+  <circle cx="142" cy="370" r="26" fill="#F97316" />
+  <text x="134" y="377" fill="#FFF7ED" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">A</text>
+  <rect x="232" y="341" width="94" height="58" rx="18" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3" />
+  <text x="252" y="378" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Pause</text>
+  <circle cx="404" cy="370" r="26" fill="#10B981" />
+  <text x="396" y="377" fill="#ECFDF5" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">B</text>
+  <line x1="118" y1="438" x2="204" y2="438" stroke="#1D4ED8" stroke-width="10" stroke-linecap="round" />
+  <line x1="204" y1="438" x2="248" y2="438" stroke="#94A3B8" stroke-width="10" stroke-linecap="round" stroke-dasharray="10 10" />
+  <line x1="248" y1="438" x2="430" y2="438" stroke="#0EA5E9" stroke-width="10" stroke-linecap="round" />
+  <text x="104" y="502" class="chip">Lane story</text>
+  <text x="104" y="536" class="body">0-2 s: steady pace</text>
+  <text x="104" y="568" class="body">2-4 s: stopped</text>
+  <text x="104" y="600" class="body">4-8 s: faster pace to the same finish</text>
+
+  <rect x="510" y="170" width="618" height="462" rx="28" fill="#EFF6FF" stroke="#93C5FD" stroke-width="3" />
+  <text x="546" y="218" class="panel-title">Mission log</text>
+  <text x="546" y="252" class="body">The vertical axis records distance from the start.</text>
+  <text x="546" y="280" class="body">The horizontal axis records elapsed time.</text>
+  <line x1="626" y1="558" x2="1050" y2="558" stroke="#334155" stroke-width="4" />
+  <line x1="626" y1="558" x2="626" y2="300" stroke="#334155" stroke-width="4" />
+  <g stroke="#CBD5E1" stroke-width="2">
+    <line x1="710" y1="558" x2="710" y2="300" />
+    <line x1="794" y1="558" x2="794" y2="300" />
+    <line x1="878" y1="558" x2="878" y2="300" />
+    <line x1="962" y1="558" x2="962" y2="300" />
+    <line x1="1046" y1="558" x2="1046" y2="300" />
+    <line x1="626" y1="494" x2="1050" y2="494" />
+    <line x1="626" y1="430" x2="1050" y2="430" />
+    <line x1="626" y1="366" x2="1050" y2="366" />
+  </g>
+  <g class="small">
+    <text x="620" y="584">0</text>
+    <text x="704" y="584">2</text>
+    <text x="788" y="584">4</text>
+    <text x="872" y="584">6</text>
+    <text x="956" y="584">8</text>
+    <text x="1040" y="584">10</text>
+    <text x="594" y="558">0</text>
+    <text x="584" y="500">12</text>
+    <text x="584" y="436">24</text>
+    <text x="584" y="372">36</text>
+  </g>
+  <polyline points="626,558 710,478 794,478 962,350" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  <polyline points="626,558 1046,350" fill="none" stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-dasharray="18 12" />
+  <circle cx="710" cy="478" r="8" fill="#F59E0B" />
+  <circle cx="794" cy="478" r="8" fill="#F59E0B" />
+  <circle cx="962" cy="350" r="8" fill="#2563EB" />
+  <rect x="640" y="334" width="178" height="50" rx="18" fill="#DBEAFE" />
+  <text x="660" y="365" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Slope = speed</text>
+  <polyline points="818,359 852,359 916,388" class="guide" stroke="#1D4ED8" />
+  <rect x="792" y="430" width="188" height="50" rx="16" fill="#FEF3C7" />
+  <text x="814" y="462" fill="#92400E" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Flat = stopped</text>
+  <polyline points="792,454 770,454 770,478" class="guide" stroke="#B45309" />
+  <rect x="846" y="296" width="226" height="76" rx="20" fill="#DCFCE7" />
+  <text x="866" y="326" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Same final point can hide</text>
+  <text x="866" y="352" fill="#047857" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">a different run story</text>
+  <polyline points="958,372 988,372 1012,356" class="guide" stroke="#047857" />
+  <text x="792" y="616" class="axis">time, t (s)</text>
+  <text x="552" y="462" class="axis" transform="rotate(-90 552 462)">distance from start, s (m)</text>
+
+  <rect x="72" y="648" width="1056" height="36" rx="18" fill="#DBEAFE" />
+  <text x="600" y="671" fill="#1D4ED8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Height = distance by that time | slope = speed | flat section = stopped</text>
+</svg>

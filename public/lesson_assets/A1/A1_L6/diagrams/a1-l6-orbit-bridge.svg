@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#f7f7fb"/>
+  <text x="58" y="74" fill="#1f2a56" font-size="56" font-family="Georgia, serif" font-weight="700">Orbit Bridge</text>
+  <text x="58" y="128" fill="#496489" font-size="28" font-family="Georgia, serif">Gravity can be the inward center pull that circular motion requires.</text>
+
+  <rect x="54" y="174" width="1070" height="468" rx="32" fill="#eef2ff" stroke="#c4b5fd" stroke-width="6"/>
+  <circle cx="280" cy="420" r="124" fill="#ddd6fe"/>
+  <circle cx="280" cy="420" r="26" fill="#4338ca"/>
+  <circle cx="402" cy="420" r="12" fill="#2563eb"/>
+  <line x1="402" y1="420" x2="334" y2="420" stroke="#f97316" stroke-width="10"/>
+  <polygon points="334,420 358,404 358,436" fill="#f97316"/>
+  <text x="430" y="402" fill="#c2410c" font-size="26" font-family="Georgia, serif" font-weight="700">gravity inward</text>
+  <line x1="402" y1="420" x2="402" y2="324" stroke="#0f766e" stroke-width="10"/>
+  <polygon points="402,324 386,350 418,350" fill="#0f766e"/>
+  <text x="432" y="344" fill="#0f766e" font-size="26" font-family="Georgia, serif" font-weight="700">sideways motion</text>
+
+  <rect x="700" y="272" width="332" height="196" rx="26" fill="#ffffff" stroke="#8b5cf6" stroke-width="4"/>
+  <text x="732" y="332" fill="#7c3aed" font-size="24" font-family="Georgia, serif" font-weight="700">required a_c = v^2 / r</text>
+  <text x="732" y="392" fill="#7c3aed" font-size="24" font-family="Georgia, serif" font-weight="700">local g = GM / r^2</text>
+  <text x="732" y="448" fill="#0f766e" font-size="24" font-family="Georgia, serif" font-weight="700">Bridge question: do they match?</text>
+
+  <text x="136" y="596" fill="#1f2a56" font-size="28" font-family="Georgia, serif" font-weight="700">Orbiting is continuous free fall with tangential speed.</text>
+  <text x="136" y="634" fill="#496489" font-size="27" font-family="Georgia, serif">The bridge closes when the inward turning need and the inward gravity field agree.</text>
+</svg>

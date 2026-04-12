@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#2563eb" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Rotation Turns Flux Change into Alternating emf
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    A turning coil keeps changing its orientation in the field, so the induced output rises, falls, and reverses sign.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="580" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="734" y="226" width="540" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="416" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Generator geometry
+  </text>
+  <text x="1004" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Output over one turn
+  </text>
+
+  <text x="182" y="452" fill="#1e40af" font-size="34" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">N</text>
+  <text x="608" y="452" fill="#1e40af" font-size="34" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800">S</text>
+  <line x1="224" y1="452" x2="562" y2="452" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="562,452 534,436 534,468" fill="#16a34a"/>
+  <text x="392" y="430" fill="#166534" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">field across gap</text>
+
+  <rect x="338" y="364" width="156" height="176" rx="10" fill="none" stroke="#0ea5e9" stroke-width="7" transform="rotate(-24 416 452)"/>
+  <circle cx="416" cy="452" r="12" fill="#1d4ed8"/>
+  <path d="M498 338 C558 356, 592 402, 604 458" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="604,458 578,442 584,474" fill="#f97316"/>
+  <text x="560" y="336" fill="#c2410c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">rotation</text>
+
+  <rect x="242" y="586" width="348" height="84" rx="22" fill="#ffffff" stroke="#60a5fa" stroke-width="2.5"/>
+  <text x="416" y="620" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    changing coil angle means changing flux linkage
+  </text>
+  <text x="416" y="650" fill="#1e40af" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    so emf changes continuously through the turn
+  </text>
+
+  <line x1="804" y1="624" x2="1196" y2="624" stroke="#1e40af" stroke-width="4"/>
+  <line x1="804" y1="354" x2="804" y2="624" stroke="#1e40af" stroke-width="4"/>
+  <text x="1208" y="632" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">time</text>
+  <text x="790" y="368" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="end">emf</text>
+
+  <path d="M824 492 C874 360, 938 360, 988 492 S1102 624, 1152 492" fill="none" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <line x1="804" y1="492" x2="1196" y2="492" stroke="#93c5fd" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="894" y1="354" x2="894" y2="624" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="8 10"/>
+  <line x1="1078" y1="354" x2="1078" y2="624" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="8 10"/>
+  <text x="894" y="646" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">quarter turn</text>
+  <text x="1078" y="646" fill="#1e40af" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">three-quarter turn</text>
+  <text x="980" y="400" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">positive half-cycle</text>
+  <text x="1054" y="578" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">negative half-cycle</text>
+</svg>

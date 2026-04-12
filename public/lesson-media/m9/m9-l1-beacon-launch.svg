@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc" style="font-family: Arial, Helvetica, sans-serif;">
+  <title id="title">Beacon Launch</title>
+  <desc id="desc">A vibrating sound source launches compressions and rarefactions into nearby air.</desc>
+  <rect width="1200" height="800" fill="#f8fbff"/>
+  <rect x="44" y="34" width="1112" height="732" rx="36" fill="#eef6ff" stroke="#c7dbf7" stroke-width="4"/>
+  <text x="84" y="112" fill="#172554" font-size="52" font-weight="700">A vibrating beacon launches sound</text>
+  <text x="84" y="162" fill="#475569" font-size="28">The source must wiggle first. Nearby air begins the squeeze-release relay.</text>
+
+  <rect x="126" y="244" width="116" height="208" rx="48" fill="#2563eb"/>
+  <rect x="126" y="480" width="116" height="46" rx="20" fill="#1e3a8a"/>
+  <line x1="252" y1="334" x2="298" y2="334" stroke="#2563eb" stroke-width="10" stroke-linecap="round"/>
+  <line x1="252" y1="382" x2="298" y2="382" stroke="#2563eb" stroke-width="10" stroke-linecap="round"/>
+  <path d="M298 334l-18-14v28z" fill="#2563eb"/>
+  <path d="M252 382l18-14v28z" fill="#2563eb"/>
+  <text x="116" y="588" fill="#1d4ed8" font-size="30" font-weight="700">Scout Beacon</text>
+  <text x="116" y="624" fill="#475569" font-size="24">source vibration</text>
+
+  <line x1="320" y1="382" x2="952" y2="382" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+  <rect x="338" y="300" width="184" height="164" rx="28" fill="#dbeafe"/>
+  <circle cx="376" cy="382" r="18" fill="#2563eb"/>
+  <circle cx="412" cy="382" r="18" fill="#2563eb"/>
+  <circle cx="448" cy="382" r="18" fill="#2563eb"/>
+  <circle cx="484" cy="382" r="18" fill="#2563eb"/>
+  <text x="330" y="274" fill="#0f766e" font-size="30" font-weight="700">First squeeze band</text>
+
+  <rect x="636" y="300" width="260" height="164" rx="28" fill="#e2e8f0"/>
+  <circle cx="684" cy="382" r="18" fill="#93c5fd"/>
+  <circle cx="776" cy="382" r="18" fill="#93c5fd"/>
+  <circle cx="868" cy="382" r="18" fill="#93c5fd"/>
+  <text x="692" y="274" fill="#475569" font-size="30" font-weight="700">Release band</text>
+
+  <line x1="528" y1="382" x2="618" y2="382" stroke="#2563eb" stroke-width="10" stroke-linecap="round"/>
+  <path d="M618 382l-22-14v28z" fill="#2563eb"/>
+  <text x="522" y="330" fill="#1d4ed8" font-size="26" font-weight="700">pressure relay moves on</text>
+
+  <rect x="98" y="652" width="300" height="72" rx="22" fill="#ffffff" opacity="0.96"/>
+  <rect x="440" y="652" width="300" height="72" rx="22" fill="#ffffff" opacity="0.96"/>
+  <rect x="782" y="652" width="300" height="72" rx="22" fill="#ffffff" opacity="0.96"/>
+  <text x="128" y="696" fill="#0f172a" font-size="22">No vibration means no new sound.</text>
+  <text x="470" y="684" fill="#0f172a" font-size="22">Source rate sets the</text>
+  <text x="470" y="710" fill="#0f172a" font-size="22">launched frequency.</text>
+  <text x="812" y="684" fill="#0f172a" font-size="22">The pattern travels;</text>
+  <text x="812" y="710" fill="#0f172a" font-size="22">the air stays local.</text>
+</svg>

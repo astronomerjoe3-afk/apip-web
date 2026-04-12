@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#fffaf5"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#fff7ed" stroke="#f97316" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#7c2d12" font-size="38" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Gas State Variables Belong to One Chamber Story
+  </text>
+  <text x="700" y="140" fill="#9a3412" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    The ideal gas law works because the chamber, particle count, and particle motion all belong to the same physical state.
+  </text>
+
+  <rect x="82" y="186" width="1236" height="566" rx="34" fill="#ffffff" stroke="#fb923c" stroke-width="3"/>
+
+  <rect x="488" y="246" width="424" height="360" rx="34" fill="#fff7ed" stroke="#fb923c" stroke-width="3"/>
+  <text x="700" y="286" fill="#7c2d12" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    gas chamber
+  </text>
+  <rect x="564" y="330" width="272" height="196" rx="28" fill="#ffffff" stroke="#fdba74" stroke-width="2.5"/>
+
+  <circle cx="612" cy="382" r="14" fill="#f97316"/><line x1="626" y1="382" x2="654" y2="370" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="706" cy="372" r="14" fill="#f97316"/><line x1="720" y1="372" x2="750" y2="360" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="780" cy="420" r="14" fill="#f97316"/><line x1="794" y1="420" x2="818" y2="406" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="664" cy="454" r="14" fill="#f97316"/><line x1="678" y1="454" x2="706" y2="444" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="736" cy="486" r="14" fill="#f97316"/><line x1="750" y1="486" x2="780" y2="474" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+
+  <line x1="836" y1="392" x2="874" y2="392" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="874,392 846,376 846,408" fill="#f97316"/>
+  <text x="882" y="398" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">wall hit</text>
+
+  <rect x="118" y="262" width="286" height="148" rx="28" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="261" y="308" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Pressure p</text>
+  <text x="261" y="346" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">pressure comes from</text>
+  <text x="261" y="376" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">wall-collision load</text>
+  <line x1="404" y1="336" x2="486" y2="336" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+
+  <rect x="118" y="466" width="286" height="148" rx="28" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="261" y="512" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Volume V</text>
+  <text x="261" y="550" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">volume is the room</text>
+  <text x="261" y="580" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">available to the gas</text>
+  <line x1="404" y1="540" x2="486" y2="540" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+
+  <rect x="996" y="262" width="286" height="148" rx="28" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="1139" y="308" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Amount n</text>
+  <text x="1139" y="346" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">more particles means</text>
+  <text x="1139" y="376" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">more microscopic carriers</text>
+  <line x1="912" y1="336" x2="994" y2="336" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+
+  <rect x="996" y="466" width="286" height="148" rx="28" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="1139" y="512" fill="#7c2d12" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Temperature T</text>
+  <text x="1139" y="550" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">higher T means faster</text>
+  <text x="1139" y="580" fill="#334155" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">average particle motion</text>
+  <line x1="912" y1="540" x2="994" y2="540" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+
+  <rect x="570" y="640" width="260" height="58" rx="20" fill="#f97316"/>
+  <text x="700" y="677" fill="#fff7ed" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    pV = nRT
+  </text>
+</svg>

@@ -1,0 +1,27 @@
+{
+  "lesson_id": "A5_L3",
+  "module": "A5",
+  "video_type": "pre_worked_example_explainer",
+  "duration_sec": 536.95,
+  "voice_model": "gpt-4o-mini-tts-2025-12-15",
+  "voice_name": "cedar",
+  "voice_speed": "0.80",
+  "source_env": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\.env",
+  "worked_example_handoff": "Carry one rule into the worked example: read amplitude and angular frequency first, then let the phase checkpoints tell you what the oscillator is doing at a chosen time.",
+  "scene_ids": [
+    "hook",
+    "diagram",
+    "analogy",
+    "formula",
+    "pattern",
+    "phase_map",
+    "quiz",
+    "handoff"
+  ],
+  "output_files": {
+    "video": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a5_preworked_v1\\videos\\03_a5_l3_preworked_explainer\\final.mp4",
+    "captions_srt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a5_preworked_v1\\videos\\03_a5_l3_preworked_explainer\\captions.srt",
+    "captions_vtt": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a5_preworked_v1\\videos\\03_a5_l3_preworked_explainer\\captions.vtt",
+    "thumbnail": "C:\\Users\\User\\OneDrive\\Documents\\Playground\\apip_ad_agent\\cognispark_a5_preworked_v1\\videos\\03_a5_l3_preworked_explainer\\thumbnail.png"
+  }
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#f5f3ff" stroke="#7c3aed" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#5b21b6" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Mass Defect Is the Energy Credit of Binding
+  </text>
+  <text x="700" y="140" fill="#6d28d9" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Free nucleons have more total mass than the bound nucleus. That missing mass is the binding energy credit through E = mc^2.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#a78bfa" stroke-width="3"/>
+  <rect x="126" y="226" width="592" height="486" rx="30" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2.5"/>
+  <rect x="750" y="226" width="524" height="486" rx="30" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2.5"/>
+
+  <text x="422" y="268" fill="#5b21b6" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Free nucleons
+  </text>
+  <text x="1012" y="268" fill="#5b21b6" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Bound nucleus and energy
+  </text>
+
+  <circle cx="248" cy="414" r="28" fill="#ef4444"/>
+  <circle cx="334" cy="414" r="28" fill="#ef4444"/>
+  <circle cx="420" cy="414" r="28" fill="#ef4444"/>
+  <circle cx="291" cy="502" r="28" fill="#3b82f6"/>
+  <circle cx="377" cy="502" r="28" fill="#3b82f6"/>
+  <text x="356" y="596" fill="#6d28d9" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    total free-particle mass is larger
+  </text>
+  <text x="356" y="628" fill="#6d28d9" font-size="20" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    separating everything needs energy input
+  </text>
+
+  <circle cx="958" cy="454" r="112" fill="#ddd6fe" stroke="#7c3aed" stroke-width="6"/>
+  <circle cx="920" cy="426" r="22" fill="#ef4444"/>
+  <circle cx="1000" cy="432" r="22" fill="#ef4444"/>
+  <circle cx="952" cy="498" r="22" fill="#ef4444"/>
+  <circle cx="906" cy="488" r="22" fill="#3b82f6"/>
+  <circle cx="1008" cy="496" r="22" fill="#3b82f6"/>
+  <text x="958" y="626" fill="#5b21b6" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    bound nucleus has lower total mass
+  </text>
+  <path d="M1090 454 C1148 454, 1186 412, 1204 358" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="1204,358 1176,374 1208,390" fill="#f97316"/>
+  <text x="1126" y="342" fill="#c2410c" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">mass defect -> energy</text>
+  <text x="1058" y="390" fill="#c2410c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600">delta E = delta m c^2</text>
+</svg>

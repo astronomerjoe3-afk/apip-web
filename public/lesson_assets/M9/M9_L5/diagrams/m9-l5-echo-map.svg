@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg-l5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff" />
+      <stop offset="100%" stop-color="#f6fff9" />
+    </linearGradient>
+    <marker id="l5-arrow-out" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#2563eb" />
+    </marker>
+    <marker id="l5-arrow-back" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#0f766e" />
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg-l5)" />
+  <text x="88" y="88" fill="#0f172a" font-size="34" font-family="Arial, sans-serif" font-weight="700">Echo time becomes one-way depth</text>
+  <text x="88" y="128" fill="#475569" font-size="20" font-family="Arial, sans-serif">Ultrasound mapping uses reflected pulses. The timed journey is out-and-back, so depth is half the full path.</text>
+
+  <rect x="76" y="176" width="786" height="420" rx="30" fill="#ffffff" stroke="#93c5fd" stroke-width="4" />
+  <text x="110" y="220" fill="#1d4ed8" font-size="26" font-family="Arial, sans-serif" font-weight="700">Pulse-echo scene</text>
+  <rect x="138" y="318" width="74" height="144" rx="22" fill="#2563eb" />
+  <text x="175" y="490" fill="#1d4ed8" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">probe</text>
+
+  <line x1="212" y1="372" x2="620" y2="372" stroke="#2563eb" stroke-width="8" marker-end="url(#l5-arrow-out)" />
+  <text x="404" y="346" fill="#1d4ed8" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">outgoing pulse</text>
+
+  <line x1="620" y1="410" x2="212" y2="454" stroke="#0f766e" stroke-width="8" stroke-dasharray="12 10" marker-end="url(#l5-arrow-back)" />
+  <text x="414" y="498" fill="#0f766e" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">echo return</text>
+
+  <line x1="620" y1="262" x2="620" y2="492" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" />
+  <line x1="752" y1="246" x2="752" y2="508" stroke="#f97316" stroke-width="10" stroke-linecap="round" opacity="0.55" />
+  <text x="620" y="236" fill="#b45309" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">nearer boundary</text>
+  <text x="752" y="236" fill="#c2410c" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">deeper boundary</text>
+
+  <rect x="892" y="176" width="312" height="420" rx="30" fill="#ffffff" stroke="#86efac" stroke-width="4" />
+  <text x="924" y="220" fill="#166534" font-size="26" font-family="Arial, sans-serif" font-weight="700">Map console</text>
+  <rect x="934" y="260" width="228" height="92" rx="22" fill="#ecfdf5" />
+  <text x="960" y="298" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">Given</text>
+  <text x="960" y="326" fill="#475569" font-size="17" font-family="Arial, sans-serif">v = 1500 m/s, t = 0.002 s</text>
+  <rect x="934" y="374" width="228" height="146" rx="22" fill="#f8fafc" stroke="#cbd5e1" />
+  <text x="960" y="412" fill="#0f172a" font-size="18" font-family="Arial, sans-serif" font-weight="700">Calculation</text>
+  <text x="960" y="446" fill="#475569" font-size="17" font-family="Arial, sans-serif">round-trip distance = vt</text>
+  <text x="960" y="476" fill="#475569" font-size="17" font-family="Arial, sans-serif">= 1500 × 0.002 = 3.0 m</text>
+  <text x="960" y="506" fill="#166534" font-size="17" font-family="Arial, sans-serif" font-weight="700">depth = 3.0 / 2 = 1.5 m</text>
+
+  <rect x="76" y="626" width="1128" height="58" rx="18" fill="#ffffff" stroke="#cbd5e1" />
+  <text x="108" y="662" fill="#0f172a" font-size="18" font-family="Arial, sans-serif" font-weight="700">Physics read:</text>
+  <text x="238" y="662" fill="#475569" font-size="18" font-family="Arial, sans-serif">Many echoes from many boundaries build an image; one echo gives one depth clue.</text>
+</svg>

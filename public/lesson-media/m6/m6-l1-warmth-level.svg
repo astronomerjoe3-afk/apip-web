@@ -1,0 +1,49 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
+  <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D7E6F8" stroke-width="4"/>
+  <text x="72" y="88" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">
+    <tspan x="72" dy="0">Warmth Level is temperature,</tspan>
+    <tspan x="72" dy="38">while the Forge Ledger tracks transfer</tspan>
+  </text>
+  <text x="72" y="164" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="21">
+    <tspan x="72" dy="0">Two blocks can receive the same energy payment and still rise by different amounts.</tspan>
+    <tspan x="72" dy="27">The meter and the payment record answer different questions.</tspan>
+  </text>
+
+  <rect x="84" y="210" width="462" height="392" rx="30" fill="#E0F2FE" stroke="#38BDF8" stroke-width="5"/>
+  <rect x="654" y="210" width="462" height="392" rx="30" fill="#EEF2FF" stroke="#818CF8" stroke-width="5"/>
+
+  <text x="122" y="258" fill="#0369A1" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Warmth Level meter</text>
+  <rect x="158" y="304" width="96" height="214" rx="30" fill="#DBEAFE"/>
+  <rect x="184" y="362" width="44" height="130" rx="18" fill="#2563EB"/>
+  <text x="140" y="554" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24">Temperature now</text>
+  <text x="322" y="352" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="23">
+    <tspan x="322" dy="0">Warmth Level answers:</tspan>
+    <tspan x="322" dy="33">How hot is the block</tspan>
+    <tspan x="322" dy="33">at this moment?</tspan>
+  </text>
+  <circle cx="384" cy="500" r="28" fill="#BFDBFE"/>
+  <circle cx="478" cy="500" r="48" fill="#93C5FD"/>
+  <text x="322" y="566" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">
+    <tspan x="322" dy="0">Same meter idea,</tspan>
+    <tspan x="322" dy="26">different block sizes</tspan>
+  </text>
+
+  <text x="692" y="258" fill="#4F46E5" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Forge Ledger</text>
+  <rect x="718" y="300" width="332" height="84" rx="24" fill="#0F172A"/>
+  <text x="758" y="352" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">+ 2400 J</text>
+  <rect x="718" y="424" width="126" height="92" rx="24" fill="#C7D2FE"/>
+  <rect x="878" y="424" width="172" height="92" rx="24" fill="#C7D2FE"/>
+  <text x="744" y="478" fill="#312E81" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">small</text>
+  <text x="914" y="478" fill="#312E81" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">large</text>
+  <text x="716" y="536" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <tspan x="716" dy="0">The payment can match,</tspan>
+    <tspan x="716" dy="28">but the temperature rise</tspan>
+    <tspan x="716" dy="28">can still differ.</tspan>
+  </text>
+
+  <rect x="96" y="634" width="1008" height="68" rx="22" fill="#EEF4FF"/>
+  <text x="128" y="676" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">
+    Heat means transferred energy. Temperature means the current thermal level.
+  </text>
+</svg>

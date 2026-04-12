@@ -1,0 +1,353 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.643
+The biggest idea in this lesson is that the resultant force tells you about change in motion, not motion already in progress.
+
+2
+00:00:05.643 --> 00:00:11.286
+A craft can be moving and still have a zero Master Arrow.
+
+3
+00:00:11.286 --> 00:00:16.929
+A craft can also have a non-zero Master Arrow while still moving the other way for a while.
+
+4
+00:00:16.929 --> 00:00:22.572
+That is why force state and motion state have to be kept separate.
+
+5
+00:00:22.572 --> 00:00:28.215
+Newton's first law becomes much calmer once the learner stops trying to read velocity directly from the force arrows.
+
+6
+00:00:28.215 --> 00:00:33.858
+Keep this takeaway in view: Resultant force tells the next change in motion, not the motion that already exists.
+
+7
+00:00:33.858 --> 00:00:39.501
+Force state means Master Arrow.
+
+8
+00:00:39.501 --> 00:00:45.144
+The Master Arrow is the resultant force after the whole force picture is combined.
+
+9
+00:00:45.144 --> 00:00:50.787
+Motion state means current velocity.
+
+10
+00:00:50.787 --> 00:00:56.430
+This tells how the craft is moving right now before the next change happens.
+
+11
+00:00:56.430 --> 00:01:02.510
+This diagram does an important job.
+
+12
+00:01:02.510 --> 00:01:08.590
+On one side, equal and opposite forces are both present, but the Master Arrow is zero because they cancel.
+
+13
+00:01:08.590 --> 00:01:14.670
+On the other side, no force arrows act at that moment, and the Master Arrow is also zero.
+
+14
+00:01:14.670 --> 00:01:20.750
+Those two pictures are physically different, yet the acceleration outcome is the same: zero.
+
+15
+00:01:20.750 --> 00:01:26.830
+That is the lesson gain.
+
+16
+00:01:26.830 --> 00:01:32.910
+Zero resultant force means no acceleration.
+
+17
+00:01:32.910 --> 00:01:38.990
+It does not tell you whether the object is at rest or already cruising steadily.
+
+18
+00:01:38.990 --> 00:01:45.070
+Keep this takeaway in view: Balanced forces and no forces are different force stories that can share the same zero-acceleration result.
+
+19
+00:01:45.070 --> 00:01:51.150
+Balanced arrows: Forces are present, but they cancel to give zero Master Arrow.
+
+20
+00:01:51.150 --> 00:01:57.230
+No arrows: No forces act now, yet zero Master Arrow still means zero acceleration.
+
+21
+00:01:57.230 --> 00:02:02.416
+A useful analogy is a pilot display.
+
+22
+00:02:02.416 --> 00:02:07.602
+Many thruster arrows may appear around the craft, but the pilot needs one summary steering instruction.
+
+23
+00:02:07.602 --> 00:02:12.788
+That summary is the Master Arrow.
+
+24
+00:02:12.788 --> 00:02:17.974
+The ship responds to that net instruction, not to one loud-looking arrow taken on its own.
+
+25
+00:02:17.974 --> 00:02:23.160
+This analogy matters because it teaches the learner to collapse the whole force picture before trying to predict the acceleration.
+
+26
+00:02:23.160 --> 00:02:28.346
+Keep this takeaway in view: The craft responds to the summary force picture, not to an uncombined list of arrows.
+
+27
+00:02:28.346 --> 00:02:33.532
+Many arrows means individual forces.
+
+28
+00:02:33.532 --> 00:02:38.718
+These are the separate pushes and pulls acting on the craft.
+
+29
+00:02:38.718 --> 00:02:43.904
+One summary arrow means resultant force.
+
+30
+00:02:43.904 --> 00:02:49.090
+This is the net force that actually sets the acceleration.
+
+31
+00:02:49.090 --> 00:02:53.484
+The method is simple but disciplined.
+
+32
+00:02:53.484 --> 00:02:57.878
+Add forces that act in the same direction.
+
+33
+00:02:57.878 --> 00:03:02.272
+Subtract opposite-direction forces that act along the same line, then keep the direction of the larger side.
+
+34
+00:03:02.272 --> 00:03:06.667
+That leftover force is the Master Arrow.
+
+35
+00:03:06.667 --> 00:03:11.061
+Only after that should the learner talk about acceleration.
+
+36
+00:03:11.061 --> 00:03:15.455
+This is what stops the force picture from becoming a list of disconnected numbers.
+
+37
+00:03:15.455 --> 00:03:19.849
+Keep this takeaway in view: Force combination comes before acceleration language.
+
+38
+00:03:19.849 --> 00:03:24.243
+Add: Same-direction arrows support one another.
+
+39
+00:03:24.243 --> 00:03:28.637
+Subtract: Opposite-direction arrows compete along the same axis.
+
+40
+00:03:28.637 --> 00:03:33.032
+same direction -> add.
+
+41
+00:03:33.032 --> 00:03:37.426
+opposite directions -> subtract.
+
+42
+00:03:37.426 --> 00:03:41.820
+The leftover same-line force is the Master Arrow, or resultant force.
+
+43
+00:03:41.820 --> 00:03:46.858
+Suppose a craft is moving west but the Master Arrow points east.
+
+44
+00:03:46.858 --> 00:03:51.896
+The craft does not teleport into eastward motion immediately.
+
+45
+00:03:51.896 --> 00:03:56.935
+Instead, the eastward acceleration first reduces the westward velocity.
+
+46
+00:03:56.935 --> 00:04:01.973
+Only later, if that acceleration continues long enough, will the craft stop and then reverse.
+
+47
+00:04:01.973 --> 00:04:07.011
+That is why present velocity and next acceleration must be held in separate boxes.
+
+48
+00:04:07.011 --> 00:04:12.049
+Motion already happening and motion change now happening are different stories.
+
+49
+00:04:12.049 --> 00:04:17.087
+Keep this takeaway in view: Acceleration can oppose the current motion without instantly replacing it.
+
+50
+00:04:17.087 --> 00:04:22.125
+Current velocity means west.
+
+51
+00:04:22.125 --> 00:04:27.164
+This is the motion the craft already has.
+
+52
+00:04:27.164 --> 00:04:32.202
+Master Arrow means east.
+
+53
+00:04:32.202 --> 00:04:37.240
+This sets an eastward acceleration right now.
+
+54
+00:04:37.240 --> 00:04:42.566
+A common trap is to see zero resultant force and announce that the object must be stationary.
+
+55
+00:04:42.566 --> 00:04:47.891
+That is wrong.
+
+56
+00:04:47.891 --> 00:04:53.217
+Zero resultant force means zero acceleration, so the object can remain at rest or keep moving with constant velocity.
+
+57
+00:04:53.217 --> 00:04:58.542
+Another trap is to say balanced forces means no forces.
+
+58
+00:04:58.542 --> 00:05:03.868
+Balanced forces are real forces whose effects cancel.
+
+59
+00:05:03.868 --> 00:05:09.193
+The distinction matters because it keeps the force story honest.
+
+60
+00:05:09.193 --> 00:05:14.519
+Keep this takeaway in view: Zero resultant force removes acceleration, not necessarily motion.
+
+61
+00:05:14.519 --> 00:05:19.844
+Zero Master Arrow means zero acceleration.
+
+62
+00:05:19.844 --> 00:05:25.170
+Zero acceleration can mean rest or steady velocity.
+
+63
+00:05:25.170 --> 00:05:28.307
+Check yourself.
+
+64
+00:05:28.307 --> 00:05:31.443
+What does the Master Arrow tell you?
+
+65
+00:05:31.443 --> 00:05:34.580
+The acceleration direction and whether it is zero or non-zero.
+
+66
+00:05:34.580 --> 00:05:37.717
+What does the current velocity tell you?
+
+67
+00:05:37.717 --> 00:05:40.853
+How the craft is moving at that instant.
+
+68
+00:05:40.853 --> 00:05:43.990
+Can a craft move steadily with zero Master Arrow?
+
+69
+00:05:43.990 --> 00:05:47.127
+Yes.
+
+70
+00:05:47.127 --> 00:05:50.263
+Can a craft accelerate east while still moving west?
+
+71
+00:05:50.263 --> 00:05:53.400
+Also yes.
+
+72
+00:05:53.400 --> 00:05:56.537
+Those are the three core checks of the lesson.
+
+73
+00:05:56.537 --> 00:05:59.673
+Keep this takeaway in view: Force state and motion state must stay separate all the way through the lesson.
+
+74
+00:05:59.673 --> 00:06:02.810
+Master Arrow means acceleration story.
+
+75
+00:06:02.810 --> 00:06:05.947
+This is the resultant-force idea.
+
+76
+00:06:05.947 --> 00:06:09.083
+Velocity means current motion story.
+
+77
+00:06:09.083 --> 00:06:12.220
+This is what the craft is doing right now.
+
+78
+00:06:12.220 --> 00:06:18.094
+You are ready for the worked example now.
+
+79
+00:06:18.094 --> 00:06:23.967
+The craft is moving west at three metres per second while fourteen newtons east and nine newtons west act on it.
+
+80
+00:06:23.967 --> 00:06:29.841
+Combine the forces first: fourteen east minus nine west leaves five newtons east.
+
+81
+00:06:29.841 --> 00:06:35.715
+That is the Master Arrow, so the acceleration points east.
+
+82
+00:06:35.715 --> 00:06:41.588
+But keep the current motion separate: the craft is still moving west right now.
+
+83
+00:06:41.588 --> 00:06:47.462
+So the immediate motion change is that it slows down while still travelling west.
+
+84
+00:06:47.462 --> 00:06:53.335
+Keep this takeaway in view: The worked example is ready: combine the arrows, then compare acceleration with current motion.
+
+85
+00:06:53.335 --> 00:06:59.209
+Step 1: Combine opposite same-line forces to find the Master Arrow.
+
+86
+00:06:59.209 --> 00:07:05.083
+Step 2: Use the Master Arrow to state the acceleration direction.
+
+87
+00:07:05.083 --> 00:07:10.956
+Master Arrow = 14 east - 9 west = 5 N east.
+
+88
+00:07:10.956 --> 00:07:16.830
+Force combination and motion interpretation happen in that order.

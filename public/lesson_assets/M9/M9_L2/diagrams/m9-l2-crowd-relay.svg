@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg-l2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff" />
+      <stop offset="100%" stop-color="#eef8f5" />
+    </linearGradient>
+    <marker id="l2-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#0f766e" />
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg-l2)" />
+  <text x="88" y="88" fill="#0f172a" font-size="34" font-family="Arial, sans-serif" font-weight="700">Compressions move on; particles stay local</text>
+  <text x="88" y="128" fill="#475569" font-size="20" font-family="Arial, sans-serif">Sound in air is a longitudinal pressure wave, so particle motion is parallel to wave travel.</text>
+
+  <rect x="76" y="176" width="1128" height="416" rx="30" fill="#ffffff" stroke="#86efac" stroke-width="4" />
+  <text x="112" y="220" fill="#166534" font-size="26" font-family="Arial, sans-serif" font-weight="700">Longitudinal relay board</text>
+
+  <rect x="170" y="286" width="120" height="188" rx="28" fill="#d1fae5" />
+  <g fill="#059669">
+    <circle cx="196" cy="380" r="12" />
+    <circle cx="220" cy="380" r="12" />
+    <circle cx="244" cy="380" r="12" />
+    <circle cx="268" cy="380" r="12" />
+  </g>
+  <text x="230" y="262" fill="#047857" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">compression</text>
+
+  <g fill="#94a3b8">
+    <circle cx="430" cy="380" r="12" />
+    <circle cx="506" cy="380" r="12" />
+    <circle cx="582" cy="380" r="12" />
+  </g>
+  <text x="506" y="262" fill="#64748b" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">rarefaction</text>
+
+  <rect x="774" y="286" width="120" height="188" rx="28" fill="#d1fae5" />
+  <g fill="#059669">
+    <circle cx="800" cy="380" r="12" />
+    <circle cx="824" cy="380" r="12" />
+    <circle cx="848" cy="380" r="12" />
+    <circle cx="872" cy="380" r="12" />
+  </g>
+  <text x="834" y="262" fill="#047857" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" font-weight="700">next compression</text>
+
+  <circle cx="430" cy="380" r="18" fill="#2563eb" />
+  <line x1="404" y1="338" x2="456" y2="338" stroke="#2563eb" stroke-width="4" marker-end="url(#l2-arrow)" />
+  <line x1="456" y1="422" x2="404" y2="422" stroke="#2563eb" stroke-width="4" marker-end="url(#l2-arrow)" />
+  <text x="430" y="454" fill="#1d4ed8" text-anchor="middle" font-size="17" font-family="Arial, sans-serif" font-weight="700">one particle oscillates locally</text>
+
+  <line x1="206" y1="520" x2="918" y2="520" stroke="#0f766e" stroke-width="6" marker-end="url(#l2-arrow)" />
+  <text x="566" y="556" fill="#0f766e" text-anchor="middle" font-size="20" font-family="Arial, sans-serif" font-weight="700">wave pattern travels to the right</text>
+
+  <rect x="948" y="268" width="214" height="248" rx="24" fill="#f8fafc" stroke="#cbd5e1" />
+  <text x="978" y="306" fill="#0f172a" font-size="20" font-family="Arial, sans-serif" font-weight="700">Read it correctly</text>
+  <text x="978" y="344" fill="#475569" font-size="17" font-family="Arial, sans-serif">1. crowded region = compression</text>
+  <text x="978" y="378" fill="#475569" font-size="17" font-family="Arial, sans-serif">2. spread region = rarefaction</text>
+  <text x="978" y="412" fill="#475569" font-size="17" font-family="Arial, sans-serif">3. particles move back and forth</text>
+  <text x="978" y="446" fill="#475569" font-size="17" font-family="Arial, sans-serif">4. pattern moves onward</text>
+
+  <rect x="76" y="626" width="1128" height="58" rx="18" fill="#ffffff" stroke="#cbd5e1" />
+  <text x="108" y="662" fill="#0f172a" font-size="18" font-family="Arial, sans-serif" font-weight="700">Physics read:</text>
+  <text x="238" y="662" fill="#475569" font-size="18" font-family="Arial, sans-serif">longitudinal wave = local motion parallel to the direction of propagation.</text>
+</svg>

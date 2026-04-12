@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eefcfb" stroke="#0f766e" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#115e59" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    RMS Reads Heating Equivalent, High Voltage Cuts Line Loss
+  </text>
+  <text x="700" y="140" fill="#0f766e" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    For the same delivered power, raising transmission voltage lowers current and reduces I squared R heating in the cables.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#5eead4" stroke-width="3"/>
+  <rect x="126" y="226" width="500" height="486" rx="30" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2.5"/>
+  <rect x="658" y="226" width="616" height="486" rx="30" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2.5"/>
+
+  <text x="376" y="268" fill="#115e59" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    RMS idea
+  </text>
+  <text x="966" y="268" fill="#115e59" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Transmission route
+  </text>
+
+  <line x1="200" y1="618" x2="548" y2="618" stroke="#115e59" stroke-width="4"/>
+  <line x1="200" y1="344" x2="200" y2="618" stroke="#115e59" stroke-width="4"/>
+  <line x1="200" y1="480" x2="548" y2="480" stroke="#99f6e4" stroke-width="3" stroke-dasharray="10 10"/>
+  <text x="186" y="358" fill="#115e59" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="end">V</text>
+  <text x="562" y="626" fill="#115e59" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">time</text>
+  <path d="M220 480 C260 376, 328 376, 368 480 S476 584, 528 480" fill="none" stroke="#0ea5e9" stroke-width="8" stroke-linecap="round"/>
+  <rect x="258" y="354" width="222" height="78" rx="20" fill="#ffffff" stroke="#2dd4bf" stroke-width="2.5"/>
+  <text x="369" y="390" fill="#0f766e" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Vrms gives same heating
+  </text>
+  <text x="369" y="418" fill="#0f766e" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    as an equivalent dc supply
+  </text>
+
+  <rect x="724" y="332" width="150" height="120" rx="22" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="799" y="402" fill="#1e40af" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">step-up</text>
+  <line x1="874" y1="392" x2="1112" y2="392" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+  <line x1="874" y1="444" x2="1112" y2="444" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+  <text x="993" y="370" fill="#b45309" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">high voltage line</text>
+  <text x="993" y="478" fill="#b45309" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">same power, smaller current</text>
+  <rect x="1112" y="332" width="112" height="120" rx="22" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text x="1168" y="402" fill="#166534" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">load</text>
+
+  <rect x="740" y="532" width="468" height="118" rx="24" fill="#ffffff" stroke="#2dd4bf" stroke-width="2.5"/>
+  <text x="974" y="572" fill="#115e59" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Loss in cables follows I squared R
+  </text>
+  <text x="974" y="608" fill="#0f766e" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    So high V transmission is used to push I down.
+  </text>
+</svg>

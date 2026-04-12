@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#26446b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 45px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #4a6891; stroke-width: 3; }
+      .panel { fill: #172742; stroke: #55769d; stroke-width: 2.5; }
+      .label { fill: #f8fafc; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
+
+  <text x="640" y="84" class="title" text-anchor="middle">The Same Clock Drives Both Components</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    At equal time intervals the projectile keeps moving across, while gravity keeps bending the vertical part downward.
+  </text>
+
+  <rect x="106" y="176" width="1068" height="478" rx="34" class="card"/>
+  <rect x="144" y="226" width="992" height="370" rx="26" class="panel"/>
+
+  <line x1="200" y1="520" x2="1078" y2="520" stroke="#475569" stroke-width="3"/>
+  <path d="M 220 470 C 360 290 540 248 760 316 C 876 352 968 426 1048 520"
+        fill="none" stroke="#60a5fa" stroke-width="7"/>
+
+  <circle cx="260" cy="438" r="10" fill="#f8fafc"/>
+  <circle cx="470" cy="330" r="10" fill="#f8fafc"/>
+  <circle cx="710" cy="320" r="10" fill="#f8fafc"/>
+  <circle cx="932" cy="432" r="10" fill="#f8fafc"/>
+  <text x="260" y="410" class="small" text-anchor="middle">t1</text>
+  <text x="470" y="302" class="small" text-anchor="middle">t2</text>
+  <text x="710" y="292" class="small" text-anchor="middle">t3</text>
+  <text x="932" y="404" class="small" text-anchor="middle">t4</text>
+
+  <line x1="260" y1="560" x2="470" y2="560" stroke="#34d399" stroke-width="5"/>
+  <line x1="470" y1="560" x2="710" y2="560" stroke="#34d399" stroke-width="5"/>
+  <line x1="710" y1="560" x2="932" y2="560" stroke="#34d399" stroke-width="5"/>
+  <text x="598" y="588" class="small" text-anchor="middle">equal time steps keep one shared clock</text>
+
+  <line x1="470" y1="330" x2="470" y2="392" stroke="#f43f5e" stroke-width="5"/>
+  <line x1="710" y1="320" x2="710" y2="420" stroke="#f43f5e" stroke-width="6"/>
+  <line x1="932" y1="432" x2="932" y2="520" stroke="#f43f5e" stroke-width="7"/>
+  <text x="994" y="348" class="body">vertical drop grows with time</text>
+  <text x="966" y="382" class="body">while x keeps advancing</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#26446b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 46px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 21px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #4a6891; stroke-width: 3; }
+      .panel { fill: #172742; stroke: #55769d; stroke-width: 2.5; }
+      .label { fill: #f8fafc; font: 700 22px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="640" cy="260" r="340" fill="url(#glow)"/>
+
+  <text x="640" y="84" class="title" text-anchor="middle">Arrow Count Does Not Decide Balance</text>
+  <text x="640" y="122" class="subtitle" text-anchor="middle">
+    A picture can have the same number of arrows in both cases. What matters is whether the component sums cancel.
+  </text>
+
+  <rect x="106" y="176" width="1068" height="478" rx="34" class="card"/>
+  <rect x="144" y="226" width="448" height="370" rx="26" class="panel"/>
+  <rect x="688" y="226" width="448" height="370" rx="26" class="panel"/>
+
+  <text x="368" y="268" class="label" text-anchor="middle">Not balanced</text>
+  <text x="912" y="268" class="label" text-anchor="middle">Balanced</text>
+
+  <line x1="240" y1="426" x2="506" y2="426" stroke="#475569" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="372" y1="332" x2="372" y2="520" stroke="#475569" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="372" y1="426" x2="468" y2="426" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="468,426 442,412 442,440" fill="#f59e0b"/>
+  <line x1="372" y1="426" x2="286" y2="426" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="286,426 312,412 312,440" fill="#f59e0b"/>
+  <line x1="372" y1="426" x2="452" y2="350" stroke="#60a5fa" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="452,350 418,358 442,382" fill="#60a5fa"/>
+  <text x="368" y="548" class="body" text-anchor="middle">horizontal parts cancel, but the upward part remains</text>
+
+  <line x1="784" y1="426" x2="1050" y2="426" stroke="#475569" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="916" y1="332" x2="916" y2="520" stroke="#475569" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="916" y1="426" x2="1012" y2="426" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="1012,426 986,412 986,440" fill="#f59e0b"/>
+  <line x1="916" y1="426" x2="830" y2="426" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="830,426 856,412 856,440" fill="#f59e0b"/>
+  <line x1="916" y1="426" x2="996" y2="350" stroke="#60a5fa" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="996,350 962,358 986,382" fill="#60a5fa"/>
+  <line x1="916" y1="426" x2="916" y2="502" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="916,502 902,476 930,476" fill="#34d399"/>
+  <text x="912" y="548" class="body" text-anchor="middle">the extra vertical force cancels Fy, so the resultant is zero</text>
+</svg>

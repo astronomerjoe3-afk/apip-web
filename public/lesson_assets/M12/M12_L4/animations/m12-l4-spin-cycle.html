@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Spin cycle</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: radial-gradient(circle at top, #0f172a, #111827); color: white; display: grid; place-items: center; min-height: 100vh; }
+  .wrap { width: min(980px, 92vw); padding: 36px; border-radius: 28px; background: rgba(15, 23, 42, 0.84); border: 1px solid #93c5fd; }
+  .title { font-size: 40px; font-weight: 800; text-align: center; }
+  .desc { margin-top: 14px; text-align: center; color: #cbd5e1; font-size: 21px; }
+  .stage { margin-top: 30px; min-height: 320px; display: grid; place-items: center; }
+  .coil { width: 240px; height: 160px; border: 10px solid #60a5fa; animation: spin 5s linear infinite; transform-origin: center center; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Spin cycle</div>
+    <div class="desc">Opposite side-kicks create torque, and the commutator keeps the overall motor rotation continuing in the same direction.</div>
+    <div class="stage"><div class="coil"></div></div>
+  </div>
+</body>
+</html>

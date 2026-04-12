@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#fff7ed" stroke="#ea580c" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#c2410c" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Decay Equations Balance Nucleons While Activity Tracks Rate
+  </text>
+  <text x="700" y="140" fill="#9a3412" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    The equation tells you what changes in the nuclide. Activity tells you how many decays happen each second.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#fdba74" stroke-width="3"/>
+  <rect x="126" y="226" width="596" height="486" rx="30" fill="#fff7ed" stroke="#fed7aa" stroke-width="2.5"/>
+  <rect x="754" y="226" width="520" height="486" rx="30" fill="#fff7ed" stroke="#fed7aa" stroke-width="2.5"/>
+
+  <text x="424" y="268" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Equation balance
+  </text>
+  <text x="1014" y="268" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Activity curve
+  </text>
+
+  <rect x="176" y="324" width="500" height="120" rx="24" fill="#ffffff" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="426" y="378" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    226 Ra -> 222 Rn + 4 He
+  </text>
+  <text x="426" y="414" fill="#9a3412" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    alpha decay keeps nucleon number and proton number balanced
+  </text>
+
+  <rect x="176" y="484" width="500" height="120" rx="24" fill="#ffffff" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="426" y="538" fill="#c2410c" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    14 C -> 14 N + beta- + antinu
+  </text>
+  <text x="426" y="574" fill="#9a3412" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    beta decay changes proton count but keeps total nucleon count the same
+  </text>
+
+  <line x1="814" y1="618" x2="1186" y2="618" stroke="#7c2d12" stroke-width="4"/>
+  <line x1="814" y1="346" x2="814" y2="618" stroke="#7c2d12" stroke-width="4"/>
+  <text x="1200" y="626" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">time</text>
+  <text x="800" y="360" fill="#7c2d12" font-size="18" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="end">activity</text>
+  <path d="M834 392 C914 416, 994 492, 1160 588" fill="none" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+  <line x1="934" y1="346" x2="934" y2="618" stroke="#fed7aa" stroke-width="3" stroke-dasharray="8 10"/>
+  <line x1="1048" y1="346" x2="1048" y2="618" stroke="#fed7aa" stroke-width="3" stroke-dasharray="8 10"/>
+  <text x="982" y="420" fill="#b91c1c" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    becquerel = decays per second
+  </text>
+  <text x="1010" y="652" fill="#7c2d12" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    what changes and how fast are linked, but not the same idea
+  </text>
+</svg>

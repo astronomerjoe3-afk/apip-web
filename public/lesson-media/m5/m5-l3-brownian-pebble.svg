@@ -1,0 +1,46 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="40" fill="#F8FBFF"/>
+  <rect x="28" y="28" width="1144" height="704" rx="34" fill="#FFFFFF" stroke="#D8E7F7" stroke-width="4"/>
+  <text x="72" y="100" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
+    Brownian motion reveals unseen collisions
+  </text>
+  <text x="72" y="146" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <tspan x="72" dy="0">The large Wander Pebble jitters because surrounding gas particles</tspan>
+    <tspan x="72" dy="28">hit it unevenly from changing directions.</tspan>
+  </text>
+
+  <rect x="70" y="192" width="1060" height="420" rx="30" fill="#EFF6FF" stroke="#93C5FD" stroke-width="4"/>
+  <g fill="#38BDF8">
+    <circle cx="150" cy="300" r="12"/>
+    <circle cx="258" cy="256" r="12"/>
+    <circle cx="356" cy="362" r="12"/>
+    <circle cx="474" cy="274" r="12"/>
+    <circle cx="598" cy="340" r="12"/>
+    <circle cx="702" cy="242" r="12"/>
+    <circle cx="816" cy="370" r="12"/>
+    <circle cx="934" cy="286" r="12"/>
+    <circle cx="1040" cy="352" r="12"/>
+    <circle cx="218" cy="438" r="12"/>
+    <circle cx="392" cy="486" r="12"/>
+    <circle cx="548" cy="446" r="12"/>
+    <circle cx="744" cy="480" r="12"/>
+    <circle cx="918" cy="440" r="12"/>
+  </g>
+
+  <path d="M246 482C302 430 338 516 398 456C440 414 472 502 534 448C592 398 634 486 696 434C742 396 782 466 852 418C900 386 960 430 1018 374" stroke="#EF4444" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1018" cy="374" r="22" fill="#F97316"/>
+  <text x="860" y="332" fill="#C2410C" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Wander Pebble</text>
+  <text x="838" y="364" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">Visible particle, not self-powered</text>
+
+  <rect x="118" y="540" width="336" height="88" rx="22" fill="#FFFFFF" stroke="#38BDF8" stroke-width="4"/>
+  <text x="144" y="580" fill="#0369A1" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Gas crowd</text>
+  <text x="144" y="612" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">Far-apart particles moving freely</text>
+
+  <rect x="500" y="540" width="274" height="88" rx="22" fill="#FFFFFF" stroke="#EF4444" stroke-width="4"/>
+  <text x="526" y="580" fill="#B91C1C" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Random path</text>
+  <text x="526" y="612" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">Uneven collisions change direction</text>
+
+  <rect x="814" y="540" width="252" height="88" rx="22" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <text x="840" y="580" fill="#C2410C" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Key evidence</text>
+  <text x="840" y="612" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="20">Invisible particles are moving</text>
+</svg>

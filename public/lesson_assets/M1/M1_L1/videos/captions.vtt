@@ -1,0 +1,353 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.385
+This lesson becomes much easier when the graph is read as a progress log rather than as a sketch of the path.
+
+2
+00:00:05.385 --> 00:00:10.769
+The vertical axis tells how much distance has been completed by a certain time.
+
+3
+00:00:10.769 --> 00:00:16.154
+The horizontal axis tells how much time has passed.
+
+4
+00:00:16.154 --> 00:00:21.538
+So the line is not showing hills, corners, or bends in the route.
+
+5
+00:00:21.538 --> 00:00:26.923
+It is showing how progress accumulates as the mission clock runs.
+
+6
+00:00:26.923 --> 00:00:32.307
+Once that distinction is secure, the graph starts to read like a motion journal instead of a confusing map.
+
+7
+00:00:32.307 --> 00:00:37.692
+Keep this takeaway in view: A distance-time graph is a record of accumulated progress, not a picture of the route itself.
+
+8
+00:00:37.692 --> 00:00:43.076
+Vertical axis means distance.
+
+9
+00:00:43.076 --> 00:00:48.461
+Graph height tells the recorded distance by that time.
+
+10
+00:00:48.461 --> 00:00:53.845
+Horizontal axis means time.
+
+11
+00:00:53.845 --> 00:00:59.230
+The mission clock runs from left to right.
+
+12
+00:00:59.230 --> 00:01:05.720
+Look at the mission-log graph carefully.
+
+13
+00:01:05.720 --> 00:01:12.210
+A higher point means more distance has been recorded by that time.
+
+14
+00:01:12.210 --> 00:01:18.700
+A rising straight segment means the traveller is moving steadily because distance is being added at a constant rate.
+
+15
+00:01:18.700 --> 00:01:25.190
+A flat section means the time is still increasing while the distance stays fixed, so the traveller is stopped.
+
+16
+00:01:25.190 --> 00:01:31.680
+The visual labels matter because they pin the meaning directly to the graph features and stop the mind from drifting back toward map thinking.
+
+17
+00:01:31.680 --> 00:01:38.170
+Keep this takeaway in view: Graph height and graph shape work together to tell the motion story.
+
+18
+00:01:38.170 --> 00:01:44.660
+Height: A higher point means a larger recorded distance by that time.
+
+19
+00:01:44.660 --> 00:01:51.150
+Rising line: Distance is being added as time passes, so motion is happening.
+
+20
+00:01:51.150 --> 00:01:56.251
+A helpful analogy is a quest journal.
+
+21
+00:01:56.251 --> 00:02:01.352
+Each chapter records how much ground has been completed by a certain moment.
+
+22
+00:02:01.352 --> 00:02:06.453
+A rising chapter means progress is being added.
+
+23
+00:02:06.453 --> 00:02:11.554
+A flat chapter means time is passing with no new progress.
+
+24
+00:02:11.554 --> 00:02:16.655
+A steeper chapter means progress is being added more quickly.
+
+25
+00:02:16.655 --> 00:02:21.755
+This analogy matters because it turns the graph into a time-ordered story log, which is exactly how the worked example needs to be read.
+
+26
+00:02:21.755 --> 00:02:26.856
+Keep this takeaway in view: Read the graph like a journal of progress chapters, one segment at a time.
+
+27
+00:02:26.856 --> 00:02:31.957
+Rising chapter means moving.
+
+28
+00:02:31.957 --> 00:02:37.058
+The traveller adds progress while the mission clock advances.
+
+29
+00:02:37.058 --> 00:02:42.159
+Flat chapter means paused.
+
+30
+00:02:42.159 --> 00:02:47.260
+The story continues in time, but the traveller is not adding distance.
+
+31
+00:02:47.260 --> 00:02:52.686
+This lesson also locks in the first important graph-gradient idea.
+
+32
+00:02:52.686 --> 00:02:58.112
+On a distance-time graph, the slope is change in distance divided by change in time.
+
+33
+00:02:58.112 --> 00:03:03.538
+That gives the pace, or speed, on that segment.
+
+34
+00:03:03.538 --> 00:03:08.963
+So if one straight segment is steeper than another, it represents faster motion.
+
+35
+00:03:08.963 --> 00:03:14.389
+A zero slope means no change in distance, which is why a flat section means a stop.
+
+36
+00:03:14.389 --> 00:03:19.815
+The same geometry can mean something else on a different graph type later, but here the axes make slope belong to pace.
+
+37
+00:03:19.815 --> 00:03:25.241
+Keep this takeaway in view: On a distance-time graph, steepness is pace, not position and not route shape.
+
+38
+00:03:25.241 --> 00:03:30.667
+More steep: More distance is added each second, so the pace is larger.
+
+39
+00:03:30.667 --> 00:03:36.092
+Less steep: Distance still increases, but more slowly.
+
+40
+00:03:36.092 --> 00:03:41.518
+pace = slope = change in distance / change in time.
+
+41
+00:03:41.518 --> 00:03:46.944
+The axes decide the meaning.
+
+42
+00:03:46.944 --> 00:03:52.370
+Here, slope belongs to speed or pace.
+
+43
+00:03:52.370 --> 00:03:57.590
+The comparison graph deepens the lesson.
+
+44
+00:03:57.590 --> 00:04:02.810
+Two runs can finish at the same final distance and at the same final time, but still have different pace histories.
+
+45
+00:04:02.810 --> 00:04:08.030
+One traveller may pause and then catch up.
+
+46
+00:04:08.030 --> 00:04:13.250
+Another may keep one steady slope throughout.
+
+47
+00:04:13.250 --> 00:04:18.470
+The final point alone cannot reveal the whole motion story.
+
+48
+00:04:18.470 --> 00:04:23.690
+That is why graph reading must be done section by section instead of by glancing only at the ending.
+
+49
+00:04:23.690 --> 00:04:28.910
+Keep this takeaway in view: The final point is not the whole story; the segments between the endpoints matter too.
+
+50
+00:04:28.910 --> 00:04:34.130
+Run A: Contains a flat paused section and then catches up later.
+
+51
+00:04:34.130 --> 00:04:39.350
+Run B: Keeps one steady slope from start to finish.
+
+52
+00:04:39.350 --> 00:04:44.862
+A common trap is to look at a high point on the graph and say the traveller must be moving fast there.
+
+53
+00:04:44.862 --> 00:04:50.374
+That is not what graph height means on a distance-time graph.
+
+54
+00:04:50.374 --> 00:04:55.887
+Height tells how much distance has already been covered.
+
+55
+00:04:55.887 --> 00:05:01.399
+Pace comes from the slope.
+
+56
+00:05:01.399 --> 00:05:06.911
+A line can sit high on the graph and still be flat, which would mean the traveller is stopped at that time.
+
+57
+00:05:06.911 --> 00:05:12.423
+Keeping height and slope in separate mental boxes is one of the biggest wins of this lesson.
+
+58
+00:05:12.423 --> 00:05:17.936
+Keep this takeaway in view: Distance-time graphs answer the distance question with height and the pace question with slope.
+
+59
+00:05:17.936 --> 00:05:23.448
+Height tells recorded distance.
+
+60
+00:05:23.448 --> 00:05:28.960
+Slope tells pace on that segment.
+
+61
+00:05:28.960 --> 00:05:32.361
+Try three checks.
+
+62
+00:05:32.361 --> 00:05:35.761
+What does a flat section mean?
+
+63
+00:05:35.761 --> 00:05:39.162
+A stop, because time passes while distance stays the same.
+
+64
+00:05:39.162 --> 00:05:42.563
+What does a steeper rising section mean?
+
+65
+00:05:42.563 --> 00:05:45.964
+Faster motion, because more distance is added each second.
+
+66
+00:05:45.964 --> 00:05:49.364
+And if two graphs finish at the same final point, must the journeys have been identical?
+
+67
+00:05:49.364 --> 00:05:52.765
+No.
+
+68
+00:05:52.765 --> 00:05:56.166
+Their pace histories can still differ.
+
+69
+00:05:56.166 --> 00:05:59.566
+Those three checks are enough to make the example feel much more straightforward.
+
+70
+00:05:59.566 --> 00:06:02.967
+Keep this takeaway in view: Segment meaning first, whole story second.
+
+71
+00:06:02.967 --> 00:06:06.368
+Flat section means stopped.
+
+72
+00:06:06.368 --> 00:06:09.769
+Time increases while distance stays unchanged.
+
+73
+00:06:09.769 --> 00:06:13.169
+Steeper rise means faster.
+
+74
+00:06:13.169 --> 00:06:16.570
+The pace is greater on that segment.
+
+75
+00:06:16.570 --> 00:06:21.453
+You are ready for the worked example now.
+
+76
+00:06:21.453 --> 00:06:26.336
+A graph rises from zero to twenty-four metres in six seconds, stays flat for four seconds, then rises from twenty-four metres to thirty-six metres in three seconds.
+
+77
+00:06:26.336 --> 00:06:31.219
+Read it one segment at a time.
+
+78
+00:06:31.219 --> 00:06:36.101
+First rising segment: steady motion.
+
+79
+00:06:36.101 --> 00:06:40.984
+Flat segment: stop.
+
+80
+00:06:40.984 --> 00:06:45.867
+Final rising segment: moving again.
+
+81
+00:06:45.867 --> 00:06:50.750
+Because the final rise is steeper than the first one, the traveller moves again and this time faster than before.
+
+82
+00:06:50.750 --> 00:06:55.633
+So the full story is move steadily, stop, then move again faster than before.
+
+83
+00:06:55.633 --> 00:07:00.516
+Keep this takeaway in view: The worked example is ready: read the mission log like a timed story of progress.
+
+84
+00:07:00.516 --> 00:07:05.399
+Step 1: Read each segment in order from left to right.
+
+85
+00:07:05.399 --> 00:07:10.281
+Step 2: Use flat and steepness clues to identify stop and faster motion.
+
+86
+00:07:10.281 --> 00:07:15.164
+rise -> move steadily.
+
+87
+00:07:15.164 --> 00:07:20.047
+flat -> stopped.
+
+88
+00:07:20.047 --> 00:07:24.930
+Tell the story segment by segment instead of staring only at the final point.

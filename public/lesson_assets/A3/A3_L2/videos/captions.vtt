@@ -1,0 +1,401 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.245
+This lesson asks the learner to move beyond simple overlap and see a stable standing pattern.
+
+2
+00:00:05.245 --> 00:00:10.491
+A stationary wave is not a progressive wave that stopped moving.
+
+3
+00:00:10.491 --> 00:00:15.736
+It is formed when two matched waves travel in opposite directions and superpose under the right boundary conditions.
+
+4
+00:00:15.736 --> 00:00:20.981
+Some points remain permanently still.
+
+5
+00:00:20.981 --> 00:00:26.227
+These are the nodes.
+
+6
+00:00:26.227 --> 00:00:31.472
+Other points oscillate most strongly.
+
+7
+00:00:31.472 --> 00:00:36.717
+These are the antinodes.
+
+8
+00:00:36.717 --> 00:00:41.963
+The pattern survives only when the system length and wavelength fit together properly.
+
+9
+00:00:41.963 --> 00:00:47.208
+That is why harmonic language appears.
+
+10
+00:00:47.208 --> 00:00:52.453
+The standing pattern is therefore both a superposition story and a boundary-fit story, and the worked example depends on keeping both ideas together.
+
+11
+00:00:52.453 --> 00:00:57.699
+Keep this takeaway in view: A stationary wave is a standing fit between boundary conditions, opposite-traveling waves, nodes, and antinodes.
+
+12
+00:00:57.699 --> 00:01:02.944
+Built from means two waves.
+
+13
+00:01:02.944 --> 00:01:08.189
+The standing pattern comes from matched opposite-traveling waves, not from one wave freezing.
+
+14
+00:01:08.189 --> 00:01:13.435
+Quiet points means nodes.
+
+15
+00:01:13.435 --> 00:01:18.680
+Nodes remain at zero displacement throughout the motion.
+
+16
+00:01:18.680 --> 00:01:24.770
+This diagram helps because it makes a standing pattern feel structural rather than decorative.
+
+17
+00:01:24.770 --> 00:01:30.860
+The nodes are not temporary still points.
+
+18
+00:01:30.860 --> 00:01:36.950
+They stay fixed.
+
+19
+00:01:36.950 --> 00:01:43.040
+The antinodes are not random bulges.
+
+20
+00:01:43.040 --> 00:01:49.130
+They mark the strongest oscillation.
+
+21
+00:01:49.130 --> 00:01:55.220
+Once the learner sees that, the mode shape begins to look constrained by the ends of the system.
+
+22
+00:01:55.220 --> 00:02:01.310
+The pattern fits the boundaries in a particular way, and that fit is what allows certain harmonics and rejects others.
+
+23
+00:02:01.310 --> 00:02:07.400
+The diagram therefore ties together three things at once: opposite-traveling-wave overlap, fixed quiet points, and the allowed geometry of the system.
+
+24
+00:02:07.400 --> 00:02:13.490
+Keep this takeaway in view: A stationary-wave diagram is strongest when it makes the boundary fit as visible as the oscillation itself.
+
+25
+00:02:13.490 --> 00:02:19.580
+Nodes: Fixed points of zero displacement that remain quiet throughout the oscillation.
+
+26
+00:02:19.580 --> 00:02:25.670
+Antinodes: Points of maximum oscillation where the standing pattern breathes most strongly.
+
+27
+00:02:25.670 --> 00:02:30.818
+A useful analogy is a skipping rope or string that is driven until a clean standing pattern appears.
+
+28
+00:02:30.818 --> 00:02:35.967
+The rope does not choose a random shape.
+
+29
+00:02:35.967 --> 00:02:41.115
+It settles into patterns that fit the ends.
+
+30
+00:02:41.115 --> 00:02:46.264
+In those patterns, some points stay almost still while other regions move strongly.
+
+31
+00:02:46.264 --> 00:02:51.412
+That is a great bridge into nodes and antinodes.
+
+32
+00:02:51.412 --> 00:02:56.561
+The analogy also helps with harmonics.
+
+33
+00:02:56.561 --> 00:03:01.709
+The first clean mode, the next clean mode, and the next each represent another allowed fit, not just a busier drawing.
+
+34
+00:03:01.709 --> 00:03:06.858
+The rope image keeps boundary fit and visible shape tied together in one memory hook.
+
+35
+00:03:06.858 --> 00:03:12.006
+Keep this takeaway in view: The rope analogy works because it turns harmonics into clean allowed fits rather than abstract labels.
+
+36
+00:03:12.006 --> 00:03:17.155
+Fixed ends means boundary fit.
+
+37
+00:03:17.155 --> 00:03:22.303
+The allowed pattern has to satisfy what the ends of the system demand.
+
+38
+00:03:22.303 --> 00:03:27.452
+Still points means nodes.
+
+39
+00:03:27.452 --> 00:03:32.600
+Some points remain quiet because the opposite motions cancel there continuously.
+
+40
+00:03:32.600 --> 00:03:39.922
+The most useful relation in a fixed-boundary system is that an allowed mode fits an integer number of half-wavelengths into the length.
+
+41
+00:03:39.922 --> 00:03:47.243
+In compact form, length equals n times wavelength over two, or wavelength equals two length over n.
+
+42
+00:03:47.243 --> 00:03:54.565
+That one structure explains why only certain harmonics are allowed.
+
+43
+00:03:54.565 --> 00:04:01.887
+It also supports spacing facts that help the learner read diagrams quickly.
+
+44
+00:04:01.887 --> 00:04:09.208
+Adjacent nodes are half a wavelength apart, while a node to the nearest antinode is a quarter wavelength.
+
+45
+00:04:09.208 --> 00:04:16.530
+The formulas therefore translate the visible mode shape into a reliable measurement routine.
+
+46
+00:04:16.530 --> 00:04:23.852
+Keep this takeaway in view: Standing-wave formulas are really boundary-fit formulas written in geometric form.
+
+47
+00:04:23.852 --> 00:04:31.173
+Integer count: The harmonic number counts how many half-wavelength segments fit into the system.
+
+48
+00:04:31.173 --> 00:04:38.495
+Quick diagram read: Counting loops or antinode regions often helps identify the mode before any equation is used.
+
+49
+00:04:38.495 --> 00:04:45.817
+system length = n x wavelength / 2.
+
+50
+00:04:45.817 --> 00:04:53.138
+adjacent nodes are wavelength / 2 apart.
+
+51
+00:04:53.138 --> 00:05:00.460
+These relations work best when the learner can see the half-wavelength fit across the whole standing pattern.
+
+52
+00:05:00.460 --> 00:05:06.055
+A strong routine is to start by checking the boundary condition.
+
+53
+00:05:06.055 --> 00:05:11.651
+Then identify the nodes and antinodes in the displayed pattern.
+
+54
+00:05:11.651 --> 00:05:17.246
+Then count how many half-wavelength segments fit into the length or how many loop regions appear.
+
+55
+00:05:17.246 --> 00:05:22.842
+Only after that should the learner name the harmonic or calculate the wavelength.
+
+56
+00:05:22.842 --> 00:05:28.437
+This order matters because many wrong answers come from naming the mode too early and then forcing the geometry to match.
+
+57
+00:05:28.437 --> 00:05:34.033
+The safer route is fit first, count second, name third.
+
+58
+00:05:34.033 --> 00:05:39.628
+Keep this takeaway in view: Fit-count-name is the safest standing-wave routine because it lets the geometry lead the algebra.
+
+59
+00:05:39.628 --> 00:05:45.224
+Step 1 means check the ends.
+
+60
+00:05:45.224 --> 00:05:50.819
+A standing-wave answer must respect the boundary condition before anything else.
+
+61
+00:05:50.819 --> 00:05:56.415
+Step 2 means count the fit.
+
+62
+00:05:56.415 --> 00:06:02.010
+Use nodes, antinodes, or half-wavelength segments to read the mode shape.
+
+63
+00:06:02.010 --> 00:06:08.225
+This extra step matters because many learners can identify one stationary-wave diagram but still do not feel how the whole harmonic ladder is organized.
+
+64
+00:06:08.225 --> 00:06:14.439
+The fundamental is the simplest fit.
+
+65
+00:06:14.439 --> 00:06:20.654
+Higher harmonics place more half-wavelength segments into the same length.
+
+66
+00:06:20.654 --> 00:06:26.868
+That means more nodes, more antinodes, and a shorter wavelength for the same system length.
+
+67
+00:06:26.868 --> 00:06:33.083
+Once that scaling idea is secure, the learner can move between diagrams, mode numbers, and formulas more smoothly.
+
+68
+00:06:33.083 --> 00:06:39.297
+The harmonics stop looking like separate facts and start looking like one fitted sequence.
+
+69
+00:06:39.297 --> 00:06:45.512
+Keep this takeaway in view: The harmonic ladder is one scaling story: same boundary, more fitted segments, shorter wavelength.
+
+70
+00:06:45.512 --> 00:06:51.726
+Fundamental means largest wavelength.
+
+71
+00:06:51.726 --> 00:06:57.941
+The first harmonic is the simplest allowed fit and therefore has the longest wavelength.
+
+72
+00:06:57.941 --> 00:07:04.155
+Higher harmonic means more segments.
+
+73
+00:07:04.155 --> 00:07:10.370
+As harmonic number rises, more half-wavelength sections fit into the same length.
+
+74
+00:07:10.370 --> 00:07:14.277
+Try four checks.
+
+75
+00:07:14.277 --> 00:07:18.185
+Is a stationary wave one frozen progressive wave?
+
+76
+00:07:18.185 --> 00:07:22.092
+No.
+
+77
+00:07:22.092 --> 00:07:25.999
+Are nodes the strongest moving points?
+
+78
+00:07:25.999 --> 00:07:29.907
+No, those are antinodes.
+
+79
+00:07:29.907 --> 00:07:33.814
+Do adjacent nodes sit half a wavelength apart?
+
+80
+00:07:33.814 --> 00:07:37.721
+Yes.
+
+81
+00:07:37.721 --> 00:07:41.629
+And does every imaginable wavelength fit cleanly between fixed ends?
+
+82
+00:07:41.629 --> 00:07:45.536
+No, only the allowed harmonics do.
+
+83
+00:07:45.536 --> 00:07:49.443
+Those checks show whether the learner is still relying on a surface picture or is really reading the fitted standing pattern.
+
+84
+00:07:49.443 --> 00:07:53.351
+Keep this takeaway in view: The worked example is ready once the learner can defend nodes, antinodes, and harmonic fit as one coherent story.
+
+85
+00:07:53.351 --> 00:07:57.258
+Origin means two-wave pattern.
+
+86
+00:07:57.258 --> 00:08:01.165
+A stationary wave is created by matched opposite-traveling waves.
+
+87
+00:08:01.165 --> 00:08:05.073
+Quiet points means nodes.
+
+88
+00:08:05.073 --> 00:08:08.980
+Nodes remain at zero displacement rather than becoming the strongest oscillators.
+
+89
+00:08:08.980 --> 00:08:14.703
+You are ready for the worked example now.
+
+90
+00:08:14.703 --> 00:08:20.425
+Begin by identifying the boundary condition and the visible pattern shape.
+
+91
+00:08:20.425 --> 00:08:26.148
+Then count nodes, antinodes, or half-wavelength segments to determine the mode.
+
+92
+00:08:26.148 --> 00:08:31.870
+Then use the fitted harmonic relation to find wavelength or spacing.
+
+93
+00:08:31.870 --> 00:08:37.593
+The best answers in this lesson sound geometric before they sound algebraic.
+
+94
+00:08:37.593 --> 00:08:43.315
+They explain why the pattern fits, and only then do they calculate the missing quantity.
+
+95
+00:08:43.315 --> 00:08:49.038
+Keep this takeaway in view: The worked example becomes stable once the learner reads the standing pattern as a fitted harmonic before calculating.
+
+96
+00:08:49.038 --> 00:08:54.760
+Do not guess the harmonic: Use the visible node and antinode structure to justify the mode number.
+
+97
+00:08:54.760 --> 00:09:00.483
+Use spacing wisely: Node spacing and loop count are often faster than memorizing a picture label.
+
+98
+00:09:00.483 --> 00:09:06.205
+identify boundary condition and visible standing pattern.
+
+99
+00:09:06.205 --> 00:09:11.928
+count fitted half-wavelength segments or loop regions.
+
+100
+00:09:11.928 --> 00:09:17.650
+A strong solution proves the mode from the picture before it trusts the equation.

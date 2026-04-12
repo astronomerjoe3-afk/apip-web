@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f7fbff"/>
+  <rect x="28" y="26" width="1344" height="768" rx="40" fill="#eef6ff" stroke="#3b82f6" stroke-width="3"/>
+
+  <text x="700" y="96" fill="#1d4ed8" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Capacitance Is Charge Stored Per Volt
+  </text>
+  <text x="700" y="140" fill="#1e40af" font-size="23" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">
+    Holding voltage fixed lets you see what capacitance really measures: how much separated charge the capacitor can store for each volt.
+  </text>
+
+  <rect x="84" y="186" width="1232" height="566" rx="34" fill="#ffffff" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="126" y="226" width="548" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+  <rect x="726" y="226" width="548" height="486" rx="30" fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5"/>
+
+  <text x="400" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Same voltage, different capacitance
+  </text>
+  <text x="1000" y="268" fill="#1d4ed8" font-size="30" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    Why capacitance changes
+  </text>
+
+  <rect x="170" y="340" width="110" height="240" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="362" y="340" width="110" height="240" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="476" y="340" width="110" height="240" rx="16" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="226" y="340" width="136" height="240" rx="16" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 10"/>
+
+  <circle cx="204" cy="374" r="10" fill="#ef4444"/><circle cx="204" cy="420" r="10" fill="#ef4444"/><circle cx="204" cy="466" r="10" fill="#ef4444"/><circle cx="204" cy="512" r="10" fill="#ef4444"/>
+  <circle cx="552" cy="374" r="10" fill="#1d4ed8"/><circle cx="552" cy="420" r="10" fill="#1d4ed8"/><circle cx="552" cy="466" r="10" fill="#1d4ed8"/><circle cx="552" cy="512" r="10" fill="#1d4ed8"/>
+
+  <circle cx="396" cy="360" r="10" fill="#ef4444"/><circle cx="396" cy="396" r="10" fill="#ef4444"/><circle cx="396" cy="432" r="10" fill="#ef4444"/><circle cx="396" cy="468" r="10" fill="#ef4444"/><circle cx="396" cy="504" r="10" fill="#ef4444"/><circle cx="396" cy="540" r="10" fill="#ef4444"/>
+  <circle cx="514" cy="360" r="10" fill="#1d4ed8"/><circle cx="514" cy="396" r="10" fill="#1d4ed8"/><circle cx="514" cy="432" r="10" fill="#1d4ed8"/><circle cx="514" cy="468" r="10" fill="#1d4ed8"/><circle cx="514" cy="504" r="10" fill="#1d4ed8"/><circle cx="514" cy="540" r="10" fill="#1d4ed8"/>
+
+  <text x="225" y="628" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    smaller C
+  </text>
+  <text x="225" y="660" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    less charge at same V
+  </text>
+  <text x="474" y="628" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    larger C
+  </text>
+  <text x="474" y="660" fill="#1e40af" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">
+    more charge at same V
+  </text>
+
+  <rect x="792" y="322" width="160" height="280" rx="18" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="1088" y="322" width="160" height="280" rx="18" fill="#bfdbfe" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="952" y="322" width="136" height="280" rx="18" fill="#dbeafe" stroke="#10b981" stroke-width="3"/>
+  <text x="1020" y="360" fill="#047857" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">dielectric</text>
+  <text x="1000" y="648" fill="#1e40af" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    plate area, separation, and dielectric all change storage.
+  </text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#09111f"/>
+      <stop offset="100%" stop-color="#17375c"/>
+    </linearGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 45px Arial, Helvetica, sans-serif; }
+      .subtitle { fill: #dbeafe; font: 20px Arial, Helvetica, sans-serif; }
+      .card { fill: #101b2f; stroke: #486480; stroke-width: 3; }
+      .panel { fill: #16243a; stroke: #577796; stroke-width: 2.4; }
+      .label { fill: #f8fafc; font: 700 23px Arial, Helvetica, sans-serif; }
+      .body { fill: #dbeafe; font: 18px Arial, Helvetica, sans-serif; }
+      .small { fill: #bfdbfe; font: 16px Arial, Helvetica, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="640" y="84" class="title" text-anchor="middle">Damping Changes How an Oscillator Settles</text>
+  <text x="640" y="119" class="subtitle" text-anchor="middle">
+    Underdamped, critically damped, and overdamped responses all lose energy, but they return in visibly different styles.
+  </text>
+
+  <rect x="90" y="164" width="1100" height="500" rx="34" class="card"/>
+  <rect x="126" y="214" width="300" height="390" rx="28" class="panel"/>
+  <rect x="490" y="214" width="300" height="390" rx="28" class="panel"/>
+  <rect x="854" y="214" width="300" height="390" rx="28" class="panel"/>
+
+  <text x="276" y="252" class="label" text-anchor="middle">Underdamped</text>
+  <text x="640" y="252" class="label" text-anchor="middle">Critically damped</text>
+  <text x="1004" y="252" class="label" text-anchor="middle">Overdamped</text>
+
+  <line x1="166" y1="490" x2="386" y2="490" stroke="#60748a" stroke-width="2"/>
+  <path d="M170 492 C195 408, 220 408, 245 492 S295 576, 320 492 S345 436, 370 492" fill="none" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/>
+  <text x="276" y="548" class="body" text-anchor="middle">oscillates while fading</text>
+
+  <line x1="530" y1="490" x2="750" y2="490" stroke="#60748a" stroke-width="2"/>
+  <path d="M534 348 C590 396, 628 432, 746 490" fill="none" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
+  <text x="640" y="548" class="body" text-anchor="middle">fastest return with no overshoot</text>
+
+  <line x1="894" y1="490" x2="1114" y2="490" stroke="#60748a" stroke-width="2"/>
+  <path d="M898 380 C954 416, 1006 446, 1110 490" fill="none" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+  <text x="1004" y="548" class="body" text-anchor="middle">slow return with no overshoot</text>
+
+  <text x="640" y="632" class="small" text-anchor="middle">More damping is not automatically better. The right choice depends on the job.</text>
+</svg>

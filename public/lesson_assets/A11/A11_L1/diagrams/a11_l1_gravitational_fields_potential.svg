@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#020817"/>
+  <rect x="34" y="28" width="1332" height="764" rx="38" fill="#07162d" stroke="#5ea6ff" stroke-width="3"/>
+  <text x="700" y="96" fill="#f8fbff" font-size="42" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">Gravitational Field and Potential</text>
+  <text x="700" y="136" fill="#9bc5ff" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" text-anchor="middle">One map shows force per mass. The linked well shows energy per mass.</text>
+
+  <rect x="84" y="178" width="1232" height="568" rx="34" fill="#0c203c" stroke="#274d7c" stroke-width="3"/>
+  <text x="200" y="230" fill="#9bc5ff" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">field picture</text>
+  <text x="860" y="230" fill="#9bc5ff" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">potential picture</text>
+
+  <circle cx="372" cy="456" r="104" fill="#2563eb"/>
+  <circle cx="372" cy="456" r="152" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="12 12"/>
+  <circle cx="372" cy="456" r="212" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="12 12"/>
+  <text x="372" y="468" fill="#dbeafe" font-size="34" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">mass</text>
+
+  <line x1="156" y1="456" x2="248" y2="456" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="248,456 220,440 220,472" fill="#60a5fa"/>
+  <line x1="588" y1="456" x2="496" y2="456" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="496,456 524,440 524,472" fill="#60a5fa"/>
+  <line x1="372" y1="240" x2="372" y2="332" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="372,332 356,304 388,304" fill="#60a5fa"/>
+  <line x1="372" y1="672" x2="372" y2="580" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="372,580 356,608 388,608" fill="#60a5fa"/>
+
+  <circle cx="584" cy="456" r="12" fill="#f8fafc"/>
+  <circle cx="520" cy="456" r="12" fill="#f8fafc"/>
+  <text x="602" y="414" fill="#dbeafe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">weaker g farther out</text>
+  <text x="384" y="526" fill="#dbeafe" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">stronger g</text>
+  <text x="384" y="552" fill="#dbeafe" font-size="21" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700">closer in</text>
+  <text x="372" y="708" fill="#93c5fd" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">field strength is the inward pull per unit mass</text>
+
+  <path d="M 780 284 C 844 336 872 410 922 490 C 970 568 1058 602 1180 604" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round"/>
+  <line x1="788" y1="604" x2="1180" y2="604" stroke="#274d7c" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="946" y1="604" x2="946" y2="520" stroke="#60a5fa" stroke-width="4" stroke-dasharray="12 10"/>
+  <text x="1030" y="320" fill="#dbeafe" font-size="28" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">deeper near the mass</text>
+  <text x="980" y="550" fill="#dbeafe" font-size="24" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">more negative close in</text>
+  <text x="1032" y="640" fill="#93c5fd" font-size="22" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">potential rises toward 0 at infinity</text>
+
+  <text x="700" y="780" fill="#dbeafe" font-size="26" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">Field and potential describe one gravitational landscape, but they answer different questions.</text>
+</svg>
