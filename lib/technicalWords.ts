@@ -118,6 +118,24 @@ const CURRICULUM_TECHNICAL_WORD_SUPPLEMENTS: Record<string, TechnicalWordSeed[]>
     { term: "Critically damped", aliases: ["critically damped"], meaning: "Critically damped means the system returns to equilibrium quickly without oscillating.", why_it_matters: "It is often the design target for fast settling." },
     { term: "Overdamped", aliases: ["overdamped"], meaning: "Overdamped means the system returns without oscillating but more slowly than the critically damped case.", why_it_matters: "It contrasts slow return with oscillatory fading." },
   ],
+  A8: [
+    { term: "Electric field", aliases: ["electric field", "electric fields"], meaning: "An electric field is the region where a charge experiences electric force.", why_it_matters: "It separates the source pattern in space from the force on one chosen test charge." },
+    { term: "Field strength", aliases: ["field strength", "electric field strength"], meaning: "Field strength is the force per unit positive charge at a point.", why_it_matters: "It gives the local push-per-charge value of the field." },
+    { term: "Test charge", aliases: ["test charge", "test charges"], meaning: "A test charge is a small probe charge used to reveal the field at a location.", why_it_matters: "It helps students distinguish the field from the particular force on one probe." },
+    { term: "Electric potential", aliases: ["electric potential"], meaning: "Electric potential is potential energy per unit charge at a point.", why_it_matters: "It turns the electric field into a height-map style quantity." },
+    { term: "Potential difference", aliases: ["potential difference", "voltage"], meaning: "Potential difference is the energy transferred per unit charge between two points.", why_it_matters: "It links field ideas to work and energy changes." },
+    { term: "Equipotential", aliases: ["equipotential", "equipotentials", "equipotential line", "equipotential lines"], meaning: "An equipotential is a line or surface joining points with the same electric potential.", why_it_matters: "It helps separate same-height routes from field direction." },
+    { term: "Potential gradient", aliases: ["potential gradient"], meaning: "Potential gradient is the rate of change of electric potential with distance.", why_it_matters: "It is the slope idea behind E = V / d in a uniform field." },
+    { term: "Uniform field", aliases: ["uniform field", "uniform electric field"], meaning: "A uniform field has the same magnitude and direction throughout the region considered.", why_it_matters: "It makes constant-force and constant-acceleration reasoning possible." },
+    { term: "Parallel plates", aliases: ["parallel plates"], meaning: "Parallel plates are two oppositely charged conducting plates used to produce an approximately uniform electric field.", why_it_matters: "They are the standard setup for potential-gradient reasoning." },
+    { term: "Point charge", aliases: ["point charge", "point charges"], meaning: "A point charge is an idealized charge concentrated at one point in space.", why_it_matters: "It supports radial field and Coulomb-law reasoning." },
+    { term: "Coulomb's law", aliases: ["coulomb's law", "coulomb law"], meaning: "Coulomb's law gives the force between point charges in terms of charge size and separation.", why_it_matters: "It is the formal inverse-square rule for electrostatic interactions." },
+    { term: "Inverse-square law", aliases: ["inverse-square law", "inverse square law"], meaning: "An inverse-square law means a quantity falls as one over the square of the distance.", why_it_matters: "It explains why point-charge force and field weaken rapidly with separation." },
+    { term: "Magnetic flux density", aliases: ["magnetic flux density"], meaning: "Magnetic flux density is the measure of magnetic field strength used in force equations.", why_it_matters: "It appears as B in motor-effect and charged-particle formulas." },
+    { term: "Motor effect", aliases: ["motor effect"], meaning: "The motor effect is the force on a current-carrying conductor in a magnetic field.", why_it_matters: "It is the bridge from magnetic force to turning motion in motors." },
+    { term: "Centripetal force", aliases: ["centripetal force"], meaning: "Centripetal force is the inward resultant force needed for circular motion.", why_it_matters: "It explains how magnetic force can keep a charged particle in a curved path." },
+    { term: "Turning couple", aliases: ["turning couple", "couple", "torque"], meaning: "A turning couple is a pair of equal and opposite forces separated by a distance that causes rotation.", why_it_matters: "It is the mechanism behind the turning of a current loop in a motor." },
+  ],
 };
 
 const FORMULA_SYMBOL_TECHNICAL_WORDS: TechnicalWordSeed[] = [

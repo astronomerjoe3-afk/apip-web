@@ -43,7 +43,7 @@ function assetPath(code: string, slug: string): string {
 }
 
 function lessonFromQuestionItem(itemId: string): [string, LessonEntry] | undefined {
-  const match = String(itemId || "").toUpperCase().match(/^(A(?:6|7|8|9|10|11))L([1-6])_[A-Z]+\d+$/);
+  const match = String(itemId || "").toUpperCase().match(/^(A(?:6|7|8|9|10|11))L([1-6])(?:[_-])[A-Z]+(?:[_-])?\d+$/);
   if (!match) return undefined;
   const code = `${match[1]}_L${match[2]}`;
   const lesson = LESSONS[code];

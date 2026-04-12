@@ -420,6 +420,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "N/C, N, C",
     },
     {
+      standardFormula: "E = k Q / r^2",
+      meaning: "The field due to a point charge depends on the source charge and falls with the square of the distance.",
+      conditions: "Use for radial field strength around a point charge.",
+      unitsText: "N/C, C, m",
+    },
+    {
       standardFormula: "F = q E",
       meaning: "A charge placed in an electric field feels a force set by both its charge and the local field.",
       conditions: "Use when finding the electric force on a charge in a known field.",
@@ -432,6 +438,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       meaning: "A change in electric potential corresponds to a change in electric potential energy for a charge.",
       conditions: "Use when linking potential difference to energy transfer.",
       unitsText: "J, C, V",
+    },
+    {
+      standardFormula: "V = k Q / r",
+      meaning: "Electric potential around a point charge depends on charge size and decreases with distance.",
+      conditions: "Use for point-charge potential comparisons.",
+      unitsText: "V, C, m",
     },
     {
       standardFormula: "V = W / Q",
@@ -494,6 +506,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       meaning: "The radius of the magnetic orbit grows with particle momentum and shrinks with stronger field or larger charge.",
       conditions: "Use after equating magnetic force with centripetal force.",
       unitsText: "m, kg, m/s, C, T",
+    },
+    {
+      standardFormula: "T = 2 pi m / (q B)",
+      meaning: "The time for one circular orbit in a uniform magnetic field depends on particle mass, charge, and field strength.",
+      conditions: "Use for orbital period when the particle moves perpendicular to a uniform magnetic field.",
+      unitsText: "s, kg, C, T",
     },
     {
       standardFormula: "F = B I L",
