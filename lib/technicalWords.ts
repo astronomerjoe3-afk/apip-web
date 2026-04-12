@@ -432,12 +432,16 @@ const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
   M6: [
     { term: "Specific heat capacity", aliases: ["specific heat capacity"], meaning: "Specific heat capacity is the energy needed to raise the temperature of one kilogram of a substance by one degree Celsius or one kelvin.", why_it_matters: "It explains why some materials warm up more slowly than others." },
     { term: "Latent heat", aliases: ["latent heat"], meaning: "Latent heat is energy transferred during a change of state without a temperature change.", why_it_matters: "It shows that energy can loosen particle bonds instead of raising average motion." },
+    { term: "Specific latent heat", aliases: ["specific latent heat"], meaning: "Specific latent heat is the energy needed per kilogram for a change of state at constant temperature.", why_it_matters: "It links the state-change bill to the mass of material involved." },
     { term: "Conduction", aliases: ["conduction"], meaning: "Conduction is thermal energy transfer through a material by particle or electron interactions.", why_it_matters: "It is strongest in good conductors and along direct contact paths." },
     { term: "Convection", aliases: ["convection"], meaning: "Convection is thermal energy transfer by the bulk movement of a fluid.", why_it_matters: "Warmer, less dense fluid can rise and carry energy with it." },
     { term: "Radiation", aliases: ["radiation"], meaning: "Radiation is thermal energy transfer by electromagnetic waves.", why_it_matters: "It can travel through empty space, unlike conduction and convection." },
     { term: "Thermal equilibrium", aliases: ["thermal equilibrium"], meaning: "Thermal equilibrium is the state in which there is no net thermal energy transfer between objects in contact.", why_it_matters: "It marks the point where temperatures have balanced out." },
     { term: "Insulator", aliases: ["insulator", "thermal insulator"], meaning: "An insulator is a material that resists the transfer of thermal energy.", why_it_matters: "It slows conduction and helps retain energy." },
     { term: "Conductor", aliases: ["conductor", "thermal conductor"], meaning: "A conductor is a material that allows thermal energy to transfer easily.", why_it_matters: "It helps explain why metals often heat up and cool down quickly." },
+    { term: "Absorber", aliases: ["absorber", "good absorber"], meaning: "An absorber is a surface or material that takes in thermal radiation efficiently.", why_it_matters: "Dark dull surfaces often warm faster because they are better absorbers." },
+    { term: "Emitter", aliases: ["emitter", "good emitter"], meaning: "An emitter is a surface or material that gives out thermal radiation efficiently.", why_it_matters: "The same surface ideas used for absorption also matter for energy loss by radiation." },
+    { term: "Vacuum", aliases: ["vacuum"], meaning: "A vacuum is a region with no particles of matter.", why_it_matters: "It blocks conduction and convection, so radiation becomes the transfer route across the gap." },
   ],
   M7: [
     { term: "Transverse wave", aliases: ["transverse", "transverse wave"], meaning: "A transverse wave has oscillations perpendicular to the direction of travel.", why_it_matters: "You must compare local motion with propagation to classify the wave correctly." },

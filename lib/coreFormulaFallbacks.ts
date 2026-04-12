@@ -127,23 +127,29 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
   M6_L1: [
     { standardFormula: "temperature change depends on energy transferred, mass, and material", meaning: "The same energy input does not force the same temperature rise in every sample.", conditions: "Use before choosing which thermal quantity is being compared.", unitsText: "" },
+    { standardFormula: "same temperature does not imply same total thermal energy", meaning: "Temperature is a current reading, not the whole energy story.", conditions: "Use when two samples share a thermometer reading but have very different masses.", unitsText: "" },
   ],
   M6_L2: [
     { standardFormula: "Q = mcΔT", meaning: "Energy for heating depends on mass, specific heat capacity, and temperature change.", conditions: "Use for a temperature-rise or temperature-drop stage with no state change.", unitsText: "J" },
+    { standardFormula: "delta T = Q / (mc)", meaning: "For a fixed transfer, larger mass or larger specific heat capacity gives a smaller temperature rise.", conditions: "Use when the heating stage is known and the temperature change is the unknown.", unitsText: "deg C" },
   ],
   M6_L3: [
     { standardFormula: "Q = mL", meaning: "Latent-heat energy depends on mass and the latent heat of the material.", conditions: "Use only for a state-change stage.", unitsText: "J" },
+    { standardFormula: "state change at constant temperature still needs energy", meaning: "A plateau can still represent a real energy transfer into changing state rather than raising temperature.", conditions: "Use when a graph or description shows melting or boiling at nearly constant temperature.", unitsText: "" },
   ],
   M6_L4: [
     { standardFormula: "better conduction -> faster energy transfer by direct contact", meaning: "Conduction rate depends on material and the contact route.", conditions: "Use when the transfer path is through matter by direct contact.", unitsText: "" },
+    { standardFormula: "larger temperature difference -> faster conduction along the same path", meaning: "A stronger hot-cold contrast increases the conduction rate when the material and route stay the same.", conditions: "Use when comparing two conduction cases with the same path but different end temperatures.", unitsText: "" },
   ],
   M6_L5: [
     { standardFormula: "warmer fluid -> lower density -> rise", meaning: "Heating a fluid can reduce density so it rises.", conditions: "Use for one part of a convection current.", unitsText: "" },
     { standardFormula: "cooler fluid -> higher density -> sink", meaning: "Cooler fluid moves in or sinks to complete the convection loop.", conditions: "Use for the returning part of a convection current.", unitsText: "" },
+    { standardFormula: "convection needs a fluid and a density-driven loop", meaning: "A solid can conduct but cannot set up the same bulk-flow circulation as a fluid.", conditions: "Use when choosing between conduction and convection in different media.", unitsText: "" },
   ],
   M6_L6: [
     { standardFormula: "Q_total = mcΔT + mL", meaning: "A full thermal mission can include a warm-up stage and a state-change stage that must be added separately.", conditions: "Use when both a temperature change and a state change occur.", unitsText: "J" },
     { standardFormula: "radiation can cross a vacuum", meaning: "Thermal radiation does not need a material medium.", conditions: "Use when identifying the transfer route across a gap.", unitsText: "" },
+    { standardFormula: "good absorber = good emitter", meaning: "Dark dull surfaces are usually stronger absorbers and emitters than shiny reflective ones.", conditions: "Use when comparing thermal radiation gain or loss for different surface finishes.", unitsText: "" },
   ],
   M7_L1: [
     { standardFormula: "wave speed = distance traveled by the front / time", meaning: "Wave speed belongs to front travel, not to one particle moving across the whole medium.", conditions: "Use when front distance and time are known.", unitsText: "m/s" },
