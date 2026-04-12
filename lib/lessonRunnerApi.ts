@@ -25,6 +25,7 @@ import { a3GeneratedConceptGateItems, a3GeneratedDiagnosticItems, a3GeneratedMas
 import { a4GeneratedConceptGateItems, a4GeneratedDiagnosticItems, a4GeneratedMasteryItems } from "./a4AssessmentBanks";
 import { a5GeneratedConceptGateItems, a5GeneratedDiagnosticItems, a5GeneratedMasteryItems } from "./a5AssessmentBanks";
 import { a6GeneratedConceptGateItems, a6GeneratedDiagnosticItems, a6GeneratedMasteryItems } from "./a6AssessmentBanks";
+import { a7GeneratedConceptGateItems, a7GeneratedDiagnosticItems, a7GeneratedMasteryItems } from "./a7AssessmentBanks";
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
@@ -6048,6 +6049,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("A4_")) return a4GeneratedDiagnosticItems(code);
   if (code.startsWith("A5_")) return a5GeneratedDiagnosticItems(code);
   if (code.startsWith("A6_")) return a6GeneratedDiagnosticItems(code);
+  if (code.startsWith("A7_")) return a7GeneratedDiagnosticItems(code);
   if (code.startsWith("A8_")) return a8GeneratedDiagnosticItems(code);
   if (code.startsWith("A9_")) return a9GeneratedDiagnosticItems(code);
   if (code.startsWith("A10_")) return a10GeneratedDiagnosticItems(code);
@@ -6196,6 +6198,7 @@ function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("A4_")) return a4GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A5_")) return a5GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A6_")) return a6GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("A7_")) return a7GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A8_")) return a8GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A9_")) return a9GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A10_")) return a10GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
@@ -6338,6 +6341,7 @@ function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("A4_")) return a4GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A5_")) return a5GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A6_")) return a6GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("A7_")) return a7GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A8_")) return a8GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A9_")) return a9GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A10_")) return a10GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
@@ -8094,6 +8098,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("A4_")) return a4GeneratedMasteryItems(code);
   if (code.startsWith("A5_")) return a5GeneratedMasteryItems(code);
   if (code.startsWith("A6_")) return a6GeneratedMasteryItems(code);
+  if (code.startsWith("A7_")) return a7GeneratedMasteryItems(code);
   if (code.startsWith("A8_")) return a8GeneratedMasteryItems(code);
   if (code.startsWith("A9_")) return a9GeneratedMasteryItems(code);
   if (code.startsWith("A10_")) return a10GeneratedMasteryItems(code);
@@ -8215,6 +8220,7 @@ function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("A4_")) return a4GeneratedConceptGateItems(code);
   if (code.startsWith("A5_")) return a5GeneratedConceptGateItems(code);
   if (code.startsWith("A6_")) return a6GeneratedConceptGateItems(code);
+  if (code.startsWith("A7_")) return a7GeneratedConceptGateItems(code);
   if (code.startsWith("A8_")) return a8GeneratedConceptGateItems(code);
   if (code.startsWith("A9_")) return a9GeneratedConceptGateItems(code);
   if (code.startsWith("A10_")) return a10GeneratedConceptGateItems(code);
@@ -8809,6 +8815,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("A4_")) return a4GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A5_")) return a5GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A6_")) return a6GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("A7_")) return a7GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A8_")) return a8GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A9_")) return a9GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("A10_")) return a10GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
