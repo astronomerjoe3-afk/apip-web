@@ -19134,6 +19134,20 @@ function preWorkedExampleVideoMeta(code: string): {
           : "captions-20260412m12a.vtt";
     return staticPublishedVideoAssetUrl("M12N", normalizedLessonId, publishedFilename, currentM12NuclearAssetVersion);
   };
+  const currentM13SolarAssetVersion = "20260412m13a";
+  const staticM13SolarVideoAssetUrl = (
+    lessonId: string,
+    filename: "final.mp4" | "thumbnail.png" | "captions.vtt",
+  ) => {
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    const publishedFilename =
+      filename === "final.mp4"
+        ? "final-20260412m13a.mp4"
+        : filename === "thumbnail.png"
+          ? "thumbnail-20260412m13a.png"
+          : "captions-20260412m13a.vtt";
+    return staticPublishedVideoAssetUrl("M13N", normalizedLessonId, publishedFilename, currentM13SolarAssetVersion);
+  };
   switch (effectiveCode) {
     case "M1_L1":
       return {
@@ -19974,6 +19988,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("F4_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("F4_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("F4_L6", "captions.vtt"),
+      };
+    case "M13_L1":
+      return {
+        body: "Use this video to keep Earth, Moon, and Sun on one linked orbital board before the worked example begins.",
+        caption: "Video explainer: host-body relationships, linked orbits, and why the Earth-Moon pair still belongs to the wider Solar System before the lesson example.",
+        highlights: [
+          "Earth mainly orbits the Sun while the Moon mainly orbits Earth",
+          "Host body and wider Solar System membership are different questions",
+          "Gravity organizes the Earth-Moon-Sun family as one connected model",
+        ],
+        checkForUnderstanding: "If the Moon mainly orbits Earth, why does it still count as part of the Sun-centered Solar System?",
+        video_url: staticM13SolarVideoAssetUrl("M13_L1", "final.mp4"),
+        poster_url: staticM13SolarVideoAssetUrl("M13_L1", "thumbnail.png"),
+        captions_url: staticM13SolarVideoAssetUrl("M13_L1", "captions.vtt"),
+      };
+    case "M13_L2":
+      return {
+        body: "Use this video to keep sideways motion and inward gravitational pull together before the worked example begins.",
+        caption: "Video explainer: tangent motion, inward pull, curved orbital paths, and why larger orbital routes usually take longer before the lesson example.",
+        highlights: [
+          "Orbit is not a force-free path",
+          "Gravity bends the motion inward while the body keeps moving sideways",
+          "Larger orbital routes usually mean longer orbital periods",
+        ],
+        checkForUnderstanding: "If gravity vanished for a moment, what path would an orbiting body try to follow first?",
+        video_url: staticM13SolarVideoAssetUrl("M13_L2", "final.mp4"),
+        poster_url: staticM13SolarVideoAssetUrl("M13_L2", "thumbnail.png"),
+        captions_url: staticM13SolarVideoAssetUrl("M13_L2", "captions.vtt"),
+      };
+    case "M13_L3":
+      return {
+        body: "Use this video to tie the lit-half picture to Earth's rotation before the worked example begins.",
+        caption: "Video explainer: Earth's spin, one lit hemisphere, apparent daily sky motion, and the true cause of day and night before the lesson example.",
+        highlights: [
+          "Day and night come from Earth's rotation",
+          "At any moment one half of Earth is lit and one half is dark",
+          "A year belongs to orbit, but a day belongs to rotation",
+        ],
+        checkForUnderstanding: "When one city moves from daylight into darkness over a few hours, which motion of Earth explains that change first?",
+        video_url: staticM13SolarVideoAssetUrl("M13_L3", "final.mp4"),
+        poster_url: staticM13SolarVideoAssetUrl("M13_L3", "thumbnail.png"),
+        captions_url: staticM13SolarVideoAssetUrl("M13_L3", "captions.vtt"),
+      };
+    case "M13_L4":
+      return {
+        body: "Use this video to keep axial tilt, sunlight angle, and hemisphere comparison together before the worked example begins.",
+        caption: "Video explainer: fixed axis direction, opposite hemispheres, sunlight angle, and why seasons are not caused mainly by distance from the Sun before the lesson example.",
+        highlights: [
+          "Earth's axis stays tilted in the same direction in space",
+          "Opposite hemispheres lean toward the Sun at different times",
+          "Seasons are driven by tilt and changing sunlight angle, not by a simple distance story",
+        ],
+        checkForUnderstanding: "If the Northern Hemisphere tilts toward the Sun, what should be happening in the Southern Hemisphere at the same time?",
+        video_url: staticM13SolarVideoAssetUrl("M13_L4", "final.mp4"),
+        poster_url: staticM13SolarVideoAssetUrl("M13_L4", "thumbnail.png"),
+        captions_url: staticM13SolarVideoAssetUrl("M13_L4", "captions.vtt"),
+      };
+    case "M13_L5":
+      return {
+        body: "Use this video to separate Moon phases from eclipse events before the worked example begins.",
+        caption: "Video explainer: the always-lit half of the Moon, Earth-based viewing geometry, and the extra alignment needed for eclipses before the lesson example.",
+        highlights: [
+          "The Sun lights half of the Moon all the time",
+          "Phases change because our viewing angle changes",
+          "Eclipses need a special shadow alignment and are not the normal monthly phase cause",
+        ],
+        checkForUnderstanding: "What stays constant through the monthly phase cycle: how much of the Moon the Sun lights, or how much of the lit half we can see from Earth?",
+        video_url: staticM13SolarVideoAssetUrl("M13_L5", "final.mp4"),
+        poster_url: staticM13SolarVideoAssetUrl("M13_L5", "thumbnail.png"),
+        captions_url: staticM13SolarVideoAssetUrl("M13_L5", "captions.vtt"),
+      };
+    case "M13_L6":
+      return {
+        body: "Use this video to keep orbit size, year length, and Solar System classification together before the worked example begins.",
+        caption: "Video explainer: inner and outer orbital routes, planet-versus-moon sorting, and why classroom Solar System diagrams are not to scale before the lesson example.",
+        highlights: [
+          "Farther orbital routes usually take longer to complete",
+          "Main host body helps separate planets from moons",
+          "A useful Solar System sketch preserves pattern and order, not real distance scale",
+        ],
+        checkForUnderstanding: "If a diagram keeps the ordering right but shrinks the distances heavily, what part of the model is still trustworthy first?",
+        video_url: staticM13SolarVideoAssetUrl("M13_L6", "final.mp4"),
+        poster_url: staticM13SolarVideoAssetUrl("M13_L6", "thumbnail.png"),
+        captions_url: staticM13SolarVideoAssetUrl("M13_L6", "captions.vtt"),
       };
     case "F5_L1":
       return {
