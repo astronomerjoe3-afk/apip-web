@@ -542,18 +542,6 @@ const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
     { term: "Strain", aliases: ["strain"], meaning: "Strain is extension divided by original length.", why_it_matters: "It normalizes stretch before materials are compared." },
     { term: "Young modulus", aliases: ["young modulus", "young's modulus"], meaning: "Young modulus is the ratio of stress to strain in the elastic region.", why_it_matters: "It compares elastic material stiffness rather than force alone." },
   ],
-  A5: [
-    { term: "Photoelectric effect", aliases: ["photoelectric effect"], meaning: "The photoelectric effect is the emission of electrons from a surface when light of high enough frequency shines on it.", why_it_matters: "It shows that light transfers energy in packets, not as a smooth continuous wave alone." },
-    { term: "Photon", aliases: ["photon", "photons"], meaning: "A photon is a quantum of electromagnetic radiation.", why_it_matters: "It is the packet model that explains threshold-frequency behaviour." },
-    { term: "Work function", aliases: ["work function"], meaning: "The work function is the minimum energy needed to free an electron from a material's surface.", why_it_matters: "It sets the threshold for photoelectric emission." },
-    { term: "Threshold frequency", aliases: ["threshold frequency"], meaning: "Threshold frequency is the minimum light frequency needed to produce photoelectric emission from a material.", why_it_matters: "Below it, increasing brightness alone will not eject electrons." },
-    { term: "Wave-particle duality", aliases: ["wave-particle duality", "duality"], meaning: "Wave-particle duality is the idea that matter and radiation show both wave-like and particle-like behaviour depending on the experiment.", why_it_matters: "It is a central modern-physics shift away from simple either-or pictures." },
-    { term: "de Broglie wavelength", aliases: ["de broglie wavelength", "debroglie wavelength"], meaning: "The de Broglie wavelength is the wavelength associated with a moving particle.", why_it_matters: "It extends wave ideas to matter." },
-    { term: "Mass defect", aliases: ["mass defect"], meaning: "Mass defect is the difference between the mass of a bound nucleus and the total mass of its separated nucleons.", why_it_matters: "It reveals that some mass is tied up as binding energy." },
-    { term: "Binding energy", aliases: ["binding energy"], meaning: "Binding energy is the energy needed to separate a nucleus into its individual nucleons.", why_it_matters: "It explains nuclear stability and nuclear energy release." },
-    { term: "Time dilation", aliases: ["time dilation"], meaning: "Time dilation is the relativity effect in which time intervals differ for observers in relative motion.", why_it_matters: "It shows that time is not absolute in all frames." },
-    { term: "Length contraction", aliases: ["length contraction"], meaning: "Length contraction is the relativity effect in which a moving object's length along the direction of motion is measured shorter by another observer.", why_it_matters: "It shows that distance and time both depend on frame of reference." },
-  ],
 };
 
 function text(value: unknown): string {

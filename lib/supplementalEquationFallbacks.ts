@@ -210,6 +210,28 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "N, N/m, m",
     },
   ],
+  A5_L2: [
+    {
+      standardFormula: "a = -omega^2 x",
+      meaning: "In SHM the acceleration is proportional to displacement and directed toward equilibrium.",
+      conditions: "Use for ideal SHM when the displacement is measured from equilibrium.",
+      unitsText: "m/s^2, rad/s, m",
+    },
+  ],
+  A5_L3: [
+    {
+      standardFormula: "f = 1 / T",
+      meaning: "Frequency and period are reciprocal ways to describe the same cycle timing.",
+      conditions: "Use when converting between one-cycle time and cycles per second.",
+      unitsText: "Hz, s",
+    },
+    {
+      standardFormula: "v_max = omega A",
+      meaning: "In SHM the maximum speed depends on angular frequency and amplitude.",
+      conditions: "Use for ideal SHM when identifying the fastest equilibrium crossing.",
+      unitsText: "m/s, rad/s, m",
+    },
+  ],
   A5_L4: [
     {
       standardFormula: "E_total = E_k + E_p",
@@ -223,10 +245,16 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       conditions: "Use for spring-based SHM.",
       unitsText: "J",
     },
+    {
+      standardFormula: "E_total = 1/2 k A^2",
+      meaning: "For a spring oscillator the total energy is fixed by the amplitude.",
+      conditions: "Use when the turning-point amplitude is known and damping is negligible.",
+      unitsText: "J",
+    },
   ],
   A5_L5: [
     {
-      standardFormula: "f_drive approx= f_natural at resonance",
+      standardFormula: "f_drive ~= f_natural at resonance",
       meaning: "The largest steady response appears when the driving frequency is close to the natural frequency.",
       conditions: "Use for forced oscillation and resonance reasoning.",
       unitsText: "Hz",
