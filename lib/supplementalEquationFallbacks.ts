@@ -1514,12 +1514,74 @@ const A4_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       unitsText: "N",
     },
   ],
+  A4_L2: [
+    {
+      standardFormula: "v = u + a t",
+      meaning: "Velocity changes linearly with time under constant acceleration on a single chosen axis.",
+      conditions: "Use component by component in one-dimensional or split two-dimensional kinematics with constant acceleration.",
+      unitsText: "m/s, m/s^2, s",
+    },
+    {
+      standardFormula: "s = u t + 1/2 a t^2",
+      meaning: "Displacement on a chosen axis is built from the starting velocity contribution plus the constant-acceleration contribution.",
+      conditions: "Use on one chosen axis after defining the sign convention and confirming constant acceleration on that axis.",
+      unitsText: "m, m/s, m/s^2, s",
+    },
+  ],
+  A4_L3: [
+    {
+      standardFormula: "u_x = u cos θ and u_y = u sin θ",
+      meaning: "Projectile launch speed is split into horizontal and vertical components before the path is rebuilt.",
+      conditions: "Use at launch in ideal projectile problems before applying horizontal and vertical kinematics separately.",
+      unitsText: "m/s, degrees",
+    },
+  ],
   A4_L4: [
     {
       standardFormula: "Σp_before = Σp_after",
       meaning: "Total momentum stays constant for the full system across a collision when external impulse is negligible.",
       conditions: "Use for collision and explosion problems after defining the system and before relying on energy labels.",
       unitsText: "kg m/s",
+    },
+    {
+      standardFormula: "impulse = Δp = F Δt",
+      meaning: "Impulse links the force-time interaction to the momentum change it produces.",
+      conditions: "Use when a collision or push is described through force and interaction time rather than directly through the before-and-after momentum ledger.",
+      unitsText: "N s, kg m/s",
+    },
+  ],
+  A4_L5: [
+    {
+      standardFormula: "a_c = v^2 / r",
+      meaning: "Uniform circular motion needs inward centripetal acceleration because the velocity direction keeps changing.",
+      conditions: "Use for circular motion after identifying the speed and radius and keeping the inward direction explicit.",
+      unitsText: "m/s^2, m/s, m",
+    },
+    {
+      standardFormula: "F_c = m v^2 / r",
+      meaning: "The required inward resultant force is the mass multiplied by the centripetal acceleration.",
+      conditions: "Use after identifying the source of the inward resultant force in a circular-motion problem.",
+      unitsText: "N, kg, m/s, m",
+    },
+  ],
+  A4_L6: [
+    {
+      standardFormula: "stress = F / A",
+      meaning: "Stress compares load with cross-sectional area rather than trusting force alone.",
+      conditions: "Use when normalizing the load on a stretched sample or wire.",
+      unitsText: "Pa, N, m^2",
+    },
+    {
+      standardFormula: "strain = ΔL / L",
+      meaning: "Strain compares extension with original length rather than extension alone.",
+      conditions: "Use when normalizing the deformation of a sample in the elastic region.",
+      unitsText: "dimensionless, m",
+    },
+    {
+      standardFormula: "E = stress / strain",
+      meaning: "Young modulus compares elastic stiffness through normalized stress and strain rather than through force-extension labels alone.",
+      conditions: "Use in the elastic or proportional region after stress and strain have already been established.",
+      unitsText: "Pa",
     },
   ],
 };
