@@ -13,6 +13,7 @@ import { m9GeneratedConceptGateItems, m9GeneratedDiagnosticItems, m9GeneratedMas
 import { m10GeneratedConceptGateItems, m10GeneratedDiagnosticItems, m10GeneratedMasteryItems } from "./m10AssessmentBanks";
 import { m11GeneratedConceptGateItems, m11GeneratedDiagnosticItems, m11GeneratedMasteryItems } from "./m11AssessmentBanks";
 import { m12GeneratedConceptGateItems, m12GeneratedDiagnosticItems, m12GeneratedMasteryItems } from "./m12AssessmentBanks";
+import { m13GeneratedConceptGateItems, m13GeneratedDiagnosticItems, m13GeneratedMasteryItems } from "./m13AssessmentBanks";
 import { m9QuestionVisualMeta, m9ReflectionVisualCheck, m9ScaffoldCoreBullets, m9ScaffoldFocusExtras, m9ScaffoldMediaCards, m9SimulationCopy } from "./m9LessonContent";
 import { m10QuestionVisualMeta, m10ReflectionVisualCheck, m10ScaffoldCoreBullets, m10ScaffoldFocusExtras, m10ScaffoldMediaCards, m10SimulationCopy } from "./m10LessonContent";
 import { m11QuestionVisualMeta, m11ReflectionVisualCheck, m11ScaffoldCoreBullets, m11ScaffoldFocusExtras, m11ScaffoldMediaCards, m11SimulationCopy } from "./m11LessonContent";
@@ -6034,6 +6035,7 @@ function generatedDiagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M10_")) return m10GeneratedDiagnosticItems(code);
   if (code.startsWith("M11_")) return m11GeneratedDiagnosticItems(code);
   if (code.startsWith("M12_")) return m12GeneratedDiagnosticItems(code);
+  if (code.startsWith("M13_")) return m13GeneratedDiagnosticItems(code);
   if (code.startsWith("M2_")) return m2GeneratedDiagnosticItems(code);
   if (code.startsWith("M3_")) return m3GeneratedDiagnosticItems(code);
   switch (code) {
@@ -6170,6 +6172,7 @@ function diagnosticItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M12_")) return m12GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M13_")) return m13GeneratedDiagnosticItems(lessonCode(lesson)).map(asRecord);
   const authored = itemsFrom(lesson, "diagnostic").map(asRecord);
   const authoredUsable = authored.filter((item) => hasUsableAssessmentAnswer(item));
   const preferAuthored = prefersLessonOwnedDiagnosticBank(lesson, authoredUsable.length);
@@ -6300,6 +6303,7 @@ function conceptGateBank(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M12_")) return m12GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M13_")) return m13GeneratedConceptGateItems(lessonCode(lesson)).map(asRecord);
   const authoredConceptItems = filterLessonSpecificAssessmentCandidates(lesson, conceptGateItems(lesson))
     .filter((item) => hasUsableAssessmentAnswer(item));
   const authoredMasteryItems = filterLessonSpecificAssessmentCandidates(
@@ -7917,6 +7921,7 @@ function generatedMasteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M10_")) return m10GeneratedMasteryItems(code);
   if (code.startsWith("M11_")) return m11GeneratedMasteryItems(code);
   if (code.startsWith("M12_")) return m12GeneratedMasteryItems(code);
+  if (code.startsWith("M13_")) return m13GeneratedMasteryItems(code);
   if (code.startsWith("M2_")) return m2GeneratedMasteryItems(code);
   if (code.startsWith("M3_")) return m3GeneratedMasteryItems(code);
   if (isExtendedNextgenLessonCode(code)) {
@@ -8026,6 +8031,7 @@ function generatedConceptGateItems(lesson: UnknownRecord): UnknownRecord[] {
   if (code.startsWith("M10_")) return m10GeneratedConceptGateItems(code);
   if (code.startsWith("M11_")) return m11GeneratedConceptGateItems(code);
   if (code.startsWith("M12_")) return m12GeneratedConceptGateItems(code);
+  if (code.startsWith("M13_")) return m13GeneratedConceptGateItems(code);
   if (code.startsWith("M2_")) return m2GeneratedConceptGateItems(code);
   if (code.startsWith("M3_")) return m3GeneratedConceptGateItems(code);
   switch (code) {
@@ -8608,6 +8614,7 @@ function masteryItems(lesson: UnknownRecord): UnknownRecord[] {
   if (lessonCode(lesson).startsWith("M10_")) return m10GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M11_")) return m11GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   if (lessonCode(lesson).startsWith("M12_")) return m12GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
+  if (lessonCode(lesson).startsWith("M13_")) return m13GeneratedMasteryItems(lessonCode(lesson)).map(asRecord);
   const seenIds = new Set<string>();
   const seenSources = new Set<string>();
   const seenPrompts = new Set<string>();
@@ -10869,12 +10876,106 @@ function scaffoldM9WorkedExample(code: string): UnknownRecord | null {
   }
 }
 
+function scaffoldM11WorkedExample(code: string): UnknownRecord | null {
+  switch (code) {
+    case "M11_L1":
+      return {
+        body: "Atomic structure examples should keep proton number, neutron number, and electron count answering different questions so the model does not collapse into one vague atom label.",
+        worked_example: {
+          prompt: "An ion has atomic number 17, mass number 37, and charge 1-. Find the numbers of protons, neutrons, and electrons, then state what would and would not change if one more electron were added.",
+          steps: [
+            "Use atomic number first: Z = 17 means 17 protons.",
+            "Use mass number next: neutrons = 37 - 17 = 20.",
+            "Use the 1- charge to infer electrons: there must be one more electron than protons, so electrons = 18. If one more electron were added, the charge would change but the element identity would not because the proton count stays 17.",
+          ],
+          answer: "The ion has 17 protons, 20 neutrons, and 18 electrons. Adding one more electron would change the charge state but not the element.",
+          answer_reason: "Proton number fixes the element, mass number counts protons plus neutrons, and electron number controls ion charge. Those three roles must stay separate for the atomic model to stay clear.",
+        },
+      };
+    case "M11_L2":
+      return {
+        body: "Isotope work should be comparative and disciplined, with proton number settling the identity question before neutron number and stability are discussed.",
+        worked_example: {
+          prompt: "Two nuclei are chlorine-35 and chlorine-37. Find the neutron number in each nucleus and explain why they are isotopes of the same element rather than different elements.",
+          steps: [
+            "Use chlorine's atomic number first: chlorine has Z = 17, so each nucleus has 17 protons.",
+            "Find the neutron numbers by subtraction: 35 - 17 = 18 neutrons and 37 - 17 = 20 neutrons.",
+            "State the identity rule clearly: same proton number means same element, while different neutron numbers make them different isotopes.",
+          ],
+          answer: "Chlorine-35 has 18 neutrons and chlorine-37 has 20 neutrons. They are isotopes of the same element because both have 17 protons.",
+          answer_reason: "Mass number can change while the element stays the same. The decisive identity test is proton number, not total nucleon count.",
+        },
+      };
+    case "M11_L3":
+      return {
+        body: "Decay-type examples should track both the emitted radiation and the nuclear bookkeeping while keeping shielding and penetration distinct from count change.",
+        worked_example: {
+          prompt: "A nucleus of radium-226 undergoes alpha decay. Write the daughter nucleus, then state which changes more between alpha and gamma: the shielding needed or the nuclear counts.",
+          steps: [
+            "Apply the alpha rule first: mass number falls by 4 and atomic number falls by 2.",
+            "From radium-226 with Z = 88, the daughter has A = 222 and Z = 86, which is radon-222.",
+            "Then compare alpha with gamma conceptually: alpha changes both nuclear counts, while gamma changes neither count but needs much stronger shielding.",
+          ],
+          answer: "The daughter nucleus is radon-222. Between alpha and gamma, the shielding requirement changes far more, while alpha changes the nuclear counts and gamma does not.",
+          answer_reason: "Alpha, beta-minus, and gamma must stay separate in two ways at once: what leaves the nucleus and what happens to A and Z. Shielding comparisons matter, but they do not replace the bookkeeping.",
+        },
+      };
+    case "M11_L4":
+      return {
+        body: "Half-life work should be genuinely quantitative and should also guard against the fixed-subtraction mistake instead of treating decay as a straight countdown.",
+        worked_example: {
+          prompt: "A radioactive sample starts at 640 counts per minute and has a half-life of 6.0 hours. What count rate remains after 18 hours, and what fraction of the original sample is still undecayed?",
+          steps: [
+            "Count the number of half-lives first: 18 / 6.0 = 3 half-lives.",
+            "Halve what remains at each interval: 640 -> 320 -> 160 -> 80 counts per minute.",
+            "Express the remaining fraction after three halvings as (1/2)^3 = 1/8.",
+          ],
+          answer: "After 18 hours, the count rate is 80 counts per minute and 1/8 of the original sample remains undecayed.",
+          answer_reason: "Half-life is a multiplicative halving rule. Each equal interval cuts the amount that remains in half, so the number removed each round gets smaller as the sample shrinks.",
+        },
+      };
+    case "M11_L5":
+      return {
+        body: "Detector work should make background subtraction unavoidable, because raw readings alone are too weak to support clean claims about a source.",
+        worked_example: {
+          prompt: "A detector reads 86 counts per second near a sample. The background count rate is 14 counts per second. Later the detector reads 62 counts per second near a second sample in the same background. Find the corrected source count rates and decide which sample is more active.",
+          steps: [
+            "Correct the first reading by subtracting background: 86 - 14 = 72 counts per second.",
+            "Correct the second reading the same way: 62 - 14 = 48 counts per second.",
+            "Compare the corrected source rates, not the raw readings, to decide which sample is more active.",
+          ],
+          answer: "The corrected source count rates are 72 counts per second and 48 counts per second, so the first sample is more active.",
+          answer_reason: "Background radiation is part of every measurement, so the fair comparison quantity is the corrected source count rate. Raw detector readings mix source plus environment together.",
+        },
+      };
+    case "M11_L6":
+      return {
+        body: "Balancing nuclear equations should be a full ledger exercise, with the decay type, daughter nucleus, and both conservation rules all visible at once.",
+        worked_example: {
+          prompt: "Complete the beta-minus decay equation for carbon-14: 14/6 C -> ? + beta-. Identify the daughter nucleus and check both balancing rules.",
+          steps: [
+            "Use the beta-minus rule: mass number stays the same while atomic number increases by 1.",
+            "So the daughter must have A = 14 and Z = 7, which is nitrogen-14.",
+            "Check the ledger: mass number 14 is balanced on both sides, and atomic number 6 on the left becomes 7 plus -1 on the right, so atomic number is also conserved.",
+          ],
+          answer: "The daughter nucleus is nitrogen-14, so the equation is 14/6 C -> 14/7 N + beta-.",
+          answer_reason: "Balancing a nuclear equation means conserving both mass number and atomic number. Beta-minus decay changes the element because the atomic number rises by 1.",
+        },
+      };
+    default:
+      return null;
+  }
+}
+
 function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
   const sourceCode = lessonCode(lesson);
   const m9WorkedExample = scaffoldM9WorkedExample(sourceCode);
   if (m9WorkedExample) return m9WorkedExample;
 
-  const code = sourceCode.startsWith("M11_") ? sourceCode.replace(/^M11_/, "M13_") : sourceCode;
+  const m11WorkedExample = scaffoldM11WorkedExample(sourceCode);
+  if (m11WorkedExample) return m11WorkedExample;
+
+  const code = sourceCode;
   if (code.startsWith("M3_")) {
     switch (code) {
       case "M3_L1":
@@ -12479,174 +12580,174 @@ function scaffoldWorkedExample(lesson: UnknownRecord): UnknownRecord {
     switch (code) {
       case "M13_L1":
         return {
-          body: "The first radioactivity lesson should force students to keep element identity, mass number, and charge state on separate ledgers instead of letting all three collapse into one vague atom label.",
+          body: "The opening Earth-and-Solar-System lesson should force learners to keep main host body and wider system membership separate, otherwise Earth, Moon, and Sun collapse into a list of names instead of one linked model.",
           worked_example: {
-            prompt: "An ion has atomic number 17, mass number 37, and charge 1-. Find the numbers of protons, neutrons, and electrons, then state what would and would not change if one more electron were added.",
+            prompt: "A student says, 'The Moon cannot belong to the Solar System because it mainly orbits Earth.' Explain why this is weak and give the stronger system description.",
             steps: [
-              "Use atomic number first: Z = 17 means 17 protons.",
-              "Use mass number next: neutrons = 37 - 17 = 20.",
-              "Use the 1- charge to infer electrons: there must be one more electron than protons, so electrons = 18. If one more electron were added, the charge would change but the element identity would not because the proton count stays 17.",
+              "Separate the two classification questions first: main host body and wider system membership are not the same question.",
+              "State the direct orbit clearly: the Moon mainly orbits Earth, so Earth is its main host body.",
+              "Then place that Earth-Moon pair in the larger picture: Earth orbits the Sun, so the Moon still belongs inside the wider Sun-centered Solar System.",
             ],
-            answer: "The ion has 17 protons, 20 neutrons, and 18 electrons. Adding one more electron would change the charge state but not the element.",
-            answer_reason: "Proton number fixes the element, mass number counts protons plus neutrons, and electron number controls ion charge. Those three roles must stay separate for the atomic model to stay clear.",
+            answer: "The statement is weak because the Moon's main host body is Earth, but Earth and Moon still belong to the wider Solar System centered on the Sun. The stronger description is that Earth orbits the Sun while the Moon mainly orbits Earth inside that linked system.",
+            answer_reason: "A strong Earth-Moon-Sun answer keeps direct orbital role and wider system membership visible together instead of treating them as the same idea.",
           },
           extra_examples: [
             {
-              body: "This follow-up checks that learners do not confuse changing electrons with changing the nucleus.",
+              body: "This follow-up keeps the linked-system idea active when a nested orbit is added.",
               worked_example: {
-                prompt: "Why is 'this atom became a different element because it lost an electron' a weak statement?",
+                prompt: "A probe circles the Moon while the Moon circles Earth and Earth circles the Sun. What is the strongest single description of this motion pattern?",
                 steps: [
-                  "Start from what decides the element identity: proton number in the nucleus.",
-                  "Notice that losing an electron changes only the outer electron count.",
-                  "Conclude that the particle becomes a positive ion, but it remains the same element because the proton number is unchanged.",
+                  "Notice that there is more than one valid orbit in the picture, but they are nested rather than unrelated.",
+                  "Classify the direct host body first at each level.",
+                  "Conclude that the strongest description is a set of linked nested orbits inside one Sun-centered system.",
                 ],
-                answer: "It is weak because losing an electron changes the charge, not the element. The element changes only if the proton number changes.",
-                answer_reason: "Element identity is a nuclear property, not an electron-count label.",
+                answer: "It is a linked nested-orbit system: the probe orbits the Moon, the Moon mainly orbits Earth, and Earth orbits the Sun.",
+                answer_reason: "The lesson is strongest when the learner treats the Solar System as one connected model with direct host-body roles at each level.",
               },
             },
           ],
         };
       case "M13_L2":
         return {
-          body: "Isotope work should be comparative and disciplined, with proton number settling the identity question before neutron number and stability are discussed.",
+          body: "Orbit work should make inward pull and sideways motion visible together, otherwise learners drift into the wrong story that an orbit is either force-free motion or a simple straight fall.",
           worked_example: {
-            prompt: "Two nuclei are chlorine-35 and chlorine-37. Find the neutron number in each nucleus and explain why they are isotopes of the same element rather than different elements.",
+            prompt: "A satellite is moving sideways around Earth. Explain what would happen without gravity, then explain why the real path is curved instead.",
             steps: [
-              "Use chlorine's atomic number first: chlorine has Z = 17, so each nucleus has 17 protons.",
-              "Find the neutron numbers by subtraction: 35 - 17 = 18 neutrons and 37 - 17 = 20 neutrons.",
-              "State the identity rule clearly: same proton number means same element, while different neutron numbers make them different isotopes.",
+              "Start with the comparison case: without gravity, the satellite would continue in a straight-line tangent because there would be no inward pull.",
+              "Now restore gravity and ask what it changes. Gravity keeps pulling inward toward Earth, so the direction of the motion changes continually.",
+              "That combination of forward motion and inward pull produces the curved orbital path rather than a straight drift or an immediate crash.",
             ],
-            answer: "Chlorine-35 has 18 neutrons and chlorine-37 has 20 neutrons. They are isotopes of the same element because both have 17 protons.",
-            answer_reason: "Mass number can change while the element stays the same. The decisive identity test is proton number, not total nucleon count.",
+            answer: "Without gravity the satellite would move in a straight-line tangent. The real orbit is curved because gravity keeps pulling inward while the satellite keeps moving sideways.",
+            answer_reason: "The lesson mechanism is orbit = sideways motion plus inward gravitational pull, not one of those ingredients on its own.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps isotope stability separate from isotope identity.",
+              body: "This follow-up guards against the constant-speed misconception.",
               worked_example: {
-                prompt: "Why is 'the heavier isotope must be a different element because it is less stable' a weak conclusion?",
+                prompt: "Why is 'a body in circular orbit has no acceleration because its speed is constant' a weak statement?",
                 steps: [
-                  "Separate identity from stability before judging the statement.",
-                  "Use proton number to decide whether two nuclei are the same element.",
-                  "Conclude that stability can differ between isotopes, but a change in stability alone does not change the element family.",
+                  "Remember that acceleration means a change in velocity, and velocity includes direction as well as speed.",
+                  "In circular orbit the direction of motion changes continuously even when the speed stays constant.",
+                  "So the body still has acceleration, directed inward toward the center of the orbit.",
                 ],
-                answer: "It is weak because element identity depends on proton number, while stability is a separate property that can differ between isotopes of the same element.",
-                answer_reason: "The lesson is stronger when identity and stability are not allowed to answer each other's questions.",
+                answer: "It is weak because velocity changes whenever direction changes. In circular orbit the direction changes continuously, so there is still inward acceleration.",
+                answer_reason: "Orbit reasoning becomes more rigorous when speed and velocity are not treated as if they were the same quantity.",
               },
             },
           ],
         };
       case "M13_L3":
         return {
-          body: "Decay-type examples should be rigorous enough to track both the emitted radiation and the nuclear bookkeeping, while also keeping shielding and penetration distinct from count change.",
+          body: "Day-night examples should keep the lit-half picture and Earth's rotation together, otherwise learners reach for the wrong year-scale explanation instead of the daily one.",
           worked_example: {
-            prompt: "A nucleus of radium-226 undergoes alpha decay. Write the daughter nucleus, then state which changes more between alpha and gamma: the shielding needed or the nuclear counts.",
+            prompt: "A city moves from darkness into sunlight during the morning. Explain why Earth's rotation is the correct cause and why Earth's yearly orbit is the wrong first explanation.",
             steps: [
-              "Apply the alpha rule first: mass number falls by 4 and atomic number falls by 2.",
-              "From radium-226 with Z = 88, the daughter has A = 222 and Z = 86, which is radon-222.",
-              "Then compare alpha with gamma conceptually: alpha changes both nuclear counts, while gamma changes neither count but needs much stronger shielding.",
+              "Use the correct timescale first: sunrise and sunset are daily effects, so start with Earth's rotation rather than its yearly orbit.",
+              "Keep the lighting geometry visible: at any moment one half of Earth is lit and one half is dark.",
+              "As Earth rotates, the city is carried from the dark side into the lit side, which is why morning arrives.",
             ],
-            answer: "The daughter nucleus is radon-222. Between alpha and gamma, the shielding requirement changes far more, while alpha changes the nuclear counts and gamma does not.",
-            answer_reason: "Alpha, beta, and gamma must stay separate in two ways at once: what leaves the nucleus and what happens to A and Z. Shielding comparisons are important, but they do not replace the bookkeeping.",
+            answer: "Earth's rotation is the correct cause because the city is carried from the dark half of Earth into the lit half. Earth's yearly orbit is the wrong first explanation because one orbit gives a year, not the daily day-night cycle.",
+            answer_reason: "A strong answer matches the timescale and the geometry: one lit half, one dark half, and a rotating Earth.",
           },
           extra_examples: [
             {
-              body: "This follow-up checks that beta-minus is not confused with electron loss from the atom shell.",
+              body: "This follow-up keeps apparent sky motion tied to Earth's spin.",
               worked_example: {
-                prompt: "Why does beta-minus decay increase atomic number by 1 even though the nucleus emits an electron?",
+                prompt: "Why is 'the Sun goes around Earth once a day' a weak school-level explanation of the daily sky motion?",
                 steps: [
-                  "Start inside the nucleus, not in the electron shell.",
-                  "Recall that in beta-minus decay, a neutron changes into a proton and an electron is emitted.",
-                  "Conclude that the new proton raises the atomic number by 1 while the mass number stays the same.",
+                  "Notice that what we see is apparent motion across the sky.",
+                  "At this level, the stronger physical model is that Earth rotates while sunlight arrives from one main direction.",
+                  "That rotation makes the Sun appear to move, even though the daily effect is explained from Earth's motion instead.",
                 ],
-                answer: "Beta-minus decay increases atomic number because a neutron turns into a proton, so the nucleus gains one proton even though an electron is emitted.",
-                answer_reason: "Beta-minus is a nuclear conversion process, not the loss of an ordinary orbital electron.",
+                answer: "It is weak because the daily motion is apparent. The stronger explanation is that Earth rotates, which makes the Sun appear to move across the sky.",
+                answer_reason: "The lesson protects the cause of apparent daily motion by tying it to Earth's rotation rather than to a literal daily solar orbit around Earth.",
               },
             },
           ],
         };
       case "M13_L4":
         return {
-          body: "Half-life work should be genuinely quantitative and should also guard against the common mistake of subtracting a fixed amount instead of halving what remains.",
+          body: "Season examples should compare hemispheres directly and keep axial tilt visible, otherwise the whole lesson collapses back into the weak distance-from-the-Sun myth.",
           worked_example: {
-            prompt: "A radioactive sample starts at 640 counts per minute and has a half-life of 6.0 hours. What count rate remains after 18 hours, and what fraction of the original sample is still undecayed?",
+            prompt: "Explain why the UK can have summer while Australia has winter at the same time, and state why this makes the distance-only explanation weak.",
             steps: [
-              "Count the number of half-lives first: 18 / 6.0 = 3 half-lives.",
-              "Halve what remains at each interval: 640 -> 320 -> 160 -> 80 counts per minute.",
-              "Express the remaining fraction after three halvings as (1/2)^3 = 1/8.",
+              "Compare the two hemispheres first rather than talking about one country in isolation.",
+              "Earth's axis is tilted, so at one orbital position the Northern Hemisphere leans more toward the Sun while the Southern Hemisphere leans away, and about half an orbit later that swaps.",
+              "Because both hemispheres are nearly the same Earth-Sun distance at the same time yet can have opposite seasons, distance alone cannot be the main cause.",
             ],
-            answer: "After 18 hours, the count rate is 80 counts per minute and 1/8 of the original sample remains undecayed.",
-            answer_reason: "Half-life is a multiplicative halving rule. Each equal interval cuts the amount that remains in half, so the number removed each round gets smaller as the sample shrinks.",
+            answer: "The UK and Australia can have opposite seasons because the hemispheres lean differently relative to the Sun as Earth orbits with a tilted axis. That makes the distance-only explanation weak because both hemispheres are almost the same distance from the Sun at the same moment.",
+            answer_reason: "A rigorous seasons answer keeps axial tilt, sunlight angle, and hemisphere comparison together.",
           },
           extra_examples: [
             {
-              body: "This follow-up targets the fixed-subtraction misconception directly.",
+              body: "This follow-up keeps sunlight angle and day length tied together.",
               worked_example: {
-                prompt: "Why is 'a 200-count sample with a half-life of 5 minutes loses 100 counts every 5 minutes forever' incorrect?",
+                prompt: "Why does a hemisphere tilted toward the Sun usually have warmer conditions than when it tilts away?",
                 steps: [
-                  "Recall that half-life halves what remains, not the same fixed number each time.",
-                  "After the first 5 minutes, 200 becomes 100, but after the next 5 minutes, 100 becomes 50, not 0.",
-                  "Conclude that radioactive decay follows repeated halving, so the loss per interval shrinks as the sample shrinks.",
+                  "When a hemisphere tilts toward the Sun, sunlight arrives more directly and the Sun's path is higher in the sky.",
+                  "That usually also brings longer daylight, so energy arrives for more of the day.",
+                  "Together those changes make warming stronger than when the hemisphere tilts away.",
                 ],
-                answer: "It is incorrect because half-life means halving what remains, so the amount lost each interval gets smaller rather than staying fixed at 100 counts.",
-                answer_reason: "The whole decay curve depends on repeated multiplication by one half, not repeated subtraction of a constant amount.",
+                answer: "Because sunlight is more direct and daylight is usually longer when that hemisphere tilts toward the Sun.",
+                answer_reason: "The strongest season explanation links sunlight angle and day length, not just the word 'summer'.",
               },
             },
           ],
         };
       case "M13_L5":
         return {
-          body: "Detector work should make background subtraction unavoidable, because raw readings alone are too weak to support clean claims about a source.",
+          body: "Moon-geometry examples should force learners to separate ordinary phases from eclipse alignments, because the most common weak answer is to explain every phase as Earth shadow.",
           worked_example: {
-            prompt: "A detector reads 86 counts per second near a sample. The background count rate is 14 counts per second. Later the detector reads 62 counts per second near a second sample in the same background. Find the corrected source count rates and decide which sample is more active.",
+            prompt: "Why can there be a full moon without a lunar eclipse, and what is the stronger explanation of the full-moon appearance?",
             steps: [
-              "Correct the first reading by subtracting background: 86 - 14 = 72 counts per second.",
-              "Correct the second reading the same way: 62 - 14 = 48 counts per second.",
-              "Compare the corrected source rates, not the raw readings, to decide which sample is more active.",
+              "Keep the ordinary phase geometry and the eclipse geometry separate.",
+              "A full moon means the Moon is opposite the Sun in the sky as seen from Earth, so the Earth-facing side is mostly sunlit.",
+              "A lunar eclipse needs a stricter condition: the Sun, Earth, and Moon must line up closely enough for Earth's shadow to fall on the Moon. That special alignment is not present every month.",
             ],
-            answer: "The corrected source count rates are 72 counts per second and 48 counts per second, so the first sample is more active.",
-            answer_reason: "Background radiation is part of every measurement, so the fair comparison quantity is the corrected source count rate. Raw detector readings mix source plus environment together.",
+            answer: "There can be a full moon without a lunar eclipse because full moon is the normal geometry in which we see the Moon's sunlit face, while a lunar eclipse needs a much more exact Sun-Earth-Moon alignment so Earth's shadow actually falls on the Moon.",
+            answer_reason: "The strongest answer says phases are a viewing-angle story and eclipses are special shadow events.",
           },
           extra_examples: [
             {
-              body: "This follow-up keeps non-zero background from being misread as contamination proof.",
+              body: "This follow-up targets the most common phase misconception directly.",
               worked_example: {
-                prompt: "Why does a detector still clicking in an empty room not prove there is a hidden source nearby?",
+                prompt: "Why is 'the crescent Moon is caused by Earth's shadow' a weak statement?",
                 steps: [
-                  "Start from the idea that background radiation is a normal environmental presence.",
-                  "Notice that the detector responds to that background even with no added source present.",
-                  "Conclude that a non-zero reading alone is not enough evidence; you need comparison against a measured background and a change beyond it.",
+                  "Recall the stable fact first: the Sun lights half of the Moon all the time.",
+                  "A crescent appears because from Earth we can see only a small part of that lit half.",
+                  "Earth's shadow matters for eclipses, not for the ordinary monthly phase sequence.",
                 ],
-                answer: "It does not prove a hidden source because background radiation already gives a non-zero reading. You must compare against background before concluding anything extra is present.",
-                answer_reason: "A detector is sensitive to normal surroundings as well as to an added radioactive source.",
+                answer: "It is weak because a crescent Moon is caused by viewing geometry, not by Earth's shadow. Earth shadow belongs to eclipse events, not normal phases.",
+                answer_reason: "The lesson becomes much clearer when the always-lit half and the Earth-view angle stay visible together.",
               },
             },
           ],
         };
       case "M13_L6":
         return {
-          body: "Balancing nuclear equations should be a full ledger exercise, with the decay type, daughter nucleus, and both conservation rules all visible at once.",
+          body: "Solar-System structure examples should keep orbit size, year length, and body classification together, because a sketch by itself is too easy to read as literal spacing or as one flat category of 'space objects'.",
           worked_example: {
-            prompt: "Complete the beta-minus decay equation for carbon-14: 14/6 C -> ? + beta-. Identify the daughter nucleus and check both balancing rules.",
+            prompt: "Explain why Mercury has a much shorter year than Neptune, then state why a classroom Solar System sketch must not be read as a scale drawing.",
             steps: [
-              "Use the beta-minus rule: mass number stays the same while atomic number increases by 1.",
-              "So the daughter must have A = 14 and Z = 7, which is nitrogen-14.",
-              "Check the ledger: mass number 14 is balanced on both sides, and atomic number 6 on the left becomes 7 plus -1 on the right, so atomic number is also conserved.",
+              "Use the orbit-size idea first: Mercury travels on a much smaller orbital route than Neptune, so its orbital period is much shorter.",
+              "Then protect the diagram reading: classroom Solar System sketches compress the huge real distances between bodies.",
+              "So the useful information in the sketch is the ordering and family structure, not the exact apparent gap sizes on the page.",
             ],
-            answer: "The daughter nucleus is nitrogen-14, so the equation is 14/6 C -> 14/7 N + beta-.",
-            answer_reason: "Balancing a nuclear equation means conserving both mass number and atomic number. Beta-minus decay changes the element because the atomic number rises by 1.",
+            answer: "Mercury has a much shorter year because it follows a much smaller orbit around the Sun than Neptune. The sketch must not be read as a scale drawing because real Solar System distances are compressed enormously in classroom models.",
+            answer_reason: "A strong final-lesson answer ties orbital period to route size and keeps scale compression separate from the ordering of the bodies.",
           },
           extra_examples: [
             {
-              body: "This follow-up makes the learner distinguish the unchanged-count gamma case from alpha and beta-minus.",
+              body: "This follow-up keeps main host body active as a classification rule.",
               worked_example: {
-                prompt: "What is the strongest quick check that a proposed decay process is gamma emission rather than alpha or beta-minus?",
+                prompt: "A body mainly orbits Jupiter while Jupiter orbits the Sun. Why is the stronger first classification 'moon' rather than 'planet'?",
                 steps: [
-                  "Look first at whether the nucleus keeps the same mass number and atomic number.",
-                  "If both A and Z are unchanged, the event is consistent with gamma emission.",
-                  "If either count changes, it cannot be pure gamma emission.",
+                  "Use main host body as the first sorting rule.",
+                  "A planet mainly orbits the Sun directly, while a moon mainly orbits a planet.",
+                  "Since this body mainly orbits Jupiter, the strongest first classification is moon even though the whole system is Sun-centered.",
                 ],
-                answer: "The strongest quick check is that both mass number and atomic number stay unchanged. If either count changes, it is not pure gamma emission.",
-                answer_reason: "Gamma emission changes the nuclear energy state without changing the nuclear composition ledger.",
+                answer: "Because its main host body is Jupiter. A body that mainly orbits a planet is classified first as a moon, not as a planet.",
+                answer_reason: "The last lesson stays rigorous when body role, host body, and wider system membership are not allowed to blur together.",
               },
             },
           ],
