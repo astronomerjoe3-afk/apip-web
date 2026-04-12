@@ -41,6 +41,7 @@ Module `M14` is the late-core astronomy and cosmology module built around stars,
   - widened coverage across all six astronomy lessons instead of repeating one narrow skill
   - raised IGCSE-style rigor with mechanism, hierarchy, and quantitative items in light-year, redshift, and Hubble-law lessons
   - reduced repetition by separating diagnostic recall from concept-gate reasoning prompts before combining them into mastery
+  - added a dedicated mastery-extension layer so each M14 lesson now goes beyond the bare `40`-item minimum with extra synthesis and calculation prompts
 - Delivery-rule alignment preserved:
   - diagnostics still use the existing engine's `2-5` question window
   - concept check still runs on the existing first-correct gate behavior

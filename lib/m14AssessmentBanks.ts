@@ -195,6 +195,18 @@ function l1ConceptRaw(): RawItem[] {
   ];
 }
 
+function l1MasteryExtensionRaw(): RawItem[] {
+  const hint = "Use a full classification clue, not just the brightest-looking label.";
+  return [
+    ...mcMany(hint, [
+      ["An object changes phase and is visible by reflected sunlight. Which classification is strongest even if it looks very bright?", ["planet", "star", "galaxy", "nebula"], 0, "Phase changes plus reflected sunlight point to a planet rather than a self-luminous star."],
+    ]),
+    ...shortMany(hint, [
+      { prompt: "The strongest classification clue is the light ...", acceptedAnswers: exact("source", "origin") },
+    ]),
+  ];
+}
+
 function l2DiagnosticRaw(): RawItem[] {
   const hint = "Track the stage and the stellar mass together.";
   return [
@@ -251,6 +263,18 @@ function l2ConceptRaw(): RawItem[] {
       { prompt: "A black hole requires very large remaining ...", acceptedAnswers: exact("mass") },
       { prompt: "A flat list hides the later ... in the lifecycle.", acceptedAnswers: exact("branching", "branch") },
       { prompt: "The object left behind is the stellar ...", acceptedAnswers: exact("remnant") },
+    ]),
+  ];
+}
+
+function l2MasteryExtensionRaw(): RawItem[] {
+  const hint = "Keep the stellar remnant tied to the mass-dependent branch.";
+  return [
+    ...mcMany(hint, [
+      ["Two stars share the nebula, protostar, and main-sequence stages, but one ends as a white dwarf and the other leaves a neutron star. What best explains the difference?", ["they had different initial masses", "one was observed at night", "one reflected more light", "they were in different constellations"], 0, "The shared early stages can still lead to different remnants because stellar mass changes the later route."],
+    ]),
+    ...shortMany(hint, [
+      { prompt: "The later stellar route is controlled mainly by initial ...", acceptedAnswers: exact("mass") },
     ]),
   ];
 }
@@ -315,6 +339,18 @@ function l3ConceptRaw(): RawItem[] {
   ];
 }
 
+function l3MasteryExtensionRaw(): RawItem[] {
+  const hint = "Keep the scale hierarchy and the gravitational grouping visible.";
+  return [
+    ...mcMany(hint, [
+      ["Which order runs from smaller system to larger system most correctly?", ["star system -> galaxy -> universe", "galaxy -> star system -> universe", "universe -> galaxy -> star system", "star -> universe -> galaxy"], 0, "A star system sits inside a galaxy, and galaxies sit inside the universe."],
+    ]),
+    ...shortMany(hint, [
+      { prompt: "The Milky Way is one ... containing our Solar System.", acceptedAnswers: exact("galaxy") },
+    ]),
+  ];
+}
+
 function l4DiagnosticRaw(): RawItem[] {
   const hint = "Keep the unit meaning and the distance calculation together.";
   return [
@@ -371,6 +407,18 @@ function l4ConceptRaw(): RawItem[] {
       { prompt: "Astronomy uses AU inside the Solar System but ... for stars.", acceptedAnswers: exact("light-years", "light-year") },
       { prompt: "A larger number of light-years means a ... star.", acceptedAnswers: exact("farther", "further", "more distant") },
       { prompt: "The key question answered by light-year is how ...", acceptedAnswers: exact("far") },
+    ]),
+  ];
+}
+
+function l4MasteryExtensionRaw(): RawItem[] {
+  const hint = "Translate between the travel story and the distance unit carefully.";
+  return [
+    ...mcMany(hint, [
+      ["A star is 12 light-years away. Which statement is strongest?", ["light from the star takes about 12 years to reach us and the distance is about 12 light-years", "the star is 12 years old", "the star moves at 12 times the speed of light", "the star is 12 kilometres away"], 0, "A light-year is a distance, but it is defined from how far light travels in one year."],
+    ]),
+    ...shortMany(hint, [
+      { prompt: "A light-year is built from speed x ...", acceptedAnswers: exact("time") },
     ]),
   ];
 }
@@ -435,6 +483,18 @@ function l5ConceptRaw(): RawItem[] {
   ];
 }
 
+function l5MasteryExtensionRaw(): RawItem[] {
+  const hint = "Use the spectral-line calculation before describing the cosmology trend.";
+  return [
+    ...mcMany(hint, [
+      ["A spectral line is emitted at 600 nm and observed at 690 nm. What is the redshift z?", ["0.15", "0.09", "1.15", "90"], 0, "The wavelength change is 90 nm, so z = 90 / 600 = 0.15."],
+    ]),
+    ...shortMany(hint, [
+      { prompt: "Positive redshift means the observed wavelength is ... than the emitted wavelength.", acceptedAnswers: exact("longer", "greater") },
+    ]),
+  ];
+}
+
 function l6DiagnosticRaw(): RawItem[] {
   const hint = "Keep the hot dense early state, expansion language, and Hubble trend together.";
   return [
@@ -495,6 +555,18 @@ function l6ConceptRaw(): RawItem[] {
   ];
 }
 
+function l6MasteryExtensionRaw(): RawItem[] {
+  const hint = "Keep the Hubble-law calculation tied to the expansion model.";
+  return [
+    ...mcMany(hint, [
+      ["Using H0 = 70 km s^-1 Mpc^-1, what recession speed is predicted for a galaxy 120 Mpc away?", ["8,400 km/s", "840 km/s", "14,000 km/s", "70 km/s"], 0, "Use v = H0 d = 70 x 120 = 8,400 km/s."],
+    ]),
+    ...shortMany(hint, [
+      { prompt: "Hubble's law supports large-scale cosmic ...", acceptedAnswers: exact("expansion") },
+    ]),
+  ];
+}
+
 const M14_DIAGNOSTIC_BUILDERS: Record<string, () => RawItem[]> = {
   M14_L1: l1DiagnosticRaw,
   M14_L2: l2DiagnosticRaw,
@@ -514,12 +586,12 @@ const M14_CONCEPT_BUILDERS: Record<string, () => RawItem[]> = {
 };
 
 const M14_MASTERY_BUILDERS: Record<string, () => RawItem[]> = {
-  M14_L1: () => combine(l1DiagnosticRaw(), l1ConceptRaw()),
-  M14_L2: () => combine(l2DiagnosticRaw(), l2ConceptRaw()),
-  M14_L3: () => combine(l3DiagnosticRaw(), l3ConceptRaw()),
-  M14_L4: () => combine(l4DiagnosticRaw(), l4ConceptRaw()),
-  M14_L5: () => combine(l5DiagnosticRaw(), l5ConceptRaw()),
-  M14_L6: () => combine(l6DiagnosticRaw(), l6ConceptRaw()),
+  M14_L1: () => combine(l1DiagnosticRaw(), l1ConceptRaw(), l1MasteryExtensionRaw()),
+  M14_L2: () => combine(l2DiagnosticRaw(), l2ConceptRaw(), l2MasteryExtensionRaw()),
+  M14_L3: () => combine(l3DiagnosticRaw(), l3ConceptRaw(), l3MasteryExtensionRaw()),
+  M14_L4: () => combine(l4DiagnosticRaw(), l4ConceptRaw(), l4MasteryExtensionRaw()),
+  M14_L5: () => combine(l5DiagnosticRaw(), l5ConceptRaw(), l5MasteryExtensionRaw()),
+  M14_L6: () => combine(l6DiagnosticRaw(), l6ConceptRaw(), l6MasteryExtensionRaw()),
 };
 
 export function m14GeneratedDiagnosticItems(code: string): UnknownRecord[] {
