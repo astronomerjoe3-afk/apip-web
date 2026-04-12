@@ -19241,6 +19241,14 @@ function preWorkedExampleVideoMeta(code: string): {
     const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
     return staticPublishedVideoAssetUrl("A10", normalizedLessonId, filename, currentA10NuclearAssetVersion);
   };
+  const currentA11AstroAssetVersion = "20260412a11a";
+  const staticA11AstroVideoAssetUrl = (
+    lessonId: string,
+    filename: "final.mp4" | "thumbnail.png" | "captions.vtt",
+  ) => {
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    return staticPublishedVideoAssetUrl("A11", normalizedLessonId, filename, currentA11AstroAssetVersion);
+  };
   switch (effectiveCode) {
     case "A8_L1":
       return {
@@ -19493,6 +19501,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticA10NuclearVideoAssetUrl("A10_L6", "final.mp4"),
         poster_url: staticA10NuclearVideoAssetUrl("A10_L6", "thumbnail.png"),
         captions_url: staticA10NuclearVideoAssetUrl("A10_L6", "captions.vtt"),
+      };
+    case "A11_L1":
+      return {
+        body: "Use this video to keep gravitational field strength and gravitational potential distinct but linked before the worked example begins.",
+        caption: "Video explainer: gravitational field as force per unit mass, gravitational potential as energy per unit mass, and why both describe the same landscape differently before the lesson example.",
+        highlights: [
+          "Gravitational field strength is force per unit mass",
+          "Gravitational potential is work done per unit mass relative to infinity",
+          "Field and potential are linked but follow different distance dependences",
+        ],
+        checkForUnderstanding: "Why can two positions belong to the same gravitational landscape while field strength and potential still answer different questions there?",
+        video_url: staticA11AstroVideoAssetUrl("A11_L1", "final.mp4"),
+        poster_url: staticA11AstroVideoAssetUrl("A11_L1", "thumbnail.png"),
+        captions_url: staticA11AstroVideoAssetUrl("A11_L1", "captions.vtt"),
+      };
+    case "A11_L2":
+      return {
+        body: "Use this video to connect orbital mechanics and satellite observation roles before the worked example begins.",
+        caption: "Video explainer: gravity as the turning force for orbit, orbital speed and period, and why geostationary and polar orbits serve different observation jobs before the lesson example.",
+        highlights: [
+          "Gravity provides the centripetal pull for satellites",
+          "Orbital radius changes speed and period",
+          "Observation role depends on the chosen orbit, not just the satellite label",
+        ],
+        checkForUnderstanding: "Why can two satellites around the same planet have different usefulness even though both are just orbiting under gravity?",
+        video_url: staticA11AstroVideoAssetUrl("A11_L2", "final.mp4"),
+        poster_url: staticA11AstroVideoAssetUrl("A11_L2", "thumbnail.png"),
+        captions_url: staticA11AstroVideoAssetUrl("A11_L2", "captions.vtt"),
+      };
+    case "A11_L3":
+      return {
+        body: "Use this video to connect spectral evidence, temperature, luminosity, and H-R placement before the worked example begins.",
+        caption: "Video explainer: stellar spectra, Wien's law, luminosity from radius and temperature, and H-R diagram placement before the lesson example.",
+        highlights: [
+          "A star's spectrum reveals temperature and composition clues",
+          "Wien's law links peak wavelength to surface temperature",
+          "Luminosity and temperature together determine H-R diagram placement",
+        ],
+        checkForUnderstanding: "Why should the spectrum be read before naming the H-R region of a star?",
+        video_url: staticA11AstroVideoAssetUrl("A11_L3", "final.mp4"),
+        poster_url: staticA11AstroVideoAssetUrl("A11_L3", "thumbnail.png"),
+        captions_url: staticA11AstroVideoAssetUrl("A11_L3", "captions.vtt"),
+      };
+    case "A11_L4":
+      return {
+        body: "Use this video to connect parallax, standard candles, and distance-ladder choice before the worked example begins.",
+        caption: "Video explainer: parallax geometry, parsecs, standard-candle brightness logic, and why astronomy uses a distance ladder before the lesson example.",
+        highlights: [
+          "Parallax is the geometric rung for relatively nearby stars",
+          "Standard candles use known luminosity plus apparent brightness",
+          "The distance ladder exists because one method does not work equally well at every scale",
+        ],
+        checkForUnderstanding: "Why does astronomy need a ladder of distance methods instead of one universal distance formula for every object?",
+        video_url: staticA11AstroVideoAssetUrl("A11_L4", "final.mp4"),
+        poster_url: staticA11AstroVideoAssetUrl("A11_L4", "thumbnail.png"),
+        captions_url: staticA11AstroVideoAssetUrl("A11_L4", "captions.vtt"),
+      };
+    case "A11_L5":
+      return {
+        body: "Use this video to connect stellar evolution pathways, compact remnants, and Schwarzschild-radius reasoning before the worked example begins.",
+        caption: "Video explainer: mass-dependent stellar evolution, white dwarfs, neutron stars, black holes, and Schwarzschild radius comparison before the lesson example.",
+        highlights: [
+          "Initial stellar mass controls the broad evolution pathway",
+          "White dwarfs, neutron stars, and black holes are mass-dependent endpoints",
+          "Schwarzschild radius provides the event-horizon threshold for black-hole reasoning",
+        ],
+        checkForUnderstanding: "Why is it not enough to list stellar remnants without first talking about the starting mass of the star?",
+        video_url: staticA11AstroVideoAssetUrl("A11_L5", "final.mp4"),
+        poster_url: staticA11AstroVideoAssetUrl("A11_L5", "thumbnail.png"),
+        captions_url: staticA11AstroVideoAssetUrl("A11_L5", "captions.vtt"),
+      };
+    case "A11_L6":
+      return {
+        body: "Use this video to connect redshift, recession speed, Hubble distance, and cosmology interpretation before the worked example begins.",
+        caption: "Video explainer: spectral redshift, recession speed, Hubble's law, and modern expansion interpretation with dark energy before the lesson example.",
+        highlights: [
+          "Redshift links observed spectral stretching to recession evidence",
+          "Hubble's law connects recession speed and distance in the simple model",
+          "Modern cosmology uses dark energy to describe accelerated expansion",
+        ],
+        checkForUnderstanding: "Why does cosmology start from shifted spectra instead of from a bare claim that the universe is expanding?",
+        video_url: staticA11AstroVideoAssetUrl("A11_L6", "final.mp4"),
+        poster_url: staticA11AstroVideoAssetUrl("A11_L6", "thumbnail.png"),
+        captions_url: staticA11AstroVideoAssetUrl("A11_L6", "captions.vtt"),
       };
     case "M1_L1":
       return {
