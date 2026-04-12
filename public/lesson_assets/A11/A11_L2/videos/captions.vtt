@@ -1,0 +1,441 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.703
+Lesson 2 becomes much clearer when the orbit itself is treated as both a mechanics problem and a mission-design choice.
+
+2
+00:00:05.703 --> 00:00:11.407
+Mechanics side means gravity turns the path.
+
+3
+00:00:11.407 --> 00:00:17.110
+A satellite stays in orbit because gravity continuously bends its motion.
+
+4
+00:00:17.110 --> 00:00:22.813
+Radius side means speed and period change.
+
+5
+00:00:22.813 --> 00:00:28.517
+Higher orbits move more slowly and take longer to complete each orbit.
+
+6
+00:00:28.517 --> 00:00:34.220
+Role side means mission depends on orbit type.
+
+7
+00:00:34.220 --> 00:00:39.923
+Geostationary, low orbit, and polar orbit are useful for different reasons.
+
+8
+00:00:39.923 --> 00:00:45.627
+Orbit and observation role should be read together, not as separate astronomy facts.
+
+9
+00:00:45.627 --> 00:00:51.330
+Keep this takeaway in view: Orbit and observation role should be read together, not as separate astronomy facts.
+
+10
+00:00:51.330 --> 00:00:57.366
+This diagram matters because it keeps the same orbit choice linked to both its physical motion and its practical observation purpose.
+
+11
+00:00:57.366 --> 00:01:03.401
+Orbital mechanics means gravity keeps turning the satellite.
+
+12
+00:01:03.401 --> 00:01:09.437
+The circular path needs a centripetal pull and gravity provides it.
+
+13
+00:01:09.437 --> 00:01:15.472
+Timing means period depends on radius.
+
+14
+00:01:15.472 --> 00:01:21.508
+Different orbital radii produce very different revisit times or fixed-position behavior.
+
+15
+00:01:21.508 --> 00:01:27.543
+Mission use means role follows orbit geometry.
+
+16
+00:01:27.543 --> 00:01:33.579
+Coverage, revisit, and fixed-view communication all come from the chosen orbit.
+
+17
+00:01:33.579 --> 00:01:39.614
+Orbit type is meaningful because its mechanics support a specific observational role.
+
+18
+00:01:39.614 --> 00:01:45.650
+Keep this takeaway in view: Orbit type is meaningful because its mechanics support a specific observational role.
+
+19
+00:01:45.650 --> 00:01:50.960
+A track-lane analogy helps because satellites at different radii still circle the same planet but do so with different speeds, periods, and coverage patterns.
+
+20
+00:01:50.960 --> 00:01:56.270
+Lower lane means shorter path and faster lap.
+
+21
+00:01:56.270 --> 00:02:01.580
+Lower orbit generally means faster orbital speed and shorter period.
+
+22
+00:02:01.580 --> 00:02:06.890
+Higher lane means longer path and slower lap.
+
+23
+00:02:06.890 --> 00:02:12.200
+Higher orbit generally means slower speed and longer period.
+
+24
+00:02:12.200 --> 00:02:17.510
+Lesson gain means role becomes intuitive.
+
+25
+00:02:17.510 --> 00:02:22.820
+Different lap behavior makes different mission roles sensible.
+
+26
+00:02:22.820 --> 00:02:28.130
+Orbital radius shapes the lap time, and the lap time shapes the mission role.
+
+27
+00:02:28.130 --> 00:02:33.440
+Keep this takeaway in view: Orbital radius shapes the lap time, and the lap time shapes the mission role.
+
+28
+00:02:33.440 --> 00:02:39.852
+Lesson 2 is strongest when the learner treats orbital speed and period as consequences of radius in a gravity-controlled orbit rather than as isolated facts.
+
+29
+00:02:39.852 --> 00:02:46.263
+Speed job means higher orbit means lower speed.
+
+30
+00:02:46.263 --> 00:02:52.675
+The satellite needs less speed when gravity is weaker farther out.
+
+31
+00:02:52.675 --> 00:02:59.087
+Period job means higher orbit means longer period.
+
+32
+00:02:59.087 --> 00:03:05.498
+The larger path and lower speed combine to increase the orbital time.
+
+33
+00:03:05.498 --> 00:03:11.910
+Mission bridge means period and coverage are related.
+
+34
+00:03:11.910 --> 00:03:18.322
+Different periods create different observation or communication advantages.
+
+35
+00:03:18.322 --> 00:03:24.733
+Keep these relations visible: v = sqrt(G M / r); T = 2 pi r / v; T^2 = 4 pi^2 r^3 / (G M); and v = 2 pi r / T.
+
+36
+00:03:24.733 --> 00:03:31.145
+Use one radius to generate both the speed and the period.
+
+37
+00:03:31.145 --> 00:03:37.557
+Then use the orbit type to explain why that motion suits a mission role.
+
+38
+00:03:37.557 --> 00:03:43.968
+Radius controls both orbital motion and the practical usefulness of the orbit.
+
+39
+00:03:43.968 --> 00:03:50.380
+Keep this takeaway in view: Radius controls both orbital motion and the practical usefulness of the orbit.
+
+40
+00:03:50.380 --> 00:03:55.157
+A dependable Lesson 2 route begins with the orbital radius, then uses it to find speed and period, then turns back to the mission role and explains why that orbit is appropriate.
+
+41
+00:03:55.157 --> 00:03:59.935
+Step 1 means radius.
+
+42
+00:03:59.935 --> 00:04:04.712
+Start with the orbital size from the planet's center.
+
+43
+00:04:04.712 --> 00:04:09.489
+Step 2 means speed.
+
+44
+00:04:09.489 --> 00:04:14.266
+Use the gravity-orbit relation for velocity.
+
+45
+00:04:14.266 --> 00:04:19.044
+Step 3 means period.
+
+46
+00:04:19.044 --> 00:04:23.821
+Use the radius and speed to find the orbital time.
+
+47
+00:04:23.821 --> 00:04:28.598
+Step 4 means mission role.
+
+48
+00:04:28.598 --> 00:04:33.375
+Explain why that orbit geometry suits the task.
+
+49
+00:04:33.375 --> 00:04:38.153
+Orbit questions are strongest when the role is justified by the mechanics.
+
+50
+00:04:38.153 --> 00:04:42.930
+Keep this takeaway in view: Orbit questions are strongest when the role is justified by the mechanics.
+
+51
+00:04:42.930 --> 00:04:47.442
+The first deep idea is that orbit is not an absence of gravity.
+
+52
+00:04:47.442 --> 00:04:51.954
+Orbit is the result of gravity bending the satellite's motion every moment.
+
+53
+00:04:51.954 --> 00:04:56.466
+Without gravity means straight-line motion.
+
+54
+00:04:56.466 --> 00:05:00.978
+The satellite would continue tangentially away.
+
+55
+00:05:00.978 --> 00:05:05.490
+With gravity means curved path.
+
+56
+00:05:05.490 --> 00:05:10.002
+Gravity supplies the inward pull that keeps the orbit turning.
+
+57
+00:05:10.002 --> 00:05:14.514
+Lesson gain means orbit stays physical.
+
+58
+00:05:14.514 --> 00:05:19.026
+The satellite is constantly falling around the planet, not hovering unsupported.
+
+59
+00:05:19.026 --> 00:05:23.538
+Orbit is a gravity-turning story, not a gravity-free story.
+
+60
+00:05:23.538 --> 00:05:28.050
+Keep this takeaway in view: Orbit is a gravity-turning story, not a gravity-free story.
+
+61
+00:05:28.050 --> 00:05:32.873
+The second deep idea is that orbit comparisons should always begin with radius because both speed and period follow from it.
+
+62
+00:05:32.873 --> 00:05:37.697
+Speed change means higher orbit is slower.
+
+63
+00:05:37.697 --> 00:05:42.520
+The required orbital speed falls as radius increases.
+
+64
+00:05:42.520 --> 00:05:47.343
+Period change means higher orbit takes longer.
+
+65
+00:05:47.343 --> 00:05:52.167
+The orbit takes more time to complete at larger radius.
+
+66
+00:05:52.167 --> 00:05:56.990
+Lesson gain means comparisons become structured.
+
+67
+00:05:56.990 --> 00:06:01.813
+Radius becomes the central hinge quantity.
+
+68
+00:06:01.813 --> 00:06:06.637
+Different orbital heights create different speed-period packages.
+
+69
+00:06:06.637 --> 00:06:11.460
+Keep this takeaway in view: Different orbital heights create different speed-period packages.
+
+70
+00:06:11.460 --> 00:06:17.434
+The third deep idea is that geostationary orbit is not just 'high orbit.' It is a special period and plane choice that keeps the satellite apparently fixed over one point on Earth.
+
+71
+00:06:17.434 --> 00:06:23.409
+Period condition means one sidereal day.
+
+72
+00:06:23.409 --> 00:06:29.383
+The satellite must match Earth's rotation rate.
+
+73
+00:06:29.383 --> 00:06:35.358
+Plane condition means equatorial orbit.
+
+74
+00:06:35.358 --> 00:06:41.332
+Any tilt would make it wander north and south in the sky.
+
+75
+00:06:41.332 --> 00:06:47.307
+Role gain means continuous coverage of one region.
+
+76
+00:06:47.307 --> 00:06:53.281
+This is why it suits communications and continuous weather viewing.
+
+77
+00:06:53.281 --> 00:06:59.256
+Geostationary usefulness comes from matching both Earth's rotation period and its equatorial plane.
+
+78
+00:06:59.256 --> 00:07:05.230
+Keep this takeaway in view: Geostationary usefulness comes from matching both Earth's rotation period and its equatorial plane.
+
+79
+00:07:05.230 --> 00:07:10.729
+The final deep idea is that not every useful satellite needs to stay fixed.
+
+80
+00:07:10.729 --> 00:07:16.228
+Polar and lower orbits can sweep over many regions and deliver higher-resolution observation.
+
+81
+00:07:16.228 --> 00:07:21.727
+Polar orbit means broad surface coverage.
+
+82
+00:07:21.727 --> 00:07:27.226
+As Earth rotates beneath it, a polar satellite can eventually observe much of the planet.
+
+83
+00:07:27.226 --> 00:07:32.725
+Lower orbit means higher detail and faster revisit.
+
+84
+00:07:32.725 --> 00:07:38.224
+Closer orbits can give stronger imaging detail and shorter orbital periods.
+
+85
+00:07:38.224 --> 00:07:43.723
+Lesson gain means role follows mission need.
+
+86
+00:07:43.723 --> 00:07:49.222
+Communication, weather, and mapping can demand different orbit choices.
+
+87
+00:07:49.222 --> 00:07:54.721
+Orbit choice should always be justified by what the mission needs to observe or transmit.
+
+88
+00:07:54.721 --> 00:08:00.220
+Keep this takeaway in view: Orbit choice should always be justified by what the mission needs to observe or transmit.
+
+89
+00:08:00.220 --> 00:08:05.734
+Use this checkpoint to test whether the learner can compare orbit roles through mechanics instead of through labels alone.
+
+90
+00:08:05.734 --> 00:08:11.249
+Question means fixed view versus global sweep.
+
+91
+00:08:11.249 --> 00:08:16.763
+Why does one orbit excel at one job while another orbit suits a different job?
+
+92
+00:08:16.763 --> 00:08:22.278
+Route means coverage pattern follows orbit geometry.
+
+93
+00:08:22.278 --> 00:08:27.792
+A fixed equatorial view is useful for constant contact, while sweeping orbits are better for broader mapping.
+
+94
+00:08:27.792 --> 00:08:33.307
+Answer check means role depends on motion.
+
+95
+00:08:33.307 --> 00:08:38.821
+The mission advantage comes from period, altitude, and path across the planet.
+
+96
+00:08:38.821 --> 00:08:44.336
+Satellite usefulness is an orbit-geometry argument, not just a name label.
+
+97
+00:08:44.336 --> 00:08:49.850
+Keep this takeaway in view: Satellite usefulness is an orbit-geometry argument, not just a name label.
+
+98
+00:08:49.850 --> 00:08:54.948
+Carry one route into the worked example.
+
+99
+00:08:54.948 --> 00:09:00.045
+Start from the orbital radius, calculate the speed and period, then explain why that orbit's timing and coverage make it suitable for the stated observation or communication role.
+
+100
+00:09:00.045 --> 00:09:05.143
+Step 1 means calculate motion.
+
+101
+00:09:05.143 --> 00:09:10.241
+Use radius to get speed and period.
+
+102
+00:09:10.241 --> 00:09:15.338
+Step 2 means read coverage pattern.
+
+103
+00:09:15.338 --> 00:09:20.436
+Think about whether the orbit stays fixed or sweeps widely.
+
+104
+00:09:20.436 --> 00:09:25.534
+Step 3 means justify the role.
+
+105
+00:09:25.534 --> 00:09:30.632
+Match the orbit geometry to the mission need.
+
+106
+00:09:30.632 --> 00:09:35.729
+Keep these relations visible: v = sqrt(G M / r); T = 2 pi r / v; and match the orbit's timing and coverage to the satellite mission.
+
+107
+00:09:35.729 --> 00:09:40.827
+Do not stop at the calculation.
+
+108
+00:09:40.827 --> 00:09:45.925
+The lesson is about explaining why one orbit is chosen for one purpose rather than another.
+
+109
+00:09:45.925 --> 00:09:51.022
+Lesson 2 answers are strongest when orbit calculations and mission justification stay connected.
+
+110
+00:09:51.022 --> 00:09:56.120
+Keep this takeaway in view: Lesson 2 answers are strongest when orbit calculations and mission justification stay connected.
