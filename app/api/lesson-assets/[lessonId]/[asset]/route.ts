@@ -18,7 +18,11 @@ function isLessonId(value: string): boolean {
 
 function lessonAssetPath(lessonId: string, asset: AssetKind): string | null {
   if (!isLessonId(lessonId)) return null;
-  const moduleId = lessonId.split("_", 1)[0];
+  const moduleId =
+    lessonId.startsWith("M12_") ? "M12N"
+    : lessonId.startsWith("M13_") ? "M13N"
+    : lessonId.startsWith("M14_") ? "M14N"
+    : lessonId.split("_", 1)[0];
   switch (asset) {
     case "video":
       return path.resolve(process.cwd(), "public", "lesson_assets", moduleId, lessonId, "videos", "final.mp4");
