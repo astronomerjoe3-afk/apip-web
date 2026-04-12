@@ -1567,6 +1567,7 @@ const LOW_SIGNAL_VARIANT_WORDS = new Set([
 ]);
 const CORE_SHORT_ANSWER_FUZZY_STOPWORDS = new Set([
   "a",
+  "also",
   "an",
   "and",
   "are",
@@ -1599,6 +1600,13 @@ const CORE_SHORT_ANSWER_FUZZY_STOPWORDS = new Set([
   "with",
 ]);
 const CORE_SHORT_ANSWER_CONTRADICTION_TOKENS = new Set(["inverse", "inversely", "never", "no", "not", "opposite"]);
+const CORE_SHORT_ANSWER_PADDING_WORDS = new Set([
+  ...CORE_SHORT_ANSWER_FUZZY_STOPWORDS,
+  "just",
+  "simply",
+  "still",
+  "too",
+]);
 
 function isCoreModuleShortAnswerItem(item: UnknownRecord): boolean {
   const itemId = text(item.id).trim().replace(/-/g, "_").toUpperCase();
@@ -1624,6 +1632,15 @@ function meaningfulOpenAnswerTokens(value: unknown): string[] {
     .map((token) => token.trim())
     .filter(Boolean)
     .filter((token) => !CORE_SHORT_ANSWER_FUZZY_STOPWORDS.has(token))
+    .filter((token) => /[a-z0-9]/.test(token));
+}
+
+function normalizedShortAnswerCoreTokens(value: unknown): string[] {
+  return normalizeOpenAnswer(value)
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter(Boolean)
+    .filter((token) => !CORE_SHORT_ANSWER_PADDING_WORDS.has(token))
     .filter((token) => /[a-z0-9]/.test(token));
 }
 
@@ -1709,6 +1726,19 @@ function coreShortAnswerFuzzyMatch(answer: unknown, acceptedAnswers: string[], i
     }
 
     return approxMatchedOpenAnswerTokenCount(expectedTokens, candidateTokens) === expectedTokens.length;
+  });
+}
+
+function lowSignalPaddedShortAnswerMatch(answer: unknown, acceptedAnswers: string[]): boolean {
+  const candidateTokens = normalizedShortAnswerCoreTokens(answer);
+  if (candidateTokens.length === 0 || hasMathLikeOpenAnswerTokens(candidateTokens)) return false;
+
+  return acceptedAnswers.some((entry) => {
+    const expectedTokens = normalizedShortAnswerCoreTokens(entry);
+    if (expectedTokens.length === 0 || hasMathLikeOpenAnswerTokens(expectedTokens)) return false;
+    if (expectedTokens.length !== candidateTokens.length) return false;
+
+    return expectedTokens.every((token, index) => openAnswerTokensApproxMatch(token, candidateTokens[index]));
   });
 }
 
@@ -6755,6 +6785,168 @@ function dedupeCoreConceptBullets(values: string[]): string[] {
   return unique;
 }
 
+function includesAllCoreConceptFragments(source: string, fragments: string[]): boolean {
+  return fragments.every((fragment) => source.includes(fragment));
+}
+
+function m10CoreConceptSemanticKey(code: string, value: string): string | null {
+  if (!code.startsWith("M10_")) return null;
+
+  const normalized = coreConceptDedupKey(value);
+  if (!normalized) return null;
+
+  switch (code) {
+    case "M10_L1":
+      if (
+        includesAllCoreConceptFragments(normalized, ["current carrying", "wire", "magnetic field"]) &&
+        (normalized.includes("magnet") || normalized.includes("magnets"))
+      ) {
+        return "m10_l1_field_sources";
+      }
+      if (
+        normalized.includes("field line") &&
+        normalized.includes("direction") &&
+        (normalized.includes("strength") || normalized.includes("density") || normalized.includes("spacing"))
+      ) {
+        return "m10_l1_field_map_reading";
+      }
+      if (
+        includesAllCoreConceptFragments(normalized, ["straight current carrying", "wire", "circular", "magnetic field"])
+      ) {
+        return "m10_l1_wire_pattern";
+      }
+      if (normalized.includes("compass") && normalized.includes("direction")) {
+        return "m10_l1_compass_direction";
+      }
+      return null;
+    case "M10_L2":
+      if (
+        (normalized.includes("solenoid") || normalized.includes("coil")) &&
+        normalized.includes("magnet")
+      ) {
+        return "m10_l2_solenoid_magnet";
+      }
+      if (
+        normalized.includes("electromagnet") &&
+        (normalized.includes("current") || normalized.includes("turn") || normalized.includes("core")) &&
+        (normalized.includes("stronger") || normalized.includes("strengthen"))
+      ) {
+        return "m10_l2_strength_factors";
+      }
+      if (
+        normalized.includes("core") &&
+        (normalized.includes("concentrat") || normalized.includes("strengthen")) &&
+        normalized.includes("field")
+      ) {
+        return "m10_l2_core_role";
+      }
+      return null;
+    case "M10_L3":
+      if (
+        includesAllCoreConceptFragments(normalized, ["current carrying", "magnetic field"]) &&
+        (normalized.includes("sideways") || normalized.includes("perpendicular") || normalized.includes("force"))
+      ) {
+        return "m10_l3_sideways_force";
+      }
+      if (
+        normalized.includes("force") &&
+        normalized.includes("reverse") &&
+        (normalized.includes("current") || normalized.includes("field"))
+      ) {
+        return "m10_l3_force_reversal";
+      }
+      if (
+        normalized.includes("force") &&
+        normalized.includes("perpendicular") &&
+        normalized.includes("field") &&
+        normalized.includes("current")
+      ) {
+        return "m10_l3_perpendicular_rule";
+      }
+      return null;
+    case "M10_L4":
+      if (
+        normalized.includes("coil") &&
+        normalized.includes("opposite") &&
+        normalized.includes("force")
+      ) {
+        return "m10_l4_opposite_side_forces";
+      }
+      if (
+        normalized.includes("torque") ||
+        (normalized.includes("turning") && normalized.includes("push"))
+      ) {
+        return "m10_l4_torque";
+      }
+      if (
+        normalized.includes("commutator") &&
+        (normalized.includes("continu") || normalized.includes("same overall direction") || normalized.includes("same rotational"))
+      ) {
+        return "m10_l4_commutator_role";
+      }
+      return null;
+    case "M10_L5":
+      if (
+        normalized.includes("induction") &&
+        normalized.includes("changing") &&
+        normalized.includes("flux")
+      ) {
+        return "m10_l5_changing_flux";
+      }
+      if (
+        (normalized.includes("faster") || normalized.includes("more turns")) &&
+        (normalized.includes("induced effect") || normalized.includes("induced") || normalized.includes("emf"))
+      ) {
+        return "m10_l5_size_of_induction";
+      }
+      if (
+        normalized.includes("generator") &&
+        (normalized.includes("repeated induction") || normalized.includes("continuous rotation"))
+      ) {
+        return "m10_l5_generator_story";
+      }
+      return null;
+    case "M10_L6":
+      if (
+        normalized.includes("transformer") &&
+        normalized.includes("coil") &&
+        (normalized.includes("changing magnetic field") || normalized.includes("changing flux") || normalized.includes("shared changing"))
+      ) {
+        return "m10_l6_transformer_link";
+      }
+      if (
+        normalized.includes("voltage ratio") &&
+        normalized.includes("turns ratio")
+      ) {
+        return "m10_l6_turns_ratio";
+      }
+      if (
+        normalized.includes("transmission") &&
+        normalized.includes("current") &&
+        (normalized.includes("cable loss") || normalized.includes("losses") || normalized.includes("reduces"))
+      ) {
+        return "m10_l6_transmission_efficiency";
+      }
+      return null;
+    default:
+      return null;
+  }
+}
+
+function dedupeCoreConceptBulletsForLesson(code: string, values: string[]): string[] {
+  const seen = new Set<string>();
+  const unique: string[] = [];
+  for (const value of values) {
+    const normalized = normalizeCoreConceptBullet(value);
+    const semanticKey = m10CoreConceptSemanticKey(code, normalized);
+    const key = semanticKey || coreConceptDedupKey(normalized);
+    if (!normalized || !key || seen.has(key)) continue;
+    seen.add(key);
+    unique.push(normalized);
+  }
+  return unique;
+}
+
 function isGeneralCoreConceptBullet(value: string): boolean {
   const normalized = normalizeCoreConceptBullet(value).toLowerCase();
   if (!normalized) return false;
@@ -6777,7 +6969,7 @@ function generalCoreConceptBullets(code: string, authoredCoreConcepts: string[])
   const authored = authoredCoreConcepts
     .map((entry) => normalizeCoreConceptBullet(entry))
     .filter((entry) => isGeneralCoreConceptBullet(entry));
-  return dedupeCoreConceptBullets([...scaffold, ...authored]).slice(0, 6);
+  return dedupeCoreConceptBulletsForLesson(code, [...scaffold, ...authored]).slice(0, 6);
 }
 
 function m5RenderedQuestionOverride(item: UnknownRecord): RenderedQuestionOverride | null {
@@ -7599,6 +7791,10 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
   const compactAccepted = acceptedAnswers.map((entry) => compactOpenAnswer(entry));
 
   if (accepted.includes(candidate) || compactAccepted.includes(compactCandidate)) {
+    return true;
+  }
+
+  if (lowSignalPaddedShortAnswerMatch(answer, acceptedAnswers)) {
     return true;
   }
 
@@ -18616,7 +18812,7 @@ function preWorkedExampleVideoMeta(code: string): {
   poster_url: string;
   captions_url: string;
 } | null {
-  const assetVersion = "20260412m11a";
+  const assetVersion = "20260410d";
   const effectiveCode = String(code || "").trim().toUpperCase().replace(/^M11_/, "M13_");
   const versionedAssetFilenames: Record<string, Partial<Record<"final.mp4" | "thumbnail.png" | "captions.vtt", string>>> = {
     A1_L5: {
@@ -18658,36 +18854,6 @@ function preWorkedExampleVideoMeta(code: string): {
       "final.mp4": "final-20260411a.mp4",
       "thumbnail.png": "thumbnail-20260411a.png",
       "captions.vtt": "captions-20260411a.vtt",
-    },
-    M13_L1: {
-      "final.mp4": "final-20260412m11a.mp4",
-      "thumbnail.png": "thumbnail-20260412m11a.png",
-      "captions.vtt": "captions-20260412m11a.vtt",
-    },
-    M13_L2: {
-      "final.mp4": "final-20260412m11a.mp4",
-      "thumbnail.png": "thumbnail-20260412m11a.png",
-      "captions.vtt": "captions-20260412m11a.vtt",
-    },
-    M13_L3: {
-      "final.mp4": "final-20260412m11a.mp4",
-      "thumbnail.png": "thumbnail-20260412m11a.png",
-      "captions.vtt": "captions-20260412m11a.vtt",
-    },
-    M13_L4: {
-      "final.mp4": "final-20260412m11a.mp4",
-      "thumbnail.png": "thumbnail-20260412m11a.png",
-      "captions.vtt": "captions-20260412m11a.vtt",
-    },
-    M13_L5: {
-      "final.mp4": "final-20260412m11a.mp4",
-      "thumbnail.png": "thumbnail-20260412m11a.png",
-      "captions.vtt": "captions-20260412m11a.vtt",
-    },
-    M13_L6: {
-      "final.mp4": "final-20260412m11a.mp4",
-      "thumbnail.png": "thumbnail-20260412m11a.png",
-      "captions.vtt": "captions-20260412m11a.vtt",
     },
   };
   const staticVideoAssetUrl = (lessonId: string, filename: "final.mp4" | "thumbnail.png" | "captions.vtt") => {
@@ -20296,90 +20462,6 @@ function preWorkedExampleVideoMeta(code: string): {
         poster_url: staticVideoAssetUrl("A1_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("A1_L6", "captions.vtt"),
       };
-    case "M13_L1":
-      return {
-        body: "Use this video to separate atomic number, mass number, and charge state before the worked example begins.",
-        caption: "Video explainer: nucleus identity, proton-neutron-electron ledgers, and ion-versus-element logic before the lesson example.",
-        highlights: [
-          "Element identity follows proton number in the nucleus",
-          "Mass number counts protons and neutrons together",
-          "Changing electrons changes charge state without changing the element",
-        ],
-        checkForUnderstanding: "If one more electron is added while the nucleus stays the same, which ledger changes first and which ledger does not?",
-        video_url: staticVideoAssetUrl("M13_L1", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M13_L1", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M13_L1", "captions.vtt"),
-      };
-    case "M13_L2":
-      return {
-        body: "Use this video to keep proton number fixed before discussing isotope differences in the worked example.",
-        caption: "Video explainer: same-element isotope comparison, neutron-number differences, and stability separation before the lesson example.",
-        highlights: [
-          "Same proton count means the same element family",
-          "Different neutron counts create isotopes of that element",
-          "Stability can differ without changing the element identity",
-        ],
-        checkForUnderstanding: "If two nuclei have the same proton number but different mass numbers, what should you decide about identity before saying anything about stability?",
-        video_url: staticVideoAssetUrl("M13_L2", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M13_L2", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M13_L2", "captions.vtt"),
-      };
-    case "M13_L3":
-      return {
-        body: "Use this video to compare alpha, beta-minus, and gamma by both nuclear change and shielding before the worked example begins.",
-        caption: "Video explainer: decay-type signals, count-change bookkeeping, penetration order, and shielding logic before the lesson example.",
-        highlights: [
-          "Alpha changes both mass number and atomic number",
-          "Beta-minus changes atomic number while mass number stays the same",
-          "Gamma changes energy state without changing the nuclear counts",
-        ],
-        checkForUnderstanding: "Which is more dangerous to mix up first in a decay question: the shielding order or the nuclear-count change?",
-        video_url: staticVideoAssetUrl("M13_L3", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M13_L3", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M13_L3", "captions.vtt"),
-      };
-    case "M13_L4":
-      return {
-        body: "Use this video to read half-life as repeated halving of what remains before the worked example begins.",
-        caption: "Video explainer: equal-interval halving, decay-curve reading, remaining fraction, and large-sample predictability before the lesson example.",
-        highlights: [
-          "Half-life halves what remains, not a fixed number each round",
-          "Large samples show a stable halving pattern even though single nuclei are random",
-          "The graph and the crowd picture should tell the same decay story",
-        ],
-        checkForUnderstanding: "If three half-lives pass, which idea should you trust first: subtracting three equal chunks, or halving what remains three times?",
-        video_url: staticVideoAssetUrl("M13_L4", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M13_L4", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M13_L4", "captions.vtt"),
-      };
-    case "M13_L5":
-      return {
-        body: "Use this video to subtract background before judging detector evidence in the worked example.",
-        caption: "Video explainer: measured count rate, background radiation, corrected source reading, and detector reasoning before the lesson example.",
-        highlights: [
-          "Background radiation is always part of the raw reading",
-          "Corrected source count equals measured count minus background",
-          "A non-zero detector reading alone does not prove a strong source",
-        ],
-        checkForUnderstanding: "If two raw readings come from different background conditions, what should you correct first before comparing source activity?",
-        video_url: staticVideoAssetUrl("M13_L5", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M13_L5", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M13_L5", "captions.vtt"),
-      };
-    case "M13_L6":
-      return {
-        body: "Use this video to balance nuclear equations by both mass number and atomic number before the worked example begins.",
-        caption: "Video explainer: parent-daughter bookkeeping, emitted radiation, and A-Z balancing rules before the lesson example.",
-        highlights: [
-          "Decay equations conserve mass number and atomic number",
-          "The emitted alpha, beta-minus, or gamma term is part of the bookkeeping",
-          "A change in atomic number means the daughter is a different element",
-        ],
-        checkForUnderstanding: "When a nuclear equation feels incomplete, which two ledger totals should you check before guessing the daughter nucleus?",
-        video_url: staticVideoAssetUrl("M13_L6", "final.mp4"),
-        poster_url: staticVideoAssetUrl("M13_L6", "thumbnail.png"),
-        captions_url: staticVideoAssetUrl("M13_L6", "captions.vtt"),
-      };
     default:
       return null;
   }
@@ -20683,7 +20765,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     .map((entry) => text(entry))
     .filter(Boolean);
   const generalizedCoreConcepts = generalCoreConceptBullets(code, authoredCoreConcepts);
-  const fallbackCoreConcepts = dedupeCoreConceptBullets([
+  const fallbackCoreConcepts = dedupeCoreConceptBulletsForLesson(code, [
     ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
     ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
     ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
@@ -20716,7 +20798,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   return {
     title,
     intro: /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
-    teaching_focus: /_L1$/.test(code) ? dedupeCoreConceptBullets(teachingFocus).slice(0, 6) : teachingFocus,
+    teaching_focus: /_L1$/.test(code) ? dedupeCoreConceptBulletsForLesson(code, teachingFocus).slice(0, 6) : teachingFocus,
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     reference_tables: withEntryLessonAnalogyTable(lesson, scaffoldReferenceTables(lesson)),
     media_cards: scaffoldMediaCards(lesson),
