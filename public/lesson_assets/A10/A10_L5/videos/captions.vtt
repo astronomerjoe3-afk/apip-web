@@ -1,0 +1,445 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.621
+Lesson 5 becomes much clearer when fission is treated as both an energy event and a multiplication problem that must be controlled in time.
+
+2
+00:00:05.621 --> 00:00:11.242
+Single event means heavy nucleus splits.
+
+3
+00:00:11.242 --> 00:00:16.863
+One fission event produces lighter nuclei, released energy, and extra neutrons.
+
+4
+00:00:16.863 --> 00:00:22.484
+Chain behavior means neutrons may trigger more fissions.
+
+5
+00:00:22.484 --> 00:00:28.106
+The next generation depends on how many neutrons continue the chain.
+
+6
+00:00:28.106 --> 00:00:33.727
+Reactor design means control matters.
+
+7
+00:00:33.727 --> 00:00:39.348
+A useful reactor needs a steady chain, not a dying chain or a runaway one.
+
+8
+00:00:39.348 --> 00:00:44.969
+Reactor physics combines nuclear energy release with neutron-chain control.
+
+9
+00:00:44.969 --> 00:00:50.590
+Keep this takeaway in view: Reactor physics combines nuclear energy release with neutron-chain control.
+
+10
+00:00:50.590 --> 00:00:55.431
+This diagram matters because it keeps the neutron generations visible.
+
+11
+00:00:55.431 --> 00:01:00.272
+The reactor state depends on how one generation feeds the next.
+
+12
+00:01:00.272 --> 00:01:05.113
+Fission source means energy and neutrons released.
+
+13
+00:01:05.113 --> 00:01:09.954
+The nucleus splitting is the origin of both power and the continuing chain.
+
+14
+00:01:09.954 --> 00:01:14.795
+Multiplication path means future fissions depend on surviving neutrons.
+
+15
+00:01:14.795 --> 00:01:19.636
+Only some released neutrons go on to trigger further fissions.
+
+16
+00:01:19.636 --> 00:01:24.477
+Control path means moderation and absorption shape the chain.
+
+17
+00:01:24.477 --> 00:01:29.318
+Reactor hardware determines whether the multiplication stays steady.
+
+18
+00:01:29.318 --> 00:01:34.159
+The reactor must control the next neutron generation, not just harvest the energy from the first one.
+
+19
+00:01:34.159 --> 00:01:39.000
+Keep this takeaway in view: The reactor must control the next neutron generation, not just harvest the energy from the first one.
+
+20
+00:01:39.000 --> 00:01:44.196
+A generation-balance analogy helps because the chain reaction depends on what fraction of possibilities survive into the next round, not simply on how many are produced at the start.
+
+21
+00:01:44.196 --> 00:01:49.391
+Subcritical means too few continue.
+
+22
+00:01:49.391 --> 00:01:54.587
+The chain shrinks because too many neutrons escape or are absorbed without causing fission.
+
+23
+00:01:54.587 --> 00:01:59.782
+Critical means exactly the right share continue.
+
+24
+00:01:59.782 --> 00:02:04.978
+One generation replaces itself steadily.
+
+25
+00:02:04.978 --> 00:02:10.173
+Supercritical means too many continue.
+
+26
+00:02:10.173 --> 00:02:15.369
+The chain grows from one generation to the next.
+
+27
+00:02:15.369 --> 00:02:20.564
+Criticality is about neutron balance from generation to generation.
+
+28
+00:02:20.564 --> 00:02:25.760
+Keep this takeaway in view: Criticality is about neutron balance from generation to generation.
+
+29
+00:02:25.760 --> 00:02:32.955
+Lesson 5 is strongest when the learner can move from energy released in one fission to fissions per second for a reactor power, while also tracking the chain condition with the multiplication factor.
+
+30
+00:02:32.955 --> 00:02:40.149
+Energy job means convert MeV per fission into joules.
+
+31
+00:02:40.149 --> 00:02:47.344
+That makes one-event nuclear energy usable in power calculations.
+
+32
+00:02:47.344 --> 00:02:54.538
+Rate job means events each second for the stated power.
+
+33
+00:02:54.538 --> 00:03:01.733
+The reactor output fixes how many fissions must occur each second.
+
+34
+00:03:01.733 --> 00:03:08.927
+Control job means track k.
+
+35
+00:03:08.927 --> 00:03:16.122
+Criticality is the generation-to-generation balance condition.
+
+36
+00:03:16.122 --> 00:03:23.316
+Keep these relations visible: fission rate = power / energy per fission; P = E / t; critical reactor: k = 1; and subcritical if k < 1 and supercritical if k > 1.
+
+37
+00:03:23.316 --> 00:03:30.511
+Use the energy-per-event bridge for power calculations and the multiplication-factor bridge for reactor-state reasoning.
+
+38
+00:03:30.511 --> 00:03:37.705
+Lesson 5 needs both the per-event energy bridge and the chain-control bridge.
+
+39
+00:03:37.705 --> 00:03:44.900
+Keep this takeaway in view: Lesson 5 needs both the per-event energy bridge and the chain-control bridge.
+
+40
+00:03:44.900 --> 00:03:50.148
+A dependable Lesson 5 route begins with one fission event, then asks how many neutrons continue the chain, then explains moderator and control rods, and only after that moves into power or fuel-use calculations.
+
+41
+00:03:50.148 --> 00:03:55.396
+Step 1 means single event.
+
+42
+00:03:55.396 --> 00:04:00.645
+Start from one fission and what it releases.
+
+43
+00:04:00.645 --> 00:04:05.893
+Step 2 means generation balance.
+
+44
+00:04:05.893 --> 00:04:11.141
+Ask how many neutrons continue the chain.
+
+45
+00:04:11.141 --> 00:04:16.389
+Step 3 means reactor control.
+
+46
+00:04:16.389 --> 00:04:21.637
+Use moderator and control rods to explain the intended reactor state.
+
+47
+00:04:21.637 --> 00:04:26.885
+Step 4 means numerical rate.
+
+48
+00:04:26.885 --> 00:04:32.134
+Move to fission rate or fuel use from the power data.
+
+49
+00:04:32.134 --> 00:04:37.382
+Reactor answers are stronger when the chain logic is explained before the arithmetic begins.
+
+50
+00:04:37.382 --> 00:04:42.630
+Keep this takeaway in view: Reactor answers are stronger when the chain logic is explained before the arithmetic begins.
+
+51
+00:04:42.630 --> 00:04:47.446
+The first deep idea is that fission matters not only because it releases energy, but because it also releases neutrons that can affect future nuclei.
+
+52
+00:04:47.446 --> 00:04:52.261
+Split nucleus means lighter products appear.
+
+53
+00:04:52.261 --> 00:04:57.077
+The heavy nucleus breaks into smaller nuclei.
+
+54
+00:04:57.077 --> 00:05:01.892
+Energy release means nuclear mass-energy drops.
+
+55
+00:05:01.892 --> 00:05:06.708
+The products have lower total mass-energy than the starting state.
+
+56
+00:05:06.708 --> 00:05:11.523
+Neutron release means future chain becomes possible.
+
+57
+00:05:11.523 --> 00:05:16.339
+The extra neutrons make multiplication possible.
+
+58
+00:05:16.339 --> 00:05:21.154
+Fission is both an energy event and a neutron-source event.
+
+59
+00:05:21.154 --> 00:05:25.970
+Keep this takeaway in view: Fission is both an energy event and a neutron-source event.
+
+60
+00:05:25.970 --> 00:05:30.298
+The second deep idea is criticality.
+
+61
+00:05:30.298 --> 00:05:34.626
+A useful power reactor is designed to keep the chain steady rather than letting it die away or race upward.
+
+62
+00:05:34.626 --> 00:05:38.954
+Subcritical means too few future fissions.
+
+63
+00:05:38.954 --> 00:05:43.282
+The chain dies because not enough neutrons continue.
+
+64
+00:05:43.282 --> 00:05:47.610
+Critical means steady replacement.
+
+65
+00:05:47.610 --> 00:05:51.938
+One generation leads to one equivalent next generation.
+
+66
+00:05:51.938 --> 00:05:56.266
+Supercritical means growing chain.
+
+67
+00:05:56.266 --> 00:06:00.594
+Too many neutrons continue, so the chain strengthens.
+
+68
+00:06:00.594 --> 00:06:04.922
+The reactor state is a neutron-generation balance statement.
+
+69
+00:06:04.922 --> 00:06:09.250
+Keep this takeaway in view: The reactor state is a neutron-generation balance statement.
+
+70
+00:06:09.250 --> 00:06:14.474
+The third deep idea is hardware function.
+
+71
+00:06:14.474 --> 00:06:19.698
+The moderator slows fast neutrons so they are more effective for thermal fission, while control rods absorb some neutrons to prevent the chain from becoming too strong.
+
+72
+00:06:19.698 --> 00:06:24.922
+Moderator means slows neutrons.
+
+73
+00:06:24.922 --> 00:06:30.146
+Thermal neutrons are more effective at maintaining the intended chain in many reactors.
+
+74
+00:06:30.146 --> 00:06:35.370
+Control rods means absorb neutrons.
+
+75
+00:06:35.370 --> 00:06:40.594
+They reduce how many neutrons remain available for further fission.
+
+76
+00:06:40.594 --> 00:06:45.818
+Lesson gain means control becomes physical.
+
+77
+00:06:45.818 --> 00:06:51.042
+Reactor stability depends on concrete neutron-management tools.
+
+78
+00:06:51.042 --> 00:06:56.266
+Moderator and control rods work together by shaping neutron usefulness and neutron number.
+
+79
+00:06:56.266 --> 00:07:01.490
+Keep this takeaway in view: Moderator and control rods work together by shaping neutron usefulness and neutron number.
+
+80
+00:07:01.490 --> 00:07:06.520
+The final deep idea is the scale of reactor operation.
+
+81
+00:07:06.520 --> 00:07:11.550
+Huge thermal powers still correspond to countable per-event energy packets, so the power tells you how many fissions must occur each second.
+
+82
+00:07:11.550 --> 00:07:16.580
+Per-event energy means convert MeV to joules.
+
+83
+00:07:16.580 --> 00:07:21.610
+One fission has a small energy packet in joules.
+
+84
+00:07:21.610 --> 00:07:26.640
+Power target means joules each second.
+
+85
+00:07:26.640 --> 00:07:31.670
+The reactor's thermal output is energy delivered per second.
+
+86
+00:07:31.670 --> 00:07:36.700
+Result means fissions each second.
+
+87
+00:07:36.700 --> 00:07:41.730
+Dividing power by energy per fission gives the event rate.
+
+88
+00:07:41.730 --> 00:07:46.760
+Reactor output is easiest to scale when power is translated into fission events per second.
+
+89
+00:07:46.760 --> 00:07:51.790
+Keep this takeaway in view: Reactor output is easiest to scale when power is translated into fission events per second.
+
+90
+00:07:51.790 --> 00:07:58.368
+Use this checkpoint to test whether the learner can explain why energy release alone is not enough to characterize a useful reactor.
+
+91
+00:07:58.368 --> 00:08:04.946
+Question means why control neutrons?.
+
+92
+00:08:04.946 --> 00:08:11.523
+Why is a reactor not described fully by saying 'fission releases energy'?
+
+93
+00:08:11.523 --> 00:08:18.101
+Route means future events depend on current neutrons.
+
+94
+00:08:18.101 --> 00:08:24.679
+The chain state is determined by how many neutrons continue into the next generation.
+
+95
+00:08:24.679 --> 00:08:31.257
+Answer check means steady power needs critical balance.
+
+96
+00:08:31.257 --> 00:08:37.834
+A reactor must manage the chain to stay near critical rather than runaway or subcritical.
+
+97
+00:08:37.834 --> 00:08:44.412
+Reactor usefulness depends on neutron balance, not just on per-event energy release.
+
+98
+00:08:44.412 --> 00:08:50.990
+Keep this takeaway in view: Reactor usefulness depends on neutron balance, not just on per-event energy release.
+
+99
+00:08:50.990 --> 00:08:56.665
+Carry one route into the worked example.
+
+100
+00:08:56.665 --> 00:09:02.339
+Begin with what one fission releases, explain whether the reactor is subcritical, critical, or supercritical through neutron balance, then use the energy per fission to find the fission rate or fuel use demanded by the stated power.
+
+101
+00:09:02.339 --> 00:09:08.014
+Step 1 means chain logic.
+
+102
+00:09:08.014 --> 00:09:13.688
+Explain what happens to the neutron generations.
+
+103
+00:09:13.688 --> 00:09:19.363
+Step 2 means control features.
+
+104
+00:09:19.363 --> 00:09:25.038
+Name the moderator and control-rod roles if needed.
+
+105
+00:09:25.038 --> 00:09:30.712
+Step 3 means numerical bridge.
+
+106
+00:09:30.712 --> 00:09:36.387
+Use the energy per fission to scale up to reactor power.
+
+107
+00:09:36.387 --> 00:09:42.062
+Keep these relations visible: one fission releases energy plus neutrons; critical reactor means k = 1; and fission rate = power / energy per fission.
+
+108
+00:09:42.062 --> 00:09:47.736
+Do not jump straight to the power calculation.
+
+109
+00:09:47.736 --> 00:09:53.411
+Explain the chain condition and the control logic first.
+
+110
+00:09:53.411 --> 00:09:59.085
+Lesson 5 answers are strongest when chain control and power scaling are both visible.
+
+111
+00:09:59.085 --> 00:10:04.760
+Keep this takeaway in view: Lesson 5 answers are strongest when chain control and power scaling are both visible.

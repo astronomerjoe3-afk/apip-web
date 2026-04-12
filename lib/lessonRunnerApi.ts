@@ -19219,6 +19219,14 @@ function preWorkedExampleVideoMeta(code: string): {
     const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
     return staticPublishedVideoAssetUrl("A9", normalizedLessonId, filename, currentA9InductionAssetVersion);
   };
+  const currentA10NuclearAssetVersion = "20260412a10a";
+  const staticA10NuclearVideoAssetUrl = (
+    lessonId: string,
+    filename: "final.mp4" | "thumbnail.png" | "captions.vtt",
+  ) => {
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    return staticPublishedVideoAssetUrl("A10", normalizedLessonId, filename, currentA10NuclearAssetVersion);
+  };
   switch (effectiveCode) {
     case "A8_L1":
       return {
@@ -19387,6 +19395,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticA9InductionVideoAssetUrl("A9_L6", "final.mp4"),
         poster_url: staticA9InductionVideoAssetUrl("A9_L6", "thumbnail.png"),
         captions_url: staticA9InductionVideoAssetUrl("A9_L6", "captions.vtt"),
+      };
+    case "A10_L1":
+      return {
+        body: "Use this video to connect Rutherford scattering patterns to the tiny dense nucleus model before the worked example begins.",
+        caption: "Video explainer: straight-through majority, rare large deflections, and why Rutherford scattering requires a tiny dense positively charged nucleus before the lesson example.",
+        highlights: [
+          "Most alpha particles passing through shows that atoms are mostly empty space",
+          "Deflections show that positive charge is concentrated rather than spread out",
+          "Rare rebounds require a tiny dense massive nucleus",
+        ],
+        checkForUnderstanding: "Why do a few very large deflections tell us more than the many almost-undeflected particles?",
+        video_url: staticA10NuclearVideoAssetUrl("A10_L1", "final.mp4"),
+        poster_url: staticA10NuclearVideoAssetUrl("A10_L1", "thumbnail.png"),
+        captions_url: staticA10NuclearVideoAssetUrl("A10_L1", "captions.vtt"),
+      };
+    case "A10_L2":
+      return {
+        body: "Use this video to connect accelerating potential, particle energy, and detector-track curvature before the worked example begins.",
+        caption: "Video explainer: particle accelerators, gained kinetic energy from potential difference, and magnetic detector tracks before the lesson example.",
+        highlights: [
+          "Accelerators prepare particles by giving them kinetic energy through electric potential difference",
+          "Magnetic detector fields bend charged particles into readable curved tracks",
+          "Track radius depends on momentum-to-charge ratio while bend direction reveals charge sign",
+        ],
+        checkForUnderstanding: "If two charged particles enter the same detector field and one bends more tightly, what does that say about its momentum-to-charge ratio?",
+        video_url: staticA10NuclearVideoAssetUrl("A10_L2", "final.mp4"),
+        poster_url: staticA10NuclearVideoAssetUrl("A10_L2", "thumbnail.png"),
+        captions_url: staticA10NuclearVideoAssetUrl("A10_L2", "captions.vtt"),
+      };
+    case "A10_L3":
+      return {
+        body: "Use this video to keep decay balancing, activity, half-life, and decay constant together before the worked example begins.",
+        caption: "Video explainer: balancing nuclear decay equations, activity as decay rate, and half-life to decay-constant reasoning before the lesson example.",
+        highlights: [
+          "Nuclear equations must balance nucleon number and proton number",
+          "Activity is the decay rate, not the number of nuclei present",
+          "Half-life and decay constant are linked descriptions of the same rate behavior",
+        ],
+        checkForUnderstanding: "Why should you balance the decay equation before you start calculating half-life or activity?",
+        video_url: staticA10NuclearVideoAssetUrl("A10_L3", "final.mp4"),
+        poster_url: staticA10NuclearVideoAssetUrl("A10_L3", "thumbnail.png"),
+        captions_url: staticA10NuclearVideoAssetUrl("A10_L3", "captions.vtt"),
+      };
+    case "A10_L4":
+      return {
+        body: "Use this video to connect mass defect, total binding energy, and binding energy per nucleon before the worked example begins.",
+        caption: "Video explainer: separated nucleons, missing mass, binding-energy conversion, and binding energy per nucleon before the lesson example.",
+        highlights: [
+          "Mass defect is the difference between separated nucleon mass and actual nucleus mass",
+          "That missing mass corresponds to binding energy through delta E equals delta m c squared",
+          "Binding energy per nucleon is the comparison measure for nuclear stability",
+        ],
+        checkForUnderstanding: "Why do we compare the actual nucleus mass with the mass of separated nucleons instead of just using the nucleus mass by itself?",
+        video_url: staticA10NuclearVideoAssetUrl("A10_L4", "final.mp4"),
+        poster_url: staticA10NuclearVideoAssetUrl("A10_L4", "thumbnail.png"),
+        captions_url: staticA10NuclearVideoAssetUrl("A10_L4", "captions.vtt"),
+      };
+    case "A10_L5":
+      return {
+        body: "Use this video to connect fission energy, neutron multiplication, and reactor control before the worked example begins.",
+        caption: "Video explainer: fission events, chain reactions, critical reactor state, moderator and control rods, and fission-rate power calculations before the lesson example.",
+        highlights: [
+          "Each fission event can release both energy and neutrons",
+          "A reactor depends on controlling how many neutrons continue the chain",
+          "Moderator and control rods shape the chain toward a steady critical state",
+        ],
+        checkForUnderstanding: "Why is reactor design about neutron control as much as about the energy released in each fission event?",
+        video_url: staticA10NuclearVideoAssetUrl("A10_L5", "final.mp4"),
+        poster_url: staticA10NuclearVideoAssetUrl("A10_L5", "thumbnail.png"),
+        captions_url: staticA10NuclearVideoAssetUrl("A10_L5", "captions.vtt"),
+      };
+    case "A10_L6":
+      return {
+        body: "Use this video to connect fusion conditions, mass defect, and nuclear process comparison before the worked example begins.",
+        caption: "Video explainer: fusion of light nuclei, Coulomb barrier and plasma conditions, mass-defect energy release, and disciplined comparison with fission before the lesson example.",
+        highlights: [
+          "Fusion joins light nuclei only after extreme temperature and confinement conditions are met",
+          "Energy is released when the products are more tightly bound and therefore lower in mass-energy",
+          "Fusion and fission should be compared through physics conditions and binding-energy change, not slogans",
+        ],
+        checkForUnderstanding: "Why can fusion release energy even though work is needed first to overcome the repulsion between nuclei?",
+        video_url: staticA10NuclearVideoAssetUrl("A10_L6", "final.mp4"),
+        poster_url: staticA10NuclearVideoAssetUrl("A10_L6", "thumbnail.png"),
+        captions_url: staticA10NuclearVideoAssetUrl("A10_L6", "captions.vtt"),
       };
     case "M1_L1":
       return {

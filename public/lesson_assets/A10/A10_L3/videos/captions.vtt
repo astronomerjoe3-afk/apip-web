@@ -1,0 +1,441 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.599
+Lesson 3 becomes much clearer when decay equations and activity are treated as different questions that belong to the same radioactive process.
+
+2
+00:00:04.599 --> 00:00:09.198
+Process question means what changes?.
+
+3
+00:00:09.198 --> 00:00:13.797
+The decay equation tracks nucleon number and proton number through the transformation.
+
+4
+00:00:13.797 --> 00:00:18.396
+Rate question means how fast?.
+
+5
+00:00:18.396 --> 00:00:22.994
+Activity measures how many decays happen each second.
+
+6
+00:00:22.994 --> 00:00:27.593
+Link means same source, different job.
+
+7
+00:00:27.593 --> 00:00:32.192
+One part describes the nuclear change and the other describes its pace.
+
+8
+00:00:32.192 --> 00:00:36.791
+Decay equations and activity belong together, but they do different jobs.
+
+9
+00:00:36.791 --> 00:00:41.390
+Keep this takeaway in view: Decay equations and activity belong together, but they do different jobs.
+
+10
+00:00:41.390 --> 00:00:47.642
+This diagram matters because it prevents two common confusions: thinking activity is a particle count, and thinking a balanced decay equation already tells you how fast the source is changing.
+
+11
+00:00:47.642 --> 00:00:53.894
+Equation side means balances proton and nucleon number.
+
+12
+00:00:53.894 --> 00:01:00.147
+The nuclear transformation must conserve the right nuclear bookkeeping totals.
+
+13
+00:01:00.147 --> 00:01:06.399
+Activity side means decays per second.
+
+14
+00:01:06.399 --> 00:01:12.651
+Activity is a rate measured in becquerels, not a number of atoms.
+
+15
+00:01:12.651 --> 00:01:18.903
+Half-life side means source weakens predictably.
+
+16
+00:01:18.903 --> 00:01:25.156
+The activity and undecayed nuclei fall together with time.
+
+17
+00:01:25.156 --> 00:01:31.408
+Balancing tells you what changes, while activity and half-life tell you how quickly the source weakens.
+
+18
+00:01:31.408 --> 00:01:37.660
+Keep this takeaway in view: Balancing tells you what changes, while activity and half-life tell you how quickly the source weakens.
+
+19
+00:01:37.660 --> 00:01:43.106
+A ledger-and-clock analogy helps because decay questions often fail when the learner mixes what is emitted with how often it is emitted.
+
+20
+00:01:43.106 --> 00:01:48.551
+Ledger means what leaves and what remains.
+
+21
+00:01:48.551 --> 00:01:53.997
+The nuclear equation records the bookkeeping of the process.
+
+22
+00:01:53.997 --> 00:01:59.442
+Clock means rate of events.
+
+23
+00:01:59.442 --> 00:02:04.888
+Activity and half-life describe the timing of those events.
+
+24
+00:02:04.888 --> 00:02:10.333
+Lesson gain means separate the jobs.
+
+25
+00:02:10.333 --> 00:02:15.779
+The equation and the rate law support each other without becoming interchangeable.
+
+26
+00:02:15.779 --> 00:02:21.224
+Treat the decay equation as the ledger and activity as the clock.
+
+27
+00:02:21.224 --> 00:02:26.670
+Keep this takeaway in view: Treat the decay equation as the ledger and activity as the clock.
+
+28
+00:02:26.670 --> 00:02:33.476
+Lesson 3 is strongest when the learner can move among half-life, decay constant, activity, and undecayed nuclei without losing the meaning of each quantity.
+
+29
+00:02:33.476 --> 00:02:40.283
+Half-life job means time scale of the fall.
+
+30
+00:02:40.283 --> 00:02:47.089
+Half-life tells you how quickly the source drops by repeated halving.
+
+31
+00:02:47.089 --> 00:02:53.895
+Decay constant job means rate parameter.
+
+32
+00:02:53.895 --> 00:03:00.702
+The decay constant packages that rate into per-second form.
+
+33
+00:03:00.702 --> 00:03:07.508
+Activity bridge means linked to undecayed nuclei.
+
+34
+00:03:07.508 --> 00:03:14.315
+As N falls, A falls with it.
+
+35
+00:03:14.315 --> 00:03:21.121
+Keep these relations visible: lambda = ln(2) / t_(1/2); A = lambda N; N = N_0 (1/2)^(t / t_(1/2)); and A = A_0 (1/2)^(t / t_(1/2)).
+
+36
+00:03:21.121 --> 00:03:27.927
+Use the half-life to get the decay constant when needed, then connect activity to the number of undecayed nuclei through A equals lambda N.
+
+37
+00:03:27.927 --> 00:03:34.734
+The decay formulas are different views of the same falling radioactive source.
+
+38
+00:03:34.734 --> 00:03:41.540
+Keep this takeaway in view: The decay formulas are different views of the same falling radioactive source.
+
+39
+00:03:41.540 --> 00:03:47.155
+A dependable Lesson 3 route starts by identifying the decay process, balancing the equation, then deciding whether the question is asking for activity, decay constant, or number of undecayed nuclei.
+
+40
+00:03:47.155 --> 00:03:52.769
+Step 1 means decay type.
+
+41
+00:03:52.769 --> 00:03:58.384
+Identify alpha, beta-minus, or another nuclear process.
+
+42
+00:03:58.384 --> 00:04:03.998
+Step 2 means balance the equation.
+
+43
+00:04:03.998 --> 00:04:09.613
+Conserve proton number and nucleon number first.
+
+44
+00:04:09.613 --> 00:04:15.227
+Step 3 means identify the rate quantity.
+
+45
+00:04:15.227 --> 00:04:20.842
+Decide whether the question wants A, N, lambda, or half-life.
+
+46
+00:04:20.842 --> 00:04:26.456
+Step 4 means use the correct relation.
+
+47
+00:04:26.456 --> 00:04:32.071
+Choose the half-life or activity bridge that matches the unknown.
+
+48
+00:04:32.071 --> 00:04:37.685
+Decay questions are easier when the bookkeeping is settled before the rate calculation begins.
+
+49
+00:04:37.685 --> 00:04:43.300
+Keep this takeaway in view: Decay questions are easier when the bookkeeping is settled before the rate calculation begins.
+
+50
+00:04:43.300 --> 00:04:48.074
+The first deep idea is that decay equations are conservation statements.
+
+51
+00:04:48.074 --> 00:04:52.848
+If the nuclear numbers do not balance, the process has not been described correctly yet.
+
+52
+00:04:52.848 --> 00:04:57.622
+Mass number means nucleon total must match.
+
+53
+00:04:57.622 --> 00:05:02.396
+The total number of nucleons must balance across the equation.
+
+54
+00:05:02.396 --> 00:05:07.170
+Proton number means charge number must match.
+
+55
+00:05:07.170 --> 00:05:11.944
+The proton count must also be conserved through the change.
+
+56
+00:05:11.944 --> 00:05:16.718
+Lesson gain means avoid rate confusion.
+
+57
+00:05:16.718 --> 00:05:21.492
+A balanced equation says what changed before you discuss how fast it happened.
+
+58
+00:05:21.492 --> 00:05:26.266
+Balancing is the first gate in every decay question.
+
+59
+00:05:26.266 --> 00:05:31.040
+Keep this takeaway in view: Balancing is the first gate in every decay question.
+
+60
+00:05:31.040 --> 00:05:35.954
+The second deep idea is the meaning of activity.
+
+61
+00:05:35.954 --> 00:05:40.868
+Becquerels count events per second, so a source can have huge numbers of nuclei while only a fraction of them decay each second.
+
+62
+00:05:40.868 --> 00:05:45.782
+Activity means decays each second.
+
+63
+00:05:45.782 --> 00:05:50.696
+This is a rate quantity measured in becquerels.
+
+64
+00:05:50.696 --> 00:05:55.610
+Undecayed nuclei means how much source remains.
+
+65
+00:05:55.610 --> 00:06:00.524
+This is a count of radioactive nuclei still present.
+
+66
+00:06:00.524 --> 00:06:05.438
+Lesson gain means quantities stay clean.
+
+67
+00:06:05.438 --> 00:06:10.352
+The source size and the source rate are linked but not identical.
+
+68
+00:06:10.352 --> 00:06:15.266
+Never describe activity as the number of nuclei in the sample.
+
+69
+00:06:15.266 --> 00:06:20.180
+Keep this takeaway in view: Never describe activity as the number of nuclei in the sample.
+
+70
+00:06:20.180 --> 00:06:25.816
+The third deep idea is that activity and undecayed nuclei fall in step because activity is proportional to how many radioactive nuclei are still available to decay.
+
+71
+00:06:25.816 --> 00:06:31.451
+For N means undecayed nuclei halve.
+
+72
+00:06:31.451 --> 00:06:37.087
+After each half-life, only half the original undecayed nuclei remain.
+
+73
+00:06:37.087 --> 00:06:42.722
+For A means activity also halves.
+
+74
+00:06:42.722 --> 00:06:48.358
+Because activity tracks decay rate, it falls by the same factor.
+
+75
+00:06:48.358 --> 00:06:53.993
+Lesson gain means one halving picture.
+
+76
+00:06:53.993 --> 00:06:59.629
+The same time-story helps with both count and rate.
+
+77
+00:06:59.629 --> 00:07:05.264
+If the source halves, the activity halves too.
+
+78
+00:07:05.264 --> 00:07:10.900
+Keep this takeaway in view: If the source halves, the activity halves too.
+
+79
+00:07:10.900 --> 00:07:16.106
+The final deep idea is that the decay constant is not a new process.
+
+80
+00:07:16.106 --> 00:07:21.312
+It is another way to describe the same source weakening in rate form.
+
+81
+00:07:21.312 --> 00:07:26.518
+Conversion means lambda = ln(2) over half-life.
+
+82
+00:07:26.518 --> 00:07:31.724
+This turns a halving time into a rate constant.
+
+83
+00:07:31.724 --> 00:07:36.930
+Activity link means A = lambda N.
+
+84
+00:07:36.930 --> 00:07:42.136
+Once lambda is known, activity and undecayed nuclei connect directly.
+
+85
+00:07:42.136 --> 00:07:47.342
+Lesson gain means formula chain becomes coherent.
+
+86
+00:07:47.342 --> 00:07:52.548
+Half-life, lambda, N, and A stop feeling like isolated facts.
+
+87
+00:07:52.548 --> 00:07:57.754
+Decay constant is the bridge that connects half-life to activity calculations.
+
+88
+00:07:57.754 --> 00:08:02.960
+Keep this takeaway in view: Decay constant is the bridge that connects half-life to activity calculations.
+
+89
+00:08:02.960 --> 00:08:03.867
+Use this checkpoint to test whether the learner is separating the what-changes job from the how-fast job.
+
+90
+00:08:03.867 --> 00:08:04.773
+Question means balance before rate.
+
+91
+00:08:04.773 --> 00:08:05.680
+Why is the nuclear bookkeeping step first?
+
+92
+00:08:05.680 --> 00:08:06.587
+Route means the equation identifies the process.
+
+93
+00:08:06.587 --> 00:08:07.493
+You need the correct nuclear change before interpreting the rate quantities.
+
+94
+00:08:07.493 --> 00:08:08.400
+Answer check means process and pace are different jobs.
+
+95
+00:08:08.400 --> 00:08:09.307
+A balanced equation says what changes, while activity and half-life say how quickly.
+
+96
+00:08:09.307 --> 00:08:10.213
+Balancing first keeps decay-process reasoning and rate reasoning clean.
+
+97
+00:08:10.213 --> 00:08:11.120
+Keep this takeaway in view: Balancing first keeps decay-process reasoning and rate reasoning clean.
+
+98
+00:08:11.120 --> 00:08:17.010
+Carry one route into the worked example.
+
+99
+00:08:17.010 --> 00:08:22.900
+Balance the nuclear equation first, identify whether the question is asking for activity, decay constant, or number of undecayed nuclei, then use the half-life and A equals lambda N bridges in the right order.
+
+100
+00:08:22.900 --> 00:08:28.790
+Step 1 means balance.
+
+101
+00:08:28.790 --> 00:08:34.680
+Set the nuclear process correctly.
+
+102
+00:08:34.680 --> 00:08:40.570
+Step 2 means choose the rate bridge.
+
+103
+00:08:40.570 --> 00:08:46.460
+Decide whether lambda, A, or N is needed next.
+
+104
+00:08:46.460 --> 00:08:52.350
+Step 3 means calculate cleanly.
+
+105
+00:08:52.350 --> 00:08:58.240
+Keep activity as decays per second throughout.
+
+106
+00:08:58.240 --> 00:09:04.130
+Keep these relations visible: balance nucleon and proton number first; convert half-life to lambda when needed; and use A = lambda N and halving relations for rate calculations.
+
+107
+00:09:04.130 --> 00:09:10.020
+Do not treat activity as a count.
+
+108
+00:09:10.020 --> 00:09:15.910
+Keep it as the decay-rate quantity all the way through the solution.
+
+109
+00:09:15.910 --> 00:09:21.800
+Lesson 3 questions become much easier when the bookkeeping and rate bridges are handled in sequence.
+
+110
+00:09:21.800 --> 00:09:27.690
+Keep this takeaway in view: Lesson 3 questions become much easier when the bookkeeping and rate bridges are handled in sequence.

@@ -1,0 +1,453 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.489
+Lesson 2 becomes much clearer when the accelerator and detector are treated as one designed system rather than as two unrelated pieces of apparatus.
+
+2
+00:00:06.489 --> 00:00:12.978
+Accelerator stage means energy preparation.
+
+3
+00:00:12.978 --> 00:00:19.467
+A potential difference gives charged particles controlled kinetic energy before they probe or collide.
+
+4
+00:00:19.467 --> 00:00:25.956
+Interaction stage means beam enters field or target.
+
+5
+00:00:25.956 --> 00:00:32.444
+The prepared particle then experiences a known magnetic field or a collision region.
+
+6
+00:00:32.444 --> 00:00:38.933
+Detector stage means signals and curved tracks.
+
+7
+00:00:38.933 --> 00:00:45.422
+The detector turns the particle's path into measurable evidence.
+
+8
+00:00:45.422 --> 00:00:51.911
+Accelerators prepare beams, and detectors translate particle motion into evidence.
+
+9
+00:00:51.911 --> 00:00:58.400
+Keep this takeaway in view: Accelerators prepare beams, and detectors translate particle motion into evidence.
+
+10
+00:00:58.400 --> 00:01:03.960
+This diagram matters because it keeps the apparatus logic visible.
+
+11
+00:01:03.960 --> 00:01:09.520
+The particle only becomes interpretable because its preparation and its later track are linked.
+
+12
+00:01:09.520 --> 00:01:15.080
+Input control means accelerating potential.
+
+13
+00:01:15.080 --> 00:01:20.640
+The beam energy is deliberately set, not guessed afterwards.
+
+14
+00:01:20.640 --> 00:01:26.200
+Field response means curved path.
+
+15
+00:01:26.200 --> 00:01:31.760
+Once in a magnetic field, the charged particle bends according to its momentum and charge.
+
+16
+00:01:31.760 --> 00:01:37.320
+Measured evidence means track geometry.
+
+17
+00:01:37.320 --> 00:01:42.880
+The detector records curvature and direction so the particle properties can be inferred.
+
+18
+00:01:42.880 --> 00:01:48.440
+The detector reading only makes sense because the beam was prepared in a controlled way first.
+
+19
+00:01:48.440 --> 00:01:54.000
+Keep this takeaway in view: The detector reading only makes sense because the beam was prepared in a controlled way first.
+
+20
+00:01:54.000 --> 00:01:59.873
+A launch-and-read analogy helps because the accelerator sets the beam's motion, and the detector later reads how that motion responds to a magnetic field.
+
+21
+00:01:59.873 --> 00:02:05.747
+Launch control means beam energy set first.
+
+22
+00:02:05.747 --> 00:02:11.620
+The accelerator fixes how much kinetic energy the particle gains.
+
+23
+00:02:11.620 --> 00:02:17.493
+Turn resistance means track curvature reveals momentum.
+
+24
+00:02:17.493 --> 00:02:23.367
+A particle with greater momentum bends less in the same magnetic field.
+
+25
+00:02:23.367 --> 00:02:29.240
+Lesson gain means apparatus roles stay distinct.
+
+26
+00:02:29.240 --> 00:02:35.113
+The accelerator prepares the beam while the detector interprets what that beam does.
+
+27
+00:02:35.113 --> 00:02:40.987
+Particle experiments are easier to read when beam preparation and bending response stay distinct.
+
+28
+00:02:40.987 --> 00:02:46.860
+Keep this takeaway in view: Particle experiments are easier to read when beam preparation and bending response stay distinct.
+
+29
+00:02:46.860 --> 00:02:52.372
+Lesson 2 is strongest when the learner walks the beam through the apparatus mathematically instead of memorizing separate formulas in isolation.
+
+30
+00:02:52.372 --> 00:02:57.885
+Energy bridge means electric potential to kinetic energy.
+
+31
+00:02:57.885 --> 00:03:03.398
+The particle gains kinetic energy by moving through the accelerating potential.
+
+32
+00:03:03.398 --> 00:03:08.910
+Motion bridge means kinetic energy to speed.
+
+33
+00:03:08.910 --> 00:03:14.422
+The speed follows once the particle mass is known.
+
+34
+00:03:14.422 --> 00:03:19.935
+Detector bridge means momentum to curvature.
+
+35
+00:03:19.935 --> 00:03:25.448
+The magnetic field turns momentum and charge into a measurable radius.
+
+36
+00:03:25.448 --> 00:03:30.960
+Keep these relations visible: E_k = qV; E_k = 1/2 m v^2; r = mv / qB; and p = qBr.
+
+37
+00:03:30.960 --> 00:03:36.473
+Use the accelerating potential to find the particle energy first.
+
+38
+00:03:36.473 --> 00:03:41.985
+Then translate that energy into motion and detector curvature.
+
+39
+00:03:41.985 --> 00:03:47.498
+Treat the apparatus as one chain from potential difference to curved track.
+
+40
+00:03:47.498 --> 00:03:53.010
+Keep this takeaway in view: Treat the apparatus as one chain from potential difference to curved track.
+
+41
+00:03:53.010 --> 00:03:57.694
+A dependable Lesson 2 route begins with the particle charge and accelerating potential, then finds the gained energy, then the speed, then uses the detector field to read the curved path.
+
+42
+00:03:57.694 --> 00:04:02.377
+Step 1 means q and V.
+
+43
+00:04:02.377 --> 00:04:07.061
+Identify the charge and accelerating potential first.
+
+44
+00:04:07.061 --> 00:04:11.745
+Step 2 means kinetic energy.
+
+45
+00:04:11.745 --> 00:04:16.428
+Use E_k = qV to get the gained energy.
+
+46
+00:04:16.428 --> 00:04:21.112
+Step 3 means speed.
+
+47
+00:04:21.112 --> 00:04:25.795
+Use the energy relation with the particle mass.
+
+48
+00:04:25.795 --> 00:04:30.479
+Step 4 means track.
+
+49
+00:04:30.479 --> 00:04:35.163
+Use the magnetic field relation to interpret the curved path.
+
+50
+00:04:35.163 --> 00:04:39.846
+Beamline questions are easiest when the energy stage comes before the detector stage.
+
+51
+00:04:39.846 --> 00:04:44.530
+Keep this takeaway in view: Beamline questions are easiest when the energy stage comes before the detector stage.
+
+52
+00:04:44.530 --> 00:04:49.182
+The first deep idea is that accelerator voltage is not just apparatus decoration.
+
+53
+00:04:49.182 --> 00:04:53.834
+It is the energy-setting tool that controls the beam before any detection happens.
+
+54
+00:04:53.834 --> 00:04:58.486
+Charge matters means energy gain depends on q.
+
+55
+00:04:58.486 --> 00:05:03.138
+A larger charge gains more energy from the same potential difference.
+
+56
+00:05:03.138 --> 00:05:07.790
+Voltage matters means energy gain depends on V.
+
+57
+00:05:07.790 --> 00:05:12.442
+More accelerating potential means more kinetic energy.
+
+58
+00:05:12.442 --> 00:05:17.094
+Lesson gain means beam energy is controlled.
+
+59
+00:05:17.094 --> 00:05:21.746
+The apparatus prepares the beam quantitatively.
+
+60
+00:05:21.746 --> 00:05:26.398
+Accelerating potential is the direct bridge to kinetic energy.
+
+61
+00:05:26.398 --> 00:05:31.050
+Keep this takeaway in view: Accelerating potential is the direct bridge to kinetic energy.
+
+62
+00:05:31.050 --> 00:05:36.323
+The second deep idea is that the same gained energy does not imply the same speed for every particle.
+
+63
+00:05:36.323 --> 00:05:41.596
+Mass still matters when converting energy into motion.
+
+64
+00:05:41.596 --> 00:05:46.869
+Energy known means use 1/2 m v^2.
+
+65
+00:05:46.869 --> 00:05:52.142
+The mass is needed to turn energy into speed.
+
+66
+00:05:52.142 --> 00:05:57.415
+Particle identity matters means same energy can mean different speeds.
+
+67
+00:05:57.415 --> 00:06:02.688
+Lighter and heavier particles respond differently.
+
+68
+00:06:02.688 --> 00:06:07.961
+Lesson gain means avoid skipping straight to radius.
+
+69
+00:06:07.961 --> 00:06:13.234
+The speed should come from the energy stage, not from guesswork.
+
+70
+00:06:13.234 --> 00:06:18.507
+Use particle mass explicitly when converting accelerator energy into speed.
+
+71
+00:06:18.507 --> 00:06:23.780
+Keep this takeaway in view: Use particle mass explicitly when converting accelerator energy into speed.
+
+72
+00:06:23.780 --> 00:06:28.376
+The third deep idea is that the detector turns invisible particle motion into visible curvature.
+
+73
+00:06:28.376 --> 00:06:32.972
+At fixed magnetic field, the track radius directly reflects momentum per unit charge magnitude.
+
+74
+00:06:32.972 --> 00:06:37.568
+Large radius means harder to bend.
+
+75
+00:06:37.568 --> 00:06:42.164
+This corresponds to a larger momentum-to-charge ratio magnitude.
+
+76
+00:06:42.164 --> 00:06:46.760
+Small radius means easier to bend.
+
+77
+00:06:46.760 --> 00:06:51.356
+This corresponds to a smaller momentum-to-charge ratio magnitude.
+
+78
+00:06:51.356 --> 00:06:55.952
+Lesson gain means curvature is evidence.
+
+79
+00:06:55.952 --> 00:07:00.548
+The track picture is a measurement, not just a sketch.
+
+80
+00:07:00.548 --> 00:07:05.144
+Track radius is a measurable readout of momentum-to-charge ratio magnitude.
+
+81
+00:07:05.144 --> 00:07:09.740
+Keep this takeaway in view: Track radius is a measurable readout of momentum-to-charge ratio magnitude.
+
+82
+00:07:09.740 --> 00:07:15.410
+The final deep idea is that the detector track does more than show how strongly the particle bends.
+
+83
+00:07:15.410 --> 00:07:21.080
+The direction of bending also reveals whether the charge is positive or negative.
+
+84
+00:07:21.080 --> 00:07:26.750
+Opposite signs means curve in opposite directions.
+
+85
+00:07:26.750 --> 00:07:32.420
+Positive and negative charges respond oppositely in the same field orientation.
+
+86
+00:07:32.420 --> 00:07:38.090
+Same field means same apparatus, different sign readout.
+
+87
+00:07:38.090 --> 00:07:43.760
+The detector can distinguish sign because the bend direction changes.
+
+88
+00:07:43.760 --> 00:07:49.430
+Lesson gain means track tells two stories.
+
+89
+00:07:49.430 --> 00:07:55.100
+Curvature size gives p over q magnitude and curvature direction gives charge sign.
+
+90
+00:07:55.100 --> 00:08:00.770
+A detector track encodes both bend size and charge sign.
+
+91
+00:08:00.770 --> 00:08:06.440
+Keep this takeaway in view: A detector track encodes both bend size and charge sign.
+
+92
+00:08:06.440 --> 00:08:11.574
+Use this checkpoint to test whether the learner starts from the momentum-to-charge ratio bridge instead of from a vague statement about speed alone.
+
+93
+00:08:11.574 --> 00:08:16.709
+Question means tighter bend.
+
+94
+00:08:16.709 --> 00:08:21.843
+What property comparison should you infer first in the same magnetic field?
+
+95
+00:08:21.843 --> 00:08:26.978
+Route means smaller p over q magnitude.
+
+96
+00:08:26.978 --> 00:08:32.112
+A tighter curve means a smaller momentum-to-charge ratio magnitude.
+
+97
+00:08:32.112 --> 00:08:37.247
+Answer check means radius carries the evidence.
+
+98
+00:08:37.247 --> 00:08:42.381
+The field is fixed, so the curvature comparison is enough to start the inference.
+
+99
+00:08:42.381 --> 00:08:47.516
+Track curvature should first be read as a momentum-to-charge ratio clue.
+
+100
+00:08:47.516 --> 00:08:52.650
+Keep this takeaway in view: Track curvature should first be read as a momentum-to-charge ratio clue.
+
+101
+00:08:52.650 --> 00:08:58.775
+Carry one route into the worked example.
+
+102
+00:08:58.775 --> 00:09:04.899
+Use the accelerating potential to find the gained kinetic energy, convert that into speed using the particle mass, then use the magnetic field to find or interpret the track radius and bend direction.
+
+103
+00:09:04.899 --> 00:09:11.024
+Step 1 means voltage to energy.
+
+104
+00:09:11.024 --> 00:09:17.148
+Use the accelerator stage first.
+
+105
+00:09:17.148 --> 00:09:23.273
+Step 2 means energy to speed.
+
+106
+00:09:23.273 --> 00:09:29.398
+Use the particle mass explicitly.
+
+107
+00:09:29.398 --> 00:09:35.522
+Step 3 means speed to track.
+
+108
+00:09:35.522 --> 00:09:41.647
+Use the detector field to read curvature and sign.
+
+109
+00:09:41.647 --> 00:09:47.772
+Keep these relations visible: E_k = qV; E_k = 1/2 m v^2; and r = mv / qB and bend direction reveals charge sign.
+
+110
+00:09:47.772 --> 00:09:53.896
+Do not start with the detector formula alone.
+
+111
+00:09:53.896 --> 00:10:00.021
+The detector readout is the final stage of a beam that has already been prepared by the accelerator.
+
+112
+00:10:00.021 --> 00:10:06.145
+Accelerator and detector questions are easiest when handled as one continuous apparatus story.
+
+113
+00:10:06.145 --> 00:10:12.270
+Keep this takeaway in view: Accelerator and detector questions are easiest when handled as one continuous apparatus story.
