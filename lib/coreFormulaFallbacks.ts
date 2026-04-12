@@ -86,6 +86,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
   M4_L3: [
     { standardFormula: "p = ρgh", meaning: "Liquid pressure depends on density, gravitational field strength, and depth.", conditions: "Use for pressure in a static liquid column.", unitsText: "Pa" },
+    { standardFormula: "Δp = ρgΔh", meaning: "The pressure increase between two levels in the same liquid depends on the extra depth added.", conditions: "Use when comparing two depths in the same liquid rather than calculating both totals from zero.", unitsText: "Pa" },
   ],
   M4_L4: [
     { standardFormula: "p1 = p2", meaning: "Two points in the same resting liquid at the same depth have the same pressure.", conditions: "Use only when the liquid is the same and both points are at the same level.", unitsText: "Pa" },
@@ -93,6 +94,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
   M4_L5: [
     { standardFormula: "F = pA", meaning: "Force due to pressure depends on local pressure and patch area.", conditions: "Use after the pressure at that point is known.", unitsText: "N" },
+    { standardFormula: "force due to pressure acts normal to the surface", meaning: "Pressure is scalar at a point, but the force on a chosen patch points perpendicular to that patch.", conditions: "Use when comparing wall, floor, or slanted patches at the same point in a fluid.", unitsText: "" },
   ],
   M4_L6: [
     { standardFormula: "p_total = p_atm + ρgh", meaning: "Open-surface liquid pressure adds atmospheric pressure to the liquid contribution.", conditions: "Use for pressure below the surface of a liquid open to the air.", unitsText: "Pa", constants: "Use atmospheric pressure about 1.0 × 10^5 Pa at sea level unless the question gives a different value." },
