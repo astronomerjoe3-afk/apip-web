@@ -1,0 +1,445 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.300
+Lesson 1 becomes much clearer when gravitational field and gravitational potential are treated as linked descriptions of the same space around a mass rather than as two unrelated formulas.
+
+2
+00:00:06.300 --> 00:00:12.600
+Field strength means force per unit mass.
+
+3
+00:00:12.600 --> 00:00:18.900
+This tells you the pull a small test mass would feel at that location.
+
+4
+00:00:18.900 --> 00:00:25.200
+Potential means energy per unit mass.
+
+5
+00:00:25.200 --> 00:00:31.500
+This tells you how much work per kilogram is associated with bringing mass from infinity to that point.
+
+6
+00:00:31.500 --> 00:00:37.800
+Shared landscape means same source mass.
+
+7
+00:00:37.800 --> 00:00:44.100
+Both quantities describe the same gravitational environment in different ways.
+
+8
+00:00:44.100 --> 00:00:50.400
+Field and potential are linked, but one is a pull map and the other is an energy map.
+
+9
+00:00:50.400 --> 00:00:56.700
+Keep this takeaway in view: Field and potential are linked, but one is a pull map and the other is an energy map.
+
+10
+00:00:56.700 --> 00:01:01.808
+This diagram matters because it keeps the two gravity descriptions tied to one picture.
+
+11
+00:01:01.808 --> 00:01:06.916
+A steeper landscape and a deeper landscape are related, but they are not the same quantity.
+
+12
+00:01:06.916 --> 00:01:12.024
+Field picture means inward arrows.
+
+13
+00:01:12.024 --> 00:01:17.132
+The gravitational field points toward the mass and tells you the local pull.
+
+14
+00:01:17.132 --> 00:01:22.240
+Potential picture means negative well.
+
+15
+00:01:22.240 --> 00:01:27.348
+The potential is more negative deeper in the gravitational well.
+
+16
+00:01:27.348 --> 00:01:32.456
+Lesson gain means same radius, two readings.
+
+17
+00:01:32.456 --> 00:01:37.564
+At one position you can ask either about pull per kilogram or about energy per kilogram.
+
+18
+00:01:37.564 --> 00:01:42.672
+Use one diagram to keep local pull and energy depth separate but connected.
+
+19
+00:01:42.672 --> 00:01:47.780
+Keep this takeaway in view: Use one diagram to keep local pull and energy depth separate but connected.
+
+20
+00:01:47.780 --> 00:01:52.976
+A hillside analogy helps because the gravitational field is like the local steepness, while the potential is like the height level relative to a reference.
+
+21
+00:01:52.976 --> 00:01:58.171
+Slope means field strength.
+
+22
+00:01:58.171 --> 00:02:03.367
+A steeper slope means a stronger local pull.
+
+23
+00:02:03.367 --> 00:02:08.562
+Height means potential.
+
+24
+00:02:08.562 --> 00:02:13.758
+A lower height corresponds to a deeper gravitational energy state.
+
+25
+00:02:13.758 --> 00:02:18.953
+Lesson gain means questions stay distinct.
+
+26
+00:02:18.953 --> 00:02:24.149
+The same hill can answer both the pull-now question and the energy-level question.
+
+27
+00:02:24.149 --> 00:02:29.344
+Field is the local slope and potential is the energy height map.
+
+28
+00:02:29.344 --> 00:02:34.540
+Keep this takeaway in view: Field is the local slope and potential is the energy height map.
+
+29
+00:02:34.540 --> 00:02:40.546
+Lesson 1 is strongest when the learner sees the shared source mass and radius but keeps the formulas for local pull and energy depth cleanly separated.
+
+30
+00:02:40.546 --> 00:02:46.552
+Field law means falls as one over r squared.
+
+31
+00:02:46.552 --> 00:02:52.558
+Local gravitational pull weakens rapidly with distance.
+
+32
+00:02:52.558 --> 00:02:58.563
+Potential law means falls as one over r.
+
+33
+00:02:58.563 --> 00:03:04.569
+The potential well becomes less negative more gradually.
+
+34
+00:03:04.569 --> 00:03:10.575
+Mass bridge means test-mass quantities come later.
+
+35
+00:03:10.575 --> 00:03:16.581
+Field and potential are per-unit-mass descriptions first.
+
+36
+00:03:16.581 --> 00:03:22.587
+Keep these relations visible: g = G M / r^2; V = -G M / r; F = G M m / r^2; and E_p = m V.
+
+37
+00:03:22.587 --> 00:03:28.592
+Use g for force per kilogram and V for energy per kilogram.
+
+38
+00:03:28.592 --> 00:03:34.598
+Then connect them to force and potential energy by multiplying by the test mass only when needed.
+
+39
+00:03:34.598 --> 00:03:40.604
+Keep per-unit-mass gravity quantities distinct before multiplying by test mass.
+
+40
+00:03:40.604 --> 00:03:46.610
+Keep this takeaway in view: Keep per-unit-mass gravity quantities distinct before multiplying by test mass.
+
+41
+00:03:46.610 --> 00:03:51.415
+A dependable Lesson 1 route begins with the radius from the source mass, then asks whether the question is about force per kilogram or energy per kilogram, then applies the correct law and sign convention.
+
+42
+00:03:51.415 --> 00:03:56.221
+Step 1 means radius.
+
+43
+00:03:56.221 --> 00:04:01.026
+Locate the point in the gravitational landscape.
+
+44
+00:04:01.026 --> 00:04:05.832
+Step 2 means quantity choice.
+
+45
+00:04:05.832 --> 00:04:10.637
+Decide whether the question wants g or V.
+
+46
+00:04:10.637 --> 00:04:15.443
+Step 3 means distance law.
+
+47
+00:04:15.443 --> 00:04:20.248
+Use inverse square for g and inverse first power for V.
+
+48
+00:04:20.248 --> 00:04:25.054
+Step 4 means interpretation.
+
+49
+00:04:25.054 --> 00:04:29.859
+Keep the units and negative sign on potential meaningful.
+
+50
+00:04:29.859 --> 00:04:34.665
+The first decision in gravity questions is which map you are reading.
+
+51
+00:04:34.665 --> 00:04:39.470
+Keep this takeaway in view: The first decision in gravity questions is which map you are reading.
+
+52
+00:04:39.470 --> 00:04:43.537
+The first deep idea is that field strength is local.
+
+53
+00:04:43.537 --> 00:04:47.604
+It tells you the pull a one-kilogram test mass would feel at that point in space.
+
+54
+00:04:47.604 --> 00:04:51.671
+Meaning means force per kilogram.
+
+55
+00:04:51.671 --> 00:04:55.738
+Field strength measures the local gravitational pull at that location.
+
+56
+00:04:55.738 --> 00:04:59.805
+Direction means toward the source mass.
+
+57
+00:04:59.805 --> 00:05:03.872
+The field points inward because gravity attracts.
+
+58
+00:05:03.872 --> 00:05:07.939
+Lesson gain means field stays local.
+
+59
+00:05:07.939 --> 00:05:12.006
+The quantity answers a pull-at-this-point question.
+
+60
+00:05:12.006 --> 00:05:16.073
+Field strength is the local pull map of the gravitational landscape.
+
+61
+00:05:16.073 --> 00:05:20.140
+Keep this takeaway in view: Field strength is the local pull map of the gravitational landscape.
+
+62
+00:05:20.140 --> 00:05:25.133
+The second deep idea is that potential is not force.
+
+63
+00:05:25.133 --> 00:05:30.126
+It is a measure of the gravitational energy situation per kilogram with zero taken at infinity.
+
+64
+00:05:30.126 --> 00:05:35.119
+Meaning means work per kilogram from infinity.
+
+65
+00:05:35.119 --> 00:05:40.112
+Potential tells you the energy level of the point in the gravitational field.
+
+66
+00:05:40.112 --> 00:05:45.105
+Negative sign means deeper well is more negative.
+
+67
+00:05:45.105 --> 00:05:50.098
+Closer positions lie deeper in the gravitational well.
+
+68
+00:05:50.098 --> 00:05:55.091
+Lesson gain means energy story stays separate.
+
+69
+00:05:55.091 --> 00:06:00.084
+Potential is an energy map, not a force map.
+
+70
+00:06:00.084 --> 00:06:05.077
+Potential measures depth in the gravitational energy well, not local pull.
+
+71
+00:06:05.077 --> 00:06:10.070
+Keep this takeaway in view: Potential measures depth in the gravitational energy well, not local pull.
+
+72
+00:06:10.070 --> 00:06:15.118
+The third deep idea is that the two maps change differently with radius.
+
+73
+00:06:15.118 --> 00:06:20.166
+Field strength falls with r squared, while potential falls only with r.
+
+74
+00:06:20.166 --> 00:06:25.214
+For g means one over r squared.
+
+75
+00:06:25.214 --> 00:06:30.262
+Doubling the radius makes the field one quarter as strong.
+
+76
+00:06:30.262 --> 00:06:35.310
+For V means one over r.
+
+77
+00:06:35.310 --> 00:06:40.358
+Doubling the radius makes the potential half as negative.
+
+78
+00:06:40.358 --> 00:06:45.406
+Lesson gain means similar setting, different change.
+
+79
+00:06:45.406 --> 00:06:50.454
+The same position change affects the two quantities differently.
+
+80
+00:06:50.454 --> 00:06:55.502
+Use different distance reasoning for field and potential even in the same gravitational setting.
+
+81
+00:06:55.502 --> 00:07:00.550
+Keep this takeaway in view: Use different distance reasoning for field and potential even in the same gravitational setting.
+
+82
+00:07:00.550 --> 00:07:06.700
+The final deep idea is that gravitational potential belongs to the location and source mass, while gravitational potential energy also depends on the object placed there.
+
+83
+00:07:06.700 --> 00:07:12.850
+Potential means location property per kilogram.
+
+84
+00:07:12.850 --> 00:07:19.000
+This belongs to the gravitational landscape itself.
+
+85
+00:07:19.000 --> 00:07:25.150
+Potential energy means object-specific energy.
+
+86
+00:07:25.150 --> 00:07:31.300
+Multiply by the object's mass when the question asks for energy, not energy per unit mass.
+
+87
+00:07:31.300 --> 00:07:37.450
+Lesson gain means quantities stop mixing.
+
+88
+00:07:37.450 --> 00:07:43.600
+The same map can then be used for different masses cleanly.
+
+89
+00:07:43.600 --> 00:07:49.750
+Use potential first, then build potential energy by attaching the object's mass.
+
+90
+00:07:49.750 --> 00:07:55.900
+Keep this takeaway in view: Use potential first, then build potential energy by attaching the object's mass.
+
+91
+00:07:55.900 --> 00:08:00.891
+Use this checkpoint to test whether the learner can say both quantities on the same map without merging them into one idea.
+
+92
+00:08:00.891 --> 00:08:05.882
+Question means same point, two readings.
+
+93
+00:08:05.882 --> 00:08:10.873
+What different question does each quantity answer?
+
+94
+00:08:10.873 --> 00:08:15.864
+Route means force per mass versus energy per mass.
+
+95
+00:08:15.864 --> 00:08:20.856
+Field strength is a pull question and potential is an energy-level question.
+
+96
+00:08:20.856 --> 00:08:25.847
+Answer check means linked but not identical.
+
+97
+00:08:25.847 --> 00:08:30.838
+They describe one gravitational landscape in different ways.
+
+98
+00:08:30.838 --> 00:08:35.829
+The lesson works only if local pull and energy depth stay distinct.
+
+99
+00:08:35.829 --> 00:08:40.820
+Keep this takeaway in view: The lesson works only if local pull and energy depth stay distinct.
+
+100
+00:08:40.820 --> 00:08:47.379
+Carry one route into the worked example.
+
+101
+00:08:47.379 --> 00:08:53.938
+Locate the point by radius, decide whether the question is about pull per kilogram or energy per kilogram, then use g equals G M over r squared or V equals minus G M over r accordingly.
+
+102
+00:08:53.938 --> 00:09:00.498
+Step 1 means map choice.
+
+103
+00:09:00.498 --> 00:09:07.057
+Choose field or potential first.
+
+104
+00:09:07.057 --> 00:09:13.616
+Step 2 means radius law.
+
+105
+00:09:13.616 --> 00:09:20.175
+Use the right dependence on r.
+
+106
+00:09:20.175 --> 00:09:26.734
+Step 3 means mass attachment.
+
+107
+00:09:26.734 --> 00:09:33.293
+Only multiply by test mass when the problem asks for object-specific quantities.
+
+108
+00:09:33.293 --> 00:09:39.853
+Keep these relations visible: use g = G M / r^2 for force per unit mass; use V = -G M / r for energy per unit mass; and multiply by object mass only if force or potential energy is required.
+
+109
+00:09:39.853 --> 00:09:46.412
+Do not let the common symbols G, M, and r hide the fact that field and potential are different maps.
+
+110
+00:09:46.412 --> 00:09:52.971
+Lesson 1 questions become easy when the correct gravity map is chosen first.
+
+111
+00:09:52.971 --> 00:09:59.530
+Keep this takeaway in view: Lesson 1 questions become easy when the correct gravity map is chosen first.
