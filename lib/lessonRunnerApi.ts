@@ -19100,6 +19100,26 @@ function preWorkedExampleVideoMeta(code: string): {
     const publishedFilename = versionedAssetFilenames[assetLessonId]?.[filename] ?? filename;
     return `/lesson_assets/${assetModuleId}/${assetLessonId}/videos/${publishedFilename}?v=${assetVersion}`;
   };
+  const staticPublishedVideoAssetUrl = (
+    assetModuleId: string,
+    assetLessonId: string,
+    publishedFilename: string,
+    version: string = assetVersion,
+  ) => `/lesson_assets/${assetModuleId}/${assetLessonId}/videos/${publishedFilename}?v=${version}`;
+  const currentM12NuclearAssetVersion = "20260412m12a";
+  const staticM12NuclearVideoAssetUrl = (
+    lessonId: string,
+    filename: "final.mp4" | "thumbnail.png" | "captions.vtt",
+  ) => {
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    const publishedFilename =
+      filename === "final.mp4"
+        ? "final-20260412m12a.mp4"
+        : filename === "thumbnail.png"
+          ? "thumbnail-20260412m12a.png"
+          : "captions-20260412m12a.vtt";
+    return staticPublishedVideoAssetUrl("M12N", normalizedLessonId, publishedFilename, currentM12NuclearAssetVersion);
+  };
   switch (effectiveCode) {
     case "M1_L1":
       return {
@@ -20276,6 +20296,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticVideoAssetUrl("M9_L6", "final.mp4"),
         poster_url: staticVideoAssetUrl("M9_L6", "thumbnail.png"),
         captions_url: staticVideoAssetUrl("M9_L6", "captions.vtt"),
+      };
+    case "M12_L1":
+      return {
+        body: "Use this video to connect mass defect, binding energy, and stability before the worked example begins.",
+        caption: "Video explainer: nuclear binding, mass-energy link, binding energy per nucleon, and stability comparison before the lesson example.",
+        highlights: [
+          "Binding energy belongs to the nucleus rather than to ordinary chemical bonds",
+          "Mass defect is the mass equivalent of nuclear binding energy",
+          "Binding energy per nucleon is the fairest first stability comparison",
+        ],
+        checkForUnderstanding: "If two nuclei have different sizes, which comparison should you trust first before judging stability: total binding energy or binding energy per nucleon?",
+        video_url: staticM12NuclearVideoAssetUrl("M12_L1", "final.mp4"),
+        poster_url: staticM12NuclearVideoAssetUrl("M12_L1", "thumbnail.png"),
+        captions_url: staticM12NuclearVideoAssetUrl("M12_L1", "captions.vtt"),
+      };
+    case "M12_L2":
+      return {
+        body: "Use this video to track neutron release and control before the worked example begins.",
+        caption: "Video explainer: heavy-nucleus fission, chain reaction growth, neutron budget, and control-rod logic before the lesson example.",
+        highlights: [
+          "Fission matters because the released neutrons can trigger later fissions",
+          "A reactor is controlled when about one neutron per event keeps the chain going",
+          "Control rods work by absorbing neutrons, not by directly cooling the core",
+        ],
+        checkForUnderstanding: "When one fission event happens, what question should you answer first before naming the chain as steady or runaway?",
+        video_url: staticM12NuclearVideoAssetUrl("M12_L2", "final.mp4"),
+        poster_url: staticM12NuclearVideoAssetUrl("M12_L2", "thumbnail.png"),
+        captions_url: staticM12NuclearVideoAssetUrl("M12_L2", "captions.vtt"),
+      };
+    case "M12_L3":
+      return {
+        body: "Use this video to keep the fusion barrier and the energy release in one story before the worked example begins.",
+        caption: "Video explainer: electrostatic repulsion, high-temperature entry conditions, joining of light nuclei, and star-core context before the lesson example.",
+        highlights: [
+          "Fusion joins light nuclei instead of splitting a heavy one",
+          "Extremely high temperature matters because the nuclei repel each other first",
+          "Stars are the standard sustained-fusion context because their cores supply the needed conditions",
+        ],
+        checkForUnderstanding: "Before you talk about released energy in fusion, what physical barrier should you identify first?",
+        video_url: staticM12NuclearVideoAssetUrl("M12_L3", "final.mp4"),
+        poster_url: staticM12NuclearVideoAssetUrl("M12_L3", "thumbnail.png"),
+        captions_url: staticM12NuclearVideoAssetUrl("M12_L3", "captions.vtt"),
+      };
+    case "M12_L4":
+      return {
+        body: "Use this video to read a reactor as a linked system before the worked example begins.",
+        caption: "Video explainer: controlled chain reaction, moderator and coolant roles, staged energy transfer, and electricity generation before the lesson example.",
+        highlights: [
+          "The reactor core is a controlled heat source, not a direct electricity source",
+          "Moderator, control rods, coolant, turbine, and generator each have different jobs",
+          "The energy path runs nuclear to thermal to kinetic to electrical",
+        ],
+        checkForUnderstanding: "If you are describing a power station, which distinction should you make first: which parts control the reaction, or which parts move energy onward?",
+        video_url: staticM12NuclearVideoAssetUrl("M12_L4", "final.mp4"),
+        poster_url: staticM12NuclearVideoAssetUrl("M12_L4", "thumbnail.png"),
+        captions_url: staticM12NuclearVideoAssetUrl("M12_L4", "captions.vtt"),
+      };
+    case "M12_L5":
+      return {
+        body: "Use this video to match the isotope to the job before the worked example begins.",
+        caption: "Video explainer: task-first radioisotope choice, half-life fit, radiation-type fit, and medical-versus-industrial applications before the lesson example.",
+        highlights: [
+          "The task decides which half-life and emission type you actually want",
+          "Gamma is often useful for external detection in imaging and tracing",
+          "Imaging, tracing, treatment, and industrial checking do not all need the same isotope properties",
+        ],
+        checkForUnderstanding: "If an application only lasts a short time, what property should you judge early before choosing an isotope?",
+        video_url: staticM12NuclearVideoAssetUrl("M12_L5", "final.mp4"),
+        poster_url: staticM12NuclearVideoAssetUrl("M12_L5", "thumbnail.png"),
+        captions_url: staticM12NuclearVideoAssetUrl("M12_L5", "captions.vtt"),
+      };
+    case "M12_L6":
+      return {
+        body: "Use this video to keep benefit, hazard, and control in the same judgment before the worked example begins.",
+        caption: "Video explainer: ionising-radiation risk, contamination versus irradiation, shielding and handling controls, and waste-management reasoning before the lesson example.",
+        highlights: [
+          "A useful application still needs risk control because ionising radiation can damage tissue",
+          "Contamination and irradiation are different risk situations",
+          "Shielding, handling, storage, and waste management belong in the full judgment",
+        ],
+        checkForUnderstanding: "When a nuclear technology sounds useful, what two extra columns should you still open before deciding it is acceptable?",
+        video_url: staticM12NuclearVideoAssetUrl("M12_L6", "final.mp4"),
+        poster_url: staticM12NuclearVideoAssetUrl("M12_L6", "thumbnail.png"),
+        captions_url: staticM12NuclearVideoAssetUrl("M12_L6", "captions.vtt"),
       };
     case "A2_L1":
       return {

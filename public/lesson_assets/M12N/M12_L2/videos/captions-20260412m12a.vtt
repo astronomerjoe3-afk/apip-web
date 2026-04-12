@@ -1,0 +1,449 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.135
+The second lesson in the module is really about resisting the urge to stop the explanation too early.
+
+2
+00:00:06.135 --> 00:00:12.271
+Saying a heavy nucleus splits is not enough.
+
+3
+00:00:12.271 --> 00:00:18.406
+Fission matters because the released neutrons may trigger later fission events.
+
+4
+00:00:18.406 --> 00:00:24.542
+That is what turns one event into a chain reaction.
+
+5
+00:00:24.542 --> 00:00:30.677
+The lesson becomes rich when the learner keeps asking what the released neutrons do next, how many are lost, and how many continue the relay.
+
+6
+00:00:30.677 --> 00:00:36.813
+Once that neutron budget is visible, the difference between a dying, steady, and runaway chain reaction becomes much easier to trust.
+
+7
+00:00:36.813 --> 00:00:42.948
+Keep this takeaway in view: Lesson 2 is strongest when fission is read as a neutron-budget relay rather than a one-step split.
+
+8
+00:00:42.948 --> 00:00:49.084
+First event means heavy nucleus splits.
+
+9
+00:00:49.084 --> 00:00:55.219
+A triggered split releases energy and several neutrons.
+
+10
+00:00:55.219 --> 00:01:01.355
+Relay question means what do the neutrons do next.
+
+11
+00:01:01.355 --> 00:01:07.490
+The chain reaction depends on the later fate of the released neutrons.
+
+12
+00:01:07.490 --> 00:01:13.814
+This diagram matters because it forces the learner to keep the next generation visible.
+
+13
+00:01:13.814 --> 00:01:20.138
+One heavy nucleus splits, but the real question is what the released neutrons do next.
+
+14
+00:01:20.138 --> 00:01:26.462
+Some may escape.
+
+15
+00:01:26.462 --> 00:01:32.786
+Some may be absorbed harmlessly.
+
+16
+00:01:32.786 --> 00:01:39.110
+Some may trigger further fission events.
+
+17
+00:01:39.110 --> 00:01:45.434
+Once those paths are separated, the lesson stops sounding like vague reactor language and starts sounding like a controlled multiplication problem.
+
+18
+00:01:45.434 --> 00:01:51.758
+The diagram also makes room for reactor design, because control means managing the neutron population rather than simply naming the process.
+
+19
+00:01:51.758 --> 00:01:58.082
+Keep this takeaway in view: The diagram turns fission into a readable neutron-economy problem.
+
+20
+00:01:58.082 --> 00:02:04.406
+Released neutrons: The chain depends on how many of the emitted neutrons actually reach later fuel nuclei.
+
+21
+00:02:04.406 --> 00:02:10.730
+Lost neutrons: Escaping or absorbed neutrons reduce the multiplication of the chain.
+
+22
+00:02:10.730 --> 00:02:16.177
+A relay analogy helps because it explains why one event is not the whole process.
+
+23
+00:02:16.177 --> 00:02:21.623
+Imagine each runner handing several tokens to the next stage.
+
+24
+00:02:21.623 --> 00:02:27.070
+If too few tokens survive the handoff, the relay dies out.
+
+25
+00:02:27.070 --> 00:02:32.517
+If one useful token survives each round, the relay stays steady.
+
+26
+00:02:32.517 --> 00:02:37.963
+If more than one useful token survives, the relay grows fast.
+
+27
+00:02:37.963 --> 00:02:43.410
+Fission behaves in the same way with neutrons.
+
+28
+00:02:43.410 --> 00:02:48.857
+The analogy is not perfect, but it strongly protects the lesson from the weak statement that fission is just a heavy nucleus breaking apart.
+
+29
+00:02:48.857 --> 00:02:54.303
+Keep this takeaway in view: The analogy makes the neutron budget easier to picture before any calculation begins.
+
+30
+00:02:54.303 --> 00:02:59.750
+Too few tokens means relay dies.
+
+31
+00:02:59.750 --> 00:03:05.197
+If the handoff loses too much, the next step cannot sustain the process.
+
+32
+00:03:05.197 --> 00:03:10.643
+One useful token means relay steady.
+
+33
+00:03:10.643 --> 00:03:16.090
+A critical reactor keeps the chain going without letting it accelerate uncontrollably.
+
+34
+00:03:16.090 --> 00:03:21.709
+Three short rules anchor the lesson.
+
+35
+00:03:21.709 --> 00:03:27.328
+A fission event can release several neutrons.
+
+36
+00:03:27.328 --> 00:03:32.948
+A critical reactor needs about one continuing neutron per event on average.
+
+37
+00:03:32.948 --> 00:03:38.567
+Control rods reduce the continuing share by absorbing neutrons.
+
+38
+00:03:38.567 --> 00:03:44.186
+These lines matter because they put the chain classification on a concrete footing.
+
+39
+00:03:44.186 --> 00:03:49.805
+The learner no longer has to guess whether the chain grows or dies out.
+
+40
+00:03:49.805 --> 00:03:55.425
+The route is to count the released neutrons, subtract the losses, and then judge how many keep the relay alive.
+
+41
+00:03:55.425 --> 00:04:01.044
+Keep this takeaway in view: The formulas become clearer once the reactor state is treated as a neutron-budget judgment.
+
+42
+00:04:01.044 --> 00:04:06.663
+If fewer than one continue: The chain dies away because too little of the neutron budget reaches the next step.
+
+43
+00:04:06.663 --> 00:04:12.282
+If about one continues: The reactor stays near a steady critical state.
+
+44
+00:04:12.282 --> 00:04:17.902
+fission releases energy and several neutrons.
+
+45
+00:04:17.902 --> 00:04:23.521
+controlled reactor: about one neutron continues the chain.
+
+46
+00:04:23.521 --> 00:04:29.140
+The reactor state is decided by the continuing-neutron budget, not by the total number released alone.
+
+47
+00:04:29.140 --> 00:04:34.295
+A dependable routine for Lesson 2 has three moves.
+
+48
+00:04:34.295 --> 00:04:39.450
+First identify how many neutrons are released.
+
+49
+00:04:39.450 --> 00:04:44.605
+Second identify how many are lost by escape or non-fission absorption.
+
+50
+00:04:44.605 --> 00:04:49.760
+Third count how many remain to cause the next fission and classify the chain from that continuing share.
+
+51
+00:04:49.760 --> 00:04:54.915
+This order matters because students often see the word fission and then answer with a memorized sentence instead of a neutron-budget explanation.
+
+52
+00:04:54.915 --> 00:05:00.070
+Keep this takeaway in view: The safest routine is released neutrons, then losses, then continuing share.
+
+53
+00:05:00.070 --> 00:05:05.225
+Step 1 means count released.
+
+54
+00:05:05.225 --> 00:05:10.380
+Start by asking how many neutrons each split contributes to the next round.
+
+55
+00:05:10.380 --> 00:05:15.535
+Step 2 means count lost.
+
+56
+00:05:15.535 --> 00:05:20.690
+Escaped or absorbed neutrons must be removed from the usable budget.
+
+57
+00:05:20.690 --> 00:05:26.743
+One triggered fission event starts the story, but the chain reaction is the longer story made from many later steps.
+
+58
+00:05:26.743 --> 00:05:32.797
+This distinction matters because a learner can describe the first split correctly and still miss the reactor question completely.
+
+59
+00:05:32.797 --> 00:05:38.850
+The useful or dangerous behavior of the system comes from what happens after the split, not from the split alone.
+
+60
+00:05:38.850 --> 00:05:44.903
+That is why the lesson keeps asking what the released neutrons do next.
+
+61
+00:05:44.903 --> 00:05:50.957
+Keep this takeaway in view: A split starts the process, but the chain question is what happens next.
+
+62
+00:05:50.957 --> 00:05:57.010
+Trigger means one event.
+
+63
+00:05:57.010 --> 00:06:03.063
+The first split explains the source of released neutrons and energy.
+
+64
+00:06:03.063 --> 00:06:09.117
+Chain means many later events.
+
+65
+00:06:09.117 --> 00:06:15.170
+The chain reaction is about the repeated next-step fate of the neutrons.
+
+66
+00:06:15.170 --> 00:06:20.015
+Control rods are often described too vaguely as things that cool the reactor down.
+
+67
+00:06:20.015 --> 00:06:24.859
+That language misses their real job.
+
+68
+00:06:24.859 --> 00:06:29.704
+Control rods absorb neutrons.
+
+69
+00:06:29.704 --> 00:06:34.548
+Because later fissions depend on available neutrons, absorbing more of them reduces the rate of the chain reaction itself.
+
+70
+00:06:34.548 --> 00:06:39.393
+The heat output then falls as a consequence of the slower reaction.
+
+71
+00:06:39.393 --> 00:06:44.237
+This order matters because the control story is fundamentally a neutron-population story.
+
+72
+00:06:44.237 --> 00:06:49.082
+Keep this takeaway in view: Control rods work through neutron absorption first.
+
+73
+00:06:49.082 --> 00:06:53.926
+Direct role means absorb neutrons.
+
+74
+00:06:53.926 --> 00:06:58.771
+Control rods change the continuing-neutron budget of the chain reaction.
+
+75
+00:06:58.771 --> 00:07:03.615
+Indirect effect means less heat later.
+
+76
+00:07:03.615 --> 00:07:08.460
+The thermal output falls because fewer fissions happen after the neutron count is reduced.
+
+77
+00:07:08.460 --> 00:07:13.583
+The three reactor states become easy to remember once each one is tied to a neutron budget.
+
+78
+00:07:13.583 --> 00:07:18.706
+Subcritical means fewer than one useful neutron continues per fission on average, so the chain dies away.
+
+79
+00:07:18.706 --> 00:07:23.829
+Critical means about one continues, so the chain stays steady.
+
+80
+00:07:23.829 --> 00:07:28.952
+Supercritical means more than one continues, so the chain grows.
+
+81
+00:07:28.952 --> 00:07:34.075
+This scene matters because it gives the learner a classification route that is more physical than a memorized vocabulary trio.
+
+82
+00:07:34.075 --> 00:07:39.198
+Keep this takeaway in view: The reactor state is easiest to classify by the continuing-neutron average.
+
+83
+00:07:39.198 --> 00:07:44.321
+Subcritical means less than one.
+
+84
+00:07:44.321 --> 00:07:49.444
+The chain shrinks because the relay loses too many neutrons.
+
+85
+00:07:49.444 --> 00:07:54.567
+Critical means about one.
+
+86
+00:07:54.567 --> 00:07:59.690
+The chain stays steady because each step replaces itself once.
+
+87
+00:07:59.690 --> 00:08:02.981
+Ask four checks.
+
+88
+00:08:02.981 --> 00:08:06.271
+Does fission release neutrons that can trigger later events?
+
+89
+00:08:06.271 --> 00:08:09.562
+Yes.
+
+90
+00:08:09.562 --> 00:08:12.853
+Is the reactor state decided by how many neutrons keep the chain going?
+
+91
+00:08:12.853 --> 00:08:16.143
+Yes.
+
+92
+00:08:16.143 --> 00:08:19.434
+Do control rods reduce the rate by absorbing neutrons?
+
+93
+00:08:19.434 --> 00:08:22.725
+Yes.
+
+94
+00:08:22.725 --> 00:08:26.015
+And does a critical reactor aim for about one continuing neutron per event?
+
+95
+00:08:26.015 --> 00:08:29.306
+Yes.
+
+96
+00:08:29.306 --> 00:08:32.597
+Those checks show the full relay picture is in place.
+
+97
+00:08:32.597 --> 00:08:35.887
+Keep this takeaway in view: The quick check confirms that the fission lesson is being read as a neutron-budget story.
+
+98
+00:08:35.887 --> 00:08:39.178
+Relay check means next step matters.
+
+99
+00:08:39.178 --> 00:08:42.469
+The chain question depends on what the released neutrons do later.
+
+100
+00:08:42.469 --> 00:08:45.759
+Control check means absorb neutrons.
+
+101
+00:08:45.759 --> 00:08:49.050
+Control rods change the chain by changing the neutron population.
+
+102
+00:08:49.050 --> 00:08:54.667
+The worked example that follows gives one fission event, the released neutrons, and the losses.
+
+103
+00:08:54.667 --> 00:09:00.285
+Start by finding how many neutrons continue the chain after the losses are removed.
+
+104
+00:09:00.285 --> 00:09:05.902
+Then compare that number with the one-per-event target of a critical reactor.
+
+105
+00:09:05.902 --> 00:09:11.519
+Finally name the chain as dying out, steady, or growing.
+
+106
+00:09:11.519 --> 00:09:17.136
+Once that route is secure, the example feels like calm neutron bookkeeping instead of a reactor guess.
+
+107
+00:09:17.136 --> 00:09:22.754
+Keep this takeaway in view: The worked example is easiest when the neutron budget is counted before the reactor state is named.
+
+108
+00:09:22.754 --> 00:09:28.371
+First move: Write the total number of neutrons produced per fission.
+
+109
+00:09:28.371 --> 00:09:33.988
+Second move: Remove the neutrons that escape or fail to trigger another fission.
+
+110
+00:09:33.988 --> 00:09:39.605
+count released neutrons.
+
+111
+00:09:39.605 --> 00:09:45.223
+subtract the neutrons lost from the chain.
+
+112
+00:09:45.223 --> 00:09:50.840
+The reactor state should be named from the continuing-neutron share, not from the released count alone.
