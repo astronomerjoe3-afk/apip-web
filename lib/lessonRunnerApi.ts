@@ -17848,7 +17848,7 @@ const CORE_MODULE_ANALOGY_LABELS: Record<number, string> = {
   10: "Carrier-Loop Ledger",
   11: "Switchyard-Loop",
   12: "Field-Weave",
-  13: "Core-Vault",
+  13: "Solar-Court",
   14: "Stars and the Universe",
 };
 
@@ -17991,16 +17991,7 @@ const CORE_MODULE_ANALOGY_REPLACEMENTS: Record<number, ReadonlyArray<readonly [R
     [/\binduced emf\b/gi, "loop push"],
     [/\btransformer\b/gi, "Twin-Coil Bridge"],
   ],
-  13: [
-    [/\bnucleus\b/gi, "core vault"],
-    [/\bproton\b/gi, "identity shard"],
-    [/\bneutron\b/gi, "stability shard"],
-    [/\bisotope\b/gi, "same-badge variant"],
-    [/\bradioactive decay\b/gi, "vault drop"],
-    [/\bradiation\b/gi, "vault emission"],
-    [/\bactivity\b/gi, "detector click rate"],
-    [/\bhalf-life\b/gi, "half-life countdown"],
-  ],
+  13: [],
   14: [],
 };
 

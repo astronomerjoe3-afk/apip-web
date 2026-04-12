@@ -294,15 +294,16 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "at any moment one half of Earth is lit and one half is dark", meaning: "The day-night boundary is a rotation geometry idea under steady sunlight.", conditions: "Use when explaining why different places experience day and night at different times.", unitsText: "" },
   ],
   M13_L4: [
-    { standardFormula: "N = N₀ × (1/2)^(t / half-life)", meaning: "Equal half-life intervals halve the number that remains.", conditions: "Use for a large-sample radioactive decay calculation.", unitsText: "" },
-    { standardFormula: "remaining fraction halves each half-life", meaning: "Half-life is a multiplicative halving rule, not repeated subtraction of a fixed amount.", conditions: "Use when reasoning without a full calculation.", unitsText: "" },
+    { standardFormula: "seasons are driven by axial tilt and changing sunlight angle", meaning: "Season change is explained by how each hemisphere leans toward or away from the Sun during the orbit.", conditions: "Use when comparing opposite hemispheres or rejecting the distance-only explanation.", unitsText: "" },
+    { standardFormula: "1 year = 1 orbit of Earth around the Sun", meaning: "A year belongs to Earth's orbital timescale, while a day belongs to rotation.", conditions: "Use when separating seasonal timescale from day-night timescale.", unitsText: "year" },
   ],
   M13_L5: [
-    { standardFormula: "corrected count rate = measured count rate - background count rate", meaning: "Background radiation must be subtracted before the source count rate is interpreted.", conditions: "Use when detector readings include normal environmental background.", unitsText: "counts/s" },
+    { standardFormula: "Moon phase = visible fraction of the Moon's sunlit half", meaning: "The visible shape changes because the Earth viewpoint changes while the Sun still lights half the Moon.", conditions: "Use when explaining normal phases such as crescent, quarter, or full Moon.", unitsText: "" },
+    { standardFormula: "eclipse = special Sun-Earth-Moon shadow alignment", meaning: "An eclipse is not the normal monthly phase cause; it needs a specific alignment that brings shadow into the story.", conditions: "Use when separating eclipse events from ordinary phase geometry.", unitsText: "" },
   ],
   M13_L6: [
-    { standardFormula: "mass number before = mass number after", meaning: "Nuclear equations must conserve mass number.", conditions: "Use when balancing a nuclear equation.", unitsText: "" },
-    { standardFormula: "atomic number before = atomic number after", meaning: "Nuclear equations must also conserve atomic number.", conditions: "Use when balancing a nuclear equation.", unitsText: "" },
+    { standardFormula: "farther orbital route -> longer year", meaning: "Bodies farther from the Sun usually take longer to complete one orbit.", conditions: "Use when comparing inner and outer planets by orbital period.", unitsText: "" },
+    { standardFormula: "Solar System sketch is not to scale", meaning: "Classroom diagrams compress real distances heavily, so route order and family structure matter more than literal spacing on the page.", conditions: "Use when interpreting Solar System diagrams or models.", unitsText: "" },
   ],
   M14_L1: [
     { standardFormula: "star = self-luminous body powered by fusion", meaning: "A star makes its own light because fusion in the core is the energy source.", conditions: "Use when classifying stars versus planets.", unitsText: "" },

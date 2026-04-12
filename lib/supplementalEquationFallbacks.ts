@@ -79,28 +79,6 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
       unitsText: "V, Wb, s",
     },
   ],
-  M13_L1: [
-    {
-      standardFormula: "A = Z + N",
-      meaning: "Mass number equals proton number plus neutron number.",
-      conditions: "Use when comparing atomic number, neutron number, and nucleon number.",
-      unitsText: "count",
-    },
-    {
-      standardFormula: "charge in e units = protons - electrons",
-      meaning: "The ion charge comes from the imbalance between proton count and electron count.",
-      conditions: "Use when finding the charge state of an ion.",
-      unitsText: "e",
-    },
-  ],
-  M13_L2: [
-    {
-      standardFormula: "N = A - Z",
-      meaning: "Neutron number equals mass number minus atomic number.",
-      conditions: "Use when identifying isotopes or comparing nuclei.",
-      unitsText: "count",
-    },
-  ],
   M14_L6: [
     {
       standardFormula: "v = H₀d",
