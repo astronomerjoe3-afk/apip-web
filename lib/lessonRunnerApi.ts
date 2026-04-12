@@ -19182,7 +19182,99 @@ function preWorkedExampleVideoMeta(code: string): {
     const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
     return staticPublishedVideoAssetUrl("M14N", normalizedLessonId, filename, currentM14CosmosAssetVersion);
   };
+  const currentA8FieldsAssetVersion = "20260412a8a";
+  const staticA8FieldsVideoAssetUrl = (
+    lessonId: string,
+    filename: "final.mp4" | "thumbnail.png" | "captions.vtt",
+  ) => {
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    return staticPublishedVideoAssetUrl("A8", normalizedLessonId, filename, currentA8FieldsAssetVersion);
+  };
   switch (effectiveCode) {
+    case "A8_L1":
+      return {
+        body: "Use this video to separate field at a location from force on a chosen probe before the worked example begins.",
+        caption: "Video explainer: electric field as force per unit positive charge, test-charge sampling, and why field and force must stay distinct before the lesson example.",
+        highlights: [
+          "Electric field belongs to the location and the source charges",
+          "A test charge reveals the field but does not define it",
+          "Changing the probe changes force while the field at the point can stay the same",
+        ],
+        checkForUnderstanding: "If the probe charge is doubled at the same point, which quantity stays fixed and which quantity changes?",
+        video_url: staticA8FieldsVideoAssetUrl("A8_L1", "final.mp4"),
+        poster_url: staticA8FieldsVideoAssetUrl("A8_L1", "thumbnail.png"),
+        captions_url: staticA8FieldsVideoAssetUrl("A8_L1", "captions.vtt"),
+      };
+    case "A8_L2":
+      return {
+        body: "Use this video to keep electric potential, equipotentials, and field direction on one map before the worked example begins.",
+        caption: "Video explainer: potential as energy per charge, equipotential paths, and field-as-slope reasoning before the lesson example.",
+        highlights: [
+          "Potential is a height map while field is the local slope",
+          "Moving along one equipotential gives zero potential difference",
+          "Field lines cross equipotentials at right angles",
+        ],
+        checkForUnderstanding: "Why does moving along one equipotential not require an electric-potential-energy change?",
+        video_url: staticA8FieldsVideoAssetUrl("A8_L2", "final.mp4"),
+        poster_url: staticA8FieldsVideoAssetUrl("A8_L2", "thumbnail.png"),
+        captions_url: staticA8FieldsVideoAssetUrl("A8_L2", "captions.vtt"),
+      };
+    case "A8_L3":
+      return {
+        body: "Use this video to connect plate spacing, field strength, force, and particle acceleration before the worked example begins.",
+        caption: "Video explainer: uniform fields between parallel plates, E = V over d, and the force-to-acceleration chain before the lesson example.",
+        highlights: [
+          "A fixed voltage across a smaller gap makes a stronger field",
+          "Uniform field means the central gap keeps the same field direction and size",
+          "Once E is known, F = qE and a = F over m explain the particle response",
+        ],
+        checkForUnderstanding: "At fixed voltage, what happens to the field if the plate separation is halved, and why?",
+        video_url: staticA8FieldsVideoAssetUrl("A8_L3", "final.mp4"),
+        poster_url: staticA8FieldsVideoAssetUrl("A8_L3", "thumbnail.png"),
+        captions_url: staticA8FieldsVideoAssetUrl("A8_L3", "captions.vtt"),
+      };
+    case "A8_L4":
+      return {
+        body: "Use this video to keep charge sign, charge size, and inverse-square distance reasoning together before the worked example begins.",
+        caption: "Video explainer: Coulomb attraction and repulsion, radial force, and distance-squared weakening before the lesson example.",
+        highlights: [
+          "Opposite signs attract and like signs repel",
+          "Force magnitude depends on charge product and separation squared",
+          "Doubling distance cuts the force to one quarter",
+        ],
+        checkForUnderstanding: "If the separation doubles while the charges stay the same, what happens to the Coulomb force and what rule caused it?",
+        video_url: staticA8FieldsVideoAssetUrl("A8_L4", "final.mp4"),
+        poster_url: staticA8FieldsVideoAssetUrl("A8_L4", "thumbnail.png"),
+        captions_url: staticA8FieldsVideoAssetUrl("A8_L4", "captions.vtt"),
+      };
+    case "A8_L5":
+      return {
+        body: "Use this video to read magnetic force as a sideways geometry story before the worked example begins.",
+        caption: "Video explainer: magnetic force on moving charges and current-carrying wires, angle factor, and direction flips before the lesson example.",
+        highlights: [
+          "Magnetic force is perpendicular to both the field and the motion or current",
+          "Parallel motion gives zero force and ninety degrees gives the strongest case",
+          "Reversing the field or the current flips the sideways force direction",
+        ],
+        checkForUnderstanding: "Why does a charge moving parallel to the magnetic field feel no magnetic force?",
+        video_url: staticA8FieldsVideoAssetUrl("A8_L5", "final.mp4"),
+        poster_url: staticA8FieldsVideoAssetUrl("A8_L5", "thumbnail.png"),
+        captions_url: staticA8FieldsVideoAssetUrl("A8_L5", "captions.vtt"),
+      };
+    case "A8_L6":
+      return {
+        body: "Use this video to tie circular particle motion and motor turning to one shared magnetic-force idea before the worked example begins.",
+        caption: "Video explainer: qvB as centripetal force, orbit radius, and turning couple on a current loop before the lesson example.",
+        highlights: [
+          "A perpendicular magnetic force can bend a particle into circular motion",
+          "The same sideways-force idea makes opposite sides of a coil form a turning couple",
+          "Orbit motion and motor motion are one geometry story in two contexts",
+        ],
+        checkForUnderstanding: "What is the common force idea that lets one lesson explain both circular particle paths and motor turning?",
+        video_url: staticA8FieldsVideoAssetUrl("A8_L6", "final.mp4"),
+        poster_url: staticA8FieldsVideoAssetUrl("A8_L6", "thumbnail.png"),
+        captions_url: staticA8FieldsVideoAssetUrl("A8_L6", "captions.vtt"),
+      };
     case "M1_L1":
       return {
         body: "Use this video to read a mission log one segment at a time before you start the worked example.",

@@ -1,0 +1,697 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.015
+Lesson 5 becomes much stronger when the learner stops imagining magnetism as a forward shove and starts reading it as a sideways steering effect.
+
+2
+00:00:05.015 --> 00:00:10.031
+Geometry means perpendicular force.
+
+3
+00:00:10.031 --> 00:00:15.046
+Magnetic force sits at right angles to both the field and the moving charge or current.
+
+4
+00:00:15.046 --> 00:00:20.061
+Angle factor means crossing matters.
+
+5
+00:00:20.061 --> 00:00:25.077
+Only the component that crosses the field contributes to the force.
+
+6
+00:00:25.077 --> 00:00:30.092
+Direction flips means reverse one vector.
+
+7
+00:00:30.092 --> 00:00:35.107
+Changing the current, velocity, or field direction flips the force direction.
+
+8
+00:00:35.107 --> 00:00:40.123
+The weak move is to say the magnetic field pushes along the field lines, which erases the sideways geometry that defines the topic.
+
+9
+00:00:40.123 --> 00:00:45.138
+The worked example becomes easier because the angle factor and the direction rule now feel physically motivated.
+
+10
+00:00:45.138 --> 00:00:50.153
+Magnetic force is a crossing-angle story, not a forward-push story.
+
+11
+00:00:50.153 --> 00:00:55.169
+Keep this takeaway in view: Keep the sideways geometry visible from the first slide.
+
+12
+00:00:55.169 --> 00:01:00.184
+Geometry means perpendicular force.
+
+13
+00:01:00.184 --> 00:01:05.199
+This is the core idea.
+
+14
+00:01:05.199 --> 00:01:10.215
+Angle factor means crossing matters.
+
+15
+00:01:10.215 --> 00:01:15.230
+Parallel motion gives no force.
+
+16
+00:01:15.230 --> 00:01:19.578
+This diagram matters because it keeps the three directions separate.
+
+17
+00:01:19.578 --> 00:01:23.925
+The field direction is one vector, the current or particle motion is another, and the force is the sideways result.
+
+18
+00:01:23.925 --> 00:01:28.273
+Field means reference direction.
+
+19
+00:01:28.273 --> 00:01:32.620
+This is the magnetic environment the charge or wire is crossing.
+
+20
+00:01:32.620 --> 00:01:36.968
+Motion or current means crossing direction.
+
+21
+00:01:36.968 --> 00:01:41.315
+This decides whether the force is zero, partial, or maximum.
+
+22
+00:01:41.315 --> 00:01:45.663
+Force means sideways result.
+
+23
+00:01:45.663 --> 00:01:50.010
+The magnetic response arrives perpendicular to both of the other directions.
+
+24
+00:01:50.010 --> 00:01:54.358
+Without the diagram, students often remember the formula but forget what angle theta is actually measuring.
+
+25
+00:01:54.358 --> 00:01:58.705
+The worked example becomes safer because the angle can now be read from geometry instead of guessed from memory.
+
+26
+00:01:58.705 --> 00:02:03.053
+Use the diagram to identify the crossing angle before substitution.
+
+27
+00:02:03.053 --> 00:02:07.400
+Keep this takeaway in view: Three directions must stay distinct on the board.
+
+28
+00:02:07.400 --> 00:02:11.748
+Field means reference direction.
+
+29
+00:02:11.748 --> 00:02:16.095
+The magnetic field sets one axis of the geometry.
+
+30
+00:02:16.095 --> 00:02:20.442
+Motion or current means crossing direction.
+
+31
+00:02:20.442 --> 00:02:24.790
+This creates the angle factor.
+
+32
+00:02:24.790 --> 00:02:29.168
+A crosswind analogy helps because it separates motion along the wind from motion across the wind.
+
+33
+00:02:29.168 --> 00:02:33.546
+Crossing creates the sideways shove; moving parallel does not.
+
+34
+00:02:33.546 --> 00:02:37.924
+Parallel travel means no side-kick.
+
+35
+00:02:37.924 --> 00:02:42.302
+If you move with the field direction, there is no crossing component.
+
+36
+00:02:42.302 --> 00:02:46.681
+Perpendicular travel means strongest side-kick.
+
+37
+00:02:46.681 --> 00:02:51.059
+A full crossing gives the largest sideways effect.
+
+38
+00:02:51.059 --> 00:02:55.437
+Intermediate angle means partial side-kick.
+
+39
+00:02:55.437 --> 00:02:59.815
+Only part of the motion is crossing the field.
+
+40
+00:02:59.815 --> 00:03:04.193
+The weak analogy mistake is to think speed alone decides the force, when geometry and angle matter just as much.
+
+41
+00:03:04.193 --> 00:03:08.571
+The worked example becomes easier because the sine factor now has a physical meaning instead of being a memorized decoration.
+
+42
+00:03:08.571 --> 00:03:12.949
+Crossing component first, full speed second.
+
+43
+00:03:12.949 --> 00:03:17.328
+Keep this takeaway in view: The sine factor is the crossing component in disguise.
+
+44
+00:03:17.328 --> 00:03:21.706
+Parallel travel means no side-kick.
+
+45
+00:03:21.706 --> 00:03:26.084
+No crossing means no magnetic force.
+
+46
+00:03:26.084 --> 00:03:30.462
+Perpendicular travel means strongest side-kick.
+
+47
+00:03:30.462 --> 00:03:34.840
+Full crossing gives maximum force.
+
+48
+00:03:34.840 --> 00:03:39.751
+The formula board is much easier to remember when both relations are read as the same crossing-angle story in two different contexts.
+
+49
+00:03:39.751 --> 00:03:44.662
+Charge case means use q and v.
+
+50
+00:03:44.662 --> 00:03:49.573
+A moving charged particle feels the sideways magnetic force.
+
+51
+00:03:49.573 --> 00:03:54.484
+Wire case means use I and L.
+
+52
+00:03:54.484 --> 00:03:59.396
+A current-carrying conductor feels the same geometry through the active length.
+
+53
+00:03:59.396 --> 00:04:04.307
+Shared idea means crossing component.
+
+54
+00:04:04.307 --> 00:04:09.218
+The sine factor tells you how much of the motion or current cuts across the field.
+
+55
+00:04:09.218 --> 00:04:14.129
+Keep these relations visible: F = Bqv sin(theta); F = BIL sin(theta); and theta measures the angle between the field and the motion or current direction.
+
+56
+00:04:14.129 --> 00:04:19.040
+Parallel alignment gives zero force.
+
+57
+00:04:19.040 --> 00:04:23.951
+Ninety degrees gives the strongest case because the full motion or current crosses the field.
+
+58
+00:04:23.951 --> 00:04:28.862
+A common error is to use the wrong angle or forget that sin zero is what makes the parallel case force-free.
+
+59
+00:04:28.862 --> 00:04:33.773
+The worked example becomes cleaner because the learner sees one geometry idea wearing two algebraic outfits.
+
+60
+00:04:33.773 --> 00:04:38.684
+One angle story explains both formulas.
+
+61
+00:04:38.684 --> 00:04:43.596
+Keep this takeaway in view: Use the angle meaning before you substitute values.
+
+62
+00:04:43.596 --> 00:04:48.507
+Charge case means use q and v.
+
+63
+00:04:48.507 --> 00:04:53.418
+This is the particle version.
+
+64
+00:04:53.418 --> 00:04:58.329
+Wire case means use I and L.
+
+65
+00:04:58.329 --> 00:05:03.240
+This is the motor-effect wire version.
+
+66
+00:05:03.240 --> 00:05:08.012
+A dependable Lesson 5 routine begins by deciding whether the question is about a moving charge or a wire, then finding the angle, then deciding the sideways direction, and only then calculating the magnitude.
+
+67
+00:05:08.012 --> 00:05:12.784
+Step 1 means pick the context.
+
+68
+00:05:12.784 --> 00:05:17.556
+Choose the charge formula or the wire formula.
+
+69
+00:05:17.556 --> 00:05:22.328
+Step 2 means read theta carefully.
+
+70
+00:05:22.328 --> 00:05:27.100
+Theta is between the field and the motion or current.
+
+71
+00:05:27.100 --> 00:05:31.872
+Step 3 means decide the side-kick direction.
+
+72
+00:05:31.872 --> 00:05:36.644
+Use reversal logic before you calculate.
+
+73
+00:05:36.644 --> 00:05:41.416
+If the angle is guessed after substitution, students often mix up sine and cosine thinking without even noticing.
+
+74
+00:05:41.416 --> 00:05:46.188
+The worked example becomes steadier because the geometry has already been decoded before the arithmetic starts.
+
+75
+00:05:46.188 --> 00:05:50.960
+Decode the geometry first and calculate second.
+
+76
+00:05:50.960 --> 00:05:55.732
+Keep this takeaway in view: Let the geometry speak before the calculator does.
+
+77
+00:05:55.732 --> 00:06:00.504
+Step 1 means pick the context.
+
+78
+00:06:00.504 --> 00:06:05.276
+Charge or wire?
+
+79
+00:06:05.276 --> 00:06:10.048
+Step 2 means read theta carefully.
+
+80
+00:06:10.048 --> 00:06:14.820
+Theta is a geometric angle.
+
+81
+00:06:14.820 --> 00:06:18.695
+When the motion or current runs parallel to the field, nothing cuts across the field direction.
+
+82
+00:06:18.695 --> 00:06:22.570
+That means the sine factor is zero and the magnetic force vanishes.
+
+83
+00:06:22.570 --> 00:06:26.445
+Parallel geometry means no crossing.
+
+84
+00:06:26.445 --> 00:06:30.320
+The motion is aligned with the field.
+
+85
+00:06:30.320 --> 00:06:34.195
+Angle result means sin zero = 0.
+
+86
+00:06:34.195 --> 00:06:38.070
+The formula matches the geometry.
+
+87
+00:06:38.070 --> 00:06:41.945
+Lesson gain means zero force case.
+
+88
+00:06:41.945 --> 00:06:45.820
+This is a strong reasonableness check.
+
+89
+00:06:45.820 --> 00:06:49.695
+The weak statement is that a moving charge must always feel some magnetic force if a field is present, but the geometry says otherwise.
+
+90
+00:06:49.695 --> 00:06:53.570
+The worked example becomes easier because zero-force cases can be recognized before calculation.
+
+91
+00:06:53.570 --> 00:06:57.445
+Field presence alone is not enough; crossing geometry is required.
+
+92
+00:06:57.445 --> 00:07:01.320
+Keep this takeaway in view: Magnetic force needs a crossing component.
+
+93
+00:07:01.320 --> 00:07:05.195
+Parallel geometry means no crossing.
+
+94
+00:07:05.195 --> 00:07:09.070
+Aligned motion gives no side-kick.
+
+95
+00:07:09.070 --> 00:07:12.945
+Angle result means sin zero = 0.
+
+96
+00:07:12.945 --> 00:07:16.820
+The formula confirms the picture.
+
+97
+00:07:16.820 --> 00:07:20.901
+At ninety degrees, the crossing is complete.
+
+98
+00:07:20.901 --> 00:07:24.981
+That means the sine factor is one and the magnetic force reaches its largest value for the chosen B, q, v or B, I, L values.
+
+99
+00:07:24.981 --> 00:07:29.062
+Perpendicular geometry means full crossing.
+
+100
+00:07:29.062 --> 00:07:33.142
+Every bit of the motion or current cuts across the field.
+
+101
+00:07:33.142 --> 00:07:37.223
+Angle result means sin ninety = 1.
+
+102
+00:07:37.223 --> 00:07:41.304
+The formula reaches its full-size case.
+
+103
+00:07:41.304 --> 00:07:45.384
+Lesson gain means benchmark case.
+
+104
+00:07:45.384 --> 00:07:49.465
+This makes it easier to judge partial-angle answers.
+
+105
+00:07:49.465 --> 00:07:53.546
+A weak answer treats ninety degrees as just another angle instead of the clean maximum case.
+
+106
+00:07:53.546 --> 00:07:57.626
+The worked example becomes easier because the learner can compare any partial-angle answer to the maximum benchmark.
+
+107
+00:07:57.626 --> 00:08:01.707
+Use the right-angle case as your force ceiling.
+
+108
+00:08:01.707 --> 00:08:05.788
+Keep this takeaway in view: Right-angle crossing sets the strongest case.
+
+109
+00:08:05.788 --> 00:08:09.868
+Perpendicular geometry means full crossing.
+
+110
+00:08:09.868 --> 00:08:13.949
+This is the largest usable component.
+
+111
+00:08:13.949 --> 00:08:18.029
+Angle result means sin ninety = 1.
+
+112
+00:08:18.029 --> 00:08:22.110
+The formula is at full strength.
+
+113
+00:08:22.110 --> 00:08:26.289
+The sideways force depends on the geometry of the vectors.
+
+114
+00:08:26.289 --> 00:08:30.469
+Reverse one of the participating directions and the sideways result flips as well.
+
+115
+00:08:30.469 --> 00:08:34.648
+Reverse B means force flips.
+
+116
+00:08:34.648 --> 00:08:38.828
+Changing the field direction changes the sideways outcome.
+
+117
+00:08:38.828 --> 00:08:43.007
+Reverse v or I means force flips.
+
+118
+00:08:43.007 --> 00:08:47.186
+Changing the motion or current direction does the same.
+
+119
+00:08:47.186 --> 00:08:51.366
+Lesson gain means magnitude can stay the same.
+
+120
+00:08:51.366 --> 00:08:55.545
+Direction may change even when the force size does not.
+
+121
+00:08:55.545 --> 00:08:59.724
+A weak answer says the force gets bigger or smaller when only the direction has changed.
+
+122
+00:08:59.724 --> 00:09:03.904
+This makes the worked example safer whenever the question asks for direction rather than just magnitude.
+
+123
+00:09:03.904 --> 00:09:08.083
+Vector reversal changes the side-kick direction first.
+
+124
+00:09:08.083 --> 00:09:12.262
+Keep this takeaway in view: Do not confuse direction change with magnitude change.
+
+125
+00:09:12.262 --> 00:09:16.442
+Reverse B means force flips.
+
+126
+00:09:16.442 --> 00:09:20.621
+The sideways direction changes.
+
+127
+00:09:20.621 --> 00:09:24.801
+Reverse v or I means force flips.
+
+128
+00:09:24.801 --> 00:09:28.980
+The same reversal logic applies.
+
+129
+00:09:28.980 --> 00:09:33.229
+Because the force is perpendicular to the motion, magnetic force changes direction very naturally.
+
+130
+00:09:33.229 --> 00:09:37.478
+It is better to think of it as steering the motion than pushing it forward along the field.
+
+131
+00:09:37.478 --> 00:09:41.726
+Perpendicular force means sideways effect.
+
+132
+00:09:41.726 --> 00:09:45.975
+The force acts across the motion, not along it.
+
+133
+00:09:45.975 --> 00:09:50.224
+Motion result means turning tendency.
+
+134
+00:09:50.224 --> 00:09:54.472
+A sideways force naturally bends the path.
+
+135
+00:09:54.472 --> 00:09:58.721
+Lesson gain means bridge to orbits and motors.
+
+136
+00:09:58.721 --> 00:10:02.970
+This is the same geometry the next lesson will deepen.
+
+137
+00:10:02.970 --> 00:10:07.219
+The weak story says the magnet speeds the charge up in the field direction, which erases the key sideways geometry.
+
+138
+00:10:07.219 --> 00:10:11.468
+The worked example becomes more meaningful because the force is now seen as a direction-changing effect.
+
+139
+00:10:11.468 --> 00:10:15.716
+Magnetic force is best read as steering, not forward driving.
+
+140
+00:10:15.716 --> 00:10:19.965
+Keep this takeaway in view: Store the steering idea for Lesson 6.
+
+141
+00:10:19.965 --> 00:10:24.214
+Perpendicular force means sideways effect.
+
+142
+00:10:24.214 --> 00:10:28.462
+The force changes direction naturally.
+
+143
+00:10:28.462 --> 00:10:32.711
+Motion result means turning tendency.
+
+144
+00:10:32.711 --> 00:10:36.960
+This is a steering story.
+
+145
+00:10:36.960 --> 00:10:40.453
+Use this checkpoint to test whether the geometry is really clear.
+
+146
+00:10:40.453 --> 00:10:43.946
+Parallel motion means no crossing component, so theta is zero, sine theta is zero, and the magnetic force disappears.
+
+147
+00:10:43.946 --> 00:10:47.439
+Question means parallel to the field.
+
+148
+00:10:47.439 --> 00:10:50.931
+Why does the force vanish?
+
+149
+00:10:50.931 --> 00:10:54.424
+Route means no crossing component.
+
+150
+00:10:54.424 --> 00:10:57.917
+The geometry offers nothing to push sideways.
+
+151
+00:10:57.917 --> 00:11:01.410
+Answer check means sin zero = 0.
+
+152
+00:11:01.410 --> 00:11:04.903
+The formula matches the picture exactly.
+
+153
+00:11:04.903 --> 00:11:08.396
+No crossing means no magnetic side-kick.
+
+154
+00:11:08.396 --> 00:11:11.889
+Keep this takeaway in view: Geometry explains the zero before the formula confirms it.
+
+155
+00:11:11.889 --> 00:11:15.381
+Question means parallel to the field.
+
+156
+00:11:15.381 --> 00:11:18.874
+Think geometry before algebra.
+
+157
+00:11:18.874 --> 00:11:22.367
+Route means no crossing component.
+
+158
+00:11:22.367 --> 00:11:25.860
+That is the key physical reason.
+
+159
+00:11:25.860 --> 00:11:30.696
+Carry one route into the worked example.
+
+160
+00:11:30.696 --> 00:11:35.531
+Decide whether the case is charge or wire, identify the angle between the field and the motion or current, then evaluate the sine factor and calculate the force magnitude.
+
+161
+00:11:35.531 --> 00:11:40.367
+Step 1 means pick formula.
+
+162
+00:11:40.367 --> 00:11:45.202
+Charge case or wire case?
+
+163
+00:11:45.202 --> 00:11:50.038
+Step 2 means read theta.
+
+164
+00:11:50.038 --> 00:11:54.874
+Angle goes between field and motion or current.
+
+165
+00:11:54.874 --> 00:11:59.709
+Step 3 means interpret geometry.
+
+166
+00:11:59.709 --> 00:12:04.545
+Check whether the force is zero, partial, or maximum.
+
+167
+00:12:04.545 --> 00:12:09.381
+Keep these relations visible: choose F = Bqv sin(theta) or F = BIL sin(theta); theta is between the field and the motion or current direction; and use the geometry to interpret the result.
+
+168
+00:12:09.381 --> 00:12:14.216
+Parallel means zero force, ninety degrees means the maximum case, and reversed vectors flip the direction.
+
+169
+00:12:14.216 --> 00:12:19.052
+The angle is not decoration; it is the heart of the example.
+
+170
+00:12:19.052 --> 00:12:23.888
+Keep this takeaway in view: Take the geometry with you into the numbers.
+
+171
+00:12:23.888 --> 00:12:28.723
+Step 1 means pick formula.
+
+172
+00:12:28.723 --> 00:12:33.559
+Choose charge or wire first.
+
+173
+00:12:33.559 --> 00:12:38.394
+Step 2 means read theta.
+
+174
+00:12:38.394 --> 00:12:43.230
+Use the correct geometric angle.
