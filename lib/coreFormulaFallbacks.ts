@@ -110,16 +110,20 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   M5_L3: [
     { standardFormula: "gas = wide spacing + random motion + collisions", meaning: "A gas has large gaps between particles and frequent random collisions.", conditions: "Use when describing the gas state.", unitsText: "" },
     { standardFormula: "Brownian motion = visible evidence of invisible particle collisions", meaning: "Brownian motion is caused by uneven hits from surrounding particles.", conditions: "Use when explaining particle evidence.", unitsText: "" },
+    { standardFormula: "stronger Brownian motion -> more vigorous surrounding particle motion", meaning: "A larger visible jitter points to stronger random bombardment from the invisible particles around it.", conditions: "Use when comparing Brownian motion before and after heating or cooling the surrounding fluid.", unitsText: "" },
   ],
   M5_L4: [
     { standardFormula: "temperature is proportional to average kinetic energy per particle", meaning: "Temperature answers an average-particle motion question, not a total-energy question.", conditions: "Use when comparing equal temperatures with different sample sizes.", unitsText: "" },
+    { standardFormula: "same temperature -> same average kinetic energy per particle", meaning: "Equal temperature matches the average particle-motion scale, not necessarily the whole-sample total energy.", conditions: "Use when separating temperature from total kinetic energy or internal energy.", unitsText: "" },
   ],
   M5_L5: [
     { standardFormula: "internal energy = total kinetic energy + total potential energy of particles", meaning: "Internal energy counts both motion energy and arrangement energy in the whole sample.", conditions: "Use for the whole system, not one particle.", unitsText: "J" },
+    { standardFormula: "same temperature does not imply same internal energy", meaning: "Two samples can share the same average particle-motion level while differing in amount or state and therefore in total internal energy.", conditions: "Use when comparing different sample sizes or different states at the same temperature.", unitsText: "" },
   ],
   M5_L6: [
     { standardFormula: "increase in internal energy = energy transferred by heating", meaning: "Heating raises the sample's internal energy even when the temperature response is not large.", conditions: "Use when thermal energy enters the sample.", unitsText: "J" },
     { standardFormula: "during a state change, added energy can raise potential energy more than temperature", meaning: "State-change energy can mainly loosen links instead of sharply raising temperature.", conditions: "Use near melting or boiling.", unitsText: "" },
+    { standardFormula: "during melting or boiling, temperature can stay nearly constant while internal energy rises", meaning: "The thermometer does not tell the whole energy story during a state change because much of the input can go into arrangement change.", conditions: "Use when comparing an ordinary warm-up stage with a melting or boiling stage.", unitsText: "" },
   ],
   M6_L1: [
     { standardFormula: "temperature change depends on energy transferred, mass, and material", meaning: "The same energy input does not force the same temperature rise in every sample.", conditions: "Use before choosing which thermal quantity is being compared.", unitsText: "" },
