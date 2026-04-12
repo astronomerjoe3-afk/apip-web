@@ -90,6 +90,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A1_L1: [
     {
+      standardFormula: "e = 1.60 x 10^-19 C",
+      meaning: "The elementary charge sets the physical size of one charge-tag unit.",
+      conditions: "Use when converting particle charge tags such as +1e or -1e into coulombs.",
+      unitsText: "C",
+    },
+    {
       standardFormula: "q = n e",
       meaning: "Particle charge is an integer multiple of the elementary charge.",
       conditions: "Use when turning a charge tag into the physical charge of a particle.",
@@ -1536,6 +1542,18 @@ const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
   A1_L2: [
     {
+      standardFormula: "charge(u) = +2/3 e ; charge(d) = -1/3 e",
+      meaning: "Up and down quarks carry fractional charges that combine to make hadron charges.",
+      conditions: "Use when checking proton, neutron, and meson charge from quark composition.",
+      unitsText: "e",
+    },
+    {
+      standardFormula: "charge(anti-quark) = opposite of matching quark",
+      meaning: "An antiquark reverses the sign of the corresponding quark charge.",
+      conditions: "Use when checking meson or antimatter hadron charge.",
+      unitsText: "e",
+    },
+    {
       standardFormula: "Q_hadron = sum(quark charges)",
       meaning: "The net charge of a hadron comes from adding the charges of its constituent quarks or antiquarks.",
       conditions: "Use when checking whether a proposed quark bundle matches the named hadron.",
@@ -1549,6 +1567,12 @@ const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
     },
   ],
   A1_L3: [
+    {
+      standardFormula: "E_rest = m c^2",
+      meaning: "Mass can be expressed as an equivalent rest energy.",
+      conditions: "Use when explaining why pair production needs enough energy for both created particles.",
+      unitsText: "J or eV",
+    },
     {
       standardFormula: "E = h f",
       meaning: "Photon energy depends on Planck's constant and frequency.",
@@ -1565,6 +1589,12 @@ const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       standardFormula: "E_gamma >= 2 m c^2",
       meaning: "A photon needs at least the combined rest energy of the created pair.",
       conditions: "Use for threshold reasoning in pair production to one particle-antiparticle pair.",
+      unitsText: "J or eV",
+    },
+    {
+      standardFormula: "sum(energy)_before = sum(energy)_after",
+      meaning: "The total energy ledger must still balance in pair production and annihilation.",
+      conditions: "Use when screening whether the proposed products are energetically allowed.",
       unitsText: "J or eV",
     },
   ],
@@ -1601,6 +1631,12 @@ const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       conditions: "Use for particle reactions, decays, and collision events.",
       unitsText: "no unit",
     },
+    {
+      standardFormula: "sum(energy)_before = sum(energy)_after",
+      meaning: "Total energy must also balance across the event.",
+      conditions: "Use after the charge, baryon-number, and lepton-number ledgers have been checked.",
+      unitsText: "J or eV",
+    },
   ],
   A1_L6: [
     {
@@ -1626,6 +1662,12 @@ const A1_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       meaning: "Total energy must balance across the full particle event.",
       conditions: "Use when interpreting products, thresholds, and missing-energy clues.",
       unitsText: "J or eV",
+    },
+    {
+      standardFormula: "sum(momentum)_before = sum(momentum)_after",
+      meaning: "A complete particle-event analysis also keeps momentum balanced for the whole system.",
+      conditions: "Use when comparing alternative channels or justifying multi-photon annihilation outcomes.",
+      unitsText: "kg m/s or eV/c",
     },
   ],
 };
