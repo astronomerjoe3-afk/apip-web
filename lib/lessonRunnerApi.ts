@@ -6793,9 +6793,7 @@ function includesAllCoreConceptFragments(source: string, fragments: string[]): b
   return fragments.every((fragment) => source.includes(fragment));
 }
 
-function m10CoreConceptSemanticKey(code: string, value: string): string | null {
-  if (!code.startsWith("M10_")) return null;
-
+function lessonCoreConceptSemanticKey(code: string, value: string): string | null {
   const normalized = coreConceptDedupKey(value);
   if (!normalized) return null;
 
@@ -6932,6 +6930,135 @@ function m10CoreConceptSemanticKey(code: string, value: string): string | null {
         return "m10_l6_transmission_efficiency";
       }
       return null;
+    case "M12_L1":
+      if (
+        (normalized.includes("binding energy") && normalized.includes("mass defect")) ||
+        (normalized.includes("missing mass") && normalized.includes("binding energy"))
+      ) {
+        return "m12_l1_binding_mass_defect";
+      }
+      if (
+        (normalized.includes("nuclear energy") || normalized.includes("nuclear power")) &&
+        (normalized.includes("nucleus") || normalized.includes("nuclear")) &&
+        (normalized.includes("chemical") || normalized.includes("electron shell"))
+      ) {
+        return "m12_l1_nuclear_not_chemical";
+      }
+      if (
+        (normalized.includes("binding energy per nucleon") || normalized.includes("more tightly bound")) &&
+        (normalized.includes("stable") || normalized.includes("stability"))
+      ) {
+        return "m12_l1_stability";
+      }
+      if (
+        (normalized.includes("small mass") || normalized.includes("tiny mass")) &&
+        (normalized.includes("large energy") || normalized.includes("big energy"))
+      ) {
+        return "m12_l1_small_mass_large_energy";
+      }
+      return null;
+    case "M12_L2":
+      if (
+        normalized.includes("fission") &&
+        normalized.includes("heavy nucleus") &&
+        (normalized.includes("split") || normalized.includes("splitting"))
+      ) {
+        return "m12_l2_fission_split";
+      }
+      if (
+        normalized.includes("chain reaction") &&
+        (normalized.includes("neutron") || normalized.includes("further fission") || normalized.includes("next fission"))
+      ) {
+        return "m12_l2_chain_neutrons";
+      }
+      if (
+        (normalized.includes("control rod") || normalized.includes("critical mass") || normalized.includes("reactor control")) &&
+        (normalized.includes("reaction") || normalized.includes("neutron") || normalized.includes("control"))
+      ) {
+        return "m12_l2_reactor_control";
+      }
+      return null;
+    case "M12_L3":
+      if (
+        normalized.includes("fusion") &&
+        (normalized.includes("joins") || normalized.includes("joining")) &&
+        normalized.includes("light nuclei")
+      ) {
+        return "m12_l3_fusion_joining";
+      }
+      if (
+        normalized.includes("fusion") &&
+        (normalized.includes("extreme") || normalized.includes("repulsion") || normalized.includes("overcome"))
+      ) {
+        return "m12_l3_fusion_conditions";
+      }
+      if (
+        normalized.includes("fusion") &&
+        (normalized.includes("star") || normalized.includes("sun"))
+      ) {
+        return "m12_l3_stellar_context";
+      }
+      return null;
+    case "M12_L4":
+      if (
+        normalized.includes("control rod") &&
+        (normalized.includes("reaction rate") || normalized.includes("manage") || normalized.includes("control"))
+      ) {
+        return "m12_l4_control_rods";
+      }
+      if (
+        normalized.includes("coolant") &&
+        (normalized.includes("thermal energy") || normalized.includes("heat") || normalized.includes("core"))
+      ) {
+        return "m12_l4_coolant_transfer";
+      }
+      if (
+        normalized.includes("electrical power") ||
+        (normalized.includes("energy transfer") && (normalized.includes("stage") || normalized.includes("system")))
+      ) {
+        return "m12_l4_power_station_stages";
+      }
+      return null;
+    case "M12_L5":
+      if (
+        (normalized.includes("half life") || normalized.includes("emission")) &&
+        (normalized.includes("application") || normalized.includes("task") || normalized.includes("job") || normalized.includes("choose"))
+      ) {
+        return "m12_l5_matching_isotopes";
+      }
+      if (
+        normalized.includes("radioisotope") &&
+        (normalized.includes("choose") || normalized.includes("matching properties"))
+      ) {
+        return "m12_l5_matching_isotopes";
+      }
+      if (
+        (normalized.includes("exposure control") || normalized.includes("safety")) &&
+        (normalized.includes("useful") || normalized.includes("usefulness") || normalized.includes("balance"))
+      ) {
+        return "m12_l5_benefit_risk_balance";
+      }
+      return null;
+    case "M12_L6":
+      if (
+        normalized.includes("ionising radiation") &&
+        (normalized.includes("risk") || normalized.includes("biological"))
+      ) {
+        return "m12_l6_biological_risk";
+      }
+      if (
+        (normalized.includes("shielding") || normalized.includes("handling") || normalized.includes("storage")) &&
+        normalized.includes("risk")
+      ) {
+        return "m12_l6_risk_controls";
+      }
+      if (
+        normalized.includes("waste management") ||
+        (normalized.includes("waste") && normalized.includes("nuclear"))
+      ) {
+        return "m12_l6_waste_management";
+      }
+      return null;
     default:
       return null;
   }
@@ -6942,7 +7069,7 @@ function dedupeCoreConceptBulletsForLesson(code: string, values: string[]): stri
   const unique: string[] = [];
   for (const value of values) {
     const normalized = normalizeCoreConceptBullet(value);
-    const semanticKey = m10CoreConceptSemanticKey(code, normalized);
+    const semanticKey = lessonCoreConceptSemanticKey(code, normalized);
     const key = semanticKey || coreConceptDedupKey(normalized);
     if (!normalized || !key || seen.has(key)) continue;
     seen.add(key);
