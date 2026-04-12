@@ -166,6 +166,13 @@ export async function GET(
 
     const fileStat = await stat(resolved.filePath);
     const rangeHeader = request.headers.get("range");
+    if (!rangeHeader) {
+      const stream = createReadStream(resolved.filePath);
+      return new Response(asWebStream(stream), {
+        headers: baseHeaders(resolved.asset, fileStat.size),
+      });
+    }
+
     const window = resolveVideoWindow(fileStat.size, rangeHeader);
     if (!window) {
       return new Response("Invalid range request.", {
