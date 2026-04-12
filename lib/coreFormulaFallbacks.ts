@@ -233,18 +233,18 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "power loss in lines = I^2 R", meaning: "Cable heating losses rise strongly with transmission current.", conditions: "Use when comparing why higher transmission voltage lowers resistive losses for the same delivered power.", unitsText: "W" },
   ],
   M11_L1: [
-    { standardFormula: "atomic number Z = number of protons", meaning: "Proton count fixes the element identity.", conditions: "Use when identifying the element.", unitsText: "" },
+    { standardFormula: "Earth mainly orbits the Sun; the Moon mainly orbits Earth", meaning: "The Earth-Moon-Sun system has linked routes with different main host bodies.", conditions: "Use when sorting the main orbital relationship before adding extra detail.", unitsText: "" },
     { standardFormula: "mass number A = number of protons + number of neutrons", meaning: "Mass number counts the nucleons in the nucleus.", conditions: "Use when comparing nuclei or ions of the same element.", unitsText: "" },
     { standardFormula: "charge = number of protons - number of electrons", meaning: "Ion charge depends on the imbalance between protons and electrons.", conditions: "Use when finding the charge state of an atom or ion.", unitsText: "" },
   ],
   M11_L2: [
-    { standardFormula: "number of neutrons = mass number - atomic number", meaning: "Neutron count is found by subtracting proton number from mass number.", conditions: "Use when comparing isotopes.", unitsText: "" },
+    { standardFormula: "orbit = sideways motion + inward gravitational pull", meaning: "An orbit needs both tangential motion and the gravitational bend together.", conditions: "Use when explaining why an orbit is curved rather than a straight path or a simple fall.", unitsText: "" },
+    { standardFormula: "larger orbital route -> longer orbital period", meaning: "Bodies on larger routes usually take longer to complete one orbit.", conditions: "Use when comparing inner and outer orbital paths in the same system.", unitsText: "" },
     { standardFormula: "same proton number -> same element", meaning: "Element identity is fixed by proton number even when neutron number changes.", conditions: "Use when deciding whether two nuclei are isotopes or different elements.", unitsText: "" },
   ],
   M11_L3: [
-    { standardFormula: "alpha decay: A decreases by 4 and Z decreases by 2", meaning: "Alpha emission removes two protons and two neutrons from the nucleus.", conditions: "Use for alpha decay.", unitsText: "" },
-    { standardFormula: "beta-minus decay: A unchanged and Z increases by 1", meaning: "Beta-minus decay changes a neutron into a proton so atomic number rises.", conditions: "Use for beta-minus decay.", unitsText: "" },
-    { standardFormula: "gamma emission: A unchanged and Z unchanged", meaning: "Gamma emission changes nuclear energy state without changing nucleon counts.", conditions: "Use for gamma emission.", unitsText: "" },
+    { standardFormula: "1 day = 1 rotation of Earth", meaning: "Day and night are tied to Earth's spin, not to its yearly orbit.", conditions: "Use when linking one location's daylight change to Earth's motion.", unitsText: "day" },
+    { standardFormula: "at any moment one half of Earth is lit and one half is dark", meaning: "The day-night boundary is a rotation geometry idea under steady sunlight.", conditions: "Use when explaining why different places experience day and night at different times.", unitsText: "" },
   ],
   M11_L4: [
     { standardFormula: "N = N0 x (1/2)^(t / half-life)", meaning: "Equal half-life intervals halve the number that remains.", conditions: "Use for a large-sample radioactive decay calculation.", unitsText: "" },
@@ -282,17 +282,16 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
     { standardFormula: "shielding, distance, and time are key exposure-control variables", meaning: "Risk is reduced by limiting how much radiation reaches people and for how long.", conditions: "Use when evaluating controls for nuclear hazards or applications.", unitsText: "" },
   ],
   M13_L1: [
-    { standardFormula: "atomic number Z = number of protons", meaning: "Proton count fixes the element identity.", conditions: "Use when identifying the element.", unitsText: "" },
-    { standardFormula: "mass number A = number of protons + number of neutrons", meaning: "Mass number counts the nucleons in the nucleus.", conditions: "Use when comparing nuclei or isotopes.", unitsText: "" },
-    { standardFormula: "charge = number of protons - number of electrons", meaning: "Ion charge depends on the imbalance between protons and electrons.", conditions: "Use when finding the charge state of an atom or ion.", unitsText: "" },
+    { standardFormula: "Earth mainly orbits the Sun; the Moon mainly orbits Earth", meaning: "The Earth-Moon-Sun system has linked routes with different main host bodies.", conditions: "Use when sorting the main orbital relationship before adding extra detail.", unitsText: "" },
+    { standardFormula: "gravity organizes the Earth-Moon-Sun system", meaning: "Gravity is the reason the system behaves as one connected model instead of separate sky facts.", conditions: "Use when explaining why the Solar System can be treated as one physical system.", unitsText: "" },
   ],
   M13_L2: [
-    { standardFormula: "number of neutrons = mass number - atomic number", meaning: "Neutron count is found by subtracting proton number from mass number.", conditions: "Use when comparing isotopes.", unitsText: "" },
+    { standardFormula: "orbit = sideways motion + inward gravitational pull", meaning: "An orbit needs both tangential motion and the gravitational bend together.", conditions: "Use when explaining why an orbit is curved rather than a straight path or a simple fall.", unitsText: "" },
+    { standardFormula: "larger orbital route -> longer orbital period", meaning: "Bodies on larger routes usually take longer to complete one orbit.", conditions: "Use when comparing inner and outer orbital paths in the same system.", unitsText: "" },
   ],
   M13_L3: [
-    { standardFormula: "alpha decay: A decreases by 4 and Z decreases by 2", meaning: "Alpha emission removes two protons and two neutrons from the nucleus.", conditions: "Use for alpha decay.", unitsText: "" },
-    { standardFormula: "beta-minus decay: A unchanged and Z increases by 1", meaning: "Beta-minus decay changes a neutron into a proton so atomic number rises.", conditions: "Use for beta-minus decay.", unitsText: "" },
-    { standardFormula: "gamma emission: A unchanged and Z unchanged", meaning: "Gamma emission changes nuclear energy state without changing nucleon counts.", conditions: "Use for gamma emission.", unitsText: "" },
+    { standardFormula: "1 day = 1 rotation of Earth", meaning: "Day and night are tied to Earth's spin, not to its yearly orbit.", conditions: "Use when linking one location's daylight change to Earth's motion.", unitsText: "day" },
+    { standardFormula: "at any moment one half of Earth is lit and one half is dark", meaning: "The day-night boundary is a rotation geometry idea under steady sunlight.", conditions: "Use when explaining why different places experience day and night at different times.", unitsText: "" },
   ],
   M13_L4: [
     { standardFormula: "N = N₀ × (1/2)^(t / half-life)", meaning: "Equal half-life intervals halve the number that remains.", conditions: "Use for a large-sample radioactive decay calculation.", unitsText: "" },
@@ -348,6 +347,61 @@ const M9_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   ],
 };
 
+const M11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M11_L1: [
+    { standardFormula: "atomic number Z = number of protons", meaning: "Proton count fixes the element identity.", conditions: "Use when identifying the element.", unitsText: "" },
+    { standardFormula: "mass number A = number of protons + number of neutrons", meaning: "Mass number counts the nucleons in the nucleus.", conditions: "Use when comparing nuclei or ions of the same element.", unitsText: "" },
+    { standardFormula: "charge = number of protons - number of electrons", meaning: "Ion charge depends on the imbalance between protons and electrons.", conditions: "Use when finding the charge state of an atom or ion.", unitsText: "" },
+  ],
+  M11_L2: [
+    { standardFormula: "number of neutrons = mass number - atomic number", meaning: "Neutron count is found by subtracting proton number from mass number.", conditions: "Use when comparing isotopes.", unitsText: "" },
+    { standardFormula: "same proton number -> same element", meaning: "Element identity is fixed by proton number even when neutron number changes.", conditions: "Use when deciding whether two nuclei are isotopes or different elements.", unitsText: "" },
+  ],
+  M11_L3: [
+    { standardFormula: "alpha decay: A decreases by 4 and Z decreases by 2", meaning: "Alpha emission removes two protons and two neutrons from the nucleus.", conditions: "Use for alpha decay.", unitsText: "" },
+    { standardFormula: "beta-minus decay: A unchanged and Z increases by 1", meaning: "Beta-minus decay changes a neutron into a proton so atomic number rises.", conditions: "Use for beta-minus decay.", unitsText: "" },
+    { standardFormula: "gamma emission: A unchanged and Z unchanged", meaning: "Gamma emission changes nuclear energy state without changing nucleon counts.", conditions: "Use for gamma emission.", unitsText: "" },
+  ],
+  M11_L4: [
+    { standardFormula: "N = N0 x (1/2)^(t / half-life)", meaning: "Equal half-life intervals halve the number that remains.", conditions: "Use for a large-sample radioactive decay calculation.", unitsText: "" },
+    { standardFormula: "remaining fraction halves each half-life", meaning: "Half-life is a multiplicative halving rule, not repeated subtraction of a fixed amount.", conditions: "Use when reasoning without a full calculation.", unitsText: "" },
+  ],
+  M11_L5: [
+    { standardFormula: "corrected count rate = measured count rate - background count rate", meaning: "Background radiation must be subtracted before the source count rate is interpreted.", conditions: "Use when detector readings include normal environmental background.", unitsText: "counts/s" },
+  ],
+  M11_L6: [
+    { standardFormula: "mass number before = mass number after", meaning: "Nuclear equations must conserve mass number.", conditions: "Use when balancing a nuclear equation.", unitsText: "" },
+    { standardFormula: "atomic number before = atomic number after", meaning: "Nuclear equations must also conserve atomic number.", conditions: "Use when balancing a nuclear equation.", unitsText: "" },
+  ],
+};
+
+const M13_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
+  M13_L1: [
+    { standardFormula: "Earth mainly orbits the Sun; the Moon mainly orbits Earth", meaning: "The Earth-Moon-Sun system has linked routes with different main host bodies.", conditions: "Use when sorting the main orbital relationship before adding extra detail.", unitsText: "" },
+    { standardFormula: "gravity organizes the Earth-Moon-Sun system", meaning: "Gravity is the reason the system behaves as one connected model instead of separate sky facts.", conditions: "Use when explaining why the Solar System can be treated as one physical system.", unitsText: "" },
+  ],
+  M13_L2: [
+    { standardFormula: "orbit = sideways motion + inward gravitational pull", meaning: "An orbit needs both tangential motion and the gravitational bend together.", conditions: "Use when explaining why an orbit is curved rather than a straight path or a simple fall.", unitsText: "" },
+    { standardFormula: "larger orbital route -> longer orbital period", meaning: "Bodies on larger routes usually take longer to complete one orbit.", conditions: "Use when comparing inner and outer orbital paths in the same system.", unitsText: "" },
+  ],
+  M13_L3: [
+    { standardFormula: "1 day = 1 rotation of Earth", meaning: "Day and night are tied to Earth's spin, not to its yearly orbit.", conditions: "Use when linking one location's daylight change to Earth's motion.", unitsText: "day" },
+    { standardFormula: "at any moment one half of Earth is lit and one half is dark", meaning: "The day-night boundary is a rotation geometry idea under steady sunlight.", conditions: "Use when explaining why different places experience day and night at different times.", unitsText: "" },
+  ],
+  M13_L4: [
+    { standardFormula: "seasons are driven by axial tilt and changing sunlight angle", meaning: "Season change is explained by how each hemisphere leans toward or away from the Sun during the orbit.", conditions: "Use when comparing opposite hemispheres or rejecting the distance-only explanation.", unitsText: "" },
+    { standardFormula: "1 year = 1 orbit of Earth around the Sun", meaning: "A year belongs to Earth's orbital timescale, while a day belongs to rotation.", conditions: "Use when separating seasonal timescale from day-night timescale.", unitsText: "year" },
+  ],
+  M13_L5: [
+    { standardFormula: "Moon phase = visible fraction of the Moon's sunlit half", meaning: "The visible shape changes because the Earth viewpoint changes while the Sun still lights half the Moon.", conditions: "Use when explaining normal phases such as crescent, quarter, or full Moon.", unitsText: "" },
+    { standardFormula: "eclipse = special Sun-Earth-Moon shadow alignment", meaning: "An eclipse is not the normal monthly phase cause; it needs a specific alignment that brings shadow into the story.", conditions: "Use when separating eclipse events from ordinary phase geometry.", unitsText: "" },
+  ],
+  M13_L6: [
+    { standardFormula: "farther orbital route -> longer year", meaning: "Bodies farther from the Sun usually take longer to complete one orbit.", conditions: "Use when comparing inner and outer planets by orbital period.", unitsText: "" },
+    { standardFormula: "Solar System sketch is not to scale", meaning: "Classroom diagrams compress real distances heavily, so route order and family structure matter more than literal spacing on the page.", conditions: "Use when interpreting Solar System diagrams or models.", unitsText: "" },
+  ],
+};
+
 export function coreFormulaFallbacksForLesson(code: string): FormulaFallbackEntry[] {
-  return M9_FORMULA_OVERRIDES[code] || CORE_FORMULA_FALLBACKS[code] || [];
+  return M9_FORMULA_OVERRIDES[code] || M11_FORMULA_OVERRIDES[code] || M13_FORMULA_OVERRIDES[code] || CORE_FORMULA_FALLBACKS[code] || [];
 }
