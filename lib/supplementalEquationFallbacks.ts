@@ -727,6 +727,12 @@ const SUPPLEMENTAL_EQUATION_FALLBACKS: Record<string, FormulaFallbackEntry[]> = 
   ],
   A11_L1: [
     {
+      standardFormula: "F = G M m / r^2",
+      meaning: "The gravitational force between a large spherical mass and a test mass follows the inverse-square law.",
+      conditions: "Use outside a spherical mass when the test mass m must be kept visible.",
+      unitsText: "N",
+    },
+    {
       standardFormula: "g = G M / r^2",
       meaning: "Gravitational field strength around a spherical mass follows the inverse-square law.",
       conditions: "Use outside a spherical mass distribution.",
@@ -1638,6 +1644,12 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       conditions: "Use outside a spherical mass distribution with zero potential taken at infinity.",
       unitsText: "J/kg",
     },
+    {
+      standardFormula: "E_p = m V",
+      meaning: "Gravitational potential energy equals the object's mass times the gravitational potential at that point.",
+      conditions: "Use when turning the per-kilogram potential into the actual energy of a chosen mass.",
+      unitsText: "J",
+    },
   ],
   A11_L2: [
     {
@@ -1651,6 +1663,12 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       meaning: "Orbital period depends on orbital radius and the central mass.",
       conditions: "Use for circular or nearly circular orbits around a dominant central mass.",
       unitsText: "s",
+    },
+    {
+      standardFormula: "v = 2 pi r / T",
+      meaning: "Circular speed is the orbit circumference divided by the orbital period.",
+      conditions: "Use once radius and period are known for the same orbit.",
+      unitsText: "m/s",
     },
   ],
   A11_L3: [
@@ -1682,6 +1700,12 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       conditions: "Use when a standard candle's luminosity is known.",
       unitsText: "W/m^2, W, m",
     },
+    {
+      standardFormula: "d = sqrt(L / (4 pi I))",
+      meaning: "Distance can be found from luminosity and apparent brightness by rearranging the inverse-square law.",
+      conditions: "Use when L and I are known for a standard candle.",
+      unitsText: "m",
+    },
   ],
   A11_L5: [
     {
@@ -1689,6 +1713,12 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       meaning: "The Schwarzschild radius gives the event-horizon radius for a non-rotating black hole.",
       conditions: "Use when checking whether a compact remnant of given mass would be inside its event horizon.",
       unitsText: "m",
+    },
+    {
+      standardFormula: "v_escape = sqrt(2 G M / r)",
+      meaning: "Escape speed from a spherical mass depends on its mass and radius.",
+      conditions: "Use when comparing ordinary escape with the black-hole no-escape threshold.",
+      unitsText: "m/s",
     },
   ],
   A11_L6: [
@@ -1703,6 +1733,12 @@ const A11_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
       meaning: "For modest cosmological redshifts, recession speed can be estimated from redshift times the speed of light.",
       conditions: "Use as the low-redshift approximation before applying Hubble's law.",
       unitsText: "m/s or km/s",
+    },
+    {
+      standardFormula: "lambda_observed = (1 + z) lambda_emitted",
+      meaning: "Observed wavelength is the emitted wavelength stretched by the redshift factor.",
+      conditions: "Use when converting between z and the two wavelengths.",
+      unitsText: "m or nm",
     },
     {
       standardFormula: "v = H0 d",

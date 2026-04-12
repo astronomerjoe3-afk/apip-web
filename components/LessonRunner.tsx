@@ -27,6 +27,7 @@ import A4SimulationPanels from "./A4SimulationPanels";
 import A8SimulationPanels from "./A8SimulationPanels";
 import A9SimulationPanels from "./A9SimulationPanels";
 import A10SimulationPanels from "./A10SimulationPanels";
+import A11SimulationPanels from "./A11SimulationPanels";
 import A6ToA11SimulationPanels from "./A6ToA11SimulationPanels";
 
 type StageName =
@@ -3531,9 +3532,29 @@ export default function LessonRunner({
             setSimSpread={setSimSpread}
             formatSimulationNumber={formatSimulationNumber}
           />
+        ) : simulationLessonKey.startsWith("A11_") ? (
+          <A11SimulationPanels
+            lessonKey={simulationLessonKey}
+            simMetricMeters={simMetricMeters}
+            setSimMetricMeters={setSimMetricMeters}
+            simVectorMagnitude={simVectorMagnitude}
+            setSimVectorMagnitude={setSimVectorMagnitude}
+            simVectorAngle={simVectorAngle}
+            setSimVectorAngle={setSimVectorAngle}
+            simDensityMass={simDensityMass}
+            setSimDensityMass={setSimDensityMass}
+            simDensityVolume={simDensityVolume}
+            setSimDensityVolume={setSimDensityVolume}
+            simFluidDensity={simFluidDensity}
+            setSimFluidDensity={setSimFluidDensity}
+            simBias={simBias}
+            setSimBias={setSimBias}
+            simSpread={simSpread}
+            setSimSpread={setSimSpread}
+            formatSimulationNumber={formatSimulationNumber}
+          />
         ) : simulationLessonKey.startsWith("A6_") ||
-          simulationLessonKey.startsWith("A7_") ||
-          simulationLessonKey.startsWith("A11_") ? (
+          simulationLessonKey.startsWith("A7_") ? (
           <A6ToA11SimulationPanels
             lessonKey={simulationLessonKey}
             simMetricMeters={simMetricMeters}
