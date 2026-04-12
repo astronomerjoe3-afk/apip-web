@@ -21,28 +21,25 @@ type Props = {
   formatSimulationNumber: (value: number, digits?: number) => string;
 };
 
-const panelClass =
-  "rounded-3xl border border-slate-200 bg-white/95 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur";
+const panelClass = "rounded-3xl border border-slate-200 bg-white/95 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.08)]";
 
 function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
 
-function sliderField(label: string, value: string, input: ReactNode): ReactNode {
+function slider(label: string, value: string, input: ReactNode) {
   return (
     <label className="mt-4 block">
       <div className="flex items-center justify-between gap-4 text-sm text-slate-700">
         <span>{label}</span>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold tabular-nums text-slate-900">
-          {value}
-        </span>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-900">{value}</span>
       </div>
       <div className="mt-2">{input}</div>
     </label>
   );
 }
 
-function metricCard(title: string, value: string, tone: string): ReactNode {
+function metric(title: string, value: string, tone: string) {
   return (
     <div className={`rounded-2xl border p-4 ${tone}`}>
       <div className="text-xs font-semibold uppercase tracking-[0.18em] opacity-70">{title}</div>
@@ -51,15 +48,7 @@ function metricCard(title: string, value: string, tone: string): ReactNode {
   );
 }
 
-function renderPanel(
-  title: string,
-  controls: ReactNode,
-  boardTitle: string,
-  board: ReactNode,
-  readings: ReactNode,
-  lens: string[],
-  note: string,
-): ReactNode {
+function frame(title: string, controls: ReactNode, board: ReactNode, metrics: ReactNode, bullets: string[], note: string) {
   return (
     <div className="grid gap-4 xl:grid-cols-[minmax(320px,0.95fr)_minmax(360px,1.05fr)]">
       <div className="grid gap-4">
@@ -68,24 +57,22 @@ function renderPanel(
           {controls}
         </div>
         <div className={panelClass}>
-          <h4 className="text-lg font-semibold text-slate-900">Charge-Terrace lens</h4>
+          <h4 className="text-lg font-semibold text-slate-900">Quantum lens</h4>
           <ul className="mt-4 grid gap-3 text-sm text-slate-700">
-            {lens.map((item) => (
-              <li key={item} className="rounded-2xl bg-slate-50 px-4 py-3">
-                {item}
-              </li>
+            {bullets.map((item) => (
+              <li key={item} className="rounded-2xl bg-slate-50 px-4 py-3">{item}</li>
             ))}
           </ul>
         </div>
       </div>
       <div className="grid gap-4">
         <div className={panelClass}>
-          <h4 className="text-lg font-semibold text-slate-900">{boardTitle}</h4>
-          <div className="mt-4 overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-4">{board}</div>
+          <h4 className="text-lg font-semibold text-slate-900">Explorer board</h4>
+          <div className="mt-4 rounded-3xl border border-slate-200 bg-slate-50 p-4">{board}</div>
         </div>
         <div className={panelClass}>
           <h4 className="text-lg font-semibold text-slate-900">Readout</h4>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">{readings}</div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">{metrics}</div>
           <div className="mt-4 rounded-2xl border bg-slate-50 p-4 text-sm text-slate-700">{note}</div>
         </div>
       </div>
@@ -103,8 +90,6 @@ export default function A2SimulationPanels({
   setSimVectorAngle,
   simDensityMass,
   setSimDensityMass,
-  simDensityVolume,
-  setSimDensityVolume,
   simFluidDensity,
   setSimFluidDensity,
   simBias,
@@ -114,298 +99,203 @@ export default function A2SimulationPanels({
   formatSimulationNumber,
 }: Props) {
   if (lessonKey === "A2_L1") {
-    const sourceMagnitude = clamp(simVectorMagnitude, 1, 10);
-    const distance = clamp(simMetricMeters, 1, 8);
-    const scoutMagnitude = clamp(simDensityMass, 0.5, 4);
-    const sourcePositive = Math.round(clamp(simBias, 0, 1)) === 0;
-    const scoutPositive = Math.round(clamp(simSpread, 0, 1)) === 0;
-    const fieldStrength = (sourceMagnitude * 12) / (distance * distance);
-    const forceMagnitude = fieldStrength * scoutMagnitude;
-    const fieldDirection = sourcePositive ? "away from source" : "toward source";
-    const forceDirection =
-      scoutPositive === sourcePositive ? fieldDirection : fieldDirection === "away from source" ? "toward source" : "away from source";
-
-    return renderPanel(
-      "Slope-map",
+    const photon = clamp(simMetricMeters, 0, 9);
+    const gap1 = clamp(simVectorMagnitude, 1, 5);
+    const gap2 = Math.max(gap1 + 1, clamp(simVectorAngle, 2, 8));
+    const outcome = Math.abs(photon - gap1) < 0.05 ? "first excited" : Math.abs(photon - gap2) < 0.05 ? "second excited" : "no jump";
+    return frame(
+      "Energy-ladder lab",
       <>
-        {sliderField("Source sign", sourcePositive ? "positive source" : "negative source", <input className="w-full" type="range" min="0" max="1" step="1" value={sourcePositive ? 0 : 1} onChange={(e) => setSimBias(Number(e.target.value))} />)}
-        {sliderField("Source strength", `${formatSimulationNumber(sourceMagnitude, 1)} units`, <input className="w-full" type="range" min="1" max="10" step="0.2" value={sourceMagnitude} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-        {sliderField("Scout sign", scoutPositive ? "positive scout" : "negative scout", <input className="w-full" type="range" min="0" max="1" step="1" value={scoutPositive ? 0 : 1} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
-        {sliderField("Distance from source", `${formatSimulationNumber(distance, 1)} units`, <input className="w-full" type="range" min="1" max="8" step="0.2" value={distance} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Scout magnitude", `${formatSimulationNumber(scoutMagnitude, 1)} C`, <input className="w-full" type="range" min="0.5" max="4" step="0.1" value={scoutMagnitude} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
+        {slider("Photon packet", `${formatSimulationNumber(photon, 1)} eV`, <input className="w-full" type="range" min="0" max="9" step="0.1" value={photon} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {slider("First gap", `${formatSimulationNumber(gap1, 1)} eV`, <input className="w-full" type="range" min="1" max="5" step="0.1" value={gap1} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {slider("Second gap", `${formatSimulationNumber(gap2, 1)} eV`, <input className="w-full" type="range" min="2" max="8" step="0.1" value={gap2} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
       </>,
-      "Field map board",
-      <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="24" y="22" width="592" height="196" rx="28" fill="#eff6ff" />
-        <text x="48" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Field direction belongs to the location; force direction depends on the scout</text>
-        <circle cx="190" cy="128" r="34" fill={sourcePositive ? "#f97316" : "#1d4ed8"} />
-        <text x="190" y="138" fill="#fff" fontSize="28" fontWeight="700" textAnchor="middle">{sourcePositive ? "+" : "-"}</text>
-        <circle cx="440" cy="128" r="22" fill={scoutPositive ? "#10b981" : "#8b5cf6"} />
-        <text x="440" y="136" fill="#fff" fontSize="22" fontWeight="700" textAnchor="middle">{scoutPositive ? "+" : "-"}</text>
-        {sourcePositive ? (
-          <>
-            <line x1="236" y1="128" x2="400" y2="128" stroke="#0ea5e9" strokeWidth="8" strokeLinecap="round" />
-            <polygon points="400,128 374,114 374,142" fill="#0ea5e9" />
-          </>
-        ) : (
-          <>
-            <line x1="400" y1="128" x2="236" y2="128" stroke="#0ea5e9" strokeWidth="8" strokeLinecap="round" />
-            <polygon points="236,128 262,114 262,142" fill="#0ea5e9" />
-          </>
-        )}
-        {forceDirection === "away from source" ? (
-          <>
-            <line x1="440" y1="164" x2="520" y2="164" stroke="#0f766e" strokeWidth="8" strokeLinecap="round" />
-            <polygon points="520,164 494,150 494,178" fill="#0f766e" />
-          </>
-        ) : (
-          <>
-            <line x1="440" y1="164" x2="360" y2="164" stroke="#0f766e" strokeWidth="8" strokeLinecap="round" />
-            <polygon points="360,164 386,150 386,178" fill="#0f766e" />
-          </>
-        )}
-        <text x="258" y="104" fill="#0284c7" fontSize="18" fontWeight="700">field arrow</text>
-        <text x="422" y="194" fill="#0f766e" fontSize="18" fontWeight="700" textAnchor="middle">force on scout</text>
-        <text x="72" y="206" fill="#475569" fontSize="18">The field map stays fixed when only the scout changes sign. What flips is the force on that scout.</text>
-      </svg>,
+      <div className="space-y-4">
+        <div className="space-y-3 rounded-3xl bg-slate-900/95 p-5 text-white">
+          <div className="h-2 w-40 rounded-full bg-white/80" />
+          <div className="h-2 w-52 rounded-full bg-blue-400" />
+          <div className="h-2 w-64 rounded-full bg-violet-400" />
+          <div className="text-sm text-slate-200">Packet: {formatSimulationNumber(photon, 1)} eV to {outcome}</div>
+        </div>
+        <div className="text-sm text-slate-700">Exact packet-gap matching causes the jump. A nearly-correct packet still leaves the electron on the same rung.</div>
+      </div>,
       <>
-        {metricCard("Field strength E", `${formatSimulationNumber(fieldStrength, 2)} N/C`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Force on scout", `${formatSimulationNumber(forceMagnitude, 2)} N`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Field direction", fieldDirection, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Force direction", forceDirection, "border-amber-200 bg-amber-50 text-amber-900")}
+        {metric("Packet", `${formatSimulationNumber(photon, 1)} eV`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metric("Gap 1", `${formatSimulationNumber(gap1, 1)} eV`, "border-blue-200 bg-blue-50 text-blue-900")}
+        {metric("Gap 2", `${formatSimulationNumber(gap2, 1)} eV`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metric("Outcome", outcome, "border-emerald-200 bg-emerald-50 text-emerald-900")}
       </>,
-      ["Define the field arrow using a positive scout.", "A negative scout reverses force direction without redefining the field.", "Distance changes field strength because the electric slope becomes less steep farther out."],
-      "This explorer locks in the main advanced-electricity distinction early: field belongs to the location, while force belongs to the chosen charge.",
+      ["Allowed levels are discrete.", "Partial jumps are not allowed states.", "The ground state stays visible as the reference rung."],
+      "Try one packet that misses the gap and one that matches it exactly before deciding whether the atom changed level.",
     );
   }
 
   if (lessonKey === "A2_L2") {
-    const potentialA = clamp(simMetricMeters, 0, 20);
-    const freePotentialB = clamp(simVectorMagnitude, 0, 20);
-    const sameTerrace = Math.round(clamp(simBias, 0, 1)) === 0;
-    const potentialB = sameTerrace ? potentialA : freePotentialB;
-    const deltaV = potentialA - potentialB;
-
-    return renderPanel(
-      "Equipotential terrace",
+    const emission = Math.round(clamp(simBias, 0, 1)) === 0;
+    const atomA = Math.round(clamp(simSpread, 0, 1)) === 0;
+    const lines = atomA ? [1.9, 2.6, 3.1] : [2.2, 2.9, 3.8];
+    const selected = Math.round(clamp(simMetricMeters, 0, 2));
+    const wavelength = 1240 / lines[selected];
+    return frame(
+      "Spectral-barcode lab",
       <>
-        {sliderField("Potential at point A", `${formatSimulationNumber(potentialA, 1)} V`, <input className="w-full" type="range" min="0" max="20" step="0.5" value={potentialA} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Potential at point B", sameTerrace ? `${formatSimulationNumber(potentialB, 1)} V (locked to A)` : `${formatSimulationNumber(potentialB, 1)} V`, <input className="w-full" type="range" min="0" max="20" step="0.5" value={sameTerrace ? potentialA : potentialB} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} disabled={sameTerrace} />)}
-        {sliderField("Route mode", sameTerrace ? "same terrace" : "cross terrace", <input className="w-full" type="range" min="0" max="1" step="1" value={sameTerrace ? 0 : 1} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+        {slider("View mode", emission ? "emission" : "absorption", <input className="w-full" type="range" min="0" max="1" step="1" value={emission ? 0 : 1} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+        {slider("Atom pattern", atomA ? "atom A" : "atom B", <input className="w-full" type="range" min="0" max="1" step="1" value={atomA ? 0 : 1} onChange={(e) => setSimSpread(Number(e.target.value))} />)}
+        {slider("Selected line", `line ${selected + 1}`, <input className="w-full" type="range" min="0" max="2" step="1" value={selected} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
       </>,
-      "Terrace map board",
-      <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="24" y="22" width="592" height="196" rx="28" fill="#eef2ff" />
-        <text x="48" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Same-height routes give zero terrace drop</text>
-        {[0, 1, 2, 3].map((index) => <line key={index} x1="92" y1={92 + index * 32} x2="560" y2={92 + index * 32} stroke="#cbd5e1" strokeWidth="3" strokeDasharray="10 8" />)}
-        <line x1="180" y1="78" x2="510" y2="190" stroke="#0ea5e9" strokeWidth="6" />
-        <polygon points="510,190 486,178 500,154" fill="#0ea5e9" />
-        <circle cx="188" cy={sameTerrace ? 124 : 108} r="10" fill="#1d4ed8" />
-        <circle cx="438" cy={sameTerrace ? 124 : 172} r="10" fill="#10b981" />
-        <path d={sameTerrace ? "M188 124 C250 124, 320 124, 438 124" : "M188 108 C240 110, 320 140, 438 172"} fill="none" stroke={sameTerrace ? "#7c3aed" : "#f97316"} strokeWidth="6" strokeLinecap="round" />
-        <text x="154" y="96" fill="#1d4ed8" fontSize="18" fontWeight="700">point A</text>
-        <text x="418" y={sameTerrace ? 110 : 198} fill="#0f766e" fontSize="18" fontWeight="700">point B</text>
-        <text x="354" y="92" fill="#0284c7" fontSize="18" fontWeight="700">field direction</text>
-        <text x="88" y="206" fill="#475569" fontSize="18">Equipotential travel stays on one terrace. Crossing terrace levels creates ΔV.</text>
-      </svg>,
+      <div className="space-y-4">
+        <div className={`rounded-3xl p-5 ${emission ? "bg-slate-950" : "bg-slate-200"}`}>
+          <div className="flex items-end gap-10">
+            {lines.map((line, index) => (
+              <div key={line} className={`w-3 rounded-full ${index === selected ? "opacity-100" : "opacity-60"} ${emission ? "bg-sky-300" : "bg-slate-700"}`} style={{ height: `${48 + line * 14}px` }} />
+            ))}
+          </div>
+        </div>
+        <div className="text-sm text-slate-700">{emission ? "Bright lines appear where electrons drop." : "Dark lines mark the absorbed wavelengths from the same allowed gaps."}</div>
+      </div>,
       <>
-        {metricCard("Potential at A", `${formatSimulationNumber(potentialA, 1)} V`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Potential at B", `${formatSimulationNumber(potentialB, 1)} V`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("ΔV", `${formatSimulationNumber(deltaV, 1)} V`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Path type", sameTerrace ? "equipotential route" : "cross-terrace route", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metric("Mode", emission ? "bright-line view" : "missing-line view", "border-sky-200 bg-sky-50 text-sky-900")}
+        {metric("Gap", `${formatSimulationNumber(lines[selected], 1)} eV`, "border-blue-200 bg-blue-50 text-blue-900")}
+        {metric("Wavelength", `${formatSimulationNumber(wavelength, 0)} nm`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metric("Fingerprint", atomA ? "atom A barcode" : "atom B barcode", "border-emerald-200 bg-emerald-50 text-emerald-900")}
       </>,
-      ["Potential is electric height per unit charge.", "An equipotential path has zero terrace drop along it.", "Field arrows cross equipotential lines rather than running along them."],
-      "The point of this board is to make voltage feel like height difference and equipotential travel feel flat rather than mysterious.",
+      ["One line belongs to one transition.", "Emission and absorption use the same gap pattern.", "Different atoms keep different spectral barcodes."],
+      "Switch between two atoms and notice that the line pattern changes because the allowed level spacings are different.",
     );
   }
 
   if (lessonKey === "A2_L3") {
-    const plateVoltage = clamp(simVectorMagnitude, 10, 120);
-    const gap = clamp(simMetricMeters, 0.005, 0.05);
-    const scoutPositive = Math.round(clamp(simBias, 0, 1)) === 0;
-    const fieldStrength = plateVoltage / gap;
-    const gapMm = gap * 1000;
-
-    return renderPanel(
-      "Uniform plate-field",
+    const photon = clamp(simMetricMeters, 1, 6);
+    const phi = clamp(simVectorMagnitude, 1.5, 4.5);
+    const intensity = clamp(simDensityMass, 1, 10);
+    const emitted = photon >= phi;
+    const kmax = emitted ? photon - phi : 0;
+    return frame(
+      "Photoelectric-threshold lab",
       <>
-        {sliderField("Plate voltage", `${formatSimulationNumber(plateVoltage, 0)} V`, <input className="w-full" type="range" min="10" max="120" step="1" value={plateVoltage} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-        {sliderField("Plate gap", `${formatSimulationNumber(gapMm, 1)} mm`, <input className="w-full" type="range" min="0.005" max="0.05" step="0.001" value={gap} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Scout sign", scoutPositive ? "positive scout" : "negative scout", <input className="w-full" type="range" min="0" max="1" step="1" value={scoutPositive ? 0 : 1} onChange={(e) => setSimBias(Number(e.target.value))} />)}
+        {slider("Photon energy", `${formatSimulationNumber(photon, 1)} eV`, <input className="w-full" type="range" min="1" max="6" step="0.1" value={photon} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {slider("Work function", `${formatSimulationNumber(phi, 1)} eV`, <input className="w-full" type="range" min="1.5" max="4.5" step="0.1" value={phi} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {slider("Intensity", `${formatSimulationNumber(intensity, 0)} packets`, <input className="w-full" type="range" min="1" max="10" step="1" value={intensity} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
       </>,
-      "Plate-gap board",
-      <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="24" y="22" width="592" height="196" rx="28" fill="#eff6ff" />
-        <text x="48" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Uniform field means one steady terrace drop across the gap</text>
-        <rect x="140" y="84" width="20" height="108" rx="8" fill="#ef4444" />
-        <rect x="480" y="84" width="20" height="108" rx="8" fill="#2563eb" />
-        <text x="150" y="76" fill="#b91c1c" fontSize="18" fontWeight="700" textAnchor="middle">+</text>
-        <text x="490" y="76" fill="#1d4ed8" fontSize="18" fontWeight="700" textAnchor="middle">-</text>
-        {[0, 1, 2, 3, 4].map((index) => (
-          <g key={index}>
-            <line x1={194 + index * 52} y1="104" x2={246 + index * 52} y2="104" stroke="#0ea5e9" strokeWidth="6" />
-            <polygon points={`${246 + index * 52},104 ${224 + index * 52},92 ${224 + index * 52},116`} fill="#0ea5e9" />
-          </g>
-        ))}
-        {[0, 1, 2].map((index) => <line key={index} x1="194" y1={126 + index * 24} x2="448" y2={126 + index * 24} stroke="#cbd5e1" strokeWidth="3" strokeDasharray="10 8" />)}
-        <circle cx="318" cy="154" r="14" fill={scoutPositive ? "#10b981" : "#7c3aed"} />
-        <text x="318" y="160" fill="#fff" fontSize="18" fontWeight="700" textAnchor="middle">{scoutPositive ? "+" : "-"}</text>
-        <text x="250" y="198" fill="#475569" fontSize="18">Equipotential layers stay parallel to the plates.</text>
-      </svg>,
+      <div className="space-y-4">
+        <div className="rounded-3xl bg-slate-900 p-5 text-white">
+          <div className="flex items-end gap-4">
+            <div className="h-32 w-28 rounded-2xl bg-amber-400/80" />
+            <div className={`h-12 w-12 rounded-full ${emitted ? "bg-sky-300" : "bg-slate-500"}`} />
+          </div>
+          <div className="mt-4 text-sm">{emitted ? "Above threshold: electrons are emitted." : "Below threshold: no emission, however bright the beam becomes."}</div>
+        </div>
+      </div>,
       <>
-        {metricCard("Field strength E", `${formatSimulationNumber(fieldStrength, 0)} V/m`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Gap d", `${formatSimulationNumber(gap, 3)} m`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Voltage ΔV", `${formatSimulationNumber(plateVoltage, 0)} V`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Scout response", scoutPositive ? "force along field" : "force opposite field", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metric("Photon", `${formatSimulationNumber(photon, 1)} eV`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metric("Work function", `${formatSimulationNumber(phi, 1)} eV`, "border-blue-200 bg-blue-50 text-blue-900")}
+        {metric("K max", `${formatSimulationNumber(kmax, 1)} eV`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metric("Rate trend", emitted ? `${formatSimulationNumber(intensity * 12, 0)} emitted` : "0 emitted", "border-emerald-200 bg-emerald-50 text-emerald-900")}
       </>,
-      ["Uniform field strength is voltage drop per distance.", "Smaller gap with the same voltage means steeper electric slope.", "Field direction is fixed by the plates even when the scout sign changes."],
-      "This plate-gap view keeps ΔV and d physically visible, which is the safest way to teach E = ΔV / d conceptually.",
+      ["Threshold checks packet energy first.", "Intensity mainly changes how many electrons are emitted above threshold.", "Extra packet energy becomes electron kinetic energy."],
+      "Keep one bright low-energy beam on the board and compare it with one above-threshold beam so brightness does not replace packet logic.",
     );
   }
 
   if (lessonKey === "A2_L4") {
-    const area = clamp(simMetricMeters, 0.2, 2.0);
-    const gap = clamp(simVectorMagnitude, 0.2, 2.0);
-    const voltage = clamp(simDensityMass, 2, 24);
-    const dielectricFactor = clamp(simFluidDensity, 1, 4);
-    const capacitance = (3 * area * dielectricFactor) / gap;
-    const charge = capacitance * voltage;
-    const energy = 0.5 * capacitance * voltage * voltage;
-
-    return renderPanel(
-      "Split-deck store",
+    const packet = clamp(simMetricMeters, 0, 18);
+    const excite = clamp(simVectorMagnitude, 2, 8);
+    const ionise = Math.max(excite + 2, clamp(simVectorAngle, 6, 16));
+    const outcome = packet < excite ? "no transition" : packet < ionise ? "excitation" : "ionisation";
+    const excess = outcome === "ionisation" ? packet - ionise : 0;
+    return frame(
+      "Excitation-versus-ionisation lab",
       <>
-        {sliderField("Plate area", `${formatSimulationNumber(area, 2)} m^2`, <input className="w-full" type="range" min="0.2" max="2.0" step="0.05" value={area} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Plate gap", `${formatSimulationNumber(gap, 2)} cm`, <input className="w-full" type="range" min="0.2" max="2.0" step="0.05" value={gap} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-        {sliderField("Source voltage", `${formatSimulationNumber(voltage, 1)} V`, <input className="w-full" type="range" min="2" max="24" step="0.5" value={voltage} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
-        {sliderField("Gap material factor", `${formatSimulationNumber(dielectricFactor, 1)} x`, <input className="w-full" type="range" min="1" max="4" step="0.1" value={dielectricFactor} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
+        {slider("Incoming energy", `${formatSimulationNumber(packet, 1)} eV`, <input className="w-full" type="range" min="0" max="18" step="0.1" value={packet} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {slider("Excitation gap", `${formatSimulationNumber(excite, 1)} eV`, <input className="w-full" type="range" min="2" max="8" step="0.1" value={excite} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {slider("Ionisation threshold", `${formatSimulationNumber(ionise, 1)} eV`, <input className="w-full" type="range" min="6" max="16" step="0.1" value={ionise} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
       </>,
-      "Capacitor board",
-      <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="24" y="22" width="592" height="196" rx="28" fill="#f8fafc" />
-        <text x="48" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Two facing plates hold separated charge across a field-filled gap</text>
-        <rect x="180" y="86" width={90 + area * 55} height="18" rx="8" fill="#ef4444" />
-        <rect x="180" y={146 + gap * 12} width={90 + area * 55} height="18" rx="8" fill="#2563eb" />
-        <text x="150" y="100" fill="#b91c1c" fontSize="18" fontWeight="700">+Q</text>
-        <text x="150" y={160 + gap * 12} fill="#1d4ed8" fontSize="18" fontWeight="700">-Q</text>
-        {[0, 1, 2, 3].map((index) => (
-          <g key={index}>
-            <line x1={220 + index * 32} y1="112" x2={220 + index * 32} y2={142 + gap * 12} stroke="#0ea5e9" strokeWidth="5" strokeDasharray="10 8" />
-            <polygon points={`${220 + index * 32},${142 + gap * 12} ${214 + index * 32},${130 + gap * 12} ${226 + index * 32},${130 + gap * 12}`} fill="#0ea5e9" />
-          </g>
-        ))}
-        <text x="378" y="126" fill="#0284c7" fontSize="18" fontWeight="700">field in gap</text>
-        <text x="188" y="204" fill="#475569" fontSize="18">Capacitance rises with area and falls with separation.</text>
-      </svg>,
+      <div className="space-y-4">
+        <div className="space-y-3 rounded-3xl bg-slate-900/95 p-5 text-white">
+          <div className="h-2 w-40 rounded-full bg-white/80" />
+          <div className="h-2 w-48 rounded-full bg-blue-400" />
+          <div className="h-2 w-60 rounded-full bg-red-400" />
+          <div className="text-sm text-slate-200">Outcome: {outcome}</div>
+        </div>
+      </div>,
       <>
-        {metricCard("Capacitance C", `${formatSimulationNumber(capacitance, 2)} F`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Stored charge Q", `${formatSimulationNumber(charge, 2)} C`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Field energy", `${formatSimulationNumber(energy, 1)} J`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Store geometry", gap < 0.8 && area > 1.2 ? "strong split-deck" : "weaker split-deck", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metric("Packet", `${formatSimulationNumber(packet, 1)} eV`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metric("Excitation", `${formatSimulationNumber(excite, 1)} eV`, "border-blue-200 bg-blue-50 text-blue-900")}
+        {metric("Ionisation", `${formatSimulationNumber(ionise, 1)} eV`, "border-red-200 bg-red-50 text-red-900")}
+        {metric("Freed KE", outcome === "ionisation" ? `${formatSimulationNumber(excess, 1)} eV` : "still bound", "border-violet-200 bg-violet-50 text-violet-900")}
       </>,
-      ["Capacitance is the device ratio Q/V, not the current amount of charge by itself.", "Larger area helps the plates hold more charge per volt.", "The stored energy is in the electric field between the plates, not in one plate alone."],
-      "This explorer keeps geometry, stored charge, and field energy on the same board so capacitance feels like a design property rather than a formula to memorize.",
+      ["Excitation keeps the electron bound.", "Ionisation frees the electron into the continuum.", "Energy above ionisation can appear as kinetic energy."],
+      "Compare the same packet with both thresholds before naming the outcome. That is the real lesson distinction.",
     );
   }
 
   if (lessonKey === "A2_L5") {
-    const sourceVoltage = clamp(simVectorMagnitude, 4, 24);
-    const branchOneResistance = clamp(simDensityMass, 1, 20);
-    const branchTwoResistance = clamp(simDensityVolume, 1, 20);
-    const branchOneCurrent = sourceVoltage / branchOneResistance;
-    const branchTwoCurrent = sourceVoltage / branchTwoResistance;
-    const totalCurrent = branchOneCurrent + branchTwoCurrent;
-
-    return renderPanel(
-      "Node-platform",
+    const voltage = clamp(simMetricMeters, 20, 400);
+    const aperture = clamp(simVectorMagnitude, 0.3, 1.8);
+    const hits = Math.round(clamp(simDensityMass, 20, 180));
+    const lambdaNm = 1.227 / Math.sqrt(voltage);
+    const spread = clamp((lambdaNm / aperture) * 18, 1, 7);
+    return frame(
+      "Matter-wave lab",
       <>
-        {sliderField("Source voltage", `${formatSimulationNumber(sourceVoltage, 1)} V`, <input className="w-full" type="range" min="4" max="24" step="0.5" value={sourceVoltage} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-        {sliderField("Branch 1 resistance", `${formatSimulationNumber(branchOneResistance, 1)} ohm`, <input className="w-full" type="range" min="1" max="20" step="0.2" value={branchOneResistance} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
-        {sliderField("Branch 2 resistance", `${formatSimulationNumber(branchTwoResistance, 1)} ohm`, <input className="w-full" type="range" min="1" max="20" step="0.2" value={branchTwoResistance} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
+        {slider("Accelerating voltage", `${formatSimulationNumber(voltage, 0)} V`, <input className="w-full" type="range" min="20" max="400" step="5" value={voltage} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+        {slider("Aperture width", `${formatSimulationNumber(aperture, 2)} nm scale`, <input className="w-full" type="range" min="0.3" max="1.8" step="0.05" value={aperture} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+        {slider("Detected electrons", `${hits}`, <input className="w-full" type="range" min="20" max="180" step="5" value={hits} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
       </>,
-      "Node map board",
-      <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="24" y="22" width="592" height="196" rx="28" fill="#eff6ff" />
-        <text x="48" y="54" fill="#0f172a" fontSize="22" fontWeight="700">Branches between the same two nodes share one terrace drop</text>
-        <line x1="110" y1="84" x2="530" y2="84" stroke="#0f766e" strokeWidth="10" strokeLinecap="round" />
-        <line x1="110" y1="186" x2="530" y2="186" stroke="#1d4ed8" strokeWidth="10" strokeLinecap="round" />
-        <line x1="200" y1="84" x2="200" y2="186" stroke="#94a3b8" strokeWidth="8" />
-        <line x1="430" y1="84" x2="430" y2="186" stroke="#94a3b8" strokeWidth="8" />
-        <rect x="184" y="102" width="32" height="26" rx="6" fill="#f59e0b" />
-        <rect x="184" y="144" width="32" height="26" rx="6" fill="#f59e0b" />
-        <rect x="414" y="102" width="32" height="26" rx="6" fill="#f59e0b" />
-        <rect x="414" y="144" width="32" height="26" rx="6" fill="#f59e0b" />
-        <line x1="200" y1="116" x2="430" y2="116" stroke="#ef4444" strokeWidth="6" />
-        <line x1="200" y1="158" x2="430" y2="158" stroke="#8b5cf6" strokeWidth="6" />
-        <text x="96" y="72" fill="#0f766e" fontSize="18" fontWeight="700">top node = {formatSimulationNumber(sourceVoltage, 0)} V</text>
-        <text x="96" y="212" fill="#1d4ed8" fontSize="18" fontWeight="700">bottom node = 0 V</text>
-        <text x="258" y="108" fill="#dc2626" fontSize="18" fontWeight="700">branch 1</text>
-        <text x="258" y="176" fill="#7c3aed" fontSize="18" fontWeight="700">branch 2</text>
-      </svg>,
+      <div className="space-y-4">
+        <div className="rounded-3xl bg-slate-900 p-5 text-white">
+          <div className="mb-4 flex gap-3">
+            <div className="h-24 w-3 rounded-full bg-white" />
+            <div className="h-24 w-3 rounded-full bg-white" />
+          </div>
+          <div className="space-y-2">
+            {[0, 1, 2, 3, 4].map((index) => <div key={index} className="rounded-full bg-sky-300/80" style={{ height: 6, width: `${120 + spread * 18 - Math.abs(index - 2) * 26}px` }} />)}
+          </div>
+        </div>
+        <div className="text-sm text-slate-700">Localized hits build the pattern over time; changing momentum changes lambda and therefore the spread.</div>
+      </div>,
       <>
-        {metricCard("Branch 1 current", `${formatSimulationNumber(branchOneCurrent, 2)} A`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Branch 2 current", `${formatSimulationNumber(branchTwoCurrent, 2)} A`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Total current", `${formatSimulationNumber(totalCurrent, 2)} A`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Branch voltage", `${formatSimulationNumber(sourceVoltage, 1)} V on both branches`, "border-amber-200 bg-amber-50 text-amber-900")}
+        {metric("lambda", `${formatSimulationNumber(lambdaNm, 3)} nm`, "border-sky-200 bg-sky-50 text-sky-900")}
+        {metric("Spread index", `${formatSimulationNumber(spread, 1)}`, "border-blue-200 bg-blue-50 text-blue-900")}
+        {metric("Hits", `${hits} localized detections`, "border-violet-200 bg-violet-50 text-violet-900")}
+        {metric("Trend", spread > 3 ? "broader pattern" : "narrower pattern", "border-emerald-200 bg-emerald-50 text-emerald-900")}
       </>,
-      ["Parallel branches connected between the same two nodes share the same potential difference.", "Different branch resistances can still produce different branch currents.", "The total current equals the sum of the branch currents at the junction."],
-      "This node map makes the hidden voltage structure visible first, which is the cleanest way to keep current split and node height from getting mixed together.",
+      ["Increasing momentum shortens the de Broglie wavelength.", "Smaller wavelength gives less obvious diffraction for the same opening.", "Localized detections and a wave-like pattern belong to the same evidence story."],
+      "Move the voltage first, then compare how the pattern width responds. That makes the inverse lambda-p link easier to see.",
     );
   }
 
-  if (lessonKey === "A2_L6") {
-    const sourceRise = clamp(simVectorMagnitude, 8, 28);
-    const dropOne = clamp(simDensityMass, 1, 14);
-    const dropTwo = clamp(simDensityVolume, 1, 14);
-    const guessedMissing = clamp(simMetricMeters, 0, 20);
-    const requiredMissing = sourceRise - dropOne - dropTwo;
-    const loopSum = sourceRise - dropOne - dropTwo - guessedMissing;
-    const topNode = sourceRise;
-    const midNode = sourceRise - dropOne;
-    const lowNode = midNode - dropTwo;
-
-    return renderPanel(
-      "Mesh audit",
-      <>
-        {sliderField("Source rise", `${formatSimulationNumber(sourceRise, 1)} V`, <input className="w-full" type="range" min="8" max="28" step="0.5" value={sourceRise} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
-        {sliderField("Drop 1", `${formatSimulationNumber(dropOne, 1)} V`, <input className="w-full" type="range" min="1" max="14" step="0.5" value={dropOne} onChange={(e) => setSimDensityMass(Number(e.target.value))} />)}
-        {sliderField("Drop 2", `${formatSimulationNumber(dropTwo, 1)} V`, <input className="w-full" type="range" min="1" max="14" step="0.5" value={dropTwo} onChange={(e) => setSimDensityVolume(Number(e.target.value))} />)}
-        {sliderField("Your missing-drop guess", `${formatSimulationNumber(guessedMissing, 1)} V`, <input className="w-full" type="range" min="0" max="20" step="0.5" value={guessedMissing} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
-        {sliderField("Loop marker", `${formatSimulationNumber(clamp(simVectorAngle, 0, 360), 0)} deg`, <input className="w-full" type="range" min="0" max="360" step="5" value={clamp(simVectorAngle, 0, 360)} onChange={(e) => setSimVectorAngle(Number(e.target.value))} />)}
-      </>,
-      "Loop audit board",
-      <svg viewBox="0 0 640 250" className="w-full">
-        <rect x="24" y="22" width="592" height="196" rx="28" fill="#eef2ff" />
-        <text x="48" y="54" fill="#0f172a" fontSize="22" fontWeight="700">A closed loop must climb and descend back to its starting electric height</text>
-        <rect x="112" y="86" width="56" height="78" rx="12" fill="#10b981" />
-        <text x="140" y="130" fill="#fff" fontSize="22" fontWeight="700" textAnchor="middle">+{formatSimulationNumber(sourceRise, 0)}</text>
-        <rect x="254" y="76" width="72" height="22" rx="8" fill="#f59e0b" />
-        <rect x="414" y="76" width="72" height="22" rx="8" fill="#f59e0b" />
-        <rect x="414" y="164" width="72" height="22" rx="8" fill="#f59e0b" />
-        <line x1="168" y1="124" x2="254" y2="124" stroke="#0f766e" strokeWidth="8" />
-        <line x1="326" y1="87" x2="414" y2="87" stroke="#ef4444" strokeWidth="8" />
-        <line x1="450" y1="98" x2="450" y2="164" stroke="#1d4ed8" strokeWidth="8" />
-        <line x1="414" y1="175" x2="168" y2="175" stroke="#7c3aed" strokeWidth="8" />
-        <line x1="140" y1="164" x2="140" y2="86" stroke="#94a3b8" strokeWidth="8" />
-        <text x="258" y="70" fill="#c2410c" fontSize="18" fontWeight="700">drop 1 = {formatSimulationNumber(dropOne, 0)} V</text>
-        <text x="418" y="70" fill="#c2410c" fontSize="18" fontWeight="700">drop 2 = {formatSimulationNumber(dropTwo, 0)} V</text>
-        <text x="388" y="206" fill="#7c3aed" fontSize="18" fontWeight="700">missing drop = {formatSimulationNumber(requiredMissing, 1)} V</text>
-        <text x="74" y="206" fill="#475569" fontSize="18">Loop sum should return to zero after every rise and drop is counted.</text>
-      </svg>,
-      <>
-        {metricCard("Required missing drop", `${formatSimulationNumber(requiredMissing, 1)} V`, "border-sky-200 bg-sky-50 text-sky-900")}
-        {metricCard("Loop sum with your guess", `${formatSimulationNumber(loopSum, 1)} V`, "border-emerald-200 bg-emerald-50 text-emerald-900")}
-        {metricCard("Node heights", `top ${formatSimulationNumber(topNode, 1)} V, mid ${formatSimulationNumber(midNode, 1)} V, low ${formatSimulationNumber(lowNode, 1)} V`, "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Audit status", Math.abs(loopSum) < 0.01 ? "balanced loop" : "loop not balanced yet", "border-amber-200 bg-amber-50 text-amber-900")}
-      </>,
-      ["List every source rise and every component drop with sign.", "Use node heights to check component voltages independently of the loop walk.", "KVL is a conservation audit, not a claim that all component voltages match."],
-      "This final A2 board turns Kirchhoff voltage reasoning into terrain bookkeeping: when the audit is complete, the loop must come back to the same electric height where it started.",
-    );
-  }
-
-  return (
-    <div className="rounded-2xl border bg-slate-50 p-6 text-slate-700">
-      Use the task above to compare electric slope, terrace drop, or mesh balance before you continue.
-    </div>
+  const evidence = Math.round(clamp(simMetricMeters, 0, 2));
+  const lens = Math.round(clamp(simVectorMagnitude, 0, 2));
+  const cards = [
+    { title: "Line spectra", clue: "discrete levels", relation: "Delta E = h f" },
+    { title: "Photoelectric effect", clue: "packet thresholds", relation: "h f = phi + K max" },
+    { title: "Electron diffraction", clue: "matter waves", relation: "lambda = h / p" },
+  ];
+  const active = cards[evidence];
+  const themes = ["quantum states are discrete", "energy transfer is packet-based", "moving particles can show wave evidence"];
+  return frame(
+    "Quantum-evidence lab",
+    <>
+      {slider("Evidence panel", active.title, <input className="w-full" type="range" min="0" max="2" step="1" value={evidence} onChange={(e) => setSimMetricMeters(Number(e.target.value))} />)}
+      {slider("Interpretation lens", themes[lens], <input className="w-full" type="range" min="0" max="2" step="1" value={lens} onChange={(e) => setSimVectorMagnitude(Number(e.target.value))} />)}
+      {slider("Confidence", `${formatSimulationNumber(clamp(simFluidDensity, 1, 4), 1)}x`, <input className="w-full" type="range" min="1" max="4" step="0.1" value={clamp(simFluidDensity, 1, 4)} onChange={(e) => setSimFluidDensity(Number(e.target.value))} />)}
+    </>,
+    <div className="grid gap-3 md:grid-cols-3">
+      {cards.map((card, index) => (
+        <div key={card.title} className={`rounded-2xl border p-4 ${index === evidence ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 bg-white text-slate-900"}`}>
+          <div className="font-semibold">{card.title}</div>
+          <div className="mt-2 text-sm opacity-80">{card.clue}</div>
+        </div>
+      ))}
+    </div>,
+    <>
+      {metric("Evidence", active.title, "border-sky-200 bg-sky-50 text-sky-900")}
+      {metric("Best relation", active.relation, "border-blue-200 bg-blue-50 text-blue-900")}
+      {metric("Strongest clue", active.clue, "border-violet-200 bg-violet-50 text-violet-900")}
+      {metric("Shared model", themes[lens], "border-emerald-200 bg-emerald-50 text-emerald-900")}
+    </>,
+    ["Spectra are strongest for discrete levels.", "Photoelectric thresholds are strongest for photon packet transfer.", "Electron diffraction is strongest for matter-wave evidence."],
+    "Use the controls comparatively: switch evidence panels, say what each one proves best, then state the shared quantum model rather than a slogan.",
   );
 }
