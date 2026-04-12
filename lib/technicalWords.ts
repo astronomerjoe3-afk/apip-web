@@ -446,6 +446,11 @@ const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
   M7: [
     { term: "Transverse wave", aliases: ["transverse", "transverse wave"], meaning: "A transverse wave has oscillations perpendicular to the direction of travel.", why_it_matters: "You must compare local motion with propagation to classify the wave correctly." },
     { term: "Longitudinal wave", aliases: ["longitudinal", "longitudinal wave"], meaning: "A longitudinal wave has oscillations parallel to the direction of travel.", why_it_matters: "It helps explain sound and compression-based patterns." },
+    { term: "Amplitude", aliases: ["amplitude"], meaning: "Amplitude is the maximum displacement of a point on the wave from its equilibrium position.", why_it_matters: "It describes local oscillation size and should not be confused with wave speed." },
+    { term: "Crest", aliases: ["crest"], meaning: "A crest is the highest point of a transverse wave.", why_it_matters: "It helps learners describe transverse wave shape clearly." },
+    { term: "Trough", aliases: ["trough"], meaning: "A trough is the lowest point of a transverse wave.", why_it_matters: "It pairs with crest language for transverse waves." },
+    { term: "Compression", aliases: ["compression", "compressions"], meaning: "A compression is a region of a longitudinal wave where the medium is crowded together.", why_it_matters: "It helps learners read sound-wave and slinky-wave patterns correctly." },
+    { term: "Rarefaction", aliases: ["rarefaction", "rarefactions"], meaning: "A rarefaction is a region of a longitudinal wave where the medium is spread out.", why_it_matters: "It completes the standard description of a longitudinal pattern." },
     { term: "Frequency", aliases: ["frequency"], meaning: "Frequency is the number of wave cycles produced each second.", why_it_matters: "It is set by the source, not by how the medium later changes the wave speed." },
     { term: "Wavelength", aliases: ["wavelength", "lambda", "λ"], meaning: "Wavelength is the spacing between matching points on successive wavefronts.", why_it_matters: "It changes when wave speed changes while frequency stays fixed." },
     { term: "Wave speed", aliases: ["wave speed", "speed"], meaning: "Wave speed is how fast the wavefront travels through the medium.", why_it_matters: "It is linked to frequency and wavelength by v = fλ." },
@@ -453,6 +458,7 @@ const MODULE_TECHNICAL_WORDS: Record<string, TechnicalWordSeed[]> = {
     { term: "Refraction", aliases: ["refraction"], meaning: "Refraction is the change in direction caused when a wave changes speed in a new medium.", why_it_matters: "It is a speed-change story, not a strange kind of reflection." },
     { term: "Diffraction", aliases: ["diffraction"], meaning: "Diffraction is the spreading or bending of a wave around an edge or through an opening.", why_it_matters: "It becomes stronger when the opening size is similar to the wavelength." },
     { term: "Wavefront", aliases: ["wavefront", "wavefronts", "front line"], meaning: "A wavefront joins points that are oscillating in the same phase.", why_it_matters: "It makes reflection, refraction, and diffraction geometry easier to read." },
+    { term: "Normal", aliases: ["normal"], meaning: "The normal is the line drawn perpendicular to a boundary at the point where the wave meets it.", why_it_matters: "Reflection and refraction angles are measured from the normal, not from the surface." },
   ],
   M8: [
     { term: "Normal", aliases: ["normal", "guide line"], meaning: "The normal is the line drawn perpendicular to a surface at the point where a ray strikes it.", why_it_matters: "Optics angles are measured from the normal, not from the surface itself." },

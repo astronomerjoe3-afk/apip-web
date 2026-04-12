@@ -153,6 +153,7 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
   M7_L1: [
     { standardFormula: "wave speed = distance traveled by the front / time", meaning: "Wave speed belongs to front travel, not to one particle moving across the whole medium.", conditions: "Use when front distance and time are known.", unitsText: "m/s" },
+    { standardFormula: "larger amplitude does not by itself imply larger wave speed", meaning: "Amplitude belongs to local oscillation size, while wave speed belongs to the disturbance pattern crossing the medium.", conditions: "Use when comparing two waves with given travel distance and time.", unitsText: "" },
   ],
   M7_L2: [
     { standardFormula: "transverse wave = local motion perpendicular to wave travel", meaning: "Wave type is defined by comparing local motion with propagation direction.", conditions: "Use when classifying wave type.", unitsText: "" },
@@ -160,16 +161,21 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
   M7_L3: [
     { standardFormula: "v = fλ", meaning: "Wave speed depends on frequency and wavelength together.", conditions: "Use when any two of speed, frequency, and wavelength are known.", unitsText: "m/s, Hz, m" },
+    { standardFormula: "λ = v / f", meaning: "At known speed and frequency, wavelength is found by dividing speed by launch rate.", conditions: "Use when wavelength is the unknown.", unitsText: "m" },
   ],
   M7_L4: [
     { standardFormula: "angle of incidence = angle of reflection", meaning: "Reflection at a flat surface keeps equal angles to the normal.", conditions: "Measure both angles from the normal.", unitsText: "degrees" },
+    { standardFormula: "head-on incidence -> reflected path retraces the same line", meaning: "If the incident angle is zero to the normal, the reflected angle is also zero.", conditions: "Use in the special case where the wave hits straight along the normal.", unitsText: "" },
   ],
   M7_L5: [
     { standardFormula: "v = fλ", meaning: "Across a boundary the speed and wavelength can change together while the source keeps the frequency fixed.", conditions: "Use when comparing one medium with another.", unitsText: "m/s, Hz, m" },
     { standardFormula: "frequency stays constant across a boundary", meaning: "The source sets the frequency even when the medium changes.", conditions: "Use in refraction reasoning.", unitsText: "Hz" },
+    { standardFormula: "slower medium -> bends toward the normal", meaning: "A lower wave speed in the new medium makes the wavefront turn closer to the normal.", conditions: "Use when the wave enters a slower region.", unitsText: "" },
+    { standardFormula: "faster medium -> bends away from the normal", meaning: "A higher wave speed in the new medium makes the wavefront turn farther from the normal.", conditions: "Use when the wave enters a faster region.", unitsText: "" },
   ],
   M7_L6: [
     { standardFormula: "strongest diffraction happens when gap size is comparable to wavelength", meaning: "Wave spreading depends on comparing the opening size with the wavelength.", conditions: "Use when judging how much a wave will spread.", unitsText: "" },
+    { standardFormula: "all waves can diffract", meaning: "Diffraction is a general wave behavior, not a sound-only special case.", conditions: "Use when a question tempts a label-only answer about one wave type.", unitsText: "" },
   ],
   M8_L1: [
     { standardFormula: "angle of incidence = angle of reflection", meaning: "Mirror reflection keeps equal angles to the normal.", conditions: "Measure from the guide line or normal, not from the mirror surface.", unitsText: "degrees" },
