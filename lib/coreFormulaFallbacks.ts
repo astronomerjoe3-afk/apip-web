@@ -322,10 +322,12 @@ const CORE_FORMULA_FALLBACKS: Record<string, FormulaFallbackEntry[]> = {
   ],
   M14_L5: [
     { standardFormula: "z = (lambda_observed - lambda_emitted) / lambda_emitted", meaning: "Redshift compares the wavelength change with the emitted wavelength as a fractional increase.", conditions: "Use when quantifying cosmological redshift from spectral-line data.", unitsText: "" },
+    { standardFormula: "lambda_observed = (1 + z) x lambda_emitted", meaning: "Rearranging the redshift definition lets you predict the observed wavelength once redshift and emitted wavelength are known.", conditions: "Use when converting a known spectral-line redshift into an observed wavelength.", unitsText: "same wavelength units on both sides" },
     { standardFormula: "for small redshift, v approx zc", meaning: "At low redshift, the fractional wavelength shift gives an approximate recession speed as a fraction of the speed of light.", conditions: "Use for school-level links between measured redshift and recession speed when z is small.", unitsText: "m/s or km/s" },
   ],
   M14_L6: [
     { standardFormula: "v = H0 d", meaning: "Hubble's law links galaxy recession speed to distance on the large-scale expansion model.", conditions: "Use when estimating recession speed from a known distance or when reading a Hubble-law graph.", unitsText: "km/s, Mpc" },
+    { standardFormula: "d = v / H0", meaning: "Rearranging Hubble's law lets you estimate galaxy distance from recession speed in the simple expansion model.", conditions: "Use when recession speed is known and the Hubble constant is supplied.", unitsText: "Mpc" },
     { standardFormula: "greater galaxy distance -> greater recession speed and usually greater redshift", meaning: "The distance-redshift trend is the observable pattern behind the expanding-universe model.", conditions: "Use when linking redshift evidence, Hubble's law, and the Big Bang model.", unitsText: "" },
     { standardFormula: "greater galaxy distance -> greater cosmological redshift", meaning: "The distance-redshift trend is evidence for cosmic expansion.", conditions: "Use when linking observation to the Big Bang model.", unitsText: "" },
     { standardFormula: "Big Bang model = expanding-space model from an early hot dense state", meaning: "The model describes expansion of space rather than an ordinary explosion from one point.", conditions: "Use when explaining why the Big Bang is an expansion story.", unitsText: "" },

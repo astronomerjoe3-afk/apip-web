@@ -179,7 +179,7 @@ function l1ConceptRaw(): RawItem[] {
       ["Why is 'large-looking object equals star' a weak rule?", ["apparent size can change with distance and does not reveal the light source", "all stars look larger than planets", "planets cannot look large", "distance does not affect appearance"], 0, "Apparent size is another appearance clue, not the core definition."],
       ["Why should reflected light be treated carefully in astronomy classification?", ["it can copy brightness from a star without the body being self-luminous", "it removes the need for spectra", "it proves fusion is happening", "it makes distance irrelevant"], 0, "Reflection can make a planet look star-like if the mechanism is ignored."],
       ["A cloud hides a star from view. What is the strongest statement?", ["it is still a star because the physical source has not changed", "it becomes a planet while hidden", "it stops producing light", "classification depends only on whether Earth can see it"], 0, "Observation conditions do not alter the object's physical type."],
-      ["Which summary is strongest?", ["Classify stars by self-luminous fusion-powered light, not by appearance alone", "Classify stars by whichever object looks brightest", "Classify planets by color only", "Classify everything in space by size in the sky"], 0, "This keeps the lesson's cause-and-effect language intact."],
+      ["Which classification rule still works even if the brighter-looking object happens to be the planet?", ["Classify by whether the object produces its own light through fusion", "Classify by whichever object looks brightest", "Classify by color only", "Classify by how large it looks from Earth"], 0, "A physical source rule still works when appearance changes."],
       ["Why is reflected starlight a weaker clue than core fusion?", ["reflection depends on another light source while fusion is the object's own source", "reflection proves a star is nearby", "fusion is only a color effect", "reflection never changes apparent brightness"], 0, "Fusion identifies the body itself, while reflection depends on external lighting."],
     ]),
     ...shortMany(hint, [
@@ -251,7 +251,7 @@ function l2ConceptRaw(): RawItem[] {
       ["What decides whether a supernova remnant is more likely to be a neutron star or a black hole?", ["how much mass remains in the collapsed core", "the phase of the Moon", "the number of planets around the star", "the galaxy's color"], 0, "Remaining mass is the key compact-remnant clue."],
       ["Why is 'supernova is the normal ending for every star' too weak?", ["many stars are too low in mass for the supernova route", "supernova happens before protostar", "white dwarfs always explode later", "all stars finish in one year"], 0, "Supernova is not the default ending for the whole stellar population."],
       ["Which order is strongest for the start of stellar evolution?", ["nebula to protostar to main sequence", "main sequence to nebula to white dwarf", "black hole to protostar to galaxy", "supernova to Moon phase to remnant"], 0, "The early formation order should stay causally correct."],
-      ["Which summary is strongest?", ["stellar mass changes the later route and remnant even though many stars share early stages", "all stars differ from the first stage onward", "every star has the same remnant", "remnants depend only on galaxy size"], 0, "This summary preserves both the shared and branching parts of the lifecycle."],
+      ["Which explanation keeps both the shared early stages and the mass-dependent endings visible?", ["stellar mass changes the later route and remnant even though many stars share early stages", "all stars differ from the first stage onward", "every star has the same remnant", "remnants depend only on galaxy size"], 0, "This explanation preserves both the shared and branching parts of the lifecycle."],
       ["Why is core fusion not enough by itself to predict the final remnant?", ["many stars fuse for a long time, but the later outcome depends on mass", "fusion happens only in white dwarfs", "fusion guarantees a black hole", "fusion stops the star from changing"], 0, "Fusion explains the star stage, but mass explains the later branch."],
     ]),
     ...shortMany(hint, [
@@ -323,7 +323,7 @@ function l3ConceptRaw(): RawItem[] {
       ["If an object contains billions of stars plus gas and dust, what is the strongest classification?", ["galaxy", "single star", "planetary orbit", "Moon phase"], 0, "Many stars plus gravity-bound structure is the galaxy clue."],
       ["Why is 'the Milky Way contains every object in the universe' a weak claim?", ["other galaxies also exist", "the Milky Way is smaller than Earth", "the Milky Way is a light-year", "the universe contains no galaxies"], 0, "A single galaxy cannot contain the whole universe."],
       ["What question best distinguishes a galaxy from a star?", ["Does it contain many stars held together by gravity?", "Is it visible at night?", "Is it round?", "Is it near Earth?"], 0, "This question tests the correct scale and mechanism."],
-      ["Which summary is strongest?", ["A galaxy is a gravity-bound system much larger than one Solar System, and the Milky Way is our home galaxy", "The Milky Way and the Solar System are interchangeable terms", "The universe is one galaxy only", "The Sun is the whole Milky Way"], 0, "This summary keeps the module's scale logic intact."],
+      ["Which explanation keeps galaxy scale and gravity together most accurately?", ["A galaxy is a gravity-bound system much larger than one Solar System, and the Milky Way is our home galaxy", "The Milky Way and the Solar System are interchangeable terms", "The universe is one galaxy only", "The Sun is the whole Milky Way"], 0, "This explanation keeps the module's scale logic intact."],
       ["Why does the word 'system' matter in the galaxy definition?", ["it shows the components belong to one bound structure rather than a random list", "it means every galaxy has only one star", "it removes gravity from the picture", "it makes the universe smaller"], 0, "The physical relationship between parts matters, not just the names."],
     ]),
     ...shortMany(hint, [
@@ -344,9 +344,11 @@ function l3MasteryExtensionRaw(): RawItem[] {
   return [
     ...mcMany(hint, [
       ["Which order runs from smaller system to larger system most correctly?", ["star system -> galaxy -> universe", "galaxy -> star system -> universe", "universe -> galaxy -> star system", "star -> universe -> galaxy"], 0, "A star system sits inside a galaxy, and galaxies sit inside the universe."],
+      ["An image shows billions of stars, gas, and dust arranged in a spiral pattern. Which classification is strongest?", ["galaxy", "single star", "one Solar System", "light-year"], 0, "A spiral structure containing many stars, gas, and dust is a galaxy-scale object."],
     ]),
     ...shortMany(hint, [
       { prompt: "The Milky Way is one ... containing our Solar System.", acceptedAnswers: exact("galaxy") },
+      { prompt: "A galaxy contains many stars held together by ...", acceptedAnswers: exact("gravity") },
     ]),
   ];
 }
@@ -396,7 +398,7 @@ function l4ConceptRaw(): RawItem[] {
       ["Which relation is strongest for 1 light-year?", ["about 9.46 x 10^15 m", "about 9.46 x 10^3 m", "about 1 m", "about 9.46 x 10^8 m"], 0, "The light-year is enormous in metres."],
       ["Why is AU less useful than light-year for nearby stars?", ["AU is convenient inside the Solar System but becomes too small for interstellar distances", "AU measures mass not distance", "AU is larger than a galaxy", "AU cannot be compared with light-year"], 0, "Different scales call for different distance units."],
       ["Why are 'light takes four years' and 'distance is four light-years' linked but not identical statements?", ["one gives the travel time while the other names the distance unit built from that travel", "they are about different stars only", "one is about mass and one is about force", "they are unrelated"], 0, "The first is a travel-time statement; the second is the corresponding distance statement."],
-      ["Which summary is strongest?", ["A light-year is a large astronomy distance unit built from the speed of light and one year of travel", "A light-year is an age unit for stars", "A light-year replaces metres everywhere", "A light-year measures brightness"], 0, "This summary keeps both the formula basis and the unit meaning visible."],
+      ["Which definition keeps both the formula basis and the unit meaning correct?", ["A light-year is a large astronomy distance unit built from the speed of light and one year of travel", "A light-year is an age unit for stars", "A light-year replaces metres everywhere", "A light-year measures brightness"], 0, "This definition keeps both the formula basis and the unit meaning visible."],
     ]),
     ...shortMany(hint, [
       { prompt: "Unit misuse happens when light-year is treated as ...", acceptedAnswers: exact("time", "age") },
@@ -416,9 +418,11 @@ function l4MasteryExtensionRaw(): RawItem[] {
   return [
     ...mcMany(hint, [
       ["A star is 12 light-years away. Which statement is strongest?", ["light from the star takes about 12 years to reach us and the distance is about 12 light-years", "the star is 12 years old", "the star moves at 12 times the speed of light", "the star is 12 kilometres away"], 0, "A light-year is a distance, but it is defined from how far light travels in one year."],
+      ["A cloud is 1.89 x 10^16 m away. Using 1 light-year approx 9.46 x 10^15 m, what distance is this to two significant figures?", ["2.0 light-years", "0.20 light-years", "20 light-years", "1.0 light-year"], 0, "1.89 x 10^16 m divided by 9.46 x 10^15 m per light-year is about 2.0 light-years."],
     ]),
     ...shortMany(hint, [
       { prompt: "A light-year is built from speed x ...", acceptedAnswers: exact("time") },
+      { prompt: "To convert metres into light-years, divide by about 9.46 x 10^15 ...", acceptedAnswers: exact("m", "metres", "meters") },
     ]),
   ];
 }
@@ -438,7 +442,7 @@ function l5DiagnosticRaw(): RawItem[] {
       ["Which quantity must be compared to calculate redshift?", ["emitted and observed wavelengths of the same line", "distance and mass", "time and force", "brightness and orbit"], 0, "Redshift is measured by comparing the same spectral line before and after observation."],
       ["Why are spectral lines useful in redshift work?", ["their positions can be compared accurately with known emitted wavelengths", "they remove the need for telescopes", "they measure mass directly", "they cause galaxies to expand"], 0, "The line positions give a quantitative wavelength comparison."],
       ["What does z = 0.2 mean most directly?", ["the observed wavelength is 20% larger than the emitted wavelength", "the emitted wavelength is zero", "the galaxy is 20 light-years away", "the galaxy is not moving"], 0, "Redshift is a fractional wavelength increase."],
-      ["Which statement is strongest?", ["redshift evidence supports the idea of an expanding universe", "redshift proves galaxies are made of red material", "redshift is only a brightness change", "redshift means the source is a planet"], 0, "The lesson uses redshift as evidence for cosmic expansion."],
+      ["Which conclusion is strongest from a positive redshift trend across distant galaxies?", ["redshift evidence supports the idea of an expanding universe", "redshift proves galaxies are made of red material", "redshift is only a brightness change", "redshift means the source is a planet"], 0, "The lesson uses redshift as evidence for cosmic expansion."],
     ]),
     ...shortMany(hint, [
       { prompt: "Redshift means longer observed ...", acceptedAnswers: exact("wavelength", "wavelengths") },
@@ -467,7 +471,7 @@ function l5ConceptRaw(): RawItem[] {
       ["If z = 0, what is the strongest statement?", ["there is no wavelength shift in that line", "the galaxy has infinite distance", "the line has disappeared", "the source must be a planet"], 0, "Zero redshift means no measured shift in wavelength."],
       ["Which observation is strongest for measuring redshift?", ["comparing the same spectral line in the laboratory and in galaxy light", "judging the galaxy's color by eye", "comparing its brightness with the Moon", "counting the number of stars"], 0, "A line-by-line wavelength comparison is the rigorous method."],
       ["Why is a spectral-line shift stronger evidence than image color alone?", ["image color can be affected by many things, but line positions give a direct wavelength comparison", "spectral lines are always brighter", "image color has no physics", "image color measures mass"], 0, "The measured shift of known lines is the stronger scientific test."],
-      ["Which summary is strongest?", ["Redshift is a fractional increase in observed wavelength that is measured from spectral lines", "Redshift is just any dim red-looking galaxy", "Redshift measures galaxy mass directly", "Redshift means the source has stopped emitting light"], 0, "This summary keeps both the measurement and the interpretation clear."],
+      ["Which explanation of redshift is rigorous enough for actual measurement work?", ["Redshift is a fractional increase in observed wavelength that is measured from spectral lines", "Redshift is just any dim red-looking galaxy", "Redshift measures galaxy mass directly", "Redshift means the source has stopped emitting light"], 0, "This explanation keeps both the measurement and the interpretation clear."],
       ["Why should the emitted wavelength be kept visible in every redshift calculation?", ["without it you cannot tell how large the fractional shift is", "the observed wavelength alone gives z directly", "emitted wavelength sets the galaxy mass", "redshift does not need a reference"], 0, "The emitted value is the reference against which the shift is judged."],
     ]),
     ...shortMany(hint, [
@@ -488,9 +492,11 @@ function l5MasteryExtensionRaw(): RawItem[] {
   return [
     ...mcMany(hint, [
       ["A spectral line is emitted at 600 nm and observed at 690 nm. What is the redshift z?", ["0.15", "0.09", "1.15", "90"], 0, "The wavelength change is 90 nm, so z = 90 / 600 = 0.15."],
+      ["A spectral line is emitted at 400 nm and measured at redshift z = 0.25. What is the observed wavelength?", ["500 nm", "425 nm", "625 nm", "300 nm"], 0, "Observed wavelength = (1 + z) x emitted wavelength = 1.25 x 400 nm = 500 nm."],
     ]),
     ...shortMany(hint, [
       { prompt: "Positive redshift means the observed wavelength is ... than the emitted wavelength.", acceptedAnswers: exact("longer", "greater") },
+      { prompt: "For small redshift, recession speed is approximately z times ...", acceptedAnswers: exact("c", "the speed of light", "speed of light") },
     ]),
   ];
 }
@@ -509,7 +515,7 @@ function l6DiagnosticRaw(): RawItem[] {
       ["If most distant galaxies show redshift, what does that suggest?", ["space is expanding and galaxies are receding on the large-scale trend", "all galaxies orbit Earth", "the universe is shrinking", "stars have stopped emitting light"], 0, "The redshift trend is read as evidence for large-scale expansion."],
       ["Why is the Big Bang not just an explosion from one special place?", ["the model describes expanding space rather than fragments flying from a fixed center", "the universe contains no distance trend", "explosions cannot involve hot matter", "galaxies do not move"], 0, "The lesson protects expanding-space language against everyday explosion language."],
       ["Which proportionality belongs to Hubble's law?", ["v is proportional to d", "v is proportional to 1/d", "v is proportional to mass only", "v is independent of d"], 0, "Recession speed increases with distance in the simple Hubble model."],
-      ["Which summary is strongest?", ["farther galaxies usually recede faster, supporting an expanding-universe model", "only nearby planets show motion", "Big Bang means the Sun exploded", "redshift has no link to cosmology"], 0, "This keeps the evidence and the model connected."],
+      ["Which evidence-and-model link is strongest?", ["farther galaxies usually recede faster, supporting an expanding-universe model", "only nearby planets show motion", "Big Bang means the Sun exploded", "redshift has no link to cosmology"], 0, "This keeps the evidence and the model connected."],
       ["Why is a straight distance-speed trend important?", ["it gives a quantitative pattern rather than a vague story", "it proves galaxies are planets", "it removes the need for spectra", "it shows stars never change"], 0, "A measurable pattern is stronger than a slogan."],
     ]),
     ...shortMany(hint, [
@@ -539,7 +545,7 @@ function l6ConceptRaw(): RawItem[] {
       ["What is the strongest use of Hubble's law in this lesson?", ["estimating recession speed from known distance", "classifying planets and moons", "measuring star color only", "finding Moon phases"], 0, "The relation is used quantitatively on galaxy recession data."],
       ["Why should the evidence and the model be kept together when teaching the Big Bang?", ["otherwise it collapses into a vague story with no observational support", "because models do not need evidence", "because evidence works only for stars", "because the Big Bang removes all equations"], 0, "The lesson is stronger when the model is tied to redshift and Hubble-law trends."],
       ["Which statement best avoids the center-of-explosion mistake?", ["the large-scale pattern is expansion of space, so recession is not from one ordinary central point", "Earth sits at the center of all galaxy motion", "the Milky Way is the Big Bang center", "the Sun controls Hubble's law"], 0, "This keeps the explanation inside the modern expansion picture."],
-      ["Which summary is strongest?", ["The Big Bang model uses a hot dense early state plus redshift and Hubble-law evidence for expansion", "The Big Bang is only a mythological story", "The model needs no measurements", "Only nearby planets support cosmology"], 0, "This summary holds together state, evidence, and quantitative relation."],
+      ["Which account keeps the Big Bang model tied to evidence?", ["The Big Bang model uses a hot dense early state plus redshift and Hubble-law evidence for expansion", "The Big Bang is only a mythological story", "The model needs no measurements", "Only nearby planets support cosmology"], 0, "This account holds together state, evidence, and quantitative relation."],
       ["Why is a graph of recession speed against distance scientifically useful here?", ["it tests whether the large-scale trend matches Hubble's law", "it shows galaxy color only", "it measures Moon shadows", "it removes the need for distance"], 0, "The graph is where the model meets the data."],
     ]),
     ...shortMany(hint, [
@@ -560,9 +566,11 @@ function l6MasteryExtensionRaw(): RawItem[] {
   return [
     ...mcMany(hint, [
       ["Using H0 = 70 km s^-1 Mpc^-1, what recession speed is predicted for a galaxy 120 Mpc away?", ["8,400 km/s", "840 km/s", "14,000 km/s", "70 km/s"], 0, "Use v = H0 d = 70 x 120 = 8,400 km/s."],
+      ["A galaxy is observed to recede at 21,000 km/s. Using H0 = 70 km s^-1 Mpc^-1, what distance does Hubble's law predict?", ["300 Mpc", "30 Mpc", "150 Mpc", "700 Mpc"], 0, "Rearrange Hubble's law: d = v / H0 = 21,000 / 70 = 300 Mpc."],
     ]),
     ...shortMany(hint, [
       { prompt: "Hubble's law supports large-scale cosmic ...", acceptedAnswers: exact("expansion") },
+      { prompt: "To estimate galaxy distance from recession speed, rearrange to d = v / ...", acceptedAnswers: exact("H0", "h0") },
     ]),
   ];
 }

@@ -144,16 +144,17 @@ const M14_SIMULATION_COPY: Record<string, M14SimulationCopy> = {
   M14_L4: {
     title: "Light-year scale lab",
     instructions: "Keep cosmic distances on a single scale board so a light-year reads as distance from the beginning.",
-    taskPrompt: "Compare kilometer-sized intuition with light-year-sized astronomy distances, then explain why a light-year is used and why it is not a time unit.",
+    taskPrompt: "Compare kilometer-sized intuition with light-year-sized astronomy distances, then use distance = speed x time to explain why a light-year is useful and why it is not a time unit.",
     exploreSteps: [
       "Start with a nearby star comparison.",
       "Move outward to a much wider Milky Way distance.",
-      "Use the definition of one light-year to explain the unit.",
+      "Use the definition of one light-year and its metre value to explain the unit.",
     ],
     watchFor: [
       "A light-year measures distance.",
       "Astronomy uses it because the distances are enormous.",
       "The phrase includes year only because light travels for that duration.",
+      "The defining relation is distance = speed x time.",
     ],
     tryFirst: "Read the definition of one light-year first, then test whether it answers how far or how long. That clears the unit type before the big numbers arrive.",
     takeaway: "A light-year is a distance marker chosen for very large astronomy scales.",
@@ -161,15 +162,16 @@ const M14_SIMULATION_COPY: Record<string, M14SimulationCopy> = {
   M14_L5: {
     title: "Redshift evidence lab",
     instructions: "Keep emitted and observed wavelength bars on one board so redshift stays a stretch effect, not a vague color label.",
-    taskPrompt: "Increase the stretch, compare emitted and observed light, and explain why farther galaxies usually show larger redshifts.",
+    taskPrompt: "Increase the stretch, compare emitted and observed light, estimate redshift z, and explain why farther galaxies usually show larger redshifts.",
     exploreSteps: [
       "Start with a small stretch and compare the wavelength bars.",
       "Increase the stretch for a farther galaxy.",
-      "Rank nearby and distant galaxies by likely redshift.",
+      "Read the fractional wavelength change as redshift z before ranking nearby and distant galaxies.",
     ],
     watchFor: [
       "Expansion stretches the wavelength during travel.",
       "Redder observed light means a longer wavelength.",
+      "Redshift compares wavelength change with emitted wavelength.",
       "Farther galaxies usually show the larger redshift.",
     ],
     tryFirst: "Compare one nearby galaxy and one farther galaxy with the same emitted light. The farther one should end with the larger redshift.",
@@ -178,16 +180,17 @@ const M14_SIMULATION_COPY: Record<string, M14SimulationCopy> = {
   M14_L6: {
     title: "Big Bang evidence lab",
     instructions: "Keep model language and evidence together so the Big Bang is understood as expanding space rather than as a simple explosion into emptiness.",
-    taskPrompt: "Compare a hot dense early-state picture with a redshift trend across galaxies, then explain why the Big Bang model is stronger as an expanding-universe story.",
+    taskPrompt: "Compare a hot dense early-state picture with a redshift trend and a Hubble-law distance-speed pattern, then explain why the Big Bang model is stronger as an expanding-universe story.",
     exploreSteps: [
       "Start with the hot dense early-state caption.",
       "Turn on the galaxy redshift evidence panel.",
-      "Compare an expanding-space explanation with an explosion explanation.",
+      "Read the matching Hubble-law distance-speed pattern before comparing an expanding-space explanation with an explosion explanation.",
     ],
     watchFor: [
       "The Big Bang model describes an early hot dense universe.",
       "Space itself expands in the model.",
       "Distance-redshift evidence supports expansion.",
+      "Hubble's law gives the quantitative distance-speed relation for that expansion trend.",
     ],
     tryFirst: "Switch between the two captions while keeping the same redshift evidence visible. Only one description should keep the geometry and evidence aligned.",
     takeaway: "The Big Bang is best understood as cosmic expansion from an early hot dense state, supported by redshift evidence.",
@@ -207,11 +210,11 @@ export function m14ScaffoldFocusExtras(code: string): string[] {
     case "M14_L3":
       return ["Separate star, Solar System, galaxy, and universe scales.", "Keep gravity in the galaxy definition.", "Place the Sun inside the Milky Way, not equal to it."];
     case "M14_L4":
-      return ["Use light-year as a distance unit.", "Tie the unit to huge scale, not to timekeeping.", "Compare distances before worrying about exact numbers."];
+      return ["Use light-year as a distance unit.", "Tie the unit to huge scale, not to timekeeping.", "Keep distance = speed x time visible in the definition."];
     case "M14_L5":
-      return ["Treat redshift as wavelength stretching.", "Compare near and far galaxies qualitatively.", "Do not turn redshift into just a color-name fact."];
+      return ["Treat redshift as wavelength stretching.", "Compare emitted and observed wavelength before naming the trend.", "Do not turn redshift into just a color-name fact."];
     case "M14_L6":
-      return ["Use expanding-space language rather than explosion language.", "Connect the model to evidence.", "Keep hot dense early-state language visible."];
+      return ["Use expanding-space language rather than explosion language.", "Connect the model to evidence.", "Keep Hubble's law visible as the quantitative distance-speed relation."];
     default:
       return [];
   }
@@ -226,11 +229,11 @@ export function m14ScaffoldCoreBullets(code: string): string[] {
     case "M14_L3":
       return ["A galaxy is a gravitationally bound system of stars, gas, and dust.", "The Milky Way is our home galaxy.", "The Solar System is one tiny part of the Milky Way."];
     case "M14_L4":
-      return ["A light-year is a distance unit.", "It is the distance light travels in one year.", "It is useful because cosmic distances are enormous."];
+      return ["A light-year is a distance unit.", "It is the distance light travels in one year.", "The definition comes from distance = speed x time."];
     case "M14_L5":
-      return ["Redshift means light is observed at longer wavelengths.", "Cosmological redshift is tied to the expansion of space.", "Farther galaxies usually show larger redshifts."];
+      return ["Redshift means light is observed at longer wavelengths.", "z compares wavelength change with emitted wavelength.", "Farther galaxies usually show larger redshifts."];
     case "M14_L6":
-      return ["The Big Bang model describes an early hot dense universe.", "The universe expands over time.", "Redshift evidence supports the expansion model."];
+      return ["The Big Bang model describes an early hot dense universe.", "The universe expands over time.", "Hubble's law links galaxy distance and recession speed in that expansion model."];
     default:
       return [];
   }
