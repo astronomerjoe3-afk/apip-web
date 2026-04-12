@@ -1567,6 +1567,7 @@ const LOW_SIGNAL_VARIANT_WORDS = new Set([
 ]);
 const CORE_SHORT_ANSWER_FUZZY_STOPWORDS = new Set([
   "a",
+  "also",
   "an",
   "and",
   "are",
@@ -1599,6 +1600,13 @@ const CORE_SHORT_ANSWER_FUZZY_STOPWORDS = new Set([
   "with",
 ]);
 const CORE_SHORT_ANSWER_CONTRADICTION_TOKENS = new Set(["inverse", "inversely", "never", "no", "not", "opposite"]);
+const CORE_SHORT_ANSWER_PADDING_WORDS = new Set([
+  ...CORE_SHORT_ANSWER_FUZZY_STOPWORDS,
+  "just",
+  "simply",
+  "still",
+  "too",
+]);
 
 function isCoreModuleShortAnswerItem(item: UnknownRecord): boolean {
   const itemId = text(item.id).trim().replace(/-/g, "_").toUpperCase();
@@ -1624,6 +1632,15 @@ function meaningfulOpenAnswerTokens(value: unknown): string[] {
     .map((token) => token.trim())
     .filter(Boolean)
     .filter((token) => !CORE_SHORT_ANSWER_FUZZY_STOPWORDS.has(token))
+    .filter((token) => /[a-z0-9]/.test(token));
+}
+
+function normalizedShortAnswerCoreTokens(value: unknown): string[] {
+  return normalizeOpenAnswer(value)
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter(Boolean)
+    .filter((token) => !CORE_SHORT_ANSWER_PADDING_WORDS.has(token))
     .filter((token) => /[a-z0-9]/.test(token));
 }
 
@@ -1709,6 +1726,19 @@ function coreShortAnswerFuzzyMatch(answer: unknown, acceptedAnswers: string[], i
     }
 
     return approxMatchedOpenAnswerTokenCount(expectedTokens, candidateTokens) === expectedTokens.length;
+  });
+}
+
+function lowSignalPaddedShortAnswerMatch(answer: unknown, acceptedAnswers: string[]): boolean {
+  const candidateTokens = normalizedShortAnswerCoreTokens(answer);
+  if (candidateTokens.length === 0 || hasMathLikeOpenAnswerTokens(candidateTokens)) return false;
+
+  return acceptedAnswers.some((entry) => {
+    const expectedTokens = normalizedShortAnswerCoreTokens(entry);
+    if (expectedTokens.length === 0 || hasMathLikeOpenAnswerTokens(expectedTokens)) return false;
+    if (expectedTokens.length !== candidateTokens.length) return false;
+
+    return expectedTokens.every((token, index) => openAnswerTokensApproxMatch(token, candidateTokens[index]));
   });
 }
 
@@ -6755,6 +6785,168 @@ function dedupeCoreConceptBullets(values: string[]): string[] {
   return unique;
 }
 
+function includesAllCoreConceptFragments(source: string, fragments: string[]): boolean {
+  return fragments.every((fragment) => source.includes(fragment));
+}
+
+function m10CoreConceptSemanticKey(code: string, value: string): string | null {
+  if (!code.startsWith("M10_")) return null;
+
+  const normalized = coreConceptDedupKey(value);
+  if (!normalized) return null;
+
+  switch (code) {
+    case "M10_L1":
+      if (
+        includesAllCoreConceptFragments(normalized, ["current carrying", "wire", "magnetic field"]) &&
+        (normalized.includes("magnet") || normalized.includes("magnets"))
+      ) {
+        return "m10_l1_field_sources";
+      }
+      if (
+        normalized.includes("field line") &&
+        normalized.includes("direction") &&
+        (normalized.includes("strength") || normalized.includes("density") || normalized.includes("spacing"))
+      ) {
+        return "m10_l1_field_map_reading";
+      }
+      if (
+        includesAllCoreConceptFragments(normalized, ["straight current carrying", "wire", "circular", "magnetic field"])
+      ) {
+        return "m10_l1_wire_pattern";
+      }
+      if (normalized.includes("compass") && normalized.includes("direction")) {
+        return "m10_l1_compass_direction";
+      }
+      return null;
+    case "M10_L2":
+      if (
+        (normalized.includes("solenoid") || normalized.includes("coil")) &&
+        normalized.includes("magnet")
+      ) {
+        return "m10_l2_solenoid_magnet";
+      }
+      if (
+        normalized.includes("electromagnet") &&
+        (normalized.includes("current") || normalized.includes("turn") || normalized.includes("core")) &&
+        (normalized.includes("stronger") || normalized.includes("strengthen"))
+      ) {
+        return "m10_l2_strength_factors";
+      }
+      if (
+        normalized.includes("core") &&
+        (normalized.includes("concentrat") || normalized.includes("strengthen")) &&
+        normalized.includes("field")
+      ) {
+        return "m10_l2_core_role";
+      }
+      return null;
+    case "M10_L3":
+      if (
+        includesAllCoreConceptFragments(normalized, ["current carrying", "magnetic field"]) &&
+        (normalized.includes("sideways") || normalized.includes("perpendicular") || normalized.includes("force"))
+      ) {
+        return "m10_l3_sideways_force";
+      }
+      if (
+        normalized.includes("force") &&
+        normalized.includes("reverse") &&
+        (normalized.includes("current") || normalized.includes("field"))
+      ) {
+        return "m10_l3_force_reversal";
+      }
+      if (
+        normalized.includes("force") &&
+        normalized.includes("perpendicular") &&
+        normalized.includes("field") &&
+        normalized.includes("current")
+      ) {
+        return "m10_l3_perpendicular_rule";
+      }
+      return null;
+    case "M10_L4":
+      if (
+        normalized.includes("coil") &&
+        normalized.includes("opposite") &&
+        normalized.includes("force")
+      ) {
+        return "m10_l4_opposite_side_forces";
+      }
+      if (
+        normalized.includes("torque") ||
+        (normalized.includes("turning") && normalized.includes("push"))
+      ) {
+        return "m10_l4_torque";
+      }
+      if (
+        normalized.includes("commutator") &&
+        (normalized.includes("continu") || normalized.includes("same overall direction") || normalized.includes("same rotational"))
+      ) {
+        return "m10_l4_commutator_role";
+      }
+      return null;
+    case "M10_L5":
+      if (
+        normalized.includes("induction") &&
+        normalized.includes("changing") &&
+        normalized.includes("flux")
+      ) {
+        return "m10_l5_changing_flux";
+      }
+      if (
+        (normalized.includes("faster") || normalized.includes("more turns")) &&
+        (normalized.includes("induced effect") || normalized.includes("induced") || normalized.includes("emf"))
+      ) {
+        return "m10_l5_size_of_induction";
+      }
+      if (
+        normalized.includes("generator") &&
+        (normalized.includes("repeated induction") || normalized.includes("continuous rotation"))
+      ) {
+        return "m10_l5_generator_story";
+      }
+      return null;
+    case "M10_L6":
+      if (
+        normalized.includes("transformer") &&
+        normalized.includes("coil") &&
+        (normalized.includes("changing magnetic field") || normalized.includes("changing flux") || normalized.includes("shared changing"))
+      ) {
+        return "m10_l6_transformer_link";
+      }
+      if (
+        normalized.includes("voltage ratio") &&
+        normalized.includes("turns ratio")
+      ) {
+        return "m10_l6_turns_ratio";
+      }
+      if (
+        normalized.includes("transmission") &&
+        normalized.includes("current") &&
+        (normalized.includes("cable loss") || normalized.includes("losses") || normalized.includes("reduces"))
+      ) {
+        return "m10_l6_transmission_efficiency";
+      }
+      return null;
+    default:
+      return null;
+  }
+}
+
+function dedupeCoreConceptBulletsForLesson(code: string, values: string[]): string[] {
+  const seen = new Set<string>();
+  const unique: string[] = [];
+  for (const value of values) {
+    const normalized = normalizeCoreConceptBullet(value);
+    const semanticKey = m10CoreConceptSemanticKey(code, normalized);
+    const key = semanticKey || coreConceptDedupKey(normalized);
+    if (!normalized || !key || seen.has(key)) continue;
+    seen.add(key);
+    unique.push(normalized);
+  }
+  return unique;
+}
+
 function isGeneralCoreConceptBullet(value: string): boolean {
   const normalized = normalizeCoreConceptBullet(value).toLowerCase();
   if (!normalized) return false;
@@ -6777,7 +6969,7 @@ function generalCoreConceptBullets(code: string, authoredCoreConcepts: string[])
   const authored = authoredCoreConcepts
     .map((entry) => normalizeCoreConceptBullet(entry))
     .filter((entry) => isGeneralCoreConceptBullet(entry));
-  return dedupeCoreConceptBullets([...scaffold, ...authored]).slice(0, 6);
+  return dedupeCoreConceptBulletsForLesson(code, [...scaffold, ...authored]).slice(0, 6);
 }
 
 function m5RenderedQuestionOverride(item: UnknownRecord): RenderedQuestionOverride | null {
@@ -7599,6 +7791,10 @@ function shortAnswerMatches(answer: unknown, acceptedAnswers: string[], item: Un
   const compactAccepted = acceptedAnswers.map((entry) => compactOpenAnswer(entry));
 
   if (accepted.includes(candidate) || compactAccepted.includes(compactCandidate)) {
+    return true;
+  }
+
+  if (lowSignalPaddedShortAnswerMatch(answer, acceptedAnswers)) {
     return true;
   }
 
@@ -20569,7 +20765,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     .map((entry) => text(entry))
     .filter(Boolean);
   const generalizedCoreConcepts = generalCoreConceptBullets(code, authoredCoreConcepts);
-  const fallbackCoreConcepts = dedupeCoreConceptBullets([
+  const fallbackCoreConcepts = dedupeCoreConceptBulletsForLesson(code, [
     ...itemsFrom(lesson, "diagnostic").map((item) => text(item.hint)).filter(Boolean),
     ...itemsFrom(lesson, "transfer").map((item) => text(item.hint)).filter(Boolean),
     ...asList(asRecord(phases(lesson).concept_reconstruction).capsules).map((capsule) => text(asRecord(capsule).prompt)).filter(Boolean),
@@ -20602,7 +20798,7 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
   return {
     title,
     intro: /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
-    teaching_focus: /_L1$/.test(code) ? dedupeCoreConceptBullets(teachingFocus).slice(0, 6) : teachingFocus,
+    teaching_focus: /_L1$/.test(code) ? dedupeCoreConceptBulletsForLesson(code, teachingFocus).slice(0, 6) : teachingFocus,
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     reference_tables: withEntryLessonAnalogyTable(lesson, scaffoldReferenceTables(lesson)),
     media_cards: scaffoldMediaCards(lesson),
