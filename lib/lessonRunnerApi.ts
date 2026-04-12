@@ -19153,6 +19153,14 @@ function preWorkedExampleVideoMeta(code: string): {
           : "captions-20260412m13a.vtt";
     return staticPublishedVideoAssetUrl("M13N", normalizedLessonId, publishedFilename, currentM13SolarAssetVersion);
   };
+  const currentM14CosmosAssetVersion = "20260412m14a";
+  const staticM14CosmosVideoAssetUrl = (
+    lessonId: string,
+    filename: "final.mp4" | "thumbnail.png" | "captions.vtt",
+  ) => {
+    const normalizedLessonId = String(lessonId || "").trim().toUpperCase();
+    return staticPublishedVideoAssetUrl("M14N", normalizedLessonId, filename, currentM14CosmosAssetVersion);
+  };
   switch (effectiveCode) {
     case "M1_L1":
       return {
@@ -20077,6 +20085,90 @@ function preWorkedExampleVideoMeta(code: string): {
         video_url: staticM13SolarVideoAssetUrl("M13_L6", "final.mp4"),
         poster_url: staticM13SolarVideoAssetUrl("M13_L6", "thumbnail.png"),
         captions_url: staticM13SolarVideoAssetUrl("M13_L6", "captions.vtt"),
+      };
+    case "M14_L1":
+      return {
+        body: "Use this video to classify stars and planets by light source before the worked example begins.",
+        caption: "Video explainer: self-luminous stars, reflected starlight, fusion, and why brightness alone is a weak classifier before the lesson example.",
+        highlights: [
+          "A star makes its own light because fusion powers the core",
+          "A planet can look bright while only reflecting starlight",
+          "Brightness by itself is too weak to separate stars from planets",
+        ],
+        checkForUnderstanding: "If two sky objects look similarly bright, what physical question should you ask next before calling either one a star?",
+        video_url: staticM14CosmosVideoAssetUrl("M14_L1", "final.mp4"),
+        poster_url: staticM14CosmosVideoAssetUrl("M14_L1", "thumbnail.png"),
+        captions_url: staticM14CosmosVideoAssetUrl("M14_L1", "captions.vtt"),
+      };
+    case "M14_L2":
+      return {
+        body: "Use this video to keep stellar mass, shared stages, and branched endings together before the worked example begins.",
+        caption: "Video explainer: nebula to main sequence, low-mass and high-mass stellar branches, and remnant comparison before the lesson example.",
+        highlights: [
+          "Many stars share early stages before the lifecycle branches",
+          "Low-mass stars do not follow the same ending as high-mass stars",
+          "Mass is the main clue for choosing the later route and remnant",
+        ],
+        checkForUnderstanding: "What single variable should stay visible if you want to explain why one star ends as a white dwarf while another can go supernova?",
+        video_url: staticM14CosmosVideoAssetUrl("M14_L2", "final.mp4"),
+        poster_url: staticM14CosmosVideoAssetUrl("M14_L2", "thumbnail.png"),
+        captions_url: staticM14CosmosVideoAssetUrl("M14_L2", "captions.vtt"),
+      };
+    case "M14_L3":
+      return {
+        body: "Use this video to separate one star, one Solar System, one galaxy, and the whole universe before the worked example begins.",
+        caption: "Video explainer: Milky Way scale, gravity as the galaxy organizer, and nested scale language before the lesson example.",
+        highlights: [
+          "A galaxy is a gravitationally bound system of many stars, gas, and dust",
+          "The Solar System is one tiny part of the Milky Way",
+          "The Milky Way is not one star and not the whole universe",
+        ],
+        checkForUnderstanding: "If the Sun is only one star in the Milky Way, what does that tell you about the size difference between a star system and a galaxy?",
+        video_url: staticM14CosmosVideoAssetUrl("M14_L3", "final.mp4"),
+        poster_url: staticM14CosmosVideoAssetUrl("M14_L3", "thumbnail.png"),
+        captions_url: staticM14CosmosVideoAssetUrl("M14_L3", "captions.vtt"),
+      };
+    case "M14_L4":
+      return {
+        body: "Use this video to keep the meaning of a light-year and the reason for the unit together before the worked example begins.",
+        caption: "Video explainer: distance equals speed times time, one light-year in metres, and why the unit answers how far rather than how long before the lesson example.",
+        highlights: [
+          "A light-year is a distance unit, not a time unit",
+          "The definition comes from distance = speed x time using the speed of light",
+          "Astronomy uses light-years because cosmic distances are enormous",
+        ],
+        checkForUnderstanding: "Why does the word year appear in light-year if the quantity being measured is still a distance?",
+        video_url: staticM14CosmosVideoAssetUrl("M14_L4", "final.mp4"),
+        poster_url: staticM14CosmosVideoAssetUrl("M14_L4", "thumbnail.png"),
+        captions_url: staticM14CosmosVideoAssetUrl("M14_L4", "captions.vtt"),
+      };
+    case "M14_L5":
+      return {
+        body: "Use this video to connect wavelength stretching, redshift z, and expansion evidence before the worked example begins.",
+        caption: "Video explainer: emitted versus observed wavelength, fractional wavelength change, and the farther-galaxy larger-redshift trend before the lesson example.",
+        highlights: [
+          "Redshift means the observed wavelength is longer than the emitted wavelength",
+          "z measures the fractional wavelength increase",
+          "Farther galaxies usually show larger redshifts in the expansion picture",
+        ],
+        checkForUnderstanding: "If the observed wavelength is longer than the emitted wavelength, what happened to the light during travel in the cosmological model?",
+        video_url: staticM14CosmosVideoAssetUrl("M14_L5", "final.mp4"),
+        poster_url: staticM14CosmosVideoAssetUrl("M14_L5", "thumbnail.png"),
+        captions_url: staticM14CosmosVideoAssetUrl("M14_L5", "captions.vtt"),
+      };
+    case "M14_L6":
+      return {
+        body: "Use this video to tie the Big Bang model, redshift evidence, and Hubble's law together before the worked example begins.",
+        caption: "Video explainer: early hot dense state, expanding space, galaxy recession, and why Hubble's law strengthens the Big Bang model before the lesson example.",
+        highlights: [
+          "The Big Bang model describes an expanding universe from an early hot dense state",
+          "Hubble's law links greater galaxy distance to greater recession speed",
+          "Redshift evidence supports expansion rather than a simple explosion story",
+        ],
+        checkForUnderstanding: "Why is the Big Bang better described as expanding space than as debris flying from one ordinary explosion point?",
+        video_url: staticM14CosmosVideoAssetUrl("M14_L6", "final.mp4"),
+        poster_url: staticM14CosmosVideoAssetUrl("M14_L6", "thumbnail.png"),
+        captions_url: staticM14CosmosVideoAssetUrl("M14_L6", "captions.vtt"),
       };
     case "F5_L1":
       return {
