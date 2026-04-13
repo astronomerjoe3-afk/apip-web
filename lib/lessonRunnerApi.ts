@@ -22097,6 +22097,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson sharpens convection reasoning by following the full density-driven fluid loop instead of stopping at the slogan that heat rises.";
     case "M6_L6":
       return "This lesson closes the thermal-transfer sequence by combining radiation, surface effects, and stage-by-stage thermal bookkeeping in one story.";
+    case "M7_L1":
+      return "This lesson opens wave reasoning by separating the travel of the disturbance pattern from the local motion of the medium.";
+    case "M7_L2":
+      return "This lesson classifies waves by comparing local motion with propagation direction instead of relying on page layout or vague labels.";
+    case "M7_L3":
+      return "This lesson turns wave speed into a relationship between launch rate and front spacing so v = f lambda is read physically, not memorized blindly.";
+    case "M7_L4":
+      return "This lesson explains reflection by tying both angles to the normal line so boundary bounces stay geometric and precise.";
+    case "M7_L5":
+      return "This lesson explains refraction as a speed-change turn in a new medium while frequency stays fixed and wavelength adjusts.";
+    case "M7_L6":
+      return "This lesson closes the wave sequence by explaining diffraction as a spreading effect that depends on comparing opening size with wavelength.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -25028,6 +25040,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the thermal-transfer unit and preparing for more integrated IGCSE-style reasoning and calculation questions.",
+        },
+      ];
+    case "M7_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Wave ideas became much clearer once physicists separated the travel of a disturbance from the motion of the material carrying it, because everyday intuition often assumes the medium itself must move across with the wave.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M7_L1 opens the waves module by showing that the wave pattern travels while each point in the medium only oscillates locally, and by introducing wavefront language carefully.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain that a wave transfers energy through a traveling disturbance pattern",
+            "distinguish clearly between pattern travel and local oscillation of the medium",
+            "use wavefront language to describe matching points in the same phase",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic motion language from earlier modules and should be ready to compare what moves locally with what travels across a whole system.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the wave unit and needing a secure foundation before wave type, speed, and boundary behavior are introduced.",
+        },
+      ];
+    case "M7_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Wave classification improved once transverse and longitudinal were defined by comparing local motion with propagation direction, because pictures alone can easily mislead learners about what the medium is really doing.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M7_L2 classifies waves by keeping the direction of travel visible and then comparing it with the direction of local particle motion.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify a transverse wave when local motion is perpendicular to propagation",
+            "identify a longitudinal wave when local motion is parallel to propagation",
+            "justify the classification by comparing directions explicitly rather than by naming the diagram style",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the distinction between local motion and pattern travel from M7_L1 and should be comfortable describing direction clearly.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from the basic idea of a wave into more precise classification before using wave equations and boundary rules.",
+        },
+      ];
+    case "M7_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Wave calculations became more powerful once frequency, wavelength, and speed were held together as one relationship, because students often memorize the equation without connecting it to launch rate and spacing between matching fronts.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M7_L3 develops wave speed by treating frequency as the source launch rate, wavelength as front spacing, and wave speed as the resulting product of the two.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define frequency as the number of cycles or fronts produced each second",
+            "define wavelength as the spacing between matching points on successive waves",
+            "use the wave-speed relation to calculate one quantity from the other two",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with wavefront language from M7_L1 and with the directional comparison work from M7_L2, and should be ready to substitute carefully into a simple physics relation.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from descriptive wave language into standard IGCSE wave calculations and comparisons.",
+        },
+      ];
+    case "M7_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Reflection became easier to predict once angles were measured from the normal rather than from the surface, because surface-based measurement hides the symmetry that makes the reflection rule work.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M7_L4 teaches reflection as a boundary bounce and keeps the normal line central so incident and reflected paths can be compared correctly.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "draw or identify the normal at a reflecting boundary",
+            "measure both incident and reflected angles from the normal",
+            "explain why the angle of incidence equals the angle of reflection",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the earlier M7 lessons, especially direction language and careful comparison of lines and angles in a wave diagram.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from basic wave motion into boundary behavior and preparing for the contrasting speed-change story of refraction.",
+        },
+      ];
+    case "M7_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Refraction became much clearer once learners tracked which wave quantity is fixed by the source and which quantity is changed by the new medium, instead of treating every bend at a boundary as a reflection.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M7_L5 explains refraction as the turning that follows a speed change in a new medium while frequency stays fixed and wavelength changes to match the new speed.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why refraction happens when wave speed changes across a boundary",
+            "state that frequency stays fixed because it is set by the source",
+            "describe how wavelength changes when the medium changes the wave speed",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with wave speed from M7_L3 and with boundary-angle reading from M7_L4 so they can separate a boundary bounce from a boundary speed-change turn.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending wave reasoning into medium-change questions and preparing for more integrated optical and general-wave problems.",
+        },
+      ];
+    case "M7_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Diffraction became much easier to reason about once spreading was compared with opening size and wavelength together, because students often notice the spread but miss the size comparison that controls how strong it is.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M7_L6 closes the module by showing that diffraction strength depends on how the opening or obstacle size compares with wavelength, not on the wave simply meeting an edge by itself.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe diffraction as the spreading of waves around edges and through gaps",
+            "explain why stronger diffraction occurs when the opening size is comparable to the wavelength",
+            "recognize diffraction as a general wave behavior rather than something limited to one wave type",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M7 sequence, especially the meanings of wavelength, wave speed, and boundary behavior from M7_L3 to M7_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the whole waves unit and preparing for more demanding comparison and explanation questions across multiple wave behaviors.",
         },
       ];
     case "F2_L1":
