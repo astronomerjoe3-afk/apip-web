@@ -21965,6 +21965,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains motion change through resultant force so balanced and unbalanced situations are judged by the net force, not by whether any force is present.";
     case "F2_L6":
       return "This lesson closes the mechanics sub-unit by linking resultant force, mass, acceleration, and inertia into one Newton's-second-law story.";
+    case "F3_L1":
+      return "This lesson opens work and energy by tying work done to force-caused displacement and reading the result in joules as energy transferred.";
+    case "F3_L2":
+      return "This lesson compares kinetic and gravitational potential energy as different stores that change according to different variables.";
+    case "F3_L3":
+      return "This lesson separates power from efficiency so the rate of energy transfer is not confused with the useful fraction of the input.";
+    case "F3_L4":
+      return "This lesson explains collisions through whole-system momentum conservation, keeping direction and combined totals visible.";
+    case "F3_L5":
+      return "This lesson links impulse to momentum change and uses force-time thinking to show why longer stopping times can reduce force.";
+    case "F3_L6":
+      return "This lesson closes the sequence by combining momentum, kinetic energy, and stopping time into a full braking-safety model.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -23000,6 +23012,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the introductory mechanics sequence and preparing for more extended force and motion questions later in the course.",
+        },
+      ];
+    case "F3_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Physics sharpened the everyday word 'work' by tying it to energy transfer caused by a force moving an object in the force direction, not to effort alone.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F3_L1 introduces work done as force-caused energy transfer and keeps the zero-displacement trap visible from the start.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate work done from force and displacement in the force direction",
+            "interpret the answer in joules as energy transferred",
+            "explain why a force can exist without doing work on an object",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with force and displacement language from F2 and should be comfortable multiplying quantities with units.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the work-and-energy sequence and needing a precise meaning for work before energy stores and power are introduced.",
+        },
+      ];
+    case "F3_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Energy modelling became much more powerful once physicists described systems in terms of different stores and transfers, rather than speaking as if energy were a single vague ingredient.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F3_L2 compares kinetic energy and gravitational potential energy so motion and height changes are read as store changes with different controlling variables.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate kinetic energy and gravitational potential energy in appropriate situations",
+            "identify which variables each store depends on",
+            "explain energy changes as transfers between stores rather than disappearance or creation",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with mass, speed, height, work done, and the idea that joules measure transferred or stored energy.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending basic work language into a more complete energy-store model used throughout mechanics.",
+        },
+      ];
+    case "F3_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Machines could only be compared properly once physicists separated two questions: how quickly energy is transferred and how much of the input becomes useful output.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F3_L3 teaches power and efficiency as different ideas, keeping energy-transfer rate and useful fraction distinct in every comparison.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate power from energy transferred and time",
+            "calculate energy transferred when power and time are known",
+            "calculate and interpret efficiency as a useful-output fraction or percentage",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with energy stores and joule calculations from F3_L1 and F3_L2, and should be comfortable with percentages.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners comparing devices and processes more rigorously by separating speed of transfer from quality of transfer.",
+        },
+      ];
+    case "F3_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Momentum became a central collision tool when physicists realized that the total momentum of an isolated system remains constant even while individual objects may change speed or direction sharply.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F3_L4 introduces momentum conservation by tracking the total signed momentum of the whole system before and after a collision.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate momentum using mass and velocity with direction",
+            "apply conservation of momentum to isolated collision systems",
+            "explain why total momentum is conserved for the system rather than for each object separately",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with velocity direction from F2, with multiplying mass and velocity, and with the idea of treating an interacting pair as one system.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving into collision reasoning and preparing for impulse and safety explanations built on momentum change.",
+        },
+      ];
+    case "F3_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Impulse thinking helped connect collisions and safety because it made force and time part of one combined explanation: the same momentum change can be delivered gently or violently depending on how long it takes.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F3_L5 connects impulse, momentum change, and force-time area so collision reasoning can explain both calculation and safer stopping.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that impulse equals the change in momentum",
+            "calculate average force from momentum change over time",
+            "explain why increasing stopping time can reduce average force for the same impulse",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with momentum from F3_L4 and with time-based rate reasoning from earlier mechanics lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening collision and safety reasoning by linking equations, graphs, and physical interpretation.",
+        },
+      ];
+    case "F3_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Modern transport safety improved when braking was explained with several linked ideas at once: momentum must be changed, kinetic energy must be dissipated, and the force depends on how quickly the stop is forced to happen.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F3_L6 closes the work-and-momentum sequence by combining momentum change, kinetic energy, speed, and stopping time into one braking-safety model.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate braking-force quantities from momentum change and stopping time",
+            "calculate the kinetic energy removed during a stop",
+            "explain why higher speed increases braking danger through both momentum and kinetic-energy effects",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with kinetic energy from F3_L2, momentum conservation from F3_L4, and impulse-force-time reasoning from F3_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the F3 sequence and preparing for multi-clue mechanics and safety questions that require explanation as well as calculation.",
         },
       ];
     case "F1_L1":
