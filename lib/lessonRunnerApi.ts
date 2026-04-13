@@ -21929,6 +21929,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson keeps refraction, critical angle, and total internal reflection inside one continuous threshold story.";
     case "A3_L6":
       return "This lesson closes the wave sequence by reading oscilloscope traces as time graphs that reveal wave behaviour quantitatively.";
+    case "A4_L1":
+      return "This lesson opens advanced mechanics by showing why diagonal-force situations become trustworthy only after vectors are resolved into components.";
+    case "A4_L2":
+      return "This lesson separates displacement, velocity, and acceleration so two-dimensional motion is read as linked component stories instead of one blended path label.";
+    case "A4_L3":
+      return "This lesson explains projectile motion by splitting launch conditions into horizontal and vertical components that share time but not the same acceleration.";
+    case "A4_L4":
+      return "This lesson treats collisions as a before-and-after ledger where momentum is checked first and impulse and energy are interpreted from that secure base.";
+    case "A4_L5":
+      return "This lesson shows that constant-speed circular motion still needs inward acceleration because velocity direction changes continuously around the path.";
+    case "A4_L6":
+      return "This lesson closes the mechanics sequence by comparing materials through stress, strain, and Young modulus rather than force-only impressions.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -22460,6 +22472,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the advanced-wave sequence and preparing for quantitative wave-representation questions.",
+        },
+      ];
+    case "A4_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Mechanics became much more reliable once physicists stopped judging balance by appearance alone and began resolving angled forces into shared axes before comparing them.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A4_L1 introduces vector resolution and translational equilibrium so diagonal-force problems are tested component by component rather than by visual guesswork.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "resolve a force into horizontal and vertical components",
+            "state the equilibrium condition as zero resultant on the chosen axes",
+            "explain why diagonal arrows can hide imbalance if components are skipped",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic force language, simple trigonometric ratios, and the idea that a vector includes both size and direction.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the advanced mechanics sequence and needing a secure component model before motion, projectile, and force-balance problems become more demanding.",
+        },
+      ];
+    case "A4_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Kinematics became clearer when physicists distinguished where an object is, how fast it changes position, and how that velocity itself changes, instead of folding all motion into one everyday description.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A4_L2 separates displacement, velocity, and acceleration and keeps horizontal and vertical components distinct so two-dimensional motion can be described rigorously.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish clearly between displacement, velocity, and acceleration",
+            "describe motion using separate horizontal and vertical components",
+            "avoid letting a zero value in one direction erase motion in another direction",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with vector components from A4_L1 and with basic kinematics ideas from earlier mechanics work.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending mechanics beyond one-dimensional motion and preparing for projectile and circular-motion analysis.",
+        },
+      ];
+    case "A4_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Projectile theory became powerful when motion in two dimensions was split into independent horizontal and vertical stories connected only by the shared time of flight.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A4_L3 explains projectile motion by resolving launch velocity into components and keeping gravity inside the vertical story throughout the flight.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "split a launch velocity into horizontal and vertical components",
+            "explain why the horizontal component is uniform in the ideal model",
+            "justify the curved path by recombining the two component stories",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with vector resolution from A4_L1 and with separate displacement, velocity, and acceleration language from A4_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from component kinematics into full two-dimensional motion problems that require explanation as well as calculation.",
+        },
+      ];
+    case "A4_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Collision analysis improved dramatically once momentum was treated as a conserved ledger for the whole system, allowing physicists to compare impacts before worrying about extra labels such as elastic or inelastic.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A4_L4 teaches collisions through momentum bookkeeping, impulse, and kinetic-energy comparison so impact questions are answered systematically.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate and compare total momentum before and after a collision",
+            "explain impulse as the change in momentum during the interaction",
+            "distinguish elastic and inelastic outcomes after the momentum check is secure",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with vectors, component motion, and the idea of comparing a physical system before and after an event.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening advanced mechanics reasoning for collision, recoil, and impact questions with both conceptual and quantitative demands.",
+        },
+      ];
+    case "A4_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Circular motion was once easily misread as force-free constant motion until physicists recognized that a continuously turning velocity vector implies acceleration even when speed stays constant.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A4_L5 explains uniform circular motion by keeping tangential velocity, inward centripetal acceleration, and inward resultant force visible together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why changing direction means acceleration is present",
+            "identify centripetal acceleration and resultant force as inward",
+            "compare how speed and radius affect the turning requirement",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with component motion and should be comfortable treating acceleration as a change in velocity rather than a change in speed only.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending mechanics into turning-motion problems and correcting common outward-force misconceptions before more advanced applications.",
+        },
+      ];
+    case "A4_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Materials science became much more rigorous when stretching and stiffness were compared with normalized quantities such as stress and strain rather than with force values alone.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A4_L6 closes the sequence by linking Hooke's-law response, stress, strain, and Young modulus so materials can be compared with load, geometry, and response together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe elastic extension in the proportional region using Hooke's law",
+            "calculate stress and strain as normalized comparison quantities",
+            "explain why Young modulus is a stronger material comparison than force alone",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with force, extension, ratio reasoning, and the mechanics habit of comparing like with like before drawing conclusions.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners finishing the advanced mechanics and materials sequence and preparing for structured elasticity and material-property questions.",
         },
       ];
     case "F1_L1":
