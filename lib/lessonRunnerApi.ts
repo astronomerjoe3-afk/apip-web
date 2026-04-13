@@ -22001,6 +22001,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson connects rms values to practical power transmission by showing why higher voltage lowers current and line loss for the same power.";
     case "A9_L6":
       return "This lesson closes the induction sequence by tracing eddy-current heating, braking, and sensing back to local loops driven by changing flux.";
+    case "A10_L1":
+      return "This lesson opens nuclear physics by using scattering patterns to show that atoms contain a tiny dense nucleus rather than a spread-out positive core.";
+    case "A10_L2":
+      return "This lesson explains particle experiments by separating beam preparation in accelerators from signal readout in detectors.";
+    case "A10_L3":
+      return "This lesson distinguishes nuclear-change equations from activity so the decay process and the decay rate are not blended together.";
+    case "A10_L4":
+      return "This lesson links binding energy and mass defect as two views of the same nuclear energy bookkeeping.";
+    case "A10_L5":
+      return "This lesson explains fission reactors by keeping neutron multiplication, moderation, and control in one chain-reaction story.";
+    case "A10_L6":
+      return "This lesson closes the nuclear sequence by comparing fusion and fission through binding-energy change, operating conditions, and control demands.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -23588,6 +23600,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating electromagnetic induction and preparing for integrated questions about induction devices and applications.",
+        },
+      ];
+    case "A10_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Rutherford scattering overturned the earlier plum-pudding picture by showing that most alpha particles pass straight through foil while a very small fraction suffer large deflections, implying a tiny dense nucleus.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A10_L1 uses scattering evidence to infer nuclear size, concentration of positive charge, and the mostly empty nature of atomic space.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe the key scattering pattern that supports the nuclear atom model",
+            "explain why rare large deflections imply a small dense positively charged nucleus",
+            "distinguish evidence from one dramatic track from evidence based on the whole distribution of outcomes",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with charge interaction, alpha particles as probes, and the idea that experimental patterns can be used to infer hidden structure.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning nuclear physics and needing a strong evidence-based picture of atomic structure before decay and energy questions appear.",
+        },
+      ];
+    case "A10_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Modern particle and nuclear experiments became possible only when scientists learned to accelerate beams in controlled ways and then use detector systems to turn invisible events into measurable tracks, flashes, or signals.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A10_L2 explains why accelerators and detectors play different roles in experiments: one prepares energetic beams or collisions, and the other reads the event aftermath.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe accelerators as systems that raise particle energy before probing or collision",
+            "describe detectors as systems that convert particle interactions into recorded signals",
+            "explain why beam preparation and detector readout must be kept as separate stages in an experiment",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the idea of scattering or collision evidence from A10_L1 and with basic electric and magnetic field control of charged particles from earlier modules.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending nuclear physics into experimental method and interpretation of particle-evidence systems.",
+        },
+      ];
+    case "A10_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Radioactivity became much clearer once physicists separated two questions: what nuclear equation balances the decay event, and how quickly a large sample of unstable nuclei decays over time.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A10_L3 keeps decay equations and activity together but distinct, so learners can track both nuclide changes and decay rate without confusing one for the other.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "balance nuclear equations using nucleon number and proton number",
+            "define activity as the decay rate measured in becquerels",
+            "explain why the kind of decay and the rate of decay are related but not identical ideas",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with basic particle and nuclear notation and with the distinction between a process description and a rate description.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from structural nuclear ideas into decay bookkeeping and quantitative radioactivity language.",
+        },
+      ];
+    case "A10_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Nuclear-energy reasoning became far more coherent once physicists recognized that a bound nucleus has less mass than its separated nucleons, and that the missing mass corresponds to binding energy.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A10_L4 introduces binding energy, binding energy per nucleon, and mass defect so nuclear stability and nuclear energy release can be read from one energy-accounting model.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define binding energy as the energy needed to separate a nucleus completely",
+            "explain mass defect as the mass difference between separated nucleons and the bound nucleus",
+            "use mass-energy equivalence to connect binding changes with nuclear energy release",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with nuclear notation from A10_L3 and with the idea that energy bookkeeping can be inferred from measurable quantities.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners building the core energy-accounting model needed for rigorous fission and fusion questions.",
+        },
+      ];
+    case "A10_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Fission became technologically important when scientists realized that heavy nuclei can release energy and extra neutrons, making chain reactions possible but requiring careful control inside reactors.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A10_L5 explains nuclear fission, neutron multiplication, and the design logic of thermal reactors by treating reactor behaviour as a controlled chain-reaction problem.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe fission as the splitting of a heavy nucleus into lighter products with energy release",
+            "explain how released neutrons can sustain a chain reaction",
+            "identify the roles of moderator, control rods, and cooling in a thermal reactor",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with binding-energy ideas from A10_L4 and with the role of neutrons in nuclear processes.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending nuclear energy into reactor physics and control-based engineering reasoning.",
+        },
+      ];
+    case "A10_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Fusion gained attention because light nuclei can also release energy when the products are more tightly bound, but only under extreme temperature and confinement conditions very different from fission reactors.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A10_L6 closes the module by comparing fusion with fission through binding-energy change, required conditions, achievable control, and practical use.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe fusion as the joining of light nuclei under extreme conditions",
+            "explain why overcoming electrostatic repulsion requires very high temperature and confinement",
+            "compare fusion and fission using binding-energy logic, fuel conditions, and control demands",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with binding-energy reasoning from A10_L4 and with fission-chain logic from A10_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating nuclear physics and preparing for integrated comparison questions about nuclear structure, decay, and energy release.",
         },
       ];
     case "F2_L1":
