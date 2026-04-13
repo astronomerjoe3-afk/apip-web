@@ -21893,6 +21893,18 @@ type ScaffoldIntroTheme = {
 function scaffoldIntroText(context: ScaffoldIntroContext): string {
   const { code, title } = context;
   switch (code) {
+    case "A1_L1":
+      return "This lesson opens particle physics by separating radiation messengers, matter particles, and nucleus particles before later interaction stories begin.";
+    case "A1_L2":
+      return "This lesson develops particle classification by showing that hadrons are best sorted by quark packing, not by size or charge alone.";
+    case "A1_L3":
+      return "This lesson explains antiparticles, pair production, and annihilation through balanced particle and energy bookkeeping.";
+    case "A1_L4":
+      return "This lesson distinguishes strong and weak interactions by focusing on what each event is doing, not on a memorized label.";
+    case "A1_L5":
+      return "This lesson strengthens particle-event reasoning by making charge, baryon number, and lepton number checks work together.";
+    case "A1_L6":
+      return "This lesson closes the particle-physics sequence by combining classification, interaction clues, and conservation checks in one event analysis.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -21922,6 +21934,174 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
 function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntroSection[] {
   const { code } = context;
   switch (code) {
+    case "A1_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Particle physics grew from experiments showing that atoms and nuclei contain distinct kinds of particles rather than one generic subatomic substance.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A1_L1 introduces the basic particle inventory: photons as radiation messengers, leptons as solo matter particles, and protons and neutrons as nucleus particles.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "separate photons, leptons, and nucleons by family and role",
+            "use charge tags such as +1e, 0, and -1e correctly",
+            "explain why protons and neutrons belong in the nucleus category rather than the lepton category",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "There are no formal prerequisites beyond secure basic physics vocabulary and willingness to classify particles carefully.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning particle physics and needing a stable inventory before later event and interaction questions appear.",
+        },
+      ];
+    case "A1_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "As particle evidence improved, physicists found that hadrons were not elementary objects but composite particles built from quarks.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A1_L2 shows how quark packing distinguishes baryons from mesons and why hadron classification should start from structure.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define hadrons as quark-built composite particles",
+            "identify baryons as three-quark particles and mesons as quark-antiquark particles",
+            "justify why quark composition is a safer classifier than charge or size alone",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with the basic particle families introduced in A1_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending particle classification into hadron structure and early quark-model reasoning.",
+        },
+      ];
+    case "A1_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Antiparticle theory and later accelerator evidence showed that particle creation and destruction must still obey strict energy and conservation rules.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A1_L3 explains antiparticles as matched partners and uses pair production and annihilation to show how particle changes must still balance the ledger.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify antiparticles as matched partners with opposite charge where relevant",
+            "explain why pair production needs enough photon energy",
+            "explain how annihilation and pair production both obey conservation rules",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the particle families from A1_L1 and the hadron language from A1_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from particle classification into balanced particle-event reasoning.",
+        },
+      ];
+    case "A1_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Modern particle physics explains interactions through exchange particles, allowing different force stories to be classified by what they do in an event.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A1_L4 compares strong and weak interaction stories and shows how messenger particles help explain binding events and particle-change events.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe interactions as messenger-carried processes",
+            "recognize strong interaction stories as binding stories",
+            "recognize weak interaction stories as particle-change stories",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with particle families and simple particle events from A1_L1 to A1_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending particle physics into interaction-family reasoning before full conservation analysis.",
+        },
+      ];
+    case "A1_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Conservation laws became essential in particle physics because many plausible-looking reactions fail once the before-and-after bookkeeping is checked carefully.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A1_L5 uses charge, baryon number, and lepton number as the main filters for deciding whether a particle event is allowed.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "check charge conservation in a particle event",
+            "use baryon number and lepton number as bookkeeping tags",
+            "reject an event if any one of the conservation checks fails",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with particle types, antiparticles, and interaction stories from A1_L1 to A1_L4.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening particle-event judgement before final multi-clue event analysis.",
+        },
+      ];
+    case "A1_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "The strongest particle-physics answers combine classification, interaction clues, and conservation evidence rather than relying on one memorable product.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A1_L6 brings the whole module together by asking learners to interpret full particle events using several checks at once.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify the particles present before and after an event",
+            "use interaction clues to narrow the event type",
+            "confirm the best interpretation with conservation checks",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full A1 sequence, especially classification, antiparticles, interactions, and conservation bookkeeping.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating particle physics and preparing for rigorous IGCSE-style event-analysis questions.",
+        },
+      ];
     case "F1_L1":
       return [
         {
