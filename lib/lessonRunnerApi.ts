@@ -21917,6 +21917,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson develops wave-particle duality by keeping localized detections and wave-like patterns on the same evidence board.";
     case "A2_L6":
       return "This lesson closes the quantum sequence by linking spectra, threshold effects, and matter-wave evidence into one coherent model.";
+    case "A3_L1":
+      return "This lesson opens advanced wave physics by treating superposition as a same-place, same-time displacement rule rather than a handoff story.";
+    case "A3_L2":
+      return "This lesson explains stationary waves as standing patterns built from matched opposite-traveling waves under the right boundary conditions.";
+    case "A3_L3":
+      return "This lesson links interference outcomes to path difference and phase difference so bright and dark cases are read causally.";
+    case "A3_L4":
+      return "This lesson uses diffraction gratings to turn wavelength into an ordered angular pattern rather than a vague spread.";
+    case "A3_L5":
+      return "This lesson keeps refraction, critical angle, and total internal reflection inside one continuous threshold story.";
+    case "A3_L6":
+      return "This lesson closes the wave sequence by reading oscilloscope traces as time graphs that reveal wave behaviour quantitatively.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -22280,6 +22292,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating quantum and atomic physics and preparing for rigorous multi-clue explanation questions.",
+        },
+      ];
+    case "A3_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Wave theory became much more powerful once physicists realised that overlapping waves do not take turns; they combine by adding displacement at the same place and time.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A3_L1 introduces superposition for progressive waves and uses phase to explain why overlap can reinforce or cancel.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state the superposition rule for overlapping waves",
+            "explain reinforcement and cancellation using phase relationship",
+            "avoid describing overlap as one wave replacing another",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "There are no formal prerequisites beyond secure earlier wave language and willingness to compare wave states carefully.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the advanced wave sequence and needing a secure superposition model before stationary waves and interference.",
+        },
+      ];
+    case "A3_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Standing-wave patterns became important when boundary effects in strings, air columns, and resonant systems showed that not every wavelength can survive in a confined system.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A3_L2 explains stationary waves using nodes, antinodes, and harmonic fit, while keeping the role of opposite-traveling waves explicit.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe stationary waves as patterns formed by opposite-traveling waves",
+            "distinguish clearly between nodes and antinodes",
+            "explain why only certain harmonics fit a given boundary condition",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the superposition rule from A3_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending wave reasoning into resonance and standing-mode patterns.",
+        },
+      ];
+    case "A3_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Interference patterns showed that route differences can predict wave outcomes systematically, helping physicists link geometry to bright and dark results.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A3_L3 connects path difference, phase difference, and interference outcome so constructive and destructive cases can be justified rather than memorized.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "relate path difference to phase difference",
+            "predict constructive and destructive interference cases",
+            "explain interference outcomes using comparison of both routes",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with superposition and basic wave language from A3_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending wave physics into more rigorous route-and-phase reasoning.",
+        },
+      ];
+    case "A3_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Diffraction gratings became a powerful precision tool because they separate wavelengths into sharply ordered directions rather than broad fringes alone.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A3_L4 explains diffraction gratings by linking slit spacing, wavelength, and diffraction order to a structured angular pattern.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe diffraction orders as allowed output directions",
+            "explain how wavelength and grating spacing affect the pattern",
+            "interpret grating behaviour geometrically rather than as a vague spread",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with interference language and basic wave comparison from A3_L1 to A3_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening advanced-wave pattern reasoning before optical threshold and instrument questions.",
+        },
+      ];
+    case "A3_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Optics became more coherent once refraction, critical angle, and total internal reflection were understood as linked outcomes of the same boundary-speed story.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A3_L5 keeps refraction, critical angle, and total internal reflection together so learners can read them as one threshold sequence rather than isolated facts.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain refraction as a direction change caused by speed change",
+            "identify the critical angle as the last escape case",
+            "state the conditions needed for total internal reflection",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic wave behaviour and route comparison from earlier A3 lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending wave physics into optical-boundary reasoning and threshold-based explanation.",
+        },
+      ];
+    case "A3_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Oscilloscope traces became valuable in wave physics because they turned unseen electrical and wave behaviour into readable time graphs that could be measured directly.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A3_L6 teaches learners to read oscilloscope traces as time graphs and to extract amplitude, period, and frequency without confusing the trace with the wave path.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify the oscilloscope trace as a graph plotted against time",
+            "read amplitude and period from the graph",
+            "explain why the trace is not the physical path of the wave through space",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with wave vocabulary and basic graphical interpretation from the earlier A3 lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the advanced-wave sequence and preparing for quantitative wave-representation questions.",
         },
       ];
     case "F1_L1":
