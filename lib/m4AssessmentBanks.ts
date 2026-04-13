@@ -182,7 +182,7 @@ function l1DiagnosticRaw(): RawCollectionItem[] {
       { prompt: "A 1200 N force acts on 0.40 m^2. What pressure is produced?", acceptedAnswers: pressureAnswers(3000), hint },
       { prompt: "If the same force is spread over more area, pressure ...", acceptedAnswers: words("falls", "decreases", "drops"), hint },
       { prompt: "If the same area is kept but the force doubles, pressure ...", acceptedAnswers: words("doubles", "double"), hint },
-      { prompt: "A 5000 Pa floor reading is a measure of ...", acceptedAnswers: words("pressure", "patch load"), hint },
+      { prompt: "A 5000 Pa floor reading is a measure of ...", acceptedAnswers: words("pressure", "patch load", "force per unit area", "the force per unit area"), hint },
       { prompt: "A snowshoe lowers pressure mainly by increasing the contact ...", acceptedAnswers: words("area"), hint },
       { prompt: "Pressure is measured in ...", acceptedAnswers: words("Pa", "pascal", "pascals"), hint },
     ]),
