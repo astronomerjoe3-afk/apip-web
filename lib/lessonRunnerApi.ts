@@ -21953,6 +21953,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson treats resonance as the strong-response condition that appears when driving frequency approaches the system's natural frequency.";
     case "A5_L6":
       return "This lesson closes the oscillations sequence by comparing damping styles through energy loss, settling behaviour, and application fit.";
+    case "F2_L1":
+      return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
+    case "F2_L2":
+      return "This lesson defines acceleration through change in velocity, keeping sign convention and direction visible instead of treating it as change in speed only.";
+    case "F2_L3":
+      return "This lesson reads distance-time graphs as motion stories where graph height and graph slope answer different questions.";
+    case "F2_L4":
+      return "This lesson makes velocity-time graphs do two jobs clearly by using slope for acceleration and area for displacement.";
+    case "F2_L5":
+      return "This lesson explains motion change through resultant force so balanced and unbalanced situations are judged by the net force, not by whether any force is present.";
+    case "F2_L6":
+      return "This lesson closes the mechanics sub-unit by linking resultant force, mass, acceleration, and inertia into one Newton's-second-law story.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -22820,6 +22832,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the oscillations sequence and preparing for more rigorous explanation questions that compare ideal models with real system behaviour.",
+        },
+      ];
+    case "F2_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Early motion studies became much clearer once physicists separated the route an object takes from the straight start-to-finish change, because everyday language often hides the difference between distance travelled and displacement.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F2_L1 introduces distance, displacement, and average speed by keeping route length, direction-aware net change, and whole-journey timing visible together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish clearly between distance and displacement",
+            "calculate average speed from total distance and total time",
+            "explain how a journey can have large distance but small or zero displacement",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with units of distance and time from F1 and with the idea that direction can matter in a physics description.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning mechanics and needing a secure motion-language foundation before acceleration, graphs, and force models are introduced.",
+        },
+      ];
+    case "F2_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Acceleration became a more precise idea once motion was described with velocity rather than speed alone, because turning, slowing, and speeding up all involve changes in velocity.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F2_L2 explains acceleration as change in velocity over time and keeps sign convention and direction visible throughout the calculation.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate acceleration from the change in velocity over a time interval",
+            "interpret positive and negative signs using a chosen direction convention",
+            "explain why direction change alone can produce acceleration even at constant speed",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with motion quantities from F2_L1 and should be comfortable reading signed values and simple unit combinations.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending basic motion into change-of-motion reasoning before graph work and force explanations.",
+        },
+      ];
+    case "F2_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Graphs became essential in mechanics because they let physicists read motion over time visually, but only when each graph feature was tied to the right quantity instead of guessed from appearance.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F2_L3 teaches learners to read a distance-time graph segment by segment so graph height, steepness, and flat sections each keep their own meaning.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "read total distance from graph height at a given time",
+            "use graph slope to compare speeds on different segments",
+            "interpret flat sections as intervals where the object is stopped",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with distance, displacement, speed, and time from F2_L1 and should be comfortable comparing changes on a graph.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from verbal motion stories into graphical interpretation and preparing for the more demanding velocity-time graph work that follows.",
+        },
+      ];
+    case "F2_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Velocity-time graphs became especially powerful because the same graph could represent more than one quantity, provided physicists kept slope and area tied to their correct meanings.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F2_L4 explains how a velocity-time graph gives acceleration from slope and displacement from area without mixing those two graph jobs together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate acceleration from the slope of a velocity-time graph",
+            "calculate displacement from the area under a velocity-time graph",
+            "interpret horizontal and below-axis sections using the sign convention correctly",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with acceleration from F2_L2 and with segment-by-segment graph reading from F2_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening graph interpretation in mechanics before force and motion are connected explicitly.",
+        },
+      ];
+    case "F2_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Newtonian mechanics became clearer once motion change was linked to the resultant of all forces together, not to whichever single force happened to stand out in a diagram.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F2_L5 introduces balanced and unbalanced forces by combining forces first and then linking the resultant force to acceleration.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "combine forces to find the resultant force and its direction",
+            "distinguish balanced-force cases from unbalanced-force cases",
+            "explain why zero resultant force means zero acceleration, not necessarily zero motion",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with signed direction ideas from F2_L1 and F2_L2 and with comparing values systematically.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning force analysis and needing a secure resultant-force model before applying Newton's second law numerically.",
+        },
+      ];
+    case "F2_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Newton's second law gave mechanics a unifying rule by linking force, mass, and acceleration in one relationship, while the idea of inertia explained why more massive objects resist motion change more strongly.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F2_L6 closes the sequence by connecting resultant force, mass, acceleration, and inertia through F = ma and force-to-mass reasoning.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use the resultant force in F = ma calculations",
+            "explain how changing force or mass affects acceleration",
+            "describe inertia as resistance to changes in motion",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with resultant force from F2_L5, acceleration from F2_L2, and the general habit of keeping units and direction visible in mechanics.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the introductory mechanics sequence and preparing for more extended force and motion questions later in the course.",
         },
       ];
     case "F1_L1":
