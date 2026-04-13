@@ -21965,6 +21965,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains gas-law graphs by naming the fixed quantity first and then matching graph shape to the correct physical condition.";
     case "A6_L6":
       return "This lesson closes the thermal sequence by linking gas pressure and temperature back to microscopic particle motion and collisions.";
+    case "A7_L1":
+      return "This lesson opens advanced circuits by separating emf, terminal p.d., and internal loss so a source is not treated as an ideal push in every situation.";
+    case "A7_L2":
+      return "This lesson explains Kirchhoff analysis by keeping junction-current balance and loop-voltage balance as distinct conservation checks.";
+    case "A7_L3":
+      return "This lesson treats potential dividers as one supply shared across a series route so the tapped output is read from resistance ratio.";
+    case "A7_L4":
+      return "This lesson defines capacitance as the charge-per-volt storage ratio rather than as the stored charge itself.";
+    case "A7_L5":
+      return "This lesson explains RC charging and discharging as exponential changing-rate processes governed by the time constant.";
+    case "A7_L6":
+      return "This lesson closes the advanced-circuits sequence by linking capacitor energy and dielectric effects to the physical condition being held fixed.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -23048,6 +23060,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating advanced thermal physics and preparing for rigorous questions that demand both microscopic explanation and mathematical control.",
+        },
+      ];
+    case "A7_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Real cells and batteries forced circuit theory beyond the ideal-source picture, because practical measurements showed that some energy is always dissipated inside the source when current flows.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A7_L1 separates emf, terminal potential difference, and internal resistance so source readings are interpreted as a full energy-per-charge lift with an internal voltage loss under load.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish emf from terminal p.d. in open-circuit and loaded cases",
+            "use the source relation V = epsilon - I r in context",
+            "explain lost volts and internal heating as effects of current flowing through internal resistance",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current, potential difference, resistance, Ohm's law, and simple circuit-energy language from earlier electricity work.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from ideal circuit pictures to more realistic source models and more rigorous IGCSE-level circuit interpretation.",
+        },
+      ];
+    case "A7_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Kirchhoff's circuit rules gave physicists and engineers a systematic way to keep current conservation at junctions separate from voltage balance around loops in complex networks.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A7_L2 introduces Kirchhoff analysis by treating node-current balance and loop-voltage balance as two linked but different bookkeeping checks.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "apply the junction rule to currents entering and leaving a node",
+            "apply the loop rule to rises and drops around a closed path",
+            "combine Kirchhoff reasoning with Ohm's law to analyze branching circuits systematically",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current, voltage, resistance, and source bookkeeping, including the A7_L1 distinction between emf and terminal p.d.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners ready to move beyond single-loop circuits into multistep current-and-voltage analysis.",
+        },
+      ];
+    case "A7_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Potential-divider circuits became essential in electronics because one supply can be shared deliberately to create controlled outputs for sensing, biasing, and signal selection.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A7_L3 explains a potential divider as one supply drop shared across a series route, with the output taken as a chosen fraction set by the resistance ratio.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate divider output from the resistance ratio and the supply voltage",
+            "explain why the output must be read as part of one shared source drop",
+            "predict how changing a resistor value or loading the divider changes the output",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with series voltage sharing, Ohm's law, and the use of loop thinking to track rises and drops around a circuit.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending circuit analysis into output-selection and sensor-style voltage-sharing questions.",
+        },
+      ];
+    case "A7_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Capacitors became important once physicists understood that separated charge can be stored and released predictably, making capacitance a measurable link between charge and potential difference.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A7_L4 introduces capacitance as the storage ratio Q = C V and keeps charge, voltage, plate geometry, and dielectric material tied to the same storage story.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define capacitance as charge stored per volt of potential difference",
+            "use Q = C V flexibly to relate stored charge, capacitance, and p.d.",
+            "explain why plate area, plate spacing, and dielectric material affect capacitance",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with charge, potential difference, and circuit-energy language from earlier electricity lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning capacitor physics and needing a precise storage model before transient and energy questions appear.",
+        },
+      ];
+    case "A7_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "RC circuits showed that some electrical changes are not instantaneous, because the current and capacitor voltage evolve together over time instead of jumping straight to their final values.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A7_L5 explains charging and discharging curves by keeping current, capacitor p.d., and time on one changing-rate board governed by the time constant.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe charging and discharging as exponential rather than constant-rate processes",
+            "interpret how current and capacitor p.d. change during charging and discharging",
+            "use the time constant as the key timescale for RC response",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with capacitance from A7_L4 and with current, resistance, and p.d. relationships from earlier electricity lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from static circuit calculations into time-dependent capacitor behaviour and graph interpretation.",
+        },
+      ];
+    case "A7_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Later capacitor theory showed that the stored energy belongs to the electric field and that dielectric effects cannot be predicted safely unless the fixed condition in the setup is stated clearly.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A7_L6 closes the capacitor sequence by linking stored energy, dielectric action, and the difference between voltage-fixed and charge-fixed cases.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate capacitor energy using an appropriate equivalent form such as E = 1/2 C V^2",
+            "explain that the stored energy belongs to the electric field between the plates",
+            "predict how dielectric insertion changes circuit behaviour when voltage is fixed and when charge is fixed",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with capacitance and charge storage from A7_L4 and with RC behaviour from A7_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating advanced circuit storage ideas and preparing for more demanding capacitor-energy and constraint-based reasoning.",
         },
       ];
     case "F2_L1":
