@@ -127,8 +127,21 @@ function materializeBank(code: string, kind: BankKind, rawItems: RawItem[]): Unk
   return deduped;
 }
 
+const M14_SHORT_ANSWER_EXPANSIONS: Record<string, string[]> = {
+  light: ["speed of light", "the speed of light"],
+  distance: ["distance unit", "a distance unit", "unit of distance"],
+  time: ["time unit", "a time unit", "unit of time"],
+};
+
 function exact(value: string, ...extra: string[]): string[] {
-  return Array.from(new Set([value, ...extra]));
+  const seeds = [value, ...extra]
+    .map((entry) => String(entry || "").trim())
+    .filter(Boolean);
+  const expanded = seeds.flatMap((entry) => {
+    const normalized = entry.toLowerCase();
+    return [entry, ...(M14_SHORT_ANSWER_EXPANSIONS[normalized] || [])];
+  });
+  return Array.from(new Set(expanded));
 }
 
 function combine(...groups: RawItem[][]): RawItem[] {
