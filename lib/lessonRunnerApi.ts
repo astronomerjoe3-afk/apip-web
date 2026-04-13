@@ -21859,6 +21859,16 @@ function scaffoldIntroText(code: string): string {
   switch (code) {
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
+    case "F1_L2":
+      return "This lesson extends the measurement module into direction-sensitive quantities by showing why some physics descriptions need both size and direction.";
+    case "F1_L3":
+      return "This lesson turns measurement into trustworthy evidence by focusing on instrument choice, reading quality, uncertainty, and experimental error.";
+    case "F1_L4":
+      return "This lesson sharpens scientific reporting by showing how significant figures keep the final answer honest about the precision of the original measurements.";
+    case "F1_L5":
+      return "This lesson brings mass and volume together so density can be read as a comparison of how tightly matter is packed into space.";
+    case "F1_L6":
+      return "This lesson closes the sub-unit by separating accuracy from precision so learners can judge measurement quality with more than one label.";
     default:
       return /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "";
   }
@@ -21893,6 +21903,151 @@ function scaffoldLessonIntroduction(code: string): { heading: string; body: stri
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners beginning physics measurement work, especially anyone who needs a secure foundation before moving on to vectors, uncertainty, density, graphs, and formula-based calculation later in the course.",
+        },
+      ];
+    case "F1_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "As science moved from simple measurement to motion and force, ordinary size-only descriptions stopped being enough. Navigation, mechanics, and field diagrams all required a way to describe not just how much, but also which way, leading to the scalar-vector distinction used in modern physics.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F1_L2 introduces scalar and vector quantities. It shows why distance and displacement differ, why speed and velocity differ, and how direction changes the meaning of a physics quantity.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish between scalar quantities and vector quantities",
+            "explain why direction is required for displacement, velocity, force, acceleration, and weight",
+            "classify common physics quantities correctly as scalar or vector",
+            "avoid treating distance as the same idea as displacement or speed as the same idea as velocity",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "The main prerequisite is secure understanding of measurement language from F1_L1. Learners should already be comfortable reading quantities and units before adding direction to the description.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from simple measurement into mechanics, especially anyone who needs a reliable way to describe motion and forces before later graph and equation work.",
+        },
+      ];
+    case "F1_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Physics became stronger when scientists stopped treating one reading as enough and began caring about instrument quality, repeatability, and calibration. Modern experimental work depends on resolution, uncertainty, and error analysis because trustworthy evidence needs more than a number copied from a scale.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F1_L3 explains how to read instruments honestly, how resolution limits what can be claimed, and how random and systematic errors affect the trustworthiness of a result.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe the difference between resolution and uncertainty",
+            "read a scale in a way that matches the instrument rather than inventing unjustified digits",
+            "distinguish between random error and systematic error",
+            "suggest sensible ways to reduce error and strengthen a measurement method",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with units and measurement meaning from F1_L1. Helpful background also includes basic familiarity with rulers, balances, thermometers, or calipers from practical work.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners who are beginning experimental physics and need to understand why some readings are more trustworthy than others before moving into data handling and evaluated practical work.",
+        },
+      ];
+    case "F1_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "As measurement tools became more precise, scientists needed a standard way to report results without pretending to know more than the instrument justified. Significant-figure rules grew out of that reporting need and remain central to honest scientific calculation.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F1_L4 focuses on significant figures, rounding, and the reporting rules used after calculations so that final answers stay consistent with the quality of the measured data.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify which digits in a measured value count as significant figures",
+            "round numbers correctly to a required number of significant figures",
+            "apply the right reporting rule for addition, subtraction, multiplication, and division",
+            "check a calculator answer and rewrite it with justified precision",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should be secure with measurement language from F1_L1 and should ideally have met the idea of instrument limits and uncertainty in F1_L3, because significant figures are another way of keeping reported precision honest.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning scientific calculation, especially anyone who needs to report answers clearly in practical work, data analysis, and multi-step physics questions.",
+        },
+      ];
+    case "F1_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Comparing how heavy materials are for their size has mattered since early work on floating, sinking, and material identification. The modern density idea turns that practical comparison into a precise ratio of mass to volume.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F1_L5 introduces density as mass per unit volume. The lesson ties formula work to physical meaning so learners can compare materials by how tightly matter is packed, not by mass alone.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define density as mass divided by volume",
+            "explain why density compares heaviness with size rather than mass by itself",
+            "calculate density using consistent units",
+            "compare objects qualitatively when one is denser, less dense, or equally dense",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable measuring mass and volume and reporting those measurements with units. Basic arithmetic rearrangement and secure unit handling from earlier F1 lessons are also helpful.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning formula-based material comparison, especially anyone who needs a strong foundation before later pressure, floating, thermal, and particle-model applications.",
+        },
+      ];
+    case "F1_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Scientific progress depends on results that are both close to accepted values and repeatable from one trial to the next. Over time, experimenters learned that these are not the same judgement, which is why modern science separates accuracy from precision.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F1_L6 brings the whole measurement sub-unit together by comparing accuracy and precision, then linking them back to instrument choice, repeated readings, error control, and honest reporting.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish clearly between accuracy and precision",
+            "interpret different measurement patterns such as accurate but imprecise or precise but inaccurate",
+            "judge what makes an experimental result trustworthy",
+            "connect accuracy and precision to earlier ideas about uncertainty, error, and method quality",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "This lesson depends most strongly on F1_L3 and F1_L4, because learners need the earlier language of uncertainty, error, and honest reporting before they can judge overall measurement quality well.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the whole measurement module, especially anyone preparing for practical interpretation, evaluated methods, and higher-rigor data questions later in physics.",
         },
       ];
     default:
