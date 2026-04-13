@@ -22013,6 +22013,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains fission reactors by keeping neutron multiplication, moderation, and control in one chain-reaction story.";
     case "A10_L6":
       return "This lesson closes the nuclear sequence by comparing fusion and fission through binding-energy change, operating conditions, and control demands.";
+    case "A11_L1":
+      return "This lesson opens astrophysics by separating gravitational field strength from gravitational potential while keeping both on the same landscape picture.";
+    case "A11_L2":
+      return "This lesson explains satellites by linking gravity-provided orbiting to mission-specific choices of altitude, period, and orbit type.";
+    case "A11_L3":
+      return "This lesson connects stellar spectra and H-R position so star classification is built from temperature, luminosity, and composition evidence together.";
+    case "A11_L4":
+      return "This lesson explains the astronomical distance ladder by showing why different scales need different measurement methods.";
+    case "A11_L5":
+      return "This lesson treats stellar evolution as a mass-dependent branching story that ends in different compact remnants.";
+    case "A11_L6":
+      return "This lesson closes the astrophysics sequence by linking redshift evidence, Hubble expansion, and modern cosmology into one large-scale universe story.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -23768,6 +23780,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating nuclear physics and preparing for integrated comparison questions about nuclear structure, decay, and energy release.",
+        },
+      ];
+    case "A11_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Gravitational theory became more powerful once physicists separated field strength from gravitational potential, allowing the same landscape to be described both as force per unit mass and as energy per unit mass.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A11_L1 introduces gravitational field strength and gravitational potential as linked but distinct descriptions of the same radial gravitational environment around a mass.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define gravitational field strength as force per unit mass",
+            "define gravitational potential relative to infinity as energy per unit mass",
+            "explain why field strength and potential are connected but not interchangeable quantities",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with force, energy, inverse-square ideas, and the meaning of a radial field around a source mass.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning advanced astrophysics and needing a secure gravity model before orbits and cosmology are introduced.",
+        },
+      ];
+    case "A11_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Artificial satellites made orbital mechanics practically important because gravity does not disappear in space; instead it supplies the centripetal pull that keeps a satellite continually falling around Earth.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A11_L2 links satellite motion to gravitational orbiting and then compares orbit types by what they allow a satellite to observe or communicate.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why gravity provides the centripetal force for satellite motion",
+            "compare how altitude affects orbital speed and period",
+            "relate orbit choice to observation or communication purpose",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with gravitational field ideas from A11_L1 and with circular-motion basics from earlier mechanics work.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending gravity into practical orbital motion and mission-design reasoning.",
+        },
+      ];
+    case "A11_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Astrophysics advanced rapidly once starlight was treated as evidence: spectra revealed temperature and composition clues, while the Hertzsprung-Russell diagram organized stars by luminosity and temperature into meaningful physical groups.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A11_L3 combines stellar spectra with H-R diagram reading so stars are classified from multiple evidence layers rather than from color labels alone.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe how stellar spectra reveal temperature and composition clues",
+            "interpret a star's H-R diagram position using luminosity and temperature",
+            "connect spectra and H-R evidence to stellar type or evolutionary stage",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with electromagnetic-spectrum language and with graph interpretation from earlier physics study.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from gravitational astronomy into evidence-based stellar classification.",
+        },
+      ];
+    case "A11_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Astronomers could not measure every cosmic distance with one method, so the distance ladder emerged: nearby objects are handled geometrically, while larger scales require known-luminosity sources and brightness comparisons.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A11_L4 explains parallax, standard candles, and the distance ladder as a scale-sensitive measurement framework for increasingly distant objects.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe parallax as a geometric method for relatively nearby stars",
+            "explain how standard candles use known luminosity and inverse-square brightness reasoning",
+            "justify why astronomy uses different distance methods at different scales",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with light, brightness ideas, and the meaning of luminosity and observational evidence from A11_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending astrophysics into measurement strategy and scale-aware distance reasoning.",
+        },
+      ];
+    case "A11_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Stellar evolution became coherent when astronomers realized that a star's initial mass largely determines its later pathway, lifetime, and final remnant type.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A11_L5 explains stellar life cycles by comparing low-mass and high-mass pathways and linking compact remnants to the strength of the final core collapse.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe why stellar evolution depends strongly on initial mass",
+            "compare the pathways leading to white dwarfs, neutron stars, and black holes",
+            "explain compact remnants as outcomes of different levels of gravitational collapse",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with stellar classification ideas from A11_L3 and with the role of gravity in large astronomical systems from A11_L1 and A11_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners building a coherent star-life-cycle model before large-scale cosmology questions appear.",
+        },
+      ];
+    case "A11_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Modern cosmology grew from galaxy-spectrum evidence showing systematic redshift trends with distance, leading to the expansion model and later to the addition of dark energy in accelerated-expansion explanations.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A11_L6 closes the module by connecting redshift measurement, Hubble's law, expansion of space, and the modern dark-energy extension to cosmological reasoning.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe redshift as spectral-line stretching linked to recession",
+            "use the large-scale distance-redshift trend to explain Hubble expansion",
+            "state how dark energy is used in the modern model to describe accelerated expansion",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with stellar spectra from A11_L3 and with the astronomical distance ladder from A11_L4.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating astrophysics and preparing for rigorous evidence-to-model questions about the large-scale universe.",
         },
       ];
     case "F2_L1":
