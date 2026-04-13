@@ -21905,6 +21905,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson strengthens particle-event reasoning by making charge, baryon number, and lepton number checks work together.";
     case "A1_L6":
       return "This lesson closes the particle-physics sequence by combining classification, interaction clues, and conservation checks in one event analysis.";
+    case "A2_L1":
+      return "This lesson opens quantum physics by showing that electrons in atoms occupy discrete energy levels rather than a continuous ramp of energies.";
+    case "A2_L2":
+      return "This lesson uses line spectra to show that atomic transitions leave a discrete barcode of the allowed energy gaps.";
+    case "A2_L3":
+      return "This lesson explains the photoelectric effect by separating photon energy from beam brightness and keeping threshold logic explicit.";
+    case "A2_L4":
+      return "This lesson distinguishes excitation from ionisation by comparing bound-state jumps with the full escape threshold.";
+    case "A2_L5":
+      return "This lesson develops wave-particle duality by keeping localized detections and wave-like patterns on the same evidence board.";
+    case "A2_L6":
+      return "This lesson closes the quantum sequence by linking spectra, threshold effects, and matter-wave evidence into one coherent model.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -22100,6 +22112,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating particle physics and preparing for rigorous IGCSE-style event-analysis questions.",
+        },
+      ];
+    case "A2_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Quantum theory began when atomic evidence stopped fitting the classical idea that energy could vary continuously. Line spectra and atomic stability forced physicists to treat electrons as occupying allowed levels instead.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A2_L1 introduces atomic energy levels as discrete states and explains why an electron only changes level when the energy packet matches the gap exactly.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe atomic electrons as occupying discrete energy levels",
+            "distinguish ground state from excited states",
+            "explain why only the correct energy packet causes an allowed transition",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "There are no formal quantum prerequisites beyond secure school-level energy language and willingness to compare models with evidence carefully.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning quantum and atomic physics and needing a secure starting model before spectra and threshold questions appear.",
+        },
+      ];
+    case "A2_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Atomic spectra became one of the strongest pieces of evidence for quantized energy because atoms emit and absorb only specific wavelengths rather than a smooth spread of colours.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A2_L2 connects emission and absorption spectra to transitions between allowed energy levels and treats spectral lines as a barcode of the atom.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "link an emission line to a downward atomic transition",
+            "link an absorption line to an upward atomic transition",
+            "explain why line spectra are evidence for discrete energy levels",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the discrete energy-level model from A2_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending quantum reasoning into atomic spectra and evidence-based interpretation.",
+        },
+      ];
+    case "A2_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "The photoelectric effect was a key turning point for quantum theory because it showed that light transfers energy in packets and that brightness alone cannot explain electron emission.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A2_L3 explains photoelectric emission using threshold frequency, work function, and photon energy, while separating these from intensity effects.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why emission fails below the threshold frequency",
+            "describe intensity as mainly changing the emission rate above threshold",
+            "connect photon energy to work function and maximum electron kinetic energy",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with energy packets and atomic transitions from A2_L1 and A2_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending quantum physics into threshold reasoning and experiment-based explanation.",
+        },
+      ];
+    case "A2_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "As atomic theory developed, physicists had to separate a bound electron being lifted to a higher state from a fully freed electron leaving the atom altogether.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A2_L4 compares excitation and ionisation so that learners can see why they are different thresholds on the same atomic energy ladder.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish clearly between excitation and ionisation",
+            "explain why excitation keeps the electron bound",
+            "explain why ionisation needs enough energy to remove the electron completely",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with discrete energy levels and transition language from A2_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening atomic-threshold reasoning before later quantum comparisons and synthesis work.",
+        },
+      ];
+    case "A2_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Quantum physics had to expand again when experiments showed that matter particles can produce diffraction and interference evidence usually associated with waves while still being detected as localized hits.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A2_L5 introduces matter waves and wave-particle duality by holding particle detections and wave-like pattern buildup in the same lesson story.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe how quantum particles can produce both localized detections and wave-like patterns",
+            "use de Broglie wavelength as a momentum-linked idea",
+            "explain why changing momentum changes diffraction behaviour",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with the earlier A2 quantum evidence and with basic wave ideas from prior physics study.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending quantum physics beyond atoms into matter-wave evidence and duality reasoning.",
+        },
+      ];
+    case "A2_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Quantum theory became convincing not from one isolated experiment but from several different lines of evidence all pointing back to discrete states, packet transfer, and wave-particle behaviour.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A2_L6 synthesizes the module by linking spectra, photoelectric thresholds, and matter-wave evidence into one coherent quantum argument.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "compare different quantum experiments without treating them as unrelated tricks",
+            "identify the repeated packet-and-level theme across the module",
+            "justify quantum theory as a coherent model supported by several kinds of evidence",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full A2 sequence, especially atomic levels, spectra, threshold behaviour, and matter-wave evidence.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating quantum and atomic physics and preparing for rigorous multi-clue explanation questions.",
         },
       ];
     case "F1_L1":
