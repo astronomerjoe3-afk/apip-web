@@ -21841,9 +21841,11 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
         ...scaffoldFocusExtras(code),
         ...scaffoldCoreBullets(code),
       ]);
+  const lessonIntroduction = scaffoldLessonIntroduction(code);
   return {
     title,
-    intro: /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "",
+    intro: scaffoldIntroText(code),
+    lesson_introduction: lessonIntroduction,
     teaching_focus: /_L1$/.test(code) ? dedupeCoreConceptBulletsForLesson(code, teachingFocus).slice(0, 6) : teachingFocus,
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     reference_tables: withEntryLessonAnalogyTable(lesson, scaffoldReferenceTables(lesson)),
@@ -21851,6 +21853,51 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
     sections: scaffoldSections(lesson, repairText, analogyText, workedExample),
     review_refs: reviewRefs(lesson),
   };
+}
+
+function scaffoldIntroText(code: string): string {
+  switch (code) {
+    case "F1_L1":
+      return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
+    default:
+      return /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "";
+  }
+}
+
+function scaffoldLessonIntroduction(code: string): { heading: string; body: string; bullets?: string[] }[] {
+  switch (code) {
+    case "F1_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Science needed standard units because older local measures varied from place to place. Modern physics solves that by using shared SI units and prefixes so measurements can be compared, reproduced, and trusted across classrooms, laboratories, and countries.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F1_L1 introduces scientific measurement as a three-part statement: the physical quantity being measured, the numerical value, and the unit. It also explains why prefixes such as kilo-, centi-, and milli- change the unit size without changing the physical quantity itself.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify the physical quantity, the number, and the unit in a scientific measurement",
+            "choose a sensible unit for large and small everyday measurements",
+            "use prefixes such as kilo-, centi-, and milli- to rewrite the same measurement clearly",
+            "explain why changing the unit changes the number but not the underlying physical quantity",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "There are no formal physics prerequisites for this lesson. Learners only need basic arithmetic, everyday familiarity with length or mass, and the willingness to compare large and small scales honestly.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning physics measurement work, especially anyone who needs a secure foundation before moving on to vectors, uncertainty, density, graphs, and formula-based calculation later in the course.",
+        },
+      ];
+    default:
+      return [];
+  }
 }
 export async function getLessonRunner(moduleId: string, lessonId: string, options: RunnerLoadOptions = {}): Promise<UnknownRecord> {
   const resources = await loadResources(moduleId, lessonId, options);

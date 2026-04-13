@@ -522,6 +522,11 @@ function ScaffoldVideoPlayer({
 type ScaffoldStagePayload = {
   title?: string;
   intro?: string;
+  lesson_introduction?: {
+    heading: string;
+    body: string;
+    bullets?: string[];
+  }[];
   teaching_focus?: string[];
   misconception_targets?: string[];
   teaching_focus_cards?: TeachingFocusCard[];
@@ -1263,7 +1268,7 @@ export default function LessonRunner({
     const payload = runner.stage_payload as ScaffoldStagePayload;
     const seenMediaImageUrls = new Set<string>();
 
-    const introCount = payload.intro || payload.teaching_focus?.length ? 1 : 0;
+    const introCount = payload.intro || payload.lesson_introduction?.length || payload.teaching_focus?.length ? 1 : 0;
     const tableCount = payload.reference_tables?.length ?? 0;
     const mediaCount = payload.media_cards?.length ?? 0;
     const sectionCount = payload.sections.length;
@@ -1288,8 +1293,26 @@ export default function LessonRunner({
           <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
             {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{normalizeLessonDisplayMultiline(payload.intro)}</p> : null}
 
+          {payload.lesson_introduction?.length ? (
+            <div className={`${payload.intro ? "mt-4" : ""} space-y-4`}>
+              {payload.lesson_introduction.map((section, index) => (
+                <div key={`${section.heading}-${index}`} className="rounded-2xl border border-slate-200 bg-white/80 p-5">
+                  <p className="font-medium text-slate-900">{normalizeLessonDisplayText(section.heading)}</p>
+                  <p className="mt-2 text-slate-700">{normalizeLessonDisplayMultiline(section.body)}</p>
+                  {section.bullets?.length ? (
+                    <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
+                      {section.bullets.map((bullet, bulletIndex) => (
+                        <li key={`${section.heading}-${bulletIndex}`}>{normalizeLessonDisplayMultiline(bullet)}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          ) : null}
+
           {normalizedTeachingFocus.length ? (
-            <div className={`${payload.intro ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
+            <div className={`${payload.intro || payload.lesson_introduction?.length ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
               <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
                 {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
