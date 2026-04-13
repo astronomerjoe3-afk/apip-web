@@ -21989,6 +21989,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains magnetic force as a sideways effect set by the geometry between field direction and moving charge or current.";
     case "A8_L6":
       return "This lesson closes the fields sequence by linking particle orbits and motor turning to the same perpendicular magnetic-force geometry.";
+    case "A9_L1":
+      return "This lesson opens induction by showing that emf appears only when magnetic flux linkage changes, not simply when flux is present.";
+    case "A9_L2":
+      return "This lesson explains Lenz's law by making the induced direction oppose the original flux change rather than memorizing a disconnected rule.";
+    case "A9_L3":
+      return "This lesson links coil rotation to alternating emf by treating a generator as continuous periodic flux change.";
+    case "A9_L4":
+      return "This lesson explains transformers as shared-core induction devices where voltage ratio follows turns ratio.";
+    case "A9_L5":
+      return "This lesson connects rms values to practical power transmission by showing why higher voltage lowers current and line loss for the same power.";
+    case "A9_L6":
+      return "This lesson closes the induction sequence by tracing eddy-current heating, braking, and sensing back to local loops driven by changing flux.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -23408,6 +23420,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating electric and magnetic field reasoning and preparing for more integrated particle-and-device applications.",
+        },
+      ];
+    case "A9_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Faraday's induction work showed that electricity can be generated without direct chemical sources if the magnetic field-thread through a circuit is changing, turning flux change into emf.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A9_L1 introduces magnetic flux, flux linkage, and Faraday's law so induced emf is read as a rate-of-change story rather than a mere presence-of-field effect.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe magnetic flux qualitatively as field passing through an area",
+            "state that induced emf depends on the rate of change of flux linkage",
+            "predict when no induced emf will appear because the flux linkage is not changing",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with magnetic-field direction, field strength, area ideas, and the geometry of loops in magnetic fields.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning electromagnetic induction and needing a secure flux-change model before direction and device questions appear.",
+        },
+      ];
+    case "A9_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Lenz's law became essential because Faraday's law gives the size of an induced effect, but the direction must still be chosen in a way that preserves physical consistency and energy conservation.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A9_L2 explains how the induced current or emf direction is set by opposition to the original change in magnetic flux.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state Lenz's law as an opposition-to-change rule",
+            "identify the original flux change before deciding the induced direction",
+            "explain why the opposition rule is linked to conservation of energy",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with changing flux and induced emf from A9_L1 and with field-direction reasoning from earlier magnetism lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from induction size to induction direction and preparing for rotating-coil applications.",
+        },
+      ];
+    case "A9_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Generators became practical once rotating coils in magnetic fields were understood as devices that turn mechanical motion into periodic flux change and therefore into alternating emf.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A9_L3 links rotating-coil geometry, changing flux linkage, and alternating-current output so a.c. is read as a repeated induction pattern.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why a rotating coil in a magnetic field produces an induced emf",
+            "describe why the output alternates as the coil orientation reverses each half-turn",
+            "connect waveform features to the mechanical rotation and changing flux linkage",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with Faraday's law from A9_L1 and Lenz direction reasoning from A9_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending induction into practical electricity generation and alternating-current interpretation.",
+        },
+      ];
+    case "A9_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Transformer technology made alternating-current systems far more useful because changing current in one coil can drive a linked emf in another through shared changing magnetic flux in a core.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A9_L4 explains transformers as induction bridges between two coils and keeps core flux change, turns ratio, and voltage ratio tied together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe how changing current in the primary creates changing flux in the core",
+            "relate primary and secondary voltages to primary and secondary turns",
+            "distinguish clearly between step-up and step-down transformer cases",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with alternating current and changing flux ideas from A9_L1 to A9_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from induction principles into power-system devices and ratio-based reasoning.",
+        },
+      ];
+    case "A9_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Large-scale power systems forced physicists and engineers to compare alternating supplies fairly with direct-current heating effects and to reduce transmission losses over long cables.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A9_L5 introduces rms values and uses them with transmission reasoning to show why high voltage and low current are preferred for the same delivered power.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "interpret rms voltage or current as the direct-current-equivalent heating value",
+            "explain why higher transmission voltage means lower current for the same power",
+            "connect lower current to reduced I squared R cable losses",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with power, current, voltage, resistance, and transformer action from earlier electricity and A9_L4.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending induction and a.c. ideas into real power-distribution systems and quantitative engineering trade-offs.",
+        },
+      ];
+    case "A9_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Eddy currents revealed that induction does not only act in designed wire loops; changing flux can also drive local circulating currents inside bulk conductors, producing useful and unwanted effects.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A9_L6 closes the induction module by linking eddy-current loops to heating, braking, damping, and sensing applications.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe eddy currents as induced local loops in conducting material",
+            "explain how eddy currents can cause heating or magnetic damping",
+            "compare cases where eddy currents are useful with cases where they should be reduced",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with changing flux, induced direction, and alternating induction ideas from the full A9 sequence.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating electromagnetic induction and preparing for integrated questions about induction devices and applications.",
         },
       ];
     case "F2_L1":
