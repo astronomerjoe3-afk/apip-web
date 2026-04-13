@@ -22145,6 +22145,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains induction as a changing-flux story, not as a result of static field presence alone.";
     case "M10_L6":
       return "This lesson closes the electromagnetic-effects sequence by linking transformers, turns ratio, and high-voltage transmission into one changing-field model.";
+    case "M11_L1":
+      return "This lesson opens atomic structure by separating proton number, mass number, and electron count so identity, mass, and charge do not collapse into one vague idea.";
+    case "M11_L2":
+      return "This lesson explains isotopes by fixing proton number first and then varying neutron number without changing the element identity.";
+    case "M11_L3":
+      return "This lesson keeps alpha, beta-minus, and gamma distinct by comparing count changes, emitted particles, and shielding on the same board.";
+    case "M11_L4":
+      return "This lesson explains half-life as a repeated halving pattern for large samples rather than as a fixed countdown for each nucleus.";
+    case "M11_L5":
+      return "This lesson strengthens detector reasoning by separating measured count, background count, and corrected source count before any conclusion is drawn.";
+    case "M11_L6":
+      return "This lesson closes the radioactivity sequence by balancing decay equations with both mass number and atomic number kept visible.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -25748,6 +25760,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the whole M10 electromagnetic-effects sequence and preparing for more integrated IGCSE explanation and transmission questions.",
+        },
+      ];
+    case "M11_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Atomic theory became much more powerful once proton number, neutron number, and electron number were given separate jobs, because identity, mass, and charge cannot be explained accurately if all subatomic particles are treated as doing the same work.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M11_L1 opens the atomic-structure module by separating element identity, mass number, and charge state through the distinct roles of protons, neutrons, and electrons.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why proton number fixes the element identity",
+            "define mass number as the total number of protons and neutrons",
+            "explain why changing electron number changes charge state without changing the element",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic particle language from earlier science study and should be ready to keep nucleus-based identity separate from outer-electron charge changes.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the M11 atomic structure sequence and needing a secure model before isotopes, decay, and radioactivity are introduced.",
+        },
+      ];
+    case "M11_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Isotope reasoning became much clearer once the proton count was fixed before the neutron count was compared, because element identity depends on proton number while isotopic variation comes from neutron differences.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M11_L2 explains isotopes by holding the proton number steady and then comparing how neutron number changes the mass number and, in some cases, the stability.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define isotopes as atoms of the same element with different numbers of neutrons",
+            "explain why isotopes have the same proton number but different mass numbers",
+            "separate isotope identity from isotope stability when comparing nuclei",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with proton number, neutron number, and mass number from M11_L1 and should be ready to compare nuclei systematically.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending basic atomic structure into more precise nuclear comparison before moving into radioactive change.",
+        },
+      ];
+    case "M11_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Radioactivity became much easier to classify once alpha, beta, and gamma were compared by what leaves the nucleus and how the daughter nucleus changes, because penetration alone is not enough to identify the process.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M11_L3 introduces alpha, beta-minus, and gamma decay by keeping emitted radiation, daughter-nucleus count changes, and shielding requirements visible together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe how alpha, beta-minus, and gamma emissions differ in what leaves the nucleus",
+            "compare how each decay mode changes atomic number and mass number",
+            "relate each radiation type to its typical penetration and shielding pattern without replacing the nuclear-change story",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with atomic number and mass number from M11_L1 and M11_L2 and should be ready to compare count changes and emitted radiation on the same model.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from atomic structure into radioactivity and needing the main decay modes to stay sharply distinct before graph and equation work begins.",
+        },
+      ];
+    case "M11_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Half-life became easier to understand once scientists separated the randomness of single-nucleus decay from the predictability of large samples, because statistical regularity only appears clearly at the population level.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M11_L4 develops half-life as a repeated halving pattern for large radioactive samples and connects that population story to the shape of a decay curve.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define half-life as the time taken for the number of undecayed nuclei or the activity to halve",
+            "apply repeated halving to calculate what remains after several equal intervals",
+            "explain why large samples show a stable pattern even though single nuclei decay unpredictably",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the decay modes from M11_L3 and should be comfortable comparing elapsed time, remaining fraction, and graph trends together.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from identifying decay types into the statistical pattern of radioactive change before handling detector data and corrections.",
+        },
+      ];
+    case "M11_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Detector evidence became much more trustworthy once background radiation was measured separately and subtracted, because real environments always contribute some count even when no test source is present.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M11_L5 teaches background radiation and corrected count rate by keeping raw detector reading, background reading, and source-only reading on separate ledgers.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe background radiation as a normal environmental presence",
+            "calculate corrected source count rate by subtracting background count rate from the measured count rate",
+            "explain why a non-zero raw detector reading is not enough evidence by itself",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with half-life and radioactivity ideas from M11_L3 and M11_L4 and should be ready to interpret detector evidence more carefully.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from radioactive models into measurement and evidence, where corrected readings matter more than raw counts alone.",
+        },
+      ];
+    case "M11_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Decay equations became much less mechanical once they were read as nuclear bookkeeping, because both mass number and atomic number must stay balanced even while the element identity may change.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M11_L6 closes the radioactivity sequence by balancing decay equations for alpha, beta-minus, and gamma processes with both atomic number and mass number kept visible.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "balance nuclear equations by conserving mass number and atomic number",
+            "apply the correct count-change rule for alpha, beta-minus, and gamma emissions",
+            "explain when a decay process changes the daughter element and when it does not",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M11 sequence, especially the count changes associated with different decay types and the meanings of atomic number and mass number.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the M11 atomic and radioactivity unit and preparing for more demanding IGCSE equation, decay, and interpretation questions.",
         },
       ];
     case "F2_L1":
