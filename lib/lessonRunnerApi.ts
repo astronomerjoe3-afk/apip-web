@@ -21841,21 +21841,57 @@ function scaffoldPayload(title: string, lesson: UnknownRecord, feedback: Unknown
         ...scaffoldFocusExtras(code),
         ...scaffoldCoreBullets(code),
       ]);
-  const lessonIntroduction = scaffoldLessonIntroduction(code);
+  const mediaCards = scaffoldMediaCards(lesson);
+  const sections = scaffoldSections(lesson, repairText, analogyText, workedExample);
+  const introContext = {
+    code,
+    title,
+    lesson,
+    teachingFocus,
+    mediaCards,
+    sections,
+  };
+  const lessonIntroduction = scaffoldLessonIntroduction(introContext);
   return {
     title,
-    intro: scaffoldIntroText(code),
+    intro: scaffoldIntroText(introContext),
     lesson_introduction: lessonIntroduction,
     teaching_focus: /_L1$/.test(code) ? dedupeCoreConceptBulletsForLesson(code, teachingFocus).slice(0, 6) : teachingFocus,
     misconception_targets: repairs.map((item) => text(item.misconception_tag)).filter(Boolean),
     reference_tables: withEntryLessonAnalogyTable(lesson, scaffoldReferenceTables(lesson)),
-    media_cards: scaffoldMediaCards(lesson),
-    sections: scaffoldSections(lesson, repairText, analogyText, workedExample),
+    media_cards: mediaCards,
+    sections,
     review_refs: reviewRefs(lesson),
   };
 }
 
-function scaffoldIntroText(code: string): string {
+type ScaffoldIntroSection = {
+  heading: string;
+  body: string;
+  bullets?: string[];
+};
+
+type ScaffoldIntroContext = {
+  code: string;
+  title: string;
+  lesson: UnknownRecord;
+  teachingFocus: string[];
+  mediaCards: UnknownRecord[];
+  sections: UnknownRecord[];
+};
+
+type ScaffoldIntroTheme = {
+  area: string;
+  history: string;
+  starterPrereq: string;
+  continuingPrereq: string;
+  starterAudience: string;
+  progressingAudience: string;
+  capstoneAudience: string;
+};
+
+function scaffoldIntroText(context: ScaffoldIntroContext): string {
+  const { code, title } = context;
   switch (code) {
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
@@ -21870,11 +21906,21 @@ function scaffoldIntroText(code: string): string {
     case "F1_L6":
       return "This lesson closes the sub-unit by separating accuracy from precision so learners can judge measurement quality with more than one label.";
     default:
-      return /_L1$/.test(code) ? "This lesson covers the whole sub-unit while giving extra attention to any ideas that still need work." : "";
+      break;
   }
+  const theme = scaffoldIntroTheme(context);
+  const lessonNumber = scaffoldLessonNumber(code);
+  if (lessonNumber === 1) {
+    return `This lesson opens the ${theme.area} sequence by focusing on ${title}.`;
+  }
+  if (lessonNumber === 6) {
+    return `This lesson closes the ${theme.area} sequence by bringing several earlier ideas together through ${title}.`;
+  }
+  return `This lesson develops ${theme.area} by focusing on ${title}.`;
 }
 
-function scaffoldLessonIntroduction(code: string): { heading: string; body: string; bullets?: string[] }[] {
+function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntroSection[] {
+  const { code } = context;
   switch (code) {
     case "F1_L1":
       return [
@@ -22051,8 +22097,272 @@ function scaffoldLessonIntroduction(code: string): { heading: string; body: stri
         },
       ];
     default:
-      return [];
+      return scaffoldGeneratedLessonIntroduction(context);
   }
+}
+
+function scaffoldLessonNumber(code: string): number {
+  const match = code.match(/_L(\d+)$/);
+  return match ? Number(match[1]) : 1;
+}
+
+function scaffoldFirstSentence(value: string): string {
+  const cleaned = normalizeRenderedPhysicsText(value).replace(/\s+/g, " ").trim();
+  if (!cleaned) return "";
+  const match = cleaned.match(/^(.+?[.!?])(?:\s|$)/);
+  return (match ? match[1] : cleaned).trim();
+}
+
+function scaffoldDecapitalize(value: string): string {
+  if (!value) return value;
+  return value.charAt(0).toLowerCase() + value.slice(1);
+}
+
+function scaffoldRelevantSectionBody(sections: UnknownRecord[]): string {
+  for (const section of sections) {
+    const record = asRecord(section);
+    const heading = text(record.heading).trim().toLowerCase();
+    if (["fix these ideas", "analogy", "worked example", "technical words"].includes(heading)) continue;
+    const body = scaffoldFirstSentence(text(record.body));
+    if (body) return body;
+  }
+  return "";
+}
+
+function scaffoldRelevantMediaSentence(mediaCards: UnknownRecord[]): string {
+  for (const card of mediaCards) {
+    const record = asRecord(card);
+    const caption = scaffoldFirstSentence(text(record.caption));
+    if (caption) return caption;
+    const title = scaffoldFirstSentence(text(record.title));
+    if (title) return title;
+  }
+  return "";
+}
+
+function scaffoldObjectiveBullets(context: ScaffoldIntroContext): string[] {
+  const focusBullets = dedupeText(context.teachingFocus).slice(0, 4);
+  if (focusBullets.length > 0) {
+    return focusBullets.map(scaffoldObjectiveFromText);
+  }
+  const mediaHighlights = dedupeText(
+    context.mediaCards.flatMap((card) =>
+      asList(asRecord(card).highlights).map((entry) => text(entry)).filter(Boolean),
+    ),
+  ).slice(0, 4);
+  if (mediaHighlights.length > 0) {
+    return mediaHighlights.map(scaffoldObjectiveFromText);
+  }
+  const sectionBodies = context.sections
+    .map((section) => scaffoldFirstSentence(text(asRecord(section).body)))
+    .filter(Boolean)
+    .slice(0, 3);
+  return sectionBodies.length > 0
+    ? sectionBodies.map(scaffoldObjectiveFromText)
+    : [
+        `explain the main lesson idea in ${context.title}`,
+        `use the key representation and language from this lesson correctly`,
+        `connect this lesson to the wider module rather than treating it as an isolated fact`,
+      ];
+}
+
+function scaffoldObjectiveFromText(value: string): string {
+  const cleaned = normalizeRenderedPhysicsText(value).replace(/[.]+$/, "").trim();
+  const lowered = scaffoldDecapitalize(cleaned);
+  if (!lowered) return cleaned;
+  if (/^(identify|distinguish|define|explain|compare|calculate|predict|apply|use|interpret|classify|suggest|evaluate|connect|resolve|analyze|analyse|read|choose|state|describe|justify|outline|estimate)\b/i.test(cleaned)) {
+    return lowered;
+  }
+  if (/\b(is|are|means|depends|comes|keeps|requires|must|can|will|belongs|shows|tracks|changes|links|gives|describes|explains)\b/i.test(lowered)) {
+    return `explain why ${lowered}`;
+  }
+  return `explain and apply ${lowered}`;
+}
+
+function scaffoldIntroTheme(context: ScaffoldIntroContext): ScaffoldIntroTheme {
+  const relevantText = [
+    context.title,
+    ...context.teachingFocus,
+    ...context.mediaCards.map((card) => text(asRecord(card).title)),
+    ...context.mediaCards.map((card) => text(asRecord(card).caption)),
+    ...context.sections.map((section) => text(asRecord(section).heading)),
+    ...context.sections.map((section) => text(asRecord(section).body)),
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  if (/(quark|baryon|meson|lepton|hadron|antiparticle|pair production|annihilation|exchange particle|conservation ledger|particle event)/.test(relevantText)) {
+    return {
+      area: "particle physics",
+      history: "Modern particle physics grew out of scattering experiments, accelerator evidence, and conservation laws that forced scientists to classify particles and interactions more carefully than everyday language ever could.",
+      starterPrereq: "There are no formal prerequisites beyond secure basic physics literacy and a willingness to track particles, charges, and event changes carefully.",
+      continuingPrereq: "Learners should already be comfortable with the earlier particle-physics language in this module, because later lessons depend on classification, interaction clues, and conservation reasoning being held together accurately.",
+      starterAudience: "This lesson is for learners beginning particle physics and needing a reliable way to classify matter, radiation, and interaction evidence from the start.",
+      progressingAudience: "This lesson is for learners extending particle-physics reasoning into more rigorous classification, conservation, and event-analysis questions.",
+      capstoneAudience: "This lesson is for learners consolidating particle physics and preparing to combine several earlier particle ideas in demanding IGCSE-style event questions.",
+    };
+  }
+  if (/(energy level|photoelectric|de broglie|ionisation|excitation|line spectra|quantum|photon|discrete state|absorption line|emission line)/.test(relevantText)) {
+    return {
+      area: "quantum and atomic physics",
+      history: "Quantum theory emerged when spectra, threshold effects, and atomic behaviour stopped fitting continuous classical models. Physicists had to accept discrete energy states and packet-like transfers to explain the evidence.",
+      starterPrereq: "There are no formal prerequisites beyond secure school-level algebra, graph reading, and a willingness to compare models with experimental evidence carefully.",
+      continuingPrereq: "Learners should already be comfortable with the earlier atomic and quantum ideas in this module, because later reasoning depends on discrete levels, thresholds, and evidence-based comparison staying visible together.",
+      starterAudience: "This lesson is for learners beginning quantum and atomic physics and needing a clear entry point into discrete states, photons, and evidence-based models.",
+      progressingAudience: "This lesson is for learners extending atomic and quantum reasoning into stronger explanations, threshold arguments, and calculation-supported interpretation.",
+      capstoneAudience: "This lesson is for learners consolidating quantum and atomic physics and preparing to compare several strands of evidence within one coherent model.",
+    };
+  }
+  if (/(wave|interference|diffraction|refraction|critical angle|total internal reflection|oscilloscope|stationary wave|standing wave|superposition|grating|spectrum line)/.test(relevantText)) {
+    return {
+      area: "wave physics",
+      history: "Wave ideas were strengthened by sound, light, and pattern evidence showing that many apparently different phenomena could be explained through superposition, propagation, interference, and boundary behaviour.",
+      starterPrereq: "There are no formal prerequisites beyond basic graph reading and secure measurement language. The lesson is designed to establish the key wave vocabulary before more demanding applications appear.",
+      continuingPrereq: "Learners should already be secure with the earlier wave ideas in this module, because later work depends on keeping pattern, path, phase, and representation connected.",
+      starterAudience: "This lesson is for learners beginning wave physics and needing a stable model before moving into interference, optics, and representation-heavy questions.",
+      progressingAudience: "This lesson is for learners extending wave reasoning into more rigorous pattern explanation, comparison, and calculation.",
+      capstoneAudience: "This lesson is for learners consolidating wave physics and preparing to use several wave ideas together in more demanding explanations and problems.",
+    };
+  }
+  if (/(magnetic|electromagnet|induction|generator|transformer|flux|field line|motor effect|side-kick|coil|solenoid|electromagnetic)/.test(relevantText)) {
+    return {
+      area: "magnetism and electromagnetism",
+      history: "Magnetism became far more powerful once scientists linked permanent magnets, current-carrying conductors, induction, and electrical machines through the common language of fields and changing flux.",
+      starterPrereq: "There are no formal prerequisites beyond secure basic algebra and a willingness to interpret direction, field patterns, and cause-and-effect carefully.",
+      continuingPrereq: "Learners should already be comfortable with the earlier magnetism ideas in this module, because later lessons depend on field patterns, current direction, and changing flux being tracked consistently.",
+      starterAudience: "This lesson is for learners beginning magnetism and electromagnetism and needing a secure field-based picture before motors, generators, or induction are analysed in depth.",
+      progressingAudience: "This lesson is for learners extending magnetism and electromagnetism into more structured direction, force, and induction reasoning.",
+      capstoneAudience: "This lesson is for learners consolidating magnetism and electromagnetism and preparing to link several earlier field ideas in multi-step questions.",
+    };
+  }
+  if (/(circuit|current|voltage|potential difference|resistance|series|parallel|charge flow|power|ohm|divider|capacitor|rc|p\.d\.)/.test(relevantText)) {
+    return {
+      area: "electric circuits",
+      history: "Electrical science matured when charge flow, potential difference, resistance, and component behaviour were tied together into circuit models that could explain measurements rather than just describe apparatus.",
+      starterPrereq: "There are no formal prerequisites beyond basic algebra, unit handling, and careful comparison of simple physical quantities.",
+      continuingPrereq: "Learners should already be secure with the earlier circuit ideas in this module, because later reasoning depends on current, p.d., resistance, and component roles being kept distinct and connected.",
+      starterAudience: "This lesson is for learners beginning electric-circuit physics and needing a secure starting model before multi-component reasoning and quantitative work become heavier.",
+      progressingAudience: "This lesson is for learners extending circuit reasoning into more rigorous explanation, prediction, and calculation.",
+      capstoneAudience: "This lesson is for learners consolidating electric-circuit physics and preparing to combine several earlier circuit ideas in challenging problems.",
+    };
+  }
+  if (/(electric field|equipotential|coulomb|potential|field strength|uniform field|parallel plates|gravitational field|gravitational potential|orbit|satellite|planet|star|moon|sun|eclipse|solar system|luminosity|h-r|redshift|cosmology|astronomy|gravity)/.test(relevantText)) {
+    return {
+      area: "space, gravity, and field physics",
+      history: "From planetary motion to modern astrophysics, progress in this part of physics came from combining observation with field models so that orbits, potentials, stars, and large-scale structure could be explained quantitatively rather than descriptively.",
+      starterPrereq: "There are no formal prerequisites beyond secure algebra, graph reading, and a willingness to connect physical models with astronomical or field evidence.",
+      continuingPrereq: "Learners should already be comfortable with the earlier ideas in this module, because later lessons depend on linking representation, model, and evidence across several related field or astronomy concepts.",
+      starterAudience: "This lesson is for learners beginning the gravity, space, or field sequence and needing a secure model before orbit, stellar, or cosmological reasoning becomes more demanding.",
+      progressingAudience: "This lesson is for learners extending gravity, field, or astronomy reasoning into stronger explanation, comparison, and quantitative interpretation.",
+      capstoneAudience: "This lesson is for learners consolidating space, gravity, or field physics and preparing to coordinate several earlier ideas in more advanced IGCSE-style questions.",
+    };
+  }
+  if (/(proton|neutron|nucleus|nuclide|isotope|radioactive|decay|half-life|binding energy|mass defect|atomic number|mass number|electron shell|nuclear)/.test(relevantText)) {
+    return {
+      area: "atomic and nuclear physics",
+      history: "Atomic and nuclear physics developed when spectra, scattering, isotopes, radioactivity, and nuclear-energy evidence forced scientists to refine the internal model of the atom and the nucleus.",
+      starterPrereq: "There are no formal prerequisites beyond secure algebra, notation reading, and careful attention to symbols, charges, and conservation-style bookkeeping.",
+      continuingPrereq: "Learners should already be secure with the earlier atomic or nuclear ideas in this module, because later lessons depend on notation, structural meaning, and event interpretation staying consistent.",
+      starterAudience: "This lesson is for learners beginning atomic or nuclear physics and needing a secure model before notation, decay, and energy-change questions become more demanding.",
+      progressingAudience: "This lesson is for learners extending atomic or nuclear reasoning into more rigorous explanation, notation, and calculation.",
+      capstoneAudience: "This lesson is for learners consolidating atomic or nuclear physics and preparing to combine several earlier structural and quantitative ideas in one answer.",
+    };
+  }
+  if (/(measurement|unit|prefix|significant figure|uncertainty|precision|accuracy|resolution|density)/.test(relevantText)) {
+    return {
+      area: "measurement and scientific reporting",
+      history: "Physics became more reliable when measurements stopped being local habits and became shared, standardized reports with agreed units, sensible precision, and explicit attention to uncertainty.",
+      starterPrereq: "There are no formal prerequisites beyond basic arithmetic and a willingness to compare sizes, units, and readings carefully.",
+      continuingPrereq: "Learners should already be comfortable with the earlier measurement ideas in this module, because later lessons depend on precise language, justified digits, and trustworthy method choices.",
+      starterAudience: "This lesson is for learners beginning scientific measurement and needing secure habits before practical work and data analysis become more demanding.",
+      progressingAudience: "This lesson is for learners extending measurement and reporting skills into more rigorous practical reasoning and calculated answers.",
+      capstoneAudience: "This lesson is for learners consolidating measurement and scientific reporting before moving into more demanding practical and data-based physics work.",
+    };
+  }
+  if (/(temperature|thermal|heat|specific heat|latent|gas|pressure|volume|boyle|charles|particle model|internal energy|cooling|heating)/.test(relevantText)) {
+    return {
+      area: "thermal physics and particle behaviour",
+      history: "Thermal physics grew when heating, cooling, gas behaviour, and particle models were linked so that temperature change could be explained through energy transfer and microscopic motion instead of surface description alone.",
+      starterPrereq: "There are no formal prerequisites beyond basic algebra, unit handling, and a willingness to connect macroscopic changes with particle-level explanations.",
+      continuingPrereq: "Learners should already be comfortable with the earlier thermal ideas in this module, because later lessons depend on keeping energy transfer, particle behaviour, and state change linked carefully.",
+      starterAudience: "This lesson is for learners beginning thermal physics and needing a clear model before gas laws, specific heat, or state-change reasoning becomes heavier.",
+      progressingAudience: "This lesson is for learners extending thermal reasoning into stronger explanation, comparison, and calculation.",
+      capstoneAudience: "This lesson is for learners consolidating thermal physics and preparing to combine several earlier heating, gas, and particle ideas in more demanding questions.",
+    };
+  }
+  if (/(force|velocity|acceleration|displacement|distance|speed|motion|momentum|collision|projectile|equilibrium|torque|moment|stability|vector|component|stress|strain|young|kinematics)/.test(relevantText)) {
+    return {
+      area: "mechanics",
+      history: "Mechanics became a predictive science when motion, force, momentum, and turning effects were described with clear mathematical models instead of everyday impressions of 'push' and 'movement'.",
+      starterPrereq: "There are no formal prerequisites beyond basic algebra, graph reading, and secure use of measurement language.",
+      continuingPrereq: "Learners should already be comfortable with the earlier mechanics ideas in this module, because later lessons depend on those force, motion, or vector models staying precise.",
+      starterAudience: "This lesson is for learners beginning mechanics and needing a secure model before graph, vector, momentum, or equilibrium reasoning grows more demanding.",
+      progressingAudience: "This lesson is for learners extending mechanics into more structured explanation, comparison, and calculation.",
+      capstoneAudience: "This lesson is for learners consolidating mechanics and preparing to use several earlier motion or force ideas together in harder IGCSE-style questions.",
+    };
+  }
+  if (/(energy|power|efficiency|work|store|gpe|kinetic|internal store|transfer)/.test(relevantText)) {
+    return {
+      area: "energy and power physics",
+      history: "Energy ideas became central when physicists and engineers needed a consistent way to track what machines, lifting systems, heating processes, and motion were really transferring or wasting.",
+      starterPrereq: "There are no formal prerequisites beyond secure arithmetic, unit handling, and a willingness to track quantities through a clear before-and-after story.",
+      continuingPrereq: "Learners should already be comfortable with the earlier energy ideas in this module, because later lessons depend on energy stores, transfer routes, and efficiency language staying precise.",
+      starterAudience: "This lesson is for learners beginning energy and power physics and needing a clear bookkeeping model before multi-step machine or transfer questions appear.",
+      progressingAudience: "This lesson is for learners extending energy reasoning into stronger explanation, comparison, and calculation.",
+      capstoneAudience: "This lesson is for learners consolidating energy and power physics and preparing to combine several earlier transfer ideas in more demanding questions.",
+    };
+  }
+  return {
+    area: "physics reasoning",
+    history: "Physics advances when observed patterns are turned into repeatable models, precise language, and justified calculations instead of isolated facts.",
+    starterPrereq: "There are no formal prerequisites beyond secure basic algebra, graph reading, and willingness to reason carefully from evidence.",
+    continuingPrereq: "Learners should already be comfortable with the earlier lessons in this module, because later work depends on reusing that language and structure accurately.",
+    starterAudience: "This lesson is for learners beginning a new stretch of physics and needing a secure conceptual starting point.",
+    progressingAudience: "This lesson is for learners extending earlier ideas into more structured explanation, comparison, and calculation.",
+    capstoneAudience: "This lesson is for learners consolidating a run of physics ideas before harder multi-step questions.",
+  };
+}
+
+function scaffoldGeneratedLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntroSection[] {
+  const { code, title } = context;
+  const lessonNumber = scaffoldLessonNumber(code);
+  const theme = scaffoldIntroTheme(context);
+  const summarySource = scaffoldRelevantSectionBody(context.sections) || scaffoldRelevantMediaSentence(context.mediaCards);
+  const summary = summarySource || `${title} keeps the main lesson relationship visible before the learner moves into worked explanations and examples.`;
+  const prerequisiteBody = lessonNumber === 1
+    ? theme.starterPrereq
+    : lessonNumber === 6
+    ? `Learners should already be secure with the earlier lessons in this module, because this final lesson is strongest when several ${theme.area} ideas can be combined and compared fluently.`
+    : theme.continuingPrereq;
+  const audienceBody = lessonNumber === 1
+    ? theme.starterAudience
+    : lessonNumber === 6
+    ? theme.capstoneAudience
+    : theme.progressingAudience;
+
+  return [
+    {
+      heading: "Historical background",
+      body: theme.history,
+    },
+    {
+      heading: "Lesson description",
+      body: `${title} keeps the main lesson idea visible: ${summary}`,
+    },
+    {
+      heading: "Learning objectives",
+      body: "By the end of the lesson, the learner should be able to:",
+      bullets: scaffoldObjectiveBullets(context),
+    },
+    {
+      heading: "Prerequisites",
+      body: prerequisiteBody,
+    },
+    {
+      heading: "Who this lesson is for",
+      body: audienceBody,
+    },
+  ];
 }
 export async function getLessonRunner(moduleId: string, lessonId: string, options: RunnerLoadOptions = {}): Promise<UnknownRecord> {
   const resources = await loadResources(moduleId, lessonId, options);
