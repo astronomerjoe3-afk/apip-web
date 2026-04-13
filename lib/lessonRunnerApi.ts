@@ -22121,6 +22121,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson treats the critical angle as the last possible escape route before total internal reflection takes over.";
     case "M8_L6":
       return "This lesson closes the optics sequence by making ray diagrams trustworthy through clear separation of real rays, reference normals, and virtual extensions.";
+    case "M9_L1":
+      return "This lesson opens advanced circuit reasoning by tying steady current to a complete loop and by separating charge conservation from energy transfer.";
+    case "M9_L2":
+      return "This lesson defines current as charge flow rate through one checkpoint so total charge and current are not blended together.";
+    case "M9_L3":
+      return "This lesson explains voltage as energy transferred per unit charge, keeping the loop's energy story separate from its current story.";
+    case "M9_L4":
+      return "This lesson places resistance on the route itself by linking it to material, length, and cross-sectional area together.";
+    case "M9_L5":
+      return "This lesson sharpens Ohm's law by tying constant resistance to fixed conditions and to a straight origin-passing I-V graph.";
+    case "M9_L6":
+      return "This lesson closes the circuit sequence by separating series, parallel, and mixed-network rules before any calculation begins.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -25388,6 +25400,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the whole optics unit and preparing for more complex IGCSE-style diagram interpretation and explanation questions.",
+        },
+      ];
+    case "M9_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Electric-current models became much clearer once physicists treated a circuit as a complete loop with circulating charge carriers, because everyday language often suggests that current is used up as it passes through a component.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M9_L1 opens the advanced electricity module by tying steady current to a complete conducting loop and by separating conserved charge flow from energy transfer in components.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why a steady current requires a complete circuit",
+            "describe charge carriers as circulating around the loop rather than being used up by components",
+            "justify why the current is the same at every point in a simple one-path circuit",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic charge language and simple circuit symbols from earlier electricity work, and should be ready to separate current from energy transfer more carefully.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the M9 circuits module and needing a secure whole-loop picture before electrical quantities and network rules are developed.",
+        },
+      ];
+    case "M9_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Current became a much more useful quantity once it was defined as a rate of charge flow through one point, because a large amount of stored charge does not by itself tell us how quickly charge is moving through a circuit.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M9_L2 defines current as charge flow rate and keeps amount of charge and flow rate distinct through checkpoint-based reasoning.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define current as the rate of flow of charge",
+            "interpret one ampere as one coulomb passing a point each second",
+            "calculate current from charge and time without confusing current with total charge present",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the complete-loop picture from M9_L1 and should be comfortable with rates, time intervals, and unit interpretation.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening their quantitative circuit language before voltage and resistance are introduced in more formal ways.",
+        },
+      ];
+    case "M9_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Voltage became more meaningful once it was treated as energy transferred to each coulomb, because many learners otherwise confuse potential difference with charge amount or with current itself.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M9_L3 explains potential difference as energy transferred per unit charge and uses the loop story to compare source rises with component drops.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define voltage as energy transferred per unit charge",
+            "translate volts into joules per coulomb in source and component examples",
+            "separate the loop's energy story from the charge-flow story",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current from M9_L2 and should be comfortable reasoning with energy transfer from earlier modules.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from current-based circuit descriptions into the energy-per-charge view needed for rigorous circuit analysis.",
+        },
+      ];
+    case "M9_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Resistance became much easier to predict once it was tied to the geometry and material of the conducting route, rather than being treated as a mysterious property supplied by the battery.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M9_L4 places resistance on the component or path itself and compares how length, area, and material together control how strongly a route opposes charge flow.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe resistance as a property of the route or component, not of the source",
+            "explain why longer wires of the same material have greater resistance",
+            "explain why larger cross-sectional area lowers resistance for the same material",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current and voltage from M9_L1 to M9_L3 and should be ready to compare how route properties affect current for the same supply.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from electrical quantities into route-property reasoning before formal Ohm's-law work.",
+        },
+      ];
+    case "M9_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Ohm's law became more rigorous once it was tied to fixed conditions and graph evidence, because proportionality between voltage and current is not a universal truth for every component under all conditions.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M9_L5 develops Ohm's law by comparing ohmic and non-ohmic behaviour and by reading I-V graph shape as evidence of constant or changing resistance.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state Ohm's law correctly for ohmic conductors under fixed conditions",
+            "explain why a straight origin-passing I-V graph is the constant-resistance clue",
+            "distinguish constant-resistance behaviour from non-ohmic cases where resistance changes",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current, voltage, and resistance from M9_L2 to M9_L4 and should be comfortable linking algebraic relations to graph evidence.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving into more exam-style electrical reasoning where formulas, conditions, and graph interpretation all need to stay aligned.",
+        },
+      ];
+    case "M9_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Circuit analysis became much more reliable once physicists distinguished one-path sections from shared-junction sections, because current and voltage rules only stay valid when they are applied to the right structural part of a network.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M9_L6 closes the module by comparing series, parallel, and mixed circuits and by requiring learners to identify the valid section before applying any current or voltage rule.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify one-path series sections and same-two-junction parallel sections correctly",
+            "apply same-current and same-potential-difference rules to the correct structural part of a network",
+            "reduce mixed circuits section by section before calculating total current or total resistance",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M9 sequence, especially the meanings of current, voltage, and resistance from M9_L1 to M9_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the M9 circuits unit and preparing for more demanding IGCSE-style network analysis and explanation questions.",
         },
       ];
     case "F2_L1":
