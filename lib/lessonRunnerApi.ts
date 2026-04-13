@@ -22133,6 +22133,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson sharpens Ohm's law by tying constant resistance to fixed conditions and to a straight origin-passing I-V graph.";
     case "M9_L6":
       return "This lesson closes the circuit sequence by separating series, parallel, and mixed-network rules before any calculation begins.";
+    case "M10_L1":
+      return "This lesson opens magnetism by separating magnetic field direction from field strength and by comparing the field patterns of magnets and current-carrying wires.";
+    case "M10_L2":
+      return "This lesson explains electromagnets by showing how current, coil turns, and a soft-iron core reinforce one magnetic field story.";
+    case "M10_L3":
+      return "This lesson explains the motor effect as a sideways magnetic force on a current-carrying conductor rather than as a push along the field lines.";
+    case "M10_L4":
+      return "This lesson turns the motor effect into torque by reading opposite magnetic side-kicks on a coil as a turning pair.";
+    case "M10_L5":
+      return "This lesson explains induction as a changing-flux story, not as a result of static field presence alone.";
+    case "M10_L6":
+      return "This lesson closes the electromagnetic-effects sequence by linking transformers, turns ratio, and high-voltage transmission into one changing-field model.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -25568,6 +25580,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the M9 circuits unit and preparing for more demanding IGCSE-style network analysis and explanation questions.",
+        },
+      ];
+    case "M10_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Magnetic-field reasoning became much clearer once scientists treated field lines as a map of direction and relative strength rather than as literal tracks that particles must follow, because that distinction allows magnets and current-carrying wires to be compared accurately.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M10_L1 opens the magnetism module by comparing the field patterns of permanent magnets and straight current-carrying wires and by keeping field direction separate from field strength.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe magnetic field lines as showing local field direction while line spacing suggests relative strength",
+            "compare the field pattern around a magnet with the circular field pattern around a straight current-carrying wire",
+            "use compass direction evidence without treating field lines as literal travel paths",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with field ideas from earlier physics modules and should be ready to compare direction maps with strength clues carefully.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the M10 magnetism sequence and needing a secure field-language foundation before electromagnets, forces, and induction are introduced.",
+        },
+      ];
+    case "M10_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Electromagnets became easier to explain once current, coil shape, and core material were treated as three linked ways of strengthening the same field, rather than as unrelated tricks added to a circuit.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M10_L2 develops the electromagnet by showing how a coiled conductor behaves like a magnet and how turns, current, and a soft-iron core reinforce the field.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe a solenoid as a coiled current route that produces a magnet-like field pattern",
+            "explain why increasing current or turn count strengthens the electromagnet",
+            "explain the role of a soft-iron core in concentrating and strengthening the field",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with field patterns from M10_L1 and should be comfortable linking current in a wire to magnetic effects around it.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending static field ideas into useful current-produced magnets before moving on to magnetic force and motor effects.",
+        },
+      ];
+    case "M10_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "The motor effect became much easier to predict once the force on a current-carrying conductor was treated as a sideways interaction with the magnetic field, because learners often expect the force to push along the field instead.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M10_L3 introduces the force on a current-carrying conductor in a magnetic field and keeps force direction separate from both current direction and field direction.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe the force on a current-carrying conductor as perpendicular to both the current and the magnetic field",
+            "predict how reversing the current or the field reverses the force",
+            "interpret the motor effect using direction rules without confusing them with the field pattern itself",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with magnetic fields from M10_L1 and electromagnets from M10_L2 and should be comfortable comparing directions in three-way interactions.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from field description into magnetic-force reasoning before studying motors and induction devices.",
+        },
+      ];
+    case "M10_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Electric motors became much clearer once opposite forces on opposite sides of a coil were interpreted as a turning pair, because the real output is torque rather than a simple translation of the loop.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M10_L4 builds the d.c. motor from the motor effect by showing how opposite magnetic forces on a coil create rotation and how the commutator keeps the turning direction consistent.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why opposite sides of a current-carrying coil in a magnetic field feel opposite forces",
+            "describe those forces as a turning pair that produces torque",
+            "explain the role of the split-ring commutator in maintaining continued rotation",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the motor effect from M10_L3 and should be ready to move from a single-force picture to a whole-coil turning picture.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending magnetic-force reasoning into device explanation and preparing to compare motors with generators.",
+        },
+      ];
+    case "M10_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Induction became much easier to understand once scientists asked what was changing in the magnetic link, because a steady field by itself does not maintain an induced effect unless the flux through the coil is changing.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M10_L5 introduces electromagnetic induction by treating emf as the result of changing magnetic flux and by connecting stronger induction with faster change and more turns.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why induction requires changing magnetic flux rather than static field presence alone",
+            "describe how faster change and larger turn count increase the induced effect",
+            "connect repeated flux change in a rotating system to the basic generator idea",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with magnetic fields and motor-effect ideas from M10_L1 to M10_L4 and should be comfortable reasoning about change over time.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from magnetic-force devices into induction and generator reasoning, where change in flux becomes the key causal idea.",
+        },
+      ];
+    case "M10_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Transformers and power transmission became much clearer once the changing-field link between two coils was kept separate from direct charge flow, because the voltage shift comes from induction and the grid uses that shift to reduce transmission losses.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M10_L6 closes the module by explaining transformers through shared changing flux, then linking turns ratio to voltage change and high-voltage transmission to lower line current.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe a transformer as two separate coils linked by a changing magnetic field in a shared core",
+            "use the school-model turns ratio to explain step-up and step-down voltage changes",
+            "explain why national-grid transmission uses high voltage to reduce current and cable losses for the same power",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with induction from M10_L5 and with earlier current and power language from previous electricity modules.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the whole M10 electromagnetic-effects sequence and preparing for more integrated IGCSE explanation and transmission questions.",
         },
       ];
     case "F2_L1":
