@@ -21989,6 +21989,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains parallel circuits through several routes between the same two points, keeping shared voltage and split current distinct.";
     case "F4_L6":
       return "This lesson closes the electricity sequence by linking power, total energy transfer, and protective devices into one circuit-safety model.";
+    case "F5_L1":
+      return "This lesson opens astronomy by treating Earth, Moon, and Sun as one linked system instead of three separate sky facts.";
+    case "F5_L2":
+      return "This lesson explains day and night through Earth's rotation, keeping the daily light-dark cycle separate from the yearly orbit.";
+    case "F5_L3":
+      return "This lesson explains seasons through axial tilt and orbit position rather than a simple near-far distance story.";
+    case "F5_L4":
+      return "This lesson separates Moon phases from eclipses by keeping viewing angle and special shadow alignment as different ideas.";
+    case "F5_L5":
+      return "This lesson classifies Solar System bodies by both main host and body type so the family is not flattened into one vague category.";
+    case "F5_L6":
+      return "This lesson closes the astronomy sequence by separating apparent sky motion, real orbital motion, and heavily compressed model scale.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -23360,6 +23372,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the F4 circuit sequence and preparing for multi-step electrical calculation and safety questions.",
+        },
+      ];
+    case "F5_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Astronomy became much easier to explain once Earth, Moon, and Sun were treated as one linked gravitational system, because many sky patterns make sense only when those three bodies stay on the same board.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F5_L1 introduces the Earth-Moon-Sun system by identifying main host relationships, orbital routes, and the idea that several familiar sky patterns belong to one shared model.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that Earth mainly orbits the Sun while the Moon mainly orbits Earth",
+            "explain how nested orbit relationships can both be true at once",
+            "use the linked Earth-Moon-Sun system to support later explanations about sky patterns",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "There are no formal astronomy prerequisites, but learners should already be comfortable reading simple system diagrams and comparing larger and smaller relationships carefully.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning astronomy and needing one secure shared-system picture before day-night, seasons, phases, and eclipses are introduced.",
+        },
+      ];
+    case "F5_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Day and night were understood much more accurately once the daily light-dark cycle was linked to Earth's spin rather than to a fresh orbit around the Sun each day.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F5_L2 explains day and night by tracking one rotating Earth under a fixed sunlight direction and by keeping rotation separate from yearly orbit.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that Earth's rotation causes day and night",
+            "explain why half of Earth is lit and half is dark at any one time",
+            "distinguish the 24-hour rotation cycle from the yearly orbital cycle",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the Earth-Moon-Sun system picture from F5_L1 and should be comfortable tracking one place as Earth turns.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners building the daily-motion part of the astronomy sequence before moving into longer-timescale seasonal changes.",
+        },
+      ];
+    case "F5_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "The seasons became much clearer once scientists focused on Earth's tilted axis and the changing sunlight angle through the orbit, rather than relying on the incorrect idea that Earth simply moves closer to the Sun in summer.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F5_L3 explains seasons by keeping axial tilt, hemisphere lean, and orbit position together so opposite hemispheres can be compared properly.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that axial tilt is the main cause of the seasons",
+            "explain why opposite hemispheres can have opposite seasons at the same time",
+            "reject simple Earth-Sun distance as the main seasonal explanation",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with Earth's daily rotation from F5_L2 and with the broader Earth-Sun system from F5_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending astronomy from daily cycles into yearly Sun-Earth geometry and more rigorous seasonal explanation.",
+        },
+      ];
+    case "F5_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Moon observations became far less confusing once phases were explained as a changing viewing-angle effect while eclipses were reserved for rarer straight-line shadow events.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F5_L4 explains Moon phases by keeping the always-sunlit half visible and then separating ordinary phases from the special alignments that produce eclipses.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that the Sun always lights half of the Moon",
+            "explain phases as changes in the visible fraction of that lit half",
+            "distinguish a normal phase from the special alignment needed for an eclipse",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the shared Earth-Moon-Sun system from F5_L1 and should be comfortable with viewpoint language from the earlier sky lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening astronomy reasoning by separating ordinary monthly patterns from rarer special events.",
+        },
+      ];
+    case "F5_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "The Solar System had to be organized into clearer families once astronomers realized that not every Sun-orbiting body is a planet and that host relationship and body type both matter in classification.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F5_L5 introduces the Solar System as a Sun-centered family containing several body types, classified by what they mainly orbit and by what kind of body they are.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish planets, moons, dwarf planets, asteroids, and comets using host and type together",
+            "explain why a moon is identified by mainly orbiting a larger world",
+            "avoid flattening every orbiting body into one generic space-object label",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the Earth-Moon-Sun hierarchy from F5_L1 and should be ready to compare orbit role with physical type.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners broadening from the local Earth-Moon-Sun system to the wider Solar System family and its classification rules.",
+        },
+      ];
+    case "F5_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Astronomy teaching improved once apparent daily sky motion, real orbital motion, and the severe scale compression of classroom models were kept separate instead of being read as one literal picture.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F5_L6 closes the sequence by connecting day, year, apparent motion, and model scale while warning learners not to trust small diagrams as literal distance maps.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "match one day to Earth's rotation and one year to Earth's orbit",
+            "explain apparent sky motion as a viewpoint-based effect",
+            "state why a useful model can preserve pattern while heavily compressing real distances",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the earlier F5 lessons, especially Earth's rotation, orbit, and the linked Earth-Moon-Sun system.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the astronomy sequence and preparing for mixed explanation questions that combine system structure, observed patterns, and model limitations.",
         },
       ];
     case "F1_L1":
