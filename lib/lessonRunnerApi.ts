@@ -21953,6 +21953,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson treats resonance as the strong-response condition that appears when driving frequency approaches the system's natural frequency.";
     case "A5_L6":
       return "This lesson closes the oscillations sequence by comparing damping styles through energy loss, settling behaviour, and application fit.";
+    case "A6_L1":
+      return "This lesson opens advanced thermal physics by separating temperature as an average particle-energy story from internal energy as a whole-sample store.";
+    case "A6_L2":
+      return "This lesson explains specific heat capacity as full heating bookkeeping, keeping mass, material, and temperature rise visible together.";
+    case "A6_L3":
+      return "This lesson separates temperature-rise stages from state-change stages so latent heat is not mistaken for zero energy transfer.";
+    case "A6_L4":
+      return "This lesson introduces the ideal-gas law as one coupled chamber-state relation linking pressure, volume, amount, and temperature.";
+    case "A6_L5":
+      return "This lesson explains gas-law graphs by naming the fixed quantity first and then matching graph shape to the correct physical condition.";
+    case "A6_L6":
+      return "This lesson closes the thermal sequence by linking gas pressure and temperature back to microscopic particle motion and collisions.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -22868,6 +22880,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the oscillations sequence and preparing for more rigorous explanation questions that compare ideal models with real system behaviour.",
+        },
+      ];
+    case "A6_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Thermal physics became much more precise once scientists separated temperature from total internal energy, because a hot sample is not automatically the one with the greater whole-store energy.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A6_L1 introduces internal energy and temperature by keeping average particle kinetic energy separate from the total microscopic energy store of the sample.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that temperature tracks average particle kinetic energy in the ideal-gas model",
+            "distinguish average-per-particle energy from total internal energy of the whole sample",
+            "explain why two samples at the same temperature can still have different total internal energies",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with energy as a measurable store, with kelvin temperature as a thermal scale, and with distinguishing average values from whole-sample totals.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning advanced thermal physics and needing a secure microscopic meaning before specific heat capacity and gas laws are introduced.",
+        },
+      ];
+    case "A6_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Heating became easier to compare quantitatively once physicists recognized that the required energy depends on how much substance there is, what it is made of, and how large the temperature rise must be.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A6_L2 explains specific heat capacity through full thermal bookkeeping, keeping mass, material, and temperature change together in every heating calculation.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use Q = m c Delta T for temperature-change stages",
+            "rearrange the relation to find any missing quantity in context",
+            "explain why dropping mass, material, or temperature rise makes the heating story incomplete",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with thermal energy language from A6_L1 and should be comfortable with algebraic substitution, rearrangement, and SI units.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending thermal reasoning from meaning into rigorous quantitative heating comparisons.",
+        },
+      ];
+    case "A6_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "State changes remained conceptually difficult until physicists emphasized that energy can still be entering a substance while the temperature stays constant, because that energy is changing particle arrangement rather than raising average kinetic energy.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A6_L3 explains latent heat by splitting thermal processes into temperature-rise stages and state-change plateaus before any formula is chosen.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify when latent-heat reasoning is needed instead of specific-heat-capacity reasoning",
+            "use Q = mL for a state-change stage and combine it correctly with temperature-change stages",
+            "explain why a temperature plateau can still involve substantial energy transfer",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with Q = m c Delta T from A6_L2 and should be comfortable dividing a longer process into physically different stages.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from straightforward heating problems into more rigorous mixed-stage thermal processes.",
+        },
+      ];
+    case "A6_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Gas behaviour became more coherent once pressure, volume, amount, and temperature were treated as one linked state description rather than as detached symbols to be memorized separately.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A6_L4 introduces the ideal-gas law as a single chamber-state relation and keeps SI-unit discipline visible throughout the calculation process.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use pV = nRT and rearrange it to find a missing state variable",
+            "treat pressure, volume, amount, and temperature as one coupled state description",
+            "explain why SI units are essential when substituting into the ideal-gas law",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with thermal quantities from A6_L1 to A6_L3, should be comfortable with mole language, and should be ready to work carefully with powers of ten and SI units.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning advanced gas-state calculations and preparing for the graphical and microscopic gas explanations that follow.",
+        },
+      ];
+    case "A6_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Gas-law graphs became much safer to interpret once physicists insisted that the fixed quantity be named first, because the same variables can trace very different graph shapes under different conditions.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A6_L5 teaches gas-law graph interpretation by tying every graph to the physical condition held fixed before reading the shape or choosing a law.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify the fixed quantity in a gas-law process before interpreting the graph",
+            "match Boyle, Charles, and pressure-law situations to the correct variable relation and graph form",
+            "explain why graph shape alone is not enough without the process condition",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the state-variable meaning of p, V, n, and T from A6_L4 and should be comfortable reading proportional and inverse graphical relationships.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending ideal-gas reasoning into graph interpretation and condition-aware comparison questions.",
+        },
+      ];
+    case "A6_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Kinetic theory transformed gas physics by explaining pressure and temperature from particle motion and wall collisions, turning gas laws from memorized relations into microscopic mechanisms.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A6_L6 closes the thermal sequence by linking gas pressure, temperature, density, and particle speed through collision-based kinetic-theory reasoning.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use a kinetic-theory relation such as p = 1/3 rho c_rms^2 in context",
+            "explain gas pressure in terms of particle collisions and momentum transfer at the walls",
+            "connect temperature rise to higher average kinetic energy and therefore to faster particle motion",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the average-versus-total distinction from A6_L1, with gas-state variables from A6_L4, and with graph-condition reasoning from A6_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating advanced thermal physics and preparing for rigorous questions that demand both microscopic explanation and mathematical control.",
         },
       ];
     case "F2_L1":
