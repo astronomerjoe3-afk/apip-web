@@ -21941,6 +21941,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson shows that constant-speed circular motion still needs inward acceleration because velocity direction changes continuously around the path.";
     case "A4_L6":
       return "This lesson closes the mechanics sequence by comparing materials through stress, strain, and Young modulus rather than force-only impressions.";
+    case "A5_L1":
+      return "This lesson opens oscillations by showing that repeated motion becomes physics only when a restoring tendency pulls the system back toward equilibrium.";
+    case "A5_L2":
+      return "This lesson narrows oscillation into simple harmonic motion by making proportional restoring acceleration the defining rule rather than repetition alone.";
+    case "A5_L3":
+      return "This lesson links displacement, velocity, and acceleration graphs as phase-related views of one oscillation rather than three separate signals.";
+    case "A5_L4":
+      return "This lesson explains SHM energy as a continuous swap between kinetic and potential stores while the total stays constant in the ideal undamped model.";
+    case "A5_L5":
+      return "This lesson treats resonance as the strong-response condition that appears when driving frequency approaches the system's natural frequency.";
+    case "A5_L6":
+      return "This lesson closes the oscillations sequence by comparing damping styles through energy loss, settling behaviour, and application fit.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -22640,6 +22652,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners finishing the advanced mechanics and materials sequence and preparing for structured elasticity and material-property questions.",
+        },
+      ];
+    case "A5_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Oscillations became a powerful physics model once scientists recognized that repeated motion needs more than mere repetition: the system must be pulled back toward an equilibrium position by a restoring effect.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A5_L1 introduces oscillation, equilibrium, amplitude, and restoring tendency so repeated motion is explained causally rather than described loosely.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define oscillation as repeated motion about equilibrium",
+            "identify the restoring effect as the cause of the return toward the center",
+            "distinguish amplitude from restoring force and from the full travel distance",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic force language, equilibrium as a balance position, and the idea of displacement from an agreed reference point.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the advanced oscillations sequence and needing a secure equilibrium-and-return model before SHM, resonance, and damping are introduced.",
+        },
+      ];
+    case "A5_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Simple harmonic motion became especially important because it isolates a special restoring rule: the farther the system is displaced, the larger the restoring acceleration, always directed back toward equilibrium.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A5_L2 defines SHM as the oscillation case where restoring acceleration is proportional to displacement and opposite in direction.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state the defining acceleration-displacement rule for SHM",
+            "explain why SHM is more specific than generic repeated motion",
+            "compare opposite displacements and justify the reversed acceleration direction",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with equilibrium, displacement, and restoring tendency from A5_L1, and should be comfortable treating acceleration as a vector quantity.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners tightening oscillation language into the more rigorous SHM model used throughout advanced wave and mechanics work.",
+        },
+      ];
+    case "A5_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Time-graph methods made oscillations easier to analyze because one motion could be represented as linked displacement, velocity, and acceleration traces with fixed phase relationships.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A5_L3 teaches learners to read SHM graphs as synchronized views of one oscillation and to extract period, frequency, and phase information from the traces.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "read period and frequency from sinusoidal SHM graphs",
+            "compare displacement, velocity, and acceleration traces using phase language",
+            "explain why the three graphs are linked representations of one motion",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the SHM condition from A5_L2 and should have basic confidence reading time graphs from earlier physics work.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending SHM from verbal rules into graphical and equation-linked interpretation.",
+        },
+      ];
+    case "A5_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Energy methods clarified oscillations by showing that the system does not mysteriously lose energy at equilibrium; instead, energy shifts between motion and stored elastic or gravitational form while the total can remain constant in an ideal model.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A5_L4 explains SHM as an energy-exchange cycle in which kinetic and potential energy trade roles while total energy stays constant in the undamped ideal case.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify where kinetic energy is greatest in an SHM cycle",
+            "identify where potential energy is greatest in an SHM cycle",
+            "explain why the total energy stays constant in the ideal undamped model",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with displacement in SHM from A5_L1 to A5_L3 and should already know the basic kinetic-energy and potential-energy ideas from earlier mechanics.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening SHM reasoning by connecting motion language with energy bookkeeping.",
+        },
+      ];
+    case "A5_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Resonance became scientifically and technologically important when driven systems showed that a small repeated force can produce a large response if its rhythm matches the system's own natural timing closely enough.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A5_L5 introduces forced oscillations and resonance by comparing natural frequency, driving frequency, damping, and response amplitude on one causal board.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish natural frequency from driving frequency",
+            "explain resonance as the strong-response condition near frequency match",
+            "describe how damping changes the sharpness and size of the resonance peak",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with basic oscillation and SHM language from A5_L1 to A5_L4 and should be comfortable comparing how one changing variable affects response size.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from isolated oscillators to driven systems and preparing for application-style questions about beneficial and dangerous resonance.",
+        },
+      ];
+    case "A5_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Damping became an essential design idea because real oscillators lose energy to surroundings, and engineers learned that the best response depends on whether the job needs quick settling, minimal overshoot, or sustained oscillation.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A5_L6 closes the sequence by comparing underdamped, critically damped, and overdamped responses as different energy-loss styles with different practical uses.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe damping as energy loss from an oscillating system",
+            "compare underdamped, critically damped, and overdamped settling behaviour",
+            "justify the best damping choice for a given application goal",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with oscillation, SHM, energy exchange, and resonance language from the earlier A5 lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the oscillations sequence and preparing for more rigorous explanation questions that compare ideal models with real system behaviour.",
         },
       ];
     case "F1_L1":
