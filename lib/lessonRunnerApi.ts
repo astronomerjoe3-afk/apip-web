@@ -22169,6 +22169,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains radioisotope applications by matching half-life and emission type to the task instead of treating isotope choice as arbitrary.";
     case "M12_L6":
       return "This lesson closes the nuclear-technology sequence by weighing benefits, hazards, shielding, and waste management together.";
+    case "M13_L1":
+      return "This lesson opens the Earth-Moon-Sun sequence by treating them as one linked orbital system rather than as isolated sky objects.";
+    case "M13_L2":
+      return "This lesson explains orbit by keeping inward gravitational pull and sideways motion together instead of treating orbital motion as force-free drifting.";
+    case "M13_L3":
+      return "This lesson explains day and night through Earth's rotation so the daily light cycle is not confused with yearly orbital motion.";
+    case "M13_L4":
+      return "This lesson explains seasons as a tilt-and-sunlight-angle story rather than as a simple change in Earth-Sun distance.";
+    case "M13_L5":
+      return "This lesson keeps Moon phases and eclipses separate by treating phases as viewing geometry and eclipses as special alignment events.";
+    case "M13_L6":
+      return "This lesson closes the Solar System sequence by linking orbit size, orbital period, and body type while keeping scale sketches from being taken literally.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -26108,6 +26120,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the M12 nuclear-physics unit and preparing for more evaluative IGCSE-style questions on benefits, risks, and control measures.",
+        },
+      ];
+    case "M13_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Solar System explanations became much clearer once Earth, Moon, and Sun were treated as one linked gravitational system, because many everyday observations only make sense when the main orbital relationships are kept together.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M13_L1 opens the Earth-and-Solar-System module by showing how Earth, Moon, and Sun fit into one organized orbital model rather than three disconnected stories.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe Earth as orbiting the Sun while the Moon mainly orbits Earth",
+            "explain how gravity organizes the main routes in the system",
+            "use one linked model to account for several sky observations together",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with the basic idea of gravity from earlier modules and should be ready to connect several familiar sky objects into one system model.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the M13 Solar System sequence and needing a secure Earth-Moon-Sun framework before rotation, seasons, and lunar events are explained.",
+        },
+      ];
+    case "M13_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Orbit became much easier to explain once scientists kept inward gravitational pull and sideways motion in the same picture, because an orbit is neither a straight-line drift nor a simple straight fall inward.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M13_L2 explains orbital motion by combining inward gravitational pull with sideways motion and by comparing smaller and larger orbital paths.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why an orbit needs gravity and sideways motion together",
+            "describe the path as curving because gravity continually changes the direction of motion",
+            "compare orbital size with orbital period in a physically meaningful way",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the linked-system picture from M13_L1 and should be ready to reason about how forces shape paths over time.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from naming Solar System members into explaining why orbital paths exist and why different routes take different times.",
+        },
+      ];
+    case "M13_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Day-and-night explanations became much clearer once Earth's daily spin was separated from its yearly orbit, because the rapid alternation of daylight and darkness is a rotation story rather than an Earth-Sun distance story.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M13_L3 explains day and night by following one location on a rotating Earth as it passes from darkness into sunlight and back again.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe day and night as a result of Earth's rotation",
+            "explain why one half of Earth is lit while the other half is dark at any moment",
+            "relate one full rotation to one day rather than to one orbit around the Sun",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the Earth-Moon-Sun system picture from M13_L1 and should be ready to focus on Earth's own motion separately from orbital motion.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners building a clean explanation of daily sky changes before tackling the slower yearly changes behind the seasons.",
+        },
+      ];
+    case "M13_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Season explanations improved once axial tilt and sunlight angle replaced the simple distance myth, because opposite hemispheres experience opposite seasons even though they are at nearly the same Earth-Sun distance at the same time.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M13_L4 explains seasons by keeping Earth's tilted axis fixed in space while comparing orbit position and sunlight angle in opposite hemispheres.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe how Earth's axis remains tilted in the same direction as Earth orbits the Sun",
+            "explain why opposite hemispheres receive more direct sunlight at different times of year",
+            "reject a distance-only explanation for the seasons using hemisphere comparison",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with Earth's rotation from M13_L3 and should be comfortable comparing different positions in Earth's orbit around the Sun.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from daily Earth motion into yearly changes and needing a strong season model before Moon phases and eclipses are studied.",
+        },
+      ];
+    case "M13_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Moon phases and eclipses became much less confusing once the always-lit half of the Moon and the Earth-based viewing angle were kept separate from the rarer shadow alignments that create eclipses.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M13_L5 explains Moon phases through changing viewing geometry and then contrasts that ordinary monthly pattern with the special alignments needed for eclipses.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why half of the Moon is lit by the Sun all the time",
+            "describe lunar phases as changes in the visible fraction caused by viewing angle",
+            "distinguish ordinary phase changes from eclipse events that need special alignment",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the Earth-Moon-Sun system from M13_L1 and with the orbit and sunlight geometry ideas built through M13_L2 to M13_L4.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening Solar System geometry and preparing to compare several related sky phenomena without collapsing them into one cause.",
+        },
+      ];
+    case "M13_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Solar System structure became easier to teach once orbit size, orbital period, and family role were compared carefully, because classroom sketches compress distances so strongly that scale and structure can easily be misread.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M13_L6 closes the module by comparing inner and outer routes, sorting planets, moons, and smaller bodies by role, and keeping real scale separate from sketch scale.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe the Solar System as a Sun-centered family containing planets, moons, and smaller bodies",
+            "link larger orbital routes to longer orbital periods in a broad comparative way",
+            "explain why classroom diagrams compress the true distances and cannot be read as literal scale drawings",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M13 sequence, especially the linked-system, orbit, and sunlight-geometry ideas developed in the earlier lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the M13 Earth-and-Solar-System unit and preparing for more demanding IGCSE comparison and explanation questions about Solar System structure.",
         },
       ];
     case "F2_L1":
