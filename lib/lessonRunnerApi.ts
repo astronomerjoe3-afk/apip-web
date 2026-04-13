@@ -22049,6 +22049,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains stability through center of mass and base of support so heaviness alone is not mistaken for balance.";
     case "M2_L6":
       return "This lesson closes the force sequence by resolving angled forces into components and rebuilding resultants axis by axis.";
+    case "M3_L1":
+      return "This lesson opens advanced energy reasoning by treating energy as a ledger of stores, transfers, and leaks rather than as a loose slogan.";
+    case "M3_L2":
+      return "This lesson explains gravitational potential energy as a position store that depends on mass, field strength, and height together.";
+    case "M3_L3":
+      return "This lesson sharpens kinetic-energy reasoning by making the squared-speed effect visible instead of hiding it inside the formula.";
+    case "M3_L4":
+      return "This lesson treats work as an energy transfer so force-distance stories and store-change stories stay connected but distinct.";
+    case "M3_L5":
+      return "This lesson separates power from efficiency so transfer rate and useful fraction are not blended together.";
+    case "M3_L6":
+      return "This lesson closes the energy sequence by planning multi-stage store, leak, and target problems in the right physical order.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -24308,6 +24320,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners finishing the M2 force sequence and preparing for more advanced vector-based mechanics problems.",
+        },
+      ];
+    case "M3_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Energy ideas became much more useful once physicists began tracking where energy is stored, how it is transferred, and where apparently lost energy actually spreads into less useful forms.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M3_L1 opens the module by introducing an energy ledger in which stores, hand-offs, and leak pathways are all kept visible before equations are applied.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "distinguish between energy stores and energy transfers",
+            "balance a simple energy ledger involving useful gain and wasted output",
+            "explain why energy is accounted for rather than disappearing",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic force and motion language and with the idea that physical quantities must be tracked consistently.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning advanced energy reasoning and needing a strong conceptual ledger before store-specific formulas appear.",
+        },
+      ];
+    case "M3_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Gravitational potential energy became clearer when height was treated not as the whole story on its own, but as one factor in an energy store set by mass and gravitational field strength as well.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M3_L2 explains gravitational potential energy as a height-dependent store and keeps the full mgh relationship visible in every comparison.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate gravitational potential energy using E_p = mgh",
+            "explain why a raised object can store energy even while stationary",
+            "compare the effects of changing mass, height, or gravitational field strength",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the store-transfer ledger from M3_L1 and with mass, weight, and gravitational field language from earlier mechanics.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending the general energy ledger into position-dependent energy stores.",
+        },
+      ];
+    case "M3_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Kinetic energy became especially important once physicists recognized that motion energy does not scale linearly with speed; the squared-speed pattern is what makes fast motion so energetically significant.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M3_L3 introduces kinetic energy as the energy of motion and emphasizes the much stronger effect of speed compared with mass in many comparisons.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate kinetic energy using E_k = 1/2 mv^2",
+            "explain why doubling speed quadruples kinetic energy",
+            "compare how mass and speed affect motion energy differently",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the store-transfer framework from M3_L1 and with algebraic substitution from earlier quantitative lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners building stronger proportional reasoning about moving systems before mixed energy calculations.",
+        },
+      ];
+    case "M3_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "The concept of work became stronger when physicists treated it as an energy transfer linked to force and displacement, rather than as a vague statement about effort or difficulty.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M3_L4 connects work to energy transfer and shows when force-times-distance is the right entry point and when direct store change is the cleaner route.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use W = Fd in simple aligned force-displacement cases",
+            "connect work done to energy transferred or store change",
+            "explain why force without displacement does not guarantee work in the simple model",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the idea of energy stores from M3_L1 and should be comfortable with force and distance quantities from earlier mechanics.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from named energy stores into explicit transfer mechanisms and calculation routes.",
+        },
+      ];
+    case "M3_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Machine analysis became much more informative once rate and usefulness were treated separately, because a device can transfer energy quickly without being efficient, or efficiently without being especially powerful.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M3_L5 compares power and efficiency so learners can keep total transfer rate separate from the useful fraction of the input.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate power from energy transfer and time",
+            "calculate efficiency from useful output divided by total input",
+            "explain how a machine can be powerful but inefficient, or efficient but not very powerful",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with work and store-change language from M3_L4 and with percentage reasoning from earlier mathematics and physics study.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners comparing machine performance in a more rigorous way before tackling multi-stage missions.",
+        },
+      ];
+    case "M3_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Real energy problems often involve several linked stages, so physicists and engineers learned to plan the chain of stores, losses, targets, and equations rather than treating a long problem as one blind substitution exercise.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M3_L6 closes the module by combining stores, efficiencies, leaks, and targets into multi-step energy missions where equation order is part of the reasoning.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "plan a multi-stage energy problem before calculating",
+            "identify which quantity must be found first to unlock later steps",
+            "check a final useful output against a target or threshold and justify success or failure",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M3 sequence, especially store language, work, power, efficiency, and the meaning of useful output versus wasted transfer.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the advanced energy module and preparing for longer, more structured IGCSE-style calculation chains.",
         },
       ];
     case "F2_L1":
