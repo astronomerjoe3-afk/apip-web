@@ -22061,6 +22061,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson separates power from efficiency so transfer rate and useful fraction are not blended together.";
     case "M3_L6":
       return "This lesson closes the energy sequence by planning multi-stage store, leak, and target problems in the right physical order.";
+    case "M4_L1":
+      return "This lesson opens advanced pressure reasoning by showing that pressure depends on how force is spread across area, not on force alone.";
+    case "M4_L2":
+      return "This lesson turns pressure into a design tool by working backward from safe limits to the required contact area or allowable force.";
+    case "M4_L3":
+      return "This lesson explains liquid pressure as a depth-load story that depends on density, depth, and gravitational field strength together.";
+    case "M4_L4":
+      return "This lesson defeats the container-shape misconception by showing that pressure at one depth in the same liquid depends on location, not vessel outline.";
+    case "M4_L5":
+      return "This lesson separates pressure at a point from the force on a chosen surface patch so scalar pressure and normal force do not get blended together.";
+    case "M4_L6":
+      return "This lesson closes the pressure sequence by combining atmospheric pressure with liquid pressure in one total-pressure story.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -24488,6 +24500,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the advanced energy module and preparing for longer, more structured IGCSE-style calculation chains.",
+        },
+      ];
+    case "M4_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Pressure became a much more useful physical idea once engineers and physicists stopped judging surfaces by force alone and instead asked how concentrated that force was over contact area.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M4_L1 introduces pressure in solids as force per unit area and shows why the same push can have very different effects when spread over different footprints.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define pressure as force divided by area",
+            "use pascals and N/m^2 correctly as equivalent pressure units",
+            "explain why reducing contact area raises pressure even if the force stays the same",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with force language from earlier mechanics and with area units from measurement work.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the pressure module and needing a strong solids-pressure model before fluid cases appear.",
+        },
+      ];
+    case "M4_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Pressure relationships became especially valuable in engineering once they were used not just to analyze existing systems but to design safe footprints, supports, and contact surfaces from a known limit.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M4_L2 treats pressure as a design constraint by rearranging the relationship between force, area, and pressure to find safe operating conditions.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "rearrange the pressure equation to make area or force the subject",
+            "calculate the minimum area needed to stay under a pressure limit",
+            "explain why a safe design limit is still a pressure argument rather than a geometry-only answer",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with pressure in solids from M4_L1 and with simple algebraic rearrangement.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending pressure from direct calculation into practical design and safety reasoning.",
+        },
+      ];
+    case "M4_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Hydrostatic pressure became clearer once liquids were treated as layer stacks pressing downward, allowing depth, density, and gravitational field strength to be linked in one consistent model.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M4_L3 introduces liquid pressure in a resting fluid and explains why deeper points or denser liquids produce larger pressure values.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use p = ρgh for pressure in a resting liquid",
+            "explain why liquid pressure increases with depth",
+            "compare the roles of density and gravitational field strength in hydrostatic pressure",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with pressure as force per area from M4_L1 and with density and gravitational field language from earlier modules.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from solid-contact pressure into pressure in fluids and preparing for hydrostatic reasoning.",
+        },
+      ];
+    case "M4_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Hydrostatic reasoning became more reliable when physicists separated pressure at a point from the overall shape of the container, correcting the common intuition that wider or narrower vessels must change the local pressure at the same depth.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M4_L4 uses equal-depth comparisons to show that pressure in the same resting liquid depends on depth and liquid, not on vessel shape alone.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that points at the same depth in the same liquid have the same pressure",
+            "reject container-shape explanations when depth and liquid are unchanged",
+            "identify the conditions that break same-pressure comparisons",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the hydrostatic factors from M4_L3, especially the roles of depth and density.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners sharpening fluid-pressure reasoning and overcoming one of the most common hydrostatics misconceptions.",
+        },
+      ];
+    case "M4_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Fluid mechanics became more precise when pressure was treated as a scalar property of the location while the force produced by that pressure was recognized as acting perpendicular to any chosen surface.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M4_L5 separates pressure at a point from force on a patch, showing why the same pressure can give different total forces on different areas and why the force direction follows the surface normal.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain pressure as a scalar quantity at a location in a fluid",
+            "use F = pA to relate pressure to force on a chosen surface patch",
+            "describe the force due to pressure as acting perpendicular to the surface",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with hydrostatic pressure from M4_L3 and with same-depth reasoning from M4_L4.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from pressure values alone to surface-force interpretation in fluids.",
+        },
+      ];
+    case "M4_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Atmospheric pressure and liquid pressure became easier to unify once air was treated as another fluid layer, allowing open-surface problems to be read as one combined pressure account rather than two disconnected topics.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M4_L6 closes the module by combining atmospheric pressure with hydrostatic pressure and by linking altitude, open surfaces, and total pressure in one story.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe atmospheric pressure as due to the weight of the air above",
+            "explain why atmospheric pressure decreases with altitude",
+            "calculate total pressure below an open liquid surface using p_total = p_atm + ρgh",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with hydrostatic pressure from M4_L3 and with pressure at a point and force on a patch from M4_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the pressure module and preparing for fuller fluid-pressure comparisons and calculations.",
         },
       ];
     case "F2_L1":
