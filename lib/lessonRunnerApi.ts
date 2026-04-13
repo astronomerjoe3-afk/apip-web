@@ -22085,6 +22085,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains internal energy as the total kinetic and potential energy of all particles, not just the temperature reading.";
     case "M5_L6":
       return "This lesson closes the thermal-particle sequence by tracking where added energy goes during a state change before deciding what must change visibly.";
+    case "M6_L1":
+      return "This lesson opens thermal-transfer reasoning by separating current temperature from energy transferred so heat is not mistaken for a stored substance.";
+    case "M6_L2":
+      return "This lesson turns heating into a full calculation story by keeping mass, specific heat capacity, and temperature rise visible together.";
+    case "M6_L3":
+      return "This lesson explains latent heat by showing that energy transfer can continue through a state change even while temperature stays constant.";
+    case "M6_L4":
+      return "This lesson explains conduction as energy transfer through an unbroken contact path rather than as bulk motion of the material.";
+    case "M6_L5":
+      return "This lesson sharpens convection reasoning by following the full density-driven fluid loop instead of stopping at the slogan that heat rises.";
+    case "M6_L6":
+      return "This lesson closes the thermal-transfer sequence by combining radiation, surface effects, and stage-by-stage thermal bookkeeping in one story.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -24848,6 +24860,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the thermal particle model and preparing for more structured state-change explanations and calculations.",
+        },
+      ];
+    case "M6_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Thermal physics became much clearer once scientists separated the temperature of an object from the energy transferred into or out of it, because everyday language often treats heat as if it were a stored material inside the object.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M6_L1 introduces the thermal-transfer module by distinguishing temperature from heat and by showing why the same energy transfer can produce different temperature changes in different situations.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain temperature as a current thermal reading rather than as the same thing as heat",
+            "describe heat as transferred energy moving into or out of a system",
+            "justify why equal energy transfers can still produce different temperature rises",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with particle ideas about internal energy from M5 and with basic energy-transfer language from earlier modules.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning thermal-transfer physics and needing a secure distinction between temperature readings and energy transfer before formulas are introduced.",
+        },
+      ];
+    case "M6_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Heating calculations became more reliable once physicists recognised that the energy needed to warm a substance depends not only on the size of the temperature rise, but also on the mass of the sample and the material itself.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M6_L2 builds the specific-heat-capacity rule by keeping mass, material cost, and temperature rise visible together in one heating bill.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define specific heat capacity as energy needed per kilogram per degree",
+            "calculate heating energy using Q = mcΔT",
+            "rearrange the same relation to predict a temperature rise or compare materials fairly",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the distinction between heat and temperature from M6_L1 and should be comfortable with unit-based substitution into a simple physics formula.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from qualitative thermal ideas into standard calculation work on heating and material comparison.",
+        },
+      ];
+    case "M6_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "State-change theory improved once learners stopped assuming that constant temperature meant no further heating, because melting and boiling require energy even while the thermometer reading pauses.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M6_L3 introduces latent heat by treating a state change as a separate energy-payment stage where transfer continues even though temperature stays constant.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why temperature can stay constant during melting or boiling while energy transfer continues",
+            "define latent heat as the energy involved in a change of state at constant temperature",
+            "use mass and latent-heat ideas to compare different state-change energy payments",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with M6_L1 and M6_L2, especially the idea that transferred energy must be tracked separately from the temperature reading.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending thermal calculations into state changes and preparing for more careful stage-by-stage heating stories.",
+        },
+      ];
+    case "M6_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Conduction became easier to teach once energy transfer by direct contact was separated from convection and radiation, because solids can pass energy along even while the material itself remains in place.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M6_L4 explains conduction through a continuous contact path and shows why good and poor conductors transfer energy at different rates.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe conduction as energy transfer through direct contact in matter",
+            "explain why metals are especially good conductors",
+            "compare situations by tracing whether an unbroken conduction path exists and how effective the material is",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the thermal-transfer language from M6_L1 to M6_L3 and with basic particle ideas about collisions and energy passing between neighbors.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning route-of-transfer reasoning and needing conduction to stay distinct from fluid flow and radiation.",
+        },
+      ];
+    case "M6_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Convection became much clearer once scientists linked upward and downward fluid motion to density changes, rather than relying on the shortcut phrase that heat rises.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M6_L5 teaches convection as a complete moving-fluid loop in which warming lowers density, rising creates circulation, and cooler fluid returns to close the path.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe how heating can make a fluid less dense so it rises",
+            "explain why cooler fluid must move in or sink to complete the convection current",
+            "distinguish convection from conduction by checking whether the material itself is flowing",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with conduction from M6_L4 and should be comfortable with the idea that expansion can change density in gases or liquids.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening their transfer-route reasoning and preparing to compare all three heat-transfer mechanisms accurately.",
+        },
+      ];
+    case "M6_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Thermal-transfer explanations became more powerful once radiation was recognised as the route that can cross empty space and once complex heating problems were broken into separate stages instead of forced into one step.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M6_L6 closes the module by teaching radiation, surface effects, and multi-stage thermal totals so learners can identify the route first and then build the calculation in the right order.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why radiation can transfer energy across a vacuum while conduction and convection cannot",
+            "compare dark dull and shiny surfaces in terms of absorption and emission",
+            "separate a complex thermal problem into warming and state-change stages before totaling the energy",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the earlier M6 lessons, especially the route-of-transfer distinctions from M6_L4 and M6_L5 and the stage-based energy thinking from M6_L2 and M6_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the thermal-transfer unit and preparing for more integrated IGCSE-style reasoning and calculation questions.",
         },
       ];
     case "F2_L1":
