@@ -21977,6 +21977,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson links impulse to momentum change and uses force-time thinking to show why longer stopping times can reduce force.";
     case "F3_L6":
       return "This lesson closes the sequence by combining momentum, kinetic energy, and stopping time into a full braking-safety model.";
+    case "F4_L1":
+      return "This lesson opens electricity by defining current as charge flow rate in a complete loop and by separating current from the idea of components using it up.";
+    case "F4_L2":
+      return "This lesson explains potential difference as energy transferred per charge so voltage is not confused with total charge or total energy.";
+    case "F4_L3":
+      return "This lesson connects voltage, current, resistance, and I-V graph behaviour so Ohm's law stays tied to the circuit story.";
+    case "F4_L4":
+      return "This lesson explains series circuits through one shared route where current is common and the supply voltage is divided across components.";
+    case "F4_L5":
+      return "This lesson explains parallel circuits through several routes between the same two points, keeping shared voltage and split current distinct.";
+    case "F4_L6":
+      return "This lesson closes the electricity sequence by linking power, total energy transfer, and protective devices into one circuit-safety model.";
     case "F1_L1":
       return "This lesson opens the measurement module by showing why physics reports need an agreed quantity, a trustworthy number, and the correct unit all at once.";
     case "F1_L2":
@@ -23180,6 +23192,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the F3 sequence and preparing for multi-clue mechanics and safety questions that require explanation as well as calculation.",
+        },
+      ];
+    case "F4_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Electricity became easier to reason about once physicists described current as a circulating charge flow in a complete loop, rather than as something that gets used up as it travels around a circuit.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F4_L1 introduces charge and current by treating current as charge passing a point each second and by keeping the closed-loop requirement visible throughout the lesson.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that current is charge flow rate and use I = Q / t",
+            "explain why the same current passes every point in one complete single-route loop",
+            "explain why a broken loop stops current everywhere in that route",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with ratio reasoning from F1 and F2 and should be comfortable with time units and simple flow-rate ideas.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning circuit physics and needing a secure current model before voltage, resistance, and circuit combinations are introduced.",
+        },
+      ];
+    case "F4_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Potential difference became much clearer once electrical sources and components were described in terms of energy transferred to or from each coulomb of charge, not just in terms of 'stronger' or 'weaker' batteries.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F4_L2 introduces potential difference as energy transferred per charge and keeps that meaning separate from total energy transferred and from the amount of charge moved.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that potential difference is energy transferred per unit charge",
+            "use V = E / Q and E = VQ in context",
+            "explain what a voltage value means physically for each coulomb passing through a source or component",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with charge and current from F4_L1 and should be comfortable interpreting joules as transferred energy.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending the basic current model into energy-transfer reasoning before formal resistance and circuit-combination work.",
+        },
+      ];
+    case "F4_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Resistance became a powerful circuit idea when voltage push, current response, and graph evidence were treated as one linked story rather than as disconnected formulas and plots.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F4_L3 explains resistance through opposition to current, introduces Ohm's law for ohmic components, and connects the circuit picture to straight-line I-V graph behaviour.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use V = IR, I = V / R, and R = V / I for an ohmic resistor",
+            "explain resistance as opposition to current flow",
+            "interpret a steeper straight I-V graph as lower resistance for an ohmic component",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current from F4_L1 and potential difference from F4_L2 and should be comfortable comparing proportional changes.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners building the formal current-voltage-resistance triangle before applying it to whole circuits.",
+        },
+      ];
+    case "F4_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Series circuits became easier to understand once circuit analysis emphasized the single-route structure: the same charge stream passes every component while the source energy transfer is shared across the route.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F4_L4 introduces series circuits by keeping one route, common current, added resistance, and shared potential difference visible together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that a series circuit has one complete route and the same current through every component",
+            "calculate total resistance for resistors in series",
+            "explain why the supply voltage is shared between series components",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current, potential difference, and resistance from F4_L1 to F4_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from single components to complete circuits and needing a strong one-route model before tackling branch circuits.",
+        },
+      ];
+    case "F4_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Parallel circuits became much easier to reason about once physicists described them as multiple routes across the same two points, which keeps the branch voltage common while allowing current to divide and recombine.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F4_L5 introduces parallel circuits by showing how branch voltage stays the same while current splits according to branch resistance and rejoins at the supply.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state that parallel branches share the same potential difference across the same two points",
+            "explain why total current is the sum of the branch currents",
+            "explain why adding a branch can increase the total current from the source",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current, voltage, and resistance from the earlier F4 lessons and should understand the series-circuit contrast from F4_L4.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending circuit reasoning into branch networks and preparing for full power and safety analysis.",
+        },
+      ];
+    case "F4_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Electrical safety improved once engineers connected three ideas clearly: power tells the rate of energy transfer, total energy depends on running time, and protective devices must respond when current rises above safe limits.",
+        },
+        {
+          heading: "Lesson description",
+          body: "F4_L6 closes the electricity sequence by combining power, total electrical energy transfer, and fuse action into one practical circuit-safety story.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate electrical power using P = VI and related forms",
+            "calculate total electrical energy transferred over a time interval",
+            "explain how a fuse protects a circuit by breaking the path when current becomes unsafe",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with current, voltage, resistance, and circuit structure from F4_L1 to F4_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the F4 circuit sequence and preparing for multi-step electrical calculation and safety questions.",
         },
       ];
     case "F1_L1":
