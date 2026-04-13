@@ -1233,10 +1233,10 @@ const M4_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
 const A2_FORMULA_OVERRIDES: Record<string, FormulaFallbackEntry[]> = {
   A2_L1: [
     {
-      standardFormula: "ΔE = hf = hc / λ",
-      meaning: "An atomic transition occurs only when the incoming or outgoing packet matches the exact energy gap.",
-      conditions: "Use for discrete atomic level transitions and packet-gap matching.",
-      unitsText: "J or eV",
+      standardFormula: "ΔE = hf",
+      meaning: "The photon energy must match the gap between two allowed atomic energy levels.",
+      conditions: "Use when relating photon energy to discrete atomic transitions.",
+      unitsText: "J, Hz",
     },
   ],
   A2_L2: [

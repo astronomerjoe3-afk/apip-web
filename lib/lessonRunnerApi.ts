@@ -18264,7 +18264,7 @@ function formulaConditionInstruction(value: string, subject = "Use it"): string 
   const condition = trimmedFormulaCondition(value);
   if (!condition) return "";
 
-  const explicitLead = /^(when|for|to|as|in|during|with|after)\s+(.+)$/i.exec(condition);
+  const explicitLead = /^(?:use\s+)?(when|for|to|as|in|during|with|after)\s+(.+)$/i.exec(condition);
   if (explicitLead) {
     const [, lead, rest] = explicitLead;
     return ensureSentence(`${subject} ${lead.toLowerCase()} ${lowerFirst(rest.trim())}`);
