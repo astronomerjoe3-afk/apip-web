@@ -22037,6 +22037,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson strengthens graph interpretation by showing that the same slope shape can mean different physics depending on the axes.";
     case "M1_L6":
       return "This lesson closes the kinematics sequence by treating area under a speed-time graph as accumulated distance rather than as decoration under the line.";
+    case "M2_L1":
+      return "This lesson opens advanced force reasoning by showing that motion changes are controlled by the resultant force, not by one isolated push or by motion alone.";
+    case "M2_L2":
+      return "This lesson explains Newton's laws together by separating zero-resultant motion, mass-dependent acceleration, and third-law interaction pairs.";
+    case "M2_L3":
+      return "This lesson treats momentum as a system ledger so collision questions are solved by conserving the total rather than by guessing from force language.";
+    case "M2_L4":
+      return "This lesson sharpens turning-effect reasoning by tying torque to both force size and perpendicular distance from the pivot.";
+    case "M2_L5":
+      return "This lesson explains stability through center of mass and base of support so heaviness alone is not mistaken for balance.";
+    case "M2_L6":
+      return "This lesson closes the force sequence by resolving angled forces into components and rebuilding resultants axis by axis.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -24128,6 +24140,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners completing the kinematics graph sequence before moving into later mechanics topics that build on it.",
+        },
+      ];
+    case "M2_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Newton's first law became clearer when physicists separated an object's current motion from the force needed to change that motion, correcting the older idea that steady movement must always need a steady push.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M2_L1 introduces resultant force as the single force story that determines acceleration and compares balanced-force cases with genuinely force-free motion.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "combine several forces into one resultant force",
+            "explain why zero resultant force means zero acceleration rather than automatic rest",
+            "distinguish clearly between balanced forces and no forces",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with velocity, acceleration, and the graph-based motion reasoning from M1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from kinematics into force-based explanations of motion change.",
+        },
+      ];
+    case "M2_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Newton's laws gave mechanics a durable framework by linking resultant force to acceleration, keeping inertia visible through mass, and separating interaction pairs from one-object motion stories.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M2_L2 develops Newton's laws by comparing how the same resultant force affects different masses and by showing why equal and opposite interaction forces do not imply equal accelerations.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use F = ma and a = F/m correctly for one-object motion problems",
+            "explain why larger mass gives smaller acceleration for the same resultant force",
+            "identify Newton's third-law pairs as equal and opposite forces on different objects",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with resultant force from M2_L1 and with signed acceleration from M1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening force reasoning so they can move confidently between laws, equations, and interaction stories.",
+        },
+      ];
+    case "M2_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Momentum became essential in collision analysis because force during impact may be large and complicated, while the total momentum of a closed system still obeys a much cleaner conservation rule.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M2_L3 introduces momentum as mass times velocity and uses closed-system collisions to show why total momentum, not individual speed, is the quantity to conserve.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate momentum using mass and velocity with sign or direction kept explicit",
+            "identify the system whose total momentum is being conserved",
+            "solve simple sticking-collision problems using momentum conservation",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with mass, velocity, and Newton's laws from M2_L1 and M2_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending force-and-motion reasoning into collisions and conserved system quantities.",
+        },
+      ];
+    case "M2_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Rotational mechanics became sharper once physicists recognized that where a force acts matters as much as how large it is, leading to torque as the proper measure of turning effect.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M2_L4 explains torque, the moment of a force, by keeping force size and perpendicular distance from the pivot on the same turning-effect board.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "calculate torque from force multiplied by perpendicular distance",
+            "explain why a force through the pivot gives zero turning effect",
+            "compare different force-distance pairs that produce the same torque",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with force language from M2_L1 and M2_L2 and with basic multiplication of physical quantities.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending translational force ideas into rotational mechanics and lever reasoning.",
+        },
+      ];
+    case "M2_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Engineers and physicists improved stability analysis by treating balance as a geometric center-of-mass problem rather than a simple question of how heavy something is.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M2_L5 explains stability through center of mass, base of support, and tipping margin so weight distribution stays visible throughout the judgment.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe stability using center of mass and base of support",
+            "predict how widening the base changes tipping margin",
+            "explain why raising the load usually makes an object easier to tip",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with weight and turning ideas from earlier mechanics and especially with M2_L4.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners applying force and geometry ideas to balance, support, and real-world stability questions.",
+        },
+      ];
+    case "M2_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Vector methods became indispensable in mechanics once physicists had to combine angled forces reliably, because perpendicular effects cannot be handled by plain arithmetic alone.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M2_L6 introduces vector components as a structured way to resolve angled forces, combine totals on each axis, and rebuild the final resultant with correct magnitude and direction.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "resolve a force into horizontal and vertical components",
+            "combine same-axis components with correct signs and directions",
+            "rebuild the resultant magnitude and direction from the net components",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with force resultants from M2_L1 and with direction-aware quantities from F1 and M1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners finishing the M2 force sequence and preparing for more advanced vector-based mechanics problems.",
         },
       ];
     case "F2_L1":
