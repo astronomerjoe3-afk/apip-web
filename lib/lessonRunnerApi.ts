@@ -22073,6 +22073,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson separates pressure at a point from the force on a chosen surface patch so scalar pressure and normal force do not get blended together.";
     case "M4_L6":
       return "This lesson closes the pressure sequence by combining atmospheric pressure with liquid pressure in one total-pressure story.";
+    case "M5_L1":
+      return "This lesson opens advanced particle reasoning by separating single-particle features from whole-material properties in the particle model.";
+    case "M5_L2":
+      return "This lesson explains solids and liquids by keeping particle spacing, motion, and neighbor mobility visible together.";
+    case "M5_L3":
+      return "This lesson develops gas reasoning and Brownian motion by using visible jitter as evidence for unseen particle collisions.";
+    case "M5_L4":
+      return "This lesson separates temperature from total internal energy by treating temperature as an average-particle measure rather than a whole-system total.";
+    case "M5_L5":
+      return "This lesson explains internal energy as the total kinetic and potential energy of all particles, not just the temperature reading.";
+    case "M5_L6":
+      return "This lesson closes the thermal-particle sequence by tracking where added energy goes during a state change before deciding what must change visibly.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -24668,6 +24680,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the pressure module and preparing for fuller fluid-pressure comparisons and calculations.",
+        },
+      ];
+    case "M5_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "The particle model became more powerful once physicists stopped assigning bulk properties directly to one particle and instead treated many observed properties as patterns belonging to the whole crowd of particles.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M5_L1 introduces the basic particle-model discipline by showing that heating changes motion and spacing patterns, not the actual size of the particles.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "separate single-particle features from whole-material properties",
+            "explain why changing temperature does not mean particles themselves expand",
+            "describe state using particle motion, spacing, and attraction together",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with basic thermal ideas such as heating and cooling and with using simple models to explain observations.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the particle-model module and needing a careful foundation before solid, liquid, and gas comparisons appear.",
+        },
+      ];
+    case "M5_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Matter-state explanations became clearer once physicists compared how particles are arranged and how easily neighbors can move, instead of describing solids and liquids only by what they look like macroscopically.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M5_L2 compares solids and liquids by holding close packing visible in both states while distinguishing fixed positions from mobile neighbor changes.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe solid particles as closely packed and vibrating about fixed positions",
+            "describe liquid particles as closely packed but able to move around one another",
+            "explain why liquid flow does not require gas-like large gaps",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the particle-model discipline from M5_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending the particle model into a rigorous comparison of solids and liquids.",
+        },
+      ];
+    case "M5_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "The reality of unseen particles gained strong support from Brownian motion, where the random jostling of visible particles was explained as the result of countless collisions from surrounding invisible molecules.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M5_L3 develops the gas model and uses Brownian motion as visible evidence that gas particles are always moving and colliding.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe gas particles as far apart and moving freely between collisions",
+            "explain Brownian motion as random visible motion caused by unseen particle impacts",
+            "relate stronger heating to more vigorous Brownian jitter",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with particle descriptions of solids and liquids from M5_L1 and M5_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending the particle model into gases and into evidence-based support for invisible particle motion.",
+        },
+      ];
+    case "M5_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Temperature became easier to interpret once it was treated as an average particle-motion reading rather than as a direct measure of how much total thermal energy a whole sample must contain.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M5_L4 separates temperature from total internal energy by comparing systems with the same average particle motion but different numbers of particles.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain temperature as a measure linked to average particle motion",
+            "justify why two systems can have the same temperature but different internal energies",
+            "distinguish clearly between an average quantity and a whole-system total",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with particle motion from M5_L1 to M5_L3 and with the idea of comparing averages versus totals.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening thermal reasoning before internal energy is treated explicitly as a total store.",
+        },
+      ];
+    case "M5_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Internal energy became a stronger concept once physicists treated it as a total store containing both particle-motion energy and arrangement-linked energy, rather than reducing it to temperature alone.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M5_L5 introduces internal energy as the total kinetic and potential energy of all particles and compares cases where temperature matches but the total store differs.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define internal energy as the total kinetic and potential energy of all particles",
+            "explain why changing particle number or arrangement can change internal energy",
+            "show why same temperature does not force same internal energy",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the average-versus-total distinction from M5_L4 and with earlier particle-state language from M5_L1 to M5_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from temperature language into a fuller total-energy model of a material.",
+        },
+      ];
+    case "M5_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "State-change explanations improved once added energy was tracked into either particle motion or particle arrangement, showing why temperature can rise only a little while internal energy still increases substantially.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M5_L6 closes the module by analyzing where added energy goes during a state change and by separating internal-energy increase from temperature increase.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain that added energy during a state change can be used to loosen particle links rather than mainly raise temperature",
+            "describe state change in terms of kinetic and potential contributions to internal energy",
+            "justify why internal energy can increase even when the temperature change is small",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M5 sequence, especially the meanings of temperature, internal energy, and particle arrangement.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the thermal particle model and preparing for more structured state-change explanations and calculations.",
         },
       ];
     case "F2_L1":
