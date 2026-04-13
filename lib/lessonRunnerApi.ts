@@ -22109,6 +22109,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains refraction as a speed-change turn in a new medium while frequency stays fixed and wavelength adjusts.";
     case "M7_L6":
       return "This lesson closes the wave sequence by explaining diffraction as a spreading effect that depends on comparing opening size with wavelength.";
+    case "M8_L1":
+      return "This lesson opens optics by tying mirror reflection and plane-mirror images to the normal line so route geometry stays precise from the start.";
+    case "M8_L2":
+      return "This lesson explains refraction in light as a boundary speed-change story and keeps lenses tied to entry and exit surface bends rather than to a pull from the middle.";
+    case "M8_L3":
+      return "This lesson explains converging-lens images by tracing a few trusted rays to a real meeting point instead of guessing from lens shape alone.";
+    case "M8_L4":
+      return "This lesson explains diverging-lens images by separating the real spreading rays from the dashed backward extensions that locate the virtual image.";
+    case "M8_L5":
+      return "This lesson treats the critical angle as the last possible escape route before total internal reflection takes over.";
+    case "M8_L6":
+      return "This lesson closes the optics sequence by making ray diagrams trustworthy through clear separation of real rays, reference normals, and virtual extensions.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -25208,6 +25220,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the whole waves unit and preparing for more demanding comparison and explanation questions across multiple wave behaviors.",
+        },
+      ];
+    case "M8_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Geometrical optics became much clearer once mirror reflection was anchored to the normal line rather than to the mirror surface itself, because surface-first angle reading hides the symmetry that makes the rule work.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M8_L1 opens the optics module by teaching reflection in plane mirrors, normal-based angle reading, and the virtual image position behind the mirror.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "apply the law of reflection by measuring angles from the normal",
+            "convert a surface angle into a normal-based angle before using the mirror rule",
+            "explain why a plane-mirror image is virtual and lies the same distance behind the mirror as the object is in front",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the earlier wave module, especially the normal-line treatment of reflection from M7, and should be comfortable distinguishing real paths from construction lines.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning geometrical optics and needing a precise route-and-reference framework before refraction and lenses are introduced.",
+        },
+      ];
+    case "M8_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Refraction became easier to explain once light bending was tied to speed change at a boundary, because learners often see the turn but misread it as a kind of reflection or as a pull from the material itself.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M8_L2 explains light refraction at boundaries by comparing faster and slower media and by showing that a lens bends rays at its entry and exit surfaces.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why light bends toward the normal when it slows down and away from the normal when it speeds up",
+            "read refraction angles from the normal rather than from the surface",
+            "describe a lens as two refraction events at two boundaries rather than as a single central pull",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with normal-based angle reading from M8_L1 and with the general wave idea that a change of medium can change speed.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending normal-line reflection into refraction and preparing for image formation in lenses.",
+        },
+      ];
+    case "M8_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Lens-image reasoning improved once physicists used a small set of trusted rays rather than every possible light route, because a few carefully chosen paths can still locate the image precisely.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M8_L3 teaches converging lenses by tracing standard rays to real image positions and by comparing object positions relative to F and 2F.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "use a parallel ray and a central ray to locate a real image formed by a converging lens",
+            "describe how image position and size change as the object moves relative to F and 2F",
+            "explain why a real image is a true meeting point of actual refracted rays",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with refraction at boundaries from M8_L2 and should be comfortable with the meanings of focus and normal-based route changes.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from boundary refraction into full lens-image construction and standard optics diagram work.",
+        },
+      ];
+    case "M8_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Virtual-image reasoning became more trustworthy once real rays were kept visually separate from dashed backward extensions, because many learners otherwise treat all lines in a diagram as if they were actual beams.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M8_L4 explains diverging lenses by tracing the real spreading rays first and then using dashed backward extensions to locate the virtual image.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "apply the standard diverging-lens ray rules using the near focus and the central ray",
+            "locate the virtual image by extending the refracted rays backward",
+            "explain why the diverging-lens image is usually virtual, upright, and smaller",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with converging-lens ray work from M8_L3 and with the difference between a real crossing and an apparent one from M8_L1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening optics diagram discipline and preparing to compare real and virtual image formation accurately.",
+        },
+      ];
+    case "M8_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Total internal reflection became much easier to understand once the critical angle was treated as the last possible escape route, because the boundary behavior changes smoothly from refraction to skimming to full reflection.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M8_L5 introduces the critical angle and total internal reflection by comparing below-critical, exactly-critical, and above-critical cases in the correct medium direction.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define the critical angle as the angle of incidence in the denser medium that gives a refracted ray along the boundary",
+            "explain why total internal reflection occurs only above the critical angle and only when light travels from denser to less dense medium",
+            "use the escape-limit story to interpret fiber-optic and prism-style examples",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with refraction from M8_L2 and should be comfortable comparing boundary cases with the angle always measured from the normal.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from basic refraction into more demanding boundary-condition reasoning and high-value optics applications.",
+        },
+      ];
+    case "M8_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Ray diagrams became reliable problem-solving tools only when each line role was kept clear, because normals, real rays, and dashed extensions serve different jobs even when they share the same page.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M8_L6 closes the optics sequence by teaching learners to read and draw ray diagrams with a clear distinction between real light paths, guide lines, and virtual-image constructions.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "identify which lines in a ray diagram represent actual light paths and which are construction aids",
+            "distinguish true image points from virtual image points by checking whether real rays actually meet",
+            "use a small set of carefully chosen rays to build trustworthy optics diagrams across mirrors and lenses",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M8 sequence, especially the difference between real and virtual images and the use of normal-based geometry at boundaries.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the whole optics unit and preparing for more complex IGCSE-style diagram interpretation and explanation questions.",
         },
       ];
     case "F2_L1":
