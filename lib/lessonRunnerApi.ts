@@ -21977,6 +21977,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson explains RC charging and discharging as exponential changing-rate processes governed by the time constant.";
     case "A7_L6":
       return "This lesson closes the advanced-circuits sequence by linking capacitor energy and dielectric effects to the physical condition being held fixed.";
+    case "A8_L1":
+      return "This lesson opens fields by separating the field at a location from the force felt by any one test charge used to probe it.";
+    case "A8_L2":
+      return "This lesson distinguishes electric potential from electric field so height-map language and slope-map language are not collapsed together.";
+    case "A8_L3":
+      return "This lesson explains uniform fields between parallel plates by linking field strength to potential gradient across a fixed separation.";
+    case "A8_L4":
+      return "This lesson develops radial electric-force reasoning by keeping charge size and inverse-square separation effects visible together.";
+    case "A8_L5":
+      return "This lesson explains magnetic force as a sideways effect set by the geometry between field direction and moving charge or current.";
+    case "A8_L6":
+      return "This lesson closes the fields sequence by linking particle orbits and motor turning to the same perpendicular magnetic-force geometry.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -23228,6 +23240,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating advanced circuit storage ideas and preparing for more demanding capacitor-energy and constraint-based reasoning.",
+        },
+      ];
+    case "A8_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Field theory became much clearer once physicists stopped treating action-at-a-distance as a mysterious instant pull and instead described space around a charge as having a measurable electric field at each location.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A8_L1 introduces electric field as force per unit positive charge and keeps the source charge, the local field, and the test charge separate from one another.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define electric field strength as force per unit positive charge",
+            "explain why a test charge reveals the field without creating its meaning",
+            "interpret field arrows and field lines as direction maps rather than literal particle tracks",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with charge, force, and the idea that a physical quantity can vary from one location to another.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning advanced electrostatics and needing a stable field model before potential and field-shape questions appear.",
+        },
+      ];
+    case "A8_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Electric potential was introduced to give field problems an energy-per-charge map, making it possible to compare locations by electric height as well as by force direction.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A8_L2 explains electric potential, potential difference, and equipotentials while keeping the potential landscape distinct from the electric-field slope drawn across it.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define electric potential as energy per unit charge",
+            "describe equipotential lines or surfaces as same-potential routes",
+            "explain why field lines cross equipotentials at right angles",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with electric field from A8_L1 and with basic energy-per-charge ideas from earlier electricity lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending electrostatics into potential maps and preparing for field-gradient reasoning.",
+        },
+      ];
+    case "A8_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Parallel-plate experiments became important because they created nearly uniform electric fields, allowing potential gradient and force ideas to be tested in a clean, controlled geometry.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A8_L3 uses parallel plates to show that a uniform field can be read as a constant potential drop per unit distance across the gap.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe the central region between parallel plates as a nearly uniform electric field",
+            "use E = V / d in the correct parallel-plate context",
+            "predict how changing the voltage or the plate spacing changes field strength",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with electric field and electric potential from A8_L1 and A8_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from general field language into quantitative uniform-field reasoning.",
+        },
+      ];
+    case "A8_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Coulomb's law gave electrostatics its first precise force rule by showing that electric force depends on both charge size and inverse-square separation.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A8_L4 treats point-charge interactions as radial force problems where attraction or repulsion must be read together with the inverse-square distance dependence.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state how like and unlike charges interact",
+            "use Coulomb's law qualitatively or quantitatively in point-charge problems",
+            "explain why doubling separation changes force differently from doubling charge",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with charge interaction language and with inverse-square comparison from earlier physics contexts if available.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening electrostatic-force reasoning before electric and magnetic field ideas are compared in moving-charge situations.",
+        },
+      ];
+    case "A8_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Magnetism and charge motion became deeply connected once experiments showed that a magnetic field exerts a force on moving charges and currents, but always in a sideways direction set by geometry.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A8_L5 introduces magnetic force on currents and moving charges by keeping field direction, motion direction, and perpendicular force direction on the same geometric frame.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe magnetic force as perpendicular to both the field and the motion or current",
+            "predict how reversing the field or reversing the current changes the force direction",
+            "explain why magnetic force changes direction of motion rather than pushing along the field line",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with magnetic-field direction from earlier magnetism work and with moving-charge language from the electrostatics lessons in A8.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from static field ideas into charged-particle and current-carrying motion in magnetic fields.",
+        },
+      ];
+    case "A8_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Circular charged-particle paths and electric motor turning were eventually understood as two applications of the same sideways magnetic force, despite looking like separate topics at first.",
+        },
+        {
+          heading: "Lesson description",
+          body: "A8_L6 closes the fields module by connecting particle orbits and motor effects to the common geometry of magnetic force acting perpendicular to motion.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why a magnetic field can bend a charged particle into a curved path",
+            "describe how a current-carrying coil experiences a turning effect in a magnetic field",
+            "identify the shared perpendicular-force idea behind both orbit and motor questions",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with field geometry from A8_L1 to A8_L5, especially the sideways-force idea from A8_L5.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating electric and magnetic field reasoning and preparing for more integrated particle-and-device applications.",
         },
       ];
     case "F2_L1":
