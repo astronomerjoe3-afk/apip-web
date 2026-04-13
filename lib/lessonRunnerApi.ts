@@ -22181,6 +22181,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson keeps Moon phases and eclipses separate by treating phases as viewing geometry and eclipses as special alignment events.";
     case "M13_L6":
       return "This lesson closes the Solar System sequence by linking orbit size, orbital period, and body type while keeping scale sketches from being taken literally.";
+    case "M14_L1":
+      return "This lesson opens astronomy beyond the Solar System by separating self-luminous stars from reflective planets and moons.";
+    case "M14_L2":
+      return "This lesson explains stellar lifecycles as mass-dependent branches rather than one universal sequence for every star.";
+    case "M14_L3":
+      return "This lesson explains galaxies as gravitationally bound systems and keeps one star, one Solar System, and one galaxy at clearly different scales.";
+    case "M14_L4":
+      return "This lesson explains the light-year as a distance unit chosen for huge astronomy scales rather than as a unit of time.";
+    case "M14_L5":
+      return "This lesson explains redshift as wavelength stretching and keeps it tied to the trend that farther galaxies usually show larger redshifts.";
+    case "M14_L6":
+      return "This lesson closes the cosmology sequence by treating the Big Bang as an expanding-space model supported by redshift evidence, not as an ordinary explosion.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -26288,6 +26300,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the M13 Earth-and-Solar-System unit and preparing for more demanding IGCSE comparison and explanation questions about Solar System structure.",
+        },
+      ];
+    case "M14_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Astronomy classification became much clearer once stars were identified by producing their own light, because bright appearance alone can mislead learners into confusing self-luminous stars with planets that only reflect starlight.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M14_L1 opens the wider-universe module by separating stars from planets and moons through their light source and by introducing fusion as the energy source of starlight.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe a star as a self-luminous body that produces its own light",
+            "explain why a planet or moon can appear bright even though it is not self-luminous",
+            "identify nuclear fusion as the internal energy source of starlight",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with the Solar System structure from M13 and should be ready to extend that model outward to stars beyond our own system.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the M14 stars-and-universe sequence and needing a secure distinction between luminous and reflective objects before stellar evolution and galaxies are introduced.",
+        },
+      ];
+    case "M14_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Stellar evolution became easier to teach once stars were compared by mass, because low-mass and high-mass stars share early stages but do not end in the same way.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M14_L2 explains the stellar lifecycle as a mass-dependent branch, from formation in nebulae through main-sequence life to different remnant outcomes.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe the shared early stages of star formation and main-sequence life",
+            "explain why stellar mass changes the later path and remnant",
+            "distinguish low-mass endings from high-mass endings such as supernova, neutron star, and black hole",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the idea of a star from M14_L1 and should be ready to compare how one starting variable can change a later physical pathway.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from basic star definition into stellar evolution before stepping out to galaxy scale and cosmology.",
+        },
+      ];
+    case "M14_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Galaxy ideas became much clearer once astronomers separated one star, one Solar System, and one galaxy, because scale confusion makes it easy to misidentify the Milky Way as either our Solar System or the whole universe.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M14_L3 explains a galaxy as a gravitationally bound system of stars, gas, and dust and places the Solar System correctly inside the Milky Way.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe a galaxy as a gravitationally bound system containing many stars plus gas and dust",
+            "explain that the Milky Way is our home galaxy",
+            "distinguish clearly between the scale of one star, one Solar System, one galaxy, and the wider universe",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with stars and stellar lifecycle ideas from M14_L1 and M14_L2 and should be ready to extend the scale outward beyond single-star systems.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening astronomy scale reasoning before very large distance units and cosmological evidence are introduced.",
+        },
+      ];
+    case "M14_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Astronomy distance work became more manageable once scientists adopted very large units such as the light-year, because kilometre-scale intuition quickly breaks down across interstellar and galactic distances.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M14_L4 explains the light-year as a distance unit defined from speed multiplied by time and shows why astronomy needs such a large unit.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "define a light-year as the distance light travels in one year",
+            "explain why a light-year is a distance unit rather than a time unit",
+            "use the relation distance equals speed multiplied by time to justify the definition",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with galaxy-scale thinking from M14_L3 and with the basic physical meaning of speed, time, and distance from earlier mechanics work.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from Solar System and galaxy structure into the very large distance scales needed for cosmology and observational astronomy.",
+        },
+      ];
+    case "M14_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Redshift became much easier to interpret once it was read as a wavelength-stretch effect, because the observed color shift is evidence about motion or expansion only when it is tied back to wavelength change.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M14_L5 explains redshift by comparing emitted and observed wavelengths and by linking larger redshifts to more distant galaxies in the expanding-universe story.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe redshift as the observation of light at longer wavelengths than when it was emitted",
+            "explain why a larger redshift means a larger wavelength stretch",
+            "connect the general trend of larger redshift for more distant galaxies to expansion evidence",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with light-year scale from M14_L4 and should be comfortable comparing observed and original quantities in one evidence-based argument.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from large-scale astronomy distances into the observational evidence that supports cosmological models.",
+        },
+      ];
+    case "M14_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "The Big Bang model became much clearer once astronomers described it as expanding space from an early hot dense state, because the evidence does not fit the simpler picture of matter exploding outward into empty pre-existing space from one ordinary point.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M14_L6 closes the module by explaining the Big Bang as an expanding-universe model and by linking that model to redshift evidence and the Hubble-law distance-speed trend.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe the Big Bang model as an early hot dense universe that has expanded over time",
+            "explain why redshift evidence supports the idea of expansion",
+            "connect Hubble's law to the trend that more distant galaxies are generally receding faster",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with redshift from M14_L5 and with the larger astronomy-scale ideas developed through the earlier M14 lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the M14 stars-and-universe unit and preparing for more evaluative IGCSE-style cosmology questions.",
         },
       ];
     case "F2_L1":
