@@ -22025,6 +22025,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson treats stellar evolution as a mass-dependent branching story that ends in different compact remnants.";
     case "A11_L6":
       return "This lesson closes the astrophysics sequence by linking redshift evidence, Hubble expansion, and modern cosmology into one large-scale universe story.";
+    case "M1_L1":
+      return "This lesson opens advanced kinematics by showing why a distance-time graph is a motion record, not a sketch of the route itself.";
+    case "M1_L2":
+      return "This lesson explains speed-time graphs by separating graph height from graph slope so speed and acceleration do not collapse into one idea.";
+    case "M1_L3":
+      return "This lesson makes signed acceleration trustworthy by tying the sign to the chosen positive direction and to the full velocity change.";
+    case "M1_L4":
+      return "This lesson introduces the constant-acceleration equations as a compact toolkit that only works when the motion story really is uniform in acceleration.";
+    case "M1_L5":
+      return "This lesson strengthens graph interpretation by showing that the same slope shape can mean different physics depending on the axes.";
+    case "M1_L6":
+      return "This lesson closes the kinematics sequence by treating area under a speed-time graph as accumulated distance rather than as decoration under the line.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -23948,6 +23960,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating astrophysics and preparing for rigorous evidence-to-model questions about the large-scale universe.",
+        },
+      ];
+    case "M1_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Motion became much clearer once physicists began recording position against time in a graph, because a graph can reveal how a journey unfolds without pretending to be the journey's map.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M1_L1 introduces distance-time graphs as motion records and shows how slope, flat sections, and matching finish points should be interpreted carefully.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "interpret slope on a distance-time graph as pace or speed",
+            "explain what flat, straight, and curved sections say about motion",
+            "justify why two runs can finish at the same distance while still having different motion histories",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with distance, time, speed, and basic unit handling from earlier mechanics study.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving beyond basic motion vocabulary into graph-based interpretation of journeys.",
+        },
+      ];
+    case "M1_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "As motion measurements improved, physicists needed graphs that could show not just how far something had gone but how its speed was changing from moment to moment.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M1_L2 develops speed-time graph reading by separating graph height, which shows speed, from graph slope, which shows acceleration.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "read the speed at an instant from the graph height",
+            "use the slope of a speed-time graph to describe acceleration",
+            "distinguish constant speed from steadily changing speed",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the graph-reading discipline from M1_L1 and with the difference between distance and speed.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending motion-graph reasoning into speed and acceleration on the same time base.",
+        },
+      ];
+    case "M1_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Signed quantities became essential in mechanics because the same algebra can describe speeding up, slowing down, and reversal only when direction is kept explicit.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M1_L3 explains acceleration as signed rate of change of velocity and shows why positive and negative acceleration do not automatically mean speeding up or slowing down.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "apply a clear positive-direction sign convention to velocity and acceleration",
+            "calculate acceleration from signed velocity change over time",
+            "explain when negative acceleration can still correspond to increasing speed",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with velocity-time ideas from M1_L2 and with using positive and negative signs consistently.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners strengthening one-dimensional motion reasoning before equation-based kinematics.",
+        },
+      ];
+    case "M1_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "The constant-acceleration equations were developed as compact summaries of uniformly changing motion, allowing several measured quantities to be linked without redrawing the whole graph each time.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M1_L4 introduces the standard constant-acceleration equations and emphasizes choosing the correct relation from the known quantities and the physical condition.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "recognize that the suvat equations require constant acceleration",
+            "choose a suitable equation from the knowns and the unknown",
+            "solve routine kinematics problems involving displacement, velocity, acceleration, and time",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with distance-time and speed-time graph meanings and with signed acceleration from M1_L1 to M1_L3.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners ready to turn graph-based motion understanding into algebraic kinematics.",
+        },
+      ];
+    case "M1_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Graph methods became more powerful once physicists learned to treat the axes as part of the meaning, because the same geometric steepness can represent different physical rates in different graphs.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M1_L5 compares slope across different motion graphs so learners keep graph geometry separate from the physics meaning assigned by the axes.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "state why slope meaning depends on the graph axes",
+            "compare the meaning of zero slope on distance-time and speed-time graphs",
+            "explain why the same visual steepness can represent different physical quantities",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be comfortable with slope on distance-time and speed-time graphs from M1_L1 and M1_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating graph literacy so they stop transferring one graph rule blindly onto another.",
+        },
+      ];
+    case "M1_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Area methods turned motion graphs into quantitative accumulation tools by showing that a graph can add up many small distance strips, not just display an instantaneous value.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M1_L6 uses speed-time graphs to show why the area under the line represents total distance in these motion stories and why different shapes can still enclose the same distance.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why a thin strip under a speed-time graph represents a small distance gain",
+            "calculate total distance from rectangular and triangular speed-time areas",
+            "justify why equal total area can describe equal distance with different speed histories",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with speed-time graph meanings and with the graph-axis discipline developed earlier in M1.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners completing the kinematics graph sequence before moving into later mechanics topics that build on it.",
         },
       ];
     case "F2_L1":
