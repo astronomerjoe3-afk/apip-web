@@ -22157,6 +22157,18 @@ function scaffoldIntroText(context: ScaffoldIntroContext): string {
       return "This lesson strengthens detector reasoning by separating measured count, background count, and corrected source count before any conclusion is drawn.";
     case "M11_L6":
       return "This lesson closes the radioactivity sequence by balancing decay equations with both mass number and atomic number kept visible.";
+    case "M12_L1":
+      return "This lesson opens nuclear-energy reasoning by linking binding energy and mass defect so nuclear changes are not mistaken for ordinary chemical ones.";
+    case "M12_L2":
+      return "This lesson explains fission as a neutron-linked chain process whose growth or control depends on what the released neutrons do next.";
+    case "M12_L3":
+      return "This lesson explains fusion as the joining of light nuclei under extreme conditions rather than as fission run backward without constraints.";
+    case "M12_L4":
+      return "This lesson turns reactor physics into one controlled system by linking chain-reaction control, heat transfer, and electricity generation.";
+    case "M12_L5":
+      return "This lesson explains radioisotope applications by matching half-life and emission type to the task instead of treating isotope choice as arbitrary.";
+    case "M12_L6":
+      return "This lesson closes the nuclear-technology sequence by weighing benefits, hazards, shielding, and waste management together.";
     case "F2_L1":
       return "This lesson opens mechanics by separating full route length, net start-to-finish change, and overall average speed so motion descriptions do not collapse into one label.";
     case "F2_L2":
@@ -25928,6 +25940,174 @@ function scaffoldLessonIntroduction(context: ScaffoldIntroContext): ScaffoldIntr
         {
           heading: "Who this lesson is for",
           body: "This lesson is for learners consolidating the M11 atomic and radioactivity unit and preparing for more demanding IGCSE equation, decay, and interpretation questions.",
+        },
+      ];
+    case "M12_L1":
+      return [
+        {
+          heading: "Historical background",
+          body: "Nuclear-energy explanations became much clearer once physicists connected binding energy to mass defect, because the energy released in nuclear processes comes from changes inside the nucleus rather than from ordinary chemical bonding.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M12_L1 opens the nuclear-energy module by linking mass defect, binding energy, and nuclear stability so large energy changes can be explained from small mass changes.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain why binding energy is a nuclear property rather than a chemical-bond property",
+            "describe mass defect as evidence that nuclear binding energy is involved",
+            "justify why small mass changes can correspond to large energy changes in nuclear processes",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with atomic and nuclear structure from M11 and should be ready to compare nuclear energy changes with earlier chemical-energy ideas.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners beginning the M12 nuclear-energy sequence and needing a secure explanation of where nuclear energy comes from before fission and fusion are compared.",
+        },
+      ];
+    case "M12_L2":
+      return [
+        {
+          heading: "Historical background",
+          body: "Fission became easier to explain once it was treated as a chain-reaction system rather than as one isolated split, because the key question is what the released neutrons do in the next generation.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M12_L2 teaches nuclear fission by linking heavy-nucleus splitting, neutron release, multiplication, and the difference between controlled and uncontrolled chain reactions.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe fission as the splitting of a heavy nucleus into smaller nuclei",
+            "explain how released neutrons can trigger further fission events and create a chain reaction",
+            "distinguish clearly between a controlled chain reaction in a reactor and an uncontrolled one",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the binding-energy story from M12_L1 and with the nuclear-count language built in M11.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from basic nuclear-energy ideas into chain-reaction reasoning before reactor systems are studied in detail.",
+        },
+      ];
+    case "M12_L3":
+      return [
+        {
+          heading: "Historical background",
+          body: "Fusion became much clearer once scientists kept the joining process and its extreme conditions on the same story, because fusion is not just 'the opposite of fission' but a high-energy process that must overcome electrostatic repulsion.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M12_L3 explains fusion by comparing light nuclei before and after joining, while keeping repulsion, extreme temperature, and stellar energy release visible together.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "describe fusion as the joining of light nuclei into a heavier nucleus",
+            "explain why very high temperatures are needed to overcome electrostatic repulsion",
+            "connect fusion to the energy source of stars without blurring it into a fission story",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with nuclear binding-energy ideas from M12_L1 and with the contrast between splitting and joining processes introduced through fission in M12_L2.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending nuclear-energy reasoning into stellar and high-condition processes before moving into full reactor systems and applications.",
+        },
+      ];
+    case "M12_L4":
+      return [
+        {
+          heading: "Historical background",
+          body: "Reactor explanations improved once the plant was read as one controlled energy-transfer system, because fuel, moderator, control rods, coolant, and turbine stages each solve different parts of the same physical problem.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M12_L4 builds the nuclear reactor as a linked system by combining reaction-rate control, thermal-energy transfer, and later electrical generation in the same model.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "explain how control rods help manage the reaction rate by affecting the neutron population",
+            "describe the role of coolant in transferring thermal energy away from the core",
+            "trace the staged energy path from nuclear fuel to electrical output",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with chain-reaction reasoning from M12_L2 and should be comfortable tracking energy transfers across several stages.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners moving from individual nuclear processes into whole-system reactor understanding and controlled energy production.",
+        },
+      ];
+    case "M12_L5":
+      return [
+        {
+          heading: "Historical background",
+          body: "Radioisotope applications became easier to justify once half-life, radiation type, and task purpose were matched explicitly, because the best isotope for one job may be poor or unsafe for another.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M12_L5 explains radioisotope applications by selecting isotopes for tracing, medicine, and industry on the basis of their decay properties rather than by name alone.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "choose a radioisotope by matching half-life and emission type to the task",
+            "explain why tracer, medical, and industrial uses need different isotope properties",
+            "justify isotope choice while still accounting for exposure and risk control",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with radioactivity ideas from M11 and with the reactor and nuclear-energy context from the earlier M12 lessons.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners extending nuclear physics into real-world applications where physical suitability and safe use both matter.",
+        },
+      ];
+    case "M12_L6":
+      return [
+        {
+          heading: "Historical background",
+          body: "Nuclear-technology evaluation became more balanced once benefits and hazards were judged together, because usefulness, ionising-radiation risk, shielding, and waste handling all belong to the same decision rather than to separate debates.",
+        },
+        {
+          heading: "Lesson description",
+          body: "M12_L6 closes the module by comparing the benefits and hazards of nuclear technologies while keeping shielding, safe handling, and waste management visible in the same evaluation.",
+        },
+        {
+          heading: "Learning objectives",
+          body: "By the end of the lesson, the learner should be able to:",
+          bullets: [
+            "compare useful nuclear applications with the main hazards of ionising radiation",
+            "explain how shielding, handling procedures, and storage reduce risk",
+            "include waste management in any balanced judgment of nuclear technology",
+          ],
+        },
+        {
+          heading: "Prerequisites",
+          body: "Learners should already be secure with the full M12 sequence and with earlier radioactivity ideas from M11, especially the meaning of ionising radiation and the need for evidence-based comparison.",
+        },
+        {
+          heading: "Who this lesson is for",
+          body: "This lesson is for learners consolidating the M12 nuclear-physics unit and preparing for more evaluative IGCSE-style questions on benefits, risks, and control measures.",
         },
       ];
     case "F2_L1":
