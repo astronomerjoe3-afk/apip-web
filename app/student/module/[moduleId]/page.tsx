@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
+
+import styles from "../module.module.css";
 import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import StudentHelpCard from "../../../../components/StudentHelpCard";
@@ -822,13 +824,7 @@ export default function StudentModulePage() {
     });
   }, [moduleId]);
   return (
-    <div
-      style={{
-        padding: "40px 24px 56px",
-        maxWidth: 1240,
-        margin: "0 auto",
-      }}
-    >
+    <div className={styles.page}>
       {user ? (
         <div
           style={{
@@ -917,7 +913,7 @@ export default function StudentModulePage() {
             }}
           >
             <span style={{ fontWeight: 800 }}>
-              Module mastery average: {Math.round((moduleProgress.module_mastery || 0) * 100)}%
+              Mastery: {Math.round((moduleProgress.module_mastery || 0) * 100)}%
             </span>
             <span style={{ opacity: 0.55 }}>|</span>
             <span>
@@ -964,6 +960,45 @@ export default function StudentModulePage() {
           }}
         >
           {status}
+        </div>
+      ) : null}
+      {moduleNeedsSecurityUpgrade ? (
+        <div className={styles.securityBanner}>
+          <span className={styles.securityChip}>Security step recommended</span>
+          <div className={styles.securityTitle}>Keep learning now, then secure this account before premium access is disrupted later.</div>
+          <div className={styles.securityBody}>
+            This premium module is already unlocked. Finish the recommended account-security steps soon so premium access stays smooth:{" "}
+            {securityActions.length > 0
+              ? securityActions.map((action) => securityActionLabel(action)).join(", ")
+              : "verify your email and confirm a strong password"}.
+          </div>
+          <div className={styles.securityActions}>
+            <button
+              onClick={() => router.push(`/student/security?next=${encodeURIComponent(currentModulePath)}`)}
+              style={{
+                padding: "12px 18px",
+                borderRadius: 14,
+                border: "none",
+                background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
+                color: "#fff",
+                fontWeight: 900,
+              }}
+            >
+              Secure this account
+            </button>
+            <button
+              onClick={() => { void Promise.all([loadModuleState(false), loadBillingSummary()]); }}
+              style={{
+                padding: "12px 18px",
+                borderRadius: 14,
+                border: "1px solid rgba(16, 35, 63, 0.14)",
+                background: "rgba(255, 255, 255, 0.88)",
+                fontWeight: 800,
+              }}
+            >
+              Refresh access
+            </button>
+          </div>
         </div>
       ) : null}
       <div
@@ -1041,55 +1076,6 @@ export default function StudentModulePage() {
         ) : waitingForSecurityCheck ? (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
             Checking account security for paid access...
-          </div>
-        ) : moduleNeedsSecurityUpgrade ? (
-          <div style={{ display: "grid", gap: 16, maxWidth: 860, margin: "0 auto" }}>
-            <div style={{ display: "inline-flex", justifyContent: "center" }}>
-              <span style={{ padding: "6px 12px", borderRadius: 999, background: "#fff7ed", color: "#9a3412", fontWeight: 800, fontSize: 12 }}>
-                Security step required
-              </span>
-            </div>
-            <div style={{ textAlign: "center", fontSize: 20, fontWeight: 900, color: "#10233f" }}>
-              Secure this account before continuing with premium lessons
-            </div>
-            <div style={{ textAlign: "center", fontSize: 17, color: "#46566b", lineHeight: 1.65 }}>
-              This premium module is unlocked, but paid access now requires a stronger account baseline first.
-            </div>
-            <div style={{ border: "1px solid rgba(146, 64, 14, 0.2)", borderRadius: 18, padding: 18, background: "#fff7ed", color: "#9a3412" }}>
-              <div style={{ fontWeight: 900, marginBottom: 8 }}>Required next steps</div>
-              <div style={{ lineHeight: 1.6 }}>
-                {securityActions.length > 0
-                  ? securityActions.map((action) => securityActionLabel(action)).join(", ")
-                  : "Verify your email and confirm a strong password."}
-              </div>
-            </div>
-            <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-              <button
-                onClick={() => router.push(`/student/security?next=${encodeURIComponent(currentModulePath)}`)}
-                style={{
-                  padding: "12px 18px",
-                  borderRadius: 14,
-                  border: "none",
-                  background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
-                  color: "#fff",
-                  fontWeight: 900,
-                }}
-              >
-                Secure this account
-              </button>
-              <button
-                onClick={() => router.push("/student")}
-                style={{
-                  padding: "12px 18px",
-                  borderRadius: 14,
-                  border: "1px solid rgba(16, 35, 63, 0.14)",
-                  background: "rgba(255, 255, 255, 0.82)",
-                  fontWeight: 800,
-                }}
-              >
-                Back to modules
-              </button>
-            </div>
           </div>
         ) : loading && !activeLesson ? (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
@@ -1304,43 +1290,9 @@ export default function StudentModulePage() {
       ) : null}
 
       {canShowStudentHelp && helpDialogOpen ? (
-        <div
-          onClick={() => setHelpDialogOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 120,
-            background: "rgba(15, 23, 42, 0.42)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 20,
-          }}
-        >
-          <div
-            onClick={(event) => event.stopPropagation()}
-            style={{
-              position: "relative",
-              width: "min(100%, 980px)",
-              maxHeight: "calc(100vh - 40px)",
-              overflowY: "auto",
-            }}
-          >
-            <button
-              onClick={() => setHelpDialogOpen(false)}
-              style={{
-                position: "absolute",
-                top: 12,
-                right: 12,
-                zIndex: 2,
-                padding: "10px 14px",
-                borderRadius: 999,
-                border: "1px solid rgba(16, 35, 63, 0.14)",
-                background: "rgba(255, 255, 255, 0.94)",
-                color: "#10233f",
-                fontWeight: 800,
-              }}
-            >
+        <div className={styles.modalBackdrop} onClick={() => setHelpDialogOpen(false)}>
+          <div className={styles.modalPanel} onClick={(event) => event.stopPropagation()}>
+            <button onClick={() => setHelpDialogOpen(false)} className={styles.closeButton}>
               Close
             </button>
             <StudentHelpCard
@@ -1355,24 +1307,11 @@ export default function StudentModulePage() {
       ) : null}
 
       {canShowStudentHelp ? (
-        <button
-          onClick={() => setHelpDialogOpen(true)}
-          style={{
-            position: "fixed",
-            right: 22,
-            bottom: 22,
-            zIndex: 80,
-            padding: "14px 18px",
-            borderRadius: 999,
-            border: "none",
-            background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
-            color: "#fff",
-            fontWeight: 900,
-            boxShadow: "0 18px 38px rgba(11, 26, 50, 0.24)",
-          }}
-        >
-          Help / inquiry
-        </button>
+        <div className={styles.helpDock}>
+          <button onClick={() => setHelpDialogOpen(true)} className={styles.helpButton}>
+            Help / inquiry
+          </button>
+        </div>
       ) : null}
     </div>
   );

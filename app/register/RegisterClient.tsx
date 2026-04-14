@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
+
+import authStyles from "../auth.module.css";
 import { auth, firebaseConfigured } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth";
 import { getClientRole, resolvePostAuthPath } from "@/lib/authRouting";
@@ -82,73 +85,132 @@ export default function RegisterPage() {
   }
 
   return (
-    <main style={{ padding: 24, fontFamily: "system-ui", maxWidth: 480 }}>
-      <h1>Create account</h1>
-
-      <form onSubmit={onSubmit} style={{ display: "grid", gap: 12 }}>
-        <label>
-          Email
-          <input
-            style={{ width: "100%", padding: 10 }}
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            type="email"
-            required
-          />
-        </label>
-
-        <label>
-          Password
-          <input
-            style={{ width: "100%", padding: 10 }}
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            type="password"
-            minLength={6}
-            required
-          />
-        </label>
-
-        <div
-          style={{
-            border: "1px solid rgba(15, 23, 42, 0.12)",
-            borderRadius: 12,
-            padding: 12,
-            background: "#f8fafc",
-          }}
-        >
-          <div style={{ fontWeight: 700, marginBottom: 8 }}>
-            Minimum password strength
-          </div>
-          <div style={{ fontSize: 14, opacity: 0.8, marginBottom: 8, lineHeight: 1.6 }}>
-            If this account later unlocks a module or uses a subscription, the strong-password step is already satisfied when it passes this signup rule.
-          </div>
-          <div style={{ display: "grid", gap: 6 }}>
-            {passwordRequirements.map((requirement) => (
-              <div
-                key={requirement.key}
-                style={{
-                  color: requirement.met ? "#166534" : "#475569",
-                  fontSize: 14,
-                  fontWeight: requirement.met ? 700 : 500,
-                }}
-              >
-                {requirement.met ? "Pass" : "Needs work"}: {requirement.label}
+    <main className={authStyles.page}>
+      <section className={authStyles.shell}>
+        <div className={authStyles.brandPanel}>
+          <div className={authStyles.brandHeader}>
+            <div className={authStyles.brandLockup}>
+              <div className={authStyles.brandMark}>C</div>
+              <div>
+                <p className={authStyles.brandName}>Cognispark</p>
+                <p className={authStyles.brandTag}>Physics, mission by mission.</p>
               </div>
-            ))}
+            </div>
+            <div>
+              <p className={authStyles.eyebrow}>Create your student account</p>
+              <h1 className={authStyles.headline}>Start with structure, not confusion.</h1>
+              <p className={authStyles.support}>
+                Open your account once, then move through missions, worked examples, and mastery checks with a cleaner route across physics.
+              </p>
+            </div>
+          </div>
+
+          <div className={authStyles.proofStack}>
+            <article className={authStyles.proofCard}>
+              <span>Built for learning</span>
+              <strong>Students get visual setup, guided checks, and clearer momentum.</strong>
+              <p>The platform is designed so new ideas become understandable before they become mathematical.</p>
+            </article>
+            <article className={authStyles.proofCard}>
+              <span>Future-ready account</span>
+              <strong>Signup already satisfies the strong-password baseline for premium access.</strong>
+              <p>That means less interruption later if this account unlocks premium modules or a wider subscription.</p>
+            </article>
+          </div>
+
+          <div className={authStyles.previewBoard}>
+            <p className={authStyles.eyebrow}>What opens next</p>
+            <strong>The first platform wins to expect</strong>
+            <div className={authStyles.previewList}>
+              <div className={authStyles.previewItem}>
+                <span className={authStyles.previewIndex}>01</span>
+                <p>Free foundations to build confidence before the heavier modules.</p>
+              </div>
+              <div className={authStyles.previewItem}>
+                <span className={authStyles.previewIndex}>02</span>
+                <p>Core mechanics, energy, waves, circuits, particles, and astrophysics pathways.</p>
+              </div>
+              <div className={authStyles.previewItem}>
+                <span className={authStyles.previewIndex}>03</span>
+                <p>A dashboard that keeps progress, support, and premium access in one place.</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {err ? <p style={{ color: "crimson" }}>{err}</p> : null}
+        <div className={authStyles.formPanel}>
+          <div className={authStyles.formCard}>
+            <div className={authStyles.formHeader}>
+              <p className={authStyles.eyebrow}>Create account</p>
+              <h1>Create account</h1>
+              <p>Set up a Cognispark account and start the mission path with the right security baseline from day one.</p>
+            </div>
 
-        <button disabled={busy || !passwordCheck.isStrong} style={{ padding: 12 }}>
-          {busy ? "Creating..." : "Create account"}
-        </button>
-      </form>
+            <form onSubmit={onSubmit} className={authStyles.form}>
+              <label className={authStyles.field} htmlFor="register-email">
+                <span className={authStyles.fieldLabel}>Email</span>
+                <input
+                  id="register-email"
+                  className={authStyles.input}
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  type="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  required
+                />
+              </label>
 
-      <p style={{ marginTop: 12 }}>
-        Already have an account? <a href="/login">Login</a>
-      </p>
+              <label className={authStyles.field} htmlFor="register-password">
+                <span className={authStyles.fieldLabel}>Password</span>
+                <input
+                  id="register-password"
+                  className={authStyles.input}
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  type="password"
+                  autoComplete="new-password"
+                  aria-describedby="password-requirements"
+                  minLength={6}
+                  required
+                />
+              </label>
+
+              <div className={authStyles.requirements} id="password-requirements">
+                <strong>Minimum password strength</strong>
+                <p>
+                  If this account later unlocks a module or uses a subscription, the strong-password requirement is already satisfied when this signup rule passes.
+                </p>
+                <div className={authStyles.requirementList}>
+                  {passwordRequirements.map((requirement) => (
+                    <div
+                      key={requirement.key}
+                      className={`${authStyles.requirementItem} ${requirement.met ? authStyles.requirementMet : authStyles.requirementPending}`}
+                    >
+                      <span>{requirement.met ? "Pass" : "Needs work"}</span>
+                      <span>{requirement.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {err ? (
+                <p className={authStyles.error} role="alert">
+                  {err}
+                </p>
+              ) : null}
+
+              <button className={authStyles.primaryButton} disabled={busy || !passwordCheck.isStrong}>
+                {busy ? "Creating..." : "Create account"}
+              </button>
+            </form>
+
+            <p className={authStyles.linkRow}>
+              Already have an account? <Link href="/login">Login</Link>
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
+import styles from "./student.module.css";
 import { apipGet, apipPost } from "../../lib/apipApi";
 import { paidAccessRequiresSecurityUpgrade, securityActionLabel } from "../../lib/accountSecurity";
 import { useAuth } from "../../lib/auth";
@@ -162,15 +163,15 @@ async function getRole(user: User): Promise<Role> {
   return getClientRole(user);
 }
 
-function moduleBadge(moduleItem: Module): { label: string; background: string; color: string } {
+function moduleBadge(moduleItem: Module): { label: string; tone: "blue" | "green" | "amber" } {
   const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
   if (moduleItem.access?.tier === "premium") {
     return locked
-      ? { label: "Premium locked", background: "#fef3c7", color: "#92400e" }
-      : { label: "Premium unlocked", background: "#dcfce7", color: "#166534" };
+      ? { label: "Premium module", tone: "amber" }
+      : { label: "Premium access active", tone: "green" };
   }
 
-  return { label: "Free module", background: "#dbeafe", color: "#1d4ed8" };
+  return { label: "Free module", tone: "blue" };
 }
 
 function moduleGroupKey(moduleId?: string): ModuleGroupKey {
@@ -239,6 +240,25 @@ function subscriptionActionLabel(plan: PricingOffer, currentPlanId?: string | nu
     return "Manage subscription";
   }
   return "Subscribe to " + (plan.title || "premium");
+}
+
+function trackLabelForModule(moduleId?: string): string {
+  switch (moduleGroupKey(moduleId)) {
+    case "foundation":
+      return "Foundation track";
+    case "advancedPhysics":
+      return "Advanced track";
+    default:
+      return "Core track";
+  }
+}
+
+function formatEstimate(minutes?: number): string | null {
+  if (!minutes || minutes <= 0) return null;
+  if (minutes < 60) return `${minutes} min`;
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`;
 }
 
 export default function StudentHomePage() {
@@ -564,10 +584,11 @@ export default function StudentHomePage() {
   );
   const securityActions = sessionUser?.security?.recommended_actions || [];
   const canShowStudentHelp = !sessionLoading && role === "student";
-  const canShowStudentCommunity = !sessionLoading && role === "student" && (
-    (institutionWorkspace?.institutions.length || 0) > 0 ||
-    institutionWorkspace?.viewer.can_access_public_topics === true
-  );
+  const canShowStudentCommunity = false;
+  const totalModuleCount = modules.length;
+  const foundationCount = moduleSections.find((section) => section.key === "foundation")?.modules.length || 0;
+  const coreCount = moduleSections.find((section) => section.key === "corePhysics")?.modules.length || 0;
+  const advancedCount = moduleSections.find((section) => section.key === "advancedPhysics")?.modules.length || 0;
 
   useEffect(() => {
     if (!submissionForm.assignment_id && institutionalAssignments.length > 0) {
@@ -589,331 +610,200 @@ export default function StudentHomePage() {
     const badge = moduleBadge(moduleItem);
     const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
     const buttonLabel = locked ? "See unlock options" : "Open module";
+    const estimate = formatEstimate(moduleItem.estimated_minutes);
 
     return (
-      <div
-        key={moduleItem.id}
-        style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 10,
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ flex: 1, minWidth: 280 }}>
-            <div style={{ fontSize: 18, fontWeight: 700 }}>
-              {moduleItem.title || moduleItem.id}
-            </div>
-
-            <div style={{ opacity: 0.8, marginTop: 6 }}>
-              {moduleItem.description || ""}
-            </div>
-
-            <div style={{ marginTop: 8 }}>
-              <span
-                style={{
-                  display: "inline-flex",
-                  padding: "4px 10px",
-                  borderRadius: 999,
-                  background: badge.background,
-                  color: badge.color,
-                  fontSize: 12,
-                  fontWeight: 800,
-                }}
-              >
-                {badge.label}
-              </span>
-            </div>
-
-            {moduleItem.access?.message ? (
-              <div style={{ marginTop: 10, fontSize: 14, opacity: 0.85 }}>
-                {moduleItem.access.message}
-              </div>
-            ) : null}
-
-            {locked && moduleItem.access?.module_purchase?.price_label ? (
-              <div style={{ marginTop: 8, fontSize: 14, fontWeight: 700 }}>
-                1-month access: {moduleItem.access.module_purchase.price_label}
-              </div>
-            ) : null}
-
-            <div style={{ opacity: 0.75, marginTop: 8, fontSize: 13 }}>
-              {moduleItem.level ? `Level: ${moduleItem.level} | ` : ""}
-              {moduleItem.estimated_minutes
-                ? `Est: ${moduleItem.estimated_minutes} min`
-                : ""}
-            </div>
+      <article key={moduleItem.id} className={styles.moduleCard}>
+        <div className={styles.moduleHeader}>
+          <div>
+            <div className={styles.moduleCode}>{moduleItem.id}</div>
+            <h3>{moduleItem.title || moduleItem.id}</h3>
           </div>
-
-          <div
-            style={{
-              minWidth: 140,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            }}
+          <span
+            className={`${styles.badge} ${
+              badge.tone === "green"
+                ? styles.badgeGreen
+                : badge.tone === "amber"
+                  ? styles.badgeAmber
+                  : styles.badgeBlue
+            }`}
           >
-            <Link href={`/student/module/${encodeURIComponent(moduleItem.id)}`}>
-              <button
-                style={{
-                  padding: "10px 14px",
-                  borderRadius: 10,
-                  border: "1px solid #333",
-                  fontWeight: 700,
-                }}
-              >
-                {buttonLabel}
-              </button>
-            </Link>
-          </div>
+            {badge.label}
+          </span>
         </div>
+
+        <p className={styles.moduleDescription}>{moduleItem.description || ""}</p>
+
+        {moduleItem.access?.message ? (
+          <div className={styles.inlineNote}>{moduleItem.access.message}</div>
+        ) : null}
+
+        <div className={styles.moduleMeta}>
+          <span className={styles.moduleMetaItem}>{trackLabelForModule(moduleItem.id)}</span>
+          <span className={styles.moduleMetaItem}>Module {moduleItem.id}</span>
+          {estimate ? <span className={styles.moduleMetaItem}>Estimated time {estimate}</span> : null}
+          {locked && moduleItem.access?.module_purchase?.price_label ? (
+            <span className={styles.moduleMetaItem}>1-month access {moduleItem.access.module_purchase.price_label}</span>
+          ) : null}
+        </div>
+
+        <Link className={styles.openLink} href={`/student/module/${encodeURIComponent(moduleItem.id)}`}>
+          {buttonLabel}
+        </Link>
+      </article>
+    );
+  }
+
+  function renderStatusBanner(
+    kind: "warning" | "success" | "info",
+    title: string,
+    body: React.ReactNode,
+    actions?: React.ReactNode,
+  ) {
+    const toneClass =
+      kind === "warning"
+        ? styles.bannerWarning
+        : kind === "success"
+          ? styles.bannerSuccess
+          : styles.bannerInfo;
+
+    return (
+      <div className={`${styles.banner} ${toneClass}`}>
+        <div className={styles.bannerTitle}>{title}</div>
+        <div>{body}</div>
+        {actions ? <div className={styles.bannerActions}>{actions}</div> : null}
       </div>
     );
   }
 
   if (loading || roleLoading) {
     return (
-      <div style={{ padding: 24, maxWidth: 1000, margin: "0 auto" }}>
-        <div
-          style={{
-            border: "1px solid #333",
-            borderRadius: 14,
-            padding: 18,
-            textAlign: "center",
-            opacity: 0.85,
-          }}
-        >
-          Loading student access...
-        </div>
+      <div className={styles.page}>
+        {renderStatusBanner("info", "Loading student access", "Connecting your student dashboard and current module access.")}
       </div>
     );
   }
 
   if (!pageReady) {
     return (
-      <div style={{ padding: 24, maxWidth: 1000, margin: "0 auto" }}>
-        <div
-          style={{
-            border: "1px solid #333",
-            borderRadius: 14,
-            padding: 18,
-            textAlign: "center",
-            opacity: 0.85,
-          }}
-        >
-          Redirecting...
-        </div>
+      <div className={styles.page}>
+        {renderStatusBanner("info", "Redirecting", "Taking you to the correct account destination.")}
       </div>
     );
   }
 
   return (
-    <div style={{ padding: 24, maxWidth: 1100, margin: "0 auto" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          gap: 12,
-          marginBottom: 18,
-          flexWrap: "wrap",
-        }}
-      >
-        <div>
-          <h1 style={{ fontSize: 36, marginBottom: 12 }}>Student</h1>
-          <p style={{ opacity: 0.8, marginBottom: 8 }}>
-            F1 is free. Premium modules unlock for 1 month per module or through subscription.
-          </p>
-          <div style={{ opacity: 0.7, fontSize: 13 }}>
-            Signed in as: {user?.email || "student"}
-          </div>
-        </div>
-
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          {billingSummary?.portal_enabled ? (
-            <button onClick={() => void openBillingPortal()} disabled={billingBusy !== ""} style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #333", fontWeight: 700, opacity: billingBusy !== "" ? 0.65 : 1 }}>
-              {billingBusy === "portal" ? "Opening billing..." : billingSummary?.has_active_subscription ? "Manage subscription" : "Manage billing"}
-            </button>
-          ) : null}
-          <button
-            onClick={() => router.refresh()}
-            style={{
-              padding: "10px 14px",
-              borderRadius: 10,
-              border: "1px solid #333",
-              fontWeight: 700,
-            }}
-          >
-            Refresh
-          </button>
-          <button
-            onClick={() => void handleLogout()}
-            style={{
-              padding: "10px 14px",
-              borderRadius: 10,
-              border: "1px solid #333",
-              fontWeight: 700,
-            }}
-          >
-            Sign out
-          </button>
-        </div>
-      </div>
-
-      {status ? (
-        <div
-          style={{
-            border: "1px solid #333",
-            padding: 12,
-            borderRadius: 10,
-            marginBottom: 16,
-            opacity: 0.85,
-          }}
-        >
-          {status}
-        </div>
-      ) : null}
-
-      {err ? (
-        <div
-          style={{
-            border: "1px solid #800",
-            padding: 12,
-            borderRadius: 10,
-            marginBottom: 16,
-          }}
-        >
-          <b>Error:</b> {err}
-        </div>
-      ) : null}
-
-      {billingSummary?.has_active_subscription ? (
-        <div
-          style={{
-            border: "1px solid rgba(22, 101, 52, 0.2)",
-            borderRadius: 14,
-            padding: 16,
-            marginBottom: 16,
-            background: "#f0fdf4",
-            color: "#166534",
-            display: "grid",
-            gap: 12,
-          }}
-        >
+    <div className={styles.page}>
+      <section className={styles.hero}>
+        <div className={styles.heroTop}>
           <div>
-            <div style={{ fontWeight: 900, fontSize: 18 }}>
-              Active subscription: {planDisplayName(activeSubscriptionPlanId)}
-            </div>
-            <div style={{ marginTop: 6, opacity: 0.84 }}>
-              Manage the current plan or upgrade to a longer premium subscription directly here.
-            </div>
+            <p className={styles.eyebrow}>Student workspace</p>
+            <h1 className={styles.title}>Learn physics with a clearer route.</h1>
+            <p className={styles.subtitle}>
+              Foundation, Core, and Advanced modules now sit in one cleaner pathway so students can move from first-contact understanding into deeper physics without losing momentum.
+            </p>
           </div>
-          {subscriptionPlans.length > 0 ? (
-            <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-              {subscriptionPlans.map((plan) => (
-                <button
-                  key={plan.id || plan.title}
-                  onClick={() => void launchSubscriptionCheckout(plan.id)}
-                  disabled={billingBusy !== "" || billingSummary?.can_checkout === false}
-                  style={{ padding: "12px 14px", borderRadius: 12, border: "1px solid rgba(22, 101, 52, 0.16)", background: "rgba(255,255,255,0.92)", fontWeight: 800, color: "#14532d", opacity: billingBusy !== "" || billingSummary?.can_checkout === false ? 0.6 : 1 }}
-                >
-                  {billingBusy === plan.id ? "Opening billing..." : subscriptionActionLabel(plan, activeSubscriptionPlanId)}
-                </button>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      ) : null}
 
-      {needsPaidSecurityUpgrade ? (
-        <div
-          style={{
-            border: "1px solid rgba(146, 64, 14, 0.28)",
-            borderRadius: 14,
-            padding: 16,
-            marginBottom: 16,
-            background: "#fff7ed",
-            color: "#9a3412",
-            display: "grid",
-            gap: 10,
-          }}
-        >
-          <div style={{ fontSize: 18, fontWeight: 900 }}>
-            Secure your paid access before continuing
+          <div className={styles.toolbarGroup}>
+            {billingSummary?.portal_enabled ? (
+              <button onClick={() => void openBillingPortal()} disabled={billingBusy !== ""} className={styles.secondaryButton}>
+                {billingBusy === "portal" ? "Opening billing..." : billingSummary?.has_active_subscription ? "Manage subscription" : "Manage billing"}
+              </button>
+            ) : null}
+            <button onClick={() => router.refresh()} className={styles.ghostButton}>
+              Refresh
+            </button>
+            <button onClick={() => void handleLogout()} className={styles.ghostButton}>
+              Sign out
+            </button>
           </div>
-          <div style={{ lineHeight: 1.6 }}>
-            This account already has a paid module or subscription. Before continuing with premium access, finish the required security steps: {securityActions.length > 0 ? securityActions.map((action) => securityActionLabel(action)).join(", ") : "verify your email and confirm a strong password"}.
-          </div>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        </div>
+
+        <div className={styles.summaryGrid}>
+          <article className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>Signed in as</span>
+            <strong className={styles.summaryValue}>{user?.email || "student"}</strong>
+          </article>
+          <article className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>Pathway</span>
+            <strong className={styles.summaryValue}>{totalModuleCount} modules across Foundation, Core, and Advanced</strong>
+          </article>
+          <article className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>Track split</span>
+            <strong className={styles.summaryValue}>{foundationCount} Foundation / {coreCount} Core / {advancedCount} Advanced</strong>
+          </article>
+          <article className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>Premium status</span>
+            <strong className={styles.summaryValue}>
+              {billingSummary?.has_active_subscription
+                ? `Active subscription: ${planDisplayName(activeSubscriptionPlanId)}`
+                : "Free foundations open, premium modules available to unlock"}
+            </strong>
+          </article>
+        </div>
+      </section>
+
+      {status ? renderStatusBanner("info", "Update", status) : null}
+      {err ? renderStatusBanner("warning", "Something needs attention", err) : null}
+
+      {billingSummary?.has_active_subscription
+        ? renderStatusBanner(
+            "success",
+            `Active subscription: ${planDisplayName(activeSubscriptionPlanId)}`,
+            "Manage the current plan here or upgrade to a longer premium subscription without leaving the student area.",
+            subscriptionPlans.length > 0 ? subscriptionPlans.map((plan) => (
+              <button
+                key={plan.id || plan.title}
+                onClick={() => void launchSubscriptionCheckout(plan.id)}
+                disabled={billingBusy !== "" || billingSummary?.can_checkout === false}
+                className={styles.secondaryButton}
+              >
+                {billingBusy === plan.id ? "Opening billing..." : subscriptionActionLabel(plan, activeSubscriptionPlanId)}
+              </button>
+            )) : undefined,
+          )
+        : null}
+
+      {needsPaidSecurityUpgrade
+        ? renderStatusBanner(
+            "warning",
+            "Protect premium access before it becomes a problem later",
+            `This account already has paid access. Finish the recommended security steps soon so premium access stays smooth: ${
+              securityActions.length > 0
+                ? securityActions.map((action) => securityActionLabel(action)).join(", ")
+                : "verify your email and confirm a strong password"
+            }.`,
             <button
               onClick={() => router.push("/student/security?next=/student")}
               disabled={sessionLoading}
-              style={{
-                padding: "10px 14px",
-                borderRadius: 10,
-                border: "1px solid rgba(146, 64, 14, 0.28)",
-                background: "#fff",
-                fontWeight: 800,
-                color: "#9a3412",
-                opacity: sessionLoading ? 0.7 : 1,
-              }}
+              className={styles.secondaryButton}
             >
               {sessionLoading ? "Checking security..." : "Secure this account"}
-            </button>
-          </div>
-        </div>
-      ) : null}
+            </button>,
+          )
+        : null}
 
       {modulesLoading ? (
-        <div
-          style={{
-            border: "1px solid #333",
-            borderRadius: 12,
-            padding: 18,
-            textAlign: "center",
-            opacity: 0.85,
-          }}
-        >
-          Loading modules...
-        </div>
+        renderStatusBanner("info", "Loading modules", "Pulling the latest module list and access rules for this student account.")
       ) : (
         <div style={{ display: "grid", gap: 18 }}>
           {moduleSections.map((section) => (
-            <section
-              key={section.key}
-              style={{
-                display: "grid",
-                gap: 12,
-                border: "1px solid rgba(51, 51, 51, 0.18)",
-                borderRadius: 16,
-                padding: 16,
-                background: "#fcfcfc",
-              }}
-            >
-              <div>
-                <div style={{ fontSize: 22, fontWeight: 900 }}>{section.title}</div>
-                <div style={{ marginTop: 6, opacity: 0.76 }}>
-                  {section.description}
-                </div>
+            <section key={section.key} className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <p className={styles.sectionLabel}>{section.title}</p>
+                <h2>{section.title}</h2>
+                <p className={styles.sectionLead}>{section.description}</p>
               </div>
-              <div style={{ display: "grid", gap: 12 }}>
+
+              <div className={styles.moduleGrid}>
                 {section.modules.map((moduleItem) => renderModuleCard(moduleItem))}
               </div>
             </section>
           ))}
           {modules.length === 0 ? (
-            <div
-              style={{ border: "1px solid #333", borderRadius: 12, padding: 14 }}
-            >
-              <div style={{ fontWeight: 700, marginBottom: 8 }}>
-                No modules returned.
-              </div>
-              <div style={{ opacity: 0.8 }}>
-                Module options come from Firestore. If one is missing here, the live API is not returning it.
-              </div>
+            <div className={styles.emptyState}>
+              <div className={styles.bannerTitle}>No modules returned.</div>
+              <div>Module options come from Firestore. If one is missing here, the live API is not returning it.</div>
             </div>
           ) : null}
         </div>
@@ -1203,43 +1093,9 @@ export default function StudentHomePage() {
       ) : null}
 
       {canShowStudentHelp && helpDialogOpen ? (
-        <div
-          onClick={() => setHelpDialogOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 120,
-            background: "rgba(15, 23, 42, 0.42)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 20,
-          }}
-        >
-          <div
-            onClick={(event) => event.stopPropagation()}
-            style={{
-              position: "relative",
-              width: "min(100%, 980px)",
-              maxHeight: "calc(100vh - 40px)",
-              overflowY: "auto",
-            }}
-          >
-            <button
-              onClick={() => setHelpDialogOpen(false)}
-              style={{
-                position: "absolute",
-                top: 12,
-                right: 12,
-                zIndex: 2,
-                padding: "10px 14px",
-                borderRadius: 999,
-                border: "1px solid rgba(16, 35, 63, 0.14)",
-                background: "rgba(255, 255, 255, 0.94)",
-                color: "#10233f",
-                fontWeight: 800,
-              }}
-            >
+        <div className={styles.modalBackdrop} onClick={() => setHelpDialogOpen(false)}>
+          <div className={styles.modalPanel} onClick={(event) => event.stopPropagation()}>
+            <button onClick={() => setHelpDialogOpen(false)} className={styles.closeButton}>
               Close
             </button>
             <StudentHelpCard
@@ -1272,24 +1128,11 @@ export default function StudentHomePage() {
       ) : null}
 
       {canShowStudentHelp ? (
-        <button
-          onClick={() => setHelpDialogOpen(true)}
-          style={{
-            position: "fixed",
-            right: 22,
-            bottom: 22,
-            zIndex: 80,
-            padding: "14px 18px",
-            borderRadius: 999,
-            border: "none",
-            background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
-            color: "#fff",
-            fontWeight: 900,
-            boxShadow: "0 18px 38px rgba(11, 26, 50, 0.24)",
-          }}
-        >
-          Help / inquiry
-        </button>
+        <div className={styles.actionDock}>
+          <button onClick={() => setHelpDialogOpen(true)} className={styles.helpButton}>
+            Help / inquiry
+          </button>
+        </div>
       ) : null}
     </div>
   );
