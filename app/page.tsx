@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Interactive Physics Learning Platform",
   description:
     "Cognispark helps students learn physics through guided missions, real lesson visuals, instant feedback, and clear progression from foundations to advanced modules.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    url: "/",
+  },
 };
 
 const highlightCards = [

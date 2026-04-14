@@ -12,12 +12,8 @@ export const metadata: Metadata = {
   description:
     "Cognispark is a physics learning platform that turns concepts into guided missions with visuals, feedback, and clear progression from foundations to advanced study.",
   applicationName: "Cognispark",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
-    url: "https://app.cognispark.tech",
     siteName: "Cognispark",
     title: "Cognispark | Physics, mission by mission",
     description:

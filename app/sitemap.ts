@@ -9,7 +9,6 @@ const PUBLIC_ROUTES = [
   "/privacy",
   "/terms",
   "/operations-guide",
-  "/udemy",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
