@@ -219,9 +219,9 @@ export default function StudentSecurityClient() {
   return (
     <main style={{ padding: 24, fontFamily: "system-ui", maxWidth: 860, margin: "0 auto", display: "grid", gap: 16 }}>
       <div>
-        <h1 style={{ marginBottom: 8 }}>Secure your paid access</h1>
+        <h1 style={{ marginBottom: 8 }}>Secure your account</h1>
         <p style={{ margin: 0, opacity: 0.82, lineHeight: 1.6 }}>
-          Premium access is protected behind a stronger account baseline. If you already created this account with the new strong-password rule, you will not be asked to replace that password again.
+          Keep your account protected and recovery-ready. If your password already meets the current security rule, you will not need to change it again.
         </p>
       </div>
 
@@ -269,7 +269,7 @@ export default function StudentSecurityClient() {
           </div>
         ) : (
           <div style={{ marginTop: 12, color: "#166534", fontWeight: 700 }}>
-            This account is already hardened enough for paid access.
+            Your account security steps are complete.
           </div>
         )}
       </div>
@@ -278,7 +278,7 @@ export default function StudentSecurityClient() {
         <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 16, padding: 16, background: "#ffffff", display: "grid", gap: 12 }}>
           <div style={{ fontSize: 20, fontWeight: 800 }}>Step 1: Verify your email</div>
           <div style={{ opacity: 0.82, lineHeight: 1.6 }}>
-            A verified email gives you a recovery path and makes subscription or module access easier to protect.
+            A verified email helps you recover your account and keep it secure.
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <button
@@ -380,7 +380,7 @@ export default function StudentSecurityClient() {
         <div style={{ opacity: 0.82, lineHeight: 1.6 }}>
           {factorCount > 0
             ? `This browser session can already see ${factorCount} enrolled second factor${factorCount === 1 ? "" : "s"}.`
-            : "Once your required steps are done, add 2-factor authentication in your sign-in provider settings for stronger protection on paid access."}
+            : "When you are ready, add 2-factor authentication in your sign-in provider settings for extra protection."}
         </div>
       </div>
 
@@ -390,7 +390,7 @@ export default function StudentSecurityClient() {
             onClick={() => router.push(nextPath)}
             style={{ padding: "12px 16px", borderRadius: 12, border: "1px solid rgba(15, 23, 42, 0.14)", fontWeight: 800 }}
           >
-            Continue to paid access
+            Continue
           </button>
         ) : null}
         <Link href={nextPath} style={{ alignSelf: "center", color: "#0f172a", fontWeight: 700 }}>
