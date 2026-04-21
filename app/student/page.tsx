@@ -759,7 +759,7 @@ export default function StudentHomePage() {
   if (loading || roleLoading) {
     return (
       <div className={styles.page}>
-        {renderStatusBanner("info", "Loading student access", "Connecting your student dashboard and current module access.")}
+        {renderStatusBanner("info", "Loading your workspace", "Getting your modules and account details ready.")}
       </div>
     );
   }
@@ -767,7 +767,7 @@ export default function StudentHomePage() {
   if (!pageReady) {
     return (
       <div className={styles.page}>
-        {renderStatusBanner("info", "Redirecting", "Taking you to the correct account destination.")}
+        {renderStatusBanner("info", "Redirecting", "Taking you to the right page for your account.")}
       </div>
     );
   }
@@ -780,7 +780,7 @@ export default function StudentHomePage() {
             <p className={styles.eyebrow}>Student workspace</p>
             <h1 className={styles.title}>Learn physics with a clearer route.</h1>
             <p className={styles.subtitle}>
-              Foundation, Core, and Advanced modules now sit in one cleaner pathway so students can move from first-contact understanding into deeper physics without losing momentum.
+              Move from foundations into deeper physics with guided modules, clear explanations, and steady progress at every stage.
             </p>
           </div>
 
@@ -883,8 +883,8 @@ export default function StudentHomePage() {
           ))}
           {modules.length === 0 ? (
             <div className={styles.emptyState}>
-              <div className={styles.bannerTitle}>No modules returned.</div>
-              <div>Module options come from Firestore. If one is missing here, the live API is not returning it.</div>
+              <div className={styles.bannerTitle}>No modules available right now.</div>
+              <div>Please refresh the page or try again in a moment.</div>
             </div>
           ) : null}
         </div>
