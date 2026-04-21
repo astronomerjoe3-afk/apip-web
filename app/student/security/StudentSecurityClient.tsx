@@ -254,7 +254,7 @@ export default function StudentSecurityClient() {
         </div>
         <div style={{ display: "grid", gap: 10 }}>
           <div style={{ color: emailVerified ? "#166534" : "#334155", fontWeight: emailVerified ? 700 : 500 }}>
-            {emailVerified ? "Ready" : "Needed"}: Verify your email address
+            {emailVerified ? "Ready: Email address verified" : "Needed: Verify your email address"}
           </div>
           <div style={{ color: strongPasswordConfirmed ? "#166534" : "#334155", fontWeight: strongPasswordConfirmed ? 700 : 500 }}>
             {strongPasswordConfirmed ? "Ready" : "Needed"}: Strong password recorded for this account
