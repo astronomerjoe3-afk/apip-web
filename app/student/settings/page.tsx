@@ -201,8 +201,8 @@ export default function StudentSettingsPage() {
       <main className={styles.page}>
         <section className={styles.hero}>
           <p className={styles.eyebrow}>Student settings</p>
-          <h1 className={styles.title}>Loading your account tools.</h1>
-          <p className={styles.lead}>Checking profile details, security status, and the account actions available for this session.</p>
+          <h1 className={styles.title}>Loading your settings.</h1>
+          <p className={styles.lead}>Getting your profile and account options ready.</p>
         </section>
       </main>
     );
@@ -213,9 +213,9 @@ export default function StudentSettingsPage() {
       <section className={styles.hero}>
         <div>
           <p className={styles.eyebrow}>Student settings</p>
-          <h1 className={styles.title}>Account controls now live inside Cognispark.</h1>
+          <h1 className={styles.title}>Manage your account.</h1>
           <p className={styles.lead}>
-            Update your name, review security guidance, sign out from the correct place, and delete your account without leaving the app.
+            Update your name, review your security steps, sign out, or delete your account.
           </p>
         </div>
 
@@ -312,12 +312,12 @@ export default function StudentSettingsPage() {
           <div className={styles.cardHeader}>
             <div>
               <p className={styles.cardLabel}>Session</p>
-              <h2>Sign out from the right place</h2>
+              <h2>Sign out</h2>
             </div>
           </div>
 
           <p className={styles.bodyCopy}>
-            PrimeTestLab flagged the home-page logout placement. Sign-out now lives here so the learning flow stays focused on modules and lessons.
+            Use this section when you want to sign out and return to the login screen.
           </p>
 
           <div className={styles.cardActions}>
@@ -327,11 +327,50 @@ export default function StudentSettingsPage() {
           </div>
         </article>
 
+        <article className={styles.card}>
+          <div className={styles.cardHeader}>
+            <div>
+              <p className={styles.cardLabel}>Q & A</p>
+              <h2>Quick answers</h2>
+            </div>
+          </div>
+
+          <div className={styles.qaList}>
+            <div className={styles.qaItem}>
+              <strong className={styles.qaQuestion}>How do I change the name shown in the app?</strong>
+              <p className={styles.qaAnswer}>
+                Update your display name in the profile section above, then save your changes.
+              </p>
+            </div>
+
+            <div className={styles.qaItem}>
+              <strong className={styles.qaQuestion}>Do I need to verify my email?</strong>
+              <p className={styles.qaAnswer}>
+                Yes. Email verification helps protect your account and makes recovery easier if you lose access.
+              </p>
+            </div>
+
+            <div className={styles.qaItem}>
+              <strong className={styles.qaQuestion}>Where do I sign out?</strong>
+              <p className={styles.qaAnswer}>
+                Use the sign-out button on this page whenever you want to end your session safely.
+              </p>
+            </div>
+
+            <div className={styles.qaItem}>
+              <strong className={styles.qaQuestion}>What happens if I delete my account?</strong>
+              <p className={styles.qaAnswer}>
+                Your sign-in access and learning data are removed, while any records that must be kept for billing, security, or legal reasons may still be retained.
+              </p>
+            </div>
+          </div>
+        </article>
+
         <article className={`${styles.card} ${styles.dangerCard}`}>
           <div className={styles.cardHeader}>
             <div>
               <p className={styles.cardLabel}>Delete account</p>
-              <h2>Delete your account in-app</h2>
+              <h2>Delete your account</h2>
             </div>
             <span className={styles.cardTag}>High impact</span>
           </div>

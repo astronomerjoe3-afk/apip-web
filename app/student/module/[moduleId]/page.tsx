@@ -1226,7 +1226,7 @@ export default function StudentModulePage() {
               </div>
             ) : null}
             <div style={{ textAlign: "center", opacity: 0.72 }}>
-              {billingConfigured ? billingCtaText : "Live billing is not configured in this environment yet. Add the Stripe keys and price ids on the API service to enable checkout."}
+              {billingConfigured ? billingCtaText : "Billing is temporarily unavailable right now. Please try again later or contact support if you need help with access."}
             </div>
             <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
               {canManageBilling ? (

@@ -216,6 +216,33 @@
   line-height: 1.72;
 }
 
+.qaList {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.qaItem {
+  display: grid;
+  gap: 0.35rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(16, 35, 63, 0.08);
+}
+
+.qaItem:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.qaQuestion {
+  color: #10233f;
+  line-height: 1.5;
+}
+
+.qaAnswer {
+  color: #455467;
+  line-height: 1.72;
+}
+
 .cardActions {
   display: flex;
   gap: 0.75rem;
