@@ -1,0 +1,255 @@
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: grid;
+  gap: 1.3rem;
+}
+
+.hero,
+.card,
+.statusSuccess,
+.statusError {
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.hero {
+  padding: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(226, 236, 255, 0.92) 100%);
+}
+
+.eyebrow,
+.cardLabel,
+.heroMetaLabel {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6d7b8f;
+}
+
+.title {
+  margin-top: 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 2rem + 1.6vw, 3.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.lead {
+  max-width: 48rem;
+  margin-top: 0.85rem;
+  color: #435266;
+  line-height: 1.8;
+}
+
+.heroMeta {
+  min-width: 280px;
+  padding: 1rem 1.05rem;
+  border-radius: 24px;
+  border: 1px solid rgba(16, 35, 63, 0.08);
+  background: rgba(248, 250, 252, 0.78);
+}
+
+.heroMetaValue {
+  margin-top: 0.45rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #10233f;
+}
+
+.heroMetaSubtle {
+  margin-top: 0.35rem;
+  color: #58677a;
+}
+
+.statusSuccess,
+.statusError {
+  padding: 1rem 1.1rem;
+  line-height: 1.65;
+}
+
+.statusSuccess {
+  background: #effaf3;
+  color: #166534;
+}
+
+.statusError {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card {
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.dangerCard {
+  border-color: rgba(153, 27, 27, 0.16);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(254, 242, 242, 0.88) 100%);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.cardHeader h2 {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.cardTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 35, 63, 0.1);
+  background: rgba(248, 250, 252, 0.82);
+  color: #405066;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+  color: #24364d;
+  font-weight: 700;
+}
+
+.input,
+.inputMuted {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.82rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(16, 35, 63, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  color: #10233f;
+  font: inherit;
+}
+
+.inputMuted {
+  background: rgba(248, 250, 252, 0.92);
+  color: #58677a;
+}
+
+.primaryButton,
+.secondaryButton,
+.dangerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.82rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.primaryButton {
+  border: none;
+  background: linear-gradient(135deg, #10233f 0%, #1e3e79 100%);
+  color: #fff;
+}
+
+.secondaryButton {
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.86);
+  color: #10233f;
+}
+
+.dangerButton {
+  border: none;
+  background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+  color: #fff;
+}
+
+.securityList {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.securityRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  line-height: 1.55;
+  flex-wrap: wrap;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(16, 35, 63, 0.08);
+}
+
+.securityRow:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.bodyCopy {
+  color: #455467;
+  line-height: 1.72;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.textLink {
+  color: #10233f;
+  font-weight: 800;
+  text-decoration: none;
+  align-self: center;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 1rem 0.9rem 3rem;
+  }
+
+  .hero,
+  .card,
+  .statusSuccess,
+  .statusError {
+    border-radius: 22px;
+  }
+
+  .cardActions,
+  .form {
+    width: 100%;
+  }
+
+  .cardActions > *,
+  .primaryButton,
+  .secondaryButton,
+  .dangerButton {
+    width: 100%;
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { useRouter, useSearchParams } from "next/navigation";
 import { auth, firebaseConfigured } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
@@ -15,10 +16,17 @@ function errorMessage(error: unknown): string {
   return "Login failed";
 }
 
+const PASSWORD_RESET_NOTICE =
+  "If an account exists for this email, a reset link has been sent. Check your inbox and spam folder.";
+
+function shouldMaskPasswordResetResult(error: unknown): boolean {
+  return error instanceof FirebaseError && error.code === "auth/user-not-found";
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { user, loading } = useAuth();
+  const { user, sessionUser, authenticated, loading } = useAuth();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -28,19 +36,24 @@ export default function LoginPage() {
   const [resetMessage, setResetMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (loading || !user) {
+    if (loading || !authenticated) {
       return;
     }
 
-    const currentUser = user;
-
     async function redirectSignedInUser(): Promise<void> {
-      const role = await getClientRole(currentUser);
-      router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+      if (user) {
+        const role = await getClientRole(user);
+        router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+        return;
+      }
+
+      if (sessionUser) {
+        router.replace(resolvePostAuthPath(sessionUser.role, searchParams.get("next")));
+      }
     }
 
     void redirectSignedInUser();
-  }, [loading, router, searchParams, user]);
+  }, [authenticated, loading, router, searchParams, sessionUser, user]);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -93,8 +106,12 @@ export default function LoginPage() {
       await sendPasswordResetEmail(auth, email.trim(), {
         url: `${window.location.origin}/login`,
       });
-      setResetMessage("Password reset email sent. Check your inbox and spam folder.");
+      setResetMessage(PASSWORD_RESET_NOTICE);
     } catch (error: unknown) {
+      if (shouldMaskPasswordResetResult(error)) {
+        setResetMessage(PASSWORD_RESET_NOTICE);
+        return;
+      }
       setErr(errorMessage(error));
     } finally {
       setResetBusy(false);

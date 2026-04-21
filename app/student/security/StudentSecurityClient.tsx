@@ -54,6 +54,8 @@ export default function StudentSecurityClient() {
     () => sanitizeNextPath(searchParams.get("next")) || "/student",
     [searchParams],
   );
+  const signupSource = searchParams.get("source") === "signup";
+  const verificationStatus = searchParams.get("verification");
 
   const passwordCheck = useMemo(
     () => evaluatePasswordStrength(newPassword, user?.email || sessionUser?.email || ""),
@@ -222,6 +224,17 @@ export default function StudentSecurityClient() {
           Premium access is protected behind a stronger account baseline. If you already created this account with the new strong-password rule, you will not be asked to replace that password again.
         </p>
       </div>
+
+      {signupSource ? (
+        <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 12, padding: 14, background: "#eff6ff", color: "#1d4ed8" }}>
+          <strong>{emailVerified ? "Your account is ready." : "Your account is created."}</strong>{" "}
+          {emailVerified
+            ? "Your email already shows as verified. You can continue with the student workspace below."
+            : verificationStatus === "sent"
+              ? "We sent a verification email to this account. Open that link, then come back here and refresh your status."
+              : "Finish email verification below before you move on. If you did not receive a message yet, use the resend button in Step 1."}
+        </div>
+      ) : null}
 
       {err ? (
         <div style={{ border: "1px solid #991b1b", borderRadius: 12, padding: 12, background: "#fef2f2", color: "#991b1b" }}>
