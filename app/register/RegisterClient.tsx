@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import authStyles from "../auth.module.css";
@@ -26,7 +26,7 @@ function errorMessage(error: unknown): string {
 export default function RegisterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { user, loading } = useAuth();
+  const { user, sessionUser, authenticated, loading } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [err, setErr] = useState<string | null>(null);
@@ -38,19 +38,24 @@ export default function RegisterPage() {
   );
 
   useEffect(() => {
-    if (loading || !user) {
+    if (loading || !authenticated) {
       return;
     }
 
-    const currentUser = user;
-
     async function redirectSignedInUser(): Promise<void> {
-      const role = await getClientRole(currentUser);
-      router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+      if (user) {
+        const role = await getClientRole(user);
+        router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+        return;
+      }
+
+      if (sessionUser) {
+        router.replace(resolvePostAuthPath(sessionUser.role, searchParams.get("next")));
+      }
     }
 
     void redirectSignedInUser();
-  }, [loading, router, searchParams, user]);
+  }, [authenticated, loading, router, searchParams, sessionUser, user]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -73,10 +78,24 @@ export default function RegisterPage() {
         email.trim(),
         password,
       );
-      await establishSessionFromUser(credential.user);
+      const verificationPath = resolvePostAuthPath("student", searchParams.get("next"));
+      let verificationStatus = "retry";
+
+      try {
+        await sendEmailVerification(credential.user, {
+          url: `${window.location.origin}/student/security?next=${encodeURIComponent(verificationPath)}&source=signup`,
+        });
+        verificationStatus = "sent";
+      } catch {
+        verificationStatus = "retry";
+      }
+
+      const session = await establishSessionFromUser(credential.user);
       await recordStrongPasswordPolicy(MIN_PASSWORD_POLICY_VERSION);
-      const role = await getClientRole(credential.user);
-      router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+      const targetPath = resolvePostAuthPath(session.role, searchParams.get("next"));
+      router.replace(
+        `/student/security?next=${encodeURIComponent(targetPath)}&source=signup&verification=${verificationStatus}`,
+      );
     } catch (error: unknown) {
       setErr(errorMessage(error));
     } finally {

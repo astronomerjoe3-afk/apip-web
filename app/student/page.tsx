@@ -11,7 +11,14 @@ import { paidAccessRequiresSecurityUpgrade, securityActionLabel } from "../../li
 import { useAuth } from "../../lib/auth";
 import { getClientRole, isAcademicLeadRole, isInstitutionStaffRole, type Role } from "../../lib/authRouting";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
-import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
+import { readSessionUser, type SessionUser } from "../../lib/sessionClient";
+import { shareLink } from "../../lib/shareLink";
+import {
+  moduleFavoriteKey,
+  readStudentPreferenceState,
+  togglePreferenceId,
+  writeStudentPreferenceState,
+} from "../../lib/studentPreferences";
 import StudentHelpCard from "../../components/StudentHelpCard";
 
 type PricingOffer = {
@@ -261,9 +268,19 @@ function formatEstimate(minutes?: number): string | null {
   return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`;
 }
 
+function signedInLabel(sessionUser: SessionUser | null, user: User | null): string {
+  return (
+    sessionUser?.display_name
+    || user?.displayName
+    || sessionUser?.email
+    || user?.email
+    || "Student"
+  );
+}
+
 export default function StudentHomePage() {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, sessionUser: authSessionUser, authenticated, loading } = useAuth();
 
   const [role, setRole] = useState<Role>("unknown");
   const [roleLoading, setRoleLoading] = useState<boolean>(true);
@@ -280,6 +297,7 @@ export default function StudentHomePage() {
   const [institutionBusy, setInstitutionBusy] = useState<string>("");
   const [communityDialogOpen, setCommunityDialogOpen] = useState<boolean>(false);
   const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
+  const [favoriteModules, setFavoriteModules] = useState<string[]>([]);
   const [submissionForm, setSubmissionForm] = useState({
     assignment_id: "",
     text_response: "",
@@ -294,12 +312,32 @@ export default function StudentHomePage() {
   });
 
   useEffect(() => {
+    setFavoriteModules(readStudentPreferenceState().favoriteModules);
+  }, []);
+
+  useEffect(() => {
+    if (!communityDialogOpen && !helpDialogOpen) {
+      return;
+    }
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, [communityDialogOpen, helpDialogOpen]);
+
+  useEffect(() => {
     let cancelled = false;
 
     async function resolveRole(): Promise<void> {
       if (loading) return;
 
-      if (!user) {
+      if (!authenticated) {
         if (!cancelled) {
           setRole("unknown");
           setRoleLoading(false);
@@ -308,7 +346,9 @@ export default function StudentHomePage() {
         return;
       }
 
-      const resolvedRole = await getRole(user);
+      const resolvedRole: Role = user
+        ? await getRole(user)
+        : authSessionUser?.role || "unknown";
       if (cancelled) return;
 
       setRole(resolvedRole);
@@ -339,14 +379,14 @@ export default function StudentHomePage() {
     return () => {
       cancelled = true;
     };
-  }, [loading, router, user]);
+  }, [authSessionUser, authenticated, loading, router, user]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadModules(): Promise<void> {
       if (loading || roleLoading) return;
-      if (!user || role !== "student") return;
+      if (!authenticated || role !== "student") return;
 
       setModulesLoading(true);
 
@@ -375,14 +415,14 @@ export default function StudentHomePage() {
     return () => {
       cancelled = true;
     };
-  }, [loading, roleLoading, role, user]);
+  }, [authenticated, loading, roleLoading, role]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadBillingSummary(): Promise<void> {
       if (loading || roleLoading) return;
-      if (!user || role !== "student") return;
+      if (!authenticated || role !== "student") return;
       try {
         const data = await apipGet<BillingSummaryResponse>("/billing/summary");
         if (!cancelled) setBillingSummary(data.billing || null);
@@ -394,14 +434,14 @@ export default function StudentHomePage() {
     return () => {
       cancelled = true;
     };
-  }, [loading, roleLoading, role, user]);
+  }, [authenticated, loading, roleLoading, role]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadSessionState(): Promise<void> {
       if (loading || roleLoading) return;
-      if (!user || role !== "student") {
+      if (!authenticated || role !== "student") {
         if (!cancelled) {
           setSessionUser(null);
           setSessionLoading(false);
@@ -409,14 +449,19 @@ export default function StudentHomePage() {
         return;
       }
 
+      if (!cancelled) {
+        setSessionLoading(true);
+        setSessionUser(authSessionUser);
+      }
+
       try {
         const currentSessionUser = await readSessionUser();
         if (!cancelled) {
-          setSessionUser(currentSessionUser);
+          setSessionUser(currentSessionUser || authSessionUser || null);
         }
       } catch {
         if (!cancelled) {
-          setSessionUser(null);
+          setSessionUser(authSessionUser || null);
         }
       } finally {
         if (!cancelled) {
@@ -430,14 +475,14 @@ export default function StudentHomePage() {
     return () => {
       cancelled = true;
     };
-  }, [loading, roleLoading, role, user]);
+  }, [authSessionUser, authenticated, loading, roleLoading, role]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadInstitutionWorkspace(): Promise<void> {
       if (loading || roleLoading) return;
-      if (!user || role !== "student") return;
+      if (!authenticated || role !== "student") return;
 
       try {
         const data = await apipGet<InstitutionalWorkspaceResponse>("/institutions/workspace");
@@ -456,7 +501,7 @@ export default function StudentHomePage() {
     return () => {
       cancelled = true;
     };
-  }, [loading, roleLoading, role, user]);
+  }, [authenticated, loading, roleLoading, role]);
 
   async function openBillingPortal(): Promise<void> {
     try {
@@ -485,13 +530,30 @@ export default function StudentHomePage() {
     }
   }
 
-  async function handleLogout(): Promise<void> {
+  function toggleModuleFavorite(moduleId: string): void {
+    const nextFavoriteModules = togglePreferenceId(favoriteModules, moduleFavoriteKey(moduleId));
+    setFavoriteModules(nextFavoriteModules);
+    writeStudentPreferenceState({
+      ...readStudentPreferenceState(),
+      favoriteModules: nextFavoriteModules,
+    });
+    setStatus(
+      nextFavoriteModules.includes(moduleFavoriteKey(moduleId))
+        ? `${moduleId} saved to favorites.`
+        : `${moduleId} removed from favorites.`,
+    );
+  }
+
+  async function handleShareModule(moduleItem: Module): Promise<void> {
     try {
-      setStatus("Signing out...");
-      await signOutEverywhere();
-      router.replace("/login?next=/student");
+      const shareUrl = `${window.location.origin}/student/module/${encodeURIComponent(moduleItem.id)}`;
+      const shareStatus = await shareLink(
+        shareUrl,
+        `${moduleItem.title || moduleItem.id} | Cognispark`,
+        `Open ${moduleItem.title || moduleItem.id} in Cognispark.`,
+      );
+      setStatus(shareStatus);
     } catch (error: unknown) {
-      setStatus("");
       setErr(errorMessage(error));
     }
   }
@@ -537,8 +599,8 @@ export default function StudentHomePage() {
   }
 
   const pageReady = useMemo(() => {
-    return !loading && !roleLoading && !!user && role === "student";
-  }, [loading, roleLoading, role, user]);
+    return !loading && !roleLoading && authenticated && role === "student";
+  }, [authenticated, loading, roleLoading, role]);
 
   const activeSubscriptionPlanId = billingSummary?.active_subscription_plan_id || billingSummary?.subscription?.plan_id || null;
   const subscriptionPlans = useMemo(() => {
@@ -611,6 +673,8 @@ export default function StudentHomePage() {
     const locked = moduleItem.access?.tier === "premium" && moduleItem.access?.is_unlocked === false;
     const buttonLabel = locked ? "See unlock options" : "Open module";
     const estimate = formatEstimate(moduleItem.estimated_minutes);
+    const favoriteKey = moduleFavoriteKey(moduleItem.id);
+    const isFavorite = favoriteModules.includes(favoriteKey);
 
     return (
       <article key={moduleItem.id} className={styles.moduleCard}>
@@ -647,9 +711,25 @@ export default function StudentHomePage() {
           ) : null}
         </div>
 
-        <Link className={styles.openLink} href={`/student/module/${encodeURIComponent(moduleItem.id)}`}>
-          {buttonLabel}
-        </Link>
+        <div className={styles.moduleActions}>
+          <button
+            type="button"
+            onClick={() => toggleModuleFavorite(moduleItem.id)}
+            className={`${styles.utilityButton} ${isFavorite ? styles.utilityButtonActive : ""}`}
+          >
+            {isFavorite ? "Favorited" : "Favorite"}
+          </button>
+          <button
+            type="button"
+            onClick={() => void handleShareModule(moduleItem)}
+            className={styles.utilityButton}
+          >
+            Share
+          </button>
+          <Link className={styles.openLink} href={`/student/module/${encodeURIComponent(moduleItem.id)}`}>
+            {buttonLabel}
+          </Link>
+        </div>
       </article>
     );
   }
@@ -710,19 +790,17 @@ export default function StudentHomePage() {
                 {billingBusy === "portal" ? "Opening billing..." : billingSummary?.has_active_subscription ? "Manage subscription" : "Manage billing"}
               </button>
             ) : null}
-            <button onClick={() => router.refresh()} className={styles.ghostButton}>
-              Refresh
-            </button>
-            <button onClick={() => void handleLogout()} className={styles.ghostButton}>
-              Sign out
-            </button>
+            <Link href="/student/settings" className={styles.ghostButton}>
+              Settings & account
+            </Link>
           </div>
         </div>
 
         <div className={styles.summaryGrid}>
           <article className={styles.summaryCard}>
             <span className={styles.summaryLabel}>Signed in as</span>
-            <strong className={styles.summaryValue}>{user?.email || "student"}</strong>
+            <strong className={styles.summaryValue}>{signedInLabel(sessionUser, user)}</strong>
+            <div className={styles.summarySubtle}>{sessionUser?.email || user?.email || "Student account"}</div>
           </article>
           <article className={styles.summaryCard}>
             <span className={styles.summaryLabel}>Pathway</span>
@@ -733,12 +811,15 @@ export default function StudentHomePage() {
             <strong className={styles.summaryValue}>{foundationCount} Foundation / {coreCount} Core / {advancedCount} Advanced</strong>
           </article>
           <article className={styles.summaryCard}>
-            <span className={styles.summaryLabel}>Premium status</span>
+            <span className={styles.summaryLabel}>Saved favorites</span>
             <strong className={styles.summaryValue}>
-              {billingSummary?.has_active_subscription
-                ? `Active subscription: ${planDisplayName(activeSubscriptionPlanId)}`
-                : "Free foundations open, premium modules available to unlock"}
+              {favoriteModules.length} modules saved for quick return
             </strong>
+            <div className={styles.summarySubtle}>
+              {billingSummary?.has_active_subscription
+                ? `Premium active: ${planDisplayName(activeSubscriptionPlanId)}`
+                : "Free foundations open, premium modules available to unlock"}
+            </div>
           </article>
         </div>
       </section>
@@ -816,7 +897,7 @@ export default function StudentHomePage() {
             position: "fixed",
             inset: 0,
             zIndex: 120,
-            background: "rgba(15, 23, 42, 0.42)",
+            background: "rgba(6, 12, 24, 0.68)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

@@ -4,36 +4,69 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { onIdTokenChanged, type User } from "firebase/auth";
 
 import { firebaseConfigured, maybeAuth } from "./firebase";
-import { establishSessionFromUser } from "./sessionClient";
+import { establishSessionFromUser, readSessionUser, type SessionUser } from "./sessionClient";
 
 type AuthContextValue = {
   user: User | null;
+  sessionUser: SessionUser | null;
+  authenticated: boolean;
   loading: boolean;
 };
 
-const AuthContext = createContext<AuthContextValue>({ user: null, loading: true });
+const AuthContext = createContext<AuthContextValue>({
+  user: null,
+  sessionUser: null,
+  authenticated: false,
+  loading: true,
+});
 
-async function primeUserToken(user: User | null): Promise<User | null> {
-  if (!user) {
+async function readSessionUserSafe(): Promise<SessionUser | null> {
+  try {
+    return await readSessionUser();
+  } catch {
     return null;
+  }
+}
+
+async function primeUserToken(user: User | null): Promise<{
+  user: User | null;
+  sessionUser: SessionUser | null;
+}> {
+  if (!user) {
+    return {
+      user: null,
+      sessionUser: await readSessionUserSafe(),
+    };
   }
 
   try {
-    await establishSessionFromUser(user);
+    const sessionUser = await establishSessionFromUser(user);
+    return {
+      user,
+      sessionUser,
+    };
   } catch {
-    // Allow the app to continue with the current session object even if
-    // session bootstrap is still settling in the background.
+    return {
+      user,
+      // Fall back to any existing server session so authenticated users can
+      // survive WebView/Firebase rehydration quirks across app restarts.
+      sessionUser: await readSessionUserSafe(),
+    };
   }
-
-  return user;
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(firebaseConfigured && !!maybeAuth);
+  const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!firebaseConfigured || !maybeAuth) {
+      void (async () => {
+        const fallbackSessionUser = await readSessionUserSafe();
+        setSessionUser(fallbackSessionUser);
+        setLoading(false);
+      })();
       return;
     }
 
@@ -46,12 +79,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const currentRevision = ++revision;
 
       void (async () => {
-        const primedUser = await primeUserToken(u);
+        const primedState = await primeUserToken(u);
         if (cancelled || currentRevision !== revision) {
           return;
         }
 
-        setUser(primedUser);
+        setUser(primedState.user);
+        setSessionUser(primedState.sessionUser);
         setLoading(false);
       })();
     });
@@ -61,7 +95,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        sessionUser,
+        authenticated: Boolean(user || sessionUser),
+        loading,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {

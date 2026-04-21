@@ -136,6 +136,27 @@ export async function apipPost<
   return parseApiResponse<TResponse>(response);
 }
 
+export async function apipPatch<
+  TResponse,
+  TBody extends JsonObject = JsonObject,
+>(
+  path: string,
+  body: TBody,
+  init?: RequestInit,
+): Promise<TResponse> {
+  const headers = new Headers(init?.headers);
+  headers.set("Content-Type", "application/json");
+
+  const response = await performRequest(path, {
+    ...init,
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+  });
+
+  return parseApiResponse<TResponse>(response);
+}
+
 export async function apipDelete<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await performRequest(path, {
     ...init,

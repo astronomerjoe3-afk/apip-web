@@ -5,15 +5,15 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "./auth";
 
 export default function Protected({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
+  const { authenticated, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user) router.replace("/login");
-  }, [loading, user, router]);
+    if (!loading && !authenticated) router.replace("/login");
+  }, [authenticated, loading, router]);
 
   if (loading) return <div style={{ padding: 24 }}>Loading...</div>;
-  if (!user) return null; // while redirecting
+  if (!authenticated) return null; // while redirecting
 
   return <>{children}</>;
 }

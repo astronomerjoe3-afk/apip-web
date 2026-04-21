@@ -7,7 +7,7 @@ import styles from "../module.module.css";
 import { apipGet, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import StudentHelpCard from "../../../../components/StudentHelpCard";
-import { clearAllLessonRunnerState, restartModuleProgress } from "../../../../lib/lessonRunnerApi";
+import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
 import { isSecurityBypassRole, securityActionLabel } from "../../../../lib/accountSecurity";
 import { useAuth } from "../../../../lib/auth";
 import {
@@ -17,7 +17,15 @@ import {
   normalizeModuleId,
   sanitizeModuleHeadingDescription,
 } from "../../../../lib/moduleCurriculum";
-import { readSessionUser, signOutEverywhere, type SessionUser } from "../../../../lib/sessionClient";
+import { readSessionUser, type SessionUser } from "../../../../lib/sessionClient";
+import { shareLink } from "../../../../lib/shareLink";
+import {
+  lessonFavoriteKey,
+  moduleFavoriteKey,
+  readStudentPreferenceState,
+  togglePreferenceId,
+  writeStudentPreferenceState,
+} from "../../../../lib/studentPreferences";
 
 type PricingOffer = {
   id?: string;
@@ -277,7 +285,7 @@ export default function StudentModulePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = useParams() as Record<string, string | string[] | undefined>;
-  const { user, loading: authLoading } = useAuth();
+  const { user, sessionUser: authSessionUser, authenticated, loading: authLoading } = useAuth();
 
   const raw =
     (params["moduleId"] ?? params["module"]) as string | string[] | undefined;
@@ -299,6 +307,7 @@ export default function StudentModulePage() {
   const checkoutState = searchParams.get("checkout");
   const checkoutSessionId = searchParams.get("session_id");
   const returnedFromBillingPortal = searchParams.get("billing") === "return";
+  const requestedLessonId = searchParams.get("lesson");
 
   const [moduleMeta, setModuleMeta] = useState<ModuleCatalog | null>(null);
   const [billingSummary, setBillingSummary] = useState<BillingSummary | null>(null);
@@ -316,6 +325,8 @@ export default function StudentModulePage() {
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
+  const [favoriteModules, setFavoriteModules] = useState<string[]>([]);
+  const [favoriteLessons, setFavoriteLessons] = useState<string[]>([]);
 
   const activeLesson = useMemo(() => {
     if (!lessons.length) return null;
@@ -356,9 +367,37 @@ export default function StudentModulePage() {
   const waitingForSecurityCheck = premiumAccessUnlocked && !roleBypassesSecurityUpgrade && sessionLoading;
   const securityActions = sessionUser?.security?.recommended_actions || [];
   const canShowStudentHelp = !sessionLoading && sessionUser?.role === "student";
+  const activeLessonKey = activeLesson
+    ? lessonFavoriteKey(moduleId, normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id))
+    : "";
+  const moduleFavoriteId = moduleFavoriteKey(moduleId);
+  const moduleFavorited = favoriteModules.includes(moduleFavoriteId);
+  const lessonFavorited = activeLessonKey ? favoriteLessons.includes(activeLessonKey) : false;
+
+  useEffect(() => {
+    const preferences = readStudentPreferenceState();
+    setFavoriteModules(preferences.favoriteModules);
+    setFavoriteLessons(preferences.favoriteLessons);
+  }, []);
+
+  useEffect(() => {
+    if (!helpDialogOpen) {
+      return;
+    }
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, [helpDialogOpen]);
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
-    if (!user) {
+    if (!authenticated) {
       setBillingSummary(null);
       setBillingErr("");
       return;
@@ -374,7 +413,7 @@ export default function StudentModulePage() {
     } finally {
       setBillingLoading(false);
     }
-  }, [user]);
+  }, [authenticated]);
 
   const loadModuleState = useCallback(
     async (preserveCurrentLesson: boolean = true, currentLessonIdOverride?: string): Promise<void> => {
@@ -382,7 +421,7 @@ export default function StudentModulePage() {
         return;
       }
 
-      if (!user) {
+      if (!authenticated) {
         setErr("");
         setModuleMeta(null);
         setAvailableModules([]);
@@ -544,7 +583,7 @@ export default function StudentModulePage() {
         setLoading(false);
       }
     },
-    [authLoading, moduleId, user],
+    [authLoading, authenticated, moduleId],
   );
 
   useEffect(() => {
@@ -552,19 +591,19 @@ export default function StudentModulePage() {
       return;
     }
 
-    if (!user) {
+    if (!authenticated) {
       router.replace("/login?next=/student");
       return;
     }
 
-    void loadModuleState(false);
-  }, [authLoading, currentModulePath, loadModuleState, router, user]);
+    void loadModuleState(true, requestedLessonId || undefined);
+  }, [authLoading, authenticated, currentModulePath, loadModuleState, requestedLessonId, router]);
 
   useEffect(() => {
-    if (!authLoading && user) {
+    if (!authLoading && authenticated) {
       void loadBillingSummary();
     }
-  }, [authLoading, loadBillingSummary, user]);
+  }, [authLoading, authenticated, loadBillingSummary]);
 
   useEffect(() => {
     let cancelled = false;
@@ -574,7 +613,7 @@ export default function StudentModulePage() {
         return;
       }
 
-      if (!user) {
+      if (!authenticated) {
         if (!cancelled) {
           setSessionUser(null);
           setSessionLoading(false);
@@ -582,14 +621,19 @@ export default function StudentModulePage() {
         return;
       }
 
+      if (!cancelled) {
+        setSessionLoading(true);
+        setSessionUser(authSessionUser);
+      }
+
       try {
         const currentSessionUser = await readSessionUser();
         if (!cancelled) {
-          setSessionUser(currentSessionUser);
+          setSessionUser(currentSessionUser || authSessionUser || null);
         }
       } catch {
         if (!cancelled) {
-          setSessionUser(null);
+          setSessionUser(authSessionUser || null);
         }
       } finally {
         if (!cancelled) {
@@ -603,7 +647,7 @@ export default function StudentModulePage() {
     return () => {
       cancelled = true;
     };
-  }, [authLoading, user]);
+  }, [authLoading, authSessionUser, authenticated]);
 
   useEffect(() => {
     if (!checkoutState) {
@@ -620,7 +664,7 @@ export default function StudentModulePage() {
   }, [checkoutState, returnedFromBillingPortal]);
 
   useEffect(() => {
-    if (!user || !checkoutSessionId || checkoutState !== "success") {
+    if (!authenticated || !checkoutSessionId || checkoutState !== "success") {
       return;
     }
 
@@ -645,7 +689,7 @@ export default function StudentModulePage() {
         setStatus("");
         setBillingErr(errorMessage(error));
       });
-  }, [checkoutSessionId, checkoutState, currentModulePath, loadBillingSummary, loadModuleState, moduleId, router, user]);
+  }, [authenticated, checkoutSessionId, checkoutState, currentModulePath, loadBillingSummary, loadModuleState, moduleId, router]);
 
   const canGoBack = activeIdx > 0;
   const currentLessonCompleted = activeLesson?.progress?.completed === true;
@@ -657,6 +701,15 @@ export default function StudentModulePage() {
   );
   const totalLessons = moduleProgress?.total_lessons ?? lessons.length;
   const moduleCompleted = totalLessons > 0 && lessonsCompletedCount >= totalLessons;
+  const moduleActionMessage = moduleLocked
+    ? "This module is locked right now. Use the unlock options below or return to the module list."
+    : moduleCompleted
+      ? "You completed this module. Choose your next step below."
+      : currentLessonCompleted
+        ? "You can continue to the next mission."
+        : lessons.length > 0
+          ? "Complete this mission to unlock the next one."
+          : "Loading the lesson sequence now.";
   const nextModule = useMemo(() => {
     const currentRank = moduleSequenceRank(moduleId);
     if (!Number.isFinite(currentRank) || currentRank === Number.MAX_SAFE_INTEGER) {
@@ -672,19 +725,71 @@ export default function StudentModulePage() {
   const nextModuleSubscriptionPlans = nextModule?.access?.subscription_plans || [];
   const recommendedSubscriptionPlan = nextModuleSubscriptionPlans[0] || subscriptionPlans[0] || null;
 
+  const toggleModuleFavorite = useCallback((): void => {
+    const nextFavoriteModules = togglePreferenceId(favoriteModules, moduleFavoriteId);
+    setFavoriteModules(nextFavoriteModules);
+    writeStudentPreferenceState({
+      ...readStudentPreferenceState(),
+      favoriteModules: nextFavoriteModules,
+      favoriteLessons,
+    });
+    setStatus(
+      nextFavoriteModules.includes(moduleFavoriteId)
+        ? `${moduleId} saved to favorites.`
+        : `${moduleId} removed from favorites.`,
+    );
+  }, [favoriteLessons, favoriteModules, moduleFavoriteId, moduleId]);
 
-  const handleLogout = useCallback(async (): Promise<void> => {
+  const toggleLessonFavorite = useCallback((): void => {
+    if (!activeLessonKey || !activeLesson) {
+      return;
+    }
+
+    const nextFavoriteLessons = togglePreferenceId(favoriteLessons, activeLessonKey);
+    setFavoriteLessons(nextFavoriteLessons);
+    writeStudentPreferenceState({
+      ...readStudentPreferenceState(),
+      favoriteModules,
+      favoriteLessons: nextFavoriteLessons,
+    });
+    setStatus(
+      nextFavoriteLessons.includes(activeLessonKey)
+        ? `${activeLesson.title || "Lesson"} saved to favorites.`
+        : `${activeLesson.title || "Lesson"} removed from favorites.`,
+    );
+  }, [activeLesson, activeLessonKey, favoriteLessons, favoriteModules]);
+
+  const shareCurrentModule = useCallback(async (): Promise<void> => {
     try {
-      setErr("");
-      setStatus("Signing out...");
-      clearAllLessonRunnerState();
-      await signOutEverywhere();
-      router.replace("/login?next=/student");
+      const shareStatus = await shareLink(
+        `${window.location.origin}${currentModulePath}`,
+        `${moduleMeta?.title || moduleId} | Cognispark`,
+        `Open ${moduleMeta?.title || moduleId} in Cognispark.`,
+      );
+      setStatus(shareStatus);
     } catch (error: unknown) {
-      setStatus("");
       setErr(errorMessage(error));
     }
-  }, [router]);
+  }, [currentModulePath, moduleId, moduleMeta?.title]);
+
+  const shareCurrentLesson = useCallback(async (): Promise<void> => {
+    if (!activeLesson) {
+      return;
+    }
+
+    try {
+      const lessonId = normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id);
+      const shareUrl = `${window.location.origin}${currentModulePath}?lesson=${encodeURIComponent(lessonId)}`;
+      const shareStatus = await shareLink(
+        shareUrl,
+        `${activeLesson.title || lessonId} | Cognispark`,
+        `Continue ${activeLesson.title || lessonId} in Cognispark.`,
+      );
+      setStatus(shareStatus);
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+    }
+  }, [activeLesson, currentModulePath, moduleId]);
 
   const launchCheckout = useCallback(async (
     purchaseKind: "module_unlock" | "subscription",
@@ -825,34 +930,94 @@ export default function StudentModulePage() {
   }, [moduleId]);
   return (
     <div className={styles.page}>
-      {user ? (
-        <div
-          style={{
-            position: "sticky",
-            top: 16,
-            zIndex: 30,
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBottom: 18,
-          }}
-        >
-          <button
-            onClick={() => void handleLogout()}
-            disabled={status === "Signing out..."}
-            style={{
-              padding: "12px 18px",
-              borderRadius: 999,
-              border: "1px solid rgba(16, 35, 63, 0.14)",
-              background: "rgba(255, 255, 255, 0.88)",
-              color: "#10233f",
-              fontWeight: 900,
-              opacity: status === "Signing out..." ? 0.72 : 1,
-              boxShadow: "0 18px 38px rgba(15, 23, 42, 0.12)",
-              backdropFilter: "blur(18px)",
-            }}
-          >
-            Logout
-          </button>
+      {authenticated ? (
+        <div className={styles.moduleActionBar}>
+          <div className={styles.moduleActionRow}>
+            <div className={styles.moduleActionGroup}>
+              <button
+                onClick={() => router.push("/student")}
+                className={styles.moduleActionButton}
+              >
+                Back to modules
+              </button>
+              <button
+                onClick={() => router.push("/student/settings")}
+                className={styles.moduleActionButton}
+              >
+                Settings & account
+              </button>
+              <button
+                onClick={goBack}
+                disabled={!canGoBack}
+                className={styles.moduleActionButton}
+              >
+                Previous lesson
+              </button>
+              {lessons.length > 0 ? (
+                <button
+                  onClick={() => void restartFromBeginning()}
+                  className={styles.moduleActionButton}
+                >
+                  Start over
+                </button>
+              ) : null}
+            </div>
+
+            <div className={styles.moduleActionGroup}>
+              <button
+                onClick={toggleModuleFavorite}
+                className={`${styles.moduleActionButton} ${moduleFavorited ? styles.moduleActionButtonActive : ""}`}
+              >
+                {moduleFavorited ? "Module favorited" : "Favorite module"}
+              </button>
+              {activeLesson ? (
+                <button
+                  onClick={toggleLessonFavorite}
+                  className={`${styles.moduleActionButton} ${lessonFavorited ? styles.moduleActionButtonActive : ""}`}
+                >
+                  {lessonFavorited ? "Lesson favorited" : "Favorite lesson"}
+                </button>
+              ) : null}
+              {lessons.length > 0 && !moduleCompleted ? (
+                <button
+                  onClick={goNext}
+                  disabled={!canGoNext}
+                  className={`${styles.moduleActionButton} ${styles.moduleActionPrimary}`}
+                >
+                  Continue
+                </button>
+              ) : null}
+            </div>
+          </div>
+
+          <div className={styles.moduleActionRow}>
+            <div className={styles.moduleActionMeta}>
+              {progressLabel ? (
+                <span className={styles.moduleActionChip}>{progressLabel}</span>
+              ) : null}
+              <span className={styles.moduleActionChip}>{moduleId}</span>
+              {activeLesson ? (
+                <span className={styles.moduleActionChip}>{activeLesson.title || normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id)}</span>
+              ) : null}
+              <span>{moduleActionMessage}</span>
+            </div>
+            <div className={styles.moduleActionGroup}>
+              <button
+                onClick={() => void shareCurrentModule()}
+                className={styles.moduleActionButton}
+              >
+                Share module
+              </button>
+              {activeLesson ? (
+                <button
+                  onClick={() => void shareCurrentLesson()}
+                  className={styles.moduleActionButton}
+                >
+                  Share lesson
+                </button>
+              ) : null}
+            </div>
+          </div>
         </div>
       ) : null}
 
@@ -1014,7 +1179,7 @@ export default function StudentModulePage() {
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
             Checking your sign-in...
           </div>
-        ) : !user ? (
+        ) : !authenticated ? (
           <div style={{ padding: 18, textAlign: "center", opacity: 0.85 }}>
             Taking you to sign in...
           </div>
@@ -1248,7 +1413,7 @@ export default function StudentModulePage() {
                 fontWeight: 800,
                 boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
               }}>
-              Back
+              Previous lesson
             </button>
 
             <button
@@ -1266,11 +1431,7 @@ export default function StudentModulePage() {
           </div>
 
           <div style={{ opacity: 0.8, textAlign: "center", flex: "1 1 220px" }}>
-            {moduleCompleted
-              ? "You completed this module. Choose your next step below."
-              : currentLessonCompleted
-                ? "You can continue to the next mission."
-                : "Complete this mission to unlock the next one."}
+            {moduleActionMessage}
           </div>
 
           <button

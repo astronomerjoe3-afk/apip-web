@@ -83,6 +83,12 @@
   line-height: 1.45;
 }
 
+.summarySubtle {
+  margin-top: 0.4rem;
+  color: #5b6a7d;
+  line-height: 1.55;
+}
+
 .toolbarGroup {
   display: flex;
   gap: 0.75rem;
@@ -217,6 +223,32 @@
   color: #92400e;
 }
 
+.moduleActions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.utilityButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.7rem;
+  padding: 0.72rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  color: #10233f;
+  font-weight: 800;
+}
+
+.utilityButtonActive {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: rgba(29, 78, 216, 0.2);
+}
+
 .inlineNote {
   padding: 0.85rem 0.95rem;
   border-radius: 18px;
@@ -274,7 +306,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(15, 23, 42, 0.42);
+  background: rgba(6, 12, 24, 0.68);
 }
 
 .modalPanel {
@@ -324,6 +356,10 @@
   }
 
   .toolbarGroup > * {
+    width: 100%;
+  }
+
+  .moduleActions > * {
     width: 100%;
   }
 

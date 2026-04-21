@@ -29,6 +29,7 @@ export type SessionSecurity = {
 export type SessionUser = {
   uid: string;
   email?: string | null;
+  display_name?: string | null;
   email_verified?: boolean | null;
   role: SessionRole;
   security?: SessionSecurity | null;
@@ -115,6 +116,7 @@ function normalizeSessionUser(payload: unknown): SessionUser | null {
   return {
     uid,
     email: typeof user.email === "string" ? user.email : null,
+    display_name: typeof user.display_name === "string" ? user.display_name : null,
     email_verified: typeof user.email_verified === "boolean" ? user.email_verified : null,
     role: normalizeRole(user.role),
     security: normalizeSessionSecurity(user.security),
