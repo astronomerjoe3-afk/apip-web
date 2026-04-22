@@ -11,7 +11,7 @@ import { paidAccessRequiresSecurityUpgrade, securityActionLabel } from "../../li
 import { useAuth } from "../../lib/auth";
 import { getClientRole, isAcademicLeadRole, isInstitutionStaffRole, type Role } from "../../lib/authRouting";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
-import { readSessionUser, type SessionUser } from "../../lib/sessionClient";
+import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
 import { shareLink } from "../../lib/shareLink";
 import {
   moduleFavoriteKey,
@@ -20,6 +20,7 @@ import {
   writeStudentPreferenceState,
 } from "../../lib/studentPreferences";
 import StudentHelpCard from "../../components/StudentHelpCard";
+import StudentActionMenu, { type StudentActionMenuItem } from "../../components/StudentActionMenu";
 
 type PricingOffer = {
   id?: string;
@@ -290,6 +291,7 @@ export default function StudentHomePage() {
   const [modules, setModules] = useState<Module[]>([]);
   const [billingSummary, setBillingSummary] = useState<BillingSummary | null>(null);
   const [billingBusy, setBillingBusy] = useState<string>("");
+  const [signOutBusy, setSignOutBusy] = useState<boolean>(false);
   const [modulesLoading, setModulesLoading] = useState<boolean>(true);
   const [err, setErr] = useState<string>("");
   const [status, setStatus] = useState<string>("");
@@ -544,6 +546,17 @@ export default function StudentHomePage() {
     );
   }
 
+  async function handleSignOut(): Promise<void> {
+    try {
+      setSignOutBusy(true);
+      await signOutEverywhere();
+      router.replace("/login?next=/student");
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+      setSignOutBusy(false);
+    }
+  }
+
   async function handleShareModule(moduleItem: Module): Promise<void> {
     try {
       const shareUrl = `${window.location.origin}/student/module/${encodeURIComponent(moduleItem.id)}`;
@@ -647,6 +660,52 @@ export default function StudentHomePage() {
   const securityActions = sessionUser?.security?.recommended_actions || [];
   const canShowStudentHelp = !sessionLoading && role === "student";
   const canShowStudentCommunity = false;
+  const studentMenuItems = useMemo<StudentActionMenuItem[]>(() => {
+    const items: StudentActionMenuItem[] = [
+      {
+        label: "Settings & account",
+        section: "Account",
+        href: "/student/settings",
+      },
+    ];
+
+    if (billingSummary?.portal_enabled) {
+      items.push({
+        section: "Account",
+        label: billingBusy === "portal"
+          ? "Opening billing..."
+          : billingSummary?.has_active_subscription ? "Manage subscription" : "Manage billing",
+        onClick: () => void openBillingPortal(),
+        disabled: billingBusy !== "" || signOutBusy,
+      });
+    }
+
+    if (canShowStudentCommunity) {
+      items.push({
+        section: "Support",
+        label: "Community",
+        onClick: () => setCommunityDialogOpen(true),
+      });
+    }
+
+    if (canShowStudentHelp) {
+      items.push({
+        section: "Support",
+        label: "Help / inquiry",
+        onClick: () => setHelpDialogOpen(true),
+      });
+    }
+
+    items.push({
+      section: "Session",
+      label: signOutBusy ? "Signing out..." : "Sign out",
+      onClick: () => void handleSignOut(),
+      disabled: signOutBusy || billingBusy !== "",
+      tone: "danger",
+    });
+
+    return items;
+  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, signOutBusy]);
   const totalModuleCount = modules.length;
   const foundationCount = moduleSections.find((section) => section.key === "foundation")?.modules.length || 0;
   const coreCount = moduleSections.find((section) => section.key === "corePhysics")?.modules.length || 0;
@@ -1176,35 +1235,12 @@ export default function StudentHomePage() {
         </div>
       ) : null}
 
-      <div className={styles.workspaceDockShell}>
-        <div className={styles.workspaceDock}>
-          <Link href="/student/settings" className={styles.workspaceDockButton}>
-            Settings
-          </Link>
-          {billingSummary?.portal_enabled ? (
-            <button
-              onClick={() => void openBillingPortal()}
-              disabled={billingBusy !== ""}
-              className={styles.workspaceDockButton}
-            >
-              {billingBusy === "portal" ? "Opening..." : billingSummary?.has_active_subscription ? "Subscription" : "Billing"}
-            </button>
-          ) : null}
-          {canShowStudentCommunity ? (
-            <button
-              onClick={() => setCommunityDialogOpen(true)}
-              className={styles.workspaceDockButton}
-            >
-              Community
-            </button>
-          ) : null}
-          {canShowStudentHelp ? (
-            <button onClick={() => setHelpDialogOpen(true)} className={`${styles.workspaceDockButton} ${styles.workspaceDockPrimary}`}>
-              Help
-            </button>
-          ) : null}
-        </div>
-      </div>
+      <StudentActionMenu
+        accountLabel={signedInLabel(sessionUser, user)}
+        accountEmail={sessionUser?.email || user?.email || null}
+        items={studentMenuItems}
+        triggerLabel="Menu"
+      />
     </div>
   );
 }

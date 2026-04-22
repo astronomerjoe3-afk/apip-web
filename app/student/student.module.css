@@ -331,54 +331,6 @@
   z-index: 90;
 }
 
-.workspaceDockShell {
-  position: fixed;
-  left: 50%;
-  bottom: max(1rem, env(safe-area-inset-bottom));
-  transform: translateX(-50%);
-  z-index: 90;
-  width: min(calc(100% - 1.5rem), 760px);
-}
-
-.workspaceDock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  padding: 0.8rem;
-  border: 1px solid rgba(96, 126, 181, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.16);
-  backdrop-filter: blur(18px);
-}
-
-.workspaceDockButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.9rem;
-  padding: 0.78rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(16, 35, 63, 0.12);
-  background: rgba(255, 255, 255, 0.82);
-  color: #10233f;
-  font-weight: 800;
-  transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
-}
-
-.workspaceDockButton:hover {
-  transform: translateY(-1px);
-}
-
-.workspaceDockPrimary {
-  border: none;
-  background: linear-gradient(135deg, #10233f 0%, #1e3e79 100%);
-  color: #fff;
-  box-shadow: 0 16px 34px rgba(16, 35, 63, 0.2);
-}
-
 @media (max-width: 760px) {
   .page {
     padding: 1rem 0.9rem 7.2rem;
@@ -405,19 +357,6 @@
 
   .toolbarGroup > * {
     width: 100%;
-  }
-
-  .workspaceDockShell {
-    width: calc(100% - 1rem);
-  }
-
-  .workspaceDock {
-    border-radius: 26px;
-    justify-content: stretch;
-  }
-
-  .workspaceDockButton {
-    flex: 1 1 140px;
   }
 
   .moduleActions > * {
