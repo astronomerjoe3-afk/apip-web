@@ -17,7 +17,7 @@ import {
   normalizeModuleId,
   sanitizeModuleHeadingDescription,
 } from "../../../../lib/moduleCurriculum";
-import { readSessionUser, type SessionUser } from "../../../../lib/sessionClient";
+import { readSessionUser, signOutEverywhere, type SessionUser } from "../../../../lib/sessionClient";
 import { shareLink } from "../../../../lib/shareLink";
 import {
   lessonFavoriteKey,
@@ -26,6 +26,7 @@ import {
   togglePreferenceId,
   writeStudentPreferenceState,
 } from "../../../../lib/studentPreferences";
+import StudentActionMenu, { type StudentActionMenuItem } from "../../../../components/StudentActionMenu";
 
 type PricingOffer = {
   id?: string;
@@ -325,7 +326,7 @@ export default function StudentModulePage() {
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
-  const [lessonMenuOpen, setLessonMenuOpen] = useState<boolean>(false);
+  const [signOutBusy, setSignOutBusy] = useState<boolean>(false);
   const [favoriteModules, setFavoriteModules] = useState<string[]>([]);
   const [favoriteLessons, setFavoriteLessons] = useState<string[]>([]);
 
@@ -382,7 +383,7 @@ export default function StudentModulePage() {
   }, []);
 
   useEffect(() => {
-    if (!helpDialogOpen && !lessonMenuOpen) {
+    if (!helpDialogOpen) {
       return;
     }
 
@@ -395,7 +396,7 @@ export default function StudentModulePage() {
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
     };
-  }, [helpDialogOpen, lessonMenuOpen]);
+  }, [helpDialogOpen]);
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!authenticated) {
@@ -838,6 +839,17 @@ export default function StudentModulePage() {
     }
   }, [currentModulePath]);
 
+  const handleSignOut = useCallback(async (): Promise<void> => {
+    try {
+      setSignOutBusy(true);
+      await signOutEverywhere();
+      router.replace("/login?next=/student");
+    } catch (error: unknown) {
+      setErr(errorMessage(error));
+      setSignOutBusy(false);
+    }
+  }, [router]);
+
   const continueToNextModule = useCallback((): void => {
     if (!nextModule) {
       router.push("/student");
@@ -851,6 +863,88 @@ export default function StudentModulePage() {
     setActiveIdx((index) => Math.max(0, index - 1));
     window?.scrollTo?.({ top: 0, behavior: "smooth" });
   }
+
+  const studentMenuItems = useMemo<StudentActionMenuItem[]>(() => {
+    const items: StudentActionMenuItem[] = [
+      {
+        label: "Back to modules",
+        section: "Workspace",
+        href: "/student",
+      },
+      {
+        label: "Settings & account",
+        section: "Workspace",
+        href: "/student/settings",
+      },
+      {
+        label: moduleFavorited ? "Saved module" : "Save module",
+        section: "This module",
+        onClick: toggleModuleFavorite,
+      },
+      {
+        label: "Share module",
+        section: "This module",
+        onClick: () => void shareCurrentModule(),
+      },
+    ];
+
+    if (activeLesson) {
+      items.push({
+        label: lessonFavorited ? "Saved lesson" : "Save lesson",
+        section: "This lesson",
+        onClick: toggleLessonFavorite,
+      });
+      items.push({
+        label: "Share lesson",
+        section: "This lesson",
+        onClick: () => void shareCurrentLesson(),
+      });
+    }
+
+    if (canManageBilling) {
+      items.push({
+        section: "Account",
+        label: billingBusyId === "portal"
+          ? "Opening billing..."
+          : hasActiveSubscription ? "Manage subscription" : "Manage billing",
+        onClick: () => void openBillingPortal(),
+        disabled: billingBusyId !== "" || signOutBusy,
+      });
+    }
+
+    if (canShowStudentHelp) {
+      items.push({
+        section: "Support",
+        label: "Help / inquiry",
+        onClick: () => setHelpDialogOpen(true),
+      });
+    }
+
+    items.push({
+      section: "Session",
+      label: signOutBusy ? "Signing out..." : "Sign out",
+      onClick: () => void handleSignOut(),
+      disabled: signOutBusy || billingBusyId !== "",
+      tone: "danger",
+    });
+
+    return items;
+  }, [
+    activeLesson,
+    billingBusyId,
+    canManageBilling,
+    canShowStudentHelp,
+    handleSignOut,
+    hasActiveSubscription,
+    lessonFavorited,
+    moduleFavorited,
+    openBillingPortal,
+    shareCurrentLesson,
+    shareCurrentModule,
+    signOutBusy,
+    toggleLessonFavorite,
+    toggleModuleFavorite,
+  ]);
 
   function goNext(): void {
     if (!canGoNext) return;
@@ -1348,103 +1442,6 @@ export default function StudentModulePage() {
                 Continue
               </button>
             ) : null}
-            <button
-              onClick={() => setLessonMenuOpen(true)}
-              className={styles.lessonDockButton}
-            >
-              More
-            </button>
-          </div>
-        </div>
-      ) : null}
-
-      {authenticated && lessonMenuOpen ? (
-        <div className={styles.menuBackdrop} onClick={() => setLessonMenuOpen(false)}>
-          <div className={styles.lessonMenuPanel} onClick={(event) => event.stopPropagation()}>
-            <div className={styles.lessonMenuHeader}>
-              <div>
-                <div className={styles.lessonMenuEyebrow}>Lesson menu</div>
-                <div className={styles.lessonMenuTitle}>Quick actions</div>
-              </div>
-              <button onClick={() => setLessonMenuOpen(false)} className={styles.lessonMenuClose}>
-                Close
-              </button>
-            </div>
-
-            <div className={styles.lessonMenuGrid}>
-              <button
-                onClick={() => {
-                  setLessonMenuOpen(false);
-                  router.push("/student/settings");
-                }}
-                className={styles.lessonMenuButton}
-              >
-                Settings & account
-              </button>
-              <button
-                onClick={() => {
-                  setLessonMenuOpen(false);
-                  toggleModuleFavorite();
-                }}
-                className={`${styles.lessonMenuButton} ${moduleFavorited ? styles.lessonMenuButtonActive : ""}`}
-              >
-                {moduleFavorited ? "Module saved" : "Save module"}
-              </button>
-              {activeLesson ? (
-                <button
-                  onClick={() => {
-                    setLessonMenuOpen(false);
-                    toggleLessonFavorite();
-                  }}
-                  className={`${styles.lessonMenuButton} ${lessonFavorited ? styles.lessonMenuButtonActive : ""}`}
-                >
-                  {lessonFavorited ? "Lesson saved" : "Save lesson"}
-                </button>
-              ) : null}
-              <button
-                onClick={() => {
-                  setLessonMenuOpen(false);
-                  void shareCurrentModule();
-                }}
-                className={styles.lessonMenuButton}
-              >
-                Share module
-              </button>
-              {activeLesson ? (
-                <button
-                  onClick={() => {
-                    setLessonMenuOpen(false);
-                    void shareCurrentLesson();
-                  }}
-                  className={styles.lessonMenuButton}
-                >
-                  Share lesson
-                </button>
-              ) : null}
-              {canManageBilling ? (
-                <button
-                  onClick={() => {
-                    setLessonMenuOpen(false);
-                    void openBillingPortal();
-                  }}
-                  disabled={billingBusyId !== ""}
-                  className={styles.lessonMenuButton}
-                >
-                  {billingBusyId === "portal" ? "Opening billing..." : hasActiveSubscription ? "Manage subscription" : "Manage billing"}
-                </button>
-              ) : null}
-              {canShowStudentHelp ? (
-                <button
-                  onClick={() => {
-                    setLessonMenuOpen(false);
-                    setHelpDialogOpen(true);
-                  }}
-                  className={`${styles.lessonMenuButton} ${styles.lessonMenuButtonPrimary}`}
-                >
-                  Help / inquiry
-                </button>
-              ) : null}
-            </div>
           </div>
         </div>
       ) : null}
@@ -1466,7 +1463,14 @@ export default function StudentModulePage() {
         </div>
       ) : null}
 
-      {canShowStudentHelp && !authenticated ? (
+      {authenticated ? (
+        <StudentActionMenu
+          accountLabel={sessionUser?.display_name || sessionUser?.email || user?.displayName || user?.email || "Student"}
+          accountEmail={sessionUser?.email || user?.email || null}
+          items={studentMenuItems}
+          triggerLabel="Menu"
+        />
+      ) : canShowStudentHelp ? (
         <div className={styles.helpDock}>
           <button onClick={() => setHelpDialogOpen(true)} className={styles.helpButton}>
             Help / inquiry

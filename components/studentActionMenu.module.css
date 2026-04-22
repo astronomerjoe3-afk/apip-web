@@ -1,0 +1,200 @@
+.anchor {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 95;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.82rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.96);
+  color: #10233f;
+  font-weight: 900;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.16);
+  backdrop-filter: blur(18px);
+}
+
+.triggerIcon {
+  display: inline-grid;
+  gap: 4px;
+}
+
+.triggerIcon span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(6, 12, 24, 0.46);
+}
+
+.panel {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  bottom: 16px;
+  width: min(calc(100vw - 32px), 360px);
+  padding: 1.15rem;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  border-radius: 28px;
+  background: rgba(10, 16, 28, 0.98);
+  color: #f8fafc;
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.32);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 1.15rem;
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.accountBlock {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.25rem 0 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accountEyebrow {
+  color: rgba(226, 232, 240, 0.6);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.accountLabel {
+  font-size: 1.02rem;
+  font-weight: 900;
+}
+
+.accountEmail {
+  color: rgba(226, 232, 240, 0.74);
+  line-height: 1.5;
+}
+
+.menuList {
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.menuSection {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.menuSection + .menuSection {
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sectionLabel {
+  color: rgba(226, 232, 240, 0.58);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionItems {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.menuItem {
+  display: grid;
+  gap: 0.2rem;
+  width: 100%;
+  padding: 0.88rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #f8fafc;
+  font-weight: 800;
+  text-align: left;
+}
+
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.menuItem:disabled {
+  opacity: 0.48;
+}
+
+.menuItemDanger {
+  color: #fca5a5;
+  background: rgba(127, 29, 29, 0.14);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+.helper {
+  color: rgba(226, 232, 240, 0.68);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+@media (max-width: 760px) {
+  .anchor {
+    top: 12px;
+    left: 12px;
+  }
+
+  .panel {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+  }
+}
