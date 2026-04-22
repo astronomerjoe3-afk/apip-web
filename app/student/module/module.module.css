@@ -1,5 +1,5 @@
 .page {
-  padding: 40px 24px 112px;
+  padding: 40px 24px 156px;
   max-width: 1240px;
   margin: 0 auto;
 }
@@ -64,7 +64,7 @@
 
 .moduleActionRow {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
@@ -114,6 +114,7 @@
   flex-wrap: wrap;
   color: #46566b;
   line-height: 1.5;
+  justify-content: center;
 }
 
 .moduleActionChip {
@@ -166,6 +167,140 @@
   z-index: 80;
 }
 
+.lessonDockShell {
+  position: fixed;
+  left: 50%;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 85;
+  width: min(calc(100% - 28px), 1080px);
+}
+
+.lessonDock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px;
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.lessonDockButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.82rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  color: #10233f;
+  font-weight: 800;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+}
+
+.lessonDockButton:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+}
+
+.lessonDockPrimary {
+  border: none;
+  background: linear-gradient(135deg, #10233f 0%, #0b1a32 100%);
+  color: #fff;
+}
+
+.menuBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(6, 12, 24, 0.42);
+}
+
+.lessonMenuPanel {
+  position: fixed;
+  left: 50%;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 111;
+  width: min(calc(100% - 28px), 760px);
+  padding: 18px;
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.24);
+  backdrop-filter: blur(20px);
+  display: grid;
+  gap: 16px;
+}
+
+.lessonMenuHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.lessonMenuEyebrow {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6d7b8f;
+}
+
+.lessonMenuTitle {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #10233f;
+}
+
+.lessonMenuClose {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  color: #10233f;
+  font-weight: 800;
+}
+
+.lessonMenuGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.lessonMenuButton {
+  min-height: 3.2rem;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 35, 63, 0.12);
+  background: rgba(248, 250, 252, 0.92);
+  color: #10233f;
+  font-weight: 800;
+  text-align: left;
+}
+
+.lessonMenuButtonActive {
+  background: #eff6ff;
+  border-color: rgba(29, 78, 216, 0.2);
+  color: #1d4ed8;
+}
+
+.lessonMenuButtonPrimary {
+  border: none;
+  background: linear-gradient(135deg, #10233f 0%, #1e3e79 100%);
+  color: #fff;
+}
+
 .helpButton {
   padding: 14px 18px;
   border-radius: 999px;
@@ -178,7 +313,7 @@
 
 @media (max-width: 760px) {
   .page {
-    padding: 28px 16px 120px;
+    padding: 28px 16px 178px;
   }
 
   .moduleActionBar {
@@ -187,16 +322,7 @@
   }
 
   .moduleActionRow {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .moduleActionGroup {
-    width: 100%;
-  }
-
-  .moduleActionButton {
-    width: 100%;
+    justify-content: center;
   }
 
   .helpDock {
@@ -209,5 +335,22 @@
   .helpButton {
     width: 100%;
     max-width: 420px;
+  }
+
+  .lessonDockShell,
+  .lessonMenuPanel {
+    width: calc(100% - 16px);
+  }
+
+  .lessonDock {
+    border-radius: 28px;
+  }
+
+  .lessonDockButton {
+    flex: 1 1 140px;
+  }
+
+  .lessonMenuGrid {
+    grid-template-columns: 1fr;
   }
 }
