@@ -325,6 +325,7 @@ export default function StudentModulePage() {
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
+  const [lessonMenuOpen, setLessonMenuOpen] = useState<boolean>(false);
   const [favoriteModules, setFavoriteModules] = useState<string[]>([]);
   const [favoriteLessons, setFavoriteLessons] = useState<string[]>([]);
 
@@ -381,7 +382,7 @@ export default function StudentModulePage() {
   }, []);
 
   useEffect(() => {
-    if (!helpDialogOpen) {
+    if (!helpDialogOpen && !lessonMenuOpen) {
       return;
     }
 
@@ -394,7 +395,7 @@ export default function StudentModulePage() {
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
     };
-  }, [helpDialogOpen]);
+  }, [helpDialogOpen, lessonMenuOpen]);
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!authenticated) {
@@ -933,64 +934,6 @@ export default function StudentModulePage() {
       {authenticated ? (
         <div className={styles.moduleActionBar}>
           <div className={styles.moduleActionRow}>
-            <div className={styles.moduleActionGroup}>
-              <button
-                onClick={() => router.push("/student")}
-                className={styles.moduleActionButton}
-              >
-                Back to modules
-              </button>
-              <button
-                onClick={() => router.push("/student/settings")}
-                className={styles.moduleActionButton}
-              >
-                Settings & account
-              </button>
-              <button
-                onClick={goBack}
-                disabled={!canGoBack}
-                className={styles.moduleActionButton}
-              >
-                Previous lesson
-              </button>
-              {lessons.length > 0 ? (
-                <button
-                  onClick={() => void restartFromBeginning()}
-                  className={styles.moduleActionButton}
-                >
-                  Start over
-                </button>
-              ) : null}
-            </div>
-
-            <div className={styles.moduleActionGroup}>
-              <button
-                onClick={toggleModuleFavorite}
-                className={`${styles.moduleActionButton} ${moduleFavorited ? styles.moduleActionButtonActive : ""}`}
-              >
-                {moduleFavorited ? "Module favorited" : "Favorite module"}
-              </button>
-              {activeLesson ? (
-                <button
-                  onClick={toggleLessonFavorite}
-                  className={`${styles.moduleActionButton} ${lessonFavorited ? styles.moduleActionButtonActive : ""}`}
-                >
-                  {lessonFavorited ? "Lesson favorited" : "Favorite lesson"}
-                </button>
-              ) : null}
-              {lessons.length > 0 && !moduleCompleted ? (
-                <button
-                  onClick={goNext}
-                  disabled={!canGoNext}
-                  className={`${styles.moduleActionButton} ${styles.moduleActionPrimary}`}
-                >
-                  Continue
-                </button>
-              ) : null}
-            </div>
-          </div>
-
-          <div className={styles.moduleActionRow}>
             <div className={styles.moduleActionMeta}>
               {progressLabel ? (
                 <span className={styles.moduleActionChip}>{progressLabel}</span>
@@ -1000,22 +943,6 @@ export default function StudentModulePage() {
                 <span className={styles.moduleActionChip}>{activeLesson.title || normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id)}</span>
               ) : null}
               <span>{moduleActionMessage}</span>
-            </div>
-            <div className={styles.moduleActionGroup}>
-              <button
-                onClick={() => void shareCurrentModule()}
-                className={styles.moduleActionButton}
-              >
-                Share module
-              </button>
-              {activeLesson ? (
-                <button
-                  onClick={() => void shareCurrentLesson()}
-                  className={styles.moduleActionButton}
-                >
-                  Share lesson
-                </button>
-              ) : null}
             </div>
           </div>
         </div>
@@ -1388,65 +1315,137 @@ export default function StudentModulePage() {
         </div>
       ) : null}
 
-      {lessons.length > 0 ? (
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: "16px auto 0 auto",
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 12,
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+      {authenticated ? (
+        <div className={styles.lessonDockShell}>
+          <div className={styles.lessonDock}>
+            <button
+              onClick={() => router.push("/student")}
+              className={styles.lessonDockButton}
+            >
+              Back
+            </button>
             <button
               onClick={goBack}
               disabled={!canGoBack}
-              style={{
-                opacity: canGoBack ? 1 : 0.42,
-                padding: "12px 18px",
-                borderRadius: 14,
-                border: "1px solid rgba(16, 35, 63, 0.14)",
-                background: "rgba(255, 255, 255, 0.72)",
-                fontWeight: 800,
-                boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
-              }}>
-              Previous lesson
+              className={styles.lessonDockButton}
+            >
+              Previous
             </button>
-
+            {lessons.length > 0 ? (
+              <button
+                onClick={() => void restartFromBeginning()}
+                className={styles.lessonDockButton}
+              >
+                Start over
+              </button>
+            ) : null}
+            {lessons.length > 0 && !moduleCompleted ? (
+              <button
+                onClick={goNext}
+                disabled={!canGoNext}
+                className={`${styles.lessonDockButton} ${styles.lessonDockPrimary}`}
+              >
+                Continue
+              </button>
+            ) : null}
             <button
-              onClick={() => void restartFromBeginning()}
-              style={{
-                padding: "12px 18px",
-                borderRadius: 14,
-                border: "1px solid rgba(16, 35, 63, 0.14)",
-                background: "rgba(255, 255, 255, 0.72)",
-                fontWeight: 800,
-                boxShadow: "0 14px 34px rgba(15, 23, 42, 0.08)",
-              }}>
-              Start over from Lesson 1
+              onClick={() => setLessonMenuOpen(true)}
+              className={styles.lessonDockButton}
+            >
+              More
             </button>
           </div>
+        </div>
+      ) : null}
 
-          <div style={{ opacity: 0.8, textAlign: "center", flex: "1 1 220px" }}>
-            {moduleActionMessage}
+      {authenticated && lessonMenuOpen ? (
+        <div className={styles.menuBackdrop} onClick={() => setLessonMenuOpen(false)}>
+          <div className={styles.lessonMenuPanel} onClick={(event) => event.stopPropagation()}>
+            <div className={styles.lessonMenuHeader}>
+              <div>
+                <div className={styles.lessonMenuEyebrow}>Lesson menu</div>
+                <div className={styles.lessonMenuTitle}>Quick actions</div>
+              </div>
+              <button onClick={() => setLessonMenuOpen(false)} className={styles.lessonMenuClose}>
+                Close
+              </button>
+            </div>
+
+            <div className={styles.lessonMenuGrid}>
+              <button
+                onClick={() => {
+                  setLessonMenuOpen(false);
+                  router.push("/student/settings");
+                }}
+                className={styles.lessonMenuButton}
+              >
+                Settings & account
+              </button>
+              <button
+                onClick={() => {
+                  setLessonMenuOpen(false);
+                  toggleModuleFavorite();
+                }}
+                className={`${styles.lessonMenuButton} ${moduleFavorited ? styles.lessonMenuButtonActive : ""}`}
+              >
+                {moduleFavorited ? "Module saved" : "Save module"}
+              </button>
+              {activeLesson ? (
+                <button
+                  onClick={() => {
+                    setLessonMenuOpen(false);
+                    toggleLessonFavorite();
+                  }}
+                  className={`${styles.lessonMenuButton} ${lessonFavorited ? styles.lessonMenuButtonActive : ""}`}
+                >
+                  {lessonFavorited ? "Lesson saved" : "Save lesson"}
+                </button>
+              ) : null}
+              <button
+                onClick={() => {
+                  setLessonMenuOpen(false);
+                  void shareCurrentModule();
+                }}
+                className={styles.lessonMenuButton}
+              >
+                Share module
+              </button>
+              {activeLesson ? (
+                <button
+                  onClick={() => {
+                    setLessonMenuOpen(false);
+                    void shareCurrentLesson();
+                  }}
+                  className={styles.lessonMenuButton}
+                >
+                  Share lesson
+                </button>
+              ) : null}
+              {canManageBilling ? (
+                <button
+                  onClick={() => {
+                    setLessonMenuOpen(false);
+                    void openBillingPortal();
+                  }}
+                  disabled={billingBusyId !== ""}
+                  className={styles.lessonMenuButton}
+                >
+                  {billingBusyId === "portal" ? "Opening billing..." : hasActiveSubscription ? "Manage subscription" : "Manage billing"}
+                </button>
+              ) : null}
+              {canShowStudentHelp ? (
+                <button
+                  onClick={() => {
+                    setLessonMenuOpen(false);
+                    setHelpDialogOpen(true);
+                  }}
+                  className={`${styles.lessonMenuButton} ${styles.lessonMenuButtonPrimary}`}
+                >
+                  Help / inquiry
+                </button>
+              ) : null}
+            </div>
           </div>
-
-          <button
-            onClick={goNext}
-            disabled={!canGoNext}
-            style={{
-              opacity: canGoNext ? 1 : 0.42,
-              padding: "12px 20px",
-              borderRadius: 14,
-              border: "none",
-              background: "linear-gradient(135deg, #10233f 0%, #0b1a32 100%)",
-              color: "#fff", fontWeight: 900, boxShadow: "0 18px 38px rgba(11, 26, 50, 0.22)",
-            }}>
-            {moduleCompleted ? "Module complete" : "Continue"}
-          </button>
         </div>
       ) : null}
 
@@ -1467,7 +1466,7 @@ export default function StudentModulePage() {
         </div>
       ) : null}
 
-      {canShowStudentHelp ? (
+      {canShowStudentHelp && !authenticated ? (
         <div className={styles.helpDock}>
           <button onClick={() => setHelpDialogOpen(true)} className={styles.helpButton}>
             Help / inquiry

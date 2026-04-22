@@ -783,17 +783,6 @@ export default function StudentHomePage() {
               Move from foundations into deeper physics with guided modules, clear explanations, and steady progress at every stage.
             </p>
           </div>
-
-          <div className={styles.toolbarGroup}>
-            {billingSummary?.portal_enabled ? (
-              <button onClick={() => void openBillingPortal()} disabled={billingBusy !== ""} className={styles.secondaryButton}>
-                {billingBusy === "portal" ? "Opening billing..." : billingSummary?.has_active_subscription ? "Manage subscription" : "Manage billing"}
-              </button>
-            ) : null}
-            <Link href="/student/settings" className={styles.ghostButton}>
-              Settings & account
-            </Link>
-          </div>
         </div>
 
         <div className={styles.summaryGrid}>
@@ -1187,34 +1176,35 @@ export default function StudentHomePage() {
         </div>
       ) : null}
 
-      {canShowStudentCommunity ? (
-        <button
-          onClick={() => setCommunityDialogOpen(true)}
-          style={{
-            position: "fixed",
-            right: 22,
-            bottom: canShowStudentHelp ? 86 : 22,
-            zIndex: 80,
-            padding: "14px 18px",
-            borderRadius: 999,
-            border: "1px solid rgba(16, 35, 63, 0.14)",
-            background: "rgba(255, 255, 255, 0.96)",
-            color: "#10233f",
-            fontWeight: 900,
-            boxShadow: "0 18px 38px rgba(11, 26, 50, 0.18)",
-          }}
-        >
-          Social threads
-        </button>
-      ) : null}
-
-      {canShowStudentHelp ? (
-        <div className={styles.actionDock}>
-          <button onClick={() => setHelpDialogOpen(true)} className={styles.helpButton}>
-            Help / inquiry
-          </button>
+      <div className={styles.workspaceDockShell}>
+        <div className={styles.workspaceDock}>
+          <Link href="/student/settings" className={styles.workspaceDockButton}>
+            Settings
+          </Link>
+          {billingSummary?.portal_enabled ? (
+            <button
+              onClick={() => void openBillingPortal()}
+              disabled={billingBusy !== ""}
+              className={styles.workspaceDockButton}
+            >
+              {billingBusy === "portal" ? "Opening..." : billingSummary?.has_active_subscription ? "Subscription" : "Billing"}
+            </button>
+          ) : null}
+          {canShowStudentCommunity ? (
+            <button
+              onClick={() => setCommunityDialogOpen(true)}
+              className={styles.workspaceDockButton}
+            >
+              Community
+            </button>
+          ) : null}
+          {canShowStudentHelp ? (
+            <button onClick={() => setHelpDialogOpen(true)} className={`${styles.workspaceDockButton} ${styles.workspaceDockPrimary}`}>
+              Help
+            </button>
+          ) : null}
         </div>
-      ) : null}
+      </div>
     </div>
   );
 }
