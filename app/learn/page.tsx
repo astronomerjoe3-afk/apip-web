@@ -118,6 +118,9 @@ export default function LearnPage() {
             <Link className={styles.primaryCta} href="/graph-lab">
               Open graph lab
             </Link>
+            <Link className={styles.secondaryCta} href="/energy-ledger">
+              Plan energy ledgers
+            </Link>
             <Link className={styles.secondaryCta} href="/force-builder">
               Build force systems
             </Link>
@@ -274,6 +277,9 @@ export default function LearnPage() {
         <div className={styles.finalActions}>
           <Link className={styles.primaryCta} href="/graph-lab">
             Open graph lab
+          </Link>
+          <Link className={styles.secondaryCta} href="/energy-ledger">
+            Plan energy ledgers
           </Link>
           <Link className={styles.secondaryCta} href="/force-builder">
             Build force systems

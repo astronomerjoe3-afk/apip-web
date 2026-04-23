@@ -285,6 +285,9 @@ export default function ForceSystemBuilderClient() {
               <a href="#lab-workspace" className={styles.primaryButton}>
                 Open the builder
               </a>
+              <Link href="/energy-ledger" className={styles.secondaryButton}>
+                Plan energy ledgers
+              </Link>
               <Link href="/graph-lab" className={styles.secondaryButton}>
                 Open graph lab
               </Link>
@@ -476,6 +479,9 @@ export default function ForceSystemBuilderClient() {
         <div className={styles.finalActions}>
           <Link href="/register" className={styles.primaryButton} prefetch={false}>
             Create account
+          </Link>
+          <Link href="/energy-ledger" className={styles.secondaryButton}>
+            Plan energy ledgers
           </Link>
           <Link href="/mission-demo" className={styles.secondaryButton}>
             Try the public mission
