@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -31,6 +31,12 @@ export default function RegisterPage() {
   const [password, setPassword] = useState<string>("");
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState<boolean>(false);
+  const redirectLockRef = useRef(false);
+  const nextPath = searchParams.get("next");
+  const loginHref = useMemo(
+    () => nextPath ? `/login?next=${encodeURIComponent(nextPath)}` : "/login",
+    [nextPath],
+  );
   const passwordCheck = useMemo(() => evaluatePasswordStrength(password, email), [password, email]);
   const passwordRequirements = useMemo(
     () => passwordRequirementRows(passwordCheck),
@@ -38,24 +44,28 @@ export default function RegisterPage() {
   );
 
   useEffect(() => {
-    if (loading || !authenticated) {
+    if (loading || !authenticated || redirectLockRef.current) {
       return;
     }
 
     async function redirectSignedInUser(): Promise<void> {
       if (user) {
         const role = await getClientRole(user);
-        router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+        startTransition(() => {
+          router.replace(resolvePostAuthPath(role, nextPath));
+        });
         return;
       }
 
       if (sessionUser) {
-        router.replace(resolvePostAuthPath(sessionUser.role, searchParams.get("next")));
+        startTransition(() => {
+          router.replace(resolvePostAuthPath(sessionUser.role, nextPath));
+        });
       }
     }
 
     void redirectSignedInUser();
-  }, [authenticated, loading, router, searchParams, sessionUser, user]);
+  }, [authenticated, loading, nextPath, router, sessionUser, user]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -70,15 +80,17 @@ export default function RegisterPage() {
       return;
     }
 
+    redirectLockRef.current = true;
     setBusy(true);
 
     try {
+      const trimmedEmail = email.trim();
       const credential = await createUserWithEmailAndPassword(
         auth,
-        email.trim(),
+        trimmedEmail,
         password,
       );
-      const verificationPath = resolvePostAuthPath("student", searchParams.get("next"));
+      const verificationPath = resolvePostAuthPath("student", nextPath);
       let verificationStatus = "retry";
 
       try {
@@ -92,11 +104,14 @@ export default function RegisterPage() {
 
       const session = await establishSessionFromUser(credential.user);
       await recordStrongPasswordPolicy(MIN_PASSWORD_POLICY_VERSION);
-      const targetPath = resolvePostAuthPath(session.role, searchParams.get("next"));
-      router.replace(
-        `/student/security?next=${encodeURIComponent(targetPath)}&source=signup&verification=${verificationStatus}`,
-      );
+      const targetPath = resolvePostAuthPath(session.role, nextPath);
+      startTransition(() => {
+        router.replace(
+          `/student/security?next=${encodeURIComponent(targetPath)}&source=signup&verification=${verificationStatus}`,
+        );
+      });
     } catch (error: unknown) {
+      redirectLockRef.current = false;
       setErr(errorMessage(error));
     } finally {
       setBusy(false);
@@ -225,7 +240,7 @@ export default function RegisterPage() {
             </form>
 
             <p className={authStyles.linkRow}>
-              Already have an account? <Link href="/login">Login</Link>
+              Already have an account? <Link href={loginHref}>Login</Link>
             </p>
           </div>
         </div>
