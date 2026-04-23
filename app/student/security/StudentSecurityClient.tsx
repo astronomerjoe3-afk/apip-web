@@ -26,6 +26,7 @@ import {
   recordStrongPasswordPolicy,
   type SessionUser,
 } from "@/lib/sessionClient";
+import styles from "./security.module.css";
 
 function errorMessage(error: unknown): string {
   if (error instanceof Error) {
@@ -235,194 +236,267 @@ export default function StudentSecurityClient() {
 
   if (loading || pageLoading) {
     return (
-      <main style={{ padding: 24, fontFamily: "system-ui", maxWidth: 820, margin: "0 auto" }}>
-        <h1>Secure your account</h1>
-        <p>Checking your current security status...</p>
+      <main className={styles.page}>
+        <section className={styles.shell}>
+          <div className={styles.hero}>
+            <div className={styles.heroTop}>
+              <div className={styles.brandLockup}>
+                <div className={styles.brandMark}>C</div>
+                <div>
+                  <p className={styles.brandName}>Cognispark</p>
+                  <p className={styles.brandTag}>Physics, mission by mission.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className={styles.eyebrow}>Student onboarding security</p>
+              <h1 className={styles.headline}>Secure your account.</h1>
+              <p className={styles.support}>Checking your current verification and password status now.</p>
+            </div>
+          </div>
+        </section>
       </main>
     );
   }
 
   return (
-    <main style={{ padding: 24, fontFamily: "system-ui", maxWidth: 860, margin: "0 auto", display: "grid", gap: 16 }}>
-      <div>
-        <h1 style={{ marginBottom: 8 }}>Secure your account</h1>
-        <p style={{ margin: 0, opacity: 0.82, lineHeight: 1.6 }}>
-          Keep your account protected and recovery-ready. If your password already meets the current security rule, you will not need to change it again.
-        </p>
-      </div>
-
-      {signupSource ? (
-        <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 12, padding: 14, background: "#eff6ff", color: "#1d4ed8" }}>
-          <strong>{emailVerified ? "Your account is ready." : "Your account is created."}</strong>{" "}
-          {emailVerified
-            ? "Your email already shows as verified. You can continue with the student workspace below."
-            : verificationStatus === "sent"
-              ? "We sent a verification email to this account. Open that link, then come back here and refresh your status."
-              : "Finish email verification below before you move on. If you did not receive a message yet, use the resend button in Step 1."}
-        </div>
-      ) : null}
-
-      {err ? (
-        <div style={{ border: "1px solid #991b1b", borderRadius: 12, padding: 12, background: "#fef2f2", color: "#991b1b" }}>
-          <strong>Error:</strong> {err}
-        </div>
-      ) : null}
-
-      {status ? (
-        <div style={{ border: "1px solid #14532d", borderRadius: 12, padding: 12, background: "#f0fdf4", color: "#166534" }}>
-          {status}
-        </div>
-      ) : null}
-
-      <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 16, padding: 16, background: "#ffffff" }}>
-        <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 10 }}>
-          Current status
-        </div>
-        <div style={{ display: "grid", gap: 10 }}>
-          <div style={{ color: emailVerified ? "#166534" : "#334155", fontWeight: emailVerified ? 700 : 500 }}>
-            {emailVerified ? "Ready: Email address verified" : "Needed: Verify your email address"}
-          </div>
-          <div style={{ color: strongPasswordConfirmed ? "#166534" : "#334155", fontWeight: strongPasswordConfirmed ? 700 : 500 }}>
-            {strongPasswordConfirmed ? "Ready" : "Needed"}: Strong password recorded for this account
-          </div>
-          <div style={{ color: factorCount > 0 ? "#166534" : "#334155", fontWeight: factorCount > 0 ? 700 : 500 }}>
-            {factorCount > 0 ? "Enabled" : "Recommended"}: 2-factor authentication
-          </div>
-        </div>
-        {recommendedActions.length > 0 ? (
-          <div style={{ marginTop: 12, opacity: 0.82, lineHeight: 1.6 }}>
-            Next focus: {recommendedActions.map((action) => securityActionLabel(action)).join(", ")}.
-          </div>
-        ) : (
-          <div style={{ marginTop: 12, color: "#166534", fontWeight: 700 }}>
-            Your account security steps are complete.
-          </div>
-        )}
-      </div>
-
-      {!emailVerified ? (
-        <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 16, padding: 16, background: "#ffffff", display: "grid", gap: 12 }}>
-          <div style={{ fontSize: 20, fontWeight: 800 }}>Step 1: Verify your email</div>
-          <div style={{ opacity: 0.82, lineHeight: 1.6 }}>
-            A verified email helps you recover your account and keep it secure.
-          </div>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <button
-              onClick={() => void handleSendVerification()}
-              disabled={verifyBusy}
-              style={{ padding: "12px 16px", borderRadius: 12, border: "1px solid rgba(15, 23, 42, 0.14)", fontWeight: 800 }}
-            >
-              {verifyBusy ? "Sending email..." : "Send verification email"}
-            </button>
-            <button
-              onClick={() => void handleRefreshVerification()}
-              disabled={refreshBusy}
-              style={{ padding: "12px 16px", borderRadius: 12, border: "1px solid rgba(15, 23, 42, 0.14)", fontWeight: 800 }}
-            >
-              {refreshBusy ? "Refreshing..." : "I have verified, refresh now"}
-            </button>
-          </div>
-        </div>
-      ) : null}
-
-      {!strongPasswordConfirmed ? (
-        <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 16, padding: 16, background: "#ffffff", display: "grid", gap: 14 }}>
-          <div>
-            <div style={{ fontSize: 20, fontWeight: 800, marginBottom: 8 }}>Step 2: Confirm a strong password</div>
-            <div style={{ opacity: 0.82, lineHeight: 1.6 }}>
-              Only older accounts need this. New accounts that already met the strong-password signup rule will show this step as complete automatically.
-            </div>
-          </div>
-
-          <form onSubmit={handlePasswordUpgrade} style={{ display: "grid", gap: 12 }}>
-            <label>
-              Current password
-              <input
-                type="password"
-                autoComplete="current-password"
-                value={currentPassword}
-                onChange={(event) => setCurrentPassword(event.target.value)}
-                style={{ width: "100%", padding: 10, marginTop: 6 }}
-                required
-              />
-            </label>
-
-            <label>
-              New strong password
-              <input
-                type="password"
-                autoComplete="new-password"
-                value={newPassword}
-                onChange={(event) => setNewPassword(event.target.value)}
-                style={{ width: "100%", padding: 10, marginTop: 6 }}
-                minLength={6}
-                required
-              />
-            </label>
-
-            <label>
-              Confirm new password
-              <input
-                type="password"
-                autoComplete="new-password"
-                value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}
-                style={{ width: "100%", padding: 10, marginTop: 6 }}
-                minLength={6}
-                required
-              />
-            </label>
-
-            <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 12, padding: 12, background: "#f8fafc" }}>
-              <div style={{ fontWeight: 700, marginBottom: 8 }}>Strong password checklist</div>
-              <div style={{ display: "grid", gap: 6 }}>
-                {passwordRequirements.map((requirement) => (
-                  <div
-                    key={requirement.key}
-                    style={{
-                      color: requirement.met ? "#166534" : "#475569",
-                      fontWeight: requirement.met ? 700 : 500,
-                      fontSize: 14,
-                    }}
-                  >
-                    {requirement.met ? "Pass" : "Needs work"}: {requirement.label}
-                  </div>
-                ))}
+    <main className={styles.page}>
+      <section className={styles.shell}>
+        <div className={styles.hero}>
+          <div className={styles.heroTop}>
+            <div className={styles.brandLockup}>
+              <div className={styles.brandMark}>C</div>
+              <div>
+                <p className={styles.brandName}>Cognispark</p>
+                <p className={styles.brandTag}>Physics, mission by mission.</p>
               </div>
             </div>
 
-            <button
-              disabled={passwordBusy || !passwordCheck.isStrong}
-              style={{ padding: "12px 16px", borderRadius: 12, border: "1px solid rgba(15, 23, 42, 0.14)", fontWeight: 800 }}
-            >
-              {passwordBusy ? "Saving password..." : "Save stronger password"}
-            </button>
-          </form>
-        </div>
-      ) : null}
+            <div className={styles.heroLinks}>
+              <Link href="/mission-demo" className={styles.heroLink}>
+                Public mission
+              </Link>
+              <Link href="/learn" className={styles.heroLink}>
+                Full route
+              </Link>
+              <Link href="/support" className={styles.heroLink}>
+                Support
+              </Link>
+            </div>
+          </div>
 
-      <div style={{ border: "1px solid rgba(15, 23, 42, 0.12)", borderRadius: 16, padding: 16, background: "#ffffff", display: "grid", gap: 10 }}>
-        <div style={{ fontSize: 20, fontWeight: 800 }}>Recommended next step: 2-factor authentication</div>
-        <div style={{ opacity: 0.82, lineHeight: 1.6 }}>
-          {factorCount > 0
-            ? `This browser session can already see ${factorCount} enrolled second factor${factorCount === 1 ? "" : "s"}.`
-            : "When you are ready, add 2-factor authentication in your sign-in provider settings for extra protection."}
-        </div>
-      </div>
+          <div>
+            <p className={styles.eyebrow}>Student onboarding security</p>
+            <h1 className={styles.headline}>Secure your account.</h1>
+            <p className={styles.support}>
+              Keep your account protected and recovery-ready so the student route stays smooth from signup into the
+              platform.
+            </p>
+          </div>
 
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        {hardeningComplete ? (
-          <button
-            onClick={() => router.push(nextPath)}
-            style={{ padding: "12px 16px", borderRadius: 12, border: "1px solid rgba(15, 23, 42, 0.14)", fontWeight: 800 }}
-          >
-            Continue
-          </button>
-        ) : null}
-        <Link href={nextPath} style={{ alignSelf: "center", color: "#0f172a", fontWeight: 700 }}>
-          Back
-        </Link>
-      </div>
+          <div className={styles.heroMeta}>
+            <article className={styles.heroBadge}>
+              <span>Email status</span>
+              <strong>{emailVerified ? "Verified and ready to continue" : "Verification still needed"}</strong>
+            </article>
+            <article className={styles.heroBadge}>
+              <span>Password baseline</span>
+              <strong>{strongPasswordConfirmed ? "Strong password already recorded" : "Strong password check still open"}</strong>
+            </article>
+            <article className={styles.heroBadge}>
+              <span>Destination</span>
+              <strong>{nextPath === "/student" ? "Student workspace next" : "Return to your requested page next"}</strong>
+            </article>
+          </div>
+        </div>
+
+        <div className={styles.contentGrid}>
+          <div className={styles.mainColumn}>
+            {signupSource ? (
+              <div className={styles.notice}>
+                <strong>{emailVerified ? "Your account is ready." : "Your account is created."}</strong>{" "}
+                {emailVerified
+                  ? "Your email already shows as verified, so you can continue straight into the student workspace below."
+                  : verificationStatus === "sent"
+                    ? "We sent a verification email to this account. Open that link, then come back here and refresh your status."
+                    : "Finish email verification below before you move on. If you did not receive a message yet, use the resend button in Step 1."}
+              </div>
+            ) : null}
+
+            {err ? (
+              <div className={`${styles.alert} ${styles.alertError}`}>
+                <strong>Error:</strong> {err}
+              </div>
+            ) : null}
+
+            {status ? <div className={styles.alert}>{status}</div> : null}
+
+            <div className={styles.statusCard}>
+              <div className={styles.statusTitle}>Current status</div>
+              <div className={styles.statusList}>
+                <div className={`${styles.statusItem} ${emailVerified ? styles.statusComplete : ""}`}>
+                  {emailVerified ? "Ready: Email address verified" : "Needed: Verify your email address"}
+                </div>
+                <div className={`${styles.statusItem} ${strongPasswordConfirmed ? styles.statusComplete : ""}`}>
+                  {strongPasswordConfirmed ? "Ready" : "Needed"}: Strong password recorded for this account
+                </div>
+                <div className={`${styles.statusItem} ${factorCount > 0 ? styles.statusComplete : ""}`}>
+                  {factorCount > 0 ? "Enabled" : "Recommended"}: 2-factor authentication
+                </div>
+              </div>
+
+              {recommendedActions.length > 0 ? (
+                <div className={styles.statusHint}>
+                  Next focus: {recommendedActions.map((action) => securityActionLabel(action)).join(", ")}.
+                </div>
+              ) : (
+                <div className={styles.allClear}>Your account security steps are complete.</div>
+              )}
+            </div>
+
+            {!emailVerified ? (
+              <div className={styles.sectionCard}>
+                <div className={styles.sectionTitle}>Step 1: Verify your email</div>
+                <div className={styles.sectionBody}>
+                  A verified email gives you a reliable recovery path and keeps the account ready for the full student
+                  route.
+                </div>
+                <div className={styles.buttonRow}>
+                  <button
+                    type="button"
+                    onClick={() => void handleSendVerification()}
+                    disabled={verifyBusy}
+                    className={styles.secondaryButton}
+                  >
+                    {verifyBusy ? "Sending email..." : "Send verification email"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => void handleRefreshVerification()}
+                    disabled={refreshBusy}
+                    className={styles.secondaryButton}
+                  >
+                    {refreshBusy ? "Refreshing..." : "I have verified, refresh now"}
+                  </button>
+                </div>
+              </div>
+            ) : null}
+
+            {!strongPasswordConfirmed ? (
+              <div className={styles.sectionCard}>
+                <div className={styles.sectionTitle}>Step 2: Confirm a strong password</div>
+                <div className={styles.sectionBody}>
+                  Only older accounts need this. New accounts that already met the strong-password signup rule will
+                  show this step as complete automatically.
+                </div>
+
+                <form onSubmit={handlePasswordUpgrade} className={styles.form}>
+                  <label className={styles.field}>
+                    <span className={styles.fieldLabel}>Current password</span>
+                    <input
+                      type="password"
+                      autoComplete="current-password"
+                      value={currentPassword}
+                      onChange={(event) => setCurrentPassword(event.target.value)}
+                      className={styles.input}
+                      required
+                    />
+                  </label>
+
+                  <label className={styles.field}>
+                    <span className={styles.fieldLabel}>New strong password</span>
+                    <input
+                      type="password"
+                      autoComplete="new-password"
+                      value={newPassword}
+                      onChange={(event) => setNewPassword(event.target.value)}
+                      className={styles.input}
+                      minLength={6}
+                      required
+                    />
+                  </label>
+
+                  <label className={styles.field}>
+                    <span className={styles.fieldLabel}>Confirm new password</span>
+                    <input
+                      type="password"
+                      autoComplete="new-password"
+                      value={confirmPassword}
+                      onChange={(event) => setConfirmPassword(event.target.value)}
+                      className={styles.input}
+                      minLength={6}
+                      required
+                    />
+                  </label>
+
+                  <div className={styles.checklist}>
+                    <strong>Strong password checklist</strong>
+                    <div className={styles.checklistRows}>
+                      {passwordRequirements.map((requirement) => (
+                        <div
+                          key={requirement.key}
+                          className={`${styles.checklistItem} ${requirement.met ? styles.checkMet : styles.checkPending}`}
+                        >
+                          {requirement.met ? "Pass" : "Needs work"}: {requirement.label}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button disabled={passwordBusy || !passwordCheck.isStrong} className={styles.button}>
+                    {passwordBusy ? "Saving password..." : "Save stronger password"}
+                  </button>
+                </form>
+              </div>
+            ) : null}
+
+            <div className={styles.sectionCard}>
+              <div className={styles.sectionTitle}>{hardeningComplete ? "Continue into the student route" : "Finish the required steps first"}</div>
+              <div className={styles.sectionBody}>
+                {hardeningComplete
+                  ? "Your required onboarding security steps are complete, so you can continue into the next student page now."
+                  : "Once verification and password requirements are complete, this page will let you continue cleanly into the route you were heading toward."}
+              </div>
+              <div className={styles.footerActions}>
+                {hardeningComplete ? (
+                  <button type="button" onClick={() => router.push(nextPath)} className={styles.button}>
+                    Continue
+                  </button>
+                ) : null}
+                <Link href={nextPath} className={styles.linkButton}>
+                  Back
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.sideColumn}>
+            <div className={styles.sectionCard}>
+              <p className={styles.sideCardLabel}>What opens next</p>
+              <h2 className={styles.sideCardTitle}>The onboarding handoff should feel predictable.</h2>
+              <p className={styles.sideCardBody}>
+                After this page, students should be able to continue into the route they asked for without wondering
+                whether signup worked, whether the email step counted, or where to click next.
+              </p>
+              <div className={styles.sideList}>
+                <div className={styles.sideListItem}>Verification state stays visible here instead of hiding in email guesswork.</div>
+                <div className={styles.sideListItem}>The requested destination is preserved, so students continue into the page they meant to open.</div>
+                <div className={styles.sideListItem}>Password hardening happens once and does not keep interrupting newer accounts.</div>
+              </div>
+            </div>
+
+            <div className={styles.sectionCard}>
+              <p className={styles.sideCardLabel}>Extra protection</p>
+              <h2 className={styles.sideCardTitle}>2-factor authentication is still the best optional next step.</h2>
+              <p className={styles.sideCardBody}>
+                {factorCount > 0
+                  ? `This browser session can already see ${factorCount} enrolled second factor${factorCount === 1 ? "" : "s"}.`
+                  : "When you are ready, add 2-factor authentication in your sign-in provider settings for extra protection."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

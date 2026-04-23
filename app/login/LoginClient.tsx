@@ -139,19 +139,49 @@ export default function LoginPage() {
       <section className={authStyles.shell}>
         <div className={authStyles.brandPanel}>
           <div className={authStyles.brandHeader}>
-            <div className={authStyles.brandLockup}>
-              <div className={authStyles.brandMark}>C</div>
-              <div>
-                <p className={authStyles.brandName}>Cognispark</p>
-                <p className={authStyles.brandTag}>Physics, mission by mission.</p>
+            <div className={authStyles.brandTopRow}>
+              <div className={authStyles.brandLockup}>
+                <div className={authStyles.brandMark}>C</div>
+                <div>
+                  <p className={authStyles.brandName}>Cognispark</p>
+                  <p className={authStyles.brandTag}>Physics, mission by mission.</p>
+                </div>
+              </div>
+
+              <div className={authStyles.utilityLinks}>
+                <Link href="/mission-demo" className={authStyles.utilityLink}>
+                  Public mission
+                </Link>
+                <Link href="/learn" className={authStyles.utilityLink}>
+                  Full route
+                </Link>
+                <Link href="/support" className={authStyles.utilityLink}>
+                  Support
+                </Link>
               </div>
             </div>
+
             <div>
               <p className={authStyles.eyebrow}>Student sign-in</p>
               <h1 className={authStyles.headline}>Come back to the mission route.</h1>
               <p className={authStyles.support}>
                 Pick up exactly where you left off with your dashboard, premium access, and lesson progress in one place.
               </p>
+            </div>
+
+            <div className={authStyles.routeStats}>
+              <article className={authStyles.routeStat}>
+                <span>Coverage</span>
+                <strong>30 modules across Foundation, Core, and Advanced</strong>
+              </article>
+              <article className={authStyles.routeStat}>
+                <span>Public proof</span>
+                <strong>Try the graph mission before or after you sign in</strong>
+              </article>
+              <article className={authStyles.routeStat}>
+                <span>Return path</span>
+                <strong>{nextPath ? "You will return to the page you asked for." : "Your dashboard and lesson route reopen where you left off."}</strong>
+              </article>
             </div>
           </div>
 
@@ -195,6 +225,12 @@ export default function LoginPage() {
               <h1>Login</h1>
               <p>Sign in to continue your current module, review feedback, and manage your student account.</p>
             </div>
+
+            {nextPath ? (
+              <div className={authStyles.formNote}>
+                You are signing in to continue to your requested page once authentication finishes.
+              </div>
+            ) : null}
 
             <form onSubmit={handleLogin} className={authStyles.form}>
               <label className={authStyles.field} htmlFor="login-email">
