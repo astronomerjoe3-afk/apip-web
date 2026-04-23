@@ -1,9 +1,9 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { onIdTokenChanged, type User } from "firebase/auth";
+import { usePathname } from "next/navigation";
+import type { User } from "firebase/auth";
 
-import { firebaseConfigured, maybeAuth } from "./firebase";
 import { establishSessionFromUser, readSessionUser, type SessionUser } from "./sessionClient";
 
 type AuthContextValue = {
@@ -19,6 +19,40 @@ const AuthContext = createContext<AuthContextValue>({
   authenticated: false,
   loading: true,
 });
+
+const PUBLIC_MARKETING_PATHS = new Set([
+  "/",
+  "/graph-lab",
+  "/learn",
+  "/mission-demo",
+  "/support",
+  "/privacy",
+  "/terms",
+  "/delete-account",
+  "/delete-account/request",
+]);
+
+const ANONYMOUS_SESSION_PROBE_SKIP_PATHS = new Set([
+  ...PUBLIC_MARKETING_PATHS,
+  "/login",
+  "/register",
+]);
+
+function shouldSkipAuthBootstrap(pathname: string | null): boolean {
+  if (!pathname) {
+    return false;
+  }
+
+  return PUBLIC_MARKETING_PATHS.has(pathname);
+}
+
+function shouldSkipAnonymousSessionProbe(pathname: string | null): boolean {
+  if (!pathname) {
+    return false;
+  }
+
+  return ANONYMOUS_SESSION_PROBE_SKIP_PATHS.has(pathname);
+}
 
 async function readSessionUserSafe(): Promise<SessionUser | null> {
   try {
@@ -56,44 +90,91 @@ async function primeUserToken(user: User | null): Promise<{
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
   const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!firebaseConfigured || !maybeAuth) {
-      void (async () => {
-        const fallbackSessionUser = await readSessionUserSafe();
-        setSessionUser(fallbackSessionUser);
-        setLoading(false);
-      })();
+    const skipAuthBootstrap = shouldSkipAuthBootstrap(pathname);
+    const skipAnonymousSessionProbe = shouldSkipAnonymousSessionProbe(pathname);
+
+    if (skipAuthBootstrap) {
+      setUser(null);
+      setSessionUser(null);
+      setLoading(false);
       return;
     }
 
+    setLoading(true);
+
     let cancelled = false;
     let revision = 0;
+    let unsubscribe: (() => void) | undefined;
 
-    // Wait for the token-aware auth event so API calls do not start while
-    // Firebase is still settling the usable session token after hydration.
-    const unsub = onIdTokenChanged(maybeAuth, (u) => {
-      const currentRevision = ++revision;
+    void (async () => {
+      const [{ onIdTokenChanged }, firebaseModule] = await Promise.all([
+        import("firebase/auth"),
+        import("./firebase"),
+      ]);
 
-      void (async () => {
-        const primedState = await primeUserToken(u);
-        if (cancelled || currentRevision !== revision) {
+      if (cancelled) {
+        return;
+      }
+
+      if (!firebaseModule.firebaseConfigured || !firebaseModule.maybeAuth) {
+        if (skipAnonymousSessionProbe) {
+          setUser(null);
+          setSessionUser(null);
+          setLoading(false);
           return;
         }
 
-        setUser(primedState.user);
-        setSessionUser(primedState.sessionUser);
+        const fallbackSessionUser = await readSessionUserSafe();
+        if (cancelled) {
+          return;
+        }
+
+        setUser(null);
+        setSessionUser(fallbackSessionUser);
         setLoading(false);
-      })();
-    });
+        return;
+      }
+
+      // Wait for the token-aware auth event so API calls do not start while
+      // Firebase is still settling the usable session token after hydration.
+      unsubscribe = onIdTokenChanged(firebaseModule.maybeAuth, (u) => {
+        const currentRevision = ++revision;
+
+        void (async () => {
+          if (!u && skipAnonymousSessionProbe) {
+            if (cancelled || currentRevision !== revision) {
+              return;
+            }
+
+            setUser(null);
+            setSessionUser(null);
+            setLoading(false);
+            return;
+          }
+
+          const primedState = await primeUserToken(u);
+          if (cancelled || currentRevision !== revision) {
+            return;
+          }
+
+          setUser(primedState.user);
+          setSessionUser(primedState.sessionUser);
+          setLoading(false);
+        })();
+      });
+    })();
+
     return () => {
       cancelled = true;
-      unsub();
+      unsubscribe?.();
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <AuthContext.Provider

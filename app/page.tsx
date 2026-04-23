@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
-  title: "Interactive Physics Learning Platform",
+  title: "Cognispark | Interactive Physics Learning Platform",
   description:
     "Cognispark helps students learn physics through guided missions, a public playable mission, real lesson visuals, instant feedback, and clear progression from foundations to advanced modules.",
   alternates: {
@@ -147,10 +147,10 @@ export default function HomePage() {
           </div>
 
           <div className={styles.navActions}>
-            <Link className={styles.navLink} href="/login">
+            <Link className={styles.navLink} href="/login" prefetch={false}>
               Login
             </Link>
-            <Link className={styles.navButton} href="/register">
+            <Link className={styles.navButton} href="/register" prefetch={false}>
               Create account
             </Link>
           </div>
@@ -321,7 +321,7 @@ export default function HomePage() {
               <div className={styles.moduleCode}>{card.code}</div>
               <h3>{card.title}</h3>
               <p>{card.body}</p>
-              <Link href="/register">Try this mission track</Link>
+              <Link href="/register" prefetch={false}>Try this mission track</Link>
             </article>
           ))}
         </div>
@@ -364,10 +364,10 @@ export default function HomePage() {
         </div>
 
         <div className={styles.ctaRow} style={{ marginTop: 32 }}>
-          <Link className={styles.primaryCta} href="/login?next=/institution">
+          <Link className={styles.primaryCta} href="/login?next=/institution" prefetch={false}>
             School team login
           </Link>
-          <Link className={styles.secondaryCta} href="/register">
+          <Link className={styles.secondaryCta} href="/register" prefetch={false}>
             Create student account
           </Link>
         </div>
@@ -383,7 +383,7 @@ export default function HomePage() {
         </div>
 
         <div className={styles.finalActions}>
-          <Link className={styles.primaryCta} href="/register">
+          <Link className={styles.primaryCta} href="/register" prefetch={false}>
             Create account
           </Link>
           <Link className={styles.secondaryCta} href="/graph-lab">
