@@ -62,6 +62,71 @@
   backdrop-filter: blur(18px);
 }
 
+.moduleActionOverview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.moduleActionSummary {
+  display: grid;
+  gap: 8px;
+}
+
+.moduleActionEyebrow {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(239, 246, 255, 0.9);
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.moduleActionHeadline {
+  font-size: clamp(1.1rem, 1rem + 0.8vw, 1.6rem);
+  font-weight: 900;
+  color: #10233f;
+  line-height: 1.2;
+}
+
+.moduleActionSubcopy {
+  color: #46566b;
+  line-height: 1.6;
+}
+
+.moduleActionStatusCard {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(16, 35, 63, 0.12);
+  background: rgba(248, 250, 252, 0.9);
+}
+
+.moduleActionStatusLabel {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.moduleActionStatusValue {
+  font-size: 1.02rem;
+  font-weight: 900;
+  color: #10233f;
+}
+
+.moduleActionStatusHint {
+  color: #46566b;
+  line-height: 1.5;
+}
+
 .moduleActionRow {
   display: flex;
   justify-content: center;
@@ -114,7 +179,7 @@
   flex-wrap: wrap;
   color: #46566b;
   line-height: 1.5;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .moduleActionChip {
@@ -177,17 +242,53 @@
 }
 
 .lessonDock {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 12px;
+  gap: 12px;
+  padding: 12px 14px;
   border: 1px solid rgba(16, 35, 63, 0.14);
-  border-radius: 999px;
+  border-radius: 28px;
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 22px 48px rgba(15, 23, 42, 0.18);
   backdrop-filter: blur(18px);
+}
+
+.lessonDockContext {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.lessonDockEyebrow {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lessonDockTitle {
+  color: #10233f;
+  font-weight: 900;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lessonDockHelper {
+  color: #46566b;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.lessonDockActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .lessonDockButton {
@@ -235,6 +336,10 @@
     padding: 14px;
   }
 
+  .moduleActionOverview {
+    grid-template-columns: 1fr;
+  }
+
   .moduleActionRow {
     justify-content: center;
   }
@@ -256,11 +361,15 @@
   }
 
   .lessonDock {
-    border-radius: 28px;
+    grid-template-columns: 1fr;
   }
 
   .lessonDockButton {
     flex: 1 1 140px;
+  }
+
+  .lessonDockActions {
+    justify-content: stretch;
   }
 
 }
