@@ -1,0 +1,541 @@
+.page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 1.75rem);
+}
+
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(10px);
+}
+
+.page::before {
+  top: 5rem;
+  right: -8rem;
+  width: 24rem;
+  height: 24rem;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0) 72%);
+}
+
+.page::after {
+  left: -6rem;
+  bottom: 8rem;
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.14) 0%, rgba(34, 197, 94, 0) 72%);
+}
+
+.heroShell,
+.section,
+.finalBand {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.heroShell {
+  padding: clamp(1.2rem, 2vw, 1.6rem);
+  border: 1px solid rgba(96, 126, 181, 0.18);
+  border-radius: 36px;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.97) 0%, rgba(241, 246, 255, 0.92) 42%, rgba(247, 251, 255, 0.96) 100%);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.08);
+}
+
+.heroShell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 36px;
+  background:
+    linear-gradient(rgba(16, 35, 63, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 35, 63, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.heroHeader,
+.heroGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.heroHeader {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 1.5rem;
+}
+
+.eyebrow,
+.sectionEyebrow,
+.trackEyebrow,
+.signalCard span,
+.pathwayCard span {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #66758b;
+}
+
+.heroHeader h1,
+.routeBoard h2,
+.sectionHeader h2,
+.trackSectionHeader h2,
+.finalBand h2,
+.pathwayCard h3,
+.moduleBody h3,
+.routeTrack h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.heroHeader h1 {
+  max-width: 11ch;
+  margin-top: 0.3rem;
+  font-size: clamp(3rem, 2.5rem + 2.8vw, 5.6rem);
+  line-height: 0.93;
+}
+
+.heroText,
+.sectionHeader p,
+.trackSectionHeader p,
+.signalCard p,
+.routeSummary,
+.pathwayCard p,
+.moduleBody p,
+.finalBand p,
+.trackAside li {
+  color: #455467;
+  line-height: 1.75;
+}
+
+.heroText {
+  max-width: 44rem;
+  margin-top: 1rem;
+  font-size: 1.08rem;
+}
+
+.heroActions,
+.finalActions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 26rem;
+}
+
+.primaryCta,
+.secondaryCta,
+.ghostCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.82rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.primaryCta {
+  background: linear-gradient(135deg, #10233f 0%, #1e3e79 100%);
+  color: #fff;
+  box-shadow: 0 20px 42px rgba(16, 35, 63, 0.2);
+}
+
+.secondaryCta,
+.ghostCta {
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+}
+
+.primaryCta:hover,
+.secondaryCta:hover,
+.ghostCta:hover {
+  transform: translateY(-2px);
+}
+
+.heroGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+  align-items: start;
+  padding: 0 0.5rem 0.5rem;
+}
+
+.signalPanel,
+.routeBoard {
+  border-radius: 30px;
+}
+
+.signalPanel {
+  display: grid;
+  gap: 1rem;
+}
+
+.signalRow {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.signalCard {
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
+}
+
+.signalCard strong {
+  display: block;
+  margin-top: 0.42rem;
+  color: #122033;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.pillarsPanel {
+  padding: 1.2rem;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.04);
+}
+
+.pillars {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.95rem;
+}
+
+.pillarChip,
+.routeModuleChip,
+.trackCount,
+.routeChip,
+.trackCode {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.4rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.pillarChip {
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  background: rgba(245, 249, 255, 0.92);
+  color: #24456f;
+}
+
+.routeBoard {
+  position: relative;
+  display: grid;
+  gap: 1.15rem;
+  padding: 1.4rem;
+  border: 1px solid rgba(96, 126, 181, 0.18);
+  background:
+    linear-gradient(150deg, rgba(9, 17, 33, 0.98) 0%, rgba(15, 30, 58, 0.97) 54%, rgba(18, 44, 84, 0.95) 100%);
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.22);
+}
+
+.routeBoard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(96, 165, 250, 0.2), transparent 24%),
+    radial-gradient(circle at 82% 12%, rgba(74, 222, 128, 0.16), transparent 22%);
+  pointer-events: none;
+}
+
+.routeHeader,
+.routeTracks {
+  position: relative;
+  z-index: 1;
+}
+
+.routeHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.routeBoard h2 {
+  max-width: 13ch;
+  margin-top: 0.35rem;
+  font-size: clamp(2rem, 1.7rem + 1.1vw, 3rem);
+  line-height: 0.98;
+}
+
+.routeChip {
+  border: 1px solid rgba(191, 214, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: #dbeafe;
+}
+
+.routeTracks {
+  display: grid;
+  gap: 1rem;
+}
+
+.routeTrack {
+  padding: 1.1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(248, 250, 252, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.routeTrackHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.routeTrack h3 {
+  margin-top: 0.3rem;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.trackCode {
+  border: 1px solid rgba(191, 214, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: #dbeafe;
+}
+
+.routeSummary {
+  margin-top: 0.8rem;
+  color: rgba(226, 232, 240, 0.88);
+}
+
+.routeModulePreview {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.routeModuleChip {
+  border: 1px solid rgba(191, 214, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e5eefc;
+}
+
+.section,
+.finalBand {
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+}
+
+.sectionHeader,
+.trackSectionHeader {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sectionHeader h2,
+.trackSectionHeader h2,
+.finalBand h2 {
+  margin-top: 0.35rem;
+  font-size: clamp(2.1rem, 1.7rem + 1.2vw, 3.4rem);
+  line-height: 1;
+}
+
+.sectionHeader p,
+.trackSectionHeader p {
+  max-width: 50rem;
+  margin-top: 0.95rem;
+}
+
+.pathwayGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.4rem;
+}
+
+.pathwayCard {
+  padding: 1.2rem;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.05);
+}
+
+.pathwayCard h3 {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1.12;
+}
+
+.pathwayCard p {
+  margin-top: 0.7rem;
+}
+
+.trackSection {
+  padding-top: 1.1rem;
+}
+
+.trackAside {
+  width: min(100%, 24rem);
+  padding: 1.1rem 1.15rem;
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  border-radius: 24px;
+  background: rgba(248, 251, 255, 0.86);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.04);
+}
+
+.trackCount {
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  background: rgba(255, 255, 255, 0.9);
+  color: #10233f;
+}
+
+.trackAside ul {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.moduleGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.4rem;
+}
+
+.moduleCard {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  padding: 1.1rem;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.05);
+}
+
+.moduleCode {
+  display: grid;
+  place-items: center;
+  min-width: 3.6rem;
+  min-height: 3.6rem;
+  padding: 0.75rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #10233f 0%, #3558a6 100%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 18px 32px rgba(37, 79, 164, 0.2);
+}
+
+.moduleBody h3 {
+  font-size: 1.38rem;
+  line-height: 1.08;
+}
+
+.moduleBody p {
+  margin-top: 0.65rem;
+}
+
+.finalBand {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem;
+  border: 1px solid rgba(96, 126, 181, 0.18);
+  border-radius: 32px;
+  background:
+    linear-gradient(135deg, rgba(16, 35, 63, 0.96) 0%, rgba(25, 55, 110, 0.96) 52%, rgba(22, 87, 81, 0.94) 100%);
+  color: #fff;
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.18);
+}
+
+.finalBand p {
+  max-width: 44rem;
+  margin-top: 0.8rem;
+  color: rgba(226, 232, 240, 0.92);
+}
+
+@media (max-width: 1080px) {
+  .heroHeader,
+  .trackSectionHeader,
+  .finalBand {
+    flex-direction: column;
+  }
+
+  .heroActions,
+  .finalActions {
+    justify-content: flex-start;
+    max-width: none;
+  }
+
+  .heroGrid,
+  .pathwayGrid,
+  .moduleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .signalRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 0.85rem;
+  }
+
+  .heroShell,
+  .section,
+  .finalBand {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .heroHeader h1,
+  .routeBoard h2,
+  .sectionHeader h2,
+  .trackSectionHeader h2,
+  .finalBand h2 {
+    max-width: none;
+  }
+
+  .moduleCard {
+    grid-template-columns: 1fr;
+  }
+
+  .moduleCode {
+    min-width: 0;
+    width: fit-content;
+  }
+}

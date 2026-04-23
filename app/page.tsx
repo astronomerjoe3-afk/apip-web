@@ -279,8 +279,8 @@ export default function HomePage() {
             <Link className={styles.primaryCta} href="/mission-demo">
               Try the public graph mission
             </Link>
-            <Link className={styles.secondaryCta} href="/register">
-              Unlock the full platform
+            <Link className={styles.secondaryCta} href="/learn">
+              Explore the full route
             </Link>
           </div>
         </div>
