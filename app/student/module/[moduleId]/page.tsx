@@ -808,6 +808,9 @@ export default function StudentModulePage() {
   const currentLessonCompleted = activeLesson?.progress?.completed === true;
   const hasNextLesson = lessons.length > 0 && activeIdx < lessons.length - 1;
   const canGoNext = hasNextLesson && currentLessonCompleted;
+  const activeLessonId = activeLesson
+    ? normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id)
+    : "";
   const lessonsCompletedCount = moduleProgress?.lessons_completed_count ?? lessons.reduce(
     (count, lesson) => count + (lesson.progress?.completed ? 1 : 0),
     0,
@@ -823,6 +826,11 @@ export default function StudentModulePage() {
         : lessons.length > 0
           ? "Complete this mission to unlock the next one."
           : "Loading the lesson sequence now.";
+  const currentMissionLabel = moduleCompleted
+    ? "Module complete"
+    : activeLesson
+      ? activeLesson.title || activeLessonId
+      : "Loading mission";
   const nextModule = useMemo(() => {
     const currentRank = moduleSequenceRank(moduleId);
     if (!Number.isFinite(currentRank) || currentRank === Number.MAX_SAFE_INTEGER) {
@@ -837,6 +845,43 @@ export default function StudentModulePage() {
   const nextModulePath = nextModule ? `/student/module/${encodeURIComponent(nextModule.id)}` : "/student";
   const nextModuleSubscriptionPlans = nextModule?.access?.subscription_plans || [];
   const recommendedSubscriptionPlan = nextModuleSubscriptionPlans[0] || subscriptionPlans[0] || null;
+  const nextStepTitle = moduleLocked
+    ? "Unlock this module or return to the pathway"
+    : moduleCompleted
+      ? nextModule
+        ? nextModuleLocked
+          ? `Unlock ${nextModule.id} or open premium plans`
+          : `Open ${nextModule.id} when you are ready`
+        : "Choose your next module from the pathway"
+      : currentLessonCompleted
+        ? hasNextLesson
+          ? "Continue to the next mission"
+          : "You are at the end of this module"
+        : "Finish this mission to unlock Continue";
+  const nextStepHint = moduleLocked
+    ? "Use the unlock options below, or head back and choose another module."
+    : moduleCompleted
+      ? nextModule
+        ? nextModuleLocked
+          ? "Your next module is ready to preview, and premium options are available below."
+          : "The next module is ready as soon as you want to keep moving."
+        : "You can browse the pathway or revisit any saved module from your workspace."
+      : currentLessonCompleted
+        ? hasNextLesson
+          ? "Continue is ready now. Your progress is already saved."
+          : "Wrap up below, then choose the next module when you are ready."
+        : "Your place is saved automatically, so you can finish this mission at your own pace.";
+  const lessonDockHelperText = moduleCompleted
+    ? nextModule
+      ? nextModuleLocked
+        ? `You finished ${moduleId}. Unlock ${nextModule.id} below, or head back to the pathway.`
+        : `You finished ${moduleId}. ${nextModule.id} is ready when you want the next challenge.`
+      : "You finished this module. Your pathway progress is saved to your account."
+    : currentLessonCompleted
+      ? hasNextLesson
+        ? "Nice work. Continue is unlocked, and your place is saved to your account."
+        : "You have completed the last mission in this module. The next step is just below."
+      : "Your place is saved automatically, so you can leave and come back right here.";
 
   const toggleModuleFavorite = useCallback((): void => {
     const nextPreferenceState: StudentPreferenceState = {
@@ -995,21 +1040,25 @@ export default function StudentModulePage() {
         label: "Back to modules",
         section: "Workspace",
         href: "/student",
+        helper: "Return to your full pathway",
       },
       {
         label: "Settings & account",
         section: "Workspace",
         href: "/student/settings",
+        helper: "Profile, security, and saved items",
       },
       {
         label: moduleFavorited ? "Saved module" : "Save module",
         section: "This module",
         onClick: toggleModuleFavorite,
+        helper: moduleFavorited ? "This module is in your saved list" : "Keep this module handy",
       },
       {
         label: "Share module",
         section: "This module",
         onClick: () => void shareCurrentModule(),
+        helper: "Copy or send this module link",
       },
     ];
 
@@ -1018,11 +1067,13 @@ export default function StudentModulePage() {
         label: lessonFavorited ? "Saved lesson" : "Save lesson",
         section: "This lesson",
         onClick: toggleLessonFavorite,
+        helper: lessonFavorited ? "This mission is in your saved list" : "Keep this mission handy",
       });
       items.push({
         label: "Share lesson",
         section: "This lesson",
         onClick: () => void shareCurrentLesson(),
+        helper: "Copy or send this mission link",
       });
     }
 
@@ -1034,6 +1085,7 @@ export default function StudentModulePage() {
           : hasActiveSubscription ? "Manage subscription" : "Manage billing",
         onClick: () => void openBillingPortal(),
         disabled: billingBusyId !== "" || signOutBusy,
+        helper: "Plans, purchases, and access",
       });
     }
 
@@ -1042,6 +1094,7 @@ export default function StudentModulePage() {
         section: "Support",
         label: "Help / inquiry",
         onClick: () => setHelpDialogOpen(true),
+        helper: "Ask a question about this module",
       });
     }
 
@@ -1051,6 +1104,7 @@ export default function StudentModulePage() {
       onClick: () => void handleSignOut(),
       disabled: signOutBusy || billingBusyId !== "",
       tone: "danger",
+      helper: "Leave this device session",
     });
 
     return items;
@@ -1189,16 +1243,30 @@ export default function StudentModulePage() {
     <div className={styles.page}>
       {authenticated ? (
         <div className={styles.moduleActionBar}>
+          <div className={styles.moduleActionOverview}>
+            <div className={styles.moduleActionSummary}>
+              <span className={styles.moduleActionEyebrow}>Where you are</span>
+              <div className={styles.moduleActionHeadline}>{currentMissionLabel}</div>
+              <div className={styles.moduleActionSubcopy}>{moduleActionMessage}</div>
+            </div>
+            <div className={styles.moduleActionStatusCard}>
+              <span className={styles.moduleActionStatusLabel}>Next step</span>
+              <div className={styles.moduleActionStatusValue}>{nextStepTitle}</div>
+              <div className={styles.moduleActionStatusHint}>{nextStepHint}</div>
+            </div>
+          </div>
           <div className={styles.moduleActionRow}>
             <div className={styles.moduleActionMeta}>
               {progressLabel ? (
                 <span className={styles.moduleActionChip}>{progressLabel}</span>
               ) : null}
               <span className={styles.moduleActionChip}>{moduleId}</span>
-              {activeLesson ? (
-                <span className={styles.moduleActionChip}>{activeLesson.title || normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id)}</span>
+              {moduleProgress ? (
+                <span className={styles.moduleActionChip}>
+                  {lessonsCompletedCount}/{totalLessons} completed
+                </span>
               ) : null}
-              <span>{moduleActionMessage}</span>
+              <span className={styles.moduleActionChip}>Progress saved</span>
             </div>
           </div>
         </div>
@@ -1574,36 +1642,43 @@ export default function StudentModulePage() {
       {authenticated ? (
         <div className={styles.lessonDockShell}>
           <div className={styles.lessonDock}>
-            <button
-              onClick={() => router.push("/student")}
-              className={styles.lessonDockButton}
-            >
-              Back
-            </button>
-            <button
-              onClick={goBack}
-              disabled={!canGoBack}
-              className={styles.lessonDockButton}
-            >
-              Previous
-            </button>
-            {lessons.length > 0 ? (
+            <div className={styles.lessonDockContext}>
+              <span className={styles.lessonDockEyebrow}>Current mission</span>
+              <span className={styles.lessonDockTitle}>{currentMissionLabel}</span>
+              <span className={styles.lessonDockHelper}>{lessonDockHelperText}</span>
+            </div>
+            <div className={styles.lessonDockActions}>
               <button
-                onClick={() => void restartFromBeginning()}
+                className={styles.lessonDockButton}
+                onClick={() => router.push("/student")}
+              >
+                Pathway
+              </button>
+              <button
+                onClick={goBack}
+                disabled={!canGoBack}
                 className={styles.lessonDockButton}
               >
-                Start over
+                Previous
               </button>
-            ) : null}
-            {lessons.length > 0 && !moduleCompleted ? (
-              <button
-                onClick={goNext}
-                disabled={!canGoNext}
-                className={`${styles.lessonDockButton} ${styles.lessonDockPrimary}`}
-              >
-                Continue
-              </button>
-            ) : null}
+              {lessons.length > 0 ? (
+                <button
+                  onClick={() => void restartFromBeginning()}
+                  className={styles.lessonDockButton}
+                >
+                  Restart
+                </button>
+              ) : null}
+              {lessons.length > 0 && !moduleCompleted ? (
+                <button
+                  onClick={goNext}
+                  disabled={!canGoNext}
+                  className={`${styles.lessonDockButton} ${styles.lessonDockPrimary}`}
+                >
+                  Continue
+                </button>
+              ) : null}
+            </div>
           </div>
         </div>
       ) : null}
