@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 import styles from "../module.module.css";
-import { apipGet, apipPost } from "../../../../lib/apipApi";
+import { apipGet, apipPatch, apipPost } from "../../../../lib/apipApi";
 import LessonRunner from "../../../../components/LessonRunner";
 import StudentHelpCard from "../../../../components/StudentHelpCard";
 import { restartModuleProgress } from "../../../../lib/lessonRunnerApi";
@@ -21,9 +21,18 @@ import { readSessionUser, signOutEverywhere, type SessionUser } from "../../../.
 import { shareLink } from "../../../../lib/shareLink";
 import {
   lessonFavoriteKey,
+  mergeStudentPreferenceStates,
   moduleFavoriteKey,
+  normalizeStudentLearningState,
+  normalizeStudentPreferenceState,
   readStudentPreferenceState,
+  readStudentLearningState,
+  serializeStudentLearningState,
+  serializeStudentPreferenceState,
+  type StudentLearningState,
+  type StudentPreferenceState,
   togglePreferenceId,
+  writeStudentLearningState,
   writeStudentPreferenceState,
 } from "../../../../lib/studentPreferences";
 import StudentActionMenu, { type StudentActionMenuItem } from "../../../../components/StudentActionMenu";
@@ -157,6 +166,19 @@ type LessonsResponse = {
   warnings?: string[];
 };
 
+type ProfileResponse = {
+  ok: boolean;
+  uid: string;
+  email?: string | null;
+  display_name?: string | null;
+  email_verified?: boolean | null;
+  role: SessionUser["role"];
+  security?: SessionUser["security"] | null;
+  preferences?: StudentPreferenceState | null;
+  learning_state?: StudentLearningState | null;
+  utc: string;
+};
+
 type ActiveLesson = LessonCatalog & {
   progress?: LessonProgress;
 };
@@ -282,6 +304,21 @@ function compareModuleSequence(left: ModuleCatalog, right: ModuleCatalog): numbe
   return String(left.id || "").localeCompare(String(right.id || ""));
 }
 
+function mapProfileToSessionUser(profile: ProfileResponse | null): SessionUser | null {
+  if (!profile) {
+    return null;
+  }
+
+  return {
+    uid: profile.uid,
+    email: profile.email ?? null,
+    display_name: profile.display_name ?? null,
+    email_verified: profile.email_verified ?? null,
+    role: profile.role,
+    security: profile.security ?? null,
+  };
+}
+
 export default function StudentModulePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -317,7 +354,9 @@ export default function StudentModulePage() {
   const [billingBusyId, setBillingBusyId] = useState<string>("");
   const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
   const [sessionLoading, setSessionLoading] = useState<boolean>(true);
+  const learningStateRef = useRef<StudentLearningState | null>(readStudentLearningState());
   const confirmedSessionRef = useRef<string>("");
+  const lastPersistedLearningRef = useRef<string>("");
   const [availableModules, setAvailableModules] = useState<ModuleCatalog[]>([]);
   const [moduleProgress, setModuleProgress] = useState<StudentModuleProgressResponse["module"] | null>(null);
   const [lessons, setLessons] = useState<ActiveLesson[]>([]);
@@ -327,8 +366,9 @@ export default function StudentModulePage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
   const [signOutBusy, setSignOutBusy] = useState<boolean>(false);
-  const [favoriteModules, setFavoriteModules] = useState<string[]>([]);
-  const [favoriteLessons, setFavoriteLessons] = useState<string[]>([]);
+  const [continuityLoading, setContinuityLoading] = useState<boolean>(true);
+  const [preferenceState, setPreferenceState] = useState<StudentPreferenceState>(() => readStudentPreferenceState());
+  const [learningState, setLearningState] = useState<StudentLearningState | null>(() => readStudentLearningState());
 
   const activeLesson = useMemo(() => {
     if (!lessons.length) return null;
@@ -372,15 +412,11 @@ export default function StudentModulePage() {
   const activeLessonKey = activeLesson
     ? lessonFavoriteKey(moduleId, normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id))
     : "";
+  const favoriteModules = preferenceState.favoriteModules;
+  const favoriteLessons = preferenceState.favoriteLessons;
   const moduleFavoriteId = moduleFavoriteKey(moduleId);
   const moduleFavorited = favoriteModules.includes(moduleFavoriteId);
   const lessonFavorited = activeLessonKey ? favoriteLessons.includes(activeLessonKey) : false;
-
-  useEffect(() => {
-    const preferences = readStudentPreferenceState();
-    setFavoriteModules(preferences.favoriteModules);
-    setFavoriteLessons(preferences.favoriteLessons);
-  }, []);
 
   useEffect(() => {
     if (!helpDialogOpen) {
@@ -397,6 +433,70 @@ export default function StudentModulePage() {
       document.documentElement.style.overflow = previousHtmlOverflow;
     };
   }, [helpDialogOpen]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadContinuityState(): Promise<void> {
+      if (authLoading) {
+        return;
+      }
+
+      if (!authenticated) {
+        if (!cancelled) {
+          setContinuityLoading(false);
+        }
+        return;
+      }
+
+      try {
+        const profile = await apipGet<ProfileResponse>("/profile");
+        if (cancelled) {
+          return;
+        }
+
+        const localPreferences = readStudentPreferenceState();
+        const apiPreferences = normalizeStudentPreferenceState(profile.preferences);
+        const mergedPreferences = mergeStudentPreferenceStates(apiPreferences, localPreferences);
+        const normalizedLearningState = normalizeStudentLearningState(profile.learning_state) || readStudentLearningState();
+
+        setSessionUser((current) => mapProfileToSessionUser(profile) || current);
+        setPreferenceState(mergedPreferences);
+        setLearningState(normalizedLearningState);
+        learningStateRef.current = normalizedLearningState;
+
+        writeStudentPreferenceState(mergedPreferences);
+        writeStudentLearningState(normalizedLearningState);
+
+        if (
+          JSON.stringify(serializeStudentPreferenceState(mergedPreferences))
+          !== JSON.stringify(serializeStudentPreferenceState(apiPreferences))
+        ) {
+          void apipPatch<ProfileResponse, ReturnType<typeof serializeStudentPreferenceState>>(
+            "/profile/preferences",
+            serializeStudentPreferenceState(mergedPreferences),
+          ).catch(() => undefined);
+        }
+      } catch {
+        if (!cancelled) {
+          setPreferenceState(readStudentPreferenceState());
+          const fallbackLearningState = readStudentLearningState();
+          setLearningState(fallbackLearningState);
+          learningStateRef.current = fallbackLearningState;
+        }
+      } finally {
+        if (!cancelled) {
+          setContinuityLoading(false);
+        }
+      }
+    }
+
+    void loadContinuityState();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [authLoading, authenticated]);
 
   const loadBillingSummary = useCallback(async (): Promise<void> => {
     if (!authenticated) {
@@ -418,7 +518,11 @@ export default function StudentModulePage() {
   }, [authenticated]);
 
   const loadModuleState = useCallback(
-    async (preserveCurrentLesson: boolean = true, currentLessonIdOverride?: string): Promise<void> => {
+    async (
+      preserveCurrentLesson: boolean = true,
+      currentLessonIdOverride?: string,
+      allowResumeFromProfile: boolean = true,
+    ): Promise<void> => {
       if (authLoading) {
         return;
       }
@@ -536,13 +640,20 @@ export default function StudentModulePage() {
         const currentLessonId = preserveCurrentLesson
           ? normalizeLessonId(moduleId, currentLessonIdOverride)
           : "";
+        const resumeLessonId =
+          !currentLessonId
+          && allowResumeFromProfile
+          && normalizeModuleId(learningStateRef.current?.lastModuleId) === moduleId
+            ? normalizeLessonId(moduleId, learningStateRef.current?.lastLessonId)
+            : "";
+        const preferredLessonId = currentLessonId || resumeLessonId;
 
         let nextIndex = 0;
 
-        if (currentLessonId) {
+        if (preferredLessonId) {
           const foundIndex = mergedLessons.findIndex(
             (lesson) =>
-              normalizeLessonId(moduleId, lesson.lesson_id || lesson.id) === currentLessonId,
+              normalizeLessonId(moduleId, lesson.lesson_id || lesson.id) === preferredLessonId,
           );
           if (foundIndex >= 0) {
             nextIndex = foundIndex;
@@ -589,17 +700,17 @@ export default function StudentModulePage() {
   );
 
   useEffect(() => {
-    if (authLoading) {
+    if (authLoading || continuityLoading) {
       return;
     }
 
     if (!authenticated) {
-      router.replace("/login?next=/student");
+      router.replace(`/login?next=${encodeURIComponent(currentModulePath)}`);
       return;
     }
 
     void loadModuleState(true, requestedLessonId || undefined);
-  }, [authLoading, authenticated, currentModulePath, loadModuleState, requestedLessonId, router]);
+  }, [authLoading, authenticated, continuityLoading, currentModulePath, loadModuleState, requestedLessonId, router]);
 
   useEffect(() => {
     if (!authLoading && authenticated) {
@@ -683,7 +794,7 @@ export default function StudentModulePage() {
       module_id: moduleId,
     })
       .then(async () => {
-        await Promise.all([loadBillingSummary(), loadModuleState(false)]);
+        await Promise.all([loadBillingSummary(), loadModuleState(false, undefined, false)]);
         setStatus("Payment confirmed. Your access has been refreshed.");
         router.replace(currentModulePath);
       })
@@ -728,38 +839,52 @@ export default function StudentModulePage() {
   const recommendedSubscriptionPlan = nextModuleSubscriptionPlans[0] || subscriptionPlans[0] || null;
 
   const toggleModuleFavorite = useCallback((): void => {
-    const nextFavoriteModules = togglePreferenceId(favoriteModules, moduleFavoriteId);
-    setFavoriteModules(nextFavoriteModules);
-    writeStudentPreferenceState({
-      ...readStudentPreferenceState(),
-      favoriteModules: nextFavoriteModules,
-      favoriteLessons,
-    });
+    const nextPreferenceState: StudentPreferenceState = {
+      ...preferenceState,
+      favoriteModules: togglePreferenceId(favoriteModules, moduleFavoriteId),
+    };
+
+    setPreferenceState(nextPreferenceState);
+    writeStudentPreferenceState(nextPreferenceState);
     setStatus(
-      nextFavoriteModules.includes(moduleFavoriteId)
-        ? `${moduleId} saved to favorites.`
-        : `${moduleId} removed from favorites.`,
+      nextPreferenceState.favoriteModules.includes(moduleFavoriteId)
+        ? `${moduleId} saved to your account favorites.`
+        : `${moduleId} removed from your account favorites.`,
     );
-  }, [favoriteLessons, favoriteModules, moduleFavoriteId, moduleId]);
+
+    void apipPatch<ProfileResponse, ReturnType<typeof serializeStudentPreferenceState>>(
+      "/profile/preferences",
+      serializeStudentPreferenceState(nextPreferenceState),
+    ).catch(() => {
+      setErr("Favorites were saved on this device, but account sync could not be reached just now.");
+    });
+  }, [favoriteModules, moduleFavoriteId, moduleId, preferenceState]);
 
   const toggleLessonFavorite = useCallback((): void => {
     if (!activeLessonKey || !activeLesson) {
       return;
     }
 
-    const nextFavoriteLessons = togglePreferenceId(favoriteLessons, activeLessonKey);
-    setFavoriteLessons(nextFavoriteLessons);
-    writeStudentPreferenceState({
-      ...readStudentPreferenceState(),
-      favoriteModules,
-      favoriteLessons: nextFavoriteLessons,
-    });
+    const nextPreferenceState: StudentPreferenceState = {
+      ...preferenceState,
+      favoriteLessons: togglePreferenceId(favoriteLessons, activeLessonKey),
+    };
+
+    setPreferenceState(nextPreferenceState);
+    writeStudentPreferenceState(nextPreferenceState);
     setStatus(
-      nextFavoriteLessons.includes(activeLessonKey)
-        ? `${activeLesson.title || "Lesson"} saved to favorites.`
-        : `${activeLesson.title || "Lesson"} removed from favorites.`,
+      nextPreferenceState.favoriteLessons.includes(activeLessonKey)
+        ? `${activeLesson.title || "Lesson"} saved to your account favorites.`
+        : `${activeLesson.title || "Lesson"} removed from your account favorites.`,
     );
-  }, [activeLesson, activeLessonKey, favoriteLessons, favoriteModules]);
+
+    void apipPatch<ProfileResponse, ReturnType<typeof serializeStudentPreferenceState>>(
+      "/profile/preferences",
+      serializeStudentPreferenceState(nextPreferenceState),
+    ).catch(() => {
+      setErr("Favorites were saved on this device, but account sync could not be reached just now.");
+    });
+  }, [activeLesson, activeLessonKey, favoriteLessons, preferenceState]);
 
   const shareCurrentModule = useCallback(async (): Promise<void> => {
     try {
@@ -956,7 +1081,7 @@ export default function StudentModulePage() {
     if (!moduleId) return;
     await restartModuleProgress(moduleId);
     setActiveIdx(0);
-    await loadModuleState(false);
+    await loadModuleState(false, undefined, false);
     window?.scrollTo?.({ top: 0, behavior: "smooth" });
   }, [loadModuleState, moduleId]);
   const handleRunnerProgressSummaryChanged = useCallback((summary: {
@@ -1023,6 +1148,43 @@ export default function StudentModulePage() {
       return nextLessons;
     });
   }, [moduleId]);
+
+  useEffect(() => {
+    if (!authenticated || !moduleId || !activeLesson) {
+      return;
+    }
+
+    const normalizedLessonId = normalizeLessonId(moduleId, activeLesson.lesson_id || activeLesson.id);
+    const nextLearningState: StudentLearningState = {
+      lastModuleId: moduleId,
+      lastLessonId: normalizedLessonId,
+      lastLessonTitle: activeLesson.title || normalizedLessonId,
+      lastRoute: `${currentModulePath}?lesson=${encodeURIComponent(normalizedLessonId)}`,
+      lastVisitedUtc: new Date().toISOString(),
+    };
+    const serializedLearningState = JSON.stringify(serializeStudentLearningState(nextLearningState));
+
+    learningStateRef.current = nextLearningState;
+    setLearningState(nextLearningState);
+    writeStudentLearningState(nextLearningState);
+
+    if (lastPersistedLearningRef.current === serializedLearningState) {
+      return;
+    }
+    lastPersistedLearningRef.current = serializedLearningState;
+
+    const timeoutId = window.setTimeout(() => {
+      void apipPatch<ProfileResponse, ReturnType<typeof serializeStudentLearningState>>(
+        "/profile/learning-state",
+        serializeStudentLearningState(nextLearningState),
+      ).catch(() => undefined);
+    }, 200);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [activeLesson, authenticated, currentModulePath, moduleId]);
+
   return (
     <div className={styles.page}>
       {authenticated ? (
@@ -1173,7 +1335,7 @@ export default function StudentModulePage() {
               Secure this account
             </button>
             <button
-              onClick={() => { void Promise.all([loadModuleState(false), loadBillingSummary()]); }}
+              onClick={() => { void Promise.all([loadModuleState(false, undefined, false), loadBillingSummary()]); }}
               style={{
                 padding: "12px 18px",
                 borderRadius: 14,
@@ -1255,7 +1417,7 @@ export default function StudentModulePage() {
                   {billingBusyId === "portal" ? "Opening billing portal..." : hasActiveSubscription ? "Manage subscription" : "Manage billing"}
                 </button>
               ) : null}
-              <button onClick={() => { void Promise.all([loadModuleState(false), loadBillingSummary()]); }} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.88)", fontWeight: 800 }}>Refresh access</button>
+              <button onClick={() => { void Promise.all([loadModuleState(false, undefined, false), loadBillingSummary()]); }} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.88)", fontWeight: 800 }}>Refresh access</button>
               <button onClick={() => router.push("/student")} style={{ padding: "12px 18px", borderRadius: 14, border: "1px solid rgba(16, 35, 63, 0.14)", background: "rgba(255, 255, 255, 0.72)", fontWeight: 800 }}>Back to modules</button>
             </div>
           </div>
