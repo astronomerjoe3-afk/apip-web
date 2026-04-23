@@ -1,8 +1,6 @@
 "use client";
 
-import { signOut, type User } from "firebase/auth";
-
-import { auth } from "./firebase";
+import type { User } from "firebase/auth";
 import { BFF_PREFIX } from "./sessionConstants";
 
 export type SessionRole =
@@ -214,5 +212,12 @@ export async function recordStrongPasswordPolicy(passwordPolicyVersion: number):
 
 export async function signOutEverywhere(): Promise<void> {
   await clearServerSession().catch(() => undefined);
-  await signOut(auth);
+  const [{ signOut }, firebaseModule] = await Promise.all([
+    import("firebase/auth"),
+    import("./firebase"),
+  ]);
+
+  if (firebaseModule.maybeAuth) {
+    await signOut(firebaseModule.maybeAuth);
+  }
 }
