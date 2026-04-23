@@ -7,7 +7,7 @@ import styles from "./home.module.css";
 export const metadata: Metadata = {
   title: "Interactive Physics Learning Platform",
   description:
-    "Cognispark helps students learn physics through guided missions, real lesson visuals, instant feedback, and clear progression from foundations to advanced modules.",
+    "Cognispark helps students learn physics through guided missions, a public playable mission, real lesson visuals, instant feedback, and clear progression from foundations to advanced modules.",
   alternates: {
     canonical: "/",
   },
@@ -165,11 +165,11 @@ export default function HomePage() {
             </p>
 
             <div className={styles.ctaRow}>
-              <Link className={styles.primaryCta} href="/register">
-                Start your first mission
+              <Link className={styles.primaryCta} href="/mission-demo">
+                Play a public mission
               </Link>
-              <Link className={styles.secondaryCta} href="#mission-map">
-                Explore the module map
+              <Link className={styles.secondaryCta} href="/register">
+                Create account
               </Link>
             </div>
 
@@ -273,6 +273,15 @@ export default function HomePage() {
                 <p>{item.body}</p>
               </article>
             ))}
+          </div>
+
+          <div className={styles.ctaRow}>
+            <Link className={styles.primaryCta} href="/mission-demo">
+              Try the public graph mission
+            </Link>
+            <Link className={styles.secondaryCta} href="/register">
+              Unlock the full platform
+            </Link>
           </div>
         </div>
       </section>

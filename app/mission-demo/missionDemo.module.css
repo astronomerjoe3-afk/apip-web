@@ -1,0 +1,722 @@
+.page {
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 1.6rem);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.page::before,
+.page::after {
+  content: "";
+  position: fixed;
+  inset: auto;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(12px);
+  z-index: 0;
+}
+
+.page::before {
+  top: 6rem;
+  right: -8rem;
+  width: 24rem;
+  height: 24rem;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(37, 99, 235, 0) 72%);
+}
+
+.page::after {
+  left: -6rem;
+  bottom: 8rem;
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(16, 185, 129, 0) 72%);
+}
+
+.hero,
+.missionExperience,
+.finalBand {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 62px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.hero {
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.1), transparent 20%),
+    radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12), transparent 22%),
+    linear-gradient(rgba(16, 35, 63, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 35, 63, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+  pointer-events: none;
+}
+
+.heroNav,
+.heroGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.heroNav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0.35rem 0.35rem 0.9rem;
+}
+
+.homeLink {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #122033;
+}
+
+.heroNavActions,
+.heroActions,
+.finalActions {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navLink,
+.navButton,
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.84rem 1.15rem;
+  border-radius: 999px;
+  font-weight: 800;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.navLink,
+.secondaryButton {
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.76);
+  color: #122033;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+}
+
+.navButton,
+.primaryButton {
+  background: linear-gradient(135deg, #10233f 0%, #1d4ed8 100%);
+  color: #fff;
+  box-shadow: 0 20px 42px rgba(16, 35, 63, 0.22);
+}
+
+.navLink:hover,
+.navButton:hover,
+.primaryButton:hover,
+.secondaryButton:hover,
+.optionButton:hover {
+  transform: translateY(-2px);
+}
+
+.heroGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  align-items: stretch;
+  padding: 0.6rem 0.35rem 0.35rem;
+}
+
+.heroCopy,
+.heroBoard,
+.graphShell,
+.challengeColumn {
+  border-radius: 30px;
+}
+
+.heroCopy {
+  display: grid;
+  gap: 1.2rem;
+  padding: 1.45rem;
+}
+
+.heroEyebrow,
+.sectionEyebrow,
+.graphEyebrow,
+.boardEyebrow,
+.signalItem span,
+.questionIndex {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #66758a;
+}
+
+.heroCopy h1,
+.heroBoard h2,
+.sectionCopy h2,
+.challengeHeader h3,
+.debriefCard h3,
+.finalBand h2,
+.questionPromptBlock h4,
+.graphHeader h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.heroCopy h1 {
+  max-width: 10ch;
+  font-size: clamp(3.2rem, 2.8rem + 2.2vw, 5.6rem);
+  line-height: 0.92;
+}
+
+.heroText,
+.sectionCopy p,
+.challengeHeader p,
+.debriefCard p,
+.finalBand p,
+.boardItem p,
+.questionPromptBlock p,
+.feedbackPanel p,
+.signalItem strong,
+.readoutNarrative,
+.graphLegend span {
+  color: #435266;
+  line-height: 1.75;
+}
+
+.heroText {
+  max-width: 44rem;
+  font-size: 1.05rem;
+}
+
+.heroSignals {
+  display: grid;
+  gap: 0.95rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.signalItem {
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.05);
+}
+
+.signalItem strong {
+  display: block;
+  margin-top: 0.4rem;
+  color: #122033;
+  line-height: 1.45;
+}
+
+.heroBoard {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1.45rem;
+  color: #f8fafc;
+  background: linear-gradient(150deg, rgba(10, 18, 32, 0.97) 0%, rgba(15, 30, 58, 0.96) 55%, rgba(16, 75, 90, 0.9) 100%);
+  box-shadow: 0 26px 62px rgba(15, 23, 42, 0.2);
+}
+
+.boardEyebrow {
+  color: rgba(191, 219, 254, 0.88);
+}
+
+.heroBoard h2 {
+  max-width: 13ch;
+  font-size: clamp(2rem, 1.7rem + 1vw, 3rem);
+  line-height: 0.98;
+}
+
+.boardList {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.boardItem {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.boardItem span {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #e0f2fe;
+  font-weight: 800;
+}
+
+.boardItem strong,
+.readoutCard strong,
+.progressChip,
+.graphLegend strong {
+  color: #fff;
+  font-weight: 800;
+}
+
+.boardItem p {
+  margin-top: 0.35rem;
+  color: rgba(226, 232, 240, 0.84);
+}
+
+.missionExperience {
+  padding: 1.35rem;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.sectionCopy {
+  max-width: 50rem;
+}
+
+.sectionCopy h2,
+.finalBand h2 {
+  margin-top: 0.45rem;
+  font-size: clamp(2.1rem, 1.85rem + 1vw, 3.25rem);
+  line-height: 0.98;
+}
+
+.sectionCopy p,
+.finalBand p {
+  margin-top: 0.8rem;
+  font-size: 1.02rem;
+}
+
+.missionWorkspace {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  align-items: start;
+}
+
+.graphShell,
+.challengeColumn,
+.debriefCard,
+.questionCard {
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 247, 252, 0.9) 100%);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.06);
+}
+
+.graphShell,
+.challengeColumn {
+  padding: 1.2rem;
+}
+
+.graphShell {
+  display: grid;
+  gap: 1rem;
+  background: linear-gradient(155deg, rgba(10, 19, 34, 0.98) 0%, rgba(18, 34, 61, 0.98) 54%, rgba(21, 84, 110, 0.92) 100%);
+  color: #f8fafc;
+}
+
+.graphHeader {
+  display: flex;
+  gap: 0.85rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.graphHeader h3 {
+  margin-top: 0.35rem;
+  font-size: 2rem;
+  line-height: 0.98;
+}
+
+.progressChip {
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.92rem;
+}
+
+.readoutBand {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, auto)) minmax(0, 1fr);
+}
+
+.readoutCard,
+.readoutNarrative {
+  padding: 0.95rem 1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.readoutCard span {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(191, 219, 254, 0.88);
+}
+
+.readoutCard strong {
+  display: block;
+  margin-top: 0.42rem;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.readoutNarrative {
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.readoutNarrative strong {
+  color: #f8fafc;
+}
+
+.sliderPanel {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sliderLabel {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.slider {
+  width: 100%;
+  accent-color: #38bdf8;
+}
+
+.sliderScale {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: rgba(191, 219, 254, 0.84);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.graphBoard {
+  padding: 1rem;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.graph {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gridLine {
+  stroke: rgba(59, 130, 246, 0.16);
+  stroke-width: 1;
+}
+
+.axisLine {
+  stroke: #10233f;
+  stroke-width: 2.2;
+}
+
+.axisLabel {
+  fill: #516177;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.axisTitle {
+  fill: #122033;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.segmentLine {
+  stroke: #2563eb;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke 160ms ease;
+}
+
+.segmentLabel {
+  fill: #0f172a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.focusLine {
+  stroke: rgba(16, 185, 129, 0.68);
+  stroke-width: 2;
+  stroke-dasharray: 8 8;
+}
+
+.focusPointGlow {
+  fill: rgba(16, 185, 129, 0.18);
+}
+
+.focusPoint {
+  fill: #0f766e;
+}
+
+.graphLegend {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.graphLegend div {
+  padding: 0.95rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.graphLegend strong {
+  display: block;
+}
+
+.graphLegend span {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgba(226, 232, 240, 0.82);
+}
+
+.challengeColumn {
+  display: grid;
+  gap: 1rem;
+}
+
+.challengeHeader p {
+  margin-top: 0.7rem;
+}
+
+.challengeHeader h3 {
+  margin-top: 0.35rem;
+  font-size: 2rem;
+  line-height: 0.98;
+}
+
+.progressRail {
+  width: 100%;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: rgba(203, 213, 225, 0.44);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+  transition: width 220ms ease;
+}
+
+.questionList {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.questionCard {
+  border-radius: 24px;
+  padding: 1rem;
+}
+
+.questionTop {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.questionIndex {
+  color: #1d4ed8;
+}
+
+.questionPromptBlock h4 {
+  font-size: 1.4rem;
+  line-height: 1.05;
+}
+
+.questionPromptBlock p {
+  margin-top: 0.45rem;
+}
+
+.optionGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.optionButton {
+  width: 100%;
+  min-height: 3.2rem;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 35, 63, 0.14);
+  background: rgba(255, 255, 255, 0.84);
+  color: #10233f;
+  font-weight: 800;
+  text-align: left;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.optionCorrect {
+  border-color: rgba(22, 101, 52, 0.32);
+  background: rgba(220, 252, 231, 0.9);
+}
+
+.optionIncorrect {
+  border-color: rgba(190, 24, 93, 0.22);
+  background: rgba(255, 241, 242, 0.92);
+}
+
+.feedbackPanel {
+  margin-top: 0.9rem;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 35, 63, 0.12);
+}
+
+.feedbackPanel strong {
+  display: block;
+  font-size: 0.96rem;
+}
+
+.feedbackPanel p {
+  margin-top: 0.35rem;
+}
+
+.feedbackGood {
+  background: rgba(220, 252, 231, 0.82);
+}
+
+.feedbackNeedsWork {
+  background: rgba(254, 242, 242, 0.84);
+}
+
+.debriefCard {
+  border-radius: 24px;
+  padding: 1rem;
+}
+
+.debriefCard h3 {
+  margin-top: 0.42rem;
+  font-size: 1.65rem;
+  line-height: 1.03;
+}
+
+.finalBand {
+  padding: 1.4rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  background: linear-gradient(140deg, rgba(16, 35, 63, 0.96) 0%, rgba(31, 69, 131, 0.94) 52%, rgba(20, 104, 73, 0.9) 100%);
+  color: #fff;
+}
+
+.finalBand p,
+.finalBand .sectionEyebrow {
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.finalBand .secondaryButton {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.finalBand .primaryButton {
+  box-shadow: 0 22px 46px rgba(11, 26, 50, 0.32);
+}
+
+@media (max-width: 1100px) {
+  .heroGrid,
+  .missionWorkspace,
+  .finalBand {
+    grid-template-columns: 1fr;
+  }
+
+  .heroSignals,
+  .graphLegend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .readoutBand {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .readoutNarrative {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 0.85rem;
+  }
+
+  .hero,
+  .missionExperience,
+  .finalBand {
+    border-radius: 24px;
+  }
+
+  .heroCopy h1 {
+    max-width: none;
+    font-size: clamp(2.5rem, 2rem + 3vw, 4rem);
+  }
+
+  .heroBoard h2,
+  .sectionCopy h2,
+  .challengeHeader h3,
+  .debriefCard h3,
+  .finalBand h2,
+  .questionPromptBlock h4 {
+    max-width: none;
+  }
+
+  .heroSignals,
+  .graphLegend,
+  .readoutBand,
+  .optionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .graphBoard,
+  .graphShell,
+  .challengeColumn {
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+}
