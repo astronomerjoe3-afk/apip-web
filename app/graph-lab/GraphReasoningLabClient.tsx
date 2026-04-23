@@ -248,6 +248,9 @@ export default function GraphReasoningLabClient() {
               <a href="#lab-workspace" className={styles.primaryButton}>
                 Open the lab
               </a>
+              <Link href="/energy-ledger" className={styles.secondaryButton}>
+                Plan energy ledgers
+              </Link>
               <Link href="/force-builder" className={styles.secondaryButton}>
                 Build force systems
               </Link>
@@ -437,6 +440,9 @@ export default function GraphReasoningLabClient() {
         <div className={styles.finalActions}>
           <Link href="/register" className={styles.primaryButton} prefetch={false}>
             Create account
+          </Link>
+          <Link href="/energy-ledger" className={styles.secondaryButton}>
+            Plan energy ledgers
           </Link>
           <Link href="/force-builder" className={styles.secondaryButton}>
             Build force systems

@@ -158,7 +158,7 @@ const outcomeSignals = [
 
 const publicProofPoints = [
   "Real lesson screens instead of abstract promises",
-  "One public mission, one public graph lab, and one force system builder already playable",
+  "One public mission plus graph, force, and energy tools already playable",
   "A full Foundation, Core, and Advanced coverage explorer",
   "Lesson-level review and misconception focus beginning to surface in product",
 ];
@@ -200,6 +200,9 @@ export default function HomePage() {
               </Link>
               <Link className={styles.secondaryCta} href="/force-builder">
                 Build force systems
+              </Link>
+              <Link className={styles.secondaryCta} href="/energy-ledger">
+                Plan energy ledgers
               </Link>
               <Link className={styles.secondaryCta} href="/mission-demo">
                 Play a public mission
@@ -315,6 +318,9 @@ export default function HomePage() {
             <Link className={styles.secondaryCta} href="/force-builder">
               Build force systems
             </Link>
+            <Link className={styles.secondaryCta} href="/energy-ledger">
+              Plan energy ledgers
+            </Link>
             <Link className={styles.secondaryCta} href="/learn">
               Explore the full route
             </Link>
@@ -367,6 +373,9 @@ export default function HomePage() {
             </Link>
             <Link className={styles.secondaryCta} href="/force-builder">
               Build force systems
+            </Link>
+            <Link className={styles.secondaryCta} href="/energy-ledger">
+              Plan energy ledgers
             </Link>
             <Link className={styles.secondaryCta} href="/learn">
               Explore full coverage
@@ -477,6 +486,9 @@ export default function HomePage() {
           </Link>
           <Link className={styles.secondaryCta} href="/force-builder">
             Build force systems
+          </Link>
+          <Link className={styles.secondaryCta} href="/energy-ledger">
+            Plan energy ledgers
           </Link>
         </div>
       </section>
