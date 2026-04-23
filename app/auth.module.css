@@ -70,6 +70,14 @@
   gap: 1rem;
 }
 
+.brandTopRow {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .brandLockup {
   display: flex;
   align-items: center;
@@ -101,6 +109,33 @@
   color: rgba(226, 232, 240, 0.84);
 }
 
+.utilityLinks {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.utilityLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.45rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(191, 214, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.utilityLink:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .eyebrow {
   font-size: 0.78rem;
   font-weight: 800;
@@ -124,9 +159,41 @@
   line-height: 1.75;
 }
 
+.routeStats {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.routeStat {
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  background: rgba(248, 250, 252, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.routeStat span {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(191, 214, 255, 0.78);
+}
+
+.routeStat strong {
+  display: block;
+  margin-top: 0.42rem;
+  color: #fff;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
 .proofStack {
   display: grid;
   gap: 0.95rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .proofCard {
@@ -231,6 +298,16 @@
   margin-top: 0.75rem;
   color: #4d5c70;
   line-height: 1.7;
+}
+
+.formNote {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  border-radius: 18px;
+  background: rgba(244, 248, 255, 0.88);
+  color: #31537e;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .form {
@@ -379,6 +456,11 @@
   .support {
     max-width: none;
   }
+
+  .routeStats,
+  .proofStack {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
@@ -394,5 +476,9 @@
 
   .shell {
     min-height: auto;
+  }
+
+  .brandTopRow {
+    flex-direction: column;
   }
 }

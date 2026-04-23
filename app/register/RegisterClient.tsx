@@ -123,19 +123,49 @@ export default function RegisterPage() {
       <section className={authStyles.shell}>
         <div className={authStyles.brandPanel}>
           <div className={authStyles.brandHeader}>
-            <div className={authStyles.brandLockup}>
-              <div className={authStyles.brandMark}>C</div>
-              <div>
-                <p className={authStyles.brandName}>Cognispark</p>
-                <p className={authStyles.brandTag}>Physics, mission by mission.</p>
+            <div className={authStyles.brandTopRow}>
+              <div className={authStyles.brandLockup}>
+                <div className={authStyles.brandMark}>C</div>
+                <div>
+                  <p className={authStyles.brandName}>Cognispark</p>
+                  <p className={authStyles.brandTag}>Physics, mission by mission.</p>
+                </div>
+              </div>
+
+              <div className={authStyles.utilityLinks}>
+                <Link href="/mission-demo" className={authStyles.utilityLink}>
+                  Public mission
+                </Link>
+                <Link href="/learn" className={authStyles.utilityLink}>
+                  Full route
+                </Link>
+                <Link href="/support" className={authStyles.utilityLink}>
+                  Support
+                </Link>
               </div>
             </div>
+
             <div>
               <p className={authStyles.eyebrow}>Create your student account</p>
               <h1 className={authStyles.headline}>Start with structure, not confusion.</h1>
               <p className={authStyles.support}>
                 Open your account once, then move through missions, worked examples, and mastery checks with a cleaner route across physics.
               </p>
+            </div>
+
+            <div className={authStyles.routeStats}>
+              <article className={authStyles.routeStat}>
+                <span>First step</span>
+                <strong>Create the account, then verify your email and enter the student route cleanly.</strong>
+              </article>
+              <article className={authStyles.routeStat}>
+                <span>Public entry</span>
+                <strong>Visitors can already try a mission and inspect the full coverage map before signup.</strong>
+              </article>
+              <article className={authStyles.routeStat}>
+                <span>After signup</span>
+                <strong>{nextPath ? "You will continue into the page you originally asked for." : "You will land in the student onboarding flow, then continue into the platform."}</strong>
+              </article>
             </div>
           </div>
 
@@ -178,6 +208,10 @@ export default function RegisterPage() {
               <p className={authStyles.eyebrow}>Create account</p>
               <h1>Create account</h1>
               <p>Set up a Cognispark account and start the mission path with the right security baseline from day one.</p>
+            </div>
+
+            <div className={authStyles.formNote}>
+              The next step after signup is email verification, so your route and recovery flow are ready from the start.
             </div>
 
             <form onSubmit={onSubmit} className={authStyles.form}>
