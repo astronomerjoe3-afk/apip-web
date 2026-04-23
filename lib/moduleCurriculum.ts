@@ -1,5 +1,3 @@
-"use client";
-
 export type ModuleGroupKey = "foundation" | "corePhysics" | "advancedPhysics";
 
 export type CurriculumModuleMeta = {
@@ -8,6 +6,8 @@ export type CurriculumModuleMeta = {
   description: string;
   group: ModuleGroupKey;
 };
+
+export const MODULE_GROUP_ORDER: ModuleGroupKey[] = ["foundation", "corePhysics", "advancedPhysics"];
 
 type ModuleLike = {
   id: string;
@@ -319,4 +319,29 @@ export function applyCurriculumModuleMeta<T extends ModuleLike>(moduleItem: T): 
     title: meta.title,
     description: meta.description,
   };
+}
+
+export function curriculumModules(): CurriculumModuleMeta[] {
+  return Object.values(MODULE_CURRICULUM).sort((left, right) => {
+    const leftGroupIndex = MODULE_GROUP_ORDER.indexOf(left.group);
+    const rightGroupIndex = MODULE_GROUP_ORDER.indexOf(right.group);
+    if (leftGroupIndex !== rightGroupIndex) {
+      return leftGroupIndex - rightGroupIndex;
+    }
+    return left.id.localeCompare(right.id, undefined, { numeric: true });
+  });
+}
+
+export function curriculumModulesByGroup(): Record<ModuleGroupKey, CurriculumModuleMeta[]> {
+  return curriculumModules().reduce<Record<ModuleGroupKey, CurriculumModuleMeta[]>>(
+    (groups, moduleMeta) => {
+      groups[moduleMeta.group].push(moduleMeta);
+      return groups;
+    },
+    {
+      foundation: [],
+      corePhysics: [],
+      advancedPhysics: [],
+    },
+  );
 }

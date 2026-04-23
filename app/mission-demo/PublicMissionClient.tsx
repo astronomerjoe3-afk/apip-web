@@ -361,9 +361,7 @@ export default function PublicMissionClient() {
           <div className={styles.challengeHeader}>
             <p className={styles.graphEyebrow}>Instant feedback</p>
             <h3>Try the mission checks</h3>
-            <p>
-              This is the proof layer Cognispark needs publicly: a real concept, a real decision, and feedback that fixes the likely misconception.
-            </p>
+            <p>Pick the best answer, then use the feedback to see what the graph is really saying.</p>
           </div>
 
           <div className={styles.progressRail} aria-hidden="true">
