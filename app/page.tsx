@@ -1,22 +1,36 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./home.module.css";
 
+export const metadata: Metadata = {
+  title: "Interactive Physics Learning Platform",
+  description:
+    "Cognispark helps students learn physics through guided missions, a public playable mission, real lesson visuals, instant feedback, and clear progression from foundations to advanced modules.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    url: "/",
+  },
+};
+
 const highlightCards = [
   {
-    label: "Mission flow",
-    title: "Students see the route, not just the rule.",
-    body: "Every lesson is staged with visuals, checks, simulations, and worked examples so the next move feels earned instead of guessed.",
+    label: "Lesson structure",
+    title: "Students see what the concept means before they calculate it.",
+    body: "Lessons are staged with visual setup, checks, simulations, and worked examples so the next move feels understandable instead of arbitrary.",
   },
   {
-    label: "Module depth",
-    title: "Modules climb beyond the foundations.",
-    body: "Learners move from first-contact understanding into richer graph reasoning, force systems, and energy-ledger planning.",
+    label: "Coverage",
+    title: "The route climbs from foundations into deeper physics.",
+    body: "Students can move from first-contact understanding into graph reasoning, force systems, energy analysis, circuits, particles, and astrophysics.",
   },
   {
-    label: "Instant feedback",
+    label: "Feedback",
     title: "Wrong answers become steering, not dead ends.",
-    body: "Cognispark explains what changed, what matters, and what to notice next so students keep momentum.",
+    body: "Cognispark explains what changed, what matters, and what to notice next so students keep their momentum.",
   },
 ];
 
@@ -77,6 +91,48 @@ const institutionCards = [
   },
 ];
 
+const proofScreens = [
+  {
+    src: "/lesson_assets/F1/F1_L1/videos/thumbnail.png",
+    alt: "Cognispark foundation lesson on units and measurement",
+    label: "Foundation screen",
+    title: "Students see why units change meaning before they practise conversions.",
+    body: "This is a real lesson screen from F1, where the platform turns a bare number into an actual physical statement.",
+  },
+  {
+    src: "/lesson_assets/M1/M1_L1/videos/thumbnail.png",
+    alt: "Cognispark Motion and Kinematics lesson screen",
+    label: "Core module screen",
+    title: "Distance-time graphs are taught as records of motion, not picture puzzles.",
+    body: "The platform uses mission language and visual framing so graph interpretation becomes conceptual before it becomes procedural.",
+  },
+  {
+    src: "/lesson_assets/M2/M2_L1/videos/thumbnail.png",
+    alt: "Cognispark Forces and Equilibrium lesson screen",
+    label: "Mechanics screen",
+    title: "Forces are separated from motion state so Newtonian reasoning starts cleanly.",
+    body: "Learners get clearer distinctions, less formula blur, and a stronger base for later problem solving.",
+  },
+];
+
+const sampleMission = [
+  {
+    step: "01",
+    title: "Set the meaning first",
+    body: "Open with one visual idea that makes the concept legible before the worked example begins.",
+  },
+  {
+    step: "02",
+    title: "Stress the misconception",
+    body: "Call out the trap explicitly so students know what not to confuse while they learn the right mental model.",
+  },
+  {
+    step: "03",
+    title: "Lock it with feedback",
+    body: "Use checks, feedback, and worked examples to turn the concept into something students can actually reuse.",
+  },
+];
+
 export default function HomePage() {
   return (
     <main className={styles.page}>
@@ -109,26 +165,26 @@ export default function HomePage() {
             </p>
 
             <div className={styles.ctaRow}>
-              <Link className={styles.primaryCta} href="/register">
-                Start your first mission
+              <Link className={styles.primaryCta} href="/mission-demo">
+                Play a public mission
               </Link>
-              <Link className={styles.secondaryCta} href="#mission-map">
-                Explore the module map
+              <Link className={styles.secondaryCta} href="/register">
+                Create account
               </Link>
             </div>
 
             <div className={styles.signalRow}>
               <article className={styles.signalCard}>
-                <span>Guided route</span>
-                <strong>Visuals / Simulations / Mastery</strong>
+                <span>Coverage</span>
+                <strong>30 modules across Foundation, Core, and Advanced</strong>
               </article>
               <article className={styles.signalCard}>
-                <span>Built for students</span>
-                <strong>Understand first, then calculate</strong>
+                <span>Lesson proof</span>
+                <strong>Real lesson visuals already inside the platform</strong>
               </article>
               <article className={styles.signalCard}>
-                <span>Progress style</span>
-                <strong>Clear missions with live feedback</strong>
+                <span>Learning model</span>
+                <strong>Mission flow, feedback, and mastery tracking</strong>
               </article>
             </div>
           </div>
@@ -172,6 +228,60 @@ export default function HomePage() {
                 </div>
               </div>
             </section>
+          </div>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.proofSection}`}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionEyebrow}>Product proof</p>
+          <h2>Show the real lesson experience, not just the promise around it.</h2>
+          <p>
+            These are actual Cognispark lesson screens. The product earns trust faster when students and schools can see the interface, the explanation style, and the learning shape before signup.
+          </p>
+        </div>
+
+        <div className={styles.proofGrid}>
+          {proofScreens.map((screen) => (
+            <figure key={screen.src} className={styles.proofCard}>
+              <div className={styles.proofImageFrame}>
+                <Image src={screen.src} alt={screen.alt} width={1365} height={768} className={styles.proofImage} />
+              </div>
+              <figcaption className={styles.proofCaption}>
+                <span>{screen.label}</span>
+                <h3>{screen.title}</h3>
+                <p>{screen.body}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <div className={styles.sampleMissionBand}>
+          <div className={styles.sampleMissionHeader}>
+            <p className={styles.sectionEyebrow}>Sample mission preview</p>
+            <h3>What one strong mission should feel like inside Cognispark.</h3>
+            <p>
+              The fastest way to prove quality is to show one concrete mission arc from concept setup to misconception repair to mastery.
+            </p>
+          </div>
+
+          <div className={styles.sampleMissionSteps}>
+            {sampleMission.map((item) => (
+              <article key={item.step} className={styles.sampleMissionStep}>
+                <span>{item.step}</span>
+                <h4>{item.title}</h4>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className={styles.ctaRow}>
+            <Link className={styles.primaryCta} href="/mission-demo">
+              Try the public graph mission
+            </Link>
+            <Link className={styles.secondaryCta} href="/register">
+              Unlock the full platform
+            </Link>
           </div>
         </div>
       </section>
