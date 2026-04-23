@@ -6,7 +6,7 @@ import { type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 import styles from "./student.module.css";
-import { apipGet, apipPost } from "../../lib/apipApi";
+import { apipGet, apipPatch, apipPost } from "../../lib/apipApi";
 import { paidAccessRequiresSecurityUpgrade, securityActionLabel } from "../../lib/accountSecurity";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, isAcademicLeadRole, isInstitutionStaffRole, type Role } from "../../lib/authRouting";
@@ -14,9 +14,17 @@ import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
 import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
 import { shareLink } from "../../lib/shareLink";
 import {
+  mergeStudentPreferenceStates,
   moduleFavoriteKey,
+  normalizeStudentPreferenceState,
+  normalizeStudentLearningState,
   readStudentPreferenceState,
+  readStudentLearningState,
+  serializeStudentPreferenceState,
+  type StudentLearningState,
+  type StudentPreferenceState,
   togglePreferenceId,
+  writeStudentLearningState,
   writeStudentPreferenceState,
 } from "../../lib/studentPreferences";
 import StudentHelpCard from "../../components/StudentHelpCard";
@@ -131,6 +139,19 @@ type CheckoutSessionResponse = {
   ok: boolean;
   checkout_url?: string;
   session_id?: string;
+};
+
+type ProfileResponse = {
+  ok: boolean;
+  uid: string;
+  email?: string | null;
+  display_name?: string | null;
+  email_verified?: boolean | null;
+  role: SessionUser["role"];
+  security?: SessionUser["security"] | null;
+  preferences?: StudentPreferenceState | null;
+  learning_state?: StudentLearningState | null;
+  utc: string;
 };
 
 type ModuleGroupKey = "foundation" | "corePhysics" | "advancedPhysics";
@@ -279,6 +300,21 @@ function signedInLabel(sessionUser: SessionUser | null, user: User | null): stri
   );
 }
 
+function mapProfileToSessionUser(profile: ProfileResponse | null): SessionUser | null {
+  if (!profile) {
+    return null;
+  }
+
+  return {
+    uid: profile.uid,
+    email: profile.email ?? null,
+    display_name: profile.display_name ?? null,
+    email_verified: profile.email_verified ?? null,
+    role: profile.role,
+    security: profile.security ?? null,
+  };
+}
+
 export default function StudentHomePage() {
   const router = useRouter();
   const { user, sessionUser: authSessionUser, authenticated, loading } = useAuth();
@@ -299,7 +335,8 @@ export default function StudentHomePage() {
   const [institutionBusy, setInstitutionBusy] = useState<string>("");
   const [communityDialogOpen, setCommunityDialogOpen] = useState<boolean>(false);
   const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
-  const [favoriteModules, setFavoriteModules] = useState<string[]>([]);
+  const [preferenceState, setPreferenceState] = useState<StudentPreferenceState>(() => readStudentPreferenceState());
+  const [learningState, setLearningState] = useState<StudentLearningState | null>(() => readStudentLearningState());
   const [submissionForm, setSubmissionForm] = useState({
     assignment_id: "",
     text_response: "",
@@ -312,10 +349,6 @@ export default function StudentHomePage() {
     title: "",
     body: "",
   });
-
-  useEffect(() => {
-    setFavoriteModules(readStudentPreferenceState().favoriteModules);
-  }, []);
 
   useEffect(() => {
     if (!communityDialogOpen && !helpDialogOpen) {
@@ -457,14 +490,44 @@ export default function StudentHomePage() {
       }
 
       try {
-        const currentSessionUser = await readSessionUser();
+        const profile = await apipGet<ProfileResponse>("/profile");
         if (!cancelled) {
-          setSessionUser(currentSessionUser || authSessionUser || null);
+          const mappedProfile = mapProfileToSessionUser(profile);
+          const localPreferences = readStudentPreferenceState();
+          const apiPreferences = normalizeStudentPreferenceState(profile.preferences);
+          const mergedPreferences = mergeStudentPreferenceStates(apiPreferences, localPreferences);
+          const normalizedLearningState = normalizeStudentLearningState(profile.learning_state) || readStudentLearningState();
+
+          setSessionUser(mappedProfile || authSessionUser || null);
+          setPreferenceState(mergedPreferences);
+          setLearningState(normalizedLearningState);
+
+          writeStudentPreferenceState(mergedPreferences);
+          writeStudentLearningState(normalizedLearningState);
+
+          if (
+            JSON.stringify(serializeStudentPreferenceState(mergedPreferences))
+            !== JSON.stringify(serializeStudentPreferenceState(apiPreferences))
+          ) {
+            void apipPatch<ProfileResponse, ReturnType<typeof serializeStudentPreferenceState>>(
+              "/profile/preferences",
+              serializeStudentPreferenceState(mergedPreferences),
+            ).catch(() => undefined);
+          }
         }
       } catch {
         if (!cancelled) {
+          const fallbackPreferences = readStudentPreferenceState();
           setSessionUser(authSessionUser || null);
+          setPreferenceState(fallbackPreferences);
+          setLearningState(readStudentLearningState());
         }
+        try {
+          const currentSessionUser = await readSessionUser();
+          if (!cancelled && currentSessionUser) {
+            setSessionUser(currentSessionUser);
+          }
+        } catch {}
       } finally {
         if (!cancelled) {
           setSessionLoading(false);
@@ -533,17 +596,25 @@ export default function StudentHomePage() {
   }
 
   function toggleModuleFavorite(moduleId: string): void {
-    const nextFavoriteModules = togglePreferenceId(favoriteModules, moduleFavoriteKey(moduleId));
-    setFavoriteModules(nextFavoriteModules);
-    writeStudentPreferenceState({
-      ...readStudentPreferenceState(),
-      favoriteModules: nextFavoriteModules,
-    });
+    const nextPreferenceState: StudentPreferenceState = {
+      ...preferenceState,
+      favoriteModules: togglePreferenceId(favoriteModules, moduleFavoriteKey(moduleId)),
+    };
+
+    setPreferenceState(nextPreferenceState);
+    writeStudentPreferenceState(nextPreferenceState);
     setStatus(
-      nextFavoriteModules.includes(moduleFavoriteKey(moduleId))
-        ? `${moduleId} saved to favorites.`
-        : `${moduleId} removed from favorites.`,
+      nextPreferenceState.favoriteModules.includes(moduleFavoriteKey(moduleId))
+        ? `${moduleId} saved to your account favorites.`
+        : `${moduleId} removed from your account favorites.`,
     );
+
+    void apipPatch<ProfileResponse, ReturnType<typeof serializeStudentPreferenceState>>(
+      "/profile/preferences",
+      serializeStudentPreferenceState(nextPreferenceState),
+    ).catch(() => {
+      setErr("Favorites were saved on this device, but account sync could not be reached just now.");
+    });
   }
 
   async function handleSignOut(): Promise<void> {
@@ -657,17 +728,32 @@ export default function StudentHomePage() {
     () => paidAccessRequiresSecurityUpgrade(sessionUser, billingSummary, modules),
     [billingSummary, modules, sessionUser],
   );
+  const favoriteModules = preferenceState.favoriteModules;
   const securityActions = sessionUser?.security?.recommended_actions || [];
   const canShowStudentHelp = !sessionLoading && role === "student";
   const canShowStudentCommunity = false;
+  const resumeRoute = learningState?.lastRoute || null;
+  const resumeLabel = learningState?.lastLessonTitle
+    ? `${learningState.lastLessonTitle}${learningState.lastModuleId ? ` in ${learningState.lastModuleId}` : ""}`
+    : learningState?.lastModuleId
+      ? `Resume ${learningState.lastModuleId}`
+      : "Continue where you left off";
   const studentMenuItems = useMemo<StudentActionMenuItem[]>(() => {
-    const items: StudentActionMenuItem[] = [
-      {
+    const items: StudentActionMenuItem[] = [];
+
+    if (resumeRoute) {
+      items.push({
+        label: "Continue learning",
+        section: "Workspace",
+        href: resumeRoute,
+      });
+    }
+
+    items.push({
         label: "Settings & account",
         section: "Account",
         href: "/student/settings",
-      },
-    ];
+      });
 
     if (billingSummary?.portal_enabled) {
       items.push({
@@ -702,10 +788,10 @@ export default function StudentHomePage() {
       onClick: () => void handleSignOut(),
       disabled: signOutBusy || billingBusy !== "",
       tone: "danger",
-    });
+      });
 
     return items;
-  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, signOutBusy]);
+  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, resumeRoute, signOutBusy]);
   const totalModuleCount = modules.length;
   const foundationCount = moduleSections.find((section) => section.key === "foundation")?.modules.length || 0;
   const coreCount = moduleSections.find((section) => section.key === "corePhysics")?.modules.length || 0;
@@ -874,6 +960,19 @@ export default function StudentHomePage() {
 
       {status ? renderStatusBanner("info", "Update", status) : null}
       {err ? renderStatusBanner("warning", "Something needs attention", err) : null}
+      {resumeRoute
+        ? renderStatusBanner(
+            "info",
+            "Continue where you left off",
+            resumeLabel,
+            <button
+              onClick={() => router.push(resumeRoute)}
+              className={styles.secondaryButton}
+            >
+              Resume lesson
+            </button>,
+          )
+        : null}
 
       {billingSummary?.has_active_subscription
         ? renderStatusBanner(
