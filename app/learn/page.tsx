@@ -115,14 +115,14 @@ export default function LearnPage() {
           </div>
 
           <div className={styles.heroActions}>
-            <Link className={styles.primaryCta} href="/mission-demo">
+            <Link className={styles.primaryCta} href="/graph-lab">
+              Open graph lab
+            </Link>
+            <Link className={styles.secondaryCta} href="/mission-demo">
               Play a public mission
             </Link>
-            <Link className={styles.secondaryCta} href="/register">
+            <Link className={styles.ghostCta} href="/register">
               Create account
-            </Link>
-            <Link className={styles.ghostCta} href="/login">
-              Student login
             </Link>
           </div>
         </header>
@@ -263,17 +263,17 @@ export default function LearnPage() {
           <p className={styles.sectionEyebrow}>Next move</p>
           <h2>Try one mission, then step into the full route.</h2>
           <p>
-            Use the public mission to feel Cognispark’s teaching style, then create an account to move through the
-            complete pathway.
+            Use the graph lab or public mission to feel Cognispark&apos;s teaching style, then create an account to move
+            through the complete pathway.
           </p>
         </div>
 
         <div className={styles.finalActions}>
-          <Link className={styles.primaryCta} href="/mission-demo">
-            Play the mission
+          <Link className={styles.primaryCta} href="/graph-lab">
+            Open graph lab
           </Link>
-          <Link className={styles.secondaryCta} href="/register">
-            Create account
+          <Link className={styles.secondaryCta} href="/mission-demo">
+            Play the mission
           </Link>
         </div>
       </section>

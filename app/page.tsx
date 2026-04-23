@@ -165,11 +165,11 @@ export default function HomePage() {
             </p>
 
             <div className={styles.ctaRow}>
-              <Link className={styles.primaryCta} href="/mission-demo">
-                Play a public mission
+              <Link className={styles.primaryCta} href="/graph-lab">
+                Open graph lab
               </Link>
-              <Link className={styles.secondaryCta} href="/register">
-                Create account
+              <Link className={styles.secondaryCta} href="/mission-demo">
+                Play a public mission
               </Link>
             </div>
 
@@ -276,8 +276,8 @@ export default function HomePage() {
           </div>
 
           <div className={styles.ctaRow}>
-            <Link className={styles.primaryCta} href="/mission-demo">
-              Try the public graph mission
+            <Link className={styles.primaryCta} href="/graph-lab">
+              Open graph lab
             </Link>
             <Link className={styles.secondaryCta} href="/learn">
               Explore the full route
@@ -386,8 +386,8 @@ export default function HomePage() {
           <Link className={styles.primaryCta} href="/register">
             Create account
           </Link>
-          <Link className={styles.secondaryCta} href="/login">
-            Login
+          <Link className={styles.secondaryCta} href="/graph-lab">
+            Open graph lab
           </Link>
         </div>
       </section>
