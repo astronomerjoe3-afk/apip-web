@@ -72,16 +72,16 @@ export default function MissionDemoPage() {
             <p className={styles.heroEyebrow}>Public mission demo</p>
             <h1>Show the physics lesson, not just the promise around it.</h1>
             <p className={styles.heroText}>
-              This open mission lets students feel Cognispark’s teaching model before signup: visual setup, graph meaning,
-              misconception repair, and a clear next move.
+              This open mission lets students feel Cognispark&apos;s teaching model before signup: visual setup, graph
+              meaning, misconception repair, and a clear next move.
             </p>
 
             <div className={styles.heroActions}>
               <a href="#play-mission" className={styles.primaryButton}>
                 Play the mission
               </a>
-              <Link href="/register" className={styles.secondaryButton}>
-                Unlock the full route
+              <Link href="/graph-lab" className={styles.secondaryButton}>
+                Open graph lab
               </Link>
             </div>
 
@@ -122,8 +122,8 @@ export default function MissionDemoPage() {
           <p className={styles.sectionEyebrow}>Next step</p>
           <h2>Keep the momentum and open the full Cognispark pathway.</h2>
           <p>
-            The public mission proves the teaching style. The full platform adds progression, richer lessons, account memory,
-            feedback history, and the rest of the physics route.
+            The public mission proves the teaching style. The full platform adds progression, richer lessons, account
+            memory, feedback history, and the rest of the physics route.
           </p>
         </div>
 
@@ -131,8 +131,8 @@ export default function MissionDemoPage() {
           <Link href="/register" className={styles.primaryButton}>
             Create account
           </Link>
-          <Link href="/login" className={styles.secondaryButton}>
-            Student login
+          <Link href="/graph-lab" className={styles.secondaryButton}>
+            Open graph lab
           </Link>
         </div>
       </section>
