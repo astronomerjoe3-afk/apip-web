@@ -104,10 +104,10 @@ export default function SupportPage() {
         <section style={card}>
           <h2 style={{ marginTop: 0, fontSize: 22 }}>Quick links</h2>
           <div style={buttonRow}>
-            <Link href="/login" style={primaryButton}>
+            <Link href="/login" style={primaryButton} prefetch={false}>
               Login
             </Link>
-            <Link href="/register" style={secondaryButton}>
+            <Link href="/register" style={secondaryButton} prefetch={false}>
               Create account
             </Link>
             <Link href="/privacy" style={secondaryButton}>

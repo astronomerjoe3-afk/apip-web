@@ -121,7 +121,7 @@ export default function LearnPage() {
             <Link className={styles.secondaryCta} href="/mission-demo">
               Play a public mission
             </Link>
-            <Link className={styles.ghostCta} href="/register">
+            <Link className={styles.ghostCta} href="/register" prefetch={false}>
               Create account
             </Link>
           </div>

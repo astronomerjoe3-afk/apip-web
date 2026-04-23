@@ -226,12 +226,12 @@ export default function GraphReasoningLabClient() {
             Cognispark
           </Link>
           <div className={styles.heroNavActions}>
-            <Link href="/mission-demo" className={styles.navLink}>
-              Public mission
-            </Link>
-            <Link href="/register" className={styles.navButton}>
-              Create account
-            </Link>
+              <Link href="/login" className={styles.navLink} prefetch={false}>
+                Login
+              </Link>
+              <Link href="/register" className={styles.navButton} prefetch={false}>
+                Create account
+              </Link>
           </div>
         </div>
 
@@ -432,9 +432,9 @@ export default function GraphReasoningLabClient() {
         </div>
 
         <div className={styles.finalActions}>
-          <Link href="/register" className={styles.primaryButton}>
-            Create account
-          </Link>
+            <Link href="/register" className={styles.primaryButton} prefetch={false}>
+              Create account
+            </Link>
           <Link href="/mission-demo" className={styles.secondaryButton}>
             Try the public mission
           </Link>

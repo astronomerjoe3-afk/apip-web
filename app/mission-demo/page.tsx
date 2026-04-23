@@ -58,12 +58,12 @@ export default function MissionDemoPage() {
             Cognispark
           </Link>
           <div className={styles.heroNavActions}>
-            <Link href="/login" className={styles.navLink}>
-              Login
-            </Link>
-            <Link href="/register" className={styles.navButton}>
-              Create account
-            </Link>
+          <Link href="/login" className={styles.navLink} prefetch={false}>
+            Login
+          </Link>
+          <Link href="/register" className={styles.navButton} prefetch={false}>
+            Create account
+          </Link>
           </div>
         </div>
 
@@ -128,9 +128,9 @@ export default function MissionDemoPage() {
         </div>
 
         <div className={styles.finalActions}>
-          <Link href="/register" className={styles.primaryButton}>
-            Create account
-          </Link>
+            <Link href="/register" className={styles.primaryButton} prefetch={false}>
+              Create account
+            </Link>
           <Link href="/graph-lab" className={styles.secondaryButton}>
             Open graph lab
           </Link>
