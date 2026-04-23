@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
+import { FirebaseError } from "firebase/app";
 import {
   EmailAuthProvider,
   multiFactor,
@@ -31,6 +32,11 @@ function errorMessage(error: unknown): string {
     return error.message;
   }
   return "Security update failed";
+}
+
+function shouldMaskVerificationResendError(error: unknown): boolean {
+  return error instanceof FirebaseError
+    && (error.code === "auth/too-many-requests" || error.code === "auth/retry-limit-exceeded");
 }
 
 export default function StudentSecurityClient() {
@@ -152,6 +158,10 @@ export default function StudentSecurityClient() {
       await sendEmailVerification(user, { url: verificationUrl });
       setStatus("Verification email sent. Open the link in that message, then come back here and refresh this page.");
     } catch (error: unknown) {
+      if (shouldMaskVerificationResendError(error)) {
+        setStatus("A verification email was already sent recently. Open that message, or wait a moment before requesting another one.");
+        return;
+      }
       setErr(errorMessage(error));
     } finally {
       setVerifyBusy(false);
