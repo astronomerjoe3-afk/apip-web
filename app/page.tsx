@@ -133,6 +133,36 @@ const sampleMission = [
   },
 ];
 
+const outcomeSignals = [
+  {
+    label: "Diagnostic baseline",
+    title: "Each lesson can start by surfacing where understanding is already shaky.",
+    body: "Cognispark does not assume the learner is blank or fully ready. It checks the opening picture first so the teaching can respond to the real gap.",
+  },
+  {
+    label: "Misconception repair",
+    title: "Weak ideas are tagged and turned into visible review focus instead of disappearing into a score.",
+    body: "A mastery miss can now carry forward the underlying concept that needs repair, so the next review step is tied to a real weakness, not just a generic retry.",
+  },
+  {
+    label: "Spaced return",
+    title: "Lessons can come back when they are due, not only when a student remembers to revisit them.",
+    body: "The platform is now building a review queue that brings weaker lessons forward again after mastery attempts, which helps keep understanding from fading after one good run.",
+  },
+  {
+    label: "Momentum continuity",
+    title: "Saved modules, return points, and next review steps stay with the learner across sessions.",
+    body: "That continuity matters because the best learning products do not make students rebuild their place every time they return.",
+  },
+];
+
+const publicProofPoints = [
+  "Real lesson screens instead of abstract promises",
+  "One public mission and one public graph lab already playable",
+  "A full Foundation, Core, and Advanced coverage explorer",
+  "Lesson-level review and misconception focus beginning to surface in product",
+];
+
 export default function HomePage() {
   return (
     <main className={styles.page}>
@@ -281,6 +311,56 @@ export default function HomePage() {
             </Link>
             <Link className={styles.secondaryCta} href="/learn">
               Explore the full route
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.outcomesSection}`}>
+        <div className={styles.outcomesLead}>
+          <div className={styles.outcomesIntro}>
+            <p className={styles.sectionEyebrow}>Learning proof</p>
+            <h2>What Cognispark can now show about learning, not just say about it.</h2>
+            <p>
+              A serious physics platform should make its learning loop legible in public. Cognispark is getting there by showing the route from first misunderstanding to guided repair, mastery, and spaced return.
+            </p>
+          </div>
+
+          <div className={styles.proofLedger}>
+            <span className={styles.proofLedgerLabel}>Public proof points</span>
+            <ul className={styles.proofLedgerList}>
+              {publicProofPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className={styles.outcomeGrid}>
+          {outcomeSignals.map((item) => (
+            <article key={item.title} className={styles.outcomeCard}>
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.outcomeBand}>
+          <div className={styles.outcomeBandCopy}>
+            <p className={styles.sectionEyebrow}>What improves for the learner</p>
+            <h3>Physics starts to feel cumulative instead of fragile.</h3>
+            <p>
+              When misconceptions stay visible, review returns at the right time, and the platform remembers where the student left off, each lesson has a better chance of becoming lasting understanding instead of one-off performance.
+            </p>
+          </div>
+
+          <div className={styles.outcomeBandActions}>
+            <Link className={styles.primaryCta} href="/mission-demo">
+              Play the public mission
+            </Link>
+            <Link className={styles.secondaryCta} href="/learn">
+              Explore full coverage
             </Link>
           </div>
         </div>
