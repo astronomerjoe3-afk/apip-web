@@ -22,6 +22,11 @@ const VALID_ROLES = new Set<Role>([
   "unknown",
 ]);
 
+const DISALLOWED_POST_AUTH_PREFIXES = [
+  "/login",
+  "/register",
+];
+
 export function isAcademicLeadRole(role: Role | null | undefined): boolean {
   return role === "academic_lead" || role === "instructor";
 }
@@ -66,6 +71,19 @@ export function sanitizeNextPath(value: string | null | undefined): string | nul
   return trimmed;
 }
 
+function sanitizePostAuthPath(value: string | null | undefined): string | null {
+  const nextPath = sanitizeNextPath(value);
+  if (!nextPath) {
+    return null;
+  }
+
+  if (DISALLOWED_POST_AUTH_PREFIXES.some((prefix) => nextPath === prefix || nextPath.startsWith(`${prefix}?`))) {
+    return null;
+  }
+
+  return nextPath;
+}
+
 export async function getClientRole(user: User): Promise<Role> {
   try {
     const sessionUser = await readSessionUser();
@@ -105,9 +123,5 @@ export function landingPathForRole(role: Role): string {
 }
 
 export function resolvePostAuthPath(role: Role, nextPath?: string | null): string {
-  if (role === "student") {
-    return landingPathForRole(role);
-  }
-
-  return sanitizeNextPath(nextPath) || landingPathForRole(role);
+  return sanitizePostAuthPath(nextPath) || landingPathForRole(role);
 }

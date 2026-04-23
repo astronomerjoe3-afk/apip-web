@@ -56,6 +56,17 @@ export default function StudentSecurityClient() {
   );
   const signupSource = searchParams.get("source") === "signup";
   const verificationStatus = searchParams.get("verification");
+  const resumePath = useMemo(() => {
+    const params = new URLSearchParams();
+    params.set("next", nextPath);
+    if (signupSource) {
+      params.set("source", "signup");
+    }
+    if (verificationStatus) {
+      params.set("verification", verificationStatus);
+    }
+    return `/student/security?${params.toString()}`;
+  }, [nextPath, signupSource, verificationStatus]);
 
   const passwordCheck = useMemo(
     () => evaluatePasswordStrength(newPassword, user?.email || sessionUser?.email || ""),
@@ -66,11 +77,11 @@ export default function StudentSecurityClient() {
     [passwordCheck],
   );
 
-  const refreshSecurityState = useCallback(async (currentUser = user): Promise<void> => {
+  const refreshSecurityState = useCallback(async (currentUser = user): Promise<SessionUser | null> => {
     if (!currentUser) {
       setSessionUser(null);
       setPageLoading(false);
-      return;
+      return null;
     }
 
     await currentUser.reload();
@@ -78,12 +89,13 @@ export default function StudentSecurityClient() {
     const resolvedRole = await getClientRole(currentUser);
     if (resolvedRole !== "student") {
       router.replace(landingPathForRole(resolvedRole));
-      return;
+      return null;
     }
 
     setSessionUser(refreshedSession);
     setFactorCount(multiFactor(currentUser).enrolledFactors.length);
     setPageLoading(false);
+    return refreshedSession;
   }, [router, user]);
 
   useEffect(() => {
@@ -95,7 +107,7 @@ export default function StudentSecurityClient() {
       }
 
       if (!user) {
-        router.replace("/login?next=/student");
+        router.replace(`/login?next=${encodeURIComponent(resumePath)}`);
         return;
       }
 
@@ -122,7 +134,7 @@ export default function StudentSecurityClient() {
     return () => {
       cancelled = true;
     };
-  }, [loading, nextPath, refreshSecurityState, router, user]);
+  }, [loading, refreshSecurityState, resumePath, router, user]);
 
   const emailVerified = sessionUser?.security?.email_verified === true;
   const strongPasswordConfirmed = sessionUser?.security?.strong_password_confirmed === true;
@@ -153,9 +165,13 @@ export default function StudentSecurityClient() {
     setRefreshBusy(true);
 
     try {
-      await refreshSecurityState(user);
+      const refreshedSession = await refreshSecurityState(user);
+      const emailVerifiedNow =
+        refreshedSession?.security?.email_verified === true
+        || refreshedSession?.email_verified === true
+        || user.emailVerified === true;
       setStatus(
-        user.emailVerified || sessionUser?.security?.email_verified
+        emailVerifiedNow
           ? "Your email verification status is up to date."
           : "Your email is still unverified. Finish the email step first, then refresh again.",
       );

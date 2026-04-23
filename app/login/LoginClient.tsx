@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
@@ -30,6 +30,8 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, sessionUser, authenticated, loading } = useAuth();
+  const redirectLockRef = useRef(false);
+  const nextPath = searchParams.get("next");
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -37,26 +39,34 @@ export default function LoginPage() {
   const [resetBusy, setResetBusy] = useState<boolean>(false);
   const [err, setErr] = useState<string | null>(null);
   const [resetMessage, setResetMessage] = useState<string | null>(null);
+  const registerHref = useMemo(
+    () => nextPath ? `/register?next=${encodeURIComponent(nextPath)}` : "/register",
+    [nextPath],
+  );
 
   useEffect(() => {
-    if (loading || !authenticated) {
+    if (loading || !authenticated || redirectLockRef.current) {
       return;
     }
 
     async function redirectSignedInUser(): Promise<void> {
       if (user) {
         const role = await getClientRole(user);
-        router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+        startTransition(() => {
+          router.replace(resolvePostAuthPath(role, nextPath));
+        });
         return;
       }
 
       if (sessionUser) {
-        router.replace(resolvePostAuthPath(sessionUser.role, searchParams.get("next")));
+        startTransition(() => {
+          router.replace(resolvePostAuthPath(sessionUser.role, nextPath));
+        });
       }
     }
 
     void redirectSignedInUser();
-  }, [authenticated, loading, router, searchParams, sessionUser, user]);
+  }, [authenticated, loading, nextPath, router, sessionUser, user]);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -73,6 +83,7 @@ export default function LoginPage() {
       return;
     }
 
+    redirectLockRef.current = true;
     setBusy(true);
     try {
       const credential = await signInWithEmailAndPassword(
@@ -80,10 +91,12 @@ export default function LoginPage() {
         email.trim(),
         password,
       );
-      await establishSessionFromUser(credential.user);
-      const role = await getClientRole(credential.user);
-      router.replace(resolvePostAuthPath(role, searchParams.get("next")));
+      const session = await establishSessionFromUser(credential.user);
+      startTransition(() => {
+        router.replace(resolvePostAuthPath(session.role, nextPath));
+      });
     } catch (error: unknown) {
+      redirectLockRef.current = false;
       setErr(errorMessage(error));
     } finally {
       setBusy(false);
@@ -237,7 +250,7 @@ export default function LoginPage() {
             </form>
 
             <p className={authStyles.linkRow}>
-              No account yet? <Link href="/register">Create one</Link>
+              No account yet? <Link href={registerHref}>Create one</Link>
             </p>
           </div>
         </div>
