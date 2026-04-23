@@ -80,6 +80,9 @@ export default function MissionDemoPage() {
               <a href="#play-mission" className={styles.primaryButton}>
                 Play the mission
               </a>
+              <Link href="/force-builder" className={styles.secondaryButton}>
+                Build force systems
+              </Link>
               <Link href="/graph-lab" className={styles.secondaryButton}>
                 Open graph lab
               </Link>
@@ -128,9 +131,12 @@ export default function MissionDemoPage() {
         </div>
 
         <div className={styles.finalActions}>
-            <Link href="/register" className={styles.primaryButton} prefetch={false}>
-              Create account
-            </Link>
+          <Link href="/register" className={styles.primaryButton} prefetch={false}>
+            Create account
+          </Link>
+          <Link href="/force-builder" className={styles.secondaryButton}>
+            Build force systems
+          </Link>
           <Link href="/graph-lab" className={styles.secondaryButton}>
             Open graph lab
           </Link>

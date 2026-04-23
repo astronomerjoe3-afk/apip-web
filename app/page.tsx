@@ -158,7 +158,7 @@ const outcomeSignals = [
 
 const publicProofPoints = [
   "Real lesson screens instead of abstract promises",
-  "One public mission and one public graph lab already playable",
+  "One public mission, one public graph lab, and one force system builder already playable",
   "A full Foundation, Core, and Advanced coverage explorer",
   "Lesson-level review and misconception focus beginning to surface in product",
 ];
@@ -197,6 +197,9 @@ export default function HomePage() {
             <div className={styles.ctaRow}>
               <Link className={styles.primaryCta} href="/graph-lab">
                 Open graph lab
+              </Link>
+              <Link className={styles.secondaryCta} href="/force-builder">
+                Build force systems
               </Link>
               <Link className={styles.secondaryCta} href="/mission-demo">
                 Play a public mission
@@ -309,6 +312,9 @@ export default function HomePage() {
             <Link className={styles.primaryCta} href="/graph-lab">
               Open graph lab
             </Link>
+            <Link className={styles.secondaryCta} href="/force-builder">
+              Build force systems
+            </Link>
             <Link className={styles.secondaryCta} href="/learn">
               Explore the full route
             </Link>
@@ -358,6 +364,9 @@ export default function HomePage() {
           <div className={styles.outcomeBandActions}>
             <Link className={styles.primaryCta} href="/mission-demo">
               Play the public mission
+            </Link>
+            <Link className={styles.secondaryCta} href="/force-builder">
+              Build force systems
             </Link>
             <Link className={styles.secondaryCta} href="/learn">
               Explore full coverage
@@ -466,8 +475,8 @@ export default function HomePage() {
           <Link className={styles.primaryCta} href="/register" prefetch={false}>
             Create account
           </Link>
-          <Link className={styles.secondaryCta} href="/graph-lab">
-            Open graph lab
+          <Link className={styles.secondaryCta} href="/force-builder">
+            Build force systems
           </Link>
         </div>
       </section>
