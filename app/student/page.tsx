@@ -154,6 +154,27 @@ type ProfileResponse = {
   utc: string;
 };
 
+type ReviewQueueItem = {
+  module_id: string;
+  lesson_id: string;
+  title?: string | null;
+  route: string;
+  review_due: boolean;
+  review_state: string;
+  review_due_utc?: string | null;
+  review_count: number;
+  last_score?: number | null;
+  misconception_tags: string[];
+};
+
+type ProgressSummaryResponse = {
+  ok: boolean;
+  review_due_count: number;
+  next_review_utc?: string | null;
+  review_queue: ReviewQueueItem[];
+  top_misconception_tags: string[];
+};
+
 type ModuleGroupKey = "foundation" | "corePhysics" | "advancedPhysics";
 
 type ModuleSection = {
@@ -315,6 +336,22 @@ function mapProfileToSessionUser(profile: ProfileResponse | null): SessionUser |
   };
 }
 
+function formatConceptTag(tag: string): string {
+  return String(tag || "")
+    .replace(/^concept_/, "")
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (match) => match.toUpperCase());
+}
+
+function reviewLabelForItem(item: ReviewQueueItem | null): string {
+  if (!item) {
+    return "Review the next lesson that needs reinforcement.";
+  }
+
+  const lessonTitle = String(item.title || "").trim() || item.lesson_id;
+  return `${lessonTitle} in ${item.module_id}`;
+}
+
 export default function StudentHomePage() {
   const router = useRouter();
   const { user, sessionUser: authSessionUser, authenticated, loading } = useAuth();
@@ -332,6 +369,7 @@ export default function StudentHomePage() {
   const [err, setErr] = useState<string>("");
   const [status, setStatus] = useState<string>("");
   const [institutionWorkspace, setInstitutionWorkspace] = useState<InstitutionalWorkspaceResponse | null>(null);
+  const [progressSummary, setProgressSummary] = useState<ProgressSummaryResponse | null>(null);
   const [institutionBusy, setInstitutionBusy] = useState<string>("");
   const [communityDialogOpen, setCommunityDialogOpen] = useState<boolean>(false);
   const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
@@ -545,6 +583,32 @@ export default function StudentHomePage() {
   useEffect(() => {
     let cancelled = false;
 
+    async function loadProgressSummary(): Promise<void> {
+      if (loading || roleLoading) return;
+      if (!authenticated || role !== "student") return;
+
+      try {
+        const data = await apipGet<ProgressSummaryResponse>("/progress/me?limit_recent_events=8");
+        if (!cancelled) {
+          setProgressSummary(data);
+        }
+      } catch {
+        if (!cancelled) {
+          setProgressSummary(null);
+        }
+      }
+    }
+
+    void loadProgressSummary();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [authenticated, loading, roleLoading, role]);
+
+  useEffect(() => {
+    let cancelled = false;
+
     async function loadInstitutionWorkspace(): Promise<void> {
       if (loading || roleLoading) return;
       if (!authenticated || role !== "student") return;
@@ -732,6 +796,26 @@ export default function StudentHomePage() {
   const securityActions = sessionUser?.security?.recommended_actions || [];
   const canShowStudentHelp = !sessionLoading && role === "student";
   const canShowStudentCommunity = false;
+  const reviewQueue = progressSummary?.review_queue || [];
+  const reviewDueCount = progressSummary?.review_due_count || 0;
+  const nextReviewItem = reviewQueue[0] || null;
+  const nextReviewRoute = nextReviewItem?.route || null;
+  const reviewFocusTags = (progressSummary?.top_misconception_tags?.length
+    ? progressSummary.top_misconception_tags
+    : nextReviewItem?.misconception_tags || [])
+    .slice(0, 3)
+    .map(formatConceptTag);
+  const reviewFocusLabel = reviewFocusTags.length > 0
+    ? `Focus: ${reviewFocusTags.join(", ")}`
+    : "Focus: revisit the ideas that were least stable on the last mastery check.";
+  const reviewCardValue = reviewDueCount > 0
+    ? `${reviewDueCount} lesson${reviewDueCount === 1 ? "" : "s"} due for spaced review`
+    : nextReviewItem
+      ? "Next review checkpoint ready"
+      : "No review items yet";
+  const reviewCardSubtle = nextReviewItem
+    ? reviewLabelForItem(nextReviewItem)
+    : "As you finish mastery checks, due reviews will appear here automatically.";
   const resumeRoute = learningState?.lastRoute || null;
   const resumeLabel = learningState?.lastLessonTitle
     ? `${learningState.lastLessonTitle}${learningState.lastModuleId ? ` in ${learningState.lastModuleId}` : ""}`
@@ -741,11 +825,21 @@ export default function StudentHomePage() {
   const studentMenuItems = useMemo<StudentActionMenuItem[]>(() => {
     const items: StudentActionMenuItem[] = [];
 
+    if (nextReviewRoute) {
+      items.push({
+        label: reviewDueCount > 0 ? "Review next lesson" : "Open next review",
+        section: "Workspace",
+        href: nextReviewRoute,
+        helper: reviewLabelForItem(nextReviewItem),
+      });
+    }
+
     if (resumeRoute) {
       items.push({
         label: "Continue learning",
         section: "Workspace",
         href: resumeRoute,
+        helper: resumeLabel,
       });
     }
 
@@ -791,7 +885,7 @@ export default function StudentHomePage() {
       });
 
     return items;
-  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, resumeRoute, signOutBusy]);
+  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, nextReviewItem, nextReviewRoute, resumeLabel, resumeRoute, reviewDueCount, signOutBusy]);
   const totalModuleCount = modules.length;
   const foundationCount = moduleSections.find((section) => section.key === "foundation")?.modules.length || 0;
   const coreCount = moduleSections.find((section) => section.key === "corePhysics")?.modules.length || 0;
@@ -955,6 +1049,11 @@ export default function StudentHomePage() {
                 : "Free foundations open, premium modules available to unlock"}
             </div>
           </article>
+          <article className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>Review queue</span>
+            <strong className={styles.summaryValue}>{reviewCardValue}</strong>
+            <div className={styles.summarySubtle}>{reviewCardSubtle}</div>
+          </article>
         </div>
       </section>
 
@@ -970,6 +1069,22 @@ export default function StudentHomePage() {
               className={styles.secondaryButton}
             >
               Resume lesson
+            </button>,
+          )
+        : null}
+      {nextReviewRoute
+        ? renderStatusBanner(
+            reviewDueCount > 0 ? "warning" : "info",
+            reviewDueCount > 0 ? "Keep the concept fresh" : "Next review on deck",
+            <>
+              <div>{reviewLabelForItem(nextReviewItem)}</div>
+              <div className={styles.bannerSubtle}>{reviewFocusLabel}</div>
+            </>,
+            <button
+              onClick={() => router.push(nextReviewRoute)}
+              className={styles.secondaryButton}
+            >
+              {reviewDueCount > 0 ? "Review next lesson" : "Open review"}
             </button>,
           )
         : null}

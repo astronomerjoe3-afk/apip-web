@@ -21656,8 +21656,8 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     if (submittedIds.length && selected.length !== submittedIds.length) throw new Error("This mastery check is out of date. Start a fresh attempt and try again.");
     if (selected.length === 0) throw new Error("The mastery check is not available right now.");
     const answers = asRecord(payload.answers);
-    const feedback = selected.map((item) => {
-      const graded = grade(asRecord(item), answers[text(asRecord(item).id)], title);
+    const gradedEntries = selected.map((item) => grade(asRecord(item), answers[text(asRecord(item).id)], title));
+    const feedback = gradedEntries.map((graded) => {
       return {
         question_id: text(graded.question_id),
         prompt: text(graded.prompt),
@@ -21665,6 +21665,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
         explanation: graded.is_correct === true ? text(graded.explanation) || "Correct." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
       };
     });
+    const misconceptionTags = gradedEntries
+      .filter((entry) => entry.is_correct !== true)
+      .map((entry) => text(entry.misconception_tag))
+      .filter(Boolean);
     const correctCount = feedback.filter((entry) => entry.is_correct === true).length;
     const score = selected.length > 0 ? correctCount / selected.length : 0;
     const result = { percent: Math.round(score * 100), passed: score >= numberValue(masteryMeta.threshold, 0.8) };
@@ -21684,6 +21688,7 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
     await postEvent(moduleId, lessonId, {
       event_type: "transfer",
       score,
+      misconception_tags: misconceptionTags,
       details: { source: "student_runner_mastery_check", correct_count: correctCount },
     });
     return;
