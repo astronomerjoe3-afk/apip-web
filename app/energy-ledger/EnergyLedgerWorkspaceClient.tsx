@@ -21,12 +21,22 @@ type WorkspaceCheckpoint = {
   options: WorkspaceOption[];
 };
 
+type WorkspaceClarity = {
+  happening: string;
+  notice: string;
+  changes: string;
+  staysSame: string;
+  commonMistake: string;
+  examCheck: string;
+};
+
 type WorkspaceDefinition = {
   key: WorkspaceKey;
   label: string;
   title: string;
   summary: string;
   signal: string;
+  clarity: WorkspaceClarity;
   starter: {
     simMetricMeters: number;
     simVectorMagnitude: number;
@@ -48,6 +58,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
     summary:
       "Split one machine input into useful gain and leak, then track how the useful share redistributes into height and motion stores.",
     signal: "Input hand-off must still equal useful gain plus leak after the split.",
+    clarity: {
+      happening: "One input transfer is being split into useful gain and leak before the useful part is placed into energy stores.",
+      notice: "Read the ledger as a balance: every joule has to end up in a named part of the transfer.",
+      changes: "The leak share can grow or shrink, which changes how much useful energy reaches the stores.",
+      staysSame: "The full input still has to be accounted for, so useful gain plus leak must match the original hand-off.",
+      commonMistake: "Letting the useful store total ignore the leak trail as if the lost energy never left the system.",
+      examCheck: "Balance the input first, then choose the statement that best explains the useful gain.",
+    },
     starter: {
       simMetricMeters: 4,
       simVectorMagnitude: 420,
@@ -91,6 +109,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
     summary:
       "Compare the same load across two worlds so field strength stays visible instead of hiding inside a memorised shortcut.",
     signal: "Height store depends on mass, field strength, and height together.",
+    clarity: {
+      happening: "The same load is being compared across different worlds or conditions to show what changes its gravitational store.",
+      notice: "Keep mass and height visible, then check whether field strength changed too.",
+      changes: "The store changes when mass, height, or field strength changes.",
+      staysSame: "It is still the same gravitational-store model each time: mass, field strength, and height all matter together.",
+      commonMistake: "Treating height as the only important factor and letting field strength disappear into the shortcut.",
+      examCheck: "Name which factor changed, then choose the statement that best explains the store difference.",
+    },
     starter: {
       simMetricMeters: 7,
       simVectorMagnitude: 8,
@@ -134,6 +160,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
     summary:
       "Change force, distance, and leak rate together, then compare the input hand-off against the useful energy that actually reaches the store.",
     signal: "Work can describe the total hand-off even when the useful gain is smaller.",
+    clarity: {
+      happening: "The board shows a total work hand-off first, then separates the useful output from the part lost to leaks.",
+      notice: "Keep the total transfer and the useful gain as two related but different quantities.",
+      changes: "Leak size changes the useful output even when the total hand-off has already been fixed.",
+      staysSame: "The input work hand-off stays the starting point for the whole comparison.",
+      commonMistake: "Assuming the useful gain must always equal the total work transfer just because the input was calculated first.",
+      examCheck: "Identify where the loss happens, then choose the statement that best explains why the useful gain is smaller.",
+    },
     starter: {
       simMetricMeters: 5,
       simVectorMagnitude: 12,
@@ -177,6 +211,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
     summary:
       "Hold the same energy input while changing time and useful yield separately, so fast and efficient stop collapsing into one vague idea.",
     signal: "Power compares energy with time. Efficiency compares useful output with total input.",
+    clarity: {
+      happening: "The same machine transfer is being compared by rate and by useful yield so those two ideas stop merging together.",
+      notice: "Power asks how fast energy is transferred. Efficiency asks how much of that transfer becomes useful output.",
+      changes: "Changing the time changes power, while changing the useful fraction changes efficiency.",
+      staysSame: "The total input can stay fixed even when the rate or useful share changes.",
+      commonMistake: "Calling a faster machine more efficient without checking whether the useful fraction actually improved.",
+      examCheck: "Decide whether the question is about rate or yield first, then choose the best statement.",
+    },
     starter: {
       simMetricMeters: 4,
       simVectorMagnitude: 1400,
@@ -220,6 +262,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
     summary:
       "Run the lift input through useful yield, then through launch leak, then compare the remaining motion store against the gate threshold.",
     signal: "Intermediate gains matter because one stage creates the input for the next stage.",
+    clarity: {
+      happening: "A multi-stage mission is chaining one energy result into the next stage until a final gate condition is checked.",
+      notice: "Track the intermediate quantity produced by each stage before you jump to the final gate.",
+      changes: "Each stage reshapes the available energy by efficiency or leak before it becomes the next stage's input.",
+      staysSame: "The order matters every time: later stages only work with what earlier stages actually left behind.",
+      commonMistake: "Skipping straight to the final threshold and ignoring the intermediate gains and losses that feed it.",
+      examCheck: "Work through the stages in sequence, then choose the statement that matches the planner logic.",
+    },
     starter: {
       simMetricMeters: 900,
       simVectorMagnitude: 1600,
@@ -299,6 +349,14 @@ export default function EnergyLedgerWorkspaceClient() {
     () => WORKSPACES.filter((workspace) => answers[workspace.key] === workspace.checkpoint.answer).length,
     [answers],
   );
+  const clarityCards = [
+    { label: "What is happening", body: activeWorkspace.clarity.happening },
+    { label: "What to notice", body: activeWorkspace.clarity.notice },
+    { label: "What changes", body: activeWorkspace.clarity.changes },
+    { label: "What stays the same", body: activeWorkspace.clarity.staysSame },
+    { label: "Common mistake", body: activeWorkspace.clarity.commonMistake },
+    { label: "Exam-style check", body: activeWorkspace.clarity.examCheck },
+  ];
 
   return (
     <main className={styles.page}>
@@ -429,6 +487,24 @@ export default function EnergyLedgerWorkspaceClient() {
 
             <p className={styles.labSummary}>{activeWorkspace.summary}</p>
 
+            <section className={styles.clarityPanel} aria-label="Concept-first clarity route">
+              <div className={styles.clarityHeader}>
+                <p className={styles.questionIndex}>Clarity route</p>
+                <h4>Understand the energy story before you answer</h4>
+                <p className={styles.clarityLead}>
+                  Balance the hand-off, say what changed and what stayed the same, then use the check like an exam question.
+                </p>
+              </div>
+              <div className={styles.clarityGrid}>
+                {clarityCards.map((card) => (
+                  <article key={card.label} className={styles.clarityCard}>
+                    <p className={styles.clarityLabel}>{card.label}</p>
+                    <p className={styles.clarityValue}>{card.body}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
             <M3SimulationPanels
               lessonKey={activeWorkspace.key}
               simMetricMeters={simMetricMeters}
@@ -455,7 +531,7 @@ export default function EnergyLedgerWorkspaceClient() {
             <div key={activeWorkspace.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
               <div className={styles.questionMeta}>
                 <div>
-                  <p className={styles.questionIndex}>Checkpoint</p>
+                  <p className={styles.questionIndex}>Exam-style check</p>
                   <h3>{activeWorkspace.label}</h3>
                 </div>
                 <span className={styles.questionStatusPill}>
@@ -505,12 +581,12 @@ export default function EnergyLedgerWorkspaceClient() {
             </div>
 
             <div className={styles.challengeCard}>
-              <p className={styles.questionIndex}>What to notice</p>
-              <h3>Why this matters</h3>
+              <p className={styles.questionIndex}>Before you answer</p>
+              <h3>Use this order</h3>
               <ul className={styles.noticeList}>
-                <li>Energy reasoning gets stronger when students track stores, hand-offs, and leaks as one system.</li>
-                <li>Power, efficiency, and useful gain belong to different questions, so the workspace keeps them separate.</li>
-                <li>Longer mission problems get easier when each stage visibly creates the next stage's input.</li>
+                <li>Name the input, the useful output, and any leak before calculating.</li>
+                <li>Say what changed and what stayed balanced in the ledger.</li>
+                <li>Choose the option that matches the transfer story, not just the biggest number.</li>
               </ul>
             </div>
           </aside>

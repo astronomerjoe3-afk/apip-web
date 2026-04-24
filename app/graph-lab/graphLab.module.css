@@ -383,6 +383,59 @@
   font-size: 1rem;
 }
 
+.clarityPanel {
+  display: grid;
+  gap: 1rem;
+  padding: 1.05rem;
+  border-radius: 26px;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  background: linear-gradient(145deg, rgba(239, 246, 255, 0.88) 0%, rgba(255, 255, 255, 0.96) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.clarityHeader h4 {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+  color: #10233f;
+  line-height: 1.02;
+}
+
+.clarityLead {
+  margin-top: 0.55rem;
+  color: #435266;
+  line-height: 1.7;
+}
+
+.clarityGrid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.clarityCard {
+  padding: 0.95rem 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.05);
+}
+
+.clarityLabel {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #66758a;
+}
+
+.clarityValue {
+  margin-top: 0.45rem;
+  color: #435266;
+  line-height: 1.7;
+}
+
 .challengeColumn {
   display: grid;
   gap: 1rem;
@@ -538,6 +591,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .clarityGrid,
   .signalRow {
     grid-template-columns: 1fr;
   }

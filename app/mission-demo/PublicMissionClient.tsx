@@ -20,6 +20,33 @@ type MissionQuestion = {
   options: MissionOption[];
 };
 
+const CLARITY_ROUTE = [
+  {
+    label: "What is happening",
+    body: "The rover moves away from base, waits for a short interval, then returns toward base.",
+  },
+  {
+    label: "What to notice",
+    body: "Read the line segment by segment. Upward means farther away, flat means stopped, and downward means coming back.",
+  },
+  {
+    label: "What changes",
+    body: "The slope and direction change from one segment to the next, so the motion story changes too.",
+  },
+  {
+    label: "What stays the same",
+    body: "The axes keep the same meaning all the way through: time on the horizontal axis and distance from base on the vertical axis.",
+  },
+  {
+    label: "Common mistake",
+    body: "Treating the graph as a picture of the road instead of a record of how distance changes with time.",
+  },
+  {
+    label: "Exam-style check",
+    body: "Use the segment meaning first, then choose the statement or value that best matches the graph.",
+  },
+] as const;
+
 const GRAPH_SEGMENTS = [
   { label: "A", startTime: 0, endTime: 3, startDistance: 0, endDistance: 24 },
   { label: "B", startTime: 3, endTime: 5, startDistance: 24, endDistance: 24 },
@@ -359,10 +386,25 @@ export default function PublicMissionClient() {
 
         <div className={styles.challengeColumn}>
           <div className={styles.challengeHeader}>
-            <p className={styles.graphEyebrow}>Instant feedback</p>
-            <h3>Try the mission checks</h3>
-            <p>Pick the best answer, then use the feedback to see what the graph is really saying.</p>
+            <p className={styles.graphEyebrow}>Concept-first check</p>
+            <h3>Understand the graph, then answer the checks</h3>
+            <p>Read what the line is doing, say what changes and what stays the same, then choose the best exam-style answer.</p>
           </div>
+
+          <section className={styles.clarityPanel} aria-label="Mission clarity route">
+            <div className={styles.clarityHeader}>
+              <p className={styles.graphEyebrow}>Clarity route</p>
+              <h3>Use this route before you commit</h3>
+            </div>
+            <div className={styles.clarityGrid}>
+              {CLARITY_ROUTE.map((card) => (
+                <article key={card.label} className={styles.clarityCard}>
+                  <p className={styles.clarityLabel}>{card.label}</p>
+                  <p className={styles.clarityValue}>{card.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
 
           <div className={styles.progressRail} aria-hidden="true">
             <div className={styles.progressFill} style={{ width: `${missionProgress}%` }} />
