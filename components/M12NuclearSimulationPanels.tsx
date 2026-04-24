@@ -173,7 +173,7 @@ export default function M12NuclearSimulationPanels({
         {boardCard(
           "Mass-energy link",
           <>
-            <div>{`Using E = delta m c^2, the chosen mass defect corresponds to about ${formatSimulationNumber(totalEnergy, 1)} MeV.`}</div>
+            <div>{`Using E = Δm c², the chosen mass defect corresponds to about ${formatSimulationNumber(totalEnergy, 1)} MeV.`}</div>
             <div className="mt-2 text-slate-500">This is why a tiny mass change can still matter physically.</div>
           </>,
           "border-sky-200 bg-sky-50",
