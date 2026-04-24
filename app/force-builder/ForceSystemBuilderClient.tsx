@@ -250,6 +250,7 @@ export default function ForceSystemBuilderClient() {
   const activeAnswer = answers[activeTool.key];
   const activeOption = activeTool.checkpoint.options.find((option) => option.value === activeAnswer) || null;
   const checkpointSolved = activeAnswer === activeTool.checkpoint.answer;
+  const activeToolIndex = TOOLS.findIndex((tool) => tool.key === activeTool.key) + 1;
   const solvedCount = useMemo(
     () => TOOLS.filter((tool) => answers[tool.key] === tool.checkpoint.answer).length,
     [answers],
@@ -409,10 +410,16 @@ export default function ForceSystemBuilderClient() {
           </div>
 
           <aside className={styles.challengeColumn}>
-            <div className={styles.challengeCard}>
-              <p className={styles.questionIndex}>Checkpoint</p>
-              <h3>{activeTool.label}</h3>
-              <div className={styles.questionPrompt}>{activeTool.checkpoint.prompt}</div>
+            <div key={activeTool.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
+              <div className={styles.questionMeta}>
+                <div>
+                  <p className={styles.questionIndex}>Checkpoint</p>
+                  <h3>{activeTool.label}</h3>
+                </div>
+                <span className={styles.questionStatusPill}>Mode {activeToolIndex} of {TOOLS.length}</span>
+              </div>
+              <p className={styles.questionRoute}>{activeTool.title}</p>
+              <div className={styles.questionPrompt} aria-live="polite">{activeTool.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeTool.checkpoint.hint}</p>
 
               <div className={styles.optionList}>

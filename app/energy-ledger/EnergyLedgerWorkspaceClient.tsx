@@ -294,6 +294,7 @@ export default function EnergyLedgerWorkspaceClient() {
   const activeOption =
     activeWorkspace.checkpoint.options.find((option) => option.value === activeAnswer) || null;
   const checkpointSolved = activeAnswer === activeWorkspace.checkpoint.answer;
+  const activeWorkspaceIndex = WORKSPACES.findIndex((workspace) => workspace.key === activeWorkspace.key) + 1;
   const solvedCount = useMemo(
     () => WORKSPACES.filter((workspace) => answers[workspace.key] === workspace.checkpoint.answer).length,
     [answers],
@@ -451,10 +452,18 @@ export default function EnergyLedgerWorkspaceClient() {
           </div>
 
           <aside className={styles.challengeColumn}>
-            <div className={styles.challengeCard}>
-              <p className={styles.questionIndex}>Checkpoint</p>
-              <h3>{activeWorkspace.label}</h3>
-              <div className={styles.questionPrompt}>{activeWorkspace.checkpoint.prompt}</div>
+            <div key={activeWorkspace.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
+              <div className={styles.questionMeta}>
+                <div>
+                  <p className={styles.questionIndex}>Checkpoint</p>
+                  <h3>{activeWorkspace.label}</h3>
+                </div>
+                <span className={styles.questionStatusPill}>
+                  Mode {activeWorkspaceIndex} of {WORKSPACES.length}
+                </span>
+              </div>
+              <p className={styles.questionRoute}>{activeWorkspace.title}</p>
+              <div className={styles.questionPrompt} aria-live="polite">{activeWorkspace.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeWorkspace.checkpoint.hint}</p>
 
               <div className={styles.optionList}>
@@ -501,7 +510,7 @@ export default function EnergyLedgerWorkspaceClient() {
               <ul className={styles.noticeList}>
                 <li>Energy reasoning gets stronger when students track stores, hand-offs, and leaks as one system.</li>
                 <li>Power, efficiency, and useful gain belong to different questions, so the workspace keeps them separate.</li>
-                <li>Longer mission problems get easier when each stage visibly creates the next stage’s input.</li>
+                <li>Longer mission problems get easier when each stage visibly creates the next stage's input.</li>
               </ul>
             </div>
           </aside>
