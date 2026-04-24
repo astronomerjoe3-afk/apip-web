@@ -2069,11 +2069,7 @@ export default function LessonRunner({
             </div>
           ) : null}
 
-          {payload.feedback.map((item, index) => {
-            const promptSource =
-              payload.questions.find((question) => question.id === item.question_id)?.prompt ?? "";
-            const cue = buildReasoningCueFromText(promptSource);
-
+        {payload.feedback.map((item, index) => {
             return (
               <FeedbackCard
                 key={item.question_id}
@@ -2081,15 +2077,12 @@ export default function LessonRunner({
                 title={`Check ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
                 body={normalizeAssessmentText(item.explanation)}
                 extra={
-                  <div className="space-y-3">
-                    <AssessmentFeedbackBreakdown cue={cue} />
-                    {item.is_correct ? null : (
-                      <MisconceptionRepairPanel
-                        tag={item.misconception_tag}
-                        teachingFocus={item.teaching_focus}
-                      />
-                    )}
-                  </div>
+                  item.is_correct ? null : (
+                    <MisconceptionRepairPanel
+                      tag={item.misconception_tag}
+                      teachingFocus={item.teaching_focus}
+                    />
+                  )
                 }
               />
             );
@@ -2156,7 +2149,6 @@ export default function LessonRunner({
             question={question}
             value={answers[question.id] ?? ""}
             onChange={setAnswer}
-            showReasoningFrame
           />
         ))}
 
