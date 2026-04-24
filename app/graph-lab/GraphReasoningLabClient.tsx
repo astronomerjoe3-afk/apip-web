@@ -21,12 +21,22 @@ type LabCheckpoint = {
   options: LabOption[];
 };
 
+type LabClarity = {
+  happening: string;
+  notice: string;
+  changes: string;
+  staysSame: string;
+  commonMistake: string;
+  examCheck: string;
+};
+
 type LabDefinition = {
   key: LabKey;
   label: string;
   title: string;
   summary: string;
   signal: string;
+  clarity: LabClarity;
   starter: {
     simMetricMeters: number;
     simVectorMagnitude: number;
@@ -44,6 +54,14 @@ const LABS: LabDefinition[] = [
     summary:
       "Move the pace and pause controls, then compare two journeys that can finish at the same point while telling very different motion stories.",
     signal: "Height tracks distance. Slope tracks speed. A flat strip means the object is stopped while time keeps moving.",
+    clarity: {
+      happening: "The rover moves away from base, pauses while time keeps running, then returns toward base.",
+      notice: "Read the graph one segment at a time. Upward means farther away, flat means stopped, and downward means coming back.",
+      changes: "The slope and direction change from segment to segment, so the motion story changes too.",
+      staysSame: "The axes do not change meaning: time stays on the horizontal axis and distance from base stays on the vertical axis.",
+      commonMistake: "Treating a flat line as 'nothing is happening' instead of 'time is still passing while distance stays constant'.",
+      examCheck: "Choose the statement that best matches what one segment says about the motion.",
+    },
     starter: {
       simMetricMeters: 2,
       simVectorMagnitude: 6,
@@ -80,6 +98,14 @@ const LABS: LabDefinition[] = [
     summary:
       "Compare one instant with one interval so speed-at-the-moment and change-of-speed stop collapsing into one idea.",
     signal: "Height gives speed now. Slope gives acceleration over the interval. A flat line above zero still means motion.",
+    clarity: {
+      happening: "You are reading a speed-time graph where the line height and the line steepness tell different physics ideas.",
+      notice: "Look at one instant first: the line height gives the speed value right then.",
+      changes: "The slope changes when the speed is increasing or decreasing across an interval.",
+      staysSame: "A flat line above zero still means the object is moving, because the speed value stays constant instead of dropping to zero.",
+      commonMistake: "Reading height as distance or acceleration just because those are familiar quantities from other graphs.",
+      examCheck: "Use the axis meaning first, then decide whether the question is asking for speed or for how speed changes.",
+    },
     starter: {
       simMetricMeters: 4,
       simVectorMagnitude: 4,
@@ -116,6 +142,14 @@ const LABS: LabDefinition[] = [
     summary:
       "Hold one common tilt across two graph families so the axes, not the appearance, decide whether the slope means speed or acceleration.",
     signal: "You have to name the axes before you name the quantity. Same steepness does not guarantee the same meaning.",
+    clarity: {
+      happening: "Two graphs can look equally steep while describing different physics quantities.",
+      notice: "Name the axes before you name the slope. The same geometry does not force the same meaning.",
+      changes: "The graph family changes: distance-time and speed-time graphs use slope differently.",
+      staysSame: "Steepness still compares rise with run, but the quantity behind that rise and run depends on the axes.",
+      commonMistake: "Assuming 'steeper always means faster' even when the graph might be showing speed against time.",
+      examCheck: "Identify the axes first, then choose the quantity the slope represents on that graph.",
+    },
     starter: {
       simMetricMeters: 2,
       simVectorMagnitude: 3,
@@ -152,6 +186,14 @@ const LABS: LabDefinition[] = [
     summary:
       "Split the shaded region into rectangle and triangle parts, then watch different graph shapes still produce the same total distance when the area matches.",
     signal: "Area works here because speed multiplied by time gives distance. Rectangle plus triangle rebuilds the total.",
+    clarity: {
+      happening: "The shaded region under the speed-time graph is being rebuilt as simple shapes so total distance becomes visible.",
+      notice: "Each rectangle or triangle is a speed multiplied by a time width.",
+      changes: "The graph shape can change, but the total distance stays tied to the total shaded area.",
+      staysSame: "The unit logic stays fixed: speed x time still gives distance across every shape.",
+      commonMistake: "Treating the line itself as the distance instead of using the whole area beneath it.",
+      examCheck: "Explain why the shaded area represents total distance before choosing the correct statement.",
+    },
     starter: {
       simMetricMeters: 4,
       simVectorMagnitude: 4,
@@ -218,6 +260,14 @@ export default function GraphReasoningLabClient() {
     () => LABS.filter((lab) => answers[lab.key] === lab.checkpoint.answer).length,
     [answers],
   );
+  const clarityCards = [
+    { label: "What is happening", body: activeLab.clarity.happening },
+    { label: "What to notice", body: activeLab.clarity.notice },
+    { label: "What changes", body: activeLab.clarity.changes },
+    { label: "What stays the same", body: activeLab.clarity.staysSame },
+    { label: "Common mistake", body: activeLab.clarity.commonMistake },
+    { label: "Exam-style check", body: activeLab.clarity.examCheck },
+  ];
 
   return (
     <main className={styles.page}>
@@ -350,6 +400,24 @@ export default function GraphReasoningLabClient() {
 
             <p className={styles.labSummary}>{activeLab.summary}</p>
 
+            <section className={styles.clarityPanel} aria-label="Concept-first clarity route">
+              <div className={styles.clarityHeader}>
+                <p className={styles.questionIndex}>Clarity route</p>
+                <h4>Understand the physics before you answer</h4>
+                <p className={styles.clarityLead}>
+                  Move the controls, say what changed and what stayed the same, then use the check like an exam question.
+                </p>
+              </div>
+              <div className={styles.clarityGrid}>
+                {clarityCards.map((card) => (
+                  <article key={card.label} className={styles.clarityCard}>
+                    <p className={styles.clarityLabel}>{card.label}</p>
+                    <p className={styles.clarityValue}>{card.body}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
             <M1SimulationPanels
               lessonKey={activeLab.key}
               simMetricMeters={simMetricMeters}
@@ -374,7 +442,7 @@ export default function GraphReasoningLabClient() {
             <div key={activeLab.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
               <div className={styles.questionMeta}>
                 <div>
-                  <p className={styles.questionIndex}>Checkpoint</p>
+                  <p className={styles.questionIndex}>Exam-style check</p>
                   <h3>{activeLab.label}</h3>
                 </div>
                 <span className={styles.questionStatusPill}>Mode {activeLabIndex} of {LABS.length}</span>
@@ -422,12 +490,12 @@ export default function GraphReasoningLabClient() {
             </div>
 
             <div className={styles.challengeCard}>
-              <p className={styles.questionIndex}>What to notice</p>
-              <h3>Why this matters</h3>
+              <p className={styles.questionIndex}>Before you answer</p>
+              <h3>Use this order</h3>
               <ul className={styles.noticeList}>
-                <li>Cognispark treats graphs as physical stories before procedures.</li>
-                <li>The lab reacts immediately, so students can test one misconception at a time.</li>
-                <li>This is the same motion route students continue inside the full platform.</li>
+                <li>Name the graph story in plain language first.</li>
+                <li>Say what changed and what stayed the same on the axes.</li>
+                <li>Choose the option that matches the physics, not just the picture.</li>
               </ul>
             </div>
           </aside>

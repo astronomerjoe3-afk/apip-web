@@ -1126,6 +1126,48 @@ export default function LessonRunner({
     }
   }, [canGoNextLesson, runner]);
 
+  type ClarityLensCard = {
+    label: string;
+    body: string;
+  };
+
+  const firstClarityText = (...values: Array<string | undefined | null>) => {
+    for (const value of values) {
+      const trimmed = (value ?? "").trim();
+      if (trimmed) return trimmed;
+    }
+    return "";
+  };
+
+  const firstClarityFromList = (values?: Array<string | undefined | null>) => firstClarityText(...(values ?? []));
+
+  const createClarityCard = (label: string, body?: string | null): ClarityLensCard | null => {
+    const trimmed = (body ?? "").trim();
+    return trimmed ? { label, body: trimmed } : null;
+  };
+
+  const buildClarityCards = (cards: Array<ClarityLensCard | null>): ClarityLensCard[] =>
+    cards.filter((card): card is ClarityLensCard => Boolean(card));
+
+  const renderClarityLensPanel = (eyebrow: string, title: string, cards: ClarityLensCard[]) => {
+    if (!cards.length) return null;
+
+    return (
+      <section className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-5 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">{eyebrow}</p>
+        <h4 className="mt-2 text-lg font-semibold text-slate-900">{normalizeLessonDisplayText(title)}</h4>
+        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {cards.map((card) => (
+            <article key={card.label} className="rounded-2xl border border-white/80 bg-white/90 p-4 shadow-sm">
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-slate-500">{card.label}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-700">{normalizeLessonDisplayMultiline(card.body)}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  };
+
   if (isLoading) {
     return (
       <div className="rounded-2xl border bg-white p-6 shadow-sm">
@@ -1289,8 +1331,70 @@ export default function LessonRunner({
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
       ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
       : normalizedTeachingFocus.slice(0, 4);
+    const activeTable = isTableStep ? payload.reference_tables?.[clampedScaffoldStepIndex - tableStart] : null;
+    const activeMediaCard = isMediaStep ? payload.media_cards?.[clampedScaffoldStepIndex - mediaStart] : null;
+    const activeMediaHighlights = activeMediaCard
+      ? dedupeSupportTextItems(activeMediaCard.highlights || [], [activeMediaCard.title, activeMediaCard.caption])
+      : [];
+    const activeSection = isSectionStep ? payload.sections[clampedScaffoldStepIndex - sectionStart] : null;
+    const activeSectionFocus = firstClarityText(
+      activeSection?.technical_words?.[0]?.meaning,
+      activeSection?.formula_reference_rows?.[0]?.meaning,
+      activeSection?.worked_example?.prompt,
+      activeSection?.check_for_understanding,
+    );
+    const activeSectionChange = firstClarityText(
+      activeSection?.worked_example?.steps?.[0],
+      activeSection?.visual?.highlights?.[0],
+      activeSection?.formula_reference_rows?.[0]?.conditions,
+      activeSection?.analogy,
+    );
+    const activeSectionInvariant = firstClarityText(
+      activeSection?.formula_constants_note,
+      activeSection?.shared_formula_analogy,
+      activeSection?.formula_reference_rows?.[0]?.units_text,
+      activeSection?.technical_words?.[0]?.why_it_matters,
+    );
+    const scaffoldClarityCards = isIntroStep
+      ? buildClarityCards([
+          createClarityCard("What is happening", firstClarityText(payload.intro, payload.title)),
+          createClarityCard("What to notice", scaffoldFocusItems[0]),
+          createClarityCard("What changes", scaffoldFocusItems[1] ?? "The examples change one feature at a time so the concept stays readable."),
+          createClarityCard("What stays the same", scaffoldFocusItems[2] ?? "The quantity definitions stay fixed while the examples change."),
+          createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not rush to a formula before naming what is changing and what is staying the same.")),
+          createClarityCard("Exam-style check", firstClarityText(payload.sections.find((section) => section.check_for_understanding)?.check_for_understanding, "Use these core ideas before you answer the next exam-style check.")),
+        ])
+      : isTableStep && activeTable
+        ? buildClarityCards([
+            createClarityCard("What is happening", firstClarityText(activeTable.caption, activeTable.title)),
+            createClarityCard("What to notice", "Compare the meaning of each column before you compare the numbers inside it."),
+            createClarityCard("What changes", "Track which quantity changes from row to row instead of reading one value in isolation."),
+            createClarityCard("What stays the same", "Each column keeps the same physics meaning for every row in the table."),
+            createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Picking the biggest or smallest number without comparing the same quantity across cases.")),
+            createClarityCard("Exam-style check", "Use the row and column comparison to justify the next answer, not just one standout value."),
+          ])
+        : isMediaStep && activeMediaCard
+          ? buildClarityCards([
+              createClarityCard("What is happening", firstClarityText(activeMediaCard.caption, activeMediaCard.title)),
+              createClarityCard("What to notice", firstClarityText(activeMediaHighlights[0], "Watch the specific feature this support view is isolating.")),
+              createClarityCard("What changes", firstClarityText(activeMediaHighlights[1], "This support card changes one feature at a time so the pattern stays visible.")),
+              createClarityCard("What stays the same", firstClarityText(activeMediaHighlights[2], "The key quantity and its meaning stay the same while the representation changes.")),
+              createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Treating the visual as decoration instead of as evidence for the concept.")),
+              createClarityCard("Exam-style check", "Use the highlighted pattern from this support view when you answer the next exam-style check."),
+            ])
+          : activeSection
+            ? buildClarityCards([
+                createClarityCard("What is happening", firstClarityText(activeSection.body, activeSection.heading)),
+                createClarityCard("What to notice", activeSectionFocus),
+                createClarityCard("What changes", firstClarityText(activeSectionChange, "Track the quantity or relationship this section is changing for you.")),
+                createClarityCard("What stays the same", firstClarityText(activeSectionInvariant, "Keep the quantity definition fixed while the numbers or context change.")),
+                createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not jump to the formula before naming what the quantities mean in this section.")),
+                createClarityCard("Exam-style check", firstClarityText(activeSection.check_for_understanding, activeSection.worked_example?.answer_reason, "Use this section's idea to justify the next exam-style check.")),
+              ])
+            : [];
     return (
       <div className="space-y-6">
+        {renderClarityLensPanel("Concept-first frame", "Understand this idea before you move on", scaffoldClarityCards)}
         {isIntroStep ? (
           <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
             {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{normalizeLessonDisplayMultiline(payload.intro)}</p> : null}
@@ -2016,6 +2120,53 @@ export default function LessonRunner({
       : simZeroError > 0
         ? "A positive zero error makes every observed reading too large by the same amount until you correct it."
         : "A negative zero error makes every observed reading too small by the same amount until you correct it.";
+    const simulationClarityCards = buildClarityCards([
+      createClarityCard(
+        "What is happening",
+        firstClarityText(
+          activeMeasurementStage?.description,
+          payload.task_prompt,
+          payload.instructions,
+          payload.title,
+        ),
+      ),
+      createClarityCard(
+        "What to notice",
+        firstClarityText(
+          firstClarityFromList(payload.watch_for),
+          activeMeasurementStage?.title,
+          firstClarityFromList(payload.explore_steps),
+        ),
+      ),
+      createClarityCard(
+        "What changes",
+        firstClarityText(
+          payload.try_first,
+          firstClarityFromList(payload.explore_steps),
+          "Change one control at a time and watch which physical quantity responds.",
+        ),
+      ),
+      createClarityCard(
+        "What stays the same",
+        firstClarityText(
+          payload.takeaway,
+          "Keep the quantity definitions fixed while you compare the different cases.",
+        ),
+      ),
+      createClarityCard(
+        "Common mistake",
+        simulationLessonKey === "F1_L3"
+          ? "Changing several controls at once before you know which one caused the reading or bias pattern."
+          : "Relying on the picture alone instead of naming what changed physically and what stayed the same.",
+      ),
+      createClarityCard(
+        "Exam-style check",
+        firstClarityText(
+          payload.completion_text,
+          "Use the pattern you just observed before you answer the next exam-style question.",
+        ),
+      ),
+    ]);
 
     const simulationPanelGridStyle = { display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", alignItems: "start" };
     const metricCards = [
@@ -2109,6 +2260,8 @@ export default function LessonRunner({
             </div>
           ) : null}
         </div>
+
+        {renderClarityLensPanel("Concept-first frame", "Use the explorer to make the pattern obvious before you answer", simulationClarityCards)}
 
         {hasStructuredGuidance ? (
           <div className="rounded-2xl border bg-white p-5 shadow-sm">

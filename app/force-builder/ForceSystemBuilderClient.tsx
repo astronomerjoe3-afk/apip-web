@@ -21,12 +21,22 @@ type ToolCheckpoint = {
   options: ToolOption[];
 };
 
+type ToolClarity = {
+  happening: string;
+  notice: string;
+  changes: string;
+  staysSame: string;
+  commonMistake: string;
+  examCheck: string;
+};
+
 type ToolDefinition = {
   key: ToolKey;
   label: string;
   title: string;
   summary: string;
   signal: string;
+  clarity: ToolClarity;
   starter: {
     simMetricMeters: number;
     simVectorMagnitude: number;
@@ -48,6 +58,14 @@ const TOOLS: ToolDefinition[] = [
     summary:
       "Slide the forward and backward arrows, then test how a craft can keep moving while the Master Arrow stays at zero.",
     signal: "Zero resultant force means zero acceleration, not automatically zero velocity.",
+    clarity: {
+      happening: "Several pushes act on the same craft, and the builder combines them into one resultant Master Arrow.",
+      notice: "Look at the resultant on one object, not just the number of forces in the picture.",
+      changes: "The individual pushes can change size and direction, so the resultant can grow, shrink, or drop to zero.",
+      staysSame: "Motion changes only when the resultant on that object is non-zero; a moving craft can keep cruising when the resultant is zero.",
+      commonMistake: "Assuming zero resultant force means zero motion instead of no change in velocity.",
+      examCheck: "Use the resultant first, then choose the statement that best predicts the craft's motion.",
+    },
     starter: {
       simMetricMeters: 4,
       simVectorMagnitude: 8,
@@ -91,6 +109,14 @@ const TOOLS: ToolDefinition[] = [
     summary:
       "Compare the same force size across two craft and keep the stories apart: the resultant on one object versus an interaction pair across two objects.",
     signal: "Equal and opposite pair forces act on different objects, so they do not cancel on one object.",
+    clarity: {
+      happening: "Two interacting objects exert equal and opposite forces on each other, but each object still has its own free-body story.",
+      notice: "Ask which object each force acts on before you decide whether forces can cancel.",
+      changes: "The interaction pair changes which object feels which force, not the equality of the pair itself.",
+      staysSame: "Third-law forces stay equal in size and opposite in direction, even when the objects have different masses.",
+      commonMistake: "Cancelling an action-reaction pair inside one free-body diagram just because the arrows look equal and opposite.",
+      examCheck: "Identify the object first, then choose the statement that correctly explains why the pair does or does not cancel.",
+    },
     starter: {
       simMetricMeters: 4,
       simVectorMagnitude: 10,
@@ -134,6 +160,14 @@ const TOOLS: ToolDefinition[] = [
     summary:
       "Vary force size and perpendicular reach, then compare torque directly so turning effect feels geometric instead of mysterious.",
     signal: "Torque depends on both the push size and the perpendicular distance from the pivot.",
+    clarity: {
+      happening: "The same push is being applied at different perpendicular distances from a pivot, so the turning effect changes.",
+      notice: "Track the perpendicular reach from the pivot, not just the raw force size.",
+      changes: "Torque changes when either the push size or the perpendicular distance changes.",
+      staysSame: "A force through the pivot still has no turning effect, even if the push itself is large.",
+      commonMistake: "Thinking torque is only about force size and forgetting where the force acts relative to the pivot.",
+      examCheck: "Compare the reach first, then choose the option that best explains the turning effect.",
+    },
     starter: {
       simMetricMeters: 1.1,
       simVectorMagnitude: 7,
@@ -177,6 +211,14 @@ const TOOLS: ToolDefinition[] = [
     summary:
       "Slide the Balance Core across the base and watch stability change as the line of action moves toward or beyond the support edge.",
     signal: "A system stays stable while the weight line lands inside the support zone.",
+    clarity: {
+      happening: "The load's line of action is moving across the support base, so the system becomes more or less stable.",
+      notice: "Watch where the weight line lands relative to the base, because that decides the tipping risk.",
+      changes: "The position of the line of action changes as the load shifts or the balance point moves.",
+      staysSame: "The support base keeps the same role: the load stays stable only while the weight line remains inside it.",
+      commonMistake: "Using size, mass, or height alone to predict tipping without checking the line of action.",
+      examCheck: "Use the weight-line position first, then choose the statement that best explains the stability change.",
+    },
     starter: {
       simMetricMeters: 8,
       simVectorMagnitude: 6,
@@ -255,6 +297,14 @@ export default function ForceSystemBuilderClient() {
     () => TOOLS.filter((tool) => answers[tool.key] === tool.checkpoint.answer).length,
     [answers],
   );
+  const clarityCards = [
+    { label: "What is happening", body: activeTool.clarity.happening },
+    { label: "What to notice", body: activeTool.clarity.notice },
+    { label: "What changes", body: activeTool.clarity.changes },
+    { label: "What stays the same", body: activeTool.clarity.staysSame },
+    { label: "Common mistake", body: activeTool.clarity.commonMistake },
+    { label: "Exam-style check", body: activeTool.clarity.examCheck },
+  ];
 
   return (
     <main className={styles.page}>
@@ -387,6 +437,24 @@ export default function ForceSystemBuilderClient() {
 
             <p className={styles.labSummary}>{activeTool.summary}</p>
 
+            <section className={styles.clarityPanel} aria-label="Concept-first clarity route">
+              <div className={styles.clarityHeader}>
+                <p className={styles.questionIndex}>Clarity route</p>
+                <h4>Understand the force idea before you answer</h4>
+                <p className={styles.clarityLead}>
+                  Move the controls, identify the physical story, then use the check like an exam question.
+                </p>
+              </div>
+              <div className={styles.clarityGrid}>
+                {clarityCards.map((card) => (
+                  <article key={card.label} className={styles.clarityCard}>
+                    <p className={styles.clarityLabel}>{card.label}</p>
+                    <p className={styles.clarityValue}>{card.body}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
             <M2SimulationPanels
               lessonKey={activeTool.key}
               simMetricMeters={simMetricMeters}
@@ -413,7 +481,7 @@ export default function ForceSystemBuilderClient() {
             <div key={activeTool.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
               <div className={styles.questionMeta}>
                 <div>
-                  <p className={styles.questionIndex}>Checkpoint</p>
+                  <p className={styles.questionIndex}>Exam-style check</p>
                   <h3>{activeTool.label}</h3>
                 </div>
                 <span className={styles.questionStatusPill}>Mode {activeToolIndex} of {TOOLS.length}</span>
@@ -461,12 +529,12 @@ export default function ForceSystemBuilderClient() {
             </div>
 
             <div className={styles.challengeCard}>
-              <p className={styles.questionIndex}>What to notice</p>
-              <h3>Why this matters</h3>
+              <p className={styles.questionIndex}>Before you answer</p>
+              <h3>Use this order</h3>
               <ul className={styles.noticeList}>
-                <li>Mechanics gets easier when students build the force system before they calculate from it.</li>
-                <li>Equal and opposite forces only cancel when they act on the same object in the same diagram.</li>
-                <li>Torque and stability depend on geometry as much as push size, so the picture matters.</li>
+                <li>Name which object or pivot the force story is about.</li>
+                <li>Say what changed and what stayed the same in the system.</li>
+                <li>Choose the option that matches the force logic, not the visual clutter.</li>
               </ul>
             </div>
           </aside>
