@@ -21434,6 +21434,12 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
       best_mastery_percent: Math.round(numberValue(runnerLesson.best_score) * 100),
       module_mastery_percent: Math.round(numberValue(moduleMeta.module_mastery) * 100),
       concept_gate_passed: asList(runnerLesson.stages).map(asRecord).some((entry) => text(entry.key) === "concept_gate" && entry.completed === true),
+      review_state: text(runnerLesson.review_state) || "not_started",
+      review_due_utc: text(runnerLesson.review_due_utc) || null,
+      review_count: numberValue(runnerLesson.review_count),
+      last_review_score: typeof runnerLesson.last_review_score === "number"
+        ? numberValue(runnerLesson.last_review_score)
+        : null,
     },
   };
 }

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
 import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
+import { describeReviewProgress, describeReviewTiming } from "@/lib/spacedReview";
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
 import MeasurementInstrumentTour from "./MeasurementInstrumentTour";
 import MeasurementReportLab from "./MeasurementReportLab";
@@ -625,6 +626,10 @@ type RunnerResponse = {
     best_mastery_percent?: number | null;
     module_mastery_percent?: number | null;
     concept_gate_passed?: boolean;
+    review_state?: string;
+    review_due_utc?: string | null;
+    review_count?: number;
+    last_review_score?: number | null;
   };
   available_actions?: string[];
 };
@@ -4244,6 +4249,14 @@ export default function LessonRunner({
         typeof runner.progress_summary?.module_mastery_percent === "number"
           ? runner.progress_summary.module_mastery_percent
           : null;
+      const reviewTiming = describeReviewTiming(
+        runner.progress_summary?.review_state === "due",
+        runner.progress_summary?.review_due_utc,
+      );
+      const reviewProgress = describeReviewProgress(
+        runner.progress_summary?.review_count || 0,
+        runner.progress_summary?.last_review_score,
+      );
       const passed = typeof masteryPercent === "number"
         ? masteryPercent >= threshold
         : typeof payload.result?.passed === "boolean"
@@ -4287,6 +4300,20 @@ export default function LessonRunner({
                 Module mastery average: {moduleMasteryPercent}%
               </p>
             ) : null}
+            {passed ? (
+              <>
+                <p className="mt-2 text-sm text-slate-600">
+                  Next spaced review: {reviewTiming.label}.
+                </p>
+                <p className="mt-2 text-sm text-slate-600">
+                  {reviewProgress}
+                </p>
+              </>
+            ) : (
+              <p className="mt-2 text-sm text-slate-600">
+                This lesson stays near the front of your review plan until the idea feels steady.
+              </p>
+            )}
           </div>
 
           <div className="mt-4 flex flex-wrap gap-3">

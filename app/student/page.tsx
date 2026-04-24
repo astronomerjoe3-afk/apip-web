@@ -14,6 +14,7 @@ import type { MisconceptionRepairSummary } from "../../lib/misconceptionRepair";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
 import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
 import { shareLink } from "../../lib/shareLink";
+import { describeReviewProgress, describeReviewTiming } from "../../lib/spacedReview";
 import {
   mergeStudentPreferenceStates,
   moduleFavoriteKey,
@@ -349,6 +350,16 @@ function reviewLabelForItem(item: ReviewQueueItem | null): string {
   return focus
     ? `${lessonTitle} in ${item.module_id} - ${focus}`
     : `${lessonTitle} in ${item.module_id}`;
+}
+
+function reviewPlanHelperForItem(item: ReviewQueueItem | null): string {
+  if (!item) {
+    return "As you finish mastery checks, review timing will appear here automatically.";
+  }
+
+  const timing = describeReviewTiming(item.review_due, item.review_due_utc);
+  const progress = describeReviewProgress(item.review_count, item.last_score);
+  return `${timing.label}. ${progress}`;
 }
 
 export default function StudentHomePage() {
@@ -799,6 +810,12 @@ export default function StudentHomePage() {
   const reviewDueCount = progressSummary?.review_due_count || 0;
   const nextReviewItem = reviewQueue[0] || null;
   const nextReviewRoute = nextReviewItem?.route || null;
+  const nextReviewTiming = nextReviewItem
+    ? describeReviewTiming(nextReviewItem.review_due, nextReviewItem.review_due_utc)
+    : describeReviewTiming(false, progressSummary?.next_review_utc);
+  const nextReviewProgress = nextReviewItem
+    ? describeReviewProgress(nextReviewItem.review_count, nextReviewItem.last_score)
+    : "Finish a mastery check to schedule the first spaced return.";
   const reviewFocusSummaries = (progressSummary?.top_misconception_summaries?.length
     ? progressSummary.top_misconception_summaries
     : nextReviewItem?.misconception_summaries || []);
@@ -809,12 +826,12 @@ export default function StudentHomePage() {
     ? reviewFocusSummaries[0]?.repair || reviewFocusLabel
     : reviewFocusLabel;
   const reviewCardValue = reviewDueCount > 0
-    ? `${reviewDueCount} lesson${reviewDueCount === 1 ? "" : "s"} due for spaced review`
+    ? `${reviewDueCount} review${reviewDueCount === 1 ? "" : "s"} ready now`
     : nextReviewItem
-      ? "Next review checkpoint ready"
+      ? `Next review ${nextReviewTiming.label.toLowerCase()}`
       : "No review items yet";
   const reviewCardSubtle = nextReviewItem
-    ? reviewLabelForItem(nextReviewItem)
+    ? `${reviewLabelForItem(nextReviewItem)}. ${nextReviewProgress}`
     : "As you finish mastery checks, due reviews will appear here automatically.";
   const resumeRoute = learningState?.lastRoute || null;
   const resumeLabel = learningState?.lastLessonTitle
@@ -827,10 +844,10 @@ export default function StudentHomePage() {
 
     if (nextReviewRoute) {
       items.push({
-        label: reviewDueCount > 0 ? "Review next lesson" : "Open next review",
+        label: reviewDueCount > 0 ? "Review now" : "Open scheduled review",
         section: "Workspace",
         href: nextReviewRoute,
-        helper: reviewLabelForItem(nextReviewItem),
+        helper: `${nextReviewTiming.label} • ${reviewLabelForItem(nextReviewItem)}`,
       });
     }
 
@@ -885,7 +902,7 @@ export default function StudentHomePage() {
       });
 
     return items;
-  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, nextReviewItem, nextReviewRoute, resumeLabel, resumeRoute, reviewDueCount, signOutBusy]);
+  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, nextReviewItem, nextReviewRoute, nextReviewTiming.label, resumeLabel, resumeRoute, reviewDueCount, signOutBusy]);
   const totalModuleCount = modules.length;
   const foundationCount = moduleSections.find((section) => section.key === "foundation")?.modules.length || 0;
   const coreCount = moduleSections.find((section) => section.key === "corePhysics")?.modules.length || 0;
@@ -1075,16 +1092,17 @@ export default function StudentHomePage() {
       {nextReviewRoute
         ? renderStatusBanner(
             reviewDueCount > 0 ? "warning" : "info",
-            reviewDueCount > 0 ? "Keep the concept fresh" : "Next review on deck",
+            reviewDueCount > 0 ? "Bring this idea back now" : "Next spaced return",
             <>
               <div>{reviewLabelForItem(nextReviewItem)}</div>
+              <div className={styles.bannerSubtle}>{reviewPlanHelperForItem(nextReviewItem)}</div>
               <div className={styles.bannerSubtle}>{reviewFocusSubtle}</div>
             </>,
             <button
               onClick={() => router.push(nextReviewRoute)}
               className={styles.secondaryButton}
             >
-              {reviewDueCount > 0 ? "Review next lesson" : "Open review"}
+              {reviewDueCount > 0 ? "Review now" : "Open scheduled review"}
             </button>,
           )
         : null}
