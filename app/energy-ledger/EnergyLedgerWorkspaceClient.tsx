@@ -18,6 +18,9 @@ type WorkspaceCheckpoint = {
   prompt: string;
   hint: string;
   answer: string;
+  focus: string;
+  watchFor: string;
+  difficulty: "Foundation" | "Core" | "Advanced";
   options: WorkspaceOption[];
 };
 
@@ -80,6 +83,9 @@ const WORKSPACES: WorkspaceDefinition[] = [
       prompt: "If the input hand-off is 420 J and 30% leaks away, what must be true about the useful gain?",
       hint: "The ledger still has to account for the full input after leak and useful parts are separated.",
       answer: "remaining-useful",
+      focus: "Balancing useful gain and leak",
+      watchFor: "forgetting that leak reduces the useful side",
+      difficulty: "Foundation",
       options: [
         {
           value: "remaining-useful",
@@ -131,6 +137,9 @@ const WORKSPACES: WorkspaceDefinition[] = [
       prompt: "If the same load is raised to the same height on two worlds, what can still make the store different?",
       hint: "The comparison board keeps one factor visible on purpose.",
       answer: "field-strength",
+      focus: "Factors in gravitational store",
+      watchFor: "treating height as the only relevant factor",
+      difficulty: "Foundation",
       options: [
         {
           value: "field-strength",
@@ -182,6 +191,9 @@ const WORKSPACES: WorkspaceDefinition[] = [
       prompt: "Which statement best explains why the useful gain can be smaller than the work hand-off on this board?",
       hint: "The board tracks something that happens after the input hand-off has already been counted.",
       answer: "leaks-reduce-useful",
+      focus: "Separating total transfer from useful output",
+      watchFor: "assuming useful gain must equal total input",
+      difficulty: "Core",
       options: [
         {
           value: "leaks-reduce-useful",
@@ -233,6 +245,9 @@ const WORKSPACES: WorkspaceDefinition[] = [
       prompt: "A machine transfers the same total energy in less time but keeps the same useful yield. What definitely changes?",
       hint: "One quantity is tied directly to the transfer time.",
       answer: "power-rises",
+      focus: "Separating power from efficiency",
+      watchFor: "assuming faster always means more efficient",
+      difficulty: "Core",
       options: [
         {
           value: "power-rises",
@@ -284,6 +299,9 @@ const WORKSPACES: WorkspaceDefinition[] = [
       prompt: "What is the safest first move in this mission planner?",
       hint: "The final gate check only makes sense after the earlier stages have created the right intermediate quantity.",
       answer: "efficiency-first",
+      focus: "Following multi-stage transfer order",
+      watchFor: "jumping straight to the final threshold",
+      difficulty: "Advanced",
       options: [
         {
           value: "efficiency-first",
@@ -541,6 +559,22 @@ export default function EnergyLedgerWorkspaceClient() {
               <p className={styles.questionRoute}>{activeWorkspace.title}</p>
               <div className={styles.questionPrompt} aria-live="polite">{activeWorkspace.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeWorkspace.checkpoint.hint}</p>
+              <div className={styles.metaRow}>
+                <span className={styles.metaBadge}>Focus: {activeWorkspace.checkpoint.focus}</span>
+                <span className={styles.metaBadge}>Difficulty: {activeWorkspace.checkpoint.difficulty}</span>
+                <span className={styles.metaBadge}>Watch for: {activeWorkspace.checkpoint.watchFor}</span>
+              </div>
+
+              <div className={styles.reasoningPanel}>
+                <div className={styles.reasoningBlock}>
+                  <p className={styles.reasoningLabel}>Intuition first</p>
+                  <p>{activeWorkspace.clarity.notice}</p>
+                </div>
+                <div className={styles.reasoningBlock}>
+                  <p className={styles.reasoningLabel}>Exam move</p>
+                  <p>{activeWorkspace.clarity.examCheck}</p>
+                </div>
+              </div>
 
               <div className={styles.optionList}>
                 {activeWorkspace.checkpoint.options.map((option) => {
@@ -571,6 +605,20 @@ export default function EnergyLedgerWorkspaceClient() {
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
                   <strong>{checkpointSolved ? "Locked in" : "Good catch to work through"}</strong>
                   <p>{activeOption.feedback}</p>
+                  <div className={styles.feedbackBreakdown}>
+                    <div>
+                      <p className={styles.reasoningLabel}>{checkpointSolved ? "Why this is right" : "Why this answer falls short"}</p>
+                      <p>{activeOption.feedback}</p>
+                    </div>
+                    <div>
+                      <p className={styles.reasoningLabel}>Tempting wrong move</p>
+                      <p>{activeWorkspace.clarity.commonMistake}</p>
+                    </div>
+                    <div>
+                      <p className={styles.reasoningLabel}>Exam move</p>
+                      <p>{activeWorkspace.clarity.examCheck}</p>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className={styles.feedbackPanel}>

@@ -744,14 +744,211 @@ function FeedbackCard({
   );
 }
 
+type QuestionReasoningCue = {
+  intuition: string;
+  whyRight: string;
+  temptingWrong: string;
+  examMove: string;
+};
+
+type ExamQuestionDifficulty = "Foundation" | "Core" | "Advanced";
+
+type ExamQuestionMeta = {
+  focus: string;
+  watchFor: string;
+  difficulty: ExamQuestionDifficulty;
+};
+
+function buildExamQuestionMetaFromText(source: string): ExamQuestionMeta {
+  const text = normalizeAssessmentText(source).toLowerCase();
+
+  if (/(graph|slope|gradient|distance-time|speed-time|area)/.test(text)) {
+    return {
+      focus: /(area|interpolate|distance at|speed-time)/.test(text)
+        ? "Graph interpretation and calculation"
+        : "Graph interpretation and physical meaning",
+      watchFor: /(area)/.test(text)
+        ? "treating the line itself as the total quantity instead of using the graph meaning"
+        : "matching the shape without checking what the axes say it means",
+      difficulty: /(area|interpolate|gradient|compare)/.test(text) ? "Core" : "Foundation",
+    };
+  }
+
+  if (/(force|resultant|torque|pivot|stability|weight line|free-body)/.test(text)) {
+    return {
+      focus: /(torque|pivot|stability)/.test(text)
+        ? "Turning effect and stability reasoning"
+        : "Force balance and resultant reasoning",
+      watchFor: /(third law|equal and opposite)/.test(text)
+        ? "cancelling forces that act on different objects"
+        : "using arrow appearance instead of the actual object or pivot",
+      difficulty: /(torque|pivot|stability|third law)/.test(text) ? "Core" : "Foundation",
+    };
+  }
+
+  if (/(energy|power|efficiency|useful|store|work|ledger|leak)/.test(text)) {
+    return {
+      focus: /(power|efficiency)/.test(text)
+        ? "Energy rate and useful-yield reasoning"
+        : /(planner|multi-stage|sequence|chain)/.test(text)
+          ? "Multi-stage energy transfer reasoning"
+          : "Energy transfer and conservation reasoning",
+      watchFor: /(power|efficiency)/.test(text)
+        ? "calling a faster transfer more efficient without checking the useful fraction"
+        : /(planner|multi-stage|sequence|chain)/.test(text)
+          ? "jumping to the final stage without following the transfer chain in order"
+          : "ignoring leaks or losses when comparing useful output",
+      difficulty: /(planner|multi-stage|sequence|chain)/.test(text)
+        ? "Advanced"
+        : /(power|efficiency|work)/.test(text)
+          ? "Core"
+          : "Foundation",
+    };
+  }
+
+  if (/(vector|scalar|displacement|velocity|direction|acceleration)/.test(text)) {
+    return {
+      focus: "Quantity classification and directional meaning",
+      watchFor: "treating related quantities as identical because they share units",
+      difficulty: /(acceleration|velocity|displacement)/.test(text) ? "Core" : "Foundation",
+    };
+  }
+
+  if (/(measurement|uncertainty|zero error|resolution|scale|significant|unit|prefix|decimal)/.test(text)) {
+    return {
+      focus: /(uncertainty|zero error|resolution)/.test(text)
+        ? "Measurement quality and instrument reading"
+        : "Unit conversion and scale reasoning",
+      watchFor: /(decimal|prefix|unit)/.test(text)
+        ? "using a decimal trick without stating the conversion factor underneath it"
+        : "reporting a reading without checking the instrument scale or uncertainty",
+      difficulty: /(uncertainty|zero error|significant)/.test(text) ? "Core" : "Foundation",
+    };
+  }
+
+  return {
+    focus: "Concept interpretation and exam reasoning",
+    watchFor: "answering by surface pattern instead of naming the quantity or relationship being tested",
+    difficulty: "Core",
+  };
+}
+
+function buildReasoningCueFromText(source: string): QuestionReasoningCue {
+  const text = normalizeAssessmentText(source).toLowerCase();
+
+  if (/(graph|slope|gradient|distance-time|speed-time|area)/.test(text)) {
+    return {
+      intuition: "Name the axes first, then translate the graph into a plain-language motion story before touching any numbers.",
+      whyRight: "The right answer comes from matching the graph feature to the physics meaning it represents, not from treating the graph as a picture.",
+      temptingWrong: "The tempting wrong move is to match shape by eye or grab a familiar number without checking what the axes say that feature means.",
+      examMove: "In exams, say what the graph shows physically, then choose the quantity or relationship that follows from that story.",
+    };
+  }
+
+  if (/(force|resultant|torque|pivot|stability|weight line|free-body)/.test(text)) {
+    return {
+      intuition: "Identify the object or pivot first, then decide which forces or turning effects really belong to that situation.",
+      whyRight: "The right answer comes from keeping the force story tied to one object or one turning effect instead of mixing diagrams together.",
+      temptingWrong: "The tempting wrong move is to let equal-looking arrows cancel automatically or to ignore where the force acts relative to the pivot.",
+      examMove: "In exams, name the object, direction, and pivot clearly before deciding what changes the motion or turning effect.",
+    };
+  }
+
+  if (/(energy|power|efficiency|useful|store|work|ledger|leak)/.test(text)) {
+    return {
+      intuition: "Track the hand-off in words first: input, useful gain, leak, and the store or rate being compared.",
+      whyRight: "The right answer comes from conserving the transfer story all the way through, so every gain, leak, and comparison still balances physically.",
+      temptingWrong: "The tempting wrong move is to jump to the biggest number or final output without checking which energy actually remains available at that stage.",
+      examMove: "In exams, write the transfer chain in order before choosing the statement or calculation that fits it.",
+    };
+  }
+
+  if (/(vector|scalar|displacement|velocity|direction|acceleration)/.test(text)) {
+    return {
+      intuition: "Separate size from direction before you decide what the quantity really means.",
+      whyRight: "The right answer comes from classifying the quantity by the information it needs, especially whether direction changes its meaning.",
+      temptingWrong: "The tempting wrong move is to treat two related quantities as identical just because they share the same units.",
+      examMove: "In exams, name the quantity, then ask whether direction is essential to that definition.",
+    };
+  }
+
+  if (/(measurement|uncertainty|zero error|resolution|scale|significant|unit|prefix|decimal)/.test(text)) {
+    return {
+      intuition: "Start with what the instrument or unit scale can honestly justify before you commit to a number rule.",
+      whyRight: "The right answer comes from matching the measurement or conversion to the scale, uncertainty, or factor that actually controls it.",
+      temptingWrong: "The tempting wrong move is to apply a remembered decimal trick without showing the physical scale or conversion factor underneath it.",
+      examMove: "In exams, state the scale step, conversion factor, or uncertainty rule first, then finish the number work.",
+    };
+  }
+
+  return {
+    intuition: "State the physical story in plain language before you try to spot the answer pattern.",
+    whyRight: "The right answer follows from naming the quantity, relationship, or change the question is really testing.",
+    temptingWrong: "The tempting wrong move is to answer by surface pattern instead of checking what stays fixed, what changes, and which idea the question targets.",
+    examMove: "In exams, say the idea first, then use the numbers or labels to support it.",
+  };
+}
+
+function AssessmentReasoningPanel({ cue }: { cue: QuestionReasoningCue }) {
+  return (
+    <div className="mb-4 grid gap-3 md:grid-cols-2">
+      <div className="rounded-2xl border border-sky-100 bg-sky-50/80 p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Intuition first</p>
+        <p className="mt-2 text-sm leading-6 text-slate-700 normal-case">{cue.intuition}</p>
+      </div>
+      <div className="rounded-2xl border border-slate-200 bg-slate-50/90 p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Exam move</p>
+        <p className="mt-2 text-sm leading-6 text-slate-700 normal-case">{cue.examMove}</p>
+      </div>
+    </div>
+  );
+}
+
+function AssessmentMetaRow({ meta }: { meta: ExamQuestionMeta }) {
+  return (
+    <div className="mb-4 flex flex-wrap gap-2">
+      <span className="inline-flex min-h-[2.1rem] items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold tracking-[0.01em] text-slate-700 normal-case">
+        Focus: {meta.focus}
+      </span>
+      <span className="inline-flex min-h-[2.1rem] items-center rounded-full border border-sky-100 bg-sky-50/80 px-3 py-2 text-xs font-semibold tracking-[0.01em] text-sky-800 normal-case">
+        Difficulty: {meta.difficulty}
+      </span>
+      <span className="inline-flex min-h-[2.1rem] items-center rounded-full border border-emerald-100 bg-emerald-50/80 px-3 py-2 text-xs font-semibold tracking-[0.01em] text-emerald-800 normal-case">
+        Watch for: {meta.watchFor}
+      </span>
+    </div>
+  );
+}
+
+function AssessmentFeedbackBreakdown({ cue }: { cue: QuestionReasoningCue }) {
+  return (
+    <div className="grid gap-3 md:grid-cols-3">
+      <div>
+        <p className="font-semibold text-slate-800 normal-case">Why this answer is right</p>
+        <p className="mt-1 leading-6 normal-case">{cue.whyRight}</p>
+      </div>
+      <div>
+        <p className="font-semibold text-slate-800 normal-case">Tempting wrong move</p>
+        <p className="mt-1 leading-6 normal-case">{cue.temptingWrong}</p>
+      </div>
+      <div>
+        <p className="font-semibold text-slate-800 normal-case">Exam move</p>
+        <p className="mt-1 leading-6 normal-case">{cue.examMove}</p>
+      </div>
+    </div>
+  );
+}
+
 function QuestionBlock({
   question,
   value,
   onChange,
+  showReasoningFrame = false,
 }: {
   question: Question;
   value: string;
   onChange: (questionId: string, value: string) => void;
+  showReasoningFrame?: boolean;
 }) {
   const prompt = normalizeAssessmentText(question.prompt);
   const visualTitle = question.visual_title ? normalizeAssessmentText(question.visual_title) : "";
@@ -759,6 +956,20 @@ function QuestionBlock({
   const visualCallouts = (question.visual_callouts ?? [])
     .map(normalizeAssessmentText)
     .filter((item) => item.length > 0);
+  const questionMeta = showReasoningFrame
+    ? buildExamQuestionMetaFromText(
+        [question.prompt, question.visual_title, question.visual_caption, ...(question.visual_callouts ?? [])]
+          .filter(Boolean)
+          .join(" "),
+      )
+    : null;
+  const reasoningCue = showReasoningFrame
+    ? buildReasoningCueFromText(
+        [question.prompt, question.visual_title, question.visual_caption, ...(question.visual_callouts ?? [])]
+          .filter(Boolean)
+          .join(" "),
+      )
+    : null;
 
   return (
     <div className="rounded-2xl border bg-white p-5 shadow-sm normal-case">
@@ -791,6 +1002,8 @@ function QuestionBlock({
       ) : null}
 
       <p className="mb-4 font-medium text-slate-900 normal-case">{prompt}</p>
+      {questionMeta ? <AssessmentMetaRow meta={questionMeta} /> : null}
+      {reasoningCue ? <AssessmentReasoningPanel cue={reasoningCue} /> : null}
 
       {question.type === "short_answer" ? (
         <textarea
@@ -1863,14 +2076,21 @@ export default function LessonRunner({
             </div>
           ) : null}
 
-          {payload.feedback.map((item, index) => (
-            <FeedbackCard
-              key={item.question_id}
-              correct={item.is_correct}
-              title={`Check ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
-              body={normalizeAssessmentText(item.explanation)}
-            />
-          ))}
+          {payload.feedback.map((item, index) => {
+            const promptSource =
+              payload.questions.find((question) => question.id === item.question_id)?.prompt ?? "";
+            const cue = buildReasoningCueFromText(promptSource);
+
+            return (
+              <FeedbackCard
+                key={item.question_id}
+                correct={item.is_correct}
+                title={`Check ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
+                body={normalizeAssessmentText(item.explanation)}
+                extra={<AssessmentFeedbackBreakdown cue={cue} />}
+              />
+            );
+          })}
 
           {payload.micro_reteach ? (
             <div className="rounded-2xl border bg-white p-5 shadow-sm">
@@ -1933,6 +2153,7 @@ export default function LessonRunner({
             question={question}
             value={answers[question.id] ?? ""}
             onChange={setAnswer}
+            showReasoningFrame
           />
         ))}
 
@@ -4153,14 +4374,19 @@ export default function LessonRunner({
               Start this unit all over again
             </SecondaryButton>
           </div>
-          {payload.feedback?.map((item, index) => (
-            <FeedbackCard
-              key={item.question_id}
-              correct={item.is_correct}
-              title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
-              body={masteryFeedbackBody(item, runner.lesson_title)}
-            />
-          ))}
+          {payload.feedback?.map((item, index) => {
+            const cue = buildReasoningCueFromText(item.prompt ?? runner.lesson_title);
+
+            return (
+              <FeedbackCard
+                key={item.question_id}
+                correct={item.is_correct}
+                title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
+                body={masteryFeedbackBody(item, runner.lesson_title)}
+                extra={<AssessmentFeedbackBreakdown cue={cue} />}
+              />
+            );
+          })}
 
           {passed ? null : (
             <>
@@ -4211,6 +4437,7 @@ export default function LessonRunner({
             question={question}
             value={answers[question.id] ?? ""}
             onChange={setAnswer}
+            showReasoningFrame
           />
         ))}
 

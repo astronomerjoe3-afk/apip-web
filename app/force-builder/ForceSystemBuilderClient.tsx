@@ -18,6 +18,9 @@ type ToolCheckpoint = {
   prompt: string;
   hint: string;
   answer: string;
+  focus: string;
+  watchFor: string;
+  difficulty: "Foundation" | "Core" | "Advanced";
   options: ToolOption[];
 };
 
@@ -80,6 +83,9 @@ const TOOLS: ToolDefinition[] = [
       prompt: "If the Master Arrow is zero while the craft is already moving, what follows?",
       hint: "A zero resultant means the velocity stops changing, not that motion must disappear.",
       answer: "constant-motion",
+      focus: "Resultant force and motion change",
+      watchFor: "assuming zero resultant means zero motion",
+      difficulty: "Foundation",
       options: [
         {
           value: "constant-motion",
@@ -131,6 +137,9 @@ const TOOLS: ToolDefinition[] = [
       prompt: "Which statement best explains why an action-reaction pair does not cancel on one object?",
       hint: "Cancellation only happens when forces act on the same object in the same force diagram.",
       answer: "different-objects",
+      focus: "Third-law pairs versus resultants",
+      watchFor: "cancelling equal and opposite forces on different objects",
+      difficulty: "Core",
       options: [
         {
           value: "different-objects",
@@ -182,6 +191,9 @@ const TOOLS: ToolDefinition[] = [
       prompt: "With the same push size, what is the clearest way to increase the turning effect?",
       hint: "Focus on the perpendicular reach from the pivot.",
       answer: "farther-from-pivot",
+      focus: "Torque and perpendicular distance",
+      watchFor: "thinking torque depends on force size alone",
+      difficulty: "Core",
       options: [
         {
           value: "farther-from-pivot",
@@ -233,6 +245,9 @@ const TOOLS: ToolDefinition[] = [
       prompt: "What is the clearest sign that a load is about to tip?",
       hint: "Watch where the weight line lands relative to the support base.",
       answer: "outside-base",
+      focus: "Weight line and stability",
+      watchFor: "predicting tipping from height or mass alone",
+      difficulty: "Core",
       options: [
         {
           value: "outside-base",
@@ -490,6 +505,23 @@ export default function ForceSystemBuilderClient() {
               <div className={styles.questionPrompt} aria-live="polite">{activeTool.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeTool.checkpoint.hint}</p>
 
+              <div className={styles.metaRow}>
+                <span className={styles.metaBadge}>Focus: {activeTool.checkpoint.focus}</span>
+                <span className={styles.metaBadge}>Difficulty: {activeTool.checkpoint.difficulty}</span>
+                <span className={styles.metaBadge}>Watch for: {activeTool.checkpoint.watchFor}</span>
+              </div>
+
+              <div className={styles.reasoningPanel}>
+                <div className={styles.reasoningBlock}>
+                  <p className={styles.reasoningLabel}>Intuition first</p>
+                  <p>{activeTool.clarity.notice}</p>
+                </div>
+                <div className={styles.reasoningBlock}>
+                  <p className={styles.reasoningLabel}>Exam move</p>
+                  <p>{activeTool.clarity.examCheck}</p>
+                </div>
+              </div>
+
               <div className={styles.optionList}>
                 {activeTool.checkpoint.options.map((option) => {
                   const isChosen = activeAnswer === option.value;
@@ -519,6 +551,20 @@ export default function ForceSystemBuilderClient() {
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
                   <strong>{checkpointSolved ? "Locked in" : "Good catch to work through"}</strong>
                   <p>{activeOption.feedback}</p>
+                  <div className={styles.feedbackBreakdown}>
+                    <div>
+                      <p className={styles.reasoningLabel}>{checkpointSolved ? "Why this is right" : "Why this answer falls short"}</p>
+                      <p>{activeOption.feedback}</p>
+                    </div>
+                    <div>
+                      <p className={styles.reasoningLabel}>Tempting wrong move</p>
+                      <p>{activeTool.clarity.commonMistake}</p>
+                    </div>
+                    <div>
+                      <p className={styles.reasoningLabel}>Exam move</p>
+                      <p>{activeTool.clarity.examCheck}</p>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className={styles.feedbackPanel}>
