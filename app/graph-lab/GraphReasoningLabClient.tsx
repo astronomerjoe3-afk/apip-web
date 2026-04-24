@@ -213,6 +213,7 @@ export default function GraphReasoningLabClient() {
   const activeAnswer = answers[activeLab.key];
   const activeOption = activeLab.checkpoint.options.find((option) => option.value === activeAnswer) || null;
   const checkpointSolved = activeAnswer === activeLab.checkpoint.answer;
+  const activeLabIndex = LABS.findIndex((lab) => lab.key === activeLab.key) + 1;
   const solvedCount = useMemo(
     () => LABS.filter((lab) => answers[lab.key] === lab.checkpoint.answer).length,
     [answers],
@@ -370,10 +371,16 @@ export default function GraphReasoningLabClient() {
           </div>
 
           <aside className={styles.challengeColumn}>
-            <div className={styles.challengeCard}>
-              <p className={styles.questionIndex}>Checkpoint</p>
-              <h3>{activeLab.label}</h3>
-              <div className={styles.questionPrompt}>{activeLab.checkpoint.prompt}</div>
+            <div key={activeLab.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
+              <div className={styles.questionMeta}>
+                <div>
+                  <p className={styles.questionIndex}>Checkpoint</p>
+                  <h3>{activeLab.label}</h3>
+                </div>
+                <span className={styles.questionStatusPill}>Mode {activeLabIndex} of {LABS.length}</span>
+              </div>
+              <p className={styles.questionRoute}>{activeLab.title}</p>
+              <div className={styles.questionPrompt} aria-live="polite">{activeLab.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeLab.checkpoint.hint}</p>
 
               <div className={styles.optionList}>

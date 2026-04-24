@@ -392,8 +392,20 @@
   padding: 1.1rem;
 }
 
+.checkpointCard {
+  animation: checkpointSwap 220ms ease;
+}
+
 .questionIndex {
   display: inline-flex;
+}
+
+.questionMeta {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .challengeCard h3 {
@@ -401,6 +413,28 @@
   font-size: 1.6rem;
   color: #10233f;
   line-height: 1;
+}
+
+.questionStatusPill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.3rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(29, 78, 216, 0.14);
+  background: rgba(239, 246, 255, 0.92);
+  color: #1d4ed8;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.questionRoute {
+  margin-top: 0.75rem;
+  color: #66758a;
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.55;
 }
 
 .questionPrompt {
@@ -480,6 +514,18 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+}
+
+@keyframes checkpointSwap {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 1080px) {
