@@ -490,6 +490,27 @@
   line-height: 1.55;
 }
 
+.metaRow {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+
+.metaBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.1rem;
+  padding: 0.48rem 0.82rem;
+  border-radius: 999px;
+  border: 1px solid rgba(96, 126, 181, 0.16);
+  background: rgba(248, 250, 252, 0.96);
+  color: #435266;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
 .questionPrompt {
   margin-top: 0.8rem;
   color: #10233f;
@@ -499,6 +520,34 @@
 .questionHint {
   margin-top: 0.5rem;
   font-size: 0.96rem;
+}
+
+.reasoningPanel {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reasoningBlock {
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.reasoningLabel {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #66758a;
+}
+
+.reasoningBlock p:last-child {
+  margin-top: 0.35rem;
+  color: #435266;
+  line-height: 1.7;
 }
 
 .optionList {
@@ -541,6 +590,19 @@
 .feedbackPanel strong {
   display: block;
   color: #10233f;
+}
+
+.feedbackBreakdown {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.feedbackBreakdown p:last-child {
+  margin-top: 0.35rem;
+  color: #435266;
+  line-height: 1.7;
 }
 
 .feedbackCorrect {
@@ -592,8 +654,14 @@
   }
 
   .clarityGrid,
-  .signalRow {
+  .signalRow,
+  .reasoningPanel,
+  .feedbackBreakdown {
     grid-template-columns: 1fr;
+  }
+
+  .metaRow {
+    flex-direction: column;
   }
 }
 

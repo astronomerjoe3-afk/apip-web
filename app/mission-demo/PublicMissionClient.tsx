@@ -17,6 +17,13 @@ type MissionQuestion = {
   prompt: string;
   answer: string;
   hint: string;
+  focus: string;
+  watchFor: string;
+  difficulty: "Foundation" | "Core" | "Advanced";
+  intuition: string;
+  whyRight: string;
+  temptingWrong: string;
+  examMove: string;
   options: MissionOption[];
 };
 
@@ -59,6 +66,13 @@ const QUESTIONS: MissionQuestion[] = [
     prompt: "Which segment shows the rover stopped?",
     answer: "B",
     hint: "Look for the part of the graph where distance does not change while time keeps moving.",
+    focus: "Interpreting flat segments",
+    watchFor: "treating constant distance as constant time",
+    difficulty: "Foundation",
+    intuition: "A stopped object still lets time pass. On this graph, that means the distance value stays fixed while the time value keeps increasing.",
+    whyRight: "Segment B is flat, so the rover keeps the same distance from base throughout that interval.",
+    temptingWrong: "The tempting wrong move is to treat any non-horizontal segment as the answer because it looks more active, but motion only stops when the distance stops changing.",
+    examMove: "In exams, identify what the axes mean first, then translate the line shape into the motion story.",
     options: [
       {
         value: "A",
@@ -82,6 +96,13 @@ const QUESTIONS: MissionQuestion[] = [
     prompt: "Which segment has the greatest speed?",
     answer: "A",
     hint: "Speed is how steep the graph is. The steeper the segment, the larger the speed.",
+    focus: "Comparing gradient and speed",
+    watchFor: "judging motion by appearance instead of slope",
+    difficulty: "Core",
+    intuition: "On a distance-time graph, speed is the size of the slope. The steepest segment shows the biggest change in distance each second.",
+    whyRight: "Segment A rises the fastest, so it shows the largest change in distance per second and therefore the greatest speed.",
+    temptingWrong: "The tempting wrong move is to compare only whether a segment is moving or flat instead of comparing how steep the moving segments really are.",
+    examMove: "In exams, compare gradients rather than raw line length or how dramatic the picture looks.",
     options: [
       {
         value: "A",
@@ -110,6 +131,13 @@ const QUESTIONS: MissionQuestion[] = [
     prompt: "At 7 seconds, how far is the rover from base?",
     answer: "16",
     hint: "Segment C drops from 24 m at 5 s to 12 m at 8 s. Use the graph, not the total journey length.",
+    focus: "Interpolating on a graph",
+    watchFor: "grabbing an endpoint instead of the asked time",
+    difficulty: "Core",
+    intuition: "This is an interpolation question. Stay on Segment C, work out how the distance is changing each second, then read the value at 7 s.",
+    whyRight: "Segment C drops by 12 m over 3 s, so the distance falls by 4 m each second. Starting from 24 m at 5 s, the rover is 16 m from base at 7 s.",
+    temptingWrong: "The tempting wrong move is to grab the end value or a familiar number from the graph instead of tracking the segment's change rate to the exact time asked.",
+    examMove: "In exams, keep your eye on the segment that contains the time you were asked about, not the whole journey.",
     options: [
       {
         value: "12",
@@ -426,6 +454,23 @@ export default function PublicMissionClient() {
                     </div>
                   </div>
 
+                  <div className={styles.metaRow}>
+                    <span className={styles.metaBadge}>Focus: {question.focus}</span>
+                    <span className={styles.metaBadge}>Difficulty: {question.difficulty}</span>
+                    <span className={styles.metaBadge}>Watch for: {question.watchFor}</span>
+                  </div>
+
+                  <div className={styles.reasoningPanel}>
+                    <div className={styles.reasoningBlock}>
+                      <p className={styles.reasoningLabel}>Intuition first</p>
+                      <p>{question.intuition}</p>
+                    </div>
+                    <div className={styles.reasoningBlock}>
+                      <p className={styles.reasoningLabel}>Exam move</p>
+                      <p>{question.examMove}</p>
+                    </div>
+                  </div>
+
                   <div className={styles.optionGrid}>
                     {question.options.map((option) => {
                       const isSelected = selectedAnswer === option.value;
@@ -454,6 +499,16 @@ export default function PublicMissionClient() {
                     <div className={`${styles.feedbackPanel} ${answeredCorrectly ? styles.feedbackGood : styles.feedbackNeedsWork}`}>
                       <strong>{answeredCorrectly ? "Good read." : "Useful correction."}</strong>
                       <p>{selectedOption.feedback}</p>
+                      <div className={styles.feedbackBreakdown}>
+                        <div>
+                          <p className={styles.reasoningLabel}>Why this is right</p>
+                          <p>{question.whyRight}</p>
+                        </div>
+                        <div>
+                          <p className={styles.reasoningLabel}>Tempting wrong move</p>
+                          <p>{question.temptingWrong}</p>
+                        </div>
+                      </div>
                     </div>
                   ) : null}
                 </article>

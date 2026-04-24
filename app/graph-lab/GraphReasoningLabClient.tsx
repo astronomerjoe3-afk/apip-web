@@ -18,6 +18,9 @@ type LabCheckpoint = {
   prompt: string;
   hint: string;
   answer: string;
+  focus: string;
+  watchFor: string;
+  difficulty: "Foundation" | "Core" | "Advanced";
   options: LabOption[];
 };
 
@@ -72,6 +75,9 @@ const LABS: LabDefinition[] = [
       prompt: "If the graph stays flat while time continues, what is the right interpretation?",
       hint: "A flat segment means the recorded distance is not changing.",
       answer: "stopped",
+      focus: "Interpreting flat graph segments",
+      watchFor: "reading a flat line as no time passing",
+      difficulty: "Foundation",
       options: [
         {
           value: "stopped",
@@ -116,6 +122,9 @@ const LABS: LabDefinition[] = [
       prompt: "On a speed-time graph, what does the height of the line at one instant tell you?",
       hint: "Height answers the value on the vertical axis right then.",
       answer: "speed",
+      focus: "Separating height from slope",
+      watchFor: "mixing graph height with distance or acceleration",
+      difficulty: "Foundation",
       options: [
         {
           value: "speed",
@@ -160,6 +169,9 @@ const LABS: LabDefinition[] = [
       prompt: "Two graphs have the same steepness. What must you decide first before naming the slope?",
       hint: "The graph family changes the meaning of the same geometry.",
       answer: "axes",
+      focus: "Identifying slope meaning from axes",
+      watchFor: "assuming the same steepness always means the same quantity",
+      difficulty: "Core",
       options: [
         {
           value: "axes",
@@ -204,6 +216,9 @@ const LABS: LabDefinition[] = [
       prompt: "Which statement best explains why the area under a speed-time graph represents total distance?",
       hint: "Think about the units made by the vertical and horizontal axes together.",
       answer: "speed-time",
+      focus: "Linking area to distance",
+      watchFor: "treating the line itself as total distance",
+      difficulty: "Core",
       options: [
         {
           value: "speed-time",
@@ -451,6 +466,23 @@ export default function GraphReasoningLabClient() {
               <div className={styles.questionPrompt} aria-live="polite">{activeLab.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeLab.checkpoint.hint}</p>
 
+              <div className={styles.metaRow}>
+                <span className={styles.metaBadge}>Focus: {activeLab.checkpoint.focus}</span>
+                <span className={styles.metaBadge}>Difficulty: {activeLab.checkpoint.difficulty}</span>
+                <span className={styles.metaBadge}>Watch for: {activeLab.checkpoint.watchFor}</span>
+              </div>
+
+              <div className={styles.reasoningPanel}>
+                <div className={styles.reasoningBlock}>
+                  <p className={styles.reasoningLabel}>Intuition first</p>
+                  <p>{activeLab.clarity.notice}</p>
+                </div>
+                <div className={styles.reasoningBlock}>
+                  <p className={styles.reasoningLabel}>Exam move</p>
+                  <p>{activeLab.clarity.examCheck}</p>
+                </div>
+              </div>
+
               <div className={styles.optionList}>
                 {activeLab.checkpoint.options.map((option) => {
                   const isChosen = activeAnswer === option.value;
@@ -480,6 +512,20 @@ export default function GraphReasoningLabClient() {
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
                   <strong>{checkpointSolved ? "Locked in" : "Good catch to work through"}</strong>
                   <p>{activeOption.feedback}</p>
+                  <div className={styles.feedbackBreakdown}>
+                    <div>
+                      <p className={styles.reasoningLabel}>{checkpointSolved ? "Why this is right" : "Why this answer falls short"}</p>
+                      <p>{activeOption.feedback}</p>
+                    </div>
+                    <div>
+                      <p className={styles.reasoningLabel}>Tempting wrong move</p>
+                      <p>{activeLab.clarity.commonMistake}</p>
+                    </div>
+                    <div>
+                      <p className={styles.reasoningLabel}>Exam move</p>
+                      <p>{activeLab.clarity.examCheck}</p>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className={styles.feedbackPanel}>
