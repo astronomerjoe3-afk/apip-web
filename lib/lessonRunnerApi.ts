@@ -7680,16 +7680,70 @@ function advancedContrastAnswerPrompt(item: UnknownRecord): string | null {
   return `How is ${left} different from ${right}${promptMatch[1]}`;
 }
 
+function standardExamQuestionPrompt(prompt: string, type: "multiple_choice" | "short_answer"): string {
+  const trimmed = normalizeRenderedPhysicsText(prompt).trim();
+  if (!trimmed) return trimmed;
+
+  const barePrompt = trimmed.replace(/[.?!]\s*$/, "");
+
+  if (type === "multiple_choice") {
+    if (
+      /^(Which|What|Calculate|Find|Determine|State|Select|Give|Identify|Complete|A |An |The |Given )/i.test(trimmed) ||
+      /^How\s+(much|many|long|far|big|large|often|old)\b/i.test(trimmed)
+    ) {
+      return trimmed;
+    }
+
+    if (/^Why\s+/i.test(trimmed)) {
+      return `Which statement best explains why ${barePrompt.replace(/^Why\s+/i, "")}?`;
+    }
+
+    if (/^How\s+/i.test(trimmed)) {
+      return `Which statement best explains how ${barePrompt.replace(/^How\s+/i, "")}?`;
+    }
+
+    if (/^Explain why\s+/i.test(trimmed)) {
+      return `Which statement best explains why ${barePrompt.replace(/^Explain why\s+/i, "")}?`;
+    }
+
+    if (/^Explain how\s+/i.test(trimmed)) {
+      return `Which statement best explains how ${barePrompt.replace(/^Explain how\s+/i, "")}?`;
+    }
+
+    if (/^Explain\s+/i.test(trimmed)) {
+      return `Which statement best explains ${barePrompt.replace(/^Explain\s+/i, "")}?`;
+    }
+
+    if (/^Describe\s+/i.test(trimmed)) {
+      return `Which option gives the best description of ${barePrompt.replace(/^Describe\s+/i, "")}?`;
+    }
+
+    if (/^Tell\s+/i.test(trimmed)) {
+      return `Which option gives the best answer to ${barePrompt.replace(/^Tell\s+/i, "")}?`;
+    }
+
+    return trimmed.endsWith("?") ? trimmed : `${trimmed}?`;
+  }
+
+  if (/^Tell\s+/i.test(trimmed)) {
+    return `State ${barePrompt.replace(/^Tell\s+/i, "")}.`;
+  }
+
+  return trimmed;
+}
+
 function renderedPromptText(item: UnknownRecord): string {
+  const choiceCount = renderedChoices(item).length;
+  const questionType: "multiple_choice" | "short_answer" = choiceCount > 0 ? "multiple_choice" : "short_answer";
   const promptOverride = renderedPromptOverride(item);
-  if (promptOverride) return promptOverride;
+  if (promptOverride) return standardExamQuestionPrompt(promptOverride, questionType);
   const a1ShortAnswerPrompt = a1ShortAnswerPromptOverride(item);
-  if (a1ShortAnswerPrompt) return normalizeRenderedPhysicsText(a1ShortAnswerPrompt);
+  if (a1ShortAnswerPrompt) return standardExamQuestionPrompt(a1ShortAnswerPrompt, "short_answer");
   const advancedContrastPrompt = advancedContrastAnswerPrompt(item);
-  if (advancedContrastPrompt) return normalizeRenderedPhysicsText(advancedContrastPrompt);
+  if (advancedContrastPrompt) return standardExamQuestionPrompt(advancedContrastPrompt, "short_answer");
   const override = m5RenderedQuestionOverride(item);
-  if (override) return override.prompt;
-  return normalizeRenderedPhysicsText(text(item.prompt));
+  if (override) return standardExamQuestionPrompt(override.prompt, override.choices.length > 0 ? "multiple_choice" : "short_answer");
+  return standardExamQuestionPrompt(text(item.prompt), questionType);
 }
 
 function renderedChoices(item: UnknownRecord): string[] {
@@ -21214,7 +21268,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
     const gateItem = conceptGateItemForAttempt(moduleId, lessonId, resources.lesson, conceptNonce, retryCount);
     stagePayload = state.conceptGate?.submitted
       ? {
-          instructions: "Use the feedback below to tighten the key idea before moving on.",
+          instructions: "Review the feedback below, then answer the checkpoint question again.",
           retry_count: retryCount,
           max_retries: CONCEPT_GATE_MAX_RETRIES,
           questions: gateItem ? [question(asRecord(gateItem), conceptSeed)] : [],
@@ -21224,7 +21278,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
           micro_reteach: asRecord(state.conceptGate).microReteach,
         }
       : {
-          instructions: "Answer this quick check before you move on.",
+          instructions: "Choose the best answer for this checkpoint question.",
           retry_count: retryCount,
           max_retries: CONCEPT_GATE_MAX_RETRIES,
           questions: gateItem ? [question(asRecord(gateItem), conceptSeed)] : [],
@@ -21346,7 +21400,7 @@ export async function getLessonRunner(moduleId: string, lessonId: string, option
           passing_percent: thresholdPercent,
         }
       : {
-          instructions: "Use what you learned in " + title + " to answer " + String(selected.length) + " final questions carefully.",
+          instructions: "Answer " + String(selected.length) + " final assessment questions on " + title + ".",
           question_count: selected.length,
           questions: selected.map((item, index) => question(asRecord(item), `mastery:${masteryState.nonce || 0}:${index}`)),
           min_questions: numberValue(masteryMeta.min_questions, 5),

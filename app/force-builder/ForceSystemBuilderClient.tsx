@@ -102,7 +102,7 @@ const TOOLS: ToolDefinition[] = [
       simSpread: 4,
     },
     checkpoint: {
-      prompt: "Why do an action-reaction pair not cancel each other on one object?",
+      prompt: "Which statement best explains why an action-reaction pair does not cancel on one object?",
       hint: "Cancellation only happens when forces act on the same object in the same force diagram.",
       answer: "different-objects",
       options: [

@@ -159,7 +159,7 @@ const LABS: LabDefinition[] = [
       simBias: 2,
     },
     checkpoint: {
-      prompt: "Why does the area under a speed-time graph represent total distance?",
+      prompt: "Which statement best explains why the area under a speed-time graph represents total distance?",
       hint: "Think about the units made by the vertical and horizontal axes together.",
       answer: "speed-time",
       options: [
