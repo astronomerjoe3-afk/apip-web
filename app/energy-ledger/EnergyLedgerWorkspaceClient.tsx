@@ -145,7 +145,7 @@ const WORKSPACES: WorkspaceDefinition[] = [
       simSpread: 25,
     },
     checkpoint: {
-      prompt: "Why can the useful gain be smaller than the work hand-off on this board?",
+      prompt: "Which statement best explains why the useful gain can be smaller than the work hand-off on this board?",
       hint: "The board tracks something that happens after the input hand-off has already been counted.",
       answer: "leaks-reduce-useful",
       options: [

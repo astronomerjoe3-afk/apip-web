@@ -1110,17 +1110,17 @@ export default function LessonRunner({
     if (isFinalModuleWrapUp) return "Congratulations. You finished the final mission and wrapped up this module.";
     switch (runner.active_stage) {
       case "diagnostic":
-        return "A few quick questions first.";
+        return "Opening questions.";
       case "scaffold":
         return "Study the key ideas for this sub-unit.";
       case "concept_gate":
-        return "One quick check before the activity.";
+        return "Checkpoint question before the activity.";
       case "simulation":
         return "Change one thing at a time, watch what changes, and explain the pattern you notice.";
       case "reflection":
         return "Explain the idea in your own words.";
       case "mastery":
-        return "This check decides mastery.";
+        return "Final assessment.";
       default:
         return "";
     }
@@ -4039,7 +4039,7 @@ export default function LessonRunner({
       <div className="space-y-4">
         <div className="rounded-2xl border bg-white p-5 shadow-sm">
           <p className="text-slate-700">
-            {normalizeLessonDisplayMultiline(payload.instructions ?? "Answer the final questions carefully.")}
+            {normalizeLessonDisplayMultiline(payload.instructions ?? "Answer the final assessment questions carefully.")}
           </p>
           <p className="mt-3 text-sm text-slate-600">
             {String(payload.question_count ?? payload.questions.length) + " questions. Aim for " + String(payload.passing_percent ?? 80) + "% to master this lesson."}
