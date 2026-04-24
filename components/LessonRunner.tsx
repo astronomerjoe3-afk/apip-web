@@ -4248,8 +4248,6 @@ export default function LessonRunner({
             </SecondaryButton>
           </div>
           {payload.feedback?.map((item, index) => {
-            const cue = buildReasoningCueFromText(item.prompt ?? runner.lesson_title);
-
             return (
               <FeedbackCard
                 key={item.question_id}
@@ -4257,15 +4255,12 @@ export default function LessonRunner({
                 title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
                 body={masteryFeedbackBody(item, runner.lesson_title)}
                 extra={
-                  <div className="space-y-3">
-                    <AssessmentFeedbackBreakdown cue={cue} />
-                    {item.is_correct ? null : (
-                      <MisconceptionRepairPanel
-                        tag={item.misconception_tag}
-                        teachingFocus={item.teaching_focus}
-                      />
-                    )}
-                  </div>
+                  item.is_correct ? null : (
+                    <MisconceptionRepairPanel
+                      tag={item.misconception_tag}
+                      teachingFocus={item.teaching_focus}
+                    />
+                  )
                 }
               />
             );
@@ -4320,7 +4315,6 @@ export default function LessonRunner({
             question={question}
             value={answers[question.id] ?? ""}
             onChange={setAnswer}
-            showReasoningFrame
           />
         ))}
 
