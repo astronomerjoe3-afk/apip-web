@@ -16,6 +16,12 @@ import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/
 import { shareLink } from "../../lib/shareLink";
 import { describeReviewProgress, describeReviewTiming } from "../../lib/spacedReview";
 import {
+  describeLearningStreakBanner,
+  describeLearningStreakSubtle,
+  describeLearningStreakValue,
+  type LearningStreakSummary,
+} from "../../lib/streaks";
+import {
   mergeStudentPreferenceStates,
   moduleFavoriteKey,
   normalizeStudentPreferenceState,
@@ -175,6 +181,7 @@ type ProgressSummaryResponse = {
   review_due_count: number;
   next_review_utc?: string | null;
   review_queue: ReviewQueueItem[];
+  learning_streak: LearningStreakSummary;
   top_misconception_tags: string[];
   top_misconception_summaries?: MisconceptionRepairSummary[];
 };
@@ -808,6 +815,7 @@ export default function StudentHomePage() {
   const canShowStudentCommunity = false;
   const reviewQueue = progressSummary?.review_queue || [];
   const reviewDueCount = progressSummary?.review_due_count || 0;
+  const learningStreak = progressSummary?.learning_streak || null;
   const nextReviewItem = reviewQueue[0] || null;
   const nextReviewRoute = nextReviewItem?.route || null;
   const nextReviewTiming = nextReviewItem
@@ -833,12 +841,17 @@ export default function StudentHomePage() {
   const reviewCardSubtle = nextReviewItem
     ? `${reviewLabelForItem(nextReviewItem)}. ${nextReviewProgress}`
     : "As you finish mastery checks, due reviews will appear here automatically.";
+  const streakCardValue = describeLearningStreakValue(learningStreak);
+  const streakCardSubtle = describeLearningStreakSubtle(learningStreak);
   const resumeRoute = learningState?.lastRoute || null;
   const resumeLabel = learningState?.lastLessonTitle
     ? `${learningState.lastLessonTitle}${learningState.lastModuleId ? ` in ${learningState.lastModuleId}` : ""}`
     : learningState?.lastModuleId
       ? `Resume ${learningState.lastModuleId}`
       : "Continue where you left off";
+  const fallbackStartRoute = modules[0]?.id ? `/student/module/${encodeURIComponent(modules[0].id)}` : "/student";
+  const streakBanner = describeLearningStreakBanner(learningStreak);
+  const streakBannerRoute = nextReviewRoute || resumeRoute || fallbackStartRoute;
   const studentMenuItems = useMemo<StudentActionMenuItem[]>(() => {
     const items: StudentActionMenuItem[] = [];
 
@@ -849,6 +862,13 @@ export default function StudentHomePage() {
         href: nextReviewRoute,
         helper: `${nextReviewTiming.label} • ${reviewLabelForItem(nextReviewItem)}`,
       });
+    }
+
+    if (nextReviewRoute && items[0]) {
+      items[0] = {
+        ...items[0],
+        helper: `${learningStreak?.status === "at_risk" ? "Best move for today • " : ""}${nextReviewTiming.label} • ${reviewLabelForItem(nextReviewItem)}`,
+      };
     }
 
     if (resumeRoute) {
@@ -902,7 +922,7 @@ export default function StudentHomePage() {
       });
 
     return items;
-  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, nextReviewItem, nextReviewRoute, nextReviewTiming.label, resumeLabel, resumeRoute, reviewDueCount, signOutBusy]);
+  }, [billingBusy, billingSummary?.has_active_subscription, billingSummary?.portal_enabled, canShowStudentCommunity, canShowStudentHelp, learningStreak?.status, nextReviewItem, nextReviewRoute, nextReviewTiming.label, resumeLabel, resumeRoute, reviewDueCount, signOutBusy]);
   const totalModuleCount = modules.length;
   const foundationCount = moduleSections.find((section) => section.key === "foundation")?.modules.length || 0;
   const coreCount = moduleSections.find((section) => section.key === "corePhysics")?.modules.length || 0;
@@ -1056,6 +1076,11 @@ export default function StudentHomePage() {
             <strong className={styles.summaryValue}>{foundationCount} Foundation / {coreCount} Core / {advancedCount} Advanced</strong>
           </article>
           <article className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>Learning streak</span>
+            <strong className={styles.summaryValue}>{streakCardValue}</strong>
+            <div className={styles.summarySubtle}>{streakCardSubtle}</div>
+          </article>
+          <article className={styles.summaryCard}>
             <span className={styles.summaryLabel}>Saved favorites</span>
             <strong className={styles.summaryValue}>
               {favoriteModules.length} modules saved for quick return
@@ -1076,6 +1101,19 @@ export default function StudentHomePage() {
 
       {status ? renderStatusBanner("info", "Update", status) : null}
       {err ? renderStatusBanner("warning", "Something needs attention", err) : null}
+      {streakBanner
+        ? renderStatusBanner(
+            streakBanner.kind,
+            streakBanner.title,
+            streakBanner.body,
+            <button
+              onClick={() => router.push(streakBannerRoute)}
+              className={styles.secondaryButton}
+            >
+              {streakBanner.ctaLabel}
+            </button>,
+          )
+        : null}
       {resumeRoute
         ? renderStatusBanner(
             "info",
