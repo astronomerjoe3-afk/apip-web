@@ -1676,8 +1676,6 @@ export default function LessonRunner({
             </div>
             {payload.review_refs?.length ? <p className="mt-4 text-sm text-slate-600">Keep these ideas in view as you move into the worked explanations and examples that follow.</p> : null}
           </div>
-          ) : null}
-        </div>
         ) : null}
         {isIntroStep && scaffoldClarityCards.length ? scaffoldClarityPanel : null}
         {payload.reference_tables?.length && isTableStep ? (
