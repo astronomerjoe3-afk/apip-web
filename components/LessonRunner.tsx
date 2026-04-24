@@ -1350,7 +1350,6 @@ export default function LessonRunner({
           createClarityCard("What changes", scaffoldFocusItems[1] ?? "The examples change one feature at a time so the concept stays readable."),
           createClarityCard("What stays the same", scaffoldFocusItems[2] ?? "The quantity definitions stay fixed while the examples change."),
           createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not rush to a formula before naming what is changing and what is staying the same.")),
-          createClarityCard("Exam-style check", firstClarityText(payload.sections.find((section) => section.check_for_understanding)?.check_for_understanding, "Use these core ideas before you answer the next exam-style check.")),
         ])
       : isTableStep && activeTable
         ? buildClarityCards([
@@ -1380,9 +1379,14 @@ export default function LessonRunner({
                 createClarityCard("Exam-style check", firstClarityText(activeSection.check_for_understanding, activeSection.worked_example?.answer_reason, "Use this section's idea to justify the next exam-style check.")),
               ])
             : [];
+    const scaffoldClarityPanel = renderClarityLensPanel(
+      "Concept-first frame",
+      "Understand this idea before you move on",
+      scaffoldClarityCards,
+    );
     return (
       <div className="space-y-6">
-        {renderClarityLensPanel("Concept-first frame", "Understand this idea before you move on", scaffoldClarityCards)}
+        {!isIntroStep ? scaffoldClarityPanel : null}
         {isIntroStep ? (
           <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
             {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{normalizeLessonDisplayMultiline(payload.intro)}</p> : null}
@@ -1399,6 +1403,7 @@ export default function LessonRunner({
           ) : null}
         </div>
         ) : null}
+        {isIntroStep ? scaffoldClarityPanel : null}
         {payload.reference_tables?.length && isTableStep ? (
           <div className="lesson-display-deck">
             {payload.reference_tables.map((table, index) => (
