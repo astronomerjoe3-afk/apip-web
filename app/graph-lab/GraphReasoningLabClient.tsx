@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
 import M1SimulationPanels from "../../components/M1SimulationPanels";
 import styles from "./graphLab.module.css";
 
@@ -12,6 +13,7 @@ type LabOption = {
   value: string;
   label: string;
   feedback: string;
+  misconceptionTag?: string;
 };
 
 type LabCheckpoint = {
@@ -88,11 +90,13 @@ const LABS: LabDefinition[] = [
           value: "speeding-up",
           label: "The object is speeding up rapidly.",
           feedback: "Not this time. Speeding up would change the slope, not flatten it.",
+          misconceptionTag: "flat_line_time_confusion",
         },
         {
           value: "turning-around",
           label: "The object has turned around automatically.",
           feedback: "A flat section says nothing about turning around by itself. It only says the distance stayed constant.",
+          misconceptionTag: "flat_line_time_confusion",
         },
       ],
     },
@@ -135,11 +139,13 @@ const LABS: LabDefinition[] = [
           value: "distance",
           label: "The total distance travelled so far.",
           feedback: "That is a common mix-up. Distance is not read directly from graph height on a speed-time graph.",
+          misconceptionTag: "height_vs_slope_confusion",
         },
         {
           value: "acceleration",
           label: "The acceleration for the whole segment.",
           feedback: "Close, but acceleration comes from the slope, not the height.",
+          misconceptionTag: "height_vs_slope_confusion",
         },
       ],
     },
@@ -182,11 +188,13 @@ const LABS: LabDefinition[] = [
           value: "color",
           label: "Which line color is darker.",
           feedback: "Color is only visual styling here. The physics meaning comes from the axes.",
+          misconceptionTag: "slope_meaning_confusion",
         },
         {
           value: "highest-point",
           label: "Which graph has the higher top point.",
           feedback: "That might matter for height questions, but slope meaning still comes from the axes first.",
+          misconceptionTag: "slope_meaning_confusion",
         },
       ],
     },
@@ -229,11 +237,13 @@ const LABS: LabDefinition[] = [
           value: "line-length",
           label: "Because the line itself measures how far the object went.",
           feedback: "Not quite. The line length is not the physics quantity here; the shaded area is.",
+          misconceptionTag: "area_under_graph_confusion",
         },
         {
           value: "highest-speed",
           label: "Because the highest speed always equals the total distance.",
           feedback: "That is the trap. Highest speed is only one value. Total distance comes from the whole area over time.",
+          misconceptionTag: "area_under_graph_confusion",
         },
       ],
     },
@@ -270,6 +280,10 @@ export default function GraphReasoningLabClient() {
   const activeAnswer = answers[activeLab.key];
   const activeOption = activeLab.checkpoint.options.find((option) => option.value === activeAnswer) || null;
   const checkpointSolved = activeAnswer === activeLab.checkpoint.answer;
+  const misconceptionSummary =
+    !checkpointSolved && activeOption?.misconceptionTag
+      ? misconceptionSummaryForTag(activeOption.misconceptionTag)
+      : null;
   const activeLabIndex = LABS.findIndex((lab) => lab.key === activeLab.key) + 1;
   const solvedCount = useMemo(
     () => LABS.filter((lab) => answers[lab.key] === lab.checkpoint.answer).length,
@@ -526,6 +540,25 @@ export default function GraphReasoningLabClient() {
                       <p>{activeLab.clarity.examCheck}</p>
                     </div>
                   </div>
+                  {misconceptionSummary ? (
+                    <div className={styles.repairPanel}>
+                      <strong>Try this correction</strong>
+                      <div className={styles.repairGrid}>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>What got mixed up</p>
+                          <p>{misconceptionSummary.diagnosis}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                          <p>{misconceptionSummary.repair}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>What to notice next</p>
+                          <p>{misconceptionSummary.noticeNext}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               ) : (
                 <div className={styles.feedbackPanel}>

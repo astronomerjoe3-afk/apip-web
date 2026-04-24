@@ -605,6 +605,37 @@
   line-height: 1.7;
 }
 
+.repairPanel {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(96, 126, 181, 0.18);
+}
+
+.repairPanel strong {
+  display: block;
+  color: #10233f;
+}
+
+.repairGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.repairBlock {
+  padding: 0.85rem 0.9rem;
+  border-radius: 16px;
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.repairBlock p:last-child {
+  margin-top: 0.35rem;
+  color: #435266;
+  line-height: 1.7;
+}
+
 .feedbackCorrect {
   border-color: rgba(22, 101, 52, 0.18);
   background: rgba(240, 253, 244, 0.92);
@@ -656,7 +687,8 @@
   .clarityGrid,
   .signalRow,
   .reasoningPanel,
-  .feedbackBreakdown {
+  .feedbackBreakdown,
+  .repairGrid {
     grid-template-columns: 1fr;
   }
 

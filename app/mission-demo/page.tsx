@@ -40,7 +40,7 @@ const whyItWorks = [
     body: "Students meet the graph as a record of motion, not as a shape to memorize.",
   },
   {
-    title: "Misconception repair",
+    title: "Targeted feedback",
     body: "The feedback targets the likely wrong idea instead of only marking the answer wrong.",
   },
   {
@@ -73,7 +73,7 @@ export default function MissionDemoPage() {
             <h1>Show the physics lesson, not just the promise around it.</h1>
             <p className={styles.heroText}>
               This open mission lets students feel Cognispark&apos;s teaching model before signup: visual setup, graph
-              meaning, misconception repair, and a clear next move.
+              meaning, targeted correction, and a clear next move.
             </p>
 
             <div className={styles.heroActions}>

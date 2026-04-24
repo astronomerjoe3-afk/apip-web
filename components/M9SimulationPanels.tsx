@@ -171,7 +171,7 @@ export default function M9SimulationPanels(props: Props) {
         "Opening the route kills the steady current even though charge carriers remain in the metal.",
         "Components transfer energy while the charge continues to circulate.",
       ],
-      "This board keeps the route condition and the current equality visible together, which is the quickest way to block the 'current gets used up' misconception.",
+      "This board keeps the route condition and the current equality visible together, which is the quickest way to correct the idea that current gets used up.",
     );
   }
 

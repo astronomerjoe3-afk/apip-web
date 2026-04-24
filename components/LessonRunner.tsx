@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
+import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
 import MeasurementInstrumentTour from "./MeasurementInstrumentTour";
 import MeasurementReportLab from "./MeasurementReportLab";
@@ -530,6 +531,8 @@ type ConceptGateFeedbackItem = {
   question_id: string;
   is_correct: boolean;
   explanation: string;
+  misconception_tag?: string;
+  teaching_focus?: string;
 };
 
 type ConceptGateStagePayload = {
@@ -580,6 +583,8 @@ type MasteryFeedbackItem = {
   prompt?: string;
   is_correct: boolean;
   explanation?: string;
+  misconception_tag?: string;
+  teaching_focus?: string;
 };
 
 type MasteryResult = {
@@ -925,6 +930,46 @@ function AssessmentFeedbackBreakdown({ cue }: { cue: QuestionReasoningCue }) {
         <p className="font-semibold text-slate-800 normal-case">Exam move</p>
         <p className="mt-1 leading-6 normal-case">{cue.examMove}</p>
       </div>
+    </div>
+  );
+}
+
+function MisconceptionRepairPanel({
+  tag,
+  teachingFocus,
+}: {
+  tag?: string;
+  teachingFocus?: string;
+}) {
+  const summary = misconceptionSummaryForTag(tag);
+
+  if (!summary && !teachingFocus) {
+    return null;
+  }
+
+  return (
+    <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50/80 p-4">
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-800">Try this correction</p>
+      {summary ? (
+        <div className="mt-3 grid gap-3 md:grid-cols-3">
+          <div>
+            <p className="font-semibold text-slate-800 normal-case">What got mixed up</p>
+            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.title}</p>
+          </div>
+          <div>
+            <p className="font-semibold text-slate-800 normal-case">Why that reasoning breaks</p>
+            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.diagnosis}</p>
+          </div>
+          <div>
+            <p className="font-semibold text-slate-800 normal-case">What to notice next</p>
+            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.repair}</p>
+            <p className="mt-2 leading-6 text-slate-600 normal-case">{summary.noticeNext}</p>
+          </div>
+        </div>
+      ) : null}
+      {!summary && teachingFocus ? (
+        <p className="mt-3 leading-6 text-slate-700 normal-case">{normalizeAssessmentText(normalizeTeachingFocusText(teachingFocus))}</p>
+      ) : null}
     </div>
   );
 }
@@ -1438,6 +1483,12 @@ export default function LessonRunner({
               <span className="font-medium">Key idea:</span> {normalizedTeachingFocus}
             </p>
           ) : null}
+          {item.is_correct ? null : (
+            <MisconceptionRepairPanel
+              tag={item.misconception_tag}
+              teachingFocus={item.teaching_focus}
+            />
+          )}
         </div>
       );
     };
@@ -2052,7 +2103,17 @@ export default function LessonRunner({
                 correct={item.is_correct}
                 title={`Check ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
                 body={normalizeAssessmentText(item.explanation)}
-                extra={<AssessmentFeedbackBreakdown cue={cue} />}
+                extra={
+                  <div className="space-y-3">
+                    <AssessmentFeedbackBreakdown cue={cue} />
+                    {item.is_correct ? null : (
+                      <MisconceptionRepairPanel
+                        tag={item.misconception_tag}
+                        teachingFocus={item.teaching_focus}
+                      />
+                    )}
+                  </div>
+                }
               />
             );
           })}
@@ -4247,7 +4308,17 @@ export default function LessonRunner({
                 correct={item.is_correct}
                 title={`Question ${index + 1}: ${item.is_correct ? "Correct" : "Needs attention"}`}
                 body={masteryFeedbackBody(item, runner.lesson_title)}
-                extra={<AssessmentFeedbackBreakdown cue={cue} />}
+                extra={
+                  <div className="space-y-3">
+                    <AssessmentFeedbackBreakdown cue={cue} />
+                    {item.is_correct ? null : (
+                      <MisconceptionRepairPanel
+                        tag={item.misconception_tag}
+                        teachingFocus={item.teaching_focus}
+                      />
+                    )}
+                  </div>
+                }
               />
             );
           })}

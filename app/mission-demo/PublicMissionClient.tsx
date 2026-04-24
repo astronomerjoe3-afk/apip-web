@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 
+import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
 import styles from "./missionDemo.module.css";
 
 type QuestionKey = "pauseSegment" | "fastestSegment" | "distanceAtSeven";
@@ -10,6 +11,7 @@ type MissionOption = {
   value: string;
   label: string;
   feedback: string;
+  misconceptionTag?: string;
 };
 
 type MissionQuestion = {
@@ -78,6 +80,7 @@ const QUESTIONS: MissionQuestion[] = [
         value: "A",
         label: "Segment A",
         feedback: "Not quite. Segment A slopes upward, so the rover is still moving away from base.",
+        misconceptionTag: "flat_line_time_confusion",
       },
       {
         value: "B",
@@ -88,6 +91,7 @@ const QUESTIONS: MissionQuestion[] = [
         value: "C",
         label: "Segment C",
         feedback: "Close, but Segment C slopes downward. That means the rover is moving back toward base.",
+        misconceptionTag: "flat_line_time_confusion",
       },
     ],
   },
@@ -113,16 +117,19 @@ const QUESTIONS: MissionQuestion[] = [
         value: "B",
         label: "Segment B",
         feedback: "A flat segment means zero speed, so it cannot be the fastest part.",
+        misconceptionTag: "height_vs_slope_confusion",
       },
       {
         value: "C",
         label: "Segment C",
         feedback: "Segment C is moving, but its slope is gentler than Segment A, so it is slower.",
+        misconceptionTag: "height_vs_slope_confusion",
       },
       {
         value: "same",
         label: "They are all the same",
         feedback: "The graph says otherwise. Comparing slope is the key move here.",
+        misconceptionTag: "height_vs_slope_confusion",
       },
     ],
   },
@@ -143,6 +150,7 @@ const QUESTIONS: MissionQuestion[] = [
         value: "12",
         label: "12 m",
         feedback: "That is the distance at 8 seconds, not at 7 seconds.",
+        misconceptionTag: "distance_time_graph_error",
       },
       {
         value: "16",
@@ -153,11 +161,13 @@ const QUESTIONS: MissionQuestion[] = [
         value: "20",
         label: "20 m",
         feedback: "A common trap. The graph is dropping by 4 m each second on Segment C, so at 7 s the distance is 16 m.",
+        misconceptionTag: "distance_time_graph_error",
       },
       {
         value: "28",
         label: "28 m",
         feedback: "The rover never reaches 28 m on this graph. The maximum distance shown is 24 m.",
+        misconceptionTag: "height_vs_slope_confusion",
       },
     ],
   },
@@ -242,7 +252,7 @@ export default function PublicMissionClient() {
         <h2>Read a motion graph like a record of what really happened.</h2>
         <p>
           A rover leaves base, waits, then comes back. In the full platform, Cognispark would unpack this with visuals,
-          guided questions, misconception checks, and teacher-ready follow-through. This public mission shows that logic in miniature.
+          guided questions, targeted corrections, and teacher-ready follow-through. This public mission shows that logic in miniature.
         </p>
       </div>
 
@@ -443,6 +453,10 @@ export default function PublicMissionClient() {
               const selectedAnswer = answers[question.key];
               const selectedOption = question.options.find((option) => option.value === selectedAnswer);
               const answeredCorrectly = selectedAnswer === question.answer;
+              const misconceptionSummary =
+                !answeredCorrectly && selectedOption?.misconceptionTag
+                  ? misconceptionSummaryForTag(selectedOption.misconceptionTag)
+                  : null;
 
               return (
                 <article key={question.key} className={styles.questionCard}>
@@ -509,6 +523,25 @@ export default function PublicMissionClient() {
                           <p>{question.temptingWrong}</p>
                         </div>
                       </div>
+                      {misconceptionSummary ? (
+                        <div className={styles.repairPanel}>
+                          <strong>Try this correction</strong>
+                          <div className={styles.repairGrid}>
+                            <div className={styles.repairBlock}>
+                              <p className={styles.reasoningLabel}>What got mixed up</p>
+                              <p>{misconceptionSummary.diagnosis}</p>
+                            </div>
+                            <div className={styles.repairBlock}>
+                              <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                              <p>{misconceptionSummary.repair}</p>
+                            </div>
+                            <div className={styles.repairBlock}>
+                              <p className={styles.reasoningLabel}>What to notice next</p>
+                              <p>{misconceptionSummary.noticeNext}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
                     </div>
                   ) : null}
                 </article>
@@ -524,7 +557,7 @@ export default function PublicMissionClient() {
                 : "The key move is to read line shape as motion meaning, not as picture matching."}
             </h3>
             <p>
-              In the full platform, this is where Cognispark would chain the graph idea into worked examples, misconception repair, and the next module lesson.
+              In the full platform, this is where Cognispark would chain the graph idea into worked examples, targeted correction, and the next module lesson.
             </p>
           </div>
         </div>

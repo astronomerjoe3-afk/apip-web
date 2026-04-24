@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
 import M2SimulationPanels from "../../components/M2SimulationPanels";
 import styles from "../graph-lab/graphLab.module.css";
 
@@ -12,6 +13,7 @@ type ToolOption = {
   value: string;
   label: string;
   feedback: string;
+  misconceptionTag?: string;
 };
 
 type ToolCheckpoint = {
@@ -98,12 +100,14 @@ const TOOLS: ToolDefinition[] = [
           label: "The craft must stop immediately.",
           feedback:
             "That is the classic trap. Stopping would require the velocity to change, which needs a non-zero resultant force.",
+          misconceptionTag: "zero_resultant_zero_motion",
         },
         {
           value: "speed-up",
           label: "The craft must speed up because two forces are acting.",
           feedback:
             "Not if those forces balance. What matters for the motion change is the Master Arrow, not the force count alone.",
+          misconceptionTag: "zero_resultant_zero_motion",
         },
       ],
     },
@@ -152,12 +156,14 @@ const TOOLS: ToolDefinition[] = [
           label: "Because they happen at different times.",
           feedback:
             "They happen together. The reason they do not cancel is that they act on different objects, not different moments.",
+          misconceptionTag: "third_law_cancellation",
         },
         {
           value: "bigger-mass",
           label: "Because the heavier object keeps the bigger force.",
           feedback:
             "Mass changes acceleration, not the force equality in a third-law pair. The key point is still which object each force acts on.",
+          misconceptionTag: "third_law_cancellation",
         },
       ],
     },
@@ -206,12 +212,14 @@ const TOOLS: ToolDefinition[] = [
           label: "Move the push closer to the pivot line.",
           feedback:
             "That does the opposite. A force through the pivot gives no turning effect because the perpendicular reach falls to zero.",
+          misconceptionTag: "torque_reach_confusion",
         },
         {
           value: "same-reach",
           label: "Keep the same reach and only rename the force as torque.",
           feedback:
             "Torque is not just a new label. It changes when force or perpendicular distance changes.",
+          misconceptionTag: "torque_reach_confusion",
         },
       ],
     },
@@ -260,12 +268,14 @@ const TOOLS: ToolDefinition[] = [
           label: "The object is tall, so it must tip automatically.",
           feedback:
             "Height can matter, but height alone does not decide stability. The key check is still where the line of action lands.",
+          misconceptionTag: "stability_line_of_action",
         },
         {
           value: "heavy-alone",
           label: "The object becomes heavier, so it must tip automatically.",
           feedback:
             "Weight size matters for loads, but tipping still depends on the line of action relative to the support zone.",
+          misconceptionTag: "stability_line_of_action",
         },
       ],
     },
@@ -307,6 +317,10 @@ export default function ForceSystemBuilderClient() {
   const activeAnswer = answers[activeTool.key];
   const activeOption = activeTool.checkpoint.options.find((option) => option.value === activeAnswer) || null;
   const checkpointSolved = activeAnswer === activeTool.checkpoint.answer;
+  const misconceptionSummary =
+    !checkpointSolved && activeOption?.misconceptionTag
+      ? misconceptionSummaryForTag(activeOption.misconceptionTag)
+      : null;
   const activeToolIndex = TOOLS.findIndex((tool) => tool.key === activeTool.key) + 1;
   const solvedCount = useMemo(
     () => TOOLS.filter((tool) => answers[tool.key] === tool.checkpoint.answer).length,
@@ -565,6 +579,25 @@ export default function ForceSystemBuilderClient() {
                       <p>{activeTool.clarity.examCheck}</p>
                     </div>
                   </div>
+                  {misconceptionSummary ? (
+                    <div className={styles.repairPanel}>
+                      <strong>Try this correction</strong>
+                      <div className={styles.repairGrid}>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>What got mixed up</p>
+                          <p>{misconceptionSummary.diagnosis}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                          <p>{misconceptionSummary.repair}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>What to notice next</p>
+                          <p>{misconceptionSummary.noticeNext}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               ) : (
                 <div className={styles.feedbackPanel}>

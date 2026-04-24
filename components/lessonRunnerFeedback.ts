@@ -3,6 +3,7 @@ export type DiagnosticFeedbackLike = {
   correct_answer: string | string[];
   is_correct: boolean;
   teaching_focus?: string;
+  misconception_tag?: string;
 };
 
 const GENERIC_RETRY_EXPLANATIONS = new Set([

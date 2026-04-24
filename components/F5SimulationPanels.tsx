@@ -258,7 +258,7 @@ export default function F5SimulationPanels({
         {metricCard("Orbit side", juneLike ? "June-like" : "December-like", "border-sky-200 bg-sky-50 text-sky-900")}
         {metricCard("Sunward hemisphere", hemisphere, "border-emerald-200 bg-emerald-50 text-emerald-900")}
         {metricCard("Main cause", tilt > 0 ? "tilt + sunlight angle" : "tilt removed", "border-violet-200 bg-violet-50 text-violet-900")}
-        {metricCard("Misconception check", "not simple distance", "border-amber-200 bg-amber-50 text-amber-900")}
+        {metricCard("Key reminder", "not simple distance", "border-amber-200 bg-amber-50 text-amber-900")}
       </>,
       ["Keep axis direction fixed in space.", "Compare opposite hemispheres.", "Use sunlight angle instead of close-far distance."],
       "The seasons board keeps tilt and orbit position together so opposite seasonal patterns stay easy to explain.",

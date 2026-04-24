@@ -10,6 +10,7 @@ import { apipGet, apipPatch, apipPost } from "../../lib/apipApi";
 import { paidAccessRequiresSecurityUpgrade, securityActionLabel } from "../../lib/accountSecurity";
 import { useAuth } from "../../lib/auth";
 import { getClientRole, isAcademicLeadRole, isInstitutionStaffRole, type Role } from "../../lib/authRouting";
+import type { MisconceptionRepairSummary } from "../../lib/misconceptionRepair";
 import { applyCurriculumModuleMeta } from "../../lib/moduleCurriculum";
 import { readSessionUser, signOutEverywhere, type SessionUser } from "../../lib/sessionClient";
 import { shareLink } from "../../lib/shareLink";
@@ -165,6 +166,7 @@ type ReviewQueueItem = {
   review_count: number;
   last_score?: number | null;
   misconception_tags: string[];
+  misconception_summaries?: MisconceptionRepairSummary[];
 };
 
 type ProgressSummaryResponse = {
@@ -173,6 +175,7 @@ type ProgressSummaryResponse = {
   next_review_utc?: string | null;
   review_queue: ReviewQueueItem[];
   top_misconception_tags: string[];
+  top_misconception_summaries?: MisconceptionRepairSummary[];
 };
 
 type ModuleGroupKey = "foundation" | "corePhysics" | "advancedPhysics";
@@ -336,20 +339,16 @@ function mapProfileToSessionUser(profile: ProfileResponse | null): SessionUser |
   };
 }
 
-function formatConceptTag(tag: string): string {
-  return String(tag || "")
-    .replace(/^concept_/, "")
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (match) => match.toUpperCase());
-}
-
 function reviewLabelForItem(item: ReviewQueueItem | null): string {
   if (!item) {
     return "Review the next lesson that needs reinforcement.";
   }
 
   const lessonTitle = String(item.title || "").trim() || item.lesson_id;
-  return `${lessonTitle} in ${item.module_id}`;
+  const focus = item.misconception_summaries?.[0]?.title || "";
+  return focus
+    ? `${lessonTitle} in ${item.module_id} - ${focus}`
+    : `${lessonTitle} in ${item.module_id}`;
 }
 
 export default function StudentHomePage() {
@@ -800,14 +799,15 @@ export default function StudentHomePage() {
   const reviewDueCount = progressSummary?.review_due_count || 0;
   const nextReviewItem = reviewQueue[0] || null;
   const nextReviewRoute = nextReviewItem?.route || null;
-  const reviewFocusTags = (progressSummary?.top_misconception_tags?.length
-    ? progressSummary.top_misconception_tags
-    : nextReviewItem?.misconception_tags || [])
-    .slice(0, 3)
-    .map(formatConceptTag);
-  const reviewFocusLabel = reviewFocusTags.length > 0
-    ? `Focus: ${reviewFocusTags.join(", ")}`
+  const reviewFocusSummaries = (progressSummary?.top_misconception_summaries?.length
+    ? progressSummary.top_misconception_summaries
+    : nextReviewItem?.misconception_summaries || []);
+  const reviewFocusLabel = reviewFocusSummaries.length > 0
+    ? `Focus: ${reviewFocusSummaries.map((summary) => summary.title).slice(0, 2).join(", ")}`
     : "Focus: revisit the ideas that were least stable on the last mastery check.";
+  const reviewFocusSubtle = reviewFocusSummaries.length > 0
+    ? reviewFocusSummaries[0]?.repair || reviewFocusLabel
+    : reviewFocusLabel;
   const reviewCardValue = reviewDueCount > 0
     ? `${reviewDueCount} lesson${reviewDueCount === 1 ? "" : "s"} due for spaced review`
     : nextReviewItem
@@ -1078,7 +1078,7 @@ export default function StudentHomePage() {
             reviewDueCount > 0 ? "Keep the concept fresh" : "Next review on deck",
             <>
               <div>{reviewLabelForItem(nextReviewItem)}</div>
-              <div className={styles.bannerSubtle}>{reviewFocusLabel}</div>
+              <div className={styles.bannerSubtle}>{reviewFocusSubtle}</div>
             </>,
             <button
               onClick={() => router.push(nextReviewRoute)}
