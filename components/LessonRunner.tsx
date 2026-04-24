@@ -1580,26 +1580,32 @@ export default function LessonRunner({
     const seenMediaImageUrls = new Set<string>();
     const normalizedTeachingFocus = (payload.teaching_focus ?? []).map(normalizeTeachingFocusText);
     const scaffoldFocusCards = payload.teaching_focus_cards?.slice(0, 4) ?? [];
-
-    const introCount = payload.intro || payload.lesson_introduction?.length ? 1 : 0;
-    const coreConceptCount = normalizedTeachingFocus.length ? 1 : 0;
-    const tableCount = payload.reference_tables?.length ?? 0;
-    const mediaCount = payload.media_cards?.length ?? 0;
-    const sectionCount = payload.sections.length;
-    const totalScaffoldActivities = introCount + coreConceptCount + tableCount + mediaCount + sectionCount;
-    const clampedScaffoldStepIndex = Math.max(0, Math.min(scaffoldStepIndex, Math.max(totalScaffoldActivities - 1, 0)));
-    const coreConceptStart = introCount;
-    const tableStart = coreConceptStart + coreConceptCount;
-    const mediaStart = tableStart + tableCount;
-    const sectionStart = mediaStart + mediaCount;
-    const isIntroStep = introCount === 1 && clampedScaffoldStepIndex === 0;
-    const isCoreConceptStep = coreConceptCount === 1 && clampedScaffoldStepIndex === coreConceptStart;
-    const isTableStep = clampedScaffoldStepIndex >= tableStart && clampedScaffoldStepIndex < mediaStart;
-    const isMediaStep = clampedScaffoldStepIndex >= mediaStart && clampedScaffoldStepIndex < sectionStart;
-    const isSectionStep = clampedScaffoldStepIndex >= sectionStart;
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
       ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
       : normalizedTeachingFocus.slice(0, 4);
+    const scaffoldClarityCards = buildClarityCards([
+      createClarityCard("What is happening", firstClarityText(payload.title, scaffoldFocusItems[0])),
+      createClarityCard("What to notice", scaffoldFocusItems[0]),
+      createClarityCard("What changes", scaffoldFocusItems[1] ?? "The examples change one feature at a time so the concept stays readable."),
+      createClarityCard("What stays the same", scaffoldFocusItems[2] ?? "The quantity definitions stay fixed while the examples change."),
+      createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not rush to a formula before naming what is changing and what is staying the same.")),
+    ]);
+    const introCount = payload.intro || payload.lesson_introduction?.length ? 1 : 0;
+    const clarityCount = scaffoldClarityCards.length ? 1 : 0;
+    const tableCount = payload.reference_tables?.length ?? 0;
+    const mediaCount = payload.media_cards?.length ?? 0;
+    const sectionCount = payload.sections.length;
+    const totalScaffoldActivities = introCount + clarityCount + tableCount + mediaCount + sectionCount;
+    const clampedScaffoldStepIndex = Math.max(0, Math.min(scaffoldStepIndex, Math.max(totalScaffoldActivities - 1, 0)));
+    const clarityStart = introCount;
+    const tableStart = clarityStart + clarityCount;
+    const mediaStart = tableStart + tableCount;
+    const sectionStart = mediaStart + mediaCount;
+    const isIntroStep = introCount === 1 && clampedScaffoldStepIndex === 0;
+    const isClarityStep = clarityCount === 1 && clampedScaffoldStepIndex === clarityStart;
+    const isTableStep = clampedScaffoldStepIndex >= tableStart && clampedScaffoldStepIndex < mediaStart;
+    const isMediaStep = clampedScaffoldStepIndex >= mediaStart && clampedScaffoldStepIndex < sectionStart;
+    const isSectionStep = clampedScaffoldStepIndex >= sectionStart;
     const activeTable = isTableStep ? payload.reference_tables?.[clampedScaffoldStepIndex - tableStart] : null;
     const activeMediaCard = isMediaStep ? payload.media_cards?.[clampedScaffoldStepIndex - mediaStart] : null;
     const activeMediaHighlights = activeMediaCard
@@ -1624,15 +1630,6 @@ export default function LessonRunner({
       activeSection?.formula_reference_rows?.[0]?.units_text,
       activeSection?.technical_words?.[0]?.why_it_matters,
     );
-    const scaffoldClarityCards = isIntroStep
-      ? buildClarityCards([
-          createClarityCard("What is happening", firstClarityText(payload.intro, payload.title)),
-          createClarityCard("What to notice", scaffoldFocusItems[0]),
-          createClarityCard("What changes", scaffoldFocusItems[1] ?? "The examples change one feature at a time so the concept stays readable."),
-          createClarityCard("What stays the same", scaffoldFocusItems[2] ?? "The quantity definitions stay fixed while the examples change."),
-          createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not rush to a formula before naming what is changing and what is staying the same.")),
-        ])
-      : [];
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -1664,20 +1661,7 @@ export default function LessonRunner({
         </div>
         ) : null}
 
-        {isCoreConceptStep ? (
-          <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
-            <div className="rounded-2xl bg-slate-50 p-5">
-              <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
-                {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
-                  <li key={`${index}-${item}`}>{normalizeLessonDisplayMultiline(item)}</li>
-                ))}
-              </ul>
-            </div>
-            {payload.review_refs?.length ? <p className="mt-4 text-sm text-slate-600">Keep these ideas in view as you move into the worked explanations and examples that follow.</p> : null}
-          </div>
-        ) : null}
-        {isIntroStep && scaffoldClarityCards.length ? scaffoldClarityPanel : null}
+        {isClarityStep ? scaffoldClarityPanel : null}
         {payload.reference_tables?.length && isTableStep ? (
           <div className="lesson-display-deck">
             {payload.reference_tables.map((table, index) => (
