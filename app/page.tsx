@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import { curriculumModules } from "../lib/moduleCurriculum";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
@@ -156,14 +157,41 @@ const outcomeSignals = [
   },
 ];
 
-const publicProofPoints = [
-  "Real lesson screens instead of abstract promises",
-  "One public mission plus graph, force, and energy tools already playable",
-  "A full Foundation, Core, and Advanced coverage explorer",
-  "Lesson-level review and misconception focus beginning to surface in product",
+const PUBLIC_STARTING_POINTS = 4;
+const PUBLIC_TOOL_CHECKPOINTS = 13;
+
+const publicVerificationChecks = [
+  "Open one public mission and feel a real misconception-repair step before signup.",
+  "Use the Graph Reasoning Lab, Force System Builder, and Energy Ledger Workspace without creating an account.",
+  "Inspect real lesson screens on the homepage instead of relying on abstract promises.",
+  "Open the full Foundation, Core, and Advanced route map and see the breadth of coverage immediately.",
 ];
 
 export default function HomePage() {
+  const routeModuleCount = curriculumModules().length;
+  const measurableProofStats = [
+    {
+      value: String(routeModuleCount),
+      label: "Modules in the live route",
+      detail: "Across Foundation, Core, and Advanced physics.",
+    },
+    {
+      value: String(PUBLIC_STARTING_POINTS),
+      label: "Public no-login starting points",
+      detail: "One mission plus graph, force, and energy tools.",
+    },
+    {
+      value: String(PUBLIC_TOOL_CHECKPOINTS),
+      label: "Interactive tool checkpoints",
+      detail: "Across graph, force, and energy reasoning modes.",
+    },
+    {
+      value: String(proofScreens.length),
+      label: "Real lesson screens shown publicly",
+      detail: "Actual lesson visuals from inside Cognispark.",
+    },
+  ];
+
   return (
     <main className={styles.page}>
       <section className={styles.heroShell}>
@@ -332,20 +360,42 @@ export default function HomePage() {
         <div className={styles.outcomesLead}>
           <div className={styles.outcomesIntro}>
             <p className={styles.sectionEyebrow}>Learning proof</p>
-            <h2>What Cognispark can now show about learning, not just say about it.</h2>
+            <h2>What a visitor can verify about Cognispark right now.</h2>
             <p>
-              A serious physics platform should make its learning loop legible in public. Cognispark is getting there by showing the route from first misunderstanding to guided repair, mastery, and spaced return.
+              The strongest claims on this page are the ones the product can already support in public. These counts and
+              checks are visible today, and they make the platform easier to trust before signup.
             </p>
           </div>
 
           <div className={styles.proofLedger}>
-            <span className={styles.proofLedgerLabel}>Public proof points</span>
-            <ul className={styles.proofLedgerList}>
-              {publicProofPoints.map((point) => (
-                <li key={point}>{point}</li>
+            <span className={styles.proofLedgerLabel}>Measured in the current release</span>
+            <div className={styles.proofMetricGrid}>
+              {measurableProofStats.map((item) => (
+                <article key={item.label} className={styles.proofMetricCard}>
+                  <strong className={styles.proofMetricValue}>{item.value}</strong>
+                  <span className={styles.proofMetricLabel}>{item.label}</span>
+                  <p className={styles.proofMetricDetail}>{item.detail}</p>
+                </article>
               ))}
-            </ul>
+            </div>
           </div>
+        </div>
+
+        <div className={styles.proofChecklist}>
+          <div className={styles.proofChecklistCopy}>
+            <p className={styles.sectionEyebrow}>What to test in under five minutes</p>
+            <h3>Let the product prove the learning loop instead of asking visitors to trust the copy.</h3>
+            <p>
+              The current release is strongest when it gives students and schools something concrete to touch. These
+              are the fastest checks a new visitor can make for themselves.
+            </p>
+          </div>
+
+          <ul className={styles.proofLedgerList}>
+            {publicVerificationChecks.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
         </div>
 
         <div className={styles.outcomeGrid}>
