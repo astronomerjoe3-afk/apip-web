@@ -346,7 +346,7 @@ export default function M14SimulationPanels({
         "The word year appears because it is defined from light traveling for one year.",
         "Astronomy needs large units because cosmic distances are enormous.",
       ],
-      "The ladder turns light-year language into a distance-scale decision instead of a timing misconception.",
+      "The ladder turns light-year language into a distance-scale decision instead of a timing mix-up.",
     );
   }
 

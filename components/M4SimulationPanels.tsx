@@ -383,7 +383,7 @@ export default function M4SimulationPanels({
       </>,
       [
         "Two patches at the same depth in the same resting liquid match even when the vessels look very different.",
-        "The equal-level rule is a direct attack on the shape misconception.",
+        "The equal-level rule directly corrects the common shape mix-up.",
         "The moment one patch moves deeper, the equality breaks for a real physical reason.",
       ],
       "Container outline is not one of the hydrostatic variables. Pressure follows the location in the liquid, so equal depth wins over visual shape.",

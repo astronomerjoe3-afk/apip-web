@@ -28156,7 +28156,13 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
         retryCount,
         submitted: true,
         passed: graded.is_correct === true,
-        feedback: [{ question_id: text(graded.question_id), is_correct: graded.is_correct, explanation: graded.is_correct === true ? "That is right. You have shown the key idea clearly." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.` }],
+        feedback: [{
+          question_id: text(graded.question_id),
+          is_correct: graded.is_correct,
+          explanation: graded.is_correct === true ? "That is right. You have shown the key idea clearly." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
+          misconception_tag: text(graded.misconception_tag),
+          teaching_focus: text(graded.teaching_focus),
+        }],
         microReteach: graded.is_correct === true ? undefined : {
           title: retryCount >= CONCEPT_GATE_MAX_RETRIES ? "Quick refresher" : "Remember this",
           body: normalizeRenderedPhysicsText(text(capsule?.prompt) || text(graded.teaching_focus)),
@@ -28263,6 +28269,8 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
         prompt: text(graded.prompt),
         is_correct: graded.is_correct,
         explanation: graded.is_correct === true ? text(graded.explanation) || "Correct." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
+        misconception_tag: text(graded.misconception_tag),
+        teaching_focus: text(graded.teaching_focus),
       };
     });
     const misconceptionTags = gradedEntries

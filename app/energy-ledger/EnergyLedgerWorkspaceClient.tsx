@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
 import M3SimulationPanels from "../../components/M3SimulationPanels";
 import styles from "../graph-lab/graphLab.module.css";
 
@@ -12,6 +13,7 @@ type WorkspaceOption = {
   value: string;
   label: string;
   feedback: string;
+  misconceptionTag?: string;
 };
 
 type WorkspaceCheckpoint = {
@@ -98,12 +100,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
           label: "The useful gain stays equal to the full input anyway.",
           feedback:
             "Not if part of the input leaks away. The ledger has to shrink the useful side when leak grows.",
+          misconceptionTag: "energy_leak_accounting",
         },
         {
           value: "stores-ignore-leak",
           label: "The stores can still add up to more than the useful gain if the mission is urgent.",
           feedback:
             "That breaks the ledger. Store gains must come from the useful part that remains after leaks are accounted for.",
+          misconceptionTag: "energy_leak_accounting",
         },
       ],
     },
@@ -152,12 +156,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
           label: "Only the height matters once the load is fixed.",
           feedback:
             "That is the shortcut trap. Height matters, but the field strength is part of the physics too.",
+          misconceptionTag: "gravitational_store_factor_confusion",
         },
         {
           value: "motion-only",
           label: "The store changes only if the load is moving faster.",
           feedback:
             "Speed belongs to motion store, not the gravitational store being compared here.",
+          misconceptionTag: "gravitational_store_factor_confusion",
         },
       ],
     },
@@ -206,12 +212,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
           label: "Because work never measures the total transfer in the first place.",
           feedback:
             "Not here. This board uses work as the input hand-off and then separates useful output from losses.",
+          misconceptionTag: "useful_transfer_confusion",
         },
         {
           value: "distance-cancels",
           label: "Because the distance cancels part of the force.",
           feedback:
             "Distance does not cancel force. It helps determine the input hand-off before leak is applied.",
+          misconceptionTag: "useful_transfer_confusion",
         },
       ],
     },
@@ -260,12 +268,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
           label: "Its efficiency must rise too.",
           feedback:
             "Not automatically. Efficiency only changes if the useful fraction changes.",
+          misconceptionTag: "power_efficiency_confusion",
         },
         {
           value: "useful-fraction-falls",
           label: "Its useful fraction must fall because it is faster.",
           feedback:
             "Speed of transfer does not force a lower useful fraction. That is why the board keeps rate and yield separate.",
+          misconceptionTag: "power_efficiency_confusion",
         },
       ],
     },
@@ -314,12 +324,14 @@ const WORKSPACES: WorkspaceDefinition[] = [
           label: "Compare the lift input directly with the gate threshold first.",
           feedback:
             "That skips the whole mission logic. The gate is reached only after efficiency and launch leaks have reshaped the energy.",
+          misconceptionTag: "multi_stage_energy_order",
         },
         {
           value: "final-leak-only",
           label: "Apply only the launch leak and ignore the useful yield stage.",
           feedback:
             "That drops a real stage from the mission. The planner is built to make the chain visible, not to compress it away.",
+          misconceptionTag: "multi_stage_energy_order",
         },
       ],
     },
@@ -362,6 +374,10 @@ export default function EnergyLedgerWorkspaceClient() {
   const activeOption =
     activeWorkspace.checkpoint.options.find((option) => option.value === activeAnswer) || null;
   const checkpointSolved = activeAnswer === activeWorkspace.checkpoint.answer;
+  const misconceptionSummary =
+    !checkpointSolved && activeOption?.misconceptionTag
+      ? misconceptionSummaryForTag(activeOption.misconceptionTag)
+      : null;
   const activeWorkspaceIndex = WORKSPACES.findIndex((workspace) => workspace.key === activeWorkspace.key) + 1;
   const solvedCount = useMemo(
     () => WORKSPACES.filter((workspace) => answers[workspace.key] === workspace.checkpoint.answer).length,
@@ -619,6 +635,25 @@ export default function EnergyLedgerWorkspaceClient() {
                       <p>{activeWorkspace.clarity.examCheck}</p>
                     </div>
                   </div>
+                  {misconceptionSummary ? (
+                    <div className={styles.repairPanel}>
+                      <strong>Try this correction</strong>
+                      <div className={styles.repairGrid}>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>What got mixed up</p>
+                          <p>{misconceptionSummary.diagnosis}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                          <p>{misconceptionSummary.repair}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>What to notice next</p>
+                          <p>{misconceptionSummary.noticeNext}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               ) : (
                 <div className={styles.feedbackPanel}>

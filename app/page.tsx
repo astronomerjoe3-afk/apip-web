@@ -124,7 +124,7 @@ const sampleMission = [
   },
   {
     step: "02",
-    title: "Stress the misconception",
+    title: "Surface the weak idea",
     body: "Call out the trap explicitly so students know what not to confuse while they learn the right mental model.",
   },
   {
@@ -141,9 +141,9 @@ const outcomeSignals = [
     body: "Cognispark does not assume the learner is blank or fully ready. It checks the opening picture first so the teaching can respond to the real gap.",
   },
   {
-    label: "Misconception repair",
-    title: "Weak ideas are tagged and turned into visible review focus instead of disappearing into a score.",
-    body: "A mastery miss can now carry forward the underlying concept that needs repair, so the next review step is tied to a real weakness, not just a generic retry.",
+    label: "Targeted correction",
+    title: "Weak ideas stay visible and become the next useful review focus instead of disappearing into a score.",
+    body: "A mastery miss can now carry forward the underlying concept that needs repair, so the next review step stays tied to a real weakness, not just a generic retry.",
   },
   {
     label: "Spaced return",
@@ -161,7 +161,7 @@ const PUBLIC_STARTING_POINTS = 4;
 const PUBLIC_TOOL_CHECKPOINTS = 13;
 
 const publicVerificationChecks = [
-  "Open one public mission and feel a real misconception-repair step before signup.",
+  "Open one public mission and feel a real targeted-correction step before signup.",
   "Use the Graph Reasoning Lab, Force System Builder, and Energy Ledger Workspace without creating an account.",
   "Inspect real lesson screens on the homepage instead of relying on abstract promises.",
   "Open the full Foundation, Core, and Advanced route map and see the breadth of coverage immediately.",
@@ -325,7 +325,7 @@ export default function HomePage() {
             <p className={styles.sectionEyebrow}>Sample mission preview</p>
             <h3>What one strong mission should feel like inside Cognispark.</h3>
             <p>
-              The fastest way to prove quality is to show one concrete mission arc from concept setup to misconception repair to mastery.
+              The fastest way to prove quality is to show one concrete mission arc from concept setup to targeted correction to mastery.
             </p>
           </div>
 
@@ -413,7 +413,7 @@ export default function HomePage() {
             <p className={styles.sectionEyebrow}>What improves for the learner</p>
             <h3>Physics starts to feel cumulative instead of fragile.</h3>
             <p>
-              When misconceptions stay visible, review returns at the right time, and the platform remembers where the student left off, each lesson has a better chance of becoming lasting understanding instead of one-off performance.
+              When weak ideas stay visible, review returns at the right time, and the platform remembers where the student left off, each lesson has a better chance of becoming lasting understanding instead of one-off performance.
             </p>
           </div>
 

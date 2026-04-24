@@ -268,7 +268,7 @@ export default function M6SimulationPanels({
         "Metals conduct well because electrons help the relay.",
         "The solid stays in place while the energy passes through it.",
       ],
-      "This board makes conduction look like a contact relay rather than a flowing-solid story, which helps block the common bulk-motion misconception.",
+      "This board makes conduction look like a contact relay rather than a flowing-solid story, which helps correct the common bulk-motion mix-up.",
     );
   }
 
