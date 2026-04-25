@@ -1745,8 +1745,353 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1"
+      lessonId === "M1_L1" || lessonId === "F1_L1"
         ? (() => {
+            if (lessonId === "F1_L1") {
+              if (isTableStep && activeTableIndex === 0) {
+                return {
+                  id: `f1-l1-table-${activeTableIndex}`,
+                  badge: "Lab bench",
+                  title: "Lock the measurement language first",
+                  scenario:
+                    "The reference board is live, but the crew keeps mixing up quantities, units, and sub-units. You need the setup note that keeps the board usable.",
+                  prompt: "Choose the note you pin to the board.",
+                  options: [
+                    {
+                      value: "match_quantity_unit",
+                      label: "Match each quantity to its unit and common sub-units before you compare any numbers.",
+                      feedback:
+                        "Exactly. Once the quantity and unit are matched, the rest of the lesson has a clear measurement language to work with.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "units_are_quantities",
+                      label: "Treat the unit itself as the quantity, because m, s, and kg already tell the whole story.",
+                      feedback:
+                        "The unit alone is not the quantity. Length, time, and mass are quantities; metre, second, and kilogram are the agreed units used to measure them.",
+                    },
+                    {
+                      value: "skip_subunits",
+                      label: "Ignore sub-units until later, because only the base unit matters in real measurements.",
+                      feedback:
+                        "Sub-units matter whenever the object is small. They keep the number readable without changing the physical quantity.",
+                    },
+                  ],
+                  successLabel: "Board aligned. The lesson now starts with clean measurement language.",
+                  retryLabel: "That would blur the language before the lesson even begins.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f1-l1-unit-ladder",
+                  badge: "Scale ladder",
+                  title: "Send the unit-swap rule",
+                  scenario:
+                    "The crew is staring at the unit ladder. You can post one rule before they start converting values blindly.",
+                  prompt: "Choose the rule to post.",
+                  options: [
+                    {
+                      value: "smaller_unit_more_numbers",
+                      label: "When the unit gets smaller, the number usually gets larger, but the physical quantity stays the same.",
+                      feedback:
+                        "Exactly. Smaller units need more copies of themselves, so the written number grows while the actual length stays fixed.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "smaller_unit_smaller_number",
+                      label: "When the unit gets smaller, the number should also get smaller because the object has not changed.",
+                      feedback:
+                        "The object does stay the same, but that is why the number usually grows in a smaller unit: it takes more small units to describe the same quantity.",
+                    },
+                    {
+                      value: "prefix_changes_quantity",
+                      label: "Changing the prefix changes the physical quantity itself, so each conversion describes a new measurement.",
+                      feedback:
+                        "The physical quantity stays fixed. Only the unit size and the written number change.",
+                    },
+                  ],
+                  successLabel: "Rule sent. The crew can now climb the ladder safely.",
+                  retryLabel: "That rule would make every later conversion shakier.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 1) {
+                return {
+                  id: "f1-l1-unit-meaning",
+                  badge: "Report check",
+                  title: "Attach the missing meaning",
+                  scenario:
+                    "A trainee has written the number 5 on the board and thinks the measurement is complete. You need the line that fixes the report.",
+                  prompt: "Choose the correction you send.",
+                  options: [
+                    {
+                      value: "number_needs_unit",
+                      label: "The number is incomplete by itself; the unit tells what quantity and scale the 5 belongs to.",
+                      feedback:
+                        "Exactly. 5 m, 5 s, and 5 kg are very different statements because the unit carries the physical meaning.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "context_enough",
+                      label: "If the context feels obvious, the unit can be left off because the number still says enough.",
+                      feedback:
+                        "That leaves the measurement unsafe. Physics needs the unit attached so the reader knows the quantity and scale.",
+                    },
+                    {
+                      value: "unit_only_final",
+                      label: "The unit only matters in the final line of a calculation, not while the lesson idea is being built.",
+                      feedback:
+                        "The unit matters from the start. It is part of the measurement, not decoration added at the end.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The report now says something real.",
+                  retryLabel: "That would leave the number floating without meaning.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f1-l1-fix-ideas",
+                    badge: "Repair desk",
+                    title: "Stop the shaky lab note",
+                    scenario:
+                      "A learner has written a bare number in the lab book and moved on. You get one note to fix the mistake before the rest of the page is copied.",
+                    prompt: "Choose the note you send back.",
+                    options: [
+                      {
+                        value: "number_and_unit",
+                        label: "A scientific measurement is incomplete until the number and the unit stay together.",
+                        feedback:
+                          "Exactly. Without the unit, the number does not tell the reader what quantity or scale is being reported.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "number_enough",
+                        label: "A bare number is fine as long as the student remembers what it meant while answering.",
+                        feedback:
+                          "That does not protect the measurement. The unit has to travel with the number so another reader can interpret it correctly.",
+                      },
+                      {
+                        value: "unit_later",
+                        label: "Leave the unit until the worked example, because the early lesson is only about the number.",
+                        feedback:
+                          "The unit matters from the first line. It is part of the measurement itself, not something to add later.",
+                      },
+                    ],
+                    successLabel: "Good repair. The lab note is safe again.",
+                    retryLabel: "That would let the weak measurement habit survive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f1-l1-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the measurement rule",
+                    scenario:
+                      "Quest Control wants one short rule the whole team can repeat while working with units and prefixes.",
+                    prompt: "Choose the rule to post.",
+                    options: [
+                      {
+                        value: "unit_changes_number_not_quantity",
+                        label: "Changing the unit changes the written number, but not the physical quantity being measured.",
+                        feedback:
+                          "Exactly. That is the anchor idea for the whole lesson.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "bigger_number_bigger_quantity",
+                        label: "A bigger number always means a bigger physical quantity, even if the unit changes.",
+                        feedback:
+                          "Unit choice can make the number bigger or smaller without changing the quantity itself.",
+                      },
+                      {
+                        value: "unit_is_decoration",
+                        label: "The unit is only there to make the answer look scientific after the main idea is already clear.",
+                        feedback:
+                          "The unit is part of the main idea. It tells the reader what quantity and scale the number belongs to.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The whole room now has the same anchor idea.",
+                    retryLabel: "That would point the room toward the wrong rule.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "technical words") {
+                  return {
+                    id: "f1-l1-technical-words",
+                    badge: "Term desk",
+                    title: "Sort the measurement vocabulary",
+                    scenario:
+                      "The crew has the right examples, but their words are drifting. You need the vocabulary card that keeps quantity and unit separate.",
+                    prompt: "Choose the card to post.",
+                    options: [
+                      {
+                        value: "quantity_vs_unit",
+                        label: "A quantity names what is being measured, and a unit names the agreed size used to measure it.",
+                        feedback:
+                          "Exactly. That keeps the language clean before prefixes and conversions are added.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "same_thing",
+                        label: "Quantity and unit mean the same thing as long as the example is simple enough.",
+                        feedback:
+                          "They do different jobs. Quantity tells what is being measured; unit tells the measurement scale.",
+                      },
+                      {
+                        value: "prefix_is_quantity",
+                        label: "A prefix is the quantity, because milli and kilo already say what is being measured.",
+                        feedback:
+                          "A prefix only changes the size of the unit. It does not name the physical quantity itself.",
+                      },
+                    ],
+                    successLabel: "Vocabulary sorted. The crew can speak cleanly now.",
+                    retryLabel: "That wording would muddle the basic terms again.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "technical words continued") {
+                  return {
+                    id: "f1-l1-technical-words-continued",
+                    badge: "Term relay",
+                    title: "Finish the prefix handoff",
+                    scenario:
+                      "A second glossary card is about to go up. It needs to explain what sub-units actually do without repeating the first card badly.",
+                    prompt: "Choose the follow-up line.",
+                    options: [
+                      {
+                        value: "subunits_for_scale",
+                        label: "Sub-units keep the same quantity but use smaller measurement chunks, which makes small objects easier to report sensibly.",
+                        feedback:
+                          "Exactly. That extends the vocabulary into the real reason sub-units exist.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "subunits_change_object",
+                        label: "Sub-units are for physically smaller objects, so changing the unit also changes the object being measured.",
+                        feedback:
+                          "The object stays the same. Only the unit size changes so the report matches the scale better.",
+                      },
+                      {
+                        value: "always_base_unit",
+                        label: "Sub-units are mostly optional because every serious report should return to the base unit immediately.",
+                        feedback:
+                          "Base units are important, but sensible reporting often uses sub-units so the number stays readable.",
+                      },
+                    ],
+                    successLabel: "Prefix handoff complete.",
+                    retryLabel: "That follow-up would blur what sub-units actually do.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "quantities, units, and sub-units") {
+                  return {
+                    id: "f1-l1-quantities-units-subunits",
+                    badge: "Report desk",
+                    title: "Choose the readable report",
+                    scenario:
+                      "The team has measured a notebook and a coin. You need the report line that keeps both values readable without changing the physical sizes.",
+                    prompt: "Choose the report to send.",
+                    options: [
+                      {
+                        value: "sensible_units",
+                        label: "Report the notebook width in centimetres and the coin thickness in millimetres so the numbers match the object scale.",
+                        feedback:
+                          "Exactly. Sensible units keep the quantity fixed while making the measurement easy to read and compare.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "smallest_unit_always",
+                        label: "Always choose the smallest possible unit so the numbers become as large as they can be.",
+                        feedback:
+                          "Very large numbers can become awkward. The goal is readable reporting, not just making the number bigger.",
+                      },
+                      {
+                        value: "base_unit_only",
+                        label: "Always use the base unit even when it makes the number awkward, because prefixes weaken the measurement.",
+                        feedback:
+                          "Prefixes do not weaken the measurement. They help the report fit the scale of the object.",
+                      },
+                    ],
+                    successLabel: "Report chosen. The measurements now fit the objects properly.",
+                    retryLabel: "That choice would make the report harder to read than it needs to be.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "choose units and tools wisely") {
+                  return {
+                    id: "f1-l1-choose-units-tools",
+                    badge: "Instrument bay",
+                    title: "Assign the right tool and unit",
+                    scenario:
+                      "Three jobs just came in: desk length, object mass, and coin thickness. You need the setup that matches each job with a sensible tool and unit.",
+                    prompt: "Choose the setup order.",
+                    options: [
+                      {
+                        value: "match_scale_and_tool",
+                        label: "Use a metre rule for desk length, a balance for mass, and a caliper or micrometer for coin thickness, then report each in a sensible unit.",
+                        feedback:
+                          "Exactly. Tool choice and unit choice should both match the scale of the job.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "one_tool_all_jobs",
+                        label: "Use the metre rule for everything, then fix the problem by converting the values carefully afterward.",
+                        feedback:
+                          "A later conversion cannot rescue a poor tool choice. The instrument has to suit the job from the start.",
+                      },
+                      {
+                        value: "base_unit_for_all",
+                        label: "Choose any tool you want, as long as every final answer ends up written in the base unit.",
+                        feedback:
+                          "The final unit matters, but the first priority is matching the tool and unit to the scale of the measurement.",
+                      },
+                    ],
+                    successLabel: "Bay assigned. Each job now has the right setup.",
+                    retryLabel: "That setup would make at least one measurement weaker than it needs to be.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f1-l1-analogy",
+                    badge: "Story relay",
+                    title: "Pick the analogy that keeps the unit idea clean",
+                    scenario:
+                      "The team wants an analogy that explains prefixes without making students think the quantity itself changes.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "money_analogy",
+                        label: "Treat units like money sizes: dollars, cents, and thousands are all money, but the unit size changes how many are needed.",
+                        feedback:
+                          "Exactly. That keeps the quantity fixed while showing why the number changes with unit size.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "different_objects",
+                        label: "Treat each unit as a different object entirely, because changing from cm to mm creates a new measurement.",
+                        feedback:
+                          "That breaks the lesson idea. The quantity stays the same; only the unit size changes.",
+                      },
+                      {
+                        value: "same_number",
+                        label: "Treat prefixes like labels that should never change the number, because the object has not changed.",
+                        feedback:
+                          "The object stays the same, but the written number changes because different unit sizes count the quantity in different chunks.",
+                      },
+                    ],
+                    successLabel: "Good analogy. It supports the lesson instead of distorting it.",
+                    retryLabel: "That analogy would confuse the unit idea.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
+            if (lessonId === "M1_L1") {
             if (isTableStep && activeTableIndex === 0) {
               return {
                 id: `m1-l1-table-${activeTableIndex}`,
@@ -2120,6 +2465,7 @@ export default function LessonRunner({
                   retryLabel: "That would connect this lesson to the wrong next step.",
                 } satisfies ScaffoldRoleplayCard;
               }
+            }
             }
             return null;
           })()
