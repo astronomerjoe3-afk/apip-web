@@ -1478,13 +1478,14 @@ export default function LessonRunner({
             {card.badge}
           </span>
           <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-            Role-play challenge
+            Mission sim
           </span>
         </div>
         <h4 className="mt-3 text-xl font-semibold text-slate-900">{normalizeLessonDisplayText(card.title)}</h4>
         <p className="mt-3 text-sm leading-6 text-slate-700">{normalizeLessonDisplayMultiline(card.scenario)}</p>
         <div className="mt-4 rounded-2xl border border-white/90 bg-white/90 p-4 shadow-sm">
-          <p className="text-sm font-medium text-slate-900">{normalizeLessonDisplayText(card.prompt)}</p>
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-slate-500">Your move</p>
+          <p className="mt-2 text-sm font-medium text-slate-900">{normalizeLessonDisplayText(card.prompt)}</p>
           <div className="mt-4 grid gap-3">
             {card.options.map((option) => {
               const isSelected = selectedValue === option.value;
@@ -1523,8 +1524,8 @@ export default function LessonRunner({
           >
             <p className="text-sm font-semibold">
               {selectedOption.isCorrect
-                ? card.successLabel ?? "That is the right call."
-                : card.retryLabel ?? "Not the best coaching move yet."}
+                ? card.successLabel ?? "That move keeps the mission readable."
+                : card.retryLabel ?? "That move would send the crew off track."}
             </p>
             <p className="mt-2 text-sm leading-6">{normalizeLessonDisplayMultiline(selectedOption.feedback)}</p>
           </div>
@@ -1750,33 +1751,33 @@ export default function LessonRunner({
               return {
                 id: "m1-l1-intro-brief",
                 badge: "Mission brief",
-                title: "Quest Control needs your first instruction",
+                title: "Quest Control: send the opening call",
                 scenario:
-                  "A new rover analyst keeps saying the graph is the road itself. You have one radio message to stop that confusion before the mission log starts.",
-                prompt: "Which instruction should you send first?",
+                  "The rover team is rolling out, and a new analyst keeps treating the graph like a picture of the lane. You get one clean transmission before the mission log starts.",
+                prompt: "Pick your opening transmission.",
                 options: [
                   {
                     value: "route_picture",
-                    label: "Treat the graph as a picture of the lane the rover drove along.",
+                    label: "“Treat the graph as a picture of the lane the rover drove along.”",
                     feedback:
                       "That keeps the learner trapped in the wrong world. In this lesson, the graph is a record of distance changing with time, not a sketch of the route shape.",
                   },
                   {
                     value: "distance_time_record",
-                    label: "Read the graph as a record of how distance changes with time.",
+                    label: "“Read the graph as a record of how distance changes with time.”",
                     feedback:
                       "Exactly. That one instruction separates the motion world from the graph world and makes the rest of the lesson readable.",
                     isCorrect: true,
                   },
                   {
                     value: "highest_point_speed",
-                    label: "Look for the highest point first because that must be the fastest part of the journey.",
+                    label: "“Look for the highest point first because that must be the fastest part of the journey.”",
                     feedback:
                       "Highest point only means the greatest recorded distance by that time. Speed comes from the slope, not the graph height.",
                   },
                 ],
-                successLabel: "Send that briefing.",
-                retryLabel: "That message would confuse the analyst.",
+                successLabel: "Transmission locked in.",
+                retryLabel: "That call would start the mission off wrong.",
               } satisfies ScaffoldRoleplayCard;
             }
 
@@ -1786,31 +1787,31 @@ export default function LessonRunner({
                 badge: "Radio call",
                 title: "The pilot is misreading a flat segment",
                 scenario:
-                  "Mid-mission, the pilot reports that a flat section means the rover vanished from the graph. You need to correct the idea in one sentence.",
-                prompt: "What do you say?",
+                  "Mid-mission, the pilot reports that a flat section means the rover vanished from the graph. You need one calm correction over comms.",
+                prompt: "Transmit the correction.",
                 options: [
                   {
                     value: "time_stopped",
-                    label: "A flat section means time stopped, so the mission log paused completely.",
+                    label: "“A flat section means time stopped, so the mission log paused completely.”",
                     feedback:
                       "If time stopped, there would be no graph interval at all. A flat section still covers time; only the distance stays unchanged.",
                   },
                   {
                     value: "distance_constant",
-                    label: "Time kept moving, but the distance stayed the same, so the rover was stopped in that interval.",
+                    label: "“Time kept moving, but the distance stayed the same, so the rover was stopped in that interval.”",
                     feedback:
                       "Yes. A flat distance-time section means the rover is not adding distance while time continues to pass.",
                     isCorrect: true,
                   },
                   {
                     value: "moving_backward",
-                    label: "A flat section means the rover is moving backwards at a steady pace.",
+                    label: "“A flat section means the rover is moving backwards at a steady pace.”",
                     feedback:
                       "Backward motion would change the distance reading in the opposite direction. A flat section means no change in recorded distance.",
                   },
                 ],
-                successLabel: "That is the right radio message.",
-                retryLabel: "That would leave the flat segment unclear.",
+                successLabel: "Good comms. The crew can read the pause now.",
+                retryLabel: "That comms line would leave the crew guessing.",
               } satisfies ScaffoldRoleplayCard;
             }
 
@@ -1818,33 +1819,33 @@ export default function LessonRunner({
               return {
                 id: `m1-l1-table-${activeTableIndex}`,
                 badge: "Control room",
-                title: "Use the data wall before you brief the crew",
+                title: "The data wall is live",
                 scenario:
-                  "The mission table is on screen. Your job is to stop the crew from jumping to a story before they have matched the quantities and units properly.",
-                prompt: "What should the crew do first?",
+                  "The mission table just lit up in Control. Your job is to stop the crew from jumping to a story before they have matched the quantities and units properly.",
+                prompt: "Choose the crew's next move.",
                 options: [
                   {
                     value: "match_axes",
-                    label: "Match each column or axis to the quantity and unit before telling the motion story.",
+                    label: "“Match each column or axis to the quantity and unit before telling the motion story.”",
                     feedback:
                       "Exactly. The crew needs to lock the quantities and units first so each later conclusion rests on the right measurement meaning.",
                     isCorrect: true,
                   },
                   {
                     value: "pick_highest",
-                    label: "Jump straight to the biggest number because the largest value always tells the fastest motion.",
+                    label: "“Jump straight to the biggest number because the largest value always tells the fastest motion.”",
                     feedback:
                       "A large value can be total distance, not speed. The quantities have to be matched to their meanings before the story is safe to tell.",
                   },
                   {
                     value: "ignore_units",
-                    label: "Ignore the units for now and focus only on whether the numbers rise or fall.",
+                    label: "“Ignore the units for now and focus only on whether the numbers rise or fall.”",
                     feedback:
                       "That loses the physics. Units decide what the numbers mean and stop distance, time, and speed from collapsing into one idea.",
                   },
                 ],
-                successLabel: "Good. Start with the quantities and units.",
-                retryLabel: "That would rush the crew past the evidence.",
+                successLabel: "Control room aligned. The data now means something.",
+                retryLabel: "That move would rush the crew past the evidence.",
               } satisfies ScaffoldRoleplayCard;
             }
 
@@ -1852,33 +1853,33 @@ export default function LessonRunner({
               return {
                 id: "m1-l1-visual-axes",
                 badge: "Playback challenge",
-                title: "Pause the mission log at the teaching moment",
+                title: "Freeze the mission log at the teaching moment",
                 scenario:
-                  "The crew is watching the distance-time visual. They need one coaching line that keeps graph height and graph steepness doing different jobs.",
-                prompt: "Which note belongs on the screen?",
+                  "The crew is watching the distance-time visual. You can pin one coaching note to the display before the playback continues.",
+                prompt: "Pin the right note to the screen.",
                 options: [
                   {
                     value: "height_speed",
-                    label: "Height tells the speed and steepness tells the total distance travelled so far.",
+                    label: "“Height tells the speed and steepness tells the total distance travelled so far.”",
                     feedback:
                       "That swaps the graph jobs. On a distance-time graph, height shows the recorded distance by that time, while steepness shows how quickly distance is being added.",
                   },
                   {
                     value: "height_distance_slope_speed",
-                    label: "Height shows distance by that time, and steepness shows the speed on that segment.",
+                    label: "“Height shows distance by that time, and steepness shows the speed on that segment.”",
                     feedback:
                       "Exactly. That is the sentence that keeps the graph readable without turning it into a road picture.",
                     isCorrect: true,
                   },
                   {
                     value: "graph_is_lane",
-                    label: "The graph line is the lane itself, so steeper parts mean the road became steeper.",
+                    label: "“The graph line is the lane itself, so steeper parts mean the road became steeper.”",
                     feedback:
                       "That collapses the graph world into the route world. The line records changing distance over time; it does not draw the physical lane.",
                   },
                 ],
-                successLabel: "That is the note to pin on the screen.",
-                retryLabel: "That note would mix up the graph jobs.",
+                successLabel: "Pinned. The screen now tells the right story.",
+                retryLabel: "That note would scramble the graph jobs.",
               } satisfies ScaffoldRoleplayCard;
             }
 
@@ -1886,32 +1887,32 @@ export default function LessonRunner({
               return {
                 id: "m1-l1-visual-same-finish",
                 badge: "Mission compare",
-                title: "Two logs finish together, but the stories do not",
+                title: "Same finish, different journey",
                 scenario:
-                  "The crew sees two mission logs end at the same final point and assumes the journeys must have been identical.",
-                prompt: "Which correction should you send?",
+                  "The crew sees two mission logs end at the same final point and assumes the journeys must have been identical. You need one correction before that mistake spreads.",
+                prompt: "Send the comparison call.",
                 options: [
                   {
                     value: "same_story",
-                    label: "Same finish means the journeys had the same pace at every moment.",
+                    label: "“Same finish means the journeys had the same pace at every moment.”",
                     feedback:
                       "Equal final distance and time do not lock the whole story. One run can pause or change pace and still finish at the same point.",
                   },
                   {
                     value: "different_histories",
-                    label: "Same finish can still hide different pauses and pace patterns on the way there.",
+                    label: "“Same finish can still hide different pauses and pace patterns on the way there.”",
                     feedback:
                       "Exactly. Final point alone is not the full motion story; the segment history still matters.",
                     isCorrect: true,
                   },
                   {
                     value: "one_must_reverse",
-                    label: "If the logs look different, one rover must have reversed direction at some point.",
+                    label: "“If the logs look different, one rover must have reversed direction at some point.”",
                     feedback:
                       "Different graph shapes can come from different pace histories without any reversal. The safe move is to read each segment one at a time.",
                   },
                 ],
-                successLabel: "That keeps the comparison honest.",
+                successLabel: "Call sent. The crew can now compare the stories properly.",
                 retryLabel: "That would hide the real difference between the runs.",
               } satisfies ScaffoldRoleplayCard;
             }
@@ -1922,30 +1923,30 @@ export default function LessonRunner({
                 badge: "Analyst drill",
                 title: "Coach the trainee through the graph",
                 scenario:
-                  "A trainee analyst is about to solve the worked example. You want them to take the first move that unlocks the whole motion story instead of guessing from the graph shape.",
-                prompt: "What should they do first?",
+                  "A trainee analyst is about to tackle the worked example. You need to call the first move that unlocks the graph instead of letting them guess from shape alone.",
+                prompt: "Call the trainee's first move.",
                 options: [
                   {
                     value: "road_shape",
-                    label: "Describe the physical route the line looks like before using any numbers.",
+                    label: "“Describe the physical route the line looks like before using any numbers.”",
                     feedback:
                       "That keeps the learner in the wrong frame. The line is not the route shape, so that description does not unlock the graph meaning.",
                   },
                   {
                     value: "segment_story",
-                    label: "Split the graph into segments, find what each segment means, then calculate the speed on each moving part.",
+                    label: "“Split the graph into segments, find what each segment means, then calculate the speed on each moving part.”",
                     feedback:
                       "Exactly. Segment-by-segment reading is the move that reveals the pause and makes the later speed calculations trustworthy.",
                     isCorrect: true,
                   },
                   {
                     value: "highest_point",
-                    label: "Start from the highest point because it must be the fastest part of the journey.",
+                    label: "“Start from the highest point because it must be the fastest part of the journey.”",
                     feedback:
                       "Highest point gives the greatest recorded distance so far, not the fastest motion. Speed still comes from the slope on each segment.",
                   },
                 ],
-                successLabel: "That is the right first coaching move.",
+                successLabel: "Nice call. The trainee now has a clean route into the example.",
                 retryLabel: "That would send the trainee into guesswork.",
               } satisfies ScaffoldRoleplayCard;
             }
@@ -1954,32 +1955,32 @@ export default function LessonRunner({
               return {
                 id: `m1-l1-section-${activeSectionIndex}`,
                 badge: "Coach move",
-                title: "Give the trainee one useful instruction",
+                title: "Give the trainee one clean instruction",
                 scenario:
-                  "The trainee analyst can see the graph, but their explanation is still fuzzy. You only get one sentence to sharpen their thinking before they continue.",
-                prompt: "Which instruction helps most?",
+                  "The trainee analyst can see the graph, but their explanation is still fuzzy. You only get one sentence before they move on.",
+                prompt: "Choose the line you send.",
                 options: [
                   {
                     value: "segment_reading",
-                    label: "Read one segment at a time and tell what distance and time are doing in that interval.",
+                    label: "“Read one segment at a time and tell what distance and time are doing in that interval.”",
                     feedback:
                       "Exactly. Segment reading is the habit that stops the graph from turning into one blurry overall picture.",
                     isCorrect: true,
                   },
                   {
                     value: "fastest_highest",
-                    label: "Always look for the highest point first because that reveals the fastest motion.",
+                    label: "“Always look for the highest point first because that reveals the fastest motion.”",
                     feedback:
                       "Highest point only shows the greatest distance recorded so far. The speed story still comes from the slope of each segment.",
                   },
                   {
                     value: "ignore_pause",
-                    label: "Ignore flat sections until the end because they do not change the important part of the graph.",
+                    label: "“Ignore flat sections until the end because they do not change the important part of the graph.”",
                     feedback:
                       "Flat sections are part of the motion story. They tell you the object is stopped while time keeps moving.",
                   },
                 ],
-                successLabel: "That is the coaching line to send.",
+                successLabel: "That line sharpens the trainee's read straight away.",
                 retryLabel: "That instruction would leave the story fuzzy.",
               } satisfies ScaffoldRoleplayCard;
             }
