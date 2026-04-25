@@ -444,9 +444,9 @@ export default function PublicMissionClient() {
 
         <div className={styles.challengeColumn}>
           <div className={styles.challengeHeader}>
-            <p className={styles.graphEyebrow}>Concept-first check</p>
-            <h3>Understand the graph, then answer the checks</h3>
-            <p>Read what the line is doing, say what changes and what stays the same, then choose the best exam-style answer.</p>
+            <p className={styles.graphEyebrow}>Mission checks</p>
+            <h3>Read the graph, then answer the checks</h3>
+            <p>Use the graph story first, then choose the answer that matches what the rover is doing.</p>
           </div>
 
           <section className={styles.clarityPanel} aria-label="Mission clarity route">
@@ -488,23 +488,6 @@ export default function PublicMissionClient() {
                     </div>
                   </div>
 
-                  <div className={styles.metaRow}>
-                    <span className={styles.metaBadge}>Focus: {question.focus}</span>
-                    <span className={styles.metaBadge}>Difficulty: {question.difficulty}</span>
-                    <span className={styles.metaBadge}>Watch for: {question.watchFor}</span>
-                  </div>
-
-                  <div className={styles.reasoningPanel}>
-                    <div className={styles.reasoningBlock}>
-                      <p className={styles.reasoningLabel}>Intuition first</p>
-                      <p>{question.intuition}</p>
-                    </div>
-                    <div className={styles.reasoningBlock}>
-                      <p className={styles.reasoningLabel}>Exam move</p>
-                      <p>{question.examMove}</p>
-                    </div>
-                  </div>
-
                   <div className={styles.optionGrid}>
                     {question.options.map((option) => {
                       const isSelected = selectedAnswer === option.value;
@@ -533,16 +516,6 @@ export default function PublicMissionClient() {
                     <div className={`${styles.feedbackPanel} ${answeredCorrectly ? styles.feedbackGood : styles.feedbackNeedsWork}`}>
                       <strong>{answeredCorrectly ? "Good read." : "Useful correction."}</strong>
                       <p>{selectedOption.feedback}</p>
-                      <div className={styles.feedbackBreakdown}>
-                        <div>
-                          <p className={styles.reasoningLabel}>Why this is right</p>
-                          <p>{question.whyRight}</p>
-                        </div>
-                        <div>
-                          <p className={styles.reasoningLabel}>Tempting wrong move</p>
-                          <p>{question.temptingWrong}</p>
-                        </div>
-                      </div>
                       {misconceptionSummary ? (
                         <div className={styles.repairPanel}>
                           <strong>Try this correction</strong>
