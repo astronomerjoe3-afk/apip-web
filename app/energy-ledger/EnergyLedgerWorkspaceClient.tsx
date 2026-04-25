@@ -573,7 +573,7 @@ export default function EnergyLedgerWorkspaceClient() {
             <div key={activeWorkspace.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
               <div className={styles.questionMeta}>
                 <div>
-                  <p className={styles.questionIndex}>Exam-style check</p>
+                  <p className={styles.questionIndex}>Check</p>
                   <h3>{activeWorkspace.label}</h3>
                 </div>
                 <span className={styles.questionStatusPill}>
@@ -583,22 +583,6 @@ export default function EnergyLedgerWorkspaceClient() {
               <p className={styles.questionRoute}>{activeWorkspace.title}</p>
               <div className={styles.questionPrompt} aria-live="polite">{activeWorkspace.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeWorkspace.checkpoint.hint}</p>
-              <div className={styles.metaRow}>
-                <span className={styles.metaBadge}>Focus: {activeWorkspace.checkpoint.focus}</span>
-                <span className={styles.metaBadge}>Difficulty: {activeWorkspace.checkpoint.difficulty}</span>
-                <span className={styles.metaBadge}>Watch for: {activeWorkspace.checkpoint.watchFor}</span>
-              </div>
-
-              <div className={styles.reasoningPanel}>
-                <div className={styles.reasoningBlock}>
-                  <p className={styles.reasoningLabel}>Intuition first</p>
-                  <p>{activeWorkspace.clarity.notice}</p>
-                </div>
-                <div className={styles.reasoningBlock}>
-                  <p className={styles.reasoningLabel}>Exam move</p>
-                  <p>{activeWorkspace.clarity.examCheck}</p>
-                </div>
-              </div>
 
               <div className={styles.optionList}>
                 {activeWorkspace.checkpoint.options.map((option) => {
@@ -627,22 +611,8 @@ export default function EnergyLedgerWorkspaceClient() {
 
               {activeOption ? (
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
-                  <strong>{checkpointSolved ? "Locked in" : "Use this correction"}</strong>
+                  <strong>{checkpointSolved ? "Good call." : "Use this correction."}</strong>
                   <p>{activeOption.feedback}</p>
-                  <div className={styles.feedbackBreakdown}>
-                    <div>
-                      <p className={styles.reasoningLabel}>{checkpointSolved ? "Why this is right" : "Why this answer falls short"}</p>
-                      <p>{activeOption.feedback}</p>
-                    </div>
-                    <div>
-                      <p className={styles.reasoningLabel}>Tempting wrong move</p>
-                      <p>{activeWorkspace.clarity.commonMistake}</p>
-                    </div>
-                    <div>
-                      <p className={styles.reasoningLabel}>Exam move</p>
-                      <p>{activeWorkspace.clarity.examCheck}</p>
-                    </div>
-                  </div>
                   {misconceptionSummary ? (
                     <div className={styles.repairPanel}>
                       <div className={styles.repairGrid}>

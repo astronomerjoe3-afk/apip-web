@@ -517,7 +517,7 @@ export default function ForceSystemBuilderClient() {
             <div key={activeTool.key} className={`${styles.challengeCard} ${styles.checkpointCard}`}>
               <div className={styles.questionMeta}>
                 <div>
-                  <p className={styles.questionIndex}>Exam-style check</p>
+                  <p className={styles.questionIndex}>Check</p>
                   <h3>{activeTool.label}</h3>
                 </div>
                 <span className={styles.questionStatusPill}>Mode {activeToolIndex} of {TOOLS.length}</span>
@@ -525,23 +525,6 @@ export default function ForceSystemBuilderClient() {
               <p className={styles.questionRoute}>{activeTool.title}</p>
               <div className={styles.questionPrompt} aria-live="polite">{activeTool.checkpoint.prompt}</div>
               <p className={styles.questionHint}>{activeTool.checkpoint.hint}</p>
-
-              <div className={styles.metaRow}>
-                <span className={styles.metaBadge}>Focus: {activeTool.checkpoint.focus}</span>
-                <span className={styles.metaBadge}>Difficulty: {activeTool.checkpoint.difficulty}</span>
-                <span className={styles.metaBadge}>Watch for: {activeTool.checkpoint.watchFor}</span>
-              </div>
-
-              <div className={styles.reasoningPanel}>
-                <div className={styles.reasoningBlock}>
-                  <p className={styles.reasoningLabel}>Intuition first</p>
-                  <p>{activeTool.clarity.notice}</p>
-                </div>
-                <div className={styles.reasoningBlock}>
-                  <p className={styles.reasoningLabel}>Exam move</p>
-                  <p>{activeTool.clarity.examCheck}</p>
-                </div>
-              </div>
 
               <div className={styles.optionList}>
                 {activeTool.checkpoint.options.map((option) => {
@@ -570,22 +553,8 @@ export default function ForceSystemBuilderClient() {
 
               {activeOption ? (
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
-                  <strong>{checkpointSolved ? "Locked in" : "Use this correction"}</strong>
+                  <strong>{checkpointSolved ? "Good call." : "Use this correction."}</strong>
                   <p>{activeOption.feedback}</p>
-                  <div className={styles.feedbackBreakdown}>
-                    <div>
-                      <p className={styles.reasoningLabel}>{checkpointSolved ? "Why this is right" : "Why this answer falls short"}</p>
-                      <p>{activeOption.feedback}</p>
-                    </div>
-                    <div>
-                      <p className={styles.reasoningLabel}>Tempting wrong move</p>
-                      <p>{activeTool.clarity.commonMistake}</p>
-                    </div>
-                    <div>
-                      <p className={styles.reasoningLabel}>Exam move</p>
-                      <p>{activeTool.clarity.examCheck}</p>
-                    </div>
-                  </div>
                   {misconceptionSummary ? (
                     <div className={styles.repairPanel}>
                       <div className={styles.repairGrid}>

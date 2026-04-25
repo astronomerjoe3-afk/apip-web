@@ -53,8 +53,8 @@ const CLARITY_ROUTE = [
     body: "Treating the graph as a picture of the road instead of a record of how distance changes with time.",
   },
   {
-    label: "Exam-style check",
-    body: "Use the segment meaning first, then choose the statement or value that best matches the graph.",
+    label: "Your check",
+    body: "Use the segment meaning first, then choose the answer that best matches the graph.",
   },
 ] as const;
 
