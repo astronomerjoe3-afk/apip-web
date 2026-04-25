@@ -1738,7 +1738,7 @@ export default function LessonRunner({
     );
     const activeTableIndex = isTableStep ? clampedScaffoldStepIndex - tableStart : -1;
     const activeMediaIndex = isMediaStep ? clampedScaffoldStepIndex - mediaStart : -1;
-    const activeSectionIndex = isSectionStep ? clampedScaffoldStepIndex - sectionStart : -1;
+    const activeSectionHeading = isSectionStep ? normalizeLessonDisplayText(activeSection?.heading || "").toLowerCase() : "";
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -1747,74 +1747,6 @@ export default function LessonRunner({
     const scaffoldRoleplayCard =
       lessonId === "M1_L1"
         ? (() => {
-            if (false && isIntroStep) {
-              return {
-                id: "m1-l1-intro-brief",
-                badge: "Mission brief",
-                title: "Quest Control: send the opening call",
-                scenario:
-                  "The rover team is rolling out, and a new analyst keeps treating the graph like a picture of the lane. You get one clean transmission before the mission log starts.",
-                prompt: "Pick your opening transmission.",
-                options: [
-                  {
-                    value: "route_picture",
-                    label: "“Treat the graph as a picture of the lane the rover drove along.”",
-                    feedback:
-                      "That keeps the learner trapped in the wrong world. In this lesson, the graph is a record of distance changing with time, not a sketch of the route shape.",
-                  },
-                  {
-                    value: "distance_time_record",
-                    label: "“Read the graph as a record of how distance changes with time.”",
-                    feedback:
-                      "Exactly. That one instruction separates the motion world from the graph world and makes the rest of the lesson readable.",
-                    isCorrect: true,
-                  },
-                  {
-                    value: "highest_point_speed",
-                    label: "“Look for the highest point first because that must be the fastest part of the journey.”",
-                    feedback:
-                      "Highest point only means the greatest recorded distance by that time. Speed comes from the slope, not the graph height.",
-                  },
-                ],
-                successLabel: "Transmission locked in.",
-                retryLabel: "That call would start the mission off wrong.",
-              } satisfies ScaffoldRoleplayCard;
-            }
-
-            if (false && isClarityStep) {
-              return {
-                id: "m1-l1-radio-call",
-                badge: "Radio call",
-                title: "The pilot is misreading a flat segment",
-                scenario:
-                  "Mid-mission, the pilot reports that a flat section means the rover vanished from the graph. You need one calm correction over comms.",
-                prompt: "Transmit the correction.",
-                options: [
-                  {
-                    value: "time_stopped",
-                    label: "“A flat section means time stopped, so the mission log paused completely.”",
-                    feedback:
-                      "If time stopped, there would be no graph interval at all. A flat section still covers time; only the distance stays unchanged.",
-                  },
-                  {
-                    value: "distance_constant",
-                    label: "“Time kept moving, but the distance stayed the same, so the rover was stopped in that interval.”",
-                    feedback:
-                      "Yes. A flat distance-time section means the rover is not adding distance while time continues to pass.",
-                    isCorrect: true,
-                  },
-                  {
-                    value: "moving_backward",
-                    label: "“A flat section means the rover is moving backwards at a steady pace.”",
-                    feedback:
-                      "Backward motion would change the distance reading in the opposite direction. A flat section means no change in recorded distance.",
-                  },
-                ],
-                successLabel: "Good comms. The crew can read the pause now.",
-                retryLabel: "That comms line would leave the crew guessing.",
-              } satisfies ScaffoldRoleplayCard;
-            }
-
             if (isTableStep && activeTableIndex === 0) {
               return {
                 id: `m1-l1-table-${activeTableIndex}`,
@@ -1916,75 +1848,279 @@ export default function LessonRunner({
                 retryLabel: "That would hide the real difference between the runs.",
               } satisfies ScaffoldRoleplayCard;
             }
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m1-l1-fix-ideas",
+                  badge: "Signal check",
+                  title: "Repair the first bad briefing",
+                  scenario:
+                    "A trainee sends a shaky opening note to the rover crew. You need to stop the wrong graph story before it becomes the team habit.",
+                  prompt: "Choose the fix you send back.",
+                  options: [
+                    {
+                      value: "route_shape",
+                      label: "Tell them the line is mainly a sketch of the route shape, so they should picture the road first.",
+                      feedback:
+                        "That keeps the trainee in the wrong world. The line is a record of distance changing with time, not a map of the road shape.",
+                    },
+                    {
+                      value: "record_story",
+                      label: "Tell them to read what the graph records: distance on the vertical axis and time on the horizontal axis.",
+                      feedback:
+                        "Exactly. That puts the trainee back in the graph world before any story about motion is added.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "highest_first",
+                      label: "Tell them to find the highest point first because it always reveals the fastest motion.",
+                      feedback:
+                        "Highest point only shows the greatest recorded distance so far. Speed still comes from the steepness of the segment.",
+                    },
+                  ],
+                  successLabel: "Good catch. The briefing is back on track.",
+                  retryLabel: "That reply would reinforce the wrong habit.",
+                } satisfies ScaffoldRoleplayCard;
+              }
 
-            if (false && isSectionStep && activeSection?.worked_example) {
-              return {
-                id: `m1-l1-worked-${activeSectionIndex}`,
-                badge: "Analyst drill",
-                title: "Coach the trainee through the graph",
-                scenario:
-                  "A trainee analyst is about to tackle the worked example. You need to call the first move that unlocks the graph instead of letting them guess from shape alone.",
-                prompt: "Call the trainee's first move.",
-                options: [
-                  {
-                    value: "road_shape",
-                    label: "“Describe the physical route the line looks like before using any numbers.”",
-                    feedback:
-                      "That keeps the learner in the wrong frame. The line is not the route shape, so that description does not unlock the graph meaning.",
-                  },
-                  {
-                    value: "segment_story",
-                    label: "“Split the graph into segments, find what each segment means, then calculate the speed on each moving part.”",
-                    feedback:
-                      "Exactly. Segment-by-segment reading is the move that reveals the pause and makes the later speed calculations trustworthy.",
-                    isCorrect: true,
-                  },
-                  {
-                    value: "highest_point",
-                    label: "“Start from the highest point because it must be the fastest part of the journey.”",
-                    feedback:
-                      "Highest point gives the greatest recorded distance so far, not the fastest motion. Speed still comes from the slope on each segment.",
-                  },
-                ],
-                successLabel: "Nice call. The trainee now has a clean route into the example.",
-                retryLabel: "That would send the trainee into guesswork.",
-              } satisfies ScaffoldRoleplayCard;
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m1-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Send the one-line rule",
+                  scenario:
+                    "Quest Control wants a single sentence the whole team can repeat while reading the graph.",
+                  prompt: "Choose the line that should go on the ops board.",
+                  options: [
+                    {
+                      value: "height_speed",
+                      label: "Graph height tells speed, and graph steepness tells how far away the rover is.",
+                      feedback:
+                        "That swaps the graph jobs. Height gives recorded distance by that time, while steepness gives speed.",
+                    },
+                    {
+                      value: "height_distance_slope_speed",
+                      label: "Graph height shows distance by that time, and graph steepness shows speed on that segment.",
+                      feedback:
+                        "Exactly. That is the clean rule the crew needs before they compare segments.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shape_is_route",
+                      label: "The graph shape is the route, so curves and slopes tell you how the road itself bends.",
+                      feedback:
+                        "That confuses the graph with the physical path. The graph is a motion record, not a map.",
+                    },
+                  ],
+                  successLabel: "Rule posted. Everyone is reading from the same idea now.",
+                  retryLabel: "That rule would confuse the whole team.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m1-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the vocabulary board",
+                  scenario:
+                    "The crew can see the graph, but their labels are getting sloppy. You need the term card that keeps the quantities straight.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "distance_speed_mix",
+                      label: "Distance and speed are interchangeable as long as the graph is moving upward.",
+                      feedback:
+                        "Those are different quantities. Distance is how far has been recorded by that time; speed is how quickly distance is changing.",
+                    },
+                    {
+                      value: "distance_time_speed_terms",
+                      label: "Distance is the recorded height, time is the horizontal progress, and speed is read from the segment gradient.",
+                      feedback:
+                        "Exactly. That keeps the language tied to the graph jobs instead of loose impressions.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height_only",
+                      label: "Use the graph height for every motion quantity because it is the easiest number to see.",
+                      feedback:
+                        "That makes every quantity collapse into one reading. Different graph features answer different questions.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the quantities again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m1-l1-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the glossary handoff",
+                  scenario:
+                    "A second crew member is writing the glossary card that follows the first one. It needs to extend the vocabulary without repeating it badly.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "segment_meaning",
+                      label: "Each segment can tell a different motion story, so the crew should name what distance and time are doing in that interval.",
+                      feedback:
+                        "Exactly. That extends the glossary into actual graph reading instead of repeating the first card.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all_same_story",
+                      label: "Once you know the final point, you do not need segment language because the story is already complete.",
+                      feedback:
+                        "Final point alone does not tell the whole journey. Segment language is what reveals pauses and pace changes.",
+                    },
+                    {
+                      value: "speed_is_point",
+                      label: "Speed is always a single point reading, so segment language only adds clutter.",
+                      feedback:
+                        "On a distance-time graph, speed comes from the gradient of a segment, not just a point label.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would flatten the segment story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m1-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst's first move",
+                  scenario:
+                    "The trainee analyst is ready to answer a graph question, but they still rush straight to a guess. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "segment_story",
+                      label: "Read one segment at a time and say what distance and time are doing before you calculate anything.",
+                      feedback:
+                        "Exactly. Segment-by-segment reading is what makes the graph story trustworthy.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "highest_first",
+                      label: "Find the highest point first because that always reveals the fastest part of the motion.",
+                      feedback:
+                        "Highest point only gives the greatest recorded distance so far. Speed still comes from the segment slope.",
+                    },
+                    {
+                      value: "skip_flat",
+                      label: "Ignore flat sections until the end because they do not affect the important parts of the story.",
+                      feedback:
+                        "Flat sections matter. They show that time is passing while the recorded distance is not changing.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst has a real method now.",
+                  retryLabel: "That would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m1-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the shortcut before it spreads",
+                  scenario:
+                    "One crew member keeps saying the highest point must be the fastest moment. You need the correction that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "highest_is_fastest",
+                      label: "That shortcut is safe because bigger graph height always means bigger speed.",
+                      feedback:
+                        "That is exactly the trap. Height gives recorded distance by that time; speed comes from steepness.",
+                    },
+                    {
+                      value: "slope_not_height",
+                      label: "Speed comes from the slope of the segment, not from the highest point on the graph.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "ignore_points",
+                      label: "Ignore the graph points completely and only read the captions around the graph.",
+                      feedback:
+                        "The graph still matters. The fix is to read the right graph feature, not to stop reading the graph.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The shortcut will not take over the room.",
+                  retryLabel: "That warning would leave the trap alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m1-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the physics clean",
+                  scenario:
+                    "The team wants a story comparison that helps beginners without slipping back into route-shape thinking.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "scoreboard",
+                      label: "Treat the graph like a scoreboard or mission log that records what has happened as time passes.",
+                      feedback:
+                        "Exactly. That keeps the idea of a running record without pretending the graph line is the physical path.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "road_map",
+                      label: "Treat the graph like a road map that draws the bends and slopes of the route itself.",
+                      feedback:
+                        "That drags the learner back into the wrong picture. The graph is not a map of the lane.",
+                    },
+                    {
+                      value: "photo_snapshot",
+                      label: "Treat the graph like one still photo, because the final picture tells you the whole journey.",
+                      feedback:
+                        "A single snapshot misses the time story. This lesson needs a record that updates as time goes on.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the idea instead of warping it.",
+                  retryLabel: "That analogy would pull the team back off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "lesson relation") {
+                return {
+                  id: "m1-l1-lesson-relation",
+                  badge: "Rule dispatch",
+                  title: "Send the bridge into the next lesson",
+                  scenario:
+                    "Quest Control wants one compact line that links this graph reading lesson to the formal motion work coming next.",
+                  prompt: "Choose the bridge line.",
+                  options: [
+                    {
+                      value: "distance_slope_link",
+                      label: "Distance-time reading prepares the crew to use graph slope as a speed idea before moving into more formal motion analysis.",
+                      feedback:
+                        "Exactly. That is the right bridge: keep the graph meaning, then carry it into the formal motion language.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "formula_first",
+                      label: "Forget the graph story now and move straight to formulas, because the graph was only a warm-up picture.",
+                      feedback:
+                        "The graph story is the foundation. The next lesson should build on it, not throw it away.",
+                    },
+                    {
+                      value: "route_only",
+                      label: "The main lesson is still just about route shape, and the next lesson will prove that more carefully.",
+                      feedback:
+                        "That keeps the wrong frame alive. The lesson relation should carry forward the motion-record idea instead.",
+                    },
+                  ],
+                  successLabel: "Bridge line sent. The next lesson has a clean runway.",
+                  retryLabel: "That would connect this lesson to the wrong next step.",
+                } satisfies ScaffoldRoleplayCard;
+              }
             }
-
-            if (false && isSectionStep) {
-              return {
-                id: `m1-l1-section-${activeSectionIndex}`,
-                badge: "Coach move",
-                title: "Give the trainee one clean instruction",
-                scenario:
-                  "The trainee analyst can see the graph, but their explanation is still fuzzy. You only get one sentence before they move on.",
-                prompt: "Choose the line you send.",
-                options: [
-                  {
-                    value: "segment_reading",
-                    label: "“Read one segment at a time and tell what distance and time are doing in that interval.”",
-                    feedback:
-                      "Exactly. Segment reading is the habit that stops the graph from turning into one blurry overall picture.",
-                    isCorrect: true,
-                  },
-                  {
-                    value: "fastest_highest",
-                    label: "“Always look for the highest point first because that reveals the fastest motion.”",
-                    feedback:
-                      "Highest point only shows the greatest distance recorded so far. The speed story still comes from the slope of each segment.",
-                  },
-                  {
-                    value: "ignore_pause",
-                    label: "“Ignore flat sections until the end because they do not change the important part of the graph.”",
-                    feedback:
-                      "Flat sections are part of the motion story. They tell you the object is stopped while time keeps moving.",
-                  },
-                ],
-                successLabel: "That line sharpens the trainee's read straight away.",
-                retryLabel: "That instruction would leave the story fuzzy.",
-              } satisfies ScaffoldRoleplayCard;
-            }
-
             return null;
           })()
         : null;
