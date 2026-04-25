@@ -1754,8 +1754,284 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5"
         ? (() => {
+            if (lessonId === "F1_L5") {
+              if (isTableStep && activeTableIndex === 0) {
+                return {
+                  id: `f1-l5-table-${activeTableIndex}`,
+                  badge: "Packing board",
+                  title: "Lock the density rule first",
+                  scenario:
+                    "The density desk is live, but one trainee keeps treating density as if it were just another word for weight. You need the board note that keeps mass, volume, and density in the right relationship.",
+                  prompt: "Choose the board note you send.",
+                  options: [
+                    {
+                      value: "mass_packed_into_volume",
+                      label: "Density tells how much mass is packed into each unit of volume, so you have to compare mass and space together.",
+                      feedback:
+                        "Exactly. Density is about how tightly mass is packed into the available space.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heavier_means_denser",
+                      label: "The heavier object is always denser, because density is just the same thing as mass written differently.",
+                      feedback:
+                        "Heavier alone is not enough. A large object can have more mass but still be less dense if that mass is spread through much more volume.",
+                    },
+                    {
+                      value: "size_only_decides",
+                      label: "Density is really a size idea, so the smaller object is always denser no matter what its mass is.",
+                      feedback:
+                        "Size alone cannot decide density either. You need both the mass and the volume together.",
+                    },
+                  ],
+                  successLabel: "Packing board secured. The crew now has the right density language.",
+                  retryLabel: "That note would blur density into only mass or only size.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f1-l5-equal-sized-blocks",
+                  badge: "Block compare",
+                  title: "Call the equal-size comparison",
+                  scenario:
+                    "Two equal-sized blocks are on the scan table. One is clearly heavier, and the trainee wants to describe that without accidentally talking only about mass.",
+                  prompt: "Choose the comparison call you send.",
+                  options: [
+                    {
+                      value: "same_volume_more_mass",
+                      label: "If the volume stays the same, the block with more mass is denser because more mass is packed into the same space.",
+                      feedback:
+                        "Exactly. Keeping the same volume fixed makes the mass comparison a density comparison.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same_volume_same_density",
+                      label: "If two blocks have the same size, they must have the same density because density depends only on volume.",
+                      feedback:
+                        "Same size does not force the same density. The heavier block can be denser because it packs more mass into that same volume.",
+                    },
+                    {
+                      value: "more_mass_only_heavier",
+                      label: "You can only say the block is heavier; density cannot be compared until the blocks are different sizes.",
+                      feedback:
+                        "You can compare density here precisely because the blocks are the same size. More mass in the same volume means greater density.",
+                    },
+                  ],
+                  successLabel: "Comparison sent. The crew can now separate mass from density properly.",
+                  retryLabel: "That call would miss why equal-sized blocks are such a clean density comparison.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 1) {
+                return {
+                  id: "f1-l5-float-sink",
+                  badge: "Tank check",
+                  title: "Send the float-or-sink rule",
+                  scenario:
+                    "The float tank is ready, but one teammate still wants to predict floating from weight alone. You need the rule that keeps the comparison tied to density.",
+                  prompt: "Choose the tank rule you broadcast.",
+                  options: [
+                    {
+                      value: "compare_object_to_fluid",
+                      label: "Compare the object density with the fluid density: less dense objects float, more dense objects sink.",
+                      feedback:
+                        "Exactly. The float-or-sink call comes from the density comparison, not just the object's mass on its own.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "lighter_always_floats",
+                      label: "A lighter object always floats because floating depends only on having less mass than something else.",
+                      feedback:
+                        "Floating is not decided by mass alone. A small metal object can be heavier than a foam block and still the comparison has to be made through density.",
+                    },
+                    {
+                      value: "larger_always_floats",
+                      label: "A larger object floats more easily because more size means more support from the liquid.",
+                      feedback:
+                        "Size by itself does not decide the outcome. The key comparison is still object density against fluid density.",
+                    },
+                  ],
+                  successLabel: "Tank rule sent. The crew will now predict floating from density, not guesswork.",
+                  retryLabel: "That rule would send the tank team back to mass-only thinking.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f1-l5-fix-ideas",
+                    badge: "Repair desk",
+                    title: "Correct the heavy-means-dense myth",
+                    scenario:
+                      "A trainee has written that the heavier object must always be denser. You need the one repair note that stops that shortcut from spreading.",
+                    prompt: "Choose the repair note you send.",
+                    options: [
+                      {
+                        value: "density_needs_mass_and_volume",
+                        label: "Density compares mass with volume, so an object can be heavy but not very dense if it also takes up a lot of space.",
+                        feedback:
+                          "Exactly. Density is about mass for the size, not mass alone.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "heavy_objects_always_dense",
+                        label: "Heavier objects are always denser because they contain more matter, and more matter always means tighter packing.",
+                        feedback:
+                          "More matter helps only if you also know how much space it occupies. Density can only be judged with both mass and volume.",
+                      },
+                      {
+                        value: "small_objects_always_dense",
+                        label: "Smaller objects are always denser because density is really just about fitting into less space.",
+                        feedback:
+                          "Small size alone is not enough either. A small object can still have low density if it has very little mass in that small volume.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The shortcut between heavy and dense is broken.",
+                    retryLabel: "That would keep the mass-only shortcut alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f1-l5-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line density idea",
+                    scenario:
+                      "Quest Control wants one sentence the whole crew can repeat before they compare blocks, calculate answers, or predict floating.",
+                    prompt: "Choose the line you post.",
+                    options: [
+                      {
+                        value: "mass_per_unit_volume",
+                        label: "Density tells how much mass is packed into each unit of volume.",
+                        feedback:
+                          "Exactly. That line keeps mass and volume tied together in one usable idea.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "mass_only",
+                        label: "Density tells how much matter an object has, so the densest object is just the one with the most mass.",
+                        feedback:
+                          "That drops the volume part of the idea. Density is not just a mass ranking.",
+                      },
+                      {
+                        value: "volume_only",
+                        label: "Density tells how much space an object occupies, so denser objects are simply the ones that are smaller.",
+                        feedback:
+                          "That drops the mass part of the idea. Density compares how much mass is packed into the space.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has a clear density anchor.",
+                    retryLabel: "That line would split the density idea in half.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "mass, volume, and density") {
+                  return {
+                    id: "f1-l5-mass-volume-density",
+                    badge: "Compare lab",
+                    title: "Send the comparison verdict",
+                    scenario:
+                      "The compare lab is running two tests: same-volume blocks and same-mass samples. You need the one verdict note that works in both situations.",
+                    prompt: "Choose the verdict note you send.",
+                    options: [
+                      {
+                        value: "more_mass_same_volume_or_less_volume_same_mass",
+                        label: "For the same volume, the heavier object is denser; for the same mass, the smaller-volume object is denser.",
+                        feedback:
+                          "Exactly. That note keeps the two standard density comparisons clean and separate.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "heavier_and_bigger",
+                        label: "The heavier object is always denser, and the larger-volume object is always denser because it has more material in it.",
+                        feedback:
+                          "That mixes up the comparison rules. Larger volume can actually make density smaller if the mass does not rise with it.",
+                      },
+                      {
+                        value: "same_mass_same_density",
+                        label: "If the mass is the same, the density must also be the same because mass is the thing density is measuring.",
+                        feedback:
+                          "Equal mass does not force equal density. If one sample squeezes that mass into less space, it is denser.",
+                      },
+                    ],
+                    successLabel: "Verdict sent. The compare lab can now read both density cases correctly.",
+                    retryLabel: "That verdict would confuse the two main comparison cases.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "use the formula carefully") {
+                  return {
+                    id: "f1-l5-use-formula-carefully",
+                    badge: "Formula desk",
+                    title: "Approve the calculation line",
+                    scenario:
+                      "A trainee is about to calculate density, but the notebook has one risky line that would spoil the answer before the division even starts.",
+                    prompt: "Choose the calculation line you approve.",
+                    options: [
+                      {
+                        value: "density_mass_over_volume",
+                        label: "Write density = mass / volume, convert any mixed units first, then divide and keep the compound density unit with the answer.",
+                        feedback:
+                          "Exactly. That keeps both the calculation and the reporting honest.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "density_volume_over_mass",
+                        label: "Write density = volume / mass, because you are checking how much space each gram occupies.",
+                        feedback:
+                          "That reverses the relationship. Density compares mass packed into volume, so the formula is mass divided by volume.",
+                      },
+                      {
+                        value: "ignore_unit_mismatch",
+                        label: "Substitute the numbers as they appear first, because unit conversions can be cleaned up after the density has been calculated.",
+                        feedback:
+                          "Mixed units can distort the value itself. The units need to be made consistent before you calculate.",
+                      },
+                    ],
+                    successLabel: "Calculation line approved. The notebook now protects both the number and its unit.",
+                    retryLabel: "That line would send the trainee into a unit or formula mistake straight away.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f1-l5-analogy",
+                    badge: "Packing crate",
+                    title: "Choose the density analogy",
+                    scenario:
+                      "The team wants one everyday comparison that helps beginners feel density without drifting into a fluffy shortcut.",
+                    prompt: "Choose the analogy you send.",
+                    options: [
+                      {
+                        value: "same_size_boxes_more_books",
+                        label: "Imagine two boxes of the same size. The box packed with more books is like the denser material because more mass is packed into the same space.",
+                        feedback:
+                          "Exactly. That analogy keeps the focus on packing more matter into equal space.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "bigger_box_means_denser",
+                        label: "Imagine the bigger box is always denser because it holds more things, even if the packing is loose.",
+                        feedback:
+                          "That would confuse capacity with density. The density idea is about how tightly mass is packed, not just how big the box is.",
+                      },
+                      {
+                        value: "heaviest_box_only",
+                        label: "Imagine whichever box feels heavier is automatically denser, so there is no need to think about the box size at all.",
+                        feedback:
+                          "That drops the size comparison. The analogy works only when you keep the shared box size visible.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the density idea instead of flattening it.",
+                    retryLabel: "That analogy would push students back into a mass-only shortcut.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F1_L4") {
               if (isTableStep && activeTableIndex === 0) {
                 return {
