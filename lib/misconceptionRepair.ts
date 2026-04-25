@@ -16,6 +16,52 @@ type MisconceptionRepairContext = {
 
 type MisconceptionTemplate = Omit<MisconceptionRepairSummary, "tag">;
 
+function normalizeRepairText(value: string | string[] | null | undefined): string {
+  if (Array.isArray(value)) {
+    return value.join(" ").trim().toLowerCase();
+  }
+  return String(value || "").trim().toLowerCase();
+}
+
+function displayRepairText(value: string | string[] | null | undefined): string {
+  if (Array.isArray(value)) {
+    return value.join(" / ").trim();
+  }
+  return String(value || "").trim();
+}
+
+function includesAny(source: string, patterns: RegExp[]): boolean {
+  return patterns.some((pattern) => pattern.test(source));
+}
+
+function genericContextualRepair(
+  tag: string | null | undefined,
+  correctText: string,
+  focusText: string,
+): MisconceptionRepairSummary | null {
+  const cleanCorrect = displayRepairText(correctText);
+  const cleanFocus = displayRepairText(focusText);
+  if (!cleanCorrect && !cleanFocus) {
+    return null;
+  }
+
+  const title = cleanFocus || "Use the correct physics idea here";
+  const answerLead = cleanCorrect
+    ? `For this question, use ${cleanCorrect}.`
+    : "For this question, rebuild the answer from the physics idea, not from the surface wording.";
+  const why = cleanFocus
+    ? `${cleanFocus} Make that idea do the work before you choose an option.`
+    : "The correction works because it matches the quantity or relationship the question is actually testing.";
+
+  return {
+    tag: String(tag || "contextual_repair"),
+    title,
+    diagnosis: why,
+    repair: answerLead,
+    noticeNext: "Next time, ask what physical quantity is changing or being compared before you answer.",
+  };
+}
+
 const EXACT_SUMMARIES: Record<string, MisconceptionTemplate> = {
   vector_scalar_confusion: {
     title: "Vector vs scalar direction logic",
@@ -317,13 +363,6 @@ export function misconceptionSummaryForTag(tag?: string | null): MisconceptionRe
   };
 }
 
-function normalizeRepairText(value: string | string[] | null | undefined): string {
-  if (Array.isArray(value)) {
-    return value.join(" ").trim().toLowerCase();
-  }
-  return String(value || "").trim().toLowerCase();
-}
-
 export function misconceptionSummaryForContext({
   tag,
   prompt,
@@ -335,6 +374,8 @@ export function misconceptionSummaryForContext({
   const answerText = normalizeRepairText(learnerAnswer);
   const correctText = normalizeRepairText(correctAnswer);
   const focusText = normalizeRepairText(teachingFocus);
+  const displayCorrectText = displayRepairText(correctAnswer);
+  const displayFocusText = displayRepairText(teachingFocus);
   const source = [promptText, answerText, correctText, focusText].filter(Boolean).join(" ");
 
   const isConstantVelocityAccelerationCheck =
@@ -347,12 +388,128 @@ export function misconceptionSummaryForContext({
       tag: String(tag || "constant_velocity_zero_acceleration"),
       title: "Constant velocity means the acceleration is zero",
       diagnosis: "Acceleration tells you how quickly velocity changes. If the velocity stays at the same value, there is no change to measure.",
-      repair: "A constant velocity of 5 m/s means the velocity is staying at 5 m/s, so the acceleration is 0 m/s^2.",
+      repair: cleanCorrectionText(displayCorrectText, "A constant velocity of 5 m/s means the velocity is staying at 5 m/s, so the acceleration is 0 m/s^2."),
       noticeNext: "Ask one question first: is the velocity changing? If it is not changing, the acceleration is zero.",
     };
   }
 
+  const isVelocityGraphAccelerationCheck =
+    includesAny(source, [/velocity-time/, /velocity time/, /speed-time/, /speed time/])
+    && /acceleration/.test(source);
+
+  if (isVelocityGraphAccelerationCheck) {
+    return {
+      tag: String(tag || "velocity_time_graph_error"),
+      title: "Use the gradient, not the graph height",
+      diagnosis: "On a velocity-time or speed-time graph, the line height tells you the velocity or speed. The gradient tells you the acceleration.",
+      repair: cleanCorrectionText(displayCorrectText, "Here, acceleration comes from the gradient of the graph, not the height of the line."),
+      noticeNext: "If the line is horizontal, the gradient is zero, so the acceleration is zero.",
+    };
+  }
+
+  const isVelocityGraphAreaCheck =
+    includesAny(source, [/velocity-time/, /velocity time/, /speed-time/, /speed time/])
+    && includesAny(source, [/area/, /displacement/, /distance travelled/, /distance traveled/]);
+
+  if (isVelocityGraphAreaCheck) {
+    return {
+      tag: String(tag || "area_under_graph_confusion"),
+      title: "Area under the graph gives the change in displacement",
+      diagnosis: "For a velocity-time graph, the area under the graph combines velocity and time, so it represents displacement change.",
+      repair: cleanCorrectionText(displayCorrectText, "Do not read this from the line height. Use the area under the graph."),
+      noticeNext: "When the prompt asks for displacement from a velocity-time graph, think area first.",
+    };
+  }
+
+  const isDistanceGraphStationaryCheck =
+    includesAny(source, [/distance-time/, /distance time/])
+    && includesAny(source, [/stopped/, /stationary/, /not moving/, /constant distance/]);
+
+  if (isDistanceGraphStationaryCheck) {
+    return {
+      tag: String(tag || "distance_time_graph_error"),
+      title: "A flat line means the object is stationary",
+      diagnosis: "On a distance-time graph, time keeps moving along the horizontal axis while the distance stays fixed on a flat segment.",
+      repair: cleanCorrectionText(displayCorrectText, "The stopped part is the flat section because the distance does not change."),
+      noticeNext: "If time increases but the distance stays the same, the object is stationary.",
+    };
+  }
+
+  const isDistanceDisplacementCheck =
+    includesAny(source, [/distance/]) && includesAny(source, [/displacement/]);
+
+  if (isDistanceDisplacementCheck) {
+    return {
+      tag: String(tag || "distance_displacement_confusion"),
+      title: "Distance and displacement are not the same quantity",
+      diagnosis: "Distance measures the full path length. Displacement measures the change from the starting position to the final position.",
+      repair: cleanCorrectionText(displayCorrectText, "Use total path length for distance, but use start-to-finish change for displacement."),
+      noticeNext: "When the path turns back, distance and displacement separate sharply.",
+    };
+  }
+
+  const isVectorScalarCheck =
+    tag === "vector_scalar_confusion"
+    || (includesAny(source, [/vector/, /scalar/]) && includesAny(source, [/direction/, /displacement/, /velocity/, /force/, /acceleration/]));
+
+  if (isVectorScalarCheck) {
+    const cleanCorrect = displayCorrectText;
+    const direct =
+      /vector/i.test(cleanCorrect)
+        ? "This is a vector because direction is part of the quantity."
+        : /scalar/i.test(cleanCorrect)
+          ? "This is a scalar because only size matters here, not direction."
+          : cleanCorrectionText(displayCorrectText, "Decide whether direction changes the meaning of the quantity.");
+    return {
+      tag: String(tag || "vector_scalar_confusion"),
+      title: "Decide whether direction matters",
+      diagnosis: "A quantity is scalar if it only needs size. It is vector if it needs both size and direction.",
+      repair: direct,
+      noticeNext: "Ask one question: would changing the direction change the answer? If yes, it is a vector idea.",
+    };
+  }
+
+  const isBalancedForceCheck =
+    includesAny(source, [/balanced force/, /zero resultant/, /resultant force/, /net force/])
+    && includesAny(source, [/motion/, /moving/, /velocity/, /acceleration/]);
+
+  if (isBalancedForceCheck) {
+    return {
+      tag: String(tag || "balanced_force_motion_confusion"),
+      title: "Zero resultant means zero acceleration, not zero motion",
+      diagnosis: "Balanced forces stop the velocity changing. They do not automatically make the velocity zero.",
+      repair: cleanCorrectionText(displayCorrectText, "Use the resultant force to decide acceleration first. Then decide whether the object keeps moving with the same velocity."),
+      noticeNext: "No resultant force means no change in velocity.",
+    };
+  }
+
+  const isEfficiencyCheck =
+    includesAny(source, [/efficiency/, /useful output/, /useful energy/, /useful power/]);
+
+  if (isEfficiencyCheck) {
+    return {
+      tag: String(tag || "efficiency_calculation_error"),
+      title: "Efficiency compares useful output to total input",
+      diagnosis: "Efficiency is the useful fraction, not just the output value by itself.",
+      repair: cleanCorrectionText(displayCorrectText, "Use useful output divided by total input, then convert to a percentage if needed."),
+      noticeNext: "The moment you see efficiency, look for both useful output and total input.",
+    };
+  }
+
+  const contextualFallback = genericContextualRepair(tag, displayCorrectText, displayFocusText);
+  if (contextualFallback) {
+    return contextualFallback;
+  }
+
   return misconceptionSummaryForTag(tag);
+}
+
+function cleanCorrectionText(correctText: string, fallback: string): string {
+  const cleanCorrect = displayRepairText(correctText);
+  if (!cleanCorrect) {
+    return fallback;
+  }
+  return `${fallback} For this question, the correct answer is ${cleanCorrect}.`;
 }
 
 export function misconceptionSummariesForTags(

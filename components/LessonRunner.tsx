@@ -979,26 +979,25 @@ function MisconceptionRepairPanel({
     return null;
   }
 
-  return (
-    <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50/80 p-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-800">Fix this idea now</p>
-      {summary ? (
-        <div className="mt-3 grid gap-3 md:grid-cols-3">
-          <div>
-            <p className="font-semibold text-slate-800 normal-case">What to correct</p>
-            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.title}</p>
+    return (
+      <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50/80 p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-800">Use this correction</p>
+        {summary ? (
+          <div className="mt-3 space-y-3">
+            <div>
+              <p className="font-semibold text-slate-800 normal-case">Right idea</p>
+              <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.repair}</p>
+            </div>
+            <div>
+              <p className="font-semibold text-slate-800 normal-case">Why</p>
+              <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.diagnosis}</p>
+            </div>
+            <div>
+              <p className="font-semibold text-slate-800 normal-case">Next time</p>
+              <p className="mt-1 leading-6 text-slate-600 normal-case">{summary.noticeNext}</p>
+            </div>
           </div>
-          <div>
-            <p className="font-semibold text-slate-800 normal-case">Direct correction</p>
-            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.repair}</p>
-          </div>
-          <div>
-            <p className="font-semibold text-slate-800 normal-case">Why this works</p>
-            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.diagnosis}</p>
-            <p className="mt-2 leading-6 text-slate-600 normal-case">{summary.noticeNext}</p>
-          </div>
-        </div>
-      ) : null}
+        ) : null}
       {!summary && teachingFocus ? (
         <p className="mt-3 leading-6 text-slate-700 normal-case">{normalizeAssessmentText(normalizeTeachingFocusText(teachingFocus))}</p>
       ) : null}
