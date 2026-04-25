@@ -356,7 +356,7 @@ function DistanceTimeStoryFigure({
             Same Finish Comparison
           </text>
           <text x="320" y="48" fill="#cbd5e1" fontSize="13" textAnchor="middle">
-            Compare Run A's changing slope with Run B's steady slope over the same time.
+            Compare Run A&apos;s changing slope with Run B&apos;s steady slope over the same time.
           </text>
           {renderGrid()}
           {renderAxisLabels()}

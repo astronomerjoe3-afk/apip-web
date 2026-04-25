@@ -1,4 +1,22 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Account And Data Deletion",
+  description:
+    "Request deletion of a Cognispark account and associated personal data, with details on verification, deleted records, and retained compliance records.",
+  alternates: {
+    canonical: "/delete-account",
+  },
+  openGraph: {
+    url: "/delete-account",
+    title: "Cognispark Account And Data Deletion",
+    description:
+      "How to request deletion of a Cognispark account and associated personal data.",
+  },
+};
+
+const SUPPORT_EMAIL = "support@cognispark.tech";
 
 const requestItems = [
   "your full name",
@@ -80,7 +98,7 @@ export default function DeleteAccountPage() {
           <h1 style={{ margin: "12px 0 14px", fontSize: "clamp(2rem, 3vw, 3rem)", lineHeight: 1.05 }}>Cognispark account deletion starts here.</h1>
           <p style={{ margin: 0, maxWidth: 760, fontSize: 17, lineHeight: 1.7 }}>
             Effective date: <strong>2026-03-31</strong>. If you want to delete your Cognispark account and associated personal data, you can use the request form linked below or email{" "}
-            <a style={{ color: "#7cc5ff" }} href="mailto:astronomerjoe3@gmail.com">astronomerjoe3@gmail.com</a>.
+            <a style={{ color: "#7cc5ff" }} href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
           </p>
         </section>
 

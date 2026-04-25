@@ -1,3 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Cognispark privacy policy for account data, learning progress, class workflows, support requests, billing status, and deletion requests.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    url: "/privacy",
+    title: "Cognispark Privacy Policy",
+    description:
+      "How Cognispark handles learning, class, account, support, subscription, and deletion-request data.",
+  },
+};
+
+const SUPPORT_EMAIL = "support@cognispark.tech";
+const PRIVACY_EMAIL = "privacy@cognispark.tech";
+
 const sections = [
   {
     title: "What Cognispark collects",
@@ -74,9 +94,9 @@ export default function PrivacyPage() {
         <section style={card}>
           <h2 style={{ marginTop: 0, fontSize: 22 }}>Contact</h2>
           <p style={{ lineHeight: 1.8 }}>
-            Privacy requests: <a href="mailto:josephjobescape@gmail.com">josephjobescape@gmail.com</a>
+            Privacy requests: <a href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a>
             <br />
-            Support requests: <a href="mailto:astronomerjoe3@gmail.com">astronomerjoe3@gmail.com</a>
+            Support requests: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
             <br />
             Account deletion requests: visit <strong>/delete-account</strong> on this site.
           </p>
