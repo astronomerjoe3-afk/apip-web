@@ -23,14 +23,9 @@ import M13SimulationPanels from "./M13SimulationPanels";
 import M14SimulationPanels from "./M14SimulationPanels";
 import F5SimulationPanels from "./F5SimulationPanels";
 import A1SimulationPanels from "./A1SimulationPanels";
-import A2SimulationPanels from "./A2SimulationPanels";
 import A3SimulationPanels from "./A3SimulationPanels";
 import A5SimulationPanels from "./A5SimulationPanels";
 import A4SimulationPanels from "./A4SimulationPanels";
-import A8SimulationPanels from "./A8SimulationPanels";
-import A9SimulationPanels from "./A9SimulationPanels";
-import A10SimulationPanels from "./A10SimulationPanels";
-import A11SimulationPanels from "./A11SimulationPanels";
 import A6ToA11SimulationPanels from "./A6ToA11SimulationPanels";
 
 type StageName =
@@ -525,11 +520,6 @@ function ScaffoldVideoPlayer({
 type ScaffoldStagePayload = {
   title?: string;
   intro?: string;
-  lesson_introduction?: {
-    heading: string;
-    body: string;
-    bullets?: string[];
-  }[];
   teaching_focus?: string[];
   misconception_targets?: string[];
   teaching_focus_cards?: TeachingFocusCard[];
@@ -1702,8 +1692,9 @@ export default function LessonRunner({
   const renderScaffold = () => {
     const payload = runner.stage_payload as ScaffoldStagePayload;
     const seenMediaImageUrls = new Set<string>();
-    const normalizedTeachingFocus = (payload.teaching_focus ?? []).map(normalizeTeachingFocusText);
+
     const scaffoldFocusCards = payload.teaching_focus_cards?.slice(0, 4) ?? [];
+    const normalizedTeachingFocus = (payload.teaching_focus ?? []).map(normalizeTeachingFocusText);
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
       ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
       : normalizedTeachingFocus.slice(0, 4);
@@ -1714,7 +1705,7 @@ export default function LessonRunner({
       createClarityCard("What stays the same", scaffoldFocusItems[2] ?? "The quantity definitions stay fixed while the examples change."),
       createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not rush to a formula before naming what is changing and what is staying the same.")),
     ]);
-    const introCount = payload.intro || payload.lesson_introduction?.length ? 1 : 0;
+    const introCount = payload.intro || payload.teaching_focus?.length ? 1 : 0;
     const clarityCount = scaffoldClarityCards.length ? 1 : 0;
     const tableCount = payload.reference_tables?.length ?? 0;
     const mediaCount = payload.media_cards?.length ?? 0;
@@ -1763,8 +1754,934 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4"
         ? (() => {
+            if (lessonId === "F1_L4") {
+              if (isTableStep && activeTableIndex === 0) {
+                return {
+                  id: `f1-l4-table-${activeTableIndex}`,
+                  badge: "Digits desk",
+                  title: "Mark which digits really count",
+                  scenario:
+                    "A lab partner is about to publish a counting rule for significant figures, but one line would make the whole board unreliable. You need the version that keeps the counting honest.",
+                  prompt: "Choose the counting rule you send.",
+                  options: [
+                    {
+                      value: "leading_zeros_place_only",
+                      label: "Leading zeros only place the decimal point; they do not add significant figures, but trailing zeros after a decimal can show real precision.",
+                      feedback:
+                        "Exactly. That rule keeps placeholder zeros separate from digits that carry measured precision.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all_zeros_count",
+                      label: "Every zero counts as significant because it is still a written digit in the number.",
+                      feedback:
+                        "That would overcount numbers like 0.0045. Some zeros only position the decimal point and do not show measured precision.",
+                    },
+                    {
+                      value: "decimal_zeros_never_count",
+                      label: "Zeros after a decimal never count, because decimals are only there to make the number easier to read.",
+                      feedback:
+                        "That throws away real precision. In a value like 2.300, the trailing zeros after the decimal can show measured detail.",
+                    },
+                  ],
+                  successLabel: "Digits desk secured. The count now reflects real precision.",
+                  retryLabel: "That rule would make the crew count placeholder digits as if they were measured ones.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isTableStep && activeTableIndex === 1) {
+                return {
+                  id: `f1-l4-table-${activeTableIndex}`,
+                  badge: "Rounding tower",
+                  title: "Approve the rounding call",
+                  scenario:
+                    "The rounding tower is ready to issue one instruction to the whole team. It has to stop people from guessing based on the last kept digit alone.",
+                  prompt: "Choose the rounding instruction you broadcast.",
+                  options: [
+                    {
+                      value: "look_at_next_digit",
+                      label: "Keep the digits you want, then check the next digit only: 0 to 4 means keep it, 5 to 9 means round up.",
+                      feedback:
+                        "Exactly. The next digit is the control point for the rounding decision.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "round_from_last_digit",
+                      label: "Decide whether to round by looking only at the last digit you plan to keep.",
+                      feedback:
+                        "That misses the deciding digit. You need the next digit after the last kept one before you round.",
+                    },
+                    {
+                      value: "decimal_places_first",
+                      label: "Use the decimal point position first, because significant-figure rounding and decimal-place rounding are basically the same move.",
+                      feedback:
+                        "The rules overlap sometimes, but they are not the same. Significant-figure rounding still depends on which digits actually count.",
+                    },
+                  ],
+                  successLabel: "Rounding tower aligned. The crew now knows exactly where to look.",
+                  retryLabel: "That instruction would make the tower round by habit instead of by rule.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isTableStep && activeTableIndex === 2) {
+                return {
+                  id: `f1-l4-table-${activeTableIndex}`,
+                  badge: "Notebook check",
+                  title: "Choose the reporting rule",
+                  scenario:
+                    "A trainee keeps using one reporting rule for every calculation. You need the notebook line that separates addition or subtraction from multiplication or division.",
+                  prompt: "Choose the notebook line you send.",
+                  options: [
+                    {
+                      value: "operation_sets_rule",
+                      label: "Use least decimal places for addition or subtraction, but least significant figures for multiplication or division.",
+                      feedback:
+                        "Exactly. The operation decides which precision rule controls the final answer.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "always_least_sig_figs",
+                      label: "Always keep the least significant figures, because that rule is safest for every calculation.",
+                      feedback:
+                        "That would misreport addition and subtraction. Those answers are controlled by decimal places, not total significant figures.",
+                    },
+                    {
+                      value: "calculator_digits_rule",
+                      label: "Follow however many digits the calculator shows, then trim only if the result looks awkward.",
+                      feedback:
+                        "The calculator does not decide the reporting rule. The measurements and the operation do.",
+                    },
+                  ],
+                  successLabel: "Notebook rule posted. The crew can now report each calculation honestly.",
+                  retryLabel: "That line would mix up two different reporting rules.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f1-l4-last-kept-digit",
+                  badge: "Precision screen",
+                  title: "Freeze the last-kept-digit moment",
+                  scenario:
+                    "The crew is watching the significant-figures visual. You can pin one coaching note to the display before the demonstration continues.",
+                  prompt: "Pin the note that keeps the rounding step clean.",
+                  options: [
+                    {
+                      value: "next_digit_controls_rounding",
+                      label: "Look at the next digit after the last one you want to keep. That one decides whether the kept digit stays or rounds up.",
+                      feedback:
+                        "Exactly. That keeps the crew looking at the right place in the number.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "keep_all_decimal_digits",
+                      label: "If the number has a decimal point, keep all the digits after it because they are all automatically significant.",
+                      feedback:
+                        "A decimal point does not make every digit significant. You still have to decide which digits count and then round from the next one.",
+                    },
+                    {
+                      value: "first_non_zero_sets_answer",
+                      label: "Once you find the first non-zero digit, the rest of the number can be copied straight across without any extra check.",
+                      feedback:
+                        "Finding the first significant digit only starts the count. The next digit after the last kept one still controls the rounding.",
+                    },
+                  ],
+                  successLabel: "Pinned. The display now shows where the rounding decision really happens.",
+                  retryLabel: "That note would send the crew to the wrong digit.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 1) {
+                return {
+                  id: "f1-l4-calculator-notebook",
+                  badge: "Lab notebook",
+                  title: "Stop the calculator copy habit",
+                  scenario:
+                    "A trainee wants to copy the calculator screen into the lab notebook exactly as it appears. You need the one correction that protects the final answer.",
+                  prompt: "Choose the correction you send.",
+                  options: [
+                    {
+                      value: "screen_is_not_final_report",
+                      label: "Do the calculation first, then apply the correct reporting rule before writing the final answer in the notebook.",
+                      feedback:
+                        "Exactly. The calculator gives the raw result, but the notebook must reflect justified precision.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "copy_if_precise",
+                      label: "Copy every calculator digit if the question looks precise enough, because the machine is more exact than the student.",
+                      feedback:
+                        "The screen can show more digits than the measurements justify. Precision still has to be limited by the reporting rule.",
+                    },
+                    {
+                      value: "round_only_if_asked",
+                      label: "Only round if the question explicitly says to; otherwise every displayed digit belongs in the final answer.",
+                      feedback:
+                        "Physics answers still need justified precision even when the question does not use the word round.",
+                    },
+                  ],
+                  successLabel: "Notebook protected. The crew will not confuse calculator output with the final report.",
+                  retryLabel: "That advice would let unsupported digits slip into the notebook.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f1-l4-fix-ideas",
+                    badge: "Repair desk",
+                    title: "Correct the precision myth",
+                    scenario:
+                      "A trainee has written that more digits always make a physics answer better. You need one repair note before that idea gets copied into the whole pack.",
+                    prompt: "Choose the repair you send.",
+                    options: [
+                      {
+                        value: "justified_digits_only",
+                        label: "A better answer uses only the digits the measurement or calculation rule can honestly justify.",
+                        feedback:
+                          "Exactly. More digits only help when the measurement really supports them.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "longer_means_better",
+                        label: "A longer answer is always stronger because it gives the examiner more detail to work with.",
+                        feedback:
+                          "Extra digits can pretend to a precision the measurement never gave you. Longer is not automatically better.",
+                      },
+                      {
+                        value: "units_make_digits_safe",
+                        label: "As long as the unit is correct, extra digits cannot do any harm to the final answer.",
+                        feedback:
+                          "Correct units matter, but they do not rescue unsupported precision. The number itself still has to be reported honestly.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The idea of honest precision is back in place.",
+                    retryLabel: "That would keep the bad precision habit alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f1-l4-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line precision rule",
+                    scenario:
+                      "Quest Control wants a single line the whole team can repeat before they write any final number.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "precision_must_be_justified",
+                        label: "Use enough digits to show the justified precision, but not so many that the answer pretends to more certainty than it has.",
+                        feedback:
+                          "Exactly. That is the anchor idea for this lesson.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "keep_every_digit_seen",
+                        label: "Keep every digit you can see, then let the examiner decide which ones matter.",
+                        feedback:
+                          "That hands off a decision the student must make. The final answer should already reflect justified precision.",
+                      },
+                      {
+                        value: "round_everything_aggressively",
+                        label: "Round every final answer hard to keep it simple, even if the calculation supports more detail.",
+                        feedback:
+                          "Oversimplifying can lose justified information. The goal is not shorter answers; it is honest answers.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean precision standard.",
+                    retryLabel: "That line would confuse honesty with convenience.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "which digits count") {
+                  return {
+                    id: "f1-l4-which-digits-count",
+                    badge: "Count board",
+                    title: "Mark the zeros correctly",
+                    scenario:
+                      "The count board is almost right, but one crew member still treats every zero the same. You need the note that fixes that mistake.",
+                    prompt: "Choose the note you pin to the board.",
+                    options: [
+                      {
+                        value: "zeros_have_different_jobs",
+                        label: "Some zeros only place the decimal point, while others show measured precision, so you have to judge them by position.",
+                        feedback:
+                          "Exactly. Position decides whether a zero is a placeholder or part of the measured precision.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "zeros_never_count",
+                        label: "Zeros are only placeholders, so they never count as significant figures in any position.",
+                        feedback:
+                          "That would wrongly remove zeros that do show precision, like trailing zeros after a decimal or zeros between non-zero digits.",
+                      },
+                      {
+                        value: "zeros_always_count",
+                        label: "If the number is written down, every zero counts because the instrument displayed it somehow.",
+                        feedback:
+                          "That would overcount leading zeros that only locate the decimal point.",
+                      },
+                    ],
+                    successLabel: "Count board corrected. The crew can now judge zeros by what they do.",
+                    retryLabel: "That note would keep the zero-counting rule blurred.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "rounding with purpose") {
+                  return {
+                    id: "f1-l4-rounding-with-purpose",
+                    badge: "Round-off relay",
+                    title: "Send the rounding move",
+                    scenario:
+                      "The team is about to round by instinct instead of by rule. You need one short instruction that makes the decision process reliable.",
+                    prompt: "Choose the instruction you send.",
+                    options: [
+                      {
+                        value: "keep_then_check_next",
+                        label: "Keep the digits you want first, then look at the next digit and let that digit decide whether to round up.",
+                        feedback:
+                          "Exactly. That gives the team a repeatable rounding move instead of a guess.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "nearest_whole_first",
+                        label: "Round to the nearest whole number first, then rebuild the significant figures afterward.",
+                        feedback:
+                          "That changes the number too early. The rounding move should happen at the place value you are actually targeting.",
+                      },
+                      {
+                        value: "always_round_up_if_decimal",
+                        label: "Any decimal digit means the answer should usually round up to look safer.",
+                        feedback:
+                          "Rounding is not about playing safe. It depends on the next digit after the last kept one.",
+                      },
+                    ],
+                    successLabel: "Rounding move sent. The crew can now round with purpose instead of instinct.",
+                    retryLabel: "That would turn a rule-governed step into guesswork.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "rules for calculations") {
+                  return {
+                    id: "f1-l4-rules-for-calculations",
+                    badge: "Calculation dispatch",
+                    title: "Call the right precision rule",
+                    scenario:
+                      "Two teams are solving the same worksheet, but one is using sig figs for every answer and the other is using decimal places for every answer. You need the line that stops both mistakes.",
+                    prompt: "Choose the dispatch line.",
+                    options: [
+                      {
+                        value: "operation_decides_precision",
+                        label: "Ask what operation was used first: addition or subtraction uses decimal places, while multiplication or division uses significant figures.",
+                        feedback:
+                          "Exactly. The operation tells you which reporting rule belongs to the final answer.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "same_rule_everywhere",
+                        label: "Pick one precision rule at the start of the lesson and keep using it so the answers stay consistent.",
+                        feedback:
+                          "Consistency matters, but the operation still changes the rule. One rule cannot handle every calculation honestly.",
+                      },
+                      {
+                        value: "look_only_at_biggest_number",
+                        label: "Let the largest number in the question decide the precision rule, because it dominates the calculation.",
+                        feedback:
+                          "The size of the number is not the deciding feature. The operation and the least precise measurement are what matter.",
+                      },
+                    ],
+                    successLabel: "Dispatch sent. Each calculation can now follow the right reporting rule.",
+                    retryLabel: "That would leave one of the teams using the wrong rule again.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "calculator answers need a final check") {
+                  return {
+                    id: "f1-l4-calculator-final-check",
+                    badge: "Final check",
+                    title: "Approve the notebook entry",
+                    scenario:
+                      "The calculator has finished, and the trainee is about to ink the answer straight into the notebook. You need the one approval rule that keeps the final line honest.",
+                    prompt: "Choose the approval rule.",
+                    options: [
+                      {
+                        value: "apply_rule_after_calculation",
+                        label: "Write the raw result only in rough work, then apply the correct rounding or reporting rule before the final notebook answer.",
+                        feedback:
+                          "Exactly. The final line belongs to the notebook only after the precision rule has been checked.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "screen_is_final",
+                        label: "If the calculator produced the number, the notebook should copy it exactly because the machine has already done the hard work.",
+                        feedback:
+                          "The machine gives a raw result, not the final reported answer. The precision rule still has to be applied.",
+                      },
+                      {
+                        value: "only_units_need_checking",
+                        label: "Once the unit is right, the digits can stay exactly as shown because the final check is only about units.",
+                        feedback:
+                          "Units matter, but the digit count matters too. The final check is about honest reporting, not just the unit label.",
+                      },
+                    ],
+                    successLabel: "Notebook entry approved. The final answer now matches the physics, not just the calculator screen.",
+                    retryLabel: "That approval would let unsupported digits slip through the final check.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f1-l4-analogy",
+                    badge: "Analogy relay",
+                    title: "Pick the precision analogy",
+                    scenario:
+                      "The team wants one everyday comparison that helps beginners understand why extra digits can be dishonest without making the idea fluffy.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "photo_quality",
+                        label: "A measurement is like a photo saved at a certain quality: you cannot honestly add sharper detail after the picture has been taken.",
+                        feedback:
+                          "Exactly. That analogy keeps the idea of limited captured detail without drifting away from the precision lesson.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "guess_more_for_better",
+                        label: "A measurement is like filling in the missing parts of a sketch: the more detail you imagine, the stronger the final image becomes.",
+                        feedback:
+                          "That pushes learners toward invented detail. The whole lesson is about not pretending to more precision than was captured.",
+                      },
+                      {
+                        value: "calculator_is_camera",
+                        label: "A calculator is like a camera that always records the exact scene perfectly, so the notebook should trust it completely.",
+                        feedback:
+                          "That gives too much authority to the calculator. The measurement quality still limits what the final report can claim.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the lesson instead of weakening the honesty rule.",
+                    retryLabel: "That analogy would encourage the wrong instinct about extra digits.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
+            if (lessonId === "F1_L3") {
+              if (isTableStep && activeTableIndex === 0) {
+                return {
+                  id: `f1-l3-table-${activeTableIndex}`,
+                  badge: "Instrument bay",
+                  title: "Match the job to the tool",
+                  scenario:
+                    "The lab crew is about to measure a desk, a wire thickness, and a short time interval. You need the assignment note that stops them using one tool for every job.",
+                  prompt: "Choose the setup note you send.",
+                  options: [
+                    {
+                      value: "match_tool_to_scale",
+                      label: "Match each job to the tool that suits its scale and the detail you need before taking the reading.",
+                      feedback:
+                        "Exactly. Tool choice should follow the size of the object and the resolution the job demands.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same_tool_everywhere",
+                      label: "Use the metre rule first for every job, then convert carefully afterward if the numbers look awkward.",
+                      feedback:
+                        "A later conversion cannot rescue a poor tool choice. The instrument has to suit the measurement from the start.",
+                    },
+                    {
+                      value: "smallest_tool_always",
+                      label: "Always use the finest tool available because more decimal places automatically mean the reading is better.",
+                      feedback:
+                        "Finer tools help only when they match the job. A tool must suit both the object and the way the reading is taken.",
+                    },
+                  ],
+                  successLabel: "Instrument bay aligned. Each job now has a sensible setup.",
+                  retryLabel: "That note would weaken at least one measurement before it begins.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isTableStep && activeTableIndex === 1) {
+                return {
+                  id: `f1-l3-table-${activeTableIndex}`,
+                  badge: "Readout desk",
+                  title: "Protect the honest digits",
+                  scenario:
+                    "A trainee is writing down more digits than the scale can really support. You need the guidance line that protects the report.",
+                  prompt: "Choose the guidance line.",
+                  options: [
+                    {
+                      value: "report_supported_precision",
+                      label: "Write only the detail the scale can justify, then attach an uncertainty that matches the instrument.",
+                      feedback:
+                        "Exactly. The report has to match what the instrument can honestly support.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "copy_all_digits",
+                      label: "Copy every digit you can imagine from the scale because more digits always make the result stronger.",
+                      feedback:
+                        "Extra digits can pretend to a precision the instrument never gave you. Only justified detail belongs in the report.",
+                    },
+                    {
+                      value: "uncertainty_optional",
+                      label: "If the scale looks clear enough, leave uncertainty off and just trust the number itself.",
+                      feedback:
+                        "Uncertainty is part of honest reporting. It tells the reader how much confidence the instrument really supports.",
+                    },
+                  ],
+                  successLabel: "Readout protected. The report now matches the instrument honestly.",
+                  retryLabel: "That would make the reading look more certain than it really is.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isTableStep && activeTableIndex === 2) {
+                return {
+                  id: `f1-l3-table-${activeTableIndex}`,
+                  badge: "Quality board",
+                  title: "Call the error type correctly",
+                  scenario:
+                    "The crew has three strange result patterns on the quality board. You need the rule that stops them using one error label for all of them.",
+                  prompt: "Choose the classification note.",
+                  options: [
+                    {
+                      value: "different_patterns_need_different_responses",
+                      label: "Random scatter, systematic shift, and one-off reading mistakes look different and need different fixes.",
+                      feedback:
+                        "Exactly. Error patterns only become useful when they are classified by how they behave and how they are reduced.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all_error_same",
+                      label: "All error is basically the same, so the best fix is always to repeat the reading a few times.",
+                      feedback:
+                        "Repeats help with random error, but they do not automatically remove a systematic shift or a bad instrument setup.",
+                    },
+                    {
+                      value: "systematic_is_random",
+                      label: "If the readings keep landing high in the same way, that just means the random error is unusually strong.",
+                      feedback:
+                        "A fixed shift in one direction is the sign of systematic error, not stronger random scatter.",
+                    },
+                  ],
+                  successLabel: "Quality board sorted. The crew can now choose the right fix for each pattern.",
+                  retryLabel: "That note would blur error patterns that need different responses.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f1-l3-resolution-ladder",
+                  badge: "Resolution ladder",
+                  title: "Post the ladder rule",
+                  scenario:
+                    "The crew is comparing ruler, caliper, and micrometer views of the same object. You get one note before they start chasing extra digits.",
+                  prompt: "Choose the note to post.",
+                  options: [
+                    {
+                      value: "finer_scale_more_justified_detail",
+                      label: "A finer scale can justify smaller differences and usually supports a smaller uncertainty for the same object.",
+                      feedback:
+                        "Exactly. The object stays the same, but the instrument resolution changes what you can honestly claim.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "object_changes_precision",
+                      label: "The object becomes more precise when you swap to a finer instrument, so the reading itself changes quality automatically.",
+                      feedback:
+                        "The object does not become more precise. The instrument simply lets you resolve and report the same object more carefully.",
+                    },
+                    {
+                      value: "same_digits_every_tool",
+                      label: "If the object is the same, every tool should produce the same number of useful digits once you look hard enough.",
+                      feedback:
+                        "Different instruments support different justified detail. The digits must match the scale, not your effort level.",
+                    },
+                  ],
+                  successLabel: "Rule posted. The ladder now tells the right measurement story.",
+                  retryLabel: "That note would turn resolution into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 1) {
+                return {
+                  id: "f1-l3-instrument-tour",
+                  badge: "Instrument tour",
+                  title: "Choose the tour instruction",
+                  scenario:
+                    "A trainee is jumping between controls on the instrument tour and losing track of what each tool actually improves. You get one coaching line.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "change_one_thing",
+                      label: "Switch one instrument at a time and compare what happens to the smallest visible step and the uncertainty you can justify.",
+                      feedback:
+                        "Exactly. One controlled change at a time is what makes the instrument comparison meaningful.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "change_everything",
+                      label: "Change several controls quickly so you can reach the most detailed reading as fast as possible.",
+                      feedback:
+                        "That makes it hard to tell what actually caused the better or worse reading. A clean comparison needs one change at a time.",
+                    },
+                    {
+                      value: "ignore_uncertainty",
+                      label: "Focus only on the last displayed number because uncertainty is a later reporting issue, not part of the tour.",
+                      feedback:
+                        "The tour is exactly where uncertainty becomes visible. It should travel with the reading from the start.",
+                    },
+                  ],
+                  successLabel: "Coaching sent. The tour now behaves like an investigation instead of a scramble.",
+                  retryLabel: "That would make the tour look busy without teaching what changed.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 2) {
+                return {
+                  id: "f1-l3-error-compare",
+                  badge: "Pattern check",
+                  title: "Separate the two error stories",
+                  scenario:
+                    "The crew is looking at the random-error and zero-error visual. You need one sentence that stops them treating every bad result as the same kind of problem.",
+                  prompt: "Choose the sentence to send.",
+                  options: [
+                    {
+                      value: "scatter_vs_shift",
+                      label: "Random error makes readings scatter around a best value, but zero error shifts every reading by the same amount.",
+                      feedback:
+                        "Exactly. That is the clean split the crew needs before they decide how to improve the method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "both_random",
+                      label: "Both pictures show random error; one just happens to look tidier than the other.",
+                      feedback:
+                        "A fixed offset is not random. It is the clue that the instrument or setup is shifting every reading the same way.",
+                    },
+                    {
+                      value: "average_fixes_all",
+                      label: "Averaging repeated readings will remove both patterns as long as enough trials are taken.",
+                      feedback:
+                        "Averaging helps reduce random scatter, but it does not automatically remove a systematic shift like zero error.",
+                    },
+                  ],
+                  successLabel: "Pattern check sent. The two error stories are now clearly separated.",
+                  retryLabel: "That would flatten two different problems into one blurry idea.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f1-l3-fix-ideas",
+                    badge: "Repair desk",
+                    title: "Fix the shaky measurement note",
+                    scenario:
+                      "A trainee has written that any measured number is trustworthy as long as it looks neat. You need one correction before that note gets copied.",
+                    prompt: "Choose the correction you send.",
+                    options: [
+                      {
+                        value: "tool_and_method_set_trust",
+                        label: "A reading is only as trustworthy as the tool and method behind it, not just the neatness of the number.",
+                        feedback:
+                          "Exactly. Trust comes from the instrument, the method, and the uncertainty the reading can support.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "neat_number_enough",
+                        label: "If the number is written clearly with a unit, that is enough to treat the measurement as trustworthy.",
+                        feedback:
+                          "Clear writing helps, but it does not prove the instrument or method justified the reading.",
+                      },
+                      {
+                        value: "decimal_places_mean_trust",
+                        label: "The reading with the most decimal places is always the most trustworthy one.",
+                        feedback:
+                          "Extra decimal places can be misleading if the instrument did not support them. Trust depends on justified detail, not just longer numbers.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The measurement note now has a solid foundation.",
+                    retryLabel: "That would leave the trust question dangerously vague.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f1-l3-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the trust rule",
+                    scenario:
+                      "Quest Control wants one short rule the whole team can repeat before they touch any measurement question.",
+                    prompt: "Choose the rule to post.",
+                    options: [
+                      {
+                        value: "instrument_sets_detail",
+                        label: "The instrument sets the smallest trustworthy detail you can claim, so the report must match the tool.",
+                        feedback:
+                          "Exactly. That is the anchor idea for the lesson.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "reader_sets_detail",
+                        label: "The careful reader decides how many digits are trustworthy once the scale is visible.",
+                        feedback:
+                          "Care helps, but the instrument still sets the limit. You cannot invent detail the scale does not support.",
+                      },
+                      {
+                        value: "average_sets_detail",
+                        label: "Repeating a reading enough times automatically makes any extra digits trustworthy.",
+                        feedback:
+                          "Repeats help with scatter, but they do not overrule the instrument’s resolution or erase systematic limits.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The whole room now has the same anchor idea.",
+                    retryLabel: "That rule would give the team too much confidence in unsupported digits.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "technical words") {
+                  return {
+                    id: "f1-l3-technical-words",
+                    badge: "Term desk",
+                    title: "Clean up the measurement language",
+                    scenario:
+                      "The examples are good, but the crew keeps mixing up scale step, resolution, and uncertainty. You need the vocabulary card that separates them.",
+                    prompt: "Choose the card to post.",
+                    options: [
+                      {
+                        value: "scale_resolution_uncertainty",
+                        label: "The smallest division is what you can see on the scale, resolution is the smallest meaningful change shown, and uncertainty is the range you can honestly justify around the reading.",
+                        feedback:
+                          "Exactly. That gives the crew three different jobs instead of one blurry measurement word.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "all_same",
+                        label: "Smallest division, resolution, and uncertainty all mean the same thing in practice, so one definition is enough.",
+                        feedback:
+                          "They are connected, but they are not identical. Each one answers a slightly different question about the reading.",
+                      },
+                      {
+                        value: "resolution_is_digits",
+                        label: "Resolution is simply the number of digits the instrument display happens to show.",
+                        feedback:
+                          "Displayed digits can mislead. Resolution is about the smallest meaningful change the instrument can actually show.",
+                      },
+                    ],
+                    successLabel: "Vocabulary sorted. The crew can now talk about readings precisely.",
+                    retryLabel: "That wording would keep the measurement language tangled.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "technical words continued") {
+                  return {
+                    id: "f1-l3-technical-words-continued",
+                    badge: "Term relay",
+                    title: "Finish the error glossary",
+                    scenario:
+                      "A second glossary card is about to go up. It needs to separate random error from systematic error without making them sound interchangeable.",
+                    prompt: "Choose the follow-up line.",
+                    options: [
+                      {
+                        value: "random_vs_systematic",
+                        label: "Random error makes readings spread out, while systematic error pushes them in the same wrong direction each time.",
+                        feedback:
+                          "Exactly. That is the split the crew needs before they choose how to respond.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "random_is_small",
+                        label: "Random error is just the smaller version of systematic error, so the same fix works for both.",
+                        feedback:
+                          "They are different patterns, not small and large versions of the same thing. The fixes are different too.",
+                      },
+                      {
+                        value: "systematic_is_mistake",
+                        label: "Systematic error just means one careless misread that should be ignored if the other readings look fine.",
+                        feedback:
+                          "A one-off careless read is different. Systematic error affects the whole set in the same direction.",
+                      },
+                    ],
+                    successLabel: "Glossary handoff complete.",
+                    retryLabel: "That would blur two error patterns the crew needs to keep apart.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "resolution and uncertainty") {
+                  return {
+                    id: "f1-l3-resolution-uncertainty",
+                    badge: "Readout desk",
+                    title: "Choose the honest report",
+                    scenario:
+                      "The crew has a reading from a ruler and wants to report it with extra confidence. You need the note that keeps the report honest.",
+                    prompt: "Choose the note to post.",
+                    options: [
+                      {
+                        value: "match_uncertainty_to_scale",
+                        label: "Tie the uncertainty to the instrument scale, because the report should never claim more detail than the tool supports.",
+                        feedback:
+                          "Exactly. The uncertainty is what stops the report from pretending to a precision it never earned.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "best_digit_only",
+                        label: "Keep the neatest final digit and leave uncertainty out so the result looks cleaner.",
+                        feedback:
+                          "Clean formatting is not the goal. Honest reporting means showing the limit of what the tool could support.",
+                      },
+                      {
+                        value: "more_digits_is_safer",
+                        label: "Add one extra digit if you feel confident, because a more detailed answer gives the reader more information.",
+                        feedback:
+                          "Unsupported detail gives the reader false confidence. Extra digits are only useful when the instrument justified them.",
+                      },
+                    ],
+                    successLabel: "Report protected. The reading now looks honest instead of overclaimed.",
+                    retryLabel: "That would make the report look stronger than the instrument allowed.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "reading a scale honestly") {
+                  return {
+                    id: "f1-l3-reading-scale",
+                    badge: "Scale check",
+                    title: "Coach the reading method",
+                    scenario:
+                      "A trainee is trying to impress the crew by inventing digits between marks. You get one instruction before they write the result down.",
+                    prompt: "Choose the instruction you send.",
+                    options: [
+                      {
+                        value: "read_then_estimate_carefully",
+                        label: "Read to the smallest clear division, estimate carefully only where the tool allows it, and never invent digits the scale cannot support.",
+                        feedback:
+                          "Exactly. That is the habit that keeps the reading matched to the instrument.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "fill_gaps_with_digits",
+                        label: "If there is any empty space between marks, add enough extra digits to make the answer look smooth.",
+                        feedback:
+                          "That turns guessing into fake precision. A reading should reflect the scale, not the wish for a cleaner number.",
+                      },
+                      {
+                        value: "always_halfway",
+                        label: "Whenever you are unsure, write a halfway digit automatically because that is the fairest compromise.",
+                        feedback:
+                          "A default halfway guess is not a method. The estimate must come from what the scale actually lets you see.",
+                      },
+                    ],
+                    successLabel: "Method sent. The trainee now has a trustworthy reading routine.",
+                    retryLabel: "That instruction would encourage invented precision.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "different types of error") {
+                  return {
+                    id: "f1-l3-different-errors",
+                    badge: "Pattern board",
+                    title: "Choose the right response",
+                    scenario:
+                      "The crew has identified two different error patterns and wants one response that fixes both. You need the note that keeps the strategy honest.",
+                    prompt: "Choose the response note.",
+                    options: [
+                      {
+                        value: "match_fix_to_pattern",
+                        label: "Use repeats and averaging for random scatter, but check zero error and calibration for a fixed shift.",
+                        feedback:
+                          "Exactly. The response has to match the error pattern instead of treating every problem the same way.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "average_everything",
+                        label: "Average every set of readings and the error problem is solved, no matter what pattern caused it.",
+                        feedback:
+                          "Averaging helps with scatter, but it does not automatically remove a systematic shift from every reading.",
+                      },
+                      {
+                        value: "recalibrate_everything",
+                        label: "Recalibrate first for every problem, because all error patterns come from the instrument eventually.",
+                        feedback:
+                          "Calibration matters for systematic issues, but random scatter often needs repeated readings and averaging instead.",
+                      },
+                    ],
+                    successLabel: "Response chosen. The crew can now treat each pattern properly.",
+                    retryLabel: "That would apply the wrong fix to at least one kind of error.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reduce error") {
+                  return {
+                    id: "f1-l3-reduce-error",
+                    badge: "Method board",
+                    title: "Post the improvement plan",
+                    scenario:
+                      "Quest Control wants one improvement plan the crew can follow before the worked example. It has to reduce error without pretending perfect measurement is possible.",
+                    prompt: "Choose the plan to post.",
+                    options: [
+                      {
+                        value: "repeat_check_zero_choose_tool",
+                        label: "Repeat readings, average when scatter matters, check for zero error, and choose a tool that suits the scale of the job.",
+                        feedback:
+                          "Exactly. That is a realistic plan for reducing error while still reporting honest uncertainty.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "repeat_until_exact",
+                        label: "Repeat the reading until the numbers match exactly, then stop because the uncertainty has effectively disappeared.",
+                        feedback:
+                          "Repeats improve confidence, but they do not erase uncertainty completely. Honest reporting still matters.",
+                      },
+                      {
+                        value: "ignore_small_errors",
+                        label: "Ignore small offsets once the main reading looks reasonable, because only large mistakes affect physics conclusions.",
+                        feedback:
+                          "Small shifts can still matter, especially if they affect every reading in the same direction. They should be checked, not ignored.",
+                      },
+                    ],
+                    successLabel: "Plan posted. The crew now has a realistic route to stronger measurements.",
+                    retryLabel: "That plan would promise more certainty than the method can deliver.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f1-l3-analogy",
+                    badge: "Story relay",
+                    title: "Pick the analogy that keeps measurement honest",
+                    scenario:
+                      "The team wants an analogy that helps beginners feel the difference between blurry and trustworthy measurement without weakening the science.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "blurry_photo",
+                        label: "Treat a low-resolution reading like a blurry photo: you can see the big shape, but not the tiny detail reliably.",
+                        feedback:
+                          "Exactly. That captures why low resolution limits what details you can honestly claim.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "zoom_makes_truth",
+                        label: "Treat a finer tool like digital zoom, because the main job is to make the number look bigger and more detailed.",
+                        feedback:
+                          "That risks the wrong idea. A better tool reveals more genuine detail; it is not just enlarging the same weak reading.",
+                      },
+                      {
+                        value: "photo_never_wrong",
+                        label: "Treat any measured reading like a clear photo once it has been written down, because the number itself locks the truth.",
+                        feedback:
+                          "A written number can still overclaim if the instrument and method did not support it. The tool still matters.",
+                      },
+                    ],
+                    successLabel: "Good analogy. It supports the trust idea instead of distorting it.",
+                    retryLabel: "That analogy would weaken the lesson’s honesty about measurement limits.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F1_L2") {
               if (isTableStep && activeTableIndex === 0) {
                 return {
@@ -2876,21 +3793,14 @@ export default function LessonRunner({
           <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
             {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{normalizeLessonDisplayMultiline(payload.intro)}</p> : null}
 
-          {payload.lesson_introduction?.length ? (
-            <div className={`${payload.intro ? "mt-4" : ""} space-y-4`}>
-              {payload.lesson_introduction.map((section, index) => (
-                <div key={`${section.heading}-${index}`} className="rounded-2xl border border-slate-200 bg-white/80 p-5">
-                  <p className="font-medium text-slate-900">{normalizeLessonDisplayText(section.heading)}</p>
-                  <p className="mt-2 text-slate-700">{normalizeLessonDisplayMultiline(section.body)}</p>
-                  {section.bullets?.length ? (
-                    <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
-                      {section.bullets.map((bullet, bulletIndex) => (
-                        <li key={`${section.heading}-${bulletIndex}`}>{normalizeLessonDisplayMultiline(bullet)}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              ))}
+          {normalizedTeachingFocus.length ? (
+            <div className={`${payload.intro ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
+              <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
+                {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
+                  <li key={`${index}-${item}`}>{normalizeLessonDisplayMultiline(item)}</li>
+                ))}
+              </ul>
             </div>
           ) : null}
         </div>
@@ -4888,27 +5798,6 @@ export default function LessonRunner({
             simVectorAngle={simVectorAngle}
             setSimVectorAngle={setSimVectorAngle}
           />
-        ) : simulationLessonKey.startsWith("A2_") ? (
-          <A2SimulationPanels
-            lessonKey={simulationLessonKey}
-            simMetricMeters={simMetricMeters}
-            setSimMetricMeters={setSimMetricMeters}
-            simVectorMagnitude={simVectorMagnitude}
-            setSimVectorMagnitude={setSimVectorMagnitude}
-            simVectorAngle={simVectorAngle}
-            setSimVectorAngle={setSimVectorAngle}
-            simDensityMass={simDensityMass}
-            setSimDensityMass={setSimDensityMass}
-            simDensityVolume={simDensityVolume}
-            setSimDensityVolume={setSimDensityVolume}
-            simFluidDensity={simFluidDensity}
-            setSimFluidDensity={setSimFluidDensity}
-            simBias={simBias}
-            setSimBias={setSimBias}
-            simSpread={simSpread}
-            setSimSpread={setSimSpread}
-            formatSimulationNumber={formatSimulationNumber}
-          />
         ) : simulationLessonKey.startsWith("A3_") ? (
           <A3SimulationPanels
             lessonKey={simulationLessonKey}
@@ -5098,92 +5987,12 @@ export default function LessonRunner({
             setSimSpread={setSimSpread}
             formatSimulationNumber={formatSimulationNumber}
           />
-        ) : simulationLessonKey.startsWith("A8_") ? (
-          <A8SimulationPanels
-            lessonKey={simulationLessonKey}
-            simMetricMeters={simMetricMeters}
-            setSimMetricMeters={setSimMetricMeters}
-            simVectorMagnitude={simVectorMagnitude}
-            setSimVectorMagnitude={setSimVectorMagnitude}
-            simVectorAngle={simVectorAngle}
-            setSimVectorAngle={setSimVectorAngle}
-            simDensityMass={simDensityMass}
-            setSimDensityMass={setSimDensityMass}
-            simDensityVolume={simDensityVolume}
-            setSimDensityVolume={setSimDensityVolume}
-            simFluidDensity={simFluidDensity}
-            setSimFluidDensity={setSimFluidDensity}
-            simBias={simBias}
-            setSimBias={setSimBias}
-            simSpread={simSpread}
-            setSimSpread={setSimSpread}
-            formatSimulationNumber={formatSimulationNumber}
-          />
-        ) : simulationLessonKey.startsWith("A9_") ? (
-          <A9SimulationPanels
-            lessonKey={simulationLessonKey}
-            simMetricMeters={simMetricMeters}
-            setSimMetricMeters={setSimMetricMeters}
-            simVectorMagnitude={simVectorMagnitude}
-            setSimVectorMagnitude={setSimVectorMagnitude}
-            simVectorAngle={simVectorAngle}
-            setSimVectorAngle={setSimVectorAngle}
-            simDensityMass={simDensityMass}
-            setSimDensityMass={setSimDensityMass}
-            simDensityVolume={simDensityVolume}
-            setSimDensityVolume={setSimDensityVolume}
-            simFluidDensity={simFluidDensity}
-            setSimFluidDensity={setSimFluidDensity}
-            simBias={simBias}
-            setSimBias={setSimBias}
-            simSpread={simSpread}
-            setSimSpread={setSimSpread}
-            formatSimulationNumber={formatSimulationNumber}
-          />
-        ) : simulationLessonKey.startsWith("A10_") ? (
-          <A10SimulationPanels
-            lessonKey={simulationLessonKey}
-            simMetricMeters={simMetricMeters}
-            setSimMetricMeters={setSimMetricMeters}
-            simVectorMagnitude={simVectorMagnitude}
-            setSimVectorMagnitude={setSimVectorMagnitude}
-            simVectorAngle={simVectorAngle}
-            setSimVectorAngle={setSimVectorAngle}
-            simDensityMass={simDensityMass}
-            setSimDensityMass={setSimDensityMass}
-            simDensityVolume={simDensityVolume}
-            setSimDensityVolume={setSimDensityVolume}
-            simFluidDensity={simFluidDensity}
-            setSimFluidDensity={setSimFluidDensity}
-            simBias={simBias}
-            setSimBias={setSimBias}
-            simSpread={simSpread}
-            setSimSpread={setSimSpread}
-            formatSimulationNumber={formatSimulationNumber}
-          />
-        ) : simulationLessonKey.startsWith("A11_") ? (
-          <A11SimulationPanels
-            lessonKey={simulationLessonKey}
-            simMetricMeters={simMetricMeters}
-            setSimMetricMeters={setSimMetricMeters}
-            simVectorMagnitude={simVectorMagnitude}
-            setSimVectorMagnitude={setSimVectorMagnitude}
-            simVectorAngle={simVectorAngle}
-            setSimVectorAngle={setSimVectorAngle}
-            simDensityMass={simDensityMass}
-            setSimDensityMass={setSimDensityMass}
-            simDensityVolume={simDensityVolume}
-            setSimDensityVolume={setSimDensityVolume}
-            simFluidDensity={simFluidDensity}
-            setSimFluidDensity={setSimFluidDensity}
-            simBias={simBias}
-            setSimBias={setSimBias}
-            simSpread={simSpread}
-            setSimSpread={setSimSpread}
-            formatSimulationNumber={formatSimulationNumber}
-          />
         ) : simulationLessonKey.startsWith("A6_") ||
-          simulationLessonKey.startsWith("A7_") ? (
+          simulationLessonKey.startsWith("A7_") ||
+          simulationLessonKey.startsWith("A8_") ||
+          simulationLessonKey.startsWith("A9_") ||
+          simulationLessonKey.startsWith("A10_") ||
+          simulationLessonKey.startsWith("A11_") ? (
           <A6ToA11SimulationPanels
             lessonKey={simulationLessonKey}
             simMetricMeters={simMetricMeters}
