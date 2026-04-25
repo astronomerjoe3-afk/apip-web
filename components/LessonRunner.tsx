@@ -1763,8 +1763,387 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2"
         ? (() => {
+            if (lessonId === "F1_L2") {
+              if (isTableStep && activeTableIndex === 0) {
+                return {
+                  id: `f1-l2-table-${activeTableIndex}`,
+                  badge: "Classification desk",
+                  title: "Stabilize the scalar board",
+                  scenario:
+                    "The crew is filling the scalar board, but they keep slipping direction words into the list. You need the note that keeps the board honest.",
+                  prompt: "Choose the note you pin to the board.",
+                  options: [
+                    {
+                      value: "how_much_only",
+                      label: "Put a quantity on the scalar board only if it answers how much without needing a direction.",
+                      feedback:
+                        "Exactly. That is the clean test for a scalar quantity.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "motion_means_vector",
+                      label: "If a quantity is about motion, it must always go on the vector board.",
+                      feedback:
+                        "Not always. Speed is about motion but does not need a direction, so it is scalar.",
+                    },
+                    {
+                      value: "big_numbers_only",
+                      label: "Put quantities with larger values on the scalar board because vectors are only for small changes.",
+                      feedback:
+                        "Size has nothing to do with the scalar-vector test. The key question is whether direction is required.",
+                    },
+                  ],
+                  successLabel: "Scalar board secured. The crew can sort the rest cleanly.",
+                  retryLabel: "That note would let the sorting rule drift.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isTableStep && activeTableIndex === 1) {
+                return {
+                  id: `f1-l2-table-${activeTableIndex}`,
+                  badge: "Vector board",
+                  title: "Mark what makes a vector",
+                  scenario:
+                    "The vector board is up, but one crew member still thinks any changing quantity counts as a vector. You need the rule that fixes the board.",
+                  prompt: "Choose the rule to post.",
+                  options: [
+                    {
+                      value: "needs_direction",
+                      label: "A quantity belongs on the vector board only if its description needs both size and direction.",
+                      feedback:
+                        "Exactly. Magnitude plus direction is what makes the quantity a vector.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "changes_fast",
+                      label: "A quantity is a vector whenever it changes quickly enough to affect the motion story.",
+                      feedback:
+                        "Rate of change is not the test. Direction is the missing ingredient that turns a quantity into a vector.",
+                    },
+                    {
+                      value: "arrow_picture_only",
+                      label: "A quantity is only a vector if it is drawn as an arrow in the textbook diagram.",
+                      feedback:
+                        "Arrows help show vectors, but the real test is whether the physical quantity itself needs a direction.",
+                    },
+                  ],
+                  successLabel: "Vector board corrected. The sorting rule is clear now.",
+                  retryLabel: "That rule would misclassify the next few quantities.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f1-l2-arrow-map",
+                  badge: "Map room",
+                  title: "Pin the arrow note",
+                  scenario:
+                    "The crew is looking at the arrow-on-a-map visual. You get one sentence to stop them treating the arrow like a plain number.",
+                  prompt: "Choose the note to pin to the display.",
+                  options: [
+                    {
+                      value: "magnitude_and_direction",
+                      label: "The arrow shows both how much and which way, so it behaves like a vector.",
+                      feedback:
+                        "Exactly. The arrow keeps magnitude and direction together in one picture.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "length_only",
+                      label: "Only the arrow length matters here; the direction is decorative.",
+                      feedback:
+                        "Direction is the key extra ingredient. Without it, the arrow would not be modelling a vector idea.",
+                    },
+                    {
+                      value: "route_shape",
+                      label: "The arrow mainly draws the route shape, so its direction does not change the quantity meaning.",
+                      feedback:
+                        "That misses the point of the diagram. The arrow is there to show a quantity that points somewhere.",
+                    },
+                  ],
+                  successLabel: "Pinned. The map room can now read the arrow properly.",
+                  retryLabel: "That note would flatten the vector idea into a plain amount.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 1) {
+                return {
+                  id: "f1-l2-thermometer-reading",
+                  badge: "Sensor check",
+                  title: "Keep the reading scalar",
+                  scenario:
+                    "The crew is comparing the thermometer visual with the arrow visual. One trainee wants to add a direction to temperature just to stay consistent.",
+                  prompt: "Choose the correction you send.",
+                  options: [
+                    {
+                      value: "no_direction_needed",
+                      label: "Temperature tells how much only, so it stays scalar because no direction is needed.",
+                      feedback:
+                        "Exactly. Temperature has magnitude, but it does not point anywhere.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "upward_hotter",
+                      label: "Temperature becomes a vector if the reading is increasing upward on the thermometer scale.",
+                      feedback:
+                        "The display direction is not the same as physical direction. Temperature still does not need a direction in its description.",
+                    },
+                    {
+                      value: "all_measurements_need_direction",
+                      label: "Every measurement needs a direction eventually, so temperature is only temporarily scalar.",
+                      feedback:
+                        "That overreaches. Many quantities stay scalar because direction never becomes part of the quantity description.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The scalar example stays clean.",
+                  retryLabel: "That would force direction into a quantity that does not need it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f1-l2-fix-ideas",
+                    badge: "Repair desk",
+                    title: "Stop the mixed-up motion note",
+                    scenario:
+                      "A trainee has written that distance and displacement mean the same thing as long as the journey looks simple. You need one repair note before the page is copied.",
+                    prompt: "Choose the repair you send.",
+                    options: [
+                      {
+                        value: "distance_vs_displacement",
+                        label: "Distance asks how much path was travelled, but displacement asks for the start-to-finish change with direction.",
+                        feedback:
+                          "Exactly. That is the difference the trainee needs to keep the two ideas apart.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "same_if_straight",
+                        label: "They are basically the same whenever the journey is straight enough to picture easily.",
+                        feedback:
+                          "A straight route can make the values match, but the questions are still different: path length versus directional change.",
+                        isCorrect: false,
+                      },
+                      {
+                        value: "distance_needs_direction",
+                        label: "Distance becomes the vector version when you add a direction word to it.",
+                        feedback:
+                          "Adding a direction word does not change what distance asks. Displacement is the vector quantity, not distance with an extra label.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The motion note is back on track.",
+                    retryLabel: "That would keep the two journey questions blurred together.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f1-l2-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the scalar-vector rule",
+                    scenario:
+                      "Quest Control wants one short line the team can repeat while sorting quantities.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "how_much_and_which_way",
+                        label: "Scalars tell how much only; vectors tell how much and which way.",
+                        feedback:
+                          "Exactly. That is the core rule for the whole lesson.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "vector_means_motion",
+                        label: "Vectors are the quantities that involve motion, while scalars are the ones that stay still.",
+                        feedback:
+                          "Motion alone is not enough. Speed involves motion but is scalar because it does not need a direction.",
+                      },
+                      {
+                        value: "bigger_is_vector",
+                        label: "Vectors are the quantities that feel more important or larger in physics problems.",
+                        feedback:
+                          "Importance and size are not the test. The real test is whether direction is part of the quantity.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The whole room has the same anchor idea now.",
+                    retryLabel: "That line would send the team toward the wrong sorting rule.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "technical words") {
+                  return {
+                    id: "f1-l2-technical-words",
+                    badge: "Term desk",
+                    title: "Clean up the quantity language",
+                    scenario:
+                      "The examples are right, but the crew keeps swapping magnitude, direction, scalar, and vector as if they were interchangeable.",
+                    prompt: "Choose the vocabulary card to post.",
+                    options: [
+                      {
+                        value: "magnitude_direction",
+                        label: "Magnitude tells the size of the quantity, while direction tells where it points when the quantity is a vector.",
+                        feedback:
+                          "Exactly. That keeps the language precise before the examples get more complicated.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "magnitude_is_unit",
+                        label: "Magnitude is just the unit attached to the quantity, so direction is the only real extra part.",
+                        feedback:
+                          "Magnitude is the size or amount, not the unit. The unit tells scale; magnitude tells how much.",
+                      },
+                      {
+                        value: "direction_for_all",
+                        label: "Direction is present in every quantity, but some questions simply ignore it for convenience.",
+                        feedback:
+                          "That overstates it. Many quantities are genuinely scalar because direction is not part of their description at all.",
+                      },
+                    ],
+                    successLabel: "Vocabulary cleaned up. The crew can speak clearly again.",
+                    retryLabel: "That wording would keep the key terms tangled.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "technical words continued") {
+                  return {
+                    id: "f1-l2-technical-words-continued",
+                    badge: "Term relay",
+                    title: "Finish the motion glossary",
+                    scenario:
+                      "A second glossary card is about to go up. It needs to separate the motion pairs without repeating the first card badly.",
+                    prompt: "Choose the follow-up line.",
+                    options: [
+                      {
+                        value: "speed_velocity_pair",
+                        label: "Speed is how fast only, while velocity is speed with direction.",
+                        feedback:
+                          "Exactly. That carries the scalar-vector rule into one of the most important motion pairs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "speed_same_as_velocity",
+                        label: "Speed and velocity are the same unless the object changes direction suddenly.",
+                        feedback:
+                          "They are different questions even before any turn happens. Velocity always includes direction; speed does not.",
+                      },
+                      {
+                        value: "velocity_bigger_speed",
+                        label: "Velocity is just the larger or more advanced version of speed.",
+                        feedback:
+                          "Velocity is not a larger speed. It is a different quantity because direction changes the meaning.",
+                      },
+                    ],
+                    successLabel: "Glossary handoff complete.",
+                    retryLabel: "That line would keep the motion pair blurry.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to test any quantity") {
+                  return {
+                    id: "f1-l2-how-to-test",
+                    badge: "Guidance channel",
+                    title: "Coach the two-question test",
+                    scenario:
+                      "The trainee analyst wants to sort a quantity by instinct. You get one instruction before they answer.",
+                    prompt: "Choose the instruction you send.",
+                    options: [
+                      {
+                        value: "two_question_test",
+                        label: "Ask how much first, then ask which way. If the second question matters, treat the quantity as a vector.",
+                        feedback:
+                          "Exactly. That gives the analyst a reliable test instead of a guess.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "use_context_only",
+                        label: "Look at the context and trust your first impression, because most quantities sort themselves automatically.",
+                        feedback:
+                          "That invites avoidable mistakes. The two-question test is what makes the classification reliable.",
+                      },
+                      {
+                        value: "motion_words_only",
+                        label: "If the question mentions movement, classify it as a vector immediately and skip the rest.",
+                        feedback:
+                          "Movement words are not enough. Speed is still scalar, so the quantity must be tested, not assumed.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a real method.",
+                    retryLabel: "That would send the analyst back into guesswork.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f1-l2-analogy",
+                    badge: "Story relay",
+                    title: "Pick the analogy that keeps vectors clean",
+                    scenario:
+                      "The team wants an analogy that helps beginners feel the difference between scalar and vector without muddying the physics.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "steps_vs_arrow",
+                        label: "Distance is like counting how many steps you took, while displacement is like drawing one arrow from where you started to where you ended.",
+                        feedback:
+                          "Exactly. That keeps the path-length idea separate from the directed change.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "both_are_steps",
+                        label: "Distance and displacement are both just step counts, but one sounds more formal in exam questions.",
+                        feedback:
+                          "That removes the key difference. Displacement is not just a more formal distance; it includes direction.",
+                      },
+                      {
+                        value: "arrow_for_everything",
+                        label: "Every quantity is best imagined as an arrow, even when direction is not part of the definition.",
+                        feedback:
+                          "That overuses the arrow picture. It helps with vectors, but scalar quantities do not need direction.",
+                      },
+                    ],
+                    successLabel: "Good analogy. It supports the lesson instead of blurring the two ideas.",
+                    retryLabel: "That analogy would weaken the vector-scalar split.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common patterns to remember") {
+                  return {
+                    id: "f1-l2-common-patterns",
+                    badge: "Memory board",
+                    title: "Send the classification shortcut",
+                    scenario:
+                      "The crew wants one quick memory aid before the worked example begins. It has to help without replacing the actual rule.",
+                    prompt: "Choose the memory aid to send.",
+                    options: [
+                      {
+                        value: "examples_follow_rule",
+                        label: "Remember common examples like distance, speed, mass, and time as scalars, and displacement, velocity, force, and acceleration as vectors, but still test any new quantity with the rule.",
+                        feedback:
+                          "Exactly. The examples help memory, but the classification rule still stays in charge.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "memorize_only",
+                        label: "Memorize the listed examples and skip the rule, because the exam will only use the familiar quantities anyway.",
+                        feedback:
+                          "That is too risky. Memory lists help, but the rule is what protects you when the quantity is new or phrased differently.",
+                      },
+                      {
+                        value: "all_forces_only",
+                        label: "Only force-type quantities really matter as vectors; the rest can be treated as scalar unless the diagram says otherwise.",
+                        feedback:
+                          "That would misclassify several important vectors like displacement and velocity. The examples need to stay broader than that.",
+                      },
+                    ],
+                    successLabel: "Memory board sent. The crew has a shortcut that still respects the rule.",
+                    retryLabel: "That shortcut would collapse the lesson into memorization alone.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F1_L1") {
               if (isTableStep && activeTableIndex === 0) {
                 return {
