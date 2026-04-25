@@ -1754,8 +1754,318 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6"
         ? (() => {
+            if (lessonId === "F1_L6") {
+              if (isTableStep && activeTableIndex === 0) {
+                return {
+                  id: `f1-l6-table-${activeTableIndex}`,
+                  badge: "Target board",
+                  title: "Separate accuracy from precision",
+                  scenario:
+                    "The target-board crew is mixing up closeness to the centre with closeness among repeated readings. You need the board note that keeps those ideas apart.",
+                  prompt: "Choose the board note you send.",
+                  options: [
+                    {
+                      value: "accuracy_vs_precision",
+                      label: "Accuracy asks how close the result is to the accepted value, while precision asks how closely repeated readings agree with each other.",
+                      feedback:
+                        "Exactly. That note keeps target position separate from clustering.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "accuracy_is_clustering",
+                      label: "Accuracy means the readings are tightly clustered, even if the whole cluster misses the accepted value.",
+                      feedback:
+                        "Tight clustering shows precision, not accuracy. Accuracy still depends on closeness to the accepted value.",
+                    },
+                    {
+                      value: "precision_is_centre",
+                      label: "Precision means the readings land near the centre, because being near the accepted value is the same thing as agreement.",
+                      feedback:
+                        "Near the centre shows accuracy. Precision is about the readings agreeing closely with one another.",
+                    },
+                  ],
+                  successLabel: "Target board aligned. The crew now has the right two-question test.",
+                  retryLabel: "That note would collapse two different measurement ideas into one.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isTableStep && activeTableIndex === 1) {
+                return {
+                  id: `f1-l6-table-${activeTableIndex}`,
+                  badge: "Pattern map",
+                  title: "Call the result pattern correctly",
+                  scenario:
+                    "The pattern map is live, but a trainee keeps naming every tight cluster as a 'good result' without checking where it sits relative to the target.",
+                  prompt: "Choose the pattern rule you send.",
+                  options: [
+                    {
+                      value: "tight_and_off_target",
+                      label: "A tight cluster away from the target is precise but not accurate, while a spread-out set around the target can be accurate on average but not very precise.",
+                      feedback:
+                        "Exactly. The pattern name depends on both spread and position, not one feature alone.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "tight_means_both",
+                      label: "Any tight cluster is automatically both accurate and precise because agreement among readings proves the method is good.",
+                      feedback:
+                        "A tight cluster can still miss the accepted value. That would make it precise but not accurate.",
+                    },
+                    {
+                      value: "spread_means_wrong",
+                      label: "Any spread-out set is automatically neither accurate nor precise because scatter always makes the average useless.",
+                      feedback:
+                        "A spread-out set can still average near the accepted value, so it can be accurate but not very precise.",
+                    },
+                  ],
+                  successLabel: "Pattern map secured. The crew can now name the reading pattern honestly.",
+                  retryLabel: "That rule would mislabel at least one common result pattern.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f1-l6-target-board-visual",
+                  badge: "Aim check",
+                  title: "Send the target-board call",
+                  scenario:
+                    "The visual is frozen on a target board with clustered hits. The team needs one call that explains what the shape and position are telling them.",
+                  prompt: "Choose the call you send.",
+                  options: [
+                    {
+                      value: "shape_and_position",
+                      label: "The cluster shape tells you about precision, and the cluster position relative to the centre tells you about accuracy.",
+                      feedback:
+                        "Exactly. That keeps the two visual clues doing different jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "centre_only",
+                      label: "Only the distance from the centre matters, because the spread never changes the judgement of a measurement pattern.",
+                      feedback:
+                        "Spread still matters. A result can sit near the centre on average but have poor precision if the readings scatter widely.",
+                    },
+                    {
+                      value: "cluster_only",
+                      label: "Only the tightness of the cluster matters, because agreement between readings is enough to show the result is trustworthy.",
+                      feedback:
+                        "Agreement alone is not enough. A tight cluster can still be shifted away from the accepted value.",
+                    },
+                  ],
+                  successLabel: "Call sent. The crew can now read the target board without mixing up the clues.",
+                  retryLabel: "That call would make the target board tell only half the story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isMediaStep && activeMediaIndex === 1) {
+                return {
+                  id: "f1-l6-measurement-report-lab",
+                  badge: "Report lab",
+                  title: "Approve the measurement report",
+                  scenario:
+                    "The report lab is assembling a final measurement statement. One version looks tidy, but only one version matches the tool, the stated value, and the uncertainty honestly.",
+                  prompt: "Choose the report rule you approve.",
+                  options: [
+                    {
+                      value: "tool_value_uncertainty_match",
+                      label: "Use a suitable instrument, state the measured value with its unit, and report a reasonable uncertainty that matches what the instrument can support.",
+                      feedback:
+                        "Exactly. A trustworthy report needs the method and the written claim to support each other.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "value_only",
+                      label: "Write the measured value only, because uncertainty just makes the report look less confident and less scientific.",
+                      feedback:
+                        "Leaving out uncertainty makes the report pretend to more certainty than the instrument supports.",
+                    },
+                    {
+                      value: "smallest_uncertainty_always",
+                      label: "Choose the smallest uncertainty you can write, because that makes the result look most accurate to the reader.",
+                      feedback:
+                        "Uncertainty should be honest, not decorative. Writing an unrealistically small uncertainty weakens trustworthiness.",
+                    },
+                  ],
+                  successLabel: "Report approved. The lab statement now matches the real quality of the measurement.",
+                  retryLabel: "That rule would let the written report overclaim what the method can support.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f1-l6-fix-ideas",
+                    badge: "Repair desk",
+                    title: "Correct the measurement-quality shortcut",
+                    scenario:
+                      "A trainee has written that one word, 'accurate', can describe any good-looking set of readings. You need the repair note that stops that shortcut from spreading.",
+                    prompt: "Choose the repair note you send.",
+                    options: [
+                      {
+                        value: "different_questions",
+                        label: "Accuracy and precision answer different questions, so you have to test closeness to the accepted value separately from agreement between readings.",
+                        feedback:
+                          "Exactly. The shortcut fails because it tries to make one word do two jobs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "accuracy_covers_all",
+                        label: "Accuracy is the umbrella word for all strong measurements, so precision and uncertainty are really optional extra detail.",
+                        feedback:
+                          "That would erase important differences. Precision and uncertainty still matter because a result can be accurate in one sense and weak in another.",
+                      },
+                      {
+                        value: "precision_proves_accuracy",
+                        label: "If readings agree closely, that automatically proves they are accurate, so there is no need to compare with an accepted value.",
+                        feedback:
+                          "Close agreement alone can still miss the accepted value. That would be precise but not accurate.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The quality shortcut is gone.",
+                    retryLabel: "That would keep the lesson stuck in one-word judgement instead of careful measurement analysis.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f1-l6-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line quality rule",
+                    scenario:
+                      "Quest Control wants one line the crew can repeat before they judge any set of measurements.",
+                    prompt: "Choose the line you post.",
+                    options: [
+                      {
+                        value: "accuracy_precision_different",
+                        label: "Accuracy asks whether you are close to the accepted value, while precision asks whether repeated readings agree closely.",
+                        feedback:
+                          "Exactly. That is the anchor sentence for the lesson.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "accuracy_is_best_word",
+                        label: "Accuracy is the only idea that matters, because closeness to the truth automatically includes precision and trustworthiness.",
+                        feedback:
+                          "That collapses three different judgements into one. Precision and trustworthiness still need their own checks.",
+                      },
+                      {
+                        value: "precision_is_enough",
+                        label: "Precision is the most important idea, because tightly grouped readings are always the safest measurements to trust.",
+                        feedback:
+                          "A tight cluster can still be shifted away from the accepted value or come from a poor method. Precision alone is not enough.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has a clear measurement-quality anchor.",
+                    retryLabel: "That line would blur the lesson’s main distinction.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "possible measurement patterns") {
+                  return {
+                    id: "f1-l6-patterns",
+                    badge: "Pattern desk",
+                    title: "Name the reading pattern correctly",
+                    scenario:
+                      "The pattern desk is sorting measurement sets, but one trainee keeps calling every off-target set 'bad' without checking whether the readings at least agree with one another.",
+                    prompt: "Choose the sorting rule you send.",
+                    options: [
+                      {
+                        value: "check_spread_and_position",
+                        label: "Check two things every time: the spread shows precision, and the average or cluster position relative to the accepted value shows accuracy.",
+                        feedback:
+                          "Exactly. That two-part rule lets the crew name all four common patterns properly.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "off_target_means_neither",
+                        label: "If the readings miss the accepted value, the set must be neither accurate nor precise no matter how tightly grouped it is.",
+                        feedback:
+                          "Missing the accepted value does not erase precision. A tight off-target cluster is precise but not accurate.",
+                      },
+                      {
+                        value: "wide_spread_means_never_accurate",
+                        label: "If the readings are spread out, the set can never count as accurate because only tight clusters can be close to the accepted value.",
+                        feedback:
+                          "A spread-out set can still average near the accepted value, so it can be accurate on average but not very precise.",
+                      },
+                    ],
+                    successLabel: "Pattern desk aligned. The crew can now read the four measurement patterns honestly.",
+                    retryLabel: "That sorting rule would misclassify one of the standard result patterns.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "what makes a result trustworthy") {
+                  return {
+                    id: "f1-l6-trustworthy",
+                    badge: "Trust check",
+                    title: "Approve the trustworthy-measurement rule",
+                    scenario:
+                      "The trust check team wants one rule for deciding whether a result deserves confidence before it goes into the final report.",
+                    prompt: "Choose the rule you approve.",
+                    options: [
+                      {
+                        value: "method_and_reporting_support",
+                        label: "A result is more trustworthy when the instrument suits the job, readings are repeated or checked, errors are controlled, and the report includes honest uncertainty.",
+                        feedback:
+                          "Exactly. Trustworthiness comes from the method and the reporting working together.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "single_reading_enough",
+                        label: "One clean reading is enough to prove trustworthiness, as long as the number looks neat and the unit is present.",
+                        feedback:
+                          "A neat-looking single reading does not prove much on its own. Trust grows when the method and uncertainty are both checked carefully.",
+                      },
+                      {
+                        value: "small_uncertainty_proves_method",
+                        label: "Any result with a very small stated uncertainty is automatically trustworthy, even if the tool choice was poor.",
+                        feedback:
+                          "Uncertainty has to match the method honestly. A small uncertainty written beside a poor method does not create trust.",
+                      },
+                    ],
+                    successLabel: "Trust rule approved. The team now knows what makes a result worth believing.",
+                    retryLabel: "That rule would let tidy-looking numbers pass without enough method behind them.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f1-l6-analogy",
+                    badge: "Analogy relay",
+                    title: "Choose the target-board analogy",
+                    scenario:
+                      "The lesson team wants one everyday picture that helps beginners feel the difference between accuracy and precision without flattening them into one idea.",
+                    prompt: "Choose the analogy you send.",
+                    options: [
+                      {
+                        value: "darts_target",
+                        label: "A dartboard works well: a tight cluster shows precision, a cluster near the centre shows accuracy, and the strongest set does both at once.",
+                        feedback:
+                          "Exactly. That analogy keeps spread and target position doing different jobs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "centre_only",
+                        label: "Use a race finish line analogy where only winning matters, because being near the target already tells you everything important.",
+                        feedback:
+                          "That analogy loses the idea of clustering. The lesson needs both closeness to target and agreement among repeated readings.",
+                      },
+                      {
+                        value: "tight_group_only",
+                        label: "Use a marching analogy where walking in step is enough, because tight grouping already guarantees the result is good.",
+                        feedback:
+                          "That analogy would overvalue agreement alone. A tight group can still miss the accepted value.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the lesson’s two-part quality judgement.",
+                    retryLabel: "That analogy would blur accuracy and precision together again.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F1_L5") {
               if (isTableStep && activeTableIndex === 0) {
                 return {
