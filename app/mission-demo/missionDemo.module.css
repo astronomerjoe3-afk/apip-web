@@ -352,11 +352,19 @@
 }
 
 .progressChip {
+  display: grid;
+  gap: 0.18rem;
   padding: 0.65rem 0.9rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 0.92rem;
+}
+
+.progressChip span {
+  color: rgba(226, 232, 240, 0.78);
+  font-size: 0.76rem;
+  font-weight: 700;
 }
 
 .readoutBand {
@@ -594,6 +602,97 @@
   padding: 1rem;
 }
 
+.debriefComplete {
+  border-color: rgba(16, 185, 129, 0.28);
+  background: linear-gradient(160deg, rgba(236, 253, 245, 0.96) 0%, rgba(239, 246, 255, 0.96) 100%);
+}
+
+.masterySnapshot {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.masteryHeader {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+}
+
+.masteryHeader span,
+.masteryGrid span {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.masteryHeader span {
+  color: rgba(191, 219, 254, 0.86);
+}
+
+.masteryHeader strong {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.masteryGrid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.masteryGrid article,
+.repairMemory {
+  border: 1px solid rgba(96, 126, 181, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.masteryGrid article {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem;
+}
+
+.masteryGrid span {
+  color: #66758a;
+}
+
+.masteryGrid strong {
+  color: #10233f;
+  line-height: 1.45;
+}
+
+.repairMemory {
+  padding: 1rem;
+}
+
+.repairMemory ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.55rem 0 0;
+  padding-left: 1.1rem;
+  color: #435266;
+  line-height: 1.65;
+}
+
+.repairMemory p:not(.reasoningLabel) {
+  margin-top: 0.45rem;
+  color: #435266;
+  line-height: 1.65;
+}
+
+.debriefActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .questionTop {
   display: grid;
   gap: 0.7rem;
@@ -812,7 +911,8 @@
   .readoutBand,
   .reasoningPanel,
   .feedbackBreakdown,
-  .repairGrid {
+  .repairGrid,
+  .masteryGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -853,7 +953,8 @@
   .optionGrid,
   .reasoningPanel,
   .feedbackBreakdown,
-  .repairGrid {
+  .repairGrid,
+  .masteryGrid {
     grid-template-columns: 1fr;
   }
 

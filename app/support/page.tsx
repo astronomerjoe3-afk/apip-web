@@ -1,4 +1,22 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Support Center",
+  description:
+    "Get Cognispark support for student accounts, teacher workflows, school setup, privacy requests, and account deletion.",
+  alternates: {
+    canonical: "/support",
+  },
+  openGraph: {
+    url: "/support",
+    title: "Cognispark Support Center",
+    description: "Support routes for Cognispark students, teachers, schools, subscriptions, privacy, and account deletion.",
+  },
+};
+
+const SUPPORT_EMAIL = "support@cognispark.tech";
+const PRIVACY_EMAIL = "privacy@cognispark.tech";
 
 const supportItems = [
   {
@@ -86,9 +104,9 @@ export default function SupportPage() {
           <div style={{ fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.82 }}>Support center</div>
           <h1 style={{ margin: "12px 0 14px", fontSize: "clamp(2rem, 3vw, 3rem)", lineHeight: 1.05 }}>Cognispark support is built around actual student, teacher, and subscription workflows.</h1>
           <p style={{ margin: 0, maxWidth: 760, fontSize: 17, lineHeight: 1.7 }}>
-            Public support email: <a style={{ color: "#7cc5ff" }} href="mailto:astronomerjoe3@gmail.com">astronomerjoe3@gmail.com</a>
+            Public support email: <a style={{ color: "#7cc5ff" }} href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
             <br />
-            Privacy email: <a style={{ color: "#7cc5ff" }} href="mailto:josephjobescape@gmail.com">josephjobescape@gmail.com</a>
+            Privacy email: <a style={{ color: "#7cc5ff" }} href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a>
           </p>
         </section>
 

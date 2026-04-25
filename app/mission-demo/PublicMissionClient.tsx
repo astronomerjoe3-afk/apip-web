@@ -29,6 +29,8 @@ type MissionQuestion = {
   options: MissionOption[];
 };
 
+type RepairSummary = NonNullable<ReturnType<typeof misconceptionSummaryForTag>>;
+
 const CLARITY_ROUTE = [
   {
     label: "What is happening",
@@ -220,6 +222,7 @@ function motionDescription(time: number): string {
 export default function PublicMissionClient() {
   const [time, setTime] = useState(4);
   const [answers, setAnswers] = useState<Partial<Record<QuestionKey, string>>>({});
+  const [repairTags, setRepairTags] = useState<string[]>([]);
 
   const currentDistance = useMemo(() => distanceAtTime(time), [time]);
   const currentDescription = useMemo(() => motionDescription(time), [time]);
@@ -236,6 +239,14 @@ export default function PublicMissionClient() {
     [answers],
   );
   const missionProgress = QUESTIONS.length > 0 ? (correctCount / QUESTIONS.length) * 100 : 0;
+  const allChecksCorrect = correctCount === QUESTIONS.length;
+  const capturedRepairs = useMemo(
+    () =>
+      repairTags
+        .map((tag) => misconceptionSummaryForTag(tag))
+        .filter((repair): repair is RepairSummary => repair !== null),
+    [repairTags],
+  );
 
   const activePoint = useMemo(
     () => ({
@@ -244,6 +255,14 @@ export default function PublicMissionClient() {
     }),
     [currentDistance, time],
   );
+
+  function handleAnswer(questionKey: QuestionKey, value: string, misconceptionTag?: string) {
+    setAnswers((current) => ({ ...current, [questionKey]: value }));
+
+    if (misconceptionTag) {
+      setRepairTags((current) => (current.includes(misconceptionTag) ? current : [...current, misconceptionTag]));
+    }
+  }
 
   return (
     <section className={styles.missionExperience}>
@@ -265,6 +284,7 @@ export default function PublicMissionClient() {
             </div>
             <div className={styles.progressChip}>
               {correctCount}/{QUESTIONS.length} mission checks locked in
+              <span>{answeredCount}/{QUESTIONS.length} attempted</span>
             </div>
           </div>
 
@@ -500,7 +520,7 @@ export default function PublicMissionClient() {
                           key={option.value}
                           type="button"
                           className={`${styles.optionButton} ${stateClass}`}
-                          onClick={() => setAnswers((current) => ({ ...current, [question.key]: option.value }))}
+                          onClick={() => handleAnswer(question.key, option.value, option.misconceptionTag)}
                           aria-pressed={isSelected}
                         >
                           {option.label}
@@ -549,16 +569,68 @@ export default function PublicMissionClient() {
             })}
           </div>
 
-          <div className={styles.debriefCard}>
+          <div
+            className={`${styles.debriefCard} ${allChecksCorrect ? styles.debriefComplete : ""}`}
+            aria-label="Mission debrief"
+            aria-live="polite"
+            role="region"
+          >
             <p className={styles.graphEyebrow}>Mission debrief</p>
             <h3>
-              {correctCount === QUESTIONS.length
+              {allChecksCorrect
                 ? "You just used slope, flat-line meaning, and interpolation the way a stronger physics learner does."
                 : "The key move is to read line shape as motion meaning, not as picture matching."}
             </h3>
             <p>
               In the full platform, this is where Cognispark would chain the graph idea into worked examples, targeted correction, and the next module lesson.
             </p>
+            {allChecksCorrect ? (
+              <div className={styles.masterySnapshot}>
+                <div className={styles.masteryHeader}>
+                  <span>Mastery snapshot</span>
+                  <strong>Graph meaning mission complete</strong>
+                </div>
+                <div className={styles.masteryGrid}>
+                  <article>
+                    <span>Core idea</span>
+                    <strong>Graphs are records, not road pictures.</strong>
+                  </article>
+                  <article>
+                    <span>Clean read</span>
+                    <strong>Flat means distance stayed fixed while time moved on.</strong>
+                  </article>
+                  <article>
+                    <span>Transfer move</span>
+                    <strong>Use slope and segment rate before grabbing endpoints.</strong>
+                  </article>
+                </div>
+                <div className={styles.repairMemory}>
+                  <p className={styles.reasoningLabel}>What Cognispark would remember</p>
+                  {capturedRepairs.length > 0 ? (
+                    <ul>
+                      {capturedRepairs.map((repair) => (
+                        <li key={repair.tag}>
+                          <strong>{repair.title}:</strong> {repair.noticeNext}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No repair path was needed this time. The next step should stretch the same idea in a new graph.</p>
+                  )}
+                </div>
+                <div className={styles.debriefActions}>
+                  <a href="/graph-lab" className={styles.primaryButton}>
+                    Open graph lab
+                  </a>
+                  <a href="/register" className={styles.secondaryButton}>
+                    Save progress
+                  </a>
+                  <a href="/learn" className={styles.secondaryButton}>
+                    See full route
+                  </a>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

@@ -84,6 +84,7 @@ function contentSecurityPolicy(isProduction: boolean): string {
 }
 
 const isProduction = process.env.NODE_ENV === "production";
+const appRoot = __dirname;
 const securityHeaders = [
   { key: "Content-Security-Policy", value: contentSecurityPolicy(isProduction) },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -100,6 +101,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  turbopack: {
+    root: appRoot,
+  },
   async rewrites() {
     return {
       beforeFiles: [

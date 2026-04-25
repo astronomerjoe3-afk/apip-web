@@ -1,3 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "Cognispark terms of service for account integrity, fair product use, subscription access, school workflows, and learning delivery.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    url: "/terms",
+    title: "Cognispark Terms of Service",
+    description:
+      "Terms covering Cognispark accounts, subscriptions, school workflows, acceptable use, and support.",
+  },
+};
+
+const SUPPORT_EMAIL = "support@cognispark.tech";
+const PRIVACY_EMAIL = "privacy@cognispark.tech";
+
 const shell: React.CSSProperties = {
   minHeight: "100vh",
   background: "linear-gradient(180deg, #f4f7ff 0%, #ffffff 100%)",
@@ -62,9 +82,9 @@ export default function TermsPage() {
         <section style={card}>
           <h2 style={{ marginTop: 0, fontSize: 22 }}>Support and contact</h2>
           <p style={{ marginBottom: 0, lineHeight: 1.8 }}>
-            Product and account support: <a href="mailto:astronomerjoe3@gmail.com">astronomerjoe3@gmail.com</a>
+            Product and account support: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
             <br />
-            Privacy requests: <a href="mailto:josephjobescape@gmail.com">josephjobescape@gmail.com</a>
+            Privacy requests: <a href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a>
             <br />
             Governing contact: Cognispark, No. 2B Poultry Road, Owere-Eze Orba, Nsukka, Enugu State, Nigeria.
           </p>
