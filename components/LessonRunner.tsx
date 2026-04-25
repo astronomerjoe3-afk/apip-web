@@ -1747,7 +1747,7 @@ export default function LessonRunner({
     const scaffoldRoleplayCard =
       lessonId === "M1_L1"
         ? (() => {
-            if (isIntroStep) {
+            if (false && isIntroStep) {
               return {
                 id: "m1-l1-intro-brief",
                 badge: "Mission brief",
@@ -1781,7 +1781,7 @@ export default function LessonRunner({
               } satisfies ScaffoldRoleplayCard;
             }
 
-            if (isClarityStep) {
+            if (false && isClarityStep) {
               return {
                 id: "m1-l1-radio-call",
                 badge: "Radio call",
@@ -1815,7 +1815,7 @@ export default function LessonRunner({
               } satisfies ScaffoldRoleplayCard;
             }
 
-            if (isTableStep) {
+            if (isTableStep && activeTableIndex === 0) {
               return {
                 id: `m1-l1-table-${activeTableIndex}`,
                 badge: "Control room",
@@ -1917,7 +1917,7 @@ export default function LessonRunner({
               } satisfies ScaffoldRoleplayCard;
             }
 
-            if (isSectionStep && activeSection?.worked_example) {
+            if (false && isSectionStep && activeSection?.worked_example) {
               return {
                 id: `m1-l1-worked-${activeSectionIndex}`,
                 badge: "Analyst drill",
@@ -1951,7 +1951,7 @@ export default function LessonRunner({
               } satisfies ScaffoldRoleplayCard;
             }
 
-            if (isSectionStep) {
+            if (false && isSectionStep) {
               return {
                 id: `m1-l1-section-${activeSectionIndex}`,
                 badge: "Coach move",
