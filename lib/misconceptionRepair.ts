@@ -435,6 +435,32 @@ export function misconceptionSummaryForContext({
     };
   }
 
+  const isDistanceGraphSpeedCheck =
+    !/acceleration/.test(source)
+    && (
+      (
+        includesAny(source, [/distance-time/, /distance time/])
+        && includesAny(source, [/\bspeed\b/, /\bm\/s\b/, /\bm s\^-?1\b/, /metres per second/, /meters per second/])
+      ) ||
+      includesAny(source, [
+        /graph gradient as speed/,
+        /gradient gives speed/,
+        /slope gives speed/,
+        /speed on (this|that|the) segment/,
+        /which segment.*speed/,
+      ])
+    );
+
+  if (isDistanceGraphSpeedCheck) {
+    return {
+      tag: String(tag || "distance_time_graph_error"),
+      title: "Use the gradient of that distance-time segment",
+      diagnosis: "On a distance-time graph, the line height tells you the total distance reached by that time. The speed comes from how much the distance changes during that segment.",
+      repair: cleanCorrectionText(displayCorrectText, "This question is asking for speed, so use the segment slope: change in distance divided by change in time."),
+      noticeNext: "When a distance-time graph asks for speed, do not read the graph height. Use the steepness of the segment.",
+    };
+  }
+
   const isDistanceDisplacementCheck =
     includesAny(source, [/distance/]) && includesAny(source, [/displacement/]);
 
