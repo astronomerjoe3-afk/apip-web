@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
+import { misconceptionSummaryForContext } from "@/lib/misconceptionRepair";
 import M3SimulationPanels from "../../components/M3SimulationPanels";
 import styles from "../graph-lab/graphLab.module.css";
 
@@ -373,10 +373,18 @@ export default function EnergyLedgerWorkspaceClient() {
   const activeAnswer = answers[activeWorkspace.key];
   const activeOption =
     activeWorkspace.checkpoint.options.find((option) => option.value === activeAnswer) || null;
+  const correctOption =
+    activeWorkspace.checkpoint.options.find((option) => option.value === activeWorkspace.checkpoint.answer) || null;
   const checkpointSolved = activeAnswer === activeWorkspace.checkpoint.answer;
   const misconceptionSummary =
     !checkpointSolved && activeOption?.misconceptionTag
-      ? misconceptionSummaryForTag(activeOption.misconceptionTag)
+      ? misconceptionSummaryForContext({
+          tag: activeOption.misconceptionTag,
+          prompt: activeWorkspace.checkpoint.prompt,
+          learnerAnswer: activeOption.label,
+          correctAnswer: correctOption?.label ?? activeWorkspace.checkpoint.answer,
+          teachingFocus: activeWorkspace.checkpoint.hint,
+        })
       : null;
   const activeWorkspaceIndex = WORKSPACES.findIndex((workspace) => workspace.key === activeWorkspace.key) + 1;
   const solvedCount = useMemo(
@@ -619,7 +627,7 @@ export default function EnergyLedgerWorkspaceClient() {
 
               {activeOption ? (
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
-                  <strong>{checkpointSolved ? "Locked in" : "Good catch to work through"}</strong>
+                  <strong>{checkpointSolved ? "Locked in" : "Use this correction"}</strong>
                   <p>{activeOption.feedback}</p>
                   <div className={styles.feedbackBreakdown}>
                     <div>
@@ -637,18 +645,17 @@ export default function EnergyLedgerWorkspaceClient() {
                   </div>
                   {misconceptionSummary ? (
                     <div className={styles.repairPanel}>
-                      <strong>Try this correction</strong>
                       <div className={styles.repairGrid}>
                         <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>What got mixed up</p>
-                          <p>{misconceptionSummary.diagnosis}</p>
-                        </div>
-                        <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                          <p className={styles.reasoningLabel}>Right idea</p>
                           <p>{misconceptionSummary.repair}</p>
                         </div>
                         <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>What to notice next</p>
+                          <p className={styles.reasoningLabel}>Why</p>
+                          <p>{misconceptionSummary.diagnosis}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>Next time</p>
                           <p>{misconceptionSummary.noticeNext}</p>
                         </div>
                       </div>

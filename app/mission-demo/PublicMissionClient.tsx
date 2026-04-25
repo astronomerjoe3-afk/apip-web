@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
+import { misconceptionSummaryForContext, misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
 import styles from "./missionDemo.module.css";
 
 type QuestionKey = "pauseSegment" | "fastestSegment" | "distanceAtSeven";
@@ -472,10 +472,17 @@ export default function PublicMissionClient() {
             {QUESTIONS.map((question, index) => {
               const selectedAnswer = answers[question.key];
               const selectedOption = question.options.find((option) => option.value === selectedAnswer);
+              const correctOption = question.options.find((option) => option.value === question.answer);
               const answeredCorrectly = selectedAnswer === question.answer;
               const misconceptionSummary =
                 !answeredCorrectly && selectedOption?.misconceptionTag
-                  ? misconceptionSummaryForTag(selectedOption.misconceptionTag)
+                  ? misconceptionSummaryForContext({
+                      tag: selectedOption.misconceptionTag,
+                      prompt: question.prompt,
+                      learnerAnswer: selectedOption.label,
+                      correctAnswer: correctOption?.label ?? question.answer,
+                      teachingFocus: question.hint,
+                    })
                   : null;
 
               return (
@@ -514,22 +521,21 @@ export default function PublicMissionClient() {
 
                   {selectedOption ? (
                     <div className={`${styles.feedbackPanel} ${answeredCorrectly ? styles.feedbackGood : styles.feedbackNeedsWork}`}>
-                      <strong>{answeredCorrectly ? "Good read." : "Useful correction."}</strong>
+                      <strong>{answeredCorrectly ? "Good read." : "Use this correction."}</strong>
                       <p>{selectedOption.feedback}</p>
                       {misconceptionSummary ? (
                         <div className={styles.repairPanel}>
-                          <strong>Try this correction</strong>
                           <div className={styles.repairGrid}>
                             <div className={styles.repairBlock}>
-                              <p className={styles.reasoningLabel}>What got mixed up</p>
-                              <p>{misconceptionSummary.diagnosis}</p>
-                            </div>
-                            <div className={styles.repairBlock}>
-                              <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                              <p className={styles.reasoningLabel}>Right idea</p>
                               <p>{misconceptionSummary.repair}</p>
                             </div>
                             <div className={styles.repairBlock}>
-                              <p className={styles.reasoningLabel}>What to notice next</p>
+                              <p className={styles.reasoningLabel}>Why</p>
+                              <p>{misconceptionSummary.diagnosis}</p>
+                            </div>
+                            <div className={styles.repairBlock}>
+                              <p className={styles.reasoningLabel}>Next time</p>
                               <p>{misconceptionSummary.noticeNext}</p>
                             </div>
                           </div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
+import { misconceptionSummaryForContext } from "@/lib/misconceptionRepair";
 import M1SimulationPanels from "../../components/M1SimulationPanels";
 import styles from "./graphLab.module.css";
 
@@ -279,10 +279,17 @@ export default function GraphReasoningLabClient() {
 
   const activeAnswer = answers[activeLab.key];
   const activeOption = activeLab.checkpoint.options.find((option) => option.value === activeAnswer) || null;
+  const correctOption = activeLab.checkpoint.options.find((option) => option.value === activeLab.checkpoint.answer) || null;
   const checkpointSolved = activeAnswer === activeLab.checkpoint.answer;
   const misconceptionSummary =
     !checkpointSolved && activeOption?.misconceptionTag
-      ? misconceptionSummaryForTag(activeOption.misconceptionTag)
+      ? misconceptionSummaryForContext({
+          tag: activeOption.misconceptionTag,
+          prompt: activeLab.checkpoint.prompt,
+          learnerAnswer: activeOption.label,
+          correctAnswer: correctOption?.label ?? activeLab.checkpoint.answer,
+          teachingFocus: activeLab.checkpoint.hint,
+        })
       : null;
   const activeLabIndex = LABS.findIndex((lab) => lab.key === activeLab.key) + 1;
   const solvedCount = useMemo(
@@ -524,7 +531,7 @@ export default function GraphReasoningLabClient() {
 
               {activeOption ? (
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
-                  <strong>{checkpointSolved ? "Locked in" : "Good catch to work through"}</strong>
+                  <strong>{checkpointSolved ? "Locked in" : "Use this correction"}</strong>
                   <p>{activeOption.feedback}</p>
                   <div className={styles.feedbackBreakdown}>
                     <div>
@@ -542,18 +549,17 @@ export default function GraphReasoningLabClient() {
                   </div>
                   {misconceptionSummary ? (
                     <div className={styles.repairPanel}>
-                      <strong>Try this correction</strong>
                       <div className={styles.repairGrid}>
                         <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>What got mixed up</p>
-                          <p>{misconceptionSummary.diagnosis}</p>
-                        </div>
-                        <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                          <p className={styles.reasoningLabel}>Right idea</p>
                           <p>{misconceptionSummary.repair}</p>
                         </div>
                         <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>What to notice next</p>
+                          <p className={styles.reasoningLabel}>Why</p>
+                          <p>{misconceptionSummary.diagnosis}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>Next time</p>
                           <p>{misconceptionSummary.noticeNext}</p>
                         </div>
                       </div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
+import { misconceptionSummaryForContext } from "@/lib/misconceptionRepair";
 import M2SimulationPanels from "../../components/M2SimulationPanels";
 import styles from "../graph-lab/graphLab.module.css";
 
@@ -316,10 +316,17 @@ export default function ForceSystemBuilderClient() {
 
   const activeAnswer = answers[activeTool.key];
   const activeOption = activeTool.checkpoint.options.find((option) => option.value === activeAnswer) || null;
+  const correctOption = activeTool.checkpoint.options.find((option) => option.value === activeTool.checkpoint.answer) || null;
   const checkpointSolved = activeAnswer === activeTool.checkpoint.answer;
   const misconceptionSummary =
     !checkpointSolved && activeOption?.misconceptionTag
-      ? misconceptionSummaryForTag(activeOption.misconceptionTag)
+      ? misconceptionSummaryForContext({
+          tag: activeOption.misconceptionTag,
+          prompt: activeTool.checkpoint.prompt,
+          learnerAnswer: activeOption.label,
+          correctAnswer: correctOption?.label ?? activeTool.checkpoint.answer,
+          teachingFocus: activeTool.checkpoint.hint,
+        })
       : null;
   const activeToolIndex = TOOLS.findIndex((tool) => tool.key === activeTool.key) + 1;
   const solvedCount = useMemo(
@@ -563,7 +570,7 @@ export default function ForceSystemBuilderClient() {
 
               {activeOption ? (
                 <div className={`${styles.feedbackPanel} ${checkpointSolved ? styles.feedbackCorrect : styles.feedbackNeutral}`}>
-                  <strong>{checkpointSolved ? "Locked in" : "Good catch to work through"}</strong>
+                  <strong>{checkpointSolved ? "Locked in" : "Use this correction"}</strong>
                   <p>{activeOption.feedback}</p>
                   <div className={styles.feedbackBreakdown}>
                     <div>
@@ -581,18 +588,17 @@ export default function ForceSystemBuilderClient() {
                   </div>
                   {misconceptionSummary ? (
                     <div className={styles.repairPanel}>
-                      <strong>Try this correction</strong>
                       <div className={styles.repairGrid}>
                         <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>What got mixed up</p>
-                          <p>{misconceptionSummary.diagnosis}</p>
-                        </div>
-                        <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>Why that reasoning breaks</p>
+                          <p className={styles.reasoningLabel}>Right idea</p>
                           <p>{misconceptionSummary.repair}</p>
                         </div>
                         <div className={styles.repairBlock}>
-                          <p className={styles.reasoningLabel}>What to notice next</p>
+                          <p className={styles.reasoningLabel}>Why</p>
+                          <p>{misconceptionSummary.diagnosis}</p>
+                        </div>
+                        <div className={styles.repairBlock}>
+                          <p className={styles.reasoningLabel}>Next time</p>
                           <p>{misconceptionSummary.noticeNext}</p>
                         </div>
                       </div>
