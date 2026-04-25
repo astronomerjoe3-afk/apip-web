@@ -557,6 +557,23 @@ type ScaffoldRoleplayCard = {
   retryLabel?: string;
 };
 
+function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
+  if (card.options.length <= 1) return card.options;
+  const correctIndex = card.options.findIndex((option) => option.isCorrect);
+  if (correctIndex < 0) return card.options;
+
+  const targetIndex =
+    [...card.id].reduce((sum, character, index) => sum + character.charCodeAt(0) * (index + 1), 0) %
+    card.options.length;
+
+  if (targetIndex === correctIndex) return card.options;
+
+  const reordered = [...card.options];
+  const [correctOption] = reordered.splice(correctIndex, 1);
+  reordered.splice(targetIndex, 0, correctOption);
+  return reordered;
+}
+
 type ConceptGateFeedbackItem = {
   question_id: string;
   prompt?: string;
@@ -1470,6 +1487,7 @@ export default function LessonRunner({
   const renderScaffoldRoleplayCard = (card: ScaffoldRoleplayCard, selectionKey: string) => {
     const selectedValue = scaffoldRoleplaySelections[selectionKey] ?? "";
     const selectedOption = card.options.find((option) => option.value === selectedValue) ?? null;
+    const orderedOptions = getOrderedScaffoldRoleplayOptions(card);
 
     return (
       <section className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-orange-50 p-5 shadow-sm">
@@ -1487,7 +1505,7 @@ export default function LessonRunner({
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-slate-500">Your move</p>
           <p className="mt-2 text-sm font-medium text-slate-900">{normalizeLessonDisplayText(card.prompt)}</p>
           <div className="mt-4 grid gap-3">
-            {card.options.map((option) => {
+            {orderedOptions.map((option) => {
               const isSelected = selectedValue === option.value;
               const isCorrect = Boolean(isSelected && option.isCorrect);
               return (
