@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getLessonRunner, postProgressEvent, restartLessonProgress } from "@/lib/lessonRunnerApi";
-import { misconceptionSummaryForTag } from "@/lib/misconceptionRepair";
+import { misconceptionSummaryForContext } from "@/lib/misconceptionRepair";
 import { describeReviewProgress, describeReviewTiming } from "@/lib/spacedReview";
 import { feedbackAnswer, feedbackBody } from "./lessonRunnerFeedback";
 import MeasurementInstrumentTour from "./MeasurementInstrumentTour";
@@ -64,6 +64,7 @@ type Question = {
 
 type DiagnosticFeedbackItem = {
   question_id: string;
+  prompt?: string;
   learner_answer: string | string[] | null;
   is_correct: boolean;
   correct_answer: string | string[];
@@ -540,8 +541,10 @@ type ScaffoldStagePayload = {
 
 type ConceptGateFeedbackItem = {
   question_id: string;
+  prompt?: string;
   is_correct: boolean;
   explanation: string;
+  correct_answer?: string | string[];
   misconception_tag?: string;
   teaching_focus?: string;
 };
@@ -594,6 +597,8 @@ type MasteryFeedbackItem = {
   prompt?: string;
   is_correct: boolean;
   explanation?: string;
+  correct_answer?: string | string[];
+  learner_answer?: string | string[] | null;
   misconception_tag?: string;
   teaching_focus?: string;
 };
@@ -951,12 +956,24 @@ function AssessmentFeedbackBreakdown({ cue }: { cue: QuestionReasoningCue }) {
 
 function MisconceptionRepairPanel({
   tag,
+  prompt,
+  learnerAnswer,
+  correctAnswer,
   teachingFocus,
 }: {
   tag?: string;
+  prompt?: string;
+  learnerAnswer?: string | string[] | null;
+  correctAnswer?: string | string[];
   teachingFocus?: string;
 }) {
-  const summary = misconceptionSummaryForTag(tag);
+  const summary = misconceptionSummaryForContext({
+    tag,
+    prompt,
+    learnerAnswer,
+    correctAnswer,
+    teachingFocus,
+  });
 
   if (!summary && !teachingFocus) {
     return null;
@@ -964,20 +981,20 @@ function MisconceptionRepairPanel({
 
   return (
     <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50/80 p-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-800">Try this correction</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-800">Fix this idea now</p>
       {summary ? (
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           <div>
-            <p className="font-semibold text-slate-800 normal-case">What got mixed up</p>
+            <p className="font-semibold text-slate-800 normal-case">What to correct</p>
             <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.title}</p>
           </div>
           <div>
-            <p className="font-semibold text-slate-800 normal-case">Why that reasoning breaks</p>
-            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.diagnosis}</p>
+            <p className="font-semibold text-slate-800 normal-case">Direct correction</p>
+            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.repair}</p>
           </div>
           <div>
-            <p className="font-semibold text-slate-800 normal-case">What to notice next</p>
-            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.repair}</p>
+            <p className="font-semibold text-slate-800 normal-case">Why this works</p>
+            <p className="mt-1 leading-6 text-slate-700 normal-case">{summary.diagnosis}</p>
             <p className="mt-2 leading-6 text-slate-600 normal-case">{summary.noticeNext}</p>
           </div>
         </div>
@@ -1501,6 +1518,9 @@ export default function LessonRunner({
           {item.is_correct ? null : (
             <MisconceptionRepairPanel
               tag={item.misconception_tag}
+              prompt={item.prompt}
+              learnerAnswer={item.learner_answer}
+              correctAnswer={item.correct_answer}
               teachingFocus={item.teaching_focus}
             />
           )}
@@ -2097,6 +2117,8 @@ export default function LessonRunner({
                   item.is_correct ? null : (
                     <MisconceptionRepairPanel
                       tag={item.misconception_tag}
+                      prompt={item.prompt}
+                      correctAnswer={item.correct_answer}
                       teachingFocus={item.teaching_focus}
                     />
                   )
@@ -4368,6 +4390,9 @@ export default function LessonRunner({
                   item.is_correct ? null : (
                     <MisconceptionRepairPanel
                       tag={item.misconception_tag}
+                      prompt={item.prompt}
+                      learnerAnswer={item.learner_answer}
+                      correctAnswer={item.correct_answer}
                       teachingFocus={item.teaching_focus}
                     />
                   )

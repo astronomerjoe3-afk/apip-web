@@ -1389,8 +1389,19 @@ function moduleTwoStructuredShortAnswerMatch(
 }
 
 function numericAnswer(value: unknown): number | null {
-  const raw = compactOpenAnswer(value);
-  if (!raw) return null;
+  const normalized = normalizeOpenAnswer(value);
+  if (!normalized) return null;
+
+  const hasDirectionWord = /\b(left|right|up|down|east|west|north|south|forward|backward)\b/.test(normalized);
+  if (!hasDirectionWord && /^zero(?:\b|$)/.test(normalized)) {
+    return 0;
+  }
+
+  const raw = normalized.replace(/\s+/g, "");
+  if (!hasDirectionWord && /^[-+]?0+(?:\.0+)?(?:[a-z/^0-9.+-]*)$/.test(raw)) {
+    return 0;
+  }
+
   const match = raw.match(/^[-+]?\d*\.?\d+$/);
   return match ? Number.parseFloat(match[0]) : null;
 }
@@ -7948,6 +7959,8 @@ function teachingFocus(prompt: string, title: string): string {
 
 function misconceptionTag(prompt: string): string | undefined {
   const source = prompt.toLowerCase();
+  if (source.includes("distance-time") || source.includes("distance time graph") || (source.includes("graph") && source.includes("distance"))) return "distance_time_graph_error";
+  if (source.includes("velocity-time") || source.includes("velocity time graph") || source.includes("speed-time") || source.includes("speed time graph") || source.includes("area under") || (source.includes("graph") && (source.includes("velocity") || source.includes("speed")))) return "velocity_time_graph_error";
   if (source.includes("work") || (source.includes("force") && source.includes("distance"))) return "work_energy_transfer_confusion";
   if (source.includes("kinetic energy")) return "kinetic_energy_relationship_error";
   if (source.includes("gravitational potential energy") || source.includes("gpe") || (source.includes("lifted") && source.includes("height"))) return "gravitational_potential_energy_error";
@@ -7966,8 +7979,6 @@ function misconceptionTag(prompt: string): string | undefined {
   if (source.includes("prefix") || source.includes("kilo") || source.includes("centi") || source.includes("milli")) return "prefix_scale_error";
   if (source.includes("distance") || source.includes("displacement") || source.includes("average speed") || source.includes("journey")) return "distance_displacement_confusion";
   if (source.includes("velocity") || source.includes("direction") || source.includes("acceleration")) return source.includes("acceleration") ? "acceleration_sign_confusion" : "velocity_direction_confusion";
-  if (source.includes("distance-time") || source.includes("distance time graph") || (source.includes("graph") && source.includes("distance"))) return "distance_time_graph_error";
-  if (source.includes("velocity-time") || source.includes("velocity time graph") || source.includes("area under") || (source.includes("graph") && source.includes("velocity"))) return "velocity_time_graph_error";
   if (source.includes("resultant force") || source.includes("balanced force") || source.includes("unbalanced force") || source.includes("net force")) return source.includes("balanced") ? "balanced_force_motion_confusion" : "resultant_force_error";
   if (source.includes("seatbelt") || source.includes("inertia")) return "inertia_force_confusion";
   if (source.includes("f = ma") || source.includes("force") && source.includes("mass")) return "fma_relationship_error";
@@ -28164,8 +28175,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
         passed: graded.is_correct === true,
         feedback: [{
           question_id: text(graded.question_id),
+          prompt: text(graded.prompt),
           is_correct: graded.is_correct,
           explanation: graded.is_correct === true ? "That is right. You have shown the key idea clearly." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
+          correct_answer: text(graded.correct_answer),
           misconception_tag: text(graded.misconception_tag),
           teaching_focus: text(graded.teaching_focus),
         }],
@@ -28273,8 +28286,10 @@ export async function postProgressEvent(moduleId: string, request: RunnerRequest
       return {
         question_id: text(graded.question_id),
         prompt: text(graded.prompt),
+        learner_answer: text(graded.learner_answer),
         is_correct: graded.is_correct,
         explanation: graded.is_correct === true ? text(graded.explanation) || "Correct." : `${text(graded.explanation)} Correct answer: ${text(graded.correct_answer)}.`,
+        correct_answer: text(graded.correct_answer),
         misconception_tag: text(graded.misconception_tag),
         teaching_focus: text(graded.teaching_focus),
       };

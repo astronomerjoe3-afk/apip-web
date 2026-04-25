@@ -6,6 +6,14 @@ export type MisconceptionRepairSummary = {
   noticeNext: string;
 };
 
+type MisconceptionRepairContext = {
+  tag?: string | null;
+  prompt?: string | null;
+  learnerAnswer?: string | string[] | null;
+  correctAnswer?: string | string[] | null;
+  teachingFocus?: string | null;
+};
+
 type MisconceptionTemplate = Omit<MisconceptionRepairSummary, "tag">;
 
 const EXACT_SUMMARIES: Record<string, MisconceptionTemplate> = {
@@ -307,6 +315,44 @@ export function misconceptionSummaryForTag(tag?: string | null): MisconceptionRe
     tag: normalized,
     ...template,
   };
+}
+
+function normalizeRepairText(value: string | string[] | null | undefined): string {
+  if (Array.isArray(value)) {
+    return value.join(" ").trim().toLowerCase();
+  }
+  return String(value || "").trim().toLowerCase();
+}
+
+export function misconceptionSummaryForContext({
+  tag,
+  prompt,
+  learnerAnswer,
+  correctAnswer,
+  teachingFocus,
+}: MisconceptionRepairContext): MisconceptionRepairSummary | null {
+  const promptText = normalizeRepairText(prompt);
+  const answerText = normalizeRepairText(learnerAnswer);
+  const correctText = normalizeRepairText(correctAnswer);
+  const focusText = normalizeRepairText(teachingFocus);
+  const source = [promptText, answerText, correctText, focusText].filter(Boolean).join(" ");
+
+  const isConstantVelocityAccelerationCheck =
+    /constant velocity|same velocity|keeps the same velocity|velocity stays the same|horizontal line|horizontal section|flat line/.test(source)
+    && /acceleration/.test(source)
+    && (/0/.test(correctText) || /0 m\/s\^2|0 m s\^-2|zero acceleration/.test(source));
+
+  if (isConstantVelocityAccelerationCheck) {
+    return {
+      tag: String(tag || "constant_velocity_zero_acceleration"),
+      title: "Constant velocity means the acceleration is zero",
+      diagnosis: "Acceleration tells you how quickly velocity changes. If the velocity stays at the same value, there is no change to measure.",
+      repair: "A constant velocity of 5 m/s means the velocity is staying at 5 m/s, so the acceleration is 0 m/s^2.",
+      noticeNext: "Ask one question first: is the velocity changing? If it is not changing, the acceleration is zero.",
+    };
+  }
+
+  return misconceptionSummaryForTag(tag);
 }
 
 export function misconceptionSummariesForTags(
