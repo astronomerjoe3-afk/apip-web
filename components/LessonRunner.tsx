@@ -1766,7 +1766,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5"
         ? (() => {
             if (lessonId === "F2_L4") {
               if (isMediaStep && activeMediaIndex === 0) {
@@ -1971,6 +1971,214 @@ export default function LessonRunner({
                     ],
                     successLabel: "Analogy chosen. It supports the graph meanings instead of flattening them.",
                     retryLabel: "That analogy would blur the ledger roles right when they need to stay separate.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
+            if (lessonId === "F2_L5") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f2-l5-balanced-unbalanced",
+                  badge: "Force board",
+                  title: "Read the leftover pull",
+                  scenario:
+                    "The mechanics room is comparing one balanced tug and one unbalanced tug. A trainee keeps counting arrows without deciding whether any pull is left over.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "resultant-is-leftover-pull",
+                      label: "Combine the opposite pulls with their directions. Equal pulls leave zero resultant, but unequal pulls leave a resultant in the direction of the larger force.",
+                      feedback:
+                        "Exactly. That keeps the focus on the single leftover force, not on the number of arrows drawn.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "two-forces-means-motion",
+                      label: "If two forces are shown, the object must accelerate because more than one force always means a change in motion.",
+                      feedback:
+                        "Two forces can still balance. The motion changes only if a non-zero resultant force is left over.",
+                    },
+                    {
+                      value: "bigger-force-only-matters",
+                      label: "Ignore the smaller force and just follow the larger arrow, because only the biggest force decides the motion.",
+                      feedback:
+                        "The smaller force still matters because the resultant comes from combining both forces, not from pretending one force disappears.",
+                    },
+                  ],
+                  successLabel: "Pinned. The crew can now look for the leftover pull before predicting any motion change.",
+                  retryLabel: "That note would keep the room counting arrows instead of finding the resultant.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f2-l5-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first force note",
+                    scenario:
+                      "A trainee has written that zero resultant force means the object must be stationary. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "zero-resultant-zero-acceleration",
+                        label: "Zero resultant force means zero acceleration, so the object can stay at rest or keep moving with constant velocity.",
+                        feedback:
+                          "Exactly. That separates 'no change in motion' from 'no motion at all.'",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "zero-resultant-stopped",
+                        label: "Zero resultant force means the pushes cancel completely, so the object must stop immediately.",
+                        feedback:
+                          "That is the trap. Balanced forces stop the velocity changing; they do not force the velocity to become zero.",
+                      },
+                      {
+                        value: "any-force-means-acceleration",
+                        label: "As long as at least one force is acting, the object must accelerate, even if the forces are balanced.",
+                        feedback:
+                          "Forces can act and still balance. Acceleration depends on the resultant force, not on whether any individual force is present.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The first resultant-force misunderstanding is now cleared.",
+                    retryLabel: "That would leave the zero-resultant mistake active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f2-l5-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line force rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner starts these force questions from the same anchor idea.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "resultant-decides-acceleration",
+                        label: "Resultant force is the single overall force left after the pushes and pulls are combined, and that resultant decides the acceleration.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "largest-force-decides-motion",
+                        label: "The largest single force decides the motion, so the smaller forces are mostly background detail.",
+                        feedback:
+                          "The lesson needs the combined effect of all the forces. Smaller forces still change the resultant.",
+                      },
+                      {
+                        value: "balanced-means-no-forces",
+                        label: "Balanced forces mean there are really no forces acting, so the diagram can be treated as empty.",
+                        feedback:
+                          "Balanced means the forces cancel in the combination. It does not mean the forces themselves vanish from the situation.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean resultant-force anchor.",
+                    retryLabel: "That line would blur force balance and motion change together again.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f2-l5-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the force analyst",
+                    scenario:
+                      "A trainee analyst sees opposing arrows and wants to predict the motion before combining them properly. You can send one method instruction before they start.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "combine-forces-first",
+                        label: "Choose a direction, combine the forces along that line, then decide whether the leftover resultant is zero or points with the larger side.",
+                        feedback:
+                          "Exactly. That method keeps the force combination and the motion prediction in the right order.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "predict-from-arrow-count",
+                        label: "Count how many arrows point each way first, because the side with more arrows should control the motion.",
+                        feedback:
+                          "Arrow count is not the rule. The force sizes and directions decide the resultant.",
+                      },
+                      {
+                        value: "motion-first-force-second",
+                        label: "Decide whether the object is speeding up or slowing down from the story first, then match a force diagram afterward.",
+                        feedback:
+                          "That reverses the method. The force analysis should come first, because acceleration depends on the resultant.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable resultant-force method.",
+                    retryLabel: "That instruction would send the analyst back into force-diagram guesswork.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f2-l5-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the zero-force shortcut",
+                    scenario:
+                      "One crew member keeps saying that if the resultant force is zero, the object cannot be moving. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "zero-resultant-not-zero-velocity",
+                        label: "Zero resultant force means zero acceleration, not zero velocity. The object can keep moving at constant velocity.",
+                        feedback:
+                          "Exactly. That warning protects the lesson’s main distinction.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "zero-resultant-no-motion",
+                        label: "Zero resultant force means the object has no motion, because balanced pulls always freeze the object in place.",
+                        feedback:
+                          "That is the trap. Balanced pulls stop changes in motion, but they do not automatically stop existing motion.",
+                      },
+                      {
+                        value: "unbalanced-only-speeding",
+                        label: "An unbalanced force only matters if the object is already speeding up; otherwise the force story can be ignored.",
+                        feedback:
+                          "Any non-zero resultant matters because it causes acceleration, even if the object started from rest.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now keeps zero acceleration separate from zero velocity.",
+                    retryLabel: "That warning would leave the biggest resultant-force shortcut alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f2-l5-analogy",
+                    badge: "Story relay",
+                    title: "Choose the tug-of-war analogy",
+                    scenario:
+                      "The team wants one analogy that makes balanced and unbalanced forces obvious without flattening the lesson into 'bigger wins' language.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "tug-of-war-leftover-pull",
+                        label: "Use a tug-of-war rope: equal opposite teams leave no net pull, but if one side pulls harder there is a leftover pull in that direction.",
+                        feedback:
+                          "Exactly. That analogy keeps the resultant as the leftover pull after the forces are combined.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "single-strongest-pull",
+                        label: "Use the strongest single pull only, because the lesson mainly needs the learner to follow the biggest force arrow.",
+                        feedback:
+                          "That loses the balancing idea. The smaller pull still matters because it changes the leftover resultant.",
+                      },
+                      {
+                        value: "rope-means-no-motion",
+                        label: "Use a tied rope picture, because if the rope does not move then the lesson can treat every balanced case as complete rest.",
+                        feedback:
+                          "The key idea is not 'rope equals no motion.' It is that equal opposite pulls leave zero resultant, which means no acceleration.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports force balance without collapsing the lesson into a shortcut.",
+                    retryLabel: "That analogy would blur the resultant-force story instead of clarifying it.",
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
