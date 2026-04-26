@@ -1766,8 +1766,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1"
         ? (() => {
+            if (lessonId === "F2_L1") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f2-l1-route-arrow",
+                  badge: "Route board",
+                  title: "Separate the route from the arrow",
+                  scenario:
+                    "The motion room can see the journey path and the straight start-to-finish arrow at the same time. You get one note to stop the crew from reading both as the same quantity.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "distance_route_displacement_arrow",
+                      label: "Distance follows the whole route, while displacement is the single start-to-finish arrow with direction.",
+                      feedback:
+                        "Exactly. That keeps route length and net change separate before any numbers are added.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "distance_arrow_displacement_route",
+                      label: "Distance is the straight arrow, while displacement follows every bend and return in the route.",
+                      feedback:
+                        "That swaps the two ideas. The whole route belongs to distance, while the straight start-to-finish change belongs to displacement.",
+                    },
+                    {
+                      value: "same_if_same_finish",
+                      label: "If the journey ends at the same place it started, distance and displacement are both zero.",
+                      feedback:
+                        "A round trip can make displacement zero, but the full route distance can still be large.",
+                    },
+                  ],
+                  successLabel: "Display pinned. The crew can now read the journey with two different motion questions in mind.",
+                  retryLabel: "That note would blur route length and net change together again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f2-l1-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first journey note",
+                    scenario:
+                      "A trainee has written that distance and displacement are basically the same unless the object turns round completely. You need to correct that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "route_vs_finish",
+                        label: "Distance uses the whole route, but displacement only compares the finishing point with the starting point and keeps direction.",
+                        feedback:
+                          "Exactly. That is the clean distinction the trainee needs before solving any journey question.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "same_unless_return",
+                        label: "Distance and displacement stay the same for most journeys, so only complete round trips really separate them.",
+                        feedback:
+                          "Even a partial return can make distance and displacement different. They answer different questions on every multi-stage trip.",
+                      },
+                      {
+                        value: "distance_needs_direction",
+                        label: "Distance is the one that needs the direction word, because it follows the real path.",
+                        feedback:
+                          "Direction belongs to displacement here. Distance just adds the route length.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The journey note now separates route length from net change properly.",
+                    retryLabel: "That would leave the first mechanics misunderstanding alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f2-l1-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line motion rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner solves journey questions from the same anchor idea.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "distance_route_displacement_net_speed_total",
+                        label: "Distance adds the route, displacement keeps the net start-to-finish change with direction, and average speed uses total distance over total time.",
+                        feedback:
+                          "Exactly. That line keeps the three lesson quantities separate and useful.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "distance_speed_same",
+                        label: "Distance and average speed are both route quantities, so they can be solved from the same number line without using time carefully.",
+                        feedback:
+                          "Average speed still depends on total time. It is linked to the route, but not identical to distance.",
+                      },
+                      {
+                        value: "displacement_is_shorter_distance",
+                        label: "Displacement is just the shorter version of distance, so it usually needs the same method with fewer steps.",
+                        feedback:
+                          "Displacement is not a shortened distance. It is a different question about the net change from start to finish.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean mechanics anchor.",
+                    retryLabel: "That line would collapse three different motion ideas into one blur.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f2-l1-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the route analyst",
+                    scenario:
+                      "A trainee analyst sees a multi-stage journey and wants to subtract or average numbers too early. You can send one method instruction before they start.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "identify_quantity_first",
+                        label: "First decide whether the question wants the whole route, the net start-to-finish change, or the whole-journey average speed.",
+                        feedback:
+                          "Exactly. That choice decides whether to add the route, compare positions, or divide total distance by total time.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "average_stage_speeds",
+                        label: "Work out the speed of each stage first, then average those stage speeds for every average-speed question.",
+                        feedback:
+                          "That shortcut is unsafe. Average speed for the whole trip uses total distance and total time, not a casual average of stage speeds.",
+                      },
+                      {
+                        value: "subtract_returns_for_distance",
+                        label: "Subtract any return part immediately, because backwards motion cancels distance the same way it cancels displacement.",
+                        feedback:
+                          "Return parts still count toward total distance. Only displacement uses the net change after directions are considered.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a real journey-solving method.",
+                    retryLabel: "That instruction would send the analyst into the standard route-question trap.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f2-l1-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the average-speed shortcut",
+                    scenario:
+                      "One crew member keeps saying average speed is found by averaging the speeds of the visible stages. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "use_total_distance_time",
+                        label: "Average speed for the whole trip comes from total distance divided by total time, not from averaging stage speeds by habit.",
+                        feedback:
+                          "Exactly. The whole-journey totals decide average speed, especially when stage times differ.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "use_displacement_instead",
+                        label: "Average speed should use displacement because it is the cleaner route number.",
+                        feedback:
+                          "That would switch to a different quantity. Average speed uses total distance, not displacement.",
+                      },
+                      {
+                        value: "largest_stage_only",
+                        label: "The largest stage speed should dominate the answer because it tells the strongest motion part of the trip.",
+                        feedback:
+                          "A fast stage can matter, but average speed still depends on the full journey totals, not the biggest single stage.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room will now use the whole-journey rule instead of the shortcut.",
+                    retryLabel: "That warning would leave the most tempting average-speed mistake alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f2-l1-analogy",
+                    badge: "Story relay",
+                    title: "Choose the journey analogy",
+                    scenario:
+                      "The team wants one analogy that keeps route length and start-to-finish change separate without weakening the lesson into a vague travel story.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "odometer_and_arrow",
+                        label: "Use an odometer for the whole route and a straight map arrow for the start-to-finish change.",
+                        feedback:
+                          "Exactly. That analogy keeps distance and displacement doing different jobs in one journey.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "single_map_line",
+                        label: "Use one map line for both quantities, because the route itself already contains the start and finish.",
+                        feedback:
+                          "That collapses the two ideas. The route and the straight start-to-finish change need different representations here.",
+                      },
+                      {
+                        value: "clock_only",
+                        label: "Use only a travel clock, because once time is tracked carefully the distance-displacement difference becomes obvious automatically.",
+                        feedback:
+                          "Time matters for average speed, but a clock alone cannot separate route length from net position change.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the mechanics idea instead of flattening it.",
+                    retryLabel: "That analogy would blur the lesson right when it should clarify it.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F1_L6") {
               if (isTableStep && activeTableIndex === 0) {
                 return {
