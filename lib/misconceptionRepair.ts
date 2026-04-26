@@ -584,22 +584,28 @@ export function misconceptionSummaryForContext({
     && !includesAny(promptText, [/displacement/, /average speed/, /\bspeed\b/]);
 
   if (asksForDistanceOnly) {
+    const directDistanceCorrection =
+      journeySummary && learnerUsedDirectionWord
+        ? `Your answer ${displayRepairText(learnerAnswer)} is the displacement because it keeps the direction. This question asks for distance, so add the route stages: ${journeySummary.stageText} = ${journeySummary.distanceText}, then drop the direction word.`
+        : journeySummary
+          ? `Add the route stages: ${journeySummary.stageText} = ${journeySummary.distanceText}. Then leave out the direction word, because distance is a scalar.`
+          : learnerUsedDirectionWord
+            ? `Your answer ${displayRepairText(learnerAnswer)} keeps the direction, so it reads like a displacement. For distance, add every stage of the route and then drop the direction word.`
+            : "Add every stage of the route to get the total distance.";
     return {
       tag: String(tag || "distance_displacement_confusion"),
       title: "Distance means add the whole route",
       diagnosis:
         learnerUsedDirectionWord
-          ? "This is a distance question, so every stage of the journey counts and the final answer drops the direction word."
+          ? "This is a distance question, but the answer given is a direction-carrying net change. That means the student has answered with displacement instead of distance."
           : "This is a distance question, so every stage of the journey counts even if the route turns back.",
       repair: cleanCorrectionText(
         displayCorrectText,
-        journeySummary
-          ? `Add the route stages: ${journeySummary.stageText} = ${journeySummary.distanceText}. Then leave out the direction word, because distance is a scalar.`
-          : learnerUsedDirectionWord
-            ? "Add every stage of the route to get the distance, then drop the direction word because distance does not keep east, west, north, or south."
-            : "Add every stage of the route to get the total distance.",
+        directDistanceCorrection,
       ),
-      noticeNext: "Distance adds the whole route. Only displacement keeps east, west, north, or south.",
+      noticeNext: learnerUsedDirectionWord
+        ? "If a distance answer still says east, west, north, or south, you have probably written the displacement instead."
+        : "Distance adds the whole route. Only displacement keeps east, west, north, or south.",
     };
   }
 
