@@ -522,6 +522,85 @@ export function misconceptionSummaryForContext({
     };
   }
 
+  const isSigFigMultiplyDivideRuleCheck =
+    (
+      includesAny(source, [/significant figure/, /significant figures/, /sig fig/, /sig figs/])
+      && includesAny(source, [/least precise measurement/, /fewest significant figures/, /least significant figures/])
+    )
+    || (
+      includesAny(source, [/multiply/, /multiplication/, /divide/, /division/, /product/, /quotient/])
+      && includesAny(source, [/least significant figures/, /fewest significant figures/])
+    );
+
+  if (isSigFigMultiplyDivideRuleCheck) {
+    return {
+      tag: String(tag || "significant_figures"),
+      title: "Use the least significant figures rule",
+      diagnosis: "For multiplication and division, the final answer is limited by the measurement with the fewest significant figures. This is the precision rule being tested here.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        "Find the measurement with the fewest significant figures, do the calculation, then round the final answer to that many significant figures.",
+      ),
+      noticeNext: "Check the operation first: multiplication or division uses significant figures, while addition or subtraction uses decimal places.",
+    };
+  }
+
+  const isDecimalPlacesRuleCheck =
+    (
+      includesAny(source, [/decimal place/, /decimal places/])
+      && includesAny(source, [/least decimal places/, /fewest decimal places/])
+    )
+    || (
+      includesAny(source, [/\badd\b/, /\badding\b/, /\baddition\b/, /\bsubtract\b/, /\bsubtraction\b/, /\bsum\b/, /\bdifference\b/, /\bplus\b/, /\bminus\b/])
+      && includesAny(source, [/least decimal places/, /fewest decimal places/])
+    );
+
+  if (isDecimalPlacesRuleCheck) {
+    return {
+      tag: String(tag || "rounding_rules"),
+      title: "Use the least decimal places rule",
+      diagnosis: "For addition and subtraction, the final answer is limited by the least precise decimal place in the measurements, not by total significant figures.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        "Line up the decimal places, do the calculation, then round the final answer to the fewest decimal places shown by the original measurements.",
+      ),
+      noticeNext: "Check the operation first: addition or subtraction uses decimal places, while multiplication or division uses significant figures.",
+    };
+  }
+
+  const isCountingSigFigsCheck =
+    includesAny(source, [/how many significant figures/, /count the significant figures/, /number of significant figures/]);
+
+  if (isCountingSigFigsCheck) {
+    return {
+      tag: String(tag || "significant_figures"),
+      title: "Count from the first meaningful digit",
+      diagnosis: "Counting significant figures starts at the first non-zero digit. Leading zeros only place the decimal point, while trailing zeros may count if they show measured precision.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        "Start at the first non-zero digit and count every digit that still shows measured precision.",
+      ),
+      noticeNext: "Ignore leading zeros first, then decide whether any trailing zeros are showing real precision.",
+    };
+  }
+
+  const isRoundingSigFigsCheck =
+    includesAny(source, [/\bround\b/, /\brounded\b/, /\brounding\b/])
+    && includesAny(source, [/significant figure/, /significant figures/, /sig fig/, /sig figs/]);
+
+  if (isRoundingSigFigsCheck) {
+    return {
+      tag: String(tag || "rounding_rules"),
+      title: "Round to the requested significant figures",
+      diagnosis: "Keep only the required significant figures, then use the next digit to decide whether the last kept digit stays the same or rounds up.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        "Keep the required significant figures first, then look at the next digit once to decide whether to round up.",
+      ),
+      noticeNext: "Mark the last digit you are allowed to keep before you start rounding.",
+    };
+  }
+
   const contextualFallback = genericContextualRepair(tag, displayCorrectText, displayFocusText);
   if (contextualFallback) {
     return contextualFallback;
