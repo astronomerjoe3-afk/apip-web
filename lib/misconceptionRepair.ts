@@ -583,89 +583,83 @@ export function misconceptionSummaryForContext({
     includesAny(promptText, [/\bdistance\b/])
     && !includesAny(promptText, [/displacement/, /average speed/, /\bspeed\b/]);
 
-  if (asksForDistanceOnly) {
-    const directDistanceCorrection =
-      journeySummary && learnerUsedDirectionWord
-        ? `Your answer ${displayRepairText(learnerAnswer)} is the displacement because it keeps the direction. This question asks for distance, so add the route stages: ${journeySummary.stageText} = ${journeySummary.distanceText}, then drop the direction word.`
-        : journeySummary
-          ? `Add the route stages: ${journeySummary.stageText} = ${journeySummary.distanceText}. Then leave out the direction word, because distance is a scalar.`
-          : learnerUsedDirectionWord
-            ? `Your answer ${displayRepairText(learnerAnswer)} keeps the direction, so it reads like a displacement. For distance, add every stage of the route and then drop the direction word.`
-            : "Add every stage of the route to get the total distance.";
-    return {
-      tag: String(tag || "distance_displacement_confusion"),
-      title: "Distance means add the whole route",
-      diagnosis:
-        learnerUsedDirectionWord
-          ? "This is a distance question, but the answer given is a direction-carrying net change. That means the student has answered with displacement instead of distance."
-          : "This is a distance question, so every stage of the journey counts even if the route turns back.",
-      repair: cleanCorrectionText(
-        displayCorrectText,
-        directDistanceCorrection,
-      ),
-      noticeNext: learnerUsedDirectionWord
-        ? "If a distance answer still says east, west, north, or south, you have probably written the displacement instead."
-        : "Distance adds the whole route. Only displacement keeps east, west, north, or south.",
-    };
-  }
+    if (asksForDistanceOnly) {
+      const directDistanceCorrection =
+        journeySummary && learnerUsedDirectionWord
+          ? `You wrote ${displayRepairText(learnerAnswer)}. That is the displacement because it gives the net change with a direction. This question asks for distance, so add the full route instead: ${journeySummary.stageText} = ${journeySummary.distanceText}. Distance does not keep east, west, north, or south.`
+          : journeySummary
+            ? `This question asks for distance, so add the whole route: ${journeySummary.stageText} = ${journeySummary.distanceText}. Do not attach a direction word, because distance is the total path length.`
+            : learnerUsedDirectionWord
+              ? `You wrote ${displayRepairText(learnerAnswer)}, which reads like a displacement because it keeps a direction. For distance, add every stage of the route and then drop the direction word.`
+              : "This question asks for distance, so add every stage of the route to get the full path length.";
+      return {
+        tag: String(tag || "distance_displacement_confusion"),
+        title: "Distance means add the whole route",
+        diagnosis:
+          learnerUsedDirectionWord
+            ? `This question asked for distance, but the answer ${displayRepairText(learnerAnswer)} gives the start-to-finish change with direction instead. That is displacement, not distance.`
+            : "This is a distance question, so every stage of the journey still counts even if the route turns back.",
+        repair: directDistanceCorrection,
+        noticeNext: learnerUsedDirectionWord
+          ? "If a distance answer still says east, west, north, or south, stop and check whether you have written the displacement instead."
+          : "Distance adds the whole route. Only displacement keeps the direction word.",
+      };
+    }
 
   const asksForDisplacementOnly =
     includesAny(promptText, [/displacement/])
     && !includesAny(promptText, [/\bdistance\b/, /average speed/, /\bspeed\b/]);
 
-  if (asksForDisplacementOnly) {
-    return {
-      tag: String(tag || "distance_displacement_confusion"),
-      title: "Displacement means the net change with direction",
-      diagnosis: "This question is asking where the journey finishes relative to where it started. Displacement uses the start-to-finish change and keeps the direction.",
-      repair: cleanCorrectionText(
-        displayCorrectText,
+    if (asksForDisplacementOnly) {
+      const directDisplacementCorrection =
         journeySummary
-          ? `Compare the finish with the start, not the full route. That leaves ${journeySummary.displacementText}, so keep the direction if the finish is not back at the start.`
+          ? `This question asks for displacement, so compare the finish with the start instead of adding the whole route. That leaves ${journeySummary.displacementText}.`
           : correctIncludesDirectionWord
-            ? "Work out the net change from start to finish, then keep the direction word because displacement is a vector."
-            : "Work out the net start-to-finish change instead of adding the whole route.",
-      ),
-      noticeNext: "If the question says displacement, compare finish with start. Do not add every stage unless you are finding distance.",
-    };
-  }
+            ? "This question asks for displacement, so work out the net start-to-finish change and keep the direction because displacement is a vector."
+            : "This question asks for displacement, so find the net start-to-finish change instead of adding the full route.";
+      return {
+        tag: String(tag || "distance_displacement_confusion"),
+        title: "Displacement means the net change with direction",
+        diagnosis: "This question is asking where the journey finishes relative to where it started. Displacement uses the start-to-finish change and keeps the direction.",
+        repair: directDisplacementCorrection,
+        noticeNext: "If the question says displacement, compare finish with start first. Do not add every stage unless the question is asking for distance.",
+      };
+    }
 
   const asksForAverageSpeedOnly =
     includesAny(promptText, [/average speed/])
     || (includesAny(promptText, [/\bspeed\b/]) && includesAny(promptText, [/whole journey/, /entire journey/, /total time/, /covers .* in .* s/, /travels .* in .* s/]));
 
-  if (asksForAverageSpeedOnly) {
-    return {
-      tag: String(tag || "distance_displacement_confusion"),
-      title: "Average speed uses the whole journey totals",
-      diagnosis: "Average speed is based on total distance divided by total time for the whole trip, not on the displacement and not on a quick average of stage speeds.",
-      repair: cleanCorrectionText(
-        displayCorrectText,
+    if (asksForAverageSpeedOnly) {
+      const directAverageSpeedCorrection =
         journeySummary && journeySummary.totalTimeText && journeySummary.averageSpeedText
-          ? `Use the whole-trip totals: distance ${journeySummary.distanceText} and time ${journeySummary.totalTimeText}. Then divide to get ${journeySummary.averageSpeedText} and leave out the direction word.`
-          : "Use total distance over total time for the whole journey, then report the speed without a direction word.",
-      ),
-      noticeNext: "When you see average speed, collect the whole-trip distance and the whole-trip time before dividing.",
-    };
-  }
+          ? `Average speed uses the whole-trip totals, not the displacement and not a quick average of stage speeds. Use distance ${journeySummary.distanceText} and time ${journeySummary.totalTimeText}, then divide to get ${journeySummary.averageSpeedText}.`
+          : "Average speed uses total distance over total time for the whole journey, not displacement and not a quick average of stage speeds.";
+      return {
+        tag: String(tag || "distance_displacement_confusion"),
+        title: "Average speed uses the whole journey totals",
+        diagnosis: "Average speed is based on total distance divided by total time for the whole trip, not on the displacement and not on a quick average of stage speeds.",
+        repair: directAverageSpeedCorrection,
+        noticeNext: "When you see average speed, collect the whole-trip distance and the whole-trip time before dividing.",
+      };
+    }
 
   const isDistanceDisplacementCheck =
     includesAny(source, [/distance/]) && includesAny(source, [/displacement/]);
 
-  if (isDistanceDisplacementCheck) {
-    return {
-      tag: String(tag || "distance_displacement_confusion"),
-      title: "Distance and displacement are not the same quantity",
-      diagnosis: "This question is asking for both quantities at once, so the full route length and the net start-to-finish change must stay separate.",
-      repair: cleanCorrectionText(
-        displayCorrectText,
+    if (isDistanceDisplacementCheck) {
+      const directPairCorrection =
         journeySummary
-          ? `Distance uses the full route: ${journeySummary.stageText} = ${journeySummary.distanceText}. Displacement compares the finish with the start: ${journeySummary.displacementText}.`
-          : "Use total path length for distance, but use start-to-finish change for displacement.",
-      ),
-      noticeNext: "Add every stage for distance, then compare finish with start for displacement.",
-    };
-  }
+          ? `Keep the two quantities separate. Distance uses the full route: ${journeySummary.stageText} = ${journeySummary.distanceText}. Displacement compares the finish with the start: ${journeySummary.displacementText}.`
+          : "Keep the two quantities separate: use total path length for distance, but use the start-to-finish change for displacement.";
+      return {
+        tag: String(tag || "distance_displacement_confusion"),
+        title: "Distance and displacement are not the same quantity",
+        diagnosis: "This question is asking for both quantities at once, so the full route length and the net start-to-finish change must stay separate.",
+        repair: directPairCorrection,
+        noticeNext: "Add every stage for distance, then compare finish with start for displacement.",
+      };
+    }
 
   const isVectorScalarCheck =
     tag === "vector_scalar_confusion"
