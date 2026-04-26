@@ -58,7 +58,7 @@ function genericContextualRepair(
     title,
     diagnosis: why,
     repair: answerLead,
-    noticeNext: "Next time, ask what physical quantity is changing or being compared before you answer.",
+    noticeNext: "Next time, name the quantity first, then decide what the question is asking you to compare or calculate.",
   };
 }
 
@@ -583,26 +583,28 @@ export function misconceptionSummaryForContext({
     includesAny(promptText, [/\bdistance\b/])
     && !includesAny(promptText, [/displacement/, /average speed/, /\bspeed\b/]);
 
-    if (asksForDistanceOnly) {
+  if (asksForDistanceOnly) {
       const directDistanceCorrection =
         journeySummary && learnerUsedDirectionWord
-          ? `You wrote ${displayRepairText(learnerAnswer)}. That is the displacement because it gives the net change with a direction. This question asks for distance, so add the full route instead: ${journeySummary.stageText} = ${journeySummary.distanceText}. Distance does not keep east, west, north, or south.`
+          ? `You wrote ${displayRepairText(learnerAnswer)}. That is the displacement because it gives the start-to-finish change with a direction. This question asks for distance, so add the whole route instead: ${journeySummary.stageText} = ${journeySummary.distanceText}. Write ${journeySummary.distanceText}, not ${journeySummary.displacementText}.`
           : journeySummary
-            ? `This question asks for distance, so add the whole route: ${journeySummary.stageText} = ${journeySummary.distanceText}. Do not attach a direction word, because distance is the total path length.`
+            ? `Distance means total ground covered. Add the full route: ${journeySummary.stageText} = ${journeySummary.distanceText}. Do not attach a direction word, because distance is scalar.`
             : learnerUsedDirectionWord
               ? `You wrote ${displayRepairText(learnerAnswer)}, which reads like a displacement because it keeps a direction. For distance, add every stage of the route and then drop the direction word.`
-              : "This question asks for distance, so add every stage of the route to get the full path length.";
+              : "Distance means total route length, so add every stage of the journey.";
       return {
         tag: String(tag || "distance_displacement_confusion"),
-        title: "Distance means add the whole route",
+        title: learnerUsedDirectionWord
+          ? "You gave displacement, but the question asked for distance"
+          : "Distance means add the whole route",
         diagnosis:
           learnerUsedDirectionWord
-            ? `This question asked for distance, but the answer ${displayRepairText(learnerAnswer)} gives the start-to-finish change with direction instead. That is displacement, not distance.`
+            ? `${displayRepairText(learnerAnswer)} tells you where the journey ends relative to the start. That is displacement. Distance ignores direction and counts every metre travelled.`
             : "This is a distance question, so every stage of the journey still counts even if the route turns back.",
         repair: directDistanceCorrection,
         noticeNext: learnerUsedDirectionWord
-          ? "If a distance answer still says east, west, north, or south, stop and check whether you have written the displacement instead."
-          : "Distance adds the whole route. Only displacement keeps the direction word.",
+          ? "If your answer still says east, west, north, or south, pause and check whether you have written displacement instead of distance."
+          : "For distance, ask one question first: how much ground was covered altogether?",
       };
     }
 
@@ -613,16 +615,16 @@ export function misconceptionSummaryForContext({
     if (asksForDisplacementOnly) {
       const directDisplacementCorrection =
         journeySummary
-          ? `This question asks for displacement, so compare the finish with the start instead of adding the whole route. That leaves ${journeySummary.displacementText}.`
+          ? `This question asks for displacement, so compare the finish with the start instead of adding the whole route. The net change is ${journeySummary.displacementText}, not ${journeySummary.distanceText}.`
           : correctIncludesDirectionWord
             ? "This question asks for displacement, so work out the net start-to-finish change and keep the direction because displacement is a vector."
             : "This question asks for displacement, so find the net start-to-finish change instead of adding the full route.";
       return {
         tag: String(tag || "distance_displacement_confusion"),
         title: "Displacement means the net change with direction",
-        diagnosis: "This question is asking where the journey finishes relative to where it started. Displacement uses the start-to-finish change and keeps the direction.",
+        diagnosis: "This question is asking where the journey finishes relative to where it started. Displacement keeps only the start-to-finish change and the direction of that change.",
         repair: directDisplacementCorrection,
-        noticeNext: "If the question says displacement, compare finish with start first. Do not add every stage unless the question is asking for distance.",
+        noticeNext: "If the question says displacement, compare finish with start first. Only add every stage when the question is asking for distance.",
       };
     }
 
@@ -633,14 +635,14 @@ export function misconceptionSummaryForContext({
     if (asksForAverageSpeedOnly) {
       const directAverageSpeedCorrection =
         journeySummary && journeySummary.totalTimeText && journeySummary.averageSpeedText
-          ? `Average speed uses the whole-trip totals, not the displacement and not a quick average of stage speeds. Use distance ${journeySummary.distanceText} and time ${journeySummary.totalTimeText}, then divide to get ${journeySummary.averageSpeedText}.`
-          : "Average speed uses total distance over total time for the whole journey, not displacement and not a quick average of stage speeds.";
+          ? `Average speed uses the whole-trip totals. Take distance ${journeySummary.distanceText} and time ${journeySummary.totalTimeText}, then divide: ${journeySummary.distanceText} ÷ ${journeySummary.totalTimeText} = ${journeySummary.averageSpeedText}. Do not use displacement and do not average the stage speeds.`
+          : "Average speed uses total distance divided by total time for the whole journey. Do not use displacement and do not average the stage speeds.";
       return {
         tag: String(tag || "distance_displacement_confusion"),
         title: "Average speed uses the whole journey totals",
-        diagnosis: "Average speed is based on total distance divided by total time for the whole trip, not on the displacement and not on a quick average of stage speeds.",
+        diagnosis: "Average speed comes from the whole trip: total distance divided by total time. It does not come from the displacement or from averaging stage speeds.",
         repair: directAverageSpeedCorrection,
-        noticeNext: "When you see average speed, collect the whole-trip distance and the whole-trip time before dividing.",
+        noticeNext: "When you see average speed, collect the whole-trip distance and the whole-trip time before you divide.",
       };
     }
 
@@ -657,7 +659,7 @@ export function misconceptionSummaryForContext({
         title: "Distance and displacement are not the same quantity",
         diagnosis: "This question is asking for both quantities at once, so the full route length and the net start-to-finish change must stay separate.",
         repair: directPairCorrection,
-        noticeNext: "Add every stage for distance, then compare finish with start for displacement.",
+        noticeNext: "Do the route total first for distance, then do the start-to-finish comparison for displacement.",
       };
     }
 
