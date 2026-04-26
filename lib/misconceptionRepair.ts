@@ -62,6 +62,117 @@ function genericContextualRepair(
   };
 }
 
+type JourneyDirection = "east" | "west" | "north" | "south";
+
+type JourneyLeg = {
+  magnitude: number;
+  direction: JourneyDirection;
+  unit: string;
+};
+
+type JourneySummary = {
+  legs: JourneyLeg[];
+  unit: string;
+  totalDistance: number;
+  distanceText: string;
+  displacementText: string;
+  stageText: string;
+  totalTime: number | null;
+  totalTimeText: string | null;
+  averageSpeedText: string | null;
+};
+
+function formatJourneyNumber(value: number): string {
+  if (Number.isInteger(value)) {
+    return String(value);
+  }
+  return value.toFixed(2).replace(/\.?0+$/, "");
+}
+
+function parseJourneyLegs(text: string): JourneyLeg[] {
+  const legs: JourneyLeg[] = [];
+  const legPattern = /\b(\d+(?:\.\d+)?)\s*(km|cm|mm|m)\s*(east|west|north|south)\b/gi;
+  let match: RegExpExecArray | null;
+
+  while ((match = legPattern.exec(text)) !== null) {
+    legs.push({
+      magnitude: Number(match[1]),
+      unit: match[2].toLowerCase(),
+      direction: match[3].toLowerCase() as JourneyDirection,
+    });
+  }
+
+  return legs;
+}
+
+function summarizeJourney(text: string): JourneySummary | null {
+  const legs = parseJourneyLegs(text);
+  if (legs.length === 0) {
+    return null;
+  }
+
+  const unit = legs[0].unit;
+  let totalDistance = 0;
+  let eastWest = 0;
+  let northSouth = 0;
+
+  for (const leg of legs) {
+    totalDistance += leg.magnitude;
+    if (leg.direction === "east") {
+      eastWest += leg.magnitude;
+    } else if (leg.direction === "west") {
+      eastWest -= leg.magnitude;
+    } else if (leg.direction === "north") {
+      northSouth += leg.magnitude;
+    } else {
+      northSouth -= leg.magnitude;
+    }
+  }
+
+  const stageText = legs
+    .map((leg) => `${formatJourneyNumber(leg.magnitude)} ${leg.unit}`)
+    .join(" + ");
+
+  let displacementText = `0 ${unit}`;
+  if (eastWest !== 0 && northSouth === 0) {
+    displacementText = `${formatJourneyNumber(Math.abs(eastWest))} ${unit} ${eastWest > 0 ? "east" : "west"}`;
+  } else if (northSouth !== 0 && eastWest === 0) {
+    displacementText = `${formatJourneyNumber(Math.abs(northSouth))} ${unit} ${northSouth > 0 ? "north" : "south"}`;
+  } else if (eastWest !== 0 || northSouth !== 0) {
+    const parts: string[] = [];
+    if (eastWest !== 0) {
+      parts.push(`${formatJourneyNumber(Math.abs(eastWest))} ${unit} ${eastWest > 0 ? "east" : "west"}`);
+    }
+    if (northSouth !== 0) {
+      parts.push(`${formatJourneyNumber(Math.abs(northSouth))} ${unit} ${northSouth > 0 ? "north" : "south"}`);
+    }
+    displacementText = parts.join(" and ");
+  }
+
+  const timeMatches = [...text.matchAll(/\b(\d+(?:\.\d+)?)\s*s\b/gi)];
+  const totalTime =
+    timeMatches.length > 0
+      ? timeMatches.reduce((sum, match) => sum + Number(match[1]), 0)
+      : null;
+  const totalTimeText = totalTime === null ? null : `${formatJourneyNumber(totalTime)} s`;
+  const averageSpeedText =
+    totalTime && totalTime > 0
+      ? `${formatJourneyNumber(totalDistance / totalTime)} ${unit}/s`
+      : null;
+
+  return {
+    legs,
+    unit,
+    totalDistance,
+    distanceText: `${formatJourneyNumber(totalDistance)} ${unit}`,
+    displacementText,
+    stageText,
+    totalTime,
+    totalTimeText,
+    averageSpeedText,
+  };
+}
+
 const EXACT_SUMMARIES: Record<string, MisconceptionTemplate> = {
   vector_scalar_confusion: {
     title: "Vector vs scalar direction logic",
@@ -377,6 +488,7 @@ export function misconceptionSummaryForContext({
   const displayCorrectText = displayRepairText(correctAnswer);
   const displayFocusText = displayRepairText(teachingFocus);
   const source = [promptText, answerText, correctText, focusText].filter(Boolean).join(" ");
+  const journeySummary = summarizeJourney(promptText);
 
   const isConstantVelocityAccelerationCheck =
     /constant velocity|same velocity|keeps the same velocity|velocity stays the same|horizontal line|horizontal section|flat line/.test(source)
@@ -474,15 +586,20 @@ export function misconceptionSummaryForContext({
   if (asksForDistanceOnly) {
     return {
       tag: String(tag || "distance_displacement_confusion"),
-      title: "Distance means the whole route",
-      diagnosis: "This question is asking for total route length, not for the start-to-finish change. Distance adds every stage of the journey.",
+      title: "Distance means add the whole route",
+      diagnosis:
+        learnerUsedDirectionWord
+          ? "This is a distance question, so every stage of the journey counts and the final answer drops the direction word."
+          : "This is a distance question, so every stage of the journey counts even if the route turns back.",
       repair: cleanCorrectionText(
         displayCorrectText,
-        learnerUsedDirectionWord
-          ? "Add every stage of the route to get the distance, then drop the direction word because distance does not keep east, west, north, or south."
-          : "Add every stage of the route to get the total distance.",
+        journeySummary
+          ? `Add the route stages: ${journeySummary.stageText} = ${journeySummary.distanceText}. Then leave out the direction word, because distance is a scalar.`
+          : learnerUsedDirectionWord
+            ? "Add every stage of the route to get the distance, then drop the direction word because distance does not keep east, west, north, or south."
+            : "Add every stage of the route to get the total distance.",
       ),
-      noticeNext: "If the question says distance, add the whole route. Save direction words for displacement.",
+      noticeNext: "Distance adds the whole route. Only displacement keeps east, west, north, or south.",
     };
   }
 
@@ -497,9 +614,11 @@ export function misconceptionSummaryForContext({
       diagnosis: "This question is asking where the journey finishes relative to where it started. Displacement uses the start-to-finish change and keeps the direction.",
       repair: cleanCorrectionText(
         displayCorrectText,
-        correctIncludesDirectionWord
-          ? "Work out the net change from start to finish, then keep the direction word because displacement is a vector."
-          : "Work out the net start-to-finish change instead of adding the whole route.",
+        journeySummary
+          ? `Compare the finish with the start, not the full route. That leaves ${journeySummary.displacementText}, so keep the direction if the finish is not back at the start.`
+          : correctIncludesDirectionWord
+            ? "Work out the net change from start to finish, then keep the direction word because displacement is a vector."
+            : "Work out the net start-to-finish change instead of adding the whole route.",
       ),
       noticeNext: "If the question says displacement, compare finish with start. Do not add every stage unless you are finding distance.",
     };
@@ -516,7 +635,9 @@ export function misconceptionSummaryForContext({
       diagnosis: "Average speed is based on total distance divided by total time for the whole trip, not on the displacement and not on a quick average of stage speeds.",
       repair: cleanCorrectionText(
         displayCorrectText,
-        "Use total distance over total time for the whole journey, then report the speed without a direction word.",
+        journeySummary && journeySummary.totalTimeText && journeySummary.averageSpeedText
+          ? `Use the whole-trip totals: distance ${journeySummary.distanceText} and time ${journeySummary.totalTimeText}. Then divide to get ${journeySummary.averageSpeedText} and leave out the direction word.`
+          : "Use total distance over total time for the whole journey, then report the speed without a direction word.",
       ),
       noticeNext: "When you see average speed, collect the whole-trip distance and the whole-trip time before dividing.",
     };
@@ -529,9 +650,14 @@ export function misconceptionSummaryForContext({
     return {
       tag: String(tag || "distance_displacement_confusion"),
       title: "Distance and displacement are not the same quantity",
-      diagnosis: "Distance measures the full path length. Displacement measures the change from the starting position to the final position.",
-      repair: cleanCorrectionText(displayCorrectText, "Use total path length for distance, but use start-to-finish change for displacement."),
-      noticeNext: "When the path turns back, distance and displacement separate sharply.",
+      diagnosis: "This question is asking for both quantities at once, so the full route length and the net start-to-finish change must stay separate.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        journeySummary
+          ? `Distance uses the full route: ${journeySummary.stageText} = ${journeySummary.distanceText}. Displacement compares the finish with the start: ${journeySummary.displacementText}.`
+          : "Use total path length for distance, but use start-to-finish change for displacement.",
+      ),
+      noticeNext: "Add every stage for distance, then compare finish with start for displacement.",
     };
   }
 
