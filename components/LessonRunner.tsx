@@ -1766,8 +1766,424 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4"
         ? (() => {
+            if (lessonId === "F2_L4") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f2-l4-slope-area",
+                  badge: "Graph board",
+                  title: "Separate slope from area",
+                  scenario:
+                    "The motion room is using one velocity-time graph to answer two different questions. One trainee keeps trying to use the same graph feature for everything.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "height-slope-area",
+                      label: "On a velocity-time graph, height gives velocity, slope gives acceleration, and area gives displacement change.",
+                      feedback:
+                        "Exactly. That keeps the three graph features doing three different jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-does-all",
+                      label: "Use the graph height for acceleration and displacement too, because it is the most visible feature on the graph.",
+                      feedback:
+                        "That collapses three different ideas into one. Height gives velocity here, not acceleration or displacement.",
+                    },
+                    {
+                      value: "horizontal-means-zero-displacement",
+                      label: "A horizontal section means zero displacement, because the graph is not rising anymore.",
+                      feedback:
+                        "A horizontal section means zero acceleration. If the line is above or below zero velocity, area still builds up and displacement still changes.",
+                    },
+                  ],
+                  successLabel: "Pinned. The crew can now use the same graph for velocity, acceleration, and displacement without mixing them up.",
+                  retryLabel: "That note would keep slope and area blurred together.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f2-l4-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first velocity-time note",
+                    scenario:
+                      "A trainee has written that a flat velocity-time section means nothing happens, so both acceleration and displacement are zero. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "flat-zero-acc-not-zero-displacement",
+                        label: "A flat section means zero acceleration, but if the velocity is not zero then displacement still builds up through the area under the graph.",
+                        feedback:
+                          "Exactly. That separates the slope idea from the area idea properly.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "flat-zero-everything",
+                        label: "A flat section means the graph has stopped changing, so acceleration and displacement must both be zero there.",
+                        feedback:
+                          "That is the trap. Flat means zero slope, not zero area.",
+                      },
+                      {
+                        value: "height-means-acceleration",
+                        label: "The graph height tells the acceleration, so a non-zero flat section means constant acceleration.",
+                        feedback:
+                          "Height gives velocity on this graph, not acceleration. Acceleration comes from the slope.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The first velocity-time misunderstanding is now cleared.",
+                    retryLabel: "That would leave the key slope-versus-area confusion alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f2-l4-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line graph rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner uses the same anchor idea when reading a velocity-time graph.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "vt-height-slope-area",
+                        label: "On a velocity-time graph, height gives velocity, slope gives acceleration, and area gives displacement change.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "vt-height-speed-slope-distance",
+                        label: "On a velocity-time graph, height gives speed, slope gives distance, and area just confirms the motion shape.",
+                        feedback:
+                          "That swaps the meanings around. Slope gives acceleration and area gives displacement change.",
+                      },
+                      {
+                        value: "vt-one-feature",
+                        label: "A velocity-time graph mainly needs one feature at a time, so the safest method is to treat slope, height, and area as different ways of estimating the same thing.",
+                        feedback:
+                          "They are not estimates of the same thing. Each graph feature answers a different physics question.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean velocity-time anchor.",
+                    retryLabel: "That line would blur the graph features together again.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f2-l4-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the graph analyst",
+                    scenario:
+                      "A trainee analyst sees one velocity-time graph and wants to start calculating before deciding what quantity the question is asking for.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "name-quantity-then-feature",
+                        label: "Name the target quantity first, then choose the graph feature that matches it: height for velocity, slope for acceleration, area for displacement.",
+                        feedback:
+                          "Exactly. That method stops the analyst from grabbing the wrong feature.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "start-with-height",
+                        label: "Start with the graph height because it is the easiest value to read, then adjust it later if the question turns out to want something else.",
+                        feedback:
+                          "That invites the wrong start. The first step is to identify the quantity, not the easiest visible feature.",
+                      },
+                      {
+                        value: "slope-for-all-change",
+                        label: "Use the slope whenever the question mentions change, because displacement and acceleration are both changes in motion.",
+                        feedback:
+                          "Displacement on this graph comes from area, not slope. The feature depends on the quantity being asked for.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable graph-reading method.",
+                    retryLabel: "That instruction would send the analyst into the usual feature mix-up.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f2-l4-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the slope-area mix-up",
+                    scenario:
+                      "One crew member keeps saying that if a question is about change, the slope must always be the right answer. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "quantity-decides-feature",
+                        label: "The quantity decides the feature: slope for acceleration, area for displacement, height for velocity.",
+                        feedback:
+                          "Exactly. That warning keeps the shortcut from taking over.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "change-means-slope",
+                        label: "Any motion question about change should use the slope first, because slope is the cleanest graph measure.",
+                        feedback:
+                          "That shortcut fails on displacement questions. Area can be the right feature even when the motion is changing.",
+                      },
+                      {
+                        value: "horizontal-no-displacement",
+                        label: "A horizontal line means no displacement can build up, so area questions can be ignored there.",
+                        feedback:
+                          "A horizontal line can still sit above or below zero velocity, so displacement can keep building through the area.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now picks the graph feature from the quantity, not from a shortcut.",
+                    retryLabel: "That warning would leave the biggest velocity-time shortcut alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f2-l4-analogy",
+                    badge: "Story relay",
+                    title: "Choose the motion-ledger analogy",
+                    scenario:
+                      "The team wants one analogy that keeps current velocity, change in velocity, and accumulated displacement separate on the same graph.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "ledger-height-slope-area",
+                        label: "Use a motion ledger: the graph height is the current signed entry, the slope is how fast that entry is being updated, and the area is the running signed total.",
+                        feedback:
+                          "Exactly. That analogy keeps all three roles visible without collapsing them together.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "single-speedometer",
+                        label: "Use one speedometer reading, because if the learner knows the current velocity the slope and area ideas will look after themselves.",
+                        feedback:
+                          "A single speedometer cannot show how the velocity is changing or how displacement accumulates.",
+                      },
+                      {
+                        value: "distance-logbook",
+                        label: "Use a distance logbook, because area and slope are both really just more detailed ways of restating the journey length.",
+                        feedback:
+                          "That collapses the graph too far. This lesson needs one analogy that preserves velocity, acceleration, and displacement as different readings.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the graph meanings instead of flattening them.",
+                    retryLabel: "That analogy would blur the ledger roles right when they need to stay separate.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
+            if (lessonId === "F2_L3") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f2-l3-journey-graph",
+                  badge: "Journey graph",
+                  title: "Translate the graph into a motion story",
+                  scenario:
+                    "The distance-time board shows a steep section, a flat section, and then a shallower section. One trainee keeps reading the picture shape instead of the journey story.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "steep-flat-shallow-story",
+                      label: "Steep means the traveller is covering distance faster, flat means the traveller is stopped, and a shallower rise means the traveller is still moving but more slowly.",
+                      feedback:
+                        "Exactly. That reads the graph segment by segment as a motion story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-means-speed",
+                      label: "The higher part of the graph must be the faster part, because a larger height always means greater speed.",
+                      feedback:
+                        "Height gives the distance reached, not the speed. Speed comes from the steepness of the segment.",
+                    },
+                    {
+                      value: "flat-means-no-time",
+                      label: "A flat section means the graph pauses there, so no time passes until the line starts rising again.",
+                      feedback:
+                        "Time keeps moving along the horizontal axis. Flat means distance stays constant while time continues.",
+                    },
+                  ],
+                  successLabel: "Pinned. The crew can now read the graph one segment at a time instead of matching it by shape.",
+                  retryLabel: "That note would keep the distance-time story blurred.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f2-l3-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first graph note",
+                    scenario:
+                      "A trainee has written that a flat section means time stops and that a higher graph section means faster motion. You need the correction that clears both mistakes before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "flat-time-height-slope",
+                        label: "Time still moves along the horizontal axis, so a flat section means the distance stays constant, while speed comes from the segment steepness, not the graph height.",
+                        feedback:
+                          "Exactly. That repairs both the flat-line mistake and the height-versus-speed mistake together.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "flat-no-distance-or-time",
+                        label: "A flat section means both time and distance pause, so the graph is really blank at that part.",
+                        feedback:
+                          "The graph is not blank. Time still passes there; only the distance value stays fixed.",
+                      },
+                      {
+                        value: "higher-faster",
+                        label: "The higher graph section is always the faster part, because the traveller is farther from the start there.",
+                        feedback:
+                          "Being farther away does not automatically mean moving faster. Speed comes from how steeply the line rises.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The first distance-time misunderstandings are now cleared.",
+                    retryLabel: "That would leave the main graph-reading mistakes active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f2-l3-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line distance-time rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner reads a distance-time graph from the same anchor idea.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "height-distance-slope-speed",
+                        label: "On a distance-time graph, height gives the distance reached by that time and slope gives the speed on that segment.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "height-speed-slope-distance",
+                        label: "On a distance-time graph, height gives the speed and slope gives how far from the start the traveller is.",
+                        feedback:
+                          "That swaps the meanings. Height gives distance and slope gives speed here.",
+                      },
+                      {
+                        value: "flat-no-story",
+                        label: "A distance-time graph mostly tells one overall route story, so individual segments do not need separate meanings.",
+                        feedback:
+                          "The segments are exactly what tell the motion story. Each one can represent a different stage of the journey.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean distance-time anchor.",
+                    retryLabel: "That line would blur the graph meanings together again.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f2-l3-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the graph analyst",
+                    scenario:
+                      "A trainee analyst sees three graph segments and wants to jump straight to an answer without checking what each section says physically.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "read-one-segment-at-a-time",
+                        label: "Read one segment at a time: say whether distance is rising or flat, then use the steepness of that segment to decide how the speed compares.",
+                        feedback:
+                          "Exactly. That method keeps the motion story tied to each segment instead of to the whole shape at once.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "read-highest-point-first",
+                        label: "Start with the highest point on the graph, because that tells you the fastest moment and the rest of the graph can be estimated from it.",
+                        feedback:
+                          "The highest point tells you the greatest distance reached, not the fastest moment. Speed comes from the slope.",
+                      },
+                      {
+                        value: "average-the-slopes-immediately",
+                        label: "Average the steepness of the visible segments first, because that gives the cleanest overall motion answer.",
+                        feedback:
+                          "That skips the story each segment is telling. The first job is to understand each stage before combining anything.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable segment-by-segment method.",
+                    retryLabel: "That instruction would send the analyst back into shape-matching.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f2-l3-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the height-means-speed shortcut",
+                    scenario:
+                      "One crew member keeps pointing to the highest part of the graph whenever the question asks about speed. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "speed-from-steepness",
+                        label: "On a distance-time graph, speed comes from the segment steepness, not from how high the graph sits above the axis.",
+                        feedback:
+                          "Exactly. That warning keeps height and speed from being mixed up.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "higher-means-faster",
+                        label: "The higher segment is the faster segment, because the traveller has reached more distance there.",
+                        feedback:
+                          "That is the trap. Higher means farther from the start, not automatically faster.",
+                      },
+                      {
+                        value: "flat-means-backwards",
+                        label: "A flat segment means the traveller is probably turning back, because the graph stops rising for a while.",
+                        feedback:
+                          "Flat means stopped in this lesson, not turning back. Distance stays constant while time continues.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now uses steepness, not height, to judge speed.",
+                    retryLabel: "That warning would leave the most tempting distance-time shortcut alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f2-l3-analogy",
+                    badge: "Story relay",
+                    title: "Choose the travel-diary analogy",
+                    scenario:
+                      "The team wants one analogy that makes each graph segment feel like a stage of the journey instead of a decorative line shape.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "travel-diary",
+                        label: "Use a travel diary: each graph segment is one diary entry showing how quickly distance was being added during that stage of the journey.",
+                        feedback:
+                          "Exactly. That analogy keeps the graph readable as a sequence of motion stages.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "mountain-silhouette",
+                        label: "Use a mountain silhouette, because the graph mainly shows how high or low the route looks at different times.",
+                        feedback:
+                          "That turns the graph into a picture of the path. This lesson needs the graph read as a record of distance over time.",
+                      },
+                      {
+                        value: "single-odometer",
+                        label: "Use one odometer reading only, because once the total distance is visible the segment meanings will take care of themselves.",
+                        feedback:
+                          "The total distance alone cannot tell the stage-by-stage motion story. The segment changes still matter.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports segment-by-segment graph reading instead of flattening the lesson.",
+                    retryLabel: "That analogy would push the graph back toward a picture-reading mistake.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F2_L2") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
