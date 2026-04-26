@@ -1766,8 +1766,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6"
         ? (() => {
+            if (lessonId === "F2_L6") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f2-l6-same-push-different-mass",
+                  badge: "Mass board",
+                  title: "Read the same-push comparison",
+                  scenario:
+                    "The dynamics room is comparing a light trolley and a heavy trolley under the same push. One trainee keeps expecting both trolleys to change motion by the same amount because the force arrow is the same size.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "same-force-different-acceleration",
+                      label: "The same resultant force gives the smaller mass the larger acceleration, while the larger mass changes motion less because it has more inertia.",
+                      feedback:
+                        "Exactly. The force is the same, but the smaller mass responds with the bigger acceleration.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-force-same-acceleration",
+                      label: "If the force arrows match, both trolleys must accelerate equally because acceleration depends only on force.",
+                      feedback:
+                        "Mass still matters. F = ma links all three quantities, so the same force does not guarantee the same acceleration.",
+                    },
+                    {
+                      value: "heavier-faster-because-bigger",
+                      label: "The heavier trolley should accelerate more because it has more mass for the force to act on.",
+                      feedback:
+                        "That reverses the relationship. More mass means more inertia, so the same force changes the heavier trolley less.",
+                    },
+                  ],
+                  successLabel: "Pinned. The crew can now read the same-push comparison without losing the mass effect.",
+                  retryLabel: "That note would keep force and mass disconnected.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f2-l6-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first F = ma note",
+                    scenario:
+                      "A trainee has written that inertia is an extra backward force that always fights the push. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "inertia-is-not-a-force",
+                        label: "Inertia is not an extra force. It is the resistance to changes in motion, which is why a larger mass accelerates less under the same resultant force.",
+                        feedback:
+                          "Exactly. That keeps inertia as a property of matter, not a new arrow in the force diagram.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "inertia-cancels-force",
+                        label: "Inertia is the backward force that cancels part of the forward push, so the acceleration becomes smaller.",
+                        feedback:
+                          "That is the trap. The lesson needs inertia kept separate from the force arrows.",
+                      },
+                      {
+                        value: "mass-does-not-matter",
+                        label: "Ignore inertia and mass completely once the resultant force is known, because F = ma is really only about force.",
+                        feedback:
+                          "Mass is essential here. The same resultant force can give different accelerations because the mass changes.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The first inertia misunderstanding is now cleared.",
+                    retryLabel: "That would leave inertia acting like a fake extra force.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f2-l6-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line F = ma rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner starts these force-mass questions from the same anchor idea.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "fma-anchor",
+                        label: "F = ma links resultant force, mass, and acceleration: the same force changes a smaller mass more than a larger mass.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "force-alone-anchor",
+                        label: "Acceleration is decided by force alone, while mass only affects how heavy the trolley feels.",
+                        feedback:
+                          "That drops one of the key lesson links. Mass changes the acceleration too.",
+                      },
+                      {
+                        value: "mass-alone-anchor",
+                        label: "Mass decides acceleration, so force only matters after you know whether the object is heavy or light.",
+                        feedback:
+                          "Force and mass both matter. The lesson needs them linked in one relationship.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean force-mass anchor.",
+                    retryLabel: "That line would leave the force-mass-acceleration link broken.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f2-l6-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the acceleration analyst",
+                    scenario:
+                      "A trainee analyst wants to divide numbers immediately without first deciding which force belongs in the formula or what happens when one quantity changes.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "resultant-then-relationship",
+                        label: "Find the resultant force first, then use F = ma to link force, mass, and acceleration before substituting values.",
+                        feedback:
+                          "Exactly. That method keeps the physics relationship in place before the arithmetic starts.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "any-force-arrow",
+                        label: "Pick any force from the diagram and divide by the mass, because the biggest arrow should be close enough for F = ma.",
+                        feedback:
+                          "The formula needs the resultant force, not just any one force shown in the situation.",
+                      },
+                      {
+                        value: "memorize-only",
+                        label: "Memorize that heavier objects are slower and lighter objects are faster, then choose the nearest option without checking the force relationship.",
+                        feedback:
+                          "That turns the lesson into a shortcut. The analyst needs the actual F = ma relationship, not a rough slogan.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable F = ma method.",
+                    retryLabel: "That instruction would send the analyst into shortcut maths.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f2-l6-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the inertia shortcut",
+                    scenario:
+                      "One crew member keeps saying that a heavier trolley should accelerate less because inertia pushes back like an extra hidden force. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "inertia-property-not-force",
+                        label: "Inertia is a property of matter, not an extra force. The same resultant force gives a larger mass a smaller acceleration because a = F / m.",
+                        feedback:
+                          "Exactly. That warning keeps the lesson using the formula and the meaning of inertia together.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "inertia-backward-force",
+                        label: "Treat inertia as a backward force arrow whenever the object is hard to accelerate, because that shows why the motion change becomes small.",
+                        feedback:
+                          "That is the trap. Inertia explains resistance to change, but it is not another force arrow to subtract.",
+                      },
+                      {
+                        value: "mass-stops-acceleration",
+                        label: "A large enough mass can switch acceleration off completely even when a non-zero resultant force still acts.",
+                        feedback:
+                          "A larger mass reduces the acceleration for the same force, but it does not make a non-zero resultant produce zero acceleration.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now keeps inertia separate from the force diagram.",
+                    retryLabel: "That warning would keep the biggest F = ma shortcut alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f2-l6-analogy",
+                    badge: "Story relay",
+                    title: "Choose the shopping-cart analogy",
+                    scenario:
+                      "The team wants one analogy that makes the same-force / different-mass story obvious before the algebra begins.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "shopping-cart-shove",
+                        label: "Use a shopping cart comparison: the same shove changes an empty cart more than a loaded cart because the loaded cart has more mass and more inertia.",
+                        feedback:
+                          "Exactly. That analogy keeps same force, different mass, and inertia in one clear picture.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "bigger-cart-bigger-force",
+                        label: "Use a bigger-cart picture, because a larger cart automatically creates a larger force even before anyone pushes it.",
+                        feedback:
+                          "Mass does not automatically create the push. The analogy should keep the force the same and compare the response.",
+                      },
+                      {
+                        value: "cart-weight-only",
+                        label: "Use a heavy-cart picture only to show that more weight means more downward force, because that alone explains the acceleration difference.",
+                        feedback:
+                          "That misses the lesson target. The analogy needs the same shove with different masses, not a switch into weight alone.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the F = ma story without flattening it.",
+                    retryLabel: "That analogy would blur the same-force comparison right when it needs to stay clear.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F2_L4") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
