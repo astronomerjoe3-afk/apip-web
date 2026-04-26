@@ -1707,6 +1707,9 @@ export default function LessonRunner({
       body: normalizeLessonDisplayMultiline(section.body),
       bullets: (section.bullets ?? []).map(normalizeLessonDisplayMultiline),
     }));
+    const hasIntroContent = Boolean(payload.intro || introSections.length);
+    const hasTeachingFocus = normalizedTeachingFocus.length > 0;
+    const separateTeachingFocusStep = lessonId.startsWith("F2_") && hasIntroContent && hasTeachingFocus;
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
       ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
       : normalizedTeachingFocus.slice(0, 4);
@@ -1717,18 +1720,21 @@ export default function LessonRunner({
       createClarityCard("What stays the same", scaffoldFocusItems[2] ?? "The quantity definitions stay fixed while the examples change."),
       createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not rush to a formula before naming what is changing and what is staying the same.")),
     ]);
-    const introCount = payload.intro || introSections.length || payload.teaching_focus?.length ? 1 : 0;
+    const introCount = hasIntroContent || (hasTeachingFocus && !separateTeachingFocusStep) ? 1 : 0;
+    const teachingFocusCount = separateTeachingFocusStep ? 1 : 0;
     const clarityCount = scaffoldClarityCards.length ? 1 : 0;
     const tableCount = payload.reference_tables?.length ?? 0;
     const mediaCount = payload.media_cards?.length ?? 0;
     const sectionCount = payload.sections.length;
-    const totalScaffoldActivities = introCount + clarityCount + tableCount + mediaCount + sectionCount;
+    const totalScaffoldActivities = introCount + clarityCount + teachingFocusCount + tableCount + mediaCount + sectionCount;
     const clampedScaffoldStepIndex = Math.max(0, Math.min(scaffoldStepIndex, Math.max(totalScaffoldActivities - 1, 0)));
     const clarityStart = introCount;
-    const tableStart = clarityStart + clarityCount;
+    const teachingFocusStart = clarityStart + clarityCount;
+    const tableStart = teachingFocusStart + teachingFocusCount;
     const mediaStart = tableStart + tableCount;
     const sectionStart = mediaStart + mediaCount;
     const isIntroStep = introCount === 1 && clampedScaffoldStepIndex === 0;
+    const isTeachingFocusStep = teachingFocusCount === 1 && clampedScaffoldStepIndex === teachingFocusStart;
     const isClarityStep = clarityCount === 1 && clampedScaffoldStepIndex === clarityStart;
     const isTableStep = clampedScaffoldStepIndex >= tableStart && clampedScaffoldStepIndex < mediaStart;
     const isMediaStep = clampedScaffoldStepIndex >= mediaStart && clampedScaffoldStepIndex < sectionStart;
@@ -5657,7 +5663,7 @@ export default function LessonRunner({
                 </div>
               ) : null}
 
-            {normalizedTeachingFocus.length ? (
+            {normalizedTeachingFocus.length && !separateTeachingFocusStep ? (
               <div className={`${payload.intro || introSections.length ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
                 <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
                 <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
@@ -5668,6 +5674,18 @@ export default function LessonRunner({
             </div>
           ) : null}
         </div>
+        ) : null}
+        {isTeachingFocusStep ? (
+          <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
+            <div className="rounded-2xl bg-slate-50 p-5">
+              <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
+                {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
+                  <li key={`teaching-focus-${index}-${item}`}>{normalizeLessonDisplayMultiline(item)}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
         ) : null}
         {scaffoldRoleplayCard ? renderScaffoldRoleplayCard(scaffoldRoleplayCard, scaffoldRoleplaySelectionKey) : null}
         {isClarityStep ? scaffoldClarityPanel : null}
