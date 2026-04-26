@@ -517,9 +517,16 @@ function ScaffoldVideoPlayer({
   );
 }
 
+type ScaffoldIntroSection = {
+  heading: string;
+  body: string;
+  bullets?: string[];
+};
+
 type ScaffoldStagePayload = {
   title?: string;
   intro?: string;
+  lesson_introduction?: ScaffoldIntroSection[];
   teaching_focus?: string[];
   misconception_targets?: string[];
   teaching_focus_cards?: TeachingFocusCard[];
@@ -1695,6 +1702,11 @@ export default function LessonRunner({
 
     const scaffoldFocusCards = payload.teaching_focus_cards?.slice(0, 4) ?? [];
     const normalizedTeachingFocus = (payload.teaching_focus ?? []).map(normalizeTeachingFocusText);
+    const introSections = (payload.lesson_introduction ?? []).map((section) => ({
+      heading: normalizeLessonDisplayText(section.heading),
+      body: normalizeLessonDisplayMultiline(section.body),
+      bullets: (section.bullets ?? []).map(normalizeLessonDisplayMultiline),
+    }));
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
       ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
       : normalizedTeachingFocus.slice(0, 4);
@@ -1705,7 +1717,7 @@ export default function LessonRunner({
       createClarityCard("What stays the same", scaffoldFocusItems[2] ?? "The quantity definitions stay fixed while the examples change."),
       createClarityCard("Common mistake", firstClarityText(payload.misconception_targets?.[0], "Do not rush to a formula before naming what is changing and what is staying the same.")),
     ]);
-    const introCount = payload.intro || payload.teaching_focus?.length ? 1 : 0;
+    const introCount = payload.intro || introSections.length || payload.teaching_focus?.length ? 1 : 0;
     const clarityCount = scaffoldClarityCards.length ? 1 : 0;
     const tableCount = payload.reference_tables?.length ?? 0;
     const mediaCount = payload.media_cards?.length ?? 0;
@@ -4374,16 +4386,34 @@ export default function LessonRunner({
       ? `${lessonId}:scaffold:${clampedScaffoldStepIndex}:${scaffoldRoleplayCard.id}`
       : "";
     return (
-      <div className="space-y-6">
-        {isIntroStep ? (
-          <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
-            {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{normalizeLessonDisplayMultiline(payload.intro)}</p> : null}
+        <div className="space-y-6">
+          {isIntroStep ? (
+            <div className="lesson-stage-hero rounded-2xl border p-6 shadow-sm">
+              {payload.intro ? <p className="lesson-stage-subtitle text-slate-700">{normalizeLessonDisplayMultiline(payload.intro)}</p> : null}
 
-          {normalizedTeachingFocus.length ? (
-            <div className={`${payload.intro ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
-              <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
-                {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
+              {introSections.length ? (
+                <div className={`${payload.intro ? "mt-4" : ""} grid gap-4`}>
+                  {introSections.map((section) => (
+                    <div key={section.heading} className="rounded-2xl border border-slate-200 bg-white/90 p-5">
+                      <p className="font-medium text-slate-900">{section.heading}</p>
+                      <p className="mt-3 whitespace-pre-line text-slate-700">{section.body}</p>
+                      {section.bullets.length ? (
+                        <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700">
+                          {section.bullets.map((item, index) => (
+                            <li key={`${section.heading}-${index}`}>{item}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
+            {normalizedTeachingFocus.length ? (
+              <div className={`${payload.intro || introSections.length ? "mt-4" : ""} rounded-2xl bg-slate-50 p-5`}>
+                <p className="font-medium text-slate-900">Core concepts in this sub-unit</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
+                  {normalizedTeachingFocus.slice(0, 6).map((item, index) => (
                   <li key={`${index}-${item}`}>{normalizeLessonDisplayMultiline(item)}</li>
                 ))}
               </ul>
