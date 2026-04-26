@@ -1766,8 +1766,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2"
         ? (() => {
+            if (lessonId === "F2_L2") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f2-l2-velocity-arrows",
+                  badge: "Arrow screen",
+                  title: "Read the velocity change before the sign",
+                  scenario:
+                    "The acceleration room is comparing the starting and finishing velocity arrows. One trainee keeps naming the sign from intuition before checking what actually changed.",
+                  prompt: "Choose the note you pin on the display.",
+                  options: [
+                    {
+                      value: "compare_final_minus_initial",
+                      label: "Write the initial and final velocities with signs first, then use final velocity minus initial velocity before deciding what the acceleration sign means.",
+                      feedback:
+                        "Exactly. That keeps the sign tied to the actual change in velocity instead of to a quick guess about speeding up or slowing down.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed_change_only",
+                      label: "Ignore the direction arrows and just compare the speeds, because acceleration is really about how fast the object is moving.",
+                      feedback:
+                        "That would lose the whole point of this lesson. Acceleration is based on change in velocity, and velocity keeps direction.",
+                    },
+                    {
+                      value: "negative_means_slowing",
+                      label: "If the final speed is smaller, call the acceleration negative immediately because negative always means slowing down.",
+                      feedback:
+                        "That shortcut fails as soon as the chosen positive direction changes. The sign only makes sense after you compare the signed velocities.",
+                    },
+                  ],
+                  successLabel: "Pinned. The display now forces the crew to compare signed velocities before naming the acceleration.",
+                  retryLabel: "That note would keep the room guessing from speed words instead of from the velocity change.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f2-l2-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first acceleration note",
+                    scenario:
+                      "A trainee has written that acceleration just means speeding up. You need the one correction that keeps turning, slowing, and sign convention visible.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "acceleration_is_velocity_change",
+                        label: "Acceleration measures change in velocity, so a change in speed or a change in direction can both produce acceleration.",
+                        feedback:
+                          "Exactly. That is the core repair the trainee needs before the lesson can move on.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "acceleration_means_speeding",
+                        label: "Acceleration is the same as speeding up, so a constant-speed turn cannot involve acceleration.",
+                        feedback:
+                          "That is the mistake we need to remove. A turn changes velocity because the direction changes even if the speed stays the same.",
+                      },
+                      {
+                        value: "negative_equals_slowing",
+                        label: "Negative acceleration means the object must always be slowing down, whatever direction convention was chosen.",
+                        feedback:
+                          "That ignores the sign convention. Negative only tells you the acceleration points in the chosen negative direction.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The lesson note now treats acceleration as change in velocity, not just speed change.",
+                    retryLabel: "That would leave the first acceleration misunderstanding active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f2-l2-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line acceleration rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner solves signed acceleration questions from the same anchor idea.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "delta_v_over_t_with_signs",
+                        label: "Acceleration comes from final velocity minus initial velocity, divided by time, with the sign interpreted using the chosen positive direction.",
+                        feedback:
+                          "Exactly. That keeps the calculation, the sign, and the direction convention tied together.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "speed_change_only",
+                        label: "Acceleration comes from the change in speed only, because the direction has already been handled by the motion question.",
+                        feedback:
+                          "That drops the most important feature of velocity. The sign and direction still matter when you calculate acceleration.",
+                      },
+                      {
+                        value: "sign_before_calculation",
+                        label: "Choose the acceleration sign first from the story words, then calculate only the size of the change afterward.",
+                        feedback:
+                          "That invites guessing. The sign should come from the signed velocity change after the calculation is set up properly.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean acceleration method to follow.",
+                    retryLabel: "That line would blur the sign convention and the actual velocity change.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f2-l2-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the velocity analyst",
+                    scenario:
+                      "A trainee analyst is about to rush into a signed acceleration problem. You can send one method instruction before they start.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "sign_velocities_then_subtract",
+                        label: "Choose the positive direction, write the initial and final velocities with signs, then do final minus initial before dividing by time.",
+                        feedback:
+                          "Exactly. That method keeps the sign logic under control and prevents story-word guessing.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "subtract_speeds_only",
+                        label: "Compare the speeds first, because using signed velocities will only make the calculation harder than it needs to be.",
+                        feedback:
+                          "That shortcut breaks signed questions. You need signed velocities if the lesson is asking about direction-aware acceleration.",
+                      },
+                      {
+                        value: "divide_before_change",
+                        label: "Divide each velocity by the time first, then compare the two results to get acceleration.",
+                        feedback:
+                          "That changes the structure of the calculation. Acceleration comes from the change in velocity over the time interval, not from dividing each velocity separately first.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable signed-acceleration method.",
+                    retryLabel: "That instruction would send the analyst into the usual sign mistake.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f2-l2-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the negative-means-slowing shortcut",
+                    scenario:
+                      "One crew member keeps saying that any negative acceleration means the object is slowing down. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "sign_depends_on_chosen_direction",
+                        label: "Negative acceleration only tells you the acceleration points in the chosen negative direction; whether the speed rises or falls depends on the direction of the velocity too.",
+                        feedback:
+                          "Exactly. The sign convention and the current velocity direction both have to stay visible.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "negative_always_slowing",
+                        label: "Negative acceleration is the universal slowing-down sign, so direction conventions do not really matter after that.",
+                        feedback:
+                          "That is the trap. Negative does not automatically mean slowing down in every signed motion story.",
+                      },
+                      {
+                        value: "positive_always_speeding",
+                        label: "Positive acceleration always means speeding up, so the sign can be read before you know the direction of motion.",
+                        feedback:
+                          "That is just the same shortcut in reverse. Speeding up or slowing down depends on how acceleration compares with the current velocity direction.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now treats sign and speeding/slowing as related but not identical ideas.",
+                    retryLabel: "That warning would leave the most tempting acceleration shortcut alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f2-l2-analogy",
+                    badge: "Story relay",
+                    title: "Choose the arrow-change analogy",
+                    scenario:
+                      "The team wants one analogy that keeps acceleration tied to the change between two velocity arrows instead of to a vague feeling about speed.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "before_after_velocity_arrows",
+                        label: "Use a before-and-after velocity-arrow comparison, then measure how much that arrow changes over the time interval.",
+                        feedback:
+                          "Exactly. That analogy keeps acceleration tied to the change in velocity itself.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "single_speedometer",
+                        label: "Use one speedometer reading, because the fastest way to see acceleration is just to watch whether the speed number feels larger or smaller.",
+                        feedback:
+                          "One speed reading cannot show the change on its own. Acceleration needs a before-and-after velocity comparison.",
+                      },
+                      {
+                        value: "distance_logbook",
+                        label: "Use a distance logbook, because acceleration is really just a more detailed version of distance covered over time.",
+                        feedback:
+                          "That confuses acceleration with route tracking. This lesson needs velocity change, not distance accumulation.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the acceleration idea instead of flattening it into a speed guess.",
+                    retryLabel: "That analogy would blur velocity change right when it should be clarified.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F2_L1") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
