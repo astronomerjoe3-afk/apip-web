@@ -461,6 +461,67 @@ export function misconceptionSummaryForContext({
     };
   }
 
+  const learnerUsedDirectionWord =
+    includesAny(answerText, [/\beast\b/, /\bwest\b/, /\bnorth\b/, /\bsouth\b/, /\bup\b/, /\bdown\b/, /\bleft\b/, /\bright\b/]);
+
+  const correctIncludesDirectionWord =
+    includesAny(correctText, [/\beast\b/, /\bwest\b/, /\bnorth\b/, /\bsouth\b/, /\bup\b/, /\bdown\b/, /\bleft\b/, /\bright\b/]);
+
+  const asksForDistanceOnly =
+    includesAny(promptText, [/\bdistance\b/])
+    && !includesAny(promptText, [/displacement/, /average speed/, /\bspeed\b/]);
+
+  if (asksForDistanceOnly) {
+    return {
+      tag: String(tag || "distance_displacement_confusion"),
+      title: "Distance means the whole route",
+      diagnosis: "This question is asking for total route length, not for the start-to-finish change. Distance adds every stage of the journey.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        learnerUsedDirectionWord
+          ? "Add every stage of the route to get the distance, then drop the direction word because distance does not keep east, west, north, or south."
+          : "Add every stage of the route to get the total distance.",
+      ),
+      noticeNext: "If the question says distance, add the whole route. Save direction words for displacement.",
+    };
+  }
+
+  const asksForDisplacementOnly =
+    includesAny(promptText, [/displacement/])
+    && !includesAny(promptText, [/\bdistance\b/, /average speed/, /\bspeed\b/]);
+
+  if (asksForDisplacementOnly) {
+    return {
+      tag: String(tag || "distance_displacement_confusion"),
+      title: "Displacement means the net change with direction",
+      diagnosis: "This question is asking where the journey finishes relative to where it started. Displacement uses the start-to-finish change and keeps the direction.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        correctIncludesDirectionWord
+          ? "Work out the net change from start to finish, then keep the direction word because displacement is a vector."
+          : "Work out the net start-to-finish change instead of adding the whole route.",
+      ),
+      noticeNext: "If the question says displacement, compare finish with start. Do not add every stage unless you are finding distance.",
+    };
+  }
+
+  const asksForAverageSpeedOnly =
+    includesAny(promptText, [/average speed/])
+    || (includesAny(promptText, [/\bspeed\b/]) && includesAny(promptText, [/whole journey/, /entire journey/, /total time/, /covers .* in .* s/, /travels .* in .* s/]));
+
+  if (asksForAverageSpeedOnly) {
+    return {
+      tag: String(tag || "distance_displacement_confusion"),
+      title: "Average speed uses the whole journey totals",
+      diagnosis: "Average speed is based on total distance divided by total time for the whole trip, not on the displacement and not on a quick average of stage speeds.",
+      repair: cleanCorrectionText(
+        displayCorrectText,
+        "Use total distance over total time for the whole journey, then report the speed without a direction word.",
+      ),
+      noticeNext: "When you see average speed, collect the whole-trip distance and the whole-trip time before dividing.",
+    };
+  }
+
   const isDistanceDisplacementCheck =
     includesAny(source, [/distance/]) && includesAny(source, [/displacement/]);
 
