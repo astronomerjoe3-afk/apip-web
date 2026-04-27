@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M5_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m5-l3-brownian-board",
+                badge: "Drift board",
+                title: "Read the Wander Pebble as evidence, not as a self-powered traveler",
+                scenario:
+                  "The Drift-and-Jostle board shows a Wander Pebble shaking through a gas crowd. One trainee says the pebble is steering itself, while another says the jagged path proves the gas particles are pushing in a smooth direction.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "random-collisions-evidence",
+                    label: "Read the jitter as random unequal collisions from unseen surrounding particles. The gas particles are far apart and move freely between collisions, and the visible pebble is only showing their hidden motion.",
+                    feedback:
+                      "Exactly. That keeps Brownian motion as evidence for unseen particle collisions rather than self-powered drift.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "pebble-self-powered",
+                    label: "Treat the Wander Pebble as the active mover, because a path that jagged must come from the pebble deciding its own route more than from the particles around it.",
+                    feedback:
+                      "That breaks the lesson. The visible pebble is not self-powered here; it is being buffeted by surrounding particles.",
+                  },
+                  {
+                    value: "gas-gives-smooth-push",
+                    label: "Treat the jitter as the overall gas flow pushing the pebble in one blended direction, because many tiny hits should average into a smooth drive rather than an irregular path.",
+                    feedback:
+                      "That would erase the evidence value of the jagged path. Brownian motion is irregular because the hits stay uneven from moment to moment.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the pebble as visible evidence for unseen collisions.",
+                retryLabel: "That note would flatten Brownian evidence into the wrong story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m5-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the self-powered-pebble shortcut",
+                  scenario:
+                    "A trainee has written that the Wander Pebble moves by itself, while another says the gas must be moving as one smooth stream because there are so many particle collisions.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-random-collision-story",
+                      label: "Repair both ideas together: the visible pebble is not self-powered, and its jagged path comes from random unequal collisions with many unseen gas particles moving freely between collisions.",
+                      feedback:
+                        "Exactly. That restores the evidence story and keeps the collisions random rather than smooth.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pebble-has-own-engine",
+                      label: "Tell them the pebble does most of the moving for itself, but the gas only adds some small wobble around the main path after the real motion has already begun.",
+                      feedback:
+                        "That would keep the main shortcut alive. The lesson wants the pebble treated as evidence, not as the source of motion.",
+                    },
+                    {
+                      value: "many-hits-mean-smooth-force",
+                      label: "Tell them the collisions should really average into a smooth force direction, because random microscopic hits cannot explain such visible movement unless they combine into a steady push.",
+                      feedback:
+                        "That would erase the reason the path is jagged. The lesson needs uneven collisions, not a hidden smooth engine.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps Brownian motion tied to random surrounding collisions.",
+                  retryLabel: "That would leave the Brownian-evidence shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m5-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Brownian evidence rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this gas-and-evidence lesson with the right anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "brownian-evidence-anchor",
+                      label: "Brownian motion is visible random jitter caused by invisible surrounding particles colliding unevenly with the object.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brownian-shows-self-motion",
+                      label: "Brownian motion mainly shows that the visible particle has stored motion of its own, while the surrounding particles only roughen the path slightly.",
+                      feedback:
+                        "That would build the main shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "jagged-means-crowd-is-purposeful",
+                      label: "Brownian motion is best understood as many tiny pushes lining up into a hidden purposeful path, so the irregularity is mostly decorative noise rather than evidence.",
+                      feedback:
+                        "That would erase the whole evidence story the lesson is trying to establish.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Brownian-evidence rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m5-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Drift Mode vocabulary board",
+                  scenario:
+                    "The crew sees the gas crowd and the Wander Pebble trace, but their labels are drifting. You need the note that keeps gas language and Brownian-evidence language doing separate jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "gas-and-brownian-language",
+                      label: "Use Drift Mode for particles far apart and moving freely between collisions. Use Brownian motion for the visible jitter caused by those unseen collisions acting on another particle.",
+                      feedback:
+                        "Exactly. That keeps the gas-state words and the evidence words in the right places.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brownian-means-gas-flow",
+                      label: "Use Brownian motion as another name for the whole gas flow, because the visible particle is simply tracing the path that the gas itself wants to follow.",
+                      feedback:
+                        "That would collapse evidence language into the wrong kind of gas description.",
+                    },
+                    {
+                      value: "drift-means-self-motion",
+                      label: "Use Drift Mode mainly for the Wander Pebble itself, because it is the particle that learners can actually watch moving across the screen.",
+                      feedback:
+                        "That would swap the visible evidence particle with the surrounding gas crowd the term is supposed to describe.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the gas-and-evidence story again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m5-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they mistake jitter for intention",
+                  scenario:
+                    "The trainee analyst is about to explain the pebble path as if the visible particle chose it. You get one instruction to redirect them.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-visible-object-then-hidden-cause",
+                      label: "Start by naming the visible object, then ask what hidden cause could make its path jagged. Use the answer to connect the jitter to random surrounding collisions rather than to any self-powered motion.",
+                      feedback:
+                        "Exactly. That gives the analyst a reliable evidence-first method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "treat-path-as-choice",
+                      label: "Treat the path like a choice made by the pebble, because irregular motion is easier to explain if the visible object is assumed to be controlling most of it.",
+                      feedback:
+                        "That would send the analyst directly into the main shortcut. The pebble is not the source of the motion story here.",
+                    },
+                    {
+                      value: "average-the-jagged-line-into-one-direction",
+                      label: "Average the whole jagged path into one smooth direction first, because many small collisions are too messy to explain honestly one by one.",
+                      feedback:
+                        "That would erase the evidence value of the irregular motion. The jaggedness is part of what the lesson needs to preserve.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Brownian-evidence method.",
+                  retryLabel: "That would send the analyst back into self-powered or smoothed-out storytelling.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m5-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the self-powered and smooth-flow shortcuts",
+                  scenario:
+                    "One crew member keeps saying the Wander Pebble is driving itself, while another keeps saying the gas must be giving one smooth overall push because there are so many particles involved.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "jagged-path-means-uneven-collisions",
+                      label: "Do not treat the visible particle as self-powered, and do not smooth the hits into one hidden stream. Brownian motion is jagged because surrounding collisions stay uneven from moment to moment.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "small-self-power-warning",
+                      label: "Warn only that the pebble is not entirely self-powered, because giving it a small built-in drive is still a fair way to explain why it keeps moving at all.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson wants the motion explained by collisions, not by an internal drive.",
+                    },
+                    {
+                      value: "mostly-smooth-gas-warning",
+                      label: "Warn mainly that the gas flow is not perfectly smooth, because a mostly smooth combined push is still the safest beginner picture for a large number of hits.",
+                      feedback:
+                        "That would keep the second shortcut alive. The visible randomness matters here.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps Brownian motion as random-collision evidence.",
+                  retryLabel: "That warning would leave one of the lesson's main traps active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m5-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the crowd-bump analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the visible pebble jitters in a jagged way rather than following a straight chosen route.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "blindfolded-crowd-bumps",
+                      label: "Think of the pebble like a person being nudged from many sides by a fast-moving crowd. No one nudge controls the whole path, so the motion looks jagged and unpredictable.",
+                      feedback:
+                        "Exactly. That analogy keeps the motion external, random, and collision-driven.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "runner-picks-zigzag-route",
+                      label: "Think of the pebble like a runner choosing a zigzag route, because a jagged path is easiest to picture if the moving object decides where it wants to go next.",
+                      feedback:
+                        "That analogy would rebuild the self-powered shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "moving-walkway-carries-person",
+                      label: "Think of the gas like a hidden moving walkway carrying the pebble overall, because the many tiny hits should combine into one smooth travel direction.",
+                      feedback:
+                        "That analogy hides the random collision story and wrongly smooths out the evidence.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports Brownian evidence instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right unseen-collision picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M5_L2") {
