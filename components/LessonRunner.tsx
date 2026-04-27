@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5"
           ? (() => {
+              if (lessonId === "F4_L5") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f4-l5-branch-board",
+                    badge: "Branch board",
+                    title: "Read the split-route comparison",
+                    scenario:
+                      "The Flow-Grid room is comparing one branch deck with another branch added in parallel. One trainee keeps saying the voltage must split between the branches because the current splits there too.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "same-voltage-current-splits",
+                        label: "Each branch spans the same two supply points, so each branch gets the same voltage. The current is what splits between the branches and recombines afterward.",
+                        feedback:
+                          "Exactly. That keeps the branch story anchored to shared endpoints, shared voltage, and split current.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "voltage-splits-between-branches",
+                        label: "The voltage must split between the branches first, and then the current adjusts itself inside each branch afterward.",
+                        feedback:
+                          "That is the trap. In parallel, each branch connects across the same two points, so the branch voltage is the same.",
+                      },
+                      {
+                        value: "same-current-in-every-branch",
+                        label: "The current must be the same in every branch, because the source sends out one stream that each branch has to copy exactly.",
+                        feedback:
+                          "Current only stays the same everywhere in one-route series circuits. In parallel, it splits between the branches.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read the branch deck with shared voltage and split current.",
+                    retryLabel: "That note would break the parallel branch story the lesson is trying to secure.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f4-l5-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first parallel note",
+                      scenario:
+                        "A trainee has written that each parallel branch gets only part of the battery voltage because the current has to split there. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "same-endpoints-same-voltage",
+                          label: "Parallel branches connect across the same two points, so each branch gets the same potential difference as the supply across those points.",
+                          feedback:
+                            "Exactly. That correction secures the shared-endpoint idea that makes the branch voltage the same.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "voltage-halves-when-current-splits",
+                          label: "When current splits, the voltage must split with it, so each branch only keeps part of the original push.",
+                          feedback:
+                            "That keeps the mistake alive. Voltage does not split in parallel branches that share the same two endpoints.",
+                        },
+                        {
+                          value: "branch-voltage-depends-only-on-current",
+                          label: "The branch with more current automatically gets the larger voltage, because current determines the push on that route.",
+                          feedback:
+                            "Current and voltage are linked through resistance, but the shared branch endpoints still make the branch voltage the same.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now keeps branch voltage tied to shared endpoints.",
+                      retryLabel: "That would leave the voltage-splitting shortcut active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f4-l5-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line parallel rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the parallel lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "shared-voltage-split-current",
+                          label: "A parallel circuit is a split-route network: each branch gets the same voltage, while current splits between branches and recombines afterward.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "same-current-shared-voltage",
+                          label: "A parallel circuit keeps the same current in every branch, while the voltage is shared between the routes depending on branch size.",
+                          feedback:
+                            "That flips the lesson story. In parallel, voltage is shared across each branch, while current is what splits.",
+                        },
+                        {
+                          value: "more-branches-same-total-current",
+                          label: "A parallel circuit just gives the source more routes to choose from, but the total current stays fixed because the battery decides it in advance.",
+                          feedback:
+                            "The source current is not fixed in advance. Adding branches usually changes the total resistance and raises the total current.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts from the split-route meaning instead of a series-circuit shortcut.",
+                      retryLabel: "That line would blur the branch-voltage and branch-current roles.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f4-l5-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the branch analyst",
+                      scenario:
+                        "A trainee keeps jumping straight into numbers and losing track of which quantity is shared across the branches. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "branch-voltage-first-then-add-currents",
+                          label: "First mark that each branch gets the same voltage. Then find each branch current from its own resistance and add the branch currents to get the total source current.",
+                          feedback:
+                            "Exactly. That keeps the branch-voltage story and the current-adds-at-the-junction story in the right order.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "split-voltage-then-share-current",
+                          label: "First split the voltage between the branches, then keep the same current in each branch so the total stays simple.",
+                          feedback:
+                            "That uses the series rule in the wrong place. Parallel branches share voltage, while current depends on each branch resistance.",
+                        },
+                        {
+                          value: "add-resistances-before-branches",
+                          label: "First add every branch resistance directly, then use one current for the entire circuit so you do not need to think about each branch separately.",
+                          feedback:
+                            "That skips the branch logic the lesson is trying to secure. Branch currents have to be reasoned through branch by branch.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable parallel-circuit method instead of a series shortcut.",
+                      retryLabel: "That method would scramble the branch quantities instead of ordering them.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f4-l5-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the voltage-splits-in-parallel shortcut",
+                      scenario:
+                        "The next learner note says: 'Two branches means half the voltage in each branch.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "same-two-points-same-voltage",
+                          label: "Branches connected across the same two points share the same potential difference. What changes between branches is the current, not the branch voltage.",
+                          feedback:
+                            "Exactly. That warning blocks the series-style voltage-sharing shortcut.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "current-decides-voltage-share",
+                          label: "The branch with the greater current automatically takes the greater voltage, so voltage only matches if the branch currents happen to match too.",
+                          feedback:
+                            "Branch currents can differ, but the branch voltage is still the same when the endpoints are the same.",
+                        },
+                        {
+                          value: "more-branches-means-less-push-per-branch",
+                          label: "Every new branch makes the push weaker in all the other branches, because the supply has to spread itself thinner as the routes multiply.",
+                          feedback:
+                            "Adding branches changes the total current and equivalent resistance, but it does not force the branch voltage to split.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps shared branch voltage and split current in the right places.",
+                      retryLabel: "That warning would let the parallel-voltage shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f4-l5-analogy",
+                      badge: "Story relay",
+                      title: "Choose the branch-deck bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture several routes between the same two points without turning the lesson into a one-lane series story.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "same-start-finish-split-stream",
+                          label: "Use the analogy by keeping the same start and finish points for each route. The push across each route is the same, while the stream divides between the routes and recombines later.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the split-route parallel meaning cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "one-lane-many-gates",
+                          label: "Use the analogy by keeping one lane and adding more gates on the same route, because that shows why each branch should keep the same current.",
+                          feedback:
+                            "That would build a series picture, not a parallel one. Parallel needs multiple routes between the same two points.",
+                        },
+                        {
+                          value: "different-starts-different-voltages",
+                          label: "Use the analogy by giving each route a different starting point so learners can see why each branch can end up with its own voltage.",
+                          feedback:
+                            "That breaks the key lesson idea. The same start and finish points are what make the branch voltage the same.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports shared branch voltage without slipping back into series language.",
+                      retryLabel: "That analogy would blur the branch structure instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F4_L4") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
