@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2"
         ? (() => {
             if (lessonId === "F3_L1") {
               if (isMediaStep && activeMediaIndex === 0) {
@@ -1980,6 +1980,214 @@ export default function LessonRunner({
                     ],
                     successLabel: "Analogy chosen. It supports the transfer story without flattening it into effort or symbols.",
                     retryLabel: "That analogy would pull the lesson away from its core transfer meaning.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
+            if (lessonId === "F3_L2") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f3-l2-store-board",
+                  badge: "Store board",
+                  title: "Read the motion-versus-height comparison",
+                  scenario:
+                    "The energy room is comparing a fast trolley near the floor with a slower trolley higher up the ramp. One trainee keeps mixing the stores and saying height directly makes the kinetic energy bigger.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "separate-ke-and-gpe",
+                      label: "Kinetic energy belongs to motion and depends on mass and speed, while gravitational potential energy belongs to height and depends on mass, g, and height.",
+                      feedback:
+                        "Exactly. That keeps the two stores separate and stops height from being pushed into the kinetic-energy story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-raises-ke",
+                      label: "Height makes kinetic energy larger in the same direct way speed does, because higher objects automatically count as moving-energy cases.",
+                      feedback:
+                        "That is the store mix-up. Height changes gravitational potential energy directly, not kinetic energy.",
+                    },
+                    {
+                      value: "mass-only-for-gpe",
+                      label: "Mass matters only for gravitational potential energy, while kinetic energy is decided by speed alone.",
+                      feedback:
+                        "Mass matters in both stores. The big difference is that speed is squared in kinetic energy, while height enters directly in gravitational potential energy.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now separate motion energy from height energy cleanly.",
+                  retryLabel: "That note would keep the two energy stores blurred together.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f3-l2-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first store mix-up",
+                    scenario:
+                      "A trainee has written that an object high on a ramp must have more kinetic energy because it has gained more energy overall. You need the correction that separates the stores before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "height-is-gpe",
+                        label: "Being higher increases gravitational potential energy. Kinetic energy is the motion store, so you still need the speed to judge that store.",
+                        feedback:
+                          "Exactly. That correction separates the height store from the motion store straight away.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "higher-means-more-ke",
+                        label: "A higher object must have more kinetic energy because the total energy is larger and kinetic energy is the main moving store.",
+                        feedback:
+                          "That keeps the mistake alive. Height points you toward gravitational potential energy, not automatically toward more kinetic energy.",
+                      },
+                      {
+                        value: "one-energy-label-is-enough",
+                        label: "There is no need to separate the stores here. As long as you say the object has energy, the lesson meaning is already complete.",
+                        feedback:
+                          "This lesson needs the stores named properly. The whole point is to distinguish motion energy from height energy so comparisons stay honest.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The energy-store mix-up is now cleared.",
+                    retryLabel: "That would leave the height-versus-motion confusion in place.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f3-l2-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line store rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner begins this lesson with the right energy-store map in mind.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "ke-and-gpe-rule",
+                        label: "Kinetic energy is the store linked to motion, while gravitational potential energy is the store linked to height in a gravitational field.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "same-store-different-formulas",
+                        label: "Kinetic energy and gravitational potential energy are really the same store, and the formulas only change because the numbers are arranged differently.",
+                        feedback:
+                          "That collapses the two stores together too early. This lesson needs them kept distinct so transfers can be tracked properly.",
+                      },
+                      {
+                        value: "mass-decides-store",
+                        label: "Mass decides which energy store applies, while speed and height only change the number after the correct store is chosen.",
+                        feedback:
+                          "Mass appears in both stores, so it cannot choose the store by itself. Motion points to kinetic energy; height points to gravitational potential energy.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean energy-store anchor.",
+                    retryLabel: "That line would blur the two stores right at the start.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f3-l2-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the energy analyst",
+                    scenario:
+                      "A trainee analyst wants to grab whichever formula looks familiar first instead of deciding which store the question is actually asking about.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "identify-store-first",
+                        label: "First decide which energy store is being asked about, then match the variables: mass and speed for kinetic energy, mass, g, and height for gravitational potential energy, and compare transfers if both stores appear.",
+                        feedback:
+                          "Exactly. That keeps the energy story clear before any calculation begins.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "pick-formula-with-most-numbers",
+                        label: "Use whichever formula has the most numbers from the question, because the store identity matters less than using all the given values.",
+                        feedback:
+                          "That is a calculator-first shortcut. This lesson needs the store identified before the formula is chosen.",
+                      },
+                      {
+                        value: "start-with-mgh",
+                        label: "Start with mgh whenever height is mentioned, then decide afterwards whether the result should really count as kinetic or potential energy.",
+                        feedback:
+                          "The store decision cannot be postponed like that. The learner has to know what is being found before the calculation starts.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable energy-store method.",
+                    retryLabel: "That instruction would push the analyst back toward formula-first guessing.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f3-l2-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the speed-versus-mass shortcut",
+                    scenario:
+                      "One crew member keeps saying doubling speed and doubling mass change kinetic energy by the same amount. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "speed-is-squared",
+                        label: "In kinetic energy, doubling mass only doubles the store, but doubling speed quadruples it because speed is squared.",
+                        feedback:
+                          "Exactly. That warning protects the strongest comparison this lesson is building.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "speed-and-mass-equal",
+                        label: "Mass and speed affect kinetic energy equally, so doubling either one always gives the same change.",
+                        feedback:
+                          "That keeps the trap alive. This lesson needs the squared speed effect kept visible.",
+                      },
+                      {
+                        value: "height-replaces-speed",
+                        label: "Height can stand in for speed when comparing kinetic energy, because both show how much energy the object has.",
+                        feedback:
+                          "Height belongs to gravitational potential energy in this lesson. It cannot replace the speed role in kinetic energy.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now treats speed as the stronger kinetic-energy driver.",
+                    retryLabel: "That warning would leave the key speed-squared trap active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f3-l2-analogy",
+                    badge: "Story relay",
+                    title: "Choose the energy-store bridge",
+                    scenario:
+                      "The team wants one analogy line that keeps learners asking which store is changing and which variable drives the comparison most strongly before any formula is used.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "store-and-driver",
+                        label: "Use the analogy by asking which store is being filled or emptied, what transfer connects the stores, and which variable changes most strongly in this comparison.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving the store-and-transfer meaning instead of replacing it.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "symbol-memory",
+                        label: "Use the analogy mainly to remember the symbols in 1/2mv^2 and mgh, because once the symbols are recalled the store meaning matters less.",
+                        feedback:
+                          "This lesson wants the analogy to support the physics meaning before the formula is used, not to shrink the idea into symbol recall.",
+                      },
+                      {
+                        value: "higher-means-more-total",
+                        label: "Use the analogy to say that the higher object must always have more total energy than a lower faster one, because height is the clearest sign of stored energy.",
+                        feedback:
+                          "That would overclaim from the picture. This lesson needs the analogy to keep the stores and drivers separate, not to jump straight to a blanket ranking.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the store comparison without flattening it into symbols or a height-only shortcut.",
+                    retryLabel: "That analogy would blur the energy-store story instead of clarifying it.",
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
