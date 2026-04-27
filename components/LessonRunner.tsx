@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,418 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M3_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m3-l4-hand-off-visual",
+                badge: "Hand-off board",
+                title: "Freeze the hand-off story before the room turns work into effort talk",
+                scenario:
+                  "The Energy Hand-off display shows one aligned push-distance case, one zero-displacement case, and one direct store-gain case. A trainee keeps saying work just means trying hard.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "work-is-energy-transfer",
+                    label: "Read the board as an energy hand-off story. Work is the transfer that changes a store, not a feeling of effort, and the route you use depends on what the story actually gives you.",
+                    feedback:
+                      "Exactly. That gives the lesson the right meaning before any formula appears.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "work-is-effort",
+                    label: "Treat work as how hard the machine tried, because a strong push should still count as lots of work even if the story never mentions any movement or store change.",
+                    feedback:
+                      "That is the everyday-language trap. This lesson defines work through transfer, not effort feeling.",
+                  },
+                  {
+                    value: "force-alone-decides-work",
+                    label: "Assume the biggest force always means the biggest work, because work is mainly the force part and the other details only tidy up the final number.",
+                    feedback:
+                      "That skips the transfer story completely. Force alone does not settle work in this lesson.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now reads work as an energy hand-off instead of effort talk.",
+                retryLabel: "That note would pull the room back into the wrong definition.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m3-l4-module-lens",
+                badge: "Module lens",
+                title: "Choose the right route before the symbols take over",
+                scenario:
+                  "The Module 3 lens card is up, and the room is already trying to force every problem through W = Fd even when the story gives the store change directly.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "story-decides-route",
+                    label: "Post the rule that the story chooses the route: use W = Fd for a simple aligned force-distance hand-off, and use W = ΔE when the store change is already the cleanest known quantity.",
+                    feedback:
+                      "Exactly. That keeps the equations subordinate to the story instead of the other way around.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "always-use-fd-first",
+                    label: "Say that W = Fd should always come first, because force and distance are the most concrete clues and every other route is really just a later shortcut.",
+                    feedback:
+                      "That would hard-wire the wrong habit. Sometimes the store change is the cleaner first route.",
+                  },
+                  {
+                    value: "always-use-delta-e-first",
+                    label: "Say that W = ΔE should always come first, because once work is called an energy transfer there is no real need to check the force-distance story anymore.",
+                    feedback:
+                      "That swings too far the other way. The aligned force-distance route is still valid when the story supports it.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps the route choice tied to the story.",
+                retryLabel: "That rule would send the room into equation grabbing.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m3-l4-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on input work versus useful gain",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare only the total input hand-off, while another wants to compare only the useful store gain and ignore the leak trail.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "compare-input-useful-and-leak",
+                    label: "First name the total work input, then track how much becomes useful store gain and how much leaks away. The work story stays complete only if all three remain connected.",
+                    feedback:
+                      "Exactly. That keeps the hand-off, useful gain, and leak story intact.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-input-only",
+                    label: "Compare only the input work, because once the total hand-off is known the useful gain will automatically follow and the leak details can wait.",
+                    feedback:
+                      "That would hide part of the transfer story. Useful gain and leaks still need to be accounted for explicitly.",
+                  },
+                  {
+                    value: "compare-useful-only",
+                    label: "Compare only the useful store gain, because the leaked part did not help the pod and so it does not belong in the main work comparison.",
+                    feedback:
+                      "That would erase part of the hand-off. The lesson needs the whole accounting path visible.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares the full work ledger before zooming into one branch.",
+                retryLabel: "That plan would shrink the transfer story too early.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "two routes to work") {
+                return {
+                  id: "m3-l4-two-routes",
+                  badge: "Route desk",
+                  title: "Choose the cleaner first route before substituting",
+                  scenario:
+                    "A problem already tells the team that the pod's store rose by 200 J. One trainee still wants to invent a force-distance story first because W = Fd feels more familiar.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "delta-e-cleaner-first",
+                      label: "Use W = ΔE first when the store change is already given directly. Save W = Fd for the simple aligned push story when force and distance are the cleanest known quantities.",
+                      feedback:
+                        "Exactly. That is the route choice habit this screen is meant to build.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fd-always-cleaner",
+                      label: "Use W = Fd first anyway, because every work question is really a hidden force-distance story once you unpack it far enough.",
+                      feedback:
+                        "That would override the story with a familiar formula. This lesson wants the cleaner given quantity to lead.",
+                    },
+                    {
+                      value: "power-first-route",
+                      label: "Use power first, because transfer questions are mainly about how fast the machine works and the total hand-off can be recovered later if needed.",
+                      feedback:
+                        "That is the wrong quantity family for this screen. The question here is about total work route choice, not rate.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The crew now chooses the route that matches the story.",
+                  retryLabel: "That would keep the route-choice misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "displacement is part of the concept") {
+                return {
+                  id: "m3-l4-displacement-concept",
+                  badge: "Alignment check",
+                  title: "Stop the no-movement push from being miscounted as work",
+                  scenario:
+                    "A trainee pushes hard on a wall that does not move and insists that large effort must still mean large work in the lesson model.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "no-displacement-no-work",
+                      label: "In the lesson's simple aligned model, no displacement in the force direction means no work is done by that force on the wall, even if the effort feels large.",
+                      feedback:
+                        "Exactly. That keeps displacement inside the concept rather than burying it in the fine print.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-alone-counts",
+                      label: "A big force should still count as big work, because the strength of the push is the main thing the work equation is trying to measure.",
+                      feedback:
+                        "That leaves out the transfer condition. Force alone does not settle work here.",
+                    },
+                    {
+                      value: "time-alone-counts",
+                      label: "If the push lasts long enough it should count as work even without movement, because time can stand in for distance when the effort is steady.",
+                      feedback:
+                        "That imports a different idea entirely. This screen is about displacement in the force direction, not elapsed time.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The crew now keeps displacement inside the meaning of work.",
+                  retryLabel: "That would leave the aligned-displacement misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m3-l4-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first work misconception",
+                  scenario:
+                    "A trainee has written that work just means effort, and another has added that as long as force is present the work story is already complete.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "work-is-transfer-with-story",
+                      label: "Repair both ideas at once: work is the energy hand-off that changes a store, and the story still has to tell you either the aligned force-distance route or the direct store-change route.",
+                      feedback:
+                        "Exactly. That fixes the effort-language mistake and the force-alone shortcut together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-main-repair",
+                      label: "Keep force as the main idea and just add that some work questions happen to mention store change because it is easier to calculate afterward.",
+                      feedback:
+                        "That still crowns force as the definition. The lesson wants transfer meaning first.",
+                    },
+                    {
+                      value: "rate-main-repair",
+                      label: "Fix the note by saying work is mainly about how fast energy moves, because the speed of transfer is the most useful way to think about machines.",
+                      feedback:
+                        "That drifts into power. This lesson needs total hand-off meaning, not rate meaning.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps work tied to transfer and route choice.",
+                  retryLabel: "That would leave the main work misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m3-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line work rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the lesson with the right anchor before the examples begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "work-anchor",
+                      label: "Work is the energy hand-off that fills or empties stores, and the story tells you whether force-distance or direct store change is the cleaner route.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "effort-anchor",
+                      label: "Work is mainly how hard the machine tried, while the equations only sharpen that effort idea once a number is needed.",
+                      feedback:
+                        "That would put the everyday-language trap directly into the anchor sentence.",
+                    },
+                    {
+                      value: "fd-anchor",
+                      label: "Work is basically force times distance, and the rest of the lesson mostly explains special cases where that familiar line needs small adjustments.",
+                      feedback:
+                        "That would over-promote one route. The lesson wants the story to choose the route, not the formula to lead by default.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right work rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m3-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the work vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps work, store change, and displacement doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "work-displacement-store-language",
+                      label: "Work means energy hand-off. Displacement belongs to the simple aligned force-distance route, and store change belongs to the direct energy-change route when that quantity is already known.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary aligned with the two-route model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all-transfer-terms-same",
+                      label: "Treat work, store change, and displacement as mostly interchangeable transfer words, because they all point to the same overall event in the end.",
+                      feedback:
+                        "That would collapse the route structure. The terms matter because they signal different reasoning routes.",
+                    },
+                    {
+                      value: "displacement-is-optional",
+                      label: "Leave displacement off the vocabulary board for now, because students can usually recover it later once the force and effort story is already secure.",
+                      feedback:
+                        "That would weaken the aligned-force route immediately. Displacement is part of the concept here.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the work-language model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m3-l4-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the glossary with the route-choice language",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into the route-choice move students forget when they see a familiar formula.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "story-chooses-equation",
+                      label: "Add that the story chooses the equation: aligned force with distance points toward W = Fd, while a directly known store change points toward W = ΔE.",
+                      feedback:
+                        "Exactly. That completes the glossary with the route-choice move this lesson depends on.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equation-chooses-story",
+                      label: "The follow-up card should say that once students remember W = Fd, the rest of the story mostly serves to confirm the formula afterward.",
+                      feedback:
+                        "That reverses the logic. The story is supposed to choose the route, not get subordinated to the familiar equation.",
+                    },
+                    {
+                      value: "rate-belongs-here",
+                      label: "The follow-up card should explain that power is the main deciding clue for route choice, because any transfer quantity is best sorted by how fast it happens.",
+                      feedback:
+                        "That would pull in the next lesson's idea too early. This screen is about total hand-off route choice, not rate.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the route-choice language model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m3-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before the formula grab",
+                  scenario:
+                    "The trainee analyst is about to write W = Fd immediately before deciding whether the question is really giving force-distance information or a direct store change.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "classify-story-first",
+                      label: "Start by classifying the story: if the store change is given directly, use W = ΔE; if a force acts through a distance in the same direction, use W = Fd. Then calculate.",
+                      feedback:
+                        "Exactly. That gives the analyst a story-first method instead of a formula reflex.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fd-first-then-check",
+                      label: "Start with W = Fd because it is the most familiar route, and only switch away from it later if the numbers become awkward.",
+                      feedback:
+                        "That would invite the exact reflex this lesson is trying to break.",
+                    },
+                    {
+                      value: "power-first-then-backtrack",
+                      label: "Start with power because transfer questions are usually easier to classify by time, then backtrack to work once the hand-off feels clearer.",
+                      feedback:
+                        "That is the wrong route family for this lesson. This screen is about total work route choice, not rate.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean story-first method.",
+                  retryLabel: "That instruction would send the analyst straight into equation grabbing.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m3-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the familiar-formula shortcut",
+                  scenario:
+                    "One crew member keeps grabbing W = Fd the moment they see the word work, even when the displacement direction is unclear or the store change is already given directly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "do-not-grab-fd-blindly",
+                      label: "Do not grab W = Fd just because it looks familiar. The story must still support aligned force and displacement, and sometimes W = ΔE is cleaner because the store change is already known.",
+                      feedback:
+                        "Exactly. That warning blocks the main shortcut this lesson is trying to stop.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fd-usually-fine",
+                      label: "Warn only that W = Fd is usually fine, but in a few rare edge cases another equation might tidy the arithmetic more nicely afterward.",
+                      feedback:
+                        "That leaves the shortcut alive. The lesson wants route choice treated as a central reasoning step, not a rare exception.",
+                    },
+                    {
+                      value: "force-biggest-clue",
+                      label: "Warn students only to check whether the force is large enough, because once the force clue is strong the rest of the work story normally takes care of itself.",
+                      feedback:
+                        "That keeps force at the center instead of the transfer story. The warning needs to block that move, not soften it.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist blind W = Fd reflexes.",
+                  retryLabel: "That warning would leave the main shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m3-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the hand-off analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why work is about energy being handed over, and why sometimes the cleaner starting clue is the store change rather than the push-distance picture.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "delivery-route-bridge",
+                      label: "Think of a delivery route: sometimes the cleanest record is the distance the courier carried the package with the push, and sometimes the cleanest record is the exact amount that arrived in the destination store. Either way, the same hand-off story is being tracked.",
+                      feedback:
+                        "Exactly. That analogy supports both routes without letting one dominate the lesson unfairly.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "effort-bridge",
+                      label: "Think of work like trying hard in a gym, because that gives students a familiar emotional picture even if the transfer details are filled in later.",
+                      feedback:
+                        "That would reinforce the everyday-language trap instead of repairing it.",
+                    },
+                    {
+                      value: "force-meter-bridge",
+                      label: "Think of work as a force-meter reading, because once the push strength is visible the rest of the hand-off story mostly becomes bookkeeping.",
+                      feedback:
+                        "That would over-promote force and bury the transfer meaning. The analogy needs to keep the hand-off central.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the hand-off meaning without sliding back into effort talk.",
+                  retryLabel: "That analogy would pull the room toward the wrong definition.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M3_L3") {
