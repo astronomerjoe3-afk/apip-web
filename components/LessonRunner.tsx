@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M5_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m5-l5-store-board",
+                badge: "Store board",
+                title: "Keep Pulse Level visible while you compare total Plaza Store",
+                scenario:
+                  "The Plaza Store board shows two same-pulse comparisons. In one, Crowd B is larger. In the other, the crowd size matches but one plaza is in Slide Mode while the other is in Drift Mode. One trainee says same temperature settles the totals, while another counts only motion and ignores arrangement.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "internal-energy-motion-and-arrangement",
+                    label: "Treat internal energy as the whole-system total of particle motion plus arrangement. Same Pulse Level can still leave different totals when crowd size changes or when the state arrangement changes.",
+                    feedback:
+                      "Exactly. That keeps Plaza Store richer than the pulse reading alone.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "temperature-proves-same-store",
+                    label: "Treat the matched Pulse Level as enough to prove equal Plaza Store, because temperature already measures how much total energy the whole crowd has.",
+                    feedback:
+                      "That collapses average reading into total store again. Matched pulse does not settle the whole-system total.",
+                  },
+                  {
+                    value: "motion-only-no-arrangement",
+                    label: "Treat Plaza Store as only the motion part of the particles, because arrangement differences belong to state descriptions but do not count inside the total energy story.",
+                    feedback:
+                      "That would delete half of the lesson. Arrangement or potential-energy differences are part of internal energy too.",
+                  },
+                ],
+                successLabel: "Pinned. The room now keeps Plaza Store as motion plus arrangement.",
+                retryLabel: "That note would flatten the total-store story this lesson needs.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m5-l5-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the pulse-only and motion-only shortcuts",
+                  scenario:
+                    "A trainee has written that same temperature proves same Plaza Store, while another agrees the totals can differ but says the difference can only come from motion and not from particle arrangement.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-total-kinetic-plus-potential",
+                      label: "Repair both ideas together: internal energy is the total kinetic plus total potential energy of all particles, so same Pulse Level can still leave different totals when crowd size or arrangement changes.",
+                      feedback:
+                        "Exactly. That restores both the total-motion part and the arrangement part of the lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pulse-proves-total-store",
+                      label: "Tell them the pulse meter already includes every part of the Plaza Store, so arrangement and crowd size do not need separate checking once the temperature is matched.",
+                      feedback:
+                        "That keeps the first shortcut alive. Pulse Level is not the whole Plaza Store meter.",
+                    },
+                    {
+                      value: "arrangement-does-not-count",
+                      label: "Tell them arrangement may help describe the state, but the whole-system total still comes only from particle motion once the temperature has been chosen.",
+                      feedback:
+                        "That keeps the second shortcut alive. Arrangement energy is part of internal energy in this lesson.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps internal energy as motion plus arrangement.",
+                  retryLabel: "That would leave one of the main Plaza Store shortcuts active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m5-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Plaza Store rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so students stop treating temperature like the whole answer and stop dropping the arrangement part of the store.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "internal-energy-total-anchor",
+                      label: "Internal energy is the total kinetic and potential energy of all particles, so same temperature does not guarantee the same Plaza Store.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "temperature-is-whole-store",
+                      label: "Internal energy is best read directly from temperature, because average particle motion already tells you the whole-system total once the sample is hot enough.",
+                      feedback:
+                        "That would rebuild the pulse-only shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "internal-energy-is-motion-only",
+                      label: "Internal energy is the total motion energy of the particles, while arrangement only affects what state the material is in and not how much store it has.",
+                      feedback:
+                        "That would erase the arrangement contribution the lesson is explicitly teaching.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Plaza Store rule.",
+                  retryLabel: "That line would blur the whole-store lesson instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m5-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Plaza Store vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up Pulse Level, internal energy, kinetic part, and arrangement part. You need the note that gives each term a clean job.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "pulse-vs-store-language",
+                      label: "Use Pulse Level for the average-motion reading. Use internal energy or Plaza Store for the whole-system total, which includes both the total motion part and the arrangement or potential-energy part.",
+                      feedback:
+                        "Exactly. That keeps average language and whole-store language in the right places.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pulse-is-store-language",
+                      label: "Use Pulse Level and Plaza Store as interchangeable names, because an average reading is already the fastest way to represent the whole system.",
+                      feedback:
+                        "That would collapse the key lesson terms into the wrong single label.",
+                    },
+                    {
+                      value: "arrangement-is-state-only-language",
+                      label: "Use arrangement only for naming states like Slide Mode and Drift Mode, because it does not belong inside the energy vocabulary once the total store is being discussed.",
+                      feedback:
+                        "That would throw away the arrangement contribution to internal energy.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Plaza Store language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m5-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare only the pulse meter",
+                  scenario:
+                    "The trainee analyst is about to answer a same-temperature comparison by stopping at the Pulse Level reading and never checking what changed about crowd size or arrangement.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "ask-what-changed-then-split-store",
+                      label: "Start by asking what changed between the cases: crowd size, arrangement, or both. Keep Pulse Level in one column, then compare the total motion part and arrangement part of Plaza Store before judging the total.",
+                      feedback:
+                        "Exactly. That gives the analyst a reliable full-store method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-pulse-settles-everything",
+                      label: "Treat the matched Pulse Level as enough on its own, because once temperature is fixed there is no need to inspect crowd size or state when comparing total energy.",
+                      feedback:
+                        "That would send the analyst straight into the main shortcut.",
+                    },
+                    {
+                      value: "count-particles-only",
+                      label: "Count the particles first and settle the whole answer from crowd size alone, because arrangement only changes what the diagram looks like and not the internal-energy total.",
+                      feedback:
+                        "That would replace one shortcut with another. Arrangement can change the total too.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Plaza Store comparison method.",
+                  retryLabel: "That would send the analyst back into a flattened total-store story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m5-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the pulse-only and size-only shortcuts",
+                  scenario:
+                    "One crew member keeps saying same temperature proves same total store, while another accepts different totals but says only crowd size matters and arrangement can be ignored.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "whole-store-needs-motion-and-arrangement",
+                      label: "Do not use Pulse Level as a hidden whole-store meter, and do not use crowd size as the only total-store factor. Internal energy counts motion and arrangement together across the whole system.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-temperature-usually-same-store",
+                      label: "Warn only that same temperature usually means the same total unless the sample sizes are wildly different, because arrangement changes are too small to matter in most beginner comparisons.",
+                      feedback:
+                        "That would leave the first shortcut alive and downplay the arrangement part the lesson needs.",
+                    },
+                    {
+                      value: "crowd-size-settles-total-warning",
+                      label: "Warn mainly that bigger crowd size usually settles the total, because arrangement belongs to state labels and not to the total-store comparison itself.",
+                      feedback:
+                        "That would leave the second shortcut alive by deleting the arrangement contribution.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps Plaza Store as motion plus arrangement.",
+                  retryLabel: "That warning would leave a main Plaza Store trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m5-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the same-pace, different-crowd-and-link analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why two plazas can share the same Pulse Level while Plaza Store still changes with crowd size or with how tightly the crowd is linked.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "dance-floor-and-link-bands",
+                      label: "Think of two dance floors with the same average bounce pace. One floor can hold more total motion if it has more dancers, and a floor with tighter elastic bands between dancers can also store more in the links even when the bounce pace matches.",
+                      feedback:
+                        "Exactly. That analogy keeps both the motion part and the arrangement part visible.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "thermometer-settles-household-energy",
+                      label: "Think of one thermostat reading settling the full energy story of a whole building, because once the temperature matches the total store is already known too.",
+                      feedback:
+                        "That analogy sneaks the pulse-only shortcut back in.",
+                    },
+                    {
+                      value: "more-people-only-matters",
+                      label: "Think of Plaza Store as just counting how many people are on the floor, because links and arrangement only decorate the scene without changing the real total-energy story.",
+                      feedback:
+                        "That analogy would delete the arrangement part of the lesson.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the full Plaza Store story instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from motion-plus-arrangement thinking.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M5_L4") {
