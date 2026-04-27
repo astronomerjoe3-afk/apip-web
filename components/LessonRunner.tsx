@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,350 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M2_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m2-l2-load-rating-visual",
+                badge: "Load bay",
+                title: "Freeze the load-rating display before the crew blames the wrong thing",
+                scenario:
+                  "The Load Bay display shows the same Master Arrow acting on a light craft and a heavy craft. A trainee keeps saying the heavier craft must be feeling the smaller force.",
+                prompt: "Pin the right instruction to the display.",
+                options: [
+                  {
+                    value: "same-force-different-mass",
+                    label: "Keep the Master Arrow the same and compare the Load Rating. The lighter craft gets the bigger Motion Shift because the same force is acting on less mass.",
+                    feedback:
+                      "Exactly. That keeps equal force and different mass from being collapsed into different force stories.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "heavy-craft-feels-less-force",
+                    label: "Treat the heavy craft as feeling the weaker force, because smaller acceleration proves the push on it must be smaller.",
+                    feedback:
+                      "That is the trap. The same Master Arrow can produce different accelerations when the masses differ.",
+                  },
+                  {
+                    value: "mass-only-decides-motion",
+                    label: "Ignore the Master Arrow and compare the masses alone, because the heavier craft should always change motion less no matter what force acts.",
+                    feedback:
+                      "Mass matters, but only together with the resultant force. Motion Shift depends on both.",
+                  },
+                ],
+                successLabel: "Pinned. The room now compares equal force with different mass correctly.",
+                retryLabel: "That note would send the crew into the wrong cause-and-effect story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m2-l2-module-lens",
+                badge: "Law lens",
+                title: "Lock the law split before response and interaction get mixed",
+                scenario:
+                  "The Module 2 lens card is up, and the room is starting to mix one-object `F = ma` reasoning with two-object third-law pair reasoning.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "separate-response-from-pair",
+                    label: "Use Newton's second law for one object's Motion Shift from its Master Arrow and Load Rating. Use Newton's third law to compare equal and opposite interaction forces on two different objects.",
+                    feedback:
+                      "Exactly. That keeps response questions and interaction-pair questions in their proper lanes.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "third-law-explains-one-object-acceleration",
+                    label: "Use Newton's third law as the main rule for any acceleration question, because every force automatically comes with an opposite partner that sets the motion change.",
+                    feedback:
+                      "That blurs two different jobs. Third law compares forces across objects; second law explains one object's acceleration from its resultant force.",
+                  },
+                  {
+                    value: "equal-force-means-equal-acceleration",
+                    label: "Treat equal forces as meaning equal acceleration, because if the interaction forces match then the motion response should match too.",
+                    feedback:
+                      "Equal forces do not guarantee equal accelerations. Different masses respond differently to the same force.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now separates response-law and pair-law reasoning.",
+                retryLabel: "That rule would blur the lesson's main law split.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m2-l2-what-to-compare",
+                badge: "Compare board",
+                title: "Coach the crew on the right comparison",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare accelerations only, while another wants to compare force pairs only.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "name-force-mass-or-pair-first",
+                    label: "First decide whether the question is about one object's Motion Shift or a two-object interaction pair. Then compare Master Arrow with Load Rating for the first case, or equal-and-opposite forces on different objects for the second.",
+                    feedback:
+                      "Exactly. That stops the crew from mixing the lesson's two comparison structures together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-accelerations-only",
+                    label: "Compare only the accelerations, because once the motion change is known the separate force story is no longer needed.",
+                    feedback:
+                      "That would hide the cause. The lesson wants the force story and the motion response connected carefully, not collapsed.",
+                  },
+                  {
+                    value: "compare-forces-only",
+                    label: "Compare only the forces, because if the forces are matched the accelerations can be assumed to match as well unless the question says otherwise.",
+                    feedback:
+                      "Equal forces do not settle the acceleration question when the masses differ. The comparison still needs Load Rating.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now checks whether the question is response or interaction first.",
+                retryLabel: "That plan would collapse two different comparison jobs into one.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m2-l2-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the equal-force note",
+                  scenario:
+                    "A trainee has written that if two objects feel the same force, they must have the same acceleration. You need the correction that fixes that idea before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "same-force-different-mass-different-acceleration",
+                      label: "The same force can give different accelerations because acceleration depends on both force and mass. A larger Load Rating means a smaller Motion Shift for the same Master Arrow.",
+                      feedback:
+                        "Exactly. That repairs the missing mass part of the response story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-force-same-acceleration",
+                      label: "Keep the note as it is, because equal forces are the clearest sign that the motion changes must match exactly.",
+                      feedback:
+                        "That keeps the mistake alive. Equal force does not mean equal acceleration when the masses differ.",
+                    },
+                    {
+                      value: "heavier-pushes-back-harder",
+                      label: "Fix the note by saying the heavier object pushes back harder, so the stronger reaction force cancels the extra acceleration.",
+                      feedback:
+                        "That drags third law into the wrong place. The different acceleration comes from mass, not from a larger reaction force.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps force and mass together in the acceleration story.",
+                  retryLabel: "That would leave the equal-force shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m2-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line response-and-pair rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right anchor before comparing masses or interaction pairs.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "force-mass-and-third-law-split",
+                      label: "A craft's Motion Shift depends on both its Master Arrow and its Load Rating, while third-law pairs compare equal and opposite interaction forces on different objects.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equal-pairs-control-all-acceleration",
+                      label: "All acceleration stories should begin with the equal-and-opposite pair, because third law tells you how strongly every object must respond.",
+                      feedback:
+                        "That makes third law do the wrong job. One-object acceleration comes from the resultant force and mass.",
+                    },
+                    {
+                      value: "force-alone-decides-motion-shift",
+                      label: "Motion Shift is mainly a force-size story, so once the Master Arrow is known the Load Rating only adds a small correction.",
+                      feedback:
+                        "That downplays mass too much. The lesson needs force and mass working together from the start.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right response-and-pair rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m2-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Load Rating vocabulary board",
+                  scenario:
+                    "The crew can see the comparison, but the labels are drifting. You need the note that keeps Master Arrow, Load Rating, and Motion Shift doing separate jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "master-arrow-load-rating-motion-shift",
+                      label: "Master Arrow is the resultant force, Load Rating is the mass term, and Motion Shift is the acceleration produced by that force-mass combination.",
+                      feedback:
+                        "Exactly. That keeps the three lesson terms tied to separate roles.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "load-rating-is-force-store",
+                      label: "Treat Load Rating as the force stored inside the craft, because the heavier craft must be carrying more push to resist motion change.",
+                      feedback:
+                        "That would turn mass into hidden force. Load Rating stands for mass, not stored push.",
+                    },
+                    {
+                      value: "motion-shift-is-velocity",
+                      label: "Treat Motion Shift as the craft's current velocity, because the readout tells how the craft is moving rather than how its motion is changing.",
+                      feedback:
+                        "Motion Shift is acceleration, not the current velocity. It tells how quickly velocity changes.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the lesson terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m2-l2-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the pair-force handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into third-law pair language without mixing it into one-object response reasoning.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "third-law-pairs-different-objects",
+                      label: "Third-law pairs are equal and opposite forces acting on different objects. They compare interaction forces, not one object's acceleration calculation.",
+                      feedback:
+                        "Exactly. That carries the pair-language into the right part of the lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "third-law-cancels-on-one-object",
+                      label: "Third-law pairs should be canceled inside one object's force total, because the opposite partner force always balances the first one automatically.",
+                      feedback:
+                        "That is the trap. Third-law pairs act on different objects, so they do not cancel inside one object's `F = ma` calculation.",
+                    },
+                    {
+                      value: "pair-force-sets-same-motion-shift",
+                      label: "Equal pair forces are best described as equal Motion Shifts, because the interaction strength and the motion response should stay identical on both objects.",
+                      feedback:
+                        "Equal pair forces do not imply equal accelerations. Different masses can respond differently.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the third-law comparison.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m2-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the load-rating analyst",
+                  scenario:
+                    "The trainee analyst is about to answer by looking at force size alone. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "decide-response-or-pair-then-use-mass",
+                      label: "Decide first whether the question is a one-object response story or a two-object interaction pair. For response, combine forces to a Master Arrow and compare with Load Rating. For pairs, keep the equal-and-opposite forces on different objects.",
+                      feedback:
+                        "Exactly. That gives the analyst the right decision tree instead of a force-size shortcut.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-size-alone",
+                      label: "Use the bigger force as the whole answer, because once the force sizes are known the mass and pair language only add technical detail.",
+                      feedback:
+                        "That would send the analyst straight into the shortcut this lesson is removing. Mass and force-story type both matter.",
+                    },
+                    {
+                      value: "third-law-first-every-time",
+                      label: "Start every question from the equal-and-opposite pair, because third law is the safest rule whenever more than one object appears anywhere in the picture.",
+                      feedback:
+                        "Third law matters for interaction pairs, but not every acceleration question is a pair-comparison question.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable second-law/third-law method.",
+                  retryLabel: "That would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m2-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the equal-force-equal-acceleration shortcut",
+                  scenario:
+                    "One crew member keeps saying that if two objects feel the same force, their Motion Shifts must match. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "same-force-needs-mass-check",
+                      label: "The same force only guarantees the same push size. The Motion Shift still depends on mass, so a lighter object can accelerate more under that same force.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-force-same-motion-shift",
+                      label: "Equal forces are the safest sign of equal Motion Shift, because acceleration should follow force directly without needing a second comparison.",
+                      feedback:
+                        "That is the trap. Acceleration follows force and mass together, not force alone.",
+                    },
+                    {
+                      value: "reaction-force-cancels-difference",
+                      label: "Any difference in Motion Shift should be blamed on the reaction force canceling more effectively on the heavier object.",
+                      feedback:
+                        "That would drag in the wrong law. The heavier object's smaller acceleration comes from greater mass, not from a special cancellation.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now check mass before comparing Motion Shifts.",
+                  retryLabel: "That warning would leave the shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m2-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the tow-cable analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why equal interaction forces can still lead to different accelerations without making the forces themselves unequal.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "tow-cable-light-heavy",
+                      label: "Picture the same tow cable pulling a light sled and a heavily loaded one. The cable tension can match in both stories, but the lighter sled jumps more because the same pull is acting on less mass.",
+                      feedback:
+                        "Exactly. That analogy supports the lesson without pretending the forces must change size.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heavier-pull-means-bigger-force",
+                      label: "Picture the heavy sled as automatically feeling the bigger pull, because its smaller acceleration proves the cable must be working harder on it.",
+                      feedback:
+                        "That would rebuild the main confusion. The lesson needs equal force with different mass, not bigger force on the heavier object.",
+                    },
+                    {
+                      value: "same-pull-same-jump",
+                      label: "Picture the same pull giving the same jump to both sleds, because equal interaction forces should always create equal responses if the cable is honest.",
+                      feedback:
+                        "That would erase the whole mass effect. The same pull can still produce different accelerations when the masses differ.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the tow-cable idea instead of flattening it.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M2_L1") {
