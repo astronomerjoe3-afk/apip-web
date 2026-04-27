@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,350 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M2_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m2-l3-dock-exchange-visual",
+                badge: "Dock bay",
+                title: "Freeze the docking deck before the crew starts conserving the wrong thing",
+                scenario:
+                  "The Dock Exchange display shows two moving craft about to join. A trainee is about to compare their speeds only and ignore the carried motion each craft brings into the docking event.",
+                prompt: "Pin the right instruction to the display.",
+                options: [
+                  {
+                    value: "carry-score-before-docking",
+                    label: "Calculate each craft's Carry Score from mass and velocity first, then add them to get the total before docking.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored on the conserved total instead of on one speed reading.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "speed-only-before-docking",
+                    label: "Compare the incoming speeds only, because the faster craft should decide the final shared motion on its own.",
+                    feedback:
+                      "That skips the mass part of the story. Carry Score depends on both mass and velocity.",
+                  },
+                  {
+                    value: "force-during-impact-first",
+                    label: "Start from the impact force, because the collision force should be the quantity that tells you what is conserved through docking.",
+                    feedback:
+                      "That swaps momentum reasoning for force language. The conserved quantity here is the total Carry Score of the closed system.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now starts from Carry Score before the docking event.",
+                retryLabel: "That note would send the room into the wrong conserved-quantity story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m2-l3-module-lens",
+                badge: "Law lens",
+                title: "Lock the closed-system rule before the totals get split wrongly",
+                scenario:
+                  "The Module 2 lens card is up, and the room is starting to talk as if each craft should keep its own old motion through the docking event.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "system-total-is-conserved",
+                    label: "In a closed Dock Exchange, the total system Carry Score is conserved. Individual craft speeds can change as that same total gets shared across the post-docking mass.",
+                    feedback:
+                      "Exactly. That keeps conservation attached to the whole system instead of to each object separately.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "each-craft-keeps-own-motion",
+                    label: "Treat conservation as each craft keeping its own incoming motion as much as possible, because the docking event should preserve each object's original contribution separately.",
+                    feedback:
+                      "That is the trap. Conservation belongs to the total system, not to each craft keeping its own old speed.",
+                  },
+                  {
+                    value: "force-is-what-is-conserved",
+                    label: "Treat the impact force as the conserved quantity, because the biggest force in the collision should be what carries through the event.",
+                    feedback:
+                      "Force during impact is not the conserved quantity here. The lesson is about conserving total Carry Score.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps conservation on the total system.",
+                retryLabel: "That rule would blur the docking-conservation idea.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m2-l3-what-to-compare",
+                badge: "Compare board",
+                title: "Coach the crew on the right docking comparison",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare only masses, while another wants to compare only incoming velocities.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "compare-total-before-and-shared-after",
+                    label: "Compare the total Carry Score before docking with the shared total after docking, then compare that total with the combined post-docking mass to find the final speed.",
+                    feedback:
+                      "Exactly. That keeps the system total and the combined mass in the right sequence.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-masses-only",
+                    label: "Compare only the masses, because once the heavier craft is known the final shared motion should be mostly decided already.",
+                    feedback:
+                      "Mass matters, but only together with the total Carry Score. Mass alone cannot settle the final shared speed.",
+                  },
+                  {
+                    value: "compare-velocities-only",
+                    label: "Compare only the incoming velocities, because whichever craft enters faster should automatically control the final shared motion after docking.",
+                    feedback:
+                      "That would hide the mass weighting. The final story comes from total Carry Score, not from fastest speed alone.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares system total first and shared mass second.",
+                retryLabel: "That plan would leave out one part of the docking calculation.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m2-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the conservation note",
+                  scenario:
+                    "A trainee has written that conservation means each craft keeps its own motion through the docking event. You need the correction that fixes that idea before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "system-total-not-individual-speeds",
+                      label: "Conservation belongs to the total Carry Score of the closed system. Individual craft speeds can change as long as the system total stays the same.",
+                      feedback:
+                        "Exactly. That repairs the confusion between individual motion and conserved system total.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "each-object-conserved",
+                      label: "Keep the note as it is, because the clearest meaning of conservation is that each craft should hold onto its own original motion as much as possible.",
+                      feedback:
+                        "That keeps the mistake alive. It is the total system Carry Score that is conserved, not each object's original speed.",
+                    },
+                    {
+                      value: "impact-force-is-key",
+                      label: "Fix the note by saying the impact force is what stays the same, so the final motion can be read from the size of that force instead.",
+                      feedback:
+                        "That drags in the wrong quantity. Collision force and conserved Carry Score answer different questions.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps conservation on the system total.",
+                  retryLabel: "That would leave the docking-conservation shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m2-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line docking rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right anchor before sharing totals across combined mass.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "carry-score-system-anchor",
+                      label: "Carry Score equals mass x velocity, and in a closed Dock Exchange the total system Carry Score is conserved and then shared across the post-collision mass.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-anchor",
+                      label: "Docking questions are mainly speed-comparison stories, so once the fastest incoming craft is identified the final shared motion is nearly fixed.",
+                      feedback:
+                        "That hides the mass term. The lesson needs mass and velocity combined into Carry Score first.",
+                    },
+                    {
+                      value: "force-anchor",
+                      label: "Docking questions should begin from the collision force, because the conserved story mainly tracks how hard the craft hit each other.",
+                      feedback:
+                        "That starts from the wrong quantity. The lesson anchor is conserved system Carry Score, not impact force.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right docking rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m2-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the docking vocabulary board",
+                  scenario:
+                    "The crew can see the collision story, but the labels are drifting. You need the note that keeps Carry Score, closed system, and final shared speed doing separate jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "carry-score-system-final-speed",
+                      label: "Carry Score combines mass and velocity, the closed system is the whole docking set you are conserving, and the final shared speed is the result after that total is shared across the combined mass.",
+                      feedback:
+                        "Exactly. That keeps the core lesson terms tied to their proper roles.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "carry-score-is-force",
+                      label: "Treat Carry Score as the collision force stored in the craft, because that is what really drives the docking result.",
+                      feedback:
+                        "That would turn momentum into force. Carry Score is mass x velocity, not stored push.",
+                    },
+                    {
+                      value: "closed-system-is-any-single-craft",
+                      label: "Treat the closed system as whichever craft you are focusing on at the moment, because conservation should work one object at a time before it works on the pair.",
+                      feedback:
+                        "The closed system must include the whole docking set whose total is being conserved.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the lesson terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m2-l3-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the shared-speed handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into how the conserved total becomes a final shared speed after docking.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "share-total-across-combined-mass",
+                      label: "After docking, the conserved total Carry Score is shared across the combined mass, which is why the final shared speed depends on both the total and the joined mass.",
+                      feedback:
+                        "Exactly. That carries the conservation story into the post-collision calculation step.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "keep-faster-speed",
+                      label: "After docking, the combined craft should mostly keep the faster incoming speed, because that is the clearest surviving motion signal from before the collision.",
+                      feedback:
+                        "That would erase the combined-mass step. Final shared speed comes from total Carry Score divided by total mass.",
+                    },
+                    {
+                      value: "average-the-speeds",
+                      label: "After docking, take a quick average of the incoming speeds, because sticking together means the two old speeds blend equally into one new speed.",
+                      feedback:
+                        "A simple speed average ignores mass. The lesson needs the conserved total weighted by mass.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the shared-speed story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m2-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the docking analyst",
+                  scenario:
+                    "The trainee analyst is about to answer from the incoming speeds alone. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "signed-carry-scores-then-share",
+                      label: "Calculate each craft's signed Carry Score first, add them to get the system total, and then share that total across the combined post-docking mass.",
+                      feedback:
+                        "Exactly. That gives the analyst the right sequence instead of a speed-only guess.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-first-mass-later",
+                      label: "Start from whichever craft is faster, because the mass details can be added later once the likely final direction has been guessed.",
+                      feedback:
+                        "That would send the analyst into the shortcut this lesson is removing. Mass and velocity have to be combined from the start.",
+                    },
+                    {
+                      value: "impact-force-first",
+                      label: "Start every docking question from the impact force, because the hardest collision should also be the one with the biggest conserved motion result.",
+                      feedback:
+                        "Impact force is not the conserved quantity here. The lesson needs total Carry Score first.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable docking-conservation method.",
+                  retryLabel: "That would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m2-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the speed-only shortcut",
+                  scenario:
+                    "One crew member keeps saying the faster incoming craft should decide the final shared motion after docking. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "carry-score-needs-mass-and-velocity",
+                      label: "Final shared motion depends on total Carry Score, so you must keep mass and velocity together. A slower heavier craft can matter as much as or more than a faster lighter one.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fastest-craft-decides",
+                      label: "The fastest incoming craft is the safest guide to the final shared motion, because the biggest speed should survive the collision most strongly.",
+                      feedback:
+                        "That is the trap. Speed alone does not decide the conserved total.",
+                    },
+                    {
+                      value: "force-decides-after-impact",
+                      label: "The final motion is best predicted from how hard the craft collide, because the biggest impact force should set the post-collision speed directly.",
+                      feedback:
+                        "That would swap in the wrong quantity. The lesson wants conserved Carry Score, not impact force.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now keep mass and velocity together in the docking story.",
+                  retryLabel: "That warning would leave the shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m2-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the motion-token analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the conserved quantity belongs to the whole docking system, not to each craft keeping its own old speed.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "motion-token-docking-bay",
+                      label: "Think of each craft carrying signed motion tokens into the docking bay. When the craft join, the bay keeps the same total token balance even though the tokens are now shared across the combined mass.",
+                      feedback:
+                        "Exactly. That analogy supports the lesson without pretending each craft keeps its old speed separately.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fastest-token-wins",
+                      label: "Think of the faster craft as bringing the winning token pile, because the largest incoming speed should dominate the final shared motion after docking.",
+                      feedback:
+                        "That would rebuild the speed-only shortcut. The lesson needs the total token balance, not just the fastest stack.",
+                    },
+                    {
+                      value: "each-craft-keeps-own-tokens",
+                      label: "Think of each craft keeping its own motion tokens after docking, because conservation should preserve each original share rather than merging them into one total.",
+                      feedback:
+                        "That would miss the whole-system idea. After docking, the conserved total is shared across the combined mass.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the motion-token idea instead of flattening it.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M2_L2") {
