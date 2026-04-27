@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M4_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m4-l6-sky-blanket-board",
+                badge: "Sky board",
+                title: "Keep the sky blanket visible before the room treats rho g h as the whole story",
+                scenario:
+                  "The Sky Blanket board compares open-water patches at different altitudes and depths. One trainee wants to use rho g h as the total pressure every time, while another keeps treating air pressure and liquid pressure as two unrelated worlds.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "total-pressure-is-air-plus-liquid",
+                    label: "Read the board as one combined loading story: in an open liquid the total pressure is atmospheric pressure plus the liquid contribution rho g h, so the sky blanket and the liquid stack both count.",
+                    feedback:
+                      "Exactly. That keeps open-liquid pressure as one account instead of two disconnected ideas.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "rho-gh-is-total-pressure",
+                    label: "Treat rho g h as the total pressure directly, because once the point is under a liquid surface the air above is no longer relevant to what the patch feels.",
+                    feedback:
+                      "That drops the sky blanket completely. In an open liquid, the atmosphere is still pressing on the surface and contributes to the total.",
+                  },
+                  {
+                    value: "air-and-liquid-never-meet",
+                    label: "Treat atmospheric pressure and liquid pressure as separate cases, because air pressure belongs to weather problems while liquid pressure belongs to depth problems and the two should not be mixed.",
+                    feedback:
+                      "That splits one real loading story into two fake compartments. Open-liquid total pressure is built from both parts together.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads open-liquid pressure as sky blanket plus liquid stack.",
+                retryLabel: "That note would hide the total-pressure story the lesson needs.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m4-l6-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the rho g h only shortcut before it spreads",
+                  scenario:
+                    "A trainee has written that total pressure below an open liquid surface is just rho g h, while another has written that air pressure stops mattering once the point is below the surface.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-total-pressure-story",
+                      label: "Repair both ideas together: rho g h is the liquid contribution only, and total open-liquid pressure adds the atmospheric sky blanket to that liquid stack load.",
+                      feedback:
+                        "Exactly. That restores the full total-pressure account in one move.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rho-gh-usually-enough",
+                      label: "Tell them rho g h is usually close enough to total pressure in liquid questions, because the air part mainly matters for weather and altitude rather than for what happens under the liquid.",
+                      feedback:
+                        "That would keep the main shortcut alive. The atmosphere is part of the total at every open surface.",
+                    },
+                    {
+                      value: "air-pressure-replaces-liquid",
+                      label: "Tell them to focus mainly on atmospheric pressure in open liquids, because once the surface is open the liquid part only fine-tunes the answer after the sky pressure has already set it.",
+                      feedback:
+                        "That swings too far the other way. The liquid stack still adds a real contribution below the surface.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps sky blanket and liquid stack in one pressure account.",
+                  retryLabel: "That would leave the total-pressure misconceptions active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m4-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line open-liquid rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right anchor before the total-pressure examples begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "open-liquid-anchor",
+                      label: "In an open liquid, the point carries both the atmospheric sky blanket and the liquid stack, so total pressure is p_atm plus rho g h.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rho-gh-anchor",
+                      label: "Open-liquid pressure is mainly the same as rho g h, because the liquid stack is the part that actually changes with depth and so it tells the whole pressure story by itself.",
+                      feedback:
+                        "That would build the main shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "atmosphere-only-anchor",
+                      label: "Open-liquid pressure is mainly about atmospheric pressure, because the air load sets the real pressure and the liquid only adds small corrections underneath.",
+                      feedback:
+                        "That would erase the liquid contribution from the main rule.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right open-liquid rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m4-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the total-pressure vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps atmospheric pressure, liquid contribution, and total pressure doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "total-pressure-language",
+                      label: "Atmospheric pressure is the sky blanket load. Rho g h is the liquid contribution from depth. Total pressure below an open surface is the sum of both contributions.",
+                      feedback:
+                        "Exactly. That keeps each term tied to a clear part of the story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rho-gh-means-total-language",
+                      label: "Treat rho g h as another name for total pressure whenever the point is in a liquid, because the fluid stack already includes everything above the patch that matters.",
+                      feedback:
+                        "That blurs liquid contribution and total pressure into the same label when the lesson needs them separate.",
+                    },
+                    {
+                      value: "air-pressure-means-weather-only",
+                      label: "Treat atmospheric pressure mainly as weather vocabulary, because once a question turns to liquids the air part stops being part of the real pressure model.",
+                      feedback:
+                        "That disconnects the atmosphere from the exact total-pressure story this lesson is teaching.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the total-pressure model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m4-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they stop at the liquid part",
+                  scenario:
+                    "The trainee analyst has found rho g h and is about to finish, even though the question asks for total pressure below an open surface.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "separate-liquid-part-then-add-atmosphere",
+                      label: "Start by naming what the question wants: liquid contribution or total pressure. If it wants the total in an open liquid, find rho g h first and then add the atmospheric part deliberately.",
+                      feedback:
+                        "Exactly. That gives the analyst a clean two-stage method instead of stopping halfway.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "always-stop-at-rho-gh",
+                      label: "Stop once rho g h is found, because any atmospheric effect is already included in the idea of being under a fluid and does not need a separate step.",
+                      feedback:
+                        "That is the exact shortcut this lesson is trying to block.",
+                    },
+                    {
+                      value: "always-start-with-atmosphere-only",
+                      label: "Start and finish with the atmospheric value, because it is the constant background load and the liquid part usually only changes the numbers slightly afterward.",
+                      feedback:
+                        "That would hide the liquid contribution instead of combining it properly.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean total-pressure method.",
+                  retryLabel: "That instruction would send the analyst back into incomplete pressure accounting.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m4-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the rho g h equals total shortcut",
+                  scenario:
+                    "One crew member keeps using rho g h as the final answer in open-liquid questions and calling the atmospheric part an optional detail.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "rho-gh-is-only-liquid-part",
+                      label: "Do not treat rho g h as the whole answer in an open liquid. It is only the liquid part of the load; total pressure still includes the atmospheric sky blanket above the surface.",
+                      feedback:
+                        "Exactly. That warning blocks the main shortcut this lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "air-part-only-matters-at-high-altitude",
+                      label: "Warn only that the atmospheric part matters at unusual altitudes, because near the ground most liquid questions can safely ignore it without changing the real story much.",
+                      feedback:
+                        "That would keep the shortcut alive instead of stopping it.",
+                    },
+                    {
+                      value: "liquid-part-only-matters-when-deep",
+                      label: "Warn mainly that the liquid part matters only at large depths, because the atmosphere usually settles the pressure pattern before the liquid is even considered.",
+                      feedback:
+                        "That would hide the need to account for both contributions together.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now keep total pressure and liquid contribution separate.",
+                  retryLabel: "That warning would leave the main open-liquid trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m4-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the sky-blanket analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why an open-liquid point feels both the air load above the surface and the liquid stack below it.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "blanket-plus-books",
+                      label: "Think of the point as carrying a blanket already laid over it, then extra books stacked on top. The blanket is the atmospheric part and the books are the liquid stack, so the total load is both together.",
+                      feedback:
+                        "Exactly. That analogy keeps the two contributions visible in one combined picture.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "books-replace-blanket",
+                      label: "Think of the liquid stack replacing the blanket once it is added, because the new material above the point takes over the pressure story completely by itself.",
+                      feedback:
+                        "That drops the atmospheric part instead of combining it with the liquid part.",
+                    },
+                    {
+                      value: "blanket-makes-books-irrelevant",
+                      label: "Think of the blanket as the real load and the books as decoration, because the background air pressure settles the whole pressure story before depth is considered.",
+                      feedback:
+                        "That swings too far the other way and hides the liquid contribution.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the open-liquid pressure story clean instead of distorting it.",
+                  retryLabel: "That analogy would pull the lesson away from the right total-pressure picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M4_L5") {
