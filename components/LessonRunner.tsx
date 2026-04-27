@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M4_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m4-l3-liquid-stack-board",
+                badge: "Stack board",
+                title: "Read the liquid-layer stack before the room blames tank shape",
+                scenario:
+                  "The Liquid Stack board compares a shallow patch, a deeper patch, and a denser liquid at the same depth. One trainee keeps saying the wider tank should give greater pressure, while another only checks depth and forgets the liquid itself can change the load.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "depth-density-g-set-pressure",
+                    label: "Read the board as a layer-stack story: pressure at a liquid patch is set by depth, liquid density, and World Pull together, while tank width is not one of the hydrostatic factors.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored to the real hydrostatic factors instead of container shape.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "wider-tank-more-pressure",
+                    label: "Treat the wider tank as the higher-pressure case, because more liquid spread across the container should push harder on any patch inside it.",
+                    feedback:
+                      "That confuses total liquid amount with local pressure. Width is not part of p = rho g h at one location.",
+                  },
+                  {
+                    value: "depth-only-matters",
+                    label: "Treat depth as the whole story, because once the patch is lower the liquid type and World Pull only fine-tune the answer after the main comparison is done.",
+                    feedback:
+                      "That leaves two real factors out of the model. Density and World Pull can change the pressure even when depth stays fixed.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads liquid pressure as a layer-stack story instead of a tank-shape story.",
+                retryLabel: "That note would send the room back into the wrong hydrostatic picture.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m4-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the shape and depth-only shortcuts",
+                  scenario:
+                    "A trainee has written that wider tanks create more pressure at the same depth, while another has written that only depth matters once the patch is underwater.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-shape-and-depth-only",
+                      label: "Repair both ideas together: liquid pressure depends on depth, density, and World Pull, and vessel width or outline does not enter the local patch-load rule.",
+                      feedback:
+                        "Exactly. That repairs both shortcuts at the hydrostatic-rule level.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shape-still-matters-a-bit",
+                      label: "Tell them depth is the main factor, but tank width still matters a little because larger containers hold more liquid and so press harder overall.",
+                      feedback:
+                        "That keeps the shape misconception alive. Local pressure at a point does not care how wide the vessel is.",
+                    },
+                    {
+                      value: "depth-alone-is-enough",
+                      label: "Tell them depth is enough for comparisons, because density and World Pull usually stay in the background unless the arithmetic becomes difficult.",
+                      feedback:
+                        "That demotes two real factors into decoration. Density and World Pull belong in the first model, not only in cleanup.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses the full hydrostatic rule instead of shape or depth-only shortcuts.",
+                  retryLabel: "That would leave the main liquid-pressure misconceptions active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m4-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line hydrostatic rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the lesson with the right anchor before any calculations begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "hydrostatic-anchor",
+                      label: "Liquid pressure at a point comes from the layer stack above it, so it increases with depth, density, and World Pull rather than with tank shape.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "depth-only-anchor",
+                      label: "Liquid pressure mainly depends on depth, and the liquid type only matters if the question is trying to make the numbers awkward.",
+                      feedback:
+                        "That would build a shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "container-anchor",
+                      label: "Liquid pressure mainly depends on how much liquid the whole container is holding, so wider or fuller tanks should press more strongly at each point.",
+                      feedback:
+                        "That would anchor the lesson to the wrong picture from the start.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right hydrostatic rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m4-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the liquid-pressure vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps depth, density, and World Pull doing different jobs in the same rule.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "rho-g-h-language",
+                      label: "Depth tells how tall the liquid stack is, density tells how heavy each layer is, and World Pull tells how strongly that stack loads the patch. Together they form p = rho g h.",
+                      feedback:
+                        "Exactly. That keeps each term tied to a real part of the pressure story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rho-means-depth-too",
+                      label: "Treat density as almost the same as depth, because both mainly tell you how much liquid is pressing and can usually be blended into one idea.",
+                      feedback:
+                        "That blurs two different parts of the model. Depth and density do not do the same job.",
+                    },
+                    {
+                      value: "g-is-just-a-number",
+                      label: "Treat World Pull as mostly a number that appears in calculations, because the real physical story is already complete once depth and liquid type are known.",
+                      feedback:
+                        "That hides one of the three physical factors. World Pull belongs to the story, not only to the arithmetic.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the hydrostatic model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m4-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare one factor at a time",
+                  scenario:
+                    "The trainee analyst is about to choose the higher-pressure case using only the greater depth, even though the liquids differ and the question is meant to compare the full rho g h picture.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-all-three-factors",
+                      label: "Start by checking depth, density, and World Pull together. If one factor rises while another falls, keep the comparison inside one rho g h story before deciding which pressure is greater.",
+                      feedback:
+                        "Exactly. That gives the analyst a real hydrostatic comparison method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "depth-first-almost-always",
+                      label: "Start with depth and usually stop there, because liquid-pressure comparisons are mostly really depth questions unless the numbers are very unusual.",
+                      feedback:
+                        "That would bake the main shortcut into the method. Density and World Pull can both change the outcome.",
+                    },
+                    {
+                      value: "density-first-almost-always",
+                      label: "Start with the denser liquid every time, because heavier liquid should dominate the pressure story even if the other point is deeper.",
+                      feedback:
+                        "That just replaces one single-factor shortcut with another.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean three-factor comparison method.",
+                  retryLabel: "That instruction would send the analyst back into shortcut thinking.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m4-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the container-shape shortcut",
+                  scenario:
+                    "One crew member keeps pointing to the widest tank and saying it must create the greatest pressure at the marked patch because it holds more liquid overall.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "local-pressure-not-whole-tank-size",
+                      label: "Do not use whole-tank size as the pressure test. At one patch, liquid pressure is local and depends on the layer stack above that point, not on the vessel width elsewhere.",
+                      feedback:
+                        "Exactly. That warning blocks the main container-shape shortcut this lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "width-helps-if-depth-close",
+                      label: "Warn that width usually matters when the depths are close, because the larger tank has more liquid available to push and so can edge the pressure higher.",
+                      feedback:
+                        "That would keep the shape misconception alive instead of stopping it.",
+                    },
+                    {
+                      value: "shape-matters-more-than-density",
+                      label: "Warn mainly against ignoring vessel shape, because liquid density only changes the numbers after the container geometry has set the pressure pattern first.",
+                      feedback:
+                        "That reverses the lesson completely. Shape is not one of the hydrostatic factors here.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist the container-shape shortcut.",
+                  retryLabel: "That warning would leave the main hydrostatic trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m4-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the liquid-stack analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a deeper or denser liquid creates greater pressure without drifting into container-shape talk.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "stacked-blankets-or-books",
+                      label: "Think of the patch like the bottom of a stack: a taller stack gives more load above it, and denser layers make each level heavier even when the stack height stays the same.",
+                      feedback:
+                        "Exactly. That analogy keeps depth and density visible in the same picture.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "wider-shelf-more-load",
+                      label: "Think of a wider shelf carrying more load because the full spread is larger, so a wider tank should also create more pressure at the same depth.",
+                      feedback:
+                        "That drifts straight back into the shape misconception the analogy is supposed to defeat.",
+                    },
+                    {
+                      value: "deeper-only-heavier",
+                      label: "Think only about adding more layers on top, because density changes are too small to matter in the real pressure story once the depth has been fixed.",
+                      feedback:
+                        "That would hide one of the lesson's main comparison moves. Denser layers matter too.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the liquid-stack story clean instead of distorting it.",
+                  retryLabel: "That analogy would pull the lesson away from the right hydrostatic picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M4_L2") {
