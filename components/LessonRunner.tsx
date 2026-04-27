@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1"
         ? (() => {
+            if (lessonId === "F3_L1") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f3-l1-work-transfer-board",
+                  badge: "Transfer board",
+                  title: "Read the moving-versus-stuck comparison",
+                  scenario:
+                    "The energy room is comparing a crate that moves under a pull with a wall that never moves under a push. One trainee keeps saying the bigger effort always means more work, even if nothing moves.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "movement-in-force-direction",
+                      label: "Work is done when the force causes displacement in its direction, so the moving crate gains transferred energy while the stuck wall case gives zero work on the wall.",
+                      feedback:
+                        "Exactly. That keeps work tied to energy transfer through displacement, not to effort alone.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-alone-means-work",
+                      label: "A large force always means a large amount of work, even if the object stays still, because the force is still being applied.",
+                      feedback:
+                        "That is the trap. Force by itself is not enough; without displacement in the force direction, the work on the object is zero.",
+                    },
+                    {
+                      value: "any-movement-counts",
+                      label: "Any movement in the scene counts as work, even if the object does not move in the direction of the force that is being considered.",
+                      feedback:
+                        "This lesson keeps the displacement tied to the same force interaction. The movement has to be in the force direction for that force to do work in the simple model.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now separate effort from energy transfer cleanly.",
+                  retryLabel: "That note would keep the first work-done misunderstanding alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f3-l1-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first work note",
+                    scenario:
+                      "A trainee has written that pushing hard on a wall is a lot of work because the person is trying hard. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "no-displacement-no-work",
+                        label: "In physics, the push does zero work on the wall if the wall does not move, because no displacement happens in the force direction.",
+                        feedback:
+                          "Exactly. That keeps the lesson using the physics meaning of work instead of the everyday meaning of effort.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "effort-equals-work",
+                        label: "The push still counts as a lot of work because effort alone decides the size of the work done.",
+                        feedback:
+                          "That is the mistake to remove. Work in this lesson depends on force and displacement together, not on effort by itself.",
+                      },
+                      {
+                        value: "time-makes-work",
+                        label: "The longer the person pushes, the more work must be done on the wall, even if the wall stays still.",
+                        feedback:
+                          "Time can matter in power questions, but this lesson's work idea still needs displacement in the force direction.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The zero-displacement trap is now cleared.",
+                    retryLabel: "That would leave the effort-equals-work mistake in place.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f3-l1-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line work rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner starts the work-and-energy sequence from the same anchor idea.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "work-is-energy-transfer",
+                        label: "Work is the energy transferred when a force moves an object through a distance in the force direction.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "work-is-force-only",
+                        label: "Work is just the size of the force, provided the force acts for long enough.",
+                        feedback:
+                          "That drops the displacement idea. This lesson needs force and movement in the force direction together.",
+                      },
+                      {
+                        value: "work-is-effort",
+                        label: "Work is how hard the person feels they are trying, which is why the physical motion matters less than the effort.",
+                        feedback:
+                          "The lesson is moving away from everyday effort language. The core idea is energy transfer through displacement caused by a force.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean work-and-energy anchor.",
+                    retryLabel: "That line would blur work back into force or effort.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f3-l1-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the work analyst",
+                    scenario:
+                      "A trainee analyst wants to multiply numbers straight away without checking whether the chosen force actually causes displacement in its direction.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "match-force-and-displacement",
+                        label: "First identify the force and the displacement from the same interaction, confirm the displacement is in the force direction, then use W = F × s and read the answer as energy transferred.",
+                        feedback:
+                          "Exactly. That method keeps the physics story intact before the arithmetic starts.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "multiply-any-force-distance",
+                        label: "As soon as a force and a distance appear anywhere in the question, multiply them because work is always force times distance.",
+                        feedback:
+                          "That shortcut is too loose. The force and displacement must belong to the same interaction, and the displacement has to count in the force direction.",
+                      },
+                      {
+                        value: "read-joules-last",
+                        label: "Ignore the physical meaning until the end; the important part is to get a number first and only then decide whether it represents work.",
+                        feedback:
+                          "This lesson wants the energy-transfer meaning present from the start, not added as an afterthought.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable work-done method.",
+                    retryLabel: "That instruction would send the analyst into calculator-first thinking.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f3-l1-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the force-alone shortcut",
+                    scenario:
+                      "One crew member keeps saying that any force automatically means work is being done. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "force-needs-displacement",
+                        label: "A force alone does not guarantee work. In this lesson, work needs displacement in the force direction as well.",
+                        feedback:
+                          "Exactly. That warning protects the key distinction this lesson is building.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "all-forces-do-work",
+                        label: "Any force does work because the force itself carries energy whether or not the object moves.",
+                        feedback:
+                          "That keeps the trap alive. The lesson is specifically separating force from work done by that force.",
+                      },
+                      {
+                        value: "time-replaces-displacement",
+                        label: "If the force acts for long enough, time can replace displacement and still guarantee work.",
+                        feedback:
+                          "Time becomes important in power, but this work model still needs displacement in the force direction.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now checks for displacement before calling it work.",
+                    retryLabel: "That warning would leave the force-alone shortcut active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f3-l1-analogy",
+                    badge: "Story relay",
+                    title: "Choose the transfer-story bridge",
+                    scenario:
+                      "The team wants one analogy line that keeps the focus on what is transferred and what has to change before the work equation is used.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "transfer-story",
+                        label: "Use the analogy by asking what is being transferred, what force causes the change, and what displacement shows that the transfer really happened.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving the work-and-energy meaning instead of replacing it.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "effort-story",
+                        label: "Use an effort story, because as long as the person is straining the analogy already proves that work is being done.",
+                        feedback:
+                          "That sends the lesson back to everyday effort language, which is exactly what this section is trying to clean up.",
+                      },
+                      {
+                        value: "formula-story",
+                        label: "Use the analogy only to remember the symbols W, F, and s, because the physical transfer story matters less once the formula is known.",
+                        feedback:
+                          "This lesson wants the analogy to support the physics meaning before the formula is used, not to shrink the idea into symbol recall.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the transfer story without flattening it into effort or symbols.",
+                    retryLabel: "That analogy would pull the lesson away from its core transfer meaning.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F2_L6") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
