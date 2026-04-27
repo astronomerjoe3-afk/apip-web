@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,282 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M4_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m4-l1-patch-load-visual",
+                badge: "Patch board",
+                title: "Freeze the footprint story before the room treats pressure as force alone",
+                scenario:
+                  "The Patch Load display shows the same push spread across narrow and wide footprints. A trainee keeps saying the patch load must stay the same because the total push does not change.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "same-push-different-crowding",
+                    label: "Read the board as a crowding story: the same total push can give different pressure because pressure depends on how many surface patches share that push.",
+                    feedback:
+                      "Exactly. That keeps pressure tied to force per area instead of force alone.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "same-force-same-pressure",
+                    label: "Treat the total push as the whole story, because if the force stays the same the floor should feel the same load regardless of footprint.",
+                    feedback:
+                      "That leaves area out of the story completely. This lesson exists to stop that move.",
+                  },
+                  {
+                    value: "bigger-footprint-more-pressure",
+                    label: "Assume a wider footprint means more pressure, because more shoe or machine base touching the floor should press the surface harder overall.",
+                    feedback:
+                      "That reverses the footprint idea. Wider contact spreads the same push across more area, so the pressure falls.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads pressure as patch crowding instead of force alone.",
+                retryLabel: "That note would pull the lesson back into the wrong pressure story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "pressure units") {
+                return {
+                  id: "m4-l1-pressure-units",
+                  badge: "Unit desk",
+                  title: "Translate the pascal before it turns into a memorized label",
+                  scenario:
+                    "The unit board says Pa and N/m^2, but a trainee is treating pascal like a special symbol to memorize rather than a force-and-area relationship.",
+                  prompt: "Choose the clarification to send.",
+                  options: [
+                    {
+                      value: "pa-means-n-per-square-metre",
+                      label: "Post that 1 Pa means 1 newton of force spread over 1 square metre of area. The unit itself repeats the pressure story in compact form.",
+                      feedback:
+                        "Exactly. That keeps the unit tied to the real relationship instead of turning it into a label only.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pa-means-force-only",
+                      label: "Say the pascal is mainly another way to write force, because pressure questions are really just force questions with an extra symbol added for convenience.",
+                      feedback:
+                        "That erases area from the unit. Pressure is not just force with new letters.",
+                    },
+                    {
+                      value: "pa-means-area-only",
+                      label: "Say the pascal mainly tells you about the size of the footprint, because the area part is the only new thing pressure adds beyond everyday pushing.",
+                      feedback:
+                        "That swings too far the other way. The unit keeps force and area together, not one without the other.",
+                    },
+                  ],
+                  successLabel: "Clarification sent. The room now reads the pascal as a relationship, not a symbol only.",
+                  retryLabel: "That would leave the pressure unit detached from its meaning.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m4-l1-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the force-only shortcut",
+                  scenario:
+                    "A trainee has written that greater force always means greater pressure, and another has added that footprint width is mostly cosmetic once the push is fixed.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "pressure-needs-force-and-area",
+                      label: "Repair both ideas at once: pressure depends on force and area together, so the same push can produce different patch loads when the footprint changes.",
+                      feedback:
+                        "Exactly. That repairs the main pressure misconception at its root.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-main-area-detail",
+                      label: "Keep force as the main idea and explain that area only becomes worth mentioning when the numbers are awkward or the footprint looks unusually small.",
+                      feedback:
+                        "That still demotes area into an afterthought. The lesson needs force and area working together from the start.",
+                    },
+                    {
+                      value: "area-main-force-detail",
+                      label: "Keep area as the main idea and explain that once a narrow patch is spotted the total push hardly matters because the contact story is already settled.",
+                      feedback:
+                        "That leaves force out of the relationship. Pressure is not area alone any more than it is force alone.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps force and area together in one pressure story.",
+                  retryLabel: "That would leave the force-only shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m4-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line pressure rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the lesson with the right anchor before the examples begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "pressure-anchor",
+                      label: "Pressure in solids is the crowdedness of a push across area: the same force can give different pressures if the contact area changes.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-anchor",
+                      label: "Pressure is mainly just another way of talking about a push, and the area details mostly help tidy up the arithmetic afterward.",
+                      feedback:
+                        "That would put the main misconception directly into the anchor sentence.",
+                    },
+                    {
+                      value: "footprint-anchor",
+                      label: "Pressure is mainly about footprint size, and force only matters once two footprints happen to match.",
+                      feedback:
+                        "That would split the relationship apart again. The anchor has to keep force and area tied together.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right pressure rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m4-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the pressure vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps force, area, and pressure doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "pressure-force-area-language",
+                      label: "Pressure compares force with area. Force is the total push, area is the size of the contact patch, and pressure is the push per unit area.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary aligned with the relationship.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pressure-is-force-language",
+                      label: "Treat pressure and force as almost interchangeable words, because one usually stands in for the other once the surface being discussed is obvious.",
+                      feedback:
+                        "That would collapse the whole lesson into the wrong language.",
+                    },
+                    {
+                      value: "pressure-is-area-language",
+                      label: "Treat pressure mainly as a footprint word, because the area sets the contact story and the total push can usually be understood from context later.",
+                      feedback:
+                        "That leaves force out of the relationship. The terms need to stay distinct.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the pressure model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m4-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before the bigger-force reflex takes over",
+                  scenario:
+                    "The trainee analyst is about to compare two pressure cases by force alone before checking whether the contact areas match.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-force-and-area-together",
+                      label: "Start by checking both force and area. If force stays fixed, compare the areas; if area stays fixed, compare the forces; if both change, keep them in one pressure ratio story before calculating.",
+                      feedback:
+                        "Exactly. That gives the analyst a real pressure method instead of a force reflex.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "compare-force-first",
+                      label: "Start with the bigger force every time, because that is the strongest clue and the area mostly fine-tunes the answer later if needed.",
+                      feedback:
+                        "That is the exact reflex this lesson is trying to break.",
+                    },
+                    {
+                      value: "compare-area-first",
+                      label: "Start with the smaller area every time, because footprint size is the true pressure clue and the total push mostly just confirms what the footprint already suggests.",
+                      feedback:
+                        "That just flips the same single-factor mistake the other way around.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean pressure-comparison method.",
+                  retryLabel: "That instruction would send the analyst into single-factor thinking again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m4-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the same-force-same-pressure shortcut",
+                  scenario:
+                    "One crew member keeps saying the same total push must mean the same pressure, even when the contact patch gets much narrower.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "do-not-ignore-contact-area",
+                      label: "Do not ignore the contact area. The same push on fewer patches means a higher pressure, and the same push on more patches means a lower pressure.",
+                      feedback:
+                        "Exactly. That warning blocks the main shortcut this lesson is trying to stop.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-usually-enough",
+                      label: "Warn only that force is usually enough for quick comparisons, but area should be checked later if the footprints look dramatically different.",
+                      feedback:
+                        "That would keep the shortcut alive. Area matters as part of the first comparison, not as an optional cleanup step.",
+                    },
+                    {
+                      value: "area-usually-enough",
+                      label: "Warn only that area is usually enough for quick comparisons, because once the narrow patch is found the push details rarely change the real conclusion.",
+                      feedback:
+                        "That would leave force out of the warning. Pressure needs both parts visible.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist the same-force-same-pressure shortcut.",
+                  retryLabel: "That warning would leave the main pressure trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m4-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the footprint analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a narrow support can damage a surface even when the total push is unchanged.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "heel-vs-flat-sole",
+                      label: "Think of the same person standing on a narrow heel or a flat sole: the total push on the floor can stay the same, but the narrow contact patch crowds that push into a much larger pressure.",
+                      feedback:
+                        "Exactly. That analogy keeps force fixed while making the area story visible.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heavier-person-only",
+                      label: "Think mainly about a heavier person, because more mass is the clearest way to explain pressure and the footwear shape only changes the look of the example.",
+                      feedback:
+                        "That would push the analogy back toward force alone instead of the force-area relationship.",
+                    },
+                    {
+                      value: "bigger-shoe-more-damage",
+                      label: "Think of a bigger shoe as doing more damage because it touches more of the floor, so the larger contact patch should mean more pressure overall.",
+                      feedback:
+                        "That reverses the whole analogy. Larger contact patch spreads the same push more thinly.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the patch-load story clean instead of blurring it.",
+                  retryLabel: "That analogy would distort the pressure idea.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M3_L6") {
