@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6"
         ? (() => {
+            if (lessonId === "F3_L6") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f3-l6-braking-board",
+                  badge: "Safety board",
+                  title: "Read the braking-risk comparison",
+                  scenario:
+                    "The safety room is comparing the same car at a normal speed and at a doubled speed, then comparing a short stop with a longer stop. One trainee keeps treating all the changes as one simple force story.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "momentum-energy-time-together",
+                      label: "Higher speed raises momentum directly and kinetic energy even more strongly, while longer stopping time reduces the average force for the same momentum change.",
+                      feedback:
+                        "Exactly. That keeps the lesson’s three linked safety ideas working together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-only-affects-force",
+                      label: "Speed changes only the braking force, because momentum and kinetic energy are just two names for the same speed effect.",
+                      feedback:
+                        "That is the trap. This lesson needs momentum and kinetic energy kept distinct, with speed affecting them by different amounts.",
+                    },
+                    {
+                      value: "longer-stop-removes-energy",
+                      label: "A longer stopping time makes the danger vanish because it removes the momentum change and kinetic energy problem altogether.",
+                      feedback:
+                        "Longer stopping time reduces average force, but the momentum change and the energy to be dissipated still have to be dealt with.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now read the braking story without collapsing the linked ideas together.",
+                  retryLabel: "That note would flatten the safety lesson back into one vague force story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f3-l6-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first braking note",
+                    scenario:
+                      "A trainee has written that high-speed braking is dangerous only because the force becomes larger, and that momentum and kinetic energy do not add anything important to the explanation. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "speed-raises-both",
+                        label: "High speed makes the momentum change larger and also makes the kinetic energy much larger, so braking has to manage both the force story and the energy story.",
+                        feedback:
+                          "Exactly. That correction keeps the lesson using both linked ideas instead of shrinking everything into force alone.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "force-only-matters",
+                        label: "The only useful explanation is that the force becomes larger, because momentum and kinetic energy are just extra labels for the same thing.",
+                        feedback:
+                          "That keeps the mistake alive. This lesson needs momentum, kinetic energy, and stopping time all visible together.",
+                      },
+                      {
+                        value: "energy-only-matters",
+                        label: "Only kinetic energy matters in braking, so the momentum change and stopping-time comparison can be ignored once the speed is known.",
+                        feedback:
+                          "That drops too much of the safety story. The force still depends on how quickly the momentum is changed during the stop.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The full braking-safety story is now back in place.",
+                    retryLabel: "That would leave the one-factor braking mistake in place.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f3-l6-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line braking rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner begins this lesson with the right integrated safety anchor.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "braking-anchor",
+                        label: "Braking force depends on the rate of change of momentum, while high speed also makes the kinetic energy much larger, so safer stopping depends on both slowing the momentum change and managing the energy.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "momentum-only-anchor",
+                        label: "Braking is only about momentum change, so kinetic energy adds no extra reason for high speed to be dangerous.",
+                        feedback:
+                          "That is too narrow. This lesson needs the stronger speed effect in kinetic energy kept visible as well.",
+                      },
+                      {
+                        value: "time-only-anchor",
+                        label: "Stopping time is the whole braking story, because once you lengthen the stop every other safety quantity becomes unimportant.",
+                        feedback:
+                          "Longer stopping time matters, but the lesson still needs the momentum change and energy demand in view.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean braking-safety anchor.",
+                    retryLabel: "That line would blur the linked safety ideas at the start of the lesson.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f3-l6-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the safety analyst",
+                    scenario:
+                      "A trainee analyst wants to grab one familiar formula and stop there instead of deciding whether the question is about momentum, kinetic energy, or average force from stopping time.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "identify-which-story",
+                        label: "First decide which part of the safety story the question is asking about: momentum now, kinetic energy now, or force from changing momentum over time. Then connect the results instead of treating them as separate unrelated answers.",
+                        feedback:
+                          "Exactly. That method keeps the lesson using one linked safety story rather than disconnected formulas.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "always-start-with-force",
+                        label: "Start with force in every braking question, because once the force is known the momentum and energy ideas can be ignored.",
+                        feedback:
+                          "That is too narrow. Some questions start from momentum or kinetic energy first, and the lesson wants those linked before force is discussed.",
+                      },
+                      {
+                        value: "speed-alone-solves-it",
+                        label: "Start with speed alone, because high speed already tells you every braking answer without needing mass or stopping time.",
+                        feedback:
+                          "Speed matters a lot, but the lesson still needs mass for momentum and kinetic energy, and stopping time for force.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable braking-safety method.",
+                    retryLabel: "That instruction would push the analyst back toward one-formula shortcut thinking.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f3-l6-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the momentum-equals-energy shortcut",
+                    scenario:
+                      "One crew member keeps saying that momentum and kinetic energy rise in the same way with speed, so there is no need to keep them separate in braking questions. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "different-speed-effects",
+                        label: "Momentum rises directly with speed, but kinetic energy rises with speed squared, so high-speed braking becomes especially demanding if you blur those trends together.",
+                        feedback:
+                          "Exactly. That warning protects one of the key comparisons this lesson is building.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "same-speed-effect",
+                        label: "Momentum and kinetic energy change in the same way with speed, so you can safely use either one as a full replacement for the other in braking explanations.",
+                        feedback:
+                          "That keeps the trap alive. This lesson needs the direct momentum trend and the squared energy trend kept separate.",
+                      },
+                      {
+                        value: "time-removes-difference",
+                        label: "Once stopping time is included, the difference between momentum and kinetic energy no longer matters in the safety explanation.",
+                        feedback:
+                          "Stopping time matters for force, but it does not erase the stronger speed effect in kinetic energy.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now keeps momentum and kinetic energy doing different jobs in the safety story.",
+                    retryLabel: "That warning would leave the momentum-equals-energy shortcut active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f3-l6-analogy",
+                    badge: "Story relay",
+                    title: "Choose the braking-safety bridge",
+                    scenario:
+                      "The team wants one analogy line that keeps learners asking what has to be removed, how fast that removal happens, and why higher speed makes the job disproportionately harder before any formula is used.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "removal-rate-and-load",
+                        label: "Use the analogy by asking how much motion load must be removed, how quickly the stop tries to remove it, and why a faster start makes both the motion change and the energy burden more demanding.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving the full braking-safety meaning instead of replacing it.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "force-only-bridge",
+                        label: "Use the analogy mainly to compare force spikes, because once the strongest force is identified the rest of the braking story is already settled.",
+                        feedback:
+                          "That would flatten the lesson into force alone. The analogy still has to protect momentum change, stopping time, and the stronger speed effect in energy.",
+                      },
+                      {
+                        value: "time-only-bridge",
+                        label: "Use the analogy mainly to compare stopping times, because longer time automatically explains every other safety quantity in the lesson.",
+                        feedback:
+                          "Longer time matters, but the analogy still has to keep the changing momentum and energy demand in play.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the braking-safety story without flattening it into a single-factor shortcut.",
+                    retryLabel: "That analogy would blur the integrated safety story instead of clarifying it.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F3_L5") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
