@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1"
           ? (() => {
+              if (lessonId === "F5_L1") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f5-l1-signal-board",
+                    badge: "Signal board",
+                    title: "Read the traveling-pattern comparison",
+                    scenario:
+                      "The Signal-Stadium room is comparing a ripple crest crossing water with a stadium crest crossing a row of seats. One trainee keeps saying the cork or the spectators must travel with the crest if the wave is really moving.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "pattern-travels-medium-oscillates",
+                        label: "The disturbance pattern travels across the medium, but each part of the medium only oscillates locally. The cork bobs in place and each spectator stands and sits where they already are.",
+                        feedback:
+                          "Exactly. That keeps the traveling pattern separate from the local motion of the medium.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "medium-travels-with-crest",
+                        label: "Because the crest crosses the space, the water or the spectators must travel all the way across with it or the wave could not move forward.",
+                        feedback:
+                          "That is the trap. A wave can propagate even when each part of the medium only oscillates around one position.",
+                      },
+                      {
+                        value: "bigger-bob-means-faster-wave",
+                        label: "The part of the medium that moves through the larger up-and-down motion must also be the part that sets the wave speed across the whole space.",
+                        feedback:
+                          "Local oscillation size is not what the lesson uses to decide the wave speed. The front travel and time do that job.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read the wave as a traveling disturbance with local medium motion.",
+                    retryLabel: "That note would blur the difference between front travel and local oscillation.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f5-l1-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first wave note",
+                      scenario:
+                        "A trainee has written that the medium itself moves across the whole space with the crest. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "pattern-propagates-medium-local",
+                          label: "In this lesson, the pattern propagates through the medium while each part of the medium only oscillates locally about one position.",
+                          feedback:
+                            "Exactly. That correction secures the pattern-versus-medium distinction the lesson depends on.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "crest-carries-medium-along",
+                          label: "The crest carries the medium along with it, but the movement is small enough that we usually ignore the full-distance drift.",
+                          feedback:
+                            "That keeps the mistake alive. The lesson needs local oscillation, not hidden full-distance transport.",
+                        },
+                        {
+                          value: "speed-comes-from-amplitude",
+                          label: "The key correction is that the wave speed depends on how far each bit of the medium moves up and down during one pulse.",
+                          feedback:
+                            "Amplitude and local displacement are not the speed rule this lesson is protecting.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now treats the wave as a traveling pattern instead of a material convoy.",
+                      retryLabel: "That would leave the medium-travels shortcut active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f5-l1-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line wave rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the first wave lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "travelling-disturbance-local-oscillation",
+                          label: "A wave is a traveling disturbance: the pattern and its energy move across the medium, while each part of the medium only oscillates locally.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "wave-is-medium-motion",
+                          label: "A wave is the motion of the medium itself from one place to another, so the material is what actually travels across the route.",
+                          feedback:
+                            "That collapses the lesson into the wrong story. The pattern travels; the medium mainly oscillates locally.",
+                        },
+                        {
+                          value: "amplitude-controls-travel",
+                          label: "A wave is best understood as how far the medium moves up and down, because that local displacement is what determines the whole travel story.",
+                          feedback:
+                            "Local displacement matters for amplitude, but this lesson needs the traveling pattern distinguished from the local motion.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts from the disturbance story instead of the medium-travels shortcut.",
+                      retryLabel: "That line would blur the main wave meaning instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f5-l1-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the signal analyst",
+                      scenario:
+                        "A trainee keeps mixing together the crest crossing distance, the cork motion, and the wave speed. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "front-travel-first-local-motion-second",
+                          label: "First use the front travel distance and time to find the wave speed. Then treat the medium motion separately and describe it as local oscillation instead of full-route travel.",
+                          feedback:
+                            "Exactly. That keeps the speed calculation and the medium-motion explanation in the right order.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "medium-motion-first-speed-second",
+                          label: "First decide how far one cork or one spectator moves, because that local travel tells you how fast the whole wave must be crossing the space.",
+                          feedback:
+                            "That would make local oscillation do the wrong job. The wave speed belongs to the front travel, not to one particle crossing the whole route.",
+                        },
+                        {
+                          value: "bigger-amplitude-faster-wave",
+                          label: "First compare which wave has the larger oscillation, because the bigger motion sets the faster propagation before you use any distance-time data.",
+                          feedback:
+                            "The lesson is blocking that shortcut. Bigger oscillation does not by itself tell you the propagation speed.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable way to separate speed from local oscillation.",
+                      retryLabel: "That method would scramble the wave story instead of ordering it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f5-l1-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the people-travel-with-the-wave shortcut",
+                      scenario:
+                        "The next learner note says: 'In a stadium wave, the people travel around the stadium with the crest.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "pattern-moves-people-local",
+                          label: "The crest pattern moves around the stadium, but each person only stands and sits at one location. The wave is the traveling pattern, not the people circling the seats.",
+                          feedback:
+                            "Exactly. That warning blocks the medium-travels shortcut cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "crest-pulls-people-along",
+                          label: "The crest does pull the people around the stadium, but the motion is too small to notice unless you zoom out from the whole arena.",
+                          feedback:
+                            "That would keep the mistake alive. The lesson needs local up-down motion, not hidden travel with the crest.",
+                        },
+                        {
+                          value: "travel-is-just-bigger-motion",
+                          label: "The people do not need to change seats because the larger standing motion already counts as traveling around the stadium in wave language.",
+                          feedback:
+                            "Larger local motion is still local motion. It does not become propagation around the arena.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps pattern travel and medium motion in the right places.",
+                      retryLabel: "That warning would let the stadium-wave shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f5-l1-analogy",
+                      badge: "Story relay",
+                      title: "Choose the Signal-Stadium bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture a wave moving across a medium without turning the medium itself into a convoy that travels with the crest.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "stadium-crest-local-people",
+                          label: "Use the analogy by keeping the crest moving across the seats while each person only stands and sits locally. That way the pattern travels, but the people stay in place.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the wave lesson cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "crowd-marches-with-crest",
+                          label: "Use the analogy by having the whole crowd march with the crest, because that makes it easier to see that the wave really covers distance.",
+                          feedback:
+                            "That would destroy the key distinction this lesson is building. The analogy needs the pattern to move while the people stay local.",
+                        },
+                        {
+                          value: "bigger-stand-faster-crest",
+                          label: "Use the analogy by making the people stand higher when you want the wave to move faster, because bigger motion is the clearest way to signal propagation.",
+                          feedback:
+                            "That would mix amplitude into the wrong role. The lesson needs front travel kept separate from how large the local motion is.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports traveling-pattern meaning without slipping into the medium-travels shortcut.",
+                      retryLabel: "That analogy would blur the wave idea instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F4_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
