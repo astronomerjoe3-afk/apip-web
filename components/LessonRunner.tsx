@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,282 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M1_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m1-l3-signed-graph-visual",
+                badge: "Boost shift",
+                title: "Freeze the signed graph at the right reading",
+                scenario:
+                  "The Quest-Log signed-velocity display starts below the axis and rises through it. A trainee keeps saying any positive acceleration must mean speeding up, and any negative acceleration must mean slowing down.",
+                prompt: "Pin the right note to the screen.",
+                options: [
+                  {
+                    value: "sign-comes-from-velocity-change",
+                    label: "Choose a positive direction first. Then read the velocity sign from the axis position and the acceleration sign from the slope, remembering that a positive slope can act while the object is still moving in the negative direction.",
+                    feedback:
+                      "Exactly. That keeps sign convention, velocity sign, and slope sign in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "positive-acceleration-always-speeding-up",
+                    label: "Use positive acceleration as a direct synonym for speeding up, because the plus sign already tells you the motion is getting faster.",
+                    feedback:
+                      "That is the trap. A positive acceleration can slow an object down if the velocity is negative.",
+                  },
+                  {
+                    value: "crossing-axis-flips-acceleration-rule",
+                    label: "When the line crosses the axis, the acceleration rule resets, so the slope before the crossing no longer helps with the sign story after it.",
+                    feedback:
+                      "Crossing the axis changes the velocity sign, not the meaning of slope. The acceleration sign still comes from the slope direction.",
+                  },
+                ],
+                successLabel: "Pinned. The display now keeps velocity sign and acceleration sign separate.",
+                retryLabel: "That note would blur the signed-motion story again.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m1-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first signed-acceleration note",
+                  scenario:
+                    "A trainee has written that negative acceleration always means slowing down. You need the correction that fixes that note before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "sign-depends-on-velocity-direction-too",
+                      label: "Acceleration sign alone is not enough. Negative acceleration means the velocity is changing in the negative direction, and the object can still speed up if it is already moving negative.",
+                      feedback:
+                        "Exactly. That restores the missing comparison between velocity direction and acceleration direction.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "negative-always-slower",
+                      label: "Negative acceleration is just the formal physics way to say the object is slowing down, so no other sign comparison is needed.",
+                      feedback:
+                        "That keeps the mistake alive. Slowing down depends on whether velocity and acceleration point in opposite directions.",
+                    },
+                    {
+                      value: "ignore-direction-just-use-size",
+                      label: "The safest correction is to ignore direction and compare only the size of the speeds, because signs mostly complicate the motion story.",
+                      feedback:
+                        "This lesson exists to stop that shortcut. The signs are exactly what make the acceleration story trustworthy.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps acceleration sign separate from speeding-up language.",
+                  retryLabel: "That would leave the sign shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m1-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line signed-acceleration rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right acceleration anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "signed-rate-of-velocity-change",
+                      label: "Acceleration is the signed rate of change of velocity, so its sign comes from the chosen positive direction and the change between the starting and ending velocities.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "acceleration-is-speed-change-feeling",
+                      label: "Acceleration is mainly the feeling of speeding up or slowing down, so the sign is just a convenience added after the motion has been described.",
+                      feedback:
+                        "That turns the lesson back into intuition-only language. The sign has to come from the velocity change itself.",
+                    },
+                    {
+                      value: "slope-only-means-speed-up",
+                      label: "On a signed velocity graph, any upward slope means speeding up and any downward slope means slowing down, no matter which side of the axis the motion is on.",
+                      feedback:
+                        "That forgets the velocity sign. Upward or downward slope names the acceleration sign, not automatically whether speed rises or falls.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right signed-acceleration rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m1-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the signed-motion vocabulary board",
+                  scenario:
+                    "The crew can see the graph, but their labels are slipping. You need the vocabulary note that keeps velocity sign and acceleration sign tied to the right ideas.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "velocity-sign-and-acceleration-sign",
+                      label: "Use velocity for the signed motion value read from the axis, and use acceleration for the signed rate at which that velocity changes.",
+                      feedback:
+                        "Exactly. That keeps the vocabulary tied to the lesson's actual quantities.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-and-velocity-same-here",
+                      label: "Use speed and velocity almost interchangeably here, because once signs are on the graph the words mean the same thing anyway.",
+                      feedback:
+                        "Those are not interchangeable. Velocity carries direction, which is why the sign matters in the first place.",
+                    },
+                    {
+                      value: "acceleration-is-just-line-direction",
+                      label: "Use acceleration only as a word for whether the line points up or down, because the graph direction already replaces the physics meaning.",
+                      feedback:
+                        "The line direction helps, but acceleration still means the rate of change of velocity, not just a visual tilt label.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the signed quantities again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m1-l3-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the sign-language handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into full sign interpretation without repeating it badly.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "speed-up-and-slow-down-come-from-comparison",
+                      label: "Speeding up or slowing down comes from comparing the velocity direction with the acceleration direction, not from reading the acceleration sign in isolation.",
+                      feedback:
+                        "Exactly. That extends the vocabulary into actual sign interpretation.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "positive-means-faster-negative-means-slower",
+                      label: "Positive still means faster and negative still means slower, so the comparison step only adds clutter once the sign is known.",
+                      feedback:
+                        "That is the exact shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "zero-acceleration-means-rest",
+                      label: "Zero acceleration should be defined as rest, because a motion with no change cannot still count as a moving case.",
+                      feedback:
+                        "Zero acceleration means constant velocity, which may still be non-zero. Rest is only one special case.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would warp the sign story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m1-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the signed-motion analyst",
+                  scenario:
+                    "The trainee analyst is about to answer a sign question from intuition alone. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "choose-positive-then-subtract",
+                      label: "Choose a positive direction first. Write the starting and ending velocities with signs, subtract final minus initial, divide by time, and only then interpret what the sign means physically.",
+                      feedback:
+                        "Exactly. That gives the analyst a real signed-acceleration method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "guess-from-speed-feeling",
+                      label: "Start by deciding whether the object feels like it is speeding up or slowing down, then choose the acceleration sign that seems to match the feeling.",
+                      feedback:
+                        "That would send the analyst back into guesswork. The signs have to come from the velocity change, not from a feeling first.",
+                    },
+                    {
+                      value: "ignore-initial-sign",
+                      label: "Focus on the final velocity sign only, because the last direction tells you almost everything you need about the acceleration sign.",
+                      feedback:
+                        "The acceleration sign comes from the change between the two velocities. Ignoring the initial sign erases half the story.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable sign method.",
+                  retryLabel: "That would send the analyst back into intuition-only answers.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m1-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the negative-means-slower shortcut",
+                  scenario:
+                    "One crew member keeps saying negative acceleration always means slowing down. You need the correction that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "compare-directions-not-sign-alone",
+                      label: "Whether the object speeds up or slows down depends on how the acceleration direction compares with the velocity direction, not on the acceleration sign alone.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "negative-sign-settles-it",
+                      label: "The negative sign already settles the story, because a minus acceleration is the formal way to say the motion is calming down.",
+                      feedback:
+                        "That is the trap. A negative acceleration can speed an object up if the velocity is already negative.",
+                    },
+                    {
+                      value: "crossing-axis-is-only-case",
+                      label: "The only time the shortcut fails is when the graph crosses the axis, so it is safe everywhere else.",
+                      feedback:
+                        "The shortcut can fail whenever velocity and acceleration point the same way in the negative direction, not only at an axis crossing.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The sign shortcut will not take over the room.",
+                  retryLabel: "That warning would leave the trap alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m1-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the arrow-photo analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture signed acceleration without dropping back into vague speed feelings.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "before-after-arrow-photos",
+                      label: "Treat the motion like before-and-after photos of a signed velocity arrow: acceleration comes from how the arrow changes between the photos over the time gap.",
+                      feedback:
+                        "Exactly. That keeps the analogy tied to signed velocity change instead of loose impressions.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "hill-climb-analogy",
+                      label: "Treat the motion like climbing or descending a hill, because uphill means positive acceleration and downhill means negative acceleration no matter which way the object is already moving.",
+                      feedback:
+                        "That would drag in the wrong sign logic. The lesson needs signed velocity change, not terrain metaphors.",
+                    },
+                    {
+                      value: "single-speedometer-analogy",
+                      label: "Treat the motion like one speedometer readout, because the number getting bigger or smaller already captures the whole acceleration story without needing arrows or direction.",
+                      feedback:
+                        "This lesson needs direction kept visible. A single speedometer alone would hide the signed-velocity story.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports signed acceleration instead of warping it.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M1_L2") {
