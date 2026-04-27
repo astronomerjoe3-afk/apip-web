@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M8_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m8-l4-spread-ghost-board",
+                badge: "Lens board",
+                title: "Separate the real spread routes from the ghost image",
+                scenario:
+                  "The Spread Lens board shows the parallel route and the center route diverging after the lens. One trainee wants to call the image where the real routes go, another wants to place the image on the far side because that is where the light keeps traveling, and a third wants to mix dashed extensions in before the real routes are even clear.",
+                prompt: "Pin the note that keeps the spread-lens map honest.",
+                options: [
+                  {
+                    value: "real-first-extensions-second",
+                    label: "Trace the real spread routes first, then add dashed backward extensions: the parallel route appears to come from the near focus, and the ghost image is where those extensions meet on the object side.",
+                    feedback:
+                      "Exactly. That keeps the line roles clear and the ghost image tied to extensions, not real crossings.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "real-routes-meet-later",
+                    label: "Keep following the real routes farther on the far side, because a spread lens image should still be found where the actual light eventually meets if the page is extended enough.",
+                    feedback:
+                      "That turns a ghost image into a false real crossing. The real routes keep spreading apart.",
+                  },
+                  {
+                    value: "extensions-first",
+                    label: "Start with dashed extensions immediately and let them decide how the real routes should be drawn afterward, because the image point is the important part and the route details can be adjusted to fit it.",
+                    feedback:
+                      "That reverses the logic. The real routes must be traced first so the extensions mean something.",
+                  },
+                ],
+                successLabel: "Pinned. The room now keeps spread routes and ghost-image extensions in the right order.",
+                retryLabel: "That note would flatten the spread-lens method into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m8-l4-fix-ideas",
+                  badge: "Route repair",
+                  title: "Repair the far-side and extension-first shortcuts",
+                  scenario:
+                    "One trainee says the image must be on the far side because that is where the real light travels, while another keeps adding extensions before the real spread routes are clear.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-spread-logic",
+                      label: "Repair both ideas together: trace the real spread routes first, note that they do not meet, then use backward extensions to place the ghost image on the object side near the lens.",
+                      feedback:
+                        "Exactly. That restores both the route order and the ghost-image meaning.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-more-distance",
+                      label: "Repair the confusion by extending the far-side path farther, because a larger drawing usually reveals where the spread routes eventually gather if students are patient enough.",
+                      feedback:
+                        "That keeps the wrong real-meeting idea alive. Spread-lens real routes do not gather into the image.",
+                    },
+                    {
+                      value: "repair-with-focus-only",
+                      label: "Repair the confusion by teaching that the near focus is simply the image point for every spread-lens case, so the route work matters much less than memorizing that location.",
+                      feedback:
+                        "That flattens the geometry into a memory shortcut. The focus guides the parallel route, not every image position.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now trusts spread routes first and ghost-image extensions second.",
+                  retryLabel: "That would leave a main M8_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m8-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Spread Lens rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop hunting for a real crossing and start reading the ghost image correctly.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "spread-anchor",
+                      label: "A Spread Lens usually gives a ghost image: the real routes spread apart, the parallel route appears to come from the near focus, and backward extensions locate the image on the object side.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "far-side-anchor",
+                      label: "A Spread Lens image belongs on the far side because that is where the real light continues, even if the exact meeting point is hard to see on a short sketch.",
+                      feedback:
+                        "That would build the wrong image location into the anchor sentence.",
+                    },
+                    {
+                      value: "extension-anchor-only",
+                      label: "A Spread Lens image is found by dashed lines first, and the real routes can be treated as supporting decoration after the image has been chosen.",
+                      feedback:
+                        "That would build the wrong order into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Spread Lens rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m8-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Spread Lens vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up near focus, real spread routes, dashed backward extensions, and ghost image until the diagram sounds like every line is doing the same job.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-spread",
+                      label: "Use near focus for where the parallel route appears to come from, real spread routes for the actual refracted light, and ghost image for the extension meeting point on the object side.",
+                      feedback:
+                        "Exactly. That keeps each spread-lens term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-far-focus",
+                      label: "Use the far focus as the main target even for a Spread Lens, because any proper lens image should still be discussed through where the real light is heading after refraction.",
+                      feedback:
+                        "That scrambles the focus rule the lesson is trying to keep visible.",
+                    },
+                    {
+                      value: "term-board-image-equals-focus",
+                      label: "Use ghost image and near focus almost interchangeably, because both are on the object side and students understand the lens faster if those locations are treated as basically the same point.",
+                      feedback:
+                        "That would blur the route rule into the wrong shortcut.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the spread-lens terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m8-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they chase a false crossing",
+                  scenario:
+                    "The trainee analyst is about to keep extending the real far-side routes forward in hopes of forcing a meeting point instead of checking whether the image only exists through backward extensions.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "trace-check-extend",
+                      label: "Trace the real routes first, check whether they actually meet, then add backward extensions only after you know the image must be ghost rather than true.",
+                      feedback:
+                        "Exactly. That gives the analyst the right spread-lens workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "choose-side-first",
+                      label: "Start by deciding which side of the lens feels more plausible for the image, because the line work usually becomes easier once the likely side has been named.",
+                      feedback:
+                        "That would send the analyst straight into the guessing trap.",
+                    },
+                    {
+                      value: "focus-memory-first",
+                      label: "Start by memorizing that the near focus is the answer to most spread-lens questions, then only trace routes afterward if the sketch looks unusual.",
+                      feedback:
+                        "That would flatten the route logic into the wrong memory shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean spread-lens workflow.",
+                  retryLabel: "That would send the analyst back into a spread-lens shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m8-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the false-crossing and focus-equals-image shortcuts",
+                  scenario:
+                    "One crew member keeps searching for a real far-side crossing, while another keeps treating the near focus itself as the final image instead of a guide for one selected route.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "spread-trap-warning",
+                      label: "Do not force a real crossing and do not collapse the image into the near focus. Trace the spread routes, then use backward extensions to locate the ghost image.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "crossing-warning-only",
+                      label: "Warn mainly that students should stop forcing a far-side crossing, because once that is fixed the focus-versus-image distinction usually takes care of itself.",
+                      feedback:
+                        "That would leave the focus-equals-image shortcut mostly alive.",
+                    },
+                    {
+                      value: "focus-warning-only",
+                      label: "Warn mainly that the near focus is not automatically the image, because once students hear that clearly the temptation to hunt for a far-side crossing matters much less.",
+                      feedback:
+                        "That would leave the false-crossing shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps ghost images tied to the right line behavior.",
+                  retryLabel: "That warning would leave a main M8_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m8-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the ghost-image logic visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners understand why the image is on the object side even though no real routes meet there.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "backward-trail-analogy",
+                      label: "Think of two paths spreading away from you while their backward trail lines point to where they seemed to come from. The ghost image lives at that apparent source, not at a real meetup ahead.",
+                      feedback:
+                        "Exactly. That keeps the apparent-source logic visible without inventing a false crossing.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "late-meeting-analogy",
+                      label: "Think of the routes as taking a long detour before they finally reunite much farther on, because spread-lens images are mainly delayed real meetings.",
+                      feedback:
+                        "That would rebuild the wrong false-crossing story.",
+                    },
+                    {
+                      value: "focus-magnet-analogy",
+                      label: "Think of the near focus as a magnet point pulling the image toward itself, because that explains why the picture appears on the object side.",
+                      feedback:
+                        "That would turn the diagram into lens magic instead of route geometry.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the ghost-image logic without flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right Spread Lens model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M8_L3") {
