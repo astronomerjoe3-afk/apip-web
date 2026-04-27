@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M8_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m8-l2-bend-gate-board",
+                badge: "Gate board",
+                title: "Read the bend from the speed change, not from a lens pull",
+                scenario:
+                  "The Bend Gate board flips one route from a fast-to-slow boundary to a slow-to-fast boundary while the incident angle stays fixed. One trainee wants to say the route bends because the second medium pulls the light inward, while another keeps measuring the turn from the surface instead of the Guide Line.",
+                prompt: "Pin the note that keeps the bend story honest.",
+                options: [
+                  {
+                    value: "speed-change-guide-line",
+                    label: "Ask what happened to light speed at the boundary, then read the angle from the Guide Line: slower zone means toward the Guide Line, faster zone means away from it.",
+                    feedback:
+                      "Exactly. That keeps both the cause and the angle reference in the right place.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "lens-pull-story",
+                    label: "Treat the bend as the new medium pulling the light path inward, because the material itself is what drags the route into the turn.",
+                    feedback:
+                      "That turns refraction into a force story. The lesson needs a speed-change explanation instead.",
+                  },
+                  {
+                    value: "surface-angle-story",
+                    label: "Read the turn from the surface line first because it is easier to see, then only switch to the Guide Line if the question becomes too technical.",
+                    feedback:
+                      "That starts from the wrong reference. The Guide Line is the trusted angle line in this lesson.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads refraction from speed change and the Guide Line.",
+                retryLabel: "That note would flatten the bend into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m8-l2-fix-ideas",
+                  badge: "Bend repair",
+                  title: "Repair the lens-pull and wrong-reference shortcuts",
+                  scenario:
+                    "One trainee has written that the second medium pulls the route toward itself, while another says the surface line is good enough for comparing the bend directions.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-speed-and-guide-line",
+                      label: "Repair both ideas together: treat the turn as a boundary speed-change story, and read all angles from the Guide Line rather than the surface.",
+                      feedback:
+                        "Exactly. That restores the real cause and the right reference line.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-material-pull",
+                      label: "Keep the material-pull explanation but make it more careful, because students usually trust the bend more once the medium itself is described as causing the route to lean inward or outward.",
+                      feedback:
+                        "That keeps the wrong cause alive. The lesson needs speed-change language, not pull language.",
+                    },
+                    {
+                      value: "repair-with-surface-reference",
+                      label: "Keep the surface line as the main angle guide, because once the bend direction is correct the Guide Line is mostly optional detail.",
+                      feedback:
+                        "That keeps the wrong reference alive. The Guide Line is the trusted angle line here.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now starts from the correct bend explanation.",
+                  retryLabel: "That would leave a main M8_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m8-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line bend-gate rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop naming bend direction from memory without checking what happened to speed.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "bend-anchor",
+                      label: "Refraction happens because light changes speed at a boundary: slower means toward the Guide Line, faster means away from it.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pull-anchor",
+                      label: "Refraction mainly happens because the new material pulls or releases the light path, so the route bends according to how strongly the medium grabs it.",
+                      feedback:
+                        "That would build the wrong cause into the anchor sentence.",
+                    },
+                    {
+                      value: "surface-anchor",
+                      label: "Refraction is easiest to trust when students read the bend from the surface first and only convert to the Guide Line later if needed.",
+                      feedback:
+                        "That would build the wrong angle reference into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right bend-gate rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m8-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the refraction vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up speed change, bend direction, Guide Line, and lens behavior until refraction sounds like a vague path preference instead of a boundary rule.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-refraction",
+                      label: "Use Guide Line for the angle reference, speed change for the cause, toward the Guide Line for slower entry, and away from it for faster entry.",
+                      feedback:
+                        "Exactly. That keeps each refraction term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-material-force",
+                      label: "Use refraction mainly for the way a material steers the route, because that explains both lenses and boundaries more simply than separating speed and angle language.",
+                      feedback:
+                        "That would scramble the cause-and-reference split the lesson needs.",
+                    },
+                    {
+                      value: "term-board-surface-first",
+                      label: "Use the surface as the main angle line and treat the Guide Line as a technical backup for harder questions only.",
+                      feedback:
+                        "That would keep the wrong reference language alive.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the bend-gate terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m8-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they memorize the bend",
+                  scenario:
+                    "The trainee analyst is about to call the turn direction from memory without first asking whether the new zone is faster or slower than the first one.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "ask-speed-first",
+                      label: "Ask what happened to the speed first, then read the angle to the Guide Line. Use slower-toward and faster-away only after that comparison is clear.",
+                      feedback:
+                        "Exactly. That gives the analyst the right refraction workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "memorize-bend-only",
+                      label: "Start with the remembered bend direction rule, because if the visual matches the usual pattern there is rarely a need to reason through the speed story in detail.",
+                      feedback:
+                        "That would send the analyst straight into the memorized-shortcut trap.",
+                    },
+                    {
+                      value: "surface-first-workflow",
+                      label: "Start with the visible surface angle because it is easier to track, then worry about the speed story only if the route seems unusual.",
+                      feedback:
+                        "That would send the analyst into the wrong reference-line habit.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean speed-first bend method.",
+                  retryLabel: "That would send the analyst back into a refraction shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m8-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the pull-language and surface-first shortcuts",
+                  scenario:
+                    "One crew member keeps describing the new medium as pulling the route, while another keeps treating the surface as the default angle line.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "bend-trap-warning",
+                      label: "Do not turn refraction into a pull story, and do not trust the surface as the angle line. Ask about speed change and use the Guide Line.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "cause-warning-only",
+                      label: "Warn mainly that students should avoid vague material language, because the surface-versus-Guide-Line issue usually sorts itself out once the bend cause is named clearly.",
+                      feedback:
+                        "That would leave the wrong angle-reference shortcut mostly alive.",
+                    },
+                    {
+                      value: "angle-warning-only",
+                      label: "Warn mainly that students should convert surface angles carefully, because once the arithmetic is right the deeper cause story matters much less.",
+                      feedback:
+                        "That would leave the wrong cause-language shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps refraction tied to speed change and the Guide Line.",
+                  retryLabel: "That warning would leave a main M8_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m8-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the speed-change cause visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the route turns at the boundary without making it sound like the second medium is grabbing the light.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "marching-surface-analogy",
+                      label: "Think of a marching line entering slower ground with one side changing pace first: the route turns because the speed changes across the boundary, not because the new ground pulls it inward.",
+                      feedback:
+                        "Exactly. That analogy keeps the speed-change cause visible without inventing a force.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "magnet-pull-analogy",
+                      label: "Think of the second medium like a magnet drawing the path in, because a strong material should naturally bend light by pulling it toward itself.",
+                      feedback:
+                        "That would rebuild the wrong pull-language shortcut.",
+                    },
+                    {
+                      value: "mirror-edge-analogy",
+                      label: "Think mainly of a mirror turn at the boundary, because any path change near an edge is best taught as reflection before other details are layered on.",
+                      feedback:
+                        "That would blur refraction into the wrong boundary story.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the speed-change story without flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right bend model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M8_L1") {
