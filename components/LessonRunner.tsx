@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,282 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M1_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m1-l6-area-hunter",
+                badge: "Area hunter",
+                title: "Tag the shaded route before the crew reads the peak",
+                scenario:
+                  "Area Hunter Bay is showing one shaded speed-time graph. A trainee keeps pointing to the final graph height and calling it the total distance.",
+                prompt: "Pin the correct readout to the display.",
+                options: [
+                  {
+                    value: "whole-shaded-area",
+                    label: "Use the whole shaded area. Each strip combines speed height with time width, so the total area gives the distance traveled across the interval.",
+                    feedback:
+                      "Exactly. That keeps the lesson tied to the full shaded region instead of one end-point reading.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "final-height-distance",
+                    label: "Use the final graph height, because the last speed value should also show the total distance covered by the end of the journey.",
+                    feedback:
+                      "That is the trap. Final height is final speed, not total distance.",
+                  },
+                  {
+                    value: "highest-peak-most-distance",
+                    label: "Use the tallest peak as the distance clue, because the graph that reaches the greatest speed must also cover the greatest distance.",
+                    feedback:
+                      "Peak height alone is not enough. A lower but wider region can build the same or a greater total area.",
+                  },
+                ],
+                successLabel: "Tagged. The crew is now reading the whole shaded route, not just the peak.",
+                retryLabel: "That tag would make the crew confuse speed with distance.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m1-l6-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first area note",
+                  scenario:
+                    "A trainee has written that area under any graph gives distance. You need the correction that fixes that idea before the room starts calculating.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "area-rule-needs-speed-time-axes",
+                      label: "The area rule belongs to a speed-time graph because the strips are speed x time. Change the axes and the area means something else.",
+                      feedback:
+                        "Exactly. That keeps the rule tied to the graph type instead of turning it into a universal shortcut.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "any-area-is-distance",
+                      label: "Keep the note general. Once a graph shows motion, the area underneath is the safest shortcut for total distance no matter what the axes are.",
+                      feedback:
+                        "That would keep the mistake alive. The axes decide what the area means.",
+                    },
+                    {
+                      value: "final-height-closest-distance",
+                      label: "Focus on the last graph height instead, because the end value is the clearest summary of the whole journey even when the area looks complicated.",
+                      feedback:
+                        "That swaps one mistake for another. Final height is a speed reading, not the journey total.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The area rule is now tied to the correct axes.",
+                  retryLabel: "That would leave the wrong area shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m1-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line area rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner enters the lesson with the right anchor before any shape-splitting starts.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "area-under-speed-time-distance",
+                      label: "On a speed-time graph, area under the graph gives total distance because each strip combines a speed height with a time width.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-is-distance",
+                      label: "On a speed-time graph, the main distance story comes from the graph height, while the area only adds small detail about how the speed changes.",
+                      feedback:
+                        "That blurs the lesson anchor. Height is speed; area is distance.",
+                    },
+                    {
+                      value: "peak-controls-distance",
+                      label: "On a speed-time graph, whichever journey reaches the greatest speed should automatically cover the greatest distance, so area only confirms the obvious answer.",
+                      feedback:
+                        "That is the shortcut this lesson is removing. Peak speed does not settle total distance by itself.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right area rule.",
+                  retryLabel: "That line would weaken the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m1-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the area vocabulary board",
+                  scenario:
+                    "The display is live, but the labels are drifting. You need the note that keeps speed, time, and area doing their correct jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "height-speed-width-time-area-distance",
+                      label: "On the speed-time graph, height is speed, width is time, and shaded area is total distance traveled.",
+                      feedback:
+                        "Exactly. That ties each graph feature to one clear quantity.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-distance-area-speed",
+                      label: "Use graph height for distance and shaded area for speed, because the tallest part of the graph should show the biggest travel result.",
+                      feedback:
+                        "Those labels are crossed. Height gives speed, while area gives distance.",
+                    },
+                    {
+                      value: "area-only-when-flat",
+                      label: "Only use area language on flat sections. Once the line slopes, the shape stops being reliable and the end height becomes the safer reading.",
+                      feedback:
+                        "Sloping sections still contribute through area. You just split the shape into simpler parts.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the graph features again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m1-l6-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the equal-area handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to explain how two different graph shapes can still tell the same distance story.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "equal-area-equal-distance",
+                      label: "Two speed-time graphs can show the same total distance if their total shaded areas match, even when one graph is taller and the other is wider.",
+                      feedback:
+                        "Exactly. That carries the area rule into one of the lesson's most important comparisons.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "taller-means-farther",
+                      label: "Two graphs only show the same distance if they reach the same top speed, because the tallest point controls how much distance can be built.",
+                      feedback:
+                        "That keeps the peak-height shortcut alive. Total area, not tallest point, controls the distance total.",
+                    },
+                    {
+                      value: "same-shape-required",
+                      label: "Equal distance needs matching graph shapes, because different shapes always imply different journeys and therefore different distance totals.",
+                      feedback:
+                        "Different journeys can still cover the same total distance. Matching shapes are not required if the total area matches.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the equal-area comparison.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m1-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the area analyst",
+                  scenario:
+                    "The trainee analyst can see the shaded region but is about to guess from the picture instead of calculating it cleanly. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "split-shapes-and-add",
+                      label: "Split the shaded region into rectangles, triangles, or trapezia, find each area, and add them before you compare any journey totals.",
+                      feedback:
+                        "Exactly. That gives the analyst a real method instead of a peak-height guess.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "read-end-height-first",
+                      label: "Start from the final graph height, because the last speed value usually gives the cleanest clue to the total distance without needing extra shape work.",
+                      feedback:
+                        "That would send the analyst into the main trap. End height is not the journey total.",
+                    },
+                    {
+                      value: "highest-region-wins",
+                      label: "Look for the tallest region first, because the graph with the biggest speed peak normally covers the greater distance even before the areas are added.",
+                      feedback:
+                        "That is still guesswork. A wider lower region can build the same or more total distance.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable area-building method.",
+                  retryLabel: "That would send the analyst back into visual guessing.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m1-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the peak-height shortcut",
+                  scenario:
+                    "One crew member keeps saying the graph with the bigger final speed or tallest peak must have traveled farther. You need the warning that stops that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "distance-needs-total-area",
+                      label: "Total distance needs the whole shaded area. Final speed and peak height can differ while the total area, and therefore the distance, stays the same.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "peak-decides-distance",
+                      label: "Use the tallest point as the safest summary, because any graph that reaches a higher speed must cover more distance than a lower graph.",
+                      feedback:
+                        "That is the trap. The widest shaded region can beat the tallest peak once the full area is counted.",
+                    },
+                    {
+                      value: "area-only-matters-late",
+                      label: "Ignore the early shaded region and focus on the ending section, because the last part of the graph tells you the final distance outcome most directly.",
+                      feedback:
+                        "That would erase most of the journey. Total distance needs the whole interval, not just the ending section.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now trust total area instead of the peak.",
+                  retryLabel: "That warning would leave the peak shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m1-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the strip-built distance analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a shaded region can accumulate distance even when the graph shape changes from one interval to the next.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "distance-meter-strips",
+                      label: "Treat the shaded region like a distance meter built from strips: each strip adds a little speed x time piece, so different overall shapes can still make the same total if the strips add to the same area.",
+                      feedback:
+                        "Exactly. That analogy supports the lesson without turning the peak into the whole story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "peak-trophy-analogy",
+                      label: "Treat the graph like a peak trophy chart, where the highest point decides the winner and the shaded region mostly decorates the display afterward.",
+                      feedback:
+                        "That would rebuild the exact confusion this lesson is removing. The total area matters more than the tallest point.",
+                    },
+                    {
+                      value: "shape-match-analogy",
+                      label: "Treat the graph like a shape-matching puzzle, where the only safe way to compare journeys is to find graphs with nearly identical outlines.",
+                      feedback:
+                        "That would miss the lesson's main comparison. Different outlines can still enclose the same total area.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the strip-built distance idea instead of flattening it.",
+                  retryLabel: "That analogy would send the room back to peak-reading.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M1_L5") {
