@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2"
           ? (() => {
+              if (lessonId === "F5_L2") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f5-l2-direction-board",
+                    badge: "Direction board",
+                    title: "Read the motion-travel comparison",
+                    scenario:
+                      "The Signal-Stadium room is comparing two waves that both travel east. In one, the medium moves north-south. In the other, the medium oscillates east-west in compressions and rarefactions. One trainee keeps saying the picture that looks up-and-down must be transverse no matter how it actually travels.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "compare-motion-with-travel",
+                        label: "Classify the wave by comparing local motion with travel direction. Perpendicular motion means transverse, while parallel motion means longitudinal.",
+                        feedback:
+                          "Exactly. That keeps the lesson anchored to the directional comparison instead of the page drawing.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "up-down-means-transverse",
+                        label: "If the sketch looks up-and-down, the wave is transverse by definition, because the page shape is the safest first clue.",
+                        feedback:
+                          "That is the trap. The page shape alone is not enough; the travel direction has to be compared with the local motion.",
+                      },
+                      {
+                        value: "compressions-decide-everything",
+                        label: "Any wave that shows compressions must be longitudinal even if the local motion and travel direction are actually at right angles.",
+                        feedback:
+                          "Compressions can be a clue, but this lesson protects the perpendicular-versus-parallel test as the deciding rule.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now classify waves by comparing local motion with propagation.",
+                    retryLabel: "That note would let the page-orientation shortcut survive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f5-l2-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first wave-type note",
+                      scenario:
+                        "A trainee has written that a transverse wave is simply one that goes up and down on the page. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "transverse-needs-travel-comparison",
+                          label: "Transverse means the local motion is perpendicular to the direction the wave travels. The page drawing alone does not decide the type.",
+                          feedback:
+                            "Exactly. That correction secures the real classification rule instead of the weak page-based shortcut.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "page-shape-decides-type",
+                          label: "Wave type is decided by whether the sketch looks vertical or horizontal, because that is what students can see first.",
+                          feedback:
+                            "That keeps the mistake alive. The lesson needs the actual travel direction compared with the local motion.",
+                        },
+                        {
+                          value: "transverse-means-bigger-amplitude",
+                          label: "A wave becomes transverse when the medium moves through a bigger displacement than the wave travels in one step.",
+                          feedback:
+                            "Amplitude is not the deciding rule here. The lesson is about perpendicular versus parallel motion.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now classifies wave type by directional comparison instead of page appearance.",
+                      retryLabel: "That would leave the weak 'up-and-down' definition active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f5-l2-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line wave-type rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the second wave lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "perpendicular-vs-parallel-rule",
+                          label: "Wave type comes from comparison: transverse means local motion is perpendicular to travel, while longitudinal means local motion is parallel to travel.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "shape-rule",
+                          label: "Wave type comes from the way the picture is drawn: up-and-down waves are transverse, while squeeze-shaped waves are always longitudinal.",
+                          feedback:
+                            "That blurs the lesson into a picture-memorizing shortcut. The safe rule is the motion-versus-travel comparison.",
+                        },
+                        {
+                          value: "travel-only-rule",
+                          label: "Wave type comes from which way the wave travels, because the local motion only changes the amplitude and not the classification.",
+                          feedback:
+                            "Travel direction matters only in comparison with the local motion. The classification needs both directions together.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts from the comparison rule instead of the page-shape shortcut.",
+                      retryLabel: "That line would blur the core classification idea instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f5-l2-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the direction analyst",
+                      scenario:
+                        "A trainee keeps jumping to labels before checking the actual motion directions. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "travel-arrow-then-motion-arrow",
+                          label: "First mark the wave's travel direction. Then mark the medium's local motion. If the two directions are at right angles, name transverse; if they are along the same line, name longitudinal.",
+                          feedback:
+                            "Exactly. That keeps the reasoning ordered around the comparison the lesson depends on.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "label-from-picture-first",
+                          label: "First name the wave from the way the sketch looks, then adjust the label later only if the motion description is very unusual.",
+                          feedback:
+                            "That would make the page appearance do the wrong job. The comparison has to come first.",
+                        },
+                        {
+                          value: "amplitude-first-then-type",
+                          label: "First compare how far the medium moves, because a larger local displacement is the clearest clue about whether the wave is transverse or longitudinal.",
+                          feedback:
+                            "Local displacement size does not classify the wave type. The lesson needs directional comparison instead.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable way to classify wave type without guessing from the page.",
+                      retryLabel: "That method would scramble the classification story instead of ordering it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f5-l2-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the page-shape shortcut",
+                      scenario:
+                        "The next learner note says: 'Transverse just means the wave goes up and down.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "needs-travel-direction-too",
+                          label: "That sentence is incomplete because it ignores the travel direction. A transverse wave is defined by local motion being perpendicular to propagation.",
+                          feedback:
+                            "Exactly. That warning blocks the weak page-based definition cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "up-down-is-enough",
+                          label: "The sentence is acceptable as long as the page sketch clearly points upward and downward, because the drawing already contains the important clue.",
+                          feedback:
+                            "That would keep the shortcut alive. The drawing alone can misclassify the wave if the travel direction changes.",
+                        },
+                        {
+                          value: "only-longitudinal-needs-comparison",
+                          label: "Only longitudinal waves need the travel comparison, because transverse waves can always be recognized from the visible shape without extra direction work.",
+                          feedback:
+                            "Both types need the same comparison rule. Transverse is not exempt from checking the travel direction.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps page appearance separate from the real classification rule.",
+                      retryLabel: "That warning would let the shape shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f5-l2-analogy",
+                      badge: "Story relay",
+                      title: "Choose the arrow-check bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture wave type as a direction comparison instead of a picture-shape guess.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "two-arrows-check",
+                          label: "Use the analogy by drawing one arrow for the travel direction and one for the local motion. Right-angle arrows mean transverse, while same-line arrows mean longitudinal.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the comparison rule cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "tall-shape-means-transverse",
+                          label: "Use the analogy by making the transverse case look taller on the page, because the easiest way to remember it is by the visible up-and-down shape.",
+                          feedback:
+                            "That would rebuild the exact shortcut the lesson is trying to remove.",
+                        },
+                        {
+                          value: "compressions-mean-parallel-every-time",
+                          label: "Use the analogy by teaching that any squeezed-looking sketch is enough to classify a wave, because compressions alone settle the type without checking directions.",
+                          feedback:
+                            "The analogy needs the actual direction comparison kept alive, not replaced by one repeated picture cue.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports the comparison rule without slipping back into page-shape guessing.",
+                      retryLabel: "That analogy would blur the wave-type idea instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F5_L1") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
