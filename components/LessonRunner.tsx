@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,418 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M3_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m3-l5-rate-yield-visual",
+                badge: "Dual-meter board",
+                title: "Split rate from yield before the room starts calling one machine simply better",
+                scenario:
+                  "The Transfer Rate and Useful Yield display shows two machines moving the same input through different times and useful fractions. The crew keeps trying to collapse both ideas into one score.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "rate-and-yield-separate",
+                    label: "Read the board with two separate meters: power tells how quickly the total hand-off happens, while efficiency tells how much of that input becomes useful output.",
+                    feedback:
+                      "Exactly. That keeps machine comparison honest before any calculation starts.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "fast-means-efficient",
+                    label: "Treat the faster machine as automatically more efficient, because finishing quickly should prove that less energy was wasted along the way.",
+                    feedback:
+                      "That is the shortcut the lesson is trying to block. Fast does not automatically mean efficient.",
+                  },
+                  {
+                    value: "same-output-same-power",
+                    label: "Assume that if two machines give the same useful output they must also have the same power, because the useful result is the only comparison that really matters.",
+                    feedback:
+                      "That collapses rate and yield again. Useful output alone does not settle power.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads two machine measures instead of one vague score.",
+                retryLabel: "That note would blur rate and yield into the same idea.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m3-l5-module-lens",
+                badge: "Module lens",
+                title: "Choose which quantity changed before the symbols take over",
+                scenario:
+                  "The Module 3 lens card is up. One trainee keeps treating shorter time and bigger useful fraction as the same kind of improvement because both make the machine feel better.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "time-vs-fraction-rule",
+                    label: "Post the rule that time changes power, while useful fraction changes efficiency. If input stays fixed and only the time shrinks, rate changes first. If time stays fixed and only the useful fraction rises, yield changes first.",
+                    feedback:
+                      "Exactly. That is the split the whole lesson depends on.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "time-and-fraction-both-efficiency",
+                    label: "Say both shorter time and bigger useful fraction mainly count as efficiency changes, because each one makes the machine seem more effective overall.",
+                    feedback:
+                      "That merges two different questions into one vague judgment.",
+                  },
+                  {
+                    value: "time-and-fraction-both-power",
+                    label: "Say both shorter time and bigger useful fraction mainly count as power changes, because each one changes how impressive the machine looks in operation.",
+                    feedback:
+                      "That buries useful fraction completely. This lesson needs both comparisons visible.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps time and useful fraction in separate columns.",
+                retryLabel: "That rule would send the room back into one-score thinking.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m3-l5-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on how to compare machines cleanly",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare only total input, while another wants to compare only the useful output and ignore time and leak trail.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "compare-rate-yield-output-leak",
+                    label: "Set up separate columns for total input, time, power, useful fraction, useful output, and leak trail. The machine story stays clear only when rate and yield are compared side by side instead of blended together.",
+                    feedback:
+                      "Exactly. That gives the crew a real machine-comparison habit instead of a vague impression.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-output-only",
+                    label: "Compare only the useful output, because once the better useful result is known the faster/slower details and leak story are just background.",
+                    feedback:
+                      "That would hide both rate and waste. This lesson needs the comparison columns kept separate.",
+                  },
+                  {
+                    value: "compare-time-only",
+                    label: "Compare only the time, because faster completion tells you almost everything worth knowing about machine quality and the rest mostly follows automatically.",
+                    feedback:
+                      "That would crown speed as the whole story. The lesson is specifically trying to stop that move.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares machines with separate rate and yield columns.",
+                retryLabel: "That plan would flatten the machine comparison too early.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "rate versus yield split") {
+                return {
+                  id: "m3-l5-rate-yield-split",
+                  badge: "Split desk",
+                  title: "Separate the question before you compare the machines",
+                  scenario:
+                    "A trainee sees two machines with the same 1200 J input and 50% yield, but one finishes in 3 s instead of 6 s. They want to say both power and efficiency doubled.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "shorter-time-changes-power-only",
+                      label: "Only power changes here. The same input with the same useful fraction means the efficiency stays fixed, while the shorter time increases the transfer rate.",
+                      feedback:
+                        "Exactly. That is the rate-versus-yield split this screen is meant to build.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "everything-doubles",
+                      label: "Both power and efficiency double, because finishing the same job faster proves the machine became better in every performance measure.",
+                      feedback:
+                        "That is the exact shortcut the lesson wants to stop. Faster does not automatically improve useful fraction.",
+                    },
+                    {
+                      value: "only-useful-output-matters",
+                      label: "Neither quantity really changes because the useful output stays the same, so the time difference is mainly a presentation detail.",
+                      feedback:
+                        "That erases rate completely. Time still matters because power asks how quickly the transfer happens.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The crew now separates rate change from yield change.",
+                  retryLabel: "That would keep the rate-versus-yield confusion active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "machine-comparison habit") {
+                return {
+                  id: "m3-l5-machine-comparison-habit",
+                  badge: "Compare desk",
+                  title: "Set the machine-comparison columns before you judge which one is better",
+                  scenario:
+                    "The room wants one quick winner label, but the two machines differ in time, useful fraction, and leak trail. You need the comparison habit that stops the class from reaching for one vague verdict.",
+                  prompt: "Choose the habit to post.",
+                  options: [
+                    {
+                      value: "name-columns-before-judging",
+                      label: "Name the comparison columns first: total input, time, power, useful fraction, useful output, and leak trail. Then say which machine wins on which measure instead of forcing one universal winner label too early.",
+                      feedback:
+                        "Exactly. That is the comparison discipline this lesson is trying to build.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pick-single-winner-first",
+                      label: "Start by choosing the overall better machine by instinct, then use whichever quantity supports that decision most clearly afterward.",
+                      feedback:
+                        "That would turn the lesson into bias confirmation instead of analysis.",
+                    },
+                    {
+                      value: "sort-by-power-first",
+                      label: "Rank the machines by power first, because once the rate winner is known the efficiency and leak details only matter if there is still a tie.",
+                      feedback:
+                        "That still collapses the comparison into one score. This screen needs parallel columns, not a single ranking lane.",
+                    },
+                  ],
+                  successLabel: "Posted. The crew now compares machines by column instead of by vague impression.",
+                  retryLabel: "That would keep the machine comparison muddy.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m3-l5-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the fast-means-efficient shortcut",
+                  scenario:
+                    "A trainee has written that the more powerful machine must also be the more efficient one, because a better machine should waste less and finish faster at the same time.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "power-vs-efficiency-repair",
+                      label: "Repair the shortcut by separating the questions: power asks how quickly energy moves, while efficiency asks what fraction becomes useful. A machine can win on one measure and lose on the other.",
+                      feedback:
+                        "Exactly. That repairs the merged-machine idea at its root.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "power-is-main-measure",
+                      label: "Keep power as the main machine score and explain that efficiency is mostly a fine-detail correction for unusual cases where the waste becomes extreme.",
+                      feedback:
+                        "That still demotes efficiency into a side note. The lesson needs both measures treated as real and separate.",
+                    },
+                    {
+                      value: "efficiency-is-main-measure",
+                      label: "Keep efficiency as the main machine score and explain that power mostly tells you how dramatic the machine looks while running.",
+                      feedback:
+                        "That just flips the same one-score mistake the other way around.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps machine quality split across rate and yield.",
+                  retryLabel: "That would leave the merged-machine shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m3-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line machine rule",
+                  scenario:
+                    "Quest Control wants a single sentence on the wall so every learner starts the lesson with the right anchor before the examples begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "rate-yield-anchor",
+                      label: "Power tells how quickly the hand-off happens, while efficiency tells how much of the input becomes useful. Good machine comparison keeps those two questions separate.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-score-anchor",
+                      label: "A better machine is the one with the best overall performance score, and power and efficiency are mostly two ways of dressing up that same basic judgment.",
+                      feedback:
+                        "That would put the main misconception directly into the anchor sentence.",
+                    },
+                    {
+                      value: "speed-anchor",
+                      label: "Machine comparison is mainly about speed, and efficiency only matters once two machines are already close in power.",
+                      feedback:
+                        "That would crown rate as the whole story. The lesson is trying to stop that collapse.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right machine-comparison rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m3-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the power vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps power tied to total hand-off over time instead of to usefulness.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "power-language-note",
+                      label: "Power means transfer rate: total energy or work divided by time. It tells how quickly the whole hand-off happens, not how much of it becomes useful.",
+                      feedback:
+                        "Exactly. That keeps power language doing the right job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "power-means-useful-only",
+                      label: "Power means the amount of useful energy produced each second, because wasted energy does not really belong in the main machine rate story.",
+                      feedback:
+                        "That quietly replaces total hand-off with useful output. This lesson needs the whole transfer rate kept visible.",
+                    },
+                    {
+                      value: "power-is-total-energy",
+                      label: "Power is basically another name for the total energy a machine handles, because time is only there to make the numbers easier to compare.",
+                      feedback:
+                        "That erases the rate idea completely. Time is central to the meaning of power.",
+                    },
+                  ],
+                  successLabel: "Power vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the power meaning again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m3-l5-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the glossary with the useful-yield language",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to keep efficiency tied to useful fraction instead of speed, rate, or total output alone.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "efficiency-language-note",
+                      label: "Add that efficiency compares useful output with total input. It is a fraction or percentage, so it answers how much of the input becomes useful rather than how quickly the hand-off happens.",
+                      feedback:
+                        "Exactly. That completes the glossary with the useful-yield move this lesson depends on.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "efficiency-means-fast-output",
+                      label: "The follow-up card should say that efficiency mainly means delivering useful output quickly, because a machine that helps sooner is automatically less wasteful in practice.",
+                      feedback:
+                        "That merges efficiency back into rate. The glossary needs to keep those ideas separate.",
+                    },
+                    {
+                      value: "efficiency-means-large-output",
+                      label: "The follow-up card should say that efficiency mainly means getting a large useful output, because the bigger result is the clearest sign that the machine is doing its job well.",
+                      feedback:
+                        "That leaves out the input comparison. Efficiency is about the useful fraction, not the useful amount alone.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the useful-yield language model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m3-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before the machine comparison blurs",
+                  scenario:
+                    "The trainee analyst is about to declare one machine better before deciding whether the question is asking about total transfer, time, power, useful output, or efficiency.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "classify-comparison-first",
+                      label: "Start by classifying the comparison: ask whether the question is about total energy, time, power, useful output, efficiency, or a combination. Build the comparison columns first, then calculate.",
+                      feedback:
+                        "Exactly. That gives the analyst a real comparison method instead of a vague machine judgment.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pick-better-then-calculate",
+                      label: "Start by guessing which machine feels better overall, then calculate power or efficiency only to confirm that first impression.",
+                      feedback:
+                        "That would turn the lesson into intuition defense instead of disciplined comparison.",
+                    },
+                    {
+                      value: "always-calculate-power-first",
+                      label: "Start with power in every case, because transfer rate is the most important machine clue and the efficiency details can always be attached later.",
+                      feedback:
+                        "That would still collapse the lesson into one preferred metric. This screen needs classification before calculation.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean machine-comparison method.",
+                  retryLabel: "That instruction would send the analyst into one-score thinking again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m3-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-better-machine shortcut",
+                  scenario:
+                    "One crew member keeps saying the more powerful machine must be the better machine, even when the useful fraction is lower and the leak trail is larger.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "do-not-collapse-machine-quality",
+                      label: "Do not collapse machine quality into one winner label too early. A machine can win on transfer rate and lose on useful yield, so the comparison columns must stay separate until the question says what matters most.",
+                      feedback:
+                        "Exactly. That warning blocks the main shortcut this lesson is trying to stop.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "power-usually-enough",
+                      label: "Warn only that power is usually enough for comparison, but efficiency can be added later if someone specifically asks about waste.",
+                      feedback:
+                        "That would keep the shortcut alive. The lesson needs rate and yield treated as coequal questions.",
+                    },
+                    {
+                      value: "efficiency-usually-enough",
+                      label: "Warn only that efficiency is usually enough for comparison, because machines that waste less should be treated as better even when they work more slowly.",
+                      feedback:
+                        "That just reverses the same shortcut. The warning needs to stop single-metric thinking entirely.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist the one-better-machine shortcut.",
+                  retryLabel: "That warning would leave the main comparison trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m3-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the dual-meter analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why one machine meter should track speed of transfer while another tracks how much of the input really reaches the target.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "dual-meter-machine-bridge",
+                      label: "Think of a machine wall with two meters: one meter shows how fast the cargo moves through the line, and the other shows what fraction of the cargo reaches the target bay instead of spilling into the leak channel. A machine can look strong on one meter and weak on the other.",
+                      feedback:
+                        "Exactly. That analogy keeps the two machine questions visible without merging them.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-speedometer-bridge",
+                      label: "Think of one speedometer only, because once students see which machine finishes first they can usually infer the rest of the comparison well enough.",
+                      feedback:
+                        "That would erase useful yield from the analogy completely.",
+                    },
+                    {
+                      value: "single-success-meter-bridge",
+                      label: "Think of one success meter only, because the useful result is the real purpose of the machine and speed is mostly presentation detail afterward.",
+                      feedback:
+                        "That would erase transfer rate from the analogy. The bridge needs both meters active.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the two machine meters visible instead of blending them together.",
+                  retryLabel: "That analogy would collapse rate and yield into the same picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M3_L4") {
