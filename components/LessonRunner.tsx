@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M6_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m6-l4-touch-relay-board",
+                badge: "Relay board",
+                title: "Trace the contact path before you name the route",
+                scenario:
+                  "The Touch Relay board compares one strong metal path and one weak insulated path between a hot end and a cool end. One trainee keeps talking as if the whole solid itself must flow from one end to the other, while another treats the starting temperature difference as enough to explain the outcome even if the path is broken.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "contact-path-and-material-story",
+                    label: "Conduction needs an unbroken contact path, and the path stays in place while energy passes through it. Metals relay energy well because electrons help, while an insulating path or a broken contact slows or stops the transfer.",
+                    feedback:
+                      "Exactly. That keeps route, material, and fixed solid structure in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "solid-has-to-flow",
+                    label: "Treat the fast warming metal case as proof that part of the solid itself is flowing from the hot end to the cool end, because only moving material could carry energy across that quickly.",
+                    feedback:
+                      "That would turn conduction into fluid motion. The lesson wants the path to stay in place while the energy moves through it.",
+                  },
+                  {
+                    value: "temperature-difference-alone",
+                    label: "Treat the hot-cool temperature difference as enough to guarantee transfer, because once the ends are different the exact contact path and material no longer matter much to the explanation.",
+                    feedback:
+                      "That would hide two core factors. Contact continuity and conductor quality both matter in conduction.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads conduction as a relay through a solid path.",
+                retryLabel: "That note would flatten the Touch Relay story into the wrong route.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m6-l4-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the moving-solid and broken-path shortcuts",
+                  scenario:
+                    "A trainee has written that the metal itself must flow from hot end to cool end, while another says any temperature difference is enough to explain the transfer even when the contact path is broken.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-contact-relay-story",
+                      label: "Repair both ideas together: conduction is energy transfer by direct contact through a solid path that stays in place. If the contact route breaks, the relay stops even when the endpoints remain at different temperatures.",
+                      feedback:
+                        "Exactly. That restores both parts of the lesson at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "metal-movement-mostly-explains-it",
+                      label: "Tell them the metal case mainly works because some of the hotter material spreads through the bar itself, so direct contact is useful but not really the central idea to protect.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson wants the path to stay in place while energy passes through it.",
+                    },
+                    {
+                      value: "difference-is-enough",
+                      label: "Tell them the temperature difference should remain the main explanation even if the route is interrupted, because large hot-cool gaps matter more than the exact material bridge between them.",
+                      feedback:
+                        "That would keep the second shortcut alive. A broken path stops conduction even when the endpoints stay different.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps conduction tied to contact and material.",
+                  retryLabel: "That would leave a main Touch Relay shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m6-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Touch Relay rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop turning conduction into either moving matter or magic transfer across a gap.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "conduction-anchor",
+                      label: "Conduction is energy transfer by direct contact through a path that stays in place, and metals conduct well because electrons help the relay.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "temperature-gap-anchor",
+                      label: "Conduction mainly means a temperature difference exists, so once the ends are different the route itself becomes a minor detail in the explanation.",
+                      feedback:
+                        "That would build the broken-path shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "solid-flow-anchor",
+                      label: "Conduction mainly means the hotter solid spreads through the cooler region, because energy transfer in solids is best pictured as matter carrying the warmth across.",
+                      feedback:
+                        "That would rebuild the moving-solid shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right conduction rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m6-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the conduction vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up contact path, conductor, insulator, and temperature difference as if they all name the same part of the transfer story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "contact-conductor-insulator-language",
+                      label: "Use contact path for the unbroken solid route, conductor for a material that relays energy well, insulator for a material that resists that relay, and temperature difference for the hot-cool contrast that drives the comparison.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its own job in the lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "conductor-means-hotter-language",
+                      label: "Use conductor mainly as another word for the hotter object in the setup, because whichever part begins warmer is automatically the best route for transfer.",
+                      feedback:
+                        "That would scramble material property with starting condition.",
+                    },
+                    {
+                      value: "contact-is-optional-language",
+                      label: "Use contact path only as an extra detail, because once the temperature difference is large enough the route and material words do not add much to the explanation.",
+                      feedback:
+                        "That would erase one of the main distinctions the lesson wants students to keep.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Touch Relay language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m6-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they jump past the route",
+                  scenario:
+                    "The trainee analyst is about to compare two solid-transfer setups by looking only at which end is hotter, without first tracing the path or checking whether the material is a conductor or an insulator.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "trace-path-then-check-material",
+                      label: "Start by tracing the unbroken contact path from hot end to cool end. Then compare whether the route is metal or insulating material, and only after that explain the far-end response.",
+                      feedback:
+                        "Exactly. That gives the analyst the right conduction workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "hotter-end-settles-story",
+                      label: "Start from whichever end is hotter, because once the hot side is identified the path and material mostly just decorate the same transfer story afterward.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main route shortcut.",
+                    },
+                    {
+                      value: "assume-metal-moves-heat-object",
+                      label: "Picture the metal itself carrying the warmth across like a moving object first, because that gives the fastest intuitive answer before the details of contact are considered.",
+                      feedback:
+                        "That would rebuild the moving-solid shortcut instead of protecting the relay model.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean contact-path method.",
+                  retryLabel: "That would send the analyst back into a flattened conduction explanation.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m6-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the moving-solid and route-does-not-matter shortcuts",
+                  scenario:
+                    "One crew member keeps saying the solid itself flows during conduction, while another keeps saying the hot-cool difference is enough even if the path is broken or insulating.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "relay-and-contact-warning",
+                      label: "Do not picture conduction as matter flowing, and do not ignore the route. Energy is relayed through a fixed solid path, and a broken or insulating path changes the outcome even when the endpoints stay different.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "temperature-gap-warning",
+                      label: "Warn mainly that the temperature gap should be read carefully, because once that is right the route itself usually becomes a secondary detail rather than a deciding factor.",
+                      feedback:
+                        "That would leave the broken-path shortcut mostly alive.",
+                    },
+                    {
+                      value: "moving-material-warning",
+                      label: "Warn mainly that students should picture the hotter material spreading more slowly in poor conductors, because that keeps the conduction story concrete even if the relay mechanism stays vague.",
+                      feedback:
+                        "That would leave the moving-solid shortcut alive by rebuilding the wrong picture.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps conduction tied to fixed contact paths.",
+                  retryLabel: "That warning would leave a main Touch Relay trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m6-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the baton-line analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture conduction as a relay through matter without making the whole material itself travel.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "baton-line-analogy",
+                      label: "Think of a line of people passing a baton hand to hand. The line stays in place, but the baton travels along it quickly only when each hand-off is possible. Break the line or replace skilled passers with clumsy ones, and the relay slows or stops.",
+                      feedback:
+                        "Exactly. That analogy keeps fixed position, direct contact, and material quality in the same picture.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "hot-liquid-pour-analogy",
+                      label: "Think of hot liquid being poured from one end of the bar to the other, because conduction is easiest to picture when the warm substance itself moves through the object.",
+                      feedback:
+                        "That analogy would rebuild the moving-solid shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "light-switch-analogy",
+                      label: "Think of flipping a light switch, because once a temperature difference exists the energy route should work no matter what the path is made from or whether the contact is broken.",
+                      feedback:
+                        "That analogy would erase the need for direct contact and conductor quality.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the relay-through-matter story instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right Touch Relay model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M6_L3") {
