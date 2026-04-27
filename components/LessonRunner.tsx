@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,418 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M2_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m2-l6-arrow-split-visual",
+                badge: "Split deck",
+                title: "Freeze the diagonal arrow before the crew turns one force into two new pushes",
+                scenario:
+                  "The Arrow Split display shows one diagonal Drive Arrow being rewritten into horizontal and vertical parts. A trainee keeps talking as if the split has created extra forces that were not there before.",
+                prompt: "Pin the right instruction to the display.",
+                options: [
+                  {
+                    value: "components-rewrite-one-force",
+                    label: "Treat the horizontal and vertical parts as one original force rewritten on chosen axes. They are not extra pushes; together they rebuild the same diagonal arrow.",
+                    feedback:
+                      "Exactly. That keeps the split as a bookkeeping move instead of turning it into new physics.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "split-creates-new-forces",
+                    label: "Treat the components as two extra forces that now act alongside the diagonal arrow, because resolving the vector should give more pushes to combine.",
+                    feedback:
+                      "That is the trap. The components are a different description of the same force, not new forces added to the story.",
+                  },
+                  {
+                    value: "ignore-diagonal-after-split",
+                    label: "Erase the original diagonal arrow completely, because once the force is split the diagonal version no longer means anything physically.",
+                    feedback:
+                      "The original diagonal arrow still represents the same force. The split just makes the bookkeeping easier.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now treats Arrow Split as a rewrite of one force, not a force-creation trick.",
+                retryLabel: "That note would blur the meaning of components immediately.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m2-l6-vector-rebuild-visual",
+                badge: "Rebuild board",
+                title: "Lock the tip-to-tail rebuild before anyone adds perpendicular parts as plain numbers",
+                scenario:
+                  "The vector-addition board shows the horizontal component followed by the vertical component. A trainee wants to add their sizes directly because both numbers belong to the same original arrow.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "perpendicular-parts-rebuild-diagonal",
+                    label: "Place the components tip to tail and rebuild the diagonal resultant from the first tail to the final tip. Perpendicular parts do not combine by plain scalar addition.",
+                    feedback:
+                      "Exactly. That protects the geometry of the vector sum instead of flattening it into arithmetic on unrelated axes.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "add-component-sizes-directly",
+                    label: "Add the component sizes directly, because once they come from the same arrow they should collapse into one bigger number automatically.",
+                    feedback:
+                      "That only works for same-axis quantities. Perpendicular components rebuild a diagonal instead of adding as plain numbers.",
+                  },
+                  {
+                    value: "use-largest-component-only",
+                    label: "Use whichever component is larger, because the biggest axis part should already give the best estimate of the final resultant.",
+                    feedback:
+                      "The larger component alone cannot stand in for the full resultant. Both axes still matter.",
+                  },
+                ],
+                successLabel: "Posted. The room now rebuilds perpendicular components geometrically instead of adding them flatly.",
+                retryLabel: "That rule would collapse vector geometry into the wrong arithmetic move.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m2-l6-direction-angle-visual",
+                badge: "Angle board",
+                title: "Coach the crew on reading the final direction",
+                scenario:
+                  "The direction board shows the rebuilt resultant and the deck axes. One crew member wants to read the angle from the y-axis, while another wants to guess from whichever component is larger.",
+                prompt: "Choose the direction plan to send.",
+                options: [
+                  {
+                    value: "measure-from-plus-x",
+                    label: "Find the net x and net y first, rebuild the resultant, then measure the angle counterclockwise from the +x axis with a quadrant check.",
+                    feedback:
+                      "Exactly. That keeps the lesson's direction convention and the net-component logic together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "measure-from-y",
+                    label: "Measure from the y-axis because the vertical part usually feels more natural on a deck diagram once the arrow points upward.",
+                    feedback:
+                      "That breaks the lesson convention. The angle here is read from +x, not from the y-axis.",
+                  },
+                  {
+                    value: "largest-component-sets-direction",
+                    label: "Use the larger component to decide the direction, because the biggest axis contribution should already tell you where the resultant points well enough.",
+                    feedback:
+                      "The larger component helps with intuition, but direction still comes from the rebuilt resultant and the chosen angle convention.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now reads direction from +x after the net components are known.",
+                retryLabel: "That plan would send the room into an angle-reading shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 3) {
+              return {
+                id: "m2-l6-module-lens",
+                badge: "Law lens",
+                title: "Lock the component rule before same-axis and perpendicular parts get mixed",
+                scenario:
+                  "The Module 2 lens card is up, and the room is starting to treat every component sum as if it worked the same way regardless of direction.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "same-axis-add-perpendicular-rebuild",
+                    label: "Add same-axis components algebraically, but rebuild perpendicular parts into a resultant geometrically after the net x and net y are known.",
+                    feedback:
+                      "Exactly. That keeps one-axis bookkeeping and perpendicular-vector rebuilds in their proper lanes.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "all-components-add-the-same-way",
+                    label: "Treat all component totals the same, because once every force is rewritten as numbers there is no need to separate axis addition from vector rebuilds.",
+                    feedback:
+                      "That erases the structure of the lesson. Same-axis sums and perpendicular-resultant rebuilds are not the same move.",
+                  },
+                  {
+                    value: "components-remove-direction",
+                    label: "Once a force is split into components, the direction problem is solved completely, so the final resultant can be treated like an ordinary size-only answer.",
+                    feedback:
+                      "Direction is still part of the final answer. The split helps organize it, but it does not remove it.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps axis sums and rebuilt resultants clearly separated.",
+                retryLabel: "That rule would blur the whole Arrow Split method.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 4) {
+              return {
+                id: "m2-l6-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on the right component comparison",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare diagonal arrows directly, while another wants to combine all numbers before checking which ones share an axis.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "sort-by-axis-then-rebuild",
+                    label: "First sort every contribution by axis, combine horizontal with horizontal and vertical with vertical, then rebuild the final resultant from the net components.",
+                    feedback:
+                      "Exactly. That keeps the component method stable all the way from input arrows to final answer.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-diagonals-whole",
+                    label: "Compare the diagonal arrows directly first, because keeping the original arrows whole should settle the result faster than splitting them apart.",
+                    feedback:
+                      "That skips the structure this lesson is teaching. The split is what makes multi-force combination manageable.",
+                  },
+                  {
+                    value: "add-all-numbers-first",
+                    label: "Add every component number first and only sort the directions afterward, because the final total should be easier to clean up at the end.",
+                    feedback:
+                      "That loses the axis structure immediately. Components have to be organized before they are combined.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now sorts by axis first and rebuilds the resultant second.",
+                retryLabel: "That plan would send the room into messy component bookkeeping.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m2-l6-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first Arrow Split note",
+                  scenario:
+                    "A trainee has written that components are extra forces and that perpendicular parts can just be added directly once they are numbers. You need the correction that fixes both mistakes before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "components-rewrite-and-rebuild",
+                      label: "Components are one force rewritten on chosen axes. Same-axis parts add algebraically, but perpendicular parts must rebuild a resultant geometrically.",
+                      feedback:
+                        "Exactly. That repairs both the force-creation mistake and the plain-addition mistake together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "components-are-extra-forces",
+                      label: "Keep the note as it is, because splitting a vector should produce new pushes that can all be added the same way once they have numbers.",
+                      feedback:
+                        "That keeps both mistakes alive. The split changes the description, not the physical force count.",
+                    },
+                    {
+                      value: "only-angle-matters",
+                      label: "Fix the note by saying the angle is the only part that matters, because once the diagonal direction is known the component values do not really need separate rules.",
+                      feedback:
+                        "That throws away the whole component method. The axis values are exactly what organize the sum.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps Arrow Split tied to rewrite, axis sums, and rebuilt resultants.",
+                  retryLabel: "That would leave the first vector-structure misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m2-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Arrow Split rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the Arrow Split lesson with the right anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "arrow-split-anchor",
+                      label: "Arrow Split rewrites one angled force as horizontal and vertical components, then combines net x and net y before rebuilding the same overall resultant and its direction.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "number-anchor",
+                      label: "Arrow Split mainly turns vectors into easier numbers, so once the component sizes are listed the direction and geometry parts become secondary details.",
+                      feedback:
+                        "That flattens the lesson too much. Direction and rebuild are still part of the core rule.",
+                    },
+                    {
+                      value: "diagonal-anchor",
+                      label: "Arrow Split mainly helps draw diagonal arrows more neatly, because the final diagonal picture matters more than the axis-by-axis comparison.",
+                      feedback:
+                        "That skips the real point. The axis-by-axis comparison is the organizational heart of the method.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Arrow Split rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m2-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the vector vocabulary board",
+                  scenario:
+                    "The crew can see the diagonal arrow and its axis parts, but the labels are drifting. You need the note that keeps components, resultant, and axes doing separate jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "components-resultant-axes",
+                      label: "Components are the horizontal and vertical descriptions of one force on chosen axes, and the resultant is the single arrow rebuilt from the net components.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary aligned with the real vector ideas.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "components-are-extra-pushes",
+                      label: "Treat components as extra pushes that replace the original force, because once the split is made the diagonal arrow is only a sketch aid.",
+                      feedback:
+                        "That would collapse the vocabulary into the wrong physics story. The original force is still the same force.",
+                    },
+                    {
+                      value: "axes-are-directions-of-motion",
+                      label: "Treat the axes as the actual motion paths the object must follow, because the component labels mainly tell you how the object will travel after the force acts.",
+                      feedback:
+                        "The axes are bookkeeping directions, not guaranteed motion paths.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the vector terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m2-l6-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the direction-and-quadrant handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into how the final direction is reported.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "direction-from-plus-x",
+                      label: "After net x and net y are known, report direction counterclockwise from +x and use the component signs to check the correct quadrant.",
+                      feedback:
+                        "Exactly. That completes the glossary with the lesson's direction convention.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "direction-from-largest-component",
+                      label: "After the split, report direction from whichever component is larger, because that part already shows which way the resultant mostly points.",
+                      feedback:
+                        "That would keep the angle shortcut alive. The lesson needs a consistent reference axis and quadrant check.",
+                    },
+                    {
+                      value: "direction-from-y-axis",
+                      label: "After the split, report direction from the y-axis whenever the arrow points upward, because vertical resultants read more naturally from there.",
+                      feedback:
+                        "That breaks the lesson convention. Direction is measured from +x here.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the direction convention.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m2-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the vector analyst",
+                  scenario:
+                    "The trainee analyst is about to answer from the diagonal arrows directly. You get one coaching instruction before they commit.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "split-sort-rebuild",
+                      label: "Split each angled force onto the chosen axes, sort and combine same-axis parts first, then rebuild the resultant magnitude and direction from the net components.",
+                      feedback:
+                        "Exactly. That gives the analyst a stable Arrow Split method instead of a diagonal-guess shortcut.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "guess-diagonal-first",
+                      label: "Start from the diagonal picture and guess the overall direction first, then use components only if the final number looks too hard to estimate directly.",
+                      feedback:
+                        "That would send the analyst into guesswork. The whole point is to make the structure manageable before guessing.",
+                    },
+                    {
+                      value: "add-sizes-then-directions",
+                      label: "Add the force sizes first and clean up the directions at the end, because the total magnitude should be the hardest part of the problem anyway.",
+                      feedback:
+                        "That loses the vector structure immediately. Direction has to stay visible from the start.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable component-first method.",
+                  retryLabel: "That instruction would send the analyst back into messy vector guesses.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m2-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the add-the-components-flatly shortcut",
+                  scenario:
+                    "One crew member keeps adding perpendicular component sizes as ordinary numbers and then reporting that as the resultant. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "perpendicular-needs-rebuild",
+                      label: "Perpendicular components do not combine by plain addition. First find net x and net y, then rebuild the resultant geometrically and report its direction separately.",
+                      feedback:
+                        "Exactly. That one warning blocks the most tempting arithmetic shortcut in the lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bigger-number-usually-fine",
+                      label: "The warning should say only that plain addition usually overestimates a little, because the perpendicular case still gives a rough answer that is good enough most of the time.",
+                      feedback:
+                        "That would leave the shortcut alive. The lesson needs the exact structural difference, not a rough-exception warning.",
+                    },
+                    {
+                      value: "horizontal-only-matters",
+                      label: "The safest warning is to trust the horizontal part first, because most deck problems are dominated by left-right motion anyway.",
+                      feedback:
+                        "That would erase one whole axis from the story. Both net components still matter.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now keep axis sums and resultant rebuilds separate.",
+                  retryLabel: "That warning would leave the shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m2-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the city-grid analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a diagonal route can be understood by splitting it into east-west and north-south moves without inventing new travel paths.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "city-grid-bridge",
+                      label: "Think of a city-grid route: one diagonal trip can be described by how far east-west and how far north-south it carries you, then rebuilt into one overall start-to-finish displacement.",
+                      feedback:
+                        "Exactly. That analogy supports components, rebuild, and direction without inventing new forces.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "two-separate-trips",
+                      label: "Think of the split as making two separate trips at once, because once the route is described on two axes it becomes two different journeys rather than one diagonal journey.",
+                      feedback:
+                        "That would rebuild the extra-forces mistake in travel language. The split is still describing one overall route.",
+                    },
+                    {
+                      value: "largest-street-decides",
+                      label: "Think mainly about whichever street direction is longer, because that direction should already capture the real route well enough for the final answer.",
+                      feedback:
+                        "That would encourage the component-size shortcut. The analogy still needs the full rebuilt displacement.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports Arrow Split as organized bookkeeping instead of flattening it into guesswork.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M2_L5") {
