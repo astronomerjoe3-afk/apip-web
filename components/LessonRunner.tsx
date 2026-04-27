@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4"
           ? (() => {
+              if (lessonId === "F5_L4") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f5-l4-guide-line-board",
+                    badge: "Guide Line board",
+                    title: "Read the boundary-bounce comparison",
+                    scenario:
+                      "The Signal-Stadium room is comparing a wave that meets a straight wall at an angle with a head-on case along the Guide Line. One trainee keeps measuring from the wall surface and saying the wave reflects because the speed changed at the barrier.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "measure-from-normal-bounce",
+                        label: "Reflection is a boundary bounce. Measure both angles from the normal, not the wall surface, and keep the reflected angle equal to the incident angle.",
+                        feedback:
+                          "Exactly. That keeps the geometry tied to the correct reference line and the real reflection story.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "measure-from-surface",
+                        label: "Measure the angles from the wall surface because that is the visible boundary, then treat any change in the numbers as proof that the wave has reflected correctly.",
+                        feedback:
+                          "That is the trap. The reflection rule uses the normal as the reference, not the surface itself.",
+                      },
+                      {
+                        value: "speed-change-causes-reflection",
+                        label: "The wave reflects because its speed changes at the wall, so the main thing to watch is how the new speed turns the outgoing path.",
+                        feedback:
+                          "That imports the refraction story into the wrong lesson. Reflection here is the equal-angle boundary bounce.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read reflection as equal-angle bounce from the Guide Line.",
+                    retryLabel: "That note would blur the Guide Line geometry or import the wrong speed-change story.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f5-l4-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first reflection note",
+                      scenario:
+                        "A trainee has written that the reflection law should be measured from the wall surface because that is the easiest visible line. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "normal-is-reference",
+                          label: "The reflection rule uses the normal as the reference line. Incident and reflected angles are measured to the normal, and only converted to surface angles afterward if the question asks for them.",
+                          feedback:
+                            "Exactly. That correction secures the reference-line rule this lesson depends on.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "surface-is-safe-reference",
+                          label: "The wall surface is the safe reference because it is the line the wave actually touches, so there is no need to introduce a separate normal line.",
+                          feedback:
+                            "That keeps the mistake alive. The normal is what makes the equal-angle rule usable and consistent.",
+                        },
+                        {
+                          value: "angles-can-mix-references",
+                          label: "It is acceptable to mix one angle from the normal and one from the surface as long as the two numbers still seem symmetrical in the picture.",
+                          feedback:
+                            "Mixed references break the geometry. Both angles have to be measured from the same line.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now measures reflection from the Guide Line instead of the wall face.",
+                      retryLabel: "That would leave the surface-angle shortcut active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f5-l4-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line reflection rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the reflection lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "equal-angles-to-normal",
+                          label: "Reflection is a boundary bounce in which the incident angle equals the reflected angle, and both are measured from the normal.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "equal-angles-to-surface",
+                          label: "Reflection means the wave leaves with the same angle to the wall surface that it arrived with, so the normal is optional extra geometry.",
+                          feedback:
+                            "That blurs the rule into the wrong reference. The lesson needs the angles tied to the normal.",
+                        },
+                        {
+                          value: "reflection-is-speed-turn",
+                          label: "Reflection is the case where the wall changes the wave speed enough to force the path to turn back out symmetrically.",
+                          feedback:
+                            "That imports the refraction mechanism. The anchor here is equal-angle bounce, not speed change at a new medium.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts from Guide Line geometry instead of surface-angle guessing.",
+                      retryLabel: "That line would blur the reflection rule instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f5-l4-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the boundary analyst",
+                      scenario:
+                        "A trainee keeps applying the reflection rule before deciding which line the angle is measured from. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "convert-to-normal-first",
+                          label: "First identify the normal. If the angle is given to the surface, convert it to the normal angle. Then apply equal angles to the normal, and convert back to a surface angle only if the question asks for it.",
+                          feedback:
+                            "Exactly. That keeps the reasoning ordered around the correct reference line.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "apply-surface-angle-directly",
+                          label: "First use the angle that is easiest to read from the wall surface, because any equal-looking pair on the page will still satisfy the reflection rule.",
+                          feedback:
+                            "That would make the surface do the wrong job. The normal has to be the first reference, not the last.",
+                        },
+                        {
+                          value: "decide-from-speed-story",
+                          label: "First ask whether the barrier made the wave slower or faster, because that tells you whether the reflected path should open out or close in against the surface.",
+                          feedback:
+                            "That would mix reflection with refraction. This lesson needs the normal-angle geometry first.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable reflection method instead of a page-guess shortcut.",
+                      retryLabel: "That method would scramble the boundary geometry instead of ordering it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f5-l4-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the surface-angle shortcut",
+                      scenario:
+                        "The next learner note says: 'The wall is the thing the wave hits, so it makes more sense to measure the reflection angles from the wall surface itself.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "normal-keeps-rule-consistent",
+                          label: "The reflection law is written to the normal, not the wall surface. Using the normal keeps the incoming and outgoing angles comparable and the equal-angle rule consistent.",
+                          feedback:
+                            "Exactly. That warning blocks the wrong reference-line shortcut cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "surface-is-close-enough",
+                          label: "Using the wall surface is close enough for most reflection questions because the normal only changes the numbers by a fixed 90 degrees.",
+                          feedback:
+                            "That would keep the trap alive. A fixed shift still matters if you want the rule applied to the correct geometry.",
+                        },
+                        {
+                          value: "head-on-case-proves-surface",
+                          label: "The head-on case shows the surface is the better reference, because the wave looks flat to the wall when both reflection angles are zero.",
+                          feedback:
+                            "The head-on case still uses the normal. Zero degrees is to the Guide Line, not to the wall surface.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps Guide Line geometry separate from wall-surface intuition.",
+                      retryLabel: "That warning would let the surface-angle shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f5-l4-analogy",
+                      badge: "Story relay",
+                      title: "Choose the mirror-bounce bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture equal-angle bounce without turning the lesson into a speed-change story at a new medium.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "guide-line-bounce",
+                          label: "Use the analogy by keeping a Guide Line standing at right angles to the wall. The incoming route and outgoing route make equal angles to that line, so the bounce stays symmetrical.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the reflection geometry cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "surface-skimming-rule",
+                          label: "Use the analogy by measuring everything from the wall face because the surface is the part learners can see, so the Guide Line only makes the picture more complicated.",
+                          feedback:
+                            "That would rebuild the shortcut the lesson is trying to remove.",
+                        },
+                        {
+                          value: "slowdown-at-wall",
+                          label: "Use the analogy by saying the wall slows the wave down and then speeds it back up again, because that is why the outgoing path turns away at the matching angle.",
+                          feedback:
+                            "That turns reflection into the wrong mechanism. The analogy needs equal-angle bounce, not a refraction-style speed story.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports the Guide Line rule without slipping into surface-angle or speed-change shortcuts.",
+                      retryLabel: "That analogy would blur the reflection idea instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F5_L3") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
