@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2"
         ? (() => {
+            if (lessonId === "F4_L2") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f4-l2-push-board",
+                  badge: "Source board",
+                  title: "Read the energy-per-charge comparison",
+                  scenario:
+                    "The Flow-Grid room is comparing a weaker source and a stronger source using the same moving charge packets. One trainee keeps treating a bigger potential difference as if it means more charge is moving rather than more energy per coulomb.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "voltage-is-energy-per-charge",
+                      label: "Potential difference tells how much energy each coulomb gains or loses. A bigger voltage means each charge packet carries more energy change, not that extra charge has appeared.",
+                      feedback:
+                        "Exactly. That keeps voltage tied to energy per charge instead of to total charge or current.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "voltage-means-more-charge",
+                      label: "A bigger potential difference means more charge must be moving through the circuit, because voltage is the amount of charge being pushed around the loop.",
+                      feedback:
+                        "That is the trap. Voltage is not the amount of charge; it is the energy transferred for each coulomb of charge.",
+                    },
+                    {
+                      value: "voltage-is-total-energy-only",
+                      label: "Potential difference gives the total energy in the whole circuit, so you can ignore how much charge is involved once the source is chosen.",
+                      feedback:
+                        "Potential difference still needs the 'per charge' part. Total energy transferred depends on both voltage and how much charge moves.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now read voltage as energy per charge instead of as extra charge in the loop.",
+                  retryLabel: "That note would blur voltage back into charge amount or total energy.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f4-l2-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first voltage note",
+                    scenario:
+                      "A trainee has written that potential difference is just the amount of charge in the circuit. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "energy-per-coulomb",
+                        label: "Potential difference tells how much energy is transferred to or from each coulomb. The amount of charge and the energy per charge must stay separate.",
+                        feedback:
+                          "Exactly. That correction separates charge amount from energy per charge, which is the key lesson move here.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "voltage-is-charge",
+                        label: "Potential difference is really just the amount of charge in the circuit, written in a different unit so the battery story sounds more electrical.",
+                        feedback:
+                          "That keeps the mistake alive. Voltage is about energy per charge, not how much charge exists.",
+                      },
+                      {
+                        value: "voltage-is-current-speed",
+                        label: "Potential difference tells how quickly the charge is moving, so a bigger voltage always means the current must already be larger too.",
+                        feedback:
+                          "Current and potential difference are different ideas. This lesson needs energy per charge secured before current-rate links come later.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The energy-per-charge story is now back in place.",
+                    retryLabel: "That would leave the voltage-equals-charge mistake in place.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f4-l2-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line voltage rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner starts the potential-difference lesson with the right anchor.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "voltage-energy-per-charge",
+                        label: "Potential difference is the energy transferred per unit charge, so it tells how much energy each coulomb gains from a source or loses in a component.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "voltage-is-total-energy",
+                        label: "Potential difference is the total energy in the circuit, which is why you do not need to think about charge once voltage is known.",
+                        feedback:
+                          "That drops the 'per charge' meaning. This lesson needs voltage tied to each coulomb, not to the whole circuit total by itself.",
+                      },
+                      {
+                        value: "voltage-is-route-difficulty",
+                        label: "Potential difference mainly tells how hard the route is for charge, so it is effectively the same idea as resistance in a simpler form.",
+                        feedback:
+                          "That swaps this lesson with the resistance lesson. Here, voltage is the energy transfer per charge, not the path difficulty.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean voltage anchor.",
+                    retryLabel: "That line would blur voltage back into total energy or resistance.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f4-l2-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the potential-difference analyst",
+                    scenario:
+                      "A trainee analyst wants to plug numbers into V = E / Q immediately without first deciding whether the question is asking about energy per charge or total energy transferred.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "name-per-charge-first",
+                        label: "First ask whether the question wants energy per coulomb or total energy. If it wants energy per charge, use V = E / Q. If it wants total energy, keep the per-charge meaning and use E = VQ after that story is secure.",
+                        feedback:
+                          "Exactly. That keeps the formula tied to the meaning instead of turning it into a blind substitution step.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "always-divide-by-charge",
+                        label: "Start by dividing by charge in every voltage question, because potential difference is always the only quantity that matters once a battery is mentioned.",
+                        feedback:
+                          "That is too mechanical. Some questions ask for total energy transferred, so the lesson needs the quantity identified before the formula step.",
+                      },
+                      {
+                        value: "focus-on-charge-only",
+                        label: "Start by finding how much charge moved, because once the charge is known the energy story takes care of itself automatically.",
+                        feedback:
+                          "Charge still needs an energy-per-charge link before the answer is meaningful. This lesson needs that link made explicit first.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable energy-per-charge method.",
+                    retryLabel: "That instruction would push the analyst back toward formula guessing.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f4-l2-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the more-charge-equals-more-voltage shortcut",
+                    scenario:
+                      "One crew member keeps saying a bigger potential difference simply means more charge is moving. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "same-charge-different-energy",
+                        label: "The same amount of charge can pass through sources with different voltages. What changes is the energy transferred to each coulomb, not the amount of charge itself.",
+                        feedback:
+                          "Exactly. That warning protects the lesson's main distinction.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "more-voltage-more-charge",
+                        label: "A bigger voltage must mean more charge has been supplied, because a stronger battery always creates extra charge in the loop.",
+                        feedback:
+                          "That keeps the trap alive. Batteries give energy per charge; they do not create extra charge as the meaning of voltage.",
+                      },
+                      {
+                        value: "voltage-uses-up-charge",
+                        label: "A larger potential difference means each charge packet gets used up more quickly, so the charge quantity itself becomes smaller after the component.",
+                        feedback:
+                          "This mixes energy transfer with charge disappearance. The lesson needs charge kept circulating while energy per charge changes.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now keeps charge amount separate from energy per charge.",
+                    retryLabel: "That warning would leave the voltage-equals-charge shortcut active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f4-l2-analogy",
+                    badge: "Story relay",
+                    title: "Choose the source-push bridge",
+                    scenario:
+                      "The team wants one analogy line that helps learners picture the same charge packets leaving one source with a smaller boost and another source with a larger boost, without confusing that with extra charge being created.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "same-packets-more-boost",
+                        label: "Use the analogy by keeping the same packets in view and comparing how much boost each packet gets from the source. A larger source push means more energy per packet, not extra packets.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving the energy-per-charge meaning cleanly.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "bigger-source-more-packets",
+                        label: "Use the analogy by showing a stronger source creating extra packets, because that is the easiest way to picture a bigger potential difference.",
+                        feedback:
+                          "That would build the exact misconception this lesson is trying to remove.",
+                      },
+                      {
+                        value: "energy-whole-circuit-only",
+                        label: "Use the analogy by talking only about the total energy in the whole circuit, because the packet-by-packet picture is not needed once a source is named.",
+                        feedback:
+                          "The packet-by-packet picture is the point here. This lesson needs the 'per charge' meaning kept explicit.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports voltage as energy per charge without slipping into extra-charge thinking.",
+                    retryLabel: "That analogy would blur the source-push idea instead of clarifying it.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F4_L1") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
