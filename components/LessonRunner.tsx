@@ -1774,10 +1774,218 @@ export default function LessonRunner({
       "Understand this idea before you move on",
       scaffoldClarityCards,
     );
-    const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2"
-        ? (() => {
-            if (lessonId === "F4_L2") {
+      const scaffoldRoleplayCard =
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3"
+          ? (() => {
+              if (lessonId === "F4_L3") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f4-l3-route-board",
+                    badge: "Route board",
+                    title: "Read the push-difficulty comparison",
+                    scenario:
+                      "The Flow-Grid room is comparing two ohmic routes and their straight I-V lines. One trainee keeps saying the steeper line must show greater resistance because it climbs faster.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "steeper-means-lower-resistance",
+                        label: "A steeper straight I-V line means more current flows for each extra volt, so the route is easier and the resistance is lower.",
+                        feedback:
+                          "Exactly. That keeps the graph shape tied to current response per volt, which is the key lesson move here.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "steeper-means-higher-resistance",
+                        label: "A steeper straight I-V line means the route is harder, because the graph rises more sharply and so the resistance must be greater.",
+                        feedback:
+                          "That is the trap. Greater resistance gives less current for each volt, so its straight line is flatter, not steeper.",
+                      },
+                      {
+                        value: "slope-does-not-matter",
+                        label: "Once the graph is a straight line through the origin, the slope no longer matters because any straight ohmic line shows the same resistance.",
+                        feedback:
+                          "Straightness shows the proportional pattern, but the slope still matters because it shows how much current you get for each volt.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read steeper I-V lines as easier routes with lower resistance.",
+                    retryLabel: "That note would keep the steeper-means-harder shortcut alive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f4-l3-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first resistance note",
+                      scenario:
+                        "A trainee has written that resistance is basically stored charge waiting inside the resistor. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "resistance-is-path-difficulty",
+                          label: "Resistance is how strongly the route opposes current. It is the path difficulty, not stored charge and not extra energy inside the component.",
+                          feedback:
+                            "Exactly. That correction puts resistance back in its proper role as opposition to current.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "resistance-is-stored-charge",
+                          label: "Resistance is the amount of charge the component can hold back, so a resistor with more stored charge has the greater resistance.",
+                          feedback:
+                            "That keeps the mistake alive. Resistance is not stored charge; it is the route difficulty faced by moving charge.",
+                        },
+                        {
+                          value: "resistance-is-voltage",
+                          label: "Resistance is really just another name for potential difference, because both tell you how strong the electrical push is.",
+                          feedback:
+                            "Voltage and resistance play different roles. Voltage is the push; resistance is the path difficulty that responds to that push.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now treats resistance as route difficulty instead of stored charge.",
+                      retryLabel: "That would leave the resistance story blurred into charge storage or voltage.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f4-l3-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line resistance rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the resistance lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "current-needs-push-and-difficulty",
+                          label: "For an ohmic component, current depends on both push and path difficulty: more voltage gives more current, while more resistance gives less current.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "resistance-creates-current",
+                          label: "Resistance is what creates current in the route, so a bigger resistance gives a stronger stream once the battery is connected.",
+                          feedback:
+                            "That reverses the lesson story. Resistance opposes current; it does not create it.",
+                        },
+                        {
+                          value: "current-only-needs-voltage",
+                          label: "Only the voltage matters once a battery is chosen, because resistance just changes the component label and not the stream itself.",
+                          feedback:
+                            "Resistance matters directly. At the same voltage, a harder path gives less current.",
+                        },
+                      ],
+                      successLabel: "Rule posted. The room now has one clean resistance anchor.",
+                      retryLabel: "That line would blur current, voltage, and resistance into the wrong relationship.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f4-l3-how-to-reason",
+                      badge: "Guidance channel",
+                      title: "Coach the I-V analyst",
+                      scenario:
+                        "A trainee analyst wants to divide numbers immediately without first deciding what is being held fixed, or whether the question is about current, resistance, or graph meaning.",
+                      prompt: "Choose the coaching instruction.",
+                      options: [
+                        {
+                          value: "hold-one-variable-fixed",
+                          label: "First decide what is being held fixed. At fixed resistance, compare how current responds to voltage. At fixed voltage, compare how current responds to resistance. Then use I = V / R or R = V / I.",
+                          feedback:
+                            "Exactly. That keeps the formula tied to the push-and-difficulty story instead of turning it into blind substitution.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "always-divide-voltage-by-current",
+                          label: "Start by dividing voltage by current in every resistance question, because once you have a number the graph meaning will take care of itself.",
+                          feedback:
+                            "That is too mechanical. This lesson needs the fixed quantity and the graph meaning identified before the arithmetic starts.",
+                        },
+                        {
+                          value: "focus-on-steepness-only",
+                          label: "Start with the graph slope only, because once the line is steeper or flatter you can ignore which quantity changed or what stayed fixed.",
+                          feedback:
+                            "Graph slope matters, but the lesson still needs the push-versus-difficulty comparison kept explicit.",
+                        },
+                      ],
+                      successLabel: "Good coaching. The analyst now has a reliable push-and-difficulty method.",
+                      retryLabel: "That instruction would push the analyst back toward formula guessing.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f4-l3-common-trap",
+                      badge: "Trap alert",
+                      title: "Block the steeper-means-harder shortcut",
+                      scenario:
+                        "One crew member keeps saying the steeper straight I-V line must show greater resistance because the line rises faster. You need the warning that shuts that shortcut down.",
+                      prompt: "Choose the trap warning.",
+                      options: [
+                        {
+                          value: "more-current-per-volt",
+                          label: "A steeper straight I-V line means more current flows for each volt, so the route is easier and the resistance is lower.",
+                          feedback:
+                            "Exactly. That warning protects the lesson's most important graph distinction.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "steeper-means-more-resistance",
+                          label: "A steeper line must mean the current is fighting harder to rise, so the component has the greater resistance.",
+                          feedback:
+                            "That keeps the trap alive. Higher resistance gives less current per volt, so its straight line is flatter.",
+                        },
+                        {
+                          value: "all-straight-lines-same",
+                          label: "Any straight I-V line through the origin shows the same resistance, so there is no need to compare steepness once the line is ohmic.",
+                          feedback:
+                            "Straightness shows proportionality, but the slope still shows how easily current rises for each volt.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now reads steeper I-V lines the right way.",
+                      retryLabel: "That warning would leave the steeper-equals-greater-resistance shortcut active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f4-l3-analogy",
+                      badge: "Story relay",
+                      title: "Choose the route-difficulty bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture the same source push acting on an easier route and a harder route, without turning resistance into stored charge or a second kind of current.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "same-push-easier-route",
+                          label: "Use the analogy by keeping the same push and comparing two routes: the easier route gives the bigger stream rate, while the harder route gives the smaller stream rate.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the push-and-difficulty meaning cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "harder-route-stores-packets",
+                          label: "Use the analogy by showing the harder route holding extra packets inside itself, because that is the easiest way to picture higher resistance.",
+                          feedback:
+                            "That would build the exact misconception this lesson is trying to remove.",
+                        },
+                        {
+                          value: "push-and-difficulty-are-same",
+                          label: "Use the analogy by treating push and route difficulty as two names for the same idea, because both change the current response.",
+                          feedback:
+                            "The lesson needs them kept separate. Push and route difficulty both matter, but they play different roles.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports resistance as route difficulty without slipping into storage or current confusion.",
+                      retryLabel: "That analogy would blur the push-and-difficulty story instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
+              if (lessonId === "F4_L2") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
                   id: "f4-l2-push-board",
