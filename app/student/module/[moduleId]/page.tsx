@@ -871,18 +871,6 @@ export default function StudentModulePage() {
           ? "Continue is ready now. Your progress is already saved."
           : "Wrap up below, then choose the next module when you are ready."
         : "Your place is saved automatically, so you can finish this mission at your own pace.";
-  const lessonDockHelperText = moduleCompleted
-    ? nextModule
-      ? nextModuleLocked
-        ? `You finished ${moduleId}. Unlock ${nextModule.id} below, or head back to the pathway.`
-        : `You finished ${moduleId}. ${nextModule.id} is ready when you want the next challenge.`
-      : "You finished this module. Your pathway progress is saved to your account."
-    : currentLessonCompleted
-      ? hasNextLesson
-        ? "Nice work. Continue is unlocked, and your place is saved to your account."
-        : "You have completed the last mission in this module. The next step is just below."
-      : "Your place is saved automatically, so you can leave and come back right here.";
-
   const toggleModuleFavorite = useCallback((): void => {
     const nextPreferenceState: StudentPreferenceState = {
       ...preferenceState,
@@ -1642,11 +1630,6 @@ export default function StudentModulePage() {
       {authenticated ? (
         <div className={styles.lessonDockShell}>
           <div className={styles.lessonDock}>
-            <div className={styles.lessonDockContext}>
-              <span className={styles.lessonDockEyebrow}>Current mission</span>
-              <span className={styles.lessonDockTitle}>{currentMissionLabel}</span>
-              <span className={styles.lessonDockHelper}>{lessonDockHelperText}</span>
-            </div>
             <div className={styles.lessonDockActions}>
               <button
                 className={styles.lessonDockButton}
