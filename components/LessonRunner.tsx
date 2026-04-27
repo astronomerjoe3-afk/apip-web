@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M6_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m6-l6-glow-cast-board",
+                badge: "Beam board",
+                title: "Choose the route across the gap before you total the mission",
+                scenario:
+                  "The Glow Cast board shows a beam crossing a vacuum gap toward two target plates, one dark and dull and one shiny. The ledger underneath also shows a warm-up stage and a gate stage for the same mission. One trainee wants to explain the gap crossing with conduction, while another wants one giant total without splitting the thermal stages.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "radiation-plus-stage-ledger",
+                    label: "Radiation is the route that crosses the vacuum gap, dark dull surfaces absorb more strongly than shiny ones, and the full mission total must still be built from separate stage bills rather than one blended shortcut.",
+                    feedback:
+                      "Exactly. That keeps route choice, surface finish, and ledger structure all in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "conduction-across-gap",
+                    label: "Treat the beam crossing as a strong conduction case, because the source and target still face each other closely enough that a direct thermal link explains the transfer better than radiation does.",
+                    feedback:
+                      "That would erase the vacuum-gap clue. Conduction needs matter in contact, but this route crosses the gap by radiation.",
+                  },
+                  {
+                    value: "one-big-total-shortcut",
+                    label: "Treat the whole mission as one total energy problem first, because once the final target is known the stage split and surface-finish detail mainly distract from the bigger answer.",
+                    feedback:
+                      "That would flatten the capstone structure. The lesson wants route choice first and stage-by-stage bookkeeping afterward.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the beam route and the ledger stages correctly.",
+                retryLabel: "That note would flatten the Glow Cast mission into the wrong capstone shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m6-l6-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the wrong-route and one-total shortcuts",
+                  scenario:
+                    "A trainee has written that the beam crossing the gap is conduction, while another says the thermal mission should be solved as one total without separating the warm-up and gate stages.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-radiation-and-stage-split",
+                      label: "Repair both ideas together: radiation is the route that crosses a vacuum gap, and multi-stage thermal missions must be totalled by adding the separate bills for each stage.",
+                      feedback:
+                        "Exactly. That restores both the route choice and the ledger method at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "gap-is-still-direct-transfer",
+                      label: "Tell them the gap is small enough that direct transfer is still the safest explanation, because the beam picture mainly helps us imagine the energy rather than choose a different route name.",
+                      feedback:
+                        "That would keep the first shortcut alive. The gap matters because it rules out conduction and convection.",
+                    },
+                    {
+                      value: "whole-mission-first",
+                      label: "Tell them it is fine to total the whole mission first and only split stages later if the arithmetic becomes awkward, because the final answer matters more than the path used to reach it.",
+                      feedback:
+                        "That would keep the second shortcut alive. The lesson wants the stage split protected from the start.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps beam route and stage totals separate.",
+                  retryLabel: "That would leave a main Glow Cast shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m6-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Glow Cast rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop collapsing route choice and ledger structure into a single blur.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "radiation-and-stage-anchor",
+                      label: "Radiation carries energy across a vacuum gap, surface finish changes absorption, and complex thermal missions need stage-by-stage totals.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "beam-is-just-heating-anchor",
+                      label: "A beam crossing the gap is mainly another way of showing ordinary heating, so the route name and the surface finish only add extra detail after the total energy answer is known.",
+                      feedback:
+                        "That would erase both the route choice and the absorption lesson from the anchor sentence.",
+                    },
+                    {
+                      value: "single-total-anchor",
+                      label: "The safest capstone rule is to build one total energy answer first, because separate stage bills only matter if a teacher specifically asks for them afterward.",
+                      feedback:
+                        "That would build the one-total shortcut directly into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Glow Cast rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m6-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the beam-route vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up radiation, absorption, shiny, dull, and stage total as if they all name the same kind of thermal result.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "radiation-absorption-stage-language",
+                      label: "Use radiation for the route across the gap, absorption for how much incoming beam energy a surface takes in, shiny or dull for the surface finish, and stage total for each separate ledger bill before the final sum.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its own job in the capstone lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "radiation-means-hotter-language",
+                      label: "Use radiation mainly as another word for the hotter part of the setup, because whichever surface gets warmer is automatically the one showing what radiation means.",
+                      feedback:
+                        "That would scramble a transfer route into a temperature outcome.",
+                    },
+                    {
+                      value: "absorption-is-total-language",
+                      label: "Use absorption as another name for the whole final energy total, because once the surface takes in energy there is no real need to keep stage totals or route labels separate.",
+                      feedback:
+                        "That would collapse surface behaviour, route choice, and bookkeeping into one term.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Glow Cast language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m6-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they blur the capstone steps",
+                  scenario:
+                    "The trainee analyst is about to read a beam-and-ledger mission by guessing one big formula first, without deciding how the energy crosses the gap or whether the thermal process has more than one stage.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "route-first-stage-second",
+                      label: "Choose the transfer route across the gap first. Then separate the thermal process into stage 1 and stage 2 bills before you add the totals and compare surface finishes.",
+                      feedback:
+                        "Exactly. That gives the analyst the right capstone workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "big-total-first",
+                      label: "Start with the final energy target only, because route names and stage splits are mostly support details that can be filled in later if the first answer seems incomplete.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main shortcut.",
+                    },
+                    {
+                      value: "surface-finish-only",
+                      label: "Focus only on whether the surface is shiny or dull, because once absorption is known the route across the gap and the separate ledger stages no longer matter much to the explanation.",
+                      feedback:
+                        "That would erase two of the main choices the capstone lesson is trying to protect.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean route-first, stage-by-stage method.",
+                  retryLabel: "That would send the analyst back into a flattened capstone explanation.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m6-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the wrong-route and one-giant-total shortcuts",
+                  scenario:
+                    "One crew member keeps naming conduction for the vacuum-gap beam, while another keeps treating the whole thermal mission as one giant total instead of separate stage bills.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "route-and-stage-warning",
+                      label: "Do not ignore the vacuum gap, and do not crush the ledger into one total too early. Radiation crosses the gap, and multi-stage missions need separate bills before the final sum.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "beam-is-beam-warning",
+                      label: "Warn mainly that the beam should be described carefully, because once students remember there is heating involved the exact route and stage structure usually become secondary details.",
+                      feedback:
+                        "That would leave the wrong-route shortcut mostly alive.",
+                    },
+                    {
+                      value: "tidy-arithmetic-warning",
+                      label: "Warn mainly that students should keep the arithmetic tidy, because stage separation matters less than making sure one neat final total appears at the end of the page.",
+                      feedback:
+                        "That would leave the one-total shortcut alive by downplaying the stage split.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps route choice and ledger stages visible.",
+                  retryLabel: "That warning would leave a main Glow Cast trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m6-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the spotlight-and-receipts analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners hold together vacuum-gap radiation, surface absorption, and separate stage totals without flattening the mission.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "spotlight-and-receipts",
+                      label: "Think of a spotlight shining across empty space onto two jackets, where the dark one absorbs more of the light. Then think of the total cost as two receipts added together: one for warming up and one for the state-change stage.",
+                      feedback:
+                        "Exactly. That analogy keeps gap crossing, surface finish, and ledger stages separate but connected.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heated-rope-analogy",
+                      label: "Think of the beam like heat running through a rope stretched across the gap, because the main goal is simply to picture energy getting from one side to the other somehow.",
+                      feedback:
+                        "That analogy would rebuild a contact route where the lesson is explicitly using a vacuum gap.",
+                    },
+                    {
+                      value: "single-bill-analogy",
+                      label: "Think of the whole mission like one utility bill with no item breakdown, because the separate stages and the surface detail mostly complicate what is really one final payment story.",
+                      feedback:
+                        "That analogy would erase the stage-by-stage bookkeeping the lesson is trying to build.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the radiation route and separate stage receipts instead of flattening them.",
+                  retryLabel: "That analogy would pull the lesson away from the right Glow Cast model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M6_L5") {
