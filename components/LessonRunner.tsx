@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M6_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m6-l1-warmth-board",
+                badge: "Warmth board",
+                title: "Keep Warmth Level separate from the Forge Ledger payment",
+                scenario:
+                  "The Warmth Level board compares two blocks that start at the same reading and receive the same energy payment. One block is larger, and another test uses a higher Level Cost material. One trainee says the same energy payment must force the same final temperature, while another says heat is the warm substance now stored inside the block.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "temperature-reading-vs-energy-transfer",
+                    label: "Keep the ideas separate: temperature is the Warmth Level reading right now, while heat is the energy transferred in or out. The same payment can still give different temperature rises when Build Size or Level Cost changes.",
+                    feedback:
+                      "Exactly. That keeps the first thermal distinction clean and useful.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "same-energy-same-temperature",
+                    label: "Treat the equal energy payment as enough to prove the same final temperature, because heat directly becomes the new temperature reading no matter what the block is made from or how large it is.",
+                    feedback:
+                      "That collapses the transfer story into the reading. Size and Level Cost can change the temperature rise even when the payment matches.",
+                  },
+                  {
+                    value: "heat-is-stored-substance",
+                    label: "Treat heat as the warm substance stored inside the block after the transfer ends, because temperature is only the number that tells you how much of that substance is trapped there.",
+                    feedback:
+                      "That rebuilds the old shortcut. Heat is transferred energy here, not a substance stored inside the sample.",
+                  },
+                ],
+                successLabel: "Pinned. The room now separates Warmth Level from the Forge Ledger payment.",
+                retryLabel: "That note would blur the first thermal distinction this lesson needs.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m6-l1-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the same-payment and stored-heat shortcuts",
+                  scenario:
+                    "A trainee has written that equal energy input must cause equal temperature rise, while another trainee says heat is the stuff stored inside the block after it warms up.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-reading-vs-transfer",
+                      label: "Repair both ideas together: temperature is the reading, heat is transferred energy, and the same energy payment can still produce different temperature rises when mass or Level Cost changes.",
+                      feedback:
+                        "Exactly. That restores both parts of the lesson at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "payment-sets-rise-alone",
+                      label: "Tell them the energy payment settles the rise by itself, because once the input is fixed the sample details only affect how quickly the temperature catches up, not where it ends.",
+                      feedback:
+                        "That leaves the first shortcut alive. The sample details matter to the size of the rise too.",
+                    },
+                    {
+                      value: "heat-lives-inside-block",
+                      label: "Tell them heat really is what the block stores after warming, because transferred energy only matters while it is moving and then becomes trapped heat once the process ends.",
+                      feedback:
+                        "That leaves the second shortcut alive. The lesson needs heat treated as transfer, not as a stored substance.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps reading and transfer in the right places.",
+                  retryLabel: "That would leave one of the main thermal shortcuts active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m6-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line warmth rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop using temperature and heat as if they are the same thing.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "temperature-vs-heat-anchor",
+                      label: "Temperature is the Warmth Level reading, while heat means transferred energy, so the same energy can still produce different temperature rises.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "temperature-is-stored-heat-anchor",
+                      label: "Temperature is the amount of stored heat inside a block, so a larger reading simply means more heat has collected there.",
+                      feedback:
+                        "That would rebuild the stored-heat shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "same-payment-same-rise-anchor",
+                      label: "Heat is the payment that always sets the same rise if the input is matched, because the reading can only change in one fixed way once the energy transfer begins.",
+                      feedback:
+                        "That would erase the role of sample size and Level Cost in the response.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right thermal distinction.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m6-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Warmth Level vocabulary board",
+                  scenario:
+                    "The crew keeps swapping Temperature, Heat, Build Size, and Level Cost as if they all answer the same question. You need the note that gives each term a clean job.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "reading-transfer-cost-language",
+                      label: "Use Temperature or Warmth Level for the current reading. Use heat for transferred energy. Use Build Size and Level Cost for the sample features that affect how big the temperature rise will be.",
+                      feedback:
+                        "Exactly. That keeps the reading, transfer, and response factors in the right places.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heat-and-temperature-same-language",
+                      label: "Use Heat and Temperature as near-interchangeable labels, because one names the energy and the other names how much of that energy is sitting in the sample.",
+                      feedback:
+                        "That would collapse the two key terms together and lose the lesson split.",
+                    },
+                    {
+                      value: "level-cost-is-extra-label",
+                      label: "Use Level Cost only as a unit detail for later formula work, because it does not really belong in the reasoning once the sample has already been heated.",
+                      feedback:
+                        "That would hide one of the main factors the lesson wants students to compare qualitatively.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Warmth Level language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m6-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they treat the payment like the whole answer",
+                  scenario:
+                    "The trainee analyst is about to compare two heating cases by looking only at the equal energy payment and ignoring the starting reading, the block size, and the Level Cost.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "match-start-then-change-one-factor",
+                      label: "Start by matching the starting Warmth Level, then change one factor at a time and ask whether the difference comes from Build Size or Level Cost. Keep the energy payment and the temperature reading as separate columns while you reason.",
+                      feedback:
+                        "Exactly. That gives the analyst a clean comparison method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equal-payment-settles-case",
+                      label: "Treat equal energy input as enough on its own, because once the payment is fixed the final temperature rise should no longer depend on what block is being heated.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main shortcut.",
+                    },
+                    {
+                      value: "watch-only-final-temperature",
+                      label: "Watch only the final temperature reading and ignore how the energy got there, because the reading already contains the whole heat story by the time the transfer ends.",
+                      feedback:
+                        "That would erase the transfer-versus-reading distinction the lesson is trying to build.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean reading-versus-transfer method.",
+                  retryLabel: "That would send the analyst back into a flattened thermal explanation.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m6-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the equal-payment and stored-heat shortcuts",
+                  scenario:
+                    "One crew member keeps saying equal energy input must force equal temperature rise, while another keeps saying heat is the warm substance a block stores after transfer.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "reading-not-substance-warning",
+                      label: "Do not use temperature as the stored form of heat, and do not assume equal payments force equal rises. Heat is transferred energy, temperature is the reading, and the rise still depends on sample properties.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-payment-usually-same-rise-warning",
+                      label: "Warn only that equal payments usually mean equal rises unless the samples are very unusual, because the energy input is still the main driver and usually settles the comparison by itself.",
+                      feedback:
+                        "That would keep the first shortcut mostly alive.",
+                    },
+                    {
+                      value: "heat-stays-inside-warning",
+                      label: "Warn mainly that stored heat can be hard to measure exactly, but it is still the right idea once the transfer has finished and the energy is no longer moving.",
+                      feedback:
+                        "That would keep the second shortcut alive by treating heat as a stored substance again.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps Warmth Level and transferred energy separate.",
+                  retryLabel: "That warning would leave a main thermal trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m6-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the same-budget, different-rise analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the same energy payment can still lead to different temperature rises, without treating heat as something stored like a liquid.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "same-budget-different-staircases",
+                      label: "Think of two staircases being climbed with the same energy budget. One staircase is longer or harder per step, so the same payment does not lift both climbers by the same number of levels. The budget is the transfer, while the final level is the reading.",
+                      feedback:
+                        "Exactly. That analogy keeps the payment separate from the final reading and lets the sample factors matter.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-fuel-same-dashboard",
+                      label: "Think of two vehicles receiving the same fuel amount, because equal fuel proves the same dashboard reading no matter what the vehicle is like once the energy has gone in.",
+                      feedback:
+                        "That analogy sneaks the equal-payment shortcut right back in.",
+                    },
+                    {
+                      value: "heat-water-in-bucket",
+                      label: "Think of heat like warm water poured into a bucket, because the main job is to picture the energy collecting inside the object until the bucket fills to a higher temperature.",
+                      feedback:
+                        "That analogy would rebuild the stored-substance shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the first thermal distinction instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right Warmth Level story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M5_L6") {
