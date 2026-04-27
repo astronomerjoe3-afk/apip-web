@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M7_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m7-l1-travel-board",
+                badge: "Travel board",
+                title: "Separate the traveling front from the local pad pulse",
+                scenario:
+                  "The stadium board shows one highlighted pad rising and settling while the wavefront crosses the whole field. One trainee keeps saying the pad itself travels with the front, while another wants to use the local up-down pulse as the wave speed measurement.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "pattern-travels-pad-stays-local",
+                    label: "Keep the two stories separate: the wave pattern or front travels across the field, but each pad only pulses locally around its own place. Wave speed comes from front distance and time, not from how far one pad moves up or down.",
+                    feedback:
+                      "Exactly. That protects the first wave anchor and the right speed method together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "pad-rides-with-front",
+                    label: "Treat the highlighted pad as riding forward with the wavefront, because once it rises when the front arrives its motion is the same thing as the pattern's travel.",
+                    feedback:
+                      "That collapses local motion into pattern travel. The pad responds locally while the front crosses the field.",
+                  },
+                  {
+                    value: "pad-motion-sets-wave-speed",
+                    label: "Measure the wave speed from the pad's own rise and fall, because the front distance only matters after we already know how much one point of the medium moved.",
+                    feedback:
+                      "That swaps the roles. Wave speed is about front travel across distance and time, not the pad's local oscillation size.",
+                  },
+                ],
+                successLabel: "Pinned. The room now keeps local pulse and pattern travel separate.",
+                retryLabel: "That note would flatten the first wave idea into the wrong motion story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m7-l1-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the traveling-pad shortcut",
+                  scenario:
+                    "A trainee has written that the chosen pad travels across the stadium with the wave, while another says the pad's own up-down motion should be used to calculate the wave speed.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-local-vs-pattern",
+                      label: "Repair both ideas together: the pad only oscillates locally, but the disturbance pattern travels. Use the front's crossing distance and time for wave speed, and keep the pad's pulse as a separate local response.",
+                      feedback:
+                        "Exactly. That restores both the motion split and the correct speed method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pad-mostly-carries-wave",
+                      label: "Tell them the pad is still mostly carrying the wave across the field, because once it joins the front its local motion and the front motion become close enough to treat as one story.",
+                      feedback:
+                        "That keeps the first shortcut alive. The lesson needs the pad and the traveling pattern kept distinct.",
+                    },
+                    {
+                      value: "one-point-speed-method",
+                      label: "Tell them it is fine to estimate the wave speed from one pad's local motion first, because the field-wide front distance only becomes useful once the local movement has already been measured.",
+                      feedback:
+                        "That keeps the second shortcut alive. The speed belongs to the front crossing, not the local pulse size.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps the first wave split clean.",
+                  retryLabel: "That would leave a main travel-pattern shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m7-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line travel-pattern rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop mixing up what travels with what only pulses.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "wave-anchor",
+                      label: "A wave is a traveling disturbance pattern, while each point in the medium responds locally rather than traveling with the pattern.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "medium-travels-anchor",
+                      label: "A wave mainly means the medium itself travels with the pattern, because the visible front can only move if the same part of the medium carries it forward.",
+                      feedback:
+                        "That would build the main shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "speed-is-local-anchor",
+                      label: "A wave is mainly the local pulse of one point, so the best anchor is to treat front travel as a secondary description after the local motion has been measured.",
+                      feedback:
+                        "That would erase the field-wide pattern travel the lesson is trying to protect.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right travel-pattern rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m7-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the wavefront vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up wave, wavefront, oscillation, and wave speed as if they all name the same thing.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "wavefront-language",
+                      label: "Use wave for the traveling disturbance pattern, oscillation for the local up-down motion of one point, wavefront for a line joining points in the same phase, and wave speed for the front's crossing distance per time.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its own job in the lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "wavefront-is-one-pad-language",
+                      label: "Use wavefront mainly for whichever single pad is easiest to watch, because same-phase language is more technical than students really need at this stage.",
+                      feedback:
+                        "That would erase the actual meaning of wavefront and collapse it into one point.",
+                    },
+                    {
+                      value: "speed-is-oscillation-language",
+                      label: "Use wave speed as another name for how quickly one pad oscillates, because the field-wide front travel only repeats what the local motion already tells us.",
+                      feedback:
+                        "That would scramble the local pulse and front travel ideas again.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the wave language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m7-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they track the wrong thing",
+                  scenario:
+                    "The trainee analyst is about to describe the whole wave by watching only one pad and never separating the pad's local pulse from the field-wide front crossing.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "watch-pad-then-front",
+                      label: "Watch one pad first so you can name the local oscillation. Then switch to the front crossing distance and time to describe the traveling pattern and calculate the speed.",
+                      feedback:
+                        "Exactly. That gives the analyst the right two-part workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "one-pad-settles-whole-wave",
+                      label: "Stay with the chosen pad the whole time, because once one point is understood there is no real need to separate that local motion from the wave crossing the field.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main shortcut.",
+                    },
+                    {
+                      value: "front-only-skip-local",
+                      label: "Ignore the local pulse and just measure the front crossing, because once the speed is known the medium response does not add anything useful to the explanation.",
+                      feedback:
+                        "That would erase half the lesson. The local response and the traveling pattern both matter here.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean local-versus-pattern method.",
+                  retryLabel: "That would send the analyst back into a flattened wave explanation.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m7-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the traveling-medium and local-speed shortcuts",
+                  scenario:
+                    "One crew member keeps saying the medium itself travels across the stadium, while another keeps turning the pad's local motion into the wave speed calculation.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "pattern-vs-medium-warning",
+                      label: "Do not turn the medium into the traveler, and do not use one point's local pulse as the speed method. The disturbance pattern travels across the field, while each point responds locally.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "local-motion-mostly-enough-warning",
+                      label: "Warn mainly that students should watch the local pulse carefully, because once that is accurate the larger field-wide travel story usually takes care of itself.",
+                      feedback:
+                        "That would leave the speed shortcut mostly alive.",
+                    },
+                    {
+                      value: "field-travel-only-warning",
+                      label: "Warn mainly that students should focus on the front crossing, because the local motion can usually be treated as the same thing in simpler wave setups like this.",
+                      feedback:
+                        "That would leave the medium-travel shortcut alive by collapsing the two motions together.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps wave travel and local response separate.",
+                  retryLabel: "That warning would leave a main travel-pattern trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m7-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the crowd-wave analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture a pattern moving across a field while each point only moves locally.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "crowd-wave-analogy",
+                      label: "Think of a crowd wave in a stadium: the pattern sweeps across the stands, but each person only stands and sits in place when the front reaches them.",
+                      feedback:
+                        "Exactly. That analogy keeps the traveling pattern and the local response clearly separated.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "marching-line-analogy",
+                      label: "Think of a line of marchers carrying the pattern forward with their own bodies, because a wave works best when the same part of the medium physically travels with it.",
+                      feedback:
+                        "That analogy would rebuild the traveling-medium shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "single-spring-analogy",
+                      label: "Think only of one spring bobbing up and down, because the local motion is really the whole wave story and the pattern crossing the field is just a larger-scale version of the same thing.",
+                      feedback:
+                        "That analogy would erase the difference between one point's pulse and the front's travel.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the first wave anchor instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right travel-pattern model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M6_L6") {
