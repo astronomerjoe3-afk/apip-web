@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M4_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m4-l4-equal-level-board",
+                badge: "Level board",
+                title: "Read the same-depth line before the room trusts vessel shape",
+                scenario:
+                  "The Equal-Level board marks one depth line through a narrow vessel and a wide vessel filled with the same resting liquid. One trainee keeps saying the curved or wider side must change the pressure reading, while another wants to use equal depth even after switching one side to a different liquid.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "same-liquid-same-depth-same-pressure",
+                    label: "Read the board as a same-location rule: in the same resting liquid, equal depth means equal pressure, and vessel shape only changes the outline around the point.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored to local depth instead of container shape.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "wider-vessel-more-pressure",
+                    label: "Treat the wider vessel as the higher-pressure case, because more liquid can lean on the patch when the container spreads out around that depth.",
+                    feedback:
+                      "That drifts back into the shape misconception. The local pressure does not care how the vessel widens elsewhere.",
+                  },
+                  {
+                    value: "equal-depth-always-enough",
+                    label: "Treat equal depth as enough on its own, because once both patches sit at the same level the liquid type no longer matters for the reading.",
+                    feedback:
+                      "That leaves density out of the rule. Equal depth only guarantees equal pressure when the liquid is the same too.",
+                  },
+                ],
+                successLabel: "Pinned. The room now trusts the same-level rule over the vessel outline.",
+                retryLabel: "That note would pull the room back into the wrong same-level picture.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m4-l4-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the vessel-shape shortcut before it spreads",
+                  scenario:
+                    "A trainee has written that patches in differently shaped vessels must feel different pressure even at the same depth, while another has written that equal depth guarantees equal pressure even across different liquids.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-shape-and-liquid-condition",
+                      label: "Repair both ideas together: same pressure comes from same liquid plus same depth, while vessel shape itself does not enter the local hydrostatic rule.",
+                      feedback:
+                        "Exactly. That restores the full same-level condition in one move.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shape-usually-matters",
+                      label: "Tell them equal depth is a good guide, but unusual vessel shape can still tilt the reading because the liquid has to fit around the walls differently.",
+                      feedback:
+                        "That keeps the shape misconception alive. The local pressure is not set by wall outline.",
+                    },
+                    {
+                      value: "equal-depth-alone-solves-all",
+                      label: "Tell them equal depth solves the comparison every time, because the depth line is the only condition the same-level rule really needs once the liquid is resting.",
+                      feedback:
+                        "That would erase the same-liquid condition the rule depends on.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses the full same-level rule instead of two shortcuts.",
+                  retryLabel: "That would leave the same-level misconceptions active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m4-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line same-level rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right anchor before the comparisons begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "same-level-anchor",
+                      label: "In the same resting liquid, patches at the same depth have the same pressure even if the container shape around them looks different.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shape-anchor",
+                      label: "Pressure follows the vessel outline, so the same depth can still produce different readings when the walls curve or widen around the patch.",
+                      feedback:
+                        "That would post the main misconception as the anchor sentence.",
+                    },
+                    {
+                      value: "depth-only-anchor",
+                      label: "Pressure depends only on depth, so equal depth guarantees equal pressure no matter what liquid is used at each point.",
+                      feedback:
+                        "That would blur the same-liquid condition that keeps the rule true.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right same-level rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m4-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the same-level vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps same level, same liquid, and location property doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "same-level-language",
+                      label: "Same level means equal depth below the same liquid surface. Pressure is a location property in the liquid, so vessel shape elsewhere does not decide the reading at that point.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary tied to the actual rule.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-level-means-same-shape-zone",
+                      label: "Treat same level as mainly meaning the patches sit in similar-looking parts of the vessel, because shape around the point helps determine whether the pressures can really match.",
+                      feedback:
+                        "That pulls the terms back into the shape misconception the lesson is defeating.",
+                    },
+                    {
+                      value: "location-means-any-liquid",
+                      label: "Treat pressure as a location property only in the sense that depth matters, because once two patches line up horizontally the liquid type no longer changes the meaning of the comparison.",
+                      feedback:
+                        "That erases the role of liquid density from the vocabulary itself.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the same-level model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m4-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare shapes instead of conditions",
+                  scenario:
+                    "The trainee analyst is about to judge which patch has greater pressure by comparing vessel width and wall shape before checking whether the same-level condition is actually satisfied.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "check-liquid-and-depth-first",
+                      label: "Start by checking whether the liquid is the same and whether the patches are at the same depth. Only if one of those conditions breaks should you expect the pressure readings to differ.",
+                      feedback:
+                        "Exactly. That gives the analyst a real same-level method instead of a shape reflex.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "compare-shape-first",
+                      label: "Start with vessel shape, because the container outline is the best clue to how the liquid presses around each patch before the depth details are checked.",
+                      feedback:
+                        "That is the exact reflex this lesson is trying to replace.",
+                    },
+                    {
+                      value: "compare-depth-only",
+                      label: "Start and finish with depth, because equal depth settles the whole comparison even if the patches sit in different liquids.",
+                      feedback:
+                        "That overuses depth and drops the same-liquid condition.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean same-level comparison method.",
+                  retryLabel: "That instruction would send the analyst back into shortcut thinking.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m4-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the vessel-shape shortcut",
+                  scenario:
+                    "One crew member keeps pointing to the narrow side of the vessel and saying it must create a higher reading because the liquid feels more squeezed there.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "shape-does-not-set-local-pressure",
+                      label: "Do not use vessel shape as the pressure test. At one point in the same resting liquid, equal depth gives equal pressure even when the walls around the point look very different.",
+                      feedback:
+                        "Exactly. That warning blocks the main shortcut this lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "narrow-sides-usually-higher",
+                      label: "Warn only that vessel shape can be misleading sometimes, because narrow sections still usually build more pressure unless the depth difference is tiny.",
+                      feedback:
+                        "That would keep the main misconception active instead of stopping it.",
+                    },
+                    {
+                      value: "shape-beats-liquid-type",
+                      label: "Warn mainly against ignoring vessel shape, because liquid type only changes the numbers after the geometry has already set the pressure pattern first.",
+                      feedback:
+                        "That reverses the lesson completely. Shape is not the deciding factor here.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist the vessel-shape shortcut.",
+                  retryLabel: "That warning would leave the main same-level trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m4-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the same-level analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why two patches at the same depth in the same liquid can match even when the container around them looks different.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "same-floor-in-building",
+                      label: "Think of two rooms on the same floor of one building: if the load above them is the same kind of stack and the same height, the support at that level matches even if the hallways around them have different shapes.",
+                      feedback:
+                        "Exactly. That analogy keeps equal level stronger than the surrounding outline.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "narrow-corridor-more-load",
+                      label: "Think of a narrow corridor carrying more load just because it squeezes the traffic, so a narrow vessel side should also give more pressure at the same depth.",
+                      feedback:
+                        "That drifts straight back into the vessel-shape misconception the analogy should defeat.",
+                    },
+                    {
+                      value: "same-floor-any-material",
+                      label: "Think of any two rooms at the same floor height as equally loaded no matter what material is stacked above them, because height alone settles the whole comparison.",
+                      feedback:
+                        "That would hide the same-liquid condition. Equal level alone is not the whole rule.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the same-level story clean instead of distorting it.",
+                  retryLabel: "That analogy would pull the lesson away from the right equal-level picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M4_L3") {
