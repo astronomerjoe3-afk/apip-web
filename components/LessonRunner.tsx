@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3"
           ? (() => {
+              if (lessonId === "F5_L3") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f5-l3-product-board",
+                    badge: "Product board",
+                    title: "Read the frequency-wavelength comparison",
+                    scenario:
+                      "The Signal-Stadium room is comparing two waves with different launch rates and different front spacings. One trainee keeps saying the wave with the larger frequency must be faster before anyone checks the wavelength or the units.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "compare-products-after-unit-fix",
+                        label: "Convert the wavelength into metres first, then use v = f x λ and compare the products. A higher frequency can be balanced by a shorter wavelength, so the speeds can still match.",
+                        feedback:
+                          "Exactly. That keeps unit discipline and product comparison doing the right work.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "frequency-alone-sets-speed",
+                        label: "The wave with the larger frequency must be faster, because more fronts per second automatically means a greater wave speed whatever the wavelength is.",
+                        feedback:
+                          "That is the trap. Wave speed depends on frequency and wavelength together, not on frequency alone.",
+                      },
+                      {
+                        value: "larger-wavelength-alone-sets-speed",
+                        label: "The wave with the longer wavelength must be faster, because a wider front spacing automatically means more distance covered each second whatever the frequency is.",
+                        feedback:
+                          "Wavelength alone is not enough either. The lesson needs the full product in v = f x λ.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now compare wave speeds by product, not by one factor at a time.",
+                    retryLabel: "That note would let the one-variable shortcut survive.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f5-l3-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first wave-speed note",
+                      scenario:
+                        "A trainee has written that frequency by itself decides wave speed, so wavelength only changes the look of the wave and not the result. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "speed-needs-both-factors",
+                          label: "Wave speed depends on both frequency and wavelength together through v = f x λ. You must know the full product before judging which wave is faster.",
+                          feedback:
+                            "Exactly. That correction secures the two-factor rule the lesson depends on.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "frequency-dominates",
+                          label: "Frequency is the main speed-setting factor, so wavelength only matters when two waves happen to have the same frequency.",
+                          feedback:
+                            "That keeps the mistake alive. Wavelength matters every time because it is part of the product.",
+                        },
+                        {
+                          value: "units-do-not-matter",
+                          label: "You can compare the products directly without converting centimetres into metres first, because the equation will still show which wave is faster.",
+                          feedback:
+                            "Unit discipline is part of the lesson. The wavelength has to be in metres if the speed is being found in metres per second.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now treats wave speed as a two-factor product with clean units.",
+                      retryLabel: "That would leave the one-factor speed shortcut active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f5-l3-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line wave-equation rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the wave-equation lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "wave-speed-product-rule",
+                          label: "Wave speed comes from the product of frequency and wavelength: v = f x λ, with the units kept consistent before you compare or calculate.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "frequency-is-speed-rule",
+                          label: "Wave speed mainly follows the launch rate, so once the frequency is known the wavelength only refines the answer rather than determining it.",
+                          feedback:
+                            "That blurs the lesson into a one-factor shortcut. The full product sets the speed.",
+                        },
+                        {
+                          value: "wavelength-is-distance-rule",
+                          label: "Wave speed is really just the wavelength measured in metres, because the front spacing already tells you how far the wave travels.",
+                          feedback:
+                            "Wavelength is only one part of the relation. The launch rate still has to be included.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts from the product rule instead of one-variable guessing.",
+                      retryLabel: "That line would blur the equation story instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f5-l3-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the ripple-run analyst",
+                      scenario:
+                        "A trainee keeps comparing the numbers before converting the wavelength or checking whether the question asks for speed or wavelength. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "convert-then-use-equation",
+                          label: "First convert the wavelength into metres. Then use v = f x λ if the speed is unknown, or rearrange to λ = v / f if the wavelength is unknown. Compare the full product, not one factor alone.",
+                          feedback:
+                            "Exactly. That keeps unit discipline and equation choice in the right order.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "frequency-first-guess-speed",
+                          label: "First rank the waves by frequency, because the fastest launch rate usually tells you the fastest wave before the wavelength even matters.",
+                          feedback:
+                            "That would rebuild the shortcut the lesson is removing. The wavelength still has to be part of the comparison.",
+                        },
+                        {
+                          value: "use-bigger-number-rule",
+                          label: "First look for whichever wave has the bigger number in the prompt, because the largest number usually identifies the fastest case before any rearrangement is needed.",
+                          feedback:
+                            "The lesson needs a physics rule, not a bigger-number guess. Units and the full relation have to stay in play.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable wave-equation method instead of a number-spotting shortcut.",
+                      retryLabel: "That method would scramble the calculation story instead of ordering it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f5-l3-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the higher-frequency-means-faster shortcut",
+                      scenario:
+                        "The next learner note says: 'Wave R must be faster because its frequency is larger.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "frequency-alone-not-enough",
+                          label: "Frequency alone is not enough because wave speed depends on both frequency and wavelength together. A larger frequency can still match a smaller speed if the wavelength changes appropriately.",
+                          feedback:
+                            "Exactly. That warning blocks the one-factor shortcut cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "frequency-always-wins",
+                          label: "The shortcut is mostly safe because frequency is the stronger factor in the product, so wavelength usually only changes the exact decimal places.",
+                          feedback:
+                            "That would keep the trap alive. Neither factor can be ignored if you want a safe speed judgment.",
+                        },
+                        {
+                          value: "units-fix-everything",
+                          label: "As long as the units are converted correctly, the larger frequency will still decide the faster wave even before the wavelength is multiplied in.",
+                          feedback:
+                            "Correct units matter, but they do not make wavelength irrelevant. The product still has to be completed.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps one-factor claims out of the wave-speed story.",
+                      retryLabel: "That warning would let the frequency shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f5-l3-analogy",
+                      badge: "Story relay",
+                      title: "Choose the beat-rate bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture why launch rate and front spacing work together, without letting either one become the whole speed story by itself.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "beat-rate-times-gap",
+                          label: "Use the analogy by treating speed as the number of fronts launched each second multiplied by the spacing between matching fronts. A faster beat can be balanced by a tighter gap, so the ripple-run can still match.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the product rule cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "more-fronts-always-faster",
+                          label: "Use the analogy by saying the route with more fronts launched each second is always faster, because the front spacing only changes the look of the pattern and not the travel rate.",
+                          feedback:
+                            "That would rebuild the exact shortcut the lesson is trying to remove.",
+                        },
+                        {
+                          value: "wider-gap-always-faster",
+                          label: "Use the analogy by saying the wider pulse gap is always the faster wave, because a bigger spacing means each front must cover more ground every second whatever the launch rate is.",
+                          feedback:
+                            "That turns wavelength into the only factor, which breaks the two-factor wave-speed story.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports the product rule without slipping back into one-factor guessing.",
+                      retryLabel: "That analogy would blur the wave-equation idea instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F5_L2") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
