@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6"
           ? (() => {
+              if (lessonId === "F4_L6") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f4-l6-safety-board",
+                    badge: "Safety board",
+                    title: "Read the power-and-safety deck",
+                    scenario:
+                      "The Flow-Grid room is comparing a normal device run, a longer run, and a fault-current case. One trainee keeps mixing them up by saying a fuse measures total energy used and that a longer run must raise the power.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "power-time-current-limit",
+                        label: "Power tells how much electrical energy is transferred each second. Letting the same power run longer increases total energy, while the fuse only responds if the current rises above its safe limit.",
+                        feedback:
+                          "Exactly. That keeps rate, total transfer, and safety cut-off in their proper roles.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "fuse-measures-total-energy",
+                        label: "A fuse mainly tracks the total energy a device has used, so a longer run always makes the fuse more likely to melt even if the current stays normal.",
+                        feedback:
+                          "That is the trap. A fuse responds to dangerously large current, not to total energy by itself.",
+                      },
+                      {
+                        value: "longer-run-raises-power",
+                        label: "If the device stays on longer, the power must rise, because a longer run means the circuit transfers more energy each second than before.",
+                        feedback:
+                          "Longer time can raise the total transferred energy, but it does not by itself change the power per second.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read power, total transfer, and safety as one connected story.",
+                    retryLabel: "That note would blur the rate, time, and safety-limit roles the lesson is trying to secure.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f4-l6-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first safety note",
+                      scenario:
+                        "A trainee has written that a fuse boosts power when a device needs extra energy and only opens after the device has used too much total energy. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "fuse-stops-large-current",
+                          label: "A fuse is a safety device that breaks the circuit when current becomes dangerously large. It does not boost power and it does not measure total energy used over time.",
+                          feedback:
+                            "Exactly. That correction puts the fuse back in its proper current-limit role.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "fuse-adds-extra-push",
+                          label: "A fuse adds extra push when a device needs more power, then disconnects the route only after the device has finished using the extra energy.",
+                          feedback:
+                            "That keeps both mistakes alive. A fuse does not increase push; it interrupts unsafe current.",
+                        },
+                        {
+                          value: "fuse-stores-charge",
+                          label: "A fuse stores spare charge in the route, so if the current rises it can soak up the extra charge before the wire overheats.",
+                          feedback:
+                            "A fuse is not a charge store. Its role is to break the route if current becomes unsafe.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now treats the fuse as a current safety gate, not a power booster.",
+                      retryLabel: "That would leave the fuse story blurred into power or energy storage.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f4-l6-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line safety rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the power-and-safety lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "power-time-safety-anchor",
+                          label: "Power tells how fast energy is transferred, total energy depends on power and time together, and safety depends on keeping current below the fuse or breaker limit.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "power-is-total-energy",
+                          label: "Power is the total energy used by the device, while the fuse checks whether the device has been running for too long.",
+                          feedback:
+                            "That mixes up the lesson roles. Power is a rate, and the fuse responds to current, not simply to running time.",
+                        },
+                        {
+                          value: "fuse-controls-power-directly",
+                          label: "The main safety idea is that the fuse controls how much power the circuit can have, so energy and current do not need to be separated in the analysis.",
+                          feedback:
+                            "The lesson needs those ideas separated. The fuse limits unsafe current; power and total energy still need their own reasoning.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts from rate, total transfer, and safety-limit roles that stay distinct.",
+                      retryLabel: "That line would keep the power and safety story blurred together.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f4-l6-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the safety analyst",
+                      scenario:
+                        "A trainee keeps skipping between formulas and missing whether the question is about rate, total transfer, or safety cut-off. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "power-then-energy-then-safety",
+                          label: "First use P = VI to find the transfer rate each second. Then use E = Pt if the question asks for total energy over a running time. After that, compare the current with the fuse or breaker rating to decide whether the route stays safe.",
+                          feedback:
+                            "Exactly. That keeps the analysis ordered around rate first, total transfer second, and safety check third.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "time-first-then-voltage",
+                          label: "First decide how long the device runs, because a longer time tells you the power. Then compare the voltage with the fuse rating to decide whether the route is safe.",
+                          feedback:
+                            "Time alone does not tell you the power, and fuse ratings are about current, not voltage.",
+                        },
+                        {
+                          value: "fuse-first-everything-else-follows",
+                          label: "First check the fuse rating, because once you know that you can treat power and total energy as the same quantity for the rest of the calculation.",
+                          feedback:
+                            "The fuse check matters, but power and total energy still answer different questions and cannot be collapsed into one quantity.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable power-energy-safety method instead of a blur of formulas.",
+                      retryLabel: "That method would scramble the lesson sequence instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f4-l6-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the longer-time-means-more-power shortcut",
+                      scenario:
+                        "The next learner note says: 'If the same device runs for longer, its power becomes bigger because the total energy is larger.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "time-changes-total-not-rate",
+                          label: "Running for longer can increase the total transferred energy, but it does not by itself change the power. Power is the rate of energy transfer each second.",
+                          feedback:
+                            "Exactly. That warning blocks the time-changes-power shortcut cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "longer-time-raises-current",
+                          label: "A longer run always raises the current, so the power must rise too even if the circuit itself has not changed.",
+                          feedback:
+                            "Current does not rise just because time passes. The circuit conditions have to change for the current to change.",
+                        },
+                        {
+                          value: "fuse-responds-to-long-time",
+                          label: "The fuse becomes the main reason power rises over time, because the safety gate delays the transfer at first and then releases it later.",
+                          feedback:
+                            "That would invent the wrong fuse story. A fuse responds to unsafe current; it does not gradually change the power over time.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps transfer rate and total transfer in the right places.",
+                      retryLabel: "That warning would let the power-versus-total-energy shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f4-l6-analogy",
+                      badge: "Story relay",
+                      title: "Choose the safety-gate bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture rate, total transfer, and safety cut-off together without turning the fuse into a power source.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "stream-rate-run-time-safety-gate",
+                          label: "Use the analogy by keeping a stream rate for power, a longer running time for the growing total transfer, and a safety gate that opens only when the stream becomes dangerously large.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving all three lesson moves without giving the safety gate the wrong job.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "gate-adds-extra-stream",
+                          label: "Use the analogy by saying the safety gate adds more stream whenever the device needs extra energy, because that makes the role of the fuse feel more active.",
+                          feedback:
+                            "That breaks the lesson meaning. The safety gate cuts off unsafe current; it does not add extra stream.",
+                        },
+                        {
+                          value: "longer-run-means-faster-stream",
+                          label: "Use the analogy by saying the stream automatically gets faster the longer the route stays open, because that shows why long runs give more total energy.",
+                          feedback:
+                            "Longer running time can give more total transfer without making the stream faster. The analogy needs time and rate kept separate.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports power, total transfer, and safety cut-off without mixing their roles.",
+                      retryLabel: "That analogy would blur the safety story instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F4_L5") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
