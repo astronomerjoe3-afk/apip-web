@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M7_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m7-l3-ripple-run-board",
+                badge: "Run board",
+                title: "Build Ripple Run from launch rate and front spacing",
+                scenario:
+                  "The Beat-Rate board shows one run with 4 Hz and a 3 m Pulse Gap, then another with 6 Hz and a 2 m Pulse Gap. One trainee wants to say the faster launch rate must always mean the faster wave, while another wants to choose from wavelength alone because the fronts are easier to see.",
+                prompt: "Pin the note that keeps the speed story honest.",
+                options: [
+                  {
+                    value: "speed-is-product",
+                    label: "Keep all three jobs separate: frequency is how many matching fronts are launched each second, wavelength is the spacing between matching fronts, and wave speed is built from the product v = fλ.",
+                    feedback:
+                      "Exactly. That protects the relationship instead of letting one quantity take over the whole story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "frequency-alone-wins",
+                    label: "Use frequency as the main answer because launching fronts more often automatically means the wave is faster, even before the spacing is checked.",
+                    feedback:
+                      "That would erase the wavelength factor. A higher frequency does not guarantee a faster wave unless the full product is larger.",
+                  },
+                  {
+                    value: "wavelength-alone-wins",
+                    label: "Use wavelength as the main answer because the visible front spacing tells the real travel story more directly than the launch rate does.",
+                    feedback:
+                      "That would erase the frequency factor. The speed comes from launch rate and spacing together.",
+                  },
+                ],
+                successLabel: "Pinned. The room now treats Ripple Run as a relationship, not a one-quantity shortcut.",
+                retryLabel: "That note would flatten the wave-speed model into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m7-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the one-quantity speed shortcut",
+                  scenario:
+                    "One trainee has written that a higher Beat Rate always means a faster wave, while another has written that the largest Pulse Gap must always mean the fastest run.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-with-product",
+                      label: "Repair both claims by rebuilding the full relationship: frequency counts launches each second, wavelength measures the gap between matching fronts, and the speed comes from multiplying the two.",
+                      feedback:
+                        "Exactly. That puts the whole relationship back in place.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-frequency-priority",
+                      label: "Repair the wavelength claim by saying Beat Rate is the deeper quantity, because source timing usually decides speed more reliably than front spacing does.",
+                      feedback:
+                        "That would keep one shortcut alive. This lesson needs both quantities protected together.",
+                    },
+                    {
+                      value: "repair-with-wavelength-priority",
+                      label: "Repair the frequency claim by saying Pulse Gap is the more trustworthy quantity, because students can see spacing directly while launch rate is more abstract.",
+                      feedback:
+                        "That would keep the other shortcut alive. The lesson needs the product, not a preferred winner.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps the full wave-speed relationship intact.",
+                  retryLabel: "That would leave a one-quantity shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m7-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Ripple Run rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop turning wave speed into a frequency-only or wavelength-only answer.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "ripple-run-anchor",
+                      label: "Wave speed is built from launch rate and front spacing together: v = fλ.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "frequency-anchor",
+                      label: "Wave speed is mainly the source launch rate, so wavelength is usually just a way to picture the same answer more clearly.",
+                      feedback:
+                        "That would build the first shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "wavelength-anchor",
+                      label: "Wave speed is mainly the front spacing, so frequency mostly helps describe how often the same spacing pattern repeats.",
+                      feedback:
+                        "That would build the other shortcut into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Ripple Run rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m7-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Beat Rate and Pulse Gap vocabulary board",
+                  scenario:
+                    "The crew keeps swapping the meanings of frequency, wavelength, and wave speed until they sound like three names for the same measurement.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-meanings-note",
+                      label: "Use frequency for the number of matching fronts launched each second, wavelength for the spacing between matching fronts, and wave speed for how fast the pattern travels through the medium.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-timing-note",
+                      label: "Treat frequency and speed as almost the same idea, because if the launch timing changes the travel story has effectively already changed too.",
+                      feedback:
+                        "That would collapse two quantities together and hide the wavelength factor.",
+                    },
+                    {
+                      value: "term-spacing-note",
+                      label: "Treat wavelength and speed as almost the same idea, because wider front spacing already tells the movement story before the launch timing is considered.",
+                      feedback:
+                        "That would collapse another pair of quantities together and hide the frequency factor.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the wave-speed terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m7-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they grab one number",
+                  scenario:
+                    "The trainee analyst is about to pick whichever quantity looks most obvious in the table instead of naming what each quantity means before calculating the Ripple Run.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-meaning-then-multiply",
+                      label: "Name what each quantity means first: Beat Rate is frequency and Pulse Gap is wavelength. Then calculate the wave speed from the full product rather than guessing from one column.",
+                      feedback:
+                        "Exactly. That gives the analyst the right step order.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "use-frequency-first",
+                      label: "Start with Beat Rate only, because a good speed estimate usually comes from the source timing before any spacing correction is added.",
+                      feedback:
+                        "That would send the analyst straight into the frequency-only shortcut.",
+                    },
+                    {
+                      value: "use-wavelength-first",
+                      label: "Start with Pulse Gap only, because the visible front spacing normally tells the travel story more directly than the rate column does.",
+                      feedback:
+                        "That would send the analyst straight into the wavelength-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean quantity-meaning workflow.",
+                  retryLabel: "That would send the analyst back into a one-quantity shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m7-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the frequency-only and wavelength-only shortcuts",
+                  scenario:
+                    "One crew member keeps naming the fastest run from Beat Rate alone, while another keeps naming it from Pulse Gap alone.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "product-warning",
+                      label: "Do not let one quantity settle the whole answer. Wave speed comes from frequency and wavelength together, so the full product must be compared.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "timing-warning-only",
+                      label: "Warn mainly against ignoring Beat Rate, because once source timing is right the spacing usually takes care of itself.",
+                      feedback:
+                        "That would still leave the frequency-only shortcut mostly alive.",
+                    },
+                    {
+                      value: "spacing-warning-only",
+                      label: "Warn mainly against ignoring Pulse Gap, because once the front spacing is tracked carefully the timing column rarely changes the final ranking much.",
+                      feedback:
+                        "That would still leave the wavelength-only shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now protects the full Ripple Run relationship.",
+                  retryLabel: "That warning would leave a main M7_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m7-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps both factors visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture how launch rate and spacing can change separately while still combining into one travel speed.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "conveyor-spacing-analogy",
+                      label: "Think of markers passing on a conveyor: how often markers are released and how far apart matching markers are both matter if you want to know how fast the pattern is moving along the belt.",
+                      feedback:
+                        "Exactly. That analogy keeps both factors visible without letting one replace the other.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "metronome-only-analogy",
+                      label: "Think only of a metronome ticking faster and faster, because once the launch rhythm speeds up the travel speed story is already basically complete.",
+                      feedback:
+                        "That would rebuild the frequency-only shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "tape-measure-only-analogy",
+                      label: "Think only of markers painted farther apart on the floor, because wider spacing already tells the movement story without needing any separate launch-rate idea.",
+                      feedback:
+                        "That would rebuild the wavelength-only shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the full speed relationship instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right Ripple Run model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M7_L2") {
