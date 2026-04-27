@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M4_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m4-l2-safety-limit-board",
+                badge: "Safety board",
+                title: "Read the safe-footprint limit before the room treats it as a geometry puzzle",
+                scenario:
+                  "The Safety-Limit design board shows a fragile floor with a maximum safe patch load. One trainee wants to solve for footprint size as if it were only an area exercise and another keeps saying the push is moderate enough that the surface should be fine anyway.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "design-backward-from-pressure-limit",
+                    label: "Read the board as backward pressure design: the safe limit tells you the biggest allowed pressure, so the footprint must be large enough that the push stays under that patch-load threshold.",
+                    feedback:
+                      "Exactly. That keeps the lesson rooted in pressure design instead of detached area manipulation.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "area-only-geometry",
+                    label: "Treat the target footprint as mostly geometry, because once a floor area is found the pressure story is basically finished and the force only provided the setup.",
+                    feedback:
+                      "That strips the physics out of the design. The whole reason the area matters is that it controls pressure for a given push.",
+                  },
+                  {
+                    value: "moderate-force-automatically-safe",
+                    label: "Assume the floor is safe because the push is not especially large, so only very extreme forces can create unsafe pressure on a surface like this.",
+                    feedback:
+                      "That ignores the footprint completely. A moderate push can still be unsafe if it is crowded onto too small an area.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the task as safe pressure design rather than plain area hunting.",
+                retryLabel: "That note would hide the real design logic of the lesson.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m4-l2-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the fragile-floor shortcut before it spreads",
+                  scenario:
+                    "A trainee has written that a minimum safe area answer is really just an area problem, while another has added that a push can only be unsafe if the force itself is extreme.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "minimum-area-is-still-pressure",
+                      label: "Repair both ideas together: minimum safe area is still a pressure answer because the goal is to keep force spread wide enough that the pressure stays below the limit.",
+                      feedback:
+                        "Exactly. That keeps the design question tied to pressure instead of splitting the symbols apart.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "area-problem-with-pressure-label",
+                      label: "Tell them the pressure wording mainly introduces the situation, but once the question asks for area the rest of the task is mostly geometry with a physics label attached.",
+                      feedback:
+                        "That would leave the main misconception active. The area matters only because it controls pressure.",
+                    },
+                    {
+                      value: "force-decides-safety",
+                      label: "Tell them fragile floors are mostly about avoiding large pushes, because area changes are helpful only after the force has already been judged safe enough.",
+                      feedback:
+                        "That collapses the safe-design story back into force alone. Pressure depends on spread as well as push.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats minimum-area design as a pressure question from start to finish.",
+                  retryLabel: "That would keep the fragile-floor shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m4-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line safe-design rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right anchor before any rearranging begins.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "safe-design-anchor",
+                      label: "Pressure design works backward from a safe limit: choose the force and the allowed patch load, then find the footprint large enough to keep the surface safe.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "area-anchor-only",
+                      label: "Safe design is mostly about finding the right area first, because once a large enough footprint is available the pressure idea has already done its job.",
+                      feedback:
+                        "That would detach area from the pressure relationship the lesson is trying to strengthen.",
+                    },
+                    {
+                      value: "force-anchor-only",
+                      label: "Safe design is mostly about limiting the total push, because footprint size only fine-tunes the answer after the force has been judged acceptable.",
+                      feedback:
+                        "That would turn the lesson back into force-only thinking.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right safe-design rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m4-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the safe-limit vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps pressure limit, force, and minimum area doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "pressure-limit-language",
+                      label: "A pressure limit is the maximum safe patch load. Force is the total push, area is the footprint sharing that push, and minimum safe area is the smallest footprint that keeps the pressure under the limit.",
+                      feedback:
+                        "Exactly. That keeps the lesson language tied to the real design relationship.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pressure-limit-means-force-limit",
+                      label: "Treat the pressure limit as basically another way to say force limit, because once the floor has a safety number the footprint mostly becomes a detail of layout.",
+                      feedback:
+                        "That would erase the whole reason the lesson rearranges the relationship in the first place.",
+                    },
+                    {
+                      value: "minimum-area-means-biggest-shape",
+                      label: "Treat minimum safe area as mainly a shape-size term, because once the footprint is large enough the pressure vocabulary does not add much else.",
+                      feedback:
+                        "That disconnects the area from the safety limit it is meant to satisfy.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the pressure-design model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m4-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they solve forward for the wrong thing",
+                  scenario:
+                    "The trainee analyst sees force and area in the formula and is about to substitute forward mechanically instead of starting from the safe limit and identifying the unknown design feature.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "start-with-limit-and-unknown",
+                      label: "Start by naming the safe pressure limit and the design unknown. Then keep the same pressure relationship while rearranging toward the missing footprint or safe force.",
+                      feedback:
+                        "Exactly. That gives the analyst a real design method instead of button-press algebra.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "always-substitute-first",
+                      label: "Substitute the numbers as soon as possible, because pressure-design questions mostly test how quickly you can move symbols around after spotting the formula.",
+                      feedback:
+                        "That would flatten the lesson into algebra first. The safe-limit story needs to guide the rearrangement.",
+                    },
+                    {
+                      value: "estimate-force-only-first",
+                      label: "Judge the push by eye before checking the limit, because footprint changes usually matter only when the force already looks worryingly large.",
+                      feedback:
+                        "That would send the analyst back into force-only thinking instead of pressure design.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean backward-design method.",
+                  retryLabel: "That instruction would send the analyst into formula shuffling without the physics story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m4-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the rearranging-changes-the-physics shortcut",
+                  scenario:
+                    "One crew member keeps saying that once the equation is rearranged to find area, it stops being a pressure question and becomes a different kind of problem.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "rearranging-keeps-same-story",
+                      label: "Do not treat rearranging as a new physics story. The same pressure relationship stays in control; only the unknown design feature changes from pressure to area or force.",
+                      feedback:
+                        "Exactly. That warning protects the lesson's main backward-design move.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rearranging-makes-it-area-only",
+                      label: "Warn that once area becomes the unknown, the task is mostly an area problem and pressure only mattered while choosing the starting formula.",
+                      feedback:
+                        "That is the trap. Rearranging does not remove the pressure meaning from the question.",
+                    },
+                    {
+                      value: "rearranging-makes-it-force-only",
+                      label: "Warn that pressure questions become force problems once the formula is moved around, because force remains the only quantity that really decides whether a surface is safe.",
+                      feedback:
+                        "That would push the lesson straight back into force-only reasoning.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew now keeps the same pressure story even after rearranging.",
+                  retryLabel: "That warning would leave the main safe-design trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m4-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the rescue-pad analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a rescue pad or machine base may need to be widened even when the total push is fixed.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "snowshoe-rescue-pad",
+                      label: "Think of a rescue pad like a snowshoe: the same traveller or machine can stay safe on a delicate surface only if the push is spread across enough area.",
+                      feedback:
+                        "Exactly. That analogy keeps the safe-limit story tied to spreading the same push wider.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "stronger-floor-means-any-size",
+                      label: "Think of the pad mainly as a way to make the floor feel stronger, because once a support is added the size of the footprint matters much less than the total push.",
+                      feedback:
+                        "That would hide the whole patch-load idea. The footprint size is exactly what the analogy is trying to highlight.",
+                    },
+                    {
+                      value: "larger-pad-means-more-pressure",
+                      label: "Think of the wider pad as creating more pressure because more of the surface is being pressed at once, so increasing the footprint should raise the strain overall.",
+                      feedback:
+                        "That reverses the design logic. Wider support spreads the same push and lowers the pressure.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports safe-footprint planning instead of distorting it.",
+                  retryLabel: "That analogy would pull the lesson away from the right design picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M4_L1") {
