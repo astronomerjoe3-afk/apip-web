@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,418 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M3_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m3-l3-motion-store-visual",
+                badge: "Motion board",
+                title: "Freeze the Motion Store factors before the room treats speed like a gentle add-on",
+                scenario:
+                  "The Motion Store display compares one pod at different speeds and different loads. A trainee keeps saying faster should only give a little more store, because the pod is still the same object.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "speed-squared-and-mass",
+                    label: "Read the board as a two-factor pattern: load matters directly, but speed has the stronger effect because the store grows with speed squared.",
+                    feedback:
+                      "Exactly. That locks in the lesson's main surprise before the symbols appear.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "speed-just-adds-linearly",
+                    label: "Treat speed as a gentle add-on, so doubling speed should only double the store in the same way doubling mass would.",
+                    feedback:
+                      "That misses the squared-speed effect. This lesson is built to make that stronger growth visible.",
+                  },
+                  {
+                    value: "mass-only-tells-story",
+                    label: "Assume the heavier pod always has the bigger Motion Store, because mass is the physical amount of matter and speed only describes how it is moving for now.",
+                    feedback:
+                      "Mass matters, but it does not settle the story alone. Speed can dominate the comparison because it is squared.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now reads Motion Store as a mass-and-speed-squared story.",
+                retryLabel: "That note would flatten the lesson's main surprise.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m3-l3-module-lens",
+                badge: "Module lens",
+                title: "Lock the speed-squared rule before the formula turns into button pressing",
+                scenario:
+                  "The Module 3 lens card is up, but the room is already talking as if E_k only needs a quick substitution and no one-factor comparison first.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "square-speed-before-comparing",
+                    label: "Post the rule that Motion Store follows 0.5mv^2, so speed changes must be squared before you compare them with mass changes.",
+                    feedback:
+                      "Exactly. That keeps the squared-speed idea active instead of hiding it inside a calculator step.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "mass-and-speed-same-kind",
+                    label: "Say that mass and speed changes can usually be compared the same way, because both are just inputs multiplying the store together.",
+                    feedback:
+                      "That erases the key structure. Speed and mass do not enter the expression in the same way.",
+                  },
+                  {
+                    value: "formula-only-after-largest-speed",
+                    label: "Tell students to pick whichever pod looks fastest first, because the fastest one will always settle the comparison before the formula is needed.",
+                    feedback:
+                      "That would invite unsafe guessing. The lesson needs factor reasoning before visual shortcuts are trusted.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps the speed-squared rule front and center.",
+                retryLabel: "That rule would let the main comparison structure disappear.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m3-l3-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on the clean comparison sequence",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare only the biggest speed, while another wants to compare only the heaviest load.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "same-mass-and-same-speed-comparisons",
+                    label: "Use one same-mass speed comparison and one same-speed mass comparison before any full calculation. That isolates which factor is driving the Motion Store change.",
+                    feedback:
+                      "Exactly. That is the comparison habit this lesson is trying to build.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "fastest-first-comparison",
+                    label: "Sort by speed first because the pod moving fastest will always have the greatest Motion Store no matter what the loads are.",
+                    feedback:
+                      "That is too loose. Speed is powerful here, but mass still matters and the comparison needs cleaner control than that.",
+                  },
+                  {
+                    value: "heaviest-first-comparison",
+                    label: "Sort by mass first because load is the real physical quantity, while speed is only a temporary description layered on top.",
+                    feedback:
+                      "That would overcorrect in the other direction. Speed can dominate strongly because the lesson uses a squared term.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares Motion Store by isolating speed and mass cleanly.",
+                retryLabel: "That plan would blur the factor comparison the board is supposed to teach.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "speed-squared shock") {
+                return {
+                  id: "m3-l3-speed-squared-shock",
+                  badge: "Shock desk",
+                  title: "Call the speed jump before anyone underestimates it",
+                  scenario:
+                    "A trainee sees the pod's speed double and says the Motion Store should probably just double as well, because the pod itself has not changed.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "doubling-speed-quadruples",
+                      label: "Doubling speed quadruples Motion Store, because the speed term is squared. The same pod can therefore gain store much faster through speed change than through an equal-factor mass change.",
+                      feedback:
+                        "Exactly. That is the qualitative shock this lesson wants students to feel early.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "doubling-speed-doubles",
+                      label: "Doubling speed only doubles Motion Store, because energy should grow in step with whatever quantity visibly doubled in the motion story.",
+                      feedback:
+                        "That treats speed as a linear factor. This lesson exists to correct that assumption.",
+                    },
+                    {
+                      value: "doubling-speed-eight-times",
+                      label: "Doubling speed should make Motion Store eight times as large, because faster motion compounds more aggressively than simple doubling.",
+                      feedback:
+                        "Not here. The squared term gives four times, not eight.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The crew now reads a doubled speed as a quadrupled Motion Store.",
+                  retryLabel: "That would keep the main speed-shock misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "compare before calculating") {
+                return {
+                  id: "m3-l3-compare-before-calculating",
+                  badge: "Pattern check",
+                  title: "Choose the cleanest factor test before substitution",
+                  scenario:
+                    "The instructor wants one fast comparison before any calculator work. You need the note that best isolates the speed effect rather than blurring it with mass at the same time.",
+                  prompt: "Choose the note to send.",
+                  options: [
+                    {
+                      value: "same-mass-new-speed",
+                      label: "Use the same mass with a new speed if you want the cleanest speed test. Then use the same speed with a new mass if you want the cleanest mass test.",
+                      feedback:
+                        "Exactly. That keeps the proportional structure visible before full substitution begins.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "change-both-at-once",
+                      label: "Change mass and speed together first, because the real world always changes several things at once and clean isolation can come later if needed.",
+                      feedback:
+                        "That would hide the lesson pattern. This stage is about isolation precisely so students can see what each factor does.",
+                    },
+                    {
+                      value: "same-speed-for-speed-test",
+                      label: "Use the same speed with a new mass if you want the cleanest speed test, because holding speed steady shows you what motion contributes on its own.",
+                      feedback:
+                        "That reverses the comparison logic. Holding speed steady isolates mass, not speed.",
+                    },
+                  ],
+                  successLabel: "Pattern chosen correctly. The crew now knows how to isolate speed and mass before calculating.",
+                  retryLabel: "That note would weaken the comparison habit this lesson needs.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m3-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first Motion Store misconception",
+                  scenario:
+                    "A trainee has written that fast means only a little more energy, and another has added that mass and speed do basically the same job in the calculation.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "speed-squared-repair",
+                      label: "Repair both ideas at once: Motion Store depends on mass directly, but speed enters as a squared factor, so speed changes usually hit harder than equal-factor mass changes.",
+                      feedback:
+                        "Exactly. That fixes the weak-speed assumption and the 'same kind of factor' mistake together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mass-main-repair",
+                      label: "Keep mass as the main idea and say speed only fine-tunes the answer, because the object's load is the more physical quantity in the energy story.",
+                      feedback:
+                        "That would push students toward the wrong shortcut. The lesson wants the stronger speed effect noticed clearly.",
+                    },
+                    {
+                      value: "fast-means-force-repair",
+                      label: "Fix the note by saying fast pods must have stronger forces inside them, so that hidden force increase is what really explains the bigger Motion Store.",
+                      feedback:
+                        "That changes the story completely. This lesson is about kinetic energy, not hidden internal force.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps Motion Store tied to mass and speed-squared reasoning.",
+                  retryLabel: "That would leave the main Motion Store misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m3-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Motion Store rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson from the right anchor before the examples begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "motion-store-anchor",
+                      label: "Motion Store is kinetic energy, and it depends on mass directly and on speed through a squared relationship.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-only-anchor",
+                      label: "Motion Store is mainly a speed story, while mass usually only tidies up the exact number after the main comparison is obvious.",
+                      feedback:
+                        "That would build another shortcut into the anchor. Mass still matters and should stay visible.",
+                    },
+                    {
+                      value: "equal-factors-anchor",
+                      label: "Motion Store grows with mass and speed in roughly the same way, so the main job is just to remember both are present.",
+                      feedback:
+                        "That would erase the whole squared-speed insight. The lesson needs the different roles kept explicit.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Motion Store rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m3-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Motion Store vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps the lesson words lined up with the real factors.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "kinetic-energy-mass-speed",
+                      label: "Motion Store means kinetic energy, and its main factor words are mass and speed. The lesson wording should keep both present while marking that speed is the one that gets squared.",
+                      feedback:
+                        "Exactly. That keeps the vocabulary tied to the real structure of the store.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-language-only",
+                      label: "The safest vocabulary move is to translate everything back into speed language, because once a pod is moving the load term mostly repeats what speed already tells you.",
+                      feedback:
+                        "That would erase half the structure. Mass still plays a real and visible role in Motion Store.",
+                    },
+                    {
+                      value: "vector-language-mix",
+                      label: "Bring in direction words early, because Motion Store comparisons work best when students treat speed like a vector with north-east style components.",
+                      feedback:
+                        "That would blur scalar store reasoning with vector reasoning from a different part of physics.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the Motion Store language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m3-l3-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the glossary with the comparison language",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into the comparison move students forget as soon as the formula appears.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "proportional-comparison-line",
+                      label: "Add that proportional comparison belongs in the glossary too: same-mass speed tests and same-speed mass tests reveal how the store changes before full calculation begins.",
+                      feedback:
+                        "Exactly. That completes the glossary with the missing reasoning move this lesson depends on.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "substitute-immediately-line",
+                      label: "The follow-up card should say that once the formula is known, comparison language is optional because students can jump straight to substitution safely.",
+                      feedback:
+                        "That would undercut the lesson design. Comparison-first reasoning is part of the content, not optional decoration.",
+                    },
+                    {
+                      value: "mass-decides-line",
+                      label: "The follow-up card should explain that heavier pods are the most reliable way to predict the larger Motion Store, and the speed term mainly confirms the intuition later.",
+                      feedback:
+                        "That would reintroduce a shortcut the lesson is trying to block.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the comparison-first language model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m3-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before the calculator comes out",
+                  scenario:
+                    "The trainee analyst is about to substitute numbers into the formula before deciding whether the question is really about speed effect, mass effect, or a full store calculation.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-motion-story-and-factor-role",
+                      label: "Start by naming it as a moving-store problem, then decide whether the task is a comparison or a value calculation, square the speed deliberately, and only then multiply through the mass and one-half terms.",
+                      feedback:
+                        "Exactly. That gives the analyst a reasoning-first method instead of blind substitution.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "formula-first-meaning-later",
+                      label: "Start with the numbers because 0.5mv^2 will reveal the important pattern automatically once the calculator gives the answer.",
+                      feedback:
+                        "That invites blind substitution. The factor roles should be chosen before the arithmetic is trusted.",
+                    },
+                    {
+                      value: "speed-first-guessing",
+                      label: "Start by finding the fastest pod because the larger speed will normally settle the comparison without any real need to think about the mass term carefully.",
+                      feedback:
+                        "That is too loose for this lesson. Speed is powerful, but the comparison still needs structured factor reasoning.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean factor-first method.",
+                  retryLabel: "That instruction would send the analyst straight into formula grabbing.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m3-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the speed-only or mass-only shortcut",
+                  scenario:
+                    "One crew member keeps saying the fastest pod must always win, while another says the heavier pod must always win. Both want to skip the real comparison.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "both-factors-stay-visible",
+                      label: "Neither speed alone nor mass alone is safe by default. Motion Store depends on both, and the clean move is to compare how each factor enters before trusting any quick visual guess.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcut habits at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-always-wins-warning",
+                      label: "Warn only that speed always wins, because the squared term means mass can never overturn the answer once speeds differ.",
+                      feedback:
+                        "That swings too far. Speed is stronger, but mass still matters and can change the comparison outcome.",
+                    },
+                    {
+                      value: "mass-grounds-story-warning",
+                      label: "Warn only that mass is the safer guide, because the object's physical amount is more trustworthy than a motion description that might change moment by moment.",
+                      feedback:
+                        "That builds the opposite shortcut. The lesson wants both factors kept visible, not one crowned as automatic winner.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist one-variable guessing.",
+                  retryLabel: "That warning would leave the comparison shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m3-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the Motion Grid analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why speed changes hit Motion Store so much harder than equal-factor mass changes without turning the lesson into a random algebra trick.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "motion-grid-bridge",
+                      label: "Think of a Motion Grid that grows taller and wider as speed increases, so the covered area jumps sharply. Mass still scales the whole grid, but speed expands it faster because the pattern is squared.",
+                      feedback:
+                        "Exactly. That analogy supports the lesson's strongest pattern without flattening it into a memorized rule.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-speed-line-bridge",
+                      label: "Think of speed as one straight line getting longer, because that keeps the picture simple enough to see why a faster pod only adds a little more store.",
+                      feedback:
+                        "That would hide the squared effect instead of clarifying it.",
+                    },
+                    {
+                      value: "heavier-pod-bridge",
+                      label: "Think only about loading the pod with more mass, because that is the most physical part of the analogy and speed can be added after the main picture is secure.",
+                      feedback:
+                        "That would weaken the real insight. The analogy needs to highlight the stronger speed effect, not delay it.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the speed-squared pattern without turning it into a memorized trick.",
+                  retryLabel: "That analogy would send the room toward the wrong shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M3_L2") {
