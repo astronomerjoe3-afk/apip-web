@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,830 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M3_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m3-l1-ledger-world-visual",
+                badge: "Ledger world",
+                title: "Freeze the Lift-Launch world before the crew turns energy into a vague force word",
+                scenario:
+                  "The Lift-Launch display shows one machine input, two possible stores, and a Leak Trail. A trainee keeps saying energy is basically just the push making the pod move.",
+                prompt: "Pin the right instruction to the display.",
+                options: [
+                  {
+                    value: "stores-hand-offs-and-leaks",
+                    label: "Treat energy as something stored in the pod or transferred by a machine hand-off. The ledger must show useful store gains and any Leak Trail explicitly.",
+                    feedback:
+                      "Exactly. That keeps the lesson in store-transfer-ledger language instead of collapsing it into force talk.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "energy-is-force",
+                    label: "Treat energy as another name for force, because both ideas explain why the pod can move or rise.",
+                    feedback:
+                      "That is the trap. Force and energy answer different questions in this module.",
+                  },
+                  {
+                    value: "only-moving-pods-have-energy",
+                    label: "Assume only a moving pod can really have energy, because a still pod is not doing anything with it yet.",
+                    feedback:
+                      "Still pods can still hold Height Store. The lesson keeps stored energy separate from visible motion.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now reads the mission as stores, hand-offs, and leaks rather than as a loose force story.",
+                retryLabel: "That note would blur the ledger world immediately.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m3-l1-module-lens",
+                badge: "Module lens",
+                title: "Lock the ledger rule before useful gain and leak get separated from the input",
+                scenario:
+                  "The Module 3 lens card is up, and the room is starting to talk as if the useful gain is the whole story once the pod ends up with more stored energy.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "input-equals-useful-plus-leak",
+                    label: "Start from the ledger sentence: input hand-off = useful gain + Leak Trail. The useful part can split across more than one store without breaking the balance.",
+                    feedback:
+                      "Exactly. That keeps the accounting complete before anyone reaches for a formula.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "useful-gain-is-enough",
+                    label: "Once the useful gain is known, the leak no longer matters because it did not help the pod's final state directly.",
+                    feedback:
+                      "That breaks the ledger. The leak still has to be accounted for if the input stays the same.",
+                  },
+                  {
+                    value: "stores-cannot-split",
+                    label: "A useful gain must all go into one store at a time, because splitting it across Height Store and Motion Store would make the accounting ambiguous.",
+                    feedback:
+                      "The lesson explicitly allows one useful gain to split across more than one store while keeping the ledger balanced.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps input, useful gain, and Leak Trail tied together.",
+                retryLabel: "That rule would leave the ledger half-visible.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m3-l1-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on the right ledger comparison",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare only the useful totals, while another wants to compare only the leak values and ignore where the useful part ends up.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "compare-input-useful-and-leak-together",
+                    label: "First compare the full input hand-off, then track how that input splits into useful gain and Leak Trail, and finally name which stores receive the useful share.",
+                    feedback:
+                      "Exactly. That keeps the whole mission ledger intact from start to finish.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-useful-only",
+                    label: "Compare only the useful gain, because the stored part is the only part that really matters once the mission step is complete.",
+                    feedback:
+                      "That would erase the leak accounting. The ledger has to explain where all the input goes, not just the helpful part.",
+                  },
+                  {
+                    value: "compare-leak-only",
+                    label: "Compare only the Leak Trail first, because once the wasted share is known the useful and store parts can be guessed afterward.",
+                    feedback:
+                      "That would isolate one branch of the ledger from the rest of the story. Input, useful gain, and leak have to stay connected.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares the whole ledger before zooming into one store or one leak.",
+                retryLabel: "That plan would send the room into a partial-accounting shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "store versus hand-off test") {
+                return {
+                  id: "m3-l1-store-vs-hand-off",
+                  badge: "Sorter",
+                  title: "Sort the first energy sentence correctly",
+                  scenario:
+                    "A trainee has written 'the launcher transfers 180 J' and then filed it under stored energy in the pod. You need the correction that puts the sentence in the right category.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "transfer-is-hand-off",
+                      label: "A sentence about the launcher transferring energy names a hand-off, not a store. A store is what the pod has at that moment, like Height Store or Motion Store.",
+                      feedback:
+                        "Exactly. That separates what energy is doing now from where energy is sitting now.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "transfer-is-store",
+                      label: "A transfer sentence still names a store, because as soon as energy moves into the pod it becomes the same thing as whatever store it will end up in.",
+                      feedback:
+                        "That collapses two jobs into one. The lesson needs the movement of energy kept separate from the stored result.",
+                    },
+                    {
+                      value: "all-energy-words-same",
+                      label: "The safest move is to treat all energy words the same at first, because store and hand-off labels only matter once the arithmetic begins.",
+                      feedback:
+                        "The labels matter before the arithmetic. They are what keep the ledger readable.",
+                    },
+                  ],
+                  successLabel: "Sorted. The crew now separates hand-offs from stores before calculating.",
+                  retryLabel: "That would leave the first ledger category mistake active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "ledger sentence frame") {
+                return {
+                  id: "m3-l1-ledger-sentence-frame",
+                  badge: "Sentence frame",
+                  title: "Choose the ledger sentence before the symbols",
+                  scenario:
+                    "The team wants the first line on the board to be a sentence, not a symbol string. One trainee keeps omitting the leak as soon as the useful gain is known.",
+                  prompt: "Choose the sentence frame to post.",
+                  options: [
+                    {
+                      value: "input-equals-useful-plus-leak-sentence",
+                      label: "Write it in words first: input hand-off = useful gain + Leak Trail. Then, if needed, add where the useful gain is split between Height Store and Motion Store.",
+                      feedback:
+                        "Exactly. That keeps the accounting visible before symbolic compression begins.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "input-equals-useful-only-sentence",
+                      label: "Write input hand-off = useful gain first, because the leak can be treated as a later correction if the totals do not match at the end.",
+                      feedback:
+                        "That would build the wrong frame. The leak is part of the ledger from the start, not a correction afterward.",
+                    },
+                    {
+                      value: "store-only-sentence",
+                      label: "Start by naming only the final store, because the beginning of the lesson is mainly about where the pod ends up, not how the transfer is split.",
+                      feedback:
+                        "That would erase the transfer story. The whole point is to keep the full ledger visible.",
+                    },
+                  ],
+                  successLabel: "Frame posted. The crew now starts with a balanced ledger sentence before formula work.",
+                  retryLabel: "That sentence would leave the ledger incomplete from the first line.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m3-l1-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first energy note",
+                  scenario:
+                    "A trainee has written that energy is basically force, and that any part of the input not kept usefully has simply disappeared. You need the correction that fixes both mistakes before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "energy-is-accounted-for-not-force",
+                      label: "Energy is tracked through stores, hand-offs, and Leak Trail. It is not another name for force, and the 'missing' part has to be accounted for rather than treated as gone.",
+                      feedback:
+                        "Exactly. That repairs both the force-language mistake and the disappearing-energy mistake at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "energy-force-same",
+                      label: "Keep the note as it is, because force and energy are close enough for early mission talk, and leaks only matter if you later decide to discuss waste.",
+                      feedback:
+                        "That keeps both mistakes alive. The whole lesson depends on cleaner accounting language than that.",
+                    },
+                    {
+                      value: "stores-only-matter",
+                      label: "Fix the note by saying only stores really count, because transfers and leaks are just side comments about how the pod got there.",
+                      feedback:
+                        "That would erase the ledger structure. Hand-offs and leaks are part of the main explanation, not side comments.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps energy as an accounting story instead of a force label.",
+                  retryLabel: "That would leave the first Lift-Launch misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m3-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line ledger rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the Lift-Launch lesson with the right anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "ledger-anchor",
+                      label: "Energy lives in stores and moves by hand-offs, and a balanced ledger keeps input, useful gain, and Leak Trail all accounted for.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-anchor",
+                      label: "Energy questions mainly compare how hard the machine pushes, so once the force story is clear the stores and leaks are mostly details.",
+                      feedback:
+                        "That would drag the lesson back into force language. Stores and ledger balance are the anchor here.",
+                    },
+                    {
+                      value: "useful-only-anchor",
+                      label: "Energy questions mainly track the useful gain, because the leak and transfer path do not affect the final physics story very much.",
+                      feedback:
+                        "That would leave the accounting incomplete. The final physics story still has to explain the whole input.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right ledger rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m3-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the ledger vocabulary board",
+                  scenario:
+                    "The crew can see the Lift-Launch world, but the labels are drifting. You need the note that keeps stores, hand-offs, and Leak Trail doing separate jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "stores-hand-offs-leak-trail",
+                      label: "Stores name where energy is held now, hand-offs name how energy moves between places, and Leak Trail names the part spread in unhelpful forms that still must be accounted for.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary aligned with the energy-ledger model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all-energy-terms-mean-same",
+                      label: "Treat stores, hand-offs, and Leak Trail as mostly interchangeable energy words, because they all refer to the same substance in the end.",
+                      feedback:
+                        "That would collapse the whole model. The terms are useful because they mark different roles in the accounting story.",
+                    },
+                    {
+                      value: "leak-trail-means-disappeared",
+                      label: "Treat Leak Trail as the part that has effectively vanished, because once it stops helping the pod it no longer belongs in the main mission story.",
+                      feedback:
+                        "Leak Trail is still part of the main mission story. It is tracked precisely so nothing is treated as vanished.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the ledger terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m3-l1-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the store-name handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into the main store names used in this world.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "height-and-motion-store-line",
+                      label: "Height Store and Motion Store are different destinations for useful gain. A pod can hold one or both, depending on the mission state.",
+                      feedback:
+                        "Exactly. That completes the glossary with the main store names and keeps them separate.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "one-store-at-a-time-line",
+                      label: "A pod can only hold one store at a time, because if two stores were named together the ledger would stop being clear enough to use.",
+                      feedback:
+                        "That would rebuild a false limitation. The same pod can be high and moving, so both stores can matter together.",
+                    },
+                    {
+                      value: "store-equals-machine-line",
+                      label: "Height Store and Motion Store are mainly names for the machines causing the transfers, not for what the pod has once the transfer is done.",
+                      feedback:
+                        "That swaps destination with transfer device. The stores belong to the pod's energy state, not to the machine label.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the store-language model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m3-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the ledger analyst",
+                  scenario:
+                    "The trainee analyst is about to dive into arithmetic before naming what each quantity actually is. You get one coaching instruction before they commit.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-input-useful-leak-stores-first",
+                      label: "Name the input hand-off, useful gain, Leak Trail, and final stores first. Then write a balanced ledger sentence before any numerical step.",
+                      feedback:
+                        "Exactly. That gives the analyst a stable energy-accounting method instead of a formula grab.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "calculate-first-label-later",
+                      label: "Start from whichever number looks easiest to subtract, because the labels can be added afterward once the totals are already known.",
+                      feedback:
+                        "That would send the analyst into blind arithmetic. The labels are what tell you which subtraction or split is valid.",
+                    },
+                    {
+                      value: "focus-on-final-store-only",
+                      label: "Start from the final store only, because the machine input and leak details mostly distract from the result the pod ends up with.",
+                      feedback:
+                        "That would erase the transfer story. The final store only makes sense once the ledger path is clear.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable ledger-first method.",
+                  retryLabel: "That instruction would send the analyst back into formula grabbing.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m3-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the missing-energy shortcut",
+                  scenario:
+                    "One crew member keeps saying the part of the input not seen in the useful store must have disappeared. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "missing-energy-goes-into-leak-trail",
+                      label: "The 'missing' part has not vanished. If the useful gain is smaller than the input, the remaining energy must still be accounted for in the Leak Trail or another named destination.",
+                      feedback:
+                        "Exactly. That one warning blocks the disappearing-energy shortcut and restores the ledger logic.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "missing-part-can-be-ignored",
+                      label: "The warning should say only that the missing part is usually small enough to ignore, because the useful store is the part students really care about.",
+                      feedback:
+                        "That would leave the shortcut alive. The whole point is that the ledger must still balance.",
+                    },
+                    {
+                      value: "only-formulas-fix-this",
+                      label: "The safest warning is to avoid words and jump straight to formal energy equations, because ledger language is too vague to settle where the missing part went.",
+                      feedback:
+                        "That would throw away the lesson's main teaching move. The words are there to keep the accounting visible before symbols.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now treat leaks as accounted-for spread, not vanished energy.",
+                  retryLabel: "That warning would leave the shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m3-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the mission-budget analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why an energy mission needs input, useful gain, and leaks all tracked together without treating the unhelpful part as gone.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "mission-budget-bridge",
+                      label: "Think of a mission budget: you track what came in, what was spent usefully on the pod's stores, and what was lost to side costs. The budget is only trustworthy if every part is still accounted for.",
+                      feedback:
+                        "Exactly. That analogy supports the ledger idea without flattening energy into force or into a single total.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-score-bridge",
+                      label: "Think only about the final score at the end of the mission, because once the pod's useful gain is known the path taken to get there no longer matters.",
+                      feedback:
+                        "That would erase the transfer and leak story. The analogy needs the whole accounting path, not just the ending number.",
+                    },
+                    {
+                      value: "push-meter-bridge",
+                      label: "Think of the mission like a push meter, because as long as the launcher pushes hard enough the store and leak language mainly just rephrases the same force event.",
+                      feedback:
+                        "That would drag the analogy back into force language, which this lesson is trying to separate from energy accounting.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports ledger reasoning instead of flattening the mission into one vague quantity.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
+            }
+
+            if (lessonId === "M3_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m3-l1-ledger-world-visual",
+                badge: "Ledger world",
+                title: "Freeze the Lift-Launch world before the room turns energy into force talk",
+                scenario:
+                  "The Lift-Launch display shows one machine input, one useful gain, and one Leak Trail. A trainee keeps saying the pod has 'force energy' and another keeps acting as if the leaked part has vanished from the story.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "stores-hand-offs-leaks",
+                    label: "Read the mission as stores, hand-offs, and Leak Trail. Energy is being stored or transferred here; it is not another name for force, and the leaked part is still being accounted for.",
+                    feedback:
+                      "Exactly. That keeps the lesson in ledger language instead of letting it collapse into force talk or disappearance talk.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "energy-is-force",
+                    label: "Treat energy as the same thing as force, because both are part of how the launcher makes the pod move and the display only needs one idea.",
+                    feedback:
+                      "That blurs two different stories. Force is a push interaction; this lesson is tracking where energy is stored or transferred.",
+                  },
+                  {
+                    value: "leak-means-gone",
+                    label: "Ignore the Leak Trail once the useful store gain is known, because leaked energy has left the important part of the physics and does not need to stay in the accounting.",
+                    feedback:
+                      "The Leak Trail is still part of the mission accounting. The ledger only works if the leaked part stays visible.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the Lift-Launch world as a balanced energy ledger.",
+                retryLabel: "That note would let force language or disappearance language take over too early.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m3-l1-module-lens",
+                badge: "Module 3 lens",
+                title: "Lock the ledger rule before anyone jumps straight to formulas",
+                scenario:
+                  "The Module 3 lens card is up. One crew member wants the room to memorize symbols first, while another wants to track the mission with a sentence before any calculation begins.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "sentence-before-symbols",
+                    label: "Start with the ledger sentence first: input hand-off = useful gain + Leak Trail. The equation later is only a compressed version of that accounting story.",
+                    feedback:
+                      "Exactly. That keeps the conceptual spine visible before symbols arrive.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "symbols-first",
+                    label: "Skip the sentence and move straight to formulas, because the words are only there to warm up the room before the real physics starts.",
+                    feedback:
+                      "That throws away the teaching move this lesson needs. The sentence is what keeps every part of the energy story visible.",
+                  },
+                  {
+                    value: "useful-equals-input",
+                    label: "Keep the lens simple by treating useful gain as the same as input whenever the machine is doing its job properly.",
+                    feedback:
+                      "That erases the Leak Trail completely. A working machine can still leak part of the input while the ledger stays balanced.",
+                  },
+                ],
+                successLabel: "Posted. The room now starts from the ledger sentence instead of formula panic.",
+                retryLabel: "That rule would blur the balance structure the whole module depends on.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m3-l1-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on what to compare first in the mission ledger",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare only the useful gains, and another wants to compare store labels before checking whether the total input was even split correctly.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "input-useful-leak-store-split",
+                    label: "Compare the total input first, then useful gain versus Leak Trail, and only after that compare how the useful part is split between Height Store and Motion Store.",
+                    feedback:
+                      "Exactly. That order keeps the accounting stable before the room argues about store destinations.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "store-split-first",
+                    label: "Compare Height Store and Motion Store first, because once the useful destinations look reasonable the input and Leak Trail details will take care of themselves.",
+                    feedback:
+                      "That skips the ledger check. The input and Leak Trail have to be settled before the useful split can be trusted.",
+                  },
+                  {
+                    value: "useful-only",
+                    label: "Compare only the useful gains, because leaked energy is outside the main lesson and does not affect which mission is stronger.",
+                    feedback:
+                      "Leak Trail is part of the main lesson. Ignoring it would break the ledger before the comparison even starts.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now checks the whole ledger before zooming in on the store split.",
+                retryLabel: "That plan would let the room compare the wrong thing first.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m3-l1-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first bad energy briefing",
+                  scenario:
+                    "A trainee note says energy is basically force with a new unit, and that any part not kept as useful gain has simply gone missing. You need one correction that stops both mistakes.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "stores-transfers-leaks",
+                      label: "Energy is tracked as stores, hand-offs, and Leak Trail. Force is a push interaction, and the unhelpful part has to be placed somewhere in the ledger rather than declared gone.",
+                      feedback:
+                        "Exactly. That repairs both the force mix-up and the disappearance story together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "energy-is-force-with-loss",
+                      label: "Keep the note as it is, but add that the missing part is force that has weakened too much to matter once the useful gain has been recorded.",
+                      feedback:
+                        "That keeps both misconceptions alive. The lesson needs accounting language, not weakened-force language.",
+                    },
+                    {
+                      value: "useful-only-matters",
+                      label: "Fix the note by saying only the useful gain needs attention, because the leaked part is outside the physics target and can be ignored after the calculation.",
+                      feedback:
+                        "That would break the ledger immediately. The leaked part still has to be accounted for.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now separates energy accounting from force talk and disappearance talk.",
+                  retryLabel: "That would leave the first ledger misconceptions active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m3-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line ledger anchor",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner begins the module with the right energy picture.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "ledger-anchor",
+                      label: "Energy sits in stores, moves by hand-offs, and the ledger must balance every mission step.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "energy-force-anchor",
+                      label: "Energy is the pushing effect that forces use to move the pod, so the main job is to decide which push was strongest.",
+                      feedback:
+                        "That pulls the lesson back into force language instead of store-transfer accounting.",
+                    },
+                    {
+                      value: "useful-only-anchor",
+                      label: "Energy matters only when it becomes useful gain, because the leaked part is not really part of the mission result.",
+                      feedback:
+                        "That erases the ledger balance. Leak Trail still belongs in the mission account.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right ledger rule.",
+                  retryLabel: "That line would blur the module anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m3-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the energy vocabulary board",
+                  scenario:
+                    "The room can see the mission, but the labels are starting to blur together. You need the vocabulary card that keeps the categories straight.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "store-transfer-leak-terms",
+                      label: "A store is energy the pod has now, a hand-off is energy moving between places now, and Leak Trail is the tracked spread that stops the ledger from pretending the missing part vanished.",
+                      feedback:
+                        "Exactly. That keeps the lesson words tied to distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all-terms-same",
+                      label: "Store, hand-off, and Leak Trail are mostly interchangeable labels for the same energy, so learners should focus on the numbers rather than the wording.",
+                      feedback:
+                        "Those labels are not interchangeable. The wording is what keeps the accounting story readable.",
+                    },
+                    {
+                      value: "force-replaces-terms",
+                      label: "It is clearer to replace store and hand-off language with force language, because pushes already explain the important change in the mission.",
+                      feedback:
+                        "That would erase the lesson's whole vocabulary structure. This module needs energy words that do a different job from force words.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the energy categories again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m3-l1-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the ledger glossary handoff",
+                  scenario:
+                    "A second crew member is adding the follow-up glossary card. It needs to extend the language without flattening the whole lesson into one formula note.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "useful-gain-split",
+                      label: "A useful gain can split across Height Store and Motion Store, but the total useful part plus the Leak Trail still has to balance the input hand-off.",
+                      feedback:
+                        "Exactly. That extends the glossary into the multi-store accounting move this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "one-store-only",
+                      label: "A mission can only have one true store at a time, so once Height Store is named the room should stop thinking about Motion Store or Leak Trail.",
+                      feedback:
+                        "That is too narrow. One mission state can involve more than one store, and Leak Trail still matters.",
+                    },
+                    {
+                      value: "leak-optional",
+                      label: "Leak Trail is an optional vocabulary word for advanced cases, so beginners can safely drop it from the glossary until formulas arrive.",
+                      feedback:
+                        "Leak Trail is central, not optional. It is what stops the useful part from swallowing the whole input story.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would flatten the ledger story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m3-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst's first move",
+                  scenario:
+                    "The trainee analyst is ready to answer an energy question, but they still want to rush straight to a number. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-story-then-balance",
+                      label: "Name the store and hand-off story first, then write the ledger sentence in words, and only after that calculate the missing gain or Leak Trail.",
+                      feedback:
+                        "Exactly. That is the stable reasoning method for the whole lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "subtract-first-ask-later",
+                      label: "Subtract whatever numbers look closest first, because the ledger sentence can always be added back afterward if the room still feels unsure.",
+                      feedback:
+                        "That turns the reasoning upside down. The words are what tell you which subtraction or addition actually belongs.",
+                    },
+                    {
+                      value: "start-with-formula",
+                      label: "Choose a formula before naming any stores or leaks, because the symbols will reveal which parts of the mission matter.",
+                      feedback:
+                        "That skips the conceptual filter the lesson is trying to build. The ledger story should choose the calculation, not the other way round.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a real ledger method.",
+                  retryLabel: "That would send the analyst back into symbol-first guessing.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m3-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the missing-energy shortcut",
+                  scenario:
+                    "One crew member keeps saying that if the useful gain is smaller than the input, the leftover part has simply disappeared. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "leftover-goes-somewhere",
+                      label: "If useful gain is smaller than input, the leftover part has to be tracked somewhere in the ledger, usually as Leak Trail or another named destination. It has not vanished.",
+                      feedback:
+                        "Exactly. That is the sentence that protects the whole accounting model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "smaller-useful-means-gone",
+                      label: "That shortcut is safe because the missing part is no longer in the useful outcome, so it is fair to treat it as gone once the mission target is reached.",
+                      feedback:
+                        "That is exactly the trap. The useful outcome is not the whole ledger.",
+                    },
+                    {
+                      value: "ignore-ledger-when-splitting",
+                      label: "Ignore the missing-energy question whenever the useful gain splits between two stores, because multi-store missions are too messy for simple balance checks.",
+                      feedback:
+                        "Multi-store missions still need the same balance check. The split makes the accounting richer, not optional.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps every joule in the ledger.",
+                  retryLabel: "That warning would leave the disappearance shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m3-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy line that keeps the ledger clean",
+                  scenario:
+                    "The team wants one comparison that helps beginners picture the energy mission without slipping into a vague 'stuff gets used up' story.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "mission-ledger",
+                      label: "Treat the mission like a ledger or account book: every input has to be placed into useful destinations or Leak Trail so the totals still balance.",
+                      feedback:
+                        "Exactly. That supports the accounting idea without changing the physics job of the lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fuel-burns-away",
+                      label: "Treat the mission like fuel that mostly burns away, because that makes it easier to accept that some energy is simply lost from the story.",
+                      feedback:
+                        "That analogy reinforces the wrong intuition. The lesson needs the energy to stay accounted for, not to drift away conceptually.",
+                    },
+                    {
+                      value: "one-scoreboard-number",
+                      label: "Treat the mission like one scoreboard number that only tracks the useful gain, because that is the part students care about most.",
+                      feedback:
+                        "That would erase the ledger structure. The whole point is that one visible total is not enough.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the ledger idea instead of weakening it.",
+                  retryLabel: "That analogy would push the team back toward disappearance language.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "store versus hand-off test") {
+                return {
+                  id: "m3-l1-store-vs-handoff",
+                  badge: "Category check",
+                  title: "Sort the mission sentence before the room blurs stores and transfers",
+                  scenario:
+                    "The board now shows mixed sentences about launchers, stores, and leaks. The team needs one rule for deciding whether a sentence is about energy the pod has now or energy moving between places now.",
+                  prompt: "Choose the sorting rule.",
+                  options: [
+                    {
+                      value: "has-now-vs-moving-now",
+                      label: "If the sentence names what the pod has now, it is a store. If it names energy moving between places or machines now, it is a hand-off.",
+                      feedback:
+                        "Exactly. That keeps the categories clean before any numbers are touched.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "machine-means-store",
+                      label: "Any sentence that mentions a machine should count as a store, because machines are where the energy sits before the pod gets it.",
+                      feedback:
+                        "That blurs the roles. A machine can be part of the transfer story without being the store the pod holds.",
+                    },
+                    {
+                      value: "moving-pod-means-handoff",
+                      label: "If the pod is moving, every sentence should count as a hand-off, because motion always means the energy is currently being transferred.",
+                      feedback:
+                        "Motion Store is still a store. Moving does not automatically turn every sentence into a transfer event.",
+                    },
+                  ],
+                  successLabel: "Sorted. The room now keeps stores and hand-offs in separate lanes.",
+                  retryLabel: "That rule would let the categories collapse into one blur.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "ledger sentence frame") {
+                return {
+                  id: "m3-l1-ledger-sentence",
+                  badge: "Ledger frame",
+                  title: "Build the sentence that keeps the energy accounting honest",
+                  scenario:
+                    "The room has the numbers, but the sentence frame on the wall is still incomplete. One crew member wants to leave out the Leak Trail whenever the useful gain looks impressive.",
+                  prompt: "Choose the sentence frame to post.",
+                  options: [
+                    {
+                      value: "input-equals-useful-plus-leak",
+                      label: "Input hand-off = useful gain + Leak Trail.",
+                      feedback:
+                        "Exactly. That is the frame that keeps the whole mission balanced in words before symbols.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "input-equals-useful-only",
+                      label: "Input hand-off = useful gain, because the best missions should treat the useful part as the whole story.",
+                      feedback:
+                        "That leaves the ledger incomplete. Even strong missions still need the leaked part tracked.",
+                    },
+                    {
+                      value: "useful-plus-store-labels-only",
+                      label: "Height Store + Motion Store = useful gain, so the input sentence is not needed unless the mission includes an equation later.",
+                      feedback:
+                        "That skips the full balance statement. The input and the Leak Trail still have to appear somewhere in the ledger sentence.",
+                    },
+                  ],
+                  successLabel: "Frame posted. The room now has the sentence that keeps every mission balanced.",
+                  retryLabel: "That sentence would hide part of the ledger instead of completing it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M2_L6") {
