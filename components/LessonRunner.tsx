@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,350 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M2_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m2-l1-master-arrow-visual",
+                badge: "Deck map",
+                title: "Freeze the thruster deck before the crew predicts motion",
+                scenario:
+                  "The Thruster-Deck display shows several Drive Arrows acting at once. A trainee is about to read one arrow in isolation and ignore the combined overall push.",
+                prompt: "Pin the right instruction to the display.",
+                options: [
+                  {
+                    value: "collapse-to-master-arrow",
+                    label: "Combine the Drive Arrows first and read the single Master Arrow before you say anything about the motion change.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored on the resultant force instead of one isolated arrow.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "strongest-arrow-controls",
+                    label: "Use the biggest single Drive Arrow as the motion answer, because the strongest visible force should decide what happens next.",
+                    feedback:
+                      "That skips the key first-law step. The craft responds to the resultant, not to whichever arrow looks biggest by itself.",
+                  },
+                  {
+                    value: "motion-state-first",
+                    label: "Look at whether the craft is already moving, because the current motion state should decide which individual force matters most.",
+                    feedback:
+                      "Current motion matters later, but first you still have to collapse the whole force picture into one Master Arrow.",
+                  },
+                ],
+                successLabel: "Pinned. The deck now reads the Master Arrow before predicting motion.",
+                retryLabel: "That note would let the crew skip the resultant-force step.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m2-l1-module-lens",
+                badge: "Lens check",
+                title: "Lock the zero-resultant rule before the cases get mixed",
+                scenario:
+                  "The Module 2 lens card is up, and the room is starting to merge rest, steady cruising, and balanced forces into one blurry story.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "zero-master-arrow-zero-acceleration",
+                    label: "Zero Master Arrow means zero acceleration, so the motion state stays unchanged whether the craft was resting or already cruising steadily.",
+                    feedback:
+                      "Exactly. That keeps change in motion separate from motion already in progress.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "zero-master-arrow-means-rest",
+                    label: "Zero Master Arrow means the craft must be at rest, because no leftover push means there is no motion left to explain.",
+                    feedback:
+                      "That is the trap. Zero Master Arrow means no change in velocity, not automatic rest.",
+                  },
+                  {
+                    value: "balanced-forces-equal-no-forces",
+                    label: "Balanced forces and no forces are the same physical setup, so they should always be treated as one case from the start.",
+                    feedback:
+                      "They can share the same resultant but still tell different force stories. The lesson needs those setups kept distinct.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now separates zero acceleration from zero motion.",
+                retryLabel: "That rule would blur the first-law comparison cases.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m2-l1-what-to-compare",
+                badge: "Compare board",
+                title: "Coach the crew on what to compare next",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare only force diagrams, while another wants to compare only whether the craft is moving.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "compare-force-state-and-motion-change",
+                    label: "Compare the force state first to find the Master Arrow, then compare that with the motion-change story. A craft can still be moving when the Master Arrow is zero.",
+                    feedback:
+                      "Exactly. That sequence keeps force state and motion state from collapsing into each other.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-motion-only",
+                    label: "Compare only whether the craft is moving, because once the motion state is known the separate force story no longer matters very much.",
+                    feedback:
+                      "That would hide the lesson's main distinction. First law is about how resultant force connects to change in motion.",
+                  },
+                  {
+                    value: "compare-force-only",
+                    label: "Compare only the arrows and stop there, because once the diagram has been simplified the current velocity stops being relevant to the answer.",
+                    feedback:
+                      "The current velocity still matters when you describe what happens next. Zero acceleration can mean rest or steady cruising depending on the starting motion.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares force state and motion change in the right order.",
+                retryLabel: "That plan would leave one side of the comparison out.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m2-l1-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first first-law note",
+                  scenario:
+                    "A trainee has written that zero Master Arrow means the craft is not moving. You need the correction that fixes that idea before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "zero-master-arrow-no-change",
+                      label: "Zero Master Arrow means no change in velocity. The craft can stay at rest or keep moving at constant velocity depending on how it started.",
+                      feedback:
+                        "Exactly. That repairs the confusion between motion state and motion change.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "zero-master-arrow-rest",
+                      label: "Zero Master Arrow means the craft should be described as stationary, because only a non-zero push can support motion.",
+                      feedback:
+                        "That keeps the mistake alive. Motion can continue with zero resultant force if there is no acceleration.",
+                    },
+                    {
+                      value: "balanced-and-no-force-same-case",
+                      label: "The safest correction is to say balanced forces and no forces are identical cases, because they both remove the need to think about acceleration.",
+                      feedback:
+                        "They share zero resultant, but they are still different force stories. The lesson wants that difference kept visible.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps zero acceleration separate from zero motion.",
+                  retryLabel: "That would leave the first-law confusion active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m2-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line first-law rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right anchor before comparing any force maps.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "first-law-master-arrow",
+                      label: "Newton's first law says an object stays at rest or keeps constant velocity unless a non-zero resultant force, the Master Arrow, acts on it.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-keeps-motion-going",
+                      label: "Newton's first law says a force is needed to keep motion going, so zero Master Arrow should always lead to a stop.",
+                      feedback:
+                        "That is the old misconception the lesson is trying to remove. Constant velocity does not need a non-zero resultant force.",
+                    },
+                    {
+                      value: "motion-decides-force",
+                      label: "Newton's first law is mainly about looking at the current motion first and using that to decide which forces are really acting.",
+                      feedback:
+                        "Current motion matters, but the lesson anchor starts from the resultant force and the resulting acceleration story.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right first-law rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m2-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the force-map vocabulary board",
+                  scenario:
+                    "The crew can see the arrows, but the labels are drifting. You need the note that keeps Drive Arrows, Master Arrow, and acceleration doing separate jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "drive-arrows-master-arrow-acceleration",
+                      label: "Drive Arrows are the individual forces, the Master Arrow is their resultant, and acceleration is the motion change caused by that resultant.",
+                      feedback:
+                        "Exactly. That keeps the three lesson terms from collapsing into each other.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all-arrows-mean-acceleration",
+                      label: "Treat every Drive Arrow as a separate acceleration arrow, because each force should directly tell one part of the motion answer.",
+                      feedback:
+                        "That skips the resultant-force step. Individual arrows combine first; acceleration comes from the Master Arrow.",
+                    },
+                    {
+                      value: "master-arrow-is-current-motion",
+                      label: "Treat the Master Arrow as the craft's current motion arrow, because the summary display should tell how the craft is traveling right now.",
+                      feedback:
+                        "The Master Arrow is the resultant force, not the current velocity. Force state and motion state must stay separate.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the lesson terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m2-l1-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the zero-resultant handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into the difference between balanced arrows and no arrows.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "same-resultant-different-force-story",
+                      label: "Balanced arrows and no arrows can both give zero Master Arrow, but one case still has individual forces acting while the other has none.",
+                      feedback:
+                        "Exactly. That carries the force-story comparison into one of the lesson's key distinctions.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-resultant-same-setup",
+                      label: "If two situations give the same zero Master Arrow, they should be treated as the same setup because only the resultant matters.",
+                      feedback:
+                        "The resultant matters for acceleration, but the lesson still wants the underlying force stories kept distinct.",
+                    },
+                    {
+                      value: "balanced-is-stronger-rest",
+                      label: "Balanced arrows are best treated as a stronger form of rest, because the craft is being held still by matched pushes instead of by having none.",
+                      feedback:
+                        "That would pull the room back toward zero motion. Balanced arrows can also describe steady cruising with zero acceleration.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the zero-resultant comparison.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m2-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the first-law analyst",
+                  scenario:
+                    "The trainee analyst is about to answer from the craft's current motion alone. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "collapse-arrows-then-compare-motion",
+                      label: "Collapse the force map into one Master Arrow first, decide whether the acceleration is zero or non-zero, and only then compare that with the craft's current motion.",
+                      feedback:
+                        "Exactly. That gives the analyst the right sequence instead of a motion-first guess.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "motion-first-force-later",
+                      label: "Start from whether the craft is moving or resting, because the present motion state should reveal whether the forces matter at all.",
+                      feedback:
+                        "That would send the analyst into the shortcut this lesson is removing. First-law reasoning starts from the resultant force.",
+                    },
+                    {
+                      value: "largest-arrow-shortcut",
+                      label: "Use the largest Drive Arrow as the fastest shortcut, then only combine forces if the answer still feels uncertain after the first guess.",
+                      feedback:
+                        "That would skip the whole point of the Master Arrow idea. The forces have to be combined before the motion change is predicted.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable first-law method.",
+                  retryLabel: "That would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m2-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the zero-force-means-stop shortcut",
+                  scenario:
+                    "One crew member keeps saying that if the Master Arrow becomes zero, the craft must stop. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "zero-master-arrow-no-acceleration",
+                      label: "Zero Master Arrow means zero acceleration. It tells you the velocity will stay unchanged, not that the craft must be at rest.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "zero-force-stops-motion",
+                      label: "Zero Master Arrow should be treated as the stop signal, because without a leftover push the craft has nothing keeping it moving.",
+                      feedback:
+                        "That is the trap. Constant velocity does not need a non-zero resultant force.",
+                    },
+                    {
+                      value: "balanced-forces-hide-motion",
+                      label: "Balanced forces are safest treated as hidden rest, because the pushes cancel and therefore erase whatever motion the craft had before.",
+                      feedback:
+                        "Cancellation erases acceleration, not existing velocity. The craft can still keep cruising.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now read zero resultant as zero acceleration, not automatic rest.",
+                  retryLabel: "That warning would leave the shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m2-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the pilot-display analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why many separate force arrows can be collapsed into one summary arrow without confusing that summary with the craft's current motion.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "pilot-summary-display",
+                      label: "Treat the force map like a pilot looking at many thruster indicators but flying from one summary display. The craft responds to the Master Arrow, while the current cruise state can still stay different from that summary force reading.",
+                      feedback:
+                        "Exactly. That analogy supports the lesson without turning the Master Arrow into the craft's velocity.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "engine-always-drives-motion",
+                      label: "Treat the force map like an engine-speed display where the strongest engine always tells the craft how fast it is moving right now, so the summary arrow mainly repeats that one engine's message.",
+                      feedback:
+                        "That would rebuild the isolated-force shortcut. The lesson needs the combined resultant, not one biggest force, and it still keeps force separate from current motion.",
+                    },
+                    {
+                      value: "summary-arrow-is-route-arrow",
+                      label: "Treat the Master Arrow like the craft's route arrow, because a good summary display should show both the current motion and the force story in one line.",
+                      feedback:
+                        "That would merge force state and motion state into one symbol. The analogy needs those stories kept separate.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the pilot-display idea instead of warping it.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M1_L6") {
