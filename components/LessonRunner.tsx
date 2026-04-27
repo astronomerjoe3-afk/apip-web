@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3"
         ? (() => {
+            if (lessonId === "F3_L3") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f3-l3-rate-yield-board",
+                  badge: "Rate board",
+                  title: "Read the fast-versus-useful comparison",
+                  scenario:
+                    "The energy room is comparing two machines. One transfers energy very quickly but wastes a lot, while the other gives a better useful fraction but works more slowly. One trainee keeps collapsing both ideas into one score.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "separate-rate-and-fraction",
+                      label: "Power tells how quickly energy is transferred, while efficiency tells what fraction of the input becomes useful output.",
+                      feedback:
+                        "Exactly. That keeps rate and usefulness separate right from the first comparison.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "power-means-efficient",
+                      label: "A more powerful machine must be more efficient, because transferring energy quickly already proves less is being wasted.",
+                      feedback:
+                        "That is the lesson's main trap. Fast transfer does not guarantee a high useful fraction.",
+                    },
+                    {
+                      value: "efficiency-means-faster",
+                      label: "The more efficient machine is automatically the more powerful one, because useful machines always finish the transfer sooner.",
+                      feedback:
+                        "Efficiency and power answer different questions. A machine can waste little energy and still transfer energy slowly.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now keep fast transfer separate from useful fraction.",
+                  retryLabel: "That note would blur power and efficiency back together.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f3-l3-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first power note",
+                    scenario:
+                      "A trainee has written that a high-power machine must also be highly efficient because it gets the job done quickly. You need the correction that separates the two ideas before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "power-vs-efficiency",
+                        label: "Power is about rate, while efficiency is about useful fraction. A machine can be powerful and still waste a large part of its input.",
+                        feedback:
+                          "Exactly. That correction keeps the lesson anchored on two different questions instead of one blended score.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "high-power-high-efficiency",
+                        label: "High power usually proves high efficiency, because fast transfer means less time for waste to happen.",
+                        feedback:
+                          "That keeps the mistake alive. This lesson needs rate and usefulness kept separate.",
+                      },
+                      {
+                        value: "one-percentage-explains-both",
+                        label: "As long as you know the efficiency percentage, you already know how quickly the machine transfers energy as well.",
+                        feedback:
+                          "Efficiency is not a rate. It does not tell you how many joules are transferred each second.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The rate-versus-usefulness mix-up is now cleared.",
+                    retryLabel: "That would leave the power-equals-efficiency mistake in place.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f3-l3-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line rate rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner begins this lesson with the right split between transfer rate and useful fraction.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "power-and-efficiency-rule",
+                        label: "Power measures how quickly energy is transferred, while efficiency measures how much of the input becomes useful output.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "power-is-useful-output",
+                        label: "Power is the amount of useful output a machine gives, so it already includes efficiency inside it.",
+                        feedback:
+                          "That folds the two ideas together too early. This lesson needs power and efficiency treated as different measurements.",
+                      },
+                      {
+                        value: "efficiency-is-speed",
+                        label: "Efficiency tells how quickly the useful output appears, while power tells how much is wasted.",
+                        feedback:
+                          "That swaps the jobs around. Power is the rate; efficiency is the useful fraction.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean power-and-efficiency anchor.",
+                    retryLabel: "That line would blur the lesson’s two key quantities together.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f3-l3-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the power analyst",
+                    scenario:
+                      "A trainee analyst wants to divide or multiply numbers straight away without first deciding whether the question is asking about transfer rate, total transferred energy, running time, or useful fraction.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "identify-quantity-first",
+                        label: "First decide whether the question is asking for power, energy, time, or efficiency. Use P = E / t for the rate relationship, and keep efficiency as a separate useful-output comparison.",
+                        feedback:
+                          "Exactly. That method keeps the rate relationship and the usefulness check from being mixed together.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "always-use-efficiency-first",
+                        label: "Start with efficiency whenever a machine is mentioned, because efficiency is the main quantity and power can be inferred later.",
+                        feedback:
+                          "That is too narrow. Many questions in this lesson are about transfer rate or total transferred energy, not about useful fraction first.",
+                      },
+                      {
+                        value: "same-formula-for-all",
+                        label: "Use one formula chain for every question, because power, energy, time, and efficiency are all versions of the same relationship.",
+                        feedback:
+                          "This lesson needs two different structures kept apart: the rate relation and the useful-fraction relation.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable power-and-efficiency method.",
+                    retryLabel: "That instruction would push the analyst back toward formula guessing.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f3-l3-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the fast-means-efficient shortcut",
+                    scenario:
+                      "One crew member keeps saying the machine that finishes sooner must also be the more efficient one. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "fast-not-equal-efficient",
+                        label: "Finishing sooner can mean greater power, but efficiency still depends on the useful fraction of the input, not on speed alone.",
+                        feedback:
+                          "Exactly. That warning protects the lesson’s main distinction.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "fast-proves-efficient",
+                        label: "The faster machine must be more efficient because less running time always means less wasted energy.",
+                        feedback:
+                          "That keeps the trap alive. A process can be powerful without being efficient.",
+                      },
+                      {
+                        value: "same-energy-same-efficiency",
+                        label: "If two machines transfer the same total energy, they must also have the same efficiency, even if the useful output differs.",
+                        feedback:
+                          "Total transferred energy alone does not fix the useful fraction. Efficiency needs the useful-output comparison.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now treats speed and usefulness as separate checks.",
+                    retryLabel: "That warning would leave the fast-equals-efficient shortcut active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f3-l3-analogy",
+                    badge: "Story relay",
+                    title: "Choose the rate-and-yield bridge",
+                    scenario:
+                      "The team wants one analogy line that keeps learners asking how quickly the transfer happens and how much of it becomes useful before any formula is used.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "rate-and-yield",
+                        label: "Use the analogy by asking how fast the transfer meter is running and what useful share reaches the target, because rate and yield answer different questions.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving both lesson ideas without blending them.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "yield-is-rate",
+                        label: "Use the analogy to treat the useful share as the same thing as transfer speed, because the better machine should always do both at once.",
+                        feedback:
+                          "That would collapse the two lesson ideas together again. The analogy needs to preserve rate and useful fraction as separate readings.",
+                      },
+                      {
+                        value: "time-only",
+                        label: "Use the analogy mainly to compare finishing times, because once you know which machine is faster the efficiency story is already settled.",
+                        feedback:
+                          "Finishing time alone cannot settle the efficiency story. The analogy still has to protect the useful-output comparison.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports rate and yield without flattening them into one score.",
+                    retryLabel: "That analogy would blur the power-and-efficiency story instead of clarifying it.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F3_L1") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
