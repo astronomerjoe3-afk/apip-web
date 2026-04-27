@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M8_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m8-l6-route-role-board",
+                badge: "Route board",
+                title: "Name what each line is doing before trusting the sketch",
+                scenario:
+                  "The Route Sketch board mixes a real-image case with a ghost-image case. One trainee keeps calling every drawn line a beam, another wants to ignore the Guide Lines because they do not carry light, and a third keeps treating dashed extensions as if they were real routes behind the surface.",
+                prompt: "Pin the note that keeps the route sketch honest.",
+                options: [
+                  {
+                    value: "line-role-first",
+                    label: "Name the line role first: real routes show actual travel, Guide Lines are references, and dashed extensions are geometry tools. Then decide whether the meeting point is true or ghost.",
+                    feedback:
+                      "Exactly. That keeps the whole sketch readable because each line keeps its job.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "all-lines-are-beams",
+                    label: "Treat every line as a beam path first, because diagrams become easier once every mark is interpreted as light and the finer distinctions are added later.",
+                    feedback:
+                      "That destroys the line-role system the lesson is trying to build.",
+                  },
+                  {
+                    value: "image-first-line-later",
+                    label: "Decide where the image seems to be first, then label the lines afterward, because the line roles mainly exist to support the answer once the position is known.",
+                    feedback:
+                      "That reverses the lesson logic. The line roles are what make the image decision trustworthy.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads route sketches by line role before image label.",
+                retryLabel: "That note would flatten the route-sketch method into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m8-l6-fix-ideas",
+                  badge: "Role repair",
+                  title: "Repair the all-lines-are-beams shortcut",
+                  scenario:
+                    "One trainee says Guide Lines and dashed extensions should both count as light because they are drawn on the same diagram, while another keeps naming image type without checking what kind of meeting point the lines actually create.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-line-role-system",
+                      label: "Repair both ideas together: separate reference lines, real routes, and dashed extensions first, then decide whether the meeting point comes from actual crossings or only from apparent extensions.",
+                      feedback:
+                        "Exactly. That restores both the line-role system and the true-versus-ghost test.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-brighter-lines",
+                      label: "Repair the confusion by drawing the real routes darker than the others, because once the page looks more visual students usually stop needing explicit line-role language.",
+                      feedback:
+                        "That may decorate the page, but it leaves the reasoning shortcut alive.",
+                    },
+                    {
+                      value: "repair-with-image-memory",
+                      label: "Repair the confusion by memorizing which setups give real images and which give ghost images, because once the case is recognized the role of each line matters much less.",
+                      feedback:
+                        "That skips the exact reasoning this lesson is trying to teach.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now separates line roles before naming image type.",
+                  retryLabel: "That would leave a main M8_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m8-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line route-sketch rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop trusting optics sketches just because the lines look tidy.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "route-map-anchor",
+                      label: "A ray diagram is a smart route map: real routes, Guide Lines, and dashed extensions do different jobs, and true and ghost meeting points come from different line behaviors.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "picture-anchor",
+                      label: "A ray diagram is mainly a picture of where the light probably goes, so the line types can be treated loosely as long as the image position looks reasonable.",
+                      feedback:
+                        "That would build the wrong looseness into the anchor sentence.",
+                    },
+                    {
+                      value: "image-label-anchor",
+                      label: "A ray diagram is best understood by naming the image first and only then checking whether the lines support it well enough for exam use.",
+                      feedback:
+                        "That would build the wrong order into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right route-sketch rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m8-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the line-role vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up Guide Lines, real routes, dashed extensions, true meeting points, and ghost meeting points until the page sounds like every line means the same thing.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-route-sketch",
+                      label: "Use Guide Line for a reference, real route for actual light travel, dashed extension for apparent continuation, True Meeting Point for actual crossings, and Ghost Meeting Point for extension-only intersections.",
+                      feedback:
+                        "Exactly. That keeps each route-sketch term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-beam-family",
+                      label: "Use beam for almost every drawn line, because students can sort out whether a line is approximate, real, or extended later without much difficulty.",
+                      feedback:
+                        "That would scramble the line-role language the lesson is trying to make precise.",
+                    },
+                    {
+                      value: "term-board-image-family",
+                      label: "Use real and ghost mainly as labels for lens types or mirror types, because the meeting-point distinction is a deeper detail than most learners need at first.",
+                      feedback:
+                        "That would blur the central test the lesson is teaching.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the route-sketch terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m8-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst through the line-role check",
+                  scenario:
+                    "The trainee analyst is about to trust a meeting point immediately instead of asking whether the lines that meet are actual routes or only apparent extensions.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "label-then-test",
+                      label: "Label each line first, then ask whether the meeting point could be caught on a screen. Use actual crossings for true images and extension-only intersections for ghost images.",
+                      feedback:
+                        "Exactly. That gives the analyst the right route-sketch workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "meeting-point-first",
+                      label: "Start with whichever meeting point is easiest to see, because once the image location is secure the line roles can be sorted out afterward without much risk.",
+                      feedback:
+                        "That would send the analyst straight into the shortcut this lesson is trying to block.",
+                    },
+                    {
+                      value: "case-memory-first",
+                      label: "Start by memorizing which devices tend to give real or ghost images, because that is quicker than checking what each line is doing every time.",
+                      feedback:
+                        "That would replace reasoning with recall instead of teaching the route map properly.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean line-role-first method.",
+                  retryLabel: "That would send the analyst back into a route-sketch shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m8-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the all-lines-equal and image-first shortcuts",
+                  scenario:
+                    "One crew member keeps treating every line as light, while another keeps trusting any neat meeting point before checking whether it comes from screenable crossings or only from extensions.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "route-trap-warning",
+                      label: "Do not treat every line as a beam and do not trust the image label first. Separate line roles, then use screenability and actual-versus-apparent meeting behavior to classify the image.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "line-warning-only",
+                      label: "Warn mainly that students should label the lines more carefully, because once that is fixed the true-versus-ghost distinction usually looks obvious on its own.",
+                      feedback:
+                        "That would leave the image-first shortcut mostly alive.",
+                    },
+                    {
+                      value: "image-warning-only",
+                      label: "Warn mainly that students should test whether the image is real or ghost, because once that is right the exact line roles matter much less.",
+                      feedback:
+                        "That would leave the all-lines-equal shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps route sketches tied to line roles and screenability.",
+                  retryLabel: "That warning would leave a main M8_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m8-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the map logic visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners understand why a sketch can be trustworthy without pretending every line is the same kind of thing.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "map-key-analogy",
+                      label: "Think of a map key: a road, a border, and a dotted walking trail may share the same page, but you trust the map only because each mark has a different job.",
+                      feedback:
+                        "Exactly. That keeps the route-map logic visible without flattening the lines together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-pen-analogy",
+                      label: "Think of every line as coming from the same pen, because what matters most is the final shape on the page rather than the job each mark is doing.",
+                      feedback:
+                        "That would rebuild the all-lines-equal shortcut.",
+                    },
+                    {
+                      value: "answer-box-analogy",
+                      label: "Think of the diagram mainly as an answer box with supporting decoration, because the image label is the real goal and the lines are there only to make it look justified.",
+                      feedback:
+                        "That would pull the lesson away from the reasoning system it is trying to teach.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the map logic without flattening the line roles.",
+                  retryLabel: "That analogy would pull the lesson away from the right route-sketch model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M8_L5") {
