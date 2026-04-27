@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M5_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m5-l2-lock-slide-board",
+                badge: "State board",
+                title: "Keep the crowd close while you separate Lock Mode from Slide Mode",
+                scenario:
+                  "The Lock-and-Slide board compares a solid crowd with a liquid crowd. One trainee keeps drawing huge gas-like gaps in the liquid panel, while another says flow only happens if the particles spread far apart.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "close-packed-neighbor-swap",
+                    label: "Keep both crowds close-packed. Solids stay in fixed positions and mainly vibrate, while liquids stay close but let neighbors change, which is why they can flow.",
+                    feedback:
+                      "Exactly. That keeps the liquid crowded while still explaining mobility honestly.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "liquid-needs-big-gaps",
+                    label: "Spread the liquid particles much farther apart, because flow only becomes possible once the particles are almost as separated as they are in a gas.",
+                    feedback:
+                      "That turns the liquid into the wrong state. This lesson keeps liquid particles close together.",
+                  },
+                  {
+                    value: "solid-and-liquid-same-because-close",
+                    label: "Treat solids and liquids as basically the same state, because if both are close-packed then there is no useful particle-model difference left to explain.",
+                    feedback:
+                      "Close spacing is not the whole story. Neighbor mobility is exactly what separates the two here.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads Slide Mode as close-packed matter with mobility.",
+                retryLabel: "That note would push the lesson back toward a gas-like liquid shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m5-l2-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the half-gas liquid shortcut",
+                  scenario:
+                    "A trainee has written that liquid particles must be far apart to move, while another says solids and liquids cannot be different if both keep particles close.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-close-but-mobile",
+                      label: "Repair both ideas together: liquids stay close-packed like solids, but their particles can change neighbors and flow, while solids mainly vibrate about fixed positions.",
+                      feedback:
+                        "Exactly. That fixes both the spacing mistake and the missing mobility difference in one move.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "liquids-need-gas-gaps",
+                      label: "Tell them the liquid really should be drawn with much larger gaps, because any meaningful particle movement needs space close to a gas state.",
+                      feedback:
+                        "That would keep the main shortcut alive. Liquids do not need gas-like gaps in this model.",
+                    },
+                    {
+                      value: "close-packing-erases-difference",
+                      label: "Tell them solids and liquids are close enough in the model that the difference is not worth emphasizing yet, because both mostly just show crowded particles.",
+                      feedback:
+                        "That would erase the core lesson distinction. Neighbor mobility is the point of the comparison.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now separates close spacing from neighbor mobility correctly.",
+                  retryLabel: "That would leave the liquid-state shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m5-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Lock Mode versus Slide Mode rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this state-comparison lesson with the right anchor before later gas lessons begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "close-packed-different-mobility",
+                      label: "Solids and liquids both keep particles close together, but solids keep them in fixed positions while liquids let them move around one another.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "liquids-are-nearly-gases",
+                      label: "Liquids are best thought of as particles that have already spread most of the way toward a gas, so the key visual is the much larger gap between neighbors.",
+                      feedback:
+                        "That would build the main shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "spacing-alone-defines-state",
+                      label: "State can be named almost entirely from spacing, because once particles are close together the motion pattern adds very little to the classification.",
+                      feedback:
+                        "That would erase the exact motion clue this lesson is trying to establish.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right state-comparison rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m5-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the state-language board",
+                  scenario:
+                    "The crew sees the two particle crowds, but their labels are drifting. You need the note that keeps spacing words and mobility words working together instead of replacing one another.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "spacing-and-mobility-language",
+                      label: "Use close-packed for both solids and liquids, fixed positions and vibration for solids, and neighbor change or flow for liquids.",
+                      feedback:
+                        "Exactly. That keeps the language tied to the real contrast this lesson is teaching.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "liquid-means-far-apart-language",
+                      label: "Use far apart as the main liquid label, because movement between particles is the strongest clue and it is easiest to picture with large gaps.",
+                      feedback:
+                        "That would pull the lesson into gas language. Liquids stay crowded in this model.",
+                    },
+                    {
+                      value: "close-packed-is-enough-language",
+                      label: "Use close-packed as the main label for both states and do not worry too much about mobility words, because crowded spacing already tells most of the state story.",
+                      feedback:
+                        "That would hide the difference the lesson is trying to sharpen. Mobility words matter here.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the state model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m5-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call every moving crowd a gas",
+                  scenario:
+                    "The trainee analyst is about to classify a liquid as a gas because the particles can move. You get one instruction to redirect them.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "check-spacing-then-neighbor-change",
+                      label: "Start by checking spacing and then check neighbor mobility. If the particles stay close but can swap neighbors, you are reading a liquid rather than a gas.",
+                      feedback:
+                        "Exactly. That gives the analyst a real two-clue method instead of one shortcut.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "movement-alone-means-gas",
+                      label: "Use movement as the deciding clue, because any crowd whose particles can travel around one another has already crossed into gas reasoning.",
+                      feedback:
+                        "That would send the analyst straight into the main shortcut. Liquids move too, while staying close-packed.",
+                    },
+                    {
+                      value: "close-spacing-alone-means-solid",
+                      label: "Use close spacing as the deciding clue, because once particles are crowded together the safest call is solid unless the gaps become very large.",
+                      feedback:
+                        "That would erase the liquid state entirely. Close spacing must be combined with mobility here.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable Lock Mode versus Slide Mode method.",
+                  retryLabel: "That would send the analyst back into state-guessing shortcuts.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m5-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the liquid-is-half-gas shortcut",
+                  scenario:
+                    "One crew member keeps saying liquids are basically gases with fewer gaps removed, while another says crowded particles must always mean a solid.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "close-packed-does-not-settle-state",
+                      label: "Do not treat liquid as half-gas or close-packed as automatic solid. Liquids stay close together but let particles move around one another, so spacing and mobility must be read together.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "liquid-mostly-gas-warning",
+                      label: "Warn only that liquids should not be drawn fully gas-like, because a moderately spread-out particle picture is still the safest way to show liquid movement to beginners.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson wants a genuinely close-packed liquid model.",
+                    },
+                    {
+                      value: "crowded-mostly-solid-warning",
+                      label: "Warn mainly that crowded particles usually mean solid, because particle movement is a weaker clue than spacing when beginners are making state calls.",
+                      feedback:
+                        "That would keep the second shortcut alive. Mobility is exactly what separates liquid from solid here.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps liquid flow and close spacing in the same honest model.",
+                  retryLabel: "That warning would leave one of the lesson's main traps active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m5-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the crowded-hall analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why solids and liquids can both stay crowded while only one of them flows.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "seated-row-vs-crowded-corridor",
+                      label: "Think of a solid like people standing in fixed marked spots, and a liquid like a crowded corridor where people stay close but can still swap places and slide past one another.",
+                      feedback:
+                        "Exactly. That analogy keeps the crowd close in both cases while changing only the mobility story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "liquid-like-scattered-crowd",
+                      label: "Think of a liquid like a crowd spread widely across a field, because only big open gaps can explain why the group is able to move and flow.",
+                      feedback:
+                        "That analogy would turn liquid into the wrong state. The lesson needs the liquid crowd to stay close.",
+                    },
+                    {
+                      value: "solid-and-liquid-same-crowd",
+                      label: "Think of solid and liquid as basically the same crowded queue, because once the people are close together the rest of the state story is mostly decorative detail.",
+                      feedback:
+                        "That analogy hides the one difference the lesson most needs: whether neighbors can change.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the Lock Mode versus Slide Mode distinction instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right particle picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M5_L1") {
