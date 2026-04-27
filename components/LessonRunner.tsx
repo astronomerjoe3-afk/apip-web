@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,418 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M3_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m3-l6-ledger-mission-visual",
+                badge: "Mission planner",
+                title: "Freeze the whole chain before the room grabs one favorite equation",
+                scenario:
+                  "The Ledger Mission display shows lift input, useful yield, a later leak, and a final gate target. The crew wants to jump straight into one formula without mapping the stages.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "map-stages-before-equations",
+                    label: "Read the board as a staged mission: mark the stores, hand-offs, leaks, and final target first, then decide the equation order from that chain.",
+                    feedback:
+                      "Exactly. That keeps the capstone lesson rooted in mission planning instead of pattern matching.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "one-formula-solves-all",
+                    label: "Treat the whole board as one giant substitution problem, because long energy questions mainly test whether you can spot the single strongest equation quickly.",
+                    feedback:
+                      "That is the shortcut this lesson is trying to break. The chain has to be mapped before the symbols are trusted.",
+                  },
+                  {
+                    value: "target-first-means-finish-first",
+                    label: "Ignore the earlier stages and compare only the final gate target, because if the target is known the rest of the mission details can be reconstructed later if needed.",
+                    feedback:
+                      "That skips the bridge quantities the later target depends on. The earlier stages still have to be planned deliberately.",
+                  },
+                ],
+                successLabel: "Pinned. The room now sees a staged mission instead of a giant formula hunt.",
+                retryLabel: "That note would turn the capstone back into equation grabbing.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m3-l6-module-lens",
+                badge: "Module lens",
+                title: "Choose whether the mission should run forward or backward",
+                scenario:
+                  "The Module 3 lens card is up. One trainee wants to always work forward from the first input, even when the final target and a later-stage efficiency are the clearest known clues.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "forward-or-backward-from-knowns",
+                    label: "Post the rule that equation order follows the knowns: run forward when early input and yield are known, but work backward when the final target and later-stage loss or efficiency are the cleanest starting clues.",
+                    feedback:
+                      "Exactly. That is the planning move this screen is meant to build.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "always-work-forward",
+                    label: "Say the safest rule is to always work forward from the first stage, because backward planning is more confusing and usually unnecessary in real questions.",
+                    feedback:
+                      "That would erase one of the capstone moves. Some missions are cleaner precisely because they are worked backward from the target.",
+                  },
+                  {
+                    value: "always-work-backward",
+                    label: "Say the safest rule is to always work backward from the target, because final questions are what matter most and the earlier stages will eventually fall into place.",
+                    feedback:
+                      "That swings too far the other way. The route should follow the known quantities, not a fixed preference.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps equation order tied to the known mission clues.",
+                retryLabel: "That rule would send the room into rigid planning instead of deliberate planning.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m3-l6-compare-board",
+                badge: "Target board",
+                title: "Coach the crew on bridge quantities and the final threshold check",
+                scenario:
+                  "The comparison board is live. One crew member wants to celebrate a large intermediate store, while another wants to skip the final target comparison because most of the arithmetic already looks impressive.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "bridge-quantities-then-target",
+                    label: "Track each bridge quantity stage by stage, then compare the final useful amount with the gate threshold at the end. The mission verdict belongs to the final check, not to the largest intermediate number.",
+                    feedback:
+                      "Exactly. That keeps the chain honest from first stage to final judgment.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "largest-intermediate-wins",
+                    label: "Judge the mission by the largest intermediate store or hand-off, because a big number anywhere in the chain usually shows the mission had enough energy overall.",
+                    feedback:
+                      "That would mistake an intermediate result for the final verdict. The target check still belongs at the end.",
+                  },
+                  {
+                    value: "target-only-no-bridge",
+                    label: "Compare only the final threshold and ignore the bridge quantities, because the middle stages matter only for the arithmetic and do not need to stay visible in the reasoning.",
+                    feedback:
+                      "That would hide the whole planning structure. The bridge quantities are what make the final check trustworthy.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now tracks bridge quantities and saves the verdict for the target check.",
+                retryLabel: "That plan would distort the mission-planning structure.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "mission map before equations") {
+                return {
+                  id: "m3-l6-mission-map",
+                  badge: "Map desk",
+                  title: "Build the mission map before touching the symbols",
+                  scenario:
+                    "A trainee wants to begin a long energy question by writing whichever equation looks most familiar, even though the story involves several stages, leaks, and a gate target.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "map-stages-first",
+                      label: "Start by mapping the mission stages: name the stores, hand-offs, leaks, bridge quantities, and target before choosing any equation. The map is part of the physics, not optional scratch work.",
+                      feedback:
+                        "Exactly. That is the planning discipline this screen is meant to build.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equation-first-map-later",
+                      label: "Start with the strongest familiar equation first, then map the stages only if the substitution becomes awkward and you need help untangling the numbers.",
+                      feedback:
+                        "That would put equation grabbing back in charge. The map is supposed to lead the route, not rescue it later.",
+                    },
+                    {
+                      value: "target-first-only",
+                      label: "Start by circling the target number and ignore the stage map, because the final requirement usually tells you enough to solve the whole mission with minimal setup.",
+                      feedback:
+                        "That can hide the chain the target depends on. The stage map still matters even when the final target is known.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The crew now maps the mission before choosing equations.",
+                  retryLabel: "That would keep the mission-planning misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "backward planning is allowed") {
+                return {
+                  id: "m3-l6-backward-planning",
+                  badge: "Reverse route",
+                  title: "Work backward when the target is the cleanest known clue",
+                  scenario:
+                    "The gate needs 900 J after a stage keeps only 75% of its incoming useful energy. A trainee still wants to multiply by 0.75 first because the stage sounds like a forward process.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "divide-when-working-backward",
+                      label: "Work backward from the target. If only 75% remains after the stage, divide by 0.75 to find what had to enter that stage before the loss.",
+                      feedback:
+                        "Exactly. That keeps backward planning tied to the target rather than to the story's time direction.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "multiply-because-forward-story",
+                      label: "Multiply by 0.75 first anyway, because the machine runs forward in time and the calculation should always mimic that physical order directly.",
+                      feedback:
+                        "That confuses the real process order with the safest reasoning route. Backward planning is allowed when the target is the clearest starting clue.",
+                    },
+                    {
+                      value: "ignore-efficiency-until-end",
+                      label: "Ignore the 75% stage until the end, because it is easier to work out the earlier store values first and attach the efficiency correction afterward if the target still matters.",
+                      feedback:
+                        "That would bury the very clue the backward route depends on. The final-stage fraction matters immediately here.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The crew now trusts backward planning when the target leads the story.",
+                  retryLabel: "That would leave the backward-planning habit blocked.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m3-l6-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the one-giant-substitution shortcut",
+                  scenario:
+                    "A trainee has written that long energy missions are really just single-step questions with extra numbers, and another has added that the final threshold check is mostly decoration after the arithmetic feels large enough.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "multi-stage-ledger-repair",
+                      label: "Repair both ideas at once: long energy missions need staged ledger planning, bridge quantities, and a final target check. The arithmetic only makes sense because the chain is kept visible.",
+                      feedback:
+                        "Exactly. That fixes the one-step shortcut and the missing-target shortcut together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-as-single-step",
+                      label: "Keep the single-step idea and just warn that long missions need a little more care with units and percentages, but not a different reasoning structure.",
+                      feedback:
+                        "That would leave the main capstone misconception alive. The reasoning structure really is different here.",
+                    },
+                    {
+                      value: "target-is-optional",
+                      label: "Fix the note by saying the target matters only if the numbers look close, because large intermediate values usually prove success without a formal final comparison.",
+                      feedback:
+                        "That would erase the final judgment step. The target comparison is not optional.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats the capstone as staged mission planning.",
+                  retryLabel: "That would leave the capstone shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m3-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line capstone rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the lesson with the right anchor before the examples begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "ledger-mission-anchor",
+                      label: "Long energy problems are solved as ledger missions: map the stages, keep the bridge quantities visible, choose equation order deliberately, and judge success at the final target.",
+                      feedback:
+                        "Exactly. That is the clean anchor this capstone needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equation-list-anchor",
+                      label: "Long energy problems are mainly about spotting the strongest equation early, because the rest of the mission story usually follows automatically once the main substitution is chosen.",
+                      feedback:
+                        "That would put the main misconception directly into the anchor sentence.",
+                    },
+                    {
+                      value: "big-number-anchor",
+                      label: "Long energy problems are mainly about building the largest useful intermediate value, because that usually tells you whether the mission has already succeeded.",
+                      feedback:
+                        "That would bury the final target check and the stage-planning logic together.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right capstone rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m3-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the mission-planning vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps stage, target, and bridge quantity doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "stage-target-bridge-language",
+                      label: "A stage is one link in the mission chain, a target is the final amount that must be reached or exceeded, and a bridge quantity is the value one stage creates for the next stage to use.",
+                      feedback:
+                        "Exactly. That keeps the mission-planning vocabulary aligned with the lesson structure.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "all-steps-same-language",
+                      label: "Treat stages, targets, and bridge quantities as mostly interchangeable planning words, because they all just point to numbers that appear somewhere in the mission.",
+                      feedback:
+                        "That would collapse the planning structure. The terms matter because they signal different roles in the chain.",
+                    },
+                    {
+                      value: "target-only-language",
+                      label: "Leave bridge quantities off the board for now, because once the target is known the intermediate values can usually be treated as optional bookkeeping.",
+                      feedback:
+                        "That would weaken the whole mission chain. Bridge quantities are what connect one stage to the next.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the mission-planning model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m3-l6-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the glossary with the route-order language",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into the route-order move students forget when they see several valid equations on the page.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "equation-order-follows-chain",
+                      label: "Add that equation order follows the mission chain: each stage creates the quantity needed by the next, and the safest route may run forward or backward depending on the known clues.",
+                      feedback:
+                        "Exactly. That completes the glossary with the route-order move this lesson depends on.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equation-order-is-style",
+                      label: "The follow-up card should say that equation order is mostly personal style, because any correct formula list can usually be rearranged without changing the physics much.",
+                      feedback:
+                        "That would erase one of the capstone's main ideas. Equation order is part of the reasoning here.",
+                    },
+                    {
+                      value: "always-forward-order",
+                      label: "The follow-up card should say that the best order is always forward through the mission, because reverse planning is mainly a mathematical trick rather than a real physics move.",
+                      feedback:
+                        "That would shut down a valid and sometimes cleaner route. Backward planning is part of the lesson toolkit.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the route-order language model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m3-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before the capstone collapses into formula grabbing",
+                  scenario:
+                    "The trainee analyst is about to start substituting immediately before deciding what each stage provides, what leaks, and whether the cleanest route runs forward or backward.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "plan-stage-route-first",
+                      label: "Start by mapping the stages, target, leaks, and bridge quantities. Then decide whether the cleanest route runs forward from the input or backward from the target before writing any equation.",
+                      feedback:
+                        "Exactly. That gives the analyst a real capstone method instead of a formula reflex.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "favorite-equation-first",
+                      label: "Start with the most familiar equation first, because long missions mainly become easier once one concrete number is produced and the rest can be improvised afterward.",
+                      feedback:
+                        "That would invite the exact reflex this lesson is trying to break.",
+                    },
+                    {
+                      value: "target-only-first",
+                      label: "Start only with the final target, because the earlier mission stages mainly matter as background story and can be reattached once the threshold comparison looks plausible.",
+                      feedback:
+                        "That would ignore the bridge quantities the target depends on. The stages still have to be planned deliberately.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean capstone method.",
+                  retryLabel: "That instruction would send the analyst into equation grabbing again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m3-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the giant-substitution shortcut",
+                  scenario:
+                    "One crew member keeps trying to compress the whole mission into one blended line of arithmetic, even when later-stage losses and final target checks clearly depend on earlier bridge quantities.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "do-not-compress-chain",
+                      label: "Do not compress the whole mission into one giant substitution too early. Long energy problems stay trustworthy only when stages, bridge quantities, leaks, and the final target check remain visible.",
+                      feedback:
+                        "Exactly. That warning blocks the main shortcut this lesson is trying to stop.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "compress-if-neat",
+                      label: "Warn only that giant substitutions are risky when the numbers look messy, but they are usually fine if the arithmetic stays neat and the answer looks large enough.",
+                      feedback:
+                        "That would leave the shortcut alive. The chain needs to stay visible because the reasoning matters, not just the neatness.",
+                    },
+                    {
+                      value: "only-target-matters",
+                      label: "Warn only that the target should be checked at the end, because once that final comparison is planned the intermediate stage details do not need much attention.",
+                      feedback:
+                        "That still demotes the bridge quantities too far. The chain details are what make the final check meaningful.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist the giant-substitution shortcut.",
+                  retryLabel: "That warning would leave the main capstone trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m3-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the mission-planner analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why long energy questions should be planned as linked stages with targets and checkpoints instead of as one blur of equations.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "checkpoint-mission-bridge",
+                      label: "Think of a checkpoint mission: each stage hands the next team the exact cargo it managed to preserve, some of that cargo may spill at later checkpoints, and the final gate only opens if the last delivery meets the threshold. Planning the route matters as much as the arithmetic.",
+                      feedback:
+                        "Exactly. That analogy keeps stages, bridge quantities, leaks, and the final target all visible at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-delivery-bridge",
+                      label: "Think of the whole mission as one direct delivery, because once the starting cargo is known the intermediate checkpoints do not add much beyond slowing the calculation down.",
+                      feedback:
+                        "That would erase the stage structure the lesson is trying to build.",
+                    },
+                    {
+                      value: "scoreboard-only-bridge",
+                      label: "Think only of the final scoreboard, because if the final gate matters most the earlier transfers and leaks are mostly side details rather than part of the main reasoning.",
+                      feedback:
+                        "That would erase the chain that makes the final scoreboard trustworthy. The analogy needs the whole mission visible.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the whole mission chain visible instead of flattening it.",
+                  retryLabel: "That analogy would collapse the capstone into the wrong picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M3_L5") {
