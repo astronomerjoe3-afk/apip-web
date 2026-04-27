@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M8_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m8-l3-gather-point-board",
+                badge: "Lens board",
+                title: "Use selected routes to prove a True Meeting Point",
+                scenario:
+                  "The Gather Lens board shows an object outside the focus. One trainee wants to trace every possible route before naming the image, another keeps bending the center route strongly, and a third says the image is only a guessed point from dashed extensions.",
+                prompt: "Pin the note that keeps the ray-map honest.",
+                options: [
+                  {
+                    value: "selected-real-crossing",
+                    label: "Trace the parallel route through the far Focus Marker and the center route as undeviated; where those actual routes meet is the True Meeting Point, so a few trusted routes are enough.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored to selected routes and a real crossing.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "every-ray-needed",
+                    label: "Hold off on naming the image until every route has been drawn, because a Gather Lens cannot be trusted from selected routes alone.",
+                    feedback:
+                      "That turns the diagram into unnecessary clutter. The lesson is about using a few trusted routes well.",
+                  },
+                  {
+                    value: "dashed-guess-first",
+                    label: "Start with dashed extensions to guess where the image should be, then bend the center route until it reaches that guessed point.",
+                    feedback:
+                      "That reverses the logic. A True Meeting Point comes from actual refracted routes, not guessed extensions.",
+                  },
+                ],
+                successLabel: "Pinned. The room now treats the image as a real crossing found by selected routes.",
+                retryLabel: "That note would flatten the gather-lens method into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m8-l3-fix-ideas",
+                  badge: "Route repair",
+                  title: "Repair the every-ray and dashed-guess shortcuts",
+                  scenario:
+                    "One trainee says selected routes are never enough, while another keeps treating a real image like an imagined meeting point that should be found with extensions first.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-real-crossing-method",
+                      label: "Repair both ideas together: use the parallel route and center route as trusted guides, and call the image real only when actual refracted routes meet.",
+                      feedback:
+                        "Exactly. That restores both the efficient method and the meaning of a True Meeting Point.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-more-rays",
+                      label: "Repair the confusion by asking for many more rays, because once the page looks crowded enough students usually stop doubting the image location.",
+                      feedback:
+                        "That keeps the wrong method alive. The lesson wants selected routes, not clutter.",
+                    },
+                    {
+                      value: "repair-with-extensions",
+                      label: "Repair the confusion by teaching all lens images through dashed guesses first, because extensions are the simplest universal rule even for real images.",
+                      feedback:
+                        "That blurs real and ghost image logic. This lesson needs actual crossings first.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now trusts selected routes and real crossings.",
+                  retryLabel: "That would leave a main M8_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m8-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Gather Lens rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop guessing image positions and start tracing the right routes with purpose.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "gather-anchor",
+                      label: "A Gather Lens can make a True Meeting Point: trace the parallel route through the far focus and the center route undeviated, then look for a real crossing.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "crowded-anchor",
+                      label: "A Gather Lens is reliable only after many routes are drawn, because the image position depends on seeing the whole page fill out before trusting any crossing.",
+                      feedback:
+                        "That would build the wrong method into the anchor sentence.",
+                    },
+                    {
+                      value: "extension-anchor",
+                      label: "A Gather Lens image is best found by extending likely routes behind the lens first, then checking whether any real routes happen to support the guess.",
+                      feedback:
+                        "That would build the wrong image logic into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Gather Lens rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m8-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Gather Lens vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up Focus Marker, center route, real image, and dashed extension until the diagram sounds like a loose sketch instead of a route map.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-gather",
+                      label: "Use parallel route through the far Focus Marker, center route as undeviated, and True Meeting Point for the real image where actual routes meet.",
+                      feedback:
+                        "Exactly. That keeps each lens term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-bend-all",
+                      label: "Use center route for the strongest bend and treat the focus as the place every route should aim for if the lens is working correctly.",
+                      feedback:
+                        "That scrambles the route jobs the lesson is trying to separate.",
+                    },
+                    {
+                      value: "term-board-ghost-first",
+                      label: "Use dashed meeting point as the standard image term, because every lens image is easiest to discuss as an imagined location before real routes are considered.",
+                      feedback:
+                        "That would blur real images into ghost-image language.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the gather-lens terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m8-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst through F and 2F without guessing",
+                  scenario:
+                    "The trainee analyst is about to call the image location from memory instead of using the object position and the two trusted routes to see where the real crossing lands.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "trace-and-compare",
+                      label: "Start with the parallel and center routes, then compare the 2F anchor case with beyond-2F and between-F-and-2F positions before naming the real crossing.",
+                      feedback:
+                        "Exactly. That gives the analyst the right gather-lens workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "guess-from-side",
+                      label: "Start by guessing which side of the lens the image probably sits on, because the crossing detail usually becomes obvious once the side has been named confidently.",
+                      feedback:
+                        "That would send the analyst straight into the guessing trap.",
+                    },
+                    {
+                      value: "focus-only-memory",
+                      label: "Start by memorizing that every important image lands at the focus somehow, then adjust the sketch afterward if the object position seems unusual.",
+                      feedback:
+                        "That would flatten the F and 2F anchor cases into the wrong shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean selected-route method.",
+                  retryLabel: "That would send the analyst back into a gather-lens shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m8-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the clutter and ghost-image shortcuts",
+                  scenario:
+                    "One crew member keeps demanding every route before trusting the sketch, while another keeps reaching for dashed extensions even though the lesson is about a real image.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "gather-trap-warning",
+                      label: "Do not wait for every route, and do not start with dashed guesses. Use the trusted selected routes and look for the actual refracted crossing.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "clutter-warning-only",
+                      label: "Warn mainly that students should avoid messy pages, because once the sketch is cleaner the difference between real crossings and dashed guesses usually fixes itself.",
+                      feedback:
+                        "That would leave the real-versus-ghost shortcut mostly alive.",
+                    },
+                    {
+                      value: "ghost-warning-only",
+                      label: "Warn mainly that students should avoid dashed extensions, because once that habit is gone the need for selected routes versus every route matters much less.",
+                      feedback:
+                        "That would leave the every-ray shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps Gather Lens diagrams tied to selected real crossings.",
+                  retryLabel: "That warning would leave a main M8_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m8-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the route-map logic visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners trust why two carefully chosen routes can locate the image without making the lens sound magical.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "map-route-analogy",
+                      label: "Think of two trusted guide roads on a map: if both lead to the same meeting square, you do not need every side street to know where the real meetup is.",
+                      feedback:
+                        "Exactly. That supports the selected-route method without flattening the lens into magic.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "vacuum-pull-analogy",
+                      label: "Think of the lens like a vacuum pulling every route into the same point, because that explains why the image forms where the light gets dragged together.",
+                      feedback:
+                        "That would rebuild a magical pull story the lesson does not want.",
+                    },
+                    {
+                      value: "guess-and-correct-analogy",
+                      label: "Think of sketching a likely meeting square first and then redrawing the roads until they reach it, because diagrams are mainly about approximating the answer and refining it later.",
+                      feedback:
+                        "That would turn the real crossing into a guess-first process.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the route-map logic clear without inventing lens magic.",
+                  retryLabel: "That analogy would pull the lesson away from the right Gather Lens model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M8_L2") {
