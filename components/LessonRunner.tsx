@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M5_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m5-l6-state-change-board",
+                badge: "Change board",
+                title: "Track whether added energy raises pulse, loosens links, or both",
+                scenario:
+                  "The State-Change board shows one plaza heating normally and another sitting near a state boundary. One trainee says added energy must mainly raise the pulse meter, while another says a small temperature rise proves only a small increase in internal energy.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "state-change-energy-routing",
+                    label: "Track where the added energy goes. Near a state boundary, a large share can loosen links and raise internal energy strongly even while the pulse meter rises only a little.",
+                    feedback:
+                      "Exactly. That keeps state change as an energy-routing story instead of a temperature-only story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "added-energy-means-pulse-rise",
+                    label: "Treat added energy as mainly a pulse-meter increase every time, because temperature is always the clearest and biggest sign of what happened to the internal energy.",
+                    feedback:
+                      "That would miss the arrangement part of the state-change story. Added energy does not always mainly raise temperature.",
+                  },
+                  {
+                    value: "small-pulse-small-total-change",
+                    label: "Treat a small pulse rise as proof of only a small internal-energy increase, because the total store cannot change much unless the temperature reading climbs by a lot too.",
+                    feedback:
+                      "That would erase the hidden link-release part of the story. Internal energy can rise a lot while the pulse meter changes only a little.",
+                  },
+                ],
+                successLabel: "Pinned. The room now tracks state change by where the energy goes.",
+                retryLabel: "That note would flatten the state-change story into the wrong single rule.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m5-l6-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the temperature-only state-change shortcut",
+                  scenario:
+                    "A trainee has written that added energy always mainly raises pulse, while another agrees state changes happen but still says a small pulse rise proves only a small internal-energy increase.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-energy-routing-story",
+                      label: "Repair both ideas together: during a state change, added energy can loosen links as well as raise motion, so internal energy can climb strongly even while the pulse meter changes only a little.",
+                      feedback:
+                        "Exactly. That restores the energy-routing story the lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pulse-always-main-signal",
+                      label: "Tell them the pulse meter is still the main signal in every heating process, because link changes only explain state labels and not where most of the energy really goes.",
+                      feedback:
+                        "That keeps the first shortcut alive. Link release is part of where the energy can really go.",
+                    },
+                    {
+                      value: "small-pulse-means-small-store",
+                      label: "Tell them a small pulse rise always keeps the total increase small too, because a large internal-energy rise would have to show up clearly on the temperature reading first.",
+                      feedback:
+                        "That keeps the second shortcut alive. A large total increase can hide in the arrangement part.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps pulse rise and link release in the same state-change story.",
+                  retryLabel: "That would leave the state-change shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m5-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line state-change rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop collapsing temperature rise and internal-energy rise into the same single pattern.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "state-change-anchor",
+                      label: "During a state change, added energy can loosen links as well as raise motion, so internal energy can rise even when temperature changes only a little.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "temperature-is-main-heating-anchor",
+                      label: "During any heating process, the main effect of added energy is a temperature rise, so state change is mostly just a label for when the pulse meter increases more slowly.",
+                      feedback:
+                        "That would rebuild the temperature-only shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "state-change-is-separate-from-energy-anchor",
+                      label: "State change mainly tells you that the arrangement shifted, while the real internal-energy change still belongs only to the motion part and not to the links themselves.",
+                      feedback:
+                        "That would erase the arrangement contribution from the total-energy story.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right state-change rule.",
+                  retryLabel: "That line would blur the energy-routing lesson instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m5-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the state-change vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up Pulse Level, internal energy, state change, and link release. You need the note that gives each term a clean job.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "pulse-vs-link-release-language",
+                      label: "Use Pulse Level for the average-motion reading. Use internal energy for the whole-system total. During state change, added energy can feed link release or arrangement change as well as motion.",
+                      feedback:
+                        "Exactly. That keeps the words doing separate jobs instead of collapsing them together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pulse-is-total-language",
+                      label: "Use Pulse Level as the main name for the total internal-energy change, because once heating begins the pulse meter is the only reading that really matters.",
+                      feedback:
+                        "That would collapse average reading and total change back into one term.",
+                    },
+                    {
+                      value: "state-change-is-not-energy-language",
+                      label: "Use state change only as a shape or arrangement label, because the energy language should stay with motion alone and not with the links between particles.",
+                      feedback:
+                        "That would strip the arrangement contribution out of the lesson vocabulary.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the state-change language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m5-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they chase only the pulse meter",
+                  scenario:
+                    "The trainee analyst is about to compare two heating missions by watching only the pulse-meter rise and ignoring whether the system is near a state boundary.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "track-energy-destination-first",
+                      label: "Start by asking where the added energy is going: into faster motion, into loosened links, or into both. Use that routing check before you decide what a small or large pulse rise really means.",
+                      feedback:
+                        "Exactly. That gives the analyst the right energy-routing method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pulse-meter-settles-heating",
+                      label: "Treat the pulse meter as enough on its own, because any important internal-energy change has to show up first and mainly as a temperature increase.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main shortcut.",
+                    },
+                    {
+                      value: "state-label-without-energy-route",
+                      label: "Name the final state first and stop there, because once you know the state changed there is no need to track whether the added energy went into motion or into links.",
+                      feedback:
+                        "That would leave the energy-routing question unanswered, which is exactly what this lesson is trying to train.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean state-change reasoning method.",
+                  retryLabel: "That would send the analyst back into a pulse-only explanation.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m5-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the pulse-only and tiny-rise-tiny-total shortcuts",
+                  scenario:
+                    "One crew member keeps saying added energy always mainly raises pulse, while another says a small pulse change must mean only a small total-energy change.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "track-motion-and-links-warning",
+                      label: "Do not use Pulse Level as the whole heating story. During a state change, added energy can feed motion and loosened links together, so a modest temperature rise can still hide a large internal-energy increase.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pulse-usually-settles-it-warning",
+                      label: "Warn only that pulse sometimes rises more slowly near a state boundary, because temperature still remains the main indicator of how much internal energy changed overall.",
+                      feedback:
+                        "That would leave the first shortcut mostly alive.",
+                    },
+                    {
+                      value: "small-rise-small-total-warning",
+                      label: "Warn mainly that the pulse meter can lag slightly, but a really large total-energy rise would still have to show up as a large temperature jump before it counts as significant.",
+                      feedback:
+                        "That would leave the second shortcut alive by denying the hidden arrangement increase.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now tracks state change by energy destination, not by pulse alone.",
+                  retryLabel: "That warning would leave a main state-change trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m5-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the loosening-links analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why added energy can raise internal energy strongly during a state change even when the pulse meter barely moves.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "crowd-breaks-magnetic-clips",
+                      label: "Think of a crowd where extra energy can either make everyone bounce faster or be spent unclipping magnetic links between neighbors. The total energy rises in both cases, but the pulse reading rises much less when more of the energy goes into breaking the links.",
+                      feedback:
+                        "Exactly. That analogy keeps motion and arrangement both visible in the same story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "thermometer-tells-whole-kettle-story",
+                      label: "Think of one thermometer reading as telling the whole story of a kettle, because if the total energy change were large the temperature reading would always be the clearest and biggest sign of it.",
+                      feedback:
+                        "That analogy sneaks the pulse-only shortcut back in.",
+                    },
+                    {
+                      value: "state-change-is-label-only",
+                      label: "Think of state change like changing the color label on a box, because the new label matters for description but does not carry its own important share of the total-energy story.",
+                      feedback:
+                        "That analogy would erase the arrangement or link-release part of the lesson.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the full state-change energy story instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right energy-routing picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M5_L5") {
