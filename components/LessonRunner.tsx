@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M5_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m5-l1-particle-rules-board",
+                badge: "Pulse board",
+                title: "Keep the micro-pucks the same size while the crowd story changes",
+                scenario:
+                  "The Particle Rules board is showing a Pulse-Plaza crowd being heated. One trainee keeps drawing larger particles after every pulse increase, while another keeps copying whole-material properties onto a single micro-puck.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "particles-stay-fixed-crowd-changes",
+                    label: "Keep each particle the same size. Heating changes the motion and spacing pattern of the crowd, while properties like hardness or flow belong to the whole material rather than to one isolated particle.",
+                    feedback:
+                      "Exactly. That keeps particle size fixed and moves the change into the crowd pattern where it belongs.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "particles-grow-when-heated",
+                    label: "Show each particle getting larger when the pulse rises, because hotter matter must mean each particle physically expands before anything else changes.",
+                    feedback:
+                      "That breaks the model. The lesson keeps particle size fixed and changes motion or arrangement instead.",
+                  },
+                  {
+                    value: "one-particle-carries-bulk-properties",
+                    label: "Let one particle carry the hardness, shape, and state of the whole material, because the single-particle picture is the quickest way to summarize what the crowd is doing.",
+                    feedback:
+                      "That collapses crowd-level behavior into one particle. Bulk properties belong to the whole material, not one micro-puck.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads heating as a crowd-pattern change, not a particle-growth story.",
+                retryLabel: "That note would drag the lesson back into the two shortcuts it is trying to remove.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m5-l1-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the particle-growth shortcut before it spreads",
+                  scenario:
+                    "A trainee has written that heating makes each particle bigger, and another has written that a single particle can be called hard or soft in the same way as the whole block.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-particle-vs-crowd",
+                      label: "Repair both ideas together: particle size stays fixed, while heating changes motion and spacing patterns, and words like hardness or flow belong to the whole crowd rather than to one isolated particle.",
+                      feedback:
+                        "Exactly. That fixes both the particle-growth mistake and the one-particle bulk-property mistake in one move.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heating-usually-grows-particles",
+                      label: "Tell them particles usually grow a little when heated, but the growth is often too small to draw clearly, so it is still fair to imagine bigger particles in the model.",
+                      feedback:
+                        "That would keep the wrong picture alive. The lesson wants particle size fixed so the changes stay in motion and arrangement.",
+                    },
+                    {
+                      value: "single-particle-is-good-enough",
+                      label: "Tell them using one particle as a stand-in for the whole material is fine at this stage, because learners can add the crowd details later once the idea feels familiar.",
+                      feedback:
+                        "That would bake in the wrong level of explanation. The crowd-level story is the point of the model from the start.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now separates one-particle ideas from whole-crowd ideas cleanly.",
+                  retryLabel: "That would leave the core particle-model confusion active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m5-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line particle-model rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the particles unit with the right anchor before later state lessons build on it.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "fixed-size-changing-patterns",
+                      label: "Particle size stays fixed while motion, spacing, and attraction patterns can change, and those crowd patterns explain the material's bulk behavior.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heating-mainly-resizes-particles",
+                      label: "The particle model works best if learners imagine each particle changing size first, because that gives a quick visual explanation for why materials behave differently when heated.",
+                      feedback:
+                        "That would build the main shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "bulk-words-belong-to-one-particle",
+                      label: "The easiest way to use the particle model is to give each particle the same properties as the whole material, so the crowd pattern mostly just repeats what one particle is already doing.",
+                      feedback:
+                        "That would erase the crowd-level reasoning the lesson is trying to establish.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right particle-model rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m5-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the particle-language board",
+                  scenario:
+                    "The crew understands the picture, but their labels are drifting. You need the note that keeps particle properties and bulk material properties doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "particle-vs-bulk-language",
+                      label: "Use particle language for size, motion, spacing, and attraction. Use bulk-material language for properties like hardness, shape, and flow that belong to the whole crowd together.",
+                      feedback:
+                        "Exactly. That keeps the vocabulary tied to the right level of the model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bulk-words-are-particle-words",
+                      label: "Treat bulk words like hardness and softness as useful names for one particle, because a single particle already carries the material story in miniature.",
+                      feedback:
+                        "That would blur the whole model. Bulk words belong to the material made from many particles together.",
+                    },
+                    {
+                      value: "size-explains-everything",
+                      label: "Treat particle size as the main vocabulary key, because once you know whether particles are big or small, the state and material behavior mostly explain themselves.",
+                      feedback:
+                        "That would bring back a shortcut the lesson is trying to remove. Size stays fixed here while other features do the explanatory work.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the particle-model language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m5-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they invent bigger particles",
+                  scenario:
+                    "The trainee analyst is about to explain a heating change by drawing larger particles and stopping there. You get one instruction to redirect them.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "ask-one-particle-or-crowd",
+                      label: "Start by asking whether the claim belongs to one particle or to the whole crowd. Then describe the change using motion, spacing, and attraction before you write anything about state.",
+                      feedback:
+                        "Exactly. That gives the analyst a reliable particle-model method instead of a picture shortcut.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "draw-bigger-first",
+                      label: "Draw larger particles first because that gives the fastest visual explanation, then add any motion changes only if the question still feels unclear afterward.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main shortcut. Particle size stays fixed in this model.",
+                    },
+                    {
+                      value: "skip-crowd-level-check",
+                      label: "Skip the crowd-level check and go straight to naming the state, because solids, liquids, and gases are easier to identify from memory than from the particle details.",
+                      feedback:
+                        "That would hide the reasoning the lesson is trying to train. The state needs to come from the particle pattern, not from a guess.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a real particle-model method.",
+                  retryLabel: "That would push the analyst back toward shortcut reasoning.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m5-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the bigger-particles shortcut",
+                  scenario:
+                    "One crew member keeps saying that hotter matter must mean bigger particles, and another keeps calling one particle 'hard' because the solid block is hard.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "fixed-particle-size-warning",
+                      label: "Do not use bigger particles to explain heating, and do not copy bulk-material properties onto one particle. Keep particle size fixed and move the explanation into motion, spacing, attraction, and the whole crowd pattern.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "slight-growth-warning",
+                      label: "Warn only that particles should not be drawn too much larger, because a small amount of particle growth is still a fair way to show heating in beginner diagrams.",
+                      feedback:
+                        "That would keep the trap alive. The model wants no particle-size growth at all.",
+                    },
+                    {
+                      value: "bulk-words-are-acceptable-warning",
+                      label: "Warn mainly that bulk words should be used carefully, but keep them available for one-particle explanations because learners need simple labels before full crowd reasoning.",
+                      feedback:
+                        "That would leave the second shortcut active. The lesson wants the level-of-explanation mistake removed, not softened.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the particle model at the right level.",
+                  retryLabel: "That warning would leave one of the major shortcuts active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m5-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the crowd-floor analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture how heating can change the crowd pattern without changing the size of each particle.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "dancers-on-same-floor-dots",
+                      label: "Think of the particles like the same floor dots in a dance studio. The dots do not grow, but the dancers can jiggle more, spread differently, and change how tightly the group moves together.",
+                      feedback:
+                        "Exactly. That analogy keeps size fixed while shifting the change into motion and arrangement.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "balloons-get-bigger",
+                      label: "Think of the particles like balloons that swell when warmed, because size growth is the easiest way to picture why the material later behaves differently.",
+                      feedback:
+                        "That analogy teaches the exact wrong picture. The lesson needs fixed-size particles, not swelling ones.",
+                    },
+                    {
+                      value: "one-dancer-explains-whole-crowd",
+                      label: "Think of one dancer standing in for the whole crowd, because once one dancer is labeled clearly you no longer need the pattern of the rest of the group.",
+                      feedback:
+                        "That analogy would collapse crowd behavior into one object, which is the opposite of what the lesson is training.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the particle model instead of flattening it.",
+                  retryLabel: "That analogy would drag the lesson back into the wrong mental picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M4_L6") {
