@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M7_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m7-l4-bounce-board",
+                badge: "Bounce board",
+                title: "Use the normal line to keep the reflection story geometric",
+                scenario:
+                  "The Bounce Wall board shows one incoming front meeting a flat wall. One trainee wants to compare the angles to the wall surface, while another wants to explain the turn as if the wave slowed down at the boundary.",
+                prompt: "Pin the note that keeps the reflection model honest.",
+                options: [
+                  {
+                    value: "normal-and-equal-angles",
+                    label: "Draw the normal first, measure both incident and reflected angles from that line, and keep the reflection as a boundary bounce with equal angles.",
+                    feedback:
+                      "Exactly. That protects the geometric rule and the right reference line together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "measure-from-wall",
+                    label: "Measure the angles from the wall surface because that line is easier to see, then convert later only if the numbers look awkward.",
+                    feedback:
+                      "That would start from the wrong reference line. The lesson needs the normal as the first angle guide.",
+                  },
+                  {
+                    value: "treat-as-speed-change",
+                    label: "Explain the turn mainly as a speed-change effect at the wall, because any path change at a boundary is basically the same story as entering a new medium.",
+                    feedback:
+                      "That would blur reflection into refraction. Here the key story is a boundary bounce with equal angles to the normal.",
+                  },
+                ],
+                successLabel: "Pinned. The room now keeps the reflection rule tied to the normal line.",
+                retryLabel: "That note would flatten reflection into the wrong boundary story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m7-l4-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the wall-angle and speed-change shortcuts",
+                  scenario:
+                    "One trainee has measured the incoming and outgoing paths from the wall surface, while another says the reflected path must come from the wave slowing down at the wall.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-normal-bounce",
+                      label: "Repair both ideas together: draw the normal, measure both angles from that line, and keep reflection as a boundary bounce where incident and reflected angles match.",
+                      feedback:
+                        "Exactly. That restores both the geometry and the correct boundary story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-wall-line",
+                      label: "Keep measuring from the wall for simplicity, because the equal-angle idea still survives as long as the same surface line is used for both paths.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson needs the normal as the true reference line.",
+                    },
+                    {
+                      value: "repair-with-medium-story",
+                      label: "Explain the turn with a medium-change story instead, because students usually understand reflection best once it is treated as a milder version of refraction.",
+                      feedback:
+                        "That would keep the second shortcut alive. Reflection here is a bounce rule, not a speed-change rule.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now starts from the correct reflection setup.",
+                  retryLabel: "That would leave a main reflection shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m7-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line reflection rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so new analysts stop treating reflected paths as rough guesses from whichever line looks easiest to use.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "reflection-anchor",
+                      label: "Reflection is a boundary bounce where the incident angle equals the reflected angle when both are measured from the normal.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "surface-anchor",
+                      label: "Reflection is mostly about matching the two wall-surface angles, because the surface line is the most natural reference line in a mirror or wall diagram.",
+                      feedback:
+                        "That would build the wrong reference line into the anchor sentence.",
+                    },
+                    {
+                      value: "slowdown-anchor",
+                      label: "Reflection is mainly the path bend caused by the wave slowing at the wall, so the normal line is useful only after the main cause has been named.",
+                      feedback:
+                        "That would blur reflection into the wrong speed-change story.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right reflection rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m7-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the incident, reflected, and normal vocabulary board",
+                  scenario:
+                    "The crew keeps using surface angle, incident angle, reflected angle, and normal line as if they are interchangeable labels.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-reflection",
+                      label: "Use incident angle for the incoming path to the normal, reflected angle for the outgoing path to the normal, and normal for the perpendicular reference line at the boundary.",
+                      feedback:
+                        "Exactly. That keeps each reflection term tied to its actual job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "surface-term-board",
+                      label: "Use the wall as the main reference and treat the normal as an optional helper, because students usually picture the boundary surface more easily than the perpendicular.",
+                      feedback:
+                        "That would leave the wrong angle reference in place.",
+                    },
+                    {
+                      value: "path-only-term-board",
+                      label: "Treat incident and reflected angles as mostly the same travel measurement, because the important idea is just that the wave goes in and comes back out again.",
+                      feedback:
+                        "That would erase the actual geometry the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the reflection terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m7-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they measure from the wrong line",
+                  scenario:
+                    "The trainee analyst is about to quote an angle from the wall surface and then explain the reflected path without ever drawing the normal.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "draw-normal-first",
+                      label: "Draw the normal first. Then measure the incident angle to that line and match the reflected angle to the same line before describing the bounce.",
+                      feedback:
+                        "Exactly. That gives the analyst the right geometric workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "surface-first",
+                      label: "Start with the wall surface because it is already visible, then add the normal only if the reflected path still feels hard to estimate.",
+                      feedback:
+                        "That would send the analyst straight into the wrong-reference shortcut.",
+                    },
+                    {
+                      value: "cause-first-speed-story",
+                      label: "Start by deciding how the boundary changed the wave speed, because once that cause is named the angle construction can be treated as a secondary detail.",
+                      feedback:
+                        "That would send the analyst into the wrong boundary story. Reflection here is not being explained through a speed-change model.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean normal-first reflection method.",
+                  retryLabel: "That would send the analyst back into a reflection shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m7-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the surface-angle and refraction-style shortcuts",
+                  scenario:
+                    "One crew member keeps naming angles from the wall surface, while another keeps explaining every boundary path change as if it must come from entering a slower or faster medium.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "reflection-trap-warning",
+                      label: "Do not measure from the wall surface, and do not import a refraction speed-change story here. Draw the normal and use equal angles for the boundary bounce.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "surface-warning-only",
+                      label: "Warn mainly about angle accuracy, because once the numbers are consistent the choice between the wall and the normal does not usually change the real reflection idea much.",
+                      feedback:
+                        "That would leave the wrong-reference shortcut mostly alive.",
+                    },
+                    {
+                      value: "boundary-cause-warning-only",
+                      label: "Warn mainly that students should name the boundary cause carefully, because angle choice usually sorts itself out once the path change has been explained physically.",
+                      feedback:
+                        "That would leave the wrong-angle shortcut alive and still blur reflection into refraction.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps reflection geometric and normal-based.",
+                  retryLabel: "That warning would leave a main M7_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m7-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the equal-angle rule visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture a path bouncing from a flat boundary without turning the lesson into a wall-angle or speed-change story.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "billiard-cushion-analogy",
+                      label: "Think of a smooth billiard-style bounce from a cushion: use the perpendicular guide at the contact point and keep the incoming and outgoing angles matched to that guide.",
+                      feedback:
+                        "Exactly. That analogy keeps the equal-angle and reference-line ideas visible together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mirror-edge-analogy",
+                      label: "Think mainly of the edge of the wall itself, because the visible surface is the part that should control both the measurement and the explanation.",
+                      feedback:
+                        "That would rebuild the wall-surface shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "slow-lane-analogy",
+                      label: "Think of a runner entering a slower lane, because any path turn at a boundary is best explained as a speed-change story before angle rules are added.",
+                      feedback:
+                        "That would rebuild the refraction-style shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the normal-line rule instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right reflection model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M7_L3") {
