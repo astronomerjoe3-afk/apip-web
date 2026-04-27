@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
+              if (lessonId === "F5_L6") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f5-l6-sky-board",
+                    badge: "Sky board",
+                    title: "Read the day-year-scale comparison",
+                    scenario:
+                      "The Observatory room is comparing one daily sky sweep, one full year, and a classroom Solar System sketch. One trainee keeps saying the Sun crosses the sky each day because Earth finishes a new orbit every day, and another keeps treating the drawing's distances as literal.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "rotation-day-orbit-year-compressed-scale",
+                        label: "Earth's rotation explains the Sun's daily apparent path, Earth's orbit explains the year, and most classroom Solar System sketches keep the relationship pattern while strongly compressing the real distances.",
+                        feedback:
+                          "Exactly. That keeps day, year, apparent motion, and model scale in the right places.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "daily-sun-path-from-daily-orbit",
+                        label: "The Sun appears to cross the sky each day because Earth completes a fresh orbit around the Sun every 24 hours, and the sketch can be trusted for rough orbit spacing because the order is correct.",
+                        feedback:
+                          "That mixes the timescales. Daily sky motion comes from rotation, and the model order being right does not make the distances literal.",
+                      },
+                      {
+                        value: "apparent-motion-is-whole-story",
+                        label: "The daily sky sweep is the main real motion story, so it is safe to use it as evidence for both the year length and the exact orbital scale shown in the sketch.",
+                        feedback:
+                          "That collapses three ideas into one. The lesson keeps apparent motion, real motions, and compressed scale separate.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read day, year, and model scale without collapsing them together.",
+                    retryLabel: "That note would blur the rotation story or trust the sketch too literally.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f5-l6-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first sky-motion note",
+                      scenario:
+                        "A trainee has written that the Sun's daily apparent path proves Earth goes around the Sun once every day. You need the correction that fixes the timescale before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "rotation-for-day-orbit-for-year",
+                          label: "The Sun's daily apparent path comes from Earth's rotation. Earth's orbit around the Sun takes about one year, so day and year must be matched to different motions.",
+                          feedback:
+                            "Exactly. That restores the missing timescale separation immediately.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "orbit-does-both",
+                          label: "Earth's orbit can explain both the daily sky sweep and the yearly cycle, so the safest correction is just to say the orbit is the main motion behind everything we see.",
+                          feedback:
+                            "That keeps the confusion alive. The lesson needs rotation for the day and orbit for the year.",
+                        },
+                        {
+                          value: "apparent-motion-replaces-real-motion",
+                          label: "The correction should focus on the fact that apparent motion is what matters most, because once we know what we see, the real motions underneath no longer need separate names.",
+                          feedback:
+                            "Apparent motion matters, but it does not replace the real-motion explanation. The learner still needs rotation and orbit separated.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now keeps daily appearance tied to rotation and the year tied to orbit.",
+                      retryLabel: "That would leave the day-versus-year confusion active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f5-l6-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line sky-scale rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the lesson with the right astronomy anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "day-rotation-year-orbit-scale-compressed",
+                          label: "A day comes from Earth's rotation, a year comes from Earth's orbit around the Sun, and classroom Solar System sketches usually preserve the relationship pattern while heavily compressing the real distances.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "daily-path-is-full-motion-story",
+                          label: "The Sun's daily sky path is the main motion story, so once that is understood the year length and orbit scale can be read directly from the same sweep.",
+                          feedback:
+                            "That collapses the lesson into one timescale. The anchor has to separate day, year, and compressed scale.",
+                        },
+                        {
+                          value: "accurate-drawing-because-order-right",
+                          label: "A Solar System sketch is usually trustworthy for distances as long as the planets are in the right order, so the safest summary is to read the scale directly but treat the timing more loosely.",
+                          feedback:
+                            "That flips the warning backward. The sketch often keeps the pattern while shrinking the distances strongly.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts with the right day-year-scale structure.",
+                      retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f5-l6-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the observatory analyst",
+                      scenario:
+                        "A trainee keeps mixing what we see in the sky with the real motions underneath and then trusting the sketch literally. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "appearance-then-real-motion-then-scale-warning",
+                          label: "First name the appearance being described. Then match day to rotation and year to orbit. Only after that ask whether the drawing is showing exact size and spacing or just a compressed relationship pattern.",
+                          feedback:
+                            "Exactly. That keeps observation, real motion, and model trust in the right order.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "trust-model-first",
+                          label: "First trust the model's spacing, then use the picture to decide which motion must be happening each day and each year afterward.",
+                          feedback:
+                            "That starts from the least safe part. The model-scale warning belongs after the motion matching, not before it.",
+                        },
+                        {
+                          value: "start-with-year-because-bigger",
+                          label: "First decide the yearly orbit because it is the bigger motion, then let that same orbit story explain the daily sky sweep unless the diagram says otherwise.",
+                          feedback:
+                            "That rebuilds the exact shortcut the lesson is trying to remove. The daily sky sweep still comes from rotation.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable order for reading sky motion and model scale.",
+                      retryLabel: "That method would scramble appearance, real motion, and model trust.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f5-l6-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the scale-is-literal shortcut",
+                      scenario:
+                        "The next learner note says: 'The sketch shows the planets in the right order, so the distances must be roughly right too.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "pattern-can-be-right-while-scale-is-compressed",
+                          label: "A model can get the order, direction, and relationship pattern right while still shrinking the real distances and times a lot. Treat the structure as trustworthy before you treat the scale as literal.",
+                          feedback:
+                            "Exactly. That is the scale warning this lesson needs learners to remember.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "order-proves-rough-scale",
+                          label: "If the order of bodies is right, that is usually enough evidence that the distances are at least roughly to scale, even if the exact numbers are not perfect.",
+                          feedback:
+                            "That keeps the trap alive. The whole warning is that correct ordering does not guarantee literal scale.",
+                        },
+                        {
+                          value: "ignore-model-warning",
+                          label: "The safest move is to ignore model-scale warnings completely, because they only matter in advanced astronomy and do not affect a simple day-and-year lesson.",
+                          feedback:
+                            "The warning matters here because the lesson explicitly teaches pattern versus exact scale.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps relationship pattern and literal scale separate.",
+                      retryLabel: "That warning would let the scale shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f5-l6-analogy",
+                      badge: "Story relay",
+                      title: "Choose the globe-and-sketch bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture why a classroom model can show the right pattern while shrinking the real distances, without confusing the daily sky appearance with the yearly orbit.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "globe-spin-calendar-sketch",
+                          label: "Use the analogy by treating the daily sky sweep like a globe turning once each day, the year like a separate calendar loop around the Sun, and the classroom sketch like a map that keeps the layout pattern while shrinking the real spacing heavily.",
+                          feedback:
+                            "Exactly. That bridge supports the whole lesson without collapsing day, year, and scale together.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "single-motion-analogy",
+                          label: "Use one single-motion analogy for everything: the same looping path can stand for the daily sky sweep, the yearly orbit, and the scaled drawing all at once if the learner keeps the picture in mind.",
+                          feedback:
+                            "That analogy would blur the three ideas together instead of separating them.",
+                        },
+                        {
+                          value: "literal-mini-solar-system",
+                          label: "Use the analogy by describing the sketch as a tiny but still roughly literal Solar System, so learners can trust the distances while remembering the times are shortened for convenience.",
+                          feedback:
+                            "That would undo the scale warning. The lesson needs the model treated as strongly compressed, not roughly literal.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports day, year, and compressed scale without mixing them together.",
+                      retryLabel: "That analogy would muddy the lesson instead of helping it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F5_L5") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
