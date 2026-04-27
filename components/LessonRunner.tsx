@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M6_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m6-l2-level-cost-board",
+                badge: "Cost board",
+                title: "Read the heating bill before you touch the calculator",
+                scenario:
+                  "The Level Cost board compares two heating jobs. One block is heavier, another material has a higher Level Cost, and the target temperature rise changes between tasks. One trainee wants to treat the bill as mostly about temperature rise alone, while another wants to fold mass and Level Cost into one vague 'harder to heat' idea.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "q-equals-mcdelta-t-story",
+                    label: "Keep the bill in three separate multipliers: mass, Level Cost, and target rise. Q = mcΔT means each one can increase the heating bill, and rearranging the formula later does not change that story.",
+                    feedback:
+                      "Exactly. That keeps the warm-up rule numerical without flattening the factors together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "delta-t-drives-everything",
+                    label: "Treat the target rise as the main real driver, because once you know the temperature change the mass and Level Cost only tweak the arithmetic and do not matter much conceptually.",
+                    feedback:
+                      "That would flatten the formula into one factor. Mass and Level Cost are separate parts of the heating bill too.",
+                  },
+                  {
+                    value: "mass-and-c-one-combined-label",
+                    label: "Treat mass and Level Cost as one combined material difficulty label, because students do not need to keep them separate once both numbers are multiplying the same bill.",
+                    feedback:
+                      "That would hide the meaning of the formula. The lesson wants students to keep mass and specific heat capacity distinct.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads Q = mcΔT as a three-factor heating bill.",
+                retryLabel: "That note would blur one of the key factors in the warm-up rule.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m6-l2-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the one-factor heating-bill shortcut",
+                  scenario:
+                    "A trainee has written that the target temperature rise is the only part that really matters, while another says mass and Level Cost can be merged into one fuzzy material-difficulty label.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-three-factor-bill",
+                      label: "Repair both ideas together: the heating bill has three distinct multipliers, m, c, and ΔT. Mass and Level Cost are separate parts of the story, and all three can raise the total energy needed.",
+                      feedback:
+                        "Exactly. That restores the full meaning of Q = mcΔT.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "delta-t-mostly-solves-it",
+                      label: "Tell them the target rise usually settles the question first, because mass and Level Cost only become important in unusually extreme cases after the temperature goal is known.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson wants all three factors treated as real drivers.",
+                    },
+                    {
+                      value: "combine-mass-and-c",
+                      label: "Tell them it is fine to combine mass and Level Cost into one shared material burden idea, because the formula only needs them for multiplication and not for separate reasoning.",
+                      feedback:
+                        "That would keep the second shortcut alive. The lesson wants students to know what each factor means.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps the heating bill split into the right parts.",
+                  retryLabel: "That would leave the warm-up rule flattened into the wrong picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m6-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Level Cost rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so students stop treating the warm-up equation like symbol soup.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "heating-bill-anchor",
+                      label: "Q = mcΔT is the heating bill: energy depends on mass, specific heat capacity, and the temperature rise together.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "delta-t-anchor",
+                      label: "Q = mcΔT mainly says the temperature rise sets the bill, while the other factors only decorate the final arithmetic once the goal is chosen.",
+                      feedback:
+                        "That would build the first shortcut straight into the anchor sentence.",
+                    },
+                    {
+                      value: "c-is-just-a-unit-anchor",
+                      label: "Q = mcΔT mainly says to multiply mass by temperature rise, while c is mostly a unit correction factor that does not need its own real meaning.",
+                      feedback:
+                        "That would erase the meaning of specific heat capacity from the lesson.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right heating-bill rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m6-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Level Cost vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up mass, Level Cost, temperature rise, and total energy as if they all name the same kind of quantity. You need the note that gives each term a clean job.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "m-c-delta-t-language",
+                      label: "Use mass for how much substance is being heated, Level Cost for the energy needed per kilogram per degree, ΔT for the target rise, and Q for the total energy bill.",
+                      feedback:
+                        "Exactly. That keeps each symbol tied to its own physical role.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "c-as-material-label-only",
+                      label: "Use Level Cost mainly as a material label, because it does not really contribute anything beyond reminding you which substance the block is made from.",
+                      feedback:
+                        "That would hide the fact that c is one of the actual multipliers in the bill.",
+                    },
+                    {
+                      value: "q-and-delta-t-same-language",
+                      label: "Use total energy and temperature rise almost interchangeably, because one is just the larger-number version of the other once heating begins.",
+                      feedback:
+                        "That would collapse the outcome into the payment and lose the structure of the rule.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Level Cost language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m6-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they substitute blindly",
+                  scenario:
+                    "The trainee analyst is about to throw numbers into Q = mcΔT without first deciding which quantity is unknown or what each factor means in the heating bill.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-unknown-then-keep-units",
+                      label: "Start by naming the unknown, then write the bill in the order m, c, and ΔT with units visible. Only rearrange after you know which part you are solving for.",
+                      feedback:
+                        "Exactly. That gives the analyst the right method before any substitution begins.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "substitute-first-reason-later",
+                      label: "Substitute first and reason later, because the formula itself will usually show which factor mattered most once the calculator gives a number.",
+                      feedback:
+                        "That would train blind substitution instead of structured reasoning.",
+                    },
+                    {
+                      value: "drop-units-early",
+                      label: "Drop the units early so the algebra looks cleaner, because specific heat capacity is easier to manage when students stop thinking about joules, kilograms, and degrees separately.",
+                      feedback:
+                        "That would make the Level Cost meaning harder to protect, not easier.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Q = mcΔT workflow.",
+                  retryLabel: "That would send the analyst back into symbol-first, meaning-later work.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m6-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the temperature-only and symbol-soup shortcuts",
+                  scenario:
+                    "One crew member keeps saying the target rise is the real answer-driver, while another treats c as a decorative symbol that does not need its own meaning.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "all-three-factors-warning",
+                      label: "Do not flatten the heating bill into just ΔT, and do not strip meaning away from c. Mass, specific heat capacity, and temperature rise are three separate factors in the energy cost.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "delta-t-usually-enough-warning",
+                      label: "Warn only that ΔT should be checked carefully, because once that is right the other factors mainly scale the answer without changing the conceptual story very much.",
+                      feedback:
+                        "That would leave the first shortcut mostly alive.",
+                    },
+                    {
+                      value: "c-is-just-formula-warning",
+                      label: "Warn mainly that students should not forget to include c in the multiplication, because even if they do not fully understand it the formula still works as long as the symbol is present.",
+                      feedback:
+                        "That would leave the second shortcut alive by treating c as symbol-only.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps all three heating-bill factors visible.",
+                  retryLabel: "That warning would leave a main Level Cost trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m6-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the heating-bill analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why mass, Level Cost, and target rise all matter in the same bill.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "water-tank-billing",
+                      label: "Think of filling a tank where the total bill depends on how much water the tank holds, how expensive each litre is, and how many levels you want the water to climb. You cannot explain the bill honestly with only one of those factors.",
+                      feedback:
+                        "Exactly. That analogy keeps the three-factor structure visible.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "thermostat-goal-only",
+                      label: "Think of the bill as mostly paying for the target thermostat setting, because once you choose the final warmth goal the tank size and price-per-step only add minor arithmetic afterward.",
+                      feedback:
+                        "That analogy sneaks the temperature-only shortcut back in.",
+                    },
+                    {
+                      value: "mystery-service-fee",
+                      label: "Think of Level Cost as a hidden service fee that can safely stay unexplained, because students only need to know it appears in the formula somewhere to make the total work.",
+                      feedback:
+                        "That analogy would erase the physical meaning of specific heat capacity.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the three-factor heating bill instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right Level Cost story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M6_L1") {
