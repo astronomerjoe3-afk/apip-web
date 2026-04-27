@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M8_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m8-l5-escape-edge-board",
+                badge: "Boundary board",
+                title: "Read the critical angle as the last possible escape",
+                scenario:
+                  "The Escape Edge board compares three cases from inside the slower medium: one route escapes, one skims along the boundary, and one lock-bounces back inside. One trainee wants to treat the critical angle as just another number to memorize, while another forgets to check which medium the light is trying to leave.",
+                prompt: "Pin the note that keeps the escape-limit story honest.",
+                options: [
+                  {
+                    value: "last-escape-direction-check",
+                    label: "Check that light is trying to leave the slower medium first, then treat the critical angle as the last possible escape: below it the route escapes, at it the route skims, above it lock-bounce takes over.",
+                    feedback:
+                      "Exactly. That keeps both the medium direction and the threshold story in place.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "threshold-only-number",
+                    label: "Treat the critical angle mainly as a boundary number to compare with the incident angle, because once the angle is bigger the rest of the story does not matter much.",
+                    feedback:
+                      "That strips away the meaning. The lesson needs the last-escape story, not a bare number check.",
+                  },
+                  {
+                    value: "any-boundary-lock-bounce",
+                    label: "If the angle is large enough, expect lock-bounce at any boundary, because total internal reflection is really just the steep-angle version of ordinary reflection.",
+                    feedback:
+                      "That drops the medium-direction condition. Lock-bounce only works when light is trying to leave the slower medium.",
+                  },
+                ],
+                successLabel: "Pinned. The room now treats the critical angle as an escape limit, not just a number.",
+                retryLabel: "That note would flatten the escape-edge method into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m8-l5-fix-ideas",
+                  badge: "Limit repair",
+                  title: "Repair the number-only and wrong-direction shortcuts",
+                  scenario:
+                    "One trainee uses the critical angle as a bare comparison number, while another keeps predicting lock-bounce without checking whether the route is trying to leave the slower medium.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-limit-story",
+                      label: "Repair both ideas together: check the medium direction first, then read the critical angle as the last possible escape before total internal reflection begins.",
+                      feedback:
+                        "Exactly. That restores both the threshold meaning and the boundary-direction rule.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-bigger-angle",
+                      label: "Repair the confusion by emphasizing that a bigger angle simply means a stronger bounce, because students usually understand total internal reflection once it is framed as the steep-angle version of reflection.",
+                      feedback:
+                        "That keeps the wrong reflection shortcut alive. This lesson needs the escape-limit story.",
+                    },
+                    {
+                      value: "repair-with-fiber-only",
+                      label: "Repair the confusion by jumping straight to optical fibers, because once learners see repeated bounces in a cable they no longer need the medium-direction rule spelled out carefully.",
+                      feedback:
+                        "That skips the actual condition students need to reason with first.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now checks direction first and reads the critical angle as a limit.",
+                  retryLabel: "That would leave a main M8_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m8-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line critical-angle rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating total internal reflection as a vague steep-angle effect.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "critical-anchor",
+                      label: "The critical angle is the last possible escape when light tries to leave the slower medium; above that limit there is total internal reflection.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "critical-number-anchor",
+                      label: "The critical angle is the special number for a boundary, and if the incident angle is bigger the light reflects instead of refracts for practical purposes.",
+                      feedback:
+                        "That would build the number-only shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "bounce-anchor",
+                      label: "Total internal reflection is best treated as a stronger kind of reflection that happens when light hits a boundary steeply enough, regardless of which medium it starts in.",
+                      feedback:
+                        "That would build the wrong cause and condition into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right critical-angle rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m8-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the escape-edge vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up critical angle, skim case, total internal reflection, and medium direction until the boundary story sounds like every steep ray should just bounce.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-critical",
+                      label: "Use critical angle for the last escape case, skim for the boundary-hugging route at the limit, and total internal reflection for the lock-bounce above the limit when light is leaving the slower medium.",
+                      feedback:
+                        "Exactly. That keeps each boundary term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-steepness",
+                      label: "Use critical angle mainly for the steepness rating of the ray, because the exact medium story matters less once students can picture a sharper and sharper approach to the surface.",
+                      feedback:
+                        "That would scramble the role of the threshold and the medium condition.",
+                    },
+                    {
+                      value: "term-board-bounce",
+                      label: "Use total internal reflection for any case where light bounces back inside instead of crossing, because that keeps the language simple even if the route is not leaving the slower medium.",
+                      feedback:
+                        "That would flatten the condition into the wrong shortcut.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the escape-edge terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m8-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst through the below-at-above sequence",
+                  scenario:
+                    "The trainee analyst is about to compare the incident angle with the critical angle without first checking which medium the route starts in or what each threshold case actually means.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "direction-then-threshold",
+                      label: "Check that the route is trying to leave the slower medium first, then compare below, at, and above the critical angle as escape, skim, and lock-bounce cases.",
+                      feedback:
+                        "Exactly. That gives the analyst the right escape-edge workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "memorize-above-bounce",
+                      label: "Start by memorizing that above the critical angle means bounce, because once the top case is secure the medium direction and skim case can be filled in later if needed.",
+                      feedback:
+                        "That would send the analyst straight into the number-only shortcut.",
+                    },
+                    {
+                      value: "fiber-example-first",
+                      label: "Start with the optical-fiber example because repeated bounces are the most memorable part, then work backward to the boundary rule only if the learner asks for it.",
+                      feedback:
+                        "That would skip the core reasoning sequence this lesson is trying to build.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean critical-angle workflow.",
+                  retryLabel: "That would send the analyst back into an escape-edge shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m8-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the number-only and any-boundary shortcuts",
+                  scenario:
+                    "One crew member keeps treating the critical angle as a memorized threshold number, while another keeps predicting total internal reflection whenever the incident angle looks large enough.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "critical-trap-warning",
+                      label: "Do not use the critical angle as a bare number and do not ignore boundary direction. Check the slower-medium exit first, then read the angle as the last escape before lock-bounce.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "number-warning-only",
+                      label: "Warn mainly that students should attach meaning to the critical angle, because once that is done the boundary-direction issue usually fixes itself.",
+                      feedback:
+                        "That would leave the wrong-direction shortcut mostly alive.",
+                    },
+                    {
+                      value: "direction-warning-only",
+                      label: "Warn mainly that students should check the slower-medium exit, because once that is right the precise last-escape meaning of the critical angle matters much less.",
+                      feedback:
+                        "That would leave the number-only shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps total internal reflection tied to the right condition and story.",
+                  retryLabel: "That warning would leave a main M8_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m8-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the last-escape story visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners feel the critical angle as a limit case without turning total internal reflection into a magical bounce rule.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "doorway-analogy",
+                      label: "Think of a doorway angle that still lets you just squeeze through: below it you get out, at it you skim the frame, and above it you ricochet back inside because escape has run out.",
+                      feedback:
+                        "Exactly. That keeps the last-escape pattern visible without flattening it into magic.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mirror-analogy",
+                      label: "Think of the boundary as becoming more mirror-like as the angle grows, because total internal reflection is mainly the same process as ordinary reflection but stronger.",
+                      feedback:
+                        "That would rebuild the wrong reflection shortcut.",
+                    },
+                    {
+                      value: "number-lock-analogy",
+                      label: "Think of the critical angle like a keypad code: once the number is crossed the boundary just switches modes, so the route story itself does not need much explanation.",
+                      feedback:
+                        "That would flatten the lesson into a bare threshold number again.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the escape-limit story without flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right critical-angle model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M8_L4") {
