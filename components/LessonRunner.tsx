@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5"
         ? (() => {
+            if (lessonId === "F3_L5") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f3-l5-impulse-board",
+                  badge: "Impact board",
+                  title: "Read the same-area comparison",
+                  scenario:
+                    "The collision room is comparing a short sharp stop with a longer softer stop. One trainee keeps thinking the longer stop must mean a larger impulse because it lasts longer.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "same-area-same-impulse",
+                      label: "If the force-time area is the same, the impulse is the same, so the same momentum change can happen with a smaller force spread over more time.",
+                      feedback:
+                        "Exactly. That keeps area, impulse, and safer longer stops linked in one clear picture.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "longer-time-more-impulse",
+                      label: "A longer stopping time always means a larger impulse, because more time automatically adds more effect even when the area stays the same.",
+                      feedback:
+                        "That is the trap. For this lesson, the same area means the same impulse even if the width changes.",
+                    },
+                    {
+                      value: "force-only-decides-impulse",
+                      label: "Only the peak force decides the impulse, so the wider lower block must count for less even when the areas match.",
+                      feedback:
+                        "Impulse needs both force and time together. The whole area matters, not just the height of the block.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now read equal-area impacts without losing the safety idea.",
+                  retryLabel: "That note would blur area and impulse back apart.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f3-l5-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first impulse note",
+                    scenario:
+                      "A trainee has written that impulse is a separate extra quantity unrelated to momentum change. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "impulse-is-change-in-momentum",
+                        label: "Impulse is the change in momentum during the interaction, and the same quantity can also be found from force multiplied by time or the area under a force-time graph.",
+                        feedback:
+                          "Exactly. That correction ties the three lesson views back to one physical quantity.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "impulse-is-extra-formula",
+                        label: "Impulse is its own separate effect, so it should be treated as different from momentum change even if the numbers sometimes look similar.",
+                        feedback:
+                          "That keeps the mistake alive. This lesson needs impulse and momentum change treated as the same quantity described in different ways.",
+                      },
+                      {
+                        value: "impulse-is-force-only",
+                        label: "Impulse is really just another name for force, because a stronger force always means the bigger impulse regardless of time.",
+                        feedback:
+                          "Time still matters. Impulse needs force and time together, not force alone.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The impulse-and-momentum link is now clear.",
+                    retryLabel: "That would leave impulse floating away from momentum change.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f3-l5-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line impulse rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner begins this lesson with the right anchor for impacts and safer stopping.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "impulse-anchor",
+                        label: "Impulse is the change in momentum, and for the same impulse a longer stopping time means a smaller average force.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "impulse-is-bigger-force",
+                        label: "Impulse mainly tells you how large the force is, so stopping time matters only after the force has already been found.",
+                        feedback:
+                          "That drops too much of the idea. This lesson needs the force-time trade-off visible from the start.",
+                      },
+                      {
+                        value: "impulse-needs-no-time",
+                        label: "Impulse depends only on momentum size, so time can be ignored once the moving object has been identified.",
+                        feedback:
+                          "Time is essential when the lesson moves to force and safety. The same momentum change over longer time gives a smaller force.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean impulse anchor.",
+                    retryLabel: "That line would blur the impulse-and-safety story at the start of the lesson.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f3-l5-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the impact analyst",
+                    scenario:
+                      "A trainee analyst wants to grab whichever equation looks familiar first instead of deciding whether the question gives force and time, a graph area, or a momentum change.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "identify-representation-first",
+                        label: "First decide how the same quantity is being represented: force × time, force-time area, or momentum change. Then translate that impulse into the needed force or safety comparison.",
+                        feedback:
+                          "Exactly. That method keeps all three lesson views tied to one quantity before the arithmetic starts.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "always-use-force-time",
+                        label: "Start with force × time for every question, because impulse questions always have to be converted into that form before you can reason further.",
+                        feedback:
+                          "That is too narrow. Some questions already give the momentum change or a graph area directly, and the lesson wants those seen as the same quantity.",
+                      },
+                      {
+                        value: "time-only-safety",
+                        label: "Start with the stopping time alone, because once you know the time you already know whether the collision is safe.",
+                        feedback:
+                          "Time matters, but only together with the same momentum change. The lesson still needs the impulse link kept visible.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable impulse method.",
+                    retryLabel: "That instruction would push the analyst back toward formula guessing.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f3-l5-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the longer-time-bigger-impulse shortcut",
+                    scenario:
+                      "One crew member keeps saying a longer stop must always mean a bigger impulse because the interaction lasts longer. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "same-impulse-less-force",
+                        label: "A longer stop can still have the same impulse if the force is lower, and that is exactly why longer stopping time can make the collision safer.",
+                        feedback:
+                          "Exactly. That warning protects the lesson’s key safety distinction.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "longer-means-bigger-impulse",
+                        label: "More stopping time automatically means more impulse, because impulse grows whenever the interaction lasts longer.",
+                        feedback:
+                          "That keeps the trap alive. The lesson needs force and time considered together through the area or Ft relationship.",
+                      },
+                      {
+                        value: "same-area-same-force",
+                        label: "If two force-time graphs have the same area, they must also have the same force, because equal impulse means equal impact strength in every sense.",
+                        feedback:
+                          "Equal area means equal impulse, not equal force. The same area can be tall-and-narrow or short-and-wide.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now keeps impulse and stopping-time safety connected correctly.",
+                    retryLabel: "That warning would leave the longer-time shortcut active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f3-l5-analogy",
+                    badge: "Story relay",
+                    title: "Choose the impact-area bridge",
+                    scenario:
+                      "The team wants one analogy line that keeps learners asking what total change must stay the same and how stretching the event changes the force before any formula is used.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "same-change-stretched-time",
+                        label: "Use the analogy by asking what total change must be delivered, then compare whether that same change is packed into a short sharp burst or spread over a longer safer interval.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving the impulse-and-safety meaning instead of replacing it.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "time-alone-story",
+                        label: "Use the analogy mainly to compare which impact lasts longer, because the longest event automatically carries the largest impulse.",
+                        feedback:
+                          "That would flatten the lesson into time alone. The analogy still has to protect the same-change idea.",
+                      },
+                      {
+                        value: "peak-force-only-story",
+                        label: "Use the analogy to focus on the tallest force spike only, because the biggest peak tells you everything important about the impulse.",
+                        feedback:
+                          "That would break the area story. The analogy needs to protect force and time together, not peak force alone.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the same-impulse / different-force story without flattening it into time-only or peak-force shortcuts.",
+                    retryLabel: "That analogy would blur the impulse story instead of clarifying it.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F3_L4") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
