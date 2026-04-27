@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,350 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M2_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m2-l4-spin-pull-visual",
+                badge: "Spin board",
+                title: "Freeze the pivot display before the crew treats all equal pushes as equal turning effects",
+                scenario:
+                  "The Spin Pull display shows the same push first through the pivot line and then off-center. A trainee keeps saying the turning effect should stay the same because the force value never changes.",
+                prompt: "Pin the right instruction to the display.",
+                options: [
+                  {
+                    value: "same-force-different-reach",
+                    label: "Keep the force size the same, then compare the perpendicular reach from the pivot. A force through the pivot gives zero turning effect, while an off-center push creates Spin Pull.",
+                    feedback:
+                      "Exactly. That keeps turning effect tied to where the force acts, not just to how hard it pushes.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "same-force-same-torque",
+                    label: "Treat the turning effect as fixed whenever the force value is fixed, because force alone should settle the rotation story.",
+                    feedback:
+                      "That is the trap. Torque, the moment of a force, depends on both force and perpendicular reach.",
+                  },
+                  {
+                    value: "off-center-only-translates",
+                    label: "Assume only the centered push can change the motion, because an off-center push mainly changes the contact point rather than the rotation.",
+                    feedback:
+                      "That reverses the lesson. A centered push through the pivot can give zero turning effect, while an off-center push can create rotation.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now checks pivot reach before naming the turning effect.",
+                retryLabel: "That note would keep force size doing too much of the thinking.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m2-l4-module-lens",
+                badge: "Law lens",
+                title: "Lock the torque rule before turning effect gets flattened into plain force",
+                scenario:
+                  "The Module 2 lens card is up, and the room is starting to talk as if torque is just force with a new name.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "torque-force-times-reach",
+                    label: "Spin Pull is torque, also called the moment of a force: force x perpendicular reach. Zero reach means zero turning effect even if the force is large.",
+                    feedback:
+                      "Exactly. That keeps the whole rule together and protects the zero-reach case.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "torque-is-force-only",
+                    label: "Treat torque as the same thing as force, because the push size already tells you how much turning effect an object gets.",
+                    feedback:
+                      "That drops the reach term completely. The lesson needs both force and perpendicular reach visible together.",
+                  },
+                  {
+                    value: "distance-along-bar-only",
+                    label: "Use the full distance along the bar from the pivot, because the longest visible line from the pivot always gives the turning effect automatically.",
+                    feedback:
+                      "The needed reach is perpendicular to the line of action. The longest visible bar distance is not always the correct moment arm.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps torque attached to force and perpendicular reach together.",
+                retryLabel: "That rule would blur the turning-effect model.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m2-l4-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on the right turning comparison",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare force sizes only, while another wants to compare visible distances from the pivot without checking which one is perpendicular to the push line.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "identify-pivot-then-force-and-reach",
+                    label: "First identify the pivot, then compare force size and perpendicular reach together before deciding which push gives the larger Spin Pull.",
+                    feedback:
+                      "Exactly. That keeps the comparison faithful to the torque rule instead of to one easy-looking number.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-force-only",
+                    label: "Compare only the force values, because once the larger push is known the larger turning effect should already be decided.",
+                    feedback:
+                      "That would erase the reach term. A smaller force farther from the pivot can match or beat a larger force nearer the pivot.",
+                  },
+                  {
+                    value: "compare-bar-length-only",
+                    label: "Compare whichever push is farthest along the bar, because the longest visible distance from the pivot always gives the greatest turning effect.",
+                    feedback:
+                      "That can fail when the force line changes. The lesson needs perpendicular reach, not just any distance on the object.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares pivot, force, and perpendicular reach in the right order.",
+                retryLabel: "That plan would send the room into a shortcut comparison.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m2-l4-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first torque note",
+                  scenario:
+                    "A trainee has written that torque is basically just force, so equal pushes should always give equal turning effect. You need the correction that fixes that note before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "torque-needs-force-and-reach",
+                      label: "Torque, the moment of a force, depends on both force and perpendicular reach. Equal pushes can give different turning effects if they act at different reaches from the pivot.",
+                      feedback:
+                        "Exactly. That repairs the missing reach term and restores the real turning story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equal-force-equal-turning",
+                      label: "Keep the note as it is, because the same push should create the same turning effect unless the object changes mass.",
+                      feedback:
+                        "That keeps the mistake alive. The turning effect can change just because the line of action moves relative to the pivot.",
+                    },
+                    {
+                      value: "pivot-does-not-matter",
+                      label: "Fix the note by saying the pivot only helps you draw the picture, but it does not change the actual turning effect calculation.",
+                      feedback:
+                        "The pivot matters directly because the turning reach is measured from it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps torque tied to force and reach together.",
+                  retryLabel: "That would leave the first turning-effect misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m2-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line turning rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the Spin Pull lesson with the right anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "torque-anchor",
+                      label: "Spin Pull is torque, also called the moment of a force: force x perpendicular reach, so a force through the pivot gives zero turning effect.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-anchor",
+                      label: "Turning questions mainly compare force size, so once the biggest push is known the biggest Spin Pull is nearly fixed.",
+                      feedback:
+                        "That drops the reach part of the story. The biggest push does not automatically give the biggest torque.",
+                    },
+                    {
+                      value: "distance-anchor",
+                      label: "Turning questions mainly compare how far along the object the push is applied, because torque is really just a distance story once the pivot is known.",
+                      feedback:
+                        "Distance matters only as perpendicular reach together with force. Torque is not a distance-only story either.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right turning-effect rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m2-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the turning vocabulary board",
+                  scenario:
+                    "The crew can see the rotating beam, but the labels are drifting. You need the note that keeps Spin Pull, torque, moment of a force, and pivot doing separate jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "spin-pull-torque-pivot",
+                      label: "Spin Pull is the lesson nickname for torque, also called the moment of a force. The pivot is the turning reference point used to measure the perpendicular reach.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary aligned with the real physics terms.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "spin-pull-is-force",
+                      label: "Treat Spin Pull as just the force value written again, because the lesson term and the physics term should both point to the same push size.",
+                      feedback:
+                        "That would collapse torque back into force. Spin Pull is the turning effect, not the raw push by itself.",
+                    },
+                    {
+                      value: "pivot-is-motion-direction",
+                      label: "Treat the pivot as the direction the object is about to move, because it is the place that tells you which way the beam will travel.",
+                      feedback:
+                        "The pivot is the turning point, not a motion direction marker.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the turning terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m2-l4-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the reach-and-line handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into what perpendicular reach really means.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "perpendicular-reach-definition",
+                      label: "Perpendicular reach is the shortest distance from the pivot to the force's line of action. It is this reach, not just any visible bar length, that sets the torque.",
+                      feedback:
+                        "Exactly. That completes the glossary with the key geometric idea learners usually miss.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "any-distance-from-pivot",
+                      label: "Perpendicular reach means any distance from the pivot to the point where the hand touches the object, because all distances from the pivot affect the turning equally.",
+                      feedback:
+                        "That would keep the geometry blurred. The lesson needs the perpendicular distance to the line of action specifically.",
+                    },
+                    {
+                      value: "reach-is-after-rotation",
+                      label: "Perpendicular reach only matters after the object starts rotating, because before motion begins torque can be estimated from force alone.",
+                      feedback:
+                        "Reach matters from the start. It is part of the torque calculation before any rotation happens.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the reach idea.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m2-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the turning analyst",
+                  scenario:
+                    "The trainee analyst is about to answer from the biggest push alone. You get one coaching instruction before they commit.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "pivot-then-reach-then-force",
+                      label: "Mark the pivot first, find the perpendicular reach for each push, then combine that reach with the force before comparing the turning effects.",
+                      feedback:
+                        "Exactly. That gives the analyst a stable torque method instead of a force-only guess.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-first-reach-later",
+                      label: "Start from the largest force and only check reach later if two pushes happen to tie, because reach is mainly a secondary detail.",
+                      feedback:
+                        "That would send the analyst into the shortcut this lesson is removing. Reach is part of the first comparison, not a tie-breaker.",
+                    },
+                    {
+                      value: "rotation-first",
+                      label: "Guess which object will rotate most first, then work backward to whichever force-and-reach story matches that guess best.",
+                      feedback:
+                        "That reverses the reasoning. The turning prediction should come from pivot, reach, and force, not from a guess first.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable Spin Pull method.",
+                  retryLabel: "That instruction would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m2-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the biggest-force shortcut",
+                  scenario:
+                    "One crew member keeps saying the largest force must always create the largest turning effect. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "force-alone-does-not-set-torque",
+                      label: "The largest force does not automatically give the largest torque. Turning effect depends on force and perpendicular reach together, and a force through the pivot can still give zero torque.",
+                      feedback:
+                        "Exactly. That one warning blocks both the force-only shortcut and the pivot-line trap at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "largest-force-wins",
+                      label: "The warning should say only that torque is usually bigger for bigger forces, because the reach part only fine-tunes the final ranking.",
+                      feedback:
+                        "That would leave the shortcut alive. Reach is not a fine-tuning detail; it is part of the core calculation.",
+                    },
+                    {
+                      value: "distance-alone-wins",
+                      label: "The safest warning is to ignore force size and just use the farthest point from the pivot, because the longest visible distance from the pivot always gives the greatest turning effect.",
+                      feedback:
+                        "That swings to the opposite mistake. Torque needs both force size and perpendicular reach together.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now keep force and reach together in the turning story.",
+                  retryLabel: "That warning would leave the shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m2-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the door-handle analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the same push can give a bigger turning effect when it acts farther from the pivot.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "door-handle-bridge",
+                      label: "Think of pushing a door: the same push at the handle gives a bigger turning effect than the same push near the hinge because the perpendicular reach from the pivot is larger.",
+                      feedback:
+                        "Exactly. That analogy supports the whole torque lesson without dropping the pivot and reach story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-push-same-door-effect",
+                      label: "Think of any door push as basically equivalent, because a door will open as long as the force is large enough and the hinge only changes comfort, not the physics.",
+                      feedback:
+                        "That would rebuild the force-only shortcut. The hinge position changes the torque directly.",
+                    },
+                    {
+                      value: "longest-door-distance-only",
+                      label: "Think of the door by measuring the longest straight distance from the hinge to your hand, because the farthest visible point always gives the correct torque story.",
+                      feedback:
+                        "That would blur ordinary distance with perpendicular reach. The analogy needs the turning reach, not just the longest visible line.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports Spin Pull as torque instead of flattening it into force alone.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M2_L3") {
