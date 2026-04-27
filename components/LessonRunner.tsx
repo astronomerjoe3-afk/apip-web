@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M7_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m7-l6-gate-board",
+                badge: "Gate board",
+                title: "Judge the spread by comparing gate width with wavelength",
+                scenario:
+                  "The Gate Spread board shows the same front passing through a wide opening and then through a much narrower one. One trainee wants to say the narrower gate always gives stronger spread just because it is smaller, while another wants to ignore wavelength and treat diffraction as a special reflection around edges.",
+                prompt: "Pin the note that keeps the diffraction story honest.",
+                options: [
+                  {
+                    value: "compare-opening-with-wavelength",
+                    label: "Compare the opening width with the wavelength first. Diffraction is strongest when the gate size is comparable to the wavelength, and weaker when the opening is much wider than the wavelength.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored to the right size comparison.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "narrower-alone-decides",
+                    label: "Use the narrowest gate as the strongest diffraction case automatically, because absolute gate size settles the spread without any need to compare it with the wavelength.",
+                    feedback:
+                      "That leaves out the key comparison. The strength depends on how the opening size matches the wavelength.",
+                  },
+                  {
+                    value: "edge-bounce-story",
+                    label: "Treat the spreading mainly as a boundary-bounce effect around the gate edges, because any path change near an edge is best explained as reflection first.",
+                    feedback:
+                      "That blurs diffraction into reflection. This lesson needs spreading around an opening, not a bounce rule.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads gate spread from the right size comparison.",
+                retryLabel: "That note would flatten diffraction into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m7-l6-fix-ideas",
+                  badge: "Spread repair",
+                  title: "Repair the absolute-size and edge-bounce shortcuts",
+                  scenario:
+                    "One trainee has written that the smaller gate must always give the larger spread no matter the wavelength, while another says the spreading is really just a reflection effect from the gate edges.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-with-size-match",
+                      label: "Repair both ideas together: compare the opening size with the wavelength, and keep diffraction as spreading around an opening or edge rather than a bounce from the boundary.",
+                      feedback:
+                        "Exactly. That restores both the key comparison and the right wave behavior.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-smallest-opening",
+                      label: "Keep the smallest gate as the main answer rule, because once the opening is reduced enough the wavelength detail usually stops mattering in practice.",
+                      feedback:
+                        "That would keep the absolute-size shortcut alive. The wavelength comparison still matters.",
+                    },
+                    {
+                      value: "repair-with-reflection-story",
+                      label: "Explain the spread as an edge-reflection effect instead, because students understand path changes best when every boundary effect is taught as some kind of bounce.",
+                      feedback:
+                        "That would keep the wrong boundary story alive. Diffraction here is not a reflection lesson.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now compares gate size with wavelength correctly.",
+                  retryLabel: "That would leave a main M7_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m7-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line diffraction rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating diffraction as either a smallest-gap rule or a disguised reflection story.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "diffraction-anchor",
+                      label: "Diffraction is strongest when the opening size is comparable to the wavelength.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "smallest-gap-anchor",
+                      label: "Diffraction is mainly strongest at the smallest opening available, because absolute narrowness is the key idea and wavelength is only a later refinement.",
+                      feedback:
+                        "That would build the absolute-size shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "reflection-anchor",
+                      label: "Diffraction is mainly an edge-reflection effect, so spread strength should first be explained by how sharply the path can bounce around the opening.",
+                      feedback:
+                        "That would build the wrong boundary story into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right diffraction rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m7-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the diffraction vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up opening width, wavelength, spread strength, and edge behavior until diffraction sounds like a vague 'wave weirdness' label.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-diffraction",
+                      label: "Use wavelength for the spacing of matching fronts, opening width for the gate size, and diffraction for the spreading that becomes stronger when those two sizes are comparable.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-small-gap",
+                      label: "Use diffraction mainly as another name for very narrow gaps, because once an opening is small enough the wavelength comparison usually stops mattering.",
+                      feedback:
+                        "That would hide the comparison the lesson is trying to teach.",
+                    },
+                    {
+                      value: "term-board-edge-bounce",
+                      label: "Use diffraction mainly for edge bounces near openings, because the spread is really just a bundle of many tiny reflections around the gate.",
+                      feedback:
+                        "That would scramble diffraction with the wrong mechanism.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the diffraction terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m7-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they rank the openings blindly",
+                  scenario:
+                    "The trainee analyst is about to choose the strongest spread by absolute gate width alone without checking how that width compares with the wavelength.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-width-with-wavelength",
+                      label: "Hold the wavelength steady, then compare each gate width directly with it before you rank the spread strength.",
+                      feedback:
+                        "Exactly. That gives the analyst the right comparison workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rank-by-smallness-only",
+                      label: "Start by ranking the gates from smallest to largest, because once that list is made the diffraction ranking is usually settled already.",
+                      feedback:
+                        "That would send the analyst straight into the absolute-size shortcut.",
+                    },
+                    {
+                      value: "rank-by-edge-sharpness",
+                      label: "Start by deciding which gate has the sharpest edge, because stronger edge interactions usually explain the strongest spreading first.",
+                      feedback:
+                        "That would send the analyst into the wrong boundary story instead of the wavelength comparison.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean size-comparison method.",
+                  retryLabel: "That would send the analyst back into a diffraction shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m7-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the smallest-gap and reflection-style shortcuts",
+                  scenario:
+                    "One crew member keeps treating the narrowest opening as automatically best for diffraction, while another keeps explaining the spreading as if it were a collection of tiny reflections around the edges.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "diffraction-trap-warning",
+                      label: "Do not let absolute gap size settle the answer, and do not recast spreading as reflection. Compare gate width with wavelength and keep diffraction as its own wave behavior.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "size-warning-only",
+                      label: "Warn mainly that students should measure the opening carefully, because once the width is known the wavelength comparison rarely changes the ranking much.",
+                      feedback:
+                        "That would leave the absolute-size shortcut mostly alive.",
+                    },
+                    {
+                      value: "edge-warning-only",
+                      label: "Warn mainly that students should describe the edge interaction better, because the main cause of spreading is still how the wave grazes the boundary.",
+                      feedback:
+                        "That would leave the wrong mechanism alive and underteach the real comparison.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps diffraction tied to gate-width versus wavelength.",
+                  retryLabel: "That warning would leave a main M7_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m7-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the size comparison visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why one opening spreads a wave much more strongly than another without turning the lesson into a smallest-gap slogan.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "doorway-crowd-analogy",
+                      label: "Think of a moving crowd pattern reaching a doorway: when the opening is wide compared with the pattern spacing the flow stays focused, but when the opening is close to that spacing the pattern spreads much more on the far side.",
+                      feedback:
+                        "Exactly. That analogy keeps the opening-to-spacing comparison visible.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "tiny-hole-analogy",
+                      label: "Think only of the tiniest hole possible, because diffraction is basically the rule that the smallest gate always produces the strongest spread.",
+                      feedback:
+                        "That would rebuild the absolute-size shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "mirror-edge-analogy",
+                      label: "Think of the wave as bouncing from the doorway edges, because stronger spreading mostly comes from stronger edge reflections.",
+                      feedback:
+                        "That would rebuild the wrong reflection-style story for this lesson.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the right size-comparison model.",
+                  retryLabel: "That analogy would pull the lesson away from the real diffraction idea.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M7_L5") {
