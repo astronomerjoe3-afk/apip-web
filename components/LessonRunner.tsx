@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M4_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m4-l5-patch-orientation-board",
+                badge: "Patch board",
+                title: "Separate point pressure from patch force before the room collapses them together",
+                scenario:
+                  "The Patch Orientation board shows a wall patch, floor patch, and slanted hatch passing through the same fluid point. One trainee keeps saying the pressure must point in different directions on each patch, while another says the force should stay the same because the pressure reading is fixed.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "pressure-scalar-force-normal-area-matters",
+                    label: "Read the board as two linked ideas: pressure stays the same at the fluid location, but the force due to pressure acts perpendicular to the chosen patch and grows with patch area.",
+                    feedback:
+                      "Exactly. That keeps the scalar pressure value separate from the patch-dependent force story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "pressure-points-like-force",
+                    label: "Treat the pressure itself as the directional quantity, because wall, floor, and slanted patches clearly make the pressure aim in different directions around the point.",
+                    feedback:
+                      "That turns pressure into a vector in this lesson when the direction actually belongs to the force on the chosen patch.",
+                  },
+                  {
+                    value: "same-pressure-means-same-force",
+                    label: "Treat the force as the same on every patch, because once the pressure reading is fixed the surface size and orientation should not change the total push any more.",
+                    feedback:
+                      "That leaves area and patch orientation out of the model completely. The pressure can match while the forces differ.",
+                  },
+                ],
+                successLabel: "Pinned. The room now keeps point pressure separate from force on a chosen patch.",
+                retryLabel: "That note would collapse the lesson back into the wrong pressure-force picture.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m4-l5-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the pressure-is-a-force-arrow shortcut",
+                  scenario:
+                    "A trainee has written that pressure points in different directions on different surfaces, while another has written that changing the patch area cannot change the force if the pressure is fixed.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "pressure-location-force-patch",
+                      label: "Repair both ideas together: pressure is the scalar value at the fluid location, while the force due to pressure belongs to the chosen patch, acts normal to it, and scales with its area.",
+                      feedback:
+                        "Exactly. That repairs both shortcuts by putting pressure and force back into their right roles.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pressure-mostly-directional",
+                      label: "Tell them pressure is still mainly directional, but the arrows are usually left off because the patch orientation already hints where it is pointing in the drawing.",
+                      feedback:
+                        "That keeps the main misconception alive. In this lesson the direction belongs to the force on the surface, not to pressure itself.",
+                    },
+                    {
+                      value: "area-only-visual-detail",
+                      label: "Tell them patch area mostly changes how the surface looks, because once the pressure value is known the total force should already be settled by the fluid at that point.",
+                      feedback:
+                        "That would erase the F = pA link the lesson is trying to build.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps pressure-at-a-point and force-on-a-patch distinct.",
+                  retryLabel: "That would leave the main patch-force misconceptions active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m4-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line patch-force rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this lesson with the right anchor before the comparisons begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "patch-force-anchor",
+                      label: "Pressure is the scalar value at a point in the fluid, while the force due to that pressure acts perpendicular to the chosen surface patch and scales with its area.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pressure-arrow-anchor",
+                      label: "Pressure is mainly the arrow that shows which way the fluid pushes, and area only adjusts the size of the drawing once the direction is known.",
+                      feedback:
+                        "That would post the main misconception as the anchor sentence.",
+                    },
+                    {
+                      value: "same-pressure-same-force-anchor",
+                      label: "If the pressure at a point matches, the force should match too, because the fluid has already decided the push before the surface is chosen.",
+                      feedback:
+                        "That would erase the role of patch area and orientation from the lesson anchor.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right patch-force rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m4-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the pressure-and-force vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps pressure, surface patch, normal direction, and total force doing different jobs.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "pressure-force-patch-language",
+                      label: "Pressure belongs to the fluid location. A patch is the chosen piece of surface. The force due to pressure acts normal to that patch, and F = pA links the pressure value to the total force.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its proper role.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pressure-and-force-same-word",
+                      label: "Treat pressure and force as nearly the same word here, because both are just ways to talk about how strongly the fluid is pushing on the surface.",
+                      feedback:
+                        "That collapses the main distinction this lesson is trying to build.",
+                    },
+                    {
+                      value: "normal-means-pressure-direction",
+                      label: "Treat normal direction as the direction of the pressure itself, because the surface angle tells you which way the pressure arrow points through the fluid.",
+                      feedback:
+                        "That attaches direction to the wrong quantity. The normal sets the force direction on the patch.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the patch-force model again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m4-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they let one matching pressure settle everything",
+                  scenario:
+                    "The trainee analyst sees one fixed pressure value and is about to assume every patch through that point must feel the same total force and point in the same direction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "separate-location-and-patch-questions",
+                      label: "Start by asking two separate questions: what is the pressure at the location, and what patch has been chosen? Then use the patch orientation for direction and the patch area for total force.",
+                      feedback:
+                        "Exactly. That gives the analyst a real method instead of one-pressure-fixes-all thinking.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "solve-pressure-and-stop",
+                      label: "Start and finish with the pressure reading, because once the local pressure is known any extra patch detail mainly decorates the diagram rather than changing the physics.",
+                      feedback:
+                        "That would throw away the whole point of the lesson's patch step.",
+                    },
+                    {
+                      value: "use-orientation-only",
+                      label: "Start with surface orientation, because once the wall, floor, or hatch angle is known the direction will tell you nearly everything about the force without much need for the area.",
+                      feedback:
+                        "That would replace one shortcut with another. Area still matters for the total force.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean pressure-versus-patch method.",
+                  retryLabel: "That instruction would send the analyst back into shortcut thinking.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m4-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the pressure-becomes-a-vector shortcut",
+                  scenario:
+                    "One crew member keeps redrawing the pressure reading as a different arrow on each patch and using that to explain why the forces change.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "pressure-stays-scalar-force-turns",
+                      label: "Do not turn pressure into the arrow. The pressure value stays with the location, while the chosen surface sets the direction of the force, which acts normal to the patch.",
+                      feedback:
+                        "Exactly. That warning blocks the main shortcut this lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pressure-arrow-just-simplified",
+                      label: "Warn only that pressure arrows are sometimes simplified in diagrams, because the directional picture is still basically pressure itself even if the labels are not always shown carefully.",
+                      feedback:
+                        "That would keep the misconception alive instead of stopping it.",
+                    },
+                    {
+                      value: "area-is-the-only-difference",
+                      label: "Warn mainly that different areas create different forces, because direction is usually secondary once the pressure value has already been fixed at the point.",
+                      feedback:
+                        "That would hide half the lesson. Patch orientation matters too.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist turning pressure into the force arrow.",
+                  retryLabel: "That warning would leave the main patch-force trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m4-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the patch-collector analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the same point pressure can feed different forces on different surface patches without turning pressure into a vector.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "rain-on-umbrella-panels",
+                      label: "Think of the pressure like the local rain intensity at one place, while different panels collect that load according to their size and orientation. The place sets the intensity, but the chosen panel sets the force direction and total amount collected.",
+                      feedback:
+                        "Exactly. That analogy keeps the location idea and the chosen-surface idea visible at the same time.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "wind-arrow-is-the-pressure",
+                      label: "Think of pressure like a wind arrow that changes direction whenever the surface turns, because the fluid push itself must rotate with the patch.",
+                      feedback:
+                        "That drifts straight back into the misconception the analogy should defeat.",
+                    },
+                    {
+                      value: "same-rain-same-weight-always",
+                      label: "Think of the same rain intensity giving the same collected weight no matter what panel is used, because the local condition has already fixed the result before surface size is considered.",
+                      feedback:
+                        "That would hide the role of patch area from the analogy.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the pressure-versus-patch story clean instead of distorting it.",
+                  retryLabel: "That analogy would pull the lesson away from the right patch-force picture.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M4_L4") {
