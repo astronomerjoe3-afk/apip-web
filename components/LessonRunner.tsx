@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M6_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m6-l3-form-gate-board",
+                badge: "Gate board",
+                title: "Read the plateau before you assume the heater is off",
+                scenario:
+                  "The Form Gate board shows a block warming to a state-change gate and then sitting on a flat temperature plateau while the Morph Fee meter keeps rising. One trainee says the heater must have stopped because the Warmth Level is flat, while another wants to use the same heating formula for the whole mission from start to finish.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "plateau-still-costs-energy",
+                    label: "Keep the stage split visible: the plateau can still represent real energy transfer, the Morph Fee is the latent-heat payment for changing state, and Q = mL belongs only to that gate stage.",
+                    feedback:
+                      "Exactly. That keeps the flat temperature reading from being mistaken for zero transfer.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "flat-line-means-heater-off",
+                    label: "Treat the flat temperature line as proof the heater has effectively stopped, because a real transfer would have to show up first as a higher Warmth Level before anything else changed.",
+                    feedback:
+                      "That would erase the plateau idea. A flat temperature does not prove zero transfer during a state change.",
+                  },
+                  {
+                    value: "same-formula-for-every-stage",
+                    label: "Treat the whole mission as one uninterrupted temperature-rise bill, because once the sample is still being heated it is safer to keep using the same formula all the way through instead of splitting the stages.",
+                    feedback:
+                      "That would blur the warm-up stage and the gate stage together. The lesson wants students to separate them.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the plateau as a real state-change payment stage.",
+                retryLabel: "That note would flatten the gate stage into the wrong heating story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m6-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the switched-off-heater and one-formula shortcuts",
+                  scenario:
+                    "A trainee has written that a temperature plateau proves the heater is no longer transferring energy, while another says Q = mc delta T should cover the whole process even during the gate stage.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-plateau-and-latent-stage",
+                      label: "Repair both ideas together: a plateau can still hide real transfer, because the energy is paying the latent-heat or Morph Fee for the state change. Split the mission into a warm-up stage and a gate stage instead of using one rule blindly.",
+                      feedback:
+                        "Exactly. That restores both parts of the lesson at once.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "plateau-usually-means-pause",
+                      label: "Tell them the plateau usually means the heating has paused for a moment, because transfer and temperature rise should still appear together unless the equipment has stopped working.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson wants the plateau treated as evidence of continuing transfer.",
+                    },
+                    {
+                      value: "one-heating-rule-is-enough",
+                      label: "Tell them it is fine to keep one heating rule throughout, because separating the state-change stage only makes the arithmetic look different and does not really change the physical story.",
+                      feedback:
+                        "That would keep the second shortcut alive. The gate stage needs its own payment story.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps the plateau and the latent-heat payment in the right place.",
+                  retryLabel: "That would leave the Form Gate shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m6-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Form Gate rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop reading a flat temperature plateau as a dead heater.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "form-gate-anchor",
+                      label: "A Form Gate is a state-change temperature, and the plateau can still represent real transfer because the energy is paying the latent-heat cost of changing state.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "plateau-means-no-transfer-anchor",
+                      label: "A Form Gate mainly shows when the heater stops raising temperature, so the flat stage is best treated as a pause in transfer until the sample can warm again.",
+                      feedback:
+                        "That would build the main plateau shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "temperature-rise-rule-only-anchor",
+                      label: "A Form Gate still belongs inside the normal temperature-rise story, because every stage of heating is really just another version of warming the sample more.",
+                      feedback:
+                        "That would erase the latent-heat payment from the lesson anchor.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right plateau rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m6-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Form Gate vocabulary board",
+                  scenario:
+                    "The crew keeps swapping Form Gate, latent heat, Morph Fee, plateau, and heating bill as if they all name the same part of the mission.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "gate-plateau-latent-language",
+                      label: "Use Form Gate for the state-change temperature, plateau for the flat temperature stage, latent heat or Morph Fee for the energy paid during that stage, and keep the warm-up bill separate from the gate payment.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its own physical job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "plateau-is-break-language",
+                      label: "Use plateau mainly as a pause label, because once the line goes flat the transfer is effectively on hold until the sample can start warming again.",
+                      feedback:
+                        "That would scramble the plateau meaning and lose the continuing-transfer idea.",
+                    },
+                    {
+                      value: "latent-heat-is-final-temperature-language",
+                      label: "Use latent heat as another name for the final gate temperature, because both are really just different ways of labeling the same part of the graph.",
+                      feedback:
+                        "That would collapse a temperature into an energy payment and lose the lesson distinction.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Form Gate language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m6-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they flatten the plateau",
+                  scenario:
+                    "The trainee analyst is about to read one long heating mission as if every joule must raise temperature the same way from start to finish.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "label-stages-before-equations",
+                      label: "Label the warm-up stage and the gate stage separately first. Use the plateau as evidence of continuing transfer, then choose the right payment rule for each stage before calculating anything.",
+                      feedback:
+                        "Exactly. That gives the analyst the right stage-by-stage method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "watch-temperature-only",
+                      label: "Watch only the temperature line, because if the line is flat there is nothing new to reason about until it starts climbing again.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main plateau shortcut.",
+                    },
+                    {
+                      value: "one-formula-then-adjust",
+                      label: "Use one heating formula for the whole mission first, then adjust the answer a little afterward if the graph happens to include a plateau.",
+                      feedback:
+                        "That would train the analyst to treat the gate stage as an afterthought instead of a separate payment stage.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean stage-splitting method.",
+                  retryLabel: "That would send the analyst back into one-rule, one-stage thinking.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m6-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the dead-heater and wrong-formula shortcuts",
+                  scenario:
+                    "One crew member keeps saying a flat temperature line means the heater has stopped, while another keeps saying the state-change stage should still be solved with the same temperature-rise formula.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "plateau-and-stage-warning",
+                      label: "Do not treat a plateau as zero transfer, and do not use the temperature-rise bill blindly through the gate stage. A flat line can still hide a real latent-heat payment.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "flat-line-mostly-means-stop-warning",
+                      label: "Warn mainly that plateaus usually mean the heater is not doing much, because temperature should remain the best guide to whether energy is still entering the sample.",
+                      feedback:
+                        "That would leave the first shortcut mostly alive.",
+                    },
+                    {
+                      value: "formula-symbols-matter-more-warning",
+                      label: "Warn mainly that students should keep the symbols tidy, because the bigger risk is forgetting a letter in the equation rather than deciding which stage the equation belongs to.",
+                      feedback:
+                        "That would leave the second shortcut alive by downplaying the stage split.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now reads the Form Gate stage correctly.",
+                  retryLabel: "That warning would leave a main plateau trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m6-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the gate-fee analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the heater can keep paying in energy even while the temperature reading stays flat at the Form Gate.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "ticket-gate-fee",
+                      label: "Think of reaching a locked gate on a mission path. The traveler can keep paying energy into the gate without climbing to a higher level yet, because the payment is being used to open the gate and change what movement becomes possible next.",
+                      feedback:
+                        "Exactly. That analogy keeps the plateau as a real payment stage instead of a stopped process.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "flat-lift-means-no-power",
+                      label: "Think of a lift that stops moving whenever it reaches a landing, because a flat level shows the motor has paused and no meaningful energy transfer is happening until it starts rising again.",
+                      feedback:
+                        "That analogy would rebuild the dead-heater shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "same-staircase-whole-way",
+                      label: "Think of the whole mission as one staircase with the same price per step, because plateaus only make the climb look unusual and do not really justify switching to a different payment story.",
+                      feedback:
+                        "That analogy would erase the separate gate fee the lesson needs students to see.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the gate-fee story instead of flattening the plateau.",
+                  retryLabel: "That analogy would pull the lesson away from the right Form Gate story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M6_L2") {
