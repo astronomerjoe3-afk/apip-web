@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4"
           ? (() => {
+              if (lessonId === "F4_L4") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f4-l4-series-board",
+                    badge: "Loop board",
+                    title: "Read the one-route comparison",
+                    scenario:
+                      "The Flow-Grid room is comparing one series loop with an added resistor in the same route. One trainee keeps saying only the new resistor should be affected, while the rest of the loop should stay unchanged.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "whole-loop-changes",
+                        label: "In a series circuit there is one route, so adding another resistor makes the whole route harder. The current falls everywhere, while the source voltage is shared across the components.",
+                        feedback:
+                          "Exactly. That keeps the one-route idea tied to both the shared current and the voltage-sharing story.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "only-new-resistor-changes",
+                        label: "Only the new resistor changes, because the original part of the circuit already had its own current and voltage before the extra component was added.",
+                        feedback:
+                          "That is the trap. In one route, the whole loop responds together, so the current changes everywhere.",
+                      },
+                      {
+                        value: "series-splits-current",
+                        label: "The current splits between the series components, so each resistor gets a smaller current after the extra resistor is added.",
+                        feedback:
+                          "Current does not split in series. The same current passes every component on the single route.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read a series circuit as one shared route that changes as a whole.",
+                    retryLabel: "That note would break the one-route story the lesson is trying to secure.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f4-l4-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first series note",
+                      scenario:
+                        "A trainee has written that series circuits split the current between components the same way branch circuits do. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "same-current-one-route",
+                          label: "A series circuit has one route, so the same current passes through every component. What gets shared is the source voltage, not the current.",
+                          feedback:
+                            "Exactly. That correction secures the series current rule and the shared-voltage idea together.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "current-splits-in-series",
+                          label: "Series circuits split the current between resistors because each resistor takes the part it needs before the rest of the loop continues.",
+                          feedback:
+                            "That keeps the mistake alive. Current splitting belongs to parallel branches, not to one-route series circuits.",
+                        },
+                        {
+                          value: "voltage-same-everywhere",
+                          label: "Series circuits keep the voltage the same across every component, so current must change instead to balance the loop.",
+                          feedback:
+                            "This swaps the rules. In series, the current stays the same while the supply voltage is shared.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now treats series circuits as one-route current stories.",
+                      retryLabel: "That would leave the series-versus-parallel mix-up in place.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f4-l4-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line series rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the series-circuit lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "one-route-same-current",
+                          label: "A series circuit is one complete route: the same current flows through every component, and the supply voltage is shared across the route sections.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "series-shares-current",
+                          label: "A series circuit shares the current between its components, while each component gets the full supply voltage from the battery.",
+                          feedback:
+                            "That reverses the lesson story. In series, current stays common and voltage is shared.",
+                        },
+                        {
+                          value: "series-components-independent",
+                          label: "Each series component mainly responds on its own, so adding a new resistor changes the voltage at that resistor only and leaves the rest of the loop alone.",
+                          feedback:
+                            "One-route networks respond together. Adding difficulty affects the current everywhere in the loop.",
+                        },
+                      ],
+                      successLabel: "Rule posted. The room now has one clean series-circuit anchor.",
+                      retryLabel: "That line would blur current sharing and voltage sharing into the wrong pattern.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f4-l4-how-to-reason",
+                      badge: "Guidance channel",
+                      title: "Coach the series-circuit analyst",
+                      scenario:
+                        "A trainee analyst wants to calculate each resistor separately before deciding what stays the same in a one-route circuit or what should be added first.",
+                      prompt: "Choose the coaching instruction.",
+                      options: [
+                        {
+                          value: "add-resistance-find-current-first",
+                          label: "First identify one route. Add the series resistances, use the supply voltage to find the one shared current, then work out how the voltage is shared across the components.",
+                          feedback:
+                            "Exactly. That keeps the arithmetic tied to the one-route story instead of letting the learner guess locally.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "solve-each-resistor-alone",
+                          label: "Treat each resistor as its own little circuit first, because the current and voltage through one component do not depend much on the others in series.",
+                          feedback:
+                            "That misses the whole-loop structure. In series, the components are linked by one shared route.",
+                        },
+                        {
+                          value: "split-current-first",
+                          label: "Start by splitting the current between the resistors, then add the voltage drops afterward if there is time.",
+                          feedback:
+                            "That brings in the wrong rule. Current does not split in a series circuit.",
+                        },
+                      ],
+                      successLabel: "Good coaching. The analyst now has a reliable one-route method.",
+                      retryLabel: "That instruction would push the analyst back toward disconnected component guessing.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f4-l4-common-trap",
+                      badge: "Trap alert",
+                      title: "Block the current-splits-in-series shortcut",
+                      scenario:
+                        "One crew member keeps saying each resistor in series should get a different current because each one has a different resistance. You need the warning that shuts that shortcut down.",
+                      prompt: "Choose the trap warning.",
+                      options: [
+                        {
+                          value: "same-current-shared-voltage",
+                          label: "In one route, the same current must pass every component. Different resistances take different shares of the supply voltage instead of different shares of the current.",
+                          feedback:
+                            "Exactly. That warning protects the lesson's most important series distinction.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "bigger-resistor-less-current-through-it",
+                          label: "A bigger resistor must have less current through it, even in series, because harder components always take a smaller share of the loop current.",
+                          feedback:
+                            "That keeps the trap alive. In series, harder components take a bigger voltage drop, not a smaller current.",
+                        },
+                        {
+                          value: "series-gets-full-voltage-each",
+                          label: "Each resistor keeps the full battery voltage in series, so the current can change from one component to the next as needed.",
+                          feedback:
+                            "The supply voltage is shared in series, so each resistor does not keep the full battery voltage.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps series current and voltage roles in the right places.",
+                      retryLabel: "That warning would leave the series-current shortcut active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f4-l4-analogy",
+                      badge: "Story relay",
+                      title: "Choose the one-lane chain bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture several difficult sections on the same single route, without turning the lesson into a branch or split-current story.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "one-lane-more-gates",
+                          label: "Use the analogy by keeping one lane and adding more gates to that same route. The stream rate is common everywhere, but the total route gets harder and the source push is shared across the gates.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the one-route series meaning cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "many-lanes-series",
+                          label: "Use the analogy by showing several side lanes, because that is the easiest way to explain why different components can take different amounts of current.",
+                          feedback:
+                            "That would build a parallel-circuit picture, not a series one.",
+                        },
+                        {
+                          value: "each-gate-gets-full-push",
+                          label: "Use the analogy by saying each gate in the same lane receives the full original push, because source push does not need to be shared in a single route.",
+                          feedback:
+                            "The lesson needs the source push shared across the route sections, not repeated in full at each gate.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports the one-route current story without slipping into branch language.",
+                      retryLabel: "That analogy would blur the series structure instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F4_L3") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
