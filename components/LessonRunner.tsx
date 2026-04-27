@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4"
+        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5"
           ? (() => {
+              if (lessonId === "F5_L5") {
+                if (isMediaStep && activeMediaIndex === 0) {
+                  return {
+                    id: "f5-l5-bend-board",
+                    badge: "Bend board",
+                    title: "Read the boundary-turn comparison",
+                    scenario:
+                      "The Signal-Stadium room is comparing a wave entering a slower region with another entering a faster region. One trainee keeps saying the wave bends because the source changes its frequency at the boundary.",
+                    prompt: "Choose the note to pin on the display.",
+                    options: [
+                      {
+                        value: "speed-change-frequency-fixed",
+                        label: "Refraction is a turn caused by a speed change in the new medium. The source keeps the frequency fixed, so the wavelength changes with the speed and the front bends toward or away from the normal.",
+                        feedback:
+                          "Exactly. That keeps the whole refraction chain together instead of blaming the source frequency.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "frequency-changes-at-boundary",
+                        label: "The wave bends because the boundary changes the frequency first, and the new frequency then forces the wavelength and direction to adjust afterward.",
+                        feedback:
+                          "That is the trap. The source frequency stays fixed across the boundary; it is the speed and wavelength that change.",
+                      },
+                      {
+                        value: "wavelength-alone-bends-wave",
+                        label: "The wave bends because the wavelength changes by itself at the boundary, so there is no need to think about whether the new medium is slower or faster.",
+                        feedback:
+                          "Wavelength does change, but it changes because the speed changes in the new medium. The slower-versus-faster story still matters.",
+                      },
+                    ],
+                    successLabel: "Pinned. The room can now read refraction as a speed-change turn with fixed frequency.",
+                    retryLabel: "That note would blur the boundary-speed story or move the cause onto the source.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (isSectionStep && !activeSection?.worked_example) {
+                  if (activeSectionHeading === "fix these ideas") {
+                    return {
+                      id: "f5-l5-fix-ideas",
+                      badge: "Signal repair",
+                      title: "Repair the first refraction note",
+                      scenario:
+                        "A trainee has written that the source frequency changes as soon as the wave crosses the boundary, and that is why the route bends. You need the correction that fixes that note before the lesson moves on.",
+                      prompt: "Choose the correction to send.",
+                      options: [
+                        {
+                          value: "source-frequency-stays-fixed",
+                          label: "The source keeps the frequency fixed across the boundary. The new medium changes the speed, so the wavelength changes with it and the front turns.",
+                          feedback:
+                            "Exactly. That correction secures the source-versus-medium distinction the lesson depends on.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "boundary-resets-frequency",
+                          label: "Every new medium resets the wave frequency to match its own local conditions, which is why the wave turns at the interface.",
+                          feedback:
+                            "That keeps the mistake alive. The boundary changes the speed, not the source launch rate.",
+                        },
+                        {
+                          value: "normal-causes-turn-directly",
+                          label: "The normal line itself makes the wave turn, so once the Guide Line is drawn the speed story is no longer the important cause.",
+                          feedback:
+                            "The normal helps describe the geometry, but the cause story is still the speed change in the new medium.",
+                        },
+                      ],
+                      successLabel: "Repair sent. The room now keeps the source frequency fixed and the boundary-speed change doing the bending.",
+                      retryLabel: "That would leave the wrong cause story active.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "core idea") {
+                    return {
+                      id: "f5-l5-core-idea",
+                      badge: "Ops summary",
+                      title: "Post the one-line refraction rule",
+                      scenario:
+                        "Control wants one sentence on the wall so every learner starts the refraction lesson with the right anchor.",
+                      prompt: "Choose the line to post.",
+                      options: [
+                        {
+                          value: "speed-change-turn-rule",
+                          label: "Refraction is a turn caused by a speed change at a boundary: the source frequency stays fixed, the wavelength changes with the speed, and the route bends toward the normal in a slower medium or away in a faster one.",
+                          feedback:
+                            "Exactly. That is the clean anchor sentence this lesson needs.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "frequency-turn-rule",
+                          label: "Refraction happens because the wave frequency changes in the new medium, and the new frequency then decides the direction of the bend.",
+                          feedback:
+                            "That blurs the cause into the wrong quantity. The frequency stays source-set while the speed and wavelength change.",
+                        },
+                        {
+                          value: "wavelength-is-whole-story",
+                          label: "Refraction is just a wavelength-change picture, so the slower-versus-faster medium story is optional detail rather than part of the rule.",
+                          feedback:
+                            "The lesson needs the full chain. Wavelength change matters because the speed changes in the new medium.",
+                        },
+                      ],
+                      successLabel: "Posted. The room now starts from the speed-change chain instead of a frequency-shift shortcut.",
+                      retryLabel: "That line would blur the refraction rule instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "how to reason through it") {
+                    return {
+                      id: "f5-l5-how-to-reason",
+                      badge: "Coach move",
+                      title: "Coach the boundary analyst",
+                      scenario:
+                        "A trainee keeps mixing the source setting, the new medium, and the bend direction. You need the coaching note that gives them a reliable order.",
+                      prompt: "Choose the coaching note to send.",
+                      options: [
+                        {
+                          value: "fix-frequency-then-change-speed",
+                          label: "First keep the source frequency fixed. Then decide whether the new medium is slower or faster, update the wavelength with the speed change, and only after that choose whether the route bends toward or away from the normal.",
+                          feedback:
+                            "Exactly. That keeps source, medium, and bend direction in the right order.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "choose-bend-first-from-picture",
+                          label: "First guess the bend direction from the drawing, then change whichever quantity needs to move afterward so the numbers fit the picture.",
+                          feedback:
+                            "That would let the picture guess replace the physics chain. The medium-speed story has to come first.",
+                        },
+                        {
+                          value: "change-frequency-first",
+                          label: "First update the frequency to match the new medium, because once the launch rate changes the new wavelength and bend direction follow automatically.",
+                          feedback:
+                            "That would rebuild the exact shortcut the lesson is trying to remove. The frequency stays fixed across the boundary.",
+                        },
+                      ],
+                      successLabel: "Coaching note sent. The analyst now has a stable refraction method instead of a mixed cause story.",
+                      retryLabel: "That method would scramble the boundary chain instead of ordering it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "common trap") {
+                    return {
+                      id: "f5-l5-common-trap",
+                      badge: "Trap shield",
+                      title: "Block the frequency-changed-so-it-bent shortcut",
+                      scenario:
+                        "The next learner note says: 'The wave bends because its frequency changes at the boundary.' You need the warning that blocks that shortcut before it spreads.",
+                      prompt: "Choose the warning to pin beside the trap.",
+                      options: [
+                        {
+                          value: "frequency-stays-source-set",
+                          label: "The source keeps the frequency fixed. The new medium changes the speed, so the wavelength changes instead and the route bends because one side of the front enters the new speed region first.",
+                          feedback:
+                            "Exactly. That warning blocks the wrong-cause shortcut cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "frequency-mostly-changes",
+                          label: "The shortcut is close enough because the frequency often changes a little when the wave crosses the boundary, and that small shift is what creates most of the turning.",
+                          feedback:
+                            "That would keep the trap alive. The lesson needs frequency fixed and speed change doing the bending.",
+                        },
+                        {
+                          value: "normal-alone-explains-bend",
+                          label: "You do not need to mention speed or wavelength at all, because the normal line already explains which side of the route must turn inward or outward.",
+                          feedback:
+                            "The normal helps with geometry, but the cause story still needs the speed change in the new medium.",
+                        },
+                      ],
+                      successLabel: "Trap blocked. The room now keeps source frequency and medium-speed change in the right places.",
+                      retryLabel: "That warning would let the frequency shortcut survive.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+
+                  if (activeSectionHeading === "analogy") {
+                    return {
+                      id: "f5-l5-analogy",
+                      badge: "Story relay",
+                      title: "Choose the pace-zone bridge",
+                      scenario:
+                        "The team wants one analogy line that helps learners picture why the route turns when one side of the front enters a slower or faster zone, without making the source reset its launch rhythm.",
+                      prompt: "Choose the analogy line to send.",
+                      options: [
+                        {
+                          value: "same-launch-rate-new-pace-zone",
+                          label: "Use the analogy by keeping the same launch rhythm while the front enters a new pace zone. The slower zone shortens the gap and turns the route toward the normal, while a faster zone lengthens the gap and turns it away.",
+                          feedback:
+                            "Exactly. That keeps the analogy serving the refraction chain cleanly.",
+                          isCorrect: true,
+                        },
+                        {
+                          value: "boundary-resets-launch-rate",
+                          label: "Use the analogy by letting the new zone reset how often fronts are launched, because that is the clearest way to show why the route turns at the boundary.",
+                          feedback:
+                            "That would rebuild the source-frequency shortcut the lesson is trying to remove.",
+                        },
+                        {
+                          value: "turn-without-speed-story",
+                          label: "Use the analogy by saying the route just turns when it touches the boundary line, because the line itself chooses the new direction without needing a slower-or-faster story.",
+                          feedback:
+                            "That would strip out the real cause. The analogy needs the pace-zone change to do the turning work.",
+                        },
+                      ],
+                      successLabel: "Analogy chosen. It supports refraction as a speed-change turn without slipping into the wrong cause story.",
+                      retryLabel: "That analogy would blur the refraction idea instead of clarifying it.",
+                    } satisfies ScaffoldRoleplayCard;
+                  }
+                }
+              }
+
               if (lessonId === "F5_L4") {
                 if (isMediaStep && activeMediaIndex === 0) {
                   return {
