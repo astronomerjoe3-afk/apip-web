@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,282 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M1_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m1-l5-twin-board",
+                badge: "Twin board",
+                title: "Freeze the graph pair before the crew swaps the meanings",
+                scenario:
+                  "Twin-Graph Bay is showing one progress log beside one pace log with matching steepness. A trainee keeps saying the same tilt must mean the same physics idea on both screens.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "name-graph-first",
+                    label: "Name the graph first. On a progress log, slope means speed. On a pace log, slope means acceleration. The tilt can look the same while the physics meaning changes with the axes.",
+                    feedback:
+                      "Exactly. That keeps geometry and graph meaning separate instead of letting the same tilt do one job everywhere.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "same-tilt-same-speed",
+                    label: "Use the same tilt as proof of the same speed, because slope always tells how fast the object is moving no matter which graph is on the wall.",
+                    feedback:
+                      "That is the trap. Slope only tells speed on a progress log. On a pace log, the same steepness tells acceleration.",
+                  },
+                  {
+                    value: "pace-log-is-just-detail",
+                    label: "Treat the pace log as a more detailed version of the progress log, so the old slope meaning carries over and only the numbers need updating.",
+                    feedback:
+                      "That collapses two graph families into one. The vertical axis changes the slope meaning, so the old reading rule cannot just carry over.",
+                  },
+                ],
+                successLabel: "Pinned. The room now names the graph before it names the slope.",
+                retryLabel: "That note would let the twin-board confusion spread.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m1-l5-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first slope note",
+                  scenario:
+                    "A trainee has written that steeper always means faster, no matter which graph is on the board. You need the correction that fixes that note before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "steeper-needs-graph-name",
+                      label: "Steeper only becomes meaningful after you name the graph. On a progress log it means greater speed, but on a pace log it means greater acceleration.",
+                      feedback:
+                        "Exactly. That restores the missing graph-first step the whole lesson depends on.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "steeper-means-faster-everywhere",
+                      label: "Steeper is the universal sign of faster motion, so the safest correction is just to keep reading slope as speed and ignore the graph type.",
+                      feedback:
+                        "That keeps the mistake alive. Different vertical axes create different slope meanings.",
+                    },
+                    {
+                      value: "height-and-slope-same-job",
+                      label: "The correction should focus on graph height instead, because once the highest point is found the steepness no longer adds much useful information.",
+                      feedback:
+                        "That swaps one confusion for another. Height and slope still do different jobs on both graphs.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now checks the graph name before trusting the slope.",
+                  retryLabel: "That would leave the slope shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m1-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line gradient-context rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this graph-comparison lesson with the right anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "slope-meaning-comes-from-axes",
+                      label: "Slope meaning comes from the axes: on a distance-time graph it gives speed, while on a speed-time graph it gives acceleration.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "slope-always-speed",
+                      label: "Slope is the graph's speed reading, while height gives the extra detail about how the speed is changing.",
+                      feedback:
+                        "That drags the old reading rule into the wrong graph. This lesson needs speed on one graph and acceleration on the other.",
+                    },
+                    {
+                      value: "same-shape-same-meaning",
+                      label: "If two graphs share the same shape, they should share the same motion meaning, so the axes mostly act as labels rather than changing the physics.",
+                      feedback:
+                        "That is the shortcut this lesson is trying to remove. The axes are what decide the physics meaning.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right gradient-context rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m1-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the twin-graph vocabulary board",
+                  scenario:
+                    "The crew can see the paired graphs, but their labels are slipping. You need the vocabulary note that keeps the graph names and slope meanings tied together.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "progress-slope-speed-pace-slope-acceleration",
+                      label: "Use progress log for the distance-time graph, where slope gives speed. Use pace log for the speed-time graph, where slope gives acceleration.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary tied to the correct graph families.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "progress-and-pace-same-family",
+                      label: "Use progress log and pace log almost interchangeably, because both are motion graphs and the same slope word should travel across them.",
+                      feedback:
+                        "Those labels are not interchangeable here. The graph family changes what the slope means.",
+                    },
+                    {
+                      value: "height-most-important-word",
+                      label: "Use height as the main reading word on both graphs, because slope mostly just decorates the line shape once the vertical value is known.",
+                      feedback:
+                        "That would bury the lesson's main distinction. Height and slope are separate readings on both boards.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the graph families again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m1-l5-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the zero-slope handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into zero-slope reading without repeating it badly.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "zero-slope-needs-graph-name",
+                      label: "Zero slope still needs the graph name: it means stopped on a progress log, but constant speed or rest on a pace log because the vertical axis has changed.",
+                      feedback:
+                        "Exactly. That carries the graph-first rule into one of the most tempting shortcut cases.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "zero-slope-means-stop-everywhere",
+                      label: "Zero slope is the safest universal rest signal, so the team should read every flat line as the object being stopped.",
+                      feedback:
+                        "That keeps the confusion alive. A flat pace log above zero still shows steady motion.",
+                    },
+                    {
+                      value: "zero-slope-only-matters-on-progress",
+                      label: "Zero slope mainly matters on progress logs, because pace logs are about speed and any flat line there is too simple to carry real meaning.",
+                      feedback:
+                        "Flat sections matter on pace logs too. They are exactly how the lesson shows zero acceleration.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would warp the zero-slope story.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m1-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the twin-graph analyst",
+                  scenario:
+                    "The trainee analyst is about to answer a slope question from visual steepness alone. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-axes-then-attach-unit",
+                      label: "Name the graph, read the vertical axis, compare the rise with the run, and attach the unit before you decide whether the slope means speed or acceleration.",
+                      feedback:
+                        "Exactly. That gives the analyst a real method instead of a shape guess.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "use-steepest-first",
+                      label: "Start from the steepest line first, because the most extreme tilt usually tells the strongest motion story without needing the axis labels.",
+                      feedback:
+                        "That would send the analyst straight into the shortcut this lesson is removing. The axes still decide the slope meaning.",
+                    },
+                    {
+                      value: "height-before-graph-name",
+                      label: "Read the graph height first and only name the graph if the height seems confusing, because slope meaning usually follows from the tallest point anyway.",
+                      feedback:
+                        "This lesson needs the graph name first. Otherwise height and slope start swapping jobs again.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable gradient-context method.",
+                  retryLabel: "That would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m1-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the steeper-means-faster shortcut",
+                  scenario:
+                    "One crew member keeps saying any steeper graph section must mean faster motion. You need the correction that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "steeper-needs-graph-context",
+                      label: "Steeper only answers the right question after you name the graph. It can mean greater speed on a progress log or greater acceleration on a pace log.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "steeper-always-faster",
+                      label: "Steeper is safe because motion gets faster whenever the line gets steeper, so the graph name only changes the units, not the meaning.",
+                      feedback:
+                        "That is the trap. The graph name changes the physics meaning, not just the unit label.",
+                    },
+                    {
+                      value: "ignore-slope-use-height",
+                      label: "Ignore slope whenever the graph has a clear high point, because the highest point already summarizes the important motion change on both boards.",
+                      feedback:
+                        "That would erase the exact feature this lesson is teaching. Height and slope are not interchangeable.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The twin-board shortcut will not take over the room.",
+                  retryLabel: "That warning would leave the trap alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m1-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the scoreboard analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the same tilt can stay visually the same while the physics meaning changes with the axes.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "same-gesture-different-scoreboards",
+                      label: "Treat the slope like the same gesture performed on two different scoreboards: one board records distance over time, so the gesture means speed, while the other records speed over time, so the gesture means acceleration.",
+                      feedback:
+                        "Exactly. That analogy supports the lesson without letting the same tilt carry one meaning everywhere.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-gesture-same-meaning",
+                      label: "Treat the slope like the same gesture with the same meaning on both scoreboards, because matching shapes should stay trustworthy even when the labels change.",
+                      feedback:
+                        "That would rebuild the whole confusion. This lesson exists because matching shapes can still mean different rates.",
+                    },
+                    {
+                      value: "height-only-scoreboard",
+                      label: "Treat both scoreboards as height displays first, because once the vertical reading is known the line tilt mainly acts as decoration rather than as a separate measurement.",
+                      feedback:
+                        "That would hide the lesson's main comparison. The analogy needs both height and slope doing separate jobs.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the twin-graph idea instead of flattening it.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M1_L3") {
