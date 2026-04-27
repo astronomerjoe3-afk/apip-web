@@ -1709,7 +1709,10 @@ export default function LessonRunner({
     }));
     const hasIntroContent = Boolean(payload.intro || introSections.length);
     const hasTeachingFocus = normalizedTeachingFocus.length > 0;
-    const separateTeachingFocusStep = lessonId.startsWith("F2_") && hasIntroContent && hasTeachingFocus;
+    const separateTeachingFocusStep =
+      (lessonId.startsWith("F1_") || lessonId.startsWith("F2_")) &&
+      hasIntroContent &&
+      hasTeachingFocus;
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
       ? scaffoldFocusCards.map((card) => card.title + ": " + card.detail + (card.why_it_matters ? " Why it matters: " + card.why_it_matters : ""))
       : normalizedTeachingFocus.slice(0, 4);
