@@ -82,6 +82,13 @@ type JourneySummary = {
   averageSpeedText: string | null;
 };
 
+type DensityUnit = "kg/m^3" | "g/cm^3";
+
+type DensityValue = {
+  value: number;
+  unit: DensityUnit;
+};
+
 function formatJourneyNumber(value: number): string {
   if (Number.isInteger(value)) {
     return String(value);
@@ -171,6 +178,47 @@ function summarizeJourney(text: string): JourneySummary | null {
     totalTimeText,
     averageSpeedText,
   };
+}
+
+function extractRepairNumber(text: string): number | null {
+  const match = text.replace(/,/g, "").match(/-?\d+(?:\.\d+)?(?:e[+-]?\d+)?/i);
+  if (!match) {
+    return null;
+  }
+  const value = Number(match[0]);
+  return Number.isFinite(value) ? value : null;
+}
+
+function detectDensityUnit(text: string): DensityUnit | null {
+  if (includesAny(text, [/kg\/m\^?3/, /kg\/m3/, /kg m\^-?3/, /kg per m\^?3/, /kg per m3/])) {
+    return "kg/m^3";
+  }
+  if (includesAny(text, [/g\/cm\^?3/, /g\/cm3/, /g cm\^-?3/, /g per cm\^?3/, /g per cm3/])) {
+    return "g/cm^3";
+  }
+  return null;
+}
+
+function parseDensityValue(text: string): DensityValue | null {
+  const unit = detectDensityUnit(text);
+  const value = extractRepairNumber(text);
+  if (!unit || value === null) {
+    return null;
+  }
+  return { value, unit };
+}
+
+function isApproxFactor(
+  numerator: number,
+  denominator: number,
+  target: number,
+  tolerance = 0.05,
+): boolean {
+  if (!Number.isFinite(numerator) || !Number.isFinite(denominator) || denominator === 0) {
+    return false;
+  }
+  const ratio = numerator / denominator;
+  return Math.abs(ratio - target) / target <= tolerance;
 }
 
 const EXACT_SUMMARIES: Record<string, MisconceptionTemplate> = {
@@ -788,6 +836,73 @@ export function misconceptionSummaryForContext({
       ),
       noticeNext: "Mark the last digit you are allowed to keep before you start rounding.",
     };
+  }
+
+  const densityAnswer = parseDensityValue(answerText);
+  const densityCorrect = parseDensityValue(correctText);
+  const isDensityCheck =
+    includesAny(source, [/\bdensity\b/, /\bdenser\b/, /\bless dense\b/, /float/, /sink/])
+    || Boolean(densityAnswer)
+    || Boolean(densityCorrect);
+
+  if (isDensityCheck && densityAnswer && densityCorrect) {
+    const mentionsGramPerCentimetreCube = includesAny(source, [/g\/cm\^?3/, /g\/cm3/, /g per cm\^?3/, /g per cm3/]);
+    const sameDisplayedUnit = densityAnswer.unit === densityCorrect.unit;
+    const massOnlyConversionSlip =
+      densityCorrect.unit === "kg/m^3"
+      && densityAnswer.unit === "kg/m^3"
+      && isApproxFactor(densityCorrect.value, densityAnswer.value, 1_000_000);
+    const unitLabelOnlySlip =
+      densityCorrect.unit === "kg/m^3"
+      && densityAnswer.unit === "kg/m^3"
+      && isApproxFactor(densityCorrect.value, densityAnswer.value, 1000);
+    const leftOriginalUnitSlip =
+      densityCorrect.unit === "kg/m^3"
+      && densityAnswer.unit === "g/cm^3"
+      && isApproxFactor(densityCorrect.value, densityAnswer.value, 1000);
+
+    if (massOnlyConversionSlip) {
+      return {
+        tag: String(tag || "density_unit_scale_error"),
+        title: "This is a density conversion mistake, not a density-definition mistake",
+        diagnosis: "You converted the mass part down to kilograms, but density is mass per volume. The volume scale must change too, so the final density does not shrink to a tiny value.",
+        repair: cleanCorrectionText(
+          displayCorrectText,
+          mentionsGramPerCentimetreCube
+            ? "You have treated the density as if it were only a mass conversion. If the value starts in g/cm^3, convert the whole ratio: 1 g/cm^3 = 1000 kg/m^3, so 1.5 g/cm^3 becomes 1500 kg/m^3, not 0.0015 kg/m^3."
+            : `You wrote ${displayRepairText(learnerAnswer)}, which is what happens when the mass is converted but the per-volume scale is left behind. Keep the whole mass-per-volume ratio together when you convert.`,
+        ),
+        noticeNext: "For density, do not convert just the number in front. Convert the whole unit ratio and remember that 1 g/cm^3 = 1000 kg/m^3.",
+      };
+    }
+
+    if (unitLabelOnlySlip || leftOriginalUnitSlip) {
+      return {
+        tag: String(tag || "density_unit_scale_error"),
+        title: "You changed the unit, but not the density scale",
+        diagnosis: "The physical density stays the same, but kg/m^3 is a much larger scale than g/cm^3. Changing only the label or keeping the same number gives the wrong size.",
+        repair: cleanCorrectionText(
+          displayCorrectText,
+          mentionsGramPerCentimetreCube || leftOriginalUnitSlip
+            ? `If the density is written in g/cm^3 first, multiply by 1000 to express the same density in kg/m^3. That is why the answer is ${displayCorrectText}, not ${displayRepairText(learnerAnswer)}.`
+            : "A density written in kg/m^3 must keep the per-volume scale as well as the mass scale. Check the conversion factor before you reuse the original number.",
+        ),
+        noticeNext: "When a density changes from g/cm^3 to kg/m^3, multiply by 1000. When it changes the other way, divide by 1000.",
+      };
+    }
+
+    if (sameDisplayedUnit && densityCorrect.unit === "kg/m^3" && /consistent units|convert/.test(source)) {
+      return {
+        tag: String(tag || "density_unit_scale_error"),
+        title: "Keep the density ratio together while you convert",
+        diagnosis: "This question is testing whether the mass unit and the volume unit were both converted before the density was written.",
+        repair: cleanCorrectionText(
+          displayCorrectText,
+          "Density is mass divided by volume, so the mass unit and the volume unit must be made consistent before you divide or compare.",
+        ),
+        noticeNext: "If the answer is in kg/m^3, pause and check both parts of the unit: kilograms and cubic metres.",
+      };
+    }
   }
 
   const contextualFallback = genericContextualRepair(tag, displayCorrectText, displayFocusText);
