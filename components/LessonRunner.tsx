@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-        lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,282 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M1_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m1-l2-pace-log-visual",
+                badge: "Pace log",
+                title: "Freeze the graph at the right reading",
+                scenario:
+                  "The Quest-Log display shows one flat section above zero, one rising section, and one falling section. A trainee keeps mixing graph height with graph slope and says the highest point must also show the greatest acceleration.",
+                prompt: "Pin the right note to the screen.",
+                options: [
+                  {
+                    value: "height-speed-slope-acceleration",
+                    label: "Use graph height for the speed at that instant, use graph slope for the acceleration on that section, and remember that a flat line above zero still means constant motion.",
+                    feedback:
+                      "Exactly. That keeps speed-now, change-in-speed, and constant motion separate.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "highest-point-most-acceleration",
+                    label: "Use the highest point to find both the top speed and the greatest acceleration, because the biggest visible value must answer the most important question.",
+                    feedback:
+                      "That is the trap. Height and slope answer different questions, so the highest point does not automatically give the biggest acceleration.",
+                  },
+                  {
+                    value: "downward-slope-reverse",
+                    label: "Treat the falling section as moving backward, because any downward line on a graph means the object has started going in the opposite direction.",
+                    feedback:
+                      "A speed-time graph does not give direction by itself. A falling line above zero means the speed is decreasing, not that the object has reversed.",
+                  },
+                ],
+                successLabel: "Pinned. The display now keeps height and slope doing different jobs.",
+                retryLabel: "That note would collapse the graph features back together.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m1-l2-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first pace-log note",
+                  scenario:
+                    "A trainee has written that a flat line above zero means the rover is stopped because the graph is not rising anymore. You need the correction that fixes that note before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "flat-above-zero-constant-speed",
+                      label: "A flat line above zero means the speed is staying constant at a non-zero value. Rest only appears when the flat line sits on the time axis itself.",
+                      feedback:
+                        "Exactly. That restores the difference between constant motion and zero speed.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "flat-means-no-motion",
+                      label: "Any flat graph means no motion, because a line that is not rising cannot represent anything still happening.",
+                      feedback:
+                        "That keeps the mistake alive. On a speed-time graph, a flat line can show constant speed if it is above zero.",
+                    },
+                    {
+                      value: "flat-means-no-distance",
+                      label: "A flat pace log means no distance is being covered, so the object must be at rest whether the line is above zero or not.",
+                      feedback:
+                        "That mixes pace logs with distance-time graphs. Here the vertical axis is speed, so the line height still matters.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps flat-above-zero separate from rest.",
+                  retryLabel: "That would leave the constant-speed confusion active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m1-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line pace-log rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts this pace-log lesson with the right anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "height-speed-slope-acceleration-rule",
+                      label: "On a speed-time graph, height gives the speed at a chosen moment and slope gives the acceleration over a section.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-distance-slope-speed-rule",
+                      label: "On a speed-time graph, height gives distance gained so far and slope gives the speed on that section.",
+                      feedback:
+                        "That swaps in the distance-time meanings. This lesson needs speed from height and acceleration from slope.",
+                    },
+                    {
+                      value: "high-point-strongest-change-rule",
+                      label: "On a speed-time graph, the highest point is always where the strongest change is happening, so it is the safest place to read acceleration.",
+                      feedback:
+                        "That turns height into change rate. The lesson needs those jobs kept separate.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right pace-log rule.",
+                  retryLabel: "That line would blur the graph jobs instead of clarifying them.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m1-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the pace-log vocabulary board",
+                  scenario:
+                    "The crew can see the graph, but their labels are slipping. You need the vocabulary note that keeps the quantities tied to the right graph features.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "speed-height-acceleration-slope",
+                      label: "Use speed for the graph height at an instant, and use acceleration for the slope over a time interval.",
+                      feedback:
+                        "Exactly. That keeps the vocabulary tied to the right graph features.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "speed-and-acceleration-same",
+                      label: "Use speed and acceleration almost interchangeably, because both are just ways of describing how hard the motion is happening.",
+                      feedback:
+                        "Those are different quantities. Speed is the current value, while acceleration is the rate at which that value changes.",
+                    },
+                    {
+                      value: "distance-is-main-term",
+                      label: "Use distance as the main term for every vertical reading, because all motion graphs are really distance stories underneath.",
+                      feedback:
+                        "That would drag the learner into the wrong graph family. This vertical axis is speed, not distance.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the quantities again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m1-l2-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the graph-language handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into section reading without repeating it badly.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "flat-rising-falling-stories",
+                      label: "A flat section above zero tells a constant-speed story, a rising section tells a speeding-up story, and a falling section above zero tells a slowing-down story.",
+                      feedback:
+                        "Exactly. That extends the glossary into section-by-section reading.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "falling-means-backward",
+                      label: "A falling section means the rover has started moving backward, because the graph is heading down toward the axis.",
+                      feedback:
+                        "That keeps the trap alive. A speed-time graph does not encode direction by slope sign alone.",
+                    },
+                    {
+                      value: "flat-sections-unimportant",
+                      label: "Flat sections can be skipped in the glossary because only rising or falling parts contain real motion information.",
+                      feedback:
+                        "Flat sections matter. They are exactly how the lesson shows constant speed and rest.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would warp the section stories.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m1-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the pace-log analyst",
+                  scenario:
+                    "The trainee analyst is about to answer a graph question by guessing from the overall shape. You get one coaching instruction.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "ask-height-or-slope-first",
+                      label: "Ask first whether the question wants the speed at one moment or the change in speed over a section. Then read height for the first job and slope for the second.",
+                      feedback:
+                        "Exactly. That gives the analyst a reliable order instead of a shape guess.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pick-biggest-visible-number",
+                      label: "Start from the biggest visible graph value, because the largest number usually answers both the speed and acceleration questions fastest.",
+                      feedback:
+                        "That would send the analyst into the same shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "use-direction-words-from-line",
+                      label: "Use upward and downward lines as direction words first, then only check the values afterward if something still feels unclear.",
+                      feedback:
+                        "This graph is about speed changing with time. Direction has to come from another representation, not from the line tilt alone.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a real pace-log method.",
+                  retryLabel: "That would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m1-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the highest-point shortcut",
+                  scenario:
+                    "One crew member keeps saying the highest point on the graph must be where the acceleration is greatest. You need the correction that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "acceleration-comes-from-slope",
+                      label: "Acceleration comes from the slope of the section, not from how high the graph is at that moment.",
+                      feedback:
+                        "Exactly. That one sentence blocks the most common shortcut in this lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "highest-point-does-both",
+                      label: "The highest point is safe because it tells the biggest speed and the biggest acceleration at the same time.",
+                      feedback:
+                        "That is the trap. Highest speed and greatest acceleration are not the same question on a speed-time graph.",
+                    },
+                    {
+                      value: "ignore-slope-completely",
+                      label: "Ignore slope whenever the graph has a clear peak, because the peak already summarizes the important motion change.",
+                      feedback:
+                        "The slope is exactly what carries the change story. Ignoring it would erase the acceleration reading.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The shortcut will not take over the room.",
+                  retryLabel: "That warning would leave the trap alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m1-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the dashboard analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture speed-now and change-in-speed without turning the graph back into a distance map.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "speedometer-readout",
+                      label: "Treat the graph like a speedometer record over time: the reading at one moment is the current speed, while the way the record rises, falls, or stays flat shows whether the speed is changing.",
+                      feedback:
+                        "Exactly. That keeps the analogy tied to the lesson's height-versus-slope meaning.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "route-map-analogy",
+                      label: "Treat the graph like a road map where climbing upward means the road itself is going uphill and falling means the road bends back downward.",
+                      feedback:
+                        "That would pull the learner back into route-shape thinking. The graph is a pace record, not a lane map.",
+                    },
+                    {
+                      value: "distance-counter-analogy",
+                      label: "Treat the graph like one total-distance counter, because the only thing that matters is how much ground has been covered by each time mark.",
+                      feedback:
+                        "That would collapse this pace log into the previous graph type. This lesson needs speed now and change in speed kept separate.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the pace-log idea instead of warping it.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M1_L1") {
