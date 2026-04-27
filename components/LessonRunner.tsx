@@ -1710,7 +1710,7 @@ export default function LessonRunner({
     const hasIntroContent = Boolean(payload.intro || introSections.length);
     const hasTeachingFocus = normalizedTeachingFocus.length > 0;
     const separateTeachingFocusStep =
-      (lessonId.startsWith("F1_") || lessonId.startsWith("F2_")) &&
+      (lessonId.startsWith("F1_") || lessonId.startsWith("F2_") || lessonId.startsWith("F3_")) &&
       hasIntroContent &&
       hasTeachingFocus;
     const scaffoldFocusItems = scaffoldFocusCards.length > 0
