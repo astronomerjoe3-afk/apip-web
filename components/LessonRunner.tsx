@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M8_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m8-l1-bounce-panel-board",
+                badge: "Panel board",
+                title: "Use the Guide Line first and keep the image ghostly",
+                scenario:
+                  "The Mirror Match board shows an incoming route, a reflected route, and dashed extensions behind the panel. One trainee wants to read the mirror rule from the surface line, while another keeps calling the dashed image routes real light behind the panel.",
+                prompt: "Pin the note that keeps the mirror story honest.",
+                options: [
+                  {
+                    value: "guide-line-and-ghost-image",
+                    label: "Start from the Guide Line, match the incident and reflected angles around that same line, and treat the image behind the panel as a ghost position found by backward extensions rather than real light there.",
+                    feedback:
+                      "Exactly. That protects both the angle rule and the status of the image lines.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "surface-line-first",
+                    label: "Read the mirror rule from the surface line because that line is already visible, then only convert to the Guide Line if the numbers become awkward.",
+                    feedback:
+                      "That starts from the wrong reference. The reflection rule is Guide-Line first, not surface first.",
+                  },
+                  {
+                    value: "real-light-behind-panel",
+                    label: "Treat the dashed image lines as real light traveling behind the panel, because the image position should come from where the reflected light actually goes next.",
+                    feedback:
+                      "That blurs the construction lines into real beams. The image behind the panel is virtual, not a real light path.",
+                  },
+                ],
+                successLabel: "Pinned. The room now protects the Guide Line and the ghost image together.",
+                retryLabel: "That note would flatten the mirror story into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m8-l1-fix-ideas",
+                  badge: "Mirror repair",
+                  title: "Repair the surface-angle and real-image-behind-panel shortcuts",
+                  scenario:
+                    "One trainee has measured the route from the panel surface, while another says the image must come from real light traveling behind the panel because the dashed lines meet there.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-guide-line-and-extensions",
+                      label: "Repair both ideas together: convert any surface angle to the Guide Line before using the reflection rule, and treat the dashed lines as backward extensions that locate a ghost image rather than real light behind the panel.",
+                      feedback:
+                        "Exactly. That restores both the angle reference and the image-status idea.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-surface-is-good-enough",
+                      label: "Keep the surface angle as the main reading, because the reflection rule still mostly works as long as the same surface line is used for the incoming and outgoing paths.",
+                      feedback:
+                        "That keeps the wrong reference alive. The lesson needs the Guide Line as the trusted angle reference.",
+                    },
+                    {
+                      value: "repair-image-is-real",
+                      label: "Explain the image as real light gathering behind the panel, because the dashed meeting point should still count as a true crossing if it lines up cleanly.",
+                      feedback:
+                        "That would keep the image-status shortcut alive. The dashed lines are geometry tools, not real beams.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now reads the mirror panel correctly.",
+                  retryLabel: "That would leave a main M8_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m8-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line mirror rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop mixing the Guide Line rule with the ghost-image construction.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "mirror-anchor",
+                      label: "Mirror reflection is normal-first: incident and reflected angles match around the Guide Line, and the plane-mirror image is a virtual ghost position behind the surface.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "surface-anchor",
+                      label: "Mirror reflection is mainly surface-first, so the easiest safe rule is to read the angles from the panel face and only use the Guide Line as a later check.",
+                      feedback:
+                        "That would build the wrong angle reference into the anchor sentence.",
+                    },
+                    {
+                      value: "real-image-anchor",
+                      label: "A plane mirror forms its image by sending real reflected light behind the surface, so the dashed routes mainly help reveal the real beam crossing there.",
+                      feedback:
+                        "That would build the wrong image-status story into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right mirror rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m8-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Guide Line, surface angle, and ghost-image vocabulary board",
+                  scenario:
+                    "The crew keeps using surface angle, Guide-Line angle, real image, and ghost image as if they were all interchangeable labels.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-mirror",
+                      label: "Use Guide-Line angle for the reflection rule, surface angle only as a value that may need conversion, and ghost image for the virtual position found by backward extensions behind the panel.",
+                      feedback:
+                        "Exactly. That keeps each mirror term tied to its actual job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-surface-dominates",
+                      label: "Use surface angle as the main mirror angle because the panel face is what students can see directly, and treat the Guide Line as an optional helper.",
+                      feedback:
+                        "That would keep the wrong angle language alive.",
+                    },
+                    {
+                      value: "term-board-ghost-is-real",
+                      label: "Use ghost image as another name for the place where reflected light really gathers out of sight behind the mirror.",
+                      feedback:
+                        "That would scramble the status of the image completely.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the mirror terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m8-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they trust the wrong line",
+                  scenario:
+                    "The trainee analyst is about to quote the panel-surface angle directly and then explain the image as if real light traveled behind the panel.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "guide-line-then-status",
+                      label: "Notice the Guide Line first, convert any surface angle if needed, then apply the equal-angle rule and check whether each line is a real beam or a backward extension.",
+                      feedback:
+                        "Exactly. That gives the analyst the right mirror workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "surface-then-equal",
+                      label: "Start with the surface reading because it is already labeled, then assume the equal-angle rule works on that same line before worrying about anything else.",
+                      feedback:
+                        "That would send the analyst into the wrong-reference shortcut.",
+                    },
+                    {
+                      value: "image-then-angle",
+                      label: "Start by locating where the dashed lines meet, because once the image point is known the angle reference and beam status can be treated as secondary details.",
+                      feedback:
+                        "That would send the analyst into the wrong image-status story before the geometry is settled.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Guide-Line-first mirror method.",
+                  retryLabel: "That would send the analyst back into a mirror shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m8-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the surface-first and real-light-behind-panel shortcuts",
+                  scenario:
+                    "One crew member keeps trusting the panel surface as the mirror-angle reference, while another keeps treating the dashed image lines as real light behind the panel.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "mirror-trap-warning",
+                      label: "Do not trust the panel surface as the mirror rule line, and do not turn dashed extensions into real beams. Use the Guide Line for the angles and keep the image behind the panel virtual.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "angle-warning-only",
+                      label: "Warn mainly that students should keep their angle arithmetic tidy, because the surface-versus-Guide-Line difference rarely changes the real mirror story very much.",
+                      feedback:
+                        "That would leave the wrong-reference shortcut mostly alive.",
+                    },
+                    {
+                      value: "image-warning-only",
+                      label: "Warn mainly that students should draw the image more neatly, because once the picture is clear enough the dashed-versus-real distinction usually sorts itself out.",
+                      feedback:
+                        "That would leave the wrong beam-status shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps mirror geometry and image status separate.",
+                  retryLabel: "That warning would leave a main M8_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m8-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the ghost image ghostly",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture the mirror image without turning the construction lines into hidden real beams behind the panel.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "apparent-source-analogy",
+                      label: "Think of the mirror as making the light look as if it came from a matching point behind the panel, even though the real reflected light still travels in front of it to the eye.",
+                      feedback:
+                        "Exactly. That analogy supports the ghost-image idea without inventing real beams behind the mirror.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "hidden-lamp-analogy",
+                      label: "Think of a hidden lamp behind the panel sending out the reflected light, because the dashed image routes show where the real light must continue traveling.",
+                      feedback:
+                        "That would rebuild the wrong real-light-behind-panel story.",
+                    },
+                    {
+                      value: "surface-only-analogy",
+                      label: "Think only about a shiny surface turning the route, because the image idea is mostly decorative once the panel bounce is understood.",
+                      feedback:
+                        "That would underteach the image-status half of the lesson.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the ghost image without flattening the geometry.",
+                  retryLabel: "That analogy would pull the lesson away from the right mirror model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M7_L6") {
