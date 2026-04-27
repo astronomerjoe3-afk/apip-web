@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,418 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M3_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m3-l2-height-store-visual",
+                badge: "Height board",
+                title: "Freeze the Height Store factors before the room turns this into a height-only story",
+                scenario:
+                  "The Height Store display compares one pod across different deck levels, different loads, and different World Grip settings. A trainee keeps saying the tallest deck must settle everything by itself.",
+                prompt: "Pin the right note to the display.",
+                options: [
+                  {
+                    value: "mass-height-and-world-grip",
+                    label: "Read the board as a three-factor pattern: load, deck level, and World Grip all matter together, so the tallest deck alone never tells the whole store story.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored in the full mgh pattern instead of a height-only shortcut.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "height-alone-decides",
+                    label: "Treat Height Store as mainly a deck-level story, because once the pod is higher the mass and World Grip details do not change the main answer very much.",
+                    feedback:
+                      "That drops two of the three factors. The lesson is explicitly about keeping all three visible.",
+                  },
+                  {
+                    value: "moving-pod-only",
+                    label: "Assume the pod needs to be moving before it can really have Height Store, because being high without motion does not yet show any usable energy.",
+                    feedback:
+                      "A still pod can still hold Height Store. This lesson treats raised position in a field as enough.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now reads Height Store as a full three-factor comparison.",
+                retryLabel: "That note would let the room collapse the lesson into height alone.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m3-l2-module-lens",
+                badge: "Module lens",
+                title: "Lock the mgh rule before one factor quietly disappears",
+                scenario:
+                  "The Module 3 lens card is up, but the room is already starting to talk as if g is just background scenery once mass and height have been named.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "keep-all-three-factors-visible",
+                    label: "Post the rule that Height Store depends on m, g, and h together. If any one factor changes while the other two stay fixed, the store changes with it.",
+                    feedback:
+                      "Exactly. That protects the lesson from the common move of deleting g once the symbols appear.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "g-only-matters-between-worlds",
+                    label: "Say that g only matters in unusual cross-world questions, because on most questions students can safely think of Height Store as mass times height.",
+                    feedback:
+                      "That would teach the wrong habit. The lesson wants g kept visible even before students know whether worlds are being compared.",
+                  },
+                  {
+                    value: "use-formula-after-height-choice",
+                    label: "Tell students to choose the highest deck first and then use the formula only to confirm the obvious answer afterward.",
+                    feedback:
+                      "That would turn the formula into decoration. The reasoning has to compare all three factors before any shortcut claim is trusted.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps all three Height Store factors visible.",
+                retryLabel: "That rule would quietly erase one factor from the story.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m3-l2-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on the one-factor-at-a-time comparison",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare the biggest final height only, while another wants to calculate every case immediately without checking which factor actually changed.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "hold-two-factors-fixed",
+                    label: "Hold two factors fixed and change one at a time so the board shows exactly whether load, deck level, or World Grip caused the Height Store difference.",
+                    feedback:
+                      "Exactly. That is the comparison habit this lesson is trying to build before blind substitution starts.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "tallest-first",
+                    label: "Sort the cases by final deck level first, because the highest case will always have the biggest Height Store no matter what the other entries are.",
+                    feedback:
+                      "That would let height overrule mass and World Grip too early. The board is there to stop that shortcut.",
+                  },
+                  {
+                    value: "calculate-everything-first",
+                    label: "Ignore the structured comparison and calculate every case immediately, because the board only really matters if the numbers happen to tie.",
+                    feedback:
+                      "The board matters before the arithmetic. It tells you which factor changed and what proportional effect to expect.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares Height Store by isolating one factor at a time.",
+                retryLabel: "That plan would bury the comparison logic the board is meant to teach.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "reference level awareness") {
+                return {
+                  id: "m3-l2-reference-level",
+                  badge: "Reference desk",
+                  title: "Fix the wrong height before it reaches the formula line",
+                  scenario:
+                    "A trainee sees a pod rise from 2 m to 9 m and writes h = 9 m straight into the Height Store gain line because that is the final number they can see most clearly.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "use-height-change",
+                      label: "Use the height change relative to the chosen reference level. Here the gain uses 9 m - 2 m = 7 m, because the store change comes from the vertical change that actually happened.",
+                      feedback:
+                        "Exactly. That keeps the reference level active and stops final-height grabbing.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "use-final-height",
+                      label: "Use 9 m because the final deck level is what the pod ends up with, so that value should always enter the Height Store gain calculation directly.",
+                      feedback:
+                        "That skips the reference-level idea. The question is about gained store, so the height change matters.",
+                    },
+                    {
+                      value: "average-the-heights",
+                      label: "Average the start and finish heights first, because store gain depends on the middle of the lift path rather than on either endpoint alone.",
+                      feedback:
+                        "That is not the model here. Height Store gain tracks the change in position, not the midpoint.",
+                    },
+                  ],
+                  successLabel: "Correction sent. The crew now uses height change rather than grabbing the final height.",
+                  retryLabel: "That would keep the reference-level mistake alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "proportional check before substitution") {
+                return {
+                  id: "m3-l2-proportional-check",
+                  badge: "Pattern check",
+                  title: "Call the factor pattern before the numbers go in",
+                  scenario:
+                    "The team is about to substitute values, but the instructor wants one quick proportional check first. In the next comparison, mass stays fixed while World Grip doubles.",
+                  prompt: "Choose the note to send.",
+                  options: [
+                    {
+                      value: "world-grip-doubles-store",
+                      label: "If mass and height stay fixed, doubling World Grip doubles Height Store. Say that pattern first, then substitute numbers only if the question still needs them.",
+                      feedback:
+                        "Exactly. That turns mgh into a reasoning pattern instead of a button-press routine.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "world-grip-does-not-matter",
+                      label: "World Grip only changes the units around the answer, so the Height Store itself should stay the same while mass and height are fixed.",
+                      feedback:
+                        "World Grip is one of the actual factors. If it doubles while the others stay fixed, the store doubles too.",
+                    },
+                    {
+                      value: "world-grip-quadruples-store",
+                      label: "Doubling one factor should quadruple Height Store because energy relationships usually grow faster than the factor itself.",
+                      feedback:
+                        "Not here. Height Store is directly proportional to each single factor when the other two stay fixed.",
+                    },
+                  ],
+                  successLabel: "Pattern called correctly. The crew now checks the proportional story before substituting.",
+                  retryLabel: "That note would weaken the factor-by-factor reasoning habit.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m3-l2-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first Height Store misconception",
+                  scenario:
+                    "A trainee has written that Height Store depends only on height, and another has added that a still pod cannot really have it because nothing is moving yet.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "position-in-field-and-mgh",
+                      label: "Repair both ideas at once: Height Store depends on mass, World Grip, and height together, and a raised pod can hold that store even while standing still because position in a field is enough.",
+                      feedback:
+                        "Exactly. That fixes the missing-factor mistake and the 'motion required' mistake together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-only-repair",
+                      label: "Keep height as the main idea and just add that still pods can hold the store because high things are naturally more energetic than low things.",
+                      feedback:
+                        "That still leaves out mass and World Grip. The lesson needs the full three-factor pattern, not a polished height-only version.",
+                    },
+                    {
+                      value: "motion-only-repair",
+                      label: "Fix the note by saying the pod has hidden motion even when it looks still, so that hidden motion is what actually explains the stored energy.",
+                      feedback:
+                        "That changes the physics story completely. This lesson is about position in a gravitational field, not hidden motion.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps Height Store tied to position in a field and all three factors.",
+                  retryLabel: "That would leave the core misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m3-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Height Store rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner enters the lesson with the right anchor before the examples start.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "height-store-anchor",
+                      label: "Height Store is gravitational potential energy, and it grows with mass, World Grip, and height change together rather than with height alone.",
+                      feedback:
+                        "Exactly. That is the clean anchor this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-only-anchor",
+                      label: "Height Store is mainly about being on a higher deck, while the other symbols only help tidy up the exact answer after that idea is settled.",
+                      feedback:
+                        "That would put the main shortcut straight into the anchor sentence. The lesson is trying to prevent exactly that.",
+                    },
+                    {
+                      value: "motion-anchor",
+                      label: "Height Store is best understood as motion waiting to happen, so speed language is the safest way to explain it before the formula appears.",
+                      feedback:
+                        "That drags the lesson into the wrong model. This anchor needs position-in-a-field language, not speed language.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Height Store rule.",
+                  retryLabel: "That line would blur the lesson anchor.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m3-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Height Store vocabulary board",
+                  scenario:
+                    "The crew understands the picture, but the labels are drifting. You need the note that keeps the lesson words lined up with the real factors.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "mass-g-height-together",
+                      label: "Height Store means gravitational potential energy, and its main factor words are mass, gravitational field strength, and height change. In the mission language those are load, World Grip, and deck-level change.",
+                      feedback:
+                        "Exactly. That keeps the vocabulary tied to the actual three-factor story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-translation-only",
+                      label: "The safest vocabulary move is to translate everything back into height language, because the other factor names mostly duplicate what height already tells you.",
+                      feedback:
+                        "That would erase the factor structure. The three names matter because they do different jobs in the store story.",
+                    },
+                    {
+                      value: "g-is-background",
+                      label: "World Grip can stay off the vocabulary board for now, because students can add g later once they are stronger with the deck-level idea.",
+                      feedback:
+                        "Leaving World Grip off the board would reinforce the exact omission this lesson is trying to stop.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the factor language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m3-l2-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the glossary with the missing reference idea",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into the parts students forget when they start calculating.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "reference-level-and-height-change",
+                      label: "Reference level and height change belong on the second card, because store gain uses the vertical change that actually happened, not whichever final number looks tallest.",
+                      feedback:
+                        "Exactly. That completes the glossary with the missing calculation-language move.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "final-height-only-line",
+                      label: "The follow-up card should say that once the final deck is known, students can usually ignore reference level because the highest visible number is the safest one to use.",
+                      feedback:
+                        "That would rebuild the final-height shortcut instead of fixing it.",
+                    },
+                    {
+                      value: "g-only-changes-units-line",
+                      label: "The follow-up card should explain that World Grip mainly changes the unit story, while the real physical comparison still comes from mass and height.",
+                      feedback:
+                        "That would shrink World Grip into decoration. It is one of the real factors in the store itself.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the Height Store language model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m3-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before substitution starts",
+                  scenario:
+                    "The trainee analyst is about to substitute numbers into a formula before naming what the story is about or which factor is changing.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-story-and-factors-first",
+                      label: "Start by naming the story as position in a gravitational field, then name m, g, and h, decide whether the question is about value or gain, and only then substitute.",
+                      feedback:
+                        "Exactly. That gives the analyst a reasoning-first method instead of a symbol grab.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "substitute-then-interpret",
+                      label: "Start with the numbers because the correct formula will force the meaning to show up automatically once the arithmetic is done.",
+                      feedback:
+                        "That would invite blind substitution. The meaning has to be chosen before the numbers can be trusted.",
+                    },
+                    {
+                      value: "height-first-method",
+                      label: "Start by finding the largest height value on the page, because once that is known the remaining factors normally just scale the answer afterward.",
+                      feedback:
+                        "That puts the shortcut in charge. The lesson needs factor naming before any one value is allowed to dominate the reasoning.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a factor-first method.",
+                  retryLabel: "That instruction would send the analyst straight into formula grabbing.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m3-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the height-only shortcut",
+                  scenario:
+                    "One crew member keeps saying the word height already tells them enough, so the rest of the equation only tidies up the exact number afterward.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "height-alone-is-incomplete",
+                      label: "The word height points you toward the store family, but it does not finish the reasoning. Mass and World Grip still have to stay visible, and store gain may depend on height change rather than the final height alone.",
+                      feedback:
+                        "Exactly. That warning blocks both the missing-factor shortcut and the final-height shortcut together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "height-usually-enough",
+                      label: "Warn only that height is enough most of the time, but special world-comparison questions may occasionally need the other factors too.",
+                      feedback:
+                        "That would leave the main shortcut alive. The lesson wants students to keep all three factors visible by default.",
+                    },
+                    {
+                      value: "just-memorize-mgh",
+                      label: "Warn students not to worry about the words too much and simply memorize mgh, because correct symbol order is the safest protection against misunderstanding.",
+                      feedback:
+                        "Memorizing the symbol order without the factor story would not fix the misconception. The warning needs conceptual content, not just recall.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now resist the height-only shortcut.",
+                  retryLabel: "That warning would leave the main trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m3-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the shelf-world analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a heavier pod, a higher deck, or a stronger World Grip can each change Height Store without turning the lesson into a motion story.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "shelf-world-bridge",
+                      label: "Think of the pod on a shelf world: heavier load, higher shelf, or stronger World Grip all make the stored situation bigger. The pod does not need to be moving for the comparison to make sense.",
+                      feedback:
+                        "Exactly. That analogy keeps all three factors visible and still protects the position-in-a-field idea.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "launch-speed-bridge",
+                      label: "Think of Height Store like a launch speed waiting to happen, because the clearest picture is still one where the pod is secretly halfway into moving already.",
+                      feedback:
+                        "That would turn the analogy back into a motion story, which this lesson is trying to keep separate.",
+                    },
+                    {
+                      value: "highest-shelf-only-bridge",
+                      label: "Think only about the highest shelf, because once the pod is highest the other factors become small details that beginners can safely ignore at first.",
+                      feedback:
+                        "That would flatten the analogy into the exact shortcut we are trying to prevent.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the full Height Store pattern without collapsing into motion talk.",
+                  retryLabel: "That analogy would send the room back toward the wrong shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M3_L1") {
