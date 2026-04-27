@@ -190,10 +190,10 @@ function extractRepairNumber(text: string): number | null {
 }
 
 function detectDensityUnit(text: string): DensityUnit | null {
-  if (includesAny(text, [/kg\/m\^?3/, /kg\/m3/, /kg m\^-?3/, /kg per m\^?3/, /kg per m3/])) {
+  if (includesAny(text, [/kg\/m\^?3/, /kg\/m3/, /kg\/m³/, /kg m\^-?3/, /kg per m\^?3/, /kg per m3/, /kg per m³/])) {
     return "kg/m^3";
   }
-  if (includesAny(text, [/g\/cm\^?3/, /g\/cm3/, /g cm\^-?3/, /g per cm\^?3/, /g per cm3/])) {
+  if (includesAny(text, [/g\/cm\^?3/, /g\/cm3/, /g\/cm³/, /g cm\^-?3/, /g per cm\^?3/, /g per cm3/, /g per cm³/])) {
     return "g/cm^3";
   }
   return null;
@@ -846,7 +846,7 @@ export function misconceptionSummaryForContext({
     || Boolean(densityCorrect);
 
   if (isDensityCheck && densityAnswer && densityCorrect) {
-    const mentionsGramPerCentimetreCube = includesAny(source, [/g\/cm\^?3/, /g\/cm3/, /g per cm\^?3/, /g per cm3/]);
+    const mentionsGramPerCentimetreCube = includesAny(source, [/g\/cm\^?3/, /g\/cm3/, /g\/cm³/, /g per cm\^?3/, /g per cm3/, /g per cm³/]);
     const sameDisplayedUnit = densityAnswer.unit === densityCorrect.unit;
     const massOnlyConversionSlip =
       densityCorrect.unit === "kg/m^3"
@@ -864,15 +864,15 @@ export function misconceptionSummaryForContext({
     if (massOnlyConversionSlip) {
       return {
         tag: String(tag || "density_unit_scale_error"),
-        title: "This is a density conversion mistake, not a density-definition mistake",
-        diagnosis: "You converted the mass part down to kilograms, but density is mass per volume. The volume scale must change too, so the final density does not shrink to a tiny value.",
+        title: "This density was converted the wrong way",
+        diagnosis: `The answer ${displayRepairText(learnerAnswer)} is far too small because only the mass part was treated as changing. Density is mass per volume, so the whole ratio has to be converted together.`,
         repair: cleanCorrectionText(
           displayCorrectText,
           mentionsGramPerCentimetreCube
-            ? "You have treated the density as if it were only a mass conversion. If the value starts in g/cm^3, convert the whole ratio: 1 g/cm^3 = 1000 kg/m^3, so 1.5 g/cm^3 becomes 1500 kg/m^3, not 0.0015 kg/m^3."
+            ? `Treat the density as one full ratio: 1 g/cm^3 = 1000 kg/m^3. So 1.5 g/cm^3 becomes ${displayCorrectText}, not ${displayRepairText(learnerAnswer)}.`
             : `You wrote ${displayRepairText(learnerAnswer)}, which is what happens when the mass is converted but the per-volume scale is left behind. Keep the whole mass-per-volume ratio together when you convert.`,
         ),
-        noticeNext: "For density, do not convert just the number in front. Convert the whole unit ratio and remember that 1 g/cm^3 = 1000 kg/m^3.",
+        noticeNext: "For density, never convert just the number in front. Convert the whole unit ratio and remember that 1 g/cm^3 = 1000 kg/m^3.",
       };
     }
 
