@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M5_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m5-l4-pulse-board",
+                badge: "Pulse board",
+                title: "Keep the Pulse Level matched while the whole plaza total changes",
+                scenario:
+                  "The Same-Pulse board shows Plaza A and Plaza B holding the same Pulse Level, but Crowd B has many more particles. One trainee says matched pulse proves the same internal energy, while another says the larger crowd must be hotter.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "same-temperature-different-total",
+                    label: "Keep the Pulse Level story as an average-motion match: the temperatures can be the same while the larger crowd still has more total internal energy because more particles share that average motion.",
+                    feedback:
+                      "Exactly. That keeps temperature as an average reading and whole-system total as a separate question.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "same-pulse-same-total",
+                    label: "Treat matched Pulse Level as proof that both plazas must store the same total internal energy, because the pulse meter already tells you how much energy the whole crowd has.",
+                    feedback:
+                      "That collapses average and total into one number. Pulse Level does not count the whole-system total by itself.",
+                  },
+                  {
+                    value: "bigger-crowd-means-hotter",
+                    label: "Treat the larger crowd as automatically hotter, because a system with more total energy must always have a higher temperature reading than a smaller one.",
+                    feedback:
+                      "That would confuse total energy with temperature. A bigger crowd can have more total energy while keeping the same average temperature.",
+                  },
+                ],
+                successLabel: "Pinned. The room now keeps same pulse and same total as separate ideas.",
+                retryLabel: "That note would blur the average-versus-total split this lesson needs.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m5-l4-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the same-temperature-same-total shortcut",
+                  scenario:
+                    "A trainee has written that two plazas with the same Pulse Level must have the same internal energy, while another says a larger crowd must always read hotter than a smaller crowd.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-average-vs-total",
+                      label: "Repair both ideas together: temperature answers an average-particle question, so matched Pulse Level can stay the same while a larger crowd still has more total internal energy.",
+                      feedback:
+                        "Exactly. That restores the lesson split between average reading and whole-system total.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-pulse-proves-same-store",
+                      label: "Tell them the pulse meter is already a whole-system total meter, so matching it is enough to prove the internal energies are equal even if the crowd sizes differ.",
+                      feedback:
+                        "That keeps the main shortcut alive. Pulse Level is not the total internal-energy reading.",
+                    },
+                    {
+                      value: "bigger-crowd-must-read-hotter",
+                      label: "Tell them the larger crowd should always read hotter, because adding particles always raises the temperature before it raises anything else about the total system.",
+                      feedback:
+                        "That confuses system size with average motion. Bigger crowd size can raise total energy without raising the temperature.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now separates average temperature from total internal energy.",
+                  retryLabel: "That would leave the same-temperature shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m5-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Pulse Level rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop treating temperature like a hidden system-size meter.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "temperature-average-anchor",
+                      label: "Temperature is an average particle-motion reading, so the same temperature does not guarantee the same total internal energy.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "temperature-total-anchor",
+                      label: "Temperature is the quickest way to read the total internal energy of a whole system, so matching temperature means the totals are already matched too.",
+                      feedback:
+                        "That would build the main shortcut straight into the anchor sentence.",
+                    },
+                    {
+                      value: "crowd-size-controls-temperature",
+                      label: "Temperature mostly tells you how many particles are in the crowd, because larger systems naturally read hotter than smaller ones when they store more energy.",
+                      feedback:
+                        "That would point learners toward the wrong variable. Temperature is about average motion, not how many particles there are.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Pulse Level rule.",
+                  retryLabel: "That line would blur average reading and whole-system total.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m5-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Pulse Level vocabulary board",
+                  scenario:
+                    "The crew keeps swapping Temperature, Pulse Level, and internal energy as if they are interchangeable. You need the note that gives each term a clean job.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "average-vs-total-language",
+                      label: "Use Temperature or Pulse Level for the average-particle-motion reading. Use internal energy for the whole-system total, which can change when crowd size changes even if Pulse Level stays matched.",
+                      feedback:
+                        "Exactly. That keeps the average language and total language in the right places.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pulse-means-total-store",
+                      label: "Use Pulse Level as the short name for the whole-system energy store, because the average reading already includes everything that matters about the crowd.",
+                      feedback:
+                        "That would collapse the two key terms together and lose the main lesson split.",
+                    },
+                    {
+                      value: "internal-energy-means-hotness-only",
+                      label: "Use internal energy as another word for how hot the system is, because crowd size only changes how much space the particles take up, not the total energy story.",
+                      feedback:
+                        "That would erase the role of crowd size in the total-energy comparison the lesson is teaching.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Pulse Level language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m5-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they confuse average and total",
+                  scenario:
+                    "The trainee analyst is about to answer a same-temperature comparison by looking only at the pulse meter. You get one instruction to redirect them.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-average-then-crowd-size",
+                      label: "Start by asking what the pulse meter is averaging. Once the average motion is matched, check how many particles share that average before you decide anything about the whole-system total.",
+                      feedback:
+                        "Exactly. That gives the analyst the right two-step method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "temperature-settles-total",
+                      label: "Treat the temperature reading as enough on its own, because a same-temperature comparison already settles the total internal-energy question without any need to inspect crowd size.",
+                      feedback:
+                        "That would send the analyst directly into the lesson's main shortcut.",
+                    },
+                    {
+                      value: "count-particles-ignore-average",
+                      label: "Count the particles first and decide the bigger crowd must be hotter, because more particles always mean a larger temperature reading before any other comparison matters.",
+                      feedback:
+                        "That would confuse temperature with size. Crowd size helps with the total, not with the average reading by itself.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean average-then-total method.",
+                  retryLabel: "That would send the analyst back into the wrong shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m5-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the same-pulse-same-store shortcut",
+                  scenario:
+                    "One crew member keeps saying matched Pulse Level proves matched internal energy, while another keeps saying the bigger crowd must read hotter because it stores more total energy.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "average-reading-not-total-meter",
+                      label: "Do not use temperature as a hidden size meter. Pulse Level answers an average-motion question, so equal temperature can still sit alongside different whole-system totals when crowd size changes.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-temperature-means-same-energy-warning",
+                      label: "Warn only that learners should compare the pulse meter more carefully, because same temperature still usually means the same total unless the reading itself was taken badly.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson wants average and total separated on purpose.",
+                    },
+                    {
+                      value: "bigger-crowd-hotter-warning",
+                      label: "Warn mainly that a larger crowd is often hotter in practice, because total energy tends to drag the temperature reading upward before any other idea matters.",
+                      feedback:
+                        "That would keep the second shortcut alive. Bigger crowd size does not automatically mean higher temperature.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps Pulse Level and total store separate.",
+                  retryLabel: "That warning would leave the main lesson trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m5-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the same-pace, bigger-crowd analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why two plazas can share the same Pulse Level while one still stores more total energy.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "same-bounce-bigger-crowd",
+                      label: "Think of two dance floors where each dancer is bouncing with the same average pace, but one floor has many more dancers. The average pace can match while the bigger floor still has more total motion in the whole crowd.",
+                      feedback:
+                        "Exactly. That analogy keeps average and total doing different jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-speedometer-same-fuel",
+                      label: "Think of two vehicles showing the same speedometer reading, because matching speed proves the same total fuel and the same total energy story automatically.",
+                      feedback:
+                        "That analogy sneaks the shortcut back in by pretending one reading settles the whole-system total.",
+                    },
+                    {
+                      value: "bigger-classroom-is-louder",
+                      label: "Think of a bigger classroom as automatically louder, because once more people are present the average sound level must rise even if everyone is acting the same way as before.",
+                      feedback:
+                        "That analogy would wrongly turn crowd size into an automatic average increase.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports average-versus-total thinking instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right comparison.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M5_L3") {
