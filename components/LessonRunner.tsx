@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M6_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m6-l5-carrier-loop-board",
+                badge: "Loop board",
+                title: "Track the whole fluid loop, not just the rising side",
+                scenario:
+                  "The Carrier Loop board shows one warm parcel rising and one cool parcel returning. One trainee keeps explaining the scene with only the slogan 'heat rises,' while another talks as if the warm parcel floats up by itself and the rest of the fluid does not need to move.",
+                prompt: "Pin the note that keeps the model honest.",
+                options: [
+                  {
+                    value: "full-convection-loop-story",
+                    label: "Convection is a moving-fluid loop. Heating makes the warm parcel expand and become less dense, so it rises, while cooler fluid must move in or sink to complete the circulation.",
+                    feedback:
+                      "Exactly. That keeps density change and the full loop in the same explanation.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "heat-rises-alone",
+                    label: "Treat the scene as proof that heat itself rises, because once the lower region is warmed the upward arrow already contains the whole explanation students need.",
+                    feedback:
+                      "That would flatten the lesson into a slogan. The full loop and the density change still matter.",
+                  },
+                  {
+                    value: "warm-parcel-only-story",
+                    label: "Focus only on the warm parcel floating upward, because the cooler fluid movement is optional detail that does not really affect whether convection is happening.",
+                    feedback:
+                      "That would break the loop. The return flow is part of the convection story, not extra decoration.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads convection as a full moving-fluid loop.",
+                retryLabel: "That note would flatten the Carrier Loop story into the wrong shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m6-l5-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the slogan-only and missing-return-flow shortcuts",
+                  scenario:
+                    "A trainee has written that convection is just 'heat rises,' while another describes only the warm parcel going up and leaves out how the cooler fluid completes the circulation.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-loop-and-density-story",
+                      label: "Repair both ideas together: heating makes fluid less dense so it rises, but convection is the whole moving-fluid loop, so cooler fluid must sink or move in to complete the circulation.",
+                      feedback:
+                        "Exactly. That restores both the density cause and the full-loop structure.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "slogan-usually-enough",
+                      label: "Tell them the phrase 'heat rises' is usually enough for this lesson, because the full loop and the density detail mostly matter only in harder examples later on.",
+                      feedback:
+                        "That would keep the first shortcut alive. The lesson wants the full explanation now.",
+                    },
+                    {
+                      value: "upward-arrow-is-core-story",
+                      label: "Tell them the warm parcel is the main event and the return flow only helps with neat diagrams, because convection still works as an explanation even if the rest of the fluid is ignored.",
+                      feedback:
+                        "That would keep the second shortcut alive. The return flow is part of the process itself.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps the convection loop complete.",
+                  retryLabel: "That would leave a main Carrier Loop shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m6-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Carrier Loop rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so learners stop using slogans where a full convection explanation is needed.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "convection-anchor",
+                      label: "Convection is moving-fluid transfer: heating makes fluid less dense so it rises, and cooler fluid completes the full loop.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heat-rises-anchor",
+                      label: "Convection mainly means heat rises upward, so once the upward motion is named the rest of the fluid story can be safely left in the background.",
+                      feedback:
+                        "That would build the slogan shortcut directly into the anchor sentence.",
+                    },
+                    {
+                      value: "upward-only-anchor",
+                      label: "Convection mainly means warm fluid floats up, because the cooler returning fluid is just what is left over after the important part of the process has already happened.",
+                      feedback:
+                        "That would erase the full-loop structure from the lesson anchor.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right convection rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m6-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the convection vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up convection, density, warm parcel, and return flow as if they all name the same part of the transfer story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "convection-density-loop-language",
+                      label: "Use convection for the moving-fluid transfer route, lower density for why the warmed parcel rises, and return flow for the cooler fluid motion that closes the circulation.",
+                      feedback:
+                        "Exactly. That keeps each term tied to its own job in the lesson.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "convection-means-up-language",
+                      label: "Use convection mainly as another word for upward movement, because the rising part is what the learner really needs and the density or return-flow language only complicates things.",
+                      feedback:
+                        "That would flatten the vocabulary into the wrong single arrow.",
+                    },
+                    {
+                      value: "density-means-hotter-language",
+                      label: "Use density as another name for how hot the fluid is, because once a region warms up the density word can safely replace the temperature and motion story together.",
+                      feedback:
+                        "That would scramble cause, property, and motion into one term.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Carrier Loop language again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m6-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they stop at the upward arrow",
+                  scenario:
+                    "The trainee analyst is about to explain a heated fluid scene by pointing only at the upward motion and never checking what happens to the cooler fluid around it.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "trace-one-parcel-around-loop",
+                      label: "Track one parcel all the way around the loop. Explain the rising part with reduced density after heating, then look for the cooler return flow that completes the circulation.",
+                      feedback:
+                        "Exactly. That gives the analyst the right convection workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "upward-arrow-settles-story",
+                      label: "Start from the upward arrow only, because once warm fluid is seen rising the rest of the loop can be treated as background movement rather than part of the explanation.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main shortcut.",
+                    },
+                    {
+                      value: "temperature-only-reasoning",
+                      label: "Focus only on which region is hotter, because once the temperature contrast is known the fluid path no longer matters much to the explanation.",
+                      feedback:
+                        "That would erase the moving-fluid route the lesson is trying to build.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean full-loop method.",
+                  retryLabel: "That would send the analyst back into a flattened convection explanation.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m6-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the slogan and missing-return-flow shortcuts",
+                  scenario:
+                    "One crew member keeps saying 'heat rises' as if that completes the reasoning, while another keeps leaving out the cooler fluid that must move to close the loop.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "full-loop-warning",
+                      label: "Do not stop at the slogan or the upward arrow. Convection needs a density change in heated fluid and a full circulation with cooler return flow.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "slogan-with-detail-later-warning",
+                      label: "Warn mainly that the slogan should be used carefully, because it is still a strong enough main explanation and the loop detail can wait until later if time is short.",
+                      feedback:
+                        "That would leave the slogan shortcut mostly alive.",
+                    },
+                    {
+                      value: "rise-is-core-warning",
+                      label: "Warn mainly that students should focus on the warm fluid rising more accurately, because the downward or sideways return flow is not essential to deciding whether convection is taking place.",
+                      feedback:
+                        "That would leave the missing-return-flow shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the whole convection loop visible.",
+                  retryLabel: "That warning would leave a main Carrier Loop trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m6-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the loop conveyor analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture convection as a full circulation instead of a single rising arrow or a floating slogan.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "loop-conveyor-analogy",
+                      label: "Think of a loop conveyor where one heated section becomes lighter and rises, while the cooler section moves in to take its place and complete the circuit. The motion only makes sense when the whole loop is seen together.",
+                      feedback:
+                        "Exactly. That analogy keeps density change and the full circulation in one picture.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "balloon-only-analogy",
+                      label: "Think only of a hot balloon rising, because convection is really just the upward part and the rest of the fluid movement mainly distracts from the core idea.",
+                      feedback:
+                        "That analogy would rebuild the upward-only shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "heat-smoke-analogy",
+                      label: "Think of heat itself as smoke that naturally drifts upward, because the main goal is to picture the transfer moving up without worrying about how the cooler fluid responds.",
+                      feedback:
+                        "That analogy would rebuild the slogan shortcut and erase the return flow.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the full-loop convection story instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right Carrier Loop model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M6_L4") {
