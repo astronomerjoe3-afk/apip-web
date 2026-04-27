@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+                        lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,350 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M2_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m2-l5-balance-core-visual",
+                badge: "Balance deck",
+                title: "Freeze the cargo deck before the crew treats weight alone as the whole stability story",
+                scenario:
+                  "The Balance Core display shows the same cargo first centered, then shifted sideways. A trainee keeps saying the heavier craft must stay stable anyway because the total mass has not changed.",
+                prompt: "Pin the right instruction to the display.",
+                options: [
+                  {
+                    value: "balance-core-shifts-with-cargo",
+                    label: "Watch where the Balance Core line falls relative to the Footprint Zone. Moving the cargo shifts that line toward the moved mass even when the total mass stays the same.",
+                    feedback:
+                      "Exactly. That keeps stability tied to mass distribution and support geometry, not to weight alone.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "same-mass-same-stability",
+                    label: "Treat stability as fixed whenever the total mass is unchanged, because tipping should only depend on how heavy the craft is overall.",
+                    feedback:
+                      "That is the trap. The same mass can become less stable when the Balance Core moves toward the edge of the base.",
+                  },
+                  {
+                    value: "cargo-color-decides-balance",
+                    label: "Compare the color and type of cargo first, because materials should matter more than where the load sits on the deck.",
+                    feedback:
+                      "The lesson is not about material labels. It is about where the mass is placed relative to the support base.",
+                  },
+                ],
+                successLabel: "Pinned. The crew now checks Balance Core position before judging stability.",
+                retryLabel: "That note would leave weight doing too much of the thinking.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m2-l5-module-lens",
+                badge: "Law lens",
+                title: "Lock the stability rule before balance gets flattened into weight alone",
+                scenario:
+                  "The Module 2 lens card is up, and the room is starting to talk as if mass alone guarantees balance.",
+                prompt: "Choose the rule card to post.",
+                options: [
+                  {
+                    value: "balance-core-inside-footprint",
+                    label: "Stability depends on whether the Balance Core line stays inside the Footprint Zone. A wider base can improve stability even when the mass stays fixed.",
+                    feedback:
+                      "Exactly. That keeps the rule on geometry and support margin instead of on weight alone.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "heavier-means-safer",
+                    label: "Treat heavier craft as automatically safer, because more weight should always make tipping harder no matter how the mass is arranged.",
+                    feedback:
+                      "That drops the geometry story completely. A heavy craft can still tip if the Balance Core line leaves the base.",
+                  },
+                  {
+                    value: "base-width-does-not-matter",
+                    label: "Ignore base width once the craft is stationary, because only motion should change whether the craft tips or not.",
+                    feedback:
+                      "The Footprint Zone matters directly. Wider support can improve stability without changing motion at all.",
+                  },
+                ],
+                successLabel: "Posted. The lens card now keeps stability tied to Balance Core and Footprint Zone together.",
+                retryLabel: "That rule would blur the balance model.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 2) {
+              return {
+                id: "m2-l5-compare-board",
+                badge: "Compare board",
+                title: "Coach the crew on the right stability comparison",
+                scenario:
+                  "The comparison board is live. One crew member wants to compare total masses only, while another wants to compare base widths only and ignore where the cargo sits.",
+                prompt: "Choose the comparison plan to send.",
+                options: [
+                  {
+                    value: "compare-core-line-and-base",
+                    label: "First compare where the Balance Core line falls, then compare how much Footprint Zone margin is left on each side before you decide which craft is closer to tipping.",
+                    feedback:
+                      "Exactly. That keeps mass distribution and support width in the same comparison instead of isolating one easy number.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "compare-total-mass-only",
+                    label: "Compare only the total masses, because whichever craft is heavier should need a larger disturbance before it can tip.",
+                    feedback:
+                      "That would erase the center-of-mass story. Heavier does not automatically mean more stable.",
+                  },
+                  {
+                    value: "compare-base-width-only",
+                    label: "Compare only the base widths, because the widest base should always be the safest no matter where the load sits.",
+                    feedback:
+                      "Base width matters, but only together with where the Balance Core line falls relative to that base.",
+                  },
+                ],
+                successLabel: "Good plan. The crew now compares Balance Core position and support margin in the right order.",
+                retryLabel: "That plan would send the room into a shortcut comparison.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m2-l5-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the first stability note",
+                  scenario:
+                    "A trainee has written that heavier always means more stable, so the same craft cannot become easier to tip unless its mass changes. You need the correction that fixes that note before the lesson moves on.",
+                  prompt: "Choose the correction to send.",
+                  options: [
+                    {
+                      value: "stability-needs-distribution-and-base",
+                      label: "Stability depends on where the Balance Core sits relative to the Footprint Zone. Mass distribution and support width matter, not just the total weight.",
+                      feedback:
+                        "Exactly. That repairs the missing geometry and mass-distribution story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heavier-stays-more-stable",
+                      label: "Keep the note as it is, because once an object is heavy enough the balance details become secondary and tipping becomes much less likely automatically.",
+                      feedback:
+                        "That keeps the mistake alive. The same total mass can still tip if the Balance Core line moves toward or beyond the edge.",
+                    },
+                    {
+                      value: "only-base-width-matters",
+                      label: "Fix the note by saying base width is the only true stability factor, because center-of-mass ideas just restate the same support story in a harder way.",
+                      feedback:
+                        "That swings too far the other way. The Balance Core position still matters directly.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps stability tied to geometry as well as mass.",
+                  retryLabel: "That would leave the first stability misconception active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m2-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line stability rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so every learner starts the Balance Core lesson with the right anchor.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "stability-anchor",
+                      label: "A craft stays stable while the Balance Core line remains inside the Footprint Zone, so stability depends on mass distribution and support width together.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "weight-anchor",
+                      label: "Stability questions mainly compare total weight, so once the heaviest craft is known the safest craft is nearly fixed.",
+                      feedback:
+                        "That drops the geometry part of the story. The heaviest craft does not automatically have the best tipping margin.",
+                    },
+                    {
+                      value: "base-anchor-only",
+                      label: "Stability questions mainly compare base size, because center-of-mass position only matters after motion has already begun.",
+                      feedback:
+                        "The Balance Core position matters before any tipping begins. Base width alone is not enough.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right stability rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m2-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the stability vocabulary board",
+                  scenario:
+                    "The crew can see the tilting platform, but the labels are drifting. You need the note that keeps Balance Core, Footprint Zone, and stability doing separate jobs.",
+                  prompt: "Pick the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "balance-core-footprint-zone",
+                      label: "Balance Core is the center-of-mass idea in the model, Footprint Zone is the support base, and stability depends on whether the Balance Core line stays inside that support area.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary aligned with the real physics ideas.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "balance-core-is-weight",
+                      label: "Treat Balance Core as just another name for total weight, because the model term and the force term should both point to how heavy the craft is.",
+                      feedback:
+                        "That would collapse center of mass into weight. The Balance Core is about where the mass is effectively centered.",
+                    },
+                    {
+                      value: "footprint-zone-is-motion-path",
+                      label: "Treat the Footprint Zone as the route the craft will tip through, because it mainly shows the path the motion will follow after balance is lost.",
+                      feedback:
+                        "The Footprint Zone is the support area under the craft, not a motion path.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would blur the stability terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words continued") {
+                return {
+                  id: "m2-l5-technical-words-continued",
+                  badge: "Term relay",
+                  title: "Finish the tipping-threshold handoff",
+                  scenario:
+                    "A second crew member is writing the follow-up glossary card. It needs to extend the first note into what marks the instant tipping begins.",
+                  prompt: "Choose the follow-up line.",
+                  options: [
+                    {
+                      value: "weight-line-reaches-edge",
+                      label: "Tipping begins when the Balance Core line reaches or crosses the edge of the Footprint Zone, because the support margin has run out.",
+                      feedback:
+                        "Exactly. That completes the glossary with the key threshold idea learners usually need.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heaviest-load-tips-first",
+                      label: "Tipping begins when the cargo becomes heavy enough, because weight by itself eventually overwhelms any support shape underneath.",
+                      feedback:
+                        "That keeps the wrong cause story active. The threshold is about where the line of action falls relative to the base.",
+                    },
+                    {
+                      value: "tilt-angle-alone-decides",
+                      label: "Tipping begins as soon as the platform angle looks steep, because visible tilt is the only stability sign the crew needs to read.",
+                      feedback:
+                        "Visible tilt can mislead. The lesson needs the Balance Core line and support edge kept explicit.",
+                    },
+                  ],
+                  successLabel: "Glossary relay complete.",
+                  retryLabel: "That follow-up would distort the tipping-threshold idea.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m2-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the stability analyst",
+                  scenario:
+                    "The trainee analyst is about to answer from the heaviest craft alone. You get one coaching instruction before they commit.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "check-core-line-then-support-margin",
+                      label: "Mark where the Balance Core line falls first, then compare how much Footprint Zone margin remains before deciding which setup is safer.",
+                      feedback:
+                        "Exactly. That gives the analyst a stable balance method instead of a weight-only guess.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "weigh-first-geometry-later",
+                      label: "Start from the heaviest setup and only check the Balance Core position later if two craft seem close, because geometry is mainly a secondary detail.",
+                      feedback:
+                        "That would send the analyst into the shortcut this lesson is removing. Geometry is part of the first comparison, not a tie-breaker.",
+                    },
+                    {
+                      value: "tilt-first",
+                      label: "Guess which setup looks least stable first, then work backward to whichever base-and-cargo story matches that guess best.",
+                      feedback:
+                        "That reverses the reasoning. The stability judgment should come from Balance Core position and support margin, not from a first impression.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a stable Balance Core method.",
+                  retryLabel: "That instruction would send the analyst back into guesswork.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m2-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the heavier-means-safer shortcut",
+                  scenario:
+                    "One crew member keeps saying the heavier setup must always be the safer one. You need the warning that kills that shortcut cleanly.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "weight-alone-does-not-set-stability",
+                      label: "The heaviest setup does not automatically give the best stability. Tipping depends on where the Balance Core line falls and how much Footprint Zone is underneath it.",
+                      feedback:
+                        "Exactly. That one warning blocks the weight-only shortcut and restores the geometry story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "heavier-usually-wins",
+                      label: "The warning should say only that heavier setups are usually safer, because balance details only fine-tune the final ranking after weight is known.",
+                      feedback:
+                        "That would leave the shortcut alive. Balance Core position is not a fine-tuning detail; it is part of the core rule.",
+                    },
+                    {
+                      value: "base-width-alone-wins",
+                      label: "The safest warning is to ignore total weight and just choose the widest base, because the largest Footprint Zone always guarantees stability.",
+                      feedback:
+                        "That swings to the opposite mistake. Base width matters, but the Balance Core can still move toward the edge.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The crew will now keep geometry and mass distribution together in the stability story.",
+                  retryLabel: "That warning would leave the shortcut alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m2-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the tray-carry analogy",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the same load can feel steadier when it is lower and more centered over a wider base.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "tray-carry-bridge",
+                      label: "Think of carrying a tray: it feels steadier when the load stays centered over your hands and lower over a wider support, because the balance line has more margin before it slips past the edge.",
+                      feedback:
+                        "Exactly. That analogy supports the whole stability lesson without dropping the Balance Core and support story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-weight-same-tray-feel",
+                      label: "Think of any tray with the same total weight as basically equally stable, because once the load is heavy enough the hand position mainly changes comfort, not the physics.",
+                      feedback:
+                        "That would rebuild the weight-only shortcut. Where the load sits relative to the support still changes the tipping risk.",
+                    },
+                    {
+                      value: "widest-tray-always-safe",
+                      label: "Think only about the widest tray, because the broadest support always makes the balance story correct no matter where the load is stacked.",
+                      feedback:
+                        "That would blur base width with full stability. The analogy still needs the load position kept visible.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports Balance Core reasoning instead of flattening it into weight alone.",
+                  retryLabel: "That analogy would push the team off course.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M2_L4") {
