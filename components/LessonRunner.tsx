@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M7_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m7-l5-pace-zone-board",
+                badge: "Pace board",
+                title: "Keep source frequency fixed while the new zone changes the run",
+                scenario:
+                  "The Pace Zone board shows one front leaving a faster zone and entering a slower one. One trainee wants to say the source must have changed frequency because the fronts are now closer together, while another wants to treat the turn as a reflection from the boundary.",
+                prompt: "Pin the note that keeps the refraction story honest.",
+                options: [
+                  {
+                    value: "frequency-fixed-speed-and-wavelength-change",
+                    label: "Keep the source frequency fixed across the boundary. The new medium changes the wave speed, so the wavelength changes with it and the front turns as it enters the new zone.",
+                    feedback:
+                      "Exactly. That protects the source-medium split and the correct refraction story together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "frequency-changes-with-gap",
+                    label: "Use the smaller front spacing as proof that the source frequency dropped when the wave entered the new zone, because front gaps tell us what the source is doing right now.",
+                    feedback:
+                      "That swaps the jobs. The source keeps the frequency fixed; the new medium changes the speed and therefore the wavelength.",
+                  },
+                  {
+                    value: "boundary-bounce-story",
+                    label: "Treat the turn mainly as a reflection from the boundary, because any visible change in direction at an edge should first be read as a bounce before other effects are considered.",
+                    feedback:
+                      "That blurs refraction into reflection. Here the front turns because the new medium changes the speed.",
+                  },
+                ],
+                successLabel: "Pinned. The room now keeps the source, speed, and wavelength jobs separate.",
+                retryLabel: "That note would flatten refraction into the wrong boundary shortcut.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m7-l5-fix-ideas",
+                  badge: "Zone repair",
+                  title: "Repair the frequency-shift and reflection shortcuts",
+                  scenario:
+                    "One trainee has written that the source frequency changes at the boundary because the wavelength changes, while another says the front has simply bounced slightly as it hits the second zone.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-with-source-medium-split",
+                      label: "Repair both ideas together: keep the source frequency fixed, let the new medium change the speed, and then let the wavelength adjust with that new speed as the front refracts.",
+                      feedback:
+                        "Exactly. That puts the source-medium split back in place.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-frequency-priority",
+                      label: "Treat the wavelength change as the main clue that the source reset itself at the boundary, because the source timing must adapt once the front enters a new zone.",
+                      feedback:
+                        "That would keep the frequency shortcut alive. The source timing does not reset at the boundary here.",
+                    },
+                    {
+                      value: "repair-with-bounce-priority",
+                      label: "Explain the turn as a mild bounce first, because students understand boundary turns better when every path change is treated as a version of reflection.",
+                      feedback:
+                        "That would keep the reflection shortcut alive. This lesson needs a speed-change turn in a new medium.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now reads the new zone correctly.",
+                  retryLabel: "That would leave a main M7_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m7-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line refraction rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop mixing up frequency, speed, and boundary type when a wave enters a new zone.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "refraction-anchor",
+                      label: "Refraction is a speed-change turn in a new medium where the source frequency stays fixed and the wavelength changes with the new speed.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "frequency-anchor",
+                      label: "Refraction mainly means the source resets its frequency to match the new medium, while the wavelength mostly follows that new source setting.",
+                      feedback:
+                        "That would build the wrong source story into the anchor sentence.",
+                    },
+                    {
+                      value: "reflection-anchor",
+                      label: "Refraction is mostly a special reflection case where the path changes at a boundary, and speed details are only a later refinement.",
+                      feedback:
+                        "That would build the wrong boundary story into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right refraction rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m7-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the speed, frequency, and wavelength vocabulary board",
+                  scenario:
+                    "The crew keeps talking about speed, frequency, and wavelength as if any one of them can change first and force the other two to follow automatically.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-refraction",
+                      label: "Use frequency for the source-set launch rate, speed for how fast the pattern travels in the current medium, and wavelength for the front spacing that matches that speed at the fixed source frequency.",
+                      feedback:
+                        "Exactly. That keeps each quantity tied to its correct job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-frequency-leads",
+                      label: "Use frequency as the master quantity at every boundary, because once the wave changes medium the source and the new zone jointly decide the new timing together.",
+                      feedback:
+                        "That would blur the source-medium split the lesson needs.",
+                    },
+                    {
+                      value: "term-board-boundary-turn",
+                      label: "Use refraction mainly for any bent path at a boundary, because the turn itself matters more than which quantity changed to produce it.",
+                      feedback:
+                        "That would erase the speed-change mechanism the lesson is trying to protect.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the refraction terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m7-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they change the wrong quantity",
+                  scenario:
+                    "The trainee analyst is about to explain the new wavelength by saying the source changed its launch rate the moment the front crossed the boundary.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "ask-source-then-medium",
+                      label: "Ask what the source sets first, then ask what the new medium changes. Keep frequency with the source, then use the new zone speed to explain the new wavelength and turn.",
+                      feedback:
+                        "Exactly. That gives the analyst the right two-part refraction workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "ask-wavelength-first",
+                      label: "Start with the new front spacing only, because once the wavelength difference is described the source timing can usually be adjusted afterward to fit it.",
+                      feedback:
+                        "That would send the analyst into the frequency-change shortcut.",
+                    },
+                    {
+                      value: "ask-bounce-first",
+                      label: "Start by deciding how much the front bounced at the edge, because any turn at a boundary should be treated as a reflection-style path change before anything else.",
+                      feedback:
+                        "That would send the analyst into the wrong boundary model.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean source-versus-medium workflow.",
+                  retryLabel: "That would send the analyst back into a refraction shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m7-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the frequency-reset and reflection shortcuts",
+                  scenario:
+                    "One crew member keeps changing the source frequency every time the front enters a new zone, while another keeps calling every boundary turn a bounce.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "refraction-trap-warning",
+                      label: "Do not reset the source frequency at the boundary, and do not treat every turn as a bounce. In refraction the new medium changes the speed, the wavelength follows, and the source frequency stays fixed.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "frequency-warning-only",
+                      label: "Warn mainly that students should check wavelength carefully, because the source frequency usually sorts itself out once the spacing is measured well enough.",
+                      feedback:
+                        "That would leave the frequency-reset shortcut mostly alive.",
+                    },
+                    {
+                      value: "boundary-warning-only",
+                      label: "Warn mainly that students should name the boundary type more carefully, because the turn direction normally matters more than which quantity actually changed across the boundary.",
+                      feedback:
+                        "That would leave the source-medium shortcut alive and underteach the mechanism.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps refraction tied to a speed change in a new medium.",
+                  retryLabel: "That warning would leave a main M7_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m7-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps source and medium separate",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the front spacing changes in a new zone without making it sound like the source changed its rhythm.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "marching-tiles-analogy",
+                      label: "Think of a steady drummer keeping the same beat while a marching line steps onto slower tiles: the beat stays fixed, but the spacing and motion through the new ground change.",
+                      feedback:
+                        "Exactly. That analogy keeps the source rhythm fixed while the medium changes the travel story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "new-drummer-analogy",
+                      label: "Think of a second drummer taking over at the boundary, because a new zone should naturally create a new launch rhythm to match its own travel conditions.",
+                      feedback:
+                        "That would rebuild the frequency-reset shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "mirror-turn-analogy",
+                      label: "Think of a mirror bounce first, because any visible path change at an edge is best taught as reflection before speed details are layered on.",
+                      feedback:
+                        "That would rebuild the wrong boundary analogy for this lesson.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the refraction model instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right source-medium split.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M7_L4") {
