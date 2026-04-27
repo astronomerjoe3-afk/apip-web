@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+            lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M7_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m7-l2-mode-board",
+                badge: "Mode board",
+                title: "Classify the run from direction, not from page shape",
+                scenario:
+                  "Quest Control flips the same front between Cross-Sway Mode and Push-Squeeze Mode while the travel direction stays to the right. One trainee wants to call the first view transverse only because it looks up-down on the page, while another wants to call the second view longitudinal just because the compressions line up neatly.",
+                prompt: "Pin the note that keeps the classification honest.",
+                options: [
+                  {
+                    value: "compare-local-motion-with-travel",
+                    label: "Name the front travel direction first, then compare the local motion to it: perpendicular local motion means transverse, while parallel local motion means longitudinal.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored to the directional comparison instead of a page-layout shortcut.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "use-page-orientation-only",
+                    label: "Treat anything that looks up-down on the page as transverse and anything drawn left-right as longitudinal, because the page layout already tells the wave type.",
+                    feedback:
+                      "That would flatten the idea into a picture-reading shortcut. The classification comes from local motion versus propagation.",
+                  },
+                  {
+                    value: "front-shape-decides-mode",
+                    label: "Focus mainly on the front's shape, because once the wavefront is drawn clearly there is no real need to compare how one point in the medium moves.",
+                    feedback:
+                      "That would skip the key step. The wave type depends on the direction of the local motion relative to travel.",
+                  },
+                ],
+                successLabel: "Pinned. The room now classifies the wave from the right directional test.",
+                retryLabel: "That note would let a page-shape shortcut replace the real mode comparison.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m7-l2-fix-ideas",
+                  badge: "Mode repair",
+                  title: "Repair the page-shape shortcut",
+                  scenario:
+                    "A trainee has written that Cross-Sway Mode is transverse only because the pads move up-down on the screen, and that Push-Squeeze Mode is longitudinal because the rows look tighter together.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-by-direction-comparison",
+                      label: "Repair both claims by comparing each pad's local motion with the front travel direction. Perpendicular local motion gives a transverse wave, while parallel local motion gives a longitudinal wave.",
+                      feedback:
+                        "Exactly. That restores the actual classification rule.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-by-redrawing-page",
+                      label: "Repair the screen orientation instead, because once the diagrams are drawn more clearly the wave type will usually show itself without any directional comparison.",
+                      feedback:
+                        "That would keep the wrong shortcut alive. The lesson wants the directional test, not a cleaner picture.",
+                    },
+                    {
+                      value: "repair-by-front-only",
+                      label: "Repair the wavefront drawing first, because if the front is tracked carefully the local motion direction becomes a secondary detail that rarely changes the mode choice.",
+                      feedback:
+                        "That would bury the main idea. The local motion direction is exactly what settles the classification.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now classifies mode by direction rather than appearance.",
+                  retryLabel: "That would leave the main M7_L2 shortcut in place.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m7-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line wave-mode rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so new analysts stop confusing wave type with how a diagram happens to look.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "mode-is-relation",
+                      label: "Wave type is a relation between local motion and propagation: perpendicular gives transverse, while parallel gives longitudinal.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mode-is-picture-style",
+                      label: "Wave type is mostly a picture-style choice, so the safest rule is to name the mode from the diagram layout before worrying about the motion directions.",
+                      feedback:
+                        "That would replace the physics rule with a drawing shortcut.",
+                    },
+                    {
+                      value: "mode-is-front-style",
+                      label: "Wave type mainly depends on what the front looks like, so local particle motion is useful only after the mode has already been named from the pattern itself.",
+                      feedback:
+                        "That would invert the lesson. The local motion direction is part of the first decision, not a later detail.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right wave-mode rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of sharpening it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m7-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the transverse-versus-longitudinal vocabulary board",
+                  scenario:
+                    "The crew keeps using transverse, longitudinal, parallel, and perpendicular as if they were separate memorized labels instead of connected terms.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-link-note",
+                      label: "Link the terms directly: transverse means local motion perpendicular to propagation, while longitudinal means local motion parallel to propagation.",
+                      feedback:
+                        "Exactly. That keeps each term tied to the same directional comparison.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-layout-note",
+                      label: "Keep the technical words separate from the direction words, because transverse and longitudinal are mainly naming styles rather than exact direction relationships.",
+                      feedback:
+                        "That would break the core meaning. The direction relationship is the definition students need.",
+                    },
+                    {
+                      value: "term-front-note",
+                      label: "Use transverse and longitudinal mainly to name the wavefront style, because the local motion vocabulary only matters in more advanced diagrams.",
+                      feedback:
+                        "That would point the words at the wrong thing. The mode terms belong to local motion versus propagation.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the mode terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m7-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they classify from the picture alone",
+                  scenario:
+                    "The trainee analyst is about to call the mode from how the diagram looks on the page without naming the travel direction or checking how one point of the medium moves.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-travel-then-local",
+                      label: "Name the travel direction first. Then watch one point of the medium and compare its local motion to that direction before you classify the mode.",
+                      feedback:
+                        "Exactly. That gives the analyst the right step order.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "classify-from-screen-orientation",
+                      label: "Use the screen orientation first, because a well-drawn diagram usually shows the mode clearly enough before any detailed motion comparison is needed.",
+                      feedback:
+                        "That would send the analyst straight into the lesson's main shortcut.",
+                    },
+                    {
+                      value: "classify-from-front-spacing",
+                      label: "Focus on the front spacing first, because once the wavelength pattern is clear the local motion direction rarely changes the correct mode choice.",
+                      feedback:
+                        "That would watch the wrong feature. Mode choice comes from local motion versus propagation.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean direction-first workflow.",
+                  retryLabel: "That would send the analyst back into a picture-reading shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m7-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the page-label shortcut",
+                  scenario:
+                    "One crew member keeps naming wave type from whichever way the diagram is drawn, while another keeps ignoring the front travel direction completely.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "direction-warning",
+                      label: "Do not classify by page shape alone. Always compare the local motion with the propagation direction: perpendicular gives transverse, while parallel gives longitudinal.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "screen-warning-only",
+                      label: "Warn mainly that the diagram needs to be neat, because once the picture is clear enough the mode label usually becomes obvious without extra direction language.",
+                      feedback:
+                        "That would leave the main shortcut alive by still trusting appearance first.",
+                    },
+                    {
+                      value: "front-warning-only",
+                      label: "Warn mainly that students should follow the front carefully, because local motion direction is normally too fine-grained to be the first decision step.",
+                      feedback:
+                        "That would leave the other shortcut alive. Local motion direction is part of the first decision.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now classifies mode from direction rather than appearance.",
+                  retryLabel: "That warning would leave the main M7_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m7-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the directional test visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture the difference between a cross-sway pattern and a push-squeeze pattern without turning it into a page-layout memory trick.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "rope-and-spring-analogy",
+                      label: "Think of flicking a rope up and down while the ripple travels along it for transverse, and pushing a spring back and forth along its length while the compression travels for longitudinal.",
+                      feedback:
+                        "Exactly. That analogy keeps the directional comparison visible in both cases.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "poster-orientation-analogy",
+                      label: "Think of turning a poster from portrait to landscape, because wave type is mainly about which way the picture is presented to the viewer.",
+                      feedback:
+                        "That would rebuild the page-shape shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "same-front-only-analogy",
+                      label: "Think only about how the front looks while it moves, because the front pattern itself already contains everything needed to name the wave type.",
+                      feedback:
+                        "That would erase the role of local motion direction in the classification.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the mode test instead of flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right directional comparison.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M7_L1") {
