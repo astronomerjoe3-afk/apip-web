@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1"
         ? (() => {
+            if (lessonId === "F4_L1") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f4-l1-stream-board",
+                  badge: "Flow board",
+                  title: "Read the closed-loop stream",
+                  scenario:
+                    "The Flow-Grid room is comparing a complete loop with an open switch. One trainee keeps saying the lamp uses some current up, so the current after the lamp must be smaller than the current before it.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "same-current-one-route",
+                      label: "In one complete route, the same charge stream passes every checkpoint each second. The lamp transfers energy, but it does not use current up.",
+                      feedback:
+                        "Exactly. That keeps current as charge-flow rate while leaving the energy transfer job to the lamp.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "lamp-uses-current",
+                      label: "The lamp must reduce the current after it, because part of the current gets used to make light and heat.",
+                      feedback:
+                        "That is the trap. The lamp transfers energy from the moving charge, but the same current keeps circulating in a closed single loop.",
+                    },
+                    {
+                      value: "current-grows-after-lamp",
+                      label: "The current becomes larger after the lamp because the charge has already been energized by the source and now moves faster through the rest of the loop.",
+                      feedback:
+                        "Current is not a store that grows after the lamp. In this lesson, one complete loop keeps one common stream rate everywhere.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now read the circuit as one common charge stream around a complete route.",
+                  retryLabel: "That note would keep the 'current gets used up' mistake alive.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f4-l1-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first circuit note",
+                    scenario:
+                      "A trainee has written that a lamp uses up current, so less current leaves the lamp than enters it. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "current-is-flow-rate",
+                        label: "Current is the rate of charge flow. In one closed loop, the same charge keeps circulating, while the lamp transfers some electrical energy from that moving charge.",
+                        feedback:
+                          "Exactly. That correction separates charge flow from energy transfer, which is the main lesson move here.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "lamp-destroys-current",
+                        label: "A lamp uses current up because light and heat have to come from somewhere, so the current must be smaller after the lamp.",
+                        feedback:
+                          "That keeps the mistake alive. Light and heat come from transferred energy, not from charge disappearing out of the loop.",
+                      },
+                      {
+                        value: "battery-restores-current",
+                        label: "The current really does drop after the lamp, but the battery restores it later so the loop average stays the same.",
+                        feedback:
+                          "This lesson needs a stronger idea than that: in one complete loop, the same current passes every checkpoint the whole time the route stays closed.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The charge-flow story is now back in place.",
+                    retryLabel: "That would leave the used-up-current mistake in place.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f4-l1-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line current rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner starts the electricity sequence with the right current anchor.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "current-charge-per-second",
+                        label: "Current measures how much charge passes a point each second, and in one complete loop that same current passes every point in the route.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "current-is-energy-per-charge",
+                        label: "Current tells how much energy each charge carries, which is why a lamp changes the current as it transfers energy.",
+                        feedback:
+                          "That swaps current with potential difference reasoning. This lesson needs current kept as charge per second.",
+                      },
+                      {
+                        value: "current-stored-in-components",
+                        label: "Current is the amount of charge stored inside each component, so every component can hold a different current in the same loop.",
+                        feedback:
+                          "Current is not stored in components. The lesson needs current treated as a flow rate through the complete route.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean current anchor.",
+                    retryLabel: "That line would blur current back into stored charge or energy per charge.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f4-l1-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the circuit analyst",
+                    scenario:
+                      "A trainee analyst wants to jump straight into a number calculation without first deciding whether the question is about charge moved, time taken, current everywhere in a loop, or whether the loop is even complete.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "identify-loop-and-quantity",
+                        label: "First decide whether the route is closed or open, then name the quantity: charge moved, time, or current. Use I = Q / t only after the circuit story is clear.",
+                        feedback:
+                          "Exactly. That keeps the loop meaning and the current formula tied together before the arithmetic starts.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "always-divide-first",
+                        label: "Start with I = Q / t for every question, because once you have a current value the circuit meaning will take care of itself automatically.",
+                        feedback:
+                          "That is too mechanical. This lesson wants the closed-loop meaning secured before the formula is used.",
+                      },
+                      {
+                        value: "focus-on-lamp-first",
+                        label: "Start by deciding how much current the lamp uses up, then compare what is left in the rest of the loop.",
+                        feedback:
+                          "That instruction starts from the very misconception the lesson is trying to remove.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable current-first method.",
+                    retryLabel: "That instruction would push the analyst back toward formula guessing or used-up-current thinking.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f4-l1-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the used-up-current shortcut",
+                    scenario:
+                      "One crew member keeps saying that a bright lamp must remove some current from the loop because it transfers more energy. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "energy-not-current-used",
+                        label: "The lamp changes the electrical energy carried by the moving charge, not the amount of charge passing each second in the closed loop.",
+                        feedback:
+                          "Exactly. That warning protects the lesson's most important distinction.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "brighter-means-less-current-after",
+                        label: "A brighter lamp must leave less current after it, because stronger energy transfer always means less charge continues around the route.",
+                        feedback:
+                          "That keeps the trap alive. Energy transfer and current are not the same quantity.",
+                      },
+                      {
+                        value: "lamp-stores-current-briefly",
+                        label: "The current looks the same only because the lamp stores some current briefly and releases it again farther around the loop.",
+                        feedback:
+                          "This lesson does not need a hidden storage story. In one closed loop, the same current passes each checkpoint continuously.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now keeps charge flow separate from energy transfer.",
+                    retryLabel: "That warning would leave the used-up-current shortcut active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f4-l1-analogy",
+                    badge: "Story relay",
+                    title: "Choose the Flow-Grid bridge",
+                    scenario:
+                      "The team wants one analogy line that helps learners picture one shared stream rate moving around a complete route, while still leaving room for components to transfer energy without making charge disappear.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "one-stream-one-route",
+                        label: "Use the analogy by tracking one packet stream around one complete route: the stream rate stays the same at each checkpoint, while a device on the route can still take energy from the moving packets.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving both the current idea and the energy-transfer idea.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "stream-gets-smaller-after-device",
+                        label: "Use the analogy by showing the stream shrinking after a device, because that is the easiest way to picture the device using current up.",
+                        feedback:
+                          "That would build the exact misconception this lesson is trying to remove.",
+                      },
+                      {
+                        value: "route-only-matters-at-source",
+                        label: "Use the analogy mainly at the battery, because once the charge leaves the source the rest of the route no longer matters to the current story.",
+                        feedback:
+                          "The whole route matters. This lesson needs the complete closed loop kept visible from source to component and back again.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the current story without slipping into 'current gets used up.'",
+                    retryLabel: "That analogy would blur the one-stream closed-loop idea instead of clarifying it.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F3_L6") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
