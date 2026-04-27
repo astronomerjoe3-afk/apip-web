@@ -1775,8 +1775,216 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
     const scaffoldRoleplayCard =
-      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3"
+      lessonId === "M1_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4"
         ? (() => {
+            if (lessonId === "F3_L4") {
+              if (isMediaStep && activeMediaIndex === 0) {
+                return {
+                  id: "f3-l4-system-board",
+                  badge: "System board",
+                  title: "Read the whole-collision comparison",
+                  scenario:
+                    "The collision room is comparing a light second trolley with a heavier one joining the motion. One trainee keeps following only the incoming trolley and ignoring the whole-system total.",
+                  prompt: "Choose the note to pin on the display.",
+                  options: [
+                    {
+                      value: "whole-system-total",
+                      label: "Track the total momentum of the whole system before and after the collision. If more mass shares the same total momentum, the shared final speed can be smaller.",
+                      feedback:
+                        "Exactly. That keeps the lesson centered on the whole-system momentum total.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "incoming-object-keeps-momentum",
+                      label: "Follow only the incoming trolley, because conservation means each object keeps its own original momentum through the collision.",
+                      feedback:
+                        "That is the trap. Conservation belongs to the system total, not to each object keeping its old momentum unchanged.",
+                    },
+                    {
+                      value: "heavier-object-always-wins",
+                      label: "The heavier trolley automatically decides the final motion, so you do not need to total the momenta if one object is much heavier.",
+                      feedback:
+                        "Mass matters, but the lesson still needs the whole-system momentum total before and after the interaction.",
+                    },
+                  ],
+                  successLabel: "Pinned. The room can now read the collision as one system story.",
+                  retryLabel: "That note would keep the collision reasoning tied to one object instead of the total.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (isSectionStep && !activeSection?.worked_example) {
+                if (activeSectionHeading === "fix these ideas") {
+                  return {
+                    id: "f3-l4-fix-ideas",
+                    badge: "Signal repair",
+                    title: "Repair the first conservation note",
+                    scenario:
+                      "A trainee has written that conservation of momentum means every trolley keeps its own momentum unchanged. You need the correction that fixes that note before the lesson moves on.",
+                    prompt: "Choose the correction to send.",
+                    options: [
+                      {
+                        value: "system-total-stays-same",
+                        label: "Conservation of momentum is a whole-system rule: the total momentum before the interaction equals the total momentum after if external forces are negligible.",
+                        feedback:
+                          "Exactly. That correction keeps conservation attached to the system total instead of to each object separately.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "each-object-keeps-own-momentum",
+                        label: "Each object keeps its own momentum unchanged, which is why conservation works even when the objects collide.",
+                        feedback:
+                          "That keeps the mistake alive. Individual momenta can change a lot during the interaction while the system total stays the same.",
+                      },
+                      {
+                        value: "rest-object-means-no-conservation",
+                        label: "Conservation matters only when both objects are already moving, because a stationary object contributes no useful momentum information.",
+                        feedback:
+                          "A stationary object can still be part of the momentum total. Zero is still part of the system bookkeeping.",
+                      },
+                    ],
+                    successLabel: "Repair sent. The system-total idea is now clear.",
+                    retryLabel: "That would leave the one-object conservation mistake in place.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "core idea") {
+                  return {
+                    id: "f3-l4-core-idea",
+                    badge: "Ops summary",
+                    title: "Post the one-line momentum rule",
+                    scenario:
+                      "Control wants one sentence on the wall so every learner begins this lesson with the right momentum anchor.",
+                    prompt: "Choose the line to post.",
+                    options: [
+                      {
+                        value: "momentum-system-rule",
+                        label: "Momentum equals mass times velocity, and the total momentum of an isolated system stays constant through the interaction.",
+                        feedback:
+                          "Exactly. That is the clean anchor sentence this lesson needs.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "momentum-is-mass-only",
+                        label: "Momentum is mostly about mass, so direction and velocity are secondary details that can be added later if needed.",
+                        feedback:
+                          "That drops too much of the idea. Momentum needs mass, velocity, and direction from the start.",
+                      },
+                      {
+                        value: "collision-removes-momentum",
+                        label: "Collisions usually remove momentum, so the main job is to estimate how much is lost during the impact.",
+                        feedback:
+                          "This lesson wants the total momentum preserved for the isolated system. What changes is how that total is shared afterward.",
+                      },
+                    ],
+                    successLabel: "Rule posted. The room now has one clean system-momentum anchor.",
+                    retryLabel: "That line would blur the momentum idea at the start of the lesson.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "how to reason through it") {
+                  return {
+                    id: "f3-l4-how-to-reason",
+                    badge: "Guidance channel",
+                    title: "Coach the collision analyst",
+                    scenario:
+                      "A trainee analyst wants to jump straight to a final speed without first building the signed momentum total before the collision.",
+                    prompt: "Choose the coaching instruction.",
+                    options: [
+                      {
+                        value: "total-before-then-after",
+                        label: "First calculate the total momentum before the interaction with directions or signs included, then set that equal to the total after and solve for the unknown speed.",
+                        feedback:
+                          "Exactly. That method keeps the whole-system bookkeeping intact before the algebra starts.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "use-only-heaviest-object",
+                        label: "Start with the heaviest object only, because the largest mass usually sets the final collision speed closely enough.",
+                        feedback:
+                          "That shortcut breaks the system idea. Every momentum contribution belongs in the total before you solve.",
+                      },
+                      {
+                        value: "drop-direction-until-end",
+                        label: "Ignore direction until the very end, because momentum size matters more than sign while the equation is being built.",
+                        feedback:
+                          "Direction cannot be postponed like that. Opposite momenta can cancel in the total, so the sign or direction words matter from the start.",
+                      },
+                    ],
+                    successLabel: "Good coaching. The analyst now has a reliable collision method.",
+                    retryLabel: "That instruction would push the analyst back toward shortcut reasoning.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "common trap") {
+                  return {
+                    id: "f3-l4-common-trap",
+                    badge: "Trap alert",
+                    title: "Block the direction-drop shortcut",
+                    scenario:
+                      "One crew member keeps removing direction from every momentum term because they think only the sizes matter in collisions. You need the warning that shuts that shortcut down.",
+                    prompt: "Choose the trap warning.",
+                    options: [
+                      {
+                        value: "momentum-needs-direction",
+                        label: "Momentum is a vector, so opposite directions can cancel in the total. Keep direction or a sign convention all the way through the system calculation.",
+                        feedback:
+                          "Exactly. That warning protects one of the key ideas this lesson is building.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "direction-is-optional",
+                        label: "Direction is only a presentation detail, so you can ignore it until the final answer and still conserve momentum safely.",
+                        feedback:
+                          "That keeps the trap alive. Direction can change the total itself because opposite contributions can cancel.",
+                      },
+                      {
+                        value: "zero-total-means-no-motion",
+                        label: "If the total momentum is zero, that proves every object in the collision is motionless before and after the interaction.",
+                        feedback:
+                          "Zero total momentum can still come from equal and opposite moving objects. The total and the individual motions are not the same thing.",
+                      },
+                    ],
+                    successLabel: "Trap blocked. The room now keeps direction inside the momentum total.",
+                    retryLabel: "That warning would leave the direction-drop shortcut active.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+
+                if (activeSectionHeading === "analogy") {
+                  return {
+                    id: "f3-l4-analogy",
+                    badge: "Story relay",
+                    title: "Choose the collision-balance bridge",
+                    scenario:
+                      "The team wants one analogy line that keeps the focus on the whole-system balance and the signed contributions before any collision formula is used.",
+                    prompt: "Choose the analogy line to send.",
+                    options: [
+                      {
+                        value: "system-balance",
+                        label: "Use the analogy by asking which objects bring positive or negative motion tokens into the interaction and what total balance the whole system must keep before and after.",
+                        feedback:
+                          "Exactly. That keeps the analogy serving the system-total meaning instead of replacing it.",
+                        isCorrect: true,
+                      },
+                      {
+                        value: "winner-loser-story",
+                        label: "Use the analogy as a winner-versus-loser story, because the main job in a collision is to decide which object dominates the result.",
+                        feedback:
+                          "That would flatten the lesson into a contest story. The analogy needs to protect the total system balance instead.",
+                      },
+                      {
+                        value: "mass-only-story",
+                        label: "Use the analogy mainly to compare which object has more mass, because mass alone decides how momentum conservation will work out.",
+                        feedback:
+                          "Mass matters, but the analogy still has to keep speed, direction, and whole-system total in play.",
+                      },
+                    ],
+                    successLabel: "Analogy chosen. It supports the system-balance story without flattening the collision into a winner-loser shortcut.",
+                    retryLabel: "That analogy would blur the momentum-conservation story instead of clarifying it.",
+                  } satisfies ScaffoldRoleplayCard;
+                }
+              }
+            }
+
             if (lessonId === "F3_L3") {
               if (isMediaStep && activeMediaIndex === 0) {
                 return {
