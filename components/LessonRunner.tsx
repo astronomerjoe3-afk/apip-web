@@ -1876,6 +1876,7 @@ export default function LessonRunner({
         lessonId === "A3_L4" ||
         lessonId === "A3_L5" ||
         lessonId === "A3_L6" ||
+        lessonId === "A4_L1" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9132,6 +9133,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A4_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a4-l1-vector-rig",
+                badge: "Vector rig",
+                title: "Resolve the diagonal force before you claim balance",
+                scenario:
+                  "The vector rig shows one angled force and two axis forces trying to steady the system. One trainee wants to judge equilibrium from the picture alone, another counts arrows instead of checking resultants, and a third forgets that the diagonal force must be split into components before any clean balance claim is made.",
+                prompt: "Pin the note that keeps the balance model accurate.",
+                options: [
+                  {
+                    value: "resolve-then-check-resultant-note",
+                    label: "Resolve the diagonal force into horizontal and vertical components first, compare those components on shared axes, and only then judge equilibrium from the resultant.",
+                    feedback:
+                      "Exactly. That keeps component balance and resultant language in the right order.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "picture-balance-note",
+                    label: "Judge the balance mainly from how symmetric the arrows look, because once the diagram seems visually even the component sums usually become a secondary detail.",
+                    feedback:
+                      "That would rebuild the picture-only shortcut.",
+                  },
+                  {
+                    value: "arrow-count-note",
+                    label: "Judge the balance mainly by matching the number of arrows in opposite directions, because once the force count looks even the resultant is usually close enough for equilibrium.",
+                    feedback:
+                      "That would rebuild the arrow-count shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The rig now reads diagonal balance through components and resultant checks.",
+                retryLabel: "That note would leave a main A4_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a4-l1-fix-ideas",
+                  badge: "Rig repair",
+                  title: "Repair the picture-only and arrow-count shortcuts",
+                  scenario:
+                    "One trainee keeps claiming the rig is balanced because the diagram looks neat, while another keeps using arrow count as the main test instead of resolving the diagonal force and checking component sums.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-components-before-equilibrium",
+                      label: "Repair both habits together: split the diagonal force into components, compare horizontal and vertical sums on the chosen axes, and only then decide whether the resultant is zero.",
+                      feedback:
+                        "Exactly. That restores the right equilibrium workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-visual-neatness-first",
+                      label: "Repair the confusion by improving the symmetry of the sketch first, because once students see a tidier force picture the component logic usually becomes easier later.",
+                      feedback:
+                        "That would keep the picture-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-arrow-opposition-first",
+                      label: "Repair the confusion by matching opposite arrow counts first, because once students see that forces come in opposing directions the resultant idea usually becomes easier later.",
+                      feedback:
+                        "That would keep the arrow-count shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now tests balance component by component.",
+                  retryLabel: "That would leave a main A4_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a4-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line vector-equilibrium rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop calling diagonal-force systems balanced before the axis story has even been checked.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "a4-l1-anchor",
+                      label: "Vector equilibrium is strongest when forces are resolved and compared component by component.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "appearance-anchor",
+                      label: "The main idea is mostly that balanced diagrams look visually even, because once the arrows seem tidy the component details usually become secondary.",
+                      feedback:
+                        "That would rebuild the picture-only shortcut.",
+                    },
+                    {
+                      value: "arrow-count-anchor",
+                      label: "The main idea is mostly that opposite force arrows should come in matching numbers, because once the count looks fair the resultant check usually becomes secondary.",
+                      feedback:
+                        "That would flatten equilibrium into the wrong shortcut.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right vector-equilibrium rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a4-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the vector-equilibrium vocabulary board",
+                  scenario:
+                    "The crew keeps mixing vector, component, resultant, equilibrium, and balance until every answer sounds like one vague claim that the arrows somehow cancel.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a4-l1",
+                      label: "Use vector for a quantity with size and direction, component for the part on a chosen axis, resultant for the combined effect, and equilibrium for the zero-resultant case after the axis sums have been checked.",
+                      feedback:
+                        "Exactly. That keeps the vector-equilibrium terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-balance-does-most",
+                      label: "Use balance as the main word for almost the whole topic, because once students know the system is balanced the vector and resultant labels usually matter less.",
+                      feedback:
+                        "That would scramble the terms into a vague balance-only story.",
+                    },
+                    {
+                      value: "term-board-arrow-does-most",
+                      label: "Use arrow as the main word for almost the whole topic, because once students track the arrows the component and resultant labels usually become secondary.",
+                      feedback:
+                        "That would weaken the axis-based reasoning the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the vector-equilibrium terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a4-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call equilibrium",
+                  scenario:
+                    "The trainee analyst is about to announce that the rig is balanced before resolving the angled force or checking what the horizontal and vertical sums say.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "axes-then-components-then-resultant",
+                      label: "Start by choosing the axes, then resolve the diagonal force, compare the component sums on each axis, and only afterward decide whether the resultant is zero.",
+                      feedback:
+                        "Exactly. That gives the analyst the right equilibrium workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "judge-shape-first",
+                      label: "Start from the overall look of the force picture, because once the arrangement seems visually balanced the component sums usually become mostly obvious.",
+                      feedback:
+                        "That would send the analyst back into the picture-only shortcut.",
+                    },
+                    {
+                      value: "count-opposites-first",
+                      label: "Start by counting how many arrows point each way, because once the opposing forces look numerically fair the resultant story usually becomes mostly obvious.",
+                      feedback:
+                        "That would send the analyst back into the arrow-count shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean component-first balance method.",
+                  retryLabel: "That would send the analyst back into a A4_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a4-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the picture-only and arrow-count shortcuts",
+                  scenario:
+                    "One crew member keeps reading balance from the appearance of the rig, while another keeps treating matched arrow counts like enough evidence for equilibrium.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "vector-trap-warning",
+                      label: "Do not trust the picture alone and do not trust arrow count alone. Resolve diagonal forces, compare components on the chosen axes, and then test whether the resultant is zero.",
+                      feedback:
+                        "Exactly. That warning blocks the main A4_L1 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "picture-warning-only",
+                      label: "Warn mainly against judging from the sketch, because once students stop that they usually stop using arrow count as the main test on their own.",
+                      feedback:
+                        "That would leave the arrow-count shortcut too alive.",
+                    },
+                    {
+                      value: "count-warning-only",
+                      label: "Warn mainly against matching arrow counts, because once students stop that they usually read the diagonal force picture correctly on their own.",
+                      feedback:
+                        "That would leave the picture-only shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps components and resultants in the right order.",
+                  retryLabel: "That warning would leave a main A4_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a4-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the axis story visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners feel why one diagonal pull must be split into separate axis effects before anyone decides the whole rig is balanced.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "crate-rope-analogy",
+                      label: "Think of one slanted rope tugging a crate: part of the tug pulls sideways and part pulls upward, so you have to compare those separate pushes before you can tell whether the crate is truly balanced.",
+                      feedback:
+                        "Exactly. That keeps the axis story visible without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "neat-picture-analogy",
+                      label: "Think of the rig mainly like a tidy poster layout, because once the lines look evenly arranged the hidden balance details usually matter less.",
+                      feedback:
+                        "That would rebuild the picture-only shortcut.",
+                    },
+                    {
+                      value: "vote-count-analogy",
+                      label: "Think of the forces mainly like votes on opposite sides, because once the count seems fair the detailed strength and direction story usually matters less.",
+                      feedback:
+                        "That would rebuild the arrow-count shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the component story visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right vector-equilibrium model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A3_L6") {
