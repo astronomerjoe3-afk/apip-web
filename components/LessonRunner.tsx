@@ -1867,6 +1867,7 @@ export default function LessonRunner({
         lessonId === "A2_L1" ||
         lessonId === "A2_L2" ||
         lessonId === "A2_L3" ||
+        lessonId === "A2_L4" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9123,6 +9124,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A2_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a2-l4-excitation-ionisation",
+                badge: "Escape ladder",
+                title: "Do not treat ionisation as just a bigger ordinary jump",
+                scenario:
+                  "The excitation-versus-ionisation board shows one packet that lands the electron on a higher bound rung and a larger packet that pushes it past the top escape threshold. One trainee thinks ionisation is just a stronger version of excitation, another forgets that the electron remains bound after excitation, and a third ignores the start of the continuum above the threshold.",
+                prompt: "Pin the note that keeps the ladder model accurate.",
+                options: [
+                  {
+                    value: "excitation-vs-ionisation-note",
+                    label: "Excitation leaves the electron on a higher allowed bound state, while ionisation frees it completely above the escape threshold where the continuum begins.",
+                    feedback:
+                      "Exactly. That keeps bound jumps, escape, and continuum in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "bigger-jump-note",
+                    label: "Ionisation is mainly just a bigger excitation jump, because both processes simply move the electron upward and differ mostly by size words.",
+                    feedback:
+                      "That would rebuild the bigger-jump shortcut.",
+                  },
+                  {
+                    value: "excited-means-free-note",
+                    label: "Once the electron reaches an excited state it is basically free enough that the distinction from ionisation no longer matters very much.",
+                    feedback:
+                      "That would erase the bound-versus-free difference the lesson needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now treats excitation and ionisation as distinct final-state stories.",
+                retryLabel: "That note would leave a main A2_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a2-l4-fix-ideas",
+                  badge: "Escape repair",
+                  title: "Repair the bigger-jump shortcut",
+                  scenario:
+                    "One trainee keeps saying ionisation is just a larger excitation, while another keeps talking as if every excited electron is already basically detached from the atom anyway.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-bound-vs-free-model",
+                      label: "Repair both habits together: excitation ends on an allowed bound level, ionisation crosses the escape threshold and leaves the electron free, and the continuum starts above that threshold.",
+                      feedback:
+                        "Exactly. That restores the right final-state model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-more-energy-first",
+                      label: "Repair the confusion by emphasizing that ionisation uses more energy, because once students accept the bigger packet they usually understand the rest of the distinction for themselves.",
+                      feedback:
+                        "That would keep the size-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-excited-state-only",
+                      label: "Repair the confusion by focusing on excited states first, because once students trust those levels the distinction from ionisation usually becomes secondary.",
+                      feedback:
+                        "That would leave the free-electron threshold underdeveloped.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps bound and free endings clearly separated.",
+                  retryLabel: "That would leave a main A2_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a2-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line escape rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop describing ionisation like an especially energetic ordinary transition.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "escape-anchor",
+                      label: "Ionisation is a distinct threshold beyond excitation, not just a stronger ordinary jump.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "size-anchor",
+                      label: "The main idea is mostly that ionisation just needs more energy than excitation, because the final-state distinction usually matters less than the packet size.",
+                      feedback:
+                        "That line rebuilds the size-only shortcut.",
+                    },
+                    {
+                      value: "excited-anchor-only",
+                      label: "The main idea is mostly about recognizing excited states, because once students know those higher levels the ionisation story usually becomes secondary.",
+                      feedback:
+                        "That line misses the escape-threshold rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right escape rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a2-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the excitation and ionisation vocabulary board",
+                  scenario:
+                    "The crew keeps mixing excited state, ionisation threshold, continuum, bound electron, and free electron until every answer sounds like one vague 'higher energy means higher state' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a2-l4",
+                      label: "Use excited state for a higher bound level, ionisation threshold for the escape boundary, continuum for the free-electron region above that boundary, and free electron for the ionised outcome.",
+                      feedback:
+                        "Exactly. That keeps the escape-ladder terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-higher-state-does-most",
+                      label: "Use higher state as the main phrase for almost the whole topic, because once students know the electron ends up with more energy the exact bound-versus-free language usually becomes secondary.",
+                      feedback:
+                        "That would hard-wire the bigger-jump shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-threshold-does-most",
+                      label: "Use threshold as the main word for almost the whole topic, because once students know there is a top boundary the excited-state language usually matters less.",
+                      feedback:
+                        "That would weaken the bound-jump side of the lesson too much.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the escape-ladder terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a2-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call it ionisation",
+                  scenario:
+                    "The trainee analyst is about to label the outcome from packet size words alone without first checking whether the electron ends on a bound level or crosses into the free region above the threshold.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "check-final-state-and-threshold",
+                      label: "Start by checking whether the packet lands the electron on an allowed bound level or pushes it past the escape threshold, then use that final state to decide between excitation and ionisation.",
+                      feedback:
+                        "Exactly. That gives the analyst the right excitation-versus-ionisation method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bigger-packet-means-ionisation",
+                      label: "Start from which packet looks larger, because once the photon is clearly more energetic it is usually safe to treat the outcome as ionisation.",
+                      feedback:
+                        "That would send the analyst back into the size-only shortcut.",
+                    },
+                    {
+                      value: "bound-level-first-then-ignore-threshold",
+                      label: "Start by matching the nearest excited level first, because once students can see a possible rung the distinction from ionisation usually becomes less important.",
+                      feedback:
+                        "That would send the analyst back into the bound-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean escape-threshold method.",
+                  retryLabel: "That would send the analyst back into a A2_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a2-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the stronger-jump shortcut",
+                  scenario:
+                    "One crew member keeps treating ionisation like an overpowered excitation jump, while another keeps forgetting that excitation still leaves the electron bound inside the atom.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "escape-trap-warning",
+                      label: "Do not treat ionisation as merely a bigger ordinary jump. Excitation stays bound on the ladder, while ionisation crosses the escape threshold into the continuum.",
+                      feedback:
+                        "Exactly. That warning blocks the main A2_L4 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "size-warning-only",
+                      label: "Warn mainly against the size-language habit, because once students stop saying 'bigger jump' they usually remember the bound-versus-free difference on their own.",
+                      feedback:
+                        "That would leave the bound-state confusion too alive.",
+                    },
+                    {
+                      value: "bound-warning-only",
+                      label: "Warn mainly that excitation stays bound, because once students remember that they usually stop describing ionisation as just a stronger jump on their own.",
+                      feedback:
+                        "That would leave the size-only shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps ordinary jumps and escape events distinct.",
+                  retryLabel: "That warning would leave a main A2_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a2-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps bound and free outcomes separate",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why excitation and ionisation are not just two sizes of the same jump.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "ladder-vs-rooftop-analogy",
+                      label: "Think of the atom like climbing inside a building: excitation moves you to a higher floor but keeps you inside, while ionisation takes you out through the rooftop boundary into open air.",
+                      feedback:
+                        "Exactly. That keeps bound and free outcomes separate without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "taller-step-analogy",
+                      label: "Think of ionisation mainly like taking a taller step on the same staircase, because the main difference is just how big the rise is.",
+                      feedback:
+                        "That would rebuild the stronger-jump shortcut.",
+                    },
+                    {
+                      value: "higher-floor-analogy",
+                      label: "Think of ionisation mainly like reaching a very high floor, because once the electron is high enough the inside-versus-outside difference usually matters less.",
+                      feedback:
+                        "That would erase the bound-versus-free distinction the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the escape-threshold picture intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right excitation-versus-ionisation model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A2_L3") {
