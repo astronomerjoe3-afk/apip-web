@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M11_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m11-l2-same-badge-board",
+                badge: "Isotope board",
+                title: "Check proton number first, then let neutron change do the isotope work",
+                scenario:
+                  "The Same-badge isotope lab compares two nuclei with the same proton count but different neutron counts. One trainee keeps renaming the element when the mass number changes, another treats isotope stability as if it decides the element name, and a third blurs neutron change into the general identity story instead of the isotope story.",
+                prompt: "Pin the note that keeps the isotope story accurate.",
+                options: [
+                  {
+                    value: "same-protons-isotopes-note",
+                    label: "Same proton count means the same element. Different neutron counts create different isotopes, so the mass number can change while the element stays the same, and stability is a separate question from identity.",
+                    feedback:
+                      "Exactly. That keeps identity, isotope difference, and stability in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "mass-renames-element-note",
+                    label: "Treat a new mass number as a new element label, because once the total nucleus count changes the atom should no longer be considered part of the same element family.",
+                    feedback:
+                      "That would rebuild the wrong mass-renames-element shortcut.",
+                  },
+                  {
+                    value: "stability-decides-identity-note",
+                    label: "Treat the more stable nucleus as the real element version, because stability is the best clue for deciding whether two nuclei should really count as the same type of atom.",
+                    feedback:
+                      "That would mix stability into the wrong identity job.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads same proton count as same element and neutron change as the isotope move.",
+                retryLabel: "That note would leave a main M11_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m11-l2-fix-ideas",
+                  badge: "Isotope repair",
+                  title: "Repair the mass-renames-element and stability-mixes-identity shortcuts",
+                  scenario:
+                    "One trainee still changes the element name when the mass number changes, while another keeps using isotope stability as if it decides whether two nuclei belong to the same element.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-protons-neutrons-stability",
+                      label: "Repair both ideas together: proton number answers the identity question, neutron change answers the isotope question, and stability is a separate comparison you make only after the isotope family is identified.",
+                      feedback:
+                        "Exactly. That restores the right isotope reasoning order.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-mass-first",
+                      label: "Repair the confusion by saying mass number should still be checked first, because the easiest way to tell whether two nuclei are meaningfully different is to start from the total nucleon count.",
+                      feedback:
+                        "That would keep the wrong mass-first identity shortcut alive.",
+                    },
+                    {
+                      value: "repair-with-stability-first",
+                      label: "Repair the confusion by saying stability is the best first filter, because once students know which nucleus is more stable they usually become more careful about how they compare the rest.",
+                      feedback:
+                        "That would keep the wrong stability-first identity shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now reads isotope families in the right order.",
+                  retryLabel: "That would leave a main M11_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m11-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line isotope rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop using mass number or stability to rename the element.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "isotope-anchor",
+                      label: "Isotopes have the same proton number but different neutron numbers. The mass number can change while the element stays the same, and stability can differ between isotopes of that same element.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mass-anchor",
+                      label: "The main idea is that a changed mass number usually means a changed element, because the total nucleus count is the strongest label for comparing atoms.",
+                      feedback:
+                        "That would build the wrong mass-renames-element shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "stability-anchor",
+                      label: "The main idea is that isotope stability tells you which nucleus really counts as the element's true form, because identity and stability are closely tied together in practice.",
+                      feedback:
+                        "That would build the wrong stability-sets-identity shortcut into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right isotope rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m11-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the isotope vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up proton number, neutron number, isotope, mass number, and stability until every difference between two nuclei sounds like a new element with a new risk level.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-isotope-family",
+                      label: "Use proton number for the shared element family, neutron number for the isotope difference, mass number for the new nucleus total, and stability for a later comparison that does not rename the element.",
+                      feedback:
+                        "Exactly. That keeps the isotope terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-total-first",
+                      label: "Use mass number as the main isotope term, because students usually understand the comparison faster when they start with the biggest total and let the smaller counts explain it afterward.",
+                      feedback:
+                        "That would hard-wire the wrong total-first shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-stability-name",
+                      label: "Use stability as part of the isotope name itself, because once students know which version is safer or less stable the rest of the comparison usually becomes clearer.",
+                      feedback:
+                        "That would hard-wire the wrong stability-name shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the isotope terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m11-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare the nuclei",
+                  scenario:
+                    "The trainee analyst is about to compare the two nuclei by whichever number looks biggest or by whichever one seems more stable, instead of anchoring the comparison in proton number first.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "protons-first-then-neutrons-then-stability",
+                      label: "Start with proton number to decide whether the nuclei belong to the same element, then compare neutron count to identify the isotope difference, and only after that compare stability if the task asks for it.",
+                      feedback:
+                        "Exactly. That gives the analyst the right isotope-reading order.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mass-first",
+                      label: "Start with mass number, because the biggest visible difference usually gives the fastest clue about whether two nuclei should really be treated as the same thing.",
+                      feedback:
+                        "That would send the analyst back into the wrong mass-first shortcut.",
+                    },
+                    {
+                      value: "stability-first",
+                      label: "Start with stability, because once the safer versus less-stable comparison is clear students can usually infer the family relationship between the nuclei afterward.",
+                      feedback:
+                        "That would send the analyst into the wrong stability-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean isotope-reading method.",
+                  retryLabel: "That would send the analyst back into a M11_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m11-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the mass-first and stability-first shortcuts",
+                  scenario:
+                    "One crew member keeps letting a new mass number rename the element, while another keeps using stability as if it settles the family identity question first.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "isotope-trap-warning",
+                      label: "Do not let mass number rename the element, and do not let stability answer the family question first. Same proton count means same element, neutron change creates the isotope difference, and stability is a separate comparison afterward.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mass-warning-only",
+                      label: "Warn mainly that mass number is not the identity label, because once students stop that mistake they usually become more careful about stability on their own.",
+                      feedback:
+                        "That would leave the stability-first shortcut mostly alive.",
+                    },
+                    {
+                      value: "stability-warning-only",
+                      label: "Warn mainly that stability is not the family label, because once students stop that mistake they usually become more careful with proton number and mass number on their own.",
+                      feedback:
+                        "That would leave the mass-first shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps identity, isotope difference, and stability separate.",
+                  retryLabel: "That warning would leave a main M11_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m11-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the same-badge family visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why two nuclei can belong to the same element family even though their neutron counts, mass numbers, and stability can differ.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "same-badge-analogy",
+                      label: "Think of isotopes like crew members wearing the same badge number but carrying different supply packs: the shared badge is the proton count, the supply-pack difference is the neutron count, and the steadiness of each crew member is a separate comparison from the badge name.",
+                      feedback:
+                        "Exactly. That keeps identity, isotope difference, and stability in separate lanes.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "total-load-analogy",
+                      label: "Think of the nuclei mainly as different total loads, because once the full load changes it makes more sense to rename the whole carrier rather than keep the same family label.",
+                      feedback:
+                        "That would rebuild the wrong mass-renames-element shortcut.",
+                    },
+                    {
+                      value: "best-performer-analogy",
+                      label: "Think of the nuclei mainly as different performers where the more stable one gets the real family name, because that makes the comparison easier than keeping identity and stability separate.",
+                      feedback:
+                        "That would rebuild the wrong stability-sets-identity shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the same-badge isotope family visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right Same-badge model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M11_L1") {
