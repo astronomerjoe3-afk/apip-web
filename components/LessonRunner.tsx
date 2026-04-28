@@ -1852,6 +1852,7 @@ export default function LessonRunner({
         lessonId === "M13_L4" ||
         lessonId === "M13_L5" ||
         lessonId === "M13_L6" ||
+        lessonId === "M14_L1" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9108,6 +9109,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M14_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m14-l1-light-source-board",
+                badge: "Classification board",
+                title: "Classify by light source before brightness pulls you off track",
+                scenario:
+                  "The Star and planet classification board compares one fusion-powered star with one bright reflective planet. One trainee keeps calling the brightest object a star, another ignores where the light comes from, and a third forgets that a reflective object can still look bright from a distance.",
+                prompt: "Pin the note that keeps the classification model accurate.",
+                options: [
+                  {
+                    value: "source-first-note",
+                    label: "Classify by where the light comes from first: a star makes its own light through fusion, while a planet can look bright because it reflects starlight.",
+                    feedback:
+                      "Exactly. That keeps the lesson anchored to light source, not appearance.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "brightness-first-note",
+                    label: "Classify by how bright the object looks first, because the brightest object in the comparison is usually the star and the dimmer one is usually the planet.",
+                    feedback:
+                      "That would rebuild the wrong brightness shortcut.",
+                  },
+                  {
+                    value: "size-first-note",
+                    label: "Classify by the apparent size of the object first, because stars are usually the larger-looking objects while planets are usually the smaller-looking ones.",
+                    feedback:
+                      "That would rebuild the wrong appearance shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads star-versus-planet classification from light source.",
+                retryLabel: "That note would leave a main M14_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m14-l1-fix-ideas",
+                  badge: "Classification repair",
+                  title: "Repair the brightness shortcut before it spreads",
+                  scenario:
+                    "One trainee keeps calling the brighter object a star, while another treats reflected light as if it counts as self-produced light for classification.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-source-model",
+                      label: "Repair both habits together: ask where the light comes from first, keep fusion as the internal clue for a star, and treat reflected light as a planet-style clue even when the object looks bright.",
+                      feedback:
+                        "Exactly. That restores the proper classification model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-brightness-ranking",
+                      label: "Repair the confusion by ranking the objects by brightness more carefully, because once students order them correctly the star label usually becomes obvious on its own.",
+                      feedback:
+                        "That would keep the main brightness shortcut alive.",
+                    },
+                    {
+                      value: "repair-color-first",
+                      label: "Repair the confusion by focusing first on color, because once students know hotter stars often look different in color the star label usually becomes secure enough afterward.",
+                      feedback:
+                        "That would leave the source-of-light rule too weak.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps brightness and light source in separate slots.",
+                  retryLabel: "That would leave a main M14_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m14-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line star rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop using brightness alone to decide whether something counts as a star.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "star-anchor",
+                      label: "Stars are luminous bodies powered by fusion in the core, while planets and moons are usually visible because they reflect starlight rather than producing it.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bright-anchor-only",
+                      label: "The main idea is that stars are the brighter objects in the sky, because brightness is the most natural first clue learners can trust when separating stars from planets.",
+                      feedback:
+                        "That line rebuilds the wrong brightness shortcut.",
+                    },
+                    {
+                      value: "night-sky-anchor-only",
+                      label: "The main idea is that stars belong higher up in the night sky than planets, because once students picture the sky layout clearly the category difference usually becomes obvious on its own.",
+                      feedback:
+                        "That line misses the light-source rule that actually explains the classification.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right star-classification rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m14-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the luminous-versus-reflective vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up luminous, reflective, brightness, fusion, and starlight until every answer sounds like one vague 'shiny object' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-stars",
+                      label: "Use luminous for an object that produces its own light, reflective for one seen by bounced starlight, brightness for appearance only, and fusion for the internal source that powers a star.",
+                      feedback:
+                        "Exactly. That keeps the star-classification terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-brightness-does-most",
+                      label: "Use brightness as the main word for almost the whole topic, because once students know which object looks brightest the rest of the classification usually sorts itself out.",
+                      feedback:
+                        "That would hard-wire the brightness shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-far-near-does-most",
+                      label: "Use distance as the main word for almost the whole topic, because once students know some objects only look dim because they are far away the star label usually becomes easy to assign.",
+                      feedback:
+                        "That would hide the source-of-light rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the star-classification terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m14-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they classify the object",
+                  scenario:
+                    "The trainee analyst is about to call the brighter object a star without first checking whether the object produces its own light or only reflects incoming starlight.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "source-then-appearance",
+                      label: "Start by asking where the light comes from, then separate self-produced light from reflected light before you use brightness as a supporting detail.",
+                      feedback:
+                        "Exactly. That gives the analyst the right classification method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brightness-then-source",
+                      label: "Start by ranking the objects by apparent brightness, because once the brighter one is identified the source-of-light explanation usually becomes obvious afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong brightness shortcut.",
+                    },
+                    {
+                      value: "distance-then-size",
+                      label: "Start by estimating which object is farther away and larger, because once the scale picture is clearer the star-versus-planet label usually falls into place on its own.",
+                      feedback:
+                        "That would send the analyst away from the real light-source test.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean star-versus-planet method.",
+                  retryLabel: "That would send the analyst back into a M14_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m14-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the brightness shortcut",
+                  scenario:
+                    "One crew member keeps using apparent brightness as the whole classification rule, while another quietly treats reflected light as if it counts as self-luminous output.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "star-trap-warning",
+                      label: "Do not classify by brightness alone, and do not confuse reflected light with self-produced light. Keep fusion and light source in the same picture before you name the object.",
+                      feedback:
+                        "Exactly. That warning blocks the main M14_L1 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brightness-warning-only",
+                      label: "Warn mainly against using brightness, because once students stop that mistake they usually become careful enough about reflected light on their own.",
+                      feedback:
+                        "That would leave the reflected-light shortcut mostly alive.",
+                    },
+                    {
+                      value: "reflection-warning-only",
+                      label: "Warn mainly against treating reflected light as self-produced light, because once students stop that mistake they usually stop trusting brightness too much on their own.",
+                      feedback:
+                        "That would leave the brightness shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps brightness and light source physically separated.",
+                  retryLabel: "That warning would leave a main M14_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m14-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps source and reflection separate",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a bright reflective planet should not be mistaken for a star.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "lamp-and-mirror-analogy",
+                      label: "Think of a star like a lamp making its own light and a planet like an object seen because it reflects that light, so apparent brightness alone cannot settle the classification.",
+                      feedback:
+                        "Exactly. That keeps source and reflection linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brightest-bulb-analogy",
+                      label: "Think of the star as simply the brightest bulb in the room, because the brighter object should normally carry the star label even if the others also seem luminous.",
+                      feedback:
+                        "That would rebuild the brightness shortcut.",
+                    },
+                    {
+                      value: "largest-object-analogy",
+                      label: "Think of the star as whichever object seems biggest in the scene, because larger-looking things usually make better star candidates than smaller-looking ones.",
+                      feedback:
+                        "That would rebuild the appearance shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the star-classification ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right star-versus-planet model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M13_L6") {
