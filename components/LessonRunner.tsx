@@ -2026,6 +2026,259 @@ function getA4ScaffoldRoleplayCard({
   return null;
 }
 
+function getA5ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A5_L1") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a5-l1-oscillation-board",
+        badge: "Oscillation board",
+        title: "Find equilibrium and the return tendency first",
+        scenario:
+          "The oscillation board shows equilibrium, displacement, amplitude, and return direction together. One trainee thinks any repeated motion counts as oscillation physics, another treats amplitude like the restoring force itself, and a third forgets that the key return tendency must point back toward the center after a displacement.",
+        prompt: "Pin the note that keeps the oscillation model accurate.",
+        options: [
+          {
+            value: "equilibrium-return-note",
+            label: "Start from equilibrium, displace the system, and check that the restoring tendency points back toward the center. Amplitude is the maximum displacement from equilibrium, not the restoring effect itself.",
+            feedback:
+              "Exactly. That keeps equilibrium, return tendency, and amplitude in the right roles.",
+            isCorrect: true,
+          },
+          {
+            value: "repetition-alone-note",
+            label: "Treat any repeating motion as enough, because once the pattern repeats the deeper return-tendency details usually become secondary to the visible cycle.",
+            feedback:
+              "That would rebuild the repetition-only shortcut.",
+          },
+          {
+            value: "amplitude-is-force-note",
+            label: "Treat amplitude as basically the same thing as the restoring force, because the biggest displacement point is usually where the main restoring idea is stored.",
+            feedback:
+              "That would rebuild the amplitude-mix shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now starts from equilibrium and return tendency instead of repetition alone.",
+        retryLabel: "That note would leave a main A5_L1 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a5-l1-fix-ideas",
+          badge: "Oscillation repair",
+          title: "Repair the repetition-only and amplitude-mix shortcuts",
+          scenario:
+            "One analyst keeps calling any repeated motion an oscillation story, while another keeps folding amplitude into the restoring effect instead of keeping displacement size and return tendency separate.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-equilibrium-return-story",
+              label: "Repair both habits together: identify equilibrium first, then check whether a displaced system has a restoring tendency back toward the center, and keep amplitude as the maximum displacement measure rather than the return effect.",
+              feedback:
+                "Exactly. That restores the right oscillation-basics workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-repeat-pattern-first",
+              label: "Repair the confusion by emphasizing the repeating pattern first, because once students trust the cycle they usually sort the equilibrium and restoring details out later.",
+              feedback:
+                "That would keep the repetition-only shortcut alive.",
+            },
+            {
+              value: "repair-amplitude-drives-all",
+              label: "Repair the confusion by emphasizing amplitude more strongly first, because once students know the biggest displacement the return tendency usually becomes mostly obvious later.",
+              feedback:
+                "That would keep the amplitude-mix shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats oscillation as an equilibrium-and-return story.",
+          retryLabel: "That would leave a main A5_L1 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a5-l1-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line oscillation-basics rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating repeated motion alone as enough for this lesson.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a5-l1-anchor",
+              label: "Oscillations are repeated motions about equilibrium sustained by a restoring tendency back toward the center.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "repeat-anchor-only",
+              label: "The main idea is mostly that the motion repeats, because once the cycle is obvious the equilibrium and restoring details usually become secondary.",
+              feedback:
+                "That would hide the real condition the lesson needs.",
+            },
+            {
+              value: "amplitude-anchor-only",
+              label: "The main idea is mostly that oscillations have amplitude, because once students know the biggest displacement the return-tendency story usually becomes secondary.",
+              feedback:
+                "That would rebuild the amplitude-mix shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right oscillation-basics rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a5-l1-technical-words",
+          badge: "Term desk",
+          title: "Clean up the oscillation vocabulary board",
+          scenario:
+            "The crew keeps mixing equilibrium, displacement, amplitude, restoring tendency, and oscillation until every answer sounds like one vague repeating-motion story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a5-l1",
+              label: "Use equilibrium for the center position, displacement for how far the system is from that center, amplitude for the maximum displacement, and restoring tendency for the effect that points back toward equilibrium.",
+              feedback:
+                "Exactly. That keeps the oscillation terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-repeat-does-most",
+              label: "Use repeating motion as the main phrase for almost the whole topic, because once students notice the cycle the separate equilibrium and displacement labels usually matter less.",
+              feedback:
+                "That would scramble the oscillation terms into the repetition-only shortcut.",
+            },
+            {
+              value: "term-board-amplitude-does-most",
+              label: "Use amplitude as the main word for almost the whole topic, because once students know the motion size the restoring and equilibrium details usually become secondary.",
+              feedback:
+                "That would weaken the distinct-role structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the oscillation terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a5-l1-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they call it an oscillation",
+          scenario:
+            "The trainee analyst is about to classify the motion from repetition alone and has not yet checked where equilibrium is or which way the restoring tendency points after a displacement.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "equilibrium-then-return-check",
+              label: "Start by finding equilibrium, then displace the system and ask which way the restoring tendency points. Only after that should you describe the repeated motion and amplitude.",
+              feedback:
+                "Exactly. That gives the analyst the right oscillation workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-repeat-pattern",
+              label: "Start from the visible repeating pattern first, because once that is secure the center position and restoring details usually explain themselves.",
+              feedback:
+                "That would send the analyst back into the repetition-only shortcut.",
+            },
+            {
+              value: "start-from-biggest-displacement",
+              label: "Start from the biggest displacement first, because once amplitude is known the return tendency and equilibrium story usually become mostly obvious.",
+              feedback:
+                "That would send the analyst back into the amplitude-mix shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean equilibrium-first method.",
+          retryLabel: "That would send the analyst back into a A5_L1 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a5-l1-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the repetition-only oscillation shortcut",
+          scenario:
+            "One crew member keeps using repetition as the whole explanation, while another keeps blurring amplitude into the restoring effect instead of keeping size and return tendency separate.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "oscillation-trap-warning",
+              label: "Do not call every repeated motion an oscillation story, and do not treat amplitude as the restoring effect. Check equilibrium first and make sure the restoring tendency points back toward the center.",
+              feedback:
+                "Exactly. That warning blocks the main A5_L1 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "repeat-warning-only",
+              label: "Warn mainly against trusting repetition alone, because once students stop that they usually stop mixing amplitude with restoring effect on their own.",
+              feedback:
+                "That would leave the amplitude-mix shortcut too alive.",
+            },
+            {
+              value: "amplitude-warning-only",
+              label: "Warn mainly against mixing amplitude with restoring effect, because once students stop that they usually understand that repetition alone is not enough on their own.",
+              feedback:
+                "That would leave the repetition-only shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps equilibrium and return tendency visible.",
+          retryLabel: "That warning would leave a main A5_L1 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a5-l1-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the return tendency visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why oscillation is not just repetition, but repeated motion about a center with a tendency to return there after a displacement.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "marble-bowl-analogy",
+              label: "Think of the motion like a marble in a smooth bowl: move it away from the middle and the shape gives it a tendency to return toward the center, while the farthest points mark the amplitude.",
+              feedback:
+                "Exactly. That keeps the return tendency visible without flattening the physics.",
+              isCorrect: true,
+            },
+            {
+              value: "metronome-repeat-analogy",
+              label: "Think of the motion mainly like any repeated beat, because once the pattern repeats the center position and return direction details usually become secondary.",
+              feedback:
+                "That would rebuild the repetition-only shortcut.",
+            },
+            {
+              value: "big-swing-analogy",
+              label: "Think of the motion mainly through how far it reaches on each side, because once the amplitude is obvious the return-tendency story usually becomes secondary.",
+              feedback:
+                "That would rebuild the amplitude-mix shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps equilibrium, displacement, and return tendency in the same picture.",
+          retryLabel: "That analogy would pull the lesson away from the right oscillation-basics model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
 function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
   if (card.options.length <= 1) return card.options;
   const correctIndex = card.options.findIndex((option) => option.isCorrect);
@@ -3249,6 +3502,14 @@ export default function LessonRunner({
       activeSectionWorkedExample: Boolean(activeSection?.worked_example),
       activeSectionHeading,
     });
+    const a5ScaffoldRoleplayCard = getA5ScaffoldRoleplayCard({
+      lessonId,
+      isMediaStep,
+      activeMediaIndex,
+      isSectionStep,
+      activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+      activeSectionHeading,
+    });
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -3256,6 +3517,7 @@ export default function LessonRunner({
     );
       const scaffoldRoleplayCard =
         a4ScaffoldRoleplayCard ??
+        a5ScaffoldRoleplayCard ??
         (
         lessonId === "M1_L1" ||
         lessonId === "M1_L2" ||
