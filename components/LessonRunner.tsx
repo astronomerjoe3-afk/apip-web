@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M9_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m9-l6-network-reduction-board",
+                badge: "Network board",
+                title: "Name the network type first, then apply the matching rule",
+                scenario:
+                  "The Network Reduction board shows a series chain, a parallel pair, and a mixed layout. One trainee wants to use the same-current rule everywhere, another wants to use the same-voltage rule everywhere, and a third tries to solve the mixed network in one jump without reducing the valid block first.",
+                prompt: "Pin the note that keeps the network story accurate.",
+                options: [
+                  {
+                    value: "type-first-reduction-note",
+                    label: "Decide first whether the section is series, parallel, or mixed. Series sections share one current, parallel branches share the same potential difference, and mixed networks are reduced valid block by valid block before rebuilding the source current.",
+                    feedback:
+                      "Exactly. That keeps the rules tied to the right section and makes the mixed-network method explicit.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "same-current-everywhere-note",
+                    label: "Use the same-current rule as the main shortcut, because current comes from one source and should stay common through the whole network even when branches appear.",
+                    feedback:
+                      "That erases the branch split story and applies the series rule where it does not belong.",
+                  },
+                  {
+                    value: "one-step-mixed-note",
+                    label: "Treat the mixed network as one global pattern, because once the full diagram is visible it is usually quicker to jump straight to the source current than to reduce sections separately.",
+                    feedback:
+                      "That skips the section-by-section logic the lesson is trying to establish.",
+                  },
+                ],
+                successLabel: "Pinned. The room now starts with network type and valid reduction order.",
+                retryLabel: "That note would leave a main M9_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m9-l6-fix-ideas",
+                  badge: "Reduction repair",
+                  title: "Repair the one-rule-for-all-networks shortcut",
+                  scenario:
+                    "One trainee keeps using the same-current rule inside parallel branches, while another keeps trying to force every mixed network into one quick overall step instead of reducing the valid section first.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-section-rules",
+                      label: "Repair both ideas together: tie same-current only to series sections, same-voltage only to matching parallel branches, and reduce mixed circuits section by section before calculating the source current.",
+                      feedback:
+                        "Exactly. That restores both the local rule matching and the proper mixed-network workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-source-story",
+                      label: "Repair the confusion by saying the source current is still the master clue, because once that is known the section rules usually matter much less for the rest of the network.",
+                      feedback:
+                        "That would keep the section-rule confusion alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-parallel-first",
+                      label: "Repair the confusion by saying parallel behaviour is usually the most informative part of a network, because once the branch pattern is recognized the rest of the circuit can normally be treated by inspection.",
+                      feedback:
+                        "That would keep the mixed-network shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now matches rules to sections before calculating.",
+                  retryLabel: "That would leave a main M9_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m9-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line network rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating every circuit like one flat diagram with one global current-and-voltage rule.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "network-anchor",
+                      label: "Series sections share one current, parallel branches share the same potential difference, and mixed networks are reduced section by section before the source current is rebuilt.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "current-anchor",
+                      label: "The main idea is that current comes from one source and stays the most reliable guide across the whole network, so voltage sharing and reduction steps are mainly supporting detail.",
+                      feedback:
+                        "That would build the wrong one-rule model into the anchor sentence.",
+                    },
+                    {
+                      value: "inspection-anchor",
+                      label: "The main idea is to inspect the whole diagram quickly, because once students can recognize the network visually the formal section-reduction method usually becomes optional.",
+                      feedback:
+                        "That would hide the actual method the lesson is trying to teach.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right network-type rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m9-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the network-law vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up series, parallel, branch voltage, branch current, and mixed reduction until every network sounds like the same current story with extra drawing clutter.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-network-laws",
+                      label: "Use series for one-path sections with common current, parallel for branch sections with common potential difference, and mixed for networks that must be reduced valid section by valid section.",
+                      feedback:
+                        "Exactly. That keeps the network terms tied to the correct rules.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-current-master",
+                      label: "Use current as the main network word for every section, because voltage and reduction language usually make more sense after the learner has one common flow story in mind.",
+                      feedback:
+                        "That would scramble the exact distinction this lesson is trying to teach.",
+                    },
+                    {
+                      value: "term-board-branch-shortcut",
+                      label: "Use mixed circuit mainly for networks with branches, because once a branch is present the same reduction and rule story can usually be applied everywhere in the diagram.",
+                      feedback:
+                        "That would hard-wire the wrong overgeneralization into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the network-law terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m9-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they calculate the source current",
+                  scenario:
+                    "The trainee analyst is about to jump straight to the source current without first deciding which part of the diagram is series, which part is parallel, and which block can be reduced safely.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "classify-then-reduce",
+                      label: "Classify the network section by section first, apply the common-current or common-voltage rule only where it belongs, and reduce the valid block before rebuilding the source current.",
+                      feedback:
+                        "Exactly. That gives the analyst the right section-by-section workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "source-first",
+                      label: "Start with the source current first, because once that main value is secure the section details usually fall into place naturally afterward.",
+                      feedback:
+                        "That would send the analyst straight into the wrong top-down shortcut.",
+                    },
+                    {
+                      value: "parallel-first-everywhere",
+                      label: "Start by checking for any branches and applying the parallel rule broadly, because branch recognition is usually enough to guide the rest of the diagram by inspection.",
+                      feedback:
+                        "That would send the analyst into the wrong overgeneralized branch shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean classify-then-reduce method.",
+                  retryLabel: "That would send the analyst back into a M9_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m9-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-rule and one-step shortcuts",
+                  scenario:
+                    "One crew member keeps using the same-current story across branches, while another keeps trying to solve mixed circuits in one global move without reducing the valid section first.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "network-trap-warning",
+                      label: "Do not stretch one section rule across the whole network, and do not skip the reduction order. Match the rule to the section type, then reduce mixed circuits block by block before rebuilding the source current.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rule-warning-only",
+                      label: "Warn mainly that series and parallel are different, because once that distinction is secure students usually discover the right mixed-network order on their own.",
+                      feedback:
+                        "That would leave the one-step mixed shortcut mostly alive.",
+                    },
+                    {
+                      value: "reduction-warning-only",
+                      label: "Warn mainly that mixed circuits should be reduced step by step, because once that habit is in place students usually stop misapplying current and voltage rules automatically.",
+                      feedback:
+                        "That would leave the one-rule shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps local rules and reduction order in the right relationship.",
+                  retryLabel: "That warning would leave a main M9_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m9-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps section rules visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why one part of a network can share current, another can share voltage, and a mixed layout must be handled in blocks instead of one sweep.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "road-system-analogy",
+                      label: "Think of a road system: one-lane sections keep the same stream of vehicles, side-by-side branch roads share the same start-and-end junction difference, and a mixed route map has to be simplified junction block by junction block before the total entry flow is rebuilt.",
+                      feedback:
+                        "Exactly. That keeps local rules and section reduction visible without flattening the whole network into one story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-pipe-analogy",
+                      label: "Think of the whole network like one pipe system with one main flow rule, because the source still drives the whole structure and the section differences usually act only as small corrections.",
+                      feedback:
+                        "That would rebuild the one-rule shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "branch-only-analogy",
+                      label: "Think mainly of branch splitting, because once students picture branches clearly the mixed-network reduction steps usually become unnecessary detail.",
+                      feedback:
+                        "That would rebuild the one-step shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps local rules and reduction order in the right relationship.",
+                  retryLabel: "That analogy would pull the lesson away from the right network-reduction model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M9_L5") {
