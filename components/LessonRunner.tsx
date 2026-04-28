@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M10_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m10-l6-grid-bridge-board",
+                badge: "Grid board",
+                title: "Keep induction link, turns ratio, and transmission logic in one transformer story",
+                scenario:
+                  "The Grid Bridge board shows a primary coil, a shared core, and a secondary coil feeding a transmission line. One trainee jumps straight to turns ratio without checking whether the primary current is changing, another merges the two coils into one circuit, and a third remembers step-up voltage but forgets why the grid uses that for lower current and lower cable loss.",
+                prompt: "Pin the note that keeps the transformer story accurate.",
+                options: [
+                  {
+                    value: "linked-transformer-note",
+                    label: "Read the shared changing field first: the primary must have changing current, that changing field links the secondary, the voltage ratio follows the turns ratio in the simple model, and the grid steps voltage up so the same power can travel with lower current and less cable loss.",
+                    feedback:
+                      "Exactly. That keeps the induction link, turns ratio, and transmission logic connected.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "turns-only-note",
+                    label: "Treat the transformer mainly as a turns-count machine, because once the coil numbers are known the changing field and transmission details are mostly supporting decoration.",
+                    feedback:
+                      "That would flatten the lesson into a turns-only shortcut instead of the full transformer story.",
+                  },
+                  {
+                    value: "single-circuit-note",
+                    label: "Treat the primary and secondary as one long shared circuit, because the current effectively travels from the input coil through the core into the output coil and then continues to the line.",
+                    feedback:
+                      "That would collapse two linked circuits into one path, which is exactly what this lesson is trying to prevent.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the transformer as one linked field-bridge story.",
+                retryLabel: "That note would leave a main M10_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m10-l6-fix-ideas",
+                  badge: "Bridge repair",
+                  title: "Repair the turns-only and one-circuit shortcuts",
+                  scenario:
+                    "One trainee treats the transformer as just a turns ratio trick, while another keeps talking as if current flows directly from the primary wire through the core into the secondary wire.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-induction-link",
+                      label: "Repair both ideas together: the transformer uses two separate circuits linked by a shared changing magnetic field. The primary's changing current creates the link, the turns ratio sets the voltage shift in the simple model, and the grid then uses that shift for transmission.",
+                      feedback:
+                        "Exactly. That restores the induction link and the two-circuit structure.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-more-turns",
+                      label: "Repair the confusion by saying turn count is still the main rule, because once students trust the turns ratio they usually become less concerned about whether the field link or circuit separation is being described in detail.",
+                      feedback:
+                        "That would keep the turns-only shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-shared-current",
+                      label: "Repair the confusion by saying the current is shared indirectly across the whole device, because that makes it easier to see why changing something on one side affects the other side so strongly.",
+                      feedback:
+                        "That would keep the one-circuit shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses the right field-bridge transformer story.",
+                  retryLabel: "That would leave a main M10_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m10-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line transformer rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop shrinking the transformer into 'more turns means more voltage' with no induction or grid logic attached.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "transformer-anchor",
+                      label: "A transformer links two coils by a shared changing magnetic field. In the school model, the turns ratio sets the voltage ratio, and step-up transmission lowers current and reduces cable losses for the same power.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "ratio-anchor",
+                      label: "The main idea is that more secondary turns give more secondary voltage, because once that ratio rule is remembered the induction and transmission details can be treated as later extensions.",
+                      feedback:
+                        "That would build the turns-only shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "grid-anchor",
+                      label: "The main idea is that the grid uses very high voltage, because once students know that, the detailed transformer link between the two coils is mainly background information.",
+                      feedback:
+                        "That would skip the actual field-bridge story the lesson is trying to secure.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right transformer rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m10-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the transformer vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up primary, secondary, turns ratio, induction link, and transmission line until the whole device sounds like one wire with a voltage dial in the middle.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-primary-secondary",
+                      label: "Use primary and secondary for two separate circuits, induction link for the shared changing field between them, turns ratio for the simple voltage-ratio rule, and transmission step-up for the grid strategy that lowers current and cable loss.",
+                      feedback:
+                        "Exactly. That keeps the transformer terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-shared-path",
+                      label: "Use primary and secondary as two names for the same overall current path, because students usually understand the device faster when they picture one flow being boosted as it crosses the core.",
+                      feedback:
+                        "That would hard-wire the one-circuit shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-ratio-first",
+                      label: "Use turns ratio as the main transformer term, because once students remember that one ratio the other words are mostly there to decorate the setup.",
+                      feedback:
+                        "That would hard-wire the turns-only shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the transformer terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m10-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare the two sides",
+                  scenario:
+                    "The trainee analyst is about to compare only coil counts and ignore whether the primary current is changing, whether the circuits are separate, and why the grid would prefer higher voltage on long lines.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "field-link-ratio-grid",
+                      label: "Start with the induction link: confirm changing current in the primary, keep the primary and secondary as separate circuits, then use the turns ratio for the voltage shift and finish by checking what that shift does to line current and cable loss.",
+                      feedback:
+                        "Exactly. That gives the analyst the right field-link to ratio to grid workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "ratio-first-only",
+                      label: "Start with the turns ratio, because once the output voltage is known the changing-field setup and transmission consequences can usually be inferred later without much risk.",
+                      feedback:
+                        "That would send the analyst back into the turns-only shortcut.",
+                    },
+                    {
+                      value: "line-voltage-only",
+                      label: "Start with the transmission line voltage, because once the grid side is understood the details of how the two coils interact become mostly optional for the reasoning.",
+                      feedback:
+                        "That would send the analyst away from the actual transformer link story.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean transformer method.",
+                  retryLabel: "That would send the analyst back into a M10_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m10-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the turns-only and one-circuit shortcuts",
+                  scenario:
+                    "One crew member keeps reading only the turns ratio, while another keeps treating the primary and secondary as one shared current route through the device.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "transformer-trap-warning",
+                      label: "Do not skip the changing-field link, and do not merge the two coils into one circuit. A transformer uses separate primary and secondary circuits linked by induction, then the turns ratio and grid purpose are read on top of that.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "link-warning-only",
+                      label: "Warn mainly that the two coils are separate, because once students stop merging the circuits they usually become more careful about the turns ratio and grid logic on their own.",
+                      feedback:
+                        "That would leave the turns-only shortcut mostly alive.",
+                    },
+                    {
+                      value: "ratio-warning-only",
+                      label: "Warn mainly that turns ratio is not the whole lesson, because once students think beyond the ratio they usually stop merging the two coils into one circuit automatically.",
+                      feedback:
+                        "That would leave the one-circuit shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the field link and circuit split visible.",
+                  retryLabel: "That warning would leave a main M10_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m10-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the bridge visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the transformer is not one direct wire path, and why stepping voltage up matters for long-distance transmission.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "shared-bridge-analogy",
+                      label: "Think of the transformer like two separate platforms linked by a moving bridge signal: the first platform drives the bridge rhythm, the second responds according to its turn count, and the grid uses a higher platform height to move the same power with less current on the long route.",
+                      feedback:
+                        "Exactly. That keeps the separate circuits, shared link, and transmission purpose visible together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-pipe-analogy",
+                      label: "Think of the transformer like one pipe that narrows and widens, because that makes the voltage change easier to picture than worrying about two circuits and an induction bridge.",
+                      feedback:
+                        "That would rebuild the one-circuit shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "ratio-dial-analogy",
+                      label: "Think of the turns ratio like a voltage dial in the middle of the device, because once students picture that dial the induction and transmission details are not really needed.",
+                      feedback:
+                        "That would rebuild the turns-only shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the transformer bridge story visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right Grid Bridge model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M10_L5") {
