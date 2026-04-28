@@ -1851,6 +1851,7 @@ export default function LessonRunner({
         lessonId === "M13_L3" ||
         lessonId === "M13_L4" ||
         lessonId === "M13_L5" ||
+        lessonId === "M13_L6" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9107,6 +9108,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M13_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m13-l6-scale-board",
+                badge: "Scale board",
+                title: "Keep route size, year length, and body role ahead of the literal-sketch shortcut",
+                scenario:
+                  "The Solar System scale board compares inner and outer orbital routes, body types, and a classroom sketch that compresses the true distances heavily. One trainee reads the sketch as if the spacing is literal, another sorts bodies mainly by size without checking the main host, and a third forgets that longer routes usually mean longer years.",
+                prompt: "Pin the note that keeps the Solar System model organized.",
+                options: [
+                  {
+                    value: "scale-and-role-note",
+                    label: "Keep route size, year length, and body role in separate linked slots: farther orbital routes usually mean longer years, planets mainly orbit the Sun, moons mainly orbit planets, and classroom sketches compress the real spacing heavily.",
+                    feedback:
+                      "Exactly. That keeps the Solar System story organized instead of literalized.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "literal-sketch-note",
+                    label: "Treat the classroom sketch as close to literal scale, because once students see the outer bodies drawn farther away they can use the picture itself to read the real spacing directly.",
+                    feedback:
+                      "That would rebuild the wrong literal-sketch shortcut.",
+                  },
+                  {
+                    value: "size-sorting-note",
+                    label: "Sort planets, moons, and smaller bodies mainly by how large they look in the drawing, because visible size is the simplest way to keep the Solar System family clear for beginners.",
+                    feedback:
+                      "That would rebuild the wrong size-first shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads Solar System scale as an organized model, not a literal drawing.",
+                retryLabel: "That note would leave a main M13_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m13-l6-fix-ideas",
+                  badge: "Scale repair",
+                  title: "Repair the literal-sketch and wrong-host shortcuts",
+                  scenario:
+                    "One trainee keeps using the classroom sketch as if it shows true Solar System spacing, while another decides whether something is a planet or moon without checking what it mainly orbits.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-scale-model",
+                      label: "Repair both habits together: treat the sketch as a compressed model, link longer route to longer year, and sort planets, moons, and smaller bodies by role and main host rather than by drawing size alone.",
+                      feedback:
+                        "Exactly. That restores the proper Solar System model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-order-only",
+                      label: "Repair the confusion by drilling the body order from the Sun first, because once students can recite the sequence they usually interpret the scale and body roles accurately on their own.",
+                      feedback:
+                        "That would leave the literal-sketch shortcut too alive.",
+                    },
+                    {
+                      value: "repair-size-chart-first",
+                      label: "Repair the confusion by emphasizing which bodies are bigger or smaller, because once students know the size ranking the family roles and route lengths usually become obvious afterward.",
+                      feedback:
+                        "That would leave the host-and-role shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps route size, year length, and body role in the right slots.",
+                  retryLabel: "That would leave a main M13_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m13-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Solar System scale rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating classroom sketches as literal maps of Solar System spacing.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "solar-system-anchor",
+                      label: "The Solar System is a Sun-centered family of different body types, farther orbital routes usually mean longer years, and real Solar System distances are heavily compressed in classroom sketches.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "distance-anchor-only",
+                      label: "The main idea is that outer planets are simply much farther away on the page, because once students can read the picture spacing clearly the Solar System structure mostly explains itself.",
+                      feedback:
+                        "That line rebuilds the literal-sketch shortcut.",
+                    },
+                    {
+                      value: "family-anchor-only",
+                      label: "The main idea is just to memorize which named bodies belong in the Solar System family, because once students know the members the route and scale ideas usually sort themselves out.",
+                      feedback:
+                        "That line misses the route-size and scale reasoning that explains the pattern.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Solar System scale rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m13-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Solar System vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up orbit route, year length, planet, moon, smaller body, and sketch scale until every answer sounds like one vague space-distance story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-solar-system",
+                      label: "Use orbit route for the path around the main host, year or orbital period for the travel time, planet and moon for body role, and sketch scale for how compressed the drawing is compared with the real Solar System.",
+                      feedback:
+                        "Exactly. That keeps the Solar System terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-distance-does-most",
+                      label: "Use distance as the main word for almost the whole topic, because once students know inner means near and outer means far the rest of the Solar System story usually sorts itself out.",
+                      feedback:
+                        "That would hard-wire the literal-distance shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-size-does-most",
+                      label: "Use size as the main sorting word for almost the whole topic, because once students know which bodies are bigger the host and route ideas usually become clear on their own.",
+                      feedback:
+                        "That would hard-wire the size-first shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Solar System terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m13-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they explain a Solar System sketch",
+                  scenario:
+                    "The trainee analyst is about to read the classroom picture like a literal map without first linking route size to year length and body role to the main host.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "route-then-host-then-scale",
+                      label: "Start by matching a shorter year to a smaller route, then sort each body by what it mainly orbits, and only after that explain that the classroom sketch is a compressed model rather than a literal spacing map.",
+                      feedback:
+                        "Exactly. That gives the analyst the right Solar System method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "picture-spacing-first",
+                      label: "Start by reading the spacing in the drawing carefully, because once the inner and outer gaps on the page are understood the body roles and year lengths usually become easy to assign.",
+                      feedback:
+                        "That would send the analyst back into the wrong literal-sketch shortcut.",
+                    },
+                    {
+                      value: "body-names-first",
+                      label: "Start by recalling the names of the bodies in order, because once the list is remembered clearly the size, role, and route ideas usually fall into place afterward.",
+                      feedback:
+                        "That would send the analyst away from the real route-size and host reasoning.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Solar System explanation method.",
+                  retryLabel: "That would send the analyst back into a M13_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m13-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the literal-sketch and size-first shortcuts",
+                  scenario:
+                    "One crew member keeps treating the classroom sketch like a true-scale map, while another uses body size alone instead of main host and route role to sort planets, moons, and smaller bodies.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "solar-system-trap-warning",
+                      label: "Do not read classroom spacing literally, and do not sort bodies by size alone. Keep route size with year length, and keep body role with the main host in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M13_L6 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "scale-warning-only",
+                      label: "Warn mainly against reading the sketch literally, because once students stop that mistake they usually become careful enough about body role and main host on their own.",
+                      feedback:
+                        "That would leave the size-first shortcut mostly alive.",
+                    },
+                    {
+                      value: "host-warning-only",
+                      label: "Warn mainly against mixing up planets and moons, because once students sort the bodies by host they usually stop reading the sketch as literal scale on their own.",
+                      feedback:
+                        "That would leave the literal-sketch shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps Solar System scale and role physically linked.",
+                  retryLabel: "That warning would leave a main M13_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m13-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps structure without pretending the sketch is literal",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a Solar System diagram can keep the right family structure and route relationships even while badly compressing the real spacing.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "transit-map-analogy",
+                      label: "Think of the Solar System sketch like a transit map: it keeps the route order and relationships clear, but it is not meant to preserve the true distances between every stop.",
+                      feedback:
+                        "Exactly. That keeps structure and compressed scale linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "road-atlas-analogy",
+                      label: "Think of the Solar System sketch like a road atlas that preserves true spacing closely enough for direct distance reading, because the picture should work as a mostly literal map of where everything is.",
+                      feedback:
+                        "That would rebuild the literal-sketch shortcut.",
+                    },
+                    {
+                      value: "size-rank-analogy",
+                      label: "Think of the Solar System mainly like a size-ranking poster, because once students know which bodies are larger the route and family structure usually become obvious on their own.",
+                      feedback:
+                        "That would rebuild the size-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the Solar System ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Solar System scale model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M13_L5") {
