@@ -1869,6 +1869,7 @@ export default function LessonRunner({
         lessonId === "A2_L3" ||
         lessonId === "A2_L4" ||
         lessonId === "A2_L5" ||
+        lessonId === "A2_L6" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9125,6 +9126,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A2_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a2-l6-quantum-evidence",
+                badge: "Evidence board",
+                title: "Link the experiments back to one packet-and-level model",
+                scenario:
+                  "The quantum-evidence board places spectra, the photoelectric threshold, and matter-wave behavior side by side. One trainee treats them as three unrelated topics, another only notices 'light does odd things,' and a third forgets that discrete levels, packet transfer, and wavelength evidence are all supporting one coherent quantum picture.",
+                prompt: "Pin the note that keeps the capstone model accurate.",
+                options: [
+                  {
+                    value: "shared-quantum-model-note",
+                    label: "Read the experiments as connected evidence: spectra support discrete levels, the photoelectric effect supports packet-by-packet energy transfer with thresholds, and matter-wave results extend quantum reasoning beyond atomic ladders while still fitting the same model-building style.",
+                    feedback:
+                      "Exactly. That keeps the module as one coherent quantum story instead of a fact list.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "three-separate-topics-note",
+                    label: "Treat each experiment mainly as its own separate chapter, because quantum topics usually become clearer when students avoid trying to connect them too early.",
+                    feedback:
+                      "That would rebuild the disconnected-facts shortcut.",
+                  },
+                  {
+                    value: "light-only-note",
+                    label: "Treat the shared theme mainly as 'light is strange,' because once students remember that idea the deeper packet-and-level links usually matter less.",
+                    feedback:
+                      "That would flatten the evidence into a vague slogan.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads the module as one connected quantum-evidence story.",
+                retryLabel: "That note would leave a main A2_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a2-l6-fix-ideas",
+                  badge: "Synthesis repair",
+                  title: "Repair the disconnected-facts shortcut",
+                  scenario:
+                    "One trainee keeps listing spectra, thresholds, and matter waves as unrelated results, while another tries to connect them with a vague 'quantum is weird' slogan that does not preserve what each experiment actually shows.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-shared-packet-level-model",
+                      label: "Repair both habits together: ask what each experiment is evidencing, then connect discrete levels, packet-style energy transfer, and wave evidence into one coherent quantum model instead of a slogan or a list.",
+                      feedback:
+                        "Exactly. That restores the module’s shared evidence structure.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-topic-by-topic-only",
+                      label: "Repair the confusion by reteaching each experiment separately first, because once students memorize the three results the common structure usually becomes obvious on its own.",
+                      feedback:
+                        "That would keep the disconnected-facts shortcut alive.",
+                    },
+                    {
+                      value: "repair-slogan-first",
+                      label: "Repair the confusion by pushing a stronger 'quantum is unusual' slogan first, because once students accept that, the detailed links between the experiments usually matter less.",
+                      feedback:
+                        "That would keep the vague-slogan shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats the module as one evidence web instead of scattered facts.",
+                  retryLabel: "That would leave a main A2_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a2-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line module rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts end the module with one coherent quantum picture rather than three isolated experiment memories.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "quantum-evidence-anchor",
+                      label: "Quantum theory is stronger when several experiments point back to the same packet-and-level structure.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this capstone needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "separate-results-anchor",
+                      label: "The main idea is mostly that quantum physics contains many different surprising results, because the experiments do not really need a strong common structure to stay useful.",
+                      feedback:
+                        "That line rebuilds the disconnected-results shortcut.",
+                    },
+                    {
+                      value: "wave-anchor-mostly",
+                      label: "The main idea is mostly that wave behavior is the surprising part, because once students trust matter waves the packet and level evidence usually become secondary details.",
+                      feedback:
+                        "That line distorts the balance of the capstone model.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right capstone rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a2-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the quantum-evidence vocabulary board",
+                  scenario:
+                    "The crew keeps mixing discrete levels, photon packets, threshold, work function, matter wave, and diffraction evidence until every answer sounds like one vague 'quantum effect' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a2-l6",
+                      label: "Use discrete levels for the atomic ladder evidence, photon packets and threshold for photoelectric transfer logic, and matter wave with diffraction pattern for the evidence that quantum reasoning extends beyond atomic levels alone.",
+                      feedback:
+                        "Exactly. That keeps the capstone terms doing distinct jobs inside one model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-quantum-does-most",
+                      label: "Use quantum as the main word for almost the whole topic, because once students know all of this belongs to quantum physics the specific evidence labels usually matter less.",
+                      feedback:
+                        "That would hard-wire the vague-slogan shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-light-does-most",
+                      label: "Use light as the main word for almost the whole topic, because once students connect the experiments to light behavior the level and matter-wave details usually become secondary.",
+                      feedback:
+                        "That would flatten the capstone into the wrong shared theme.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the capstone evidence terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a2-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they summarize the module",
+                  scenario:
+                    "The trainee analyst is about to summarize the module as a list of experiment names without first asking what shared packet, level, or wave-evidence idea each one actually supports.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "evidence-then-shared-principle",
+                      label: "Start by naming what each experiment directly evidences, then ask which packet-or-level idea it supports, and only afterward write the shared quantum summary.",
+                      feedback:
+                        "Exactly. That gives the analyst the right synthesis workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "list-experiments-then-theme",
+                      label: "Start by listing the experiments first, because once the names are remembered the common idea usually emerges naturally without much extra checking.",
+                      feedback:
+                        "That would send the analyst back into the disconnected-facts shortcut.",
+                    },
+                    {
+                      value: "slogan-then-fit-examples",
+                      label: "Start from a big 'quantum is strange' theme, because once students accept the slogan the details of what each experiment evidences usually matter less.",
+                      feedback:
+                        "That would send the analyst back into the vague-theme shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean synthesis method.",
+                  retryLabel: "That would send the analyst back into a A2_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a2-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the fact-list and slogan shortcuts",
+                  scenario:
+                    "One crew member keeps reducing the module to a checklist of separate experiments, while another keeps replacing the actual evidence links with one vague 'quantum is odd' line.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "quantum-evidence-trap-warning",
+                      label: "Do not finish the module as either a fact list or a slogan. The strength of the topic is that several experiments point back to shared packet, level, threshold, and wave evidence in one model.",
+                      feedback:
+                        "Exactly. That warning blocks the main A2_L6 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fact-list-warning-only",
+                      label: "Warn mainly against the fact-list habit, because once students stop listing experiments separately they usually stop relying on vague slogans on their own.",
+                      feedback:
+                        "That would leave the slogan shortcut too alive.",
+                    },
+                    {
+                      value: "slogan-warning-only",
+                      label: "Warn mainly against the slogan habit, because once students stop using vague themes they usually connect the experiments properly on their own.",
+                      feedback:
+                        "That would leave the fact-list shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the shared evidence structure visible.",
+                  retryLabel: "That warning would leave a main A2_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a2-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the experiments connected",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why several different experiments can strengthen one quantum model instead of staying as isolated facts.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "case-file-analogy",
+                      label: "Think of the module like a case file built from several witness statements: each experiment reports a different angle, but the strongest explanation is the one that makes all of them fit the same underlying picture.",
+                      feedback:
+                        "Exactly. That keeps the synthesis honest without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "scrapbook-analogy",
+                      label: "Think of the module more like a scrapbook of interesting quantum moments, because the main value is collecting the separate surprises rather than forcing a common structure.",
+                      feedback:
+                        "That would rebuild the disconnected-facts shortcut.",
+                    },
+                    {
+                      value: "motto-analogy",
+                      label: "Think of the module mainly like learning one big motto about quantum weirdness, because once the overall slogan is remembered the specific evidence links usually matter less.",
+                      feedback:
+                        "That would rebuild the vague-slogan shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the capstone evidence web intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right quantum-evidence model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A2_L5") {
