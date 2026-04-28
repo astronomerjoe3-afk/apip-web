@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M9_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m9-l5-iv-characteristic-board",
+                badge: "I-V board",
+                title: "Check the graph shape before chanting Ohm's law",
+                scenario:
+                  "The I-V Characteristic board shows one component in ohmic mode and another in non-ohmic mode. One trainee wants to use V = IR as a chant for every case, another sees a curved graph but still claims the resistance must be constant, and a third forgets that proportional current growth only holds when conditions stay fixed for an ohmic conductor.",
+                prompt: "Pin the note that keeps the I-V story accurate.",
+                options: [
+                  {
+                    value: "graph-shape-ohmic-note",
+                    label: "Use Ohm's law as an observed rule for ohmic conductors under fixed conditions: a straight origin-passing I-V graph shows proportional current growth and constant resistance, while a curved graph signals changing resistance.",
+                    feedback:
+                      "Exactly. That keeps graph shape, proportionality, and constant-resistance meaning in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "always-use-chant-note",
+                    label: "Treat V = IR as the full answer in every case, because any graph that comes from current and voltage should still obey the same constant-resistance pattern if the measurements are correct.",
+                    feedback:
+                      "That turns Ohm's law into a chant and erases the non-ohmic case the lesson is trying to make visible.",
+                  },
+                  {
+                    value: "curved-still-constant-note",
+                    label: "Treat the curved graph as another version of constant resistance, because the main clue is still that more voltage gives more current even if the line stops being straight.",
+                    feedback:
+                      "That keeps the changing-resistance case invisible. Curve shape matters here.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads graph shape before applying the ohmic rule.",
+                retryLabel: "That note would leave a main M9_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m9-l5-fix-ideas",
+                  badge: "Graph repair",
+                  title: "Repair the chant-and-ignore-the-curve shortcut",
+                  scenario:
+                    "One trainee keeps chanting V = IR as if it must force every component into constant resistance, while another notices more voltage gives more current and concludes that graph shape can never matter very much.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-ohmic-rule",
+                      label: "Repair both ideas together: Ohm's law is the proportional rule for ohmic conductors under fixed conditions, and the I-V graph shape tells you whether resistance is staying constant or changing.",
+                      feedback:
+                        "Exactly. That restores both the rule boundary and the graph-reading purpose.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-better-data",
+                      label: "Repair the confusion by saying curved graphs usually mean the measurements need smoothing, because a well-run current-voltage test should normally come back to the same straight-line rule.",
+                      feedback:
+                        "That would keep the chant shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-bigger-voltage",
+                      label: "Repair the confusion by saying the main thing to learn is that larger voltage gives larger current, because the exact graph shape only adds detail after the main electrical trend is clear.",
+                      feedback:
+                        "That would keep the ignore-the-curve shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats graph shape as evidence, not decoration.",
+                  retryLabel: "That would leave a main M9_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m9-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line I-V rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating every current-voltage question as the same constant-resistance story.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "iv-anchor",
+                      label: "For an ohmic conductor under fixed conditions, current is proportional to voltage and the I-V graph is a straight line through the origin; if the graph curves, the resistance is changing across the range.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "formula-anchor",
+                      label: "The main idea is to remember V = IR strongly enough that any current-voltage graph can be treated as a version of the same resistance rule.",
+                      feedback:
+                        "That would build the wrong chant model into the anchor sentence.",
+                    },
+                    {
+                      value: "bigger-voltage-anchor",
+                      label: "The main idea is that bigger voltage gives bigger current, because once students know that trend the distinction between straight and curved graphs usually becomes optional detail.",
+                      feedback:
+                        "That would shrink the lesson to a partial trend and hide the whole resistance-change clue.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right ohmic-and-graph rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m9-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the I-V vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up ohmic, proportional, constant resistance, and curved response until every graph sounds like just another way of plotting the same formula.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-iv-shape",
+                      label: "Use ohmic for the fixed-condition proportional case, constant resistance for the straight origin-passing response, and non-ohmic for the curved response where the effective resistance changes.",
+                      feedback:
+                        "Exactly. That keeps the graph words tied to their real circuit meanings.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-always-ohmic",
+                      label: "Use ohmic for any component that shows more current when the voltage rises, because proportionality and constant resistance are usually close enough for classroom graph work.",
+                      feedback:
+                        "That would hard-wire the wrong overgeneralization into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-curves-as-noise",
+                      label: "Use curved response mainly for messy data, because the clean physical meaning should still be the same straight-line resistance story whenever the measurements settle down.",
+                      feedback:
+                        "That would erase the whole point of including non-ohmic behaviour in the lesson.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the I-V terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m9-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they judge the graph",
+                  scenario:
+                    "The trainee analyst is about to quote V = IR immediately without checking whether the graph is straight through the origin or curving away from that pattern.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "shape-first-then-rule",
+                      label: "Check the I-V graph shape first, then decide whether the component is behaving ohmically under fixed conditions before using the proportional rule and constant-resistance interpretation.",
+                      feedback:
+                        "Exactly. That gives the analyst the right graph-first workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "formula-first",
+                      label: "Start with V = IR first, because the formula tells you the resistance story and the graph is mainly there to display the same answer visually afterward.",
+                      feedback:
+                        "That would send the analyst straight into the wrong chant shortcut.",
+                    },
+                    {
+                      value: "trend-only",
+                      label: "Start by checking whether current rises when voltage rises, because once that basic trend is confirmed the graph shape usually adds only presentational detail.",
+                      feedback:
+                        "That would send the analyst into the wrong ignore-the-curve shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean graph-shape method.",
+                  retryLabel: "That would send the analyst back into a M9_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m9-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the chant and curve-ignoring shortcuts",
+                  scenario:
+                    "One crew member keeps applying Ohm's law to every graph without checking the component type, while another keeps saying any upward graph proves constant resistance even if the line curves.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "iv-trap-warning",
+                      label: "Do not turn Ohm's law into a chant for every component, and do not ignore graph shape. Straight through the origin is the constant-resistance clue; a curve means the resistance is changing over the tested range.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "formula-warning-only",
+                      label: "Warn mainly that not every component is perfectly ohmic, because once that is clear students usually treat graph curvature with the right amount of caution on their own.",
+                      feedback:
+                        "That would leave the curve-ignoring shortcut mostly alive.",
+                    },
+                    {
+                      value: "graph-warning-only",
+                      label: "Warn mainly that graph shape matters, because once students notice the curve they usually stop overusing the Ohm's law formula automatically.",
+                      feedback:
+                        "That would leave the chant shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps Ohm's law and graph evidence in the right relationship.",
+                  retryLabel: "That warning would leave a main M9_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m9-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps constant-versus-changing difficulty visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why some routes keep the same difficulty as the push rises while others change their difficulty and bend the graph.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "travelator-analogy",
+                      label: "Think of an ohmic route like a travel path with the same difficulty each step of the way: doubling the push doubles the response. A non-ohmic route is more like a path whose difficulty changes as conditions change, so the response bends away from that straight pattern.",
+                      feedback:
+                        "Exactly. That keeps proportionality and changing resistance visible without flattening them into one story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "always-straight-analogy",
+                      label: "Think of every current-voltage graph like a cleaner or messier version of the same straight road, because the real physical rule is still constant resistance underneath.",
+                      feedback:
+                        "That would rebuild the chant shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "more-push-only-analogy",
+                      label: "Think mainly of stronger push giving stronger movement, because once that direction is clear the exact curve shape usually does not change the core circuit meaning very much.",
+                      feedback:
+                        "That would rebuild the ignore-the-curve shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps constant and changing resistance in the right relationship.",
+                  retryLabel: "That analogy would pull the lesson away from the right I-V model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M9_L4") {
