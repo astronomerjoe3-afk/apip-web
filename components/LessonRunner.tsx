@@ -3497,6 +3497,248 @@ function getA6ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A6_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a6-l5-graph-board",
+        badge: "Graph board",
+        title: "Name the fixed quantity before you read the graph shape",
+        scenario:
+          "The graph board shows isothermal, isobaric, and isochoric paths beside the chamber story. One trainee chooses the law from the graph's visual look alone, another forgets that direct gas-law plots need kelvin, and a third treats every rising line as basically the same relation.",
+        prompt: "Pin the note that keeps the gas-graph model accurate.",
+        options: [
+          {
+            value: "condition-first-graph-note",
+            label: "Start by naming the fixed quantity, then match the law and graph shape to that condition. A graph only becomes meaningful when the physical path and the variable relation stay linked.",
+            feedback:
+              "Exactly. That keeps condition, law, and graph shape in one story.",
+            isCorrect: true,
+          },
+          {
+            value: "shape-alone-note",
+            label: "Treat the graph shape as the main clue on its own, because once the curve or line is recognized the fixed quantity and process label usually become secondary details.",
+            feedback:
+              "That would rebuild the shape-alone shortcut.",
+          },
+          {
+            value: "same-upward-line-note",
+            label: "Treat the direct gas-law graphs as basically the same upward line story, because once the variables rise together the exact fixed condition and temperature scale usually matter much less.",
+            feedback:
+              "That would rebuild the condition-blur shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads graph shape through fixed-condition meaning.",
+        retryLabel: "That note would leave a main A6_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a6-l5-fix-ideas",
+          badge: "Graph repair",
+          title: "Repair the shape-alone and condition-blur shortcuts",
+          scenario:
+            "One analyst keeps picking Boyle, Charles, or the pressure law from visual shape alone, while another keeps talking about straight lines without naming what was held fixed.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-condition-then-shape",
+              label: "Repair both habits together: name the fixed quantity first, then choose the matching gas law and explain the graph shape from that condition rather than from appearance alone.",
+              feedback:
+                "Exactly. That restores the right A6_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-curve-recognition-first",
+              label: "Repair the confusion by focusing on curve recognition first, because once students know which shapes are straight or curved the condition labels usually become routine details.",
+              feedback:
+                "That would keep the shape-alone shortcut alive.",
+            },
+            {
+              value: "repair-direct-proportion-first",
+              label: "Repair the confusion by grouping the direct-proportion cases together first, because once students see both lines rise the fixed condition and kelvin requirement usually become less central.",
+              feedback:
+                "That would keep the condition-blur shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now ties each path to its fixed condition first.",
+          retryLabel: "That would leave a main A6_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a6-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line gas-graph rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop reading gas-law graphs like detached picture art.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a6-l5-anchor",
+              label: "Gas-law graphs only become meaningful when the path is linked to the condition that stays fixed.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "graph-shape-main-anchor",
+              label: "The main idea is mostly that each gas-law graph has its own visual signature, because once students memorize the shapes the fixed condition usually becomes secondary.",
+              feedback:
+                "That would erase the condition-first idea the lesson needs.",
+            },
+            {
+              value: "equation-main-anchor",
+              label: "The main idea is mostly that each path has an equation, because once students know the formula the graph meaning usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson too far into formula matching.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right gas-graph rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a6-l5-technical-words",
+          badge: "Term desk",
+          title: "Clean up the gas-graph vocabulary board",
+          scenario:
+            "The crew keeps mixing isothermal, isobaric, isochoric, direct proportion, inverse proportion, and kelvin axes until every answer sounds like one vague graph story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a6-l5",
+              label: "Use isothermal for constant temperature, isobaric for constant pressure, isochoric for constant volume, and keep kelvin explicit when reading direct gas-law proportionality graphs.",
+              feedback:
+                "Exactly. That keeps the A6_L5 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-graph-does-most",
+              label: "Use graph shape as the main word for almost the whole topic, because once students know whether a line rises or curves down the condition labels usually matter less.",
+              feedback:
+                "That would scramble the gas-graph terms into one visual shortcut.",
+            },
+            {
+              value: "term-board-direct-line-does-most",
+              label: "Use direct line as the main word for most of the topic, because once students know two laws give upward lines the other distinctions usually become secondary.",
+              feedback:
+                "That would hide the fixed-condition roles the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the gas-graph terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a6-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose the law",
+          scenario:
+            "The trainee analyst is about to jump from a graph sketch straight to an equation, and has not yet named the fixed quantity or checked whether the temperature axis should be absolute.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "fixed-condition-then-law",
+              label: "Start by naming what stays fixed, then choose the matching law, and only after that explain why the graph is curved or straight and whether kelvin is required on the temperature axis.",
+              feedback:
+                "Exactly. That gives the analyst the right A6_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-shape-only",
+              label: "Start from the shape alone, because once the graph is recognized the fixed condition and temperature scale usually sort themselves out.",
+              feedback:
+                "That would send the analyst back into the shape-alone shortcut.",
+            },
+            {
+              value: "start-from-equation-only",
+              label: "Start from the equation you remember best, because once a formula is chosen the graph and condition meaning usually become easier and less central.",
+              feedback:
+                "That would send the analyst back into the formula-first shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean condition-first graph method.",
+          retryLabel: "That would send the analyst back into an A6_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a6-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the graph-shape-only shortcut",
+          scenario:
+            "One crew member keeps matching the graph by appearance alone, while another keeps forgetting that direct gas-law graphs need absolute temperature in kelvin to keep the proportional story valid.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a6-l5-trap-warning",
+              label: "Do not choose a law from graph shape alone. Name the fixed quantity first, then keep the condition, the graph form, and the kelvin requirement aligned.",
+              feedback:
+                "Exactly. That warning blocks the main A6_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "kelvin-warning-only",
+              label: "Warn mainly about kelvin conversion, because once students remember the absolute scale they usually stop mixing up the graph conditions on their own.",
+              feedback:
+                "That would leave the condition-first method too weak.",
+            },
+            {
+              value: "shape-warning-only",
+              label: "Warn mainly about graph appearance, because once students stop trusting visual shape alone they usually sort out the fixed condition and temperature scale automatically.",
+              feedback:
+                "That would leave the full alignment habit too incomplete.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps graph, law, and condition aligned.",
+          retryLabel: "That warning would leave a main A6_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a6-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps graph and condition together",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the same variables can trace different graph shapes depending on what is held fixed.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "route-map-analogy",
+              label: "Think of the graph like a route map: the path only makes sense once you know which rule the traveler must keep constant, so the route shape has to be read together with the condition label.",
+              feedback:
+                "Exactly. That keeps path meaning tied to the fixed condition.",
+              isCorrect: true,
+            },
+            {
+              value: "shape-matching-analogy",
+              label: "Think of the graph mainly like a shape-matching puzzle, because once the line or curve is recognized the physical condition usually becomes a minor detail.",
+              feedback:
+                "That would rebuild the shape-alone shortcut.",
+            },
+            {
+              value: "formula-card-analogy",
+              label: "Think of the graph mainly like picking a formula card from memory, because once the law is recalled the graph and fixed condition usually matter much less.",
+              feedback:
+                "That would rebuild the formula-first shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps graph shape tied to the fixed-condition story.",
+          retryLabel: "That analogy would pull the lesson away from the right A6_L5 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A6_L4") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
