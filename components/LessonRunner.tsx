@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M11_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m11-l5-ambient-buzz-board",
+                badge: "Detector board",
+                title: "Measure background before naming the source effect",
+                scenario:
+                  "The Ambient-buzz lab shows a detector reading in one location before and after a source is added. One trainee quotes the raw source reading as the answer, another treats any non-zero reading as proof of the source, and a third forgets that moving to a new location can change the background by itself.",
+                prompt: "Pin the note that keeps the detector story accurate.",
+                options: [
+                  {
+                    value: "background-then-corrected-note",
+                    label: "Measure the background first, then compare the raw reading with the source present, and subtract to get the corrected source count. A non-zero detector reading alone is not enough evidence, because background and location can change the baseline.",
+                    feedback:
+                      "Exactly. That keeps raw, background, and corrected counts in the right order.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "raw-reading-note",
+                    label: "Treat the detector reading with the source present as the true source reading, because once the source is nearby the background becomes too small to matter in practice.",
+                    feedback:
+                      "That would rebuild the wrong raw-reading shortcut.",
+                  },
+                  {
+                    value: "nonzero-proof-note",
+                    label: "Treat any non-zero detector reading as proof that the source is responsible, because the instrument should only click when radiation from the source is actually reaching it.",
+                    feedback:
+                      "That would rebuild the wrong non-zero-means-source shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads detector evidence through background first.",
+                retryLabel: "That note would leave a main M11_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m11-l5-fix-ideas",
+                  badge: "Detector repair",
+                  title: "Repair the raw-reading and non-zero-proof shortcuts",
+                  scenario:
+                    "One trainee still quotes the raw count with the source present as the whole answer, while another keeps treating any non-zero reading as proof that the source caused it.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-background-subtraction",
+                      label: "Repair both ideas together: background radiation is a normal signal that must be measured first. The corrected source count is measured count minus background count, and a non-zero raw reading alone is not enough evidence by itself.",
+                      feedback:
+                        "Exactly. That restores the right background-first detector reasoning.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-stronger-source",
+                      label: "Repair the confusion by saying the source reading should dominate if the source is strong enough, because then background subtraction becomes more of a technical detail than a reasoning step.",
+                      feedback:
+                        "That would keep the wrong raw-reading shortcut alive.",
+                    },
+                    {
+                      value: "repair-with-clicks-mean-source",
+                      label: "Repair the confusion by saying detector clicks are still mainly source evidence, because once the instrument responds at all the background contribution is usually not the main issue.",
+                      feedback:
+                        "That would keep the wrong non-zero-proof shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses the right background-subtraction story.",
+                  retryLabel: "That would leave a main M11_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m11-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line detector rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop quoting raw readings and skipping the background step.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "detector-anchor",
+                      label: "Background radiation is a normal environmental presence. Corrected source count equals measured count minus background count, and a non-zero detector reading by itself is not enough evidence.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "raw-anchor",
+                      label: "The main idea is that the detector reading with the source present already tells you the source strength, because subtraction mainly tidies the result rather than changing the conclusion.",
+                      feedback:
+                        "That would build the wrong raw-reading shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "click-anchor",
+                      label: "The main idea is that a clicking detector proves the source is active, because background effects are usually too small to matter for deciding whether radiation is present.",
+                      feedback:
+                        "That would build the wrong non-zero-proof shortcut into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right detector rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m11-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the detector vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up raw reading, background, corrected source count, and location change until every detector number sounds like direct source evidence.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-background-corrected",
+                      label: "Use background for the normal environmental count, measured or raw reading for the detector total with the source present, corrected source count for the result after subtraction, and location change for one reason the baseline can move.",
+                      feedback:
+                        "Exactly. That keeps the detector terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-total-evidence",
+                      label: "Use raw reading and source reading almost interchangeably, because students usually understand the detector faster when every count is treated mainly as direct source evidence.",
+                      feedback:
+                        "That would hard-wire the wrong raw-equals-source shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-baseline-optional",
+                      label: "Use background mainly as a small correction note, because the real physics comes from the bigger reading once the source is placed near the detector.",
+                      feedback:
+                        "That would hard-wire the wrong baseline-is-optional shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the detector terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m11-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they judge the detector result",
+                  scenario:
+                    "The trainee analyst is about to read the source-present count and decide immediately, without measuring the background first or asking whether the location itself changed the baseline.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "background-first-then-subtract",
+                      label: "Start by measuring the background in the same conditions, then measure with the source, subtract to get the corrected source count, and only after that decide what the detector evidence really shows.",
+                      feedback:
+                        "Exactly. That gives the analyst the right detector method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "source-first-only",
+                      label: "Start with the source-present reading, because once the detector total is known the background can usually be estimated later without changing the main conclusion.",
+                      feedback:
+                        "That would send the analyst back into the wrong raw-reading shortcut.",
+                    },
+                    {
+                      value: "clicks-first-only",
+                      label: "Start by asking whether the detector is clicking at all, because once the instrument responds the exact background number is usually not the main point.",
+                      feedback:
+                        "That would send the analyst into the wrong non-zero-proof shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean detector-reading method.",
+                  retryLabel: "That would send the analyst back into a M11_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m11-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the raw-reading and non-zero-proof shortcuts",
+                  scenario:
+                    "One crew member keeps quoting the total source-present count as if it were already corrected, while another keeps treating any non-zero detector reading as enough proof by itself.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "detector-trap-warning",
+                      label: "Do not quote the raw reading as the source effect, and do not treat a non-zero reading as proof by itself. Measure background first, subtract before concluding, and remember that location can change the baseline.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "raw-warning-only",
+                      label: "Warn mainly that raw and corrected readings are different, because once students stop that mistake they usually become more careful about non-zero evidence on their own.",
+                      feedback:
+                        "That would leave the non-zero-proof shortcut mostly alive.",
+                    },
+                    {
+                      value: "proof-warning-only",
+                      label: "Warn mainly that non-zero is not enough by itself, because once students stop that mistake they usually become more careful about subtraction on their own.",
+                      feedback:
+                        "That would leave the raw-reading shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps background, raw, and corrected counts separate.",
+                  retryLabel: "That warning would leave a main M11_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m11-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the baseline visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a detector reading must be split into background and extra source contribution before it becomes good evidence.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "room-noise-analogy",
+                      label: "Think of the detector like listening for one speaker in a room that already has background noise: first measure the room noise, then add the speaker, and subtract the baseline before deciding how loud the speaker alone really is.",
+                      feedback:
+                        "Exactly. That keeps the background baseline visible without flattening the detector story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "meter-total-analogy",
+                      label: "Think of the detector like a meter where the final number is all that matters, because once the source is switched on the total reading is the best evidence of the source by itself.",
+                      feedback:
+                        "That would rebuild the wrong raw-reading shortcut.",
+                    },
+                    {
+                      value: "alarm-trigger-analogy",
+                      label: "Think of the detector like an alarm where any trigger proves the source is present, because that is simpler than worrying about background clicks and subtraction.",
+                      feedback:
+                        "That would rebuild the wrong non-zero-proof shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the background baseline visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right Ambient-buzz model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M11_L4") {
