@@ -1856,6 +1856,7 @@ export default function LessonRunner({
         lessonId === "M14_L2" ||
         lessonId === "M14_L3" ||
         lessonId === "M14_L4" ||
+        lessonId === "M14_L5" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9112,6 +9113,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M14_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m14-l5-redshift-board",
+                badge: "Wavelength board",
+                title: "Keep emitted and observed wavelength on the same board",
+                scenario:
+                  "The Redshift evidence board compares emitted light with the longer observed wavelength from a farther galaxy. One trainee keeps treating redshift as just a color-name label, another wants to rank galaxies by distance without checking the wavelength stretch, and a third forgets that expansion is the reason the arriving light is stretched.",
+                prompt: "Pin the note that keeps the redshift model accurate.",
+                options: [
+                  {
+                    value: "stretch-and-distance-note",
+                    label: "Treat redshift as observed light arriving at a longer wavelength than it was emitted, tie that stretch to the expansion of space during travel, and expect farther galaxies to usually show larger redshifts.",
+                    feedback:
+                      "Exactly. That keeps wavelength stretching, expansion, and the farther-galaxy trend in one picture.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "color-name-only-note",
+                    label: "Treat redshift mainly as a red-looking color label, because once learners picture the redder appearance clearly the wavelength meaning usually sorts itself out on its own.",
+                    feedback:
+                      "That would rebuild the wrong color-name shortcut.",
+                  },
+                  {
+                    value: "distance-only-note",
+                    label: "Treat the lesson mainly as a distance ranking task, because once students know which galaxy is farther the redshift explanation is usually obvious even without comparing emitted and observed wavelengths.",
+                    feedback:
+                      "That would hide the wavelength-stretch evidence the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads redshift as wavelength stretching tied to expansion.",
+                retryLabel: "That note would leave a main M14_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m14-l5-fix-ideas",
+                  badge: "Stretch repair",
+                  title: "Repair the color-label and distance-only shortcuts",
+                  scenario:
+                    "One trainee keeps saying redshift only means the light looks redder, while another ranks near and far galaxies without first comparing emitted and observed wavelengths.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-stretch-model",
+                      label: "Repair both habits together: compare emitted and observed wavelengths first, treat a longer observed wavelength as the redshift clue, and use expansion during travel to explain why farther galaxies usually show the larger stretch.",
+                      feedback:
+                        "Exactly. That restores the proper redshift model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-color-first",
+                      label: "Repair the confusion by emphasizing the redder color more carefully, because once students picture the color shift clearly the wavelength and expansion meanings usually become obvious afterward.",
+                      feedback:
+                        "That would keep the color-label shortcut alive.",
+                    },
+                    {
+                      value: "repair-distance-first",
+                      label: "Repair the confusion by drilling the near-versus-far ranking first, because once students know which galaxy is farther the wavelength-stretch explanation usually takes care of itself.",
+                      feedback:
+                        "That would keep the distance-only shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps wavelength stretch and galaxy distance linked the right way.",
+                  retryLabel: "That would leave a main M14_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m14-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line redshift rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating redshift like only a color fact with no wavelength or expansion story attached.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "redshift-anchor",
+                      label: "Redshift means light is observed at longer wavelengths, cosmological redshift is tied to the expansion of space, and farther galaxies usually show larger redshifts.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "red-color-anchor-only",
+                      label: "The main idea is that redshift means light simply looks redder, because the color name is the clearest first clue and the wavelength details can stay secondary.",
+                      feedback:
+                        "That line rebuilds the wrong color-name shortcut.",
+                    },
+                    {
+                      value: "farther-only-anchor",
+                      label: "The main idea is that farther galaxies usually have larger redshifts, because once students remember that trend the wavelength and expansion meanings usually become less important.",
+                      feedback:
+                        "That line misses the wavelength-stretch rule that actually explains the trend.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right redshift rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m14-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the redshift vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up emitted wavelength, observed wavelength, redshift, expansion, and galaxy distance until every answer sounds like one vague 'red means far' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-redshift",
+                      label: "Use emitted wavelength for the light at the source, observed wavelength for the stretched light we receive, redshift for that longer-wavelength change, and expansion for the cosmic cause behind the farther-galaxy trend.",
+                      feedback:
+                        "Exactly. That keeps the redshift terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-color-does-most",
+                      label: "Use red color as the main word for almost the whole topic, because once students picture the color shift the wavelength and expansion terms usually sort themselves out.",
+                      feedback:
+                        "That would hard-wire the color-label shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-distance-does-most",
+                      label: "Use farther away as the main word for almost the whole topic, because once students know which galaxy is farther the rest of the redshift vocabulary usually becomes secondary.",
+                      feedback:
+                        "That would hide the wavelength-stretch rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the redshift terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m14-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they name the trend",
+                  scenario:
+                    "The trainee analyst is about to rank galaxies by redshift without first comparing emitted and observed wavelength bars or asking what physical process created the stretch.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-bars-then-cause-then-rank",
+                      label: "Start by comparing emitted and observed wavelength, call the longer observed wavelength the redshift clue, then connect that stretch to expansion during travel before ranking which farther galaxy should usually show the larger redshift.",
+                      feedback:
+                        "Exactly. That gives the analyst the right redshift method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rank-distance-then-explain",
+                      label: "Start by ranking the galaxies by distance alone, because once students know which object is farther the redshift explanation usually becomes obvious afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong distance-only shortcut.",
+                    },
+                    {
+                      value: "color-name-then-explain",
+                      label: "Start from the redder color label itself, because once students picture that shift clearly the wavelength-stretch meaning usually takes care of itself afterward.",
+                      feedback:
+                        "That would send the analyst back into the color-name shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean redshift explanation method.",
+                  retryLabel: "That would send the analyst back into a M14_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m14-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the color-label and trend-only shortcuts",
+                  scenario:
+                    "One crew member keeps treating redshift as nothing more than 'it looks redder,' while another treats the farther-galaxy trend as a fact to memorize without checking the wavelength-stretch evidence.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "redshift-trap-warning",
+                      label: "Do not let redshift collapse into a color-name fact, and do not let the farther-galaxy trend replace the wavelength comparison. Keep emitted light, observed stretch, and expansion in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M14_L5 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "color-warning-only",
+                      label: "Warn mainly against the color mistake, because once students stop that habit they usually stop memorizing the distance trend with no explanation on their own.",
+                      feedback:
+                        "That would leave the trend-only shortcut too alive.",
+                    },
+                    {
+                      value: "trend-warning-only",
+                      label: "Warn mainly against memorizing the distance trend, because once students stop that habit they usually stop treating redshift like a simple color label on their own.",
+                      feedback:
+                        "That would leave the color-label shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps redshift tied to wavelength stretching and expansion.",
+                  retryLabel: "That warning would leave a main M14_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m14-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps stretching central",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why farther galaxies usually show larger redshifts without turning the lesson into a vague color-memory trick.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "elastic-spacing-analogy",
+                      label: "Think of the light pattern like marks on an elastic strip that gets stretched during travel: the gaps end up wider apart, and a larger stretch gives a larger redshift than before.",
+                      feedback:
+                        "Exactly. That keeps wavelength stretching central without flattening the astronomy.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "paint-color-analogy",
+                      label: "Think of redshift like paint slowly turning redder with distance, because the main point is simply that farther galaxies pick up a redder look as they travel to us.",
+                      feedback:
+                        "That would rebuild the color-label shortcut.",
+                    },
+                    {
+                      value: "distance-label-analogy",
+                      label: "Think of redshift mainly like putting bigger distance stickers on farther galaxies, because once the trend is clear the wavelength story usually matters less.",
+                      feedback:
+                        "That would rebuild the trend-without-stretch shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the redshift ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right redshift model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M14_L4") {
