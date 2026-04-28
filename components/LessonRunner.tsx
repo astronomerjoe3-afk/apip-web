@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M12_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m12-l6-balance-board",
+                badge: "Review board",
+                title: "Judge the application with benefit, hazard, control, and waste together",
+                scenario:
+                  "The Benefits and hazards review board compares one useful nuclear application with its radiation risk, the control measures used around it, and the long-term waste question. One trainee sells only the benefit, another talks as if shielding makes the risk disappear completely, and a third ignores the waste-management step because the application works well right now.",
+                prompt: "Pin the note that keeps the final judgment balanced.",
+                options: [
+                  {
+                    value: "balanced-judgment-note",
+                    label: "Keep the evaluation linked: name the useful application, the biological risk from ionising radiation, the shielding or handling control, and the waste-management question before deciding whether the use is justified.",
+                    feedback:
+                      "Exactly. That keeps benefit, hazard, control, and waste on one board.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "benefit-only-note",
+                    label: "Judge the technology mainly by how useful it is, because once the practical benefit is strong enough the safety and waste details are mostly engineering follow-up issues.",
+                    feedback:
+                      "That would rebuild the wrong benefit-only shortcut.",
+                  },
+                  {
+                    value: "shielding-erases-risk-note",
+                    label: "Judge the technology mainly by whether shielding is available, because if barriers can be added the radiation problem is effectively solved and the rest of the evaluation becomes straightforward.",
+                    feedback:
+                      "That would rebuild the wrong shielding-erases-risk shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now judges nuclear use with a balanced evidence board.",
+                retryLabel: "That note would leave a main M12_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m12-l6-fix-ideas",
+                  badge: "Judgment repair",
+                  title: "Repair the benefit-only and shielding-erases-risk shortcuts",
+                  scenario:
+                    "One trainee keeps arguing from usefulness alone, while another keeps talking as if once shielding or procedures exist the biological risk stops mattering physically.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-balanced-judgment",
+                      label: "Repair both habits together: pair each nuclear benefit with its ionising-radiation hazard, the real control method, and the waste or long-term handling issue before reaching the final judgment.",
+                      feedback:
+                        "Exactly. That restores the balanced evaluation method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-benefit-first",
+                      label: "Repair the confusion by ranking the uses from most useful to least useful first, because once students know the benefit order they usually become more realistic about the safety side afterward.",
+                      feedback:
+                        "That would keep the benefit-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-shielding-first",
+                      label: "Repair the confusion by focusing mainly on shielding and procedures, because once students know the controls they usually infer the rest of the hazard judgment for themselves.",
+                      feedback:
+                        "That would keep the risk-without-physics shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps use, risk, control, and waste together.",
+                  retryLabel: "That would leave a main M12_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m12-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the final evaluation rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop giving one-sided answers about nuclear technology.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "hazard-anchor",
+                      label: "Ionising radiation creates real biological risk, shielding, handling, and storage reduce risk, and waste management remains part of the full nuclear-technology story.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "benefit-anchor-only",
+                      label: "The main idea is that nuclear technology can do jobs other methods cannot, because the unusual usefulness is the point students most need to remember.",
+                      feedback:
+                        "That line collapses the evaluation into benefit-only thinking.",
+                    },
+                    {
+                      value: "control-anchor-only",
+                      label: "The main idea is that careful shielding and handling make nuclear technology safe enough to use, because the control side is the most practical fact students need to remember.",
+                      feedback:
+                        "That line narrows the judgment too much and blurs the remaining risk and waste story.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right evaluation rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m12-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the benefit-and-hazard vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up ionising radiation, shielding, handling procedure, storage, and waste management until every answer sounds like one vague safety slogan.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-balanced-review",
+                      label: "Use ionising radiation for the biological-risk source, shielding and handling for the control methods, storage and waste management for the long-term responsibility, and application benefit for the useful side of the comparison.",
+                      feedback:
+                        "Exactly. That keeps the review terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-safety-does-most",
+                      label: "Use shielding as the main word for almost the whole topic, because once students know there is protection the rest of the discussion is mostly detail.",
+                      feedback:
+                        "That would hard-wire the shielding-solves-everything shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-benefit-does-most",
+                      label: "Use application benefit as the main word for almost the whole topic, because once students know why the technology is useful the rest of the discussion is mostly detail.",
+                      feedback:
+                        "That would hard-wire the benefit-only shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the review terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m12-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they give the verdict",
+                  scenario:
+                    "The trainee analyst is about to give a final verdict after naming only the benefit or only the control methods, without pairing the useful application with the hazard and the long-term waste question.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "pair-benefit-hazard-control-waste",
+                      label: "Start by naming the useful application and the ionising-radiation hazard in the same sentence, then add the main control method and finish with the waste or long-term handling question before deciding whether the use is justified.",
+                      feedback:
+                        "Exactly. That gives the analyst the right final-review method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "benefit-first-verdict",
+                      label: "Start with whether the application is valuable, because once the purpose is strong enough the rest of the argument mainly explains how the use is made workable.",
+                      feedback:
+                        "That would send the analyst back into benefit-first judgment.",
+                    },
+                    {
+                      value: "control-first-verdict",
+                      label: "Start with the protection methods, because once the shielding and procedures are good enough the rest of the judgment mostly takes care of itself.",
+                      feedback:
+                        "That would send the analyst back into control-only judgment.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a balanced nuclear-review method.",
+                  retryLabel: "That would send the analyst back into a M12_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m12-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-sided verdict shortcuts",
+                  scenario:
+                    "One crew member treats usefulness as the whole story, another treats shielding as if it makes the radiation problem disappear, and a third never brings waste management into the judgment at all.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "review-trap-warning",
+                      label: "Do not give a one-sided verdict. Pair benefit with ionising-radiation hazard, include the real control method, and keep waste management inside the same final judgment.",
+                      feedback:
+                        "Exactly. That warning blocks the main M12_L6 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "benefit-warning-only",
+                      label: "Warn mainly against overselling the usefulness, because once students stop that habit they usually become more balanced about the control and waste side on their own.",
+                      feedback:
+                        "That would leave the shielding-and-waste shortcuts mostly alive.",
+                    },
+                    {
+                      value: "control-warning-only",
+                      label: "Warn mainly against oversimplifying the controls, because once students become more careful there they usually become more balanced about the benefit side too.",
+                      feedback:
+                        "That would leave the benefit-only shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the verdict balanced.",
+                  retryLabel: "That warning would leave a main M12_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m12-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps benefit and responsibility linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture nuclear technology as something valuable that still needs real controls and long-term responsibility.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "power-tool-analogy",
+                      label: "Think of nuclear technology like a powerful specialist tool: it can do important jobs, but you judge it properly only when the safety guard, operating rules, and after-use handling stay part of the same decision.",
+                      feedback:
+                        "Exactly. That keeps usefulness, control, and responsibility linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "miracle-tool-analogy",
+                      label: "Think of it like a miracle tool that is obviously worth using whenever it solves a hard problem, because the usefulness usually outweighs the rest of the discussion.",
+                      feedback:
+                        "That would rebuild the benefit-only shortcut.",
+                    },
+                    {
+                      value: "sealed-box-analogy",
+                      label: "Think of it like a sealed box that becomes safe once the right barriers are added, because once the protection is there the inside physics no longer matters very much.",
+                      feedback:
+                        "That would rebuild the shielding-erases-risk shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps benefit and responsibility linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Benefits and hazards review model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M12_L5") {
