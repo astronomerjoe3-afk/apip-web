@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M10_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m10-l5-induction-alarm-board",
+                badge: "Change board",
+                title: "Ask what is changing before you ask what is induced",
+                scenario:
+                  "The Induction Alarm board compares a still magnet in a still coil, a quickly moving magnet, and a higher-turn coil. One trainee says the magnet's presence alone should keep an induced output going, another notices a bigger pulse but forgets it comes from faster change, and a third talks about generator output without connecting it to repeated change-thread.",
+                prompt: "Pin the note that keeps the induction story accurate.",
+                options: [
+                  {
+                    value: "change-thread-note",
+                    label: "Induction is a change-thread story: a still field does not give a sustained induced output, faster change gives a larger induced effect, and more turns strengthen the response. A generator works by making that field-thread change repeat continuously.",
+                    feedback:
+                      "Exactly. That keeps change, speed, turns, and generator logic connected.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "static-field-note",
+                    label: "Treat the magnet's presence as the main induction cause, because once the coil is inside a strong field the output should continue as long as the magnet remains nearby.",
+                    feedback:
+                      "That would rebuild the static-field shortcut the lesson is trying to remove.",
+                  },
+                  {
+                    value: "motion-only-note",
+                    label: "Treat the moving hand as the whole cause, because induction mainly comes from motion itself and the details about changing field-thread or turn count can be added later if needed.",
+                    feedback:
+                      "That would flatten the lesson into vague motion language instead of the actual change-thread story.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads induction as a change-thread story.",
+                retryLabel: "That note would leave a main M10_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m10-l5-fix-ideas",
+                  badge: "Change repair",
+                  title: "Repair the static-field and vague-motion shortcuts",
+                  scenario:
+                    "One trainee still says a magnet sitting in a coil should keep producing output by its presence alone, while another talks about motion without naming what is changing in the field-thread.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-with-change-first",
+                      label: "Repair both ideas together: induction needs changing magnetic flux through the coil. A static field is not enough for a sustained induced output, and faster change or more turns makes the induced effect larger.",
+                      feedback:
+                        "Exactly. That restores the change-first induction story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-stronger-magnet",
+                      label: "Repair the confusion by saying the magnet just needs to be stronger, because once the field is large enough the coil should start giving output even if nothing in the setup changes much.",
+                      feedback:
+                        "That would keep the static-field shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-motion-alone",
+                      label: "Repair the confusion by saying any motion near the coil is what matters, because students can usually understand the output before they worry about which part of the field story is changing.",
+                      feedback:
+                        "That would keep the vague-motion shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now asks what is changing before naming induction.",
+                  retryLabel: "That would leave a main M10_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m10-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line induction rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop reducing induction to 'magnet near coil means output.'",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "induction-anchor",
+                      label: "Induction needs changing magnetic flux. Faster change and more turns increase the induced effect, and a generator is repeated induction caused by continuous rotation.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "presence-anchor",
+                      label: "The main idea is that a magnet near a coil creates output, because once the field reaches the wire the induction effect is already present and motion mainly changes its size.",
+                      feedback:
+                        "That would build the wrong static-presence model into the anchor sentence.",
+                    },
+                    {
+                      value: "generator-anchor",
+                      label: "The main idea is that generators spin coils to make electricity, because the exact flux-change story is helpful detail but not really the central induction idea.",
+                      feedback:
+                        "That would skip the core change-story the lesson is trying to secure.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right induction rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m10-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the induction vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up induced effect, flux change, turn count, and generator until every case sounds like 'magnet plus wire makes electricity' with no real difference between still and changing setups.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-flux-change",
+                      label: "Use changing flux for what must vary through the coil, induced effect for the resulting output, turn count for one factor that strengthens it, and generator for a setup that keeps the flux change repeating.",
+                      feedback:
+                        "Exactly. That keeps the induction terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-field-presence",
+                      label: "Use field presence and induction almost interchangeably at first, because students usually understand the topic faster if the magnet itself is treated as the main output source.",
+                      feedback:
+                        "That would hard-wire the static-field shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-motion-spark",
+                      label: "Use motion as the main induction term, because once students know that something has to move the exact field-change wording usually becomes optional detail.",
+                      feedback:
+                        "That would hard-wire the vague-motion shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the induction terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m10-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they predict the induced output",
+                  scenario:
+                    "The trainee analyst is about to look only at whether a magnet is present, without checking whether the field-thread through the coil is changing, how quickly it is changing, or how many turns are helping the response.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "change-speed-turns-first",
+                      label: "Start by asking what is changing through the coil, then compare how fast that change happens, and only after that add turn count to judge the size of the induced effect or the generator-style output.",
+                      feedback:
+                        "Exactly. That gives the analyst the right change-speed-turns workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "magnet-present-first",
+                      label: "Start with whether the magnet is inside the coil, because once the field is clearly present the induced effect is mostly guaranteed and the rest of the details just adjust it.",
+                      feedback:
+                        "That would send the analyst back into the static-field shortcut.",
+                    },
+                    {
+                      value: "motion-first-only",
+                      label: "Start with whether something is moving, because once motion is confirmed the output can usually be predicted without spending much time on the detailed field-thread story.",
+                      feedback:
+                        "That would send the analyst into the vague-motion shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean induction method.",
+                  retryLabel: "That would send the analyst back into a M10_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m10-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the static-field and motion-alone shortcuts",
+                  scenario:
+                    "One crew member keeps treating a still magnet in a coil as enough for sustained output, while another keeps saying motion alone explains induction without naming the changing flux story.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "induction-trap-warning",
+                      label: "Do not confuse field presence with induction, and do not stop at the word motion. Induction needs changing flux through the coil, and the effect grows with faster change and more turns.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "presence-warning-only",
+                      label: "Warn mainly that a still magnet is not enough, because once students accept that, they usually sort out the rest of the induction story on their own.",
+                      feedback:
+                        "That would leave the vague-motion shortcut mostly alive.",
+                    },
+                    {
+                      value: "motion-warning-only",
+                      label: "Warn mainly that motion is not the whole explanation, because once students talk about changing flux they usually stop treating a still field as enough automatically.",
+                      feedback:
+                        "That would leave the static-field shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the flux-change story visible.",
+                  retryLabel: "That warning would leave a main M10_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m10-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the change-thread visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a still setup gives no sustained induced output, but faster change and repeated turning can build stronger pulses and generator-style output.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "turnstile-analogy",
+                      label: "Think of the coil like a turnstile counter that only clicks when something actually passes through and changes the reading. Faster passes make stronger or quicker responses, and a generator is like making that change happen over and over again.",
+                      feedback:
+                        "Exactly. That keeps the change-thread story visible without flattening it into 'magnet nearby.'",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "magnet-battery-analogy",
+                      label: "Think of the magnet like a battery that powers the coil whenever it is close enough, because then students can picture induction as a stored push that motion simply helps release.",
+                      feedback:
+                        "That would rebuild the static-field shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "movement-alone-analogy",
+                      label: "Think of induction like any nearby movement waking the coil up, because that makes the topic easier to picture than worrying about what is changing in the magnetic story.",
+                      feedback:
+                        "That would rebuild the vague-motion shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the change-thread story visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right Induction Alarm model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M10_L4") {
