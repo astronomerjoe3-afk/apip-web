@@ -1873,6 +1873,7 @@ export default function LessonRunner({
         lessonId === "A3_L1" ||
         lessonId === "A3_L2" ||
         lessonId === "A3_L3" ||
+        lessonId === "A3_L4" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9129,6 +9130,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A3_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a3-l4-grating-board",
+                badge: "Grating board",
+                title: "Read wavelength and spacing through the angle pattern",
+                scenario:
+                  "The grating board compares first-order angles while wavelength and line spacing change. One trainee treats order labels like random brightness names, another ignores the grating spacing completely, and a third forgets that a longer wavelength pushes the reinforcement directions farther out.",
+                prompt: "Pin the note that keeps the grating model accurate.",
+                options: [
+                  {
+                    value: "wavelength-spacing-order-note",
+                    label: "Larger wavelength gives larger diffraction angles, smaller grating spacing spreads the pattern more, and order lines mark reinforcement directions rather than random brightness labels.",
+                    feedback:
+                      "Exactly. That keeps wavelength, spacing, and order in one accurate grating story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "order-label-note",
+                    label: "Treat the order numbers mainly like brightness labels, because once the first few bright lines are named the exact wavelength and spacing details usually matter less.",
+                    feedback:
+                      "That would rebuild the order-label shortcut.",
+                  },
+                  {
+                    value: "wavelength-only-note",
+                    label: "Read the pattern mainly from wavelength, because once the color or wavelength is known the grating spacing usually becomes a secondary detail.",
+                    feedback:
+                      "That would hide the spacing trend the lesson needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads the pattern through wavelength, spacing, and reinforcement together.",
+                retryLabel: "That note would leave a main A3_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a3-l4-fix-ideas",
+                  badge: "Pattern repair",
+                  title: "Repair the order-label and spacing shortcuts",
+                  scenario:
+                    "One trainee keeps treating the orders like decorative bright-line names, while another keeps ignoring how grating spacing changes the angular spread even when the wavelength stays fixed.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-wavelength-spacing-reinforcement-model",
+                      label: "Repair both habits together: treat the bright orders as reinforcement directions, then read how wavelength and grating spacing together set where those directions appear.",
+                      feedback:
+                        "Exactly. That restores the right diffraction-grating workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-order-names-first",
+                      label: "Repair the confusion by naming the bright orders more carefully first, because once students can count the lines the angular story usually becomes easier later.",
+                      feedback:
+                        "That would keep the order-label shortcut alive.",
+                    },
+                    {
+                      value: "repair-wavelength-only",
+                      label: "Repair the confusion by focusing on wavelength first, because once students know which wavelength is larger the spacing details usually become secondary.",
+                      feedback:
+                        "That would keep the spacing shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now reads order, wavelength, and spacing as one pattern story.",
+                  retryLabel: "That would leave a main A3_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a3-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line grating rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating diffraction-grating patterns like random stripes with no predictable angular logic.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "grating-anchor",
+                      label: "A diffraction grating turns wavelength into a predictable angular interference pattern.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "stripe-anchor",
+                      label: "The main idea is mostly that gratings produce several bright stripes, because once students know the pattern has many lines the angle story usually becomes secondary.",
+                      feedback:
+                        "That would rebuild the decorative-stripes shortcut.",
+                    },
+                    {
+                      value: "wavelength-anchor-only",
+                      label: "The main idea is mostly that longer wavelengths spread more, because once students know that trend the role of spacing and reinforcement usually becomes secondary.",
+                      feedback:
+                        "That line would break the full grating model the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right grating rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a3-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the grating vocabulary board",
+                  scenario:
+                    "The crew keeps mixing wavelength, grating spacing, order, diffraction angle, and reinforcement direction until every answer sounds like one vague story about 'the bright lines moving around somehow.'",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a3-l4",
+                      label: "Use wavelength for the wave spacing, grating spacing for the line separation, order for the reinforcement number, diffraction angle for the spread direction, and reinforcement direction for where path matching produces a bright maximum.",
+                      feedback:
+                        "Exactly. That keeps the grating terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-order-does-most",
+                      label: "Use order as the main word for almost the whole topic, because once students can label the bright lines the wavelength and spacing terms usually matter less.",
+                      feedback:
+                        "That would wire the order-label shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-angle-does-most",
+                      label: "Use angle as the main word for almost the whole topic, because once students can see the spread the wavelength and spacing labels usually become secondary.",
+                      feedback:
+                        "That would weaken the pattern logic the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the grating terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a3-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call the spread",
+                  scenario:
+                    "The trainee analyst is about to name which pattern spreads farther without first checking wavelength and grating spacing together or thinking about how the reinforcement directions must shift.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "name-wavelength-spacing-then-shift",
+                      label: "Start by naming the wavelength and the grating spacing, then decide how that pair changes the reinforcement directions, and only afterward call which orders should sit farther out.",
+                      feedback:
+                        "Exactly. That gives the analyst the right grating workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "count-lines-first",
+                      label: "Start by counting the bright lines, because once students know which order they are looking at the wavelength and spacing story usually becomes easier later.",
+                      feedback:
+                        "That would send the analyst back into the order-label shortcut.",
+                    },
+                    {
+                      value: "wavelength-first-alone",
+                      label: "Start from wavelength alone, because once students know which wave is longer the final spread answer usually becomes mostly obvious even before spacing is checked.",
+                      feedback:
+                        "That would send the analyst back into the spacing shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean wavelength-and-spacing method.",
+                  retryLabel: "That would send the analyst back into a A3_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a3-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the order-label and spacing shortcuts",
+                  scenario:
+                    "One crew member keeps treating the order numbers like decorative stripe tags, while another keeps making spread judgments from wavelength alone and leaving the grating spacing out of the story.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "grating-trap-warning",
+                      label: "Do not treat orders like random labels or ignore the grating spacing. Read wavelength and spacing together, then use the reinforcement pattern to decide the diffraction angles.",
+                      feedback:
+                        "Exactly. That warning blocks the main A3_L4 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "order-warning-only",
+                      label: "Warn mainly against misreading the order numbers, because once students stop that they usually remember the spacing effect on their own.",
+                      feedback:
+                        "That would leave the spacing shortcut too alive.",
+                    },
+                    {
+                      value: "spacing-warning-only",
+                      label: "Warn mainly against ignoring the grating spacing, because once students include that they usually stop treating the orders like decorative labels on their own.",
+                      feedback:
+                        "That would leave the order-label shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps wavelength, spacing, and order tied together.",
+                  retryLabel: "That warning would leave a main A3_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a3-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the grating logic intact",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why only certain directions stay reinforced, and why changing wavelength or grating spacing shifts those directions.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "gate-lane-analogy",
+                      label: "Think of the grating like a row of synchronized gates: only some exit directions let all the walkers arrive in step, and changing wavelength or gate spacing changes which directions still line up.",
+                      feedback:
+                        "Exactly. That keeps reinforcement and angular spread linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "stripe-paint-analogy",
+                      label: "Think of the pattern mainly like painted stripes on a wall, because once the lines are visible their positions can usually be treated like labels rather than route-matching outcomes.",
+                      feedback:
+                        "That would rebuild the order-label shortcut.",
+                    },
+                    {
+                      value: "zoom-lens-analogy",
+                      label: "Think of the pattern mainly like zooming an image in or out, because once one setting grows wider the underlying spacing and reinforcement details usually matter less.",
+                      feedback:
+                        "That would hide the spacing-and-reinforcement logic the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the grating logic intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right diffraction-grating model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A3_L3") {
