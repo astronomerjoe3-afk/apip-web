@@ -1875,6 +1875,7 @@ export default function LessonRunner({
         lessonId === "A3_L3" ||
         lessonId === "A3_L4" ||
         lessonId === "A3_L5" ||
+        lessonId === "A3_L6" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9131,6 +9132,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A3_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a3-l6-oscilloscope-board",
+                badge: "Trace board",
+                title: "Read the oscilloscope as a graph against time",
+                scenario:
+                  "The oscilloscope board shows one clean repeating trace. One trainee treats the trace like the wave's path through space, another mixes up height and cycle spacing, and a third starts calculating before checking what each axis means.",
+                prompt: "Pin the note that keeps the trace model accurate.",
+                options: [
+                  {
+                    value: "time-graph-trace-note",
+                    label: "An oscilloscope trace is plotted against time. Trace height and cycle spacing carry different meanings, and the graph is a time-based representation of the wave rather than the wave path through space.",
+                    feedback:
+                      "Exactly. That keeps axis meaning, amplitude, and period in one accurate oscilloscope story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "path-shape-note",
+                    label: "Treat the trace mainly like a sketch of the wave itself, because once the shape looks familiar the axis meanings usually become secondary.",
+                    feedback:
+                      "That would rebuild the path-picture shortcut.",
+                  },
+                  {
+                    value: "one-reading-note",
+                    label: "Treat height and cycle spacing as two ways of reading the same wave size idea, because once the trace is periodic the exact axis distinction usually matters less.",
+                    feedback:
+                      "That would blur the separate graph meanings the lesson needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads the trace as time-based wave evidence.",
+                retryLabel: "That note would leave a main A3_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a3-l6-fix-ideas",
+                  badge: "Trace repair",
+                  title: "Repair the path-picture and mixed-reading shortcuts",
+                  scenario:
+                    "One trainee keeps saying the oscilloscope trace is the wave's travel route, while another keeps reading height and cycle spacing as if they describe the same thing.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-time-graph-meaning",
+                      label: "Repair both habits together: label the axes first, treat the trace as a graph against time, then read height and cycle spacing as different pieces of wave evidence.",
+                      feedback:
+                        "Exactly. That restores the right oscilloscope workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-shape-first",
+                      label: "Repair the confusion by focusing on the visible wave shape first, because once students trust the trace outline the time-axis meaning usually becomes easier later.",
+                      feedback:
+                        "That would keep the path-picture shortcut alive.",
+                    },
+                    {
+                      value: "repair-size-first",
+                      label: "Repair the confusion by focusing on the size of the trace first, because once students know whether the graph looks taller or wider the detailed graph meanings usually become secondary.",
+                      feedback:
+                        "That would keep the mixed-reading shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now reads the trace through axis meaning before calculation.",
+                  retryLabel: "That would leave a main A3_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a3-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line oscilloscope rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating oscilloscope traces like moving wave pictures instead of measured graph evidence.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "a3-l6-anchor",
+                      label: "Oscilloscope traces become useful wave evidence once the time-graph meaning is kept explicit.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shape-anchor",
+                      label: "The main idea is mostly that the trace looks like a wave, because once students recognize the familiar shape the graph meaning usually becomes secondary.",
+                      feedback:
+                        "That would rebuild the path-picture shortcut.",
+                    },
+                    {
+                      value: "reading-anchor",
+                      label: "The main idea is mostly that oscilloscopes give two main readings from one graph shape, because once students can read the numbers the exact axis meaning usually becomes secondary.",
+                      feedback:
+                        "That would flatten the graph meaning the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right oscilloscope rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a3-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the trace vocabulary board",
+                  scenario:
+                    "The crew keeps mixing time axis, amplitude, period, frequency, and wave path until every oscilloscope answer sounds like one vague story about a line that wiggles.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a3-l6",
+                      label: "Use time axis for the horizontal graph direction, amplitude for the trace height, period for one full cycle spacing in time, frequency for cycles per second, and wave path only for the route in space that the oscilloscope is not directly drawing.",
+                      feedback:
+                        "Exactly. That keeps the trace terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-shape-does-most",
+                      label: "Use wave shape as the main word for almost the whole topic, because once students know the trace is wavy the separate graph labels usually matter less.",
+                      feedback:
+                        "That would scramble the oscilloscope terms into the path-picture shortcut.",
+                    },
+                    {
+                      value: "term-board-time-does-most",
+                      label: "Use time as the main word for almost the whole topic, because once students know the horizontal axis is time the height and cycle labels usually become secondary.",
+                      feedback:
+                        "That would weaken the distinct graph-reading roles the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the trace terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a3-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they read the trace",
+                  scenario:
+                    "The trainee analyst is about to calculate frequency from the trace without first checking the axes or separating the meaning of trace height from the meaning of cycle spacing.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "axes-then-height-spacing",
+                      label: "Start by naming the axes, then read trace height and cycle spacing as different graph features, and only afterward translate period or frequency back into wave behavior.",
+                      feedback:
+                        "Exactly. That gives the analyst the right oscilloscope workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "calculate-first",
+                      label: "Start with the calculation first, because once students get a frequency number the axis meanings and trace details usually become clearer afterward.",
+                      feedback:
+                        "That would send the analyst back into the graph-meaning shortcut.",
+                    },
+                    {
+                      value: "shape-first",
+                      label: "Start from the overall wave shape first, because once students see a familiar oscillation the height and spacing readings usually become mostly obvious.",
+                      feedback:
+                        "That would send the analyst back into the path-picture shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean trace-reading method.",
+                  retryLabel: "That would send the analyst back into a A3_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a3-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the path-picture and graph-blur shortcuts",
+                  scenario:
+                    "One crew member keeps treating the trace like the wave's travel route, while another keeps reading amplitude and period as if they are just two versions of the same size judgment.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "trace-trap-warning",
+                      label: "Do not treat the trace like the wave path and do not blur height with cycle spacing. Read the oscilloscope as a graph against time, then separate amplitude and period before calculating.",
+                      feedback:
+                        "Exactly. That warning blocks the main A3_L6 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "path-warning-only",
+                      label: "Warn mainly against thinking the trace is the path, because once that is fixed students usually separate the graph readings on their own.",
+                      feedback:
+                        "That would leave the mixed-reading shortcut too alive.",
+                    },
+                    {
+                      value: "reading-warning-only",
+                      label: "Warn mainly against mixing up height and spacing, because once that is fixed students usually stop treating the trace as a wave path on their own.",
+                      feedback:
+                        "That would leave the path-picture shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps trace meaning and wave meaning connected in the right way.",
+                  retryLabel: "That warning would leave a main A3_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a3-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the graph meaning visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners feel why an oscilloscope trace is a measurement record over time, not a sketch of the wave traveling across the room.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "heartbeat-monitor-analogy",
+                      label: "Think of the trace like a heartbeat monitor: the line is a timed record of what is happening, so height and spacing mean different measured features even though the whole signal is shown in one graph.",
+                      feedback:
+                        "Exactly. That keeps the time-graph idea visible without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rope-shape-analogy",
+                      label: "Think of the trace mainly like a frozen rope shape, because once students can picture the wave in space the graph meaning usually takes care of itself.",
+                      feedback:
+                        "That would rebuild the path-picture shortcut.",
+                    },
+                    {
+                      value: "single-size-analogy",
+                      label: "Think of the trace mainly like one size meter that can look taller or wider, because once students see which trace is more dramatic the separate period and amplitude meanings usually matter less.",
+                      feedback:
+                        "That would hide the graph-reading structure the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the time-graph meaning visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right oscilloscope model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A3_L5") {
