@@ -3497,6 +3497,248 @@ function getA6ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A6_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a6-l6-particle-motion-board",
+        badge: "Particle-motion board",
+        title: "Keep wall hits, random motion, and average speed on one story line",
+        scenario:
+          "The particle-motion board shows random motion, wall collisions, density, and average kinetic energy together. One trainee explains pressure as if it were a detached wall property, another talks about temperature without linking it to average particle motion, and a third forgets that pressure rises because collisions become more frequent and harder.",
+        prompt: "Pin the note that keeps the kinetic-theory model accurate.",
+        options: [
+          {
+            value: "collision-motion-note",
+            label: "Treat gas pressure as the wall-collision effect of randomly moving particles, and link higher temperature to larger average kinetic energy, faster motion, and therefore more frequent and harder wall hits.",
+            feedback:
+              "Exactly. That keeps pressure and temperature tied to one microscopic collision story.",
+            isCorrect: true,
+          },
+          {
+            value: "pressure-is-separate-note",
+            label: "Treat pressure as a gas property that can be explained on its own, because once the wall-load is known the particle-motion story usually becomes a secondary microscopic detail.",
+            feedback:
+              "That would rebuild the detached-pressure shortcut.",
+          },
+          {
+            value: "temperature-is-pressure-note",
+            label: "Treat temperature as basically the same thing as pressure, because once the gas gets hotter the pressure rises and the two ideas usually become interchangeable enough for explanation.",
+            feedback:
+              "That would rebuild the temperature-pressure blur.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads pressure and temperature through one collision-based particle story.",
+        retryLabel: "That note would leave a main A6_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a6-l6-fix-ideas",
+          badge: "Kinetic-theory repair",
+          title: "Repair the detached-pressure and slogan shortcuts",
+          scenario:
+            "One analyst keeps describing pressure with no particle mechanism, while another keeps using vague 'hotter means more pressure' language without mentioning average kinetic energy, collision frequency, or momentum transfer.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-microscopic-collision-story",
+              label: "Repair both habits together: explain pressure from particle collisions with the walls, then connect heating to larger average kinetic energy, faster motion, and increased collision transfer.",
+              feedback:
+                "Exactly. That restores the right A6_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-pressure-formula-only",
+              label: "Repair the confusion by anchoring everything to the pressure formula first, because once students know the equation the microscopic story usually becomes an optional extra.",
+              feedback:
+                "That would keep the formula-first shortcut alive.",
+            },
+            {
+              value: "repair-hotter-means-more-only",
+              label: "Repair the confusion by repeating that hotter gas gives more pressure, because once that trend is known the details of collisions and momentum transfer usually become secondary.",
+              feedback:
+                "That would keep the slogan-first shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats gas pressure as a microscopic collision effect.",
+          retryLabel: "That would leave a main A6_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a6-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line kinetic-theory rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop drifting back into slogan-only gas explanations.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a6-l6-anchor",
+              label: "Kinetic theory links gas pressure and temperature back to particle motion, collisions, and average kinetic energy.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "pressure-main-anchor",
+              label: "The main idea is mostly that pressure is the key gas quantity, because once pressure is tracked the particle explanation usually becomes secondary.",
+              feedback:
+                "That would erase the microscopic-mechanism idea the lesson needs.",
+            },
+            {
+              value: "temperature-main-anchor",
+              label: "The main idea is mostly that hotter gas means stronger effects, because once students know the temperature rises the rest of the mechanism usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson into a slogan instead of an explanation.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right kinetic-theory rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a6-l6-technical-words",
+          badge: "Term desk",
+          title: "Clean up the kinetic-theory vocabulary board",
+          scenario:
+            "The crew keeps mixing random motion, rms speed, average kinetic energy, density, pressure, and collisions until every answer sounds like one vague gas-pressure story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a6-l6",
+              label: "Use random motion for the particle model, wall collisions for the pressure mechanism, rms speed for the speed measure in the pressure relation, and average kinetic energy for the microscopic meaning of temperature.",
+              feedback:
+                "Exactly. That keeps the A6_L6 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-pressure-does-most",
+              label: "Use pressure as the main word for almost the whole topic, because once students know the gas pushes on the walls the rest of the particle language usually matters less.",
+              feedback:
+                "That would scramble the kinetic-theory terms into one dominant label.",
+            },
+            {
+              value: "term-board-speed-does-most",
+              label: "Use particle speed as the main word for almost the whole topic, because once the gas is moving fast the collision, density, and average-energy distinctions usually become secondary.",
+              feedback:
+                "That would hide the full mechanism the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the kinetic-theory terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a6-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they explain the pressure rise",
+          scenario:
+            "The trainee analyst is about to jump from a higher-temperature statement straight to a pressure conclusion, and has not yet named the microscopic steps that connect the two.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "motion-collision-then-pressure",
+              label: "Start from particle motion: heating raises average kinetic energy, which raises particle speed, which makes wall collisions more frequent and harder, which then raises the pressure.",
+              feedback:
+                "Exactly. That gives the analyst the right A6_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-pressure-only",
+              label: "Start from the pressure change itself, because once the gas pushes harder on the walls the particle-motion explanation usually becomes less central.",
+              feedback:
+                "That would send the analyst back into the detached-pressure shortcut.",
+            },
+            {
+              value: "start-from-hotter-only",
+              label: "Start from the fact that the gas is hotter, because once the temperature increase is named the rest of the collision story usually takes care of itself.",
+              feedback:
+                "That would send the analyst back into the slogan-first shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean microscopic chain from heating to pressure rise.",
+          retryLabel: "That would send the analyst back into an A6_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a6-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the slogan-first gas explanation",
+          scenario:
+            "One crew member keeps saying 'hotter means more pressure' as if that alone is the explanation, while another keeps quoting the pressure equation without connecting it to collisions, momentum transfer, or density.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a6-l6-trap-warning",
+              label: "Do not stop at the trend or the formula. Explain pressure through particle motion, wall collisions, and momentum transfer, and keep temperature linked to average kinetic energy.",
+              feedback:
+                "Exactly. That warning blocks the main A6_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "equation-warning-only",
+              label: "Warn mainly against forgetting the equation, because once students remember the kinetic-theory formula they usually recover the particle explanation on their own.",
+              feedback:
+                "That would leave the microscopic story too weak.",
+            },
+            {
+              value: "trend-warning-only",
+              label: "Warn mainly against missing the hotter-higher-pressure trend, because once students know that pattern the details of collisions and momentum transfer usually become secondary.",
+              feedback:
+                "That would leave the slogan-first shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps pressure and temperature tied to one particle mechanism.",
+          retryLabel: "That warning would leave a main A6_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a6-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the collision mechanism visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why pressure rises in kinetic theory without turning the topic into one vague 'more heat, more pressure' slogan.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "busy-hallway-analogy",
+              label: "Think of the gas like a busy hallway: if the people move faster in random directions, they hit the walls more often and more forcefully, so the wall load rises even though the hallway size stays the same.",
+              feedback:
+                "Exactly. That keeps random motion, collisions, and wall load in one picture.",
+              isCorrect: true,
+            },
+            {
+              value: "stronger-gas-analogy",
+              label: "Think of the gas mainly like becoming stronger when heated, because once the gas has more thermal strength the wall-pressure explanation usually becomes obvious enough.",
+              feedback:
+                "That would rebuild the slogan-first shortcut.",
+            },
+            {
+              value: "formula-card-analogy",
+              label: "Think of the gas mainly like a formula card where density and speed are inserted, because once the numbers are substituted the collision mechanism usually becomes less important.",
+              feedback:
+                "That would rebuild the formula-first shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the collision mechanism visible without flattening it to a slogan.",
+          retryLabel: "That analogy would pull the lesson away from the right A6_L6 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A6_L5") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
