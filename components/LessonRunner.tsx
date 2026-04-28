@@ -2034,6 +2034,248 @@ function getA5ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A5_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a5-l3-trace-board",
+        badge: "Trace board",
+        title: "Read the SHM traces as one linked motion story",
+        scenario:
+          "The trace board shows displacement, velocity, and acceleration curves together with cycle spacing markers. One trainee treats the traces like unrelated signals, another reads period from one graph and frequency from a different story, and a third ignores the phase links between the three quantities.",
+        prompt: "Pin the note that keeps the trace model accurate.",
+        options: [
+          {
+            value: "linked-traces-phase-note",
+            label: "Treat the displacement, velocity, and acceleration curves as linked views of one oscillation, read period and frequency from the same repeating time spacing, and keep phase relationships visible when comparing the traces.",
+            feedback:
+              "Exactly. That keeps representation, timing, and phase in one motion story.",
+            isCorrect: true,
+          },
+          {
+            value: "independent-signals-note",
+            label: "Treat the three traces as mostly separate signals, because once each graph is read on its own the larger oscillation picture usually becomes easier later.",
+            feedback:
+              "That would rebuild the unrelated-signals shortcut.",
+          },
+          {
+            value: "formula-graph-split-note",
+            label: "Treat the equations and graphs as different topics, because once students can calculate period or frequency the phase details on the traces usually become secondary decoration.",
+            feedback:
+              "That would rebuild the split-representations shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads SHM traces as one linked oscillation story.",
+        retryLabel: "That note would leave a main A5_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a5-l3-fix-ideas",
+          badge: "Trace repair",
+          title: "Repair the unrelated-graphs and split-representation shortcuts",
+          scenario:
+            "One analyst keeps treating displacement, velocity, and acceleration traces like independent graphs, while another keeps separating equations, period, frequency, and phase from the trace story instead of reading them together.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-linked-trace-story",
+              label: "Repair both habits together: read all three curves as linked traces of one motion, take period and frequency from the repeating time spacing, and use phase language to compare how the quantities are related.",
+              feedback:
+                "Exactly. That restores the right SHM-trace workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-each-graph-alone",
+              label: "Repair the confusion by mastering each graph on its own first, because once each trace makes sense separately the connection between them usually becomes obvious later.",
+              feedback:
+                "That would keep the unrelated-signals shortcut alive.",
+            },
+            {
+              value: "repair-calculation-first",
+              label: "Repair the confusion by emphasizing period and frequency calculations first, because once students can compute those numbers the phase and trace-link details usually become easier later.",
+              feedback:
+                "That would keep the split-representations shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats the traces as linked views of one oscillator.",
+          retryLabel: "That would leave a main A5_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a5-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line SHM-trace rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop reading the SHM graphs like disconnected plots.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a5-l3-anchor",
+              label: "SHM graphs and equations become clearer when all traces are read as linked views of one oscillation.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "graphs-anchor-only",
+              label: "The main idea is mostly that SHM produces neat graphs, because once the curves look regular the links between them usually become secondary.",
+              feedback:
+                "That would hide the representation-link idea the lesson needs.",
+            },
+            {
+              value: "timing-anchor-only",
+              label: "The main idea is mostly that period and frequency can be calculated, because once students know the timing numbers the other trace relationships usually become secondary.",
+              feedback:
+                "That would leave out the phase-linked trace story.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right SHM-trace rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a5-l3-technical-words",
+          badge: "Term desk",
+          title: "Clean up the SHM-trace vocabulary board",
+          scenario:
+            "The crew keeps mixing displacement, velocity, acceleration, period, frequency, and phase until every graph answer sounds like one vague wave-reading story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a5-l3",
+              label: "Use displacement, velocity, and acceleration for the three linked quantities, period for one full cycle time, frequency for cycles per second, and phase for how the traces are shifted relative to one another.",
+              feedback:
+                "Exactly. That keeps the SHM-trace terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-graph-does-most",
+              label: "Use graph as the main word for almost the whole topic, because once students know the curves repeat the separate quantity and phase labels usually matter less.",
+              feedback:
+                "That would scramble the trace terms into the vague-graph shortcut.",
+            },
+            {
+              value: "term-board-frequency-does-most",
+              label: "Use frequency as the main word for almost the whole topic, because once students know how often the motion repeats the displacement, velocity, and acceleration differences usually become secondary.",
+              feedback:
+                "That would weaken the linked-quantity structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the SHM-trace terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a5-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they read the graphs separately",
+          scenario:
+            "The trainee analyst is about to read one trace at a time as if each were its own topic, and has not yet anchored period, frequency, or phase in the full set of curves.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "anchor-displacement-then-link",
+              label: "Start with one full displacement cycle, read the period from its spacing, translate that to frequency, and then compare velocity and acceleration as phase-linked traces of the same motion.",
+              feedback:
+                "Exactly. That gives the analyst the right SHM-trace workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-each-graph-alone",
+              label: "Start by mastering each graph independently, because once each trace is secure on its own the link between them usually becomes obvious later.",
+              feedback:
+                "That would send the analyst back into the unrelated-signals shortcut.",
+            },
+            {
+              value: "start-from-frequency-formula",
+              label: "Start from the timing formulas first, because once period and frequency are calculated the phase and trace-link relationships usually become secondary details.",
+              feedback:
+                "That would send the analyst back into the split-representations shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean linked-trace method.",
+          retryLabel: "That would send the analyst back into a A5_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a5-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the disconnected-graphs shortcut",
+          scenario:
+            "One crew member keeps treating the curves like separate signals, while another keeps treating phase and timing as calculation extras instead of as part of the graph meaning.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "trace-trap-warning",
+              label: "Do not read the SHM curves as separate stories. Use one repeating cycle to anchor period and frequency, then compare displacement, velocity, and acceleration as phase-linked views of the same oscillation.",
+              feedback:
+                "Exactly. That warning blocks the main A5_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "graph-warning-only",
+              label: "Warn mainly against reading each graph alone, because once students stop that they usually connect timing and phase on their own.",
+              feedback:
+                "That would leave the split-representations shortcut too alive.",
+            },
+            {
+              value: "timing-warning-only",
+              label: "Warn mainly against splitting timing from the graphs, because once students stop that they usually see the traces as linked on their own.",
+              feedback:
+                "That would leave the unrelated-signals shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the full linked-trace story visible.",
+          retryLabel: "That warning would leave a main A5_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a5-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the linked-trace idea visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the SHM graphs are not separate topics, but synchronized readouts of one oscillator viewed in different ways.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "dashboard-instruments-analogy",
+              label: "Think of the traces like synchronized dashboard instruments on one machine: different gauges show different quantities, but they all belong to the same engine cycle and have to be read together.",
+              feedback:
+                "Exactly. That keeps the linked-trace idea visible without flattening the physics.",
+              isCorrect: true,
+            },
+            {
+              value: "three-channels-analogy",
+              label: "Think of the traces mainly like three unrelated channels you can study one by one, because once each display is understood separately the overall motion usually takes care of itself.",
+              feedback:
+                "That would rebuild the unrelated-signals shortcut.",
+            },
+            {
+              value: "calculator-screen-analogy",
+              label: "Think of the traces mainly as a place to extract timing numbers, because once period and frequency are known the rest of the graph relationships usually matter much less.",
+              feedback:
+                "That would rebuild the split-representations shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the linked-trace picture visible.",
+          retryLabel: "That analogy would pull the lesson away from the right SHM-trace model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A5_L2") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
