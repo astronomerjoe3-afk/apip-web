@@ -1868,6 +1868,7 @@ export default function LessonRunner({
         lessonId === "A2_L2" ||
         lessonId === "A2_L3" ||
         lessonId === "A2_L4" ||
+        lessonId === "A2_L5" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9124,6 +9125,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A2_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a2-l5-matter-wave",
+                badge: "Matter-wave board",
+                title: "Keep single hits and the full pattern on the same evidence board",
+                scenario:
+                  "The matter-wave board shows one-particle-at-a-time detections slowly building into a diffraction pattern. One trainee thinks each localized hit disproves wave behavior, another trusts the final pattern but ignores the single-hit evidence, and a third forgets that greater momentum shortens the de Broglie wavelength and changes the spread.",
+                prompt: "Pin the note that keeps the duality model accurate.",
+                options: [
+                  {
+                    value: "duality-evidence-note",
+                    label: "Localized detections and wave-like buildup can both be true: each hit arrives at a point, the full set builds a diffraction pattern, and changing momentum changes wavelength and spread.",
+                    feedback:
+                      "Exactly. That keeps both sides of the evidence on the same board.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "hits-beat-pattern-note",
+                    label: "Treat the localized hits as the more trustworthy evidence, because once particles arrive at points the later wave pattern is mostly just a display artifact.",
+                    feedback:
+                      "That would rebuild the hits-cancel-wave shortcut.",
+                  },
+                  {
+                    value: "pattern-beats-hits-note",
+                    label: "Treat the final pattern as the only evidence that really matters, because once the wave behavior is clear the point-like detections usually become secondary noise.",
+                    feedback:
+                      "That would erase the localized-detection side of the duality evidence.",
+                  },
+                ],
+                successLabel: "Pinned. The board now keeps localized hits and pattern buildup in one honest story.",
+                retryLabel: "That note would leave a main A2_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a2-l5-fix-ideas",
+                  badge: "Duality repair",
+                  title: "Repair the one-side-only evidence shortcuts",
+                  scenario:
+                    "One trainee keeps using the single-hit dots to reject wave behavior, while another keeps using the finished pattern to dismiss the importance of localized detections altogether.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-two-sided-evidence-model",
+                      label: "Repair both habits together: keep the localized detections and the gradual pattern buildup on the same evidence board, then use momentum-linked wavelength to explain how the spread changes.",
+                      feedback:
+                        "Exactly. That restores the full matter-wave model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-pattern-first",
+                      label: "Repair the confusion by emphasizing the final pattern first, because once students accept the diffraction shape the single-hit dots usually stop bothering them.",
+                      feedback:
+                        "That would keep the localized-hit evidence too weak.",
+                    },
+                    {
+                      value: "repair-hit-first-only",
+                      label: "Repair the confusion by emphasizing the single-hit dots first, because once students trust the localized detections the pattern story usually becomes secondary.",
+                      feedback:
+                        "That would keep the wave-pattern evidence too weak.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats duality as one linked evidence story.",
+                  retryLabel: "That would leave a main A2_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a2-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line matter-wave rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop acting as if they must choose between particle detections and wave patterns.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "matter-wave-anchor",
+                      label: "Wave-particle duality is strongest when localized detections and pattern evidence are kept on the same board.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "particle-anchor-only",
+                      label: "The main idea is mostly that matter still arrives as particles, because once students remember the point-like detections the pattern usually becomes a later complication.",
+                      feedback:
+                        "That line rebuilds the particle-only shortcut.",
+                    },
+                    {
+                      value: "wave-anchor-only",
+                      label: "The main idea is mostly that matter behaves like a wave, because once students trust the diffraction pattern the single hits usually do not add much.",
+                      feedback:
+                        "That line rebuilds the wave-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right duality rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a2-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the matter-wave vocabulary board",
+                  scenario:
+                    "The crew keeps mixing localized detection, diffraction pattern, de Broglie wavelength, momentum, and spread until every answer sounds like one vague 'wave or particle somehow' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a2-l5",
+                      label: "Use localized detection for a single point-like hit, diffraction pattern for the built-up wave-like distribution, de Broglie wavelength for the matter-wave spacing, and momentum for the quantity that shortens that wavelength when it increases.",
+                      feedback:
+                        "Exactly. That keeps the duality terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-wave-does-most",
+                      label: "Use wave as the main word for almost the whole topic, because once students accept interference the detection details usually become secondary.",
+                      feedback:
+                        "That would hard-wire the wave-only shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-particle-does-most",
+                      label: "Use particle as the main word for almost the whole topic, because once students trust the single hits the pattern language usually matters less.",
+                      feedback:
+                        "That would hard-wire the particle-only shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the matter-wave terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a2-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they read the evidence",
+                  scenario:
+                    "The trainee analyst is about to choose one side of the experiment as the 'real' story without first comparing the single-hit dots, the full pattern, and the momentum-linked wavelength change together.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "read-hits-pattern-and-wavelength",
+                      label: "Start with the localized hits, then let the full pattern build, and then use momentum to explain how the de Broglie wavelength and spread change before you summarize the evidence.",
+                      feedback:
+                        "Exactly. That gives the analyst the right duality workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "pick-pattern-as-real",
+                      label: "Start from the final diffraction pattern, because once the wave behavior is visible the single-hit dots usually become a distracting detail.",
+                      feedback:
+                        "That would send the analyst back into the wave-only shortcut.",
+                    },
+                    {
+                      value: "pick-hits-as-real",
+                      label: "Start from the localized detections, because once the particles are seen hitting at points the later pattern usually becomes a display effect rather than real evidence.",
+                      feedback:
+                        "That would send the analyst back into the particle-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean matter-wave method.",
+                  retryLabel: "That would send the analyst back into a A2_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a2-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the choose-one-side shortcuts",
+                  scenario:
+                    "One crew member keeps using the point-like hits to reject wave behavior, while another keeps using the built-up pattern to dismiss the localized detections.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "duality-trap-warning",
+                      label: "Do not force the experiment into one side only. The detections stay localized, the pattern stays wave-like, and the strongest explanation keeps both pieces of evidence together.",
+                      feedback:
+                        "Exactly. That warning blocks the main A2_L5 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "particle-warning-only",
+                      label: "Warn mainly against overvaluing the point-like hits, because once students stop that they usually accept the rest of the wave story on their own.",
+                      feedback:
+                        "That would leave the wave-only shortcut too alive.",
+                    },
+                    {
+                      value: "wave-warning-only",
+                      label: "Warn mainly against overvaluing the final pattern, because once students stop that they usually trust the single-hit evidence without trouble.",
+                      feedback:
+                        "That would leave the particle-only shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps both sides of the evidence visible.",
+                  retryLabel: "That warning would leave a main A2_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a2-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps dots and pattern together",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture how one-particle-at-a-time hits can still build a wave-like distribution.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "raindrop-map-analogy",
+                      label: "Think of the detections like raindrops landing one by one on a surface: each drop lands at one point, but over time the full map can reveal a larger pattern about how the system behaves.",
+                      feedback:
+                        "Exactly. That keeps localized hits and overall pattern together without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "wave-only-analogy",
+                      label: "Think of the experiment mainly like a ripple pattern on water, because once the interference is visible the individual hits usually stop mattering.",
+                      feedback:
+                        "That would rebuild the wave-only shortcut.",
+                    },
+                    {
+                      value: "particle-only-analogy",
+                      label: "Think of the experiment mainly like pellets striking a wall, because once the points are visible the larger pattern usually matters less than where each pellet landed.",
+                      feedback:
+                        "That would rebuild the particle-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the two-sided evidence picture intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right matter-wave model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A2_L4") {
