@@ -1857,6 +1857,7 @@ export default function LessonRunner({
         lessonId === "M14_L3" ||
         lessonId === "M14_L4" ||
         lessonId === "M14_L5" ||
+        lessonId === "M14_L6" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9113,6 +9114,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M14_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m14-l6-big-bang-board",
+                badge: "Model board",
+                title: "Keep the expansion model and the evidence on the same board",
+                scenario:
+                  "The Big Bang evidence board pairs a hot dense early-state caption with redshift evidence across galaxies. One trainee keeps describing the Big Bang as an ordinary explosion into empty space, another wants to keep the model language separate from the evidence, and a third forgets that expanding space is the point of the modern story.",
+                prompt: "Pin the note that keeps the universe model accurate.",
+                options: [
+                  {
+                    value: "expanding-space-evidence-note",
+                    label: "Treat the Big Bang as a model of an early hot dense universe whose space expands over time, and use galaxy redshift evidence to support that expansion story rather than an ordinary explosion picture.",
+                    feedback:
+                      "Exactly. That keeps model language, early conditions, and evidence aligned.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "ordinary-explosion-note",
+                    label: "Treat the Big Bang mainly like matter exploding outward from one central point into empty space, because that picture is the clearest first image and the exact expansion language can come later.",
+                    feedback:
+                      "That would rebuild the wrong explosion shortcut.",
+                  },
+                  {
+                    value: "evidence-without-model-note",
+                    label: "Treat the lesson mainly as a list of redshift facts, because once students remember the evidence trend the universe model itself usually becomes less important.",
+                    feedback:
+                      "That would break the link between the model and the evidence the lesson needs.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the Big Bang as expanding space supported by redshift evidence.",
+                retryLabel: "That note would leave a main M14_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m14-l6-fix-ideas",
+                  badge: "Model repair",
+                  title: "Repair the explosion shortcut before it spreads",
+                  scenario:
+                    "One trainee keeps retelling the Big Bang as an ordinary explosion into emptiness, while another tries to keep the redshift evidence as a separate fact list with no direct model attached.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-expanding-space-model",
+                      label: "Repair both habits together: keep the early hot dense universe visible, describe the model as expanding space, and use redshift evidence as support for that expansion story rather than as an isolated fact list.",
+                      feedback:
+                        "Exactly. That restores the proper Big Bang model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-explosion-first",
+                      label: "Repair the confusion by making the explosion picture more careful first, because once students have a vivid image they can usually refine it toward the scientific model later.",
+                      feedback:
+                        "That would keep the explosion shortcut alive.",
+                    },
+                    {
+                      value: "repair-evidence-first",
+                      label: "Repair the confusion by drilling the redshift evidence trend first, because once students remember the evidence clearly the universe model usually sorts itself out afterward.",
+                      feedback:
+                        "That would keep the model-evidence split too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps model language and evidence in the same frame.",
+                  retryLabel: "That would leave a main M14_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m14-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Big Bang rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop using explosion language where the lesson needs an expanding-universe model.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "big-bang-anchor",
+                      label: "The Big Bang model describes an early hot dense universe, the universe expands over time, and redshift evidence supports the expansion model.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "explosion-anchor-only",
+                      label: "The main idea is that the universe exploded outward from one place, because the explosion image is the simplest way to remember where everything started.",
+                      feedback:
+                        "That line rebuilds the wrong explosion shortcut.",
+                    },
+                    {
+                      value: "redshift-anchor-only",
+                      label: "The main idea is that galaxies show redshift, because once students remember that evidence the rest of the Big Bang explanation usually matters less.",
+                      feedback:
+                        "That line misses the model statement that actually explains what the evidence supports.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Big Bang rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m14-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Big Bang vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up Big Bang model, hot dense early universe, expansion, redshift evidence, and explosion until every answer sounds like one vague blast story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-big-bang",
+                      label: "Use Big Bang model for the scientific expansion picture, hot dense early universe for the starting condition, expansion for what space does over time, and redshift evidence for one clue supporting that model.",
+                      feedback:
+                        "Exactly. That keeps the Big Bang terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-explosion-does-most",
+                      label: "Use explosion as the main word for almost the whole topic, because once students picture a blast clearly the rest of the universe-model vocabulary usually sorts itself out.",
+                      feedback:
+                        "That would hard-wire the explosion shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-evidence-does-most",
+                      label: "Use redshift as the main word for almost the whole topic, because once students know that galaxies shift red the rest of the Big Bang model language usually becomes secondary.",
+                      feedback:
+                        "That would hide the model-language rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Big Bang terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m14-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they explain the model",
+                  scenario:
+                    "The trainee analyst is about to jump from redshift evidence straight to an explosion story without first checking which universe model actually keeps the geometry and evidence aligned.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "model-then-evidence-then-language",
+                      label: "Start by naming the model as an early hot dense universe with expanding space, then use the redshift evidence as support for that expansion picture, and only afterward reject the ordinary-explosion shortcut.",
+                      feedback:
+                        "Exactly. That gives the analyst the right Big Bang explanation method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "explosion-then-refine",
+                      label: "Start from the ordinary explosion picture, because once students have a strong mental image they can usually reshape it into the scientific model afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong explosion shortcut.",
+                    },
+                    {
+                      value: "evidence-list-then-stop",
+                      label: "Start by listing the redshift evidence only, because once students know the observations clearly the universe model language usually becomes optional.",
+                      feedback:
+                        "That would send the analyst back into the model-evidence split.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Big Bang explanation method.",
+                  retryLabel: "That would send the analyst back into a M14_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m14-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the explosion and fact-list shortcuts",
+                  scenario:
+                    "One crew member keeps turning the Big Bang into an ordinary blast picture, while another treats redshift evidence like a disconnected astronomy fact with no model attached.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "big-bang-trap-warning",
+                      label: "Do not let the Big Bang collapse into an ordinary explosion image, and do not let redshift become a disconnected fact list. Keep the early hot dense model, expanding space, and supporting evidence in one picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M14_L6 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "explosion-warning-only",
+                      label: "Warn mainly against the explosion mistake, because once students stop that habit they usually connect the evidence to the right model on their own.",
+                      feedback:
+                        "That would leave the model-evidence split too alive.",
+                    },
+                    {
+                      value: "evidence-warning-only",
+                      label: "Warn mainly against treating the evidence as disconnected, because once students stop that habit they usually stop using explosion language on their own.",
+                      feedback:
+                        "That would leave the explosion shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the model and the evidence tightly linked.",
+                  retryLabel: "That warning would leave a main M14_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m14-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps expanding space central",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture the Big Bang model without slipping back into the image of debris flying from one spot into empty space.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "stretching-grid-analogy",
+                      label: "Think of the universe more like points on a stretching grid where the gaps between places grow everywhere together, rather than like debris thrown from one central blast point.",
+                      feedback:
+                        "Exactly. That keeps expansion central without flattening the cosmology.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "firework-analogy",
+                      label: "Think of the Big Bang like a firework bursting from one place, because the outward motion is the main part learners need before the deeper model details arrive.",
+                      feedback:
+                        "That would rebuild the explosion shortcut.",
+                    },
+                    {
+                      value: "evidence-poster-analogy",
+                      label: "Think of the lesson mainly like collecting redshift posters on a wall, because once enough evidence cards are visible the model picture usually matters less.",
+                      feedback:
+                        "That would rebuild the fact-list-without-model shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the Big Bang ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right expansion model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M14_L5") {
