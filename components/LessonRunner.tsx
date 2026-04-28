@@ -571,6 +571,248 @@ function getA4ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A4_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a4-l5-turn-board",
+        badge: "Turn board",
+        title: "Track the inward turning need even at constant speed",
+        scenario:
+          "The circular-motion board shows tangential velocity, inward acceleration, radius, and inward resultant force together. One trainee says constant speed means no acceleration, another invents an outward driving force, and a third mixes the sideways travel direction with the inward turning requirement.",
+        prompt: "Pin the note that keeps the turning model accurate.",
+        options: [
+          {
+            value: "inward-turning-note",
+            label: "Keep the tangential velocity and inward acceleration separate: the object can move at constant speed while still accelerating inward because its direction keeps changing, and the required resultant force points inward too.",
+            feedback:
+              "Exactly. That keeps the turning story and the travel story in the right slots.",
+            isCorrect: true,
+          },
+          {
+            value: "constant-speed-no-acceleration-note",
+            label: "Treat constant speed as proof that acceleration has stopped, because without speeding up or slowing down there is no real change in motion to explain.",
+            feedback:
+              "That would rebuild the constant-speed shortcut.",
+          },
+          {
+            value: "outward-force-note",
+            label: "Treat the turn as a balance between an inward force and an outward driving force, because a circle needs matched opposite turning forces to keep the motion steady.",
+            feedback:
+              "That would rebuild the outward-force shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads circular motion as steady travel plus inward turning need.",
+        retryLabel: "That note would leave a main A4_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a4-l5-fix-ideas",
+          badge: "Turn repair",
+          title: "Repair the no-acceleration and outward-force shortcuts",
+          scenario:
+            "One analyst keeps saying constant speed means no acceleration, while another keeps explaining the turn with an extra outward force instead of one inward resultant.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-inward-turning-story",
+              label: "Repair both habits together: keep the tangential velocity separate from the inward acceleration, use direction change as the reason acceleration is still present, and keep the required resultant force pointing inward rather than inventing an outward driver.",
+              feedback:
+                "Exactly. That restores the right circular-motion workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-speed-language-first",
+              label: "Repair the confusion by focusing more strongly on speed changes first, because once students remember how acceleration links to changing speed they usually sort the turning case out later.",
+              feedback:
+                "That would keep the constant-speed shortcut alive.",
+            },
+            {
+              value: "repair-balanced-turn-force",
+              label: "Repair the confusion by presenting the turn as balanced inward and outward forces, because once students see a matched pair the circular path usually feels easier to justify.",
+              feedback:
+                "That would keep the outward-force shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats turning as inward acceleration, not a force myth.",
+          retryLabel: "That would leave a main A4_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a4-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line circular-turning rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating constant-speed circular motion like force-free motion.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a4-l5-anchor",
+              label: "Uniform circular motion still needs inward acceleration because velocity direction changes continuously.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "speed-anchor-only",
+              label: "The main idea is mostly that the speed stays constant, because once students trust that fact the rest of the turning story usually becomes secondary.",
+              feedback:
+                "That would hide the real acceleration idea the lesson needs.",
+            },
+            {
+              value: "force-pair-anchor",
+              label: "The main idea is mostly that circular motion is held together by matched inward and outward forces, because once students picture the pair the turning story usually becomes clear.",
+              feedback:
+                "That would rebuild the outward-force shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right circular-turning rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a4-l5-technical-words",
+          badge: "Term desk",
+          title: "Clean up the circular-motion vocabulary board",
+          scenario:
+            "The crew keeps mixing speed, velocity, centripetal acceleration, centripetal force, and radius until every turning answer sounds like one vague spinning story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a4-l5",
+              label: "Use speed for how fast the object moves, velocity for the tangential motion with direction, centripetal acceleration for the inward turning change, centripetal force for the inward resultant cause, and radius for how tight the turn is.",
+              feedback:
+                "Exactly. That keeps the circular-motion terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-speed-does-most",
+              label: "Use speed as the main word for almost the whole topic, because once students know the object keeps moving fast the force and acceleration details usually matter less.",
+              feedback:
+                "That would scramble the circular-motion terms into the speed-only shortcut.",
+            },
+            {
+              value: "term-board-force-pair-does-most",
+              label: "Use inward and outward force as the main words for almost the whole topic, because once students picture the pair the velocity and acceleration details usually become secondary.",
+              feedback:
+                "That would weaken the actual inward-only resultant structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the circular-motion terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a4-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they explain the turn",
+          scenario:
+            "The trainee analyst is about to describe the motion as constant speed with no acceleration, and is reaching for an outward-force story because the path bends away from the center.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "separate-travel-from-turning",
+              label: "Start by separating the tangential travel direction from the inward turning requirement, then use the continual direction change to justify inward acceleration and the inward resultant force.",
+              feedback:
+                "Exactly. That gives the analyst the right circular-motion workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-constant-speed",
+              label: "Start from the fact that the speed is constant, because once that is secure the rest of the turning explanation usually reduces to proving nothing important is changing.",
+              feedback:
+                "That would send the analyst back into the no-acceleration shortcut.",
+            },
+            {
+              value: "start-from-force-pair",
+              label: "Start by pairing an inward and outward force, because once students see opposite directions the circular motion usually feels more balanced and easier to explain.",
+              feedback:
+                "That would send the analyst back into the outward-force shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean inward-turning method.",
+          retryLabel: "That would send the analyst back into a A4_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a4-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the no-acceleration circular-motion shortcut",
+          scenario:
+            "One crew member keeps using constant speed as proof that nothing is accelerating, while another keeps inventing an outward force to go with the inward turning requirement.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "circular-motion-trap-warning",
+              label: "Do not confuse constant speed with zero acceleration, and do not invent an outward driving force. In circular motion the velocity direction keeps changing, so the acceleration and resultant force both point inward.",
+              feedback:
+                "Exactly. That warning blocks the main A4_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "speed-warning-only",
+              label: "Warn mainly against trusting constant speed too much, because once students stop that they usually stop inventing an outward force on their own.",
+              feedback:
+                "That would leave the outward-force shortcut too alive.",
+            },
+            {
+              value: "force-warning-only",
+              label: "Warn mainly against inventing an outward force, because once students stop that they usually understand that constant speed can still hide acceleration on their own.",
+              feedback:
+                "That would leave the no-acceleration shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the inward-turning story clear.",
+          retryLabel: "That warning would leave a main A4_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a4-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the inward-turning idea visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why something can keep moving at steady speed and still need a continuous inward turning requirement.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "steering-wheel-analogy",
+              label: "Think of the motion like steady driving with the steering wheel held into a bend: the car can keep a steady speed while its direction keeps changing, so the turning requirement stays inward the whole time.",
+              feedback:
+                "Exactly. That keeps the inward-turning idea visible without flattening the physics.",
+              isCorrect: true,
+            },
+            {
+              value: "speedometer-analogy",
+              label: "Think of the motion mainly like watching a steady speedometer, because once the speed reading looks constant the rest of the motion story usually becomes mostly decorative.",
+              feedback:
+                "That would rebuild the constant-speed shortcut.",
+            },
+            {
+              value: "tug-of-war-analogy",
+              label: "Think of the motion mainly like two opposite teams pulling inward and outward at once, because once the opposing forces are pictured the circular path usually feels easier to justify.",
+              feedback:
+                "That would rebuild the outward-force shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps steady speed and inward turning in the same picture.",
+          retryLabel: "That analogy would pull the lesson away from the right circular-turning model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A4_L4") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
