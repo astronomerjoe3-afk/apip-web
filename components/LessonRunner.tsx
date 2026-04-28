@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M10_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m10-l3-side-kick-board",
+                badge: "Force board",
+                title: "Keep field, current, and force in separate slots before predicting the side-kick",
+                scenario:
+                  "The Side-Kick Challenge board shows a current-carrying route crossing a magnetic field. One trainee points the force along the field, another reverses both the field and the current at once and then claims the rule is inconsistent, and a third tries to use the left-hand rule as a finger chant without first deciding what each finger stands for.",
+                prompt: "Pin the note that keeps the side-kick story accurate.",
+                options: [
+                  {
+                    value: "sideways-force-note",
+                    label: "Keep the three directions separate: the magnetic force is sideways to both the field and the current, and if you reverse only the field or only the current, the force flips. Use the left-hand rule only after you know which finger stands for field, current, and force.",
+                    feedback:
+                      "Exactly. That keeps the sideways-force story and the one-direction-at-a-time logic in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "force-along-field-note",
+                    label: "Treat the force as mainly following the field direction, because the field is the strongest influence in the setup and should pull the conductor along its own line first.",
+                    feedback:
+                      "That would erase the key sideways-force idea the lesson is trying to secure.",
+                  },
+                  {
+                    value: "finger-chant-note",
+                    label: "Use the left-hand rule as a quick finger chant first, because once the hand shape is memorized students can usually sort out which direction was current or field afterward.",
+                    feedback:
+                      "That turns the rule into a gesture trick instead of a meaning check.",
+                  },
+                ],
+                successLabel: "Pinned. The room now treats field, current, and force as separate directions before using the hand rule.",
+                retryLabel: "That note would leave a main M10_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m10-l3-fix-ideas",
+                  badge: "Force repair",
+                  title: "Repair the along-the-field and finger-chant shortcuts",
+                  scenario:
+                    "One trainee keeps aiming the force along the field, while another keeps using the left-hand rule as a hand-shape chant without separating the meanings of field, current, and force first.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-sideways-meanings",
+                      label: "Repair both ideas together: the magnetic force is perpendicular to both the field and the current, so you must identify those two directions first and then use the left-hand rule to check the force direction.",
+                      feedback:
+                        "Exactly. That restores both the sideways-force idea and the meaning-first use of the rule.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-stronger-field",
+                      label: "Repair the confusion by saying the field direction still matters most, because once the field arrow is secure the conductor force can usually be treated as a modified version of the same direction.",
+                      feedback:
+                        "That would keep the along-the-field shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-hand-memory",
+                      label: "Repair the confusion by saying students should memorize the left-hand shape harder, because once the gesture is automatic the meaning of the three directions normally becomes clearer by use.",
+                      feedback:
+                        "That would keep the finger-chant shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses a meaning-first sideways-force story.",
+                  retryLabel: "That would leave a main M10_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m10-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line motor-effect rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop collapsing field, current, and force into one forward-pointing arrow story.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "motor-effect-anchor",
+                      label: "A current-carrying conductor in a magnetic field feels a sideways force. The force is perpendicular to both field and current, and it reverses if either the field or the current reverses.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "field-pull-anchor",
+                      label: "The main idea is that the field pulls the conductor along its own direction, because once students know which way the field points the force story usually becomes straightforward.",
+                      feedback:
+                        "That would build the wrong along-the-field model into the anchor sentence.",
+                    },
+                    {
+                      value: "hand-rule-anchor",
+                      label: "The main idea is to remember the left-hand rule gesture, because once the hand shape is secure the detailed relationship between field, current, and force can be filled in later.",
+                      feedback:
+                        "That would turn the lesson into memorized finger choreography instead of physics meaning.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right side-kick rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m10-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the side-kick vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up field direction, current direction, force direction, and the left-hand rule until every arrow in the setup sounds like the same kind of push.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-three-directions",
+                      label: "Use field direction, current direction, and force direction as three separate arrows, and treat the left-hand rule as a way to connect them after each arrow has been identified clearly.",
+                      feedback:
+                        "Exactly. That keeps the side-kick terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-force-flow",
+                      label: "Use force direction as the same basic arrow as current direction, because once the conductor is live the magnetic force mostly follows the route of the moving charge.",
+                      feedback:
+                        "That would hard-wire the wrong force-current collapse into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-hand-first",
+                      label: "Use the left-hand rule as the main term and the three named directions as supporting detail, because students usually learn the motor effect fastest through the gesture alone.",
+                      feedback:
+                        "That would hard-wire the finger-chant shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the side-kick terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m10-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they flip the setup",
+                  scenario:
+                    "The trainee analyst is about to reverse both the field and the current together, then blame the hand rule when the predicted force seems confusing.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "one-direction-at-a-time",
+                      label: "Separate the slots first: name field, current, and force, then reverse only one direction at a time so you can see how the sideways force flips before using the left-hand rule as a check.",
+                      feedback:
+                        "Exactly. That gives the analyst the right one-change-at-a-time workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "flip-everything-fast",
+                      label: "Reverse both the field and current together first, because the quickest way to understand the motor effect is to test the full setup and then let the pattern reveal itself afterward.",
+                      feedback:
+                        "That would send the analyst straight into the wrong mixed-change shortcut.",
+                    },
+                    {
+                      value: "gesture-first",
+                      label: "Start with the left-hand gesture first, because once the fingers are arranged the setup arrows can usually be assigned afterward without much risk of confusion.",
+                      feedback:
+                        "That would send the analyst into the wrong gesture-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean one-direction-at-a-time method.",
+                  retryLabel: "That would send the analyst back into a M10_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m10-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the along-the-field and mixed-change shortcuts",
+                  scenario:
+                    "One crew member keeps drawing the force along the field, while another keeps changing field and current together and then claiming the rule gives random answers.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "sideways-trap-warning",
+                      label: "Do not point the force along the field, and do not reverse multiple directions at once when you are trying to understand the rule. The force is sideways, and the clean test is to flip one direction at a time.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "field-warning-only",
+                      label: "Warn mainly that the force is not along the field, because once students accept that, they usually become more careful about how they test reversals on their own.",
+                      feedback:
+                        "That would leave the mixed-change shortcut mostly alive.",
+                    },
+                    {
+                      value: "reversal-warning-only",
+                      label: "Warn mainly that field and current should not be reversed together, because once that habit is fixed students usually stop pointing the force in the wrong direction automatically.",
+                      feedback:
+                        "That would leave the along-the-field shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the force sideways and the reversals controlled.",
+                  retryLabel: "That warning would leave a main M10_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m10-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the side-kick visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the conductor gets a sideways kick instead of being pulled along the field line or pushed along its own current route.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "crosswind-analogy",
+                      label: "Think of it like a crosswind side-kick: one direction is the field, one is the current route, and the result is a sideways shove. If you reverse either one of the first two, the side-kick flips.",
+                      feedback:
+                        "Exactly. That keeps the sideways relationship visible without turning the rule into a chant.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "tow-line-analogy",
+                      label: "Think of the field like a tow line pulling the conductor along the same way it points, because that makes the effect feel more intuitive than a sideways story.",
+                      feedback:
+                        "That would rebuild the exact along-the-field shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "finger-dance-analogy",
+                      label: "Think of it mainly like a finger dance where the shape matters more than the setup, because students can attach the real directions later once the gesture is memorized.",
+                      feedback:
+                        "That would rebuild the gesture-first shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the side-kick story visible without flattening the directions.",
+                  retryLabel: "That analogy would pull the lesson away from the right motor-effect model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M10_L2") {
