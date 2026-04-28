@@ -1864,6 +1864,7 @@ export default function LessonRunner({
         lessonId === "A1_L4" ||
         lessonId === "A1_L5" ||
         lessonId === "A1_L6" ||
+        lessonId === "A2_L1" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9120,6 +9121,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A2_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a2-l1-energy-ladder",
+                badge: "Energy ladder",
+                title: "Only an exact packet can trigger the jump",
+                scenario:
+                  "The energy-ladder board shows an electron starting in the ground state. One trainee wants a slightly too-small photon packet to lift the electron partway, another thinks any extra packet should always work somehow, and a third treats the excited level like a temporary mistake instead of an allowed state.",
+                prompt: "Pin the note that keeps the ladder model accurate.",
+                options: [
+                  {
+                    value: "exact-gap-note",
+                    label: "Atomic jumps are all-or-nothing: the electron only moves when the photon packet matches an allowed energy gap exactly, and the higher level is still an allowed bound state.",
+                    feedback:
+                      "Exactly. That keeps packet matching, discrete gaps, and excited states aligned.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "partial-lift-note",
+                    label: "A slightly too-small packet should still lift the electron partway, because most real systems respond a little before the full gap is reached.",
+                    feedback:
+                      "That would rebuild the partial-lift shortcut.",
+                  },
+                  {
+                    value: "any-bigger-packet-note",
+                    label: "Any larger packet should always force the jump, because once the photon has at least enough energy the ladder spacing becomes less important than the total amount.",
+                    feedback:
+                      "That would hide the exact-gap rule the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads atomic jumps as exact packet-to-gap matches.",
+                retryLabel: "That note would leave a main A2_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a2-l1-fix-ideas",
+                  badge: "Ladder repair",
+                  title: "Repair the partial-lift shortcut",
+                  scenario:
+                    "One trainee keeps saying a wrong-size packet should still raise the electron a little, while another keeps acting as if the excited state is not a real allowed level once the jump happens.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-all-or-nothing-ladder",
+                      label: "Repair both habits together: the electron only jumps when the packet matches an allowed gap exactly, and the excited state it lands on is still one of the allowed bound levels.",
+                      feedback:
+                        "Exactly. That restores the real energy-ladder model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-bigger-packet-first",
+                      label: "Repair the confusion by giving the photon more energy first, because once students see a bigger packet they usually stop worrying about the exact gap size.",
+                      feedback:
+                        "That would keep the exact-match rule too weak.",
+                    },
+                    {
+                      value: "repair-ground-state-only",
+                      label: "Repair the confusion by emphasizing the ground state most strongly, because once students remember where the electron starts the nature of the higher level usually takes care of itself.",
+                      feedback:
+                        "That would leave the excited-state misunderstanding alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps atomic jumps discrete from the start.",
+                  retryLabel: "That would leave a main A2_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a2-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line ladder rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating atomic energy changes like smooth ramps.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "ladder-anchor",
+                      label: "Atomic transitions only occur between discrete allowed energy levels when the photon packet matches the gap exactly.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "smooth-raise-anchor",
+                      label: "Atomic energy mainly rises smoothly with bigger photon packets, because exact ladder spacing mostly matters after students learn the general trend.",
+                      feedback:
+                        "That line rebuilds the smooth-ramp shortcut.",
+                    },
+                    {
+                      value: "ground-state-anchor-only",
+                      label: "The main idea is mostly that electrons begin in the ground state, because once that start point is secure the jump conditions usually become secondary.",
+                      feedback:
+                        "That line misses the exact-gap rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right ladder rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a2-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the ladder vocabulary board",
+                  scenario:
+                    "The crew keeps mixing ground state, excited state, packet, gap, and allowed level until every answer sounds like one vague 'more energy means higher somehow' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a2-l1",
+                      label: "Use ground state for the starting lowest level, excited state for a higher allowed bound level, photon packet for the incoming energy amount, and gap for the exact energy difference that has to be matched.",
+                      feedback:
+                        "Exactly. That keeps the ladder terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-more-energy-does-most",
+                      label: "Use energy increase as the main phrase for almost the whole topic, because once students know the electron ends up higher the named ladder terms usually become secondary.",
+                      feedback:
+                        "That would hard-wire the smooth-ramp shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-excited-means-unstable-only",
+                      label: "Use excited state mainly as a temporary unstable mistake level, because once students know it is not the ground state the exact allowed-level language matters less.",
+                      feedback:
+                        "That would scramble the excited-state meaning the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the ladder terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a2-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call it a jump",
+                  scenario:
+                    "The trainee analyst is about to declare a transition because the packet looks almost large enough, even though they have not compared it carefully with the actual gap between two allowed levels.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-packet-to-gap-first",
+                      label: "Start by identifying the two allowed levels, compare the photon packet with the exact gap between them, and only call it a jump if the match is exact enough for that discrete transition.",
+                      feedback:
+                        "Exactly. That gives the analyst the right ladder-check method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bigger-is-probably-enough",
+                      label: "Start by deciding whether the packet feels roughly large enough, because once the photon is close to the gap the atom usually responds in the right direction anyway.",
+                      feedback:
+                        "That would send the analyst back into the almost-enough shortcut.",
+                    },
+                    {
+                      value: "higher-level-first",
+                      label: "Start from the target excited level first and assume the packet can be adjusted to reach it, because once students know the destination the exact gap check usually becomes secondary.",
+                      feedback:
+                        "That would send the analyst back into the wrong route-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean packet-versus-gap method.",
+                  retryLabel: "That would send the analyst back into a A2_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a2-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the almost-enough and smooth-ramp shortcuts",
+                  scenario:
+                    "One crew member keeps saying the electron should rise a little with a near-miss packet, while another treats the ladder more like a smooth ramp where extra energy always guarantees the move.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "ladder-trap-warning",
+                      label: "Do not treat atomic energy like a smooth ramp. A wrong-size packet does not partly lift the electron, and a transition only happens when the packet matches an allowed gap exactly.",
+                      feedback:
+                        "Exactly. That warning blocks the main A2_L1 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "partial-warning-only",
+                      label: "Warn mainly against the partway-rise habit, because once students stop that they usually stop treating the whole ladder like a smooth ramp on their own.",
+                      feedback:
+                        "That would leave the smooth-ramp shortcut too alive.",
+                    },
+                    {
+                      value: "smooth-warning-only",
+                      label: "Warn mainly against the smooth-ramp habit, because once students accept discrete levels they usually stop thinking about partway rises on their own.",
+                      feedback:
+                        "That would leave the near-miss shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now treats atomic jumps as exact matches only.",
+                  retryLabel: "That warning would leave a main A2_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a2-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the jump discrete",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why only exact packet sizes produce allowed jumps.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "rung-jump-analogy",
+                      label: "Think of the atom like a ladder with fixed rungs: the packet has to match the height to the next rung, and a near-miss does not leave the climber hovering between levels.",
+                      feedback:
+                        "Exactly. That keeps the all-or-nothing jump visible without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "ramp-analogy",
+                      label: "Think of the atom more like a ramp, because even if the packet does not match exactly it should still move the electron partway upward.",
+                      feedback:
+                        "That would rebuild the smooth-ramp shortcut.",
+                    },
+                    {
+                      value: "bigger-battery-analogy",
+                      label: "Think of the packet mainly like a stronger battery, because once it is powerful enough the exact spacing between levels usually matters less than the total push.",
+                      feedback:
+                        "That would rebuild the exact-gap shortcut in a new form.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the discrete ladder picture intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right energy-ladder model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A1_L6") {
