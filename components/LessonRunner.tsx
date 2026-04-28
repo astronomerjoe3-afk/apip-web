@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M12_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m12-l1-binding-board",
+                badge: "Binding board",
+                title: "Compare stability before naming the energy change",
+                scenario:
+                  "The Binding-energy comparison board shows one less tightly bound nucleus and one more tightly bound nucleus. One trainee jumps straight to a huge-energy slogan without checking which nucleus is more stable, another explains the change like a chemical-bond story, and a third treats the mass difference as too tiny to matter.",
+                prompt: "Pin the note that keeps the nuclear-energy story accurate.",
+                options: [
+                  {
+                    value: "stability-mass-defect-binding-note",
+                    label: "Start by checking which nucleus is more tightly bound, use the mass-defect readout as evidence of a binding-energy change inside the nucleus, and treat the released energy as a nuclear story rather than a chemical-bond story.",
+                    feedback:
+                      "Exactly. That keeps stability, mass defect, and energy release on one board.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "chemical-bond-note",
+                    label: "Treat the energy change like stronger chemical bonds forming, because the important point is simply that going to a more stable state releases energy.",
+                    feedback:
+                      "That would rebuild the wrong chemical-bond shortcut.",
+                  },
+                  {
+                    value: "tiny-mass-note",
+                    label: "Treat the mass difference as too small to be physically important, because only large mass changes should produce meaningful energy differences.",
+                    feedback:
+                      "That would rebuild the wrong tiny-mass-means-tiny-energy shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads nuclear energy through binding and stability first.",
+                retryLabel: "That note would leave a main M12_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m12-l1-fix-ideas",
+                  badge: "Binding repair",
+                  title: "Repair the chemical-energy and tiny-mass shortcuts",
+                  scenario:
+                    "One trainee still explains the release with chemical-bond language, while another keeps assuming a small mass defect cannot correspond to a large energy change.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-binding-story",
+                      label: "Repair both habits together: this is a nuclear binding-energy story inside the nucleus. Mass defect and released energy are linked, so even a very small mass change can correspond to a large energy change.",
+                      feedback:
+                        "Exactly. That restores the right binding-energy explanation.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-stability-only",
+                      label: "Repair the confusion by saying the more stable nucleus simply has less energy, because once that is accepted the exact mass-defect reasoning does not matter much.",
+                      feedback:
+                        "That would leave the mass-defect link too weak for this lesson.",
+                    },
+                    {
+                      value: "repair-bond-language",
+                      label: "Repair the confusion by saying nuclear and chemical bonding are basically the same type of energy story at different scales, because that keeps the stability idea intuitive.",
+                      feedback:
+                        "That would keep the wrong chemical-bond shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats the change as nuclear binding, not chemistry.",
+                  retryLabel: "That would leave a main M12_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m12-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line binding rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating nuclear energy like either ordinary chemistry or just a mysterious mass-to-energy chant.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "binding-anchor",
+                      label: "Binding energy and mass defect explain nuclear energy changes. Nuclear energy comes from changes inside the nucleus, and even small mass changes can correspond to large energy changes.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "stability-anchor-only",
+                      label: "The main idea is that more stable nuclei release energy, because the rest of the explanation is mostly detail around that central comparison.",
+                      feedback:
+                        "That line drops too much of the mass-defect and binding-energy logic.",
+                    },
+                    {
+                      value: "mass-only-anchor",
+                      label: "The main idea is that mass turns into energy, because once students know that phrase the stability comparison can usually be inferred later.",
+                      feedback:
+                        "That line is too slogan-like and strips out the binding story.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right binding-energy rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m12-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the binding-energy vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up stability, binding energy, mass defect, and chemical energy until every comparison sounds like either loose metaphor or memorized slogan.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-binding",
+                      label: "Use binding energy for the energy linked to how tightly nucleons are held in the nucleus, mass defect for the mass difference linked to that nuclear energy, stability for which nucleus is more tightly bound, and chemical energy for a different atom-bond story outside this lesson.",
+                      feedback:
+                        "Exactly. That keeps the lesson vocabulary doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-energy-is-energy",
+                      label: "Use binding energy and chemical energy almost interchangeably, because both are just names for energy released when a system becomes more stable.",
+                      feedback:
+                        "That would hard-wire the wrong chemical-energy shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-mass-is-symbolic",
+                      label: "Use mass defect mainly as a symbolic way of saying energy changed, because the mass shift itself is too small to carry much physical meaning.",
+                      feedback:
+                        "That would hard-wire the wrong tiny-mass shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the binding-energy terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m12-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call the energy outcome",
+                  scenario:
+                    "The trainee analyst is about to quote a dramatic energy result before checking which nucleus is more tightly bound or how the mass-defect readout supports the comparison.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "stability-then-mass-defect",
+                      label: "Start by deciding which nucleus is more tightly bound, then use the mass-defect clue to support the nuclear energy change, and only after that state whether energy is released or required.",
+                      feedback:
+                        "Exactly. That gives the analyst the right comparison method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "energy-slogan-first",
+                      label: "Start with the idea that mass becomes energy, because that gives the answer quickly and the tighter-binding comparison can be added afterward if needed.",
+                      feedback:
+                        "That would send the analyst into the slogan-first shortcut.",
+                    },
+                    {
+                      value: "chemistry-first",
+                      label: "Start by comparing it to a stronger chemical bond, because students usually understand energy release better through ordinary bonding language.",
+                      feedback:
+                        "That would send the analyst into the wrong chemistry analogy.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean binding-energy method.",
+                  retryLabel: "That would send the analyst back into a M12_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m12-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the chemistry and slogan shortcuts",
+                  scenario:
+                    "One crew member keeps explaining the release like ordinary bonding, while another keeps saying only that mass turns into energy without checking the binding and stability comparison that makes the statement meaningful.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "binding-trap-warning",
+                      label: "Do not flatten this into a chemical-bond story, and do not stop at the slogan alone. Check which nucleus is more tightly bound, keep mass defect visible, and treat the release as a nuclear binding-energy change.",
+                      feedback:
+                        "Exactly. That warning blocks the main M12_L1 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "chemistry-warning-only",
+                      label: "Warn mainly against using chemical language, because once students stop that mistake they usually become more careful about the mass-defect logic on their own.",
+                      feedback:
+                        "That would leave the slogan shortcut mostly alive.",
+                    },
+                    {
+                      value: "slogan-warning-only",
+                      label: "Warn mainly against using the slogan by itself, because once students expand the explanation a little they usually stop confusing nuclear and chemical energy on their own.",
+                      feedback:
+                        "That would leave the chemistry shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps binding, mass defect, and stability in one story.",
+                  retryLabel: "That warning would leave a main M12_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m12-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the nucleus story honest",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture tighter nuclear binding without sliding into chemical-bond language or hiding the mass-defect link.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "tighter-clamp-analogy",
+                      label: "Think of the more tightly bound nucleus like a much tighter clamp: moving into that tighter-held arrangement can release energy, and the mass-defect clue is part of how the nuclear bookkeeping reveals that change.",
+                      feedback:
+                        "Exactly. That keeps the story inside the nucleus without pretending it is a chemical bond diagram.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "chemical-bond-analogy",
+                      label: "Think of it exactly like atoms forming stronger chemical bonds, because that is the simplest way to explain why the more stable arrangement gives energy out.",
+                      feedback:
+                        "That would rebuild the wrong chemical-bond shortcut.",
+                    },
+                    {
+                      value: "magic-mass-analogy",
+                      label: "Think of it like a tiny amount of mass magically vanishing into energy, because the disappearance itself is the main concept students need.",
+                      feedback:
+                        "That would rebuild the slogan-only shortcut and hide the binding comparison.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the binding story visible without flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right Binding-energy comparison model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M11_L6") {
