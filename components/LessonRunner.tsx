@@ -1853,6 +1853,7 @@ export default function LessonRunner({
         lessonId === "M13_L5" ||
         lessonId === "M13_L6" ||
         lessonId === "M14_L1" ||
+        lessonId === "M14_L2" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9109,6 +9110,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M14_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m14-l2-lifecycle-board",
+                badge: "Lifecycle board",
+                title: "Read the stellar lifecycle as a branch shaped by mass",
+                scenario:
+                  "The Stellar lifecycle board shows a shared early path through nebula, protostar, and main-sequence stages, then separate later routes for lower-mass and higher-mass stars. One trainee sends every star toward supernova, another memorizes the stages as one flat chain, and a third ignores mass when choosing the remnant.",
+                prompt: "Pin the note that keeps the lifecycle model accurate.",
+                options: [
+                  {
+                    value: "mass-branch-note",
+                    label: "Read the lifecycle as a shared early path that branches later, use stellar mass to choose the later route, and keep white-dwarf endings separate from supernova, neutron-star, and black-hole endings.",
+                    feedback:
+                      "Exactly. That keeps the lifecycle causal instead of flat.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "supernova-for-all-note",
+                    label: "Treat supernova as the normal final stage for stars in general, because once learners remember the dramatic ending they can usually place the earlier stages around it later.",
+                    feedback:
+                      "That would rebuild the wrong one-fate-for-all-stars shortcut.",
+                  },
+                  {
+                    value: "stage-order-only-note",
+                    label: "Treat the lifecycle mainly as one memorized order of stage names, because once the list is secure the low-mass and high-mass differences usually become clear on their own.",
+                    feedback:
+                      "That would rebuild the wrong flat-chain shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads stellar evolution as a mass-dependent branch.",
+                retryLabel: "That note would leave a main M14_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m14-l2-fix-ideas",
+                  badge: "Lifecycle repair",
+                  title: "Repair the flat-chain and supernova-for-all shortcuts",
+                  scenario:
+                    "One trainee treats every star as if it must end in a supernova, while another keeps repeating the lifecycle as one straight list without using mass to choose the later branch.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-branch-model",
+                      label: "Repair both habits together: keep the shared early path, then split the later route by stellar mass and choose the remnant from the correct low-mass or high-mass branch.",
+                      feedback:
+                        "Exactly. That restores the proper stellar-lifecycle model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-stage-list-first",
+                      label: "Repair the confusion by drilling the stage names in order more carefully, because once students can recite the list cleanly they usually stop making mistakes about the endings on their own.",
+                      feedback:
+                        "That would keep the flat-chain shortcut alive.",
+                    },
+                    {
+                      value: "repair-explosion-first",
+                      label: "Repair the confusion by emphasizing how powerful a supernova is, because once students understand that event clearly the differences between star endings usually become obvious afterward.",
+                      feedback:
+                        "That would keep the supernova-for-all shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps mass, branch, and remnant in the right slots.",
+                  retryLabel: "That would leave a main M14_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m14-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line stellar-lifecycle rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop collapsing every star into the same ending.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "lifecycle-anchor",
+                      label: "Stars form in nebulae and protostars, main-sequence stars are the long steady stage, and stellar mass changes the later path and remnant.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "explosion-anchor-only",
+                      label: "The main idea is that stars eventually explode, because the dramatic ending is the clearest single image for stellar evolution and helps learners organize the other stages later.",
+                      feedback:
+                        "That line rebuilds the wrong one-fate shortcut.",
+                    },
+                    {
+                      value: "stage-list-anchor-only",
+                      label: "The main idea is that stellar evolution is a fixed sequence of named stages, because once students memorize the order the cause of different endings usually becomes obvious on its own.",
+                      feedback:
+                        "That line misses the mass-dependent branching that actually explains the pattern.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right stellar-lifecycle rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m14-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the lifecycle vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up nebula, protostar, main sequence, red giant, white dwarf, supernova, neutron star, black hole, and stellar mass until every answer sounds like one vague star-death story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-lifecycle",
+                      label: "Use nebula and protostar for the forming stages, main sequence for the long stable stage, stellar mass for the branch choice, and remnant for the later outcome such as white dwarf, neutron star, or black hole.",
+                      feedback:
+                        "Exactly. That keeps the lifecycle terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-supernova-does-most",
+                      label: "Use supernova as the main word for almost the whole topic, because once students know the explosion label the rest of the lifecycle usually sorts itself out.",
+                      feedback:
+                        "That would hard-wire the supernova-for-all shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-stage-order-does-most",
+                      label: "Use stage order as the main word for almost the whole topic, because once students know which name comes next the remnant differences usually become clear on their own.",
+                      feedback:
+                        "That would hard-wire the flat-chain shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the stellar-lifecycle terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m14-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they choose the ending",
+                  scenario:
+                    "The trainee analyst is about to assign a remnant directly without first checking whether the star belongs on the lower-mass or higher-mass branch.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "mass-then-branch-then-remnant",
+                      label: "Start by asking whether the star is lower mass or higher mass, keep the shared early stages separate from the later branch, and only then choose the likely later path and remnant.",
+                      feedback:
+                        "Exactly. That gives the analyst the right lifecycle method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "ending-first-then-justify",
+                      label: "Start by choosing the most dramatic ending that seems plausible, because once the final stage is selected the earlier branch details usually become easier to explain afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong one-fate shortcut.",
+                    },
+                    {
+                      value: "stage-order-first-then-remnant",
+                      label: "Start by reciting the stage sequence from memory, because once the list is secure the correct remnant usually becomes obvious without extra branching checks.",
+                      feedback:
+                        "That would send the analyst back into the flat-chain shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean stellar-lifecycle method.",
+                  retryLabel: "That would send the analyst back into a M14_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m14-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-fate and flat-chain shortcuts",
+                  scenario:
+                    "One crew member keeps sending every star toward supernova, while another treats the lifecycle as one fixed list that does not really branch.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "lifecycle-trap-warning",
+                      label: "Do not treat stellar evolution as one universal ending, and do not read it as a flat list. Keep stellar mass, branch choice, and later remnant in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M14_L2 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "supernova-warning-only",
+                      label: "Warn mainly against using supernova for every star, because once students stop that mistake they usually become careful enough about the branch structure on their own.",
+                      feedback:
+                        "That would leave the flat-chain shortcut mostly alive.",
+                    },
+                    {
+                      value: "branch-warning-only",
+                      label: "Warn mainly that the lifecycle branches, because once students remember there are two routes they usually stop overusing the supernova ending on their own.",
+                      feedback:
+                        "That would leave the supernova-for-all shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps mass and later stellar fate physically linked.",
+                  retryLabel: "That warning would leave a main M14_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m14-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps one shared start and later branching",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why many stars share an early route but do not all end the same way.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "route-branch-analogy",
+                      label: "Think of stellar evolution like travelers sharing the same early road and then taking different later branches depending on the load they carry, so the branch choice matters more than memorizing one final destination.",
+                      feedback:
+                        "Exactly. That keeps the shared start and later branching linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-track-analogy",
+                      label: "Think of stellar evolution like one train line with fixed stations for every star, because a single route is the simplest way to picture how all stars change over time.",
+                      feedback:
+                        "That would rebuild the flat-chain shortcut.",
+                    },
+                    {
+                      value: "explosion-end-analogy",
+                      label: "Think of stellar evolution mainly like a countdown to one final fireworks display, because the explosion image is the clearest way to help students remember how stars end.",
+                      feedback:
+                        "That would rebuild the supernova-for-all shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the stellar-lifecycle ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right stellar-lifecycle model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M14_L1") {
