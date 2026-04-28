@@ -1871,6 +1871,7 @@ export default function LessonRunner({
         lessonId === "A2_L5" ||
         lessonId === "A2_L6" ||
         lessonId === "A3_L1" ||
+        lessonId === "A3_L2" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9127,6 +9128,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A3_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a3-l2-stationary-wave",
+                badge: "Standing-wave board",
+                title: "Nodes stay fixed because the opposite-traveling waves fit the boundary",
+                scenario:
+                  "The standing-wave board shows a fundamental mode and a higher harmonic on the same boundary. One trainee thinks the quiet points drift along with the wave, another treats nodes and antinodes as just larger and smaller parts of one traveling pulse, and a third ignores the wavelength-fit rule that decides whether the mode can survive.",
+                prompt: "Pin the note that keeps the standing-wave model accurate.",
+                options: [
+                  {
+                    value: "nodes-antinodes-fit-note",
+                    label: "A stationary wave is built from matched opposite-traveling waves. Nodes stay fixed, antinodes oscillate strongly, and only wavelength patterns that fit the boundary can survive as allowed modes.",
+                    feedback:
+                      "Exactly. That keeps fixed nodes, oscillating antinodes, and boundary fit in one story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "drifting-node-note",
+                    label: "Treat nodes as temporary quiet spots that drift through the system, because the underlying waves are still traveling and should carry the low-displacement points along too.",
+                    feedback:
+                      "That would rebuild the drifting-node shortcut.",
+                  },
+                  {
+                    value: "size-only-mode-note",
+                    label: "Choose the mode mainly from how large the wave looks, because once the amplitude is strong enough the exact wavelength fit at the boundary usually matters less.",
+                    feedback:
+                      "That would hide the allowed-fit rule the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads standing waves through nodes, antinodes, and boundary fit.",
+                retryLabel: "That note would leave a main A3_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a3-l2-fix-ideas",
+                  badge: "Mode repair",
+                  title: "Repair the drifting-node and size-only shortcuts",
+                  scenario:
+                    "One trainee keeps treating nodes like moving low points on a traveling pulse, while another keeps deciding whether a standing pattern should exist from amplitude size instead of from wavelength fit.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-fixed-node-fit-model",
+                      label: "Repair both habits together: build the pattern from opposite-traveling waves, keep nodes fixed and antinodes oscillating, and test whether the wavelength fits the boundary before you approve the mode.",
+                      feedback:
+                        "Exactly. That restores the right standing-wave model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-bigger-wave-first",
+                      label: "Repair the confusion by emphasizing the larger oscillations first, because once students can see the biggest peaks the node and boundary details usually become easier later.",
+                      feedback:
+                        "That would keep the size-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-travel-story-first",
+                      label: "Repair the confusion by focusing on how each input wave travels first, because once students track the motion the fixed-node picture usually becomes secondary.",
+                      feedback:
+                        "That would keep the drifting-node shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats standing modes as fixed-fit patterns.",
+                  retryLabel: "That would leave a main A3_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a3-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line stationary-wave rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop reading standing patterns like slow-moving traveling waves.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "stationary-wave-anchor",
+                      label: "Stationary waves are standing modes created by boundary-matched superposition.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "traveling-wave-anchor",
+                      label: "The main idea is mostly that the wave still travels through the system, because once students remember that the fixed points usually become easier to excuse later.",
+                      feedback:
+                        "That line rebuilds the drifting-node shortcut.",
+                    },
+                    {
+                      value: "amplitude-anchor-only",
+                      label: "The main idea is mostly about where the biggest peaks appear, because once students can see the antinodes the boundary-fit details usually become secondary.",
+                      feedback:
+                        "That line misses the allowed-mode rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right stationary-wave rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a3-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the node and antinode vocabulary board",
+                  scenario:
+                    "The crew keeps mixing node, antinode, harmonic, standing wave, and boundary fit until every answer sounds like one vague 'wavy shape' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a3-l2",
+                      label: "Use node for a fixed zero-displacement point, antinode for a strongly oscillating point, harmonic for an allowed standing mode number, and boundary fit for the wavelength condition that lets the mode survive.",
+                      feedback:
+                        "Exactly. That keeps the standing-wave terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-peak-does-most",
+                      label: "Use peak as the main word for almost the whole topic, because once students can see where the big motion is the node and harmonic labels usually become secondary.",
+                      feedback:
+                        "That would hard-wire the size-only shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-travel-does-most",
+                      label: "Use travel as the main word for almost the whole topic, because once students remember that waves move the fixed-node language usually matters less.",
+                      feedback:
+                        "That would hard-wire the drifting-node shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the stationary-wave terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a3-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they approve a mode",
+                  scenario:
+                    "The trainee analyst is about to describe the pattern from the moving-wave story alone without first checking where the fixed quiet points sit or whether the wavelength matches the boundary condition.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "find-nodes-check-fit-then-mode",
+                      label: "Start by locating the fixed nodes, then test whether the wavelength fits the boundary, and only afterward describe the antinodes and harmonic number.",
+                      feedback:
+                        "Exactly. That gives the analyst the right standing-wave workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "track-motion-first",
+                      label: "Start by tracking how the input waves move, because once the travel story is clear the fixed pattern usually becomes easier to infer afterward.",
+                      feedback:
+                        "That would send the analyst back into the drifting-node shortcut.",
+                    },
+                    {
+                      value: "pick-biggest-peaks-first",
+                      label: "Start from the biggest antinodes first, because once students know where the largest motion sits the node and fit details usually become mostly obvious.",
+                      feedback:
+                        "That would send the analyst back into the size-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean mode-reading method.",
+                  retryLabel: "That would send the analyst back into a A3_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a3-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the drifting-node and loose-fit shortcuts",
+                  scenario:
+                    "One crew member keeps treating nodes like moving wave features, while another keeps approving patterns without testing whether the wavelength actually fits the boundary.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "standing-wave-trap-warning",
+                      label: "Do not let nodes drift or let any wavelength count. In a stationary wave the nodes stay fixed, the antinodes oscillate, and only boundary-matched wavelengths survive as modes.",
+                      feedback:
+                        "Exactly. That warning blocks the main A3_L2 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "node-warning-only",
+                      label: "Warn mainly against the drifting-node habit, because once students stop that they usually remember to check wavelength fit on their own.",
+                      feedback:
+                        "That would leave the loose-fit shortcut too alive.",
+                    },
+                    {
+                      value: "fit-warning-only",
+                      label: "Warn mainly against ignoring the boundary fit, because once students test allowed wavelengths they usually stop imagining drifting nodes on their own.",
+                      feedback:
+                        "That would leave the drifting-node shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps fixed nodes and allowed fit visible together.",
+                  retryLabel: "That warning would leave a main A3_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a3-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps fixed quiet points visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why nodes stay fixed while antinodes keep oscillating.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "jump-rope-analogy",
+                      label: "Think of the pattern like a jump rope held at both ends: only certain shapes fit, some points stay quiet, and other points swing strongly in place.",
+                      feedback:
+                        "Exactly. That keeps nodes, antinodes, and fit together without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "traveling-belt-analogy",
+                      label: "Think of the pattern more like marks riding along a conveyor belt, because once the wave is present the quiet points should travel with the motion too.",
+                      feedback:
+                        "That would rebuild the drifting-node shortcut.",
+                    },
+                    {
+                      value: "biggest-bounce-analogy",
+                      label: "Think of the pattern mainly like finding the biggest bounce spots, because once the largest motion is identified the quiet points and fit conditions usually matter less.",
+                      feedback:
+                        "That would rebuild the size-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the stationary-wave picture intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right standing-mode model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A3_L1") {
