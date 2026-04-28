@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M9_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m9-l1-complete-loop-board",
+                badge: "Loop board",
+                title: "Check the route first, then compare the current checkpoints",
+                scenario:
+                  "The Complete-Loop board shows one ammeter before a lamp and one after it. One trainee says the lamp uses current up, another says the current nearest the source should be larger, and a third keeps talking about battery energy as if it were the same thing as moving charge carriers.",
+                prompt: "Pin the note that keeps the current-ledger story honest.",
+                options: [
+                  {
+                    value: "closed-loop-same-current",
+                    label: "Close the route first, then compare the two checkpoints: in one simple loop the current is the same before and after the component because charge carriers circulate and are not used up.",
+                    feedback:
+                      "Exactly. That keeps complete-loop logic, equal current, and charge conservation in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "source-side-bigger-current",
+                    label: "Expect the source-side checkpoint to be larger, because the battery sends its strongest current out first and the lamp should reduce the amount left for the rest of the route.",
+                    feedback:
+                      "That turns current into a consumable substance. In a simple closed loop, the current matches at both checkpoints.",
+                  },
+                  {
+                    value: "energy-equals-current",
+                    label: "Treat the lamp as taking some of the current away, because once energy is transferred the circuit should naturally have less current left to carry onward.",
+                    feedback:
+                      "That blurs energy transfer into charge loss. Components transfer energy without using up the charge carriers.",
+                  },
+                ],
+                successLabel: "Pinned. The room now starts with route condition and equal-checkpoint current.",
+                retryLabel: "That note would leave a main M9_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m9-l1-fix-ideas",
+                  badge: "Ledger repair",
+                  title: "Repair the used-up-current shortcut",
+                  scenario:
+                    "One trainee says the component uses current up, while another keeps mixing the battery’s energy story with the question of whether charge carriers are conserved around the loop.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-carriers-versus-energy",
+                      label: "Repair both ideas together: charge carriers circulate around a complete loop and stay conserved, while the component changes the energy carried by each charge without removing the charges themselves.",
+                      feedback:
+                        "Exactly. That restores the difference between conserved charge flow and transferred energy.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-battery-strength",
+                      label: "Repair the confusion by emphasizing that a strong battery can keep the current high enough after the component, because the component loss mostly depends on source strength.",
+                      feedback:
+                        "That keeps the used-up-current shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-lamp-demand",
+                      label: "Repair the confusion by saying the lamp only takes a little current in normal cases, so the after-lamp current can be treated as almost the same as the before-lamp current.",
+                      feedback:
+                        "That suggests a small loss model instead of the correct same-current rule.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now separates charge conservation from energy transfer.",
+                  retryLabel: "That would leave a main M9_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m9-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line complete-loop rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating current like fuel that gets spent by each component.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "loop-anchor",
+                      label: "A steady current needs one complete conducting path, and in a simple loop the current is the same at every point while components transfer energy without using up charge carriers.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "source-anchor",
+                      label: "A battery sends the biggest current out near the source, and each component takes a share of that current as the loop progresses.",
+                      feedback:
+                        "That would build the wrong current-loss model into the anchor sentence.",
+                    },
+                    {
+                      value: "switch-anchor",
+                      label: "The main idea is that opening the switch reduces the current, while the details of carrier motion and equal checkpoints matter only after the learner is fluent.",
+                      feedback:
+                        "That hides the actual conservation idea the lesson is trying to anchor.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right complete-loop rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m9-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the current-ledger vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up current, charge carriers, complete circuit, and energy transfer until every electrical word sounds like it means the same flowing stuff.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-current-ledger",
+                      label: "Use current for charge flow rate, charge carriers for the moving charges, complete circuit for the closed conducting path, and energy transfer for what the component does to each passing charge.",
+                      feedback:
+                        "Exactly. That keeps each loop term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-current-energy",
+                      label: "Use current and energy almost interchangeably at first, because students usually understand circuits faster when the battery is described as sending energy current all around the loop.",
+                      feedback:
+                        "That would scramble the key distinction the lesson is trying to make.",
+                    },
+                    {
+                      value: "term-board-component-drop",
+                      label: "Use current drop for what happens after a component, because that phrase helps learners remember that electrical devices take something away from the flow.",
+                      feedback:
+                        "That would hard-wire the wrong used-up-current idea into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the current-ledger terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m9-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare the ammeters",
+                  scenario:
+                    "The trainee analyst is about to compare the ammeter readings before checking whether the route is even complete, and they are still half-expecting the second ammeter to be lower because of the lamp.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "route-then-checkpoints",
+                      label: "Check that the route is complete first, then compare the two current checkpoints while keeping energy transfer separate from whether the same charge flow continues around the loop.",
+                      feedback:
+                        "Exactly. That gives the analyst the right current-ledger workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "compare-source-first",
+                      label: "Start with whichever ammeter is closest to the source, because that is usually the most trustworthy place to estimate the battery’s output before components reduce it.",
+                      feedback:
+                        "That would send the analyst straight into the wrong current-loss shortcut.",
+                    },
+                    {
+                      value: "battery-story-first",
+                      label: "Start by explaining what the battery gives to the loop, because once the source story is secure the exact carrier and checkpoint details usually take care of themselves.",
+                      feedback:
+                        "That would blur the energy story into the charge-conservation story again.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean complete-loop method.",
+                  retryLabel: "That would send the analyst back into a M9_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m9-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the current-loss and energy-equals-charge shortcuts",
+                  scenario:
+                    "One crew member keeps saying the lamp uses current up, while another keeps translating every battery or lamp discussion into a change in the number of charge carriers moving round the loop.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "current-trap-warning",
+                      label: "Do not treat current as something components use up, and do not collapse energy transfer into charge loss. In a simple complete loop the same current continues while the energy story changes at the components.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "current-warning-only",
+                      label: "Warn mainly that the current can stay high after a component, because once that is accepted the energy-versus-charge distinction usually becomes optional detail.",
+                      feedback:
+                        "That would leave the energy-equals-charge shortcut mostly alive.",
+                    },
+                    {
+                      value: "energy-warning-only",
+                      label: "Warn mainly that energy transfer and charge flow are different, because once that is said clearly the idea that current falls after a lamp usually corrects itself.",
+                      feedback:
+                        "That would leave the used-up-current shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps complete-loop current separate from energy transfer.",
+                  retryLabel: "That warning would leave a main M9_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m9-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps carrier circulation visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture the same carriers moving round a closed route without making it sound like current gets eaten by the component.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "relay-loop-analogy",
+                      label: "Think of a relay loop where the same runners keep circulating round the track while handing energy tasks off at stations. The stations change what the runners are carrying, not how many runners remain on the track.",
+                      feedback:
+                        "Exactly. That keeps both circulation and energy transfer visible without turning current into fuel.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fuel-pipe-analogy",
+                      label: "Think of current like fuel in a pipe that each device burns a little, because that makes it easier to understand why electrical devices must take something from the flow to work.",
+                      feedback:
+                        "That would rebuild the exact shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "battery-push-analogy",
+                      label: "Think mainly of the battery pushing harder at the start of the route, because once students picture the strong launch they can infer why later checkpoints are usually weaker.",
+                      feedback:
+                        "That would turn the analogy into a source-side current-drop story.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps carrier circulation and energy transfer in the right relationship.",
+                  retryLabel: "That analogy would pull the lesson away from the right complete-loop model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M8_L6") {
