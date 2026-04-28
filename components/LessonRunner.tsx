@@ -1872,6 +1872,7 @@ export default function LessonRunner({
         lessonId === "A2_L6" ||
         lessonId === "A3_L1" ||
         lessonId === "A3_L2" ||
+        lessonId === "A3_L3" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9128,6 +9129,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A3_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a3-l3-interference-board",
+                badge: "Interference board",
+                title: "Use path difference to predict the fringe outcome",
+                scenario:
+                  "The interference board compares two routes reaching the same point. One trainee wants to decide from one route alone, another jumps straight to the bright-or-dark result without checking the route difference first, and a third treats phase as disconnected from the geometry that created it.",
+                prompt: "Pin the note that keeps the interference model accurate.",
+                options: [
+                  {
+                    value: "path-difference-bridge-note",
+                    label: "Route difference is the bridge to phase difference. Compare the two paths first, then use the resulting phase relation to predict constructive or destructive interference.",
+                    feedback:
+                      "Exactly. That keeps route, phase, and fringe outcome in one linked story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "one-route-note",
+                    label: "Read the interference mainly from the longer route alone, because once one path is clearly different the final bright-or-dark result usually becomes obvious without further comparison.",
+                    feedback:
+                      "That would rebuild the one-path shortcut.",
+                  },
+                  {
+                    value: "fringe-first-note",
+                    label: "Decide the fringe outcome from the screen pattern first, because once the result is recognized the exact route and phase details usually become secondary.",
+                    feedback:
+                      "That would hide the route-to-phase bridge the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads interference through the right route-to-phase link.",
+                retryLabel: "That note would leave a main A3_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a3-l3-fix-ideas",
+                  badge: "Fringe repair",
+                  title: "Repair the one-path and fringe-first shortcuts",
+                  scenario:
+                    "One trainee keeps trying to explain the outcome from one route alone, while another keeps naming bright or dark before checking what route difference or phase relation the geometry actually sets up.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-route-phase-fringe-model",
+                      label: "Repair both habits together: compare the two routes, translate the route difference into a phase relation, and only afterward choose constructive or destructive interference.",
+                      feedback:
+                        "Exactly. That restores the right interference workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-longer-route-first",
+                      label: "Repair the confusion by identifying the longer route first, because once students know which path differs the rest of the interference logic usually becomes easier later.",
+                      feedback:
+                        "That would keep the one-path shortcut alive.",
+                    },
+                    {
+                      value: "repair-pattern-first",
+                      label: "Repair the confusion by focusing on the visible fringe result first, because once students trust the bright-or-dark outcome the route and phase details usually become secondary.",
+                      feedback:
+                        "That would keep the fringe-first shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats route difference and phase difference as one chain.",
+                  retryLabel: "That would leave a main A3_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a3-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line interference rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop reading interference outcomes as if they appear with no geometric cause.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "interference-anchor",
+                      label: "Interference is easiest to trust when route difference and phase difference are read as one linked story.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fringe-anchor-only",
+                      label: "The main idea is mostly that some points become bright and others dark, because once students know the screen outcome the route story usually becomes secondary.",
+                      feedback:
+                        "That line rebuilds the fringe-first shortcut.",
+                    },
+                    {
+                      value: "geometry-anchor-only",
+                      label: "The main idea is mostly about comparing route lengths, because once students know the geometry the phase relation usually becomes secondary.",
+                      feedback:
+                        "That line breaks the route-to-phase link the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right interference rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a3-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the interference vocabulary board",
+                  scenario:
+                    "The crew keeps mixing path difference, phase difference, constructive interference, destructive interference, and fringe outcome until every answer sounds like one vague 'the waves meet somehow' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a3-l3",
+                      label: "Use path difference for the route comparison, phase difference for the resulting alignment shift, constructive interference for reinforcement, destructive interference for cancellation, and fringe outcome for the visible bright-or-dark result.",
+                      feedback:
+                        "Exactly. That keeps the interference terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-fringe-does-most",
+                      label: "Use fringe as the main word for almost the whole topic, because once students know where the bright and dark regions appear the path and phase labels usually matter less.",
+                      feedback:
+                        "That would hard-wire the fringe-first shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-route-does-most",
+                      label: "Use route as the main word for almost the whole topic, because once students compare the paths the phase and interference labels usually become secondary.",
+                      feedback:
+                        "That would weaken the route-to-phase bridge the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the interference terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a3-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call the outcome",
+                  scenario:
+                    "The trainee analyst is about to label the point bright or dark without first comparing the two routes and checking the phase relation that follows from that route difference.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-routes-then-phase-then-outcome",
+                      label: "Start by comparing the two routes, then use the route difference to infer the phase relation, and only afterward decide whether the result should reinforce or cancel.",
+                      feedback:
+                        "Exactly. That gives the analyst the right interference workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "screen-first-then-reason-back",
+                      label: "Start from the observed screen outcome, because once students know whether the point is bright or dark the route and phase explanation usually becomes easier to fill in later.",
+                      feedback:
+                        "That would send the analyst back into the fringe-first shortcut.",
+                    },
+                    {
+                      value: "one-route-first",
+                      label: "Start from whichever route looks more changed, because once students know the standout path the final interference outcome usually becomes mostly obvious.",
+                      feedback:
+                        "That would send the analyst back into the one-path shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean route-to-phase method.",
+                  retryLabel: "That would send the analyst back into a A3_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a3-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-path and fringe-first shortcuts",
+                  scenario:
+                    "One crew member keeps trying to predict the result from a single route, while another keeps announcing bright or dark before reading the route difference that causes the phase shift.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "interference-trap-warning",
+                      label: "Do not read interference from one path or one final fringe alone. Compare the routes, link the difference to phase, and then decide whether the outcome reinforces or cancels.",
+                      feedback:
+                        "Exactly. That warning blocks the main A3_L3 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "one-path-warning-only",
+                      label: "Warn mainly against using one route alone, because once students stop that they usually stop jumping to fringe labels on their own.",
+                      feedback:
+                        "That would leave the fringe-first shortcut too alive.",
+                    },
+                    {
+                      value: "fringe-warning-only",
+                      label: "Warn mainly against naming bright or dark too early, because once students slow down there they usually compare the full path story on their own.",
+                      feedback:
+                        "That would leave the one-path shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps route difference and phase relation tied together.",
+                  retryLabel: "That warning would leave a main A3_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a3-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps route and phase linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why route difference can predict whether two waves reinforce or cancel.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "marcher-analogy",
+                      label: "Think of the waves like two marching groups taking different routes to the same meeting point: if the route difference leaves them stepping together they reinforce, and if it leaves them out of step they cancel.",
+                      feedback:
+                        "Exactly. That keeps route difference and phase relation linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-road-analogy",
+                      label: "Think of the result mainly like one road deciding the meeting, because whichever route changes most should usually control the final outcome.",
+                      feedback:
+                        "That would rebuild the one-path shortcut.",
+                    },
+                    {
+                      value: "spotlight-analogy",
+                      label: "Think of the result mainly like a spotlight turning on or off, because once the bright-or-dark outcome is seen the route details usually matter less.",
+                      feedback:
+                        "That would rebuild the fringe-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the route-to-phase bridge intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right interference model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A3_L2") {
