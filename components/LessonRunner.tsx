@@ -2034,6 +2034,248 @@ function getA5ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A5_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a5-l6-damping-board",
+        badge: "Damping board",
+        title: "Choose damping by settling style, not by “more is better”",
+        scenario:
+          "The damping board shows underdamped, critically damped, and overdamped returns side by side. One trainee treats damping as a vague friction label, another assumes the most damping must always be best, and a third forgets that critically damped is the fastest return without overshoot.",
+        prompt: "Pin the note that keeps the damping model accurate.",
+        options: [
+          {
+            value: "damping-response-style-note",
+            label: "Treat damping as energy loss from the oscillator, compare underdamped, critically damped, and overdamped return styles, and choose the setting by the application's settling goal rather than by assuming more damping is always better.",
+            feedback:
+              "Exactly. That keeps energy loss, response style, and application fit in one story.",
+            isCorrect: true,
+          },
+          {
+            value: "more-damping-always-best-note",
+            label: "Treat the most damping as the safest and best choice in general, because once oscillation is suppressed as strongly as possible the system usually becomes automatically superior.",
+            feedback:
+              "That would rebuild the more-is-better shortcut.",
+          },
+          {
+            value: "critical-means-biggest-loss-note",
+            label: "Treat critical damping mainly as the case with the greatest energy loss, because the fastest non-oscillating return must come from removing the most energy as quickly as possible.",
+            feedback:
+              "That would blur the response-style criterion the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads damping as an application-shaped settling choice.",
+        retryLabel: "That note would leave a main A5_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a5-l6-fix-ideas",
+          badge: "Damping repair",
+          title: "Repair the “more is better” and vague-friction shortcuts",
+          scenario:
+            "One analyst keeps talking about damping as a generic slowing effect with no response-style differences, while another assumes the strongest damping must always be the best design choice.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-response-style-comparison",
+              label: "Repair both habits together: treat damping as energy loss, compare underdamped, critically damped, and overdamped return styles directly, and then choose the best case by the application's settling target.",
+              feedback:
+                "Exactly. That restores the right damping-response workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-suppress-motion-first",
+              label: "Repair the confusion by emphasizing motion suppression first, because once students see oscillations reduced strongly the design choice usually becomes obvious later.",
+              feedback:
+                "That would keep the more-is-better shortcut alive.",
+            },
+            {
+              value: "repair-energy-loss-only",
+              label: "Repair the confusion by emphasizing energy loss alone, because once students know damping removes energy the differences between underdamped, critical, and overdamped behavior usually become secondary.",
+              feedback:
+                "That would keep the vague-friction shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now reads damping through return behavior and job fit.",
+          retryLabel: "That would leave a main A5_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a5-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line damping rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop choosing damping by instinct instead of by response target.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a5-l6-anchor",
+              label: "Damping is an energy-loss setting that shapes how an oscillator settles and which applications it suits.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "strongest-anchor-only",
+              label: "The main idea is mostly that stronger damping is safer, because once students know that large oscillations are reduced the rest of the design story usually becomes secondary.",
+              feedback:
+                "That would hide the application-fit idea the lesson needs.",
+            },
+            {
+              value: "critical-anchor-only",
+              label: "The main idea is mostly that critical damping is the best case, because once students know the fastest return type the other damping styles usually become secondary details.",
+              feedback:
+                "That would flatten the comparison and application choice too far.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right damping rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a5-l6-technical-words",
+          badge: "Term desk",
+          title: "Clean up the damping vocabulary board",
+          scenario:
+            "The crew keeps mixing damping, underdamped, critically damped, overdamped, settling, and overshoot until every answer sounds like one vague slowing-down story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a5-l6",
+              label: "Use damping for the energy-loss effect, underdamped for oscillatory return with fading, critically damped for the fastest return without overshoot, and overdamped for a slower non-oscillatory return.",
+              feedback:
+                "Exactly. That keeps the damping terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-friction-does-most",
+              label: "Use friction as the main word for almost the whole topic, because once students know energy is being removed the separate response-style labels usually matter less.",
+              feedback:
+                "That would scramble the damping terms into the vague-friction shortcut.",
+            },
+            {
+              value: "term-board-critical-does-most",
+              label: "Use critical damping as the main word for almost the whole topic, because once students know the fastest non-oscillating case the other return styles usually become secondary.",
+              feedback:
+                "That would weaken the full comparison structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the damping terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a5-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose the damping level",
+          scenario:
+            "The trainee analyst is about to pick the strongest damping by instinct, and has not yet compared the actual return styles or matched them to the application's settling goal.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "compare-return-styles-first",
+              label: "Start by comparing underdamped, critically damped, and overdamped returns, note how energy loss changes the settling style, and then choose the best case by the job's need for speed, overshoot control, or smooth decay.",
+              feedback:
+                "Exactly. That gives the analyst the right damping workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-strongest-damping",
+              label: "Start from the strongest damping level, because once the oscillation is suppressed as much as possible the best design choice usually becomes obvious.",
+              feedback:
+                "That would send the analyst back into the more-is-better shortcut.",
+            },
+            {
+              value: "start-from-energy-loss-only",
+              label: "Start from how much energy is removed, because once that is known the details of overshoot and settling style usually become secondary.",
+              feedback:
+                "That would send the analyst back into the vague-friction shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean compare-then-match method.",
+          retryLabel: "That would send the analyst back into a A5_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a5-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the “most damping wins” shortcut",
+          scenario:
+            "One crew member keeps choosing the most damping by default, while another keeps treating damping as a generic friction word instead of as a set of distinct settling behaviors.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "damping-trap-warning",
+              label: "Do not assume more damping is automatically better, and do not stop at a vague friction story. Compare underdamped, critically damped, and overdamped returns, then match the settling style to the application goal.",
+              feedback:
+                "Exactly. That warning blocks the main A5_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "more-warning-only",
+              label: "Warn mainly against over-damping by instinct, because once students stop that they usually understand the return-style differences on their own.",
+              feedback:
+                "That would leave the vague-friction shortcut too alive.",
+            },
+            {
+              value: "friction-warning-only",
+              label: "Warn mainly against using vague friction language, because once students stop that they usually stop assuming the strongest damping is always best on their own.",
+              feedback:
+                "That would leave the more-is-better shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps response style and application fit visible.",
+          retryLabel: "That warning would leave a main A5_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a5-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps application fit visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why damping is not just about “more stopping,” but about choosing the right settling style for the job.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "door-closer-analogy",
+              label: "Think of the motion like tuning a door closer: one setting lets the door swing and settle, one closes it fastest without a bounce, and one closes it too sluggishly, so the best choice depends on the job.",
+              feedback:
+                "Exactly. That keeps response style and application fit visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "strongest-brake-analogy",
+              label: "Think of the motion mainly like braking as hard as possible, because once the movement is suppressed strongly the best setting is usually obvious.",
+              feedback:
+                "That would rebuild the more-is-better shortcut.",
+            },
+            {
+              value: "rough-surface-analogy",
+              label: "Think of the motion mainly like rubbing on a rough surface, because once energy loss is present the differences between damping styles usually matter much less.",
+              feedback:
+                "That would rebuild the vague-friction shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps damping style tied to application choice.",
+          retryLabel: "That analogy would pull the lesson away from the right damping-response model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A5_L5") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
