@@ -1862,6 +1862,7 @@ export default function LessonRunner({
         lessonId === "A1_L2" ||
         lessonId === "A1_L3" ||
         lessonId === "A1_L4" ||
+        lessonId === "A1_L5" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9118,6 +9119,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A1_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a1-l5-conservation-ledger",
+                badge: "Conservation ledger",
+                title: "Check all three totals before approving the event",
+                scenario:
+                  "The conservation check board shows one event that still balances charge while quietly breaking baryon number, and another that keeps the charge right but breaks lepton number. One trainee wants to approve the event as soon as charge works, while another keeps forgetting to track baryons and leptons separately.",
+                prompt: "Pin the note that keeps the event test accurate.",
+                options: [
+                  {
+                    value: "all-three-ledger-note",
+                    label: "Keep charge, baryon number, and lepton number visible on the same ledger and reject the event as soon as any one of the three totals no longer balances.",
+                    feedback:
+                      "Exactly. That keeps the whole conservation check alive instead of approving events too early.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "charge-first-note",
+                    label: "Approve the event once charge balances, because charge is the main conservation rule and the other totals usually follow automatically if the particle list looks sensible.",
+                    feedback:
+                      "That would leave the charge-only shortcut active.",
+                  },
+                  {
+                    value: "one-extra-total-note",
+                    label: "Check charge and then only one extra total, because once either baryon number or lepton number works the other one is usually safe enough to assume.",
+                    feedback:
+                      "That would still leave one conservation rule unguarded.",
+                  },
+                ],
+                successLabel: "Pinned. The board now treats particle events like full three-rule ledger checks.",
+                retryLabel: "That note would leave a main A1_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a1-l5-fix-ideas",
+                  badge: "Ledger repair",
+                  title: "Repair the charge-only approval habit",
+                  scenario:
+                    "One trainee keeps approving events as soon as the charge matches, while another checks baryon number for hadrons but forgets lepton number as soon as electrons or neutrinos appear.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-three-check-ledger",
+                      label: "Repair both habits together: keep charge, baryon number, and lepton number on one ledger and reject the event immediately if any one of the three does not balance.",
+                      feedback:
+                        "Exactly. That restores the full conservation-check method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-charge-more-carefully",
+                      label: "Repair the confusion by teaching charge more carefully first, because once students become more accurate with charge the baryon and lepton checks usually sort themselves out.",
+                      feedback:
+                        "That would keep the charge-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-family-guessing",
+                      label: "Repair the confusion by recognizing whether the event looks more hadronic or leptonic first, because that usually tells students which one of the extra totals they really need.",
+                      feedback:
+                        "That would still encourage skipping one of the conservation checks.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats every event as a full three-column ledger.",
+                  retryLabel: "That would leave a main A1_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a1-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line conservation rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop approving events from one correct total alone.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "conservation-anchor",
+                      label: "A particle event is only allowed when charge, baryon number, and lepton number all balance together.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-anchor-only",
+                      label: "A particle event is usually allowed once the charge balances, because the other totals mainly confirm what charge already tells you.",
+                      feedback:
+                        "That line rebuilds the charge-only shortcut.",
+                    },
+                    {
+                      value: "baryon-lepton-anchor",
+                      label: "A particle event is mainly about checking baryon number and lepton number, because charge is usually the easy part that does not need equal attention.",
+                      feedback:
+                        "That line breaks the full three-check rule in the other direction.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right conservation rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a1-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the conservation vocabulary board",
+                  scenario:
+                    "The crew keeps mixing charge, baryon number, lepton number, allowed event, and rejected event until every answer sounds like one vague 'it looks okay' judgment.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a1-l5",
+                      label: "Use charge for the electric total, baryon number for tracking baryons through the event, lepton number for tracking leptons through the event, and allowed event only when all three totals balance.",
+                      feedback:
+                        "Exactly. That keeps the conservation terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-charge-does-most",
+                      label: "Use charge as the main word for almost the whole topic, because once students have the electric total correct the other labels usually become secondary.",
+                      feedback:
+                        "That would hard-wire the charge-only shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-particle-family-does-most",
+                      label: "Use particle family labels as the main guide, because once students know whether the event looks baryonic or leptonic the totals usually matter less.",
+                      feedback:
+                        "That would hide the all-three-ledger rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the conservation terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a1-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they approve the event",
+                  scenario:
+                    "The trainee analyst is about to approve the reaction because the charge matches, even though they have not finished checking baryon number and lepton number on the ledger.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "ledger-all-three-then-approve",
+                      label: "Start by writing before-and-after totals for charge, baryon number, and lepton number, then compare all three columns, and only afterward decide whether the event is allowed.",
+                      feedback:
+                        "Exactly. That gives the analyst the right conservation-check method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-then-family",
+                      label: "Start from charge first and then use particle family intuition if anything feels odd, because full baryon and lepton bookkeeping is usually more detail than the first pass needs.",
+                      feedback:
+                        "That would send the analyst back into the charge-first shortcut.",
+                    },
+                    {
+                      value: "baryon-or-lepton-whichever-shows-up",
+                      label: "Start by deciding whether baryon number or lepton number seems more relevant in this event, because checking both every time usually slows students down too much.",
+                      feedback:
+                        "That would send the analyst back into the partial-ledger shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean event-check method.",
+                  retryLabel: "That would send the analyst back into a A1_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a1-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-correct-total shortcut",
+                  scenario:
+                    "One crew member keeps approving events from charge alone, while another keeps checking exactly one of baryon number or lepton number and assuming the remaining rule is probably fine.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "conservation-trap-warning",
+                      label: "Do not approve an event from one correct total alone. Charge, baryon number, and lepton number must all balance on the same ledger before the event is allowed.",
+                      feedback:
+                        "Exactly. That warning blocks the main A1_L5 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-warning-only",
+                      label: "Warn mainly against the charge-only habit, because once students stop that they usually remember the other totals on their own.",
+                      feedback:
+                        "That would leave the partial-ledger shortcut too alive.",
+                    },
+                    {
+                      value: "extra-total-warning-only",
+                      label: "Warn mainly against forgetting baryon number or lepton number, because once students remember one extra total the charge problem usually takes care of itself.",
+                      feedback:
+                        "That would still weaken the full three-check rule.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now treats event approval as a three-rule decision.",
+                  retryLabel: "That warning would leave a main A1_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a1-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the full ledger visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners understand why one correct total is not enough to approve a particle event.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "three-lock-ledger-analogy",
+                      label: "Think of the event like a vault with three locks: charge, baryon number, and lepton number all have to click into balance before the door can open.",
+                      feedback:
+                        "Exactly. That keeps the all-three-check rule visible without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "main-lock-charge-analogy",
+                      label: "Think of charge as the main lock and the other totals as backup checks, because once the main lock opens the others usually do not matter as much.",
+                      feedback:
+                        "That would rebuild the charge-only shortcut.",
+                    },
+                    {
+                      value: "choose-best-lock-analogy",
+                      label: "Think of the analyst as choosing whichever lock looks most relevant for the event, because not every conservation rule needs equal attention every time.",
+                      feedback:
+                        "That would rebuild the partial-ledger shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the full conservation ledger in view.",
+                  retryLabel: "That analogy would pull the lesson away from the right conservation-check model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A1_L4") {
