@@ -1855,6 +1855,7 @@ export default function LessonRunner({
         lessonId === "M14_L1" ||
         lessonId === "M14_L2" ||
         lessonId === "M14_L3" ||
+        lessonId === "M14_L4" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9111,6 +9112,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M14_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m14-l4-lightyear-board",
+                badge: "Scale ladder",
+                title: "Treat the light-year as a distance marker from the start",
+                scenario:
+                  "The Light-year scale board compares nearby-star and wider-Milky-Way distances. One trainee keeps calling a light-year a time unit because it includes the word year, another grabs exact giant numbers before deciding what kind of quantity is being measured, and a third forgets why astronomy needs a larger distance unit at all.",
+                prompt: "Pin the note that keeps the light-year model accurate.",
+                options: [
+                  {
+                    value: "distance-unit-note",
+                    label: "Treat a light-year as distance from the beginning: it is how far light travels in one year, it answers a how-far question, and astronomy uses it because the distances are enormous.",
+                    feedback:
+                      "Exactly. That keeps the unit type clear before the big scale details arrive.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "time-unit-note",
+                    label: "Treat a light-year mainly as a time unit, because the word year should tell learners that the quantity belongs with long travel times before anything else.",
+                    feedback:
+                      "That would rebuild the wrong time-unit shortcut.",
+                  },
+                  {
+                    value: "number-first-note",
+                    label: "Treat the lesson mainly as memorizing the huge number attached to one light-year, because once students know the exact figure the meaning of the unit usually becomes obvious on its own.",
+                    feedback:
+                      "That would rebuild the wrong number-first shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the light-year as a distance unit built for huge astronomy scales.",
+                retryLabel: "That note would leave a main M14_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m14-l4-fix-ideas",
+                  badge: "Unit repair",
+                  title: "Repair the time-unit shortcut before it spreads",
+                  scenario:
+                    "One trainee keeps reading a light-year like a duration, while another jumps straight to the giant number without first asking whether the lesson is about distance or time.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-distance-model",
+                      label: "Repair both habits together: ask what question the unit answers first, classify light-year as a distance unit, and only then use the travel-of-light definition to support the huge astronomy scale.",
+                      feedback:
+                        "Exactly. That restores the proper light-year model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-calendar-first",
+                      label: "Repair the confusion by emphasizing the word year more carefully, because once students understand the time word they usually sort out the full unit meaning on their own.",
+                      feedback:
+                        "That would keep the time-unit shortcut alive.",
+                    },
+                    {
+                      value: "repair-big-number-first",
+                      label: "Repair the confusion by teaching the exact value first, because once students respect how large one light-year is the distance interpretation usually becomes obvious afterward.",
+                      feedback:
+                        "That would keep the number-first shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps unit type and huge scale in the right slots.",
+                  retryLabel: "That would leave a main M14_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m14-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line light-year rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop reading light-year as if it were just a long time interval.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "lightyear-anchor",
+                      label: "A light-year is a distance unit, it is the distance light travels in one year, and it is useful because cosmic distances are enormous.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "year-word-anchor-only",
+                      label: "The main idea is that a light-year belongs with time because the unit includes the word year, and the distance side can be treated as a later technical detail.",
+                      feedback:
+                        "That line rebuilds the wrong time-unit shortcut.",
+                    },
+                    {
+                      value: "huge-number-anchor-only",
+                      label: "The main idea is that a light-year is just a very large astronomy number, because once students know it is huge the exact type of quantity usually matters less.",
+                      feedback:
+                        "That line misses the distance-unit rule that actually explains the term.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right light-year rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m14-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the light-year vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up light-year, distance, time, scale, and travel definition until every answer sounds like one vague very-big-number story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-lightyear",
+                      label: "Use light-year for a distance unit, year inside the definition for the travel duration of light, and scale for why astronomy needs the unit at all.",
+                      feedback:
+                        "Exactly. That keeps the light-year terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-time-does-most",
+                      label: "Use time as the main word for almost the whole topic, because once students accept that light travels for a year the rest of the unit meaning usually sorts itself out.",
+                      feedback:
+                        "That would hard-wire the time-unit shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-number-does-most",
+                      label: "Use huge number as the main word for almost the whole topic, because once students know the scale is enormous the unit type usually becomes secondary.",
+                      feedback:
+                        "That would hide the distance-unit rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the light-year terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m14-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they use the unit",
+                  scenario:
+                    "The trainee analyst is about to react to the word year without first deciding whether the question is asking how far or how long.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "question-type-then-definition",
+                      label: "Start by asking whether the unit answers how far or how long, classify light-year as distance, and only then use the definition involving how far light travels in a year.",
+                      feedback:
+                        "Exactly. That gives the analyst the right light-year method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "word-year-then-interpret",
+                      label: "Start from the word year itself, because once students settle on the time idea they can usually fit the rest of the term around that interpretation.",
+                      feedback:
+                        "That would send the analyst back into the wrong time-unit shortcut.",
+                    },
+                    {
+                      value: "exact-value-then-interpret",
+                      label: "Start from the exact numerical size of one light-year, because once students feel the scale clearly the meaning of the unit usually becomes obvious afterward.",
+                      feedback:
+                        "That would send the analyst back into the number-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean light-year explanation method.",
+                  retryLabel: "That would send the analyst back into a M14_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m14-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the time-unit and giant-number shortcuts",
+                  scenario:
+                    "One crew member keeps treating light-year as a time label, while another keeps acting as if memorizing a giant number is enough to understand the unit.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "lightyear-trap-warning",
+                      label: "Do not let the word year turn the unit into time, and do not let a giant number replace the unit meaning. Keep question type, distance meaning, and huge astronomy scale in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M14_L4 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "time-warning-only",
+                      label: "Warn mainly against the time mistake, because once students stop that habit they usually stop relying on the giant number as the whole explanation on their own.",
+                      feedback:
+                        "That would leave the number-first shortcut too alive.",
+                    },
+                    {
+                      value: "number-warning-only",
+                      label: "Warn mainly against memorizing the big number, because once students stop that habit they usually stop reading the word year as a time signal on their own.",
+                      feedback:
+                        "That would leave the time-unit shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the light-year tied to distance and scale.",
+                  retryLabel: "That warning would leave a main M14_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m14-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the unit type clear",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a light-year uses a time phrase inside its definition but still ends up as a distance unit.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "road-trip-distance-analogy",
+                      label: "Think of a light-year like saying how far a car could travel in a set travel time: the time appears in the definition, but the finished answer is still a distance.",
+                      feedback:
+                        "Exactly. That keeps the unit type clear without flattening the astronomy.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "calendar-duration-analogy",
+                      label: "Think of a light-year mainly like a long calendar period, because the word year should be enough to anchor the term in time before any deeper interpretation.",
+                      feedback:
+                        "That would rebuild the time-unit shortcut.",
+                    },
+                    {
+                      value: "record-number-analogy",
+                      label: "Think of a light-year mainly like a record-breaking big statistic, because the most important part is simply that the number is huge compared with everyday distances.",
+                      feedback:
+                        "That would rebuild the number-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the light-year ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right light-year model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M14_L3") {
