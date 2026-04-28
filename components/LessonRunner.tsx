@@ -2034,6 +2034,248 @@ function getA5ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A5_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a5-l4-energy-board",
+        badge: "Energy board",
+        title: "Track the energy swap before you talk about loss",
+        scenario:
+          "The energy board shows kinetic, potential, and total energy together around one SHM cycle. One trainee says energy is used up at equilibrium, another watches only one bar and forgets the swap, and a third treats the total as changing just because the split between the two stores changes.",
+        prompt: "Pin the note that keeps the energy model accurate.",
+        options: [
+          {
+            value: "energy-swap-total-constant-note",
+            label: "Read SHM as a swap between kinetic and potential energy: kinetic is largest at equilibrium, potential is largest at maximum displacement, and the total stays constant in the ideal undamped model.",
+            feedback:
+              "Exactly. That keeps the exchange pattern and the constant total in one story.",
+            isCorrect: true,
+          },
+          {
+            value: "equilibrium-uses-up-energy-note",
+            label: "Treat equilibrium as the point where the oscillator has mostly used up its energy, because the system has passed through the center and spent most of its stored stretch by then.",
+            feedback:
+              "That would rebuild the energy-used-up shortcut.",
+          },
+          {
+            value: "largest-bar-is-whole-story-note",
+            label: "Treat whichever energy bar is currently largest as the main story, because once the dominant form is identified the total-energy picture usually becomes secondary.",
+            feedback:
+              "That would rebuild the one-store-only shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads SHM as an energy exchange with constant total.",
+        retryLabel: "That note would leave a main A5_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a5-l4-fix-ideas",
+          badge: "Energy repair",
+          title: "Repair the energy-loss and one-store shortcuts",
+          scenario:
+            "One analyst keeps saying energy disappears at equilibrium, while another keeps talking about kinetic or potential energy in isolation instead of reading the swap and the constant total together.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-swap-plus-total",
+              label: "Repair both habits together: track how kinetic and potential energy trade roles through the cycle, then keep total energy visible as the constant quantity in the ideal undamped model.",
+              feedback:
+                "Exactly. That restores the right SHM-energy workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-center-energy-spent",
+              label: "Repair the confusion by emphasizing what happens at equilibrium first, because once students understand the center point they usually stop worrying about the total-energy picture.",
+              feedback:
+                "That would keep the energy-used-up shortcut alive.",
+            },
+            {
+              value: "repair-dominant-store-first",
+              label: "Repair the confusion by following the dominant energy store first, because once students know which bar is largest the other store and the total usually become obvious later.",
+              feedback:
+                "That would keep the one-store-only shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats SHM energy as a swap with a preserved total.",
+          retryLabel: "That would leave a main A5_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a5-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line SHM-energy rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop reading the oscillator as though it were steadily using up energy through the cycle.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a5-l4-anchor",
+              label: "SHM continually swaps energy between stored stretch and motion while preserving the total in the ideal model.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "equilibrium-anchor-only",
+              label: "The main idea is mostly that equilibrium is the special energy point, because once students understand the center position the rest of the cycle usually becomes secondary.",
+              feedback:
+                "That would hide the full swap story the lesson needs.",
+            },
+            {
+              value: "largest-store-anchor-only",
+              label: "The main idea is mostly that the dominant energy form changes, because once students know which store is biggest the total-energy detail usually becomes secondary.",
+              feedback:
+                "That would leave out the preserved-total idea.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right SHM-energy rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a5-l4-technical-words",
+          badge: "Term desk",
+          title: "Clean up the SHM-energy vocabulary board",
+          scenario:
+            "The crew keeps mixing kinetic energy, potential energy, total energy, equilibrium, and maximum displacement until every answer sounds like one vague energy-loss story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a5-l4",
+              label: "Use kinetic energy for the motion store, potential energy for the stored stretch or displacement-related store, total energy for their full sum, equilibrium for the center point where kinetic is greatest, and maximum displacement for where potential is greatest.",
+              feedback:
+                "Exactly. That keeps the SHM-energy terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-energy-does-most",
+              label: "Use energy as the main word for almost the whole topic, because once students know the oscillator has energy the separate store labels usually matter less.",
+              feedback:
+                "That would scramble the energy terms into a vague-store shortcut.",
+            },
+            {
+              value: "term-board-center-does-most",
+              label: "Use equilibrium as the main word for almost the whole topic, because once students know what happens at the center the energy-store differences usually become secondary.",
+              feedback:
+                "That would weaken the full-cycle exchange structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the SHM-energy terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a5-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they call it energy loss",
+          scenario:
+            "The trainee analyst is about to explain the energy picture from one point in the cycle only, and has not yet compared maximum displacement, equilibrium, and the constant total together.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "compare-extremes-and-total",
+              label: "Start by comparing maximum displacement and equilibrium, note which store is largest at each point, and then keep total energy visible as the constant quantity in the ideal undamped model.",
+              feedback:
+                "Exactly. That gives the analyst the right SHM-energy workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-center-only",
+              label: "Start from equilibrium only, because once students understand the center point the rest of the energy cycle usually takes care of itself.",
+              feedback:
+                "That would send the analyst back into the center-only shortcut.",
+            },
+            {
+              value: "start-from-biggest-bar-only",
+              label: "Start by naming whichever energy bar is largest at the moment, because once the dominant store is clear the total and the other store usually become secondary details.",
+              feedback:
+                "That would send the analyst back into the one-store-only shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean energy-swap method.",
+          retryLabel: "That would send the analyst back into a A5_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a5-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the used-up-energy shortcut",
+          scenario:
+            "One crew member keeps saying energy is spent at equilibrium, while another keeps watching only one store instead of the exchange and the total together.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "energy-swap-trap-warning",
+              label: "Do not say SHM uses up energy at equilibrium, and do not follow only one store. Read the cycle as a swap between kinetic and potential energy while total energy stays constant in the ideal undamped model.",
+              feedback:
+                "Exactly. That warning blocks the main A5_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "equilibrium-warning-only",
+              label: "Warn mainly against calling equilibrium an energy-loss point, because once students stop that they usually stop over-focusing on one store by themselves.",
+              feedback:
+                "That would leave the one-store-only shortcut too alive.",
+            },
+            {
+              value: "one-store-warning-only",
+              label: "Warn mainly against following one energy store, because once students stop that they usually understand that total energy stays constant on their own.",
+              feedback:
+                "That would leave the energy-used-up shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the swap and the constant total visible.",
+          retryLabel: "That warning would leave a main A5_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a5-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the energy exchange visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why SHM is an energy swap between two stores rather than a one-way spending story.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "two-account-transfer-analogy",
+              label: "Think of the motion like money moving between two linked accounts while the total balance stays the same: one account can peak while the other dips, but the full amount is preserved in the ideal case.",
+              feedback:
+                "Exactly. That keeps the swap and the preserved total visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "burning-fuel-analogy",
+              label: "Think of the motion mainly like fuel being used up as the oscillator moves, because once students picture steady spending the changes in the bars usually make intuitive sense.",
+              feedback:
+                "That would rebuild the energy-loss shortcut.",
+            },
+            {
+              value: "winner-takes-all-analogy",
+              label: "Think of the motion mainly like one side winning at each point, because once the dominant store is obvious the other store and the total usually matter much less.",
+              feedback:
+                "That would rebuild the one-store-only shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the SHM energy exchange visible.",
+          retryLabel: "That analogy would pull the lesson away from the right SHM-energy model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A5_L3") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
