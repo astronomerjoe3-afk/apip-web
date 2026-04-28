@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M9_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m9-l2-checkpoint-rate-board",
+                badge: "Rate board",
+                title: "Compare charge and time together before naming the current",
+                scenario:
+                  "The Charge Checkpoint Rate board shows one sensor reading total charge through a checkpoint and another reading the time taken. One trainee keeps calling the larger charge amount the larger current automatically, another only looks at the shorter time, and a third forgets that amperes are just coulombs each second written compactly.",
+                prompt: "Pin the note that keeps the current-rate story accurate.",
+                options: [
+                  {
+                    value: "charge-per-second-note",
+                    label: "Current is the rate of charge flow, so compare charge and time together. Then translate the result back as coulombs per second, because 1 A is 1 C/s.",
+                    feedback:
+                      "Exactly. That keeps current tied to a rate instead of to charge amount alone.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "charge-only-note",
+                    label: "Choose the checkpoint with the larger total charge, because more charge passing must always mean a larger current even if the timing is different.",
+                    feedback:
+                      "That ignores the time part of the rate. A larger charge spread over longer time can still give a smaller current.",
+                  },
+                  {
+                    value: "time-only-note",
+                    label: "Choose the shorter-time reading, because current is really about how quickly the circuit responds and the charge amount is secondary detail.",
+                    feedback:
+                      "That drops the charge part of the rate. Current depends on both amount of charge and time taken.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads current as a full charge-per-second comparison.",
+                retryLabel: "That note would leave a main M9_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m9-l2-fix-ideas",
+                  badge: "Rate repair",
+                  title: "Repair the amount-versus-rate mix-up",
+                  scenario:
+                    "One trainee keeps saying a bigger total charge always means a bigger current, while another talks as if amperes are a different mysterious substance instead of a charge-per-second reading.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-rate-language",
+                      label: "Repair both ideas together: current is the rate of charge flow, so the same charge can give different currents if the time changes, and amperes are just coulombs per second written in a compact unit.",
+                      feedback:
+                        "Exactly. That repairs both the amount-versus-rate confusion and the unit translation issue.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-big-charge",
+                      label: "Repair the confusion by saying large charge amounts usually matter more than timing, because time mainly fine-tunes the current after the main amount has been identified.",
+                      feedback:
+                        "That would keep the charge-only shortcut mostly alive.",
+                    },
+                    {
+                      value: "repair-with-fast-reading",
+                      label: "Repair the confusion by saying the quickest transfer should usually be treated as the biggest current, because high current mainly means speed of response in the circuit.",
+                      feedback:
+                        "That would keep the time-only shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats current as a genuine charge-flow rate.",
+                  retryLabel: "That would leave a main M9_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m9-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line current-rate rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop answering current questions with only a charge amount or only a timing clue.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "rate-anchor",
+                      label: "Current is the rate of charge flow: compare how much charge passes a point and how long it takes, then read the result as coulombs per second or amperes.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "amount-anchor",
+                      label: "Current mainly tells you how much charge a circuit has available, while the time detail matters only when two charge amounts are very close.",
+                      feedback:
+                        "That would build the wrong amount-only model into the anchor sentence.",
+                    },
+                    {
+                      value: "symbol-anchor",
+                      label: "The main idea is that current uses the symbol I and unit A, because once students remember the symbols the charge-per-second story usually follows naturally.",
+                      feedback:
+                        "That turns the core idea into symbol memory instead of the actual physical meaning.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right charge-rate rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m9-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the charge-rate vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up current, charge amount, amperes, and coulombs per second until every number sounds like just another kind of charge total.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-charge-rate",
+                      label: "Use current for charge-flow rate, charge for the amount that passes, and amperes as the same rate written in unit form, where 1 A means 1 C each second.",
+                      feedback:
+                        "Exactly. That keeps amount, rate, and units in the right relationship.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-charge-total",
+                      label: "Use current and charge almost interchangeably at first, because students usually understand the lesson faster if every electrical number is treated as part of one big charge story.",
+                      feedback:
+                        "That would scramble the exact distinction this lesson is trying to teach.",
+                    },
+                    {
+                      value: "term-board-amp-mystery",
+                      label: "Use amperes as a separate circuit quantity that should be learned first by symbol, because translating it back into coulombs per second usually makes the concept feel too mathematical.",
+                      feedback:
+                        "That would hide the meaning of the unit instead of clarifying it.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the charge-rate terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m9-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare the checkpoint readings",
+                  scenario:
+                    "The trainee analyst is about to choose the larger current by glancing at only the charge column, while another analyst wants to use only the shorter time because it sounds more like speed.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "compare-both-factors",
+                      label: "Read current as charge per second: compare both the charge amount and the time interval together, then translate the winning reading back into amperes only after the rate story is clear.",
+                      feedback:
+                        "Exactly. That gives the analyst the right charge-rate workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "scan-biggest-charge-first",
+                      label: "Start with the larger charge amount, because current is mostly about how much charge gets through and time only adjusts the final figure slightly.",
+                      feedback:
+                        "That would send the analyst straight into the wrong amount-only shortcut.",
+                    },
+                    {
+                      value: "scan-shortest-time-first",
+                      label: "Start with the shortest time reading, because current is mostly about how fast the checkpoint responds and the charge total usually follows that story automatically.",
+                      feedback:
+                        "That would send the analyst into the wrong time-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean charge-per-second method.",
+                  retryLabel: "That would send the analyst back into a M9_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m9-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the amount-only and symbol-only shortcuts",
+                  scenario:
+                    "One crew member keeps saying bigger charge always means bigger current, while another hides behind the symbol A without translating it back into charge per second.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "rate-trap-warning",
+                      label: "Do not treat current as the same thing as total charge, and do not let the unit symbol replace the meaning. Current is a charge-per-second comparison, so both amount and time must stay visible.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-warning-only",
+                      label: "Warn mainly that total charge is not enough on its own, because once that is accepted the meaning of amperes usually takes care of itself.",
+                      feedback:
+                        "That would leave the unit-meaning shortcut mostly alive.",
+                    },
+                    {
+                      value: "unit-warning-only",
+                      label: "Warn mainly that 1 A means 1 C/s, because once the unit translation is secure students usually stop comparing charge amounts too literally.",
+                      feedback:
+                        "That would leave the amount-only shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps amount, time, and unit meaning together.",
+                  retryLabel: "That warning would leave a main M9_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m9-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps rate visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a bigger amount does not always mean a bigger current unless the timing is included as part of the story.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "turnstile-analogy",
+                      label: "Think of a checkpoint turnstile: current is how many people pass each second, not just how many passed overall. A large crowd over a long interval can still give a smaller rate than a smaller crowd moving through quickly.",
+                      feedback:
+                        "Exactly. That keeps both amount and timing visible without turning current into a simple total.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bucket-analogy",
+                      label: "Think mainly of the biggest bucket of charge, because the main clue for current is still how much electrical stuff is available to move through the checkpoint.",
+                      feedback:
+                        "That would rebuild the exact amount-only shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "sprint-analogy",
+                      label: "Think mainly of whichever route feels fastest, because current is really the circuit's speed of response and the exact crowd size matters only after that.",
+                      feedback:
+                        "That would turn the analogy into a time-only story.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps amount, time, and rate in the right relationship.",
+                  retryLabel: "That analogy would pull the lesson away from the right charge-rate model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M9_L1") {
