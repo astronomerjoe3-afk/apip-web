@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M13_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m13-l1-system-board",
+                badge: "System board",
+                title: "Keep Earth, Moon, and Sun in one linked orbital model",
+                scenario:
+                  "The Earth-Moon-Sun system board shows Earth on its wider route around the Sun and the Moon on its route around Earth. One trainee talks as if Earth and Moon share the same main host, another lists separate sky facts without linking them, and a third forgets gravity is what keeps the family organized.",
+                prompt: "Pin the note that keeps the system model accurate.",
+                options: [
+                  {
+                    value: "linked-system-note",
+                    label: "Start with the main host relationships: Earth mainly orbits the Sun, the Moon mainly orbits Earth, and gravity keeps the linked family organized so one system picture can explain several sky patterns together.",
+                    feedback:
+                      "Exactly. That keeps the system linked instead of fragmented.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "shared-host-note",
+                    label: "Treat Earth and Moon as bodies that mainly share the same host route together, because the important idea is that both belong to the same general Solar System neighborhood.",
+                    feedback:
+                      "That would rebuild the wrong shared-host shortcut.",
+                  },
+                  {
+                    value: "fact-list-note",
+                    label: "Treat the lesson mainly as a list of separate sky facts, because once students know enough observations the system picture usually builds itself afterward.",
+                    feedback:
+                      "That would rebuild the disconnected-facts shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads Earth, Moon, and Sun as one linked system.",
+                retryLabel: "That note would leave a main M13_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m13-l1-fix-ideas",
+                  badge: "System repair",
+                  title: "Repair the shared-host and disconnected-facts shortcuts",
+                  scenario:
+                    "One trainee still talks as if Earth and Moon have the same main host, while another keeps explaining day, month, and year ideas as disconnected facts instead of one linked system model.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-linked-system",
+                      label: "Repair both habits together: say what Earth mainly orbits and what the Moon mainly orbits, then use gravity and the linked routes to explain several sky patterns from the same system picture.",
+                      feedback:
+                        "Exactly. That restores the proper linked-system story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-solar-neighborhood",
+                      label: "Repair the confusion by emphasizing that both Earth and Moon belong to the Solar System, because once students accept that bigger grouping the orbit details usually sort themselves out later.",
+                      feedback:
+                        "That would keep the shared-host shortcut alive.",
+                    },
+                    {
+                      value: "repair-observations-first",
+                      label: "Repair the confusion by collecting more separate observations first, because once students know enough sky events they usually infer the system relationships afterward.",
+                      feedback:
+                        "That would keep the disconnected-facts shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps host relationships and sky patterns linked.",
+                  retryLabel: "That would leave a main M13_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m13-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line system rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop mixing up the main host relationships in the Earth-Moon-Sun family.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "system-anchor",
+                      label: "Earth orbits the Sun while the Moon mainly orbits Earth, gravity keeps the linked system organized, and one system model explains several sky patterns together.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "family-anchor-only",
+                      label: "The main idea is that Earth, Moon, and Sun belong to the same general space family, because the shared family name is the most important first fact for beginners.",
+                      feedback:
+                        "That line blurs the main host relationships too much.",
+                    },
+                    {
+                      value: "gravity-anchor-only",
+                      label: "The main idea is that gravity affects everything in space, because once students remember that universal pull they usually become less confused about the system layout.",
+                      feedback:
+                        "That line is too broad and loses the linked-route structure.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right system rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m13-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the Earth-Moon-Sun vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up orbit, main host, gravity, Earth route, and Moon route until every explanation sounds like one vague spinning-space story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-system",
+                      label: "Use main host for the body a smaller body mainly orbits, use orbit route for the linked path, and use gravity for the organizer that keeps Earth around the Sun and the Moon around Earth.",
+                      feedback:
+                        "Exactly. That keeps the system terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-orbit-does-most",
+                      label: "Use orbit as the main word for almost the whole topic, because once students know everything is moving around something the detailed host relationships are mostly supporting labels.",
+                      feedback:
+                        "That would hard-wire the vague-system shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-gravity-does-most",
+                      label: "Use gravity as the main word for almost the whole topic, because once students know pull exists the rest of the system explanation is mostly detail.",
+                      feedback:
+                        "That would hard-wire the too-broad gravity shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the system terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m13-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they summarize the system",
+                  scenario:
+                    "The trainee analyst is about to describe several sky events separately without first naming what Earth mainly orbits and what the Moon mainly orbits in the shared Earth-Moon-Sun model.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "host-then-patterns",
+                      label: "Start with the main host relationships, then keep Earth, Moon, and Sun on one board so you can use the same linked system picture to explain more than one sky pattern.",
+                      feedback:
+                        "Exactly. That gives the analyst the right system method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "events-first",
+                      label: "Start by listing the observations one by one, because once the facts are all on the table the orbit structure usually becomes obvious afterward.",
+                      feedback:
+                        "That would send the analyst back into disconnected fact listing.",
+                    },
+                    {
+                      value: "gravity-first-only",
+                      label: "Start by saying gravity controls everything in the system, because once that universal idea is stated the detailed route relationships are not very important.",
+                      feedback:
+                        "That would send the analyst into an overly broad gravity-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Earth-Moon-Sun system method.",
+                  retryLabel: "That would send the analyst back into a M13_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m13-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the shared-host and disconnected-facts shortcuts",
+                  scenario:
+                    "One crew member keeps talking as if Earth and Moon mainly orbit the same host, while another keeps using separate sky facts without showing how one system picture links them.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "system-trap-warning",
+                      label: "Do not blur the main host relationships, and do not break the sky story into unrelated facts. Keep Earth around the Sun, the Moon around Earth, and gravity as the organizer of one linked system.",
+                      feedback:
+                        "Exactly. That warning blocks the main M13_L1 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "host-warning-only",
+                      label: "Warn mainly against mixing up which body orbits which, because once students stop that mistake they usually connect the other sky patterns correctly on their own.",
+                      feedback:
+                        "That would leave the disconnected-facts shortcut mostly alive.",
+                    },
+                    {
+                      value: "facts-warning-only",
+                      label: "Warn mainly against using separate facts, because once students link more observations together they usually fix the host-body confusion on their own.",
+                      feedback:
+                        "That would leave the shared-host shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the family routes linked.",
+                  retryLabel: "That warning would leave a main M13_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m13-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the family structure clear",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture the Earth-Moon-Sun system as a linked family of routes instead of a bag of unrelated facts.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "family-route-analogy",
+                      label: "Think of it like a family travel plan: one larger route carries the Earth around the Sun, while the Moon follows Earth on its own linked route, and the whole plan only makes sense when those routes stay connected.",
+                      feedback:
+                        "Exactly. That keeps the family structure linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-bus-analogy",
+                      label: "Think of Earth and Moon as passengers on the same main bus route around the same host, because that gives students the simplest overall picture of the system.",
+                      feedback:
+                        "That would rebuild the wrong shared-host shortcut.",
+                    },
+                    {
+                      value: "flashcard-analogy",
+                      label: "Think of the topic like a set of space flashcards, because the important thing is collecting enough correct facts even if the system picture stays loose at first.",
+                      feedback:
+                        "That would rebuild the disconnected-facts shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the system family linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Earth-Moon-Sun system model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M12_L6") {
