@@ -571,6 +571,248 @@ function getA4ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A4_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a4-l6-response-board",
+        badge: "Response board",
+        title: "Normalize the material comparison before you judge stiffness",
+        scenario:
+          "The materials board shows load, extension, cross-sectional area, and original length together. One trainee wants to compare materials from force alone, another treats a bigger extension as automatic proof of a weaker material, and a third mixes spring-style force-extension talk with stress, strain, and Young modulus without normalizing first.",
+        prompt: "Pin the note that keeps the comparison fair.",
+        options: [
+          {
+            value: "normalize-material-response-note",
+            label: "Compare the response with the normalized measures first: stress compares force with area, strain compares extension with original length, and Young modulus compares elastic response after those size effects are accounted for.",
+            feedback:
+              "Exactly. That keeps the material comparison normalized before judgment.",
+            isCorrect: true,
+          },
+          {
+            value: "force-only-material-note",
+            label: "Compare materials mainly by the force value on its own, because once the applied load is known the geometric details usually become secondary to the material quality.",
+            feedback:
+              "That would rebuild the force-only shortcut.",
+          },
+          {
+            value: "extension-alone-material-note",
+            label: "Compare materials mainly by whichever sample extends more, because the largest visible change is usually the safest signal of the weaker material without extra normalization steps.",
+            feedback:
+              "That would rebuild the extension-alone shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads material response through normalized measures instead of raw force impressions.",
+        retryLabel: "That note would leave a main A4_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a4-l6-fix-ideas",
+          badge: "Material repair",
+          title: "Repair the force-only and extension-only shortcuts",
+          scenario:
+            "One analyst keeps comparing materials from force alone, while another keeps deciding from whichever sample extends more without checking area or original length first.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-normalized-material-story",
+              label: "Repair both habits together: separate raw load and raw extension from the normalized measures, then use stress, strain, and Young modulus to compare elastic response fairly.",
+              feedback:
+                "Exactly. That restores the right materials-comparison workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-force-table-first",
+              label: "Repair the confusion by emphasizing the force table more strongly first, because once students trust the load values the extension and geometry details usually become easier later.",
+              feedback:
+                "That would keep the force-only shortcut alive.",
+            },
+            {
+              value: "repair-biggest-extension-first",
+              label: "Repair the confusion by emphasizing visible extension more strongly first, because once students see which sample stretches most the deeper material comparison usually becomes obvious later.",
+              feedback:
+                "That would keep the extension-alone shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now normalizes before comparing materials.",
+          retryLabel: "That would leave a main A4_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a4-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line materials-response rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating raw force values as enough for material comparisons.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a4-l6-anchor",
+              label: "Materials are best compared with normalized response measures, not force alone.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "force-anchor-only",
+              label: "The main idea is mostly that larger forces create larger responses, because once students trust the load story the material-comparison details usually become secondary.",
+              feedback:
+                "That would hide the normalization idea the lesson needs.",
+            },
+            {
+              value: "extension-anchor-only",
+              label: "The main idea is mostly that the sample with the bigger extension is the easier one to stretch, because once that is seen the geometry adjustments usually become secondary.",
+              feedback:
+                "That would rebuild the extension-alone shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right materials-response rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a4-l6-technical-words",
+          badge: "Term desk",
+          title: "Clean up the materials vocabulary board",
+          scenario:
+            "The crew keeps mixing force, extension, stress, strain, spring stiffness, and Young modulus until every sample comparison sounds like one vague stretching story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a4-l6",
+              label: "Use force and extension for the raw loading story, stress for force per area, strain for extension relative to original length, and Young modulus for the normalized elastic comparison of the material itself.",
+              feedback:
+                "Exactly. That keeps the materials terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-force-does-most",
+              label: "Use force as the main word for almost the whole topic, because once students know the load value the rest of the stretching vocabulary usually matters less.",
+              feedback:
+                "That would scramble the materials terms into the force-only shortcut.",
+            },
+            {
+              value: "term-board-extension-does-most",
+              label: "Use extension as the main word for almost the whole topic, because once students see how much the sample changes length the other normalized quantities usually become secondary.",
+              feedback:
+                "That would weaken the normalized structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the materials terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a4-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they compare the samples",
+          scenario:
+            "The trainee analyst is about to judge the samples from force and visible extension alone, without checking how cross-sectional area and original length change the fairness of the comparison.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "normalize-then-compare-materials",
+              label: "Start by separating the raw load-extension story from the normalized comparison, then use stress, strain, and Young modulus to compare the samples after area and original-length effects are accounted for.",
+              feedback:
+                "Exactly. That gives the analyst the right materials workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-force-table",
+              label: "Start from the force table first, because once the applied loads are secure the geometry and normalization details usually reduce to minor clean-up.",
+              feedback:
+                "That would send the analyst back into the force-only shortcut.",
+            },
+            {
+              value: "start-from-largest-stretch",
+              label: "Start from whichever sample stretches most, because once that visual difference is secure the rest of the material judgment usually explains itself.",
+              feedback:
+                "That would send the analyst back into the extension-alone shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean normalize-first method.",
+          retryLabel: "That would send the analyst back into a A4_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a4-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the raw-force material shortcut",
+          scenario:
+            "One crew member keeps deciding from force alone, while another keeps deciding from visible extension alone without checking whether area and original length made the comparison unfair.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "materials-trap-warning",
+              label: "Do not compare materials from raw force or raw extension alone. First account for size and geometry with stress and strain, then use Young modulus for the elastic material comparison.",
+              feedback:
+                "Exactly. That warning blocks the main A4_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "force-warning-only",
+              label: "Warn mainly against trusting force alone, because once students stop that they usually stop over-trusting visible extension on their own.",
+              feedback:
+                "That would leave the extension-alone shortcut too alive.",
+            },
+            {
+              value: "extension-warning-only",
+              label: "Warn mainly against trusting visible extension alone, because once students stop that they usually understand the force and geometry balance on their own.",
+              feedback:
+                "That would leave the force-only shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now normalizes before comparing material response.",
+          retryLabel: "That warning would leave a main A4_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a4-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps normalization visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why judging materials from raw force or raw extension alone is unfair when the samples have different sizes.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "price-per-unit-analogy",
+              label: "Think of the comparison like shopping by price per unit instead of total sticker price: raw totals can mislead when package sizes differ, so you normalize first before deciding which option is really harder to stretch.",
+              feedback:
+                "Exactly. That keeps normalization visible without flattening the physics.",
+              isCorrect: true,
+            },
+            {
+              value: "heaviest-bag-analogy",
+              label: "Think of the comparison mainly like choosing the heaviest bag, because once the biggest total is found the rest of the comparison details usually become secondary.",
+              feedback:
+                "That would rebuild the force-only shortcut.",
+            },
+            {
+              value: "longest-rubber-band-analogy",
+              label: "Think of the comparison mainly like picking the band that stretches farthest, because once the biggest visible change is found the material judgment usually becomes obvious.",
+              feedback:
+                "That would rebuild the extension-alone shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the normalize-first comparison visible.",
+          retryLabel: "That analogy would pull the lesson away from the right materials-response model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A4_L5") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
