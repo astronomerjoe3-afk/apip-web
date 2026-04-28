@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "M13_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M13_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m13-l2-orbit-board",
+                badge: "Orbit board",
+                title: "Keep inward pull and sideways motion in the same picture",
+                scenario:
+                  "The Orbit route board shows one body that would travel straight on without gravity, then the inward pull is switched on and the path bends into orbit. One trainee treats orbit like force-free motion, another talks only about gravity with no sideways motion, and a third forgets that different orbital sizes lead to different periods.",
+                prompt: "Pin the note that keeps the orbit model accurate.",
+                options: [
+                  {
+                    value: "gravity-plus-sideways-note",
+                    label: "Read orbit as curved motion made by two linked ingredients: gravity provides the inward pull while sideways motion keeps the body moving around instead of falling straight in.",
+                    feedback:
+                      "Exactly. That keeps the orbit picture physically linked.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "force-free-note",
+                    label: "Treat orbit mainly as a force-free path, because once a body is already moving in space it mostly keeps going around on its own.",
+                    feedback:
+                      "That would rebuild the wrong force-free shortcut.",
+                  },
+                  {
+                    value: "gravity-only-note",
+                    label: "Treat gravity as the whole explanation, because once the inward pull is strong enough the sideways motion becomes only a background detail.",
+                    feedback:
+                      "That would rebuild the wrong gravity-only shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads orbit as pull plus sideways motion.",
+                retryLabel: "That note would leave a main M13_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m13-l2-fix-ideas",
+                  badge: "Orbit repair",
+                  title: "Repair the force-free and gravity-only shortcuts",
+                  scenario:
+                    "One trainee keeps saying an orbiting body is basically coasting with no force, while another keeps talking as if gravity alone explains the path without keeping the sideways motion visible.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-orbit-link",
+                      label: "Repair both habits together: ask what would happen without gravity, then combine the inward pull with the sideways motion to explain why the path stays curved.",
+                      feedback:
+                        "Exactly. That restores the proper orbit story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-speed-only",
+                      label: "Repair the confusion by emphasizing how fast the body is moving, because once students focus on the speed the need for the orbit shape usually becomes obvious later.",
+                      feedback:
+                        "That would keep the force-free shortcut alive.",
+                    },
+                    {
+                      value: "repair-pull-only",
+                      label: "Repair the confusion by emphasizing how strong gravity is, because once students accept the inward pull the rest of the orbit explanation usually sorts itself out.",
+                      feedback:
+                        "That would keep the gravity-only shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps pull and sideways motion linked.",
+                  retryLabel: "That would leave a main M13_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m13-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line orbit rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop describing orbit as either force-free drifting or pure inward fall.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "orbit-anchor",
+                      label: "Orbit needs gravity and sideways motion together, the inward pull continually changes the direction of motion, and different orbital sizes produce different periods.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "gravity-anchor-only",
+                      label: "The main idea is that gravity holds bodies in orbit, because once students remember the pull the rest of the orbital behaviour is mostly detail.",
+                      feedback:
+                        "That line collapses the orbit story too much.",
+                    },
+                    {
+                      value: "motion-anchor-only",
+                      label: "The main idea is that bodies keep moving forward in space, because once students remember that sideways motion exists the orbital path is not very difficult to imagine.",
+                      feedback:
+                        "That line collapses the orbit story too much.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right orbit rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m13-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the orbit vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up orbit route, inward pull, sideways motion, and orbital period until every answer sounds like one vague circling story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-orbit",
+                      label: "Use inward pull for gravity toward the center, sideways motion for the forward travel that would continue without gravity, orbit route for the curved result, and period for the time taken to complete one orbit.",
+                      feedback:
+                        "Exactly. That keeps the orbit terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-gravity-does-most",
+                      label: "Use gravity as the main word for almost the whole topic, because once students know there is an inward pull the detailed motion language is mostly supporting detail.",
+                      feedback:
+                        "That would hard-wire the gravity-only shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-circling-does-most",
+                      label: "Use orbiting or circling as the main word for almost the whole topic, because once students know the body goes around the center the force and motion details are mostly supporting labels.",
+                      feedback:
+                        "That would hard-wire the vague-orbit shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the orbit terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m13-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they explain the orbit",
+                  scenario:
+                    "The trainee analyst is about to describe the curved path directly without first asking what the body would do without gravity and what gravity changes afterward.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "straight-then-bend",
+                      label: "Start by asking what would happen without gravity, then add the inward pull and explain how it keeps turning the direction of the sideways motion into a curved orbit.",
+                      feedback:
+                        "Exactly. That gives the analyst the right orbit method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shape-first",
+                      label: "Start by naming the final orbit shape, because once students picture the curve clearly the force and motion causes are usually easy to infer afterward.",
+                      feedback:
+                        "That would send the analyst back into surface-description thinking.",
+                    },
+                    {
+                      value: "pull-first-only",
+                      label: "Start by describing gravity in detail, because once students accept the central pull they usually do not need to think much about the body's existing motion.",
+                      feedback:
+                        "That would send the analyst into the gravity-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean orbit-explanation method.",
+                  retryLabel: "That would send the analyst back into a M13_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m13-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the force-free and one-ingredient shortcuts",
+                  scenario:
+                    "One crew member treats orbit like drifting with no force, while another keeps using only one ingredient at a time instead of linking inward pull and sideways motion.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "orbit-trap-warning",
+                      label: "Do not describe orbit as force-free, and do not use gravity or sideways motion alone. Keep the inward pull and the forward motion in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M13_L2 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-warning-only",
+                      label: "Warn mainly against forgetting gravity, because once students remember there is a pull they usually build the rest of the orbit story correctly on their own.",
+                      feedback:
+                        "That would leave the one-ingredient shortcut mostly alive.",
+                    },
+                    {
+                      value: "motion-warning-only",
+                      label: "Warn mainly against forgetting the sideways motion, because once students remember the body is already moving the rest of the orbit story usually fixes itself.",
+                      feedback:
+                        "That would leave the one-ingredient shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the orbit ingredients linked.",
+                  retryLabel: "That warning would leave a main M13_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m13-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the orbit ingredients linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture an orbit as a path made from both inward pull and sideways motion, without turning it into pure falling or pure drifting.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "whirl-path-analogy",
+                      label: "Think of orbit like a path that keeps bending around a center because one influence keeps pulling inward while the object's forward motion keeps carrying it onward at the same time.",
+                      feedback:
+                        "Exactly. That keeps the two ingredients linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "free-coast-analogy",
+                      label: "Think of orbit like a perfect coasting route that simply keeps going around once it has started, because the main idea is that space offers almost no resistance.",
+                      feedback:
+                        "That would rebuild the force-free shortcut.",
+                    },
+                    {
+                      value: "straight-fall-analogy",
+                      label: "Think of orbit like a sideways version of straight falling, because once gravity is pulling the forward motion is not very important to the final picture.",
+                      feedback:
+                        "That would rebuild the gravity-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the orbit ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Orbit route model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M13_L1") {
