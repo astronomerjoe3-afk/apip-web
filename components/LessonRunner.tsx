@@ -1874,6 +1874,7 @@ export default function LessonRunner({
         lessonId === "A3_L2" ||
         lessonId === "A3_L3" ||
         lessonId === "A3_L4" ||
+        lessonId === "A3_L5" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9130,6 +9131,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A3_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a3-l5-critical-route-board",
+                badge: "Route board",
+                title: "Keep refraction, grazing, and trapping in one boundary story",
+                scenario:
+                  "The route board compares a refracted case below the threshold, the grazing-out case at the threshold, and the trapped-light case above it. One trainee treats total internal reflection like a generic steep-angle bounce, another ignores which side the light starts in, and a third forgets that the whole route change begins with a wave-speed change at the boundary.",
+                prompt: "Pin the note that keeps the boundary model accurate.",
+                options: [
+                  {
+                    value: "last-escape-threshold-note",
+                    label: "The critical angle is the last possible escape case, total internal reflection needs travel from the higher-index side into the lower-index side, and the whole route story comes from the speed change across the boundary.",
+                    feedback:
+                      "Exactly. That keeps refraction, the threshold, and total internal reflection on one continuous route model.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "steep-bounce-note",
+                    label: "Treat total internal reflection mainly as what happens whenever the incident angle becomes steep enough, because once the angle is large the starting medium usually matters much less.",
+                    feedback:
+                      "That would rebuild the steep-bounce shortcut.",
+                  },
+                  {
+                    value: "threshold-number-note",
+                    label: "Treat the critical angle mainly like a special number to memorize, because once that threshold value is known the speed-change route story usually becomes secondary.",
+                    feedback:
+                      "That would hide the boundary model the lesson needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads the threshold as one continuous boundary story.",
+                retryLabel: "That note would leave a main A3_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a3-l5-fix-ideas",
+                  badge: "Route repair",
+                  title: "Repair the steep-bounce and number-only shortcuts",
+                  scenario:
+                    "One trainee keeps calling total internal reflection a generic steep-angle bounce, while another keeps treating the critical angle like a memorized boundary number with no route meaning attached.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-threshold-route-model",
+                      label: "Repair both habits together: start with the correct boundary direction, treat the critical angle as the last escape case, and then read total internal reflection as the trapped case beyond that threshold.",
+                      feedback:
+                        "Exactly. That restores the right threshold workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-angle-size-first",
+                      label: "Repair the confusion by focusing on angle size first, because once students can see a steeper and steeper approach the medium direction usually becomes easier later.",
+                      feedback:
+                        "That would keep the steep-bounce shortcut alive.",
+                    },
+                    {
+                      value: "repair-number-first",
+                      label: "Repair the confusion by attaching more emphasis to the critical-angle value, because once students trust the threshold number the route meaning usually becomes easier later.",
+                      feedback:
+                        "That would keep the number-only shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats the threshold as the last escape case before trapping.",
+                  retryLabel: "That would leave a main A3_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a3-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line threshold rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating total internal reflection like an isolated trick instead of part of the same boundary story as refraction.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "a3-l5-anchor",
+                      label: "Critical angle and total internal reflection are best understood as one continuous boundary story.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "tir-only-anchor",
+                      label: "The main idea is mostly that total internal reflection is a strong bounce case, because once students know that result the refraction and threshold details usually become secondary.",
+                      feedback:
+                        "That would rebuild the bounce-only shortcut.",
+                    },
+                    {
+                      value: "critical-number-anchor",
+                      label: "The main idea is mostly that each boundary has its own critical-angle value, because once the number is known the route story usually becomes secondary.",
+                      feedback:
+                        "That would flatten the lesson into a threshold-number shortcut.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right threshold story.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a3-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the threshold vocabulary board",
+                  scenario:
+                    "The crew keeps mixing refraction, critical angle, grazing route, total internal reflection, and boundary direction until every case sounds like 'light just bounces if the angle is big enough.'",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a3-l5",
+                      label: "Use refraction for the direction change caused by speed change, critical angle for the last escape case, grazing route for the boundary-skimming limit, and total internal reflection for the trapped case above the limit when the light is leaving the higher-index medium.",
+                      feedback:
+                        "Exactly. That keeps each threshold term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-steepness",
+                      label: "Use critical angle mainly as the steepness rating of the incoming ray, because once students can picture a sharper approach the medium-direction story usually matters less.",
+                      feedback:
+                        "That would scramble the threshold terms into the wrong shortcut.",
+                    },
+                    {
+                      value: "term-board-bounce",
+                      label: "Use total internal reflection for any case where the light route turns back instead of crossing, because that keeps the vocabulary simpler even if the starting side is different.",
+                      feedback:
+                        "That would flatten the condition into the wrong boundary rule.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the threshold terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a3-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst through the boundary sequence",
+                  scenario:
+                    "The trainee analyst is about to compare the incident angle with the critical angle without first checking which medium the light is leaving or what the below-at-above threshold cases mean.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "direction-then-below-at-above",
+                      label: "Check the direction of travel across the boundary first, then read below critical as escape, at critical as the grazing limit, and above critical as the trapped-light case.",
+                      feedback:
+                        "Exactly. That gives the analyst the right threshold workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "memorize-above-bounce",
+                      label: "Start by memorizing that above the critical angle means bounce, because once the top case is secure the medium direction and grazing limit can be added later if needed.",
+                      feedback:
+                        "That would send the analyst straight into the number-only shortcut.",
+                    },
+                    {
+                      value: "start-from-fiber-example",
+                      label: "Start with the optical-fiber example because repeated internal reflections are the most memorable part, then work backward to the boundary rule only if the learner asks for it.",
+                      feedback:
+                        "That would skip the core route sequence this lesson is trying to build.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean threshold workflow.",
+                  retryLabel: "That would send the analyst back into a A3_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a3-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the bounce-only and number-only shortcuts",
+                  scenario:
+                    "One crew member keeps treating total internal reflection as any steep bounce, while another keeps using the critical angle like a bare threshold number with no attached route meaning.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "threshold-trap-warning",
+                      label: "Do not treat total internal reflection like any steep bounce and do not use the critical angle as a bare number. Check the boundary direction first, then read the critical angle as the last escape before the trapped case.",
+                      feedback:
+                        "Exactly. That warning blocks the main A3_L5 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bounce-warning-only",
+                      label: "Warn mainly against calling every steep route total internal reflection, because once that is fixed the exact meaning of the critical angle usually takes care of itself.",
+                      feedback:
+                        "That would leave the number-only shortcut too alive.",
+                    },
+                    {
+                      value: "number-warning-only",
+                      label: "Warn mainly against using the critical angle as a memorized number, because once that is fixed the boundary-direction condition usually takes care of itself.",
+                      feedback:
+                        "That would leave the wrong-boundary shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps refraction, the limit case, and total internal reflection tied together.",
+                  retryLabel: "That warning would leave a main A3_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a3-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the last-escape story visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners feel the critical angle as a limit case without turning total internal reflection into a magical bounce rule.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "door-gap-analogy",
+                      label: "Think of a doorway angle that still lets you just squeeze out: below it you escape, at it you skim the edge, and above it you stay trapped inside because the exit route has run out.",
+                      feedback:
+                        "Exactly. That keeps the last-escape pattern visible without flattening it into magic.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mirror-wall-analogy",
+                      label: "Think of the boundary as becoming more mirror-like as the angle grows, because total internal reflection is mainly ordinary reflection becoming stronger and stronger.",
+                      feedback:
+                        "That would rebuild the wrong reflection shortcut.",
+                    },
+                    {
+                      value: "keypad-analogy",
+                      label: "Think of the critical angle like a keypad code: once the number is crossed the boundary just switches modes, so the route story itself does not need much explanation.",
+                      feedback:
+                        "That would flatten the lesson into a bare threshold number again.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It supports the last-escape story without flattening it.",
+                  retryLabel: "That analogy would pull the lesson away from the right threshold model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A3_L4") {
