@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M9_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m9-l3-energy-per-charge-board",
+                badge: "Voltage board",
+                title: "Track what each coulomb gains and loses around the same loop",
+                scenario:
+                  "The Energy-per-Charge board shows one source voltage and one component voltage on the same loop. One trainee says the battery stores current, another treats the larger voltage as just a bigger current, and a third forgets that the same charge can gain energy at the source and transfer part of it at the component.",
+                prompt: "Pin the note that keeps the loop-energy story accurate.",
+                options: [
+                  {
+                    value: "energy-per-charge-note",
+                    label: "Treat voltage as energy transferred per unit charge: the source gives each coulomb an energy rise, the component takes a defined share of that same charge's energy, and current is a different quantity.",
+                    feedback:
+                      "Exactly. That keeps source lift, component drop, and voltage-versus-current in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "battery-stores-current-note",
+                    label: "Treat the battery as a store of current, because the source voltage mainly tells you how much current the battery has available to send around the loop.",
+                    feedback:
+                      "That confuses voltage and current, and it describes the battery using the wrong quantity entirely.",
+                  },
+                  {
+                    value: "bigger-voltage-means-bigger-current-note",
+                    label: "Treat the larger voltage as simply the larger current reading, because both numbers are really different ways of measuring how strong the flow is in the circuit.",
+                    feedback:
+                      "That collapses two different electrical quantities into one idea. Voltage is energy per charge, not current.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads voltage as an energy-per-charge story across the loop.",
+                retryLabel: "That note would leave a main M9_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m9-l3-fix-ideas",
+                  badge: "Energy repair",
+                  title: "Repair the voltage-versus-current mix-up",
+                  scenario:
+                    "One trainee keeps talking about a battery as if it stores current, while another keeps treating source voltage and component voltage as though they were just current labels for strong and weak flow.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-voltage-language",
+                      label: "Repair both ideas together: voltage is energy transferred per unit charge, so the source gives each coulomb energy and the component takes some of that energy, while current stays a separate charge-flow quantity.",
+                      feedback:
+                        "Exactly. That repairs both the battery-language error and the voltage-current collapse.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-strong-source",
+                      label: "Repair the confusion by saying a strong source keeps both voltage and current high together, because students mainly need to remember that bigger electrical numbers usually mean stronger flow.",
+                      feedback:
+                        "That would keep the voltage-current shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-component-use",
+                      label: "Repair the confusion by saying the component uses some current and some voltage, because devices normally take part of every electrical quantity as charge passes through them.",
+                      feedback:
+                        "That would deepen the confusion by turning both current and voltage into consumables.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps energy per charge separate from charge-flow rate.",
+                  retryLabel: "That would leave a main M9_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m9-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line voltage rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating voltage as just another name for current or a vague battery-strength number.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "voltage-anchor",
+                      label: "Potential difference is energy transferred per unit charge: a source gives each coulomb an energy rise and components take defined shares of that energy around the loop.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "current-anchor",
+                      label: "Voltage mainly tells you how strongly current moves around the circuit, so the core idea is to compare electrical push without worrying too much about charge or energy language.",
+                      feedback:
+                        "That would build the wrong voltage-current collapse into the anchor sentence.",
+                    },
+                    {
+                      value: "battery-anchor",
+                      label: "The main idea is that a battery contains a certain amount of voltage to send out, because once students picture voltage as stored electrical supply the component story follows naturally.",
+                      feedback:
+                        "That would teach the battery using the wrong concept language.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right energy-per-charge rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m9-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the loop-energy vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up voltage, current, charge, and transferred energy until every electrical number sounds like one general measure of flow strength.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-voltage-energy",
+                      label: "Use voltage or potential difference for energy transferred per unit charge, current for charge-flow rate, charge for the amount moving, and transferred energy for the total share linked to a chosen amount of charge.",
+                      feedback:
+                        "Exactly. That keeps each loop-energy term tied to its own job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-voltage-current",
+                      label: "Use voltage and current almost interchangeably at first, because students usually understand circuit questions faster when both are treated as measures of electrical strength.",
+                      feedback:
+                        "That would scramble the exact distinction this lesson is trying to teach.",
+                    },
+                    {
+                      value: "term-board-battery-store",
+                      label: "Use battery voltage for the amount of current stored in the source, because that phrase helps students remember that sources contain the electrical supply devices need.",
+                      feedback:
+                        "That would hard-wire the wrong battery model into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the loop-energy terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m9-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare source and component readings",
+                  scenario:
+                    "The trainee analyst is about to compare the source and component voltage as if they were two current readings, and they still have not translated either number into what happens to each coulomb of charge.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "translate-each-coulomb-first",
+                      label: "Translate each voltage into an energy-per-charge statement first, then track how the same charge gains energy at the source and transfers part of it at the component while keeping current as a separate idea.",
+                      feedback:
+                        "Exactly. That gives the analyst the right loop-energy workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "compare-biggest-electrical-number",
+                      label: "Start with whichever electrical reading is numerically larger, because the biggest number usually tells you where the strongest current action is happening in the loop.",
+                      feedback:
+                        "That would send the analyst straight into the wrong voltage-current shortcut.",
+                    },
+                    {
+                      value: "source-current-first",
+                      label: "Start by deciding how much current the battery has stored, because once the source story is secure the component voltage usually explains itself.",
+                      feedback:
+                        "That would send the analyst into the wrong battery-language shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean energy-per-charge method.",
+                  retryLabel: "That would send the analyst back into a M9_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m9-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the battery-current and voltage-equals-current shortcuts",
+                  scenario:
+                    "One crew member keeps saying the battery stores current, while another keeps translating every voltage comparison into a stronger-versus-weaker current story instead of an energy-per-charge story.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "voltage-trap-warning",
+                      label: "Do not describe a battery as a store of current, and do not collapse voltage into current. Voltage is the energy each unit charge gains or transfers, while current is the rate that charge flows.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "battery-warning-only",
+                      label: "Warn mainly that the battery is not a current store, because once that is said clearly students usually keep voltage and current separate on their own.",
+                      feedback:
+                        "That would leave the voltage-current shortcut mostly alive.",
+                    },
+                    {
+                      value: "current-warning-only",
+                      label: "Warn mainly that voltage is not the same as current, because once that distinction is secure the way students talk about the battery usually becomes optional detail.",
+                      feedback:
+                        "That would leave the wrong battery-language shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps voltage, current, and battery language in the right places.",
+                  retryLabel: "That warning would leave a main M9_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m9-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps energy per charge visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture the same charge moving round the loop while gaining and losing energy in different parts of the route.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "token-budget-analogy",
+                      label: "Think of each charge like a courier carrying a token budget. The source tops up the budget for every courier, and each component takes a defined share from that same budget as the courier passes through.",
+                      feedback:
+                        "Exactly. That keeps energy per charge visible without turning voltage into current.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "water-pressure-analogy",
+                      label: "Think mainly of voltage as stronger flow pressure, because students usually understand circuits best when every electrical idea is linked back to how forcefully the current moves.",
+                      feedback:
+                        "That would rebuild the voltage-current shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "battery-tank-analogy",
+                      label: "Think of the battery as a tank of current that gets shared around the loop, because then voltage and current can both be treated as different views of the same stored electrical supply.",
+                      feedback:
+                        "That would rebuild both shortcuts the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps source lift, component drop, and current separate in the right way.",
+                  retryLabel: "That analogy would pull the lesson away from the right loop-energy model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M9_L2") {
