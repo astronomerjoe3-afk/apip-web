@@ -2034,6 +2034,248 @@ function getA5ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A5_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a5-l5-resonance-board",
+        badge: "Resonance board",
+        title: "Match the driving rhythm to the natural timing",
+        scenario:
+          "The driven-oscillator board shows natural frequency, driving frequency, damping, and response amplitude together. One trainee treats resonance like a mysterious extra force, another mixes up the system's natural timing with the external driver rhythm, and a third forgets that damping changes how sharply the response peak appears.",
+        prompt: "Pin the note that keeps the resonance model accurate.",
+        options: [
+          {
+            value: "match-condition-note",
+            label: "Treat resonance as the strong-response condition that appears when the driving frequency comes close to the system's natural frequency, while damping controls how broad or sharp that response peak looks.",
+            feedback:
+              "Exactly. That keeps the timing match and the damping effect in one story.",
+            isCorrect: true,
+          },
+          {
+            value: "extra-force-note",
+            label: "Treat resonance as a special extra force that turns on near the peak, because once the amplitude becomes large there must be a new driving effect beyond ordinary oscillation.",
+            feedback:
+              "That would rebuild the extra-force shortcut.",
+          },
+          {
+            value: "frequency-is-all-one-thing-note",
+            label: "Treat natural frequency and driving frequency as basically the same label, because once the oscillation is underway the source rhythm and system rhythm usually become one combined number.",
+            feedback:
+              "That would rebuild the mixed-frequency shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads resonance as a match condition, not a mystery force.",
+        retryLabel: "That note would leave a main A5_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a5-l5-fix-ideas",
+          badge: "Resonance repair",
+          title: "Repair the mystery-force and mixed-frequency shortcuts",
+          scenario:
+            "One analyst keeps talking about resonance like a new force appears at the peak, while another keeps collapsing natural frequency and driving frequency into one vague rhythm label.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-match-condition-story",
+              label: "Repair both habits together: separate the system's natural frequency from the external driving frequency, then treat resonance as the strong-response condition that appears near frequency match, with damping shaping the peak.",
+              feedback:
+                "Exactly. That restores the right resonance workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-big-amplitude-first",
+              label: "Repair the confusion by emphasizing the large amplitude first, because once students see the huge response the force story usually becomes easier to explain later.",
+              feedback:
+                "That would keep the extra-force shortcut alive.",
+            },
+            {
+              value: "repair-one-rhythm-language",
+              label: "Repair the confusion by talking about one main rhythm for the whole setup, because once the oscillation is running the difference between source timing and system timing usually becomes secondary.",
+              feedback:
+                "That would keep the mixed-frequency shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats resonance as a timing-match response condition.",
+          retryLabel: "That would leave a main A5_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a5-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line resonance rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop explaining resonance as a mysterious force spike.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a5-l5-anchor",
+              label: "Forced oscillations respond most strongly when the driver rhythm matches the system's own timing.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "peak-anchor-only",
+              label: "The main idea is mostly that resonance creates a very large amplitude, because once students recognize the big response the timing details usually become secondary.",
+              feedback:
+                "That would hide the match-condition idea the lesson needs.",
+            },
+            {
+              value: "driver-anchor-only",
+              label: "The main idea is mostly that the driver controls everything, because once the external rhythm is known the system's own timing usually becomes secondary.",
+              feedback:
+                "That would flatten the two-frequency relationship too far.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right resonance rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a5-l5-technical-words",
+          badge: "Term desk",
+          title: "Clean up the resonance vocabulary board",
+          scenario:
+            "The crew keeps mixing natural frequency, driving frequency, resonance, response amplitude, and damping until every answer sounds like one vague shaking story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a5-l5",
+              label: "Use natural frequency for the system's own timing, driving frequency for the external source rhythm, resonance for the strong-response condition near a match, and damping for the energy-loss effect that changes the peak shape.",
+              feedback:
+                "Exactly. That keeps the resonance terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-vibration-does-most",
+              label: "Use vibration as the main word for almost the whole topic, because once students know the system is shaking the different timing labels usually matter less.",
+              feedback:
+                "That would scramble the resonance terms into a vague-motion shortcut.",
+            },
+            {
+              value: "term-board-peak-does-most",
+              label: "Use resonance mainly as the word for the highest peak, because once students recognize the largest amplitude the source timing and damping details usually become secondary.",
+              feedback:
+                "That would weaken the match-condition structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the resonance terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a5-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they explain the peak",
+          scenario:
+            "The trainee analyst is about to explain the response peak from amplitude alone, and has not yet separated the system's natural timing from the driver rhythm or checked how damping changes the response shape.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "separate-frequencies-then-peak",
+              label: "Start by separating the natural frequency from the driving frequency, then sweep the driver toward the match condition and use damping to explain why the response peak changes shape.",
+              feedback:
+                "Exactly. That gives the analyst the right resonance workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-big-response",
+              label: "Start from the biggest response first, because once the amplitude peak is clear the timing relationship usually becomes obvious later.",
+              feedback:
+                "That would send the analyst back into the peak-only shortcut.",
+            },
+            {
+              value: "start-from-one-rhythm",
+              label: "Start from one main rhythm for the whole system, because once the oscillation is underway the difference between driver timing and system timing usually matters less.",
+              feedback:
+                "That would send the analyst back into the mixed-frequency shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean match-condition method.",
+          retryLabel: "That would send the analyst back into a A5_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a5-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the mystery-force resonance shortcut",
+          scenario:
+            "One crew member keeps explaining resonance as a special force at the peak, while another keeps blurring natural and driving frequency into one label.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "resonance-trap-warning",
+              label: "Do not explain resonance as a new force, and do not blur the two frequencies together. Keep natural frequency and driving frequency separate, then read resonance as the strong-response condition near a match, with damping shaping the peak.",
+              feedback:
+                "Exactly. That warning blocks the main A5_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "force-warning-only",
+              label: "Warn mainly against the mystery-force explanation, because once students stop that they usually keep the two frequencies separate on their own.",
+              feedback:
+                "That would leave the mixed-frequency shortcut too alive.",
+            },
+            {
+              value: "frequency-warning-only",
+              label: "Warn mainly against mixing the two frequencies, because once students stop that they usually stop inventing a special force at the peak on their own.",
+              feedback:
+                "That would leave the extra-force shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the full resonance condition visible.",
+          retryLabel: "That warning would leave a main A5_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a5-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the timing match visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why resonance is about matching rhythms rather than adding a mysterious extra shove.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "playground-push-analogy",
+              label: "Think of the motion like pushing a swing at the right rhythm: when the pushes match the swing's own timing the response grows most strongly, while damping decides how sharply that success stands out.",
+              feedback:
+                "Exactly. That keeps the timing match visible without flattening the physics.",
+              isCorrect: true,
+            },
+            {
+              value: "turbo-boost-analogy",
+              label: "Think of the motion mainly like a hidden boost that switches on near the peak, because once the response gets large there must be an extra driving effect involved.",
+              feedback:
+                "That would rebuild the extra-force shortcut.",
+            },
+            {
+              value: "single-drumbeat-analogy",
+              label: "Think of the motion mainly as one shared beat, because once the system is being driven the source rhythm and natural rhythm usually become basically the same thing.",
+              feedback:
+                "That would rebuild the mixed-frequency shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the timing-match story visible.",
+          retryLabel: "That analogy would pull the lesson away from the right resonance model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A5_L4") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
