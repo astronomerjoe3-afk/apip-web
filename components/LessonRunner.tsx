@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "M13_L2" || lessonId === "M13_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "M13_L2" || lessonId === "M13_L3" || lessonId === "M13_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M13_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m13-l4-seasons-board",
+                badge: "Seasons board",
+                title: "Keep tilt and sunlight angle ahead of the distance shortcut",
+                scenario:
+                  "The Seasons and tilt board shows Earth at opposite positions in its orbit with the axis tilt kept in the same direction in space. One trainee explains summer and winter with distance from the Sun, another forgets to compare opposite hemispheres, and a third lets the axis direction change as Earth moves.",
+                prompt: "Pin the note that keeps the seasons model accurate.",
+                options: [
+                  {
+                    value: "tilt-and-angle-note",
+                    label: "Keep the axis tilt pointing in the same direction in space, compare which hemisphere leans toward the Sun, and use sunlight angle rather than simple distance as the seasonal cause.",
+                    feedback:
+                      "Exactly. That keeps the seasons story tied to tilt and lighting.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "distance-note",
+                    label: "Treat seasons mainly as a distance effect, because moving closer to the Sun gives warmer conditions while moving farther away gives cooler conditions.",
+                    feedback:
+                      "That would rebuild the wrong distance shortcut.",
+                  },
+                  {
+                    value: "moving-tilt-note",
+                    label: "Treat the axis as turning to face different directions during the orbit, because that changing tilt direction is the clearest reason different seasons appear.",
+                    feedback:
+                      "That would rebuild the wrong changing-axis shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads seasons as a tilt-and-sunlight-angle story.",
+                retryLabel: "That note would leave a main M13_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m13-l4-fix-ideas",
+                  badge: "Season repair",
+                  title: "Repair the distance and moving-axis shortcuts",
+                  scenario:
+                    "One trainee still explains seasons by how near Earth is to the Sun, while another changes the axis direction as Earth moves instead of keeping the tilt fixed in space.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-tilt-model",
+                      label: "Repair both habits together: keep the axis direction fixed in space, compare opposite orbit positions, and ask which hemisphere gets more direct sunlight.",
+                      feedback:
+                        "Exactly. That restores the proper seasons story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-temperature-first",
+                      label: "Repair the confusion by talking first about warmer and cooler times of year, because once students know the temperature pattern the orbital cause usually becomes obvious afterward.",
+                      feedback:
+                        "That would keep the distance shortcut too easy to rebuild.",
+                    },
+                    {
+                      value: "repair-orbit-shape-first",
+                      label: "Repair the confusion by emphasizing the shape of Earth's orbit, because once students know the route clearly the seasonal explanation usually sorts itself out.",
+                      feedback:
+                        "That would keep the distance shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps tilt and sunlight angle linked.",
+                  retryLabel: "That would leave a main M13_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m13-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line seasons rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop falling back to the near-Sun, far-Sun explanation.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "seasons-anchor",
+                      label: "Earth's axis stays tilted in the same direction in space, opposite hemispheres swap which one leans toward the Sun, and seasons are driven by tilt and sunlight angle.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "distance-anchor-only",
+                      label: "The main idea is that Earth is warmer when it is closer to the Sun, because solar distance is the most natural first explanation for seasonal changes.",
+                      feedback:
+                        "That line rebuilds the wrong distance story.",
+                    },
+                    {
+                      value: "hemisphere-anchor-only",
+                      label: "The main idea is that the hemispheres take turns having different seasons, because opposite seasonal patterns are the easiest feature for students to remember first.",
+                      feedback:
+                        "That line misses the tilt-and-angle cause that explains the pattern.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right seasons rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m13-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the seasons vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up axis tilt, orbit position, hemisphere, sunlight angle, and distance until every answer sounds like one vague weather-in-space story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-seasons",
+                      label: "Use axis tilt for Earth's fixed lean, orbit position for where Earth is along its route, hemisphere for the north-south comparison, and sunlight angle for the main seasonal lighting cause.",
+                      feedback:
+                        "Exactly. That keeps the seasons terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-distance-does-most",
+                      label: "Use Sun distance as the main word for almost the whole topic, because once students know the near-and-far part the seasonal pattern mostly explains itself.",
+                      feedback:
+                        "That would hard-wire the distance shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-tilt-changes",
+                      label: "Use tilt direction as the main changing word in the topic, because once students know the axis points differently around the orbit the rest of the seasonal story is mostly detail.",
+                      feedback:
+                        "That would hard-wire the changing-axis shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the seasons terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m13-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they explain the seasons",
+                  scenario:
+                    "The trainee analyst is about to name a season directly without first checking which hemisphere leans toward the Sun and how direct the sunlight is at that orbit position.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "lean-then-angle",
+                      label: "Start by keeping the axis direction fixed, then ask which hemisphere leans toward the Sun and which one receives more direct sunlight before you name the seasonal pattern.",
+                      feedback:
+                        "Exactly. That gives the analyst the right seasons method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "distance-then-temperature",
+                      label: "Start by checking whether Earth is closer to or farther from the Sun, because once that is known the warmer and cooler seasons usually become easy to assign.",
+                      feedback:
+                        "That would send the analyst back into the wrong distance shortcut.",
+                    },
+                    {
+                      value: "orbit-shape-then-labels",
+                      label: "Start by looking carefully at the orbit path shape, because once students visualize the route well enough the seasonal labels mostly assign themselves.",
+                      feedback:
+                        "That would send the analyst away from the real tilt-and-angle cause.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean seasons-explanation method.",
+                  retryLabel: "That would send the analyst back into a M13_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m13-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the distance and changing-axis shortcuts",
+                  scenario:
+                    "One crew member keeps using Sun distance as the whole explanation, while another quietly changes the axis direction instead of keeping it fixed in space.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "seasons-trap-warning",
+                      label: "Do not use simple Sun distance to explain opposite hemispheres at the same time, and do not let the axis direction drift. Keep fixed tilt and sunlight angle in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M13_L4 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "distance-warning-only",
+                      label: "Warn mainly against using distance, because once students drop that shortcut they usually become careful enough about the axis for themselves.",
+                      feedback:
+                        "That would leave the changing-axis shortcut mostly alive.",
+                    },
+                    {
+                      value: "axis-warning-only",
+                      label: "Warn mainly against moving the axis direction, because once students keep the tilt fixed they usually stop relying on the distance shortcut on their own.",
+                      feedback:
+                        "That would leave the distance shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the seasons model physically linked.",
+                  retryLabel: "That warning would leave a main M13_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m13-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps tilt and lighting linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture opposite hemispheres leaning differently into the same sunlight without turning the story into a distance race.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "tilted-lamp-analogy",
+                      label: "Think of Earth like a tilted globe moving around a lamp while keeping the tilt direction fixed, so one side then the other receives the more direct light.",
+                      feedback:
+                        "Exactly. That keeps tilt and lighting linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "near-far-heater-analogy",
+                      label: "Think of seasons like moving a globe nearer to or farther from a heater, because the closer position naturally explains the warmer season.",
+                      feedback:
+                        "That would rebuild the distance shortcut.",
+                    },
+                    {
+                      value: "turning-tilt-analogy",
+                      label: "Think of seasons like a globe that keeps turning its tilt to face different ways during the year, because changing the lean direction is the clearest seasonal cause.",
+                      feedback:
+                        "That would rebuild the changing-axis shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the seasons ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Seasons and tilt model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M13_L3") {
