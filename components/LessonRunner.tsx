@@ -1775,7 +1775,112 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "M13_L2" || lessonId === "M13_L3" || lessonId === "M13_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+        lessonId === "M1_L1" ||
+        lessonId === "M1_L2" ||
+        lessonId === "M1_L3" ||
+        lessonId === "M1_L5" ||
+        lessonId === "M1_L6" ||
+        lessonId === "M2_L1" ||
+        lessonId === "M2_L2" ||
+        lessonId === "M2_L3" ||
+        lessonId === "M2_L4" ||
+        lessonId === "M2_L5" ||
+        lessonId === "M2_L6" ||
+        lessonId === "M3_L1" ||
+        lessonId === "M3_L2" ||
+        lessonId === "M3_L3" ||
+        lessonId === "M3_L4" ||
+        lessonId === "M3_L5" ||
+        lessonId === "M3_L6" ||
+        lessonId === "M4_L1" ||
+        lessonId === "M4_L2" ||
+        lessonId === "M4_L3" ||
+        lessonId === "M4_L4" ||
+        lessonId === "M4_L5" ||
+        lessonId === "M4_L6" ||
+        lessonId === "M5_L1" ||
+        lessonId === "M5_L2" ||
+        lessonId === "M5_L3" ||
+        lessonId === "M5_L4" ||
+        lessonId === "M5_L5" ||
+        lessonId === "M5_L6" ||
+        lessonId === "M6_L1" ||
+        lessonId === "M6_L2" ||
+        lessonId === "M6_L3" ||
+        lessonId === "M6_L4" ||
+        lessonId === "M6_L5" ||
+        lessonId === "M6_L6" ||
+        lessonId === "M7_L1" ||
+        lessonId === "M7_L2" ||
+        lessonId === "M7_L3" ||
+        lessonId === "M7_L4" ||
+        lessonId === "M7_L5" ||
+        lessonId === "M7_L6" ||
+        lessonId === "M8_L1" ||
+        lessonId === "M8_L2" ||
+        lessonId === "M8_L3" ||
+        lessonId === "M8_L4" ||
+        lessonId === "M8_L5" ||
+        lessonId === "M8_L6" ||
+        lessonId === "M9_L1" ||
+        lessonId === "M9_L2" ||
+        lessonId === "M9_L3" ||
+        lessonId === "M9_L4" ||
+        lessonId === "M9_L5" ||
+        lessonId === "M9_L6" ||
+        lessonId === "M10_L1" ||
+        lessonId === "M10_L2" ||
+        lessonId === "M10_L3" ||
+        lessonId === "M10_L4" ||
+        lessonId === "M10_L5" ||
+        lessonId === "M10_L6" ||
+        lessonId === "M11_L1" ||
+        lessonId === "M11_L2" ||
+        lessonId === "M11_L3" ||
+        lessonId === "M11_L4" ||
+        lessonId === "M11_L5" ||
+        lessonId === "M11_L6" ||
+        lessonId === "M12_L1" ||
+        lessonId === "M12_L2" ||
+        lessonId === "M12_L3" ||
+        lessonId === "M12_L4" ||
+        lessonId === "M12_L5" ||
+        lessonId === "M12_L6" ||
+        lessonId === "M13_L1" ||
+        lessonId === "M13_L2" ||
+        lessonId === "M13_L3" ||
+        lessonId === "M13_L4" ||
+        lessonId === "M13_L5" ||
+        lessonId === "F1_L1" ||
+        lessonId === "F1_L2" ||
+        lessonId === "F1_L3" ||
+        lessonId === "F1_L4" ||
+        lessonId === "F1_L5" ||
+        lessonId === "F1_L6" ||
+        lessonId === "F2_L1" ||
+        lessonId === "F2_L2" ||
+        lessonId === "F2_L3" ||
+        lessonId === "F2_L4" ||
+        lessonId === "F2_L5" ||
+        lessonId === "F2_L6" ||
+        lessonId === "F3_L1" ||
+        lessonId === "F3_L2" ||
+        lessonId === "F3_L3" ||
+        lessonId === "F3_L4" ||
+        lessonId === "F3_L5" ||
+        lessonId === "F3_L6" ||
+        lessonId === "F4_L1" ||
+        lessonId === "F4_L2" ||
+        lessonId === "F4_L3" ||
+        lessonId === "F4_L4" ||
+        lessonId === "F4_L5" ||
+        lessonId === "F4_L6" ||
+        lessonId === "F5_L1" ||
+        lessonId === "F5_L2" ||
+        lessonId === "F5_L3" ||
+        lessonId === "F5_L4" ||
+        lessonId === "F5_L5" ||
+        lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9107,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M13_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m13-l5-phase-board",
+                badge: "Phase board",
+                title: "Keep the Moon half lit and save shadows for the special eclipse case",
+                scenario:
+                  "The Moon phases and eclipses board shows the Moon moving around Earth while sunlight always lights one half of it. One trainee explains every crescent and gibbous shape with Earth's shadow, another changes how much of the Moon is lit by the Sun, and a third says a full Moon is basically an eclipse every month.",
+                prompt: "Pin the note that keeps the phase model accurate.",
+                options: [
+                  {
+                    value: "viewing-angle-note",
+                    label: "Keep the Moon half lit by the Sun all month, change only the Earth-based viewing angle to explain the phases, and reserve shadow language for the rare eclipse alignment.",
+                    feedback:
+                      "Exactly. That keeps phases and eclipses cleanly separated.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "shadow-note",
+                    label: "Treat the phases mainly as Earth's shadow sliding across the Moon, because the changing dark shape is the clearest thing students can see first.",
+                    feedback:
+                      "That would rebuild the wrong shadow shortcut.",
+                  },
+                  {
+                    value: "changing-light-note",
+                    label: "Treat the Sun as lighting different fractions of the Moon during the month, because the changing lit amount is the simplest reason the Moon looks different from Earth.",
+                    feedback:
+                      "That would break the key rule that the Sun keeps half of the Moon lit.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads phases as a viewing-angle story with eclipses kept separate.",
+                retryLabel: "That note would leave a main M13_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m13-l5-fix-ideas",
+                  badge: "Phase repair",
+                  title: "Repair the shadow shortcut before it spreads",
+                  scenario:
+                    "One trainee keeps using Earth's shadow to explain ordinary crescents and quarters, while another forgets that the Sun keeps one half of the Moon lit even as the visible phase changes from Earth.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-phase-model",
+                      label: "Repair both habits together: keep the sunlight on half of the Moon constant, then ask which part of that lit half is visible from Earth before mentioning eclipses at all.",
+                      feedback:
+                        "Exactly. That restores the proper phase model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-shadow-detail",
+                      label: "Repair the confusion by drawing Earth's shadow more carefully first, because once the shadow path looks clearer students usually stop mixing phases and eclipses on their own.",
+                      feedback:
+                        "That would keep the main shadow shortcut alive.",
+                    },
+                    {
+                      value: "repair-full-moon-first",
+                      label: "Repair the confusion by starting from the full Moon picture only, because once students know the brightest case the rest of the monthly pattern usually sorts itself out afterward.",
+                      feedback:
+                        "That would leave the constant half-lit rule too weak.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps sunlight, viewing angle, and eclipse alignment in the right slots.",
+                  retryLabel: "That would leave a main M13_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m13-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line phases rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop falling back to the idea that everyday Moon phases are just shadow events.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "phases-anchor",
+                      label: "The Sun lights half of the Moon all the time, phases change because the Earth-based viewing angle changes, and eclipses need a special alignment rather than the normal monthly case.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shadow-anchor-only",
+                      label: "The main idea is that phases happen because Earth's shadow covers different amounts of the Moon during the month, and eclipses are just the strongest versions of the same event.",
+                      feedback:
+                        "That line rebuilds the main shadow misconception.",
+                    },
+                    {
+                      value: "orbit-position-anchor-only",
+                      label: "The main idea is that the Moon reaches a sequence of special orbit positions each month, because once students remember the order the lighting explanation usually becomes obvious on its own.",
+                      feedback:
+                        "That line misses the viewing-angle story that actually explains the pattern.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Moon-phase rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m13-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the phase and eclipse vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up lit half, visible phase, full Moon, eclipse alignment, and shadow until every Moon answer sounds like one vague dark-versus-bright story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-phases",
+                      label: "Use lit half for the Sun-illuminated side that stays present, visible phase for the portion seen from Earth, and eclipse alignment for the rare shadow case when the bodies line up in the special way.",
+                      feedback:
+                        "Exactly. That keeps the phase terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-shadow-does-most",
+                      label: "Use shadow as the main word for almost the whole topic, because once students know that dark regions matter the Moon story usually sorts itself out.",
+                      feedback:
+                        "That would hard-wire the shadow shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-phase-order-only",
+                      label: "Use phase names mainly as a memorized monthly sequence, because once students can list crescent, quarter, gibbous, and full the explanation mostly fills itself in later.",
+                      feedback:
+                        "That would keep the viewing-angle cause too hidden.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the phase terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m13-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they explain a Moon shape",
+                  scenario:
+                    "The trainee analyst is about to call a crescent an Earth-shadow case without first checking what stays constant about the sunlight and what changes about the Earth-based view.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "constant-light-then-view",
+                      label: "Start by keeping the Sun-lit half constant, then ask how much of that lit half an Earth observer can see before you decide whether the case is an ordinary phase or a special eclipse alignment.",
+                      feedback:
+                        "Exactly. That gives the analyst the right phase method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shadow-first-then-label",
+                      label: "Start by checking where Earth's shadow would fall, because once that dark pattern is known the phase label usually becomes easy to assign.",
+                      feedback:
+                        "That would send the analyst back into the wrong shadow shortcut.",
+                    },
+                    {
+                      value: "phase-order-then-cause",
+                      label: "Start by recalling the monthly order of the named phases, because once the sequence is remembered clearly the cause usually becomes obvious afterward.",
+                      feedback:
+                        "That would send the analyst away from the real viewing-angle cause.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Moon-phase explanation method.",
+                  retryLabel: "That would send the analyst back into a M13_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m13-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the normal-phase shadow shortcut",
+                  scenario:
+                    "One crew member keeps treating the ordinary monthly phases as Earth's shadow, while another treats any full Moon case as if it should already count as an eclipse.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "phase-trap-warning",
+                      label: "Do not use Earth's shadow as the normal phase cause, and do not treat ordinary full-Moon position as automatic eclipse. Keep the half-lit Moon and the special alignment requirement in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M13_L5 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shadow-warning-only",
+                      label: "Warn mainly against using shadow for ordinary phases, because once students stop that mistake they usually become careful enough about eclipse alignment on their own.",
+                      feedback:
+                        "That would leave the automatic-eclipse shortcut mostly alive.",
+                    },
+                    {
+                      value: "alignment-warning-only",
+                      label: "Warn mainly that eclipses need a special line-up, because once students stop calling every full Moon an eclipse they usually stop using shadow language for phases on their own.",
+                      feedback:
+                        "That would leave the ordinary-phase shadow shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps phases and eclipses physically separated.",
+                  retryLabel: "That warning would leave a main M13_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m13-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps lighting and viewpoint linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the Moon changes shape from Earth without turning the whole topic into a shadow story.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "lit-ball-analogy",
+                      label: "Think of the Moon like a ball lit from one side by a lamp while you walk around it, so the lit half stays real but the visible part changes with your viewpoint.",
+                      feedback:
+                        "Exactly. That keeps the lighting and viewing geometry linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shadow-screen-analogy",
+                      label: "Think of the Moon like a screen that a shadow slides across, because the changing dark part is the simplest way to picture the monthly phase sequence.",
+                      feedback:
+                        "That would rebuild the wrong shadow shortcut.",
+                    },
+                    {
+                      value: "dimming-lamp-analogy",
+                      label: "Think of the Moon like a lamp that brightens and dims through the month, because the change in lit amount is the clearest reason it looks different from Earth.",
+                      feedback:
+                        "That would rebuild the wrong changing-light shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the Moon-phase ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Moon phases and eclipses model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M13_L4") {
