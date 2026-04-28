@@ -1854,6 +1854,7 @@ export default function LessonRunner({
         lessonId === "M13_L6" ||
         lessonId === "M14_L1" ||
         lessonId === "M14_L2" ||
+        lessonId === "M14_L3" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9110,6 +9111,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M14_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m14-l3-milky-way-board",
+                badge: "Galaxy board",
+                title: "Keep one star, one Solar System, and one galaxy in separate scale slots",
+                scenario:
+                  "The Milky Way scale board compares a single star, the Solar System, and the wider Milky Way. One trainee keeps calling the Milky Way just one star, another treats the Solar System as if it equals the whole galaxy, and a third forgets that gravity is what makes a galaxy one system.",
+                prompt: "Pin the note that keeps the Milky Way model accurate.",
+                options: [
+                  {
+                    value: "galaxy-system-note",
+                    label: "Separate one star, one Solar System, and one galaxy by scale, keep gravity in the galaxy definition, and place the Solar System inside the Milky Way rather than equaling it.",
+                    feedback:
+                      "Exactly. That keeps scale and galaxy structure readable together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "single-star-note",
+                    label: "Treat the Milky Way mainly as one especially large star, because the bright band in the sky is the clearest first clue and helps learners remember the name more easily.",
+                    feedback:
+                      "That would rebuild the wrong one-star shortcut.",
+                  },
+                  {
+                    value: "solar-system-note",
+                    label: "Treat the Milky Way mainly as another name for our Solar System, because that keeps the home-space idea simple before students worry about larger astronomical groupings.",
+                    feedback:
+                      "That would rebuild the wrong Solar-System-equals-galaxy shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the Milky Way as a gravitationally bound galaxy containing the Solar System.",
+                retryLabel: "That note would leave a main M14_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m14-l3-fix-ideas",
+                  badge: "Galaxy repair",
+                  title: "Repair the one-star and whole-home shortcuts",
+                  scenario:
+                    "One trainee keeps shrinking the Milky Way down to one star, while another stretches the Solar System up until it counts as the whole galaxy.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-galaxy-model",
+                      label: "Repair both habits together: separate star, Solar System, and galaxy scales, keep the Sun as one star inside the Milky Way, and use gravity to explain why the galaxy counts as one larger system.",
+                      feedback:
+                        "Exactly. That restores the proper Milky Way scale model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-name-memory-first",
+                      label: "Repair the confusion by drilling the named objects more carefully first, because once students can remember Sun, Solar System, and Milky Way in order the scale differences usually become obvious on their own.",
+                      feedback:
+                        "That would leave the scale confusion too alive.",
+                    },
+                    {
+                      value: "repair-bright-band-first",
+                      label: "Repair the confusion by focusing on the bright band in the night sky, because once students picture that feature clearly they usually stop confusing the Milky Way with smaller structures on their own.",
+                      feedback:
+                        "That would leave the one-star shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps star, Solar System, and galaxy in the right scale slots.",
+                  retryLabel: "That would leave a main M14_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m14-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line Milky Way rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop collapsing the Milky Way into either one star or the whole Solar System.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "milky-way-anchor",
+                      label: "A galaxy is a gravitationally bound system of stars, gas, and dust, the Milky Way is our home galaxy, and the Solar System is one tiny part of it.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bright-band-anchor-only",
+                      label: "The main idea is that the Milky Way is the bright star band we see in the sky, because the visible band itself is the clearest definition learners can trust first.",
+                      feedback:
+                        "That line rebuilds the wrong one-star-or-appearance shortcut.",
+                    },
+                    {
+                      value: "solar-home-anchor-only",
+                      label: "The main idea is that the Milky Way is basically our wider home-space around the Sun, because once students know it belongs with the Solar System the rest of the scale story usually sorts itself out.",
+                      feedback:
+                        "That line misses the galaxy-scale definition that actually explains the pattern.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right Milky Way rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m14-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the galaxy vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up star, Solar System, galaxy, universe, gravity, gas, and dust until every answer sounds like one vague space-container story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-galaxy",
+                      label: "Use star for one luminous body, Solar System for the Sun and its orbiting family, galaxy for a gravitationally bound system of many stars plus gas and dust, and universe for the much wider total picture.",
+                      feedback:
+                        "Exactly. That keeps the Milky Way terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-home-space-does-most",
+                      label: "Use home space as the main word for almost the whole topic, because once students know everything belongs to our local region the scale labels usually sort themselves out.",
+                      feedback:
+                        "That would hard-wire the scale-collapse shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-brightness-does-most",
+                      label: "Use brightness as the main word for almost the whole topic, because once students know which objects make the sky look bright the star and galaxy labels usually become easier to assign.",
+                      feedback:
+                        "That would hide the galaxy-definition rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the Milky Way terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m14-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they label the scale",
+                  scenario:
+                    "The trainee analyst is about to label the Milky Way without first separating the scale of one star from the Solar System and then from the galaxy map.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "scale-then-system-then-name",
+                      label: "Start by separating one star from the Solar System and then from the wider galaxy, keep the Sun inside the Milky Way, and use gravity to decide why the galaxy counts as one larger system.",
+                      feedback:
+                        "Exactly. That gives the analyst the right Milky Way method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "name-first-then-scale",
+                      label: "Start by choosing the biggest familiar astronomy name that seems to fit, because once the label is selected the smaller scale relationships usually become easier to explain afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong scale-collapse shortcut.",
+                    },
+                    {
+                      value: "sun-first-then-stop",
+                      label: "Start from the Sun and keep the story mostly there, because once students feel secure about our local star the larger Milky Way picture usually becomes obvious without extra system steps.",
+                      feedback:
+                        "That would send the analyst away from the galaxy-scale reasoning.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean Milky Way explanation method.",
+                  retryLabel: "That would send the analyst back into a M14_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m14-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-star and Solar-System-equals-galaxy shortcuts",
+                  scenario:
+                    "One crew member keeps reducing the Milky Way to one star, while another keeps expanding the Solar System until it counts as the whole galaxy.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "milky-way-trap-warning",
+                      label: "Do not confuse one star with a galaxy, and do not confuse the Solar System with the Milky Way. Keep the three scales separate and keep gravity in the galaxy definition.",
+                      feedback:
+                        "Exactly. That warning blocks the main M14_L3 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "star-warning-only",
+                      label: "Warn mainly against shrinking the Milky Way down to one star, because once students stop that mistake they usually stop stretching the Solar System into the whole galaxy on their own.",
+                      feedback:
+                        "That would leave the Solar-System-equals-galaxy shortcut too alive.",
+                    },
+                    {
+                      value: "solar-system-warning-only",
+                      label: "Warn mainly against calling the Solar System the whole galaxy, because once students stop that mistake they usually stop confusing galaxies with single stars on their own.",
+                      feedback:
+                        "That would leave the one-star shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps galaxy scale physically linked to the right system definition.",
+                  retryLabel: "That warning would leave a main M14_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m14-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the scale ladder intact",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why one star, one Solar System, and one galaxy must stay in different scale slots.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "city-neighborhood-analogy",
+                      label: "Think of one star, one Solar System, and one galaxy like one house, one neighborhood, and one whole city: they belong together, but they are not the same scale or kind of system.",
+                      feedback:
+                        "Exactly. That keeps the scale ladder linked without flattening the astronomy.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "one-big-house-analogy",
+                      label: "Think of the Milky Way mainly like one especially big house, because the single-structure picture is the simplest way to remember our home galaxy.",
+                      feedback:
+                        "That would rebuild the one-star-style shortcut.",
+                    },
+                    {
+                      value: "solar-home-analogy",
+                      label: "Think of the Milky Way mainly like the Solar System written on a larger sign, because the familiar local-family picture should be enough for beginners at first.",
+                      feedback:
+                        "That would rebuild the Solar-System-equals-galaxy shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the Milky Way scale ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Milky Way model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M14_L2") {
