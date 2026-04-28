@@ -3497,6 +3497,248 @@ function getA6ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A6_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a6-l4-chamber-state-board",
+        badge: "Chamber-state board",
+        title: "Read p, V, n, and T as one chamber state story",
+        scenario:
+          "The chamber-state board shows wall-hit load, room size, particle amount, and thermal level together. One trainee treats pressure like it can be explained alone, another talks about pV = nRT as detached symbols, and a third tries to substitute non-SI values directly without checking the state-variable ledger first.",
+        prompt: "Pin the note that keeps the ideal-gas model accurate.",
+        options: [
+          {
+            value: "one-state-relation-note",
+            label: "Treat the ideal-gas law as one chamber-state relation linking pressure, volume, amount, and absolute temperature together, and keep SI units visible before substituting into the equation.",
+            feedback:
+              "Exactly. That keeps the state variables joined and the unit discipline intact.",
+            isCorrect: true,
+          },
+          {
+            value: "pressure-tells-rest-note",
+            label: "Treat pressure as the main answer on its own, because once the wall-hit load is known the roles of volume, amount, and temperature usually become secondary details.",
+            feedback:
+              "That would rebuild the pressure-first shortcut.",
+          },
+          {
+            value: "symbols-are-detached-note",
+            label: "Treat pV = nRT mainly as a symbol pattern to rearrange, because once the letters are in the right places the state story and unit choices usually matter much less.",
+            feedback:
+              "That would rebuild the detached-symbol shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads the gas law as one chamber-state relation.",
+        retryLabel: "That note would leave a main A6_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a6-l4-fix-ideas",
+          badge: "State-law repair",
+          title: "Repair the detached-symbol and pressure-first shortcuts",
+          scenario:
+            "One analyst keeps discussing pressure change without naming what happens to volume, amount, or temperature, while another keeps treating the ideal-gas law as a rearrangement trick with no joined-up state meaning.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-linked-state-ledger",
+              label: "Repair both habits together: treat pressure, volume, amount, and temperature as one coupled chamber-state ledger, then keep SI units visible when you substitute or compare states.",
+              feedback:
+                "Exactly. That restores the right A6_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-pressure-first-only",
+              label: "Repair the confusion by anchoring everything to pressure first, because once the wall-hit effect is clear the other state variables usually fall into place on their own.",
+              feedback:
+                "That would keep the pressure-first shortcut alive.",
+            },
+            {
+              value: "repair-formula-first-only",
+              label: "Repair the confusion by anchoring everything to the formula first, because once students can rearrange the symbols the state meaning and unit choices usually become routine details.",
+              feedback:
+                "That would keep the detached-symbol shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats the gas law as one linked state ledger.",
+          retryLabel: "That would leave a main A6_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a6-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line gas-state rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop turning pV = nRT into a floating symbol slogan.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a6-l4-anchor",
+              label: "The ideal-gas law is one chamber-state relation, not a collection of detached symbols.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "pressure-main-anchor",
+              label: "The main idea is mostly that pressure carries the real gas story, because once the wall-load is known the other variables usually become secondary.",
+              feedback:
+                "That would erase the linked-state idea the lesson needs.",
+            },
+            {
+              value: "formula-main-anchor",
+              label: "The main idea is mostly that the formula can be rearranged, because once students manipulate the symbols the physical meaning usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson too far into algebra alone.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right gas-state rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a6-l4-technical-words",
+          badge: "Term desk",
+          title: "Clean up the gas-law vocabulary board",
+          scenario:
+            "The crew keeps mixing pressure, volume, amount of substance, kelvin temperature, and SI units until every answer sounds like one vague gas-equation story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a6-l4",
+              label: "Use pressure for the wall-hit effect, volume for the room available to the gas, n for the amount of substance in moles, and temperature in kelvin for the absolute thermal level used in the state relation.",
+              feedback:
+                "Exactly. That keeps the A6_L4 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-pressure-does-most",
+              label: "Use pressure as the main word for almost the whole topic, because once students picture the wall hits the rest of the state description usually matters less.",
+              feedback:
+                "That would scramble the gas-law terms into one dominant label.",
+            },
+            {
+              value: "term-board-formula-does-most",
+              label: "Use the formula itself as the main word for almost the whole topic, because once students know the letter pattern the meaning of the separate variables usually becomes secondary.",
+              feedback:
+                "That would hide the distinct state-variable roles the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the gas-law terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a6-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they substitute into pV = nRT",
+          scenario:
+            "The trainee analyst is about to plug numbers into the equation before naming the state variables clearly, and has not yet checked that the temperature and volume are in the right SI forms.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "name-state-then-si",
+              label: "Start by naming which state variable is missing, keep pressure, volume, amount, and temperature linked on one ledger, then convert to SI units before substituting or rearranging the relation.",
+              feedback:
+                "Exactly. That gives the analyst the right A6_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-pressure-only",
+              label: "Start from the pressure term only, because once the wall-hit load is known the other parts of the gas-law calculation usually sort themselves out.",
+              feedback:
+                "That would send the analyst back into the pressure-first shortcut.",
+            },
+            {
+              value: "start-from-symbol-shuffle-only",
+              label: "Start by rearranging the equation first, because once the symbols are in the right order the unit checks and state meaning usually become much easier and less central.",
+              feedback:
+                "That would send the analyst back into the detached-symbol shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean linked-state and SI-first method.",
+          retryLabel: "That would send the analyst back into an A6_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a6-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the detached-symbol gas-law shortcut",
+          scenario:
+            "One crew member keeps treating the variables as unrelated labels, while another keeps trying to substitute celsius or cm^3 directly and hopes the equation will fix the mismatch automatically.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a6-l4-trap-warning",
+              label: "Do not split p, V, n, and T into detached symbols, and do not skip SI conversion. Keep the chamber-state relation joined up and use kelvin, m^3, pascals, and moles before substituting.",
+              feedback:
+                "Exactly. That warning blocks the main A6_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "unit-warning-only",
+              label: "Warn mainly about the unit conversion, because once students remember SI values they usually stop treating the variables as detached on their own.",
+              feedback:
+                "That would leave the linked-state meaning too weak.",
+            },
+            {
+              value: "meaning-warning-only",
+              label: "Warn mainly that the variables are linked, because once students remember the chamber-state story the exact SI unit choices usually become routine and less important.",
+              feedback:
+                "That would leave the unit-discipline trap too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the state story and SI discipline together.",
+          retryLabel: "That warning would leave a main A6_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a6-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the chamber-state story joined up",
+          scenario:
+            "The team wants a comparison that helps beginners feel why pressure, volume, amount, and temperature must be read together rather than as isolated labels.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "crowded-room-analogy",
+              label: "Think of the gas like a crowded room: pressure is how hard the walls are being hit, volume is the room size, n is how many people are inside, and temperature is how energetically they move, so the whole room state must be read together.",
+              feedback:
+                "Exactly. That keeps the chamber-state story joined up without flattening it.",
+              isCorrect: true,
+            },
+            {
+              value: "pressure-gauge-analogy",
+              label: "Think of the gas mainly through the pressure gauge, because once that reading is known the room size, amount, and temperature usually become secondary details.",
+              feedback:
+                "That would rebuild the pressure-first shortcut.",
+            },
+            {
+              value: "equation-puzzle-analogy",
+              label: "Think of the gas mainly like an equation puzzle where the goal is to put the symbols in the right places, because once the algebra works the physical meaning usually matters less.",
+              feedback:
+                "That would rebuild the detached-symbol shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps all four state variables in one chamber picture.",
+          retryLabel: "That analogy would pull the lesson away from the right A6_L4 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A6_L3") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
