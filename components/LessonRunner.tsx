@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M10_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m10-l1-weave-mapper-board",
+                badge: "Weave board",
+                title: "Read local direction first, then use line density for strength",
+                scenario:
+                  "The Weave Mapper board shows a field tower and a live straight route with compass flags placed around them. One trainee treats the field lines like literal roads particles travel along, another uses crowded lines to guess direction instead of strength, and a third forgets that the straight current route makes circular weave loops around itself.",
+                prompt: "Pin the note that keeps the weave-map story accurate.",
+                options: [
+                  {
+                    value: "direction-density-note",
+                    label: "Use the compass to read field direction locally, use line spacing to compare field strength, and remember that field lines are map marks rather than literal particle roads. Around a straight current route, the field pattern is circular.",
+                    feedback:
+                      "Exactly. That keeps local direction, density, and the wire pattern in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "field-line-road-note",
+                    label: "Treat each field line as the actual road magnetic particles follow, because the field map should show where the magnetic stuff is physically travelling through space.",
+                    feedback:
+                      "That turns the map into a travel-path story, which is exactly the shortcut this lesson is trying to remove.",
+                  },
+                  {
+                    value: "density-gives-direction-note",
+                    label: "Use the densest line cluster to decide the field direction, because crowded regions show the strongest part of the field and should therefore point most clearly where the field is going.",
+                    feedback:
+                      "That mixes up two different jobs: density suggests strength, while direction is read locally from the field pattern or compass.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads weave direction and weave density as separate clues.",
+                retryLabel: "That note would leave a main M10_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m10-l1-fix-ideas",
+                  badge: "Weave repair",
+                  title: "Repair the map-versus-path shortcut",
+                  scenario:
+                    "One trainee keeps treating field lines as literal travel paths, while another keeps using dense regions to answer the direction question instead of the strength question.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-map-language",
+                      label: "Repair both ideas together: field lines are map marks, not particle roads. Use a local compass or tangent direction for direction, and use line density only to compare field strength.",
+                      feedback:
+                        "Exactly. That restores the right jobs for the field map clues.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-strongest-line",
+                      label: "Repair the confusion by saying the strongest-looking part of the map usually gives the best clue for both direction and strength, because the main field trend is most obvious there.",
+                      feedback:
+                        "That would keep the density-direction shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-particle-flow",
+                      label: "Repair the confusion by saying the map does not show every particle path exactly, but it still gives a useful idea of the routes magnetic effects follow through space.",
+                      feedback:
+                        "That would keep the path shortcut alive in softer wording instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats the weave map as a guide, not a travel picture.",
+                  retryLabel: "That would leave a main M10_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m10-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line weave-map rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop collapsing magnetic field direction, strength, and line meaning into one blurry picture.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "weave-anchor",
+                      label: "Magnets and current-carrying routes both create magnetic fields. Field lines show direction, line spacing suggests strength, and a straight current route has a circular field pattern around it.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "path-anchor",
+                      label: "The main idea is that field lines show how the magnetic influence travels, because once students picture the travel path clearly the direction and strength details usually follow naturally.",
+                      feedback:
+                        "That would build the wrong path model into the anchor sentence.",
+                    },
+                    {
+                      value: "density-anchor",
+                      label: "The main idea is that dense field regions matter most, because once students find the strongest part of the map they can usually infer both direction and source pattern from there.",
+                      feedback:
+                        "That would shrink the lesson to the wrong clue and blur the direction story.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right weave-map rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m10-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the field-map vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up magnetic field, field line, direction, density, and current-route pattern until every sketch sounds like one kind of hidden particle traffic diagram.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-field-map",
+                      label: "Use magnetic field for the region where magnetic effects act, field lines for the map marks, local direction for the field direction at one point, and line density for a strength clue rather than a direction clue.",
+                      feedback:
+                        "Exactly. That keeps the field-map words tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-field-flow",
+                      label: "Use field lines for the routes magnetic influence flows along, because students usually understand the map fastest when it is treated like a traffic diagram through space.",
+                      feedback:
+                        "That would hard-wire the wrong travel-path idea into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-density-master",
+                      label: "Use dense field regions as the main direction clue, because the strongest parts of the field usually point the clearest way and make the local compass story unnecessary detail.",
+                      feedback:
+                        "That would hard-wire the density-direction shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the field-map terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m10-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they read the weave map",
+                  scenario:
+                    "The trainee analyst is about to judge the whole map by whichever region looks most crowded, and they still have not separated the local direction question from the line-density strength question.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "local-direction-first",
+                      label: "Read the field locally first with the compass or tangent direction, then use the spacing between nearby lines to compare strength, and keep the line pattern as a map rather than a travel path.",
+                      feedback:
+                        "Exactly. That gives the analyst the right weave-reading workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "crowded-region-first",
+                      label: "Start with the most crowded part of the map, because the strongest region usually tells you the main direction and pattern before any local reading is needed.",
+                      feedback:
+                        "That would send the analyst straight into the density-direction shortcut.",
+                    },
+                    {
+                      value: "path-first",
+                      label: "Start by tracing one field line all the way through, because following its full route usually tells you how the magnetic effect travels and where nearby lines should point.",
+                      feedback:
+                        "That would send the analyst into the wrong path-reading shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean local-read method.",
+                  retryLabel: "That would send the analyst back into a M10_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m10-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the path and density-direction shortcuts",
+                  scenario:
+                    "One crew member keeps tracing field lines like literal roads, while another keeps answering every direction question by pointing to the densest part of the map.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "weave-trap-warning",
+                      label: "Do not treat field lines as literal travel paths, and do not let line density answer the direction question. Field maps separate these jobs: direction is local, density suggests strength.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "path-warning-only",
+                      label: "Warn mainly that the lines are only a model, because once that is clear students usually stop overusing dense regions as direction clues on their own.",
+                      feedback:
+                        "That would leave the density-direction shortcut mostly alive.",
+                    },
+                    {
+                      value: "density-warning-only",
+                      label: "Warn mainly that density suggests strength, because once that is stated clearly students usually stop imagining the lines as real travel paths.",
+                      feedback:
+                        "That would leave the path shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps local direction and density strength in the right relationship.",
+                  retryLabel: "That warning would leave a main M10_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m10-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the field as a map",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why field lines can guide reading without being the actual roads anything is physically travelling along.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "weather-map-analogy",
+                      label: "Think of the field picture like a weather map: the marks help you read local direction and how packed the influence is, but the drawn lines are guides for interpretation, not literal tracks that particles must follow.",
+                      feedback:
+                        "Exactly. That keeps the field picture as a map and preserves the separate jobs of direction and density.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rail-track-analogy",
+                      label: "Think of each field line like a rail track magnetic particles ride along, because that makes the circular wire pattern and the magnet pattern easier to visualize as movement routes.",
+                      feedback:
+                        "That would rebuild the exact path shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "river-current-analogy",
+                      label: "Think mainly of the densest region as the strongest current in a river, because once students see where the flow is thickest they can usually infer the direction of the whole magnetic field quickly.",
+                      feedback:
+                        "That would rebuild the density-direction shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the field picture readable without turning it into a travel diagram.",
+                  retryLabel: "That analogy would pull the lesson away from the right weave-map model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M9_L6") {
