@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M11_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m11-l6-vault-ledger-board",
+                badge: "Ledger board",
+                title: "Balance the decay event before naming the daughter",
+                scenario:
+                  "The Vault-ledger board flips between alpha, beta-minus, and gamma. One trainee ignores the emitted radiation in the equation, another changes both mass number and atomic number for beta-minus, and a third assumes gamma must create a new element because radiation came out.",
+                prompt: "Pin the note that keeps the ledger balanced.",
+                options: [
+                  {
+                    value: "balance-a-z-with-emission",
+                    label: "Balance both mass number and atomic number, include the emitted radiation in the bookkeeping, and use the proton-number change to decide whether the daughter becomes a different element.",
+                    feedback:
+                      "Exactly. That is the full bookkeeping rule this lesson needs.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "daughter-only-bookkeeping",
+                    label: "Match the parent and daughter symbols first, because the emitted radiation mostly explains what happened afterward rather than taking part in the balancing itself.",
+                    feedback:
+                      "That would drop the emitted radiation out of the ledger, which is a main M11_L6 mistake.",
+                  },
+                  {
+                    value: "radiation-means-new-element",
+                    label: "Treat any decay that emits radiation as creating a new element automatically, because a nuclear event must always rename the daughter even if the count changes look small.",
+                    feedback:
+                      "That would blur the actual proton-number test for element identity.",
+                  },
+                ],
+                successLabel: "Pinned. The room now balances decay events like proper bookkeeping.",
+                retryLabel: "That note would leave a main M11_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m11-l6-fix-ideas",
+                  badge: "Ledger repair",
+                  title: "Repair the symbol-shuffle shortcuts",
+                  scenario:
+                    "One trainee keeps writing daughters by memory without checking that A and Z still balance, while another keeps forgetting that the emitted alpha, beta-minus, or gamma must be part of the same nuclear-event ledger.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-balance-with-emission",
+                      label: "Repair both habits together: treat decay equations as full bookkeeping. Balance mass number and atomic number, include the emitted radiation, and only then read whether the daughter is a new element.",
+                      feedback:
+                        "Exactly. That restores the full bookkeeping method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-daughter-first",
+                      label: "Repair the confusion by focusing on the daughter symbol first, because once that looks plausible the balancing step usually just confirms what you already know.",
+                      feedback:
+                        "That would keep the symbol-shuffle shortcut alive.",
+                    },
+                    {
+                      value: "repair-radiation-last",
+                      label: "Repair the confusion by treating the emitted radiation as a label added at the end, because the important physics is mostly in the parent-to-daughter change.",
+                      feedback:
+                        "That would keep the missing-emission shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats decay equations as full event bookkeeping.",
+                  retryLabel: "That would leave a main M11_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m11-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line ledger rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating decay equations like isolated symbol shuffling.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "ledger-anchor",
+                      label: "Decay equations conserve mass number and atomic number. Alpha, beta-minus, and gamma each obey their own ledger rule, and a change in atomic number means a change in element identity.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mass-only-anchor",
+                      label: "The main idea is that the mass number is the real balancing target, because the atomic number shift is usually easier to fill in once the heavier count is right.",
+                      feedback:
+                        "That would blur the need to balance both counts.",
+                    },
+                    {
+                      value: "new-element-anchor",
+                      label: "The main idea is that any radioactive emission creates a new element, because nuclear decay always changes what the atom is called.",
+                      feedback:
+                        "That would blur the actual proton-number rule for identity.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right ledger rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m11-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the decay-bookkeeping vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up parent nucleus, daughter nucleus, emitted radiation, atomic number, and mass number until every decay line turns into symbol guessing.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-ledger",
+                      label: "Use parent nucleus for the starting atom, daughter nucleus for the result after the event, emitted radiation for the alpha, beta-minus, or gamma that must stay in the ledger, atomic number for proton count, and mass number for proton-plus-neutron count.",
+                      feedback:
+                        "Exactly. That keeps each bookkeeping term tied to its job.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-symbols-only",
+                      label: "Use parent and daughter mainly as labels for the two big symbols, because the smaller emitted symbol usually matters less than the main element names.",
+                      feedback:
+                        "That would hard-wire the missing-emission shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-one-count",
+                      label: "Use atomic number and mass number almost interchangeably, because both are really just nuclear totals and students can sort out the exact difference later.",
+                      feedback:
+                        "That would hard-wire the one-count shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the decay-bookkeeping terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m11-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they write the daughter",
+                  scenario:
+                    "The trainee analyst is about to write the daughter nucleus from memory without checking the emitted radiation or whether both A and Z still match on the two sides.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "identify-balance-then-name",
+                      label: "Start by identifying the decay type, write the emitted radiation into the equation, balance both mass number and atomic number, and only after that decide whether the daughter is a different element.",
+                      feedback:
+                        "Exactly. That gives the analyst the right ledger method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "name-daughter-then-check",
+                      label: "Start by naming the likely daughter from memory, because once the daughter looks familiar the balancing step becomes a quick final check.",
+                      feedback:
+                        "That would send the analyst back into symbol shuffling.",
+                    },
+                    {
+                      value: "mass-first-only",
+                      label: "Start by balancing the mass number alone, because that usually narrows the answer enough that the proton-number detail can be inferred afterward.",
+                      feedback:
+                        "That would send the analyst into the one-count shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean decay-ledger method.",
+                  retryLabel: "That would send the analyst back into a M11_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m11-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the bookkeeping shortcuts",
+                  scenario:
+                    "One crew member keeps dropping the emitted radiation from the equation, while another keeps deciding whether the daughter is a new element before checking the proton-number change.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "ledger-trap-warning",
+                      label: "Do not drop the emitted radiation out of the ledger, and do not guess the daughter name before balancing both A and Z. The proton-number change decides the element identity.",
+                      feedback:
+                        "Exactly. That warning blocks the main M11_L6 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "radiation-warning-only",
+                      label: "Warn mainly that the emitted radiation matters, because once students include that symbol they usually sort out the daughter identity on their own.",
+                      feedback:
+                        "That would leave the identity shortcut mostly alive.",
+                    },
+                    {
+                      value: "identity-warning-only",
+                      label: "Warn mainly that element identity comes from proton number, because once students stop renaming the daughter too early they usually become more careful about the full equation.",
+                      feedback:
+                        "That would leave the missing-emission shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the full decay ledger intact.",
+                  retryLabel: "That warning would leave a main M11_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m11-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the bookkeeping honest",
+                  scenario:
+                    "The team wants a comparison that helps beginners see why decay equations must be balanced like full event records rather than guessed from one familiar symbol.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "ledger-bookkeeping-analogy",
+                      label: "Think of the decay equation like a full ledger entry: every amount that leaves the account must still appear in the record, and the account label only changes when the key identity number changes.",
+                      feedback:
+                        "Exactly. That keeps emitted radiation, balancing, and identity all visible together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "nickname-analogy",
+                      label: "Think of it like giving the atom a new nickname whenever anything happens to it, because that is easier than checking exactly which count changed.",
+                      feedback:
+                        "That would rebuild the wrong any-change-renames-it shortcut.",
+                    },
+                    {
+                      value: "main-symbol-analogy",
+                      label: "Think of it like keeping only the main symbol on a receipt, because the smaller emitted part usually does not matter much for the final story.",
+                      feedback:
+                        "That would rebuild the wrong missing-emission shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the bookkeeping structure visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right Vault-ledger model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M11_L5") {
