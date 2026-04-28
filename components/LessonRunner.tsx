@@ -1863,6 +1863,7 @@ export default function LessonRunner({
         lessonId === "A1_L3" ||
         lessonId === "A1_L4" ||
         lessonId === "A1_L5" ||
+        lessonId === "A1_L6" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9119,6 +9120,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A1_L6") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a1-l6-event-board",
+                badge: "Event board",
+                title: "Use several clues before naming the event",
+                scenario:
+                  "The particle-event analysis board shows the same event with two competing explanations. One trainee wants to decide from one dramatic particle alone, another keeps mixing decay and scattering as if they were the same event story, and a third ignores the conservation and interaction clues once they have a quick guess.",
+                prompt: "Pin the note that keeps the event analysis accurate.",
+                options: [
+                  {
+                    value: "multi-clue-event-note",
+                    label: "Start from particle identity, decide whether the event looks more like decay or scattering, then use the interaction clue and the conservation checks together before choosing the best explanation.",
+                    feedback:
+                      "Exactly. That keeps the full event-analysis method in play.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "dramatic-particle-note",
+                    label: "Choose the explanation from the most dramatic particle on the board first, because once one standout particle is recognized the rest of the event usually falls into place on its own.",
+                    feedback:
+                      "That would rebuild the one-particle shortcut.",
+                  },
+                  {
+                    value: "story-type-optional-note",
+                    label: "Treat decay and scattering mainly as labels that can be cleaned up later, because the particle names usually matter more than the overall event story.",
+                    feedback:
+                      "That would hide an event-type clue the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads particle events through several matching clues together.",
+                retryLabel: "That note would leave a main A1_L6 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a1-l6-fix-ideas",
+                  badge: "Case repair",
+                  title: "Repair the one-clue event guess",
+                  scenario:
+                    "One trainee keeps deciding from one standout particle, while another knows the particle list but keeps ignoring whether the whole story is a decay event or a scattering event before approving an explanation.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-multi-clue-casework",
+                      label: "Repair both habits together: identify the particles, classify the overall event story as decay or scattering, and then use the interaction clue plus conservation checks to confirm the best explanation.",
+                      feedback:
+                        "Exactly. That restores the full event-analysis workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-particle-list-only",
+                      label: "Repair the confusion by naming the particles more carefully first, because once the particle list is right the event type and conservation checks usually become secondary.",
+                      feedback:
+                        "That would keep the one-clue shortcut alive in a new form.",
+                    },
+                    {
+                      value: "repair-story-label-only",
+                      label: "Repair the confusion by focusing on whether the event is decay or scattering first, because once that label is chosen the particle identity and conservation details usually matter less.",
+                      feedback:
+                        "That would swap one oversimplified shortcut for another.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats event analysis as several linked checks.",
+                  retryLabel: "That would leave a main A1_L6 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a1-l6-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line event-analysis rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop choosing a particle-event explanation from one guess alone.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "event-analysis-anchor",
+                      label: "The best particle-event explanation is the one supported by particle identity, event type, interaction clue, and conservation checks together.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "identity-anchor-only",
+                      label: "The main idea is that once the key particle is recognized, the right event explanation usually follows automatically from that identity alone.",
+                      feedback:
+                        "That line rebuilds the one-dramatic-particle shortcut.",
+                    },
+                    {
+                      value: "story-anchor-only",
+                      label: "The main idea is mostly to tell decay from scattering, because once the event story is named the interaction and conservation details usually become secondary.",
+                      feedback:
+                        "That line breaks the multi-clue rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right event-analysis rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a1-l6-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the event-analysis vocabulary board",
+                  scenario:
+                    "The crew keeps mixing particle identity, decay, scattering, interaction clue, conservation check, and best explanation until every answer sounds like one vague 'it seems right' judgment.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a1-l6",
+                      label: "Use particle identity for what appears before and after, decay or scattering for the event story, interaction clue for the family hint, and conservation check for the balancing test that supports the final explanation.",
+                      feedback:
+                        "Exactly. That keeps the event-analysis terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-particle-does-most",
+                      label: "Use particle identity as the main word for almost the whole topic, because once students know the particles the event story and conservation checks usually become secondary.",
+                      feedback:
+                        "That would hard-wire the one-clue shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-story-does-most",
+                      label: "Use decay or scattering as the main word for almost the whole topic, because once students have the event label the particle and conservation details usually matter less.",
+                      feedback:
+                        "That would hide the multi-clue method the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the event-analysis terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a1-l6-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they lock the explanation",
+                  scenario:
+                    "The trainee analyst is about to lock in an explanation from one eye-catching particle without first checking whether the whole event looks like a decay or a scattering process or whether the rest of the clues agree.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "identity-story-clue-ledger-then-choose",
+                      label: "Start by naming the particles before and after, then decide whether the whole story looks more like decay or scattering, then use the interaction clue and conservation checks, and only afterward choose the best explanation.",
+                      feedback:
+                        "Exactly. That gives the analyst the right multi-clue workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "standout-particle-then-check",
+                      label: "Start from the most dramatic particle first and only test the other clues if the first guess feels shaky, because a standout particle usually tells the story fast enough.",
+                      feedback:
+                        "That would send the analyst back into the one-particle shortcut.",
+                    },
+                    {
+                      value: "event-label-then-fit-details",
+                      label: "Start by choosing decay or scattering from the general look of the diagram, because once the story label is chosen the particle identity and conservation details usually fit themselves afterward.",
+                      feedback:
+                        "That would send the analyst back into the label-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean event-analysis method.",
+                  retryLabel: "That would send the analyst back into a A1_L6 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a1-l6-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-clue and one-label shortcuts",
+                  scenario:
+                    "One crew member keeps deciding from one dramatic particle, while another keeps deciding from a fast decay-versus-scattering label before checking whether the rest of the clues agree.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "event-analysis-trap-warning",
+                      label: "Do not choose the explanation from one dramatic clue alone. Use particle identity, event story, interaction clue, and conservation checks together before you approve the interpretation.",
+                      feedback:
+                        "Exactly. That warning blocks the main A1_L6 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "particle-warning-only",
+                      label: "Warn mainly against the one-particle habit, because once students stop that they usually stop making fast event-label guesses on their own.",
+                      feedback:
+                        "That would leave the one-label shortcut too alive.",
+                    },
+                    {
+                      value: "story-warning-only",
+                      label: "Warn mainly against the fast event-label habit, because once students slow down on decay versus scattering they usually stop overvaluing one standout particle on their own.",
+                      feedback:
+                        "That would leave the one-particle shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now treats event interpretation as a multi-clue decision.",
+                  retryLabel: "That warning would leave a main A1_L6 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a1-l6-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps several clues working together",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the best particle-event explanation should be supported by more than one clue.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "case-file-analogy",
+                      label: "Think of the event like a case file: the particle list, the event story, the interaction clue, and the conservation ledger are all evidence cards, and the safest explanation is the one the whole file supports together.",
+                      feedback:
+                        "Exactly. That keeps the several-clue method visible without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "star-witness-analogy",
+                      label: "Think of the event mainly like a case with one star witness, because once that one dramatic clue is trusted the rest of the evidence usually becomes less important.",
+                      feedback:
+                        "That would rebuild the one-dramatic-particle shortcut.",
+                    },
+                    {
+                      value: "single-label-analogy",
+                      label: "Think of the event mainly like stamping one label on a folder, because once students decide decay or scattering the rest of the clues usually become supporting decoration.",
+                      feedback:
+                        "That would rebuild the one-label shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the event-analysis evidence working together.",
+                  retryLabel: "That analogy would pull the lesson away from the right multi-clue model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A1_L5") {
