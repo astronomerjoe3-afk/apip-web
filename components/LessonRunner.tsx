@@ -571,6 +571,248 @@ function getA4ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A4_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a4-l4-collision-ledger",
+        badge: "Collision ledger",
+        title: "Check the momentum ledger before you name the impact",
+        scenario:
+          "The collision board shows before-and-after totals, impulse readouts, and an energy comparison panel. One trainee wants to guess the collision type from one dramatic outcome, another jumps straight to energy language, and a third forgets that momentum conservation belongs to the full system ledger first.",
+        prompt: "Pin the note that keeps the impact analysis safe.",
+        options: [
+          {
+            value: "momentum-first-ledger-note",
+            label: "Start with the full-system momentum totals before and after, use impulse for the momentum change of an object during the interaction, and only then use kinetic-energy behavior to decide whether the collision is elastic or inelastic.",
+            feedback:
+              "Exactly. That keeps the collision reasoning in the right order.",
+            isCorrect: true,
+          },
+          {
+            value: "energy-label-first-note",
+            label: "Start by asking whether the collision looks elastic or inelastic, because once the energy-style label is chosen the momentum details usually become easier to fit afterward.",
+            feedback:
+              "That would rebuild the energy-first shortcut.",
+          },
+          {
+            value: "single-object-speed-note",
+            label: "Start from the most obvious speed change in one object, because the most dramatic visible outcome usually tells you the important collision story without a full ledger.",
+            feedback:
+              "That would rebuild the one-outcome shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now starts with momentum bookkeeping instead of impact guessing.",
+        retryLabel: "That note would leave a main A4_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a4-l4-fix-ideas",
+          badge: "Impact repair",
+          title: "Repair the energy-first and one-outcome shortcuts",
+          scenario:
+            "One analyst keeps naming elastic versus inelastic too early, while another keeps deciding the whole event from one object's change instead of checking the full before-and-after system ledger.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-collision-ledger-order",
+              label: "Repair both habits together: secure the total system momentum ledger first, use impulse only as the momentum-change tool, and leave elastic versus inelastic classification for the later energy comparison step.",
+              feedback:
+                "Exactly. That restores the right collision-analysis workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-energy-language-first",
+              label: "Repair the confusion by teaching the elastic versus inelastic labels more strongly first, because once students trust the energy wording they usually rebuild the momentum story correctly afterward.",
+              feedback:
+                "That would keep the energy-first shortcut alive.",
+            },
+            {
+              value: "repair-most-dramatic-object-first",
+              label: "Repair the confusion by focusing on the object with the clearest visible change first, because once that story is clear the system totals usually become mostly obvious later.",
+              feedback:
+                "That would keep the one-outcome shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts with the collision ledger instead of a shortcut label.",
+          retryLabel: "That would leave a main A4_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a4-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line collision-ledger rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop jumping straight to elastic-or-inelastic language before the momentum bookkeeping is secure.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a4-l4-anchor",
+              label: "Collision reasoning is strongest when momentum bookkeeping comes before energy-style shortcuts.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "energy-anchor-first",
+              label: "The main idea is mostly that collisions should be named by their energy outcome first, because once the right label is chosen the bookkeeping usually becomes secondary.",
+              feedback:
+                "That would rebuild the energy-first shortcut.",
+            },
+            {
+              value: "impulse-anchor-only",
+              label: "The main idea is mostly that impulse answers collision questions, because once the force-time interaction is mentioned the system momentum ledger usually becomes secondary.",
+              feedback:
+                "That would flatten the full collision workflow too far.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right collision-ledger rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a4-l4-technical-words",
+          badge: "Term desk",
+          title: "Clean up the collision vocabulary board",
+          scenario:
+            "The crew keeps mixing momentum, impulse, elastic, and inelastic until every impact answer sounds like one vague crash story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a4-l4",
+              label: "Use momentum for the before-and-after system ledger, impulse for the momentum change during the interaction, and elastic or inelastic only after the kinetic-energy comparison has been checked.",
+              feedback:
+                "Exactly. That keeps the collision terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-energy-does-most",
+              label: "Use elastic and inelastic as the main words for almost the whole topic, because once students know the label the momentum and impulse details usually matter less.",
+              feedback:
+                "That would scramble the collision terms into the energy-first shortcut.",
+            },
+            {
+              value: "term-board-impulse-does-most",
+              label: "Use impulse as the main word for almost the whole topic, because once students know there was a force-time interaction the momentum and energy bookkeeping usually become secondary.",
+              feedback:
+                "That would weaken the distinct-role structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the collision terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a4-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they label the collision",
+          scenario:
+            "The trainee analyst is about to call the event elastic or inelastic before checking the total momentum ledger and before deciding where impulse actually belongs in the reasoning.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "secure-ledger-before-label",
+              label: "Start by securing the total momentum before-and-after ledger for the full system, use impulse to track a momentum change during the interaction, and only then classify the collision with the energy comparison.",
+              feedback:
+                "Exactly. That gives the analyst the right collision workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "label-then-backfill-ledger",
+              label: "Start from the likely elastic or inelastic label first, because once the event type feels right the momentum totals usually become mostly a backfill step.",
+              feedback:
+                "That would send the analyst back into the energy-first shortcut.",
+            },
+            {
+              value: "follow-one-object-story",
+              label: "Start by following the object with the clearest speed change first, because once that object's story is secure the rest of the system usually explains itself.",
+              feedback:
+                "That would send the analyst back into the one-outcome shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean ledger-first method.",
+          retryLabel: "That would send the analyst back into a A4_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a4-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the label-first collision shortcut",
+          scenario:
+            "One crew member keeps deciding the event from the label elastic or inelastic too early, while another keeps deciding from one dramatic object outcome instead of the whole-system ledger.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "collision-trap-warning",
+              label: "Do not label the collision from one visible outcome or from energy language first. Secure the full-system momentum ledger, use impulse for momentum change, and only then use kinetic-energy behavior for the elastic or inelastic decision.",
+              feedback:
+                "Exactly. That warning blocks the main A4_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "energy-warning-only",
+              label: "Warn mainly against using energy labels too early, because once students avoid that they usually stop over-trusting one dramatic object outcome on their own.",
+              feedback:
+                "That would leave the one-outcome shortcut too alive.",
+            },
+            {
+              value: "single-object-warning-only",
+              label: "Warn mainly against trusting one dramatic object outcome, because once students stop that they usually put the momentum and energy steps in the right order on their own.",
+              feedback:
+                "That would leave the energy-first shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the ledger secure before the label.",
+          retryLabel: "That warning would leave a main A4_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a4-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the ledger order visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why collision analysis should start with the full before-and-after ledger, then move to the later energy-style classification.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "warehouse-audit-analogy",
+              label: "Think of the collision like a warehouse audit: first confirm the total cargo count before and after for the whole system, then separately check what condition the cargo is left in. The count ledger comes before the condition label.",
+              feedback:
+                "Exactly. That keeps the momentum-first order visible without flattening the physics.",
+              isCorrect: true,
+            },
+            {
+              value: "damage-label-analogy",
+              label: "Think of the collision mainly like labeling whether the cargo looks damaged or not, because once that condition label is chosen the bookkeeping usually becomes secondary.",
+              feedback:
+                "That would rebuild the energy-first shortcut.",
+            },
+            {
+              value: "single-box-analogy",
+              label: "Think of the collision mainly by following the box with the biggest visible change, because once that one story is clear the total system picture usually becomes secondary.",
+              feedback:
+                "That would rebuild the one-outcome shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the ledger-first method visible.",
+          retryLabel: "That analogy would pull the lesson away from the right collision-ledger model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A4_L3") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
