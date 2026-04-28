@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M9_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m9-l4-route-resistance-board",
+                badge: "Route board",
+                title: "Change the route first, then predict the current response",
+                scenario:
+                  "The Resistance Route board shows one supply feeding different conductor routes. One trainee keeps blaming the source whenever the current changes, another notices the route gets longer but ignores the width, and a third treats resistance as though it belongs only to special resistor symbols rather than to the whole path property.",
+                prompt: "Pin the note that keeps the route-resistance story accurate.",
+                options: [
+                  {
+                    value: "route-property-note",
+                    label: "Put the resistance story on the route: for the same supply, longer paths increase resistance, wider paths reduce resistance, and material matters too. The current changes as a response to that route property.",
+                    feedback:
+                      "Exactly. That keeps the cause on the route and the current as the result.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "source-strength-note",
+                    label: "Treat the changing current as a sign that the source is giving out different amounts of current to each route, because the supply is the part that really controls the flow strength.",
+                    feedback:
+                      "That moves the cause onto the source and hides the actual route-property story.",
+                  },
+                  {
+                    value: "length-only-note",
+                    label: "Treat resistance mainly as a length issue, because once the path is longer the width and material details usually matter much less for predicting the current.",
+                    feedback:
+                      "That keeps part of the story but drops two other route factors the lesson wants visible.",
+                  },
+                ],
+                successLabel: "Pinned. The room now starts with route properties before current response.",
+                retryLabel: "That note would leave a main M9_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m9-l4-fix-ideas",
+                  badge: "Route repair",
+                  title: "Repair the source-blame shortcut",
+                  scenario:
+                    "One trainee keeps saying the supply causes every current change directly, while another treats only route length as important and shrugs off width and material as optional detail.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-route-factors",
+                      label: "Repair both ideas together: resistance is a property of the route or component, and it depends on material and geometry together. For the same supply, changing length, cross-sectional area, or material changes the current response.",
+                      feedback:
+                        "Exactly. That restores the route-property story and keeps all three factors visible.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-stronger-source",
+                      label: "Repair the confusion by saying the source still matters most, because resistance mainly decides small differences after the supply has already determined the main current level.",
+                      feedback:
+                        "That would keep the source-blame shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-length-alone",
+                      label: "Repair the confusion by saying route length is the main resistance factor to learn first, because width and material usually make the same kind of difference in practice.",
+                      feedback:
+                        "That would keep the width-and-material shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats resistance as a full route property.",
+                  retryLabel: "That would leave a main M9_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m9-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line route-resistance rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating resistance like a hidden supply setting or a one-factor path label.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "route-anchor",
+                      label: "Resistance is a property of the route or component. For the same material, longer paths raise resistance and wider paths lower it, while material changes can alter the current response too.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "source-anchor",
+                      label: "Resistance mainly tells you how strongly the source decides the current, so the core idea is still to picture the supply as the main cause of every flow change.",
+                      feedback:
+                        "That would build the wrong source-centered model into the anchor sentence.",
+                    },
+                    {
+                      value: "length-anchor",
+                      label: "The main idea is that longer wires give higher resistance, because once students know that pattern the width and material details usually sort themselves out later.",
+                      feedback:
+                        "That would shrink the lesson to one factor instead of the full route-property idea.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right route-resistance rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m9-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the route-property vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up resistance, current, supply, length, width, and material until every circuit change sounds like just another source-strength change.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-route-property",
+                      label: "Use resistance for the route or component property, current for the resulting charge flow, length and cross-sectional area for geometry factors, and material for the substance factor that also affects resistance.",
+                      feedback:
+                        "Exactly. That keeps route properties separate from the current response.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-source-control",
+                      label: "Use resistance and source strength almost interchangeably at first, because students usually understand circuits faster when every current change is described as a change in electrical push.",
+                      feedback:
+                        "That would scramble the exact distinction this lesson is trying to teach.",
+                    },
+                    {
+                      value: "term-board-wire-length",
+                      label: "Use resistance mainly for long-wire difficulty, because width and material can usually be treated as side cases after the main path-length pattern is learned.",
+                      feedback:
+                        "That would hard-wire the one-factor shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the route-property terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m9-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they compare the route designs",
+                  scenario:
+                    "The trainee analyst is about to blame the supply for the current difference before checking which route is longer, wider, or made from a different material.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "route-factors-first",
+                      label: "Hold the supply story steady first, then compare length, cross-sectional area, and material on the route before deciding how the resistance change should affect the current.",
+                      feedback:
+                        "Exactly. That gives the analyst the right route-property workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "source-first",
+                      label: "Start with the supply, because current is mainly what the source chooses to deliver and the route details mostly explain minor correction effects afterward.",
+                      feedback:
+                        "That would send the analyst straight into the wrong source-blame shortcut.",
+                    },
+                    {
+                      value: "length-first-only",
+                      label: "Start with whichever route is longer, because that is usually enough to settle the resistance question before width and material are considered.",
+                      feedback:
+                        "That would send the analyst into the wrong one-factor shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean route-first method.",
+                  retryLabel: "That would send the analyst back into a M9_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m9-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the source-blame and one-factor shortcuts",
+                  scenario:
+                    "One crew member keeps saying current changes prove the source changed its output, while another keeps using only route length and forgetting that width and material also belong in the resistance story.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "route-trap-warning",
+                      label: "Do not move the resistance story onto the source, and do not reduce the route story to one factor. Resistance belongs to the route or component and depends on geometry and material together.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "source-warning-only",
+                      label: "Warn mainly that the source can stay the same, because once that is clear students usually remember the different route factors on their own.",
+                      feedback:
+                        "That would leave the one-factor shortcut mostly alive.",
+                    },
+                    {
+                      value: "length-warning-only",
+                      label: "Warn mainly that width and material matter too, because once that is added to the story students usually stop blaming the source for current changes.",
+                      feedback:
+                        "That would leave the source-blame shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps route properties and current response in the right places.",
+                  retryLabel: "That warning would leave a main M9_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m9-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps route difficulty visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the same supply can drive different currents when the route itself changes.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "corridor-analogy",
+                      label: "Think of the route like a corridor: a longer corridor is harder to move through, a wider corridor is easier to move through, and the floor material can also help or hinder movement. The source is the same, but the route difficulty changes the flow response.",
+                      feedback:
+                        "Exactly. That keeps the difficulty story on the route without turning it into a supply-change problem.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "battery-pressure-analogy",
+                      label: "Think mainly of the source pushing harder or softer, because current changes mostly tell you how much electrical drive the battery decided to send into the route.",
+                      feedback:
+                        "That would rebuild the source-blame shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "long-wire-only-analogy",
+                      label: "Think mainly of a long tunnel, because route width and material make the same kind of effect as length and can usually be folded into that one picture without separate attention.",
+                      feedback:
+                        "That would rebuild the one-factor shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps route difficulty and current response in the right relationship.",
+                  retryLabel: "That analogy would pull the lesson away from the right route-resistance model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M9_L3") {
