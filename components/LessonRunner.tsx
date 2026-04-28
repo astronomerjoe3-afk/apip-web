@@ -1865,6 +1865,7 @@ export default function LessonRunner({
         lessonId === "A1_L5" ||
         lessonId === "A1_L6" ||
         lessonId === "A2_L1" ||
+        lessonId === "A2_L2" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9121,6 +9122,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A2_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a2-l2-spectral-barcode",
+                badge: "Spectral barcode",
+                title: "Read the lines as evidence for fixed energy gaps",
+                scenario:
+                  "The spectral-barcode board compares an emission view, an absorption view, and a second atom with a different pattern. One trainee thinks the lines are just decorative colors, another treats emission and absorption as unrelated stories, and a third expects all atoms to share basically the same barcode.",
+                prompt: "Pin the note that keeps the spectral model accurate.",
+                options: [
+                  {
+                    value: "line-evidence-note",
+                    label: "Emission and absorption are opposite views of the same allowed gaps, the lines stay discrete because the levels are discrete, and different atoms make different barcodes because their gap patterns differ.",
+                    feedback:
+                      "Exactly. That keeps the line pattern tied directly to quantized levels.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "color-decoration-note",
+                    label: "Treat the lines mainly as color decoration, because once students know atoms emit light the exact line pattern usually matters less than the general glow.",
+                    feedback:
+                      "That would hide the line-as-evidence idea the lesson actually needs.",
+                  },
+                  {
+                    value: "same-barcode-note",
+                    label: "Assume most atoms should share nearly the same barcode, because emission and absorption mainly show the same light process rather than anything atom-specific.",
+                    feedback:
+                      "That would rebuild the same-barcode shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads spectral lines as evidence for fixed level spacings.",
+                retryLabel: "That note would leave a main A2_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a2-l2-fix-ideas",
+                  badge: "Spectrum repair",
+                  title: "Repair the decoration and same-barcode shortcuts",
+                  scenario:
+                    "One trainee keeps treating spectral lines like colorful extras with no real link to the ladder, while another keeps acting as if two different atoms should produce nearly the same set of lines anyway.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-barcode-evidence-model",
+                      label: "Repair both habits together: tie each line to an allowed gap, treat emission and absorption as opposite views of those same gaps, and use the overall pattern as atom-specific evidence.",
+                      feedback:
+                        "Exactly. That restores the spectral-barcode model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-more-lines-more-energy",
+                      label: "Repair the confusion by focusing on how much light appears overall, because once students know brighter spectra mean more energy the specific line pattern usually makes sense later.",
+                      feedback:
+                        "That would keep the line-evidence idea too weak.",
+                    },
+                    {
+                      value: "repair-emission-first-only",
+                      label: "Repair the confusion by sticking with emission only at first, because once students trust emitted lines the missing absorption lines usually become secondary.",
+                      feedback:
+                        "That would leave the opposite-view connection underdeveloped.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats line patterns as evidence, not decoration.",
+                  retryLabel: "That would leave a main A2_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a2-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line spectrum rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop talking about spectra like smooth rainbow output.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "spectrum-anchor",
+                      label: "Line spectra are direct evidence that atomic energy levels are quantized, because only specific gaps produce specific emitted or absorbed lines.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rainbow-anchor",
+                      label: "The main idea is mostly that atoms can make colorful light, because once students accept that, the precise line pattern usually becomes a later detail.",
+                      feedback:
+                        "That line rebuilds the decorative-color shortcut.",
+                    },
+                    {
+                      value: "emission-anchor-only",
+                      label: "The main idea is mostly about emitted lines, because absorption is just a less useful version of the same thing and usually does not add much evidence.",
+                      feedback:
+                        "That line breaks the opposite-view rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right spectrum rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a2-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the spectral vocabulary board",
+                  scenario:
+                    "The crew keeps mixing emission line, absorption line, barcode, gap, and atom fingerprint until every answer sounds like one vague 'light looks different somehow' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a2-l2",
+                      label: "Use emission line for light produced by a downward transition, absorption line for a missing part linked to the same gap in reverse, barcode for the whole atom-specific pattern, and gap for the level spacing that sets the line.",
+                      feedback:
+                        "Exactly. That keeps the spectral terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-color-does-most",
+                      label: "Use color as the main word for almost the whole topic, because once students can describe what they see the named spectral terms usually become secondary.",
+                      feedback:
+                        "That would hard-wire the decorative-color shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-light-source-does-most",
+                      label: "Use atom type mainly as the light-source label, because once students know which atom produced the light the line and gap language usually matters less.",
+                      feedback:
+                        "That would weaken the fingerprint logic the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the spectral terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a2-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they interpret the pattern",
+                  scenario:
+                    "The trainee analyst is about to describe the spectrum as just a set of colors without first checking whether a line is emitted or missing or whether the same gap could explain both views.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "line-gap-view-then-pattern",
+                      label: "Start by deciding whether the line is emitted or missing, match it to the gap responsible for that transition, and then use the whole pattern as evidence for the atom’s discrete level spacings.",
+                      feedback:
+                        "Exactly. That gives the analyst the right spectral-barcode method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "color-first-then-atom",
+                      label: "Start from the visible color first and then name the atom, because once the general shade is recognized the exact line meaning usually becomes secondary.",
+                      feedback:
+                        "That would send the analyst back into the decorative-color shortcut.",
+                    },
+                    {
+                      value: "emission-only-then-ignore-absorption",
+                      label: "Start from emitted lines only, because once those are understood the missing absorption lines usually do not need equal attention.",
+                      feedback:
+                        "That would send the analyst back into the one-view shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean line-to-gap method.",
+                  retryLabel: "That would send the analyst back into a A2_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a2-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the rainbow and one-view shortcuts",
+                  scenario:
+                    "One crew member keeps treating line spectra like colorful decoration, while another keeps teaching emission and absorption as separate topics instead of opposite views of the same level gaps.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "spectrum-trap-warning",
+                      label: "Do not flatten a line spectrum into a general rainbow story. The lines stay discrete because the levels are discrete, and emission and absorption are opposite views of the same allowed gaps.",
+                      feedback:
+                        "Exactly. That warning blocks the main A2_L2 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "rainbow-warning-only",
+                      label: "Warn mainly against the rainbow habit, because once students stop that they usually connect emission and absorption on their own.",
+                      feedback:
+                        "That would leave the one-view shortcut too alive.",
+                    },
+                    {
+                      value: "one-view-warning-only",
+                      label: "Warn mainly against separating emission and absorption, because once students connect those views they usually stop treating the lines like decoration on their own.",
+                      feedback:
+                        "That would leave the rainbow shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now treats line spectra as real evidence.",
+                  retryLabel: "That warning would leave a main A2_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a2-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the barcode evidence visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why line spectra can identify an atom’s allowed level spacings.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "barcode-analogy",
+                      label: "Think of the spectrum like a barcode: each atom has its own pattern of allowed gaps, so the emitted or missing lines make a recognizable fingerprint rather than a smooth smear.",
+                      feedback:
+                        "Exactly. That keeps the evidence value visible without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "paint-strip-analogy",
+                      label: "Think of the spectrum more like a paint strip, because the main point is that atoms can show different colors even if the exact spacing pattern is not very important.",
+                      feedback:
+                        "That would rebuild the decorative-color shortcut.",
+                    },
+                    {
+                      value: "single-bulb-analogy",
+                      label: "Think of the spectrum mainly like one bulb seen in two modes, because emission and absorption matter more than the detailed pattern made by each atom.",
+                      feedback:
+                        "That would weaken the atom-specific barcode idea the lesson needs.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the spectral evidence picture intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right spectral-barcode model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A2_L1") {
