@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M12_L5") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m12-l5-application-board",
+                badge: "Application board",
+                title: "Choose the isotope by the task, not by the label",
+                scenario:
+                  "The Radioisotope applications board compares tracing, medical imaging, treatment, and industrial checking. One trainee keeps choosing the source with the strongest emission, another always picks the longest half-life so the source lasts longer, and a third forgets to keep exposure control in the same decision.",
+                prompt: "Pin the note that keeps the isotope choice physical.",
+                options: [
+                  {
+                    value: "job-match-note",
+                    label: "Start with the task need, then match both emission type and half-life to that job, while keeping exposure control in the same choice.",
+                    feedback:
+                      "Exactly. That keeps the application choice tied to physics rather than guesswork.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "strongest-source-note",
+                    label: "Choose the source with the strongest radiation first, because the most penetrating or energetic isotope is usually the most useful across different jobs.",
+                    feedback:
+                      "That would rebuild the wrong strongest-source shortcut.",
+                  },
+                  {
+                    value: "longest-half-life-note",
+                    label: "Choose the source with the longest half-life first, because the isotope that lasts longest usually gives the most practical value in medicine and industry.",
+                    feedback:
+                      "That would rebuild the wrong longest-lasting-source shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now chooses isotopes by matching properties to the task.",
+                retryLabel: "That note would leave a main M12_L5 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m12-l5-fix-ideas",
+                  badge: "Selection repair",
+                  title: "Repair the strongest-source and longest-half-life shortcuts",
+                  scenario:
+                    "One trainee keeps picking whichever isotope sounds most powerful, while another keeps picking whichever one lasts longest, even when the job needs a shorter half-life or a different emission type.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-job-match",
+                      label: "Repair both habits together: radioisotopes are chosen by job requirements. Match the emission type and the half-life to the task, then keep exposure control inside the same decision.",
+                      feedback:
+                        "Exactly. That restores the proper application-selection rule.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-power-first",
+                      label: "Repair the confusion by ranking the sources from weakest to strongest first, because once students know the power order they usually make sensible application choices afterward.",
+                      feedback:
+                        "That would keep the strongest-source shortcut alive.",
+                    },
+                    {
+                      value: "repair-duration-first",
+                      label: "Repair the confusion by ranking sources by half-life first, because once students know how long each isotope lasts they can usually infer the best application from that single property.",
+                      feedback:
+                        "That would keep the one-property shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats isotope choice as a matched-properties decision.",
+                  retryLabel: "That would leave a main M12_L5 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m12-l5-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the application-selection rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop choosing radioisotopes by name, strength, or duration alone.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "application-anchor",
+                      label: "Different applications need different half-lives and emissions, radioisotopes are chosen by matching properties to the task, and usefulness must be balanced with exposure control.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "half-life-anchor-only",
+                      label: "The main idea is that half-life is the key application property, because once students know how long the source lasts the best use usually becomes obvious.",
+                      feedback:
+                        "That line collapses the selection story into one property.",
+                    },
+                    {
+                      value: "emission-anchor-only",
+                      label: "The main idea is that the emission type decides the application, because penetration matters more than all the other source details in practice.",
+                      feedback:
+                        "That line collapses the selection story into one property.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right isotope-selection rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m12-l5-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the applications vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up half-life, emission type, tracer, imaging, treatment, and industrial checking until every job sounds like it needs the same kind of source.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-app-match",
+                      label: "Use half-life for how long the source remains useful, emission type for how the radiation behaves, and application words like tracing, imaging, treatment, or industrial checking for the job that those properties must match.",
+                      feedback:
+                        "Exactly. That keeps the application terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-half-life-does-most",
+                      label: "Use half-life as the main application word for almost the whole topic, because once students know the duration question the rest of the source choice is mostly detail.",
+                      feedback:
+                        "That would hard-wire the one-property shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-radiation-does-most",
+                      label: "Use emission type as the main application word for almost the whole topic, because once students know whether the source gives alpha, beta, or gamma the rest of the choice is mostly detail.",
+                      feedback:
+                        "That would hard-wire the one-property shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the application terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m12-l5-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they choose the isotope",
+                  scenario:
+                    "The trainee analyst is about to pick a radioisotope from memory without first naming what the job actually needs in duration, radiation behaviour, and safety control.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "task-then-properties",
+                      label: "Start with the job, name the required penetration or detectability, add the useful time scale, and only then compare isotopes by emission type, half-life, and exposure control.",
+                      feedback:
+                        "Exactly. That gives the analyst the right application-selection method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "name-source-first",
+                      label: "Start by naming the most familiar isotope from memory, because once the source name is chosen the reasons for using it can usually be filled in afterward.",
+                      feedback:
+                        "That would send the analyst back into name-first guessing.",
+                    },
+                    {
+                      value: "safety-last-only",
+                      label: "Start by finding the most useful source for the job and leave the exposure and handling issues until the end, because safety is mainly a later procedural check.",
+                      feedback:
+                        "That would split usefulness and control when this lesson keeps them linked.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean isotope-selection method.",
+                  retryLabel: "That would send the analyst back into a M12_L5 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m12-l5-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-property and safety-last shortcuts",
+                  scenario:
+                    "One crew member keeps choosing sources by a single property, while another keeps talking as if application usefulness can be decided first and exposure control can be patched on later.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "application-trap-warning",
+                      label: "Do not choose a radioisotope by half-life alone or emission type alone, and do not separate usefulness from exposure control. Match the source properties to the job as one linked decision.",
+                      feedback:
+                        "Exactly. That warning blocks the main M12_L5 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "property-warning-only",
+                      label: "Warn mainly against choosing by one property, because once students stop that habit they usually become careful enough about safety on their own.",
+                      feedback:
+                        "That would leave the safety-last shortcut mostly alive.",
+                    },
+                    {
+                      value: "safety-warning-only",
+                      label: "Warn mainly against forgetting exposure control, because once students become cautious enough they usually make sensible source-property choices on their own.",
+                      feedback:
+                        "That would leave the one-property shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps source choice and control linked.",
+                  retryLabel: "That warning would leave a main M12_L5 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m12-l5-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps matching and control together",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture isotope selection as matching properties to a job, without turning it into a one-number ranking game.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "tool-kit-analogy",
+                      label: "Think of radioisotope choice like choosing a specialist tool: you match the job to the tool's reach and working time, and you still keep the safety rules attached to that choice.",
+                      feedback:
+                        "Exactly. That keeps job matching and control linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "biggest-tool-analogy",
+                      label: "Think of it like always taking the most powerful tool in the kit, because the strongest option usually gives the best chance of solving whatever job appears.",
+                      feedback:
+                        "That would rebuild the strongest-source shortcut.",
+                    },
+                    {
+                      value: "longest-tool-analogy",
+                      label: "Think of it like always taking the tool that lasts the longest, because durability is usually the best overall clue to what will be most useful.",
+                      feedback:
+                        "That would rebuild the longest-half-life shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps matching and control together.",
+                  retryLabel: "That analogy would pull the lesson away from the right Radioisotope applications model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M12_L4") {
