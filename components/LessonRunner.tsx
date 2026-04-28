@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M12_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m12-l2-chain-board",
+                badge: "Chain board",
+                title: "Read the first split as a next-step neutron story",
+                scenario:
+                  "The Fission chain-reaction board shows one heavy nucleus splitting, several neutrons leaving, and two possible next scenes. One trainee treats the split as a one-off event, another counts the energy released but ignores what the neutrons do next, and a third talks about control as if it were an optional engineering detail after the physics is finished.",
+                prompt: "Pin the note that keeps the chain-reaction story accurate.",
+                options: [
+                  {
+                    value: "neutrons-next-control-note",
+                    label: "Read the first split, count the released neutrons, and then ask what those neutrons do next. A chain reaction grows when enough of them trigger further fission, and control matters because reactor design changes that next-step neutron outcome.",
+                    feedback:
+                      "Exactly. That keeps split, released neutrons, growth, and control on one board.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "one-off-split-note",
+                    label: "Treat the important physics as the first split only, because once the heavy nucleus has broken apart the later neutron steps mainly belong to engineering rather than the real fission idea.",
+                    feedback:
+                      "That would rebuild the wrong one-off-split shortcut.",
+                  },
+                  {
+                    value: "energy-only-note",
+                    label: "Treat the released neutrons mainly as carriers of extra energy, because the key message is just that fission gives out energy and the later chain behaviour is a secondary application detail.",
+                    feedback:
+                      "That would rebuild the wrong energy-only shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads fission as a next-step neutron system.",
+                retryLabel: "That note would leave a main M12_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m12-l2-fix-ideas",
+                  badge: "Chain repair",
+                  title: "Repair the one-off and energy-only shortcuts",
+                  scenario:
+                    "One trainee still talks as if fission ends with the first split, while another keeps mentioning only the released energy and never asks whether the emitted neutrons can trigger more fission.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-neutron-multiplication",
+                      label: "Repair both habits together: fission can release more neutrons than it uses, and the chain reaction depends on what those neutrons do next. The energy release matters, but so does whether the reaction grows or is controlled.",
+                      feedback:
+                        "Exactly. That restores the neutron-multiplication story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-energy-focus",
+                      label: "Repair the confusion by saying the reaction chain is mainly useful because it releases a lot of energy, because once that is understood students can add the neutron details later if needed.",
+                      feedback:
+                        "That would keep the energy-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-control-later",
+                      label: "Repair the confusion by saying control belongs after the main physics, because first students only need to know that a heavy nucleus can split and release energy.",
+                      feedback:
+                        "That would keep the control-is-optional shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps neutron release and control visible together.",
+                  retryLabel: "That would leave a main M12_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m12-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line chain rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating fission as only a dramatic split with energy coming out.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "chain-anchor",
+                      label: "Fission splits a heavy nucleus into smaller nuclei. A chain reaction depends on the released neutrons causing further fission, and reactor control matters because the reaction can multiply.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "split-anchor-only",
+                      label: "The main idea is that a heavy nucleus can split into smaller nuclei and release energy, because the chain-reaction details are mainly a later application of the basic event.",
+                      feedback:
+                        "That line drops too much of the chain-reaction logic.",
+                    },
+                    {
+                      value: "control-anchor-only",
+                      label: "The main idea is that control rods stop nuclear reactions from getting dangerous, because safety is the main practical point students need to remember from fission.",
+                      feedback:
+                        "That line jumps to control without building the neutron-chain story first.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right chain-reaction rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m12-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the fission vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up fission event, released neutrons, chain reaction, and control until every explanation sounds like either one split or one big danger warning.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-chain",
+                      label: "Use fission for the split of a heavy nucleus, released neutrons for the particles that can start later steps, chain reaction for repeated further fission caused by those neutrons, and control for the reactor design choices that change how many of those neutrons keep the chain going.",
+                      feedback:
+                        "Exactly. That keeps the lesson terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-energy-first",
+                      label: "Use chain reaction mainly as another phrase for lots of energy coming out, because the neutron details usually matter less than the overall power of the process.",
+                      feedback:
+                        "That would hard-wire the energy-only shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-control-alone",
+                      label: "Use control as the main word for the whole lesson, because once students know reactors need control the exact chain details can usually be inferred.",
+                      feedback:
+                        "That would hard-wire the control-without-chain shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the fission-chain terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m12-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they judge whether the chain grows",
+                  scenario:
+                    "The trainee analyst is about to read the first fission event and call it done without checking how many neutrons were released or what fraction of them can strike more unstable nuclei.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "count-neutrons-then-next-step",
+                      label: "Start with the first split, count the released neutrons, and then ask how many of those can trigger further fission. Only after that decide whether the chain grows, stays controlled, or dies away.",
+                      feedback:
+                        "Exactly. That gives the analyst the right chain-reaction method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "energy-first-only",
+                      label: "Start with the energy released in the first split, because once the event is energetic enough the later chain behaviour is mainly a practical engineering detail.",
+                      feedback:
+                        "That would send the analyst back into the energy-only shortcut.",
+                    },
+                    {
+                      value: "control-first-only",
+                      label: "Start with whether control rods are present, because once the reactor hardware is named the details of the neutron steps usually matter less.",
+                      feedback:
+                        "That would send the analyst into the control-without-chain shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean fission-chain method.",
+                  retryLabel: "That would send the analyst back into a M12_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m12-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the one-split and control-is-extra shortcuts",
+                  scenario:
+                    "One crew member stops the explanation after the first split, while another keeps talking about control as if it were separate from the actual physics of the chain.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "chain-trap-warning",
+                      label: "Do not stop at the first split, and do not treat control as an optional extra. The lesson is about what the released neutrons do next and how design changes whether the chain multiplies or stays controlled.",
+                      feedback:
+                        "Exactly. That warning blocks the main M12_L2 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "split-warning-only",
+                      label: "Warn mainly that the first split is not the whole story, because once students stop that mistake they usually become more careful about control on their own.",
+                      feedback:
+                        "That would leave the control-is-extra shortcut mostly alive.",
+                    },
+                    {
+                      value: "control-warning-only",
+                      label: "Warn mainly that control matters, because once students see reactors need control they usually infer the neutron-chain idea for themselves.",
+                      feedback:
+                        "That would leave the one-split shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps split, neutrons, growth, and control in one story.",
+                  retryLabel: "That warning would leave a main M12_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m12-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the next-step logic visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why one fission event can lead to many more, and why control is about catching enough of the next-step triggers rather than changing the first split itself.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "spark-seed-analogy",
+                      label: "Think of one split like a seed event that throws out several sparks: the chain grows only if enough sparks land where they can start new fires, and control works by stopping enough sparks from reaching the next targets.",
+                      feedback:
+                        "Exactly. That keeps the next-step trigger logic and the control story visible together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "explosion-analogy",
+                      label: "Think of it mainly like one powerful explosion, because the important idea is the size of the energy release rather than the detailed behaviour of the particles afterward.",
+                      feedback:
+                        "That would rebuild the energy-only shortcut.",
+                    },
+                    {
+                      value: "switch-analogy",
+                      label: "Think of control like an on-off switch that simply decides whether fission happens, because that is easier than tracking released neutrons across later steps.",
+                      feedback:
+                        "That would rebuild the wrong control-without-chain shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps neutron multiplication and control visible together.",
+                  retryLabel: "That analogy would pull the lesson away from the right Fission chain-reaction model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M12_L1") {
