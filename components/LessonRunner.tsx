@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M11_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m11-l3-escape-signal-board",
+                badge: "Signal board",
+                title: "Track what leaves, what changes, and what blocks it",
+                scenario:
+                  "The Escape-signal lab switches between alpha, beta-minus, and gamma. One trainee ranks them only by penetration and forgets the nuclear count changes, another assumes the most penetrating signal must cause the biggest count change, and a third treats gamma like another particle leaving the nucleus in the same way as alpha or beta-minus.",
+                prompt: "Pin the note that keeps the decay story accurate.",
+                options: [
+                  {
+                    value: "three-processes-note",
+                    label: "Treat alpha, beta-minus, and gamma as three different decay processes: alpha changes both proton and neutron counts, beta-minus raises atomic number while mass number stays fixed, and gamma changes energy state without changing A or Z. Their shielding and penetration differences are part of the same comparison, but they do not replace the nuclear-change story.",
+                    feedback:
+                      "Exactly. That keeps count change and shielding together without blurring the processes.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "penetration-only-note",
+                    label: "Treat penetration order as the main rule, because once students know which signal travels furthest they can usually infer the rest of the nuclear story without much extra bookkeeping.",
+                    feedback:
+                      "That would flatten the lesson into the exact penetration-only shortcut it is trying to remove.",
+                  },
+                  {
+                    value: "same-signal-note",
+                    label: "Treat alpha, beta-minus, and gamma as the same basic escape signal with different strengths, because that makes the shielding comparison easier than tracking three separate nuclear processes.",
+                    feedback:
+                      "That would blur the three decay processes into one category, which is exactly what this lesson is trying to prevent.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads alpha, beta-minus, and gamma as separate processes with linked shielding clues.",
+                retryLabel: "That note would leave a main M11_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m11-l3-fix-ideas",
+                  badge: "Signal repair",
+                  title: "Repair the penetration-only and same-signal shortcuts",
+                  scenario:
+                    "One trainee still explains everything through penetration order, while another keeps collapsing alpha, beta-minus, and gamma into one generic radiation type with different strengths.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-three-processes",
+                      label: "Repair both ideas together: alpha, beta-minus, and gamma are different decay processes with different count changes and different shielding requirements. Read the nuclear change and the blocking pattern together for each one.",
+                      feedback:
+                        "Exactly. That restores the three-process model and keeps shielding in the right place.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-penetration-first",
+                      label: "Repair the confusion by saying penetration should still be the main sorting rule, because once the order from paper to thick shielding is secure students can add the count changes later if needed.",
+                      feedback:
+                        "That would keep the penetration-only shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-strength-scale",
+                      label: "Repair the confusion by saying the three signals are basically one radiation family on a strength scale, because that gives students a simpler route into the shielding comparison before the nuclear details are added.",
+                      feedback:
+                        "That would keep the same-signal shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses the right three-process decay story.",
+                  retryLabel: "That would leave a main M11_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m11-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line radiation rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop sorting radiation only by shielding and forgetting what the nucleus actually changes into.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "radiation-anchor",
+                      label: "Alpha, beta-minus, and gamma are different decay processes. Their count changes and shielding requirements differ, and gamma changes energy state without changing A or Z.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shielding-anchor",
+                      label: "The main idea is that radiation is best understood through shielding order, because once paper, metal, and thick shielding are matched up the rest of the decay story usually follows naturally.",
+                      feedback:
+                        "That would build the wrong shielding-first shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "strength-anchor",
+                      label: "The main idea is that alpha, beta-minus, and gamma are one signal family with different strengths, because the shielding differences matter more than the exact nuclear process for early understanding.",
+                      feedback:
+                        "That would build the wrong one-family shortcut into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right radiation rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m11-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the decay vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up alpha, beta-minus, gamma, penetration, shielding, and count change until every label sounds like a version of 'stronger or weaker radiation.'",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-processes",
+                      label: "Use alpha, beta-minus, and gamma as names for different decay processes; use count change for what happens to A and Z; and use shielding or penetration for how easily each signal is blocked rather than for its nuclear identity.",
+                      feedback:
+                        "Exactly. That keeps the radiation terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-penetration-main",
+                      label: "Use penetration as the main radiation term, because students usually understand the differences faster when the signals are described mostly by how far they travel.",
+                      feedback:
+                        "That would hard-wire the wrong penetration-only shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-one-family",
+                      label: "Use alpha, beta-minus, and gamma as three levels of the same signal family, because that keeps the vocabulary simple before the exact decay details are added.",
+                      feedback:
+                        "That would hard-wire the wrong one-family shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the decay terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m11-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they classify the signal",
+                  scenario:
+                    "The trainee analyst is about to decide the signal type from shielding alone, without checking what leaves the nucleus or which nuclear counts change.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "count-change-and-shielding",
+                      label: "Start by asking which decay process it is and what happens to the nuclear counts, then use the shielding and penetration pattern as a linked second check rather than the whole answer.",
+                      feedback:
+                        "Exactly. That gives the analyst the right process-first method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shielding-first-only",
+                      label: "Start with shielding, because once the blocking order is known the signal type can usually be named quickly without much nuclear bookkeeping.",
+                      feedback:
+                        "That would send the analyst back into the shielding-first shortcut.",
+                    },
+                    {
+                      value: "energy-first-only",
+                      label: "Start by assuming the most penetrating signal is the one with the biggest nuclear change, because larger effects should normally be harder to stop.",
+                      feedback:
+                        "That would send the analyst into the wrong penetration-equals-bigger-change shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean decay-classification method.",
+                  retryLabel: "That would send the analyst back into a M11_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m11-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the shielding-first and one-family shortcuts",
+                  scenario:
+                    "One crew member keeps letting shielding order decide the whole answer, while another keeps talking as if alpha, beta-minus, and gamma are just stronger and weaker versions of one signal.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "radiation-trap-warning",
+                      label: "Do not let shielding order replace the nuclear-change story, and do not collapse the three signals into one family. Alpha, beta-minus, and gamma must each keep their own process, their own count-change pattern, and their own blocking comparison.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "shielding-warning-only",
+                      label: "Warn mainly that shielding is not the whole answer, because once students stop that shortcut they usually separate the three signals more carefully on their own.",
+                      feedback:
+                        "That would leave the one-family shortcut mostly alive.",
+                    },
+                    {
+                      value: "family-warning-only",
+                      label: "Warn mainly that the three signals are not one family, because once students stop that shortcut they usually become more careful about how they use shielding order.",
+                      feedback:
+                        "That would leave the shielding-first shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps process, count change, and shielding in the right order.",
+                  retryLabel: "That warning would leave a main M11_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m11-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the three processes distinct",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why alpha, beta-minus, and gamma should not be sorted only by shielding or treated like one signal on a strength ladder.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "three-exit-analogy",
+                      label: "Think of the nucleus like a vault with three different exit events: one sends out a heavy two-plus-two packet, one swaps the internal balance so the outside signal changes the element count by one, and one releases an energy flash without changing the counts. The blocking materials then compare how each exit behaves after it leaves.",
+                      feedback:
+                        "Exactly. That keeps the three processes distinct while still leaving room for the shielding comparison.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "same-beam-analogy",
+                      label: "Think of alpha, beta-minus, and gamma like the same beam on three power settings, because that makes the shielding order much easier to remember than three different nuclear stories.",
+                      feedback:
+                        "That would rebuild the wrong one-family shortcut.",
+                    },
+                    {
+                      value: "armour-only-analogy",
+                      label: "Think of the signals mainly like arrows stopped by different armour levels, because once students know the stopping order they can normally ignore the exact count changes inside the nucleus.",
+                      feedback:
+                        "That would rebuild the wrong shielding-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the three decay processes distinct.",
+                  retryLabel: "That analogy would pull the lesson away from the right Escape-signal model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M11_L2") {
