@@ -1866,6 +1866,7 @@ export default function LessonRunner({
         lessonId === "A1_L6" ||
         lessonId === "A2_L1" ||
         lessonId === "A2_L2" ||
+        lessonId === "A2_L3" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9122,6 +9123,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A2_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a2-l3-threshold-board",
+                badge: "Threshold board",
+                title: "Separate packet grade from beam count before predicting emission",
+                scenario:
+                  "The threshold board compares a bright low-frequency beam with a dimmer above-threshold beam. One trainee thinks brighter light should always eject electrons, another treats frequency and intensity like the same dial, and a third forgets that the metal's work function sets the entry cost.",
+                prompt: "Pin the note that keeps the photoelectric model accurate.",
+                options: [
+                  {
+                    value: "threshold-frequency-note",
+                    label: "Emission depends first on whether each photon packet clears the work-function cost. Frequency sets that packet energy, while intensity mainly changes how many packets arrive each second once threshold has been crossed.",
+                    feedback:
+                      "Exactly. That keeps threshold, packet energy, and beam count in the right jobs.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "brightness-rules-note",
+                    label: "Brighter light should always eject electrons eventually, because enough total light energy can make up for low-frequency packets if the beam is intense enough.",
+                    feedback:
+                      "That would rebuild the brightness-beats-threshold shortcut.",
+                  },
+                  {
+                    value: "frequency-intensity-same-note",
+                    label: "Frequency and intensity mainly do the same kind of work, because both simply increase how much light energy reaches the surface.",
+                    feedback:
+                      "That would blur two roles the lesson needs to keep separate.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads emission through threshold logic first.",
+                retryLabel: "That note would leave a main A2_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a2-l3-fix-ideas",
+                  badge: "Threshold repair",
+                  title: "Repair the bright-beam shortcut",
+                  scenario:
+                    "One trainee keeps claiming a bright enough below-threshold beam must eventually eject electrons, while another keeps talking as if frequency and intensity are just two ways to say the same thing.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-threshold-and-rate-model",
+                      label: "Repair both habits together: check whether each photon packet clears the work function first, and only after threshold is crossed use intensity to discuss how many electrons are emitted per second.",
+                      feedback:
+                        "Exactly. That restores the threshold-versus-rate model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-more-total-energy",
+                      label: "Repair the confusion by comparing total beam energy more carefully, because once students see the brighter beam carries more overall energy they usually understand why emission should happen.",
+                      feedback:
+                        "That would keep the wrong total-energy shortcut alive.",
+                    },
+                    {
+                      value: "repair-frequency-only",
+                      label: "Repair the confusion by focusing only on frequency, because once students accept the threshold idea the intensity story usually becomes secondary enough to ignore.",
+                      feedback:
+                        "That would leave the emission-rate role underdeveloped.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps threshold and intensity in separate slots.",
+                  retryLabel: "That would leave a main A2_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a2-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line photoelectric rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating brighter light as the main condition for electron emission.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "photoelectric-anchor",
+                      label: "Photoelectric emission is governed by photon energy per packet, with intensity mainly affecting the emission rate after threshold.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brightness-anchor",
+                      label: "The main idea is mostly that stronger beams produce stronger emission, because once enough light energy arrives the threshold details usually become secondary.",
+                      feedback:
+                        "That line rebuilds the bright-beam shortcut.",
+                    },
+                    {
+                      value: "frequency-anchor-only",
+                      label: "The main idea is mostly about frequency alone, because once threshold is cleared the intensity story usually does not matter enough to mention.",
+                      feedback:
+                        "That line breaks the rate-after-threshold rule the lesson still needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right photoelectric rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a2-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the threshold vocabulary board",
+                  scenario:
+                    "The crew keeps mixing threshold frequency, intensity, work function, emission rate, and maximum kinetic energy until every answer sounds like one vague 'more light means more effect' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a2-l3",
+                      label: "Use threshold frequency for the minimum photon frequency that can cause emission, work function for the energy cost to escape, intensity for packet arrival rate, and maximum kinetic energy for the leftover energy after the cost is paid.",
+                      feedback:
+                        "Exactly. That keeps the threshold terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-brightness-does-most",
+                      label: "Use brightness as the main word for almost the whole topic, because once students know one beam is stronger the threshold language usually becomes secondary.",
+                      feedback:
+                        "That would hard-wire the bright-beam shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-energy-does-most",
+                      label: "Use energy as the main word for almost the whole topic, because once students know light carries energy the separate packet and rate language usually matters less.",
+                      feedback:
+                        "That would blur packet grade and beam count together again.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the threshold terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a2-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they predict emission",
+                  scenario:
+                    "The trainee analyst is about to predict electron emission from beam brightness alone without first checking whether each photon packet can clear the metal's work-function cost.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "check-threshold-then-rate-and-ke",
+                      label: "Start by comparing photon frequency with the threshold set by the work function, then decide whether emission is possible, and only afterward use intensity for rate and extra packet energy for maximum kinetic energy.",
+                      feedback:
+                        "Exactly. That gives the analyst the right threshold workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brightness-first-then-threshold",
+                      label: "Start from which beam is brighter, because once the stronger beam is identified the threshold question usually becomes easier to settle afterward.",
+                      feedback:
+                        "That would send the analyst back into the brightness-first shortcut.",
+                    },
+                    {
+                      value: "frequency-only-then-stop",
+                      label: "Start from frequency and stop there, because once threshold is crossed the intensity and kinetic-energy details usually become too minor to track.",
+                      feedback:
+                        "That would send the analyst back into an incomplete one-factor method.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean threshold-check method.",
+                  retryLabel: "That would send the analyst back into a A2_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a2-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the bright-beam and blended-dials shortcuts",
+                  scenario:
+                    "One crew member keeps insisting brighter below-threshold light must eventually work, while another keeps blending frequency and intensity into one general 'more light energy' story.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "threshold-trap-warning",
+                      label: "Do not let brightness replace threshold logic. Below threshold there is no emission however intense the beam is, and after threshold frequency and intensity still play different roles.",
+                      feedback:
+                        "Exactly. That warning blocks the main A2_L3 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "brightness-warning-only",
+                      label: "Warn mainly against the bright-beam habit, because once students stop that they usually separate frequency and intensity on their own.",
+                      feedback:
+                        "That would leave the blended-dials shortcut too alive.",
+                    },
+                    {
+                      value: "dials-warning-only",
+                      label: "Warn mainly against blending frequency and intensity, because once students separate those dials they usually stop overvaluing beam brightness on their own.",
+                      feedback:
+                        "That would leave the below-threshold brightness shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps threshold and beam count in the right order.",
+                  retryLabel: "That warning would leave a main A2_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a2-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps threshold and rate separate",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a dimmer above-threshold beam can eject electrons while a brighter below-threshold beam cannot.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "ticket-gate-analogy",
+                      label: "Think of each photon like a ticket at a gate: the ticket has to be high enough in value to open the barrier, and once tickets are valid, intensity mainly tells you how many valid tickets arrive each second.",
+                      feedback:
+                        "Exactly. That keeps threshold and arrival rate separate without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "bucket-fill-analogy",
+                      label: "Think of the metal more like a bucket that fills with light, because if the beam is bright enough for long enough the stored total should eventually spill electrons out.",
+                      feedback:
+                        "That would rebuild the total-energy shortcut.",
+                    },
+                    {
+                      value: "volume-knob-analogy",
+                      label: "Think of frequency and intensity mainly like two volume knobs on the same machine, because both just control how strong the light effect is overall.",
+                      feedback:
+                        "That would rebuild the blended-dials shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps threshold and rate in separate jobs.",
+                  retryLabel: "That analogy would pull the lesson away from the right threshold model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A2_L2") {
