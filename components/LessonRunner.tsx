@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M10_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m10-l4-spin-boss-board",
+                badge: "Spin board",
+                title: "Read the motor as matched side-kicks making torque",
+                scenario:
+                  "The Spin Boss lab shows a current loop in a magnetic field. One trainee treats the motor like one mystery forward push, another sees the opposite side-kicks but forgets they create torque about the axle, and a third says the commutator is a power source instead of the part that keeps the turning direction consistent.",
+                prompt: "Pin the note that keeps the motor story accurate.",
+                options: [
+                  {
+                    value: "matched-side-kicks-note",
+                    label: "Read the loop as two opposite side-kicks on opposite sides of the coil. Together they make a turning effect, and the split-ring commutator swaps the current each half-turn so the rotation keeps going in the same overall direction.",
+                    feedback:
+                      "Exactly. That keeps the side-kicks, torque, and commutator role tied together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "single-forward-push-note",
+                    label: "Treat the motor as one main forward magnetic push, because once the loop is live the field should drive the whole coil along one dominant straight-line route.",
+                    feedback:
+                      "That would erase the paired-force torque story this lesson is trying to secure.",
+                  },
+                  {
+                    value: "commutator-power-note",
+                    label: "Treat the commutator as the part that adds the motor's push each turn, because without it the magnetic forces would not have a power source to keep spinning the loop.",
+                    feedback:
+                      "That gives the commutator the wrong job. It keeps current direction switching at the right moment; it is not the power source.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the motor as matched side-kicks making torque.",
+                retryLabel: "That note would leave a main M10_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m10-l4-fix-ideas",
+                  badge: "Spin repair",
+                  title: "Repair the mystery-push and commutator-power shortcuts",
+                  scenario:
+                    "One trainee still describes the motor as one straight magnetic shove, while another keeps saying the commutator is where the extra pushing power comes from.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-torque-and-switch",
+                      label: "Repair both ideas together: opposite sides of the coil feel opposite forces, those paired side-kicks create torque about the axle, and the commutator swaps the current each half-turn so the turning effect keeps the same overall sense.",
+                      feedback:
+                        "Exactly. That restores the torque story and the right commutator role.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-stronger-push",
+                      label: "Repair the confusion by saying the motor still uses one main magnetic push, but the coil shape spreads that push around the axle so it looks like turning instead of sliding.",
+                      feedback:
+                        "That would keep the mystery-push shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-commutator-power",
+                      label: "Repair the confusion by saying the commutator times when the power reaches the coil, because that is why the turning stays active instead of stopping after one half-turn.",
+                      feedback:
+                        "That would keep the wrong commutator story alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses the right torque-and-switch story.",
+                  retryLabel: "That would leave a main M10_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m10-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line motor rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop collapsing the motor into a vague 'magnet makes spin' story.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "motor-anchor",
+                      label: "A motor coil turns because opposite sides of the current loop feel opposite magnetic forces. Those forces make torque, and a split-ring commutator keeps the rotation continuing in the same overall direction.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "spin-anchor",
+                      label: "The main idea is that magnets make current loops spin directly, because once current enters the loop the motor naturally keeps turning without needing a detailed force story.",
+                      feedback:
+                        "That would blur the lesson into a vague spin claim instead of the real torque explanation.",
+                    },
+                    {
+                      value: "commutator-anchor",
+                      label: "The main idea is that the commutator powers the coil at the right times, because the turning depends mostly on that timed power boost rather than on opposite side forces.",
+                      feedback:
+                        "That would build the wrong commutator model into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right motor rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m10-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the motor vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up side-kick force, torque, axle, coil side, and commutator until every motor label sounds like some version of 'spin part'.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-torque-commutator",
+                      label: "Use opposite side forces for the paired magnetic pushes on the coil sides, torque for the turning effect about the axle, and commutator for the current-switching part that keeps the overall rotation direction going.",
+                      feedback:
+                        "Exactly. That keeps the motor terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-spin-push",
+                      label: "Use push and torque almost interchangeably at first, because students usually understand motors faster when every turning effect is described as one stronger push.",
+                      feedback:
+                        "That would hard-wire the mystery-push shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-commutator-source",
+                      label: "Use commutator and power source almost interchangeably at first, because both are involved in keeping the motor active and the distinction can be added later.",
+                      feedback:
+                        "That would hard-wire the wrong commutator story into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the motor terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m10-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they explain the spin",
+                  scenario:
+                    "The trainee analyst is about to jump straight to 'the loop spins because the magnet pulls it around' without checking what happens on the left and right sides of the coil first.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "opposite-sides-first",
+                      label: "Start by comparing the forces on opposite sides of the loop at the same moment, then name the turning effect as torque, and only after that bring in the commutator as the current-switching device that keeps the turning sense consistent.",
+                      feedback:
+                        "Exactly. That gives the analyst the right side-pair to torque to commutator workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "spin-first",
+                      label: "Start with the final spinning motion, because once the loop is clearly rotating students can usually infer the detailed force pattern on the coil sides afterward.",
+                      feedback:
+                        "That would send the analyst back into the mystery-spin shortcut.",
+                    },
+                    {
+                      value: "commutator-first",
+                      label: "Start with the commutator, because once students understand how the current gets switched, the rest of the motor force story usually becomes optional detail.",
+                      feedback:
+                        "That would send the analyst into the wrong commutator-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean force-to-torque method.",
+                  retryLabel: "That would send the analyst back into a M10_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m10-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the mystery-spin and wrong-commutator shortcuts",
+                  scenario:
+                    "One crew member keeps explaining the motor as one unexplained spinning push, while another keeps saying the commutator is the source of the motor's extra force.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "motor-trap-warning",
+                      label: "Do not skip the opposite side forces, and do not treat the commutator as the power source. The turning comes from matched side-kicks making torque, and the commutator only swaps current direction at the right stage.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "torque-warning-only",
+                      label: "Warn mainly that the loop turns because of torque, because once students use the right turning word they usually stop making mistakes about the commutator on their own.",
+                      feedback:
+                        "That would leave the wrong commutator shortcut mostly alive.",
+                    },
+                    {
+                      value: "commutator-warning-only",
+                      label: "Warn mainly that the commutator is not the power source, because once that is clear students usually stop treating the motor like a mystery spinning device automatically.",
+                      feedback:
+                        "That would leave the mystery-spin shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the torque story and the right commutator role.",
+                  retryLabel: "That warning would leave a main M10_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m10-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the turning pair visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why the coil turns instead of sliding, and why the commutator matters without becoming the motor's hidden power source.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "door-push-analogy",
+                      label: "Think of the coil like a door being helped by a matched push-pull pair on opposite sides: the pair creates a turning effect around the axle, and the commutator resets which side gets which current direction so the turning keeps the same overall sense.",
+                      feedback:
+                        "Exactly. That keeps the turning pair and the commutator's real job visible.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "single-shove-analogy",
+                      label: "Think of the coil like a shopping trolley getting one strong shove, because the easiest way to picture motor action is to imagine the whole loop being pushed around by one main magnetic push.",
+                      feedback:
+                        "That would rebuild the exact mystery-push shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "battery-timer-analogy",
+                      label: "Think of the commutator like a hidden battery timer that adds the next shove each half-turn, because that makes the continued spinning easier to imagine.",
+                      feedback:
+                        "That would rebuild the wrong commutator-as-source shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the turning pair visible without flattening the motor story.",
+                  retryLabel: "That analogy would pull the lesson away from the right Spin Boss model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M10_L3") {
