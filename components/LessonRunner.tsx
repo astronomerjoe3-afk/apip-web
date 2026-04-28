@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M10_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m10-l2-core-boost-board",
+                badge: "Core board",
+                title: "Build one electromagnet story from turns, current, and core",
+                scenario:
+                  "The Core Boost board shows a coiled route with adjustable turn count, current, and a removable soft-iron core. One trainee treats each change as a separate unrelated effect, another says the core becomes a permanent magnet by itself, and a third notices stronger field lines but forgets that the coil already concentrates the weave into a magnet-like pattern.",
+                prompt: "Pin the note that keeps the electromagnet story accurate.",
+                options: [
+                  {
+                    value: "linked-strength-levers-note",
+                    label: "Treat turns, current, and the soft-iron core as three levers that strengthen the same electromagnet story: the coil concentrates the field, more turns and current reinforce it, and the core boosts the field without becoming a permanent magnet.",
+                    feedback:
+                      "Exactly. That keeps the three strength levers inside one solenoid story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "separate-effects-note",
+                    label: "Treat extra turns, larger current, and the core as three different magnetic tricks, because each one changes the setup in its own special way rather than strengthening the same field pattern.",
+                    feedback:
+                      "That breaks one electromagnet story into unrelated effects, which is the shortcut this lesson is trying to remove.",
+                  },
+                  {
+                    value: "permanent-core-note",
+                    label: "Treat the soft-iron core as the real magnet in the setup, because once it is placed inside the coil it should be understood as a permanent source of magnetism that the current only activates.",
+                    feedback:
+                      "That gives the core the wrong role. The soft-iron core strengthens the field but is not the lesson's permanent-magnet story.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads turns, current, and core as one electromagnet build.",
+                retryLabel: "That note would leave a main M10_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m10-l2-fix-ideas",
+                  badge: "Core repair",
+                  title: "Repair the separate-effects and permanent-core shortcuts",
+                  scenario:
+                    "One trainee keeps talking as if turn count, current, and the core create different magnetic tricks, while another describes the soft-iron core as the actual permanent magnet in the device.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-linked-electromagnet",
+                      label: "Repair both ideas together: the coil, current, and core all strengthen the same electromagnet pattern, and the soft-iron core concentrates the field without becoming a permanent magnet in the lesson story.",
+                      feedback:
+                        "Exactly. That restores the linked-solenoid story and the right core role.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-core-as-main-part",
+                      label: "Repair the confusion by saying the core is the main magnetic part, because once students understand that, the turn-count and current details can be treated as secondary ways of helping the core work.",
+                      feedback:
+                        "That would keep the wrong core story alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-turns-only",
+                      label: "Repair the confusion by saying the turn count is the real driver of the magnet-like pattern, because once the coil is built the current and core mainly fine-tune the result.",
+                      feedback:
+                        "That would keep the separate-effects shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats the electromagnet as one linked build story.",
+                  retryLabel: "That would leave a main M10_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m10-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line electromagnet rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop fragmenting the coil, current, and core into unrelated notes.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "electromagnet-anchor",
+                      label: "A solenoid is a coiled current route that behaves like a magnet. More turns, greater current, and a soft-iron core strengthen the same electromagnet by concentrating and reinforcing its field.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "core-anchor",
+                      label: "The main idea is that the iron core is the real magnet and the coil mainly helps reveal it, because the strongest magnetic change appears when the core is inserted.",
+                      feedback:
+                        "That would build the wrong core model into the anchor sentence.",
+                    },
+                    {
+                      value: "turns-anchor",
+                      label: "The main idea is that more turns make the biggest difference, because once the coil is dense enough the current and core details usually become optional refinements.",
+                      feedback:
+                        "That would shrink the lesson to one lever instead of the full linked story.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right electromagnet rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m10-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the electromagnet vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up solenoid, electromagnet, core, turns, and current until every strength change sounds like a different kind of hidden magnet appearing inside the setup.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-electromagnet",
+                      label: "Use solenoid for the coiled current route, electromagnet for the strengthened magnet-like field it creates, turns and current for two strength levers, and soft-iron core for the field-concentrating insert rather than a permanent magnet.",
+                      feedback:
+                        "Exactly. That keeps the electromagnet terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-core-magnet",
+                      label: "Use core and magnet almost interchangeably at first, because students usually understand the setup faster when the iron insert is described as the main magnetic source in the device.",
+                      feedback:
+                        "That would hard-wire the wrong core story into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-turns-master",
+                      label: "Use turn count as the main electromagnet word, because once students can see how the coil stacks up, current and core can usually be treated as smaller supporting details.",
+                      feedback:
+                        "That would hard-wire the one-lever shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the electromagnet terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m10-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they judge the strength change",
+                  scenario:
+                    "The trainee analyst is about to focus on whichever control changed most obviously on screen, without keeping the coil pattern, current, and core inside one connected electromagnet explanation.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "linked-levers-first",
+                      label: "Read the setup as one electromagnet first: the coil creates the magnet-like pattern, then compare how turns, current, and the soft-iron core each strengthen that same field before judging the final change.",
+                      feedback:
+                        "Exactly. That gives the analyst the right linked-lever workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "core-first",
+                      label: "Start with the core, because the iron insert is usually the most important magnetic part and the rest of the setup mostly helps it act more strongly.",
+                      feedback:
+                        "That would send the analyst straight into the wrong core shortcut.",
+                    },
+                    {
+                      value: "biggest-control-first",
+                      label: "Start with whichever control changed most dramatically, because the strongest visible adjustment usually tells you the main reason the electromagnet got stronger.",
+                      feedback:
+                        "That would send the analyst into the wrong separate-effects shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean linked-electromagnet method.",
+                  retryLabel: "That would send the analyst back into a M10_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m10-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the separate-effects and permanent-core shortcuts",
+                  scenario:
+                    "One crew member keeps explaining turns, current, and core as separate magnetic tricks, while another keeps talking as if the core is a permanent magnet hiding inside the device.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "electromagnet-trap-warning",
+                      label: "Do not split the coil, current, and core into unrelated stories, and do not call the soft-iron core a permanent magnet. They all belong to one electromagnet model, with the core strengthening the field by concentration.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "core-warning-only",
+                      label: "Warn mainly that the core is not permanent, because once that is clear students usually connect turns and current to the electromagnet story on their own.",
+                      feedback:
+                        "That would leave the separate-effects shortcut mostly alive.",
+                    },
+                    {
+                      value: "link-warning-only",
+                      label: "Warn mainly that the three controls belong to one strength story, because once that is clear the exact description of the core usually becomes optional detail.",
+                      feedback:
+                        "That would leave the wrong core story mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps one electromagnet story and the right core role.",
+                  retryLabel: "That warning would leave a main M10_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m10-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps one build story visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why more turns, more current, and a core do not create three separate magnets but reinforce one magnetic setup.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "choir-analogy",
+                      label: "Think of the electromagnet like a choir line building one song: more turns add more aligned voices, more current strengthens the drive behind them, and the soft-iron core helps focus the whole sound instead of becoming a different singer.",
+                      feedback:
+                        "Exactly. That keeps one combined effect visible without turning the core into a separate magnet.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "hidden-magnet-analogy",
+                      label: "Think of the core like a hidden magnet that the coil wakes up, because that makes the dramatic strength increase easy to picture when the iron insert is added.",
+                      feedback:
+                        "That would rebuild the exact core shortcut the lesson is trying to remove.",
+                    },
+                    {
+                      value: "three-tools-analogy",
+                      label: "Think of turns, current, and core as three separate magnetic tools, because then students can study each effect alone and add them together later if needed.",
+                      feedback:
+                        "That would rebuild the separate-effects shortcut the lesson is trying to remove.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps one electromagnet build story visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right Core Boost model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M10_L1") {
