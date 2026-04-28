@@ -3497,6 +3497,248 @@ function getA6ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A6_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a6-l3-state-change-board",
+        badge: "State-change board",
+        title: "Do not mistake a flat temperature line for zero energy transfer",
+        scenario:
+          "The state-change board shows a flat temperature meter beside a growing energy bar during melting and boiling. One trainee says a plateau means the heater is effectively off, another keeps forcing Q = m c Delta T through the whole process, and a third forgets that the incoming energy is changing particle arrangement.",
+        prompt: "Pin the note that keeps the state-change model accurate.",
+        options: [
+          {
+            value: "latent-stage-payment-note",
+            label: "Treat latent heat as the state-change payment: during a plateau the energy can still enter, but it goes into changing particle arrangement and separation rather than raising temperature.",
+            feedback:
+              "Exactly. That keeps the plateau, the energy transfer, and the state change in one story.",
+            isCorrect: true,
+          },
+          {
+            value: "flat-line-means-no-transfer-note",
+            label: "Treat a flat temperature line as proof that no energy is entering, because without a rise on the meter the heater cannot still be doing useful thermal work.",
+            feedback:
+              "That would rebuild the zero-transfer plateau shortcut.",
+          },
+          {
+            value: "one-formula-whole-process-note",
+            label: "Treat the whole heating process with one temperature-change formula, because once heating begins the same thermal relation usually covers warming and change of state together.",
+            feedback:
+              "That would rebuild the one-formula shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads a plateau as an active state-change payment.",
+        retryLabel: "That note would leave a main A6_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a6-l3-fix-ideas",
+          badge: "Latent-heat repair",
+          title: "Repair the plateau and one-formula shortcuts",
+          scenario:
+            "One analyst keeps saying constant temperature means zero energy transfer, while another keeps using the same temperature-change relation through melting, boiling, and ordinary warming without splitting the stages.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-stage-selection-first",
+              label: "Repair both habits together: split the process into stages first, use latent-heat reasoning during the state-change plateau, and use temperature-change reasoning only when the temperature is actually rising.",
+              feedback:
+                "Exactly. That restores the right A6_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-plateau-is-special-heat",
+              label: "Repair the confusion by calling the plateau a special kind of heating rise, because once students know the heater is still on the same formula can usually be stretched to fit.",
+              feedback:
+                "That would keep the one-formula shortcut alive.",
+            },
+            {
+              value: "repair-energy-bar-only",
+              label: "Repair the confusion by focusing only on the growing energy bar, because once students know energy enters the details of stage choice and particle rearrangement usually become secondary.",
+              feedback:
+                "That would keep the plateau reasoning too vague.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats a plateau as an active state-change stage.",
+          retryLabel: "That would leave a main A6_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a6-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line latent-heat rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop reading a flat temperature meter as if nothing important is happening.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a6-l3-anchor",
+              label: "Latent heat is the state-change payment, so constant temperature does not mean zero energy transfer.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "plateau-means-pause-anchor",
+              label: "The main idea is mostly that a plateau is a pause in warming, because once students see the temperature stop changing the rest of the process usually becomes secondary.",
+              feedback:
+                "That would erase the energy-transfer idea the lesson needs.",
+            },
+            {
+              value: "formula-swap-anchor",
+              label: "The main idea is mostly that a different formula is used, because once students memorize the symbol swap the physical story usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson too far into rote arithmetic.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right latent-heat rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a6-l3-technical-words",
+          badge: "Term desk",
+          title: "Clean up the latent-heat vocabulary board",
+          scenario:
+            "The crew keeps mixing latent heat, plateau, fusion, vaporization, and temperature rise until every answer sounds like one vague heating story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a6-l3",
+              label: "Use latent heat for the state-change payment, plateau for the constant-temperature stage, fusion for melting, vaporization for boiling, and temperature rise only for stages where the state stays the same.",
+              feedback:
+                "Exactly. That keeps the A6_L3 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-heating-does-most",
+              label: "Use heating as the main word for almost the whole topic, because once students know energy is being added the difference between warming and changing state usually matters less.",
+              feedback:
+                "That would scramble the state-change terms into one vague label.",
+            },
+            {
+              value: "term-board-latent-does-most",
+              label: "Use latent heat as the main word for almost the whole topic, because once students know there is an extra payment the ordinary temperature-rise stages usually become secondary.",
+              feedback:
+                "That would blur the stage split the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the latent-heat terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a6-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose the thermal relation",
+          scenario:
+            "The trainee analyst is about to grab a formula before naming the physical stage, and has not yet checked whether this part of the process is a temperature rise or a state change.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "name-stage-before-equation",
+              label: "Start by naming the stage: if the state stays the same and temperature rises, use temperature-change reasoning; if the temperature is flat during a change of state, use latent-heat reasoning and combine stages only after each one is handled separately.",
+              feedback:
+                "Exactly. That gives the analyst the right A6_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-flat-line-only",
+              label: "Start from the flat part of the graph only, because once the plateau is recognized the rest of the thermal process usually becomes automatic.",
+              feedback:
+                "That would keep the stage-selection method too incomplete.",
+            },
+            {
+              value: "start-from-one-formula-only",
+              label: "Start from one main heating relation, because once the energy input is known the stage boundaries usually matter less than the final total.",
+              feedback:
+                "That would send the analyst back into the one-formula shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean stage-first method.",
+          retryLabel: "That would send the analyst back into an A6_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a6-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the flat-line-means-nothing shortcut",
+          scenario:
+            "One crew member keeps reading a temperature plateau as if the heater has stopped doing work, while another keeps trying to cover the entire process with one favorite thermal formula.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a6-l3-trap-warning",
+              label: "Do not treat constant temperature as zero transfer, and do not force one formula across all stages. Split the process first, then match the relation to the stage.",
+              feedback:
+                "Exactly. That warning blocks the main A6_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "heater-warning-only",
+              label: "Warn mainly that the heater may still be on, because once students accept that energy enters they usually sort out the equations and stage meaning on their own.",
+              feedback:
+                "That would leave the method too vague to fix the real trap.",
+            },
+            {
+              value: "formula-warning-only",
+              label: "Warn mainly against the wrong equation, because once students memorize the correct formula for latent heat they usually stop misreading plateaus on their own.",
+              feedback:
+                "That would leave the physical meaning too blurry.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps plateaus, payments, and stage choice aligned.",
+          retryLabel: "That warning would leave a main A6_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a6-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the plateau meaning visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why energy can keep entering even while the temperature meter stays flat during a change of state.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "crowd-spreading-analogy",
+              label: "Think of the sample like a crowded group being paid to spread out: the payment goes into opening space and changing arrangement rather than making each person move faster, so the energy can rise while the motion meter stays flat.",
+              feedback:
+                "Exactly. That keeps the state-change payment and particle rearrangement visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "heater-paused-analogy",
+              label: "Think of the plateau mainly like a pause button during heating, because once the temperature stops changing the system is effectively waiting before the next rise begins.",
+              feedback:
+                "That would rebuild the zero-transfer plateau shortcut.",
+            },
+            {
+              value: "same-formula-analogy",
+              label: "Think of the whole process mainly like one long bill that can be added without splitting it up, because once energy is being supplied the stage boundaries usually matter less.",
+              feedback:
+                "That would rebuild the one-formula shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the plateau tied to a real state-change payment.",
+          retryLabel: "That analogy would pull the lesson away from the right A6_L3 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A6_L2") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
