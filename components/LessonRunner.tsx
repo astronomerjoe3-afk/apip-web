@@ -571,6 +571,248 @@ function getA4ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A4_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a4-l3-launch-board",
+        badge: "Launch board",
+        title: "Split the launch before you explain the curve",
+        scenario:
+          "The launch board shows one projectile path with separate horizontal and vertical component panels. One trainee wants to memorize the curve as one mysterious shape, another lets gravity leak into the horizontal story, and a third forgets that both component stories share the same elapsed time.",
+        prompt: "Pin the note that keeps the projectile model accurate.",
+        options: [
+          {
+            value: "split-components-shared-time-note",
+            label: "Split the launch into horizontal and vertical components first, keep gravity in the vertical story only in the ideal model, and use the shared time to reconnect the two component stories into the full path.",
+            feedback:
+              "Exactly. That keeps the split, the shared clock, and the recombined path in the right order.",
+            isCorrect: true,
+          },
+          {
+            value: "curve-first-note",
+            label: "Treat the curved path as the main thing to understand first, because once students picture the arc the component stories usually become secondary details.",
+            feedback:
+              "That would rebuild the curve-first shortcut.",
+          },
+          {
+            value: "gravity-on-both-note",
+            label: "Let gravity influence both the horizontal and vertical motion stories, because once the projectile is in flight the downward pull should shape every part of the motion equally.",
+            feedback:
+              "That would rebuild the mixed-component shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads projectile motion through split components and shared time.",
+        retryLabel: "That note would leave a main A4_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a4-l3-fix-ideas",
+          badge: "Launch repair",
+          title: "Repair the curve-first and mixed-component shortcuts",
+          scenario:
+            "One trainee keeps treating the path shape as the explanation, while another keeps giving gravity a role in both components instead of keeping the horizontal and vertical stories distinct.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-split-then-recombine",
+              label: "Repair both habits together: split the launch into components first, keep the horizontal and vertical rules separate, and only then recombine them through the shared time to explain the curve.",
+              feedback:
+                "Exactly. That restores the right projectile-motion workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-path-shape-first",
+              label: "Repair the confusion by redrawing the full curve more clearly first, because once students trust the arc shape the component rules usually become easier later.",
+              feedback:
+                "That would keep the curve-first shortcut alive.",
+            },
+            {
+              value: "repair-gravity-everywhere",
+              label: "Repair the confusion by emphasizing gravity more strongly everywhere in the motion, because once students remember the downward pull they usually sort the component details out later.",
+              feedback:
+                "That would keep the mixed-component shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now builds the path from two linked one-dimensional stories.",
+          retryLabel: "That would leave a main A4_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a4-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line projectile-split rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating projectile motion like one indivisible curved-path story.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a4-l3-anchor",
+              label: "Projectile motion becomes simpler when the horizontal and vertical stories are solved separately and linked by time.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "arc-anchor",
+              label: "The main idea is mostly that the path is curved, because once students trust the arc shape the separate component stories usually become secondary.",
+              feedback:
+                "That would rebuild the curve-first shortcut.",
+            },
+            {
+              value: "gravity-anchor-only",
+              label: "The main idea is mostly that gravity controls the motion, because once students know the downward pull the horizontal and vertical split usually becomes secondary.",
+              feedback:
+                "That would flatten the two-story model the lesson needs.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right projectile-split rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a4-l3-technical-words",
+          badge: "Term desk",
+          title: "Clean up the projectile vocabulary board",
+          scenario:
+            "The crew keeps mixing launch speed, launch angle, horizontal component, vertical component, gravity, and time until every answer sounds like one vague curve story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a4-l3",
+              label: "Use launch speed and launch angle for the starting vector, horizontal and vertical components for the split velocities, gravity for the vertical acceleration in the ideal model, and elapsed time for the shared link between the two component stories.",
+              feedback:
+                "Exactly. That keeps the projectile terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-curve-does-most",
+              label: "Use curve as the main word for almost the whole topic, because once students know the path bends the separate component and time labels usually matter less.",
+              feedback:
+                "That would scramble the projectile terms into the curve-first shortcut.",
+            },
+            {
+              value: "term-board-gravity-does-most",
+              label: "Use gravity as the main word for almost the whole topic, because once students know a downward influence is present the component split and timing labels usually become secondary.",
+              feedback:
+                "That would weaken the separate-role structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the projectile terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a4-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they explain the path",
+          scenario:
+            "The trainee analyst is about to describe the projectile as one curve before splitting the launch velocity or checking how the shared time connects the horizontal and vertical stories.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "split-components-then-time-link",
+              label: "Start by splitting the launch into horizontal and vertical components, keep the acceleration story separate on each axis, and then use the shared time to rebuild the full path.",
+              feedback:
+                "Exactly. That gives the analyst the right projectile-motion workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "describe-arc-first",
+              label: "Start from the overall arc shape first, because once the projectile path sounds intuitive the component split usually becomes mostly obvious.",
+              feedback:
+                "That would send the analyst back into the curve-first shortcut.",
+            },
+            {
+              value: "apply-gravity-everywhere",
+              label: "Start by applying gravity across the whole motion story, because once the downward influence is named the separate axis treatment usually becomes mostly obvious.",
+              feedback:
+                "That would send the analyst back into the mixed-component shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean split-and-recombine method.",
+          retryLabel: "That would send the analyst back into a A4_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a4-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the curve-first and mixed-component shortcuts",
+          scenario:
+            "One crew member keeps treating the path shape as the explanation, while another keeps letting the vertical gravity story bleed into the horizontal motion rule.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "projectile-trap-warning",
+              label: "Do not explain the motion from the curve alone and do not mix the component rules. Split the launch first, keep gravity in the vertical story, and let shared time reconnect the two parts.",
+              feedback:
+                "Exactly. That warning blocks the main A4_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "curve-warning-only",
+              label: "Warn mainly against trusting the arc shape, because once students stop that they usually keep the horizontal and vertical rules separate on their own.",
+              feedback:
+                "That would leave the mixed-component shortcut too alive.",
+            },
+            {
+              value: "component-warning-only",
+              label: "Warn mainly against mixing the component rules, because once students stop that they usually stop using the curve as the explanation on their own.",
+              feedback:
+                "That would leave the curve-first shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the split and the recombination in the right order.",
+          retryLabel: "That warning would leave a main A4_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a4-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the two-story model visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why projectile motion is not one mysterious curved command but two linked one-dimensional stories sharing one clock.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "schedule-overlay-analogy",
+              label: "Think of the launch like two schedules laid over the same clock: one steady sideways plan and one up-down plan changed by gravity, with the visible path appearing only when the two timed stories are read together.",
+              feedback:
+                "Exactly. That keeps the two-story model visible without flattening the physics.",
+              isCorrect: true,
+            },
+            {
+              value: "curve-drawing-analogy",
+              label: "Think of the motion mainly like drawing a graceful arc, because once the curve is sketched clearly the separate timing and component details usually matter less.",
+              feedback:
+                "That would rebuild the curve-first shortcut.",
+            },
+            {
+              value: "single-pull-analogy",
+              label: "Think of the motion mainly like one pull dragging the projectile downward through space, because once that main force is imagined the separate horizontal story usually matters less.",
+              feedback:
+                "That would rebuild the mixed-component shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the two linked component stories visible.",
+          retryLabel: "That analogy would pull the lesson away from the right projectile-split model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A4_L2") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
