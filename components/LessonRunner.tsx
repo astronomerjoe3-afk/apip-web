@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M12_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m12-l4-reactor-board",
+                badge: "Reactor board",
+                title: "Read the plant as one controlled energy-transfer system",
+                scenario:
+                  "The Reactor control board shows a steady reaction in the core, a control-rod adjustment, coolant carrying heat away, and turbines later producing electricity. One trainee treats the reactor as only a fuel source, another jumps straight from the core to electricity, and a third talks about control rods without linking them to the neutron population they manage.",
+                prompt: "Pin the note that keeps the reactor model accurate.",
+                options: [
+                  {
+                    value: "system-control-transfer-note",
+                    label: "Read the reactor as one linked system: control rods manage the neutron population and reaction rate, coolant carries thermal energy away from the core, and electrical generation comes after those earlier stages.",
+                    feedback:
+                      "Exactly. That keeps control and energy transfer inside one plant story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "fuel-source-note",
+                    label: "Treat the reactor mainly as a very powerful fuel source, because once students understand that the core makes lots of energy the exact transfer and control stages can be added later.",
+                    feedback:
+                      "That would rebuild the wrong fuel-source-only shortcut.",
+                  },
+                  {
+                    value: "electricity-direct-note",
+                    label: "Treat the core as producing electricity directly, because the important part is that nuclear reactions power the output and the rest is secondary machinery detail.",
+                    feedback:
+                      "That would rebuild the wrong direct-to-electricity shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the reactor as one controlled transfer system.",
+                retryLabel: "That note would leave a main M12_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m12-l4-fix-ideas",
+                  badge: "Reactor repair",
+                  title: "Repair the fuel-source and direct-electricity shortcuts",
+                  scenario:
+                    "One trainee still describes the reactor only as the place where lots of energy is made, while another keeps skipping the coolant and turbine stages and talking as if the core somehow produces electricity directly.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-reactor-system",
+                      label: "Repair both habits together: the reactor is a controlled chain-reaction system plus a staged energy-transfer path. Control rods affect the reaction rate, coolant moves thermal energy, and electricity comes later in the plant.",
+                      feedback:
+                        "Exactly. That restores the full reactor-system story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-power-first",
+                      label: "Repair the confusion by emphasizing how much power the core can provide, because once students accept the core as the main energy source they usually understand the transfer path later.",
+                      feedback:
+                        "That would keep the fuel-source-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-control-only",
+                      label: "Repair the confusion by focusing mainly on control rods, because once students know the reaction can be adjusted they usually infer the rest of the plant model for themselves.",
+                      feedback:
+                        "That would keep the transfer-path shortcut too weakly challenged.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps control and transfer stages together.",
+                  retryLabel: "That would leave a main M12_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m12-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line reactor rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop reducing the reactor to only the core or only the electricity output.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "reactor-anchor",
+                      label: "Control rods help manage the reaction rate, coolant transfers thermal energy away from the core, and electrical power comes after several linked energy-transfer stages.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "core-anchor-only",
+                      label: "The main idea is that the reactor core is where the useful energy is made, because the rest of the plant mainly exists to collect that power efficiently.",
+                      feedback:
+                        "That line collapses the staged plant model too much.",
+                    },
+                    {
+                      value: "control-anchor-only",
+                      label: "The main idea is that control rods keep the reactor safe, because safety control is the most important practical fact students need to remember.",
+                      feedback:
+                        "That line jumps too narrowly to one component instead of the linked system.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right reactor-system rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m12-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the reactor vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up control rods, coolant, core, and turbine stages until every explanation sounds like one machine part doing everything at once.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-reactor-system",
+                      label: "Use control rods for the part that manages the neutron population and reaction rate, coolant for the fluid that carries thermal energy away from the core, core for the reaction location, and turbine-generation stages for the later route to electricity.",
+                      feedback:
+                        "Exactly. That keeps the reactor terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-core-does-most",
+                      label: "Use the core as the main term for almost the whole plant, because once students know the core is central the other components are mostly supporting labels.",
+                      feedback:
+                        "That would hard-wire the one-part-does-everything shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-control-is-heat",
+                      label: "Use control rods mainly as the tool that handles the reactor's heat output, because that keeps the explanation simple and connects directly to power generation.",
+                      feedback:
+                        "That would hard-wire the wrong control-without-neutrons shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the reactor-system terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m12-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they summarize the plant",
+                  scenario:
+                    "The trainee analyst is about to list the parts separately without first tracing the route from neutron control in the core through thermal transfer and on to electrical output.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "trace-control-heat-electricity",
+                      label: "Start with the reaction in the core, ask how the neutron population is controlled, then trace the thermal energy out through the coolant and only after that name the later generation stages.",
+                      feedback:
+                        "Exactly. That gives the analyst the right reactor-system method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "list-parts-first",
+                      label: "Start by naming each plant part from memory, because once the list is complete the links between them can usually be inferred afterward.",
+                      feedback:
+                        "That would send the analyst back into disconnected part listing.",
+                    },
+                    {
+                      value: "electricity-first-only",
+                      label: "Start with how electricity is produced, because that is the final purpose of the plant and the earlier control and heat stages mostly just support that endpoint.",
+                      feedback:
+                        "That would send the analyst into the output-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean reactor-system method.",
+                  retryLabel: "That would send the analyst back into a M12_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m12-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the core-only and one-part-does-everything shortcuts",
+                  scenario:
+                    "One crew member keeps treating the core as if it explains the whole plant, while another keeps naming one component at a time without showing how control, heat transfer, and generation fit together.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "reactor-trap-warning",
+                      label: "Do not reduce the reactor to only the core, and do not let one plant part stand in for the whole system. Show how neutron control, thermal transfer, and later electrical generation link together.",
+                      feedback:
+                        "Exactly. That warning blocks the main M12_L4 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "core-warning-only",
+                      label: "Warn mainly against focusing only on the core, because once students stop that mistake they usually connect the rest of the plant correctly on their own.",
+                      feedback:
+                        "That would leave the disconnected-parts shortcut mostly alive.",
+                    },
+                    {
+                      value: "parts-warning-only",
+                      label: "Warn mainly against listing disconnected parts, because once students link the machinery better they usually become more careful about the core story too.",
+                      feedback:
+                        "That would leave the core-only shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the reactor as one linked system.",
+                  retryLabel: "That warning would leave a main M12_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m12-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the stages linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture a reactor as a controlled system with several connected stages instead of one mystery energy box.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "factory-line-analogy",
+                      label: "Think of the reactor like a factory line: one stage controls how fast the process runs, another stage moves the useful heat onward, and later stages turn that transferred energy into electricity.",
+                      feedback:
+                        "Exactly. That keeps control, transfer, and output linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "battery-box-analogy",
+                      label: "Think of it like a giant battery that directly produces electricity, because that gives students the clearest big-picture intuition for what the plant is for.",
+                      feedback:
+                        "That would rebuild the direct-to-electricity shortcut.",
+                    },
+                    {
+                      value: "single-valve-analogy",
+                      label: "Think of the whole reactor mainly as one adjustable valve, because once students understand the control part the rest of the plant behaviour is not very different.",
+                      feedback:
+                        "That would rebuild the one-part-does-everything shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the reactor stages linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Reactor control model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M12_L3") {
