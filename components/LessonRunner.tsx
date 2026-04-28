@@ -1860,6 +1860,7 @@ export default function LessonRunner({
         lessonId === "M14_L6" ||
         lessonId === "A1_L1" ||
         lessonId === "A1_L2" ||
+        lessonId === "A1_L3" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9116,6 +9117,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A1_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a1-l3-pair-event-board",
+                badge: "Event board",
+                title: "Keep threshold, mirror partners, and the ledger together",
+                scenario:
+                  "The pair-event board switches between annihilation and pair production. One trainee keeps treating the event like particles simply appear or disappear by magic, another ignores the photon-energy threshold, and a third forgets that the before-and-after ledger still has to balance in both directions.",
+                prompt: "Pin the note that keeps the pair-process model accurate.",
+                options: [
+                  {
+                    value: "threshold-and-ledger-note",
+                    label: "Treat electron-positron partners as a matched pair, require enough photon energy before pair production is allowed, and keep annihilation and pair production on the same conservation ledger.",
+                    feedback:
+                      "Exactly. That keeps partner matching, threshold, and conservation in one picture.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "magic-creation-note",
+                    label: "Treat pair production mainly as energy suddenly turning into particles whenever the event looks dramatic enough, because the threshold details can usually be cleaned up later.",
+                    feedback:
+                      "That would rebuild the wrong magic-creation shortcut.",
+                  },
+                  {
+                    value: "annihilation-ends-story-note",
+                    label: "Treat annihilation mainly as the particles vanishing from the story, because once the original pair is gone the radiation products and the ledger details matter less.",
+                    feedback:
+                      "That would hide the allowed-products and conservation story the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads pair processes as threshold-limited, balanced exchanges.",
+                retryLabel: "That note would leave a main A1_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a1-l3-fix-ideas",
+                  badge: "Event repair",
+                  title: "Repair the magic-creation and vanishing shortcuts",
+                  scenario:
+                    "One trainee keeps talking as if pair production can happen without enough photon energy, while another talks as if annihilation means the particles simply disappear and the bookkeeping can stop there.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-threshold-ledger-model",
+                      label: "Repair both habits together: treat the electron and positron as matched opposite-charge partners, check that the photon energy reaches threshold before pair production, and keep the conservation ledger active for both annihilation and pair production.",
+                      feedback:
+                        "Exactly. That restores the proper pair-process model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-energy-drama-first",
+                      label: "Repair the confusion by emphasizing the dramatic energy change first, because once students feel how energetic the event is the threshold and ledger details usually become clearer afterward.",
+                      feedback:
+                        "That would keep the threshold shortcut alive.",
+                    },
+                    {
+                      value: "repair-products-later",
+                      label: "Repair the confusion by focusing first on the original pair only, because once students remember which two particles were involved the allowed products and conservation checks usually sort themselves out later.",
+                      feedback:
+                        "That would keep the vanishing-without-ledger shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps threshold and conservation active in both directions.",
+                  retryLabel: "That would leave a main A1_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a1-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line pair-process rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop reading pair production and annihilation as unbalanced magic events.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "pair-process-anchor",
+                      label: "Antiparticles are matched partners, annihilation converts a pair into allowed radiation products, and pair production needs enough photon energy while still obeying conservation.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "energy-appears-anchor-only",
+                      label: "The main idea is that enough energy can simply make particles appear, because once students remember that energy can create matter the partner and ledger details usually matter less.",
+                      feedback:
+                        "That line rebuilds the wrong threshold-without-ledger shortcut.",
+                    },
+                    {
+                      value: "pair-disappears-anchor-only",
+                      label: "The main idea is that annihilation makes the original pair disappear, because once the pair is gone the final products are mostly a later technical detail.",
+                      feedback:
+                        "That line misses the allowed-products and conservation rule that actually explains the event.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right pair-process rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a1-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the antiparticle vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up antiparticle, annihilation, pair production, photon energy, threshold, and conservation until every answer sounds like one vague 'particles pop in and out' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a1-l3",
+                      label: "Use antiparticle for the matched partner, annihilation for the pair converting into allowed products, pair production for the reverse process, and threshold for the minimum photon energy needed before the pair can be made.",
+                      feedback:
+                        "Exactly. That keeps the pair-process terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-energy-does-most",
+                      label: "Use energy as the main word for almost the whole topic, because once students know the event is energetic the partner and threshold labels usually become secondary.",
+                      feedback:
+                        "That would hard-wire the threshold-without-ledger shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-disappear-does-most",
+                      label: "Use disappearance as the main word for almost the whole topic, because once students know the original pair vanishes the rest of the event language usually matters less.",
+                      feedback:
+                        "That would hide the balanced-exchange rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the pair-process terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a1-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they approve the event",
+                  scenario:
+                    "The trainee analyst is about to decide from the event name alone without first checking whether the photon energy is above threshold or whether the before-and-after story still balances.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "partners-then-threshold-then-ledger",
+                      label: "Start by identifying the matched partners, then check the photon-energy threshold for pair production or the allowed products for annihilation, and finish by verifying that the conservation ledger still balances.",
+                      feedback:
+                        "Exactly. That gives the analyst the right pair-process method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "event-name-then-energy",
+                      label: "Start from whether the event sounds like creation or disappearance, because once students pick the rough story the threshold and conservation details usually become easier afterward.",
+                      feedback:
+                        "That would send the analyst back into the magic-event shortcut.",
+                    },
+                    {
+                      value: "energy-only-then-approve",
+                      label: "Start from the energy size alone, because once the photon seems energetic enough the rest of the pair-production or annihilation reasoning usually takes care of itself.",
+                      feedback:
+                        "That would send the analyst back into the threshold-without-ledger shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean pair-process method.",
+                  retryLabel: "That would send the analyst back into a A1_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a1-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the magic-event and no-ledger shortcuts",
+                  scenario:
+                    "One crew member keeps treating the event like particles just appear or disappear, while another checks the threshold but then forgets to keep the conservation ledger alive.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "pair-process-trap-warning",
+                      label: "Do not treat pair processes as magic events, and do not stop at the threshold check. Keep matched partners, allowed products, and the conservation ledger in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main A1_L3 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "threshold-warning-only",
+                      label: "Warn mainly about the threshold mistake, because once students stop that habit they usually remember the conservation story on their own.",
+                      feedback:
+                        "That would leave the no-ledger shortcut too alive.",
+                    },
+                    {
+                      value: "ledger-warning-only",
+                      label: "Warn mainly about the conservation ledger, because once students keep the bookkeeping visible they usually stop treating the event like magic on their own.",
+                      feedback:
+                        "That would leave the threshold shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps threshold and ledger checks tied together.",
+                  retryLabel: "That warning would leave a main A1_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a1-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the exchange balanced",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why annihilation and pair production are balanced exchanges rather than one-way magic tricks.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "ledger-exchange-analogy",
+                      label: "Think of the event like a strict ledger exchange: a matched pair can trade into allowed radiation products, and a photon can only buy the pair when it brings enough energy to cover both members.",
+                      feedback:
+                        "Exactly. That keeps threshold and conservation linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "magic-trick-analogy",
+                      label: "Think of the event mainly like a magic trick where particles appear or disappear when the energy feels dramatic enough, because the surprise helps students remember the process.",
+                      feedback:
+                        "That would rebuild the magic-event shortcut.",
+                    },
+                    {
+                      value: "big-flash-analogy",
+                      label: "Think of the event mainly like a bright flash that settles the story by itself, because once the energy release is obvious the partner and bookkeeping details usually matter less.",
+                      feedback:
+                        "That would rebuild the no-ledger shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the pair-process ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right threshold-and-ledger model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A1_L2") {
