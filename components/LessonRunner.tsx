@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "M13_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "M12_L4" || lessonId === "M12_L5" || lessonId === "M12_L6" || lessonId === "M13_L1" || lessonId === "M13_L2" || lessonId === "M13_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M13_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m13-l3-rotation-board",
+                badge: "Rotation board",
+                title: "Track one location as Earth turns under steady sunlight",
+                scenario:
+                  "The Day-night rotation board shows one city marker starting on the dark side, crossing into sunlight, and returning to darkness after one full turn. One trainee explains day and night with Earth's yearly orbit, another talks as if the Sun moves around Earth each day, and a third forgets that half of Earth is lit at any moment.",
+                prompt: "Pin the note that keeps the day-night model accurate.",
+                options: [
+                  {
+                    value: "rotation-steady-light-note",
+                    label: "Keep the Sun's light direction steady and track one location as Earth rotates: the marker moves from darkness into sunlight and back again, so day and night are a rotation-timescale story.",
+                    feedback:
+                      "Exactly. That keeps day and night tied to rotation.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "yearly-orbit-note",
+                    label: "Treat day and night mainly as an orbit effect, because as Earth travels around the Sun different places turn toward or away from the light over the year.",
+                    feedback:
+                      "That would rebuild the wrong yearly-orbit shortcut.",
+                  },
+                  {
+                    value: "sun-goes-around-note",
+                    label: "Treat day and night mainly as the Sun circling Earth every day, because that keeps the explanation close to what the sky seems to do.",
+                    feedback:
+                      "That would rebuild the apparent-motion shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads day and night as Earth rotating under steady sunlight.",
+                retryLabel: "That note would leave a main M13_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m13-l3-fix-ideas",
+                  badge: "Rotation repair",
+                  title: "Repair the orbit and apparent-motion shortcuts",
+                  scenario:
+                    "One trainee still explains day and night with Earth's yearly orbit, while another keeps describing the daily cycle as if the Sun really travels around Earth each day.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-rotation-model",
+                      label: "Repair both habits together: keep sunlight arriving from one direction, then follow one place on a rotating Earth as it moves from night into day and back again over one full turn.",
+                      feedback:
+                        "Exactly. That restores the proper rotation story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-sky-observation-only",
+                      label: "Repair the confusion by collecting more sky observations first, because once students watch the Sun appear to move often enough the true explanation usually becomes obvious later.",
+                      feedback:
+                        "That would keep the apparent-motion shortcut alive.",
+                    },
+                    {
+                      value: "repair-year-story-only",
+                      label: "Repair the confusion by emphasizing the yearly Earth-Sun route, because once students know Earth's orbit clearly the daily light cycle usually makes sense by itself.",
+                      feedback:
+                        "That would keep the yearly-orbit shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps rotation and steady sunlight linked.",
+                  retryLabel: "That would leave a main M13_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m13-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line day-night rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop mixing daily rotation ideas with yearly orbit ideas.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "rotation-anchor",
+                      label: "Day and night come from Earth's rotation, at any moment one half of Earth is lit and one half is dark, and one day is tied to one rotation rather than one orbit.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "orbit-anchor-only",
+                      label: "The main idea is that Earth moves around the Sun, because once students remember the orbit they can usually sort out the light-and-dark pattern later.",
+                      feedback:
+                        "That line blurs the day-night cause too much.",
+                    },
+                    {
+                      value: "sun-motion-anchor-only",
+                      label: "The main idea is that the Sun appears to move across the sky, because that visible motion is the most important first fact for beginners to remember.",
+                      feedback:
+                        "That line leaves the explanation stuck at appearance rather than cause.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right day-night rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m13-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the rotation vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up rotation, orbit, lit half, dark half, and day length until every answer sounds like one vague Earth-and-Sun motion story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-rotation",
+                      label: "Use rotation for Earth's spinning turn, orbit for the much longer yearly route, and lit half and dark half for the two regions created when sunlight arrives from one steady direction.",
+                      feedback:
+                        "Exactly. That keeps the day-night terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-orbit-does-most",
+                      label: "Use orbit as the main word for almost the whole topic, because once students know Earth goes around the Sun the rest of the daily-light story is mostly supporting detail.",
+                      feedback:
+                        "That would hard-wire the yearly-orbit shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-sun-motion-does-most",
+                      label: "Use the Sun's apparent motion as the main word for almost the whole topic, because once students can describe what they see the real cause is not very important at this stage.",
+                      feedback:
+                        "That would hard-wire the appearance-without-cause shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the day-night terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m13-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they explain day and night",
+                  scenario:
+                    "The trainee analyst is about to describe the daily cycle without first following one place on Earth through a full turn under fixed sunlight.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "track-one-city-through-turn",
+                      label: "Start with one place on the dark side, keep the sunlight direction fixed, and rotate Earth until that place enters daylight and later returns to night over one full turn.",
+                      feedback:
+                        "Exactly. That gives the analyst the right day-night method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "talk-about-year-first",
+                      label: "Start with the yearly Earth-Sun path, because once the large orbit picture is clear the daily light cycle usually becomes easy to explain afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong timescale.",
+                    },
+                    {
+                      value: "describe-sun-path-first",
+                      label: "Start by describing the Sun's visible path across the sky, because once the appearance is clear the physical cause usually does not need much extra explanation.",
+                      feedback:
+                        "That would send the analyst back into appearance-first thinking.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean day-night explanation method.",
+                  retryLabel: "That would send the analyst back into a M13_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m13-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the wrong-timescale and appearance-only shortcuts",
+                  scenario:
+                    "One crew member keeps using the yearly orbit to explain the daily cycle, while another stops at what the Sun seems to do in the sky without naming Earth's rotation.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "day-night-trap-warning",
+                      label: "Do not use the yearly orbit to explain a one-day cycle, and do not stop at the Sun's apparent motion. Keep steady sunlight and Earth's rotation in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main M13_L3 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "timescale-warning-only",
+                      label: "Warn mainly against mixing up the timescales, because once students stop that mistake they usually become clear enough about the rotation story on their own.",
+                      feedback:
+                        "That would leave the appearance-only shortcut mostly alive.",
+                    },
+                    {
+                      value: "appearance-warning-only",
+                      label: "Warn mainly against stopping at appearances, because once students know they need a cause they usually choose the right one for themselves.",
+                      feedback:
+                        "That would leave the wrong-timescale shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the daily cycle tied to rotation.",
+                  retryLabel: "That warning would leave a main M13_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m13-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps rotation and lighting linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture day and night as one place moving into and out of light while the light source itself stays steady.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "lamp-and-globe-analogy",
+                      label: "Think of Earth like a turning globe beside a steady lamp: one place moves from the shadowed side into the lit side and back again as the globe rotates.",
+                      feedback:
+                        "Exactly. That keeps rotation and steady lighting linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "travel-around-lamp-analogy",
+                      label: "Think of day and night like the globe traveling around the lamp, because moving around the light source is the clearest reason different places see light at different times.",
+                      feedback:
+                        "That would rebuild the yearly-orbit shortcut.",
+                    },
+                    {
+                      value: "walking-lamp-analogy",
+                      label: "Think of day and night like the lamp walking around the globe each day, because that matches how the Sun seems to travel across the sky.",
+                      feedback:
+                        "That would rebuild the appearance-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the day-night ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right Day-night rotation model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M13_L2") {
