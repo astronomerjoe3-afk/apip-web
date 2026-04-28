@@ -3497,6 +3497,248 @@ function getA6ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A6_L2") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a6-l2-heating-cost-board",
+        badge: "Heating-cost board",
+        title: "Keep mass, material, and temperature rise on the same ledger",
+        scenario:
+          "The heating-cost board shows the same energy payment beside samples with different masses and specific heat capacities. One trainee treats specific heat capacity as the whole answer, another watches temperature rise alone, and a third forgets that the full heating story must keep m, c, and Delta T together.",
+        prompt: "Pin the note that keeps the heating model accurate.",
+        options: [
+          {
+            value: "full-heating-ledger-note",
+            label: "Treat specific heat capacity as the heating cost per kilogram per degree, then keep mass, material, and temperature rise together in one ledger when comparing or calculating thermal energy.",
+            feedback:
+              "Exactly. That keeps the whole heating ledger visible instead of collapsing it to one factor.",
+            isCorrect: true,
+          },
+          {
+            value: "specific-heat-alone-note",
+            label: "Treat specific heat capacity as the main answer on its own, because once the material's heating cost is known the effects of mass and temperature rise usually become secondary details.",
+            feedback:
+              "That would rebuild the one-factor material shortcut.",
+          },
+          {
+            value: "delta-t-alone-note",
+            label: "Treat temperature rise as the main answer on its own, because once the final warming is known the mass and material details usually stop mattering much.",
+            feedback:
+              "That would rebuild the temperature-rise-only shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads heating as full bookkeeping, not one-number guessing.",
+        retryLabel: "That note would leave a main A6_L2 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a6-l2-fix-ideas",
+          badge: "Heating repair",
+          title: "Repair the one-factor heating shortcuts",
+          scenario:
+            "One analyst keeps explaining heating from specific heat capacity alone, while another keeps talking about temperature rise without checking mass or material.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-full-heating-ledger",
+              label: "Repair both habits together: treat heating as a full ledger in which mass, specific heat capacity, and temperature rise all stay visible together.",
+              feedback:
+                "Exactly. That restores the right A6_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-material-first-only",
+              label: "Repair the confusion by anchoring everything to the material first, because once students know the specific heat capacity the rest of the calculation usually takes care of itself.",
+              feedback:
+                "That would keep the one-factor material shortcut alive.",
+            },
+            {
+              value: "repair-rise-first-only",
+              label: "Repair the confusion by anchoring everything to the temperature rise first, because once students know how much warmer the sample gets the other factors usually become obvious.",
+              feedback:
+                "That would keep the temperature-rise-only shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats heating as a three-factor ledger.",
+          retryLabel: "That would leave a main A6_L2 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a6-l2-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line heating rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop turning specific heat capacity into a slogan instead of a full heating-cost model.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a6-l2-anchor",
+              label: "Heating cost depends on mass, material, and temperature rise together.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "material-is-main-anchor",
+              label: "The main idea is mostly that specific heat capacity controls the answer, because once the material is known the rest of the heating story usually becomes secondary.",
+              feedback:
+                "That would erase the full-ledger idea the lesson needs.",
+            },
+            {
+              value: "rise-is-main-anchor",
+              label: "The main idea is mostly that temperature rise tells the story, because once students know how much warmer the sample gets the mass and material terms usually become secondary.",
+              feedback:
+                "That would flatten the three-factor comparison too far.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right heating rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a6-l2-technical-words",
+          badge: "Term desk",
+          title: "Clean up the heating vocabulary board",
+          scenario:
+            "The crew keeps mixing specific heat capacity, thermal energy, mass, Delta T, and J/kg K until every answer sounds like one vague warming story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a6-l2",
+              label: "Use specific heat capacity for the heating cost per kilogram per degree, thermal energy for the transfer being calculated, mass for how much sample is being heated, and Delta T for the temperature change while the state stays the same.",
+              feedback:
+                "Exactly. That keeps the A6_L2 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-heat-does-most",
+              label: "Use heat as the main word for almost the whole topic, because once students know energy is being added the separate mass and material terms usually matter less.",
+              feedback:
+                "That would scramble the heating terms into one vague label.",
+            },
+            {
+              value: "term-board-c-does-most",
+              label: "Use specific heat capacity as the main word for almost the whole topic, because once students know the material's heating cost the rest of the vocabulary usually becomes secondary.",
+              feedback:
+                "That would hide the full-ledger meaning the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the heating terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a6-l2-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose the heating step",
+          scenario:
+            "The trainee analyst is about to grab one number and rush to the answer, and has not yet checked that this is a same-state temperature-change stage or kept all three heating factors visible.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "check-stage-then-full-ledger",
+              label: "Start by checking that the sample is staying in the same state with a temperature change, then keep mass, specific heat capacity, and Delta T together before you calculate or compare the heating cost.",
+              feedback:
+                "Exactly. That gives the analyst the right A6_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-material-only",
+              label: "Start from the material only, because once the specific heat capacity is known the rest of the heating story usually becomes routine.",
+              feedback:
+                "That would send the analyst back into the one-factor material shortcut.",
+            },
+            {
+              value: "start-from-final-rise-only",
+              label: "Start from the temperature rise only, because once the sample's warming is clear the mass and specific heat capacity usually stop being the hard part.",
+              feedback:
+                "That would send the analyst back into the temperature-rise-only shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean stage-check and full-ledger method.",
+          retryLabel: "That would send the analyst back into an A6_L2 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a6-l2-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the one-number heating shortcut",
+          scenario:
+            "One crew member keeps acting as if c alone settles the answer, while another keeps ignoring mass or Delta T whenever the calculation starts to feel familiar.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a6-l2-trap-warning",
+              label: "Do not collapse heating into one favorite number. Keep mass, specific heat capacity, and temperature rise together, and use this relation only for same-state temperature-change stages.",
+              feedback:
+                "Exactly. That warning blocks the main A6_L2 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "material-warning-only",
+              label: "Warn mainly against forgetting the material, because once students remember c they usually keep the rest of the heating story secure on their own.",
+              feedback:
+                "That would leave the rest of the one-number shortcut too alive.",
+            },
+            {
+              value: "delta-t-warning-only",
+              label: "Warn mainly against forgetting the temperature rise, because once students track Delta T they usually keep the mass and material factors secure on their own.",
+              feedback:
+                "That would leave the full-ledger method too incomplete.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the full heating ledger visible.",
+          retryLabel: "That warning would leave a main A6_L2 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a6-l2-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the full heating ledger visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why specific heat capacity is not the whole answer, and why the heating cost changes with both amount of material and target rise.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "travel-budget-analogy",
+              label: "Think of heating like a travel budget: mass is how many travelers you are paying for, specific heat capacity is the cost per traveler per step, and Delta T is how many steps you want to cover, so the full price needs all three.",
+              feedback:
+                "Exactly. That keeps the full heating ledger visible without flattening it to one factor.",
+              isCorrect: true,
+            },
+            {
+              value: "expensive-ticket-analogy",
+              label: "Think of heating mainly like buying the most expensive ticket, because once the cost per unit is known the rest of the total usually becomes obvious.",
+              feedback:
+                "That would rebuild the one-factor material shortcut.",
+            },
+            {
+              value: "long-trip-analogy",
+              label: "Think of heating mainly like going on a longer trip, because once the journey length is known the number of travelers and ticket cost usually matter less.",
+              feedback:
+                "That would rebuild the temperature-rise-only shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps mass, material, and rise in the same picture.",
+          retryLabel: "That analogy would pull the lesson away from the right A6_L2 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A6_L1") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
