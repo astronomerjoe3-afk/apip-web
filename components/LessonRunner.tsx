@@ -3489,6 +3489,259 @@ function getA5ScaffoldRoleplayCard({
   return null;
 }
 
+function getA6ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A6_L1") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a6-l1-thermal-board",
+        badge: "Thermal board",
+        title: "Separate average particle dash from the whole-sample store",
+        scenario:
+          "The chamber board shows two gas samples with the same dash level but different particle counts. One trainee says equal temperature must mean equal internal energy, another treats a bigger whole-sample store as proof of higher temperature, and a third forgets that particle count changes totals without changing the average per particle.",
+        prompt: "Pin the note that keeps the thermal model accurate.",
+        options: [
+          {
+            value: "average-versus-total-note",
+            label: "Treat temperature as the average kinetic-energy level per particle, then use particle count to compare total internal energy of the whole sample. Equal temperature does not force equal internal energy.",
+            feedback:
+              "Exactly. That keeps the average-per-particle story separate from the whole-sample store.",
+            isCorrect: true,
+          },
+          {
+            value: "same-temperature-same-store-note",
+            label: "Treat equal temperature as proof of equal internal energy, because once each sample has the same thermal level the total microscopic store should automatically match as well.",
+            feedback:
+              "That would rebuild the same-temperature-same-store shortcut.",
+          },
+          {
+            value: "bigger-store-means-hotter-note",
+            label: "Treat the larger internal-energy store as proof of higher temperature, because once the sample contains more total microscopic energy it must also be hotter.",
+            feedback:
+              "That would blur average temperature with whole-sample total.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads average and total as different thermal stories.",
+        retryLabel: "That note would leave a main A6_L1 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a6-l1-fix-ideas",
+          badge: "Thermal repair",
+          title: "Repair the average-versus-total mix-up",
+          scenario:
+            "One analyst keeps saying same temperature means same internal energy, while another keeps deciding temperature from the whole-sample store without checking how many particles share it.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-average-then-total",
+              label: "Repair both habits together: use temperature to compare average particle kinetic energy first, then use particle count to compare total internal energy of the whole sample.",
+              feedback:
+                "Exactly. That restores the right A6_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-temperature-only",
+              label: "Repair the confusion by anchoring everything to temperature first, because once students know which sample is hotter the total-store comparison usually becomes automatic.",
+              feedback:
+                "That would keep the average-versus-total shortcut alive.",
+            },
+            {
+              value: "repair-total-store-only",
+              label: "Repair the confusion by anchoring everything to total internal energy first, because once students know which sample has the larger store the temperature story usually becomes obvious.",
+              feedback:
+                "That would keep the whole-store-means-hotter shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now separates per-particle average from whole-sample store.",
+          retryLabel: "That would leave a main A6_L1 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a6-l1-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line thermal rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop collapsing temperature and internal energy into one vague heat label.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a6-l1-anchor",
+              label: "Temperature is an average-per-particle story, while internal energy belongs to the whole microscopic store.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "temperature-is-total-anchor",
+              label: "The main idea is mostly that temperature names how much internal energy the whole sample has, because average particle language usually adds more complication than clarity.",
+              feedback:
+                "That would erase the average-versus-total distinction the lesson needs.",
+            },
+            {
+              value: "particle-count-is-everything-anchor",
+              label: "The main idea is mostly that particle count decides the answer, because once students compare amount of gas the temperature story usually becomes secondary.",
+              feedback:
+                "That would flatten the two-part comparison too far.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right thermal rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a6-l1-technical-words",
+          badge: "Term desk",
+          title: "Clean up the thermal vocabulary board",
+          scenario:
+            "The crew keeps mixing temperature, average kinetic energy, internal energy, particle count, and kelvin until every answer sounds like one vague hotness story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a6-l1",
+              label: "Use temperature for the average kinetic-energy level per particle, internal energy for the total microscopic store of the sample, particle count for the amount contributing to that total, and kelvin for the absolute thermal scale.",
+              feedback:
+                "Exactly. That keeps the A6_L1 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-hotness-does-most",
+              label: "Use hotness as the main word for almost the whole topic, because once students know one sample feels hotter the average and total distinctions usually matter less.",
+              feedback:
+                "That would scramble the thermal terms into one vague label.",
+            },
+            {
+              value: "term-board-total-does-most",
+              label: "Use internal energy as the main word for almost the whole topic, because once students know the total microscopic store the temperature wording usually becomes secondary.",
+              feedback:
+                "That would hide the average-per-particle meaning the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the thermal terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a6-l1-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they compare the two chambers",
+          scenario:
+            "The trainee analyst is about to jump straight from one thermal number to a total-store conclusion, and has not yet separated the average-per-particle comparison from the whole-sample comparison.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "compare-average-then-amount",
+              label: "Start with temperature to compare average particle kinetic energy, then check how many particles the sample contains before deciding which chamber has the larger total internal energy.",
+              feedback:
+                "Exactly. That gives the analyst the right A6_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-hotter-label",
+              label: "Start from whichever sample is hotter, because once the temperature comparison is made the total-store comparison usually takes care of itself.",
+              feedback:
+                "That would send the analyst back into the temperature-decides-total shortcut.",
+            },
+            {
+              value: "start-from-bigger-sample",
+              label: "Start from whichever sample looks larger in total, because once the amount of gas is bigger the temperature detail usually becomes secondary.",
+              feedback:
+                "That would send the analyst back into the particle-count-only shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean average-then-total method.",
+          retryLabel: "That would send the analyst back into an A6_L1 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a6-l1-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the same-temperature-same-store shortcut",
+          scenario:
+            "One crew member keeps treating temperature as the whole-sample total, while another keeps ignoring particle count when comparing total internal energy.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a6-l1-trap-warning",
+              label: "Do not treat temperature as the sample's total internal energy. Use temperature for the average per particle, then bring in particle count to compare the whole-sample store.",
+              feedback:
+                "Exactly. That warning blocks the main A6_L1 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "temperature-warning-only",
+              label: "Warn mainly that temperature can be misleading, because once students distrust the temperature label they usually stop confusing it with internal energy on their own.",
+              feedback:
+                "That would leave the method too vague to fix the real trap.",
+            },
+            {
+              value: "particle-warning-only",
+              label: "Warn mainly that particle count matters, because once students look at the amount of gas they usually stop mixing average and total quantities on their own.",
+              feedback:
+                "That would leave the average-per-particle meaning too blurry.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps average and total in separate slots.",
+          retryLabel: "That warning would leave a main A6_L1 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a6-l1-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps average and total separate",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the same temperature does not force the same internal energy, especially when one sample contains more particles than another.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "runner-team-analogy",
+              label: "Think of the sample like a team of runners: temperature is the average effort level per runner, while internal energy is the whole team's combined effort, so a bigger team can have more total even at the same average level.",
+              feedback:
+                "Exactly. That keeps per-particle average and whole-sample total visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "hotter-cup-analogy",
+              label: "Think of the sample mainly like whichever cup feels hotter in your hand, because once the thermal level is clear the total-energy story usually becomes secondary.",
+              feedback:
+                "That would rebuild the temperature-only shortcut.",
+            },
+            {
+              value: "bigger-bucket-analogy",
+              label: "Think of the sample mainly like whichever bucket holds more stuff, because once the amount is larger the question of average particle energy usually matters much less.",
+              feedback:
+                "That would rebuild the total-only shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps average level and whole-store total in the same picture.",
+          retryLabel: "That analogy would pull the lesson away from the right A6_L1 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
 function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
   if (card.options.length <= 1) return card.options;
   const correctIndex = card.options.findIndex((option) => option.isCorrect);
@@ -4720,6 +4973,14 @@ export default function LessonRunner({
       activeSectionWorkedExample: Boolean(activeSection?.worked_example),
       activeSectionHeading,
     });
+    const a6ScaffoldRoleplayCard = getA6ScaffoldRoleplayCard({
+      lessonId,
+      isMediaStep,
+      activeMediaIndex,
+      isSectionStep,
+      activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+      activeSectionHeading,
+    });
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -4728,6 +4989,7 @@ export default function LessonRunner({
       const scaffoldRoleplayCard =
         a4ScaffoldRoleplayCard ??
         a5ScaffoldRoleplayCard ??
+        a6ScaffoldRoleplayCard ??
         (
         lessonId === "M1_L1" ||
         lessonId === "M1_L2" ||
