@@ -1859,6 +1859,7 @@ export default function LessonRunner({
         lessonId === "M14_L5" ||
         lessonId === "M14_L6" ||
         lessonId === "A1_L1" ||
+        lessonId === "A1_L2" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9115,6 +9116,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A1_L2") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a1-l2-hadron-builder",
+                badge: "Hadron builder",
+                title: "Read quark packing before charge or size",
+                scenario:
+                  "The hadron builder compares a three-quark bundle with a quark-antiquark pair. One trainee keeps sorting by charge first, another wants to use apparent size or complexity, and a third keeps forgetting that baryon and meson are subfamilies inside the wider hadron family.",
+                prompt: "Pin the note that keeps the hadron model accurate.",
+                options: [
+                  {
+                    value: "packing-first-note",
+                    label: "Start from quark packing: hadrons are the umbrella family, baryons are built from three quarks, and mesons are built from a quark-antiquark pair, so composition comes before charge or size.",
+                    feedback:
+                      "Exactly. That keeps the hadron story structural from the start.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "charge-first-note",
+                    label: "Sort mainly by charge, because once students know whether a particle is positive, neutral, or negative the baryon-versus-meson label usually sorts itself out afterward.",
+                    feedback:
+                      "That would rebuild the wrong charge-first shortcut.",
+                  },
+                  {
+                    value: "size-first-note",
+                    label: "Sort mainly by how large or complicated the bundle looks, because the bigger-looking cluster should normally count as the baryon while the simpler one should count as the meson.",
+                    feedback:
+                      "That would rebuild the wrong appearance-first shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads hadrons through quark packing first.",
+                retryLabel: "That note would leave a main A1_L2 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a1-l2-fix-ideas",
+                  badge: "Packing repair",
+                  title: "Repair the charge-first and size-first shortcuts",
+                  scenario:
+                    "One trainee keeps using charge tag as the main rule, while another keeps treating the visually simpler bundle as if that alone should settle baryon versus meson.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-composition-model",
+                      label: "Repair both habits together: ask how many quark pieces are present, check whether an antiquark appears, treat hadron as the umbrella family, and only then use charge as an extra detail.",
+                      feedback:
+                        "Exactly. That restores the proper quark-packing model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-charge-carefully",
+                      label: "Repair the confusion by teaching charge patterns more carefully first, because once students track the electrical labels well the packing rule usually becomes easier on its own.",
+                      feedback:
+                        "That would keep the charge-first shortcut alive.",
+                    },
+                    {
+                      value: "repair-visual-shape-first",
+                      label: "Repair the confusion by emphasizing the visible bundle shape first, because once students can picture the clusters clearly the packing rule usually becomes obvious afterward.",
+                      feedback:
+                        "That would keep the size-or-shape shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps quark packing ahead of surface features.",
+                  retryLabel: "That would leave a main A1_L2 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a1-l2-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line hadron rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop classifying baryons and mesons from charge or appearance alone.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "hadron-anchor",
+                      label: "Hadrons are composite particles built from quarks, baryons contain three quarks, and mesons contain a quark-antiquark pair.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-anchor-only",
+                      label: "The main idea is that hadrons should be separated first by charge pattern, because once students know the electrical label the baryon-versus-meson label usually follows naturally.",
+                      feedback:
+                        "That line rebuilds the wrong charge-first shortcut.",
+                    },
+                    {
+                      value: "proton-neutron-anchor-only",
+                      label: "The main idea is mostly that protons and neutrons are the familiar important particles, because once students remember those examples the hadron family structure usually matters less.",
+                      feedback:
+                        "That line misses the composition rule that actually explains the family structure.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right hadron rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a1-l2-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the hadron vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up quark, antiquark, hadron, baryon, meson, and proton until every answer sounds like one vague 'particle bundle' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a1-l2",
+                      label: "Use hadron for the wider quark-built family, baryon for a three-quark hadron, meson for a quark-antiquark hadron, and antiquark for the partner that changes the packing route.",
+                      feedback:
+                        "Exactly. That keeps the hadron terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-charge-does-most",
+                      label: "Use charge as the main word for almost the whole topic, because once students know which bundles are positive or neutral the hadron labels usually become secondary.",
+                      feedback:
+                        "That would hard-wire the charge-first shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-example-does-most",
+                      label: "Use proton and neutron names as the main words for almost the whole topic, because once students know those examples the rest of the hadron family labels usually matter less.",
+                      feedback:
+                        "That would hide the umbrella-family rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the hadron terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a1-l2-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they label the bundle",
+                  scenario:
+                    "The trainee analyst is about to classify a hadron by charge or by familiar example name without first counting the quark pieces or checking whether an antiquark is present.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "count-quarks-then-check-antiquark",
+                      label: "Start by counting the quark pieces, then check whether an antiquark is present, use that packing rule to choose baryon or meson, and only afterward use charge as supporting detail.",
+                      feedback:
+                        "Exactly. That gives the analyst the right quark-packing method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-then-composition",
+                      label: "Start from the charge pattern first, because once students know the electrical label the quark packing usually becomes easier to infer afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong charge-first shortcut.",
+                    },
+                    {
+                      value: "familiar-example-then-match",
+                      label: "Start from whichever familiar particle the bundle seems to resemble, because once students match it to a known example the family structure usually becomes obvious afterward.",
+                      feedback:
+                        "That would send the analyst back into the example-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean hadron-classification method.",
+                  retryLabel: "That would send the analyst back into a A1_L2 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a1-l2-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the charge-only and example-only shortcuts",
+                  scenario:
+                    "One crew member keeps trusting charge tag as the main classifier, while another quietly treats familiar examples like proton or neutron as if they can replace the packing rule itself.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "hadron-trap-warning",
+                      label: "Do not let charge or familiar examples do the whole job. Keep hadron as the umbrella family and use quark packing first: three quarks for baryon, quark plus antiquark for meson.",
+                      feedback:
+                        "Exactly. That warning blocks the main A1_L2 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-warning-only",
+                      label: "Warn mainly against the charge mistake, because once students stop that habit they usually stop leaning too hard on familiar examples on their own.",
+                      feedback:
+                        "That would leave the example-first shortcut too alive.",
+                    },
+                    {
+                      value: "example-warning-only",
+                      label: "Warn mainly against overusing familiar examples, because once students stop that habit they usually stop over-trusting charge tags on their own.",
+                      feedback:
+                        "That would leave the charge-first shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps hadron structure ahead of surface clues.",
+                  retryLabel: "That warning would leave a main A1_L2 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a1-l2-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps packing central",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why baryon-versus-meson classification should start from composition rather than from charge or looks.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "packing-rule-analogy",
+                      label: "Think of hadrons like packages sorted by what pieces are packed inside: one route is three matching cargo pieces for baryons, while the other route is a piece-plus-partner pair for mesons.",
+                      feedback:
+                        "Exactly. That keeps structure central without flattening the particle physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "sticker-color-analogy",
+                      label: "Think of the hadrons mainly like parcels sorted by sticker color, because once the charge label is clear the baryon-versus-meson label should usually follow.",
+                      feedback:
+                        "That would rebuild the charge-first shortcut.",
+                    },
+                    {
+                      value: "big-versus-small-analogy",
+                      label: "Think of baryons and mesons mainly like bigger and smaller boxes, because the more substantial-looking bundle should normally count as the baryon.",
+                      feedback:
+                        "That would rebuild the size-or-appearance shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the hadron ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right quark-packing model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A1_L1") {
