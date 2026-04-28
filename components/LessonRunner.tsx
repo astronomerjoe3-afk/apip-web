@@ -1861,6 +1861,7 @@ export default function LessonRunner({
         lessonId === "A1_L1" ||
         lessonId === "A1_L2" ||
         lessonId === "A1_L3" ||
+        lessonId === "A1_L4" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9117,6 +9118,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A1_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a1-l4-exchange-board",
+                badge: "Exchange board",
+                title: "Read what the event is doing before naming the interaction",
+                scenario:
+                  "The interaction sorter board compares a binding event with a particle-change event. One trainee wants to call both of them just generic forces, another ignores the exchange messenger clue, and a third keeps mixing the strong binding story with the weak particle-change story.",
+                prompt: "Pin the note that keeps the interaction model accurate.",
+                options: [
+                  {
+                    value: "change-before-family-note",
+                    label: "Ask what the event is doing first: strong interaction fits the binding story, weak interaction fits the particle-change story, and exchange messengers help explain how the interaction is carried.",
+                    feedback:
+                      "Exactly. That keeps event change, interaction family, and messenger language aligned.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "all-forces-same-note",
+                    label: "Treat both cases mainly as the same kind of force push, because once students know something interacted the specific family label can usually be cleaned up later.",
+                    feedback:
+                      "That would rebuild the wrong generic-force shortcut.",
+                  },
+                  {
+                    value: "messenger-optional-note",
+                    label: "Treat the exchange messenger as optional decoration, because once students can name strong or weak from memory the carrier idea usually matters less.",
+                    feedback:
+                      "That would hide the messenger clue the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads binding and particle-change events through the right interaction lens.",
+                retryLabel: "That note would leave a main A1_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a1-l4-fix-ideas",
+                  badge: "Interaction repair",
+                  title: "Repair the one-force and no-messenger shortcuts",
+                  scenario:
+                    "One trainee keeps flattening strong and weak into the same generic interaction, while another keeps trying to classify the event without using the messenger-carried explanation at all.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-change-and-messenger-model",
+                      label: "Repair both habits together: identify whether the event is binding particles together or changing one particle into another, then match strong or weak interaction and keep the exchange messenger in the explanation.",
+                      feedback:
+                        "Exactly. That restores the proper interaction-sorter model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-force-name-first",
+                      label: "Repair the confusion by teaching the interaction names more forcefully first, because once students memorize strong and weak the event-type differences usually become clearer afterward.",
+                      feedback:
+                        "That would keep the generic-force shortcut alive.",
+                    },
+                    {
+                      value: "repair-messenger-later",
+                      label: "Repair the confusion by postponing the messenger idea, because once students can match the event to a family the carrier explanation usually becomes secondary.",
+                      feedback:
+                        "That would keep the no-messenger shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps event type and messenger clue in the same frame.",
+                  retryLabel: "That would leave a main A1_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a1-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line interaction rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop guessing strong versus weak from a name alone with no event story attached.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "interaction-anchor",
+                      label: "Interactions can be modeled as messenger exchanges, the strong interaction is a binding story, and the weak interaction is associated with particle-changing processes.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "force-anchor-only",
+                      label: "The main idea is that strong and weak are just two named force levels, because once students remember the labels the event details usually matter less.",
+                      feedback:
+                        "That line rebuilds the wrong generic-force shortcut.",
+                    },
+                    {
+                      value: "messenger-anchor-only",
+                      label: "The main idea is mostly that messengers exist, because once students remember that carrier particles are involved the difference between binding and particle change usually becomes secondary.",
+                      feedback:
+                        "That line misses the event-type rule that actually organizes the lesson.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right interaction rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a1-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the interaction vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up interaction, exchange particle, strong, weak, binding, and particle change until every answer sounds like one vague 'force did something' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a1-l4",
+                      label: "Use exchange particle for the messenger, strong interaction for the binding family, weak interaction for particle-changing processes, and event change for the clue that helps choose between them.",
+                      feedback:
+                        "Exactly. That keeps the interaction terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-force-does-most",
+                      label: "Use force as the main word for almost the whole topic, because once students know that something pushes or acts the strong-versus-weak labels usually become secondary.",
+                      feedback:
+                        "That would hard-wire the generic-force shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-messenger-does-most",
+                      label: "Use messenger as the main word for almost the whole topic, because once students know there is a carrier the binding-versus-change split usually matters less.",
+                      feedback:
+                        "That would hide the event-type rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the interaction terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a1-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they name the family",
+                  scenario:
+                    "The trainee analyst is about to pick strong or weak from memory alone without first asking what changed in the event or how the messenger clue fits the story.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "event-change-then-messenger-then-family",
+                      label: "Start by asking whether the event binds particles or changes one particle into another, then use the messenger-carried picture to support the match, and only afterward choose strong or weak.",
+                      feedback:
+                        "Exactly. That gives the analyst the right interaction-sorter method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "family-name-then-event",
+                      label: "Start from the interaction family name first, because once students commit to strong or weak the event details usually become easier to fit afterward.",
+                      feedback:
+                        "That would send the analyst back into the wrong label-first shortcut.",
+                    },
+                    {
+                      value: "messenger-only-then-family",
+                      label: "Start from the messenger idea alone, because once students know some carrier is involved the binding-versus-change difference usually becomes secondary.",
+                      feedback:
+                        "That would send the analyst back into the no-event-type shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean interaction-classification method.",
+                  retryLabel: "That would send the analyst back into a A1_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a1-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the label-first and one-force shortcuts",
+                  scenario:
+                    "One crew member keeps treating strong and weak like two names for the same sort of push, while another keeps naming the family before reading what the event actually does.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "interaction-trap-warning",
+                      label: "Do not flatten strong and weak into one generic force story, and do not choose the family before reading the event change. Keep binding versus particle change and the messenger clue in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main A1_L4 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "generic-force-warning-only",
+                      label: "Warn mainly against the one-force mistake, because once students stop that habit they usually stop labeling the family too early on their own.",
+                      feedback:
+                        "That would leave the label-first shortcut too alive.",
+                    },
+                    {
+                      value: "label-first-warning-only",
+                      label: "Warn mainly against the label-first habit, because once students slow down they usually stop flattening strong and weak into one story on their own.",
+                      feedback:
+                        "That would leave the one-force shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps interaction family tied to event change.",
+                  retryLabel: "That warning would leave a main A1_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a1-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps carrier and change linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why strong and weak interactions should be sorted by what the event does, not just by force labels.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "messenger-job-analogy",
+                      label: "Think of the interactions like two messenger jobs: one kind helps hold a structure together, while the other delivers the change that turns one particle into another.",
+                      feedback:
+                        "Exactly. That keeps messenger role and event change linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "stronger-push-analogy",
+                      label: "Think of strong and weak mainly like harder and softer pushes, because the main point is simply that one force is bigger than the other.",
+                      feedback:
+                        "That would rebuild the generic-force shortcut.",
+                    },
+                    {
+                      value: "name-tag-analogy",
+                      label: "Think of the interactions mainly like two name tags students have to memorize, because once the labels are remembered the event meaning usually follows on its own.",
+                      feedback:
+                        "That would rebuild the label-first shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the interaction ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right interaction-sorter model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A1_L3") {
