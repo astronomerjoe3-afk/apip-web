@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M11_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m11-l1-vault-house-board",
+                badge: "Vault board",
+                title: "Keep proton, neutron, and electron jobs separate",
+                scenario:
+                  "The Vault-house lab shows one atom readout while proton, neutron, and electron counts are adjusted. One trainee says losing an electron changes the element, another treats neutron change as a charge change, and a third mixes up mass number with proton number because all three counts are moving on screen.",
+                prompt: "Pin the note that keeps the atomic model accurate.",
+                options: [
+                  {
+                    value: "separate-three-jobs-note",
+                    label: "Keep the three jobs separate: proton number fixes element identity, mass number counts protons and neutrons together, and electron change affects charge state without changing the element when proton number stays fixed.",
+                    feedback:
+                      "Exactly. That keeps identity, mass number, and charge in the right places.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "electron-identity-note",
+                    label: "Treat electron count as the main identity clue, because a charge change means the atom is no longer really the same element even if the nucleus stays the same.",
+                    feedback:
+                      "That would rebuild the wrong idea that charge change changes the element.",
+                  },
+                  {
+                    value: "neutron-charge-note",
+                    label: "Treat neutron changes as part of the charge story, because neutrons help balance the nucleus and that balance should show up directly as a different charge state.",
+                    feedback:
+                      "That would mix nuclear mass bookkeeping into the wrong charge story.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads proton, neutron, and electron counts as separate jobs.",
+                retryLabel: "That note would leave a main M11_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m11-l1-fix-ideas",
+                  badge: "Vault repair",
+                  title: "Repair the identity and charge mix-ups",
+                  scenario:
+                    "One trainee still says removing an electron changes the element, while another keeps folding neutron changes into the charge story instead of the mass-number story.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-identity-mass-charge",
+                      label: "Repair both ideas together: the proton number in the nucleus fixes the element, protons plus neutrons set the mass number, and electron imbalance sets the charge state.",
+                      feedback:
+                        "Exactly. That restores the three-job atomic model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-electrons-first",
+                      label: "Repair the confusion by saying electron count is usually the best first clue, because the easiest way to recognise a changed atom is to look at whether it has gained or lost electrons.",
+                      feedback:
+                        "That would keep the wrong identity shortcut alive instead of removing it.",
+                    },
+                    {
+                      value: "repair-with-nucleus-balance",
+                      label: "Repair the confusion by saying neutron changes mostly rebalance charge inside the nucleus, because that makes it easier to see why proton and electron numbers do not tell the whole story on their own.",
+                      feedback:
+                        "That would keep the wrong neutron-charge shortcut alive instead of fixing it.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now uses the right nucleus-versus-electron split.",
+                  retryLabel: "That would leave a main M11_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m11-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line atomic-structure rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop collapsing identity, mass number, and charge into one blended atom label.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "atomic-anchor",
+                      label: "Proton number fixes the element identity, mass number counts protons and neutrons, and electron change affects charge state rather than element identity.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-anchor",
+                      label: "The main idea is that charge tells you what atom you are dealing with, because once the electron count changes the original element label no longer really applies.",
+                      feedback:
+                        "That would build the wrong charge-sets-identity shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "mass-anchor",
+                      label: "The main idea is that the mass number is the best atom label, because once the total particle count is known the separate proton and electron stories usually become optional detail.",
+                      feedback:
+                        "That would blur the lesson into the wrong total-count shortcut.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right atomic-structure rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m11-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the atom vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up proton number, mass number, and charge until every readout sounds like one big particle total with a plus or minus sign attached afterward.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-z-a-charge",
+                      label: "Use proton number or Z for element identity, mass number or A for protons plus neutrons, and charge for proton-electron imbalance rather than for element identity.",
+                      feedback:
+                        "Exactly. That keeps the atom terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-total-count",
+                      label: "Use mass number as the main identity term, because students usually understand atoms faster when everything starts from the biggest total count on the page.",
+                      feedback:
+                        "That would hard-wire the wrong total-count shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-electron-label",
+                      label: "Use electron count as the main label for the atom at first, because the easiest visible changes usually happen in the outer part and can later be connected back to the nucleus.",
+                      feedback:
+                        "That would hard-wire the wrong charge-and-electron identity shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the atom terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m11-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they classify the atom",
+                  scenario:
+                    "The trainee analyst is about to read all three counts at once and guess the atom's identity from the biggest visible change instead of separating what each count controls first.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "protons-first-then-a-then-charge",
+                      label: "Start with proton number to name the element, then use protons plus neutrons for the mass number, and only after that compare proton and electron counts to decide the charge state.",
+                      feedback:
+                        "Exactly. That gives the analyst the right order for reading the atom.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "outer-first",
+                      label: "Start with electrons, because the outer count changes most clearly and usually gives the fastest clue about what kind of atom is on the screen.",
+                      feedback:
+                        "That would send the analyst back into the wrong electron-first shortcut.",
+                    },
+                    {
+                      value: "total-first",
+                      label: "Start with the biggest total count, because once the mass number is secure students can normally infer the rest of the atomic story without much risk.",
+                      feedback:
+                        "That would send the analyst into the wrong total-count shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean atom-reading method.",
+                  retryLabel: "That would send the analyst back into a M11_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m11-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the electron-identity and total-count shortcuts",
+                  scenario:
+                    "One crew member keeps letting electron change rename the element, while another keeps using the total particle count as if it settles every atom question on the board.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "atom-trap-warning",
+                      label: "Do not let charge change rename the element, and do not let the total count answer every question. Proton number fixes identity, mass number answers the nucleus-total question, and electron imbalance answers the charge question.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-warning-only",
+                      label: "Warn mainly that charge does not rename the element, because once students stop that mistake they usually become more careful with mass number on their own.",
+                      feedback:
+                        "That would leave the total-count shortcut mostly alive.",
+                    },
+                    {
+                      value: "mass-warning-only",
+                      label: "Warn mainly that mass number is not the whole story, because once students separate proton and neutron roles they usually stop treating electron change as a new element automatically.",
+                      feedback:
+                        "That would leave the charge-sets-identity shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps identity, mass, and charge separate.",
+                  retryLabel: "That warning would leave a main M11_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m11-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the nucleus story separate",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why proton count fixes identity, neutron count changes the nucleus total, and electron change alters charge without changing the element name.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "building-badge-analogy",
+                      label: "Think of the atom like a vault-house with a fixed badge on the core room: the badge comes from the proton count, the stored heavy blocks inside change the mass number, and extra or missing outer passes change charge without changing the building's badge.",
+                      feedback:
+                        "Exactly. That keeps identity, mass, and charge in separate lanes.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "visitor-tag-analogy",
+                      label: "Think of the atom like a hall where the visitor tags decide the building name, because changing the outer passes is the most obvious way to tell when the atom has become a new kind.",
+                      feedback:
+                        "That would rebuild the wrong electron-sets-identity shortcut.",
+                    },
+                    {
+                      value: "crowd-total-analogy",
+                      label: "Think of the atom like a crowd count where the total number of people is the only label that matters, because once the full total is known the separate roles inside are not really important.",
+                      feedback:
+                        "That would rebuild the wrong total-count shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the nucleus and electron stories separate.",
+                  retryLabel: "That analogy would pull the lesson away from the right Vault-house model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M10_L6") {
