@@ -1870,6 +1870,7 @@ export default function LessonRunner({
         lessonId === "A2_L4" ||
         lessonId === "A2_L5" ||
         lessonId === "A2_L6" ||
+        lessonId === "A3_L1" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9126,6 +9127,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A3_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a3-l1-superposition-board",
+                badge: "Superposition board",
+                title: "Add the two displacements at the same place and time",
+                scenario:
+                  "The superposition board freezes two overlapping progressive waves at one instant. One trainee thinks the waves take turns at the overlap point, another adds amplitudes without checking sign or phase, and a third keeps reading reinforcement and cancellation as if the waves hand energy off instead of sharing one displacement story.",
+                prompt: "Pin the note that keeps the overlap model accurate.",
+                options: [
+                  {
+                    value: "same-place-same-time-note",
+                    label: "During overlap, read both displacements at the same place and time and add them algebraically. Phase decides whether the sum reinforces or cancels.",
+                    feedback:
+                      "Exactly. That keeps superposition as one same-place same-time addition rule.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "take-turns-note",
+                    label: "Treat the waves as taking turns at the overlap point, because once one pulse passes through first the second pulse can then set the displacement afterward.",
+                    feedback:
+                      "That would rebuild the take-turns shortcut.",
+                  },
+                  {
+                    value: "size-only-note",
+                    label: "Compare the wave sizes first and ignore sign or phase, because larger amplitudes usually settle whether the overlap should count as reinforcement or cancellation.",
+                    feedback:
+                      "That would hide the algebraic-sum rule the lesson actually needs.",
+                  },
+                ],
+                successLabel: "Pinned. The board now reads overlap through the correct addition rule.",
+                retryLabel: "That note would leave a main A3_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a3-l1-fix-ideas",
+                  badge: "Overlap repair",
+                  title: "Repair the take-turns and size-only shortcuts",
+                  scenario:
+                    "One trainee keeps treating overlap like a handoff where one wave acts after the other, while another keeps adding magnitudes without checking whether the individual displacements point up or down at that instant.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-algebraic-overlap-model",
+                      label: "Repair both habits together: freeze one place and time, read the two displacements together, and add them algebraically so phase can decide reinforcement or cancellation.",
+                      feedback:
+                        "Exactly. That restores the right superposition model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-bigger-wave-first",
+                      label: "Repair the confusion by identifying the larger wave first, because once students know which wave dominates the overlap the exact sign details usually become secondary.",
+                      feedback:
+                        "That would keep the size-only shortcut alive.",
+                    },
+                    {
+                      value: "repair-sequence-first",
+                      label: "Repair the confusion by tracking which wave arrived first, because once students know the order the combined shape usually becomes easier to predict.",
+                      feedback:
+                        "That would keep the take-turns shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now treats overlap as one shared displacement story.",
+                  retryLabel: "That would leave a main A3_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a3-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line superposition rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop reading overlapping waves as a sequence of separate actions.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "superposition-anchor",
+                      label: "Superposition is the rule that lets overlapping progressive waves share one displacement story by adding the displacements at the same place and time.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "sequence-anchor",
+                      label: "The main idea is mostly that waves cross each other in sequence, because once students know which one arrives first the overlap usually becomes easier to describe.",
+                      feedback:
+                        "That line rebuilds the take-turns shortcut.",
+                    },
+                    {
+                      value: "amplitude-anchor-only",
+                      label: "The main idea is mostly that bigger amplitudes matter more, because once students compare the wave sizes the phase details usually become secondary.",
+                      feedback:
+                        "That line misses the algebraic-sum rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right superposition rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a3-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the overlap vocabulary board",
+                  scenario:
+                    "The crew keeps mixing displacement, overlap, in phase, out of phase, and algebraic sum until every answer sounds like one vague 'the waves combine somehow' story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a3-l1",
+                      label: "Use displacement for the up-or-down value at one point, overlap for the moment both waves occupy the same place, in phase for matching sign and position, out of phase for mismatched sign or position, and algebraic sum for the combined displacement rule.",
+                      feedback:
+                        "Exactly. That keeps the superposition terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-combine-does-most",
+                      label: "Use combine as the main word for almost the whole topic, because once students know the waves affect each other the detailed phase language usually becomes secondary.",
+                      feedback:
+                        "That would hard-wire the vague-combination shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-amplitude-does-most",
+                      label: "Use amplitude as the main word for almost the whole topic, because once students compare the sizes of the waves the displacement and phase language usually matters less.",
+                      feedback:
+                        "That would hard-wire the size-only shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the superposition terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a3-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they read the overlap",
+                  scenario:
+                    "The trainee analyst is about to describe the overlap from wave order or overall size without first freezing one instant and reading the two separate displacements at the same location.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "freeze-read-add",
+                      label: "Freeze one instant, read both displacements at the same place, add them algebraically, and then use phase to describe whether the result reinforces or cancels.",
+                      feedback:
+                        "Exactly. That gives the analyst the right superposition workflow.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "arrival-order-first",
+                      label: "Start from which wave arrived first, because once the order is clear the combined displacement usually becomes easier to infer.",
+                      feedback:
+                        "That would send the analyst back into the take-turns shortcut.",
+                    },
+                    {
+                      value: "largest-amplitude-first",
+                      label: "Start from the larger amplitude first, because once students know which wave is bigger the final overlap usually becomes mostly obvious.",
+                      feedback:
+                        "That would send the analyst back into the size-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean overlap-reading method.",
+                  retryLabel: "That would send the analyst back into a A3_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a3-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the handoff and size-only shortcuts",
+                  scenario:
+                    "One crew member keeps treating overlap like one wave acts and then the other, while another keeps deciding the outcome from amplitude size alone instead of from signed displacement at one instant.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "superposition-trap-warning",
+                      label: "Do not treat overlap as a handoff or a size contest. Read the two displacements at the same place and time and add them algebraically.",
+                      feedback:
+                        "Exactly. That warning blocks the main A3_L1 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "handoff-warning-only",
+                      label: "Warn mainly against the handoff habit, because once students stop that they usually remember to account for sign and phase on their own.",
+                      feedback:
+                        "That would leave the size-only shortcut too alive.",
+                    },
+                    {
+                      value: "size-warning-only",
+                      label: "Warn mainly against comparing amplitudes alone, because once students stop that they usually stop imagining a handoff between the waves on their own.",
+                      feedback:
+                        "That would leave the handoff shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the same-place same-time rule visible.",
+                  retryLabel: "That warning would leave a main A3_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a3-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the same-moment sum visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why overlapping waves should be added at the same place and time.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "elevator-vote-analogy",
+                      label: "Think of the overlap like two simultaneous votes on the same elevator position: one vote can push up, the other can push down, and the final position comes from adding both influences at that instant.",
+                      feedback:
+                        "Exactly. That keeps the same-moment sum visible without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "relay-analogy",
+                      label: "Think of the overlap more like a relay race, because once one wave has acted the next wave can then take over the point.",
+                      feedback:
+                        "That would rebuild the handoff shortcut.",
+                    },
+                    {
+                      value: "bigger-team-analogy",
+                      label: "Think of the overlap mainly like whichever team has more people winning automatically, because the largest contribution usually decides the result without much need for sign details.",
+                      feedback:
+                        "That would rebuild the size-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the superposition picture intact.",
+                  retryLabel: "That analogy would pull the lesson away from the right overlap model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "A2_L6") {
