@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,282 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M11_L4") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m11-l4-crowd-board",
+                badge: "Crowd board",
+                title: "Read half-life as halving what remains",
+                scenario:
+                  "The Settle-span crowd board starts with one undecayed group and advances equal half-life intervals. One trainee subtracts the same fixed number each round, another expects every single nucleus to carry its own exact timer, and a third forgets that the crowd story and the graph story must agree.",
+                prompt: "Pin the note that keeps the crowd-halving story accurate.",
+                options: [
+                  {
+                    value: "halve-what-remains-note",
+                    label: "In each equal half-life interval, halve what remains, not the same fixed number. The exact nucleus that decays is random, but a large crowd follows a stable halving pattern that later matches the curve.",
+                    feedback:
+                      "Exactly. That keeps the population halving rule and the randomness-versus-pattern split together.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "fixed-subtraction-note",
+                    label: "Treat each half-life interval as removing the same fixed number, because equal time steps should give equal losses if the source is behaving consistently.",
+                    feedback:
+                      "That would rebuild the wrong fixed-subtraction shortcut.",
+                  },
+                  {
+                    value: "personal-timer-note",
+                    label: "Treat each nucleus as carrying its own exact half-life timer, because that makes the group pattern easier to picture than separating individual randomness from the crowd trend.",
+                    feedback:
+                      "That would rebuild the wrong personal-timer shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads half-life as halving what remains.",
+                retryLabel: "That note would leave a main M11_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isMediaStep && activeMediaIndex === 1) {
+              return {
+                id: "m11-l4-curve-board",
+                badge: "Curve board",
+                title: "Match the crowd story to the decay curve",
+                scenario:
+                  "The curve board shows the undecayed population falling over equal time intervals. One trainee reads the graph like a straight-line drop, another treats the flattening as if the decay is stopping, and a third forgets that each equal time jump should correspond to halving the remaining crowd.",
+                prompt: "Pin the note that keeps the graph linked to the crowd story.",
+                options: [
+                  {
+                    value: "curve-halving-note",
+                    label: "The curve bends because each equal time jump halves whatever population is still left. The drop per interval gets smaller because the remaining crowd is smaller, not because the source has stopped decaying.",
+                    feedback:
+                      "Exactly. That keeps the curve tied to the crowd-halving rule.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "straight-line-note",
+                    label: "Treat the graph as basically a straight-line fall in disguise, because equal time intervals should remove equal amounts if the half-life stays constant.",
+                    feedback:
+                      "That would rebuild the wrong straight-line shortcut.",
+                  },
+                  {
+                    value: "stopping-note",
+                    label: "Treat the flattening as evidence that the decay is gradually switching off, because a slower drop must mean the source itself is weakening its behaviour over time.",
+                    feedback:
+                      "That would rebuild the wrong stopping-source shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads the curve as the same halving story in graph form.",
+                retryLabel: "That note would leave a main M11_L4 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m11-l4-fix-ideas",
+                  badge: "Half-life repair",
+                  title: "Repair the fixed-subtraction and personal-timer shortcuts",
+                  scenario:
+                    "One trainee still subtracts the same number every half-life, while another keeps talking as if each nucleus carries an exact countdown timer.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-halving-pattern",
+                      label: "Repair both ideas together: half-life halves what remains in a large sample, not the same fixed number, and the group trend is predictable even though a single nucleus decays randomly.",
+                      feedback:
+                        "Exactly. That restores the right group-halving and randomness split.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-with-equal-loss",
+                      label: "Repair the confusion by saying equal time intervals should still give equal losses, because keeping the half-life constant means the source should lose the same amount each round.",
+                      feedback:
+                        "That would keep the wrong equal-loss shortcut alive.",
+                    },
+                    {
+                      value: "repair-with-hidden-timers",
+                      label: "Repair the confusion by saying every nucleus does have a hidden timer even if we cannot read it directly, because that is the easiest way to justify the regular group pattern.",
+                      feedback:
+                        "That would keep the wrong personal-timer shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now reads half-life as a group-halving rule.",
+                  retryLabel: "That would leave a main M11_L4 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m11-l4-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line half-life rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop treating half-life like a fixed-number drop or a private timer for each nucleus.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "half-life-anchor",
+                      label: "Half-life is a statistical halving pattern: equal half-life intervals halve what remains, and a large sample can be predictable even though a single nucleus decays randomly.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equal-loss-anchor",
+                      label: "The main idea is that equal half-life intervals remove equal numbers, because that is the simplest way to picture steady radioactive behaviour over time.",
+                      feedback:
+                        "That would build the wrong equal-loss shortcut into the anchor sentence.",
+                    },
+                    {
+                      value: "timer-anchor",
+                      label: "The main idea is that each nucleus has its own half-life timer, because that makes the randomness easier to manage and explains why the graph looks regular overall.",
+                      feedback:
+                        "That would build the wrong personal-timer shortcut into the anchor sentence.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right half-life rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m11-l4-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the half-life vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up half-life, remaining count, remaining fraction, randomness, and decay curve until every graph label sounds like another way of saying 'it just goes down.'",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-halving",
+                      label: "Use half-life for the equal interval that halves what remains, remaining fraction for the share left after each jump, randomness for the single-nucleus story, and decay curve for the graph form of the same population pattern.",
+                      feedback:
+                        "Exactly. That keeps the half-life terms tied to their real jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-downward",
+                      label: "Use half-life mainly as another word for the source gradually going down, because the exact difference between number, fraction, and graph shape usually confuses students more than it helps.",
+                      feedback:
+                        "That would hard-wire the wrong vague-drop shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-timers",
+                      label: "Use half-life as the timer carried by each nucleus, because that makes the decay curve easier to explain than separating the single-nucleus and population stories.",
+                      feedback:
+                        "That would hard-wire the wrong personal-timer shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the half-life terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m11-l4-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they step through the intervals",
+                  scenario:
+                    "The trainee analyst is about to read the crowd or graph by equal drops instead of checking what fraction remains after each equal half-life jump.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "remaining-first",
+                      label: "Start with what remains after each equal interval, halve that remaining amount each time, and then check that the crowd picture and the graph curve tell the same story.",
+                      feedback:
+                        "Exactly. That gives the analyst the right remaining-first method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "subtract-first",
+                      label: "Start by subtracting the same amount at each equal interval, because constant time spacing should produce constant losses when the half-life is fixed.",
+                      feedback:
+                        "That would send the analyst back into the wrong equal-loss shortcut.",
+                    },
+                    {
+                      value: "graph-shape-only",
+                      label: "Start by memorizing the curve shape, because once the graph is recognised the crowd picture and exact halving details can usually be filled in later.",
+                      feedback:
+                        "That would send the analyst into the wrong graph-shape-only shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean half-life method.",
+                  retryLabel: "That would send the analyst back into a M11_L4 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m11-l4-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the equal-loss and personal-timer shortcuts",
+                  scenario:
+                    "One crew member keeps removing the same fixed number each interval, while another keeps treating each nucleus as if it decays on its own exact schedule.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "half-life-trap-warning",
+                      label: "Do not subtract the same fixed number each interval, and do not give each nucleus its own exact timer. Half-life halves what remains in the group, and the crowd trend stays predictable even though single decays are random.",
+                      feedback:
+                        "Exactly. That warning blocks both shortcuts the lesson is targeting.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "equal-loss-warning-only",
+                      label: "Warn mainly that equal time intervals do not mean equal losses, because once students stop that mistake they usually become more careful about randomness on their own.",
+                      feedback:
+                        "That would leave the personal-timer shortcut mostly alive.",
+                    },
+                    {
+                      value: "randomness-warning-only",
+                      label: "Warn mainly that single nuclei are random, because once students stop that mistake they usually become more careful about the halving maths on their own.",
+                      feedback:
+                        "That would leave the equal-loss shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps the group-halving story intact.",
+                  retryLabel: "That warning would leave a main M11_L4 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m11-l4-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the crowd and curve linked",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why half-life halves what remains, why the drop per round gets smaller, and why the graph is curved instead of straight.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "crowd-exit-analogy",
+                      label: "Think of it like a crowd where each equal round clears out half of whoever is still inside. The number leaving each round shrinks because the remaining crowd is smaller, and the curve is just the graph view of that same crowd story.",
+                      feedback:
+                        "Exactly. That keeps the crowd picture and the curve picture linked together.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "fixed-stair-analogy",
+                      label: "Think of it like descending a staircase with the same number of steps each round, because that makes equal half-life intervals easier to remember as equal losses.",
+                      feedback:
+                        "That would rebuild the wrong equal-loss shortcut.",
+                    },
+                    {
+                      value: "alarm-clock-analogy",
+                      label: "Think of each nucleus like a clock that rings at its own set half-life, because that makes the graph easier to explain than dealing with probability and population trends.",
+                      feedback:
+                        "That would rebuild the wrong personal-timer shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the crowd and curve stories joined.",
+                  retryLabel: "That analogy would pull the lesson away from the right Settle-span model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M11_L3") {
