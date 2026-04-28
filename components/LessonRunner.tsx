@@ -1858,6 +1858,7 @@ export default function LessonRunner({
         lessonId === "M14_L4" ||
         lessonId === "M14_L5" ||
         lessonId === "M14_L6" ||
+        lessonId === "A1_L1" ||
         lessonId === "F1_L1" ||
         lessonId === "F1_L2" ||
         lessonId === "F1_L3" ||
@@ -9114,6 +9115,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "A1_L1") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "a1-l1-inventory-board",
+                badge: "Inventory board",
+                title: "Separate messengers, travelers, and nucleus bundles before later stories",
+                scenario:
+                  "The particle inventory board shows a photon, an electron, and a proton on the same tray. One trainee wants to group them only by charge tag, another keeps calling every subatomic object the same kind of tiny particle, and a third keeps slipping the electron into the nucleus bundle just because it belongs to the atom story.",
+                prompt: "Pin the note that keeps the inventory model accurate.",
+                options: [
+                  {
+                    value: "role-family-first-note",
+                    label: "Sort by role and family first: the photon is a radiation messenger, the electron is a matter traveler in the lepton family, and the proton is a composite nucleon in the nucleus bundle, while the charge tag is only a comparison label.",
+                    feedback:
+                      "Exactly. That keeps role, family, and charge in the right slots from the start.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "charge-first-note",
+                    label: "Sort mainly by charge tag, because once students separate positive, negative, and neutral particles the family and role labels usually sort themselves out afterward.",
+                    feedback:
+                      "That would rebuild the wrong charge-first shortcut.",
+                  },
+                  {
+                    value: "atom-parts-note",
+                    label: "Treat the lesson mainly as grouping all the atom parts together, because once students know the photon, electron, and proton all belong to atomic stories the finer classification can wait.",
+                    feedback:
+                      "That would collapse messenger, traveler, and nucleus-bundle roles into one vague category.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads photon, electron, and proton through role and family first.",
+                retryLabel: "That note would leave a main A1_L1 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "a1-l1-fix-ideas",
+                  badge: "Inventory repair",
+                  title: "Repair the charge-first and one-category shortcuts",
+                  scenario:
+                    "One trainee keeps using charge as the whole classification rule, while another keeps talking as if photon, electron, and proton should all begin in one generic subatomic bucket.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-role-family-model",
+                      label: "Repair both habits together: ask what role the particle plays first, keep photon separate as the radiation messenger, keep electron as a lepton matter traveler, keep proton in the nucleus bundle, and use the charge tag only as a comparison label.",
+                      feedback:
+                        "Exactly. That restores the proper particle inventory model.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-charge-more-carefully",
+                      label: "Repair the confusion by teaching charge tags more carefully first, because once students track plus, minus, and zero cleanly the family and role differences usually become obvious on their own.",
+                      feedback:
+                        "That would keep the charge-first shortcut alive.",
+                    },
+                    {
+                      value: "repair-atom-story-first",
+                      label: "Repair the confusion by emphasizing that all three belong to atomic stories, because once students feel that shared context the messenger and family details usually become easier later.",
+                      feedback:
+                        "That would keep the one-category shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now separates role, family, and charge cleanly.",
+                  retryLabel: "That would leave a main A1_L1 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "a1-l1-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line particle inventory rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop mixing photons, leptons, and nucleus particles before later particle stories begin.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "inventory-anchor",
+                      label: "Matter travelers are matter particles such as electrons and nucleons, photons are radiation messengers, charge tags compare particles without deciding family, and atoms contain electrons around nuclei made from protons and neutrons.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-anchor-only",
+                      label: "The main idea is that charge tags are the best way to organize particles, because once students know positive, negative, and neutral they can usually rebuild the family story afterward.",
+                      feedback:
+                        "That line rebuilds the wrong charge-first shortcut.",
+                    },
+                    {
+                      value: "tiny-things-anchor-only",
+                      label: "The main idea is that photons, electrons, and protons are all basically the same kind of tiny atomic thing, because the shared subatomic scale matters more than the family differences at first.",
+                      feedback:
+                        "That line misses the role-and-family rule that actually explains the inventory.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right particle inventory rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "a1-l1-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the particle inventory vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up photon, lepton, hadron, nucleon, matter traveler, radiation messenger, and charge tag until every answer sounds like one vague tiny-particle story.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-a1-l1",
+                      label: "Use photon for the radiation messenger, lepton for particles such as the electron, nucleon for the proton-or-neutron nucleus bundle, hadron for the wider composite family containing nucleons, and charge tag for the electric-charge label only.",
+                      feedback:
+                        "Exactly. That keeps the particle inventory terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-charge-does-most",
+                      label: "Use charge as the main word for almost the whole topic, because once students know each particle's plus, minus, or zero label the rest of the classification usually becomes secondary.",
+                      feedback:
+                        "That would hard-wire the charge-first shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-atom-does-most",
+                      label: "Use atom part as the main word for almost the whole topic, because once students know everything belongs somewhere in atomic physics the messenger and family labels usually matter less.",
+                      feedback:
+                        "That would hide the role-and-family rule the lesson actually needs.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the particle inventory terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "a1-l1-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they sort the tray",
+                  scenario:
+                    "The trainee analyst is about to classify the tray by charge alone without first asking which item is the messenger, which is a matter traveler, and which belongs in the nucleus bundle.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "role-then-family-then-charge",
+                      label: "Start by asking what role each particle plays, then sort by family and nucleus placement, and only afterward use the charge tag to compare charged and neutral cases.",
+                      feedback:
+                        "Exactly. That gives the analyst the right particle-inventory method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-then-role",
+                      label: "Start from the charge tag first, because once students know the electrical labels the messenger and family categories usually become easier automatically.",
+                      feedback:
+                        "That would send the analyst back into the wrong charge-first shortcut.",
+                    },
+                    {
+                      value: "atom-story-then-sort",
+                      label: "Start from the shared atomic story first, because once students feel that all the items belong to atomic physics the specific role differences usually become obvious afterward.",
+                      feedback:
+                        "That would send the analyst back into the one-category shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean particle-inventory method.",
+                  retryLabel: "That would send the analyst back into a A1_L1 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "a1-l1-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the charge-only and generic-bucket shortcuts",
+                  scenario:
+                    "One crew member keeps trusting charge tag as the whole classifier, while another quietly treats messenger, traveler, and nucleus bundle like one big generic group of tiny things.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "inventory-trap-warning",
+                      label: "Do not let charge tag do the whole job, and do not collapse every subatomic object into one generic category. Keep photon role, particle family, and nucleus placement in the same picture.",
+                      feedback:
+                        "Exactly. That warning blocks the main A1_L1 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "charge-warning-only",
+                      label: "Warn mainly against the charge mistake, because once students stop that habit they usually stop collapsing all the particles into one bucket on their own.",
+                      feedback:
+                        "That would leave the generic-bucket shortcut too alive.",
+                    },
+                    {
+                      value: "generic-warning-only",
+                      label: "Warn mainly against the generic bucket, because once students stop that habit they usually stop over-trusting charge tags on their own.",
+                      feedback:
+                        "That would leave the charge-first shortcut too alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps inventory roles and families distinct.",
+                  retryLabel: "That warning would leave a main A1_L1 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "a1-l1-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the inventory roles distinct",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why a photon, an electron, and a proton should not all start in the same category.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "courier-traveler-crate-analogy",
+                      label: "Think of the photon like a message courier, the electron like a solo traveler, and the proton like a bundled cargo unit in the nucleus, so role and structure matter before the charge label.",
+                      feedback:
+                        "Exactly. That keeps the inventory ingredients linked without flattening the physics.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "colored-stickers-analogy",
+                      label: "Think of the particles mainly like objects sorted by sticker color, because plus, minus, and zero labels should be enough to organize the whole tray before the family details arrive.",
+                      feedback:
+                        "That would rebuild the charge-first shortcut.",
+                    },
+                    {
+                      value: "tiny-parts-analogy",
+                      label: "Think of the particles mainly like three tiny parts from the same machine, because their shared small scale matters more than their messenger, traveler, or nucleus-bundle differences.",
+                      feedback:
+                        "That would rebuild the generic-bucket shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the particle inventory ingredients linked.",
+                  retryLabel: "That analogy would pull the lesson away from the right inventory model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M14_L6") {
