@@ -2034,6 +2034,248 @@ function getA5ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A5_L2") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a5-l2-shm-board",
+        badge: "SHM board",
+        title: "Check the restoring acceleration rule before calling it SHM",
+        scenario:
+          "The SHM board links displacement and acceleration on both sides of equilibrium. One trainee wants to call any repeated motion SHM, another forgets that the acceleration must point back toward equilibrium, and a third notices the size link but not the opposite-direction rule.",
+        prompt: "Pin the note that keeps the SHM model accurate.",
+        options: [
+          {
+            value: "proportional-opposite-note",
+            label: "Treat SHM as the special case where restoring acceleration grows in magnitude with displacement and always points back toward equilibrium, so the sign of acceleration is opposite to the sign of displacement.",
+            feedback:
+              "Exactly. That keeps proportional size and opposite direction together.",
+            isCorrect: true,
+          },
+          {
+            value: "repetition-means-shm-note",
+            label: "Treat any repeated motion as SHM, because once the pattern cycles smoothly the exact acceleration rule usually becomes a secondary detail.",
+            feedback:
+              "That would rebuild the repetition-equals-SHM shortcut.",
+          },
+          {
+            value: "same-direction-acceleration-note",
+            label: "Let the acceleration point with the displacement, because the farther the system moves from equilibrium the more strongly it should keep heading that way before turning back later.",
+            feedback:
+              "That would rebuild the direction-sign shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads SHM through the restoring-acceleration rule.",
+        retryLabel: "That note would leave a main A5_L2 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a5-l2-fix-ideas",
+          badge: "SHM repair",
+          title: "Repair the generic-repetition and wrong-direction shortcuts",
+          scenario:
+            "One analyst keeps treating SHM as just another name for repeating motion, while another keeps forgetting that the restoring acceleration must point back toward equilibrium on both sides.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-proportional-restoring-rule",
+              label: "Repair both habits together: define SHM with the proportional restoring-acceleration rule, then check that the acceleration magnitude grows with displacement while its direction always points back toward equilibrium.",
+              feedback:
+                "Exactly. That restores the right SHM-condition workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-repeat-pattern-first",
+              label: "Repair the confusion by emphasizing the repeated pattern first, because once students trust the cycle the acceleration rule usually becomes easier later.",
+              feedback:
+                "That would keep the repetition-equals-SHM shortcut alive.",
+            },
+            {
+              value: "repair-size-link-only",
+              label: "Repair the confusion by emphasizing only that bigger displacement means bigger acceleration, because once the size link is clear the direction rule usually becomes obvious on its own.",
+              feedback:
+                "That would leave the sign-direction shortcut too alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats SHM as a specific restoring-acceleration condition.",
+          retryLabel: "That would leave a main A5_L2 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a5-l2-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line SHM rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop using SHM as a loose synonym for any repeated motion.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a5-l2-anchor",
+              label: "SHM is defined by the proportional restoring acceleration rule, not by repetition alone.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "repeat-anchor-only",
+              label: "The main idea is mostly that the motion repeats smoothly, because once the cycle looks regular the exact restoring rule usually becomes secondary.",
+              feedback:
+                "That would hide the defining SHM condition.",
+            },
+            {
+              value: "size-anchor-only",
+              label: "The main idea is mostly that bigger displacement gives bigger acceleration, because once the size trend is seen the direction rule usually becomes secondary.",
+              feedback:
+                "That would leave out half of the SHM condition.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right SHM rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a5-l2-technical-words",
+          badge: "Term desk",
+          title: "Clean up the SHM vocabulary board",
+          scenario:
+            "The crew keeps mixing displacement, acceleration, equilibrium, proportional, and restoring until every answer sounds like one vague oscillation story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a5-l2",
+              label: "Use displacement for signed position away from equilibrium, restoring acceleration for the acceleration back toward equilibrium, and proportional for the size link between acceleration magnitude and displacement magnitude.",
+              feedback:
+                "Exactly. That keeps the SHM terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-oscillation-does-most",
+              label: "Use oscillation as the main word for almost the whole topic, because once students know the motion repeats the extra displacement and acceleration labels usually matter less.",
+              feedback:
+                "That would scramble the SHM terms into the generic-oscillation shortcut.",
+            },
+            {
+              value: "term-board-acceleration-size-only",
+              label: "Use acceleration mainly as a size word here, because once students know it gets bigger farther out the sign and equilibrium details usually become secondary.",
+              feedback:
+                "That would weaken the direction part of the SHM rule.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the SHM terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a5-l2-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they label the motion",
+          scenario:
+            "The trainee analyst is about to classify the motion from repetition alone and has not yet checked how the acceleration behaves at equal displacements on opposite sides of equilibrium.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "compare-opposite-sides-first",
+              label: "Start by comparing equal displacements on opposite sides of equilibrium, check that the acceleration flips direction back toward the center, and then confirm that larger displacement gives larger acceleration magnitude.",
+              feedback:
+                "Exactly. That gives the analyst the right SHM workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-repeat-pattern",
+              label: "Start from the repeated pattern first, because once the cycle is clear the acceleration rule usually takes care of itself.",
+              feedback:
+                "That would send the analyst back into the generic-repetition shortcut.",
+            },
+            {
+              value: "start-from-bigger-means-bigger",
+              label: "Start from the size trend alone, because once students see that bigger displacement gives bigger acceleration the direction rule usually becomes mostly obvious.",
+              feedback:
+                "That would send the analyst back into the sign-direction shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean SHM-condition method.",
+          retryLabel: "That would send the analyst back into a A5_L2 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a5-l2-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the repetition-equals-SHM shortcut",
+          scenario:
+            "One crew member keeps calling any repeated motion SHM, while another remembers the size link but still lets acceleration point the wrong way.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "shm-trap-warning",
+              label: "Do not use repetition alone to identify SHM, and do not forget the direction rule. In SHM the restoring acceleration is proportional to displacement in magnitude and points back toward equilibrium.",
+              feedback:
+                "Exactly. That warning blocks the main A5_L2 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "repeat-warning-only",
+              label: "Warn mainly against trusting repetition alone, because once students stop that they usually fix the acceleration direction on their own.",
+              feedback:
+                "That would leave the direction-sign shortcut too alive.",
+            },
+            {
+              value: "direction-warning-only",
+              label: "Warn mainly about acceleration direction, because once students stop that they usually understand that SHM is more specific than ordinary oscillation on their own.",
+              feedback:
+                "That would leave the repetition-equals-SHM shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the full SHM condition visible.",
+          retryLabel: "That warning would leave a main A5_L2 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a5-l2-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps proportional restoring visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why SHM is more specific than repetition: the farther from the center, the stronger the return tendency, and it always points back toward the center.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "spring-centerline-analogy",
+              label: "Think of the motion like a spring tied to a center mark: the farther you pull it from the middle, the stronger the pull back, and that pull always aims toward the center line.",
+              feedback:
+                "Exactly. That keeps proportional size and return direction visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "metronome-repeat-analogy",
+              label: "Think of the motion mainly like any regular beat, because once the repetition is smooth the special acceleration rule usually matters much less.",
+              feedback:
+                "That would rebuild the generic-repetition shortcut.",
+            },
+            {
+              value: "rocket-thrust-analogy",
+              label: "Think of the motion mainly like a thrust that keeps pushing farther the farther out you go, because once the size link is clear the direction issue usually matters less.",
+              feedback:
+                "That would rebuild the sign-direction shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the special SHM condition visible.",
+          retryLabel: "That analogy would pull the lesson away from the right SHM-condition model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A5_L1") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
