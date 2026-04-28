@@ -1775,7 +1775,7 @@ export default function LessonRunner({
       scaffoldClarityCards,
     );
       const scaffoldRoleplayCard =
-              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
+              lessonId === "M1_L1" || lessonId === "M1_L2" || lessonId === "M1_L3" || lessonId === "M1_L5" || lessonId === "M1_L6" || lessonId === "M2_L1" || lessonId === "M2_L2" || lessonId === "M2_L3" || lessonId === "M2_L4" || lessonId === "M2_L5" || lessonId === "M2_L6" || lessonId === "M3_L1" || lessonId === "M3_L2" || lessonId === "M3_L3" || lessonId === "M3_L4" || lessonId === "M3_L5" || lessonId === "M3_L6" || lessonId === "M4_L1" || lessonId === "M4_L2" || lessonId === "M4_L3" || lessonId === "M4_L4" || lessonId === "M4_L5" || lessonId === "M4_L6" || lessonId === "M5_L1" || lessonId === "M5_L2" || lessonId === "M5_L3" || lessonId === "M5_L4" || lessonId === "M5_L5" || lessonId === "M5_L6" || lessonId === "M6_L1" || lessonId === "M6_L2" || lessonId === "M6_L3" || lessonId === "M6_L4" || lessonId === "M6_L5" || lessonId === "M6_L6" || lessonId === "M7_L1" || lessonId === "M7_L2" || lessonId === "M7_L3" || lessonId === "M7_L4" || lessonId === "M7_L5" || lessonId === "M7_L6" || lessonId === "M8_L1" || lessonId === "M8_L2" || lessonId === "M8_L3" || lessonId === "M8_L4" || lessonId === "M8_L5" || lessonId === "M8_L6" || lessonId === "M9_L1" || lessonId === "M9_L2" || lessonId === "M9_L3" || lessonId === "M9_L4" || lessonId === "M9_L5" || lessonId === "M9_L6" || lessonId === "M10_L1" || lessonId === "M10_L2" || lessonId === "M10_L3" || lessonId === "M10_L4" || lessonId === "M10_L5" || lessonId === "M10_L6" || lessonId === "M11_L1" || lessonId === "M11_L2" || lessonId === "M11_L3" || lessonId === "M11_L4" || lessonId === "M11_L5" || lessonId === "M11_L6" || lessonId === "M12_L1" || lessonId === "M12_L2" || lessonId === "M12_L3" || lessonId === "F1_L1" || lessonId === "F1_L2" || lessonId === "F1_L3" || lessonId === "F1_L4" || lessonId === "F1_L5" || lessonId === "F1_L6" || lessonId === "F2_L1" || lessonId === "F2_L2" || lessonId === "F2_L3" || lessonId === "F2_L4" || lessonId === "F2_L5" || lessonId === "F2_L6" || lessonId === "F3_L1" || lessonId === "F3_L2" || lessonId === "F3_L3" || lessonId === "F3_L4" || lessonId === "F3_L5" || lessonId === "F3_L6" || lessonId === "F4_L1" || lessonId === "F4_L2" || lessonId === "F4_L3" || lessonId === "F4_L4" || lessonId === "F4_L5" || lessonId === "F4_L6" || lessonId === "F5_L1" || lessonId === "F5_L2" || lessonId === "F5_L3" || lessonId === "F5_L4" || lessonId === "F5_L5" || lessonId === "F5_L6"
           ? (() => {
               if (lessonId === "F5_L6") {
                 if (isMediaStep && activeMediaIndex === 0) {
@@ -9002,6 +9002,248 @@ export default function LessonRunner({
                   } satisfies ScaffoldRoleplayCard;
                 }
               }
+            }
+
+            if (lessonId === "M12_L3") {
+            if (isMediaStep && activeMediaIndex === 0) {
+              return {
+                id: "m12-l3-fusion-board",
+                badge: "Fusion board",
+                title: "Check the entry conditions before claiming the release",
+                scenario:
+                  "The Fusion route board shows two light nuclei approaching, a barrier from electrostatic repulsion, and a joined outcome only after extreme collision conditions. One trainee talks as if fusion is just fission in reverse, another jumps straight to energy release without asking what allows joining, and a third forgets that the repulsion barrier is the main entry problem.",
+                prompt: "Pin the note that keeps the fusion story accurate.",
+                options: [
+                  {
+                    value: "conditions-repulsion-release-note",
+                    label: "Start by asking what conditions let the nuclei get close enough to join. Keep electrostatic repulsion and the extreme entry conditions visible, then compare the joined nucleus with the starting pair before naming the energy release.",
+                    feedback:
+                      "Exactly. That keeps entry conditions and outcome in one fusion story.",
+                    isCorrect: true,
+                  },
+                  {
+                    value: "reverse-fission-note",
+                    label: "Treat fusion mainly as fission in the other direction, because once students know one process releases nuclear energy they can picture the other as the mirror image without much extra setup.",
+                    feedback:
+                      "That would rebuild the wrong reverse-fission shortcut.",
+                  },
+                  {
+                    value: "release-first-note",
+                    label: "Treat the energy release as the main point and the joining conditions as a later detail, because once students know fusion can power stars the barrier story matters less.",
+                    feedback:
+                      "That would rebuild the wrong release-first shortcut.",
+                  },
+                ],
+                successLabel: "Pinned. The room now reads fusion through repulsion, entry conditions, and joining.",
+                retryLabel: "That note would leave a main M12_L3 shortcut active.",
+              } satisfies ScaffoldRoleplayCard;
+            }
+
+            if (isSectionStep && !activeSection?.worked_example) {
+              if (activeSectionHeading === "fix these ideas") {
+                return {
+                  id: "m12-l3-fix-ideas",
+                  badge: "Fusion repair",
+                  title: "Repair the reverse-fission and release-first shortcuts",
+                  scenario:
+                    "One trainee still describes fusion as just the opposite of fission, while another keeps talking about energy out without first addressing the barrier that stops joining at low energy.",
+                  prompt: "Choose the repair note.",
+                  options: [
+                    {
+                      value: "repair-entry-conditions",
+                      label: "Repair both habits together: fusion joins light nuclei, but only after extreme conditions let them overcome electrostatic repulsion. The release matters, but the entry conditions are part of the same explanation.",
+                      feedback:
+                        "Exactly. That restores the full fusion route story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "repair-energy-only",
+                      label: "Repair the confusion by emphasizing that fusion is a powerful nuclear-energy process, because once students understand the outcome the exact joining conditions can be added later if needed.",
+                      feedback:
+                        "That would keep the release-first shortcut alive.",
+                    },
+                    {
+                      value: "repair-same-family",
+                      label: "Repair the confusion by saying fusion and fission are mostly the same family idea with opposite direction, because that keeps nuclear energy simple and avoids overcomplicating the lesson.",
+                      feedback:
+                        "That would keep the wrong reverse-fission shortcut alive.",
+                    },
+                  ],
+                  successLabel: "Repair sent. The room now keeps repulsion and release in the same fusion story.",
+                  retryLabel: "That would leave a main M12_L3 shortcut active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "core idea") {
+                return {
+                  id: "m12-l3-core-idea",
+                  badge: "Ops summary",
+                  title: "Post the one-line fusion rule",
+                  scenario:
+                    "Quest Control wants one sentence on the wall so analysts stop talking about fusion as effortless joining or as just reversed fission.",
+                  prompt: "Choose the line to post.",
+                  options: [
+                    {
+                      value: "fusion-anchor",
+                      label: "Fusion joins light nuclei into a heavier nucleus. Fusion needs extreme conditions to overcome repulsion, and it is the energy source in stars.",
+                      feedback:
+                        "Exactly. That is the clean anchor sentence this lesson needs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "mirror-anchor",
+                      label: "The main idea is that fusion is basically fission in reverse, because both are just nuclear-energy rearrangements and the direction is the main difference students need to remember.",
+                      feedback:
+                        "That line blurs the actual joining-conditions story.",
+                    },
+                    {
+                      value: "star-anchor-only",
+                      label: "The main idea is that stars use fusion, because once students remember the star context they usually understand the rest of the process later.",
+                      feedback:
+                        "That line drops too much of the repulsion and entry-condition logic.",
+                    },
+                  ],
+                  successLabel: "Posted. The room now starts from the right fusion rule.",
+                  retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "technical words") {
+                return {
+                  id: "m12-l3-technical-words",
+                  badge: "Term desk",
+                  title: "Clean up the fusion vocabulary board",
+                  scenario:
+                    "The crew keeps mixing up joining, repulsion, barrier, extreme conditions, and energy release until every explanation sounds like either simple sticking or vague nuclear power talk.",
+                  prompt: "Choose the vocabulary note to post.",
+                  options: [
+                    {
+                      value: "term-board-fusion",
+                      label: "Use fusion for the joining of light nuclei, electrostatic repulsion for the force that resists that joining, extreme conditions for what can overcome the barrier, and energy release for the later outcome once the joined nucleus is compared with the starting pair.",
+                      feedback:
+                        "Exactly. That keeps the fusion terms doing distinct jobs.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "term-board-sticking",
+                      label: "Use fusion mainly as another word for nuclei sticking together, because the repulsion and condition details usually just complicate the central joining idea.",
+                      feedback:
+                        "That would hard-wire the wrong effortless-joining shortcut into the vocabulary board.",
+                    },
+                    {
+                      value: "term-board-nuclear-power",
+                      label: "Use fusion mainly as a label for very powerful nuclear energy, because the exact reason the nuclei can join matters less than the fact that energy comes out.",
+                      feedback:
+                        "That would hard-wire the release-first shortcut into the vocabulary board.",
+                    },
+                  ],
+                  successLabel: "Vocabulary board cleaned up.",
+                  retryLabel: "That wording would scramble the fusion terms again.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "how to reason through it") {
+                return {
+                  id: "m12-l3-how-to-reason",
+                  badge: "Guidance channel",
+                  title: "Coach the analyst before they call fusion possible",
+                  scenario:
+                    "The trainee analyst is about to decide from the final joined nucleus alone, without first checking whether the starting nuclei have enough conditions to overcome repulsion and get close enough to join.",
+                  prompt: "Choose the instruction you send.",
+                  options: [
+                    {
+                      value: "barrier-then-joining-then-outcome",
+                      label: "Start by asking what blocks the nuclei at low energy, then check whether the conditions are extreme enough to overcome that barrier, and only after that compare the joined nucleus with the starting pair to explain the energy outcome.",
+                      feedback:
+                        "Exactly. That gives the analyst the right fusion route method.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "outcome-first-only",
+                      label: "Start with the final heavier nucleus, because once the joined product is known the barrier story can usually be treated as supporting detail.",
+                      feedback:
+                        "That would send the analyst back into the release-first shortcut.",
+                    },
+                    {
+                      value: "reverse-fission-first",
+                      label: "Start by thinking of fusion as reversed fission, because that gives a faster nuclear-energy intuition before the exact collision conditions are discussed.",
+                      feedback:
+                        "That would send the analyst into the wrong reverse-fission shortcut.",
+                    },
+                  ],
+                  successLabel: "Good coaching. The analyst now has a clean fusion-route method.",
+                  retryLabel: "That would send the analyst back into a M12_L3 shortcut.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "common trap") {
+                return {
+                  id: "m12-l3-common-trap",
+                  badge: "Trap alert",
+                  title: "Cut off the effortless-joining and reverse-fission shortcuts",
+                  scenario:
+                    "One crew member keeps talking as if light nuclei can simply join when they meet, while another keeps treating fusion as fission run backward with no special entry barrier.",
+                  prompt: "Choose the trap warning.",
+                  options: [
+                    {
+                      value: "fusion-trap-warning",
+                      label: "Do not treat joining as effortless, and do not flatten fusion into reversed fission. The lesson is about overcoming electrostatic repulsion under extreme conditions before the energy outcome can even happen.",
+                      feedback:
+                        "Exactly. That warning blocks the main M12_L3 shortcuts.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "joining-warning-only",
+                      label: "Warn mainly that nuclei do not just join easily, because once students stop that mistake they usually become more careful about the rest of the fusion explanation on their own.",
+                      feedback:
+                        "That would leave the reverse-fission shortcut mostly alive.",
+                    },
+                    {
+                      value: "family-warning-only",
+                      label: "Warn mainly that fusion is not just fission backward, because once students stop that shortcut they usually infer the barrier story for themselves.",
+                      feedback:
+                        "That would leave the effortless-joining shortcut mostly alive.",
+                    },
+                  ],
+                  successLabel: "Trap blocked. The room now keeps conditions, repulsion, and release in one route.",
+                  retryLabel: "That warning would leave a main M12_L3 trap active.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+
+              if (activeSectionHeading === "analogy") {
+                return {
+                  id: "m12-l3-analogy",
+                  badge: "Story relay",
+                  title: "Pick the analogy that keeps the barrier visible",
+                  scenario:
+                    "The team wants a comparison that helps beginners picture why two light nuclei need extreme conditions before joining can happen, without turning fusion into a simple mirror of fission.",
+                  prompt: "Choose the analogy line to send.",
+                  options: [
+                    {
+                      value: "hill-barrier-analogy",
+                      label: "Think of the nuclei like travelers trying to get over a steep hill before they can reach the same valley. The high entry barrier has to be overcome first, and only then does the joined lower-energy outcome become possible.",
+                      feedback:
+                        "Exactly. That keeps the barrier and the outcome in the same story.",
+                      isCorrect: true,
+                    },
+                    {
+                      value: "magnet-snap-analogy",
+                      label: "Think of them like magnets that naturally snap together as soon as they get close, because that makes the later energy release easier to picture.",
+                      feedback:
+                        "That would rebuild the effortless-joining shortcut.",
+                    },
+                    {
+                      value: "reverse-explosion-analogy",
+                      label: "Think of it like rewinding an explosion, because that is the clearest way to picture a nuclear process that builds up rather than breaks apart.",
+                      feedback:
+                        "That would rebuild the wrong reverse-fission shortcut.",
+                    },
+                  ],
+                  successLabel: "Good analogy. It keeps the fusion barrier visible.",
+                  retryLabel: "That analogy would pull the lesson away from the right Fusion route model.",
+                } satisfies ScaffoldRoleplayCard;
+              }
+            }
             }
 
             if (lessonId === "M12_L2") {
