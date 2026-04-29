@@ -4952,6 +4952,225 @@ function getA6ScaffoldRoleplayCard({
   return null;
 }
 
+function getA7ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A7_L1") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a7-l1-source-split-board",
+        badge: "Source-split board",
+        title: "Keep full source lift, delivered p.d., and internal loss in separate slots",
+        scenario:
+          "The source board compares the open-circuit reading with the loaded reading. One trainee keeps saying the terminal p.d. must always equal the emf, another treats the lost volts like an external resistor drop, and a third forgets that the source can heat internally when current flows.",
+        prompt: "Pin the note that keeps the source model accurate.",
+        options: [
+          {
+            value: "separate-emf-terminal-loss",
+            label: "Treat emf as the full energy-per-charge lift of the source, terminal p.d. as the delivered lift across the external circuit, and internal resistance as the cause of the lost volts and internal heating when current flows.",
+            feedback:
+              "Exactly. That keeps the whole A7_L1 source split visible instead of collapsing everything into one voltage label.",
+            isCorrect: true,
+          },
+          {
+            value: "terminal-always-equals-emf",
+            label: "Treat the terminal p.d. as always equal to the emf, because the battery rating already tells the full push available and internal details usually do not change the reading.",
+            feedback:
+              "That would rebuild the ideal-source shortcut. Under load, the terminal p.d. can be less than the emf because of internal loss.",
+          },
+          {
+            value: "internal-drop-is-external",
+            label: "Treat the lost volts as part of the external circuit only, because once current leaves the source the battery itself no longer affects the energy split in a useful way.",
+            feedback:
+              "That would hide the internal-resistance story the lesson is trying to secure.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads emf, terminal p.d., and internal loss as one clean split source story.",
+        retryLabel: "That note would leave a main A7_L1 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a7-l1-fix-ideas",
+          badge: "Source repair",
+          title: "Repair the ideal-source shortcut",
+          scenario:
+            "One analyst keeps writing emf and terminal p.d. as if they were the same reading in every case, while another mentions internal resistance but never connects it to lost volts or internal heating.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-source-split",
+              label: "Repair both habits together: use emf for the full source lift, use terminal p.d. for the delivered external lift, and explain the difference under load as the internal voltage drop caused by current through internal resistance.",
+              feedback:
+                "Exactly. That restores the right A7_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-rating-only",
+              label: "Repair the confusion by anchoring everything to the battery rating first, because once the emf is known the loaded reading usually becomes a routine detail with no new physics.",
+              feedback:
+                "That would keep the ideal-source shortcut alive.",
+            },
+            {
+              value: "repair-current-only",
+              label: "Repair the confusion by focusing mainly on the current, because once the circuit current is known the difference between emf and terminal p.d. usually stops being the hard part.",
+              feedback:
+                "That would blur the source split instead of clarifying it.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats the source reading as a split between delivered lift and internal loss.",
+          retryLabel: "That would leave a main A7_L1 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a7-l1-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line source rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating a real source like an ideal push with no internal loss.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a7-l1-anchor",
+              label: "Terminal p.d. is the source emf minus the internal voltage drop caused by current through internal resistance.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "emf-and-terminal-same-anchor",
+              label: "The main idea is mostly that emf and terminal p.d. name the same source push, because internal resistance only changes the arithmetic and not the physical reading.",
+              feedback:
+                "That would erase the key distinction this lesson needs.",
+            },
+            {
+              value: "current-main-anchor",
+              label: "The main idea is mostly that current decides the whole source story, because once the current is known the separate voltage labels usually become secondary.",
+              feedback:
+                "That would flatten the lesson too far into one quantity.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right source-split rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a7-l1-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they use V = emf - I r",
+          scenario:
+            "The trainee analyst is about to substitute into the equation immediately, but has not yet compared the open-circuit and loaded cases or named which part of the source lift is delivered and which part is lost internally.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "compare-then-split",
+              label: "Start by deciding whether the source is open-circuit or under load, then split the full source lift into delivered terminal p.d. and internal loss before substituting into V = emf - I r.",
+              feedback:
+                "Exactly. That gives the analyst the right A7_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-equation-only",
+              label: "Start from the equation immediately, because once the symbols are in place the distinction between emf, terminal p.d., and lost volts usually becomes obvious on its own.",
+              feedback:
+                "That would send the analyst back into the formula-first shortcut.",
+            },
+            {
+              value: "start-from-battery-rating-only",
+              label: "Start from the emf rating only, because once the source rating is known the loaded reading usually becomes a small correction that does not need its own reasoning step.",
+              feedback:
+                "That would send the analyst back into the ideal-source shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean source-split method.",
+          retryLabel: "That would send the analyst back into an A7_L1 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a7-l1-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the terminal-equals-emf shortcut",
+          scenario:
+            "One crew member keeps using the battery rating as if it must match the external reading in every case, while another treats lost volts as if they vanish without any internal physics story.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a7-l1-trap-warning",
+              label: "Do not treat the terminal p.d. as always equal to the emf. Under load, some of the source lift is lost across internal resistance, and that lost part is tied to internal heating.",
+              feedback:
+                "Exactly. That warning blocks the main A7_L1 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "rating-warning-only",
+              label: "Warn mainly that the rating is approximate, because once students stop trusting the printed voltage too literally they usually sort out the source split on their own.",
+              feedback:
+                "That would leave the real lost-volts story too weak.",
+            },
+            {
+              value: "heating-warning-only",
+              label: "Warn mainly that sources can heat up, because once students remember internal heating they usually stop mixing up emf and terminal p.d. on their own.",
+              feedback:
+                "That would leave the emf-versus-terminal distinction too blurry.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps delivered lift and internal loss in separate slots.",
+          retryLabel: "That warning would leave a main A7_L1 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a7-l1-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps delivery and loss together",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the source can offer a full lift but only deliver part of it to the external circuit once internal resistance is active.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "delivery-fee-analogy",
+              label: "Think of the source like a delivery budget: emf is the full amount set aside, terminal p.d. is what reaches the customer, and the internal loss is the amount spent inside the delivery system while the transfer is happening.",
+              feedback:
+                "Exactly. That keeps full lift, delivered lift, and internal loss in one picture.",
+              isCorrect: true,
+            },
+            {
+              value: "single-budget-analogy",
+              label: "Think of the source mainly like one fixed payment that always arrives in full, because once the budget is known the delivery path inside the source usually does not change the result in a useful way.",
+              feedback:
+                "That would rebuild the ideal-source shortcut.",
+            },
+            {
+              value: "external-route-only-analogy",
+              label: "Think of the source mainly through what happens after the charge leaves the battery, because once the external route is drawn the inside of the source usually stops mattering for explanation.",
+              feedback:
+                "That would erase the internal-loss story the lesson needs.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps emf, delivered p.d., and internal loss in the same story.",
+          retryLabel: "That analogy would pull the lesson away from the right A7_L1 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
 function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
   if (card.options.length <= 1) return card.options;
   const correctIndex = card.options.findIndex((option) => option.isCorrect);
@@ -6191,6 +6410,14 @@ export default function LessonRunner({
       activeSectionWorkedExample: Boolean(activeSection?.worked_example),
       activeSectionHeading,
     });
+    const a7ScaffoldRoleplayCard = getA7ScaffoldRoleplayCard({
+      lessonId,
+      isMediaStep,
+      activeMediaIndex,
+      isSectionStep,
+      activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+      activeSectionHeading,
+    });
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -6200,6 +6427,7 @@ export default function LessonRunner({
         a4ScaffoldRoleplayCard ??
         a5ScaffoldRoleplayCard ??
         a6ScaffoldRoleplayCard ??
+        a7ScaffoldRoleplayCard ??
         (
         lessonId === "M1_L1" ||
         lessonId === "M1_L2" ||
