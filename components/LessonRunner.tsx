@@ -4960,6 +4960,214 @@ function getA7ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A7_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a7-l6-energy-field-board",
+        badge: "Energy-field board",
+        title: "Keep field energy, dielectric effect, and fixed condition on one board",
+        scenario:
+          "The energy-storage board shows capacitor field energy, dielectric insertion, and the two setup conditions side by side. One trainee treats the dielectric as if it always changes the same quantity in the same way, another talks about stored energy as if it belongs to the plates rather than the field, and a third forgets to say whether voltage or charge is being held fixed.",
+        prompt: "Pin the note that keeps the capacitor-energy model accurate.",
+        options: [
+          {
+            value: "field-energy-fixed-condition-note",
+            label: "Treat the stored energy as field energy, then decide first whether voltage is fixed or charge is fixed before predicting what dielectric insertion changes, because the capacitor response depends on that condition.",
+            feedback:
+              "Exactly. That keeps the full A7_L6 reasoning structure visible instead of flattening the dielectric effect into one slogan.",
+            isCorrect: true,
+          },
+          {
+            value: "dielectric-always-same-note",
+            label: "Treat a dielectric as always giving the same kind of energy and voltage change, because once capacitance increases the rest of the setup details usually stop mattering in a practical way.",
+            feedback:
+              "That would rebuild the same-outcome shortcut the lesson is trying to remove.",
+          },
+          {
+            value: "energy-on-plates-note",
+            label: "Treat the stored energy as mainly sitting on the charged plates themselves, because once the charge is separated the electric field between the plates becomes a secondary description rather than the real store.",
+            feedback:
+              "That would hide the field-energy story the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads field energy, dielectric action, and the fixed condition as one connected story.",
+        retryLabel: "That note would leave a main A7_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a7-l6-fix-ideas",
+          badge: "Energy-store repair",
+          title: "Repair the one-dielectric-outcome shortcut",
+          scenario:
+            "One analyst keeps predicting dielectric effects with no reference to whether the capacitor stays connected or isolated, while another keeps speaking about stored energy without naming the electric field at all.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-condition-then-field",
+              label: "Repair both habits together: name whether voltage or charge is fixed first, then treat the stored energy as field energy and predict the dielectric effect from that constrained setup.",
+              feedback:
+                "Exactly. That restores the right A7_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-capacitance-only",
+              label: "Repair the confusion by anchoring everything to the capacitance increase first, because once the larger capacitance is known the energy and voltage outcomes usually follow in one obvious direction.",
+              feedback:
+                "That would keep the condition-blind shortcut alive.",
+            },
+            {
+              value: "repair-charge-only",
+              label: "Repair the confusion by focusing on the stored charge first, because once the charge story is clear the field-energy language and the fixed-condition choice usually become optional details.",
+              feedback:
+                "That would keep the field-energy story too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats dielectric action as a condition-dependent field-energy story.",
+          retryLabel: "That would leave a main A7_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a7-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line capacitor-energy rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop predicting dielectric effects without naming what stays fixed.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a7-l6-anchor",
+              label: "Capacitor energy belongs to the electric field, and dielectric effects must be predicted with the fixed voltage or fixed charge condition stated first.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "capacitance-alone-anchor",
+              label: "The main idea is mostly that a dielectric raises capacitance, because once that increase is known the rest of the energy and voltage story is usually automatic.",
+              feedback:
+                "That would erase the constraint-based reasoning the lesson needs.",
+            },
+            {
+              value: "plate-energy-anchor",
+              label: "The main idea is mostly that energy sits on the charged plates, because once the plate separation is visible the field language usually becomes a secondary technical detail.",
+              feedback:
+                "That would flatten the lesson into the wrong physical picture.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right capacitor-energy anchor.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a7-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they predict the dielectric effect",
+          scenario:
+            "The trainee analyst is about to choose an energy formula or a voltage-change claim immediately, but has not yet said whether the capacitor stays connected to the supply or is isolated after charging.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "state-constraint-first",
+              label: "Start by deciding whether voltage is fixed by a connected supply or charge is fixed by isolation, then track how the increased capacitance changes the field-energy story under that condition.",
+              feedback:
+                "Exactly. That gives the analyst the right A7_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-energy-formula-only",
+              label: "Start from the energy formula immediately, because once an equation is chosen the correct dielectric outcome usually becomes obvious without any separate condition check.",
+              feedback:
+                "That would send the analyst back into the formula-first shortcut.",
+            },
+            {
+              value: "start-from-capacitance-increase-only",
+              label: "Start from the fact that the capacitance gets larger, because once that one change is known the voltage, charge, and energy outcomes usually all point the same way.",
+              feedback:
+                "That would send the analyst back into the one-outcome shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean condition-first capacitor-energy method.",
+          retryLabel: "That would send the analyst back into an A7_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a7-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the one-dielectric-outcome shortcut",
+          scenario:
+            "One crew member keeps announcing a single universal effect of dielectric insertion, while another keeps forgetting that connected and isolated capacitors obey different constraints.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a7-l6-trap-warning",
+              label: "Do not predict dielectric effects without stating the constraint first. Connected capacitors keep voltage fixed, isolated capacitors keep charge fixed, and the energy response must be read from that condition.",
+              feedback:
+                "Exactly. That warning blocks the main A7_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "connected-warning-only",
+              label: "Warn mainly about the connected case, because once students remember the supply can fix the voltage they usually stop making mistakes about the isolated case on their own.",
+              feedback:
+                "That would leave the charge-fixed case too weak.",
+            },
+            {
+              value: "field-warning-only",
+              label: "Warn mainly that the energy belongs to the field, because once students keep that picture in mind they usually stop needing explicit fixed-condition checks.",
+              feedback:
+                "That would leave the constraint step too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps dielectric action tied to the right constraint case.",
+          retryLabel: "That warning would leave a main A7_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a7-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the constraint choice visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why inserting a dielectric is not one fixed effect, but depends on whether the setup is held to a fixed electric height by the supply or left to keep the same separated charge.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "rule-of-the-room-analogy",
+              label: "Think of the dielectric change like modifying a storage room under one of two rules: either the outside manager keeps the height setting fixed, or the room is sealed with the same contents inside, so the outcome depends on which rule the room is under.",
+              feedback:
+                "Exactly. That keeps the condition choice visible before any prediction is made.",
+              isCorrect: true,
+            },
+            {
+              value: "single-upgrade-analogy",
+              label: "Think of the dielectric mainly like a universal upgrade that always improves the same storage outcome in the same direction, because once the medium is better the rest of the setup usually matters less.",
+              feedback:
+                "That would rebuild the one-outcome shortcut.",
+            },
+            {
+              value: "plate-content-analogy",
+              label: "Think of the dielectric mainly by how it changes what sits on the plates, because once the plate contents are discussed the field story and the fixed-condition choice usually become secondary.",
+              feedback:
+                "That would rebuild the wrong physical picture.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the fixed-condition choice visible instead of turning dielectric insertion into one slogan.",
+          retryLabel: "That analogy would pull the lesson away from the right A7_L6 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A7_L5") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
