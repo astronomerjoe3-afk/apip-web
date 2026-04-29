@@ -6461,6 +6461,248 @@ function getA8ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A8_L2") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a8-l2-terrace-board",
+        badge: "Terrace board",
+        title: "Keep electric height, same-height routes, and field slope in separate roles",
+        scenario:
+          "The terrace board shows electric-potential levels, equipotential routes, and field arrows on the same landscape. One trainee keeps talking as if potential and field are the same thing, another treats equipotential motion like it must still cost energy, and a third forgets that the field crosses equipotentials rather than running along them.",
+        prompt: "Pin the note that keeps the terrace model accurate.",
+        options: [
+          {
+            value: "height-map-slope-map-note",
+            label: "Treat electric potential as the energy-per-charge height map, equipotentials as same-height routes, and the electric field as the local slope direction. Moving along one equipotential gives zero potential difference, and field lines cross equipotentials at right angles.",
+            feedback:
+              "Exactly. That keeps height, route, and slope doing distinct jobs, which is the whole A8_L2 move.",
+            isCorrect: true,
+          },
+          {
+            value: "potential-equals-field-note",
+            label: "Treat electric potential and electric field as basically the same quantity in two visual styles, because once the arrows show the push the height language usually becomes a duplicate description.",
+            feedback:
+              "That would collapse height-map and slope-map language into the same idea.",
+          },
+          {
+            value: "equipotential-costs-energy-note",
+            label: "Treat motion along one equipotential as still using energy, because any movement through the field should naturally require some potential change even if the route stays on the same contour.",
+            feedback:
+              "That would rebuild the same-height route mistake the lesson is trying to remove.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads height map, same-height route, and slope direction as one clean story.",
+        retryLabel: "That note would leave a main A8_L2 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a8-l2-fix-ideas",
+          badge: "Potential repair",
+          title: "Repair the height-map versus slope-map confusion",
+          scenario:
+            "One analyst keeps using field arrows and potential levels as if they mean the same thing, while another keeps saying a charge must lose or gain energy even when it stays on one equipotential route.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-height-then-slope",
+              label: "Repair both habits together: define potential as the energy-per-charge height first, treat equipotentials as same-height routes with zero potential difference along them, then use field arrows as the slope direction crossing those routes.",
+              feedback:
+                "Exactly. That restores the right A8_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-field-alone",
+              label: "Repair the confusion by focusing on the field direction first, because once the push direction is clear the equipotential and energy language usually explains itself automatically.",
+              feedback:
+                "That would keep the potential story too weak.",
+            },
+            {
+              value: "repair-from-motion-alone",
+              label: "Repair the confusion by focusing on whether the charge moves at all, because once movement happens some energy change should usually be assumed before the map details are discussed.",
+              feedback:
+                "That would rebuild the route-means-energy-change shortcut.",
+            },
+          ],
+          successLabel: "Repair sent. The room now separates height, route, and slope correctly.",
+          retryLabel: "That would leave a main A8_L2 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a8-l2-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line potential-map rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop flattening electric potential into just another way of saying field.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a8-l2-anchor",
+              label: "Electric potential is the height map of energy per charge, while electric field is the local slope of that map.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "field-anchor-only-a8-l2",
+              label: "The main idea is mostly that charges feel pushes, because once the field direction is known the potential picture usually becomes optional decoration.",
+              feedback:
+                "That would hide the height-map idea the lesson needs.",
+            },
+            {
+              value: "route-anchor-only-a8-l2",
+              label: "The main idea is mostly that equipotential routes are special paths, because once the path pattern is seen the separate meanings of potential and field usually become secondary.",
+              feedback:
+                "That would weaken the potential-versus-field distinction the lesson needs.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right potential-map rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a8-l2-technical-words",
+          badge: "Term desk",
+          title: "Clean up the potential and equipotential vocabulary board",
+          scenario:
+            "The crew keeps mixing electric potential, potential difference, equipotential, and electric field until every sentence sounds like one vague story about charges moving downhill.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a8-l2",
+              label: "Use electric potential for energy per unit charge at one location, potential difference for the change between two locations, equipotential for a same-potential route, and electric field for the local slope direction across that map.",
+              feedback:
+                "Exactly. That keeps the A8_L2 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-field-does-most-a8-l2",
+              label: "Use electric field as the main word for almost the whole topic, because once the push direction is visible the other potential terms usually become minor refinements.",
+              feedback:
+                "That would scramble the lesson back into field-only language.",
+            },
+            {
+              value: "term-board-route-does-most-a8-l2",
+              label: "Use equipotential as the main word for almost the whole topic, because once students can name the safe routes the separate meanings of potential and field usually become obvious enough.",
+              feedback:
+                "That would weaken the map structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A8_L2 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a8-l2-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they talk about work or direction",
+          scenario:
+            "The trainee analyst is about to say that any movement through the diagram must cost energy, but has not first checked whether the start and finish points lie on the same equipotential or on different potential levels.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "check-height-before-energy-change",
+              label: "Start by checking the electric potential at the start and finish. If the route stays on one equipotential, the potential difference is zero and no electric-potential-energy change is required. If the levels differ, then use that height difference and keep the field as the crossing-slope direction.",
+              feedback:
+                "Exactly. That gives the analyst the right A8_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-field-arrows-only-a8-l2",
+              label: "Start from the field arrows alone, because once the local push direction is visible the energy change for the route usually becomes obvious without checking the endpoints separately.",
+              feedback:
+                "That would send the analyst back into the field-only shortcut.",
+            },
+            {
+              value: "start-from-any-motion-means-work-a8-l2",
+              label: "Start by assuming any movement through the picture means work must be done, because once a charge changes position some potential-energy change should usually be present.",
+              feedback:
+                "That would send the analyst back into the motion-means-energy-change shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean height-first method.",
+          retryLabel: "That would send the analyst back into an A8_L2 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a8-l2-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the route-means-energy-change shortcut",
+          scenario:
+            "One crew member keeps saying any motion through the map must change potential energy, while another keeps drawing field lines as if they can run along equipotential routes instead of crossing them.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "potential-trap-warning",
+              label: "Do not assume movement alone means an energy change. Check whether the start and finish points are on the same electric-potential level, and remember that field lines cross equipotentials at right angles rather than running along them.",
+              feedback:
+                "Exactly. That warning blocks the main A8_L2 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "field-warning-only-a8-l2",
+              label: "Warn mainly that field arrows show direction, because once students stop misreading the arrows they usually sort out same-potential routes and energy change on their own.",
+              feedback:
+                "That would leave the same-height route shortcut too alive.",
+            },
+            {
+              value: "equipotential-warning-only-a8-l2",
+              label: "Warn mainly that equipotentials matter, because once students remember the contour lines the separate role of field direction usually becomes an optional detail.",
+              feedback:
+                "That would leave the slope-map part of the lesson too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now checks height change before claiming energy transfer.",
+          retryLabel: "That warning would leave a main A8_L2 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a8-l2-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps potential and field distinct",
+          scenario:
+            "The team wants a comparison that helps beginners feel why equipotentials are like same-height terrace walks, while the electric field is the downhill slope direction across the terraces.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "terrace-walk-analogy",
+              label: "Think of electric potential like terrace height on a hillside: walking along one level terrace keeps the same height, but stepping across terraces changes height. The electric field is the downhill slope direction across those terraces, not the terrace path itself.",
+              feedback:
+                "Exactly. That keeps height routes and slope direction distinct.",
+              isCorrect: true,
+            },
+            {
+              value: "all-paths-downhill-analogy",
+              label: "Think of every path on the hillside as naturally changing height, because once you are moving on the slope some up-or-down energy change should always be happening.",
+              feedback:
+                "That would rebuild the same-height route mistake.",
+            },
+            {
+              value: "terraces-are-the-slope-analogy",
+              label: "Think of the terrace lines themselves as the slope direction, because once the contour pattern is drawn the route lines and the downhill arrows are basically the same information in different artwork styles.",
+              feedback:
+                "That would collapse equipotentials and field direction into one idea.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps electric height and electric slope as linked but separate ideas.",
+          retryLabel: "That analogy would pull the lesson away from the right A8_L2 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
