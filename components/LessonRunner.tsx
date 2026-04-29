@@ -43396,17 +43396,17 @@ export default function LessonRunner({
                     ))}
                   </div>
                 ) : section.body && !section.worked_example ? (
-                  <p className="whitespace-pre-line text-slate-700">{normalizeLessonDisplayMultiline(section.body)}</p>
+                  <p className="whitespace-pre-line text-slate-700">{section.body}</p>
                 ) : null}
                 {payload.misconception_targets?.length && section.body ? (
-                  <p className="text-sm whitespace-pre-line text-slate-600">{normalizeLessonDisplayMultiline(section.body)}</p>
+                  <p className="text-sm whitespace-pre-line text-slate-600">{section.body}</p>
                 ) : (
                   <p className="text-sm text-slate-600">{normalizeLessonDisplayText("The next activities, examples, and simulation are arranged to strengthen these ideas one at a time.")}</p>
                 )}
               </div>
             ) : null}
             {section.body && !section.worked_example && section.heading !== "Fix these ideas" ? (
-                <p className="mt-3 whitespace-pre-line text-slate-700">{normalizeLessonDisplayMultiline(section.body)}</p>
+                <p className="mt-3 whitespace-pre-line text-slate-700">{section.body}</p>
             ) : null}
 
             {section.technical_words?.length ? (
@@ -43509,7 +43509,7 @@ export default function LessonRunner({
                           {formulaRows.map((row, index) => (
                             <tr key={`${row.standard_formula}-${index}`} className="even:bg-white odd:bg-slate-50/70">
                               <td className="border-b border-slate-100 px-5 py-4 pr-8 align-top text-left whitespace-normal break-words leading-6">
-                                <p className="font-mono text-sm text-slate-900">{normalizeFormulaDisplayText(row.standard_formula)}</p>
+                                <p className="font-mono text-sm text-slate-900">{row.standard_formula}</p>
                                 {row.meaning ? (
                                   <p className="mt-2 text-sm leading-6 text-slate-700">
                                     <span className="font-medium text-slate-800">Meaning:</span>{" "}
