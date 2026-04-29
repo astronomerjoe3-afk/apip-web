@@ -10355,6 +10355,248 @@ function getA10ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A10_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a10-l6-process-board",
+        badge: "Process board",
+        title: "Read fusion through barrier, binding, and comparison conditions",
+        scenario:
+          "The process board shows two light nuclei approaching a strong repulsion gate, then a joined product with a lower mass-energy ledger. One trainee keeps calling fusion 'just fission backwards,' another wants to compare nuclear processes only by the size of the energy headline, and a third keeps skipping the extreme entry conditions.",
+        prompt: "Pin the note that keeps the comparison board accurate.",
+        options: [
+          {
+            value: "barrier-binding-comparison-note",
+            label: "Treat fusion as a high-condition joining process. First ask what extreme temperature and confinement are needed to overcome the repulsive barrier, then ask whether the products are more tightly bound and lower in mass-energy, and only after that compare fusion with fission through binding-energy change, fuel, and control conditions.",
+            feedback:
+              "Exactly. That keeps entry conditions, binding change, and process comparison in the right A10_L6 order.",
+            isCorrect: true,
+          },
+          {
+            value: "fusion-backwards-fission-note",
+            label: "Treat fusion mainly as fission in reverse, because once students see that both are nuclear reactions the detailed barrier and operating-condition differences usually become secondary.",
+            feedback:
+              "That would flatten the process comparison too far.",
+          },
+          {
+            value: "energy-headline-note-a10-l6",
+            label: "Treat the lesson mainly as a comparison of which process releases the more impressive amount of energy, because once that headline is known the barrier and control details usually become minor.",
+            feedback:
+              "That would leave the comparison too slogan-based.",
+          },
+        ],
+        successLabel: "Pinned. The board now compares nuclear processes through physics conditions and binding change, not headlines alone.",
+        retryLabel: "That note would leave a main A10_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a10-l6-fix-ideas",
+          badge: "Comparison repair",
+          title: "Repair the 'fission backwards' and energy-headline shortcuts",
+          scenario:
+            "One analyst keeps explaining fusion as if it were simply fission run in reverse, while another keeps deciding between nuclear processes by the size of the energy claim alone without checking barrier conditions or control demands.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-barrier-then-binding-then-compare",
+              label: "Repair both habits together: start with the entry conditions and the repulsive barrier, then check whether the joined products are more tightly bound and lower in mass-energy, and only after that compare fusion and fission by binding-energy change, fuel, and control conditions.",
+              feedback:
+                "Exactly. That restores the right A10_L6 comparison workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-joined-products-only-a10-l6",
+              label: "Repair the confusion by focusing mainly on the fact that nuclei join, because once students see the joining event clearly the barrier and process-comparison details usually sort themselves out afterward.",
+              feedback:
+                "That would leave the barrier part too weak.",
+            },
+            {
+              value: "repair-from-energy-only-a10-l6",
+              label: "Repair the confusion by focusing mainly on the energy released, because once students know nuclear reactions can release huge energy the process differences usually become secondary.",
+              feedback:
+                "That would leave the comparison too headline-driven.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts with barrier conditions before making the process comparison.",
+          retryLabel: "That would leave a main A10_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a10-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line fusion-comparison rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop turning this closing nuclear lesson into either a buzzword comparison or a vague claim that fusion is just the opposite of fission.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a10-l6-anchor",
+              label: "Fusion joins light nuclei under extreme conditions, and it should be compared with fission through binding-energy change and operating conditions rather than slogans.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "joining-anchor-only-a10-l6",
+              label: "The main idea is mostly that fusion joins nuclei, because once that joining picture is known the barrier and comparison details usually become secondary.",
+              feedback:
+                "That would weaken the condition-and-comparison meaning too much.",
+            },
+            {
+              value: "energy-anchor-only-a10-l6",
+              label: "The main idea is mostly that fusion can release a lot of energy, because once that headline is known the rest of the process comparison usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson into energy headline only.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right fusion-comparison idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a10-l6-technical-words",
+          badge: "Term desk",
+          title: "Clean up the fusion-comparison vocabulary board",
+          scenario:
+            "The crew keeps mixing fusion, fission, repulsive barrier, confinement, mass defect, and binding energy per nucleon until every explanation sounds like one fuzzy story about nuclear energy being large.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a10-l6",
+              label: "Use fusion for light nuclei joining, fission for a heavy nucleus splitting, repulsive barrier for the electrostatic resistance to getting close enough to join, confinement for keeping the reacting fuel under extreme fusion conditions, mass defect for the mass-energy change between starting and finishing nuclear ledgers, and binding energy per nucleon for comparing how tightly different nuclei are bound.",
+              feedback:
+                "Exactly. That keeps the A10_L6 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-energy-does-most-a10-l6",
+              label: "Use energy language as the main word for almost the whole topic, because once students know the lesson is about large nuclear energy changes the separate meanings of barrier, confinement, and binding comparison usually become minor detail.",
+              feedback:
+                "That would collapse several A10_L6 meanings too far.",
+            },
+            {
+              value: "term-board-joining-does-most-a10-l6",
+              label: "Use joining language as the main word for almost the whole topic, because once students know fusion means joining the rest of the process-comparison vocabulary usually becomes secondary.",
+              feedback:
+                "That would blur the comparison terms too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A10_L6 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a10-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they compare fusion with fission",
+          scenario:
+            "The trainee analyst is about to decide which nuclear process fits the case best, but has not yet checked the entry conditions, the binding change, or whether the comparison is about fuel and control demands rather than about a dramatic energy slogan.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-barrier-then-binding",
+              label: "Start with the barrier and operating conditions. Ask what temperature, confinement, or other conditions are needed for the reaction to happen at all. Then check whether the finished nuclei are more tightly bound and lower in mass-energy. After that, compare the process with fission through fuel, control, and operating demands.",
+              feedback:
+                "Exactly. That gives the analyst the right A10_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-energy-headline-a10-l6",
+              label: "Start from which process sounds like it gives the larger energy release, because once that headline is chosen the barrier and operating-condition details usually become small follow-ups.",
+              feedback:
+                "That would send the analyst back into slogan-first comparison.",
+            },
+            {
+              value: "start-from-joining-alone-a10-l6",
+              label: "Start from whether nuclei join or split, because once the basic action is recognized the barrier and binding-comparison story usually becomes easy enough to guess.",
+              feedback:
+                "That would send the analyst back into action-word guessing without enough physics.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean barrier-to-binding-to-comparison method.",
+          retryLabel: "That would send the analyst back into an A10_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a10-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the buzzword and backwards-process shortcuts",
+          scenario:
+            "One crew member keeps saying fusion is just fission backwards, while another keeps ranking nuclear processes from a headline about energy release without checking the barrier, fuel, or control conditions first.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a10-l6-trap-warning",
+              label: "Do not treat fusion as fission run backwards and do not compare nuclear processes from the energy headline alone. First check the entry conditions and barrier, then the binding-energy change, and only then compare fusion and fission through operating and control demands.",
+              feedback:
+                "Exactly. That warning blocks the main A10_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "joining-warning-only-a10-l6",
+              label: "Warn mainly that fusion involves nuclei joining, because once students remember the joining action they usually recover the rest of the comparison story on their own.",
+              feedback:
+                "That would leave the barrier-and-comparison detail too weak.",
+            },
+            {
+              value: "energy-warning-only-a10-l6",
+              label: "Warn mainly that nuclear reactions can release very large energy, because once students stop underestimating the scale they usually recover the process differences on their own.",
+              feedback:
+                "That would leave the process-comparison meaning too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now compares fusion and fission through conditions and binding change instead of slogans.",
+          retryLabel: "That warning would leave a main A10_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a10-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the barrier before the lower final ledger",
+          scenario:
+            "The team wants a comparison that helps beginners feel why fusion is not just an automatic sticking event. The picture needs a real entry barrier first, and then a more stable finished arrangement that sits lower on the ledger once the barrier has been crossed.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "ridge-then-lock-analogy",
+              label: "Think of two carts that must first be pushed over a steep ridge before they can settle into a lower locked position on the far side. The hard part is getting over the entry barrier, and the reason energy can be released afterward is that the finished arrangement sits lower on the ledger than the starting one.",
+              feedback:
+                "Exactly. That keeps the barrier and the lower finished-state ledger visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "automatic-sticking-analogy-a10-l6",
+              label: "Think mainly of two magnets that naturally snap together as soon as they get near each other, because the most intuitive analogy is usually one where the joining itself tells the whole story without needing a serious entry barrier.",
+              feedback:
+                "That would erase the barrier part of the lesson.",
+            },
+            {
+              value: "big-explosion-analogy-a10-l6",
+              label: "Think mainly of a bigger explosion than fission, because the most intuitive analogy is usually one where the energy headline alone tells the main difference between the processes.",
+              feedback:
+                "That would drag the lesson back toward slogan-only comparison.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on barrier first, then lower finished mass-energy.",
+          retryLabel: "That analogy would pull the lesson away from the right A10_L6 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
