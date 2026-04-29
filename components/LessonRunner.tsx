@@ -8892,6 +8892,248 @@ function getA9ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A9_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a9-l6-eddy-current-board",
+        badge: "Eddy-current board",
+        title: "Keep local current loops, heating, braking, and design choices in one induction story",
+        scenario:
+          "The eddy-current board shows bulk metal pieces in changing magnetic fields with local circulating loops drawn inside them. One trainee treats heating, braking, and sensing as unrelated tricks, another thinks the metal must contain a wound wire coil for induction to happen, and a third forgets that slots or laminations matter because they interrupt those local loops.",
+        prompt: "Pin the note that keeps the eddy-current model accurate.",
+        options: [
+          {
+            value: "local-loops-heating-braking-note",
+            label: "Treat eddy currents as local induced loops driven inside a conductor by changing flux. Those loops can produce useful heating or useful magnetic damping, and design features like slots or laminations weaken unwanted loops by interrupting them.",
+            feedback:
+              "Exactly. That keeps local induction loops and application outcomes in the right A9_L6 order.",
+            isCorrect: true,
+          },
+          {
+            value: "needs-wire-coil-note",
+            label: "Treat eddy-current devices as needing hidden wire coils inside the conductor, because induction only makes sense when the current path is a deliberate circuit rather than a bulk piece of metal.",
+            feedback:
+              "That would erase the whole local-loop idea the lesson needs.",
+          },
+          {
+            value: "applications-are-separate-note",
+            label: "Treat heating, braking, and sensing as mostly separate technologies, because once the device purpose changes the underlying induction story usually changes with it too.",
+            feedback:
+              "That would break the shared-mechanism lesson the branch is meant to teach.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads eddy-current uses as one changing-flux loop story.",
+        retryLabel: "That note would leave a main A9_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a9-l6-fix-ideas",
+          badge: "Application repair",
+          title: "Repair the hidden-coil and unrelated-device shortcuts",
+          scenario:
+            "One analyst keeps looking for deliberate wire circuits inside every eddy-current device, while another keeps treating induction heating and magnetic braking as separate topics with different physics.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-local-loops-first",
+              label: "Repair both habits together: start from changing flux inside a bulk conductor, identify the local circulating loops it drives, then read heating, braking, or sensing as different outcomes of those same induced loops.",
+              feedback:
+                "Exactly. That restores the right A9_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-device-purpose-only",
+              label: "Repair the confusion by focusing on what the device is meant to do first, because once the purpose is named the details about where the induced currents flow usually become secondary.",
+              feedback:
+                "That would leave the shared loop mechanism too weak.",
+            },
+            {
+              value: "repair-from-heating-formula-only",
+              label: "Repair the confusion by focusing on I squared R heating first, because once that power relation is visible students usually understand braking and design changes on their own.",
+              feedback:
+                "That would leave the braking and loop-interruption story too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts from local induced loops before branching into applications.",
+          retryLabel: "That would leave a main A9_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a9-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line eddy-current rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop memorizing induction applications as disconnected device facts.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a9-l6-anchor",
+              label: "Eddy currents are local induced loops in a conductor, and those loops can be used or reduced depending on whether heating or braking is wanted.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "heating-only-anchor-a9-l6",
+              label: "The main idea is mostly that eddy currents heat metal, because once the heating effect is understood the other applications become minor variations.",
+              feedback:
+                "That would flatten the lesson into one outcome only.",
+            },
+            {
+              value: "device-list-anchor-a9-l6",
+              label: "The main idea is mostly that many devices happen to use induction, because once the application list is known the shared current-loop mechanism becomes secondary.",
+              feedback:
+                "That would erase the common physics thread the lesson is built around.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right eddy-current rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a9-l6-technical-words",
+          badge: "Term desk",
+          title: "Clean up the eddy-current vocabulary board",
+          scenario:
+            "The crew keeps mixing changing flux, local loops, damping, laminations, and heating until every explanation sounds like one vague story about magnets affecting metal.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a9-l6",
+              label: "Use eddy currents for the local circulating induced loops, changing flux for the cause that drives them, damping or braking for the opposing-motion outcome, and laminations or slots for design features that interrupt loops and reduce unwanted current.",
+              feedback:
+                "Exactly. That keeps the A9_L6 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-heating-does-most-a9-l6",
+              label: "Use heating language as the main word for almost the whole topic, because once students know metal can warm up the braking and design parts usually become small application details.",
+              feedback:
+                "That would collapse the lesson into one application only.",
+            },
+            {
+              value: "term-board-magnetism-does-most-a9-l6",
+              label: "Use magnetism as the main word for almost the whole topic, because once the field is present the separate meanings of loops, damping, and interrupted paths usually become minor detail.",
+              feedback:
+                "That would leave the local-current mechanism too blurry.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A9_L6 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a9-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they judge whether eddy currents are useful or unwanted",
+          scenario:
+            "The trainee analyst is about to name the application from memory, but has not yet asked what changing-flux setup is driving the local loops, how strong those loops can become, or whether the design wants more of the effect or less.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-flux-loops-then-purpose",
+              label: "Start by locating the changing-flux situation, then identify the local loops it drives and what those loops will do through I squared R heating or Lenz-style opposition. Only after that decide whether the design wants to strengthen the effect or interrupt it with slots or laminations.",
+              feedback:
+                "Exactly. That gives the analyst the right A9_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-device-label-only-a9-l6",
+              label: "Start from the device label first, because once you know whether it is a heater or a brake the local loop reasoning usually becomes optional detail.",
+              feedback:
+                "That would send the analyst back into the application-list shortcut.",
+            },
+            {
+              value: "start-from-solid-vs-slotted-only-a9-l6",
+              label: "Start from whether the metal is solid or slotted, because once that design detail is named the reason for the currents and their effects usually becomes obvious enough automatically.",
+              feedback:
+                "That would send the analyst back into one-factor reasoning without the induction mechanism.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean flux-loop-purpose method.",
+          retryLabel: "That would send the analyst back into an A9_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a9-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the hidden-coil and one-outcome shortcuts",
+          scenario:
+            "One crew member keeps saying induction needs designed wire loops, while another keeps talking as if eddy currents are only ever unwanted heating and never useful damping or sensing.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a9-l6-trap-warning",
+              label: "Do not require a wound wire coil and do not reduce eddy currents to one outcome. Bulk conductors can support local induced loops, and those loops can be useful or unwanted depending on whether the design wants heating, braking, sensing, or reduced loss.",
+              feedback:
+                "Exactly. That warning blocks the main A9_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "heating-warning-only-a9-l6",
+              label: "Warn mainly that eddy currents can heat conductors, because once students stop missing the heating effect they usually recover the rest of the applications on their own.",
+              feedback:
+                "That would leave the shared-mechanism and application-range story too weak.",
+            },
+            {
+              value: "slots-warning-only-a9-l6",
+              label: "Warn mainly that slots and laminations reduce the effect, because once students know how to weaken eddy currents they usually recover where those currents came from on their own.",
+              feedback:
+                "That would leave the core local-loop mechanism too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps eddy-current loops and application choices in the right order.",
+          retryLabel: "That warning would leave a main A9_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a9-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps local loops and interrupted paths visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why a solid piece of metal can support stronger induced effects than a slotted or laminated one, and why that can be useful or unwanted depending on the design goal.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "puddle-whirl-analogy",
+              label: "Think of swirling water in a broad puddle: a large uninterrupted puddle can support bigger whirl patterns, but adding dividers breaks the swirls up. Eddy currents behave the same way, and the design chooses whether strong swirls are useful or should be reduced.",
+              feedback:
+                "Exactly. That keeps local loops, interrupted paths, and design choice visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "pipe-flow-analogy-a9-l6",
+              label: "Think of eddy currents like one steady stream in a pipe, because the safest analogy is usually one where the current follows one main route and the rest of the device behavior follows from that.",
+              feedback:
+                "That would erase the local-loop nature of the effect.",
+            },
+            {
+              value: "always-bad-heat-analogy-a9-l6",
+              label: "Think of eddy currents mainly like accidental friction that is always harmful, because the most intuitive analogy is usually one where the effect should always be designed away.",
+              feedback:
+                "That would erase the useful-application side of the lesson.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on local loops and whether the design wants them strengthened or interrupted.",
+          retryLabel: "That analogy would pull the lesson away from the right A9_L6 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
