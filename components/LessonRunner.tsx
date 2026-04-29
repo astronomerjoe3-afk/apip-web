@@ -4960,6 +4960,214 @@ function getA7ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A7_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a7-l4-storage-board",
+        badge: "Storage board",
+        title: "Keep charge, p.d., and storage ratio in separate slots",
+        scenario:
+          "The storage board shows charge, potential difference, plate geometry, and dielectric language together. One trainee keeps treating capacitance like the stored charge itself, another talks about voltage alone as if it fixes the whole storage story, and a third forgets that geometry and dielectric material change the storage ratio.",
+        prompt: "Pin the note that keeps the capacitance model accurate.",
+        options: [
+          {
+            value: "storage-ratio-note",
+            label: "Treat capacitance as the storage ratio linking charge and potential difference, so a larger capacitance stores more charge for the same voltage, and remember that geometry and dielectric material affect that ratio.",
+            feedback:
+              "Exactly. That keeps capacitance as a ratio instead of collapsing it into charge or voltage alone.",
+            isCorrect: true,
+          },
+          {
+            value: "capacitance-is-charge-note",
+            label: "Treat capacitance as the amount of charge already stored, because once the plates hold more charge the capacitance itself has increased in the most direct sense.",
+            feedback:
+              "That would rebuild the capacitance-equals-charge shortcut.",
+          },
+          {
+            value: "voltage-dominates-storage-note",
+            label: "Treat the potential difference as the main storage quantity, because once the voltage is known the separate role of capacitance usually becomes more of a label than a physical ratio.",
+            feedback:
+              "That would hide the storage-ratio idea the lesson is trying to secure.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads capacitance as a storage ratio rather than as stored charge itself.",
+        retryLabel: "That note would leave a main A7_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a7-l4-fix-ideas",
+          badge: "Storage repair",
+          title: "Repair the capacitance-equals-charge shortcut",
+          scenario:
+            "One analyst keeps calling capacitance the stored charge, while another uses Q = C V as if only one direction matters and never says what stays fixed when quantities are compared.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-ratio-language",
+              label: "Repair both habits together: use capacitance for the charge-per-volt storage ratio, then compare charge, capacitance, and p.d. by stating which quantity is fixed before moving through Q = C V.",
+              feedback:
+                "Exactly. That restores the right A7_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-charge-first-only",
+              label: "Repair the confusion by anchoring everything to stored charge first, because once the charge is known the meaning of capacitance and voltage usually becomes much easier and less central.",
+              feedback:
+                "That would keep the capacitance-equals-charge shortcut alive.",
+            },
+            {
+              value: "repair-voltage-first-only",
+              label: "Repair the confusion by anchoring everything to p.d. first, because once the voltage is named the storage story usually takes care of itself automatically.",
+              feedback:
+                "That would keep the storage-ratio story too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats capacitance as a ratio instead of as stored charge itself.",
+          retryLabel: "That would leave a main A7_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a7-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line capacitance rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop using capacitance and stored charge as if they were the same quantity.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a7-l4-anchor",
+              label: "Capacitance is the storage ratio linking charge and potential difference, not the stored charge itself.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "charge-main-anchor",
+              label: "The main idea is mostly that stored charge is the real quantity, because capacitance is mainly a different way of naming how much charge is already on the plates.",
+              feedback:
+                "That would erase the ratio idea the lesson needs.",
+            },
+            {
+              value: "voltage-main-anchor",
+              label: "The main idea is mostly that voltage sets the storage outcome by itself, because once the p.d. is known the capacitance usually becomes a secondary label.",
+              feedback:
+                "That would flatten the lesson too far into one quantity.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right capacitance anchor.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a7-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they move through Q = C V",
+          scenario:
+            "The trainee analyst is about to substitute into Q = C V immediately, but has not yet said whether the question is about finding the storage ratio, the stored charge, or the required p.d., and has not yet named which quantity is fixed in the comparison.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "name-unknown-and-fixed-quantity",
+              label: "Start by naming whether the unknown is charge, capacitance, or p.d., then say which quantity stays fixed so the storage-ratio story stays visible before rearranging or comparing with Q = C V.",
+              feedback:
+                "Exactly. That gives the analyst the right A7_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-formula-only",
+              label: "Start from the formula immediately, because once the symbols are arranged the meaning of capacitance as a ratio usually becomes obvious on its own.",
+              feedback:
+                "That would send the analyst back into the formula-first shortcut.",
+            },
+            {
+              value: "start-from-charge-only",
+              label: "Start from stored charge whenever possible, because once the charge side of the question is clear the roles of capacitance and p.d. usually become much less important.",
+              feedback:
+                "That would send the analyst back into the charge-dominates shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean storage-ratio method.",
+          retryLabel: "That would send the analyst back into an A7_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a7-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the capacitance-is-charge shortcut",
+          scenario:
+            "One crew member keeps reading a larger capacitance as if the capacitor already contains more charge in every situation, while another keeps ignoring the fixed-voltage or fixed-charge condition when comparing two setups.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a7-l4-trap-warning",
+              label: "Do not treat capacitance as stored charge. It is the charge-per-volt storage ratio, so comparisons only make sense once you say what is fixed.",
+              feedback:
+                "Exactly. That warning blocks the main A7_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "condition-warning-only",
+              label: "Warn mainly about saying what is fixed, because once students state the condition they usually stop confusing capacitance with stored charge on their own.",
+              feedback:
+                "That would leave the ratio meaning too weak.",
+            },
+            {
+              value: "charge-warning-only",
+              label: "Warn mainly about stored charge, because once students stop grabbing the charge value first they usually work out the role of fixed conditions automatically.",
+              feedback:
+                "That would leave the comparison method too incomplete.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps capacitance, charge, and condition in separate slots.",
+          retryLabel: "That warning would leave a main A7_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a7-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps storage ratio visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why capacitance is a capacity-per-volt idea rather than just a count of charge already stored on the plates.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "bucket-per-height-analogy",
+              label: "Think of the capacitor like a storage container where the key idea is how much can be held for each step of electric height, so capacitance is the container's storage-per-height ratio rather than the amount already inside.",
+              feedback:
+                "Exactly. That keeps the ratio meaning visible without collapsing it into the stored amount.",
+              isCorrect: true,
+            },
+            {
+              value: "already-full-bucket-analogy",
+              label: "Think of capacitance mainly like how much is already sitting in the bucket, because once the stored amount is known the bucket's storage character usually stops being the important idea.",
+              feedback:
+                "That would rebuild the capacitance-equals-charge shortcut.",
+            },
+            {
+              value: "height-only-analogy",
+              label: "Think of the capacitor mainly through the electric height across it, because once the p.d. is known the storage character of the container usually becomes a minor detail.",
+              feedback:
+                "That would rebuild the voltage-dominates shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps capacitance tied to storage ratio instead of stored amount alone.",
+          retryLabel: "That analogy would pull the lesson away from the right A7_L4 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A7_L3") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
