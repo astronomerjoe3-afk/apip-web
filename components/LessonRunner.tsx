@@ -9137,6 +9137,259 @@ function getA9ScaffoldRoleplayCard({
   return null;
 }
 
+function getA10ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A10_L1") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a10-l1-scattering-board",
+        badge: "Scattering board",
+        title: "Read the whole scattering pattern before naming the atom model",
+        scenario:
+          "The scattering board shows a beam where most alpha particles pass straight through, a few deflect slightly, and a tiny number bounce back strongly. One trainee wants to decide from the single dramatic rebound alone, another says the few deflections just prove positive charge exists somewhere, and a third keeps talking as if the plum-pudding model could still explain the overall pattern.",
+        prompt: "Pin the note that keeps the evidence model accurate.",
+        options: [
+          {
+            value: "pattern-to-nucleus-note",
+            label: "Treat the full distribution as the evidence. The straight-through majority shows atoms are mostly empty space, the deflections show positive charge is concentrated rather than spread out, and the rare rebounds require a tiny dense massive nucleus.",
+            feedback:
+              "Exactly. That keeps the full Rutherford evidence chain in the right A10_L1 order.",
+            isCorrect: true,
+          },
+          {
+            value: "one-rebound-proves-all-note",
+            label: "Treat the rare rebound as the one key fact that proves the whole model by itself, because once one alpha particle turns back sharply the rest of the beam pattern becomes mostly decorative detail.",
+            feedback:
+              "That would weaken the whole-pattern reasoning the lesson needs.",
+          },
+          {
+            value: "spread-charge-can-still-work-note",
+            label: "Treat the scattering pattern as still broadly compatible with spread-out positive charge, because a diffuse atom model could still give a mixture of straight tracks and a few stronger turns by chance.",
+            feedback:
+              "That would erase why rare large deflections rule the plum-pudding picture out.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads scattering as pattern evidence for a tiny dense nucleus.",
+        retryLabel: "That note would leave a main A10_L1 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a10-l1-fix-ideas",
+          badge: "Evidence repair",
+          title: "Repair the one-track and vague-positive-charge shortcuts",
+          scenario:
+            "One analyst keeps using one dramatic rebound as if it settles everything by itself, while another keeps saying the scattering only shows that atoms contain some positive charge somewhere without needing a tiny concentrated nucleus.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-whole-pattern-first",
+              label: "Repair both habits together: start from the whole pattern, not one special track. Use the straight-through majority for empty space, the smaller deflections for concentrated positive charge, and the rare large rebounds for a tiny dense massive nucleus that the beam almost always misses.",
+              feedback:
+                "Exactly. That restores the right A10_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-rebound-only-a10-l1",
+              label: "Repair the confusion by focusing on the backward rebounds first, because once those rare tracks are explained the rest of the beam pattern usually becomes a minor follow-up.",
+              feedback:
+                "That would keep the one-track shortcut too alive.",
+            },
+            {
+              value: "repair-from-charge-exists-only-a10-l1",
+              label: "Repair the confusion by focusing on the fact that positive charge must exist in the atom, because once that is accepted the details about whether it is concentrated or diffuse usually become secondary.",
+              feedback:
+                "That would leave the plum-pudding rejection too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now reads the whole distribution before naming the structure.",
+          retryLabel: "That would leave a main A10_L1 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a10-l1-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line scattering rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating Rutherford scattering like a single dramatic anecdote.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a10-l1-anchor",
+              label: "The scattering pattern shows that atoms are mostly empty space with a tiny dense positively charged nucleus.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "rebound-anchor-only-a10-l1",
+              label: "The main idea is mostly that some alpha particles bounce back, because once that rare event is known the rest of the atomic-structure story usually becomes obvious.",
+              feedback:
+                "That would flatten the evidence down to one feature.",
+            },
+            {
+              value: "charge-exists-anchor-only-a10-l1",
+              label: "The main idea is mostly that atoms contain positive charge, because once that is known the details about empty space and nuclear concentration become secondary.",
+              feedback:
+                "That would weaken the real structural conclusion too much.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right scattering conclusion.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a10-l1-technical-words",
+          badge: "Term desk",
+          title: "Clean up the scattering vocabulary board",
+          scenario:
+            "The crew keeps mixing beam majority, deflection, rebound, positive-charge concentration, and nucleus until every explanation sounds like one vague story about particles hitting atoms.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a10-l1",
+              label: "Use straight-through majority for the empty-space evidence, deflection for electrostatic turning near concentrated charge, rebound for very close strong repulsion, and nucleus for the tiny dense region that holds most of the mass and positive charge.",
+              feedback:
+                "Exactly. That keeps the A10_L1 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-rebound-does-most-a10-l1",
+              label: "Use rebound language as the main word for almost the whole topic, because once the dramatic backwards tracks are noticed the separate meanings of deflection, empty space, and nucleus usually become minor detail.",
+              feedback:
+                "That would collapse the evidence pattern too far.",
+            },
+            {
+              value: "term-board-hit-does-most-a10-l1",
+              label: "Use collision language as the main word for almost the whole topic, because once alpha particles are seen interacting with atoms the separate scattering categories usually become less important.",
+              feedback:
+                "That would blur the evidential differences between the outcomes.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A10_L1 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a10-l1-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they infer atomic structure from scattering",
+          scenario:
+            "The trainee analyst is about to jump straight from one striking beam path to a conclusion, but has not yet compared what most particles do with what a small minority do or asked which atom model could produce both at once.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-majority-then-minority-pattern",
+              label: "Start with the majority outcome, then bring in the rarer outcomes. Use the many straight tracks for empty space, the few deflections for concentrated positive charge, and the rare rebounds for a tiny dense nucleus that only a few particles approach closely.",
+              feedback:
+                "Exactly. That gives the analyst the right A10_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-most-dramatic-track-a10-l1",
+              label: "Start from the most dramatic single track, because once that one path is explained the rest of the beam pattern usually becomes a minor check instead of the main evidence.",
+              feedback:
+                "That would send the analyst back into the one-track shortcut.",
+            },
+            {
+              value: "start-from-charge-exists-only-a10-l1",
+              label: "Start from the idea that atoms must contain positive charge somewhere, because once that is established the question of whether the charge is diffuse or concentrated usually becomes a small detail.",
+              feedback:
+                "That would send the analyst back into the vague-positive-charge shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean whole-pattern-to-structure method.",
+          retryLabel: "That would send the analyst back into an A10_L1 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a10-l1-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the one-track and plum-pudding-survives shortcuts",
+          scenario:
+            "One crew member keeps treating one rebound as the whole argument, while another keeps saying a spread-out positive atom could still plausibly explain the observed pattern.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a10-l1-trap-warning",
+              label: "Do not decide from one dramatic track and do not let a diffuse positive model survive the full pattern. The straight-through majority plus the rare huge deflections together require that most of the atom is empty space and that the positive charge is concentrated in a tiny dense nucleus.",
+              feedback:
+                "Exactly. That warning blocks the main A10_L1 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "rebound-warning-only-a10-l1",
+              label: "Warn mainly that rebounds are rare, because once students notice that rarity they usually recover the rest of the atom model on their own.",
+              feedback:
+                "That would leave the whole-pattern reasoning too weak.",
+            },
+            {
+              value: "empty-space-warning-only-a10-l1",
+              label: "Warn mainly that atoms are mostly empty space, because once students know that the nucleus and charge-concentration story usually becomes obvious enough automatically.",
+              feedback:
+                "That would leave the concentrated-positive-charge conclusion too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps the full scattering pattern tied to the right atom model.",
+          retryLabel: "That warning would leave a main A10_L1 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a10-l1-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps majority outcomes and rare strong turns visible together",
+          scenario:
+            "The team wants a comparison that helps beginners feel why most particles going straight through and a tiny number turning sharply together point to a mostly empty object with one tiny concentrated region.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "hall-with-small-post-analogy",
+              label: "Think of rolling marbles through a huge empty hall with one tiny steel post near the center. Most marbles never come near the post and roll straight on, but a very small number pass close enough to be thrown sharply off course. The whole pattern, not one marble alone, reveals the hidden structure.",
+              feedback:
+                "Exactly. That keeps empty space, rare strong turns, and whole-pattern reasoning visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "crowded-room-analogy-a10-l1",
+              label: "Think of the atom like a crowded room where marbles usually weave gently around people, because the most intuitive analogy is usually one where many small interactions add up to the result.",
+              feedback:
+                "That would rebuild the spread-out-positive-charge picture the lesson is rejecting.",
+            },
+            {
+              value: "one-crash-analogy-a10-l1",
+              label: "Think of the lesson mainly as discovering one hidden obstacle from one spectacular crash, because the most intuitive analogy is usually one where a single dramatic event tells the whole story.",
+              feedback:
+                "That would rebuild the one-track shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on the distribution of outcomes, not one dramatic event.",
+          retryLabel: "That analogy would pull the lesson away from the right A10_L1 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
 function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
   if (card.options.length <= 1) return card.options;
   const correctIndex = card.options.findIndex((option) => option.isCorrect);
@@ -10400,6 +10653,14 @@ export default function LessonRunner({
       activeSectionWorkedExample: Boolean(activeSection?.worked_example),
       activeSectionHeading,
     });
+    const a10ScaffoldRoleplayCard = getA10ScaffoldRoleplayCard({
+      lessonId,
+      isMediaStep,
+      activeMediaIndex,
+      isSectionStep,
+      activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+      activeSectionHeading,
+    });
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -10412,6 +10673,7 @@ export default function LessonRunner({
         a7ScaffoldRoleplayCard ??
         a8ScaffoldRoleplayCard ??
         a9ScaffoldRoleplayCard ??
+        a10ScaffoldRoleplayCard ??
         (
         lessonId === "M1_L1" ||
         lessonId === "M1_L2" ||
