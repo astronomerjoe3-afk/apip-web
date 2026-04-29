@@ -6703,6 +6703,248 @@ function getA8ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A8_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a8-l3-plate-gap-board",
+        badge: "Plate-gap board",
+        title: "Keep voltage drop, gap size, and uniform field strength on one slope story",
+        scenario:
+          "The plate-gap board shows two parallel plates, a fixed voltage drop, and the central uniform-field arrows. One trainee treats field strength like an arbitrary label instead of a potential gradient, another says halving the gap should halve the field because the space is smaller, and a third forgets that a charged particle's acceleration comes from the field-force chain after the field is found.",
+        prompt: "Pin the note that keeps the parallel-plate model accurate.",
+        options: [
+          {
+            value: "potential-gradient-uniform-field-note",
+            label: "Treat the central gap as a nearly uniform field and read field strength as potential drop per unit distance: E = Delta V / d. At fixed voltage, shrinking the gap makes the field stronger, then the force on a charge follows from F = qE and the acceleration from F = ma.",
+            feedback:
+              "Exactly. That keeps potential gradient, uniform field, and particle response in one A8_L3 chain.",
+            isCorrect: true,
+          },
+          {
+            value: "smaller-gap-smaller-field-note",
+            label: "Treat a smaller plate gap as giving a weaker field because there is less room for the field to build up between the plates, so the push on a charge should naturally reduce.",
+            feedback:
+              "That would reverse the key plate-spacing relationship the lesson is trying to secure.",
+          },
+          {
+            value: "field-before-force-optional-note",
+            label: "Treat the particle motion as mostly independent of the field calculation, because once a charged particle sits between the plates its acceleration can usually be discussed directly without working through field strength first.",
+            feedback:
+              "That would break the force-to-acceleration chain the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads voltage drop, gap, and particle response as one clean uniform-field story.",
+        retryLabel: "That note would leave a main A8_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a8-l3-fix-ideas",
+          badge: "Uniform-field repair",
+          title: "Repair the gap-change and formula-grab shortcuts",
+          scenario:
+            "One analyst keeps saying a smaller gap must mean a weaker field because the field has less space, while another plugs numbers into acceleration work without first finding the field from the plate setup.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-gradient-then-force-chain",
+              label: "Repair both habits together: treat the plate gap as a potential-gradient story first with E = Delta V / d, then use that field to find force and acceleration for the charged particle.",
+              feedback:
+                "Exactly. That restores the right A8_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-gap-size-by-intuition",
+              label: "Repair the confusion by emphasizing the visible spacing first, because once students feel whether the plates are close or far apart the field-strength relationship usually explains itself automatically.",
+              feedback:
+                "That would leave the wrong gap intuition active.",
+            },
+            {
+              value: "repair-particle-motion-first",
+              label: "Repair the confusion by emphasizing particle motion first, because once the acceleration picture is clear the field calculation usually becomes a secondary clean-up step.",
+              feedback:
+                "That would leave the force-chain reasoning too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now reads the plate setup before the particle response.",
+          retryLabel: "That would leave a main A8_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a8-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line uniform-field rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating `E = Delta V / d` like a detached formula with no physical picture.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a8-l3-anchor",
+              label: "Uniform-field strength between parallel plates is the potential drop per unit distance across the gap.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "voltage-alone-anchor-a8-l3",
+              label: "The main idea is mostly that larger voltage means stronger field, because once the supply is known the plate spacing usually matters less in practice.",
+              feedback:
+                "That would hide one of the two main variables in the relation.",
+            },
+            {
+              value: "gap-alone-anchor-a8-l3",
+              label: "The main idea is mostly that narrow gaps are stronger setups, because once the spacing is known the voltage story usually becomes a secondary adjustment.",
+              feedback:
+                "That would flatten the lesson into a one-factor shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right uniform-field rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a8-l3-technical-words",
+          badge: "Term desk",
+          title: "Clean up the uniform-field vocabulary board",
+          scenario:
+            "The crew keeps mixing voltage, field strength, gap size, force, and acceleration until every parallel-plate explanation sounds like one vague story about a particle getting shoved.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a8-l3",
+              label: "Use potential difference for the voltage across the plates, separation for the gap, electric field strength for the potential gradient in the central region, force for qE on the particle, and acceleration for the motion response that follows from that force.",
+              feedback:
+                "Exactly. That keeps the A8_L3 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-voltage-does-most-a8-l3",
+              label: "Use voltage as the main word for almost the whole topic, because once the supply value is known the field, force, and acceleration meanings usually become obvious enough.",
+              feedback:
+                "That would scramble the chain the lesson needs.",
+            },
+            {
+              value: "term-board-acceleration-does-most-a8-l3",
+              label: "Use acceleration as the main word for almost the whole topic, because once the particle response is visible the field-strength and potential-gradient language usually becomes optional.",
+              feedback:
+                "That would weaken the plate-setup reasoning too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A8_L3 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a8-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they predict the particle motion",
+          scenario:
+            "The trainee analyst is about to jump straight to force or acceleration without first turning the plate setup into a field-strength statement, and has not yet converted the gap into meters.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "convert-gap-find-field-then-motion",
+              label: "Start by converting the gap into meters, then find the uniform field from E = Delta V / d. After that, use the charge to find the force and only then move to acceleration with the particle mass.",
+              feedback:
+                "Exactly. That gives the analyst the right A8_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-charge-only-a8-l3",
+              label: "Start from the particle charge first, because once the sign and size of the charge are known the strength of the field between the plates usually becomes obvious enough for motion work.",
+              feedback:
+                "That would send the analyst back into the chain-breaking shortcut.",
+            },
+            {
+              value: "start-from-gap-guess-a8-l3",
+              label: "Start by guessing from the visual gap alone whether the field seems strong or weak, because once that intuition is set the exact voltage and acceleration calculations usually become straightforward confirmation.",
+              feedback:
+                "That would send the analyst back into the picture-only shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean plate-setup-first method.",
+          retryLabel: "That would send the analyst back into an A8_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a8-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the one-factor field shortcut",
+          scenario:
+            "One crew member keeps reasoning from voltage alone, while another keeps reasoning from gap size alone, and both skip the idea that field strength is a potential gradient built from both together.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "uniform-field-trap-warning",
+              label: "Do not reason from voltage alone or gap alone. Uniform-field strength between plates comes from the full gradient E = Delta V / d, and particle force or acceleration only comes after that field is found.",
+              feedback:
+                "Exactly. That warning blocks the main A8_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "voltage-warning-only-a8-l3",
+              label: "Warn mainly against over-trusting the supply voltage, because once students stop that they usually remember the role of plate spacing on their own.",
+              feedback:
+                "That would leave the gap-only shortcut too alive.",
+            },
+            {
+              value: "gap-warning-only-a8-l3",
+              label: "Warn mainly against over-trusting the gap picture, because once students stop that they usually rebuild the full field relation from voltage intuition on their own.",
+              feedback:
+                "That would leave the voltage-only shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now treats field strength as a full gradient relation.",
+          retryLabel: "That warning would leave a main A8_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a8-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the gradient story visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the same voltage drop squeezed into a smaller gap gives a steeper electric slope, while a wide gap spreads that same drop more gently.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "same-drop-shorter-ramp-analogy",
+              label: "Think of the plates like two terraces with the same height drop connected by ramps of different lengths: the shorter ramp is steeper because the same drop happens over less distance. The electric field is that steepness, and the particle response comes after you read the slope.",
+              feedback:
+                "Exactly. That keeps voltage drop, distance, and field steepness in one picture.",
+              isCorrect: true,
+            },
+            {
+              value: "small-gap-small-slope-analogy",
+              label: "Think of the shorter ramp as gentler because it uses less space, so the push has less room to build and the slope effect should naturally weaken.",
+              feedback:
+                "That would rebuild the reversed-gap shortcut.",
+            },
+            {
+              value: "particle-first-analogy-a8-l3",
+              label: "Think mainly about how fast the cart rolls at the end, because once the motion is imagined clearly the separate slope and distance story usually becomes a secondary detail.",
+              feedback:
+                "That would weaken the gradient-first structure the lesson needs.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the same drop over less distance as the source of a stronger field.",
+          retryLabel: "That analogy would pull the lesson away from the right A8_L3 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
