@@ -7924,6 +7924,248 @@ function getA9ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A9_L2") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a9-l2-opposition-board",
+        badge: "Opposition board",
+        title: "Keep the original flux change and the induced response in the right order",
+        scenario:
+          "The opposition board shows loops facing an increasing or decreasing into-page flux. One trainee tries to oppose the field itself instead of the change, another thinks Lenz's law is just about making the induced effect disappear, and a third jumps to clockwise or counterclockwise current before naming the original change.",
+        prompt: "Pin the note that keeps the Lenz model accurate.",
+        options: [
+          {
+            value: "change-first-opposition-note",
+            label: "Treat Lenz's law as opposition to the original change in flux. Name that change first, choose the induced field that resists it, then use the right-hand grip rule to decide the current direction.",
+            feedback:
+              "Exactly. That keeps change, response field, and current direction in the right A9_L2 order.",
+            isCorrect: true,
+          },
+          {
+            value: "oppose-field-itself-note",
+            label: "Treat the induced response as always trying to point opposite to the external field itself, because once the field direction is known the change story usually becomes unnecessary detail.",
+            feedback:
+              "That would rebuild the oppose-the-field shortcut.",
+          },
+          {
+            value: "kill-the-effect-note",
+            label: "Treat Lenz's law as the rule that tries to cancel induction entirely, because the most natural physical response is for the loop to stop the induced effect from appearing at all.",
+            feedback:
+              "That would erase the real idea of opposition to change rather than disappearance of the effect.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads Lenz's law as opposition to change, not opposition to the field itself.",
+        retryLabel: "That note would leave a main A9_L2 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a9-l2-fix-ideas",
+          badge: "Direction repair",
+          title: "Repair the oppose-the-field and memorize-the-current shortcuts",
+          scenario:
+            "One analyst keeps flipping the induced direction against the field instead of against the change, while another tries to memorize clockwise and counterclockwise answers without first naming whether the original flux is increasing or decreasing.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-change-then-response-then-current",
+              label: "Repair both habits together: identify whether the original flux is increasing or decreasing, choose the induced field that opposes that change, then map that induced field to the current direction.",
+              feedback:
+                "Exactly. That restores the right A9_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-field-direction-only",
+              label: "Repair the confusion by focusing on the external field direction first, because once that arrow is fixed the learner can usually infer the induced direction without tracking what is changing.",
+              feedback:
+                "That would keep the oppose-the-field shortcut alive.",
+            },
+            {
+              value: "repair-from-current-patterns-only",
+              label: "Repair the confusion by focusing on memorized clockwise and counterclockwise patterns first, because once those direction pairs are secure the change story usually becomes optional.",
+              feedback:
+                "That would keep the formula-card shortcut alive and weaken the physical meaning.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts from the original change before choosing direction.",
+          retryLabel: "That would leave a main A9_L2 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a9-l2-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line Lenz rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop using Lenz's law as a disconnected slogan with no change story behind it.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a9-l2-anchor",
+              label: "The induced response acts to oppose the original change in magnetic flux.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "field-opposition-anchor",
+              label: "The main idea is mostly that the induced response points against the external field, because that is the fastest way to keep track of Lenz direction questions.",
+              feedback:
+                "That would replace the real rule with the wrong shortcut.",
+            },
+            {
+              value: "memorized-current-anchor",
+              label: "The main idea is mostly that specific flux pictures map to memorized current directions, because once those pairings are known the deeper meaning of the rule becomes secondary.",
+              feedback:
+                "That would flatten the lesson into answer memorization.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right Lenz rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a9-l2-technical-words",
+          badge: "Term desk",
+          title: "Clean up the Lenz-direction vocabulary board",
+          scenario:
+            "The crew keeps mixing original flux change, induced field, induced current, and opposition until every direction explanation sounds like one vague story about loops fighting magnets.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a9-l2",
+              label: "Use original flux change for what the outside setup is doing, induced field for the loop's opposing response, induced current for the current that creates that response field, and opposition for resisting the change rather than erasing the field itself.",
+              feedback:
+                "Exactly. That keeps the A9_L2 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-field-does-most-a9-l2",
+              label: "Use field direction as the main word for almost the whole topic, because once the external field arrow is visible the other Lenz terms usually become minor details.",
+              feedback:
+                "That would collapse the original-change story too much.",
+            },
+            {
+              value: "term-board-current-does-most-a9-l2",
+              label: "Use current direction as the main word for almost the whole topic, because once clockwise or counterclockwise is decided the separate meanings of change and induced field usually stop mattering.",
+              feedback:
+                "That would turn the lesson into memorized output instead of physical reasoning.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A9_L2 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a9-l2-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they choose clockwise or counterclockwise",
+          scenario:
+            "The trainee analyst is about to jump straight to a current direction, but has not yet named whether the original flux through the loop is increasing or decreasing or what induced field would actually oppose that change.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-original-change-then-oppose-then-grip",
+              label: "Start by naming the original flux change. Decide what induced field would oppose that increase or decrease, then use the right-hand grip rule to convert that induced field into the loop current direction.",
+              feedback:
+                "Exactly. That gives the analyst the right A9_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-clockwise-or-counterclockwise-a9-l2",
+              label: "Start by guessing whether the answer is clockwise or counterclockwise, because once one direction is tested the field and change story usually sort themselves out quickly enough afterward.",
+              feedback:
+                "That would send the analyst back into answer-first guessing.",
+            },
+            {
+              value: "start-from-field-opposite-only-a9-l2",
+              label: "Start by pointing the induced field opposite to the external field, because once the two field arrows are opposed the change story usually becomes unnecessary detail.",
+              feedback:
+                "That would send the analyst back into the wrong opposition rule.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean change-opposition-direction method.",
+          retryLabel: "That would send the analyst back into an A9_L2 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a9-l2-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the oppose-the-field and cancel-it-all shortcuts",
+          scenario:
+            "One crew member keeps flipping the induced direction against the external field itself, while another talks as if Lenz's law means the loop should make the whole induction effect disappear.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a9-l2-trap-warning",
+              label: "Do not oppose the field itself and do not treat Lenz's law as total cancellation. The loop responds by opposing the original change in flux, which is why the rule has physical meaning and links back to energy conservation.",
+              feedback:
+                "Exactly. That warning blocks the main A9_L2 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "field-warning-only-a9-l2",
+              label: "Warn mainly that the field direction matters, because once students stop ignoring the field arrow they usually recover the real Lenz rule on their own.",
+              feedback:
+                "That would leave the change story too weak.",
+            },
+            {
+              value: "current-warning-only-a9-l2",
+              label: "Warn mainly that current direction must be chosen carefully, because once students slow down on clockwise versus counterclockwise they usually recover the meaning of the rule on their own.",
+              feedback:
+                "That would leave the physical opposition idea too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps original change and induced response in the right order.",
+          retryLabel: "That warning would leave a main A9_L2 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a9-l2-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps opposition-to-change visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the loop responds to a change that is happening, not by blindly pointing against whatever field happens to be there.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "door-closing-speed-analogy",
+              label: "Think of a soft-closing door that reacts to the way the motion is changing. If the door is speeding shut, the closer resists that extra closing change; if the closing is easing off, the closer resists that decrease instead. The response is against the change, not against the existence of the door itself.",
+              feedback:
+                "Exactly. That keeps opposition-to-change visible instead of turning it into blind reversal.",
+              isCorrect: true,
+            },
+            {
+              value: "always-push-backward-analogy",
+              label: "Think of the loop like something that always pushes backward against the field no matter what, because the safest analogy is usually one where the induced response simply points opposite to the main outside arrow.",
+              feedback:
+                "That would rebuild the oppose-the-field shortcut.",
+            },
+            {
+              value: "switch-off-analogy-a9-l2",
+              label: "Think of the loop like a system trying to switch the whole effect off completely, because the most intuitive analogy is usually one where the response aims to make nothing happen at all.",
+              feedback:
+                "That would rebuild the cancel-it-all shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on opposing the change itself.",
+          retryLabel: "That analogy would pull the lesson away from the right A9_L2 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
