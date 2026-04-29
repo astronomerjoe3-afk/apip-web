@@ -9387,6 +9387,248 @@ function getA10ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A10_L2") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a10-l2-beamline-board",
+        badge: "Beamline board",
+        title: "Separate beam preparation from detector readout before you interpret the experiment",
+        scenario:
+          "The beamline board shows an accelerator stage, a collision or probe region, and detector tracks in a magnetic field. One trainee talks as if the detector is what gives the particles their speed, another reads a curved track like a picture clue without connecting it to momentum-to-charge ratio, and a third keeps blurring bend direction with speed alone.",
+        prompt: "Pin the note that keeps the experiment model accurate.",
+        options: [
+          {
+            value: "beam-prep-and-readout-note",
+            label: "Treat the experiment in stages. The accelerator gives the particle kinetic energy through potential difference before the event, while the detector turns the aftermath into readable signals. In the same magnetic field, tighter curvature means a smaller momentum-to-charge ratio magnitude, and bend direction helps reveal charge sign.",
+            feedback:
+              "Exactly. That keeps accelerator role, detector role, and track evidence in the right A10_L2 order.",
+            isCorrect: true,
+          },
+          {
+            value: "detector-speeds-particles-note",
+            label: "Treat the detector as the main part that speeds particles up, because once a track is visible the same detector system usually explains both the gained energy and the final readout in one step.",
+            feedback:
+              "That would erase the beam-preparation stage the lesson needs.",
+          },
+          {
+            value: "curve-means-more-energy-note",
+            label: "Treat the most curved track as the most energetic one, because a stronger-looking bend usually means a more dramatic particle and the separate momentum-to-charge comparison becomes secondary detail.",
+            feedback:
+              "That would turn detector evidence into a picture-only shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads particle experiments as beam preparation followed by detector readout.",
+        retryLabel: "That note would leave a main A10_L2 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a10-l2-fix-ideas",
+          badge: "System repair",
+          title: "Repair the accelerator-detector blur and curve-picture shortcut",
+          scenario:
+            "One analyst keeps describing the whole experiment as one black box, while another keeps reading tighter and looser tracks by eye without first naming the field, the beam energy stage, or the momentum-to-charge comparison.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-stage-then-track-logic",
+              label: "Repair both habits together: name the accelerator as the beam-preparation stage first, then name the detector as the signal-readout stage. After that, interpret a magnetic track with the field held fixed so radius becomes evidence about momentum-to-charge ratio rather than a vague picture impression.",
+              feedback:
+                "Exactly. That restores the right A10_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-track-picture-first-a10-l2",
+              label: "Repair the confusion by focusing on the track picture first, because once the curve shape is noticed the experiment stages usually sort themselves out afterward.",
+              feedback:
+                "That would keep the picture-only shortcut too alive.",
+            },
+            {
+              value: "repair-from-energy-stage-only-a10-l2",
+              label: "Repair the confusion by focusing on the accelerating potential first, because once the beam energy is found the detector role usually becomes just decorative confirmation.",
+              feedback:
+                "That would leave detector readout too weakly understood.",
+            },
+          ],
+          successLabel: "Repair sent. The room now separates preparation stage from readout stage before reading the tracks.",
+          retryLabel: "That would leave a main A10_L2 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a10-l2-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line experiment rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop collapsing particle experiments into one vague machine story.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a10-l2-anchor",
+              label: "Accelerators prepare energetic particle beams, and detectors convert the resulting events into measurable signals.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "tracks-are-the-main-idea-a10-l2",
+              label: "The main idea is mostly that detectors show curved tracks, because once those are visible the preparation stage and signal meaning become secondary.",
+              feedback:
+                "That would flatten the lesson into detector pictures only.",
+            },
+            {
+              value: "accelerators-are-the-main-idea-a10-l2",
+              label: "The main idea is mostly that accelerators make particles fast, because once the beam is energetic the detector stage becomes a small afterthought.",
+              feedback:
+                "That would weaken the readout side of the experiment too much.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right experiment split.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a10-l2-technical-words",
+          badge: "Term desk",
+          title: "Clean up the accelerator and detector vocabulary board",
+          scenario:
+            "The crew keeps mixing accelerating potential, kinetic energy, detector signal, track radius, and charge sign until every explanation sounds like one fuzzy story about particles making marks.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a10-l2",
+              label: "Use accelerating potential for the energy-per-charge beam-preparation stage, detector signal for the recorded aftermath, track radius for momentum-to-charge ratio evidence in a fixed magnetic field, and bend direction for charge-sign evidence.",
+              feedback:
+                "Exactly. That keeps the A10_L2 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-track-does-most-a10-l2",
+              label: "Use track language as the main word for almost the whole topic, because once the curve is visible the separate meanings of potential difference, energy gain, and detector readout usually become minor detail.",
+              feedback:
+                "That would collapse the system roles too far.",
+            },
+            {
+              value: "term-board-energy-does-most-a10-l2",
+              label: "Use energy language as the main word for almost the whole topic, because once the particle speed is high enough the detector signal and curvature details usually become secondary.",
+              feedback:
+                "That would blur the readout meaning the lesson is teaching.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A10_L2 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a10-l2-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they infer properties from a detector track",
+          scenario:
+            "The trainee analyst is about to jump straight from a curved track to a claim about the particle, but has not yet named what the accelerator did, what field the detector used, or which track feature maps to which particle property.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-stage-then-feature-map",
+              label: "Start by separating the stages: first identify how the beam was prepared, then identify what the detector field is doing. After that, map track features carefully: radius in the same magnetic field tells you about momentum-to-charge ratio magnitude, while bend direction helps with charge sign.",
+              feedback:
+                "Exactly. That gives the analyst the right A10_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-tightest-curve-a10-l2",
+              label: "Start from whichever track curves most tightly, because once the most dramatic path is interpreted the rest of the detector evidence usually becomes a minor check.",
+              feedback:
+                "That would send the analyst back into the picture-first shortcut.",
+            },
+            {
+              value: "start-from-speed-only-a10-l2",
+              label: "Start from particle speed alone, because once you know the beam was accelerated the later detector bend is usually just another way of saying how fast the particle was moving.",
+              feedback:
+                "That would send the analyst back into one-factor reasoning.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean preparation-to-readout method.",
+          retryLabel: "That would send the analyst back into an A10_L2 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a10-l2-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the black-box machine story and the curve-by-eye shortcut",
+          scenario:
+            "One crew member keeps treating the apparatus as one mystery machine, while another keeps making claims from track tightness without holding the magnetic field fixed or naming momentum-to-charge ratio.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a10-l2-trap-warning",
+              label: "Do not flatten the apparatus into one black box and do not read curvature as a pure picture clue. Keep accelerator and detector as different stages, then interpret track radius only within the fixed-field relation to momentum-to-charge ratio.",
+              feedback:
+                "Exactly. That warning blocks the main A10_L2 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "field-warning-only-a10-l2",
+              label: "Warn mainly that the magnetic field matters, because once students stop ignoring the field arrow they usually recover the full experiment logic on their own.",
+              feedback:
+                "That would leave the stage split too weak.",
+            },
+            {
+              value: "energy-warning-only-a10-l2",
+              label: "Warn mainly that accelerating potential matters, because once students track the energy gain they usually recover the detector interpretation on their own.",
+              feedback:
+                "That would leave the readout meaning too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps beam preparation and detector evidence in the right order.",
+          retryLabel: "That warning would leave a main A10_L2 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a10-l2-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps launcher role and readout role separate",
+          scenario:
+            "The team wants a comparison that helps beginners feel why one system prepares the particle before the event while another system reads what happened afterward.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "launcher-and-sand-floor-analogy",
+              label: "Think of a training range where a launcher sets how fast a ball is fired, then a marked floor and curved guide region reveal what kind of ball it was from the path it leaves. The launcher prepares the motion; the readout zone turns the outcome into evidence.",
+              feedback:
+                "Exactly. That keeps preparation stage and readout stage distinct without losing the experiment story.",
+              isCorrect: true,
+            },
+            {
+              value: "one-smart-machine-analogy-a10-l2",
+              label: "Think of the apparatus mainly as one smart machine that both decides and reveals everything at once, because the most intuitive analogy is usually one where one device handles the whole story by itself.",
+              feedback:
+                "That would rebuild the black-box shortcut.",
+            },
+            {
+              value: "curve-shape-only-analogy-a10-l2",
+              label: "Think mainly of reading tire tracks after a turn, because the most intuitive analogy is usually one where the visible curve alone tells the whole story without needing a separate launch stage.",
+              feedback:
+                "That would rebuild the picture-only shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on preparation first and evidence readout second.",
+          retryLabel: "That analogy would pull the lesson away from the right A10_L2 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
