@@ -4960,6 +4960,214 @@ function getA7ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A7_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a7-l3-divider-board",
+        badge: "Divider board",
+        title: "Keep one shared supply drop and one tapped fraction on the same route",
+        scenario:
+          "The divider board shows one supply across two series sections with the output taken from a tap. One trainee keeps treating the output like an independent source, another guesses half-supply from appearance alone, and a third forgets that loading can change the divider output.",
+        prompt: "Pin the note that keeps the divider model accurate.",
+        options: [
+          {
+            value: "shared-drop-ratio-note",
+            label: "Treat the divider as one shared source drop across a series route, then read the output as the fraction set by the resistance ratio at the tapped section, remembering that loading can change that output.",
+            feedback:
+              "Exactly. That keeps the whole A7_L3 divider story in one clean picture.",
+            isCorrect: true,
+          },
+          {
+            value: "output-is-own-source",
+            label: "Treat the tapped output like its own small source, because once the wires are taken from one section the output voltage stops depending on the rest of the divider in any important way.",
+            feedback:
+              "That would rebuild the independent-output shortcut.",
+          },
+          {
+            value: "visual-halves-only",
+            label: "Treat the output as whatever looks like a fair share of the supply from the drawing, because equal-looking sections usually matter more than the actual resistance values.",
+            feedback:
+              "That would rebuild the half-supply pattern shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads divider output as a tapped fraction of one shared source drop.",
+        retryLabel: "That note would leave a main A7_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a7-l3-fix-ideas",
+          badge: "Divider repair",
+          title: "Repair the output-is-own-source shortcut",
+          scenario:
+            "One analyst keeps talking about the output as if it were a separate source voltage, while another keeps solving divider questions by visual symmetry instead of by resistance ratio.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-shared-drop-ratio",
+              label: "Repair both habits together: keep the full supply across the whole series route, then read the output from the resistance ratio of the tapped section instead of from appearance or a separate-source story.",
+              feedback:
+                "Exactly. That restores the right A7_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-top-resistor-only",
+              label: "Repair the confusion by focusing on the top resistor first, because once the drop above the output is understood the lower section usually takes care of itself automatically.",
+              feedback:
+                "That would keep the shared-divider story too incomplete.",
+            },
+            {
+              value: "repair-symmetry-only",
+              label: "Repair the confusion by starting from equal-split intuition, because once students recognize the common half-supply pattern they usually handle the other ratios by feel.",
+              feedback:
+                "That would keep the pattern-recognition shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats divider output as one shared-drop fraction.",
+          retryLabel: "That would leave a main A7_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a7-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line divider rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating divider outputs like free-standing voltages.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a7-l3-anchor",
+              label: "A potential divider shares one supply drop across a series route, so the output is set by the resistance ratio.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "output-acts-alone-anchor",
+              label: "The main idea is mostly that the chosen output section sets its own voltage, because once the tap is chosen the rest of the divider matters much less.",
+              feedback:
+                "That would erase the shared-supply idea the lesson needs.",
+            },
+            {
+              value: "equal-halves-anchor",
+              label: "The main idea is mostly that divider questions are about spotting equal or unequal visual sections, because once the layout looks balanced the exact resistance ratio usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson into a picture shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right divider anchor.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a7-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they use the divider ratio",
+          scenario:
+            "The trainee analyst is about to grab a formula immediately, but has not yet named the whole supply, the tapped output section, or whether the divider is unloaded or being affected by a load.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "whole-supply-then-output-fraction",
+              label: "Start by naming the full supply across the whole series route, then identify which resistor section the output is taken across and read that section as a fraction of the total resistance before worrying about any loading effect.",
+              feedback:
+                "Exactly. That gives the analyst the right A7_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-output-only",
+              label: "Start from the output section alone, because once the tapped resistor is known the rest of the divider usually becomes background detail.",
+              feedback:
+                "That would send the analyst back into the independent-output shortcut.",
+            },
+            {
+              value: "start-from-memorized-half-case",
+              label: "Start from the equal-divider case you remember best, because once the half-supply picture is secure the other ratios usually follow by intuition.",
+              feedback:
+                "That would send the analyst back into the pattern-recognition shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean shared-drop ratio method.",
+          retryLabel: "That would send the analyst back into an A7_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a7-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the half-supply pattern shortcut",
+          scenario:
+            "One crew member keeps guessing the output from what looks visually balanced, while another keeps ignoring the way a load can pull the divider output away from its unloaded value.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a7-l3-trap-warning",
+              label: "Do not guess divider output from appearance alone. Use the resistance ratio on the shared series route, and remember that loading can change the tapped output.",
+              feedback:
+                "Exactly. That warning blocks the main A7_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "ratio-warning-only",
+              label: "Warn mainly about the ratio, because once students calculate the unloaded fraction they usually stop needing any reminder about loading effects.",
+              feedback:
+                "That would leave the loading idea too weak.",
+            },
+            {
+              value: "loading-warning-only",
+              label: "Warn mainly about loading, because once students know loads can disturb the output they usually stop relying on visual divider patterns on their own.",
+              feedback:
+                "That would leave the ratio-first method too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps ratio thinking ahead of pattern guessing.",
+          retryLabel: "That warning would leave a main A7_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a7-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps one supply and one fraction together",
+          scenario:
+            "The team wants a comparison that helps beginners feel why divider output is not a fresh voltage source but a chosen share of one overall drop across the route.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "shared-budget-analogy",
+              label: "Think of the divider like one shared budget split across linked sections of a route: the tapped output is the share assigned to one section, and that share depends on the size of that section compared with the total route.",
+              feedback:
+                "Exactly. That keeps one supply, one route, and one chosen fraction in the same picture.",
+              isCorrect: true,
+            },
+            {
+              value: "separate-wallet-analogy",
+              label: "Think of the tapped output like its own wallet, because once you choose where to take the wires from the output has its own stored voltage independent of the rest of the divider.",
+              feedback:
+                "That would rebuild the independent-output shortcut.",
+            },
+            {
+              value: "mirror-halves-analogy",
+              label: "Think of divider questions mainly like spotting mirror halves, because once the route looks visually balanced the exact section sizes usually stop mattering much.",
+              feedback:
+                "That would rebuild the half-supply pattern shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the divider output tied to one shared route instead of treating it as a separate source.",
+          retryLabel: "That analogy would pull the lesson away from the right A7_L3 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A7_L2") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
