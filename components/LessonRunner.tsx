@@ -4960,6 +4960,214 @@ function getA7ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A7_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a7-l5-rc-board",
+        badge: "RC board",
+        title: "Keep changing current, changing capacitor p.d., and time constant on one response story",
+        scenario:
+          "The RC board shows current, capacitor p.d., and time together during charging and discharging. One trainee keeps sketching a straight-line fill, another treats the time constant like a final-time marker rather than a response scale, and a third forgets that current and capacitor p.d. move in opposite directions during charging.",
+        prompt: "Pin the note that keeps the RC model accurate.",
+        options: [
+          {
+            value: "changing-rate-note",
+            label: "Treat RC behaviour as a changing-rate process: during charging the current starts large and falls while the capacitor p.d. rises toward the supply, and the time constant sets the response timescale rather than a sudden finishing moment.",
+            feedback:
+              "Exactly. That keeps the full A7_L5 response story visible instead of turning it into a ramp.",
+            isCorrect: true,
+          },
+          {
+            value: "straight-line-fill-note",
+            label: "Treat charging like a steady fill at constant rate, because once the resistor is fixed the capacitor voltage should climb by equal steps in equal times until it reaches the supply.",
+            feedback:
+              "That would rebuild the straight-line-fill shortcut.",
+          },
+          {
+            value: "time-constant-is-finish-note",
+            label: "Treat the time constant as the moment the process is basically complete, because once one tau has passed the important charging or discharging physics is usually finished.",
+            feedback:
+              "That would blur the role of the time constant as a scale for exponential change.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads charging and discharging as changing-rate RC responses.",
+        retryLabel: "That note would leave a main A7_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a7-l5-fix-ideas",
+          badge: "RC repair",
+          title: "Repair the straight-line charging shortcut",
+          scenario:
+            "One analyst keeps drawing constant-rate ramps for capacitor voltage, while another says one time constant means the circuit has fully finished and no longer needs interpretation.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-changing-rate-story",
+              label: "Repair both habits together: keep current and capacitor p.d. changing together as an exponential response, and use the time constant as the key timescale for how quickly the change unfolds rather than as a finish line.",
+              feedback:
+                "Exactly. That restores the right A7_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-voltage-only",
+              label: "Repair the confusion by focusing on the capacitor p.d. curve only, because once that graph is recognized the current story and the time-constant meaning usually become routine details.",
+              feedback:
+                "That would leave the linked-response story too weak.",
+            },
+            {
+              value: "repair-formula-only",
+              label: "Repair the confusion by anchoring everything to the exponential formula first, because once the expression is memorized the graph shape and time-constant meaning usually sort themselves out.",
+              feedback:
+                "That would keep the formula-first shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats RC response as a linked changing-rate process.",
+          retryLabel: "That would leave a main A7_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a7-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line RC rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop turning capacitor charging into a constant-rate fill story.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a7-l5-anchor",
+              label: "RC charging and discharging are exponential changing-rate processes governed by the time constant.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "voltage-climb-anchor",
+              label: "The main idea is mostly that capacitor voltage moves toward its final value, because the current and time-constant details usually just decorate that basic rise.",
+              feedback:
+                "That would erase the linked-response story the lesson needs.",
+            },
+            {
+              value: "one-tau-finish-anchor",
+              label: "The main idea is mostly that one time constant tells you when the process is basically done, because after that the remaining behaviour is too small to matter conceptually.",
+              feedback:
+                "That would flatten the role of the time constant into the wrong meaning.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right RC anchor.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a7-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they read the response",
+          scenario:
+            "The trainee analyst is about to grab an equation or sketch a graph immediately, but has not yet decided whether the circuit is charging or discharging, what happens first to the current, or how the time constant should be interpreted.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "state-direction-then-timescale",
+              label: "Start by deciding whether the capacitor is charging or discharging, then track how current and capacitor p.d. change together, and only after that use the time constant as the response timescale.",
+              feedback:
+                "Exactly. That gives the analyst the right A7_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-final-value-only",
+              label: "Start from the final voltage only, because once the destination is known the early current behaviour and the exact time-scale meaning usually become secondary.",
+              feedback:
+                "That would send the analyst back into the end-point-only shortcut.",
+            },
+            {
+              value: "start-from-tau-as-finish",
+              label: "Start by taking one time constant as the completion time, because once that marker is set the rest of the graph usually becomes easy to sketch from intuition.",
+              feedback:
+                "That would send the analyst back into the one-tau-finish shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean RC response method.",
+          retryLabel: "That would send the analyst back into an A7_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a7-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the straight-line fill shortcut",
+          scenario:
+            "One crew member keeps sketching equal voltage jumps in equal times, while another keeps using the time constant like a stop marker instead of a scale for how the exponential response unfolds.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a7-l5-trap-warning",
+              label: "Do not treat RC response as a straight-line fill or emptying. The current and capacitor p.d. change exponentially, and the time constant is the key timescale rather than a finish switch.",
+              feedback:
+                "Exactly. That warning blocks the main A7_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "graph-warning-only",
+              label: "Warn mainly that the graph is curved, because once students stop drawing straight lines they usually understand the time constant on their own.",
+              feedback:
+                "That would leave the timescale meaning too weak.",
+            },
+            {
+              value: "tau-warning-only",
+              label: "Warn mainly about misusing the time constant, because once students stop calling one tau the end they usually stop drawing straight lines on their own.",
+              feedback:
+                "That would leave the changing-rate graph story too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps exponential response ahead of ramp intuition.",
+          retryLabel: "That warning would leave a main A7_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a7-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the slowing response visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why capacitor charging starts quickly and then slows, instead of rising in equal steps all the way to the final value.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "approach-curve-analogy",
+              label: "Think of the response like approaching a destination with less and less remaining gap to close: the first part changes quickly, then the approach slows, so the curve and the timescale matter more than a constant-rate picture.",
+              feedback:
+                "Exactly. That keeps the changing-rate idea visible without flattening it into a ramp.",
+              isCorrect: true,
+            },
+            {
+              value: "bucket-fill-analogy",
+              label: "Think of the response mainly like pouring into a bucket at constant rate, because once the supply is fixed the level should rise by equal amounts in equal times until full.",
+              feedback:
+                "That would rebuild the straight-line-fill shortcut.",
+            },
+            {
+              value: "countdown-analogy",
+              label: "Think of the response mainly like a countdown to one marked moment, because once one time constant is reached the important part of the process is basically over.",
+              feedback:
+                "That would rebuild the one-tau-finish shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the slowing exponential response visible instead of turning it into a constant-rate fill.",
+          retryLabel: "That analogy would pull the lesson away from the right A7_L5 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A7_L4") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
