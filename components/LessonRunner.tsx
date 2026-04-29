@@ -9629,6 +9629,248 @@ function getA10ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A10_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a10-l3-decay-ledger",
+        badge: "Decay ledger",
+        title: "Keep nuclear-change bookkeeping separate from rate bookkeeping",
+        scenario:
+          "The decay ledger shows nuclide changes on one panel and activity-plus-half-life data on another. One trainee talks as if activity is the number of undecayed nuclei, another wants to start calculating half-life before the decay equation is even balanced, and a third keeps blending decay process with decay rate as if they were the same idea twice.",
+        prompt: "Pin the note that keeps the decay model accurate.",
+        options: [
+          {
+            value: "process-and-rate-note",
+            label: "Treat the lesson as two linked ledgers. Balance the nuclear equation first to show what changes in proton number and nucleon number, then use activity, half-life, and decay constant to describe how quickly those decays are happening. Activity is a decay rate, not a particle count.",
+            feedback:
+              "Exactly. That keeps process bookkeeping and rate bookkeeping in the right A10_L3 order.",
+            isCorrect: true,
+          },
+          {
+            value: "activity-is-number-note",
+            label: "Treat activity as basically the number of radioactive nuclei left in the sample, because a more active source usually just means there are more nuclei and the separate rate language becomes optional.",
+            feedback:
+              "That would erase the rate meaning of activity.",
+          },
+          {
+            value: "rate-first-before-balance-note",
+            label: "Treat the rate calculation as the main story and leave equation balancing until later, because once the half-life or decay constant is known the exact nuclear change usually becomes secondary detail.",
+            feedback:
+              "That would weaken the process-versus-rate split the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The ledger now reads decay change and decay rate as different jobs.",
+        retryLabel: "That note would leave a main A10_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a10-l3-fix-ideas",
+          badge: "Ledger repair",
+          title: "Repair the activity-equals-count and one-idea-in-two-disguises shortcuts",
+          scenario:
+            "One analyst keeps calling activity the amount of radioactive material, while another keeps treating a balanced decay equation and a half-life calculation as if they are just two versions of the same task.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-process-then-rate",
+              label: "Repair both habits together: use the decay equation to show what nuclear change happens, then use activity, half-life, decay constant, or A = λN to show how fast decays are happening. The process ledger and the rate ledger work together, but they are not the same job.",
+              feedback:
+                "Exactly. That restores the right A10_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-activity-only-a10-l3",
+              label: "Repair the confusion by focusing mainly on activity first, because once students know how active the sample is they usually recover the decay-equation story on their own.",
+              feedback:
+                "That would leave the nuclear-change side too weak.",
+            },
+            {
+              value: "repair-from-balanced-equation-only-a10-l3",
+              label: "Repair the confusion by focusing mainly on balancing the equation first and treating the rate work as a small follow-up, because once the daughter nucleus is known the rest of the lesson usually becomes obvious enough.",
+              feedback:
+                "That would leave the rate side too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now keeps decay change and decay rate in separate slots.",
+          retryLabel: "That would leave a main A10_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a10-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line decay rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop collapsing nuclear equations and activity into one blended idea.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a10-l3-anchor",
+              label: "Decay equations show what changes in the nucleus, while activity and half-life show how quickly those decays happen.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "activity-main-idea-only-a10-l3",
+              label: "The main idea is mostly how active the source is, because once the decay rate is known the equation and particle-emission details usually become secondary.",
+              feedback:
+                "That would flatten the lesson into rate only.",
+            },
+            {
+              value: "equation-main-idea-only-a10-l3",
+              label: "The main idea is mostly balancing the decay equation, because once the nuclear change is known the activity and half-life language usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson into process only.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right decay split.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a10-l3-technical-words",
+          badge: "Term desk",
+          title: "Clean up the decay and activity vocabulary board",
+          scenario:
+            "The crew keeps mixing daughter nuclide, emitted particle, activity, half-life, decay constant, and number of undecayed nuclei until every explanation sounds like one fuzzy story about sources getting weaker.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a10-l3",
+              label: "Use decay equation for the before-and-after nuclear bookkeeping, activity for decays per second, half-life for the halving timescale, decay constant for the same rate behavior in λ form, and undecayed nuclei for the number still present in the sample.",
+              feedback:
+                "Exactly. That keeps the A10_L3 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-activity-does-most-a10-l3",
+              label: "Use activity language as the main word for almost the whole topic, because once the source strength is named the daughter nuclide and nuclear-number details usually become minor detail.",
+              feedback:
+                "That would collapse the process ledger too far.",
+            },
+            {
+              value: "term-board-half-life-does-most-a10-l3",
+              label: "Use half-life language as the main word for almost the whole topic, because once the halving pattern is known the rest of the decay vocabulary usually becomes secondary.",
+              feedback:
+                "That would blur several separate quantities into one slogan.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A10_L3 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a10-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they solve a decay question",
+          scenario:
+            "The trainee analyst is about to jump straight into a formula, but has not yet decided whether the question is asking for a nuclear-change statement, a rate quantity, or both.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-by-naming-ledger",
+              label: "Start by naming the ledger. If the task is about what particle is emitted or what daughter nucleus forms, balance the decay equation first. If the task is about how fast the sample changes, move to activity, half-life, decay constant, or A = λN only after the process meaning is clear.",
+              feedback:
+                "Exactly. That gives the analyst the right A10_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-favorite-formula-a10-l3",
+              label: "Start from whichever decay formula looks most familiar, because once a numerical relation is in play the nuclear-change side usually sorts itself out quickly enough afterward.",
+              feedback:
+                "That would send the analyst back into formula-first guessing.",
+            },
+            {
+              value: "start-from-source-strength-only-a10-l3",
+              label: "Start from how strong the source sounds, because once the activity seems large or small the details about particle emission and daughter nucleus usually become easier to guess.",
+              feedback:
+                "That would send the analyst back into vague rate-only reasoning.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean process-versus-rate method.",
+          retryLabel: "That would send the analyst back into an A10_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a10-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the activity-is-count and formula-first shortcuts",
+          scenario:
+            "One crew member keeps talking as if a higher activity simply means a larger count of undecayed nuclei, while another keeps grabbing λ or half-life formulas before deciding what the nuclear event actually is.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a10-l3-trap-warning",
+              label: "Do not treat activity as the number of nuclei and do not let formulas replace the process check. Activity is a decay rate, while the balanced decay equation tells you what nuclear change is happening. Keep the rate ledger and the change ledger separate.",
+              feedback:
+                "Exactly. That warning blocks the main A10_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "activity-warning-only-a10-l3",
+              label: "Warn mainly that activity is measured in becquerels, because once students remember the unit they usually recover the rest of the lesson on their own.",
+              feedback:
+                "That would leave the process-rate distinction too weak.",
+            },
+            {
+              value: "equation-warning-only-a10-l3",
+              label: "Warn mainly that the equation must balance, because once students handle nucleon and proton number correctly they usually recover the meaning of activity on their own.",
+              feedback:
+                "That would leave the rate meaning too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps decay bookkeeping and rate bookkeeping in the right order.",
+          retryLabel: "That warning would leave a main A10_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a10-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps event type and event rate separate",
+          scenario:
+            "The team wants a comparison that helps beginners feel why identifying what kind of change happens is a different job from tracking how often that change happens.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "ticket-gate-analogy",
+              label: "Think of a station log where one sheet records which route each train takes and another records how many trains pass the gate each second. The route sheet tells you what changed; the gate counter tells you the rate. You need both, but they are not the same record.",
+              feedback:
+                "Exactly. That keeps process and rate visible as different ledgers without breaking the physics meaning.",
+              isCorrect: true,
+            },
+            {
+              value: "one-big-clock-analogy-a10-l3",
+              label: "Think of the whole lesson mainly as one countdown clock, because the most intuitive analogy is usually one where all decay ideas reduce to a single timing story.",
+              feedback:
+                "That would flatten the process side too much.",
+            },
+            {
+              value: "identity-only-analogy-a10-l3",
+              label: "Think mainly of renaming one object into another, because the most intuitive analogy is usually one where the change itself matters and the timing side becomes secondary.",
+              feedback:
+                "That would flatten the rate side too much.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on one ledger for what changes and another for how fast it changes.",
+          retryLabel: "That analogy would pull the lesson away from the right A10_L3 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
