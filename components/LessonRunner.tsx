@@ -4960,6 +4960,214 @@ function getA7ScaffoldRoleplayCard({
   activeSectionWorkedExample,
   activeSectionHeading,
 }: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A7_L2") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a7-l2-node-loop-board",
+        badge: "Node-loop board",
+        title: "Keep junction current balance and loop voltage balance as different checks",
+        scenario:
+          "The node-platform board shows a branching junction and a closed loop on the same circuit. One trainee keeps adding voltages at the junction, another uses current conservation around the whole loop, and a third treats Kirchhoff work like one blended rule instead of two separate bookkeeping checks.",
+        prompt: "Pin the note that keeps the Kirchhoff model accurate.",
+        options: [
+          {
+            value: "separate-node-and-loop-checks",
+            label: "Treat the junction rule as current conservation at a node and the loop rule as voltage-rise-and-drop balance around a closed path, then use them as separate bookkeeping checks in the same circuit.",
+            feedback:
+              "Exactly. That keeps the two Kirchhoff rules distinct and usable.",
+            isCorrect: true,
+          },
+          {
+            value: "voltage-at-the-junction",
+            label: "Treat the junction as the main place to add voltage rises and drops, because once the branch point is understood the loop usually stops being the important conservation check.",
+            feedback:
+              "That swaps the two rules. Junction work is about current balance, not voltage balance.",
+          },
+          {
+            value: "one-merged-kirchhoff-rule",
+            label: "Treat Kirchhoff analysis as one general circuit-sum rule, because keeping current and voltage in separate ledgers usually adds unnecessary complication.",
+            feedback:
+              "That would rebuild the blended-rule shortcut the lesson is trying to remove.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads node-current balance and loop-voltage balance as separate checks.",
+        retryLabel: "That note would leave a main A7_L2 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a7-l2-fix-ideas",
+          badge: "Kirchhoff repair",
+          title: "Repair the blended-rule shortcut",
+          scenario:
+            "One analyst keeps treating current balance and voltage balance as if they were the same kind of statement, while another starts with a loop before checking what happens at the junction.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-node-then-loop",
+              label: "Repair both habits together: use the junction rule for currents entering and leaving a node, then use the loop rule for rises and drops around a closed path, keeping the two ledgers separate all the way through.",
+              feedback:
+                "Exactly. That restores the right A7_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-loop-only",
+              label: "Repair the confusion by anchoring everything to loop voltages first, because once the source and resistor drops are secure the branch currents usually sort themselves out automatically.",
+              feedback:
+                "That would keep the node-current check too weak.",
+            },
+            {
+              value: "repair-branch-intuition-only",
+              label: "Repair the confusion by reasoning from branch intuition alone, because once the circuit picture is understood the separate Kirchhoff rules usually become more formal than useful.",
+              feedback:
+                "That would erase the systematic bookkeeping method the lesson needs.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats junction and loop work as two linked but different checks.",
+          retryLabel: "That would leave a main A7_L2 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a7-l2-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line Kirchhoff rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop collapsing node and loop reasoning into one vague circuit-sum method.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a7-l2-anchor",
+              label: "Kirchhoff analysis stays reliable when junction-current balance and loop-voltage balance are kept as different conservation checks.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "kirchhoff-is-one-sum-anchor",
+              label: "The main idea is mostly that every circuit can be handled by one general sum rule, because current and voltage bookkeeping usually lead to the same practical conclusion anyway.",
+              feedback:
+                "That would erase the distinction the lesson needs.",
+            },
+            {
+              value: "junction-main-anchor",
+              label: "The main idea is mostly that junction current balance decides the whole circuit, because once the branching is understood the loop-voltage story usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson too far into one check only.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right Kirchhoff anchor.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a7-l2-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they start the circuit ledger",
+          scenario:
+            "The trainee analyst is about to jump straight into algebra, but has not yet decided where the useful junction is, which loop should be tracked, or which rule applies to each step.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "identify-junction-then-loop",
+              label: "Start by marking the junction and applying current conservation there, then choose a closed loop and balance voltage rises and drops around it, keeping each rule in its own line of reasoning before combining them.",
+              feedback:
+                "Exactly. That gives the analyst the right A7_L2 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-ohms-law-only",
+              label: "Start from Ohm's law everywhere immediately, because once each resistor relation is written the junction and loop rules usually become obvious and less central.",
+              feedback:
+                "That would send the analyst back into the formula-first shortcut.",
+            },
+            {
+              value: "start-from-whole-circuit-intuition",
+              label: "Start from the whole-circuit picture only, because once the branches look sensible the separate node and loop bookkeeping usually becomes overkill.",
+              feedback:
+                "That would send the analyst back into the intuition-only shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean node-then-loop method.",
+          retryLabel: "That would send the analyst back into an A7_L2 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a7-l2-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the blended Kirchhoff shortcut",
+          scenario:
+            "One crew member keeps talking about 'adding everything around the circuit' without deciding whether the quantity is current or voltage, while another keeps skipping the junction rule whenever a loop equation looks easier.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a7-l2-trap-warning",
+              label: "Do not blend Kirchhoff's rules into one generic sum. Use current conservation at junctions and voltage balance around loops, and do not let one replace the other.",
+              feedback:
+                "Exactly. That warning blocks the main A7_L2 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "loop-warning-only",
+              label: "Warn mainly that loops matter, because once students remember to track voltage around a closed path they usually stop mixing up the current side of Kirchhoff work on their own.",
+              feedback:
+                "That would leave the junction-current method too weak.",
+            },
+            {
+              value: "branch-warning-only",
+              label: "Warn mainly that branches matter, because once students respect current splitting they usually stop needing explicit loop-voltage bookkeeping.",
+              feedback:
+                "That would leave the loop-balance check too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps node and loop reasoning in separate slots.",
+          retryLabel: "That warning would leave a main A7_L2 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a7-l2-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the two ledgers separate",
+          scenario:
+            "The team wants a comparison that helps beginners feel why Kirchhoff work needs one bookkeeping line for how current splits at a platform and another for how voltage rises and drops balance around a route.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "station-and-route-analogy",
+              label: "Think of the circuit like a transit system: at a station platform you count how many travelers arrive and leave, while on a full route you track gains and costs around the complete journey, so the station ledger and the route ledger must stay separate.",
+              feedback:
+                "Exactly. That keeps the node and loop checks distinct without flattening them.",
+              isCorrect: true,
+            },
+            {
+              value: "single-ledger-analogy",
+              label: "Think of the circuit mainly like one running total, because once the whole network is followed the same ledger should cover both branch splitting and loop balance automatically.",
+              feedback:
+                "That would rebuild the blended-rule shortcut.",
+            },
+            {
+              value: "branch-only-analogy",
+              label: "Think of the circuit mainly through the branching platform, because once the split is clear the full route balance usually stops adding much useful meaning.",
+              feedback:
+                "That would erase the loop-balance side of the lesson.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps junction balance and loop balance in the same model without merging them.",
+          retryLabel: "That analogy would pull the lesson away from the right A7_L2 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   if (lessonId === "A7_L1") {
     if (isMediaStep && activeMediaIndex === 0) {
       return {
