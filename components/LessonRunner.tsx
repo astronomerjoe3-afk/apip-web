@@ -6945,6 +6945,248 @@ function getA8ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A8_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a8-l4-radial-force-board",
+        badge: "Radial-force board",
+        title: "Keep charge size, charge sign, and inverse-square separation on one force story",
+        scenario:
+          "The radial-force board shows two point charges, their separation, and the attraction-versus-repulsion arrows. One trainee decides the outcome from charge size alone, another says doubling separation should just halve the force, and a third forgets that the sign pair decides whether the interaction is attractive or repulsive while the magnitude comes from the charge product and distance squared.",
+        prompt: "Pin the note that keeps the Coulomb-law model accurate.",
+        options: [
+          {
+            value: "charge-product-and-inverse-square-note",
+            label: "Treat the force magnitude as depending on the charge product and inverse-square separation, then read the sign pair separately for attraction or repulsion. Doubling the separation makes the force one quarter as large, not one half.",
+            feedback:
+              "Exactly. That keeps magnitude and direction logic in the right A8_L4 structure.",
+            isCorrect: true,
+          },
+          {
+            value: "bigger-charge-alone-note",
+            label: "Treat the bigger charge as the main thing that decides the whole interaction, because once one charge is clearly larger the sign and the exact distance effect usually become minor corrections.",
+            feedback:
+              "That would flatten the lesson into a charge-size-only shortcut.",
+          },
+          {
+            value: "distance-halves-force-note",
+            label: "Treat doubling the separation as halving the force, because once the charges are twice as far apart the interaction should weaken in direct proportion to that extra distance.",
+            feedback:
+              "That would erase the inverse-square reasoning the lesson is trying to secure.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads charge product, sign pair, and inverse-square distance as one clean Coulomb story.",
+        retryLabel: "That note would leave a main A8_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a8-l4-fix-ideas",
+          badge: "Coulomb repair",
+          title: "Repair the size-only and direct-distance shortcuts",
+          scenario:
+            "One analyst keeps deciding from whichever charge looks larger, while another keeps weakening the force in a straight-line way when the separation changes instead of using a square-distance comparison.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-product-sign-square-distance",
+              label: "Repair both habits together: use charge product for magnitude, sign pair for attraction or repulsion, and square-distance comparison for the separation effect before making any judgment.",
+              feedback:
+                "Exactly. That restores the right A8_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-sign-alone",
+              label: "Repair the confusion by focusing on the sign pair first, because once attraction or repulsion is known the exact magnitude story usually becomes a secondary detail.",
+              feedback:
+                "That would leave the inverse-square magnitude work too weak.",
+            },
+            {
+              value: "repair-from-bigger-charge-first",
+              label: "Repair the confusion by focusing on the larger charge first, because once the stronger source is identified the distance rule usually becomes obvious enough automatically.",
+              feedback:
+                "That would keep the charge-size shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now keeps sign, size, and separation in the right order.",
+          retryLabel: "That would leave a main A8_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a8-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line Coulomb-law rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating Coulomb's law like a vague 'charges push or pull' slogan.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a8-l4-anchor",
+              label: "Coulomb force is a radial interaction whose magnitude depends on charge product and inverse-square separation, while the sign pair decides attraction or repulsion.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "charge-size-anchor-only-a8-l4",
+              label: "The main idea is mostly that bigger charges give bigger forces, because once the charge sizes are known the sign and distance details usually become refinements.",
+              feedback:
+                "That would hide too much of the real law structure.",
+            },
+            {
+              value: "distance-anchor-only-a8-l4",
+              label: "The main idea is mostly that farther charges interact less, because once the distance is known the charge-size and sign story usually becomes secondary.",
+              feedback:
+                "That would flatten the lesson into a one-factor shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right Coulomb-law rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a8-l4-technical-words",
+          badge: "Term desk",
+          title: "Clean up the point-charge vocabulary board",
+          scenario:
+            "The crew keeps mixing force magnitude, attraction, repulsion, separation, and radial direction until every point-charge explanation sounds like one vague story about charges reacting.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a8-l4",
+              label: "Use force magnitude for the size of the interaction, attraction or repulsion for the sign-based direction story, separation for the center-to-center distance, and radial for the along-the-line joining the charges geometry.",
+              feedback:
+                "Exactly. That keeps the A8_L4 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-force-does-most-a8-l4",
+              label: "Use force as the main word for almost the whole topic, because once students know there is a push or pull the separate geometry and sign terms usually matter less.",
+              feedback:
+                "That would scramble the point-charge model back into vague force language.",
+            },
+            {
+              value: "term-board-distance-does-most-a8-l4",
+              label: "Use separation as the main word for almost the whole topic, because once the distance is measured the attraction, repulsion, and charge-size meanings usually become obvious enough.",
+              feedback:
+                "That would weaken the multi-factor structure the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A8_L4 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a8-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they compare two point-charge cases",
+          scenario:
+            "The trainee analyst is about to predict the force from one clue alone and has not yet separated the sign decision from the magnitude calculation or squared the separation.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "sign-then-product-then-square-distance",
+              label: "Start by deciding whether the sign pair gives attraction or repulsion, then compare the charge product for magnitude, and finally apply the inverse-square distance effect carefully by squaring the separation before drawing the conclusion.",
+              feedback:
+                "Exactly. That gives the analyst the right A8_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-biggest-charge-a8-l4",
+              label: "Start from whichever charge is bigger, because once the dominant source is identified the rest of the force comparison usually falls into place on its own.",
+              feedback:
+                "That would send the analyst back into the size-only shortcut.",
+            },
+            {
+              value: "start-from-distance-linearly-a8-l4",
+              label: "Start from the raw distance change in a direct way, because once the charges are farther apart the force should weaken in the same simple proportion.",
+              feedback:
+                "That would send the analyst back into the direct-distance shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean sign-product-distance-squared method.",
+          retryLabel: "That would send the analyst back into an A8_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a8-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the direct-distance weakening shortcut",
+          scenario:
+            "One crew member keeps weakening the force directly with distance instead of by square distance, while another keeps forgetting that opposite and like sign pairs change the interaction direction story.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "coulomb-trap-warning",
+              label: "Do not weaken Coulomb force in a straight-line way with distance, and do not skip the sign pair. The magnitude follows charge product over separation squared, while the signs decide attraction or repulsion.",
+              feedback:
+                "Exactly. That warning blocks the main A8_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "distance-warning-only-a8-l4",
+              label: "Warn mainly about the inverse-square distance rule, because once students remember that they usually sort out attraction and repulsion on their own.",
+              feedback:
+                "That would leave the sign-direction part too weak.",
+            },
+            {
+              value: "sign-warning-only-a8-l4",
+              label: "Warn mainly about attraction and repulsion, because once students get the sign story right the exact distance scaling usually becomes a secondary technical detail.",
+              feedback:
+                "That would leave the inverse-square part too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps sign and inverse-square distance in the same force model.",
+          retryLabel: "That warning would leave a main A8_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a8-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps inverse-square distance visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the charge pair sets the interaction strength together, while distance weakens that interaction much faster than a simple one-step drop.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "radial-spread-analogy",
+              label: "Think of the interaction like a radial influence spreading out from a point: the charge pair sets how strong the source-and-probe combination is, but as the spacing grows the same influence is spread over a much wider sphere of distance, so the force drops with square-distance weakening rather than a simple half-step rule.",
+              feedback:
+                "Exactly. That keeps charge pair and inverse-square distance in one picture.",
+              isCorrect: true,
+            },
+            {
+              value: "bigger-charge-wins-analogy",
+              label: "Think mainly of the larger charge as the one that really decides the interaction, because once one participant is clearly stronger the distance rule usually matters less than people think.",
+              feedback:
+                "That would rebuild the size-only shortcut.",
+            },
+            {
+              value: "one-step-distance-drop-analogy",
+              label: "Think of distance like a simple volume knob: doubling the separation just turns the force halfway down because the charges are twice as far apart.",
+              feedback:
+                "That would rebuild the direct-distance shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps charge pair, radial geometry, and inverse-square weakening tied together.",
+          retryLabel: "That analogy would pull the lesson away from the right A8_L4 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
