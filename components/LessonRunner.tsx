@@ -8166,6 +8166,248 @@ function getA9ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A9_L3") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a9-l3-generator-board",
+        badge: "Generator board",
+        title: "Keep rotation, flux-linkage change, and alternating output in one story",
+        scenario:
+          "The generator board shows a rotating coil, changing flux linkage, and an alternating trace. One trainee treats the waveform like an unexplained machine output, another forgets that the emf sign flips because the coil orientation reverses each half-turn, and a third thinks faster rotation only changes the size of the emf and not the frequency.",
+        prompt: "Pin the note that keeps the generator model accurate.",
+        options: [
+          {
+            value: "rotation-flux-ac-note",
+            label: "Treat the generator as repeated induction from rotation: the coil's orientation keeps changing, so the flux linkage changes continuously, the induced emf reverses sign each half-turn, and faster rotation raises both the cycle rate and the induced emf.",
+            feedback:
+              "Exactly. That keeps motion, changing flux linkage, and alternating output in the right A9_L3 story.",
+            isCorrect: true,
+          },
+          {
+            value: "machine-makes-wave-note",
+            label: "Treat the alternating trace mainly as a built-in machine output, because once the coil is spinning the waveform is just what generators naturally produce without needing a separate flux-linkage explanation.",
+            feedback:
+              "That would erase the induction mechanism behind the a.c. output.",
+          },
+          {
+            value: "speed-only-changes-size-note",
+            label: "Treat faster rotation as mainly making the emf bigger, because the alternating frequency is mostly fixed by the coil-and-magnet setup rather than by how quickly the coil turns.",
+            feedback:
+              "That would break the rotation-rate-to-frequency link the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads a.c. output as repeated induction from rotation.",
+        retryLabel: "That note would leave a main A9_L3 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a9-l3-fix-ideas",
+          badge: "Generator repair",
+          title: "Repair the machine-output and fixed-frequency shortcuts",
+          scenario:
+            "One analyst keeps treating the generator as if it simply emits a.c. by design, while another keeps saying spin rate only affects emf size and leaves the cycle rate unchanged.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-rotation-to-flux-to-output",
+              label: "Repair both habits together: start from coil rotation, track how that changes flux linkage through the turn, then read the alternating emf as repeated Faraday induction. Faster rotation means the same reversal pattern happens more often and in less time, so both frequency and induced emf increase.",
+              feedback:
+                "Exactly. That restores the right A9_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-waveform-alone",
+              label: "Repair the confusion by focusing on the waveform shape first, because once the alternating trace is visible the mechanical and flux-linkage story usually becomes optional detail.",
+              feedback:
+                "That would leave the machine-output shortcut too alive.",
+            },
+            {
+              value: "repair-from-bigger-emf-only",
+              label: "Repair the confusion by focusing on the larger emf first, because once students see the output growing with speed they usually infer the frequency story on their own.",
+              feedback:
+                "That would leave the cycle-rate link too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now reads a.c. output from rotation-driven flux change.",
+          retryLabel: "That would leave a main A9_L3 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a9-l3-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line generator rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating alternating current as a separate magic output instead of a repeated induction pattern.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a9-l3-anchor",
+              label: "A rotating coil in a magnetic field produces an alternating emf because its flux linkage changes and reverses through each turn.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "wave-output-anchor",
+              label: "The main idea is mostly that generators produce wave-shaped outputs, because once the a.c. trace is recognized the changing-flux explanation becomes a secondary detail.",
+              feedback:
+                "That would flatten the lesson into output recognition only.",
+            },
+            {
+              value: "speed-bigger-anchor-only",
+              label: "The main idea is mostly that spinning faster makes the output stronger, because once that trend is known the sign-reversal and frequency story usually become secondary.",
+              feedback:
+                "That would weaken the alternating-pattern explanation too much.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right generator rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a9-l3-technical-words",
+          badge: "Term desk",
+          title: "Clean up the generator vocabulary board",
+          scenario:
+            "The crew keeps mixing rotation rate, frequency, alternating emf, flux linkage, and sign reversal until every explanation sounds like one vague story about coils making waves.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a9-l3",
+              label: "Use rotation rate for how quickly the coil turns, frequency for how many output cycles happen each second, flux linkage for what changes through the turn, and alternating emf for the induced output whose sign reverses as the coil orientation reverses.",
+              feedback:
+                "Exactly. That keeps the A9_L3 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-wave-does-most-a9-l3",
+              label: "Use alternating output as the main word for almost the whole topic, because once students see the waveform the separate meanings of rotation rate, frequency, and flux linkage usually become minor details.",
+              feedback:
+                "That would collapse the mechanism into the trace alone.",
+            },
+            {
+              value: "term-board-speed-does-most-a9-l3",
+              label: "Use spin speed as the main word for almost the whole topic, because once the turning rate is named the rest of the output story usually follows automatically without separate labels.",
+              feedback:
+                "That would flatten too many linked quantities into one factor.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A9_L3 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a9-l3-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they use frequency or emf equations",
+          scenario:
+            "The trainee analyst is about to grab formulas immediately, but has not yet said how one full turn maps to one full output cycle or how the same flux swing happening in less time changes the induced emf.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-one-full-turn",
+              label: "Start by following one full turn of the coil. Mark how the orientation reversal makes the emf change sign each half-turn, use one rotation per cycle for the frequency link, then connect faster turning to the same flux-linkage swing happening in less time and therefore to a larger induced emf.",
+              feedback:
+                "Exactly. That gives the analyst the right A9_L3 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-wave-height-only-a9-l3",
+              label: "Start from the height of the output trace first, because once the emf size is clear the frequency and sign-change story usually becomes a minor follow-up.",
+              feedback:
+                "That would send the analyst back into the size-only shortcut.",
+            },
+            {
+              value: "start-from-rpm-only-a9-l3",
+              label: "Start from the rotation rate alone, because once the speed is known the generator's frequency and emf usually follow so automatically that the flux-linkage story does not need its own step.",
+              feedback:
+                "That would send the analyst back into a one-factor shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean turn-cycle-emf method.",
+          retryLabel: "That would send the analyst back into an A9_L3 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a9-l3-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the magic-wave and speed-only shortcuts",
+          scenario:
+            "One crew member keeps treating a.c. as a built-in machine waveform, while another keeps saying faster spin only changes the emf size and not the cycle rate.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a9-l3-trap-warning",
+              label: "Do not treat the generator output as magic and do not split speed effects apart. The a.c. trace comes from repeated flux-linkage reversal as the coil turns, and faster turning means more cycles each second plus the same flux swing happening in less time.",
+              feedback:
+                "Exactly. That warning blocks the main A9_L3 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "wave-warning-only-a9-l3",
+              label: "Warn mainly that the waveform needs explanation, because once students stop treating the trace as decorative they usually recover the speed and frequency links on their own.",
+              feedback:
+                "That would leave the rotation-rate shortcut too alive.",
+            },
+            {
+              value: "speed-warning-only-a9-l3",
+              label: "Warn mainly that spin speed matters, because once students stop ignoring the turning rate they usually recover the sign-reversal story on their own.",
+              feedback:
+                "That would leave the alternating-pattern mechanism too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps rotation, reversal, frequency, and emf in one generator story.",
+          retryLabel: "That warning would leave a main A9_L3 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a9-l3-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the repeated-reversal pattern visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why a steady turning motion can create an output that repeatedly reverses direction instead of staying one-way.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "swing-past-center-analogy",
+              label: "Think of a swing passing through its center: each half-cycle the direction flips, and pushing the swing through the same arc more quickly makes the reversals happen more often. The generator's rotating coil does the same kind of repeated reversal through changing orientation in the field.",
+              feedback:
+                "Exactly. That keeps periodic reversal and faster-cycling output visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "fan-runs-faster-analogy",
+              label: "Think of the generator like a fan that just blows harder when it spins faster, because the safest analogy is usually one where greater speed mainly means a stronger one-way output.",
+              feedback:
+                "That would erase the alternating and reversing part of the lesson.",
+            },
+            {
+              value: "screen-draws-wave-analogy",
+              label: "Think of the waveform mainly like something the machine draws on a screen, because once the alternating trace appears the mechanical turning underneath it becomes less important to the explanation.",
+              feedback:
+                "That would rebuild the magic-wave shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on repeated reversal through rotation.",
+          retryLabel: "That analogy would pull the lesson away from the right A9_L3 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
