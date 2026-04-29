@@ -7429,6 +7429,248 @@ function getA8ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A8_L6") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a8-l6-orbit-and-coil-board",
+        badge: "Orbit-and-coil board",
+        title: "Keep particle bending and coil turning inside one sideways-force geometry",
+        scenario:
+          "The orbit-and-coil board shows one moving charge curving in a magnetic field and one current loop turning in that same field. One trainee treats these as two unrelated tricks, another thinks the magnetic force changes the particle's speed rather than its direction, and a third says the opposite forces on the coil should just cancel with no turning effect.",
+        prompt: "Pin the note that keeps the shared geometry model accurate.",
+        options: [
+          {
+            value: "shared-sideways-geometry-note",
+            label: "Treat both cases as consequences of the same perpendicular magnetic force. On a moving charge, the side-kick bends the path without changing the speed; on a loop, opposite side-kicks on opposite sides form a turning effect instead of simple translation.",
+            feedback:
+              "Exactly. That keeps particle orbits and motor turning inside one A8_L6 geometry story.",
+            isCorrect: true,
+          },
+          {
+            value: "two-separate-tricks-note",
+            label: "Treat circular particle motion and coil turning as separate topics with different underlying physics, because one is about fields and the other is about motors and machines.",
+            feedback:
+              "That would break the shared-geometry lesson the branch is meant to teach.",
+          },
+          {
+            value: "speed-change-note-a8-l6",
+            label: "Treat the magnetic force on the particle as mainly changing how fast it moves around the path, because once a force acts the first consequence should usually be a speed increase or decrease.",
+            feedback:
+              "That would erase the bend-without-speed-change idea the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads orbit bending and coil turning as one shared sideways-force model.",
+        retryLabel: "That note would leave a main A8_L6 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a8-l6-fix-ideas",
+          badge: "Shared-geometry repair",
+          title: "Repair the unrelated-topics and cancel-out shortcuts",
+          scenario:
+            "One analyst keeps treating particle curvature and loop turning as separate chapters, while another keeps saying opposite forces on opposite sides of the loop should cancel completely instead of producing rotation.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-one-geometry-two-outcomes",
+              label: "Repair both habits together: start from the same perpendicular magnetic force geometry, then show how a single moving charge bends into a curved path while a matched force pair on a loop creates a turning effect.",
+              feedback:
+                "Exactly. That restores the right A8_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-particle-only-a8-l6",
+              label: "Repair the confusion by focusing on the particle case first, because once the curved path is clear the loop-turning story usually becomes a separate machine detail later.",
+              feedback:
+                "That would keep the split-topic shortcut alive.",
+            },
+            {
+              value: "repair-from-force-cancel-only-a8-l6",
+              label: "Repair the confusion by emphasizing that opposite forces can balance, because once the cancellation idea is secure students usually understand motor turning automatically.",
+              feedback:
+                "That would hide the turning-effect logic the lesson needs.",
+            },
+          ],
+          successLabel: "Repair sent. The room now reads both outcomes from one magnetic-force geometry.",
+          retryLabel: "That would leave a main A8_L6 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a8-l6-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line orbit-and-motor rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating particle orbits and motor turning as separate memorized tricks.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a8-l6-anchor",
+              label: "Charged-particle orbits and motor turning are both outcomes of the same sideways magnetic force geometry.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "particle-anchor-only-a8-l6",
+              label: "The main idea is mostly that particles can curve in fields, because once that bending is understood the loop-turning case becomes a separate applied topic.",
+              feedback:
+                "That would weaken the unifying lesson idea too much.",
+            },
+            {
+              value: "motor-anchor-only-a8-l6",
+              label: "The main idea is mostly that loops can turn in fields, because once the machine effect is seen the particle case becomes a smaller special example.",
+              feedback:
+                "That would also weaken the unifying lesson idea too much.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right shared-geometry rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a8-l6-technical-words",
+          badge: "Term desk",
+          title: "Clean up the orbit-and-coil vocabulary board",
+          scenario:
+            "The crew keeps mixing curved path, orbit radius, turning effect, force pair, and sideways force until every magnetic-motion explanation sounds like one vague story about things moving in fields.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a8-l6",
+              label: "Use sideways magnetic force for the shared cause, curved path or orbit radius for the particle outcome, and turning effect or torque-like rotation language for the loop outcome when opposite side-kicks act on opposite sides.",
+              feedback:
+                "Exactly. That keeps the A8_L6 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-orbit-does-most-a8-l6",
+              label: "Use orbit language as the main word for almost the whole topic, because once the curved path is clear the loop-turning words usually become optional.",
+              feedback:
+                "That would collapse the two outcomes into the particle case.",
+            },
+            {
+              value: "term-board-motor-does-most-a8-l6",
+              label: "Use motor-turning language as the main word for almost the whole topic, because once the loop effect is clear the particle-bending words usually become optional.",
+              feedback:
+                "That would collapse the two outcomes into the loop case.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A8_L6 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a8-l6-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they separate the two magnetic-motion outcomes",
+          scenario:
+            "The trainee analyst is about to memorize one formula for particle radius and one picture for motor turning without first naming the shared sideways-force geometry that links them.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-shared-force-then-branch-outcome",
+              label: "Start from the shared perpendicular magnetic force first. Then branch the reasoning: for a single moving charge, that side-kick bends the path into curvature without changing speed; for a loop, matched opposite side-kicks create a turning effect instead of simple sideways motion.",
+              feedback:
+                "Exactly. That gives the analyst the right A8_L6 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-radius-formula-a8-l6",
+              label: "Start from the particle-radius formula first, because once the orbit calculation is secure the loop-turning story usually becomes obvious enough by analogy later.",
+              feedback:
+                "That would send the analyst back into the split-topic shortcut.",
+            },
+            {
+              value: "start-from-motor-picture-a8-l6",
+              label: "Start from the coil-turning picture first, because once the machine effect is visible the particle-orbit case usually becomes a minor extension with no need for a shared-force setup.",
+              feedback:
+                "That would also send the analyst back into the split-topic shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now starts from one geometry before branching into the two outcomes.",
+          retryLabel: "That would send the analyst back into an A8_L6 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a8-l6-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the speed-change and full-cancellation shortcuts",
+          scenario:
+            "One crew member keeps saying the magnetic force should speed the particle up, while another keeps saying opposite forces on the loop cancel completely and therefore cannot produce turning.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "shared-geometry-trap-warning",
+              label: "Do not treat the magnetic force as a speed-up along the path, and do not let the opposite loop forces disappear into a simple cancellation story. The side-kick bends a particle path without changing speed, and a separated opposite-force pair on a loop creates turning.",
+              feedback:
+                "Exactly. That warning blocks the main A8_L6 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "particle-warning-only-a8-l6",
+              label: "Warn mainly that particle speed does not change, because once students stop that mistake they usually sort out the loop-turning case on their own.",
+              feedback:
+                "That would leave the turning-effect trap too alive.",
+            },
+            {
+              value: "loop-warning-only-a8-l6",
+              label: "Warn mainly that the loop can turn, because once students stop the cancellation mistake they usually understand the particle-bending case on their own.",
+              feedback:
+                "That would leave the bend-without-speed-change trap too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps both magnetic-motion outcomes tied to the right force story.",
+          retryLabel: "That warning would leave a main A8_L6 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a8-l6-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the one-force-two-outcomes idea visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the same kind of sideways nudge can bend one moving thing into a curved route and make a wider object turn when the nudges act on opposite sides.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "side-nudge-car-and-door-analogy",
+              label: "Think of one sideways nudge on a moving cart bending its route, but two matched sideways nudges on opposite sides of a wide door making it turn about its hinge. The shared idea is still the side-kick; the different outcome comes from where that force acts.",
+              feedback:
+                "Exactly. That keeps one force story with two outcomes.",
+              isCorrect: true,
+            },
+            {
+              value: "separate-machines-analogy-a8-l6",
+              label: "Think of the two cases like completely different machines that only happen to use magnets, because once one is about orbits and the other is about motors the connection between them mostly stops mattering.",
+              feedback:
+                "That would rebuild the unrelated-topics shortcut.",
+            },
+            {
+              value: "forward-boost-analogy-a8-l6",
+              label: "Think of the magnetic effect mainly like an engine boost that drives motion forward harder, because once the object is moving the most important magnetic job should be more speed.",
+              feedback:
+                "That would rebuild the speed-change shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps one sideways-force idea while explaining why the outcomes differ.",
+          retryLabel: "That analogy would pull the lesson away from the right A8_L6 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
