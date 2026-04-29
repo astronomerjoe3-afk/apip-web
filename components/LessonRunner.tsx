@@ -6211,6 +6211,259 @@ function getA7ScaffoldRoleplayCard({
   return null;
 }
 
+function getA8ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A8_L1") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a8-l1-slope-map-board",
+        badge: "Slope-map board",
+        title: "Keep source charges, local field, and scout charge in separate roles",
+        scenario:
+          "The slope-map board shows source charges, local arrows, and a scout charge at one marked point. One trainee talks as if a bigger test charge makes the field itself stronger, another treats field lines like literal travel tracks, and a third keeps describing field as if it belongs to one chosen probe instead of the location.",
+        prompt: "Pin the note that keeps the field model accurate.",
+        options: [
+          {
+            value: "location-field-probe-note",
+            label: "Treat the electric field as the push-per-unit-positive-charge set by the source charges at that location, then use the scout charge only as the probe that reveals the field. Field lines show direction patterns, not compulsory tracks.",
+            feedback:
+              "Exactly. That keeps source, field, and probe distinct, which is the whole A8_L1 lesson move.",
+            isCorrect: true,
+          },
+          {
+            value: "bigger-probe-bigger-field-note",
+            label: "Treat the electric field as getting stronger whenever the test charge is larger, because a stronger probe should naturally create a stronger field reading at the point.",
+            feedback:
+              "That would rebuild the mistake of making the field belong to the probe.",
+          },
+          {
+            value: "field-lines-are-tracks-note",
+            label: "Treat field lines like the exact tracks a charged particle must follow, because once the direction arrows are drawn the particle route is already fixed by the map.",
+            feedback:
+              "That would rebuild the field-lines-as-tracks shortcut.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads source, location, and probe as one clean field story.",
+        retryLabel: "That note would leave a main A8_L1 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a8-l1-fix-ideas",
+          badge: "Field repair",
+          title: "Repair the probe-defines-the-field shortcut",
+          scenario:
+            "One analyst keeps saying the field changes when the test charge changes, while another keeps talking about field lines as if they are rails the particle must ride along.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-location-then-probe",
+              label: "Repair both habits together: define the field from the source charges and the chosen location first, then let the test charge reveal that field through F = qE while field lines stay as direction maps only.",
+              feedback:
+                "Exactly. That restores the right A8_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-force-alone",
+              label: "Repair the confusion by focusing on the force value first, because once the force is known the field and the role of the test charge usually explain themselves automatically.",
+              feedback:
+                "That would keep the field-versus-force confusion alive.",
+            },
+            {
+              value: "repair-from-lines-alone",
+              label: "Repair the confusion by focusing on the field-line drawing first, because once students can see the lines the source-probe distinction usually becomes a minor detail.",
+              feedback:
+                "That would leave the track-picture shortcut too strong.",
+            },
+          ],
+          successLabel: "Repair sent. The room now separates field, force, and probe correctly.",
+          retryLabel: "That would leave a main A8_L1 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a8-l1-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line electric-field rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating the test charge as the thing that creates the field meaning.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a8-l1-anchor",
+              label: "Electric field is force per unit positive charge at a location, set by the source charges, while a test charge only reveals it.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "force-anchor-only",
+              label: "The main idea is mostly that charges feel forces, because once the force direction is known the field itself usually becomes a secondary technical label.",
+              feedback:
+                "That would flatten the lesson into force talk and lose the field concept.",
+            },
+            {
+              value: "probe-anchor-only",
+              label: "The main idea is mostly that the test charge tells you everything important, because once the probe response is measured the separate source-field picture usually becomes unnecessary.",
+              feedback:
+                "That would rebuild the probe-defines-the-field shortcut.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right electric-field rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a8-l1-technical-words",
+          badge: "Term desk",
+          title: "Clean up the field vocabulary board",
+          scenario:
+            "The crew keeps mixing electric field strength, force, test charge, and field lines until every sentence sounds like one vague 'charge gets pushed' story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a8-l1",
+              label: "Use electric field strength for force per unit positive charge at a location, force for the push on a chosen charge, test charge for the probe, and field lines for the drawn direction pattern.",
+              feedback:
+                "Exactly. That keeps the field terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-force-does-most",
+              label: "Use force as the main word for almost the whole topic, because once students know something gets pushed the field vocabulary usually matters less.",
+              feedback:
+                "That would scramble the lesson back into force-only language.",
+            },
+            {
+              value: "term-board-lines-do-most",
+              label: "Use field lines as the main word for almost the whole topic, because once the line pattern is visible the separate meanings of field strength, force, and test charge usually become obvious enough.",
+              feedback:
+                "That would weaken the source-field-probe distinctions the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A8_L1 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a8-l1-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they calculate field or force",
+          scenario:
+            "The trainee analyst is about to jump straight into a number substitution without first saying what stays fixed: the source charges and location, or the probe charge being changed to test the same point.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "fix-location-then-use-e-and-f",
+              label: "Start by fixing the source charges and the location, then decide whether you are finding the field from E = F / q or predicting a force from F = qE. Keep the field the same unless the sources or location change, and let the sign of the probe set the force direction.",
+              feedback:
+                "Exactly. That gives the analyst the right A8_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-bigger-charge-first",
+              label: "Start by deciding which probe charge is larger, because once the probe size is known the electric field strength at the point usually follows from that change automatically.",
+              feedback:
+                "That would send the analyst back into the probe-defines-the-field shortcut.",
+            },
+            {
+              value: "start-from-field-lines-only",
+              label: "Start from the field-line sketch alone, because once the map is drawn the force size and the role of the test charge usually become minor details.",
+              feedback:
+                "That would send the analyst back into the picture-only shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean source-location-first method.",
+          retryLabel: "That would send the analyst back into an A8_L1 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a8-l1-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the probe-created-field shortcut",
+          scenario:
+            "One crew member keeps saying the field gets stronger when the test charge is bigger, while another keeps reading field lines as if they are literal charge tracks.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "field-trap-warning",
+              label: "Do not let the test charge define the field. The field is set by the source charges at the location, while the probe only reveals it, and field lines are maps of direction rather than compulsory paths.",
+              feedback:
+                "Exactly. That warning blocks the main A8_L1 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "probe-size-warning-only",
+              label: "Warn mainly that larger test charges feel larger forces, because once students know that they usually stop confusing field with force on their own.",
+              feedback:
+                "That would leave the field-lines shortcut too alive and the field concept too weak.",
+            },
+            {
+              value: "field-line-warning-only",
+              label: "Warn mainly that field lines are not tracks, because once students stop that picture they usually sort out the role of the test charge on their own.",
+              feedback:
+                "That would leave the probe-defines-the-field shortcut too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps field, force, and probe in the right order.",
+          retryLabel: "That warning would leave a main A8_L1 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a8-l1-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the location-based field visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the field belongs to the location and source arrangement, while the test charge is only the scout that reports what that place is like.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "slope-map-scout-analogy",
+              label: "Think of the field like the steepness of a slope at one marked spot on a hill: the hill sets the slope there, and the scout only checks it. Changing the scout does not remake the hill, and the map arrows show the downhill direction rather than a rail the scout must follow.",
+              feedback:
+                "Exactly. That keeps the field location-based and the scout probe-based.",
+              isCorrect: true,
+            },
+            {
+              value: "scout-creates-slope-analogy",
+              label: "Think of the scout as partly creating the steepness reading, because once a stronger scout stands on the hill the location naturally becomes a stronger slope point for that measurement.",
+              feedback:
+                "That would rebuild the probe-defines-the-field shortcut.",
+            },
+            {
+              value: "painted-path-analogy",
+              label: "Think of the arrows mainly like painted tracks on the ground that the scout must follow exactly, because once the route is marked the field story is basically a path-following problem.",
+              feedback:
+                "That would rebuild the field-lines-as-tracks shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the source-built landscape separate from the scout that reveals it.",
+          retryLabel: "That analogy would pull the lesson away from the right A8_L1 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
 function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
   if (card.options.length <= 1) return card.options;
   const correctIndex = card.options.findIndex((option) => option.isCorrect);
@@ -7458,6 +7711,14 @@ export default function LessonRunner({
       activeSectionWorkedExample: Boolean(activeSection?.worked_example),
       activeSectionHeading,
     });
+    const a8ScaffoldRoleplayCard = getA8ScaffoldRoleplayCard({
+      lessonId,
+      isMediaStep,
+      activeMediaIndex,
+      isSectionStep,
+      activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+      activeSectionHeading,
+    });
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -7468,6 +7729,7 @@ export default function LessonRunner({
         a5ScaffoldRoleplayCard ??
         a6ScaffoldRoleplayCard ??
         a7ScaffoldRoleplayCard ??
+        a8ScaffoldRoleplayCard ??
         (
         lessonId === "M1_L1" ||
         lessonId === "M1_L2" ||
