@@ -7674,6 +7674,259 @@ function getA8ScaffoldRoleplayCard({
   return null;
 }
 
+function getA9ScaffoldRoleplayCard({
+  lessonId,
+  isMediaStep,
+  activeMediaIndex,
+  isSectionStep,
+  activeSectionWorkedExample,
+  activeSectionHeading,
+}: ScaffoldRoleplayResolverArgs): ScaffoldRoleplayCard | null {
+  if (lessonId === "A9_L1") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a9-l1-flux-window-board",
+        badge: "Flux-window board",
+        title: "Keep flux, flux linkage, and rate of change in separate roles",
+        scenario:
+          "The flux-window board shows one loop in a magnetic field at several orientations and times. One trainee says a loop sitting in any magnetic field must already have an induced emf, another thinks a larger steady flux automatically means a larger induced emf, and a third forgets that the number of turns and the time interval both matter.",
+        prompt: "Pin the note that keeps the induction model accurate.",
+        options: [
+          {
+            value: "flux-linkage-rate-note",
+            label: "Treat magnetic flux as field-thread through the loop area, flux linkage as N times flux, and induced emf as how quickly that flux linkage changes. If the flux linkage does not change, the induced emf is zero even when flux is present.",
+            feedback:
+              "Exactly. That keeps amount, linkage, and rate in the right A9_L1 order.",
+            isCorrect: true,
+          },
+          {
+            value: "field-present-means-emf-note",
+            label: "Treat the presence of a magnetic field as enough to create induced emf, because once the loop sits inside the field the induction effect should already be active whether or not anything changes.",
+            feedback:
+              "That would rebuild the flux-present-means-emf shortcut.",
+          },
+          {
+            value: "big-flux-means-big-emf-note",
+            label: "Treat the loop with the biggest flux as automatically having the biggest induced emf, because induced effects should mainly follow how much field is through the loop rather than how that amount changes over time.",
+            feedback:
+              "That would confuse amount of flux with rate of flux-linkage change.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads induction as a flux-linkage change story.",
+        retryLabel: "That note would leave a main A9_L1 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a9-l1-fix-ideas",
+          badge: "Induction repair",
+          title: "Repair the magnet-nearby and amount-versus-change shortcuts",
+          scenario:
+            "One analyst keeps saying a nearby magnet is enough to induce emf even when nothing about the loop setup changes, while another keeps comparing loops only by how much flux they have instead of whether that flux linkage is changing.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-change-linkage-first",
+              label: "Repair both habits together: ask first whether the flux linkage is changing, then track how much it changes and how quickly. A steady flux linkage gives zero induced emf, while faster change gives a larger induced emf.",
+              feedback:
+                "Exactly. That restores the right A9_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-magnet-presence",
+              label: "Repair the confusion by emphasizing when a magnet is present, because once the field source is identified the learner can usually treat induction as an automatic consequence of that field.",
+              feedback:
+                "That would keep the no-change problem hidden.",
+            },
+            {
+              value: "repair-from-biggest-flux",
+              label: "Repair the confusion by comparing which setup has the biggest flux first, because once the largest flux is known the size of the induced emf usually follows without needing a separate change story.",
+              feedback:
+                "That would keep amount and rate mixed together.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts from flux-linkage change, not field presence alone.",
+          retryLabel: "That would leave a main A9_L1 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a9-l1-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line Faraday rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop blending flux, flux linkage, and induced emf into one vague 'magnet nearby' story.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a9-l1-anchor",
+              label: "Induced emf appears only when flux linkage changes, and a faster change gives a larger induced emf.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "flux-alone-anchor",
+              label: "The main idea is mostly that magnetic flux through a loop creates induced emf, because once the field-thread through the loop is present the induction effect is already established.",
+              feedback:
+                "That would erase the change requirement the lesson depends on.",
+            },
+            {
+              value: "turns-alone-anchor",
+              label: "The main idea is mostly that more turns create more induced emf, because once the loop has many turns the details about whether the flux is changing become secondary.",
+              feedback:
+                "That would flatten the lesson into one factor and lose the full rate-of-change story.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right Faraday rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a9-l1-technical-words",
+          badge: "Term desk",
+          title: "Clean up the induction vocabulary board",
+          scenario:
+            "The crew keeps mixing magnetic flux, flux linkage, induced emf, and rate of change until every explanation sounds like one vague story about magnets making voltage happen somehow.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a9-l1",
+              label: "Use magnetic flux for the field-thread through one loop area, flux linkage for N times that flux across all turns, induced emf for the response created by changing flux linkage, and rate of change for how quickly that linkage changes.",
+              feedback:
+                "Exactly. That keeps the A9_L1 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-flux-does-most",
+              label: "Use flux as the main word for almost the whole topic, because once students can describe how much field is through the loop the other induction terms usually become minor details.",
+              feedback:
+                "That would collapse too many different ideas into one label.",
+            },
+            {
+              value: "term-board-emf-does-most",
+              label: "Use induced emf as the main word for almost the whole topic, because once the response is named the separate meanings of flux, linkage, and change usually become obvious enough on their own.",
+              feedback:
+                "That would weaken the change-bookkeeping the lesson needs.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A9_L1 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a9-l1-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they use Faraday's law",
+          scenario:
+            "The trainee analyst is about to substitute numbers immediately, but has not yet said what changed between the start and finish, whether the flux per turn or the number of turns is being tracked, or whether the situation might actually be a zero-change case.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-change-then-linkage-then-time",
+              label: "Start by asking what changed between the two states. Find the change in flux per turn, multiply by the number of turns to get the change in flux linkage, then divide by the time interval. If the flux linkage did not change, the induced emf is zero.",
+              feedback:
+                "Exactly. That gives the analyst the right A9_L1 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-biggest-flux-only-a9-l1",
+              label: "Start by identifying the setup with the biggest flux, because once the largest flux is known the largest induced emf usually follows without any separate change or timing step.",
+              feedback:
+                "That would send the analyst back into the amount-versus-change shortcut.",
+            },
+            {
+              value: "start-from-turns-only-a9-l1",
+              label: "Start from the number of turns first, because once the coil with more turns is identified the rest of the induction reasoning usually becomes a small correction later.",
+              feedback:
+                "That would send the analyst back into a one-factor shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean change-linkage-time method.",
+          retryLabel: "That would send the analyst back into an A9_L1 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a9-l1-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the flux-present and biggest-flux shortcuts",
+          scenario:
+            "One crew member keeps saying a loop in a field must already have induced emf, while another keeps judging induction size only by which picture shows more field through the loop at one moment.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a9-l1-trap-warning",
+              label: "Do not confuse having flux with changing flux linkage. A loop can have plenty of flux and still have zero induced emf if nothing changes, while a faster change in flux linkage gives the stronger induced response.",
+              feedback:
+                "Exactly. That warning blocks the main A9_L1 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "field-present-warning-only-a9-l1",
+              label: "Warn mainly that a field must be present, because once students remember that induction needs magnetism they usually sort out the change requirement on their own.",
+              feedback:
+                "That would leave the change requirement too weak.",
+            },
+            {
+              value: "turns-warning-only-a9-l1",
+              label: "Warn mainly that turns matter, because once students stop ignoring the number of turns they usually stop mixing up flux and induced emf on their own.",
+              feedback:
+                "That would leave the amount-versus-change trap too alive.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps flux presence and flux-linkage change in separate slots.",
+          retryLabel: "That warning would leave a main A9_L1 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a9-l1-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the change story visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the loop can sit in a magnetic setting quietly with no induced emf until the field-thread through the loop starts changing.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "thread-count-window-analogy",
+              label: "Think of the loop like a window counting how many field-threads pass through it. The alert only sounds when that thread count changes, and it sounds stronger when the count changes faster or across more turns.",
+              feedback:
+                "Exactly. That keeps change, speed of change, and turns visible in one picture.",
+              isCorrect: true,
+            },
+            {
+              value: "window-has-threads-so-alert-analogy",
+              label: "Think of the alert as sounding whenever the window already has lots of threads through it, because a large thread count should naturally mean a large induction effect even if the picture stays steady.",
+              feedback:
+                "That would rebuild the flux-present-means-emf shortcut.",
+            },
+            {
+              value: "more-window-frames-only-analogy",
+              label: "Think mainly about adding more window frames, because once the setup has many frames the alert should be strong enough that the details about whether the thread count changed become secondary.",
+              feedback:
+                "That would rebuild the one-factor turns shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on changing thread count, not thread count alone.",
+          retryLabel: "That analogy would pull the lesson away from the right A9_L1 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
+  return null;
+}
+
 function getOrderedScaffoldRoleplayOptions(card: ScaffoldRoleplayCard): ScaffoldRoleplayOption[] {
   if (card.options.length <= 1) return card.options;
   const correctIndex = card.options.findIndex((option) => option.isCorrect);
@@ -8929,6 +9182,14 @@ export default function LessonRunner({
       activeSectionWorkedExample: Boolean(activeSection?.worked_example),
       activeSectionHeading,
     });
+    const a9ScaffoldRoleplayCard = getA9ScaffoldRoleplayCard({
+      lessonId,
+      isMediaStep,
+      activeMediaIndex,
+      isSectionStep,
+      activeSectionWorkedExample: Boolean(activeSection?.worked_example),
+      activeSectionHeading,
+    });
     const scaffoldClarityPanel = renderClarityLensPanel(
       "Concept-first frame",
       "Understand this idea before you move on",
@@ -8940,6 +9201,7 @@ export default function LessonRunner({
         a6ScaffoldRoleplayCard ??
         a7ScaffoldRoleplayCard ??
         a8ScaffoldRoleplayCard ??
+        a9ScaffoldRoleplayCard ??
         (
         lessonId === "M1_L1" ||
         lessonId === "M1_L2" ||
