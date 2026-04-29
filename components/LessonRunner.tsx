@@ -7187,6 +7187,248 @@ function getA8ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A8_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a8-l5-field-weave-board",
+        badge: "Field-weave board",
+        title: "Keep field direction, motion route, and sideways force in separate roles",
+        scenario:
+          "The field-weave board shows a magnetic field, a moving charge or current direction, and the resulting side-kick. One trainee keeps drawing the force along the field lines, another thinks the field speeds the particle forward along its route, and a third forgets that reversing the current or field flips the force direction while the force stays perpendicular to both.",
+        prompt: "Pin the note that keeps the magnetic-force model accurate.",
+        options: [
+          {
+            value: "sideways-geometry-note",
+            label: "Treat magnetic force as a sideways effect set by geometry: it acts perpendicular to both the field and the current or motion direction. Reversing the field or the current flips the force direction, and the field steers motion rather than pushing it forward along the field.",
+            feedback:
+              "Exactly. That keeps the full A8_L5 geometry visible instead of turning it into a forward-push story.",
+            isCorrect: true,
+          },
+          {
+            value: "force-along-field-note",
+            label: "Treat the magnetic force as acting mainly along the field lines, because once the field direction is known the charge or conductor should naturally be pushed the same way as the field pattern.",
+            feedback:
+              "That would rebuild the along-the-field shortcut the lesson is trying to remove.",
+          },
+          {
+            value: "forward-speeding-note",
+            label: "Treat the magnetic field like a battery that speeds the particle or conductor along its current route, because once there is a magnetic push the main effect should be more forward motion.",
+            feedback:
+              "That would erase the sideways-steering idea the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads field direction, route direction, and sideways force as one clean story.",
+        retryLabel: "That note would leave a main A8_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a8-l5-fix-ideas",
+          badge: "Magnetic-force repair",
+          title: "Repair the forward-push and along-the-field shortcuts",
+          scenario:
+            "One analyst keeps drawing magnetic force along the field lines, while another keeps treating the field as something that speeds motion forward instead of changing direction sideways.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-perpendicular-geometry",
+              label: "Repair both habits together: fix the geometry first by keeping field direction and motion or current direction separate, then place the magnetic force perpendicular to both and read reversal effects from that setup.",
+              feedback:
+                "Exactly. That restores the right A8_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-field-alone-a8-l5",
+              label: "Repair the confusion by focusing on field direction first, because once the field arrows are clear the force and motion story usually follows in the same direction automatically.",
+              feedback:
+                "That would keep the along-the-field shortcut alive.",
+            },
+            {
+              value: "repair-from-motion-alone-a8-l5",
+              label: "Repair the confusion by focusing on the particle or conductor motion first, because once the route is known the effect of the magnetic field usually becomes a simple extra forward push on that route.",
+              feedback:
+                "That would keep the forward-push shortcut alive.",
+            },
+          ],
+          successLabel: "Repair sent. The room now treats magnetic force as a perpendicular steering effect.",
+          retryLabel: "That would leave a main A8_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a8-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line magnetic-force rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop flattening magnetic force into a generic forward shove.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a8-l5-anchor",
+              label: "Magnetic force is a sideways steering effect that acts perpendicular to both the field and the current or motion direction.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "field-push-anchor-only-a8-l5",
+              label: "The main idea is mostly that the field pushes charges where the field points, because once the field direction is drawn the rest of the force story usually becomes obvious.",
+              feedback:
+                "That would hide the perpendicular geometry the lesson needs.",
+            },
+            {
+              value: "motion-push-anchor-only-a8-l5",
+              label: "The main idea is mostly that moving charges get pushed harder along their route, because once motion begins the magnetic field mainly adds more drive in that same direction.",
+              feedback:
+                "That would rebuild the wrong motion story.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right magnetic-force rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a8-l5-technical-words",
+          badge: "Term desk",
+          title: "Clean up the motor-effect vocabulary board",
+          scenario:
+            "The crew keeps mixing field direction, current direction, moving-charge direction, and force direction until every magnetic-force explanation sounds like one vague push story.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a8-l5",
+              label: "Use magnetic field for the background direction pattern, current or motion direction for the charge route, and magnetic force for the sideways response that sits perpendicular to both of those directions.",
+              feedback:
+                "Exactly. That keeps the A8_L5 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-field-does-most-a8-l5",
+              label: "Use magnetic field as the main word for almost the whole topic, because once the field is drawn the current and force directions usually become minor details.",
+              feedback:
+                "That would scramble the geometry the lesson needs.",
+            },
+            {
+              value: "term-board-force-does-most-a8-l5",
+              label: "Use force as the main word for almost the whole topic, because once a shove exists the separate field and current directions usually matter less than the final motion.",
+              feedback:
+                "That would weaken the direction structure too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A8_L5 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a8-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they predict the force direction",
+          scenario:
+            "The trainee analyst is about to guess the force direction from one arrow alone and has not yet set the field direction against the current or motion direction as a geometry problem.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "set-two-directions-then-side-kick",
+              label: "Start by fixing the field direction and the current or motion direction as two separate inputs, then place the magnetic force as the sideways response perpendicular to both. After that, test reversals one at a time to see how the force flips.",
+              feedback:
+                "Exactly. That gives the analyst the right A8_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-field-line-following-a8-l5",
+              label: "Start from the field line itself, because once the field arrow is known the force direction should usually follow that same line without any extra geometry setup.",
+              feedback:
+                "That would send the analyst back into the along-the-field shortcut.",
+            },
+            {
+              value: "start-from-forward-motion-a8-l5",
+              label: "Start from the current or motion route, because once the charge is moving the magnetic effect should mainly reinforce that route unless the field is very weak.",
+              feedback:
+                "That would send the analyst back into the forward-push shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean field-route-side-kick method.",
+          retryLabel: "That would send the analyst back into an A8_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a8-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the along-the-field force shortcut",
+          scenario:
+            "One crew member keeps putting the force in the field direction, while another keeps treating magnetic force as if it should automatically speed a charge up along its route.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "magnetic-force-trap-warning",
+              label: "Do not draw magnetic force along the field or treat it like a forward speed-up. The magnetic side-kick is perpendicular to both the field and the current or motion direction, so it mainly steers the route.",
+              feedback:
+                "Exactly. That warning blocks the main A8_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "field-warning-only-a8-l5",
+              label: "Warn mainly that the field direction matters, because once students stop ignoring the field they usually sort out the force direction and motion effect on their own.",
+              feedback:
+                "That would leave the steering-versus-speeding distinction too weak.",
+            },
+            {
+              value: "motion-warning-only-a8-l5",
+              label: "Warn mainly that motion direction matters, because once students stop ignoring the route they usually stop putting the force along the field on their own.",
+              feedback:
+                "That would leave the full perpendicular geometry too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now treats magnetic force as a sideways steering effect.",
+          retryLabel: "That warning would leave a main A8_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a8-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the side-kick visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the magnetic effect is a sideways redirection rather than a push along the field or a simple extra drive along the route.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "crosswind-analogy-a8-l5",
+              label: "Think of the magnetic effect like a crosswind that redirects a moving object sideways instead of a tailwind that speeds it forward: the field and the route together set the geometry, and the resulting side-kick changes direction when one of those inputs is reversed.",
+              feedback:
+                "Exactly. That keeps steering, not forward drive, at the center of the lesson.",
+              isCorrect: true,
+            },
+            {
+              value: "tailwind-analogy-a8-l5",
+              label: "Think of the field mainly like a tailwind that helps the charge or current go faster in the same direction it was already moving.",
+              feedback:
+                "That would rebuild the forward-speeding shortcut.",
+            },
+            {
+              value: "rail-line-analogy-a8-l5",
+              label: "Think of the field lines mainly like rails that the conductor or charge follows, because once the field route is laid out the force should naturally point along it.",
+              feedback:
+                "That would rebuild the along-the-field shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the magnetic effect as a side-kick built from geometry.",
+          retryLabel: "That analogy would pull the lesson away from the right A8_L5 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
