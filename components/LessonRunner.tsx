@@ -9871,6 +9871,248 @@ function getA10ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A10_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a10-l4-binding-credit-board",
+        badge: "Binding-credit board",
+        title: "Keep mass defect, total binding energy, and binding energy per nucleon in one chain",
+        scenario:
+          "The binding-credit board shows separated nucleons, the bound nucleus, and a stability comparison between nuclei of different sizes. One trainee keeps quoting E = mc^2 as if that settles the lesson by itself, another looks only at the nucleus mass without comparing it to separated nucleons, and a third compares total binding energy alone even when the nuclei have different nucleon counts.",
+        prompt: "Pin the note that keeps the nuclear-energy model accurate.",
+        options: [
+          {
+            value: "mass-defect-to-stability-note",
+            label: "Start from the mass of the separated nucleons, then subtract the actual bound nucleus mass to get the mass defect. Convert that into total binding energy, and when nuclei differ in size compare binding energy per nucleon first because that is the fairer stability measure.",
+            feedback:
+              "Exactly. That keeps missing mass, binding energy, and stability comparison in the right A10_L4 order.",
+            isCorrect: true,
+          },
+          {
+            value: "e-mc-squared-slogan-note",
+            label: "Treat the lesson mainly as a reminder that mass can become energy, because once E = mc^2 is recognized the detailed comparison with separated nucleons and per-nucleon stability usually becomes secondary.",
+            feedback:
+              "That would flatten the lesson into a slogan instead of a usable chain.",
+          },
+          {
+            value: "total-binding-only-note",
+            label: "Treat the nucleus with the larger total binding energy as automatically more stable, because the larger total energy figure is usually the strongest single clue no matter how many nucleons the nuclei contain.",
+            feedback:
+              "That would miss the fair comparison step for different-sized nuclei.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads mass defect and binding as one nuclear bookkeeping story.",
+        retryLabel: "That note would leave a main A10_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a10-l4-fix-ideas",
+          badge: "Binding repair",
+          title: "Repair the lost-mass and total-binding-only shortcuts",
+          scenario:
+            "One analyst keeps talking as if the missing mass has somehow vanished, while another keeps picking the larger total binding-energy number as the more stable nucleus even when the nuclei are different sizes.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-separated-mass-then-per-nucleon",
+              label: "Repair both habits together: compare the bound nucleus with the separated nucleons first, because that mass difference is the mass equivalent of binding energy rather than lost matter. Then, if the nuclei differ in size, compare binding energy per nucleon before judging stability.",
+              feedback:
+                "Exactly. That restores the right A10_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-equals-mc2-only-a10-l4",
+              label: "Repair the confusion by focusing mainly on E = mc^2, because once students remember that mass and energy are linked they usually recover the rest of the binding story on their own.",
+              feedback:
+                "That would leave the actual bookkeeping chain too weak.",
+            },
+            {
+              value: "repair-from-biggest-total-only-a10-l4",
+              label: "Repair the confusion by focusing mainly on the biggest total binding-energy number, because once students see which nucleus has the larger total value they usually recover the stability comparison on their own.",
+              feedback:
+                "That would leave the per-nucleon comparison too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now keeps nuclear binding and fair stability comparison in separate steps.",
+          retryLabel: "That would leave a main A10_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a10-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line binding rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating mass defect and binding energy as disconnected facts.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a10-l4-anchor",
+              label: "Mass defect and binding energy are two views of the same nuclear stability bookkeeping.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "missing-mass-anchor-only-a10-l4",
+              label: "The main idea is mostly that bound nuclei weigh less, because once that mass drop is noticed the rest of the energy and stability story usually becomes obvious.",
+              feedback:
+                "That would leave the binding-energy meaning too weak.",
+            },
+            {
+              value: "energy-release-anchor-only-a10-l4",
+              label: "The main idea is mostly that nuclear reactions release lots of energy, because once that large-energy outcome is known the bookkeeping behind it usually becomes secondary.",
+              feedback:
+                "That would turn the lesson into a headline instead of an explanation.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right binding idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a10-l4-technical-words",
+          badge: "Term desk",
+          title: "Clean up the binding-energy vocabulary board",
+          scenario:
+            "The crew keeps mixing mass defect, total binding energy, binding energy per nucleon, and stability until every explanation sounds like one fuzzy story about nuclei having lots of energy.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a10-l4",
+              label: "Use mass defect for the difference between separated nucleon mass and bound nucleus mass, total binding energy for the full energy needed to separate the nucleus, binding energy per nucleon for the fair cross-size stability comparison, and stability for how tightly the nucleus is held together.",
+              feedback:
+                "Exactly. That keeps the A10_L4 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-energy-does-most-a10-l4",
+              label: "Use energy language as the main word for almost the whole topic, because once a large nuclear energy change is recognized the separate meanings of mass defect and per-nucleon comparison usually become minor detail.",
+              feedback:
+                "That would collapse several separate quantities into one headline.",
+            },
+            {
+              value: "term-board-mass-does-most-a10-l4",
+              label: "Use mass language as the main word for almost the whole topic, because once the bound nucleus is known to weigh less the rest of the binding and stability vocabulary usually becomes secondary.",
+              feedback:
+                "That would blur the energy and stability meanings too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A10_L4 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a10-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they judge nuclear stability",
+          scenario:
+            "The trainee analyst is about to jump straight from one energy number to a stability claim, but has not yet checked whether the comparison is between equal-sized nuclei or whether the mass defect has been built from separated nucleons first.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-separated-then-convert-then-compare",
+              label: "Start with the separated nucleons, then find the mass defect and convert it into binding energy. After that, if the nuclei differ in size, compare binding energy per nucleon before making a stability judgment.",
+              feedback:
+                "Exactly. That gives the analyst the right A10_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-largest-energy-number-a10-l4",
+              label: "Start from whichever nucleus has the largest energy number on the page, because once the biggest total is identified the rest of the stability story usually becomes a small correction.",
+              feedback:
+                "That would send the analyst back into the total-only shortcut.",
+            },
+            {
+              value: "start-from-bound-mass-alone-a10-l4",
+              label: "Start from the bound nucleus mass by itself, because once the actual mass is known the comparison with separated nucleons usually becomes a minor detail.",
+              feedback:
+                "That would send the analyst back into the wrong reference-point shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean mass-defect-to-stability method.",
+          retryLabel: "That would send the analyst back into an A10_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a10-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the lost-mass and chemical-energy shortcuts",
+          scenario:
+            "One crew member keeps calling mass defect missing matter with no story, while another keeps talking about binding energy as if it were just a stronger version of ordinary chemical-bond energy.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a10-l4-trap-warning",
+              label: "Do not treat the mass defect as vanished matter and do not flatten nuclear binding into ordinary chemical energy. The mass difference is the mass equivalent of nuclear binding, and nuclear stability comparisons must stay tied to the nucleus-level bookkeeping.",
+              feedback:
+                "Exactly. That warning blocks the main A10_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "mass-warning-only-a10-l4",
+              label: "Warn mainly that the bound nucleus weighs less, because once students notice the lower mass they usually recover the rest of the nuclear-energy meaning on their own.",
+              feedback:
+                "That would leave the binding meaning too weak.",
+            },
+            {
+              value: "energy-warning-only-a10-l4",
+              label: "Warn mainly that nuclear reactions involve large energies, because once students remember that scale they usually recover the stability story on their own.",
+              feedback:
+                "That would leave the bookkeeping meaning too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps nuclear binding, mass defect, and stability in the right chain.",
+          retryLabel: "That warning would leave a main A10_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a10-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the lowered finished-state ledger visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why the bound nucleus has a lower mass-energy ledger than the separated nucleons, and why that difference is the clue to binding rather than an error.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "packed-crate-ledger-analogy",
+              label: "Think of a tightly packed crate that ends up on a lower accounting line because energy had to be taken out to lock the parts together. To pull it apart again, you must pay that energy back in. The lower finished ledger is not missing material; it is the sign that binding happened.",
+              feedback:
+                "Exactly. That keeps lower mass-energy and the need to repay separation energy visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "burning-fuel-analogy-a10-l4",
+              label: "Think mainly of fuel burning in a flame, because the most intuitive analogy is usually one where energy release alone matters and the detailed before-and-after nuclear ledger becomes secondary.",
+              feedback:
+                "That would drag the lesson toward chemical-energy flattening.",
+            },
+            {
+              value: "weighing-error-analogy-a10-l4",
+              label: "Think mainly of a measurement shortfall on a scale, because the most intuitive analogy is usually one where a smaller measured mass points to something simply not being counted properly.",
+              feedback:
+                "That would rebuild the lost-mass misunderstanding.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on lower bound-state mass-energy as the clue to binding.",
+          retryLabel: "That analogy would pull the lesson away from the right A10_L4 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
