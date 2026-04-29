@@ -8650,6 +8650,248 @@ function getA9ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A9_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a9-l5-transmission-board",
+        badge: "Transmission board",
+        title: "Keep RMS meaning, fixed power, current, and cable loss in one route",
+        scenario:
+          "The transmission board shows an a.c. wave, its rms value, a delivery line, and cable-loss boxes. One trainee treats rms as just a renaming of peak value, another says higher transmission voltage must waste more energy because the voltage is bigger, and a third forgets to hold delivered power fixed before comparing current and loss.",
+        prompt: "Pin the note that keeps the transmission model accurate.",
+        options: [
+          {
+            value: "rms-fixed-power-current-loss-note",
+            label: "Treat rms values as the direct-current-equivalent heating values, keep delivered power fixed when comparing transmission cases, then use higher voltage to infer lower current and therefore lower I squared R cable loss.",
+            feedback:
+              "Exactly. That keeps rms meaning and transmission trade-offs in the right A9_L5 order.",
+            isCorrect: true,
+          },
+          {
+            value: "peak-equals-rms-note",
+            label: "Treat the rms value as basically the same as the peak value for practical questions, because once the wave size is known the separate heating-effect interpretation usually becomes unnecessary detail.",
+            feedback:
+              "That would erase the d.c.-equivalent meaning the lesson needs.",
+          },
+          {
+            value: "higher-voltage-more-loss-note",
+            label: "Treat a higher transmission voltage as naturally creating more cable loss, because once the voltage is bigger there should be more electrical stress and therefore more wasted power in the line.",
+            feedback:
+              "That would reverse the actual current-and-loss trade-off.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads rms meaning and high-voltage transmission as one quantitative story.",
+        retryLabel: "That note would leave a main A9_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a9-l5-fix-ideas",
+          badge: "Transmission repair",
+          title: "Repair the peak-equals-rms and bigger-voltage-means-bigger-loss shortcuts",
+          scenario:
+            "One analyst keeps using peak values as if they were already the heating-equivalent values, while another keeps claiming that raising the transmission voltage must increase losses just because the voltage number is larger.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-rms-then-fixed-power",
+              label: "Repair both habits together: interpret rms as the d.c.-equivalent heating value, then compare transmission at the same delivered power. Higher voltage means lower current, and lower current means much smaller I squared R loss.",
+              feedback:
+                "Exactly. That restores the right A9_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-wave-height-only-a9-l5",
+              label: "Repair the confusion by focusing on the wave height first, because once the voltage scale is visible the rms meaning and transmission consequences usually explain themselves automatically.",
+              feedback:
+                "That would leave the rms meaning too weak.",
+            },
+            {
+              value: "repair-from-loss-formula-only-a9-l5",
+              label: "Repair the confusion by focusing on the cable-loss formula first, because once students memorize I squared R they usually recover the fixed-power and current story on their own.",
+              feedback:
+                "That would leave the fixed-power comparison too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now compares transmission cases with the right rms and current story.",
+          retryLabel: "That would leave a main A9_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a9-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line transmission rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating power transmission as a slogan about efficiency with no quantitative structure.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a9-l5-anchor",
+              label: "RMS values give the heating-equivalent a.c. values, and for the same delivered power a higher transmission voltage means lower current and lower I squared R loss.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "high-voltage-anchor-only-a9-l5",
+              label: "The main idea is mostly that high voltage is better for transmission, because once that preference is remembered the rms and current reasoning becomes secondary.",
+              feedback:
+                "That would flatten the lesson into a slogan and lose the why.",
+            },
+            {
+              value: "rms-is-peak-anchor-a9-l5",
+              label: "The main idea is mostly that rms gives a convenient way to quote the wave size, because once the voltage is labeled the separate heating-equivalent meaning becomes secondary.",
+              feedback:
+                "That would weaken the rms interpretation too much.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right rms-and-transmission rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a9-l5-technical-words",
+          badge: "Term desk",
+          title: "Clean up the RMS and transmission vocabulary board",
+          scenario:
+            "The crew keeps mixing peak value, rms value, delivered power, line current, and cable loss until every explanation sounds like one vague story about electricity getting weaker over distance.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a9-l5",
+              label: "Use peak value for the top of the sinusoidal swing, rms value for the d.c.-equivalent heating value, delivered power for the fixed comparison target, current for the line flow set by P divided by V, and cable loss for the I squared R heating in the line.",
+              feedback:
+                "Exactly. That keeps the A9_L5 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-voltage-does-most-a9-l5",
+              label: "Use voltage as the main word for almost the whole topic, because once the transmission voltage is named the rest of the rms, current, and loss story usually becomes minor detail.",
+              feedback:
+                "That would collapse the trade-off into one quantity.",
+            },
+            {
+              value: "term-board-loss-does-most-a9-l5",
+              label: "Use cable loss as the main word for almost the whole topic, because once students remember that some energy heats the wires the separate meanings of rms and fixed-power comparison usually become less important.",
+              feedback:
+                "That would weaken the actual comparison method too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A9_L5 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a9-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they compare transmission cases",
+          scenario:
+            "The trainee analyst is about to plug numbers into formulas immediately, but has not yet said whether the question is about rms conversion or fixed-power transmission, or kept delivered power constant before comparing current and line loss.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "name-rms-or-transmission-then-fix-power",
+              label: "Start by naming whether you are doing an rms conversion or a transmission comparison. If it is transmission, hold delivered power fixed, use I = P / V to compare currents, then compare cable loss with I squared R.",
+              feedback:
+                "Exactly. That gives the analyst the right A9_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-biggest-voltage-only-a9-l5",
+              label: "Start from whichever case has the biggest voltage, because once that case is identified the current and loss consequences usually become obvious enough without a fixed-power setup.",
+              feedback:
+                "That would send the analyst back into the one-factor shortcut.",
+            },
+            {
+              value: "start-from-wave-peak-only-a9-l5",
+              label: "Start from the peak wave value first, because once the maximum size of the a.c. supply is known the rms meaning and heater-equivalent reading usually become a minor correction.",
+              feedback:
+                "That would send the analyst back into the peak-versus-rms shortcut.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean rms-and-transmission comparison method.",
+          retryLabel: "That would send the analyst back into an A9_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a9-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the peak-equals-rms and high-voltage-means-high-loss shortcuts",
+          scenario:
+            "One crew member keeps using the peak value as if it already measures heating effect, while another keeps saying higher transmission voltage must increase line loss because the voltage number is larger.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a9-l5-trap-warning",
+              label: "Do not replace rms with peak value and do not compare transmission without fixing delivered power. RMS gives the heating-equivalent value, and for the same power a higher voltage lowers current, which sharply lowers I squared R loss.",
+              feedback:
+                "Exactly. That warning blocks the main A9_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "rms-warning-only-a9-l5",
+              label: "Warn mainly that rms is not the same as peak, because once students stop that mistake they usually recover the transmission-loss story on their own.",
+              feedback:
+                "That would leave the fixed-power trade-off too weak.",
+            },
+            {
+              value: "loss-warning-only-a9-l5",
+              label: "Warn mainly that current affects line loss, because once students remember I squared R they usually recover the rms meaning on their own.",
+              feedback:
+                "That would leave the heating-equivalent rms meaning too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps rms meaning and high-voltage transmission trade-offs in the right order.",
+          retryLabel: "That warning would leave a main A9_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a9-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the fixed-power trade-off visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why sending the same delivered power at a higher voltage can still reduce the heating lost in the route.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "same-delivery-fewer-trips-analogy",
+              label: "Think of delivering the same total cargo with fewer heavier-value trips: if each trip carries more value, you need fewer trips per second, and fewer trips through the road means less wear. In the line story, higher voltage means less current for the same power, so the line heats less.",
+              feedback:
+                "Exactly. That keeps fixed delivered power and lower route wear visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "bigger-number-more-wear-analogy",
+              label: "Think of a bigger voltage like a bigger strain on the line no matter what, because the safest analogy is usually one where the larger electrical number means more damage automatically.",
+              feedback:
+                "That would rebuild the higher-voltage-means-higher-loss shortcut.",
+            },
+            {
+              value: "peak-wave-is-real-load-analogy",
+              label: "Think of the peak of the wave as the real load the line feels most of the time, because the most intuitive analogy is usually one where the maximum value tells the whole heating story.",
+              feedback:
+                "That would rebuild the peak-versus-rms shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on same power, lower current, and lower line heating.",
+          retryLabel: "That analogy would pull the lesson away from the right A9_L5 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
