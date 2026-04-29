@@ -8408,6 +8408,248 @@ function getA9ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A9_L4") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a9-l4-twin-coil-board",
+        badge: "Twin-coil board",
+        title: "Keep shared changing flux, turns ratio, and voltage ratio in one transformer story",
+        scenario:
+          "The twin-coil board shows a primary coil, secondary coil, and shared core. One trainee talks as if the two coils share one direct current path, another treats the turns ratio like a stand-alone voltage trick with no induction story underneath it, and a third thinks a step-up transformer should also step the current up in the same direction.",
+        prompt: "Pin the note that keeps the transformer model accurate.",
+        options: [
+          {
+            value: "shared-core-induction-note",
+            label: "Treat the transformer as two separate circuits linked by changing magnetic flux in the shared core. The turns ratio sets the voltage ratio, and in the ideal model the current trade-off goes the opposite way so power stays balanced.",
+            feedback:
+              "Exactly. That keeps linked induction, turns ratio, and current trade-off in the right A9_L4 story.",
+            isCorrect: true,
+          },
+          {
+            value: "one-current-path-note",
+            label: "Treat the transformer like one continuous current path running through both coils, because once the coils share the same core the current can be followed as one linked electrical route.",
+            feedback:
+              "That would rebuild the one-path shortcut and erase the induction link.",
+          },
+          {
+            value: "turns-only-voltage-trick-note",
+            label: "Treat the turns ratio mainly as a voltage trick, because once the turn numbers are known the current and changing-flux story usually become minor details.",
+            feedback:
+              "That would flatten the lesson into a ratio trick and lose the physical bridge.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads the transformer as a changing-flux bridge between two coils.",
+        retryLabel: "That note would leave a main A9_L4 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a9-l4-fix-ideas",
+          badge: "Transformer repair",
+          title: "Repair the one-path and same-direction current shortcuts",
+          scenario:
+            "One analyst keeps treating the primary and secondary as one shared current route, while another keeps saying step-up voltage should automatically mean step-up current as well.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-two-circuits-one-flux-bridge",
+              label: "Repair both habits together: keep the primary and secondary as separate circuits, connect them through changing core flux, then use turns ratio for voltage and ideal power balance to see why current changes in the opposite direction.",
+              feedback:
+                "Exactly. That restores the right A9_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-turn-count-only-a9-l4",
+              label: "Repair the confusion by focusing on which side has more turns first, because once the bigger coil is identified the rest of the transformer behavior usually follows automatically without a separate current story.",
+              feedback:
+                "That would leave the current trade-off too weak.",
+            },
+            {
+              value: "repair-from-shared-core-only-a9-l4",
+              label: "Repair the confusion by focusing on the shared core first, because once students see the core as common to both sides they usually understand the two circuits as one linked current path well enough.",
+              feedback:
+                "That would rebuild the one-path shortcut.",
+            },
+          ],
+          successLabel: "Repair sent. The room now keeps two circuits and one changing-flux bridge in the right order.",
+          retryLabel: "That would leave a main A9_L4 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a9-l4-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line transformer rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating transformer questions like isolated turn-count puzzles.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a9-l4-anchor",
+              label: "A transformer uses changing core flux to link two coils, and the voltage ratio follows the turns ratio.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "turns-count-anchor-only",
+              label: "The main idea is mostly that more turns mean more voltage, because once the turn counts are known the changing-flux and two-circuit story becomes secondary.",
+              feedback:
+                "That would flatten the lesson into a ratio shortcut.",
+            },
+            {
+              value: "shared-current-anchor-only",
+              label: "The main idea is mostly that current is passed from one side to the other through the transformer, because once that transfer is imagined the separate coil stories become less important.",
+              feedback:
+                "That would replace induction with the wrong current-path picture.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right transformer rule.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a9-l4-technical-words",
+          badge: "Term desk",
+          title: "Clean up the transformer vocabulary board",
+          scenario:
+            "The crew keeps mixing primary, secondary, turns ratio, shared core flux, and power balance until every explanation sounds like one vague story about electricity jumping coils.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a9-l4",
+              label: "Use primary for the input coil, secondary for the output coil, shared core flux for the induction link between them, turns ratio for the voltage relationship, and ideal power balance for why current changes opposite to voltage.",
+              feedback:
+                "Exactly. That keeps the A9_L4 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-turns-do-most-a9-l4",
+              label: "Use turns ratio as the main word for almost the whole topic, because once the coil counts are named the separate meanings of primary, secondary, flux, and current balance usually become minor details.",
+              feedback:
+                "That would collapse the induction bridge into a simple ratio chant.",
+            },
+            {
+              value: "term-board-core-does-most-a9-l4",
+              label: "Use core link as the main word for almost the whole topic, because once the shared core is visible the separate voltage and current relationships usually explain themselves automatically.",
+              feedback:
+                "That would leave the quantitative relationships too blurry.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A9_L4 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a9-l4-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they use turns ratio and power balance",
+          scenario:
+            "The trainee analyst is about to substitute into equations immediately, but has not yet decided whether the question is asking about voltage, current, or step-up versus step-down behavior, or named the induction bridge that links the coils in the first place.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "name-coils-then-ratio-then-balance",
+              label: "Start by naming the primary and secondary and the changing-flux link between them. Use the turns ratio to find the voltage change first, then use ideal power balance to decide how the current must respond in the opposite direction.",
+              feedback:
+                "Exactly. That gives the analyst the right A9_L4 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-bigger-coil-only-a9-l4",
+              label: "Start from whichever coil has more turns, because once the larger coil is identified the voltage and current story usually becomes obvious enough without separate reasoning steps.",
+              feedback:
+                "That would send the analyst back into the one-factor shortcut.",
+            },
+            {
+              value: "start-from-current-transfer-only-a9-l4",
+              label: "Start by imagining current being passed across the transformer, because once the direction of transfer is clear the voltage ratio and induction meaning usually become minor corrections.",
+              feedback:
+                "That would send the analyst back into the wrong current-path picture.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean link-ratio-balance method.",
+          retryLabel: "That would send the analyst back into an A9_L4 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a9-l4-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the one-path and same-direction trade-off shortcuts",
+          scenario:
+            "One crew member keeps treating the transformer like one shared electrical path, while another keeps saying that if voltage rises then current must also rise the same way.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a9-l4-trap-warning",
+              label: "Do not turn the transformer into one current path and do not make voltage and current scale together in the ideal model. The coils are linked by changing flux, and ideal power balance is why the current trade-off runs opposite to the voltage change.",
+              feedback:
+                "Exactly. That warning blocks the main A9_L4 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "turns-warning-only-a9-l4",
+              label: "Warn mainly that turn counts matter, because once students stop ignoring the ratio they usually recover the current and circuit story on their own.",
+              feedback:
+                "That would leave the current-path trap too alive.",
+            },
+            {
+              value: "core-warning-only-a9-l4",
+              label: "Warn mainly that the core matters, because once students remember the shared flux link they usually recover the opposite current trade-off on their own.",
+              feedback:
+                "That would leave the voltage-current trade-off too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps transformer linkage and trade-off reasoning in the right order.",
+          retryLabel: "That warning would leave a main A9_L4 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a9-l4-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the bridge and trade-off visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why one side can raise the output voltage without becoming one continuous current wire running through the whole device.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "gear-bridge-analogy",
+              label: "Think of two separate gear wheels linked by a shared moving belt. The belt is like the changing core flux link, the wheel sizes are like the turn counts, and changing the ratio trades turning effect for speed rather than giving both more at once.",
+              feedback:
+                "Exactly. That keeps separate sides, one shared link, and the trade-off all visible.",
+              isCorrect: true,
+            },
+            {
+              value: "same-pipe-analogy-a9-l4",
+              label: "Think of the transformer like one long pipe carrying the same flow through both sides, because the safest analogy is usually one where the transfer path is continuous from input to output.",
+              feedback:
+                "That would rebuild the one-path shortcut.",
+            },
+            {
+              value: "bigger-coil-more-everything-analogy",
+              label: "Think of the bigger-turn coil as simply making everything larger on its side, because the most intuitive analogy is usually one where more turns mean more voltage and more current together.",
+              feedback:
+                "That would rebuild the same-direction trade-off shortcut.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the transformer as a linked bridge with a real trade-off, not one continuous path.",
+          retryLabel: "That analogy would pull the lesson away from the right A9_L4 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
