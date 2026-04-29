@@ -10113,6 +10113,248 @@ function getA10ScaffoldRoleplayCard({
     }
   }
 
+  if (lessonId === "A10_L5") {
+    if (isMediaStep && activeMediaIndex === 0) {
+      return {
+        id: "a10-l5-reactor-board",
+        badge: "Reactor board",
+        title: "Read fission as a neutron-chain system, not one dramatic split",
+        scenario:
+          "The reactor board shows one fission event, released neutrons, a moderator zone, control rods, and coolant lines. One trainee keeps treating fission as a one-off energy release, another says control rods mainly cool the core, and a third forgets that the first question is how many neutrons continue the chain.",
+        prompt: "Pin the note that keeps the reactor model accurate.",
+        options: [
+          {
+            value: "chain-neutron-control-note",
+            label: "Treat the reactor as a neutron-chain system. One fission event matters because the released neutrons may trigger later fissions. A steady reactor needs about one continuing neutron per event on average, the moderator helps make fission-triggering collisions more likely, and control rods work by absorbing neutrons rather than by directly cooling the core.",
+            feedback:
+              "Exactly. That keeps multiplication, moderation, and control in the right A10_L5 story.",
+            isCorrect: true,
+          },
+          {
+            value: "one-split-energy-note",
+            label: "Treat the lesson mainly as one heavy nucleus splitting and releasing energy, because once that main event is understood the extra neutron and reactor-control details usually become secondary.",
+            feedback:
+              "That would flatten the chain-reaction part of the lesson too much.",
+          },
+          {
+            value: "control-rods-cool-note",
+            label: "Treat control rods mainly as cooling parts, because once the core is prevented from overheating the reaction rate usually settles itself without needing a separate neutron-population story.",
+            feedback:
+              "That would blur the control-rod job the lesson needs.",
+          },
+        ],
+        successLabel: "Pinned. The board now reads reactor behavior from neutron economy, not from one split alone.",
+        retryLabel: "That note would leave a main A10_L5 shortcut active.",
+      } satisfies ScaffoldRoleplayCard;
+    }
+
+    if (isSectionStep && !activeSectionWorkedExample) {
+      if (activeSectionHeading === "fix these ideas") {
+        return {
+          id: "a10-l5-fix-ideas",
+          badge: "Chain repair",
+          title: "Repair the one-split and control-rods-cool shortcuts",
+          scenario:
+            "One analyst keeps explaining fission as if the first split is the whole story, while another keeps saying the reactor is controlled because control rods cool things down rather than because they change the neutron budget.",
+          prompt: "Choose the repair note.",
+          options: [
+            {
+              value: "repair-count-neutrons-then-assign-jobs",
+              label: "Repair both habits together: count what the released neutrons do next before naming the chain as dying out, steady, or growing. Then keep the reactor jobs separate: moderator helps the neutron conditions for further fission, control rods absorb neutrons to manage the rate, and coolant carries thermal energy away.",
+              feedback:
+                "Exactly. That restores the right A10_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "repair-from-energy-release-only-a10-l5",
+              label: "Repair the confusion by focusing mainly on the energy released in one fission event, because once that large release is recognized the chain and control details usually sort themselves out afterward.",
+              feedback:
+                "That would leave the neutron-chain meaning too weak.",
+            },
+            {
+              value: "repair-from-cooling-only-a10-l5",
+              label: "Repair the confusion by focusing mainly on heat removal first, because once the core temperature is controlled the reasons for a steady reaction usually become obvious enough automatically.",
+              feedback:
+                "That would leave the neutron-control story too weak.",
+            },
+          ],
+          successLabel: "Repair sent. The room now starts with neutron continuation before naming reactor behavior.",
+          retryLabel: "That would leave a main A10_L5 shortcut active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "core idea") {
+        return {
+          id: "a10-l5-core-idea",
+          badge: "Ops summary",
+          title: "Post the one-line reactor rule",
+          scenario:
+            "Quest Control wants one sentence on the wall so analysts stop treating reactor physics like a big-energy version of a single fission event.",
+          prompt: "Choose the line to post.",
+          options: [
+            {
+              value: "a10-l5-anchor",
+              label: "A reactor is a controlled neutron chain reaction, not just a place where fission happens once.",
+              feedback:
+                "Exactly. That is the clean anchor sentence this lesson needs.",
+              isCorrect: true,
+            },
+            {
+              value: "energy-anchor-only-a10-l5",
+              label: "The main idea is mostly that fission releases a lot of energy, because once that is known the rest of the reactor details usually become secondary.",
+              feedback:
+                "That would flatten the lesson into energy headline only.",
+            },
+            {
+              value: "heat-anchor-only-a10-l5",
+              label: "The main idea is mostly that reactors get very hot, because once the thermal side is recognized the neutron and control story usually becomes secondary.",
+              feedback:
+                "That would weaken the chain-reaction meaning too much.",
+            },
+          ],
+          successLabel: "Posted. The room now starts from the right reactor idea.",
+          retryLabel: "That line would blur the lesson anchor instead of clarifying it.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "technical words") {
+        return {
+          id: "a10-l5-technical-words",
+          badge: "Term desk",
+          title: "Clean up the fission-reactor vocabulary board",
+          scenario:
+            "The crew keeps mixing fission event, chain reaction, moderator, control rods, coolant, and steady critical state until every explanation sounds like one fuzzy story about hot nuclear machinery.",
+          prompt: "Choose the vocabulary note to post.",
+          options: [
+            {
+              value: "term-board-a10-l5",
+              label: "Use fission for one heavy nucleus splitting, chain reaction for the next-step neutron relay, moderator for improving neutron conditions for further fission, control rods for absorbing neutrons to manage the reaction rate, coolant for carrying thermal energy away, and steady critical state for about one continuing neutron per event on average.",
+              feedback:
+                "Exactly. That keeps the A10_L5 terms doing distinct jobs.",
+              isCorrect: true,
+            },
+            {
+              value: "term-board-control-does-most-a10-l5",
+              label: "Use control language as the main word for almost the whole topic, because once students know the reactor must be controlled the separate meanings of moderator, coolant, and neutron relay usually become minor detail.",
+              feedback:
+                "That would collapse several system roles too far.",
+            },
+            {
+              value: "term-board-heat-does-most-a10-l5",
+              label: "Use heat language as the main word for almost the whole topic, because once the core is known to produce lots of thermal energy the separate neutron and component roles usually become secondary.",
+              feedback:
+                "That would blur the chain-reaction story too much.",
+            },
+          ],
+          successLabel: "Vocabulary board cleaned up.",
+          retryLabel: "That wording would scramble the A10_L5 terms again.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "how to reason through it") {
+        return {
+          id: "a10-l5-how-to-reason",
+          badge: "Guidance channel",
+          title: "Coach the analyst before they classify a reactor chain",
+          scenario:
+            "The trainee analyst is about to label the case as steady or runaway, but has not yet counted how many neutrons keep the chain going or separated the jobs of moderator, control rods, and coolant.",
+          prompt: "Choose the instruction you send.",
+          options: [
+            {
+              value: "start-with-neutron-budget",
+              label: "Start with the neutron budget. Ask how many neutrons released in each fission go on to trigger later fissions, then classify the chain as dying out, steady, or growing. After that, keep reactor parts in role: moderator helps neutron conditions, control rods absorb neutrons, and coolant removes thermal energy.",
+              feedback:
+                "Exactly. That gives the analyst the right A10_L5 workflow.",
+              isCorrect: true,
+            },
+            {
+              value: "start-from-heat-output-a10-l5",
+              label: "Start from how much heat the reactor seems to be producing, because once the thermal output is known the chain-reaction classification usually becomes a small follow-up.",
+              feedback:
+                "That would send the analyst back into energy-first flattening.",
+            },
+            {
+              value: "start-from-control-rods-alone-a10-l5",
+              label: "Start from whether the control rods are inserted or withdrawn, because once that component state is known the neutron and moderator story usually becomes easy enough to guess.",
+              feedback:
+                "That would send the analyst back into component-first guessing without the neutron budget.",
+            },
+          ],
+          successLabel: "Good coaching. The analyst now has a clean neutron-budget-to-reactor-state method.",
+          retryLabel: "That would send the analyst back into an A10_L5 shortcut.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "common trap") {
+        return {
+          id: "a10-l5-common-trap",
+          badge: "Trap alert",
+          title: "Cut off the one-split and cooling-only shortcuts",
+          scenario:
+            "One crew member keeps treating fission as one isolated split, while another keeps talking as if the reactor stays safe mainly because some parts cool it instead of because the neutron chain is controlled.",
+          prompt: "Choose the trap warning.",
+          options: [
+            {
+              value: "a10-l5-trap-warning",
+              label: "Do not stop at one fission event and do not treat reactor safety as only a cooling story. The key question is always what the released neutrons do next, and control rods matter because they change the neutron population, not because they directly cool the fuel.",
+              feedback:
+                "Exactly. That warning blocks the main A10_L5 shortcuts.",
+              isCorrect: true,
+            },
+            {
+              value: "neutron-warning-only-a10-l5",
+              label: "Warn mainly that neutrons are involved, because once students remember that neutrons are released they usually recover the rest of the reactor story on their own.",
+              feedback:
+                "That would leave the system-role detail too weak.",
+            },
+            {
+              value: "cooling-warning-only-a10-l5",
+              label: "Warn mainly that coolant has an important job, because once students stop ignoring the thermal side they usually recover the control story on their own.",
+              feedback:
+                "That would leave the neutron-control meaning too weak.",
+            },
+          ],
+          successLabel: "Trap blocked. The room now keeps neutron multiplication, control, and heat transfer in the right order.",
+          retryLabel: "That warning would leave a main A10_L5 trap active.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+
+      if (activeSectionHeading === "analogy") {
+        return {
+          id: "a10-l5-analogy",
+          badge: "Story relay",
+          title: "Pick the analogy that keeps the next-step relay visible",
+          scenario:
+            "The team wants a comparison that helps beginners feel why one event matters only because it hands forward a neutron budget to the next event, and why different reactor parts shape that relay in different ways.",
+          prompt: "Choose the analogy line to send.",
+          options: [
+            {
+              value: "relay-baton-analogy",
+              label: "Think of a relay where each runner may pass forward several batons, but the race stays steady only if about one baton per runner keeps the next leg alive on average. Some equipment helps the handoff work better, some removes batons from the relay, and another system carries away the heat from all that activity.",
+              feedback:
+                "Exactly. That keeps multiplication, control, and separate reactor jobs visible together.",
+              isCorrect: true,
+            },
+            {
+              value: "one-firework-analogy-a10-l5",
+              label: "Think mainly of one firework bursting, because the most intuitive analogy is usually one where the dramatic release itself tells the whole story without needing a next-generation relay.",
+              feedback:
+                "That would rebuild the one-split shortcut.",
+            },
+            {
+              value: "air-conditioner-analogy-a10-l5",
+              label: "Think mainly of an air-conditioning system keeping a room from overheating, because the most intuitive analogy is usually one where temperature control explains the whole system by itself.",
+              feedback:
+                "That would flatten the neutron-chain control story too much.",
+            },
+          ],
+          successLabel: "Good analogy. It keeps the lesson anchored on the next-step neutron relay, not just the first split.",
+          retryLabel: "That analogy would pull the lesson away from the right A10_L5 model.",
+        } satisfies ScaffoldRoleplayCard;
+      }
+    }
+  }
+
   return null;
 }
 
